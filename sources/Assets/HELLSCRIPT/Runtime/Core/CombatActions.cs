@@ -123,6 +123,7 @@ namespace Hellscript
             if(!string.IsNullOrEmpty(run.heroAction.policy?.leapFollowUp)&&run.heroAction.policy.leapFollowUp!="GLOBAL"&&run.heroAction.policy.leapFollowUp!="W01"&&run.heroAction.policy.leapFollowUp!="W03")throw new NotSupportedException("지원하지 않는 도약 후 공격 선호입니다. 저장 파일은 보존했습니다.");
             EdictLandingPreference.Normalize(run);
             if(!string.IsNullOrEmpty(run.heroAction.policy?.retreatFollowUp)&&run.heroAction.policy.retreatFollowUp!="GLOBAL"&&run.heroAction.policy.retreatFollowUp!="RETREAT")throw new NotSupportedException("지원하지 않는 착지 후 보행 방침입니다. 저장 파일은 보존했습니다.");
+            if(!string.IsNullOrEmpty(run.heroAction.policy?.retreatFollowUp)&&(float.IsNaN(run.heroAction.policy.retreatDistance)||float.IsInfinity(run.heroAction.policy.retreatDistance)||run.heroAction.policy.retreatDistance<0))throw new NotSupportedException("궁수 착지 후 보행 거리가 유효하지 않습니다. 저장 파일은 보존했습니다.");
         }
     }
 }
