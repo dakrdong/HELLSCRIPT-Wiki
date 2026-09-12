@@ -1,0 +1,34 @@
+{
+  "previousNative": {
+    "log": "onboarding-native-start.log",
+    "evidence": "FirstPlayNativeEvidence",
+    "exitCode": 143,
+    "status": "Interrupted; not a pass",
+    "finding": "Process main thread blocked in file unlink; independent project file reads also stalled. File access recovered after Mac restart; cause not established."
+  },
+  "recovery": {
+    "sourceCount": 84,
+    "sourcesMatch": true,
+    "tests": 542,
+    "testsHashMatches": true,
+    "runtimeHashMatches": true,
+    "guardCount": 98,
+    "guardChanged": []
+  },
+  "currentNative": {
+    "save": "FirstPlayNativeFinalSave",
+    "evidence": "FirstPlayNativeFinalEvidence",
+    "log": "onboarding-native-final-start.log",
+    "status": "Passed before UI wording refinement; two processes exited 0 with one actual restart."
+  },
+  "finalNative": {
+    "save": "FirstPlayNativeUiSave",
+    "evidence": "FirstPlayNativeUiEvidence",
+    "exitCodes": [
+      0,
+      0
+    ],
+    "status": "Passed; 12 screenshots reviewed",
+    "summary": "onboarding-validation-summary.json"
+  }
+}

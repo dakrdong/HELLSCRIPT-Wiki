@@ -1,0 +1,140 @@
+{
+  "createdUtc": "2026-09-12T21:19:48.007121+00:00",
+  "baseCommit": "f6f80abed51aa6c61002331c20f4c342876241bf",
+  "unity": "6000.6.0f1",
+  "fullTests": {
+    "total": "1903",
+    "passed": "1903",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-12 21:09:41Z",
+    "end-time": "2026-09-12 21:15:02Z",
+    "duration": "320.4552837"
+  },
+  "slamTests": {
+    "total": "56",
+    "passed": "56",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "fullProcess": {
+    "startedUtc": "2026-09-12T21:09:28.386777+00:00",
+    "pid": 13158,
+    "endedUtc": "2026-09-12T21:15:04.206468+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-12T21:10:50.984610+00:00",
+    "pid": 13423,
+    "endedUtc": "2026-09-12T21:11:22.804905+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "checkpoint": {
+      "startedUtc": "2026-09-12T21:12:32.018242+00:00",
+      "pid": 13732,
+      "endedUtc": "2026-09-12T21:12:44.091971+00:00",
+      "exitCode": 0
+    },
+    "resume": {
+      "startedUtc": "2026-09-12T21:12:44.097909+00:00",
+      "pid": 13772,
+      "endedUtc": "2026-09-12T21:12:51.116718+00:00",
+      "exitCode": 0
+    },
+    "boss": {
+      "startedUtc": "2026-09-12T21:12:51.118873+00:00",
+      "pid": 13805,
+      "endedUtc": "2026-09-12T21:12:58.011783+00:00",
+      "exitCode": 0
+    }
+  },
+  "nativeResults": {
+    "checkpoint-result.txt": "PASS: Actual UI cycled all four W04 options with isolated drafts and a fresh saved-file read. Free Ground Slam prepared independently of blocked legacy rows; later option edits kept the committed action and LC02 charge. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "boss-result.txt": "PASS: A second independent restart released one boss hit and completed the actual 85-to-100 meter into three-second stagger once. No direct boss stun, duplicate effects or resource/discount consumption occurred. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "resume-result.txt": "PASS: Independent restart dealt two real W04 hits and applied one stun per target without consuming resource or LC02. Actual UI enabled COMPLETE for a lone boss at 85 meter; its pending preparation was saved without pre-crediting control. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation."
+  },
+  "nativeScreenshots": [
+    "01-actual-stun-after-restart-ko.png",
+    "01-boss-stagger-after-restart-ko.png",
+    "01-options-ko.png",
+    "02-actual-stun-after-restart-en.png",
+    "02-boss-stagger-after-restart-en.png",
+    "02-options-en.png",
+    "03-boss-battle-after-restart-en.png",
+    "03-boss-preparation-before-restart-ko.png",
+    "03-options-large-en.png",
+    "04-options-small-en.png",
+    "05-options-large-ko.png",
+    "06-preparation-before-restart-ko.png",
+    "07-preparation-before-restart-en.png"
+  ],
+  "scope": "Controlled W04 core-policy, combat, persistence and native UI evidence; not generated-rift balance or mobile-device validation.",
+  "earlierFailures": [
+    "Focused1: test referenced remaining instead of the actual prepare field; fixed test compilation.",
+    "Focused2: 265/266 passed; a short caster releases a hazard and replaces its action record. The test now checks the actual RELEASE event and hazard, rather than a projectile/released flag."
+  ],
+  "branchCleanup": {
+    "completedUtc": "2026-09-12T21:03:29.751870+00:00",
+    "currentBranch": "main",
+    "commit": "f6f80abed51aa6c61002331c20f4c342876241bf",
+    "deletedLocalBranch": "codex/claude-review-20260912",
+    "deletedRemoteBranch": "codex/claude-review-20260912",
+    "claudeIncluded": true,
+    "preservedWorkingFiles": 29,
+    "remoteHeads": [
+      "f6f80abed51aa6c61002331c20f4c342876241bf\trefs/heads/main"
+    ]
+  },
+  "wikiValidation": {
+    "results": [
+      {
+        "name": "wiki-build",
+        "exitCode": 0
+      },
+      {
+        "name": "wiki-check",
+        "exitCode": 0
+      },
+      {
+        "name": "wiki-tests",
+        "exitCode": 0
+      }
+    ],
+    "generatedCopiesBeforeRestoringUnrelatedFiles": []
+  },
+  "wikiCheck": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T06:18:26+09:00",
+    "pages": 127,
+    "databases": 19,
+    "records": 489,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "validation": 80
+    },
+    "documentLinks": 959,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 461,
+    "gameExecution": "not performed; preserved reports only",
+    "publicPages": 2
+  }
+}

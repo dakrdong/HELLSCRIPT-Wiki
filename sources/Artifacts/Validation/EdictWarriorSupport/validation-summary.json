@@ -1,0 +1,177 @@
+{
+  "createdUtc": "2026-09-12T22:04:53.761479+00:00",
+  "baseCommit": "fe047cafa695f04b149d2e5116b0d13548ce4aef",
+  "unity": "6000.6.0f1",
+  "fullTests": {
+    "total": "1981",
+    "passed": "1981",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-12 21:56:39Z",
+    "end-time": "2026-09-12 22:02:38Z",
+    "duration": "359.4450807"
+  },
+  "warriorSupportTests": {
+    "total": "79",
+    "passed": "79",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "fullProcess": {
+    "startedUtc": "2026-09-12T21:56:30.967035+00:00",
+    "pid": 23296,
+    "endedUtc": "2026-09-12T22:02:40.592585+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-12T21:56:30.963549+00:00",
+    "pid": 23295,
+    "endedUtc": "2026-09-12T21:57:01.858776+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "checkpoint": {
+      "startedUtc": "2026-09-12T21:57:34.210155+00:00",
+      "pid": 23553,
+      "endedUtc": "2026-09-12T21:57:48.192081+00:00",
+      "exitCode": 0
+    },
+    "wall": {
+      "startedUtc": "2026-09-12T21:57:48.193347+00:00",
+      "pid": 23586,
+      "endedUtc": "2026-09-12T21:57:55.249167+00:00",
+      "exitCode": 0
+    },
+    "shout": {
+      "startedUtc": "2026-09-12T21:57:55.251200+00:00",
+      "pid": 23617,
+      "endedUtc": "2026-09-12T21:58:00.898944+00:00",
+      "exitCode": 0
+    },
+    "basic": {
+      "startedUtc": "2026-09-12T21:58:00.904931+00:00",
+      "pid": 23630,
+      "endedUtc": "2026-09-12T21:58:06.034217+00:00",
+      "exitCode": 0
+    },
+    "charge": {
+      "startedUtc": "2026-09-12T21:58:06.036598+00:00",
+      "pid": 23649,
+      "endedUtc": "2026-09-12T21:58:12.961516+00:00",
+      "exitCode": 0
+    }
+  },
+  "nativeResults": {
+    "basic-result.txt": "PASS: An independent restart released one real basic hit. Actual UI changed target preference to low HP; UNTIL_DISCOUNT retained the original target for the second real hit, then saved recovery and the two-hit count. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "checkpoint-result.txt": "PASS: All 13 W05/W06/BASIC options were cycled through actual UI, saved and read back. A real WP05/LC02 build saved committed Iron Wall preparation despite later automatic-OFF changes and blocked legacy rows. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "wall-result.txt": "PASS: Iron Wall restored once with the actual WP05 shield multiplier. Actual UI enabled resource-only Shout for a normal enemy and saved its uncompleted preparation without pre-crediting 40 resource or a buff. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "charge-result.txt": "PASS: The restored two-hit count earned one charge on the real third hit. Basic did not block an available active: ordinary Crushing Blow consumed the earned LC02 discount once, paying 12.5 resource. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "shout-result.txt": "PASS: Shout restored exactly 40 resource and its six-second buff. A real melee basic preparation was saved before resource or LC02 hit rewards. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation."
+  },
+  "nativeScreenshots": [
+    "01-earned-restraint-after-restart-en.png",
+    "01-shout-after-restart-en.png",
+    "01-two-real-hits-before-restart-ko.png",
+    "01-wall-after-restart-ko.png",
+    "01-wall-options-ko.png",
+    "02-basic-pending-before-restart-ko.png",
+    "02-discounted-crush-after-basic-ko.png",
+    "02-wall-after-restart-en.png",
+    "02-wall-options-large-en.png",
+    "03-discounted-crush-after-basic-en.png",
+    "03-shout-options-ko.png",
+    "03-shout-pending-before-restart-ko.png",
+    "04-shout-options-large-en.png",
+    "05-basic-options-ko.png",
+    "06-basic-options-large-en.png",
+    "07-basic-options-small-en.png",
+    "08-wall-pending-before-restart-ko.png"
+  ],
+  "scope": "Controlled W05/W06/Warrior BASIC core-policy, combat, persistence and native UI evidence; not generated-rift balance or mobile-device validation.",
+  "earlierFailures": [
+    "Focused1: test array mutation used List APIs; fixed skillOrder array editing before execution.",
+    "Focused2: 346/352 passed. Updated the old Mage-only engagement expectation and made the shout-priority fixture explicitly eligible under the new policy.",
+    "Focused2: miss tests now retain a second living enemy so the encounter cannot end before release; target-holding tests distinguish busy committed preparation from the next idle selection.",
+    "Focused2: inactive Shout duration may be negative, so absence uses <= 0. Added exact discounted-payer and 30-percent-finisher boundary cases.",
+    "Focused3: 354/354 passed. Native1 used Build1 before final boundary changes; final evidence is Full1, Build2 and Native2."
+  ],
+  "branchCleanup": {
+    "completedUtc": "2026-09-12T21:03:29.751870+00:00",
+    "currentBranch": "main",
+    "commit": "f6f80abed51aa6c61002331c20f4c342876241bf",
+    "deletedLocalBranch": "codex/claude-review-20260912",
+    "deletedRemoteBranch": "codex/claude-review-20260912",
+    "claudeIncluded": true,
+    "preservedWorkingFiles": 29,
+    "remoteHeads": [
+      "f6f80abed51aa6c61002331c20f4c342876241bf\trefs/heads/main"
+    ]
+  },
+  "wikiValidation": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T07:04:00+09:00",
+    "pages": 129,
+    "databases": 19,
+    "records": 489,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "validation": 80
+    },
+    "documentLinks": 979,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 466,
+    "gameExecution": "not performed; preserved reports only"
+  },
+  "wikiCheck": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T07:04:00+09:00",
+    "pages": 129,
+    "databases": 19,
+    "records": 489,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "validation": 80
+    },
+    "documentLinks": 979,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 466,
+    "gameExecution": "not performed; preserved reports only",
+    "publicPages": 2
+  }
+}

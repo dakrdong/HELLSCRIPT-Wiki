@@ -1,0 +1,155 @@
+Mono path[0] = '/tmp/hellscript-unlock-work/HELLSCRIPT.app/Contents/Resources/Data/Managed'
+Mono config path = '/tmp/hellscript-unlock-work/HELLSCRIPT.app/Contents/MonoBleedingEdge/etc'
+CodeReloadManager initialized
+Found 1 interfaces on host : 0) 192.168.200.104
+Player connection [8306745728]  Target information:
+
+Player connection [8306745728]  * "[IP] 192.168.200.104 [Port] 55001 [Flags] 2 [Guid] 1400548240 [EditorId] 3557316755 [Version] 1048832 [Id] OSXPlayer(1,T8G-2410-PN-005ui-MacBookPro.local) [Debug] 0 [PackageName] OSXPlayer [ProjectName] HELLSCRIPT" 
+
+Player connection [8306745728] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+ preferred device: Apple M3 Pro (high power)
+Metal devices available: 1
+0: Apple M3 Pro (high power)
+Using device Apple M3 Pro (high power)
+Initialize engine version: 6000.6.0f1 (f7f8ed4d1e24)
+[EntityIdStore] init: VM path (explicit commit), pageSize=16384, blockCount=262144, entitiesPerBlock=1024, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path /tmp/hellscript-unlock-work/HELLSCRIPT.app/Contents/Resources/Data/UnitySubsystems
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Initializing Metal device caps: Apple M3 Pro
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+- Finished resetting the current domain, in  0.005 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Metal RecreateSurface[0x10fc8a2d0]: surface size 1280x720
+UnloadTime: 0.810167 ms
+Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'GaussianDepthOfField'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.DepthOfFieldGaussianPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/DepthOfFieldGaussianPostProcessPass.cs:24)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:56)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'GaussianDepthOfField'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.DepthOfFieldGaussianPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/DepthOfFieldGaussianPostProcessPass.cs:25)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:56)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Shader 'Hidden/Universal Render Pipeline/BokehDepthOfField' is not supported or has been stripped from the build (in 'BokehDepthOfField'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.DepthOfFieldBokehPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/DepthOfFieldBokehProcessPass.cs:26)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:57)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Shader 'Hidden/Universal Render Pipeline/PaniniProjection' is not supported or has been stripped from the build (in 'PaniniProjection'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.PaniniProjectionPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/PaniniProjectionPostProcessPass.cs:19)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:64)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Metal RecreateSurface[0x10fc8a2d0]: surface size 720x1280
+Metal RecreateSurface[0x10fc8a2d0]: surface size 1280x720
+Metal RecreateSurface[0x10fc8a2d0]: surface size 720x1280
+Metal RecreateSurface[0x10fc8a2d0]: surface size 1280x720
+Metal RecreateSurface[0x10fc8a2d0]: surface size 720x1280
+HELLSCRIPT_UNLOCK_RUNTIME_OK
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:Log (object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:130)
+Hellscript.RuntimeContentUnlockSmoke/<Start>d__6:MoveNext () (at /private/tmp/hellscript-unlock-work/build-unity/Assets/HELLSCRIPT/Runtime/Presentation/RuntimeContentUnlockSmoke.cs:54)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: /Users/bokken/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 130)
+
+Thread 0x17140f000 may have been prematurely finalized
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+Thread 0x16ff87000 may have been prematurely finalized
+Thread 0x17009f000 may have been prematurely finalized
+Thread 0x170013000 may have been prematurely finalized
+Thread 0x170243000 may have been prematurely finalized
+Thread 0x1701b7000 may have been prematurely finalized
+Thread 0x17012b000 may have been prematurely finalized
+Thread 0x1702cf000 may have been prematurely finalized
+Thread 0x1704ff000 may have been prematurely finalized
+Thread 0x1703e7000 may have been prematurely finalized
+Thread 0x170473000 may have been prematurely finalized
+Thread 0x17035b000 may have been prematurely finalized
+CodeReloadManager destroyed
+PlayerConnection::Cleanup##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1789215380629,"processId":96719,"allocatedMemory":2317037,"memoryLabels":[{"Default":54543},{"Permanent":1472},{"NewDelete":948947},{"Thread":8200},{"Manager":542631},{"VertexData":8},{"Geometry":408},{"Texture":16},{"Shader":78020},{"Material":24},{"GfxDevice":38632},{"GfxThread":320},{"Animation":880},{"Audio":3448},{"FreeType":8},{"FontEngine":736},{"Physics":2000},{"Physics2D":16},{"Serialization":16392},{"Input":43216},{"JobScheduler":448},{"TextLib":280},{"Mono":56},{"ScriptingNativeRuntime":128},{"BaseObject":36520},{"Resource":520},{"Renderer":2448},{"Transform":6485},{"File":4600},{"WebCam":32},{"Culling":32},{"Terrain":11298},{"Wind":24},{"String":4211},{"Utility":316568},{"PoolAlloc":2208},{"AI":40},{"TypeTree":5512},{"ScriptManager":5688},{"CodeReload":440},{"RuntimeInitializeOnLoadManager":64},{"Sprites":78},{"SpriteAtlas":120},{"GI":7200},{"Director":8248},{"CloudService":288},{"WebRequest":4424},{"VR":49402},{"SceneManager":408},{"Video":2080},{"LazyScriptCache":32},{"NativeArray":648},{"Camera":1169},{"Secure":10185},{"SerializationCache":3608},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57496},{"Baselib":16},{"Analytics":80},{"Hierarchy":1452},{"UIElements":40},{"CoreStats":14536},{"Identifiers":7152},{"Gui":40},{"CoreBusinessMetrics":128},{"AssetReference":32}]}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.1255397">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="819" result="Failed" site="Child" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.125540" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1954" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="819" result="Failed" site="Child" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.114654" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="73800" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1955" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="819" result="Failed" site="Child" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.100726" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1956" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="819" result="Failed" site="Child" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.094833" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1120" name="AttackForecastTests" fullname="Hellscript.Tests.AttackForecastTests" classname="Hellscript.Tests.AttackForecastTests" runstate="Runnable" testcasecount="39" result="Failed" site="Child" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.078272" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1166" name="LegacyChainHitConditionStillAllowsApproachBeforeTheSeparateRangeCheck" fullname="Hellscript.Tests.AttackForecastTests.LegacyChainHitConditionStillAllowsApproachBeforeTheSeparateRangeCheck" methodname="LegacyChainHitConditionStillAllowsApproachBeforeTheSeparateRangeCheck" classname="Hellscript.Tests.AttackForecastTests" runstate="Runnable" seed="163602822" result="Failed" start-time="2026-09-09 05:33:22Z" end-time="2026-09-09 05:33:22Z" duration="0.057122" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The legacy condition asks about the chain shape; the next step owns range and approach.
+  Expected: 2
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.AttackForecastTests.LegacyChainHitConditionStillAllowsApproachBeforeTheSeparateRangeCheck () [0x000af] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AttackForecastTests.cs:227
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

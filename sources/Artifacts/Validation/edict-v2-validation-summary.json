@@ -1,0 +1,104 @@
+{
+  "phase": "Hunt Edict core option v0.2 definitions, versioned source, compact HED2 codec and explicit import previews",
+  "verifiedAt": "2026-09-09T05:16:22.793150+00:00",
+  "unityVersion": "6000.6.0f1",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "780",
+    "result": "Passed",
+    "total": "780",
+    "passed": "780",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 05:06:32Z",
+    "end-time": "2026-09-09 05:08:00Z",
+    "duration": "87.9351013"
+  },
+  "focusedEarlier": {
+    "id": "2",
+    "testcasecount": "143",
+    "result": "Passed",
+    "total": "143",
+    "passed": "143",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 04:58:06Z",
+    "end-time": "2026-09-09 04:58:09Z",
+    "duration": "3.015718"
+  },
+  "newTests": 45,
+  "previousTests": 735,
+  "maximumTestCodes": {
+    "WARRIOR": {
+      "wireJsonBytes": 2075,
+      "readableSourceJsonBytes": 7034,
+      "codeCharacters": 2837
+    },
+    "RANGER": {
+      "wireJsonBytes": 2110,
+      "readableSourceJsonBytes": 7068,
+      "codeCharacters": 2884
+    },
+    "MAGE": {
+      "wireJsonBytes": 2094,
+      "readableSourceJsonBytes": 7013,
+      "codeCharacters": 2862
+    }
+  },
+  "sources": {
+    "count": 117,
+    "new": [
+      "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.Availability.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.Codec.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.Import.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.LegacyPreview.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.Options.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.cs",
+      "Assets/HELLSCRIPT/Tests/Editor/HuntEdictV2Tests.cs"
+    ],
+    "changedExisting": [],
+    "changedSinceTestLaunch": []
+  },
+  "protectedAssets": {
+    "count": 98,
+    "finalChanges": [],
+    "packageDefineChange": {
+      "changed": true,
+      "restored": true
+    }
+  },
+  "requirements": {
+    "count": 6,
+    "changes": []
+  },
+  "metadata": {
+    "missing": [],
+    "duplicateGUIDs": {}
+  },
+  "coverage": [
+    "89 specification rows, choices and defaults",
+    "all three classes and option values",
+    "slot swap/removal and inactive choices preserved",
+    "compact HED2 canonical format and hostile malformed input rejection",
+    "partial locked-skill import without source mutation",
+    "actual equipment compatibility and fallback advisory",
+    "HED1 simplification preview keeps original and writes no account data"
+  ],
+  "notYetConnected": [
+    "CombatSimulation runtime decision execution",
+    "current BuildConfig migration",
+    "GameStore current save and five presets for v2",
+    "v2 editor and sharing UI",
+    "responsive reflow of v2 editor and device orientation settings",
+    "mobile clipboard/touch/keyboard/background-resume verification"
+  ],
+  "nativeBuildCreated": false
+}

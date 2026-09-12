@@ -1,0 +1,78 @@
+{
+  "result": "PASS for specified local-preset storage and macOS layout/callback scope; screen-layout SCR-01..08 remain incomplete",
+  "buildErrors": 0,
+  "nativeStartExitCode": 0,
+  "nativeResumeExitCode": 0,
+  "uniqueRenderSizes": [
+    "720x1280",
+    "1280x720",
+    "1920x1200",
+    "900x900",
+    "640x360",
+    "862x600",
+    "864x600",
+    "1400x900",
+    "900x360"
+  ],
+  "proof": [
+    "fixed actions inside safe area",
+    "split/merge retains name and account",
+    "reading paragraph follows existing content object",
+    "failed file write retains live account/disk/draft",
+    "retry",
+    "rename changes name only",
+    "load stays preview",
+    "actual new process restores slot 5"
+  ],
+  "priorCoreTests": {
+    "passed": 682,
+    "sourceManifest": "hunt-edict-storage-core-source-manifest.json",
+    "repeatedAfterLayoutChanges": false
+  },
+  "remaining": [
+    "full app responsive layout",
+    "device-only mobile orientation settings and failure handling",
+    "safe-area notch/keyboard/physical input/background-resume tests",
+    "actual PC border drag",
+    "Unicode emoji glyph display and real Korean IME",
+    "whole-page dirty state and atomic CommitBuild",
+    "v0.2 core-option model, legacy migration and shared-code integration"
+  ],
+  "protectedAssets": {
+    "unchanged": 97,
+    "total": 98,
+    "changed": [
+      "ProjectSettings/ProjectSettings.asset"
+    ],
+    "explanation": "Only ProjectSettings.asset changed against the 98-file storage baseline: existing Unity Inference package AnalyticsDefineManager appended SENTIS_ANALYTICS_ENABLED based on EditorAnalytics.enabled. No analytics preference, package, scene, prefab, asset GUID or orientation setting was manually changed. Exact diff retained."
+  },
+  "sourceManifest": "preset-layout-source-manifest.json",
+  "evidenceFiles": {
+    "PresetLayoutNativeEvidence/01-five-slots.png": "0d6d912e7fa773755ee01a1235e5c752be99f7851edb659159cfb82fd551bb6e",
+    "PresetLayoutNativeEvidence/02-dialog-1280x720.png": "3beb4a8854a9c72ba7a831359c618cbe6a4ce6db13d1b356f7ecaa1e713d1c14",
+    "PresetLayoutNativeEvidence/02-dialog-1400x900.png": "628f2d3a45b81ce1bb58f6f4a8c36bacd9c1ffcaf92a96f001c33756d99d5f40",
+    "PresetLayoutNativeEvidence/02-dialog-1920x1200.png": "9c586d0d541bc55561456cc41e67057ba15dda5e2773585a0411db2502662639",
+    "PresetLayoutNativeEvidence/02-dialog-640x360.png": "76bdda15a15ff56f0cd0cba34353724036f3b787d9cfe0027449d826c2ddf625",
+    "PresetLayoutNativeEvidence/02-dialog-720x1280.png": "9b361beaef49a7c992c6f06ca1b02a40af135148978c204f88586fe34e90e451",
+    "PresetLayoutNativeEvidence/02-dialog-862x600.png": "84bebffead8be33f5ae4a279b4f0aa65c256329b9b504b006573d62f54ca4437",
+    "PresetLayoutNativeEvidence/02-dialog-864x600.png": "c3048e85bdf0826e35be7fc7c7eb231a03fc7647a8adfeb6547e9a0aab914ef0",
+    "PresetLayoutNativeEvidence/02-dialog-900x900.png": "50234a243bb7a488f1d4341838ebdd461396e4492fd4c04b756996a24d69c4dc",
+    "PresetLayoutNativeEvidence/02-reading-merged.png": "255fa9b4a8973ab6031817a374722687eeebfac771d2df9a91e71b567feb391b",
+    "PresetLayoutNativeEvidence/02-reading-restored.png": "628f2d3a45b81ce1bb58f6f4a8c36bacd9c1ffcaf92a96f001c33756d99d5f40",
+    "PresetLayoutNativeEvidence/02-reading-split.png": "17a05340cc50a0af8ec9ef648874011affdaf7c66bb19845436da7669a84c10b",
+    "PresetLayoutNativeEvidence/02-reading-start.png": "329982be72693cee179a1426ef48b6a2a97c1589bc613b029d40a8cf73c9a4b4",
+    "PresetLayoutNativeEvidence/03-unsaved-name-choices.png": "fb33610aeed0b3ae6cc632186b8cf87eeef6575277616e48ad9c6cdfeb385dd2",
+    "PresetLayoutNativeEvidence/04-save-failure-keeps-draft.png": "d7d1b13cea6ddb0574084bfa79f12fdb17343c3a1eb797492812bde7eeb72955",
+    "PresetLayoutNativeEvidence/05-saved-slot-five.png": "d7330af850a4a3b0a693838687536e4ba7cdb72a387667f4a67665f3f94b8d6a",
+    "PresetLayoutNativeEvidence/06-rename-only.png": "ba04ab80967fc3c8a5c8f732f3a16e7d12b993a42687d50da78ae97648f4f9cd",
+    "PresetLayoutNativeEvidence/10-restarted-five-slots.png": "d33d65e828db352a60ca5ba26558f565b8d3cbcd60781bd52095fcfeb2084704",
+    "PresetLayoutNativeEvidence/expected-account.json": "a2400e56b86a5e03d0d427d9169b63e2f666b55ea650bee5dea07dad6a0b27d9",
+    "PresetLayoutNativeEvidence/layout-results.txt": "ad9790803c633c2515c1b4f6f0fb7d93e57029f851306b62565c04ea3d62dd21",
+    "PresetLayoutNativeEvidence/runtime-preset-smoke.txt": "936319593d3974a658254e4e8ae6aa31cb088066b9f50c4f6517fe5a00bda720"
+  },
+  "historicalAttempts": [
+    "PresetLayoutNativeEvidence-attempt1: macOS rounded 863 to 864; strict size assertion failed",
+    "PresetLayoutNativeEvidence-before-copy: passed before readable error-message change"
+  ],
+  "designSourceSha256": "3367ddeb6e14829a3dfc15a4c677364821eb868f74cf1a44da8988e11f8ab524"
+}

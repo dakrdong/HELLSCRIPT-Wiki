@@ -1,0 +1,84 @@
+{
+  "scope": "D4 same-equipment behavior A/B; full development goal remains active",
+  "sourceCount": 92,
+  "unchangedCoreAfter611Tests": true,
+  "protectedAssetCount": 98,
+  "changedProtectedAssets": [],
+  "missingSourceMeta": [],
+  "duplicateAssetGuids": [],
+  "localDocumentLinksChecked": 268,
+  "brokenLocalLinks": [],
+  "unresolvedHeadingLinks": [],
+  "native": {
+    "firstExitCode": 0,
+    "resumeExitCode": 0,
+    "actualRestarts": 1,
+    "renderer": "Metal",
+    "screen": [
+      540,
+      960
+    ],
+    "evidenceDirectory": "Artifacts/Validation/ComparisonNativeVerifiedEvidence",
+    "logs": {
+      "training-comparison-native-ui-verified-start.log": "d2fc7f81a24b5077e1d656e95dc58ff56373ba3d8f9d02c9dbf034adfa905d7b",
+      "training-comparison-native-ui-verified-resume.log": "fd288210ff8fad712760f4f9b8db9fdbb767e00be496a6fd5468ecf4846dc9dc"
+    }
+  },
+  "reviewedScreenshots": [
+    "01-comparison-picker.png",
+    "01b-a-battle.png",
+    "02-fixed-comparison-conditions.png",
+    "03-completed-a.png",
+    "04-b-edit-preview.png",
+    "04b-b-battle.png",
+    "05-completed-a-and-b.png",
+    "06-skill-statistics.png",
+    "06b-result-actions.png",
+    "07-changed-conditions.png",
+    "08-explicit-setting-choice.png",
+    "09-real-build-preview.png",
+    "10-saved-comparison.png",
+    "11-restored-comparison.png",
+    "12-restored-change-list.png"
+  ],
+  "evidenceHashes": {
+    "01-comparison-picker.png": "bf2f0b0fad80f898f3f2172c265fac0b8031bf0ea785e8cc966cae462ca25dcb",
+    "01b-a-battle.png": "80a35d736f18f7054ce723e6779325a19b140bc968a00a4f9d36a3e2082ea618",
+    "02-fixed-comparison-conditions.png": "6a1d977ae46ac110b88932fe0db490a196d1c96c3ab3fb55300c52e8f34ac8c9",
+    "03-completed-a.png": "f9dfc71d0d5a062acbbe25c9749a78b52f7392180b5645483194db52cdbc81e0",
+    "04-b-edit-preview.png": "5918321847f922a3a816ab10cf500375043eaba49da0e778c0a2be26f7adccb7",
+    "04b-b-battle.png": "7d15c23309cf16128f056e3c4e749bf1e89c7239ef0ca471fe4015bcb469351c",
+    "05-completed-a-and-b.png": "27cc1074e9331074be49309bd5e5279b2739b76a1d26fbf84d7c82345519b23a",
+    "06-skill-statistics.png": "109d4f3bbd7350a3f0b1063dccf32297e5efa14a9b7df32c383f5e085f9234b8",
+    "06b-result-actions.png": "6a3e14b07e52131bae311fa5d872ecd594d5cbeaacb220181483842b7123165a",
+    "07-changed-conditions.png": "0356a84863676924b2ba19b0b53469c210a12cb8e0b8a68fe4a6a9afdec70f11",
+    "08-explicit-setting-choice.png": "af4322f9e8b32b621f4dae656ca89f076e65854c4e260099794a1f17e3689f03",
+    "09-real-build-preview.png": "00dd4a09e6caf52f30f7f632405bfbd0994638b2c7d130d451fca1eb1a8384cd",
+    "10-saved-comparison.png": "173474dfc690e12aa11f6fc6f97d0f7a03b93e651ffa1c58e5580405fe04e678",
+    "11-restored-comparison.png": "173474dfc690e12aa11f6fc6f97d0f7a03b93e651ffa1c58e5580405fe04e678",
+    "12-restored-change-list.png": "cb4d91bf7c26f805f3f1d5ce11a84b86813b8c7b97ec6907739b0ba095587371",
+    "button-bounds.txt": "511a9fda6efbb5a33be75dc20f2a7ba473d68b3d170a2a9a5b3fd4af6de6a687",
+    "completed-comparison.json": "ba525279a9b5479feb1cd25c356fae8be308767c634d62279047494370ed4c2c",
+    "expected-account.json": "f555da35516214123b7280dc7c2ae37d1753fd5317e41418f2e36a0059a8d07b",
+    "runtime-comparison-smoke.txt": "76a0e495fa0da2c867b881e818625e959cc41d5cbd929f4e5f91b4632c5b3f5c"
+  },
+  "supersededUiAttempts": [
+    {
+      "log": "training-comparison-native-ui-start.log",
+      "exitCode": 1,
+      "reason": "HUD refresh overwrote comparison A/B title; production UI fixed."
+    },
+    {
+      "log": "training-comparison-native-ui-final-start.log",
+      "exitCode": 1,
+      "reason": "RectangleContainsScreenPoint rejected visible edge-aligned button; explicit overlay screen bounds and screenshots verify containment."
+    }
+  ],
+  "remaining": [
+    "Training equipment editing",
+    "Hunt Edict five named slots, sharing, explicit save flow and skill swapping",
+    "Recent ten rift analysis and farming time",
+    "Other D3/D4/D5/D6 backlog items including online and Android"
+  ],
+  "previousUserBuildUnchanged": true
+}

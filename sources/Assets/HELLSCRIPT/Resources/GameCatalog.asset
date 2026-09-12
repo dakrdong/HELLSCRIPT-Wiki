@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09e123cb9aeb1458aa735a6a2f2987aa, type: 3}
+  m_Name: GameCatalog
+  m_EditorClassIdentifier: Hellscript.Runtime::Hellscript.GameCatalog
+  skills:
+  - id: W01
+    name: "\uD68C\uC624\uB9AC"
+    description: "\uC8FC\uBCC0 \uC801\uC5D0\uAC8C 0.25\uCD08\uB9C8\uB2E4 \uD53C\uD574. \uC774\uB3D9\uD558\uBA70 \uC720\uC9C0\uD569\uB2C8\uB2E4."
+    heroClass: 0
+    kind: 0
+    unlock: 1
+    icon: 0
+    cooldown: 0
+    cost: 6
+    coefficient: 0.5
+    range: 2.5
+    radius: 2.5
+    duration: 0
+  - id: W02
+    name: "\uB3C4\uC57D \uB0B4\uB824\uCC0D\uAE30"
+    description: "\uC720\uD6A8\uD55C \uC704\uCE58\uB85C \uB3C4\uC57D\uD574 \uCC29\uC9C0 \uCDA9\uACA9\uC744 \uC90D\uB2C8\uB2E4."
+    heroClass: 0
+    kind: 1
+    unlock: 3
+    icon: 1
+    cooldown: 8
+    cost: 0
+    coefficient: 1.8
+    range: 8
+    radius: 2.5
+    duration: 0.6
+  - id: W03
+    name: "\uBD84\uC1C4 \uC77C\uACA9"
+    description: "\uC804\uBC29\uC758 \uC801\uC5D0\uAC8C \uAC15\uD55C \uBB3C\uB9AC \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    heroClass: 0
+    kind: 2
+    unlock: 6
+    icon: 2
+    cooldown: 0
+    cost: 25
+    coefficient: 2.2
+    range: 3
+    radius: 3
+    duration: 0.65
+  - id: W04
+    name: "\uC9C0\uBA74 \uAC15\uD0C0"
+    description: "\uC8FC\uBCC0 \uC801\uC5D0\uAC8C \uD53C\uD574\uC640 1.5\uCD08 \uAE30\uC808\uC744 \uC90D\uB2C8\uB2E4."
+    heroClass: 0
+    kind: 3
+    unlock: 10
+    icon: 3
+    cooldown: 10
+    cost: 0
+    coefficient: 1.2
+    range: 3
+    radius: 3
+    duration: 0.35
+  - id: W05
+    name: "\uCCA0\uBCBD"
+    description: "\uCD5C\uB300 HP 30% \uBCF4\uD638\uB9C9\uC744 4\uCD08 \uC720\uC9C0\uD569\uB2C8\uB2E4."
+    heroClass: 0
+    kind: 4
+    unlock: 15
+    icon: 4
+    cooldown: 14
+    cost: 0
+    coefficient: 0
+    range: 0
+    radius: 0
+    duration: 4
+  - id: W06
+    name: "\uC804\uD22C \uD568\uC131"
+    description: "\uC790\uC6D0 40 \uD68C\uBCF5, 6\uCD08\uAC04 \uD53C\uD574 +20%."
+    heroClass: 0
+    kind: 5
+    unlock: 20
+    icon: 5
+    cooldown: 16
+    cost: 0
+    coefficient: 0
+    range: 0
+    radius: 0
+    duration: 6
+  - id: A01
+    name: "\uAD00\uD1B5 \uC0AC\uACA9"
+    description: "\uC77C\uC9C1\uC120\uC73C\uB85C \uCD5C\uB300 5\uBA85\uC744 \uAD00\uD1B5\uD569\uB2C8\uB2E4."
+    heroClass: 1
+    kind: 6
+    unlock: 1
+    icon: 6
+    cooldown: 0
+    cost: 20
+    coefficient: 1.8
+    range: 10
+    radius: 0.6
+    duration: 0.65
+  - id: A02
+    name: "\uB2E4\uC911 \uC0AC\uACA9"
+    description: "60\uB3C4 \uBD80\uCC44\uAF34\uB85C \uD654\uC0B4 3\uBC1C\uC744 \uBC1C\uC0AC\uD569\uB2C8\uB2E4."
+    heroClass: 1
+    kind: 7
+    unlock: 3
+    icon: 7
+    cooldown: 3
+    cost: 30
+    coefficient: 0.8
+    range: 8
+    radius: 8
+    duration: 0.65
+  - id: A03
+    name: "\uB9F9\uB3C5 \uB36B"
+    description: "5\uCD08 \uB3C5 \uC7A5\uD310\uC744 \uC124\uCE58\uD569\uB2C8\uB2E4. \uCD5C\uB300 2\uAC1C."
+    heroClass: 1
+    kind: 8
+    unlock: 6
+    icon: 8
+    cooldown: 8
+    cost: 20
+    coefficient: 0.6
+    range: 6
+    radius: 3
+    duration: 5
+  - id: A04
+    name: "\uD6C4\uD1F4 \uB3C4\uC57D"
+    description: "\uC801\uACFC \uAC70\uB9AC\uB97C \uBC8C\uB9AC\uB294 \uC704\uCE58\uB85C \uB3C4\uC57D\uD569\uB2C8\uB2E4."
+    heroClass: 1
+    kind: 9
+    unlock: 10
+    icon: 9
+    cooldown: 8
+    cost: 0
+    coefficient: 0
+    range: 6
+    radius: 0
+    duration: 0.5
+  - id: A05
+    name: "\uC0AC\uB0E5\uAFBC\uC758 \uD45C\uC2DD"
+    description: "\uD45C\uC2DD \uB300\uC0C1\uC5D0\uAC8C \uC8FC\uB294 \uD53C\uD574 +25%."
+    heroClass: 1
+    kind: 10
+    unlock: 15
+    icon: 10
+    cooldown: 10
+    cost: 0
+    coefficient: 0
+    range: 10
+    radius: 0
+    duration: 10
+  - id: A06
+    name: "\uADF8\uB9BC\uC790 \uD654\uC0B4"
+    description: "\uB2E4\uC74C \uC0AC\uACA9 3\uD68C\uC5D0 \uC554\uD751 \uCD94\uAC00 \uD53C\uD574."
+    heroClass: 1
+    kind: 11
+    unlock: 20
+    icon: 11
+    cooldown: 12
+    cost: 10
+    coefficient: 0.25
+    range: 0
+    radius: 0
+    duration: 8
+  - id: M01
+    name: "\uD654\uC5FC\uAD6C"
+    description: "\uCC29\uD0C4 \uC9C0\uC810\uC5D0 \uD3ED\uBC1C \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    heroClass: 2
+    kind: 12
+    unlock: 1
+    icon: 12
+    cooldown: 0
+    cost: 25
+    coefficient: 2.1
+    range: 10
+    radius: 2.5
+    duration: 0.7
+  - id: M02
+    name: "\uB208\uBCF4\uB77C"
+    description: "6\uCD08\uAC04 \uB0C9\uAE30 \uD53C\uD574\uC640 35% \uB454\uD654. \uCD5C\uB300 2\uAC1C."
+    heroClass: 2
+    kind: 13
+    unlock: 3
+    icon: 13
+    cooldown: 6
+    cost: 30
+    coefficient: 0.65
+    range: 10
+    radius: 3
+    duration: 6
+  - id: M03
+    name: "\uC5F0\uC1C4 \uBC88\uAC1C"
+    description: "4\uBA85\uC5D0\uAC8C \uBC88\uAC1C\uB97C \uC5F0\uACB0\uD569\uB2C8\uB2E4. \uB2E4\uC74C \uD0C0\uACA9\uB9C8\uB2E4 \xD70.8."
+    heroClass: 2
+    kind: 14
+    unlock: 6
+    icon: 14
+    cooldown: 2
+    cost: 25
+    coefficient: 1.1
+    range: 10
+    radius: 4
+    duration: 0.45
+  - id: M04
+    name: "\uC21C\uAC04\uC774\uB3D9"
+    description: "\uC704\uD5D8\uC774 \uB0AE\uC740 \uC720\uD6A8\uD55C \uC9C0\uC810\uC73C\uB85C \uC774\uB3D9\uD569\uB2C8\uB2E4."
+    heroClass: 2
+    kind: 15
+    unlock: 10
+    icon: 15
+    cooldown: 9
+    cost: 0
+    coefficient: 0
+    range: 8
+    radius: 0
+    duration: 0.2
+  - id: M05
+    name: "\uC6D0\uC18C \uBCF4\uD638\uB9C9"
+    description: "\uCD5C\uB300 HP 35% \uBCF4\uD638\uB9C9\uC744 4\uCD08 \uC720\uC9C0\uD569\uB2C8\uB2E4."
+    heroClass: 2
+    kind: 4
+    unlock: 15
+    icon: 16
+    cooldown: 14
+    cost: 0
+    coefficient: 0
+    range: 0
+    radius: 0
+    duration: 4
+  - id: M06
+    name: "\uC11C\uB9AC \uD3ED\uBC1C"
+    description: "\uC8FC\uBCC0 \uC801\uC5D0\uAC8C \uB0C9\uAE30 \uD53C\uD574\uC640 1.5\uCD08 \uBE59\uACB0."
+    heroClass: 2
+    kind: 16
+    unlock: 20
+    icon: 17
+    cooldown: 10
+    cost: 20
+    coefficient: 1
+    range: 3
+    radius: 3
+    duration: 0.35
+  classNames:
+  - "\uC804\uC0AC"
+  - "\uAD81\uC218"
+  - "\uB9C8\uBC95\uC0AC"

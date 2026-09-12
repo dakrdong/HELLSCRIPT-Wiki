@@ -1,0 +1,116 @@
+{
+  "createdAt": "2026-09-12T11:44:09.309271+00:00",
+  "unity": "6000.6.0f1",
+  "mapVersion": 4,
+  "fullTests": {
+    "id": "2",
+    "testcasecount": "1287",
+    "result": "Passed",
+    "total": "1287",
+    "passed": "1287",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-12 11:06:34Z",
+    "end-time": "2026-09-12 11:10:45Z",
+    "duration": "250.818753"
+  },
+  "newObjectiveCases": 26,
+  "generatedMaps": 10000,
+  "objectiveDistribution": {
+    "Seals": 3361,
+    "EssenceCarriers": 3401,
+    "Offerings": 3238
+  },
+  "fixedFallbacks": 6,
+  "sourceFiles": 207,
+  "productionSourcesUnchangedAfterFullTest": true,
+  "validationProject": "/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-objective-chains-jj3xi85h",
+  "sharedProject": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT",
+  "excludedConcurrentSources": [
+    "Assets/HELLSCRIPT/Runtime/Core/RiftRarity.cs",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftRarityBalance.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftRewards.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRaritySmoke.cs",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftRarityTests.cs"
+  ],
+  "harnessChangesAfterFullTest": [],
+  "finalBuildLog": "build.log",
+  "nativeProcesses": [
+    {
+      "name": "carrier-main",
+      "startedAt": "2026-09-12T11:14:08.895174+00:00",
+      "completedAt": "2026-09-12T11:14:16.478625+00:00",
+      "exitCode": 0,
+      "marker": "HELLSCRIPT_CHAIN_OK carrier-main",
+      "markerPresent": true,
+      "passed": true
+    },
+    {
+      "name": "carrier-resume",
+      "startedAt": "2026-09-12T11:14:16.478989+00:00",
+      "completedAt": "2026-09-12T11:14:25.813326+00:00",
+      "exitCode": 0,
+      "marker": "HELLSCRIPT_CHAIN_OK carrier-resume",
+      "markerPresent": true,
+      "passed": true
+    },
+    {
+      "name": "offering-main",
+      "startedAt": "2026-09-12T11:14:25.813874+00:00",
+      "completedAt": "2026-09-12T11:14:32.741945+00:00",
+      "exitCode": 0,
+      "marker": "HELLSCRIPT_CHAIN_OK offering-main",
+      "markerPresent": true,
+      "passed": true
+    },
+    {
+      "name": "offering-resume",
+      "startedAt": "2026-09-12T11:14:32.742823+00:00",
+      "completedAt": "2026-09-12T11:14:39.481175+00:00",
+      "exitCode": 0,
+      "marker": "HELLSCRIPT_CHAIN_OK offering-resume",
+      "markerPresent": true,
+      "passed": true
+    },
+    {
+      "name": "offering-finish",
+      "startedAt": "2026-09-12T11:14:39.481998+00:00",
+      "completedAt": "2026-09-12T11:14:47.532699+00:00",
+      "exitCode": 0,
+      "marker": "HELLSCRIPT_CHAIN_OK offering-finish",
+      "markerPresent": true,
+      "passed": true
+    }
+  ],
+  "screenshots": {
+    "Artifacts/Validation/ObjectiveChains/Evidence/carrier-main-01-carrier-world.png": "6ce2ede84c55231567ea1479667fc2b55ab498fbe47699d3e6dd6d218dc664cb",
+    "Artifacts/Validation/ObjectiveChains/Evidence/carrier-main-02-carrier-map.png": "7afc9bbc472db02b08a73999c2290892209763011df7577bd6305722ed0ddd27",
+    "Artifacts/Validation/ObjectiveChains/Evidence/carrier-resume-01-carrier-world.png": "d895368aa9e8c41b997c3f8085bfc83194615ed959943b954403a117bf6301e0",
+    "Artifacts/Validation/ObjectiveChains/Evidence/carrier-resume-02-carrier-map.png": "e5983527803cf4e4eeb3757cb2f19fc8fcd3f79caf628ad8af5ff1a3e305dd80",
+    "Artifacts/Validation/ObjectiveChains/Evidence/carrier-resume-03-carrier-result.png": "cc71d56abfb0d7cfbb0bfe4e3dbec1b490adb690fc02e9c56ac0ce1116a5f18f",
+    "Artifacts/Validation/ObjectiveChains/Evidence/carrier-resume-04-carrier-result-compact.png": "6084a25dd7abb70b6af5568f55c6b9ee1b25b828ff7d4e8e7a5e5ffbc364108a",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-finish-01-altar-delivered.png": "58f6070506a12f78d95ba74088cc6df81790226d1d1e5f3e8eca54ac53f12d5a",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-finish-02-offering-result.png": "7fbf7927ebb22ef3127dcb02984b627e6bc7e0b27dac3aef4c25861248ba7bbd",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-finish-03-offering-result-compact.png": "c4e3b47c86c4d823e0e92468afd871eddba209b2b4d90e4f39d323e3518186b9",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-main-01-guarded-offering.png": "7d2fbcfd2f3589c53d519e19717429bfa8e3f2a3776b6b55ba1acf245043d994",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-main-02-one-collected.png": "e09b9945f8877b47eca06e37d1b683d51b942e1eb10f653fd87a264c8c8340c3",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-resume-01-altar-partial.png": "68511f9ef58c916a4735a9e58b4b4936a5da381b73d1be967852aa46ad046449",
+    "Artifacts/Validation/ObjectiveChains/Evidence/offering-resume-02-offering-map.png": "b468260c9fa037248e9f1320a9a243f96004196d6b88258e57cadf1f9ebcd5a2"
+  },
+  "protectedFilesUnchanged": 300,
+  "newMetasTotal": 20,
+  "newMetasThisPhase": 7,
+  "duplicateGuids": 0,
+  "missingCSharpMetas": 0,
+  "diffCheckPassed": true,
+  "limitations": [
+    "Native automated development-player fixtures; physical mobile touch and sustained performance remain unverified.",
+    "Claude's separate attribute/balance worktree remains excluded.",
+    "The concurrent rift-rarity task in the shared project is excluded; this report validates the isolated objective snapshot, not the combined live project.",
+    "Objective generation and progress are validated; long-term difficulty, economy and clear-rate tuning is separate."
+  ]
+}

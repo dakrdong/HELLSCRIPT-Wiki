@@ -1,0 +1,92 @@
+{
+  "stage": "Shared observed attack forecasts and fixed v0.2 aim candidates for W03, A01, A02 and M03",
+  "verifiedAt": "2026-09-09T05:37:25.451775+00:00",
+  "unityVersion": "6000.6.0f1",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "819",
+    "result": "Passed",
+    "total": "819",
+    "passed": "819",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 05:34:17Z",
+    "end-time": "2026-09-09 05:36:02Z",
+    "duration": "104.5777425"
+  },
+  "newTests": 39,
+  "previousTests": 780,
+  "focusedEarlier": {
+    "id": "2",
+    "testcasecount": "177",
+    "result": "Passed",
+    "total": "177",
+    "passed": "177",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 05:28:15Z",
+    "end-time": "2026-09-09 05:28:16Z",
+    "duration": "1.2442788"
+  },
+  "sources": {
+    "count": 121,
+    "new": [
+      "Assets/HELLSCRIPT/Runtime/Core/AttackForecast.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictAim.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Forecast.cs",
+      "Assets/HELLSCRIPT/Tests/Editor/AttackForecastTests.cs"
+    ],
+    "changedExisting": [
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Areas.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Projectiles.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Rules.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs"
+    ],
+    "changedSinceFinalTestLaunch": []
+  },
+  "protectedAssets": {
+    "count": 98,
+    "finalChanges": [],
+    "packageDefineChange": {
+      "changed": true,
+      "restored": true
+    }
+  },
+  "requirements": {
+    "count": 6,
+    "changes": []
+  },
+  "metadata": {
+    "missing": [],
+    "duplicateGUIDs": {}
+  },
+  "runtimeConnections": [
+    "Existing PredictedHits uses shared ForecastAttack",
+    "Live and forecast chain selection share NextChainTarget",
+    "Live and forecast multishot share firing-angle calculation",
+    "Ground and landing candidate calculations accept explicit origin and observed enemies"
+  ],
+  "v2AimStage": [
+    "W03 target/direction/purpose and crush charge",
+    "A01 target/ray/purpose and actual pierce cap",
+    "A02 target/ray/purpose and same-victim arrow count; movement remains pending",
+    "M03 first-target group, unique vs total visits and charge-expiry purpose"
+  ],
+  "limits": [
+    "Aim-stage candidates do not authorize casts",
+    "New v2 aim results are not yet delivered to StartHeroAction",
+    "Global target/tracking/survival/resource/arbitration and remaining core options require integration",
+    "Observed projectile lead is not yet connected to M01/basic firing and does not forecast moving-body collisions",
+    "No new UI, current save/preset integration, mobile verification or native app build"
+  ],
+  "regressionEvidence": "edict-aim-approach-regression.xml: expected 2 shape hits but got 0 before the correction; final 819 suite passes",
+  "nativeBuildCreated": false
+}

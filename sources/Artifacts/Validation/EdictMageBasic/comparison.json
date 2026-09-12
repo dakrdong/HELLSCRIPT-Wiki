@@ -1,0 +1,2129 @@
+{
+  "createdUtc": "2026-09-12T19:34:03.377344+00:00",
+  "scope": "Eight outcome-selected stage-20 seeds, level-30 Chain Control and eight legal items, three modes before and after Mage BASIC. The baseline is the preserved final M06 run (214b3de), with source provenance checked against its archive manifest. Survival configuration is diagnostic-only; fresh defaults and player settings remain unchanged. No damage or affix tuning. Last-decision context is observational, not necessarily the cause of a later-tick interruption.",
+  "inputs": {
+    "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Artifacts/Validation/EdictNova/AfterFinal24/runs.jsonl": "bdce8625cde866bd5dc5a878f98aa13fe8e953d8e4e5283ffd35402f158543d6",
+    "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Artifacts/Validation/EdictMageBasic/AfterFinal24/runs.jsonl": "66a3248ee28fcebad4824246b4d581b017a5eab0bb4ad16a5be503cc7300e414"
+  },
+  "matchedFields": [
+    "seed",
+    "map",
+    "encounter",
+    "objective",
+    "equipment",
+    "sheet",
+    "maxHp",
+    "baseDamage"
+  ],
+  "matchedPolicyDocuments": true,
+  "baselineReusedFrom": "EdictNova/AfterFinal24",
+  "replacementControlAfter": {
+    "legacy": {
+      "casts": 0,
+      "decisions": {},
+      "finishes": {},
+      "hits": 0,
+      "castTargetApplications": 0,
+      "emptyControlReleases": 0
+    },
+    "edict": {
+      "casts": 0,
+      "decisions": {},
+      "finishes": {},
+      "hits": 0,
+      "castTargetApplications": 0,
+      "emptyControlReleases": 0
+    },
+    "survival-configured": {
+      "casts": 56,
+      "decisions": {
+        "\uc900\ube44\uac00 \ub05d\ub098\uae30 \uc804\uc5d0 \ub04a\uc744 \uc218 \uc788\ub294 \uc704\ud5d8 \uc2dc\uc804\uc744 \uc81c\uc5b4\ud569\ub2c8\ub2e4.": 56
+      },
+      "finishes": {
+        "released": 56
+      },
+      "hits": 222,
+      "castTargetApplications": 183,
+      "emptyControlReleases": 5
+    }
+  },
+  "replacementControlNote": "Same-frame selected decisions and actual M06 release, damage and applied status targets. Status includes refreshes; this is not prevented enemy casts or damage saved. No causal labels are retroactively assigned to schema-3 baseline casts.",
+  "policyDiff": {
+    "dodge.ground.policy": {
+      "default": "OFF",
+      "configured": "DAMAGE"
+    },
+    "dodge.ground.hpPercent": {
+      "default": "10",
+      "configured": "15"
+    },
+    "dodge.area.policy": {
+      "default": "OFF",
+      "configured": "DAMAGE"
+    },
+    "dodge.area.hpPercent": {
+      "default": "10",
+      "configured": "15"
+    },
+    "dodge.direct.policy": {
+      "default": "OFF",
+      "configured": "DAMAGE"
+    },
+    "dodge.direct.hpPercent": {
+      "default": "10",
+      "configured": "15"
+    },
+    "dodge.interrupt": {
+      "default": "FINISH",
+      "configured": "CANCEL_ALLOWED"
+    },
+    "survival.lowHp": {
+      "default": "OFF",
+      "configured": "ON"
+    },
+    "survival.lethal": {
+      "default": "OFF",
+      "configured": "ON"
+    },
+    "survival.defenseSkill": {
+      "default": "",
+      "configured": "M05"
+    },
+    "survival.escapeSkill": {
+      "default": "",
+      "configured": "M04"
+    },
+    "survival.fallbackSkill": {
+      "default": "",
+      "configured": "M05"
+    },
+    "survival.fallback": {
+      "default": "KEEP_FIGHTING",
+      "configured": "OTHER_SKILL"
+    }
+  },
+  "documents": {
+    "edict": {
+      "schema": 2,
+      "contentVersion": 1,
+      "globalVersion": 1,
+      "optionVersion": 2,
+      "policyVersion": 1,
+      "heroClass": "MAGE",
+      "slots": [
+        "M04",
+        "M05",
+        "M06",
+        "M03"
+      ],
+      "global": [
+        {
+          "id": "dodge.ground.policy",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.ground.hpPercent",
+          "value": "10"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.area.hpPercent",
+          "value": "10"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.direct.hpPercent",
+          "value": "10"
+        },
+        {
+          "id": "dodge.control",
+          "value": ""
+        },
+        {
+          "id": "dodge.overlap",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.window",
+          "value": "1"
+        },
+        {
+          "id": "dodge.totalHpPercent",
+          "value": "20"
+        },
+        {
+          "id": "dodge.method",
+          "value": "WALK_FIRST"
+        },
+        {
+          "id": "dodge.interrupt",
+          "value": "FINISH"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        },
+        {
+          "id": "survival.lethal",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.dot",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.dotHpPercent",
+          "value": "10"
+        },
+        {
+          "id": "survival.defenseSkill",
+          "value": ""
+        },
+        {
+          "id": "survival.escapeSkill",
+          "value": ""
+        },
+        {
+          "id": "survival.fallbackSkill",
+          "value": ""
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,ESCAPE,WALK"
+        },
+        {
+          "id": "survival.fallback",
+          "value": "KEEP_FIGHTING"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.potion",
+          "value": "ON"
+        },
+        {
+          "id": "survival.potionHpPercent",
+          "value": "40"
+        },
+        {
+          "id": "survival.returnHpPercent",
+          "value": "50"
+        },
+        {
+          "id": "position.engage",
+          "value": "APPROACH"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "2"
+        },
+        {
+          "id": "position.clockwise",
+          "value": "ON"
+        },
+        {
+          "id": "position.ownArea",
+          "value": "OFF"
+        },
+        {
+          "id": "position.surrounded",
+          "value": "FIGHT_CENTER"
+        },
+        {
+          "id": "position.gather",
+          "value": "OFF"
+        },
+        {
+          "id": "position.gatherCount",
+          "value": "3"
+        },
+        {
+          "id": "position.addEnemies",
+          "value": "OFF"
+        },
+        {
+          "id": "position.gatherTime",
+          "value": "5"
+        },
+        {
+          "id": "target.default",
+          "value": "NEAREST"
+        },
+        {
+          "id": "target.specialEnabled",
+          "value": ""
+        },
+        {
+          "id": "target.specialOrder",
+          "value": "BOSS,ELITE,SUPPORT,RANGED"
+        },
+        {
+          "id": "target.interruptCaster",
+          "value": "OFF"
+        },
+        {
+          "id": "target.switch",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "target.chaseDistance",
+          "value": "30"
+        },
+        {
+          "id": "target.chaseTime",
+          "value": "20"
+        },
+        {
+          "id": "target.lostSight",
+          "value": "LAST_SEEN"
+        },
+        {
+          "id": "target.goblin",
+          "value": "OFF"
+        },
+        {
+          "id": "target.goblinDistance",
+          "value": "30"
+        },
+        {
+          "id": "target.goblinTime",
+          "value": "20"
+        },
+        {
+          "id": "target.bossFight",
+          "value": "BOSS"
+        },
+        {
+          "id": "loot.NORMAL",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.MAGIC",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.RARE",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.LEGENDARY",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.SET",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.class",
+          "value": "ALL"
+        },
+        {
+          "id": "loot.slots",
+          "value": "WEAPON,HEAD,CHEST,HANDS,FEET,WAIST,AMULET,RING"
+        },
+        {
+          "id": "loot.itemLevel",
+          "value": "1"
+        },
+        {
+          "id": "loot.exceptLegendary",
+          "value": "OFF"
+        },
+        {
+          "id": "loot.exceptSet",
+          "value": "OFF"
+        },
+        {
+          "id": "loot.exceptEffects",
+          "value": ""
+        },
+        {
+          "id": "loot.gold",
+          "value": "PASSING"
+        },
+        {
+          "id": "loot.minimumGold",
+          "value": "0"
+        },
+        {
+          "id": "loot.material",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.gem",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.core",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.distance",
+          "value": "20"
+        },
+        {
+          "id": "loot.danger",
+          "value": "WAIT"
+        },
+        {
+          "id": "loot.finish",
+          "value": "COLLECT"
+        },
+        {
+          "id": "bag.trigger",
+          "value": "FULL"
+        },
+        {
+          "id": "bag.freeSlots",
+          "value": "0"
+        },
+        {
+          "id": "bag.policy",
+          "value": "PORTAL"
+        },
+        {
+          "id": "bag.replacementRank",
+          "value": "RARITY"
+        },
+        {
+          "id": "bag.replacementFail",
+          "value": "LEAVE"
+        },
+        {
+          "id": "bag.cleanupAt",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.allowLegendaryDisposal",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.protectEnhanced",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.protectSocketed",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.protectEffects",
+          "value": ""
+        },
+        {
+          "id": "bag.protectSets",
+          "value": ""
+        },
+        {
+          "id": "bag.warehouseFull",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.stillFull",
+          "value": "STOP"
+        },
+        {
+          "id": "bag.cleanup.NORMAL",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.MAGIC",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.RARE",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.LEGENDARY",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.SET",
+          "value": "KEEP"
+        },
+        {
+          "id": "explore.mode",
+          "value": "RIGHT_WALL"
+        },
+        {
+          "id": "explore.order",
+          "value": "ENEMIES,LOOT,CHESTS,SHRINES"
+        },
+        {
+          "id": "explore.chests",
+          "value": "ON"
+        },
+        {
+          "id": "explore.normalChest",
+          "value": "ON_PATH"
+        },
+        {
+          "id": "explore.sealedChest",
+          "value": "ON_PATH"
+        },
+        {
+          "id": "explore.chestDetour",
+          "value": "12"
+        },
+        {
+          "id": "explore.chestsAfterBoss",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.cursedChest",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.cursedHpPercent",
+          "value": "70"
+        },
+        {
+          "id": "explore.cursedDefense",
+          "value": ""
+        },
+        {
+          "id": "explore.cursedMinimumTime",
+          "value": "90"
+        },
+        {
+          "id": "explore.shrine",
+          "value": "FOUND"
+        },
+        {
+          "id": "explore.guideShrine",
+          "value": "ON"
+        },
+        {
+          "id": "explore.resolveShrine",
+          "value": "ON"
+        },
+        {
+          "id": "explore.shrineDetour",
+          "value": "12"
+        },
+        {
+          "id": "explore.bossUnlocked",
+          "value": "FINISH_CURRENT"
+        },
+        {
+          "id": "explore.lowTime",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.lowTimeSeconds",
+          "value": "30"
+        },
+        {
+          "id": "explore.lowTimeLoot",
+          "value": ""
+        },
+        {
+          "id": "repeat.enabled",
+          "value": "OFF"
+        },
+        {
+          "id": "repeat.success",
+          "value": "SAME"
+        },
+        {
+          "id": "repeat.failure",
+          "value": "SAME"
+        },
+        {
+          "id": "repeat.failures",
+          "value": "3"
+        },
+        {
+          "id": "repeat.count",
+          "value": "0"
+        },
+        {
+          "id": "repeat.minutes",
+          "value": "0"
+        },
+        {
+          "id": "repeat.gold",
+          "value": "0"
+        },
+        {
+          "id": "repeat.effects",
+          "value": ""
+        },
+        {
+          "id": "repeat.sets",
+          "value": ""
+        },
+        {
+          "id": "repeat.stage",
+          "value": "0"
+        },
+        {
+          "id": "repeat.freeSlots",
+          "value": "0"
+        },
+        {
+          "id": "repeat.resultSeconds",
+          "value": "3"
+        },
+        {
+          "id": "common.order",
+          "value": "EMERGENCY,DODGE,PRIORITY_LOOT,ATTACK,AFTER_COMBAT_LOOT,EXPLORE"
+        }
+      ],
+      "skillOrder": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "BASIC"
+      ],
+      "skills": [
+        {
+          "id": "M01",
+          "options": [
+            {
+              "id": "HEC-M01-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M01-02",
+              "value": "STEADY"
+            },
+            {
+              "id": "HEC-M01-03",
+              "value": "GLOBAL"
+            },
+            {
+              "id": "HEC-M01-04",
+              "value": "PREDICTED"
+            }
+          ]
+        },
+        {
+          "id": "M02",
+          "options": [
+            {
+              "id": "HEC-M02-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M02-02",
+              "value": "NEW_AREA"
+            },
+            {
+              "id": "HEC-M02-03",
+              "value": "DENSE"
+            },
+            {
+              "id": "HEC-M02-04",
+              "value": "REPLACE"
+            },
+            {
+              "id": "HEC-M02-05",
+              "value": "FIXED"
+            }
+          ]
+        },
+        {
+          "id": "M03",
+          "options": [
+            {
+              "id": "HEC-M03-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M03-02",
+              "value": "SINGLE"
+            },
+            {
+              "id": "HEC-M03-03",
+              "value": "ALL"
+            },
+            {
+              "id": "HEC-M03-04",
+              "value": "UNIQUE"
+            }
+          ]
+        },
+        {
+          "id": "M04",
+          "options": [
+            {
+              "id": "HEC-M04-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M04-02",
+              "value": "SURVIVAL"
+            },
+            {
+              "id": "HEC-M04-03",
+              "value": "SAFE"
+            },
+            {
+              "id": "HEC-M04-04",
+              "value": "GLOBAL"
+            }
+          ]
+        },
+        {
+          "id": "M05",
+          "options": [
+            {
+              "id": "HEC-M05-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M05-02",
+              "value": "PREVENT"
+            },
+            {
+              "id": "HEC-M05-03",
+              "value": "TOGETHER"
+            },
+            {
+              "id": "HEC-M05-04",
+              "value": "ALL"
+            }
+          ]
+        },
+        {
+          "id": "M06",
+          "options": [
+            {
+              "id": "HEC-M06-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M06-02",
+              "value": "CONTROL"
+            },
+            {
+              "id": "HEC-M06-03",
+              "value": "HERE"
+            },
+            {
+              "id": "HEC-M06-04",
+              "value": "PURPOSE"
+            }
+          ]
+        },
+        {
+          "id": "BASIC",
+          "options": [
+            {
+              "id": "HEC-MAGE-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-MAGE-02",
+              "value": "FILL"
+            },
+            {
+              "id": "HEC-MAGE-03",
+              "value": "GLOBAL"
+            },
+            {
+              "id": "HEC-MAGE-04",
+              "value": "PREDICTED"
+            }
+          ]
+        }
+      ]
+    },
+    "survival-configured": {
+      "schema": 2,
+      "contentVersion": 1,
+      "globalVersion": 1,
+      "optionVersion": 2,
+      "policyVersion": 1,
+      "heroClass": "MAGE",
+      "slots": [
+        "M04",
+        "M05",
+        "M06",
+        "M03"
+      ],
+      "global": [
+        {
+          "id": "dodge.ground.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.ground.hpPercent",
+          "value": "15"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.area.hpPercent",
+          "value": "15"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.direct.hpPercent",
+          "value": "15"
+        },
+        {
+          "id": "dodge.control",
+          "value": ""
+        },
+        {
+          "id": "dodge.overlap",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.window",
+          "value": "1"
+        },
+        {
+          "id": "dodge.totalHpPercent",
+          "value": "20"
+        },
+        {
+          "id": "dodge.method",
+          "value": "WALK_FIRST"
+        },
+        {
+          "id": "dodge.interrupt",
+          "value": "CANCEL_ALLOWED"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        },
+        {
+          "id": "survival.lethal",
+          "value": "ON"
+        },
+        {
+          "id": "survival.dot",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.dotHpPercent",
+          "value": "10"
+        },
+        {
+          "id": "survival.defenseSkill",
+          "value": "M05"
+        },
+        {
+          "id": "survival.escapeSkill",
+          "value": "M04"
+        },
+        {
+          "id": "survival.fallbackSkill",
+          "value": "M05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,ESCAPE,WALK"
+        },
+        {
+          "id": "survival.fallback",
+          "value": "OTHER_SKILL"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.potion",
+          "value": "ON"
+        },
+        {
+          "id": "survival.potionHpPercent",
+          "value": "40"
+        },
+        {
+          "id": "survival.returnHpPercent",
+          "value": "50"
+        },
+        {
+          "id": "position.engage",
+          "value": "APPROACH"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "2"
+        },
+        {
+          "id": "position.clockwise",
+          "value": "ON"
+        },
+        {
+          "id": "position.ownArea",
+          "value": "OFF"
+        },
+        {
+          "id": "position.surrounded",
+          "value": "FIGHT_CENTER"
+        },
+        {
+          "id": "position.gather",
+          "value": "OFF"
+        },
+        {
+          "id": "position.gatherCount",
+          "value": "3"
+        },
+        {
+          "id": "position.addEnemies",
+          "value": "OFF"
+        },
+        {
+          "id": "position.gatherTime",
+          "value": "5"
+        },
+        {
+          "id": "target.default",
+          "value": "NEAREST"
+        },
+        {
+          "id": "target.specialEnabled",
+          "value": ""
+        },
+        {
+          "id": "target.specialOrder",
+          "value": "BOSS,ELITE,SUPPORT,RANGED"
+        },
+        {
+          "id": "target.interruptCaster",
+          "value": "OFF"
+        },
+        {
+          "id": "target.switch",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "target.chaseDistance",
+          "value": "30"
+        },
+        {
+          "id": "target.chaseTime",
+          "value": "20"
+        },
+        {
+          "id": "target.lostSight",
+          "value": "LAST_SEEN"
+        },
+        {
+          "id": "target.goblin",
+          "value": "OFF"
+        },
+        {
+          "id": "target.goblinDistance",
+          "value": "30"
+        },
+        {
+          "id": "target.goblinTime",
+          "value": "20"
+        },
+        {
+          "id": "target.bossFight",
+          "value": "BOSS"
+        },
+        {
+          "id": "loot.NORMAL",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.MAGIC",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.RARE",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.LEGENDARY",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.SET",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.class",
+          "value": "ALL"
+        },
+        {
+          "id": "loot.slots",
+          "value": "WEAPON,HEAD,CHEST,HANDS,FEET,WAIST,AMULET,RING"
+        },
+        {
+          "id": "loot.itemLevel",
+          "value": "1"
+        },
+        {
+          "id": "loot.exceptLegendary",
+          "value": "OFF"
+        },
+        {
+          "id": "loot.exceptSet",
+          "value": "OFF"
+        },
+        {
+          "id": "loot.exceptEffects",
+          "value": ""
+        },
+        {
+          "id": "loot.gold",
+          "value": "PASSING"
+        },
+        {
+          "id": "loot.minimumGold",
+          "value": "0"
+        },
+        {
+          "id": "loot.material",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.gem",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.core",
+          "value": "AFTER_COMBAT"
+        },
+        {
+          "id": "loot.distance",
+          "value": "20"
+        },
+        {
+          "id": "loot.danger",
+          "value": "WAIT"
+        },
+        {
+          "id": "loot.finish",
+          "value": "COLLECT"
+        },
+        {
+          "id": "bag.trigger",
+          "value": "FULL"
+        },
+        {
+          "id": "bag.freeSlots",
+          "value": "0"
+        },
+        {
+          "id": "bag.policy",
+          "value": "PORTAL"
+        },
+        {
+          "id": "bag.replacementRank",
+          "value": "RARITY"
+        },
+        {
+          "id": "bag.replacementFail",
+          "value": "LEAVE"
+        },
+        {
+          "id": "bag.cleanupAt",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.allowLegendaryDisposal",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.protectEnhanced",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.protectSocketed",
+          "value": "OFF"
+        },
+        {
+          "id": "bag.protectEffects",
+          "value": ""
+        },
+        {
+          "id": "bag.protectSets",
+          "value": ""
+        },
+        {
+          "id": "bag.warehouseFull",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.stillFull",
+          "value": "STOP"
+        },
+        {
+          "id": "bag.cleanup.NORMAL",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.MAGIC",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.RARE",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.LEGENDARY",
+          "value": "KEEP"
+        },
+        {
+          "id": "bag.cleanup.SET",
+          "value": "KEEP"
+        },
+        {
+          "id": "explore.mode",
+          "value": "RIGHT_WALL"
+        },
+        {
+          "id": "explore.order",
+          "value": "ENEMIES,LOOT,CHESTS,SHRINES"
+        },
+        {
+          "id": "explore.chests",
+          "value": "ON"
+        },
+        {
+          "id": "explore.normalChest",
+          "value": "ON_PATH"
+        },
+        {
+          "id": "explore.sealedChest",
+          "value": "ON_PATH"
+        },
+        {
+          "id": "explore.chestDetour",
+          "value": "12"
+        },
+        {
+          "id": "explore.chestsAfterBoss",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.cursedChest",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.cursedHpPercent",
+          "value": "70"
+        },
+        {
+          "id": "explore.cursedDefense",
+          "value": ""
+        },
+        {
+          "id": "explore.cursedMinimumTime",
+          "value": "90"
+        },
+        {
+          "id": "explore.shrine",
+          "value": "FOUND"
+        },
+        {
+          "id": "explore.guideShrine",
+          "value": "ON"
+        },
+        {
+          "id": "explore.resolveShrine",
+          "value": "ON"
+        },
+        {
+          "id": "explore.shrineDetour",
+          "value": "12"
+        },
+        {
+          "id": "explore.bossUnlocked",
+          "value": "FINISH_CURRENT"
+        },
+        {
+          "id": "explore.lowTime",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.lowTimeSeconds",
+          "value": "30"
+        },
+        {
+          "id": "explore.lowTimeLoot",
+          "value": ""
+        },
+        {
+          "id": "repeat.enabled",
+          "value": "OFF"
+        },
+        {
+          "id": "repeat.success",
+          "value": "SAME"
+        },
+        {
+          "id": "repeat.failure",
+          "value": "SAME"
+        },
+        {
+          "id": "repeat.failures",
+          "value": "3"
+        },
+        {
+          "id": "repeat.count",
+          "value": "0"
+        },
+        {
+          "id": "repeat.minutes",
+          "value": "0"
+        },
+        {
+          "id": "repeat.gold",
+          "value": "0"
+        },
+        {
+          "id": "repeat.effects",
+          "value": ""
+        },
+        {
+          "id": "repeat.sets",
+          "value": ""
+        },
+        {
+          "id": "repeat.stage",
+          "value": "0"
+        },
+        {
+          "id": "repeat.freeSlots",
+          "value": "0"
+        },
+        {
+          "id": "repeat.resultSeconds",
+          "value": "3"
+        },
+        {
+          "id": "common.order",
+          "value": "EMERGENCY,DODGE,PRIORITY_LOOT,ATTACK,AFTER_COMBAT_LOOT,EXPLORE"
+        }
+      ],
+      "skillOrder": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "BASIC"
+      ],
+      "skills": [
+        {
+          "id": "M01",
+          "options": [
+            {
+              "id": "HEC-M01-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M01-02",
+              "value": "STEADY"
+            },
+            {
+              "id": "HEC-M01-03",
+              "value": "GLOBAL"
+            },
+            {
+              "id": "HEC-M01-04",
+              "value": "PREDICTED"
+            }
+          ]
+        },
+        {
+          "id": "M02",
+          "options": [
+            {
+              "id": "HEC-M02-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M02-02",
+              "value": "NEW_AREA"
+            },
+            {
+              "id": "HEC-M02-03",
+              "value": "DENSE"
+            },
+            {
+              "id": "HEC-M02-04",
+              "value": "REPLACE"
+            },
+            {
+              "id": "HEC-M02-05",
+              "value": "FIXED"
+            }
+          ]
+        },
+        {
+          "id": "M03",
+          "options": [
+            {
+              "id": "HEC-M03-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M03-02",
+              "value": "SINGLE"
+            },
+            {
+              "id": "HEC-M03-03",
+              "value": "ALL"
+            },
+            {
+              "id": "HEC-M03-04",
+              "value": "UNIQUE"
+            }
+          ]
+        },
+        {
+          "id": "M04",
+          "options": [
+            {
+              "id": "HEC-M04-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M04-02",
+              "value": "SURVIVAL"
+            },
+            {
+              "id": "HEC-M04-03",
+              "value": "SAFE"
+            },
+            {
+              "id": "HEC-M04-04",
+              "value": "GLOBAL"
+            }
+          ]
+        },
+        {
+          "id": "M05",
+          "options": [
+            {
+              "id": "HEC-M05-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M05-02",
+              "value": "PREVENT"
+            },
+            {
+              "id": "HEC-M05-03",
+              "value": "TOGETHER"
+            },
+            {
+              "id": "HEC-M05-04",
+              "value": "ALL"
+            }
+          ]
+        },
+        {
+          "id": "M06",
+          "options": [
+            {
+              "id": "HEC-M06-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-M06-02",
+              "value": "CONTROL"
+            },
+            {
+              "id": "HEC-M06-03",
+              "value": "HERE"
+            },
+            {
+              "id": "HEC-M06-04",
+              "value": "PURPOSE"
+            }
+          ]
+        },
+        {
+          "id": "BASIC",
+          "options": [
+            {
+              "id": "HEC-MAGE-01",
+              "value": "ON"
+            },
+            {
+              "id": "HEC-MAGE-02",
+              "value": "FILL"
+            },
+            {
+              "id": "HEC-MAGE-03",
+              "value": "GLOBAL"
+            },
+            {
+              "id": "HEC-MAGE-04",
+              "value": "PREDICTED"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "summary": {
+    "before-legacy": {
+      "outcomes": {
+        "HeroDeath": 4,
+        "TimeLimit": 4
+      },
+      "bossSpawned": 4,
+      "starts": 538,
+      "releases": 510,
+      "hits": 1761,
+      "finishes": {
+        "released": 504,
+        "missed": 6,
+        "interrupted": 28
+      },
+      "interruptReasons": {
+        "\uc0c1\uc704 \uc0dd\uc874 \ud589\ub3d9\uc73c\ub85c \uc804\ud658": 25,
+        "\uac08\uace0\ub9ac\uc5d0 \ub04c\ub9bc": 2,
+        "\uc601\uc6c5 \uc0ac\ub9dd": 1
+      },
+      "replacements": {
+        "preset-2-1-0": 22,
+        "": 3,
+        "preset-2-1-1": 3
+      },
+      "lastGlobalRequest": {
+        "(False, False, '')": 28
+      },
+      "teleportStarts": 149,
+      "shieldStarts": 41,
+      "basicStarts": 1036,
+      "basicHits": 989,
+      "novaStarts": 69,
+      "novaReleases": 62,
+      "novaHits": 226,
+      "meanBeforeBossSeconds": 227.38697719573975,
+      "resourceBlockedChecks": 0,
+      "meanDamage": 22580.607421875,
+      "meanTime": 253.365309715271
+    },
+    "before-edict": {
+      "outcomes": {
+        "HeroDeath": 7,
+        "TimeLimit": 1
+      },
+      "bossSpawned": 1,
+      "starts": 321,
+      "releases": 319,
+      "hits": 1317,
+      "finishes": {
+        "released": 317,
+        "interrupted": 2,
+        "missed": 2
+      },
+      "interruptReasons": {
+        "\uc601\uc6c5 \uc0ac\ub9dd": 2
+      },
+      "replacements": {
+        "": 2
+      },
+      "lastGlobalRequest": {
+        "(False, False, '')": 2
+      },
+      "teleportStarts": 0,
+      "shieldStarts": 0,
+      "basicStarts": 636,
+      "basicHits": 627,
+      "novaStarts": 59,
+      "novaReleases": 58,
+      "novaHits": 213,
+      "meanBeforeBossSeconds": 151.27215099334717,
+      "resourceBlockedChecks": 0,
+      "meanDamage": 16015.337341308594,
+      "meanTime": 152.6405668258667
+    },
+    "before-survival-configured": {
+      "outcomes": {
+        "TimeLimit": 8
+      },
+      "bossSpawned": 3,
+      "starts": 565,
+      "releases": 497,
+      "hits": 1815,
+      "finishes": {
+        "released": 490,
+        "interrupted": 68,
+        "missed": 7
+      },
+      "interruptReasons": {
+        "\uc0c1\uc704 \uc0dd\uc874 \ud589\ub3d9\uc73c\ub85c \uc804\ud658": 59,
+        "\uac08\uace0\ub9ac\uc5d0 \ub04c\ub9bc": 1,
+        "\uc804\uc5ed \uae34\uae09 \uc0dd\uc874 \u00b7 \ubcf4\ud589 \uc804\ud658": 6,
+        "\uc81c\ud55c\uc2dc\uac04 \ucd08\uacfc": 2
+      },
+      "replacements": {
+        "edict:M06": 52,
+        "HED2:SURVIVAL:M05": 7,
+        "": 9
+      },
+      "lastGlobalRequest": {
+        "(False, False, '')": 55,
+        "(True, False, 'DEFENSE')": 7,
+        "(True, False, 'WALK')": 6
+      },
+      "teleportStarts": 62,
+      "shieldStarts": 44,
+      "basicStarts": 1068,
+      "basicHits": 1033,
+      "novaStarts": 110,
+      "novaReleases": 109,
+      "novaHits": 382,
+      "meanBeforeBossSeconds": 271.20905113220215,
+      "resourceBlockedChecks": 0,
+      "meanDamage": 24410.475830078125,
+      "meanTime": 300.0002746582031
+    },
+    "after-legacy": {
+      "outcomes": {
+        "HeroDeath": 4,
+        "TimeLimit": 4
+      },
+      "bossSpawned": 4,
+      "starts": 538,
+      "releases": 510,
+      "hits": 1761,
+      "finishes": {
+        "released": 504,
+        "missed": 6,
+        "interrupted": 28
+      },
+      "interruptReasons": {
+        "\uc0c1\uc704 \uc0dd\uc874 \ud589\ub3d9\uc73c\ub85c \uc804\ud658": 25,
+        "\uac08\uace0\ub9ac\uc5d0 \ub04c\ub9bc": 2,
+        "\uc601\uc6c5 \uc0ac\ub9dd": 1
+      },
+      "replacements": {
+        "preset-2-1-0": 22,
+        "": 3,
+        "preset-2-1-1": 3
+      },
+      "lastGlobalRequest": {
+        "(False, False, '')": 28
+      },
+      "teleportStarts": 149,
+      "shieldStarts": 41,
+      "basicStarts": 1036,
+      "basicHits": 989,
+      "novaStarts": 69,
+      "novaReleases": 62,
+      "novaHits": 226,
+      "meanBeforeBossSeconds": 227.38697719573975,
+      "resourceBlockedChecks": 0,
+      "meanDamage": 22580.607421875,
+      "meanTime": 253.365309715271
+    },
+    "after-edict": {
+      "outcomes": {
+        "HeroDeath": 7,
+        "TimeLimit": 1
+      },
+      "bossSpawned": 2,
+      "starts": 339,
+      "releases": 337,
+      "hits": 1335,
+      "finishes": {
+        "released": 335,
+        "interrupted": 2,
+        "missed": 2
+      },
+      "interruptReasons": {
+        "\uc601\uc6c5 \uc0ac\ub9dd": 2
+      },
+      "replacements": {
+        "": 2
+      },
+      "lastGlobalRequest": {
+        "(False, False, '')": 2
+      },
+      "teleportStarts": 0,
+      "shieldStarts": 0,
+      "basicStarts": 674,
+      "basicHits": 658,
+      "novaStarts": 59,
+      "novaReleases": 59,
+      "novaHits": 219,
+      "meanBeforeBossSeconds": 152.07214450836182,
+      "resourceBlockedChecks": 0,
+      "meanDamage": 16427.707275390625,
+      "meanTime": 158.49092960357666
+    },
+    "after-survival-configured": {
+      "outcomes": {
+        "TimeLimit": 8
+      },
+      "bossSpawned": 5,
+      "starts": 576,
+      "releases": 512,
+      "hits": 1938,
+      "finishes": {
+        "released": 507,
+        "interrupted": 64,
+        "missed": 5
+      },
+      "interruptReasons": {
+        "\uc0c1\uc704 \uc0dd\uc874 \ud589\ub3d9\uc73c\ub85c \uc804\ud658": 61,
+        "\uc804\uc5ed \uae34\uae09 \uc0dd\uc874 \u00b7 \ubcf4\ud589 \uc804\ud658": 2,
+        "\uc81c\ud55c\uc2dc\uac04 \ucd08\uacfc": 1
+      },
+      "replacements": {
+        "edict:M06": 56,
+        "": 3,
+        "HED2:SURVIVAL:M05": 5
+      },
+      "lastGlobalRequest": {
+        "(False, False, '')": 57,
+        "(True, False, 'WALK')": 2,
+        "(True, False, 'DEFENSE')": 5
+      },
+      "teleportStarts": 47,
+      "shieldStarts": 37,
+      "basicStarts": 1104,
+      "basicHits": 1050,
+      "novaStarts": 116,
+      "novaReleases": 116,
+      "novaHits": 398,
+      "meanBeforeBossSeconds": 266.2601089477539,
+      "resourceBlockedChecks": 0,
+      "meanDamage": 25635.373046875,
+      "meanTime": 300.0002746582031
+    }
+  },
+  "pairs": [
+    {
+      "mode": "edict",
+      "seedIndex": 0,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 106.85192108154297,
+        "damage": 13006.607421875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 28
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 106.85192108154297,
+        "damage": 13006.607421875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 28
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 1,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 163.40536499023438,
+        "damage": 14262.4013671875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 38
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 214.3084716796875,
+        "damage": 19343.404296875,
+        "bossSpawnTime": 172.3559112548828,
+        "bossRemainingHp": 10857.4697265625,
+        "kills": 48
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 2,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 123.0029067993164,
+        "damage": 15356.91796875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 41
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 122.10285186767578,
+        "damage": 15297.240234375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 41
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 3,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 105.15181732177734,
+        "damage": 9918.2021484375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 31
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 105.15181732177734,
+        "damage": 9918.2021484375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 31
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 4,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 251.66075134277344,
+        "damage": 24487.1640625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 68
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 249.0605926513672,
+        "damage": 23094.732421875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 63
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 5,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 60.64936065673828,
+        "damage": 7877.35205078125,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 17
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 60.04936981201172,
+        "damage": 8055.6953125,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 17
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 9,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 29917.810546875,
+        "bossSpawnTime": 289.1029357910156,
+        "bossRemainingHp": 13594.46875,
+        "kills": 92
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 29409.533203125,
+        "bossSpawnTime": 290.7025451660156,
+        "bossRemainingHp": 13594.46875,
+        "kills": 88
+      }
+    },
+    {
+      "mode": "edict",
+      "seedIndex": 14,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 110.40213775634766,
+        "damage": 13296.2431640625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 34
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 110.40213775634766,
+        "damage": 13296.2431640625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 34
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 0,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 103.95174407958984,
+        "damage": 10870.2265625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 24
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 103.95174407958984,
+        "damage": 10870.2265625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 24
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 1,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 20582.56640625,
+        "bossSpawnTime": 231.9595489501953,
+        "bossRemainingHp": 9703.8837890625,
+        "kills": 48
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 20582.56640625,
+        "bossSpawnTime": 231.9595489501953,
+        "bossRemainingHp": 9703.8837890625,
+        "kills": 48
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 2,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 28015.13671875,
+        "bossSpawnTime": 260.9598083496094,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 81
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 28015.13671875,
+        "bossSpawnTime": 260.9598083496094,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 81
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 3,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 189.5069580078125,
+        "damage": 15181.513671875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 41
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 189.5069580078125,
+        "damage": 15181.513671875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 41
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 4,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 23787.275390625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 67
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 23787.275390625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 67
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 5,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 242.51019287109375,
+        "damage": 24666.26953125,
+        "bossSpawnTime": 179.9063720703125,
+        "bossRemainingHp": 13594.46875,
+        "kills": 52
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 242.51019287109375,
+        "damage": 24666.26953125,
+        "bossSpawnTime": 179.9063720703125,
+        "bossRemainingHp": 13594.46875,
+        "kills": 52
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 9,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 25300.82421875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 78
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 25300.82421875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 78
+      }
+    },
+    {
+      "mode": "legacy",
+      "seedIndex": 14,
+      "before": {
+        "outcome": "HeroDeath",
+        "time": 290.9524841308594,
+        "damage": 32241.046875,
+        "bossSpawnTime": 253.01083374023438,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 88
+      },
+      "after": {
+        "outcome": "HeroDeath",
+        "time": 290.9524841308594,
+        "damage": 32241.046875,
+        "bossSpawnTime": 253.01083374023438,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 88
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 0,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 24258.59375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 53
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 24258.59375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 53
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 1,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 23467.564453125,
+        "bossSpawnTime": 197.00741577148438,
+        "bossRemainingHp": 8062.5810546875,
+        "kills": 53
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 23403.84765625,
+        "bossSpawnTime": 193.0571746826172,
+        "bossRemainingHp": 8126.71240234375,
+        "kills": 53
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 2,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 20664.974609375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 48
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 26340.0390625,
+        "bossSpawnTime": 272.7569274902344,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 76
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 3,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 22383.3359375,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 65
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 23221.029296875,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 64
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 4,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 23303.828125,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 64
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 26569.30859375,
+        "bossSpawnTime": 291.7023010253906,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 76
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 5,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 27072.890625,
+        "bossSpawnTime": 197.0574188232422,
+        "bossRemainingHp": 13594.46875,
+        "kills": 60
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 27157.546875,
+        "bossSpawnTime": 197.0574188232422,
+        "bossRemainingHp": 13594.46875,
+        "kills": 60
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 9,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 25300.822265625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 78
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 25300.822265625,
+        "bossSpawnTime": -1.0,
+        "bossRemainingHp": 0.0,
+        "kills": 78
+      }
+    },
+    {
+      "mode": "survival-configured",
+      "seedIndex": 14,
+      "before": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 28831.796875,
+        "bossSpawnTime": 275.7561950683594,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 83
+      },
+      "after": {
+        "outcome": "TimeLimit",
+        "time": 300.0002746582031,
+        "damage": 28831.796875,
+        "bossSpawnTime": 275.7561950683594,
+        "bossRemainingHp": 11555.298828125,
+        "kills": 83
+      }
+    }
+  ],
+  "legacySummariesUnchanged": true
+}

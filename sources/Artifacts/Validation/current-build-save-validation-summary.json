@@ -1,0 +1,48 @@
+{
+  "result": "PASS within current legacy build save scope; full game goal remains active",
+  "focusedTests": 185,
+  "editModeTests": 696,
+  "coreManifest": "current-build-save-core-source-manifest.json",
+  "buildErrors": 0,
+  "nativeStartExitCode": 0,
+  "nativeResumeExitCode": 0,
+  "renderer": "Metal",
+  "resolution": "720x1280",
+  "proof": [
+    "town save failure preserves account/draft/file and retry succeeds",
+    "natural fireball preparation in generated rift survives failed save",
+    "successful transition JSON equals committed disk JSON",
+    "unchanged settings preserve current action and existing pause",
+    "temporary owned training apply does not write account even with file write obstacle",
+    "new process restores exact account and resumes saved run with pause released",
+    "successful retry clears stale error notice",
+    "long Korean save error text fits"
+  ],
+  "sourceManifest": "current-build-save-source-manifest.json",
+  "protectedAssetCount": 98,
+  "protectedAssetChanges": [],
+  "evidence": {
+    "CurrentBuildNativeEvidence/01-town-save-failure.png": "7b5bad77be022669e0b60ef263789e98087b971b080dbe26c1a78e5702f76818",
+    "CurrentBuildNativeEvidence/02-town-save-success.png": "183ed9093f1a5a6d445d55ea32cb3b6ff803b7ae5bd2f6e26b7597b86779bf99",
+    "CurrentBuildNativeEvidence/03-temporary-training-apply.png": "3af3097063e7116faeba5e84e2eb53eca0d14ded278f122acd23d34e69d9bf88",
+    "CurrentBuildNativeEvidence/04-rift-save-failure.png": "cbbfd7254031536c2820913ad2247438789d7ba2bc2a53e1b836c354e6467cea",
+    "CurrentBuildNativeEvidence/05-no-op-keeps-paused-cast.png": "f711e8bbdd35b97003cf5a717842e5b2036824a2a3a61a9a222c836b4d82a5c5",
+    "CurrentBuildNativeEvidence/10-resumed-in-flight-build.png": "bcfdc58b462261f987767c79755931975356151846249acab5bfbb61beb40ebc",
+    "CurrentBuildNativeEvidence/expected-account.json": "df14da257fdc50b072c420d2216df669271283c338a421c25f2c9e8b3bb38a16",
+    "CurrentBuildNativeEvidence/runtime-build-save-smoke.txt": "bd82232fe63a945e1c18539959dd271436ede5876762809d398271099fe90a3b"
+  },
+  "remaining": [
+    "v0.2 89-option schema and runtime integration",
+    "preserve in-flight action on successful changed build and legal channel exit",
+    "active skill replacement with stored inactive options",
+    "whole-page dirty-state guards and unified revert/save",
+    "mobile device layout/orientation/input verification"
+  ],
+  "firstFocusedAttempt": {
+    "passed": 180,
+    "failed": 1,
+    "reason": "missing global numeric validation admitted NaN; fixed with nonmutating input checks before copies",
+    "artifact": "current-build-save-focused-attempt1.xml"
+  },
+  "firstNativeAttempt": "State checks passed; visual inspection found stale error after retry. Fixed and repeated build/start/restart."
+}

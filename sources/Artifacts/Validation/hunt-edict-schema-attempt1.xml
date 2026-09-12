@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="47" result="Failed(Child)" total="47" passed="44" failed="3" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.3883594">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="658" result="Failed" site="Child" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.388359" total="47" passed="44" failed="3" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1763" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="658" result="Failed" site="Child" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.377719" total="47" passed="44" failed="3" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="29655" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1764" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="658" result="Failed" site="Child" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.363590" total="47" passed="44" failed="3" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1765" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="658" result="Failed" site="Child" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.356767" total="47" passed="44" failed="3" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1403" name="HuntEdictTests" fullname="Hellscript.Tests.HuntEdictTests" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="47" result="Failed" site="Child" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.348764" total="47" passed="44" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1420" name="AllExistingConditionsUseStableChoicesAndSkillIds" fullname="Hellscript.Tests.HuntEdictTests.AllExistingConditionsUseStableChoicesAndSkillIds" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.019935" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1417" name="AllExistingConditionsUseStableChoicesAndSkillIds(0)" fullname="Hellscript.Tests.HuntEdictTests.AllExistingConditionsUseStableChoicesAndSkillIds(0)" methodname="AllExistingConditionsUseStableChoicesAndSkillIds" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1173267782" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.013892" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1418" name="AllExistingConditionsUseStableChoicesAndSkillIds(1)" fullname="Hellscript.Tests.HuntEdictTests.AllExistingConditionsUseStableChoicesAndSkillIds(1)" methodname="AllExistingConditionsUseStableChoicesAndSkillIds" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="239536066" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.000815" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1419" name="AllExistingConditionsUseStableChoicesAndSkillIds(2)" fullname="Hellscript.Tests.HuntEdictTests.AllExistingConditionsUseStableChoicesAndSkillIds(2)" methodname="AllExistingConditionsUseStableChoicesAndSkillIds" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="666103189" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.000581" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1450" name="CorruptedOrUnboundedInputsFailBeforeImport" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.035953" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1442" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;cut&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;cut&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="882373572" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.013844" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1443" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;checksum&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;checksum&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1272189404" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.001684" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1444" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;characters&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;characters&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1590406894" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.001246" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1445" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;prefix&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;prefix&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1267366923" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.004443" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1446" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;utf8&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;utf8&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="416642669" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.001864" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1447" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;depth&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;depth&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="312263423" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.006339" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1448" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;size&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;size&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="457376339" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.001244" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1449" name="CorruptedOrUnboundedInputsFailBeforeImport(&quot;whitespace-json&quot;)" fullname="Hellscript.Tests.HuntEdictTests.CorruptedOrUnboundedInputsFailBeforeImport(&quot;whitespace-json&quot;)" methodname="CorruptedOrUnboundedInputsFailBeforeImport" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="202958902" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.003645" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1421" name="ExtensionConditionsAreStoredButCannotMasqueradeAsExistingRuntimePredicates" fullname="Hellscript.Tests.HuntEdictTests.ExtensionConditionsAreStoredButCannotMasqueradeAsExistingRuntimePredicates" methodname="ExtensionConditionsAreStoredButCannotMasqueradeAsExistingRuntimePredicates" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="860490547" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.007252" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1407" name="FullSchemaRoundTripsForEveryClass" fullname="Hellscript.Tests.HuntEdictTests.FullSchemaRoundTripsForEveryClass" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.030194" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1404" name="FullSchemaRoundTripsForEveryClass(0)" fullname="Hellscript.Tests.HuntEdictTests.FullSchemaRoundTripsForEveryClass(0)" methodname="FullSchemaRoundTripsForEveryClass" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1309084626" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.011547" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1405" name="FullSchemaRoundTripsForEveryClass(1)" fullname="Hellscript.Tests.HuntEdictTests.FullSchemaRoundTripsForEveryClass(1)" methodname="FullSchemaRoundTripsForEveryClass" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1223696775" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.009340" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1406" name="FullSchemaRoundTripsForEveryClass(2)" fullname="Hellscript.Tests.HuntEdictTests.FullSchemaRoundTripsForEveryClass(2)" methodname="FullSchemaRoundTripsForEveryClass" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1377236057" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.008126" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1415" name="ImportCanLeaveAllFourSlotsEmptyAndManualReplacementUsesItsOwnRules" fullname="Hellscript.Tests.HuntEdictTests.ImportCanLeaveAllFourSlotsEmptyAndManualReplacementUsesItsOwnRules" methodname="ImportCanLeaveAllFourSlotsEmptyAndManualReplacementUsesItsOwnRules" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1389943759" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.031860" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1416" name="ImportRejectsDifferentClassAndUnknownCatalogWithoutChangingTheHero" fullname="Hellscript.Tests.HuntEdictTests.ImportRejectsDifferentClassAndUnknownCatalogWithoutChangingTheHero" methodname="ImportRejectsDifferentClassAndUnknownCatalogWithoutChangingTheHero" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="420326167" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.009463" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1452" name="InvalidStoredRulesAndActiveLimitAreRejectedWithoutDeletingHiddenRules" fullname="Hellscript.Tests.HuntEdictTests.InvalidStoredRulesAndActiveLimitAreRejectedWithoutDeletingHiddenRules" methodname="InvalidStoredRulesAndActiveLimitAreRejectedWithoutDeletingHiddenRules" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1000060182" result="Passed" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:34Z" duration="0.007756" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1456" name="MaximumDocumentFitsMeasuredWireLimit" fullname="Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.051294" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1453" name="MaximumDocumentFitsMeasuredWireLimit(0)" fullname="Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit(0)" methodname="MaximumDocumentFitsMeasuredWireLimit" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1277817000" result="Failed" label="Error" start-time="2026-09-09 02:42:34Z" end-time="2026-09-09 02:42:35Z" duration="0.024981" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentException : 공유할 설정이 너무 큽니다.]]></message>
+                  <stack-trace><![CDATA[  at Hellscript.HuntEdictCodec.Encode (Hellscript.HuntEdictDocument document) [0x00026] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Runtime/Core/HuntEdictCodec.cs:20 
+  at Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit (System.Int32 hero) [0x00174] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/HuntEdictTests.cs:172 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1454" name="MaximumDocumentFitsMeasuredWireLimit(1)" fullname="Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit(1)" methodname="MaximumDocumentFitsMeasuredWireLimit" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="317085794" result="Failed" label="Error" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.011799" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentException : 공유할 설정이 너무 큽니다.]]></message>
+                  <stack-trace><![CDATA[  at Hellscript.HuntEdictCodec.Encode (Hellscript.HuntEdictDocument document) [0x00026] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Runtime/Core/HuntEdictCodec.cs:20 
+  at Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit (System.Int32 hero) [0x00174] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/HuntEdictTests.cs:172 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1455" name="MaximumDocumentFitsMeasuredWireLimit(2)" fullname="Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit(2)" methodname="MaximumDocumentFitsMeasuredWireLimit" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="665786016" result="Failed" label="Error" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.013677" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[System.ArgumentException : 공유할 설정이 너무 큽니다.]]></message>
+                  <stack-trace><![CDATA[  at Hellscript.HuntEdictCodec.Encode (Hellscript.HuntEdictDocument document) [0x00026] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Runtime/Core/HuntEdictCodec.cs:20 
+  at Hellscript.Tests.HuntEdictTests.MaximumDocumentFitsMeasuredWireLimit (System.Int32 hero) [0x00174] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/HuntEdictTests.cs:172 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1451" name="NumericSettingsDoNotRoundLargeIntegerAmountsAndCodesIgnoreCulture" fullname="Hellscript.Tests.HuntEdictTests.NumericSettingsDoNotRoundLargeIntegerAmountsAndCodesIgnoreCulture" methodname="NumericSettingsDoNotRoundLargeIntegerAmountsAndCodesIgnoreCulture" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1109907002" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.016021" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1414" name="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged" fullname="Hellscript.Tests.HuntEdictTests.PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.067434" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1410" name="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(1)" fullname="Hellscript.Tests.HuntEdictTests.PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(1)" methodname="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="307099377" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.018601" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1411" name="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(3)" fullname="Hellscript.Tests.HuntEdictTests.PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(3)" methodname="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="180860701" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.012638" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1412" name="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(10)" fullname="Hellscript.Tests.HuntEdictTests.PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(10)" methodname="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="2131227151" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.021765" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1413" name="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(30)" fullname="Hellscript.Tests.HuntEdictTests.PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged(30)" methodname="PartialImportKeepsOriginalSlotsRulesReferencesAndAccountUnchanged" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1178477972" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.013414" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1409" name="SlotMovementAndRemovalKeepTheSkillsOwnUnsavedOptionsAndPriority" fullname="Hellscript.Tests.HuntEdictTests.SlotMovementAndRemovalKeepTheSkillsOwnUnsavedOptionsAndPriority" methodname="SlotMovementAndRemovalKeepTheSkillsOwnUnsavedOptionsAndPriority" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="613237371" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.004816" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1408" name="UnorderedContainersAreCanonicalButBattleOrderAndSlotHolesAreMeaningful" fullname="Hellscript.Tests.HuntEdictTests.UnorderedContainersAreCanonicalButBattleOrderAndSlotHolesAreMeaningful" methodname="UnorderedContainersAreCanonicalButBattleOrderAndSlotHolesAreMeaningful" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="30314905" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.011125" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1441" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.036465" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1422" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-root&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-root&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="617065145" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.008108" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1423" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;duplicate-root&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;duplicate-root&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="690228309" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.003083" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1424" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;missing-root&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;missing-root&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="395931902" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.002975" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1425" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-rule&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-rule&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="703258122" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.003243" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1426" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;missing-rule&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;missing-rule&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="363772786" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.003605" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1427" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;future-schema&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;future-schema&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1724969069" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000835" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1428" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;future-content&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;future-content&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="181016070" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000661" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1429" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;duplicate-option&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;duplicate-option&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="883912205" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000651" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1430" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;missing-option&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;missing-option&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="701870175" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000657" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1431" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-option&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-option&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="916791583" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000672" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1432" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-choice&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-choice&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1322364285" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000907" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1433" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-skill&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-skill&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="2071115112" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000682" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1434" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;foreign-skill&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;foreign-skill&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="386958178" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000626" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1435" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;duplicate-slot&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;duplicate-slot&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="233540942" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000751" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1436" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;invalid-number&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;invalid-number&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1134653747" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000903" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1437" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;wrong-step&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;wrong-step&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1777486169" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000909" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1438" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;nan&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;nan&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="358740117" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.000998" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1439" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;bad-order&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;bad-order&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1585782677" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.001378" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1440" name="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-condition&quot;)" fullname="Hellscript.Tests.HuntEdictTests.ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings(&quot;unknown-condition&quot;)" methodname="ValidChecksumDoesNotAllowMalformedOrIncompatibleSettings" classname="Hellscript.Tests.HuntEdictTests" runstate="Runnable" seed="1274257432" result="Passed" start-time="2026-09-09 02:42:35Z" end-time="2026-09-09 02:42:35Z" duration="0.001218" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

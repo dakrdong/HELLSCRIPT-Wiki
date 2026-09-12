@@ -1,0 +1,129 @@
+{
+  "stage": "Explicit HED2 survival action execution and saved response movement",
+  "verifiedAt": "2026-09-09T06:37:15.956455+00:00",
+  "unityVersion": "6000.6.0f1",
+  "combatSaveVersion": 5,
+  "edictResponseVersion": 1,
+  "editMode": {
+    "id": "2",
+    "testcasecount": "917",
+    "result": "Passed",
+    "total": "917",
+    "passed": "917",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:33:24Z",
+    "end-time": "2026-09-09 06:35:12Z",
+    "duration": "108.2165618"
+  },
+  "newTests": 46,
+  "previousTests": 871,
+  "focused": {
+    "id": "2",
+    "testcasecount": "131",
+    "result": "Passed",
+    "total": "131",
+    "passed": "131",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:26:00Z",
+    "end-time": "2026-09-09 06:26:01Z",
+    "duration": "1.0212964"
+  },
+  "policyFocused": {
+    "id": "2",
+    "testcasecount": "47",
+    "result": "Passed",
+    "total": "47",
+    "passed": "47",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:32:12Z",
+    "end-time": "2026-09-09 06:32:13Z",
+    "duration": "0.6578234"
+  },
+  "beforePolicyFull": {
+    "id": "2",
+    "testcasecount": "911",
+    "result": "Failed(Child)",
+    "total": "911",
+    "passed": "910",
+    "failed": "1",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:26:50Z",
+    "end-time": "2026-09-09 06:28:36Z",
+    "duration": "106.0824198"
+  },
+  "sources": {
+    "count": 130,
+    "new": [
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictMovement.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictResponse.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/EdictResponse.cs",
+      "Assets/HELLSCRIPT/Tests/Editor/EdictResponseTests.cs"
+    ],
+    "changedExisting": [
+      "Assets/HELLSCRIPT/Runtime/Core/CombatActions.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Actions.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.BuildChanges.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictSurvival.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Effects.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs",
+      "Assets/HELLSCRIPT/Tests/Editor/FirstPlayGuideTests.cs"
+    ],
+    "changedSinceFinalTestLaunch": []
+  },
+  "protectedAssets": {
+    "count": 98,
+    "finalChanges": [],
+    "packageDefineChange": {
+      "changed": true,
+      "restored": true
+    }
+  },
+  "requirements": {
+    "count": 6,
+    "changes": []
+  },
+  "metadata": {
+    "missing": [],
+    "duplicateGUIDs": {}
+  },
+  "executionConnections": [
+    "Explicit ExecuteEdictSurvival re-evaluates the source and current state, then uses existing StartHeroAction",
+    "Existing MoveHero executes the saved finite survival walking command",
+    "Potion uses the shared original recovery/CD/item-effect implementation and re-evaluates survival after healing",
+    "Saved channel-finish requests complete at the existing boundary before the next cost or damage tick",
+    "Explicit response policies are captured separately from mutable legacy rule rows"
+  ],
+  "limits": [
+    "GameController and regular decision scheduling do not yet call the HED2 response entry point",
+    "Only successfully saved source must be supplied by the future scheduler; skill-slot equality alone does not prove disk-save provenance",
+    "W02 post-landing attack preference, A04 post-landing distance walk, full ordinary skill selection and global arbitration remain pending",
+    "Route danger checks use fixed observed positions and are not a combined future trajectory simulation",
+    "No new editor UI, native application build or mobile verification in this phase"
+  ],
+  "testRepairs": [
+    "M05 is free; replaced an invalid resource-shortage assumption with actual 19/20 resource boundaries for M06",
+    "Existing FirstPlayGuide disk-restart assertion compared wall-clock lastSeenUtc for equality; now asserts valid refreshed time separately and exact remaining account/guide state after a deliberately older saved timestamp"
+  ],
+  "nativeBuildCreated": false
+}

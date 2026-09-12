@@ -1,0 +1,65 @@
+{
+  "status": "passed for implemented battle layout and current speed lock; full game and mobile validation remain incomplete",
+  "builtApplication": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Builds/macOS-ScreenLayout/HELLSCRIPT.app",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "990",
+    "result": "Passed",
+    "total": "990",
+    "passed": "990",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 07:54:13Z",
+    "end-time": "2026-09-09 07:55:46Z",
+    "duration": "92.880435"
+  },
+  "nativeMarkers": {
+    "screen-layout-locked-native.log": "HELLSCRIPT_BATTLE_LAYOUT_RUNTIME_SMOKE_OK",
+    "speed-access-native.log": "HELLSCRIPT_SPEED_ACCESS_RUNTIME_SMOKE_OK",
+    "speed-access-final-resume.log": "HELLSCRIPT_SPEED_ACCESS_RESUME_OK",
+    "screen-layout-settings-native.log": "HELLSCRIPT_SCREEN_SETTINGS_RUNTIME_SMOKE_OK",
+    "screen-layout-settings-resume.log": "HELLSCRIPT_SCREEN_SETTINGS_RESUME_OK",
+    "screen-layout-final-build.log": "HELLSCRIPT_BUILD Succeeded errors=0"
+  },
+  "battleWindowSizes": 16,
+  "bossWindowSizes": 5,
+  "settingsWindowSizes": 11,
+  "renderedVsHeadlessTrainingTicks": 120,
+  "sourceCount": 143,
+  "changedAfterEditMode": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeSpeedAccessSmoke.cs"
+  ],
+  "protectedAssetsUnchanged": 98,
+  "externalDesignChangesDuringBattlePhase": [
+    "Docs/Design/HELLSCRIPT_Development_Expansion_Plan.md",
+    "Docs/Design/HELLSCRIPT_Gameplay_Completion_Checklist.md",
+    "Docs/Design/HELLSCRIPT_Player_Training_Detail.md",
+    "Docs/Design/HELLSCRIPT_Remaining_Development_Backlog.md",
+    "Docs/Design/HELLSCRIPT_Training_Comparison_Detail.md",
+    "Docs/Design/HELLSCRIPT_Unity_Implementation_Plan.md"
+  ],
+  "newExternalDesignDocs": [
+    "Docs/Design/HELLSCRIPT_Idle_Mode_Detail.md",
+    "Docs/Design/HELLSCRIPT_Speed_Access_Detail.md"
+  ],
+  "designChangesAfterSpeedPolicyRead": [],
+  "evidenceDirectories": [
+    "ScreenLayoutLockedEvidence",
+    "SpeedAccessNativeEvidence",
+    "ScreenLayoutSettingsEvidence"
+  ],
+  "supersededFailure": {
+    "log": "speed-access-resume.log",
+    "reason": "The harness assumed explicit Continue preserves paused. Existing Continue resumes gameplay; corrected harness checks load preservation, pre-tick checkpoint continuity, then manual pause. No production resume behavior changed."
+  },
+  "remaining": [
+    "Other management/results/comparison pages need responsive layout",
+    "Dedicated idle screen is not implemented",
+    "Mobile physical rotation/touch/keyboard/safe-area/resume and performance tests",
+    "Future subscription and timed-pass authority, charging and consumption"
+  ]
+}

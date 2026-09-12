@@ -1,0 +1,56 @@
+{
+  "result": "PASS within action continuity scope; full game goal remains active",
+  "focusedTests": 185,
+  "editModeTests": 735,
+  "buildErrors": 0,
+  "nativeExitCodes": [
+    0,
+    0,
+    0
+  ],
+  "renderer": "Metal",
+  "resolution": "720x1280",
+  "sourceManifest": "action-continuity-source-manifest.json",
+  "coreManifest": "action-continuity-core-source-manifest.json",
+  "protectedAssetCount": 98,
+  "protectedAssetChanges": [],
+  "proof": [
+    "17 finite skills and three class basic attacks retain original action through changed save and deterministic restore",
+    "preparing, travelling and recovering actions release once with original build version",
+    "channel exit respects the existing 0.25-second clock through repeated saves and restoration",
+    "no additional channel cost or damage on queued exit boundary",
+    "channel movement and target selection retain original policy until exit",
+    "survival priority resolves source rule identity after reorder; reused ID for another skill is not an anchor",
+    "version 3 migration preserves action phase, timers and cost without replaying effects",
+    "actual generated-rift mage preparation survives failed, changed and no-op UI saves",
+    "new process resumes original fireball and releases it once",
+    "third process restores pending warrior channel exit and completes at original boundary",
+    "capture-only rendering synchronization does not change run JSON"
+  ],
+  "remaining": [
+    "v0.2 89-option schema and runtime integration",
+    "active skill replacement with inactive option storage and cooldowns by skill ID",
+    "temporary training passive/loadout transition coverage",
+    "whole-page dirty-state guards and responsive screen implementation",
+    "device-local orientation preferences and physical mobile validation"
+  ],
+  "firstNativeAttempt": "State assertions passed; screenshots exposed a frozen-controller capture setup that did not synchronize restored actor positions. Capturing now calls the presentation layer and asserts unchanged RunState. Rebuilt and reran all three processes. Earlier evidence retained with before-view-sync suffix.",
+  "sourceChangesAfter735": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildSaveSmoke.cs"
+  ],
+  "evidence": {
+    "ActionContinuityNativeEvidence/01-town-save-failure.png": "7b5bad77be022669e0b60ef263789e98087b971b080dbe26c1a78e5702f76818",
+    "ActionContinuityNativeEvidence/02-town-save-success.png": "183ed9093f1a5a6d445d55ea32cb3b6ff803b7ae5bd2f6e26b7597b86779bf99",
+    "ActionContinuityNativeEvidence/03-temporary-training-apply.png": "2eff67869b1585b492027981afd1e5e5450321747c81065b1a8adbc3139cd531",
+    "ActionContinuityNativeEvidence/04-rift-save-failure.png": "fa2239f4d86fd89912f3a211828e42b44883162058632c376b482ba318cf9543",
+    "ActionContinuityNativeEvidence/05-no-op-keeps-paused-cast.png": "73fdf31448d4e04c63e7e887a8de6362ffcce9a26b22c68f5e770bf158b7c970",
+    "ActionContinuityNativeEvidence/06-changed-channel-awaits-boundary.png": "a45336d0394ff651143fe6971b1bde73d9dcd8083923255a5715356a95f887f2",
+    "ActionContinuityNativeEvidence/10-resumed-in-flight-build.png": "95e4084b042d63079e916647f53a3a8256286b6bd1d54fbf89baee7597907821",
+    "ActionContinuityNativeEvidence/11-original-fireball-released.png": "5a961d597b158961c714bc151be7b553d725bc2204ca63497b1cd6728f88240a",
+    "ActionContinuityNativeEvidence/12-resumed-channel-pending.png": "d52ed02fba8584bb53741cf7e8bf030655b47e60668bffecd5f3b555125fb005",
+    "ActionContinuityNativeEvidence/13-channel-exited-at-boundary.png": "3aa453e265be4e59af9b69d598ad3dbab8629946cc865c8452badba4195fd2ff",
+    "ActionContinuityNativeEvidence/expected-account.json": "98ae0f0d9c44c03830256faab0c78952d947e8a0a16860533c082d8dc331e24f",
+    "ActionContinuityNativeEvidence/expected-fireball-account.json": "d24101aa69cc85a5dbc891e375edb2518ca79dcbbdcc6e40204729eff4709979",
+    "ActionContinuityNativeEvidence/runtime-action-continuity-smoke.txt": "3204dd3710c8ea179c9f9ad007d98b1c63cdf76250aa76cc49883c2db8660b6a"
+  }
+}

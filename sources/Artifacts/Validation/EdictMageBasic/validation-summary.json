@@ -1,0 +1,264 @@
+{
+  "native": [
+    {
+      "directory": "Native1",
+      "processes": {
+        "bolt-process": {
+          "startedUtc": "2026-09-12T19:31:06.212816+00:00",
+          "pid": 90664,
+          "endedUtc": "2026-09-12T19:31:13.784156+00:00",
+          "exitCode": 0
+        },
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:30:59.547462+00:00",
+          "pid": 90649,
+          "endedUtc": "2026-09-12T19:31:06.211478+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:30:47.200281+00:00",
+          "pid": 90621,
+          "endedUtc": "2026-09-12T19:30:59.546316+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 13,
+      "reports": {
+        "checkpoint-result.txt": "PASS: Real UI edited all four Mage basic options with isolated drafts and matching file reads. Missing legacy BASIC still fired; a front collision credited its actual victim and five resource. DISCOUNT selected that unfinished hit target for the next cast. OFF/RESOURCE/LOW_HP/CURRENT edits preserved its committed preparation. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+        "resume-result.txt": "PASS: The saved preparation hit once, retaining two real hits and ten resource. RESOURCE waited while actives were unavailable, then started a third bolt for an otherwise eligible unfunded Fireball. The in-flight bolt was saved after disabling both BASIC and Fireball through actual UI. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+        "bolt-result.txt": "PASS: A second independent restart preserved the original in-flight bolt. Its third real hit granted one LC02 charge and exactly five resource with MP05 equipped. No active was forced. A later UI-selected GROUP Nova consumed that actual discount once, then its cold hit followed real basic lightning to activate MP06. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation."
+      }
+    },
+    {
+      "directory": "Regression-EdictBlizzard",
+      "processes": {
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:36:01.661693+00:00",
+          "pid": 91325,
+          "endedUtc": "2026-09-12T19:36:08.894490+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:35:50.337620+00:00",
+          "pid": 91308,
+          "endedUtc": "2026-09-12T19:36:01.660610+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 10,
+      "reports": {
+        "checkpoint-result.txt": "PASS: M02 five options edited through UI, draft isolation and file save; GROUP waits at one target, KEEP preserves two fields, REPLACE starts a paid FOLLOW cast, FIXED/OFF edits preserve that preparation; Korean/English and 140% layouts. Controlled native fixtures, not mobile-device or balance validation.",
+        "resume-result.txt": "PASS: independent process restored existing fields and paid FOLLOW preparation despite saved FIXED/OFF; one release replaces only the oldest area, the new field follows, no extra casts; translated decisions and pause restoration. Controlled native fixtures, not mobile-device or balance validation."
+      }
+    },
+    {
+      "directory": "Regression-EdictChain",
+      "processes": {
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:36:20.184318+00:00",
+          "pid": 91362,
+          "endedUtc": "2026-09-12T19:36:27.359368+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:36:08.942735+00:00",
+          "pid": 91337,
+          "endedUtc": "2026-09-12T19:36:20.183015+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 10,
+      "reports": {
+        "checkpoint-result.txt": "PASS: M03 four settings edited with real UI, isolated draft and persisted source; SAVE_CHARGE waits without charge, a short-lived fixture charge is reserved at preparation start, edits and OFF preserve the paid cast; Korean/English and 140% layouts. Controlled native fixtures, not mobile-device or balance validation.",
+        "resume-result.txt": "PASS: independent process restored the paid first target and reserved SMB bonus despite changed target preference and OFF; seven hits with LM04 visit rules, one release and no new charge consumption; translated decisions and pause restoration. Controlled native fixtures, not mobile-device or balance validation."
+      }
+    },
+    {
+      "directory": "Regression-EdictFireball",
+      "processes": {
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:35:43.658794+00:00",
+          "pid": 91280,
+          "endedUtc": "2026-09-12T19:35:50.293884+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:35:30.517855+00:00",
+          "pid": 91225,
+          "endedUtc": "2026-09-12T19:35:43.657526+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 11,
+      "reports": {
+        "checkpoint-result.txt": "PASS: M01 options edited through UI, draft isolation, file save, enabled switch, GROUP blocks one target and casts at three, OFF keeps the launched projectile; Korean/English and 140% layouts. Controlled native fixtures, not mobile-device or balance validation.",
+        "resume-result.txt": "PASS: independent process restored OFF, the projectile, its remaining travel, cost and cast policy; one original explosion, no new cast; translated decisions and pause restoration. Controlled native fixtures, not mobile-device or balance validation."
+      }
+    },
+    {
+      "directory": "Regression-EdictNova",
+      "processes": {
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:37:21.242208+00:00",
+          "pid": 91590,
+          "endedUtc": "2026-09-12T19:37:28.635538+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:37:10.981473+00:00",
+          "pid": 91564,
+          "endedUtc": "2026-09-12T19:37:21.241265+00:00",
+          "exitCode": 0
+        },
+        "chain-process": {
+          "startedUtc": "2026-09-12T19:37:28.637354+00:00",
+          "pid": 91601,
+          "endedUtc": "2026-09-12T19:37:35.476101+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 13,
+      "reports": {
+        "checkpoint-result.txt": "PASS: Actual UI edited all M06 options and saved an isolated draft. A real LC02 charge paid 10 resource for Nova despite blocked legacy rows. CONTROL/APPROACH/HOLD_ALONE/OFF and M03 OFF edits retained the committed preparation. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+        "chain-result.txt": "PASS: A second independent restart retained Nova-generated charges, the paid chain and its reserved bonus. Actual lightning activated MP06 after cold without duplicate payment. Actual UI then enabled GROUP/APPROACH; walking spent nothing and Nova paid once after entering 3m, with no forced follow-up. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+        "resume-result.txt": "PASS: Independent restart released one Nova, dealt actual cold damage, froze two targets and granted two SMB4 charges. The ordinary M03 decision paid 21.25 resource and reserved one charge; its preparation was saved with automatic use disabled. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation."
+      }
+    },
+    {
+      "directory": "Regression-EdictShield",
+      "processes": {
+        "shield-process": {
+          "startedUtc": "2026-09-12T19:36:56.205326+00:00",
+          "pid": 91530,
+          "endedUtc": "2026-09-12T19:37:04.407173+00:00",
+          "exitCode": 0
+        },
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:37:04.408773+00:00",
+          "pid": 91549,
+          "endedUtc": "2026-09-12T19:37:10.934511+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:36:45.989419+00:00",
+          "pid": 91408,
+          "endedUtc": "2026-09-12T19:36:56.203996+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 12,
+      "reports": {
+        "shield-result.txt": "PASS: Independent restart released the original committed shield once with actual willpower/MP04 scaling. A real hazard absorbed 10% of creation HP without LM03 reward; its partial absorption and opening record were saved for another process. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+        "checkpoint-result.txt": "PASS: Actual UI edited ENGAGE, stacking and encounter options; drafts and file save agree. M05 began despite a blocked legacy row, spent zero resource and retained preparation after EMERGENCY/AFTER/BOSS/OFF edits. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+        "resume-result.txt": "PASS: Second independent restart retained partial absorption and original creation HP. Real hazard damage reached 15%, paying LM03 exactly 20 resource once with a 4-second internal cooldown. OFF and re-enabled ENGAGE did not repeat the same encounter opening. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation."
+      }
+    },
+    {
+      "directory": "Regression-EdictTeleport",
+      "processes": {
+        "resume-process": {
+          "startedUtc": "2026-09-12T19:36:37.915782+00:00",
+          "pid": 91388,
+          "endedUtc": "2026-09-12T19:36:45.948235+00:00",
+          "exitCode": 0
+        },
+        "checkpoint-process": {
+          "startedUtc": "2026-09-12T19:36:27.400721+00:00",
+          "pid": 91380,
+          "endedUtc": "2026-09-12T19:36:37.914466+00:00",
+          "exitCode": 0
+        }
+      },
+      "screenshots": 10,
+      "reports": {
+        "checkpoint-result.txt": "PASS: Actual UI edited DISTANCE, arrival preference and NO_DAMAGE; drafts stayed isolated and saved source matched a fresh file read. Distance adjustment prepared a paid destination that survived option edits and OFF. Korean/English and 140% layouts passed. Controlled native fixtures; not mobile-device or natural-play balance validation.",
+        "resume-result.txt": "PASS: Independent restart preserved the paid destination, resource and cast time after options changed to SURVIVAL/OFF. Exactly one release, no queued attack, correct pause restoration; a targetless visible hazard then used global Teleport survival. Controlled native fixtures; not mobile-device or natural-play balance validation."
+      }
+    }
+  ],
+  "nativeProcessCount": 17,
+  "screenshotCount": 79,
+  "visuallyReviewedMageBasicScreens": [
+    "01-basic-options-ko.png",
+    "02-basic-options-en.png",
+    "03-basic-options-large-en.png",
+    "04-basic-options-small-en.png",
+    "05-basic-options-large-ko.png",
+    "06-front-collision-ko.png",
+    "07-second-preparation-before-restart-en.png",
+    "01-two-real-hits-after-restart-ko.png",
+    "02-resource-not-needed-ko.png",
+    "03-third-bolt-before-restart-en.png",
+    "01-real-discount-after-bolt-restart-en.png",
+    "02-earned-discount-consumed-ko.png",
+    "03-actual-element-crossover-en.png"
+  ],
+  "scope": "Controlled native fixtures, not mobile devices or natural-play balance. Earlier active smokes isolate their own skill with BASIC explicitly OFF. Their 66 screenshots passed automated text, translation and footer checks; the 13 new BASIC screenshots were also visually reviewed.",
+  "tests": {
+    "id": "2",
+    "testcasecount": "1765",
+    "result": "Passed",
+    "total": "1765",
+    "passed": "1765",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-12 19:35:37Z",
+    "end-time": "2026-09-12 19:40:17Z",
+    "duration": "280.2343555",
+    "report": "full2.xml",
+    "process": {
+      "startedUtc": "2026-09-12T19:35:29.367166+00:00",
+      "pid": 91196,
+      "endedUtc": "2026-09-12T19:40:19.294690+00:00",
+      "exitCode": 0
+    }
+  },
+  "focused": {
+    "id": "2",
+    "testcasecount": "62",
+    "result": "Passed",
+    "total": "62",
+    "passed": "62",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-12 19:26:36Z",
+    "end-time": "2026-09-12 19:27:03Z",
+    "duration": "26.6164182"
+  },
+  "diagnostic": {
+    "schema": 4,
+    "stage": 20,
+    "expectedRuns": 24,
+    "completedRuns": 24,
+    "seedIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      9,
+      14
+    ],
+    "modes": [
+      "legacy",
+      "edict",
+      "survival-configured"
+    ],
+    "createdUtc": "2026-09-12T19:29:09.8163230Z",
+    "status": "complete",
+    "affixProfile": "current54",
+    "scope": "Level-30 Chain Control with eight legal level-30 items, matched seeds and gear. Legacy rules, fresh default edicts with survival disabled, and optionally a separately specified survival configuration. Default documents do not translate legacy HP/danger conditions. Each active edict is saved in the result. Outcome-selected cases, not population win rates or isolated skill effects. End-of-50-ms occupancy samples and actual cast/damage events; no player-save or combat-stat overrides.",
+    "wallSeconds": 248.7699576
+  },
+  "baselineReusedFrom": "EdictNova/AfterFinal24",
+  "comparison": "comparison.json"
+}

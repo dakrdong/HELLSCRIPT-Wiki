@@ -1,0 +1,153 @@
+{
+  "scope": "D4 first-play guidance and real-account loop; human first-15-minute observation and remaining D3-D6 work continue. Training A/B has a new design specification, not an implementation claim.",
+  "sourceCount": 84,
+  "tests": {
+    "path": "Artifacts/Validation/onboarding-editmode-final.xml",
+    "sha256": "adffa9877cfb240d2c9c0c38a7990d6a934afdbed6aacda7f04096b08f69b1e5",
+    "total": 542,
+    "passed": 542,
+    "failed": 0,
+    "duration": "80.3088449"
+  },
+  "focusedTests": 28,
+  "postTestUiChanges": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Guide.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeFirstPlaySmoke.cs"
+  ],
+  "builtRuntime": {
+    "path": "Builds/macOS/HELLSCRIPT.app/Contents/Resources/Data/Managed/Hellscript.Runtime.dll",
+    "sha256": "7a02de83abdab2bec43fcb60fb69b203f9d5d20fb8838fef710989685793a819",
+    "log": "Artifacts/Validation/onboarding-build-mac-ui.log",
+    "result": "Succeeded errors=0",
+    "preservedDll": "Artifacts/Validation/onboarding-built-runtime-ui.dll"
+  },
+  "native": {
+    "processes": 2,
+    "actualRestarts": 1,
+    "exitCodes": [
+      0,
+      0
+    ],
+    "logs": [
+      "onboarding-native-ui-start.log",
+      "onboarding-native-ui-resume.log"
+    ],
+    "proof": "PASS: fresh account, shared controls and independent hero guidance, hide/reopen with no rewards, no-candidate explanation, real generated Lv.1 rift with no injected HP/XP/gear, first-skill hint and selected-rule link, pause restoration, real result, repeat timer paused while reading guide, explicit repeat stop, owned-item comparison, slider preview/cancel/apply, matching 60-second owned training, new rift and real process restart.\nRenderer=Metal\nScreen=540x960\nUI callbacks; no physical-input, human-comprehension, Android, or balance-completion claim.\n",
+    "firstRift": {
+      "time": 215.9085693359375,
+      "phase": 4,
+      "kills": 64,
+      "lootCount": 3,
+      "dealt": 6743.0537109375
+    },
+    "hero": {
+      "class": 2,
+      "level": 4,
+      "xp": 165,
+      "guideComplete": true,
+      "changeSummary": "이동: 거리 유지 7m → 거리 유지 5.5m"
+    },
+    "ownedTraining": {
+      "training": 1,
+      "time": 59.99937057495117,
+      "health": 285.0,
+      "dealt": 8553.216796875,
+      "phase": 3
+    },
+    "images": [
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/01-first-play-introduction.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "60adeba36b8205d1b4576a13bbaa2446adf8cfdb797fd7c7709b740280f9b3b8",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/02-no-candidate-explanation.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "ff926beb53626cf05ef95239334d6a875e0a0a4ab471a4d9d5d1f589260d6630",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/03-current-mage-builds.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "ad46cb27ede0eb9cd6ae2602ab28b0be0bf20d86bc93766830ac0f82da7935e0",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/04-first-skill-hint.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "07f8bfd187e5dadc437a6b790d43214a3149c00a20b6b2314f59a59f57cdb835",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/05-real-first-rift-result.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "2fec8d38f101d2347913dc98a7cd94c298921f3dd34bab603291180a3ac2ee65",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/06-owned-item-comparison.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "e90cf1cc7c463f96c614fe5c51ab7e6b7dc068a3126f87876eaf547bcd0a02d0",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/06b-owned-item-stat-comparison.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "2b7985ca785e7af980940b602c4b5d28dc24ed8e9b59d3cbc7be3cc0535c312f",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/06c-owned-item-set-comparison.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "8d4fa91e3a8d43960e906fb5080c127df48f38073951e41b7bd469f8cd71be95",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/07-edit-before-apply.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "00dd4a09e6caf52f30f7f632405bfbd0994638b2c7d130d451fca1eb1a8384cd",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/08-matching-training-result.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "7f8bfac4e3c55593790065613d514150e8d6720c3e9f0282b762475418782e3e",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/09-retry-policy-summary.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "7cb2a2bcbb0f7263876a02cb063ce1b4964967e032097674d903efb255773908",
+        "visuallyReviewed": true
+      },
+      {
+        "path": "Artifacts/Validation/FirstPlayNativeUiEvidence/10-restored-guide-and-retry.png",
+        "width": 540,
+        "height": 960,
+        "sha256": "eb6dc64ecce08d4ee9d831afde7ac26ef09a191f4abd3927181fb55cbbd9cee6",
+        "visuallyReviewed": true
+      }
+    ]
+  },
+  "recoveryRecord": "Artifacts/Validation/onboarding-recovery-record.json",
+  "staticChecks": {
+    "docLinks": 223,
+    "brokenLinks": [],
+    "missingSourceMetas": [],
+    "duplicateGuids": [],
+    "guardedAssets": 98,
+    "changedAssets": []
+  }
+}

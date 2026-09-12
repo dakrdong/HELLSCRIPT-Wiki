@@ -1,0 +1,135 @@
+{
+  "reviewedUtc": "2026-09-12T21:59:28.914660+00:00",
+  "build": "Build2",
+  "nativeRun": "Native2",
+  "screenshots": [
+    {
+      "file": "01-earned-restraint-after-restart-en.png",
+      "width": 720,
+      "height": 1280,
+      "sha256": "f435aa242d0bb6911746d874865b10ff941b36f700cee1bb3d68f108dfbe9628",
+      "reviewed": true
+    },
+    {
+      "file": "01-shout-after-restart-en.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "15a82647c486a62c84189fb1cd949ed9d62e792dcf52a3c7f077ec92d634522d",
+      "reviewed": true
+    },
+    {
+      "file": "01-two-real-hits-before-restart-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "2490df46a0eea0174bd39d71c3ba519f35c33497c8a295a299e56bb100e6409f",
+      "reviewed": true
+    },
+    {
+      "file": "01-wall-after-restart-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "85eca8be2fc56a99bb5a076dad2e06cbad466826b46e16d65f4f89a83700a607",
+      "reviewed": true
+    },
+    {
+      "file": "01-wall-options-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "26b7d93a0a75f4705440a692ab9d99292a93f9613095e8dec84443276fe6d0c4",
+      "reviewed": true
+    },
+    {
+      "file": "02-basic-pending-before-restart-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "94a337d248a5f5943f3aa71c46eb51b8a2ba43d5ba87a7f4a932a1ba0cc353e2",
+      "reviewed": true
+    },
+    {
+      "file": "02-discounted-crush-after-basic-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "f2cfd423901604cb717420c8403c1fa372a4ab0374280e7f641fd0425638df0c",
+      "reviewed": true
+    },
+    {
+      "file": "02-wall-after-restart-en.png",
+      "width": 720,
+      "height": 1280,
+      "sha256": "26a3f032d62824b0d526b5212baa74faf68c1ef4ec1b223c1311577b47904933",
+      "reviewed": true
+    },
+    {
+      "file": "02-wall-options-large-en.png",
+      "width": 720,
+      "height": 1280,
+      "sha256": "e02dfbab6de437c09a92de1e89183fcc0709e0c83f7a8e9fd7760a23c2478fc5",
+      "reviewed": true
+    },
+    {
+      "file": "03-discounted-crush-after-basic-en.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "300c9c86ddbe184b23c66df4e611caba2500baf9e60ed7f16e5d3b96c5d45d92",
+      "reviewed": true
+    },
+    {
+      "file": "03-shout-options-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "87c8a387a9fe083c68b054f6f140e48562f3c28b7aa3bc77f5533855a4cfd5cf",
+      "reviewed": true
+    },
+    {
+      "file": "03-shout-pending-before-restart-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "b0b9845c89f8843ee332b627c1d28b386286966d549fe8d947c871fb8ca96d7c",
+      "reviewed": true
+    },
+    {
+      "file": "04-shout-options-large-en.png",
+      "width": 720,
+      "height": 1280,
+      "sha256": "fb26437bf28f001167bde5ca2208e0ab59c5f4a0572c7e0af40a680d907c3f92",
+      "reviewed": true
+    },
+    {
+      "file": "05-basic-options-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "ea842f306fe1cfb083e51aa3cadef301123e63b8ed8e7b7375dd0655a62a93ea",
+      "reviewed": true
+    },
+    {
+      "file": "06-basic-options-large-en.png",
+      "width": 720,
+      "height": 1280,
+      "sha256": "5f4df82be21a034a7b3bc7f467fc5a33fa48602f2913d1f8788a41d3c8f63db6",
+      "reviewed": true
+    },
+    {
+      "file": "07-basic-options-small-en.png",
+      "width": 640,
+      "height": 360,
+      "sha256": "5a80fb91fdaea4cf74d0d6345e4006ac84038b1e0559bd60cbcb2edca60fce59",
+      "reviewed": true
+    },
+    {
+      "file": "08-wall-pending-before-restart-ko.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "48430e35ccc98bb8e312a6790d61ee62d700c50d3697f597f730c0e0d718174a",
+      "reviewed": true
+    }
+  ],
+  "checks": [
+    "Reviewed all 17 final-player screenshots with view_image.",
+    "KO/EN notes, option labels, combat action text, shield values and earned LC02 effect are legible in the captured states.",
+    "Long content is clipped by the scroll viewport, with a separate fixed footer; it is not claimed to fit on one page.",
+    "640x360 EN capture confirms the new basic note and footer only; not every option or device/language combination is visually covered.",
+    "Native button events, fresh-file reads, five independent processes and JSON assertions verify the settings and exactly-once combat progression."
+  ],
+  "blockingVisualIssues": [],
+  "limits": "Controlled macOS fixtures; no touch-device, natural-rift balance or exhaustive screen-combination claim."
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HELLSCRIPT 공개 위키</title>
+  <meta name="description" content="HELLSCRIPT 전체 문서와 데이터베이스 · 읽기 전용">
+  <meta name="theme-color" content="#0b0f15">
+  <link rel="icon" type="image/png" sizes="1254x1254" href="icons/hellscript-magic-stone-v1.png">
+  <link rel="preload" as="image" href="media/Sanctuary.png">
+  <link rel="stylesheet" href="app.css?v=20260913-public-mirror">
+  <script defer src="data.js?v=04a96204c6cba88a"></script><script defer src="app.js?v=20260913-public-mirror"></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <header class="topbar">
+    <button id="menu" class="mobile" aria-label="탐색 메뉴 열기" aria-expanded="false">☰</button>
+    <a class="brand" href="#/tree"><strong>HELLSCRIPT</strong><span>PUBLIC WIKI</span></a>
+    <form id="search-form" role="search"><label class="sr-only" for="search">위키와 DB 검색</label><input id="search" type="search" placeholder="문서·콘텐츠 ID·리소스 검색" autocomplete="off"><kbd>/</kbd></form>
+    <span id="sync" class="sync"></span>
+  </header>
+  <aside id="sidebar" aria-label="위키와 데이터베이스 탐색">
+    <nav class="tabs"><a href="#/tree" id="wiki-tab">위키</a><a href="#/db/resources" id="db-tab">리소스·DB</a></nav>
+    <nav id="navigation" aria-label="문서 목록"></nav>
+    <footer id="sidebar-footer"></footer>
+  </aside>
+  <main id="main" tabindex="-1"></main>
+  <dialog id="detail"><button id="close-detail" aria-label="상세 닫기">닫기 ×</button><div id="detail-body"></div></dialog>
+</body>
+</html>

@@ -1,0 +1,101 @@
+{
+  "stage": "Observed incoming damage and global dodge/emergency survival assessment",
+  "verifiedAt": "2026-09-09T06:07:39.765617+00:00",
+  "unityVersion": "6000.6.0f1",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "871",
+    "result": "Passed",
+    "total": "871",
+    "passed": "871",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:04:33Z",
+    "end-time": "2026-09-09 06:06:05Z",
+    "duration": "92.2046238"
+  },
+  "newTests": 52,
+  "previousTests": 819,
+  "focused": {
+    "id": "2",
+    "testcasecount": "174",
+    "result": "Passed",
+    "total": "174",
+    "passed": "174",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:03:43Z",
+    "end-time": "2026-09-09 06:03:45Z",
+    "duration": "2.1301913"
+  },
+  "releaseBoundaryBeforeFix": {
+    "id": "2",
+    "testcasecount": "10",
+    "result": "Failed(Child)",
+    "total": "10",
+    "passed": "2",
+    "failed": "8",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-09 06:01:40Z",
+    "end-time": "2026-09-09 06:01:40Z",
+    "duration": "0.2060079"
+  },
+  "sources": {
+    "count": 126,
+    "new": [
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictSurvival.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Incoming.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/EdictSurvival.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/IncomingForecast.cs",
+      "Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs"
+    ],
+    "changedExisting": [
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Damage.cs"
+    ],
+    "changedSinceFinalTestLaunch": []
+  },
+  "protectedAssets": {
+    "count": 98,
+    "finalChanges": [],
+    "packageDefineChange": {
+      "changed": true,
+      "restored": true
+    }
+  },
+  "requirements": {
+    "count": 6,
+    "changes": []
+  },
+  "metadata": {
+    "missing": [],
+    "duplicateGUIDs": {}
+  },
+  "runtimeConnections": [
+    "Live Hurt and incoming forecast share IncomingDamageNumbers and DamageMath"
+  ],
+  "assessmentStage": [
+    "Observed fixed-position incoming damage with actual mitigation, fixed tick timing, shared shield consumption and projectile collision groups",
+    "HED2 global dodge damage, always, control and overlap reasons",
+    "Low HP, lethal prediction, run-owned recovery memory, independent potion intent, explicit emergency order and reservation intent"
+  ],
+  "limits": [
+    "Assessment is not yet connected to actual HED2 action execution",
+    "Reference availability does not authorize casting; cooldown, cost, locks, skill purpose and landing must be checked by execution",
+    "No attached hero damage-over-time supplier; poison ground is not substituted",
+    "Future decisions, movement after pulls, deaths, buffs and recovery are not predicted",
+    "No new UI, save migration or native build; SCR-01 through SCR-08 remain partial"
+  ],
+  "nativeBuildCreated": false
+}

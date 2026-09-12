@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Failed(Child)" total="10" passed="2" failed="8" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.2060079">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="867" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.206008" total="10" passed="2" failed="8" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="2011" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="867" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.185472" total="10" passed="2" failed="8" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="80013" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="2012" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="867" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.176608" total="10" passed="2" failed="8" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="2013" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="867" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.158587" total="10" passed="2" failed="8" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1619" name="IncomingForecastTests" fullname="Hellscript.Tests.IncomingForecastTests" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" testcasecount="48" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.111127" total="10" passed="2" failed="8" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1637" name="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick" fullname="Hellscript.Tests.IncomingForecastTests.DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.081156" total="3" passed="2" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1634" name="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick(0.0f)" fullname="Hellscript.Tests.IncomingForecastTests.DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick(0.0f)" methodname="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="715262322" result="Passed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.071778" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1635" name="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick(0.2f)" fullname="Hellscript.Tests.IncomingForecastTests.DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick(0.2f)" methodname="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="1221173865" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.003652" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick (System.Single delay) [0x000f9] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:64
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1636" name="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick(0.21f)" fullname="Hellscript.Tests.IncomingForecastTests.DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick(0.21f)" methodname="DelayedProjectileAlreadyOverlappingTheHeroWaitsForItsFirstMovementTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="1725173282" result="Passed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.001396" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1644" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.017453" total="6" passed="0" failed="6" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1638" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(1)" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(1)" methodname="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="689555893" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.003519" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick (System.Int32 kind) [0x0018d] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:73
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1639" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(2)" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(2)" methodname="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="1634917984" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.001796" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick (System.Int32 kind) [0x0018d] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:73
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1640" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(7)" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(7)" methodname="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="1371368120" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.001557" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick (System.Int32 kind) [0x0018d] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:73
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1641" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(8)" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(8)" methodname="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="340395432" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.002095" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick (System.Int32 kind) [0x0018d] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:73
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1642" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(105)" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(105)" methodname="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="755564790" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.004462" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick (System.Int32 kind) [0x0018d] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:73
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1643" name="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(102)" fullname="Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick(102)" methodname="NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="502172838" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.001983" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.NewlyReleasedMovementAttacksCannotDamageDuringTheirReleaseTick (System.Int32 kind) [0x0018d] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:73
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1645" name="ShardBurstAlreadyOverlappingTheHeroCannotHitUntilAfterItSpawnsArrows" fullname="Hellscript.Tests.IncomingForecastTests.ShardBurstAlreadyOverlappingTheHeroCannotHitUntilAfterItSpawnsArrows" methodname="ShardBurstAlreadyOverlappingTheHeroCannotHitUntilAfterItSpawnsArrows" classname="Hellscript.Tests.IncomingForecastTests" runstate="Runnable" seed="1828324227" result="Failed" start-time="2026-09-09 06:01:40Z" end-time="2026-09-09 06:01:40Z" duration="0.001786" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0.25d +/- 9.9999997473787516E-05d
+  But was:  0.20000000298023224d
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.IncomingForecastTests.ShardBurstAlreadyOverlappingTheHeroCannotHitUntilAfterItSpawnsArrows () [0x000b7] in /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/IncomingForecastTests.cs:80
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

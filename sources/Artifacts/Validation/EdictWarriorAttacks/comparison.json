@@ -1,0 +1,354 @@
+{
+  "scope": "24 generated-rift runs; two Warrior builds, two seeds and three separate policies. Functional observations, not a win-rate or natural-growth conclusion.",
+  "matchedPairs": 12,
+  "matchedEquipmentSlots": 96,
+  "legacyUnchanged": true,
+  "pairs": [
+    {
+      "mode": "legacy",
+      "variant": 0,
+      "seedIndex": 0,
+      "before": "Cleared",
+      "after": "Cleared",
+      "map": "74b62fb2"
+    },
+    {
+      "mode": "legacy",
+      "variant": 0,
+      "seedIndex": 1,
+      "before": "TimeLimit",
+      "after": "TimeLimit",
+      "map": "a4d31972"
+    },
+    {
+      "mode": "legacy",
+      "variant": 1,
+      "seedIndex": 0,
+      "before": "TimeLimit",
+      "after": "TimeLimit",
+      "map": "d95207a7"
+    },
+    {
+      "mode": "legacy",
+      "variant": 1,
+      "seedIndex": 1,
+      "before": "TimeLimit",
+      "after": "TimeLimit",
+      "map": "2729b40e"
+    },
+    {
+      "mode": "core-default",
+      "variant": 0,
+      "seedIndex": 0,
+      "before": "Cleared",
+      "after": "Cleared",
+      "map": "74b62fb2"
+    },
+    {
+      "mode": "core-default",
+      "variant": 0,
+      "seedIndex": 1,
+      "before": "Cleared",
+      "after": "Cleared",
+      "map": "a4d31972"
+    },
+    {
+      "mode": "core-default",
+      "variant": 1,
+      "seedIndex": 0,
+      "before": "TimeLimit",
+      "after": "TimeLimit",
+      "map": "d95207a7"
+    },
+    {
+      "mode": "core-default",
+      "variant": 1,
+      "seedIndex": 1,
+      "before": "TimeLimit",
+      "after": "HeroDeath",
+      "map": "2729b40e"
+    },
+    {
+      "mode": "core-linked",
+      "variant": 0,
+      "seedIndex": 0,
+      "before": "Cleared",
+      "after": "Cleared",
+      "map": "74b62fb2"
+    },
+    {
+      "mode": "core-linked",
+      "variant": 0,
+      "seedIndex": 1,
+      "before": "Cleared",
+      "after": "Cleared",
+      "map": "a4d31972"
+    },
+    {
+      "mode": "core-linked",
+      "variant": 1,
+      "seedIndex": 0,
+      "before": "HeroDeath",
+      "after": "HeroDeath",
+      "map": "d95207a7"
+    },
+    {
+      "mode": "core-linked",
+      "variant": 1,
+      "seedIndex": 1,
+      "before": "HeroDeath",
+      "after": "HeroDeath",
+      "map": "2729b40e"
+    }
+  ],
+  "groups": {
+    "legacy": {
+      "before": {
+        "runs": 4,
+        "outcomes": {
+          "Cleared": 1,
+          "TimeLimit": 3
+        },
+        "bossSpawns": 4,
+        "channelEnds": 0,
+        "channelInterruptions": 33,
+        "walkingCharges": 43,
+        "leapReservations": 0,
+        "crushCharges": 4,
+        "skills": {
+          "W01": {
+            "starts": 33,
+            "releases": 0,
+            "completions": 0,
+            "interruptions": 33,
+            "hits": 1661,
+            "damage": 97980.12487411499
+          },
+          "W02": {
+            "starts": 7,
+            "releases": 7,
+            "completions": 7,
+            "interruptions": 0,
+            "hits": 21,
+            "damage": 3634.603546142578
+          },
+          "W03": {
+            "starts": 210,
+            "releases": 201,
+            "completions": 201,
+            "interruptions": 9,
+            "hits": 501,
+            "damage": 112889.90571594238
+          }
+        }
+      },
+      "after": {
+        "runs": 4,
+        "outcomes": {
+          "Cleared": 1,
+          "TimeLimit": 3
+        },
+        "bossSpawns": 4,
+        "channelEnds": 0,
+        "channelInterruptions": 33,
+        "walkingCharges": 43,
+        "leapReservations": 0,
+        "crushCharges": 4,
+        "skills": {
+          "W01": {
+            "starts": 33,
+            "releases": 0,
+            "completions": 0,
+            "interruptions": 33,
+            "hits": 1661,
+            "damage": 97980.12487411499
+          },
+          "W02": {
+            "starts": 7,
+            "releases": 7,
+            "completions": 7,
+            "interruptions": 0,
+            "hits": 21,
+            "damage": 3634.603546142578
+          },
+          "W03": {
+            "starts": 210,
+            "releases": 201,
+            "completions": 201,
+            "interruptions": 9,
+            "hits": 501,
+            "damage": 112889.90571594238
+          }
+        }
+      }
+    },
+    "core-default": {
+      "before": {
+        "runs": 4,
+        "outcomes": {
+          "Cleared": 2,
+          "TimeLimit": 2
+        },
+        "bossSpawns": 4,
+        "channelEnds": 0,
+        "channelInterruptions": 36,
+        "walkingCharges": 42,
+        "leapReservations": 0,
+        "crushCharges": 6,
+        "skills": {
+          "W01": {
+            "starts": 36,
+            "releases": 0,
+            "completions": 0,
+            "interruptions": 36,
+            "hits": 1582,
+            "damage": 93776.20655822754
+          },
+          "W02": {
+            "starts": 15,
+            "releases": 15,
+            "completions": 15,
+            "interruptions": 0,
+            "hits": 32,
+            "damage": 5672.187591552734
+          },
+          "W03": {
+            "starts": 205,
+            "releases": 183,
+            "completions": 183,
+            "interruptions": 22,
+            "hits": 449,
+            "damage": 100577.90211486816
+          }
+        }
+      },
+      "after": {
+        "runs": 4,
+        "outcomes": {
+          "Cleared": 2,
+          "TimeLimit": 1,
+          "HeroDeath": 1
+        },
+        "bossSpawns": 4,
+        "channelEnds": 0,
+        "channelInterruptions": 50,
+        "walkingCharges": 8,
+        "leapReservations": 4,
+        "crushCharges": 29,
+        "skills": {
+          "W01": {
+            "starts": 50,
+            "releases": 0,
+            "completions": 0,
+            "interruptions": 50,
+            "hits": 1386,
+            "damage": 80504.71025848389
+          },
+          "W02": {
+            "starts": 49,
+            "releases": 49,
+            "completions": 49,
+            "interruptions": 0,
+            "hits": 135,
+            "damage": 26114.7822265625
+          },
+          "W03": {
+            "starts": 168,
+            "releases": 158,
+            "completions": 158,
+            "interruptions": 10,
+            "hits": 385,
+            "damage": 88272.96492004395
+          }
+        }
+      }
+    },
+    "core-linked": {
+      "before": {
+        "runs": 4,
+        "outcomes": {
+          "Cleared": 2,
+          "HeroDeath": 2
+        },
+        "bossSpawns": 2,
+        "channelEnds": 0,
+        "channelInterruptions": 36,
+        "walkingCharges": 42,
+        "leapReservations": 0,
+        "crushCharges": 3,
+        "skills": {
+          "W01": {
+            "starts": 36,
+            "releases": 0,
+            "completions": 0,
+            "interruptions": 36,
+            "hits": 1582,
+            "damage": 93776.20655822754
+          },
+          "W02": {
+            "starts": 6,
+            "releases": 6,
+            "completions": 6,
+            "interruptions": 0,
+            "hits": 15,
+            "damage": 2598.4490661621094
+          },
+          "W03": {
+            "starts": 3,
+            "releases": 3,
+            "completions": 3,
+            "interruptions": 0,
+            "hits": 6,
+            "damage": 1430.51513671875
+          }
+        }
+      },
+      "after": {
+        "runs": 4,
+        "outcomes": {
+          "Cleared": 2,
+          "HeroDeath": 2
+        },
+        "bossSpawns": 2,
+        "channelEnds": 3,
+        "channelInterruptions": 59,
+        "walkingCharges": 9,
+        "leapReservations": 5,
+        "crushCharges": 13,
+        "skills": {
+          "W01": {
+            "starts": 62,
+            "releases": 0,
+            "completions": 3,
+            "interruptions": 59,
+            "hits": 1370,
+            "damage": 79059.64462661743
+          },
+          "W02": {
+            "starts": 34,
+            "releases": 34,
+            "completions": 34,
+            "interruptions": 0,
+            "hits": 94,
+            "damage": 18813.07276916504
+          },
+          "W03": {
+            "starts": 13,
+            "releases": 12,
+            "completions": 12,
+            "interruptions": 1,
+            "hits": 25,
+            "damage": 5512.776473999023
+          }
+        }
+      }
+    }
+  },
+  "languageFixDoesNotChangeDiagnosticRuns": true,
+  "sha256": {
+    "Before12/header.json": "e5d54407232dd0d1cdd4224aaaf3bf569a4d0b7e685525ef1d416d71451fa472",
+    "Before12/runs.jsonl": "f3cad9ca980c43622c86a7b264a9a2ae714e570d0dd1ec46a65a1b92e5bfedb8",
+    "AfterRelease12/header.json": "d72516b60f39203b2420a33abb33582e8caf317d3d783b1f70b792d02c3262bb",
+    "AfterRelease12/runs.jsonl": "ff9ccea13d11374899d642ffc328f0a8ed712c9106cfddf5fa9e890b3058015e"
+  }
+}
