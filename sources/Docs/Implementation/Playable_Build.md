@@ -1,8 +1,12 @@
 # HELLSCRIPT 첫 플레이 빌드
 
-2026-09-13 최신 실행본은 `Builds/macOS-EdictWarriorSupport/HELLSCRIPT.app`입니다. 철벽·전투 함성·전사 기본 공격의 13개 옵션을 연결해 전사 핵심 옵션 30개를 모두 독립 판단으로 적용합니다. 전체 검사 1,981개와 최종 앱의 실행·재시작 5회가 통과했고 화면 17장을 검토했습니다. [개발 기록](Edict_Warrior_Support_Expansion.md) · [English](Edict_Warrior_Support_Expansion.en.md)
+2026-09-13 최신 실행본은 `Builds/macOS-EdictRanger/HELLSCRIPT.app`입니다. 궁수 액티브·기본 사격의 핵심 옵션 30개를 독립 판단으로 연결했습니다. 전체 검사 2,079개와 실제 앱 실행·재시작 13회가 통과했고 화면 31장을 검토했습니다. [개발 기록](Edict_Ranger_Expansion.md) · [English](Edict_Ranger_Expansion.en.md)
 
-English: the latest player connects all 13 W05/W06/Warrior BASIC options, completing independent policies for all 30 Warrior core options. All 1,981 tests and five final native processes passed, with 17 screenshots reviewed. Only `main` remains locally and remotely. See the record for the controlled verification scope and remaining work.
+English: the latest player independently applies all 30 Ranger active/BASIC core options. All 2,079 tests and 13 native launches/restarts passed, with 31 screenshots reviewed. See the record for controlled costs, earned charges, persistence, UI evidence and remaining work.
+
+2026-09-13 이전 전사 지원 실행본은 `Builds/macOS-EdictWarriorSupport/HELLSCRIPT.app`입니다. 철벽·전투 함성·전사 기본 공격의 13개 옵션을 연결해 전사 핵심 옵션 30개를 모두 독립 판단으로 적용합니다. 전체 검사 1,981개와 최종 앱의 실행·재시작 5회가 통과했고 화면 17장을 검토했습니다. [개발 기록](Edict_Warrior_Support_Expansion.md) · [English](Edict_Warrior_Support_Expansion.en.md)
+
+English: the previous Warrior support player connects all 13 W05/W06/Warrior BASIC options, completing independent policies for all 30 Warrior core options. All 1,981 tests and five final native processes passed, with 17 screenshots reviewed. Only `main` remains locally and remotely. See the record for the controlled verification scope and remaining work.
 
 2026-09-13 이전 지면 강타 실행본은 `Builds/macOS-EdictSlam/HELLSCRIPT.app`입니다. 전사 지면 강타의 네 옵션, 실제 기절·보스 제압·생존 순서와 저장 복원을 연결했습니다. 전체 검사 1,903개와 최종 앱의 실행·재시작 3회가 통과했고 화면 13장을 검토했습니다. [지면 강타 개발 기록](Edict_Slam_Expansion.md) · [English](Edict_Slam_Expansion.en.md)
 

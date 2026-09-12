@@ -1,0 +1,503 @@
+{
+  "reviewed": true,
+  "reviewedBy": "Codex: direct review of all 31 Native3 screenshots, decoded-pixel comparison of all 31 final Native4 screenshots, and direct reinspection of six representative final screenshots",
+  "native": "Native4",
+  "screenshots": [
+    "01-a01-options-ko.png",
+    "02-a01-options-large-en.png",
+    "03-a02-options-ko.png",
+    "04-a02-options-large-en.png",
+    "05-a03-options-ko.png",
+    "06-a03-options-large-en.png",
+    "07-a04-options-ko.png",
+    "08-a04-options-large-en.png",
+    "09-a05-options-ko.png",
+    "10-a05-options-large-en.png",
+    "11-a06-options-ko.png",
+    "12-a06-options-large-en.png",
+    "13-basic-options-ko.png",
+    "14-basic-options-large-en.png",
+    "15-trap-pending-before-restart-ko.png",
+    "01-armed-trap-after-restart-ko.png",
+    "02-shadow-pending-before-restart-ko.png",
+    "01-focus-approach-before-volley-ko.png",
+    "02-three-arrows-before-restart-ko.png",
+    "01-focus-hits-after-restart-en.png",
+    "02-pierce-arrow-before-restart-ko.png",
+    "01-pierce-and-shadow-hits-ko.png",
+    "01-legal-la03-retreat-trap-ko.png",
+    "01-retreat-airborne-before-restart-ko.png",
+    "01-landed-before-walking-restart-en.png",
+    "01-mark-ended-walking-before-restart-ko.png",
+    "01-mark-and-earned-afterimage-en.png",
+    "01-basic-preparation-before-restart-ko.png",
+    "01-two-ranged-hits-before-restart-ko.png",
+    "01-ranged-earned-discount-ko.png",
+    "02-ranged-earned-discount-small-en.png"
+  ],
+  "notesKo": [
+    "Native3의 31장을 각각 직접 검토한 결과를 보존하고, 최종 Native4의 31장과 디코딩한 픽셀을 대조했다. 최종본 중 영어 다중 사격·그림자 설정, 착지 후 보행, 잔영 피해, 한국어 후퇴 덫, 640×360 기본 사격 할인 화면 6장을 다시 직접 확인했다.",
+    "일곱 옵션의 한국어·영어 화면 14장에서 차이는 중앙 배경 캐릭터의 작은 애니메이션 영역에 한정된다. 텍스트와 고정 하단 버튼은 같은 픽셀을 유지한다. 전투 화면의 변화는 월드·배경 렌더링 영역에 있으며 최종 직접 확인한 화면의 행동·HP·자원·효과·조작 버튼은 읽을 수 있다.",
+    "일곱 옵션 화면의 한국어 설명과 140% 영어 설명이 읽히며 돌아가기·되돌리기·저장 및 적용 버튼이 고정 영역에 표시된다.",
+    "스크롤 본문 끝에 걸친 다음 옵션·피해 기록은 일부만 보일 수 있다. 이는 스크롤 영역의 경계이며, 모든 선택지를 동시에 표시한 검증은 아니다.",
+    "전투 HUD에서 준비·집중 위치 접근·착지 후 보행과 실제 자원 80·70·40·20·12·8을 확인했다. 효과 화면에는 다중 사격·그림자·잔영의 피해가 표시된다.",
+    "화살의 실제 수·충전·적중은 저장 상태와 실행 검증으로 확인했다. 발사 직후 정지 화면만으로 개별 화살의 전체 궤적이나 중복 방지를 입증하지 않는다.",
+    "640×360 영어 화면에서 현재 행동·HP·자원·배속 잠금·하단 조작을 확인했다. 모바일 터치·회전·실기기 성능이나 모든 해상도 조합을 검증한 것은 아니다."
+  ],
+  "notesEn": [
+    "Each of the 31 Native3 screenshots was directly reviewed. All 31 final Native4 images were compared at decoded-pixel level; six representative final screenshots were directly reinspected: Multi and Shadow settings, landed walking, afterimage damage, the legal retreat trap and the 640×360 earned-discount HUD.",
+    "The 14 KO/EN option screenshots differ only in the small animated background character region; their text and fixed footer pixels match. Combat differences occur in rendered world/background regions, and the reinspected final action, HP, resource, effects and controls remain readable.",
+    "All seven KO explanations and 140% EN explanations remain readable with a fixed Back/Revert/Save-and-apply footer.",
+    "A following option or damage entry can be partially visible at the scrolling viewport edge. This is not evidence that every choice fits simultaneously.",
+    "Battle HUD screenshots show preparation, focus approach, post-landing walking and resource values 80, 70, 40, 20, 12 and 8. Effect views show Multi, Shadow and afterimage damage.",
+    "Projectile count, charges, hits and non-replay are established by saved state and runtime assertions, not by a launch-frame screenshot alone.",
+    "The 640×360 EN HUD exposes action, HP, resource, speed locks and footer controls. No mobile touch, rotation, device performance or exhaustive resolution coverage is claimed."
+  ],
+  "reviewedUtc": "2026-09-12T23:34:37.228536+00:00",
+  "images": {
+    "01-a01-options-ko.png": {
+      "sha256": "faefe804a8952b07c4e42716e97dd743abd8d291e5f145e64a1ed063c098aa73",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        358,
+        646,
+        374
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "02-a01-options-large-en.png": {
+      "sha256": "2b8598f6bc6f2147fc2a7a631c46067371efcea54dfeec0f57ce4598d8c9a5aa",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        352,
+        637,
+        370,
+        663
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "03-a02-options-ko.png": {
+      "sha256": "2eca748ad4bda48ffa41c78ee902a988138c8d1cc6c93b1f93033aabb703ea45",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        358,
+        645,
+        374
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "04-a02-options-large-en.png": {
+      "sha256": "8bdd4bb0be70064826737c1fcef333a482815df23745b6bb35dbcc4738d5cf94",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        352,
+        637,
+        370,
+        663
+      ],
+      "method": "final screenshot directly viewed and compared to Native3"
+    },
+    "05-a03-options-ko.png": {
+      "sha256": "d8140a5a8ef6b5eb04a9dd49ca1702ddbec1ec0740f89f43df1ac41b12c2175c",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        358,
+        646,
+        373
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "06-a03-options-large-en.png": {
+      "sha256": "958eb14e0d63f0022552f046fde677bfff379eb7fbc24de4e3b91a57100540ac",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        352,
+        637,
+        370,
+        663
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "07-a04-options-ko.png": {
+      "sha256": "fe8ba67aa9327fc1d27ba6fc8b60761473ddcab471117bda6a689e2f27730eb1",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        359,
+        646,
+        374
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "08-a04-options-large-en.png": {
+      "sha256": "1b495bf7e96af271d5041a0e533762d8170fccdebf3cf18bfbf659130fd13e52",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        352,
+        637,
+        370,
+        663
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "09-a05-options-ko.png": {
+      "sha256": "b87a33c2ae501890908057f4de76dbf9620f0ac18a3f4fc5c890b8777edffa2b",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        358,
+        646,
+        374
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "10-a05-options-large-en.png": {
+      "sha256": "d21be12db3343da15d88a08fc1efc32cb5f30f5fd8c2797bbc705bf22d99f7fb",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        353,
+        637,
+        370,
+        663
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "11-a06-options-ko.png": {
+      "sha256": "bbc90adaad03e06f169b1fcd50ddcf79c69de78d78ba424f5be2f996eed7a212",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        358,
+        646,
+        374
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "12-a06-options-large-en.png": {
+      "sha256": "26fd8875e3d90552baae407b40c700b69a5c7c8105e3cf6c0a46f25931f6de48",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        352,
+        637,
+        370,
+        663
+      ],
+      "method": "final screenshot directly viewed and compared to Native3"
+    },
+    "13-basic-options-ko.png": {
+      "sha256": "59054d900520353617b9b157a0fa790ab2b9a497a2e966237250ba37e68c2be1",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        635,
+        359,
+        646,
+        374
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "14-basic-options-large-en.png": {
+      "sha256": "d2638f7819a6056b28f7b68a955e0f7cdc3c54b5ec0cd1c894dcad541a4d98e3",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        353,
+        637,
+        370,
+        662
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "15-trap-pending-before-restart-ko.png": {
+      "sha256": "853634166f8617a35eb2e17e05575b661e2f36c27424481ac8a410bba0c7dc69",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        147,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-armed-trap-after-restart-ko.png": {
+      "sha256": "445334c77c4926b4f24fa4d01042ebb4fda989eefb945ea0573d224d1c43fe95",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        240,
+        111,
+        1280,
+        609
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "02-shadow-pending-before-restart-ko.png": {
+      "sha256": "ee86b6dafa2d5312f9ccc8f2209e567334ea83e0cabef57f97e15f3c673595c3",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        147,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-focus-approach-before-volley-ko.png": {
+      "sha256": "8077f1786d0540e2446242cca560795c70094437df589dd5bb33c9dde6a1e38f",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        151,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "02-three-arrows-before-restart-ko.png": {
+      "sha256": "dc1902dc3e83e3949d5bb22eca2b615f98a1018c2e6a05fa462bc63708e82d19",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        108,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-focus-hits-after-restart-en.png": {
+      "sha256": "55406fe804c367e46884b8b43dd535080fc74dd9efda63422ae2a05dc1296c87",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        0,
+        155,
+        720,
+        1122
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "02-pierce-arrow-before-restart-ko.png": {
+      "sha256": "f338f82875652b718b1f324a5e56434c5d2c567a8fe22c60ff0bbcbfbae41a65",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        111,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-pierce-and-shadow-hits-ko.png": {
+      "sha256": "ca434a5980c33befc51eed88bcdc374ea9df9b76c27ee7ba7854ec5e60c3561c",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        224,
+        111,
+        1279,
+        588
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-legal-la03-retreat-trap-ko.png": {
+      "sha256": "9bdb3ad0770e87aed6d2fcab777624462ae0245bc769b1f33149d6af4f31fcf7",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        169,
+        200,
+        956,
+        644
+      ],
+      "method": "final screenshot directly viewed and compared to Native3"
+    },
+    "01-retreat-airborne-before-restart-ko.png": {
+      "sha256": "edcc504fb5df3a9d9c315d955bc95be8833671f239847ac10f093ec6b76d4129",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        145,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-landed-before-walking-restart-en.png": {
+      "sha256": "9256d4675b928fff5cb61f29481c27a55b3e4cb60ae3a57eeda61450595d8a7e",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        109,
+        200,
+        956,
+        644
+      ],
+      "method": "final screenshot directly viewed and compared to Native3"
+    },
+    "01-mark-ended-walking-before-restart-ko.png": {
+      "sha256": "ce817bf00403e3d30522afc2a933b63d04cd56fee71e45caf72cef487534b9c8",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        12,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-mark-and-earned-afterimage-en.png": {
+      "sha256": "c017297d799b3ee03d344c56b8c087934428dd1d5620066db3a9b96b090627d0",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        0,
+        155,
+        650,
+        1071
+      ],
+      "method": "final screenshot directly viewed and compared to Native3"
+    },
+    "01-basic-preparation-before-restart-ko.png": {
+      "sha256": "71f6b6440f5a7dce9b27c210b1c210398e72d1db184aa65ea3b8c1b95c4d55a0",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        145,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-two-ranged-hits-before-restart-ko.png": {
+      "sha256": "15b7097f0ee8b9dd7a85c1aabea5a6b521cff44004c4345f4e67ea89859a012f",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        145,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "01-ranged-earned-discount-ko.png": {
+      "sha256": "5ad00b63ed19da5604bf56f84167547ab9ced9b477176fa308f38615f83d8ea7",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        145,
+        200,
+        956,
+        644
+      ],
+      "method": "Native3 direct visual inspection plus Native4 decoded-pixel comparison"
+    },
+    "02-ranged-earned-discount-small-en.png": {
+      "sha256": "5637626fe77e2fe2798954b8437ad50937e34122d2098ebee220936e35e9723c",
+      "dimensions": [
+        640,
+        360
+      ],
+      "pixelDifferenceBoxFromNative3": [
+        176,
+        132,
+        583,
+        260
+      ],
+      "method": "final screenshot directly viewed and compared to Native3"
+    }
+  },
+  "directlyReinspectedFinalScreenshots": [
+    "04-a02-options-large-en.png",
+    "12-a06-options-large-en.png",
+    "01-landed-before-walking-restart-en.png",
+    "01-mark-and-earned-afterimage-en.png",
+    "01-legal-la03-retreat-trap-ko.png",
+    "02-ranged-earned-discount-small-en.png"
+  ],
+  "priorReview": "visual-review-Native3.json",
+  "comparison": "visual-comparison.json"
+}

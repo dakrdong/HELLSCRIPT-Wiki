@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-13 궁수 핵심 옵션:** 액티브 6종과 기본 사격의 핵심 옵션 30개를 독립 판단에 연결했습니다. 전체 검사 2,079개, 궁수 전용 98개와 실제 앱 실행·재시작 13회가 통과했고 화면 31장을 검토했습니다. 덫·투사체·후퇴 후 보행·표식·실제 적중으로 얻는 할인과 저장 복원을 확인했습니다. 생성 균열의 장기 생존·성장·파밍 효용과 모바일 실기기 검증은 남아 있습니다. [개발 기록](../../Docs/Implementation/Edict_Ranger_Expansion.md)
+
+English: all 30 Ranger active/BASIC core options now use independent policies. All 2,079 tests, 98 Ranger-specific cases and 13 native launches/restarts passed; 31 screenshots were reviewed. Actual traps, projectiles, follow-up walking, Mark, earned hit discounts and persistence were verified. Long-run generated-rift survival/growth/farming and mobile-device validation remain. [English record](../../Docs/Implementation/Edict_Ranger_Expansion.en.md)
+
 **2026-09-13 전사 방어·함성·기본 공격:** 철벽·전투 함성·근접 기본 공격의 나머지 13개 옵션을 연결했습니다. 전사 핵심 옵션 30개가 모두 독립 판단을 사용합니다. 전체 검사 1,981개와 최종 앱 실행·재시작 5회가 통과했고 화면 17장을 검토했습니다. 실제 보호막·자원 회복·3회 적중으로 얻은 절제 할인과 저장 복원을 확인했습니다. `main`만 유지하며, 궁수 정책과 생성 균열의 장기 밸런스·모바일 실기기 검증은 남아 있습니다. [개발 기록](../../Docs/Implementation/Edict_Warrior_Support_Expansion.md)
 
 English: all 13 remaining W05/W06/Warrior BASIC options are connected, completing 30 Warrior core options. All 1,981 tests and five final native processes passed; 17 screenshots were reviewed. Actual shields, resource recovery, earned three-hit LC02 discounts and persistence were verified. Only `main` remains. Ranger policies, long-run generated-rift balance and mobile-device validation remain. [English record](../../Docs/Implementation/Edict_Warrior_Support_Expansion.en.md)
@@ -75,7 +79,7 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 | 플레이어 훈련 | 실제 캐릭터 복사본, 해금 제한, 고정 배치와 60초 종료의 상세안·소스·검사 결과가 있습니다. | A/B 비교 기록, 적용 미리보기와 기기 입력 검증은 별도 과제입니다. |
 | 화면·기기 대응 | 공통 설정·안내 창과 기기별 방향 설정, 화면 크기로 계산하는 전투 HUD 배치와 카메라 표시 영역, 장비 목록·상세·비교의 영역 전환을 구현했습니다. 전투 배치는 macOS 창 16개 크기에서 확인했습니다. 2026-09-11에 글자 크기 100~140% 선택을 추가했고, 20:9 화면에서 밀려나 있던 조작 20곳을 고쳤으며, 주요 조작을 80단위로 키우고 배경이 노치까지 덮도록 바꿨습니다. | 행동 설계·사냥 칙령 편집·전투 HUD의 촘촘한 위젯 크기와 모바일 실기기의 회전·터치·복귀 검증이 남아 있습니다. |
 | 배속 잠금 | 일반 균열·훈련·A/B 비교는 1배속을 사용하고 1.5배속·2배속에는 잠금 표시를 붙였습니다. 기존 고배속 저장값은 1배속으로 읽고 저장합니다. | 월 구독·이벤트 쿠폰·시간 충전과 차감, 서버의 중복 사용 방지, 절전 방치 화면은 구현되지 않았습니다. |
-| 사냥 칙령 v0.2 | 원본을 영웅 저장에 보관하고, 명시적으로 켠 영웅에 한해 정기 판단에서 전역 생존 대응을 실행합니다. 기본값은 꺼짐입니다. 성소에서 모든 항목을 편집하고, 공유 코드를 내보내고 받은 코드를 비교·적용할 수 있습니다. | 전역 생존 대응·대상·추적·전리품·공통 순서, 기존 조준 연결과 M01·M02·M03·M04·M05·M06의 독립 핵심 판단을 읽습니다. 생존 경로에서 일부 다른 스킬 옵션도 사용합니다. 마법사 기본 공격과 다른 직업의 남은 고정 판단, 기존 조준 스킬의 옛 규칙 의존 제거가 남아 있습니다. 명시적 생존 정책의 48판 비교는 완료했으며 실제 제어 전환과 시간 초과 원인을 이어서 조사합니다. |
+| 사냥 칙령 v0.2 | 영웅별 v0.2 원본·편집·공유, 전역 대상·추적·전리품·생존 대응과 세 직업의 액티브·기본 공격을 연결했습니다. 궁수의 옵션 30개까지 옛 규칙과 독립해 판단하며 실제 비용·적중·저장 복원을 검사했습니다. | 생성 균열 여러 시드에서 생존·제어 전환·공격 취소·시간 초과와 장비 파밍 효용을 계속 검증합니다. 설정별 승률 개선이나 모바일 실기기 사용성은 이번 기능 검사로 입증하지 않았습니다. |
 | 저장·서비스 | 로컬 저장과 개발용 정산을 제공합니다. | 계정 서버·서버 시각·교차 저장·구매 검증을 연결해야 합니다. |
 | 아트·출시 품질 | 생성 이미지 4개와 코드로 만든 임시 3D·UI 표현을 사용합니다. 2026-09-10에 첫 캐릭터 3D 모델(야만전사)을 생성해 시작 씬에 확인용으로 배치했습니다. 2026-09-11에 성소 보행 광장과 정거장 5곳을 임시 표현으로 만들어 도착 시 서비스가 열리고, 균열 관리자는 전용 화면을 엽니다. | 마을·NPC·정식 모델·애니메이션·음향·Android 글꼴·성능을 완성해야 합니다. |
 

@@ -1,0 +1,249 @@
+{
+  "createdUtc": "2026-09-12T23:36:24.233469+00:00",
+  "baseCommit": "d3814c2d7ff68b11f072d9ca6fb19a9b188e3e48",
+  "unity": "6000.6.0f1",
+  "fullTests": {
+    "total": "2079",
+    "passed": "2079",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-12 23:25:03Z",
+    "end-time": "2026-09-12 23:31:54Z",
+    "duration": "410.8331329"
+  },
+  "rangerTests": {
+    "total": "98",
+    "passed": "98",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "fullProcess": {
+    "startedUtc": "2026-09-12T23:24:52.592172+00:00",
+    "pid": 42461,
+    "endedUtc": "2026-09-12T23:31:56.205161+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-12T23:23:08.636780+00:00",
+    "pid": 42044,
+    "endedUtc": "2026-09-12T23:23:39.500029+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "checkpoint": {
+      "startedUtc": "2026-09-12T23:24:52.585204+00:00",
+      "pid": 42460,
+      "endedUtc": "2026-09-12T23:25:16.778480+00:00",
+      "exitCode": 0
+    },
+    "trap": {
+      "startedUtc": "2026-09-12T23:25:16.780012+00:00",
+      "pid": 42548,
+      "endedUtc": "2026-09-12T23:25:23.733329+00:00",
+      "exitCode": 0
+    },
+    "shadow": {
+      "startedUtc": "2026-09-12T23:25:23.736582+00:00",
+      "pid": 42567,
+      "endedUtc": "2026-09-12T23:25:37.965551+00:00",
+      "exitCode": 0
+    },
+    "volley": {
+      "startedUtc": "2026-09-12T23:25:37.969937+00:00",
+      "pid": 42608,
+      "endedUtc": "2026-09-12T23:25:44.922473+00:00",
+      "exitCode": 0
+    },
+    "pierce": {
+      "startedUtc": "2026-09-12T23:25:44.924705+00:00",
+      "pid": 42628,
+      "endedUtc": "2026-09-12T23:25:50.514165+00:00",
+      "exitCode": 0
+    },
+    "retreat-trap": {
+      "startedUtc": "2026-09-12T23:25:50.516787+00:00",
+      "pid": 42651,
+      "endedUtc": "2026-09-12T23:25:56.167899+00:00",
+      "exitCode": 0
+    },
+    "retreat": {
+      "startedUtc": "2026-09-12T23:25:56.171308+00:00",
+      "pid": 42664,
+      "endedUtc": "2026-09-12T23:26:01.813410+00:00",
+      "exitCode": 0
+    },
+    "landing": {
+      "startedUtc": "2026-09-12T23:26:01.815464+00:00",
+      "pid": 42682,
+      "endedUtc": "2026-09-12T23:26:07.113862+00:00",
+      "exitCode": 0
+    },
+    "walking": {
+      "startedUtc": "2026-09-12T23:26:07.116141+00:00",
+      "pid": 42691,
+      "endedUtc": "2026-09-12T23:26:12.750813+00:00",
+      "exitCode": 0
+    },
+    "mark": {
+      "startedUtc": "2026-09-12T23:26:12.752662+00:00",
+      "pid": 42700,
+      "endedUtc": "2026-09-12T23:26:18.617688+00:00",
+      "exitCode": 0
+    },
+    "basic": {
+      "startedUtc": "2026-09-12T23:26:18.619270+00:00",
+      "pid": 42717,
+      "endedUtc": "2026-09-12T23:26:24.632005+00:00",
+      "exitCode": 0
+    },
+    "basic-hit": {
+      "startedUtc": "2026-09-12T23:26:24.634921+00:00",
+      "pid": 42736,
+      "endedUtc": "2026-09-12T23:26:30.104732+00:00",
+      "exitCode": 0
+    },
+    "basic-charge": {
+      "startedUtc": "2026-09-12T23:26:30.107188+00:00",
+      "pid": 42742,
+      "endedUtc": "2026-09-12T23:26:36.896457+00:00",
+      "exitCode": 0
+    }
+  },
+  "nativeResults": {
+    "landing-result.txt": "PASS: The saved retreat landed once, earned its real SAB4 charge and restored the snapshotted ten-metre follow-up despite later source edits. Jump displacement did not earn an AP05 walking charge. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "basic-result.txt": "PASS: Actual Shadow was cast before BASIC HOLD stopped the entire shot. Actual UI switched to ALLOW and saved preparation before launch, resource recovery or LC02 hit credit. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "checkpoint-result.txt": "PASS: All 30 Ranger options traversed every choice through actual UI, saved a changed choice and passed fresh file reads. Actual AP04/LA02/LA04 gear preserved a committed trap after automatic OFF. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "retreat-result.txt": "PASS: A legal SAB4/AP02/AP05 build saved airborne state without inventing an unavailable LA03 trap. It preserved the committed RETREAT follow-up after the source was edited to GLOBAL and automatic OFF. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "basic-hit-result.txt": "PASS: Two actual basic hits granted twelve resource and consumed two Shadow charges. Actual UI switched to low HP, while UNTIL_DISCOUNT correctly kept the original eligible target; its two-hit count was saved. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "retreat-trap-result.txt": "PASS: A separate legal LA03 boot build linked Retreat to one actual takeoff trap while direct installation was OFF. The trap armed and poisoned once; no unavailable SAB4 charge was granted. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "volley-result.txt": "PASS: The saved three physical arrows completed once with multiple LA02 hits on one enemy. An independently chosen Pierce paid 20 and launched with one remaining Shadow charge; no shot was forced by the earlier buff. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "basic-charge-result.txt": "PASS: Three real ranged hits across restarts earned one LC02 charge and eighteen resource. Independently selected Pierce consumed it once, paying ten resource; BASIC never pre-credited a miss or preparation. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "pierce-result.txt": "PASS: A saved real piercing projectile finished with direct and Shadow damage. No extra cast, payment or charge consumption occurred across the shot restarts. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "mark-result.txt": "PASS: The pending free Mark restored once. Independently selected Pierce paid the real SAB2 cost of 17, consumed the landing-earned SAB4 charge once and produced a physical delayed afterimage hit. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "trap-result.txt": "PASS: The saved direct trap armed once and applied real AP04 root/own poison. LA04 poison-spread Shadow committed without recursively waiting for the reference shot purpose, then survived automatic OFF. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "shadow-result.txt": "PASS: Shadow restored three charges exactly once. LA02 focus positioning walked without spending resource, then one real three-arrow volley paid 30 and consumed only one shadow charge. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.",
+    "walking-result.txt": "PASS: Saved follow-up walking continued from disk and immediately yielded to a real Mark preparation. Automatic OFF did not cancel the committed action or apply its effect early. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation."
+  },
+  "nativeScreenshots": [
+    "01-a01-options-ko.png",
+    "01-armed-trap-after-restart-ko.png",
+    "01-basic-preparation-before-restart-ko.png",
+    "01-focus-approach-before-volley-ko.png",
+    "01-focus-hits-after-restart-en.png",
+    "01-landed-before-walking-restart-en.png",
+    "01-legal-la03-retreat-trap-ko.png",
+    "01-mark-and-earned-afterimage-en.png",
+    "01-mark-ended-walking-before-restart-ko.png",
+    "01-pierce-and-shadow-hits-ko.png",
+    "01-ranged-earned-discount-ko.png",
+    "01-retreat-airborne-before-restart-ko.png",
+    "01-two-ranged-hits-before-restart-ko.png",
+    "02-a01-options-large-en.png",
+    "02-pierce-arrow-before-restart-ko.png",
+    "02-ranged-earned-discount-small-en.png",
+    "02-shadow-pending-before-restart-ko.png",
+    "02-three-arrows-before-restart-ko.png",
+    "03-a02-options-ko.png",
+    "04-a02-options-large-en.png",
+    "05-a03-options-ko.png",
+    "06-a03-options-large-en.png",
+    "07-a04-options-ko.png",
+    "08-a04-options-large-en.png",
+    "09-a05-options-ko.png",
+    "10-a05-options-large-en.png",
+    "11-a06-options-ko.png",
+    "12-a06-options-large-en.png",
+    "13-basic-options-ko.png",
+    "14-basic-options-large-en.png",
+    "15-trap-pending-before-restart-ko.png"
+  ],
+  "scope": "All 30 Ranger A01-A06/BASIC options: controlled policies, actual combat, legal equipment, persistence and native UI. Not multi-seed balance, mobile devices or whole-game completion.",
+  "earlierFailures": [
+    "Focused1: 62/63 passed; single-skill aim fixture now explicitly switches the independently derived BASIC off.",
+    "Focused2: 294/295 passed; post-retreat fixture pointed outside the room. An open corridor now proves resumed walking and a separate no-path case proves stopping.",
+    "Focused3: 332/333 passed; two obsolete translation keys were removed. Resource shortage no longer masks A02 approach geometry.",
+    "Focused4: 131/131 passed. Full1: 2079/2079 passed.",
+    "Native1: first five shot/UI stages passed; retreat fixture attempted incompatible LA03 and SAB4 boots. Native2: all 13 legal-build stages passed.",
+    "Full2: 2078/2079 passed; shared availability still referenced the old LA04 message key. Updated both consumers and the English item name; the focused localization suite is recorded as Focused5.",
+    "Final Full3, Build4 and Native4 include the shared availability wording and both equipment-name explanations."
+  ],
+  "branchCleanup": {
+    "completedUtc": "2026-09-12T21:03:29.751870+00:00",
+    "currentBranch": "main",
+    "commit": "f6f80abed51aa6c61002331c20f4c342876241bf",
+    "deletedLocalBranch": "codex/claude-review-20260912",
+    "deletedRemoteBranch": "codex/claude-review-20260912",
+    "claudeIncluded": true,
+    "preservedWorkingFiles": 29,
+    "remoteHeads": [
+      "f6f80abed51aa6c61002331c20f4c342876241bf\trefs/heads/main"
+    ]
+  },
+  "wikiValidation": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T08:35:26+09:00",
+    "pages": 129,
+    "databases": 19,
+    "records": 489,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "validation": 80
+    },
+    "documentLinks": 1000,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 472,
+    "gameExecution": "not performed; preserved reports only"
+  },
+  "wikiCheck": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T08:35:26+09:00",
+    "pages": 129,
+    "databases": 19,
+    "records": 489,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "validation": 80
+    },
+    "documentLinks": 1000,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 472,
+    "gameExecution": "not performed; preserved reports only",
+    "publicPages": 129
+  }
+}

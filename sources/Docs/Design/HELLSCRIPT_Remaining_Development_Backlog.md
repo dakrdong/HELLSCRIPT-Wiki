@@ -1,5 +1,9 @@
 # HELLSCRIPT 남은 개발 작업표
 
+**2026-09-13 궁수 핵심 옵션:** 액티브 6종과 기본 사격의 핵심 옵션 30개를 독립 판단에 연결했습니다. 전체 검사 2,079개, 궁수 전용 98개와 실제 앱 실행·재시작 13회가 통과했고 화면 31장을 검토했습니다. 덫·투사체·후퇴 후 보행·표식·실제 적중으로 얻는 할인과 저장 복원을 확인했습니다. 생성 균열의 장기 생존·성장·파밍 효용과 모바일 실기기 검증은 남아 있습니다. [개발 기록](../Implementation/Edict_Ranger_Expansion.md)
+
+English: all 30 Ranger active/BASIC core options now use independent policies. All 2,079 tests, 98 Ranger-specific cases and 13 native launches/restarts passed; 31 screenshots were reviewed. Actual traps, projectiles, follow-up walking, Mark, earned hit discounts and persistence were verified. Long-run generated-rift survival/growth/farming and mobile-device validation remain. [English record](../Implementation/Edict_Ranger_Expansion.en.md)
+
 **2026-09-13 전사 방어·함성·기본 공격:** 철벽·전투 함성·근접 기본 공격의 나머지 13개 옵션을 연결했습니다. 전사 핵심 옵션 30개가 모두 독립 판단을 사용합니다. 전체 검사 1,981개와 최종 앱 실행·재시작 5회가 통과했고 화면 17장을 검토했습니다. 실제 보호막·자원 회복·3회 적중으로 얻은 절제 할인과 저장 복원을 확인했습니다. `main`만 유지하며, 궁수 정책과 생성 균열의 장기 밸런스·모바일 실기기 검증은 남아 있습니다. [개발 기록](../Implementation/Edict_Warrior_Support_Expansion.md)
 
 English: all 13 remaining W05/W06/Warrior BASIC options are connected, completing 30 Warrior core options. All 1,981 tests and five final native processes passed; 17 screenshots were reviewed. Actual shields, resource recovery, earned three-hit LC02 discounts and persistence were verified. Only `main` remains. Ranger policies, long-run generated-rift balance and mobile-device validation remain. [English record](../Implementation/Edict_Warrior_Support_Expansion.en.md)

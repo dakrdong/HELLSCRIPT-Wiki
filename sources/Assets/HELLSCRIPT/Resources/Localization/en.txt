@@ -421,7 +421,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 광신 돌격병	Fanatic Charger
 광장으로	To the plaza
 교전	Engaged
-교전 전 매복은 긴급 제어용 직접 설치 조건이 아닙니다.	An ambush before the fight is not a reason to place one directly for emergency control.
 교전 전 매복은 설치 위치가 자신 아래일 때만 사용할 수 있습니다.	An ambush before the fight only works when the placement is under yourself.
 교전의 기준 대상	Reference target for the fight
 교전이 시작되면|다음 공격이 닿을 때	As the fight opens|As the next attack lands
@@ -671,7 +670,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 독	Poison
 독 견디는	Venomproof
 독 저항	Poison Resistance
-독 전염 교전에는 LA04 장착이 필요합니다.	A fight where poison spreads needs LA04 equipped.
+독 전염 교전에는 ‘검은 전염’ 장착이 필요합니다.	A fight where poison spreads needs Black Contagion equipped.
 독 피해	Poison Damage
 독무덤지기	Venom Gravekeeper
 독사의 탈피	Viper's Molt
@@ -1100,7 +1099,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 설치 위치의 감지 인원이 설정 기준보다 적습니다.	Fewer enemies are detected at the placement than your threshold requires.
 설치 조준	Placement aim
 설치 조준은 맹독 덫과 눈보라에만 사용합니다.	The placement aim is only used by Venom Trap and Blizzard.
-설치 후 무장·진입 조건을 거쳐 발동할 덫입니다.	A trap that will arm after placement and fire once an enemy enters.
 설치할 상황	When to place it
 성공 시 같은 단계	Same stage after a win
 성공 후	After a win
@@ -2818,7 +2816,7 @@ HP는 남은 비율로 비교합니다. 추적 시간은 접근·관측 위치 �
 함성은 현재 공격 우선순위와 실제 할인 비용으로 자원 부족을 판단합니다. 회오리와 동시에 쓰지 않으며, 준비가 끝나야 자원 40과 6초 공격 강화가 생깁니다.	Battle Shout checks resource shortage against the current attack order and actual discounted cost. It cannot run alongside Whirlwind. Its 40 resource and 6 s damage buff apply only after preparation.
 근접 기본 공격은 실제 2m 적중 때 자원 10과 절제 횟수를 얻습니다. 절제 대상 유지가 다른 액티브를 막지는 않으며, 대상이 사라지거나 공격할 수 없으면 다시 선택합니다.	Melee basic attacks grant 10 resource and Restraint progress only on an actual hit within 2 m. Holding a Restraint target does not block active skills; unavailable targets are selected again.
 
-강화가 먼저 소비하는 할인까지 반영해 기준 사격의 비용을 확인합니다. 그 사격을 강제로 예약하지 않으며, 다음 실제 기본·관통·다중 사격이 충전을 사용합니다. 독 전염은 자기 덫 중독과 LA04가 필요합니다.	The check includes discounts spent by the buff before the reference shot. It reserves no shot: the next actual basic, Pierce or Multi Shot consumes a charge. Poison spread requires your trap poison and LA04.
+강화가 먼저 소비하는 할인까지 반영해 기준 사격의 비용을 확인합니다. 그 사격을 강제로 예약하지 않으며, 다음 실제 기본·관통·다중 사격이 충전을 사용합니다. 독 전염에는 자기 덫 중독과 ‘검은 전염’이 필요합니다.	The check includes discounts spent by the buff before the reference shot. It reserves no shot: the next actual basic, Pierce or Multi Shot consumes a charge. Poison spread requires your trap poison and Black Contagion.
 강화의 기준 대상이 정예·보스가 아닙니다.	The reference target is not an elite or boss.
 같은 대상의 자기 표식을 조기 갱신하지 않습니다.	Your existing mark on the same target is not refreshed early.
 궁수 착지 후 보행 거리가 유효하지 않습니다. 저장 파일은 보존했습니다.	The Ranger's post-landing walking distance is invalid. Your save was preserved.
@@ -2843,7 +2841,7 @@ HP는 남은 비율로 비교합니다. 추적 시간은 접근·관측 위치 �
 절제 충전 또는 내부 재사용 대기시간이 남아 있습니다.	A Restraint charge or its internal cooldown remains.
 지원하지 않는 착지 후 보행 방침입니다. 저장 파일은 보존했습니다.	The post-landing walking policy is unsupported. Your save was preserved.
 직접 덫과 후퇴 덫은 무장·대기·발동 중인 것을 합쳐 두 개까지 유지합니다. 새 적 조건에 맞는 설치 지점을 찾으며, 설치만으로 즉시 중독되지 않습니다. 직접 설치를 꺼도 장비의 후퇴 덫은 생길 수 있습니다.	At most two direct and retreat traps remain across arming, waiting and active states. Placement checks newly covered targets; installation alone does not poison. Gear can create retreat traps with direct installation off.
-집중 사격에는 LA02가 필요합니다. 사격 위치를 바꿀 때도 전역 위험·추적 한도를 지키며, 이동 중에는 사격 비용을 쓰지 않습니다. 그림자 충전은 화살 세 발 전체에 한 번만 소비합니다.	Focused shots require LA02. Repositioning obeys global danger and pursuit limits and spends no shot cost while walking. All three arrows consume one Shadow charge together.
+집중 사격에는 ‘좁혀진 사선’이 필요합니다. 사격 위치를 바꿀 때도 전역 위험·추적 한도를 지키며, 이동 중에는 사격 비용을 쓰지 않습니다. 그림자 충전은 화살 세 발 전체에 한 번만 소비합니다.	Focused shots require Narrowed Line. Repositioning obeys global danger and pursuit limits and spends no shot cost while walking. All three arrows consume one Shadow charge together.
 착지 후 희망 거리까지 보행 후퇴합니다.	Walking back to the desired distance after landing.
 표식 대상이 사라졌거나 실제 사거리·시야를 벗어났습니다.	The mark target disappeared or left actual range or sight.
 표식은 동시에 하나만 유지합니다. 새 대상에게 실제 부여가 성공해야 기존 표식을 제거하며, 같은 대상의 표식을 조기 갱신하지 않습니다. 남은 HP가 가장 많은 적은 HP 비율이 아닌 실제 남은 양으로 비교합니다.	Only one own mark remains. The old mark is removed only after a successful new application; the same target is not refreshed early. Highest remaining HP compares actual health, not its percentage.
