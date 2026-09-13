@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 보석·소켓 기반:** 보석 7종·6단계·세 부위군의 효과 126개, 소켓 자료와 장비 보호·비교, 손상 보석의 원본 보관·복구를 연결했습니다. 최종 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 계정 공용 별도 보석 가방과 캐릭터별 장비 가방 중 보관 방식을 확인 중이며, 보상 지급과 장착·분리·합성 서비스는 후속 작업입니다. 로컬·원격에는 `main`만 남아 있고 클로드의 병합 내용도 유지됩니다. [개발 기록](../../Docs/Implementation/Gem_Socket_Foundation.md)
+
+English: all 126 gem/tier/slot effects, socket data, protected equipment, comparisons and original-preserving recovery are connected. All 2,380 final tests and three native processes passed; nine screenshots were reviewed. Storage ownership awaits the user's choice; rewards and socket/fusion services remain. Only main remains locally/remotely, with Claude's merged work included. [English record](../../Docs/Implementation/Gem_Socket_Foundation.en.md)
+
 **2026-09-13 자동 반복 사냥:** 실제 사용하는 행동 설정에 따라 성공·실패 후 다음 판과 종료 조건을 적용합니다. 완료 횟수·실제 시간·획득 금화·장비·단계 목표, 등급별 자동 정리와 가방 부족 대기, 재실행 후 결과 확인·명시적 이어가기를 연결했습니다. 전체 검사 2,198개와 실제 앱 실행·재시작 4회가 통과했으며, 화면 14장을 검토했습니다. [개발 기록](../../Docs/Implementation/Repeat_Hunt_Expansion.md)
 
 English: repeat hunts follow their actual edict or base configuration owner, including outcome policies, attempt/time/gold/equipment/stage targets, transactional grade-based cleanup and bag-space readiness. Saved results require an explicit resume after relaunch. All 2,198 Editor tests and four native launches/restarts passed; 14 screenshots were reviewed. [English record](../../Docs/Implementation/Repeat_Hunt_Expansion.en.md)
@@ -72,7 +76,7 @@ English: rift rarity now uses the active encounter stage, while sweeps use the s
 
 첫 보석 정상 획득과 같은 부위 코어 10개 달성은 각각 조기 해금 조건이며, 소비 후에도 권한을 유지합니다. 영웅별 스킬·패시브와 소탕 보상, 현재 균열 단계의 전투 콘텐츠는 계정 공통 메뉴 권한과 별도로 판정합니다. 기능 권한과 안내 완료 상태도 분리했습니다. 기존 저장에서 정당하게 열려 있던 기능·패시브와 기존 구매 권한, 단계별 등급 확률 및 레벨별 고정 재설정 비용을 보존합니다.
 
-보석 실물·소켓·합성 레시피와 인증된 계정 서버·다른 기기 동기화는 아직 연결되지 않았습니다. 보석 메뉴의 해금이 보석 기능 전체의 구현 완료를 뜻하지 않습니다. 첫 강화에 필요한 재료와 신규 영웅의 첫 클리어 난도도 후속 검증이 필요합니다. 무료 재화는 추가하지 않았습니다.
+보석 효과·소켓 자료·합성 계산과 장비 보호·복구는 구현했습니다. 실제 보석 획득·보관·장착·분리·합성 거래와 인증된 계정 서버·다른 기기 동기화는 아직 연결되지 않았습니다. 보석 메뉴의 해금이 보석 기능 전체의 구현 완료를 뜻하지 않습니다. 첫 강화에 필요한 재료와 신규 영웅의 첫 클리어 난도도 후속 검증이 필요합니다. 무료 재화는 추가하지 않았습니다.
 
 구체적인 조건과 U01~U30 검증 구분은 [해금 상세 명세](../../Docs/Design/HELLSCRIPT_Content_Unlock_Spec_v0.1.md)와 [구현·검증 기록](../../Docs/Implementation/Content_Unlock_Expansion.md)을 확인하세요. 공통 원본을 읽는 ‘콘텐츠 해금’ DB와 Excel의 해금·검증 시트도 추가했습니다.
 
@@ -84,7 +88,7 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 
 | 영역 | 확인한 구현 | 남은 범위 |
 | --- | --- | --- |
-| 장비·아이템화 | 베이스 24종, 접사 54종, 개별 전설 15종, 세트 6종과 세트 장비 24종이 현재 코드에 정의되어 있습니다. 장비 목록의 필터·정렬, 획득 순번과 일괄 판매·분해 미리보기를 연결했습니다. 2026-09-12에 목걸이 초희귀 전설 셋의 가중치를 1에서 10으로 올렸습니다. 보석·소켓과 장비 품질은 기획을 마쳤고 구현은 시작하지 않았습니다. | 모든 합법적 장착 조합, 장비 교체·편집·복원 경로와 여러 시드의 빌드 역할을 이어서 검사합니다. |
+| 장비·아이템화 | 베이스 24종, 접사 54종, 개별 전설 15종, 세트 6종과 세트 장비 24종이 현재 코드에 정의되어 있습니다. 장비 목록의 필터·정렬, 획득 순번과 일괄 판매·분해 미리보기를 연결했습니다. 2026-09-12에 목걸이 초희귀 전설 셋의 가중치를 1에서 10으로 올렸습니다. 보석·소켓은 효과·보호·저장 기반을 구현했고 실제 획득·서비스를 연결할 차례입니다. 장비 품질은 후속 구현입니다. | 모든 합법적 장착 조합, 장비 교체·편집·복원 경로와 여러 시드의 빌드 역할을 이어서 검사합니다. |
 | 능력치 | 2026-09-12에 클로드가 추가한 속성 57개와 접사 54종을 인수했습니다. 네 핵심 능력치에서 최종 수치를 계산하며, 성장 화면에서 능력치를 확인합니다. 기존 접사 번호 24개의 의미를 보존했습니다. 이동 속도는 실제 m/s로, 장비의 이동 속도 보너스는 %로 표시합니다. 최대 자원 증가도 전투 게이지에 반영합니다. 접사 체계별 960만 개 생성 검사에서 기존 옵션의 출현율 감소를 확인했고, 실제 추첨은 예상 분포와 맞았습니다. | 군중 제어 지속시간 감소와 기력 두 줄은 현재 적용 대상이 없어 장비에서 제외합니다. 과거 20단계 승리 12→6회는 현재 통합본의 성능으로 재사용하지 않습니다. 54종·24종의 각 600판 대조를 완료했습니다. 후속 전후 32판 진단에서 옛 M04·M05 규칙의 공격 중단을 확인했습니다. M04 연결 후 중단은 줄었지만 전역 생존이 꺼진 기본 문서의 사망은 늘었습니다. M06 전후 48판에서도 생존 설정은 모두 시간 초과했고 M03 중단은 8→68회로 늘었습니다. M06 제어 전환·공격 취소 비용과 보스 도달·성장·파밍 효용을 계속 검증합니다. |
 | 행동 편집 | 22개 조건을 공용 정의하고 규칙별 목표·이동과 행동 차단 이유를 연결했습니다. | 첫 플레이 안내, 규칙 이해도와 실제 터치 사용성을 검증합니다. |
 | 전투 | 준비·발사·도약·착지·채널, 투사체·덫, 상태 효과·보호막·비용 충전·세트 노출을 구현했습니다. | 전체 전설·세트 조합과 장시간·배속·중단 복원을 확대 검증합니다. |
@@ -125,7 +129,7 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 1. 전설·세트의 실제 장착·편집·복원과 6빌드의 여러 시드 비교를 마칩니다.
 2. 실제 성장·첫 플레이 안내·장비 정리·빌드 슬롯·훈련과 결과 분석을 연결합니다.
 3. 성소 광장의 담당자 4명과 광장의 정식 모델을 제작합니다. 보행, 정거장 탭, 도착 시 서비스 열기, 균열 관리자 화면은 구현되었습니다.
-4. 서버 계정·교차 저장·정산·구매와 보석의 검증된 적용표를 완성합니다.
+4. 서버 계정·교차 저장·정산·구매를 연결하고, 검증된 보석 효과표를 실제 획득·보관·장착·합성 서비스로 확장합니다.
 5. 행동 설계·사냥 칙령 편집·전투 HUD의 촘촘한 위젯을 터치 최소 크기에 맞춰 다시 배치하고, Android 빌드·실기기 입력·글꼴·성능·아트·음향·접근성을 검증합니다. 글자 크기 조절, 주요 조작의 터치 크기, 노치·홈 바 여백은 구현되었습니다.
 
 ## 2026-09-10에 추가된 진행 중 작업

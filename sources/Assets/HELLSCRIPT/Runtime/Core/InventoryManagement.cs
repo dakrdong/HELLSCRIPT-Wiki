@@ -85,6 +85,7 @@ namespace Hellscript
         {
             var reasons=new List<string>();if(item.equipped)reasons.Add("장착 중");if(item.locked)reasons.Add("잠금");
             if(account.heroes.Any(h=>Economy.Referenced(h,item)))reasons.Add("현재 설정·프리셋 참조");
+            if(GemCatalog.HasGem(item))reasons.Add("보석이 장착됨");
             if(item.rarity>=3)reasons.Add("전설·세트는 개별 처리");return string.Join(" · ",reasons);
         }
         internal static string Fingerprint(AccountSave account,Item item)=>Hash(JsonUtility.ToJson(item)+"|"+Exclusion(account,item));

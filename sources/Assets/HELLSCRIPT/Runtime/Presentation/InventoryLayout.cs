@@ -6,9 +6,10 @@ namespace Hellscript
     {
         public readonly bool split,three;
         public readonly Rect header,footer,list,detail,comparison,tool;
-        public InventoryLayout(float width,float height,bool detailOpen)
+        public InventoryLayout(float width,float height,bool detailOpen,float footerHeight=72)
         {
-            float w=Mathf.Max(1,width),h=Mathf.Max(1,height),head=h<600?76:100,foot=72;
+            float w=Mathf.Max(1,width),h=Mathf.Max(1,height),head=h<600?76:100;
+            float foot=Mathf.Clamp(footerHeight,72,Mathf.Max(72,h-head-64));
             split=w>=820;three=w>=1440;
             header=new Rect(0,0,w,head);footer=new Rect(0,h-foot,w,foot);
             tool=new Rect(10,head+8,w-20,Mathf.Max(1,h-head-foot-16));

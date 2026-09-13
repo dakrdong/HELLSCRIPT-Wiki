@@ -25,6 +25,8 @@ namespace Hellscript
         public float damageReduction, closeReduction, distantReduction, injuredReduction, physicalReduction;
         public float lifeRegen, potionHealing, ccReduction, experienceGain, goldFind;
         public float maxResource, maxStamina, staminaRegen;
+        public float gemBuffReduction,gemPeriodicReduction,gemArmorPercent;
+        public float[] gemBonuses=new float[StatCatalog.Count];
         public float[] runeBonuses=new float[StatCatalog.Count];
         public float runeAttack;
         public float[] runeSkillPower=new float[18],runeSkillCost=new float[18];
@@ -38,6 +40,7 @@ namespace Hellscript
         float baseSpeed;
         public float Bonus(StatId id)=>bonuses[(int)id];
         public float SpeedWithBonus(float bonus)=>baseSpeed*(1+Mathf.Min(.5f,bonuses[21]/100+bonus));
+        public float BuffReduction(float other)=>Mathf.Min(.5f,gemBuffReduction+Mathf.Max(0,other));
         // The rating that mitigates one element: armour for physical, and the element's own
         // resistance beside the all-resistance roll for the other five. Read rather than stored,
         // so that overwriting armour or resistance moves what depends on them.
@@ -106,6 +109,16 @@ namespace Hellscript
             foreach(var item in equipped)
             {
                 for(int i=0;i<bonuses.Length;i++)bonuses[i]+=item.Value(i);
+                if(GemCatalog.TryEffect(item,out var gem,out float value))
+                {
+                    switch(gem.kind)
+                    {
+                        case GemEffectKind.Stat:bonuses[(int)gem.stat]+=value;gemBonuses[(int)gem.stat]+=value;break;
+                        case GemEffectKind.BuffReduction:gemBuffReduction+=value/100;break;
+                        case GemEffectKind.PeriodicReduction:gemPeriodicReduction+=value/100;break;
+                        case GemEffectKind.ArmorPercent:gemArmorPercent+=value/100;break;
+                    }
+                }
                 if(!string.IsNullOrEmpty(item.special))specials.Add(item.special);
                 var unique=ItemCatalog.Unique(item.special);
                 if(unique!=null&&!string.IsNullOrEmpty(unique.setId))
@@ -131,6 +144,7 @@ namespace Hellscript
                 else resistance+=upgraded;
                 resistance+=basis.resistance*(1+.08f*(item.level-1));
             }
+            armor*=1+gemArmorPercent;
             hp=(new[]{300,240,210}[c]+new[]{35,28,25}[c]*(level-1)+flatHp)*(1+bonuses[1]/100);
             damage=(weapon+runeAttack)*(1+.002f*primary);attackPower=damage;
             regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1.2f;
@@ -196,7 +210,7 @@ namespace Hellscript
             =>ItemGenerator.Create(c,slot,rarity,level,ref rng,id);
         public static bool Referenced(HeroSave hero,Item item)=>
             (hero.build.equipmentIds?.Contains(item.id)??false)||hero.presets.Any(p=>p?.equipmentIds?.Contains(item.id)??false);
-        public static bool Protected(HeroSave hero,Item item)=>item.locked||item.equipped||Referenced(hero,item);
+        public static bool Protected(HeroSave hero,Item item)=>item.locked||item.equipped||Referenced(hero,item)||GemCatalog.HasGem(item);
         static bool Owned(AccountSave a,Item item)=>item!=null&&a.heroes.Any(h=>h.inventory.Contains(item));
         static bool TownService(AccountSave a)=>a.suspendedRun==null||a.suspendedRun.phase==RunPhase.Cleared||a.suspendedRun.phase==RunPhase.Failed;
         public static string EquipError(HeroSave hero,Item item)

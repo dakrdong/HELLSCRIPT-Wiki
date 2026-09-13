@@ -20,12 +20,13 @@ namespace Hellscript
         string Protection(Item item)
         {
             var labels=new List<string>();if(item.equipped)labels.Add("장착 중");if(item.locked)labels.Add("잠금");
+            if(GemCatalog.HasGem(item))labels.Add("보석이 장착됨");
             foreach(var h in game.Store.Data.heroes)
             {
                 if(h.build.equipmentIds?.Contains(item.id)??false)labels.Add("현재 설정 참조");
                 for(int n=0;n<h.presets.Count;n++)if(h.presets[n]?.equipmentIds?.Contains(item.id)??false)labels.Add(Loc.F("{0} 프리셋 {1}", game.catalog.classNames[(int)h.heroClass], n+1));
             }
-            return string.Join(" · ",labels);
+            return string.Join(" · ",labels.Select(Loc.T));
         }
         void ItemTransaction(string request,string operation,Func<AccountSave,bool> mutation,Action refresh,string success)
         {
@@ -54,6 +55,11 @@ namespace Hellscript
             CompareStat("치명 확률 %",before.crit*100,after.crit*100);CompareStat("치명 피해 %",before.critDamage*100,after.critDamage*100);
             CompareStat("자원 회복 / 초",before.regen,after.regen);CompareStat("자원 소모 감소 %",before.costReduction*100,after.costReduction*100);CompareStat("쿨타임 감소 %",before.cdr*100,after.cdr*100);CompareStat("이동속도 m/s",before.speed,after.speed);
             for(int i=4;i<=9;i++)if(before.bonuses[i]!=after.bonuses[i])CompareStat(StatCatalog.Get(i),before.bonuses[i],after.bonuses[i]);
+            foreach(var stat in new[]{StatId.FireResistance,StatId.ColdResistance,StatId.LightningResistance,StatId.PoisonResistance,StatId.ShadowResistance,StatId.BarrierGeneration,StatId.PotionHealing})
+                if(Mathf.Abs(before.Sheet(stat)-after.Sheet(stat))>.0001f)CompareStat(StatCatalog.Get(stat),before.Sheet(stat),after.Sheet(stat));
+            if(before.gemBuffReduction!=after.gemBuffReduction)CompareStat("보석의 받는 피해 감소 %",before.gemBuffReduction*100,after.gemBuffReduction*100);
+            if(before.gemPeriodicReduction!=after.gemPeriodicReduction)CompareStat("보석의 지속 피해 감소 %",before.gemPeriodicReduction*100,after.gemPeriodicReduction*100);
+            if(GemCatalog.HasGem(old))Note(content,Loc.F("교체로 빠지는 보석 효과\n{0}\n보석은 기존 장비에 남습니다.",GemCatalog.SocketSummary(old)),19,118,gold);
             foreach(var set in ItemCatalog.Sets)
             {
                 int from=before.SetPieces(set.id),to=after.SetPieces(set.id);if(from==0&&to==0)continue;

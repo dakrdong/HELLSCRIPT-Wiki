@@ -202,7 +202,7 @@ namespace Hellscript
             bool inside=EnemyCombat.Contains(EnemyCombat.HazardThreat(h),State.position),visible=Map.LineClear(h.position,State.position);
             ObserveHazardImpact(h,inside,visible);
             if(!inside||!visible)return;
-            Hurt(h.damage,h.element,h.enemyId.ToString(),h.definitionId,h.actionId,h.id);
+            Hurt(h.damage,h.element,h.enemyId.ToString(),h.definitionId,h.actionId,h.id,h.interval>0?DamageKind.Periodic:DamageKind.Direct);
             if(h.heroSlow>0)State.enemySlowTime=Mathf.Max(State.enemySlowTime,2);
         }
         bool EnemyThreatAt(Vector2 point,float warning,bool activeOnly=false)

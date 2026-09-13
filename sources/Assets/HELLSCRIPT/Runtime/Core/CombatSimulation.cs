@@ -397,7 +397,7 @@ namespace Hellscript
             if(!hostile&&kind==13)State.effects.RemoveAll(f=>OwnBlizzard(f)&&f.duration<=.00001f);
             if(!hostile&&(kind==8||kind==13))
             {var same=State.effects.Where(e=>!e.hostile&&e.kind==kind&&(string.IsNullOrEmpty(e.casterId)||e.casterId==State.heroId)).OrderBy(e=>e.id).ToList();if(same.Count>=2)State.effects.Remove(same[0]);}
-            State.effects.Add(new GroundEffect{id=State.nextId++,position=pos,radius=radius,delay=delay,duration=duration,damage=damage,hostile=hostile,kind=kind,createdAt=State.time,
+            State.effects.Add(new GroundEffect{id=State.nextId++,position=pos,radius=radius,delay=delay,duration=duration,damage=damage,hostile=hostile,periodic=hostile&&duration>.11f,kind=kind,createdAt=State.time,
                 snapshot=hostile?null:CaptureDamage(),element=hostile?element:kind==13?2:kind==12?1:kind==8?4:element,
                 definitionId=definition??(hostile?"ENEMY_GROUND":kind==13?"M02":kind==12?"LM02":kind==8?"LEGACY_TRAP":"SAB4"),casterId=caster??(hostile?"ENEMY":State.heroId),
                 rootCastId=root!=0?root:State.heroAction.id,followsTarget=!hostile&&kind==13&&(followsTarget??Stats.specials.Contains("LM01"))});
@@ -430,12 +430,12 @@ namespace Hellscript
                      Hit(e,1.2f,0,false,0,GroundSnapshot(fx),definition:"SAB4",root:fx.rootCastId,instance:fx.id,kind:DamageKind.Set);if(++hits>=5)break;}
                     Visual?.Invoke(fx.position,fx.end,6,1);State.effects.Remove(fx);continue;
                 }
-                fx.duration-=dt;fx.tick-=dt;
+                fx.periodic=fx.PeriodicIncoming;fx.duration-=dt;fx.tick-=dt;
                 if(fx.tick<=.00001f)
                 {
                     fx.tick+=.5f;float amount=fx.duration<.11f&&fx.kind!=8?fx.damage:fx.damage*.5f;
                     if(fx.hostile)
-                    {float d=Vector2.Distance(fx.position,State.position);if(d<fx.radius&&(fx.kind!=6||d>2))Hurt(amount,fx.element,fx.casterId??"ENEMY",fx.definitionId??"ENEMY_GROUND",fx.rootCastId,fx.id);}
+                    {float d=Vector2.Distance(fx.position,State.position);if(d<fx.radius&&(fx.kind!=6||d>2))Hurt(amount,fx.element,fx.casterId??"ENEMY",fx.definitionId??"ENEMY_GROUND",fx.rootCastId,fx.id,fx.periodic?DamageKind.Periodic:DamageKind.Direct);}
                     else foreach(var e in AreaTargets(fx.position,fx.radius,default,360))
                     {
                         var snapshot=GroundSnapshot(fx);

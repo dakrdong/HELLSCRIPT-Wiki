@@ -2,9 +2,13 @@
 
 갱신일: 2026-09-13
 
-최신 실행본은 `Builds/macOS-RepeatHunt/HELLSCRIPT.app`입니다. **2026-09-13 자동 반복 사냥:** 성공·실패 후 단계와 횟수·시간·획득 목표, 등급별 자동 정리, 가방·저장 오류 대기와 결과 복원을 연결했습니다. 전체 검사 2,198개와 실제 앱 실행·재시작 4회가 통과했으며, 화면 14장을 검토했습니다. [개발 기록](Repeat_Hunt_Expansion.md)
+최신 실행본은 `Builds/macOS-GemSockets/HELLSCRIPT.app`입니다. **2026-09-13 보석·소켓 기반:** 보석 7종·6단계의 부위별 효과, 보석 장비의 판매·분해 보호, 저장 복구와 장비 비교를 연결했습니다. 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 보석 보관 방식은 사용자 확인 중이며, 획득·장착·분리·합성 서비스 연결은 남아 있습니다. [개발 기록](Gem_Socket_Foundation.md)
 
-English: the latest player connects repeat outcome policies and attempt/time/acquisition targets, transactional grade-based cleanup, bag/save blockers and saved result recovery. All 2,198 Editor tests and four native launches/restarts passed; 14 screenshots were reviewed. [English record](Repeat_Hunt_Expansion.en.md)
+English: the latest player includes gem effects, socket protection, persistence/recovery and inspection UI. All 2,380 Editor tests and three native processes passed; nine screenshots were reviewed. Storage ownership awaits the user's choice; acquisition and socket/fusion services remain. [English record](Gem_Socket_Foundation.en.md)
+
+2026-09-13 이전 실행본은 `Builds/macOS-RepeatHunt/HELLSCRIPT.app`입니다. **자동 반복 사냥:** 성공·실패 후 단계와 횟수·시간·획득 목표, 등급별 자동 정리, 가방·저장 오류 대기와 결과 복원을 연결했습니다. 전체 검사 2,198개와 실제 앱 실행·재시작 4회가 통과했으며, 화면 14장을 검토했습니다. [개발 기록](Repeat_Hunt_Expansion.md)
+
+English: the previous player connects repeat outcome policies and attempt/time/acquisition targets, transactional grade-based cleanup, bag/save blockers and saved result recovery. All 2,198 Editor tests and four native launches/restarts passed; 14 screenshots were reviewed. [English record](Repeat_Hunt_Expansion.en.md)
 
 2026-09-13 이전 실행본은 `Builds/macOS-CombatHistory/HELLSCRIPT.app`입니다. **전투 기록 보관:** 최근 10회에 스킬 집계·마지막 5초·당시 규칙과 칙령·종료 장비를 저장하고 다시 조회할 수 있습니다. 자동 반복 대기와 읽던 문단 유지, 다음 균열·캐릭터 변경·재시작을 검증했습니다. 전체 검사 2,156개와 실제 앱 검사 3회가 통과했습니다. [개발 기록](Combat_History_Expansion.md)
 

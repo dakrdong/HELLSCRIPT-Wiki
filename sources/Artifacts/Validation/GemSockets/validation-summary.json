@@ -1,0 +1,114 @@
+{
+  "validatedUtc": "2026-09-13T06:18:09.197778+00:00",
+  "phase": "GemSockets foundation",
+  "engine": "Unity 6000.6.0f1",
+  "result": "passed",
+  "fullEditor": {
+    "id": "2",
+    "testcasecount": "2380",
+    "result": "Passed",
+    "total": "2380",
+    "passed": "2380",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-13 06:08:58Z",
+    "end-time": "2026-09-13 06:14:29Z",
+    "duration": "330.5403217"
+  },
+  "focusedEarlier": {
+    "id": "2",
+    "testcasecount": "378",
+    "result": "Passed",
+    "total": "378",
+    "passed": "378",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-13 05:36:01Z",
+    "end-time": "2026-09-13 05:36:07Z",
+    "duration": "6.0678633"
+  },
+  "fullProcess": {
+    "startedUtc": "2026-09-13T06:08:36.489893+00:00",
+    "pid": 25660,
+    "endedUtc": "2026-09-13T06:14:31.345184+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-13T06:07:06.972828+00:00",
+    "pid": 25117,
+    "endedUtc": "2026-09-13T06:07:45.476731+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "initial": {
+      "startedUtc": "2026-09-13T06:08:36.487228+00:00",
+      "pid": 25659,
+      "endedUtc": "2026-09-13T06:08:55.684901+00:00",
+      "exitCode": 0
+    },
+    "restart": {
+      "startedUtc": "2026-09-13T06:08:55.690907+00:00",
+      "pid": 25984,
+      "endedUtc": "2026-09-13T06:09:01.254577+00:00",
+      "exitCode": 0
+    },
+    "recover": {
+      "startedUtc": "2026-09-13T06:09:01.271145+00:00",
+      "pid": 26042,
+      "endedUtc": "2026-09-13T06:09:07.508249+00:00",
+      "exitCode": 0
+    }
+  },
+  "comparison": {
+    "method": "Seeded level-30 legal rare gear, tier-six gems on five eligible slots, stage 10, seed 73551, ignore new loot if the equipment bag is full. Fixed-step native simulation. Gem acquisition was not exercised. One paired sample; not a balance guarantee. Damage totals use the run-wide telemetry.",
+    "rows": [
+      {
+        "seed": 73551,
+        "stage": 10,
+        "kills": 115,
+        "gemmed": false,
+        "result": "Cleared",
+        "seconds": 230.6594696044922,
+        "maximumHp": 1474.489990234375,
+        "armor": 350.9599914550781,
+        "damageDealt": 27853.230506896973,
+        "damageReceived": 506.08611011505127
+      },
+      {
+        "seed": 73551,
+        "stage": 10,
+        "kills": 117,
+        "gemmed": true,
+        "result": "Cleared",
+        "seconds": 222.3089599609375,
+        "maximumHp": 1474.489990234375,
+        "armor": 350.9599914550781,
+        "damageDealt": 29114.825885772705,
+        "damageReceived": 303.27338218688965
+      }
+    ]
+  },
+  "screenshots": 9,
+  "directlyReviewed": 9,
+  "recoveryArchiveMatchesExactOriginal": true,
+  "scope": [
+    "126 gem/tier/slot effects, stacking and cost calculations",
+    "Actual equipped stats, combat reduction and UI",
+    "Socket structure validation, protected gear and durable save recovery"
+  ],
+  "limits": [
+    "Container ownership and capacity require the pending user choice.",
+    "Gem acquisition and socket creation/insertion/removal/replacement/fusion services are not connected.",
+    "Native fixtures explicitly seed legal gems and gear; they are not acquisition evidence.",
+    "One paired stage-10 fixed-step native comparison is not a balance or farming guarantee.",
+    "No physical mobile touch, long-run performance or online service verification."
+  ]
+}

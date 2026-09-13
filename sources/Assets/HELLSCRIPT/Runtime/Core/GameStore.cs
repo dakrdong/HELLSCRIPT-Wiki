@@ -11,6 +11,8 @@ namespace Hellscript
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
+        public string GemRecoveryMessage {get;private set;}="";
+        public string GemRecoveryArchive {get;private set;}="";
         public int LocalIdleGoldAwarded {get;private set;}
         public int LocalIdleMaterialsAwarded {get;private set;}
         readonly string path;
@@ -30,7 +32,7 @@ namespace Hellscript
             ContentUnlocks.Normalize(Data);
             SettleLocalIdle();
         }
-        static AccountSave Read(string file)
+        AccountSave Read(string file)
         {
             try
             {
@@ -45,7 +47,18 @@ namespace Hellscript
                     if(a.suspendedRun!=null)allItems=allItems.Concat(a.suspendedRun.drops.Select(d=>d.item)).Concat(a.suspendedRun.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
                     if(a.repeatHunt?.pendingResult!=null)allItems=allItems.Concat(a.repeatHunt.pendingResult.drops.Select(d=>d.item)).Concat(a.repeatHunt.pendingResult.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
                     if(allItems.Any(i=>i.contentVersion>ItemCatalog.Version))throw new NotSupportedException("더 새로운 장비 데이터가 있어 불러오기를 중단했습니다. 저장 파일은 보존했습니다.");
+                    var socketItems=allItems.ToArray();
+                    if(socketItems.Any(i=>i.sockets!=null&&i.sockets.Count>0&&(!GemCatalog.AllowsSocket(i)||i.sockets.Count>1||i.sockets[0]==null||i.sockets[0].index!=0)))
+                        throw new NotSupportedException(Loc.T("소켓 구조를 안전하게 읽을 수 없어 불러오기를 중단했습니다. 저장 파일은 보존했습니다."));
+                    bool repaired=false;foreach(var item in socketItems)repaired|=GemCatalog.RepairGemValues(item);
                     ValidateItems(a);
+                    if(repaired)
+                    {
+                        string archive=file+".gem-recovery-"+Guid.NewGuid().ToString("N")+".json";
+                        try{File.Copy(file,archive,false);}
+                        catch(Exception error){throw new NotSupportedException(Loc.T("보석 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다."),error);}
+                        GemRecoveryArchive=archive;GemRecoveryMessage=Loc.T("잘못된 보석 값을 빈 소켓으로 복구했습니다. 장비와 원본 저장 파일은 보존했습니다.");
+                    }
                 }
                 return a;
             }
@@ -230,6 +243,11 @@ namespace Hellscript
                 ContentUnlocks.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
                 foreach(var hero in data.heroes)NormalizePresetSlots(hero);
+                // Old players reject the item version instead of silently dropping socket fields.
+                var socketItems=data.heroes.SelectMany(h=>h.inventory).Concat(data.warehouse);
+                if(data.suspendedRun!=null)socketItems=socketItems.Concat(data.suspendedRun.drops.Select(d=>d.item)).Concat(data.suspendedRun.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
+                if(data.repeatHunt?.pendingResult!=null)socketItems=socketItems.Concat(data.repeatHunt.pendingResult.drops.Select(d=>d.item)).Concat(data.repeatHunt.pendingResult.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
+                foreach(var item in socketItems)if(item.sockets?.Count>0)item.contentVersion=Math.Max(GemCatalog.SocketItemVersion,item.contentVersion);
                 File.WriteAllText(path+".tmp",JsonUtility.ToJson(data,true));
                 if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
                 Error="";return true;

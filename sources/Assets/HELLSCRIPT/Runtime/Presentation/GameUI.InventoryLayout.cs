@@ -183,6 +183,7 @@ namespace Hellscript
                 var def=ItemCatalog.Affix(roll.affixId);
                 InventoryNote(parent,Loc.F("{0} · {1} [{2}]\n{3} +{4:0.##} · 가능 범위 {5:0.##}~{6:0.##}{7}{8}", (roll.side==AffixSide.Prefix?"접두":"접미"), def.phrase, roll.tierId, StatCatalog.Name(def.stat), roll.value, def.Value(item.level,0), def.Value(item.level,10000), (roll.legacyRoll?"\n기존 수치를 보존한 옵션입니다.":""), (item.rerollSlotId==roll.slotId?"\n재설정 대상으로 선택한 줄입니다.":"")));
             }
+            InventoryNote(parent,GemCatalog.SocketSummary(item),20,muted);
             if(unique!=null)
             {
                 if(unique.setId=="")InventoryNote(parent,unique.Description,21,ItemColor(item));
@@ -288,7 +289,7 @@ namespace Hellscript
             foreach(var entry in plan.entries.Where(e=>e.excludedReason==""))InventoryNote(body,entry.name+(operation==InventoryBulkOperation.Sell?Loc.F("\n골드 +{0:N0}", entry.gold):Loc.F("\n재료 +{0:N0}", entry.materials)));
             if(plan.Count==0)InventoryNote(body,"처리할 장비가 없습니다.");
             InventoryNote(body,"제외된 장비",22,gold);
-            foreach(var entry in plan.entries.Where(e=>e.excludedReason!=""))InventoryNote(body,Loc.F("{0}\n{1}",entry.name,entry.excludedReason),19,muted);
+            foreach(var entry in plan.entries.Where(e=>e.excludedReason!=""))InventoryNote(body,Loc.F("{0}\n{1}",entry.name,Loc.StoredText(entry.excludedReason)),19,muted);
             FooterButton(0,2,"취소",CloseInventoryTool);
             bool committed=false;var confirm=Button(footer,operation==InventoryBulkOperation.Sell?"판매 확정":"분해 확정",()=>
             {
@@ -340,7 +341,21 @@ namespace Hellscript
             if(!inventoryDirty&&size==inventorySize&&safe==inventorySafe)return;
             var listAnchor=DialogReadingAnchor.Capture(inventoryList);var detailAnchor=DialogReadingAnchor.Capture(inventoryDetail);var compareAnchor=DialogReadingAnchor.Capture(inventoryComparison);var toolAnchor=DialogReadingAnchor.Capture(inventoryTool);
             Canvas.ForceUpdateCanvases();size=root.rect.size;inventorySize=size;inventorySafe=safe;inventoryDirty=false;
-            var plan=new InventoryLayout(size.x,size.y,inventorySession.detailOpen);
+            // Size the fixed actions from their translated text before reserving the reading area.
+            // At 140% a short landscape window may need a third line on its return button.
+            Place(footer,0,size.y-72,size.x,72);
+            foreach(var button in footer.GetComponentsInChildren<Button>())
+            {
+                var r=(RectTransform)button.transform;r.offsetMin=new Vector2(4,12);r.offsetMax=new Vector2(-4,-4);
+                var label=button.GetComponentInChildren<Text>();label.fontSize=size.x<600?17:20;
+                string caption=size.x<600&&button.name=="성소로"?"뒤로":size.x<600&&button.name=="창고"?"보관함":button.name;
+                label.text=Loc.T(caption);
+            }
+            Canvas.ForceUpdateCanvases();
+            float footerHeight=72;
+            foreach(var label in footer.GetComponentsInChildren<Text>())
+                footerHeight=Mathf.Max(footerHeight,label.preferredHeight-label.rectTransform.offsetMax.y+label.rectTransform.offsetMin.y+18);
+            var plan=new InventoryLayout(size.x,size.y,inventorySession.detailOpen,footerHeight);
             Place(header,plan.header.x,plan.header.y,plan.header.width,plan.header.height);Place(footer,plan.footer.x,plan.footer.y,plan.footer.width,plan.footer.height);
             headerTitle.fontSize=size.x<600?23:28;Place(headerTitle.rectTransform,12,6,size.x-150,36);
             headerSubtitle.fontSize=17;Place(headerSubtitle.rectTransform,12,44,size.x-152,plan.header.height-46);
@@ -355,8 +370,6 @@ namespace Hellscript
             inventoryComparison.gameObject.SetActive(!tools&&plan.three);inventoryTool.gameObject.SetActive(tools);
             foreach(var row in inventoryDetailRows)if(row!=null)row.SetParent(inventoryDetail.content,false);
             foreach(var row in inventoryComparisonRows)if(row!=null)row.SetParent(plan.three?inventoryComparison.content:inventoryDetail.content,false);
-            foreach(var button in footer.GetComponentsInChildren<Button>())
-            {var r=(RectTransform)button.transform;r.offsetMin=new Vector2(4,12);r.offsetMax=new Vector2(-4,-4);button.GetComponentInChildren<Text>().fontSize=size.x<600?17:20;}
             Canvas.ForceUpdateCanvases();foreach(var scroll in new[]{inventoryList,inventoryDetail,inventoryComparison,inventoryTool})if(scroll.gameObject.activeSelf)FitInventoryContent(scroll);
             Canvas.ForceUpdateCanvases();listAnchor?.Restore();detailAnchor?.Restore();compareAnchor?.Restore();toolAnchor?.Restore();
             if(inventoryReading==inventoryDetail)detailAnchor?.Restore();else if(inventoryReading==inventoryComparison)compareAnchor?.Restore();

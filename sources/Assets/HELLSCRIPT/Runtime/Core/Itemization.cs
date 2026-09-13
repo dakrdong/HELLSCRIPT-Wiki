@@ -78,7 +78,7 @@ namespace Hellscript
     // Stable content IDs are authoritative. Legacy indices are only an import adapter.
     public static class ItemCatalog
     {
-        public const int Version=2;
+        public const int Version=3;
         const AffixSide P=AffixSide.Prefix,S=AffixSide.Suffix;
         public static readonly IReadOnlyList<ItemBaseDefinition> Bases=Array.AsReadOnly(new[]{
             new ItemBaseDefinition("B01","녹슨 도검",0,0,0,17,0,.15f),new ItemBaseDefinition("B02","강철 대검",1,0,0,20),new ItemBaseDefinition("B03","묵철 도끼",2,0,0,23,0,-.15f),
@@ -224,6 +224,7 @@ namespace Hellscript
         }
         public static void Validate(Item item)
         {
+            GemCatalog.ValidateSockets(item);
             var b=Base(item.baseId);
             if(string.IsNullOrWhiteSpace(item.id)||item.slot!=b.slot||item.level<1||item.rarity<0||item.rarity>3||item.enhancement<0||item.enhancement>5||item.investedMaterials<0||item.rerolls<0||item.contentVersion<1||item.contentVersion>Version)
                 throw new InvalidOperationException(Loc.F("장비 기본 데이터가 올바르지 않습니다: {0}", item.id));

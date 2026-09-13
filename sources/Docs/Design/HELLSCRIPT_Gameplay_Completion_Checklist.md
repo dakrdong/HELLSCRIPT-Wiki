@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 보석·소켓 구현 갱신:** 보석 효과·장비 보호·비교·저장 복구의 전체 검사 2,380개와 실제 앱 검사 3회, 화면 9장 검토를 마쳤습니다. 사용자에게 보관 방식을 확인 중이며, 보석을 얻고 보관해 장착·분리·합성하는 전체 순환은 아직 완료 기준에 도달하지 않았습니다. 같은 시드의 빈 소켓·보석 장착 대조 1쌍은 전투 연결의 근거로만 사용합니다. [개발 기록](../Implementation/Gem_Socket_Foundation.md)
+
+English: gem effects, protection, comparisons and save recovery passed all 2,380 tests and three native processes, with nine screenshots reviewed. Storage ownership is pending; acquisition/storage/socket/fusion gameplay is incomplete. One same-seed empty-versus-gemmed comparison verifies the combat connection without establishing balance. [English record](../Implementation/Gem_Socket_Foundation.en.md)
+
 작성일: 2026-09-08 · 버전: v1.2 상세안 · 상태: 후속 개발을 위한 상세 시험안
 
 **2026-09-09 추가 기획:** [사냥 칙령 상세안](HELLSCRIPT_Hunt_Edict_Detail.md)의 명시적 저장·공유 코드·프리셋 5칸·미장착 스킬 설정 보존·전투 중 스킬 교체 기준을 함께 적용합니다. 아래의 기존 3칸·전투 중 장착 잠금에 관한 기준은 이 추가 요구의 범위에서 대체됩니다. 실제 구현·검증 완료 기록은 아닙니다.

@@ -85,6 +85,7 @@ namespace Hellscript
         public bool reviewed;
         public HeroClass lootClass;
         public List<AffixRoll> rolls=new List<AffixRoll>();
+        public List<SocketState> sockets=new List<SocketState>();
         public int baseIndex, slot, rarity, level=1, enhancement;
         public bool locked, equipped;
         public int rerollIndex=-1, rerolls;
@@ -200,6 +201,9 @@ namespace Hellscript
         public Vector2 position, end;
         public float radius, delay, duration, tick, damage;
         public bool hostile;
+        public bool periodic;
+        // Legacy hostile ground kind 4 is a repeating zone even on its final saved tick.
+        public bool PeriodicIncoming=>hostile&&(periodic||duration>.11f||kind==4);
         public DamageSnapshot snapshot;
     }
     [Serializable]

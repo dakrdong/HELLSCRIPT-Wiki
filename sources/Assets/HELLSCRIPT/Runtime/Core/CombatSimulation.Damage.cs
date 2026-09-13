@@ -79,7 +79,7 @@ namespace Hellscript
             }
             return damage;
         }
-        void Hurt(float damage,int element=0,string caster="ENEMY",string definition="ENEMY_ATTACK",int root=0,int instance=0)
+        void Hurt(float damage,int element=0,string caster="ENEMY",string definition="ENEMY_ATTACK",int root=0,int instance=0,DamageKind kind=DamageKind.Direct)
         {
             var attacker=Attacker(caster);
             // Diablo IV settles dodge before anything else. A dodged hit lands nothing, so none of
@@ -91,12 +91,12 @@ namespace Hellscript
                 Log("DODGE","공격을 회피했습니다.");return;
             }
             bool blocked=BlockIncoming();
-            var numbers=IncomingDamageNumbers(damage,element,IncomingReduction(attacker,element,blocked));
+            var numbers=IncomingDamageNumbers(damage,element,IncomingReduction(attacker,element,blocked),kind==DamageKind.Periodic);
             if(blocked)EffectEvent(definition,"BLOCKED",instance,root,value:numbers.final);
             float before=State.health,absorbed=AbsorbDamage(numbers.final);State.health=Mathf.Max(0,State.health-(numbers.final-absorbed));
             float hpLoss=Mathf.Min(Mathf.Max(0,before),Mathf.Max(0,numbers.final-absorbed));
             State.receivedDamage.Add(new DamageReceived{time=State.time,hp=hpLoss,absorbed=absorbed});
-            RecordDamage(new DamageEvent{id=State.nextDamageId++,incoming=true,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=caster,element=element,tick=EffectTick,time=State.time,
+            RecordDamage(new DamageEvent{id=State.nextDamageId++,incoming=true,kind=kind,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=caster,element=element,tick=EffectTick,time=State.time,
                 baseAttack=damage,independent=1,criticalMultiplier=1,attackBeforeDefense=numbers.beforeDefense,defenseReduction=numbers.defenseReduction,buffReduction=numbers.buffReduction,finalDamage=numbers.final,absorbed=absorbed,hpLoss=hpLoss});
             RecordTickIncomingDamage(numbers.final,hpLoss,caster,definition);
             if(before>Stats.hp*.3f&&State.health>0&&State.health<=Stats.hp*.3f&&hpLoss>0&&Stats.specials.Contains("LW04")&&State.build.activeSkills.Contains(1)&&State.cooldowns[1]>0&&ItemEffects.lw04Cooldown<=.00001f)

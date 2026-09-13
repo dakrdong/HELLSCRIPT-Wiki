@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 보석·소켓 기반:** 효과표 126개, 장착 능력치·피격 감소, 장비 보호·비교와 저장 복구를 구현했습니다. 최종 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 다음 연결은 보석 보관 방식 확정 → 소유권·용량·저장 → 균열·소탕 보상과 가방 부족 처리 → 소켓 내기·장착·교체·분리·합성 서비스입니다. 별도 계정 공용 가방 50칸·묶음당 999개는 권장안이며 아직 확정하지 않았습니다. [개발 기록](../Implementation/Gem_Socket_Foundation.md)
+
+English: 126 effect rows, equipped stats/reduction, protection, comparisons and recovery are implemented; all 2,380 tests and three native processes passed, with nine screenshots reviewed. Next: confirm storage ownership, connect capacity/persistence, rewards/full-bag handling and socket/fusion services. A shared 50-slot gem bag with 999 per stack remains a recommendation awaiting confirmation. [English record](../Implementation/Gem_Socket_Foundation.en.md)
+
 **2026-09-13 균열 출구 선택 수정:** 현재 방의 유효 출구를 먼저 고르고, 성소의 실제 사용 거리 안에 들어온 뒤 사용하도록 수정했습니다. 균열 대조 360판에서 기존 규칙 169/180판, 핵심 기본값 173/180판이 클리어했고 성소 왕복 4판이 해결됐습니다. 룬 완료본을 포함한 최신 메인의 전체 검사 2,120개, 대표 대조 24판, 실제 앱 실행·재시작 3회와 화면 5장 검토도 마쳤습니다. 보스에게 얻은 룬 4개까지 재시작 후 중복 없이 유지됩니다. 자연 성장·파밍·남은 밸런스·모바일 실기기 검증은 후속 작업입니다. [개발 기록](../Implementation/Edict_Field_Expansion.md)
 
 English: current-room exit ordering and shrine use range are corrected. The controlled 360-run comparison cleared legacy 169/180 and core defaults 173/180, resolving four shrine loops. The Rune-integrated main passed all 2,120 tests, 24 representative comparisons, three native launches/restarts and five screenshot reviews. Four earned boss runes also persist without duplication. Natural growth/farming, remaining balance and physical devices remain. [English record](../Implementation/Edict_Field_Expansion.en.md)
@@ -105,7 +109,7 @@ English: Mage BASIC now independently applies all four policies, completing the 
 | 대상 | 연결할 서비스 | 개발·완료 기준 |
 |---|---|---|
 | 대장장이 | 강화·일반 제작·분해를 연다. | 기존 경제 처리 함수를 공유한다. NPC 접근만으로 비용을 쓰거나 장비를 변경하지 않는다. |
-| 재설정 담당 | 접사 재설정과 검증 완료 후 보석 서비스를 연다. | 보석 자료가 준비되지 않은 상태를 설명하고, 임의의 효과를 넣어 완성된 기능처럼 표시하지 않는다. |
+| 재설정 담당 | 접사 재설정과 검증 완료 후 보석 서비스를 연다. | 보석 효과표·보호·저장 기반은 구현했다. 보관 방식을 확정한 뒤 소켓 내기·장착·교체·분리·합성을 실제 비용·공간 검사와 연결하고, 그전까지 서비스 준비 상태를 유지한다. |
 | 수수께끼 상인 | 부위를 선택해 미확인 장비를 구매한다. | 메뉴와 같은 후보 풀·비용·확정 영수증을 사용한다. 재진입으로 결과를 다시 추첨하지 않는다. |
 | 균열 관리자 | 단계 선택·소탕·훈련을 연다. | 입장·소탕 자격과 실제 성장 상태를 공통 경계에서 확인한다. |
 | 공유 창고 | 계정 보관함을 연다. | 이동해도 잠금·프리셋 참조와 소유권을 유지한다. |
@@ -153,7 +157,7 @@ English: repeat outcome/target policies, paused result review, owner-correct can
 2. 보스·상자·소탕·미실행·제작·구매를 확정 영수증으로 조회한다. 응답이 유실되면 기존 요청 결과를 확인한다.
 3. 서버 시각으로 KST 09:00 경계·계정 소탕 3회·캐릭터별 초회·12시간 미실행 상한을 검증한다.
 4. 유료 가방·창고 탭의 구매·복원·환불·초과칸 꺼내기 전용 상태를 구현한다. 환불 때문에 보관 장비를 삭제하지 않는다.
-5. 지정된 보석 자료 버전을 검증한 뒤 소켓·장착·해제·비용·효과를 연결한다. 여러 버전의 수치를 섞지 않는다.
+5. 보석 자료 버전 1과 장비 자료 버전 3의 효과·보호·저장 기반은 [검증 기록](../Implementation/Gem_Socket_Foundation.md)을 따른다. 보관 방식 확정 후 보상 지급·소켓 내기·장착·해제·합성과 실제 비용 거래를 연결한다. 여러 버전의 수치를 섞지 않는다.
 
 온라인 공급자·로그인, 운영 규모와 예산, 스토어·지원 지역·상품 정보는 이 단계의 소유자 선택 사항이다. 후보와 비용·지원 범위를 먼저 정리한 뒤 확인한다. 현재 로컬 저장 검사를 온라인 중복 보상 방지의 완료 증거로 사용하지 않는다.
 

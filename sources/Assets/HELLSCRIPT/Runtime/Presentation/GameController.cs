@@ -34,6 +34,7 @@ namespace Hellscript
             try{Store=new GameStore(saveDirectory,catalog);}
             catch(Exception e){Notice=e.Message;UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);enabled=false;return;}
             SelectedStage=Mathf.Max(1,Store.Data.Hero.highestClear+1);Notice=Store.OfflineMessage;
+            if(Store.GemRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.GemRecoveryMessage;
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
             UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);
         }
