@@ -169,14 +169,14 @@ namespace Hellscript
             inventoryComparisonRows.AddRange(inventoryComparison.content.Cast<Transform>().Where(t=>t.gameObject.activeSelf).Select(t=>(RectTransform)t));
         }
         Item InventoryFind(AccountSave account,string id)=>inventoryWarehouse?account.warehouse.Find(i=>i.id==id):FindOwned(account,id);
-        void DescribeInventoryItem(Transform parent,Item item,string heading)
+        void DescribeInventoryItem(Transform parent,Item item,string heading,HeroSave frozenHero=null,IEnumerable<Item> frozenWarehouse=null)
         {
-            var hero=game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(item.special);
+            var hero=frozenHero??game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(item.special);
             InventoryNote(parent,heading,22,gold);
             var title=Row(parent,90);EquipmentIcon(title,item,10,10,68);var label=Label(title,Loc.F("{0} +{1}",item.DisplayName,item.enhancement),24,ItemColor(item));Inset(label.rectTransform,88,8,8,8);
             QualityFrame(title,item);
             string restriction=unique!=null&&unique.heroClass>=0?game.catalog.classNames[unique.heroClass]:basis.heroClass>=0?game.catalog.classNames[basis.heroClass]:"공용";
-            InventoryNote(parent,Loc.F("{0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}", Grade(item), restriction, GameCatalog.Slots[item.slot], item.level, item.RequiredLevel, Protection(item)),20,ItemColor(item));
+            InventoryNote(parent,Loc.F("{0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}", Grade(item), restriction, GameCatalog.Slots[item.slot], item.level, item.RequiredLevel, frozenHero==null?Protection(item):"훈련에 사용한 복사본 · 실제 장비는 유지됩니다"),20,ItemColor(item));
             if(item.acquiredOrder<=0)InventoryNote(parent,"기존 장비 · 획득 순서 기록 없음",17,muted);
             float baseValue=basis.main*(1+.08f*(item.level-1)),main=ItemCatalog.MainValue(item);
             string mainName=item.slot==0?"무기 피해":item.slot<=5?"방어도":item.slot==6?"최대 HP":"비물리 저항";
@@ -195,14 +195,14 @@ namespace Hellscript
                 if(!string.IsNullOrEmpty(unique.requiredSkill))
                 {
                     var skill=game.catalog.skills.Find(s=>s.id==unique.requiredSkill);int index=game.catalog.skills.IndexOf(skill);
-                    bool active=hero.build.activeSkills.Contains(index)&&hero.level>=skill.unlock;
+                    bool active=(hero.useEdict?hero.edict?.slots.Contains(skill.id)==true:hero.build.activeSkills.Contains(index))&&hero.level>=skill.unlock;
                     InventoryNote(parent,Loc.F("{0}{1} · Lv.{2} 필요", (active?"필수 스킬 장착·해금 완료: ":"현재 효과 비활성: "), skill.name, skill.unlock),20,active?setGreen:gold);
                 }
                 if(unique.setId!="")
                 {
                     var set=ItemCatalog.Sets.Single(s=>s.id==unique.setId);int worn=hero.inventory.Count(i=>i.equipped&&ItemCatalog.Unique(i.special)?.setId==set.id);
-                    int bag=hero.inventory.Count(i=>ItemCatalog.Unique(i.special)?.setId==set.id),storage=game.Store.Data.warehouse.Count(i=>ItemCatalog.Unique(i.special)?.setId==set.id);
-                    InventoryNote(parent,Loc.F("{0}\n현재 장착 {1}부위 · 현재 캐릭터 보유 {2}개 · 창고 {3}개\n2세트{4}: {5}\n4세트{6}: {7}", set.name, worn, bag, storage, (worn>=2?" 활성":" 비활성"), set.two, (worn>=4?" 활성":" 비활성"), set.four),20,setGreen);
+                    int bag=hero.inventory.Count(i=>ItemCatalog.Unique(i.special)?.setId==set.id),storage=(frozenWarehouse??(frozenHero==null?game.Store.Data.warehouse:Enumerable.Empty<Item>())).Count(i=>ItemCatalog.Unique(i.special)?.setId==set.id);
+                    InventoryNote(parent,frozenHero==null?Loc.F("{0}\n현재 장착 {1}부위 · 현재 캐릭터 보유 {2}개 · 창고 {3}개\n2세트{4}: {5}\n4세트{6}: {7}", set.name, worn, bag, storage, (worn>=2?" 활성":" 비활성"), set.two, (worn>=4?" 활성":" 비활성"), set.four):Loc.F("{0}\n훈련 장착 {1}부위\n2세트{2}: {3}\n4세트{4}: {5}",set.name,worn,worn>=2?" 활성":" 비활성",set.two,worn>=4?" 활성":" 비활성",set.four),20,setGreen);
                 }
             }
         }

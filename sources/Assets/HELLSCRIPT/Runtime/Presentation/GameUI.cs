@@ -133,7 +133,7 @@ namespace Hellscript
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
             if(page!="battle")game.ExitIdle();
-            ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();
+            ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
             ApplyScaler(root.parent.GetComponent<CanvasScaler>(),battle||responsive);
             if(Page=="build"&&content!=null)buildScrollOffset=content.anchoredPosition.y;
             if(Page=="edict"&&content!=null)edictScrollOffset=content.anchoredPosition.y;
@@ -280,10 +280,12 @@ namespace Hellscript
         void RenderBuild()
         {
             pageRepaint=()=>RenderBuild();Base("build",comparisonEditing?"B 행동 설정":"행동 설계",comparisonEditing?"B 훈련에만 사용합니다 · 실제 설정은 유지됩니다":"위에서부터 검사합니다 · 실행할 수 있는 행동 하나를 선택합니다");
+            if(comparisonEditing&&comparisonHero.useEdict){RenderEdictComparisonBuild();return;}
             var presets=Row(content,96);for(int i=0;i<2;i++){int v=i;var b=Button(presets,GameCatalog.Preset(EditingHero.heroClass,i).name,()=>ShowRecommendation(v));Across(b,i,2,8,TouchHeight);}
             if(comparisonEditing)AddComparisonDifference();else AddGuideBuildDifference();
             if(RiftLoadoutLocked)Note(content,"균열에서는 장착을 유지합니다. 불러온 설정에 없는 장착 스킬은 기존 행동을 유지합니다.",20,92,pale);
-            Note(content,comparisonEditing?"스킬과 행동 조건을 바꿔 B에서 시험합니다. 기준 장비는 유지됩니다.":game.Active&&game.Combat.State.training>=0?"훈련 복사본에 적용합니다. 실제 설정에 남기려면 슬롯에 저장하세요.":"전투 중에는 조건만 편집합니다. 스킬 교체는 성소에서 합니다.",18,70);
+            Note(content,comparisonEditing?"행동과 소유 장비의 조합을 B에서 시험합니다. 실제 캐릭터에는 적용하지 않습니다.":game.Active&&game.Combat.State.training>=0?"훈련 복사본에 적용합니다. 실제 설정에 남기려면 슬롯에 저장하세요.":"전투 중에는 조건만 편집합니다. 스킬 교체는 성소에서 합니다.",18,70);
+            if(comparisonEditing)BigButton(content,"B 장비 선택",RenderComparisonEquipment,true);
             Cycle(content,"목표",new[]{"가까운 적","정예·보스 우선","지원형 우선","낮은 HP","밀집 중심"},(int)editing.target,i=>{editing.target=(TargetMode)i;RenderBuild();});
             Cycle(content,"이동",BehaviorRules.Movements,(int)editing.movement,i=>{editing.movement=(MovementMode)i;RenderBuild();});
             SliderRow(content,"목표 거리",editing.distance,.5f,10,v=>editing.distance=Mathf.Round(v*2)/2,"m");
@@ -329,7 +331,7 @@ namespace Hellscript
             RenderPresetRows();
             if(game.Active)Note(content,Loc.F("행동 {0}행 변경 · 적용 후 {1}", BuildEditing.ChangedRows(game.Combat.State.build,editing), (buildWasPaused?"일시정지 유지":"전투 재개")),20,62,pale);
             FooterButton(0,2,"취소",CancelBuild);
-            FooterButton(1,2,comparisonEditing?"B 훈련 시작":"설정 적용",()=>{if(!ValidateEditing())return;editing.version=DateTime.UtcNow.Ticks.ToString();if(comparisonEditing){string error=game.Comparison.ValidateB(editing);if(error!=""){ShowToast(error);return;}comparisonEditing=false;game.BeginComparisonB(editing);}else game.CommitBuild(editing,buildWasPaused);},true);
+            FooterButton(1,2,comparisonEditing?"B 훈련 시작":"설정 적용",()=>{if(!ValidateEditing())return;editing.version=DateTime.UtcNow.Ticks.ToString();if(comparisonEditing)StartComparisonDraft();else game.CommitBuild(editing,buildWasPaused);},true);
             RestoreBuildScroll();
         }
         void Cycle(Transform parent,string title,string[] choices,int index,Action<int> next)
@@ -452,6 +454,8 @@ namespace Hellscript
             UpdatePresetDialog();
             UpdateCommonPanel();
             ReflowInventory();
+            ReflowComparisonEquipment();
+            ReflowComparisonPages();
             ReflowBattleHud();
             ReflowEdictRows();
             ReflowRunes();

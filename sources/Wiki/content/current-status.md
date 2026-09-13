@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 소유 장비 훈련:** A/B 비교에서 가방·공유 창고 장비와 실제 사용 중인 칙령을 시험할 수 있습니다. 계정 룬 보드를 비교에서 빠뜨리던 문제와 B 프리셋에 A 장비를 저장하던 경로를 수정했습니다. 최종 전체 검사 2,515개, 실제 실행·재시작과 화면 13장 검토를 마쳤습니다. 실제 가방·창고·장착·진행도는 유지되며 결과와 프리셋은 직접 저장합니다. [개발 기록](../../Docs/Implementation/Training_Equipment_Expansion.md)
+
+English: A/B training now compares owned bag/warehouse equipment and the active hunt edict with frozen account rune boards. B presets reference B gear. All 2,515 final tests, native initial/restart checks and 13 screenshots passed; live property and progression remain unchanged. Physical mobile input and natural progression balance remain separate work. [English record](../../Docs/Implementation/Training_Equipment_Expansion.en.md)
+
 **2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](../../Docs/Implementation/Idle_Display.md)
 
 English: Idle display and peek now preserve live combat, repetition and save recovery. All 2,471 tests and final native initial/restart checks passed; 13 screenshots were reviewed. Three dimmed captures of the same final build continued combat with zero world, transient-effect or normal HUD updates. Android power/thermal/touch and platform interruption work remains. [English record](../../Docs/Implementation/Idle_Display.en.md)
@@ -50,7 +54,7 @@ English: Mage BASIC now independently applies all four policies, actual-cost res
 
 English: M06 now independently applies its four policies, physical self-area, walking approach and boss restrictions. Real cold-hit charges and discounts survive restart without duplication; switching language during preparation now updates the HUD text. All 1,705 tests and three native processes passed, retaining 13 screenshots. In the 48-run comparison, configured M03 interruptions rose from eight to 68, boss spawns fell from five to three and all eight runs timed out. The subsequent basic-attack and replacement-observation phase is recorded above; real control opportunity cost remains under investigation. See the [English record](../../Docs/Implementation/Edict_Nova_Expansion.en.md).
 
-**2026-09-13 원소 보호막 사냥 칙령:** M05의 네 옵션을 이전 규칙과 분리하고, 교전 시작의 한 번 검토와 실제 보호막 생성·흡수·환류 보상을 연결했습니다. 일부 흡수한 상태를 재시작해도 기준과 지급 여부를 유지합니다. 전체 검사 1,652개, 실제 macOS 앱의 세 프로세스 검사와 화면 12장 확인을 마쳤습니다. 전후 48판 중 생존 설정 표본의 M03 중단은 34→8회로 줄었지만 전후 모두 8판 전부 시간 초과했습니다. 기본값 문서와 생존 설정을 구분해 기록했습니다. 당시 후속 대상으로 정한 M06은 위의 단계에서 연결했습니다. [원소 보호막 개발 기록](../../Docs/Implementation/Edict_Shield_Expansion.md)을 확인하세요.
+**2026-09-13 원소 보호막 사냥 칙령:** M05의 네 옵션을 이전 규칙과 분리하고, 교전 시작의 한 번 검토와 실제 보호막 생성·흡수·환류 보상을 연결했습니다. 일부 흡수한 상태를 재시작해도 기준과 지급 여부를 유지합니다. 전체 검사 1,652개, 실제 macOS 앱의 세 프로세스 검사와 화면 13장 확인을 마쳤습니다. 전후 48판 중 생존 설정 표본의 M03 중단은 34→8회로 줄었지만 전후 모두 8판 전부 시간 초과했습니다. 기본값 문서와 생존 설정을 구분해 기록했습니다. 당시 후속 대상으로 정한 M06은 위의 단계에서 연결했습니다. [원소 보호막 개발 기록](../../Docs/Implementation/Edict_Shield_Expansion.md)을 확인하세요.
 
 English: M05 now has independent policies, one encounter-opening review and persistent actual shield absorption/reward state. All 1,652 tests and three native processes passed, retaining 12 screenshots. In 48 before/after runs, configured-survival M03 interruptions fell from 34 to eight, but all eight configured cases timed out in both versions. Default and configured documents remain separate; the subsequent M06 phase is recorded above. See the [English record](../../Docs/Implementation/Edict_Shield_Expansion.en.md).
 

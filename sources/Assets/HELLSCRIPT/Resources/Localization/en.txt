@@ -144,8 +144,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0} #{1} 사망	{0} #{1} died
 {0} +{1}\n{2} · {3} · I{4} · 요구 Lv.{5}\n{6}{7}	{0} +{1}\n{2} · {3} · I{4} · needs Lv.{5}\n{6}{7}
 {0} / 20초	{0} / 20s
-{0} Lv.{1}\n{2}\n이동: {3} {4:0.#}m\n물약: HP {5:0}% 이하	{0} Lv.{1}\n{2}\nMovement: {3} {4:0.#}m\nPotion: HP {5:0}% or below
-{0} Lv.{1} · {2} · 같은 기준 장비	{0} Lv.{1} · {2} · same reference gear
 {0} Lv.{1} · 고정 훈련 {2}\n\n표적 처치 {3} / {4} · 남은 HP {5:0}\n전투 시간 {6:0.0}초 / 실제 {7:0.0}초\n총 피해 {8:N0} · 전투 초당 {9:0.0}	{0} Lv.{1} · Fixed trial {2}\n\nTargets killed {3} / {4} · HP left {5:0}\nCombat time {6:0.0}s / Real {7:0.0}s\nTotal damage {8:N0} · {9:0.0} per combat second
 {0} Lv.{1} · 현재 장비와 해금한 스킬\nHP {2:0} · 공격 기준 {3:0.0}	{0} Lv.{1} · current gear and unlocked skills\nHP {2:0} · Attack {3:0.0}
 {0} Lv.{1} · 현재 장비와 행동을 확인합니다	{0} Lv.{1} · review your gear and behavior
@@ -310,7 +308,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 같은 적에게 기본공격 3회 적중 후, 5초 안의 다음 유료 스킬 비용 감소 +50%를 준비합니다. 1충전이며 내부 대기시간은 4초입니다.	After three basic attacks land on the same enemy, the next skill that costs resource within 5 seconds is 50% cheaper. One charge, waiting 4 seconds between triggers.
 같은 조건으로 A/B 비교	A/B comparison under identical conditions
 같은 직업의 스킬을 선택하세요.	Choose a skill of the same class.
-같은 캐릭터와 장비로 설정의 차이를 확인합니다	See what a setting changes, on the same character and gear
 개발용 Lv.30 시험 · 보상 없음	Development Lv.30 trial · no rewards
 개발용 로컬 플레이 · 계정 연동과 결제는 연결 전입니다.	Local development play. Accounts and payment are not connected yet.
 개봉 거리 이탈	Moved out of opening range
@@ -1163,7 +1160,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 스킬 핵심 옵션이 누락·추가·중복되었습니다: {0}	A skill's core options are missing, added or duplicated: {0}
 스킬 핵심 옵션이 누락되거나 추가되었습니다.	A skill's core options are missing or were added to.
 스킬·효과별 전체 기록	Full record by skill and effect
-스킬과 행동 조건을 바꿔 B에서 시험합니다. 기준 장비는 유지됩니다.	Change the skills and conditions to try in B. The reference gear stays.
 스킬별 규칙 번호가 중복되었습니다.	Two rules on the same skill share a number.
 스킬을 배워도 장착과 꺼 둔 규칙은 자동으로 바뀌지 않습니다. 사용할 설정은 행동 설계에서 직접 확인해 주세요.	Learning a skill does not equip it or turn a disabled rule back on. Check what you actually want to use in behavior design.
 스탯 번호가 겹칩니다: 	Duplicate stat number: 
@@ -1920,7 +1916,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 칸을 누르면 해금한 다음 스킬로 바뀝니다. 다른 칸에 있던 스킬을 고르면 두 칸을 맞바꿉니다.	Tapping a slot moves to the next unlocked skill. Picking a skill that sits in another slot swaps the two.
 캐릭터 레벨 {0}이 필요합니다.	This needs character level {0}.
 캐릭터 초회 보상 지급	First-time reward paid for this character
-캐릭터·장비·시드·시작 배치는 같습니다	The character, gear, seed and starting layout are identical
 켜기|끄기	On|Off
 켜진 규칙 없음	No rule enabled
 켜짐	on
@@ -3248,3 +3243,56 @@ HP {0:0}/{1:0} · 자원 {2:0}\n위치 ({3:0.0}, {4:0.0}) · 대상 {5}\n{6} · 
 실제 사냥 유지	Live hunt continues
 미실행 보상을 저장하지 못했습니다. 저장 공간을 확인한 뒤 재개를 눌러 주세요.	Offline rewards could not be saved. Check your storage, then press Resume.
 한국어	Korean
+
+A 장비 원본	A equipment snapshot
+A 장비 원본 보기	View A equipment
+B 사냥 칙령	B hunt edict
+B 사냥 칙령 편집	Edit B hunt edict
+B 설정으로	Back to B settings
+B 장비 선택	Choose B equipment
+B 장비 원본	B equipment snapshot
+B 장비 원본 보기	View B equipment
+B 장비로 선택	Select for B
+B 장착	Equipped for B
+B 편집안에 반영	Apply to B draft
+B 훈련의 장비 조합을 바꿨습니다.	B training equipment updated.
+B의 사냥 칙령 편집안에 반영했습니다.	Changes applied to B's hunt edict draft.
+{0} +{1} · I{2} · 걸작 {3}	{0} +{1} · I{2} · Masterwork {3}
+{0} +{1}\n{2} · 요구 Lv.{3}\n{4}	{0} +{1}\n{2} · Requires Lv.{3}\n{4}
+{0}\nA: {1}\n현재 B: {2}	{0}\nA: {1}\nCurrent B: {2}
+{0}\n이동: {1} {2:0.#}m\n물약: HP {3:0}% 이하	{0}\nMovement: {1} {2:0.#}m\nPotion: HP at or below {3:0}%
+{0}\n훈련 장착 {1}부위\n2세트{2}: {3}\n4세트{4}: {5}	{0}\n{1} pieces equipped in training\n2-piece{2}: {3}\n4-piece{4}: {5}
+같은 기준 장비	Same baseline equipment
+같은 캐릭터로 행동·소유 장비의 차이를 확인합니다	Compare behavior and owned equipment on the same hero
+기록된 훈련 장비를 읽을 수 없습니다.	The recorded training equipment could not be read.
+변경한 조건으로	Back to changes
+비교 시작 때 보유한 가방·공유 창고 장비만 시험할 수 있습니다.	Only bag and shared warehouse items owned when this comparison began can be tested.
+비교 시작 때 보유한 장비의 복사본으로 시험합니다	Test copies of equipment owned when the comparison began
+비교 시작 때의 룬 보드를 사용합니다. 무기를 바꾸면 해당 무기의 보드 효과를 계산합니다.	Rune boards are frozen at comparison start. A weapon change uses that weapon's board effects.
+빈 부위로 시험	Test an empty slot
+사냥 칙령 · 장착 스킬\n{0}	Hunt edict · equipped skills\n{0}
+선택한 후보	Selected candidate
+슬롯에는 선택한 장비 참조·패시브·기본 행동을 저장합니다. 사냥 칙령 원본은 아래에서 별도로 불러온 뒤 직접 적용하세요.	The preset stores chosen equipment references, passives, and legacy behavior. Load the hunt edict separately below, then apply it explicitly.
+실제 칙령 편집안으로 불러오기	Load into the actual edict editor
+이번 시도의 장비\n{0}	Equipment for this attempt\n{0}
+이전 기록에는 계정 룬 보드가 포함되지 않았습니다.	This older record did not include account rune boards.
+장비 변경 비교	Equipment change comparison
+장착한 장비가 없습니다.	No equipment is equipped.
+캐릭터 가방	Hero bag
+캐릭터·레벨·시드·시작 배치는 같습니다	Hero, level, seed, and starting layout remain the same
+행동과 소유 장비의 조합을 B에서 시험합니다. 실제 캐릭터에는 적용하지 않습니다.	Test behavior and owned equipment together in B. These changes do not apply to your actual hero.
+현재 사용 중인 사냥 칙령과 패시브를 시험합니다. 실제 캐릭터의 설정과 장비는 바뀌지 않습니다.	Test the active hunt edict and passives. Your actual hero's settings and equipment remain unchanged.
+후보를 읽거나 선택해도 실제 가방·창고·장착 상태는 바뀌지 않습니다. 장착 조건은 현재 비교의 직업·레벨로 검사합니다.	Reading or selecting candidates does not change your actual bag, warehouse, or equipment. Requirements use the class and level captured for this comparison.
+훈련 장비 · {0}\nA: {1}\nB: {2}	Training equipment · {0}\nA: {1}\nB: {2}
+훈련 장비는 부위마다 하나씩 선택해 주세요.	Choose at most one training item per slot.
+훈련 장비를 적용할 수 없습니다.	The training equipment could not be applied.
+훈련 장비의 소유 식별자가 중복되거나 비어 있습니다.	Owned training item identifiers are missing or duplicated.
+훈련에 사용한 복사본 · 실제 장비는 유지됩니다	Training snapshot · actual equipment remains unchanged
+
+# Previous comparison text retained for stored records.
+{0} Lv.{1}\n{2}\n이동: {3} {4:0.#}m\n물약: HP {5:0}% 이하	{0} Lv.{1}\n{2}\nMovement: {3} {4:0.#}m\nPotion: HP {5:0}% or below
+{0} Lv.{1} · {2} · 같은 기준 장비	{0} Lv.{1} · {2} · same reference gear
+같은 캐릭터와 장비로 설정의 차이를 확인합니다	See what a setting changes, on the same character and gear
+스킬과 행동 조건을 바꿔 B에서 시험합니다. 기준 장비는 유지됩니다.	Change the skills and conditions to try in B. The reference gear stays.
+캐릭터·장비·시드·시작 배치는 같습니다	The character, gear, seed and starting layout are identical
+A/B 비교 중에는 룬 배치를 고정합니다. 비교를 마친 뒤 룬을 변경해 주세요.	Rune layouts remain fixed during A/B comparison. Finish the comparison before changing runes.

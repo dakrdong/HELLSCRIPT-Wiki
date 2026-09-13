@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T19:02:11+09:00",
+  "generatedAt": "2026-09-13T20:36:45+09:00",
   "databases": [
     {
       "id": "resources",
@@ -105819,6 +105819,33 @@
       "name": "검증 기록",
       "description": "보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.",
       "rows": [
+        {
+          "id": "training-equipment-editmode",
+          "name": "training-equipment-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "2515 / 2515 통과 · Passed · training-equipment",
+          "fields": {
+            "검사 단계": "training-equipment",
+            "보고서 구분": "단일 보고서",
+            "보고된 결과": "Passed",
+            "전체 검사": "2515",
+            "통과": "2515",
+            "실패": "0",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-09-13 11:36:23Z",
+            "소요 시간 (초)": "379.2849958",
+            "해석": "저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Artifacts/Validation/training-equipment-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 통과",
+          "related": [
+            "current-status"
+          ],
+          "endTime": "2026-09-13 11:36:23Z"
+        },
         {
           "id": "idle-display-editmode",
           "name": "idle-display-editmode.xml",

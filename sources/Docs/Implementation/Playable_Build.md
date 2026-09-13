@@ -2,7 +2,11 @@
 
 갱신일: 2026-09-13
 
-최신 실행본은 `Builds/macOS-IdleMode-Build10/HELLSCRIPT.app`입니다. **2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](Idle_Display.md)
+최신 실행본은 `Builds/macOS-TrainingEquipment-Build8/HELLSCRIPT.app`입니다. **2026-09-13 소유 장비 훈련:** A/B 비교에서 가방·공유 창고 장비와 실제 사용 중인 칙령을 시험할 수 있습니다. 계정 룬 보드를 비교에서 빠뜨리던 문제와 B 프리셋에 A 장비를 저장하던 경로를 수정했습니다. 최종 전체 검사 2,515개, 실제 실행·재시작과 화면 13장 검토를 마쳤습니다. 실제 가방·창고·장착·진행도는 유지되며 결과와 프리셋은 직접 저장합니다. [개발 기록](Training_Equipment_Expansion.md)
+
+English: A/B training now compares owned bag/warehouse equipment and the active hunt edict with frozen account rune boards. B presets reference B gear. All 2,515 final tests, native initial/restart checks and 13 screenshots passed; live property and progression remain unchanged. Physical mobile input and natural progression balance remain separate work. [English record](Training_Equipment_Expansion.en.md)
+
+이전 실행본은 `Builds/macOS-IdleMode-Build10/HELLSCRIPT.app`입니다. **2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](Idle_Display.md)
 
 English: Idle display and peek now preserve live combat, repetition and save recovery. All 2,471 tests and final native initial/restart checks passed; 13 screenshots were reviewed. Three dimmed captures of the same final build continued combat with zero world, transient-effect or normal HUD updates. Android power/thermal/touch and platform interruption work remains. [English record](Idle_Display.en.md)
 
@@ -50,7 +54,7 @@ English: the latest Mage BASIC player preserves Claude's integration and connect
 
 English: the latest build preserves Claude's attribute/affix integration and connects M06 purpose, approach, boss policies and actual chain effects. All 1,705 tests and three native processes passed, retaining 13 screenshots. Across the 48-run comparison, configured-survival M03 interruptions increased from eight to 68 and boss spawns fell. Control replacements and cancelled preparation remain follow-up work; no balance improvement is claimed.
 
-2026-09-13 이전 보호막 실행본은 `Builds/macOS-EdictShield/HELLSCRIPT.app`입니다. 클로드의 능력치 통합 위에 원소 보호막의 네 핵심 옵션과 교전 시작 기록을 연결했습니다. 전체 검사 1,652개와 실제 앱의 세 프로세스 검사가 통과했고, 화면 12장을 보관했습니다. 전후 48판에서는 생존 설정의 시전 중단이 줄었지만 모두 시간 초과했으므로 밸런스 개선으로 판단하지 않습니다. [원소 보호막 개발 기록](Edict_Shield_Expansion.md) · [English](Edict_Shield_Expansion.en.md)
+2026-09-13 이전 보호막 실행본은 `Builds/macOS-EdictShield/HELLSCRIPT.app`입니다. 클로드의 능력치 통합 위에 원소 보호막의 네 핵심 옵션과 교전 시작 기록을 연결했습니다. 전체 검사 1,652개와 실제 앱의 세 프로세스 검사가 통과했고, 화면 13장을 보관했습니다. 전후 48판에서는 생존 설정의 시전 중단이 줄었지만 모두 시간 초과했으므로 밸런스 개선으로 판단하지 않습니다. [원소 보호막 개발 기록](Edict_Shield_Expansion.md) · [English](Edict_Shield_Expansion.en.md)
 
 English: the preceding shield build connects M05's four core policies and persistent encounter openings on top of Claude's attribute integration. All 1,652 tests and three native processes passed, with 12 screenshots. In 48 before/after runs, configured-survival interruptions fell but all eight configured cases still timed out; no balance improvement is claimed.
 
