@@ -126,7 +126,8 @@ namespace Hellscript
             if(State.phase==RunPhase.Looting){CommitExperience();Loot(dt);return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
-            try{TickCombat(dt);}finally{RecordTickTelemetry();}
+            float observedTime=State.time,observedHealth=State.health;
+            try{TickCombat(dt);}finally{RecordTickTelemetry(State.time-observedTime,observedHealth);CaptureCompletedReview();}
         }
         void TickCombat(float dt)
         {
@@ -495,7 +496,8 @@ namespace Hellscript
             ContentUnlocks.RecordRunEnd(account);
             if(account.records.Any(r=>r.id==State.id))return;
             account.records.Insert(0,new RunRecord{id=State.id,hero=catalog.classNames[(int)Hero.heroClass],result=reason,stage=State.stage,kills=State.kills,loot=State.lootCount,chestsOpened=State.layout.chests.Count(c=>c.phase==ChestPhase.Opened),chestsTotal=State.layout.chests.Count,mapFingerprint=State.layout.fingerprint,objective=State.training<0?RiftObjectives.Capture(State):null,simulationSeconds=State.time,realSeconds=State.realTime,damageDealt=State.dealt,logs=new List<string>(State.logs)});
-            while(account.records.Count>10)account.records.RemoveAt(account.records.Count-1);
+            while(account.records.Count>CombatHistory.RecordLimit)account.records.RemoveAt(account.records.Count-1);
+            CaptureCompletedReview();
         }
     }
 }

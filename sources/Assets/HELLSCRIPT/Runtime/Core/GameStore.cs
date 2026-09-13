@@ -74,6 +74,8 @@ namespace Hellscript
             // JsonUtility materializes a null plain serializable class as an empty object.
             if(a.suspendedRun!=null&&string.IsNullOrEmpty(a.suspendedRun.id))a.suspendedRun=null;
             if(a.suspendedRun!=null)NormalizeRun(a.suspendedRun);
+            if(a.records!=null)foreach(var record in a.records)
+                if(record?.review!=null&&record.review.version==0)record.review=null;
             a.transactions??=new System.Collections.Generic.List<EconomyReceipt>();
             foreach(var h in a.heroes)
             {

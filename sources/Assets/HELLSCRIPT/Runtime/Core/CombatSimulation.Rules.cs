@@ -116,11 +116,11 @@ namespace Hellscript
         void RecordDecision(Rule r,int row,string code,string detail,EnemyState target)
         {
             if(code=="RESOURCE")CombatTelemetry.ResourceBlocked(State.statistics,r.skill);
-            RecordBlockedDecision(r,code,detail);
+            RecordBlockedDecision(r,row,code,detail,target);
             var old=State.decisions.LastOrDefault(d=>d.ruleId==r.id);
-            if(old!=null&&old.code==code&&old.targetId==(target?.id??-1)&&old.version==State.build.version)
+            if(old!=null&&old.actionKnown&&old.action==r.action&&old.code==code&&old.targetId==(target?.id??-1)&&old.version==State.build.version)
             {old.count++;old.lastTime=State.time;old.detail=detail;old.row=row;return;}
-            State.decisions.Add(new RuleDecision{ruleId=r.id,row=row,skill=r.skill,code=code,detail=detail,targetId=target?.id??-1,version=State.build.version,firstTime=State.time,lastTime=State.time});
+            State.decisions.Add(new RuleDecision{ruleId=r.id,row=row,skill=r.skill,action=r.action,actionKnown=true,code=code,detail=detail,targetId=target?.id??-1,version=State.build.version,firstTime=State.time,lastTime=State.time});
             if(State.decisions.Count>240)State.decisions.RemoveAt(0);
         }
         Vector2 MovementDestination(Rule r,SkillDefinition skill,EnemyState target,Vector2? origin=null,EnemyState[] observed=null)

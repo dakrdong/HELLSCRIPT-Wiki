@@ -1,0 +1,51 @@
+{
+  "verifiedUtc": "2026-09-13T03:10:58.766500+00:00",
+  "baseCommit": "9f0489ddb1baff0c7dfa93e6451d288e78d89932",
+  "unity": "6000.6.0f1",
+  "fullEditor": {
+    "total": "2156",
+    "passed": "2156",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "350.4470465"
+  },
+  "focusedEditor": {
+    "total": "120",
+    "passed": "120",
+    "failed": "0",
+    "duration": "4.5708988"
+  },
+  "macOSBuild": "Builds/macOS-CombatHistory/HELLSCRIPT.app",
+  "nativeNaturalProcesses": 2,
+  "nativeResultFixtureProcesses": 1,
+  "nativeNaturalOutcome": {
+    "stage": 1,
+    "result": "영웅 사망",
+    "combatSeconds": 67.09949493408203,
+    "realSeconds": 0.0,
+    "heroLevelAtCompletion": 3,
+    "kills": 35,
+    "windowSeconds": 5.0,
+    "snapshots": 100,
+    "blockedAttempts": 94,
+    "edictContexts": 1,
+    "decisionEntries": 80,
+    "archiveBytes": 138737
+  },
+  "nativeProof": [
+    "no injected HP, enemy, map, reward or terminal state in initial natural fight",
+    "history reading preserves current hero configuration and currency",
+    "countdown pauses in history and resumes on results",
+    "next rift starts normally; returning, changing hero and relaunching preserve archive",
+    "same paragraph survives resize",
+    "utility actions retain their true names",
+    "legacy and newer schema display fixtures do not enter account records"
+  ],
+  "screenshots": 33,
+  "representativeScreenshotsDirectlyReviewed": 13,
+  "caveats": [
+    "Natural combat advanced real fixed ticks with controller disabled, so real-time counter is zero during that phase. Countdown checks use real controller updates.",
+    "Result-boundary smoke uses explicit injected fixtures, distinct from the natural run.",
+    "Live pre-restart telemetry, rune-board snapshots, detailed archived affix tooltips, counterfactual replay and physical mobile validation remain outside this phase."
+  ]
+}

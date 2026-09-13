@@ -1,5 +1,11 @@
 # 현재 개발 현황과 남은 과제
 
+갱신일: 2026-09-13
+
+**2026-09-13 전투 기록 보관:** 최근 10회에 스킬 집계·마지막 5초·당시 규칙과 칙령·종료 장비를 저장하고 다시 조회할 수 있습니다. 자동 반복 대기와 읽던 문단 유지, 다음 균열·캐릭터 변경·재시작을 검증했습니다. 전체 검사 2,156개와 실제 앱 검사 3회가 통과했습니다. [개발 기록](../../Docs/Implementation/Combat_History_Expansion.md)
+
+English: the latest ten rifts now retain skill totals, the final five-second window, actual rule/edict context and final equipment. Countdown/reading-position behavior and history after another rift, character change and relaunch were verified. All 2,156 editor tests and three native processes passed. [English record](../../Docs/Implementation/Combat_History_Expansion.en.md)
+
 **2026-09-13 균열 출구 선택 수정:** 현재 방의 유효 출구를 먼저 고르고, 성소의 실제 사용 거리 안에 들어온 뒤 사용하도록 수정했습니다. 균열 대조 360판에서 기존 규칙 169/180판, 핵심 기본값 173/180판이 클리어했고 성소 왕복 4판이 해결됐습니다. 룬 완료본을 포함한 최신 메인의 전체 검사 2,120개, 대표 대조 24판, 실제 앱 실행·재시작 3회와 화면 5장 검토도 마쳤습니다. 보스에게 얻은 룬 4개까지 재시작 후 중복 없이 유지됩니다. 자연 성장·파밍·남은 밸런스·모바일 실기기 검증은 후속 작업입니다. [개발 기록](../../Docs/Implementation/Edict_Field_Expansion.md)
 
 English: current-room exit ordering and shrine use range are corrected. The controlled 360-run comparison cleared legacy 169/180 and core defaults 173/180, resolving four shrine loops. The Rune-integrated main passed all 2,120 tests, 24 representative comparisons, three native launches/restarts and five screenshot reviews. Four earned boss runes also persist without duplication. Natural growth/farming, remaining balance and physical devices remain. [English record](../../Docs/Implementation/Edict_Field_Expansion.en.md)

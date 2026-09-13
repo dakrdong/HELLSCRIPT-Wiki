@@ -357,12 +357,7 @@ namespace Hellscript
             FooterButton(0,1,"성소로",ShowTown);
         }
         void ShowLog(RunRecord record)
-        {
-            pageRepaint=()=>ShowLog(record);Base("log",Loc.F("{0}단계 · {1}", record.stage, record.result),Loc.F("전투 {0:0}초 / 실제 {1:0}초 / 처치 {2}", record.simulationSeconds, record.realSeconds, record.kills));
-            ObjectiveResult(record.objective);
-            foreach(string line in record.logs.AsEnumerable().Reverse().Take(150))Note(content,Loc.LogLine(line),17,50,pale);
-            FooterButton(0,1,"기록 목록",ShowRecords);
-        }
+        {ShowRunReview(record);}
         public void ShowResult()
         {
             if(game.ComparisonRun){ShowComparisonResult();return;}
@@ -376,6 +371,8 @@ namespace Hellscript
             if(r.runesAwarded>0)Note(content,Loc.F("룬 {0}개 획득 · 룬 성장에서 배치할 수 있습니다.",r.runesAwarded),21,70,gold);
             if(r.training<0)ObjectiveResult(RiftObjectives.Capture(r));
             if(r.training<0&&r.phase==RunPhase.Failed&&r.health<=0)BigButton(content,"사망 원인 분석 (최근 5초 기록)",ShowDefeatAnalysis,true);
+            var completed=game.Store.Data.records.FirstOrDefault(record=>record.id==r.id);
+            if(r.training<0&&HasReview(completed))BigButton(content,"전투 상세 기록",()=>ShowRunReview(completed,true));
             if(game.Combat.OwnedTraining)BigButton(content,"시험한 설정을 슬롯에 저장",ShowTrainingPresetSave);
             if(r.training<0)Note(content,"성공·실패와 관계없이 이미 얻은 XP·장비·재화는 유지됩니다. 다음 해금과 변경할 행동을 확인한 뒤 다시 도전하세요.",20,104,pale);
             BigButton(content,"첫 플레이 안내 · 다음 할 일",ShowOnboarding);
@@ -387,6 +384,8 @@ namespace Hellscript
         public void ShowDefeatAnalysis()
         {
             if(game.Combat==null)return;var r=game.Combat.State;
+            var completed=game.Store.Data.records.FirstOrDefault(record=>record.id==r.id);
+            if(HasReview(completed)){ShowReviewWindow(completed,true,true);return;}
             pageRepaint=()=>ShowDefeatAnalysis();Base("defeat-analysis","사망 원인 분석","사망 직전 5초간의 피해 집중 및 스킬 불발 내역");
             var analysis=r.statistics?.BuildDefeatAnalysis(game.catalog,5f);
             if(analysis==null||analysis.snapshotCount==0)
@@ -448,6 +447,7 @@ namespace Hellscript
             ReflowBattleHud();
             ReflowEdictRows();
             ReflowRunes();
+            ReflowHistory();
             if(commonWasOpen||CommonPanelOpen)return;
             hudClock+=Time.unscaledDeltaTime;if(hudClock>.15f){hudClock=0;RefreshHud();}
             RefreshGuideHint();

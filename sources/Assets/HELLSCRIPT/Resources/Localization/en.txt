@@ -1619,7 +1619,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 전체 이동 설정	the global movement setting
 전체 이동 설정 사용	Use the global movement setting
 전체 적|정예·보스 우선|지원형 우선	Any enemy|Elites and bosses first|Support types first
-전투 {0:0}초 / 실제 {1:0}초 / 처치 {2}	Combat {0:0}s / Real {1:0}s / Kills {2}
 전투 기록	Combat records
 전투 복귀 HP	HP to return to combat
 전투 복귀 HP는 후퇴 시작 HP보다 높아야 합니다.	The HP for returning to combat has to be higher than the HP that starts a retreat.
@@ -2982,3 +2981,77 @@ G{0} {1}칸 ×2 → G{2} {3}칸 ×1 · 성공률 100%	G{0} {1}-hex ×2 → G{2} 
 {0}~{1}단계	Tiers {0}–{1}
 {0}칸 {1}%	{0}-hex {1}%
 모양은 선택된 크기 안에서 동일한 확률로 결정됩니다. 합성은 같은 등급·크기 두 개로 진행하며, 배치 중인 룬은 먼저 회수해야 합니다.	Shapes are equally likely within the rolled size. Fuse two runes of the same grade and size. Remove placed runes before using them as materials.
+
+# Completed combat history
+완료한 균열의 보관 기록	Archived record of a completed rift
+{0} · 전투 {1:0.0}초 · 실제 {2:0.0}초\n처치 {3} · 획득 장비 {4}개 · 상자 {5}/{6}	{0} · Combat {1:0.0}s · Real time {2:0.0}s\nKills {3} · Gear found {4} · Chests {5}/{6}
+종료 시 Lv.{0} · HP {1:0}/{2:0} · 자원 {3:0}	At completion: Lv.{0} · HP {1:0}/{2:0} · Resource {3:0}
+총 피해 {0:N0} · 실제 HP 피해 {1:N0}\n받은 피해 {2:N0} · HP 손실 {3:N0} · 보호막 흡수 {4:N0}\n걸은 거리 {5:0.0}m · 자원 부족 판단 {6}회	Damage {0:N0} · Actual HP damage {1:N0}\nDamage received {2:N0} · HP lost {3:N0} · Shield absorbed {4:N0}\nDistance walked {5:0.0}m · Insufficient-resource checks {6}
+전체 전투의 집계가 아닙니다. {0:0.0}초부터 관측한 합계입니다.	These totals cover observations from {0:0.0}s onward, rather than the entire fight.
+전투 중 설정이 바뀌었습니다. 전체 집계를 한 설정만의 성능으로 해석하지 마세요.	Settings changed during this fight. These totals do not represent the performance of a single configuration.
+실제 HP 피해는 과잉 피해를 제외합니다. 자원 부족은 판단 횟수이며, 소모한 자원이나 중단 횟수가 아닙니다.	Actual HP damage excludes overkill. Insufficient resource counts decision checks, not resource spent or interrupted actions.
+스킬·효과별 기록	Skills and effects
+마지막 5초 살펴보기	Review the last 5 seconds
+판단 기록	Decision history
+종료 시 설정과 장비	Final settings and equipment
+상세 기록 도입 전의 결과입니다. 남아 있는 요약과 문자 로그만 표시합니다.	This result predates detailed records. Its saved summary and text log remain available.
+이 상세 기록은 더 새로운 형식입니다. 요약과 문자 로그는 계속 볼 수 있습니다.	This detailed record uses a newer format. Its summary and text log remain available.
+문자 로그 보기	Open text log
+기록을 열어도 현재 장비·행동 설정·보상은 바뀌지 않습니다.	Viewing a record does not change your current equipment, action settings, or rewards.
+해당 균열에서 관측한 전체 합계	All observations recorded for this rift
+기록된 스킬·효과가 없습니다.	No skills or effects were recorded.
+시작 {0} · 발동 {1} · 완료 {2} · 중단 {3}\n적중 {4} · 피해 {5:N0} · 실제 HP 피해 {6:N0}\n자원 부족 판단 {7}회	Started {0} · Released {1} · Completed {2} · Interrupted {3}\nHits {4} · Damage {5:N0} · Actual HP damage {6:N0}\nInsufficient-resource checks {7}
+패시브·전설·장판의 피해도 실제 발생한 효과별로 표시합니다. 발동하지 않은 효과의 성능을 추정하지 않습니다.	Passive, legendary, and ground damage are listed by the effect that dealt them. Effects that never triggered have no inferred performance.
+전투 요약으로	Back to combat summary
+마지막 전투 구간	Final combat window
+기록한 시점의 피격과 스킬 불발	Recorded incoming hits and blocked skill attempts
+보관된 상세 전투 구간이 없습니다.	No detailed combat window was saved.
+실제 보관 구간 {0:0.00}초 · 표본 {1}개\n처음 HP {2:0} → 마지막 HP {3:0}\n받은 피해 {4:N0} · HP 손실 {5:N0}	Saved window {0:0.00}s · Samples {1}\nStarting HP {2:0} → Final HP {3:0}\nDamage received {4:N0} · HP lost {5:N0}
+5초 전체가 보관된 기록은 아닙니다. 짧은 전투이거나 이어하기 이후의 구간이며, 없는 구간은 추정하지 않습니다.	Less than five seconds were saved because the fight was short or resumed recently. Missing time is not reconstructed.
+아래 비율은 이 구간의 HP 손실에서 각 피격원이 차지한 비중입니다.	Each percentage is that source's share of HP lost in this window.
+HP 손실이 없어 아래 비율은 받은 피해의 비중입니다.	No HP was lost, so percentages show each source's share of damage received.
+{0}\n피해 {1:N0} · HP 손실 {2:N0} · {3}회 · 비중 {4:0.0}%	{0}\nDamage {1:N0} · HP lost {2:N0} · Hits {3} · Share {4:0.0}%
+{0} · {1} · {2}회	{0} · {1} · {2} times
+불발 기록은 조건을 검사한 결과입니다. 그 스킬을 썼다면 생존했을 것이라는 결론은 아닙니다.	Blocked attempts record condition checks. They do not prove that using a skill would have prevented death.
+상세 기록의 보관 한도에 도달했습니다. 최근 사건을 우선 보관했으며 위의 합계는 원래 관측값입니다.	The detail limit was reached. Recent events were kept first; the totals above still include all observed events.
+시점을 눌러 당시 위치·피격·규칙을 확인하세요.	Select a moment to inspect its position, incoming hits, and rules.
+{0:0.00}초 · HP {1:0} · 피격 {2} · 불발 {3}	{0:0.00}s · HP {1:0} · Hits received {2} · Blocked {3}
+{0:0.00}초의 전투	Combat at {0:0.00}s
+당시 관측값과 실제 판단 근거	Recorded state and the reasons behind decisions
+지속 공격	Channeling
+HP {0:0}/{1:0} · 자원 {2:0}\n위치 ({3:0.0}, {4:0.0}) · 대상 {5}\n{6} · {7}	HP {0:0}/{1:0} · Resource {2:0}\nPosition ({3:0.0}, {4:0.0}) · Target {5}\n{6} · {7}
+{0} · 피해 {1:N0} · HP 손실 {2:N0}	{0} · Damage {1:N0} · HP lost {2:N0}
+{0}번 규칙의 당시 내용	Inspect rule {0} at that moment
+마지막 구간으로	Back to final window
+당시 규칙	Rule at that moment
+저장된 근거를 읽습니다	Inspect the saved decision context
+{0}번 규칙 · {1}\n{2}\n{3}	Rule {0} · {1}\n{2}\n{3}
+당시 사냥 칙령 보기	View the edict at that moment
+현재 설정을 자동으로 바꾸지 않습니다. 이 기록의 조건과 지금 설정이 다를 수 있습니다.	Your current settings will not be changed. The conditions in this record may differ from your settings now.
+시점 상세로	Back to moment details
+사거리·자원·우선순위 등 당시의 실행 이유	Execution reasons, including range, resources, and priority
+보관 한도에 따라 최근 판단 기록을 표시합니다.	Only the most recent decision entries fit within the storage limit.
+보관된 판단 기록이 없습니다.	No decision entries were saved.
+{0:0.00}~{1:0.00}초 · {2}번 · {3} · {4}회\n{5}	{0:0.00}–{1:0.00}s · Rule {2} · {3} · Count {4}\n{5}
+보관 시점의 복사본 · 장착·적용하지 않습니다	A saved copy; viewing it does not equip or apply anything
+전투 종료 시 사냥 칙령 자동 판단을 사용했습니다.	A hunt edict controlled decisions at the end of this fight.
+전투 종료 시 기존 행동 규칙을 사용했습니다.	Legacy action rules controlled decisions at the end of this fight.
+사용 스킬: {0}	Active skills: {0}
+패시브: {0}	Passives: {0}
+종료 시 사냥 칙령 보기	View the final hunt edict
+{0}번 · {1}	Rule {0} · {1}
+종료 시 장착 장비	Equipment worn at completion
+{0}\n아이템 레벨 {1} · 강화 +{2}	{0}\nItem level {1} · Enhancement +{2}
+장비를 판매하거나 다른 캐릭터를 선택해도 이 복사본은 유지됩니다. 과거 장비를 다시 지급하거나 잠그는 기능은 아닙니다.	This copy remains after selling equipment or selecting another character. It does not grant or lock the original items.
+보관된 사냥 칙령	Archived hunt edict
+당시 설정의 읽기 전용 복사본	A read-only copy of the settings at that moment
+이전 기록으로	Back to previous record
+전투 문자 로그	Combat text log
+보관된 로그를 최신 순서로 표시합니다	Saved entries, newest first
+전투 상세 기록	Detailed combat record
+진행 중인 스킬 없음	No skill in progress
+보관된 기본 행동 규칙	Saved base action rules
+사냥 칙령이 활성인 전투에서는 스킬의 칙령 설정이 아래 기본 규칙보다 우선합니다.	When a hunt edict is active, its skill policies take precedence over the base rules below.
+인지한 적 없음  {0}초 이상	No enemy detected for at least {0}s
+현재 {0}	Current {0}
+행동 종류 미기록	Action type not recorded

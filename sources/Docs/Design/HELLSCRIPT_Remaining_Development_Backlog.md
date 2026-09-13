@@ -1,5 +1,7 @@
 # HELLSCRIPT 남은 개발 작업표
 
+갱신일: 2026-09-13
+
 **2026-09-13 균열 출구 선택 수정:** 현재 방의 유효 출구를 먼저 고르고, 성소의 실제 사용 거리 안에 들어온 뒤 사용하도록 수정했습니다. 균열 대조 360판에서 기존 규칙 169/180판, 핵심 기본값 173/180판이 클리어했고 성소 왕복 4판이 해결됐습니다. 룬 완료본을 포함한 최신 메인의 전체 검사 2,120개, 대표 대조 24판, 실제 앱 실행·재시작 3회와 화면 5장 검토도 마쳤습니다. 보스에게 얻은 룬 4개까지 재시작 후 중복 없이 유지됩니다. 자연 성장·파밍·남은 밸런스·모바일 실기기 검증은 후속 작업입니다. [개발 기록](../Implementation/Edict_Field_Expansion.md)
 
 English: current-room exit ordering and shrine use range are corrected. The controlled 360-run comparison cleared legacy 169/180 and core defaults 173/180, resolving four shrine loops. The Rune-integrated main passed all 2,120 tests, 24 representative comparisons, three native launches/restarts and five screenshot reviews. Four earned boss runes also persist without duplication. Natural growth/farming, remaining balance and physical devices remain. [English record](../Implementation/Edict_Field_Expansion.en.md)
@@ -122,6 +124,8 @@ A/B의 고정 기준·변경 목록·피해 출처별 누적 집계·회피 판�
 | A/B 비교 | 같은 시드·배치·영웅 상태에서 행동·스킬·패시브를 바꿔 정상 종료까지 비교한다. | 변경 목록·전체 누적 지표·최근 비교 1개 저장·선택한 설정의 명시적 활용을 구현했다. 60초·사망·표적 전멸을 구분하고 다른 장비나 레벨을 같은 조건으로 표시하지 않는다. N10 외 회피 분석과 5개 슬롯·공유 이관은 별도다. |
 | 최근 10회 | 결과 요약에서 원인 집계와 사망 직전 5전투초, 해당 행동 규칙으로 이동한다. | 당시 목표·상태·규칙 버전을 남긴다. 사거리 부족, 자원 부족, 다른 행동 진행 중, 제어에 의한 중단을 구분한다. |
 | 시간과 파밍 효율 | 전투·이동·회수·포탈·편집·로딩 시간을 구분해 보여 준다. | 전투 초당 피해와 실제 시간당 보상을 혼용하지 않는다. 배속에 별도 보상 배율을 곱하지 않는다. |
+
+최근 10회 상세 기록의 저장·조회 구현과 검증은 [전투 기록 개발 문서](../Implementation/Combat_History_Expansion.md)에 정리한다. 종료 시 설정과 불발 당시 설정을 구분하며, 재시작 전 관측하지 못한 구간을 추정하지 않는다. [English](../Implementation/Combat_History_Expansion.en.md)
 
 ## 6. 탐험 보상과 반복 플레이의 마무리
 

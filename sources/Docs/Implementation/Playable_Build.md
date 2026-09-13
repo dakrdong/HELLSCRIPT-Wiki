@@ -1,6 +1,12 @@
 # HELLSCRIPT 첫 플레이 빌드
 
-2026-09-13 최신 실행본은 `Builds/macOS-EdictField/HELLSCRIPT.app`입니다. 룬 성장 완료본을 포함하고, 현재 방 출구 선택과 성소 앞 왕복 문제를 수정했습니다. 균열 대조 실험 360판을 보존했으며, 최신 메인의 전체 검사 2,120개·대표 대조 24판·실제 앱 실행과 재시작 3회·화면 5장을 검증했습니다. 장비·재화·초회 보상과 보스로 얻은 룬이 재시작 후 중복 없이 유지됩니다. [개발 기록](Edict_Field_Expansion.md) · [English](Edict_Field_Expansion.en.md)
+갱신일: 2026-09-13
+
+최신 실행본은 `Builds/macOS-CombatHistory/HELLSCRIPT.app`입니다. **2026-09-13 전투 기록 보관:** 최근 10회에 스킬 집계·마지막 5초·당시 규칙과 칙령·종료 장비를 저장하고 다시 조회할 수 있습니다. 자동 반복 대기와 읽던 문단 유지, 다음 균열·캐릭터 변경·재시작을 검증했습니다. 전체 검사 2,156개와 실제 앱 검사 3회가 통과했습니다. [개발 기록](Combat_History_Expansion.md)
+
+English: the latest ten rifts now retain skill totals, the final five-second window, actual rule/edict context and final equipment. Countdown/reading-position behavior and history after another rift, character change and relaunch were verified. All 2,156 editor tests and three native processes passed. [English record](Combat_History_Expansion.en.md)
+
+2026-09-13 이전 실행본은 `Builds/macOS-EdictField/HELLSCRIPT.app`입니다. 룬 성장 완료본을 포함하고, 현재 방 출구 선택과 성소 앞 왕복 문제를 수정했습니다. 균열 대조 실험 360판을 보존했으며, 최신 메인의 전체 검사 2,120개·대표 대조 24판·실제 앱 실행과 재시작 3회·화면 5장을 검증했습니다. 장비·재화·초회 보상과 보스로 얻은 룬이 재시작 후 중복 없이 유지됩니다. [개발 기록](Edict_Field_Expansion.md) · [English](Edict_Field_Expansion.en.md)
 
 English: the latest player includes completed Rune mastery and corrects exit selection and shrine approach loops. The 360-run controlled field comparison is preserved separately. The combined main passed all 2,120 tests, 24 representative comparisons, three native launches/restarts and five screenshot reviews, including persistence of actual boss-reward runes. See the record for outcomes and limits.
 

@@ -154,6 +154,7 @@ namespace Hellscript
     [Serializable]
     public sealed class RunRecord
     {
+        public CombatReview review;
         public string id, hero, result;
         public int stage, kills, loot;
         public int chestsOpened, chestsTotal;

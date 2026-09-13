@@ -26,6 +26,8 @@ namespace Hellscript
         public string ruleId,code,detail,version;
         public int row,skill,targetId=-1,count=1;
         public float firstTime,lastTime;
+        public RuleAction action;
+        public bool actionKnown;
     }
     public sealed class ConditionDefinition
     {
