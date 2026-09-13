@@ -82,7 +82,25 @@ The same rune may be referenced in several alternative presets but appears at mo
 
 ## Acquisition and fusion
 
-New accounts and migrated saves receive twelve G0 single-hex runes and one G0 sample at each size 2–5, exactly once. Existing gear, currency and progress are preserved. Each real rift boss grants four runes. Reward grade is `min(6, floor(rift tier / 5))`; size is uniformly 1–5, and shape is uniform within that size. Use a separate deterministic reward stream and prevent duplicate grants for one run. Training, idle rewards and sweeps do not grant runes.
+New accounts and migrated saves receive twelve G0 single-hex runes and one G0 sample at each size 2–5, once. Samples are an explicit exception to monster drop restrictions. Existing owned runes are preserved.
+
+Normal kills have a **2%** chance to grant **one rune**; elite kills have a **20%** chance. Each real rift boss guarantees **four runes**. Successful drops go directly to dedicated rune storage, independently of gear bag capacity and equipment pickup filters. The result screen totals monster and boss runes. Already received runes survive defeat or returning to town.
+
+The following size percentages are **conditional on a successful rune drop**. Current rift tier determines color grade and size probabilities for normal, elite and boss rewards alike. For example, a normal monster at tiers 10–14 has a `2% × 15% = 0.3%` per-kill chance of yielding a three-hex rune.
+
+| Rift tier | Color grade | 1 hex | 2 hexes | 3 hexes | 4 hexes | 5 hexes |
+|---|---|---:|---:|---:|---:|---:|
+| 1–4 | G0 | 100% | 0% | 0% | 0% | 0% |
+| 5–9 | G1 | 80% | 20% | 0% | 0% | 0% |
+| 10–14 | G2 | 45% | 40% | 15% | 0% | 0% |
+| 15–19 | G3 | 15% | 35% | 35% | 15% | 0% |
+| 20–24 | G4 | 5% | 15% | 40% | 30% | 10% |
+| 25–29 | G5 | 0% | 5% | 30% | 40% | 25% |
+| 30+ | G6 | 0% | 0% | 20% | 40% | 40% |
+
+Roll drop success, then size, then a uniform shape within that size. Different shape counts never bias the size distribution. G0 drops are exclusively one hex, two hexes form the intermediate step, and G6 drops are exclusively three to five hexes. Color grade remains separate from board ability tier. The Rune Drop Rates screen, accessible from the board and fusion screens, displays this same balance data.
+
+Run ID and enemy ID determine results independently of combat and equipment RNG. Persist attempted rolls, including misses, to prevent rerolls after reload or item consumption. Boss rewards retain per-run receipts. Training, summoned enemies, idle rewards and sweeps grant no runes. Previously processed dead enemies in old saves receive no retroactive reward.
 
 Fuse two stored runes of the same grade and size; shapes may differ. Sizes 1–4 become the next size at the same grade. Size 5 becomes one hex at the next grade. G6 size 5 is final. Fusion always succeeds when valid and has no fee or destruction risk. Placed or unclaimed runes cannot be materials. Up to 100 pairs may be fused together; odd material counts or invalid rows reject the complete operation.
 

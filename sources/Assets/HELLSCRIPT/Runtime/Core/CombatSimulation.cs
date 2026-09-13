@@ -377,6 +377,8 @@ namespace Hellscript
                 State.meter+=e.elite>=0?5:1;
                 if(State.training<0)
                 {
+                    var rune=RuneGrowth.GrantMonster(account,State,e);
+                    if(rune!=null)Log("RUNE_DROP",Loc.Source("G{0} 룬 · {1}칸 · 모양 {2} 획득",rune.grade,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).Size,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).ShapeNumber));
                     account.gold+=Gold(e.elite>=0?25+5*State.stage:5+State.stage);
                     QueueExperience(Mathf.FloorToInt((e.elite>=0?50:10)*(1+.05f*(State.stage-1))));
                     bool drop=e.elite>=0||RandomStream.Unit(ref State.rewardRng)<.02f;

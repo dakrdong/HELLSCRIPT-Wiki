@@ -56,3 +56,35 @@ macOS 개발 빌드 경로는 `Builds/macOS/RuneMastery/HELLSCRIPT.app`입니다
 위키 생성·정합성 검사, Python 검사, JavaScript 화면·경로 검사와 룬 DB 대조 검사를 수행합니다. 공개본은 [전체 위키](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/tree), [룬 성장 기획](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/page/rune-mastery), [무기별 보드 DB](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/db/rune-boards), [룬 조각 DB](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/db/rune-shapes)에서 조회합니다. 원본 문서·이력·DB·첨부 자료를 함께 게시하며 공개본은 읽기 전용입니다.
 
 The native build succeeded with zero errors. Initial and process-restart result files and representative screenshots are linked above. The all-region screenshot uses a temporary stage-30 unlock on an isolated test account, not a natural-play achievement. The public wiki mirrors the complete documentation, history, exported database and evidence as read-only content.
+
+
+## 몬스터 드롭과 합성 확장
+
+2026-09-13 후속 변경입니다. 기존의 보스 전용·1~5칸 균등 지급을 단계별 분포로 교체하고 일반 몬스터 2%, 정예 몬스터 20% 드롭을 추가했습니다. 보스 4개 확정 보상은 유지합니다. 1~4단계 G0은 1칸만 나오고, 30단계 이상 G6은 3칸 20%·4칸 40%·5칸 40%로 나옵니다. 단계별 전체 표는 [획득과 합성 기획](../Design/HELLSCRIPT_Rune_Mastery.md)에 있습니다.
+
+`RuneEconomy`의 같은 정의를 실제 지급, 게임 내 ‘룬 드롭 확률’ 화면, 합성 결과 미리보기, 카탈로그 내보내기와 공개 DB에서 사용합니다. 룬은 몬스터 처치 보상 처리 중 전용 보관함으로 자동 수령됩니다. 장비 줍기 필터·가방 용량에 영향을 받지 않고 결과 화면은 몬스터와 보스의 지급 개수를 합산합니다. 훈련·소환 몬스터에서는 드롭하지 않습니다.
+
+`EnemyState.runeRewardRolled`는 성공과 실패 모두의 판정 완료를 기록합니다. 결과는 실행 ID와 몬스터 ID로 고정하고 별도 난수를 사용하므로 처치 순서·전투 난수·장비 보상 난수에 영향을 주지 않습니다. 이미 죽음 처리를 마친 기존 저장의 몬스터는 재처리하거나 소급 지급하지 않습니다. 보스 지급 기록과 기존 룬·프리셋·미수령 합성 결과는 유지합니다.
+
+합성은 같은 등급·크기 두 개에서 한 개로 진행합니다. 1~4칸은 같은 등급에서 한 칸 커지고, 5칸 두 개는 다음 등급 1칸이 됩니다. G6 5칸은 최종 단계입니다. 화면에서 각 행의 결과 등급·크기와 성공률 100%를 미리 확인할 수 있습니다. 결과 모양은 해당 크기의 모양 중 균등하게 선택합니다.
+
+[드롭 DB](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/db/rune-drops)는 몬스터 분류 3종 × 단계 구간 7종의 21개 기록을, [합성 DB](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/db/rune-fusion)는 최종 단계까지 포함한 35개 규칙을 제공합니다. 드롭 성공 확률과 성공 후 크기 조건부 확률을 구분해 표시합니다.
+
+### Drop and fusion expansion — English
+
+The follow-up replaces uniform boss-only sizes with stage-based distributions and adds normal (2%) and elite (20%) monster drops. Bosses still guarantee four runes. G0 tiers 1–4 drop only one-hex runes; G6 tier 30+ drops three/four/five hexes at 20%/40%/40%. RuneEconomy is the shared source for rewards, in-game rates, fusion previews and exported wiki data. Runes are automatically received into dedicated storage and do not depend on equipment bag space or pickup filters. The result screen totals monster and boss rewards. Training and summoned enemies are excluded.
+
+Every eligible corpse records its attempted roll, including misses. Results use run and enemy IDs independently of combat/gear RNG and death order. Old processed corpses are never replayed or rewarded retroactively. Existing ownership, global presets, pending fusion outcomes and boss receipts remain intact. Fusion previews show the exact output grade/size and guaranteed success; shapes are uniform within the output size. The public databases contain 21 drop profiles and 35 fusion rules, with conditional size rates explicitly distinguished from per-kill drop rates.
+
+
+### 드롭·합성 확장 검증
+
+관련 Edit Mode 검사 **138개가 모두 통과**했습니다. [검사 보고서](../../Artifacts/Validation/rune-loot-editmode.xml)는 크기 분포의 모든 백분위 경계, 단계 전환, 금지 크기, 일반·정예·보스 확률, 35개 합성 규칙, 실제 사망 처리 연결, 저장·복원과 룬 소비 이후 중복 방지를 포함합니다. 전투·장비 난수와 처치 순서 독립성, 기존 룬·전투 종료·장비 희귀도·저장·번역 회귀 검사도 통과했습니다.
+
+`Builds/macOS/RuneLoot/HELLSCRIPT.app` 개발 빌드는 오류 0개로 성공했습니다. [최초 실행 검사](RuneLootEvidence/initial-result.txt), [몬스터 드롭 검사](RuneLootEvidence/monster-drop-result.txt), [프로세스 재실행 검사](RuneLootEvidence/resume-result.txt)가 모두 통과했습니다. 실제 화면 버튼으로 확률표와 합성·수령을 열고 한국어 세로 화면, 영어 가로 화면과 글자 크기 140%를 확인했습니다. 재실행 후에도 미수령 결과가 유지되고, 결과 수령과 일시정지 중 보드 편집이 정상 작동했습니다.
+
+[한국어 드롭 확률](RuneLootEvidence/drop-rates-ko.png) · [영어 확률 안내·글자 140%](RuneLootEvidence/drop-rates-en-large.png) · [합성 결과 미리보기와 수령](RuneLootEvidence/fusion-result-ko.png)
+
+몬스터 실행 검사는 결과가 재현되는 별도 시험 계정을 사용했습니다. 실측 드롭 통계나 자연 플레이의 성장 속도를 측정한 결과는 아닙니다. 모바일 실기기와 장기 성장 경제는 후속 플레이 검증이 필요합니다.
+
+All **138 affected Edit Mode tests passed**, covering percentile boundaries, tier transitions, forbidden sizes, source rates, all 35 fusion rules, native death integration, persistence, consumed-item duplicate prevention, RNG/order independence and existing mastery/outcome/rarity/save/localization regression. The macOS development build succeeded with zero errors. Initial UI, native monster rewards and process-restart checks all passed. The linked screenshots cover Korean portrait, English landscape at 140% text and fusion output previews. Monster verification uses an isolated deterministic fixture; it is not empirical drop-rate, natural progression or physical mobile-device validation.

@@ -178,6 +178,7 @@ namespace Hellscript
         public Vector2 position, aim;
         public float health, maxHealth, attack, speed, cooldown, windup, stun, slow, poison, poisonDamage, mark, exposure;
         public bool boss, add, dead,pendingDeath;
+        public bool runeRewardRolled;
         public int pattern;
         public float setPoisonTime, setPoisonTick, frostMarkTime, frostCooldown;
         public float trapTick=.5f,blizzardTick=.5f,freeze,root;
