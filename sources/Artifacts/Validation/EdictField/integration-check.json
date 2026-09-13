@@ -1,0 +1,18 @@
+{
+  "checkedUtc": "2026-09-13T01:18:31.492074+00:00",
+  "fieldBaseCommit": "8e9e527898c1f520672a0ab00f8d3f0fc9018960",
+  "combinedBaseCommit": "d0c8e252e2f668889a8b75ed0552946ced254cef",
+  "runs": 24,
+  "matchingCombatSummaries": 24,
+  "differences": [],
+  "differentTailLogs": [],
+  "matchingNormalizedEncounters": 24,
+  "encounterSchemaChange": {
+    "removedEmptyFields": {
+      "runeSkillPower": 2832,
+      "runeBonuses": 2832
+    },
+    "explanation": "Rune added empty runeSkillPower/runeBonuses arrays to nested DamageSnapshot serialization. Each original and new raw export reproduces its audit fingerprint. Dropping only those verified-empty added fields yields identical combat seeds, boss kinds and complete enemy states."
+  },
+  "scope": "Six legal equipped presets, indices 0 and 1, both legacy and core defaults. No Rune placements. All combat summary fields and normalized full encounters match the pre-Rune field comparison. This is representative integration coverage, not a repeat of every 360-run condition or a Rune-board balance matrix."
+}

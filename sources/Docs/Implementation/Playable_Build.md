@@ -1,8 +1,12 @@
 # HELLSCRIPT 첫 플레이 빌드
 
-2026-09-13 최신 실행본은 `Builds/macOS-EdictRanger/HELLSCRIPT.app`입니다. 궁수 액티브·기본 사격의 핵심 옵션 30개를 독립 판단으로 연결했습니다. 전체 검사 2,079개와 실제 앱 실행·재시작 13회가 통과했고 화면 31장을 검토했습니다. [개발 기록](Edict_Ranger_Expansion.md) · [English](Edict_Ranger_Expansion.en.md)
+2026-09-13 최신 실행본은 `Builds/macOS-EdictField/HELLSCRIPT.app`입니다. 룬 성장 완료본을 포함하고, 현재 방 출구 선택과 성소 앞 왕복 문제를 수정했습니다. 균열 대조 실험 360판을 보존했으며, 최신 메인의 전체 검사 2,120개·대표 대조 24판·실제 앱 실행과 재시작 3회·화면 5장을 검증했습니다. 장비·재화·초회 보상과 보스로 얻은 룬이 재시작 후 중복 없이 유지됩니다. [개발 기록](Edict_Field_Expansion.md) · [English](Edict_Field_Expansion.en.md)
 
-English: the latest player independently applies all 30 Ranger active/BASIC core options. All 2,079 tests and 13 native launches/restarts passed, with 31 screenshots reviewed. See the record for controlled costs, earned charges, persistence, UI evidence and remaining work.
+English: the latest player includes completed Rune mastery and corrects exit selection and shrine approach loops. The 360-run controlled field comparison is preserved separately. The combined main passed all 2,120 tests, 24 representative comparisons, three native launches/restarts and five screenshot reviews, including persistence of actual boss-reward runes. See the record for outcomes and limits.
+
+2026-09-13 이전 궁수 실행본은 `Builds/macOS-EdictRanger/HELLSCRIPT.app`입니다. 궁수 액티브·기본 사격의 핵심 옵션 30개를 독립 판단으로 연결했습니다. 전체 검사 2,079개와 실제 앱 실행·재시작 13회가 통과했고 화면 31장을 검토했습니다. [개발 기록](Edict_Ranger_Expansion.md) · [English](Edict_Ranger_Expansion.en.md)
+
+English: the previous Ranger player independently applies all 30 Ranger active/BASIC core options. All 2,079 tests and 13 native launches/restarts passed, with 31 screenshots reviewed. See the record for controlled costs, earned charges, persistence, UI evidence and remaining work.
 
 2026-09-13 이전 전사 지원 실행본은 `Builds/macOS-EdictWarriorSupport/HELLSCRIPT.app`입니다. 철벽·전투 함성·전사 기본 공격의 13개 옵션을 연결해 전사 핵심 옵션 30개를 모두 독립 판단으로 적용합니다. 전체 검사 1,981개와 최종 앱의 실행·재시작 5회가 통과했고 화면 17장을 검토했습니다. [개발 기록](Edict_Warrior_Support_Expansion.md) · [English](Edict_Warrior_Support_Expansion.en.md)
 

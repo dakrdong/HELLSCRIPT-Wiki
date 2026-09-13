@@ -1,0 +1,1272 @@
+{
+  "createdUtc": "2026-09-13T01:41:35.497404+00:00",
+  "fieldBaseCommit": "8e9e527898c1f520672a0ab00f8d3f0fc9018960",
+  "integrationBaseCommit": "d0c8e252e2f668889a8b75ed0552946ced254cef",
+  "unity": "6000.6.0f1",
+  "fullTests": {
+    "total": "2120",
+    "passed": "2120",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-13 01:07:07Z",
+    "end-time": "2026-09-13 01:12:45Z",
+    "duration": "337.737545"
+  },
+  "fieldFullTests": {
+    "total": "2097",
+    "passed": "2097",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-13 00:43:36Z",
+    "end-time": "2026-09-13 00:50:58Z",
+    "duration": "441.268371"
+  },
+  "observerTests": {
+    "total": "2",
+    "passed": "2",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-12 23:51:21Z",
+    "end-time": "2026-09-12 23:52:01Z",
+    "duration": "40.0386378"
+  },
+  "routeTestsBefore": {
+    "total": "10",
+    "passed": "3",
+    "failed": "7",
+    "skipped": "0",
+    "start-time": "2026-09-12 23:58:23Z",
+    "end-time": "2026-09-12 23:58:23Z",
+    "duration": "0.2178377"
+  },
+  "routeTestsAfter": {
+    "total": "10",
+    "passed": "10",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-13 00:02:53Z",
+    "end-time": "2026-09-13 00:02:53Z",
+    "duration": "0.3305302"
+  },
+  "shrineTestsBefore": {
+    "total": "6",
+    "passed": "2",
+    "failed": "4",
+    "skipped": "0",
+    "start-time": "2026-09-13 00:40:09Z",
+    "end-time": "2026-09-13 00:40:12Z",
+    "duration": "2.7606479"
+  },
+  "shrineTestsAfter": {
+    "total": "6",
+    "passed": "6",
+    "failed": "0",
+    "skipped": "0",
+    "start-time": "2026-09-13 00:41:20Z",
+    "end-time": "2026-09-13 00:41:23Z",
+    "duration": "2.6240192"
+  },
+  "fullProcess": {
+    "startedUtc": "2026-09-13T01:05:35.865409+00:00",
+    "pid": 69116,
+    "endedUtc": "2026-09-13T01:12:46.966308+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-13T01:18:31.596529+00:00",
+    "pid": 72593,
+    "endedUtc": "2026-09-13T01:19:35.739161+00:00",
+    "exitCode": 0
+  },
+  "fixtureProcess": {
+    "startedUtc": "2026-09-13T01:14:52.339455+00:00",
+    "pid": 71878,
+    "endedUtc": "2026-09-13T01:15:14.897467+00:00",
+    "exitCode": 0
+  },
+  "fieldProcesses": {
+    "Probe1": {
+      "startedUtc": "2026-09-12T23:49:11.465178+00:00",
+      "pid": 47446,
+      "endedUtc": "2026-09-12T23:53:41.753696+00:00",
+      "exitCode": 0
+    },
+    "Probe2": {
+      "startedUtc": "2026-09-13T00:02:34.223484+00:00",
+      "pid": 51642,
+      "endedUtc": "2026-09-13T00:05:56.598669+00:00",
+      "exitCode": 0
+    },
+    "FieldA": {
+      "startedUtc": "2026-09-13T00:10:45.031278+00:00",
+      "pid": 53914,
+      "endedUtc": "2026-09-13T00:38:21.205406+00:00",
+      "exitCode": 0
+    },
+    "FieldB": {
+      "startedUtc": "2026-09-13T00:16:23.361577+00:00",
+      "pid": 54794,
+      "endedUtc": "2026-09-13T00:43:22.631777+00:00",
+      "exitCode": 0
+    },
+    "FieldC": {
+      "startedUtc": "2026-09-13T00:43:26.839465+00:00",
+      "pid": 64488,
+      "endedUtc": "2026-09-13T00:57:37.918706+00:00",
+      "exitCode": 0
+    },
+    "FieldD": {
+      "startedUtc": "2026-09-13T00:43:26.864325+00:00",
+      "pid": 64492,
+      "endedUtc": "2026-09-13T01:00:26.801949+00:00",
+      "exitCode": 0
+    },
+    "FieldE": {
+      "startedUtc": "2026-09-13T00:43:26.847716+00:00",
+      "pid": 64489,
+      "endedUtc": "2026-09-13T00:58:24.232686+00:00",
+      "exitCode": 0
+    },
+    "FieldF": {
+      "startedUtc": "2026-09-13T00:45:42.751419+00:00",
+      "pid": 65913,
+      "endedUtc": "2026-09-13T00:57:04.831490+00:00",
+      "exitCode": 0
+    }
+  },
+  "fieldRuns": 360,
+  "fieldPairs": 180,
+  "fieldOverall": {
+    "legacy": {
+      "runs": 180,
+      "outcomes": {
+        "Cleared": 169,
+        "TimeLimit": 11
+      },
+      "clearRatePercent": 93.88888888888889,
+      "meanClearSeconds": 206.28022964748405,
+      "medianClearSeconds": 203.65782165527344,
+      "meanAllRunSeconds": 212.00756573147243,
+      "bossSpawned": 180,
+      "bossRewarded": 169,
+      "navigationErrors": 0,
+      "maxStationaryApproachSeconds": 0.10000000149011612,
+      "meanChests": 1.5055555555555555,
+      "meanOccupancySeconds": {
+        "acting": 93.51456957923041,
+        "moving": 114.39876840379503,
+        "recovering": 0.0,
+        "stationaryWithTarget": 1.5094441315573124,
+        "stationaryWithoutTarget": 2.628610579503907
+      }
+    },
+    "core-default": {
+      "runs": 180,
+      "outcomes": {
+        "Cleared": 173,
+        "TimeLimit": 6,
+        "HeroDeath": 1
+      },
+      "clearRatePercent": 96.11111111111111,
+      "meanClearSeconds": 193.22364291152513,
+      "medianClearSeconds": 191.30706787109375,
+      "meanAllRunSeconds": 196.7566598256429,
+      "bossSpawned": 180,
+      "bossRewarded": 173,
+      "navigationErrors": 0,
+      "maxStationaryApproachSeconds": 0.05000000074505806,
+      "meanChests": 1.5,
+      "meanOccupancySeconds": {
+        "acting": 86.72579898834229,
+        "moving": 107.14582722981771,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.25305556278261876,
+        "stationaryWithoutTarget": 2.6761104471153683
+      }
+    }
+  },
+  "shrineBeforeAfter": {
+    "matchedRuns": 360,
+    "beforeOverall": {
+      "legacy": {
+        "runs": 180,
+        "outcomes": {
+          "Cleared": 167,
+          "TimeLimit": 13
+        },
+        "clearRatePercent": 92.77777777777779,
+        "meanClearSeconds": 206.78050908071552,
+        "medianClearSeconds": 204.2578582763672,
+        "meanAllRunSeconds": 213.5130477057563,
+        "bossSpawned": 178,
+        "bossRewarded": 167,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.10000000149011612,
+        "meanChests": 1.488888888888889,
+        "meanOccupancySeconds": {
+          "acting": 92.82428927951389,
+          "moving": 116.62214974297417,
+          "recovering": 0.0,
+          "stationaryWithTarget": 1.5152774611074062,
+          "stationaryWithoutTarget": 2.59472170372804
+        }
+      },
+      "core-default": {
+        "runs": 180,
+        "outcomes": {
+          "Cleared": 171,
+          "TimeLimit": 8,
+          "HeroDeath": 1
+        },
+        "clearRatePercent": 95.0,
+        "meanClearSeconds": 193.315939607676,
+        "medianClearSeconds": 191.30706787109375,
+        "meanAllRunSeconds": 198.03074870639378,
+        "bossSpawned": 178,
+        "bossRewarded": 171,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.05000000074505806,
+        "meanChests": 1.4777777777777779,
+        "meanOccupancySeconds": {
+          "acting": 85.93634249369303,
+          "moving": 109.25614640977648,
+          "recovering": 0.0,
+          "stationaryWithTarget": 0.24750000606808398,
+          "stationaryWithoutTarget": 2.6344437619050343
+        }
+      }
+    },
+    "changedRuns": [
+      {
+        "key": [
+          0,
+          0,
+          6,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 150.40457153320312,
+          "bossSpawnTime": 100.40152740478516,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 139.25389099121094,
+          "bossSpawnTime": 89.25084686279297,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          6,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 136.10369873046875,
+          "bossSpawnTime": 87.0007095336914,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 133.5035400390625,
+          "bossSpawnTime": 82.9504623413086,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          2,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 190.45701599121094,
+          "bossSpawnTime": 120.45275115966797,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 186.3067626953125,
+          "bossSpawnTime": 116.35250091552734,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          2,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 187.70684814453125,
+          "bossSpawnTime": 113.10230255126953,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 187.4568328857422,
+          "bossSpawnTime": 110.70215606689453,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          4,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 227.9093017578125,
+          "bossSpawnTime": 145.75428771972656,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 232.6595916748047,
+          "bossSpawnTime": 149.70452880859375,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          5,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 3,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 153.0547332763672,
+          "bossSpawnTime": 92.75106048583984,
+          "visited": 5,
+          "chests": 3
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          7,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 182.05650329589844,
+          "bossSpawnTime": 97.85137176513672,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 177.30621337890625,
+          "bossSpawnTime": 94.9511947631836,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          7,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 166.20553588867188,
+          "bossSpawnTime": 90.70093536376953,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 164.20541381835938,
+          "bossSpawnTime": 86.2006607055664,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          2,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 250.3606719970703,
+          "bossSpawnTime": 162.20529174804688,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 248.01052856445312,
+          "bossSpawnTime": 155.35487365722656,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          2,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 216.50860595703125,
+          "bossSpawnTime": 139.65391540527344,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 215.40853881835938,
+          "bossSpawnTime": 140.2539520263672,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          3,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 239.9100341796875,
+          "bossSpawnTime": 176.6561737060547,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 249.8606414794922,
+          "bossSpawnTime": 176.00613403320312,
+          "visited": 8,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          5,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 248.3605499267578,
+          "bossSpawnTime": 170.45579528808594,
+          "visited": 8,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 242.6602020263672,
+          "bossSpawnTime": 161.40524291992188,
+          "visited": 8,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          2,
+          0,
+          4,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 225.0591278076172,
+          "bossSpawnTime": 150.70458984375,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 221.4589080810547,
+          "bossSpawnTime": 147.1043701171875,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          12,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 217.4586639404297,
+          "bossSpawnTime": 145.20425415039062,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 216.95863342285156,
+          "bossSpawnTime": 142.15406799316406,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          15,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 2,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 182.45652770996094,
+          "bossSpawnTime": 78.50019073486328,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          8,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 139.80392456054688,
+          "bossSpawnTime": 69.7496566772461,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 138.10382080078125,
+          "bossSpawnTime": 67.19950103759766,
+          "visited": 4,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          8,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 139.30389404296875,
+          "bossSpawnTime": 69.54964447021484,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 137.1537628173828,
+          "bossSpawnTime": 67.3995132446289,
+          "visited": 4,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          13,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 155.9049072265625,
+          "bossSpawnTime": 96.50128936767578,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 154.6548309326172,
+          "bossSpawnTime": 95.3512191772461,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          14,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 147.1043701171875,
+          "bossSpawnTime": 78.00016021728516,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 142.95411682128906,
+          "bossSpawnTime": 73.84990692138672,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          15,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 121.30280303955078,
+          "bossSpawnTime": 78.9502182006836,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 119.10266876220703,
+          "bossSpawnTime": 76.75008392333984,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          8,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 268.3080139160156,
+          "bossSpawnTime": 153.30474853515625,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 260.8598327636719,
+          "bossSpawnTime": 149.00448608398438,
+          "visited": 5,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          8,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 226.60922241210938,
+          "bossSpawnTime": 135.503662109375,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 223.20901489257812,
+          "bossSpawnTime": 129.35328674316406,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          9,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 2,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 240.61007690429688,
+          "bossSpawnTime": 177.4562225341797,
+          "visited": 6,
+          "chests": 3
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          20,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 205.0579071044922,
+          "bossSpawnTime": 129.65330505371094,
+          "visited": 5,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 197.9574737548828,
+          "bossSpawnTime": 124.90302276611328,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          20,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 194.40725708007812,
+          "bossSpawnTime": 126.9531478881836,
+          "visited": 5,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 196.60739135742188,
+          "bossSpawnTime": 125.45305633544922,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          22,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 154.55482482910156,
+          "bossSpawnTime": 112.65227508544922,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 151.00460815429688,
+          "bossSpawnTime": 109.10205841064453,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          2,
+          0,
+          16,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 220.2588348388672,
+          "bossSpawnTime": 117.45256805419922,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 214.50848388671875,
+          "bossSpawnTime": 111.15218353271484,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          17,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 213.80844116210938,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 204.95790100097656,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          17,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 284.4040832519531,
+          "bossSpawnTime": 180.80642700195312,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 280.6549987792969,
+          "bossSpawnTime": 177.0561981201172,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          22,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 213.5584259033203,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 210.3582305908203,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          24,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 2,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 205.40792846679688,
+          "bossSpawnTime": 136.15370178222656,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          29,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 191.70709228515625,
+          "bossSpawnTime": 111.20218658447266,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 188.15687561035156,
+          "bossSpawnTime": 107.65196990966797,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          29,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 183.70660400390625,
+          "bossSpawnTime": 104.70178985595703,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 177.1562042236328,
+          "bossSpawnTime": 103.20169830322266,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          28,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 192.50714111328125,
+          "bossSpawnTime": 107.60196685791016,
+          "visited": 6,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 196.7574005126953,
+          "bossSpawnTime": 111.45220184326172,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          29,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 261.9095764160156,
+          "bossSpawnTime": 139.80392456054688,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 259.7601013183594,
+          "bossSpawnTime": 138.05381774902344,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          29,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 234.3596954345703,
+          "bossSpawnTime": 130.00332641601562,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 224.20907592773438,
+          "bossSpawnTime": 121.05278778076172,
+          "visited": 6,
+          "chests": 1
+        }
+      }
+    ],
+    "scope": "360 wall-only runs versus the same 360 inputs with the shrine approach/use-radius correction. Only CombatSimulation.Field.cs changes runtime behavior between these sets; the additional source files are focused tests."
+  },
+  "integration": {
+    "checkedUtc": "2026-09-13T01:18:31.492074+00:00",
+    "fieldBaseCommit": "8e9e527898c1f520672a0ab00f8d3f0fc9018960",
+    "combinedBaseCommit": "d0c8e252e2f668889a8b75ed0552946ced254cef",
+    "runs": 24,
+    "matchingCombatSummaries": 24,
+    "differences": [],
+    "differentTailLogs": [],
+    "matchingNormalizedEncounters": 24,
+    "encounterSchemaChange": {
+      "removedEmptyFields": {
+        "runeSkillPower": 2832,
+        "runeBonuses": 2832
+      },
+      "explanation": "Rune added empty runeSkillPower/runeBonuses arrays to nested DamageSnapshot serialization. Each original and new raw export reproduces its audit fingerprint. Dropping only those verified-empty added fields yields identical combat seeds, boss kinds and complete enemy states."
+    },
+    "scope": "Six legal equipped presets, indices 0 and 1, both legacy and core defaults. No Rune placements. All combat summary fields and normalized full encounters match the pre-Rune field comparison. This is representative integration coverage, not a repeat of every 360-run condition or a Rune-board balance matrix."
+  },
+  "integrationProcess": {
+    "startedUtc": "2026-09-13T01:05:35.874973+00:00",
+    "pid": 69117,
+    "endedUtc": "2026-09-13T01:09:59.296694+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "checkpoint": {
+      "startedUtc": "2026-09-13T01:21:53.006712+00:00",
+      "pid": 73259,
+      "endedUtc": "2026-09-13T01:22:03.852859+00:00",
+      "exitCode": 0
+    },
+    "resume": {
+      "startedUtc": "2026-09-13T01:22:03.857299+00:00",
+      "pid": 73291,
+      "endedUtc": "2026-09-13T01:22:31.960449+00:00",
+      "exitCode": 0
+    },
+    "result-restart": {
+      "startedUtc": "2026-09-13T01:22:31.962100+00:00",
+      "pid": 73353,
+      "endedUtc": "2026-09-13T01:22:37.912228+00:00",
+      "exitCode": 0
+    }
+  },
+  "nativeResults": {
+    "checkpoint": "PASS: A generated rift reached a real exit route after combat and discovery; saved its actual state without route or combat overrides.",
+    "resume": "PASS: The same route resumed with saved discovery, resources and random streams, cleared the real boss and committed actual tier-10 rewards.",
+    "result-restart": "PASS: A second restart preserved the earned clear, inventory and transaction receipts without restarting or rewarding the completed rift again."
+  },
+  "nativeScreenshots": [
+    "checkpoint-01-natural-exit-ko.png",
+    "result-restart-01-persisted-rewards-ko.png",
+    "resume-01-restored-route-en.png",
+    "resume-02-clear-result-ko.png",
+    "resume-03-clear-result-en.png"
+  ],
+  "nativeRestored": {
+    "time": 43.799617767333984,
+    "position": {
+      "x": 24.959867477416992,
+      "y": 37.595176696777344
+    },
+    "destination": {
+      "x": -3.0,
+      "y": 50.0
+    },
+    "health": 1264.484130859375,
+    "resource": 111.97000122070312,
+    "visited": [
+      0,
+      1
+    ],
+    "exploration": {
+      "room": 1,
+      "enteredFrom": 0,
+      "failures": 0,
+      "repaths": 0,
+      "goalId": "exit:1",
+      "chestId": "",
+      "shrineId": "",
+      "sealId": "",
+      "goal": {
+        "x": -3.0,
+        "y": 50.0
+      },
+      "probePosition": {
+        "x": 25.556116104125977,
+        "y": 37.31218719482422
+      },
+      "entryDirection": {
+        "x": -1.0,
+        "y": 0.0
+      },
+      "holdUntil": 44.299617767333984,
+      "probeTime": 43.69961929321289,
+      "observed": [
+        "0:observe:0",
+        "0:observe:1",
+        "0:observe:2",
+        "0:observe:5",
+        "0:observe:4",
+        "0:observe:3",
+        "1:observe:5",
+        "1:observe:2",
+        "1:observe:3",
+        "1:observe:1",
+        "1:observe:4",
+        "1:observe:0"
+      ],
+      "deferred": [],
+      "enemies": []
+    }
+  },
+  "nativeCompleted": {
+    "time": 253.61087036132812,
+    "phase": 3,
+    "kills": 115,
+    "bossRewarded": true,
+    "runesAwarded": 4,
+    "navigationError": ""
+  },
+  "nativeRunes": {
+    "before": 16,
+    "after": 20,
+    "bossRewardReceipts": 1,
+    "placements": 0,
+    "exactPersistedStateCheckedOnRestart": true
+  },
+  "branchStatus": {
+    "checkedUtc": "2026-09-13T01:22:53.257783+00:00",
+    "localBranches": [
+      "main"
+    ],
+    "remoteHeads": [
+      "d0c8e252e2f668889a8b75ed0552946ced254cef\trefs/heads/main"
+    ],
+    "worktrees": "worktree /Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT\nHEAD d0c8e252e2f668889a8b75ed0552946ced254cef\nbranch refs/heads/main\n\n",
+    "claudeCommit": "b1f3ea5",
+    "claudeIsAncestor": true,
+    "runeCommit": "d0c8e252e2f668889a8b75ed0552946ced254cef",
+    "runeIsAncestor": true,
+    "priorCleanupEvidence": "Artifacts/Validation/BranchCleanup/completion.json",
+    "actionThisCheck": "Only main exists locally/remotely. Both Claude and the completed Rune commit are included. No new branch, merge or deletion was needed."
+  },
+  "scope": "Current-junction wall ordering and actual shrine use range before invocation. The 360-run controlled comparison pins the pre-Rune base; the final full suite, player and 24 representative combat/encounter comparisons include the completed Rune merge d0c8e25. No combat numbers, generated geometry, reward policy or serialized gameplay fields were changed by the field fixes.",
+  "limitations": [
+    "The 24-run wall-ordering comparison and 360-run shrine comparison are distinct. Neither establishes a universal win-rate gain.",
+    "The Rune-integrated 24-run check uses empty boards; it does not retest every 360-run condition or all Rune placements.",
+    "Remaining timeouts and the Ranger ambush death are retained in the complete outcome records.",
+    "Maximum-level legal equipment fixtures do not measure natural progression, farming, or physical mobile-device performance.",
+    "The debug helper advances real fixed combat ticks while GameController.Update is disabled. Real 0.0s in screenshots is the unadvanced wall-clock display; speed options and real-time pacing are not tested."
+  ],
+  "earlierVerification": "The early pre-fix route reproduction briefly included six unrelated Rune source copies. They were removed from the stopped clone. Field comparisons then pinned the pre-Rune base. After Rune work was committed and published, it was included in separate final integration validation.",
+  "concurrentWork": {
+    "observedUtc": "2026-09-13T01:41:00.719246+00:00",
+    "threadId": "01a09800-b921-7840-b7e6-63fed9caa6cd",
+    "threadTitle": "룬 보드 기능 파악",
+    "activeFollowup": "Rune fusion previews and tier-dependent normal/elite monster drops.",
+    "publicationScope": "The completed d0c8e25 Rune mastery source plus the field corrections. The new uncommitted Rune economy follow-up remains owned by its active task and is excluded from this validation/publication. Existing shared wiki tools and publishing instructions are retained.",
+    "workspaceCheck": "A direct workspace check correctly found three changing gameplay/localization sources and the previously unmirrored CLAUDE.md. CLAUDE.md is now mirrored; the three active gameplay sources deliberately remain outside the pinned publication snapshot.",
+    "sourceDifferences": [
+      "Assets/HELLSCRIPT/Resources/Localization/en.txt",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs",
+      "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs"
+    ]
+  },
+  "wikiValidation": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T10:41:22+09:00",
+    "pages": 134,
+    "databases": 21,
+    "records": 3094,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "rune-shapes": 34,
+      "rune-boards": 2562,
+      "validation": 89
+    },
+    "documentLinks": 1058,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 506,
+    "gameExecution": "not performed; preserved reports only"
+  },
+  "wikiCheck": {
+    "result": "passed",
+    "generatedAt": "2026-09-13T10:41:22+09:00",
+    "pages": 134,
+    "databases": 21,
+    "records": 3094,
+    "recordsByDatabase": {
+      "resources": 115,
+      "skills": 18,
+      "content-unlocks": 9,
+      "passives": 18,
+      "heroes": 3,
+      "conditions": 22,
+      "builds": 6,
+      "items": 24,
+      "attributes": 57,
+      "affixes": 54,
+      "legendaries": 15,
+      "sets": 6,
+      "set-items": 24,
+      "enemies": 12,
+      "elites": 6,
+      "bosses": 3,
+      "rooms": 12,
+      "field": 5,
+      "rune-shapes": 34,
+      "rune-boards": 2562,
+      "validation": 89
+    },
+    "documentLinks": 1058,
+    "imageReferences": 97,
+    "uniqueImageFiles": 4,
+    "sourceFiles": 506,
+    "gameExecution": "not performed; preserved reports only",
+    "publicPages": 134
+  }
+}

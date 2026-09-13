@@ -1,5 +1,9 @@
 # HELLSCRIPT 남은 개발 작업표
 
+**2026-09-13 균열 출구 선택 수정:** 현재 방의 유효 출구를 먼저 고르고, 성소의 실제 사용 거리 안에 들어온 뒤 사용하도록 수정했습니다. 균열 대조 360판에서 기존 규칙 169/180판, 핵심 기본값 173/180판이 클리어했고 성소 왕복 4판이 해결됐습니다. 룬 완료본을 포함한 최신 메인의 전체 검사 2,120개, 대표 대조 24판, 실제 앱 실행·재시작 3회와 화면 5장 검토도 마쳤습니다. 보스에게 얻은 룬 4개까지 재시작 후 중복 없이 유지됩니다. 자연 성장·파밍·남은 밸런스·모바일 실기기 검증은 후속 작업입니다. [개발 기록](../Implementation/Edict_Field_Expansion.md)
+
+English: current-room exit ordering and shrine use range are corrected. The controlled 360-run comparison cleared legacy 169/180 and core defaults 173/180, resolving four shrine loops. The Rune-integrated main passed all 2,120 tests, 24 representative comparisons, three native launches/restarts and five screenshot reviews. Four earned boss runes also persist without duplication. Natural growth/farming, remaining balance and physical devices remain. [English record](../Implementation/Edict_Field_Expansion.en.md)
+
 **2026-09-13 궁수 핵심 옵션:** 액티브 6종과 기본 사격의 핵심 옵션 30개를 독립 판단에 연결했습니다. 전체 검사 2,079개, 궁수 전용 98개와 실제 앱 실행·재시작 13회가 통과했고 화면 31장을 검토했습니다. 덫·투사체·후퇴 후 보행·표식·실제 적중으로 얻는 할인과 저장 복원을 확인했습니다. 생성 균열의 장기 생존·성장·파밍 효용과 모바일 실기기 검증은 남아 있습니다. [개발 기록](../Implementation/Edict_Ranger_Expansion.md)
 
 English: all 30 Ranger active/BASIC core options now use independent policies. All 2,079 tests, 98 Ranger-specific cases and 13 native launches/restarts passed; 31 screenshots were reviewed. Actual traps, projectiles, follow-up walking, Mark, earned hit discounts and persistence were verified. Long-run generated-rift survival/growth/farming and mobile-device validation remain. [English record](../Implementation/Edict_Ranger_Expansion.en.md)

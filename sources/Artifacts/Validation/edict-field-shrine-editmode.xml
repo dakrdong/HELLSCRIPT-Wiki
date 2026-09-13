@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Passed" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:23Z" duration="2.6240192">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="2097" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:23Z" duration="2.624019" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="3483" name="Hellscript.Tests.dll" fullname="/private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="2097" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:23Z" duration="2.587031" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="63760" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="3484" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="2097" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:23Z" duration="2.551487" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="3485" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="2097" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:23Z" duration="2.514010" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="3394" name="ShrineApproachRangeTests" fullname="Hellscript.Tests.ShrineApproachRangeTests" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:23Z" duration="2.474078" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="3400" name="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" fullname="Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:21Z" duration="0.968659" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3398" name="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH01&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH01&quot;)" methodname="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1838609791" result="Passed" start-time="2026-09-13 00:41:20Z" end-time="2026-09-13 00:41:21Z" duration="0.359192" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3399" name="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH02&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH02&quot;)" methodname="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="586735594" result="Passed" start-time="2026-09-13 00:41:21Z" end-time="2026-09-13 00:41:21Z" duration="0.601694" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="3403" name="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" fullname="Hellscript.Tests.ShrineApproachRangeTests.LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-13 00:41:21Z" end-time="2026-09-13 00:41:22Z" duration="0.721876" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3401" name="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH01&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH01&quot;)" methodname="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1545791340" result="Passed" start-time="2026-09-13 00:41:21Z" end-time="2026-09-13 00:41:21Z" duration="0.160022" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3402" name="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH02&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH02&quot;)" methodname="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1426948360" result="Passed" start-time="2026-09-13 00:41:21Z" end-time="2026-09-13 00:41:22Z" duration="0.560567" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="3397" name="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" fullname="Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-13 00:41:22Z" end-time="2026-09-13 00:41:23Z" duration="0.780857" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3395" name="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH01&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH01&quot;)" methodname="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1040078983" result="Passed" start-time="2026-09-13 00:41:22Z" end-time="2026-09-13 00:41:22Z" duration="0.201501" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3396" name="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH02&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH02&quot;)" methodname="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1521466626" result="Passed" start-time="2026-09-13 00:41:22Z" end-time="2026-09-13 00:41:23Z" duration="0.578517" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,3854 @@
+{
+  "createdUtc": "2026-09-13T01:06:45.051960+00:00",
+  "status": "complete",
+  "runs": 360,
+  "matchedPairs": 180,
+  "scope": "Tier 10, level 30, eight legal item-level-30 slots, current 54 affixes, six presets, indices 0-29. Legacy versus fresh core defaults with global survival OFF. Fixed route implementation in both modes. This is not an isolated skill comparison, natural growth/farming, mobile performance or full-game completion.",
+  "shards": {
+    "FieldC": {
+      "runs": 96,
+      "rowsSha256": "384dc45a772f01ae7c473e1bfc58906947869db3e82bb5c81eb009e7a73c828a"
+    },
+    "FieldD": {
+      "runs": 96,
+      "rowsSha256": "a3d9bf5161b5cb7f845eaa4d79ac46c298809a1a47c911438dff5ff9b7cae5e6"
+    },
+    "FieldE": {
+      "runs": 84,
+      "rowsSha256": "2d6223cdc2f5ef81e2e6ad2a6b1fd45e09ebc11252e2295cca467ae06aac3c3b"
+    },
+    "FieldF": {
+      "runs": 84,
+      "rowsSha256": "c7dff0b84fede321e0ecc413c9b93dff22f9f20ce3b19db12f7cbe56b6d02ee8"
+    }
+  },
+  "overall": {
+    "legacy": {
+      "runs": 180,
+      "outcomes": {
+        "Cleared": 169,
+        "TimeLimit": 11
+      },
+      "clearRatePercent": 93.88888888888889,
+      "meanClearSeconds": 206.28022964748405,
+      "medianClearSeconds": 203.65782165527344,
+      "meanAllRunSeconds": 212.00756573147243,
+      "bossSpawned": 180,
+      "bossRewarded": 169,
+      "navigationErrors": 0,
+      "maxStationaryApproachSeconds": 0.10000000149011612,
+      "meanChests": 1.5055555555555555,
+      "meanOccupancySeconds": {
+        "acting": 93.51456957923041,
+        "moving": 114.39876840379503,
+        "recovering": 0.0,
+        "stationaryWithTarget": 1.5094441315573124,
+        "stationaryWithoutTarget": 2.628610579503907
+      }
+    },
+    "core-default": {
+      "runs": 180,
+      "outcomes": {
+        "Cleared": 173,
+        "TimeLimit": 6,
+        "HeroDeath": 1
+      },
+      "clearRatePercent": 96.11111111111111,
+      "meanClearSeconds": 193.22364291152513,
+      "medianClearSeconds": 191.30706787109375,
+      "meanAllRunSeconds": 196.7566598256429,
+      "bossSpawned": 180,
+      "bossRewarded": 173,
+      "navigationErrors": 0,
+      "maxStationaryApproachSeconds": 0.05000000074505806,
+      "meanChests": 1.5,
+      "meanOccupancySeconds": {
+        "acting": 86.72579898834229,
+        "moving": 107.14582722981771,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.25305556278261876,
+        "stationaryWithoutTarget": 2.6761104471153683
+      }
+    }
+  },
+  "builds": [
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "modes": {
+        "legacy": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 198.0656473795573,
+          "medianClearSeconds": 198.55751037597656,
+          "meanAllRunSeconds": 198.0656473795573,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.0,
+          "meanChests": 1.4,
+          "meanOccupancySeconds": {
+            "acting": 82.11875839233399,
+            "moving": 113.39398396809896,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.07666666805744171,
+            "stationaryWithoutTarget": 2.5216659128665926
+          }
+        },
+        "core-default": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 186.066748046875,
+          "medianClearSeconds": 189.83197784423828,
+          "meanAllRunSeconds": 186.066748046875,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.0,
+          "meanChests": 1.3666666666666667,
+          "meanOccupancySeconds": {
+            "acting": 75.73007431030274,
+            "moving": 107.18193918863932,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.4049999949832757,
+            "stationaryWithoutTarget": 2.794999194145203
+          }
+        }
+      }
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "modes": {
+        "legacy": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 171.4258550008138,
+          "medianClearSeconds": 174.15602111816406,
+          "meanAllRunSeconds": 171.4258550008138,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.05000000074505806,
+          "meanChests": 1.4333333333333333,
+          "meanOccupancySeconds": {
+            "acting": 55.514513142903645,
+            "moving": 110.87383117675782,
+            "recovering": 0.0,
+            "stationaryWithTarget": 2.238332301005721,
+            "stationaryWithoutTarget": 2.845000143845876
+          }
+        },
+        "core-default": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 172.16923344930012,
+          "medianClearSeconds": 172.80593872070312,
+          "meanAllRunSeconds": 172.16923344930012,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.05000000074505806,
+          "meanChests": 1.4333333333333333,
+          "meanOccupancySeconds": {
+            "acting": 58.01282272338867,
+            "moving": 111.21385167439779,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.08666666808227698,
+            "stationaryWithoutTarget": 2.901666760444641
+          }
+        }
+      }
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "modes": {
+        "legacy": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 216.73913014729817,
+          "medianClearSeconds": 206.20797729492188,
+          "meanAllRunSeconds": 216.73913014729817,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.10000000149011612,
+          "meanChests": 1.8,
+          "meanOccupancySeconds": {
+            "acting": 96.0462651570638,
+            "moving": 115.9074717203776,
+            "recovering": 0.0,
+            "stationaryWithTarget": 2.0633333404858907,
+            "stationaryWithoutTarget": 2.7683327118555705
+          }
+        },
+        "core-default": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 187.00841318766277,
+          "medianClearSeconds": 179.0813217163086,
+          "meanAllRunSeconds": 187.00841318766277,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.0,
+          "meanChests": 1.8333333333333333,
+          "meanOccupancySeconds": {
+            "acting": 78.28521817525228,
+            "moving": 105.88352711995442,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.15000000794728596,
+            "stationaryWithoutTarget": 2.734999136130015
+          }
+        }
+      }
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "modes": {
+        "legacy": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 190.38353932698567,
+          "medianClearSeconds": 187.8568572998047,
+          "meanAllRunSeconds": 190.38353932698567,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.10000000149011612,
+          "meanChests": 1.3666666666666667,
+          "meanOccupancySeconds": {
+            "acting": 86.35070838928223,
+            "moving": 100.1981808980306,
+            "recovering": 0.0,
+            "stationaryWithTarget": 1.3499997536341348,
+            "stationaryWithoutTarget": 2.5299991448720296
+          }
+        },
+        "core-default": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 29,
+            "HeroDeath": 1
+          },
+          "clearRatePercent": 96.66666666666667,
+          "meanClearSeconds": 187.19638166756465,
+          "medianClearSeconds": 188.85691833496094,
+          "meanAllRunSeconds": 187.2400655110677,
+          "bossSpawned": 30,
+          "bossRewarded": 29,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.0,
+          "meanChests": 1.3333333333333333,
+          "meanOccupancySeconds": {
+            "acting": 86.25066375732422,
+            "moving": 98.40140482584636,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.13166667185723782,
+            "stationaryWithoutTarget": 2.499999173482259
+          }
+        }
+      }
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "modes": {
+        "legacy": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 29,
+            "TimeLimit": 1
+          },
+          "clearRatePercent": 96.66666666666667,
+          "meanClearSeconds": 218.62381191911368,
+          "medianClearSeconds": 214.50848388671875,
+          "meanAllRunSeconds": 221.33636067708332,
+          "bossSpawned": 30,
+          "bossRewarded": 29,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.10000000149011612,
+          "meanChests": 1.4,
+          "meanOccupancySeconds": {
+            "acting": 105.62184575398763,
+            "moving": 111.50387013753256,
+            "recovering": 0.0,
+            "stationaryWithTarget": 1.6666666328907014,
+            "stationaryWithoutTarget": 2.5883323987325033
+          }
+        },
+        "core-default": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 30
+          },
+          "clearRatePercent": 100.0,
+          "meanClearSeconds": 197.0754592895508,
+          "medianClearSeconds": 192.60714721679688,
+          "meanAllRunSeconds": 197.0754592895508,
+          "bossSpawned": 30,
+          "bossRewarded": 30,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.0,
+          "meanChests": 1.4,
+          "meanOccupancySeconds": {
+            "acting": 91.14596252441406,
+            "moving": 103.23837229410807,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.15000000720222792,
+            "stationaryWithoutTarget": 2.5866655031840007
+          }
+        }
+      }
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "modes": {
+        "legacy": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 20,
+            "TimeLimit": 10
+          },
+          "clearRatePercent": 66.66666666666666,
+          "meanClearSeconds": 261.142155456543,
+          "medianClearSeconds": 262.0095520019531,
+          "meanAllRunSeconds": 274.09486185709636,
+          "bossSpawned": 30,
+          "bossRewarded": 20,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.10000000149011612,
+          "meanChests": 1.6333333333333333,
+          "meanOccupancySeconds": {
+            "acting": 135.4353266398112,
+            "moving": 134.51527252197266,
+            "recovering": 0.0,
+            "stationaryWithTarget": 1.6616660932699838,
+            "stationaryWithoutTarget": 2.518333164850871
+          }
+        },
+        "core-default": {
+          "runs": 30,
+          "outcomes": {
+            "Cleared": 24,
+            "TimeLimit": 6
+          },
+          "clearRatePercent": 80.0,
+          "meanClearSeconds": 238.72498067220053,
+          "medianClearSeconds": 239.83502960205078,
+          "meanAllRunSeconds": 250.98003946940105,
+          "bossSpawned": 30,
+          "bossRewarded": 24,
+          "navigationErrors": 0,
+          "maxStationaryApproachSeconds": 0.05000000074505806,
+          "meanChests": 1.6333333333333333,
+          "meanOccupancySeconds": {
+            "acting": 130.93005243937174,
+            "moving": 116.95586827596028,
+            "recovering": 0.0,
+            "stationaryWithTarget": 0.595000026623408,
+            "stationaryWithoutTarget": 2.5383329153060914
+          }
+        }
+      }
+    }
+  ],
+  "outcomePairs": {
+    "Cleared -> Cleared": 168,
+    "Cleared -> HeroDeath": 1,
+    "TimeLimit -> Cleared": 5,
+    "TimeLimit -> TimeLimit": 6
+  },
+  "pairedRows": [
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 0,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -5.600341796875
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 1,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -10.100616455078125
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 2,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -20.551254272460938
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 3,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 2.9501800537109375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 4,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -17.151046752929688
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 5,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -25.901580810546875
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 6,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -5.7503509521484375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 7,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.20013427734375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 8,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 8.00048828125
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 9,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -24.796524047851562
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 10,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -10.100616455078125
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 11,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -20.20123291015625
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 12,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -16.651016235351562
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 13,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -22.751388549804688
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 14,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -4.60028076171875
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 15,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -9.100555419921875
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 16,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -17.00103759765625
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 17,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 4.0502471923828125
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 18,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -18.951156616210938
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 19,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -11.500701904296875
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 20,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -1.3500823974609375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 21,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -20.701263427734375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 22,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -14.300872802734375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 23,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -7.8504791259765625
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 24,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -3.80023193359375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 25,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -26.101593017578125
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 26,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -15.100921630859375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 27,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -8.750534057617188
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 28,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -23.101409912109375
+    },
+    {
+      "heroClass": 0,
+      "variant": 0,
+      "seedIndex": 29,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -11.00067138671875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 0,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 1.00006103515625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 1,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -3.4502105712890625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 2,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 1.1500701904296875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 3,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 1.2000732421875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 4,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -3.1501922607421875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 5,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 6.9504241943359375
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 6,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.5501556396484375
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 7,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -13.100799560546875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 8,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -0.9500579833984375
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 9,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 5.00030517578125
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 10,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -0.100006103515625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 11,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 4.0502471923828125
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 12,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 6.3503875732421875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 13,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 0.0500030517578125
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 14,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -5.7503509521484375
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 15,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.60015869140625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 16,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 3.6002197265625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 17,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.7501678466796875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 18,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -0.300018310546875
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 19,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -0.500030517578125
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 20,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -11.350692749023438
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 21,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -6.4503936767578125
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 22,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -4.8502960205078125
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 23,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 7.3504486083984375
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 24,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 3.8502349853515625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 25,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 12.550765991210938
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 26,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 3.300201416015625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 27,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 16.0009765625
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 28,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 5.150306701660156
+    },
+    {
+      "heroClass": 0,
+      "variant": 1,
+      "seedIndex": 29,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 2.60015869140625
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 0,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -35.95219421386719
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 1,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -24.54473876953125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 2,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -32.60198974609375
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 3,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -35.24139404296875
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 4,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -28.501739501953125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 5,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -38.75236511230469
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 6,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -23.351425170898438
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 7,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -47.40289306640625
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 8,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -37.65081787109375
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 9,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -40.15245056152344
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 10,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -45.29835510253906
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 11,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -7.40045166015625
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 12,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -13.00079345703125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 13,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -33.999176025390625
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 14,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -45.80279541015625
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 15,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -25.251541137695312
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 16,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 0.8500518798828125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 17,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -49.05299377441406
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 18,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -28.351730346679688
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 19,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -9.950607299804688
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 20,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -27.00164794921875
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 21,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 0.20001220703125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 22,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -28.901763916015625
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 23,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -27.701690673828125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 24,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -24.951522827148438
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 25,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -31.151901245117188
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 26,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -22.60137939453125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 27,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -24.4014892578125
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 28,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -57.09686279296875
+    },
+    {
+      "heroClass": 1,
+      "variant": 0,
+      "seedIndex": 29,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -46.902862548828125
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 0,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 3.2001953125
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 1,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -4.60028076171875
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 2,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -8.500518798828125
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 3,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 1.300079345703125
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 4,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -13.350814819335938
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 5,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.9501800537109375
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 6,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -19.301177978515625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 7,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -5.700347900390625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 8,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 0.2500152587890625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 9,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 9.150558471679688
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 10,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 7.6504669189453125
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 11,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 21.051284790039062
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 12,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -5.04876708984375
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 13,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -9.350570678710938
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 14,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -28.251724243164062
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 15,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 5.3503265380859375
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 16,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -3.5502166748046875
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 17,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 5.8503570556640625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 18,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 8.050491333007812
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 19,
+      "legacy": "Cleared",
+      "coreDefault": "HeroDeath",
+      "coreMinusLegacySeconds": -15.750961303710938
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 20,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -12.750778198242188
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 21,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -7.0504302978515625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 22,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 4.000244140625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 23,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -4.8502960205078125
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 24,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 10.850662231445312
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 25,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -15.300933837890625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 26,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.400146484375
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 27,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -3.8502349853515625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 28,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -1.0500640869140625
+    },
+    {
+      "heroClass": 1,
+      "variant": 1,
+      "seedIndex": 29,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -7.40045166015625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 0,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -0.20001220703125
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 1,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -27.251663208007812
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 2,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -14.950912475585938
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 3,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -4.8502960205078125
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 4,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -21.40130615234375
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 5,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -10.60064697265625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 6,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -42.65260314941406
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 7,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -58.75358581542969
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 8,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -14.500885009765625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 9,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -29.851821899414062
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 10,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -8.650527954101562
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 11,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -19.80120849609375
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 12,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -61.44975280761719
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 13,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -14.349777221679688
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 14,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -25.351547241210938
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 15,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": 5.500335693359375
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 16,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -28.20172119140625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 17,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -76.20465087890625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 18,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -44.502716064453125
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 19,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -23.0943603515625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 20,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -40.65248107910156
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 21,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -32.05195617675781
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 22,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -26.701629638671875
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 23,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -10.950668334960938
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 24,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -8.550521850585938
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 25,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -23.251419067382812
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 26,
+      "legacy": "TimeLimit",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -17.14581298828125
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 27,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -18.501129150390625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 28,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -5.700347900390625
+    },
+    {
+      "heroClass": 2,
+      "variant": 0,
+      "seedIndex": 29,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -23.201416015625
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 0,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -44.093170166015625
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 1,
+      "legacy": "TimeLimit",
+      "coreDefault": "TimeLimit",
+      "coreMinusLegacySeconds": 0.0
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 2,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -33.44183349609375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 3,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -33.94261169433594
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 4,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -35.102142333984375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 5,
+      "legacy": "TimeLimit",
+      "coreDefault": "TimeLimit",
+      "coreMinusLegacySeconds": 0.0
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 6,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -30.8018798828125
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 7,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -39.14561462402344
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 8,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -32.75199890136719
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 9,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -44.5438232421875
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 10,
+      "legacy": "TimeLimit",
+      "coreDefault": "TimeLimit",
+      "coreMinusLegacySeconds": 0.0
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 11,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -2.400146484375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 12,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -19.901214599609375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 13,
+      "legacy": "TimeLimit",
+      "coreDefault": "TimeLimit",
+      "coreMinusLegacySeconds": 0.0
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 14,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -39.14360046386719
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 15,
+      "legacy": "TimeLimit",
+      "coreDefault": "TimeLimit",
+      "coreMinusLegacySeconds": 0.0
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 16,
+      "legacy": "TimeLimit",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -13.44671630859375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 17,
+      "legacy": "TimeLimit",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -19.34527587890625
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 18,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -45.39961242675781
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 19,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -34.39410400390625
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 20,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -17.60107421875
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 21,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -34.100372314453125
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 22,
+      "legacy": "TimeLimit",
+      "coreDefault": "TimeLimit",
+      "coreMinusLegacySeconds": 0.0
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 23,
+      "legacy": "TimeLimit",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -6.6983642578125
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 24,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -21.751327514648438
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 25,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -33.300079345703125
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 26,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -10.0003662109375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 27,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -49.54248046875
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 28,
+      "legacy": "TimeLimit",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -17.04583740234375
+    },
+    {
+      "heroClass": 2,
+      "variant": 1,
+      "seedIndex": 29,
+      "legacy": "Cleared",
+      "coreDefault": "Cleared",
+      "coreMinusLegacySeconds": -35.551025390625
+    }
+  ],
+  "beforeAfter": {
+    "runs": 24,
+    "baselineOutcomes": {
+      "legacy": {
+        "runs": 12,
+        "outcomes": {
+          "Cleared": 11,
+          "TimeLimit": 1
+        },
+        "clearRatePercent": 91.66666666666666,
+        "meanClearSeconds": 207.5294813676314,
+        "medianClearSeconds": 206.00796508789062,
+        "meanAllRunSeconds": 215.23538080851236,
+        "bossSpawned": 12,
+        "bossRewarded": 11,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.10000000149011612,
+        "meanChests": 0.9166666666666666,
+        "meanOccupancySeconds": {
+          "acting": 87.18839104970296,
+          "moving": 124.69050725301106,
+          "recovering": 0.0,
+          "stationaryWithTarget": 1.4666660704339545,
+          "stationaryWithoutTarget": 1.9333325227101643
+        }
+      },
+      "core-default": {
+        "runs": 12,
+        "outcomes": {
+          "Cleared": 11,
+          "TimeLimit": 1
+        },
+        "clearRatePercent": 91.66666666666666,
+        "meanClearSeconds": 192.4660311612216,
+        "medianClearSeconds": 191.5570831298828,
+        "meanAllRunSeconds": 201.42721811930338,
+        "bossSpawned": 12,
+        "bossRewarded": 11,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.05000000074505806,
+        "meanChests": 0.9166666666666666,
+        "meanOccupancySeconds": {
+          "acting": 78.47119935353597,
+          "moving": 120.70693143208821,
+          "recovering": 0.0,
+          "stationaryWithTarget": 0.3249999986340602,
+          "stationaryWithoutTarget": 1.9666658341884613
+        }
+      }
+    },
+    "postOutcomes": {
+      "legacy": {
+        "runs": 12,
+        "outcomes": {
+          "Cleared": 11,
+          "TimeLimit": 1
+        },
+        "clearRatePercent": 91.66666666666666,
+        "meanClearSeconds": 212.12504022771662,
+        "medianClearSeconds": 203.65782165527344,
+        "meanAllRunSeconds": 219.44797643025717,
+        "bossSpawned": 12,
+        "bossRewarded": 11,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.10000000149011612,
+        "meanChests": 1.3333333333333333,
+        "meanOccupancySeconds": {
+          "acting": 91.5760768254598,
+          "moving": 123.91129366556804,
+          "recovering": 0.0,
+          "stationaryWithTarget": 1.6791659193113446,
+          "stationaryWithoutTarget": 2.3249992728233337
+        }
+      },
+      "core-default": {
+        "runs": 12,
+        "outcomes": {
+          "Cleared": 11,
+          "TimeLimit": 1
+        },
+        "clearRatePercent": 91.66666666666666,
+        "meanClearSeconds": 198.34386097301137,
+        "medianClearSeconds": 192.7071533203125,
+        "meanAllRunSeconds": 206.8152287801107,
+        "bossSpawned": 12,
+        "bossRewarded": 11,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.05000000074505806,
+        "meanChests": 1.3333333333333333,
+        "meanOccupancySeconds": {
+          "acting": 86.52158482869466,
+          "moving": 117.56507237752278,
+          "recovering": 0.0,
+          "stationaryWithTarget": 0.3416666683430473,
+          "stationaryWithoutTarget": 2.429165860017141
+        }
+      }
+    },
+    "changes": [
+      {
+        "heroClass": 0,
+        "variant": 0,
+        "seedIndex": 0,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 158.40505981445312,
+          "bossSpawnTime": 73.7999038696289,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 158.40505981445312,
+          "bossSpawnTime": 73.7999038696289,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 0,
+        "seedIndex": 0,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 152.80471801757812,
+          "bossSpawnTime": 72.74983978271484,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 152.80471801757812,
+          "bossSpawnTime": 72.74983978271484,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 0,
+        "seedIndex": 1,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 200.60763549804688,
+          "bossSpawnTime": 130.3033447265625,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 203.65782165527344,
+          "bossSpawnTime": 133.30352783203125,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 0,
+        "seedIndex": 1,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 191.5570831298828,
+          "bossSpawnTime": 121.15279388427734,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 193.5572052001953,
+          "bossSpawnTime": 121.10279083251953,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 1,
+        "seedIndex": 0,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 141.75404357910156,
+          "bossSpawnTime": 72.5498275756836,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 184.3566436767578,
+          "bossSpawnTime": 113.10230255126953,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 1,
+        "seedIndex": 0,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 143.80416870117188,
+          "bossSpawnTime": 75.85002899169922,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 185.35670471191406,
+          "bossSpawnTime": 119.15267181396484,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 1,
+        "seedIndex": 1,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 196.15736389160156,
+          "bossSpawnTime": 115.90247344970703,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 196.15736389160156,
+          "bossSpawnTime": 115.90247344970703,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 0,
+        "variant": 1,
+        "seedIndex": 1,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 192.7071533203125,
+          "bossSpawnTime": 115.8024673461914,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 192.7071533203125,
+          "bossSpawnTime": 115.8024673461914,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 0,
+        "seedIndex": 0,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 206.00796508789062,
+          "bossSpawnTime": 126.85314178466797,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 206.00796508789062,
+          "bossSpawnTime": 126.85314178466797,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 0,
+        "seedIndex": 0,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 170.05577087402344,
+          "bossSpawnTime": 109.90210723876953,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 170.05577087402344,
+          "bossSpawnTime": 109.90210723876953,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 0,
+        "seedIndex": 1,
+        "mode": "legacy",
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 293.6518249511719,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 278.1556091308594,
+          "bossSpawnTime": 208.40811157226562,
+          "visited": 8,
+          "chests": 2
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 0,
+        "seedIndex": 1,
+        "mode": "core-default",
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 277.0558776855469,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 253.61087036132812,
+          "bossSpawnTime": 191.0570526123047,
+          "visited": 8,
+          "chests": 2
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 1,
+        "seedIndex": 0,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 149.75453186035156,
+          "bossSpawnTime": 85.25060272216797,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 185.65672302246094,
+          "bossSpawnTime": 117.95259857177734,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 1,
+        "seedIndex": 0,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 159.75514221191406,
+          "bossSpawnTime": 88.85082244873047,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 188.85691833496094,
+          "bossSpawnTime": 117.25255584716797,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 1,
+        "seedIndex": 1,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 271.8071594238281,
+          "bossSpawnTime": 208.7081298828125,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 202.10772705078125,
+          "bossSpawnTime": 137.4537811279297,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 1,
+        "variant": 1,
+        "seedIndex": 1,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 263.1592712402344,
+          "bossSpawnTime": 197.35743713378906,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 197.5074462890625,
+          "bossSpawnTime": 134.15357971191406,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 0,
+        "seedIndex": 0,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 223.35902404785156,
+          "bossSpawnTime": 161.5552520751953,
+          "visited": 5,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 223.25901794433594,
+          "bossSpawnTime": 153.20474243164062,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 0,
+        "seedIndex": 0,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 212.95838928222656,
+          "bossSpawnTime": 157.00497436523438,
+          "visited": 5,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 223.0590057373047,
+          "bossSpawnTime": 142.40408325195312,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 0,
+        "seedIndex": 1,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 208.40811157226562,
+          "bossSpawnTime": 132.80349731445312,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 208.40811157226562,
+          "bossSpawnTime": 132.80349731445312,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 0,
+        "seedIndex": 1,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 181.1564483642578,
+          "bossSpawnTime": 113.0022964477539,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 181.1564483642578,
+          "bossSpawnTime": 113.0022964477539,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 1,
+        "seedIndex": 0,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 287.2033996582031,
+          "bossSpawnTime": 163.35536193847656,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 287.2033996582031,
+          "bossSpawnTime": 163.35536193847656,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 1,
+        "seedIndex": 0,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 243.1102294921875,
+          "bossSpawnTime": 132.95350646972656,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 243.1102294921875,
+          "bossSpawnTime": 132.95350646972656,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 1,
+        "seedIndex": 1,
+        "mode": "legacy",
+        "before": {
+          "outcome": "Cleared",
+          "time": 239.36000061035156,
+          "bossSpawnTime": 156.90496826171875,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 261.3097229003906,
+          "visited": 6,
+          "chests": 3
+        }
+      },
+      {
+        "heroClass": 2,
+        "variant": 1,
+        "seedIndex": 1,
+        "mode": "core-default",
+        "before": {
+          "outcome": "Cleared",
+          "time": 206.05796813964844,
+          "bossSpawnTime": 137.35377502441406,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 219.0587615966797,
+          "visited": 7,
+          "chests": 3
+        }
+      }
+    ]
+  },
+  "shrineFixBeforeAfter": {
+    "matchedRuns": 360,
+    "beforeOverall": {
+      "legacy": {
+        "runs": 180,
+        "outcomes": {
+          "Cleared": 167,
+          "TimeLimit": 13
+        },
+        "clearRatePercent": 92.77777777777779,
+        "meanClearSeconds": 206.78050908071552,
+        "medianClearSeconds": 204.2578582763672,
+        "meanAllRunSeconds": 213.5130477057563,
+        "bossSpawned": 178,
+        "bossRewarded": 167,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.10000000149011612,
+        "meanChests": 1.488888888888889,
+        "meanOccupancySeconds": {
+          "acting": 92.82428927951389,
+          "moving": 116.62214974297417,
+          "recovering": 0.0,
+          "stationaryWithTarget": 1.5152774611074062,
+          "stationaryWithoutTarget": 2.59472170372804
+        }
+      },
+      "core-default": {
+        "runs": 180,
+        "outcomes": {
+          "Cleared": 171,
+          "TimeLimit": 8,
+          "HeroDeath": 1
+        },
+        "clearRatePercent": 95.0,
+        "meanClearSeconds": 193.315939607676,
+        "medianClearSeconds": 191.30706787109375,
+        "meanAllRunSeconds": 198.03074870639378,
+        "bossSpawned": 178,
+        "bossRewarded": 171,
+        "navigationErrors": 0,
+        "maxStationaryApproachSeconds": 0.05000000074505806,
+        "meanChests": 1.4777777777777779,
+        "meanOccupancySeconds": {
+          "acting": 85.93634249369303,
+          "moving": 109.25614640977648,
+          "recovering": 0.0,
+          "stationaryWithTarget": 0.24750000606808398,
+          "stationaryWithoutTarget": 2.6344437619050343
+        }
+      }
+    },
+    "changedRuns": [
+      {
+        "key": [
+          0,
+          0,
+          6,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 150.40457153320312,
+          "bossSpawnTime": 100.40152740478516,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 139.25389099121094,
+          "bossSpawnTime": 89.25084686279297,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          6,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 136.10369873046875,
+          "bossSpawnTime": 87.0007095336914,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 133.5035400390625,
+          "bossSpawnTime": 82.9504623413086,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          2,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 190.45701599121094,
+          "bossSpawnTime": 120.45275115966797,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 186.3067626953125,
+          "bossSpawnTime": 116.35250091552734,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          2,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 187.70684814453125,
+          "bossSpawnTime": 113.10230255126953,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 187.4568328857422,
+          "bossSpawnTime": 110.70215606689453,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          4,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 227.9093017578125,
+          "bossSpawnTime": 145.75428771972656,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 232.6595916748047,
+          "bossSpawnTime": 149.70452880859375,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          5,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 3,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 153.0547332763672,
+          "bossSpawnTime": 92.75106048583984,
+          "visited": 5,
+          "chests": 3
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          7,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 182.05650329589844,
+          "bossSpawnTime": 97.85137176513672,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 177.30621337890625,
+          "bossSpawnTime": 94.9511947631836,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          7,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 166.20553588867188,
+          "bossSpawnTime": 90.70093536376953,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 164.20541381835938,
+          "bossSpawnTime": 86.2006607055664,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          2,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 250.3606719970703,
+          "bossSpawnTime": 162.20529174804688,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 248.01052856445312,
+          "bossSpawnTime": 155.35487365722656,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          2,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 216.50860595703125,
+          "bossSpawnTime": 139.65391540527344,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 215.40853881835938,
+          "bossSpawnTime": 140.2539520263672,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          3,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 239.9100341796875,
+          "bossSpawnTime": 176.6561737060547,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 249.8606414794922,
+          "bossSpawnTime": 176.00613403320312,
+          "visited": 8,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          5,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 248.3605499267578,
+          "bossSpawnTime": 170.45579528808594,
+          "visited": 8,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 242.6602020263672,
+          "bossSpawnTime": 161.40524291992188,
+          "visited": 8,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          2,
+          0,
+          4,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 225.0591278076172,
+          "bossSpawnTime": 150.70458984375,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 221.4589080810547,
+          "bossSpawnTime": 147.1043701171875,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          12,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 217.4586639404297,
+          "bossSpawnTime": 145.20425415039062,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 216.95863342285156,
+          "bossSpawnTime": 142.15406799316406,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          15,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 2,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 182.45652770996094,
+          "bossSpawnTime": 78.50019073486328,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          8,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 139.80392456054688,
+          "bossSpawnTime": 69.7496566772461,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 138.10382080078125,
+          "bossSpawnTime": 67.19950103759766,
+          "visited": 4,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          8,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 139.30389404296875,
+          "bossSpawnTime": 69.54964447021484,
+          "visited": 4,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 137.1537628173828,
+          "bossSpawnTime": 67.3995132446289,
+          "visited": 4,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          13,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 155.9049072265625,
+          "bossSpawnTime": 96.50128936767578,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 154.6548309326172,
+          "bossSpawnTime": 95.3512191772461,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          14,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 147.1043701171875,
+          "bossSpawnTime": 78.00016021728516,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 142.95411682128906,
+          "bossSpawnTime": 73.84990692138672,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          0,
+          1,
+          15,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 121.30280303955078,
+          "bossSpawnTime": 78.9502182006836,
+          "visited": 5,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 119.10266876220703,
+          "bossSpawnTime": 76.75008392333984,
+          "visited": 5,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          8,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 268.3080139160156,
+          "bossSpawnTime": 153.30474853515625,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 260.8598327636719,
+          "bossSpawnTime": 149.00448608398438,
+          "visited": 5,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          1,
+          0,
+          8,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 226.60922241210938,
+          "bossSpawnTime": 135.503662109375,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 223.20901489257812,
+          "bossSpawnTime": 129.35328674316406,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          9,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 2,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 240.61007690429688,
+          "bossSpawnTime": 177.4562225341797,
+          "visited": 6,
+          "chests": 3
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          20,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 205.0579071044922,
+          "bossSpawnTime": 129.65330505371094,
+          "visited": 5,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 197.9574737548828,
+          "bossSpawnTime": 124.90302276611328,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          20,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 194.40725708007812,
+          "bossSpawnTime": 126.9531478881836,
+          "visited": 5,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 196.60739135742188,
+          "bossSpawnTime": 125.45305633544922,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          22,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 154.55482482910156,
+          "bossSpawnTime": 112.65227508544922,
+          "visited": 6,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 151.00460815429688,
+          "bossSpawnTime": 109.10205841064453,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          2,
+          0,
+          16,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 220.2588348388672,
+          "bossSpawnTime": 117.45256805419922,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 214.50848388671875,
+          "bossSpawnTime": 111.15218353271484,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          17,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 213.80844116210938,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 204.95790100097656,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          17,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 284.4040832519531,
+          "bossSpawnTime": 180.80642700195312,
+          "visited": 7,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 280.6549987792969,
+          "bossSpawnTime": 177.0561981201172,
+          "visited": 7,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          22,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 213.5584259033203,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": 210.3582305908203,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          24,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "TimeLimit",
+          "time": 300.0002746582031,
+          "bossSpawnTime": -1.0,
+          "visited": 2,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 205.40792846679688,
+          "bossSpawnTime": 136.15370178222656,
+          "visited": 6,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          29,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 191.70709228515625,
+          "bossSpawnTime": 111.20218658447266,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 188.15687561035156,
+          "bossSpawnTime": 107.65196990966797,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          0,
+          0,
+          29,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 183.70660400390625,
+          "bossSpawnTime": 104.70178985595703,
+          "visited": 7,
+          "chests": 2
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 177.1562042236328,
+          "bossSpawnTime": 103.20169830322266,
+          "visited": 7,
+          "chests": 2
+        }
+      },
+      {
+        "key": [
+          1,
+          1,
+          28,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 192.50714111328125,
+          "bossSpawnTime": 107.60196685791016,
+          "visited": 6,
+          "chests": 0
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 196.7574005126953,
+          "bossSpawnTime": 111.45220184326172,
+          "visited": 5,
+          "chests": 0
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          29,
+          "legacy"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 261.9095764160156,
+          "bossSpawnTime": 139.80392456054688,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 259.7601013183594,
+          "bossSpawnTime": 138.05381774902344,
+          "visited": 6,
+          "chests": 1
+        }
+      },
+      {
+        "key": [
+          2,
+          1,
+          29,
+          "core-default"
+        ],
+        "before": {
+          "outcome": "Cleared",
+          "time": 234.3596954345703,
+          "bossSpawnTime": 130.00332641601562,
+          "visited": 6,
+          "chests": 1
+        },
+        "after": {
+          "outcome": "Cleared",
+          "time": 224.20907592773438,
+          "bossSpawnTime": 121.05278778076172,
+          "visited": 6,
+          "chests": 1
+        }
+      }
+    ],
+    "scope": "360 wall-only runs versus the same 360 inputs with the shrine approach/use-radius correction. Only CombatSimulation.Field.cs changes runtime behavior between these sets; the additional source files are focused tests."
+  },
+  "failureRows": [
+    {
+      "key": [
+        2,
+        1,
+        1,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 261.3097229003906,
+      "bossRemainingHp": 6296.86669921875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 112.5522689819336,
+        "moving": 179.25633239746094,
+        "recovering": 0.0,
+        "stationaryWithTarget": 3.199998140335083,
+        "stationaryWithoutTarget": 5.000000953674316
+      },
+      "lastLogs": [
+        "282.9s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "282.9s [TARGET_SELECTED] 사망 또는 시야 변경",
+        "282.9s [ENEMY_DEATH] 적 #58 사망",
+        "283.9s [DAMAGE] 받은 피해 11 / HP 1130",
+        "299.1s [TARGET_SELECTED] 쇠사슬 시체 · 사망 또는 시야 변경",
+        "299.3s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 20 사용",
+        "299.7s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "299.7s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "299.7s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "300.0s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        1,
+        "core-default"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 219.0587615966797,
+      "bossRemainingHp": 477.2140197753906,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 138.703857421875,
+        "moving": 155.40487670898438,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.9000001549720764,
+        "stationaryWithoutTarget": 5.000000953674316
+      },
+      "lastLogs": [
+        "298.0s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.3s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.7s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.8s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.9s [DAMAGE] 받은 피해 53 / HP 386",
+        "299.1s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.5s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.6s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.8s [POTION] 자동 물약 사용",
+        "299.9s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        5,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 190.90704345703125,
+      "bossRemainingHp": 4318.53564453125,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 133.8535614013672,
+        "moving": 160.20516967773438,
+        "recovering": 0.0,
+        "stationaryWithTarget": 1.4499996900558472,
+        "stationaryWithoutTarget": 4.499999046325684
+      },
+      "lastLogs": [
+        "297.8s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.3s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.4s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.8s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.3s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.4s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "299.9s [DAMAGE] 받은 피해 27 / HP 767",
+        "299.9s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "299.9s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "300.0s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        5,
+        "core-default"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 190.05699157714844,
+      "bossRemainingHp": 2406.3046875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 149.1044921875,
+        "moving": 145.904296875,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.5500000715255737,
+        "stationaryWithoutTarget": 4.44999885559082
+      },
+      "lastLogs": [
+        "297.5s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "298.0s [DAMAGE] 받은 피해 54 / HP 805",
+        "298.0s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "298.0s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "298.1s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.5s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.0s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.1s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.3s [DAMAGE] 받은 피해 27 / HP 724",
+        "299.5s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_END] 기본 공격 · 동작 완료",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        10,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 246.3604278564453,
+      "bossRemainingHp": 6296.86669921875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 104.35176849365234,
+        "moving": 193.107177734375,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.5500000715255737,
+        "stationaryWithoutTarget": 1.9999991655349731
+      },
+      "lastLogs": [
+        "299.0s [ENEMY_DEATH] 적 #80 사망",
+        "299.0s [TARGET_SELECTED] 쇠사슬 시체 · 4번 규칙",
+        "299.0s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "299.6s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "299.6s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "299.6s [ENEMY_DEATH] 적 #81 사망",
+        "299.6s [ENEMY_DEATH] 적 #82 사망",
+        "299.6s [TARGET_SELECTED] 사망 또는 시야 변경",
+        "299.6s [ACTION_START] 원소 보호막 · 실행 확정 / 자원 0 사용",
+        "299.8s [ACTION_RELEASE] 원소 보호막 · 효과 실행",
+        "299.8s [ACTION_END] 원소 보호막 · 동작 완료",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        10,
+        "core-default"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 229.60940551757812,
+      "bossRemainingHp": 3522.1396484375,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 117.60257720947266,
+        "moving": 179.9563751220703,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.4500000476837158,
+        "stationaryWithoutTarget": 1.9999991655349731
+      },
+      "lastLogs": [
+        "297.6s [ACTION_END] 기본 공격 · 동작 완료",
+        "297.6s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "298.2s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "298.2s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "298.2s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.4s [DAMAGE] 받은 피해 50 / HP 603",
+        "298.6s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.2s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.2s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.6s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        13,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 215.508544921875,
+      "bossRemainingHp": 2877.06494140625,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 132.15345764160156,
+        "moving": 163.25535583496094,
+        "recovering": 0.0,
+        "stationaryWithTarget": 1.100000023841858,
+        "stationaryWithoutTarget": 3.499997854232788
+      },
+      "lastLogs": [
+        "297.5s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "297.5s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "297.5s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "297.9s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.5s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.5s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.9s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.2s [DAMAGE] 받은 피해 23 / HP 731",
+        "299.5s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.5s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 20.1 사용",
+        "300.0s [ACTION_INTERRUPTED] 연쇄 번개 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        13,
+        "core-default"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 217.8586883544922,
+      "bossRemainingHp": 6296.86669921875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 99.55147552490234,
+        "moving": 196.15736389160156,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.3500000238418579,
+        "stationaryWithoutTarget": 3.9499974250793457
+      },
+      "lastLogs": [
+        "287.7s [TARGET_SELECTED] 대상을 처치해 추적을 마쳤습니다.",
+        "287.7s [EDICT_PURSUIT_END] 대상 42 · 대상을 처치해 추적을 마쳤습니다.",
+        "287.7s [TARGET_SELECTED] 부푼 순례자 · 사망 또는 시야 변경",
+        "288.0s [ACTION_END] 기본 공격 · 동작 완료",
+        "288.1s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 20.1 사용",
+        "288.6s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "288.6s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "288.6s [ENEMY_DEATH] 적 #43 사망",
+        "288.6s [ENEMY_DEATH] 적 #45 사망",
+        "288.7s [TARGET_SELECTED] 대상을 처치해 추적을 마쳤습니다.",
+        "288.7s [EDICT_PURSUIT_END] 대상 45 · 대상을 처치해 추적을 마쳤습니다.",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        15,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 196.7073974609375,
+      "bossRemainingHp": 4156.4013671875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 130.00332641601562,
+        "moving": 165.25547790527344,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.7500001192092896,
+        "stationaryWithoutTarget": 3.99999737739563
+      },
+      "lastLogs": [
+        "298.2s [DAMAGE] 받은 피해 27 / HP 996",
+        "298.3s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.3s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "298.7s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "298.7s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "298.9s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.2s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.7s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.7s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "300.0s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        15,
+        "core-default"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 178.60629272460938,
+      "bossRemainingHp": 784.893798828125,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 151.60464477539062,
+        "moving": 143.8541717529297,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.5500000715255737,
+        "stationaryWithoutTarget": 3.99999737739563
+      },
+      "lastLogs": [
+        "298.0s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.0s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.3s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.8s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.8s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "299.1s [DAMAGE] 받은 피해 27 / HP 742",
+        "299.2s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "299.2s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "299.4s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.7s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        1,
+        1,
+        19,
+        "core-default"
+      ],
+      "outcome": "HeroDeath",
+      "bossSpawnTime": 83.10047149658203,
+      "bossRemainingHp": 662.7899169921875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 103.05168914794922,
+        "moving": 81.4003677368164,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.05000000074505806,
+        "stationaryWithoutTarget": 3.99999737739563
+      },
+      "lastLogs": [
+        "187.0s [ACTION_END] 관통 사격 · 동작 완료",
+        "187.0s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "187.4s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "187.8s [ACTION_END] 기본 공격 · 동작 완료",
+        "187.8s [ACTION_START] 관통 사격 · 실행 확정 / 자원 20 사용",
+        "188.2s [DAMAGE] 받은 피해 6 / HP 32",
+        "188.4s [ACTION_RELEASE] 관통 사격 · 효과 실행",
+        "188.4s [ACTION_END] 관통 사격 · 동작 완료",
+        "188.4s [ACTION_START] 관통 사격 · 실행 확정 / 자원 20 사용",
+        "188.5s [HERO_DEATH] 영웅 사망",
+        "188.5s [ACTION_INTERRUPTED] 관통 사격 · 영웅 사망",
+        "188.5s [RUN_END] 영웅 사망"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        16,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 196.7574005126953,
+      "bossRemainingHp": 553.4259033203125,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 131.9534454345703,
+        "moving": 166.00552368164062,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.5500000715255737,
+        "stationaryWithoutTarget": 1.4999996423721313
+      },
+      "lastLogs": [
+        "297.6s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 18.74 사용",
+        "298.0s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "298.0s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "298.2s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.5s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.0s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.0s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.3s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.8s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.8s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 18.74 사용",
+        "300.0s [ACTION_INTERRUPTED] 연쇄 번개 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        17,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 204.95790100097656,
+      "bossRemainingHp": 2818.59326171875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 133.60354614257812,
+        "moving": 164.50543212890625,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.40000003576278687,
+        "stationaryWithoutTarget": 1.4999996423721313
+      },
+      "lastLogs": [
+        "298.3s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "298.3s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "298.5s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.6s [DAMAGE] 받은 피해 29 / HP 672",
+        "298.6s [ACTION_INTERRUPTED] 기본 공격 · 갈고리에 끌림",
+        "298.6s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.0s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.4s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.4s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.8s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        22,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 244.06028747558594,
+      "bossRemainingHp": 6296.86669921875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 116.30249786376953,
+        "moving": 179.40634155273438,
+        "recovering": 0.0,
+        "stationaryWithTarget": 1.7999993562698364,
+        "stationaryWithoutTarget": 2.4999988079071045
+      },
+      "lastLogs": [
+        "294.6s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "295.0s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "295.0s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "295.0s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "295.3s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "295.7s [ENEMY_DEATH] 적 #71 사망",
+        "295.7s [ACTION_END] 기본 공격 · 동작 완료",
+        "295.8s [TARGET_SELECTED] 사망 또는 시야 변경",
+        "299.0s [ACTION_START] 원소 보호막 · 실행 확정 / 자원 0 사용",
+        "299.2s [ACTION_RELEASE] 원소 보호막 · 효과 실행",
+        "299.2s [ACTION_END] 원소 보호막 · 동작 완료",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        22,
+        "core-default"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 210.3582305908203,
+      "bossRemainingHp": 3225.208740234375,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 137.35377502441406,
+        "moving": 157.60501098632812,
+        "recovering": 0.0,
+        "stationaryWithTarget": 1.8999992609024048,
+        "stationaryWithoutTarget": 3.149998188018799
+      },
+      "lastLogs": [
+        "298.1s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.3s [DAMAGE] 받은 피해 30 / HP 592",
+        "298.5s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.6s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.9s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.3s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.4s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "299.8s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "299.8s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "299.8s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        0,
+        26,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 207.9580841064453,
+      "bossRemainingHp": 4199.13232421875,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 120.35274505615234,
+        "moving": 174.95606994628906,
+        "recovering": 0.0,
+        "stationaryWithTarget": 2.699998617172241,
+        "stationaryWithoutTarget": 1.9999991655349731
+      },
+      "lastLogs": [
+        "297.9s [ACTION_RELEASE] 눈보라 · 효과 실행",
+        "297.9s [ACTION_END] 눈보라 · 동작 완료",
+        "297.9s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.2s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.6s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.7s [ACTION_START] 화염구 · 실행 확정 / 자원 12.5 사용",
+        "299.3s [DAMAGE] 받은 피해 26 / HP 955",
+        "299.3s [ACTION_RELEASE] 화염구 · 효과 실행",
+        "299.3s [ACTION_END] 화염구 · 동작 완료",
+        "299.5s [ACTION_START] 화염구 · 실행 확정 / 자원 25 사용",
+        "300.0s [ACTION_INTERRUPTED] 화염구 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        23,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 219.70880126953125,
+      "bossRemainingHp": 2585.88427734375,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 135.35365295410156,
+        "moving": 158.80508422851562,
+        "recovering": 0.0,
+        "stationaryWithTarget": 2.2499990463256836,
+        "stationaryWithoutTarget": 3.5999977588653564
+      },
+      "lastLogs": [
+        "297.9s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "298.3s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.4s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.7s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.1s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.2s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 20.18 사용",
+        "299.6s [ACTION_RELEASE] 연쇄 번개 · 효과 실행",
+        "299.6s [ACTION_END] 연쇄 번개 · 동작 완료",
+        "299.6s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "299.9s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "300.0s [ACTION_INTERRUPTED] 기본 공격 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    },
+    {
+      "key": [
+        2,
+        1,
+        28,
+        "legacy"
+      ],
+      "outcome": "TimeLimit",
+      "bossSpawnTime": 186.90679931640625,
+      "bossRemainingHp": 3803.976318359375,
+      "navigationError": "",
+      "occupancySeconds": {
+        "acting": 135.0536346435547,
+        "moving": 159.20510864257812,
+        "recovering": 0.0,
+        "stationaryWithTarget": 0.7500001192092896,
+        "stationaryWithoutTarget": 5.000000953674316
+      },
+      "lastLogs": [
+        "298.5s [ACTION_END] 기본 공격 · 동작 완료",
+        "298.5s [ACTION_START] 기본 공격 · 실행 확정 / 자원 0 사용",
+        "298.8s [ACTION_RELEASE] 기본 공격 · 효과 실행",
+        "299.3s [ACTION_END] 기본 공격 · 동작 완료",
+        "299.3s [ACTION_START] 순간이동 · 실행 확정 / 자원 0 사용",
+        "299.5s [ACTION_RELEASE] 순간이동 · 효과 실행",
+        "299.5s [ACTION_END] 순간이동 · 동작 완료",
+        "299.5s [TARGET_SELECTED] 사망 또는 시야 변경",
+        "299.9s [TARGET_SELECTED] 묘지의 집행자 · 사망 또는 시야 변경",
+        "299.9s [ACTION_START] 연쇄 번개 · 실행 확정 / 자원 21.25 사용",
+        "300.0s [ACTION_INTERRUPTED] 연쇄 번개 · 제한시간 초과",
+        "300.0s [RUN_END] 제한시간 초과"
+      ]
+    }
+  ],
+  "occupancyCaveat": "Mutually exclusive end-of-step labels, in acting/moving/recovering/target/no-target priority order. They observe states, do not identify causal time costs, and moving may include combat movement.",
+  "beforeAfterCaveat": "The 24 matched Probe1/Probe2 runs isolate wall ordering. Another 360 matched before/after runs isolate shrine arrival. The final 360-run legacy/core comparison uses both corrections for both modes. Winning-only time averages have survivor bias; all outcomes and sample sizes are reported. Ranger seed 1 improved to a clear while Mage variant 1 seed 1 changed to a timeout in the wall-only comparison. No universal clear-rate or speed improvement is claimed."
+}

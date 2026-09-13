@@ -1,0 +1,31 @@
+{
+  "reviewedUtc": "2026-09-13T01:26:45.763844+00:00",
+  "native": "Native3",
+  "reviewedScreenshots": [
+    "checkpoint-01-natural-exit-ko.png",
+    "result-restart-01-persisted-rewards-ko.png",
+    "resume-01-restored-route-en.png",
+    "resume-02-clear-result-ko.png",
+    "resume-03-clear-result-en.png"
+  ],
+  "method": "Directly inspected all five original screenshots from the final Rune-integrated player.",
+  "results": [
+    "Korean landscape HUD has readable HP, resource, timer, contextual first-play guidance, skills, map and footer controls.",
+    "English 140% portrait HUD shows the restored moving action, unchanged HP/resource/time and readable footer buttons.",
+    "Korean and English results show 253.6 seconds of combat, 115 kills, 15 item drops and 2/6 opened chests.",
+    "The English portrait result explicitly displays four acquired runes and retains both primary buttons.",
+    "The fresh Korean town screen shows the persisted Ranger highest clear of tier 10."
+  ],
+  "limitations": [
+    "macOS portrait/landscape windows do not establish physical mobile touch or device safe-area behavior.",
+    "The fixed-step helper disables GameController.Update, so the ordinary Real 0.0s display does not measure real-time pacing or speed options.",
+    "Additional result details extend below the existing scroll viewport, especially after the Rune reward line. These screenshots do not prove manual scroll interaction."
+  ],
+  "screenshots": {
+    "checkpoint-01-natural-exit-ko.png": "1c32099c42cb664e50b10750aa3c9a8f610c881be0e97a533de6fcde30d28095",
+    "result-restart-01-persisted-rewards-ko.png": "0677b169fdf9cd48149f92724a6cb126bbcd3089f682dee98e027d919518d03e",
+    "resume-01-restored-route-en.png": "adb7f7b7d886e86ef32e728c045dd5dc3e692636ef43cf099216fd5d5fce94cc",
+    "resume-02-clear-result-ko.png": "dc45f54c9b9ca959cb2f0e0c953de3ec624ddbd189261b898d7b28af5935cffb",
+    "resume-03-clear-result-en.png": "8c3e54b397701fa457f4058a51bfb3f4d5a5c0965d95f8405330222a51662746"
+  }
+}
