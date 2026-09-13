@@ -1,5 +1,13 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-13 직접 플레이 완료 범위:** 주요 기능 구현을 우선하고 세부 수치는 사용자가 플레이하며 조정한다. 이번 작업에서 밸런스 측정은 하지 않는다. 보석 획득·공용 보관·소켓 생성·장착·교체·분리·합성과 소탕 보상을 연결했으며, 재화 회수 칙령의 실제 추적·우선순위 누락을 수정했다. 이전 기록의 보석 보관 방식 확인과 서비스 미연결 표시는 이번 구현으로 대체한다. 50칸·묶음 999개는 조정 가능한 임시 기본값이다. [구현 기록](../../Docs/Implementation/Playable_Completion.md) · [직접 플레이 안내](../../Docs/Implementation/Local_Play_Guide.md)
+
+English: prioritize major playable features; the owner tunes details and no balance measurements are performed in this task. Gems now connect acquisition, shared storage, sockets, installation/replacement/removal, fusion and sweep rewards. Resource-loot pursuit and priority gaps are fixed. These supersede earlier pending-storage/service notes; 50 slots and stacks of 999 are provisional defaults. [English record](../../Docs/Implementation/Playable_Completion.en.md) · [Play guide](../../Docs/Implementation/Local_Play_Guide.en.md)
+
+**이번 작업의 종료 기준:** 영웅 선택 → 칙령 설정 → 생성 균열·전투·상자 → 보상 → 장비·보석·룬 성장 → 재도전·반복 → 저장·복원으로 직접 플레이할 수 있으면 완료한다. 온라인 서비스·결제·모바일 실기기·출시 리소스와 세부 밸런스는 이번 골의 완료를 지연시키지 않는다. 아래의 지난 검사·실험 기록은 당시 이력이며 재실행 지시가 아니다.
+
+English: this goal ends once the local loop is playable through hero/edict selection, generated rifts, combat/chests, rewards, gear/gem/rune growth, retry/repetition and save recovery. Online services, payments, physical mobile work, release assets and balance are outside this completion target. Historical experiment records below do not instruct another run.
+
 **2026-09-13 구현 우선 방침·음향·스킬 연출:** 이후 개발은 미완성 플레이 기능을 먼저 채우고, 확인은 컴파일과 핵심 흐름에 집중합니다. 대규모 회귀 검사와 밸런스 반복 실험은 통합 단계로 미룹니다. 임시 효과음·성소/균열 배경음·기기별 음량 설정과 18개 스킬의 기본 도형·발사체·움직임을 추가했습니다. [개발 기록](../../Docs/Implementation/Audio_Skill_Presentation.md)
 
 English: prioritize missing gameplay features and limit immediate checks to compilation and critical flows; defer large regression and balance experiments until integration. Temporary audio, sanctuary/rift ambience, device volume settings and primitive-based presentation for all 18 skills are implemented. [English record](../../Docs/Implementation/Audio_Skill_Presentation.en.md)

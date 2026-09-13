@@ -1,5 +1,13 @@
 # HELLSCRIPT 남은 개발 작업표
 
+**2026-09-13 직접 플레이 완료 범위:** 주요 기능 구현을 우선하고 세부 수치는 사용자가 플레이하며 조정한다. 이번 작업에서 밸런스 측정은 하지 않는다. 보석 획득·공용 보관·소켓 생성·장착·교체·분리·합성과 소탕 보상을 연결했으며, 재화 회수 칙령의 실제 추적·우선순위 누락을 수정했다. 이전 기록의 보석 보관 방식 확인과 서비스 미연결 표시는 이번 구현으로 대체한다. 50칸·묶음 999개는 조정 가능한 임시 기본값이다. [구현 기록](../Implementation/Playable_Completion.md) · [직접 플레이 안내](../Implementation/Local_Play_Guide.md)
+
+English: prioritize major playable features; the owner tunes details and no balance measurements are performed in this task. Gems now connect acquisition, shared storage, sockets, installation/replacement/removal, fusion and sweep rewards. Resource-loot pursuit and priority gaps are fixed. These supersede earlier pending-storage/service notes; 50 slots and stacks of 999 are provisional defaults. [English record](../Implementation/Playable_Completion.en.md) · [Play guide](../Implementation/Local_Play_Guide.en.md)
+
+**이번 작업의 종료 기준:** 영웅 선택 → 칙령 설정 → 생성 균열·전투·상자 → 보상 → 장비·보석·룬 성장 → 재도전·반복 → 저장·복원으로 직접 플레이할 수 있으면 완료한다. 온라인 서비스·결제·모바일 실기기·출시 리소스와 세부 밸런스는 이번 골의 완료를 지연시키지 않는다. 아래의 지난 검사·실험 기록은 당시 이력이며 재실행 지시가 아니다.
+
+English: this goal ends once the local loop is playable through hero/edict selection, generated rifts, combat/chests, rewards, gear/gem/rune growth, retry/repetition and save recovery. Online services, payments, physical mobile work, release assets and balance are outside this completion target. Historical experiment records below do not instruct another run.
+
 **2026-09-13 구현 우선 방침·음향·스킬 연출:** 이후 개발은 미완성 플레이 기능을 먼저 채우고, 확인은 컴파일과 핵심 흐름에 집중합니다. 대규모 회귀 검사와 밸런스 반복 실험은 통합 단계로 미룹니다. 임시 효과음·성소/균열 배경음·기기별 음량 설정과 18개 스킬의 기본 도형·발사체·움직임을 추가했습니다. [개발 기록](../Implementation/Audio_Skill_Presentation.md)
 
 English: prioritize missing gameplay features and limit immediate checks to compilation and critical flows; defer large regression and balance experiments until integration. Temporary audio, sanctuary/rift ambience, device volume settings and primitive-based presentation for all 18 skills are implemented. [English record](../Implementation/Audio_Skill_Presentation.en.md)
@@ -121,7 +129,7 @@ English: Mage BASIC now independently applies all four policies, completing the 
 | 대상 | 연결할 서비스 | 개발·완료 기준 |
 |---|---|---|
 | 대장장이 | 강화·일반 제작·분해를 연다. | 기존 경제 처리 함수를 공유한다. NPC 접근만으로 비용을 쓰거나 장비를 변경하지 않는다. |
-| 재설정 담당 | 접사 재설정과 검증 완료 후 보석 서비스를 연다. | 보석 효과표·보호·저장 기반은 구현했다. 보관 방식을 확정한 뒤 소켓 내기·장착·교체·분리·합성을 실제 비용·공간 검사와 연결하고, 그전까지 서비스 준비 상태를 유지한다. |
+| 재설정 담당 | 접사 재설정과 검증 완료 후 보석 서비스를 연다. | 보석 획득·공용 보관함·소켓 내기·장착·교체·분리·합성과 비용·공간 검사를 연결했다. NPC가 여는 가방 목록에서 보석 보관함으로 이동한다. |
 | 수수께끼 상인 | 부위를 선택해 미확인 장비를 구매한다. | 메뉴와 같은 후보 풀·비용·확정 영수증을 사용한다. 재진입으로 결과를 다시 추첨하지 않는다. |
 | 균열 관리자 | 단계 선택·소탕·훈련을 연다. | 입장·소탕 자격과 실제 성장 상태를 공통 경계에서 확인한다. |
 | 공유 창고 | 계정 보관함을 연다. | 이동해도 잠금·프리셋 참조와 소유권을 유지한다. |
@@ -169,7 +177,7 @@ English: repeat outcome/target policies, paused result review, owner-correct can
 2. 보스·상자·소탕·미실행·제작·구매를 확정 영수증으로 조회한다. 응답이 유실되면 기존 요청 결과를 확인한다.
 3. 서버 시각으로 KST 09:00 경계·계정 소탕 3회·캐릭터별 초회·12시간 미실행 상한을 검증한다.
 4. 유료 가방·창고 탭의 구매·복원·환불·초과칸 꺼내기 전용 상태를 구현한다. 환불 때문에 보관 장비를 삭제하지 않는다.
-5. 보석 자료 버전 1과 장비 자료 버전 3의 효과·보호·저장 기반은 [검증 기록](../Implementation/Gem_Socket_Foundation.md)을 따른다. 보관 방식 확정 후 보상 지급·소켓 내기·장착·해제·합성과 실제 비용 거래를 연결한다. 여러 버전의 수치를 섞지 않는다.
+5. 보석 자료 버전 1과 장비 자료 버전 3의 효과·보호·저장 기반은 [검증 기록](../Implementation/Gem_Socket_Foundation.md)을 따른다. 현재 공용 보관함 기본값으로 보상 지급·소켓 내기·장착·해제·합성과 실제 비용 거래를 연결했다. 보관 용량은 플레이 후 조정한다. 여러 버전의 수치를 섞지 않는다.
 
 온라인 공급자·로그인, 운영 규모와 예산, 스토어·지원 지역·상품 정보는 이 단계의 소유자 선택 사항이다. 후보와 비용·지원 범위를 먼저 정리한 뒤 확인한다. 현재 로컬 저장 검사를 온라인 중복 보상 방지의 완료 증거로 사용하지 않는다.
 

@@ -279,10 +279,14 @@ namespace Hellscript
         public static bool Sweep(AccountSave account,string requestId,ref uint rng)
         {
             if(!ContentUnlocks.Has(account,ContentUnlocks.Sweep)||!TownService(account)||string.IsNullOrWhiteSpace(requestId)||account.receipts.Contains(requestId))return false;
-            string day=DateTime.UtcNow.ToString("yyyy-MM-dd");if(account.sweepDay!=day){account.sweepDay=day;account.sweepCount=0;}
-            var h=account.Hero;if(h.highestClear<1||account.sweepCount>=3||FreeSlots(h)<3)return false;
+            string day=DateTime.UtcNow.ToString("yyyy-MM-dd");int used=account.sweepDay==day?account.sweepCount:0;
+            var h=account.Hero;if(h.highestClear<1||used>=3||FreeSlots(h)<3)return false;
+            GemInventory.Normalize(account);
+            var gems=account.gems.Select(g=>new GemStack{gemId=g.gemId,tier=g.tier,count=g.count}).ToList();uint gemRandom=rng^0xA63149C7u;
+            for(int i=0;i<GemCatalog.DropCount(RiftRewardSource.Boss);i++)if(!GemStacks.TryAdd(gems,account.gemCapacity,GemCatalog.Roll(h.highestClear,ref gemRandom)))return false;
             for(int i=0;i<3;i++)AddItem(h,CreateRiftItem(h.heroClass,RandomStream.Range(ref rng,0,8),RiftRarity.Roll(RiftRewardSource.Boss,h.highestClear,ref rng),RandomStream.Range(ref rng,Mathf.Max(1,h.highestClear-2),h.highestClear+3),h.highestClear,ref rng),BagPolicy.Ignore,account);
-            account.gold+=800+50*h.highestClear;account.materials+=5+h.highestClear/5;account.sweepCount++;account.receipts.Add(requestId);return true;
+            account.gems=gems;ContentUnlocks.RecordGemAcquisition(account);
+            account.gold+=800+50*h.highestClear;account.materials+=5+h.highestClear/5;account.sweepDay=day;account.sweepCount=used+1;account.receipts.Add(requestId);return true;
         }
     }
 }

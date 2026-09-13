@@ -33,7 +33,7 @@ namespace Hellscript
             switch(station)
             {
                 case TownStation.Blacksmith:ShowBag();ShowToast(Loc.T("대장장이 · 강화·일반 제작·분해는 장비 화면에서 진행합니다.")+"\n"+Loc.T("걸작은 장비 상세의 ‘걸작 · 진행과 초기화’에서 이용할 수 있습니다."));break;
-                case TownStation.Reroller:ShowBag();ShowToast("재설정 담당 · 접사 재설정은 장비 상세의 ‘한 줄 재설정’입니다. 보석은 자료 검증 전이라 아직 제공하지 않습니다.");break;
+                case TownStation.Reroller:ShowBag();ShowToast("접사 재설정은 장비 상세의 ‘한 줄 재설정’에서, 보석은 가방 목록의 ‘보석 보관함’에서 이용하세요.");break;
                 case TownStation.Merchant:ShowShop();break;
                 case TownStation.RiftKeeper:ShowRiftKeeper();break;
                 case TownStation.Warehouse:OpenInventory(true,false);break;

@@ -47,13 +47,5 @@ namespace Hellscript
             if(!game.Store.Data.contentUnlocks.guidesCompleted.Contains(id))BigButton(content,"안내 확인 / 건너뛰기",()=>
             {game.Store.Transact(Guid.NewGuid().ToString("N"),"content-guide:"+id,staged=>{ContentUnlocks.CompleteGuide(staged,id);return true;});ShowContentUnlocks();});
         }
-        public void ShowGemMenu()
-        {
-            if(!RequireContent(ContentUnlocks.Gem))return;
-            pageRepaint=ShowGemMenu;Base("gem-menu","보석 장착·교체·합성","보석 이용 권한과 재료·소켓 조건은 별개입니다");
-            Note(content,ContentUnlocks.Rules.features.Single(f=>f.id==ContentUnlocks.Gem).guide,21,180,gold);
-            foreach(string title in new[]{"보석 장착","보석 교체","보석 합성"})BigButton(content,title,()=>{}).interactable=false;
-            BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);FooterButton(0,1,"성소로",ShowTown);
-        }
     }
 }

@@ -80,7 +80,7 @@ namespace Hellscript
             }
             details=string.Join(Loc.T(" 또는 "),notes);return matches;
         }
-        DropState FindRuleLoot()=>edictLoot!=null?FindEdictLoot():State.drops.Where(d=>!d.claimed&&!d.ignored&&d.item.rarity>=Policy.minimumRarity&&d.item.rarity>=Policy.pursueRarity&&Vector2.Distance(d.position,State.position)<=12&&Map.LineClear(State.position,d.position)).OrderBy(d=>Vector2.Distance(State.position,d.position)).ThenBy(d=>d.id).FirstOrDefault();
+        LootTarget FindRuleLoot()=>SelectResourceLoot(edictLoot!=null?FindEdictLoot():State.drops.Where(d=>!d.claimed&&!d.ignored&&d.item.rarity>=Policy.minimumRarity&&d.item.rarity>=Policy.pursueRarity&&Vector2.Distance(d.position,State.position)<=12&&Map.LineClear(State.position,d.position)).OrderBy(d=>Vector2.Distance(State.position,d.position)).ThenBy(d=>d.id).FirstOrDefault());
         public int PredictedHits(Rule rule,EnemyState target,EnemyState[] seen=null)
             =>rule!=null&&rule.action==RuleAction.Skill?ForecastAttack(rule,target,observed:seen).uniqueTargets:0;
         RuleTarget EffectiveTarget(Rule r,TargetMode? global=null)

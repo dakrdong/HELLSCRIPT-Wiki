@@ -25,14 +25,15 @@ namespace Hellscript
             else BigButton(content,"균열에 진입",()=>game.Begin(),true);
             bool sweepable=h.highestClear>=1&&sweeps<3&&Economy.FreeSlots(h)>=3;
             Note(content,sweepable?"소탕은 최고 실클리어 단계의 보상을 즉시 정산합니다. 하루 3회, 가방 3칸이 필요합니다.":"소탕에는 실클리어 기록, 남은 소탕 횟수, 가방 3칸이 필요합니다.",19,66,sweepable?pale:muted);
-            ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",()=>
-            {
-                uint rng=(uint)DateTime.UtcNow.Ticks;bool ok=Economy.Sweep(a,Guid.NewGuid().ToString("N"),ref rng);game.Save();ShowRiftKeeper();
-                ShowToast(ok?"소탕 보상을 받았습니다.":"실클리어 기록, 소탕 잔여 횟수, 가방 3칸이 필요합니다.");
-            });
+            ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowRiftKeeper));
             ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
             ContentButton(ContentUnlocks.Train,"같은 조건으로 A/B 비교",ShowComparisonPicker);
             FooterButton(0,2,"성소 메뉴",ShowTown);FooterButton(1,2,"광장으로",game.EnterPlaza);
+        }
+        Action SweepAction(Action refresh)
+        {
+            string request=Guid.NewGuid().ToString("N");uint seed=(uint)DateTime.UtcNow.Ticks;
+            return ()=>{bool ok=game.Store.SweepRift(request,seed);string error=game.Store.Error;refresh();ShowToast(ok?"소탕 보상을 받았습니다.":Loc.F("소탕하지 못했습니다. 실클리어·남은 횟수·장비 3칸·보석 공간을 확인하세요.\n{0}",error));};
         }
     }
 }

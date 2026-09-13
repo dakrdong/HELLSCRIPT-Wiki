@@ -204,7 +204,7 @@ namespace Hellscript
             BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);
             ContentButton(ContentUnlocks.Gem,"보석 장착·교체·합성",ShowGemMenu);
             BigButton(content,"수수께끼 상인 · 제작",ShowShop);
-            ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",()=>{uint rng=(uint)DateTime.UtcNow.Ticks;bool ok=Economy.Sweep(a,Guid.NewGuid().ToString("N"),ref rng);game.Save();ShowTown();ShowToast(ok?"소탕 보상을 받았습니다.":"실클리어 기록, 소탕 잔여 횟수, 가방 3칸이 필요합니다.");});
+            ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowTown));
             Note(content,"개발용 로컬 플레이 · 계정 연동과 결제는 연결 전입니다.",17,54);
             FooterButton(0,2,"전투 기록",ShowRecords);FooterButton(1,2,"게임 안내",ShowHelp);
             if(!string.IsNullOrEmpty(game.Notice))ShowToast(game.Notice);
@@ -375,6 +375,7 @@ namespace Hellscript
             if(r.training>=0)Note(content,"훈련 결과입니다. 실제 계정 보상은 지급하지 않습니다.",21,70,gold);
             else Note(content,Loc.F("상자 개봉 {0} / {1}개\n미개봉 상자 보상은 다음 판으로 이월되지 않습니다.", r.layout.chests.Count(c=>c.phase==ChestPhase.Opened), r.layout.chests.Count),21,92,gold);
             if(r.runesAwarded>0)Note(content,Loc.F("룬 {0}개 획득 · 룬 성장에서 배치할 수 있습니다.",r.runesAwarded),21,70,gold);
+            if(r.gemsCollected>0)BigButton(content,Loc.F("보석 {0}개 획득 · 공용 보관함 열기",r.gemsCollected),ShowGemMenu);
             if(r.training<0)ObjectiveResult(RiftObjectives.Capture(r));
             if(r.training<0&&r.phase==RunPhase.Failed&&r.health<=0)BigButton(content,"사망 원인 분석 (최근 5초 기록)",ShowDefeatAnalysis,true);
             var completed=game.Store.Data.records.FirstOrDefault(record=>record.id==r.id);

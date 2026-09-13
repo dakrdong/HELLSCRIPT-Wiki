@@ -2,7 +2,7 @@
 
 작성일: 2026-09-11 · 상태: 신규 상세 시험안
 
-2026-09-13 개발 갱신: 효과표·소켓 자료·장비 보호·저장 복구와 비교 화면을 [개발 기록](../Implementation/Gem_Socket_Foundation.md)에 연결했다. 계정 공용 보석을 별도 가방에 둘지, 캐릭터별 장비 가방의 칸을 쓸지는 사용자 확인 중이다. 아래 저장 계약을 보관함 구현 완료로 해석하지 않는다. English: see the [implementation record](../Implementation/Gem_Socket_Foundation.en.md); storage ownership and the acquisition/service flow are still pending.
+2026-09-13 서비스 구현 갱신: 효과·보호·저장 기반에 이어 획득·계정 공용 보관·소켓·장착·교체·분리·합성을 연결했다. 공용 50칸·묶음 999개는 세부 사항을 플레이하며 조절한다는 사용자 방침에 따른 임시 기본값이다. 별도 상품 정책 확정으로 기록하지 않는다. [현재 구현](../Implementation/Playable_Completion.md) · [English](../Implementation/Playable_Completion.en.md)
 
 ## 1. 범위와 자료 방침
 
@@ -183,7 +183,9 @@ GemStack         : { gemId:string, tier:int, count:int }
 - 저장을 다시 읽어도 소켓과 보석이 보존된다. 손상된 보석 값은 빈 소켓으로 읽고 원본을 보존한다.
 - 보석을 모두 뺀 상태와 모두 채운 상태의 전투 지표를 같은 시드로 비교해 기록한다. 이 수치는 표본이며 균형 보장이 아니다.
 
-## 11. 남은 결정
+## 11. 플레이 후 조정할 항목
+
+이번 개발에서는 아래 밸런스·파밍 측정을 수행하지 않는다. 사용자가 실제 플레이 후 조정할 항목으로 남긴다. English: do not run these balance/farming measurements in this development task; leave them for owner-directed tuning after play.
 
 - 보석 획득량이 합성 비용을 감당하는지는 실제 파밍 측정이 필요하다. 왕관의 단계 하나에 1단계 243개가 드는데, 30단계 기준 한 판에서 얻는 보석이 몇 개인지 측정한 뒤 드롭률이나 합성 비율을 조정한다.
 - 일곱 종류 균등 추첨은 시작값이다. 원하는 종류가 안 나오는 문제가 크면 종류 교환 서비스를 검토한다. 이번 범위에는 넣지 않는다.

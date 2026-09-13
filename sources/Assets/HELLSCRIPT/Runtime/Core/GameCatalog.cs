@@ -130,6 +130,8 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public int gemCapacity=GemInventory.DefaultCapacity;
+        public List<GemStack> gems=new List<GemStack>();
         public RuneGrowthState runes=new RuneGrowthState();
         public ContentUnlockState contentUnlocks=new ContentUnlockState();
         public AccountGuide guide=new AccountGuide();
@@ -238,6 +240,9 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public uint gemRng;
+        public int gemsCollected;
+        public List<RiftResourceDrop> resources=new List<RiftResourceDrop>();
         public long earnedGold;
         public bool limitedLoot;
         public EdictResponseState edictResponse;

@@ -42,6 +42,7 @@ namespace Hellscript
                 rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
             CombatTelemetry.Normalize(State);
+            RiftResources.Normalize(State);GemInventory.Normalize(this.account);
             State.itemEffects??=new CombatEffectState();
             State.growthEvents??=new List<GrowthEvent>();
             BehaviorRules.Normalize(State.build);
@@ -380,7 +381,8 @@ namespace Hellscript
                 {
                     var rune=RuneGrowth.GrantMonster(account,State,e);
                     if(rune!=null)Log("RUNE_DROP",Loc.Source("G{0} 룬 · {1}칸 · 모양 {2} 획득",rune.grade,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).Size,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).ShapeNumber));
-                    RiftEarnings.GrantGold(account,State,Gold(e.elite>=0?25+5*State.stage:5+State.stage));
+                    RiftResources.Add(State,RiftResourceKind.Gold,e.position,Gold(e.elite>=0?25+5*State.stage:5+State.stage));
+                    RiftResources.RollGems(State,e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,e.position);
                     QueueExperience(Mathf.FloorToInt((e.elite>=0?50:10)*(1+.05f*(State.stage-1))));
                     bool drop=e.elite>=0||RandomStream.Unit(ref State.rewardRng)<.02f;
                     if(drop)Drop(e.position,RiftRarity.Roll(e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,State.stage,ref State.rewardRng));
@@ -451,6 +453,7 @@ namespace Hellscript
         void Loot(float dt)
         {
             if(State.training>=0)return;
+            CollectResources(dt);if(State.portal)return;
             if(State.limitedLoot&&Economy.FreeSlots(Hero)>0)State.limitedLoot=false;
             var pending=State.drops.Where(d=>!d.claimed&&!d.ignored).ToArray();
             bool combatClear=edictLoot==null||State.phase==RunPhase.Looting||EdictLootCombatClear;
@@ -475,12 +478,14 @@ namespace Hellscript
                 }
                 else drop.ignored=true;
             }
-            if(State.phase==RunPhase.Looting&&State.drops.All(d=>d.claimed||d.ignored))Finish(true,"균열 클리어");
+            if(State.phase==RunPhase.Looting&&State.drops.All(d=>d.claimed||d.ignored)&&State.resources.All(d=>d.claimed||d.ignored))Finish(true,"균열 클리어");
         }
         void BossClear()
         {
             if(State.bossRewarded)return;CompleteReadyChest();if(!string.IsNullOrEmpty(State.navigationError))return;CloseUnopenedChests();State.bossRewarded=true;State.phase=RunPhase.Looting;InterruptHeroAction("보스 처치 후 전리품 정리");State.activeSkill=-1;
-            RiftEarnings.GrantGold(account,State,Gold(800+50*State.stage));account.materials+=5+State.stage/5;
+            RiftResources.Add(State,RiftResourceKind.Gold,State.position,Gold(800+50*State.stage));
+            RiftResources.Add(State,RiftResourceKind.Material,State.position,5+State.stage/5);
+            RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(1000+100*State.stage));account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
             for(int i=0;i<3;i++)Drop(State.position+new Vector2(i-1,1),RiftRarity.Roll(RiftRewardSource.Boss,State.stage,ref State.rewardRng));
@@ -488,7 +493,7 @@ namespace Hellscript
             ContentUnlocks.Reconcile(account);
             Log("BOSS_CLEAR","보스 처치 · 전리품 정리");
         }
-        public void Abandon() { if(State.phase==RunPhase.Looting){foreach(var d in State.drops)d.ignored=true;Finish(true,"전리품 정리 종료",CombatFinish.Abandoned);}else Finish(false,"마을로 귀환",CombatFinish.Abandoned); }
+        public void Abandon() { if(State.phase==RunPhase.Looting){foreach(var d in State.drops)if(!d.claimed)d.ignored=true;foreach(var d in State.resources)if(!d.claimed)d.ignored=true;Finish(true,"전리품 정리 종료",CombatFinish.Abandoned);}else Finish(false,"마을로 귀환",CombatFinish.Abandoned); }
         void Finish(bool won,string reason,CombatFinish completion=CombatFinish.Other)
         {
             if(State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;

@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=3;
+        public const int MaximumSchemaVersion=4;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -85,11 +85,13 @@ namespace Hellscript
         }
         static void Normalize(AccountSave a)
         {
+            try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             RuneGrowth.Normalize(a);
             a.speed=CombatSpeedAccess.Resolve(a.speed);
             ItemAcquisition.NormalizeCounter(a);
             FirstPlayGuide.Normalize(a);
             ContentUnlocks.Normalize(a,legacy:true);
+            if(a.gems.Count>0)ContentUnlocks.RecordGemAcquisition(a);
             // JsonUtility materializes a null plain serializable class as an empty object.
             if(a.suspendedRun!=null&&string.IsNullOrEmpty(a.suspendedRun.id))a.suspendedRun=null;
             if(a.suspendedRun!=null)NormalizeRun(a.suspendedRun);
@@ -123,6 +125,7 @@ namespace Hellscript
         }
         public static void NormalizeRun(RunState run)
         {
+            try{RiftResources.Normalize(run);}catch(Exception error){throw new NotSupportedException(Loc.T("균열의 재화·보석 기록을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             if(run.heroAction?.policy?.edictTarget?.version>EdictTargetPolicy.CurrentVersion)
                 throw new NotSupportedException("더 새로운 대상 판단 버전이 필요합니다. 저장 파일은 보존했습니다.");
             CombatTelemetry.Normalize(run);
@@ -251,6 +254,7 @@ namespace Hellscript
             Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
+            Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)
@@ -270,6 +274,7 @@ namespace Hellscript
         {
             try
             {
+                GemInventory.Normalize(data);data.schema=MaximumSchemaVersion;
                 ContentUnlocks.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
                 foreach(var hero in data.heroes)NormalizePresetSlots(hero);

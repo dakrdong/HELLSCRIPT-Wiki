@@ -87,6 +87,15 @@ namespace Hellscript
         {
             if(capture)CaptureInventoryList();
             ClearInventoryRows(inventoryList.content);var all=InventorySource.ToArray();var visible=inventorySession.query.Apply(all).ToArray();
+            if((!game.Active||portalBag)&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Gem))InventoryButton(inventoryList.content,"보석 보관함",ShowGemMenu,true);
+            if(portalBag)
+            {
+                if(game.Combat?.State.phase==RunPhase.Looting)
+                {
+                    string request=Guid.NewGuid().ToString("N");
+                    InventoryButton(inventoryList.content,"남은 보상 두고 종료",()=>Confirm("아직 줍지 않은 장비·재화·보석을 남기고 균열을 완료합니다. 이미 얻은 보상은 유지합니다.",()=>game.LeaveUncollectedLoot(request)));
+                }
+            }
             foreach(var item in visible)
             {
                 string id=item.id,protect=Protection(item);
@@ -189,6 +198,7 @@ namespace Hellscript
                 InventoryNote(parent,Loc.F("{0} · {1} [{2}]\n{3} +{4:0.##} · 가능 범위 {5:0.##}~{6:0.##}{7}{8}", (roll.side==AffixSide.Prefix?"접두":"접미"), def.phrase, roll.tierId, StatCatalog.Name(def.stat), roll.value, def.Value(item.level,0), def.Value(item.level,10000), (roll.legacyRoll?"\n기존 수치를 보존한 옵션입니다.":""), (item.rerollSlotId==roll.slotId?"\n재설정 대상으로 선택한 줄입니다.":"")));
             }
             InventoryNote(parent,GemCatalog.SocketSummary(item),20,muted);
+            if(frozenHero==null&&!game.Active&&GemCatalog.AllowsSocket(item)&&game.Store.Data.Hero.inventory.Any(i=>i.id==item.id)&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Gem))BigButton(parent,"소켓과 보석 관리",()=>ShowGemSocket(item.id));
             if(unique!=null)
             {
                 if(unique.setId=="")InventoryNote(parent,unique.Description,21,ItemColor(item));

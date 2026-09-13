@@ -99,7 +99,19 @@ namespace Hellscript
             UI.RefreshHud();
         }
         public void ContinuePortal()
-        {if(Combat==null)return;if(Economy.FreeSlots(Store.Data.Hero)<=0&&!Combat.State.limitedLoot){Notify("판매·분해·창고 이동으로 가방을 비워 주세요.");return;}Combat.State.portal=false;Combat.State.portalCast=0;Combat.State.paused=false;if(!DisplayDimmed)UI.ShowBattle();Save();}
+        {if(Combat==null)return;if(Combat.GemBagBlocked){Notify("보석을 합성해 공간을 만들거나 남은 보상을 두고 종료해 주세요.");return;}if(Economy.FreeSlots(Store.Data.Hero)<=0&&!Combat.State.limitedLoot){Notify("판매·분해·창고 이동으로 가방을 비워 주세요.");return;}Combat.State.portal=false;Combat.State.portalCast=0;Combat.State.paused=false;if(!DisplayDimmed)UI.ShowBattle();Save();}
+        public void LeaveUncollectedLoot(string request)
+        {
+            if(Combat==null)return;
+            if(!Store.CommitRunMutation(Combat.State,request,"leave-loot:"+Combat.State.id,run=>
+            {
+                if(!run.portal||run.phase!=RunPhase.Looting)return false;
+                foreach(var drop in run.drops)if(!drop.claimed)drop.ignored=true;
+                foreach(var drop in run.resources)if(!drop.claimed)drop.ignored=true;
+                run.portal=false;run.paused=false;return true;
+            })){Notify(Store.Error);return;}
+            UI.ShowBattle();
+        }
         public void EnterPlaza()
         {
             if(Active)return;Town??=new TownWalk();World.BuildTown(Town);UI.ShowPlaza();
@@ -181,7 +193,7 @@ namespace Hellscript
             else combatClock.Pause();
             if(!DisplayDimmed&&!backgroundPaused)World.Present(run,Mathf.Min(real,.25f));
             if(run.portal&&!portalCleanupTried)TryPortalCleanup();else if(!run.portal)portalCleanupTried=false;
-            if(run.portal&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse")UI.ShowBag(true);
+            if(run.portal&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse"&&UI.Page!="gem-menu")UI.ShowBag(true);
             if(!Active&&!resultShown){resultShown=true;if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();if(!IdleHunting)UI.ShowResult();}
             if(!Active&&!wasActive&&!backgroundPaused&&!foregroundResumeRequired&&!UI.BlocksRepeat&&(IdleHunting||UI.Page=="result")&&run.training<0)TickRepeat(repeatReal);
             if(!backgroundPaused){saveClock+=real;if(saveClock>=3){saveClock=0;Save();}}

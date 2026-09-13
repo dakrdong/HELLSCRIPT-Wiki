@@ -1,0 +1,123 @@
+{
+  "date": "2026-09-13",
+  "status": "passed",
+  "build": "Builds/macOS-Playable-Build2/HELLSCRIPT.app",
+  "goalCriterion": "A playable local loop. Prioritize major features; owner tunes details. Stop after delivery.",
+  "balanceMeasurementsRun": false,
+  "editor": {
+    "edictReview": {
+      "report": "Artifacts/Validation/PlayableCompletion/EdictFunctions.xml",
+      "passed": 1007,
+      "failed": 0
+    },
+    "changedFeatures": {
+      "report": "Artifacts/Validation/PlayableCompletion/FinalFunctions.xml",
+      "passed": 99,
+      "failed": 0
+    },
+    "note": "Separate focused suites; not an aggregate full-regression count."
+  },
+  "native": {
+    "initial": {
+      "startedUtc": "2026-09-13T13:12:22.061769+00:00",
+      "pid": 93918,
+      "build": "Build2",
+      "endedUtc": "2026-09-13T13:12:33.527146+00:00",
+      "exitCode": 0
+    },
+    "flow": {
+      "startedUtc": "2026-09-13T13:12:33.530779+00:00",
+      "pid": 94053,
+      "build": "Build2",
+      "endedUtc": "2026-09-13T13:15:25.090143+00:00",
+      "exitCode": 0
+    },
+    "restart": {
+      "startedUtc": "2026-09-13T13:15:25.094317+00:00",
+      "pid": 94405,
+      "build": "Build2",
+      "endedUtc": "2026-09-13T13:15:30.101935+00:00",
+      "exitCode": 0
+    }
+  },
+  "nativeEdict": "Artifacts/Validation/PlayableCompletion/EdictNative1/runtime-edict-smoke.txt",
+  "flows": [
+    "Generated rift persisted and restored in a separate process",
+    "Natural exploration, chest opening, combat, boss defeat and rewards",
+    "Gem acquisition, socket/install/remove/fuse UI in KO/EN",
+    "Full gem storage pauses without loss; fusion and explicit leave both unblock",
+    "Next rift, atomic sweep, final process restart"
+  ],
+  "fixtures": "Natural flow: level-30 Mage with legal rare item-level-30 equipment, stage 1, seed 91367. Service-only currency/gems and full-storage states explicitly seeded afterward. UI callback automation; no physical-input or balance claim.",
+  "reviewedScreenshots": [
+    "Artifacts/Validation/PlayableCompletion/Native1/01-edict-ko.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/02-rift-checkpoint.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/03-natural-result.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/04-gem-storage-ko.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/05-socket-installed-en.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/06-gem-fusion-en.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/07-portal-gem-storage-en.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/08-sweep-gems-en.png",
+    "Artifacts/Validation/PlayableCompletion/Native1/09-restored-gems-en.png"
+  ],
+  "provisionalDefaults": {
+    "accountSharedGemSlots": 50,
+    "gemStackLimit": 999
+  },
+  "remainingOutsideGoal": [
+    "Owner tuning and balance",
+    "Production art/audio",
+    "Server login, cross-device save and real billing",
+    "Physical mobile device and store release"
+  ],
+  "sourceInputs": {
+    "Assets/HELLSCRIPT/Resources/ContentUnlocks.json": "d69a61501634c161e4329afeff3cc8407f6ae00fe9dce07a35ad132d91d23ec4",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "78bf4810301ec3db9accf4512d80fcc7f38370e6f45be452ad00d27309d8577b",
+    "Assets/HELLSCRIPT/Runtime/Core/AudioSettings.cs": "3cd7856c08bd7b3d5fda152144450ff23f5f1a0b6ea315cc73d102717ba5fe82",
+    "Assets/HELLSCRIPT/Runtime/Core/AudioSettings.cs.meta": "4a55a1e5e051758c9139938dae7361539f101fb8e6d20c2fdd640ad0fea7884e",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Resources.cs": "20a25f0e0deefa9a7e38ad58eff7ca31aeac18b7a35b32649c61c31e19439981",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Resources.cs.meta": "935afdc9e79d0b07123fff5347873d813f8fa7f924e70a5f8824aaab253ba2ba",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Rules.cs": "47f8a00b857477bb119a0c9c5b908c63a36e66e49057770b8fcead80b38ce8cd",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs": "f3f8817a48c3e85da025d56c80fb7d015f7ad1a4ac4e1b87095da74b0faec0e2",
+    "Assets/HELLSCRIPT/Runtime/Core/Economy.cs": "ac854fbebacede88d125de1baf1ce442855abf7af7a91a931bdffe40e014d3c9",
+    "Assets/HELLSCRIPT/Runtime/Core/EdictLootPolicy.cs": "93e46eaf7f48d994f29e38b1bc31cbe3812ce8cc0ff436fc3063191821c0d973",
+    "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs": "ff5a386cd45c6567f81f1d4ade92847d96a7c2dabd0f42b529f86a565678b07f",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Gems.cs": "5f2c4eb8eefbf05526e8aaff0d99fbe8d88ceb8dc19f5c7e01a183493b8cd08a",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Gems.cs.meta": "a95bae634d0339bad75f050b82957b684d7c6635016a04c44df3973e09d88f92",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.cs": "9c24f9ab2150c45c922ff519ee340b0dd6f6ca1d8cc65e2329b5e8fcbc7c3ebf",
+    "Assets/HELLSCRIPT/Runtime/Core/GemInventory.cs": "b9c346fc23f99e5a5e2f2a4c5ce5ac538976c23b556b4f1bef20c25a7bdb3f55",
+    "Assets/HELLSCRIPT/Runtime/Core/GemInventory.cs.meta": "42e81843c22d92b5cd309e94ff9390b527531e9026ff2658d2cd086c22cf6ef9",
+    "Assets/HELLSCRIPT/Runtime/Core/HuntEdictV2.Order.cs": "174a11c4dd25f163c7e13b8156b9b64e982d51ca69f4273f9a479e436ad437ed",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftResources.cs": "988bc2037f190c0cb19830b7f906fba3bf1791f8c1f651ed9759f6c2f7fe2f06",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftResources.cs.meta": "a4d225b8a63cacf2ef32c68f87b7036be77039afbf4f70121f91b9f71d9e54f7",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs": "ac5ea3010859ab409f9ead40d2dc42e79cdcc4aedf202a59575741a61252ee61",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs.meta": "47a02e111cf60cf116c7f3943e0ce4cdb4a2d3740d982a12c2ee3db562e87a2e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.cs": "4bd61a9d6a535688ba3899091ae99cbdeec9f71236a5bc22d1a575aca6cad0f6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.cs.meta": "8156d74bdfcec2362f2e2bf2dca1efc9f04847f7ce5635e509b1ca059bcf5a00",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.cs": "c73704c7be75b078afe1c99a729f8e4e4be15219ff5b95e8a528da0407465741",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Audio.cs": "71d62b38137ee4b011ef61a415736046c529fa6b83523dddf60287598fd09886",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Audio.cs.meta": "c9cc6ba37a0989596ac68967816a2cd5d7683ddf527f3b82bca75f430a077189",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentUnlocks.cs": "2a2f71d97a8840c4d79e1d68d7177b3084b7da1b6b1bcef18f7c7b558fcfab03",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Gems.cs": "d39b9bd1ba1202a8e20e0e43372b03e79e765d7cc5902b3187fcfbde99365bec",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Gems.cs.meta": "8f7396d8107ef05045cd5895fe7ae9180692f0788dff62c5e1bcbb9b0223cc77",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.InventoryLayout.cs": "2c89c18d59fc32032ac3181fb34ed29c77409aa92b0e3a36d9e6c3b2f07e3e82",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Plaza.cs": "f53890e7357ab2c26905663eac11508ab02c5f69afa4f94d51d5d610a15ad31b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftKeeper.cs": "7b499485c4d2e5e1df144a4c087deff8bc48770cb9e0752e173211ae30ccd125",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs": "e576b4a7b87de7d545983b380e54b30f91c179eadfa42cdfcbd5c2af27d35b7b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "53c684ebe7f6a578ec148cef644fadf5a365005b3af54e50790382aa1f3d3c7b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAudioSkillsSmoke.cs": "c902571ba8e448b2274d7a616117af70aa1bfab2da4a9e5c9cc9c9e57c569095",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAudioSkillsSmoke.cs.meta": "3708dd478cb8de73a0528d6a8512783bc1772a6b4c37dae794ffd7ba619dd0ff",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimePlayableSmoke.cs": "198fa10d4a5cbeabcebcdd7890154f2ec2c58a307b72abfa5439b322ef50fee6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimePlayableSmoke.cs.meta": "51870cffdcc39d7a0905b5b23d72c9fa5dd66b87d167891e5150052bc81c3f9f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Actions.cs": "cc2965f81c2814188e761e4f5609f1b834f57af79c4096f237dc153210ea86b5",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Resources.cs": "1bac1831b771bb262b76a728206663ae4c3008e64d60842cfb4d147130a36378",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Resources.cs.meta": "0da56b0657bbc02dac56dc061d825543213dcf4aec09e9d1b3d99a89b2d53923",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Skills.cs": "4fa736ec39908479f051964fc78b513edfd413dafc5f0c33a4498bbe7171023c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Skills.cs.meta": "968e96005dd4542b78eedf4b52de5587af96fb779acde224041170012ae4086c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.cs": "29caeedf822cc08bffa3d082e2ac19f6d6f3f05e403ea625c08c7c8ed31d97c1",
+    "Assets/HELLSCRIPT/Tests/Editor/GemServiceTests.cs": "8ce58f0f407a3562b56cd5391eda504bcc8d87ab686d109bbb33b19457bc95c6",
+    "Assets/HELLSCRIPT/Tests/Editor/GemServiceTests.cs.meta": "6f02249a538291471a979575ccc6f19537e80ad1e8f43fd3de18c8de4d6684f1",
+    "Assets/HELLSCRIPT/Tests/Editor/ResourceLootTests.cs": "6d38f098db9d0136eff799b7584bd78599bb81fdf929e168cc38bc3c5217369e",
+    "Assets/HELLSCRIPT/Tests/Editor/ResourceLootTests.cs.meta": "f70038b88ad6303906ec200837a982953637dae121c345b5fa6151ec169b36b6"
+  }
+}

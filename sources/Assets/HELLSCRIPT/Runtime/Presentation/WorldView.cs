@@ -51,7 +51,7 @@ namespace Hellscript
             presentedRunId=null;
             shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
-            roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();ClearObjectiveChains();
+            roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
         {
@@ -150,7 +150,7 @@ namespace Hellscript
                 {var color=drop.item.rarity==3?ember:drop.item.rarity==2?purple:blue;visual=Shape(drop.item.name,PrimitiveType.Cube,world.transform,Position(drop.position)+Vector3.up*.4f,new Vector3(.35f,.65f,.2f),color);drops.Add(drop.id,visual);Ring(visual.transform,Vector3.zero,1,color,.04f);}
                 visual.transform.rotation=Quaternion.Euler(15,elapsed*55,25);
             }
-            PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
+            PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
             var active=new HashSet<int>();
             foreach(var fx in run.effects)
             {
