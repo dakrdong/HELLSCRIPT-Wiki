@@ -17,7 +17,7 @@ namespace Hellscript
         readonly List<VisualFx> effects=new List<VisualFx>();
         Material stone,darkStone,trim,ember,blue,red,green,purple;
         float elapsed;
-        sealed class VisualFx {public GameObject go;public float life,total;public Vector3 scale;}
+        sealed class VisualFx {public GameObject go;public float life,total,growth=.35f,spin;public Vector3 scale,velocity;}
         public void Initialize(GameController controller)
         {
             game=controller;
@@ -49,6 +49,7 @@ namespace Hellscript
         public void ClearDungeon()
         {
             presentedRunId=null;
+            shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();ClearObjectiveChains();
         }
@@ -93,6 +94,8 @@ namespace Hellscript
             Shape("Face light",PrimitiveType.Cube,root.transform,new Vector3(0,2.07f,.28f),new Vector3(.4f,.08f,.06f),enemy?red:ember);
             var shoulders=Shape("Shoulders",PrimitiveType.Cube,root.transform,new Vector3(0,1.6f,0),new Vector3(1.2f,.32f,.7f),body);shoulders.transform.localRotation=Quaternion.Euler(0,0,-4);
             var weapon=Shape("Weapon",PrimitiveType.Cube,root.transform,new Vector3(.68f,1.3f,.35f),new Vector3(.17f,1.6f,.25f),enemy?darkStone:trim);weapon.transform.localRotation=Quaternion.Euler(25,0,-25);
+            if(!enemy&&type==1){weapon.transform.localScale=new Vector3(.12f,1.3f,.12f);SkillLine("Simple bow",weapon.transform,new[]{new Vector3(0,-.5f,0),new Vector3(0,-.25f,2),new Vector3(0,.25f,2),new Vector3(0,.5f,0),new Vector3(0,-.5f,0)},trim,.55f);}
+            if(!enemy&&type==2)Shape("Staff tip",PrimitiveType.Sphere,weapon.transform,new Vector3(0,.55f,0),new Vector3(2,.2f,1.5f),blue);
             if(enemy&&role==2)weapon.transform.localScale=new Vector3(1.2f,.15f,.4f);
             if(enemy&&role==4)Shape("Support lantern",PrimitiveType.Sphere,root.transform,new Vector3(.68f,2.3f,.35f),Vector3.one*.4f,purple);
             if(!enemy)Ring(root.transform,Vector3.up*.08f,1.05f,ember,.055f);
@@ -147,20 +150,21 @@ namespace Hellscript
                 {var color=drop.item.rarity==3?ember:drop.item.rarity==2?purple:blue;visual=Shape(drop.item.name,PrimitiveType.Cube,world.transform,Position(drop.position)+Vector3.up*.4f,new Vector3(.35f,.65f,.2f),color);drops.Add(drop.id,visual);Ring(visual.transform,Vector3.zero,1,color,.04f);}
                 visual.transform.rotation=Quaternion.Euler(15,elapsed*55,25);
             }
-            PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);
+            PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
             var active=new HashSet<int>();
             foreach(var fx in run.effects)
             {
                 active.Add(fx.id);
                 if(fx.hostile&&!CanDisplayEnemyMarker(run,fx.position,fx.radius))
                 {if(hazards.TryGetValue(fx.id,out var hidden))hidden.SetActive(false);continue;}
-                if(!hazards.TryGetValue(fx.id,out var v)){v=Ring(world.transform,Position(fx.position)+Vector3.up*.09f,fx.radius,fx.hostile?red:fx.kind==8?green:blue,.13f);hazards[fx.id]=v;}
+                if(!hazards.TryGetValue(fx.id,out var v)){v=Ring(world.transform,Position(fx.position)+Vector3.up*.09f,fx.radius,fx.hostile?red:fx.kind==8?green:blue,.13f);hazards[fx.id]=v;DecorateGround(v,fx);}
                 v.SetActive(true);
                 v.transform.position=Position(fx.position)+Vector3.up*.1f;v.transform.localScale=Vector3.one*(fx.delay>0?.85f+Mathf.Sin(elapsed*8)*.08f:1);
+                var snow=v.transform.Find("Snow swirl");if(snow!=null)snow.localRotation=Quaternion.Euler(0,elapsed*80,0);
             }
             foreach(var id in new List<int>(hazards.Keys))if(!active.Contains(id)){Destroy(hazards[id]);hazards.Remove(id);}
             for(int i=effects.Count-1;i>=0;i--)
-            {var fx=effects[i];fx.life-=frozen?0:dt*game.EffectiveSpeed;if(fx.life<=0){Destroy(fx.go);effects.RemoveAt(i);}else fx.go.transform.localScale=fx.scale*(1+(1-fx.life/fx.total)*.35f);}
+            {var fx=effects[i];float step=frozen?0:dt*game.EffectiveSpeed;fx.life-=step;if(fx.life<=0){Destroy(fx.go);effects.RemoveAt(i);}else{fx.go.transform.localScale=fx.scale*(1+(1-fx.life/fx.total)*fx.growth);fx.go.transform.position+=fx.velocity*step;fx.go.transform.Rotate(0,fx.spin*step,0);}}
         }
         public void Effect(Vector2 origin,Vector2 target,int kind,float amount)
         {
@@ -172,8 +176,9 @@ namespace Hellscript
             if(kind==30||kind==31||kind==32){if(!CanDisplayEnemyMarker(run,origin))return;}
             else if(kind==6||kind==14||kind==18||kind==25)
             {if(!CanDisplayEnemyMarker(run,origin)||!CanDisplayEnemyMarker(run,target))return;}
-            else if(!CanDisplayEnemyMarker(run,kind==0||kind==4||kind==16||kind==20?origin:target,kind==24?2:Mathf.Clamp(amount,.8f,4)))return;
+            else if(!CanDisplayEnemyMarker(run,kind==0||kind==3||kind==4||kind==5||kind==11||kind==16||kind==17||kind==20?origin:target,kind==24?2:Mathf.Clamp(amount,.8f,4)))return;
             if(kind==30||kind==31||kind==32){if(kind==30&&amount<8)return;var spark=Shape("Hit",PrimitiveType.Sphere,world.transform,Position(origin)+Vector3.up*1.5f,Vector3.one*(kind==31?.35f:.15f),kind==32?red:ember);effects.Add(new VisualFx{go=spark,life=.15f,total=.15f,scale=spark.transform.localScale});return;}
+            if(SkillEffect(origin,target,kind,amount))return;
             Material mat=kind>=12&&kind<=17?blue:kind==8?green:kind==24||kind==25?red:ember;
             GameObject go;
             if(kind==6||kind==14||kind==18||kind==25)

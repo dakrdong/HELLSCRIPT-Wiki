@@ -1,5 +1,9 @@
 # HELLSCRIPT 남은 개발 작업표
 
+**2026-09-13 구현 우선 방침·음향·스킬 연출:** 이후 개발은 미완성 플레이 기능을 먼저 채우고, 확인은 컴파일과 핵심 흐름에 집중합니다. 대규모 회귀 검사와 밸런스 반복 실험은 통합 단계로 미룹니다. 임시 효과음·성소/균열 배경음·기기별 음량 설정과 18개 스킬의 기본 도형·발사체·움직임을 추가했습니다. [개발 기록](../Implementation/Audio_Skill_Presentation.md)
+
+English: prioritize missing gameplay features and limit immediate checks to compilation and critical flows; defer large regression and balance experiments until integration. Temporary audio, sanctuary/rift ambience, device volume settings and primitive-based presentation for all 18 skills are implemented. [English record](../Implementation/Audio_Skill_Presentation.en.md)
+
 갱신일: 2026-09-13
 
 **2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](../Implementation/Idle_Display.md)

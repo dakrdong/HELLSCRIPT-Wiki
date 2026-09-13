@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-13",
+  "result": "passed",
+  "scope": "Temporary audio and minimal skill presentation",
+  "build": "Build2",
+  "nativeRun": "Native2",
+  "app": "Builds/macOS-AudioSkills-Build2/HELLSCRIPT.app",
+  "checks": [
+    "Unity 6000.6.0f1 compilation and macOS development build",
+    "Native KO/EN volume controls, preview, mute and fixed pitch",
+    "Device preference restore in a separate native process",
+    "Short natural training with all three classes",
+    "Visual review: fixed oversized slider handle; primitive skill views"
+  ],
+  "notPerformed": [
+    "Full game regression suite",
+    "Repeated balance simulations",
+    "Physical mobile touch and audio hardware validation",
+    "Listening review of every temporary sound"
+  ],
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Runtime/Core/AudioSettings.cs": "3cd7856c08bd7b3d5fda152144450ff23f5f1a0b6ea315cc73d102717ba5fe82",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.cs": "850d198262833b93e361fc3fca1f6ff4c938068d0d4a2e963365c25e66b1b938",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs": "ac5ea3010859ab409f9ead40d2dc42e79cdcc4aedf202a59575741a61252ee61",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Audio.cs": "71d62b38137ee4b011ef61a415736046c529fa6b83523dddf60287598fd09886",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Skills.cs": "4fa736ec39908479f051964fc78b513edfd413dafc5f0c33a4498bbe7171023c",
+    "Assets/HELLSCRIPT/Runtime/Core/AudioSettings.cs.meta": "4a55a1e5e051758c9139938dae7361539f101fb8e6d20c2fdd640ad0fea7884e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.cs.meta": "8156d74bdfcec2362f2e2bf2dca1efc9f04847f7ce5635e509b1ca059bcf5a00",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs.meta": "47a02e111cf60cf116c7f3943e0ce4cdb4a2d3740d982a12c2ee3db562e87a2e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Audio.cs.meta": "c9cc6ba37a0989596ac68967816a2cd5d7683ddf527f3b82bca75f430a077189",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Skills.cs.meta": "968e96005dd4542b78eedf4b52de5587af96fb779acde224041170012ae4086c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.cs": "af0e9c38e30f8fafa6e85ce274a92845b9720b4899911837a7f7473b380c2ae9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "6819739ed6b2c7b7106ed39847e39d97fa0f43991b90ba225d14eb03c591345d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs": "e576b4a7b87de7d545983b380e54b30f91c179eadfa42cdfcbd5c2af27d35b7b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.cs": "6209510e9b96895256343525c62984bd14ba4feea389cf34d0c6142749559b0e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Actions.cs": "cc2965f81c2814188e761e4f5609f1b834f57af79c4096f237dc153210ea86b5",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "b8d736b581312558a937c97200f1cf2685161a6b65a8bced6aa3ca0513092490",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAudioSkillsSmoke.cs": "c902571ba8e448b2274d7a616117af70aa1bfab2da4a9e5c9cc9c9e57c569095",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAudioSkillsSmoke.cs.meta": "3708dd478cb8de73a0528d6a8512783bc1772a6b4c37dae794ffd7ba619dd0ff"
+  }
+}

@@ -10,7 +10,9 @@ namespace Hellscript
     {
         public GameCatalog catalog;
         public GameStore Store {get;private set;}
-        public CombatSimulation Combat {get;private set;}
+        CombatSimulation combat;
+        public CombatSimulation Combat {get=>combat;private set {combat=value;Audio?.Bind(value);}}
+        public GameAudio Audio {get;private set;}
         // Session-only plaza walk; nothing here is saved or affects a run.
         public TownWalk Town {get;private set;}
         public GameUI UI {get;private set;}
@@ -38,6 +40,7 @@ namespace Hellscript
             if(Store.GemRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.GemRecoveryMessage;
             if(Store.QualityRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.QualityRecoveryMessage;
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
+            Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);
             UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);
         }
         public void SelectHero(int index)

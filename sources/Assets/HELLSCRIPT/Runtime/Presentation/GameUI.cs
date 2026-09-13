@@ -82,12 +82,12 @@ namespace Hellscript
         public void ApplyLanguage()
         {
             if(root==null)return;
-            bool panelOpen=commonModal!=null,help=commonHelp,combat=commonCombat;
+            bool panelOpen=commonModal!=null,help=commonHelp,combat=commonCombat,sound=commonSound;
             if(panelOpen)CloseCommonPanel();
             pageRepaint?.Invoke();
             if(!panelOpen)return;
-            ShowCommonPanel(help);if(combat)SelectCombatTab();
-            Canvas.ForceUpdateCanvases();if(languageChoiceRow!=null)DialogReadingAnchor.Show(languageChoiceRow);
+            ShowCommonPanel(help);if(combat)SelectCombatTab();if(sound)SelectSoundTab();
+            Canvas.ForceUpdateCanvases();if(!sound&&!combat&&languageChoiceRow!=null)DialogReadingAnchor.Show(languageChoiceRow);
         }
         RectTransform Rect(string name,Transform parent)
         {var go=new GameObject(name,typeof(RectTransform));go.transform.SetParent(parent,false);return go.GetComponent<RectTransform>();}
@@ -121,7 +121,7 @@ namespace Hellscript
         {
             var r=Box(text,parent,color??new Color(.14f,.17f,.2f));var b=r.gameObject.AddComponent<Button>();
             var colors=b.colors;colors.highlightedColor=new Color(1.15f,1.15f,1.15f);colors.pressedColor=new Color(.75f,.75f,.75f);b.colors=colors;
-            var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>action());return b;
+            var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
         }
         Button BigButton(Transform parent,string text,Action action,bool primary=false)
         {var b=Button(parent,text,action,primary?new Color(.47f,.29f,.12f):panel);var le=b.gameObject.AddComponent<LayoutElement>();le.minHeight=TouchHeight;le.preferredHeight=TouchHeight;return b;}
@@ -434,7 +434,7 @@ namespace Hellscript
             game.ExitIdle();
             var modal=Box("Confirm",root,new Color(0,0,0,.83f));Stretch(modal);var card=Box("Dialog",modal,panel);card.anchorMin=new Vector2(.08f,.35f);card.anchorMax=new Vector2(.92f,.65f);card.offsetMin=card.offsetMax=Vector2.zero;
             var text=Label(card,message,25,pale,TextAnchor.MiddleCenter);text.rectTransform.anchorMin=new Vector2(.06f,.35f);text.rectTransform.anchorMax=new Vector2(.94f,.94f);text.rectTransform.offsetMin=text.rectTransform.offsetMax=Vector2.zero;
-            var cancel=Button(card,"취소",()=>Destroy(modal.gameObject));var ok=Button(card,"확인",()=>{Destroy(modal.gameObject);action();},new Color(.45f,.28f,.12f));
+            var cancel=Button(card,"취소",()=>Destroy(modal.gameObject));var ok=Button(card,"확인",()=>{game.Audio?.Play(SoundCue.Confirm);Destroy(modal.gameObject);action();},new Color(.45f,.28f,.12f));
             foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
         }
         public void ShowToast(string text)

@@ -102,6 +102,7 @@ namespace Hellscript
             CommonNote(screenBody, "설정과 안내를 열어 둔 동안 전투·훈련과 다음 균열 대기가 멈춥니다. 닫으면 이전 상태에서 이어집니다. 이미 일시정지한 전투는 그대로 정지해 있습니다.");
             screenMessage = CommonNote(screenBody, "", 20, gold);
             if (!string.IsNullOrEmpty(game.DisplayLoadNotice)) CommonNote(screenBody, game.DisplayLoadNotice, 20, gold);
+            if (game.Audio != null) BuildSoundPane();
             helpPane = CommonScroll("게임 안내 본문", out var helpBody);
             CommonNote(helpBody, "명령을 설계하는 자동 전투 파밍 게임", 24, gold);
             CommonNote(helpBody, "1. 성소에서 직업과 행동 설정을 고릅니다. 직업별 추천 빌드의 스킬 조합과 행동 조건을 확인하세요.");
@@ -159,6 +160,7 @@ namespace Hellscript
         { var label = Label(parent, text, size, color ?? pale); label.alignment = TextAnchor.UpperLeft; label.gameObject.AddComponent<LayoutElement>().minHeight = 28; return label; }
         void SelectCommonTab(bool help)
         {
+            commonSound = false; if (soundPane != null) soundPane.gameObject.SetActive(false);
             commonCombat = false; if (combatPane != null) combatPane.gameObject.SetActive(false);
             commonHelp = help; helpPane.gameObject.SetActive(help); screenPane.gameObject.SetActive(!help);
             foreach (Button button in commonTabs.GetComponentsInChildren<Button>()) button.GetComponent<Image>().color = button.name == (help ? "게임 안내" : "화면") ? gold * .4f : panel;
@@ -169,6 +171,7 @@ namespace Hellscript
         void SelectCombatTab()
         {
             if (combatPane == null) return;
+            commonSound = false; if (soundPane != null) soundPane.gameObject.SetActive(false);
             commonCombat = true; commonHelp = false; screenPane.gameObject.SetActive(false); helpPane.gameObject.SetActive(false); combatPane.gameObject.SetActive(true);
             screenApply.gameObject.SetActive(false); AnchorButton(commonActions.GetChild(0).GetComponent<Button>(), 0, 1);
             foreach (var button in commonTabs.GetComponentsInChildren<Button>()) button.GetComponent<Image>().color = button.name == "전투 상태" ? gold * .4f : panel;
@@ -204,21 +207,25 @@ namespace Hellscript
             var keyboard = TouchScreenKeyboard.visible ? TouchScreenKeyboard.area : new Rect();
             float bottom = keyboard.width > 0 && keyboard.xMin < safe.xMax && keyboard.xMax > safe.xMin ? Mathf.Clamp(keyboard.yMax, safe.yMin, safe.yMax) : safe.yMin;
             if (commonLaidOut && size == commonScreenSize && safe == commonSafeArea && Mathf.Abs(bottom - commonKeyboardTop) < 1) return;
-            Canvas.ForceUpdateCanvases(); var scroll = (commonCombat ? combatPane : commonHelp ? helpPane : screenPane).GetComponent<ScrollRect>(); var reading = DialogReadingAnchor.Capture(scroll);
+            Canvas.ForceUpdateCanvases(); var scroll = (commonSound ? soundPane : commonCombat ? combatPane : commonHelp ? helpPane : screenPane).GetComponent<ScrollRect>(); var reading = DialogReadingAnchor.Capture(scroll);
             commonScreenSize = size; commonSafeArea = safe; commonKeyboardTop = bottom;
             commonSafe.anchorMin = new Vector2(safe.xMin / Mathf.Max(1, size.x), bottom / Mathf.Max(1, size.y)); commonSafe.anchorMax = new Vector2(safe.xMax / Mathf.Max(1, size.x), safe.yMax / Mathf.Max(1, size.y)); commonSafe.offsetMin = commonSafe.offsetMax = Vector2.zero;
             Canvas.ForceUpdateCanvases(); var available = commonSafe.rect.size;
             float w = Mathf.Min(1100, Mathf.Max(1, available.x - 24)), h = Mathf.Min(800, Mathf.Max(1, available.y - 24));
             commonCard.sizeDelta = new Vector2(w, h); commonCard.anchoredPosition = Vector2.zero;
-            bool wide = w >= 820; float top = wide ? 62 : 130, body = Mathf.Max(1, h - top - 78);
-            Place(commonTabs, 12, 62, wide ? 200 : w - 24, wide ? 180 : 60);
             var tabs = commonTabs.GetComponentsInChildren<Button>();
+            bool wide = w >= 820; int columns = w < 620 ? 2 : tabs.Length;
+            int rows = Mathf.CeilToInt(tabs.Length / (float)columns);
+            float top = wide ? 62 : 70 + rows * 60, body = Mathf.Max(1, h - top - 78);
+            Place(commonTabs, 12, 62, wide ? 200 : w - 24, wide ? tabs.Length * 60 : rows * 60);
             for (int i = 0; i < tabs.Length; i++)
             {
                 var rect = (RectTransform)tabs[i].transform;
-                if (wide) Place(rect, 0, i * 60, 200, 52); else AnchorButton(tabs[i], i, tabs.Length);
+                if (wide) Place(rect, 0, i * 60, 200, 52);
+                else { float cell = (w - 24) / columns; Place(rect, (i % columns) * cell + 3, (i / columns) * 60, cell - 6, 52); }
             }
             foreach (var pane in new[] { screenPane, helpPane }) Place(pane, wide ? 224 : 12, top, w - (wide ? 236 : 24), body);
+            if (soundPane != null) Place(soundPane, wide ? 224 : 12, top, w - (wide ? 236 : 24), body);
             if (combatPane != null) Place(combatPane, wide ? 224 : 12, top, w - (wide ? 236 : 24), body);
             Place(commonActions, 12, h - 72, w - 24, 60);
             Canvas.ForceUpdateCanvases(); if (commonLaidOut) reading?.Restore(); commonLaidOut = true;
@@ -226,6 +233,7 @@ namespace Hellscript
         public void CloseCommonPanel()
         {
             if (commonModal == null) return;
+            game.Audio?.SavePreferences();
             var old = commonModal; commonModal = null; old.gameObject.SetActive(false); Destroy(old.gameObject);
             foreach (var gate in commonInputGates) if (gate.group != null) { gate.group.interactable = gate.interactable; gate.group.blocksRaycasts = gate.raycasts; }
             commonInputGates.Clear();
@@ -236,7 +244,7 @@ namespace Hellscript
         {
             if (root != null) ApplySafeArea();
             if (commonModal == null) return;
-            ReflowCommonPanel(); RefreshScreenSettings();
+            ReflowCommonPanel(); RefreshScreenSettings(); if (commonSound) RefreshAudioSettings();
             if (Keyboard.current?.escapeKey.wasPressedThisFrame == true) CloseCommonPanel();
         }
     }

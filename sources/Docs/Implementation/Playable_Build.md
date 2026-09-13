@@ -1,5 +1,9 @@
 # HELLSCRIPT 첫 플레이 빌드
 
+**2026-09-13 구현 우선 방침·음향·스킬 연출:** 이후 개발은 미완성 플레이 기능을 먼저 채우고, 확인은 컴파일과 핵심 흐름에 집중합니다. 대규모 회귀 검사와 밸런스 반복 실험은 통합 단계로 미룹니다. 임시 효과음·성소/균열 배경음·기기별 음량 설정과 18개 스킬의 기본 도형·발사체·움직임을 추가했습니다. [개발 기록](Audio_Skill_Presentation.md)
+
+English: prioritize missing gameplay features and limit immediate checks to compilation and critical flows; defer large regression and balance experiments until integration. Temporary audio, sanctuary/rift ambience, device volume settings and primitive-based presentation for all 18 skills are implemented. [English record](Audio_Skill_Presentation.en.md)
+
 갱신일: 2026-09-13
 
 최신 실행본은 `Builds/macOS-TrainingEquipment-Build8/HELLSCRIPT.app`입니다. **2026-09-13 소유 장비 훈련:** A/B 비교에서 가방·공유 창고 장비와 실제 사용 중인 칙령을 시험할 수 있습니다. 계정 룬 보드를 비교에서 빠뜨리던 문제와 B 프리셋에 A 장비를 저장하던 경로를 수정했습니다. 최종 전체 검사 2,515개, 실제 실행·재시작과 화면 13장 검토를 마쳤습니다. 실제 가방·창고·장착·진행도는 유지되며 결과와 프리셋은 직접 저장합니다. [개발 기록](Training_Equipment_Expansion.md)
