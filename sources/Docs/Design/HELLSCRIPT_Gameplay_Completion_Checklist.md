@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](../Implementation/Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](../Implementation/Item_Quality_Expansion.en.md)
+
 **2026-09-13 보석·소켓 구현 갱신:** 보석 효과·장비 보호·비교·저장 복구의 전체 검사 2,380개와 실제 앱 검사 3회, 화면 9장 검토를 마쳤습니다. 사용자에게 보관 방식을 확인 중이며, 보석을 얻고 보관해 장착·분리·합성하는 전체 순환은 아직 완료 기준에 도달하지 않았습니다. 같은 시드의 빈 소켓·보석 장착 대조 1쌍은 전투 연결의 근거로만 사용합니다. [개발 기록](../Implementation/Gem_Socket_Foundation.md)
 
 English: gem effects, protection, comparisons and save recovery passed all 2,380 tests and three native processes, with nine screenshots reviewed. Storage ownership is pending; acquisition/storage/socket/fusion gameplay is incomplete. One same-seed empty-versus-gemmed comparison verifies the combat connection without establishing balance. [English record](../Implementation/Gem_Socket_Foundation.en.md)

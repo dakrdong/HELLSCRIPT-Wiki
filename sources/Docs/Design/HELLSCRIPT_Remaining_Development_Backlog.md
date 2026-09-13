@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](../Implementation/Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](../Implementation/Item_Quality_Expansion.en.md)
+
 **2026-09-13 보석·소켓 기반:** 효과표 126개, 장착 능력치·피격 감소, 장비 보호·비교와 저장 복구를 구현했습니다. 최종 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 다음 연결은 보석 보관 방식 확정 → 소유권·용량·저장 → 균열·소탕 보상과 가방 부족 처리 → 소켓 내기·장착·교체·분리·합성 서비스입니다. 별도 계정 공용 가방 50칸·묶음당 999개는 권장안이며 아직 확정하지 않았습니다. [개발 기록](../Implementation/Gem_Socket_Foundation.md)
 
 English: 126 effect rows, equipped stats/reduction, protection, comparisons and recovery are implemented; all 2,380 tests and three native processes passed, with nine screenshots reviewed. Next: confirm storage ownership, connect capacity/persistence, rewards/full-bag handling and socket/fusion services. A shared 50-slot gem bag with 999 per stack remains a recommendation awaiting confirmation. [English record](../Implementation/Gem_Socket_Foundation.en.md)

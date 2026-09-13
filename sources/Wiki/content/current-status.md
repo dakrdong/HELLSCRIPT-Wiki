@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](../../Docs/Implementation/Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](../../Docs/Implementation/Item_Quality_Expansion.en.md)
+
 **2026-09-13 보석·소켓 기반:** 보석 7종·6단계·세 부위군의 효과 126개, 소켓 자료와 장비 보호·비교, 손상 보석의 원본 보관·복구를 연결했습니다. 최종 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 계정 공용 별도 보석 가방과 캐릭터별 장비 가방 중 보관 방식을 확인 중이며, 보상 지급과 장착·분리·합성 서비스는 후속 작업입니다. 로컬·원격에는 `main`만 남아 있고 클로드의 병합 내용도 유지됩니다. [개발 기록](../../Docs/Implementation/Gem_Socket_Foundation.md)
 
 English: all 126 gem/tier/slot effects, socket data, protected equipment, comparisons and original-preserving recovery are connected. All 2,380 final tests and three native processes passed; nine screenshots were reviewed. Storage ownership awaits the user's choice; rewards and socket/fusion services remain. Only main remains locally/remotely, with Claude's merged work included. [English record](../../Docs/Implementation/Gem_Socket_Foundation.en.md)
@@ -88,7 +92,7 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 
 | 영역 | 확인한 구현 | 남은 범위 |
 | --- | --- | --- |
-| 장비·아이템화 | 베이스 24종, 접사 54종, 개별 전설 15종, 세트 6종과 세트 장비 24종이 현재 코드에 정의되어 있습니다. 장비 목록의 필터·정렬, 획득 순번과 일괄 판매·분해 미리보기를 연결했습니다. 2026-09-12에 목걸이 초희귀 전설 셋의 가중치를 1에서 10으로 올렸습니다. 보석·소켓은 효과·보호·저장 기반을 구현했고 실제 획득·서비스를 연결할 차례입니다. 장비 품질은 후속 구현입니다. | 모든 합법적 장착 조합, 장비 교체·편집·복원 경로와 여러 시드의 빌드 역할을 이어서 검사합니다. |
+| 장비·아이템화 | 베이스 24종, 접사 54종, 개별 전설 15종, 세트 6종과 세트 장비 24종이 현재 코드에 정의되어 있습니다. 장비 목록의 필터·정렬, 획득 순번과 일괄 판매·분해 미리보기를 연결했습니다. 2026-09-12에 목걸이 초희귀 전설 셋의 가중치를 1에서 10으로 올렸습니다. 보석·소켓은 효과·보호·저장 기반을 구현했고 실제 획득·서비스를 연결할 차례입니다. 각성·상위 접사·걸작의 기능·저장 검증을 마쳤고 성장 구간별 전투 비교를 진행 중입니다. | 모든 합법적 장착 조합, 장비 교체·편집·복원 경로와 여러 시드의 빌드 역할을 이어서 검사합니다. |
 | 능력치 | 2026-09-12에 클로드가 추가한 속성 57개와 접사 54종을 인수했습니다. 네 핵심 능력치에서 최종 수치를 계산하며, 성장 화면에서 능력치를 확인합니다. 기존 접사 번호 24개의 의미를 보존했습니다. 이동 속도는 실제 m/s로, 장비의 이동 속도 보너스는 %로 표시합니다. 최대 자원 증가도 전투 게이지에 반영합니다. 접사 체계별 960만 개 생성 검사에서 기존 옵션의 출현율 감소를 확인했고, 실제 추첨은 예상 분포와 맞았습니다. | 군중 제어 지속시간 감소와 기력 두 줄은 현재 적용 대상이 없어 장비에서 제외합니다. 과거 20단계 승리 12→6회는 현재 통합본의 성능으로 재사용하지 않습니다. 54종·24종의 각 600판 대조를 완료했습니다. 후속 전후 32판 진단에서 옛 M04·M05 규칙의 공격 중단을 확인했습니다. M04 연결 후 중단은 줄었지만 전역 생존이 꺼진 기본 문서의 사망은 늘었습니다. M06 전후 48판에서도 생존 설정은 모두 시간 초과했고 M03 중단은 8→68회로 늘었습니다. M06 제어 전환·공격 취소 비용과 보스 도달·성장·파밍 효용을 계속 검증합니다. |
 | 행동 편집 | 22개 조건을 공용 정의하고 규칙별 목표·이동과 행동 차단 이유를 연결했습니다. | 첫 플레이 안내, 규칙 이해도와 실제 터치 사용성을 검증합니다. |
 | 전투 | 준비·발사·도약·착지·채널, 투사체·덫, 상태 효과·보호막·비용 충전·세트 노출을 구현했습니다. | 전체 전설·세트 조합과 장시간·배속·중단 복원을 확대 검증합니다. |

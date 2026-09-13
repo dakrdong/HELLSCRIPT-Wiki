@@ -93,6 +93,7 @@ namespace Hellscript
                 var button=InventoryButton(inventoryList.content,Loc.F("{0} +{1}\n{2} · {3} · I{4} · 요구 Lv.{5}\n{6}{7}", item.DisplayName, item.enhancement, Grade(item), GameCatalog.Slots[item.slot], item.level, item.RequiredLevel, (item.acquiredOrder>0&&!item.reviewed?"새 장비 · ":""), (protect==""?"상세·비교 열기":protect)),()=>SelectInventoryItem(id),id==inventorySession.selectedId);
                 button.gameObject.name="Inventory item "+id;
                 var label=button.GetComponentInChildren<Text>();label.color=ItemColor(item);Inset(label.rectTransform,84,8,8,8);
+                label.text+=QualityLine(item);QualityFrame(button.transform,item);
                 EquipmentIcon(button.transform,item,10,12,62);button.GetComponent<LayoutElement>().minHeight=92;
             }
             if(visible.Length==0)InventoryNote(inventoryList.content,"이 필터에 맞는 장비가 없습니다. 하단 ‘필터’에서 조건을 바꿀 수 있습니다.");
@@ -141,6 +142,7 @@ namespace Hellscript
                             InventoryTransaction("enhance:"+id+":"+item.enhancement,staged=>Economy.Enhance(staged,FindOwned(staged,id)),"강화를 완료했습니다."));
                         if(!ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Reroll))InventoryNote(inventoryDetail.content,ContentUnlocks.Condition(ContentUnlocks.Reroll),18,muted);
                         if(item.rolls.Count>0&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Reroll))InventoryButton(inventoryDetail.content,"한 줄 재설정",()=>ShowInventoryReroll(id));
+                        if(ContentUnlocks.Has(a,ContentUnlocks.Enhance))InventoryButton(inventoryDetail.content,"걸작 · 진행과 초기화",()=>ShowInventoryMasterwork(id));
                     }
                     if(!item.equipped)
                     {
@@ -172,15 +174,18 @@ namespace Hellscript
             var hero=game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(item.special);
             InventoryNote(parent,heading,22,gold);
             var title=Row(parent,90);EquipmentIcon(title,item,10,10,68);var label=Label(title,Loc.F("{0} +{1}",item.DisplayName,item.enhancement),24,ItemColor(item));Inset(label.rectTransform,88,8,8,8);
+            QualityFrame(title,item);
             string restriction=unique!=null&&unique.heroClass>=0?game.catalog.classNames[unique.heroClass]:basis.heroClass>=0?game.catalog.classNames[basis.heroClass]:"공용";
             InventoryNote(parent,Loc.F("{0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}", Grade(item), restriction, GameCatalog.Slots[item.slot], item.level, item.RequiredLevel, Protection(item)),20,ItemColor(item));
             if(item.acquiredOrder<=0)InventoryNote(parent,"기존 장비 · 획득 순서 기록 없음",17,muted);
             float baseValue=basis.main*(1+.08f*(item.level-1)),main=ItemCatalog.MainValue(item);
             string mainName=item.slot==0?"무기 피해":item.slot<=5?"방어도":item.slot==6?"최대 HP":"비물리 저항";
-            InventoryNote(parent,Loc.F("{0}\n{1} {2:0.0} = 기본 {3:0.0} + 강화 {4:0.0}{5}", basis.name, mainName, main, baseValue, main-baseValue, (basis.resistance>0?Loc.F("\n고정 부가 저항 {0:0.0}", basis.resistance*(1+.08f*(item.level-1))):basis.attackSpeed!=0?Loc.F("\n고정 공격속도 {0:+0%;-0%}", basis.attackSpeed):"")));
+            if(ItemQuality.HasQuality(item))DescribeQualityMain(parent,item,basis,mainName);
+            else InventoryNote(parent,Loc.F("{0}\n{1} {2:0.0} = 기본 {3:0.0} + 강화 {4:0.0}{5}", basis.name, mainName, main, baseValue, main-baseValue, (basis.resistance>0?Loc.F("\n고정 부가 저항 {0:0.0}", basis.resistance*(1+.08f*(item.level-1))):basis.attackSpeed!=0?Loc.F("\n고정 공격속도 {0:+0%;-0%}", basis.attackSpeed):"")));
             foreach(var roll in item.rolls)
             {
                 var def=ItemCatalog.Affix(roll.affixId);
+                if(item.awakened||roll.greater||ItemQuality.LineHits(item,roll.slotId)>0){DescribeQualityAffix(parent,item,roll);continue;}
                 InventoryNote(parent,Loc.F("{0} · {1} [{2}]\n{3} +{4:0.##} · 가능 범위 {5:0.##}~{6:0.##}{7}{8}", (roll.side==AffixSide.Prefix?"접두":"접미"), def.phrase, roll.tierId, StatCatalog.Name(def.stat), roll.value, def.Value(item.level,0), def.Value(item.level,10000), (roll.legacyRoll?"\n기존 수치를 보존한 옵션입니다.":""), (item.rerollSlotId==roll.slotId?"\n재설정 대상으로 선택한 줄입니다.":"")));
             }
             InventoryNote(parent,GemCatalog.SocketSummary(item),20,muted);
@@ -201,7 +206,7 @@ namespace Hellscript
                 }
             }
         }
-        Action InventoryTransaction(string operation,Func<AccountSave,bool> mutation,string success,Item quotedItem=null)
+        Action InventoryTransaction(string operation,Func<AccountSave,bool> mutation,string success,Item quotedItem=null,Action afterCommit=null)
         {
             string request=Guid.NewGuid().ToString("N");bool committed=false;
             string heroId=game.Store.Data.Hero.id;bool warehouse=inventoryWarehouse;
@@ -220,7 +225,7 @@ namespace Hellscript
                     }
                     return mutation(staged);
                 });committed=ok;
-                if(ok){inventoryToolKind="";RefreshInventory();ShowToast(success);}
+                if(ok){inventoryToolKind="";RefreshInventory();ShowToast(success);afterCommit?.Invoke();}
                 else ShowToast(game.Store.Error);
             };
         }
@@ -257,6 +262,7 @@ namespace Hellscript
             InventoryButton(body,Loc.F("전설·세트 효과 · {0}", uniques[unique]),()=>InventoryChoose("전설·세트 효과",uniques,unique,n=>q.uniqueId=n==0?"":ItemCatalog.Uniques[n-1].id));
             InventoryButton(body,Loc.F("정렬 · {0}", InventoryOrders[(int)q.order]),()=>InventoryChoose("정렬",InventoryOrders,(int)q.order,n=>q.order=(InventoryOrder)n));
             InventoryButton(body,q.unreadOnly?"새 장비만 · 켜짐":"새 장비만 · 꺼짐",()=>{q.unreadOnly=!q.unreadOnly;ShowInventoryFilters();});
+            InventoryButton(body,q.awakenedOnly?"각성 장비만 · 켜짐":"각성 장비만 · 꺼짐",()=>{q.awakenedOnly=!q.awakenedOnly;ShowInventoryFilters();});
             InventoryNote(body,"최근 획득순은 실제로 계정에 들어온 순서를 사용합니다. 창고나 다른 캐릭터로 옮겨도 순서는 유지합니다. 기존 저장에 순서가 없는 장비는 별도로 뒤에 표시합니다.",18,muted);
             if(!inventoryWarehouse&&!portalBag&&game.Store.Data.Hero.capacity<100)
             {
@@ -314,11 +320,14 @@ namespace Hellscript
             foreach(var roll in item.rolls)
             {
                 string slot=roll.slotId;var definition=ItemCatalog.Affix(roll.affixId);
-                var button=InventoryButton(body,Loc.F("{0} · {1} +{2:0.##} [{3}]", (roll.side==AffixSide.Prefix?"접두":"접미"), StatCatalog.Name(definition.stat), roll.value, roll.tierId),()=>
+                var button=InventoryButton(body,(roll.greater?Loc.T("◆ 상위 ·")+" ":"")+Loc.F("{0} · {1} +{2:0.##} [{3}]", (roll.side==AffixSide.Prefix?"접두":"접미"), StatCatalog.Name(definition.stat), ItemQuality.AffixValue(item,roll), roll.tierId),()=>
                 {
                     uint rng=(uint)DateTime.UtcNow.Ticks;
-                    ShowInventoryConfirm(Loc.F("{0} 한 줄을 재설정합니다.\n비용 {1:N0} 골드 · 수치가 낮아질 수 있습니다.", StatCatalog.Name(definition.stat), Economy.RerollGold(item)),InventoryTransaction("reroll:"+id+":"+slot+":"+item.rerolls,staged=>Economy.Reroll(staged,FindOwned(staged,id),slot,ref rng),"한 줄을 재설정했습니다.",item));
+                    string notice=Loc.F("{0} 한 줄을 재설정합니다.\n비용 {1:N0} 골드 · 수치가 낮아질 수 있습니다.", StatCatalog.Name(definition.stat), Economy.RerollGold(item));
+                    if(roll.greater)notice+="\n"+Loc.T("상위 접사를 재설정하면 상위 효과가 사라집니다. 각성 품질 하한과 걸작 접사 강화는 유지됩니다.");
+                    ShowInventoryConfirm(notice,InventoryTransaction("reroll:"+id+":"+slot+":"+item.rerolls,staged=>Economy.Reroll(staged,FindOwned(staged,id),slot,ref rng),"한 줄을 재설정했습니다.",item));
                 });button.interactable=!portalBag&&GearServiceAvailable&&(string.IsNullOrEmpty(item.rerollSlotId)||item.rerollSlotId==slot)&&ItemGenerator.RerollPool(item,slot).Count>0;
+                if(roll.greater)InventoryNote(body,"상위 접사를 재설정하면 상위 효과가 사라집니다. 각성 품질 하한과 걸작 접사 강화는 유지됩니다.",18,gold);
             }
             FooterButton(0,1,"장비 상세로",CloseInventoryTool);ReflowInventory();
         }

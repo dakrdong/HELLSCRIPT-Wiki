@@ -390,7 +390,7 @@ namespace Hellscript
         }
         void Drop(Vector2 pos,int rarity)
         {
-            int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,item=Economy.CreateItem(Hero.heroClass,RandomStream.Range(ref State.rewardRng,0,8),rarity,RandomStream.Range(ref State.rewardRng,Mathf.Max(1,State.stage-2),State.stage+3),ref State.rewardRng,State.id+"-"+id)});
+            int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,item=Economy.CreateRiftItem(Hero.heroClass,RandomStream.Range(ref State.rewardRng,0,8),rarity,RandomStream.Range(ref State.rewardRng,Mathf.Max(1,State.stage-2),State.stage+3),State.stage,ref State.rewardRng,State.id+"-"+id)});
         }
         void AddGround(Vector2 pos,float radius,float delay,float duration,float damage,bool hostile,int kind,int element=0,string caster=null,string definition=null,int root=0,bool? followsTarget=null)
         {

@@ -455,7 +455,7 @@ namespace Hellscript.Tests
             int rarity = OracleGrade(source, stage, RandomStream.Unit(ref rng));
             int slot = RandomStream.Range(ref rng, 0, 8);
             int level = RandomStream.Range(ref rng, Math.Max(1, stage - 2), stage + 3);
-            return Economy.CreateItem(hero, slot, rarity, level, ref rng, id);
+            return Economy.CreateRiftItem(hero, slot, rarity, level, stage, ref rng, id);
         }
 
         static Item ExpectedSweepItem(HeroClass hero, int stage, ref uint rng)
@@ -463,7 +463,7 @@ namespace Hellscript.Tests
             int slot = RandomStream.Range(ref rng, 0, 8);
             int rarity = OracleGrade(RiftRewardSource.Boss, stage, RandomStream.Unit(ref rng));
             int level = RandomStream.Range(ref rng, Math.Max(1, stage - 2), stage + 3);
-            return Economy.CreateItem(hero, slot, rarity, level, ref rng);
+            return Economy.CreateRiftItem(hero, slot, rarity, level, stage, ref rng);
         }
 
         static uint DistinguishingSeed(RiftRewardSource source)

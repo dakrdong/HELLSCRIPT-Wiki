@@ -136,8 +136,7 @@ namespace Hellscript
             float weapon=20, weaponSpeed=0;
             foreach(var item in equipped)
             {
-                var basis=ItemCatalog.Base(item);float value=basis.main*(1+.08f*(item.level-1));
-                float upgraded=value*(1+.05f*item.enhancement);
+                var basis=ItemCatalog.Base(item);float upgraded=ItemCatalog.MainValue(item);
                 if(item.slot==0){weapon=upgraded;weaponSpeed=basis.attackSpeed;}
                 else if(item.slot<=5)armor+=upgraded;
                 else if(item.slot==6)flatHp+=upgraded;
@@ -208,6 +207,8 @@ namespace Hellscript
         public static bool AllowedAffix(int a,int s)=>ItemCatalog.Affixes.Any(d=>d.stat==a&&d.Allows(s));
         public static Item CreateItem(HeroClass c,int slot,int rarity,int level,ref uint rng,string id=null)
             =>ItemGenerator.Create(c,slot,rarity,level,ref rng,id);
+        public static Item CreateRiftItem(HeroClass c,int slot,int rarity,int level,int stage,ref uint rng,string id=null)
+            =>ItemGenerator.Create(c,slot,rarity,level,ref rng,id,riftStage:stage);
         public static bool Referenced(HeroSave hero,Item item)=>
             (hero.build.equipmentIds?.Contains(item.id)??false)||hero.presets.Any(p=>p?.equipmentIds?.Contains(item.id)??false);
         public static bool Protected(HeroSave hero,Item item)=>item.locked||item.equipped||Referenced(hero,item)||GemCatalog.HasGem(item);
@@ -280,7 +281,7 @@ namespace Hellscript
             if(!ContentUnlocks.Has(account,ContentUnlocks.Sweep)||!TownService(account)||string.IsNullOrWhiteSpace(requestId)||account.receipts.Contains(requestId))return false;
             string day=DateTime.UtcNow.ToString("yyyy-MM-dd");if(account.sweepDay!=day){account.sweepDay=day;account.sweepCount=0;}
             var h=account.Hero;if(h.highestClear<1||account.sweepCount>=3||FreeSlots(h)<3)return false;
-            for(int i=0;i<3;i++)AddItem(h,CreateItem(h.heroClass,RandomStream.Range(ref rng,0,8),RiftRarity.Roll(RiftRewardSource.Boss,h.highestClear,ref rng),RandomStream.Range(ref rng,Mathf.Max(1,h.highestClear-2),h.highestClear+3),ref rng),BagPolicy.Ignore,account);
+            for(int i=0;i<3;i++)AddItem(h,CreateRiftItem(h.heroClass,RandomStream.Range(ref rng,0,8),RiftRarity.Roll(RiftRewardSource.Boss,h.highestClear,ref rng),RandomStream.Range(ref rng,Mathf.Max(1,h.highestClear-2),h.highestClear+3),h.highestClear,ref rng),BagPolicy.Ignore,account);
             account.gold+=800+50*h.highestClear;account.materials+=5+h.highestClear/5;account.sweepCount++;account.receipts.Add(requestId);return true;
         }
     }

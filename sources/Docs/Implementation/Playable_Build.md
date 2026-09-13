@@ -2,7 +2,11 @@
 
 갱신일: 2026-09-13
 
-최신 실행본은 `Builds/macOS-GemSockets/HELLSCRIPT.app`입니다. **2026-09-13 보석·소켓 기반:** 보석 7종·6단계의 부위별 효과, 보석 장비의 판매·분해 보호, 저장 복구와 장비 비교를 연결했습니다. 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 보석 보관 방식은 사용자 확인 중이며, 획득·장착·분리·합성 서비스 연결은 남아 있습니다. [개발 기록](Gem_Socket_Foundation.md)
+최신 실행본은 `Builds/macOS-ItemQuality/HELLSCRIPT.app`입니다. **2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](Item_Quality_Expansion.en.md)
+
+이전 실행본은 `Builds/macOS-GemSockets/HELLSCRIPT.app`입니다. **2026-09-13 보석·소켓 기반:** 보석 7종·6단계의 부위별 효과, 보석 장비의 판매·분해 보호, 저장 복구와 장비 비교를 연결했습니다. 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 보석 보관 방식은 사용자 확인 중이며, 획득·장착·분리·합성 서비스 연결은 남아 있습니다. [개발 기록](Gem_Socket_Foundation.md)
 
 English: the latest player includes gem effects, socket protection, persistence/recovery and inspection UI. All 2,380 Editor tests and three native processes passed; nine screenshots were reviewed. Storage ownership awaits the user's choice; acquisition and socket/fusion services remain. [English record](Gem_Socket_Foundation.en.md)
 

@@ -2,6 +2,8 @@
 
 작성일: 2026-09-11 · 상태: 신규 상세 시험안
 
+2026-09-13 개발 갱신: 각성·상위 접사·걸작의 생성·서비스·저장·화면을 구현했다. 전체 검사 2,442개와 실제 앱 검사 3회가 통과했고, 1,800회 전투 비교는 진행 중이다. 구현 계약과 실제 검사 상태는 [개발 기록](../Implementation/Item_Quality_Expansion.md)을 따른다. English: all 2,442 tests and three native processes passed; the 1,800-run combat comparison is ongoing. See the [implementation record](../Implementation/Item_Quality_Expansion.en.md).
+
 ## 1. 범위와 자료 방침
 
 같은 이름의 장비라도 더 좋은 개체가 존재하게 만드는 층을 넣는다. 참고 작품은 품질을 한 덩어리로 두지 않고 세 층으로 나눠 두었고, 이번 기획도 세 층을 모두 가져온다.
@@ -149,10 +151,13 @@
 Item.awakened        : bool
 Item.masterwork      : int            // 0 ~ M_max, 최대 200
 Item.masterworkLines : List<string>   // 강화된 접사 slotId, 중복은 누적을 뜻한다
+Item.masterworkInvestedMaterials : int // 실제 걸작 투입분만 기록하는 보조 원장
 AffixRoll.greater    : bool
 ```
 
 기존 `investedMaterials` 원장에 걸작 투입분을 함께 기록한다. 분해와 초기화의 회수량은 이 원장으로 계산하므로 나중에 비용표가 바뀌어도 무료 이익이 생기지 않는다.
+
+초기화 시 일반 강화 투입분까지 환급하지 않도록 `masterworkInvestedMaterials`를 함께 기록한다. 초기화는 이 보조 원장의 80%를 내림하여 돌려주고, 같은 투입분을 총원장에서도 뺀다. 신규 생성 장비에만 아이템 레벨 상한 60을 적용하며 기존 60 초과 장비는 보존한다. 품질 장비는 장비 데이터 버전 4를 쓰고, 품질 정보나 버전 4의 전투 기록 사본이 남은 계정은 저장 형식 버전 3으로 보호한다.
 
 읽을 때의 규칙은 다음과 같다. `masterwork`가 0에서 200 밖이면 0으로 읽고 원본 파일을 보존한다. 저장값이 현재 상한보다 크면 값을 깎지 않고 그대로 두며 더 올리는 것만 막는다. 최고 실클리어 기록이 손상되어도 이미 투자한 장비를 잃지 않기 위해서다. `masterworkLines`에 없는 접사 ID가 있으면 그 항목만 버리고 장비는 유지한다. `greater`가 켜진 접사의 `q`가 10000이 아니면 데이터 오류로 기록하고 그 줄을 일반 굴림으로 읽는다. 어느 경우에도 장비 자체를 잃지 않는다.
 

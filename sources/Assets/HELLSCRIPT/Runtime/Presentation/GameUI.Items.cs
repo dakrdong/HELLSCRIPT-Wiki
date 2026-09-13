@@ -79,7 +79,7 @@ namespace Hellscript
         void RenderItemShop()
         {
             var a=game.Store.Data;var h=a.Hero;pageRepaint=()=>RenderItemShop();Base("shop","수수께끼 상인","모든 제작 경로에서 전설·세트를 발견할 수 있습니다");
-            int level=Mathf.Max(1,h.highestClear),slot=selectedSlot;Note(content,Loc.F("골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준", a.gold, a.materials, level),22,90,pale);
+            int level=Mathf.Max(1,h.highestClear),slot=selectedSlot;Note(content,Loc.F("골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준", a.gold, a.materials, Mathf.Min(level,ItemQuality.MaximumItemLevel)),22,90,pale);
             Cycle(content,"선택 부위",GameCatalog.Slots,slot,i=>{selectedSlot=i;ShowShop();});
             int gambleCost=500+50*h.highestClear;
             ContentButton(ContentUnlocks.Shop,Loc.F("미확인 {0} · {1:N0} 골드", GameCatalog.Slots[slot], gambleCost),PurchaseAction(slot,level,0,gambleCost,0));

@@ -14,7 +14,7 @@ namespace Hellscript
         public AffixSide side;
         public int rollBasisPoints;
         public float value;
-        public bool legacyRoll;
+        public bool legacyRoll,greater;
     }
 
     public sealed class ItemBaseDefinition
@@ -78,7 +78,7 @@ namespace Hellscript
     // Stable content IDs are authoritative. Legacy indices are only an import adapter.
     public static class ItemCatalog
     {
-        public const int Version=3;
+        public const int Version=4;
         const AffixSide P=AffixSide.Prefix,S=AffixSide.Suffix;
         public static readonly IReadOnlyList<ItemBaseDefinition> Bases=Array.AsReadOnly(new[]{
             new ItemBaseDefinition("B01","녹슨 도검",0,0,0,17,0,.15f),new ItemBaseDefinition("B02","강철 대검",1,0,0,20),new ItemBaseDefinition("B03","묵철 도끼",2,0,0,23,0,-.15f),
@@ -193,16 +193,16 @@ namespace Hellscript
         public static ItemBaseDefinition Base(Item item)=>item.contentVersion>0?Base(item.baseId):Bases.Single(b=>b.legacyIndex==item.baseIndex);
         public static AffixDefinition Affix(string id)=>affixById.TryGetValue(id??"",out var d)?d:throw new InvalidOperationException(Loc.F("알 수 없는 접사 ID: {0}", id));
         public static UniqueItemDefinition Unique(string id)=>uniqueById.TryGetValue(id??"",out var d)?d:null;
-        public static float MainValue(Item item)=>Base(item).main*(1+.08f*(item.level-1))*(1+.05f*item.enhancement);
+        public static float MainValue(Item item)=>Base(item).main*(1+.08f*(item.level-1))*(1+.05f*item.enhancement)*ItemQuality.MainMultiplier(item);
         public static string Name(Item item)
         {
-            var unique=Unique(item.special);if(unique!=null)return unique.Name;
+            var unique=Unique(item.special);if(unique!=null)return ItemQuality.Name(item,unique.Name);
             string result=Loc.T(Base(item).name);
             var p=item.rolls.Where(r=>r.side==P).OrderByDescending(r=>r.rollBasisPoints).ThenBy(r=>r.affixId,StringComparer.Ordinal).FirstOrDefault();
             var s=item.rolls.Where(r=>r.side==S).OrderByDescending(r=>r.rollBasisPoints).ThenBy(r=>r.affixId,StringComparer.Ordinal).FirstOrDefault();
             if(p!=null)result=Loc.T(Affix(p.affixId).phrase)+" "+result;
             if(s!=null)result+=" · "+Loc.T(Affix(s.affixId).phrase);
-            return result;
+            return ItemQuality.Name(item,result);
         }
         public static void Upgrade(Item item,HeroClass ownerClass)
         {
@@ -230,6 +230,7 @@ namespace Hellscript
                 throw new InvalidOperationException(Loc.F("장비 기본 데이터가 올바르지 않습니다: {0}", item.id));
             if(!string.IsNullOrEmpty(item.special)&&(Unique(item.special)==null||Unique(item.special).slot!=item.slot||item.rarity!=3))throw new InvalidOperationException(Loc.F("고유 장비 참조 오류: {0}", item.special));
             if(item.rolls==null||item.rolls.Count>4||item.rolls.Any(r=>r==null)||item.rolls.Select(r=>r.slotId).Distinct().Count()!=item.rolls.Count)throw new InvalidOperationException(Loc.F("접사 슬롯 오류: {0}", item.id));
+            ItemQuality.Validate(item);
             if(!item.rolls.Any(r=>r.legacyRoll)&&(item.rarity==0&&item.rolls.Count!=0||item.rarity==1&&(item.rolls.Count<1||item.rolls.Count>2)||item.rarity==2&&item.rolls.Count!=3||item.rarity==3&&item.rolls.Count!=4))throw new InvalidOperationException(Loc.F("등급별 접사 개수 오류: {0}", item.id));
             var groups=new HashSet<string>();
             foreach(var r in item.rolls)
@@ -269,15 +270,16 @@ namespace Hellscript
             int total=pool.Sum(weight);if(total<=0)throw new InvalidOperationException("장비 생성 후보가 없습니다.");
             int n=Integer(ref rng,0,total);foreach(var x in pool){n-=weight(x);if(n<0)return x;}throw new InvalidOperationException("가중치 추첨 오류");
         }
-        public static AffixRoll Roll(AffixDefinition def,int level,string slotId,ref uint rng)
+        public static AffixRoll Roll(AffixDefinition def,int level,string slotId,ref uint rng,bool awakened=false)
         {
             int tier=Integer(ref rng,0,100),low=level<10?70:level<30?55:45,mid=level<10?95:level<30?90:85;
-            int q=tier<low?Integer(ref rng,0,5000):tier<mid?Integer(ref rng,5000,8500):Integer(ref rng,8500,10001);
+            int q=tier<low?Integer(ref rng,awakened?4000:0,5000):tier<mid?Integer(ref rng,5000,8500):Integer(ref rng,8500,10001);
             return new AffixRoll{slotId=slotId,affixId=def.id,side=def.side,tierId=Tier(q),rollBasisPoints=q,value=def.Value(level,q)};
         }
-        public static Item Create(HeroClass c,int slot,int rarity,int level,ref uint rng,string id=null,string uniqueId=null)
+        public static Item Create(HeroClass c,int slot,int rarity,int level,ref uint rng,string id=null,string uniqueId=null,int riftStage=0)
         {
             if((int)c<0||(int)c>2||slot<0||slot>7||rarity<0||rarity>3||level<1)throw new ArgumentOutOfRangeException();
+            level=Math.Min(ItemQuality.MaximumItemLevel,level);
             uint next=rng;
             var bases=ItemCatalog.Bases.Where(b=>b.Fits(c,slot)).ToList();var b=Pick(bases,_=>1,ref next);
             var item=new Item{id=id??Guid.NewGuid().ToString("N"),baseId=b.id,baseIndex=b.legacyIndex,slot=slot,rarity=rarity,level=level,lootClass=c,contentVersion=ItemCatalog.Version};
@@ -288,6 +290,7 @@ namespace Hellscript
                 if(d==null)throw new InvalidOperationException("부위·직업에 맞지 않는 고유 장비입니다.");item.special=d.id;
             }
             else if(uniqueId!=null)throw new InvalidOperationException("고유 장비는 전설 등급이어야 합니다.");
+            item.awakened=ItemQuality.RollAwakening(rarity,riftStage,ref next);
             int count=rarity==0?0:rarity==1?Integer(ref next,1,3):rarity==2?3:4;
             var available=affixPools[slot];var used=new HashSet<string>();
             var possible=allocations[count].Where(a=>CanFill(available,used,a.prefixes,a.suffixes)).ToList();var allocation=Pick(possible,x=>x.weight,ref next);
@@ -298,7 +301,8 @@ namespace Hellscript
                 // Every group belongs to exactly one side. Any legal choice removes exactly one
                 // group from that side, so the prevalidated allocation remains fillable.
                 var pool=available.Where(a=>a.side==side&&!used.Contains(a.group)).ToList();
-                var def=Pick(pool,a=>a.Weight(c),ref next);used.Add(def.group);item.rolls.Add(Roll(def,level,item.id+":a"+n,ref next));
+                var def=Pick(pool,a=>a.Weight(c),ref next);used.Add(def.group);var roll=Roll(def,level,item.id+":a"+n,ref next,item.awakened);
+                ItemQuality.RollGreater(item,roll,ref next);item.rolls.Add(roll);
             }
             item.name=item.DisplayName;ItemCatalog.Validate(item);rng=next;return item;
         }
@@ -309,6 +313,6 @@ namespace Hellscript
             return ItemCatalog.Affixes.Where(a=>a.side==current.side&&a.Allows(item.slot)&&!groups.Contains(a.group)).ToList();
         }
         public static AffixRoll Reroll(Item item,string slotId,ref uint rng)
-        {var pool=RerollPool(item,slotId);var def=Pick(pool,a=>a.Weight(item.lootClass),ref rng);return Roll(def,item.level,slotId,ref rng);}
+        {var pool=RerollPool(item,slotId);var def=Pick(pool,a=>a.Weight(item.lootClass),ref rng);return Roll(def,item.level,slotId,ref rng,item.awakened);}
     }
 }

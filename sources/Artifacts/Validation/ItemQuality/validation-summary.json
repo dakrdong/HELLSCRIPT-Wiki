@@ -1,0 +1,82 @@
+{
+  "validatedUtc": "2026-09-13T08:22:24.163991+00:00",
+  "phase": "Item quality feature and persistence",
+  "engine": "Unity 6000.6.0f1",
+  "result": "feature_checks_passed_combat_curve_pending",
+  "fullEditor": {
+    "id": "2",
+    "testcasecount": "2442",
+    "result": "Passed",
+    "total": "2442",
+    "passed": "2442",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-13 08:10:46Z",
+    "end-time": "2026-09-13 08:17:50Z",
+    "duration": "423.221263"
+  },
+  "qualityCases": 62,
+  "fullProcess": {
+    "startedUtc": "2026-09-13T08:10:18.360651+00:00",
+    "pid": 46462,
+    "endedUtc": "2026-09-13T08:17:52.253369+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-13T08:08:26.324972+00:00",
+    "pid": 45870,
+    "endedUtc": "2026-09-13T08:09:08.995984+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "initial": {
+      "startedUtc": "2026-09-13T08:10:18.357057+00:00",
+      "pid": 46461,
+      "endedUtc": "2026-09-13T08:10:39.641284+00:00",
+      "exitCode": 0
+    },
+    "restart": {
+      "startedUtc": "2026-09-13T08:10:39.647028+00:00",
+      "pid": 46783,
+      "endedUtc": "2026-09-13T08:10:45.024116+00:00",
+      "exitCode": 0
+    },
+    "recover": {
+      "startedUtc": "2026-09-13T08:10:45.046920+00:00",
+      "pid": 46814,
+      "endedUtc": "2026-09-13T08:10:51.190530+00:00",
+      "exitCode": 0
+    }
+  },
+  "screenshots": 15,
+  "directlyReviewed": 15,
+  "recoveryArchiveMatchesExactOriginal": true,
+  "distribution": {
+    "stage": 30,
+    "generatedItems": 100000,
+    "awakenedItems": 21944,
+    "greaterLines": 8809,
+    "itemsWithGreater": 7550
+  },
+  "controlledDamage": {
+    "baseline": 153.5032,
+    "quality": 278.3303,
+    "ratio": 1.813189
+  },
+  "scope": [
+    "Rift/chest/sweep quality generation; ordinary shop/crafts; new item-level cap 60",
+    "All eight slots; greater-affix and masterwork multipliers; milestone/reset service transactions",
+    "Version-4 equipment and schema-3 account guard; corruption recovery and archive preservation",
+    "Korean/English UI, comparison/filter, responsive service views and separate-process restart"
+  ],
+  "limits": [
+    "The 1,800-run paired combat curve is still in progress; no overall balance result is asserted.",
+    "The native fixtures explicitly seed funds/progress/equipment and invoke real UI button events; they do not measure natural acquisition or physical touch.",
+    "Gem storage ownership awaits the pending user choice; rewards and socket/fusion services remain unfinished.",
+    "No natural farming-cost, physical mobile, sustained performance or online service validation."
+  ]
+}

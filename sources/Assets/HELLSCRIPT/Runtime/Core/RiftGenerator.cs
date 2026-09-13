@@ -357,7 +357,7 @@ namespace Hellscript
             {
                 float roll=RandomStream.Unit(ref rng);int rarity=n==0||n==cursed?(roll<.6f?1:roll<.98f?2:3):(roll<.8f?1:roll<.99f?2:3);
                 int slot=RandomStream.Range(ref rng,0,8),level=RandomStream.Range(ref rng,Mathf.Max(1,stage-2),stage+3);
-                map.chests[n].reward=Economy.CreateItem(hero,slot,rarity,level,ref rng,runId+":"+map.chests[n].id+":item");
+                map.chests[n].reward=Economy.CreateRiftItem(hero,slot,rarity,level,stage,ref rng,runId+":"+map.chests[n].id+":item");
             }
             map.rewardSeed=rng;
         }

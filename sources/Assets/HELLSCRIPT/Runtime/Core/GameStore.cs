@@ -8,11 +8,14 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
+        public const int MaximumSchemaVersion=3;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
         public string GemRecoveryMessage {get;private set;}="";
         public string GemRecoveryArchive {get;private set;}="";
+        public string QualityRecoveryMessage {get;private set;}="";
+        public string QualityRecoveryArchive {get;private set;}="";
         public int LocalIdleGoldAwarded {get;private set;}
         public int LocalIdleMaterialsAwarded {get;private set;}
         readonly string path;
@@ -37,27 +40,27 @@ namespace Hellscript
             try
             {
                 if(!File.Exists(file))return null;var a=JsonUtility.FromJson<AccountSave>(File.ReadAllText(file));
-                if(a!=null&&a.schema>2)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
+                if(a!=null&&a.schema>MaximumSchemaVersion)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
                 if(a==null||a.schema<1||a.heroes==null||a.heroes.Count!=3||a.cores==null||a.cores.Length!=8)return null;
                 if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>30))return null;
                 Normalize(a);
-                if(a.schema==2)
+                if(a.schema>=2)
                 {
-                    var allItems=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse);
-                    if(a.suspendedRun!=null)allItems=allItems.Concat(a.suspendedRun.drops.Select(d=>d.item)).Concat(a.suspendedRun.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
-                    if(a.repeatHunt?.pendingResult!=null)allItems=allItems.Concat(a.repeatHunt.pendingResult.drops.Select(d=>d.item)).Concat(a.repeatHunt.pendingResult.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
+                    var allItems=PersistedItems(a);
                     if(allItems.Any(i=>i.contentVersion>ItemCatalog.Version))throw new NotSupportedException("더 새로운 장비 데이터가 있어 불러오기를 중단했습니다. 저장 파일은 보존했습니다.");
                     var socketItems=allItems.ToArray();
                     if(socketItems.Any(i=>i.sockets!=null&&i.sockets.Count>0&&(!GemCatalog.AllowsSocket(i)||i.sockets.Count>1||i.sockets[0]==null||i.sockets[0].index!=0)))
                         throw new NotSupportedException(Loc.T("소켓 구조를 안전하게 읽을 수 없어 불러오기를 중단했습니다. 저장 파일은 보존했습니다."));
-                    bool repaired=false;foreach(var item in socketItems)repaired|=GemCatalog.RepairGemValues(item);
+                    bool repaired=false,qualityRepaired=false;foreach(var item in socketItems)
+                    {repaired|=GemCatalog.RepairGemValues(item);qualityRepaired|=ItemQuality.RepairValues(item);}
                     ValidateItems(a);
-                    if(repaired)
+                    if(repaired||qualityRepaired)
                     {
-                        string archive=file+".gem-recovery-"+Guid.NewGuid().ToString("N")+".json";
+                        string archive=file+(repaired?".gem-recovery-":".quality-recovery-")+Guid.NewGuid().ToString("N")+".json";
                         try{File.Copy(file,archive,false);}
-                        catch(Exception error){throw new NotSupportedException(Loc.T("보석 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다."),error);}
-                        GemRecoveryArchive=archive;GemRecoveryMessage=Loc.T("잘못된 보석 값을 빈 소켓으로 복구했습니다. 장비와 원본 저장 파일은 보존했습니다.");
+                        catch(Exception error){throw new NotSupportedException(Loc.T(repaired?"보석 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다.":"품질 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다."),error);}
+                        if(repaired){GemRecoveryArchive=archive;GemRecoveryMessage=Loc.T("잘못된 보석 값을 빈 소켓으로 복구했습니다. 장비와 원본 저장 파일은 보존했습니다.");}
+                        if(qualityRepaired){QualityRecoveryArchive=archive;QualityRecoveryMessage=Loc.T("잘못된 장비 품질 기록을 복구했습니다. 장비와 투자 원장, 원본 저장 파일은 보존했습니다.");}
                     }
                 }
                 return a;
@@ -152,6 +155,15 @@ namespace Hellscript
             // Keep the root RunState object used by the controller and UI; adopt the committed snapshot.
             JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(committed),run);NormalizeRun(run);return true;
         }
+        static System.Collections.Generic.IEnumerable<Item> RecordedItems(AccountSave a)
+            =>a.records?.Where(r=>r?.review?.equipment!=null).SelectMany(r=>r.review.equipment).Where(i=>i!=null)??Enumerable.Empty<Item>();
+        static System.Collections.Generic.IEnumerable<Item> PersistedItems(AccountSave a)
+        {
+            var items=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).Concat(RecordedItems(a));
+            foreach(var run in new[]{a.suspendedRun,a.repeatHunt?.pendingResult})
+                if(run!=null)items=items.Concat(run.drops.Select(d=>d.item)).Concat(run.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
+            return items;
+        }
         static void ValidateItems(AccountSave a)
         {
             if(a.gold<0||a.materials<0||a.cores.Any(c=>c<0))throw new InvalidDataException("재화 값이 음수입니다.");
@@ -159,6 +171,7 @@ namespace Hellscript
             var owned=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).ToArray();
             if(owned.Select(i=>i.id).Distinct().Count()!=owned.Length)throw new InvalidDataException("중복 장비 인스턴스 ID");
             foreach(var i in owned)ItemCatalog.Validate(i);
+            foreach(var i in RecordedItems(a))if(i.contentVersion>=ItemQuality.ItemVersion||ItemQuality.HasQuality(i))ItemCatalog.Validate(i);
             if(a.suspendedRun!=null)foreach(var d in a.suspendedRun.drops)ItemCatalog.Validate(d.item);
             if(a.suspendedRun?.layout!=null)foreach(var c in a.suspendedRun.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);
             if(a.repeatHunt?.pendingResult!=null)
@@ -218,7 +231,7 @@ namespace Hellscript
                 target.lastRiftFingerprint=source.lastRiftFingerprint;target.lastRiftBoss=source.lastRiftBoss;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
-            Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
+            Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";return true;
@@ -243,16 +256,23 @@ namespace Hellscript
                 ContentUnlocks.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
                 foreach(var hero in data.heroes)NormalizePresetSlots(hero);
-                // Old players reject the item version instead of silently dropping socket fields.
-                var socketItems=data.heroes.SelectMany(h=>h.inventory).Concat(data.warehouse);
-                if(data.suspendedRun!=null)socketItems=socketItems.Concat(data.suspendedRun.drops.Select(d=>d.item)).Concat(data.suspendedRun.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
-                if(data.repeatHunt?.pendingResult!=null)socketItems=socketItems.Concat(data.repeatHunt.pendingResult.drops.Select(d=>d.item)).Concat(data.repeatHunt.pendingResult.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
-                foreach(var item in socketItems)if(item.sockets?.Count>0)item.contentVersion=Math.Max(GemCatalog.SocketItemVersion,item.contentVersion);
+                // A schema boundary also protects historical quality when every owned bag is empty.
+                foreach(var item in PersistedItems(data))
+                {
+                    if(item.sockets?.Count>0)item.contentVersion=Math.Max(GemCatalog.SocketItemVersion,item.contentVersion);
+                    if(ItemQuality.HasQuality(item))item.contentVersion=Math.Max(ItemQuality.ItemVersion,item.contentVersion);
+                }
+                if(PersistedItems(data).Any(ItemQuality.HasQuality)||RecordedItems(data).Any(i=>i.contentVersion>=ItemQuality.ItemVersion))
+                    data.schema=Math.Max(data.schema,MaximumSchemaVersion);
                 File.WriteAllText(path+".tmp",JsonUtility.ToJson(data,true));
                 if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
                 Error="";return true;
             }
-            catch(Exception e){Error=Loc.F("저장하지 못했습니다: {0}", e.Message);Debug.LogError(Error);return false;}
+            catch(Exception e)
+            {
+                Error=Loc.T("저장하지 못했습니다. 저장 공간과 파일 접근 권한을 확인한 뒤 다시 시도해 주세요.");
+                Debug.LogError(Loc.F("저장하지 못했습니다: {0}",e.Message));return false;
+            }
         }
     }
 }

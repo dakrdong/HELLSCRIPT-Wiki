@@ -81,6 +81,9 @@ namespace Hellscript
         public string id, name, special="";
         public string baseId="", rerollSlotId="";
         public int contentVersion, investedMaterials;
+        public bool awakened;
+        public int masterwork,masterworkInvestedMaterials;
+        public List<string> masterworkLines=new List<string>();
         public long acquiredOrder;
         public bool reviewed;
         public HeroClass lootClass;
@@ -96,7 +99,7 @@ namespace Hellscript
         public float Value(int index)
         {
             float v=0;
-            if(contentVersion>0){foreach(var roll in rolls)if(ItemCatalog.Affix(roll.affixId).stat==index)v+=roll.value;}
+            if(contentVersion>0){foreach(var roll in rolls)if(ItemCatalog.Affix(roll.affixId).stat==index)v+=ItemQuality.AffixValue(this,roll);}
             else for(int i=0;i<affixes.Count;i++)if(affixes[i]==index)v+=values[i];
             return v;
         }

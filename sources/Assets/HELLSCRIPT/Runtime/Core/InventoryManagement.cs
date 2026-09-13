@@ -15,7 +15,7 @@ namespace Hellscript
         public InventoryGrade grade;
         public InventoryOrder order;
         public string setId="",affixId="",uniqueId="";
-        public bool unreadOnly;
+        public bool unreadOnly,awakenedOnly;
         public IEnumerable<Item> Apply(IEnumerable<Item> source)
         {
             var indexed=source.Select((item,index)=>new{item,index});
@@ -30,6 +30,7 @@ namespace Hellscript
         public bool Matches(Item item)
         {
             if(item==null||slot>=0&&item.slot!=slot)return false;
+            if(awakenedOnly&&!item.awakened)return false;
             var unique=ItemCatalog.Unique(item.special);string set=unique?.setId??"";
             if(grade==InventoryGrade.Set&&set==""||grade==InventoryGrade.Legendary&&(item.rarity!=3||set!="")||grade>InventoryGrade.All&&grade<InventoryGrade.Legendary&&item.rarity!=(int)grade-1)return false;
             int restriction=unique!=null&&unique.heroClass>=0?unique.heroClass:ItemCatalog.Base(item).heroClass;
