@@ -43,6 +43,7 @@ namespace Hellscript
                 {
                     var allItems=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse);
                     if(a.suspendedRun!=null)allItems=allItems.Concat(a.suspendedRun.drops.Select(d=>d.item)).Concat(a.suspendedRun.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
+                    if(a.repeatHunt?.pendingResult!=null)allItems=allItems.Concat(a.repeatHunt.pendingResult.drops.Select(d=>d.item)).Concat(a.repeatHunt.pendingResult.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
                     if(allItems.Any(i=>i.contentVersion>ItemCatalog.Version))throw new NotSupportedException("더 새로운 장비 데이터가 있어 불러오기를 중단했습니다. 저장 파일은 보존했습니다.");
                     ValidateItems(a);
                 }
@@ -84,6 +85,7 @@ namespace Hellscript
                 HuntEdictV2Storage.Normalize(h);
                 NormalizePresetSlots(h);
             }
+            RepeatHunt.Normalize(a);
         }
         static void NormalizePresetSlots(HeroSave hero)
         {
@@ -146,6 +148,8 @@ namespace Hellscript
             foreach(var i in owned)ItemCatalog.Validate(i);
             if(a.suspendedRun!=null)foreach(var d in a.suspendedRun.drops)ItemCatalog.Validate(d.item);
             if(a.suspendedRun?.layout!=null)foreach(var c in a.suspendedRun.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);
+            if(a.repeatHunt?.pendingResult!=null)
+            {foreach(var d in a.repeatHunt.pendingResult.drops)ItemCatalog.Validate(d.item);foreach(var c in a.repeatHunt.pendingResult.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);}
         }
         public static AccountSave NewAccount(GameCatalog catalog=null)
         {
@@ -203,6 +207,7 @@ namespace Hellscript
             }
             Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
+            Data.repeatHunt=staged.repeatHunt;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)
@@ -216,7 +221,7 @@ namespace Hellscript
             if(committed==null){Error="상자 지급 기록과 진행 상태가 다릅니다. 저장된 균열을 다시 불러와 주세요.";return false;}
             var result=committed.layout.chests.Single(c=>c.id==chest.id);
             chest.phase=result.phase;chest.progress=result.progress;chest.dropId=result.dropId;
-            run.drops=committed.drops;run.nextId=committed.nextId;return true;
+            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;return true;
         }
         bool Write(AccountSave data)
         {

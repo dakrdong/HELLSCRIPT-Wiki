@@ -94,11 +94,11 @@ namespace Hellscript.Tests
         }
 
         [Test]
-        public void StopAfterSuccessReadsAsNoAutomaticRepeat()
+        public void StopAfterSuccessDoesNotDisableRetryAfterFailure()
         {
             var a=Account();
             var p=EdictPolicyBridge.Apply(a.Hero.build,With(a.Hero.edict,("repeat.enabled","ON"),("repeat.success","STOP")),HeroClass.Mage);
-            Assert.IsFalse(p.autoRepeat);Assert.IsFalse(p.advanceOnWin);
+            Assert.IsTrue(p.autoRepeat);Assert.IsFalse(p.advanceOnWin);
         }
 
         [Test]

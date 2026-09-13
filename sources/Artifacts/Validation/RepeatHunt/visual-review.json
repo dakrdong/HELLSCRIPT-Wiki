@@ -1,0 +1,36 @@
+{
+  "reviewedUtc": "2026-09-13T04:47:17.990069+00:00",
+  "method": "Direct visual inspection of all fourteen Native4 PNGs using view_image; native text-height and translation assertions; physical touch not tested.",
+  "result": "passed",
+  "reviewedImages": [
+    "Native4/initial-01-details-ko.png",
+    "Native4/initial-02-details-en-portrait.png",
+    "Native4/initial-03-bag-from-result-en.png",
+    "Native4/initial-04-natural-result-ko.png",
+    "Native4/legacy-restart-01-legacy-restored-en.png",
+    "Native4/legacy-restart-02-legacy-stopped-en.png",
+    "Native4/restart-01-restored-result-en.png",
+    "Native4/restart-02-next-rift-en.png",
+    "Native4/resume-active-01-cancelled-core-repeat.png",
+    "Native4/resume-active-02-count-limit.png",
+    "Native4/resume-active-03-cleanup-policy.png",
+    "Native4/resume-active-04-space-blocked.png",
+    "Native4/resume-active-05-save-blocked.png",
+    "Native4/resume-active-06-save-blocked-en.png"
+  ],
+  "notes": [
+    "Korean and English repeat guide, result restore, and inventory return remain readable in portrait/landscape at 100% and 140%.",
+    "Internal save paths remain in diagnostic state/logs; player-facing Korean and English result messages show recovery guidance. The expected debug-only console is hidden for screenshot capture.",
+    "The result list scrolls under fixed footer actions; rows below the viewport require scrolling.",
+    "Core and base-configuration cancellation, count stop and space blocking show the appropriate controls."
+  ],
+  "fixesObserved": [
+    "Native1 English subtitle clipping corrected by existing responsive review layout.",
+    "Native2 invented empty cleanup report corrected in save normalization.",
+    "Native3 raw save path and clipping corrected in Native4."
+  ],
+  "limits": [
+    "Desktop rendering and invoked UI callbacks do not validate physical mobile touch, safe areas on every device or long-running performance.",
+    "Background timing is checked with an explicit OnApplicationPause callback fixture."
+  ]
+}

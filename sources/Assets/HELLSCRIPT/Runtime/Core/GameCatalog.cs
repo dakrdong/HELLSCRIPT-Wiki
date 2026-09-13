@@ -141,6 +141,7 @@ namespace Hellscript
         public List<string> receipts=new List<string>();
         public List<EconomyReceipt> transactions=new List<EconomyReceipt>();
         public RunState suspendedRun;
+        public RepeatHuntSession repeatHunt;
         public HeroSave Hero => heroes[Mathf.Clamp(selectedHero,0,heroes.Count-1)];
     }
 
@@ -230,6 +231,8 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public long earnedGold;
+        public bool limitedLoot;
         public EdictResponseState edictResponse;
         public EdictLandingPreference edictLandingPreference;
         public EdictTargetState edictTarget;

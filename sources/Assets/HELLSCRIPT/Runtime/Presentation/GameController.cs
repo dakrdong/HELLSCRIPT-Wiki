@@ -21,7 +21,6 @@ namespace Hellscript
         public bool Active => Combat!=null&&Combat.State.phase!=RunPhase.Cleared&&Combat.State.phase!=RunPhase.Failed;
         public float EffectiveSpeed => CombatSpeedAccess.Resolve(Store?.Data.speed ?? 1f);
         float accumulator,saveClock,resultDelay;
-        int consecutiveFailures;
         bool resultShown,backgroundPaused;
         void Awake()
         {
@@ -50,7 +49,7 @@ namespace Hellscript
             BeginRun(training,false,null,true);
 #endif
         }
-        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining)
+        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false)
         {
             if(Active)return;
             if(training>=0&&!fullSkillTraining&&!ContentUnlocks.Has(Store.Data,ContentUnlocks.Train)){Notify(ContentUnlocks.Condition(ContentUnlocks.Train));return;}
@@ -58,9 +57,27 @@ namespace Hellscript
             Comparison=null;
             RunState snapshot=resume?Store.Data.suspendedRun:null;
             if(snapshot!=null){int hero=Store.Data.heroes.FindIndex(h=>h.id==snapshot.heroId);if(hero<0){Notify("저장된 영웅을 찾을 수 없습니다.");return;}Store.Data.selectedHero=hero;}
+            var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
+            string fingerprint=Store.Data.Hero.lastRiftFingerprint;int boss=Store.Data.Hero.lastRiftBoss;
             try{Combat=new CombatSimulation(Store.Data,catalog,Mathf.Clamp(SelectedStage,1,Store.Data.Hero.highestClear+1),training,snapshot,seed,ownedTraining:!fullSkillTraining);}
-            catch(Exception e){Combat=null;Store.Data.Hero.build.autoRepeat=false;Notify(e.Message);return;}
+            catch(Exception e){Combat=previous;BlockRepeat(RepeatBlock.Configuration,e.Message);Notify(e.Message);return;}
             if(training<0){Store.Data.suspendedRun=Combat.State;Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
+            if(training<0)
+            {
+                var continuing=(continueRepeat||resume)&&previousSession?.heroId==Combat.Hero.id&&(!resume||previousSession.runId==Combat.State.id)?
+                    JsonUtility.FromJson<RepeatHuntSession>(JsonUtility.ToJson(previousSession)):null;
+                Store.Data.repeatHunt=RepeatHunt.Start(Combat.State,Combat.RepeatPolicy,continuing);
+                if(!resume&&Combat.EdictActive&&!Store.Data.repeatHunt.policy.stopWhenFull&&Economy.FreeSlots(Store.Data.Hero)<=0)Combat.State.limitedLoot=true;
+            }
+            else Store.Data.repeatHunt=null;
+            if(!Store.Save())
+            {
+                Combat=previous;Store.Data.repeatHunt=previousSession;Store.Data.suspendedRun=previousSuspended;
+                Store.Data.Hero.lastRiftFingerprint=fingerprint;Store.Data.Hero.lastRiftBoss=boss;
+                BlockRepeat(RepeatBlock.Save,Store.Error);Notify(Store.Error);return;
+            }
+            if(previous!=null)previous.Visual-=World.Effect;
+            repeatRestored=false;portalCleanupTried=false;repeatClock=Time.realtimeSinceStartupAsDouble;
             FirstPlayGuide.Enter(Store.Data,Combat.State,resume);
             Combat.Visual+=World.Effect;Combat.GateOpened+=UI.ShowToast;World.BuildDungeon(Combat.State);UI.ShowBattle();
             accumulator=0;resultDelay=0;resultShown=false;Save();
@@ -74,7 +91,7 @@ namespace Hellscript
             UI.RefreshHud();
         }
         public void ContinuePortal()
-        {if(Combat==null)return;if(Economy.FreeSlots(Store.Data.Hero)<=0){Notify("판매·분해·창고 이동으로 가방을 비워 주세요.");return;}Combat.State.portal=false;Combat.State.portalCast=0;Combat.State.paused=false;UI.ShowBattle();Save();}
+        {if(Combat==null)return;if(Economy.FreeSlots(Store.Data.Hero)<=0&&!Combat.State.limitedLoot){Notify("판매·분해·창고 이동으로 가방을 비워 주세요.");return;}Combat.State.portal=false;Combat.State.portalCast=0;Combat.State.paused=false;UI.ShowBattle();Save();}
         public void EnterPlaza()
         {
             if(Active)return;Town??=new TownWalk();World.BuildTown(Town);UI.ShowPlaza();
@@ -100,7 +117,7 @@ namespace Hellscript
         {
             Comparison=null;ComparisonError="";
             if(Combat!=null){if(Active)Combat.Abandon();Combat.Visual-=World.Effect;Combat=null;}
-            Store.Data.suspendedRun=null;World.ClearDungeon();Save();UI.ShowTown();
+            Store.Data.suspendedRun=null;Store.Data.repeatHunt=null;repeatRestored=false;World.ClearDungeon();Save();UI.ShowTown();
         }
         public void EditBuild()
         {UI.ShowBuild();}
@@ -131,11 +148,13 @@ namespace Hellscript
         public void Save()
         {
             if(Combat!=null)Store.Data.suspendedRun=Combat.State.training<0&&Active?Combat.State:null;
-            if(!Store.Save())Notice=Store.Error;
+            if(Combat!=null&&!Active&&Store.Data.repeatHunt?.runId==Combat.State.id)Store.Data.repeatHunt.pendingResult=Combat.State;
+            if(!Store.Save()){Notice=Store.Error;BlockRepeat(RepeatBlock.Save,Store.Error);}
         }
         void Update()
         {
             UpdateDisplaySettings();
+            float repeatReal=UpdateRepeatClock();
             if(Combat==null){TickPlaza(Mathf.Min(Time.unscaledDeltaTime,.25f));return;}
             // This display-only pause is not serialized into the run. Existing pause reasons
             // and the partial simulation tick remain exactly as they were on entry.
@@ -149,16 +168,15 @@ namespace Hellscript
             }
             else accumulator=0;
             World.Present(run,real);
+            if(run.portal&&!portalCleanupTried)TryPortalCleanup();else if(!run.portal)portalCleanupTried=false;
             if(run.portal&&UI.Page!="bag"&&UI.Page!="warehouse")UI.ShowBag(true);
-            if(!Active&&!resultShown){resultShown=true;Save();if(ComparisonRun)CompleteComparison();UI.ShowResult();consecutiveFailures=run.phase==RunPhase.Failed?consecutiveFailures+1:0;}
-            if(!Active&&!backgroundPaused&&!UI.BlocksRepeat&&UI.Page=="result"&&run.training<0&&(Combat?.Policy??run.build).autoRepeat&&consecutiveFailures<(Combat?.Policy??run.build).stopAfterFailures)
-            {
-                resultDelay+=real;
-                if(resultDelay>=5){bool advance=run.phase==RunPhase.Cleared&&(Combat?.Policy??run.build).advanceOnWin;int stage=advance?Mathf.Min(run.stage+1,Store.Data.Hero.highestClear+1):run.stage;ReturnTown();SelectedStage=stage;Begin();}
-            }
+            if(!Active&&!resultShown){resultShown=true;if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();UI.ShowResult();}
+            if(!Active&&!backgroundPaused&&!UI.BlocksRepeat&&UI.Page=="result"&&run.training<0)TickRepeat(repeatReal);
             saveClock+=real;if(saveClock>=3){saveClock=0;Save();}
         }
-        void OnApplicationPause(bool paused){backgroundPaused=paused;accumulator=0;if(!paused&&DisplaySettings?.Pending!=0){displayRequestStarted=Time.realtimeSinceStartup;displayRequestFrame=Time.frameCount;}if(Store!=null)Save();}
+        void OnApplicationPause(bool paused){backgroundPaused=paused;repeatClock=Time.realtimeSinceStartupAsDouble;accumulator=0;if(!paused&&DisplaySettings?.Pending!=0){displayRequestStarted=Time.realtimeSinceStartup;displayRequestFrame=Time.frameCount;}if(Store!=null)Save();}
+        // Desktop players can suspend updates on focus loss without a mobile pause callback.
+        void OnApplicationFocus(bool focused){repeatClock=Time.realtimeSinceStartupAsDouble;}
         void OnApplicationQuit(){if(Store!=null)Save();}
     }
 }

@@ -19,6 +19,8 @@ namespace Hellscript
             var st=Label(stage,Loc.F("균열 {0:00}단계", game.SelectedStage),28,gold,TextAnchor.MiddleCenter);Span(st.rectTransform,102,19,102,62);
             var plus=Button(stage,"+",()=>{game.SelectedStage=Mathf.Min(h.highestClear+1,game.SelectedStage+1);ShowRiftKeeper();});Right((RectTransform)plus.transform,12,10,TouchHeight,TouchHeight);
             BigButton(content,"단계별 등급 확률",ShowRiftRewards);
+            AddRepeatPreparation();
+            if(!game.Running&&a.repeatHunt?.pendingResult!=null)BigButton(content,"저장된 반복 결과 확인",game.ResumeRepeatResult,true);
             if(a.suspendedRun!=null)BigButton(content,"진행 중인 균열 이어하기",()=>game.Begin(resume:true),true);
             else BigButton(content,"균열에 진입",()=>game.Begin(),true);
             bool sweepable=h.highestClear>=1&&sweeps<3&&Economy.FreeSlots(h)>=3;

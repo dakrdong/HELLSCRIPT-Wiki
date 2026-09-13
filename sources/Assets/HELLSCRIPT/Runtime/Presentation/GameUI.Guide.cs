@@ -97,9 +97,8 @@ namespace Hellscript
             }
             if(step==GuideStep.Retry)
             {
-                var b=h.build;
-                Note(content,Loc.F("자동 반복: {0}\n성공 후: {1}\n연속 실패 {2}회에 중단\n가방 정책: {3}", (b.autoRepeat?"켜짐":"꺼짐"), (b.advanceOnWin?"다음 단계":"같은 단계"), b.stopAfterFailures, BagPolicyDescription(b)),22,165,gold);
-                GuideButton("현재 설정으로 새 균열",()=>game.Begin(),true);GuideButton("반복 정책 직접 확인",ShowBuild);
+                AddRepeatPreparation();
+                GuideButton("현재 설정으로 새 균열",()=>game.Begin(),true);GuideButton("반복 정책 직접 확인",h.useEdict?ShowEdictEditor:ShowBuild);
             }
             if(game.Active)Note(content,"안내를 보는 동안 전투가 멈춥니다. 장비·훈련·새 판은 현재 균열을 마친 뒤 이용하세요.",19,90,muted);
             if(guideStep<8)BigButton(content,"다음 안내",()=>{guideStep++;RenderGuide();});

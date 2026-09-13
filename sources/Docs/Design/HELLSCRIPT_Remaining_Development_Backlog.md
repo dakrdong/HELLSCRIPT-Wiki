@@ -141,6 +141,10 @@ A/B의 고정 기준·변경 목록·피해 출처별 누적 집계·회피 판�
 | 보스를 잡거나 제한시간이 끝났다. | 유지한 획득물과 놓친 바닥 장비·미개봉 상자를 구분한다. | 발생하지 않은 보상을 사후 지급하지 않고, 확정된 소유 장비는 잃지 않는다. |
 | 자동 반복을 켰다. | 실패 시 같은 단계·1단계 하향·중단 정책을 따른다. | 결과 대기 중 취소와 상세 열람을 처리한다. 저장·연결·가방 오류가 남아 있으면 다음 판을 시작하지 않는다. |
 
+2026-09-13 구현: 성공·실패 후 단계, 횟수·시간·금화·장비·단계 목표, 결과 열람 중 대기 정지, 실제 설정 소유권에 따른 중지와 앱 재실행 후 명시적 이어가기를 연결했다. 등급별 판매·분해·창고 이동은 보호 대상과 저장 거래를 지키며, 가방·저장 오류가 남으면 다음 판을 시작하지 않는다. 검증 결과와 로컬 구현의 범위는 [반복 사냥 개발 기록](../Implementation/Repeat_Hunt_Expansion.md)을 따른다. 온라인 연결·서버 소유 세션과 추가 정리 트리거는 후속 범위다.
+
+English: repeat outcome/target policies, paused result review, owner-correct cancellation and explicit recovery after relaunch are implemented. Grade-based cleanup respects protected equipment and save transactions; bag/save blockers prevent the next run. See the [English record](../Implementation/Repeat_Hunt_Expansion.en.md) for validation and local-only scope. Online session ownership and additional cleanup triggers remain follow-up work.
+
 ## 7. 공개 전에 필요한 계정·보상·보석
 
 담당 명세: 체크리스트 CHK-S01~S08, 상위 기획서의 보석 기준.

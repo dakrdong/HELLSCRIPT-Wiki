@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-13
 
+**2026-09-13 자동 반복 사냥:** 실제 사용하는 행동 설정에 따라 성공·실패 후 다음 판과 종료 조건을 적용합니다. 완료 횟수·실제 시간·획득 금화·장비·단계 목표, 등급별 자동 정리와 가방 부족 대기, 재실행 후 결과 확인·명시적 이어가기를 연결했습니다. 전체 검사 2,198개와 실제 앱 실행·재시작 4회가 통과했으며, 화면 14장을 검토했습니다. [개발 기록](../../Docs/Implementation/Repeat_Hunt_Expansion.md)
+
+English: repeat hunts follow their actual edict or base configuration owner, including outcome policies, attempt/time/gold/equipment/stage targets, transactional grade-based cleanup and bag-space readiness. Saved results require an explicit resume after relaunch. All 2,198 Editor tests and four native launches/restarts passed; 14 screenshots were reviewed. [English record](../../Docs/Implementation/Repeat_Hunt_Expansion.en.md)
+
 **2026-09-13 전투 기록 보관:** 최근 10회에 스킬 집계·마지막 5초·당시 규칙과 칙령·종료 장비를 저장하고 다시 조회할 수 있습니다. 자동 반복 대기와 읽던 문단 유지, 다음 균열·캐릭터 변경·재시작을 검증했습니다. 전체 검사 2,156개와 실제 앱 검사 3회가 통과했습니다. [개발 기록](../../Docs/Implementation/Combat_History_Expansion.md)
 
 English: the latest ten rifts now retain skill totals, the final five-second window, actual rule/edict context and final equipment. Countdown/reading-position behavior and history after another rift, character change and relaunch were verified. All 2,156 editor tests and three native processes passed. [English record](../../Docs/Implementation/Combat_History_Expansion.en.md)

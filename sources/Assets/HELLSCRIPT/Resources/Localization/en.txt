@@ -1419,9 +1419,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 자동 물약 사용	Automatic potion used
 자동 반복	Auto repeat
 자동 반복 꺼짐	Auto repeat off
-자동 반복 설정이 켜져 있습니다. 5초 후 다음 판을 시작합니다.	Auto repeat is on. The next run starts in 5 seconds.
 자동 반복 중지	Stop auto repeat
-자동 반복: {0}\n성공 후: {1}\n연속 실패 {2}회에 중단\n가방 정책: {3}	Auto repeat: {0}\nAfter a win: {1}\nStops after {2} losses in a row\nBag policy: {3}
 자동 사용	Automatic use
 자동 사용을 껐습니다.	Automatic use is off.
 자동 사용을 껐습니다. 긴급 생존 요청에도 자동 발동하지 않습니다.	Automatic use is off. It will not fire even for an emergency survival request.
@@ -2358,6 +2356,56 @@ LM01이 없어 새 눈보라를 위치 고정으로 설치합니다.	Without LM0
 
 동작 완료 · 다음 행동 판단 대기	Action complete · awaiting next decision
 
+# Repeat hunt session and cleanup
+자동 판매를 완료하지 못했습니다. 장비와 재화는 유지했습니다.	Automatic sale failed. Equipment and currency were kept.
+자동 분해를 완료하지 못했습니다. 장비와 재화는 유지했습니다.	Automatic salvage failed. Equipment and currency were kept.
+반복 사냥의 캐릭터가 일치하지 않습니다.	The repeat hunt belongs to a different character.
+더 새로운 반복 사냥 버전이 필요합니다. 저장 파일은 보존했습니다.	This save needs a newer repeat hunt version. The save file was preserved.
+반복 사냥의 저장 상태가 일치하지 않습니다.	The saved repeat hunt state is inconsistent.
+결과로	Results
+반복 설정 · {0}\n자동 반복 {1} · 성공 후 {2} · 실패 후 {3}	Repeat settings · {0}\nAuto repeat {1} · On victory: {2} · On defeat: {3}
+사냥 칙령	Hunt edict
+기본 행동 설정	Base behavior settings
+연속 실패 {0}회 · 완료 횟수 {1} · 실제 세션 {2}\n시작 전 빈칸 {3}칸 · 결과 대기 {4:0.0}초	Loss streak limit {0} · Attempt limit {1} · Session limit {2}\nRequired bag space {3} · Result delay {4:0.0}s
+제한 없음	Unlimited
+{0}회	{0} attempts
+{0}분	{0} min
+이번 사냥에서 금화 {0:N0}개를 얻으면 종료합니다.	Stop after earning {0:N0} gold in this hunt.
+{0}단계 이상을 클리어하면 종료합니다.	Stop after clearing stage {0} or higher.
+획득 목표 중 하나를 얻으면 종료: {0}	Stop after acquiring any target: {0}
+시간 제한에 도달하면 현재 판을 마친 뒤 멈춥니다. 결과·장비 상세를 보는 동안 다음 판 대기는 멈춥니다.	The time limit stops repetition after the current run. Viewing result or equipment details pauses the next-run countdown.
+반복 설정을 확인할 수 없습니다: {0}	Cannot read repeat settings: {0}
+이번 세션 {0}회 완료 · 연속 실패 {1}회\n실제 세션 {2:0.0}분 · 획득 금화 {3:N0}	Session: {0} attempts completed · Loss streak {1}\nSession time {2:0.0} min · Gold earned {3:N0}
+자동 정리 · 판매 {0} · 분해 {1} · 창고 이동 {2}\n보호 장비 {3} · 창고 부족으로 가방에 유지 {4}	Auto cleanup · Sold {0} · Salvaged {1} · Stored {2}\nProtected {3} · Kept in bag because storage was full {4}
+자동 반복 이어가기	Resume auto repeat
+반복 준비 다시 확인	Check repeat readiness
+반복 설정과 종료 조건	Repeat settings and stop conditions
+가방·창고 정리	Manage bag and storage
+자동 반복 종료 · {0}	Auto repeat ended · {0}
+자동 반복이 꺼져 있습니다.	Auto repeat is off.
+사용자가 중지했습니다.	Stopped by the player.
+성공 후 중단하도록 설정했습니다.	Configured to stop after a victory.
+실패 후 중단하도록 설정했습니다.	Configured to stop after a defeat.
+연속 실패 상한에 도달했습니다.	The loss streak limit was reached.
+설정한 완료 횟수에 도달했습니다.	The attempt limit was reached.
+설정한 실제 세션 시간이 지났습니다.	The session time limit was reached.
+목표 금화를 획득했습니다.	The gold target was reached.
+목표 전설·세트 장비를 획득했습니다.	A target legendary or set item was acquired.
+목표 단계를 클리어했습니다.	The target stage was cleared.
+자동 반복 대기 · {0}	Auto repeat waiting · {0}
+가방 여유가 부족합니다. 필요한 빈칸 {0}칸 · 현재 {1}칸	Insufficient bag space. Required {0} slots · Available {1}
+창고가 가득 차 장비를 가방에 유지했습니다. 정리 후 다시 확인해 주세요.	Storage is full, so equipment was kept in the bag. Free up space and check again.
+저장된 결과입니다. 이어가기를 누르면 남은 대기시간부터 자동 반복을 재개합니다.	This is a saved result. Resume to continue auto repeat from the remaining countdown.
+자동 반복 대기 · {0:0.0}초 후 {1}단계 시작	Auto repeat waiting · Stage {1} starts in {0:0.0}s
+반복 사냥 안내	Repeat hunt guide
+현재 결과와 사냥 설정을 확인합니다	Review the current result and hunting settings
+완료 횟수는 최초 입장을 포함하며 성공과 실패를 모두 셉니다. 금화 목표에는 전투·보스·초회·상자 보상만 포함합니다. 판매와 미실행 보상은 제외합니다.	Attempts include the first run and count both victories and defeats. Gold targets count combat, boss, first-clear and chest rewards. Sales and offline rewards are excluded.
+실제 세션 시간은 전경의 사냥·일시정지·결과 열람 시간을 셉니다. 공통 설정창·백그라운드·앱 종료 시간은 제외합니다.	Session time counts foreground combat, pauses and result viewing. Time in common settings, in the background or with the app closed is excluded.
+잠금·장착·설정과 프리셋이 참조하는 장비는 자동 정리에서 보호합니다. 전설·세트의 판매·분해에는 별도 허용이 필요합니다.	Auto cleanup protects locked, equipped and build- or preset-referenced items. Selling or salvaging legendary and set items requires separate permission in the edict.
+저장된 반복 결과 확인	Review saved repeat result
+가방이 가득 차도 추가 장비 획득을 제한하고 계속합니다. 지정한 시작 전 빈칸 조건은 충족해야 합니다.	Continue with limited equipment pickup when the bag is full. The configured starting bag space is still required.
+결과 저장 다시 시도	Retry saving the result
+사냥 상태를 저장하지 못했습니다. 기기의 저장 공간과 접근 권한을 확인한 뒤 다시 시도해 주세요.	Could not save the hunt. Check the device's free storage and access permissions, then try again.
 # --- composed at runtime; no source literal holds these ---
 3초씩 끊기	Break every 3 seconds
 감지 피해 위험 없음	No detected damage reaches it

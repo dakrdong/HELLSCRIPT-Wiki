@@ -380,7 +380,7 @@ namespace Hellscript
                 {
                     var rune=RuneGrowth.GrantMonster(account,State,e);
                     if(rune!=null)Log("RUNE_DROP",Loc.Source("G{0} 룬 · {1}칸 · 모양 {2} 획득",rune.grade,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).Size,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).ShapeNumber));
-                    account.gold+=Gold(e.elite>=0?25+5*State.stage:5+State.stage);
+                    RiftEarnings.GrantGold(account,State,Gold(e.elite>=0?25+5*State.stage:5+State.stage));
                     QueueExperience(Mathf.FloorToInt((e.elite>=0?50:10)*(1+.05f*(State.stage-1))));
                     bool drop=e.elite>=0||RandomStream.Unit(ref State.rewardRng)<.02f;
                     if(drop)Drop(e.position,RiftRarity.Roll(e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,State.stage,ref State.rewardRng));
@@ -451,10 +451,14 @@ namespace Hellscript
         void Loot(float dt)
         {
             if(State.training>=0)return;
+            if(State.limitedLoot&&Economy.FreeSlots(Hero)>0)State.limitedLoot=false;
             var pending=State.drops.Where(d=>!d.claimed&&!d.ignored).ToArray();
             bool combatClear=edictLoot==null||State.phase==RunPhase.Looting||EdictLootCombatClear;
             foreach(var drop in pending)
             {
+                // The configured continue-with-limited-loot policy leaves new equipment on the
+                // floor. Already owned items are never removed to make this transition possible.
+                if(State.limitedLoot&&Policy.bagPolicy==BagPolicy.Portal){drop.ignored=true;continue;}
                 if(edictLoot!=null)
                 {
                     var mode=edictLoot.Mode(drop.item,Hero.heroClass);
@@ -476,9 +480,9 @@ namespace Hellscript
         void BossClear()
         {
             if(State.bossRewarded)return;CompleteReadyChest();if(!string.IsNullOrEmpty(State.navigationError))return;CloseUnopenedChests();State.bossRewarded=true;State.phase=RunPhase.Looting;InterruptHeroAction("보스 처치 후 전리품 정리");State.activeSkill=-1;
-            account.gold+=Gold(800+50*State.stage);account.materials+=5+State.stage/5;
+            RiftEarnings.GrantGold(account,State,Gold(800+50*State.stage));account.materials+=5+State.stage/5;
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
-            if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);account.gold+=Gold(1000+100*State.stage);account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
+            if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(1000+100*State.stage));account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
             for(int i=0;i<3;i++)Drop(State.position+new Vector2(i-1,1),RiftRarity.Roll(RiftRewardSource.Boss,State.stage,ref State.rewardRng));
             RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);

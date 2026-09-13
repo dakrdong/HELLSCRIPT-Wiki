@@ -150,7 +150,7 @@ namespace Hellscript
                         string reward=item.rarity==3?Loc.F("{0} 코어 1개", GameCatalog.Slots[item.slot]):Loc.F("재료 {0}개", new[]{1,2,5}[item.rarity]);
                         var dismantle=InventoryButton(inventoryDetail.content,Loc.F("분해 · {0}{1}", reward, (refund>0?Loc.F(" + 강화 재료 {0}개", refund):"")),()=>ShowInventoryConfirm(Loc.F("{0}\n분해하면 {1}{2}를 받습니다. 이 장비는 사라집니다.", item.DisplayName, reward, (refund>0?Loc.F("와 강화 재료 {0}개", refund):"")),InventoryTransaction("dismantle:"+id,staged=>Economy.Dismantle(staged,staged.Hero,FindOwned(staged,id)),"장비를 분해했습니다.",item)));dismantle.interactable=canDispose;
                         InventoryButton(inventoryDetail.content,"공유 창고로 이동",InventoryTransaction("warehouse:"+id,staged=>
-                        {var owned=FindOwned(staged,id);if(owned==null||owned.equipped||staged.warehouse.Count>=400)return false;staged.Hero.inventory.Remove(owned);staged.warehouse.Add(owned);return true;},"잠금·프리셋 참조·획득순을 유지하며 창고로 옮겼습니다."));
+                        {var owned=FindOwned(staged,id);if(owned==null||owned.equipped||staged.warehouse.Count>=EdictCleanupPolicy.WarehouseCapacity)return false;staged.Hero.inventory.Remove(owned);staged.warehouse.Add(owned);return true;},"잠금·프리셋 참조·획득순을 유지하며 창고로 옮겼습니다."));
                     }
                 }
                 if(a.heroes.Any(owner=>Economy.Referenced(owner,item)))
@@ -234,7 +234,8 @@ namespace Hellscript
             FooterButton(3,6,inventoryWarehouse?"가방":"창고",()=>OpenInventory(!inventoryWarehouse,portalBag));
             var equip=Button(footer,"장착",selected==null?()=>{}:InventoryTransaction("equip:"+selected.id,staged=>staged.suspendedRun==null&&Economy.Equip(staged.Hero,FindOwned(staged,selected.id)),"장비를 교체했습니다."),new Color(.42f,.28f,.12f));AnchorButton(equip,4,6);
             equip.interactable=!inventoryWarehouse&&!portalBag&&GearServiceAvailable&&selected!=null&&Economy.EquipError(game.Store.Data.Hero,selected)=="";
-            FooterButton(5,6,portalBag?"균열 복귀":"성소로",()=>{if(portalBag)game.ContinuePortal();else ShowTown();},portalBag);
+            bool result=game.Combat!=null&&!game.Active;
+            FooterButton(5,6,portalBag?"균열 복귀":result?"결과로":"성소로",()=>{if(portalBag)game.ContinuePortal();else if(result)ShowResult();else ShowTown();},portalBag);
         }
         void OpenInventoryTool(string kind)
         {CaptureInventoryList();inventoryToolKind=kind;ClearInventoryRows(inventoryTool.content);ClearInventoryRows(footer);inventoryTool.verticalNormalizedPosition=1;inventoryReading=inventoryTool;inventoryDirty=true;}
