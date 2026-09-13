@@ -2,9 +2,13 @@
 
 갱신일: 2026-09-13
 
-**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](../Implementation/Item_Quality_Expansion.md)
+**2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](../Implementation/Idle_Display.md)
 
-English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](../Implementation/Item_Quality_Expansion.en.md)
+English: Idle display and peek now preserve live combat, repetition and save recovery. All 2,471 tests and final native initial/restart checks passed; 13 screenshots were reviewed. Three dimmed captures of the same final build continued combat with zero world, transient-effect or normal HUD updates. Android power/thermal/touch and platform interruption work remains. [English record](../Implementation/Idle_Display.en.md)
+
+**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교를 마쳤습니다. 기본 장비는 2/900판, 품질 장비는 108/900판을 클리어했으며, 90단계는 두 조건 모두 실패해 후속 검토가 필요합니다. [개발 기록](../Implementation/Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison completed: baseline gear cleared 2/900 runs and quality gear 108/900. Neither cleared stage 90; further balance review is required. [English record](../Implementation/Item_Quality_Expansion.en.md)
 
 **2026-09-13 보석·소켓 기반:** 효과표 126개, 장착 능력치·피격 감소, 장비 보호·비교와 저장 복구를 구현했습니다. 최종 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 다음 연결은 보석 보관 방식 확정 → 소유권·용량·저장 → 균열·소탕 보상과 가방 부족 처리 → 소켓 내기·장착·교체·분리·합성 서비스입니다. 별도 계정 공용 가방 50칸·묶음당 999개는 권장안이며 아직 확정하지 않았습니다. [개발 기록](../Implementation/Gem_Socket_Foundation.md)
 

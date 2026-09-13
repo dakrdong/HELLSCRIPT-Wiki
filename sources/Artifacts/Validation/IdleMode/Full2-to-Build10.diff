@@ -1,0 +1,18 @@
+--- Full2
++++ Build10
+@@ -89,9 +89,13 @@
+                 Require(!game.Running && game.DisplayMode == IdleDisplayMode.Normal, "Restart resumed idle hunting automatically");
+                 var expected = JsonUtility.FromJson<RunState>(File.ReadAllText(Path.Combine(directory, "suspended.json")));
+                 Require(game.Store.Data.suspendedRun.id == expected.id && game.Store.Data.suspendedRun.time == expected.time, "Restart lost the suspended run");
+-                game.Begin(-1, true); Require(game.Combat.State.paused, "Restart resumed the interrupted battle without the resume control");
++                yield return Capture("resume-choice-town-en");
++                Click("진행 중인 균열 이어하기");
++                Require(game.Active&&!game.Combat.State.paused&&game.Combat.State.id==expected.id&&game.Combat.State.time==expected.time,
++                    "The explicit continue-rift control did not resume the preserved checkpoint");
++                Require(game.Combat.State.position==expected.position&&game.Combat.State.health==expected.health&&game.Combat.State.rng==expected.rng,
++                    "Continuing the suspended rift reset position, health or randomness");
+                 yield return Capture("suspended-rift-restored-en");
+-                Click("일시정지"); Require(!game.Combat.State.paused, "Explicit resume did not resume the restored battle");
+                 Click("절전 방치"); Require(game.DisplayDimmed, "The accepted idle introduction was not remembered on this device");
+                 yield return Capture("remembered-idle-en", 720, 1280);
+             }

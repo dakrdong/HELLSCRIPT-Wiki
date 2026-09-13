@@ -1,0 +1,65 @@
+{
+  "validatedUtc": "2026-09-13T10:00:53.927848+00:00",
+  "phase": "Idle display desktop checkpoint",
+  "engine": "Unity 6000.6.0f1",
+  "result": "desktop_checkpoint_passed_mobile_work_remaining",
+  "fullEditor": {
+    "id": "2",
+    "testcasecount": "2471",
+    "result": "Passed",
+    "total": "2471",
+    "passed": "2471",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-13 09:45:27Z",
+    "end-time": "2026-09-13 09:52:36Z",
+    "duration": "428.8918487"
+  },
+  "focusedCases": 30,
+  "fullProcess": {
+    "startedUtc": "2026-09-13T09:45:15.884558+00:00",
+    "pid": 62949,
+    "endedUtc": "2026-09-13T09:52:38.267144+00:00",
+    "exitCode": 0
+  },
+  "buildProcess": {
+    "startedUtc": "2026-09-13T09:48:26.946324+00:00",
+    "pid": 63464,
+    "endedUtc": "2026-09-13T09:48:54.553152+00:00",
+    "exitCode": 0
+  },
+  "nativeProcesses": {
+    "initial": {
+      "startedUtc": "2026-09-13T09:50:29.225379+00:00",
+      "pid": 63748,
+      "build": "Build10",
+      "endedUtc": "2026-09-13T09:51:11.448552+00:00",
+      "exitCode": 0
+    },
+    "restart": {
+      "startedUtc": "2026-09-13T09:51:11.451305+00:00",
+      "pid": 63813,
+      "build": "Build10",
+      "endedUtc": "2026-09-13T09:51:17.506362+00:00",
+      "exitCode": 0
+    }
+  },
+  "nativeScreenshots": 13,
+  "profileScreenshots": 5,
+  "scope": [
+    "Normal/dimmed/peek display modes with unchanged combat state",
+    "Exact foreground clock, repeat boundaries, save-failure pause and explicit resume",
+    "Atomic local offline settlement and fixed retry interval",
+    "KO/EN responsive entry and peek controls; separate-process restart"
+  ],
+  "limits": [
+    "Native fixtures seed legal progress/equipment, invoke actual UI events, call abandonment to exercise result/repeat transitions and inject a temporary save failure. They do not demonstrate natural victory, physical touch or OS locking.",
+    "Full2 and Build10 differ only by the corrected opt-in native restart harness, as recorded in validated-source.json.",
+    "Android physical power/thermal/long-session verification, app-window brightness, low-power interruption and actual audio/haptic policies remain.",
+    "Online settlement, gem storage decision and natural progression/high-stage balance remain separate work."
+  ]
+}

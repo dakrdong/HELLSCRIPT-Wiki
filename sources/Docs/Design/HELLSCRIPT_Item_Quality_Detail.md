@@ -2,7 +2,7 @@
 
 작성일: 2026-09-11 · 상태: 신규 상세 시험안
 
-2026-09-13 개발 갱신: 각성·상위 접사·걸작의 생성·서비스·저장·화면을 구현했다. 전체 검사 2,442개와 실제 앱 검사 3회가 통과했고, 1,800회 전투 비교는 진행 중이다. 구현 계약과 실제 검사 상태는 [개발 기록](../Implementation/Item_Quality_Expansion.md)을 따른다. English: all 2,442 tests and three native processes passed; the 1,800-run combat comparison is ongoing. See the [implementation record](../Implementation/Item_Quality_Expansion.en.md).
+2026-09-13 개발 갱신: 각성·상위 접사·걸작의 생성·서비스·저장·화면을 구현했다. 전체 검사 2,442개와 실제 앱 검사 3회가 통과했고, 1,800회 전투 비교를 완료했으며 고단계 밸런스는 후속 검토가 필요하다. 구현 계약과 실제 검사 상태는 [개발 기록](../Implementation/Item_Quality_Expansion.md)을 따른다. English: all 2,442 tests and three native processes passed; the 1,800-run combat comparison is complete; high-stage balance remains under review. See the [implementation record](../Implementation/Item_Quality_Expansion.en.md).
 
 ## 1. 범위와 자료 방침
 

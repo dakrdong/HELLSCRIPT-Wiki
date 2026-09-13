@@ -2,9 +2,13 @@
 
 갱신일: 2026-09-13
 
-최신 실행본은 `Builds/macOS-ItemQuality/HELLSCRIPT.app`입니다. **2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](Item_Quality_Expansion.md)
+최신 실행본은 `Builds/macOS-IdleMode-Build10/HELLSCRIPT.app`입니다. **2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](Idle_Display.md)
 
-English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](Item_Quality_Expansion.en.md)
+English: Idle display and peek now preserve live combat, repetition and save recovery. All 2,471 tests and final native initial/restart checks passed; 13 screenshots were reviewed. Three dimmed captures of the same final build continued combat with zero world, transient-effect or normal HUD updates. Android power/thermal/touch and platform interruption work remains. [English record](Idle_Display.en.md)
+
+이전 실행본은 `Builds/macOS-ItemQuality/HELLSCRIPT.app`입니다. **2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교를 마쳤습니다. 기본 장비는 2/900판, 품질 장비는 108/900판을 클리어했으며, 90단계는 두 조건 모두 실패해 후속 검토가 필요합니다. [개발 기록](Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison completed: baseline gear cleared 2/900 runs and quality gear 108/900. Neither cleared stage 90; further balance review is required. [English record](Item_Quality_Expansion.en.md)
 
 이전 실행본은 `Builds/macOS-GemSockets/HELLSCRIPT.app`입니다. **2026-09-13 보석·소켓 기반:** 보석 7종·6단계의 부위별 효과, 보석 장비의 판매·분해 보호, 저장 복구와 장비 비교를 연결했습니다. 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 보석 보관 방식은 사용자 확인 중이며, 획득·장착·분리·합성 서비스 연결은 남아 있습니다. [개발 기록](Gem_Socket_Foundation.md)
 

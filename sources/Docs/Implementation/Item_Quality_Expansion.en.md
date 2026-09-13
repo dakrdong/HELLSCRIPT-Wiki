@@ -2,7 +2,7 @@
 
 Date: 2026-09-13 · [한국어](Item_Quality_Expansion.md)
 
-Status: feature, persistence and native macOS UI checks passed. The 1,800-run combat comparison remains in progress; this record does not establish overall balance or completion of the game.
+Status: feature, persistence, native macOS UI checks and the 1,800-run combat comparison are complete. Low clear rates at higher stages remain a balance follow-up; this record does not establish overall balance or completion of the game.
 
 ## Generation and combat values
 
@@ -34,7 +34,7 @@ Masterwork outside 0–200 or incompatible with the enhancement requirement is r
 
 Before saving repaired data, the exact original is archived as `*.quality-recovery-*.json`. Concurrent gem repairs share a single archive using the existing `*.gem-recovery-*.json` name. Failure to archive stops loading. The same recovery covers owned gear, warehouse items, suspended drops/chests, pending repeat-hunt results and historical equipment copies.
 
-## Completed validation and ongoing checks
+## Completed validation and remaining checks
 
 All **2,442 tests** in the final-source [Unity Edit Mode suite](../../Artifacts/Validation/item-quality-editmode.xml) passed. The 62 quality-specific cases cover production drops/chests/sweeps, shop/craft exclusion, costs through level 200, all eight slots, reset refunds, failed/duplicate transactions, restart and legacy-save protection. Schema 3 also protects accounts whose only remaining quality gear is historical, with every inventory and the warehouse empty.
 
@@ -50,11 +50,26 @@ Among 100,000 actual generated stage-30 items, 21,944 awakened, 8,809 affix line
 
 An actual damage calculation isolating specification section 5.2 produced 153.5032 baseline damage and 278.3303 quality damage, a **1.813189 ratio**. The fixture used item level 30, enhancement +5, awakening, masterwork 12 and a tier-6 weapon diamond, explicitly matching the stated 60% existing additive-damage baseline. This is not an average damage increase across builds. Greater affixes and random masterwork affix boosts are checked separately.
 
-A **1,800-run comparison is in progress**: five stages (30/45/60/75/90), six builds, 30 seeds and paired quality/baseline profiles. Quality gear uses actual awakened generation and its greater-affix rolls, then the enhancement and masterwork services up to the cap. Baselines retain identical bases, unique effects and raw affix rolls, with quality layers removed. Each pair must have identical layouts and initial encounters. Gems and rune boards are absent. Hero level, account progression and investment currency are seeded fixture conditions, not natural-growth or farming-time measurements.
+The **1,800-run comparison completed**: five stages (30/45/60/75/90), six builds, 30 seeds and paired quality/baseline profiles. All runs terminated. Seed, layout and initial-encounter matching passed for all 900 pairs, and all 60 equipment sample files matched their hashes. The [final analysis](../../Artifacts/Validation/ItemQuality/Curve1-analysis.json) separates outcomes, clear-rate confidence intervals and mean times of successful runs.
 
-The combat comparison uses the frozen `Focus5-inputs.json` source. Subsequent edits strengthen schema protection, error messages, UI, translations and tests; the generation, masterwork and combat calculations used by the comparison are unchanged. The final build and full suite were confirmed to use identical `Build3-inputs.json` and `Full4-inputs.json` sources. Ongoing comparison files are not presented as completed final-player results.
+Quality gear uses actual awakened generation and greater-affix rolls, followed by enhancement and masterworking to the fixture's cap. Baselines retain identical bases, unique effects and raw rolls with quality layers removed. Heroes are level 30 with explicitly seeded progression and investment funds. Gems, rune boards and hunt edicts are absent. This is a counterfactual equipment comparison, not natural progression or farming-time evidence.
 
-Remaining work includes completion/analysis of that comparison and natural growth/farming-cost validation. Physical mobile input and sustained performance, the pending gem-storage decision, and gem acquisition/service integration remain separate unfinished work. Main and the public wiki receive the verified feature checkpoint first; the combat comparison receives a separate final record after it completes.
+Each cell is clears out of 30 runs, shown as `baseline → quality`. Build 0/1 denotes the class preset index used by the validation runner.
+
+| Class/build | Stage 30 | Stage 45 | Stage 60 | Stage 75 | Stage 90 |
+|---|---|---|---|---|---|
+| Warrior 0 | 2 → 12 | 0 → 14 | 0 → 9 | 0 → 4 | 0 → 0 |
+| Warrior 1 | 0 → 12 | 0 → 4 | 0 → 4 | 0 → 1 | 0 → 0 |
+| Ranger 0 | 0 → 6 | 0 → 7 | 0 → 5 | 0 → 0 | 0 → 0 |
+| Ranger 1 | 0 → 6 | 0 → 3 | 0 → 1 | 0 → 0 | 0 → 0 |
+| Mage 0 | 0 → 10 | 0 → 4 | 0 → 5 | 0 → 0 | 0 → 0 |
+| Mage 1 | 0 → 0 | 0 → 0 | 0 → 1 | 0 → 0 | 0 → 0 |
+
+The 900 baseline runs produced 2 clears, 98 time limits and 800 deaths. The 900 quality runs produced 108 clears, 347 time limits and 445 deaths. No pair cleared only with baseline gear; two cleared in both conditions. Masterwork caps at stages 30/45/60/75/90 were 12/57/102/147/192. The quality layer helps this fixture, but neither profile cleared stage 90. Mage build 1 and stages 75 onward require a separate bottleneck review; these results do not support declaring balance complete.
+
+The curve used frozen `Focus5-inputs.json` sources. Later quality-feature edits addressed schema protection, messages, UI, translations and tests without changing this curve's generation, masterwork or combat owners. Idle-display development used a different verification copy and did not enter the comparison. The native feature build and full suite remain separately identified by the previously recorded `Build3-inputs.json` and `Full4-inputs.json` evidence.
+
+Natural growth, farming costs and high-stage/build-specific bottlenecks remain unfinished, alongside physical mobile input, sustained performance, the pending gem-storage decision and gem acquisition/service integration.
 
 ## Screen evidence
 

@@ -18,6 +18,8 @@ namespace Hellscript
         public string QualityRecoveryArchive {get;private set;}="";
         public int LocalIdleGoldAwarded {get;private set;}
         public int LocalIdleMaterialsAwarded {get;private set;}
+        long? pendingLocalIdleThrough;
+        bool settlingLocalIdle;
         readonly string path;
         public GameStore(string directory,GameCatalog catalog=null)
         {
@@ -191,25 +193,40 @@ namespace Hellscript
             }
             RuneGrowth.Normalize(a);return a;
         }
-        void SettleLocalIdle()
+        public bool SettleLocalIdle()
         {
-            long now=DateTimeOffset.UtcNow.ToUnixTimeSeconds();int best=Data.heroes.Max(h=>h.highestClear);
+            pendingLocalIdleThrough??=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            long through=pendingLocalIdleThrough.Value;int best=Data.heroes.Max(h=>h.highestClear),gold=0,materials=0;
+            LocalIdleGoldAwarded=LocalIdleMaterialsAwarded=0;OfflineMessage="";
             if(ContentUnlocks.Has(Data,ContentUnlocks.Offline)&&best>0&&Data.lastSeenUtc>0)
             {
-                double hours=Math.Min(12,Math.Max(0,now-Math.Max(Data.lastSeenUtc,Data.contentUnlocks.offlineActivatedUtc))/3600d);
-                int gold=(int)(hours*(200+40*best)),materials=(int)(hours*(5+best/5));
-                if(gold>0||materials>0){Data.gold+=gold;Data.materials+=materials;LocalIdleGoldAwarded=gold;LocalIdleMaterialsAwarded=materials;OfflineMessage=Loc.F("미실행 보상 · 골드 {0:N0} / 재료 {1}", gold, materials);}
+                double hours=Math.Min(12,Math.Max(0,through-Math.Max(Data.lastSeenUtc,Data.contentUnlocks.offlineActivatedUtc))/3600d);
+                gold=(int)(hours*(200+40*best));materials=(int)(hours*(5+best/5));
             }
-            Data.lastSeenUtc=now;Save();
+            // Keep the failed interval fixed. Neither another save nor an inventory transaction
+            // can move its cursor forward before its rewards commit successfully.
+            settlingLocalIdle=true;bool success;
+            try
+            {
+                success=gold>0||materials>0?Transact("local-idle:"+Data.lastSeenUtc+":"+through,"local-idle",staged=>
+                {staged.gold=checked(staged.gold+gold);staged.materials=checked(staged.materials+materials);return true;}):Save();
+            }
+            finally{settlingLocalIdle=false;}
+            if(!success)return false;
+            pendingLocalIdleThrough=null;LocalIdleGoldAwarded=gold;LocalIdleMaterialsAwarded=materials;
+            if(gold>0||materials>0)OfflineMessage=Loc.F("미실행 보상 · 골드 {0:N0} / 재료 {1}",gold,materials);
+            return true;
         }
         public bool Save()
         {
+            if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle&&!SettleLocalIdle())return false;
             Data.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             return Write(Data);
         }
         // Stage the whole account before disk commit. Failed saves never consume the player's inputs.
         public bool Transact(string requestId,string operation,Func<AccountSave,bool> mutation)
         {
+            if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle&&!SettleLocalIdle())return false;
             if(string.IsNullOrWhiteSpace(requestId)||string.IsNullOrWhiteSpace(operation)){Error="거래 식별자가 없습니다.";return false;}
             var receipt=Data.transactions.Find(r=>r.requestId==requestId);
             if(receipt!=null){Error=receipt.operation==operation?"":"같은 거래 요청에 다른 내용이 들어왔습니다.";return receipt.operation==operation;}

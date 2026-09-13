@@ -11,7 +11,7 @@ namespace Hellscript
         readonly List<RectTransform> battleIcons = new List<RectTransform>();
         readonly List<Button> battleSpeeds = new List<Button>();
         RectTransform[] battleCurtains;
-        Button battleEffects, battleReason, battleGrowth;
+        Button battleEffects, battleReason, battleGrowth, battleIdle;
         BattleHudLayout battleLayout;
         Vector2 battleSize;
         Rect battleSafe;
@@ -54,11 +54,21 @@ namespace Hellscript
                 var skill = Rect("Battle skill " + index, battleSkills); Icon(skill, index, 0, 0, 48); battleIcons.Add(skill.GetChild(0) as RectTransform);
                 var label = Label(skill, "", 17, pale); label.gameObject.name = "Skill " + index; skillLabels.Add(label);
             }
+            if(game.DisplayMode==IdleDisplayMode.Peek)
+            {
+                FooterButton(0,3,"계속 보기",game.KeepWatching);
+                FooterButton(1,3,"절전으로 돌아가기",game.DimIdle);
+                FooterButton(2,3,"다음 판부터 중단",game.StopAutoRepeat);
+            }
+            else
+            {
             FooterButton(0, 5, "일시정지", () => game.TogglePause());
             FooterButton(1, 5, game.ComparisonRun ? "비교 조건" : "행동 수정", () => game.EditBuild());
             FooterButton(2, 5, "지도", ShowRiftMap);
             FooterButton(3, 5, "전투 상태", ShowCombatOverview);
             FooterButton(4, 5, "귀환", () => Confirm(game.ComparisonRun ? "진행 중인 비교를 끝내고 성소로 돌아갑니다. 저장하지 않은 비교 결과는 남지 않습니다." : "현재까지 얻은 전리품을 보존하고 마을로 돌아갑니다.", () => game.ReturnTown()));
+            }
+            battleIdle=run.training<0&&game.DisplayMode==IdleDisplayMode.Normal?Button(root,"절전 방치",game.RequestIdle,panel):null;
             AddRiftMinimap(run);
             battleGrowth = Button(header, "성장과 스킬", ShowGrowth, Color.clear); battleGrowth.GetComponentInChildren<Text>().text = "";
             RefreshHud(); ReflowBattleHud();
@@ -75,6 +85,7 @@ namespace Hellscript
             battleSize = size; battleSafe = safe; battleBoss = boss;
             var plan = new BattleHudLayout(size.x, size.y, boss); battleLayout = plan;
             PlaceBattle(header, plan.header); PlaceBattle(footer, plan.footer); PlaceBattle(battleStatus, plan.status); PlaceBattle(battleActions, plan.actions); PlaceBattle(battleWorld, plan.world);
+            if(battleIdle!=null)Place((RectTransform)battleIdle.transform,plan.world.xMax-128,plan.world.y+8,120,48);
             headerTitle.fontSize = plan.compact ? 22 : 26;
             Place(headerTitle.rectTransform, 12, 5, size.x - 154, plan.compact ? 38 : 40);
             headerSubtitle.gameObject.SetActive(!plan.compact);
@@ -169,7 +180,8 @@ namespace Hellscript
             }
             actionText.text = Loc.T(toastTime > 0 && toast != null && !string.IsNullOrEmpty(toast.text) ? toast.text : fullBattleAction);
             var pause = footer.GetComponentsInChildren<Button>().FirstOrDefault(b => b.name == "일시정지");
-            if (pause != null) pause.GetComponentInChildren<Text>().text = Loc.T(game.Combat.State.paused ? "재개" : "일시정지");
+            if (pause != null) pause.GetComponentInChildren<Text>().text = Loc.T(game.Combat.State.paused||game.ForegroundResumeRequired ? "재개" : "일시정지");
+            if(battleIdle!=null)battleIdle.interactable=game.CanEnterIdle;
             // The full action remains available in the combat overview and decision log.
             while (actionText.preferredHeight > actionText.rectTransform.rect.height + 1 && actionText.text.Length > 8)
                 actionText.text = actionText.text.Substring(0, actionText.text.Length - (actionText.text.EndsWith("…") ? 2 : 1)) + "…";

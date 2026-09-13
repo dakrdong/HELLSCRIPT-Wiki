@@ -2,9 +2,13 @@
 
 갱신일: 2026-09-13
 
-**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교는 진행 중입니다. [개발 기록](../../Docs/Implementation/Item_Quality_Expansion.md)
+**2026-09-13 절전 방치:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발 기록](../../Docs/Implementation/Idle_Display.md)
 
-English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison across five stages and six builds remains in progress. [English record](../../Docs/Implementation/Item_Quality_Expansion.en.md)
+English: Idle display and peek now preserve live combat, repetition and save recovery. All 2,471 tests and final native initial/restart checks passed; 13 screenshots were reviewed. Three dimmed captures of the same final build continued combat with zero world, transient-effect or normal HUD updates. Android power/thermal/touch and platform interruption work remains. [English record](../../Docs/Implementation/Idle_Display.en.md)
+
+**2026-09-13 장비 품질:** 각성·상위 접사·걸작을 균열·상자·소탕, 전투 수치와 대장장이 거래에 연결했습니다. 신규 장비 레벨은 60으로 제한하고 기존 고레벨 장비는 보존합니다. 최종 전체 검사 2,442개와 실제 앱 실행·재시작·복구 3회가 통과했으며 화면 15장을 검토했습니다. 다섯 성장 구간·여섯 빌드의 1,800회 전투 비교를 마쳤습니다. 기본 장비는 2/900판, 품질 장비는 108/900판을 클리어했으며, 90단계는 두 조건 모두 실패해 후속 검토가 필요합니다. [개발 기록](../../Docs/Implementation/Item_Quality_Expansion.md)
+
+English: awakening, greater affixes and masterworking now connect rift/chest/sweep rewards, combat stats and blacksmith transactions. New items cap at level 60 while legacy higher-level gear is preserved. All 2,442 final tests and three native processes passed; 15 screenshots were reviewed. The 1,800-run comparison completed: baseline gear cleared 2/900 runs and quality gear 108/900. Neither cleared stage 90; further balance review is required. [English record](../../Docs/Implementation/Item_Quality_Expansion.en.md)
 
 **2026-09-13 보석·소켓 기반:** 보석 7종·6단계·세 부위군의 효과 126개, 소켓 자료와 장비 보호·비교, 손상 보석의 원본 보관·복구를 연결했습니다. 최종 전체 검사 2,380개와 실제 앱 실행·재시작·복구 3회가 통과했고 화면 9장을 검토했습니다. 계정 공용 별도 보석 가방과 캐릭터별 장비 가방 중 보관 방식을 확인 중이며, 보상 지급과 장착·분리·합성 서비스는 후속 작업입니다. 로컬·원격에는 `main`만 남아 있고 클로드의 병합 내용도 유지됩니다. [개발 기록](../../Docs/Implementation/Gem_Socket_Foundation.md)
 
@@ -92,7 +96,7 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 
 | 영역 | 확인한 구현 | 남은 범위 |
 | --- | --- | --- |
-| 장비·아이템화 | 베이스 24종, 접사 54종, 개별 전설 15종, 세트 6종과 세트 장비 24종이 현재 코드에 정의되어 있습니다. 장비 목록의 필터·정렬, 획득 순번과 일괄 판매·분해 미리보기를 연결했습니다. 2026-09-12에 목걸이 초희귀 전설 셋의 가중치를 1에서 10으로 올렸습니다. 보석·소켓은 효과·보호·저장 기반을 구현했고 실제 획득·서비스를 연결할 차례입니다. 각성·상위 접사·걸작의 기능·저장 검증을 마쳤고 성장 구간별 전투 비교를 진행 중입니다. | 모든 합법적 장착 조합, 장비 교체·편집·복원 경로와 여러 시드의 빌드 역할을 이어서 검사합니다. |
+| 장비·아이템화 | 베이스 24종, 접사 54종, 개별 전설 15종, 세트 6종과 세트 장비 24종이 현재 코드에 정의되어 있습니다. 장비 목록의 필터·정렬, 획득 순번과 일괄 판매·분해 미리보기를 연결했습니다. 2026-09-12에 목걸이 초희귀 전설 셋의 가중치를 1에서 10으로 올렸습니다. 보석·소켓은 효과·보호·저장 기반을 구현했고 실제 획득·서비스를 연결할 차례입니다. 각성·상위 접사·걸작의 기능·저장 검증을 마쳤고 성장 구간별 전투 비교를 마쳤으며 고단계·빌드별 병목을 후속 검토합니다. | 모든 합법적 장착 조합, 장비 교체·편집·복원 경로와 여러 시드의 빌드 역할을 이어서 검사합니다. |
 | 능력치 | 2026-09-12에 클로드가 추가한 속성 57개와 접사 54종을 인수했습니다. 네 핵심 능력치에서 최종 수치를 계산하며, 성장 화면에서 능력치를 확인합니다. 기존 접사 번호 24개의 의미를 보존했습니다. 이동 속도는 실제 m/s로, 장비의 이동 속도 보너스는 %로 표시합니다. 최대 자원 증가도 전투 게이지에 반영합니다. 접사 체계별 960만 개 생성 검사에서 기존 옵션의 출현율 감소를 확인했고, 실제 추첨은 예상 분포와 맞았습니다. | 군중 제어 지속시간 감소와 기력 두 줄은 현재 적용 대상이 없어 장비에서 제외합니다. 과거 20단계 승리 12→6회는 현재 통합본의 성능으로 재사용하지 않습니다. 54종·24종의 각 600판 대조를 완료했습니다. 후속 전후 32판 진단에서 옛 M04·M05 규칙의 공격 중단을 확인했습니다. M04 연결 후 중단은 줄었지만 전역 생존이 꺼진 기본 문서의 사망은 늘었습니다. M06 전후 48판에서도 생존 설정은 모두 시간 초과했고 M03 중단은 8→68회로 늘었습니다. M06 제어 전환·공격 취소 비용과 보스 도달·성장·파밍 효용을 계속 검증합니다. |
 | 행동 편집 | 22개 조건을 공용 정의하고 규칙별 목표·이동과 행동 차단 이유를 연결했습니다. | 첫 플레이 안내, 규칙 이해도와 실제 터치 사용성을 검증합니다. |
 | 전투 | 준비·발사·도약·착지·채널, 투사체·덫, 상태 효과·보호막·비용 충전·세트 노출을 구현했습니다. | 전체 전설·세트 조합과 장시간·배속·중단 복원을 확대 검증합니다. |
@@ -100,7 +104,8 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 | 적과 보스 | 일반 적 12종·정예 6특성·보스 3종의 개별 행동과 위험 예고를 구현했습니다. | 최종 모델·애니메이션·음향을 연결하고 작은 화면의 가독성을 검증합니다. |
 | 플레이어 훈련 | 실제 캐릭터 복사본, 해금 제한, 고정 배치와 60초 종료의 상세안·소스·검사 결과가 있습니다. | A/B 비교 기록, 적용 미리보기와 기기 입력 검증은 별도 과제입니다. |
 | 화면·기기 대응 | 공통 설정·안내 창과 기기별 방향 설정, 화면 크기로 계산하는 전투 HUD 배치와 카메라 표시 영역, 장비 목록·상세·비교의 영역 전환을 구현했습니다. 전투 배치는 macOS 창 16개 크기에서 확인했습니다. 2026-09-11에 글자 크기 100~140% 선택을 추가했고, 20:9 화면에서 밀려나 있던 조작 20곳을 고쳤으며, 주요 조작을 80단위로 키우고 배경이 노치까지 덮도록 바꿨습니다. | 행동 설계·사냥 칙령 편집·전투 HUD의 촘촘한 위젯 크기와 모바일 실기기의 회전·터치·복귀 검증이 남아 있습니다. |
-| 배속 잠금 | 일반 균열·훈련·A/B 비교는 1배속을 사용하고 1.5배속·2배속에는 잠금 표시를 붙였습니다. 기존 고배속 저장값은 1배속으로 읽고 저장합니다. | 월 구독·이벤트 쿠폰·시간 충전과 차감, 서버의 중복 사용 방지, 절전 방치 화면은 구현되지 않았습니다. |
+| 절전 방치 | 실제 전투를 유지하면서 월드·일반 HUD 표시를 쉬고, 현재 상태의 잠깐 보기·10초 후 복귀·반복 중단·저장 실패와 재실행을 연결했습니다. | Android 전력·발열·장시간 동작, 실제 터치·OS 중단, 창 밝기·저전력 중단·오디오·진동 정책은 남아 있습니다. |
+| 배속 잠금 | 일반 균열·훈련·A/B 비교는 1배속을 사용하고 1.5배속·2배속에는 잠금 표시를 붙였습니다. 기존 고배속 저장값은 1배속으로 읽고 저장합니다. | 월 구독·이벤트 쿠폰·시간 충전과 차감, 서버의 중복 사용 방지는 구현되지 않았습니다. 절전 화면의 데스크톱 검증은 완료했으며 Android 실기기 검증은 남아 있습니다. |
 | 사냥 칙령 v0.2 | 영웅별 v0.2 원본·편집·공유, 전역 대상·추적·전리품·생존 대응과 세 직업의 액티브·기본 공격을 연결했습니다. 궁수의 옵션 30개까지 옛 규칙과 독립해 판단하며 실제 비용·적중·저장 복원을 검사했습니다. | 생성 균열 여러 시드에서 생존·제어 전환·공격 취소·시간 초과와 장비 파밍 효용을 계속 검증합니다. 설정별 승률 개선이나 모바일 실기기 사용성은 이번 기능 검사로 입증하지 않았습니다. |
 | 저장·서비스 | 로컬 저장과 개발용 정산을 제공합니다. | 계정 서버·서버 시각·교차 저장·구매 검증을 연결해야 합니다. |
 | 아트·출시 품질 | 생성 이미지 4개와 코드로 만든 임시 3D·UI 표현을 사용합니다. 2026-09-10에 첫 캐릭터 3D 모델(야만전사)을 생성해 시작 씬에 확인용으로 배치했습니다. 2026-09-11에 성소 보행 광장과 정거장 5곳을 임시 표현으로 만들어 도착 시 서비스가 열리고, 균열 관리자는 전용 화면을 엽니다. | 마을·NPC·정식 모델·애니메이션·음향·Android 글꼴·성능을 완성해야 합니다. |

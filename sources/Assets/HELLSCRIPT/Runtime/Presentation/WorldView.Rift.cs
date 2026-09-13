@@ -90,7 +90,7 @@ namespace Hellscript
             {
                 if(!chestViews.TryGetValue(c.id,out var v))continue;v.root.SetActive(c.discovered&&Vector2.Distance(c.position,run.position)<25);
                 float angle=c.phase==ChestPhase.Opened?-105:c.phase==ChestPhase.Opening?-8*Mathf.Sin(c.progress*20):0;
-                v.lid.localRotation=Quaternion.Slerp(v.lid.localRotation,Quaternion.Euler(angle,0,0),Mathf.Min(1,dt*14));
+                v.lid.localRotation=snapPresentation?Quaternion.Euler(angle,0,0):Quaternion.Slerp(v.lid.localRotation,Quaternion.Euler(angle,0,0),Mathf.Min(1,dt*14));
                 v.seal.SetActive(c.phase!=ChestPhase.Opened&&c.phase!=ChestPhase.Exhausted);
             }
             foreach(var s in run.layout.shrines)

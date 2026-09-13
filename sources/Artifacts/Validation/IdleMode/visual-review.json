@@ -1,0 +1,36 @@
+{
+  "reviewedUtc": "2026-09-13T10:00:53.927848+00:00",
+  "result": "passed",
+  "method": "Direct model review of all thirteen final Native8 screenshots and five final-source profile screenshots.",
+  "checks": [
+    "KO introduction with pinned actions; EN 140% short landscape scroll area",
+    "Dimmed summary and three-button peek controls",
+    "Automatic ten-second dimming, deferred repeat world, repeat stop and save-failure reason",
+    "Foreground explicit resume, restarted town checkpoint, restored battle and remembered device preference"
+  ],
+  "screenshots": {
+    "Native8/initial-01-battle-entry-ko.png": "d51eea66815f311c8f33c7d1ce7d930451563d4ad3a7465eedac45bcc4890000",
+    "Native8/initial-02-introduction-ko.png": "885f5aacb46767aba5bf1c3427804e9a27aa00de57e47119a25d08bc22710079",
+    "Native8/initial-03-introduction-en-140.png": "43bf751378c2db69c7b36969ae08e40bea8e25b90906c78e11de7cbfeea2581f",
+    "Native8/initial-04-dimmed-en-140.png": "eb61b18852e97c52645e5d298a0b2559d1ad9ebb7b6ab5a89f03c1d290c7db35",
+    "Native8/initial-05-peek-en-140.png": "fff6e84cbffd27e795a6aee3327e47f9bf3fad4c34fb87aa2898f939f86c1d2d",
+    "Native8/initial-06-automatic-dim-en.png": "16301e92c70d0860ce85fe893dea9741433a160bec983420c8a97d97531b1073",
+    "Native8/initial-07-next-rift-deferred-en.png": "d7f26ddc2b1f65a280ccf7365823b9caf4612a5116e6541e07e9a1653e6f2faa",
+    "Native8/initial-08-repeat-stopped-en.png": "db67b33d8dc6efcda7d958a6fd119a8632ab3725fba6b1c51ef899830b2c305c",
+    "Native8/initial-09-save-blocked-en.png": "9d2493486238a71669fd77881921032697fb38374bdf6eab1f28d50b00d5335a",
+    "Native8/initial-10-foreground-resume-required-en.png": "26d432eea2b6a9117d173b7adbe139c7795c1feec9ee41a45f15d3d094e6222f",
+    "Native8/restart-01-resume-choice-town-en.png": "afe344f144a32596d9acadaf8c7dd89c6139d5ef997b1721d0f5f77e41523e65",
+    "Native8/restart-02-suspended-rift-restored-en.png": "fbbab9ca5d8db4f62246d8cd71efdc1e439d8a08b26fb3bfc8f4ef0ce912350b",
+    "Native8/restart-03-remembered-idle-en.png": "32428938ec38620396681fee69f3474ab046cef553955f1837ed4fe2358feb5f",
+    "AfterNormal1/profile.png": "0dc3fcdc2dafe0001c3cc800b17c0073a8a0f15c0a63c83cf4bb61966d531dc6",
+    "Dim2/profile.png": "ad1eb24b47faf63470f43479b82449f143ed059f6b286a6504e732010db165ee",
+    "Dim3/profile.png": "d9b820b5c0476fbab833f166ef4e6fea5e3379a6c893f6dd91e63a48ab2976f1",
+    "Dim4/profile.png": "0a771d96ad026dee7adc20f7613403d7657424dfbf1bbfe0017386ca7a3b5c46",
+    "Peek1/profile.png": "f5781fe087d964fdf8a0e18dc6b24685a1a31951a948e0e3e84d82285e4d7f36"
+  },
+  "limits": [
+    "The initial restarted town capture shows its upper scroll area; native control events separately verify Continue Rift.",
+    "Short-screen introduction clips offscreen body intentionally inside a scroll view.",
+    "Development watermark remains visible; no physical mobile touch or OS lock was exercised."
+  ]
+}

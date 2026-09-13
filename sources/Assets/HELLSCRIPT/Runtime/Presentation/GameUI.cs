@@ -132,6 +132,7 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
+            if(page!="battle")game.ExitIdle();
             ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();
             ApplyScaler(root.parent.GetComponent<CanvasScaler>(),battle||responsive);
             if(Page=="build"&&content!=null)buildScrollOffset=content.anchoredPosition.y;
@@ -222,7 +223,7 @@ namespace Hellscript
         static void Fill(Image image,float ratio){var r=image.rectTransform;r.anchorMax=new Vector2(Mathf.Clamp01(ratio),1);r.offsetMin=r.offsetMax=Vector2.zero;}
         public void RefreshHud()
         {
-            if(Page!="battle"||game.Combat==null||hpText==null)return;var r=game.Combat.State;var stats=game.Combat.Stats;
+            if(game.DisplayDimmed||Page!="battle"||game.Combat==null||hpText==null)return;var r=game.Combat.State;var stats=game.Combat.Stats;
             RefreshGrowthHud();
             Fill(hpFill,r.health/stats.hp);Fill(resourceFill,r.resource/Mathf.Max(1,stats.maxResource));Fill(meterFill,r.meter/100f);
             hpText.text=Loc.F("HP {0:0} / {1:0}{2} · 상세", Mathf.Max(0,r.health), stats.hp, (r.shield>0?$"  +{r.shield:0}":""));resourceText.text=Loc.F("자원 {0:0} / {1:0}", r.resource,stats.maxResource);
@@ -428,6 +429,7 @@ namespace Hellscript
         }
         void Confirm(string message,Action action)
         {
+            game.ExitIdle();
             var modal=Box("Confirm",root,new Color(0,0,0,.83f));Stretch(modal);var card=Box("Dialog",modal,panel);card.anchorMin=new Vector2(.08f,.35f);card.anchorMax=new Vector2(.92f,.65f);card.offsetMin=card.offsetMax=Vector2.zero;
             var text=Label(card,message,25,pale,TextAnchor.MiddleCenter);text.rectTransform.anchorMin=new Vector2(.06f,.35f);text.rectTransform.anchorMax=new Vector2(.94f,.94f);text.rectTransform.offsetMin=text.rectTransform.offsetMax=Vector2.zero;
             var cancel=Button(card,"취소",()=>Destroy(modal.gameObject));var ok=Button(card,"확인",()=>{Destroy(modal.gameObject);action();},new Color(.45f,.28f,.12f));
@@ -435,12 +437,17 @@ namespace Hellscript
         }
         public void ShowToast(string text)
         {
+            if(game.DisplayDimmed){RefreshIdleSummary(true);return;}
             if(toast==null)return;toast.text=Loc.T(text);toastTime=5;toastFrame.gameObject.SetActive(!string.IsNullOrEmpty(text));overlay.SetAsLastSibling();
             if(Page=="battle"){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
             Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
         }
         void Update()
         {
+            if(game.DisplayDimmed){RefreshIdleSummary();return;}
+            if(idleIntroductionOpen)ReflowIdleIntroduction();
+            using var sample=PresentationMetrics.UI.Auto();
+            PresentationMetrics.HudCalls++;
             bool commonWasOpen=CommonPanelOpen;
             UpdatePresetDialog();
             UpdateCommonPanel();

@@ -26,7 +26,7 @@ namespace Hellscript
         Text languageMessage;
         RectTransform languageChoiceRow;
         DeviceScreenDirection screenDraft;
-        public bool CommonPanelOpen => commonModal != null;
+        public bool CommonPanelOpen => commonModal != null || idleIntroductionOpen;
         public bool BlocksRepeat => runeSession || CommonPanelOpen || presetModal != null || root != null && root.Find("Confirm") != null;
 
         public void ShowScreenSettings() => ShowCommonPanel(false);
@@ -34,6 +34,7 @@ namespace Hellscript
         void ShowHelp() => ShowCommonPanel(true);
         void ShowCommonPanel(bool help)
         {
+            game.ExitIdle();
             if (commonModal != null) { SelectCommonTab(help); return; }
             commonPreviousSelection = EventSystem.current?.currentSelectedGameObject;
             EventSystem.current?.SetSelectedGameObject(null);

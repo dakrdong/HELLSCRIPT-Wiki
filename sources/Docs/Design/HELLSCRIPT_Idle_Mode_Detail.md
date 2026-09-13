@@ -1,9 +1,15 @@
 # HELLSCRIPT 절전 방치 모드 상세 기획
 
 작성일: 2026-09-09  
-버전: v0.2  
-문서 상태: 후속 구현을 위한 검토안이다. 2026-09-09 배속 잠금·향후 해금 정책을 반영했으며, 새 화면·전환 시간·성능 목표는 구현과 실기기 검증 전의 제안이다.  
+버전: v0.3
+
+문서 상태: 2026-09-13 데스크톱 구현·검증 기록을 연결했다. 아래 설계의 전력·발열·전환 지연 목표와 Android 정책은 실기기 검증 전의 제안이며, 기능 전체의 완료를 뜻하지 않는다.
+
 적용 대상: 앱을 켜 둔 상태에서 실제 균열 사냥을 계속하면서 배터리 소모를 줄이고, 언제든 현재 전투를 확인하는 기능이다.
+
+**2026-09-13 구현 범위:** 절전 화면과 잠깐 보기를 실제 전투·자동 반복·저장 복구에 연결했습니다. 전체 검사 2,471개와 최종 앱의 실행·재시작 검사가 통과했으며 화면 13장을 검토했습니다. 같은 최종 빌드의 절전 측정 3회에서 전투는 계속되고 월드·타격 효과·일반 HUD 갱신은 0회였습니다. Android 전력·발열·실제 터치와 플랫폼별 중단 처리는 후속 작업입니다. [개발·검증 기록](../Implementation/Idle_Display.md)
+
+English: Idle display and peek now preserve live combat, repetition and save recovery. All 2,471 tests and final native initial/restart checks passed; 13 screenshots were reviewed. Three dimmed captures of the same final build continued combat with zero world, transient-effect or normal HUD updates. Android power/thermal/touch and platform interruption work remains. [English record](../Implementation/Idle_Display.en.md)
 
 ## 1. 목표와 설계 방향
 

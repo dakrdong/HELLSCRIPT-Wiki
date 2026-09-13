@@ -48,12 +48,13 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
+            presentedRunId=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
         {
-            ClearDungeon();world=new GameObject("Rift Runtime");
+            ClearDungeon();presentedRunId=run.id;world=new GameObject("Rift Runtime");
             if(!run.layout.legacy){BuildGeneratedGeometry(run);BuildObjectives(run);BuildGates(run);BuildObjectiveChains(run);}
             else
             {
@@ -108,13 +109,18 @@ namespace Hellscript
         Vector3 CameraPosition(Vector2 p) => Position(p)+new Vector3(12,25,-18);
         public void Present(RunState run,float dt)
         {
+            if(presentationSuspended||world==null)return;
+            using var sample=PresentationMetrics.World.Auto();
+            PresentationMetrics.WorldCalls++;
             if(world==null)return;bool frozen=run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError);elapsed+=frozen?0:dt*game.EffectiveSpeed;
             PresentExploredGeometry(run);
             Vector3 hp=Position(run.position)+Vector3.up*game.Combat.HeroAirHeight;Vector3 movement=hp-hero.transform.position;movement.y=0;
-            hero.transform.position=Vector3.Lerp(hero.transform.position,hp,Mathf.Min(1,dt*22));
-            if(movement.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(movement),dt*14);
+            hero.transform.position=snapPresentation?hp:Vector3.Lerp(hero.transform.position,hp,Mathf.Min(1,dt*22));
+            var currentFacing=CurrentHeroFacing(run);
+            if(snapPresentation&&currentFacing.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.LookRotation(currentFacing);
+            else if(movement.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(movement),dt*14);
             var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(movement.sqrMagnitude>.001f?Mathf.Sin(elapsed*13)*.08f:0),0);
-            viewCamera.transform.position=Vector3.Lerp(viewCamera.transform.position,CameraPosition(run.position),dt*5);
+            viewCamera.transform.position=snapPresentation?CameraPosition(run.position):Vector3.Lerp(viewCamera.transform.position,CameraPosition(run.position),dt*5);
             ApplyBattleViewport();
             foreach(var enemy in run.enemies)
             {
@@ -128,7 +134,7 @@ namespace Hellscript
                  Shape("Health",PrimitiveType.Cube,actor.transform,new Vector3(0,2.65f,0),new Vector3(1,.1f,.1f),red);}
                 if(enemy.boss&&actor.transform.Find("Stagger")==null){var ring=Ring(actor.transform,Vector3.up*.12f,1.1f,blue,.09f);ring.name="Stagger";}
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
-                actor.SetActive(true);actor.transform.position=Vector3.Lerp(actor.transform.position,Position(enemy.position),Mathf.Min(1,dt*20));
+                actor.SetActive(true);actor.transform.position=snapPresentation?Position(enemy.position):Vector3.Lerp(actor.transform.position,Position(enemy.position),Mathf.Min(1,dt*20));
                 Vector3 facing=Position(enemy.brain.facing);facing.y=0;if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
                 actor.transform.GetChild(0).localRotation=Quaternion.Euler(enemy.brain.action.phase==EnemyActionPhase.Charging?25:enemy.brain.action.phase==EnemyActionPhase.Preparing?-12:0,0,0);
                 var bar=actor.transform.Find("Health");bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);
@@ -158,6 +164,9 @@ namespace Hellscript
         }
         public void Effect(Vector2 origin,Vector2 target,int kind,float amount)
         {
+            if(presentationSuspended||world==null)return;
+            using var sample=PresentationMetrics.Effect.Auto();
+            PresentationMetrics.EffectCalls++;
             if(world==null)return;
             var run=game.Combat.State;
             if(kind==30||kind==31||kind==32){if(!CanDisplayEnemyMarker(run,origin))return;}
@@ -175,7 +184,7 @@ namespace Hellscript
         void LateUpdate()=>ApplyBattleViewport();
         void ApplyBattleViewport()
         {
-            if(viewCamera==null)return;
+            if(viewCamera==null||presentationSuspended)return;
             var viewport=game.UI!=null&&game.UI.Page=="battle"?game.UI.BattleViewport:new Rect(0,0,1,1);
             viewCamera.rect=viewport;viewCamera.ResetAspect();
             viewCamera.orthographicSize=BattleHudLayout.CameraHalfHeight(viewCamera.aspect,game.UI!=null?game.UI.BattleViewHeight:Screen.height);
