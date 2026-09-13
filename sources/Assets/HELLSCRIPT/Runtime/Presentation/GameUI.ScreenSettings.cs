@@ -27,7 +27,7 @@ namespace Hellscript
         RectTransform languageChoiceRow;
         DeviceScreenDirection screenDraft;
         public bool CommonPanelOpen => commonModal != null;
-        public bool BlocksRepeat => CommonPanelOpen || presetModal != null || root != null && root.Find("Confirm") != null;
+        public bool BlocksRepeat => runeSession || CommonPanelOpen || presetModal != null || root != null && root.Find("Confirm") != null;
 
         public void ShowScreenSettings() => ShowCommonPanel(false);
         public void ShowCombatOverview() { ShowCommonPanel(false); SelectCombatTab(); }

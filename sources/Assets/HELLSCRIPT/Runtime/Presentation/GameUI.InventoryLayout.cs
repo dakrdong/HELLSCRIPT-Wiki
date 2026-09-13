@@ -114,7 +114,7 @@ namespace Hellscript
             foreach(var row in inventoryDetailRows.Concat(inventoryComparisonRows)){if(row!=null){row.gameObject.SetActive(false);Destroy(row.gameObject);}}
             inventoryDetailRows.Clear();inventoryComparisonRows.Clear();
             var a=game.Store.Data;var hero=a.Hero;var item=InventorySelected;
-            var stats=new HeroStats(hero);InventoryNote(inventoryDetail.content,Loc.F("현재 캐릭터 · HP {0:0} · 공격 기준 {1:0.0} · 방어도 {2:0}", stats.hp, stats.damage, stats.armor),18,muted);
+            var stats=new HeroStats(hero,false,game.Store.Data.runes);InventoryNote(inventoryDetail.content,Loc.F("현재 캐릭터 · HP {0:0} · 공격 기준 {1:0.0} · 방어도 {2:0}", stats.hp, stats.damage, stats.armor),18,muted);
             if(item==null)InventoryNote(inventoryDetail.content,"목록에서 장비를 선택하면 접두·접미와 장착 중인 장비를 비교할 수 있습니다.",22,gold);
             else
             {

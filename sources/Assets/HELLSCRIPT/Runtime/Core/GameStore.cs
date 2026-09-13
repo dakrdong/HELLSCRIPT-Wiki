@@ -66,6 +66,7 @@ namespace Hellscript
         }
         static void Normalize(AccountSave a)
         {
+            RuneGrowth.Normalize(a);
             a.speed=CombatSpeedAccess.Resolve(a.speed);
             ItemAcquisition.NormalizeCounter(a);
             FirstPlayGuide.Normalize(a);
@@ -156,7 +157,7 @@ namespace Hellscript
                 h.edict=HuntEdictV2Storage.CreateForHero(h);
                 var w=Economy.CreateItem(h.heroClass,0,0,1,ref rng);w.baseId=new[]{"B02","B05","B08"}[i];w.baseIndex=i*3+1;w.name=w.DisplayName;w.equipped=true;ItemAcquisition.Stamp(a,w);h.inventory.Add(w);a.heroes.Add(h);
             }
-            return a;
+            RuneGrowth.Normalize(a);return a;
         }
         void SettleLocalIdle()
         {

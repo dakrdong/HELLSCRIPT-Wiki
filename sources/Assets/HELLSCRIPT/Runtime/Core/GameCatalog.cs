@@ -126,6 +126,7 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public RuneGrowthState runes=new RuneGrowthState();
         public ContentUnlockState contentUnlocks=new ContentUnlockState();
         public AccountGuide guide=new AccountGuide();
         public int schema=2, selectedHero, gold, materials, sweepCount;
@@ -201,6 +202,8 @@ namespace Hellscript
     [Serializable]
     public sealed class DamageSnapshot
     {
+        public float[] runeSkillPower;
+        public float[] runeBonuses;
         public float damage, bonus, crit, critDamage;
         public int level;
         public float[] elements;
@@ -229,6 +232,7 @@ namespace Hellscript
         public EdictLandingPreference edictLandingPreference;
         public EdictTargetState edictTarget;
         public CombatStatistics statistics;
+        public int runesAwarded;
         public int pendingExperience;
         public List<GrowthEvent> growthEvents=new List<GrowthEvent>();
         public float enemySlowTime;

@@ -195,6 +195,7 @@ namespace Hellscript
             BigButton(content,"사냥 칙령 v0.2 편집",ShowEdictEditor);
             BigButton(content,"사냥 칙령 공유 · v0.2 사용",()=>{ClearEdictShare();ShowEdictShare();});
             BigButton(content,"성장과 스킬",ShowGrowth);
+            BigButton(content,"룬 성장",ShowRunes);
             BigButton(content,"장비 · 대장간 · 창고",()=>ShowBag());
             ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
             BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);
@@ -249,7 +250,7 @@ namespace Hellscript
         {
             if(!RequireContent(ContentUnlocks.Train))return;
             pageRepaint=()=>ShowTraining();Base("training","훈련장","현재 캐릭터로 60전투초 동안 시험합니다");
-            var hero=game.Store.Data.Hero;var stats=new HeroStats(hero);
+            var hero=game.Store.Data.Hero;var stats=new HeroStats(hero,false,game.Store.Data.runes);
             Note(content,Loc.F("{0} Lv.{1} · 현재 장비와 해금한 스킬\nHP {2:0} · 공격 기준 {3:0.0}", game.catalog.classNames[(int)hero.heroClass], hero.level, stats.hp, stats.damage),22,92,pale);
             Note(content,"현재 상태의 복사본으로 실행합니다. XP·재화·장비는 바뀌지 않으며, 훈련 설정은 슬롯 저장을 선택할 때만 남습니다.",20,114);
             BigButton(content,"01  단일 적 · 스킬 순환",()=>game.Begin(0),true);
@@ -372,6 +373,7 @@ namespace Hellscript
             var card=Row(content,250);var t=Label(card,summary,27,pale);Inset(t.rectTransform,24,24,18,18);
             if(r.training>=0)Note(content,"훈련 결과입니다. 실제 계정 보상은 지급하지 않습니다.",21,70,gold);
             else Note(content,Loc.F("상자 개봉 {0} / {1}개\n미개봉 상자 보상은 다음 판으로 이월되지 않습니다.", r.layout.chests.Count(c=>c.phase==ChestPhase.Opened), r.layout.chests.Count),21,92,gold);
+            if(r.runesAwarded>0)Note(content,Loc.F("룬 {0}개 획득 · 룬 성장에서 배치할 수 있습니다.",r.runesAwarded),21,70,gold);
             if(r.training<0)ObjectiveResult(RiftObjectives.Capture(r));
             if(r.training<0&&r.phase==RunPhase.Failed&&r.health<=0)BigButton(content,"사망 원인 분석 (최근 5초 기록)",ShowDefeatAnalysis,true);
             if(game.Combat.OwnedTraining)BigButton(content,"시험한 설정을 슬롯에 저장",ShowTrainingPresetSave);
@@ -445,6 +447,7 @@ namespace Hellscript
             ReflowInventory();
             ReflowBattleHud();
             ReflowEdictRows();
+            ReflowRunes();
             if(commonWasOpen||CommonPanelOpen)return;
             hudClock+=Time.unscaledDeltaTime;if(hudClock>.15f){hudClock=0;RefreshHud();}
             RefreshGuideHint();

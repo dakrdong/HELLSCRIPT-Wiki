@@ -48,7 +48,7 @@ namespace Hellscript
             if(item.equipped)return;
             string error=Economy.EquipError(hero,item);if(error!=""){Note(content,Loc.F("장착 조건: {0}", error),20,70,gold);return;}
             var copy=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(hero));var candidate=copy.inventory.Find(i=>i.id==item.id);var old=hero.inventory.Find(i=>i.equipped&&i.slot==item.slot);
-            var before=new HeroStats(hero);Economy.Equip(copy,candidate);var after=new HeroStats(copy);
+            var before=new HeroStats(hero,false,game.Store.Data.runes);Economy.Equip(copy,candidate);var after=new HeroStats(copy,false,game.Store.Data.runes);
             Note(content,Loc.F("교체 후 전체 능력치\n현재: {0}", (old?.DisplayName??"빈 부위")),22,94,gold);
             CompareStat("최대 HP",before.hp,after.hp);CompareStat("공격 기준",before.damage,after.damage);CompareStat("방어도",before.armor,after.armor);CompareStat("비물리 저항",before.resistance,after.resistance);
             CompareStat("치명 확률 %",before.crit*100,after.crit*100);CompareStat("치명 피해 %",before.critDamage*100,after.critDamage*100);
@@ -100,7 +100,7 @@ namespace Hellscript
         void ShowItemCollection()
         {
             var a=game.Store.Data;var h=a.Hero;pageRepaint=()=>ShowItemCollection();Base("collection","전설·세트 도감",Loc.F("{0} 전용 장비와 공용 장비", game.catalog.classNames[(int)h.heroClass]));
-            var all=a.heroes.SelectMany(hero=>hero.inventory).Concat(a.warehouse).ToArray();var stats=new HeroStats(h);
+            var all=a.heroes.SelectMany(hero=>hero.inventory).Concat(a.warehouse).ToArray();var stats=new HeroStats(h,false,game.Store.Data.runes);
             foreach(var set in ItemCatalog.Sets.Where(s=>s.heroClass==h.heroClass))
             {
                 var owned=all.Where(i=>ItemCatalog.Unique(i.special)?.setId==set.id).Select(i=>i.slot).Distinct().Count();

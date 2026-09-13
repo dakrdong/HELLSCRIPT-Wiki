@@ -66,7 +66,7 @@ namespace Hellscript
                 {
                     Cycle(content,"설치 위치",new[]{"목표 위치","무리 중심","자신 아래","관측한 이동 경로"},(int)rule.areaAim,i=>{rule.areaAim=(AreaAim)i;RenderBuild();});
                     if(rule.areaAim==AreaAim.ObservedPath)Note(content,"관측한 이동 방향으로 0.75초 앞을 조준합니다.\n관측이 없거나 오래되면 현재 목표 위치를 사용합니다.",18,82,pale);
-                    if(rule.skill==13&&(game.Active?game.Combat.Stats:new HeroStats(EditingHero)).specials.Contains("LM01"))
+                    if(rule.skill==13&&(game.Active?game.Combat.Stats:new HeroStats(EditingHero,false,game.Store.Data.runes)).specials.Contains("LM01"))
                         Cycle(content,"눈보라 이동",new[]{"목표 추적","생성 위치 고정"},(int)rule.blizzardMode,i=>{rule.blizzardMode=(BlizzardMode)i;RenderBuild();});
                     Note(content,"설치 위치는 준비 시작에 결정합니다.\n이미 생성된 장판은 이후 설정 변경의 영향을 받지 않습니다.",18,82,pale);
                 }

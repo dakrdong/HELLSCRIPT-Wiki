@@ -25,6 +25,11 @@ namespace Hellscript
         public float damageReduction, closeReduction, distantReduction, injuredReduction, physicalReduction;
         public float lifeRegen, potionHealing, ccReduction, experienceGain, goldFind;
         public float maxResource, maxStamina, staminaRegen;
+        public float[] runeBonuses=new float[StatCatalog.Count];
+        public float runeAttack;
+        public float[] runeSkillPower=new float[18],runeSkillCost=new float[18];
+        public int[] runeSkillLevels=new int[18];
+        public int SkillLevel(int index,bool learned)=>learned?1+runeSkillLevels[index]:0;
         public float[] bonuses=new float[StatCatalog.Count];
         public HashSet<string> specials=new HashSet<string>();
         readonly Dictionary<string,HashSet<int>> sets=new Dictionary<string,HashSet<int>>();
@@ -93,7 +98,7 @@ namespace Hellscript
                 default: return Bonus(id);
             }
         }
-        public HeroStats(HeroSave hero, bool training=false)
+        public HeroStats(HeroSave hero, bool training=false,RuneGrowthState runes=null)
         {
             int level=training?30:hero.level; int c=(int)hero.heroClass;
             foreach(int p in hero.build.passives) if(p>=0&&p<6)passives[p]=true;
@@ -106,6 +111,8 @@ namespace Hellscript
                 if(unique!=null&&!string.IsNullOrEmpty(unique.setId))
                 {if(!sets.TryGetValue(unique.setId,out var slots))sets[unique.setId]=slots=new HashSet<int>();slots.Add(item.slot);}
             }
+            foreach(var effect in RuneGrowth.Contributions(runes,Hellscript.Runes.RuneMasteryCatalog.EquippedWeapon(hero)))
+            {if(effect.Meaning=="AttackPower")runeAttack+=effect.Value;else if(Hellscript.Runes.RuneMasteryCatalog.IsSkill(effect.Meaning)){int skill=Hellscript.Runes.RuneMasteryCatalog.SkillIndex(effect.Meaning);if(effect.Meaning.StartsWith("SkillLevel:"))runeSkillLevels[skill]=Mathf.Min(5,runeSkillLevels[skill]+(int)effect.Value);else if(effect.Meaning.StartsWith("SkillCost:"))runeSkillCost[skill]=Mathf.Min(30,runeSkillCost[skill]+effect.Value);else runeSkillPower[skill]=Mathf.Min(60,runeSkillPower[skill]+effect.Value);}else {int stat=(int)Enum.Parse<StatId>(effect.Meaning);bonuses[stat]+=effect.Value;runeBonuses[stat]+=effect.Value;}}
             float primary=30+2*(level-1)+bonuses[10+c]+bonuses[14];
             float str=(c==0?30+2*(level-1):10+level-1)+bonuses[10]+bonuses[14];
             float dex=(c==1?30+2*(level-1):10+level-1)+bonuses[11]+bonuses[14];
@@ -125,7 +132,7 @@ namespace Hellscript
                 resistance+=basis.resistance*(1+.08f*(item.level-1));
             }
             hp=(new[]{300,240,210}[c]+new[]{35,28,25}[c]*(level-1)+flatHp)*(1+bonuses[1]/100);
-            damage=weapon*(1+.002f*primary);attackPower=damage;
+            damage=(weapon+runeAttack)*(1+.002f*primary);attackPower=damage;
             regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1.2f;
             baseSpeed=new[]{4f,4.4f,4f}[c];speed=SpeedWithBonus(0);
             pickup=Mathf.Min(6,1.5f+bonuses[22]+(specials.Contains("LC01")?2.5f:0));

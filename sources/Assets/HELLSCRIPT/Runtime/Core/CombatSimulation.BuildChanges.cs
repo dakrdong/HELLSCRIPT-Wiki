@@ -28,7 +28,7 @@ namespace Hellscript
         {
             if(State.training<0)return Stats;
             var hero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));hero.build=candidate;
-            return new HeroStats(hero,FullSkillTraining);
+            return new HeroStats(hero,FullSkillTraining,account.runes);
         }
         // This transition has no external callbacks, I/O, time reads, or random draws.
         // Both preflight and adoption use it, preserving existing object/navigation ownership.

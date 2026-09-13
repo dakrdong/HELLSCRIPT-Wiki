@@ -24,7 +24,7 @@ namespace Hellscript
         // target and lets gear raise it, which is exactly what Stats.vulnerable holds.
         float AttackBonus(EnemyState enemy,int element,DamageSnapshot snap,float extra,DamageKind kind=DamageKind.Direct)
         {
-            float bonus=snap.elements[element]+snap.bonus+(CombatEffects.Has(enemy,StatusKind.Mark)?Stats.vulnerable/100:0)+extra+ConditionalBonus(enemy,kind);
+            float bonus=snap.elements[element]+snap.bonus+(CombatEffects.Has(enemy,StatusKind.Mark)?(Stats.vulnerable-Stats.Bonus(StatId.VulnerableDamage)+RuneSnapshotBonus(StatId.VulnerableDamage,snap))/100:0)+extra+ConditionalBonus(enemy,kind,snap);
             // Round the threshold to stored HP precision; Mono can otherwise retain extra intermediate precision.
             if(Hero.heroClass==HeroClass.Warrior)
             {if(snap.passives[0]&&(snap.crowdCaptured?snap.crowdQualified:CountNear(State.position,3)>=3))bonus+=.15f;if(snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f))bonus+=.2f;}
@@ -47,6 +47,8 @@ namespace Hellscript
         {
             if(enemy==null||enemy.dead)return null;
             var snap=snapshot??CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
+            int masterySkill=definition.Length==3&&definition[0]=='W'?int.Parse(definition.Substring(1))-1:definition.Length==3&&definition[0]=='A'?int.Parse(definition.Substring(1))+5:definition.Length==3&&definition[0]=='M'?int.Parse(definition.Substring(1))+11:-1;
+            if(masterySkill>=0&&masterySkill<18&&snap.runeSkillPower!=null&&snap.runeSkillPower.Length==18)coefficient*=1+snap.runeSkillPower[masterySkill]/100;
             float crit=snap.crit+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?.1f:0);
             bool critical=canCrit&&RandomStream.Unit(ref State.rng)<Mathf.Min(.75f,crit);
             if(!enemy.boss&&enemy.kind==6&&enemy.brain.rearWindow>0&&(kind==DamageKind.Direct||kind==DamageKind.Basic)&&Vector2.Angle(-enemy.brain.facing,(origin??State.position)-enemy.position)<=60)extraBonus+=.25f;

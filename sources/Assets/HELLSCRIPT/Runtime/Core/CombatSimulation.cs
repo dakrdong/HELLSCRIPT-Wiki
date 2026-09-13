@@ -46,7 +46,7 @@ namespace Hellscript
             State.growthEvents??=new List<GrowthEvent>();
             BehaviorRules.Normalize(State.build);
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;
-            Stats=new HeroStats(statsHero,FullSkillTraining);
+            Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
             PrepareEdict();
             InitializeRift(restore==null,forcedObjective);
             if(Hero.heroClass==HeroClass.Mage||Hero.heroClass==HeroClass.Warrior)EnsureShieldEngagement();
@@ -176,7 +176,7 @@ namespace Hellscript
         public bool InDanger => DangerAt(State.position,1.5f);
         float Cost(SkillDefinition skill,bool withoutConsumables=false)
         {
-            float reduction=Stats.costReduction+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?.25f:0);
+            float reduction=Stats.costReduction+Stats.runeSkillCost[catalog.skills.IndexOf(skill)]/100+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?.25f:0);
             if(skill.kind==SkillKind.Whirlwind){if(Stats.passives[1]&&State.channelTime>=2-.00001f)reduction+=.2f;if(Stats.SetPieces("SW")>=2)reduction+=.15f;}
             if(skill.kind==SkillKind.Blizzard&&Stats.SetPieces("SM")>=2)reduction+=.2f;
             if(skill.kind==SkillKind.Pierce&&Stats.SetPieces("SAB")>=2||skill.kind==SkillKind.Chain&&Stats.SetPieces("SMB")>=2)reduction+=.15f;
@@ -359,7 +359,7 @@ namespace Hellscript
             var targets=AreaTargets(pos,radius,direction,arc);var snapshot=CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             foreach(var e in targets)Hit(e,coefficient,element,procs,0,snapshot,definition:definition,root:root,kind:kind);return targets.Length;
         }
-        DamageSnapshot CaptureDamage()=>new DamageSnapshot{damage=Stats.damage,bonus=(State.shoutTime>0?.2f:0)+(elementBuff>0?.1f:0),crit=Stats.crit,critDamage=Stats.critDamage,
+        DamageSnapshot CaptureDamage()=>new DamageSnapshot{runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?.2f:0)+(elementBuff>0?.1f:0),crit=Stats.crit,critDamage=Stats.critDamage,
             level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),
             crowdCaptured=Hero.heroClass==HeroClass.Warrior,crowdQualified=Hero.heroClass==HeroClass.Warrior&&CountNear(State.position,3)>=3};
         void Deal(EnemyState e,float damage,bool critical)
@@ -477,6 +477,7 @@ namespace Hellscript
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);account.gold+=Gold(1000+100*State.stage);account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
             for(int i=0;i<3;i++)Drop(State.position+new Vector2(i-1,1),RiftRarity.Roll(RiftRewardSource.Boss,State.stage,ref State.rewardRng));
+            RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);
             Log("BOSS_CLEAR","보스 처치 · 전리품 정리");
         }

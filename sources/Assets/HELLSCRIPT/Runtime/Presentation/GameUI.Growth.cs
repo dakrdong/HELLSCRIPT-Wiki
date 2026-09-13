@@ -31,13 +31,16 @@ namespace Hellscript
             var hero=combat?.Hero??game.Store.Data.Hero;var build=run?.build??hero.build;int level=combat?.EffectiveLevel??hero.level;
             if(run==null||run.training<0)game.RecordGuide(()=>FirstPlayGuide.ReadBuild(hero));
             pageRepaint=()=>ShowGrowth();Base("growth","성장과 스킬",Loc.F("{0} Lv.{1} · 현재 장비와 행동을 확인합니다", game.catalog.classNames[(int)hero.heroClass], level));
+            BigButton(content,"룬 성장",()=>{if(run!=null)run.paused=paused;ShowRunes();});
             Note(content,run?.training>=0?"훈련 복사본입니다. 실제 XP와 성장에는 반영하지 않습니다.":level>=30?"최대 레벨에 도달했습니다.":Loc.F("다음 레벨까지 XP {0:N0} / {1:N0}", hero.xp, Economy.XpRequired(level)),22,82,gold);
             Note(content,"스킬을 배워도 장착과 꺼 둔 규칙은 자동으로 바뀌지 않습니다. 사용할 설정은 행동 설계에서 직접 확인해 주세요.",20,106,pale);
             for(int n=(int)hero.heroClass*6;n<(int)hero.heroClass*6+6;n++)
             {
                 var skill=game.catalog.skills[n];bool learned=skill.unlock<=level;int enabled=build.rules.Count(r=>r.action==RuleAction.Skill&&r.skill==n&&r.enabled);
                 string state=!learned?Loc.F("Lv.{0} 해금 예정", skill.unlock):!build.activeSkills.Contains(n)?"배움 · 장착하지 않음":enabled==0?"장착됨 · 켜진 규칙 없음":Loc.F("장착됨 · 켜진 규칙 {0}개", enabled);
+                var runeStats=combat?.Stats??new HeroStats(hero,false,game.Store.Data.runes);
                 Note(content,Loc.F("{0}\n{1}",skill.name,state),21,78,learned?pale:muted);
+                if(runeStats.runeSkillLevels[n]>0||runeStats.runeSkillPower[n]>0||runeStats.runeSkillCost[n]>0)Note(content,Loc.F("룬 마스터리 · 스킬 Lv.{0} · 추가 피해 {1:0.#}% · 자원 소모 감소 {2:0.#}%",runeStats.SkillLevel(n,learned),runeStats.runeSkillPower[n]+runeStats.runeSkillLevels[n]*10,runeStats.runeSkillCost[n]),19,76,gold);
             }
             if(run!=null)foreach(var change in run.growthEvents.AsEnumerable().Reverse().Take(3))
                 Note(content,Loc.F("{0:0.0}초 · Lv.{1} → {2}\nHP {3:0.0}/{4:0.0} → {5:0.0}/{6:0.0}{7}", change.time, change.fromLevel, change.toLevel, change.healthBefore, change.oldMaxHp, change.healthAfter, change.newMaxHp, (change.unlockedSkills.Count>0?Loc.F("\n해금: {0}", string.Join(", ",change.unlockedSkills.Select(i=>game.catalog.skills[i].name))):"")),20,112,gold);
