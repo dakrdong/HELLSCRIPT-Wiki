@@ -50,6 +50,7 @@ namespace Hellscript
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
             PrepareEdict();
             InitializeRift(restore==null,forcedObjective);
+            RiftVisibility.Initialize(State,Map,restore!=null);
             if(Hero.heroClass==HeroClass.Mage||Hero.heroClass==HeroClass.Warrior)EnsureShieldEngagement();
             if(restore==null)
             {
@@ -124,11 +125,11 @@ namespace Hellscript
         public void Tick(float dt)
         {
             if(State.paused||State.portal||!string.IsNullOrEmpty(State.navigationError)||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;
-            if(State.phase==RunPhase.Looting){CommitExperience();Loot(dt);return;}
+            if(State.phase==RunPhase.Looting){CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
             float observedTime=State.time,observedHealth=State.health;
-            try{TickCombat(dt);}finally{RecordTickTelemetry(State.time-observedTime,observedHealth);CaptureCompletedReview();}
+            try{TickCombat(dt);}finally{RecordTickTelemetry(State.time-observedTime,observedHealth);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();}
         }
         void TickCombat(float dt)
         {

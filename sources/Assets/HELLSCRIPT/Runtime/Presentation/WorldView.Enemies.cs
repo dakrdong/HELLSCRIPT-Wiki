@@ -12,7 +12,7 @@ namespace Hellscript
             active.Add(key);
             if(!enemyThreatViews.TryGetValue(key,out var go))
             {go=new GameObject(key);go.transform.SetParent(world.transform,false);var line=go.AddComponent<LineRenderer>();line.useWorldSpace=true;enemyThreatViews[key]=go;}
-            var renderer=go.GetComponent<LineRenderer>();renderer.sharedMaterial=material;renderer.widthMultiplier=width;renderer.positionCount=points.Length;
+            var renderer=go.GetComponent<LineRenderer>();renderer.sharedMaterial=RiftMaterial(material);renderer.widthMultiplier=width;renderer.positionCount=points.Length;
             for(int i=0;i<points.Length;i++)renderer.SetPosition(i,Position(points[i])+Vector3.up*.19f);
         }
         void PresentEnemyCombat(RunState run)

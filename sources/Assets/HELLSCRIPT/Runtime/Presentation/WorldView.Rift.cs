@@ -65,8 +65,9 @@ namespace Hellscript
                 Vector3 size=o.radius>0?new Vector3(o.radius*2,o.height*.5f,o.radius*2):new Vector3(o.halfSize.x*2,o.height,o.halfSize.y*2);
                 var owner=layout.rooms.FirstOrDefault(room=>room.Bounds.Contains(o.position));
                 var parent=owner!=null&&roomGeometry.TryGetValue(owner.index,out var group)?group.transform:world.transform;
-                Shape(o.kind,type,parent,Position(o.position)+Vector3.up*o.height*.5f,size,material);
-                if(o.kind=="Brazier")Shape("Brazier light",PrimitiveType.Sphere,parent,Position(o.position)+Vector3.up*(o.height+.25f),new Vector3(.45f,.5f,.45f),ember);
+                var obstacleView=Shape(o.kind,type,parent,Position(o.position)+Vector3.up*o.height*.5f,size,material);
+                riftFog?.ObserveObstacle(obstacleView.GetComponent<Renderer>(),o);
+                if(o.kind=="Brazier"){var glow=Shape("Brazier light",PrimitiveType.Sphere,parent,Position(o.position)+Vector3.up*(o.height+.25f),new Vector3(.45f,.5f,.45f),ember);riftFog?.ObserveObstacle(glow.GetComponent<Renderer>(),o);}
             }
             foreach(var chest in layout.chests)
             {
@@ -113,14 +114,14 @@ namespace Hellscript
         {
             foreach(var c in run.layout.chests)
             {
-                if(!chestViews.TryGetValue(c.id,out var v))continue;v.root.SetActive(c.discovered&&Vector2.Distance(c.position,run.position)<25);
+                if(!chestViews.TryGetValue(c.id,out var v))continue;v.root.SetActive(c.discovered&&RiftVisibility.Get(run,game.Combat.Map).Visible(c.position));
                 float angle=c.phase==ChestPhase.Opened?-105:c.phase==ChestPhase.Opening?-8*Mathf.Sin(c.progress*20):0;
                 v.lid.localRotation=snapPresentation?Quaternion.Euler(angle,0,0):Quaternion.Slerp(v.lid.localRotation,Quaternion.Euler(angle,0,0),Mathf.Min(1,dt*14));
                 v.seal.SetActive(c.phase!=ChestPhase.Opened&&c.phase!=ChestPhase.Exhausted);
             }
             foreach(var s in run.layout.shrines)
             {
-                if(!shrineViews.TryGetValue(s.id,out var root))continue;root.SetActive(s.discovered&&Vector2.Distance(s.position,run.position)<25);
+                if(!shrineViews.TryGetValue(s.id,out var root))continue;root.SetActive(s.discovered&&RiftVisibility.Get(run,game.Combat.Map).Visible(s.position));
                 root.transform.Find("Blessing light").gameObject.SetActive(s.phase!=ShrinePhase.Used&&s.phase!=ShrinePhase.Exhausted);
             }
         }

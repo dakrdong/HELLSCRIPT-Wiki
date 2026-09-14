@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T14:59:59+09:00",
+  "generatedAt": "2026-09-14T15:19:39+09:00",
   "databases": [
     {
       "id": "resources",
@@ -3137,19 +3137,19 @@
           "id": "todo-fog-art",
           "name": "탐색 안개 경계 미술",
           "category": "제작 과제",
-          "summary": "방·통로 단위 표시의 안개 경계를 미술적으로 다듬고 실제 기기의 렌더링 비용을 측정해야 합니다.",
+          "summary": "실시간 시야와 회색 지형 기억을 구현했습니다. 안개 경계의 미술적 개선과 실제 기기의 성능 측정은 남아 있습니다.",
           "fields": {
-            "현재 표현": "생성 지형을 방별 표현 객체로 나누고 통로를 구간별로 표시하는 코드 생성 표현입니다.",
-            "현재 공백": "안개 경계의 미술적 개선과 실제 기기의 렌더링 비용 측정이 남아 있습니다.",
-            "상태 해석": "기획에 필요한 제작 과제이며 완성 자산 수에 포함하지 않습니다."
+            "현재 표현": "실제 바닥과 차폐 판정을 공유하는 0.35m 격자의 360도 시야, 누적 탐색 마스크와 플레이어 중심 윤곽 지도를 사용합니다. 미탐색 지형은 검은색, 시야 밖의 탐색 지형은 회색이며 오브젝트는 현재 시야에서만 표시합니다.",
+            "현재 공백": "안개 경계의 미술적 개선과 모바일 실기기의 렌더링 비용 측정이 남아 있습니다.",
+            "상태 해석": "기능 구현과 별개인 후속 미술·기기 검증 과제이며 완성 이미지 자산 수에 포함하지 않습니다."
           },
           "source": {
-            "path": "Docs/Implementation/Battle_Layout_Expansion.md",
+            "path": "Docs/Implementation/Rift_Visibility_Expansion.md",
             "line": 1
           },
           "status": "제작 대기",
           "related": [
-            "battle-layout-expansion",
+            "rift-visibility-expansion",
             "resource-guide"
           ]
         }
@@ -3189,7 +3189,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 347
+              "line": 349
             }
           ],
           "related": [
@@ -3227,7 +3227,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 348
+              "line": 350
             }
           ],
           "related": [
@@ -3265,7 +3265,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 349
+              "line": 351
             }
           ],
           "related": [
@@ -3303,7 +3303,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 350
+              "line": 352
             }
           ],
           "related": [
@@ -3341,7 +3341,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 351
+              "line": 353
             }
           ],
           "related": [
@@ -3379,7 +3379,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 352
+              "line": 354
             }
           ],
           "related": [
@@ -3417,7 +3417,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 353
+              "line": 355
             }
           ],
           "related": [
@@ -3455,7 +3455,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 354
+              "line": 356
             }
           ],
           "related": [
@@ -3493,7 +3493,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 355
+              "line": 357
             }
           ],
           "related": [
@@ -3531,7 +3531,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 356
+              "line": 358
             }
           ],
           "related": [
@@ -3569,7 +3569,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 357
+              "line": 359
             }
           ],
           "related": [
@@ -3607,7 +3607,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 358
+              "line": 360
             }
           ],
           "related": [
@@ -3645,7 +3645,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 359
+              "line": 361
             }
           ],
           "related": [
@@ -3683,7 +3683,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 360
+              "line": 362
             }
           ],
           "related": [
@@ -3721,7 +3721,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 361
+              "line": 363
             }
           ],
           "related": [
@@ -3759,7 +3759,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 362
+              "line": 364
             }
           ],
           "related": [
@@ -3797,7 +3797,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 363
+              "line": 365
             }
           ],
           "related": [
@@ -3835,7 +3835,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 364
+              "line": 366
             }
           ],
           "related": [
@@ -4059,7 +4059,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 326
+            "line": 328
           },
           "status": "현재 정의",
           "related": [
@@ -4079,7 +4079,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 327
+            "line": 329
           },
           "status": "현재 정의",
           "related": [
@@ -4099,7 +4099,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 328
+            "line": 330
           },
           "status": "현재 정의",
           "related": [
@@ -4119,7 +4119,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 329
+            "line": 331
           },
           "status": "현재 정의",
           "related": [
@@ -4139,7 +4139,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 330
+            "line": 332
           },
           "status": "현재 정의",
           "related": [
@@ -4159,7 +4159,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 331
+            "line": 333
           },
           "status": "현재 정의",
           "related": [
@@ -4179,7 +4179,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 332
+            "line": 334
           },
           "status": "현재 정의",
           "related": [
@@ -4199,7 +4199,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 333
+            "line": 335
           },
           "status": "현재 정의",
           "related": [
@@ -4219,7 +4219,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 334
+            "line": 336
           },
           "status": "현재 정의",
           "related": [
@@ -4239,7 +4239,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 335
+            "line": 337
           },
           "status": "현재 정의",
           "related": [
@@ -4259,7 +4259,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 336
+            "line": 338
           },
           "status": "현재 정의",
           "related": [
@@ -4279,7 +4279,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 337
+            "line": 339
           },
           "status": "현재 정의",
           "related": [
@@ -4299,7 +4299,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 338
+            "line": 340
           },
           "status": "현재 정의",
           "related": [
@@ -4319,7 +4319,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 339
+            "line": 341
           },
           "status": "현재 정의",
           "related": [
@@ -4339,7 +4339,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 340
+            "line": 342
           },
           "status": "현재 정의",
           "related": [
@@ -4359,7 +4359,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 330
+            "line": 332
           },
           "status": "현재 정의",
           "related": [
@@ -4379,7 +4379,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 342
+            "line": 344
           },
           "status": "현재 정의",
           "related": [
@@ -4399,7 +4399,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 343
+            "line": 345
           },
           "status": "현재 정의",
           "related": [

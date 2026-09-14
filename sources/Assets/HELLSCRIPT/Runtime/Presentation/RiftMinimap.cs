@@ -8,6 +8,19 @@ namespace Hellscript
     {
         public RunState run;
         public bool expanded;
+        public RiftFogView fog;
+        Material ownedMaterial;
+        public void Configure(RunState state,RiftFogView view)
+        {run=state;fog=view;if(fog!=null){ownedMaterial=RiftAutomap.CreateMapMaterial(fog);material=ownedMaterial;}SetVerticesDirty();}
+        Vector2 lastPosition;
+        int lastRevision=-1;
+        void LateUpdate()
+        {
+            if(run==null||fog==null)return;
+            if(ownedMaterial==null){ownedMaterial=RiftAutomap.CreateMapMaterial(fog);material=ownedMaterial;}
+            if(lastPosition!=run.position||lastRevision!=fog.Visibility.Revision){lastPosition=run.position;lastRevision=fog.Visibility.Revision;SetVerticesDirty();}
+        }
+        protected override void OnDestroy(){if(ownedMaterial!=null)Destroy(ownedMaterial);base.OnDestroy();}
         Vector2 center;float scale;
         RiftLayout surfaceLayout;RiftSurface surface;
         Vector2 Point(Vector2 p)=>(p-center)*scale;
@@ -27,41 +40,13 @@ namespace Hellscript
             if(!ReferenceEquals(surfaceLayout,run.layout)){surfaceLayout=run.layout;surface=new RiftSurface(run.layout);}
             if(expanded){center=surface.Bounds.center;scale=Mathf.Min(r.width/(surface.Bounds.width+12),r.height/(surface.Bounds.height+12));}
             Color floor=new Color(.25f,.29f,.34f),gold=new Color(.96f,.67f,.3f),muted=new Color(.4f,.45f,.5f);
-            if(run.layout.rooms.Any(room=>room.outline!=null&&room.outline.Count>=3))
+            foreach(var patch in surface.patches)
             {
-                foreach(var patch in surface.patches)
-                {
-                    bool visible=patch.room>=0&&run.visited.Contains(patch.room);
-                    if(patch.corridor>=0)
-                    {
-                        var c=run.layout.corridors[patch.corridor];bool a=run.visited.Contains(c.roomA),b=run.visited.Contains(c.roomB);
-                        visible=a&&b||(a||b)&&run.phase==RunPhase.Boss&&expanded;
-                        if(!visible&&(a||b))visible=Vector2.Distance(patch.center,a?c.points[0]:c.points[c.points.Count-1])<5;
-                    }
-                    if(!visible)continue;int first=v.currentVertCount;foreach(var p in patch.points)v.AddVert(Point(p),floor,Vector2.zero);
-                    for(int n=1;n<patch.points.Length-1;n++)v.AddTriangle(first,first+n,first+n+1);
-                }
+                int first=v.currentVertCount;foreach(var p in patch.points)v.AddVert(Point(p),floor,Vector2.zero);
+                for(int n=1;n<patch.points.Length-1;n++)v.AddTriangle(first,first+n,first+n+1);
             }
-            else
-            {
-            foreach(var c in run.layout.corridors)
-            {
-                bool a=run.visited.Contains(c.roomA),b=run.visited.Contains(c.roomB);if(!a&&!b)continue;
-                if(a&&b||run.phase==RunPhase.Boss&&expanded)
-                {for(int n=1;n<c.points.Count;n++)Line(v,Point(c.points[n-1]),Point(c.points[n]),Mathf.Max(2,c.width*scale),floor);}
-                else
-                {
-                    var points=c.points;Vector2 p=a?points[0]:points[points.Count-1],next=a?points[1]:points[points.Count-2];
-                    Line(v,Point(p),Point(Vector2.MoveTowards(p,next,5)),Mathf.Max(2,c.width*scale),floor);
-                }
-            }
-            foreach(var room in run.layout.rooms)if(run.visited.Contains(room.index))
-            {
-                Rect(v,Point(room.position),room.size*scale,floor);
-            }
-            }
-            foreach(var room in run.layout.rooms.Where(room=>run.visited.Contains(room.index)))
-                foreach(var o in run.layout.obstacles.Where(o=>room.Bounds.Contains(o.position)))Rect(v,Point(o.position),(o.radius>0?Vector2.one*o.radius*2:o.halfSize*2)*scale,new Color(.08f,.1f,.13f));
+            if(fog!=null)foreach(var edge in fog.Visibility.Boundary)
+                Line(v,Point(new Vector2(edge.x,edge.y)),Point(new Vector2(edge.z,edge.w)),1.3f,new Color(.7f,.74f,.68f));
             foreach(var c in run.layout.chests.Where(c=>c.discovered))
             {
                 Vector2 p=Point(c.position);float size=expanded?7:8;
@@ -70,7 +55,7 @@ namespace Hellscript
                 if(c.phase==ChestPhase.Opened)Line(v,p-new Vector2(size*.4f,0),p+new Vector2(size*.4f,size*.4f),2,Color.white);
                 if(c.definitionId=="CH03")Line(v,p-Vector2.one*size*.5f,p+Vector2.one*size*.5f,2,new Color(1,.25f,.2f));
             }
-            foreach(var seen in run.exploration.enemies.Where(e=>e.elite>=0&&!e.investigated))
+            foreach(var seen in run.exploration.enemies.Where(e=>e.elite>=0&&!e.investigated&&run.time-e.seenAt<=.3f&&(fog==null||fog.Visibility.Visible(e.position))))
             {
                 Vector2 p=Point(seen.position);Color color=run.time-seen.seenAt>.3f?muted:new Color(.8f,.48f,1);float size=6;
                 Line(v,p+Vector2.up*size,p+Vector2.right*size,2,color);Line(v,p+Vector2.right*size,p+Vector2.down*size,2,color);
@@ -117,13 +102,16 @@ namespace Hellscript
                 Line(v,p-side*7,p-side*4,4,color);Line(v,p+side*4,p+side*7,4,color);
                 if(!run.layout.gateOpen)Line(v,p-side*4,p+side*4,3,color);
             }
-            if(run.phase==RunPhase.Boss&&(!run.layout.roamingBoss||run.enemies.Any(e=>e.id==run.bossId)))
+            if(run.phase==RunPhase.Boss&&run.enemies.Any(e=>e.id==run.bossId&&(fog==null||fog.Visibility.Visible(e.position))))
             {
                 var boss=run.enemies.Find(e=>e.id==run.bossId);Vector2 p=Point(boss!=null?boss.position:run.layout.rooms[run.layout.bossRoom].position);
                 if(!expanded)p=Vector2.ClampMagnitude(p,Mathf.Min(r.width,r.height)*.42f);
                 Line(v,p-new Vector2(6,6),p+new Vector2(6,6),3,new Color(1,.2f,.2f));Line(v,p+new Vector2(-6,6),p+new Vector2(6,-6),3,new Color(1,.2f,.2f));
             }
             Vector2 hero=Point(run.position);int index=v.currentVertCount;v.AddVert(hero+new Vector2(0,7),Color.white,Vector2.zero);v.AddVert(hero+new Vector2(-5,-4),Color.white,Vector2.zero);v.AddVert(hero+new Vector2(5,-4),Color.white,Vector2.zero);v.AddTriangle(index,index+1,index+2);
+            if(fog!=null)for(int i=0;i<v.currentVertCount;i++)
+            {var vertex=new UIVertex();v.PopulateUIVertex(ref vertex,i);var world=new Vector2(vertex.position.x,vertex.position.y)/scale+center;vertex.uv0=RiftAutomap.UV(fog.Visibility,world);v.SetUIVertex(vertex,i);}
+
         }
     }
 }

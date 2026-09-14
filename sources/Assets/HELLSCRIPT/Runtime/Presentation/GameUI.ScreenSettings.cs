@@ -47,7 +47,7 @@ namespace Hellscript
         }
         void BuildDisplayPane()
         {
-            screenPane=CommonScroll("화면 설정 본문",out var body);BuildViewDistanceControl(body);CommonNote(body,"화면 비율",24,gold);
+            screenPane=CommonScroll("화면 설정 본문",out var body);BuildViewDistanceControl(body);BuildOverlayMapControl(body);CommonNote(body,"화면 비율",24,gold);
             CommonNote(body,"비율을 선택하면 바로 적용합니다. PC에서는 창 크기를 맞추고, 모바일에서는 화면을 회전한 뒤 선택한 비율로 표시합니다.",19);aspectButtons.Clear();
             var automatic=BigButton(body,"화면에 맞춤",()=>game.ApplyAspect("auto"));automatic.name="settings-aspect-auto";aspectButtons.Add(("auto",automatic));
             for(int side=0;side<2;side++)
@@ -116,7 +116,7 @@ namespace Hellscript
             if(commonModal==null)return;
             foreach(var choice in aspectButtons)choice.button.GetComponent<Image>().color=choice.id==game.Aspect?gold*.4f:new Color(.14f,.17f,.2f);
             aspectMessage.text=Loc.T(string.IsNullOrEmpty(game.AspectMessage)?Loc.F("현재 비율 · {0}",game.Aspect=="auto"?Loc.T("화면에 맞춤"):game.Aspect):game.AspectMessage);
-            RefreshViewDistanceControl();var scale=game.InterfaceScale;scaleSlider.SetValueWithoutNotify((scale.Percent-50)/5);scaleValue.text=scale.Percent+"%";scaleMessage.text=string.IsNullOrEmpty(scale.Message)?Loc.T(game.InterfaceScaleLoadNotice):scale.Message;scaleRetry.gameObject.SetActive(scale.CanRetrySave);
+            RefreshOverlayMapControl();RefreshViewDistanceControl();var scale=game.InterfaceScale;scaleSlider.SetValueWithoutNotify((scale.Percent-50)/5);scaleValue.text=scale.Percent+"%";scaleMessage.text=string.IsNullOrEmpty(scale.Message)?Loc.T(game.InterfaceScaleLoadNotice):scale.Message;scaleRetry.gameObject.SetActive(scale.CanRetrySave);
             foreach(var choice in languageButtons)choice.button.GetComponent<Image>().color=choice.code==game.Language.Language?gold*.4f:new Color(.14f,.17f,.2f);
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
         }

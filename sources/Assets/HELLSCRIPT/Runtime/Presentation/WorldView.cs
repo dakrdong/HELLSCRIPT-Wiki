@@ -44,11 +44,12 @@ namespace Hellscript
         GameObject Shape(string name,PrimitiveType type,Transform parent,Vector3 pos,Vector3 scale,Material mat)
         {
             var go=GameObject.CreatePrimitive(type);go.name=name;go.transform.SetParent(parent,false);go.transform.localPosition=pos;go.transform.localScale=scale;
-            go.GetComponent<Renderer>().sharedMaterial=mat;var collider=go.GetComponent<Collider>();if(collider!=null)Destroy(collider);return go;
+            go.GetComponent<Renderer>().sharedMaterial=RiftMaterial(mat);var collider=go.GetComponent<Collider>();if(collider!=null)Destroy(collider);return go;
         }
         public void ClearDungeon()
         {
-            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;
+            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;
+            if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
@@ -56,6 +57,7 @@ namespace Hellscript
         public void BuildDungeon(RunState run)
         {
             ClearDungeon();presentedRunId=run.id;world=new GameObject("Rift Runtime");
+            InitializeRiftVisibility(run);
             if(!run.layout.legacy){BuildGeneratedGeometry(run);BuildObjectives(run);BuildGates(run);BuildObjectiveChains(run);}
             else
             {
@@ -80,6 +82,7 @@ namespace Hellscript
                 Shape("Connected passage",PrimitiveType.Cube,world.transform,new Vector3(mid.x,-.4f,mid.y),horizontal?new Vector3(7,.7f,6):new Vector3(6,.7f,7),darkStone);
             }
             }
+            BindRiftTerrain();
             hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false);
             hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);
         }
@@ -105,7 +108,7 @@ namespace Hellscript
         GameObject Ring(Transform parent,Vector3 pos,float radius,Material mat,float width)
         {
             var go=new GameObject("Runic ring");go.transform.SetParent(parent,false);go.transform.localPosition=pos;
-            var line=go.AddComponent<LineRenderer>();line.sharedMaterial=mat;line.useWorldSpace=false;line.positionCount=49;line.loop=false;line.widthMultiplier=width;
+            var line=go.AddComponent<LineRenderer>();line.sharedMaterial=RiftMaterial(mat);line.useWorldSpace=false;line.positionCount=49;line.loop=false;line.widthMultiplier=width;
             for(int i=0;i<49;i++){float a=i*Mathf.PI/24;line.SetPosition(i,new Vector3(Mathf.Cos(a)*radius,0,Mathf.Sin(a)*radius));}return go;
         }
         static Vector3 Position(Vector2 p) => new Vector3(p.x,0,p.y);
@@ -182,7 +185,7 @@ namespace Hellscript
             Material mat=kind>=12&&kind<=17?blue:kind==8?green:kind==24||kind==25?red:ember;
             GameObject go;
             if(kind==6||kind==14||kind==18||kind==25)
-            {go=new GameObject("Attack trail");go.transform.SetParent(world.transform);var line=go.AddComponent<LineRenderer>();line.sharedMaterial=mat;line.positionCount=2;line.SetPosition(0,Position(origin)+Vector3.up);line.SetPosition(1,Position(target)+Vector3.up);line.widthMultiplier=kind==14?.12f:.055f;}
+            {go=new GameObject("Attack trail");go.transform.SetParent(world.transform);var line=go.AddComponent<LineRenderer>();line.sharedMaterial=RiftMaterial(mat);line.positionCount=2;line.SetPosition(0,Position(origin)+Vector3.up);line.SetPosition(1,Position(target)+Vector3.up);line.widthMultiplier=kind==14?.12f:.055f;}
             else go=Ring(world.transform,Position(kind==0||kind==4||kind==16||kind==20?origin:target)+Vector3.up*.15f,kind==24?2:Mathf.Clamp(amount,.8f,4),mat,kind==0?.16f:.09f);
             float life=kind==24?amount:kind==0?.22f:.45f;effects.Add(new VisualFx{go=go,life=life,total=life,scale=go.transform.localScale});
         }

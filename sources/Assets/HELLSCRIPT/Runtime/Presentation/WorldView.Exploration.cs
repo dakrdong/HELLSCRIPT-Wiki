@@ -8,25 +8,36 @@ namespace Hellscript
         readonly Dictionary<int, GameObject> roomGeometry = new Dictionary<int, GameObject>();
         sealed class PassageView { public GameObject go; public int roomA, roomB; public Vector2 center; }
         readonly List<PassageView> passageGeometry = new List<PassageView>();
+        RiftFogView riftFog;
+        Color? riftBackground;
+        public RiftFogView RiftFog => riftFog;
+        Material RiftMaterial(Material source) => riftFog != null ? riftFog.Resolve(source) : source;
         bool CanDisplayEnemyMarker(RunState run, Vector2 position, float radius = 0)
             => Vector2.Distance(run.position, position) <= 14 + radius && game.Combat.Map.LineClear(run.position, position);
         Transform RoomGeometry(int index, bool visited)
         {
             var room = new GameObject("Discovered room " + index); room.transform.SetParent(world.transform, false);
-            roomGeometry[index] = room; room.SetActive(visited); return room.transform;
+            roomGeometry[index] = room; return room.transform;
+        }
+        void InitializeRiftVisibility(RunState run)
+        {
+            if (run.layout.legacy) return;
+            riftFog = world.AddComponent<RiftFogView>(); riftFog.Initialize(RiftVisibility.Get(run, game.Combat.Map));
+            riftBackground = viewCamera.backgroundColor; viewCamera.backgroundColor = Color.black;
+        }
+        void BindRiftTerrain()
+        {
+            if (riftFog == null) return;
+            foreach (var room in roomGeometry.Values)
+                foreach (var renderer in room.GetComponentsInChildren<MeshRenderer>(true))
+                    if (renderer.GetComponent<RiftFloorMesh>() != null || renderer.name.EndsWith(" floor") || renderer.name == "Stone inlay" || renderer.name == "Room boundary") riftFog.Bind(renderer, true);
+            foreach (var passage in passageGeometry)
+            { passage.go.SetActive(true); foreach (var renderer in passage.go.GetComponentsInChildren<MeshRenderer>(true)) riftFog.Bind(renderer, true); }
         }
         void PresentExploredGeometry(RunState run)
         {
             if (run.layout.legacy) return;
-            foreach (var room in roomGeometry) room.Value.SetActive(run.visited.Contains(room.Key));
-            foreach (var passage in passageGeometry)
-            {
-                // Knowledge comes from exploration or the same fixed observation radius on every display.
-                // A wider camera cannot reveal additional routes or change exploration state.
-                bool known = run.visited.Contains(passage.roomA) && run.visited.Contains(passage.roomB);
-                bool observed = Vector2.Distance(run.position, passage.center) <= 12 && game.Combat.Map.LineClear(run.position, passage.center);
-                passage.go.SetActive(known || observed);
-            }
+            riftFog?.Present();
         }
     }
 }
