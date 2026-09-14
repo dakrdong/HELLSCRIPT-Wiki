@@ -50,6 +50,7 @@ namespace Hellscript
         // header and footer colours continue into the notch and home bar bands instead of leaving them black.
         void ApplySafeArea()
         {
+            UpdateAspectMask();
             Rect s=UiSafeArea.Current;float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;
             if(headerApron!=null){headerApron.anchorMin=new Vector2(0,s.yMax/h);headerApron.anchorMax=Vector2.one;headerApron.offsetMin=headerApron.offsetMax=Vector2.zero;}
@@ -72,7 +73,7 @@ namespace Hellscript
             if(root==null)return;
             var pageScaler=root.parent.GetComponent<CanvasScaler>();
             ApplyScaler(pageScaler,pageScaler.uiScaleMode==CanvasScaler.ScaleMode.ConstantPixelSize);
-            if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
+            if(commonModal!=null&&!(scaleSlider?.Dragging??false)){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
             if(presetModal!=null){ApplyScaler(presetModal.GetComponent<CanvasScaler>(),true);presetScreenSize=Vector2.zero;ReflowPresetDialog();}
             Canvas.ForceUpdateCanvases();
         }
@@ -82,12 +83,12 @@ namespace Hellscript
         public void ApplyLanguage()
         {
             if(root==null)return;
-            bool panelOpen=commonModal!=null,help=commonHelp,combat=commonCombat,sound=commonSound;
+            bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
             pageRepaint?.Invoke();
             if(!panelOpen)return;
-            ShowCommonPanel(help);if(combat)SelectCombatTab();if(sound)SelectSoundTab();
-            Canvas.ForceUpdateCanvases();if(!sound&&!combat&&languageChoiceRow!=null)DialogReadingAnchor.Show(languageChoiceRow);
+            ShowCommonPanel(false);SelectSettingsTab(tab);
+            Canvas.ForceUpdateCanvases();
         }
         RectTransform Rect(string name,Transform parent)
         {var go=new GameObject(name,typeof(RectTransform));go.transform.SetParent(parent,false);return go.GetComponent<RectTransform>();}
@@ -144,12 +145,12 @@ namespace Hellscript
                 var back=Box("Backdrop",shell,ink);Stretch(back);
                 if(art&&background!=null){var image=Rect("Generated Sanctuary",shell);Stretch(image);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=background;raw.color=new Color(1,1,1,.8f);raw.raycastTarget=false;}
             }
-            header=Box("Header",root,new Color(.025f,.035f,.05f,.94f));header.anchorMin=new Vector2(0,1);header.anchorMax=Vector2.one;header.pivot=new Vector2(.5f,1);header.sizeDelta=new Vector2(0,110);
-            var top=Label(header,title,34,gold);Place(top.rectTransform,24,10,650,48);headerTitle=top;
-            top.rectTransform.anchorMax=Vector2.one;top.rectTransform.sizeDelta=new Vector2(-190,48);
+            header=Box("Header",root,new Color(.025f,.035f,.05f,.94f));header.anchorMin=new Vector2(0,1);header.anchorMax=Vector2.one;header.pivot=new Vector2(.5f,1);header.sizeDelta=new Vector2(0,80);
+            var top=Label(header,title,30,gold);Place(top.rectTransform,20,6,650,38);headerTitle=top;
+            top.rectTransform.anchorMax=Vector2.one;top.rectTransform.sizeDelta=new Vector2(-100,38);
             var settings=Button(header,"설정·안내",ShowScreenSettings);var settingsRect=(RectTransform)settings.transform;
-            settingsRect.anchorMin=settingsRect.anchorMax=new Vector2(1,1);settingsRect.pivot=new Vector2(1,1);settingsRect.anchoredPosition=new Vector2(-16,-14);settingsRect.sizeDelta=new Vector2(134,TouchHeight);
-            var sub=Label(header,subtitle,18,muted);Span(sub.rectTransform,26,61,170,32);headerSubtitle=sub;
+            settingsRect.anchorMin=settingsRect.anchorMax=new Vector2(1,1);settingsRect.pivot=new Vector2(1,1);settingsRect.anchoredPosition=new Vector2(-12,-12);settingsRect.sizeDelta=new Vector2(52,52);MakeSettingsIcon(settings);
+            var sub=Label(header,subtitle,16,muted);Span(sub.rectTransform,22,46,82,26);headerSubtitle=sub;
             var line=Box("Gold divider",header,new Color(.48f,.34f,.16f));line.anchorMin=new Vector2(0,0);line.anchorMax=new Vector2(1,0);line.sizeDelta=new Vector2(0,2);
             footer=Box("Footer",root,new Color(.025f,.035f,.05f,.97f));footer.anchorMin=Vector2.zero;footer.anchorMax=new Vector2(1,0);footer.pivot=new Vector2(.5f,0);footer.sizeDelta=new Vector2(0,108);footer.anchoredPosition=Vector2.zero;
             headerApron=Box("Header apron",shell,new Color(.025f,.035f,.05f,.94f));
@@ -162,7 +163,7 @@ namespace Hellscript
             toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);Inset(toast.rectTransform,16,16,8,8);toastTime=0;toastFrame.gameObject.SetActive(false);
             if(!battle)
             {
-                var scroll=Rect("Scroll",root);scroll.SetSiblingIndex(root.childCount-2);scroll.anchorMin=new Vector2(0,0);scroll.anchorMax=Vector2.one;scroll.offsetMin=new Vector2(24,180);scroll.offsetMax=new Vector2(-24,-125);
+                var scroll=Rect("Scroll",root);scroll.SetSiblingIndex(root.childCount-2);scroll.anchorMin=new Vector2(0,0);scroll.anchorMax=Vector2.one;scroll.offsetMin=new Vector2(24,180);scroll.offsetMax=new Vector2(-24,-94);
                 scroll.gameObject.AddComponent<Image>().color=Color.clear;scroll.gameObject.AddComponent<RectMask2D>();var sr=scroll.gameObject.AddComponent<ScrollRect>();sr.horizontal=false;sr.movementType=ScrollRect.MovementType.Clamped;
                 content=Rect("Content",scroll);content.anchorMin=new Vector2(0,1);content.anchorMax=new Vector2(1,1);content.pivot=new Vector2(.5f,1);content.sizeDelta=Vector2.zero;
                 var layout=content.gameObject.AddComponent<VerticalLayoutGroup>();layout.spacing=10;layout.childControlHeight=true;layout.childForceExpandHeight=false;layout.childControlWidth=true;layout.childForceExpandWidth=true;

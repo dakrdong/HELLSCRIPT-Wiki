@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T11:57:18+09:00",
+  "generatedAt": "2026-09-14T13:08:59+09:00",
   "databases": [
     {
       "id": "resources",
@@ -2678,25 +2678,38 @@
         },
         {
           "id": "procedural-settings",
-          "name": "설정·안내 공통 창",
+          "name": "톱니바퀴 설정·캐릭터 미리보기",
           "category": "코드 생성 표현",
-          "summary": "화면 / 게임 안내 / 전투 상태 분류를 전환하는 공통 창과 기기별 방향 설정, 글자 크기 100~140% 선택을 uGUI로 구성합니다.",
+          "summary": "가로 화면은 오른쪽 반쪽 메뉴와 왼쪽 캐릭터, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기 50~150%를 제공합니다.",
           "fields": {
-            "제작 방식": "화면 / 게임 안내 / 전투 상태 분류를 전환하는 공통 창과 기기별 방향 설정, 글자 크기 100~140% 선택을 uGUI로 구성합니다.",
-            "구현 파일": "GameUI.ScreenSettings.cs",
-            "후속 제작": "모바일 실기기에서 방향 설정과 글자 크기 100~140%의 표시, 긴 안내 문구를 검증합니다."
+            "제작 방식": "가로 화면은 오른쪽 반쪽 메뉴와 왼쪽 캐릭터, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기 50~150%를 제공합니다.",
+            "구현 파일": "GameUI.ScreenSettings.cs · GameUI.SettingsFrame.cs · SettingsControls.cs · SettingsCharacterPreview.cs",
+            "후속 제작": "글자 크기는 5%씩 조절하며 캐릭터 변경 후 마을로 돌아갑니다. 모바일 실기기 방향 전환과 터치는 후속 검증 대상입니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs",
             "line": 1
           },
           "status": "임시 사용",
-          "refs": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.SettingsFrame.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/SettingsControls.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/SettingsCharacterPreview.cs",
+              "line": 1
+            }
+          ],
           "related": [
+            "settings-revision",
             "screen-settings-expansion",
             "reading-size-expansion",
             "touch-and-safe-area-expansion",
-            "battle-layout-expansion",
             "resource-guide"
           ]
         },

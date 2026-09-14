@@ -376,9 +376,9 @@ namespace Hellscript
                 footerHeight=Mathf.Max(footerHeight,label.preferredHeight-label.rectTransform.offsetMax.y+label.rectTransform.offsetMin.y+18);
             var plan=new InventoryLayout(size.x,size.y,inventorySession.detailOpen,footerHeight);
             Place(header,plan.header.x,plan.header.y,plan.header.width,plan.header.height);Place(footer,plan.footer.x,plan.footer.y,plan.footer.width,plan.footer.height);
-            headerTitle.fontSize=size.x<600?23:28;Place(headerTitle.rectTransform,12,6,size.x-150,36);
+            headerTitle.fontSize=size.x<600?23:28;Place(headerTitle.rectTransform,12,6,size.x-78,36);
             headerSubtitle.fontSize=17;Place(headerSubtitle.rectTransform,12,44,size.x-152,plan.header.height-46);
-            var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,size.x-136,6,124,52);
+            var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,size.x-64,6,52,52);
             Place((RectTransform)inventoryList.transform,plan.list.x,plan.list.y,plan.list.width,plan.list.height);
             Place((RectTransform)inventoryDetail.transform,plan.detail.x,plan.detail.y,plan.detail.width,plan.detail.height);
             Place((RectTransform)inventoryComparison.transform,plan.comparison.x,plan.comparison.y,plan.comparison.width,plan.comparison.height);

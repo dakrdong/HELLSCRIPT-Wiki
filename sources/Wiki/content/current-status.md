@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-14 설정 메뉴 개편:** 상단 버튼을 작은 톱니바퀴로 바꿨다. 가로 화면은 오른쪽 반쪽 메뉴와 왼쪽 캐릭터를 표시하며, 세로 화면은 메뉴가 전체를 채운다. 배경·우측 상단 X로 닫을 수 있고, 화면·소리·언어·캐릭터 분류에서 비율 10종, 글자 크기 50~150%의 5% 조절과 마을로 돌아가는 캐릭터 변경을 지원한다. [구현·검증 기록](../../Docs/Implementation/Settings_Revision.md)
+
+English: settings now use a compact gear, a right-half menu with the character on the left in landscape, and a full-screen menu in portrait. Background and upper-right X close the menu. Screen, Audio, Language and Character cover ten ratios, reading size from 50–150% in 5% steps, and character changes that return to town. [Implementation and verification](../../Docs/Implementation/Settings_Revision.en.md)
+
 **2026-09-13 직접 플레이 완료 범위:** 주요 기능 구현을 우선하고 세부 수치는 사용자가 플레이하며 조정한다. 이번 작업에서 밸런스 측정은 하지 않는다. 보석 획득·공용 보관·소켓 생성·장착·교체·분리·합성과 소탕 보상을 연결했으며, 재화 회수 칙령의 실제 추적·우선순위 누락을 수정했다. 이전 기록의 보석 보관 방식 확인과 서비스 미연결 표시는 이번 구현으로 대체한다. 50칸·묶음 999개는 조정 가능한 임시 기본값이다. [구현 기록](../../Docs/Implementation/Playable_Completion.md) · [직접 플레이 안내](../../Docs/Implementation/Local_Play_Guide.md)
 
 English: prioritize major playable features; the owner tunes details and no balance measurements are performed in this task. Gems now connect acquisition, shared storage, sockets, installation/replacement/removal, fusion and sweep rewards. Resource-loot pursuit and priority gaps are fixed. These supersede earlier pending-storage/service notes; 50 slots and stacks of 999 are provisional defaults. [English record](../../Docs/Implementation/Playable_Completion.en.md) · [Play guide](../../Docs/Implementation/Local_Play_Guide.en.md)

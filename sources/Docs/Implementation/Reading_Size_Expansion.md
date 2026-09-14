@@ -2,6 +2,8 @@
 
 작성일: 2026-09-11 · P4 1단계 읽기 크기 100~140%
 
+2026-09-14 갱신: 현재 조절 범위는 50~150%이며 5%씩 바뀐다. 슬라이더·휠·− / + 조작과 새 메뉴 배치는 [설정 메뉴 개편](Settings_Revision.md)을 따른다. 아래 내용은 초기 구현 기록이다. English: the current range is 50–150% in 5% steps; see the [settings revision](Settings_Revision.en.md) for slider, wheel and − / + controls and the new layout. The record below describes the initial implementation.
+
 ## 범위
 
 [다음 개발 계획서](../../Assets/Plans/next-development-plan.md)의 P4는 모바일·반응형 최적화이며 세 가지를 요구한다. 이번 단계는 그중 첫 번째인 100%부터 140%까지의 글자 크기 조절을 구현한다. 최소 터치 영역 48dp와 노치·홈 바 여백 보강은 다음 단계로 남긴다. [화면 설정·공통 안내](Screen_Settings_Expansion.md)에서 만든 설정 창에 항목을 추가하는 방식이라 새 화면을 만들지 않았다.

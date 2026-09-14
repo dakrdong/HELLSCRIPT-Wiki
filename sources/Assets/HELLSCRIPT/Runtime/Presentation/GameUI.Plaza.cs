@@ -32,10 +32,10 @@ namespace Hellscript
         {
             pageRepaint=ShowPlaza;Base("plaza","잿빛 숲 · 정착민 마을","조이스틱으로 이동 · 주민에게 가까이 가서 대화하세요",battle:true);
             footer.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);plazaBubbles.Clear();plazaBubbleLabels.Clear();
-            plazaStatus=Label(root,"",17,pale);Span(plazaStatus.rectTransform,22,120,20,46);
-            var guide=Button(root,"시설 안내",ToggleTownGuide);Place((RectTransform)guide.transform,20,172,126,52);
-            var menu=Button(root,"메뉴",()=>{game.Town.Cancel();ShowTownMenu();});Place((RectTransform)menu.transform,156,172,98,52);
-            plazaGuide=Box("Town destinations",root,ink);Place(plazaGuide,20,236,300,390);plazaGuide.gameObject.SetActive(false);
+            plazaStatus=Label(root,"",17,pale);Span(plazaStatus.rectTransform,22,90,20,40);
+            var guide=Button(root,"시설 안내",ToggleTownGuide);Place((RectTransform)guide.transform,20,140,126,52);
+            var menu=Button(root,"메뉴",()=>{game.Town.Cancel();ShowTownMenu();});Place((RectTransform)menu.transform,156,140,98,52);
+            plazaGuide=Box("Town destinations",root,ink);Place(plazaGuide,20,204,300,390);plazaGuide.gameObject.SetActive(false);
             for(int i=0;i<TownLayout.Stations.Length;i++)
             {
                 var s=TownLayout.Stations[i];var b=Button(plazaGuide,s.name,()=>{plazaGuide.gameObject.SetActive(false);game.RequestStation(s.id);});Place((RectTransform)b.transform,8,8+i*53,284,46);b.name="town-route-"+s.id;

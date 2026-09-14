@@ -111,11 +111,11 @@ namespace Hellscript
             Canvas.ForceUpdateCanvases();comparisonLaidOutContent=content;comparisonPageSize=size;
             var scroll=content.GetComponentInParent<ScrollRect>();var anchor=DialogReadingAnchor.Capture(scroll);
             headerTitle.fontSize=size.x<600?26:30;headerSubtitle.fontSize=17;
-            Place(headerTitle.rectTransform,12,6,size.x-164,40);Place(headerSubtitle.rectTransform,12,50,size.x-164,40);
+            Place(headerTitle.rectTransform,12,6,size.x-82,40);Place(headerSubtitle.rectTransform,12,50,size.x-82,40);
             Canvas.ForceUpdateCanvases();float titleHeight=Mathf.Max(36,headerTitle.preferredHeight),subtitleHeight=Mathf.Max(26,headerSubtitle.preferredHeight);
             float head=Mathf.Max(100,titleHeight+subtitleHeight+22),foot=80;
-            Place(header,0,0,size.x,head);Place(headerTitle.rectTransform,12,6,size.x-164,titleHeight);Place(headerSubtitle.rectTransform,12,titleHeight+12,size.x-164,subtitleHeight);
-            Place((RectTransform)header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내").transform,size.x-146,8,134,62);
+            Place(header,0,0,size.x,head);Place(headerTitle.rectTransform,12,6,size.x-82,titleHeight);Place(headerSubtitle.rectTransform,12,titleHeight+12,size.x-82,subtitleHeight);
+            Place((RectTransform)header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내").transform,size.x-64,8,52,52);
             Place(footer,0,size.y-foot,size.x,foot);Canvas.ForceUpdateCanvases();
             foreach(var label in footer.GetComponentsInChildren<Text>())foot=Mathf.Max(foot,label.preferredHeight+28);
             Place(footer,0,size.y-foot,size.x,foot);Place(scroll.viewport,16,head+8,size.x-32,Mathf.Max(1,size.y-head-foot-16));

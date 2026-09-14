@@ -32,10 +32,10 @@ namespace Hellscript
             ApplySafeArea();var size=root.rect.size;if(size==idleIntroductionSize)return;
             Canvas.ForceUpdateCanvases();size=root.rect.size;idleIntroductionSize=size;
             header.sizeDelta=new Vector2(0,72);footer.sizeDelta=new Vector2(0,68);
-            headerTitle.fontSize=size.x<600?22:24;Place(headerTitle.rectTransform,12,3,size.x-128,34);
-            headerSubtitle.gameObject.SetActive(size.y>=400);Place(headerSubtitle.rectTransform,14,40,size.x-150,28);
+            headerTitle.fontSize=size.x<600?22:24;Place(headerTitle.rectTransform,12,3,size.x-78,34);
+            headerSubtitle.gameObject.SetActive(size.y>=400);Place(headerSubtitle.rectTransform,14,40,size.x-78,28);
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");
-            Right((RectTransform)settings.transform,12,8,96,48);settings.GetComponentInChildren<Text>().fontSize=18;
+            Right((RectTransform)settings.transform,12,8,48,48);settings.GetComponentInChildren<Text>().fontSize=18;
             foreach(var button in footer.GetComponentsInChildren<Button>())button.GetComponentInChildren<Text>().fontSize=size.x<600?17:21;
             var scroll=(RectTransform)root.Find("Scroll");scroll.offsetMin=new Vector2(16,80);scroll.offsetMax=new Vector2(-16,-84);
         }

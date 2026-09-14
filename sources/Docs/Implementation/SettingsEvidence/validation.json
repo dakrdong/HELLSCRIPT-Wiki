@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-14",
+  "unity": "6000.6.0f1",
+  "baseline": "8e066af",
+  "scope": "Settings revision in an isolated checkout; concurrent organic rift changes excluded.",
+  "editMode": {
+    "total": 161,
+    "passed": 161,
+    "failed": 0
+  },
+  "nativeMacOS": {
+    "build": "Succeeded",
+    "buildErrors": 0,
+    "runtime": "HELLSCRIPT_SETTINGS_RUNTIME_OK",
+    "restart": "HELLSCRIPT_SETTINGS_RESTART_OK",
+    "saveDirectory": "isolated test account"
+  },
+  "verified": [
+    "Compact gear on title, town and battle",
+    "Four settings categories",
+    "Landscape right half and left centered character; portrait full screen",
+    "Top-right X and background close, including pointer raycasts",
+    "Ten ratios, safe area and no overlapping ratio choices after narrowing",
+    "All 21 reading sizes, 5 percent wheel steps, stable drag, visible slider thumb pixels",
+    "Sound controls and Korean/English switching with no missing translations",
+    "Training freeze/resume and existing pause preservation",
+    "Character changes end current rift and repeat session, preserve earned experience and return to town",
+    "Exactly one completion record; failed saves preserve original account/run/file",
+    "Device ratio, reading size, language and selected character survive a separate launch"
+  ],
+  "limitations": [
+    "Physical iOS/Android orientation and touch not tested",
+    "Existing primitive character model reused",
+    "Focused checks only; no full-suite claim"
+  ],
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "51f995c619ba1a5b6e8662f4ce0122703919f5f136c0b6342b66c7d39692828f",
+    "Assets/HELLSCRIPT/Runtime/Core/InterfaceScale.cs": "a99291442dae9995b1e75f7807afe7c2812721deac3a6d023e88cc0e429ce946",
+    "Assets/HELLSCRIPT/Runtime/Core/DisplayAspect.cs": "986b2694927bffcef8b639d5cd99e56dafca13ab1b718dbfc5cc0d994975f3cf",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.CharacterSwitch.cs": "c8e79f8f85b611d0c98ceb2a7d5ea07c2e3ddad7804e8a8bd84e1a56b357c1b1",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Display.cs": "78fc6501fcff12a723730b267708ec17b2cc74dcbc786f2ef59d0735ed0c3033",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.cs": "04552be5d31f5565b88bd1ef264978ba789ccbce37b551429fc5156260cb360c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Audio.cs": "166c581ac5b680bddb76cad8cbc0d652a88409817fdb2845394051e80d5ab2af",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs": "5ee97bf7439b5c13b0f2f6f7be27572c8042705e71ff07b252142d52c6fe1c16",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Comparison.cs": "21e222361a6f00016ba1aad24c04d948c36bec4302fe778e94f426c9e3d3e1bf",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Idle.cs": "7d3bf4c7fdfa5a21535be79e262d9900109ea20a2d996541a5058ae764524d8d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.InventoryLayout.cs": "826d170420a43608cbe4a50908f0234d5edc3f5669f7c58472d1d5557a3c51db",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Plaza.cs": "0b92c2881ac4b1dbafff6ab6ca3a33708f71bdd25ee0edb46a2237187873b260",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs": "221d720ce23ceddce86e5135cb6cdc8f76202543bc89998b36e1bf5d411040aa",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "6d4f1838bfc6c74c658922db21b73867dc9226d06d775193e307d1c4d4ba96ec",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeScreenSettingsSmoke.cs": "7b988cfc714ace83ce82aa8d6e55a78675a0e55cd7ee3871cd1692a56f9c452b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiSafeArea.cs": "474f0a95e88389c5fdbee29a775a6fb39d4b1dccef64f65172da577c0792c96b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.cs": "bfe4321f2e11e704619153d39c5d4640b57b614d478c3205b611dcef11ca0d4f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.SettingsFrame.cs": "bfcc53f99414646d33558ac562413a352d50a4da02e98c2da53665f1779e2cad",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.SettingsInformation.cs": "705dbaacaa2a63345b33231c7f2e39b80bae7a8a593f87711e9e4356ecedb66c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SettingsControls.cs": "fdeeb78057bd2e62279337917b4852e4e9e993164e93f74a2fc9fcf7f4a05e5f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SettingsCharacterPreview.cs": "4f62cfac004dd2844f483337ca32892e8b8ac3cf9fa2a2dcd69c4e27d07d297b",
+    "Assets/HELLSCRIPT/Tests/Editor/InterfaceScaleTests.cs": "6760a14126ae7214fac6d4276c04bf45ec41312b898f91f9b4036e515343658f",
+    "Assets/HELLSCRIPT/Tests/Editor/LocalizationTests.cs": "b5169811310849a6cdbd07f377d3ad5bf3d1ce3e557e425010e3ba7f93702cd4",
+    "Assets/HELLSCRIPT/Tests/Editor/SettingsRevisionTests.cs": "fcb191865e6f11f4dff7b50b55eb1f91b9595284cbd8677d6bfb706a413a0fe8"
+  }
+}

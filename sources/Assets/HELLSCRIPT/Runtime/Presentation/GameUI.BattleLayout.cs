@@ -87,12 +87,12 @@ namespace Hellscript
             PlaceBattle(header, plan.header); PlaceBattle(footer, plan.footer); PlaceBattle(battleStatus, plan.status); PlaceBattle(battleActions, plan.actions); PlaceBattle(battleWorld, plan.world);
             if(battleIdle!=null)Place((RectTransform)battleIdle.transform,plan.world.xMax-128,plan.world.y+8,120,48);
             headerTitle.fontSize = plan.compact ? 22 : 26;
-            Place(headerTitle.rectTransform, 12, 5, size.x - 154, plan.compact ? 38 : 40);
+            Place(headerTitle.rectTransform, 12, 5, size.x - 78, plan.compact ? 38 : 40);
             headerSubtitle.gameObject.SetActive(!plan.compact);
             Place(headerSubtitle.rectTransform, 14, plan.wide ? 43 : 48, size.x - 28, plan.wide ? 24 : 40);
-            Place((RectTransform)battleGrowth.transform, 10, plan.compact ? 2 : 44, size.x - (plan.compact ? 160 : 20), plan.compact ? 44 : plan.wide ? 26 : 44);
+            Place((RectTransform)battleGrowth.transform, 10, plan.compact ? 2 : 44, size.x - (plan.compact ? 80 : 20), plan.compact ? 44 : plan.wide ? 26 : 44);
             var settings = header.GetComponentsInChildren<Button>().Single(b => b.name == "설정·안내");
-            Place((RectTransform)settings.transform, size.x - 136, plan.compact ? 2 : 5, 124, 44);
+            Place((RectTransform)settings.transform, size.x - 56, plan.compact ? 2 : 5, 44, 44);
             float w = plan.status.width;
             if (plan.compact)
             {

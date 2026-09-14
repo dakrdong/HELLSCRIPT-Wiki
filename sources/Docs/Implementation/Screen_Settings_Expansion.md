@@ -2,6 +2,8 @@
 
 작성일: 2026-09-09 · 화면 상세 기획에 따른 부분 구현
 
+2026-09-14 갱신: 아래 내용은 최초 구현 기록이다. 현재 톱니바퀴 진입, 가로 반쪽·세로 전체 메뉴, 네 가지 설정과 캐릭터 변경은 [설정 메뉴 개편](Settings_Revision.md)을 따른다. English: this is the original implementation record; see the [current settings revision](Settings_Revision.en.md) for the gear entry, landscape half-screen/portrait full-screen menu, four categories and character transitions.
+
 ## 범위와 실행 경로
 
 [화면 비율·방향 대응 상세 기획](../Design/HELLSCRIPT_Screen_Layout_Detail.md)의 인계 순서에 따라 읽기 전용 안내와 화면 설정을 먼저 연결했다. 각 화면 상단의 **설정·안내**에서 열고, 성소 하단의 **게임 안내**로도 진입한다. 같은 창에서 **화면 / 게임 안내** 분류를 전환하고 **닫기**로 이전 화면에 돌아간다.

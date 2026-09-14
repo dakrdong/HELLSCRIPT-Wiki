@@ -47,6 +47,14 @@ namespace Hellscript
         {
             if(Running)return;Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
+        public bool ChangeCharacterFromSettings(int index)
+        {
+            if(!Store.SwitchCharacter(index,catalog,Combat?.State)){Notify(Store.Error);return false;}
+            UI.CloseCommonPanel();ExitIdle(false);RestoreForegroundClock();
+            Comparison=null;ComparisonError="";repeatRestored=false;
+            if(Combat!=null){Combat.Visual-=World.Effect;Combat=null;}
+            SelectedStage=Store.Data.Hero.highestClear+1;EnterPlaza(true);return true;
+        }
         public void Begin(int training=-1,bool resume=false,uint? seed=null)
         {BeginRun(training,resume,seed,false);}
         public void BeginDeveloperTraining(int training)
@@ -128,7 +136,7 @@ namespace Hellscript
         }
         public void TapPlaza(Vector2 screen)
         {
-            if(Town==null||UI==null||UI.Page!="plaza"||Active||UI.CommonPanelOpen||UI.TownNavigationOpen)return;
+            if(Town==null||UI==null||UI.Page!="plaza"||Active||UI.CommonPanelOpen||UI.TownNavigationOpen||!UiSafeArea.Frame.Contains(screen))return;
             if(World.TryPickStation(screen,out var station))RequestStation(station);
             else if(World.TryPickTownGround(screen,out var point))Town.RequestPoint(point);
         }
