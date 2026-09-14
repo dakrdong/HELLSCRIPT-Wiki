@@ -42,6 +42,7 @@ namespace Hellscript
             shell=Rect("Display",canvasObject.transform);Stretch(shell);
             root=Rect("Safe area",canvasObject.transform);Stretch(root);ApplySafeArea();
             if(FindAnyObjectByType<EventSystem>()==null){var es=new GameObject("UI Input",typeof(EventSystem),typeof(InputSystemUIInputModule));es.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();}
+            InitializeGlobalHud();
             if(game.Store==null)
             {Base("recovery","저장 복구가 필요합니다","진행 기록을 덮어쓰지 않고 게임을 멈췄습니다");Note(content,game.Notice,22,360,pale);FooterButton(0,1,"게임 종료",()=>Application.Quit());}
             else ShowTitle();
@@ -51,7 +52,10 @@ namespace Hellscript
         void ApplySafeArea()
         {
             UpdateAspectMask();
-            Rect s=UiSafeArea.Current;float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
+            Rect s=UiSafeArea.Current;
+            if(Page!="battle"&&Page!="plaza"&&Page!="title"&&Page!="recovery"&&globalHud?.Layout!=null)
+            {float inset=Mathf.Min(globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12,s.height*.42f);s.yMin+=inset;}
+            float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;
             if(headerApron!=null){headerApron.anchorMin=new Vector2(0,s.yMax/h);headerApron.anchorMax=Vector2.one;headerApron.offsetMin=headerApron.offsetMax=Vector2.zero;}
             if(footerApron!=null){footerApron.anchorMin=Vector2.zero;footerApron.anchorMax=new Vector2(1,s.y/h);footerApron.offsetMin=footerApron.offsetMax=Vector2.zero;}
@@ -134,7 +138,7 @@ namespace Hellscript
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
             if(page!="battle")game.ExitIdle();
-            ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
+            CloseHudPanel();ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
             ApplyScaler(root.parent.GetComponent<CanvasScaler>(),battle||responsive);
             if(Page=="build"&&content!=null)buildScrollOffset=content.anchoredPosition.y;
             if(Page=="edict"&&content!=null)edictScrollOffset=content.anchoredPosition.y;
@@ -225,31 +229,17 @@ namespace Hellscript
         static void Fill(Image image,float ratio){var r=image.rectTransform;r.anchorMax=new Vector2(Mathf.Clamp01(ratio),1);r.offsetMin=r.offsetMax=Vector2.zero;}
         public void RefreshHud()
         {
-            if(game.DisplayDimmed||Page!="battle"||game.Combat==null||hpText==null)return;var r=game.Combat.State;var stats=game.Combat.Stats;
-            RefreshGrowthHud();
-            Fill(hpFill,r.health/stats.hp);Fill(resourceFill,r.resource/Mathf.Max(1,stats.maxResource));Fill(meterFill,r.meter/100f);
-            hpText.text=Loc.F("HP {0:0} / {1:0}{2} · 상세", Mathf.Max(0,r.health), stats.hp, (r.shield>0?$"  +{r.shield:0}":""));resourceText.text=Loc.F("자원 {0:0} / {1:0}", r.resource,stats.maxResource);
-            int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-r.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
-            meterText.text=Loc.T(r.training>=0?Loc.F("표적 {0} / {1} · 보상 없음", r.kills, r.enemies.Count):r.phase==RunPhase.Boss?"보스 출현 · 표시된 방향으로 이동 중":Loc.F("처치 {0}   균열 게이지 {1} / 100", r.kills, Mathf.Min(100,r.meter)));
-            if(r.training<0&&r.phase!=RunPhase.Boss&&game.Combat.ObjectiveActive)
-                meterText.text=r.layout.objective==RiftObjectiveKind.Seals?Loc.F("봉인 {0} / {1} · 게이지 {2} / {3}", game.Combat.SealsBroken, r.layout.seals.Count, Mathf.Min(CombatSimulation.GateMeter,r.meter), CombatSimulation.GateMeter):Loc.F("{0} · 게이지 {1} / {2}",ObjectiveProgress(r.layout),Mathf.Min(CombatSimulation.GateMeter,r.meter),CombatSimulation.GateMeter);
-            var boss=r.enemies.Find(e=>e.boss&&!e.dead&&e.id==r.bossId);
-            RefreshBossHud(boss);
-            if(boss!=null)
-            {var control=boss.bossControl;meterText.text=Loc.T(control.staggered>0?Loc.F("보스 제압 · {0:0.0}초", control.staggered):control.immunity>0?Loc.F("제압 면역 · {0:0.0}초", control.immunity):Loc.F("보스 제압 {0:0.0} / 100", control.meter));Fill(meterFill,control.staggered>0?control.staggered/3:control.immunity>0?control.immunity/10:control.meter/100);}
-            actionText.text=r.paused?Loc.T("일시정지 · 모든 전투 시간이 멈췄습니다"):Loc.F("{0}   |   {1:0.#}×", game.Combat.CurrentActionText, game.EffectiveSpeed);
-            if(!string.IsNullOrEmpty(r.navigationError))actionText.text=Loc.T("진행을 멈췄습니다 · 지도에서 상태를 확인해 주세요");
-            fullBattleAction=actionText.text;ReflowBattleHud();UpdateBattleBrief();
+            RefreshGlobalHud();
+            if(game.DisplayDimmed||Page!="battle"||game.Combat==null||timerText==null)return;
+            var run=game.Combat.State;RefreshGrowthHud();
+            int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-run.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
+            meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));
+            if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
+            fullBattleAction=run.paused?Loc.T("일시정지"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
+            RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));ReflowBattleHud();UpdateBattleBrief();
             if(riftMinimap!=null)riftMinimap.SetVerticesDirty();
-            if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}  ·  지도 보기", r.layout.chests.Count(c=>c.phase==ChestPhase.Opened), r.layout.chests.Count);
-            if(fieldStatusText!=null)
-            {
-                var lines=new List<string>();if(r.guideShrineTime>0)lines.Add(Loc.F("길잡이 {0:0.0}초", r.guideShrineTime));if(r.resolveShrineTime>0)lines.Add(Loc.F("결의 {0:0.0}초", r.resolveShrineTime));
-                var activeEvent=r.layout.events.FirstOrDefault(e=>e.phase==RiftEventPhase.Active);
-                if(activeEvent!=null)lines.Add(Loc.F("잔향 {0}/4 · {1:0.0}초", activeEvent.enemyIds.Count(id=>r.enemies.Any(e=>e.id==id&&e.dead)), activeEvent.remaining));
-                fieldStatusText.text=string.Join("\n",lines);
-            }
-            foreach(var t in skillLabels){int index=int.Parse(t.gameObject.name.Substring(6));var skill=game.catalog.skills[index];bool locked=game.Combat.EffectiveLevel<skill.unlock;t.text=locked?Loc.F("Lv.{0} 해금", skill.unlock):Loc.F("{0}\n{1}", skill.name, (r.heroAction.skill==index&&r.heroAction.phase!=HeroActionPhase.Idle?(r.heroAction.phase==HeroActionPhase.Preparing?"준비 중":r.heroAction.phase==HeroActionPhase.Travelling?"이동 중":r.heroAction.phase==HeroActionPhase.Channeling?"유지 중":"동작 마무리"):r.cooldowns[index]>0?Loc.F("{0}초", r.cooldowns[index].ToString("0.0")):"사용 가능"));t.color=locked?muted:pale;}
+            if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);
+            if(fieldStatusText!=null)fieldStatusText.text=run.navigationError;
         }
         public void ShowTraining()
         {
@@ -449,6 +439,7 @@ namespace Hellscript
         }
         void Update()
         {
+            TickGlobalHud();
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();

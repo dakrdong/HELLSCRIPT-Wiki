@@ -84,7 +84,7 @@ namespace Hellscript
                 foreach (var patch in navigation.Surface.patches)
                 {
                     bool known = patch.room >= 0 && run.visited.Contains(patch.room);
-                    if (patch.corridor >= 0)
+                    if (patch.corridor >= 0 && patch.corridor < run.layout.corridors.Count)
                     { var c = run.layout.corridors[patch.corridor]; known = run.visited.Contains(c.roomA) && run.visited.Contains(c.roomB); }
                     if (!known) continue;
                     for (int y = Y(patch.bounds.yMin); y <= Y(patch.bounds.yMax); y++)

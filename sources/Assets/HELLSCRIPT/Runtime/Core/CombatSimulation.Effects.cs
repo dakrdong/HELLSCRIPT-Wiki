@@ -67,16 +67,17 @@ namespace Hellscript
             }
             MirrorShields();return damage-remaining;
         }
-        void UsePotion()=>TryUsePotion(Policy.potionThreshold);
         bool TryUsePotion(float threshold)
         {
-            if(State.health<=0||State.health/Stats.hp*100>threshold||State.potionCd>0)return false;
-            float before=State.health;State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*.35f*Stats.healing*Stats.potionHealing);
+            if(threshold<=0||State.health<=0||State.health/Stats.hp*100>threshold||State.potionCd>0||!HasHpPotion)return false;
+            var def=PotionCatalog.Get("PH01");
+            float before=State.health;State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*def.magnitude*Stats.healing*Stats.potionHealing);
             if(State.health<=before)return false;
-            State.potionCd=20;
+            State.potionCd=State.potions.hpTotal=def.cooldown;
+            if(State.potions.version>0)ConsumePotion(def);
             if(before<=Stats.hp*.2f&&Stats.specials.Contains("LC03")&&ItemEffects.lc03Cooldown<=.00001f)
             {AddShield("LC03",Stats.hp*.25f,3,0);ItemEffects.lc03Cooldown=20;}
-            Visual?.Invoke(State.position,State.position,20,1);Log("POTION","자동 물약 사용");return true;
+            Visual?.Invoke(State.position,State.position,20,1);if(State.potions.version==0)Log("POTION","자동 물약 사용");return true;
         }
         void ApplyStatus(EnemyState enemy,StatusKind kind,string definition,float duration,int root,float strength=1,int area=0)
         {

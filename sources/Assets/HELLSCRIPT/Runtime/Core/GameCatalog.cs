@@ -111,6 +111,7 @@ namespace Hellscript
     public sealed class HeroSave
     {
         public int legacyPassiveSlots;
+        public PotionInventory potions=new PotionInventory();
         public TrainingComparisonRecord trainingComparison;
         public string id;
         public HeroClass heroClass;
@@ -240,6 +241,8 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public PotionRuntimeState potions=new PotionRuntimeState();
+        public float[] cooldownTotals=new float[18];
         public uint gemRng;
         public int gemsCollected;
         public List<RiftResourceDrop> resources=new List<RiftResourceDrop>();

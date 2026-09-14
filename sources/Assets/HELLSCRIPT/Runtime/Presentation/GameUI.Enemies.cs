@@ -22,7 +22,19 @@ namespace Hellscript
             bool visible=Vector2.Distance(game.Combat.State.position,boss.position)<=12&&game.Combat.Map.LineClear(game.Combat.State.position,boss.position);
             bossTitle.text=visible?Loc.F("{0} · HP {1:0.#}% · {2}", GameCatalog.BossNames[boss.pattern], 100*boss.health/boss.maxHealth, (boss.brain.boss.enraged?"후반":"전반")):Loc.F("{0} · 위치 확인 중", GameCatalog.BossNames[boss.pattern]);
             var a=boss.brain.action;bossActionLabel.text=Loc.T(!visible?"표시된 방향으로 접근하세요.":boss.bossControl.staggered>0?"제압되어 행동을 멈췄습니다.":Loc.T(boss.brain.state)+(a.phase==EnemyActionPhase.Preparing?Loc.F(" · {0:0.00}초 뒤 실행", a.remaining):""));
-            bossHealthFill.gameObject.SetActive(visible);Fill(bossHealthFill,boss.health/boss.maxHealth);
+            bossHealthFill.gameObject.SetActive(visible);Fill(bossHealthFill,boss.health/boss.maxHealth);ReflowBossText();
+        }
+        void ReflowBossText()
+        {
+            if(Page!="battle"||bossHud==null)return;
+            float width=bossHud.rect.width;
+            bossTitle.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width);
+            bossActionLabel.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width);
+            float titleHeight=Mathf.Max(25,bossTitle.preferredHeight),actionHeight=Mathf.Max(30,bossActionLabel.preferredHeight);
+            Place(bossTitle.rectTransform,0,0,width,titleHeight);
+            Place(bossActionLabel.rectTransform,0,titleHeight+2,width,actionHeight);
+            Place((RectTransform)bossHealthFill.transform.parent,0,titleHeight+actionHeight+7,width,4);
+            bossHud.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,titleHeight+actionHeight+11);
         }
         public void ShowEnemyCombat()
         {

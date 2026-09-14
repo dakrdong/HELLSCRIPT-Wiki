@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=4;
+        public const int MaximumSchemaVersion=5;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -100,6 +100,7 @@ namespace Hellscript
             a.transactions??=new System.Collections.Generic.List<EconomyReceipt>();
             foreach(var h in a.heroes)
             {
+                h.potions??=new PotionInventory();h.potions.Validate();
                 if(h.trainingComparison!=null&&string.IsNullOrEmpty(h.trainingComparison.id))h.trainingComparison=null;
                 BehaviorRules.Normalize(h.build);
                 HuntEdictV2Storage.Normalize(h);
@@ -125,6 +126,8 @@ namespace Hellscript
         }
         public static void NormalizeRun(RunState run)
         {
+            run.potions??=new PotionRuntimeState();run.potions.Validate();
+            if(run.cooldownTotals==null||run.cooldownTotals.Length!=18)run.cooldownTotals=new float[18];
             try{RiftResources.Normalize(run);}catch(Exception error){throw new NotSupportedException(Loc.T("균열의 재화·보석 기록을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             if(run.heroAction?.policy?.edictTarget?.version>EdictTargetPolicy.CurrentVersion)
                 throw new NotSupportedException("더 새로운 대상 판단 버전이 필요합니다. 저장 파일은 보존했습니다.");
@@ -171,6 +174,7 @@ namespace Hellscript
         }
         static void ValidateItems(AccountSave a)
         {
+            foreach(var h in a.heroes)h.potions.Validate();
             if(a.gold<0||a.materials<0||a.cores.Any(c=>c<0))throw new InvalidDataException("재화 값이 음수입니다.");
             if(a.heroes.Any(h=>h.inventory.Where(i=>i.equipped).GroupBy(i=>i.slot).Any(g=>g.Count()>1)))throw new InvalidDataException("같은 부위에 여러 장비가 장착되어 있습니다.");
             var owned=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).ToArray();
@@ -249,6 +253,7 @@ namespace Hellscript
                 var target=Data.heroes[i];var source=staged.heroes[i];
                 target.legacyPassiveSlots=source.legacyPassiveSlots;target.level=source.level;target.xp=source.xp;target.highestClear=source.highestClear;target.capacity=source.capacity;
                 target.lastRiftFingerprint=source.lastRiftFingerprint;target.lastRiftBoss=source.lastRiftBoss;
+                target.potions=source.potions;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
             Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;

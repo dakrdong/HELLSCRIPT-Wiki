@@ -13,7 +13,7 @@ namespace Hellscript
         void RefreshGrowthHud()
         {
             var combat=game.Combat;var run=combat.State;int level=combat.EffectiveLevel;
-            headerTitle.text=BattleHeading(run)+$" · Lv.{level}";
+            headerTitle.text=BattleHeading(run);
             if(run.training<0)
             {
                 var next=game.catalog.skills.Where(s=>s.heroClass==combat.Hero.heroClass&&s.unlock>level).OrderBy(s=>s.unlock).FirstOrDefault();

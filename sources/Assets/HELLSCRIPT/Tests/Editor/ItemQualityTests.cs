@@ -250,7 +250,7 @@ namespace Hellscript.Tests
             var item=Gear(1);Enhanced(item);Assert.IsTrue(ItemQuality.Advance(account,item,ref rng));
             account.records.Add(new RunRecord{review=new CombatReview{version=CombatHistory.Version,equipment=new List<Item>{JsonUtility.FromJson<Item>(Json(item))}}});
             account.Hero.inventory.Remove(item);foreach(var owned in account.heroes.SelectMany(h=>h.inventory))owned.contentVersion=3;
-            var store=Store();Assert.AreEqual(3,account.schema);Assert.IsTrue(account.heroes.SelectMany(h=>h.inventory).All(i=>i.contentVersion==3));
+            var store=Store();Assert.AreEqual(GameStore.MaximumSchemaVersion,account.schema);Assert.IsTrue(account.heroes.SelectMany(h=>h.inventory).All(i=>i.contentVersion==3));
             var old=account.records.Last().review.equipment.Single();old.contentVersion=5;string path=Path.Combine(directory,"hellscript-local-v1.json"),original=Json(account);File.WriteAllText(path,original);
             Assert.Throws<NotSupportedException>(()=>new GameStore(directory,catalog));Assert.AreEqual(original,File.ReadAllText(path));
         }
@@ -260,9 +260,9 @@ namespace Hellscript.Tests
             var item=Gear(0,3,30,true);Enhanced(item);Assert.IsTrue(ItemQuality.Advance(account,item,ref rng));
             string expected=Json(item);account.records.Add(new RunRecord{review=new CombatReview{version=CombatHistory.Version,equipment=new List<Item>{JsonUtility.FromJson<Item>(expected)}}});
             foreach(var hero in account.heroes)hero.inventory.Clear();account.warehouse.Clear();
-            Store();Assert.AreEqual(3,account.schema);var loaded=new GameStore(directory,catalog);
-            Assert.AreEqual(3,loaded.Data.schema);Assert.AreEqual(expected,Json(loaded.Data.records.Last().review.equipment.Single()));
-            loaded.Data.records.Clear();Assert.IsTrue(loaded.Save());Assert.AreEqual(3,new GameStore(directory,catalog).Data.schema);
+            Store();Assert.AreEqual(GameStore.MaximumSchemaVersion,account.schema);var loaded=new GameStore(directory,catalog);
+            Assert.AreEqual(GameStore.MaximumSchemaVersion,loaded.Data.schema);Assert.AreEqual(expected,Json(loaded.Data.records.Last().review.equipment.Single()));
+            loaded.Data.records.Clear();Assert.IsTrue(loaded.Save());Assert.AreEqual(GameStore.MaximumSchemaVersion,new GameStore(directory,catalog).Data.schema);
         }
         [Test]
         public void TheCurrentAccountSchemaAlsoRejectsAStillNewerSchemaWithoutFallback()

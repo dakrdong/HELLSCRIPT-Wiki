@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-14 전역 HUD·물약:** 패시브 3개·액티브 4개·물약 3슬롯을 배경판 없이 표시하며 가로·세로에서 같은 컴포넌트를 사용한다. 상태 목록은 4.5칸에서 최대 8칸으로 펼치고 숫자까지 함께 사라지는 경계를 적용했다. 물약 8종의 실제 재고·자동 사용·성소 구매와 부족 시 출정 지침을 연결했다. [구현·검증 기록](../../Docs/Implementation/Global_HUD_Potions.md)
+
+English: the shared landscape/portrait HUD displays three passives, four actives and three potion slots without a wide backing panel. Expand the status strip from 4.5 to eight slots with matching alpha fades for icons and numbers. Eight potions connect real stock, automatic use, sanctuary purchases and saved shortage/departure choices. [Implementation and verification](../../Docs/Implementation/Global_HUD_Potions.en.md)
+
 **2026-09-14 밀도·동선 추가 규칙:** 새 버전 7 지도는 내부 바닥 점유율 48% 이상, 빈 공간 표본 거리 14m 이하, 방 밖 무분기 통로 40m 이하를 강제한다. 모든 방에 출입구 3개 이상을 연결한다. 곡선 지형·중앙 방·전체 순환·주변 보스 소환은 유지한다. [최신 구현·검증 기록](../../Docs/Implementation/Compact_Rift_Expansion.md)
 
 English: version 7 enforces at least 48% interior floor occupancy, at most 14 m sampled empty-space distance, and at most 40 m of unbranched passage outside rooms. Every room has at least three connected exits. Organic geometry, the central room, full circulation and nearby boss spawning remain. [Current implementation and verification](../../Docs/Implementation/Compact_Rift_Expansion.en.md)

@@ -22,7 +22,7 @@ Keep `RectMask2D` for hard outside containment and share viewport coordinates ac
 
 In both collapsed and expanded states, briefly select an icon to inspect its name, full description, time, stacks and source. Descriptions must remain reachable with four or fewer effects when no expand button exists. This input only inspects information and never activates an effect or combat action. Distinguish taps from drags; drag release must not select an effect. Desktop hover can show the same description. The existing detailed combat-effects screen retains its pause policy, but expand/collapse/scroll alone never pauses combat.
 
-Proposed initial ordering is debuffs first, then arrival order; do not continually sort by shrinking duration. During a drag, expired effects become inactive temporary placeholders rather than being falsely shown as active. On release, remove expired slots and insert pending effects, preserving the current anchor or nearest surviving neighbor.
+Keep a stable source order, with shield instances ordered by creation ID; do not continually sort by shrinking duration. During a drag, expired effects become inactive temporary placeholders rather than being falsely shown as active. On release, remove expired slots and insert pending effects, preserving the current anchor or nearest surviving neighbor.
 
 Acceptance: 0/4/5/8/12/40 effects; start/middle/end; expand/collapse/rotate/expire; all effects reachable; real scene visibility and smooth text fading over bright/dark ground; no combat actions from inspection gestures. The supplied status set provides shared semantic glyphs, not bespoke artwork for every possible game effect.
 

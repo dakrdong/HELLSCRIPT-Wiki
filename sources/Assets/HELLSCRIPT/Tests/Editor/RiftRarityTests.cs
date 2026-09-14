@@ -195,12 +195,18 @@ namespace Hellscript.Tests
             // The public tick resolves real death rewards before movement and collection.
             sim.Tick(CombatSimulation.Step);
             Assert.AreEqual(expectedCount, sim.State.drops.Count);
-            for (int i = 0; i < expected.Length; i++) Assert.AreEqual(ItemFingerprint(expected[i]), ItemFingerprint(sim.State.drops[i].item));
+            for (int i = 0; i < expected.Length; i++)
+            {
+                var drop=sim.State.drops[i];
+                Assert.AreEqual(sim.State.id+"-"+drop.id,drop.item.id);
+                Assert.AreEqual(ItemFingerprint(expected[i],false), ItemFingerprint(drop.item,false));
+            }
+            Assert.AreEqual(expectedCount,sim.State.drops.Select(d=>d.id).Distinct().Count());
             Assert.AreEqual(expectedRng, sim.State.rewardRng);
             Assert.IsTrue(sim.State.drops.All(d => d.item.level >= 8 && d.item.level <= 12));
             Assert.AreEqual(50, account.Hero.highestClear);
-            Assert.AreEqual(gold + (source == RiftRewardSource.Boss ? 3300 : source == RiftRewardSource.Elite ? 75 : 15), account.gold);
-            Assert.AreEqual(materials + (source == RiftRewardSource.Boss ? 19 : 0), account.materials);
+            Assert.AreEqual(gold + (source == RiftRewardSource.Boss ? 3300 : source == RiftRewardSource.Elite ? 75 : 15), account.gold+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed).Sum(r=>r.amount));
+            Assert.AreEqual(materials + (source == RiftRewardSource.Boss ? 19 : 0), account.materials+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed).Sum(r=>r.amount));
             if (source == RiftRewardSource.Boss) Assert.AreEqual(RunPhase.Looting, sim.State.phase);
         }
 
@@ -277,7 +283,7 @@ namespace Hellscript.Tests
             CollectionAssert.AreEqual(items, loaded.Data.suspendedRun.drops.Select(d => ItemFingerprint(d.item)));
             var resumed = new CombatSimulation(loaded.Data, catalog, 999, restore: loaded.Data.suspendedRun);
             Assert.AreEqual(10, resumed.State.stage);
-            int before = resumed.Hero.inventory.Count, gold = loaded.Data.gold, materials = loaded.Data.materials;
+            int before = resumed.Hero.inventory.Count, gold = loaded.Data.gold+resumed.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed).Sum(r=>r.amount), materials = loaded.Data.materials+resumed.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed).Sum(r=>r.amount);
             resumed.Tick(CombatSimulation.Step);
             resumed.Tick(CombatSimulation.Step);
             Assert.AreEqual(RunPhase.Cleared, resumed.State.phase);

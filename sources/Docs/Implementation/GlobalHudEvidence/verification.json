@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-14",
+  "unity": "6000.6.0f1",
+  "fullEditMode": {
+    "total": 2639,
+    "passed": 2638,
+    "failed": 1,
+    "source": "final-all-tests.xml"
+  },
+  "focusedAfterFix": {
+    "total": 109,
+    "passed": 109,
+    "failed": 0,
+    "source": "final-delta-tests.xml"
+  },
+  "resolvedAssertion": {
+    "before": "Hellscript.Tests.GemServiceTests.OldSaveLoadsWithAnEmptyBagAndNewSavesRequireSchemaFour",
+    "after": "Hellscript.Tests.GemServiceTests.OldSaveLoadsWithAnEmptyBagAndNewSavesUseCurrentSchema",
+    "reason": "Account schema is now 5; replace outdated literal 4 with MaximumSchemaVersion."
+  },
+  "combinedDistinctCases": 2640,
+  "combinedUnresolvedFailures": 0,
+  "combinedCaveat": "Combined evidence from the full run plus focused rerun; not a claim that one entire final suite was rerun.",
+  "resourcePngCount": 67,
+  "layoutMatrixCases": 30,
+  "geometryToleranceLogicalPixels": 2,
+  "mobileDeviceValidation": "pending release gate",
+  "nativeRuntimeMarkers": [
+    "HELLSCRIPT_GLOBAL_HUD_SMOKE_OK",
+    "HELLSCRIPT_BATTLE_LAYOUT_RUNTIME_SMOKE_OK",
+    "HELLSCRIPT_VISIBILITY_SMOKE_OK",
+    "HELLSCRIPT_VISIBILITY_RESTART_OK"
+  ],
+  "battleWindowCases": 16,
+  "bossWindowCases": 5,
+  "isolatedRestart": "passed"
+}

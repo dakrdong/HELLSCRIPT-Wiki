@@ -45,11 +45,12 @@ namespace Hellscript
         }
         public void SelectHero(int index)
         {
-            if(Running)return;Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
+            if(Running)return;CancelPotionDeparture();Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
         public bool ChangeCharacterFromSettings(int index)
         {
             if(!Store.SwitchCharacter(index,catalog,Combat?.State)){Notify(Store.Error);return false;}
+            CancelPotionDeparture();
             UI.CloseCommonPanel();ExitIdle(false);RestoreForegroundClock();
             Comparison=null;ComparisonError="";repeatRestored=false;
             if(Combat!=null){Combat.Visual-=World.Effect;Combat=null;}
@@ -72,6 +73,13 @@ namespace Hellscript
             Comparison=null;
             RunState snapshot=resume?Store.Data.suspendedRun:null;
             if(snapshot!=null){int hero=Store.Data.heroes.FindIndex(h=>h.id==snapshot.heroId);if(hero<0){Notify("저장된 영웅을 찾을 수 없습니다.");return;}Store.Data.selectedHero=hero;}
+            if(training<0&&snapshot==null)
+            {
+                string visit=PotionVisit();
+                if(!PrepareDeparturePotions(visit,continueRepeat))
+                {if(!continueRepeat&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;}return;}
+            }
+            CancelPotionDeparture();
             var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
             string fingerprint=Store.Data.Hero.lastRiftFingerprint;int boss=Store.Data.Hero.lastRiftBoss;
             try{Combat=new CombatSimulation(Store.Data,catalog,Mathf.Clamp(SelectedStage,1,Store.Data.Hero.highestClear+1),training,snapshot,seed,ownedTraining:!fullSkillTraining);}
@@ -103,7 +111,7 @@ namespace Hellscript
         public void SetSpeed(float speed)
         {
             if(!CombatSpeedAccess.CanSelect(speed)){Notify(CombatSpeedAccess.LockedMessage);return;}
-            if(Store.Data.speed!=EffectiveSpeed){Store.Data.speed=EffectiveSpeed;Save();}
+            if(Store.Data.speed!=speed){Store.Data.speed=speed;Save();}
             UI.RefreshHud();
         }
         public void ContinuePortal()
@@ -123,6 +131,7 @@ namespace Hellscript
         public void EnterPlaza(bool fresh=false)
         {
             if(Active)return;
+            if(fresh||Town==null)VisitSanctuary(PotionVisit());
             if(Combat!=null){Combat.Visual-=World.Effect;Combat=null;}
             if(fresh||Town==null)Town=new TownWalk();
             World.BuildTown(Town);UI.ShowPlaza();
@@ -165,9 +174,11 @@ namespace Hellscript
         public void ReturnTown()
         {
             ExitIdle(false);RestoreForegroundClock();
+            CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();
             Comparison=null;ComparisonError="";
             if(Combat!=null){if(Active)Combat.Abandon();Combat.Visual-=World.Effect;Combat=null;}
             Store.Data.suspendedRun=null;Store.Data.repeatHunt=null;repeatRestored=false;World.ClearDungeon();Save();UI.ShowTown();
+            VisitSanctuary(visit);
         }
         public void EditBuild()
         {UI.ShowBuild();}
@@ -206,6 +217,7 @@ namespace Hellscript
             double elapsed=combatClock.Sample(Time.realtimeSinceStartupAsDouble);
             UpdateDisplaySettings();
             float repeatReal=UpdateRepeatClock();
+            TickPotionWait();
             if(Combat==null){TickPlaza(Mathf.Min(Time.unscaledDeltaTime,.25f));return;}
             // This display-only pause is not serialized into the run. Existing pause reasons
             // and the partial simulation tick remain exactly as they were on entry.

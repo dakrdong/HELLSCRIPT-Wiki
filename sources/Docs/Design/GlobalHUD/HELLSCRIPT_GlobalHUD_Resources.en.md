@@ -6,12 +6,12 @@ Date: 2026-09-14
 
 ## Import workflow
 
-Resources are staged in `Docs/Design/GlobalHUD/Resources/v1`, outside Assets to avoid automatic integration. After implementation approval, copy selected PNGs to the manifest target and import through Unity Editor. SVGs are editable sources; supplied PNGs require no vector package.
+Originals remain archived in `Docs/Design/GlobalHUD/Resources/v1`. The game imports 67 PNGs into `Assets/HELLSCRIPT/Resources/Art/GlobalHUD` through the folder-scoped, idempotent `GlobalHudImporter`. The [v2 runtime profile](Resources/v2/layout-profile.json) supersedes the initial layout proposal. PNGs require no vector package.
 
-1. Read the [manifest](Resources/v1/resource-manifest.json) and [layout profile](Resources/v1/layout-profile.json).
+1. Read the [manifest](Resources/v1/resource-manifest.json) and [runtime layout profile](Resources/v2/layout-profile.json).
 2. Start with Sprite (2D and UI), Input Texture Alpha, Alpha Is Transparency, Bilinear, Clamp, mipmaps off, read/write off, Full Rect and PPU 100. Disable compression for initial review; compare compression on the target device later.
-3. Proposed maximum size is 2048 for native artwork and 512 for vector PNGs. Preserve source files and use Unity import settings for device-specific reductions.
-4. Existing SkillAtlas is 1536×1024 in six columns/four rows of 256×256 cells. Manifest rectangles use Unity bottom-left coordinates. The packaged copy is byte-identical; reuse the existing project texture rather than loading a duplicate.
+3. The importer uses a maximum size of 2048 and disables NPOT rescaling for all 67 assets. Preserve source files and use Unity import settings for device-specific reductions.
+4. Existing SkillAtlas is 1536×1024 in six columns/four rows of 256×256 cells. Manifest rectangles use Unity bottom-left coordinates. At runtime cells use the imported texture dimensions, so existing atlas import rescaling does not change cell identity. The packaged copy is byte-identical; reuse the existing project texture rather than loading a duplicate.
 5. Borders use left/bottom/right/top order: 14 for `frame-vital`, 10 for `fill-vital`. For sliced fills, adjust the parent width; a single Image cannot simultaneously be Sliced and Filled.
 6. Compose new frame/content/cooldown layers separately. Existing active tiles already include borders; do not double-frame them. Center and scale the mage face inside a circular mask non-destructively.
 
@@ -25,7 +25,7 @@ HP/MP/XP tint, timers, counts, level, stacks and descriptions remain dynamic usi
 
 Three bottles and the mage portrait were generated with built-in image_gen and copied without modifying PNG bytes. Metadata reports `softwareAgent.name=gpt-image`, `version=2.0`; the tool exposes no model-selection argument and signatures were not verified. Do not infer the old atlas's model. Existing usage follows [Asset Provenance](../../Implementation/Asset_Provenance.md). New paintings were generated for this project; no exclusivity or completed independent legal review is claimed.
 
-Retain [prompts](Resources/v1/generation-prompts.json), [native IDs](Resources/v1/native-sources.json), [vector builder](Resources/v1/build-vectors.cjs), [validator](Resources/v1/validate-resources.py), [pixel QA](Resources/v1/resource-qa.json) and [vector list](Resources/v1/vector-manifest.json). Checks cover real alpha, transparent pixels, dimensions, rectangles and hashes. Unity/mobile rendering remains future work.
+Retain [prompts](Resources/v1/generation-prompts.json), [native IDs](Resources/v1/native-sources.json), [vector builder](Resources/v1/build-vectors.cjs), [validator](Resources/v1/validate-resources.py), [pixel QA](Resources/v1/resource-qa.json) and [vector list](Resources/v1/vector-manifest.json). Checks cover real alpha, transparent pixels, dimensions, rectangles and hashes. Rendering was verified in a Unity 6000.6 macOS development player. Mobile-device touch and compression quality remain release checks.
 
 Open the [gallery](Resources/v1/gallery.html) locally or from a static folder server. Public wiki HTML attachments may be displayed as source text; use PNG links or the ZIP there.
 

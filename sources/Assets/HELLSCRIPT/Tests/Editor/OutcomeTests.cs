@@ -93,6 +93,8 @@ namespace Hellscript.Tests
             var sim=Fixture(out _);var enemy=sim.State.enemies[0];enemy.stun=2;sim.State.effectVersion=2;GameStore.NormalizeRun(sim.State);Assert.AreEqual(2,enemy.stun);
             enemy.boss=true;enemy.stun=0;enemy.statuses.Add(new StatusEffect{kind=StatusKind.Root,definitionId="A03",rootCastId=77,remaining=1});enemy.bossControl.credited.Add("77:A03");sim.State.effectVersion=2;GameStore.NormalizeRun(sim.State);Assert.AreEqual(0,enemy.bossControl.meter);Assert.IsEmpty(enemy.statuses);
         }
+        static int GoldWithPending(AccountSave account,RunState run)=>account.gold+run.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed&&!r.ignored).Sum(r=>r.amount);
+        static int MaterialsWithPending(AccountSave account,RunState run)=>account.materials+run.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed&&!r.ignored).Sum(r=>r.amount);
         static void AddOpposingProjectiles(CombatSimulation sim,bool reverse)
         {
             var boss=sim.State.enemies[0];boss.boss=true;boss.health=1;sim.State.bossId=boss.id;sim.State.phase=RunPhase.Boss;sim.State.training=-1;sim.State.health=10;
@@ -105,8 +107,8 @@ namespace Hellscript.Tests
         {
             var sim=Fixture(out var account);int gold=account.gold,mats=account.materials;AddOpposingProjectiles(sim,reverse);sim.Tick(.05f);
             Assert.AreEqual(RunPhase.Looting,sim.State.phase);Assert.AreEqual(0,sim.State.health);Assert.AreEqual(2,sim.State.damageEvents.Count);Assert.AreEqual(2,sim.State.effectEvents.Count(e=>e.kind=="DEATH"));Assert.IsTrue(sim.State.heroDeathRecorded);
-            CollectionAssert.AreEqual(new[]{"BOSS","HERO"},sim.State.effectEvents.Where(e=>e.kind=="DEATH").Select(e=>e.definitionId));Assert.AreEqual(gold+1950,account.gold);Assert.AreEqual(mats+15,account.materials);Assert.AreEqual(3,sim.State.drops.Count);
-            sim.Tick(.05f);Assert.AreEqual(RunPhase.Cleared,sim.State.phase);Assert.AreEqual(2,sim.State.damageEvents.Count);Assert.AreEqual(gold+1950,account.gold);Assert.AreEqual(1,account.records.Count);
+            CollectionAssert.AreEqual(new[]{"BOSS","HERO"},sim.State.effectEvents.Where(e=>e.kind=="DEATH").Select(e=>e.definitionId));Assert.AreEqual(gold+1950,GoldWithPending(account,sim.State));Assert.AreEqual(mats+15,MaterialsWithPending(account,sim.State));Assert.AreEqual(3,sim.State.drops.Count);
+            sim.Tick(.05f);Assert.AreEqual(RunPhase.Cleared,sim.State.phase);Assert.AreEqual(2,sim.State.damageEvents.Count);Assert.AreEqual(gold+1950,GoldWithPending(account,sim.State));Assert.AreEqual(1,account.records.Count);
         }
         [Test]
         public void FatalGroundAfterTheBossProjectileStillRecordsDamageAndPreventsKillHealRevival()
@@ -119,14 +121,14 @@ namespace Hellscript.Tests
         public void BossKillWinsTheTimerBoundaryButHeroDeathAloneFails(bool killBoss)
         {
             var sim=Fixture(out var account);AddOpposingProjectiles(sim,false);if(!killBoss)sim.State.projectiles.RemoveAll(p=>!p.hostile);sim.State.time=299.99f;int gold=account.gold;sim.Tick(.05f);
-            Assert.AreEqual(killBoss?RunPhase.Looting:RunPhase.Failed,sim.State.phase);Assert.AreEqual(killBoss?gold+1950:gold,account.gold);int damage=sim.State.damageEvents.Count;sim.Tick(1);Assert.AreEqual(damage,sim.State.damageEvents.Count);
+            Assert.AreEqual(killBoss?RunPhase.Looting:RunPhase.Failed,sim.State.phase);Assert.AreEqual(killBoss?gold+1950:gold,GoldWithPending(account,sim.State));int damage=sim.State.damageEvents.Count;sim.Tick(1);Assert.AreEqual(damage,sim.State.damageEvents.Count);
         }
         [Test]
         public void LaterAttacksFreezeAfterLootingAndSavingCannotRepeatDeathOrFirstClearRewards()
         {
             var sim=Fixture(out var account);AddOpposingProjectiles(sim,false);sim.State.effects.Add(new GroundEffect{id=4000,createdAt=-1,position=sim.State.position,radius=3,delay=.2f,duration=2,damage=1000,hostile=true});sim.Tick(.05f);
-            var save=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account));var run=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));var restored=new CombatSimulation(save,catalog,1,restore:run);int gold=save.gold;restored.Tick(.5f);restored.Tick(.5f);
-            Assert.AreEqual(gold,save.gold);Assert.AreEqual(2,run.damageEvents.Count);Assert.AreEqual(2,run.effectEvents.Count(e=>e.kind=="DEATH"));Assert.AreEqual(1,save.Hero.firstClears.Count);Assert.AreEqual(1,save.records.Count);Assert.AreEqual(.15f,run.effects.Single().delay,.00001f);
+            var save=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account));var run=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));var restored=new CombatSimulation(save,catalog,1,restore:run);int gold=GoldWithPending(save,run);restored.Tick(.5f);restored.Tick(.5f);
+            Assert.AreEqual(gold,GoldWithPending(save,run));Assert.AreEqual(2,run.damageEvents.Count);Assert.AreEqual(2,run.effectEvents.Count(e=>e.kind=="DEATH"));Assert.AreEqual(1,save.Hero.firstClears.Count);Assert.AreEqual(1,save.records.Count);Assert.AreEqual(.15f,run.effects.Single().delay,.00001f);
         }
         [Test]
         public void PendingDeathRestoresWithoutRepeatingSettledOlderDeaths()

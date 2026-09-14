@@ -19,7 +19,7 @@ namespace Hellscript
         readonly List<(CanvasGroup group,bool interactable,bool raycasts,float alpha)> commonInputGates=new List<(CanvasGroup,bool,bool,float)>();
         readonly List<(string id,Button button)> aspectButtons=new List<(string,Button)>();
         readonly List<(string code,Button button)> languageButtons=new List<(string,Button)>();
-        public bool CommonPanelOpen=>commonModal!=null||idleIntroductionOpen;
+        public bool CommonPanelOpen=>commonModal!=null||hudPanel!=null||idleIntroductionOpen;
         public bool BlocksRepeat=>runeSession||CommonPanelOpen||presetModal!=null||root!=null&&root.Find("Confirm")!=null;
         public void ShowScreenSettings()=>ShowCommonPanel(false);
         public void ShowCombatOverview(){ShowCommonPanel(false);SelectCombatTab();}

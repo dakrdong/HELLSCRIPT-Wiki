@@ -6,11 +6,11 @@
 
 ## 사용 순서
 
-리소스는 `Docs/Design/GlobalHUD/Resources/v1`에 준비했다. Unity가 자동으로 임포트하지 않도록 아직 Assets 폴더에 넣지 않았다. 구현 승인을 받은 뒤 필요한 PNG를 매니페스트의 대상 경로로 옮겨 Editor에서 임포트한다. SVG는 편집 원본이며 게임에서는 기본 제공 PNG를 사용하면 별도 벡터 패키지가 필요하지 않다.
+원본은 `Docs/Design/GlobalHUD/Resources/v1`에 보존하고 PNG 67개를 `Assets/HELLSCRIPT/Resources/Art/GlobalHUD`에 임포트했다. `GlobalHudImporter`가 범위를 해당 폴더로 한정해 같은 설정을 반복 적용한다. v1 ZIP은 당시 전달 원본이며 현재 배치는 [v2 설정](Resources/v2/layout-profile.json)을 따른다. SVG는 편집 원본이며 게임에서는 PNG를 사용한다.
 
-1. [매니페스트](Resources/v1/resource-manifest.json)와 [배치 프로필](Resources/v1/layout-profile.json)을 확인한다.
+1. [매니페스트](Resources/v1/resource-manifest.json)와 [현재 배치 프로필](Resources/v2/layout-profile.json)을 확인한다.
 2. Sprite (2D and UI), Input Texture Alpha, Alpha Is Transparency, Bilinear, Clamp, Mip Maps Off, Read/Write Off, Full Rect, PPU 100을 시작값으로 사용한다. 초기 시각 검토에서는 압축을 끄고 이후 기기에서 압축을 비교한다.
-3. 원화는 Max Size 2048, 벡터 PNG는 실제 크기 이상인 512를 제안한다. 보관 원본은 그대로 두고 모바일용 축소·압축은 Unity 임포트 설정에서 처리한다.
+3. 현재 임포터는 67개 모두 Max Size 2048과 NPOT 축소 비활성화를 적용한다. 보관 원본은 그대로 두고 모바일용 축소·압축은 Unity 임포트 설정에서 처리한다.
 4. SkillAtlas는 1536×1024, 6열×4행, 셀 256×256이다. 매니페스트는 Unity의 왼쪽 아래 원점 좌표를 제공한다. 기존 프로젝트 파일과 바이트가 같으므로 런타임에 사본을 또 로드하지 않는다.
 5. 프레임의 border는 왼쪽·아래·오른쪽·위 순서다. `frame-vital`은 14, `fill-vital`은 10을 사용한다. 바를 Sliced로 그릴 때 부모 폭으로 진행 길이를 조절한다. Filled 모드와 Sliced 모드를 한 Image에 동시에 설정하지 않는다.
 6. 새로운 공통 그림은 프레임·내용·쿨타임을 나눠 조합한다. 기존 액티브 아틀라스의 테두리는 이미 포함되어 있으므로 새 프레임과 중복하지 않는다. 마법사 초상은 원형 마스크 안에서 얼굴 중심과 확대율을 맞춘다.
@@ -27,7 +27,7 @@ HP·MP·XP 색, 시간·수량·레벨·중첩·설명은 동적으로 표시한
 
 병 3종과 마법사 초상은 내장 image_gen으로 생성했고 원본 PNG 바이트를 보존했다. 메타데이터의 `softwareAgent.name=gpt-image`, `version=2.0`을 확인했다. 도구는 모델 지정 인자를 노출하지 않으며 서명 검증을 수행한 것은 아니다. 기존 아틀라스의 과거 생성 모델은 이번 기록에서 추정하지 않는다. 기존 사용 기록은 [Asset Provenance](../../Implementation/Asset_Provenance.md)를 따른다. 이번 원화는 프로젝트용 신규 생성물이며 독점권이나 별도 법적 검토가 완료되었다고 주장하지 않는다.
 
-[프롬프트](Resources/v1/generation-prompts.json), [원본 파일 식별자](Resources/v1/native-sources.json), [벡터 재생성 도구](Resources/v1/build-vectors.cjs), [검사 도구](Resources/v1/validate-resources.py), [검사 결과](Resources/v1/resource-qa.json), [벡터 목록](Resources/v1/vector-manifest.json)을 함께 보관한다. 픽셀 검사에서는 실제 알파·투명 픽셀·크기·좌표·해시를 확인했다. Unity 및 모바일 시각 검증은 구현 단계에 남아 있다.
+[프롬프트](Resources/v1/generation-prompts.json), [원본 파일 식별자](Resources/v1/native-sources.json), [벡터 재생성 도구](Resources/v1/build-vectors.cjs), [검사 도구](Resources/v1/validate-resources.py), [검사 결과](Resources/v1/resource-qa.json), [벡터 목록](Resources/v1/vector-manifest.json)을 함께 보관한다. 픽셀 검사에서는 실제 알파·투명 픽셀·크기·좌표·해시를 확인했다. Unity 6000.6 macOS 개발 빌드에서 실제 표시를 확인했다. 모바일 실기기의 터치·압축 품질 검증은 출시 전에 수행한다.
 
 아래 목록은 각각의 원본 파일을 제공한다. [리소스 미리보기](Resources/v1/gallery.html)는 로컬에서 파일을 열거나 폴더를 정적 서버로 열어 확인할 수 있다. 공개 위키에서는 HTML이 텍스트로 제공될 수 있으므로 PNG 링크 또는 ZIP을 사용한다.
 

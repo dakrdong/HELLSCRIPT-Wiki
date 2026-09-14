@@ -67,6 +67,12 @@ namespace Hellscript
         {
             if(Page!="plaza"||plazaStatus==null||game.Town==null)return;
             var walk=game.Town;var near=walk.Nearby;
+            if(globalHud?.Layout!=null&&plazaJoystickRect!=null)
+            {
+                var layout=globalHud.Layout;float scale=root.parent.GetComponent<Canvas>().scaleFactor;
+                // Keep the existing town movement control above the left HUD, including text scaling.
+                plazaJoystickRect.anchoredPosition=new Vector2(28,(layout.status.yMax+16)*layout.scale/scale);
+            }
             plazaStatus.text=walk.Destination.HasValue?Loc.F("{0}으로 이동 중 · {1:0.0}m",TownLayout.Station(walk.Destination.Value).name,walk.Remaining):Loc.F("{0} Lv.{1} · 중앙 길 횡단 약 20초",game.catalog.classNames[(int)game.Store.Data.Hero.heroClass],game.Store.Data.Hero.level);
             plazaAction.gameObject.SetActive(near.HasValue&&!TownNavigationOpen&&!CommonPanelOpen);
             if(near.HasValue)

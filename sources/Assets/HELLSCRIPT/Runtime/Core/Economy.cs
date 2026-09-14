@@ -37,9 +37,24 @@ namespace Hellscript
         readonly Dictionary<string,HashSet<int>> sets=new Dictionary<string,HashSet<int>>();
         public int SetPieces(string id)=>sets.TryGetValue(id,out var slots)?slots.Count:0;
         public bool[] passives=new bool[6];
-        float baseSpeed;
+        float baseSpeed,potionMoveBonus;
         public float Bonus(StatId id)=>bonuses[(int)id];
-        public float SpeedWithBonus(float bonus)=>baseSpeed*(1+Mathf.Min(.5f,bonuses[21]/100+bonus));
+        public float SpeedWithBonus(float bonus)=>baseSpeed*(1+Mathf.Min(.5f,bonuses[21]/100+bonus+potionMoveBonus));
+        public HeroStats WithPotion(PotionDefinition potion,int level)
+        {
+            var result=(HeroStats)MemberwiseClone();
+            switch(potion.id)
+            {
+                case "PU01":result.potionMoveBonus=potion.magnitude;result.speed=result.SpeedWithBonus(0);break;
+                case "PU02":result.damage*=1+potion.magnitude;result.attackPower*=1+potion.magnitude;break;
+                case "PU03":result.resistance+=potion.magnitude+level*3;break;
+                case "PU04":result.armor*=1+potion.magnitude;break;
+                case "PU05":result.attackSpeed=Mathf.Min(1.5f,result.attackSpeed+potion.magnitude);break;
+                case "PU06":result.crit=Mathf.Min(.75f,result.crit+potion.magnitude);break;
+            }
+            return result;
+        }
+        public bool PotionChanges(HeroStats other)=>speed!=other.speed||damage!=other.damage||resistance!=other.resistance||armor!=other.armor||attackSpeed!=other.attackSpeed||crit!=other.crit;
         public float BuffReduction(float other)=>Mathf.Min(.5f,gemBuffReduction+Mathf.Max(0,other));
         // The rating that mitigates one element: armour for physical, and the element's own
         // resistance beside the all-resistance roll for the other five. Read rather than stored,

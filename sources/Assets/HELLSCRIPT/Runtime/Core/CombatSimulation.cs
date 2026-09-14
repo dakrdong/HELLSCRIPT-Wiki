@@ -9,7 +9,6 @@ namespace Hellscript
     {
         public const float Step=.05f;
         public readonly RunState State;
-        public HeroStats Stats {get;private set;}
         public readonly HeroSave Hero;
         public bool OwnedTraining=>State.training>=0&&State.trainingUsesOwnedHero;
         bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero;
@@ -37,7 +36,10 @@ namespace Hellscript
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
             bool owned=restore!=null?restore.training>=0&&restore.trainingUsesOwnedHero:ownedTraining&&training>=0;
             if(owned&&(restore?.training??training)>2)throw new ArgumentOutOfRangeException(nameof(training));
-            this.account=owned?JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account)):account;this.catalog=catalog;Hero=this.account.Hero;
+            // Owned training and every stocked training session own their account copy. Keep the
+            // pre-inventory developer fixture contract until its hero adopts the new inventory.
+            bool copyAccount=owned||(restore?.training??training)>=0&&account.Hero.potions?.version>0;
+            this.account=copyAccount?JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account)):account;this.catalog=catalog;Hero=this.account.Hero;
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
@@ -49,6 +51,7 @@ namespace Hellscript
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
             PrepareEdict();
+            InitializePotions(restore==null);
             InitializeRift(restore==null,forcedObjective);
             RiftVisibility.Initialize(State,Map,restore!=null);
             if(Hero.heroClass==HeroClass.Mage||Hero.heroClass==HeroClass.Warrior)EnsureShieldEngagement();
@@ -136,6 +139,7 @@ namespace Hellscript
             ResolveCombatDeaths();if(SettleCombatOutcome())return;
             State.guideShrineTime=Mathf.Max(0,State.guideShrineTime-dt);State.resolveShrineTime=Mathf.Max(0,State.resolveShrineTime-dt);
             State.time+=dt;State.statistics.ticks++;State.potionCd=Mathf.Max(0,State.potionCd-dt);State.actionCd=Mathf.Max(0,State.actionCd-dt);
+            TickPotionTimers(dt);
             TickEnemyTimers(dt);
             float passiveWalkingTime=Mathf.Clamp(dt-ItemEffects.ap05Cooldown,0,dt);TickCharges(dt);
             State.receivedDamage.RemoveAll(d=>d.time<State.time-3-Step);
@@ -155,6 +159,7 @@ namespace Hellscript
                 State.decisionTime=.2f;
             }
             var walkingOrigin=State.position;MoveHero(dt);TrackWalking(Vector2.Distance(walkingOrigin,State.position),dt,passiveWalkingTime);TickChannel(dt);
+            if(State.potions.version>0&&Vector2.Distance(walkingOrigin,State.position)>.0001f)TryUseUtilityPotion(true);
             TickItemAilments(dt);
             TickEnemies(dt);TickProjectiles(dt);TickTraps(dt);TickEffects(dt);TickEnemyHazards(dt);
             RemoveCancelledEvasions();
@@ -177,6 +182,7 @@ namespace Hellscript
         }
         public int CountNear(Vector2 pos,float radius) => State.enemies.Count(e=>!e.dead&&Vector2.Distance(pos,e.position)<=radius);
         public bool InDanger => DangerAt(State.position,1.5f);
+        public float DisplaySkillCost(SkillDefinition skill)=>Cost(skill);
         float Cost(SkillDefinition skill,bool withoutConsumables=false)
         {
             float reduction=Stats.costReduction+Stats.runeSkillCost[catalog.skills.IndexOf(skill)]/100+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?.25f:0);

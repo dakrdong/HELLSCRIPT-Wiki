@@ -13,7 +13,7 @@ namespace Hellscript
             account=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(source.account));catalog=source.catalog;
             Hero=account.heroes.Single(h=>h.id==source.Hero.id);
             State=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(source.State));
-            Stats=source.Stats;Map=new RiftNavigation(State.layout);
+            Stats=source.baseStats;Map=new RiftNavigation(State.layout);
         }
         BuildConfig ValidateBuildChange(BuildConfig requested)
         {
@@ -26,7 +26,7 @@ namespace Hellscript
         }
         HeroStats BuildChangeStats(BuildConfig candidate)
         {
-            if(State.training<0)return Stats;
+            if(State.training<0)return baseStats;
             var hero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));hero.build=candidate;
             return new HeroStats(hero,FullSkillTraining,account.runes);
         }

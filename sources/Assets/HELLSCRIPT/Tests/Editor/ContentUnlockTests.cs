@@ -125,10 +125,12 @@ namespace Hellscript.Tests
             sim.State.training=-1;sim.State.stage=1;sim.State.enemies.Clear();
             sim.State.enemies.Add(new EnemyState{boss=true,dead=true});
             sim.Tick(.05f);Assert.AreEqual(1,a.Hero.highestClear);Assert.IsTrue(sim.State.bossRewarded);
-            Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.Enhance));int gold=a.gold,mats=a.materials;int grants=a.contentUnlocks.unlocked.Count;
+            Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.Enhance));int gold=a.gold+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed).Sum(r=>r.amount),mats=a.materials+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed).Sum(r=>r.amount);var grants=a.contentUnlocks.unlocked.ToList();
+            if(sim.State.resources.Any(r=>r.kind==RiftResourceKind.Gem&&!r.claimed)&&!grants.Contains(ContentUnlocks.Gem))grants.Add(ContentUnlocks.Gem);
             a.suspendedRun=sim.State;var copy=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(a));
             var restored=new CombatSimulation(copy,catalog,50,restore:copy.suspendedRun);restored.Tick(.05f);
-            Assert.AreEqual(gold,copy.gold);Assert.AreEqual(mats,copy.materials);Assert.AreEqual(grants,copy.contentUnlocks.unlocked.Count);Assert.AreEqual(1,restored.State.stage);
+            Assert.AreEqual(gold,copy.gold);Assert.AreEqual(mats,copy.materials);CollectionAssert.AreEquivalent(grants,copy.contentUnlocks.unlocked);Assert.AreEqual(1,restored.State.stage);
+            restored.Tick(.05f);Assert.AreEqual(gold,copy.gold);CollectionAssert.AreEquivalent(grants,copy.contentUnlocks.unlocked);
         }
         [Test] public void U03_OfflineUnlockDoesNotBackdateAndRepeatedLoadDoesNotDuplicate()
         {

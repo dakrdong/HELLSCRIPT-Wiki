@@ -13,7 +13,6 @@
 \n골드 +{0:N0}	\nGold +{0:N0}
 \n기존 수치를 보존한 옵션입니다.	\nThis affix keeps its older value.
 \n번역 파일을 찾지 못해 번역이 없는 줄은 한국어로 표시합니다.	\nThe translation file was not found, so lines without a translation are shown in Korean.
-\n잠김	\nlocked
 \n재료 +{0:N0}	\nMaterials +{0:N0}
 \n재설정 대상으로 선택한 줄입니다.	\nThis is the line chosen for rerolling.
 \n해금: {0}	\nUnlocked: {0}
@@ -45,7 +44,6 @@
  비활성	 inactive
  이름을 저장했습니다.	 was renamed.
  자동 정리	 auto cleanup
- 잠김	 locked
  활성	 active
  회수	 collection
 + AND 조건 추가	+ Add an AND condition
@@ -99,7 +97,6 @@ B에서 바꿀 내용\n{0}	What B will change\n{0}
 CD 대기	On cooldown
 HP 20% 이하에서 물약 사용 시 최대 HP 25% 보호막을 3초 얻습니다. 20초 간격.	Drinking a potion at 20% HP or below grants a shield worth 25% of max HP for 3 seconds, once every 20 seconds.
 HP {0:0} / {1:0} · 보호막 {2:0}\n자원 {3:0} / {4:0} · {5:0.#}배\n{6}	HP {0:0} / {1:0} · Shield {2:0}\nResource {3:0} / {4:0} · {5:0.#}×\n{6}
-HP {0:0} / {1:0}{2} · 상세	HP {0:0} / {1:0}{2} · Details
 HP 손실	HP lost
 HP가 30% 이하인 적에게 가산 피해 +20%를 적용합니다.	Adds +20% damage against enemies at or below 30% HP.
 HP가 30% 이하인 적에게 치명 확률 +10%p를 적용합니다. 최종 상한은 75%입니다.	Adds +10%p critical chance against enemies at or below 30% HP, capped at 75%.
@@ -108,7 +105,6 @@ LM04가 없어 고유 대상 수로 판단합니다.	Without LM04 it is judged b
 LM04가 없어 고유 대상 수를 기준으로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
 Lv.{0} → {1} · HP 비율 유지{2}	Lv.{0} → {1} · HP ratio kept{2}
 Lv.{0} 달성{1}	Reached Lv.{0}{1}
-Lv.{0} 해금	Unlocks at Lv.{0}
 Lv.{0} 해금 예정	Unlocks at Lv.{0}
 Lv.{0} 해금 전 · 규칙 꺼짐	Before Lv.{0} unlocks it · rule off
 Lv.{0} 해금 전에는 실행하지 않습니다. 규칙은 보존됩니다.	It will not run before Lv.{0} unlocks it. The rule is kept.
@@ -196,7 +192,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0}{1} · 성장 보기	{0}{1} · View growth
 {0}–{1}{2}, {3} 단위로 입력하세요.	Enter {0}–{1}{2} in steps of {3}.
 {0}단계 · {1}	Stage {0} · {1}
-{0}배속{1}	{0}×{1}
 {0}번 {1} → {2}\n이전: {3} · {4}\n변경: {5} · {6}	Rule {0} {1} → {2}\nBefore: {3} · {4}\nAfter: {5} · {6}
 {0}번 {1} 규칙 삭제	Deleted rule {0} for {1}
 {0}번 {1} 규칙 추가	Added rule {0} for {1}
@@ -215,7 +210,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0}장착하지 않은 스킬입니다.	{0}that skill is not equipped.
 {0}장판 조준·이동 선택이 유효하지 않습니다.	{0}the zone aim or movement choice is not valid.
 {0}참조 스킬을 장착해야 합니다.	{0}the referenced skill has to be equipped.
-{0}초	{0}s
 {0}항상 검사 또는 조건 OR 묶음 1–2개를 선택하세요.	{0}choose always-check, or 1 to 2 OR groups of conditions.
 {0}행동·목표·이동 선택이 유효하지 않습니다.	{0}the action, target or movement choice is not valid.
 • {0}: {1} ×{2}회	• {0}: {1} ×{2}
@@ -327,7 +321,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 결과 대기 시간	Wait on the result screen
 결과 화면으로	Back to the result
 결과로 돌아가기	Back to the result
-결의 {0:0.0}초	Resolve {0:0.0}s
 결의 성소	Resolve shrine
 결의의 성소 · 피해 감소 +10%p	Resolve shrine · damage taken -10%p
 결의의 성소 제외	Skip the resolve shrine
@@ -514,7 +507,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 긴급 생존용 회피기 보존	Keep an escape skill for emergencies
 긴급 행동 순서	Emergency order
 길목 유인	Lure them to a choke point
-길잡이 {0:0.0}초	Guide {0:0.0}s
 길잡이 성소	Guide shrine
 길잡이의 성소 · 비전투 이동 +15%	Guide shrine · out of combat movement +15%
 길잡이의 성소 제외	Skip the guide shrine
@@ -832,15 +824,12 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 보스 상태	Boss state
 보스 우선	Boss first
 보스 제압	Boss staggered
-보스 제압 {0:0.0} / 100	Boss stagger {0:0.0} / 100
 보스 제압 · 3초 동안 행동 중단	Boss staggered · unable to act for 3 seconds
-보스 제압 · {0:0.0}초	Boss staggered · {0:0.0}s
 보스 제압 · {0:0.0}초 남음	Boss stagger · {0:0.0}s left
 보스 제압 게이지 {0:0.0} / 100	Boss stagger gauge {0:0.0} / 100
 보스 제압 면역 · {0:0.0}초 남음	Boss stagger immunity · {0:0.0}s left
 보스 처치 · 전리품 정리	Boss killed · collecting loot
 보스 처치 후 전리품 정리	Collecting loot after the boss
-보스 출현 · 표시된 방향으로 이동 중	Boss appeared · moving in the marked direction
 보스 해금 시	When the boss unlocks
 보스 후에도 상자 개봉	Open chests after the boss too
 보스로 이동	Head for the boss
@@ -857,7 +846,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.	Adds +20%p to shield strength, stacking with the bonus from Willpower.
 보호막 흡수	Shield absorbed
 보호막 흡수 {0:0.##} · HP 감소 {1:0.##}	Shield absorbed {0:0.##} · HP lost {1:0.##}
-보호막·피해 상세	Shield and damage details
 보호막을 한 번씩만 사용한 합산 HP 손실이 기준 이상입니다.	Counting each shield only once, the combined HP loss is at or above the threshold.
 봉인 목걸이	Sealed Amulet
 봉인 상자	Sealed chests
@@ -897,7 +885,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 비교	Comparison
 비교 결과로	Back to the comparison result
 비교 방법이 맞지 않습니다.	The comparison does not fit.
-비교 조건	Comparison conditions
 비교 중에는 설정을 유지합니다. 훈련을 마친 뒤 B 설정을 바꾸고 다시 실행할 수 있습니다. 이 화면을 닫으면 이전 일시정지 상태로 돌아갑니다.	Settings stay fixed during a comparison. Once the training ends you can change the B settings and run it again. Closing this screen returns to the pause state you came from.
 비교 중인 설정	Settings under comparison
 비교 항목	Measure
@@ -959,7 +946,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 사망 직전 5초간의 피해 집중 및 스킬 불발 내역	Where the damage came from and which skills failed in the last 5 seconds
 사선 선택	Choosing the line of fire
 사선 차단	Line of fire blocked
-사용 가능	Ready
 사용 가능 · 규칙 {0}개	Available · {0} rules
 사용 가능할 때|무리 처리|분쇄 충전이 있을 때	Whenever it is ready|To clear a pack|While a crush charge is held
 사용 가능합니다.	Ready to use.
@@ -992,7 +978,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 상위 규칙 우선	A higher rule won
 상위 생존 행동으로 전환	Switching to a higher survival action
 상자	Chests
-상자 {0} / {1}  ·  지도 보기	Chests {0} / {1}  ·  View map
 상자 개봉	Open chests
 상자 개봉 {0:0.0} / {1:0.0}초	Opening the chest {0:0.0} / {1:0.0}s
 상자 개봉 {0} / {1}개\n미개봉 상자 보상은 다음 판으로 이월되지 않습니다.	Chests opened {0} / {1}\nRewards in unopened chests do not carry over to the next run.
@@ -1378,7 +1363,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 일반 적에게 쓸 때	Using it on ordinary enemies
 일반 전투에서 사용	Use in ordinary combat
 일시정지	Pause
-일시정지 · 모든 전투 시간이 멈췄습니다	Paused · all combat time has stopped
 일시정지 유지	stay paused
 일직선으로 최대 5명을 관통합니다.	Pierces up to 5 enemies in a straight line.
 일치	matches
@@ -1410,7 +1394,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 자신의 장판·덫 활용	Use your own zones and traps
 자신의 활성 덫 안	Inside your own live trap
 자원 40 회복, 6초간 피해 +20%.	Restores 40 resource and adds +20% damage for 6 seconds.
-자원 {0:0} / {1:0}	Resource {0:0} / {1:0}
 자원 기준으로 유지 종료	End the channel on resource
 자원 능력치	Resource
 자원 보충 전용에서는 강화할 교전을 제한하지 않습니다.	When it only restores resource, no restriction is placed on which fights it boosts.
@@ -1422,7 +1405,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 자원 소모 감소	Resource Cost Reduction
 자원 소모 감소 %	Resource Cost Reduction %
 자원 회복 / 초	Resource per second
-잔향 {0}/4 · {1:0.0}초	Echo {0}/4 · {1:0.0}s
 잔향 생성 공간 확인	Checking the room for the echo
 잔향 생성점 부족	Not enough spawn points for the echo
 잔향 진압 {0:0.0}초 남음	Suppressing the echo · {0:0.0}s left
@@ -1649,7 +1631,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 정확한 대응을 확인하지 않은 항목입니다. 새 기본값 ‘{0}’을 제안합니다.	No exact counterpart was confirmed for this entry. The new default "{0}" is proposed.
 제압 가능	Can be staggered
 제압 면역 {0:0.0}초	Stagger immunity {0:0.0}s
-제압 면역 · {0:0.0}초	Stagger immunity · {0:0.0}s
 제압되어 행동을 멈췄습니다.	Staggered and unable to act.
 제압됨	Staggered
 제어로 중단	Interrupted by control
@@ -1755,11 +1736,9 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 진행 중인 균열의 상자가 아닙니다.	That chest does not belong to the rift in progress.
 진행 중인 균열이 아닙니다.	This is not the rift in progress.
 진행 중인 균열이나 훈련을 먼저 마쳐 주세요.	Finish the rift or the training in progress first.
-진행 중인 비교를 끝내고 성소로 돌아갑니다. 저장하지 않은 비교 결과는 남지 않습니다.	Ends the comparison in progress and returns to the sanctuary. An unsaved comparison result is not kept.
 진행 중인 장판·사망 예고 {0}개	{0} zones and death telegraphs running
 진행 중인 전투로	To the fight in progress
 진행 중인 주 행동이 있습니다.	A main action is already running.
-진행을 멈췄습니다 · 지도에서 상태를 확인해 주세요	Progress stopped · check the state on the map
 진행할 내용	What to do
 집중	Focus
 집중 광선	Focused beam
@@ -1793,8 +1772,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 처리할 장비가 없습니다.	There is nothing to handle.
 처음 고른 한 줄만 계속 재설정할 수 있습니다. 접두·접미 종류를 유지하며 새 결과는 즉시 적용됩니다. 현재보다 낮은 수치가 나올 수 있습니다.	Only the line you pick first can be rerolled from then on. It keeps its prefix or suffix kind and the new result applies at once. The value can come out lower than it is now.
 처치	Killed
-처치 {0}   균열 게이지 {1} / 100	Kills {0}   Rift gauge {1} / 100
-처치 {0} · 게이지 {1} / 100	Kills {0} · gauge {1} / 100
 처치 {0} · 균열 게이지 {1} / 100	Kills {0} · Rift gauge {1} / 100
 처치 게이지 충전 · {0}	Filling the kill gauge · {0}
 처치 시 최대 HP의 2%를 회복합니다. 한 번 발동한 뒤 1초 동안 기다립니다.	Restores 2% of max HP on a kill, then waits 1 second before it can trigger again.
@@ -1942,7 +1919,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 표식 이전	Move the mark
 표식할 대상	Target to mark
 표적 {0} / {1}	Targets {0} / {1}
-표적 {0} / {1} · 보상 없음	Targets {0} / {1} · no rewards
 표적 {0} / {1} · 실제 보상 없음	Targets {0} / {1} · no real rewards
 표적 전멸	All targets down
 프리셋 · 캐릭터별 5개	Presets · 5 per character
@@ -3419,3 +3395,114 @@ A/B 비교 중에는 룬 배치를 고정합니다. 비교를 마친 뒤 룬을 
 지도 표시 설정은 이 기기에 저장됩니다.	The map display preference is saved on this device.
 지도 표시 설정을 읽지 못해 기본값으로 시작했습니다. 기존 파일은 보존했습니다.	Could not read the map preference. Started with the default and preserved the existing file.
 지도 표시를 적용했지만 기기에 저장하지 못했습니다. 저장을 다시 시도해 주세요.	Applied the map preference but could not save it on this device. Please retry saving.
+
+# Global observation HUD and potion catalog
+HP 물약이 없어 사냥 칙령에 따라 출정을 기다립니다.	Waiting to depart: the hunting edict requires an HP potion.
+물약 목표 수량을 채울 때까지 출정을 기다립니다.	Waiting to reach the potion stock targets before departure.
+자원 물약 자동 사용	Use resource potions automatically
+자원 물약 사용 기준	Resource potion threshold
+보조 물약 종류	Utility potion type
+보조 물약 사용 조건	Utility potion condition
+성소에서 물약 자동 구매	Buy potions automatically at the sanctuary
+HP 물약 목표 수량	HP potion stock target
+자원 물약 목표 수량	Resource potion stock target
+보조 물약 목표 수량	Utility potion stock target
+성소 방문당 물약 예산	Potion budget per sanctuary visit
+물약 구매 후 남길 금화	Minimum gold after buying potions
+물약 부족 시 출정 지침	Departure when supplies are short
+물약 구매는 성소에서만 가능합니다.	Potions can only be purchased at the sanctuary.
+물약을 준비하지 못했습니다: {0}	Could not prepare potions: {0}
+보조 물약 종류는 성소 또는 훈련 편집에서 변경할 수 있습니다.	Change utility potion types at the sanctuary or in training.
+{0} 사용 · 남은 수량 {1}	Used {0} · {1} remaining
+질주 물약	Sprint potion
+맹공 물약	Assault potion
+저항 물약	Resistance potion
+강철 물약	Iron potion
+속공 물약	Haste potion
+집중 물약	Focus potion
+물약별 기본 조건	Default condition for this potion
+교전 중	In combat
+위험할 때	When in danger
+HP가 없으면 대기	Wait if no HP potions
+목표 수량까지 대기	Wait for stock targets
+부족해도 출정	Depart with insufficient supplies
+관찰 메뉴	Observation menu
+자원	Resource
+빈칸	Empty
+상시	Always
+패시브	Passive
+빈 스킬 칸	Empty skill slot
+남은 보호막 {0:0} · 출처 {1}	Shield remaining {0:0} · Source {1}
+얼음 고리 감속	Frost ring slow
+이동속도 -35%	Movement speed -35%
+받는 피해가 15% 감소합니다.	Damage taken is reduced by 15%.
+이동속도 증가 +20%p	Movement speed bonus +20 percentage points
+가산 피해 +10% · 중첩 없음	Additive damage +10% · Does not stack
+6초간 피해 +20%	Damage +20% for 6 seconds
+다음 사격에 암흑 추가 피해	Bonus shadow damage on the next shot
+회오리 충격	Whirlwind impact
+다음 도약의 이동 시작에 예약합니다.	Reserved when movement begins for the next Leap.
+분쇄 준비	Crush ready
+다음 분쇄에 추가타를 적용합니다.	Adds a follow-up hit to the next Crush.
+긴 사선	Long firing line
+다음 관통 사격을 강화합니다.	Enhances the next Piercing Shot.
+과충전	Overcharge
+다음 연쇄 번개를 강화합니다.	Enhances the next Chain Lightning.
+절제	Restraint
+다음 자원 소모 스킬의 비용 감소 +50%	Cost reduction +50% for the next paid skill
+다음 유료 스킬의 비용이 25% 감소합니다.	The next paid skill costs 25% less.
+비용 감소 +20% · 합산 상한 50%	Cost reduction +20% · Combined cap 50%
+길잡이	Guide
+길잡이 성소 효과	Guide shrine effect
+결의	Resolve
+결의 성소 효과	Resolve shrine effect
+효과 {0}	Effect {0}
+효과의 남은 시간과 중첩 수를 확인합니다.	View the remaining duration and stack count.
+남은 시간 {0}초	{0}s remaining
+중첩 {0} · 출처 {1}	Stacks {0} · Source {1}
+보유 수량 {0}	Stock {0}
+재사용 대기 {0}초	Cooldown {0}s
+훈련용 보조 물약 선택 · 실제 재고는 변경하지 않습니다.	Select a utility potion for training. Your real stock is unchanged.
+활성 보조 효과가 끝난 뒤 물약을 변경해 주세요.	Wait for the active utility effect to expire before changing potions.
+현재 상태	Current effects
+{0}배속	{0}x speed
+보호막 +{0:0}	Shield +{0:0}
+처치 {0} · 균열 {1}/100	Kills {0} · Rift {1}/100
+상자 {0} / {1}	Chests {0} / {1}
+만료	Expired
+HP 물약	HP potion
+체력 회복	Restore health
+자원 물약	Resource potion
+자원 회복	Restore resource
+공격력 +15%	Attack power +15%
+모든 속성 저항 +20 + 영웅 레벨×3	All elemental resistance ratings +20 + hero level x3
+방어도 +30%	Armor +30%
+공격속도 증가 +15%p	Attack speed bonus +15 percentage points
+치명타 확률 +10%p	Critical strike chance +10 percentage points
+  HP  — / {0:0} · 전투 전	  HP  — / {0:0} · Before battle
+
+# Retained historical HUD messages
+\n잠김	\nlocked
+ 잠김	 locked
+HP {0:0} / {1:0}{2} · 상세	HP {0:0} / {1:0}{2} · Details
+Lv.{0} 해금	Unlocks at Lv.{0}
+{0}배속{1}	{0}×{1}
+{0}초	{0}s
+결의 {0:0.0}초	Resolve {0:0.0}s
+길잡이 {0:0.0}초	Guide {0:0.0}s
+보스 제압 {0:0.0} / 100	Boss stagger {0:0.0} / 100
+보스 제압 · {0:0.0}초	Boss staggered · {0:0.0}s
+보스 출현 · 표시된 방향으로 이동 중	Boss appeared · moving in the marked direction
+보호막·피해 상세	Shield and damage details
+비교 조건	Comparison conditions
+사용 가능	Ready
+상자 {0} / {1}  ·  지도 보기	Chests {0} / {1}  ·  View map
+일시정지 · 모든 전투 시간이 멈췄습니다	Paused · all combat time has stopped
+자원 {0:0} / {1:0}	Resource {0:0} / {1:0}
+잔향 {0}/4 · {1:0.0}초	Echo {0}/4 · {1:0.0}s
+제압 면역 · {0:0.0}초	Stagger immunity · {0:0.0}s
+진행 중인 비교를 끝내고 성소로 돌아갑니다. 저장하지 않은 비교 결과는 남지 않습니다.	Ends the comparison in progress and returns to the sanctuary. An unsaved comparison result is not kept.
+진행을 멈췄습니다 · 지도에서 상태를 확인해 주세요	Progress stopped · check the state on the map
+처치 {0}   균열 게이지 {1} / 100	Kills {0}   Rift gauge {1} / 100
+처치 {0} · 게이지 {1} / 100	Kills {0} · gauge {1} / 100
+표적 {0} / {1} · 보상 없음	Targets {0} / {1} · no rewards

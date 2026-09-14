@@ -102,7 +102,7 @@ namespace Hellscript.Tests
             item.affixes.AddRange(new[]{10,11,17});item.values.AddRange(new[]{9.3f,12.7f,4.1f});item.enhancement=5;item.locked=true;item.rerollIndex=1;item.rerolls=3;
             string path=Path.Combine(directory,"hellscript-local-v1.json");File.WriteAllText(path,JsonUtility.ToJson(a));
             var loaded=new GameStore(directory);var result=loaded.Data.Hero.inventory[0];
-            Assert.AreEqual(2,loaded.Data.schema);Assert.AreEqual(item.id,result.id);Assert.AreEqual(9.3f,result.Value(10));Assert.AreEqual(12.7f,result.Value(11));Assert.AreEqual(4.1f,result.Value(17));
+            Assert.AreEqual(GameStore.MaximumSchemaVersion,loaded.Data.schema);Assert.AreEqual(item.id,result.id);Assert.AreEqual(9.3f,result.Value(10));Assert.AreEqual(12.7f,result.Value(11));Assert.AreEqual(4.1f,result.Value(17));
             Assert.AreEqual(620,result.investedMaterials);Assert.AreEqual(5,result.enhancement);Assert.IsTrue(result.locked);Assert.AreEqual(result.rolls[1].slotId,result.rerollSlotId);Assert.IsTrue(result.rolls.All(r=>r.legacyRoll));
             Assert.AreEqual(1,Directory.GetFiles(directory,"*.schema1-*.json").Length);
             string first=JsonUtility.ToJson(result);Assert.IsTrue(loaded.Save());Assert.AreEqual(first,JsonUtility.ToJson(new GameStore(directory).Data.Hero.inventory[0]));

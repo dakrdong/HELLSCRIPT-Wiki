@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: resources and implementation planning prepared. Unity integration has not started; await the user's next instruction.
+Status: implemented in Unity 6000.6 with uGUI. See the [implementation record](../../Implementation/Global_HUD_Potions.en.md) for runtime evidence. Physical mobile verification remains a separate release gate.
 
 The game is fully automatic. Keep the world visible to the bottom of the selected display area, with small floating information groups on the left and right. Skills and potions report state; they do not trigger combat actions. Only inspection controls accept input.
 
@@ -17,7 +17,7 @@ Landscape places skills on the lowest right row at 1.20 times the previous linea
 
 Concepts are generated mockups, not runtime screenshots. Deliver separate artwork, frames, fills and live text; never paste a complete HUD screenshot into the game. Existing active artwork and Warrior/Ranger portraits are reused and may differ from the concept examples.
 
-There are 68 resource PNG files: 4 newly generated native-alpha paintings, 63 original vector-authored UI/status/passive images, and one byte-identical existing atlas copy. That atlas defines 18 active skill cells and 3 legacy portrait cells. All 63 SVG sources are included. Baseline sizes were not numerically defined in the concept: 64 → 76.8 skills and 60 → 45 potions are proposed logical implementation values, while the 1.20/0.75 ratios are the approved requirements.
+The archived v1 handoff contains 68 PNGs: 4 native-alpha paintings, 63 vector-authored UI/status/passive images and one existing atlas copy. The game imports 67 PNGs and reuses its existing atlas for 18 active skills and legacy portraits. All 63 SVG sources remain available. The [v2 runtime profile](Resources/v2/layout-profile.json) fixes 1600×900 and 900×1600 references, landscape skill size 76.8, bottle height 45 and a 24-unit gap between three passives and four actives.
 
 ## Feature specifications
 
@@ -26,12 +26,14 @@ There are 68 resource PNG files: 4 newly generated native-alpha paintings, 63 or
 | Class portrait | [01 Seal](HELLSCRIPT_GlobalHUD_01_Seal.en.md) |
 | Health | [02 HP](HELLSCRIPT_GlobalHUD_02_HP.en.md) |
 | Mana/class resource | [03 Resource](HELLSCRIPT_GlobalHUD_03_Resource.en.md) |
-| Passive, four actives and cooldowns | [04 Skills](HELLSCRIPT_GlobalHUD_04_Skills.en.md) |
+| Three passives, four actives and cooldowns | [04 Skills](HELLSCRIPT_GlobalHUD_04_Skills.en.md) |
 | Three potions, counts and cooldowns | [05 Potions](HELLSCRIPT_GlobalHUD_05_Potions.en.md) |
 | Level | [06 Level](HELLSCRIPT_GlobalHUD_06_Level.en.md) |
 | XP and ticks | [07 XP](HELLSCRIPT_GlobalHUD_07_XP.en.md) |
 | Effects, scrolling and descriptions | [08 Status](HELLSCRIPT_GlobalHUD_08_Status.en.md) |
 
-The [implementation plan](HELLSCRIPT_GlobalHUD_Implementation_Plan.en.md) identifies owner files, data prerequisites and acceptance gates. PNG dimensions, real alpha, sprite bounds, hashes and generated metadata fields were checked. Native alpha is preserved without background removal, chroma keying or recoloring. The rejected checkerboard potion and unused green variant are excluded. Unity import, runtime rendering, mobile readability and performance remain untested. This task changes no game code, Assets, scenes, prefabs, packages or saves.
+The [implementation plan](HELLSCRIPT_GlobalHUD_Implementation_Plan.en.md) identifies owner files and acceptance gates. PNG dimensions, native alpha, sprite bounds, hashes and generated metadata are recorded. Original PNG bytes remain unchanged.
+
+The production HUD and preview share `GlobalHudView` on persistent Canvas 105, above pages/maps and below inspection/settings dialogs. The camera fills the selected aspect frame. No new UI package, scene rewrite or prefab rewrite is required. Narrow layouts wrap complete groups. A minimum HUD scale of 0.4 preserves legibility in small windows even with the 50% preference; the 50–150% setting otherwise remains intact. Status timer numbers are seconds, with the unit included in details.
 
 한국어: [전체 기획](HELLSCRIPT_GlobalHUD_Overview.md).
