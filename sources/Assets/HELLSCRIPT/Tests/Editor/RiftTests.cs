@@ -151,7 +151,7 @@ namespace Hellscript.Tests
                 }
                 foreach(var spawn in map.spawns){Assert.IsTrue(nav.Reachable(spawn.position));Assert.GreaterOrEqual(Vector2.Distance(spawn.position,map.start),10);}
                 foreach(var chest in map.chests)
-                {Assert.GreaterOrEqual(RiftGenerator.GraphDistances(map,0)[chest.room],2);foreach(var access in chest.accessPoints)Assert.IsTrue(nav.Reachable(access));Assert.GreaterOrEqual(nav.Length(map.start,chest.openingPosition),45);}
+                {Assert.GreaterOrEqual(RiftGenerator.GraphDistances(map,0)[chest.room],2);foreach(var access in chest.accessPoints)Assert.IsTrue(nav.Reachable(access));Assert.GreaterOrEqual(nav.Length(map.start,chest.openingPosition),map.version>=7?24:45);}
                 previous=map.fingerprint;boss=map.bossKind;
                 Debug.Log($"RIFT_SEED {seed} rooms={map.rooms.Count} candidate={map.candidate} fallback={map.fallbackId}");
             }

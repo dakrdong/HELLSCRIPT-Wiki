@@ -131,7 +131,7 @@ namespace Hellscript
         public RiftOfferingAltar altar;
         public RiftObjectiveRecord objectiveRecord;
         public bool gateOpen,gateOpenedByMeter;
-        public const int CurrentVersion=6;
+        public const int CurrentVersion=7;
         public int contentStage;
         public int version=CurrentVersion,theme,bossRoom,bossKind,candidate;
         public uint mapSeed,layoutSeed,decorationSeed,encounterSeed,combatSeed,rewardSeed;

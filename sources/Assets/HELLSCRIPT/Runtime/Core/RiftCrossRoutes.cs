@@ -5,27 +5,32 @@ using UnityEngine;
 
 namespace Hellscript
 {
-    // Two continuous transverse routes, one passing through an additional central combat room.
+    // Compact interior routes give every room an inward choice and retain a true X crossing.
     // They retain real room/door endpoints so exploration, gates and saved routes share a graph.
     public static class RiftCrossRoutes
     {
         public static void AddCentralRoom(RiftLayout map,ref uint layout,ref uint decoration)
         {
             var template=RiftTemplates.Get(map.theme==0?"RM02":"RM10");
-            var position=new Vector2(RandomStream.Range(ref layout,-4,5),RandomStream.Range(ref layout,-4,5));
+            var position=new Vector2(RandomStream.Range(ref layout,-2,3),RandomStream.Range(ref layout,-2,3));
             var room=RiftTemplates.Instantiate(template,map.rooms.Count,position,RandomStream.Range(ref layout,0,4),RandomStream.Range(ref decoration,0,3),map.obstacles);
             room.central=true;map.rooms.Add(room);
         }
         static Rect Expand(Rect bounds,float margin)=>new Rect(bounds.min-Vector2.one*margin,bounds.size+Vector2.one*margin*2);
         public static void PreparePerimeterSockets(RiftLayout map,int spine)
         {
-            foreach(var room in map.rooms.Take(spine).Skip(1))
+            foreach(var room in map.rooms.Take(spine))
                 foreach(var direction in new[]{Vector2.up,Vector2.down,Vector2.left,Vector2.right})
                 {
                     if(room.doors.Any(d=>d.direction==direction))continue;
-                    var position=room.position+Vector2.Scale(room.size*.5f,direction);
-                    if(Enumerable.Range(-6,13).Any(step=>map.obstacles.Any(o=>o.blocksWalk&&o.Contains(position+direction*(step*.5f),1.2f))))continue;
-                    room.doors.Add(new RiftDoor{index=room.doors.Count,position=position,direction=direction});
+                    var side=new Vector2(-direction.y,direction.x);
+                    foreach(float offset in new[]{0f,-4,4,-6,6})
+                    {
+                        if(Mathf.Abs(offset)>Vector2.Dot(room.size,new Vector2(Mathf.Abs(side.x),Mathf.Abs(side.y)))*.5f-3)continue;
+                        var position=room.position+Vector2.Scale(room.size*.5f,direction)+side*offset;
+                        if(Enumerable.Range(-6,13).Any(step=>map.obstacles.Any(o=>o.blocksWalk&&o.Contains(position+direction*(step*.5f),1.2f))))continue;
+                        room.doors.Add(new RiftDoor{index=room.doors.Count,position=position,direction=direction});break;
+                    }
                 }
         }
         static RiftDoor Port(RiftLayout map,RiftRoom room,Vector2 target)
@@ -46,55 +51,126 @@ namespace Hellscript
             }
             throw new InvalidOperationException($"No independent crossing socket: {room.index} {room.templateId}.");
         }
+        public static void RingPorts(RiftLayout map,int spine,int[] previous,int[] next)
+        {
+            var states=new List<Vector2Int>[spine];var costs=new float[spine][,];
+            for(int i=0;i<spine;i++)
+            {
+                var room=map.rooms[i];int inward=room.doors.OrderByDescending(d=>Vector2.Dot(d.direction,-room.position.normalized)).First().index;
+                states[i]=new List<Vector2Int>();
+                foreach(var a in room.doors)foreach(var b in room.doors)
+                    if(a.index!=b.index&&a.index!=inward&&b.index!=inward)states[i].Add(new Vector2Int(a.index,b.index));
+                if(states[i].Count==0)throw new InvalidOperationException("A perimeter room has no independent inward exit.");
+            }
+            var forbidden=map.rooms.Select(r=>Expand(r.Bounds,3.6f)).ToArray();
+            for(int i=0;i<spine;i++)
+            {
+                int j=(i+1)%spine;costs[i]=new float[map.rooms[i].doors.Count,map.rooms[j].doors.Count];
+                foreach(var a in map.rooms[i].doors)foreach(var b in map.rooms[j].doors)
+                {
+                    var start=a.position+a.direction*5.5f;var end=b.position+b.direction*5.5f;
+                    float cost=Vector2.Distance(start,end)+11;int samples=Mathf.CeilToInt(Vector2.Distance(start,end));
+                    foreach(var bounds in forbidden)
+                    {
+                        bool blocked=false;for(int n=0;n<=samples;n++)if(bounds.Contains(Vector2.Lerp(start,end,n/(float)Mathf.Max(1,samples)))){blocked=true;break;}
+                        if(blocked)cost+=30;
+                    }
+                    costs[i][a.index,b.index]=cost;
+                }
+            }
+            float best=float.PositiveInfinity;int[] selected=null;
+            for(int initial=0;initial<states[0].Count;initial++)
+            {
+                var distances=new float[spine][];var parents=new int[spine][];
+                for(int i=0;i<spine;i++){distances[i]=Enumerable.Repeat(float.PositiveInfinity,states[i].Count).ToArray();parents[i]=new int[states[i].Count];}
+                distances[0][initial]=0;
+                for(int i=1;i<spine;i++)for(int b=0;b<states[i].Count;b++)for(int a=0;a<states[i-1].Count;a++)
+                {
+                    float cost=distances[i-1][a]+costs[i-1][states[i-1][a].y,states[i][b].x];
+                    if(cost<distances[i][b]){distances[i][b]=cost;parents[i][b]=a;}
+                }
+                for(int final=0;final<states[spine-1].Count;final++)
+                {
+                    float cost=distances[spine-1][final]+costs[spine-1][states[spine-1][final].y,states[0][initial].x];
+                    if(cost>=best)continue;best=cost;selected=new int[spine];selected[spine-1]=final;
+                    for(int i=spine-1;i>0;i--)selected[i-1]=parents[i][selected[i]];
+                }
+            }
+            for(int i=0;i<spine;i++){previous[i]=states[i][selected[i]].x;next[i]=states[i][selected[i]].y;}
+        }
         public static void Connect(RiftLayout map,int spine)
         {
             var central=map.rooms.Single(r=>r.central);
-            var outer=map.rooms.Take(spine).Where(r=>r.index!=0&&!r.boss).ToList();
-            // Four consecutive ring rooms A/B/C/D support a complete tour through
-            // A -> C -> B -> central -> D, in addition to the retained outer ring.
-            // Intersect the A-C and B-central chords to place a genuine exterior X.
-            uint rng=RiftGenerator.Derive(map.layoutSeed,"crossing");
-            int choices=(outer.Count-3)*2,shift=RandomStream.Range(ref rng,0,choices);
-            RiftRoom[] anchors=null;Vector2 crossing=Vector2.zero,axisA=Vector2.zero,axisB=Vector2.zero;
-            var forbidden=map.rooms.Select(r=>Expand(r.Bounds,5f)).ToArray();
-            for(int offset=0;offset<choices&&anchors==null;offset++)
+            // Every perimeter room gets an inward choice. A subset reaches the central
+            // room; the others pair across the interior and cross those radial routes.
+            int[] spokeIds=spine==6?new[]{0,2,3,5}:spine==7?new[]{0,2,4}:new[]{0,2,4,6};
+            uint rng=RiftGenerator.Derive(map.layoutSeed,"crossing");int shift=RandomStream.Range(ref rng,0,spine);
+            spokeIds=spokeIds.Select(i=>(i+shift)%spine).ToArray();
+            var remaining=Enumerable.Range(0,spine).Where(i=>!spokeIds.Contains(i)).ToArray();
+            // Pair opposite remaining rooms, avoiding another perimeter connection.
+            var pairs=new List<Vector2Int>();
+            for(int i=0;i<remaining.Length/2;i++)pairs.Add(new Vector2Int(remaining[i],remaining[i+remaining.Length/2]));
+            var forbidden=map.rooms.Select(r=>Expand(r.Bounds,3.6f)).ToArray();
+            float bestCrossing=float.PositiveInfinity;
+            int chosenSpoke=-1,chosenPair=-1;Vector2 crossing=Vector2.zero,radial=Vector2.zero,transverse=Vector2.zero;
+            foreach(int spoke in spokeIds)
             {
-                int choice=(shift+offset)%choices,start=choice/2;
-                var block=outer.Skip(start).Take(4).ToArray();if(choice%2!=0)Array.Reverse(block);
-                var first=block[0];var middle=block[1];var last=block[2];
-                var a=last.position-first.position;var b=central.position-middle.position;
-                float denominator=RiftFloorPatch.Cross(a,b);if(Mathf.Abs(denominator)<.01f)continue;
-                var delta=middle.position-first.position;
-                float t=RiftFloorPatch.Cross(delta,b)/denominator,u=RiftFloorPatch.Cross(delta,a)/denominator;
-                if(t<.15f||t>.85f||u<.15f||u>.85f||Mathf.Abs(Vector2.Dot(a.normalized,b.normalized))>.5f)continue;
-                var point=first.position+a*t;bool clear=true;
-                foreach(var direction in new[]{a.normalized,b.normalized})for(int step=-12;step<=12;step++)
-                    if(forbidden.Any(r=>r.Contains(point+direction*step))){clear=false;break;}
-                if(!clear)continue;
-                anchors=block;crossing=point;axisA=a.normalized;axisB=b.normalized;
+                var outer=map.rooms[spoke];var axis=(central.position-outer.position).normalized;
+                var side=new Vector2(-axis.y,axis.x);
+                for(int pair=0;pair<pairs.Count;pair++)
+                {
+                    var a=map.rooms[pairs[pair].x];var b=map.rooms[pairs[pair].y];
+                    foreach(float t in new[]{.5f,.45f,.55f,.4f,.6f})
+                    {
+                        var point=Vector2.Lerp(outer.position,central.position,t);
+                        if(Vector2.Dot(a.position-point,side)*Vector2.Dot(b.position-point,side)>=0)continue;
+                        bool clear=true;
+                        foreach(var direction in new[]{axis,side})for(int n=-12;n<=12;n++)
+                            if(forbidden.Any(r=>r.Contains(point+direction*(n*.5f)))){clear=false;break;}
+                        if(!clear)continue;
+                        float da=Vector2.Distance(a.position,point),db=Vector2.Distance(b.position,point);
+                        float score=Mathf.Max(da,db)+(da+db)*.25f;
+                        if(score>=bestCrossing)continue;bestCrossing=score;
+                        chosenSpoke=spoke;chosenPair=pair;crossing=point;radial=axis;
+                        transverse=Vector2.Dot(b.position-a.position,side)>0?side:-side;
+                    }
+                }
             }
-            if(anchors==null)throw new InvalidOperationException("No clear four-arm crossing.");
-            var a0=Port(map,anchors[0],crossing);var a2=Port(map,anchors[2],crossing);
-            RiftGenerator.Connect(map,anchors[0].index,anchors[2].index,a0.index,a2.index,true,crossing,axisA);
-            var a1=Port(map,anchors[1],crossing);var inner=Port(map,central,crossing);
-            RiftGenerator.Connect(map,anchors[1].index,central.index,a1.index,inner.index,true,crossing,axisB);
-            var exit=Port(map,central,anchors[3].position);var a3=Port(map,anchors[3],central.position);
-            RiftGenerator.Connect(map,central.index,anchors[3].index,exit.index,a3.index,true);
+            if(chosenSpoke<0)throw new InvalidOperationException("No compact four-arm crossing.");
+            // Assign central ports together so an earlier diagonal cannot consume the
+            // only useful cardinal socket for a later spoke.
+            var centralPorts=new Dictionary<int,RiftDoor>();
+            foreach(int spoke in spokeIds.OrderByDescending(i=>Mathf.Max(Mathf.Abs((map.rooms[i].position-central.position).normalized.x),Mathf.Abs((map.rooms[i].position-central.position).normalized.y))))
+            {
+                var door=Port(map,central,map.rooms[spoke].position);centralPorts.Add(spoke,door);door.corridor=int.MaxValue;
+            }
+            foreach(int spoke in spokeIds)
+            {
+                var room=map.rooms[spoke];var port=Port(map,room,central.position);var inner=centralPorts[spoke];inner.corridor=-1;
+                RiftGenerator.Connect(map,spoke,central.index,port.index,inner.index,true,spoke==chosenSpoke?(Vector2?)crossing:null,spoke==chosenSpoke?(Vector2?)radial:null);
+            }
+            for(int i=0;i<pairs.Count;i++)
+            {
+                var a=map.rooms[pairs[i].x];var b=map.rooms[pairs[i].y];
+                var pa=Port(map,a,central.position);var pb=Port(map,b,central.position);
+                RiftGenerator.Connect(map,a.index,b.index,pa.index,pb.index,true,i==chosenPair?(Vector2?)crossing:null,i==chosenPair?(Vector2?)transverse:null);
+            }
         }
         public static RiftJunction Crossing(RiftLayout map)
         {
             var routes=map.corridors.Where(c=>c.crossing).ToArray();if(routes.Length!=2)return null;
             foreach(var junction in map.junctions.Where(j=>routes.All(c=>j.corridors.Contains(c.index))))
             {
-                // A real interior intersection must have nine metres on both sides of each
-                // route and a substantial angle. Endpoint touches and tangencies do not count.
+                // Saved v6 maps retain nine-metre arms. Compact maps require four metres,
+                // a substantial angle and four actual traversable branches.
                 var axes=new List<Vector2>();
                 foreach(var route in routes)
                 {
                     int index=route.points.FindIndex(p=>Vector2.Distance(p,junction.position)<.01f);
                     if(index<3||index+3>=route.points.Count)break;
                     var a=route.points[index-3]-junction.position;var b=route.points[index+3]-junction.position;
-                    if(a.magnitude<8.9f||b.magnitude<8.9f||Vector2.Dot(a.normalized,b.normalized)>-.99f)break;
+                    float arm=map.version>=7?3.9f:8.9f;
+                    if(a.magnitude<arm||b.magnitude<arm||Vector2.Dot(a.normalized,b.normalized)>-.99f)break;
                     axes.Add(a.normalized);
                 }
                 if(axes.Count==2&&Mathf.Abs(Vector2.Dot(axes[0],axes[1]))<.5f)return junction;

@@ -66,7 +66,7 @@ namespace Hellscript
             for(int n=0;n<=steps;n++)if(forbidden.Any(r=>r.Contains(Vector2.Lerp(a,b,n/(float)steps))))return false;
             return true;
         }
-        public static List<Vector2> Connect(RiftDoor first,RiftDoor last,List<Vector2> route,Rect[] forbidden,uint seed)
+        public static List<Vector2> Connect(RiftDoor first,RiftDoor last,List<Vector2> route,Rect[] forbidden,uint seed,float firstNeck=3,float lastNeck=3)
         {
             var direct=new List<Vector2>{route[0]};int current=0;
             while(current<route.Count-1)
@@ -74,7 +74,7 @@ namespace Hellscript
                 int next=current+1;for(int n=route.Count-1;n>current+1;n--)if(Clear(route[current],route[n],forbidden)){next=n;break;}
                 direct.Add(route[next]);current=next;
             }
-            var bends=new List<Vector2>{first.position,first.position+first.direction*3};
+            var bends=new List<Vector2>{first.position,first.position+first.direction*firstNeck};
             for(int n=0;n<direct.Count;n++)
             {
                 bends.Add(direct[n]);if(n==direct.Count-1)break;
@@ -84,7 +84,7 @@ namespace Hellscript
                 var middle=(direct[n]+direct[n+1])*.5f+side*shift;
                 if(Clear(direct[n],middle,forbidden)&&Clear(middle,direct[n+1],forbidden))bends.Add(middle);
             }
-            bends.Add(last.position+last.direction*3);bends.Add(last.position);
+            bends.Add(last.position+last.direction*lastNeck);bends.Add(last.position);
             var smooth=new List<Vector2>{bends[0],bends[1]};
             for(int n=2;n<bends.Count-2;n++)
             {

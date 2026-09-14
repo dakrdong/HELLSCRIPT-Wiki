@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T15:19:39+09:00",
+  "generatedAt": "2026-09-14T16:28:35+09:00",
   "databases": [
     {
       "id": "resources",
@@ -10901,7 +10901,7 @@
           },
           "source": {
             "path": "Docs/Design/HELLSCRIPT_Rift_Exploration_Detail.md",
-            "line": 221
+            "line": 225
           },
           "status": "기획·구현 기록",
           "refs": [
@@ -10929,7 +10929,7 @@
           },
           "source": {
             "path": "Docs/Design/HELLSCRIPT_Rift_Exploration_Detail.md",
-            "line": 222
+            "line": 226
           },
           "status": "기획·구현 기록",
           "refs": [
@@ -10957,7 +10957,7 @@
           },
           "source": {
             "path": "Docs/Design/HELLSCRIPT_Rift_Exploration_Detail.md",
-            "line": 223
+            "line": 227
           },
           "status": "기획·구현 기록",
           "refs": [
@@ -10984,7 +10984,7 @@
           },
           "source": {
             "path": "Docs/Design/HELLSCRIPT_Rift_Exploration_Detail.md",
-            "line": 316
+            "line": 320
           },
           "status": "기획·구현 기록",
           "refs": [
@@ -11011,7 +11011,7 @@
           },
           "source": {
             "path": "Docs/Design/HELLSCRIPT_Rift_Exploration_Detail.md",
-            "line": 317
+            "line": 321
           },
           "status": "기획·구현 기록",
           "refs": [
@@ -105849,6 +105849,60 @@
       "name": "검증 기록",
       "description": "보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.",
       "rows": [
+        {
+          "id": "compact-rift-editmode-metrics",
+          "name": "compact-rift-editmode-metrics.xml",
+          "category": "Unity Edit Mode",
+          "summary": "6 / 6 통과 · Passed · compact-rift",
+          "fields": {
+            "검사 단계": "compact-rift",
+            "보고서 구분": "metrics",
+            "보고된 결과": "Passed",
+            "전체 검사": "6",
+            "통과": "6",
+            "실패": "0",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-09-14 07:14:24Z",
+            "소요 시간 (초)": "3.3143941",
+            "해석": "저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Artifacts/Validation/compact-rift-editmode-metrics.xml",
+            "line": 1
+          },
+          "status": "당시 통과",
+          "related": [
+            "current-status"
+          ],
+          "endTime": "2026-09-14 07:14:24Z"
+        },
+        {
+          "id": "compact-rift-editmode-final",
+          "name": "compact-rift-editmode-final.xml",
+          "category": "Unity Edit Mode",
+          "summary": "83 / 83 통과 · Passed · compact-rift",
+          "fields": {
+            "검사 단계": "compact-rift",
+            "보고서 구분": "final",
+            "보고된 결과": "Passed",
+            "전체 검사": "83",
+            "통과": "83",
+            "실패": "0",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-09-14 07:13:29Z",
+            "소요 시간 (초)": "186.5200741",
+            "해석": "저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Artifacts/Validation/compact-rift-editmode-final.xml",
+            "line": 1
+          },
+          "status": "당시 통과",
+          "related": [
+            "current-status"
+          ],
+          "endTime": "2026-09-14 07:13:29Z"
+        },
         {
           "id": "settings-world-editmode",
           "name": "settings-world-editmode.xml",

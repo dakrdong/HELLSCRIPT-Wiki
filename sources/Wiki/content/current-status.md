@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-14 밀도·동선 추가 규칙:** 새 버전 7 지도는 내부 바닥 점유율 48% 이상, 빈 공간 표본 거리 14m 이하, 방 밖 무분기 통로 40m 이하를 강제한다. 모든 방에 출입구 3개 이상을 연결한다. 곡선 지형·중앙 방·전체 순환·주변 보스 소환은 유지한다. [최신 구현·검증 기록](../../Docs/Implementation/Compact_Rift_Expansion.md)
+
+English: version 7 enforces at least 48% interior floor occupancy, at most 14 m sampled empty-space distance, and at most 40 m of unbranched passage outside rooms. Every room has at least three connected exits. Organic geometry, the central room, full circulation and nearby boss spawning remain. [Current implementation and verification](../../Docs/Implementation/Compact_Rift_Expansion.en.md)
+
 **2026-09-14 균열 지형·보스 진행 변경:** 비대칭 방과 굽은 통로에 중앙 방 1개와 X자 횡단로를 추가했다. 모든 방과 통로를 순환 동선으로 연결하고, 막다른 곁방과 되돌아가기를 강제하는 외길을 금지했다. 새 균열은 보스 전용 방과 보스 문 없이 생성되며, 처치 게이지가 100에 도달하면 플레이어 주변에 보스가 나타난다. 옛 균열은 저장된 구조와 목표로 이어진다. [구현·검증 기록](../../Docs/Implementation/Organic_Rift_Expansion.md)
 
 English: asymmetric rooms and curved passages now include one additional central room and intersecting transverse routes. Every room and corridor belongs to circulation routes, with no dead-end wings or connecting passages that force retracing. New rifts have no boss arena or gate; reaching 100 kill-meter points summons the boss near the player. Existing saves retain their structure and objectives. [Implementation and verification](../../Docs/Implementation/Organic_Rift_Expansion.en.md)

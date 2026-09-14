@@ -1,5 +1,7 @@
 # HELLSCRIPT Organic Rift Geometry and Nearby Boss Summoning
 
+**Follow-up:** version 7 density and route limits are documented in [Compact Rift Layouts](Compact_Rift_Expansion.en.md). Version 6 measurements and evidence below remain as historical records.
+
 Date: 2026-09-14 · Map version: 6
 
 [한국어](Organic_Rift_Expansion.md)

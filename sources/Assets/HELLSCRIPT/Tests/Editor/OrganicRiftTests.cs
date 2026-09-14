@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -59,10 +60,13 @@ namespace Hellscript.Tests
         public void GeneratedContoursRoundTripAndAllContentRemainsReachable()
         {
             string directory="Artifacts/Validation/OrganicRift/maps";Directory.CreateDirectory(directory);
+            var densityLines=new List<string>{"seed,candidate,theme,rooms,floorRatio,emptyRadius,hullArea,longestUnbranched"};
             int fallback=0;var shapes=new HashSet<string>();float removed=0,rectArea=0;
             for(uint seed=1;seed<=36;seed++)
             {
                 var map=RiftGenerator.Generate(914000+seed,"organic-audit",seed<=6?1:10,HeroClass.Warrior,forcedTheme:(int)(seed%2),forcedCount:6+(int)(seed%3));
+                var density=RiftDensity.Measure(map);densityLines.Add(FormattableString.Invariant($"{map.mapSeed},{map.candidate},{map.theme},{map.rooms.Count},{density.floorRatio:F4},{density.emptyRadius:F2},{density.hullArea:F2},{density.longestUnbranched:F2}"));
+                RiftDensity.Validate(map);
                 RiftGenerator.Validate(map);Assert.IsNotNull(RiftCrossRoutes.Crossing(map));Assert.AreEqual(1,map.rooms.Count(r=>r.central));Assert.AreEqual(-1,map.bossRoom);var nav=new RiftNavigation(map,true);
                 Assert.IsEmpty(map.spawns.Where(s=>!nav.Reachable(s.position)));
                 Assert.IsEmpty(map.chests.SelectMany(c=>c.accessPoints).Where(p=>!nav.Reachable(p)));
@@ -84,6 +88,7 @@ namespace Hellscript.Tests
                 if(map.fallbackId!="")fallback++;Assert.IsTrue(shapes.Add(map.fingerprint));
                 if(seed<=6)File.WriteAllText(Path.Combine(directory,seed+".json"),json);
             }
+            Directory.CreateDirectory("Artifacts/Validation/CompactRift");File.WriteAllLines("Artifacts/Validation/CompactRift/density-audit.csv",densityLines);
             Assert.Less(fallback,4,"Frequent fixed fallbacks hide a broken generator.");
             Assert.Greater(removed/rectArea,.07f,"The new geometry must visibly change the square footprint.");
             File.WriteAllText("Artifacts/Validation/OrganicRift/generation-summary.txt",$"PASS: 36 seeds, both themes, 6/7/8 perimeter rooms + central room, X crossings, all rooms on one complete tour, no bridges/articulation/dead ends, no boss arena or gate, 1.2 m passage clearance, save round trip.\nfallback={fallback}\nroomAreaRemoved={removed/rectArea:P2}\n");

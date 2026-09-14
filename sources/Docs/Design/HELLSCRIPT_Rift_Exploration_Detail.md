@@ -1,5 +1,9 @@
 # HELLSCRIPT 균열 생성·탐색·필드 보상 상세 기획
 
+**2026-09-14 밀도·동선 추가 규칙:** 새 버전 7 지도는 내부 바닥 점유율 48% 이상, 빈 공간 표본 거리 14m 이하, 방 밖 무분기 통로 40m 이하를 강제한다. 모든 방에 출입구 3개 이상을 연결한다. 곡선 지형·중앙 방·전체 순환·주변 보스 소환은 유지한다. [최신 구현·검증 기록](../Implementation/Compact_Rift_Expansion.md)
+
+English: version 7 enforces at least 48% interior floor occupancy, at most 14 m sampled empty-space distance, and at most 40 m of unbranched passage outside rooms. Every room has at least three connected exits. Organic geometry, the central room, full circulation and nearby boss spawning remain. [Current implementation and verification](../Implementation/Compact_Rift_Expansion.en.md)
+
 **2026-09-14 규칙 변경:** 새 균열은 곡선 지형, 중앙 방 1개와 X자 횡단로를 필수로 생성한다. 보스 방·전실·보스 문과 기존 목표 사슬은 새 균열에 생성하지 않는다. 처치 게이지 100을 채우면 플레이어 근처에 보스가 나타난다. 구조·보스 진입에 관한 아래의 이전 규칙은 [최신 구현 기록](../Implementation/Organic_Rift_Expansion.md)이 대체하며, 기존 저장의 호환 근거로 보존한다. 새 균열에는 막다른 곁방이 없으며, 모든 방을 한 번씩 거쳐 입구로 돌아오는 순환 경로와 모든 통로의 우회 연결을 보장한다.
 
 English: new rifts require organic floors, an additional central room and crossing transverse routes. Dedicated arenas, antechambers, boss gates and former objective chains are not generated. A full 100-point kill meter summons the boss near the player. The [current implementation](../Implementation/Organic_Rift_Expansion.en.md) supersedes the older structure and boss-entry rules below, which remain as legacy compatibility history. New rifts have no dead-end wings: every room fits a complete tour back to the entrance, and every corridor has an alternate return route.

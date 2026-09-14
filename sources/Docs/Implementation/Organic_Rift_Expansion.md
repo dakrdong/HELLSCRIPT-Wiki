@@ -1,5 +1,7 @@
 # HELLSCRIPT 유기적인 균열 지형과 주변 보스 소환
 
+**후속 변경:** 버전 7의 밀도·동선 규칙은 [밀집형 균열 구현 기록](Compact_Rift_Expansion.md)을 따른다. 이 문서의 버전 6 수치와 검증은 당시 이력으로 보존한다.
+
 작성일: 2026-09-14 · 지도 버전: 6
 
 [English](Organic_Rift_Expansion.en.md)

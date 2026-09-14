@@ -8,6 +8,8 @@ namespace Hellscript
 {
     public static class RiftGenerator
     {
+        // Structural alternatives certified against the same density and traversal limits.
+        static readonly uint[,] CompactFallbackSeeds={{81002,81005,81008},{81101,81103,81105}};
         public static uint Derive(uint seed,string stream)
         {uint hash=2166136261;foreach(char c in stream){hash^=c;hash*=16777619;}hash^=seed;return RandomStream.Next(ref hash);}
         public static int SelectBoss(ref uint encounter,int previous)
@@ -58,7 +60,7 @@ namespace Hellscript
         {
             arenaBoss|=forcedObjective.HasValue;
             if(theme<0||theme>1||index<0||index>2)throw new ArgumentOutOfRangeException();
-            var map=Candidate(seed,runId,stage,hero,theme,6,0,lastBoss,(uint)(81001+theme*100+index),allowWings:false,forcedObjective:forcedObjective,arenaBoss:arenaBoss);
+            var map=Candidate(seed,runId,stage,hero,theme,6,0,lastBoss,arenaBoss?(uint)(81001+theme*100+index):CompactFallbackSeeds[theme,index],allowWings:false,forcedObjective:forcedObjective,arenaBoss:arenaBoss);
             map.fallbackId=$"F{theme+1}-{index+1}";map.candidate=24+index;return map;
         }
         static RiftLayout Candidate(uint seed,string runId,int stage,HeroClass hero,int theme,int count,int candidate,int lastBoss,uint structuralSeed=0,bool allowWings=true,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false)
@@ -77,16 +79,16 @@ namespace Hellscript
             // Legacy arenas remain on the spine; normal maps contain no arena template.
             int bossTemplate=templates.FindIndex(t=>t.boss);
             if(bossTemplate>=spine){int swap=RandomStream.Range(ref layout,1,spine);(templates[swap],templates[bossTemplate])=(templates[bossTemplate],templates[swap]);}
-            float radius=(arenaBoss?32:50)+count*2;float stretchX=1+RandomStream.Unit(ref layout)*.1f,stretchY=1+RandomStream.Unit(ref layout)*.1f;
+            float radius=arenaBoss?32+count*2:34+count*1.2f;float stretchX=1+RandomStream.Unit(ref layout)*.1f,stretchY=1+RandomStream.Unit(ref layout)*.1f;
             for(int n=0;n<spine;n++)
             {
-                float angle=n*Mathf.PI*2/spine+(RandomStream.Unit(ref layout)-.5f)*.25f;
-                float localRadius=radius+(RandomStream.Unit(ref layout)-.5f)*10;
+                float angle=n*Mathf.PI*2/spine+(RandomStream.Unit(ref layout)-.5f)*(arenaBoss?.25f:.12f);
+                float localRadius=radius+(RandomStream.Unit(ref layout)-.5f)*(arenaBoss?10:4);
                 var p=new Vector2(Mathf.Round(Mathf.Cos(angle)*localRadius*stretchX),Mathf.Round(Mathf.Sin(angle)*localRadius*stretchY));
                 int rotation=(Mathf.RoundToInt(angle/(Mathf.PI*.5f))+1)%4,variant=RandomStream.Range(ref decor,0,3);
                 // RM01's axial-pillar variant blocks both possible side sockets. Perimeter
                 // cross-route anchors need a clear inward exit, so use its corner-pillar variant.
-                if(!arenaBoss&&n!=0&&templates[n].id=="RM01"&&variant==0)variant=1;
+                if(!arenaBoss&&templates[n].id=="RM01"&&variant==0)variant=1;
                 var duplicate=map.rooms.Find(r=>r.templateId==templates[n].id);if(duplicate!=null&&duplicate.rotation==rotation&&duplicate.variant==variant)variant=!arenaBoss&&templates[n].id=="RM01"?3-variant:(variant+1)%3;
                 map.rooms.Add(RiftTemplates.Instantiate(templates[n],n,p,rotation,variant,map.obstacles));if(templates[n].boss)map.bossRoom=n;
             }
@@ -124,7 +126,7 @@ namespace Hellscript
             for(int n=0;n<spine;n++)
             {
                 var r=map.rooms[n];float best=float.MinValue;
-                int inward=map.roamingBoss&&n!=0&&r.doors.Count>=3?r.doors.OrderByDescending(d=>Vector2.Dot(d.direction,-r.position.normalized)).First().index:-1;
+                int inward=map.roamingBoss&&r.doors.Count>=3?r.doors.OrderByDescending(d=>Vector2.Dot(d.direction,-r.position.normalized)).First().index:-1;
                 foreach(var a in r.doors)foreach(var b in r.doors)
                 {
                     if(a.index==b.index||a.index==inward||b.index==inward)continue;
@@ -132,6 +134,7 @@ namespace Hellscript
                     if(score>best){best=score;previousPorts[n]=a.index;nextPorts[n]=b.index;}
                 }
             }
+            if(!arenaBoss)RiftCrossRoutes.RingPorts(map,spine,previousPorts,nextPorts);
             for(int n=0;n<spine;n++)Connect(map,n,(n+1)%spine,nextPorts[n],previousPorts[(n+1)%spine],false);
             for(int n=spine;n<count;n++)
             {
@@ -159,6 +162,7 @@ namespace Hellscript
             AddJunctions(map);AssignRoles(map,spine);
             var first=map.rooms[0];map.start=first.Transform(-RiftTemplates.Get(first.templateId).size*.5f+Vector2.one*2);
             RiftOrganicGeometry.ShapeRooms(map);
+            if(map.version>=7)RiftDensity.Validate(map);
             var nav=new RiftNavigation(map);if(!nav.Reachable(map.start))throw new InvalidOperationException("시작점 접근 불가");
             foreach(var corridor in map.corridors)for(int n=1;n<corridor.points.Count;n++)
                 if(!nav.TravelClear(corridor.points[n-1],corridor.points[n],1.2f))throw new InvalidOperationException($"Curved passage clearance failed: {corridor.index}/{n} {corridor.points[n-1]} to {corridor.points[n]}");
@@ -183,27 +187,29 @@ namespace Hellscript
         internal static void Connect(RiftLayout map,int a,int b,int da,int db,bool extra,Vector2? crossing=null,Vector2? axis=null)
         {
             var first=map.rooms[a].doors[da];var last=map.rooms[b].doors[db];
-            var forbidden=map.rooms.Select(r=>Expand(r.Bounds,4.3f)).ToArray();
+            float clearance=map.version>=7?3.6f:4.3f;
+            var forbidden=map.rooms.Select(r=>Expand(r.Bounds,clearance)).ToArray();
             float limit=map.rooms.Max(r=>Mathf.Max(Mathf.Abs(r.position.x),Mathf.Abs(r.position.y)))+45;
             bool Pass(Vector2Int p)=>Mathf.Abs(p.x)<=limit&&Mathf.Abs(p.y)<=limit&&!forbidden.Any(r=>r.Contains(p));
             uint shapeSeed=Derive(map.layoutSeed,"passage:"+map.corridors.Count);
-            List<Vector2> Leg(RiftDoor from,RiftDoor to,float fromCollar=9,float toCollar=9)
+            List<Vector2> Leg(RiftDoor from,RiftDoor to,float fromCollar=-1,float toCollar=-1)
             {
+                if(fromCollar<0)fromCollar=map.version>=7?5.5f:9;if(toCollar<0)toCollar=map.version>=7?5.5f:9;
                 var route=RiftGridSearch.Find(Vector2Int.RoundToInt(from.position+from.direction*fromCollar),Vector2Int.RoundToInt(to.position+to.direction*toCollar),Pass);
                 if(route==null)throw new InvalidOperationException("Passage connection failed.");
-                return RiftOrganicGeometry.Connect(from,to,route,forbidden,shapeSeed);
+                return RiftOrganicGeometry.Connect(from,to,route,forbidden,shapeSeed,Mathf.Min(3,fromCollar),Mathf.Min(3,toCollar));
             }
             List<Vector2> points;
             if(crossing.HasValue)
             {
                 var center=crossing.Value;var direction=axis.Value.normalized;
-                // Keep an eighteen-metre, four-arm crossing outside all room envelopes. These
-                // two collars are hard constraints; smoothing cannot turn the X into a T or I.
-                var incoming=new RiftDoor{position=center-direction*9,direction=-direction};
-                var outgoing=new RiftDoor{position=center+direction*9,direction=direction};
-                points=Leg(first,incoming,toCollar:3);
+                // Preserve four straight arms without forcing a large empty core around the X.
+                float arm=map.version>=7?4:9,neck=map.version>=7?1.5f:3;
+                var incoming=new RiftDoor{position=center-direction*arm,direction=-direction};
+                var outgoing=new RiftDoor{position=center+direction*arm,direction=direction};
+                points=Leg(first,incoming,toCollar:neck);
                 for(int n=1;n<=6;n++)points.Add(Vector2.Lerp(incoming.position,outgoing.position,n/6f));
-                points.AddRange(Leg(outgoing,last,fromCollar:3).Skip(1));
+                points.AddRange(Leg(outgoing,last,fromCollar:neck).Skip(1));
             }
             else points=Leg(first,last);
             var c=new RiftCorridor{index=map.corridors.Count,roomA=a,roomB=b,doorA=da,doorB=db,extra=extra,crossing=crossing.HasValue,points=points};
@@ -398,7 +404,7 @@ namespace Hellscript
                 var anchors=room.chestAnchors.ToList();Shuffle(anchors,ref rng);RiftChest chest=null;
                 foreach(var anchor in anchors)
                 {
-                    if(used.Any(c=>Vector2.Distance(c.position,anchor)<3)||Vector2.Distance(map.start,anchor)<45||!nav.Reachable(anchor))continue;
+                    if(used.Any(c=>Vector2.Distance(c.position,anchor)<3)||Vector2.Distance(map.start,anchor)<(map.version>=7?26:45)||!nav.Reachable(anchor))continue;
                     var points=new List<Vector2>();foreach(var offset in new[]{Vector2.up,Vector2.down,Vector2.left,Vector2.right}){Vector2 p=anchor+offset*1.15f;if(nav.Reachable(p)&&nav.TravelClear(p,anchor))points.Add(p);}
                     if(points.Count<2)continue;string id="chest-"+n.ToString("00");
                     chest=new RiftChest{id=id,requestId=runId+":"+id+":open",definitionId=n==0?"CH02":"CH01",room=room.index,position=anchor,accessPoints=points,openingPosition=points[0]};break;
@@ -436,6 +442,7 @@ namespace Hellscript
             {
                 if(map.bossRoom!=-1||map.bossPoints.Count!=0||map.objective!=RiftObjectiveKind.None||map.gates.Count!=0)throw new InvalidOperationException("A roaming boss must not reserve an arena or gates.");
                 RiftCrossRoutes.Validate(map);RiftCirculation.Validate(map);
+                if(map.version>=7)RiftDensity.Validate(map);
             }
             RiftGates.Validate(map);
             RiftObjectives.Validate(map);
