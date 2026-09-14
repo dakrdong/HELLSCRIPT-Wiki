@@ -28,7 +28,7 @@ namespace Hellscript
             ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowRiftKeeper));
             ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
             ContentButton(ContentUnlocks.Train,"같은 조건으로 A/B 비교",ShowComparisonPicker);
-            FooterButton(0,2,"성소 메뉴",ShowTown);FooterButton(1,2,"광장으로",game.EnterPlaza);
+            FooterButton(0,2,"성소 메뉴",ShowTownMenu);FooterButton(1,2,"광장으로",()=>game.EnterPlaza());
         }
         Action SweepAction(Action refresh)
         {

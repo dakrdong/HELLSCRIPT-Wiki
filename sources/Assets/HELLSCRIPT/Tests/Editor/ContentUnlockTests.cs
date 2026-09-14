@@ -15,7 +15,7 @@ namespace Hellscript.Tests
         [Test] public void U01_NewAccountHasBaseAndNoGrowthPrivileges()
         {
             var a=New();Assert.AreEqual(3,a.heroes.Count);Assert.IsTrue(a.heroes.All(h=>h.build!=null&&h.inventory.Count==1));
-            foreach(var f in ContentUnlocks.Rules.features)Assert.IsFalse(ContentUnlocks.Has(a,f.id),f.id);
+            foreach(var f in ContentUnlocks.Rules.features)Assert.AreEqual(f.id==ContentUnlocks.Train,ContentUnlocks.Has(a,f.id),f.id);
             Assert.IsTrue(a.heroes.All(h=>h.build.passives.Length==0));
         }
         [Test] public void U02_FailedRealRunEnablesTrainingOnly()
@@ -102,7 +102,7 @@ namespace Hellscript.Tests
         {
             var a=New();a.gold=100000;a.materials=1000;uint rng=21;var item=a.Hero.inventory[0];
             Assert.IsFalse(Economy.Enhance(a,item));Assert.IsFalse(ContentServices.Purchase(a,0,0,ref rng,out _));
-            Assert.Throws<InvalidOperationException>(()=>new CombatSimulation(a,catalog,1,0,ownedTraining:true));
+            Assert.DoesNotThrow(()=>new CombatSimulation(a,catalog,1,0,ownedTraining:true));
             a.Hero.highestClear=50;var sim=new CombatSimulation(a,catalog,1,seed:82);a.suspendedRun=sim.State;sim.State.portal=true;
             int gold=a.gold;Assert.IsFalse(Economy.Enhance(a,item));Assert.IsFalse(ContentServices.Purchase(a,0,2,ref rng,out _));Assert.IsFalse(Economy.Sweep(a,"portal",ref rng));Assert.AreEqual(gold,a.gold);
         }

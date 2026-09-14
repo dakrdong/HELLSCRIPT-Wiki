@@ -62,7 +62,7 @@ namespace Hellscript
             s.firstRunEnded|=best>0;
             foreach(var f in Rules.features)
             {
-                bool eligible=f.stage>0&&best>=f.stage||f.id==Train&&s.firstRunEnded||f.id==Gem&&s.gemAcquired||f.id==CoreCraft&&s.coreReady;
+                bool eligible=f.stage>0&&best>=f.stage||f.id==Train||f.id==Gem&&s.gemAcquired||f.id==CoreCraft&&s.coreReady;
                 if(!eligible||s.unlocked.Contains(f.id))continue;
                 Grant(s,f.id);
                 if(f.id==Offline)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
@@ -72,7 +72,7 @@ namespace Hellscript
         public static string Condition(string id)
         {
             var f=Rules.features.Single(x=>x.id==id);
-            string text=f.stage>0?Loc.F("계정 내 영웅으로 균열 {0}단계 클리어 시 개방",f.stage):Loc.T("첫 균열 시도 종료 후 개방 · 실패해도 이용 가능");
+            string text=f.stage>0?Loc.F("계정 내 영웅으로 균열 {0}단계 클리어 시 개방",f.stage):Loc.T("마을 도착부터 언제든 이용 가능");
             return string.IsNullOrEmpty(f.early)?text:text+" · "+Loc.T(f.early);
         }
         public static void RecordRunEnd(AccountSave a){a.contentUnlocks.firstRunEnded=true;Reconcile(a);}

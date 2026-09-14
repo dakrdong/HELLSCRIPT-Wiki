@@ -44,7 +44,7 @@ namespace Hellscript
             if(FindAnyObjectByType<EventSystem>()==null){var es=new GameObject("UI Input",typeof(EventSystem),typeof(InputSystemUIInputModule));es.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();}
             if(game.Store==null)
             {Base("recovery","저장 복구가 필요합니다","진행 기록을 덮어쓰지 않고 게임을 멈췄습니다");Note(content,game.Notice,22,360,pale);FooterButton(0,1,"게임 종료",()=>Application.Quit());}
-            else ShowTown();
+            else ShowTitle();
         }
         // Controls stay inside the usable area while the backdrop keeps covering the display, and the
         // header and footer colours continue into the notch and home bar bands instead of leaving them black.
@@ -174,25 +174,26 @@ namespace Hellscript
             var b=Button(footer,title,action,primary?new Color(.48f,.3f,.13f):new Color(.1f,.13f,.17f));var r=(RectTransform)b.transform;
             r.anchorMin=new Vector2((float)index/count,0);r.anchorMax=new Vector2((float)(index+1)/count,1);r.offsetMin=new Vector2(8,10);r.offsetMax=new Vector2(-8,-10);
         }
-        public void ShowTown()
+        public void ShowTown()=>game.EnterPlaza();
+        public void ShowTownMenu()
         {
             var a=game.Store.Data;var h=a.Hero;
-            pageRepaint=()=>ShowTown();Base("town","HELLSCRIPT","행동을 설계하고, 균열을 지배하라",true);
+            pageRepaint=()=>ShowTownMenu();Base("town","HELLSCRIPT","행동을 설계하고, 균열을 지배하라",true);
             Note(content,"SANCTUARY  /  잿빛 성소",18,45,gold);
             var heroCard=Row(content,158);Icon(heroCard,18+(int)h.heroClass,15,15,125);
             var info=Label(heroCard,Loc.F("{0}   Lv.{1}\n최고 실클리어 {2}단계\n{3}", game.catalog.classNames[(int)h.heroClass], h.level, h.highestClear, h.build.name),25,pale);Place(info.rectTransform,160,10,470,135);
             var classes=Row(content,96);for(int i=0;i<3;i++){int id=i;var b=Button(classes,game.catalog.classNames[i],()=>game.SelectHero(id),i==a.selectedHero?new Color(.35f,.25f,.14f):panel);Across(b,i,3,8,TouchHeight);b.interactable=a.suspendedRun==null;}
             AddTownGuide();
             Note(content,Loc.F("골드 {0:N0}    일반 재료 {1:N0}    가방 {2}/{3}", a.gold, a.materials, h.inventory.Count(x=>!x.equipped), h.capacity),21,50,pale);
-            var stage=Row(content,100);var minus=Button(stage,"−",()=>{game.SelectedStage=Mathf.Max(1,game.SelectedStage-1);ShowTown();});Place((RectTransform)minus.transform,12,10,TouchHeight,TouchHeight);
+            var stage=Row(content,100);var minus=Button(stage,"−",()=>{game.SelectedStage=Mathf.Max(1,game.SelectedStage-1);ShowTownMenu();});Place((RectTransform)minus.transform,12,10,TouchHeight,TouchHeight);
             var st=Label(stage,Loc.F("균열 {0:00}단계", game.SelectedStage),28,gold,TextAnchor.MiddleCenter);Span(st.rectTransform,102,19,102,62);
-            var plus=Button(stage,"+",()=>{game.SelectedStage=Mathf.Min(h.highestClear+1,game.SelectedStage+1);ShowTown();});Right((RectTransform)plus.transform,12,10,TouchHeight,TouchHeight);
+            var plus=Button(stage,"+",()=>{game.SelectedStage=Mathf.Min(h.highestClear+1,game.SelectedStage+1);ShowTownMenu();});Right((RectTransform)plus.transform,12,10,TouchHeight,TouchHeight);
             BigButton(content,"단계별 등급 확률",ShowRiftRewards);
             AddRepeatPreparation();
             if(!game.Running&&a.repeatHunt?.pendingResult!=null)BigButton(content,"저장된 반복 결과 확인",game.ResumeRepeatResult,true);
             if(a.suspendedRun!=null)BigButton(content,"진행 중인 균열 이어하기",()=>game.Begin(resume:true),true);
             else BigButton(content,"균열에 진입",()=>game.Begin(),true);
-            BigButton(content,"성소 거닐기 · NPC 방문",game.EnterPlaza);
+            BigButton(content,"성소 거닐기 · NPC 방문",()=>game.EnterPlaza());
             BigButton(content,"균열 관리자 · 단계·소탕·훈련",ShowRiftKeeper);
             BigButton(content,"자동 행동 설계",()=>ShowBuild());
             BigButton(content,"사냥 칙령 v0.2 편집",ShowEdictEditor);
@@ -460,6 +461,7 @@ namespace Hellscript
             ReflowBattleHud();
             ReflowEdictRows();
             ReflowRunes();
+            RefreshPlaza();
             ReflowResultRows();
             ReflowHistory();
             RefreshRepeatStatus();

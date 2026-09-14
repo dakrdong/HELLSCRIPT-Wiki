@@ -254,7 +254,7 @@ namespace Hellscript
             Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
-            Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;
+            Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)

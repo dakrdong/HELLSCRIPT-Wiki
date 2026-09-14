@@ -48,7 +48,7 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
-            presentedRunId=null;
+            ClearTownPresentation();presentedRunId=null;
             shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
@@ -192,8 +192,9 @@ namespace Hellscript
             if(viewCamera==null||presentationSuspended)return;
             var viewport=game.UI!=null&&game.UI.Page=="battle"?game.UI.BattleViewport:new Rect(0,0,1,1);
             viewCamera.rect=viewport;viewCamera.ResetAspect();
+            if(game.UI!=null&&game.UI.Page=="plaza"){viewCamera.orthographicSize=Mathf.Max(15,14/Mathf.Max(.3f,viewCamera.aspect));return;}
             viewCamera.orthographicSize=BattleHudLayout.CameraHalfHeight(viewCamera.aspect,game.UI!=null?game.UI.BattleViewHeight:Screen.height);
         }
-        void OnDestroy(){foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);}
+        void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);}
     }
 }

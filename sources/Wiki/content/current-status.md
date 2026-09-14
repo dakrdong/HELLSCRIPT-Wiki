@@ -170,3 +170,10 @@ English: account-wide menu access follows rewarded actual clears, while hero ski
 사냥 칙령 v0.2는 저장·전투·공유·편집의 네 단계를 마쳤고, 편집·공유 화면은 macOS 개발 빌드의 런타임 스모크로 실제 버튼을 눌러 확인했습니다. 첫 실행과 별도 프로세스 재시작이 모두 통과했으며 스크린샷 11장을 보존했습니다. 이는 당시 편집 화면의 검증 기록입니다. 이후 전역 대상·추적·전리품·공통 순서·기존 조준과 M01·M02·M03·M04·M05·M06의 핵심 판단을 추가로 연결했습니다.
 
 각 항목의 구체적인 완료 조건은 [남은 개발 작업표](../../Docs/Design/HELLSCRIPT_Remaining_Development_Backlog.md)와 [게임 완성 체크리스트](../../Docs/Design/HELLSCRIPT_Gameplay_Completion_Checklist.md)를 따릅니다. 근거 없는 전체 완성률은 표시하지 않습니다.
+
+
+## 2026-09-14 숲속 마을과 타이틀
+
+게임 시작은 타이틀에서 멈추며, 캐릭터를 선택하고 입장하면 숲속 정착민 마을에 도착합니다. 원형 조이스틱으로 이동하고 NPC 6명과 중앙 오른쪽의 주황·금빛 균열 포탈을 이용합니다. 가까이 가면 오른쪽 고정 버튼으로 기능을 열 수 있으며, 건물 뒤에 서면 건물이 반투명해집니다. 중앙 길 횡단은 기본 속도로 약 20초가 걸립니다. 훈련장은 첫 균열 시도 전부터 열리며 장비·보석·룬 상인은 실제 구매 거래를 제공합니다. [구현과 검증 기록](../../Docs/Implementation/Forest_Settlement.md)을 확인하세요.
+
+English: boot stops at the character-selection title. Enter the forest settlement, move with the circular joystick, then explicitly interact with six NPCs and the orange/gold rift portal slightly right of center. The action card remains on the right in both orientations. Buildings fade when they obstruct the hero. The main road takes about 20 seconds to cross. Training is available before the first rift; equipment, gem and rune merchants support actual purchases. See the [implementation record](../../Docs/Implementation/Forest_Settlement.en.md).

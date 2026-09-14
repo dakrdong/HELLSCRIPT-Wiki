@@ -33,7 +33,7 @@ namespace Hellscript
             Require(!string.IsNullOrEmpty(directory),"Evidence directory required.");Directory.CreateDirectory(directory);
             yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();game.enabled=false;
             game.Store.Data.guide.hintsHidden=true;
-            Require(!ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Train),"Fresh account unexpectedly unlocked.");
+            Require(ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Train),"Fresh account must have training.");
             game.ApplyLanguage("ko");game.UI.ShowContentUnlocks();yield return Capture("new-ko",720,1280);
             game.ApplyLanguage("en");game.UI.ShowContentUnlocks();yield return Capture("new-en",1280,720);
             game.UI.ShowShop();yield return Capture("shop-locked-en",720,1280);

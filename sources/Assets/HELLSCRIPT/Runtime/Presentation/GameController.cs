@@ -45,7 +45,7 @@ namespace Hellscript
         }
         public void SelectHero(int index)
         {
-            if(Running)return;Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();UI.ShowTown();
+            if(Running)return;Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
         public void Begin(int training=-1,bool resume=false,uint? seed=null)
         {BeginRun(training,resume,seed,false);}
@@ -112,26 +112,47 @@ namespace Hellscript
             })){Notify(Store.Error);return;}
             UI.ShowBattle();
         }
-        public void EnterPlaza()
+        public void EnterPlaza(bool fresh=false)
         {
-            if(Active)return;Town??=new TownWalk();World.BuildTown(Town);UI.ShowPlaza();
+            if(Active)return;
+            if(Combat!=null){Combat.Visual-=World.Effect;Combat=null;}
+            if(fresh||Town==null)Town=new TownWalk();
+            World.BuildTown(Town);UI.ShowPlaza();
         }
         public void RequestStation(TownStation station)
+        {if(Town==null||Active)return;Town.Request(station);UI.RefreshPlaza();}
+        public void InteractTown()
         {
-            if(Town==null||Active)return;Town.Request(station);UI.RefreshPlaza();
+            if(Town==null||Active||UI.Page!="plaza"||UI.CommonPanelOpen||UI.TownNavigationOpen)return;
+            if(Town.Nearby.HasValue)UI.OpenStation(Town.Nearby.Value);
         }
         public void TapPlaza(Vector2 screen)
         {
-            if(Town==null||UI==null||UI.Page!="plaza"||Active)return;
+            if(Town==null||UI==null||UI.Page!="plaza"||Active||UI.CommonPanelOpen||UI.TownNavigationOpen)return;
             if(World.TryPickStation(screen,out var station))RequestStation(station);
+            else if(World.TryPickTownGround(screen,out var point))Town.RequestPoint(point);
+        }
+        readonly System.Collections.Generic.List<RaycastResult> townUIHits=new System.Collections.Generic.List<RaycastResult>();
+        bool TownPointerOverUI(Vector2 point)
+        {
+            if(EventSystem.current==null)return false;townUIHits.Clear();
+            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position=point},townUIHits);return townUIHits.Count>0;
         }
         void TickPlaza(float real)
         {
-            if(Town==null||UI==null||UI.Page!="plaza"||UI.CommonPanelOpen)return;
+            if(Town==null||UI==null||UI.Page!="plaza")return;
+            if(UI.CommonPanelOpen||UI.TownNavigationOpen||backgroundPaused){UI.ResetTownInput();Town.Cancel();return;}
+            Vector2 input=UI.TownMovement;var keyboard=Keyboard.current;
+            if(keyboard!=null)
+            {
+                input+=new Vector2((keyboard.dKey.isPressed||keyboard.rightArrowKey.isPressed?1:0)-(keyboard.aKey.isPressed||keyboard.leftArrowKey.isPressed?1:0),
+                    (keyboard.wKey.isPressed||keyboard.upArrowKey.isPressed?1:0)-(keyboard.sKey.isPressed||keyboard.downArrowKey.isPressed?1:0));
+                if(keyboard.eKey.wasPressedThisFrame){InteractTown();return;}
+            }
             var pointer=Pointer.current;
-            if(pointer!=null&&pointer.press.wasPressedThisFrame&&!(EventSystem.current!=null&&EventSystem.current.IsPointerOverGameObject()))TapPlaza(pointer.position.ReadValue());
-            Town.Tick(real);World.PresentTown(Town,real);UI.RefreshPlaza();
-            if(Town.TakeArrival(out var station))UI.OpenStation(station);
+            if(pointer!=null&&pointer.press.wasPressedThisFrame&&!TownPointerOverUI(pointer.position.ReadValue()))TapPlaza(pointer.position.ReadValue());
+            if(input.sqrMagnitude>.01f)Town.Move(input,real);else Town.Tick(real);
+            World.PresentTown(Town,real);UI.RefreshPlaza();
         }
         public void ReturnTown()
         {
@@ -216,7 +237,7 @@ namespace Hellscript
             if(Store!=null)Save();
         }
         // Desktop players can suspend updates on focus loss without a mobile pause callback.
-        void OnApplicationFocus(bool focused){repeatClock=Time.realtimeSinceStartupAsDouble;combatClock.Reset(repeatClock);}
+        void OnApplicationFocus(bool focused){if(!focused){Town?.Cancel();UI?.ResetTownInput();}repeatClock=Time.realtimeSinceStartupAsDouble;combatClock.Reset(repeatClock);}
         void OnApplicationQuit(){if(Store!=null)Save();}
     }
 }

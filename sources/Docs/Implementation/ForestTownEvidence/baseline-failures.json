@@ -1,0 +1,58 @@
+{
+  "baseline": "1ad2d84",
+  "total": 56,
+  "failures": [
+    {
+      "test": "Hellscript.Tests.ContentUnlockTests.U03U23_BossRewardSettlementUnlocksOnceAndRestoreDoesNotDuplicate",
+      "message": "  Expected: 1100\n  But was:  1950\n"
+    },
+    {
+      "test": "Hellscript.Tests.ItemizationTests.LegacyMigrationPreservesValuesAndStableRerollSlotWithoutDrawing",
+      "message": "  Expected: 2\n  But was:  4\n"
+    },
+    {
+      "test": "Hellscript.Tests.ItemQualityTests.AHistoricalQualityItemStillMakesOlderPlayersRejectTheSaveAfterItsLiveCopyIsGone",
+      "message": "  Expected: 3\n  But was:  4\n"
+    },
+    {
+      "test": "Hellscript.Tests.ItemQualityTests.QualityHistoryWithNoOwnedEquipmentRetainsItsSchemaBoundaryAndData",
+      "message": "  Expected: 3\n  But was:  4\n"
+    },
+    {
+      "test": "Hellscript.Tests.OutcomeTests.BossKillWinsTheTimerBoundaryButHeroDeathAloneFails(True)",
+      "message": "  Expected: 1950\n  But was:  1100\n"
+    },
+    {
+      "test": "Hellscript.Tests.OutcomeTests.BothAlreadyFlyingAttacksResolveBeforeBossDeathWinsTheSameTick(False)",
+      "message": "  Expected: 1950\n  But was:  1100\n"
+    },
+    {
+      "test": "Hellscript.Tests.OutcomeTests.BothAlreadyFlyingAttacksResolveBeforeBossDeathWinsTheSameTick(True)",
+      "message": "  Expected: 1950\n  But was:  1100\n"
+    },
+    {
+      "test": "Hellscript.Tests.OutcomeTests.LaterAttacksFreezeAfterLootingAndSavingCannotRepeatDeathOrFirstClearRewards",
+      "message": "  Expected: 1100\n  But was:  1950\n"
+    },
+    {
+      "test": "Hellscript.Tests.RiftRarityTests.RealDeathSettlementUsesCurrentTenNotHighestFiftyAndKeepsDrawCount(Normal)",
+      "message": "  String lengths are both 930. Strings differ at index 27.\n  Expected: \"{\"id\":\"rift-rarity-fixture-3\",\"name\":\"강인한 은 목걸이 · 치유\",\"specia...\"\n  But was:  \"{\"id\":\"rift-rarity-fixture-4\",\"name\":\"강인한 은 목걸이 · 치유\",\"specia...\"\n  --------------------------------------^\n"
+    },
+    {
+      "test": "Hellscript.Tests.RiftRarityTests.RealDeathSettlementUsesCurrentTenNotHighestFiftyAndKeepsDrawCount(Elite)",
+      "message": "  String lengths are both 930. Strings differ at index 27.\n  Expected: \"{\"id\":\"rift-rarity-fixture-3\",\"name\":\"날렵한 묵철 도끼 · 처형\",\"specia...\"\n  But was:  \"{\"id\":\"rift-rarity-fixture-5\",\"name\":\"날렵한 묵철 도끼 · 처형\",\"specia...\"\n  --------------------------------------^\n"
+    },
+    {
+      "test": "Hellscript.Tests.RiftRarityTests.RealDeathSettlementUsesCurrentTenNotHighestFiftyAndKeepsDrawCount(Boss)",
+      "message": "  String lengths are both 933. Strings differ at index 27.\n  Expected: \"{\"id\":\"rift-rarity-fixture-2\",\"name\":\"타오르는 녹슨 도검 · 간파\",\"speci...\"\n  But was:  \"{\"id\":\"rift-rarity-fixture-6\",\"name\":\"타오르는 녹슨 도검 · 간파\",\"speci...\"\n  --------------------------------------^\n"
+    },
+    {
+      "test": "Hellscript.Tests.RiftRarityTests.SavedUnclaimedBossItemsStayFixedAfterRecordChangesRestoreAndRepeatedCollection",
+      "message": "  Expected: 2000\n  But was:  3300\n"
+    },
+    {
+      "test": "Hellscript.Tests.RiftTests.BossDeathAndCompletedOpeningInSameTickBothCommitOnce",
+      "message": "  Expected: 2013\n  But was:  1163\n"
+    }
+  ]
+}
