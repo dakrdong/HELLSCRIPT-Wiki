@@ -48,9 +48,9 @@ New entries save version 7. Existing version 6 and older runs retain their saved
 
 Six identical seeds are compared with the previously saved version 6 layouts. Both sides of the comparison image use the same metres-to-pixels scale.
 
-![Previous and compact layouts at the same world scale](CompactRiftEvidence/before-after.en.png)
+[Previous and compact layouts at the same world scale](CompactRiftEvidence/before-after.en.png)
 
-![Six compact generated layouts](CompactRiftEvidence/sample-layouts.en.png)
+[Six compact generated layouts](CompactRiftEvidence/sample-layouts.en.png)
 
 | Mean across six matching seeds | Version 6 | Version 7 |
 |---|---:|---:|

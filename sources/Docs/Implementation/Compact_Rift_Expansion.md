@@ -48,9 +48,9 @@
 
 같은 시드 6개를 이전에 저장한 버전 6 지형과 비교했다. 아래 비교 그림은 양쪽의 거리 축척이 같다. 생성 데이터를 화면에 맞게 따로 확대해서 생긴 차이가 아니다.
 
-![같은 거리 축척으로 비교한 이전 지도와 압축 지도](CompactRiftEvidence/before-after.png)
+[같은 거리 축척으로 비교한 이전 지도와 압축 지도](CompactRiftEvidence/before-after.png)
 
-![서로 다른 시드로 생성한 밀집형 균열 6개](CompactRiftEvidence/sample-layouts.png)
+[서로 다른 시드로 생성한 밀집형 균열 6개](CompactRiftEvidence/sample-layouts.png)
 
 | 동일 시드 6개의 평균 | 버전 6 | 버전 7 |
 |---|---:|---:|
@@ -59,7 +59,7 @@
 | 최대 공백 표본 거리 | 28.2m | 9.7m |
 | 최장 무분기 통로 | 62.8m | 36.1m |
 
-[비교 측정 원본](CompactRiftEvidence/comparison.json)과 [지도 생성 원본 6개](CompactRiftEvidence/sample-layouts.json)을 보존한다. 서로 다른 후보가 선택될 수 있으므로 방 템플릿 순서가 아니라 동일한 입력 시드의 생성 결과를 비교한 것이다.
+[비교 측정 원본](CompactRiftEvidence/comparison.json)과 [지도 생성 원본 6개](CompactRiftEvidence/sample-layouts.json)를 보존한다. 서로 다른 후보가 선택될 수 있으므로 방 템플릿 순서가 아니라 동일한 입력 시드의 생성 결과를 비교한 것이다.
 
 ## 검증 결과
 
