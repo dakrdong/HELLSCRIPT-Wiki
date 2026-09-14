@@ -1,0 +1,67 @@
+{
+  "date": "2026-09-14",
+  "unity": "6000.6.0f1",
+  "baseCommit": "297018b",
+  "validationCheckout": "isolated checkout with only this task’s runtime changes; concurrent organic rift changes excluded",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "174",
+    "result": "Passed",
+    "total": "174",
+    "passed": "174",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-14 04:46:10Z",
+    "end-time": "2026-09-14 04:46:11Z",
+    "duration": "1.4469031"
+  },
+  "native": {
+    "platform": "macOS development player",
+    "runtime": "HELLSCRIPT_SETTINGS_RUNTIME_OK",
+    "restart": "HELLSCRIPT_SETTINGS_RESTART_OK",
+    "isolatedSave": true,
+    "worldChecks": [
+      "Actual player identity, position, rotation and scale unchanged in town and rift",
+      "One gameplay camera; no preview clone or render texture",
+      "Actual player centered in left half; camera angle and apparent scale preserved",
+      "Backdrop close restores camera position/viewport and HUD visibility/input",
+      "Portrait full menu and round-trip landscape layout",
+      "All 21 view-distance steps immediately scale actual world; wheel and buttons work",
+      "Separate native restart restores view distance 125% with other preferences"
+    ],
+    "screenshots": [
+      "town-100.png",
+      "town-50.png",
+      "town-150.png",
+      "rift-100.png",
+      "portrait.png",
+      "restart.png"
+    ]
+  },
+  "limitations": [
+    "Physical iOS/Android orientation and touch were not tested."
+  ],
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "35119219bc7f133d00c473f505262e0784e6c612f57feeb9a845d0fb06a215f8",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Display.cs": "0ba1cad3dd9163e1f764c11b80a30d0f91c409c336224ea2b63e56cbf60cf4a0",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs": "e44d2439f85023b9d38be2959e80d2124b23fad0734b283e5706011f193daadf",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.cs": "e18e4423d4ea10924574f55f61bf75097f1f51713a3210665f27ffae7200ddd6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeScreenSettingsSmoke.cs": "df4814d260fff26a2d224d2daeb7b492044d348a2b8d12594141dc68cf6d0a59",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Settings.cs": "70ab9a78c3dadc733ba5db7057785a283d5cc33a22743146c0d003e5affacd1b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Settings.cs.meta": "26f5b4255a2f68f5542a41fa03020a756332ed626aef0524a2b9a2988d051b1a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ViewDistance.cs": "5eb097db93a257a1f47c343918f117ec4ebc379c7bfb38b06108d0b78fed1586",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ViewDistance.cs.meta": "f5a56b700faec269cc332ae1dd7b43f1216f58fc6b66469c5eeedf486d042919",
+    "Assets/HELLSCRIPT/Runtime/Core/ViewDistance.cs": "15b26087b63c2f653abe204db341c838ed7d97206aac0cca5e2c054b5b3863c2",
+    "Assets/HELLSCRIPT/Runtime/Core/ViewDistance.cs.meta": "f32833befb5d557651561f33fcc654d5c0e304803168f216ad04bfa1985d9772",
+    "Assets/HELLSCRIPT/Tests/Editor/ViewDistanceTests.cs": "034474eba073796c9200b69df682901a6208740377d0304c4a05bfb8cea274df",
+    "Assets/HELLSCRIPT/Tests/Editor/ViewDistanceTests.cs.meta": "d1e6034feadd577fa61fbc5183f62f182f2db47c2706ad1d5ee88b1d4fe79553"
+  },
+  "removed": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/SettingsCharacterPreview.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SettingsCharacterPreview.cs.meta"
+  ]
+}

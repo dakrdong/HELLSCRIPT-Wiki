@@ -48,7 +48,7 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
-            ClearTownPresentation();presentedRunId=null;
+            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;
             shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
@@ -83,10 +83,9 @@ namespace Hellscript
             hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false);
             hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);
         }
-        public GameObject CreateCharacterPreview(Transform parent)=>CreateBody("Settings character",(int)game.Store.Data.Hero.heroClass,false,false,parent);
-        GameObject CreateBody(string name,int type,bool enemy,bool boss,Transform parent=null)
+        GameObject CreateBody(string name,int type,bool enemy,bool boss)
         {
-            var root=new GameObject(name);root.transform.SetParent(parent!=null?parent:world.transform,false);
+            var root=new GameObject(name);root.transform.SetParent(world.transform,false);
             Material body=enemy?Mat("Enemy "+type,Color.Lerp(new Color(.35f,.3f,.34f),type%3==0?new Color(.44f,.2f,.16f):new Color(.2f,.33f,.37f),.6f)):type==0?Mat("Hero Iron",new Color(.37f,.44f,.53f)):type==1?Mat("Hunter Cloak",new Color(.19f,.34f,.28f)):Mat("Mage Cloak",new Color(.28f,.19f,.44f));
             // Rigid one-piece placeholder. The view adds bob, lean, and facing without a skeleton.
             int role=type%6;Vector3 bodyScale=enemy&&role==1?new Vector3(.65f,.65f,1.1f):enemy&&role==5?new Vector3(1.25f,1,1.25f):enemy&&role==4?new Vector3(.55f,1.25f,.55f):new Vector3(.8f,1,.65f);
@@ -191,10 +190,8 @@ namespace Hellscript
         void ApplyBattleViewport()
         {
             if(viewCamera==null||presentationSuspended)return;
-            var viewport=game.UI!=null&&game.UI.Page=="battle"?game.UI.BattleViewport:UiSafeArea.FrameNormalized;
-            viewCamera.rect=viewport;viewCamera.ResetAspect();
-            if(game.UI!=null&&game.UI.Page=="plaza"){viewCamera.orthographicSize=Mathf.Max(15,14/Mathf.Max(.3f,viewCamera.aspect));return;}
-            viewCamera.orthographicSize=BattleHudLayout.CameraHalfHeight(viewCamera.aspect,game.UI!=null?game.UI.BattleViewHeight:Screen.height);
+            if(settingsWorldOpen&&HasPresentedPlayer){ApplySettingsWorld();return;}
+            var viewport=GameplayViewport;viewCamera.rect=viewport;viewCamera.ResetAspect();viewCamera.orthographicSize=GameplayHalfHeight(viewport);
         }
         void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);}
     }

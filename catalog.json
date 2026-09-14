@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T13:08:59+09:00",
+  "generatedAt": "2026-09-14T13:51:03+09:00",
   "databases": [
     {
       "id": "resources",
@@ -2678,13 +2678,13 @@
         },
         {
           "id": "procedural-settings",
-          "name": "톱니바퀴 설정·캐릭터 미리보기",
+          "name": "톱니바퀴 설정·실제 플레이 화면",
           "category": "코드 생성 표현",
-          "summary": "가로 화면은 오른쪽 반쪽 메뉴와 왼쪽 캐릭터, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기 50~150%를 제공합니다.",
+          "summary": "가로 화면은 오른쪽 반쪽 메뉴와 왼쪽의 실제 마을·사냥터 플레이어, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기·가시거리 각각 50~150%를 제공합니다.",
           "fields": {
-            "제작 방식": "가로 화면은 오른쪽 반쪽 메뉴와 왼쪽 캐릭터, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기 50~150%를 제공합니다.",
-            "구현 파일": "GameUI.ScreenSettings.cs · GameUI.SettingsFrame.cs · SettingsControls.cs · SettingsCharacterPreview.cs",
-            "후속 제작": "글자 크기는 5%씩 조절하며 캐릭터 변경 후 마을로 돌아갑니다. 모바일 실기기 방향 전환과 터치는 후속 검증 대상입니다."
+            "제작 방식": "가로 화면은 오른쪽 반쪽 메뉴와 왼쪽의 실제 마을·사냥터 플레이어, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기·가시거리 각각 50~150%를 제공합니다.",
+            "구현 파일": "GameUI.ScreenSettings.cs · GameUI.SettingsFrame.cs · SettingsControls.cs · WorldView.Settings.cs · GameUI.ViewDistance.cs",
+            "후속 제작": "글자 크기와 가시거리는 각각 5%씩 조절하며 캐릭터 변경 후 마을로 돌아갑니다. 모바일 실기기 방향 전환과 터치는 후속 검증 대상입니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs",
@@ -2701,7 +2701,11 @@
               "line": 1
             },
             {
-              "path": "Assets/HELLSCRIPT/Runtime/Presentation/SettingsCharacterPreview.cs",
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Settings.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ViewDistance.cs",
               "line": 1
             }
           ],

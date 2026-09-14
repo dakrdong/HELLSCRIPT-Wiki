@@ -11,12 +11,12 @@ namespace Hellscript
     {
         enum SettingsSection { Screen,Sound,Language,Character,Help,Combat }
         SettingsSection commonTab;
-        RectTransform commonModal,commonSafe,commonCard,commonTabs,commonPreview;Button commonClose,commonBackdrop;SettingsCharacterPreview characterPreview;
+        RectTransform commonModal,commonSafe,commonCard,commonTabs,commonWorld;Button commonClose,commonBackdrop;
         RectTransform screenPane,languagePane,characterPane,helpPane,combatPane,scaleChoiceRow;
         Text commonHeading,scaleValue,scaleMessage,aspectMessage,languageMessage,characterMessage;
         SettingsStepSlider scaleSlider;Button scaleRetry;GameObject commonPreviousSelection;
         Vector2 commonScreenSize;Rect commonSafeArea;float commonKeyboardTop;bool commonLaidOut;
-        readonly List<(CanvasGroup group,bool interactable,bool raycasts)> commonInputGates=new List<(CanvasGroup,bool,bool)>();
+        readonly List<(CanvasGroup group,bool interactable,bool raycasts,float alpha)> commonInputGates=new List<(CanvasGroup,bool,bool,float)>();
         readonly List<(string id,Button button)> aspectButtons=new List<(string,Button)>();
         readonly List<(string code,Button button)> languageButtons=new List<(string,Button)>();
         public bool CommonPanelOpen=>commonModal!=null||idleIntroductionOpen;
@@ -30,17 +30,13 @@ namespace Hellscript
             if(commonModal!=null){SelectSettingsTab(help?SettingsSection.Help:SettingsSection.Screen);return;}
             commonPreviousSelection=EventSystem.current?.currentSelectedGameObject;EventSystem.current?.SetSelectedGameObject(null);commonInputGates.Clear();
             foreach(var existing in GetComponentsInChildren<Canvas>())
-            {var group=existing.GetComponent<CanvasGroup>()??existing.gameObject.AddComponent<CanvasGroup>();commonInputGates.Add((group,group.interactable,group.blocksRaycasts));group.interactable=group.blocksRaycasts=false;}
+            {var group=existing.GetComponent<CanvasGroup>()??existing.gameObject.AddComponent<CanvasGroup>();commonInputGates.Add((group,group.interactable,group.blocksRaycasts,group.alpha));group.interactable=group.blocksRaycasts=false;}
             commonModal=Rect("Screen and help modal",transform);var canvas=commonModal.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=120;canvas.pixelPerfect=true;
             ApplyScaler(commonModal.gameObject.AddComponent<CanvasScaler>(),true);commonModal.gameObject.AddComponent<GraphicRaycaster>();
             commonBackdrop=Button(commonModal,"",CloseCommonPanel,new Color(.025f,.035f,.049f,1));commonBackdrop.name="settings-backdrop";Stretch((RectTransform)commonBackdrop.transform);commonBackdrop.transition=Selectable.Transition.None;
             commonSafe=Rect("Common safe area",commonModal);Stretch(commonSafe);
-            commonPreview=Rect("Settings character presentation",commonSafe);commonPreview.anchorMin=Vector2.zero;commonPreview.anchorMax=new Vector2(.5f,1);commonPreview.offsetMin=commonPreview.offsetMax=Vector2.zero;
-            if(background!=null){var scenery=Rect("Character backdrop",commonPreview);Stretch(scenery);var sceneImage=scenery.gameObject.AddComponent<RawImage>();sceneImage.texture=background;sceneImage.color=new Color(.24f,.3f,.32f,1);sceneImage.raycastTarget=false;}
-            var portrait=Rect("Current character preview",commonPreview);Stretch(portrait);portrait.offsetMin=new Vector2(12,64);portrait.offsetMax=new Vector2(-12,-36);var portraitImage=portrait.gameObject.AddComponent<RawImage>();portraitImage.raycastTarget=false;
-            characterPreview=portrait.gameObject.AddComponent<SettingsCharacterPreview>();characterPreview.Initialize(game.World);
-            var hero=game.Store.Data.Hero;var name=Label(commonPreview,Loc.F("{0} · Lv.{1}",game.catalog.classNames[(int)hero.heroClass],hero.level),24,gold,TextAnchor.MiddleCenter);name.rectTransform.anchorMin=new Vector2(0,0);name.rectTransform.anchorMax=new Vector2(1,0);name.rectTransform.sizeDelta=new Vector2(-24,40);name.rectTransform.anchoredPosition=new Vector2(0,62);
-            var hint=Label(commonPreview,"배경을 누르면 닫힙니다.",17,muted,TextAnchor.MiddleCenter);hint.rectTransform.anchorMin=new Vector2(0,0);hint.rectTransform.anchorMax=new Vector2(1,0);hint.rectTransform.sizeDelta=new Vector2(-24,40);hint.rectTransform.anchoredPosition=new Vector2(0,28);
+            commonWorld=Rect("Settings world area",commonSafe);commonWorld.anchorMin=Vector2.zero;commonWorld.anchorMax=new Vector2(.5f,1);commonWorld.offsetMin=commonWorld.offsetMax=Vector2.zero;
+            var hint=Label(commonWorld,"배경을 누르면 닫힙니다.",17,pale,TextAnchor.MiddleCenter);hint.rectTransform.anchorMin=new Vector2(0,0);hint.rectTransform.anchorMax=new Vector2(1,0);hint.rectTransform.sizeDelta=new Vector2(-24,40);hint.rectTransform.anchoredPosition=new Vector2(0,28);
             commonCard=Box("Common dialog",commonSafe,ink);commonCard.anchorMin=commonCard.anchorMax=commonCard.pivot=new Vector2(.5f,.5f);
             commonHeading=Label(commonCard,"설정",26,gold);Span(commonHeading.rectTransform,18,8,18,40);commonTabs=Rect("Common categories",commonCard);
             foreach(var entry in new[]{(SettingsSection.Screen,"화면"),(SettingsSection.Sound,"소리"),(SettingsSection.Language,"언어"),(SettingsSection.Character,"캐릭터 변경")})
@@ -51,7 +47,7 @@ namespace Hellscript
         }
         void BuildDisplayPane()
         {
-            screenPane=CommonScroll("화면 설정 본문",out var body);CommonNote(body,"화면 비율",24,gold);
+            screenPane=CommonScroll("화면 설정 본문",out var body);BuildViewDistanceControl(body);CommonNote(body,"화면 비율",24,gold);
             CommonNote(body,"비율을 선택하면 바로 적용합니다. PC에서는 창 크기를 맞추고, 모바일에서는 화면을 회전한 뒤 선택한 비율로 표시합니다.",19);aspectButtons.Clear();
             var automatic=BigButton(body,"화면에 맞춤",()=>game.ApplyAspect("auto"));automatic.name="settings-aspect-auto";aspectButtons.Add(("auto",automatic));
             for(int side=0;side<2;side++)
@@ -120,7 +116,7 @@ namespace Hellscript
             if(commonModal==null)return;
             foreach(var choice in aspectButtons)choice.button.GetComponent<Image>().color=choice.id==game.Aspect?gold*.4f:new Color(.14f,.17f,.2f);
             aspectMessage.text=Loc.T(string.IsNullOrEmpty(game.AspectMessage)?Loc.F("현재 비율 · {0}",game.Aspect=="auto"?Loc.T("화면에 맞춤"):game.Aspect):game.AspectMessage);
-            var scale=game.InterfaceScale;scaleSlider.SetValueWithoutNotify((scale.Percent-50)/5);scaleValue.text=scale.Percent+"%";scaleMessage.text=string.IsNullOrEmpty(scale.Message)?Loc.T(game.InterfaceScaleLoadNotice):scale.Message;scaleRetry.gameObject.SetActive(scale.CanRetrySave);
+            RefreshViewDistanceControl();var scale=game.InterfaceScale;scaleSlider.SetValueWithoutNotify((scale.Percent-50)/5);scaleValue.text=scale.Percent+"%";scaleMessage.text=string.IsNullOrEmpty(scale.Message)?Loc.T(game.InterfaceScaleLoadNotice):scale.Message;scaleRetry.gameObject.SetActive(scale.CanRetrySave);
             foreach(var choice in languageButtons)choice.button.GetComponent<Image>().color=choice.code==game.Language.Language?gold*.4f:new Color(.14f,.17f,.2f);
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
         }
@@ -133,8 +129,11 @@ namespace Hellscript
             commonScreenSize=size;commonSafeArea=safe;commonKeyboardTop=bottom;commonSafe.anchorMin=new Vector2(safe.xMin/Mathf.Max(1,size.x),bottom/Mathf.Max(1,size.y));commonSafe.anchorMax=new Vector2(safe.xMax/Mathf.Max(1,size.x),safe.yMax/Mathf.Max(1,size.y));commonSafe.offsetMin=commonSafe.offsetMax=Vector2.zero;
             Canvas.ForceUpdateCanvases();var available=commonSafe.rect.size;bool landscape=UiSafeArea.Frame.width>UiSafeArea.Frame.height;
             float w=Mathf.Max(1,available.x*(landscape?.5f:1)),h=Mathf.Max(1,available.y);commonCard.sizeDelta=new Vector2(w,h);commonCard.anchoredPosition=new Vector2(landscape?available.x*.25f:0,0);
-            commonPreview.gameObject.SetActive(landscape);commonBackdrop.interactable=landscape;
-            if(landscape){var pixels=((RectTransform)characterPreview.transform).rect.size*commonModal.GetComponent<Canvas>().scaleFactor;characterPreview.Resize(pixels.x,pixels.y);}
+            bool showWorld=landscape&&game.World!=null&&game.World.HasPresentedPlayer;
+            commonWorld.gameObject.SetActive(showWorld);commonBackdrop.interactable=landscape;commonBackdrop.image.color=showWorld?Color.clear:new Color(.025f,.035f,.049f,landscape?.75f:1);
+            foreach(var gate in commonInputGates)if(gate.group!=null&&gate.group.transform!=aspectMask)gate.group.alpha=showWorld?0:gate.alpha;
+            if(showWorld)game.World.ShowSettingsWorld(new Rect(commonSafe.anchorMin.x,commonSafe.anchorMin.y,(commonSafe.anchorMax.x-commonSafe.anchorMin.x)*.5f,commonSafe.anchorMax.y-commonSafe.anchorMin.y));
+            else game.World?.RestoreSettingsWorld();
             bool shortWindow=h<400;float heading=56,tabHeight=shortWindow?40:48;int columns=w<620?2:4,rows=Mathf.CeilToInt(4f/columns);float top=heading+rows*tabHeight+8;
             Span(commonHeading.rectTransform,18,8,74,40);commonHeading.fontSize=shortWindow?22:26;Right((RectTransform)commonClose.transform,8,6,44,44);Place(commonTabs,12,heading,w-24,rows*tabHeight);
             var tabs=commonTabs.GetComponentsInChildren<Button>();
@@ -147,8 +146,8 @@ namespace Hellscript
         }
         public void CloseCommonPanel()
         {
-            if(commonModal==null)return;game.Audio?.SavePreferences();var old=commonModal;commonModal=null;old.gameObject.SetActive(false);Destroy(old.gameObject);
-            foreach(var gate in commonInputGates)if(gate.group!=null){gate.group.interactable=gate.interactable;gate.group.blocksRaycasts=gate.raycasts;}commonInputGates.Clear();
+            if(commonModal==null)return;game.Audio?.SavePreferences();game.World?.RestoreSettingsWorld();var old=commonModal;commonModal=null;old.gameObject.SetActive(false);Destroy(old.gameObject);
+            foreach(var gate in commonInputGates)if(gate.group!=null){gate.group.interactable=gate.interactable;gate.group.blocksRaycasts=gate.raycasts;gate.group.alpha=gate.alpha;}commonInputGates.Clear();
             if(commonPreviousSelection!=null&&commonPreviousSelection.activeInHierarchy)EventSystem.current?.SetSelectedGameObject(commonPreviousSelection);commonPreviousSelection=null;
         }
         void UpdateCommonPanel()
