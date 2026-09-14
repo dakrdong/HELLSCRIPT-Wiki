@@ -9,6 +9,7 @@ namespace Hellscript
         public RunState run;
         public bool expanded;
         Vector2 center;float scale;
+        RiftLayout surfaceLayout;RiftSurface surface;
         Vector2 Point(Vector2 p)=>(p-center)*scale;
         void Rect(VertexHelper v,Vector2 p,Vector2 size,Color color)
         {
@@ -23,7 +24,26 @@ namespace Hellscript
         {
             v.Clear();if(run?.layout==null)return;var r=rectTransform.rect;center=expanded?Vector2.zero:run.position;
             scale=Mathf.Min(r.width,r.height)/(expanded?155:55);
+            if(!ReferenceEquals(surfaceLayout,run.layout)){surfaceLayout=run.layout;surface=new RiftSurface(run.layout);}
+            if(expanded){center=surface.Bounds.center;scale=Mathf.Min(r.width/(surface.Bounds.width+12),r.height/(surface.Bounds.height+12));}
             Color floor=new Color(.25f,.29f,.34f),gold=new Color(.96f,.67f,.3f),muted=new Color(.4f,.45f,.5f);
+            if(run.layout.rooms.Any(room=>room.outline!=null&&room.outline.Count>=3))
+            {
+                foreach(var patch in surface.patches)
+                {
+                    bool visible=patch.room>=0&&run.visited.Contains(patch.room);
+                    if(patch.corridor>=0)
+                    {
+                        var c=run.layout.corridors[patch.corridor];bool a=run.visited.Contains(c.roomA),b=run.visited.Contains(c.roomB);
+                        visible=a&&b||(a||b)&&run.phase==RunPhase.Boss&&expanded;
+                        if(!visible&&(a||b))visible=Vector2.Distance(patch.center,a?c.points[0]:c.points[c.points.Count-1])<5;
+                    }
+                    if(!visible)continue;int first=v.currentVertCount;foreach(var p in patch.points)v.AddVert(Point(p),floor,Vector2.zero);
+                    for(int n=1;n<patch.points.Length-1;n++)v.AddTriangle(first,first+n,first+n+1);
+                }
+            }
+            else
+            {
             foreach(var c in run.layout.corridors)
             {
                 bool a=run.visited.Contains(c.roomA),b=run.visited.Contains(c.roomB);if(!a&&!b)continue;
@@ -38,8 +58,10 @@ namespace Hellscript
             foreach(var room in run.layout.rooms)if(run.visited.Contains(room.index))
             {
                 Rect(v,Point(room.position),room.size*scale,floor);
-                foreach(var o in run.layout.obstacles.Where(o=>room.Bounds.Contains(o.position)))Rect(v,Point(o.position),(o.radius>0?Vector2.one*o.radius*2:o.halfSize*2)*scale,new Color(.08f,.1f,.13f));
             }
+            }
+            foreach(var room in run.layout.rooms.Where(room=>run.visited.Contains(room.index)))
+                foreach(var o in run.layout.obstacles.Where(o=>room.Bounds.Contains(o.position)))Rect(v,Point(o.position),(o.radius>0?Vector2.one*o.radius*2:o.halfSize*2)*scale,new Color(.08f,.1f,.13f));
             foreach(var c in run.layout.chests.Where(c=>c.discovered))
             {
                 Vector2 p=Point(c.position);float size=expanded?7:8;
@@ -95,7 +117,7 @@ namespace Hellscript
                 Line(v,p-side*7,p-side*4,4,color);Line(v,p+side*4,p+side*7,4,color);
                 if(!run.layout.gateOpen)Line(v,p-side*4,p+side*4,3,color);
             }
-            if(run.phase==RunPhase.Boss)
+            if(run.phase==RunPhase.Boss&&(!run.layout.roamingBoss||run.enemies.Any(e=>e.id==run.bossId)))
             {
                 var boss=run.enemies.Find(e=>e.id==run.bossId);Vector2 p=Point(boss!=null?boss.position:run.layout.rooms[run.layout.bossRoom].position);
                 if(!expanded)p=Vector2.ClampMagnitude(p,Mathf.Min(r.width,r.height)*.42f);

@@ -72,10 +72,12 @@ namespace Hellscript
         public int index, rotation, variant;
         public string templateId;
         public Vector2 position, size;
-        public bool boss;
+        public bool boss,central;
         public RiftRoomRole role;
         public List<RiftDoor> doors=new List<RiftDoor>();
         public List<Vector2> groupAnchors=new List<Vector2>(), chestAnchors=new List<Vector2>();
+        // Version 5 saves the actual floor silhouette. Empty keeps older rectangular maps intact.
+        public List<Vector2> outline=new List<Vector2>();
         public Vector2 Transform(Vector2 p)=>position+Rotate(p,rotation);
         public static Vector2 Rotate(Vector2 p,int quarter)=>quarter%4==0?p:quarter%4==1?new Vector2(-p.y,p.x):quarter%4==2?-p:new Vector2(p.y,-p.x);
         public Rect Bounds=>new Rect(position-size*.5f,size);
@@ -84,8 +86,9 @@ namespace Hellscript
     {
         public int index, roomA,roomB,doorA,doorB;
         public float width=4;
-        public bool extra;
+        public bool extra,crossing;
         public List<Vector2> points=new List<Vector2>();
+        public List<float> widths=new List<float>();
     }
     [Serializable]public sealed class RiftJunction
     {
@@ -128,12 +131,12 @@ namespace Hellscript
         public RiftOfferingAltar altar;
         public RiftObjectiveRecord objectiveRecord;
         public bool gateOpen,gateOpenedByMeter;
-        public const int CurrentVersion=4;
+        public const int CurrentVersion=6;
         public int contentStage;
         public int version=CurrentVersion,theme,bossRoom,bossKind,candidate;
         public uint mapSeed,layoutSeed,decorationSeed,encounterSeed,combatSeed,rewardSeed;
         public string fingerprint, fallbackId="";
-        public bool legacy;
+        public bool legacy,roamingBoss;
         public Vector2 start;
         public List<RiftRoom> rooms=new List<RiftRoom>();
         public List<RiftCorridor> corridors=new List<RiftCorridor>();

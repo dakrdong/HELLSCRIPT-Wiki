@@ -15,7 +15,7 @@ namespace Hellscript.Tests
         public void AllSixFallbackLayoutsPassWithDifferentRewardSeeds()
         {
             for(int theme=0;theme<2;theme++)for(int index=0;index<3;index++)for(uint seed=1;seed<=5;seed++)
-            {var map=RiftGenerator.Fallback(seed,"fallback-test",seed%2==0?30:1,HeroClass.Warrior,theme,index);RiftGenerator.Validate(map);Assert.AreEqual(6,map.rooms.Count);Assert.IsNotEmpty(map.fallbackId);}
+            {var map=RiftGenerator.Fallback(seed,"fallback-test",seed%2==0?30:1,HeroClass.Warrior,theme,index);RiftGenerator.Validate(map);Assert.AreEqual(7,map.rooms.Count);Assert.IsNotEmpty(map.fallbackId);}
         }
         [Test]
         public void BossExclusionRemainsEvenAcrossAdjacentSeeds()
@@ -105,8 +105,13 @@ namespace Hellscript.Tests
                 var account=GameStore.NewAccount();var sim=new CombatSimulation(account,catalog,1,seed:115);var chest=PrepareChest(sim);chest.progress=chest.Duration-.05f;
                 sim.State.enemies.Add(new EnemyState{id=9000,boss=true,health=1,maxHealth=1,poison=2,poisonDamage=100,position=sim.State.position+Vector2.right*30});
                 sim.State.build.chestsAfterBoss=true;sim.Tick(.05f);
-                Assert.AreEqual(ChestPhase.Opened,chest.phase);Assert.IsTrue(sim.State.bossRewarded);Assert.AreEqual(1950+chest.gold,account.gold);Assert.AreEqual(1,account.transactions.Count);
-                Assert.AreEqual(4,sim.State.drops.Count);sim.Tick(.05f);Assert.AreEqual(1950+chest.gold,account.gold);
+                Assert.AreEqual(ChestPhase.Opened,chest.phase);Assert.IsTrue(sim.State.bossRewarded);
+                // Boss gold is a physical resource drop and may be collected on a later tick.
+                int TotalGold()=>account.gold+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed&&!r.ignored).Sum(r=>r.amount);
+                Assert.AreEqual(1950+chest.gold,TotalGold());Assert.AreEqual(1,account.transactions.Count);
+                Assert.AreEqual(4,sim.State.drops.Count);sim.Tick(.05f);Assert.AreEqual(1950+chest.gold,TotalGold());
+                foreach(var resource in sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold).ToList())RiftResources.Claim(account,sim.State,resource);
+                Assert.AreEqual(1950+chest.gold,account.gold);sim.Tick(.05f);Assert.AreEqual(1950+chest.gold,TotalGold());
             }finally{UnityEngine.Object.DestroyImmediate(catalog);}
         }
         [Test]
@@ -152,40 +157,25 @@ namespace Hellscript.Tests
             }
         }
         [Test]
-        public void EveryLayoutAssignsRolesAndGivesEveryWingAReward()
+        public void EveryLayoutCirculatesThroughAllRoomsWithoutDeadEnds()
         {
-            int wingTotal=0,withWing=0;
             for(uint seed=1;seed<=40;seed++)
             {
                 var map=RiftGenerator.Generate(seed,"roles",10,HeroClass.Warrior,"",-1,(int)(seed%2),6+(int)(seed%3));
-                var nav=new RiftNavigation(map);var distances=RiftGenerator.GraphDistances(map,0);
                 Assert.AreEqual(1,map.rooms.Count(r=>r.role==RiftRoomRole.Entrance));
-                Assert.AreEqual(1,map.rooms.Count(r=>r.role==RiftRoomRole.Antechamber));
-                Assert.AreEqual(1,map.rooms.Count(r=>r.role==RiftRoomRole.BossArena));
+                Assert.AreEqual(0,map.rooms.Count(r=>r.role==RiftRoomRole.Antechamber||r.role==RiftRoomRole.BossArena||r.role==RiftRoomRole.Wing));
                 Assert.AreEqual(RiftRoomRole.Entrance,map.rooms[0].role);
-                Assert.AreEqual(RiftRoomRole.BossArena,map.rooms[map.bossRoom].role);
-                var wings=map.rooms.Where(r=>r.role==RiftRoomRole.Wing).ToList();
-                Assert.LessOrEqual(wings.Count,2);wingTotal+=wings.Count;if(wings.Count>0)withWing++;
-                foreach(var wing in wings)
-                {
-                    Assert.IsFalse(wing.boss);Assert.AreNotEqual(0,wing.index);
-                    Assert.AreEqual(1,wing.doors.Count(d=>d.corridor>=0),"A wing is a single dead end.");
-                    Assert.IsTrue(map.chests.Any(c=>c.room==wing.index),"A wing must never be an empty detour.");
-                    Assert.GreaterOrEqual(distances[wing.index],2);
-                    foreach(var anchor in wing.groupAnchors)Assert.IsTrue(nav.Reachable(anchor));
-                }
-                foreach(var room in map.rooms.Where(r=>r.role!=RiftRoomRole.Wing))
-                    Assert.GreaterOrEqual(room.doors.Count(d=>d.corridor>=0),2);
+                Assert.AreEqual(-1,map.bossRoom);Assert.AreEqual(1,map.rooms.Count(r=>r.central));
+                foreach(var room in map.rooms)Assert.GreaterOrEqual(room.doors.Count(d=>d.corridor>=0),2);
+                RiftCirculation.Validate(map);Assert.AreEqual(map.rooms.Count+1,RiftCirculation.FindTour(map).Count);
             }
-            Assert.Greater(wingTotal,0,"Wings must actually occur.");
-            Debug.Log($"RIFT_WINGS layouts=40 withWing={withWing} wings={wingTotal}");
         }
         [Test]
         public void CombatGetsDenserTowardTheGateWithoutChangingTheBudget()
         {
             for(uint seed=1;seed<=16;seed++)
             {
-                var map=RiftGenerator.Generate(seed,"beats",10,HeroClass.Ranger,"",-1,(int)(seed%2),6+(int)(seed%3));
+                var map=RiftGenerator.Generate(seed,"beats",10,HeroClass.Ranger,"",-1,(int)(seed%2),6+(int)(seed%3),arenaBoss:true);
                 Assert.AreEqual(110,map.spawns.Count(s=>s.elite<0));Assert.AreEqual(8,map.spawns.Count(s=>s.elite>=0));
                 var ante=map.rooms.First(r=>r.role==RiftRoomRole.Antechamber);
                 int anteNormal=map.spawns.Count(s=>s.room==ante.index&&s.elite<0);
@@ -206,7 +196,7 @@ namespace Hellscript.Tests
             var restored=JsonUtility.FromJson<RiftLayout>(JsonUtility.ToJson(a));
             Assert.AreEqual(a.fingerprint,restored.fingerprint);Assert.AreEqual(a.obstacles.Count,restored.obstacles.Count);
             Assert.AreEqual(a.rewardSeed,restored.rewardSeed);Assert.AreNotEqual(a.combatSeed,a.rewardSeed);
-            var nav=new RiftNavigation(restored,gatesOpen:true);foreach(var point in restored.bossPoints)Assert.IsNotNull(nav.FindPath(restored.start,point));
+            var nav=new RiftNavigation(restored,gatesOpen:true);foreach(var point in restored.rooms.SelectMany(r=>r.groupAnchors))Assert.IsNotNull(nav.FindPath(restored.start,point));
         }
         [TestCase(.05f,false)]
         [TestCase(.13f,false)]
@@ -248,7 +238,7 @@ namespace Hellscript.Tests
         public void PathFollowingCannotCrossAnObstacleOrVoid()
         {
             var map=RiftGenerator.Generate(144,"path-test",1,HeroClass.Warrior);var nav=new RiftNavigation(map);
-            Vector2 p=map.start,target=map.bossPoints[0];var path=nav.FindPath(p,target);Assert.IsNotNull(path);
+            Vector2 p=map.start,target=map.rooms.Single(r=>r.central).groupAnchors[0];var path=nav.FindPath(p,target);Assert.IsNotNull(path);
             for(int tick=0;tick<6000&&Vector2.Distance(p,target)>.1f;tick++)
             {var next=nav.Move(p,target,.2f,0,tick*.05f);Assert.IsTrue(nav.TravelClear(p,next));p=next;}
             Assert.Less(Vector2.Distance(p,target),.11f);

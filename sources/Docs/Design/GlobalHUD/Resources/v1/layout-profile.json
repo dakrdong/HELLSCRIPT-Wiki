@@ -1,0 +1,57 @@
+{
+  "units": "Proposed logical units at 1600x900 landscape / 900x1600 portrait; calibrate in Unity before sign-off. Ratios are the approved requirement; baseline pixel sizes are implementation proposals.",
+  "landscape": {
+    "portrait": 112,
+    "vitalWidth": 300,
+    "vitalHeight": 20,
+    "vitalGap": 8,
+    "statusIcon": 44,
+    "statusGap": 8,
+    "statusCollapsedWidth": 230,
+    "statusExpandedMaxWidth": 408,
+    "statusFadeMaxWidth": 22,
+    "expandVisual": 32,
+    "expandHit": 44,
+    "skillBaseline": 64,
+    "skillScale": 1.2,
+    "skillSize": 76.8,
+    "skillGap": 12,
+    "potionBaseline": 60,
+    "potionScale": 0.75,
+    "potionSize": 45,
+    "potionRowAboveSkills": true,
+    "xpThickness": 3,
+    "xpSideInset": 32,
+    "xpBottomInset": 16,
+    "xpTicks": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ]
+  },
+  "portrait": {
+    "portrait": 96,
+    "skillSize": 64,
+    "potionSize": 60,
+    "statusIcon": 40,
+    "statusGap": 8,
+    "xpMode": "existing approved short left track",
+    "skillRowAbovePotions": true,
+    "note": "Do not apply landscape-only reordering/resizing/full-width XP to portrait."
+  },
+  "colors": {
+    "hp": "#c8403c",
+    "mp": "#338acb",
+    "xp": "#d8b774",
+    "text": "#f3ebda",
+    "shadow": "#0b0d12",
+    "gold": "#c4a872"
+  },
+  "input": "Read-only skill/potion/vitals. Expand/collapse, scroll and explicit details only."
+}

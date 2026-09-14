@@ -1,0 +1,872 @@
+[
+  {
+    "id": "frame-seal",
+    "category": "common",
+    "file": "png/frame-seal.png",
+    "vector": "svg/frame-seal.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "mask-circle",
+    "category": "mask",
+    "file": "png/mask-circle.png",
+    "vector": "svg/mask-circle.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "mask-square",
+    "category": "mask",
+    "file": "png/mask-square.png",
+    "vector": "svg/mask-square.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "mask-diamond",
+    "category": "mask",
+    "file": "png/mask-diamond.png",
+    "vector": "svg/mask-diamond.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "frame-active",
+    "category": "common",
+    "file": "png/frame-active.png",
+    "vector": "svg/frame-active.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "frame-passive",
+    "category": "common",
+    "file": "png/frame-passive.png",
+    "vector": "svg/frame-passive.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "frame-status",
+    "category": "common",
+    "file": "png/frame-status.png",
+    "vector": "svg/frame-status.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "plate-icon",
+    "category": "common",
+    "file": "png/plate-icon.png",
+    "vector": "svg/plate-icon.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "frame-vital",
+    "category": "common",
+    "file": "png/frame-vital.png",
+    "vector": "svg/frame-vital.svg",
+    "width": 512,
+    "height": 48,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "border": [
+      14,
+      14,
+      14,
+      14
+    ]
+  },
+  {
+    "id": "fill-white",
+    "category": "common",
+    "file": "png/fill-white.png",
+    "vector": "svg/fill-white.svg",
+    "width": 16,
+    "height": 16,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "mask-edge-smooth",
+    "category": "mask",
+    "file": "png/mask-edge-smooth.png",
+    "vector": "svg/mask-edge-smooth.svg",
+    "width": 256,
+    "height": 8,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "wrapMode": "Clamp",
+    "sRGB": false,
+    "usage": "Optional alpha lookup; analytic smoothstep is preferred. Never draw as a dark overlay."
+  },
+  {
+    "id": "fill-vital",
+    "category": "common",
+    "file": "png/fill-vital.png",
+    "vector": "svg/fill-vital.svg",
+    "width": 512,
+    "height": 32,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "border": [
+      10,
+      10,
+      10,
+      10
+    ]
+  },
+  {
+    "id": "badge-level",
+    "category": "common",
+    "file": "png/badge-level.png",
+    "vector": "svg/badge-level.svg",
+    "width": 192,
+    "height": 64,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "control-plus",
+    "category": "control",
+    "file": "png/control-plus.png",
+    "vector": "svg/control-plus.svg",
+    "width": 64,
+    "height": 64,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "control-minus",
+    "category": "control",
+    "file": "png/control-minus.png",
+    "vector": "svg/control-minus.svg",
+    "width": 64,
+    "height": 64,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "badge-buff",
+    "category": "common",
+    "file": "png/badge-buff.png",
+    "vector": "svg/badge-buff.svg",
+    "width": 32,
+    "height": 32,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "badge-debuff",
+    "category": "common",
+    "file": "png/badge-debuff.png",
+    "vector": "svg/badge-debuff.svg",
+    "width": 32,
+    "height": 32,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "xp-tick",
+    "category": "common",
+    "file": "png/xp-tick.png",
+    "vector": "svg/xp-tick.svg",
+    "width": 8,
+    "height": 16,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "xp-tick-major",
+    "category": "common",
+    "file": "png/xp-tick-major.png",
+    "vector": "svg/xp-tick-major.svg",
+    "width": 8,
+    "height": 24,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "xp-cap",
+    "category": "common",
+    "file": "png/xp-cap.png",
+    "vector": "svg/xp-cap.svg",
+    "width": 16,
+    "height": 20,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "portrait-placeholder",
+    "category": "common",
+    "file": "png/portrait-placeholder.png",
+    "vector": "svg/portrait-placeholder.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-shield",
+    "category": "status",
+    "file": "png/status-shield.png",
+    "vector": "svg/status-shield.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-power",
+    "category": "status",
+    "file": "png/status-power.png",
+    "vector": "svg/status-power.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-poison",
+    "category": "status",
+    "file": "png/status-poison.png",
+    "vector": "svg/status-poison.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-lightning",
+    "category": "status",
+    "file": "png/status-lightning.png",
+    "vector": "svg/status-lightning.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-leaf",
+    "category": "status",
+    "file": "png/status-leaf.png",
+    "vector": "svg/status-leaf.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-sword",
+    "category": "status",
+    "file": "png/status-sword.png",
+    "vector": "svg/status-sword.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-frost",
+    "category": "status",
+    "file": "png/status-frost.png",
+    "vector": "svg/status-frost.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-hourglass",
+    "category": "status",
+    "file": "png/status-hourglass.png",
+    "vector": "svg/status-hourglass.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-flame",
+    "category": "status",
+    "file": "png/status-flame.png",
+    "vector": "svg/status-flame.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-eye",
+    "category": "status",
+    "file": "png/status-eye.png",
+    "vector": "svg/status-eye.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-wind",
+    "category": "status",
+    "file": "png/status-wind.png",
+    "vector": "svg/status-wind.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-heart",
+    "category": "status",
+    "file": "png/status-heart.png",
+    "vector": "svg/status-heart.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-rune",
+    "category": "status",
+    "file": "png/status-rune.png",
+    "vector": "svg/status-rune.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-chain",
+    "category": "status",
+    "file": "png/status-chain.png",
+    "vector": "svg/status-chain.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-broken",
+    "category": "status",
+    "file": "png/status-broken.png",
+    "vector": "svg/status-broken.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-unknown",
+    "category": "status",
+    "file": "png/status-unknown.png",
+    "vector": "svg/status-unknown.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-whirl",
+    "category": "status",
+    "file": "png/status-whirl.png",
+    "vector": "svg/status-whirl.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-arrow",
+    "category": "status",
+    "file": "png/status-arrow.png",
+    "vector": "svg/status-arrow.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-trap",
+    "category": "status",
+    "file": "png/status-trap.png",
+    "vector": "svg/status-trap.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-mana",
+    "category": "status",
+    "file": "png/status-mana.png",
+    "vector": "svg/status-mana.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-target",
+    "category": "status",
+    "file": "png/status-target.png",
+    "vector": "svg/status-target.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-elements",
+    "category": "status",
+    "file": "png/status-elements.png",
+    "vector": "svg/status-elements.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-focus",
+    "category": "status",
+    "file": "png/status-focus.png",
+    "vector": "svg/status-focus.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "status-people",
+    "category": "status",
+    "file": "png/status-people.png",
+    "vector": "svg/status-people.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "passive-WP01",
+    "category": "passive",
+    "file": "png/passive-WP01.png",
+    "vector": "svg/passive-WP01.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "WP01",
+    "semanticGlyph": "people"
+  },
+  {
+    "id": "passive-WP02",
+    "category": "passive",
+    "file": "png/passive-WP02.png",
+    "vector": "svg/passive-WP02.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "WP02",
+    "semanticGlyph": "whirl"
+  },
+  {
+    "id": "passive-WP03",
+    "category": "passive",
+    "file": "png/passive-WP03.png",
+    "vector": "svg/passive-WP03.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "WP03",
+    "semanticGlyph": "shield"
+  },
+  {
+    "id": "passive-WP04",
+    "category": "passive",
+    "file": "png/passive-WP04.png",
+    "vector": "svg/passive-WP04.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "WP04",
+    "semanticGlyph": "heart"
+  },
+  {
+    "id": "passive-WP05",
+    "category": "passive",
+    "file": "png/passive-WP05.png",
+    "vector": "svg/passive-WP05.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "WP05",
+    "semanticGlyph": "shield"
+  },
+  {
+    "id": "passive-WP06",
+    "category": "passive",
+    "file": "png/passive-WP06.png",
+    "vector": "svg/passive-WP06.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "WP06",
+    "semanticGlyph": "eye"
+  },
+  {
+    "id": "passive-AP01",
+    "category": "passive",
+    "file": "png/passive-AP01.png",
+    "vector": "svg/passive-AP01.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "AP01",
+    "semanticGlyph": "arrow"
+  },
+  {
+    "id": "passive-AP02",
+    "category": "passive",
+    "file": "png/passive-AP02.png",
+    "vector": "svg/passive-AP02.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "AP02",
+    "semanticGlyph": "wind"
+  },
+  {
+    "id": "passive-AP03",
+    "category": "passive",
+    "file": "png/passive-AP03.png",
+    "vector": "svg/passive-AP03.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "AP03",
+    "semanticGlyph": "target"
+  },
+  {
+    "id": "passive-AP04",
+    "category": "passive",
+    "file": "png/passive-AP04.png",
+    "vector": "svg/passive-AP04.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "AP04",
+    "semanticGlyph": "trap"
+  },
+  {
+    "id": "passive-AP05",
+    "category": "passive",
+    "file": "png/passive-AP05.png",
+    "vector": "svg/passive-AP05.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "AP05",
+    "semanticGlyph": "focus"
+  },
+  {
+    "id": "passive-AP06",
+    "category": "passive",
+    "file": "png/passive-AP06.png",
+    "vector": "svg/passive-AP06.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "AP06",
+    "semanticGlyph": "sword"
+  },
+  {
+    "id": "passive-MP01",
+    "category": "passive",
+    "file": "png/passive-MP01.png",
+    "vector": "svg/passive-MP01.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "MP01",
+    "semanticGlyph": "flame"
+  },
+  {
+    "id": "passive-MP02",
+    "category": "passive",
+    "file": "png/passive-MP02.png",
+    "vector": "svg/passive-MP02.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "MP02",
+    "semanticGlyph": "frost"
+  },
+  {
+    "id": "passive-MP03",
+    "category": "passive",
+    "file": "png/passive-MP03.png",
+    "vector": "svg/passive-MP03.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "MP03",
+    "semanticGlyph": "chain"
+  },
+  {
+    "id": "passive-MP04",
+    "category": "passive",
+    "file": "png/passive-MP04.png",
+    "vector": "svg/passive-MP04.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "MP04",
+    "semanticGlyph": "shield"
+  },
+  {
+    "id": "passive-MP05",
+    "category": "passive",
+    "file": "png/passive-MP05.png",
+    "vector": "svg/passive-MP05.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "MP05",
+    "semanticGlyph": "mana"
+  },
+  {
+    "id": "passive-MP06",
+    "category": "passive",
+    "file": "png/passive-MP06.png",
+    "vector": "svg/passive-MP06.svg",
+    "width": 256,
+    "height": 256,
+    "spriteMode": "Single",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "definitionId": "MP06",
+    "semanticGlyph": "elements"
+  }
+]

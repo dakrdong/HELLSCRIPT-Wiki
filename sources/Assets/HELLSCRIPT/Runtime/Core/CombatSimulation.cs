@@ -281,7 +281,7 @@ namespace Hellscript
             else
             {
                 if(State.phase==RunPhase.Boss)
-                {if(TargetPolicy!=null)goal=State.layout.rooms[State.layout.bossRoom].position;else{var boss=State.enemies.Find(e=>e.id==State.bossId);if(boss!=null)goal=boss.position;}}
+                {if(TargetPolicy!=null&&!State.layout.roamingBoss)goal=State.layout.rooms[State.layout.bossRoom].position;else{var boss=State.enemies.Find(e=>e.id==State.bossId);if(boss!=null)goal=boss.position;}}
                 else
                 {
                     if(!State.layout.legacy)

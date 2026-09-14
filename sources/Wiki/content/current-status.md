@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-14 균열 지형·보스 진행 변경:** 비대칭 방과 굽은 통로에 중앙 방 1개와 X자 횡단로를 추가했다. 모든 방과 통로를 순환 동선으로 연결하고, 막다른 곁방과 되돌아가기를 강제하는 외길을 금지했다. 새 균열은 보스 전용 방과 보스 문 없이 생성되며, 처치 게이지가 100에 도달하면 플레이어 주변에 보스가 나타난다. 옛 균열은 저장된 구조와 목표로 이어진다. [구현·검증 기록](../../Docs/Implementation/Organic_Rift_Expansion.md)
+
+English: asymmetric rooms and curved passages now include one additional central room and intersecting transverse routes. Every room and corridor belongs to circulation routes, with no dead-end wings or connecting passages that force retracing. New rifts have no boss arena or gate; reaching 100 kill-meter points summons the boss near the player. Existing saves retain their structure and objectives. [Implementation and verification](../../Docs/Implementation/Organic_Rift_Expansion.en.md)
+
 **2026-09-14 설정 메뉴 개편:** 상단 버튼을 작은 톱니바퀴로 바꿨다. 가로 화면은 오른쪽 반쪽 메뉴와 왼쪽의 실제 마을·사냥터 플레이어를 표시하며, 세로 화면은 메뉴가 전체를 채운다. 배경·우측 상단 X로 닫을 수 있고, 화면·소리·언어·캐릭터 분류에서 비율 10종, 글자 크기와 가시거리 각각 50~150%의 5% 조절과 마을로 돌아가는 캐릭터 변경을 지원한다. [구현·검증 기록](../../Docs/Implementation/Settings_Revision.md)
 
 English: settings now use a compact gear, a right-half menu with the actual town or hunt and existing player on the left in landscape, and a full-screen menu in portrait. Background and upper-right X close the menu. Screen, Audio, Language and Character cover ten ratios, reading size and view distance, each from 50–150% in 5% steps, and character changes that return to town. [Implementation and verification](../../Docs/Implementation/Settings_Revision.en.md)

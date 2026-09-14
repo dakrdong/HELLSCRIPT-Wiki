@@ -13,6 +13,9 @@ namespace Hellscript
         {
             var layout=run.layout;Material ground=run.theme==0?Mat("Grave Paving",new Color(.7f,.78f,.84f)):Mat("Fortress Slate",new Color(.85f,.72f,.69f));
             var paving=Resources.Load<Texture2D>("Art/RiftStone");if(paving!=null)ground.mainTexture=paving;
+            if(layout.rooms.Any(r=>r.outline!=null&&r.outline.Count>=3))BuildOrganicFloor(run,ground);
+            else
+            {
             foreach(var corridor in layout.corridors)for(int n=1;n<corridor.points.Count;n++)
             {
                 Vector2 a=corridor.points[n-1],b=corridor.points[n];int pieces=Mathf.Max(1,Mathf.CeilToInt(Vector2.Distance(a,b)/4));
@@ -53,6 +56,7 @@ namespace Hellscript
                 }
                 if(room.boss)Ring(roomRoot,Position(room.position)+Vector3.up*.04f,7,trim,.06f);
             }
+            }
             foreach(var o in layout.obstacles)
             {
                 if(o.kind=="Chest"||o.kind=="Shrine"||o.kind=="OfferingAltar")continue;
@@ -82,6 +86,27 @@ namespace Hellscript
                 var light=Shape("Blessing light",PrimitiveType.Sphere,root.transform,Vector3.up*1.65f,Vector3.one*.45f,shrine.definitionId=="SH01"?blue:ember);
                 Ring(root.transform,Vector3.up*.04f,.85f,shrine.definitionId=="SH01"?blue:ember,.07f);
                 shrineViews[shrine.id]=root;root.SetActive(false);
+            }
+        }
+        void BuildOrganicFloor(RunState run,Material ground)
+        {
+            var surface=new RiftSurface(run.layout);
+            foreach(var room in run.layout.rooms)
+            {
+                var root=RoomGeometry(room.index,run.visited.Contains(room.index));
+                RiftFloorMesh.Create(room.templateId+" organic floor",root,surface.patches.Where(p=>p.room==room.index),surface,ground,darkStone);
+                if(room.boss)Ring(root,Position(room.position)+Vector3.up*.04f,7,trim,.06f);
+            }
+            foreach(var corridor in run.layout.corridors)
+            {
+                // Keep the existing exploration culling granularity. Revealing one endpoint must
+                // not reveal the entire winding passage or its remote room.
+                foreach(var chunk in surface.patches.Where(p=>p.corridor==corridor.index).GroupBy(p=>new Vector2Int(Mathf.FloorToInt(p.center.x/4),Mathf.FloorToInt(p.center.y/4))))
+                {
+                    var piece=RiftFloorMesh.Create("Organic passage "+corridor.index,world.transform,chunk,surface,ground,darkStone);
+                    var center=chunk.Aggregate(Vector2.zero,(sum,p)=>sum+p.center)/chunk.Count();
+                    passageGeometry.Add(new PassageView{go=piece,roomA=corridor.roomA,roomB=corridor.roomB,center=center});piece.SetActive(false);
+                }
             }
         }
         void PresentChests(RunState run,float dt)
