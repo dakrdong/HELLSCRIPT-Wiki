@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace Hellscript
 {
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class RiftMinimap : MaskableGraphic
     {
         public RunState run;

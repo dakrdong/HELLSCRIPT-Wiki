@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Hellscript
 {
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class RiftAutomap : MaskableGraphic
     {
         GameController game;
@@ -56,6 +57,7 @@ namespace Hellscript
         }
         protected override void OnDestroy() { if (ownedMaterial != null) Destroy(ownedMaterial); base.OnDestroy(); }
     }
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class RiftAutomapHero : MaskableGraphic
     {
         protected override void OnPopulateMesh(VertexHelper vh)

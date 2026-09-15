@@ -90,6 +90,16 @@
 
 Edit Mode 결과 원본은 [editmode-focused.xml](PlayContentDockEvidence/editmode-focused.xml)이다. 전체 회귀 검사는 이번 작업에서 다시 돌리지 않았다. 사냥 칙령 창의 내용은 같은 브랜치에서 진행 중인 별도 작업의 상태를 그대로 보여 주며 이번 작업이 바꾼 것은 없다.
 
+## 편집기에서 드러난 기존 문제와 수정
+
+독을 넣은 뒤 사용자가 편집기 Play 모드로 마을에 들어가자 `MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object` 예외가 매 프레임 발생했다. 사용자 편집기 로그(`Logs/Editor.log`)에는 두 번째 플레이 세션 동안 [1,417회](PlayContentDockEvidence/editor-exception-sample.txt) 기록됐다. 플레이 방식은 정상이었고 게임 코드의 문제였다.
+
+원인은 uGUI의 `Graphic`이 `RequireComponent`로 `RectTransform`만 요구하고, `CanvasRenderer`는 `Image`·`Text`·`RawImage`가 각자 선언한다는 점이다. 이 프로젝트의 커스텀 그래픽 `TownCircleGraphic`(마을 조이스틱 판·테·손잡이), `SettingsGearGraphic`(설정 톱니바퀴), `RuneBoardGraphic`(룬 보드)은 그 선언이 없어 `AddComponent`로 붙일 때 `CanvasRenderer`가 함께 생기지 않았다. 플레이어 빌드에서는 `Graphic.canvasRenderer`가 없는 부품을 조용히 추가해 문제가 드러나지 않았다. 편집기에서는 `GetComponent`가 돌려주는 자리표시 객체가 그대로 저장되어 `GraphicRaycaster`가 레이캐스트 대상 그래픽을 검사할 때마다 예외를 던지고, 해당 그래픽은 그려지지 않는다. 독과 직접 관련은 없으며, 마을 화면이 생긴 뒤 편집기에서 마을에 들어가면 같은 조건이 성립하는 상태였다. `RiftMinimap`, `RiftAutomap`, `RiftAutomapHero`는 생성 시 `CanvasRenderer`를 명시해 왔으므로 화면에서는 문제가 없었다.
+
+재현은 복제본에서 했다. 사용자 편집기가 프로젝트를 열고 있어 원본에서는 배치 실행이 불가능했다. 복제본에 편집기 스크립트를 넣어 사용자와 같은 Enter Play Mode 설정(도메인·씬 리로드 없음)으로 Play 모드에 두 번 진입해 마을에 들어간 결과, 조이스틱 오브젝트의 구성 요소는 `RectTransform, TownCircleGraphic, TownJoystick`뿐이었고 `EventSystem.RaycastAll`이 같은 예외를 던졌다. [기록](PlayContentDockEvidence/editor-repro-before.txt)
+
+수정으로 여섯 커스텀 그래픽 클래스(`TownCircleGraphic`, `SettingsGearGraphic`, `RuneBoardGraphic`, `RiftMinimap`, `RiftAutomap`, `RiftAutomapHero`)에 `[RequireComponent(typeof(CanvasRenderer))]`를 선언했다. 뒤의 세 클래스는 동작 변화가 없고 규칙을 통일한 것이다. 새 Edit Mode 검사 `GraphicComponentTests`는 게임 어셈블리의 모든 `Graphic` 파생 클래스를 빈 오브젝트에 `AddComponent`로 붙여 `CanvasRenderer`가 생기는지 확인한다. 수정 전 복제본에서 이 검사는 [여섯 클래스를 모두 나열하며 실패](PlayContentDockEvidence/graphic-test-before.xml)했다. 수정을 적용한 복제본에서는 이 검사와 전역 HUD 리소스·전투 배치·마을 이동·설정 개편 검사 [73개가 모두 통과](PlayContentDockEvidence/graphic-test-after.xml)했고, 같은 재현 스크립트가 두 세션 모두에서 조이스틱 구성 요소에 `CanvasRenderer`가 있고 레이캐스트가 조이스틱을 정상으로 잡는 것을 [기록](PlayContentDockEvidence/editor-repro-after.txt)했다. 사용자 편집기가 프로젝트를 열고 있어 원본 프로젝트에서의 배치 검사와 개발 빌드는 이번 수정에 대해 다시 돌리지 않았다. 열려 있는 편집기는 파일 변경을 감지해 다시 컴파일한다.
+
 ## 남은 일
 
 캐릭터와 룬 보드 화면을 만들면 두 버튼의 안내 문구를 실제 진입으로 바꾼다. 마을 가로 화면이 매우 작을 때(높이 360 근처) 펼친 독의 아래쪽이 오른쪽 NPC 대화 카드와 겹칠 수 있다. 독을 접으면 겹치지 않으며, 필요하면 그 카드의 위치를 조정한다.

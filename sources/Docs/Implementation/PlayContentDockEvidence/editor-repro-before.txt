@@ -1,0 +1,29 @@
+# Editor reproduction in a scratch copy of the project (Enter Play Mode Options: no domain/scene reload), before the fix.
+# Probe = components on the 'Town joystick' object right after each creation step; REPRO = checks from the editor script.
+  REPRO[0] page before=title
+  PLAZAPROBE after-graphic RectTransform,TownCircleGraphic
+  PLAZAPROBE after-joystick RectTransform,TownCircleGraphic,TownJoystick
+  PLAZAPROBE end-of-ShowPlaza RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[0] immediately after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[0] frame 1 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[0] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[0] frame 2 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[0] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[0] frame 3 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[0] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[0] frame 4 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[0] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[1] page before=title
+  PLAZAPROBE after-graphic RectTransform,TownCircleGraphic
+  PLAZAPROBE after-joystick RectTransform,TownCircleGraphic,TownJoystick
+  PLAZAPROBE end-of-ShowPlaza RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[1] immediately after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[1] frame 1 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[1] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[1] frame 2 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[1] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[1] frame 3 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[1] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[1] frame 4 after EnterPlaza: CanvasRenderer=MISSING graphic=TownCircleGraphic components=RectTransform,TownCircleGraphic,TownJoystick
+  REPRO[1] RAYCAST EXCEPTION: MissingComponentException: There is no 'CanvasRenderer' attached to the "Town joystick" game object, but a script is trying to access it.
+  REPRO[1] DONE

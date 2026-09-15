@@ -1,0 +1,28 @@
+# Same scratch-copy editor reproduction after declaring RequireComponent(typeof(CanvasRenderer)) on the custom graphics.
+  REPRO[0] page before=title
+  PLAZAPROBE after-graphic RectTransform,CanvasRenderer,TownCircleGraphic
+  PLAZAPROBE after-joystick RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  PLAZAPROBE end-of-ShowPlaza RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[0] immediately after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[0] frame 1 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[0] raycast ok hits=0 top=-
+  REPRO[0] frame 2 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[0] raycast ok hits=1 top=Town joystick
+  REPRO[0] frame 3 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[0] raycast ok hits=1 top=Town joystick
+  REPRO[0] frame 4 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[0] raycast ok hits=1 top=Town joystick
+  REPRO[1] page before=title
+  PLAZAPROBE after-graphic RectTransform,CanvasRenderer,TownCircleGraphic
+  PLAZAPROBE after-joystick RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  PLAZAPROBE end-of-ShowPlaza RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[1] immediately after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[1] frame 1 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[1] raycast ok hits=0 top=-
+  REPRO[1] frame 2 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[1] raycast ok hits=1 top=Town joystick
+  REPRO[1] frame 3 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[1] raycast ok hits=1 top=Town joystick
+  REPRO[1] frame 4 after EnterPlaza: CanvasRenderer=ok graphic=TownCircleGraphic components=RectTransform,CanvasRenderer,TownCircleGraphic,TownJoystick
+  REPRO[1] raycast ok hits=1 top=Town joystick
+  REPRO[1] DONE

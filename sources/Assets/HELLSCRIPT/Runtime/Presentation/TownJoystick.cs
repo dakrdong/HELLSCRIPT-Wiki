@@ -25,6 +25,7 @@ namespace Hellscript
         void OnApplicationPause(bool paused){if(paused)ResetInput();}
     }
     // Vector UI circles remain crisp at every resolution; no generated bitmap is needed.
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class TownCircleGraphic : MaskableGraphic
     {
         public float InnerRatio;

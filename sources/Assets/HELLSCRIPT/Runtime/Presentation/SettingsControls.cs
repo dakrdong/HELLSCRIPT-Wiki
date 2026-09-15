@@ -15,6 +15,7 @@ namespace Hellscript
             spacing=new Vector2(8,8);cellSize=new Vector2((width-(constraintCount-1)*8)/constraintCount,46);base.SetLayoutHorizontal();
         }
     }
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class SettingsGearGraphic : MaskableGraphic
     {
         protected override void OnPopulateMesh(VertexHelper vh)
