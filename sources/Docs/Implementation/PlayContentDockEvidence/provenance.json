@@ -1,0 +1,89 @@
+{
+  "package": "HELLSCRIPT play-screen content dock art",
+  "createdAt": "2026-09-15",
+  "origin": "Four PNG files attached by the project owner in the development chat (originals kept outside the repository; hashes recorded here).",
+  "tool": "Pillow 11.3.0",
+  "files": [
+    {
+      "source": {
+        "file": "캐릭터.png",
+        "sha256": "8ec96f2c9ff929c4a3353719c8c52db4b73bd34ccfc5459d133cc427d39bdf9f",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 2109640
+      },
+      "crop": null,
+      "resample": "Pillow LANCZOS to 512x512",
+      "output": {
+        "file": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-character.png",
+        "sha256": "978bb0becc5a171534ffb438e40ec320e54689b80d9fad4dadabc427bb8d5d51",
+        "width": 512,
+        "height": 512,
+        "bytes": 392809
+      },
+      "purpose": "Character shortcut emblem"
+    },
+    {
+      "source": {
+        "file": "사냥 칙령.png",
+        "sha256": "2c1a30a2ede1c8a384d9ff13d487ed4af8c9af6b362781a9635b1ded1994042d",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 2208920
+      },
+      "crop": null,
+      "resample": "Pillow LANCZOS to 512x512",
+      "output": {
+        "file": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-hunt-edict.png",
+        "sha256": "b4728cbbd51b2a7c82243bbfbf024ae814c78cbd3f9163d79b94888bb9bea7a7",
+        "width": 512,
+        "height": 512,
+        "bytes": 417409
+      },
+      "purpose": "Hunt Edict shortcut emblem"
+    },
+    {
+      "source": {
+        "file": "룬 보드.png",
+        "sha256": "bb3d733508122c361bf7cd0c937c03813694dca4225b221ff0d5a59abba3b304",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 2238682
+      },
+      "crop": null,
+      "resample": "Pillow LANCZOS to 512x512",
+      "output": {
+        "file": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-rune-board.png",
+        "sha256": "48bceba0fd8d3290f0a22c3db60b43b4a1ad79c4161828d484b5df541563ceb4",
+        "width": 512,
+        "height": 512,
+        "bytes": 424903
+      },
+      "purpose": "Rune board shortcut emblem"
+    },
+    {
+      "source": {
+        "file": "화살표 버튼.png",
+        "sha256": "19b90038b0c38ab3b099c78c8399420b54384f1ae91aa623adf5aaf697655b4f",
+        "width": 1774,
+        "height": 887,
+        "bytes": 1573348
+      },
+      "crop": [
+        0,
+        0,
+        887,
+        887
+      ],
+      "resample": "Pillow LANCZOS to 512x512",
+      "output": {
+        "file": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-toggle.png",
+        "sha256": "a7ce7f944d5cebc84c124383248365e66fb17021f671a05d9158b5dc06c360d1",
+        "width": 512,
+        "height": 512,
+        "bytes": 284550
+      },
+      "purpose": "Fold toggle; the left (down-arrow) button of the pair. The up state is a 180° rotation at runtime."
+    }
+  ]
+}

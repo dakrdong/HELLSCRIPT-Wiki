@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-15 플레이 화면 콘텐츠 독:** 마을과 균열 전투의 설정 버튼 아래에 접었다 펼 수 있는 바로가기 묶음을 두었다. 아래 화살표가 내려가며 캐릭터·사냥 칙령·룬 보드 버튼이 드러나고 끝에서 180도 돌아 위 화살표가 된다. 사냥 칙령만 실제 편집으로 연결했고 캐릭터·룬 보드는 안내만 표시한다. 가로 전투의 미니맵은 왼쪽으로 56 옮겼다. [구현·검증 기록](../../Docs/Implementation/Play_Content_Dock.md)
+
+English: the town and rift combat screens now have a folding shortcut dock under the settings gear. The down arrow slides down revealing Character, Hunt Edict and Rune Board, then turns 180° into an up arrow. Only Hunt Edict is wired; Character and Rune Board show a notice. The landscape minimap moved 56 units left. [Implementation and verification](../../Docs/Implementation/Play_Content_Dock.en.md)
+
 **2026-09-14 전역 HUD·물약:** 패시브 3개·액티브 4개·물약 3슬롯을 배경판 없이 표시하며 가로·세로에서 같은 컴포넌트를 사용한다. 상태 목록은 4.5칸에서 최대 8칸으로 펼치고 숫자까지 함께 사라지는 경계를 적용했다. 물약 8종의 실제 재고·자동 사용·성소 구매와 부족 시 출정 지침을 연결했다. [구현·검증 기록](../../Docs/Implementation/Global_HUD_Potions.md)
 
 English: the shared landscape/portrait HUD displays three passives, four actives and three potion slots without a wide backing panel. Expand the status strip from 4.5 to eight slots with matching alpha fades for icons and numbers. Eight potions connect real stock, automatic use, sanctuary purchases and saved shortage/departure choices. [Implementation and verification](../../Docs/Implementation/Global_HUD_Potions.en.md)

@@ -1,0 +1,94 @@
+# HELLSCRIPT Play-Screen Content Dock
+
+Date: 2026-09-15
+작성일: 2026-09-15
+
+## Goal
+
+A folding group of content shortcuts sits beneath the settings gear in the upper right of the play screens. Folded, only a down-arrow button shows under the gear. Pressing it slides the arrow downward, uncovering the shortcut buttons above it as it travels; when the arrow reaches the bottom it turns 180° into an up arrow. Pressing the up arrow reverses the two steps: the arrow turns back first, then slides up and hides the shortcuts again.
+
+| Order | Button | Connection |
+|---|---|---|
+| 1 | Character (bag and equipped items) | No screen yet. Pressing shows only the notice `This content is still in preparation.` |
+| 2 | Hunt Edict (skill management and edict editing) | Opens the existing Hunt Edict entry point `ShowEdictEditor`. |
+| 3 | Rune Board (rune block placement and management) | No screen yet. Pressing shows only the notice. |
+
+The Character and Rune Board screens are out of scope. Only the buttons and their art are present; no functionality is wired.
+
+## Screens
+
+The play screens are the town (`plaza`) and rift combat (`battle`). Both have the settings gear in the upper right of the header, and the dock hangs directly under it at the same 12-unit right margin.
+
+| Screen | Settings button | Dock button size | Dock top |
+|---|---|---|---|
+| Town | 52×52, top 12 | 52 | 70 |
+| Rift combat | 44×44, top 8 | 44 | 58 |
+
+Buttons are 6 apart. The dock is anchored to the right edge, so it stays under the gear at any window size or ratio. The open state is remembered across screens: entering a rift with the dock open starts the battle screen open as well, drawn immediately without animation.
+
+In landscape combat the rift minimap, which occupied the upper right, moves 56 units left so it does not overlap the dock column. Its size and vertical position are unchanged. Title, meter, timer, observation menu and settings positions are unchanged.
+
+List-style screens such as the sanctuary menu, equipment or settings do not get the dock: their scroll content begins right under the header, an open dock would cover it, and the same entry buttons already exist in those lists.
+
+## Animation
+
+One `ContentDockView` holds two values. `slide` is the arrow's travel fraction and `turn` its rotation fraction. Opening moves `slide` from 0 to 1 first, then `turn` from 0 to 1 for the 180° rotation. Folding moves `turn` back from 1 to 0 first, then `slide` from 1 to 0. Each step takes 0.22 s of real time and continues while combat is paused.
+
+The shortcut buttons live inside a `RectMask2D` region whose height is `slide × total travel`. The region grows only as far as the arrow has come down, so the buttons appear behind the arrow. Hidden parts are neither drawn nor clickable. There is no separate up-arrow image; the down-arrow image is rotated 180°. The four ornaments on the frame are symmetric, so the rotated frame looks identical.
+
+## Resources
+
+The four PNG files the owner attached in the development chat are used. The originals stay outside the repository; the table below and the [provenance record](PlayContentDockEvidence/provenance.json) keep their hashes and the conversion steps. The game files live in `Assets/HELLSCRIPT/Resources/Art/GlobalHUD/` and inherit the existing global-HUD import settings (sprite, alpha preserved, no mipmaps, uncompressed, clamp).
+
+| Source file | Source size | Game file | Processing |
+|---|---|---|---|
+| 캐릭터.png | 1254×1254 | menu-character.png | Downscaled to 512×512 |
+| 사냥 칙령.png | 1254×1254 | menu-hunt-edict.png | Downscaled to 512×512 |
+| 룬 보드.png | 1254×1254 | menu-rune-board.png | Downscaled to 512×512 |
+| 화살표 버튼.png | 1774×887, two arrows | menu-toggle.png | Left half (down arrow) cropped, downscaled to 512×512 |
+
+Downscaling used Pillow 11.3.0 LANCZOS; background transparency is the original's, and all four corner pixels have alpha 0. 512 pixels stays above the largest on-screen size: the 52-unit town button at a 4× device scale with 150% reading size. The global-HUD resource test's expected file count rose from 67 to 71.
+
+## Text
+
+New lines were added to the English table with the Korean source as key: `캐릭터`, `룬 보드`, `콘텐츠 메뉴`, `준비 중인 콘텐츠입니다.`; `사냥 칙령` reuses the existing entry. Button object names keep the Korean source; on screen only the art is drawn.
+
+## Changed files
+
+| File | Change |
+|---|---|
+| `Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs` | New. Dock construction `AddContentDock`, art button `Emblem`, animation `ContentDockView` |
+| `Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs` | Dock in the battle header; landscape minimap moved 56 left |
+| `Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Plaza.cs` | Dock in the town header |
+| `Assets/HELLSCRIPT/Runtime/Presentation/RuntimeContentDockSmoke.cs` | New. Development-build runtime smoke `-hellscriptContentDockSmoke` |
+| `Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-*.png` | Four new sprites |
+| `Assets/HELLSCRIPT/Resources/Localization/en.txt` | Four new lines |
+| `Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs` | File count 67 → 71 |
+
+## Verification
+
+Results are in the table below and the [evidence folder](PlayContentDockEvidence/). Nothing was checked on a physical device.
+
+| Item | Result |
+|---|---|
+| Edit Mode tests (localization, global HUD resources, battle layout; 72) | 71 passed. The one failure, `EveryKoreanLiteralInTheRuntimeHasAnEntry`, lists 82 untranslated lines in `CombatSimulation.HuntEdictChanges.cs` and `SkillProgressionInfo.cs`, uncommitted Hunt Edict work on the same branch; none come from this change. |
+| macOS development build | Unity 6000.6.0f1 batch build, [0 errors](PlayContentDockEvidence/build.txt). The player was kept in a working folder outside the repository. |
+| Runtime smoke `-hellscriptContentDockSmoke` | [Passed](PlayContentDockEvidence/runtime.txt) with an isolated save directory; exit code 0, `HELLSCRIPT_CONTENT_DOCK_SMOKE_OK`. |
+
+The smoke checked the following. In a 1600×900 window it entered the town, found the dock folded, and confirmed that a real UI raycast at the hidden `캐릭터` button's centre does not hit it. 0.11 s after pressing the down arrow the mask height was between 0 and the full travel with 0° rotation, proving slide precedes turn. After settling, rotation was 180° and all three buttons were hit by raycasts. `캐릭터` produced the notice; `룬 보드` produced only the notice with no screen change. 0.11 s after pressing the up arrow the rotation was intermediate while the mask was still full height, proving turn precedes slide when folding. After folding and reopening, `사냥 칙령` opened the Hunt Edict window, and closing it returned to the town. Entering a rift with the dock open started the battle dock open, and the minimap's right edge did not pass the dock's left edge. Hunt Edict also opened and closed from battle, the dock folded, and it reopened in a 900×1600 portrait window.
+
+| Capture | Content |
+|---|---|
+| [01](PlayContentDockEvidence/01-plaza-folded.png) | Town, folded dock |
+| [02](PlayContentDockEvidence/02-plaza-opening.png) | Town, opening. The 0.2 s capture delay let the slide finish, so the frame shows the arrow mid-turn; slide-first was asserted in code before the capture. |
+| [03](PlayContentDockEvidence/03-plaza-open.png) | Town, open dock with up arrow |
+| [05](PlayContentDockEvidence/05-plaza-hunt-edict.png) | Hunt Edict window opened from the town dock |
+| [06](PlayContentDockEvidence/06-battle-open.png) | Landscape combat, open dock and the relocated minimap |
+| [08](PlayContentDockEvidence/08-battle-folded.png) | Landscape combat, folded dock |
+| [09](PlayContentDockEvidence/09-battle-portrait-open.png) | Portrait combat, open dock |
+
+The raw Edit Mode result is [editmode-focused.xml](PlayContentDockEvidence/editmode-focused.xml). The full regression suite was not rerun for this change. The Hunt Edict window content reflects separate in-progress work on the same branch and is unchanged here.
+
+## Remaining
+
+When the Character and Rune Board screens exist, replace the two notices with real entry points. In a very small landscape town window (around 360 high) the bottom of the open dock can overlap the NPC interaction card on the right; folding clears it, and the card can be moved if needed.

@@ -20,6 +20,7 @@ namespace Hellscript
             footer.gameObject.SetActive(false);headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);
             meterText=Label(header,"",15,pale);timerText=Label(header,"",18,gold);actionText=Label(header,"",14,gold);
             var menu=Button(header,"☰",ShowObservationMenu,Color.clear);menu.name="관찰 메뉴";
+            AddContentDock(58,44);
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
             AddRiftMinimap(run);RefreshHud();ReflowBattleHud();
         }
@@ -49,7 +50,8 @@ namespace Hellscript
             if(mini!=null)
             {
                 mini.gameObject.SetActive(size.x>size.y&&w>=720);mini.GetComponent<Image>().color=new Color(.02f,.03f,.04f,.45f);
-                Place(mini,w-180,64,168,220);Place(mini.Find("Map viewport") as RectTransform,4,4,160,160);
+                // Sits left of the content dock column (44 wide, 12 from the right edge).
+                Place(mini,w-236,64,168,220);Place(mini.Find("Map viewport") as RectTransform,4,4,160,160);
                 Place(chestCountText.rectTransform,0,169,168,20);Place(fieldStatusText.rectTransform,0,190,168,30);
             }
             UpdateBattleBrief();
