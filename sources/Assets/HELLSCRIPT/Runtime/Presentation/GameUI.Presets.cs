@@ -70,7 +70,7 @@ namespace Hellscript
         {
             if(presetModal!=null||source==null)return;
             var module=EventSystem.current?.currentInputModule;
-            if(module!=null&&module.inputOverride==null)module.inputOverride=module.gameObject.GetComponent<HellscriptTextInput>()??module.gameObject.AddComponent<HellscriptTextInput>();
+            if(module!=null&&module.inputOverride==null){if(!module.TryGetComponent(out HellscriptTextInput input))input=module.gameObject.AddComponent<HellscriptTextInput>();module.inputOverride=input;}
             var previous=game.Store.Data.Hero.presets.ElementAtOrDefault(slot);bool occupied=BuildEditing.HasPreset(previous);
             string initial=rename?previous.name:source.name;
             // A root canvas gives the text generator the actual display scale. Scaling a child

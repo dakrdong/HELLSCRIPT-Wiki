@@ -1,0 +1,16 @@
+# Scratch-copy editor script after the fix: opens and closes the settings panel on the title and in the town, then opens the preset name dialog (Enter Play Mode Options: no domain/scene reload).
+  REPRO page=title
+  REPRO open settings on title: ok
+  REPRO settings open=True
+  REPRO close settings: ok
+  REPRO open settings again: ok
+  REPRO settings open again=True
+  REPRO close settings again: ok
+  REPRO open settings in town: ok
+  REPRO settings open in town=True
+  REPRO close settings in town: ok
+  REPRO open preset name dialog: ok
+  REPRO inputOverride reference=set unityNull=False type=HellscriptTextInput
+  REPRO inputOverride enabled=True
+  REPRO access inputOverride: ok
+  REPRO DONE

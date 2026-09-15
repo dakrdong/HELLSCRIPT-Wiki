@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-15 편집기 자리표시 객체 오류 수정:** 편집기 Play 모드에서 설정 버튼을 누르면 나던 `CanvasGroup` 누락 예외를 고쳤다. `GetComponent … ?? AddComponent` 구문이 편집기의 자리표시 객체 때문에 동작하지 않던 것이 원인이며, 설정 창과 프리셋 이름 입력의 두 곳을 `TryGetComponent`로 바꾸고 같은 구문을 소스에서 찾아내는 검사를 추가했다. [구현·검증 기록](../../Docs/Implementation/Editor_Null_Object_Fixes.md)
+
+English: fixed the missing-`CanvasGroup` exception raised by the settings button in editor Play Mode. `GetComponent … ?? AddComponent` never adds in the editor because of Unity's null placeholder; the settings panel and preset name input now use `TryGetComponent`, and a new test scans the sources for the pattern. [Implementation and verification](../../Docs/Implementation/Editor_Null_Object_Fixes.en.md)
+
 **2026-09-15 플레이 화면 콘텐츠 독:** 마을과 균열 전투의 설정 버튼 아래에 접었다 펼 수 있는 바로가기 묶음을 두었다. 아래 화살표가 내려가며 캐릭터·사냥 칙령·룬 보드 버튼이 드러나고 끝에서 180도 돌아 위 화살표가 된다. 사냥 칙령만 실제 편집으로 연결했고 캐릭터·룬 보드는 안내만 표시한다. 가로 전투의 미니맵은 왼쪽으로 56 옮겼다. 편집기 Play 모드에서만 드러나던 커스텀 그래픽의 `CanvasRenderer` 누락(마을 조이스틱 예외)도 같은 기록에서 고쳤다. [구현·검증 기록](../../Docs/Implementation/Play_Content_Dock.md)
 
 English: the town and rift combat screens now have a folding shortcut dock under the settings gear. The down arrow slides down revealing Character, Hunt Edict and Rune Board, then turns 180° into an up arrow. Only Hunt Edict is wired; Character and Rune Board show a notice. The landscape minimap moved 56 units left. The same record fixes the custom graphics' missing `CanvasRenderer`, which surfaced only in editor Play Mode as the town joystick exception. [Implementation and verification](../../Docs/Implementation/Play_Content_Dock.en.md)

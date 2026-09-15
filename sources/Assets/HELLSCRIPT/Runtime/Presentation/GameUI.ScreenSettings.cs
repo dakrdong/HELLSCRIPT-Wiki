@@ -30,7 +30,7 @@ namespace Hellscript
             if(commonModal!=null){SelectSettingsTab(help?SettingsSection.Help:SettingsSection.Screen);return;}
             commonPreviousSelection=EventSystem.current?.currentSelectedGameObject;EventSystem.current?.SetSelectedGameObject(null);commonInputGates.Clear();
             foreach(var existing in GetComponentsInChildren<Canvas>())
-            {var group=existing.GetComponent<CanvasGroup>()??existing.gameObject.AddComponent<CanvasGroup>();commonInputGates.Add((group,group.interactable,group.blocksRaycasts,group.alpha));group.interactable=group.blocksRaycasts=false;}
+            {if(!existing.TryGetComponent(out CanvasGroup group))group=existing.gameObject.AddComponent<CanvasGroup>();commonInputGates.Add((group,group.interactable,group.blocksRaycasts,group.alpha));group.interactable=group.blocksRaycasts=false;}
             commonModal=Rect("Screen and help modal",transform);var canvas=commonModal.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=120;canvas.pixelPerfect=true;
             ApplyScaler(commonModal.gameObject.AddComponent<CanvasScaler>(),true);commonModal.gameObject.AddComponent<GraphicRaycaster>();
             commonBackdrop=Button(commonModal,"",CloseCommonPanel,new Color(.025f,.035f,.049f,1));commonBackdrop.name="settings-backdrop";Stretch((RectTransform)commonBackdrop.transform);commonBackdrop.transition=Selectable.Transition.None;
