@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=5;
+        public const int MaximumSchemaVersion=6;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -65,6 +65,11 @@ namespace Hellscript
                         if(qualityRepaired){QualityRecoveryArchive=archive;QualityRecoveryMessage=Loc.T("잘못된 장비 품질 기록을 복구했습니다. 장비와 투자 원장, 원본 저장 파일은 보존했습니다.");}
                     }
                 }
+                if(a.schema<6)
+                {
+                    string archive=file+".schema"+a.schema+"-before-hunt-edict.json";
+                    if(!File.Exists(archive))File.Copy(file,archive,false);
+                }
                 return a;
             }
             catch(NotSupportedException){throw;}
@@ -87,6 +92,7 @@ namespace Hellscript
         {
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             RuneGrowth.Normalize(a);
+            Storage.Normalize(a);
             a.speed=CombatSpeedAccess.Resolve(a.speed);
             ItemAcquisition.NormalizeCounter(a);
             FirstPlayGuide.Normalize(a);
@@ -105,6 +111,7 @@ namespace Hellscript
                 BehaviorRules.Normalize(h.build);
                 HuntEdictV2Storage.Normalize(h);
                 NormalizePresetSlots(h);
+                HuntEdictStorage.Normalize(h);
             }
             RepeatHunt.Normalize(a);
         }
@@ -179,6 +186,7 @@ namespace Hellscript
             if(a.heroes.Any(h=>h.inventory.Where(i=>i.equipped).GroupBy(i=>i.slot).Any(g=>g.Count()>1)))throw new InvalidDataException("같은 부위에 여러 장비가 장착되어 있습니다.");
             var owned=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).ToArray();
             if(owned.Select(i=>i.id).Distinct().Count()!=owned.Length)throw new InvalidDataException("중복 장비 인스턴스 ID");
+            Storage.Validate(a);
             foreach(var i in owned)ItemCatalog.Validate(i);
             foreach(var i in RecordedItems(a))if(i.contentVersion>=ItemQuality.ItemVersion||ItemQuality.HasQuality(i))ItemCatalog.Validate(i);
             if(a.suspendedRun!=null)foreach(var d in a.suspendedRun.drops)ItemCatalog.Validate(d.item);
@@ -196,6 +204,7 @@ namespace Hellscript
                 if(catalog!=null)h.build=BehaviorPresets.ForLevel(h.heroClass,0,h.level,catalog);
                 h.build.passives=Array.Empty<int>();
                 h.edict=HuntEdictV2Storage.CreateForHero(h);
+                HuntEdictStorage.InitializeNewHero(h,catalog);
                 var w=Economy.CreateItem(h.heroClass,0,0,1,ref rng);w.baseId=new[]{"B02","B05","B08"}[i];w.baseIndex=i*3+1;w.name=w.DisplayName;w.equipped=true;ItemAcquisition.Stamp(a,w);h.inventory.Add(w);a.heroes.Add(h);
             }
             RuneGrowth.Normalize(a);return a;
@@ -257,6 +266,7 @@ namespace Hellscript
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
             Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
+            Data.premium=staged.premium;Data.warehouseCapacity=staged.warehouseCapacity;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;

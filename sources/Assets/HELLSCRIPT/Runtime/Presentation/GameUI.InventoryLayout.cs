@@ -106,7 +106,7 @@ namespace Hellscript
                 EquipmentIcon(button.transform,item,10,12,62);button.GetComponent<LayoutElement>().minHeight=92;
             }
             if(visible.Length==0)InventoryNote(inventoryList.content,"이 필터에 맞는 장비가 없습니다. 하단 ‘필터’에서 조건을 바꿀 수 있습니다.");
-            headerSubtitle.text=Loc.T(inventoryWarehouse?Loc.F("보관 {0}/400 · 필터 결과 {1}개", all.Length, visible.Length):Loc.F("가방 {0}/{1} · 필터 결과 {2}개", game.Store.Data.Hero.capacity-Economy.FreeSlots(game.Store.Data.Hero), game.Store.Data.Hero.capacity, visible.Length));
+            headerSubtitle.text=Loc.T(inventoryWarehouse?Loc.F("보관 {0}/{1} · 필터 결과 {2}개", all.Length, Storage.Capacities(game.Store.Data).Sum(), visible.Length):Loc.F("가방 {0}/{1} · 필터 결과 {2}개", game.Store.Data.Hero.capacity-Economy.FreeSlots(game.Store.Data.Hero), game.Store.Data.Hero.capacity, visible.Length));
             if(InventorySelected==null){inventorySession.selectedId="";inventorySession.detailOpen=false;}
             BuildInventoryDetails();BuildInventoryFooter();inventoryDirty=true;ReflowInventory();RestoreInventoryList();
         }
@@ -138,8 +138,7 @@ namespace Hellscript
                 {var owned=InventoryFind(staged,id);if(owned==null)return false;owned.locked=!item.locked;return true;},item.locked?"잠금을 해제했습니다.":"장비를 잠갔습니다."));
                 if(inventoryWarehouse)
                 {
-                    InventoryButton(inventoryDetail.content,"현재 캐릭터의 가방으로 이동",InventoryTransaction("withdraw:"+id+":"+hero.id,staged=>
-                    {var owned=staged.warehouse.Find(i=>i.id==id);if(owned==null||Economy.FreeSlots(staged.Hero)<=0)return false;staged.warehouse.Remove(owned);staged.Hero.inventory.Add(owned);return true;},"가방으로 옮겼습니다."));
+                    InventoryButton(inventoryDetail.content,"현재 캐릭터의 가방으로 이동",InventoryTransaction("withdraw:"+id+":"+hero.id,staged=>Storage.Move(staged,id,StorageSide.Bag,0),"가방으로 옮겼습니다."));
                     InventoryNote(inventoryComparison.content,"창고의 장비는 현재 캐릭터의 가방으로 옮긴 뒤 장착할 수 있습니다. 아래 비교는 보유 장비를 바꾸지 않는 미리보기입니다.",20,gold);
                 }
                 else
@@ -160,8 +159,7 @@ namespace Hellscript
                         long refund=(item.contentVersion>0?item.investedMaterials:20L*((1<<item.enhancement)-1))*4/5;
                         string reward=item.rarity==3?Loc.F("{0} 코어 1개", GameCatalog.Slots[item.slot]):Loc.F("재료 {0}개", new[]{1,2,5}[item.rarity]);
                         var dismantle=InventoryButton(inventoryDetail.content,Loc.F("분해 · {0}{1}", reward, (refund>0?Loc.F(" + 강화 재료 {0}개", refund):"")),()=>ShowInventoryConfirm(Loc.F("{0}\n분해하면 {1}{2}를 받습니다. 이 장비는 사라집니다.", item.DisplayName, reward, (refund>0?Loc.F("와 강화 재료 {0}개", refund):"")),InventoryTransaction("dismantle:"+id,staged=>Economy.Dismantle(staged,staged.Hero,FindOwned(staged,id)),"장비를 분해했습니다.",item)));dismantle.interactable=canDispose;
-                        InventoryButton(inventoryDetail.content,"공유 창고로 이동",InventoryTransaction("warehouse:"+id,staged=>
-                        {var owned=FindOwned(staged,id);if(owned==null||owned.equipped||staged.warehouse.Count>=EdictCleanupPolicy.WarehouseCapacity)return false;staged.Hero.inventory.Remove(owned);staged.warehouse.Add(owned);return true;},"잠금·프리셋 참조·획득순을 유지하며 창고로 옮겼습니다."));
+                        InventoryButton(inventoryDetail.content,"공유 창고로 이동",InventoryTransaction("warehouse:"+id,staged=>Storage.Deposit(staged,FindOwned(staged,id)),"잠금·프리셋 참조·획득순을 유지하며 창고로 옮겼습니다."));
                     }
                 }
                 if(a.heroes.Any(owner=>Economy.Referenced(owner,item)))
@@ -247,7 +245,7 @@ namespace Hellscript
             FooterButton(0,6,"목록",()=>{inventorySession.detailOpen=false;inventoryReading=inventoryList;inventoryDirty=true;ReflowInventory();});
             FooterButton(1,6,"필터",ShowInventoryFilters);
             FooterButton(2,6,"정리",()=>ShowInventoryBulk(InventoryBulkOperation.Dismantle));
-            FooterButton(3,6,inventoryWarehouse?"가방":"창고",()=>OpenInventory(!inventoryWarehouse,portalBag));
+            FooterButton(3,6,inventoryWarehouse?"가방":"창고",()=>{if(inventoryWarehouse)OpenInventory(false,portalBag);else ShowStorage();});
             var equip=Button(footer,"장착",selected==null?()=>{}:InventoryTransaction("equip:"+selected.id,staged=>staged.suspendedRun==null&&Economy.Equip(staged.Hero,FindOwned(staged,selected.id)),"장비를 교체했습니다."),new Color(.42f,.28f,.12f));AnchorButton(equip,4,6);
             equip.interactable=!inventoryWarehouse&&!portalBag&&GearServiceAvailable&&selected!=null&&Economy.EquipError(game.Store.Data.Hero,selected)=="";
             bool result=game.Combat!=null&&!game.Active;

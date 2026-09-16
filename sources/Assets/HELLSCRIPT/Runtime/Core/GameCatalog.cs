@@ -72,6 +72,7 @@ namespace Hellscript
         public List<Rule> rules=new List<Rule>();
         public List<string> equipmentIds=new List<string>();
         public int[] passives={0,1,2};
+        public int[] skillRanks=SkillProgression.BaseRanks();
         public BuildConfig Copy() => JsonUtility.FromJson<BuildConfig>(JsonUtility.ToJson(this));
     }
 
@@ -91,6 +92,9 @@ namespace Hellscript
         public List<SocketState> sockets=new List<SocketState>();
         public int baseIndex, slot, rarity, level=1, enhancement;
         public bool locked, equipped;
+        // Where the item sits in its container (bag tab 0, or a warehouse tab) and, while worn, where it came from.
+        public int storageTab=-1, storageSlot=-1;
+        public string origin="";
         public int rerollIndex=-1, rerolls;
         public List<int> affixes=new List<int>();
         public List<float> values=new List<float>();
@@ -124,6 +128,12 @@ namespace Hellscript
         public bool useEdict;
         public HeroGuide guide=new HeroGuide();
         public List<BuildConfig> presets=new List<BuildConfig>();
+        public int huntEdictVersion;
+        public int selectedEdictPreset=-1;
+        public string[] edictPassiveSlots;
+        public List<HuntEdictPreset> edictPresets=new List<HuntEdictPreset>();
+        public bool edictMigrationNeedsReview;
+        public BuildConfig edictLegacyBuild;
         public List<Item> inventory=new List<Item>();
         public List<int> firstClears=new List<int>();
     }
@@ -137,7 +147,11 @@ namespace Hellscript
         public ContentUnlockState contentUnlocks=new ContentUnlockState();
         public AccountGuide guide=new AccountGuide();
         public int schema=2, selectedHero, gold, materials, sweepCount;
+        // Paid currency balance. Nothing grants it yet; the warehouse quotes it for its last two tabs.
+        public int premium;
         public int[] cores=new int[8];
+        // Purchased capacity per warehouse tab; 0 is a locked tab. Items keep their own tab and slot.
+        public int[] warehouseCapacity={StorageRules.BaseCapacity,0,0,0,0};
         public string sweepDay="";
         public long lastSeenUtc;
         public long itemSequence;

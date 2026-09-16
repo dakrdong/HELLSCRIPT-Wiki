@@ -1,0 +1,58 @@
+Unity 6000.6.0f1 batchmode EditMode, filter: StorageTests InventoryManagementTests RepeatHuntTests GemSocketTests ItemQualityTests TrainingEquipmentTests RiftRarityTests PresetStorageTests CurrentBuildSaveTests LocalizationTests GraphicComponentTests EditorNullPatternTests
+total=475 passed=473 failed=2 skipped=0 duration=81.1353536s
+
+FAILED Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry
+  82 untranslated:
+FAILED Hellscript.Tests.RepeatHuntTests.FreeingBagSpaceRestoresPickupForNewDrops
+  Expected: True
+
+Both failures predate this work: the localization gap lists only in-progress hunt edict files (CombatSimulation.HuntEdictChanges.cs, SkillProgressionInfo.cs); FreeingBagSpaceRestoresPickupForNewDrops also fails on a baseline clone without the storage changes (results-base.xml).
+baseline clone (HEAD + shared WIP, storage changes removed): total=2 passed=1 failed=1; failed: Hellscript.Tests.RepeatHuntTests.FreeingBagSpaceRestoresPickupForNewDrops
+
+StorageTests: 46 cases, 46 passed
+  Passed BatchRenameValidatesEveryNameBeforeWritingAndOnlyChangesNames
+  Passed DiskFailureKeepsLiveAccountDiskAndSourceThenRetrySucceeds(False)
+  Passed DiskFailureKeepsLiveAccountDiskAndSourceThenRetrySucceeds(True)
+  Passed EmptyAndMissingLegacyBanksBecomeFiveEmptySlots
+  Passed InvalidNamesCannotBeSaved("")
+  Passed InvalidNamesCannotBeSaved("  ")
+  Passed InvalidNamesCannotBeSaved("줄\n바꿈")
+  Passed InvalidNamesCannotBeSaved("탭\t이름")
+  Passed InvalidNamesCannotBeSaved("‍")
+  Passed InvalidSlotCannotWriteOrChangeLiveState(-1)
+  Passed InvalidSlotCannotWriteOrChangeLiveState(5)
+  Passed JoinersDoNotMergeOrdinaryLettersIntoOneDisplayedCharacter
+  Passed MoreThanFiveLegacySlotsAreNotSilentlyTruncated
+  Passed NamesUseDisplayedCharactersAndPreserveUnicode("가")
+  Passed NamesUseDisplayedCharactersAndPreserveUnicode("한")
+  Passed NamesUseDisplayedCharactersAndPreserveUnicode("é")
+  Passed NamesUseDisplayedCharactersAndPreserveUnicode("👨‍👩‍👧‍👦")
+  Passed NamesUseDisplayedCharactersAndPreserveUnicode("👍🏽")
+  Passed NamesUseDisplayedCharactersAndPreserveUnicode("🇰🇷")
+  Passed NewSlotsSaveIndependentCopiesAndDoNotApplyTheBuild(3)
+  Passed NewSlotsSaveIndependentCopiesAndDoNotApplyTheBuild(4)
+  Passed ThreeLegacySlotsBecomeFiveWithoutChangingNamesRulesPassivesOrProtection
+  Passed WrongHeroInvalidBuildAndEmptyRenameAreRejected
+  Passed AnOverfullTabRefusesIntakeAndSwapsInButReleasesItemsAndClearsWhenExpanded
+  Passed ASortedFullViewIsFrozenBeforeAnExactDropSoTheDroppedItemStays
+  Passed AutomaticDepositUsesTheFirstOpenTabWithRoom
+  Passed BulkMoveIsAllOrNothingAndOnlyFromOneContainer
+  Passed DamagedCapacityArraysAreRepairedWithoutLockingAnOpenTab
+  Passed ExactSlotDropPlacesThereAndAnOccupiedTargetSwapsAtomically
+  Passed ExpandingAnOverfullTabMovesTemporaryItemsIntoTheNewRoom
+  Passed ExpansionIsAFixedPricePerTabTenSlotsAtATimeUpToOneHundred
+  Passed FiltersAndOrdersAreDisplayOnlyAndSetCountsAsItsOwnGrade
+  Passed FullContainersStillSwapWithoutATemporarySlot
+  Passed InsufficientCurrencyRefusesAPurchaseWithoutChangingAnything
+  Passed LegacySaveWithoutPositionsKeepsEveryItemAndGetsSequentialSlots
+  Passed ManualEquipHandsTheVacatedBagSlotToTheReplacedItem
+  Passed MissingAndUnusableRegistrationsLeaveTheirSlotsEmptyAndAreReported
+  Passed MoveKeepsIdOptionsLockAndPresetReferencesAndTotalCountsAcrossContainers
+  Passed NewAccountOpensOnlyTheFirstTabWithFiftySlotsAndNoPaidCurrency
+  Passed PresetEquipsFromTheWarehouseAndReturnsReleasedGearToItsOwnOrigin
+  Passed PresetReturnMayOverflowAFullTabWithoutRaisingItsCapacity
+  Passed PresetsAreRefusedDuringARiftAndFailedWritesChangeNothing
+  Passed RegisteringAPresetRecordsTheWornInstancesOnly
+  Passed SingleMoveTakesTheFirstFreeSlotOfTheDestinationTab
+  Passed TabsArePurchasedInOrderAtTheTablePriceAndARepeatedRequestDoesNotChargeTwice
+  Passed ValidationRejectsDuplicateSlotsAndNormalizationRepairsThem

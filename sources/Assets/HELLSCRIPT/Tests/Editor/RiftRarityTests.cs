@@ -494,6 +494,8 @@ namespace Hellscript.Tests
         {
             var copy = JsonUtility.FromJson<Item>(JsonUtility.ToJson(item));
             copy.acquiredOrder = 0;
+            // Where an item sits in a bag or warehouse is storage bookkeeping, not part of the item that dropped.
+            copy.storageTab = copy.storageSlot = -1; copy.origin = "";
             if (!includeIdentity)
             {
                 copy.id = "";

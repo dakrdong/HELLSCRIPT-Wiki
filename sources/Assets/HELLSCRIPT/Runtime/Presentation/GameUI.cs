@@ -132,6 +132,8 @@ namespace Hellscript
         {var b=Button(parent,text,action,primary?new Color(.47f,.29f,.12f):panel);var le=b.gameObject.AddComponent<LayoutElement>();le.minHeight=TouchHeight;le.preferredHeight=TouchHeight;return b;}
         void Icon(Transform parent,int index,float x,float y,float size)
         {
+            if(index>=0&&index<18)
+            {var skill=SkillIconView.Create(parent,false);Place(skill.Rect,x,y,size,size);skill.SetSprite(SkillIconAssets.Active(index));return;}
             var r=Rect("Generated art",parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();raw.texture=atlas;
             int col=index%6,row=index/6;raw.uvRect=new Rect(col/6f,1-(row+1)/4f,1/6f,1/4f);raw.raycastTarget=false;
         }

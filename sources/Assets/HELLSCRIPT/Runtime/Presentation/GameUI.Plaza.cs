@@ -100,7 +100,7 @@ namespace Hellscript
                 case TownStation.Blacksmith:case TownStation.Reroller:ShowTownSmith();break;
                 case TownStation.Merchant:ShowTownMerchant();break;
                 case TownStation.RiftKeeper:ShowRiftKeeper();break;
-                case TownStation.Warehouse:OpenInventory(true,false);break;
+                case TownStation.Warehouse:ShowStorage();break;
                 case TownStation.Training:ShowTraining();break;
                 case TownStation.GemMerchant:ShowTownGemShop();break;
                 case TownStation.RuneMerchant:ShowTownRuneShop();break;

@@ -240,18 +240,19 @@ namespace Hellscript
         public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null)
         {
             if(item==null||hero.inventory.Any(i=>i.id==item.id))return false;
-            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);return true;}
+            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);return true;}
             if(policy!=BagPolicy.Replace)return false;
             var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
             if(worst==null||Compare(item,worst)<=0)return false;
-            ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);return true;
+            ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);return true;
         }
         static int Compare(Item a,Item b) {int c=a.rarity.CompareTo(b.rarity);if(c==0)c=a.level.CompareTo(b.level);return c==0?a.Price.CompareTo(b.Price):c;}
         public static bool Equip(HeroSave hero,Item item)
         {
             if(!string.IsNullOrEmpty(EquipError(hero,item)))return false;
-            foreach(var i in hero.inventory)if(i.slot==item.slot)i.equipped=false;
-            item.equipped=true;return true;
+            var outgoing=hero.inventory.Where(i=>i.equipped&&i.slot==item.slot&&i!=item).ToList();
+            foreach(var i in outgoing)i.equipped=false;
+            item.equipped=true;Storage.HandOff(item,outgoing);return true;
         }
         public static bool Dismantle(AccountSave account,HeroSave hero,Item item)
         {

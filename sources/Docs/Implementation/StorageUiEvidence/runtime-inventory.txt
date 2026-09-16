@@ -1,0 +1,11 @@
+-hellscriptInventorySmoke on the same build, isolated save directory, 1280x720: exit code 1.
+It stops before the warehouse segment at Click("강화 +1 · 재료 20 / 6,000 골드") with 'Sequence contains no matching element'.
+Cause: since the content unlock feature (UL02_ENHANCE, stage 1) the enhancement button only appears after a rift clear, and this smoke's fresh account never clears one. RuntimeInventorySmoke.cs dates from 2026-09-11, ContentUnlocks from 2026-09-14, so the failure predates the storage work.
+The smoke's warehouse segment was retargeted to the storage window; the equivalent entry-point checks (bag detail '공유 창고로 이동', bag footer '창고', content dock '창고') run and pass inside RuntimeStorageSmoke.
+
+120-(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+121-
+122:InvalidOperationException: Sequence contains no matching element
+123-  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+124-  at Hellscript.RuntimeInventorySmoke.Click (System.String name) [0x0000d] in <scratchpad>/proj/Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.cs:29 
+125-  at Hellscript.RuntimeInventorySmoke+<Start>d__21.MoveNext () [0x00586] in <scratchpad>/proj/Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.cs:91 
