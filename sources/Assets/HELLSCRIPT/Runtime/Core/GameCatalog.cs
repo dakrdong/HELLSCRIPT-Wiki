@@ -200,7 +200,7 @@ namespace Hellscript
         public Vector2 lastSeenPosition;
         public Vector2 position, aim;
         public float health, maxHealth, attack, speed, cooldown, windup, stun, slow, poison, poisonDamage, mark, exposure;
-        public bool boss, add, dead,pendingDeath;
+        public bool boss, add, dead,pendingDeath,goblin;
         public bool runeRewardRolled;
         public int pattern;
         public float setPoisonTime, setPoisonTick, frostMarkTime, frostCooldown;
@@ -235,6 +235,7 @@ namespace Hellscript
         public int level;
         public float[] elements;
         public bool[] passives;
+        public int[] ranks;
         public bool crowdCaptured,crowdQualified;
     }
     [Serializable]
@@ -265,6 +266,8 @@ namespace Hellscript
         public EdictResponseState edictResponse;
         public EdictLandingPreference edictLandingPreference;
         public EdictTargetState edictTarget;
+        public EdictFieldState edictField;
+        public GoldenGoblinState goblin;
         public CombatStatistics statistics;
         public int runesAwarded;
         public int pendingExperience;
@@ -315,6 +318,8 @@ namespace Hellscript
         public float time, realTime, health, resource=100, shield, shieldTime, potionCd, actionCd, channelTime, channelTick,
             shoutTime, shadowTime, dealt, moveDistance, decisionTime, saveTime, portalCast;
         public int targetId=-1, exploreRoom, shadowCharges;
+        // Buffs keep the rank they were cast at; zero means a run saved before ranks existed.
+        public float shoutBonus, shadowFraction;
         public bool paused, portal, bossRewarded,heroDeathRecorded;
         public Vector2 position, destination;
         public float[] cooldowns=new float[18];

@@ -27,8 +27,8 @@ namespace Hellscript
             float bonus=snap.elements[element]+snap.bonus+(CombatEffects.Has(enemy,StatusKind.Mark)?(Stats.vulnerable-Stats.Bonus(StatId.VulnerableDamage)+RuneSnapshotBonus(StatId.VulnerableDamage,snap))/100:0)+extra+ConditionalBonus(enemy,kind,snap);
             // Round the threshold to stored HP precision; Mono can otherwise retain extra intermediate precision.
             if(Hero.heroClass==HeroClass.Warrior)
-            {if(snap.passives[0]&&(snap.crowdCaptured?snap.crowdQualified:CountNear(State.position,3)>=3))bonus+=.15f;if(snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f))bonus+=.2f;}
-            if(Hero.heroClass==HeroClass.Ranger&&snap.passives[0]&&Vector2.Distance(State.position,enemy.position)>=7)bonus+=.15f;
+            {if(snap.passives[0]&&(snap.crowdCaptured?snap.crowdQualified:CountNear(State.position,3)>=3))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,0);if(snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,5);}
+            if(Hero.heroClass==HeroClass.Ranger&&snap.passives[0]&&Vector2.Distance(State.position,enemy.position)>=7)bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Ranger,0);
             return bonus;
         }
         DamageEvent ApplyOutgoing(EnemyState enemy,float baseAttack,float additive,float independent,float critMultiplier,bool critical,int element,DamageSnapshot snapshot,string definition,int root,int instance,DamageKind kind,int triggerTarget=-1,bool projectile=false,Vector2? origin=null)
@@ -49,7 +49,7 @@ namespace Hellscript
             var snap=snapshot??CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             int masterySkill=definition.Length==3&&definition[0]=='W'?int.Parse(definition.Substring(1))-1:definition.Length==3&&definition[0]=='A'?int.Parse(definition.Substring(1))+5:definition.Length==3&&definition[0]=='M'?int.Parse(definition.Substring(1))+11:-1;
             if(masterySkill>=0&&masterySkill<18&&snap.runeSkillPower!=null&&snap.runeSkillPower.Length==18)coefficient*=1+snap.runeSkillPower[masterySkill]/100;
-            float crit=snap.crit+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?.1f:0);
+            float crit=snap.crit+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?SkillEffects.Passive(snap.ranks,HeroClass.Ranger,5):0);
             bool critical=canCrit&&RandomStream.Unit(ref State.rng)<Mathf.Min(.75f,crit);
             if(!enemy.boss&&enemy.kind==6&&enemy.brain.rearWindow>0&&(kind==DamageKind.Direct||kind==DamageKind.Basic)&&Vector2.Angle(-enemy.brain.facing,(origin??State.position)-enemy.position)<=60)extraBonus+=.25f;
             bool overpowered=OverpowerRoll(kind);
@@ -64,7 +64,7 @@ namespace Hellscript
             if(procs&&Hero.heroClass==HeroClass.Ranger&&(shadowShot??State.shadowCharges>0)&&element==0&&!enemy.dead)
             {
                 // A06 inherits the direct shot's critical result but uses shadow bonuses and resistance.
-                var shadow=ApplyOutgoing(enemy,snap.damage*coefficient*.25f,AttackBonus(enemy,5,snap,extraBonus,DamageKind.Shadow),1,criticalMultiplier,critical,5,snap,"A06",root,instance,DamageKind.Shadow,projectile:projectile,origin:origin);
+                var shadow=ApplyOutgoing(enemy,snap.damage*coefficient*ShadowFraction,AttackBonus(enemy,5,snap,extraBonus,DamageKind.Shadow),1,criticalMultiplier,critical,5,snap,"A06",root,instance,DamageKind.Shadow,projectile:projectile,origin:origin);
                 if(shadow!=null&&Stats.specials.Contains("LA04")&&ownPoison&&!State.procHits.Any(p=>p.rootCastId==root&&p.definitionId=="LA04"&&(!p.originScoped||p.targetId==enemy.id)))
                 {
                     // Old receipts lack the original target: retain their root-wide restriction instead of inventing an origin.

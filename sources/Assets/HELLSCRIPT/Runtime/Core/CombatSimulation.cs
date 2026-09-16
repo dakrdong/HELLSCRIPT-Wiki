@@ -78,7 +78,7 @@ namespace Hellscript
                 {SpawnEnemy(spawn.room,spawn.kind,spawn.position,spawn.elite);var e=State.enemies[State.enemies.Count-1];e.group=spawn.group;e.eliteTraits=new List<int>(spawn.traits);}
                 foreach(var spawn in State.layout.spawns)if(spawn.elitePartner>=0)State.enemies[spawn.index].elitePartner=State.enemies[spawn.elitePartner].id;
                 foreach(var carrier in State.layout.carriers)carrier.enemyId=State.enemies[carrier.spawn].id;
-                return;
+                SpawnGoldenGoblin();return;
             }
             for(int room=0;room<8;room++)for(int i=0;i<18;i++)
             {
@@ -174,7 +174,7 @@ namespace Hellscript
         {
             sensed.Clear();foreach(var e in State.enemies)if(!e.dead&&Vector2.Distance(State.position,e.position)<=12&&Map.LineClear(State.position,e.position))sensed.Add(e);
             RiftExploration.ObserveEnemies(State,sensed);
-            ObserveEdictTarget();
+            ObserveEdictTarget();ObserveEngagement();
             if(sensed.Count>0)State.noEnemySince=State.time;
             if(Target==null||!sensed.Contains(Target))SelectTarget(SelectRuleTarget(new Rule(-1)),"사망 또는 시야 변경");
             ObserveShieldEngagement();
@@ -183,10 +183,18 @@ namespace Hellscript
         public int CountNear(Vector2 pos,float radius) => State.enemies.Count(e=>!e.dead&&Vector2.Distance(pos,e.position)<=radius);
         public bool InDanger => DangerAt(State.position,1.5f);
         public float DisplaySkillCost(SkillDefinition skill)=>Cost(skill);
+        // Invested ranks travel with the build the run fights with; a run restored from before
+        // ranks existed has none and reads as rank one everywhere.
+        int[] Ranks=>State.build.skillRanks;
+        public float SkillRange(int index)=>SkillEffects.Range(catalog.skills[index],SkillEffects.ActiveRank(Ranks,index));
+        float ShoutBonus=>State.shoutBonus>0?State.shoutBonus:SkillEffects.ShoutBonus(SkillEffects.ActiveRank(Ranks,5));
+        float ShadowFraction=>State.shadowFraction>0?State.shadowFraction:SkillEffects.ShadowFraction(SkillEffects.ActiveRank(Ranks,11));
+        float LeapDefenseReduction=>SkillEffects.Passive(Ranks,HeroClass.Warrior,2);
+        float SlowStrength(DamageSnapshot snapshot)=>.35f+(snapshot.passives[1]?SkillEffects.Passive(snapshot.ranks,HeroClass.Mage,1):0);
         float Cost(SkillDefinition skill,bool withoutConsumables=false)
         {
-            float reduction=Stats.costReduction+Stats.runeSkillCost[catalog.skills.IndexOf(skill)]/100+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?.25f:0);
-            if(skill.kind==SkillKind.Whirlwind){if(Stats.passives[1]&&State.channelTime>=2-.00001f)reduction+=.2f;if(Stats.SetPieces("SW")>=2)reduction+=.15f;}
+            float reduction=Stats.costReduction+Stats.runeSkillCost[catalog.skills.IndexOf(skill)]/100+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?SkillEffects.Passive(Ranks,HeroClass.Ranger,4):0);
+            if(skill.kind==SkillKind.Whirlwind){if(Stats.passives[1]&&State.channelTime>=2-.00001f)reduction+=SkillEffects.Passive(Ranks,HeroClass.Warrior,1);if(Stats.SetPieces("SW")>=2)reduction+=.15f;}
             if(skill.kind==SkillKind.Blizzard&&Stats.SetPieces("SM")>=2)reduction+=.2f;
             if(skill.kind==SkillKind.Pierce&&Stats.SetPieces("SAB")>=2||skill.kind==SkillKind.Chain&&Stats.SetPieces("SMB")>=2)reduction+=.15f;
             return skill.cost*(1-Mathf.Min(.5f,reduction));
@@ -223,15 +231,15 @@ namespace Hellscript
                     if(novaHits==0)ActionEvent(action,"ACTION_MISS","폭발 순간 자기 범위에 적이 없습니다.");
                     if(skill.kind==SkillKind.Nova&&novaHits>0&&Stats.SetPieces("SMB")>=4){ItemEffects.chainCharge=6;ItemEffects.chainCharges=2;EffectEvent("SMB4","CHARGE",root:action.id,value:2);}
                     foreach(var e in AreaTargets(origin,3,default,360))ApplyStatus(e,skill.kind==SkillKind.Nova?StatusKind.Freeze:StatusKind.Stun,SkillId(index),1.5f,action.id);break;
-                case SkillKind.Shield:AddShield(SkillId(index),Stats.hp*(Hero.heroClass==HeroClass.Warrior?.3f:.35f),4,action.id);break;
-                case SkillKind.Shout:State.resource=Mathf.Min(Stats.maxResource,State.resource+40);State.shoutTime=6;break;
+                case SkillKind.Shield:AddShield(SkillId(index),Stats.hp*SkillEffects.ShieldFraction(Hero.heroClass,SkillEffects.ActiveRank(Ranks,index)),4,action.id);break;
+                case SkillKind.Shout:{int rank=SkillEffects.ActiveRank(Ranks,index);State.resource=Mathf.Min(Stats.maxResource,State.resource+SkillEffects.ShoutResource(rank));State.shoutTime=6;State.shoutBonus=SkillEffects.ShoutBonus(rank);break;}
                 case SkillKind.Pierce:LaunchPierce(action);break;
                 case SkillKind.Multi:LaunchMulti(action);break;
                 case SkillKind.Trap:CreateTrap(action,aim,5);break;
                 case SkillKind.Mark:
                     if(target!=null&&Vector2.Distance(origin,target.position)<=10&&Map.LineClear(origin,target.position))ApplyStatus(target,StatusKind.Mark,"A05",10,action.id);
                     else ActionEvent(action,"ACTION_MISS","표식 대상이 사라졌거나 실제 사거리·시야를 벗어났습니다.");break;
-                case SkillKind.Shadow:State.shadowCharges=3;State.shadowTime=8;break;
+                case SkillKind.Shadow:State.shadowCharges=3;State.shadowTime=8;State.shadowFraction=SkillEffects.ShadowFraction(SkillEffects.ActiveRank(Ranks,index));break;
                 case SkillKind.Fireball:LaunchFireball(action);break;
                 case SkillKind.Blizzard:AddGround(aim,3,0,6,Stats.damage*.65f,false,13,root:action.id,followsTarget:Stats.specials.Contains("LM01")&&action.blizzardMode==BlizzardMode.Follow);break;
                 case SkillKind.Chain:
@@ -255,6 +263,7 @@ namespace Hellscript
         {
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
             if(MoveEdictResponse(dt))return;
+            if(MoveEdictGather(dt))return;
             if(MoveEdictRanger(dt))return;
             if(MoveEdictNova(dt))return;
             if(MoveEdictWhirlwind(dt))return;
@@ -270,12 +279,15 @@ namespace Hellscript
             if(State.portalCast>0&&target==null){State.exploration.probeTime=State.time;return;}
             if((ChestBusy||ShrineBusy||ObjectiveBusy)&&target==null&&!InDanger){State.exploration.probeTime=State.time;return;}
             if(!AdvanceEdictPursuit(dt,searching,target,movementRule))return;
-            if(searching){goal=lastSeenGoal;State.action="마지막으로 발견한 적의 위치 확인";}
+            if(searching&&!DiscoveryBeforeEnemies(ref goal,ref recovering)){goal=lastSeenGoal;State.action="마지막으로 발견한 적의 위치 확인";}
             else if(target!=null)
             {
                 Vector2 delta=State.position-target.position;float d=delta.magnitude;float range=policy?.distance??(movementRule!=null&&movementRule.overrideMovement?movementRule.distance:Policy.distance);
                 var movement=policy?.movement??(movementRule!=null&&movementRule.overrideMovement?movementRule.movement:Policy.movement);
                 float standRange=Hero.heroClass==HeroClass.Warrior?(movementRule?.id=="edict:WARRIOR:BASIC"?2:2.5f):movementRule?.id=="edict:A02"?8:movementRule?.id=="edict:A03"?6:movementRule?.id=="edict:A06"&&HuntEdictV2.Value(edictSource,"A06",3)=="A02"?8:10;
+                if(policy==null&&EdictFieldGoal(target,range,ref goal)){}
+                else
+                {
                 if(movement==MovementMode.Stand&&d<=standRange)return;
                 if(movement==MovementMode.Retreat)goal=State.position+delta.normalized*2;
                 else if(movement==MovementMode.KeepDistance)
@@ -284,10 +296,11 @@ namespace Hellscript
                 {Vector2 tangent=new Vector2(-delta.y,delta.x).normalized*((policy?.clockwise??Policy.clockwise)?1:-1);goal=target.position+(delta.normalized+tangent*.4f).normalized*range;}
                 else goal=target.position+delta.normalized*Mathf.Min(range,Hero.heroClass==HeroClass.Warrior?1.6f:8);
                 if(Hero.heroClass!=HeroClass.Warrior&&!Map.ProjectileClear(State.position,target.position,.3f))goal=ShotApproach(target,goal);
+                }
             }
             else
             {
-                if(State.phase==RunPhase.Boss)
+                if(HeadToBossNow())
                 {if(TargetPolicy!=null&&!State.layout.roamingBoss)goal=State.layout.rooms[State.layout.bossRoom].position;else{var boss=State.enemies.Find(e=>e.id==State.bossId);if(boss!=null)goal=boss.position;}}
                 else
                 {
@@ -368,8 +381,8 @@ namespace Hellscript
             var targets=AreaTargets(pos,radius,direction,arc);var snapshot=CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             foreach(var e in targets)Hit(e,coefficient,element,procs,0,snapshot,definition:definition,root:root,kind:kind);return targets.Length;
         }
-        DamageSnapshot CaptureDamage()=>new DamageSnapshot{runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?.2f:0)+(elementBuff>0?.1f:0),crit=Stats.crit,critDamage=Stats.critDamage,
-            level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),
+        DamageSnapshot CaptureDamage()=>new DamageSnapshot{runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
+            level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),ranks=Ranks==null?null:(int[])Ranks.Clone(),
             crowdCaptured=Hero.heroClass==HeroClass.Warrior,crowdQualified=Hero.heroClass==HeroClass.Warrior&&CountNear(State.position,3)>=3};
         void Deal(EnemyState e,float damage,bool critical)
         {
@@ -381,6 +394,7 @@ namespace Hellscript
         void RewardEnemyDeath(EnemyState e)
         {
             if(e.boss)return;
+            if(e.goblin){RewardGoldenGoblin(e);return;}
             if(!e.add)
             {
                 State.meter+=e.elite>=0?5:1;
@@ -397,9 +411,10 @@ namespace Hellscript
             }
 
         }
-        void Drop(Vector2 pos,int rarity)
+        void Drop(Vector2 pos,int rarity)=>Drop(pos,rarity,ref State.rewardRng);
+        void Drop(Vector2 pos,int rarity,ref uint rng)
         {
-            int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,item=Economy.CreateRiftItem(Hero.heroClass,RandomStream.Range(ref State.rewardRng,0,8),rarity,RandomStream.Range(ref State.rewardRng,Mathf.Max(1,State.stage-2),State.stage+3),State.stage,ref State.rewardRng,State.id+"-"+id)});
+            int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,item=Economy.CreateRiftItem(Hero.heroClass,RandomStream.Range(ref rng,0,8),rarity,RandomStream.Range(ref rng,Mathf.Max(1,State.stage-2),State.stage+3),State.stage,ref rng,State.id+"-"+id)});
         }
         void AddGround(Vector2 pos,float radius,float delay,float duration,float damage,bool hostile,int kind,int element=0,string caster=null,string definition=null,int root=0,bool? followsTarget=null)
         {
@@ -478,11 +493,13 @@ namespace Hellscript
                 }
                 else if(drop.item.rarity<Policy.minimumRarity){drop.ignored=true;continue;}
                 if(Vector2.Distance(State.position,drop.position)>Stats.pickup&&State.phase!=RunPhase.Looting)continue;
-                if(Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account)){drop.claimed=true;State.lootCount++;Log("LOOT",drop.item.name);}
-                else if(Policy.bagPolicy==BagPolicy.Portal)
-                {
-                    State.portalCast+=dt;if(State.portalCast>=2||State.phase==RunPhase.Looting){State.portal=true;Log("INVENTORY_POLICY","가방 정리 · 균열 상태 동결");}return;
-                }
+                // The shortage trigger can fire before the bag is completely full: keep the configured
+                // slots free by ignoring further equipment or by cleaning up in town early.
+                bool shortage=BagShort;
+                if(shortage&&Policy.bagPolicy==BagPolicy.Ignore){drop.ignored=true;continue;}
+                if(shortage&&Policy.bagPolicy==BagPolicy.Portal&&Economy.FreeSlots(Hero)>0){PortalForBag(dt);return;}
+                if(Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account,edictField?.replacementRank=="RARITY")){drop.claimed=true;State.lootCount++;Log("LOOT",drop.item.name);}
+                else if(Policy.bagPolicy==BagPolicy.Portal||Policy.bagPolicy==BagPolicy.Replace&&edictField?.replacementFail=="PORTAL"){PortalForBag(dt);return;}
                 else drop.ignored=true;
             }
             if(State.phase==RunPhase.Looting&&State.drops.All(d=>d.claimed||d.ignored)&&State.resources.All(d=>d.claimed||d.ignored))Finish(true,"균열 클리어");

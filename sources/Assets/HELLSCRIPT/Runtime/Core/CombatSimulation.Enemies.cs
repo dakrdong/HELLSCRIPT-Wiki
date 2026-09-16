@@ -136,6 +136,7 @@ namespace Hellscript
                 if(e.poison>0){e.poison-=dt;if(e.poisonDamage>0)Hit(e,e.poisonDamage*dt/Mathf.Max(.0001f,Stats.damage),4,false,canCrit:false,definition:"LEGACY_POISON",kind:DamageKind.Periodic);if(e.dead)continue;}
                 bool hard=CombatEffects.Has(e,StatusKind.Stun)||CombatEffects.Has(e,StatusKind.Freeze)||e.bossControl.staggered>0;
                 if(hard){if(e.boss)InterruptBossAction(e,"보스 제압");else InterruptEnemyAction(e,"기절·빙결");e.stun=Mathf.Max(0,e.stun-dt);e.freeze=Mathf.Max(0,e.freeze-dt);continue;}
+                if(e.goblin){TickGoldenGoblin(e,dt);continue;}
                 if(e.boss){TickBoss(e,dt);continue;}
                 var b=e.brain;float distance=Vector2.Distance(e.position,State.position);bool visible=distance<=14&&Map.LineClear(e.position,State.position);
                 if(visible)
@@ -174,7 +175,7 @@ namespace Hellscript
         void RegisterEnemyDeath(EnemyState e)
         {
             if(e.boss)InterruptBossAction(e,"사망");else InterruptEnemyAction(e,"사망");
-            if(!e.boss&&!e.add)State.enemyCorpses.Add(new EnemyCorpse{id=State.nextId++,enemyId=e.id,position=e.position,createdAt=State.time});
+            if(!e.boss&&!e.add&&!e.goblin)State.enemyCorpses.Add(new EnemyCorpse{id=State.nextId++,enemyId=e.id,position=e.position,createdAt=State.time});
             if(!e.boss&&e.kind==5)CreateEnemyHazard(e,"N06_DEATH",e.position,1,0,EnemyAttackValue(e)*2,0);
             if(!e.boss&&e.kind==11)CreateEnemyHazard(e,"N12_DEATH",e.position,.9f,0,EnemyAttackValue(e)*1.2f,0,shards:true);
         }

@@ -98,7 +98,7 @@ namespace Hellscript
         }
         void ChooseChestGoal(ref Vector2 goal)
         {
-            if(State.layout.legacy||!Policy.openChests||State.phase==RunPhase.Boss&&!Policy.chestsAfterBoss){CancelChest("");return;}
+            if(State.layout.legacy||!Policy.openChests||State.phase==RunPhase.Boss&&!Policy.chestsAfterBoss||LowTime){CancelChest("");return;}
             var active=ActiveChest;
             if(active!=null&&active.phase==ChestPhase.Approaching&&SafeForChest(active)&&CursedAllowed(active))
             {

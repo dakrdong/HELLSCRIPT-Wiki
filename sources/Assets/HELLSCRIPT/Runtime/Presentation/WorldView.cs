@@ -134,7 +134,7 @@ namespace Hellscript
                 if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!game.Combat.Map.LineClear(run.position,enemy.position))
                 {if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);continue;}
                 if(!actors.TryGetValue(enemy.id,out var actor))
-                {actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?new[]{6,10,7}[enemy.pattern]:enemy.kind,true,enemy.boss);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
+                {actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?new[]{6,10,7}[enemy.pattern]:enemy.kind,true,enemy.boss);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
                  if(enemy.elite>=0)Ring(actor.transform,Vector3.up*.1f,1.1f,purple,.1f);
                  if(!string.IsNullOrEmpty(enemy.eventId))Ring(actor.transform,Vector3.up*.15f,.9f,red,.1f);
                  Shape("Health",PrimitiveType.Cube,actor.transform,new Vector3(0,2.65f,0),new Vector3(1,.1f,.1f),red);}

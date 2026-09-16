@@ -21,7 +21,7 @@ namespace Hellscript
         }
         void LaunchPierce(HeroActionState action)
         {
-            var p=Shot(action,action.aim-action.origin,10,18,.3f,1.8f,0,Stats.passives[2]?7:5);p.shadow=ConsumeShadow();
+            var p=Shot(action,action.aim-action.origin,10,18,.3f,1.8f,0,Stats.passives[2]?SkillEffects.PierceTargets(Ranks):5);p.shadow=ConsumeShadow();
             if(action.pierceBonus)
             {var echo=Shot(action,action.aim-action.origin,10,18,.3f,1.2f,0,5);echo.extra=true;echo.delay=.3f;}
         }
@@ -102,7 +102,7 @@ namespace Hellscript
             var targets=AreaTargets(p.position,p.explosionRadius,default,360);
             foreach(var e in targets)
             {
-                Hit(e,p.coefficient,1,true,p.snapshot.passives[0]&&targets.Length>=3?.15f:0,p.snapshot,definition:"M01",root:p.actionId,instance:p.id);
+                Hit(e,p.coefficient,1,true,p.snapshot.passives[0]&&targets.Length>=3?SkillEffects.Passive(p.snapshot.ranks,HeroClass.Mage,0):0,p.snapshot,definition:"M01",root:p.actionId,instance:p.id);
                 ConsumeFrostMark(e,p);
             }
             if(Stats.specials.Contains("LM02"))AddGround(p.position,3.5f,.4f,.1f,Stats.damage*.7f,false,12,root:p.actionId);
@@ -126,7 +126,7 @@ namespace Hellscript
                 {
                     var enemies=AreaTargets(trap.position,trap.radius,default,360);
                     if(enemies.Length>0)
-                    {trap.triggered=true;trap.triggeredAt=State.time;trap.remaining=trap.duration;foreach(var e in enemies)ApplyStatus(e,StatusKind.Root,trap.definitionId,1.5f*(trap.snapshot.passives[3]?1.25f:1),trap.actionId);Log("TRAP_TRIGGERED","맹독 덫 발동");}
+                    {trap.triggered=true;trap.triggeredAt=State.time;trap.remaining=trap.duration;foreach(var e in enemies)ApplyStatus(e,StatusKind.Root,trap.definitionId,1.5f*(trap.snapshot.passives[3]?1+SkillEffects.Passive(trap.snapshot.ranks,HeroClass.Ranger,3):1),trap.actionId);Log("TRAP_TRIGGERED","맹독 덫 발동");}
                     else {trap.wait-=elapsed;if(trap.wait<=.00001f)State.traps.Remove(trap);}continue;
                 }
                 trap.remaining=Mathf.Max(0,trap.remaining-dt);

@@ -49,7 +49,7 @@ namespace Hellscript.Tests
         {
             var catalog=Catalog();try
             {
-                var account=GameStore.NewAccount();var sim=new CombatSimulation(account,catalog,1,seed:111);var chest=PrepareChest(sim);
+                var account=ContentTestAccounts.Legacy();var sim=new CombatSimulation(account,catalog,1,seed:111);var chest=PrepareChest(sim);
                 sim.Tick(.05f);Assert.Greater(chest.progress,0);sim.State.paused=true;float progress=chest.progress;sim.Tick(.5f);Assert.AreEqual(progress,chest.progress);
                 sim.State.paused=false;sim.State.portal=true;sim.Tick(.5f);Assert.AreEqual(progress,chest.progress);sim.State.portal=false;
                 sim.State.effects.Add(new GroundEffect{id=5000,position=sim.State.position,radius=1,damage=1,duration=1,hostile=true});sim.Tick(.05f);
@@ -90,7 +90,7 @@ namespace Hellscript.Tests
         {
             var catalog=Catalog();try
             {
-                var account=GameStore.NewAccount();account.Hero.capacity=0;var sim=new CombatSimulation(account,catalog,1,seed:114);var chest=PrepareChest(sim);chest.progress=chest.Duration;
+                var account=ContentTestAccounts.Legacy();account.Hero.capacity=0;var sim=new CombatSimulation(account,catalog,1,seed:114);var chest=PrepareChest(sim);chest.progress=chest.Duration;
                 sim.Tick(.05f);Assert.AreEqual(ChestPhase.Opened,chest.phase);int gold=account.gold;
                 for(int n=0;n<45;n++)sim.Tick(.05f);Assert.IsTrue(sim.State.portal);Assert.AreEqual(gold,account.gold);Assert.IsFalse(sim.State.drops[0].claimed);
                 sim.State.portal=false;account.Hero.capacity=50;sim.State.portalCast=0;sim.Tick(.05f);Assert.IsTrue(sim.State.drops[0].claimed);Assert.AreEqual(1,account.Hero.inventory.Count(i=>i.id==chest.reward.id));
@@ -102,7 +102,7 @@ namespace Hellscript.Tests
         {
             var catalog=Catalog();try
             {
-                var account=GameStore.NewAccount();var sim=new CombatSimulation(account,catalog,1,seed:115);var chest=PrepareChest(sim);chest.progress=chest.Duration-.05f;
+                var account=ContentTestAccounts.Legacy();var sim=new CombatSimulation(account,catalog,1,seed:115);var chest=PrepareChest(sim);chest.progress=chest.Duration-.05f;
                 sim.State.enemies.Add(new EnemyState{id=9000,boss=true,health=1,maxHealth=1,poison=2,poisonDamage=100,position=sim.State.position+Vector2.right*30});
                 sim.State.build.chestsAfterBoss=true;sim.Tick(.05f);
                 Assert.AreEqual(ChestPhase.Opened,chest.phase);Assert.IsTrue(sim.State.bossRewarded);
@@ -121,7 +121,7 @@ namespace Hellscript.Tests
             {
                 for(int hero=0;hero<3;hero++)for(int build=0;build<2;build++)
                 {
-                    var account=GameStore.NewAccount();account.selectedHero=hero;account.Hero.level=30;account.Hero.build=GameCatalog.Preset((HeroClass)hero,build);
+                    var account=ContentTestAccounts.Legacy();account.selectedHero=hero;account.Hero.level=30;account.Hero.build=GameCatalog.Preset((HeroClass)hero,build);
                     var sim=new CombatSimulation(account,catalog,1,seed:(uint)(710+hero*2+build));
                     for(int tick=0;tick<6001&&sim.State.phase!=RunPhase.Cleared&&sim.State.phase!=RunPhase.Failed;tick++)
                     {sim.Tick(.05f);Assert.IsTrue(sim.HeroTravelling?sim.Map.LineClear(sim.State.heroAction.origin,sim.State.position)&&sim.Map.CanLand(sim.State.heroAction.destination):sim.Map.Walkable(sim.State.position),$"hero={hero} build={build} tick={tick}");Assert.IsEmpty(sim.State.navigationError);if(sim.State.portal)sim.Abandon();}

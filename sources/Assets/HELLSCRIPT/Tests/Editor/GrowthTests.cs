@@ -117,7 +117,18 @@ namespace Hellscript.Tests
             try
             {
                 var store=new GameStore(directory,catalog);
-                foreach(var hero in store.Data.heroes)Assert.AreEqual(JsonUtility.ToJson(BehaviorPresets.ForLevel(hero.heroClass,0,1,catalog)),JsonUtility.ToJson(hero.build));
+                foreach(var hero in store.Data.heroes)
+                {
+                    // A new hero fights through the unified hunt edict: the recommended legacy build seeds the
+                    // document's slots, and the stored build is that document's own projection.
+                    var recommended=BehaviorPresets.ForLevel(hero.heroClass,0,1,catalog);
+                    Assert.IsTrue(hero.useEdict);Assert.AreEqual(recommended.name,hero.build.name);
+                    CollectionAssert.AreEqual(recommended.activeSkills.Where(i=>catalog.skills[i].unlock<=1),hero.build.activeSkills);
+                    CollectionAssert.AreEqual(hero.build.activeSkills.Select(CombatTelemetry.SkillId),hero.edict.slots.Where(s=>s!=""));
+                    var projected=HuntEdictLoadout.FromHero(hero).ToBuild(hero.build);
+                    CollectionAssert.AreEqual(projected.rules.Select(r=>r.id),hero.build.rules.Select(r=>r.id));
+                    Assert.AreEqual(JsonUtility.ToJson(projected.skillRanks),JsonUtility.ToJson(hero.build.skillRanks));
+                }
                 store.Data.selectedHero=2;var custom=store.Data.Hero.build;custom.name="직접 만든 조건";custom.version="owner-saved";custom.rules.Single(r=>r.skill==12).enabled=false;custom.distance=9;
                 string expected=JsonUtility.ToJson(custom);Assert.IsTrue(store.Save());var restored=new GameStore(directory,catalog);
                 Assert.AreEqual(expected,JsonUtility.ToJson(restored.Data.Hero.build));

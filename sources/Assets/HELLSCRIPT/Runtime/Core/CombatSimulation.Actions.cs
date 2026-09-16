@@ -63,7 +63,7 @@ namespace Hellscript
             if(index>=0)
             {
                 var skill=catalog.skills[index];State.lastSkillStarts[index]=State.time;
-                State.cooldowns[index]=skill.cooldown*(1-Mathf.Min(.4f,Stats.cdr+(index==1&&Stats.SetPieces("SWB")>=2?.15f:0)));
+                State.cooldowns[index]=SkillEffects.Cooldown(skill,SkillEffects.ActiveRank(Ranks,index))*(1-Mathf.Min(.4f,Stats.cdr+(index==1&&Stats.SetPieces("SWB")>=2?.15f:0)));
                 State.cooldownTotals[index]=State.cooldowns[index];
                 if(index!=4&&index!=5&&index!=11&&index!=16)State.lastAttackTime=State.time;
             }

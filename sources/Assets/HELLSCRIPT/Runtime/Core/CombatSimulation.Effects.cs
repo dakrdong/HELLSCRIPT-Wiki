@@ -126,7 +126,7 @@ namespace Hellscript
             foreach(float boundary in boundaries)
             {
                 float strongest=slows.Where(s=>s.remaining>cursor).Select(s=>Mathf.Clamp(s.strength,0,.8f))
-                    .Concat(areas.Where(w=>w.start<=cursor&&w.end>cursor).Select(w=>.35f+(GroundSnapshot(w.effect).passives[1]?.2f:0))).DefaultIfEmpty(0).Max();
+                    .Concat(areas.Where(w=>w.start<=cursor&&w.end>cursor).Select(w=>SlowStrength(GroundSnapshot(w.effect)))).DefaultIfEmpty(0).Max();
                 credit+=strongest*Mathf.Max(0,boundary-cursor)*10;cursor=boundary;
             }
             return credit;

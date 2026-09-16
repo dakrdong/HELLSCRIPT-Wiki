@@ -104,7 +104,7 @@ namespace Hellscript.Tests
             var loaded=new GameStore(directory);var result=loaded.Data.Hero.inventory[0];
             Assert.AreEqual(GameStore.MaximumSchemaVersion,loaded.Data.schema);Assert.AreEqual(item.id,result.id);Assert.AreEqual(9.3f,result.Value(10));Assert.AreEqual(12.7f,result.Value(11));Assert.AreEqual(4.1f,result.Value(17));
             Assert.AreEqual(620,result.investedMaterials);Assert.AreEqual(5,result.enhancement);Assert.IsTrue(result.locked);Assert.AreEqual(result.rolls[1].slotId,result.rerollSlotId);Assert.IsTrue(result.rolls.All(r=>r.legacyRoll));
-            Assert.AreEqual(1,Directory.GetFiles(directory,"*.schema1-*.json").Length);
+            Assert.AreEqual(2,Directory.GetFiles(directory,"*.schema1-*.json").Length);Assert.AreEqual(1,Directory.GetFiles(directory,"*.schema1-before-hunt-edict.json").Length);
             string first=JsonUtility.ToJson(result);Assert.IsTrue(loaded.Save());Assert.AreEqual(first,JsonUtility.ToJson(new GameStore(directory).Data.Hero.inventory[0]));
         }
         [Test]public void TransactionCommitsOnceAndKeepsLiveHeroIdentity()
@@ -137,7 +137,7 @@ namespace Hellscript.Tests
         }
         [Test]public void InFlightSetChargesAndDelayedEchoSurviveSaveAndFreeze()
         {
-            var a=GameStore.NewAccount();var catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();
+            var a=ContentTestAccounts.Legacy();var catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();
             try
             {
                 var sim=new CombatSimulation(a,catalog,1,1);sim.State.itemEffects.crushCharge=3.4f;sim.State.itemEffects.chainCharge=5;sim.State.itemEffects.chainCharges=2;
@@ -150,7 +150,7 @@ namespace Hellscript.Tests
         }
         CombatSimulation SetSimulation(GameCatalog catalog,HeroClass c,string setId,params int[] skills)
         {
-            var a=GameStore.NewAccount();a.selectedHero=(int)c;a.Hero.level=30;a.Hero.build.passives=Array.Empty<int>();a.Hero.build.movement=MovementMode.Stand;
+            var a=ContentTestAccounts.Legacy();a.selectedHero=(int)c;a.Hero.level=30;a.Hero.build.passives=Array.Empty<int>();a.Hero.build.movement=MovementMode.Stand;
             a.Hero.build.rules=skills.Select(i=>new Rule(i,ConditionKind.Always,0,i==9)).ToList();a.Hero.build.activeSkills=skills.Distinct().ToList();uint rng=991;
             for(int slot=1;slot<=4;slot++){var item=ItemGenerator.Create(c,slot,3,1,ref rng,uniqueId:setId+slot);item.equipped=true;a.Hero.inventory.Add(item);}
             var sim=new CombatSimulation(a,catalog,1,1);sim.State.position=RiftMap.Rooms[0];sim.State.enemies.Clear();sim.Stats.crit=0;sim.Stats.regen=0;
@@ -171,7 +171,7 @@ namespace Hellscript.Tests
                 sim.Tick(.05f);Assert.AreEqual(0,sim.State.itemEffects.crushCharge);Assert.AreEqual(4.8f,sim.State.cooldowns[1],.001f);sim.State.decisionTime=100;UntilSkill(sim,1);Assert.AreEqual(4,sim.State.itemEffects.crushCharge);
                 var snapshot=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));snapshot.itemEffects.crushCharge=0;
                 // Clone the equipped hero into an independent account.
-                var account=GameStore.NewAccount();account.heroes[0]=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(sim.Hero));
+                var account=ContentTestAccounts.Legacy();account.heroes[0]=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(sim.Hero));
                 var comparison=new CombatSimulation(account,catalog,1,1,snapshot);comparison.Stats.crit=0;comparison.Stats.regen=0;
                 sim.State.decisionTime=0;comparison.State.decisionTime=0;UntilSkill(sim,2);UntilSkill(comparison,2);Assert.AreEqual(0,sim.State.itemEffects.crushCharge);
                 Assert.Greater(sim.State.dealt,comparison.State.dealt+20);

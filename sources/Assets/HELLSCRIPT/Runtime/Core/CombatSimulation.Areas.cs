@@ -138,7 +138,7 @@ namespace Hellscript
                 foreach(var window in inside)
                 {
                     var fx=window.effect;float remaining=fx.duration-(window.end-window.start);if(window.end<dt-.00001f||remaining<=.00001f)continue;
-                    activeAreas.Add(fx.id);var snap=GroundSnapshot(fx);ApplyStatus(enemy,StatusKind.Slow,"M02",remaining,fx.rootCastId,.35f+(snap.passives[1]?.2f:0),fx.id);
+                    activeAreas.Add(fx.id);var snap=GroundSnapshot(fx);ApplyStatus(enemy,StatusKind.Slow,"M02",remaining,fx.rootCastId,SlowStrength(snap),fx.id);
                 }
                 enemy.statuses.RemoveAll(s=>s.areaId>0&&s.casterId==State.heroId&&s.definitionId=="M02"&&!activeAreas.Contains(s.areaId));
             }

@@ -29,7 +29,7 @@ namespace Hellscript
             if(deaths==0||State.health<=0||Hero.heroClass!=HeroClass.Warrior||!Stats.passives[3]
                 ||EffectTick-Mathf.RoundToInt(lastHeal/Step)<20)return;
             lastHeal=State.time;float before=State.health;
-            State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*.02f*Stats.healing);
+            State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*SkillEffects.Passive(Ranks,HeroClass.Warrior,3)*Stats.healing);
             EffectEvent("WP04","HEAL",value:State.health-before);
         }
         void RecordElementHit(int element,DamageSnapshot snapshot,int root)

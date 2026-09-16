@@ -161,7 +161,7 @@ namespace Hellscript
             armor*=1+gemArmorPercent;
             hp=(new[]{300,240,210}[c]+new[]{35,28,25}[c]*(level-1)+flatHp)*(1+bonuses[1]/100);
             damage=(weapon+runeAttack)*(1+.002f*primary);attackPower=damage;
-            regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1.2f;
+            regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1+SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,4);
             baseSpeed=new[]{4f,4.4f,4f}[c];speed=SpeedWithBonus(0);
             pickup=Mathf.Min(6,1.5f+bonuses[22]+(specials.Contains("LC01")?2.5f:0));
             crit=Mathf.Min(.75f,.05f+dex*.0003f+bonuses[15]/100);critDamage=1.5f+bonuses[16]/100;
@@ -170,18 +170,19 @@ namespace Hellscript
             healing=1+bonuses[23]/100+will*.001f;
             // Diablo IV calls this barrier generation. Willpower, the two passives and the gear
             // roll all raise the same number, so they are summed here rather than kept apart.
-            shieldMultiplier=1+will*.001f+(c==0&&passives[4]||c==2&&passives[3]?.2f:0)+bonuses[(int)StatId.BarrierGeneration]/100;
-            DeriveExtendedStats(will,dex);
+            shieldMultiplier=1+will*.001f+(c==0&&passives[4]?SkillEffects.Passive(hero.build.skillRanks,HeroClass.Warrior,4):c==2&&passives[3]?SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,3):0)+bonuses[(int)StatId.BarrierGeneration]/100;
+            DeriveExtendedStats(will,dex,c==1?SkillEffects.MarkBonus(SkillEffects.ActiveRank(hero.build.skillRanks,10)):25);
         }
         // Diablo IV's own derivations: strength feeds armour, dexterity feeds dodge, intelligence
         // feeds resistance and willpower feeds healing, overpower damage and resource generation.
         // The four lines above this call already spend strength, intelligence and part of
         // willpower, so only the parts this project did not have are added here.
-        void DeriveExtendedStats(float will,float dex)
+        void DeriveExtendedStats(float will,float dex,float markBonus)
         {
             // Twenty-five is what a marked target already added here before the sheet existed;
-            // Diablo IV's own baseline for a vulnerable target sits beside it in the gear roll.
-            vulnerable=25+Bonus(StatId.VulnerableDamage);
+            // the ranger's mark rank raises it, and Diablo IV's own baseline for a vulnerable
+            // target sits beside it in the gear roll.
+            vulnerable=markBonus+Bonus(StatId.VulnerableDamage);
             overpower=50+will*.25f+Bonus(StatId.OverpowerDamage);
             luckyHit=StatCatalog.Cap(StatId.LuckyHitChance,Bonus(StatId.LuckyHitChance));
             dodge=StatCatalog.Cap(StatId.DodgeChance,dex*.025f+Bonus(StatId.DodgeChance))/100;
@@ -237,13 +238,14 @@ namespace Hellscript
             if(!ItemCatalog.Base(item).Fits(hero.heroClass,item.slot)||ItemCatalog.Unique(item.special) is UniqueItemDefinition u&&!u.Fits(hero.heroClass,item.slot))return "다른 직업의 전용 장비입니다.";
             return "";
         }
-        public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null)
+        // rarityOnly compares grades alone; a tie keeps the equipment already in the bag.
+        public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false)
         {
             if(item==null||hero.inventory.Any(i=>i.id==item.id))return false;
             if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);return true;}
             if(policy!=BagPolicy.Replace)return false;
             var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
-            if(worst==null||Compare(item,worst)<=0)return false;
+            if(worst==null||(rarityOnly?item.rarity.CompareTo(worst.rarity):Compare(item,worst))<=0)return false;
             ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);return true;
         }
         static int Compare(Item a,Item b) {int c=a.rarity.CompareTo(b.rarity);if(c==0)c=a.level.CompareTo(b.level);return c==0?a.Price.CompareTo(b.Price):c;}
