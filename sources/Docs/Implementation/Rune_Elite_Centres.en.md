@@ -106,4 +106,4 @@ The checks ran on a macOS development build only. This was not seen on real mobi
 
 Lighting an elite with any colour needs the board topology changed, so it is left open. Ability icons, buying slots with points and a padlock-popup screen also belong to the separate effort that brings the whole rune board in line with the mock-up.
 
-The six abilities carry the mock-up's draft numbers. They have not been measured in real combat.
+The six abilities carry the mock-up's draft numbers. They were measured by simulation the same day in [Rune Elite Balance Measurement](Rune_Elite_Balance.en.md); the numbers themselves are still unchanged.
