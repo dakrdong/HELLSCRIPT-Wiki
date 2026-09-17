@@ -30,6 +30,8 @@ namespace Hellscript.Runes
              case "B07":case "B08":case "B09":return "staff";default:return null;}
         }
         public static int UnlockedGrade(AccountSave account)=>Math.Min(6,account.heroes.Max(h=>h.highestClear)/5);
+        // The inverse of the line above, so a locked region can name the clear it is still waiting for.
+        public static int ClearForGrade(int grade){RuneColors.CheckGrade(grade);return grade*5;}
         // Cell value tier is independent of region unlock and rune color.
         static readonly string[] common={"AttackPower","Strength","Dexterity","Intelligence","Willpower","MaximumLife","AllResistance","Armor"};
         static readonly string[][] specialty={
