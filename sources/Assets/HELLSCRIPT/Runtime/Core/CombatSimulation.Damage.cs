@@ -60,6 +60,7 @@ namespace Hellscript
             {
                 if(overpowered)EffectEvent(definition,"OVERPOWER",instance,root,value:damage.finalDamage);
                 StealLife(damage.hpLoss);LuckyHit(damage.hpLoss);
+                EliteDirectHit(enemy,damage,critical,element,snap,root,instance,kind);
             }
             if(procs&&Hero.heroClass==HeroClass.Ranger&&(shadowShot??State.shadowCharges>0)&&element==0&&!enemy.dead)
             {
@@ -78,6 +79,31 @@ namespace Hellscript
                 }
             }
             return damage;
+        }
+        // The elite centre runes, resolved from the hit that just landed. A hit never grants the stack or
+        // the exposure it was itself multiplied by, and the burst is raised outside Hit so that a kill it
+        // causes cannot start another one.
+        void EliteDirectHit(EnemyState enemy,DamageEvent damage,bool critical,int element,DamageSnapshot snap,int root,int instance,DamageKind kind)
+        {
+            if(!DirectHit(kind)||damage.finalDamage<=0)return;
+            if(Stats.specials.Contains("ELITE_HEAT"))
+            {
+                ItemEffects.eliteHeatLast=State.time;
+                if(State.time-ItemEffects.eliteHeatGained>=.5f-.00001f&&ItemEffects.eliteHeatStacks<5)
+                {ItemEffects.eliteHeatStacks++;ItemEffects.eliteHeatGained=State.time;EffectEvent("ELITE_HEAT","STACK",instance,root,enemy.id,ItemEffects.eliteHeatStacks);}
+            }
+            if(critical&&Stats.specials.Contains("ELITE_WEAKNESS"))
+            {enemy.eliteExposed=State.time+4;EffectEvent("ELITE_WEAKNESS","EXPOSED",instance,root,enemy.id,4);}
+            if(enemy.dead&&Stats.specials.Contains("ELITE_CASCADE")&&ItemEffects.eliteCascadeCooldown<=.00001f)EliteCascade(enemy,element,snap,root,instance);
+        }
+        void EliteCascade(EnemyState killed,int element,DamageSnapshot snap,int root,int instance)
+        {
+            ItemEffects.eliteCascadeCooldown=1;
+            EffectEvent("ELITE_CASCADE","BURST",instance,root,killed.id,2.5f);
+            // ApplyOutgoing rather than Hit: the burst rolls no critical, no overpower and no lucky hit,
+            // and cannot reach this hook again from a kill of its own.
+            foreach(var other in State.enemies.Where(e=>e!=killed&&!e.dead&&Vector2.Distance(e.position,killed.position)<=2.5f).OrderBy(e=>e.id).ToArray())
+                ApplyOutgoing(other,snap.damage*.3f,0,1,1,false,element,snap,"ELITE_CASCADE",root,instance,DamageKind.Legendary,killed.id);
         }
         void Hurt(float damage,int element=0,string caster="ENEMY",string definition="ENEMY_ATTACK",int root=0,int instance=0,DamageKind kind=DamageKind.Direct)
         {
@@ -101,6 +127,8 @@ namespace Hellscript
             RecordTickIncomingDamage(numbers.final,hpLoss,caster,definition);
             if(before>Stats.hp*.3f&&State.health>0&&State.health<=Stats.hp*.3f&&hpLoss>0&&Stats.specials.Contains("LW04")&&State.build.activeSkills.Contains(1)&&State.cooldowns[1]>0&&ItemEffects.lw04Cooldown<=.00001f)
             {State.cooldowns[1]=0;ItemEffects.lw04Cooldown=30;EffectEvent("LW04","COOLDOWN_RESET",root:root,value:30);}
+            if(before>Stats.hp*.35f&&State.health>0&&State.health<=Stats.hp*.35f&&hpLoss>0&&Stats.specials.Contains("ELITE_RESOLVE")&&ItemEffects.eliteResolveCooldown<=.00001f)
+            {AddShield("ELITE_RESOLVE",Stats.hp*.2f,4,root);ItemEffects.eliteResolveCooldown=30;}
             ApplyThorns(attacker);
             State.lastDamageTime=State.time;CancelChest("피격으로 개봉 중단");CancelShrine("피격으로 사용 중단");
             State.portalCast=0;Visual?.Invoke(State.position,State.position,32,numbers.final-absorbed);

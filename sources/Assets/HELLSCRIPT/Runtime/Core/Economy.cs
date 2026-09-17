@@ -140,7 +140,12 @@ namespace Hellscript
                 {if(!sets.TryGetValue(unique.setId,out var slots))sets[unique.setId]=slots=new HashSet<int>();slots.Add(item.slot);}
             }
             foreach(var effect in RuneGrowth.Contributions(runes,Hellscript.Runes.RuneMasteryCatalog.EquippedWeapon(hero)))
-            {if(effect.Meaning=="AttackPower")runeAttack+=effect.Value;else if(Hellscript.Runes.RuneMasteryCatalog.IsSkill(effect.Meaning)){int skill=Hellscript.Runes.RuneMasteryCatalog.SkillIndex(effect.Meaning);if(effect.Meaning.StartsWith("SkillLevel:"))runeSkillLevels[skill]=Mathf.Min(5,runeSkillLevels[skill]+(int)effect.Value);else if(effect.Meaning.StartsWith("SkillCost:"))runeSkillCost[skill]=Mathf.Min(30,runeSkillCost[skill]+effect.Value);else runeSkillPower[skill]=Mathf.Min(60,runeSkillPower[skill]+effect.Value);}else {int stat=(int)Enum.Parse<StatId>(effect.Meaning);bonuses[stat]+=effect.Value;runeBonuses[stat]+=effect.Value;}}
+            {if(effect.Meaning=="AttackPower")runeAttack+=effect.Value;else if(Hellscript.Runes.RuneMasteryCatalog.IsElite(effect.Meaning))specials.Add(Hellscript.Runes.RuneMasteryCatalog.EliteSpecial(effect.Meaning));else if(Hellscript.Runes.RuneMasteryCatalog.IsSkill(effect.Meaning)){int skill=Hellscript.Runes.RuneMasteryCatalog.SkillIndex(effect.Meaning);if(effect.Meaning.StartsWith("SkillLevel:"))runeSkillLevels[skill]=Mathf.Min(5,runeSkillLevels[skill]+(int)effect.Value);else if(effect.Meaning.StartsWith("SkillCost:"))runeSkillCost[skill]=Mathf.Min(30,runeSkillCost[skill]+effect.Value);else runeSkillPower[skill]=Mathf.Min(60,runeSkillPower[skill]+effect.Value);}else {int stat=(int)Enum.Parse<StatId>(effect.Meaning);bonuses[stat]+=effect.Value;runeBonuses[stat]+=effect.Value;}}
+            // Skill inheritance is applied after the per-skill level runes so both share the one +5 ceiling.
+            // It raises the damage coefficient of a skill the hero already carries; it unlocks nothing.
+            if(specials.Contains("ELITE_INHERIT"))
+                foreach(int skill in hero.build.activeSkills)
+                    if(skill>=0&&skill<runeSkillLevels.Length)runeSkillLevels[skill]=Mathf.Min(5,runeSkillLevels[skill]+1);
             float primary=30+2*(level-1)+bonuses[10+c]+bonuses[14];
             float str=(c==0?30+2*(level-1):10+level-1)+bonuses[10]+bonuses[14];
             float dex=(c==1?30+2*(level-1):10+level-1)+bonuses[11]+bonuses[14];

@@ -24,7 +24,7 @@ The mock-up and the Unity game are two different boards wearing the same name. C
 | Regions | Six named regions: Assault, Precision, Spread, Artistry, Circulation, Guard | Seven colour-grade regions, G0–G6 |
 | Region unlock | Fill the 37 central hexes, choose one region, buy its other 36 hexes at 1P each | Opens automatically every 5 account-best rift clears; no points |
 | Region centre | A dedicated `color:"elite"` hex, activated by a rune of any colour | An `isStart` hex, activated only by its own region's colour |
-| Centre ability | Combat Heat, Exposed Weakness, Chain Collapse, Skill Inheritance, Cycle Core, Unyielding Ward | Attack power on all six weapons, forced by `isStart` |
+| Centre ability | Combat Heat, Exposed Weakness, Chain Collapse, Skill Inheritance, Cycle Core, Unyielding Ward | Attack power on all six weapons at the time of this work; the six were added afterwards in [Elite Abilities](Rune_Elite_Centres.en.md) |
 | Padlock | A locked region is drawn as a single padlock marker | A locked region still draws all its hexes; they are dark but pressable |
 | Ability icons | Every ability has a `glyph` symbol | The rune board has no ability icons; borders, dots and crosses carry the meaning |
 
@@ -95,6 +95,6 @@ The checks ran on a macOS development build only. This was not seen on real mobi
 
 ## Remaining work
 
-The mock-up's six elite abilities (Combat Heat, Exposed Weakness, Chain Collapse, Skill Inheritance, Cycle Core, Unyielding Ward) are not in the game yet. The mock-up's own data marks them as new proposals that still need combat implementation. Adding them needs new ability data, a board rule change turning each region centre from a start hex into an elite hex, an any-colour activation check, and the combat effects themselves. When that happens this preview reads the new centre abilities with no code change.
+The mock-up's six elite abilities (Combat Heat, Exposed Weakness, Chain Collapse, Skill Inheritance, Cycle Core, Unyielding Ward) were not in the game when this was written. **All six were added the same day in [Elite Abilities at the Rune Region Centres](Rune_Elite_Centres.en.md).** This preview reads the new centre abilities without one line of change. The start hex keeps its colour requirement, so the mock-up's any-colour activation was not carried over; that document says why.
 
 Buying slots with points, per-ability icons and a padlock-popup screen belong to a separate effort that brings the whole rune board in line with the mock-up.
