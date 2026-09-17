@@ -50,7 +50,7 @@ namespace Hellscript
             BehaviorRules.Normalize(State.build);
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
-            PrepareEdict();
+            PrepareEdict(restore!=null);
             InitializePotions(restore==null);
             InitializeRift(restore==null,forcedObjective);
             RiftVisibility.Initialize(State,Map,restore!=null);
@@ -411,8 +411,9 @@ namespace Hellscript
             }
 
         }
-        void Drop(Vector2 pos,int rarity)=>Drop(pos,rarity,ref State.rewardRng);
-        void Drop(Vector2 pos,int rarity,ref uint rng)
+        void Drop(Vector2 pos,int rarity)=>DropFrom(pos,rarity,ref State.rewardRng);
+        // Named apart from Drop so reflection by name in the tests still finds one method.
+        void DropFrom(Vector2 pos,int rarity,ref uint rng)
         {
             int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,item=Economy.CreateRiftItem(Hero.heroClass,RandomStream.Range(ref rng,0,8),rarity,RandomStream.Range(ref rng,Mathf.Max(1,State.stage-2),State.stage+3),State.stage,ref rng,State.id+"-"+id)});
         }

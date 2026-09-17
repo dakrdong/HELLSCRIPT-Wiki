@@ -312,6 +312,8 @@ namespace Hellscript
         public float lastDamageTime=-20, bossWait;
         public float lastAttackTime=-20,lastOutgoingDamageTime=-20,guideShrineTime,resolveShrineTime;
         public string navigationError="";
+        // Logged once per run; kept here so reopening a suspended rift does not repeat the line.
+        public string edictBlockLogged="";
         public int stage, theme, training=-1, kills, meter, lootCount, nextId=1, bossId=-1;
         public bool trainingUsesOwnedHero;
         public RunPhase phase;

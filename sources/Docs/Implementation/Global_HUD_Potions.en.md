@@ -1,7 +1,7 @@
 # Global HUD, Potions and Hunting Edicts
 
 Date: 2026-09-14
-작성일: 2026-09-14
+갱신일: 2026-09-17 · 작성일: 2026-09-14
 
 ## Implemented behavior
 
@@ -49,6 +49,14 @@ Account schema is 5, potion inventory/runtime version 1 and edict global options
 
 The upper-right observation menu provides pause, speed selection, build/edict editing, map, combat details, growth, return and idle display. Existing speed entitlements still apply. Closing inspection restores its previous pause state. Keep the HUD in town, inventory and results; reserve scrolling space in non-combat lists. Move the existing town movement control above the left HUD so they do not overlap. In small windows, boss names and action descriptions grow to their actual line count and move the health bar below them.
 
+## One shared skill icon
+
+Active skills use circular frames and passive skills square ones, the convention the user confirmed for the whole game. HUD slots, the skill buffs in the status list and the inspection panels all draw through `SkillIconView`, the same component the Hunt Edict window uses, and `SkillIconAssets` reads the existing eighteen active and eighteen passive images rather than a separate HUD icon set. The cooldown sweep follows the same shape mask, potion slots keep their bottle art, and a status entry falls back to its own icon when its effect is not a skill. When the hunt edict document's slots match the loadout being fought with, the HUD shows the document's slot order, empty slots included.
+
+## Reopening a suspended rift
+
+The reason the hunt edict is blocked is reported once per rift. That "already reported" state lived in a field on the simulation rather than in the run, so reopening a suspended rift wrote the line again and the reopened run's log no longer matched the original. It surfaced once a new account's hero began fighting through the unified edict. The state moved to `RunState.edictBlockLogged`, which is saved with the run and kept when it is reopened; a real change of the document or the loadout still reports the next block.
+
 ## Verification and evidence
 
 The [verification summary](GlobalHudEvidence/verification.json) distinguishes the original run from subsequent focused checks.
@@ -61,6 +69,7 @@ The [verification summary](GlobalHudEvidence/verification.json) distinguishes th
 | HUD runtime | Preserve [runtime results](GlobalHudEvidence/runtime.txt) and [geometry records](GlobalHudEvidence/geometry.txt). Check Korean/English × 50/100/150% × five window sizes, 30 cases within two logical pixels for key positions and sizes. Separately exercise the safe area, 0/4/5/8/12/40 effects, start/middle/end, expansion, expiry, rotation, inspection and drag-release rejection. |
 | Live potions and repeat hunting | Simultaneous HP/resource/utility activation deducts one of each from real stock and starts independent cooldowns plus the utility buff. Paused values remain unchanged; 100 ticks with or without HUD presentation are identical. Verify HP-shortage waiting, saved departure-policy changes, a 350-gold sanctuary purchase and no duplicate purchase on repaint. |
 | Existing screen regression | A [separate native run](GlobalHudEvidence/battle-layout/runtime-battle-layout-smoke.txt) covers 16 macOS sizes, five boss layouts, combat detail inspection, build/settings return, hidden enemy/hazard filtering and 120 identical training ticks. |
+| Skill icons and reopened runs | The 2026-09-17 rerun refreshed the [runtime result](GlobalHudEvidence/runtime.txt) and the [build record](GlobalHudEvidence/build-skill-icons.txt). The smoke now checks the shared component's kind, clipping mask and border sprite on every passive and active HUD slot. The existing check that copies a live rift and ticks both for a hundred steps, then requires the run and the hero to match exactly, passes. Five [restore fidelity tests](../../Assets/HELLSCRIPT/Tests/Editor/RestoreFidelityTests.cs) were added in Edit Mode. |
 | Map and restart | The [map runtime check](GlobalHudEvidence/visibility/runtime.txt) verifies a nonblocking overlay, pointer interaction with settings, both languages and orientations. A [separate process restart](GlobalHudEvidence/visibility/restart.txt) preserves explored terrain and the disabled-map preference. |
 
 These landscape, expanded and portrait captures use the same production component. Reference captures inject sample HUD values; the live potion-use image reads actual gameplay state.
