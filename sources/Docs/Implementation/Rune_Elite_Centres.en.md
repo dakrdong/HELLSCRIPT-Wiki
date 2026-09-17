@@ -33,7 +33,7 @@ Each one is a whole effect rather than an amount. It therefore carries no value 
 | Elite | Effect |
 |---|---|
 | Combat Heat | +1 Offensive per direct hit. +2% direct damage per stack, up to 5. Gained at most every 0.5s. All stacks end 4s after the last direct hit |
-| Exposed Weakness | A direct critical leaves the target taking +10% direct damage from you for 4s. Reapplying refreshes only the duration |
+| Exposed Weakness | A direct critical leaves the target taking +20% direct damage from you for 8s. Reapplying refreshes only the duration. Raised from the mock-up's 4s and +10% after [measurement](Rune_Elite_Balance.en.md) |
 | Chain Collapse | A direct-hit kill bursts for 2.5m: 30% of attack basis D, in the element of the killing hit. 1s internal cooldown |
 | Skill Inheritance | +1 level to equipped active skills. Combined with per-skill level runes, up to +5 |
 | Cycle Core | Every 50 resource actually spent cuts 1s from the equipped active with the longest remaining cooldown. 3s internal cooldown |

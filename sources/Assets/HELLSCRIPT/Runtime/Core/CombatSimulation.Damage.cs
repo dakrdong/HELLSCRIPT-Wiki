@@ -80,6 +80,9 @@ namespace Hellscript
             }
             return damage;
         }
+        // Exposed weakness is limited by how much of the fight it covers, not by its size: a direct
+        // critical on one target for a few seconds. Both knobs are named here because tuning moves them.
+        const float ExposedSeconds=8,ExposedBonus=.2f;
         // The elite centre runes, resolved from the hit that just landed. A hit never grants the stack or
         // the exposure it was itself multiplied by, and the burst is raised outside Hit so that a kill it
         // causes cannot start another one.
@@ -93,7 +96,7 @@ namespace Hellscript
                 {ItemEffects.eliteHeatStacks++;ItemEffects.eliteHeatGained=State.time;EffectEvent("ELITE_HEAT","STACK",instance,root,enemy.id,ItemEffects.eliteHeatStacks);}
             }
             if(critical&&Stats.specials.Contains("ELITE_WEAKNESS"))
-            {enemy.eliteExposed=State.time+4;EffectEvent("ELITE_WEAKNESS","EXPOSED",instance,root,enemy.id,4);}
+            {enemy.eliteExposed=State.time+ExposedSeconds;EffectEvent("ELITE_WEAKNESS","EXPOSED",instance,root,enemy.id,ExposedSeconds);}
             if(enemy.dead&&Stats.specials.Contains("ELITE_CASCADE")&&ItemEffects.eliteCascadeCooldown<=.00001f)EliteCascade(enemy,element,snap,root,instance);
         }
         void EliteCascade(EnemyState killed,int element,DamageSnapshot snap,int root,int instance)
