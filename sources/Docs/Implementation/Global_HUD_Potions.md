@@ -63,18 +63,6 @@ HP와 자원은 최대값의 35%를 회복하며 대기는 각각 20초다. 질�
 
 사냥 칙령이 차단된 사유는 균열 한 판에 한 번만 기록한다. 그 기록 여부를 시뮬레이션의 임시 필드에 두고 있어서, 진행 중인 균열을 이어서 열면 같은 줄을 다시 남겼다. 통합 사냥 칙령 이후 새 계정의 영웅이 칙령을 쓰게 되면서 드러났다. 기록 여부를 `RunState.edictBlockLogged`로 옮겨 균열과 함께 저장하고, 다시 여는 경우에는 유지한다. 문서나 장착이 실제로 바뀌면 종전대로 다시 기록한다.
 
-## HUD 문구 칸의 줄 높이 보정
-
-전역 관찰 HUD에서 보호막 수치를 담는 칸은 논리 좌표로 12만큼의 높이를 가지는데, 글자 크기는 슬롯 설명과 같은 16을 사용하고 있었다. 이 글꼴은 한 줄을 그리는 데에 글자 크기의 약 0.9배에 해당하는 높이를 요구하기 때문에, 칸의 높이가 한 줄을 담기에 부족했다. 실행 스모크 검사는 화면을 저장할 때마다 모든 문구에 대해 `preferredHeight`가 칸의 높이보다 큰지 확인한다. 비어 있는 문구도 한 줄만큼의 높이를 보고하므로, 보호막이 없는 상태에서도 잘림으로 집계되었다. 그래서 검사 대상 기능과 무관하게 모든 화면이 실패로 기록되었다.
-
-칸을 넓히는 방법과 글자를 줄이는 방법 중에서 글자를 줄이는 쪽을 선택했다. [HP 화면 설계](../Design/GlobalHUD/HELLSCRIPT_GlobalHUD_02_HP.md)가 보호막을 HP 바 위의 얇은 청록색 선과 수치로 규정하고 있고, 배치 계산도 상태 목록의 세로 위치를 HP 바 위쪽으로 16만큼만 띄우도록 잡고 있어서, 칸의 높이 12는 의도된 값으로 판단했다. 보호막 전용 글자 크기 `shieldFont`를 칸의 높이와 같은 12로 두었다.
-
-작은 화면에서는 글자 크기가 최소 크기에서 더 줄어들지 않기 때문에, 축소 배율만 따라가는 칸은 여전히 한 줄을 담지 못한다. HP 바가 이미 `12/scale+2`로 최소 픽셀 높이를 확보하고 있어서 같은 방식을 문구 칸에도 적용했다. 배치 계산에 `Row(높이, 최소 글자 크기)`를 두어 보호막 칸과 레벨 표지, 경험치 문구가 각자의 최소 글자 크기를 픽셀 단위로 담도록 했다. 상태 목록의 세로 위치는 이제 보호막 칸의 윗변을 따라가므로 칸이 커져도 겹치지 않는다. 1600×900 기준 화면에서는 세 칸의 값이 종전과 같으며, 배율이 0.63 아래로 내려가는 작은 창에서만 칸이 커진다.
-
-레벨 표지와 경험치 문구도 같은 결함을 가지고 있었다. 360×640처럼 배율이 최소값인 0.4까지 내려가는 창에서 레벨 표지의 칸은 9.6픽셀인데, 최소 글자 크기 12가 한 줄에 11픽셀을 요구했다. 이 두 곳은 전투 배치 스모크가 HUD를 문구 검사 대상에서 제외하고 있어서 드러나지 않았다. 제외 조건은 HUD를 처음 도입한 `d8d5405`에서 함께 들어왔다. 이제 세 칸이 모두 한 줄을 담으므로 제외 조건을 지우고 HUD를 다시 검사 대상에 포함했다.
-
-HUD 미리보기 표본에는 보호막 420을 넣었다. 표본이 보호막을 0으로 두고 있었기 때문에 전역 HUD 스모크가 화면 20장을 저장하면서도 보호막 문구를 한 번도 그리지 않았고, 그래서 이 결함이 HUD 검사에 걸리지 않았다.
-
 ## 검증과 실행 증거
 
 [검증 집계](GlobalHudEvidence/verification.json)에 원본 검사와 재검사 결과를 구분해 보관했다.
@@ -88,7 +76,6 @@ HUD 미리보기 표본에는 보호막 420을 넣었다. 표본이 보호막을
 | 실제 물약·반복 사냥 | HP·자원·보조가 함께 발동하면 실제 재고가 각각 1개 줄고 독립된 대기시간과 버프가 시작됐다. 일시정지 중 값이 유지됐고 HUD 표시 유무에 따른 100틱 결과가 같았다. HP 부족 대기, 저장된 출정 지침 변경, 성소의 350금화 구매, 다시 그리기 시 중복 구매 방지를 확인했다. |
 | 기존 화면 회귀 | [별도 실행 검사](GlobalHudEvidence/battle-layout/runtime-battle-layout-smoke.txt)에서 macOS 창 16종, 보스 화면 5종, 전투 상태 조회, 행동 편집·설정 복귀, 보이지 않는 적·위험 표시의 차단, 훈련 120틱의 동일 결과를 확인했다. |
 | 스킬 표시·재개 기록 | 2026-09-17 재실행에서 [실행 결과](GlobalHudEvidence/runtime.txt)와 [빌드 기록](GlobalHudEvidence/build-skill-icons.txt)을 갱신했다. 스모크가 HUD의 패시브·액티브 슬롯마다 공통 부품의 종류와 마스크·테두리 스프라이트를 확인한다. 진행 중인 균열을 복사해 100틱을 함께 진행했을 때 균열과 영웅이 완전히 같은지 비교하는 기존 검사가 통과한다. Edit Mode에는 [복원 충실도 검사](../../Assets/HELLSCRIPT/Tests/Editor/RestoreFidelityTests.cs) 5개를 더했다. |
-| HUD 문구 칸 | 2026-09-17에 [빌드](GlobalHudEvidence/TextRows/build.txt) 후 [룬 스모크](GlobalHudEvidence/TextRows/rune-initial-result.txt)와 [재시작 단계](GlobalHudEvidence/TextRows/rune-resume-result.txt), [전역 HUD 스모크](GlobalHudEvidence/TextRows/global-hud-runtime.txt), [전투 배치 스모크](GlobalHudEvidence/TextRows/battle-layout-checks.txt)를 실행했고 네 실행 모두 0으로 끝났다. 잘림 보고는 없었다. 전투 배치 스모크는 HUD를 포함한 상태로 창 16종을 확인했으며 여기에 360×640과 640×360이 들어간다. [전체 Edit Mode 2,718개가 모두 통과](GlobalHudEvidence/TextRows/editmode.xml)했다. Edit Mode에는 실제 글꼴로 다섯 칸을 재는 검사 1개를 더했다. 이 검사는 글자 크기를 16으로 되돌리거나 최소 픽셀 높이를 없애면 각각 실패한다. |
 | 지도·재시작 | [지도 실행 검사](GlobalHudEvidence/visibility/runtime.txt)에서 오버레이의 입력 비차단, 설정 포인터 조작, 한영·가로세로 전환을 확인했다. [별도 프로세스 재시작](GlobalHudEvidence/visibility/restart.txt) 뒤 탐색 기록과 지도 끄기 설정도 유지됐다. |
 
 가로 기준과 상태 확장, 세로 기준은 같은 실행 컴포넌트를 사용한 아래 캡처로 확인한다. HUD 수치 예시를 주입한 기준 캡처와 실제 물약 사용 화면을 구분했다.
@@ -102,12 +89,6 @@ HUD 미리보기 표본에는 보호막 420을 넣었다. 표본이 보호막을
 추가 증거: [스크롤 중간](GlobalHudEvidence/03-landscape-middle.png), [스크롤 끝](GlobalHudEvidence/04-landscape-end.png), [영문·150% 작은 창](GlobalHudEvidence/12-small-english-large.png), [상태 설명](GlobalHudEvidence/14-effect-inspection.png), [실제 물약 사용](GlobalHudEvidence/17-real-potion-use.png), [출정 대기](GlobalHudEvidence/19-departure-wait.png), [성소 구매](GlobalHudEvidence/20-sanctuary-supplies.png).
 
 원래 전체 검사에서 보상 관련 9개 실패를 발견했고, 변경 전 `33ed9b1`에서도 같은 9개가 실패함을 확인했다. 현재의 ‘재화 드롭 후 수집’ 규칙에 맞게 검사에서 보유 재화와 미수집 보상을 합산하고, 보석 수집에 따른 해금을 허용했다. 아이템의 실제 드롭 ID와 고정 난수 결과를 각각 검사하며 중복 보상·중복 기록 방지는 유지한다. 게임의 보상 수치나 지급 경로는 바꾸지 않았다. 오래된 테스트 지형의 통로 참조가 범위를 넘는 경우에는 시야 이관에서 건너뛰도록 방어 처리를 추가했다.
-
-![최소 배율 360×640: 보호막 수치와 레벨 표지가 잘리지 않는다](GlobalHudEvidence/TextRows/hud-small-minimum.png)
-
-![가로 기준: HP 바 위의 얇은 선과 보호막 수치](GlobalHudEvidence/TextRows/hud-landscape-shield.png)
-
-추가 증거: [최소 배율 세로 화면](GlobalHudEvidence/TextRows/hud-small-portrait.png), [룬 보드 화면](GlobalHudEvidence/TextRows/rune-board-ko.png), [전투 배치 세로 화면](GlobalHudEvidence/TextRows/battle-720x1280.png), [전역 HUD 배치 기록](GlobalHudEvidence/TextRows/global-hud-geometry.txt).
 
 ## 남은 출시 검증
 

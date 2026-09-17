@@ -3271,7 +3271,23 @@ G{0} · {1}칸	G{0} · {1} hexes
 시작점 연결과 같은 색 조각의 한 칸 간격을 확인하세요.	Check the start connection and one-hex gaps between same-color pieces.
 룬 색이 달라 통로로만 사용합니다.	The color differs. This hex only forms a path.
 아직 룬이 덮고 있지 않습니다.	No rune covers this hex yet.
-{0} +{1}{2}\n요구: G{3} · 수치 등급 {4} · 영역 개방 G{5}\n{6}	{0} +{1}{2}\nRequired: G{3} · Value tier {4} · Region unlock G{5}\n{6}
+{0}\n요구: G{1} · 수치 등급 {2} · 영역 개방 G{3}\n{4}	{0}\nRequired: G{1} · Value tier {2} · Region unlock G{3}\n{4}
+{0} 영역은 계정 최고 실클리어 {1}단계에서 열립니다.	The {0} region opens at account-best rift tier {1}.
+이 영역의 중앙 칸 정보를 확인할 수 없습니다.	This region has no centre hex to read.
+중앙 시작칸 미리보기 · 요구 {0}\n{1}	Centre start hex preview · Requires {0}\n{1}
+전투 열기	Combat Heat
+급소 노출	Exposed Weakness
+연쇄 붕괴	Chain Collapse
+기술 전승	Skill Inheritance
+순환의 핵	Cycle Core
+불굴의 결계	Unyielding Ward
+직접 적중마다 공세 +1: 중첩당 직접 피해 +2%, 최대 5중첩. 획득 간격 0.5초. 마지막 직접 적중 후 4초에 모두 해제. 지속 피해·가시·추가 발동으로 중첩을 얻지 않습니다.	Every direct hit adds 1 Offensive: +2% direct damage per stack, up to 5. Gained at most every 0.5s. All stacks end 4s after the last direct hit. Damage over time, thorns and extra procs grant no stacks.
+직접 치명타로 적중한 대상에게 4초간 자신이 주는 직접 피해 +10%. 같은 대상 재적용은 시간만 갱신. 일반 취약 표식과 별도의 신규 효과이며 이 효과는 취약 상태를 부여하지 않습니다.	A direct critical hit leaves the target taking +10% direct damage from you for 4s. Reapplying to the same target only refreshes the duration. This is a new effect, separate from the ordinary vulnerable mark, and it never applies vulnerable.
+직접 타격으로 적 처치 시 2.5m 폭발: 공격 기준 D의 30%, 처치 타격과 같은 속성. 내부 재사용 1초. 폭발은 치명타·압도·행운의 적중·처치 재귀 발동을 만들지 않습니다.	Killing an enemy with a direct hit bursts for 2.5m: 30% of attack basis D, in the element of the killing hit. 1s internal cooldown. The burst rolls no critical, overpower or lucky hit, and a kill of its own starts no further burst.
+이미 해금했고 장착 중인 액티브 스킬 레벨 +1. 스킬별 개별 레벨 룬과 합산해 최대 +5. 기존 레벨 피해 계수만 강화하며 스킬·장착 슬롯을 해금하지 않습니다.	+1 level to active skills that are already unlocked and equipped. Combined with per-skill level runes, up to +5. It only raises the damage coefficient of existing levels; it unlocks no skill and no slot.
+실제로 소비한 자원 50마다 남은 재사용 시간이 가장 긴 장착 액티브의 시간을 1초 감소. 내부 재사용 3초. 감소 대상이 없거나 내부 재사용 중이면 해당 50 소비는 소모하고 보류하지 않습니다. 무료 발동·회복량은 누적하지 않습니다.	Every 50 resource actually spent cuts 1s from the equipped active with the longest remaining cooldown. 3s internal cooldown. With nothing to cut, or during the internal cooldown, that 50 is still spent and never banked. Free casts and regeneration add nothing.
+생명력이 35% 위에서 35% 이하로 내려갈 때 최대 생명력의 20% 보호막을 4초 생성. 내부 재사용 30초. 장착·편집 저장으로 즉시 발동하지 않으며 발동 대기시간을 초기화하지 않습니다.	Crossing from above 35% life to 35% or below raises a barrier worth 20% of maximum life for 4s. 30s internal cooldown. Equipping or saving an edit neither fires it nor resets its wait.
+미리 보기만 합니다. 칸이 열리거나 능력이 켜지지 않습니다.	A preview only. No hex opens and no ability turns on.
 모든 무기의 룬 배치를 저장했습니다.	Saved rune layouts for all weapons.
 저장하지 않은 전체 룬 배치를 버리고 닫을까요?	Discard all unsaved rune layouts and close?
 룬 배치 프리셋	Rune Layout Presets

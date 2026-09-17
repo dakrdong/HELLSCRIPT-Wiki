@@ -11,9 +11,9 @@ A folding group of content shortcuts sits beneath the settings gear in the upper
 |---|---|---|
 | 1 | Character (bag and equipped items) | No screen yet. Pressing shows only the notice `This content is still in preparation.` |
 | 2 | Hunt Edict (skill management and edict editing) | Opens the existing Hunt Edict entry point `ShowEdictEditor`. |
-| 3 | Rune Board (rune block placement and management) | No screen yet. Pressing shows only the notice. |
+| 3 | Rune Board (rune block placement and management) | Opens the existing Rune Growth screen `ShowRunes` since 2026-09-17. Before that it showed only the notice. |
 
-The Character and Rune Board screens are out of scope. Only the buttons and their art are present; no functionality is wired.
+The Character and Rune Board screens were out of scope for this work: only the buttons and their art were present. The Rune Board was wired to its existing screen on 2026-09-17; Character is still a placeholder.
 
 ## Screens
 
@@ -75,7 +75,7 @@ Results are in the table below and the [evidence folder](PlayContentDockEvidence
 | macOS development build | Unity 6000.6.0f1 batch build, [0 errors](PlayContentDockEvidence/build.txt). The player was kept in a working folder outside the repository. |
 | Runtime smoke `-hellscriptContentDockSmoke` | [Passed](PlayContentDockEvidence/runtime.txt) with an isolated save directory; exit code 0, `HELLSCRIPT_CONTENT_DOCK_SMOKE_OK`. |
 
-The smoke checked the following. In a 1600×900 window it entered the town, found the dock folded, and confirmed that a real UI raycast at the hidden `캐릭터` button's centre does not hit it. 0.11 s after pressing the down arrow the mask height was between 0 and the full travel with 0° rotation, proving slide precedes turn. After settling, rotation was 180° and all three buttons were hit by raycasts. `캐릭터` produced the notice; `룬 보드` produced only the notice with no screen change. 0.11 s after pressing the up arrow the rotation was intermediate while the mask was still full height, proving turn precedes slide when folding. After folding and reopening, `사냥 칙령` opened the Hunt Edict window, and closing it returned to the town. Entering a rift with the dock open started the battle dock open, and the minimap's right edge did not pass the dock's left edge. Hunt Edict also opened and closed from battle, the dock folded, and it reopened in a 900×1600 portrait window.
+The smoke checked the following. In a 1600×900 window it entered the town, found the dock folded, and confirmed that a real UI raycast at the hidden `캐릭터` button's centre does not hit it. 0.11 s after pressing the down arrow the mask height was between 0 and the full travel with 0° rotation, proving slide precedes turn. After settling, rotation was 180° and all three buttons were hit by raycasts. `캐릭터` produced the notice. Since the 2026-09-17 wiring, `룬 보드` opens the [Rune Growth screen](PlayContentDockEvidence/10-plaza-rune-board.png) and closing it returns to the town with the dock still open, which the smoke now checks. 0.11 s after pressing the up arrow the rotation was intermediate while the mask was still full height, proving turn precedes slide when folding. After folding and reopening, `사냥 칙령` opened the Hunt Edict window, and closing it returned to the town. Entering a rift with the dock open started the battle dock open, and the minimap's right edge did not pass the dock's left edge. Hunt Edict also opened and closed from battle, the dock folded, and it reopened in a 900×1600 portrait window.
 
 | Capture | Content |
 |---|---|
@@ -101,4 +101,4 @@ The fix declares `[RequireComponent(typeof(CanvasRenderer))]` on all six custom 
 
 ## Remaining
 
-When the Character and Rune Board screens exist, replace the two notices with real entry points. In a very small landscape town window (around 360 high) the bottom of the open dock can overlap the NPC interaction card on the right; folding clears it, and the card can be moved if needed.
+When the Character screen exists, replace its notice with a real entry point. The Rune Board was replaced on 2026-09-17. In a very small landscape town window (around 360 high) the bottom of the open dock can overlap the NPC interaction card on the right; folding clears it, and the card can be moved if needed.
