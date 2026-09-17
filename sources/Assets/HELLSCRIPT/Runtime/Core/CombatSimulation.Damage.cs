@@ -83,6 +83,9 @@ namespace Hellscript
         // Exposed weakness is limited by how much of the fight it covers, not by its size: a direct
         // critical on one target for a few seconds. Both knobs are named here because tuning moves them.
         const float ExposedSeconds=8,ExposedBonus=.2f;
+        // The burst is a share of the attack basis, and it carries the hero's damage bonuses the way every
+        // other derived hit here does. Without them it was a flat number that a build could not improve.
+        const float CascadeFraction=.3f;
         // The elite centre runes, resolved from the hit that just landed. A hit never grants the stack or
         // the exposure it was itself multiplied by, and the burst is raised outside Hit so that a kill it
         // causes cannot start another one.
@@ -106,7 +109,7 @@ namespace Hellscript
             // ApplyOutgoing rather than Hit: the burst rolls no critical, no overpower and no lucky hit,
             // and cannot reach this hook again from a kill of its own.
             foreach(var other in State.enemies.Where(e=>e!=killed&&!e.dead&&Vector2.Distance(e.position,killed.position)<=2.5f).OrderBy(e=>e.id).ToArray())
-                ApplyOutgoing(other,snap.damage*.3f,0,1,1,false,element,snap,"ELITE_CASCADE",root,instance,DamageKind.Legendary,killed.id);
+                ApplyOutgoing(other,snap.damage*CascadeFraction,AttackBonus(other,element,snap,0,DamageKind.Legendary),1,1,false,element,snap,"ELITE_CASCADE",root,instance,DamageKind.Legendary,killed.id);
         }
         void Hurt(float damage,int element=0,string caster="ENEMY",string definition="ENEMY_ATTACK",int root=0,int instance=0,DamageKind kind=DamageKind.Direct)
         {

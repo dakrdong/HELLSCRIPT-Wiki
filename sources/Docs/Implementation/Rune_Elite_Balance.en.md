@@ -34,7 +34,7 @@ A first attempt at tier 20 with 1 seed was unusable. Clear times of 286–300 s 
 **The noise floor is about ±0.8%**: that is the archetype-to-archetype SD of the conditions that do nothing. Read against it,
 
 - Combat Heat and Skill Inheritance are clear signal: positive in all six archetypes, and Inheritance is very even at SD 0.72.
-- Chain Collapse has the higher mean but an SD of 2.63. It is +7.16% on Ranger Variant 2 and −0.17% on Warrior Variant 1. It depends heavily on the class.
+- Chain Collapse has the higher mean but an SD of 2.63. It is +7.16% on Ranger Variant 2 and −0.17% on Warrior Variant 1. It depends heavily on the class. **Its row here is also a pre-fix value.**
 - Exposed Weakness sits on the noise floor. **Its row in this table is the pre-buff value**; see the re-measurement below.
 - Cycle Core and Unyielding Ward do not change damage at tier 10.
 
@@ -72,7 +72,7 @@ On that conversion,
 | Elite | Worth about |
 |---|---|
 | Combat Heat | 6 skill-level hexes |
-| Chain Collapse | 4 hexes |
+| Chain Collapse | about 4 hexes before and after, but 0 to 14 depending on the class |
 | Skill Inheritance | 4 hexes (by construction) |
 | Exposed Weakness | about 1 hex before the buff, about 2 after |
 | Cycle Core, Unyielding Ward | 0 for damage, large for survival |
@@ -105,12 +105,43 @@ Magnitude does scale close to linearly, but reaching the +2% band would need +40
 
 Even after the change Exposed Weakness is the lowest of the six on damage. It is, however, now above the ±0.8% noise floor and positive in five archetypes of six.
 
+## Fixing Chain Collapse, and re-measuring
+
+Chain Collapse's mean was inside the band (+2.12%) but its spread across classes was 7.33pp: +7.16% on Ranger Variant 2 against −0.17% on Warrior Variant 1.
+
+Burst frequency was the first suspect, and the data said no. Bursts per run at tier 25 were highest on Warrior Variant 2 at 56.0 and **lowest** on Ranger Variant 2 at 34.2. The build that burst most gained least. What each burst was worth was the problem, not how often it happened.
+
+So `additive=0` was fixed. The burst was going out bare, at a flat `D × 0.3`, receiving none of the hero's damage bonuses. It was the only derived hit in this repository that threw them away: the `LA04` spread uses its source hit's `attackBeforeDefense`, and `LW02` goes through `Hit` and receives everything. That is a consistency problem before it is a balance one.
+
+The fix is one line calling the existing `AttackBonus`, which computes the elemental, conditional and vulnerable bonuses per target. No critical, overpower or lucky hit is rolled, so the specification's prohibitions still hold.
+
+| Archetype | Before | After |
+|---|---|---|
+| Mage Variant 1 | +0.76% | **+2.01%** |
+| Mage Variant 2 | +0.99% | **+2.39%** |
+| Ranger Variant 1 | +4.23% | +2.87% |
+| Ranger Variant 2 | +7.16% | +7.14% |
+| Warrior Variant 1 | −0.17% | **−0.34%** |
+| Warrior Variant 2 | +0.27% | **+0.28%** |
+| Pooled DPS | +2.12% | **+2.34%** |
+| Mean / SD | +2.21 / 2.63 | +2.39 / 2.41 |
+| Spread | 7.33pp | 7.48pp |
+| Deaths (tier 25) | 9 → 7 | 9 → 7 |
+
+**This was half right.** Both Mage builds came up from below the noise floor (+0.76, +0.99) into the band (+2.01, +2.39). **The Warriors did not move at all.** The earlier claim that `additive=0` explained the spread holds for the Mages and fails for the Warriors.
+
+The reason Warriors gain nothing is not a number. Both Warrior builds already blanket an area — whirlwind, and leap into crush — and they carry the highest baseline DPS of the six at 115.0 and 133.6. The 2.5m around a kill is ground the whirlwind is already covering, so the burst re-hits enemies that were dying anyway. Ranger Variant 2, whose traps and poison leave the area empty, gets +7% from the same burst.
+
+**The spread comes from the ability's shape, not its numbers.** An on-kill area burst has nothing to give a build that is already an area build. That can be read as filling a gap by design, but whether one board hex may swing 7pp across classes is a decision.
+
+Ranger Variant 1 falling from +4.23% to +2.87% is noise rather than a regression. Chain Collapse has the largest archetype SD of the six at 2.4–2.6: a stronger burst changes the order enemies die in, and the run diverges from there.
+
 ## Judgement
 
-No balance number other than Exposed Weakness was changed. What follows is what the measurement suggests.
+No balance number other than Exposed Weakness and Chain Collapse was changed. What follows is what the measurement suggests.
 
-1. **Exposed Weakness was raised and is still the lowest.** See the section above. The next step is a decision about target coverage, not a number.
-2. **Chain Collapse depends far too much on the class**: +7% on Ranger, 0% on Warrior. Part of the cause is that the burst goes out with `additive=0`, so it receives no elemental, conditional or vulnerable bonus at all. That is the literal reading of the specification's "30% of attack basis D", and whether that sentence should stand is a decision.
+1. **Exposed Weakness was raised and is still the lowest.** The next step is a decision about target coverage, not a number.
+2. **Chain Collapse's consistency was fixed and that put the Mages in the band, but the Warrior spread remains.** What is left is the ability's shape, so the next step there is also a decision rather than a number.
 3. **Cycle Core's name and behaviour disagree.** It reads as a resource ability and measures as a survival one, because of the rule that picks the longest remaining cooldown. If damage was the intended role, the target rule has to change.
 4. **The other three — Heat, Inheritance and the Ward — earn their place at the current numbers,** and none of them is excessive.
 
@@ -120,7 +151,7 @@ No balance number other than Exposed Weakness was changed. What follows is what 
 - A 0–8% win rate at tier 25 means the tier is beyond these builds. It is a stress fixture, not a balance target.
 - This is not a claim about natural growth, real player input, mobile hardware or released balance. It is a macOS batch simulation.
 - The raw reports are kept as [tier 10, 8 seeds](RuneEliteBalanceEvidence/tier10-8seeds.json) and [tier 25, 4 seeds](RuneEliteBalanceEvidence/tier25-4seeds.json).
-- The re-measurement after the Exposed Weakness change is kept separately as [tier 10](RuneEliteBalanceEvidence/weakness-buffed-tier10-8seeds.json) and [tier 25](RuneEliteBalanceEvidence/weakness-buffed-tier25-4seeds.json). The other five elites do not appear in those two reports.
+- The re-measurement after the Exposed Weakness change is kept as [tier 10](RuneEliteBalanceEvidence/weakness-buffed-tier10-8seeds.json) and [tier 25](RuneEliteBalanceEvidence/weakness-buffed-tier25-4seeds.json), and after the Chain Collapse fix as [tier 10](RuneEliteBalanceEvidence/cascade-fixed-tier10-8seeds.json) and [tier 25](RuneEliteBalanceEvidence/cascade-fixed-tier25-4seeds.json). Each of those reports holds only the baseline and the one elite it names.
 
 ## Repeating it
 
