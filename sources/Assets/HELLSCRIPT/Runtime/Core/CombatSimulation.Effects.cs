@@ -44,12 +44,6 @@ namespace Hellscript
             ItemEffects.lm03Cooldown=Mathf.Max(0,ItemEffects.lm03Cooldown-dt);
             ItemEffects.lw04Cooldown=Mathf.Max(0,ItemEffects.lw04Cooldown-dt);
             ItemEffects.lc03Cooldown=Mathf.Max(0,ItemEffects.lc03Cooldown-dt);
-            ItemEffects.eliteCascadeCooldown=Mathf.Max(0,ItemEffects.eliteCascadeCooldown-dt);
-            ItemEffects.eliteResolveCooldown=Mathf.Max(0,ItemEffects.eliteResolveCooldown-dt);
-            ItemEffects.eliteCycleCooldown=Mathf.Max(0,ItemEffects.eliteCycleCooldown-dt);
-            // Heat leaves all at once four seconds after the last direct hit, never one stack at a time.
-            if(ItemEffects.eliteHeatStacks>0&&State.time-ItemEffects.eliteHeatLast>=4)
-            {EffectEvent("ELITE_HEAT","EXPIRED",value:ItemEffects.eliteHeatStacks);ItemEffects.eliteHeatStacks=0;}
             foreach(var shield in State.shields.ToArray())
             {
                 shield.remaining=Mathf.Max(0,shield.remaining-dt);

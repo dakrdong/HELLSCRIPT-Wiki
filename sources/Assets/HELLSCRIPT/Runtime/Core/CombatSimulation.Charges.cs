@@ -42,26 +42,6 @@ namespace Hellscript
             {reducedNext=false;ItemEffects.lc02Charge=0;EffectEvent("LC02","CONSUMED",root:action.id,value:paid);}
             if(ItemEffects.ap05Ready)
             {ItemEffects.ap05Ready=false;ItemEffects.ap05Movement=0;ItemEffects.ap05Cooldown=4;EffectEvent("AP05","CONSUMED",root:action.id,value:paid);}
-            EliteCycle(paid,action);
-        }
-        // Every 50 resource actually paid trims the longest remaining cooldown. A 50 that lands during the
-        // internal cooldown, or with nothing to trim, is still spent: it is never banked for later.
-        void EliteCycle(float paid,HeroActionState action)
-        {
-            if(!Stats.specials.Contains("ELITE_CYCLE"))return;
-            ItemEffects.eliteCycleSpent+=paid;
-            while(ItemEffects.eliteCycleSpent>=50)
-            {
-                ItemEffects.eliteCycleSpent-=50;
-                if(ItemEffects.eliteCycleCooldown>.00001f)continue;
-                int longest=-1;
-                for(int i=0;i<State.cooldowns.Length;i++)
-                    if(State.build.activeSkills.Contains(i)&&State.cooldowns[i]>0&&(longest<0||State.cooldowns[i]>State.cooldowns[longest]))longest=i;
-                if(longest<0)continue;
-                State.cooldowns[longest]=Mathf.Max(0,State.cooldowns[longest]-1);
-                ItemEffects.eliteCycleCooldown=3;
-                EffectEvent("ELITE_CYCLE","COOLDOWN",root:action.id,target:longest,value:1);
-            }
         }
         void ReserveCastCharges(HeroActionState a)
         {

@@ -200,8 +200,6 @@ namespace Hellscript
         public Vector2 lastSeenPosition;
         public Vector2 position, aim;
         public float health, maxHealth, attack, speed, cooldown, windup, stun, slow, poison, poisonDamage, mark, exposure;
-        // Time until the elite exposure ends. Separate from mark: it never grants the vulnerable status.
-        public float eliteExposed;
         public bool boss, add, dead,pendingDeath,goblin;
         public bool runeRewardRolled;
         public int pattern;
@@ -246,12 +244,6 @@ namespace Hellscript
         public float lc02Charge,ap05Cooldown,ap05Movement;
         public bool ap05Ready;
         public float lm03Cooldown,lw04Cooldown,lc03Cooldown;
-        // Elite centre runes. Saved with the run, so editing the board mid-combat neither fires nor rearms one.
-        // The two "last seen" times start far behind so that the first hit of a run already qualifies.
-        // A save written before these existed keeps these initialisers rather than a zero.
-        public float eliteHeatGained=-1000,eliteHeatLast=-1000;
-        public float eliteCascadeCooldown,eliteResolveCooldown,eliteCycleSpent,eliteCycleCooldown;
-        public int eliteHeatStacks;
         public float lastLog=-10,lastPull=-1000,lastHeal=-1000,leapDefense,moveBuff,elementBuff,lastElementTime,procCooldown;
         public int lastElement=-1,basicCount,lastBasic=-1;
         public int[] elementHitTicks={-1000000,-1000000,-1000000,-1000000,-1000000,-1000000};
