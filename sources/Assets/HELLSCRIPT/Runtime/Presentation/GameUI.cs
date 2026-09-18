@@ -29,11 +29,16 @@ namespace Hellscript
         bool portalBag;
         const float TouchHeight=80;
         readonly Color ink=new Color(.035f,.047f,.065f,.98f),panel=new Color(.065f,.081f,.104f,.96f),gold=new Color(.83f,.66f,.39f),pale=new Color(.91f,.9f,.84f),muted=new Color(.53f,.6f,.65f);
+        // Shared with the tests that measure real line heights against the rectangles the layout hands out.
+        public static Font CreateFont()
+        {
+            var chosen=Font.CreateDynamicFontFromOSFont(new[]{"Apple SD Gothic Neo","Malgun Gothic","Noto Sans CJK KR","Noto Sans CJK","Droid Sans Fallback","Arial"},32);
+            return chosen!=null?chosen:Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        }
         public void Initialize(GameController controller)
         {
             game=controller;
-            font=Font.CreateDynamicFontFromOSFont(new[]{"Apple SD Gothic Neo","Malgun Gothic","Noto Sans CJK KR","Noto Sans CJK","Droid Sans Fallback","Arial"},32);
-            if(font==null)font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            font=CreateFont();
             background=Resources.Load<Texture2D>("Art/Sanctuary");atlas=Resources.Load<Texture2D>("Art/SkillAtlas");
             equipmentAtlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");
             var canvasObject=new GameObject("HELLSCRIPT UI",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));

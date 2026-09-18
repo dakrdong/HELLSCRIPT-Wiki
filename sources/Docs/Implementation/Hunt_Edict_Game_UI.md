@@ -163,6 +163,70 @@
 - 승인 HTML과의 논리 좌표 2px 비교는 하지 않았다. 헤더 높이 34, 가로형 탭 열 128, 8개 탭의 무겹침·안전 영역 유지 같은 수치 조건만 검사했다.
 - 황금 고블린의 등장 확률은 120개 시드 표본으로 4~24회 범위를 확인했다. 정확한 10% 수렴은 표본을 늘려야 한다.
 
+## 레거시 편집기를 쓰는 스모크의 진입 경로
+
+`ShowEdictEditor`가 통합 창을 열도록 바뀌면서, 이전 편집기 화면을 조작하던 런타임 스모크 14개가 실행 첫 단계에서 멈췄다. 이 스모크들은 `스킬 설정` 탭을 눌러 스킬별 옵션으로 이동한다. 통합 창의 스킬 탭 이름은 `스킬`이고 옵션도 다른 구조로 그리기 때문에 버튼을 찾지 못했고, 실행은 `Sequence contains no matching element` 예외로 끝났다.
+
+f4306c1은 기존 편집기와 공유 화면을 `ShowLegacyEdictEditor`, `ShowLegacyEdictShare`로 남겨 참조가 끊어지지 않게 한다고 적었다. 끊어진 참조가 바로 이 경로였다. `ShowLegacyEdictEditor`를 공개로 바꾸고 해당 스모크들이 이 메서드로 직접 들어가게 했다. 레거시 화면 안의 연결도 레거시끼리 닫았다. 편집기의 `공유` 버튼과 공유 화면의 `항목 편집`, 그리고 언어를 바꿀 때의 다시 그리기가 통합 창으로 빠져나가고 있었다.
+
+두 번째 원인도 함께 고쳤다. `HuntEdictStorage.InitializeNewHero`가 새 영웅의 `useEdict`를 켜 두기 때문에, 공유 화면의 전환 버튼은 `✓ 사냥 칙령 v0.2 사용 중`으로 그려진다. `사냥 칙령 v0.2 사용하기`를 바로 누르던 10곳은 켜져 있으면 먼저 끄고 다시 켜도록 바꿨다. 전환 버튼의 양방향을 모두 지나므로 이전보다 넓게 확인한다.
+
+사용자가 여는 화면은 바꾸지 않았다. 마을 메뉴와 비교 화면의 버튼은 그대로 통합 창을 연다.
+
+전체 Edit Mode [2,719개가 모두 통과](HuntEdictGameUiEvidence/LegacyEditorSmokes/editmode.xml)했고, 스모크 16개가 모든 단계에서 0으로 끝났다. [실행 요약](HuntEdictGameUiEvidence/LegacyEditorSmokes/runtime.txt)에 단계 순서와 각 스모크의 결과 문장을 남겼다. 재개 단계는 앞 단계가 남긴 검사점 파일을 읽으므로 순서대로 실행해야 하고, 새로 시작하는 단계는 저장 폴더를 따로 써야 한다.
+
+### 대상 스모크와 언어 스모크
+
+두 스모크는 뒤이어 따로 고쳤다. 원인이 서로 달랐고 편집기 진입과도 무관했다.
+
+대상 스모크에서 실패한 것은 제품이 아니라 검사 배치였다. 진단용 빌드로 확인한 결과 전역 기준은 제대로 동작했다. 첫 선택에서 `SelectTarget id=120`으로 HP가 높은 적을 골랐다. 그 뒤 회오리 규칙이 대상을 다시 정하면서 가까운 적으로 바뀌었는데, 회오리는 2.5m 안의 적만 후보로 삼기 때문이다. HP가 높은 적을 2.8m에 두었으니 회오리가 닿지 않는 자리였고, 회오리는 자기가 때릴 수 있는 유일한 적을 고른 것이다. 새 계정의 영웅이 사냥 칙령의 컴파일된 규칙으로 싸우게 되면서 드러난 차이다. 검사가 쓰려던 `Utility(RuleAction.Basic)` 한 줄은 더 이상 실행 경로가 아니다. HP가 높은 적을 2m로 옮겨 두 적이 모두 회오리의 사거리 안에 들어오게 했다. 여전히 HP가 높은 쪽이 더 멀리 있으므로, 검사가 주장하는 "더 가까운 저HP 적 대신 고HP 적을 고른다"는 그대로 성립한다.
+
+언어 스모크는 네 군데가 어긋나 있었다. 게임이 제목 화면으로 시작하고 마을이 성소 광장 뒤로 옮겨져서 마을 메뉴를 직접 열어야 한다. 설정 창에 탭이 생기고 조작 요소가 한국어 문구 대신 `settings-language-en` 같은 고정 ID를 갖게 되어, 언어 탭을 고른 뒤 ID로 찾아야 한다. 광장에 들어가는 것 자체가 계정을 기록하므로, "언어 선택이 계정을 바꾸지 않는다"를 확인하는 기준 시점은 마을 메뉴를 연 다음으로 옮겼다. 그리고 사냥 칙령으로 싸우는 영웅의 규칙은 조건 없이 항상 실행되므로, 조건 묶음 화면에 닿으려면 규칙 한 줄을 조건 검사로 바꿔야 한다.
+
+이렇게 고치고 나니 스모크가 실제로 찾으려던 결함 하나를 잡았다. 균열 관리자 화면의 부제가 영어에서 26픽셀 칸에 33픽셀을 요구했다. 같은 뜻을 유지하면서 짧은 영어 문장으로 바꿨다. 다른 화면에는 잘린 문구가 없었다.
+
+### 남은 두 스모크를 통합 창으로
+
+`RuntimeEdictSmoke`와 `RuntimeTrainingEquipmentSmoke`는 마을과 비교 화면의 실제 버튼을 눌러 편집기에 들어간다. 그 버튼은 통합 창을 열어야 하므로 레거시 화면으로 되돌릴 수 없고, 두 스모크를 통합 창으로 옮겼다.
+
+`RuntimeEdictSmoke`는 통합 창 자체의 스모크가 다루지 않는 계약을 맡는다. 창이 저장된 원본을 그대로 읽어 여는 것, 편집이 초안만 움직이고 저장된 영웅과 계정을 건드리지 않는 것, 저장이 파일과 영웅에 함께 닿고 새로 연 `GameStore`가 같은 값을 읽는 것, 변경이 남은 채 나가려 하면 묻고 되돌리기가 저장본을 복원하는 것, 손상된 프리셋 코드를 미리보기 대신 거절하는 것, 그리고 별도 프로세스가 이 모두를 다시 읽는 것이다. 여덟 탭과 드래그, 프리셋 공유처럼 `RuntimeHuntEdictSmoke`가 이미 확인하는 내용은 겹치지 않게 뺐다.
+
+`RuntimeTrainingEquipmentSmoke`는 B 초안을 통합 창으로 편집한다. 종전에는 기본 공격의 `자동 사용`을 꺼서 B를 A와 구분했는데 통합 창에는 그 조작 수단이 없다. 대신 B의 장착 액티브를 모두 해제해 구분하고, 마지막 단정도 "A는 해당 스킬을 사용했고 B는 한 번도 사용하지 않았다"로 바꿨다.
+
+옮기는 과정에서 비교 결과 화면의 결함 하나를 고쳤다. `실제 칙령 편집안으로 불러오기`가 통합 창을 연 다음 레거시 화면을 그 아래에 그리고 있었다. 두 화면이 동시에 떠서 어느 쪽도 조작할 수 없었다. 이제 기록된 원본을 창의 초안으로 넣는다.
+
+### 빠져 있던 조작 두 가지를 통합 창에 넣기
+
+스킬별 `자동 사용`과 사냥 칙령 사용 여부 전환은 저장 원본에는 남아 있었지만 통합 창에 조작 수단이 없었다. 둘 다 창에 넣었다.
+
+`자동 사용`은 스킬 사냥 칙령 화면에서 각 스킬의 첫 줄이다. 옵션 목록이 1번을 건너뛰고 2번부터 그리고 있었는데, 그 이유를 적은 주석도 함께 있었다. 접힘 머리의 개수 표시도 하나 늘었다.
+
+화면만 고쳐서는 값이 바뀌지 않았다. `HuntEdictLoadout.Canonical`이 모든 스킬의 1번 옵션을 `ON`으로 되돌리고 있었고, 주석에 "새 편집기에는 자동 사용 조작이 없으므로 투영은 항상 켠다"고 적혀 있었다. 초안이 값을 담을 수 없으니 화면에서 껐다가도 즉시 되살아났다. 이 줄을 지웠다. 저장·프리셋·공유 코드를 모두 지나도 값이 유지되는지 확인하는 Edit Mode 검사를 더했고, 그 줄을 되살리면 실패하는 것도 확인했다.
+
+사용 여부 전환은 `프리셋·공유` 탭 맨 위의 `자동 판단 사용` 자리에 넣었다. 이 값은 초안이 아니라 영웅의 상태라서 저장을 기다리지 않고 바로 적용하며, 진행 중인 전투가 있으면 판단을 다시 읽는다. 훈련·비교 편집처럼 실제 캐릭터가 아닌 초안을 다루는 동안에는 프리셋과 같은 조건으로 비활성화한다. 문구는 레거시 화면이 쓰던 것을 그대로 써서 두 언어가 이미 갖춰져 있다.
+
+조작이 돌아왔으므로 훈련 장비 스모크의 B 구분도 원래대로 되돌렸다. 액티브를 모두 해제하는 대신 기본 공격의 자동 사용을 끄고, 마지막 단정도 "A는 기본 공격을 사용했고 B는 한 번도 사용하지 않았다"로 되돌아갔다.
+
+![스킬 사냥 칙령 화면의 자동 사용 줄](HuntEdictGameUiEvidence/LegacyEditorSmokes/window-automatic-use.png)
+
+![프리셋·공유 탭 맨 위의 사냥 칙령 사용 전환](HuntEdictGameUiEvidence/LegacyEditorSmokes/window-edict-switch.png)
+
+추가 증거: [빌드 기록](HuntEdictGameUiEvidence/LegacyEditorSmokes/build.txt), [A 훈련 화면](HuntEdictGameUiEvidence/LegacyEditorSmokes/comparison-a-battle.png).
+
+기존 프리셋에 대한 영향도 적어 둔다. 종전에는 저장된 프리셋을 읽을 때마다 1번 옵션이 `ON`으로 덮였다. 이제 덮지 않으므로, HED2 시절 원본에서 꺼 둔 값을 담고 있던 프리셋은 그 값을 그대로 적용한다. 사용자가 고른 값을 되살리는 방향이지만 기존 프리셋의 동작이 달라질 수 있다.
+
+### 비교 스모크
+
+`-hellscriptComparisonSmoke`도 이어서 고쳤다. 어긋난 곳이 네 군데였다.
+
+전투 제목 `TRAINING / A · Lv.1`은 `BattleHeading`이 만든 적이 없다. 이 함수는 첫 커밋부터 `TRAINING / A`를 만들고 레벨은 부제에 들어간다. 제목과 부제를 따로 읽도록 바꿨다. 기준 거리 7과 `7m → ...` 미리보기 문구도 실행 중인 값에서 읽도록 바꿔, 기본 빌드가 달라져도 검사의 뜻이 유지된다.
+
+전투 화면에서 행동 편집으로 가는 길도 달라졌다. 이제 관찰 메뉴의 `행동 수정`을 거치며, 비교 중에는 그 입구가 고정 조건 화면으로 간다.
+
+가장 큰 차이는 B 편집 화면이다. 사냥 칙령을 쓰는 영웅에게는 칙령 변형이 나오므로 거리 조절 막대가 없다. 이 스모크는 행동 빌드 비교와 그 막대를 다루므로 영웅을 명시적으로 이전 방식의 규칙 엔진에 둔다. 칙령 쪽 비교 경로는 훈련 장비 스모크가 맡는다. Edit Mode 검사가 `ContentTestAccounts.Legacy`로 같은 구분을 하는 것과 같은 방식이다.
+
+마지막으로 영웅의 첫 물약 지급은 첫 성소 방문에 일어나는데, 이 스모크의 흐름이 중간에 마을로 돌아가면서 그 시점이 측정 구간 안에 들어왔다. 진행도 기준선을 잡기 전에 성소를 한 번 방문하도록 해서, 이후의 차이는 실제 차이만 남게 했다.
+
 ## English
 
 This work implements the approved portrait and landscape Hunt Edict mockups as native Unity uGUI, including all behavior, skill progression, save migration, preset sharing, golden goblin content, and development-build validation. All six stages below are complete on the macOS development build and the batch-mode Edit Mode suite; no phone or tablet was used. Performed and skipped verification is listed in [Verification](#verification).
@@ -221,3 +285,67 @@ Before this work the branch tip failed 139 tests, which f4306c1 recorded as in-p
 Two `ItemQualityTests` cases broke because the goblin's own reward stream needed a second `Drop` overload and the tests find that method by name; the overload was renamed `DropFrom`. The archetype balance sweep exceeded its 180-second timeout: it already ran at 171 seconds on main, and after f4306c1 it was measuring edict-driven behaviour instead of the recommended legacy builds named in its own report, because a new account now has `useEdict` on. The sweep's hero is explicitly reset to legacy, so it measures what it claims again and finishes in 172 seconds. Its margin was always eight seconds, so a concurrent Unity job on the same machine can still push it over.
 
 Not performed: no phone or tablet was used, so portrait and landscape were only checked at desktop window sizes; Play Mode tests were not run, with the runtime smoke driving the real buttons and drag handlers instead; the approved HTML was not compared at two-logical-pixel tolerance, only the numeric frame conditions (34-unit header, 128-unit landscape tab column, eight non-overlapping tabs inside the safe area); and the golden goblin's appearance rate was sampled over 120 seeds (4–24 spawns), not converged to exactly ten percent.
+
+### Smokes that drive the legacy editor
+
+When `ShowEdictEditor` began opening the unified window, fourteen runtime smokes that drive the earlier editor page stopped at their first step. They click the `스킬 설정` tab to reach the per-skill options; the unified window names that tab `스킬` and draws the options differently, so the button was never found and the run ended in `Sequence contains no matching element`.
+
+`f4306c1` recorded that the old editor and share pages stay compiled as `ShowLegacyEdictEditor` and `ShowLegacyEdictShare` so nothing referencing them breaks. This path was the reference that broke. `ShowLegacyEdictEditor` is now public and those smokes enter through it directly, and the legacy pages' own links stay within the legacy pair: the editor's `공유` button, the share page's `항목 편집` button and its redraw on a language change were all leaving for the unified window.
+
+A second cause is fixed with it. `HuntEdictStorage.InitializeNewHero` leaves `useEdict` on for a new hero, so the share page draws `✓ 사냥 칙령 v0.2 사용 중`. The ten sites that pressed `사냥 칙령 v0.2 사용하기` directly now turn the switch off first when it is on, which also means both directions of the switch are exercised.
+
+Nothing the player opens changed: the town menu and comparison buttons still open the unified window.
+
+The full Edit Mode suite [passes 2,719 of 2,719](HuntEdictGameUiEvidence/LegacyEditorSmokes/editmode.xml) and sixteen smokes exit zero on every stage; the [run summary](HuntEdictGameUiEvidence/LegacyEditorSmokes/runtime.txt) lists the stage order and each smoke's result line. Resume stages read the checkpoint file their predecessor wrote, so they must run in order, and a stage that starts a new chain needs its own save directory.
+
+#### Target and Language
+
+Both were repaired in a second pass, for causes unrelated to the editor entry and to each other.
+
+The target smoke failed on its fixture, not on the product. A diagnostic build showed the global basis working: the first selection was `SelectTarget id=120`, the high-HP enemy. The whirlwind rule then retargeted, because it only considers enemies within its 2.5m reach and the high-HP enemy sat at 2.8m, so it took the one enemy it could actually hit. The difference appeared once a new hero began fighting through the edict's compiled rules, which leaves the single `Utility(RuleAction.Basic)` rule the fixture wrote off the execution path. The high-HP enemy now sits at 2m so both are reachable and the basis decides between them; it is still the farther of the two, so the smoke's claim of choosing it over a nearer low-HP enemy stands.
+
+The language smoke had drifted in four places. The game boots to the title screen and the town now sits behind the sanctuary plaza, so the town menu is opened explicitly. The settings dialog gained tabs and stable control ids such as `settings-language-en` in place of Korean labels, so the language tab is selected and the controls are found by id. Entering the plaza is gameplay and writes to the account, so the snapshot that proves a language choice leaves the account alone is taken after that navigation. And a hero fighting through the edict starts from rules that always run, so one row is switched to condition groups to reach the pickers.
+
+With those fixed the smoke caught the defect it exists for: the rift keeper subtitle needed 33px in its 26px band in English. That translation was shortened while keeping its meaning. No other screen had a clipped label.
+
+#### The last two smokes on the unified window
+
+`RuntimeEdictSmoke` and `RuntimeTrainingEquipmentSmoke` reach the editor through shipped town and comparison buttons, which must open the unified window, so both were moved onto it.
+
+`RuntimeEdictSmoke` now holds the contract the window's own smoke does not: the window opens on the saved document, editing moves only the draft and leaves the saved hero and account alone, a save reaches the file and the hero together and a freshly opened `GameStore` reads the same values, leaving with changes asks and reverting restores the saved document, a damaged preset code is refused rather than previewed, and a separate process reads all of it back. The eight tabs, dragging and preset sharing that `RuntimeHuntEdictSmoke` already covers were left out rather than duplicated.
+
+`RuntimeTrainingEquipmentSmoke` edits the B draft through the window. It used to separate B from A by turning the basic attack's automatic use off, and the window has no such control, so B now unequips its actives instead and the closing assertion reads "A used the skill and B never did".
+
+Moving it surfaced a defect in the comparison result screen, now fixed: `실제 칙령 편집안으로 불러오기` opened the window and then drew the legacy page underneath it, leaving both on screen and neither reachable. The recorded document is loaded as the window's draft instead.
+
+#### The two missing controls
+
+A skill's automatic use and the hunt edict on/off switch lived in the saved document with no control in the unified window. Both are now in it.
+
+Automatic use is the first row under each skill on the hunt edict page. The option list started at the second option, with a comment explaining why; the disclosure count grew by one to match.
+
+Drawing the row was not enough. `HuntEdictLoadout.Canonical` forced every skill's first option back to `ON`, its comment saying the new editor had no automatic-use control, so the draft could never hold the value and anything switched off came straight back. That line is gone, and an Edit Mode test pins the value through the loadout, a preset and a share code; restoring the line makes it fail.
+
+The switch sits at the top of the presets tab under `자동 판단 사용`. It is hero state rather than a draft value, so it applies immediately instead of waiting for a save, and a running fight re-reads its decisions. While a draft belongs to a training or comparison hero rather than the real one it is disabled on the same condition as the presets. Its wording is the legacy screen's, so both languages already exist.
+
+With the control back, the training equipment smoke returned to its original separation: B turns the basic attack's automatic use off instead of unequipping every active, and the closing assertion is again "A used the basic attack and B never did".
+
+![The automatic use row on the hunt edict page](HuntEdictGameUiEvidence/LegacyEditorSmokes/window-automatic-use.png)
+
+![The hunt edict switch at the top of the presets tab](HuntEdictGameUiEvidence/LegacyEditorSmokes/window-edict-switch.png)
+
+More evidence: [the build record](HuntEdictGameUiEvidence/LegacyEditorSmokes/build.txt), [the A training screen](HuntEdictGameUiEvidence/LegacyEditorSmokes/comparison-a-battle.png).
+
+One effect on existing presets: a stored preset used to have its first option overwritten with `ON` every time it was read. It no longer is, so a preset carrying an off value from a HED2-era document now applies it. That restores a choice the player made, but it can change how an existing preset behaves.
+
+#### The comparison smoke
+
+`-hellscriptComparisonSmoke` followed, with four drifted expectations.
+
+The battle title `TRAINING / A · Lv.1` was never produced: `BattleHeading` has composed `TRAINING / A` since the first commit and the level lives in the subtitle, so the header and the subtitle are read separately now. The baseline distance of 7 and the `7m → …` preview string are read from the run rather than assumed, so a different default build no longer breaks the check's meaning.
+
+The battle screen also reaches the build editor through the observation menu's `행동 수정`, and during a comparison that entry goes to the fixed-conditions screen.
+
+The largest difference is the B editor: a hero on the hunt edict gets the edict variant, which has no distance slider. This smoke covers the behaviour-build comparison and that slider, so its hero is put on the pre-edict rule engine explicitly, the same split the Edit Mode tests make through `ContentTestAccounts.Legacy`; the edict comparison path belongs to the training equipment smoke.
+
+Finally the hero's one-time potion grant lands on the first sanctuary visit, which this flow triggers partway through, so the visit is made before the progression baseline is taken and a later difference is a real one.

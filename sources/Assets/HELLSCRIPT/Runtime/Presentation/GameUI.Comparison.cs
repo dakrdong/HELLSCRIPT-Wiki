@@ -192,7 +192,15 @@ namespace Hellscript
             {
                 ShowPresetNameDialog(slot,chosen,name=>game.SaveComparisonPreset(record,useB,slot,name),()=>ShowComparisonChoice(record,useB));
             });}
-            if(record.useEdict)BigButton(content,"실제 칙령 편집안으로 불러오기",()=>{game.ReturnTown();ShowEdictEditor();edictDraft=(useB?record.b:record.a).edict.Copy();RenderEdictEditor();},true);
+            // The recorded document is loaded as the window's unsaved draft; drawing the legacy page under
+            // the window left both on screen and neither reachable.
+            if(record.useEdict)BigButton(content,"실제 칙령 편집안으로 불러오기",()=>
+            {
+                game.ReturnTown();ShowEdictEditor();
+                if(huntEdictWindow==null)return;
+                var loadout=HuntEdictLoadout.FromHero(game.Store.Data.Hero);loadout.edict=(useB?record.b:record.a).edict.Copy();
+                huntEdictWindow.Session.ReplaceDraft(loadout);huntEdictWindow.Repaint();
+            },true);
             else BigButton(content,"실제 행동 편집안으로 불러오기",()=>{game.ReturnTown();ShowBuild();LoadEditing(chosen);},true);
             FooterButton(0,1,"비교 결과로",()=>ShowComparisonRecord(record));
         }

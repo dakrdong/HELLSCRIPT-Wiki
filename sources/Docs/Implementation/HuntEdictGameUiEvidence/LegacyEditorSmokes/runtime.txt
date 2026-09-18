@@ -1,0 +1,85 @@
+Ran on 2026-09-17 against the macOS development build in build.txt.
+Every stage below exited 0. Resume stages are listed in the order their checkpoints chain;
+a chain starter needs its own save directory, which is why an out-of-order run reports
+"Use a fresh test account." or a missing expected-*.json rather than a real failure.
+
+-hellscriptShieldEdictSmoke                      checkpoint, -hellscriptShieldEdictResume, -hellscriptShieldEdictAbsorbResume
+-hellscriptBlizzardSmoke                         checkpoint, -hellscriptBlizzardResume
+-hellscriptChainEdictSmoke                       checkpoint, -hellscriptChainEdictResume
+-hellscriptFireballSmoke                         checkpoint, -hellscriptFireballResume
+-hellscriptNovaEdictSmoke                        checkpoint, -hellscriptNovaEdictResume, -hellscriptNovaChainResume
+-hellscriptMageBasicSmoke                        checkpoint, -hellscriptMageBasicResume, -hellscriptMageBoltResume
+-hellscriptSlamEdictSmoke                        checkpoint, -hellscriptSlamEdictResume, -hellscriptSlamBossResume
+-hellscriptTeleportEdictSmoke                    checkpoint, -hellscriptTeleportEdictResume
+-hellscriptWarriorSupportSmoke                   checkpoint, wall, shout, basic, charge
+-hellscriptWarriorAttackSmoke                    checkpoint, channel, prepare, flight, landing
+-hellscriptRangerSmoke -hellscriptRangerStage    checkpoint, trap, shadow, volley, pierce
+                                                 retreat, landing, walking, mark (own account)
+                                                 retreat-trap (own account)
+                                                 basic, basic-hit, basic-charge (own account)
+
+-hellscriptTargetSmoke                           checkpoint, -hellscriptTargetResume
+-hellscriptLanguageSmoke                         checkpoint, -hellscriptLanguageResume
+
+Target and Language were repaired in a second pass. The target policy was never wrong: a probe build
+showed the global basis selecting the high-HP enemy ("SelectTarget id=120"), after which the whirlwind
+rule legitimately retargeted the only enemy inside its 2.5m reach. The fixture placed the high-HP enemy
+at 2.8m, outside that reach, so it now sits at 2m and the basis decides between two reachable enemies.
+Language needed the town menu opened (the game boots to the title and the town is behind the plaza),
+the settings dialog driven by its stable ids with the language tab selected, the account snapshot taken
+after that navigation, and one rule row switched to condition groups. It then caught a real defect: the
+rift keeper subtitle needed 33px in its 26px band in English, so that translation was shortened.
+
+-hellscriptEdictSmoke                            checkpoint, -hellscriptEdictResume
+-hellscriptTrainingEquipmentSmoke                checkpoint, -hellscriptTrainingEquipmentResume
+
+Those last two were moved onto the unified window in a third pass, since both reach the editor through
+shipped buttons. RuntimeEdictSmoke now covers what the window's own smoke does not: the window opens on
+the saved document, editing moves only the draft, a save reaches the file and the hero together and a
+fresh GameStore read agrees, leaving dirty asks and reverting restores, a damaged preset code is refused,
+and a separate process reads it all back. RuntimeTrainingEquipmentSmoke drives the B draft through the
+window and separates B from A by turning the basic attack's automatic use off, which is what it
+measured before the control went missing. Loading a recorded document back into the editor was broken and is fixed: it
+opened the window and drew the legacy page underneath, leaving both on screen and neither reachable.
+
+Both missing controls were then added to the window. A skill's automatic use is the first row under each
+skill on the hunt edict page, and the hunt edict on/off switch opens the presets tab. The option was not
+only absent from the UI: HuntEdictLoadout.Canonical forced every skill's option 1 back to ON, with a
+comment saying the editor had no control for it, so the draft could never hold the value. That line is
+gone and an Edit Mode test pins the value through the loadout, a preset and a share code.
+
+-hellscriptComparisonSmoke                       checkpoint, -hellscriptComparisonResume
+
+The comparison smoke was repaired in a fourth pass. Four expectations had drifted. The battle title
+"TRAINING / A · Lv.1" was never produced by BattleHeading, which has composed "TRAINING / A" since the
+first commit while the level lives in the subtitle, so the header and the subtitle are now read
+separately. The baseline distance of 7 and the "7m -> ..." preview string were read from the run instead
+of assumed. The battle screen reaches the build editor through the observation menu, and a comparison
+run sends that entry to the fixed-conditions screen. And the B editor is now the edict variant for any
+hero on the hunt edict, so this smoke, which covers the behaviour-build comparison and its distance
+slider, puts its hero on the pre-edict rule engine explicitly; the edict comparison path is covered by
+the training equipment smoke. The hero's one-time potion grant also lands on the first sanctuary visit,
+which the flow triggers partway through, so that visit is made before the progression baseline is taken.
+
+Result line reported by each smoke:
+
+blizzard                     PASS: M02 five options edited through UI, draft isolation and file save; GROUP waits at one target, KEEP preserves two fields, REPLACE starts a paid FOLLOW cast, FIXED/OFF edits preserve that preparation; Korean/English and 140% layouts. Controlled native fixtures, not mobile-device or balance validation.
+chain                        PASS: M03 four settings edited with real UI, isolated draft and persisted source; SAVE_CHARGE waits without charge, a short-lived fixture charge is reserved at preparation start, edits and OFF preserve the paid cast; Korean/English and 140% layouts. Controlled native fixtures, not mobile-device or balance validation.
+comparison                   PASS: fresh Lv.1 owned mage, real 60-second A and B at 1x with the same baseline, mid-run build mutation blocked at controller, readonly comparison conditions and pause restoration, B slider preview/cancel/start, visible A/B battle titles and fixed B-edit footer, result-action jump with save/A/B buttons fully inside viewport, full statistics and changed conditions, explicit report save and slot 2 save, real-build preview/cancel/apply, actual process restart preserving report/preset/build/progress, no suspended training rift.
+edict                        PASS: window opens from the town menu on the saved document, editing moves only the draft, save reaches file and hero together and a fresh store read agrees, leaving dirty asks and revert restores, a skill's automatic use is editable and saved, the hunt edict switch applies and persists at once, a damaged preset code is refused.
+fireball                     PASS: M01 options edited through UI, draft isolation, file save, enabled switch, GROUP blocks one target and casts at three, OFF keeps the launched projectile; Korean/English and 140% layouts. Controlled native fixtures, not mobile-device or balance validation.
+language-resume              PASS: a separate native process restored the account and the saved English language, drew the town with no Korean left on it, and kept every control findable by its source name.
+language                     PASS: the default is the source language and writes no file; the settings window lists each language under its own name; choosing English redraws the open window and the page behind it with no Korean left on the town, behavior, rule editor, rule conditions, condition picker, rule picker, growth, attributes both folded and expanded, gear, rift keeper, hunt edict editor on all three tabs, battle and
+magebasic                    PASS: A second independent restart preserved the original in-flight bolt. Its third real hit granted one LC02 charge and exactly five resource with MP05 equipped. No active was forced. A later UI-selected GROUP Nova consumed that actual discount once, then its cold hit followed real basic lightning to activate MP06. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+nova                         PASS: A second independent restart retained Nova-generated charges, the paid chain and its reserved bonus. Actual lightning activated MP06 after cold without duplicate payment. Actual UI then enabled GROUP/APPROACH; walking spent nothing and Nova paid once after entering 3m, with no forced follow-up. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+ranger                       PASS: All 30 Ranger options traversed every choice through actual UI, saved a changed choice and passed fresh file reads. Actual AP04/LA02/LA04 gear preserved a committed trap after automatic OFF. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+shield-checkpoint            PASS: Actual UI edited ENGAGE, stacking and encounter options; drafts and file save agree. M05 began despite a blocked legacy row, spent zero resource and retained preparation after EMERGENCY/AFTER/BOSS/OFF edits. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+shield-stage2                PASS: Independent restart released the original committed shield once with actual willpower/MP04 scaling. A real hazard absorbed 10% of creation HP without LM03 reward; its partial absorption and opening record were saved for another process. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+shield-stage3                PASS: Second independent restart retained partial absorption and original creation HP. Real hazard damage reached 15%, paying LM03 exactly 20 resource once with a 4-second internal cooldown. OFF and re-enabled ENGAGE did not repeat the same encounter opening. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+slam                         PASS: A second independent restart released one boss hit and completed the actual 85-to-100 meter into three-second stagger once. No direct boss stun, duplicate effects or resource/discount consumption occurred. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+target                       PASS: actual editor saved HIGH_HP, Korean/English target settings, selected high-HP target over nearer low-HP target, persisted partial chase; rendering left state unchanged.
+teleport                     PASS: Actual UI edited DISTANCE, arrival preference and NO_DAMAGE; drafts stayed isolated and saved source matched a fresh file read. Distance adjustment prepared a paid destination that survived option edits and OFF. Korean/English and 140% layouts passed. Controlled native fixtures; not mobile-device or natural-play balance validation.
+training-equipment-restart   PASS: independent process restored equipment, edict, rune snapshot and B preset; real inventory and progression preserved.
+training-equipment           PASS: real A/B runtime, owned warehouse selection, cancellation, active edict draft, raycast-resolved UI clicks, KO/EN, 140%, resize, explicit record and B preset, real-edict preview discard. Controlled fixture; no physical mobile touch or natural progression claim.
+warriorattack                PASS: The channel restart retained its paid ticks and real walking progress. The actual SW4 charge ended the spin only after leap eligibility, then the ordinary decision selected a free leap. Preparation was saved before charge reservation. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
+warriorsupport               PASS: An independent restart released one real basic hit. Actual UI changed target preference to low HP; UNTIL_DISCOUNT retained the original target for the second real hit, then saved recovery and the two-hit count. Controlled native UI/combat fixtures; not mobile-device or natural-play balance validation.
