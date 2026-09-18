@@ -136,13 +136,36 @@ The reason Warriors gain nothing is not a number. Both Warrior builds already bl
 
 Ranger Variant 1 falling from +4.23% to +2.87% is noise rather than a regression. Chain Collapse has the largest archetype SD of the six at 2.4–2.6: a stronger burst changes the order enemies die in, and the run diverges from there.
 
+## Cycle Core — changed, then reverted
+
+Cycle Core was not broken; it behaved unlike its name. At tier 25 it cuts deaths from 9 to 3, second only to the Unyielding Ward, while the name reads as a resource ability.
+
+The earlier judgement blamed the target rule. "The equipped active with the longest remaining cooldown" is usually the escape or defensive skill, so that is what returns sooner. The rule was therefore changed to **the shortest remaining** instead: pulling in the skill that is closest to returning turns into another cast soonest, and the skill used most often is the damage rotation.
+
+The measurement rejected that.
+
+| | Before | With "shortest" |
+|---|---|---|
+| DPS (tier 10, 48 runs) | −0.38% | **+0.01%** |
+| Archetype mean / SD | −0.24 / 0.76 | +0.26 / **1.66** |
+| Deaths (tier 25, 24 runs) | 9 → **3** | 9 → **6** |
+| Trims per run (tier 25) | 31.2 | 31.0 |
+
+**It gained no damage at all and gave up half the survival.** Pooled DPS moved from −0.38% to +0.01%, which is zero either way. The SD doubled from 0.76 to 1.66 and Mage Variant 2 fell to −2.97%, while deaths doubled from 3 to 6. Trims per run were 31.2 against 31.0, so the trigger was unchanged and only the target moved.
+
+So it was **reverted.** The code still picks the longest.
+
+What this measured is that the first judgement was wrong. Cycle Core does not behave as survival because of the target rule. The value of shaving a cooldown is simply worth more defensively than offensively for these builds, whichever skill it is spent on.
+
+What is left is the name rather than a number. Treating it as a survival ability and wording it that way matches what it does. Renaming an ability is a design decision, so that was not done.
+
 ## Judgement
 
 No balance number other than Exposed Weakness and Chain Collapse was changed. What follows is what the measurement suggests.
 
 1. **Exposed Weakness was raised and is still the lowest.** The next step is a decision about target coverage, not a number.
 2. **Chain Collapse's consistency was fixed and that put the Mages in the band, but the Warrior spread remains.** What is left is the ability's shape, so the next step there is also a decision rather than a number.
-3. **Cycle Core's name and behaviour disagree.** It reads as a resource ability and measures as a survival one, because of the rule that picks the longest remaining cooldown. If damage was the intended role, the target rule has to change.
+3. **Cycle Core's name and behaviour disagree, and no number fixes that.** Changing the target rule was tried: damage did not move and survival was lost. See the section above. What is left is to word the ability as what it does.
 4. **The other three — Heat, Inheritance and the Ward — earn their place at the current numbers,** and none of them is excessive.
 
 ## Scope and limits
@@ -151,6 +174,7 @@ No balance number other than Exposed Weakness and Chain Collapse was changed. Wh
 - A 0–8% win rate at tier 25 means the tier is beyond these builds. It is a stress fixture, not a balance target.
 - This is not a claim about natural growth, real player input, mobile hardware or released balance. It is a macOS batch simulation.
 - The raw reports are kept as [tier 10, 8 seeds](RuneEliteBalanceEvidence/tier10-8seeds.json) and [tier 25, 4 seeds](RuneEliteBalanceEvidence/tier25-4seeds.json).
+- The reverted "shortest" rule was measured too, at [tier 10](RuneEliteBalanceEvidence/cycle-soonest-rejected-tier10-8seeds.json) and [tier 25](RuneEliteBalanceEvidence/cycle-soonest-rejected-tier25-4seeds.json). That rule is not in the code.
 - The re-measurement after the Exposed Weakness change is kept as [tier 10](RuneEliteBalanceEvidence/weakness-buffed-tier10-8seeds.json) and [tier 25](RuneEliteBalanceEvidence/weakness-buffed-tier25-4seeds.json), and after the Chain Collapse fix as [tier 10](RuneEliteBalanceEvidence/cascade-fixed-tier10-8seeds.json) and [tier 25](RuneEliteBalanceEvidence/cascade-fixed-tier25-4seeds.json). Each of those reports holds only the baseline and the one elite it names.
 
 ## Repeating it
