@@ -232,6 +232,7 @@ namespace Hellscript
     [Serializable]
     public sealed class DamageSnapshot
     {
+        public float[] runeV13;
         public float[] runeSkillPower;
         public float[] runeBonuses;
         public float damage, bonus, crit, critDamage;
@@ -244,6 +245,7 @@ namespace Hellscript
     [Serializable]
     public sealed class CombatEffectState
     {
+        public float runeMobilityGuardUntil;
         public float lc02Charge,ap05Cooldown,ap05Movement;
         public bool ap05Ready;
         public float lm03Cooldown,lw04Cooldown,lc03Cooldown;

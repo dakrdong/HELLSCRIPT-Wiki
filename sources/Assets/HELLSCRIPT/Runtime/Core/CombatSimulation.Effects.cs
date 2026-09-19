@@ -79,7 +79,7 @@ namespace Hellscript
             var def=PotionCatalog.Get("PH01");
             float before=State.health;State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*def.magnitude*Stats.healing*Stats.potionHealing);
             if(State.health<=before)return false;
-            State.potionCd=State.potions.hpTotal=def.cooldown;
+            State.potionCd=State.potions.hpTotal=RunePotionCooldown(def.cooldown);
             if(State.potions.version>0)ConsumePotion(def);
             if(before<=Stats.hp*.2f&&Stats.specials.Contains("LC03")&&ItemEffects.lc03Cooldown<=.00001f)
             {AddShield("LC03",Stats.hp*.25f,3,0);ItemEffects.lc03Cooldown=20;}
@@ -95,6 +95,7 @@ namespace Hellscript
                 {enemy.bossControl.credited.Add(key);AddBossControl(enemy,duration*10,definition,root);}
                 return;
             }
+            if(!enemy.boss&&(kind==StatusKind.Stun||kind==StatusKind.Freeze||kind==StatusKind.Root||kind==StatusKind.Slow))duration*=1+Stats.Rune(RuneBonus.ControlOutgoing)/100;
             if(kind==StatusKind.Mark)foreach(var other in State.enemies)
             {other.mark=0;other.statuses.RemoveAll(s=>s.kind==StatusKind.Mark&&s.casterId==State.heroId&&(other!=enemy||s.rootCastId!=root));}
             var status=enemy.statuses.Find(s=>s.kind==kind&&s.definitionId==definition&&s.casterId==State.heroId&&s.rootCastId==root&&s.areaId==area);

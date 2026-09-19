@@ -63,7 +63,7 @@ namespace Hellscript
             if(index>=0)
             {
                 var skill=catalog.skills[index];State.lastSkillStarts[index]=State.time;
-                State.cooldowns[index]=SkillEffects.Cooldown(skill,SkillEffects.ActiveRank(Ranks,index))*(1-Mathf.Min(.4f,Stats.cdr+(index==1&&Stats.SetPieces("SWB")>=2?.15f:0)));
+                State.cooldowns[index]=SkillEffects.Cooldown(skill,SkillEffects.ActiveRank(Ranks,index))*(1-Mathf.Min(.4f,Stats.cdr+Stats.runeSkillCooldown[index]/100+(index==1&&Stats.SetPieces("SWB")>=2?.15f:0)));
                 State.cooldownTotals[index]=State.cooldowns[index];
                 if(index!=4&&index!=5&&index!=11&&index!=16)State.lastAttackTime=State.time;
             }
@@ -134,10 +134,13 @@ namespace Hellscript
             var target=State.enemies.Find(e=>e.id==a.targetId&&!e.dead);
             if(target==null||Vector2.Distance(State.position,target.position)>2||!Map.LineClear(State.position,target.position))
             {ActionEvent(a,"ACTION_MISS","기본 공격의 대상이 사라졌거나 실제 사거리·시야를 벗어났습니다.");return;}
-            Hit(target,1,0,true,0,a.snapshot);BasicResource(target.id);Visual?.Invoke(a.origin,target.position,18,1);
+            Hit(target,1,0,true,0,a.snapshot,kind:DamageKind.Basic);BasicResource(target.id,a.id,a.snapshot);Visual?.Invoke(a.origin,target.position,18,1);
         }
-        void BasicResource(int target)
+        void BasicResource(int target,int root=0,DamageSnapshot snapshot=null)
         {
+            float extra=SnapshotRune(snapshot,RuneBonus.BasicResource);
+            if(extra>0&&!State.procHits.Any(p=>p.rootCastId==root&&p.definitionId=="RUNE_BASIC_RESOURCE"))
+            {State.procHits.Add(new ProcReceipt{rootCastId=root,definitionId="RUNE_BASIC_RESOURCE"});State.resource=Mathf.Min(Stats.maxResource,State.resource+extra);}
             State.resource=Mathf.Min(Stats.maxResource,State.resource+new[]{10,6,5}[(int)Hero.heroClass]);
             if(!Stats.specials.Contains("LC02")||reducedNext||procCooldown>.00001f)return;
             if(lastBasic==target)basicCount++;else{lastBasic=target;basicCount=1;}

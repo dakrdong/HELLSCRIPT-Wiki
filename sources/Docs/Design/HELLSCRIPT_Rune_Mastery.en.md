@@ -1,95 +1,70 @@
-# Weapon Rune Mastery and Global Layout Presets
+# Weapon Rune Growth — v13 Implementation Design
 
-Version 1.0 · 2026-09-13 · User requirements confirmed; implementation and verification in progress. [한국어](HELLSCRIPT_Rune_Mastery.md)
+갱신일: 2026-09-20 · Version 13 · [한국어](HELLSCRIPT_Rune_Mastery.md)
 
-## Purpose and ownership
+## Authority and scope
 
-Rune Growth is an account-wide weapon mastery puzzle. Abilities belong to board cells; owned hex pieces connect and activate them. A board belongs to a weapon category, not an equipment instance. Upgrading to a better item of the same category preserves the board.
+The user's [v13 reference package](RuneV13/reference-v13.zip) defines the native Unity board, appearance and placement rules. Its README deployment instructions are reference material, not execution authority. [Provenance](RuneV13/provenance.json) records source hashes.
 
-The user explicitly requires editing at any time, free removal and reuse on another board, no simultaneous reuse of one physical rune, and exactly five presets that each store every weapon board together. There is no permanent binding. Low value tiers contain basic stats; high tiers contain critical, speed and skill enhancements; the highest tier contains skill levels.
+This replaces the previous 427-slot board, 61-slot regions, clear-based unlocking and seven grade-linked colors. It reuses PackBound's 34 polyhex shapes, rotations, editing transactions, shared inventory and HELLSCRIPT's existing drop/fusion economy. The reference's 160 demo runes and XP debug controls are not granted to players.
 
-The category mapping, account sharing, unlock and reward cadence, and values below are implementation choices that complete the requested feature. They remain initial balance rather than proof of long-term tuning. This request supersedes the older exclusion of rune combinations for this feature only.
+Sword, Greatsword, Axe, Bow, Crossbow and Staff each have their own board. Only the equipped weapon type's board contributes to combat, including its common attributes. Runes can be freely retrieved and moved to another weapon. A physical rune ID can occupy only one board at a time.
 
-## Categories and scope
+## Board and progression
 
-| Category | Existing item bases | High-tier stats | Featured skills |
-| --- | --- | --- | --- |
-| Sword | B01 | Attack speed, critical chance, physical damage | W02 Leap |
-| Greatsword | B02 | Close damage, critical damage, damage to controlled targets | W01 Whirlwind |
-| Axe | B03 | Damage to injured targets, critical damage, physical damage | W03 Crushing Strike |
-| Bow | B04, B05 | Attack speed, damage to healthy targets, vulnerable damage | A02 Multishot |
-| Crossbow | B06 | Distant damage, critical chance, vulnerable damage | A01 Piercing Shot |
-| Staff | B07, B08, B09 | Fire, cold, lightning damage, cooldown reduction | M01 Fireball, M02 Blizzard, M03 Chain Lightning |
+Each weapon has 259 fixed slots: seven regions of 37, totaling 1,554 across six weapons. The regions are Core, Assault, Precision, Impact, Technique, Flow and Guard. Coordinates, ability assignments, values, tiers and glyphs are imported directly from the reference.
 
-Only the currently equipped weapon category contributes. Selecting another board in the editor does not equip that weapon. With no weapon, no board contributes. Basic stats on other categories are inactive too. Every hero shares the inventory, boards and five preset slots. A separate mastery XP tree is not introduced.
+Each weapon starts at mastery level 1 with 19 central slots open. The cap is level 41. Advancing from level L requires L × 100 XP and grants six slot points. Opening a slot costs one point and must extend the open component connected to the origin. Complete all 37 slots in the current region before choosing another.
 
-## Geometry and three distinct grades
+Choosing an outer region opens its elite center for free. That center is neither an unlock-path seed nor a rune connection origin. Completing the board costs 234 points, alongside 19 initial slots and six free centers. Level 40 can fully open the board; level 41 leaves six spare points.
 
-Each category has one fixed 427-cell board, using PackBound's seven 61-cell hex regions and original starts. There are 2,562 cells across six boards. Equipment acquisition never rerolls a board.
+The reference did not specify live kill XP. The initial integration grants only the weapon in use 5/25/100 XP for ordinary/elite/boss kills, multiplied by `1 + floor(rift stage / 5)`. Training and summoned enemies do not count. Receipts prevent duplicate grants. Hero XP bonuses do not affect weapon mastery.
 
-Region grades G0–G6 unlock at account-best real rift clears 0, 5, 10, 15, 20, 25 and 30. Any hero's clear counts. Rune grades G0–G6 correspond to Slate, Ivory, Green, Sky, Violet, Gold and Rose. A rune cannot exceed the unlocked grade.
+## Color, ability tier and acquisition grade
 
-A cell's value tier is independent of its region and required rune color. An unlocked G0 region can contain a tier-6 ability. Cells are ordered by distance from the region center, making basic stats predominantly inner nodes and high-tier abilities outer nodes.
+The five ability colors are Attack, Magic, Support, Critical and Skill Bonus. Matching the block and slot color activates the ability; elite slots accept every color. G0–G6 acquisition grade controls drop size and fusion progression, independently of color and board unlocking. A low-grade rune can activate an open high-tier slot when its color matches.
 
-| Value tier | Content | Cells per region |
+Ability tiers follow the source's 1–4 classification: basic attributes and life at lower tiers, critical/attack speed and skill bonuses at higher tiers, and skill levels at the highest tier. Exact values and caps are available in the in-game codex and [Unity catalog](../Implementation/Rune_Mastery_Catalog.json). The three source-disabled attributes—hero control resistance, maximum stamina and stamina regeneration—remain unassigned.
+
+| Weapon | Specialized skill | Additional modifiers |
 | --- | --- | --- |
-| 0–2 | Attack power, strength, dexterity, intelligence, willpower, life, all resistance, armor | 37 |
-| 3–4 | Critical, speed and category-specific stats | 12 |
-| 5 | Featured-skill bonus damage or resource cost reduction | 9 |
-| 6 | Featured-skill level +1 | 3 |
+| Sword | W02 Leap Slam | Damage, level, cooldown, radius |
+| Greatsword | W01 Whirlwind | Damage, level, resource cost, radius |
+| Axe | W03 Crushing Blow | Damage, level, resource cost, radius |
+| Bow | A02 Multishot | Damage, level, resource cost, range |
+| Crossbow | A01 Piercing Shot | Damage, level, resource cost, targets |
+| Staff | M01 Fireball, M02 Blizzard, M03 Chain Lightning | Damage, level, resource cost, and radius/duration/targets respectively |
 
-Every central start grants attack power. A skill without a resource cost, such as Leap, never receives cost-reduction nodes. High-tier skill enhancements are working damage and cost modifiers; no unimplemented projectile, summon or behavior effects are advertised.
+Direct damage excludes damage over time, thorns and triggered effects. Multiple-target damage requires at least three distinct enemies in the same strike of one cast; separate chain hops are not combined into one strike. Area damage augments existing area attacks and ground skills without creating new areas. Outgoing control duration affects ordinary and elite enemies without increasing boss stagger. Ground-bound slow retains existing exit/expiration rules.
 
-## Values and skill levels
+Skill damage runes cap at +60%. Dedicated skill cost reduction caps at 30 percentage points and combined cost reduction at 50%. Already learned skills gain at most five rune levels, each adding 10% to their damage coefficient. Inheritance shares this level cap. Radius, cooldown, duration and target count change only through their corresponding modifiers.
 
-The value multiplier is `1 + tier × 0.25`. Attack power grants `0.4 × multiplier`, life grants `2 × multiplier`, and other basic stats grant `1 × multiplier`. Rune attack power is added to weapon base power before the existing primary-attribute calculation. Derived attributes use the existing character sheet rules.
+## Placement and connectivity
 
-Critical chance, attack speed and cooldown reduction grant `0.12 × multiplier` percentage points. Other high-tier percentage stats grant `0.5 × multiplier` points. Identical contributions add before HELLSCRIPT's existing caps. PackBound combat caps are not imported.
+Leave the shared central origin empty. Each color starts with a block adjacent to it. Separate blocks of the same color cannot share an edge. A valid gap has two common neighboring slots, both open. A straight axial distance-two jump does not connect.
 
-A skill damage node grants +3%, capped at +60% from runes. A skill cost node grants 2 percentage points, capped at 30 points from runes and the existing 50% total cost-reduction cap. A learned skill has base level 1 and may gain up to five rune levels. Each extra level adds 10% to that skill's damage coefficient. Level damage and skill bonus damage add, up to +110%. Levels do not implicitly alter range, control or duration. Unlearned skills remain level 0 and are not unlocked by runes.
+One other block covering both intermediate slots blocks that bridge. Two separate blocks covering one slot each do not. Different colors may touch but never overlap. A mismatched slot may relay connectivity without activating its ability. Outer elite centers still require a connection from the central origin.
 
-## Placement rules
+Placement, rotation and retrieval validate the entire layout. An invalid operation preserves the previous placement. Retrieve outer dependent blocks before their bridge. Six 60-degree rotations are supported; mirroring is not.
 
-The original 34 shapes are retained: 1, 1, 3, 7 and 22 shapes at sizes 1–5. Rotate in 60-degree increments; mirroring is unsupported.
+## Native interface and saving
 
-Each color must cover its own start. Separate same-color pieces cannot share an edge and connect when at least one cell pair is at hex distance two. All pieces must reach the start through the whole layout. Disconnected cycles are invalid and invalid pieces cannot relay connections.
+Landscape uses a left weapon rail, central board and right storage. Portrait stacks the weapon strip, board and storage. The interface imports the supplied weapon illustrations, 328 SVG symbols, colors, continuous block contours and gold borders. Storage has eight columns, five color filters and multiple simultaneous size filters.
 
-Different colors may touch but cannot overlap. Foreign-color starts cannot be covered. A wrong-color ordinary cell may form a path but does not activate its ability. An intervening different-color piece does not sever a link. Locked or nonexistent intermediate cells cannot bridge a link.
+The interface includes mastery/points, region preview, map/minimap, pan/zoom/fit, view/edit mode, active effects, codex, guide, selected-slot details, rotation/retrieval, undo/revert and save. Inventory and dialog contents scroll independently.
 
-Removing a piece returns it to the shared inventory. A valid staged removal permits moving it to another board in the same editing session. Combat uses only the saved global layout. If removing or rotating a bridge disconnects pieces, highlight the invalid layout and block saving or changing boards until repaired or reverted.
+Editing pauses combat. Selecting a board does not equip a weapon. Save changes writes all weapons' unlock paths, layouts and preset changes together. Closing an unsaved draft prompts before discarding. Undo retains the latest 50 changes.
 
-## Screens and editing
+Exactly five presets store every weapon's rune IDs, coordinates and rotations together. They exclude mastery, unlock paths, ownership, equipment and skill settings. Registering, naming and clearing presets remain draft changes until Save changes. Loading validates the whole preset atomically; missing runes or invalid connectivity reject the complete load. Presets never duplicate runes.
 
-Enter Rune Growth from the sanctuary shortcut or Growth screen, including during combat. Six category buttons appear above the selected board. Global presets, fusion and five-page practice are separate destinations.
+Failed disk writes or stale revisions do not change the live account or combat. Saving does not refill life/resource, reset cooldowns or restart actions. Already created attacks retain their captured offensive rune bonuses.
 
-The board supports selection, tap placement, drag movement, 60-degree rotation, removal, zoom, pan and recentering. Show legal candidate coverage, exact landing preview, invalid pieces, required colors and starts. Storage filters by grade and size. Cell details distinguish value tier, required rune grade, region unlock and inactive reasons. The summary distinguishes preview from saved effects. Save, revert and close remain fixed at the bottom. Closing with unsaved layouts requires confirmation.
+## Drops and fusion
 
-Invalid or offscreen drops preserve the old placement. Navigation and cancelled pointers cancel dragging. Korean and English, portrait and landscape, and text sizing follow HELLSCRIPT's UI.
+Ordinary enemies drop one rune at 2%; elites at 20%. Actual rift bosses grant four runes. Training, summoned enemies and sweeps are excluded. Runes enter their dedicated storage automatically and use no equipment bag space. Each color has a 20% chance; shapes are uniform within the selected size.
 
-## Combat and persistence
-
-Opening the editor pauses combat and the rift timer; closing restores the prior pause state. Automatic repeat waits while the editor is open. A successful save refreshes current weapon stats without increasing health or resource. If a maximum decreases, clamp to that maximum. Do not reset cooldowns, actions, projectiles, ground effects or random streams.
-
-Released projectiles and existing ground effects retain their captured rune attack, element, critical, skill and conditional bonuses. New effects capture new values at the existing effect-creation boundary. An unreleased preparing action follows the game's existing release-time calculation. Channelled actions use new values on the next normal paid tick.
-
-Validate copied state before writing. Publish changes to the live account only after the file write succeeds. Failed writes preserve ownership, layouts, presets, combat and the original file. Stale editors cannot overwrite a newer revision.
-
-## Five global presets
-
-Each slot stores real rune IDs, categories, coordinates and rotations across all boards. Empty boards remain empty after replacement. Equipped items, hero selection, skill loadout, Hunt Edict, rune ownership and pending fusion results are not preset contents.
-
-The same rune may be referenced in several alternative presets but appears at most once in the active global layout. Saving uses the committed global layout and confirms overwriting. Loading confirms replacing all boards, then validates every rune and board atomically. Missing consumed runes, ownership, grade, duplicate, region or connection errors reject the entire load. Never substitute similar runes or partially apply a preset. Clearing a slot preserves owned runes and active layouts. Save or revert unsaved edits before preset operations.
-
-## Acquisition and fusion
-
-New accounts and migrated saves receive twelve G0 single-hex runes and one G0 sample at each size 2–5, once. Samples are an explicit exception to monster drop restrictions. Existing owned runes are preserved.
-
-Normal kills have a **2%** chance to grant **one rune**; elite kills have a **20%** chance. Each real rift boss guarantees **four runes**. Successful drops go directly to dedicated rune storage, independently of gear bag capacity and equipment pickup filters. The result screen totals monster and boss runes. Already received runes survive defeat or returning to town.
-
-The following size percentages are **conditional on a successful rune drop**. Current rift tier determines color grade and size probabilities for normal, elite and boss rewards alike. For example, a normal monster at tiers 10–14 has a `2% × 15% = 0.3%` per-kill chance of yielding a three-hex rune.
-
-| Rift tier | Color grade | 1 hex | 2 hexes | 3 hexes | 4 hexes | 5 hexes |
-|---|---|---:|---:|---:|---:|---:|
+| Rift stage | Acquisition grade | 1 cell | 2 cells | 3 cells | 4 cells | 5 cells |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
 | 1–4 | G0 | 100% | 0% | 0% | 0% | 0% |
 | 5–9 | G1 | 80% | 20% | 0% | 0% | 0% |
 | 10–14 | G2 | 45% | 40% | 15% | 0% | 0% |
@@ -98,16 +73,14 @@ The following size percentages are **conditional on a successful rune drop**. Cu
 | 25–29 | G5 | 0% | 5% | 30% | 40% | 25% |
 | 30+ | G6 | 0% | 0% | 20% | 40% | 40% |
 
-Roll drop success, then size, then a uniform shape within that size. Different shape counts never bias the size distribution. G0 drops are exclusively one hex, two hexes form the intermediate step, and G6 drops are exclusively three to five hexes. Color grade remains separate from board ability tier. The Rune Drop Rates screen, accessible from the board and fusion screens, displays this same balance data.
+These size probabilities are conditional on a successful drop. A stage 10–14 ordinary enemy therefore has a 0.3% chance to drop a three-cell rune.
 
-Run ID and enemy ID determine results independently of combat and equipment RNG. Persist attempted rolls, including misses, to prevent rerolls after reload or item consumption. Boss rewards retain per-run receipts. Training, summoned enemies, idle rewards and sweeps grant no runes. Previously processed dead enemies in old saves receive no retroactive reward.
+Fuse two runes of equal grade and size: sizes 1–4 become the next size at the same grade; two five-cell runes become a one-cell rune at the next grade. G6 five-cell runes are final. There is no failure or fee; batch up to 100 pairs. Equal colors are paired first and preserved; remaining mixed-color pairs produce each color with 20% probability. Results are saved pending claim and cannot be placed until claimed. Placed and unclaimed runes are ineligible materials.
 
-Fuse two stored runes of the same grade and size; shapes may differ. Sizes 1–4 become the next size at the same grade. Size 5 becomes one hex at the next grade. G6 size 5 is final. Fusion always succeeds when valid and has no fee or destruction risk. Placed or unclaimed runes cannot be materials. Up to 100 pairs may be fused together; odd material counts or invalid rows reject the complete operation.
+The existing one-time starter grant remains twelve G0 singles plus one example each of sizes 2–5. Those examples are a starter-grant exception, not low-stage monster drops.
 
-Save results as pending before revealing them. Claim all results for the selected source grade together, including results that advanced to the next grade. A row with unclaimed results cannot fuse again. Closing or restarting preserves actual results. Unconfirmed material selections are discarded without consuming runes.
+## Migration and practice
 
-## Reuse and verification
+Migration preserves every owned rune's ID, grade, shape and quantity. Legacy grade deterministically maps to one of five colors. Previously earned region access maps to equivalent completed regions and mastery. Compatible coordinates remain placed; incompatible runes return to storage. The complete original layout and presets are retained verbatim in the save's `legacyV1` field.
 
-Reuse PackBound's geometry, shapes, rotation, graph validation, draft and ownership model, activation evaluator, aggregation and isolated 19-cell five-page practice model. [Import provenance](../Implementation/Rune_Growth_Import.json) records source hashes. The source project is unchanged. Its 54-item abilities, random-blueprint loader, combat owner and scene are not imported; HELLSCRIPT uses its own UGUI and persistence adapters.
-
-Verify geometry, connectivity, grade separation, category scoping, reuse, all five global presets, missing-rune rejection, fusion, reward idempotency, failed writes, reload, combat continuity, actual high-tier skill effects and Korean/English portrait/landscape screens. [Implementation evidence](../Implementation/Rune_Mastery_Implementation.md) distinguishes completed checks from remaining work.
+The five-page tutorial uses isolated practice pieces. As specified by the reference, its fixed blocks act as roots and it omits third-piece gap occlusion. Actual weapon boards use the shared central origin and full occlusion rules.

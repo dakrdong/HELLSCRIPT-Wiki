@@ -208,10 +208,11 @@ namespace Hellscript
                 case SkillKind.Whirlwind:break;
                 case SkillKind.Leap:case SkillKind.Retreat:case SkillKind.Teleport:
                     State.position=destination;LandingPassives(action);
+                    if(Stats.Rune(RuneBonus.MobilityGuard)>0)ItemEffects.runeMobilityGuardUntil=State.time+2;
                     if(skill.kind==SkillKind.Leap)
                     {
                         RememberLeapLanding(action);
-                        int hits=AreaHit(destination,2.5f,1.8f,0);
+                        int hits=AreaHit(destination,RuneSkillRadius(1,2.5f),1.8f,0);
                         if(hits>0&&Stats.SetPieces("SWB")>=4){ItemEffects.crushCharge=4;EffectEvent("SWB4","CHARGE",root:action.id,value:4);}
                         if(Stats.specials.Contains("LW02"))AreaHit(destination,4,.9f,0,default,360,false,"LW02",action.id,DamageKind.Legendary);
                         if(action.whirlwindReserved){AreaHit(destination,3,1.8f,0,default,360,false,"SW4",action.id,DamageKind.Set);action.whirlwindReserved=false;EffectEvent("SW4","CONSUMED",root:action.id);}
@@ -220,11 +221,11 @@ namespace Hellscript
                     if(skill.kind==SkillKind.Retreat&&action.legacyRetreatTrapOnLanding&&Stats.specials.Contains("LA03")&&(action.policy?.retreatTrapEquipped??State.build.activeSkills.Contains(8))){CreateTrap(action,origin,3);action.legacyRetreatTrapOnLanding=false;}
                     break;
                 case SkillKind.Crush:
-                    var crushTargets=AreaTargets(origin,3,aim-origin,100);bool crushBonus=action.crushBonus;
+                    var crushTargets=AreaTargets(origin,RuneSkillRadius(2,3),aim-origin,100);bool crushBonus=action.crushBonus;
                     if(crushTargets.Length==0)ActionEvent(action,"ACTION_MISS","분쇄 일격의 실제 부채꼴 안에 적이 없습니다.");
                     float single=Stats.specials.Contains("LW03")&&crushTargets.Length==1?.5f:0;
                     var crushSnapshot=CaptureDamage();
-                    foreach(var e in crushTargets){Hit(e,skill.coefficient,0,true,single,crushSnapshot,definition:"W03",root:action.id);if(crushBonus)Hit(e,1.6f,0,false,definition:"SWB4",root:action.id,kind:DamageKind.Set);}
+                    foreach(var e in crushTargets){Hit(e,skill.coefficient,0,true,single+RuneMultiBonus(crushSnapshot,crushTargets.Length),crushSnapshot,definition:"W03",root:action.id);if(crushBonus)Hit(e,1.6f,0,false,definition:"SWB4",root:action.id,kind:DamageKind.Set);}
                     break;
                 case SkillKind.Slam:case SkillKind.Nova:
                     int novaHits=AreaHit(origin,3,skill.coefficient,skill.kind==SkillKind.Nova?2:0);
@@ -241,7 +242,7 @@ namespace Hellscript
                     else ActionEvent(action,"ACTION_MISS","표식 대상이 사라졌거나 실제 사거리·시야를 벗어났습니다.");break;
                 case SkillKind.Shadow:State.shadowCharges=3;State.shadowTime=8;State.shadowFraction=SkillEffects.ShadowFraction(SkillEffects.ActiveRank(Ranks,index));break;
                 case SkillKind.Fireball:LaunchFireball(action);break;
-                case SkillKind.Blizzard:AddGround(aim,3,0,6,Stats.damage*.65f,false,13,root:action.id,followsTarget:Stats.specials.Contains("LM01")&&action.blizzardMode==BlizzardMode.Follow);break;
+                case SkillKind.Blizzard:AddGround(aim,3,0,6*(1+Stats.runeSkillDuration[13]/100),Stats.damage*.65f,false,13,root:action.id,followsTarget:Stats.specials.Contains("LM01")&&action.blizzardMode==BlizzardMode.Follow);break;
                 case SkillKind.Chain:
                     // A paid preparation can lose its first target. Do not hit through a wall
                     // or outside the actual initial range, and do not transfer it to a new target.
@@ -338,14 +339,14 @@ namespace Hellscript
             if(State.activeSkill!=0||Hero.heroClass!=HeroClass.Warrior)return;
             var action=State.heroAction;if(action.phase!=HeroActionPhase.Channeling)return;
             if(action.startedAt>=State.time-.00001f)return;
-            action.emptyTime=AreaTargets(State.position,2.5f,default,360).Length==0?action.emptyTime+dt:0;
+            action.emptyTime=AreaTargets(State.position,RuneSkillRadius(0,2.5f),default,360).Length==0?action.emptyTime+dt:0;
             if(action.emptyTime>=.5f-.00001f){InterruptHeroAction("0.5초 동안 공격 범위에 적 없음");return;}
             State.channelTime+=dt;State.channelTick-=dt;if(State.channelTick>.00001f)return;
             if(action.exitChannelForBuild){CompleteHeroAction(action,"설정 변경 · 유지 구간 종료");return;}
             if(action.exitChannelForSurvival){CompleteHeroAction(action,"전역 회피 · 유지 구간 종료");return;}
             float cost=Cost(catalog.skills[0]);if(State.resource<cost){InterruptHeroAction("회오리 자원 부족");return;}
             if(EndEdictWhirlwindBeforeTick(action,cost))return;
-            State.channelTick+=.25f;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;AreaHit(State.position,2.5f,.5f,0);Visual?.Invoke(State.position,State.position,0,2.5f);
+            State.channelTick+=.25f;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;AreaHit(State.position,RuneSkillRadius(0,2.5f),.5f,0);Visual?.Invoke(State.position,State.position,0,RuneSkillRadius(0,2.5f));
             State.action=Loc.F("회오리 · {0:0.0}초 유지", State.channelTime);
             PullWhirlwindTargets();
             EndTimedEdictWhirlwind(action);
@@ -379,9 +380,9 @@ namespace Hellscript
         int AreaHit(Vector2 pos,float radius,float coefficient,int element,Vector2 direction=default,float arc=360,bool procs=true,string definition=null,int root=0,DamageKind kind=DamageKind.Direct)
         {
             var targets=AreaTargets(pos,radius,direction,arc);var snapshot=CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
-            foreach(var e in targets)Hit(e,coefficient,element,procs,0,snapshot,definition:definition,root:root,kind:kind);return targets.Length;
+            foreach(var e in targets)Hit(e,coefficient,element,procs,RuneMultiBonus(snapshot,targets.Length),snapshot,definition:definition,root:root,kind:kind);return targets.Length;
         }
-        DamageSnapshot CaptureDamage()=>new DamageSnapshot{runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
+        DamageSnapshot CaptureDamage()=>new DamageSnapshot{runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
             level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),ranks=Ranks==null?null:(int[])Ranks.Clone(),
             crowdCaptured=Hero.heroClass==HeroClass.Warrior,crowdQualified=Hero.heroClass==HeroClass.Warrior&&CountNear(State.position,3)>=3};
         void Deal(EnemyState e,float damage,bool critical)

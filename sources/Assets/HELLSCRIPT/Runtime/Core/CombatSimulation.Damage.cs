@@ -24,7 +24,7 @@ namespace Hellscript
         // target and lets gear raise it, which is exactly what Stats.vulnerable holds.
         float AttackBonus(EnemyState enemy,int element,DamageSnapshot snap,float extra,DamageKind kind=DamageKind.Direct)
         {
-            float bonus=snap.elements[element]+snap.bonus+(CombatEffects.Has(enemy,StatusKind.Mark)?(Stats.vulnerable-Stats.Bonus(StatId.VulnerableDamage)+RuneSnapshotBonus(StatId.VulnerableDamage,snap))/100:0)+extra+ConditionalBonus(enemy,kind,snap);
+            float bonus=snap.elements[element]+snap.bonus+(CombatEffects.Has(enemy,StatusKind.Mark)?(Stats.vulnerable-Stats.Bonus(StatId.VulnerableDamage)+RuneSnapshotBonus(StatId.VulnerableDamage,snap))/100:0)+extra+ConditionalBonus(enemy,kind,snap)+RuneDamageBonus(enemy,kind,snap);
             // Round the threshold to stored HP precision; Mono can otherwise retain extra intermediate precision.
             if(Hero.heroClass==HeroClass.Warrior)
             {if(snap.passives[0]&&(snap.crowdCaptured?snap.crowdQualified:CountNear(State.position,3)>=3))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,0);if(snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,5);}
@@ -49,6 +49,7 @@ namespace Hellscript
             var snap=snapshot??CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             int masterySkill=definition.Length==3&&definition[0]=='W'?int.Parse(definition.Substring(1))-1:definition.Length==3&&definition[0]=='A'?int.Parse(definition.Substring(1))+5:definition.Length==3&&definition[0]=='M'?int.Parse(definition.Substring(1))+11:-1;
             if(masterySkill>=0&&masterySkill<18&&snap.runeSkillPower!=null&&snap.runeSkillPower.Length==18)coefficient*=1+snap.runeSkillPower[masterySkill]/100;
+            extraBonus+=RuneAreaBonus(snap,definition);
             float crit=snap.crit+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?SkillEffects.Passive(snap.ranks,HeroClass.Ranger,5):0);
             bool critical=canCrit&&RandomStream.Unit(ref State.rng)<Mathf.Min(.75f,crit);
             if(!enemy.boss&&enemy.kind==6&&enemy.brain.rearWindow>0&&(kind==DamageKind.Direct||kind==DamageKind.Basic)&&Vector2.Angle(-enemy.brain.facing,(origin??State.position)-enemy.position)<=60)extraBonus+=.25f;
@@ -82,9 +83,8 @@ namespace Hellscript
         }
         // Exposed weakness is limited by how much of the fight it covers, not by its size: a direct
         // critical on one target for a few seconds. Both knobs are named here because tuning moves them.
-        const float ExposedSeconds=8,ExposedBonus=.2f;
-        // The burst is a share of the attack basis, and it carries the hero's damage bonuses the way every
-        // other derived hit here does. Without them it was a flat number that a build could not improve.
+        const float ExposedSeconds=4,ExposedBonus=.1f;
+        // v13 specifies 30% of the attack basis, without a second additive damage package.
         const float CascadeFraction=.3f;
         // The elite centre runes, resolved from the hit that just landed. A hit never grants the stack or
         // the exposure it was itself multiplied by, and the burst is raised outside Hit so that a kill it
@@ -109,7 +109,7 @@ namespace Hellscript
             // ApplyOutgoing rather than Hit: the burst rolls no critical, no overpower and no lucky hit,
             // and cannot reach this hook again from a kill of its own.
             foreach(var other in State.enemies.Where(e=>e!=killed&&!e.dead&&Vector2.Distance(e.position,killed.position)<=2.5f).OrderBy(e=>e.id).ToArray())
-                ApplyOutgoing(other,snap.damage*CascadeFraction,AttackBonus(other,element,snap,0,DamageKind.Legendary),1,1,false,element,snap,"ELITE_CASCADE",root,instance,DamageKind.Legendary,killed.id);
+                ApplyOutgoing(other,snap.damage*CascadeFraction,0,1,1,false,element,snap,"ELITE_CASCADE",root,instance,DamageKind.Legendary,killed.id);
         }
         void Hurt(float damage,int element=0,string caster="ENEMY",string definition="ENEMY_ATTACK",int root=0,int instance=0,DamageKind kind=DamageKind.Direct)
         {

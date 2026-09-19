@@ -1,5 +1,7 @@
 # 무기별 룬 성장 구현 기록
 
+> 과거 구현·검증 기록입니다. 보드 규칙과 엘리트 수치는 2026-09-20의 [v13 기획](../Design/HELLSCRIPT_Rune_Mastery.md)으로 대체했습니다. 현재 구현·검증 근거는 [v13 적용 기록](Rune_V13_Implementation.md)에 있습니다. 아래의 이전 검사 결과는 당시 기록으로 보존합니다.
+
 2026-09-13 · 구현 및 자동 검사·macOS 실행 검증을 완료했습니다.
 
 기획은 [무기별 룬 성장](../Design/HELLSCRIPT_Rune_Mastery.md)과 [영어판](../Design/HELLSCRIPT_Rune_Mastery.en.md)을 따릅니다. 룬을 언제든 회수해 다른 무기 보드에 재사용할 수 있으며, 프리셋 5칸은 각각 모든 무기의 배치를 함께 저장합니다.

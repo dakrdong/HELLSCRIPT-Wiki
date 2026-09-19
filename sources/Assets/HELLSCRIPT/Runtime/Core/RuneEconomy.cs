@@ -49,7 +49,7 @@ namespace Hellscript
         {
             var band=Band(stage);int size=band.RollSize(RandomStream.Range(ref rng,0,100));
             var shapes=RuneMasteryCatalog.Shapes.Where(s=>s.Size==size).ToArray();
-            return new OwnedRune{id=id,grade=band.Grade,shapeId=shapes[RandomStream.Range(ref rng,0,shapes.Length)].Id};
+            return new OwnedRune{id=id,grade=band.Grade,shapeId=shapes[RandomStream.Range(ref rng,0,shapes.Length)].Id,type=RandomStream.Range(ref rng,0,5)};
         }
         public static bool FusionOutput(int grade,int size,out int nextGrade,out int nextSize)
         {

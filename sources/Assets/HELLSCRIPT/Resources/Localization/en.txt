@@ -3878,3 +3878,262 @@ Lv.{0} 해금	Unlocks at Lv.{0}
 0으로 설정하면 완료 횟수를 제한하지 않습니다.	Set to 0 for no completed-run limit.
 0으로 설정하면 사냥 시간을 제한하지 않습니다.	Set to 0 for no hunt time limit.
 균열을 종료하기 전에 남은 전리품을 확인합니다.	Check remaining loot before ending the rift.
+
+# Rune board v13: reviewed reference text and native integration
+최대 생명력에 고정값을 더합니다.	Adds a flat amount to maximum life.
+최대 생명력의 증가 비율에 가산합니다.	Adds to the maximum-life percentage bonus.
+물리 피해의 방어도 감소 곡선에 사용됩니다.	Used by the armor curve that reduces incoming physical damage.
+화염·냉기·번개·독·암흑 저항에 공통으로 더합니다.	Adds equally to fire, cold, lightning, poison and shadow resistance.
+물리 속성 피해 증가 합계에 가산합니다.	Adds to the additive physical damage bonus.
+화염 속성 피해 증가 합계에 가산합니다.	Adds to the additive fire damage bonus.
+냉기 속성 피해 증가 합계에 가산합니다.	Adds to the additive cold damage bonus.
+번개 속성 피해 증가 합계에 가산합니다.	Adds to the additive lightning damage bonus.
+독 속성 피해 증가 합계에 가산합니다.	Adds to the additive poison damage bonus.
+암흑 속성 피해 증가 합계에 가산합니다.	Adds to the additive shadow damage bonus.
+방어도를 높입니다. 전사의 주능력 피해 계산에도 사용됩니다.	Increases armor and the Warrior’s primary-attribute damage.
+회피 확률과 기존 치명타 확률 파생값을 높입니다. 궁수의 주능력입니다.	Increases dodge and derived critical chance. The Ranger’s primary attribute.
+모든 원소 저항을 높입니다. 마법사의 주능력입니다.	Increases all elemental resistances. The Mage’s primary attribute.
+받는 치유·보호막 생성·압도 피해의 파생 계산에 사용됩니다.	Used to derive healing received, barrier generation and overpower damage.
+힘·민첩성·지능·의지력을 각각 올립니다.	Increases strength, dexterity, intelligence and willpower equally.
+치명타 확률을 퍼센트포인트로 올립니다. 최종 상한 75%.	Adds percentage points to critical chance. Final cap: 75%.
+기본 치명타 피해 150%에 퍼센트포인트로 더합니다.	Adds percentage points to the base 150% critical damage.
+공격 속도 보너스. 기본공격과 적용 대상 시전만 강화하며 회오리 틱은 빨라지지 않습니다.	Speeds up basic attacks and eligible casts. Does not accelerate Whirlwind ticks.
+재사용 대기시간 감소 합계에 더합니다. 최종 상한 40%.	Adds to cooldown reduction. Final cap: 40%.
+자원 비용 감소 합계에 더합니다. 최종 상한 50%.	Adds to resource cost reduction. Final cap: 50%.
+백분율이 아닌 초당 자원 회복량의 고정 증가입니다.	Adds a flat amount of resource regeneration per second, not a percentage.
+이동 속도 보너스 비율. 최종 보너스 상한 50%; 실제 m/s와 별개입니다.	Adds to the movement-speed percentage bonus, capped at 50%. This is separate from actual metres per second.
+획득 반경을 미터 단위로 늘립니다. 최종 반경 상한 6m.	Extends pickup radius in metres. Final radius cap: 6m.
+물약·처치 회복·생명력 훔치기 등 받는 치유에 적용됩니다.	Applies to healing received from potions, kills, life steal and other sources.
+표식으로 취약 상태인 적에게 적용됩니다. 이 칸 자체는 표식을 부여하지 않습니다.	Applies to enemies made vulnerable by Mark. This slot does not apply a mark.
+압도가 발생한 직접 타격의 피해를 강화합니다. 기본 3% 압도 확률 자체는 증가하지 않습니다.	Increases the damage of direct hits that overpower. Does not increase the base 3% overpower chance.
+기존 행운 적중 판정의 확률을 높입니다. 기존 성공 효과는 자원 5 회복입니다.	Increases the existing lucky-hit chance. A successful lucky hit restores 5 resource.
+피해를 회피할 확률을 올립니다. 최종 상한 60%.	Increases the chance to avoid damage. Final cap: 60%.
+막기 발생 확률을 올립니다. 최종 상한 75%.	Increases block chance. Final cap: 75%.
+막기에 성공한 공격의 피해 감소량을 높입니다. 최종 상한 90%.	Increases damage reduction on a successful block. Final cap: 90%.
+피격 시 공격한 적에게 돌려주는 물리 피해의 고정값입니다.	A flat amount of physical damage returned to an attacker when hit.
+준 피해 일부를 회복합니다. 받는 치유 효과가 함께 적용됩니다.	Heals for a share of damage dealt. Healing received also applies.
+모든 피해 감소. 최종 피해 감소 처리와 85% 상한은 전투 엔진에서 적용합니다.	Reduces all damage. The combat engine applies the final reduction calculation and 85% cap.
+3m 안의 적에게 받는 피해에 적용됩니다.	Applies to damage from enemies within 3m.
+7m 밖의 적에게 받는 피해에 적용됩니다.	Applies to damage from enemies beyond 7m.
+자신의 생명력이 35% 이하일 때 적용됩니다.	Applies while your life is at or below 35%.
+화염 피해를 받을 때 모든 원소 저항과 합쳐 사용합니다.	Combines with all resistance against incoming fire damage.
+냉기 피해를 받을 때 모든 원소 저항과 합쳐 사용합니다.	Combines with all resistance against incoming cold damage.
+번개 피해를 받을 때 모든 원소 저항과 합쳐 사용합니다.	Combines with all resistance against incoming lightning damage.
+독 피해를 받을 때 모든 원소 저항과 합쳐 사용합니다.	Combines with all resistance against incoming poison damage.
+암흑 피해를 받을 때 모든 원소 저항과 합쳐 사용합니다.	Combines with all resistance against incoming shadow damage.
+물리 피해에만 적용됩니다.	Applies only to incoming physical damage.
+기본 최대 자원 100에 고정값을 더합니다. 현재 자원을 즉시 회복하지 않습니다.	Adds to the base maximum resource of 100. Does not immediately restore resource.
+초당 생명력 회복량의 고정값을 더합니다.	Adds a flat amount of life regeneration per second.
+물약의 회복량에만 적용되는 추가 보너스입니다.	An additional bonus that applies only to potion healing.
+새로 생성하는 보호막의 크기를 늘립니다. 이 칸만으로 보호막이 생기지는 않습니다.	Increases newly created barriers. This slot does not create a barrier.
+현재 영웅에게 걸리는 기절·빙결·속박 적용처가 없어 보드 배정 제외.	Excluded from boards: the hero currently has no supported incoming stun, freeze or root application.
+기존 영웅 경험치 획득량. 신규 무기 숙련도 경험치에는 적용하지 않는 초안입니다.	Increases existing hero experience gains. Does not affect weapon mastery experience.
+기존 금화 획득 보너스입니다.	The existing gold acquisition bonus.
+3m 안의 적에게 주는 피해에 적용됩니다.	Applies to damage dealt to enemies within 3m.
+7m 밖의 적에게 주는 피해에 적용됩니다.	Applies to damage dealt to enemies beyond 7m.
+장판·중독 등 주기 피해에 적용됩니다. 치명타 가능 여부를 변경하지 않습니다.	Applies to periodic damage, including ground effects and poison. Does not change critical eligibility.
+기절·빙결·속박·둔화된 적에게 주는 피해에 적용됩니다.	Applies to damage dealt to stunned, frozen, rooted or slowed enemies.
+적의 생명력이 35% 이하일 때 적용됩니다.	Applies when enemy life is at or below 35%.
+적의 생명력이 80% 초과일 때 적용됩니다.	Applies when enemy life is above 80%.
+현재 적용처가 없어 보드 배정 제외.	Excluded from boards: no current gameplay application.
+무기 기초 공격값에 고정값을 더한 뒤 기존 주능력 계산을 따릅니다.	Adds to base weapon attack before the existing primary-attribute calculation.
+직접 피해	Direct damage
+직접 타격의 가산 피해를 늘립니다. 지속 피해·가시·추가 발동은 제외합니다.	Adds to direct-hit damage. Excludes damage over time, thorns and triggered effects.
+기본공격 피해	Basic attack damage
+해당 무기의 기본공격 가산 피해를 늘립니다. 액티브에는 적용하지 않습니다.	Adds to this weapon’s basic attack damage. Does not apply to active skills.
+정예·보스 피해	Elite and boss damage
+정예·보스에게 주는 가산 피해입니다. 소환된 일반 적에는 적용하지 않습니다.	An additive damage bonus against elites and bosses. Does not apply to summoned ordinary enemies.
+광역 스킬 피해	Area skill damage
+기존 범위 공격·장판 스킬의 가산 피해입니다. 범위를 새로 만들지는 않습니다.	Adds to existing area attacks and ground-skill damage. Does not create a new area.
+다수 적 적중 피해	Multiple-target damage
+같은 시전의 동일 타격에서 서로 다른 적 3명 이상을 맞힐 때 적용하는 가산 피해입니다.	Adds damage when the same strike of a cast hits at least three different enemies.
+적 군중 제어 지속시간	Outgoing control duration
+일반·정예에게 거는 기절·빙결·속박·둔화 지속시간을 늘립니다. 영웅의 제어 저항이나 보스 무력화량은 늘리지 않습니다.	Extends stun, freeze, root and slow on ordinary and elite enemies. Does not increase hero control resistance or boss stagger.
+보호막 중 피해	Damage while shielded
+현재 보호막이 0보다 클 때 주는 가산 피해입니다. 보호막 생성 기능은 없습니다.	Adds damage while your current barrier is above zero. Does not create a barrier.
+기본공격 자원 회복	Basic attack resource
+기본공격의 정상 적중 시 자원을 추가 회복합니다. 같은 공격의 다중 적중은 1회만 인정합니다.	Restores additional resource on a successful basic hit. Multiple hits from the same attack count once.
+물약 재사용 감소	Potion cooldown reduction
+물약의 기본 재사용 대기시간에 적용하는 전용 감소율입니다. 스킬 쿨타임과 구분합니다.	A dedicated reduction to a potion’s base cooldown, separate from skill cooldown reduction.
+이동기 후 피해 감소	Guard after mobility
+도약·후퇴 도약·순간이동의 이동 완료 후 2초간 받는 피해를 줄입니다. 같은 효과는 갱신하며 중첩하지 않습니다.	Reduces incoming damage for 2 seconds after Leap, Retreat or Teleport finishes moving. Reapplication refreshes the duration without stacking.
+도약 내려찍기 피해	Leap Slam damage
+W02 도약 내려찍기의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Leap Slam in 3% steps. This skill’s damage rune bonus is capped at +60%.
+도약 내려찍기 레벨	Leap Slam level
+이미 해금한 W02 도약 내려찍기 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Leap Slam. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+도약 내려찍기 재사용 감소	Leap Slam cooldown reduction
+W02 도약 내려찍기 전용 재사용 대기시간 감소. 일반 재사용 감소와 합산하여 최종 40%를 넘지 않는 신규 룬 효과입니다.	Reduces the cooldown of Leap Slam. Combined with general cooldown reduction, capped at 40% overall.
+도약 내려찍기 범위	Leap Slam range
+W02 도약 내려찍기의 범위를 늘리는 신규 보너스. 기존 발사 수·동일 대상 재적중 제한은 유지합니다. 범위 비율은 길이에 적용합니다.	Extends the existing range of Leap Slam. The percentage applies to length. Projectile count and repeat-hit limits remain unchanged.
+회오리 피해	Whirlwind damage
+W01 회오리의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Whirlwind in 3% steps. This skill’s damage rune bonus is capped at +60%.
+회오리 레벨	Whirlwind level
+이미 해금한 W01 회오리 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Whirlwind. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+회오리 자원 소모 감소	Whirlwind resource cost reduction
+W01 회오리의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Whirlwind. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+회오리 범위	Whirlwind range
+W01 회오리의 범위를 늘리는 신규 보너스. 기존 발사 수·동일 대상 재적중 제한은 유지합니다. 범위 비율은 길이에 적용합니다.	Extends the existing range of Whirlwind. The percentage applies to length. Projectile count and repeat-hit limits remain unchanged.
+분쇄 일격 피해	Crushing Blow damage
+W03 분쇄 일격의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Crushing Blow in 3% steps. This skill’s damage rune bonus is capped at +60%.
+분쇄 일격 레벨	Crushing Blow level
+이미 해금한 W03 분쇄 일격 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Crushing Blow. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+분쇄 일격 자원 소모 감소	Crushing Blow resource cost reduction
+W03 분쇄 일격의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Crushing Blow. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+분쇄 일격 범위	Crushing Blow range
+W03 분쇄 일격의 범위를 늘리는 신규 보너스. 기존 발사 수·동일 대상 재적중 제한은 유지합니다. 범위 비율은 길이에 적용합니다.	Extends the existing range of Crushing Blow. The percentage applies to length. Projectile count and repeat-hit limits remain unchanged.
+다중 사격 피해	Multishot damage
+A02 다중 사격의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Multishot in 3% steps. This skill’s damage rune bonus is capped at +60%.
+다중 사격 레벨	Multishot level
+이미 해금한 A02 다중 사격 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Multishot. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+다중 사격 자원 소모 감소	Multishot resource cost reduction
+A02 다중 사격의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Multishot. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+다중 사격 공격 범위	Multishot range
+A02 다중 사격의 공격 범위를 늘리는 신규 보너스. 기존 발사 수·동일 대상 재적중 제한은 유지합니다. 범위 비율은 길이에 적용합니다.	Extends the existing range of Multishot. The percentage applies to length. Projectile count and repeat-hit limits remain unchanged.
+관통 사격 피해	Piercing Shot damage
+A01 관통 사격의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Piercing Shot in 3% steps. This skill’s damage rune bonus is capped at +60%.
+관통 사격 레벨	Piercing Shot level
+이미 해금한 A01 관통 사격 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Piercing Shot. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+관통 사격 자원 소모 감소	Piercing Shot resource cost reduction
+A01 관통 사격의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Piercing Shot. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+관통 사격 관통 대상	Piercing Shot targets
+A01 관통 사격의 관통 대상를 늘리는 신규 보너스. 새 스킬을 발동시키지 않으며 기존 중복 적중·장판 중첩 제한은 유지합니다.	Adds targets to Piercing Shot. Does not cast another skill. Existing repeat-hit and ground-overlap limits remain unchanged.
+화염구 피해	Fireball damage
+M01 화염구의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Fireball in 3% steps. This skill’s damage rune bonus is capped at +60%.
+화염구 레벨	Fireball level
+이미 해금한 M01 화염구 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Fireball. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+화염구 자원 소모 감소	Fireball resource cost reduction
+M01 화염구의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Fireball. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+화염구 폭발 범위	Fireball range
+M01 화염구의 폭발 범위를 늘리는 신규 보너스. 기존 발사 수·동일 대상 재적중 제한은 유지합니다. 범위 비율은 길이에 적용합니다.	Extends the existing range of Fireball. The percentage applies to length. Projectile count and repeat-hit limits remain unchanged.
+눈보라 피해	Blizzard damage
+M02 눈보라의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Blizzard in 3% steps. This skill’s damage rune bonus is capped at +60%.
+눈보라 레벨	Blizzard level
+이미 해금한 M02 눈보라 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Blizzard. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+눈보라 자원 소모 감소	Blizzard resource cost reduction
+M02 눈보라의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Blizzard. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+눈보라 지속시간	Blizzard duration
+M02 눈보라의 지속시간를 늘리는 신규 보너스. 새 스킬을 발동시키지 않으며 기존 중복 적중·장판 중첩 제한은 유지합니다.	Extends Blizzard duration. Does not cast another skill. Existing repeat-hit and ground-overlap limits remain unchanged.
+연쇄 번개 피해	Chain Lightning damage
+M03 연쇄 번개의 피해 계수에 +3% 단위로 가산합니다. 개별 스킬 추가 피해 룬 합계 상한 +60%.	Adds damage to Chain Lightning in 3% steps. This skill’s damage rune bonus is capped at +60%.
+연쇄 번개 레벨	Chain Lightning level
+이미 해금한 M03 연쇄 번개 레벨 +1. 해당 스킬 룬 레벨 합계 최대 +5; 레벨당 피해 계수 +10%. 선행 해금·범위 증가 없음.	+1 level to an already unlocked Chain Lightning. Individual level runes total at most +5; each level adds 10% to its damage coefficient. Does not unlock the skill or extend its range.
+연쇄 번개 자원 소모 감소	Chain Lightning resource cost reduction
+M03 연쇄 번개의 실제 자원 소모를 줄입니다. 전용 룬 감소 최대 30%p, 일반 감소까지 합친 최종 감소 최대 50%.	Reduces the actual resource cost of Chain Lightning. Dedicated rune reduction is capped at 30 percentage points; final reduction including general bonuses is capped at 50%.
+연쇄 번개 연쇄 대상	Chain Lightning targets
+M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 발동시키지 않으며 기존 중복 적중·장판 중첩 제한은 유지합니다.	Adds targets to Chain Lightning. Does not cast another skill. Existing repeat-hit and ground-overlap limits remain unchanged.
+시작점	Starting point
+다섯 색의 공용 연결 기점. 룬 블럭으로 덮을 수 없습니다. 이 칸 자체는 능력치를 지급하지 않습니다.	The shared connection origin for all five colors. Cannot be covered by a rune block and grants no stats.
+직접 치명타로 적중한 대상에게 4초간 자신이 주는 직접 피해 +10%. 같은 대상 재적용은 시간만 갱신. 일반 취약 표식과 별도의 신규 효과이며 이 효과는 취약 상태를 부여하지 않습니다.	A direct critical hit makes that target take +10% direct damage from you for 4s. Reapplication refreshes duration only. This is separate from Mark and does not apply Vulnerable.
+직접 타격으로 적 처치 시 2.5m 폭발: 공격 기준 D의 30%, 처치 타격과 같은 속성. 내부 재사용 1초. 폭발은 치명타·압도·행운의 적중·처치 재귀 발동을 만들지 않습니다.	A direct-hit kill causes a 2.5m explosion dealing 30% of attack basis D, with the killing hit’s element. Internal cooldown: 1s. It cannot crit, overpower, lucky-hit or trigger further kill explosions.
+가이드	Guide
+도감	Codex
+보기	View
+편집	Edit
+슬롯 포인트	Slot points
+최고 레벨	Maximum level
+{0} 숙련도	{0} mastery
+룬 보관함	Rune Storage
+전부	All
+보관 {0}개 · 표시 {1}개 · 8열	Stored {0} · Shown {1} · 8 columns
+미저장 변경	Unsaved changes
+저장된 상태	Saved
+활성 능력 {0}칸	{0} active slots
+개방과 활성은 별개입니다.	Opening a slot does not activate it.
+변경 저장	Save changes
+선택 정보	Selection
+배치 중 · 이동하거나 회수할 수 있습니다.	Placed · Move or retrieve this block.
+보관 중 · 배치할 칸을 선택하세요.	Stored · Select a slot to place it.
+공용 시작점	Shared starting point
+다섯 색의 공용 기점 · 룬을 덮을 수 없습니다.	Shared origin for all five colors. Cannot be covered.
+미개방 · 개방해도 능력은 켜지지 않습니다.	Unopened · Opening alone grants no ability.
+색 일치 · 능력 활성	Color matches · Ability active
+색 불일치 · 연결 통로로만 사용합니다.	Color mismatch · Connection only.
+개방된 빈 칸 · 같은 색 룬으로 활성화합니다.	Open and empty · Match its color to activate.
+능력 상세	Ability details
+영역 미리보기	Region preview
+1P · 칸 개방	Open · 1P
+회전하면 연결이 끊기거나 다른 룬과 겹칩니다.	Rotating would break a connection or overlap another rune.
+이 블록을 빼면 연결이 끊어집니다. 바깥 블록부터 회수하세요.	Removing this block would break the connection. Retrieve the outer blocks first.
+모든 무기의 개방 경로와 룬 배치를 저장했습니다.	Saved the unlock paths and layouts for every weapon.
+룬 편집은 편집 모드에서 가능합니다.	Switch to Edit mode to change runes.
+영역 선택 시 중앙 엘리트 칸이 무료로 열립니다. 나머지 36칸은 연결된 경계부터 1포인트씩 개방합니다. 무료 중앙 칸은 연결 시작점이 아닙니다.	Choosing a region opens its elite center for free. Open the other 36 slots from the connected boundary for 1 point each. The free center is not a connection origin.
+다음 확장 영역으로 선택할 수 있습니다.	Available as your next expansion region.
+이미 선택한 영역입니다.	This region is already selected.
+현재 영역의 37칸을 모두 개방하면 선택할 수 있습니다.	Open all 37 slots in the current region before choosing this one.
+이 영역 선택	Choose this region
+{0} 영역 · 능력 등급 {1}	{0} region · Ability tier {1}
+룬 합산 상한: {0}{1}	Rune total cap: {0}{1}
+모든 색 룬으로 활성화할 수 있습니다.	Any rune color can activate this slot.
+필요한 능력 색: {0}	Required ability color: {0}
+{0} · 활성 효과	{0} · Active effects
+현재 장착한 무기에 적용됩니다. 미저장 배치는 저장 후 적용됩니다.	Applies to your equipped weapon. Unsaved layouts take effect after saving.
+이 무기 종류를 사용할 때 적용됩니다. 미저장 배치는 저장 후 적용됩니다.	Applies when using this weapon type. Unsaved layouts take effect after saving.
+활성화된 능력이 없습니다.	No active abilities.
+{0} 보드에 배치된 능력	Abilities on the {0} board
+6종 무기 · 무기당 259칸 · 능력 색 5종	6 weapons · 259 slots per weapon · 5 ability colors
+각 무기는 숙련도 1레벨과 중앙 19칸으로 시작합니다. 레벨이 오를 때마다 슬롯 포인트 6개를 얻습니다. 다음 레벨에 필요한 경험치는 현재 레벨 × 100이며 최고 레벨은 41입니다.	Each weapon starts at mastery level 1 with 19 central slots. Each level grants 6 slot points. Experience required for the next level is current level × 100. Maximum level: 41.
+숙련도 경험치는 사용 중인 무기에만 쌓입니다. 기본 획득량은 일반 5, 정예 25, 보스 100이며 균열 5단계마다 기본 획득량만큼 추가됩니다. 훈련과 소환 몬스터는 제외합니다.	Only the weapon in use gains mastery experience. Base rewards are 5 for ordinary enemies, 25 for elites and 100 for bosses. Each 5 rift stages adds another base reward. Training and summoned enemies are excluded.
+프리셋 5칸은 모든 무기의 배치를 함께 저장합니다. 룬을 복제하거나 숙련도·개방 경로를 되돌리지 않습니다.	Five presets each store every weapon layout together. They neither duplicate runes nor roll back mastery or unlock paths.
+능력 색은 공격·마법·보조·치명타·스킬 보너스입니다. 획득 등급 G0~G6 및 블록 크기와는 별개입니다. 몬스터 드롭의 능력 색은 각각 20%입니다.	Ability colors are Attack, Magic, Support, Critical and Skill Bonus. They are independent of G0–G6 acquisition grade and block size. Each color has a 20% chance on monster drops.
+이전 보드의 배치와 프리셋 원본을 저장 안에 보관했습니다. 새 규칙에 맞지 않는 룬은 보관함으로 회수했으며, 보유 룬은 삭제하지 않았습니다.	The save retains the original previous-board layouts and presets. Runes incompatible with the new rules were returned to storage. No owned rune was deleted.
+룬 배치 가이드	Rune Placement Guide
+중앙 시작점 옆에서 색마다 연결을 시작합니다. 시작점 자체는 비워 둡니다.	Start each color beside the central origin. Leave the origin itself empty.
+같은 색의 다른 블록끼리는 변을 맞댈 수 없습니다. 두 개의 중간 칸을 공유하는 한 칸 간격으로 연결합니다. 중간 두 칸을 하나의 다른 블록이 모두 막으면 연결되지 않습니다.	Separate blocks of the same color cannot share an edge. Connect across a gap with two shared intermediate slots. One other block occupying both intermediate slots blocks the connection.
+다른 색의 블록끼리는 맞닿을 수 있습니다. 슬롯과 블록의 색이 일치해야 능력이 활성화됩니다. 색이 다르면 연결 통로로만 사용합니다.	Different colors may touch. A slot activates only when its color matches the block. A mismatch can still relay a connection.
+블록을 선택해 탭하거나 끌어 배치하고, 선택 정보에서 회전·회수합니다. 빈 곳을 끌면 보드를 이동합니다. 보기 모드에서는 블록 아래의 능력을 확인합니다.	Select a block and tap or drag to place it. Rotate or retrieve it in Selection. Drag empty space to pan. View mode inspects abilities beneath blocks.
+5페이지 배치 연습은 작은 독립 보드에서 간격·회전·활성 규칙을 익히는 예제입니다. 무기 보드의 중앙 시작점 규칙과 별개이며 보유 룬과 저장을 바꾸지 않습니다.	The five-page practice uses a small independent board to teach spacing, rotation and activation. It is separate from the weapon board’s central-origin rule and does not change owned runes or saves.
+5페이지 배치 연습	Five-page placement practice
+연결된 개방 칸 옆에서 현재 영역의 칸을 선택하세요. 슬롯 포인트가 필요합니다.	Select a slot in the current region beside the connected open path. Slot points are required.
+현재 영역의 37칸을 모두 개방한 뒤 다음 영역을 선택하세요.	Open all 37 slots in the current region before choosing the next.
+무기 숙련도 정보가 올바르지 않습니다.	Invalid weapon mastery data.
+개방 칸과 슬롯 포인트를 확인하세요.	Check open slots and slot points.
+완료되지 않은 영역이 개방 순서에 있습니다.	An unfinished region appears earlier in the unlock order.
+선택한 영역의 중앙 칸이 없습니다.	The selected region’s center slot is missing.
+시작점과 연결되지 않은 개방 칸입니다.	An open slot is disconnected from the origin.
+무기별 숙련도 정보가 필요합니다.	Mastery data is required for every weapon.
+숙련도와 기존 개방 기록은 배치 편집으로 바꿀 수 없습니다.	Layout editing cannot change mastery or previously opened slots.
+보조	Support
+치명타	Critical
+스킬 보너스	Skill Bonus
+중앙	Core
+기초와 균형	Foundation and balance
+맹공	Assault
+직접 공격 · 지속 화력	Direct attacks and sustained damage
+정밀	Precision
+치명타 · 강적의 약점	Critical hits and elite weaknesses
+파급	Impact
+군집 · 광역 · 상태 연계	Groups, areas and status effects
+기교	Technique
+주력 스킬의 특화	Specializing your main skill
+자원 · 재사용 시간	Resources and cooldowns
+수호	Guard
+생명력 · 방어 · 회복	Life, defense and recovery
+속도 · 도약 · 공방 균형	Speed · Leap · Balanced combat
+회오리 · 군집 · 지속 전투	Whirlwind · Groups · Sustained combat
+분쇄 · 압도 · 마무리	Crushing · Overpower · Finishing
+다중 사격 · 선제 · 기동	Multishot · First strike · Mobility
+관통 · 원거리 · 약점	Piercing · Distance · Weaknesses
+원소 · 장판 · 연쇄	Elements · Ground effects · Chains
+등록	Store
+불러오기	Load
+비우기	Clear
+프리셋 변경도 변경 저장을 눌러야 보존됩니다.	Preset changes are kept only after you press Save changes.
+전체 배치 등록	Store all layouts
+슬롯 {0}에 모든 무기의 현재 배치를 등록합니다.	Store the current layouts of all weapons in slot {0}.
+각인 배치	Inscribed layout
+프리셋의 룬이 없거나 현재 개방 경로에 맞지 않아 적용하지 않았습니다.	The preset was not applied: a rune is missing or its placement does not match the current unlock paths.
+1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다. 같은 색끼리 먼저 짝을 지으며 그 색을 유지합니다. 다른 색 한 쌍은 다섯 색 중 무작위로 결정됩니다.	Two 1–4-cell runes become the next size at the same grade. Two 5-cell runes become one cell at the next grade. Shapes may differ; combine up to 100 pairs. Matching colors are paired first and preserved. A mixed-color pair yields one of five colors at random.
+아래 크기 확률은 룬 드롭에 성공했을 때의 비율입니다. 보스의 룬도 같은 표를 따릅니다. 획득 등급·능력 색·보드 능력 등급은 서로 다릅니다. 각 능력 색의 확률은 20%입니다.	Size probabilities below are conditional on a successful rune drop. Boss runes use the same table. Acquisition grade, ability color and board ability tier are separate. Each ability color has a 20% chance.
+이전 저장 → 현재 편집	Last saved → Current draft
+활성	Active
+모든 영역	All regions
+능력 이름·효과 검색	Search ability names and effects
+배정 위치 보기	Show assigned slot
+활성 {0}칸 · 불일치 {1}칸	Active {0} · Mismatched {1}
+밝은 문양은 활성, 블록과 같은 색의 어두운 문양은 비활성입니다.	Bright glyphs are active. Dark glyphs in the block’s color are inactive.
+능력 도감	Ability Codex
+이용 안내	Information
+활성 효과	Active Effects
+공격 계열	Attack
+무기 선택	Select weapon
+영역 선택	Select region

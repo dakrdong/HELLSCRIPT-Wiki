@@ -1,5 +1,7 @@
 # HELLSCRIPT Elite Abilities at the Rune Region Centres
 
+> Historical implementation evidence. The current board rules and elite values are superseded by [v13](../Design/HELLSCRIPT_Rune_Mastery.en.md) on 2026-09-20. Earlier test results remain historical.
+
 Date: 2026-09-17
 작성일: 2026-09-17
 

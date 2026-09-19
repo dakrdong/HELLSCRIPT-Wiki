@@ -58,7 +58,7 @@ namespace Hellscript
         {
             UpdateAspectMask();
             Rect s=UiSafeArea.Current;
-            if(Page!="battle"&&Page!="plaza"&&Page!="title"&&Page!="recovery"&&globalHud?.Layout!=null)
+            if(Page!="runes"&&Page!="battle"&&Page!="plaza"&&Page!="title"&&Page!="recovery"&&globalHud?.Layout!=null)
             {float inset=Mathf.Min(globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12,s.height*.42f);s.yMin+=inset;}
             float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;

@@ -119,6 +119,7 @@ namespace Hellscript
                 if(fx.followsTarget&&Target!=null&&Perceived(Target)&&fx.moved<4)
                 {var p=Map.MoveDirect(fx.position,Target.position,Mathf.Min(active,4-fx.moved));fx.moved+=Vector2.Distance(p,fx.position);fx.position=p;}
             }
+            var runeTargets=windows.ToDictionary(w=>w.effect,w=>SnapshotRune(GroundSnapshot(w.effect),RuneBonus.MultiDamage)>0?AreaTargets(w.effect.position,w.effect.radius,default,360).Length:0);
             foreach(var enemy in State.enemies.Where(e=>!e.dead).ToArray())
             {
                 var inside=windows.Where(w=>Vector2.Distance(w.effect.position,enemy.position)<=w.effect.radius&&Map.LineClear(w.effect.position,enemy.position)).ToArray();
@@ -130,7 +131,7 @@ namespace Hellscript
                     if(active.Length==0){enemy.blizzardTick=.5f;cursor=end;continue;}
                     var fx=active[0].effect;var snap=GroundSnapshot(fx);enemy.blizzardTick-=end-cursor;
                     while(enemy.blizzardTick<=.00001f&&!enemy.dead)
-                    {enemy.blizzardTick+=.5f;Hit(enemy,fx.damage*.5f/Mathf.Max(.0001f,snap.damage),2,false,0,snap,false,definition:"M02",root:fx.rootCastId,instance:fx.id,kind:DamageKind.Periodic);}
+                    {enemy.blizzardTick+=.5f;Hit(enemy,fx.damage*.5f/Mathf.Max(.0001f,snap.damage),2,false,RuneMultiBonus(snap,runeTargets[fx]),snap,false,definition:"M02",root:fx.rootCastId,instance:fx.id,kind:DamageKind.Periodic);}
                     cursor=end;
                 }
                 // Slow strength is independent of which overlapping field supplied the stronger damage tick.

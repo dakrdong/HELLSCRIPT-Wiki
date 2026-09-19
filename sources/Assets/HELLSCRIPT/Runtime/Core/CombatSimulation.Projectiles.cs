@@ -21,7 +21,7 @@ namespace Hellscript
         }
         void LaunchPierce(HeroActionState action)
         {
-            var p=Shot(action,action.aim-action.origin,10,18,.3f,1.8f,0,Stats.passives[2]?SkillEffects.PierceTargets(Ranks):5);p.shadow=ConsumeShadow();
+            var p=Shot(action,action.aim-action.origin,10,18,.3f,1.8f,0,(Stats.passives[2]?SkillEffects.PierceTargets(Ranks):5)+(int)Stats.runeSkillTargets[6]);p.shadow=ConsumeShadow();
             if(action.pierceBonus)
             {var echo=Shot(action,action.aim-action.origin,10,18,.3f,1.2f,0,5);echo.extra=true;echo.delay=.3f;}
         }
@@ -30,10 +30,10 @@ namespace Hellscript
             bool narrow=Stats.specials.Contains("LA02"),shadow=ConsumeShadow();float angle=MultiShotHalfAngle(narrow);Vector2 direction=(action.aim-action.origin).normalized;
             State.projectileGroups.Add(new ProjectileGroup{actionId=action.id,maxPerVictim=narrow?3:1});
             foreach(float degrees in new[]{-angle,0,angle})
-            {var p=Shot(action,RotateShot(direction,degrees),8,18,.2f,.8f,0);p.shadow=shadow;}
+            {var p=Shot(action,RotateShot(direction,degrees),RuneSkillRadius(7,8),18,.2f,.8f,0);p.shadow=shadow;}
         }
         void LaunchFireball(HeroActionState action)
-        {var p=Shot(action,action.aim-action.origin,Mathf.Min(10,Vector2.Distance(action.origin,action.aim)),14,.25f,2.1f,1);p.explosionRadius=2.5f;}
+        {var p=Shot(action,action.aim-action.origin,Mathf.Min(10,Vector2.Distance(action.origin,action.aim)),14,.25f,2.1f,1);p.explosionRadius=RuneSkillRadius(12,2.5f);}
         void LaunchEnemyProjectile(EnemyState enemy)
         {
             State.projectiles.Add(new CombatProjectile{id=State.nextId++,actionId=State.nextId++,skill=-1,origin=enemy.position,position=enemy.position,direction=(enemy.aim-enemy.position).normalized,
@@ -50,6 +50,7 @@ namespace Hellscript
             =>Map.ProjectileEnd(from,end,radius,out wall);
         void TickProjectiles(float dt)
         {
+            var runeTargets=State.projectiles.Where(p=>!p.hostile&&!p.extra).GroupBy(p=>p.actionId).ToDictionary(g=>g.Key,g=>RuneProjectileTargets(g.First(),dt));
             foreach(var p in State.projectiles.ToArray())
             {
                 if(p.createdAt>=State.time-.00001f)continue;
@@ -82,8 +83,8 @@ namespace Hellscript
                         {
                             if(group!=null){if(victim==null){victim=new ProjectileVictim{id=hit.enemy.id};group.victims.Add(victim);}victim.hits++;}
                             bool poisoned=CombatEffects.OwnTrapPoison(hit.enemy,State.heroId);float extra=p.skill==6&&!p.extra&&Stats.specials.Contains("LA01")?Mathf.Min(.6f,p.hitIds.Count*.15f):0;
-                            Hit(hit.enemy,p.coefficient,p.element,!p.extra,extra,p.snapshot,true,p.shadow,p.extra?"SAB4":SkillId(p.skill),p.actionId,p.id,p.extra?DamageKind.Set:p.skill<0?DamageKind.Basic:DamageKind.Direct,true,hit.enemy.position-p.direction);
-                            if(p.skill<0)BasicResource(hit.enemy.id);
+                            Hit(hit.enemy,p.coefficient,p.element,!p.extra,extra+(!p.extra&&runeTargets.TryGetValue(p.actionId,out int multi)?RuneMultiBonus(p.snapshot,multi):0),p.snapshot,true,p.shadow,p.extra?"SAB4":SkillId(p.skill),p.actionId,p.id,p.extra?DamageKind.Set:p.skill<0?DamageKind.Basic:DamageKind.Direct,true,hit.enemy.position-p.direction);
+                            if(p.skill<0)BasicResource(hit.enemy.id,p.actionId,p.snapshot);
                             if(p.skill==6&&!p.extra&&poisoned&&Stats.SetPieces("SA")>=4&&!hit.enemy.dead)
                                 ApplySetPoison(hit.enemy,p);
                         }
@@ -102,7 +103,7 @@ namespace Hellscript
             var targets=AreaTargets(p.position,p.explosionRadius,default,360);
             foreach(var e in targets)
             {
-                Hit(e,p.coefficient,1,true,p.snapshot.passives[0]&&targets.Length>=3?SkillEffects.Passive(p.snapshot.ranks,HeroClass.Mage,0):0,p.snapshot,definition:"M01",root:p.actionId,instance:p.id);
+                Hit(e,p.coefficient,1,true,(p.snapshot.passives[0]&&targets.Length>=3?SkillEffects.Passive(p.snapshot.ranks,HeroClass.Mage,0):0)+RuneMultiBonus(p.snapshot,targets.Length),p.snapshot,definition:"M01",root:p.actionId,instance:p.id);
                 ConsumeFrostMark(e,p);
             }
             if(Stats.specials.Contains("LM02"))AddGround(p.position,3.5f,.4f,.1f,Stats.damage*.7f,false,12,root:p.actionId);
@@ -131,13 +132,14 @@ namespace Hellscript
                 }
                 trap.remaining=Mathf.Max(0,trap.remaining-dt);
             }
+            var runeTargets=State.traps.ToDictionary(t=>t,t=>SnapshotRune(t.snapshot,RuneBonus.MultiDamage)>0?AreaTargets(t.position,t.radius,default,360).Length:0);
             foreach(var enemy in State.enemies.Where(e=>!e.dead).ToArray())
             {
                 var strongest=State.traps.Where(t=>t.triggered&&Vector2.Distance(t.position,enemy.position)<=t.radius&&Map.LineClear(t.position,enemy.position))
                     .OrderByDescending(t=>t.snapshot.damage*(1+t.snapshot.bonus+t.snapshot.elements[4])).ThenBy(t=>t.id).FirstOrDefault();
                 if(strongest==null){enemy.trapTick=.5f;continue;}
                 ApplyStatus(enemy,StatusKind.Poisoned,strongest.definitionId,.55f,strongest.actionId);if(strongest.triggeredAt>=State.time-.00001f)continue;enemy.trapTick-=dt;
-                if(enemy.trapTick<=.00001f){enemy.trapTick+=.5f;Hit(enemy,.3f,4,false,0,strongest.snapshot,false,definition:strongest.definitionId,root:strongest.actionId,instance:strongest.id,kind:DamageKind.Periodic);}
+                if(enemy.trapTick<=.00001f){enemy.trapTick+=.5f;Hit(enemy,.3f,4,false,RuneMultiBonus(strongest.snapshot,runeTargets[strongest]),strongest.snapshot,false,definition:strongest.definitionId,root:strongest.actionId,instance:strongest.id,kind:DamageKind.Periodic);}
             }
             State.traps.RemoveAll(t=>t.triggered&&t.remaining<=.00001f);
         }

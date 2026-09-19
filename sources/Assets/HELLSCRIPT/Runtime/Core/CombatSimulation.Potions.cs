@@ -69,7 +69,7 @@ namespace Hellscript
             if(state.version==0||State.health<=0||state.resourceCooldown>0||Hero.potions.Count(def.id)<=0)return false;
             float next=Mathf.Min(Stats.maxResource,State.resource+Stats.maxResource*def.magnitude);
             if(next<=State.resource)return false;
-            State.resource=next;ConsumePotion(def);state.resourceCooldown=state.resourceTotal=def.cooldown;return true;
+            State.resource=next;ConsumePotion(def);state.resourceCooldown=state.resourceTotal=RunePotionCooldown(def.cooldown);return true;
         }
         void TryUseUtilityPotion(bool moved)
         {
@@ -86,7 +86,7 @@ namespace Hellscript
             var def=PotionCatalog.Get(state.equippedUtility);var changed=baseStats.WithPotion(def,EffectiveLevel);
             if(!baseStats.PotionChanges(changed))return false;
             state.utilityId=def.id;state.utilityRemaining=state.utilityDuration=def.duration;
-            state.utilityCooldown=state.utilityTotal=def.cooldown;ConsumePotion(def);return true;
+            state.utilityCooldown=state.utilityTotal=RunePotionCooldown(def.cooldown);ConsumePotion(def);return true;
         }
         void ConsumePotion(PotionDefinition def)
         {
