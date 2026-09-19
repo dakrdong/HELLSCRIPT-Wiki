@@ -45,6 +45,18 @@ Existing 6×4 `EquipmentAtlas` cells remain unchanged. `StorageGlyph` draws ware
 
 `StorageWindow.cs` owns layout, `.Style.cs` drawing, `.Dialogs.cs` detail/purchase/presets, `.Tools.cs` sort/names/history/guide and `.Drag.cs` input. A continuous repaint after switching language was also fixed. Existing data, purchasing and preset rules are documented in [Storage UI implementation](Storage_UI.en.md).
 
+## Pointer tracking and immediate pickup correction
+
+The follow-up request on 2026-09-20 removes the pickup delay from both warehouse and bag. The first movement while pressing an item starts dragging, without the 0.24-second hold or a movement-distance threshold. Pressing and releasing without moving still opens details or changes bulk selection. Empty-slot swipes, scrollbars and the mouse wheel scroll the inventories.
+
+The earlier ghost used coordinates relative to the safe-area frame's bottom-left pivot as a center-anchored position, displacing it from the pointer. It also treated every positive pointer ID as touch, although the current Input System can assign positive IDs to mice. Pickup no longer depends on time or that type inference. The slot-sized item icon is centered directly on the converted pointer position. Only the separate name, destination and drop-hint card is constrained to the screen. Neither element intercepts drop raycasts.
+
+Runtime acceptance now requires pickup in the same frame as the first one-pixel movement for both a positive mouse ID and touch. It measures icon-center error throughout movement, including portrait and screen edges. It also checks stationary clicks, empty-slot scrolling, moves, swaps and cancellation. The one-second dwell for opening another warehouse tab is a separate interaction.
+
+All 99 focused Edit Mode tests passed. The macOS runtime checked six immediate pickups and 74 icon-center positions, with a maximum pointer error of 0.000 pixels. These inputs were synthetic events through the actual cell handlers.
+
+Evidence: [landscape drag](StoragePointerEvidence/drag-landscape.png), [portrait drag](StoragePointerEvidence/drag-portrait.png), [runtime result](StoragePointerEvidence/runtime.txt), and [focused Edit Mode tests](StoragePointerEvidence/editmode.xml). These captures supersede the drag presentation in the initial implementation captures below. Screen sizes were exercised in desktop windows, not on physical mobile devices.
+
 ## Verification and captures
 
 An isolated checkout containing only this storage change passed **99 of 99** tests across `StorageTests`, `PresetStorageTests`, `InventoryLayoutTests` and `LocalizationTests`. New tests cover name persistence, legacy arrays, preservation through other transactions and unchanged state for invalid names or locked tabs. The full Edit Mode regression suite was not rerun for this change.
