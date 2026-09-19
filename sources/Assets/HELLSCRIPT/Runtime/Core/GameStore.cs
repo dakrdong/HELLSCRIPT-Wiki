@@ -266,7 +266,7 @@ namespace Hellscript
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
             Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
-            Data.premium=staged.premium;Data.warehouseCapacity=staged.warehouseCapacity;
+            Data.premium=staged.premium;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;

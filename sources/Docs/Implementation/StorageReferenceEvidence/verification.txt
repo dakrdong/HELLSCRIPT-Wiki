@@ -1,0 +1,15 @@
+2026-09-20 Storage reference acceptance
+Unity: 6000.6.0f1; macOS desktop development player.
+Scope: isolated checkout of 6288a1c plus the storage reference implementation.
+Edit Mode: 99 total, 99 passed, 0 failed, 0 skipped.
+Suites: StorageTests; PresetStorageTests; InventoryLayoutTests; LocalizationTests.
+Build: HELLSCRIPT_BUILD Succeeded errors=0.
+Runtime: HELLSCRIPT_STORAGE_SMOKE_OK; process exit code 0; 23 captures.
+Layouts: 1600x900, 900x1600, 390x844, 844x390; Korean, English and 125% reading size.
+New UI acceptance: sort dropdown, tab rename/save, guide, transaction history, native slot surfaces, non-overlapping quantity/filter controls, stable English repaint.
+Existing movement/economy/preset/pause acceptance: see runtime.txt.
+Inputs: synthetic pointer through the actual uGUI handlers and held-pointer reading, not a physical device.
+No full Edit Mode regression, physical iOS/Android, device performance or automated HTML pixel comparison was performed.
+HTML was inspected as source; browser rendering of its local file was blocked by the tool policy.
+The separate shared-working-directory run was 98/99 due to nine untranslated strings in concurrent rune work. That work is excluded from this checkout and commit.
+User saves were not used. Fixture save: /tmp/hellscript-storage-isolated-20260920.

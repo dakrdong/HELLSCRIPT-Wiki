@@ -152,6 +152,7 @@ namespace Hellscript
         public int[] cores=new int[8];
         // Purchased capacity per warehouse tab; 0 is a locked tab. Items keep their own tab and slot.
         public int[] warehouseCapacity={StorageRules.BaseCapacity,0,0,0,0};
+        public string[] warehouseNames=new string[StorageRules.Tabs];
         public string sweepDay="";
         public long lastSeenUtc;
         public long itemSequence;

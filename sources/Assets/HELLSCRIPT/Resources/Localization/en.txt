@@ -2509,10 +2509,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 레벨순	By level
 화면 크기 변경으로 이동을 취소했습니다.	The move was cancelled because the screen size changed.
 이동을 취소했습니다.	Move cancelled.
-계정 공용 창고 · {0} 소지품	Account warehouse · {0} bag
-골드 {0:N0}	Gold {0:N0}
-유료재화 {0:N0}	Premium {0:N0}
-보관 위치와 구매는 계정에 저장됩니다	Positions and purchases are saved to the account
 소지품	Bag
 초과	over
 프리셋	Presets
@@ -2524,8 +2520,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 전체 선택	Select all
 {0}칸 초과 · 꺼내기만 가능	{0} over · withdraw only
  · 확장 구매 가능	 · expansion available
-{0}번	Tab {0}
-{0}번 · 순차 개방	Tab {0} · opens in order
 출발지 탭을 바꾸려면 선택을 먼저 해제해 주세요.	Clear the selection before changing the source tab.
 전체 등급	All grades
 등급 없음	No grades
@@ -2612,7 +2606,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 재화 부족	Not enough currency
 구매하고 개방	Buy and open
 창고 {0}번 탭이 열렸습니다. 기본 {1}칸을 사용할 수 있습니다.	Warehouse tab {0} is open with {1} slots.
-유료재화는 아직 지급 경로가 없습니다. 결제 연동 전이므로 잔액이 있어야만 구매할 수 있습니다.	Premium currency has no source yet. Until payments are connected, a purchase needs an existing balance.
 보관 칸 확장	Expand storage
 창고 {0}번 탭 · {1}칸 → {2}칸	Warehouse tab {0} · {1} → {2} slots
 승인하면 {0}이 차감되고 이 탭에 보관 칸 {1}개가 추가됩니다.	Approving deducts {0} and adds {1} slots to this tab.
@@ -2732,6 +2725,33 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 몰이 중에는 공격을 보류합니다.	Attacks wait while gathering.
 황금 고블린	Golden Goblin
 현재 콘텐츠에는 영웅에게 부착되는 지속 피해가 없어 초당 {0}% 기준은 보관만 합니다. 바닥 장판은 회피 규칙이 처리합니다.	The current content has no damage over time attached to the hero, so the {0}% per second threshold is only stored. Ground fields are handled by the dodge rules.
+기본 보관함	Default vault
+보관함 {0}	Vault {0}
+보관함 이름 변경	Rename vault
+계정의 모든 영웅에게 같은 이름으로 표시됩니다.	All heroes on this account see the same name.
+보관함 이름을 변경했습니다.	Vault renamed.
+창고 이용 안내	Storage guide
+개별 이동	Move an item
+아이템을 눌러 상세 정보를 열고 꺼내기 또는 창고에 넣기를 선택하세요.	Select an item to inspect it, then choose Withdraw or Store.
+끌어서 배치	Drag to arrange
+빈칸에 놓으면 그 칸으로 이동하고, 아이템 위에 놓으면 자리를 교환합니다. 터치는 길게 눌러 끌고, 빠르게 쓸면 목록이 스크롤됩니다.	Drop on an empty slot to move there, or on an item to swap. On touchscreens, hold to drag and swipe to scroll.
+일괄 이동을 누른 뒤 한쪽 목록에서 아이템을 선택하세요. 목적지에 모두 들어갈 때 함께 이동합니다.	Choose Bulk move, then select items on one side. They move together only when the destination has room for all of them.
+보관함 확장	Expand a vault
+마지막 보관 칸 다음의 확장 슬롯에서 10칸씩 구매할 수 있습니다. 보관함마다 최대 100칸입니다.	The expansion tile after the final slot adds 10 slots. Each vault can hold up to 100 purchased slots.
+전투 중 창고를 열면 전투와 균열 시간이 함께 멈춥니다.	Opening storage during combat pauses both combat and the rift timer.
+창고 기록	Storage history
+아직 창고 이용 기록이 없습니다.	No storage activity yet.
+아이템 이동	Item moved
+아이템 배치·교환	Item placed or swapped
+장비 프리셋 적용	Equipment preset applied
+아이템 잠금 변경	Item lock changed
+계정 공용	Account shared
+기록	History
+안내	Guide
+순차 개방	Unlock in order
+잠긴 보관함의 이름은 바꿀 수 없습니다.	Unlock the vault before renaming it.
+보관함 이름은 1~12자로 입력해 주세요.	Enter a vault name with 1 to 12 characters.
+레어	Rare
 # --- composed at runtime; no source literal holds these ---
 # Legacy saved rift errors
 통로 연결 실패	A corridor failed to connect
