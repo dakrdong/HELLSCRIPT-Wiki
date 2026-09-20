@@ -57,6 +57,16 @@
 
 추가 실행 화면: [신규 계정](RuneV13Evidence/01-fresh-portrait-ko.png) · [잠긴 영역](RuneV13Evidence/05-region-preview-ko.png) · [전체 지도](RuneV13Evidence/07-full-map-ko.png) · [영어 세로](RuneV13Evidence/09-reference-portrait-en.png) · [공격 색 효과](RuneV13Evidence/11-attack-effects-ko.png) · [도감 영역 필터](RuneV13Evidence/13-codex-region-ko.png) · [세로 도감](RuneV13Evidence/14-codex-portrait-ko.png)
 
+## 2026-09-20: 드래그 표시와 보관함 회수
+
+마우스로 룬을 끌 때 집은 지점이 포인터를 따라가도록 수정했습니다. 마우스 드래그의 대기 시간을 없애고, 드래그를 시작한 위치에서 블록을 식별합니다. 이동 중인 블록은 보드 마스크 밖의 최상단에 표시하므로 보관함 뒤로 가려지지 않습니다. 보드에는 놓일 위치를 따로 미리 보여 줍니다.
+
+배치된 블록을 보관함 영역에 놓으면 기존 회수 처리로 연결됩니다. 보유 개수와 룬 ID를 유지하며 실행 취소와 변경 저장을 지원합니다. 다른 블록의 연결을 끊는 회수는 기존 규칙에 따라 거절합니다. 보드 밖의 다른 곳에 놓거나 취소하면 원래 배치를 유지합니다. 무기 전환·화면 닫기 때는 드래그 표시를 제거합니다. 보관 중인 룬도 포인터를 따라가며, 보관함에 다시 놓으면 그대로 보관합니다.
+
+[관련 Edit Mode 검사](RuneV13Evidence/Drag/editmode.xml)는 **69/69 통과**했습니다. [macOS 빌드](RuneV13Evidence/Drag/build.txt)와 [가로·세로 실행 검사](RuneV13Evidence/Drag/runtime.txt)도 통과했습니다. 집은 지점의 추적 오차가 1픽셀 미만인지, 보관함 위 표시, 회수, 실행 취소, 저장 후 재읽기, 재배치, 잘못된 드롭과 취소를 확인했습니다. 별도로 마우스 누름·이동·놓기 상태를 실제 게임 입력 시스템에 전달해 UI 입력 모듈을 거친 회수와 실행 취소를 검증했습니다. 자동 입력 검사이며 사람의 마우스 드래그나 모바일 실기기 시험으로 보고하지 않습니다. [검사 범위와 소스 해시](RuneV13Evidence/Drag/validation.json)를 보존합니다.
+
+[가로 드래그 화면](RuneV13Evidence/Drag/01-drag-over-storage-landscape.png) · [세로 드래그 화면](RuneV13Evidence/Drag/02-drag-over-storage-portrait.png) · [입력 모듈을 거쳐 회수한 화면](RuneV13Evidence/Drag/03-input-module-recovered.png)
+
 ## 유지보수 경로
 
 보드와 능력의 원본은 [v13 런타임 카탈로그](../../Assets/HELLSCRIPT/Resources/Runes/V13/catalog.json)이며 [Unity 내보내기](Rune_Mastery_Catalog.json)와 공개 DB가 이를 대조합니다. [추출 도구](../../tools/runes/import_v13.py)는 승인한 패키지 해시를 확인하고 내장 스크립트를 실행하지 않습니다. [리소스 변환 도구](../../tools/runes/render_v13.cjs)는 원본 SVG와 이미지를 사용해 재생성합니다.

@@ -100,6 +100,7 @@ namespace Hellscript
             var counts=Rect("Rune type activation",boardPanel);Place(counts,0,boardH-28*s,boardW,28*s);
             var effects=RuneEffects();for(int i=0;i<5;i++){int type=i;var count=RuneButton(counts,"rune-effects-type-"+i,"",()=>ShowRuneEffects(type),i*boardW/5,0,boardW/5,28*s);count.GetComponent<Outline>().enabled=false;runeTypeCounts[i]=count.GetComponentInChildren<Text>();runeTypeCounts[i].color=RuneBoardGraphic.TypeColor(i);}
             var storagePanel=RuneBox("Rune storage panel",frame);float storageW=portrait?workW:workW-boardW,storageH=portrait?workH-boardH:workH;
+            runeCanvas.storageDropTarget=storagePanel;runeCanvas.recover=()=>{runeSelected=runeCanvas.piece?.InstanceId;runeRotation=runeCanvas.rotation;RemoveRune();};
             Place(storagePanel,portrait?workX:workX+boardW,portrait?workY+boardH:workY,storageW,storageH);
             RuneTextAt(storagePanel,"룬 보관함",10*s,3*s,storageW*.5f,30*s,17);
             RuneButton(storagePanel,"rune-effects","활성 효과",ShowRuneEffects,storageW-92*s,5*s,82*s,27*s);

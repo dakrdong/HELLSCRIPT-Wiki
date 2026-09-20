@@ -6,6 +6,8 @@ using System.Linq;
 using Hellscript.Runes;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 namespace Hellscript
@@ -15,7 +17,7 @@ namespace Hellscript
     {
         GameController game;string output;int captures;readonly HashSet<string> missing=new HashSet<string>();
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)] static void Install()
-        {if(Debug.isDebugBuild&&Environment.GetCommandLineArgs().Contains("-hellscriptRuneV13Smoke")){Application.runInBackground=true;new GameObject("Rune v13 verification").AddComponent<RuntimeRuneV13Smoke>();}}
+        {if(Debug.isDebugBuild&&Environment.GetCommandLineArgs().Any(a=>a=="-hellscriptRuneV13Smoke"||a=="-hellscriptRuneDragSmoke")){Application.runInBackground=true;new GameObject("Rune v13 verification").AddComponent<RuntimeRuneV13Smoke>();}}
         static string Arg(string name){var a=Environment.GetCommandLineArgs();int i=Array.IndexOf(a,name);if(i<0||i+1>=a.Length)throw new ArgumentException(name);return a[i+1];}
         static void Require(bool check,string message){if(!check)throw new InvalidOperationException(message);}
         Button Find(string name)=>game.UI.GetComponentsInChildren<Button>().Single(b=>b.name==name);
@@ -33,11 +35,87 @@ namespace Hellscript
             Require(Board.editor.Board.Cells.Count==259,"Wrong board geometry");foreach(var key in Loc.Missing)missing.Add(key);
             ScreenCapture.CaptureScreenshot(Path.Combine(output,(++captures).ToString("00")+"-"+name+".png"));yield return new WaitForSecondsRealtime(.2f);
         }
+        RuneBoardGraphic DragVisual=>game.UI.GetComponentsInChildren<RuneBoardGraphic>().SingleOrDefault(b=>b.name=="Rune drag visual");
+        static Vector2 ScreenCenter(RectTransform rect)=>RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center));
+        PointerEventData BeginBoardDrag(RunePlacement placement,out Vector2 grabOffset,out HexCell grabbedCell)
+        {
+            grabbedCell=placement.OccupiedCells.Last()-placement.Anchor;grabOffset=new Vector2(3,-2);
+            var press=Board.ScreenCell(placement.OccupiedCells.Last())+grabOffset;
+            var e=new PointerEventData(EventSystem.current){pointerId=-1,button=PointerEventData.InputButton.Left,pressPosition=press,position=press};
+            Board.OnPointerDown(e);Board.OnInitializePotentialDrag(e);Require(!e.useDragThreshold,"Mouse pickup should be immediate");
+            e.position+=Vector2.right*.5f;Board.OnBeginDrag(e);e.dragging=true;
+            Require(Board.Dragging,"Fast mouse pickup panned the board instead of lifting the piece");return e;
+        }
+        IEnumerator VerifyInputModuleDrag()
+        {
+            yield return Resize(1280,720);
+            var placed=Board.editor.DraftPlacements.First();int count=Board.editor.DraftPlacements.Count;
+            var start=Board.ScreenCell(placed.OccupiedCells.Last());var end=ScreenCenter(Board.storageDropTarget);
+            string before=JsonUtility.ToJson(game.Store.Data.runes);var mouse=InputSystem.AddDevice<Mouse>("Rune verification mouse");
+            try
+            {
+                InputSystem.QueueStateEvent(mouse,new MouseState{position=start});yield return null;
+                InputSystem.QueueStateEvent(mouse,new MouseState{position=start}.WithButton(MouseButton.Left));yield return null;
+                foreach(float amount in new[]{.02f,.3f,.7f,1f})
+                {
+                    var point=Vector2.Lerp(start,end,amount);InputSystem.QueueStateEvent(mouse,new MouseState{position=point}.WithButton(MouseButton.Left));yield return null;
+                    Require(Board.Dragging,"Input module did not route a held mouse to rune dragging");
+                    Require(Vector2.Distance(DragVisual.ScreenCell(placed.OccupiedCells.Last()-placed.Anchor),point)<1,"Input module drag lost pointer alignment");
+                }
+                InputSystem.QueueStateEvent(mouse,new MouseState{position=end});yield return null;
+                Require(DragVisual==null&&!Board.editor.IsInDraft(placed.InstanceId)&&Board.editor.DraftPlacements.Count==count-1,"Input module did not route release to storage recovery");
+                Require(before==JsonUtility.ToJson(game.Store.Data.runes),"Input module release saved the draft prematurely");
+                yield return Capture("input-module-recovered",1280,720);Click("rune-undo");Require(Board.editor.IsInDraft(placed.InstanceId),"Input module recovery did not preserve undo");
+            }
+            finally{InputSystem.RemoveDevice(mouse);}
+        }
+        IEnumerator VerifyDragging()
+        {
+            game.Store.Data.runes=JsonUtility.FromJson<RuneGrowthState>(File.ReadAllText(Arg("-hellscriptRuneFixture")));RuneGrowth.Normalize(game.Store.Data);game.Store.Save();
+            game.UI.ShowRunes();Click("rune-weapon-sword");
+            foreach(var size in new[]{new Vector2Int(1280,720),new Vector2Int(720,1280)})
+            {
+                yield return Resize(size.x,size.y);var board=Board;var placement=board.editor.DraftPlacements.First(p=>p.Piece.Shape.Size>1);
+                string id=placement.InstanceId,before=JsonUtility.ToJson(game.Store.Data.runes);int owned=game.Store.Data.runes.owned.Count,count=board.editor.DraftPlacements.Count;var pan=board.pan;
+                var e=BeginBoardDrag(placement,out var offset,out var cell);e.position+=new Vector2(17,9);board.OnDrag(e);Canvas.ForceUpdateCanvases();
+                Require(Vector2.Distance(DragVisual.ScreenCell(cell),e.position-offset)<1,"Grabbed point no longer follows the mouse");
+                Require(board.pan==pan,"Dragging a placed rune moved the board");
+                e.position=ScreenCenter(board.storageDropTarget);board.OnDrag(e);yield return null;Canvas.ForceUpdateCanvases();
+                var ghost=DragVisual;Require(ghost!=null&&!ghost.canvasRenderer.cull,"Rune disappears over storage");
+                Require(ghost.transform.parent==board.canvas.rootCanvas.transform&&ghost.transform.GetSiblingIndex()==ghost.transform.parent.childCount-1,"Rune is behind the storage panel");
+                Require(Vector2.Distance(ghost.ScreenCell(cell),e.position-offset)<1,"Rune stopped following outside the board");
+                var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(e,hits);Require(hits.Count>0&&hits.All(h=>h.gameObject!=ghost.gameObject),"Drag visual intercepted the drop target");
+                yield return Capture("drag-over-storage-"+(size.x>size.y?"landscape":"portrait"),size.x,size.y);
+                board.OnEndDrag(e);Require(!board.editor.IsInDraft(id)&&board.editor.DraftPlacements.Count==count-1,"Storage drop did not recover the placed rune");
+                Require(DragVisual==null&&game.Store.Data.runes.owned.Count==owned,"Drop left a ghost or changed ownership");
+                Require(before==JsonUtility.ToJson(game.Store.Data.runes),"Storage drop leaked into the account before Save");
+                Click("rune-undo");Require(Board.editor.IsInDraft(id),"Storage recovery cannot be undone");
+                placement=Board.editor.DraftPlacements.Single(p=>p.InstanceId==id);e=BeginBoardDrag(placement,out _,out _);e.position=ScreenCenter(Board.storageDropTarget);Board.OnDrag(e);Board.OnEndDrag(e);Click("rune-save");
+                var disk=new GameStore(Arg("-hellscriptSavePath"),game.catalog);Require(disk.Data.runes.placements.All(p=>p.runeId!=id)&&disk.Data.runes.owned.Count==owned,"Recovered rune did not survive disk reload");
+                yield return null;Canvas.ForceUpdateCanvases();
+                var card=Find("rune-card-"+id);var drag=card.GetComponent<RuneStorageDrag>();var start=ScreenCenter((RectTransform)card.transform);
+                e=new PointerEventData(EventSystem.current){pointerId=-1,pressPosition=start,position=start};drag.OnPointerDown(e);drag.OnInitializePotentialDrag(e);Require(!e.useDragThreshold,"Storage mouse drag is delayed");drag.OnBeginDrag(e);e.dragging=true;
+                Require(DragVisual!=null&&Vector2.Distance(DragVisual.ScreenCell(new HexCell(0,0)),e.position)<1,"Stored rune is not attached to the mouse");
+                drag.OnEndDrag(e);Require(DragVisual==null&&!Board.editor.IsInDraft(id),"Dropping a stored rune back into storage changed its state");
+                drag.OnBeginDrag(e);var anchor=Board.editor.ValidPlacementAnchors(id,drag.rotation).First(c=>Board.Contains(Board.ScreenCell(c)));
+                e.position=Board.ScreenCell(anchor);drag.OnDrag(e);Require(Board.landingValid,"Storage-to-board preview is invalid");drag.OnEndDrag(e);Require(Board.editor.IsInDraft(id),"Storage-to-board drop failed");Click("rune-save");
+                placement=Board.editor.DraftPlacements.Single(p=>p.InstanceId==id);var savedAnchor=placement.Anchor;
+                e=BeginBoardDrag(placement,out _,out _);e.position=new Vector2(-40,-40);Board.OnDrag(e);Board.OnEndDrag(e);
+                Require(DragVisual==null&&Board.editor.DraftPlacements.Single(p=>p.InstanceId==id).Anchor.Equals(savedAnchor),"Invalid drop changed the original placement");
+                e=BeginBoardDrag(placement,out _,out _);Board.OnCancel(e);e.position=ScreenCenter(Board.storageDropTarget);Board.OnDrag(e);Board.OnEndDrag(e);
+                Require(DragVisual==null&&Board.editor.IsInDraft(id),"Cancelled drag recovered a rune");
+                e=BeginBoardDrag(placement,out _,out _);Click("rune-weapon-bow");Require(DragVisual==null,"Changing weapon left the drag visual on screen");Click("rune-weapon-sword");
+            }
+            yield return VerifyInputModuleDrag();
+            File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: landscape and portrait; immediate mouse pickup; exact grabbed-point tracking; unclipped topmost visual over storage; transparent raycasts; storage recovery; draft-only change; undo; save/disk reload without ownership loss; storage pickup and return; storage-to-board placement; invalid drop; cancellation; weapon-switch cleanup. Also queued mouse press/held movement/release through the actual InputSystem UI input module and verified recovery and undo. Native automated input workflow, not physical mobile input.\n");
+            Application.Quit(0);
+        }
         IEnumerator Start()
         {
             output=Arg("-hellscriptScreenshots");Arg("-hellscriptSavePath");Directory.CreateDirectory(output);
             Application.logMessageReceived+=(m,s,t)=>{if(t==LogType.Exception){File.WriteAllText(Path.Combine(output,"failure.txt"),m+"\n"+s);Application.Quit(1);}};
             yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Store unavailable");game.enabled=false;game.ApplyLanguage("ko");game.ApplyInterfaceScale(100);
+            if(Environment.GetCommandLineArgs().Contains("-hellscriptRuneDragSmoke")){yield return VerifyDragging();yield break;}
             game.UI.ShowRunes();yield return Capture("fresh-portrait-ko",720,1280);
             Click("rune-weapon-sword");yield return null;
             string id=game.Store.Data.runes.owned[0].id;Click("rune-card-"+id);Tap(new HexCell(1,0));Require(Board.editor.DraftPlacements.Count==1,"Tap placement failed");Click("rune-save");yield return null;

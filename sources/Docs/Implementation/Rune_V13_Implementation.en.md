@@ -36,6 +36,16 @@ The [macOS development build](RuneV13Evidence/build.txt) and [native workflow](R
 
 Native UI automation invokes UGUI buttons and pointer events. It is distinct from physical input testing. Physical mobile touch/pinch behavior, device performance, long-term progression and all equipment combinations are outside this macOS verification scope.
 
+## 2026-09-20: Pointer-following drag and storage recovery
+
+A dragged rune now follows the grabbed point immediately for mouse input. Pickup identifies the piece at the press position. The moving visual is rendered above the entire rune screen, outside the board mask, so it remains visible over storage. A separate snapped preview shows the prospective board placement.
+
+Dropping a placed rune over storage uses the existing recovery operation, preserving ownership and instance IDs while supporting Undo and explicit Save. Recovery that disconnects other pieces retains the existing refusal rule. Invalid drops or cancellation keep the original placement. Switching weapons or closing the screen removes the floating visual. Stored runes also follow the pointer; dropping them back over storage leaves them stored.
+
+The [focused Edit Mode run](RuneV13Evidence/Drag/editmode.xml) passed **69/69**. The [macOS build](RuneV13Evidence/Drag/build.txt) and [landscape/portrait runtime checks](RuneV13Evidence/Drag/runtime.txt) passed. Checks cover subpixel grabbed-point alignment, visibility over storage, recovery, Undo, save/disk reload, replacement, invalid drops and cancellation. A separate check queues mouse press, held movement and release states through the actual InputSystem UI input module and verifies recovery and Undo. These are automated input checks, not evidence of human mouse dragging or physical mobile testing. The [scope and source hashes](RuneV13Evidence/Drag/validation.json) are preserved.
+
+[Landscape drag](RuneV13Evidence/Drag/01-drag-over-storage-landscape.png) · [Portrait drag](RuneV13Evidence/Drag/02-drag-over-storage-portrait.png) · [Recovery through the input module](RuneV13Evidence/Drag/03-input-module-recovered.png)
+
 ## Maintenance
 
 [Runtime reference data](../../Assets/HELLSCRIPT/Resources/Runes/V13/catalog.json) is checked against the [Unity export](Rune_Mastery_Catalog.json) and wiki databases. The [importer](../../tools/runes/import_v13.py) checks the supplied archive hash without executing embedded scripts. The [art converter](../../tools/runes/render_v13.cjs) regenerates assets from supplied SVGs and images.
