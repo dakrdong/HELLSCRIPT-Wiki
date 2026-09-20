@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T19:11:53+09:00",
+  "generatedAt": "2026-09-20T19:15:46+09:00",
   "databases": [
     {
       "id": "resources",
@@ -160,6 +160,41 @@
           "related": [
             "asset-provenance",
             "image-prompts"
+          ]
+        },
+        {
+          "id": "ui-menu-storage",
+          "name": "창고 바로가기 아이콘",
+          "category": "콘텐츠 바로가기 아이콘",
+          "summary": "사용자가 첨부한 투명 PNG를 마을·전투의 실제 창고 바로가기에 적용했습니다.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-storage.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "제작 방법": "사용자 첨부 원본을 변경 없이 복사",
+            "완전 투명 픽셀": 611509,
+            "SHA-256": "c4dc070018f427908f1ad6711c22f8a0894e537aabd6384a10af596a868a1ee8",
+            "Unity GUID": "bb841ca04ad654fc1ab019d05b8159e5",
+            "사용처": "GameUI.ContentDock → ShowStorage"
+          },
+          "source": {
+            "path": "Docs/Implementation/Town_Hud_Responsive.md",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "GlobalHUD/menu-storage.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-storage.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "town-hud-responsive",
+            "play-content-dock"
           ]
         },
         {

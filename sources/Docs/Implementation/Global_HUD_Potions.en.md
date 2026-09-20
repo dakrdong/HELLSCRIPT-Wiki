@@ -1,5 +1,7 @@
 # Global HUD, Potions and Hunting Edicts
 
+From September 20, 2026, potions stay above every skill row in portrait as well as landscape. The earlier bottom potion row is superseded by [Town HUD improvements](Town_Hud_Responsive.en.md).
+
 Date: 2026-09-14
 갱신일: 2026-09-17 · 작성일: 2026-09-14
 

@@ -5,12 +5,17 @@ using UnityEngine.UI;
 namespace Hellscript
 {
     // Pointer ownership keeps a second thumb on the interaction button from stealing movement.
+    [RequireComponent(typeof(CanvasGroup))]
     public sealed class TownJoystick : MonoBehaviour,IPointerDownHandler,IDragHandler,IPointerUpHandler
     {
         public RectTransform Knob;
         public Vector2 Value {get;private set;}
+        public const float IdleOpacity=.3f;
+        CanvasGroup visibility;
+        CanvasGroup Visibility=>visibility!=null?visibility:visibility=GetComponent<CanvasGroup>();
         int? pointer;
-        public void OnPointerDown(PointerEventData e){if(pointer.HasValue)return;pointer=e.pointerId;OnDrag(e);}
+        void Awake(){visibility=GetComponent<CanvasGroup>();ResetInput();}
+        public void OnPointerDown(PointerEventData e){if(pointer.HasValue)return;pointer=e.pointerId;Visibility.alpha=1;OnDrag(e);}
         public void OnDrag(PointerEventData e)
         {
             if(pointer!=e.pointerId)return;var rect=(RectTransform)transform;
@@ -19,7 +24,21 @@ namespace Hellscript
             if(Value.magnitude<.12f)Value=Vector2.zero;Knob.anchoredPosition=Value*radius;
         }
         public void OnPointerUp(PointerEventData e){if(pointer==e.pointerId)ResetInput();}
-        public void ResetInput(){pointer=null;Value=Vector2.zero;if(Knob!=null)Knob.anchoredPosition=Vector2.zero;}
+        public void ResetInput(){pointer=null;Value=Vector2.zero;if(Knob!=null)Knob.anchoredPosition=Vector2.zero;if(Visibility!=null)Visibility.alpha=IdleOpacity;}
+        // Geometry is measured in usable display pixels, then converted once to the page canvas.
+        public static Rect Bounds(float width,float height,float hudTop)
+        {
+            float shortSide=Mathf.Min(width,height),margin=shortSide*.03f,bottom=hudTop+margin;
+            float diameter=Mathf.Min(shortSide*.2f,Mathf.Max(1,height-bottom-48-margin));
+            return new Rect(margin,bottom,diameter,diameter);
+        }
+        public void Reflow(Rect pixels,float canvasScale)
+        {
+            var rect=(RectTransform)transform;var position=pixels.position/canvasScale;var size=pixels.size/canvasScale;
+            if(rect.anchoredPosition==position&&rect.sizeDelta==size)return;
+            ResetInput();rect.anchoredPosition=position;rect.sizeDelta=size;
+            if(Knob!=null)Knob.sizeDelta=size*(64f/168f);
+        }
         void OnDisable()=>ResetInput();
         void OnApplicationFocus(bool focused){if(!focused)ResetInput();}
         void OnApplicationPause(bool paused){if(paused)ResetInput();}

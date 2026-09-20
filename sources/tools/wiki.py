@@ -295,6 +295,17 @@ def build_resources(databases):
                    IMPL+'Asset_Provenance.md',status='임시 사용',image={'file':filename},assetPath=path,
                    refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/'+('WorldView.Rift.cs' if filename=='RiftStone.png' else 'GameUI.cs'))],
                    related=['asset-provenance','equipment-atlas-prompt' if filename=='EquipmentAtlas.png' else 'rift-stone-prompt' if filename=='RiftStone.png' else 'image-prompts']))
+    storage_path=ART+'GlobalHUD/menu-storage.png'
+    storage_raw=(ROOT/storage_path).read_bytes();INPUTS[storage_path]=digest(storage_raw)
+    storage_meta=read(storage_path+'.meta')
+    storage_provenance=json.loads(read(IMPL+'TownHudEvidence/provenance.json'))
+    rows.append(record('ui-menu-storage','창고 바로가기 아이콘','콘텐츠 바로가기 아이콘',
+        '사용자가 첨부한 투명 PNG를 마을·전투의 실제 창고 바로가기에 적용했습니다.',
+        {'원본 경로':storage_path,'해상도':'1254 × 1254','색상 모드':'RGBA','제작 방법':'사용자 첨부 원본을 변경 없이 복사',
+         '완전 투명 픽셀':storage_provenance['fullyTransparentPixels'],'SHA-256':digest(storage_raw),
+         'Unity GUID':re.search(r'^guid: (\w+)',storage_meta,re.M)[1],'사용처':'GameUI.ContentDock → ShowStorage'},
+        IMPL+'Town_Hud_Responsive.md',status='사용 중',image={'file':'GlobalHUD/menu-storage.png'},assetPath=storage_path,
+        refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs')],related=['town-hud-responsive','play-content-dock']))
     byid={d['id']:d for d in databases}
     for group in ['skills','heroes','items']:
         for item in byid[group]['rows']:
@@ -652,6 +663,8 @@ def build():
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
     for file in (ROOT/ART).glob('*.png'):
         target=SITE/'media'/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,target)
+    (SITE/'media/GlobalHUD').mkdir(parents=True,exist_ok=True)
+    shutil.copyfile(ROOT/ART/'GlobalHUD/menu-storage.png',SITE/'media/GlobalHUD/menu-storage.png')
     report=validate(dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')

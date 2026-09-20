@@ -1,5 +1,7 @@
 # HELLSCRIPT Play-Screen Content Dock
 
+From September 20, 2026, the fourth shortcut uses the attached warehouse icon. The town uses a 44-unit header, a 20-unit gear and a dock starting at 48 units from the top. Earlier measurements below are historical; see [Town HUD improvements](Town_Hud_Responsive.en.md).
+
 Date: 2026-09-15
 작성일: 2026-09-15
 

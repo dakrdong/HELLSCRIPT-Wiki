@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-20",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "total": 56,
+    "passed": 56,
+    "failed": 0,
+    "scope": [
+      "GlobalHudTests",
+      "GlobalHudResourceTests",
+      "TownWalkTests",
+      "InterfaceScaleTests"
+    ]
+  },
+  "build": {
+    "target": "macOS development",
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "runtime": {
+    "result": "HELLSCRIPT_TOWN_HUD_SMOKE_OK",
+    "exitCode": 0,
+    "resolutions": [
+      [
+        1600,
+        900
+      ],
+      [
+        900,
+        1600
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        640,
+        360
+      ],
+      [
+        360,
+        640
+      ]
+    ],
+    "interfacePercent": [
+      50,
+      100,
+      150
+    ],
+    "combinations": 18,
+    "safeArea": true,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "input": "Simulated EventSystem pointer events driving the production TownWalk controller",
+    "physicalMobileVerified": false,
+    "warnings": "URP reported stripped GaussianDepthOfField, BokehDepthOfField and PaniniProjection post-processing shaders. These render-pipeline warnings are outside the UI changes."
+  }
+}

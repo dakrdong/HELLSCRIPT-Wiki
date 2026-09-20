@@ -1,5 +1,7 @@
 # Forest settlement and title entry flow
 
+The September 20, 2026 update hides the town guide, menu and status text, replaces NPC speech bubbles with outlined names, and updates joystick scaling, opacity and the compact header. See [Town HUD improvements](Town_Hud_Responsive.en.md).
+
 Date: 2026-09-14
 
 [한국어](Forest_Settlement.md)
