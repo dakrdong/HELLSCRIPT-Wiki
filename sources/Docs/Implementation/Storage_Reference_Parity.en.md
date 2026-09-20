@@ -49,6 +49,8 @@ Existing 6×4 `EquipmentAtlas` cells remain unchanged. `StorageGlyph` draws ware
 
 The follow-up request on 2026-09-20 removes the pickup delay from both warehouse and bag. The first movement while pressing an item starts dragging, without the 0.24-second hold or a movement-distance threshold. Pressing and releasing without moving still opens details or changes bulk selection. Empty-slot swipes, scrollbars and the mouse wheel scroll the inventories.
 
+Dragging no longer shows numbered empty-slot placement hints. Item names, destinations, swap messages, blocked-drop messages and tab-hover instructions remain visible. See the [drag capture without an empty-slot hint](StoragePointerEvidence/drag-portrait-no-slot-hint.png).
+
 The earlier ghost used coordinates relative to the safe-area frame's bottom-left pivot as a center-anchored position, displacing it from the pointer. It also treated every positive pointer ID as touch, although the current Input System can assign positive IDs to mice. Pickup no longer depends on time or that type inference. The slot-sized item icon is centered directly on the converted pointer position. Only the separate name, destination and drop-hint card is constrained to the screen. Neither element intercepts drop raycasts.
 
 Runtime acceptance now requires pickup in the same frame as the first one-pixel movement for both a positive mouse ID and touch. It measures icon-center error throughout movement, including portrait and screen edges. It also checks stationary clicks, empty-slot scrolling, moves, swaps and cancellation. The one-second dwell for opening another warehouse tab is a separate interaction.
