@@ -60,15 +60,15 @@ namespace Hellscript
             RuneButton(title,"rune-codex","도감",ShowRuneCodex,width-margin*2-132*s,3*s,44*s,head-margin-6*s);
             RuneButton(title,"rune-info","ⓘ",ShowRuneInformation,width-margin*2-84*s,3*s,34*s,head-margin-6*s);
             RuneButton(title,"닫기","×",CloseRunes,width-margin*2-46*s,3*s,36*s,head-margin-6*s);
-            float rail=portrait?0:88*s,weaponH=portrait?56*s:0;
+            float rail=portrait?0:88*s,weaponH=portrait?78*s:0;
             var weapons=Rect("Weapon rail",frame);Place(weapons,margin,bodyY,portrait?width-2*margin:rail,portrait?weaponH:bodyH);
             for(int i=0;i<6;i++)
             {
                 string weapon=RuneMasteryCatalog.Weapons[i];float ww=portrait?weapons.rect.width/6:rail-6*s,wh=portrait?weaponH-5*s:Mathf.Min(82*s,bodyH/6-5*s);
                 var b=RuneButton(weapons,"rune-weapon-"+weapon,"",()=>SwitchRuneWeapon(weapon),portrait?i*ww:0,portrait?0:i*(wh+5*s),ww-3*s,wh,weapon==runeWeapon);
-                float artSize=portrait?32*s:46*s;var image=Rect("Weapon art",b.transform);Place(image,portrait?2*s:(ww-artSize)/2,3*s,artSize,artSize);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=Resources.Load<Texture2D>("Runes/V13/Weapons/"+weapon);raw.raycastTarget=false;
-                RuneTextAt(b.transform,RuneMasteryCatalog.Name(weapon),portrait?37*s:3*s,portrait?6*s:wh*.59f,portrait?ww-41*s:ww-6*s,19*s,12,portrait?TextAnchor.MiddleLeft:TextAnchor.MiddleCenter);
-                RuneTextAt(b.transform,"Lv. "+RuneMasteryProgress.Get(runeSource,weapon).level,portrait?37*s:3*s,portrait?24*s:wh*.80f,portrait?ww-41*s:ww-6*s,12*s,9,portrait?TextAnchor.MiddleLeft:TextAnchor.MiddleCenter);
+                float artSize=portrait?32*s:46*s;var image=Rect("Weapon art",b.transform);Place(image,(ww-3*s-artSize)/2,3*s,artSize,artSize);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=Resources.Load<Texture2D>("Runes/V13/Weapons/"+weapon);raw.raycastTarget=false;
+                RuneTextAt(b.transform,RuneMasteryCatalog.Name(weapon),3*s,portrait?36*s:wh*.59f,ww-9*s,19*s,12,TextAnchor.MiddleCenter);
+                RuneTextAt(b.transform,"Lv. "+RuneMasteryProgress.Get(runeSource,weapon).level,3*s,portrait?56*s:wh*.80f,ww-9*s,12*s,9,TextAnchor.MiddleCenter);
             }
             float workX=margin+rail,workW=width-margin*2-rail,workY=bodyY+weaponH,workH=bodyH-weaponH;
             float boardW=portrait?workW:workW*.5f,boardH=portrait?Mathf.Min(workH*.56f,Mathf.Max(230*s,bodyH*.43f)):workH;
