@@ -1,0 +1,47 @@
+[
+  {
+    "name": "hunt-edict",
+    "flag": "-hellscriptHuntEdictSmoke",
+    "exitCode": 0,
+    "passed": true,
+    "durationSeconds": 26.25,
+    "screenshots": 24,
+    "report": "PASS: hunt edict window over the real GameStore; landscape-town: 1600x900 landscape=True scale=1.896; skills saved: ranks/slots/passives persisted through GameStore.CommitHuntEdict; presets: store, HED3 share code, import into slot 2, select and save; portrait-430x840: 430x840 landscape=False scale=1; portrait-390x844: 390x844 landscape=False scale=0.907; portrait-360x640: 360x640 landscape=False scale=0.762; portrait-430x840-large-text: 430x840 landscape=False scale=1; landscape-844x390: 844x390 landscape=True scale=1; landscape-640x360: 640x360 landscape=True scale=0.758; landscape-1280x720: 1280x720 landscape=True scale=1.517; landscape-1920x1080: 1920x1080 landscape=True scale=2.275; landscape-rift: 1600x900 landscape=True scale=1.896. Rank change, equip/replace, passive equip, save and reload; equipped-only skill options and a real drag reorder with revert; every global group on six tabs, a choice dialog, toggles and a number step; unsaved-close dialog; preset store/share/import/select/rename; portrait 430x840/390x844/360x640 and landscape 844x390/640x360/1280x720/1920x1080 frames; English and 150% text; rift pause, in-rift save applied to the running simulation, resume. All eight navigation tabs pass event-system pointer hit checks at every checked frame. Synthetic pointer through the real button and drag handlers; no physical device claim.\n"
+  },
+  {
+    "name": "town-hud",
+    "flag": "-hellscriptTownHudSmoke",
+    "exitCode": 0,
+    "passed": true,
+    "durationSeconds": 22.69,
+    "screenshots": 8,
+    "report": "PASS: 18 resolution/scale combinations, safe area, Korean/English, production movement, release, second-pointer ownership, idle 0.3 / active 1.0 opacity, outlined names, compact header, native attached storage icon and real storage action. Desktop simulated pointer input; physical mobile not tested.\n"
+  },
+  {
+    "name": "storage",
+    "flag": "-hellscriptStorageSmoke",
+    "exitCode": 0,
+    "passed": true,
+    "durationSeconds": 29.5,
+    "screenshots": 24,
+    "report": "PASS: storage window over real ItemGenerator items, GemInventory stacks and RuneGrowth pieces; layouts landscape-town: 1600x900 landscape=True cell=60; portrait-town: 900x1600 landscape=False cell=74; portrait-phone: 390x844 landscape=False cell=43; landscape-phone: 844x390 landscape=True cell=42; english-landscape: 844x390 landscape=True cell=42; english-portrait: 390x844 landscape=False cell=43; english-large-text: 390x844 landscape=False cell=43; landscape-rift: 1600x900 landscape=True cell=60. Same-frame first-pixel pickup (positive mouse ID and touch): 6; icon-center samples: 74, maximum pointer error: 0.000px; stationary click, empty-slot scrolling and pointer-at-screen-edge passed. Exact-slot drop, atomic swap, immediate touch pickup with 1s tab hover then exact drop, cancelled drag, sorted-view freeze, one-direction bulk selection with the exact refusal text, all-or-nothing bulk move, expansion double-click charged once, in-order tab purchase, preset apply from warehouse+bag with origin return, rotation keeping tab/category/bulk, rift pause and resume, town-only preset policy. Synthetic pointer through the real cell handlers and the window's pointer reading; no physical device claim.\n"
+  },
+  {
+    "name": "rune-clarity",
+    "flag": "-hellscriptRuneClaritySmoke",
+    "exitCode": 0,
+    "passed": true,
+    "durationSeconds": 13.39,
+    "screenshots": 7,
+    "report": "PASS: equal landscape board/storage widths; closed inset frames; pixel-aligned canvas; six full-UV 512px weapon icons; fixed unoccupiable root; all six rotations match card/detail/pickup; enlarged detail pickup; actual UI input module press/held movement/release from detail and inventory at the rotated cell (<1px tracking); rotated placement; invalid drop retention; storage recovery; undo; draft isolation; owned IDs/count and rotation survive save/disk reload; Korean/English, landscape/portrait and 140% type. Automated macOS input, not physical mouse/mobile testing.\n"
+  },
+  {
+    "name": "rune-drag",
+    "flag": "-hellscriptRuneDragSmoke",
+    "exitCode": 0,
+    "passed": true,
+    "durationSeconds": 9.92,
+    "screenshots": 3,
+    "report": "PASS: landscape and portrait; immediate mouse pickup; exact grabbed-point tracking; unclipped topmost visual over storage; transparent raycasts; storage recovery; draft-only change; undo; save/disk reload without ownership loss; storage pickup and return; storage-to-board placement; invalid drop; cancellation; weapon-switch cleanup. Also queued mouse press/held movement/release through the actual InputSystem UI input module and verified recovery and undo. Native automated input workflow, not physical mobile input.\n"
+  }
+]

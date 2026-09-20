@@ -1,0 +1,115 @@
+{
+  "date": "2026-09-20",
+  "scope": "Browser design prototype only; no Unity code or player save integration",
+  "browser": "Codex In-app Browser (iab)",
+  "checkedFlowCount": 13,
+  "checks": [
+    "Enhancement preview shows 42.4 -> 46.2, +9.0%, with 3,200 gold + 20 materials.",
+    "Purchase deducts only 10,240, moves bag 3 -> 4 and disables duplicate purchase.",
+    "Locked ring sale remains disabled.",
+    "Sell and buyback transfer the same fixture item for 520; gold returns to 18,220.",
+    "Weapon filter returns exactly two offers; Korean/English visible copy switches.",
+    "390px portrait switches list -> details; purchase control ends at y=777.6 in an 844px viewport.",
+    "320px Korean and English details have no horizontal overflow or out-of-bounds controls.",
+    "844x390 uses two columns without horizontal overflow; content scrolls in this review preview.",
+    "Insufficient-funds fixture disables purchase at 3,000 gold.",
+    "Warehouse comparison uses I17 power 45.6 versus offer 44, showing -3.5% and its location.",
+    "Full bag blocks purchase at 50/50; selling one item changes 49/50 and re-enables it.",
+    "Ceiling fixture uses I18 power 47.2, removes recommendation badges and shows no-upgrade message.",
+    "Close and reopen restore the shop view."
+  ],
+  "viewportChecks": [
+    {
+      "width": 1600,
+      "height": 900,
+      "language": [
+        "ko",
+        "en"
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "language": [
+        "ko"
+      ],
+      "purchaseButtonBottom": 777.5859375
+    },
+    {
+      "width": 320,
+      "height": 740,
+      "language": [
+        "ko",
+        "en"
+      ],
+      "horizontalOverflow": false
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "language": [
+        "en"
+      ],
+      "columns": 2,
+      "horizontalOverflow": false
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "language": [
+        "ko"
+      ]
+    }
+  ],
+  "captureMode": "Native visible-viewport JPEG at the tested browser dimensions; page scrolling is intentional for review. Recaptured to avoid full-page screenshot scaling errors at devicePixelRatio 2.",
+  "unverified": [
+    "Unity integration",
+    "Game persistence and transaction receipts",
+    "Full combat recommendation evaluator",
+    "Progression balance and economy calibration",
+    "Physical mobile touch/safe area/performance",
+    "Full Unity regression"
+  ],
+  "art": {
+    "source": "Assets/HELLSCRIPT/Resources/Art/EquipmentAtlas.png",
+    "sourceSha256": "6030455d309fdf71821c96fa45f322627788564bfe3f5bf8e242fcbdf9cb46e5",
+    "preview": "equipment-preview.png",
+    "previewSha256": "58726beed9590f312d912d836562a5e5e3edd1fe87a0f063ff58b9fd70bb8c5d",
+    "method": "deterministic 768px thumbnail, PNG alpha retained; source unchanged"
+  },
+  "captures": [
+    {
+      "file": "buyback-ko.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "landscape-en.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "landscape-ko.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "landscape-phone-en.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "portrait-320-en.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "portrait-detail-ko.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "portrait-list-ko.jpg",
+      "format": "JPEG"
+    },
+    {
+      "file": "warehouse-comparison-ko.jpg",
+      "format": "JPEG"
+    }
+  ],
+  "browserConsoleErrors": []
+}

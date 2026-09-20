@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="35" result="Passed" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:30Z" duration="3.808591">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="2749" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:30Z" duration="3.808591" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="4221" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/hunt-edict-clean-ui/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="2749" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:30Z" duration="3.753489" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="7309" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="4222" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="2749" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:30Z" duration="3.718728" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="4223" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="2749" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:30Z" duration="3.681558" total="35" passed="35" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1682" name="EdictEditingTests" fullname="Hellscript.Tests.EdictEditingTests" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" testcasecount="15" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:28Z" duration="0.949279" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1692" name="ChoicesCycleThroughEveryValueAndWrapAround" fullname="Hellscript.Tests.EdictEditingTests.ChoicesCycleThroughEveryValueAndWrapAround" methodname="ChoicesCycleThroughEveryValueAndWrapAround" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1673389230" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:27Z" duration="0.022820" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1696" name="EveryChoiceSetAndOrderValueOfEveryGlobalOptionHasAReadableLabel" fullname="Hellscript.Tests.EdictEditingTests.EveryChoiceSetAndOrderValueOfEveryGlobalOptionHasAReadableLabel" methodname="EveryChoiceSetAndOrderValueOfEveryGlobalOptionHasAReadableLabel" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="303261377" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:27Z" duration="0.013887" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1697" name="LabelsReadInKoreanAndContentIdsReadAsThemselves" fullname="Hellscript.Tests.EdictEditingTests.LabelsReadInKoreanAndContentIdsReadAsThemselves" methodname="LabelsReadInKoreanAndContentIdsReadAsThemselves" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="2043076525" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:27Z" duration="0.002339" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1693" name="OrderMovesSwapNeighboursOnlyAndKeepEveryItem" fullname="Hellscript.Tests.EdictEditingTests.OrderMovesSwapNeighboursOnlyAndKeepEveryItem" methodname="OrderMovesSwapNeighboursOnlyAndKeepEveryItem" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1998368011" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:27Z" duration="0.010394" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1698" name="RefreshingAnActiveRunPicksUpADocumentSavedMidRun" fullname="Hellscript.Tests.EdictEditingTests.RefreshingAnActiveRunPicksUpADocumentSavedMidRun" methodname="RefreshingAnActiveRunPicksUpADocumentSavedMidRun" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1002429506" result="Passed" start-time="2026-09-20 11:19:27Z" end-time="2026-09-20 11:19:28Z" duration="0.869359" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1694" name="SetTogglesKeepTheDeclaredOrderRegardlessOfClickOrder" fullname="Hellscript.Tests.EdictEditingTests.SetTogglesKeepTheDeclaredOrderRegardlessOfClickOrder" methodname="SetTogglesKeepTheDeclaredOrderRegardlessOfClickOrder" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1969298382" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.002925" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1695" name="SkillOrderMovesKeepEveryIdOnceAndStayCanonical" fullname="Hellscript.Tests.EdictEditingTests.SkillOrderMovesKeepEveryIdOnceAndStayCanonical" methodname="SkillOrderMovesKeepEveryIdOnceAndStayCanonical" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="27677977" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.003711" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1690" name="SteppingANumberStaysOnItsGridAndInsideItsRange" fullname="Hellscript.Tests.EdictEditingTests.SteppingANumberStaysOnItsGridAndInsideItsRange" methodname="SteppingANumberStaysOnItsGridAndInsideItsRange" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1273944807" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.001597" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1691" name="SteppingASkillNumberUsesTheDecimalStepOfItsDefinition" fullname="Hellscript.Tests.EdictEditingTests.SteppingASkillNumberUsesTheDecimalStepOfItsDefinition" methodname="SteppingASkillNumberUsesTheDecimalStepOfItsDefinition" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="104824918" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.000445" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1689" name="WithGlobalRejectsInvalidValuesWithoutChangingTheSource" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalRejectsInvalidValuesWithoutChangingTheSource" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.008383" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1684" name="WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;survival.lowHpPercent&quot;,&quot;0&quot;)" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;survival.lowHpPercent&quot;,&quot;0&quot;)" methodname="WithGlobalRejectsInvalidValuesWithoutChangingTheSource" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1430381151" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.001554" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1685" name="WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;survival.lowHpPercent&quot;,&quot;30.5&quot;)" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;survival.lowHpPercent&quot;,&quot;30.5&quot;)" methodname="WithGlobalRejectsInvalidValuesWithoutChangingTheSource" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1004017557" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.001020" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1686" name="WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;dodge.method&quot;,&quot;RUN&quot;)" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;dodge.method&quot;,&quot;RUN&quot;)" methodname="WithGlobalRejectsInvalidValuesWithoutChangingTheSource" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1088276901" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.000978" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1687" name="WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;survival.lowHp&quot;,&quot;MAYBE&quot;)" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;survival.lowHp&quot;,&quot;MAYBE&quot;)" methodname="WithGlobalRejectsInvalidValuesWithoutChangingTheSource" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="269344231" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.000938" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1688" name="WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;no.such.option&quot;,&quot;ON&quot;)" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalRejectsInvalidValuesWithoutChangingTheSource(&quot;no.such.option&quot;,&quot;ON&quot;)" methodname="WithGlobalRejectsInvalidValuesWithoutChangingTheSource" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="1877807755" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.000916" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1683" name="WithGlobalSetsOneValueAndLeavesTheSourceUntouched" fullname="Hellscript.Tests.EdictEditingTests.WithGlobalSetsOneValueAndLeavesTheSourceUntouched" methodname="WithGlobalSetsOneValueAndLeavesTheSourceUntouched" classname="Hellscript.Tests.EdictEditingTests" runstate="Runnable" seed="54498474" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.002608" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3031" name="HuntEdictFoundationTests" fullname="Hellscript.Tests.HuntEdictFoundationTests" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:30Z" duration="2.626424" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="3051" name="All36ExistingSkillImagesResolveAndUseTheSharedActiveCirclePassiveSquareRule" fullname="Hellscript.Tests.HuntEdictFoundationTests.All36ExistingSkillImagesResolveAndUseTheSharedActiveCirclePassiveSquareRule" methodname="All36ExistingSkillImagesResolveAndUseTheSharedActiveCirclePassiveSquareRule" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1803214766" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.071407" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3050" name="ApprovedAtlasHas24NamedSlicesWithMeasuredBordersAndNativeScale" fullname="Hellscript.Tests.HuntEdictFoundationTests.ApprovedAtlasHas24NamedSlicesWithMeasuredBordersAndNativeScale" methodname="ApprovedAtlasHas24NamedSlicesWithMeasuredBordersAndNativeScale" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1827138020" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.036025" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3052" name="ApprovedGroupsCoverAll130OptionsAndOnlyConditionalChildrenHide" fullname="Hellscript.Tests.HuntEdictFoundationTests.ApprovedGroupsCoverAll130OptionsAndOnlyConditionalChildrenHide" methodname="ApprovedGroupsCoverAll130OptionsAndOnlyConditionalChildrenHide" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1208606951" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:28Z" duration="0.049651" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3048" name="BattleCommitPreservesTimeRngHealthResourceAndCooldownsWhileReplacingBothLoadouts" fullname="Hellscript.Tests.HuntEdictFoundationTests.BattleCommitPreservesTimeRngHealthResourceAndCooldownsWhileReplacingBothLoadouts" methodname="BattleCommitPreservesTimeRngHealthResourceAndCooldownsWhileReplacingBothLoadouts" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1866030360" result="Passed" start-time="2026-09-20 11:19:28Z" end-time="2026-09-20 11:19:29Z" duration="0.811610" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3039" name="CompletePresetCodeRoundTripsWithoutLocalEquipmentOrOwnerInformation" fullname="Hellscript.Tests.HuntEdictFoundationTests.CompletePresetCodeRoundTripsWithoutLocalEquipmentOrOwnerInformation" methodname="CompletePresetCodeRoundTripsWithoutLocalEquipmentOrOwnerInformation" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1729998289" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.044399" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3053" name="DraggingVisibleAttackCardsPreservesTheHiddenSkillsAndTheirPositions" fullname="Hellscript.Tests.HuntEdictFoundationTests.DraggingVisibleAttackCardsPreservesTheHiddenSkillsAndTheirPositions" methodname="DraggingVisibleAttackCardsPreservesTheHiddenSkillsAndTheirPositions" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="390749665" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.041323" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="3038" name="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit" fullname="Hellscript.Tests.HuntEdictFoundationTests.EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.163000" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3035" name="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit(Warrior)" fullname="Hellscript.Tests.HuntEdictFoundationTests.EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit(Warrior)" methodname="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1726045957" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.054617" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3036" name="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit(Ranger)" fullname="Hellscript.Tests.HuntEdictFoundationTests.EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit(Ranger)" methodname="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1918017958" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.050375" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3037" name="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit(Mage)" fullname="Hellscript.Tests.HuntEdictFoundationTests.EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit(Mage)" methodname="EmptySlotsHiddenOptionsAndPassiveSlotPositionsSurviveCommit" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1770420906" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.053977" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="3047" name="FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged" fullname="Hellscript.Tests.HuntEdictFoundationTests.FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:30Z" duration="1.026820" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3045" name="FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged(False)" fullname="Hellscript.Tests.HuntEdictFoundationTests.FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged(False)" methodname="FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="119505963" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:29Z" duration="0.087614" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-unified-edict-2128b918460949e7a020207754b48907/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="3046" name="FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged(True)" fullname="Hellscript.Tests.HuntEdictFoundationTests.FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged(True)" methodname="FailedDiskCommitKeepsDraftHeroPresetAndRunningBattleUnchanged" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1068439363" result="Passed" start-time="2026-09-20 11:19:29Z" end-time="2026-09-20 11:19:30Z" duration="0.938412" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-unified-edict-f511795220414c57b5a0f67f5a7873e9/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-case id="3042" name="ImportedAllocationCanBeStoredBeforeItCanBeAppliedAndOriginalCodeIsRetained" fullname="Hellscript.Tests.HuntEdictFoundationTests.ImportedAllocationCanBeStoredBeforeItCanBeAppliedAndOriginalCodeIsRetained" methodname="ImportedAllocationCanBeStoredBeforeItCanBeAppliedAndOriginalCodeIsRetained" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1830059285" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.065244" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3040" name="ImportedExcessPointsCanBeRefundedOneAtATimeEvenFromLockedSkills" fullname="Hellscript.Tests.HuntEdictFoundationTests.ImportedExcessPointsCanBeRefundedOneAtATimeEvenFromLockedSkills" methodname="ImportedExcessPointsCanBeRefundedOneAtATimeEvenFromLockedSkills" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="338930688" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.016251" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3043" name="ImportOverwritesOnlyWithConsentAndDetachesTheActiveSlotWithoutApplyingIt" fullname="Hellscript.Tests.HuntEdictFoundationTests.ImportOverwritesOnlyWithConsentAndDetachesTheActiveSlotWithoutApplyingIt" methodname="ImportOverwritesOnlyWithConsentAndDetachesTheActiveSlotWithoutApplyingIt" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="679586292" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.059537" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3049" name="LegacySchemaIsArchivedAndRulesRequireReviewInsteadOfBeingSilentlyDiscarded" fullname="Hellscript.Tests.HuntEdictFoundationTests.LegacySchemaIsArchivedAndRulesRequireReviewInsteadOfBeingSilentlyDiscarded" methodname="LegacySchemaIsArchivedAndRulesRequireReviewInsteadOfBeingSilentlyDiscarded" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1959092609" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.056523" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3033" name="NewHeroHasNoInventedPointsOrPresetsAndAutomaticEdictIsActive" fullname="Hellscript.Tests.HuntEdictFoundationTests.NewHeroHasNoInventedPointsOrPresetsAndAutomaticEdictIsActive" methodname="NewHeroHasNoInventedPointsOrPresetsAndAutomaticEdictIsActive" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1345633420" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.017032" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3034" name="RanksConsumeOnePointEachAndCannotSpendOnLockedSkillsOrPastMaximum" fullname="Hellscript.Tests.HuntEdictFoundationTests.RanksConsumeOnePointEachAndCannotSpendOnLockedSkillsOrPastMaximum" methodname="RanksConsumeOnePointEachAndCannotSpendOnLockedSkillsOrPastMaximum" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="983026245" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.017509" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3044" name="SaveUpdatesSelectedSlotTogetherWithLiveConfigurationAndRevertRestoresSelection" fullname="Hellscript.Tests.HuntEdictFoundationTests.SaveUpdatesSelectedSlotTogetherWithLiveConfigurationAndRevertRestoresSelection" methodname="SaveUpdatesSelectedSlotTogetherWithLiveConfigurationAndRevertRestoresSelection" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="920039346" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.078399" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3041" name="ShareParserRejectsUnknownDuplicateMissingFieldsInvalidAllocationAndFutureVersion" fullname="Hellscript.Tests.HuntEdictFoundationTests.ShareParserRejectsUnknownDuplicateMissingFieldsInvalidAllocationAndFutureVersion" methodname="ShareParserRejectsUnknownDuplicateMissingFieldsInvalidAllocationAndFutureVersion" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="1756870538" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.043461" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3032" name="TurningASkillsAutomaticUseOffSurvivesTheLoadoutPresetAndCode" fullname="Hellscript.Tests.HuntEdictFoundationTests.TurningASkillsAutomaticUseOffSurvivesTheLoadoutPresetAndCode" methodname="TurningASkillsAutomaticUseOffSurvivesTheLoadoutPresetAndCode" classname="Hellscript.Tests.HuntEdictFoundationTests" runstate="Runnable" seed="2131598831" result="Passed" start-time="2026-09-20 11:19:30Z" end-time="2026-09-20 11:19:30Z" duration="0.024064" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,6 +1,6 @@
 # HELLSCRIPT 사냥 칙령 게임 UI 구현
 
-갱신일: 2026-09-17 · 작성일: 2026-09-15
+갱신일: 2026-09-20 · 작성일: 2026-09-15
 
 ## 목표와 상태
 
@@ -25,6 +25,24 @@
 - 변경 상태에서 닫기·다른 탭을 선택하면 되돌리고 나가기 또는 저장하고 나가기를 선택한다. 경고창의 닫기는 편집을 계속한다.
 - 순서 항목 5종인 공격 순서, 생존 순서, 특수 적 우선순위, 탐색 순서, 공통 행동 순서를 모두 드래그 카드로 바꾼다. 이동 미리보기·삽입 위치·가장자리 자동 스크롤·취소를 제공한다. 배경 드래그 스크롤과 버튼 조작이 충돌하지 않아야 한다.
 - 하위 옵션을 여닫는 제목은 일반 옵션과 다른 색으로 표시한다. 터치 조작 영역은 기존 최소 48dp 규칙을 따른다.
+
+## 화면 장식 정리 (2026-09-20)
+
+배경, 카드, 버튼마다 겹쳐 있던 거친 질감과 금속 장식 테두리를 없애고, 사냥 칙령 창 전체를 어두운 단색 면과 얇은 구분선으로 정리했다. 글자 크기와 배치, 스크롤 영역, 저장·공유·스킬 편집 기능은 유지한다.
+
+- 제목·탐색·설명·장착 영역은 명도 차이로 구분한다. 선택한 탭만 옅은 금색 밑줄을 쓰고, 일반 탭에는 테두리를 두지 않는다.
+- 가로형 왼쪽 탭의 아이콘은 논리 크기 22에서 30으로 키운다. 아이콘과 이름 사이 간격은 2로 두고, 둘을 묶어 버튼의 가로·세로 중앙에 배치한다. 탭 버튼 크기와 2열×4행 배치는 유지한다.
+- 스킬 카드와 레벨 표시는 단순한 배경으로 바꾼다. 기존 스킬 그림과 액티브 원형·패시브 정사각형 표기는 그대로 사용한다. 장착 해제 버튼에는 초록 바탕 위에 어두운 `−`를 표시한다.
+- 펼칠 수 있는 옵션 제목은 청회색으로 구분하고, 선택한 값과 드래그 삽입 위치는 초록색으로 강조한다. 프리셋은 선택한 슬롯의 초록색과 나머지 저장 슬롯의 베이지색을 유지한다.
+- 숫자 입력, 선택 버튼, 순서 카드, 공유 코드와 확인창에도 같은 스타일을 적용한다. 설정 스위치는 손잡이 위치와 색으로 켜짐·꺼짐을 함께 구분한다. 누름·비활성 상태는 밝기를 바꿔 표현한다.
+
+화면 바탕은 `HuntEdictSurface`가 Unity UI 메시로 그린다. 크기에 따라 장식 이미지가 늘어나거나 테두리가 뭉개지지 않으며, 기존 `Image`의 마스킹·입력·버튼 색상 전환을 유지한다. 기존 `edict-ui-skins` 아틀라스와 정책 스위치 이미지는 삭제하지 않지만 이 창에서는 더 이상 사용하지 않는다. 스킬 그림과 탐색 아이콘은 기존 리소스를 계속 사용한다.
+
+검증: 관련 Edit Mode 검사 35개가 모두 통과했고([결과](HuntEdictCleanUiEvidence/NavAlignment/editmode.xml)), macOS 개발 빌드와 사냥 칙령 런타임 스모크도 통과했다([빌드](HuntEdictCleanUiEvidence/NavAlignment/build.txt), [실행 기록](HuntEdictCleanUiEvidence/NavAlignment/runtime.txt)). 24개 화면을 캡처해 8개 탭, 설명·확인창, 세로·가로 배치, 영어와 150% 글자 크기를 확인했다. 저장·재조회·공유·순서 드래그 외에 각 화면 크기에서 8개 탭이 실제 포인터 적중 대상인지도 검사한다. 이번 변경에서는 전체 회귀 검사, Play Mode 검사, Android·iOS 빌드와 모바일 실기기 검증은 수행하지 않았다.
+
+![정리한 가로형 스킬 관리 화면](HuntEdictCleanUiEvidence/NavAlignment/02-landscape-skill-details.png)
+
+![정리한 가로형 전투 옵션 화면](HuntEdictCleanUiEvidence/NavAlignment/06-landscape-combat.png)
 
 ## 스킬 성장 기준
 
@@ -234,6 +252,18 @@ This work implements the approved portrait and landscape Hunt Edict mockups as n
 Eight main tabs remain visible without scrolling: Skills, Combat, Survival, Loot, Bag & Cleanup, Exploration, Repeat Hunt, and Presets & Sharing. Portrait uses a 4×2 navigation grid; landscape uses a narrow 2×4 left grid. The approved 430×840 and 844×390 layouts define geometry. The 34-unit header has a single-line title and subtitle with a close button. Small floating Undo and Save buttons appear only when dirty. Background dragging scrolls; every ordering control uses draggable cards with insertion feedback, edge scrolling and cancellation. Expandable group headers have distinct colors.
 
 Skills has Management and Hunt Edict subtabs. Management shows six passives above six actives, compact painted icons, current/max rank badges, vertical +/− controls, points and reset. Active skills use circular frames and passive skills square frames; three passive slots sit above four active slots, and HUD slots, skill buffs, inspection and the edict share one icon component. Equipped skills have green borders and independent unequip controls. Details stay at a fixed location and show actual costs and current/next effects. Empty slots can be saved. The edict subtab shows only equipped skills in slot order while preserving hidden settings. Closing or changing tabs while dirty requires saving or discarding. Hunt Edict and equipped skills are always automatic; use toggles are absent.
+
+### Reduced decoration (2026-09-20)
+
+The Hunt Edict window now uses quiet dark fills and thin dividers instead of repeating textured metal frames on panels, cards and buttons. Typography, geometry, scroll regions and editing behavior stay the same. The header, navigation, inspector and equipment dock are separated by tone; only the current tab receives a muted gold underline. Expandable groups have blue-gray headers. Green marks equipped skills, selected values, drag insertion and the current preset; other stored presets retain a muted beige fill.
+
+The landscape navigation icons are enlarged from 22 to 30 logical units. Each icon and label form a centered stack with a two-unit gap, while the button bounds and 2-by-4 navigation grid stay the same.
+
+Skill cards and rank badges have plain backgrounds, while existing skill art and the active-circle/passive-square convention remain. The green unequip badge has a dark minus for contrast. Number inputs, choice controls, ordering cards, share-code dialogs and confirmations share the same treatment, with brightness feedback for pressed and disabled controls. Policy switches show their state through both color and thumb position.
+
+`HuntEdictSurface` draws these surfaces as native Unity UI geometry and preserves the `Image` masking, input and button-tint paths. The original `edict-ui-skins` atlas and policy-switch images are retained but are no longer used in this window. Skill paintings and navigation glyphs are reused.
+
+Verification: [35 of 35 focused Edit Mode cases passed](HuntEdictCleanUiEvidence/NavAlignment/editmode.xml), followed by a successful [macOS development build](HuntEdictCleanUiEvidence/NavAlignment/build.txt) and [Hunt Edict runtime smoke](HuntEdictCleanUiEvidence/NavAlignment/runtime.txt). The 24 captures cover all eight tabs, details and dialogs, portrait and landscape, English and 150% text. The smoke checks save/reload, sharing and drag order, plus actual event-system pointer hits for all eight navigation tabs at every checked frame size. This visual change did not run the full regression suite, Play Mode tests, Android/iOS builds or physical-device validation.
 
 ### Skill progression in combat (stage 3)
 
