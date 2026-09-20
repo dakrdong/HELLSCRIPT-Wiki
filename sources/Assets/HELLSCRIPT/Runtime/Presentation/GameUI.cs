@@ -42,7 +42,7 @@ namespace Hellscript
             background=Resources.Load<Texture2D>("Art/Sanctuary");atlas=Resources.Load<Texture2D>("Art/SkillAtlas");
             equipmentAtlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");
             var canvasObject=new GameObject("HELLSCRIPT UI",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
-            canvasObject.transform.SetParent(transform,false);var canvas=canvasObject.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=100;
+            canvasObject.transform.SetParent(transform,false);var canvas=canvasObject.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=100;canvas.pixelPerfect=true;
             ApplyScaler(canvasObject.GetComponent<CanvasScaler>(),false);
             shell=Rect("Display",canvasObject.transform);Stretch(shell);
             root=Rect("Safe area",canvasObject.transform);Stretch(root);ApplySafeArea();
@@ -130,6 +130,7 @@ namespace Hellscript
         Button Button(Transform parent,string text,Action action,Color? color=null)
         {
             var r=Box(text,parent,color??new Color(.14f,.17f,.2f));var b=r.gameObject.AddComponent<Button>();
+            r.gameObject.AddComponent<UIRectBorder>();
             var colors=b.colors;colors.highlightedColor=new Color(1.15f,1.15f,1.15f);colors.pressedColor=new Color(.75f,.75f,.75f);b.colors=colors;
             var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
         }

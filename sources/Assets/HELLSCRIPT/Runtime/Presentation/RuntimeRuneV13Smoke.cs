@@ -13,11 +13,11 @@ using UnityEngine.UI;
 namespace Hellscript
 {
     // Explicit opt-in development harness; requires an isolated save and user-supplied fixture paths.
-    public sealed class RuntimeRuneV13Smoke:MonoBehaviour
+    public sealed partial class RuntimeRuneV13Smoke:MonoBehaviour
     {
         GameController game;string output;int captures;readonly HashSet<string> missing=new HashSet<string>();
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)] static void Install()
-        {if(Debug.isDebugBuild&&Environment.GetCommandLineArgs().Any(a=>a=="-hellscriptRuneV13Smoke"||a=="-hellscriptRuneDragSmoke")){Application.runInBackground=true;new GameObject("Rune v13 verification").AddComponent<RuntimeRuneV13Smoke>();}}
+        {if(Debug.isDebugBuild&&Environment.GetCommandLineArgs().Any(a=>a=="-hellscriptRuneV13Smoke"||a=="-hellscriptRuneDragSmoke"||a=="-hellscriptRuneClaritySmoke")){Application.runInBackground=true;new GameObject("Rune v13 verification").AddComponent<RuntimeRuneV13Smoke>();}}
         static string Arg(string name){var a=Environment.GetCommandLineArgs();int i=Array.IndexOf(a,name);if(i<0||i+1>=a.Length)throw new ArgumentException(name);return a[i+1];}
         static void Require(bool check,string message){if(!check)throw new InvalidOperationException(message);}
         Button Find(string name)=>game.UI.GetComponentsInChildren<Button>().Single(b=>b.name==name);
@@ -93,7 +93,7 @@ namespace Hellscript
                 placement=Board.editor.DraftPlacements.Single(p=>p.InstanceId==id);e=BeginBoardDrag(placement,out _,out _);e.position=ScreenCenter(Board.storageDropTarget);Board.OnDrag(e);Board.OnEndDrag(e);Click("rune-save");
                 var disk=new GameStore(Arg("-hellscriptSavePath"),game.catalog);Require(disk.Data.runes.placements.All(p=>p.runeId!=id)&&disk.Data.runes.owned.Count==owned,"Recovered rune did not survive disk reload");
                 yield return null;Canvas.ForceUpdateCanvases();
-                var card=Find("rune-card-"+id);var drag=card.GetComponent<RuneStorageDrag>();var start=ScreenCenter((RectTransform)card.transform);
+                var card=Find("rune-card-"+id);var drag=card.GetComponent<RuneStorageDrag>();var start=card.GetComponentInChildren<RuneBoardGraphic>().ScreenCell(new HexCell(0,0));
                 e=new PointerEventData(EventSystem.current){pointerId=-1,pressPosition=start,position=start};drag.OnPointerDown(e);drag.OnInitializePotentialDrag(e);Require(!e.useDragThreshold,"Storage mouse drag is delayed");drag.OnBeginDrag(e);e.dragging=true;
                 Require(DragVisual!=null&&Vector2.Distance(DragVisual.ScreenCell(new HexCell(0,0)),e.position)<1,"Stored rune is not attached to the mouse");
                 drag.OnEndDrag(e);Require(DragVisual==null&&!Board.editor.IsInDraft(id),"Dropping a stored rune back into storage changed its state");
@@ -115,6 +115,7 @@ namespace Hellscript
             output=Arg("-hellscriptScreenshots");Arg("-hellscriptSavePath");Directory.CreateDirectory(output);
             Application.logMessageReceived+=(m,s,t)=>{if(t==LogType.Exception){File.WriteAllText(Path.Combine(output,"failure.txt"),m+"\n"+s);Application.Quit(1);}};
             yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Store unavailable");game.enabled=false;game.ApplyLanguage("ko");game.ApplyInterfaceScale(100);
+            if(Environment.GetCommandLineArgs().Contains("-hellscriptRuneClaritySmoke")){yield return VerifyClarity();yield break;}
             if(Environment.GetCommandLineArgs().Contains("-hellscriptRuneDragSmoke")){yield return VerifyDragging();yield break;}
             game.UI.ShowRunes();yield return Capture("fresh-portrait-ko",720,1280);
             Click("rune-weapon-sword");yield return null;

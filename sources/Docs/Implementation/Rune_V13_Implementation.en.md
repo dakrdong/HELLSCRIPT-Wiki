@@ -14,7 +14,7 @@ The reference did not implement combat mastery rewards. The initial integration 
 
 ## Native UI and combat
 
-The existing UGUI screen was replaced with the reference's landscape weapon rail, board and storage arrangement, and its portrait weapon row, board and storage arrangement. Wide portrait windows use a bounded content width. Storage and detail bodies scroll independently while actions remain fixed. Six supplied weapon images and 328 SVG glyphs were extracted and converted into transparent runtime assets; no new AI-generated artwork was used. Shared internal edges are removed to draw solid blocks and continuous region boundaries.
+The existing UGUI screen was replaced with the reference's landscape weapon rail, board and storage arrangement, and its portrait weapon row, board and storage arrangement. Wide portrait windows use a bounded content width. Storage and ability details scroll independently while the enlarged selected-block pickup tile and actions remain fixed. The initial import extracted six supplied weapon images and 328 SVG glyphs, converting them into transparent runtime assets; no new AI-generated artwork was used. The weapon icons now use the new assets described below; the imported originals remain intact. Shared internal edges are removed to draw solid blocks and continuous region boundaries.
 
 The screen provides pan, zoom, fit, full map, a seven-region minimap, anchored region previews, view/edit modes, color and multi-size filters, per-color active effects, searchable codex with weapon/region choices, assigned-slot navigation, rotation, recovery, 50-step undo, revert and save. Korean, English, landscape, portrait and 140% interface size are checked. Unity and browser font rendering can differ. Reference screenshots use isolated fixture ownership; real new accounts do not receive the demo's 160 runes.
 
@@ -45,6 +45,26 @@ Dropping a placed rune over storage uses the existing recovery operation, preser
 The [focused Edit Mode run](RuneV13Evidence/Drag/editmode.xml) passed **69/69**. The [macOS build](RuneV13Evidence/Drag/build.txt) and [landscape/portrait runtime checks](RuneV13Evidence/Drag/runtime.txt) passed. Checks cover subpixel grabbed-point alignment, visibility over storage, recovery, Undo, save/disk reload, replacement, invalid drops and cancellation. A separate check queues mouse press, held movement and release states through the actual InputSystem UI input module and verifies recovery and Undo. These are automated input checks, not evidence of human mouse dragging or physical mobile testing. The [scope and source hashes](RuneV13Evidence/Drag/validation.json) are preserved.
 
 [Landscape drag](RuneV13Evidence/Drag/01-drag-over-storage-landscape.png) · [Portrait drag](RuneV13Evidence/Drag/02-drag-over-storage-portrait.png) · [Recovery through the input module](RuneV13Evidence/Drag/03-input-module-recovered.png)
+
+## 2026-09-20: Clarity, rotation and detail pickup
+
+Landscape now divides the area after the weapon rail equally between board and storage. Portrait retains its stacked layout. The selected block has a pickup tile up to 128 UI units wide, with an enlarged block, a bright closed border and the existing localized “Drag to arrange” label. Both stored and placed runes can be dragged from this tile.
+
+A rune's 60-degree rotation is shared by its inventory card, detail, lifted visual and placement. Stored preview orientations survive selection and weapon changes within the editing session. The picked point is scaled from the source preview to the lifted block. Dragging a placed rune from its detail hides its original board visual, recovers it on storage drop, and retains its placement on invalid drop. Undo and explicit Save Changes preserve the ownership boundary. Saved board rotations persist on disk; unplaced preview rotations remain session state.
+
+The shared central origin is rendered as a permanent gold single-cell block, with a raised face and dark sides. It remains the common start for all five colors and is neither owned nor recoverable nor available for placement.
+
+Clipped outer `Outline` effects caused missing or doubled edges. The [closed inset frame](../../Assets/HELLSCRIPT/Runtime/Presentation/UIRectBorder.cs) draws all four sides inside each control. Rune panels, filters, inventory slots, details, dialogs and shared UI buttons use it. Circular seals and minimap markers keep their shapes; separately skinned inventory UI retains its complete slot artwork. The shared canvas uses pixel alignment.
+
+Six weapon icons were redrawn as original SVG geometry with distinct silhouettes, silver edges and gold fittings, then rendered to uncompressed 512×512 transparent PNGs without mipmaps, fading masks or cropped UVs. See [sword](../Design/RuneV13/weapons-clear/sword.svg) · [greatsword](../Design/RuneV13/weapons-clear/greatsword.svg) · [axe](../Design/RuneV13/weapons-clear/axe.svg) · [bow](../Design/RuneV13/weapons-clear/bow.svg) · [crossbow](../Design/RuneV13/weapons-clear/crossbow.svg) · [staff](../Design/RuneV13/weapons-clear/staff.svg), [renderer](../../tools/runes/render_weapons.cjs) and [six-icon RGBA report](../Design/RuneV13/weapons-clear/validation.json). Imported reference art remains intact. No AI-generated raster assets were used.
+
+The connected Unity GameView also had low-resolution aspect ratios enabled. Disabling that local preference increased the same window's render target from 907×763 to 1814×1526. The [editor record](RuneV13Evidence/Clarity/editor-display.txt) distinguishes this preview setting from runtime and serialized project settings.
+
+Evidence: [focused Edit Mode: 102/102 passed](RuneV13Evidence/Clarity/editmode.xml), [macOS development build](RuneV13Evidence/Clarity/build.txt), [clarity/rotation/detail input](RuneV13Evidence/Clarity/runtime.txt), [existing drag regression](RuneV13Evidence/Clarity/drag-runtime.txt), and [source hashes and scope](RuneV13Evidence/Clarity/validation.json). The actual UI input module receives mouse press, held movement and release to verify rotated pickup from both sources, placement, recovery, undo and disk reload. This is automated macOS input evidence, not physical mouse or mobile-device verification.
+
+![Updated landscape rune board](RuneV13Evidence/Clarity/01-clear-landscape-ko.png)
+
+[Rotated detail pickup](RuneV13Evidence/Clarity/02-rotated-detail-drag.png) · [Portrait](RuneV13Evidence/Clarity/03-clear-portrait-ko.png) · [English](RuneV13Evidence/Clarity/05-clear-landscape-en.png) · [140% type](RuneV13Evidence/Clarity/07-clear-large-type-ko.png)
 
 ## Maintenance
 
