@@ -14,12 +14,12 @@ namespace Hellscript
         RectTransform commonModal,commonSafe,commonCard,commonTabs,commonWorld;Button commonClose,commonBackdrop;
         RectTransform screenPane,languagePane,characterPane,helpPane,combatPane,scaleChoiceRow;
         Text commonHeading,scaleValue,scaleMessage,aspectMessage,languageMessage,characterMessage;
-        SettingsStepSlider scaleSlider;Button scaleRetry;GameObject commonPreviousSelection;
+        SettingsStepSlider scaleSlider;Button scaleRetry;
         Vector2 commonScreenSize;Rect commonSafeArea;float commonKeyboardTop;bool commonLaidOut;
-        readonly List<(CanvasGroup group,bool interactable,bool raycasts,float alpha)> commonInputGates=new List<(CanvasGroup,bool,bool,float)>();
+        readonly List<(CanvasGroup group,float alpha)> commonBackgrounds=new List<(CanvasGroup,float)>();
         readonly List<(string id,Button button)> aspectButtons=new List<(string,Button)>();
         readonly List<(string code,Button button)> languageButtons=new List<(string,Button)>();
-        public bool CommonPanelOpen=>commonModal!=null||hudPanel!=null||idleIntroductionOpen||PlayInventoryOpen||EquipmentShopOpen||BlacksmithOpen||RuneMasterOpen;
+        public bool CommonPanelOpen=>windowHost!=null&&windowHost.BlocksGameplay||commonModal!=null||hudPanel!=null||idleIntroductionOpen||PlayInventoryOpen||EquipmentShopOpen||BlacksmithOpen||RuneMasterOpen;
         public bool BlocksRepeat=>runeSession||CommonPanelOpen||presetModal!=null||root!=null&&root.Find("Confirm")!=null;
         public void ShowScreenSettings()=>ShowCommonPanel(false);
         public void ShowCombatOverview(){ShowCommonPanel(false);SelectCombatTab();}
@@ -28,11 +28,10 @@ namespace Hellscript
         {
             game.ExitIdle();ResetTownInput();game.Town?.Cancel();
             if(commonModal!=null){SelectSettingsTab(help?SettingsSection.Help:SettingsSection.Screen);return;}
-            commonPreviousSelection=EventSystem.current?.currentSelectedGameObject;EventSystem.current?.SetSelectedGameObject(null);commonInputGates.Clear();
-            foreach(var existing in GetComponentsInChildren<Canvas>())
-            {if(!existing.TryGetComponent(out CanvasGroup group))group=existing.gameObject.AddComponent<CanvasGroup>();commonInputGates.Add((group,group.interactable,group.blocksRaycasts,group.alpha));group.interactable=group.blocksRaycasts=false;}
+            commonBackgrounds.Clear();foreach(var existing in GetComponentsInChildren<Canvas>())
+            {if(!existing.TryGetComponent<CanvasGroup>(out var group))group=existing.gameObject.AddComponent<CanvasGroup>();commonBackgrounds.Add((group,group.alpha));}
             commonModal=Rect("Screen and help modal",transform);var canvas=commonModal.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=120;canvas.pixelPerfect=true;
-            ApplyScaler(commonModal.gameObject.AddComponent<CanvasScaler>(),true);commonModal.gameObject.AddComponent<GraphicRaycaster>();
+            ApplyScaler(commonModal.gameObject.AddComponent<CanvasScaler>(),true);commonModal.gameObject.AddComponent<GraphicRaycaster>();ContentWindowHost.Attach(commonModal,CloseCommonPanel);
             commonBackdrop=Button(commonModal,"",CloseCommonPanel,new Color(.025f,.035f,.049f,1));commonBackdrop.name="settings-backdrop";Stretch((RectTransform)commonBackdrop.transform);commonBackdrop.transition=Selectable.Transition.None;
             commonSafe=Rect("Common safe area",commonModal);Stretch(commonSafe);
             commonWorld=Rect("Settings world area",commonSafe);commonWorld.anchorMin=Vector2.zero;commonWorld.anchorMax=new Vector2(.5f,1);commonWorld.offsetMin=commonWorld.offsetMax=Vector2.zero;
@@ -131,7 +130,7 @@ namespace Hellscript
             float w=Mathf.Max(1,available.x*(landscape?.5f:1)),h=Mathf.Max(1,available.y);commonCard.sizeDelta=new Vector2(w,h);commonCard.anchoredPosition=new Vector2(landscape?available.x*.25f:0,0);
             bool showWorld=landscape&&game.World!=null&&game.World.HasPresentedPlayer;
             commonWorld.gameObject.SetActive(showWorld);commonBackdrop.interactable=landscape;commonBackdrop.image.color=showWorld?Color.clear:new Color(.025f,.035f,.049f,landscape?.75f:1);
-            foreach(var gate in commonInputGates)if(gate.group!=null&&gate.group.transform!=aspectMask)gate.group.alpha=showWorld?0:gate.alpha;
+            foreach(var gate in commonBackgrounds)if(gate.group!=null&&gate.group.transform!=aspectMask)gate.group.alpha=showWorld?0:gate.alpha;
             if(showWorld)game.World.ShowSettingsWorld(new Rect(commonSafe.anchorMin.x,commonSafe.anchorMin.y,(commonSafe.anchorMax.x-commonSafe.anchorMin.x)*.5f,commonSafe.anchorMax.y-commonSafe.anchorMin.y));
             else game.World?.RestoreSettingsWorld();
             bool shortWindow=h<400;float heading=56,tabHeight=shortWindow?40:48;int columns=w<620?2:4,rows=Mathf.CeilToInt(4f/columns);float top=heading+rows*tabHeight+8;
@@ -146,14 +145,13 @@ namespace Hellscript
         }
         public void CloseCommonPanel()
         {
-            if(commonModal==null)return;game.Audio?.SavePreferences();game.World?.RestoreSettingsWorld();var old=commonModal;commonModal=null;old.gameObject.SetActive(false);Destroy(old.gameObject);
-            foreach(var gate in commonInputGates)if(gate.group!=null){gate.group.interactable=gate.interactable;gate.group.blocksRaycasts=gate.raycasts;gate.group.alpha=gate.alpha;}commonInputGates.Clear();
-            if(commonPreviousSelection!=null&&commonPreviousSelection.activeInHierarchy)EventSystem.current?.SetSelectedGameObject(commonPreviousSelection);commonPreviousSelection=null;
+            if(commonModal==null)return;game.Audio?.SavePreferences();game.World?.RestoreSettingsWorld();var old=commonModal;commonModal=null;ContentWindowHost.Detach(old);old.gameObject.SetActive(false);Destroy(old.gameObject);
+            foreach(var background in commonBackgrounds)if(background.group!=null)background.group.alpha=background.alpha;commonBackgrounds.Clear();
         }
         void UpdateCommonPanel()
         {
             if(root!=null)ApplySafeArea();if(commonModal==null)return;ReflowCommonPanel();RefreshScreenSettings();if(commonSound)RefreshAudioSettings();
-            if(Keyboard.current?.escapeKey.wasPressedThisFrame==true)CloseCommonPanel();
+
         }
     }
 }

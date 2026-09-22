@@ -24,7 +24,7 @@ namespace Hellscript
         public void Initialize(GameController owner,Font bodyFont,TitleSession state,TitleAtmosphere backdrop,Action openSettings)
         {
             game=owner;font=bodyFont;Session=state;atmosphere=backdrop;settings=openSettings;root=(RectTransform)transform;
-            displayFont=Font.CreateDynamicFontFromOSFont(new[]{"Baskerville","Georgia","Times New Roman","Noto Serif"},100);
+            displayFont=UiFonts.Display;
             if(displayFont==null)displayFont=font;
             toolbar=Rect("Title tools",root);
             motion=ActionButton(toolbar,"title-motion","연출 켜짐",()=>{Session.MotionEnabled=!Session.MotionEnabled;Refresh();},false,13);
@@ -173,6 +173,6 @@ namespace Hellscript
             button.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return button;
         }
         static void SetCaption(Button b,string text)=>b.GetComponentInChildren<Text>().text=text;
-        void OnDestroy(){if(displayFont!=null&&displayFont!=font)Destroy(displayFont);}
+
     }
 }

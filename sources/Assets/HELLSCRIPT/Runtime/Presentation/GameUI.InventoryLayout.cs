@@ -44,7 +44,7 @@ namespace Hellscript
         }
         ScrollRect InventoryScroll(string name)
         {
-            var frame=Box(name,root,new Color(.04f,.055f,.07f,.95f));
+            var frame=Box(name,root,UiTheme.Panel);
             frame.gameObject.AddComponent<RectMask2D>();var scroll=frame.gameObject.AddComponent<DialogScrollRect>();
             scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.readingStarted=()=>inventoryReading=scroll;
             var body=Rect(name+" content",frame);body.anchorMin=new Vector2(0,1);body.anchorMax=Vector2.one;body.pivot=new Vector2(.5f,1);body.sizeDelta=Vector2.zero;
@@ -177,24 +177,13 @@ namespace Hellscript
         {
             var hero=frozenHero??game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(item.special);
             InventoryNote(parent,heading,22,gold);
-            var title=Row(parent,90);EquipmentIcon(title,item,10,10,68);var label=Label(title,Loc.F("{0} +{1}",item.DisplayName,item.enhancement),24,ItemColor(item));Inset(label.rectTransform,88,8,8,8);
-            QualityFrame(title,item);
-            string restriction=unique!=null&&unique.heroClass>=0?game.catalog.classNames[unique.heroClass]:basis.heroClass>=0?game.catalog.classNames[basis.heroClass]:"공용";
-            InventoryNote(parent,Loc.F("{0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}", Grade(item), restriction, GameCatalog.Slots[item.slot], item.level, item.RequiredLevel, frozenHero==null?Protection(item):"훈련에 사용한 복사본 · 실제 장비는 유지됩니다"),20,ItemColor(item));
-            if(item.acquiredOrder<=0)InventoryNote(parent,"기존 장비 · 획득 순서 기록 없음",17,muted);
-            float baseValue=basis.main*(1+.08f*(item.level-1)),main=ItemCatalog.MainValue(item);
-            string mainName=EquipmentSlots.Kind(item)==WeaponKind.Shield?"방어도":item.slot==0?"무기 피해":item.slot<=5?"방어도":item.slot==6?"최대 HP":"비물리 저항";
-            if(ItemQuality.HasQuality(item))DescribeQualityMain(parent,item,basis,mainName);
-            else InventoryNote(parent,Loc.F("{0}\n{1} {2:0.0} = 기본 {3:0.0} + 강화 {4:0.0}{5}", basis.name, mainName, main, baseValue, main-baseValue, (basis.resistance>0?Loc.F("\n고정 부가 저항 {0:0.0}", basis.resistance*(1+.08f*(item.level-1))):basis.attackSpeed!=0?Loc.F("\n고정 공격속도 {0:+0%;-0%}", basis.attackSpeed):"")));
-            foreach(var roll in item.rolls)
-            {
-                DescribeQualityAffix(parent,item,roll);
-            }
-            InventoryNote(parent,GemCatalog.SocketSummary(item),20,muted);
+            float bodyWidth=Mathf.Max(260,((RectTransform)parent).rect.width-16);
+            ItemDetailView.Append(parent,item,bodyWidth,font,1.5f,frozenHero==null?EquipmentViewSource.Owned:comparisonEditing?EquipmentViewSource.Draft:EquipmentViewSource.BattleSnapshot);
+            InventoryNote(parent,frozenHero==null?Protection(item):"훈련에 사용한 복사본 · 실제 장비는 유지됩니다",18,muted);
             if(frozenHero==null&&!game.Active&&GemCatalog.AllowsSocket(item)&&game.Store.Data.Hero.inventory.Any(i=>i.id==item.id)&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Gem))BigButton(parent,"소켓과 보석 관리",()=>ShowGemSocket(item.id));
             if(unique!=null)
             {
-                if(unique.setId=="")InventoryNote(parent,unique.Description,21,ItemColor(item));
+
                 if(!string.IsNullOrEmpty(unique.requiredSkill))
                 {
                     var skill=game.catalog.skills.Find(s=>s.id==unique.requiredSkill);int index=game.catalog.skills.IndexOf(skill);

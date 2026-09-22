@@ -7,18 +7,11 @@ namespace Hellscript
 {
     public sealed partial class GameUI
     {
-        readonly Color setGreen=new Color(.43f,.83f,.64f);
+        readonly Color setGreen=StorageSurface.Hex(EquipmentGradePalette.Hex[4]);
         bool GearServiceAvailable=>!game.Active&&game.Store.Data.suspendedRun==null;
-        void EquipmentIcon(Transform parent,Item item,float x,float y,float size)
-        {
-            if(ItemCatalog.Base(item).legacyIndex>=24)
-            {var symbol=Rect("Equipment "+item.baseId,parent);Place(symbol,x+size*.12f,y+size*.12f,size*.76f,size*.76f);var icon=symbol.gameObject.AddComponent<StorageGlyph>();icon.symbol=EquipmentSlots.Kind(item).ToString().ToLowerInvariant();icon.color=gold;icon.raycastTarget=false;return;}
-            if(equipmentAtlas==null){Icon(parent,item.slot==0?21:item.slot>=6?23:22,x,y,size);return;}
-            var r=Rect("Equipment "+item.baseId,parent);Place(r,x,y,size,size);var image=r.gameObject.AddComponent<UnityEngine.UI.RawImage>();image.texture=equipmentAtlas;
-            int index=ItemCatalog.AtlasIndex(item);image.uvRect=new Rect(index%6/6f,1-(index/6+1)/4f,1/6f,1/4f);image.raycastTarget=false;
-        }
+        void EquipmentIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size);
         string Grade(Item item)=>!string.IsNullOrEmpty(ItemCatalog.Unique(item.special)?.setId)?"세트":GameCatalog.Rarities[item.rarity];
-        Color ItemColor(Item item)=>Grade(item)=="세트"?setGreen:RarityColor(item.rarity);
+        Color ItemColor(Item item)=>EquipmentGradePalette.For(item);
         string Protection(Item item)
         {
             var labels=new List<string>();if(item.equipped)labels.Add("장착 중");if(item.locked)labels.Add("잠금");
@@ -49,7 +42,7 @@ namespace Hellscript
         {
             if(item==null||item.equipped)return;
             var host=Row(content,520);host.name="Legacy equipment comparison";
-            EquipmentComparisonView.Create(host,hero,item,frozenRunes??game.Store.Data.runes,font,equipmentAtlas,1.25f,targetIndex);
+            EquipmentComparisonView.Create(host,hero,item,frozenRunes??game.Store.Data.runes,font,equipmentAtlas,1.25f,targetIndex,frozenRunes!=null?EquipmentViewSource.BattleSnapshot:comparisonEditing?EquipmentViewSource.Draft:EquipmentViewSource.Owned);
         }
         void CompareStat(string label,float before,float after)
         {float delta=after-before;Note(content,Loc.F("{0}   {1:0.#} → {2:0.#}   ({3:+0.#;-0.#;0})",label,before,after,delta),20,44,Mathf.Abs(delta)<.001f?muted:delta>0?setGreen:gold);}
@@ -96,9 +89,12 @@ namespace Hellscript
             }
             foreach(var definition in ItemCatalog.Uniques.Where(d=>string.IsNullOrEmpty(d.setId)&&(d.heroClass<0||d.heroClass==(int)h.heroClass)))
             {
-                Note(content,Loc.F("{0}{1} / {2}", (all.Any(i=>i.special==definition.id)?"보유 · ":"미보유 · "), definition.Name, GameCatalog.Slots[definition.slot]),23,68,gold);
-                Note(content,definition.Description,20,116,pale);
-                Note(content,Loc.F("획득: 균열 전리품 · 소탕 · 상점 · 해당 부위 코어 제작\n호환 베이스: {0}", string.Join(", ",ItemCatalog.Bases.Where(b=>b.Fits(h.heroClass,definition.slot)).Select(b=>b.name))),18,90);
+                bool owned=all.Any(i=>i.special==definition.id);var heroClass=h.heroClass;
+                ItemDetailView.AppendCatalog(content,Mathf.Max(300,content.rect.width),()=>new[]{
+                    new ItemTooltipLine("name",Loc.F("{0}{1} / {2}",owned?"보유 · ":"미보유 · ",definition.Name,GameCatalog.Slots[definition.slot]),EquipmentGradePalette.Hex[3]),
+                    new ItemTooltipLine("special",definition.Description),
+                    new ItemTooltipLine("acquisition",Loc.F("획득: 균열 전리품 · 소탕 · 상점 · 해당 부위 코어 제작\n호환 베이스: {0}",string.Join(", ",ItemCatalog.Bases.Where(b=>b.Fits(heroClass,definition.slot)).Select(b=>b.name))),ItemTooltip.Muted)
+                },font,1.5f);
             }
             FooterButton(0,1,"장비 목록으로",()=>ShowBag());
         }

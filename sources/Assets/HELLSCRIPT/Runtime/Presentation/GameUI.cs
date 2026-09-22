@@ -28,16 +28,14 @@ namespace Hellscript
         int selectedSlot;
         bool portalBag;
         const float TouchHeight=80;
-        readonly Color ink=new Color(.035f,.047f,.065f,.98f),panel=new Color(.065f,.081f,.104f,.96f),gold=new Color(.83f,.66f,.39f),pale=new Color(.91f,.9f,.84f),muted=new Color(.53f,.6f,.65f);
+        readonly Color ink=UiTheme.Background,panel=UiTheme.Panel,gold=UiTheme.Gold,pale=UiTheme.Text,muted=UiTheme.Muted;
+        ContentWindowHost windowHost;long shownStoreRevision;
         // Shared with the tests that measure real line heights against the rectangles the layout hands out.
-        public static Font CreateFont()
-        {
-            var chosen=Font.CreateDynamicFontFromOSFont(new[]{"Apple SD Gothic Neo","Malgun Gothic","Noto Sans CJK KR","Noto Sans CJK","Droid Sans Fallback","Arial"},32);
-            return chosen!=null?chosen:Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        }
+        public static Font CreateFont()=>UiFonts.Body;
         public void Initialize(GameController controller)
         {
             game=controller;
+            windowHost=gameObject.AddComponent<ContentWindowHost>();windowHost.Initialize(()=>game.Active?game.Combat.State:null);
             font=CreateFont();
             background=Resources.Load<Texture2D>("Art/Sanctuary");atlas=Resources.Load<Texture2D>("Art/SkillAtlas");
             equipmentAtlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");
@@ -58,8 +56,8 @@ namespace Hellscript
         {
             UpdateAspectMask();
             Rect s=UiSafeArea.Current;
-            if(Page!="runes"&&Page!="battle"&&Page!="plaza"&&Page!="title"&&Page!="characters"&&Page!="recovery"&&globalHud?.Layout!=null)
-            {float inset=Mathf.Min(globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12,s.height*.42f);s.yMin+=inset;}
+            if(ReserveGlobalHudSpace&&globalHud?.Layout!=null)
+            {float inset=globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12;s.yMin+=inset;}
             float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;
             if(headerApron!=null){headerApron.anchorMin=new Vector2(0,s.yMax/h);headerApron.anchorMax=Vector2.one;headerApron.offsetMin=headerApron.offsetMax=Vector2.zero;}
@@ -129,13 +127,13 @@ namespace Hellscript
         {var r=Rect("Text row",parent);var le=r.gameObject.AddComponent<LayoutElement>();le.preferredHeight=height;le.minHeight=height;var label=Label(r,text,size,color??muted);Inset(label.rectTransform,4,4,0,0);return label;}
         Button Button(Transform parent,string text,Action action,Color? color=null)
         {
-            var r=Box(text,parent,color??new Color(.14f,.17f,.2f));var b=r.gameObject.AddComponent<Button>();
-            r.gameObject.AddComponent<UIRectBorder>();
+            var r=Box(text,parent,color??UiTheme.Panel);var b=r.gameObject.AddComponent<Button>();
+            r.gameObject.AddComponent<UIRectBorder>();UiTheme.Button(b);
             var colors=b.colors;colors.highlightedColor=new Color(1.15f,1.15f,1.15f);colors.pressedColor=new Color(.75f,.75f,.75f);b.colors=colors;
             var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
         }
         Button BigButton(Transform parent,string text,Action action,bool primary=false)
-        {var b=Button(parent,text,action,primary?new Color(.47f,.29f,.12f):panel);var le=b.gameObject.AddComponent<LayoutElement>();le.minHeight=TouchHeight;le.preferredHeight=TouchHeight;return b;}
+        {var b=Button(parent,text,action,primary?UiTheme.Primary:panel);var le=b.gameObject.AddComponent<LayoutElement>();le.minHeight=TouchHeight;le.preferredHeight=TouchHeight;return b;}
         void Icon(Transform parent,int index,float x,float y,float size)
         {
             if(index>=0&&index<18)
@@ -159,25 +157,25 @@ namespace Hellscript
                 var back=Box("Backdrop",shell,ink);Stretch(back);
                 if(art&&background!=null){var image=Rect("Generated Sanctuary",shell);Stretch(image);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=background;raw.color=new Color(1,1,1,.8f);raw.raycastTarget=false;}
             }
-            header=Box("Header",root,new Color(.025f,.035f,.05f,.94f));header.anchorMin=new Vector2(0,1);header.anchorMax=Vector2.one;header.pivot=new Vector2(.5f,1);header.sizeDelta=new Vector2(0,80);
+            header=Box("Header",root,UiTheme.Background);header.anchorMin=new Vector2(0,1);header.anchorMax=Vector2.one;header.pivot=new Vector2(.5f,1);header.sizeDelta=new Vector2(0,80);
             var top=Label(header,title,30,gold);Place(top.rectTransform,20,6,650,38);headerTitle=top;
             top.rectTransform.anchorMax=Vector2.one;top.rectTransform.sizeDelta=new Vector2(-100,38);
             var settings=Button(header,"설정·안내",ShowScreenSettings);var settingsRect=(RectTransform)settings.transform;
             settingsRect.anchorMin=settingsRect.anchorMax=new Vector2(1,1);settingsRect.pivot=new Vector2(1,1);settingsRect.anchoredPosition=new Vector2(-12,-12);settingsRect.sizeDelta=new Vector2(52,52);MakeSettingsIcon(settings);
             var sub=Label(header,subtitle,16,muted);Span(sub.rectTransform,22,46,82,26);headerSubtitle=sub;
-            var line=Box("Gold divider",header,new Color(.48f,.34f,.16f));line.anchorMin=new Vector2(0,0);line.anchorMax=new Vector2(1,0);line.sizeDelta=new Vector2(0,2);
-            footer=Box("Footer",root,new Color(.025f,.035f,.05f,.97f));footer.anchorMin=Vector2.zero;footer.anchorMax=new Vector2(1,0);footer.pivot=new Vector2(.5f,0);footer.sizeDelta=new Vector2(0,108);footer.anchoredPosition=Vector2.zero;
-            headerApron=Box("Header apron",shell,new Color(.025f,.035f,.05f,.94f));
-            footerApron=Box("Footer apron",shell,new Color(.025f,.035f,.05f,.97f));
+            var line=Box("Gold divider",header,UiTheme.Gold);line.anchorMin=new Vector2(0,0);line.anchorMax=new Vector2(1,0);line.sizeDelta=new Vector2(0,2);
+            footer=Box("Footer",root,UiTheme.Background);footer.anchorMin=Vector2.zero;footer.anchorMax=new Vector2(1,0);footer.pivot=new Vector2(.5f,0);footer.sizeDelta=new Vector2(0,108);footer.anchoredPosition=Vector2.zero;
+            headerApron=Box("Header apron",shell,UiTheme.Background);
+            footerApron=Box("Footer apron",shell,UiTheme.Background);
             headerApron.GetComponent<Image>().raycastTarget=footerApron.GetComponent<Image>().raycastTarget=false;
-            ApplySafeArea();
+            RefreshGlobalHud();ApplySafeArea();
             overlay=Rect("Overlay",root);Stretch(overlay);
             toastFrame=Box("Notice",overlay,ink);toastFrame.GetComponent<Image>().raycastTarget=false;
             toastFrame.anchorMin=new Vector2(.05f,0);toastFrame.anchorMax=new Vector2(.95f,0);toastFrame.pivot=new Vector2(.5f,0);toastFrame.anchoredPosition=new Vector2(0,battle?325:112);toastFrame.sizeDelta=new Vector2(0,battle?80:62);
             toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);Inset(toast.rectTransform,16,16,8,8);toastTime=0;toastFrame.gameObject.SetActive(false);
             if(!battle)
             {
-                var scroll=Rect("Scroll",root);scroll.SetSiblingIndex(root.childCount-2);scroll.anchorMin=new Vector2(0,0);scroll.anchorMax=Vector2.one;scroll.offsetMin=new Vector2(24,180);scroll.offsetMax=new Vector2(-24,-94);
+                var scroll=Rect("Scroll",root);scroll.SetSiblingIndex(root.childCount-2);scroll.anchorMin=new Vector2(0,0);scroll.anchorMax=Vector2.one;scroll.offsetMin=new Vector2(24,124);scroll.offsetMax=new Vector2(-24,-94);
                 scroll.gameObject.AddComponent<Image>().color=Color.clear;scroll.gameObject.AddComponent<RectMask2D>();var sr=scroll.gameObject.AddComponent<ScrollRect>();sr.horizontal=false;sr.movementType=ScrollRect.MovementType.Clamped;
                 content=Rect("Content",scroll);content.anchorMin=new Vector2(0,1);content.anchorMax=new Vector2(1,1);content.pivot=new Vector2(.5f,1);content.sizeDelta=Vector2.zero;
                 var layout=content.gameObject.AddComponent<VerticalLayoutGroup>();layout.spacing=10;layout.childControlHeight=true;layout.childForceExpandHeight=false;layout.childControlWidth=true;layout.childForceExpandWidth=true;
@@ -186,7 +184,7 @@ namespace Hellscript
         }
         void FooterButton(int index,int count,string title,Action action,bool primary=false)
         {
-            var b=Button(footer,title,action,primary?new Color(.48f,.3f,.13f):new Color(.1f,.13f,.17f));var r=(RectTransform)b.transform;
+            var b=Button(footer,title,action,primary?UiTheme.Primary:UiTheme.Panel);var r=(RectTransform)b.transform;
             r.anchorMin=new Vector2((float)index/count,0);r.anchorMax=new Vector2((float)(index+1)/count,1);r.offsetMin=new Vector2(8,10);r.offsetMax=new Vector2(-8,-10);
         }
         public void ShowTown()=>game.EnterPlaza();
@@ -353,7 +351,7 @@ namespace Hellscript
             slider.onValueChanged.AddListener(v=>{changed(v);label.text=Loc.F("{0}  {1:0.#}{2}",title,v,unit);RefreshGuideBuildDifference();RefreshPresetSaveButtons();});
         }
         public void ShowBag(bool portal=false)=>RenderEquipment(portal);
-        Color RarityColor(int r)=>r==3?gold:r==2?new Color(.8f,.69f,1):r==1?new Color(.5f,.76f,1):pale;
+        Color RarityColor(int r)=>StorageSurface.Hex(EquipmentGradePalette.Hex[Mathf.Clamp(r,0,4)]);
         void ShowWarehouse(bool portal)=>RenderWarehouse(portal);
         public void ShowShop()=>RenderItemShop();
         public void ShowRecords()
@@ -437,7 +435,9 @@ namespace Hellscript
             game.ExitIdle();
             var modal=Box("Confirm",root,new Color(0,0,0,.83f));Stretch(modal);var card=Box("Dialog",modal,panel);card.anchorMin=new Vector2(.08f,.35f);card.anchorMax=new Vector2(.92f,.65f);card.offsetMin=card.offsetMax=Vector2.zero;
             var text=Label(card,message,25,pale,TextAnchor.MiddleCenter);text.rectTransform.anchorMin=new Vector2(.06f,.35f);text.rectTransform.anchorMax=new Vector2(.94f,.94f);text.rectTransform.offsetMin=text.rectTransform.offsetMax=Vector2.zero;
-            var cancel=Button(card,"취소",()=>Destroy(modal.gameObject));var ok=Button(card,"확인",()=>{game.Audio?.Play(SoundCue.Confirm);Destroy(modal.gameObject);action();},new Color(.45f,.28f,.12f));
+            void Close(){ContentWindowHost.Detach(modal);modal.gameObject.SetActive(false);Destroy(modal.gameObject);}
+            ContentWindowHost.Attach(modal,Close);
+            var cancel=Button(card,"취소",Close);var ok=Button(card,"확인",()=>{game.Audio?.Play(SoundCue.Confirm);Close();action();},new Color(.45f,.28f,.12f));
             foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
         }
         public void ShowToast(string text)
@@ -449,6 +449,7 @@ namespace Hellscript
         }
         void Update()
         {
+            if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             TickGlobalHud();
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
             if(idleIntroductionOpen)ReflowIdleIntroduction();

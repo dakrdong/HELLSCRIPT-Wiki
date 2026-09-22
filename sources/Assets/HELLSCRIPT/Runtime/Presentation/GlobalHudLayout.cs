@@ -71,6 +71,17 @@ namespace Hellscript
         public readonly Rect seal,level,hp,resource,shield,shieldLine,status,xp,xpText;
         public readonly Rect[] passives=new Rect[3],actives=new Rect[4],potions=new Rect[3];
         public readonly float occupiedHeight;
+        // Reading pages reserve at most 42% for the persistent HUD. Fit the entire HUD into that
+        // region instead of clipping the reservation while its controls still extend above it.
+        public static float ContentFactor(float w,float h,float requested,GlobalHudStyle style)
+        {
+            float limit=Mathf.Max(1,h*.42f-12);
+            bool Fits(float value){var layout=new GlobalHudLayout(w,h,value,style);return layout.occupiedHeight*layout.scale<=limit;}
+            if(Fits(requested))return requested;
+            float low=.01f,high=requested;
+            for(int i=0;i<16;i++){float mid=(low+high)*.5f;if(Fits(mid))low=mid;else high=mid;}
+            return low;
+        }
         public GlobalHudLayout(float pixelsWide,float pixelsHigh,float interfaceFactor=1,GlobalHudStyle style=null)
         {
             style??=new GlobalHudStyle();

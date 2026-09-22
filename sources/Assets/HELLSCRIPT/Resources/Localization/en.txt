@@ -8,8 +8,6 @@
 #
    · 이 게임에는 아직 적용되는 곳이 없습니다	   · nothing in this game spends it yet
 \n4세트: 	\n4 set: 
-\n고정 공격속도 {0:+0%;-0%}	\nFixed attack speed {0:+0%;-0%}
-\n고정 부가 저항 {0:0.0}	\nFixed extra resistance {0:0.0}
 \n골드 +{0:N0}	\nGold +{0:N0}
 \n번역 파일을 찾지 못해 번역이 없는 줄은 한국어로 표시합니다.	\nThe translation file was not found, so lines without a translation are shown in Korean.
 \n재료 +{0:N0}	\nMaterials +{0:N0}
@@ -116,7 +114,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0:0.0}초 · Lv.{1} → {2}\nHP {3:0.0}/{4:0.0} → {5:0.0}/{6:0.0}{7}	{0:0.0}s · Lv.{1} → {2}\nHP {3:0.0}/{4:0.0} → {5:0.0}/{6:0.0}{7}
 {0:00}번 · {1} ×{2}\n{3:0.0}–{4:0.0}초 / {5}	Rule {0:00} · {1} ×{2}\n{3:0.0}–{4:0.0}s / {5}
 {0} Lv.{1} · 장비와 능력치가 만든 값입니다	{0} Lv.{1} · Gear and attribute totals
-{0}\n{1} {2:0.0} = 기본 {3:0.0} + 강화 {4:0.0}{5}	{0}\n{1} {2:0.0} = base {3:0.0} + enhancement {4:0.0}{5}
 {0}\n남은 양 {1:0} · {2:0.0}초\n누적 흡수 {3:0}{4}	{0}\n{1:0} left · {2:0.0}s\nAbsorbed so far {3:0}{4}
 {0}\n분해하면 {1}{2}를 받습니다. 이 장비는 사라집니다.	{0}\nSalvaging gives {1}{2}. This piece is gone for good.
 {0}\n조준 방향 고정{1}	{0}\nAim direction locked{1}
@@ -134,7 +131,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0} Lv.{1} · 현재 장비와 행동을 확인합니다	{0} Lv.{1} · review your gear and behavior
 {0} · Lv.{1} 추천	{0} · recommended for Lv.{1}
 {0} · {1} · {2}\n목표 {3} {4:0.#}m · {5}\n{6} · 설치 {7} · {8} · {9}	{0} · {1} · {2}\nTarget {3} {4:0.#}m · {5}\n{6} · placement {7} · {8} · {9}
-{0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}	{0} · {1} · {2}\nItem level {3} · needs Lv.{4}\n{5}
 {0} · {1} · 조건을 고정해 시험합니다	{0} · {1} · tested with the conditions held fixed
 {0} · {1}단계\n\n처치 {2}   /   획득 {3}개\n전투 시간 {4:0.0}초   /   실제 {5:0.0}초\n총 피해 {6:N0}	{0} · Stage {1}\n\nKills {2}   /   Loot {3}\nCombat time {4:0.0}s   /   Real {5:0.0}s\nTotal damage {6:N0}
 {0} · {1}단계 · {2}	{0} · Stage {1} · {2}
@@ -356,7 +352,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 공격을 회피했습니다.	Dodged the attack.
 공명하는 폭풍	Resonating Storm
 공세	Onslaught
-공용	Shared
 공용 장비	Shared gear
 공유	Share
 공유 창고	Shared warehouse
@@ -474,7 +469,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 기존 덫과 겹침	Overlapping an existing trap
 기존 슬롯\n{0}	The slot as it stands\n{0}
 기존 자동 사용이 꺼져 있거나 켜진 규칙이 없어 자동 사용을 끕니다.	Automatic use was off, or no rule was enabled, so automatic use is turned off.
-기존 장비 · 획득 순서 기록 없음	Older gear · no pickup order recorded
 기존 장판 보존|오래된 장판 교체	Keep the existing zones|Replace the oldest one
 기존 접사와 수치 개수가 다릅니다.	The affix count and the value count do not match.
 기존 표식 유지|더 높은 우선순위면 이전|새 대상에 이전	Keep the existing mark|Move it for a higher priority|Move it to any new target
@@ -718,7 +712,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 몸통	Chest
 묘지의 집행자	Graveyard Executioner
 무기	Weapon
-무기 피해	Weapon damage
 무너진 병영	Collapsed Barracks
 무너진 성채 · 처치 게이지를 채워 보스를 소환하세요	Fallen Citadel · Fill the kill gauge to summon the boss
 무덤 사냥개	Grave Hound
@@ -2528,8 +2521,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 아이템을 찾을 수 없습니다.	Item not found.
 아이템 상세 정보	Item details
 아이템 레벨 {0} · 요구 Lv.{1}	Item level {0} · requires Lv.{1}
- · 고정 부가 저항 {0:0.0}	 · fixed extra resistance {0:0.0}
- · 고정 공격속도 {0:+0%;-0%}	 · fixed attack speed {0:+0%;-0%}
 현재 위치 · {0}	Current position · {0}
 이동 목적지 · {0} · 첫 빈칸	Destination · {0} · first empty slot
 꺼내기	Withdraw
@@ -2605,10 +2596,7 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 대상에게 주는 피해	Damage to the target
 추가 피해	Extra damage
 공격 계수	Attack coefficient
-감소	Decrease
-증가	Increase
 프리셋·공유	Presets & Sharing
-초록색 프리셋을 적용·편집하고 있습니다. 변경한 내용은 저장을 눌러 반영하세요.	The green preset is applied and being edited. Press Save to apply your changes.
 훈련 편집안은 실제 캐릭터에 저장되지 않습니다.	A training draft is not saved to the real hero.
 변환 내역 확인 필요	Conversion review required
 적용·편집 중	Applied · editing
@@ -2632,8 +2620,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 투자한 스킬 포인트를 모두 되돌리시겠습니까?	Refund all invested skill points?
 패시브 스킬	Passive skills
 액티브 스킬	Active skills
-레벨 올리기	Raise level
-레벨 내리기	Lower level
 장착 해제	Unequip
 액티브	Active
 스킬 아이콘을 누르면 설명과 다음 레벨의 효과를 확인할 수 있습니다.	Tap a skill icon to see its description and next-level effect.
@@ -2747,11 +2733,8 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 단검	Dagger
 
 # Native inventory
- · 각성	 · Awakened
-{0} · {1} · 아이템 Lv.{2} · 요구 Lv.{3}	{0} · {1} · Item Lv.{2} · Requires Lv.{3}
 {0}개 분해	Dismantle {0}
 {0}에 장착	Equip: {0}
-강화 +{0} · 걸작 {1}{2}	Enhancement +{0} · Masterwork {1}{2}
 공격 기준  {0:0.#} → {1:0.#}	Attack  {0:0.#} → {1:0.#}
 분해 대상 · {0}개	Selected items · {0}
 선택 분해	Dismantle selected
@@ -4447,3 +4430,36 @@ G{0} {1}칸 → G{2} {3}칸	G{0} {1} cells → G{2} {3} cells
 컨트롤 키로 일시 활성화	Hold Ctrl to show ranges temporarily
 아이템 옵션 범위 설정을 읽지 못했습니다. 기본값으로 표시합니다.	Could not read the item range preference. Using the default display.
 옵션 범위 설정을 저장하지 못했습니다. 다시 시도해 주세요.	Could not save the range preference. Please try again.
+
+옵션 이름·설명 검색	Search option names and descriptions
+✓ 변경된 항목	✓ Changed only
+변경된 항목	Changed only
+조건에 맞는 설정이 없습니다.	No settings match the filters.
+‹ 설정 목록	‹ Settings list
+사용 조건	Use conditions
+자동 구매	Auto purchase
+{0}: {1} 선택 시 적용	Applies when {0} is set to {1}
+{0} 외 {1}개	{0} and {1} more
+범위 {0}~{1} · 단위 {2}	Range {0}–{1} · Step {2}
+금색 프리셋을 적용·편집하고 있습니다. 변경한 내용은 저장을 눌러 반영하세요.	The gold preset is being edited. Save to apply your changes.
+# Retained wording for historical records and composed descriptions.
+\n고정 공격속도 {0:+0%;-0%}	\nFixed attack speed {0:+0%;-0%}
+\n고정 부가 저항 {0:0.0}	\nFixed extra resistance {0:0.0}
+{0}\n{1} {2:0.0} = 기본 {3:0.0} + 강화 {4:0.0}{5}	{0}\n{1} {2:0.0} = base {3:0.0} + enhancement {4:0.0}{5}
+{0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}	{0} · {1} · {2}\nItem level {3} · needs Lv.{4}\n{5}
+공용	Shared
+기존 장비 · 획득 순서 기록 없음	Older gear · no pickup order recorded
+무기 피해	Weapon damage
+ · 고정 부가 저항 {0:0.0}	 · fixed extra resistance {0:0.0}
+ · 고정 공격속도 {0:+0%;-0%}	 · fixed attack speed {0:+0%;-0%}
+감소	Decrease
+증가	Increase
+초록색 프리셋을 적용·편집하고 있습니다. 변경한 내용은 저장을 눌러 반영하세요.	The green preset is applied and being edited. Press Save to apply your changes.
+레벨 올리기	Raise level
+레벨 내리기	Lower level
+ · 각성	 · Awakened
+{0} · {1} · 아이템 Lv.{2} · 요구 Lv.{3}	{0} · {1} · Item Lv.{2} · Requires Lv.{3}
+강화 +{0} · 걸작 {1}{2}	Enhancement +{0} · Masterwork {1}{2}
+장비 상세	Equipment Details
+저장하지 않은 변경	Unsaved changes
+변경 사항 없음	No changes

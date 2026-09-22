@@ -21,7 +21,7 @@ namespace Hellscript
             ResetTownInput();game.Town?.Cancel();CloseHudPanel();Page="bag";
             nativeInventory=InventoryWindow.Open(transform,game.Store,game.catalog,font,()=>InterfaceFactor,()=>
             {
-                nativeInventory=null;Page=playInventoryOrigin;playInventoryOrigin=null;pageRepaint=inventoryPreviousRepaint;
+                nativeInventory=null;if(Page=="bag"){Page=playInventoryOrigin;pageRepaint=inventoryPreviousRepaint;}playInventoryOrigin=null;
                 RefreshHud();
             },()=>{if(game.Combat!=null&&game.Combat.Hero==game.Store.Data.Hero)game.Combat.RefreshEquipment();});
             pageRepaint=()=>nativeInventory?.Repaint();

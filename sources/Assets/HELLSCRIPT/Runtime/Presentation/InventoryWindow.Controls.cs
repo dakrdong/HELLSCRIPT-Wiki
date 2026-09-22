@@ -21,7 +21,7 @@ namespace Hellscript
         Button Btn(Transform parent,string label,float x,float y,float w,float h,Action click,bool primary=false,int size=11)
         {
             var r=Panel(parent,label,primary?"71352a":"343428",primary?"482219":"25261c",primary?"b18b5a":"786342");Place(r,x,y,w,h);r.GetComponent<StorageSurface>().inset=true;
-            var b=r.gameObject.AddComponent<Button>();b.targetGraphic=r.GetComponent<Image>();var colors=b.colors;colors.highlightedColor=new Color(1.2f,1.13f,1.03f);colors.pressedColor=new Color(.75f,.72f,.64f);b.colors=colors;
+            var b=r.gameObject.AddComponent<Button>();b.targetGraphic=r.GetComponent<Image>();var colors=b.colors;colors.highlightedColor=new Color(1.2f,1.13f,1.03f);colors.pressedColor=new Color(.75f,.72f,.64f);b.colors=colors;UiTheme.Button(b,primary);
             var t=Txt(r,label,4,0,w-8,h,size,pale,TextAnchor.MiddleCenter);t.resizeTextForBestFit=true;t.resizeTextMinSize=8;t.resizeTextMaxSize=t.fontSize;b.onClick.AddListener(()=>click());return b;
         }
         void Glyph(Transform parent,string symbol,float x,float y,float size,Color color)
@@ -66,17 +66,12 @@ namespace Hellscript
             for(int n=0;n<GradeNames.Length;n++)
             {
                 int bit=1<<n;bool chosen=(grades&bit)!=0;var row=Find("inventory-grade-option-"+n);row.interactable=grades!=bit;
-                row.GetComponent<StorageSurface>().Paint(chosen?"71352a":"343428",chosen?"482219":"25261c",chosen?"b18b5a":"786342");
+                UiTheme.Button(row,chosen);
                 var check=(RectTransform)row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?"c4a774":"13180f",chosen?"c4a774":"13180f","c0a475");
                 if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);else if(chosen)Glyph(check,"check",1,1,13,ink);
             }
         }
-        void DrawIcon(Transform parent,Item item,float x,float y,float size)
-        {
-            if(ItemCatalog.Base(item).legacyIndex>=24){Glyph(parent,EquipmentSlots.Kind(item).ToString().ToLowerInvariant(),x+size*.12f,y+size*.12f,size*.76f,gold);return;}
-            var r=Rect("Equipment art",parent);Place(r,x,y,size,size);var image=r.gameObject.AddComponent<RawImage>();image.texture=atlas;int index=ItemCatalog.AtlasIndex(item);
-            image.uvRect=new Rect(index%6/6f,1-(index/6+1)/4f,1/6f,1/4f);image.raycastTarget=false;
-        }
+        void DrawIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size);
         ScrollRect Scroll(Transform parent,string name,float x,float y,float w,float h,out RectTransform content)
         {
             var root=Panel(parent,name,"12160f","12160f");Place(root,x,y,w,h);

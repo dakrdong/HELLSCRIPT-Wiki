@@ -117,7 +117,7 @@ namespace Hellscript
                 if(field.text==initial){Close();return;}
                 presetMain.gameObject.SetActive(false);presetExit.gameObject.SetActive(true);
             }
-            presetClose=Exit;
+            presetClose=Exit;ContentWindowHost.Attach(presetModal,HandlePresetEscape);
             var cancel=Button(presetMain,"닫기",Exit);var commit=Button(presetMain,rename?"이름 저장":occupied?"이 슬롯에 덮어쓰기":"프리셋 저장",Save,gold*.55f);
             commit.interactable=!rename;
             AnchorButton(cancel,0,2);AnchorButton(commit,1,2);
@@ -171,10 +171,10 @@ namespace Hellscript
         {
             presetClose=null;presetNameField=null;presetReadingPane=null;var old=presetModal;
             presetModal=presetSafeRoot=presetCard=presetSummary=presetEntry=presetMain=presetExit=null;
-            if(old!=null){old.gameObject.SetActive(false);Destroy(old.gameObject);}
+            if(old!=null){ContentWindowHost.Detach(old);old.gameObject.SetActive(false);Destroy(old.gameObject);}
         }
         void UpdatePresetDialog()
-        {if(presetModal==null)return;ReflowPresetDialog();if(!CommonPanelOpen&&Keyboard.current?.escapeKey.wasPressedThisFrame==true&&presetNameField?.isFocused!=true)HandlePresetEscape();}
+        {if(presetModal==null)return;ReflowPresetDialog();}
         void HandlePresetEscape(){if(presetEscapeFrame==Time.frameCount)return;presetEscapeFrame=Time.frameCount;presetClose?.Invoke();}
     }
 }

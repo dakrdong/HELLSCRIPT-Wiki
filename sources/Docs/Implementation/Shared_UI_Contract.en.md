@@ -1,0 +1,56 @@
+# Shared UI and new-content contract
+
+Updated: 2026-09-22
+Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
+
+[Korean version](Shared_UI_Contract.md)
+
+## Presentation owners
+
+| Element | Owner and contract |
+| --- | --- |
+| Theme | `UiTheme`: dark olive backgrounds, brass selection/actions, ivory text. Preserve semantic danger/gain/loss colors. |
+| Fonts | `UiFonts.Body`; `UiFonts.Display` only for title branding. Individual windows must not destroy borrowed fonts. |
+| Type | Title 20, heading 15, body 12, caption 10 before reading scale. Existing HUD/legacy adapters convert their coordinate system. |
+| Equipment slots | Portrait 52, landscape 54, gap 6, common `UiTheme.Scale`. Reduce columns instead of shrinking slots. Preserve persisted slot indices and capacity. |
+| Windows | Header/close, navigation, scroll body, fixed actions. `ContentWindowHost` owns stacking, background input, back and nested pause leases. |
+| Details | `ItemTooltip` and `ItemDetailView` share order, values, ranges, effects, sockets, upgrades and protection. Fixed outer bounds, scrolling body. |
+| Comparison | `EquipmentComparisonView` and `ItemComparison` share ring/hand replacement and stat deltas. |
+| Paperdoll | `CharacterEquipmentView` owns ten placements. Inventory/storage presets show actual items; slot growth shows translucent body-part emblems. |
+| Slot states | `EquipmentSlotView` owns grade border, level, lock, worn and selected markers. Forge work uses `ForgeWorkingPulse`. |
+
+Element/class/rune colors, HP/mana, danger telegraphs and map symbols retain their meaning. Forge keeps equal three-column landscape geometry, storage keeps two inventories, and rune boards keep hex cells.
+
+## Domain ownership
+
+Use `HeroStats`, `StatCatalog` and `ItemComparison` for numeric meaning; `EquipmentSlots` and `Storage` for equip positions and movement; existing bulk/salvage/sale policies and `ShopAutoSelect` for protection and selection. Different actions intentionally have different eligibility rules. Do not replace them with one permissive check.
+
+`InventoryQuery`, `ShopAutoSettings` and per-window state preserve filters, selection and scrolling. Existing uGUI drag adapters share pointer lifecycle conventions while movement, hex occupancy and reorder validity remain domain-specific. Existing `GameStore` commands revalidate quotes, ownership and resources atomically.
+
+`GameStore.Committed` fires only after a successful persisted adoption. Duplicate receipts do not publish again. `StoreViewBinding` defers repaint while a modal is being edited. Presentation callbacks cannot turn a completed purchase into a failed purchase. Existing edit models distinguish applied, draft and saved state.
+
+`TownWalk` and `ContentUnlocks` own access. `UiTime` formats durations but never chooses a clock: UTC work and pausable battle time remain separate. `GlobalHudSnapshot`, `SkillIconView` and saved combat/training snapshots preserve consistent labels/icons without recomputing history from live gear. `UiSafeArea`, `Loc` and existing device display/text/audio preferences remain shared.
+
+Pass `EquipmentViewSource.Owned`, `Draft`, `BattleSnapshot` or `Catalog`. Detail/comparison views copy their input and never mutate the account. Catalog definitions have no acquired roll; never fabricate one for display. Controllers supply domain commands and drafts.
+
+## Hunt Edict
+
+Keep all 25 groups and 130 global option IDs, values, ranges and combat behavior. Landscape uses category, summary list and selected editor with independent scrolling. Portrait slides between summary and detail and restores list position. Search names/help/IDs across categories; optionally show changed groups only.
+
+Show current choices, numbers, sets and priorities compactly; open controls on demand. Disabled conditions remain explained inline. Skill rows show icon/name/rank/equipped state while commands belong to selected details. New skill design remains excluded. Keep dirty state, revert and save in a fixed footer. Navigation preserves drafts; close/preset replacement asks about unsaved edits.
+
+## New content workflow
+
+1. Start in a checkout containing the latest merged `main`, then run `python3 tools/new_content_ui.py FeatureName`. Keep unfinished changes in an older checkout intact and use a separate current checkout. Existing files are never overwritten.
+2. Supply bilingual title, explicit source, reading scale and render callback. Keep the draft in the controller, outside repaint callbacks.
+3. Compose common views under `Navigation`, `Body` and `Actions`; call established transactions for mutations.
+4. Document any specialized layout adapter and its shared owners. Do not duplicate font creation, formulas, equipment cards or canvas ownership.
+5. Run `python3 tools/check_ui_contract.py`, `python3 tools/test_ui_contract.py`, related Unity tests and native macOS acceptance. Record images plus actual before/after state and persistence.
+
+GitHub Actions runs the ownership checker and its fault-injection tests. The checker catches new window/canvas bypasses, independent font creation, missing shared equipment connections and account access in reusable views. It does not redraw arbitrary UI or prove visual correctness. Repository rules guide subsequent development; they are not an operating-system restriction on external code generators.
+
+## Acceptance
+
+Check identical equipment data, two rings/two hands/offhand/presets, unchanged saved slot indices, fixed actions and scrolling at 440×956, 956×440, 16:9, 16:10 and 21:9. Check Korean, English, larger text, all edict options and preserved drafts across search/navigation/rotation/language. Test failed saves, duplicate/stale requests, insufficient resources and nested pause/input restoration. Distinguish synthetic macOS pointer acceptance from physical-mobile validation.
+
+See [completed-work integration](Completed_Work_Integration.en.md) for the initial merge and excluded skill work, and [shared UI validation](Shared_UI_Validation.en.md) for implementation evidence.

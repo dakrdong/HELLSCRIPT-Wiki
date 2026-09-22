@@ -29,7 +29,7 @@ namespace Hellscript
         RectTransform RuneBox(string name,Transform parent,Color? fill=null)
         {var box=Box(name,parent,fill??RuneBg);box.gameObject.AddComponent<UIRectBorder>().color=RuneLine;return box;}
         Text RuneTextAt(Transform parent,string text,float x,float y,float w,float h,int size=14,TextAnchor align=TextAnchor.MiddleLeft,Color? color=null)
-        {var t=Label(parent,text,Mathf.RoundToInt(size*runeUnit*InterfaceFactor),color??RuneText,align);Place(t.rectTransform,x,y,w,h);t.horizontalOverflow=HorizontalWrapMode.Wrap;t.resizeTextForBestFit=true;t.resizeTextMinSize=Mathf.Max(7,Mathf.RoundToInt(size*runeUnit*.9f));t.resizeTextMaxSize=Mathf.RoundToInt(size*runeUnit*InterfaceFactor);if(size>=15){runeSerif??=Font.CreateDynamicFontFromOSFont(new[]{"AppleMyungjo","Georgia","Times New Roman"},32);t.font=runeSerif;}return t;}
+        {var t=Label(parent,text,Mathf.RoundToInt(size*runeUnit*InterfaceFactor),color??RuneText,align);Place(t.rectTransform,x,y,w,h);t.horizontalOverflow=HorizontalWrapMode.Wrap;t.resizeTextForBestFit=true;t.resizeTextMinSize=Mathf.Max(7,Mathf.RoundToInt(size*runeUnit*.9f));t.resizeTextMaxSize=Mathf.RoundToInt(size*runeUnit*InterfaceFactor);if(size>=15){runeSerif=UiFonts.Body;t.font=runeSerif;}return t;}
         Button RuneButton(Transform parent,string name,string text,Action action,float x,float y,float w,float h,bool selected=false)
         {
             var b=Button(parent,text,action,selected?RuneV13Art.Color("#393622"):RuneBg);b.name=name;Place((RectTransform)b.transform,x,y,w,h);

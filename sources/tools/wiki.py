@@ -501,6 +501,10 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'shared-ui-contract':('프로젝트','공통 UI와 신규 콘텐츠 규칙','장비 상세·슬롯·장착 배치·테마·창 관리의 소유자와 신규 콘텐츠 기본 틀·자동 검사입니다.'),
+ 'shared-ui-contract.en':('프로젝트','Shared UI and new-content contract','Shared equipment, theme and window owners, new-content starter and automated ownership checks.'),
+ 'shared-ui-validation':('후속 개발 기록','공통 UI 통합 검증','통합된 화면과 사냥 칙령, 저장·입력·장비 회귀 검사 및 macOS 실행 근거입니다.'),
+ 'shared-ui-validation.en':('후속 개발 기록','Shared UI integration validation','Integrated UI and Hunt Edict, persistence/input/equipment regression and native macOS evidence.'),
  'class-set-reference':('장비와 빌드','직업별 세트 24종 기획·레퍼런스','디아블로 4 부적 세트를 참고한 직업별 8종, 개별 장비 105개와 효과 60단계의 게임 미반영 검토안입니다.'),
  'class-set-reference.en':('장비와 빌드','24 class set concepts and references','Design-only Diablo IV-inspired catalog: eight sets per class, 105 pieces and 60 bonus tiers.'),
  'legendary-class-expansion':('장비와 빌드','직업별 전설 40종','전사·궁수·마법사 전설 120종의 효과, 부위, 참고 위상과 공통 전투 규칙입니다.'),
@@ -621,14 +625,18 @@ def link_target(target, source, page_paths):
 
 def inline(text, source, page_paths):
     # Tokenize code and links before escaping prose. Raw HTML is always escaped.
-    pattern=r'`([^`]+)`|\[([^\]]+)\]\(([^\s)]+)\)'
+    pattern=r'`(?P<code>[^`]+)`|(?P<image>!)?\[(?P<label>[^\]]+)\]\((?P<target>[^\s)]+)\)'
     result=[];pos=0
     for m in re.finditer(pattern,text):
         result.append(html.escape(text[pos:m.start()]))
-        if m[1] is not None: result.append('<code>'+html.escape(m[1])+'</code>')
+        if m['code'] is not None: result.append('<code>'+html.escape(m['code'])+'</code>')
         else:
-            target=link_target(m[3],source,page_paths)
-            result.append('<a href="'+html.escape(target,quote=True)+'">'+html.escape(m[2])+'</a>' if target else html.escape(m[2]))
+            target=link_target(m['target'],source,page_paths)
+            label=html.escape(m['label'])
+            if m['image'] and target and target.startswith('sources/') and Path(urlsplit(target).path).suffix.lower() in ('.png','.jpg','.jpeg','.webp','.gif'):
+                result.append('<img class="evidence-image" loading="lazy" src="'+html.escape(target,quote=True)+'" alt="'+html.escape(m['label'],quote=True)+'">')
+            elif m['image']: result.append(label)
+            else: result.append('<a href="'+html.escape(target,quote=True)+'">'+label+'</a>' if target else label)
         pos=m.end()
     result.append(html.escape(text[pos:]));value=''.join(result)
     value=re.sub(r'\*\*(.+?)\*\*',r'<strong>\1</strong>',value)

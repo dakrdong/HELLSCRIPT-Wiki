@@ -1,5 +1,9 @@
 # HELLSCRIPT 프로젝트 지침
 
+신규 콘텐츠 UI는 `AGENTS.md`의 **신규 콘텐츠와 공통 UI — 필수** 규칙과 `Docs/Implementation/Shared_UI_Contract.md`를 따른다. 공통 부품·신규 창 템플릿·자동 검사 경로를 새 화면에서도 사용한다.
+
+New content UI must follow the shared UI contract and mandatory routing in `AGENTS.md`, including the starter, shared owners and validation checks.
+
 Unity Editor 연동에는 `AGENTS.md`의 **CoplayDev Unity MCP 활용 기준**을 함께 따른다. 도구 선택, 대상 프로젝트 확인, 변경 후 검증과 연결 실패 시 대응 기준은 그 문서를 단일 기준으로 유지한다.
 
 For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `AGENTS.md` as the single source for tool selection, project targeting, verification, and connection recovery.

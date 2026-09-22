@@ -19,34 +19,8 @@ namespace Hellscript
         }
         void ItemInfo(Transform parent,Item item,float w,ref float y,bool concise=false,bool stackedHeader=false)
         {
-            if(stackedHeader)
-            {
-                DrawIcon(parent,item,(w-44)/2,y,44);y+=48;
-                Paragraph(parent,item.DisplayName,12,ref y,w-24,13,ColorOf(GradeColors[Storage.Grade(item)]));
-            }
-            else
-            {
-                DrawIcon(parent,item,12,y,52);var title=Txt(parent,item.DisplayName,73,y,w-88,52,16,ColorOf(GradeColors[Storage.Grade(item)]));float titleHeight=Mathf.Max(52,title.preferredHeight);Place(title.rectTransform,73,y,w-88,titleHeight);y+=titleHeight+6;
-            }
-            Paragraph(parent,Loc.F("{0} · {1} · 아이템 Lv.{2} · 요구 Lv.{3}",GradeNames[Storage.Grade(item)],GameCatalog.Slots[item.slot],item.level,item.RequiredLevel),12,ref y,w-24,10,muted);
-            if(item.slot==0)Paragraph(parent,EquipmentSlots.HandLabel(item),12,ref y,w-24,11,gold);
-            Paragraph(parent,Loc.F("{0}  {1:0.##}",EquipmentSlots.MainLabel(item),ItemCatalog.MainValue(item)),12,ref y,w-24,17,pale);
-            var basis=ItemCatalog.Base(item);
-            if(basis.resistance>0)Paragraph(parent,Loc.F("고정 부가 저항 {0:0.0}",basis.resistance*(1+.08f*(item.level-1))),12,ref y,w-24,11,muted);
-            if(basis.attackSpeed!=0)Paragraph(parent,Loc.F("고정 공격속도 {0:+0%;-0%}",basis.attackSpeed),12,ref y,w-24,11,muted);
-            foreach(var roll in item.rolls)
-            {
-                string hidden=ItemTooltip.AffixText(item,roll,false),shown=ItemTooltip.AffixText(item,roll,true);
-                var label=Txt(parent,shown,12,y,w-24,1000,11,roll.greater?gold:pale);label.name="item-affix-"+roll.slotId;
-                var binding=ItemRangeText.Bind(label,hidden,shown);float h=Mathf.Max(16,binding.PreferredHeight+6);Place(label.rectTransform,12,y,w-24,h);y+=h;
-            }
-            if(concise)return;
-            if(item.enhancement>0||item.masterwork>0||item.awakened)Paragraph(parent,Loc.F("강화 +{0} · 걸작 {1}{2}",item.enhancement,item.masterwork,item.awakened?Loc.T(" · 각성"):""),12,ref y,w-24,11,gold);
-            Paragraph(parent,GemCatalog.SocketSummary(item),12,ref y,w-24,10,muted);
-            var unique=ItemCatalog.Unique(item.special);if(unique!=null)Paragraph(parent,unique.Description,12,ref y,w-24,11,gold);
-            if(item.equipped)Paragraph(parent,"장착 중",12,ref y,w-24,10,green);
-            if(item.locked)Paragraph(parent,"잠금",12,ref y,w-24,10,gold);
-            if(!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item))Paragraph(parent,"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.",12,ref y,w-24,10,muted);
+            var shared=ItemDetailView.Append(parent,item,w-12,font,textScale,EquipmentViewSource.Owned,icon:!concise);float h=shared.sizeDelta.y;UiLayout.Place(shared,6,y,w-12,h);y+=h+4;
+            if(!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item))Paragraph(parent,"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.",12,ref y,w-24,UiTheme.Caption,muted);
         }
         public void ShowDetail(string id)
         {

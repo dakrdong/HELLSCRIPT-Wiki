@@ -170,6 +170,7 @@ namespace Hellscript
         public bool CommitRunMutation(RunState run,string requestId,string operation,Func<RunState,bool> mutation)
         {
             if(Data.suspendedRun!=run){Error="진행 중인 균열이 아닙니다.";return false;}
+            using var notifications=DeferNotifications();
             RunState committed=null;
             bool success=Transact(requestId,operation,staged=>{committed=staged.suspendedRun;return mutation(committed);});
             if(!success||committed==null)return success;
@@ -245,7 +246,7 @@ namespace Hellscript
         {
             if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle&&!SettleLocalIdle())return false;
             Data.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            return Write(Data);
+            if(!Write(Data))return false;NotifyCommitted("save");return true;
         }
         // Stage the whole account before disk commit. Failed saves never consume the player's inputs.
         public bool Transact(string requestId,string operation,Func<AccountSave,bool> mutation)
@@ -280,12 +281,13 @@ namespace Hellscript
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
-            Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";return true;
+            Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";NotifyCommitted(operation);return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)
         {
             if(Data.suspendedRun!=run||run.layout==null||!run.layout.chests.Contains(chest)){Error="진행 중인 균열의 상자가 아닙니다.";return false;}
             if(chest.phase==ChestPhase.Opened)return true;
+            using var notifications=DeferNotifications();
             RunState committed=null;
             bool success=Transact(chest.requestId,"chest:"+run.id+":"+chest.id,staged=>
             {committed=staged.suspendedRun;return ChestRewards.Apply(staged,committed,chest.id,false);});
