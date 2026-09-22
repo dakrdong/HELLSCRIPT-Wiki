@@ -501,6 +501,10 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'aspect-runestone':('장비와 빌드','위상 각인석·위상 성장','전설 분해 자동 수집, 123종의 다섯 레벨, 수동 레벨업과 장비 각인 규칙입니다.'),
+ 'aspect-runestone.en':('장비와 빌드','Aspect Runestone and progression','Automatic salvage collection, five levels for 123 aspects, manual upgrades and equipment imprinting.'),
+ 'aspect-runestone-implementation':('후속 개발 기록','위상 각인석 구현·검증','공통 UI, 마을 기물, 계정 저장·전투 적용과 macOS 검증 근거입니다.'),
+ 'aspect-runestone-implementation.en':('후속 개발 기록','Aspect Runestone implementation','Shared UI, town monument, persistence, combat integration and native macOS evidence.'),
  'shared-ui-contract':('프로젝트','공통 UI와 신규 콘텐츠 규칙','장비 상세·슬롯·장착 배치·테마·창 관리의 소유자와 신규 콘텐츠 기본 틀·자동 검사입니다.'),
  'shared-ui-contract.en':('프로젝트','Shared UI and new-content contract','Shared equipment, theme and window owners, new-content starter and automated ownership checks.'),
  'shared-ui-validation':('후속 개발 기록','공통 UI 통합 검증','통합된 화면과 사냥 칙령, 저장·입력·장비 회귀 검사 및 macOS 실행 근거입니다.'),

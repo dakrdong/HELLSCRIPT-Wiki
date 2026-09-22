@@ -82,7 +82,7 @@ namespace Hellscript
                         if(allowed)
                         {
                             if(group!=null){if(victim==null){victim=new ProjectileVictim{id=hit.enemy.id};group.victims.Add(victim);}victim.hits++;}
-                            bool poisoned=CombatEffects.OwnTrapPoison(hit.enemy,State.heroId);float extra=p.skill==6&&!p.extra&&Stats.specials.Contains("LA01")?Mathf.Min(.6f,p.hitIds.Count*.15f):0;
+                            bool poisoned=CombatEffects.OwnTrapPoison(hit.enemy,State.heroId);float extra=p.skill==6&&!p.extra&&Stats.specials.Contains("LA01")?AspectGrowth.SnapshotValue(p.snapshot,"LA01",Mathf.Min(.6f,p.hitIds.Count*.15f)):0;
                             Hit(hit.enemy,p.coefficient,p.element,!p.extra,extra+(!p.extra&&runeTargets.TryGetValue(p.actionId,out int multi)?RuneMultiBonus(p.snapshot,multi):0),p.snapshot,true,p.shadow,p.extra?"SAB4":SkillId(p.skill),p.actionId,p.id,p.extra?DamageKind.Set:p.skill<0?DamageKind.Basic:DamageKind.Direct,true,hit.enemy.position-p.direction);
                             if(p.skill<0)BasicResource(hit.enemy.id,p.actionId,p.snapshot);
                             if(p.skill==6&&!p.extra&&poisoned&&Stats.SetPieces("SA")>=4&&!hit.enemy.dead)
@@ -106,7 +106,7 @@ namespace Hellscript
                 Hit(e,p.coefficient,1,true,(p.snapshot.passives[0]&&targets.Length>=3?SkillEffects.Passive(p.snapshot.ranks,HeroClass.Mage,0):0)+RuneMultiBonus(p.snapshot,targets.Length),p.snapshot,definition:"M01",root:p.actionId,instance:p.id);
                 ConsumeFrostMark(e,p);
             }
-            if(Stats.specials.Contains("LM02"))AddGround(p.position,3.5f,.4f,.1f,Stats.damage*.7f,false,12,root:p.actionId);
+            if(Stats.specials.Contains("LM02"))AddGround(p.position,3.5f,.4f,.1f,Stats.damage*AspectGrowth.SnapshotValue(p.snapshot,"LM02",.7f),false,12,root:p.actionId);
             Visual?.Invoke(p.position,p.position,12,p.explosionRadius);
         }
         CombatTrap CreateTrap(HeroActionState action,Vector2 position,float duration)
@@ -136,10 +136,10 @@ namespace Hellscript
             foreach(var enemy in State.enemies.Where(e=>!e.dead).ToArray())
             {
                 var strongest=State.traps.Where(t=>t.triggered&&Vector2.Distance(t.position,enemy.position)<=t.radius&&Map.LineClear(t.position,enemy.position))
-                    .OrderByDescending(t=>t.snapshot.damage*(1+t.snapshot.bonus+t.snapshot.elements[4])).ThenBy(t=>t.id).FirstOrDefault();
+                    .OrderByDescending(t=>t.snapshot.damage*(1+t.snapshot.bonus+t.snapshot.elements[4])*(t.definitionId=="LA03"?AspectGrowth.SnapshotValue(t.snapshot,"LA03",1):1)).ThenBy(t=>t.id).FirstOrDefault();
                 if(strongest==null){enemy.trapTick=.5f;continue;}
                 ApplyStatus(enemy,StatusKind.Poisoned,strongest.definitionId,.55f,strongest.actionId);if(strongest.triggeredAt>=State.time-.00001f)continue;enemy.trapTick-=dt;
-                if(enemy.trapTick<=.00001f){enemy.trapTick+=.5f;Hit(enemy,.3f,4,false,RuneMultiBonus(strongest.snapshot,runeTargets[strongest]),strongest.snapshot,false,definition:strongest.definitionId,root:strongest.actionId,instance:strongest.id,kind:DamageKind.Periodic);}
+                if(enemy.trapTick<=.00001f){enemy.trapTick+=.5f;Hit(enemy,strongest.definitionId=="LA03"?AspectGrowth.SnapshotValue(strongest.snapshot,"LA03",.3f):.3f,4,false,RuneMultiBonus(strongest.snapshot,runeTargets[strongest]),strongest.snapshot,false,definition:strongest.definitionId,root:strongest.actionId,instance:strongest.id,kind:DamageKind.Periodic);}
             }
             State.traps.RemoveAll(t=>t.triggered&&t.remaining<=.00001f);
         }

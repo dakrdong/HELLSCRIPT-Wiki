@@ -2779,6 +2779,28 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 장착 위치나 무기 조합이 올바르지 않습니다.	The equipment positions or weapon combination are invalid.
 오래된 순	Oldest first
 
+# Aspect progression text templates
+30초	30 seconds
+{0}도	{0} degrees
+ 후퇴 덫은 0.5초마다 D{0}%의 독 피해를 줍니다.	 The retreat trap deals D{0}% poison damage every 0.5s.
+ 원래 추가 피해의 {0}%를 전염시킵니다.	 Spreads {0}% of the original extra damage.
+초당 {0}m	{0}m per second
+자원 {0}	{0} resource
+절반입니다	half damage
+{0}%입니다	{0}% damage
+5초	5 seconds
+{0}초 동안	for {0}s.
+자원을 {0} 회복	restore {0} resource
+쿨타임을 {0}초	cooldown by {0}s
+가산으로 {0}%	+{0}%
+최대 HP의 {0}%를 회복합니다	heal for {0}% of maximum HP
+최대 HP의 {0}%에 해당하는 보호막	a barrier equal to {0}% maximum HP
+피해가 {0}% 감소합니다	take {0}% less damage
+이동속도가 {0}% 증가합니다	gain {0}% movement speed
+{0}% 감속	{0}% slow
+
+위상 수집 기록을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다.	Could not safely read the aspect collection. Loading stopped and the original save was preserved.
+
 # --- composed at runtime; no source literal holds these ---
 # Legacy saved rift errors
 통로 연결 실패	A corridor failed to connect
@@ -4463,3 +4485,58 @@ G{0} {1}칸 → G{2} {3}칸	G{0} {1} cells → G{2} {3} cells
 장비 상세	Equipment Details
 저장하지 않은 변경	Unsaved changes
 변경 사항 없음	No changes
+
+# Aspect Runestone
+위상 각인석	Aspect Runestone
+위상 도감	Aspects
+각인 확인	Imprint
+착용 중인 장비	Equipped items
+희귀·전설 장비를 선택하세요.	Select a Rare or Legendary item.
+희귀·전설 장비에 각인할 수 있습니다. 세트 장비는 제외됩니다.	Imprint Rare or Legendary equipment. Set items cannot be imprinted.
+등록한 위상 {0} / {1}	Aspects registered {0} / {1}
+레벨업 가능한 위상 {0}개	{0} aspects ready to level up
+위상 이름·효과 검색	Search aspect names or effects
+레벨업	Level up
+등록됨	Registered
+미등록	Unregistered
+조건에 맞는 위상이 없습니다.	No aspects match your filters.
+보유 {0}개 · {1}	Owned {0} · {1}
+각인 미리보기	Imprint preview
+장비를 선택하세요	Select equipment
+도감에서 위상을 선택하세요.	Select an aspect from the library.
+보유 {0}개	Owned {0}
+이 위상이 담긴 전설 장비를 분해하면 자동으로 등록됩니다.	Salvage a Legendary item with this aspect to register it automatically.
+다음 레벨 · Lv.{0}	Next level · Lv.{0}
+레벨업 · Lv.{0}	Level up · Lv.{0}
+최고 레벨에 도달했습니다.	Maximum level reached.
+{0} 기술에 적용되는 위상입니다.	This aspect applies to {0} skills.
+기존 위상	Current aspect
+새 위상	New aspect
+기존 위상은 새 위상으로 교체됩니다.	The new aspect replaces the current one.
+희귀 장비가 전설 등급으로 바뀌며 다른 옵션은 유지됩니다.	Rare equipment becomes Legendary. Its other properties stay intact.
+장비 상세 닫기	Hide item details
+장비 상세 보기	View item details
+각인석에서 레벨을 올린 뒤 다시 각인하면 장비에도 새 레벨이 적용됩니다.	After leveling up an aspect, imprint it again to apply the new level to your equipment.
+착용 장비 변경	Change equipped item
+각인 불가	Cannot imprint
+{0}개	{0}
+다음 레벨 등록 수 {0} / {1}개	Copies for next level: {0} / {1}
+{0} · Lv.{1} 달성	{0} reached Lv.{1}
+각인	Imprint
+위상 선택	Choose aspect
+전설 장비를 분해해 위상을 모으세요.	Collect aspects by salvaging Legendary equipment.
+각인을 완료했습니다.	Imprint complete.
+위상 각인석 이용 안내	Using the Aspect Runestone
+전설 장비를 분해하면 해당 위상이 계정의 각인석에 자동으로 누적됩니다.	Salvaging Legendary equipment automatically adds its aspect to the account collection.
+첫 위상은 Lv.1로 활성화됩니다. 2·4·8·16개를 모으면 Lv.2·3·4·5로 올릴 수 있습니다.	The first copy activates Lv.1. Collect 2, 4, 8 or 16 copies to unlock Lv.2, 3, 4 or 5.
+빨간 점은 레벨업 가능한 위상을 뜻합니다. 해당 위상을 선택한 뒤 레벨업을 직접 눌러 주세요.	A red dot marks an aspect ready to level up. Select it and press Level up.
+모은 위상은 레벨업하거나 각인해도 줄어들지 않습니다.	Leveling up and imprinting do not consume collected copies.
+같은 위상을 여러 장비에 각인하면 가장 높은 레벨 하나만 적용됩니다.	If multiple equipped items have the same aspect, only the highest level applies.
+위상 수집 · 레벨업 · 각인	Collect, level up and imprint aspects
+각인석 열기	Open Runestone
+분해하면 장비가 원래 지닌 전설 위상을 수집합니다. 새로 각인한 위상은 수집 개수를 늘리지 않습니다.	Salvage collects the item's original Legendary aspect. Imprinting cannot create extra copies.
+분해 시 수집: {0} 1개	Salvage grants: 1 {0}
+각인으로 전설이 된 장비는 분해해도 위상을 얻지 못합니다.	An item made Legendary by imprinting grants no aspect when salvaged.
+재료 {0:N0} · 코어 {1} · 강화석 {2:N0} · 위상 {3}	Materials {0:N0} · Cores {1} · Stones {2:N0} · Aspects {3}
+분해로 위상을 수집합니다.	Salvage to collect aspects.
+위상 {0} 1개	1 {0} aspect

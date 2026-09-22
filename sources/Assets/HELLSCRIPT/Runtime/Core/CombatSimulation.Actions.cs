@@ -145,7 +145,7 @@ namespace Hellscript
             State.resource=Mathf.Min(Stats.maxResource,State.resource+new[]{10,6,5}[(int)Hero.heroClass]);
             if(!Stats.specials.Contains("LC02")||reducedNext||procCooldown>.00001f)return;
             if(lastBasic==target)basicCount++;else{lastBasic=target;basicCount=1;}
-            if(basicCount>=3){reducedNext=true;ItemEffects.lc02Charge=5;basicCount=0;procCooldown=4;EffectEvent("LC02","CHARGE",target:target,value:5);}
+            if(basicCount>=3){reducedNext=true;ItemEffects.lc02Charge=Stats.AspectValue("LC02",5);basicCount=0;procCooldown=4;EffectEvent("LC02","CHARGE",target:target,value:ItemEffects.lc02Charge);}
         }
     }
 }

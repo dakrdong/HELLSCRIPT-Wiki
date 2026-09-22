@@ -35,7 +35,7 @@ namespace Hellscript
             if(grade==InventoryGrade.Set&&set==""||grade==InventoryGrade.Legendary&&(item.rarity!=3||set!="")||grade>InventoryGrade.All&&grade<InventoryGrade.Legendary&&item.rarity!=(int)grade-1)return false;
             int restriction=unique!=null&&unique.heroClass>=0?unique.heroClass:ItemCatalog.Base(item).heroClass;
             if(heroClass==-1&&restriction!=-1||heroClass>=0&&restriction>=0&&restriction!=heroClass)return false;
-            if(setId!=""&&set!=setId||affixId!=""&&!item.rolls.Any(r=>r.affixId==affixId)||uniqueId!=""&&item.special!=uniqueId)return false;
+            if(setId!=""&&set!=setId||affixId!=""&&!item.rolls.Any(r=>r.affixId==affixId)||uniqueId!=""&&AspectStone.PowerId(item)!=uniqueId)return false;
             return !unreadOnly||item.acquiredOrder>0&&!item.reviewed;
         }
     }

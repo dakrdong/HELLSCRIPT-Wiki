@@ -229,6 +229,7 @@ namespace Hellscript
         }
         public static void Validate(Item item)
         {
+            AspectStone.Validate(item);
             GemCatalog.ValidateSockets(item);
             var b=Base(item.baseId);
             if(string.IsNullOrWhiteSpace(item.id)||item.slot!=b.slot||item.level<1||item.rarity<0||item.rarity>3||item.enhancement<0||item.enhancement>GearEnhancement.Maximum||item.investedMaterials<0||item.rerolls<0||item.contentVersion<1||item.contentVersion>Version)
@@ -236,7 +237,7 @@ namespace Hellscript
             if(!string.IsNullOrEmpty(item.special)&&(Unique(item.special)==null||Unique(item.special).slot!=item.slot||item.rarity!=3))throw new InvalidOperationException(Loc.F("고유 장비 참조 오류: {0}", item.special));
             if(item.rolls==null||item.rolls.Count>4||item.rolls.Any(r=>r==null)||item.rolls.Select(r=>r.slotId).Distinct().Count()!=item.rolls.Count)throw new InvalidOperationException(Loc.F("접사 슬롯 오류: {0}", item.id));
             ItemQuality.Validate(item);
-            if(!item.rolls.Any(r=>r.legacyRoll)&&(item.rarity==0&&item.rolls.Count!=0||item.rarity==1&&(item.rolls.Count<1||item.rolls.Count>2)||item.rarity==2&&item.rolls.Count!=3||item.rarity==3&&item.rolls.Count!=4))throw new InvalidOperationException(Loc.F("등급별 접사 개수 오류: {0}", item.id));
+            if(!item.rolls.Any(r=>r.legacyRoll)&&(item.rarity==0&&item.rolls.Count!=0||item.rarity==1&&(item.rolls.Count<1||item.rolls.Count>2)||item.rarity==2&&item.rolls.Count!=3||item.rarity==3&&item.rolls.Count!=4&&!(item.rolls.Count==3&&!string.IsNullOrEmpty(item.aspectId))))throw new InvalidOperationException(Loc.F("등급별 접사 개수 오류: {0}", item.id));
             var groups=new HashSet<string>();
             foreach(var r in item.rolls)
             {

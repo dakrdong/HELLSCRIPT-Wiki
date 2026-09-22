@@ -143,6 +143,7 @@ namespace Hellscript
                 case TownStation.GemMerchant:ShowTownGemShop();break;
                 case TownStation.RuneMerchant:ShowTownRuneShop();break;
                 case TownStation.RuneMaster:ShowRuneMaster();break;
+                case TownStation.AspectStone:ShowAspectStone();break;
             }
         }
     }

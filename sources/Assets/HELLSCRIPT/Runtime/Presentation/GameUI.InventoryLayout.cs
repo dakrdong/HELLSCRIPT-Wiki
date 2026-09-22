@@ -158,6 +158,7 @@ namespace Hellscript
                         var sell=InventoryButton(inventoryDetail.content,Loc.F("판매 · {0:N0} 골드", item.Price),()=>ShowInventoryConfirm(Loc.F("{0}\n판매하면 {1:N0} 골드를 받습니다. 이 장비는 사라집니다.", item.DisplayName, item.Price),InventoryTransaction("sell:"+id,staged=>Economy.Sell(staged,staged.Hero,FindOwned(staged,id)),"장비를 판매했습니다.",item)));sell.interactable=canDispose;
                         long refund=(item.contentVersion>0?item.investedMaterials:20L*((1<<item.enhancement)-1))*4/5;
                         string reward=item.rarity==3?Loc.F("{0} 코어 1개", GameCatalog.Slots[item.slot]):Loc.F("재료 {0}개", new[]{1,2,5}[item.rarity]);
+                        if(AspectStone.SalvagedId(item) is string aspect)reward+=" · "+Loc.F("위상 {0} 1개",AspectStone.Definition(aspect).Name);
                         var dismantle=InventoryButton(inventoryDetail.content,Loc.F("분해 · {0}{1}", reward, (refund>0?Loc.F(" + 강화 재료 {0}개", refund):"")),()=>ShowInventoryConfirm(Loc.F("{0}\n분해하면 {1}{2}를 받습니다. 이 장비는 사라집니다.", item.DisplayName, reward, (refund>0?Loc.F("와 강화 재료 {0}개", refund):"")),InventoryTransaction("dismantle:"+id,staged=>Economy.Dismantle(staged,staged.Hero,FindOwned(staged,id)),"장비를 분해했습니다.",item)));dismantle.interactable=canDispose;
                         InventoryButton(inventoryDetail.content,"공유 창고로 이동",InventoryTransaction("warehouse:"+id,staged=>Storage.Deposit(staged,FindOwned(staged,id)),"잠금·프리셋 참조·획득순을 유지하며 창고로 옮겼습니다."));
                     }
@@ -175,7 +176,7 @@ namespace Hellscript
         Item InventoryFind(AccountSave account,string id)=>inventoryWarehouse?account.warehouse.Find(i=>i.id==id):FindOwned(account,id);
         void DescribeInventoryItem(Transform parent,Item item,string heading,HeroSave frozenHero=null,IEnumerable<Item> frozenWarehouse=null)
         {
-            var hero=frozenHero??game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(item.special);
+            var hero=frozenHero??game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(AspectStone.PowerId(item));
             InventoryNote(parent,heading,22,gold);
             float bodyWidth=Mathf.Max(260,((RectTransform)parent).rect.width-16);
             ItemDetailView.Append(parent,item,bodyWidth,font,1.5f,frozenHero==null?EquipmentViewSource.Owned:comparisonEditing?EquipmentViewSource.Draft:EquipmentViewSource.BattleSnapshot);

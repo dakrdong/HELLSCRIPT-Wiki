@@ -36,7 +36,7 @@ namespace Hellscript
         {
             if(shield.definitionId!="M05"||shield.manaPaid||!Stats.specials.Contains("LM03")||ItemEffects.lm03Cooldown>.00001f||shield.absorbed+.00001f<shield.createdMaxHp*.15f)return;
             shield.manaPaid=true;ItemEffects.lm03Cooldown=4;
-            float before=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+20);
+            float before=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+Stats.AspectValue("LM03",20));
             EffectEvent("LM03","RESOURCE",shield.id,shield.rootCastId,value:State.resource-before);
         }
         void TickShields(float dt)
@@ -82,7 +82,7 @@ namespace Hellscript
             State.potionCd=State.potions.hpTotal=RunePotionCooldown(def.cooldown);
             if(State.potions.version>0)ConsumePotion(def);
             if(before<=Stats.hp*.2f&&Stats.specials.Contains("LC03")&&ItemEffects.lc03Cooldown<=.00001f)
-            {AddShield("LC03",Stats.hp*.25f,3,0);ItemEffects.lc03Cooldown=20;}
+            {AddShield("LC03",Stats.hp*Stats.AspectValue("LC03",.25f),3,0);ItemEffects.lc03Cooldown=20;}
             TriggerLegendary(LegendaryTrigger.Potion,"*",null,0);
             Visual?.Invoke(State.position,State.position,20,1);if(State.potions.version==0)Log("POTION","자동 물약 사용");return true;
         }

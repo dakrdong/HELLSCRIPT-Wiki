@@ -215,7 +215,7 @@ namespace Hellscript
                         RememberLeapLanding(action);
                         int hits=AreaHit(destination,RuneSkillRadius(1,2.5f),1.8f,0);
                         if(hits>0&&Stats.SetPieces("SWB")>=4){ItemEffects.crushCharge=4;EffectEvent("SWB4","CHARGE",root:action.id,value:4);}
-                        if(Stats.specials.Contains("LW02"))AreaHit(destination,4,.9f,0,default,360,false,"LW02",action.id,DamageKind.Legendary);
+                        if(Stats.specials.Contains("LW02"))AreaHit(destination,4,Stats.AspectValue("LW02",.9f),0,default,360,false,"LW02",action.id,DamageKind.Legendary);
                         if(action.whirlwindReserved){AreaHit(destination,3,1.8f,0,default,360,false,"SW4",action.id,DamageKind.Set);action.whirlwindReserved=false;EffectEvent("SW4","CONSUMED",root:action.id);}
                     }
                     if(skill.kind==SkillKind.Retreat){RememberRetreatLanding(action);if(Stats.SetPieces("SAB")>=4){ItemEffects.pierceCharge=6;EffectEvent("SAB4","CHARGE",root:action.id,value:6);}}
@@ -224,7 +224,7 @@ namespace Hellscript
                 case SkillKind.Crush:
                     var crushTargets=AreaTargets(origin,RuneSkillRadius(2,3),aim-origin,100);bool crushBonus=action.crushBonus;
                     if(crushTargets.Length==0)ActionEvent(action,"ACTION_MISS","분쇄 일격의 실제 부채꼴 안에 적이 없습니다.");
-                    float single=Stats.specials.Contains("LW03")&&crushTargets.Length==1?.5f:0;
+                    float single=Stats.specials.Contains("LW03")&&crushTargets.Length==1?Stats.AspectValue("LW03",.5f):0;
                     var crushSnapshot=CaptureDamage();
                     foreach(var e in crushTargets){Hit(e,skill.coefficient,0,true,single+RuneMultiBonus(crushSnapshot,crushTargets.Length),crushSnapshot,definition:"W03",root:action.id);if(crushBonus)Hit(e,1.6f,0,false,definition:"SWB4",root:action.id,kind:DamageKind.Set);}
                     break;
@@ -254,7 +254,7 @@ namespace Hellscript
                     for(int i=0;i<hops&&current!=null;i++)
                     {
                         int previous=current.id;visits[previous]=visits.TryGetValue(previous,out int count)?count+1:1;
-                        Hit(current,1.1f*Mathf.Pow(.8f,i)*(visits[previous]>1?.5f:1),3,true,0,action.snapshot,definition:"M03",root:action.id);Visual?.Invoke(last,current.position,14,1);last=current.position;
+                        Hit(current,1.1f*Mathf.Pow(.8f,i)*(visits[previous]>1?AspectGrowth.SnapshotValue(action.snapshot,"LM04",.5f):1),3,true,0,action.snapshot,definition:"M03",root:action.id);Visual?.Invoke(last,current.position,14,1);last=current.position;
                         current=NextChainTarget(last,previous,visits,State.enemies.Where(Perceived));
                     }
                     break;
@@ -361,7 +361,7 @@ namespace Hellscript
             foreach(var enemy in targets)
             {
                 if(enemy.boss||Immobilized(enemy)||!Map.Walkable(enemy.position,.4f))continue;
-                Vector2 from=enemy.position;float distance=Mathf.Min(1.5f,Mathf.Max(0,Vector2.Distance(from,State.position)-.85f));
+                Vector2 from=enemy.position;float distance=Mathf.Min(Stats.AspectValue("LW01",1.5f),Mathf.Max(0,Vector2.Distance(from,State.position)-.85f));
                 Vector2 to=Map.MoveDirect(from,State.position,distance,.4f);
                 foreach(var body in State.enemies.Where(e=>e!=enemy&&!e.dead).OrderBy(e=>e.id))
                 {
@@ -383,7 +383,7 @@ namespace Hellscript
             var targets=AreaTargets(pos,radius,direction,arc);var snapshot=CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             foreach(var e in targets)Hit(e,coefficient,element,procs,RuneMultiBonus(snapshot,targets.Length),snapshot,definition:definition,root:root,kind:kind);return targets.Length;
         }
-        DamageSnapshot CaptureDamage()=>new DamageSnapshot{legendaryPowers=EquippedLegendaryPowers().Select(p=>p.Id).ToArray(),legendaryDamage=CaptureLegendaryDamage(),runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
+        DamageSnapshot CaptureDamage()=>new DamageSnapshot{aspectIds=Stats.aspectLevels.Keys.OrderBy(id=>id,System.StringComparer.Ordinal).ToArray(),aspectLevels=Stats.aspectLevels.OrderBy(pair=>pair.Key,System.StringComparer.Ordinal).Select(pair=>pair.Value).ToArray(),legendaryPowers=EquippedLegendaryPowers().Select(p=>p.Id).ToArray(),legendaryDamage=CaptureLegendaryDamage(),runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
             level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),ranks=Ranks==null?null:(int[])Ranks.Clone(),
             crowdCaptured=Hero.heroClass==HeroClass.Warrior,crowdQualified=Hero.heroClass==HeroClass.Warrior&&CountNear(State.position,3)>=3};
         void Deal(EnemyState e,float damage,bool critical)

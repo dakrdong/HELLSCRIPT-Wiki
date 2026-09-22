@@ -83,6 +83,8 @@ namespace Hellscript
         public string acquisitionKind="";
         public string id, name, special="";
         public string baseId="", rerollSlotId="";
+        public string aspectId="";
+        public int aspectLevel;
         public int contentVersion, investedMaterials;
         public bool awakened;
         public int masterwork,masterworkInvestedMaterials;
@@ -146,6 +148,7 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public List<AspectProgress> aspects=new List<AspectProgress>();
         public int enhancementStones;
         public ForgeAccount forge=new ForgeAccount();
         public SalvagePreferences salvage=new SalvagePreferences();
@@ -240,6 +243,8 @@ namespace Hellscript
     [Serializable]
     public sealed class DamageSnapshot
     {
+        public string[] aspectIds;
+        public int[] aspectLevels;
         public string[] legendaryPowers;
         public float[] legendaryDamage;
         public float[] runeV13;

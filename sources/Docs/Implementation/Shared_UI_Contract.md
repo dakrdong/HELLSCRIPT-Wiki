@@ -77,3 +77,7 @@
 - macOS 합성 포인터 검증과 모바일 실기기 검증을 구분한다.
 
 통합 전 개발분과 스킬 기획 제외 근거는 [개발분 통합 기록](Completed_Work_Integration.md)을 따른다. 현재 구현 검증 기록은 [공통 UI 통합 검증](Shared_UI_Validation.md)에 남긴다.
+
+## 위상 각인석
+
+`AspectStoneWindow`는 신규 콘텐츠 템플릿에서 시작하며 `ContentWindowView`를 `EquipmentViewSource.Owned`로 연다. 공통 탐색·스크롤 본문·고정 행동 영역 안에 `CharacterEquipmentView`, `EquipmentSlotView`, `ItemDetailView`를 조합한다. 가로는 장비·도감·상세의 세 열, 세로는 세 단계로 배치한다. 확인 단계 안의 착용 장비 목록에서 부위를 바꿔도 위상 선택을 유지한다. 선택·필터는 `AspectStoneSession`, 수집·레벨업·각인 거래는 `GameStore`가 소유한다. 룬석 문양과 빨간 레벨업 점은 콘텐츠의 의미 표시이며, 글꼴·슬롯·창 배율·패널 색은 공통 소유자를 사용한다. 필드 배치 탭은 두지 않는다.

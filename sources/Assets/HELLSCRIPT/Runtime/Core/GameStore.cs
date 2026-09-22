@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=8;
+        public const int MaximumSchemaVersion=9;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -94,6 +94,7 @@ namespace Hellscript
         static void Normalize(AccountSave a)
         {
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
+            AspectStone.Normalize(a);
             RuneGrowth.Normalize(a);
             BlacksmithCatalog.Normalize(a);
             Storage.Normalize(a);
@@ -216,6 +217,7 @@ namespace Hellscript
                 HuntEdictStorage.InitializeNewHero(h,catalog);
                 var w=Economy.CreateItem(h.heroClass,0,0,1,ref rng);w.baseId=new[]{"B02","B05","B08"}[i];w.baseIndex=i*3+1;w.name=w.DisplayName;w.equipped=true;ItemAcquisition.Stamp(a,w);h.inventory.Add(w);a.heroes.Add(h);
             }
+            AspectStone.Normalize(a);
             RuneGrowth.Normalize(a);return a;
         }
         public bool SettleLocalIdle()
@@ -275,7 +277,7 @@ namespace Hellscript
                 target.equipmentShop=source.equipmentShop;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
-            Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;
+            Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;

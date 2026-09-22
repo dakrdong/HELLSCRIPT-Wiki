@@ -6,14 +6,14 @@ using UnityEngine;
 namespace Hellscript
 {
     // Preserve old station numbers. Reroller shares the blacksmith's service.
-    public enum TownStation { Blacksmith, Reroller, Merchant, RiftKeeper, Warehouse, Training, GemMerchant, RuneMerchant, Gambler, RuneMaster }
+    public enum TownStation { Blacksmith, Reroller, Merchant, RiftKeeper, Warehouse, Training, GemMerchant, RuneMerchant, Gambler, RuneMaster, AspectStone }
     public sealed class TownStationDefinition
     {
         public readonly TownStation id;
         public readonly string name,service,action,npcName;
         public readonly Vector2 position;
         public readonly Rect building;
-        public Vector2 NpcPosition=>id==TownStation.RiftKeeper?position+new Vector2(-2.2f,-1.6f):position;
+        public Vector2 NpcPosition=>id==TownStation.AspectStone?building.center:id==TownStation.RiftKeeper?position+new Vector2(-2.2f,-1.6f):position;
         internal TownStationDefinition(TownStation id,string name,string service,string action,Vector2 position,Rect building=default,string npcName="")
         {this.id=id;this.name=name;this.service=service;this.action=action;this.position=position;this.building=building;this.npcName=npcName;}
     }
@@ -35,6 +35,7 @@ namespace Hellscript
         static Rect House(float x,float y,float w=12,float h=9)=>new Rect(x-w/2,y-h/2,w,h);
         public static readonly TownStationDefinition[] Stations=
         {
+            new TownStationDefinition(TownStation.AspectStone,"위상 각인석","위상 수집 · 레벨업 · 각인","각인석 열기",new Vector2(-34,1),House(-34,4,5,2)),
             new TownStationDefinition(TownStation.Warehouse,"창고","계정 창고 · 장비 보관","창고 열기",new Vector2(-37,13),House(-37,21,14,10),"차도르 사마프"),
             new TownStationDefinition(TownStation.Merchant,"무기 상인","장비 구매 · 판매","상점 열기",new Vector2(-14,16),House(-14,24),"제이크 보쿤"),
             new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-6,-24),House(-6,-16,11,9)),

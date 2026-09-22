@@ -34,6 +34,9 @@ namespace Hellscript
         public int SkillLevel(int index,bool learned)=>learned?effectiveSkillRanks[6+index%6]+runeSkillLevels[index]:0;
         public float[] bonuses=new float[StatCatalog.Count];
         public HashSet<string> specials=new HashSet<string>();
+        public readonly Dictionary<string,int> aspectLevels=new Dictionary<string,int>(StringComparer.Ordinal);
+        public int AspectLevel(string id)=>aspectLevels.TryGetValue(id,out int level)?level:1;
+        public float AspectValue(string id,float basis)=>AspectGrowth.Value(basis,AspectLevel(id));
         readonly Dictionary<string,HashSet<int>> sets=new Dictionary<string,HashSet<int>>();
         public int SetPieces(string id)=>sets.TryGetValue(id,out var slots)?slots.Count:0;
         public bool[] passives=new bool[6];
@@ -137,7 +140,9 @@ namespace Hellscript
                         case GemEffectKind.ArmorPercent:gemArmorPercent+=value/100;break;
                     }
                 }
-                if(!string.IsNullOrEmpty(item.special))specials.Add(item.special);
+                string power=AspectStone.PowerId(item);var aspect=AspectStone.Definition(power);
+                if(!string.IsNullOrEmpty(power)&&(aspect==null||aspect.heroClass<0||aspect.heroClass==c))
+                {specials.Add(power);if(aspect!=null)aspectLevels[power]=Mathf.Max(AspectLevel(power),AspectStone.PowerLevel(item));}
                 var unique=ItemCatalog.Unique(item.special);
                 if(unique!=null&&!string.IsNullOrEmpty(unique.setId))
                 {if(!sets.TryGetValue(unique.setId,out var slots))sets[unique.setId]=slots=new HashSet<int>();slots.Add(item.slot);}
@@ -170,7 +175,7 @@ namespace Hellscript
             damage=(weapon+runeAttack+slotAttack)*(1+.002f*primary);attackPower=damage;
             regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1+SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,4);
             baseSpeed=new[]{4f,4.4f,4f}[c];speed=SpeedWithBonus(0);
-            pickup=Mathf.Min(6,1.5f+bonuses[22]+(specials.Contains("LC01")?2.5f:0));
+            pickup=Mathf.Min(6,1.5f+bonuses[22]+(specials.Contains("LC01")?AspectValue("LC01",2.5f):0));
             crit=Mathf.Min(.75f,.05f+dex*.0003f+bonuses[15]/100);critDamage=1.5f+bonuses[16]/100;
             attackSpeed=1+Mathf.Clamp(weaponSpeed+bonuses[17]/100,-.5f,.5f);
             cdr=Mathf.Min(.4f,bonuses[18]/100); costReduction=Mathf.Min(.5f,bonuses[19]/100);
@@ -262,6 +267,8 @@ namespace Hellscript
             int stones=BlacksmithCatalog.SalvageStones(item);
             long refund=(item.contentVersion>0?item.investedMaterials:20L*((1<<Math.Clamp(item.enhancement,0,5))-1))*4/5;
             if(stones>int.MaxValue-account.enhancementStones||refund+(item.rarity==3?0:new[]{1,2,5}[item.rarity])>int.MaxValue-account.materials||item.rarity==3&&account.cores[item.slot]==int.MaxValue)return false;
+            if(!AspectStone.CanCollect(account,item))return false;
+            AspectStone.Collect(account,item);
             account.enhancementStones+=stones;
             if(item.rarity==3)account.cores[item.slot]++;else account.materials+=new[]{1,2,5}[item.rarity];
             int invested=item.contentVersion>0?item.investedMaterials:20*((1<<Math.Clamp(item.enhancement,0,5))-1);account.materials+=(int)(invested*4L/5);hero.inventory.Remove(item);ContentUnlocks.Reconcile(account);return true;

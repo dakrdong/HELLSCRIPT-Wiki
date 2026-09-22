@@ -92,7 +92,7 @@ namespace Hellscript
             if(root==null)return;
             bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
-            if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
+            if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
             if(!panelOpen)return;
             ShowCommonPanel(false);SelectSettingsTab(tab);
             Canvas.ForceUpdateCanvases();
@@ -143,7 +143,7 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
-            CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();
+            CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();
             if(PlayInventoryOpen&&page!="bag"&&page!="warehouse")ReleasePlayInventory();
             if(page!="battle")game.ExitIdle();
             CloseHudPanel();ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();

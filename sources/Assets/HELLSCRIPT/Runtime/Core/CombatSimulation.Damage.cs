@@ -78,7 +78,7 @@ namespace Hellscript
                         .OrderBy(e=>(e.position-enemy.position).sqrMagnitude).ThenBy(e=>e.id).Take(2).ToArray();
                     foreach(var other in others)
                     {
-                        ApplyOutgoing(other,shadow.attackBeforeDefense,0,.5f,1,false,5,snap,"LA04",root,instance,DamageKind.Spread,enemy.id);
+                        ApplyOutgoing(other,shadow.attackBeforeDefense,0,AspectGrowth.SnapshotValue(snap,"LA04",.5f),1,false,5,snap,"LA04",root,instance,DamageKind.Spread,enemy.id);
                     }
                 }
             }
@@ -135,7 +135,7 @@ namespace Hellscript
                 baseAttack=damage,independent=1,criticalMultiplier=1,attackBeforeDefense=numbers.beforeDefense,defenseReduction=numbers.defenseReduction,buffReduction=numbers.buffReduction,finalDamage=numbers.final,absorbed=absorbed,hpLoss=hpLoss});
             RecordTickIncomingDamage(numbers.final,hpLoss,caster,definition);
             if(before>Stats.hp*.3f&&State.health>0&&State.health<=Stats.hp*.3f&&hpLoss>0&&Stats.specials.Contains("LW04")&&State.build.activeSkills.Contains(1)&&State.cooldowns[1]>0&&ItemEffects.lw04Cooldown<=.00001f)
-            {State.cooldowns[1]=0;ItemEffects.lw04Cooldown=30;EffectEvent("LW04","COOLDOWN_RESET",root:root,value:30);}
+            {State.cooldowns[1]=0;ItemEffects.lw04Cooldown=AspectGrowth.Reduced(30,Stats.AspectLevel("LW04"));EffectEvent("LW04","COOLDOWN_RESET",root:root,value:ItemEffects.lw04Cooldown);}
             if(before>Stats.hp*.35f&&State.health>0&&State.health<=Stats.hp*.35f&&hpLoss>0&&Stats.specials.Contains("ELITE_RESOLVE")&&ItemEffects.eliteResolveCooldown<=.00001f)
             {AddShield("ELITE_RESOLVE",Stats.hp*.2f,4,root);ItemEffects.eliteResolveCooldown=30;}
             if(numbers.final>0&&State.health>0)

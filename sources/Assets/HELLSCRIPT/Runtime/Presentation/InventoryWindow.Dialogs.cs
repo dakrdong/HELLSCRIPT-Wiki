@@ -117,7 +117,7 @@ namespace Hellscript
             top+=gh+5;
             // Landscape uses the fixed right footer strip; portrait leaves breathing room below the three rows.
             float fy=h-49;
-            Txt(dialog,Loc.F("재료 {0:N0} · 코어 {1} · 강화석 {2:N0}",SalvagePlan.Materials,SalvagePlan.Cores,SalvagePlan.Stones),14,Mathf.Min(top,fy-22),w-28,21,11,gold);
+            Txt(dialog,Loc.F("재료 {0:N0} · 코어 {1} · 강화석 {2:N0} · 위상 {3}",SalvagePlan.Materials,SalvagePlan.Cores,SalvagePlan.Stones,SalvagePlan.Aspects),14,Mathf.Min(top,fy-22),w-28,21,11,gold);
             if(!landscape)Txt(dialog,"아이템을 누르면 정보를 확인할 수 있습니다.",14,top+26,w-28,27,10,muted);
             Rule(dialog,fy-4,w);
             Btn(dialog,"취소",14,fy,82,34,Dismiss,false,11).name="salvage-cancel";

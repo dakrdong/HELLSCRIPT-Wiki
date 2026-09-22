@@ -117,7 +117,7 @@ namespace Hellscript
             {
                 var fx=window.effect;float active=window.end-window.start;
                 if(fx.followsTarget&&Target!=null&&Perceived(Target)&&fx.moved<4)
-                {var p=Map.MoveDirect(fx.position,Target.position,Mathf.Min(active,4-fx.moved));fx.moved+=Vector2.Distance(p,fx.position);fx.position=p;}
+                {var p=Map.MoveDirect(fx.position,Target.position,Mathf.Min(active*AspectGrowth.SnapshotValue(GroundSnapshot(fx),"LM01",1),4-fx.moved));fx.moved+=Vector2.Distance(p,fx.position);fx.position=p;}
             }
             var runeTargets=windows.ToDictionary(w=>w.effect,w=>SnapshotRune(GroundSnapshot(w.effect),RuneBonus.MultiDamage)>0?AreaTargets(w.effect.position,w.effect.radius,default,360).Length:0);
             foreach(var enemy in State.enemies.Where(e=>!e.dead).ToArray())

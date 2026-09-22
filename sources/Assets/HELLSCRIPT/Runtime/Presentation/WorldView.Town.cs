@@ -23,6 +23,7 @@ namespace Hellscript
             BuildForestGround(layout);
             foreach(var s in TownLayout.Stations)
             {
+                if(s.id==TownStation.AspectStone){BuildAspectStone(layout,s);continue;}
                 if(s.building.width>0)BuildTownHouse(layout,s);
                 if(s.id==TownStation.Training)BuildTrainingYard(layout,s);
                 if(s.id==TownStation.RiftKeeper)BuildTownPortal(layout,s.position);
@@ -61,15 +62,15 @@ namespace Hellscript
             {
                 void AddTarget(Vector2 point)
                 {
-                    var p=viewCamera.WorldToViewportPoint(TownPoint(point,1.6f));if(p.z<=0||p.x<0||p.x>1||p.y<0||p.y>1)return;
-                    var pixel=viewCamera.WorldToScreenPoint(TownPoint(point,1.6f));projected.Add((s.id,new Vector2(pixel.x,pixel.y)));
+                    var p=viewCamera.WorldToViewportPoint(TownPoint(point,s.id==TownStation.AspectStone?3.5f:1.6f));if(p.z<=0||p.x<0||p.x>1||p.y<0||p.y>1)return;
+                    var pixel=viewCamera.WorldToScreenPoint(TownPoint(point,s.id==TownStation.AspectStone?3.5f:1.6f));projected.Add((s.id,new Vector2(pixel.x,pixel.y)));
                 }
                 AddTarget(s.NpcPosition);if(s.id==TownStation.RiftKeeper)AddTarget(s.position);
             }
             return TownPick.Nearest(projected,screen,Mathf.Max(32,Screen.height*.045f),out station);
         }
         public Vector3 TownNpcScreen(Vector2 position)=>viewCamera.WorldToScreenPoint(TownPoint(position,2.9f));
-        public Vector3 TownStationScreen(TownStation station)=>TownNpcScreen(TownLayout.Station(station).NpcPosition);
+        public Vector3 TownStationScreen(TownStation station)=>station==TownStation.AspectStone?viewCamera.WorldToScreenPoint(TownPoint(TownLayout.Station(station).building.center,7.5f)):TownNpcScreen(TownLayout.Station(station).NpcPosition);
         public void PresentTown(TownWalk walk,float dt)
         {
             if(world==null||hero==null)return;elapsed+=dt;hero.transform.position=TownPoint(walk.Position);
