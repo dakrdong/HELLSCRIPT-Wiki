@@ -48,7 +48,7 @@ namespace Hellscript
             header.gameObject.SetActive(false);footer.gameObject.SetActive(false);content.parent.gameObject.SetActive(false);
             runeScreen=new Vector2(Screen.width,Screen.height);runeInterface=InterfaceFactor;Canvas.ForceUpdateCanvases();
             float availableWidth=root.rect.width,height=root.rect.height;bool portrait=availableWidth<height;
-            float width=portrait?Mathf.Min(availableWidth,480f):availableWidth;
+            float width=availableWidth;
             runeUnit=Mathf.Clamp(portrait?width/480f:width/1280f,.4f,1.6f);
             float s=runeUnit,margin=6*s,head=44*s,foot=46*s,bodyY=head+margin,bodyH=height-head-foot-margin*2;
             var background=Box("Rune background",root,RuneBg);Stretch(background);background.SetSiblingIndex(0);

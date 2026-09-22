@@ -1,6 +1,6 @@
 # Rune board v13 implementation
 
-갱신일: 2026-09-20 · [한국어](Rune_V13_Implementation.md) · [Current design](../Design/HELLSCRIPT_Rune_Mastery.en.md)
+갱신일: 2026-09-22 · [한국어](Rune_V13_Implementation.md) · [Current design](../Design/HELLSCRIPT_Rune_Mastery.en.md)
 
 ## Reference and implementation
 
@@ -14,7 +14,7 @@ The reference did not implement combat mastery rewards. The initial integration 
 
 ## Native UI and combat
 
-The existing UGUI screen was replaced with the reference's landscape weapon rail, board and storage arrangement, and its portrait weapon row, board and storage arrangement. Wide portrait windows use a bounded content width. Storage and ability details scroll independently while the enlarged selected-block pickup tile and actions remain fixed. The initial import extracted six supplied weapon images and 328 SVG glyphs, converting them into transparent runtime assets; no new AI-generated artwork was used. The weapon icons now use the new assets described below; the imported originals remain intact. Shared internal edges are removed to draw solid blocks and continuous region boundaries.
+The existing UGUI screen was replaced with the reference's landscape weapon rail, board and storage arrangement, and its portrait weapon row, board and storage arrangement. Portrait and landscape windows use the full shared safe-area width. Storage and ability details scroll independently while the enlarged selected-block pickup tile and actions remain fixed. The initial import extracted six supplied weapon images and 328 SVG glyphs, converting them into transparent runtime assets; no new AI-generated artwork was used. The weapon icons now use the new assets described below; the imported originals remain intact. Shared internal edges are removed to draw solid blocks and continuous region boundaries.
 
 The screen provides pan, zoom, fit, full map, a seven-region minimap, anchored region previews, view/edit modes, color and multi-size filters, per-color active effects, searchable codex with weapon/region choices, assigned-slot navigation, rotation, recovery, 50-step undo, revert and save. Korean, English, landscape, portrait and 140% interface size are checked. Unity and browser font rendering can differ. Reference screenshots use isolated fixture ownership; real new accounts do not receive the demo's 160 runes.
 
@@ -65,6 +65,16 @@ Evidence: [focused Edit Mode: 102/102 passed](RuneV13Evidence/Clarity/editmode.x
 ![Updated landscape rune board](RuneV13Evidence/Clarity/01-clear-landscape-ko.png)
 
 [Rotated detail pickup](RuneV13Evidence/Clarity/02-rotated-detail-drag.png) · [Portrait](RuneV13Evidence/Clarity/03-clear-portrait-ko.png) · [English](RuneV13Evidence/Clarity/05-clear-landscape-en.png) · [140% type](RuneV13Evidence/Clarity/07-clear-large-type-ko.png)
+
+## 2026-09-22: Full-width portrait window
+
+Removed the 480 UI-unit width cap from portrait rune windows. Both phone-sized and wider portrait windows now fill the usable width supplied by `UiSafeArea`, respecting device insets and any selected display aspect ratio.
+
+The specialized hex board and storage layout remains in its existing `GameUI.Runes` adapter, using the shared `UiSafeArea`, `UiFonts` and button components. Only the width calculation changed. Landscape retains equal board/storage widths, and placement editing and persistence keep their existing owners.
+
+Focused Edit Mode tests passed **145/145**. The [native macOS run](RuneV13Evidence/PortraitWidth/runtime.txt) verified rotation, detail pickup, placement, storage return, undo and save/reload. **24 combinations** cover 440×956, 956×440, 960×1440, 1920×1080, 1920×1200 and 2520×1080, Korean/English and 100%/140% reading size. Every window matches its safe-area width and keeps close/save/undo/revert within that area. Evidence includes [measured widths](RuneV13Evidence/PortraitWidth/window-widths.tsv), [scope and source hashes](RuneV13Evidence/PortraitWidth/validation.json), [Edit Mode results](RuneV13Evidence/PortraitWidth/editmode.xml) and [build results](RuneV13Evidence/PortraitWidth/build.txt). This is automated native macOS input verification, not physical-mobile testing.
+
+[Portrait 440×956](RuneV13Evidence/PortraitWidth/portrait-ko.png) · [Wide portrait 960×1440](RuneV13Evidence/PortraitWidth/wide-portrait-ko.png) · [Landscape 956×440](RuneV13Evidence/PortraitWidth/landscape-ko.png) · [PC 16:9](RuneV13Evidence/PortraitWidth/pc-16-9-ko.png) · [PC 16:10](RuneV13Evidence/PortraitWidth/pc-16-10-ko.png) · [PC 21:9](RuneV13Evidence/PortraitWidth/pc-21-9-ko.png) · [Korean 140%](RuneV13Evidence/PortraitWidth/portrait-ko-large.png) · [English 140%](RuneV13Evidence/PortraitWidth/portrait-en-large.png)
 
 ## Maintenance
 

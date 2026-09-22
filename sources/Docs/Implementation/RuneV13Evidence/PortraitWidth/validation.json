@@ -1,0 +1,200 @@
+{
+  "date": "2026-09-22",
+  "base_commit": "316d356a9406f9fb8cf904e182f1e11ba1380870",
+  "change": "Remove the 480 UI-unit portrait cap; fill the existing safe-area root.",
+  "edit_mode": {
+    "result": "Passed",
+    "total": "145",
+    "passed": "145",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "filter": "Hellscript.Tests.Rune;Hellscript.Tests.GraphicComponentTests;Hellscript.Tests.LocalizationTests;Hellscript.Tests.SharedUiTests",
+  "native_build": "Succeeded, errors=0",
+  "native_smoke": "PASS: existing clarity/rotation/detail-drag/save checks and 24 width/action-bound checks",
+  "matrix": [
+    {
+      "resolution": "440x956",
+      "language": "ko",
+      "interface_scale": 100,
+      "safe_width": 440.0,
+      "frame_width": 440.0
+    },
+    {
+      "resolution": "956x440",
+      "language": "ko",
+      "interface_scale": 100,
+      "safe_width": 956.0,
+      "frame_width": 956.0
+    },
+    {
+      "resolution": "960x1440",
+      "language": "ko",
+      "interface_scale": 100,
+      "safe_width": 960.0,
+      "frame_width": 960.0
+    },
+    {
+      "resolution": "1920x1080",
+      "language": "ko",
+      "interface_scale": 100,
+      "safe_width": 1920.0,
+      "frame_width": 1920.0
+    },
+    {
+      "resolution": "1920x1200",
+      "language": "ko",
+      "interface_scale": 100,
+      "safe_width": 1920.0,
+      "frame_width": 1920.0
+    },
+    {
+      "resolution": "2520x1080",
+      "language": "ko",
+      "interface_scale": 100,
+      "safe_width": 2520.0,
+      "frame_width": 2520.0
+    },
+    {
+      "resolution": "440x956",
+      "language": "ko",
+      "interface_scale": 140,
+      "safe_width": 314.2857,
+      "frame_width": 314.2857
+    },
+    {
+      "resolution": "956x440",
+      "language": "ko",
+      "interface_scale": 140,
+      "safe_width": 682.8572,
+      "frame_width": 682.8572
+    },
+    {
+      "resolution": "960x1440",
+      "language": "ko",
+      "interface_scale": 140,
+      "safe_width": 685.7143,
+      "frame_width": 685.7143
+    },
+    {
+      "resolution": "1920x1080",
+      "language": "ko",
+      "interface_scale": 140,
+      "safe_width": 1371.429,
+      "frame_width": 1371.429
+    },
+    {
+      "resolution": "1920x1200",
+      "language": "ko",
+      "interface_scale": 140,
+      "safe_width": 1371.429,
+      "frame_width": 1371.429
+    },
+    {
+      "resolution": "2520x1080",
+      "language": "ko",
+      "interface_scale": 140,
+      "safe_width": 1800.0,
+      "frame_width": 1800.0
+    },
+    {
+      "resolution": "440x956",
+      "language": "en",
+      "interface_scale": 100,
+      "safe_width": 440.0,
+      "frame_width": 440.0
+    },
+    {
+      "resolution": "956x440",
+      "language": "en",
+      "interface_scale": 100,
+      "safe_width": 956.0,
+      "frame_width": 956.0
+    },
+    {
+      "resolution": "960x1440",
+      "language": "en",
+      "interface_scale": 100,
+      "safe_width": 960.0,
+      "frame_width": 960.0
+    },
+    {
+      "resolution": "1920x1080",
+      "language": "en",
+      "interface_scale": 100,
+      "safe_width": 1920.0,
+      "frame_width": 1920.0
+    },
+    {
+      "resolution": "1920x1200",
+      "language": "en",
+      "interface_scale": 100,
+      "safe_width": 1920.0,
+      "frame_width": 1920.0
+    },
+    {
+      "resolution": "2520x1080",
+      "language": "en",
+      "interface_scale": 100,
+      "safe_width": 2520.0,
+      "frame_width": 2520.0
+    },
+    {
+      "resolution": "440x956",
+      "language": "en",
+      "interface_scale": 140,
+      "safe_width": 314.2857,
+      "frame_width": 314.2857
+    },
+    {
+      "resolution": "956x440",
+      "language": "en",
+      "interface_scale": 140,
+      "safe_width": 682.8572,
+      "frame_width": 682.8572
+    },
+    {
+      "resolution": "960x1440",
+      "language": "en",
+      "interface_scale": 140,
+      "safe_width": 685.7143,
+      "frame_width": 685.7143
+    },
+    {
+      "resolution": "1920x1080",
+      "language": "en",
+      "interface_scale": 140,
+      "safe_width": 1371.429,
+      "frame_width": 1371.429
+    },
+    {
+      "resolution": "1920x1200",
+      "language": "en",
+      "interface_scale": 140,
+      "safe_width": 1371.429,
+      "frame_width": 1371.429
+    },
+    {
+      "resolution": "2520x1080",
+      "language": "en",
+      "interface_scale": 140,
+      "safe_width": 1800.0,
+      "frame_width": 1800.0
+    }
+  ],
+  "source_sha256": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Runes.cs": "5be79ab931514852964633148f0dbfde15b833016056d95c6dadd97c86927018",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRuneV13Smoke.Clarity.cs": "32e46f905577780f28469b771a11bf58ca31d848552e41abd0b26c5ce04054b4"
+  },
+  "screenshots": [
+    "portrait-ko.png",
+    "landscape-ko.png",
+    "wide-portrait-ko.png",
+    "pc-16-9-ko.png",
+    "pc-16-10-ko.png",
+    "pc-21-9-ko.png",
+    "portrait-ko-large.png",
+    "portrait-en-large.png"
+  ],
+  "scope": "Automated native macOS UI input and captures. Isolated save and fixture. Not a full Unity regression, human mouse test, or physical mobile-device verification."
+}

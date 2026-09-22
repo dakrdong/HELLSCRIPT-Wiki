@@ -1,6 +1,6 @@
 # 룬 보드 v13 적용 기록
 
-갱신일: 2026-09-20 · [English](Rune_V13_Implementation.en.md) · [현재 기획](../Design/HELLSCRIPT_Rune_Mastery.md)
+갱신일: 2026-09-22 · [English](Rune_V13_Implementation.en.md) · [현재 기획](../Design/HELLSCRIPT_Rune_Mastery.md)
 
 ## 적용 기준과 변경점
 
@@ -19,7 +19,7 @@
 
 ## 실제 게임 화면
 
-웹 화면을 띄우는 방식이 아니라 기존 게임의 UGUI 화면을 교체했습니다. 가로 화면은 왼쪽 무기 목록·중앙 보드·오른쪽 보관함, 세로 화면은 위쪽 무기 목록·보드·보관함으로 구성합니다. 넓은 세로 창에서는 첨부처럼 보드 화면의 폭을 제한합니다. 보관함과 능력 상세 내용은 내부에서 스크롤하고, 선택한 블록의 큰 집기 영역과 배치 조작·저장 버튼은 고정합니다.
+웹 화면을 띄우는 방식이 아니라 기존 게임의 UGUI 화면을 교체했습니다. 가로 화면은 왼쪽 무기 목록·중앙 보드·오른쪽 보관함, 세로 화면은 위쪽 무기 목록·보드·보관함으로 구성합니다. 세로·가로 화면 모두 공통 안전 영역의 전체 너비를 사용합니다. 보관함과 능력 상세 내용은 내부에서 스크롤하고, 선택한 블록의 큰 집기 영역과 배치 조작·저장 버튼은 고정합니다.
 
 최초 적용에서는 원본의 무기 그림 6개와 SVG 문양 328개를 추출해 사용했습니다. 현재 무기 아이콘은 아래 선명도 개선 항목의 새 리소스로 교체했으며 원본 파일은 보존합니다. 무기 이미지는 원본의 색 보정·가장자리 투명도를 반영한 PNG, 문양은 투명 아틀라스로 변환했습니다. 블록은 공유 변을 제거한 하나의 외곽선과 입체 테두리로 그립니다. 영역도 내부 변을 제거한 연속 경계로 구분합니다. 새 AI 생성 그림은 사용하지 않았습니다.
 
@@ -86,6 +86,16 @@
 ![개선된 가로 룬 화면](RuneV13Evidence/Clarity/01-clear-landscape-ko.png)
 
 [회전된 상세 룬을 집은 화면](RuneV13Evidence/Clarity/02-rotated-detail-drag.png) · [세로 화면](RuneV13Evidence/Clarity/03-clear-portrait-ko.png) · [영어 화면](RuneV13Evidence/Clarity/05-clear-landscape-en.png) · [글자 140%](RuneV13Evidence/Clarity/07-clear-large-type-ko.png)
+
+## 2026-09-22: 세로 창의 전체 너비 사용
+
+세로 화면에서 창 너비를 480 UI 단위로 제한하던 처리를 제거했습니다. 이제 휴대폰 화면과 넓은 세로 창 모두 `UiSafeArea`가 제공하는 실제 사용 가능 너비를 채웁니다. 공통 안전 영역을 기준으로 하므로 노치나 화면 비율 설정에 따른 여백은 존중합니다.
+
+룬 화면은 육각 보드와 보관함의 배치 목적에 맞춰 기존 `GameUI.Runes` 어댑터를 유지합니다. 공통 `UiSafeArea`·`UiFonts`·버튼 부품을 그대로 사용하며, 너비 계산만 수정했습니다. 가로 화면의 보드·보관함 1:1 배치와 기존 배치 편집·저장 경로를 유지합니다.
+
+관련 Edit Mode 검사는 **145/145 통과**했고, [macOS 실행 검사](RuneV13Evidence/PortraitWidth/runtime.txt)에서 회전·상세 집기·배치·회수·실행 취소·저장 재읽기를 확인했습니다. 440×956, 956×440, 960×1440, 1920×1080, 1920×1200, 2520×1080을 한국어·영어와 글자 크기 100%·140%로 조합한 **24개 조건**에서 창 너비가 안전 영역 너비와 일치하며 닫기·저장·실행 취소·되돌리기 버튼이 영역 안에 있는지 확인했습니다. [너비 측정](RuneV13Evidence/PortraitWidth/window-widths.tsv), [검사 범위와 소스 해시](RuneV13Evidence/PortraitWidth/validation.json), [Edit Mode 결과](RuneV13Evidence/PortraitWidth/editmode.xml), [빌드 결과](RuneV13Evidence/PortraitWidth/build.txt)를 보존합니다. 이는 macOS 자동 입력 검증이며 모바일 실기기 검증은 아닙니다.
+
+[세로 440×956](RuneV13Evidence/PortraitWidth/portrait-ko.png) · [넓은 세로 960×1440](RuneV13Evidence/PortraitWidth/wide-portrait-ko.png) · [가로 956×440](RuneV13Evidence/PortraitWidth/landscape-ko.png) · [PC 16:9](RuneV13Evidence/PortraitWidth/pc-16-9-ko.png) · [PC 16:10](RuneV13Evidence/PortraitWidth/pc-16-10-ko.png) · [PC 21:9](RuneV13Evidence/PortraitWidth/pc-21-9-ko.png) · [한국어 140%](RuneV13Evidence/PortraitWidth/portrait-ko-large.png) · [영어 140%](RuneV13Evidence/PortraitWidth/portrait-en-large.png)
 
 ## 유지보수 경로
 
