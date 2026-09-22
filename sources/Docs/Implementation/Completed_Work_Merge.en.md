@@ -54,4 +54,8 @@ The Aspect Runestone checks cover 20 layouts: Korean/English, 100%/150% text, po
 
 ## Post-merge cleanup scope
 
-The user authorized cleanup of local working folders/branches and merged GitHub work branches. Only clean working folders confirmed integrated into main are removed. Pre-existing uncommitted changes in the original checkout, `0648`, `hud-scale-validation` and `ui-integration-native` are retained.
+Four folders with uncommitted changes were initially retained. The user then confirmed no work was in progress and requested complete cleanup. All 598 remaining file entries were rechecked: 555 matched main or its earlier history; the rest were corrected document links, unused legacy translations, an older wiki generator, validation-project settings and Unity-generated differences. No additional feature implementation remained to merge.
+
+Those files, patches, validation artifacts and builds were backed up outside the repository before all temporary worktrees and work branches were removed. The primary project checkout now uses current `main`, and HELLSCRIPT retains only `main` locally and on GitHub. The independent public-wiki deployment checkout was also moved out of the temporary worktree directory to the adjacent `HELLSCRIPT-Wiki` folder.
+
+This follow-up cleanup changes no game code or data. The full-suite and macOS results above were obtained with the same runtime and data; they are not counted as a second full regression run for cleanup.
