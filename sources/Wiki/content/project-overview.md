@@ -27,6 +27,10 @@ HELLSCRIPT는 어두운 판타지 세계에서 장비와 행동 규칙을 조합
 
 ## 기획 문서 읽는 순서
 
+장비 세트 확장 후보는 [직업별 세트 24종 기획·레퍼런스](../../Docs/Design/HELLSCRIPT_Class_Set_Reference.md)에서 확인합니다. 직업마다 8종을 장비 3·4·5·6개 구성으로 나누었으며, 원작 출처·개별 장비 105개·효과 60단계와 [JSON 데이터](../../Docs/Design/ClassSetReference/catalog.json)를 제공합니다. 기존 실행용 세트 DB와 구분한 게임 미반영 검토안입니다.
+
+English: see [24 class set concepts and references](../../Docs/Design/HELLSCRIPT_Class_Set_Reference.en.md) for eight candidates per class across 3/4/5/6-piece compositions, 105 named pieces, 60 bonus tiers, source links, and the [JSON catalog](../../Docs/Design/ClassSetReference/catalog.json). These design drafts are separate from the existing runtime set DB.
+
 [절전 방치 모드](../../Docs/Design/HELLSCRIPT_Idle_Mode_Detail.md)는 실제 사냥의 연속성과 배터리 절감을, [배속 잠금·사용권 정책](../../Docs/Design/HELLSCRIPT_Speed_Access_Detail.md)은 현재 잠금과 향후 구독·이벤트 해금 방식을 정리합니다. 2배속 1h 쿠폰은 60분을 추가하며 남은 시간에 합산합니다.
 
 새 UI 작업에는 [화면 비율·방향 대응 상세안](../../Docs/Design/HELLSCRIPT_Screen_Layout_Detail.md)을 공통으로 적용합니다. 모바일 가로·세로 배치, 설정의 방향 선택, PC 리사이징과 전환 중 상태 보존을 정리한 기획이며 개발은 별도 작업에서 진행합니다.

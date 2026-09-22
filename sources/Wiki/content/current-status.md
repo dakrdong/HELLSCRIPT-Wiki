@@ -1,5 +1,9 @@
 # 현재 개발 현황과 남은 과제
 
+**2026-09-22 직업별 세트 기획:** 디아블로 4의 부적 세트를 참고한 장비 세트 24종을 정리했습니다. 전사·마법사·궁수마다 3개 구성 2종, 4개 구성 2종, 5개 구성 3종, 6개 구성 1종이며, 개별 장비 105개와 효과 60단계를 포함합니다. 원작 근거와 HELLSCRIPT의 제안 이름·부위·수치를 구분했습니다. 기획·레퍼런스 문서와 데이터만 추가했으며, 게임의 세트·드롭·전투에는 아직 반영하지 않았습니다. [기획·레퍼런스](../../Docs/Design/HELLSCRIPT_Class_Set_Reference.md) · [세트 데이터](../../Docs/Design/ClassSetReference/catalog.json)
+
+English: documented 24 equipment-set candidates inspired by Diablo IV charm sets. Each of Warrior, Mage, and Ranger has two 3-piece, two 4-piece, three 5-piece, and one 6-piece set, totaling 105 pieces and 60 bonus tiers. Source facts are separate from proposed HELLSCRIPT names, slots, and tuning. This is a documentation/data addition; runtime sets, drops, and combat are unchanged. [Concepts and references](../../Docs/Design/HELLSCRIPT_Class_Set_Reference.en.md) · [Set catalog](../../Docs/Design/ClassSetReference/catalog.json)
+
 **2026-09-15 편집기 자리표시 객체 오류 수정:** 편집기 Play 모드에서 설정 버튼을 누르면 나던 `CanvasGroup` 누락 예외를 고쳤다. `GetComponent … ?? AddComponent` 구문이 편집기의 자리표시 객체 때문에 동작하지 않던 것이 원인이며, 설정 창과 프리셋 이름 입력의 두 곳을 `TryGetComponent`로 바꾸고 같은 구문을 소스에서 찾아내는 검사를 추가했다. [구현·검증 기록](../../Docs/Implementation/Editor_Null_Object_Fixes.md)
 
 English: fixed the missing-`CanvasGroup` exception raised by the settings button in editor Play Mode. `GetComponent … ?? AddComponent` never adds in the editor because of Unity's null placeholder; the settings panel and preset name input now use `TryGetComponent`, and a new test scans the sources for the pattern. [Implementation and verification](../../Docs/Implementation/Editor_Null_Object_Fixes.en.md)

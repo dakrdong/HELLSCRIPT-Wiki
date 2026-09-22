@@ -410,6 +410,8 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'class-set-reference':('장비와 빌드','직업별 세트 24종 기획·레퍼런스','디아블로 4 부적 세트를 참고한 직업별 8종, 개별 장비 105개와 효과 60단계의 게임 미반영 검토안입니다.'),
+ 'class-set-reference.en':('장비와 빌드','24 class set concepts and references','Design-only Diablo IV-inspired catalog: eight sets per class, 105 pieces and 60 bonus tiers.'),
  'rune-mastery':('장비와 빌드','무기별 룬 성장','여섯 무기 보드, 자유 회수, 전체 배치 프리셋 5칸과 기본·고급·최상위 능력 등급을 정리합니다.'),
  'rune-mastery.en':('장비와 빌드','Weapon rune mastery','Six weapon boards, reusable runes, five global presets and graded mastery abilities.'),
  'rune-mastery-implementation':('후속 개발 기록','무기별 룬 성장 구현 기록','PackBound 이식, 무기별 전투 적용, 저장·합성·프리셋과 macOS 검증 결과입니다.'),
@@ -585,7 +587,7 @@ def build_pages():
         public=path.startswith('Wiki/public-content/')
         if public: category,summary='공개 안내',metadata.get(ident,{}).get('summary','게임의 기본 개념을 소개합니다.')
         status='현재 정리' if path.startswith('Wiki/content/') else '당시 기록' if ident in ('playable-build','validation-report') else '기획 초안' if ident=='content-catalog' else '기획 기준' if '/Design/' in path else '개발 기록'
-        if ident=='idle-mode-detail':status='기획 검토안'
+        if ident in ('idle-mode-detail','class-set-reference','class-set-reference.en'):status='기획 검토안'
         if public:status='공개 안내'
         notice='이 문서는 최초 빌드 당시 기록입니다. 최신 상태는 현재 개발 현황과 후속 개발 기록을 확인하세요.' if status=='당시 기록' else '기존 178개 정의를 보존한 초기 카탈로그입니다. 세트 등 현재 수량은 DB와 후속 명세를 따릅니다.' if ident=='content-catalog' else ''
         date_match=re.search(r'(?:정리 기준일|갱신일|작성일)[: ]+(\d{4}-\d{2}-\d{2})',body)
