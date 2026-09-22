@@ -1,0 +1,123 @@
+{
+  "id": "A06",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "그림자 화살",
+    "en": "Shadow Arrow"
+  },
+  "kind": "active",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A06.png",
+  "effectSummary": {
+    "ko": "다음 사격 3회에 암흑 추가 피해.",
+    "en": "Adds dark damage to the next 3 shots."
+  },
+  "tags": [
+    "Shadow"
+  ],
+  "equipmentIds": [
+    "LA04",
+    "LA34",
+    "LA35",
+    "LA36",
+    "LA37"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "One broad silver arrowhead is enveloped by a flowing violet-black shadow ribbon that curls into three short pointed echoes behind it. The physical arrow remains the main mass, visibly charged with dark power for upcoming shots.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): A06 Shadow Arrow. Skill type: active. Effect: Adds dark damage to the next 3 shots. Tags: Shadow. Linked equipment IDs for identity context only: LA04, LA34, LA35, LA36, LA37. Subject and composition: One broad silver arrowhead is enveloped by a flowing violet-black shadow ribbon that curls into three short pointed echoes behind it. The physical arrow remains the main mass, visibly charged with dark power for upcoming shots. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-c99b427e-1c56-42e8-8e43-3fdea2626ba7.png",
+    "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A06.png",
+    "sourceSha256": "64da3895d0f818875f3cc49887cce5a9bd4fc8689381bb188b663add2ac17247",
+    "modelEvidence": "Tool returned only image_url and output_hint; model not exposed."
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pass",
+    "mode": "RGBA",
+    "dimensions": "pass",
+    "dimensionPass": true,
+    "nativeAlpha": true,
+    "fullyTransparentPixels": 1310675,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBounds": [
+      39,
+      19,
+      1194,
+      1198
+    ],
+    "bboxAlphaGreaterThan16": [
+      264,
+      303,
+      991,
+      977
+    ],
+    "central76PercentPass": true,
+    "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/A06-64.png",
+    "visual64": "reviewed_pass",
+    "alpha": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1310675,
+      "alphaBBox": [
+        39,
+        19,
+        1194,
+        1198
+      ],
+      "coreBBox": [
+        265,
+        304,
+        989,
+        976
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "marginGuideline": "pass",
+    "visual64Note": "Silver broad arrowhead, violet mass and short shadow echoes read as a shadow-charged arrow at 64px.",
+    "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
+    "reviewedBy": "ranger_icons agent"
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A06.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-c99b427e-1c56-42e8-8e43-3fdea2626ba7.png",
+  "sourceSha256": "64da3895d0f818875f3cc49887cce5a9bd4fc8689381bb188b663add2ac17247",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A06.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A06.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:13:51.695106+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-c99b427e-1c56-42e8-8e43-3fdea2626ba7.png",
+      "sourceSha256": "64da3895d0f818875f3cc49887cce5a9bd4fc8689381bb188b663add2ac17247",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

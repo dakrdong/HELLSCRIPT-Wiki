@@ -1,0 +1,96 @@
+{
+  "id": "WP05",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "단단한 의지",
+    "en": "Hardened Will"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP05.png",
+  "effectSummary": {
+    "ko": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
+    "en": "Adds +20%p to shield strength, stacking with the bonus from Willpower."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW29",
+    "LW30",
+    "LW32"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP05 Hardened Will (passive). Gameplay meaning: Adds +20%p to shield strength, stacking with the bonus from Willpower.\nSubject and composition: PASSIVE EMBLEM: a faceted iron heart reinforced by two broad inward-fitting steel ribs and one steady warm gold core. Firm enduring will made tangible, stout balanced silhouette. Not a shield face and not a UI plate.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1124271,
+      "alphaBBox": [
+        49,
+        21,
+        1134,
+        1214
+      ],
+      "coreBBox": [
+        210,
+        185,
+        1045,
+        1048
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "단단한 심장형 철과 밝은 중심이 보이며 방패나 생명 방울과 실루엣이 다릅니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "A hardened iron heart and bright center have a different silhouette from shields and life drops. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:42:03.779630+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-3825db78-faed-401c-99ce-eead2fb9b673.png",
+      "sourceSha256": "389447640548eafc18c795d5e702d3862c0e9a16431b259ac58521beaef09de0",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP05.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-3825db78-faed-401c-99ce-eead2fb9b673.png",
+  "sourceSha256": "389447640548eafc18c795d5e702d3862c0e9a16431b259ac58521beaef09de0",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP05.png"
+}

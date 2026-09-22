@@ -1,0 +1,95 @@
+{
+  "id": "W13",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "전장의 고리",
+    "en": "Battlefield Ring"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W13.png",
+  "effectSummary": {
+    "ko": "4m 안의 최대 5명에게 D70% 물리 피해를 주고 최대 1.5m 끌어옵니다. 벽·몸체를 통과하지 않습니다. 보스는 이동하지 않고 제압 수치만 얻습니다.",
+    "en": "Deal D70% physical damage to up to 5 enemies within 4m and pull them up to 1.5m without crossing walls or bodies. Bosses receive stagger credit without moving."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW44"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W13 Battlefield Ring (active). Gameplay meaning: Deal D70% physical damage to up to 5 enemies within 4m and pull them up to 1.5m without crossing walls or bodies. Bosses receive stagger credit without moving.\nSubject and composition: Three dark hostile helmet silhouettes drawn toward a bright central iron fist by three thick curved inward-tugging chains. Open spiral composition with large transparent gaps, no complete decorative circle and no surrounding frame.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 920189,
+      "alphaBBox": [
+        0,
+        21,
+        1224,
+        1254
+      ],
+      "coreBBox": [
+        80,
+        76,
+        1221,
+        1201
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "세 적을 중앙 주먹으로 끌어오는 사슬 배치가 보입니다. 64px에서는 사슬의 세부 대신 모이는 방향과 세 갈래 형태로 구분됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Three chained enemies converge on a central fist. At 64px, grouping direction and the three arms carry the meaning rather than chain-link detail. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:28:48.499067+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-6c1f09ec-ddd7-4ecb-919b-3a279ce9802c.png",
+      "sourceSha256": "3dbd736077c7cbc4b89cd70fa7d695a4305e62fc5aee230001a6d339b8e63128",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W13.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-6c1f09ec-ddd7-4ecb-919b-3a279ce9802c.png",
+  "sourceSha256": "3dbd736077c7cbc4b89cd70fa7d695a4305e62fc5aee230001a6d339b8e63128",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W13.png"
+}

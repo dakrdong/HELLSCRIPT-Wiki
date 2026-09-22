@@ -1,0 +1,101 @@
+{
+  "id": "WP02",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "끝나지 않는 회전",
+    "en": "Endless Spin"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP02.png",
+  "effectSummary": {
+    "ko": "회오리를 2초 유지하면 비용 감소 +20%를 적용합니다. 중단하면 해제됩니다.",
+    "en": "Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it clears the bonus."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW01",
+    "LW05",
+    "LW06",
+    "LW07",
+    "LW08",
+    "LW09",
+    "LW10",
+    "LW25"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP02 Endless Spin (passive). Gameplay meaning: Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it clears the bonus.\nSubject and composition: PASSIVE EMBLEM: a forged iron double-curved blade that folds into an open continuous spiral, with a persistent ember resting at its center. Two substantial overlapping sweeps suggest endurance and reduced strain, no attacking person, no decorative border.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1123694,
+      "alphaBBox": [
+        29,
+        21,
+        1234,
+        1238
+      ],
+      "coreBBox": [
+        208,
+        179,
+        1072,
+        1077
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "열린 두 칼날의 연속 회전 상징이며 전사의 동작이 포함된 W01과 구별됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Two open curved blades symbolize ongoing rotation, distinct from the attacking warrior in W01. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:38:21.447720+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-bd96d51a-c178-49b8-bb5c-d4d7157920ee.png",
+      "sourceSha256": "e7177a8bbd9492bd8c10d10efc4d36ec4a038b3e2efb38dc47b1cc6fea03965a",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP02.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-bd96d51a-c178-49b8-bb5c-d4d7157920ee.png",
+  "sourceSha256": "e7177a8bbd9492bd8c10d10efc4d36ec4a038b3e2efb38dc47b1cc6fea03965a",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP02.png"
+}

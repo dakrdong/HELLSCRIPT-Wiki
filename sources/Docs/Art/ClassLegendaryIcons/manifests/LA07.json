@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LA07",
+  "name": {
+    "ko": "낙인을 읽는 눈",
+    "en": "Brand-Reading Eye"
+  },
+  "heroClass": "Ranger",
+  "slot": 1,
+  "slotName": "head armor",
+  "effectSummary": {
+    "ko": "관통 사격 적중 시, 대상에게 표식이 있으면, 자원을 6 회복합니다. 재발동 간격은 2초입니다.",
+    "en": "On Piercing Shot hit, against a marked target, restore 6 resource. Internal cooldown: 2s."
+  },
+  "directSkillIds": [
+    "A01"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "A01",
+      "name": {
+        "ko": "관통 사격",
+        "en": "Piercing Shot"
+      },
+      "description": {
+        "ko": "일직선으로 최대 5명을 관통합니다.",
+        "en": "Pierces up to 5 enemies in a straight line."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LA07.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LA07.png",
+  "concept": "One ranger hood with an asymmetric single-eye metal sight visor, a sharp angled brow and a large round green lens inset above one eye opening. Weathered charcoal leather, bronze lens housing, no face or actual eye.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LA07.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LA07, Brand-Reading Eye, class Ranger, slot head armor.\nSubject design: One ranger hood with an asymmetric single-eye metal sight visor, a sharp angled brow and a large round green lens inset above one eye opening. Weathered charcoal leather, bronze lens housing, no face or actual eye.\nPower that informs materials and structure, not a spell illustration: On Piercing Shot hit, against a marked target, restore 6 resource. Internal cooldown: 2s.\nDirect skill context: A01 Piercing Shot — Pierces up to 5 enemies in a straight line.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-470efd27-1e20-46e7-9db0-243a68fa04f0.png",
+    "sourceSha256": "0892b6d5efaf226c1678f96e8ae0f92521eb9df12e5f0b11f80756c025f8cfb0",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-470efd27-1e20-46e7-9db0-243a68fa04f0.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:16:30.086798+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "0dbcd5afadbcef90c1e1c5937852ff49e92a54118f07e4f58ae896c2112b0a19",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "0892b6d5efaf226c1678f96e8ae0f92521eb9df12e5f0b11f80756c025f8cfb0",
+    "nativeAlpha": true,
+    "transparentPixels": 1071316,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 501200,
+    "nearlyOpaquePixels": 478907,
+    "alphaBoundingBox": [
+      43,
+      37,
+      1184,
+      1254
+    ],
+    "alpha16BoundingBox": [
+      262,
+      127,
+      1057,
+      1114
+    ],
+    "transparentPixelFraction": 0.6812751030832118,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-009.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-009-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝은·어두운 바탕의 64px 표본에서 장비 부위와 고유 형태를 확인했습니다. 활의 시위와 장신구의 내부 빈 공간도 유지되며, 원본 가장자리에서 배경 잔여물·번짐·형태 잘림이 보이지 않습니다.",
+      "en": "Single green sight lens distinguishes the empty ranger hood. Reviewed at 64px on dark/light backgrounds and in native edge crops; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

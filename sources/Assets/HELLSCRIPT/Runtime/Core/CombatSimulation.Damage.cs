@@ -24,36 +24,45 @@ namespace Hellscript
         // target and lets gear raise it, which is exactly what Stats.vulnerable holds.
         float AttackBonus(EnemyState enemy,int element,DamageSnapshot snap,float extra,DamageKind kind=DamageKind.Direct)
         {
-            float bonus=snap.elements[element]+snap.bonus+(CombatEffects.Has(enemy,StatusKind.Mark)?(Stats.vulnerable-Stats.Bonus(StatId.VulnerableDamage)+RuneSnapshotBonus(StatId.VulnerableDamage,snap))/100:0)+extra+ConditionalBonus(enemy,kind,snap)+RuneDamageBonus(enemy,kind,snap);
+            float bonus=snap.elements[element]+snap.bonus+(HasAmplifyingMark(enemy)?(Stats.vulnerable-Stats.Bonus(StatId.VulnerableDamage)+RuneSnapshotBonus(StatId.VulnerableDamage,snap))/100:0)+extra+ConditionalBonus(enemy,kind,snap)+RuneDamageBonus(enemy,kind,snap);
             // Round the threshold to stored HP precision; Mono can otherwise retain extra intermediate precision.
             if(Hero.heroClass==HeroClass.Warrior)
             {if(snap.passives[0]&&(snap.crowdCaptured?snap.crowdQualified:CountNear(State.position,3)>=3))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,0);if(snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,5);}
             if(Hero.heroClass==HeroClass.Ranger&&snap.passives[0]&&Vector2.Distance(State.position,enemy.position)>=7)bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Ranger,0);
             return bonus;
         }
-        DamageEvent ApplyOutgoing(EnemyState enemy,float baseAttack,float additive,float independent,float critMultiplier,bool critical,int element,DamageSnapshot snapshot,string definition,int root,int instance,DamageKind kind,int triggerTarget=-1,bool projectile=false,Vector2? origin=null)
+        DamageEvent ApplyOutgoing(EnemyState enemy,float baseAttack,float additive,float independent,float critMultiplier,bool critical,int element,DamageSnapshot snapshot,string definition,int root,int instance,DamageKind kind,int triggerTarget=-1,bool projectile=false,Vector2? origin=null,bool attackResolved=false)
         {
             if(enemy==null||enemy.dead)return null;
             float defense=element==0?10+2*(State.stage-1):5+State.stage-1;
             var legendary=PrepareLegendaryHit(snapshot,definition,enemy);
-            independent*=1+LegendaryDamageBonus(snapshot,definition,enemy);
+            int classFlags=ClassHitFlags(enemy);
+            if(!attackResolved){additive+=ClassDamageBonus(definition,enemy,kind,root,instance,element);independent*=1+Mathf.Min(1.5f,LegendaryDamageBonus(snapshot,definition,enemy)+ClassLegendaryBonus(definition,root));}
             var numbers=DamageMath.Calculate(baseAttack,additive,independent,critMultiplier,defense,snapshot.level,element,TargetReduction(enemy,element,projectile,origin));
             var damage=new DamageEvent{id=State.nextDamageId++,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=State.heroId,targetId=enemy.id,triggerTargetId=triggerTarget,kind=kind,element=element,tick=EffectTick,time=State.time,
                 baseAttack=baseAttack,additive=additive,independent=independent,critical=critical,criticalMultiplier=critMultiplier,attackBeforeDefense=numbers.beforeDefense,projectile=projectile,attackOrigin=origin??State.position,
                 defenseReduction=numbers.defenseReduction,buffReduction=numbers.buffReduction,finalDamage=numbers.final,hpLoss=Mathf.Min(Mathf.Max(0,enemy.health),numbers.final)};
             RecordDamage(damage);Deal(enemy,numbers.final,critical);
-            if(numbers.final>0)RecordElementHit(element,snapshot,root);
+            if(numbers.final>0&&(!ClassSkillsActive||Native(definition)))RecordElementHit(element,snapshot,root);
             FinishLegendaryHit(legendary,enemy,damage,snapshot);
+            AfterClassHit(enemy,damage,snapshot,classFlags);
+            if(ClassSkillsActive)
+            {
+                var eventOrigin=damage.kind==DamageKind.Periodic?ClassSkillEventOrigin.Periodic:damage.kind==DamageKind.Set||damage.kind==DamageKind.Legendary||damage.kind==DamageKind.Shadow?
+                    definition=="EXTRA:W17"||definition=="EXTRA:A15"?ClassSkillEventOrigin.Summon:definition=="EXTRA:A14"?ClassSkillEventOrigin.Split:
+                    definition=="A06"||definition=="EXTRA:A18"?ClassSkillEventOrigin.Echo:definition.StartsWith("EXTRA:",System.StringComparison.Ordinal)&&ClassSkills.Find(definition.Substring(6))!=null?ClassSkillEventOrigin.Secondary:ClassSkillEventOrigin.Equipment:ClassSkillEventOrigin.Direct;
+                QueueClassSkillEvent(new ClassSkillEvent(Cast(root)?.id??definition,"DAMAGE",definition,root,enemy.id,State.time,damage.hpLoss,enemy.position,eventOrigin));
+            }
             return damage;
         }
         DamageEvent Hit(EnemyState enemy,float coefficient,int element,bool procs=true,float extraBonus=0,DamageSnapshot snapshot=null,bool canCrit=true,bool? shadowShot=null,string definition=null,int root=0,int instance=0,DamageKind kind=DamageKind.Direct,bool projectile=false,Vector2? origin=null)
         {
             if(enemy==null||enemy.dead)return null;
             var snap=snapshot??CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
-            int masterySkill=definition.Length==3&&definition[0]=='W'?int.Parse(definition.Substring(1))-1:definition.Length==3&&definition[0]=='A'?int.Parse(definition.Substring(1))+5:definition.Length==3&&definition[0]=='M'?int.Parse(definition.Substring(1))+11:-1;
+            int masterySkill=ClassSkills.LegacyIndex(definition);
             if(masterySkill>=0&&masterySkill<18&&snap.runeSkillPower!=null&&snap.runeSkillPower.Length==18)coefficient*=1+snap.runeSkillPower[masterySkill]/100;
             extraBonus+=RuneAreaBonus(snap,definition);
-            float crit=snap.crit+LegendaryCriticalBonus(snap,definition,enemy)+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?SkillEffects.Passive(snap.ranks,HeroClass.Ranger,5):0);
+            float crit=snap.crit+ClassCritical(definition,enemy,kind)+LegendaryCriticalBonus(snap,definition,enemy)+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?SkillEffects.Passive(snap.ranks,HeroClass.Ranger,5):0);
             bool critical=canCrit&&RandomStream.Unit(ref State.rng)<Mathf.Min(.75f,crit);
             if(!enemy.boss&&enemy.kind==6&&enemy.brain.rearWindow>0&&(kind==DamageKind.Direct||kind==DamageKind.Basic)&&Vector2.Angle(-enemy.brain.facing,(origin??State.position)-enemy.position)<=60)extraBonus+=.25f;
             bool overpowered=OverpowerRoll(kind);
@@ -140,7 +149,7 @@ namespace Hellscript
             {AddShield("ELITE_RESOLVE",Stats.hp*.2f,4,root);ItemEffects.eliteResolveCooldown=30;}
             if(numbers.final>0&&State.health>0)
             {TriggerLegendary(LegendaryTrigger.Hurt,"*",attacker,root);if(blocked)TriggerLegendary(LegendaryTrigger.Block,"*",attacker,root);}
-            ApplyThorns(attacker);
+            AfterClassHurt(attacker,blocked,root);ApplyThorns(attacker);
             State.lastDamageTime=State.time;CancelChest("피격으로 개봉 중단");CancelShrine("피격으로 사용 중단");
             State.portalCast=0;Visual?.Invoke(State.position,State.position,32,numbers.final-absorbed);
             if(State.time-lastLog>=1){Log("DAMAGE",Loc.F("받은 피해 {0:0} / HP {1:0}", numbers.final, Mathf.Max(0,State.health)));lastLog=State.time;}

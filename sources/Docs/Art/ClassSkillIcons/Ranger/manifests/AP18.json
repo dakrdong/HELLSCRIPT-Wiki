@@ -1,0 +1,100 @@
+{
+  "id": "AP18",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "무음의 살수",
+    "en": "Silent Execution"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP18.png",
+  "effectSummary": {
+    "ko": "일제 소탕의 첫 파동이 표식 대상을 맞히면 그 대상에게 D100% 물리 추가 피해를 한 번 줍니다. 그림자 추격을 선택했다면 지속시간이 2초, 총 발동 상한이 2회 늘어납니다. 선택한 궁극기에만 적용합니다.",
+    "en": "If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target. With Shadow Pursuit selected, add 2s duration and 2 total allowed procs. Apply only the selected branch."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "DES_LA46"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring ultimate mastery emblem: a stern empty dark hood above two crossed broad silver arrowheads, one ivory and one violet-shadow edged, with a single crimson hunters mark glint in the hood. Strong but quiet symbolic silhouette, no wings or rain action.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP18 Silent Execution. Skill type: passive. Effect: If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target. With Shadow Pursuit selected, add 2s duration and 2 total allowed procs. Apply only the selected branch. Tags: Passive. Linked equipment IDs for identity context only: DES_LA46. Subject and composition: An enduring ultimate mastery emblem: a stern empty dark hood above two crossed broad silver arrowheads, one ivory and one violet-shadow edged, with a single crimson hunters mark glint in the hood. Strong but quiet symbolic silhouette, no wings or rain action. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1206206,
+      "alphaBBox": [
+        49,
+        21,
+        1192,
+        1222
+      ],
+      "coreBBox": [
+        250,
+        206,
+        1005,
+        1052
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-03.png",
+    "visualReview": {
+      "ko": "어두운 두건 아래 교차한 두 화살이 64px에서 고유 상징으로 남습니다. 미끼 인형과 다른 실루엣을 확인했습니다.",
+      "en": "Two crossed arrows below a dark hood remain a distinct symbol at 64px, with a silhouette different from the decoy effigy."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP18.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-175e6490-1463-44b6-b3fb-bc022a023de5.png",
+  "sourceSha256": "a30b73697e3e338a22da15744f78deb9932f96e772ae63c8d403176190faf52c",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP18.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP18.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:38:49.264130+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-175e6490-1463-44b6-b3fb-bc022a023de5.png",
+      "sourceSha256": "a30b73697e3e338a22da15744f78deb9932f96e772ae63c8d403176190faf52c",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

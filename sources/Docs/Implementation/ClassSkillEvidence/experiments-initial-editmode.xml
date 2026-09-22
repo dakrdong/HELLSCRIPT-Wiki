@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:34Z" duration="32.6357173">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="3275" result="Failed" site="Child" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:34Z" duration="32.635717" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="4780" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="3275" result="Failed" site="Child" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:34Z" duration="32.610722" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="2541" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="4781" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="3275" result="Failed" site="Child" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:34Z" duration="32.590068" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="4782" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="3275" result="Failed" site="Child" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:34Z" duration="32.575269" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1366" name="ClassSkillRuntimeTests" fullname="Hellscript.Tests.ClassSkillRuntimeTests" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" testcasecount="331" result="Failed" site="Child" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:34Z" duration="32.415912" total="5" passed="4" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1522" name="ChargingAndPositioningResumeTheirRemainingWorkOnce" fullname="Hellscript.Tests.ClassSkillRuntimeTests.ChargingAndPositioningResumeTheirRemainingWorkOnce" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:02Z" duration="0.612398" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1520" name="ChargingAndPositioningResumeTheirRemainingWorkOnce(&quot;M13&quot;,16,0.7f)" fullname="Hellscript.Tests.ClassSkillRuntimeTests.ChargingAndPositioningResumeTheirRemainingWorkOnce(&quot;M13&quot;,16,0.7f)" methodname="ChargingAndPositioningResumeTheirRemainingWorkOnce" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" seed="1475965433" result="Passed" start-time="2026-09-22 07:32:01Z" end-time="2026-09-22 07:32:02Z" duration="0.366211" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1521" name="ChargingAndPositioningResumeTheirRemainingWorkOnce(&quot;W02&quot;,25,0.3f)" fullname="Hellscript.Tests.ClassSkillRuntimeTests.ChargingAndPositioningResumeTheirRemainingWorkOnce(&quot;W02&quot;,25,0.3f)" methodname="ChargingAndPositioningResumeTheirRemainingWorkOnce" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" seed="492072296" result="Passed" start-time="2026-09-22 07:32:02Z" end-time="2026-09-22 07:32:02Z" duration="0.241564" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1519" name="PolicyExperimentsCompareSpacingAndChargingUnderIdenticalConditions" fullname="Hellscript.Tests.ClassSkillRuntimeTests.PolicyExperimentsCompareSpacingAndChargingUnderIdenticalConditions" methodname="PolicyExperimentsCompareSpacingAndChargingUnderIdenticalConditions" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" seed="1414090513" result="Failed" start-time="2026-09-22 07:32:02Z" end-time="2026-09-22 07:32:34Z" duration="31.718455" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.ClassSkillRuntimeTests.PolicyExperimentsCompareSpacingAndChargingUnderIdenticalConditions () [0x00248] in /Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ClassSkillExperimentTests.cs:29
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1523" name="RankAdjustedManaRateIsTheSameInTheReadModelAndCombat" fullname="Hellscript.Tests.ClassSkillRuntimeTests.RankAdjustedManaRateIsTheSameInTheReadModelAndCombat" methodname="RankAdjustedManaRateIsTheSameInTheReadModelAndCombat" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" seed="180634394" result="Passed" start-time="2026-09-22 07:32:34Z" end-time="2026-09-22 07:32:34Z" duration="0.026255" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1524" name="UnknownOrUnboundedPositioningIsRejectedBeforeRestore" fullname="Hellscript.Tests.ClassSkillRuntimeTests.UnknownOrUnboundedPositioningIsRejectedBeforeRestore" methodname="UnknownOrUnboundedPositioningIsRejectedBeforeRestore" classname="Hellscript.Tests.ClassSkillRuntimeTests" runstate="Runnable" seed="1474728124" result="Passed" start-time="2026-09-22 07:32:34Z" end-time="2026-09-22 07:32:34Z" duration="0.030587" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

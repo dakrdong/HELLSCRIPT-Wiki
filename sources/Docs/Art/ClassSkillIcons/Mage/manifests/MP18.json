@@ -1,0 +1,89 @@
+{
+  "id": "MP18",
+  "heroClass": "Mage",
+  "name": {
+    "ko": "대마법사의 유언",
+    "en": "Archmage's Testament"
+  },
+  "kind": "passive",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP18.png",
+  "effectSummary": {
+    "ko": "삼원소 붕괴의 세 번째 단계가 실제 적중하면 자원 15을 한 번 회복합니다. 현자의 화신을 선택했다면 해당 궁극기의 보호막 생성량에 최대 HP 10%를 더합니다. 선택한 궁극기에만 적용합니다.",
+    "en": "If Triune Collapse's third stage actually hits, restore 15 resource once. With Sage Incarnate selected, add 10% maximum HP to its barrier. Apply only the selected ultimate branch."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, MP18 Archmage's Testament / 대마법사의 유언, passive.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A closed weathered charcoal grimoire with an angular silver clasp and three thick elemental crystal inlays: ember, frost and lightning. A single broad blue protective fold curls from the spine. Ancient arcane legacy augmenting the chosen ultimate, represented as a quiet enduring object. No writing, page marks, runes, skulls, frame or stand.\nEffect context: If Triune Collapse's third stage actually hits, restore 15 resource once. With Sage Incarnate selected, add 10% maximum HP to its barrier. Apply only the selected ultimate branch.\nRelevant equipment linkage: DES_LM46. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null,
+    "nativeTransparencyRequired": true
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 889529,
+      "alphaBBox": [
+        0,
+        21,
+        1203,
+        1235
+      ],
+      "coreBBox": [
+        166,
+        106,
+        1056,
+        1187
+      ]
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ],
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "visualReview": {
+      "ko": "닫힌 고서, 세 원소의 보석과 푸른 책등 흐름이 64px에서 식별됩니다. 글자나 페이지 문양을 넣지 않았습니다.",
+      "en": "The closed grimoire, three elemental inlays and blue spine fold remain identifiable at 64px, without text or page markings."
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png"
+  },
+  "reuse": false,
+  "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
+  "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP18.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-744a9b99-92fc-4227-b89c-ce3a0b2738d4.png",
+  "sourceSha256": "4efb69386903bfa46608ebb96f4d7177e53881767f1bedecfb877cacebf34c2f",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP18.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:51:13.945270+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-744a9b99-92fc-4227-b89c-ce3a0b2738d4.png",
+      "sourceSha256": "4efb69386903bfa46608ebb96f4d7177e53881767f1bedecfb877cacebf34c2f",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

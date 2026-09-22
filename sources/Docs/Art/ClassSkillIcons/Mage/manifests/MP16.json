@@ -1,0 +1,89 @@
+{
+  "id": "MP16",
+  "heroClass": "Mage",
+  "name": {
+    "ko": "삼색의 기억",
+    "en": "Threefold Memory"
+  },
+  "kind": "passive",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP16.png",
+  "effectSummary": {
+    "ko": "6초 안에 화염·냉기·번개 일반 액티브를 각각 한 번 시전하면 최대 HP 8% 보호막을 4초간 얻습니다. 완성·만료 시 기록을 비우며 재발동 간격은 8초입니다.",
+    "en": "Cast one normal fire, cold and lightning active within 6s to gain an 8% maximum-HP barrier for 4s. Clear the record on completion or expiry; 8s interval."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, MP16 Threefold Memory / 삼색의 기억, passive.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. Three large elemental memory stones, ember-orange, glacial cyan and lightning violet-white, fit together into a single shieldlike tri-lobed crystal cluster. Each distinct form remains visible; a subtle blue protective seam binds them. A static emblem of three-element memory granting a barrier, no compass needle or text.\nEffect context: Cast one normal fire, cold and lightning active within 6s to gain an 8% maximum-HP barrier for 4s. Clear the record on completion or expiry; 8s interval.\nRelevant equipment linkage: LM01, LM02, LM04, LM05, LM06, LM07, LM08, LM09, LM10, LM11, LM12, LM13, LM14, LM15, LM16, LM17, LM18, LM19, LM20, LM21, LM22, LM26, LM31, LM36, LM39, DES_LM45. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null,
+    "nativeTransparencyRequired": true
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 920116,
+      "alphaBBox": [
+        0,
+        20,
+        1236,
+        1254
+      ],
+      "coreBBox": [
+        166,
+        57,
+        1096,
+        1194
+      ]
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ],
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "visualReview": {
+      "ko": "화염·냉기·번개 결정 세 덩어리가 64px에서 서로 다른 원소로 읽히고, 하나의 방어 형태로 결합됩니다.",
+      "en": "Three fire, cold and lightning crystal masses remain distinct at 64px and combine into one defensive form."
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png"
+  },
+  "reuse": false,
+  "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
+  "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP16.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-311980d9-f61e-4780-adbf-8cd8be42507e.png",
+  "sourceSha256": "98ec93bfdd23b229c6e29d902d9f11dbba23e3451d77cdb8efc18e3d1c6a114e",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP16.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:49:42.849790+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-311980d9-f61e-4780-adbf-8cd8be42507e.png",
+      "sourceSha256": "98ec93bfdd23b229c6e29d902d9f11dbba23e3451d77cdb8efc18e3d1c6a114e",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

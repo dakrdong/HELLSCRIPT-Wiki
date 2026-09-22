@@ -19,6 +19,12 @@ namespace Hellscript
         {
             if(!BuildEditing.HasPreset(requested))throw new ArgumentException("저장된 설정이 없는 슬롯입니다.");
             string issue=BehaviorRules.InputValueIssue(requested);if(issue!="")throw new ArgumentException(issue);
+            if(ClassSkillsActive)
+            {
+                if(ClassSkillLoadout.IsAbsent(requested.classSkills)||ClassSkillCodec.Encode(requested.classSkills)!=ClassSkillCodec.Encode(Loadout))
+                    throw new ArgumentException("Change the skill loadout in town.");
+                ClassSkillLoadout.Validate(requested.classSkills,Hero);
+            }
             var candidate=State.training<0?BuildEditing.DuringRift(State.build,requested):requested.Copy();
             var errors=BehaviorRules.Validate(candidate,Hero.heroClass);
             if(!FullSkillTraining){string passiveError=ContentUnlocks.PassiveError(Hero,candidate);if(passiveError!="")errors.Add(passiveError);}

@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "DES_LM41",
+  "name": {
+    "ko": "서로 먹이는 불씨",
+    "en": "Kindling Grasp"
+  },
+  "heroClass": "Mage",
+  "slot": 3,
+  "slotName": "gloves or gauntlets",
+  "effectSummary": {
+    "ko": "자신의 화염 장벽 안에 있는 적에게 잿불창을 직접 맞히면 잿불창의 연소 총량이 30% 증가합니다. 화염 장벽 틱은 이 효과를 다시 발동하지 않습니다.",
+    "en": "Ember Lance gains +30% burn total against a direct target inside your Firewall. Firewall ticks cannot retrigger this effect."
+  },
+  "directSkillIds": [
+    "M07",
+    "M08"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "M07",
+      "name": {
+        "ko": "잿불창",
+        "en": "Ember Lance"
+      },
+      "description": {
+        "ko": "길이 10m·폭 0.6m의 불꽃 창으로 최대 3명에게 D140% 화염 직접 피해와 3초간 총 D60% 연소를 줍니다. 연소는 자기 기술의 강한 잔여량으로 갱신합니다.",
+        "en": "Fire a 10m-long, 0.6m-wide lance through up to 3 enemies for D140% direct fire damage plus D60% burn over 3s. Refresh only this skill's stronger remaining burn total."
+      }
+    },
+    {
+      "id": "M08",
+      "name": {
+        "ko": "화염 장벽",
+        "en": "Firewall"
+      },
+      "description": {
+        "ko": "8m 안에 길이 5m·폭 1m의 불길을 4초간 만듭니다. 1초마다 최대 5명에게 D60% 화염 지속 피해를 주며 장벽 안의 적을 연소 상태로 봅니다. 이동을 막지는 않습니다. 최대 1개입니다.",
+        "en": "Create a 5m-long, 1m-wide fire line within 8m for 4s. Deal D60% fire damage each second to up to 5 enemies and mark occupants as Burning. It does not block movement. Limit 1."
+      }
+    }
+  ],
+  "sourceStatus": "design_only",
+  "sourceRuntimeEnabled": false,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/DES_LM41.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/DES_LM41.png",
+  "concept": "A compact pair of mage gloves with lance-shaped ember-bronze backplates nested inside short wall-like cuff plates, two restrained orange stones joined by a dark metal channel. Charred leather and burnished edges. No external flame wall or projectile.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/DES_LM41.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: DES_LM41, Kindling Grasp, class Mage, slot gloves or gauntlets.\nSubject design: A compact pair of mage gloves with lance-shaped ember-bronze backplates nested inside short wall-like cuff plates, two restrained orange stones joined by a dark metal channel. Charred leather and burnished edges. No external flame wall or projectile.\nPower that informs materials and structure, not a spell illustration: Ember Lance gains +30% burn total against a direct target inside your Firewall. Firewall ticks cannot retrigger this effect.\nDirect skill context: M07 Ember Lance — Fire a 10m-long, 0.6m-wide lance through up to 3 enemies for D140% direct fire damage plus D60% burn over 3s. Refresh only this skill's stronger remaining burn total.; M08 Firewall — Create a 5m-long, 1m-wide fire line within 8m for 4s. Deal D60% fire damage each second to up to 5 enemies and mark occupants as Burning. It does not block movement. Limit 1.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-824b81b2-5500-4c6f-ade4-633bc1223f48.png",
+    "sourceSha256": "cb147e486f6fb51bb248b4276a2a51a63d6a37933c6bde94ace2b62f8f630ed6",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-824b81b2-5500-4c6f-ade4-633bc1223f48.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:52:48.060197+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "8b1db61d921cbf9371b9ca3114b517e6fb569bd26e7799618049db8464ea0d72",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "cb147e486f6fb51bb248b4276a2a51a63d6a37933c6bde94ace2b62f8f630ed6",
+    "nativeAlpha": true,
+    "transparentPixels": 1127989,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 444527,
+    "nearlyOpaquePixels": 413551,
+    "alphaBoundingBox": [
+      41,
+      21,
+      1222,
+      1236
+    ],
+    "alpha16BoundingBox": [
+      226,
+      188,
+      1062,
+      1082
+    ],
+    "transparentPixelFraction": 0.717314799976598,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-005.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-005-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝은 바탕과 어두운 바탕의 64px 축소본 및 원본 해상도 가장자리를 확인했습니다. 부위와 항목별 구조를 구분할 수 있고 잘림과 눈에 띄는 배경 테두리가 없습니다.",
+      "en": "Lance-shaped orange stones and wall-like cuffs identify the fire synergy gloves. Inspected native-resolution edges and actual 64px samples on dark/light backgrounds."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

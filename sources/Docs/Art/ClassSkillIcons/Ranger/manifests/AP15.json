@@ -1,0 +1,109 @@
+{
+  "id": "AP15",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "독과 서리",
+    "en": "Venom and Frost"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP15.png",
+  "effectSummary": {
+    "ko": "중독과 둔화가 동시에 걸린 적에게 일반 액티브 직접 피해가 가산 12% 증가합니다. 빙결만으로 둔화가 있다고 간주하지 않습니다.",
+    "en": "Gain +12% additive normal-active direct damage against enemies that are both poisoned and slowed. Freeze alone does not imply Slow."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LA03",
+    "LA17",
+    "LA18",
+    "LA19",
+    "LA20",
+    "LA21",
+    "LA22",
+    "LA26",
+    "DES_LA42",
+    "DES_LA44"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring poison-and-slow synergy emblem: a thick emerald venom fang intertwined with a broad blue-white frost crystal, meeting at one silver barb. Clearly distinct interlocking green organic and icy angular halves, compact solid silhouette with transparent inner gap.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP15 Venom and Frost. Skill type: passive. Effect: Gain +12% additive normal-active direct damage against enemies that are both poisoned and slowed. Freeze alone does not imply Slow. Tags: Passive. Linked equipment IDs for identity context only: LA03, LA17, LA18, LA19, LA20, LA21, LA22, LA26, DES_LA42, DES_LA44. Subject and composition: An enduring poison-and-slow synergy emblem: a thick emerald venom fang intertwined with a broad blue-white frost crystal, meeting at one silver barb. Clearly distinct interlocking green organic and icy angular halves, compact solid silhouette with transparent inner gap. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1235451,
+      "alphaBBox": [
+        39,
+        21,
+        1222,
+        1230
+      ],
+      "coreBBox": [
+        283,
+        235,
+        971,
+        1017
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-03.png",
+    "visualReview": {
+      "ko": "곡선형 녹색 독니와 각진 푸른 얼음이 64px에서도 서로 다른 반쪽으로 읽힙니다.",
+      "en": "The curved green venom fang and angular blue ice remain distinct halves at 64px."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP15.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-b5cf3acd-8489-4973-9a8a-7e3b9b662bc7.png",
+  "sourceSha256": "a0c950a20f01d7ddda228097ddc91e9db872ad6a91c9dc222d0d1f6c1dea5fb5",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP15.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP15.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:36:00.074939+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-b5cf3acd-8489-4973-9a8a-7e3b9b662bc7.png",
+      "sourceSha256": "a0c950a20f01d7ddda228097ddc91e9db872ad6a91c9dc222d0d1f6c1dea5fb5",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

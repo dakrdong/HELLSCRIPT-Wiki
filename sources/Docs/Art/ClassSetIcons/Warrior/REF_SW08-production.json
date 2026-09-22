@@ -1,0 +1,885 @@
+{
+  "schemaVersion": 1,
+  "setId": "REF_SW08",
+  "generatedItems": 7,
+  "status": "generated_candidates",
+  "workflow": {
+    "ko": "준비된 항목별 프롬프트로 내장 이미지 생성 요청을 각각 수행했습니다. 반환된 원본은 변경 없이 보관하고 네이티브 알파를 유지하는 기존 정규화 도구로 1024px PNG를 저장했습니다.",
+    "en": "Each asset used its prepared prompt in a separate built-in generation request. Returned originals were preserved unchanged and exported to 1024px PNG with the existing native-alpha normalization tool."
+  },
+  "verificationLimits": {
+    "ko": "실제 모델명은 반환되지 않아 unknown 후보 상태입니다. Unity 임포트와 런타임 검증은 수행하지 않았습니다.",
+    "en": "The actual model name was not returned, so these remain unknown-model candidates. Unity import and runtime verification were not performed."
+  },
+  "contactSheet": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png",
+  "items": [
+    {
+      "id": "REF_SW08_P01",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P01.png",
+      "status": "generated_candidate",
+      "sha256": "fd7171422f50a6544d9bd67f6df0c97b290b1caeceecbe84ee9f7dc1e0f20eb0",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08_P01.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-2a6cb712-36ea-4b9e-9838-6e2947cf6ff2.png",
+        "sha256": "c75adb3c2e3fb0bef5f7aa43b840a4705c3e500b3a8419e60ae54a0ce1fe9448",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 1132131,
+          "opaquePixels": 590,
+          "partialAlphaPixels": 439795,
+          "alphaBounds": [
+            0,
+            21,
+            1226,
+            1254
+          ],
+          "transparentFraction": 0.719949,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08_P01.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08_P01",
+        "sha256": "2d56d2f455d548f9f52c0b9c00a53c6ba8d745b67fcaaf17a7cd375834617073"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P01.png",
+          "sha256": "fd7171422f50a6544d9bd67f6df0c97b290b1caeceecbe84ee9f7dc1e0f20eb0",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "906b5682e81ecfd62a3f6b4a386fc8817ec41c571b47de319cb4a13ef9b2edc7",
+          "visiblePixelSha256": "790645cb980e3e0bbb5c64082252c0a3f9194f109a7a81b68a8121323b8d7fab",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 881182,
+          "opaquePixels": 846,
+          "partialAlphaPixels": 166548,
+          "transparentFraction": 0.840361,
+          "alphaBounds": [
+            134,
+            154,
+            890,
+            892
+          ],
+          "alpha128Bounds": [
+            195,
+            161,
+            874,
+            852
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          99,
+          68,
+          1199,
+          1189
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "대각선 자루와 큰 사각 망치 머리가 64px에서도 무기로 구별됩니다.",
+            "en": "The diagonal haft and large square maul head remain identifiable as a weapon at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    },
+    {
+      "id": "REF_SW08_P02",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P02.png",
+      "status": "generated_candidate",
+      "sha256": "74018bd3a8e2757358271a3c3753fe9507361145f1d78e7fe4e282b0479e6985",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08_P02.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-e6e930a6-1c5d-4a66-a900-7a9f923b01ce.png",
+        "sha256": "5f376760a723a248b0adbf6173e6434961bba9b5b7b4c6ece9b4a8743a4adc18",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 877580,
+          "opaquePixels": 254,
+          "partialAlphaPixels": 694682,
+          "alphaBounds": [
+            0,
+            7,
+            1230,
+            1228
+          ],
+          "transparentFraction": 0.558074,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08_P02.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08_P02",
+        "sha256": "ae5976e8f232a7eaf41b1e0ab55bf389b56c90ba4221c523e5e39e20ae6d9c51"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P02.png",
+          "sha256": "74018bd3a8e2757358271a3c3753fe9507361145f1d78e7fe4e282b0479e6985",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "a65953010024e2834e7a256b999cd564aabbfdfd23ef638de601d1cf283d08d6",
+          "visiblePixelSha256": "21e8d7ed170b1d510d8b56a4e4e363df3d40a000833e2882f48aca1b77e71bb0",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 783488,
+          "opaquePixels": 1002,
+          "partialAlphaPixels": 264086,
+          "transparentFraction": 0.747192,
+          "alphaBounds": [
+            132,
+            135,
+            892,
+            889
+          ],
+          "alpha128Bounds": [
+            261,
+            202,
+            781,
+            839
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          209,
+          115,
+          1051,
+          1147
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "낮고 두꺼운 투구 외곽선과 넓은 턱 보호대가 64px에서도 구별됩니다.",
+            "en": "The squat helmet outline and broad jaw guard remain distinct at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    },
+    {
+      "id": "REF_SW08_P03",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P03.png",
+      "status": "generated_candidate",
+      "sha256": "5251ff21c9c4a8a9708393e1c61383bbbebc6e8acb512e6cf0683de057a7e8ff",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08_P03.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-148d1927-878c-44d8-814c-7a8d8c1f8e7c.png",
+        "sha256": "a3259b2271ffcdc6ad2bac11013556acc2e025e9a5225c112df1c965cea23121",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 789125,
+          "opaquePixels": 817,
+          "partialAlphaPixels": 782574,
+          "alphaBounds": [
+            0,
+            21,
+            1215,
+            1254
+          ],
+          "transparentFraction": 0.501823,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08_P03.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08_P03",
+        "sha256": "f347e0dd828987983d470707223496f1637a75a6ba3908953b21d334cddaa7fb"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P03.png",
+          "sha256": "5251ff21c9c4a8a9708393e1c61383bbbebc6e8acb512e6cf0683de057a7e8ff",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "9909ddb3dab6a894cebcd275eb0c152c72be68acf74c7a85342df98681185852",
+          "visiblePixelSha256": "9029fa1d5f68dc09d0c8c36f39919a09ae660bc97f829df6d58ef44ab588d849",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 750664,
+          "opaquePixels": 1161,
+          "partialAlphaPixels": 296751,
+          "transparentFraction": 0.715889,
+          "alphaBounds": [
+            137,
+            141,
+            886,
+            892
+          ],
+          "alpha128Bounds": [
+            167,
+            212,
+            884,
+            832
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          48,
+          151,
+          1211,
+          1156
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "넓은 양쪽 어깨와 잘록한 몸통이 64px에서도 갑옷 실루엣을 유지합니다.",
+            "en": "Broad shoulders and a narrower torso retain a clear cuirass silhouette at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    },
+    {
+      "id": "REF_SW08_P04",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P04.png",
+      "status": "generated_candidate",
+      "sha256": "d0dd9a8ee6fc54a88dbaf6daf67e0d9255f0b8bf66ddf0d6bdd8bda4ddd544fe",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08_P04.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-41f9add5-df46-40c1-bee2-6186b9900d45.png",
+        "sha256": "486df715ba9ced0c339fa4ea8f2155645fd840fa741a7c06c693c2ca61fdf0a0",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 878349,
+          "opaquePixels": 717,
+          "partialAlphaPixels": 693450,
+          "alphaBounds": [
+            0,
+            9,
+            1216,
+            1198
+          ],
+          "transparentFraction": 0.558563,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08_P04.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08_P04",
+        "sha256": "7d9980911736d4c277ad37220de9686366c45001af1110a3368c53c96db82236"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P04.png",
+          "sha256": "d0dd9a8ee6fc54a88dbaf6daf67e0d9255f0b8bf66ddf0d6bdd8bda4ddd544fe",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "3422e219abf7144cc09818ab8f8cf6ec5e60280f0645ad3ca8f651b917b56797",
+          "visiblePixelSha256": "34b20f369f78a24825e5c6dcde5562316ae21fdcffbe8842a8bb136b4cb7b8c0",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 777178,
+          "opaquePixels": 1260,
+          "partialAlphaPixels": 270138,
+          "transparentFraction": 0.741175,
+          "alphaBounds": [
+            132,
+            140,
+            892,
+            883
+          ],
+          "alpha128Bounds": [
+            167,
+            256,
+            889,
+            797
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          56,
+          195,
+          1212,
+          1061
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "두 개의 장갑과 긴 손목 보호대가 64px에서도 단일 주먹 문양과 구별됩니다.",
+            "en": "The paired gauntlets and long cuffs remain distinct from the single-fist emblem at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    },
+    {
+      "id": "REF_SW08_P05",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P05.png",
+      "status": "generated_candidate",
+      "sha256": "0fcf3b8cafd8a80712d9bff29bbd9e8923411f246fef89741cee517cad40df93",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08_P05.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-1575f1a7-5933-409c-8df0-b1d91d090f4e.png",
+        "sha256": "f326e01843f250192442832c320539ab63080fcda560c393cee36b497596636d",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 942175,
+          "opaquePixels": 403,
+          "partialAlphaPixels": 629938,
+          "alphaBounds": [
+            0,
+            23,
+            1225,
+            1254
+          ],
+          "transparentFraction": 0.599151,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08_P05.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08_P05",
+        "sha256": "dddc5b6561b6ef6e939a5f258e75f237ecaeec05436b113395b2126316bbc17b"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P05.png",
+          "sha256": "0fcf3b8cafd8a80712d9bff29bbd9e8923411f246fef89741cee517cad40df93",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "b57180c9a6f2b781efda1ccb769ebc58a542cb204137a7ecd391271107ad11ab",
+          "visiblePixelSha256": "48f3eb68d094e516bbb03bf93398422f8654d1a2e5a9f87610aa5cd0b2ab5ec8",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 808286,
+          "opaquePixels": 808,
+          "partialAlphaPixels": 239482,
+          "transparentFraction": 0.770842,
+          "alphaBounds": [
+            134,
+            132,
+            890,
+            892
+          ],
+          "alpha128Bounds": [
+            157,
+            297,
+            885,
+            714
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          38,
+          290,
+          1217,
+          965
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "넓은 가로 띠와 중앙 주먹 버클이 64px에서도 허리띠로 읽힙니다.",
+            "en": "The broad horizontal band and central fist buckle read as a belt at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    },
+    {
+      "id": "REF_SW08_P06",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P06.png",
+      "status": "generated_candidate",
+      "sha256": "94d9a69086e80f9a327b5c31a7b5b7fccfd9bd480cae72e0bdece7c09137fb84",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08_P06.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-f5f44b5c-162d-4a07-bd47-dce9f91d7b2f.png",
+        "sha256": "5bf461cb67dd97a1995dee67ec732ccafdc1b061aa81f0be0084774eb35183d1",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 907097,
+          "opaquePixels": 501,
+          "partialAlphaPixels": 664918,
+          "alphaBounds": [
+            0,
+            0,
+            1236,
+            1254
+          ],
+          "transparentFraction": 0.576844,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08_P06.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08_P06",
+        "sha256": "a11eeb6a2c42492c8175ec7a38b20187960a99d7e336225f77540cf0f505f112"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08_P06.png",
+          "sha256": "94d9a69086e80f9a327b5c31a7b5b7fccfd9bd480cae72e0bdece7c09137fb84",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "b2f9e0af2d41be064479b2e7080e96fbf9c69b3e128d53d435ffab635c798508",
+          "visiblePixelSha256": "b2782b92b860886e66b6bf5627006ccac9d631168e83f81b196a82509d9f5ce2",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 803997,
+          "opaquePixels": 1169,
+          "partialAlphaPixels": 243410,
+          "transparentFraction": 0.766751,
+          "alphaBounds": [
+            137,
+            132,
+            886,
+            892
+          ],
+          "alpha128Bounds": [
+            249,
+            208,
+            790,
+            817
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          185,
+          125,
+          1077,
+          1130
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "사각 인장과 내부가 열린 고리가 64px에서도 반지 형태를 유지합니다.",
+            "en": "The square signet and open inner hoop retain a readable ring shape at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    },
+    {
+      "id": "REF_SW08",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08.png",
+      "status": "generated_candidate",
+      "sha256": "cdcab73fda9787ad022d0e1f3b97cabc5adf0af18153f423b18e9ca57053ddae",
+      "original": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/originals/REF_SW08.png",
+        "generatedPath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7fd-1006-7fc3-bd52-fbfb159d5e94/exec-9e31043f-570f-4d14-9e6b-d6e501705ede.png",
+        "sha256": "493351655ff8bd384e8a804d3e4ba320b2e7526e8c2f6eb81d294b298f639066",
+        "qa": {
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1254,
+            1254
+          ],
+          "nativeAlpha": true,
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 947480,
+          "opaquePixels": 550,
+          "partialAlphaPixels": 624486,
+          "alphaBounds": [
+            0,
+            20,
+            1224,
+            1254
+          ],
+          "transparentFraction": 0.602525,
+          "passed": true
+        }
+      },
+      "evidenceFile": "Docs/Art/ClassSetIcons/Warrior/evidence/REF_SW08.json",
+      "promptSource": {
+        "file": "Docs/Art/ClassSetIcons/Warrior/manifest.json",
+        "id": "REF_SW08",
+        "sha256": "b8fb77ded493ca10bcbc1ac3f9032d7528b2e4912d9823d45f6e3276a0e40903"
+      },
+      "model": {
+        "requested": "gpt-image-2",
+        "actual": "unknown",
+        "evidence": null,
+        "returnedKeys": [
+          "image_url",
+          "output_hint"
+        ]
+      },
+      "qa": {
+        "technical": {
+          "file": "Assets/HELLSCRIPT/Resources/Art/ClassSetIcons/REF_SW08.png",
+          "sha256": "cdcab73fda9787ad022d0e1f3b97cabc5adf0af18153f423b18e9ca57053ddae",
+          "format": "PNG",
+          "mode": "RGBA",
+          "size": [
+            1024,
+            1024
+          ],
+          "hasAlphaChannel": true,
+          "rgbaSha256": "70e92857b80378b13569e30aa1522412700658688b8bb39c2e88e7517b740b4b",
+          "visiblePixelSha256": "4e39a14411f581eebc005c11384fde75f907ce36c2d154421f51ff0ec0e893b8",
+          "alphaExtrema": [
+            0,
+            255
+          ],
+          "transparentPixels": 811185,
+          "opaquePixels": 904,
+          "partialAlphaPixels": 236487,
+          "transparentFraction": 0.773606,
+          "alphaBounds": [
+            135,
+            132,
+            889,
+            892
+          ],
+          "alpha128Bounds": [
+            269,
+            200,
+            783,
+            830
+          ],
+          "alpha128TouchesCanvasEdge": false,
+          "validAlpha": true,
+          "central76Percent": true,
+          "square1024": true,
+          "passed": true
+        },
+        "sourceByteMatch": true,
+        "normalizationReplayMatches": true,
+        "sourceAlpha128Bounds": [
+          218,
+          131,
+          1052,
+          1153
+        ],
+        "sourceAlpha128TouchesCanvasEdge": false,
+        "fullShape": {
+          "status": "pass",
+          "method": "Viewed each native generated result; checked source alpha > 128 bounds against every canvas edge",
+          "notes": {
+            "ko": "주요 장비 형태 전체가 보이며 원본의 뚜렷한 불투명 영역이 캔버스 경계에 닿지 않습니다.",
+            "en": "The full primary subject is visible; the source alpha > 128 bounds do not touch any canvas edge."
+          }
+        },
+        "readability64": {
+          "status": "pass",
+          "method": "Viewed seven-item contact sheet at native 64px on dark and light backgrounds",
+          "notes": {
+            "ko": "하나의 큰 주먹과 황동 관절 보호대가 64px에서도 독립된 세트 문양으로 읽힙니다.",
+            "en": "The single large fist and brass knuckle braces remain legible as a distinct set emblem at 64px."
+          }
+        },
+        "edges": {
+          "status": "pass",
+          "method": "Viewed native generated result and 64px/192px composites on contrasting backgrounds",
+          "notes": {
+            "ko": "검수한 축소 화면에서 사각 배경판이나 눈에 띄는 매트 테두리·색 번짐이 보이지 않습니다.",
+            "en": "No rectangular backdrop or conspicuous matte fringe or color halo is visible in the inspected reduced composites."
+          }
+        },
+        "evidence": "Docs/Art/ClassSetIcons/Warrior/REF_SW08-qa-contact.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "A10",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "서리 올가미",
+    "en": "Frost Snare"
+  },
+  "kind": "active",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A10.png",
+  "effectSummary": {
+    "ko": "6m 안에 최대 1개의 올가미를 설치합니다. 0.4초 후 무장해 6초 기다리며, 적 진입 시 반경 2.5m의 최대 5명에게 D60% 냉기 피해와 3초간 40% 둔화를 줍니다. 적중 당시 중독된 적은 0.75초 빙결됩니다.",
+    "en": "Place one snare within 6m; arm after 0.4s and wait up to 6s. On entry, hit up to 5 enemies in 2.5m for D60% cold damage and a 40% slow for 3s. Enemies poisoned at impact are frozen for 0.75s."
+  },
+  "tags": [
+    "Cold",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LA42"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "A thick iron cable noose snaps closed, visibly crusted with jagged blue-white ice. Three broad frost shards point inward from the cable and a tiny venom-green fleck accents the knot. The dominant shape is the tilted tightening loop, no frame or backdrop.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): A10 Frost Snare. Skill type: active. Effect: Place one snare within 6m; arm after 0.4s and wait up to 6s. On entry, hit up to 5 enemies in 2.5m for D60% cold damage and a 40% slow for 3s. Enemies poisoned at impact are frozen for 0.75s. Tags: Cold, Normal. Linked equipment IDs for identity context only: DES_LA42. Subject and composition: A thick iron cable noose snaps closed, visibly crusted with jagged blue-white ice. Three broad frost shards point inward from the cable and a tiny venom-green fleck accents the knot. The dominant shape is the tilted tightening loop, no frame or backdrop. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-9d196366-8854-4933-94ad-d47d6a5d6900.png",
+    "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A10.png",
+    "sourceSha256": "893a90d15e66249ef41d71415c41734805ceddc3e8c22c501fbaaf461fcc4fe1",
+    "modelEvidence": "Tool returned only image_url and output_hint; model not exposed."
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pass",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1266343,
+      "alphaBBox": [
+        29,
+        35,
+        1240,
+        1254
+      ],
+      "coreBBox": [
+        256,
+        197,
+        1062,
+        1071
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "mode": "RGBA",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "dimensionPass": true,
+    "fullyTransparentPixels": 1266343,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBounds": [
+      29,
+      35,
+      1240,
+      1254
+    ],
+    "bboxAlphaGreaterThan16": [
+      255,
+      195,
+      1063,
+      1072
+    ],
+    "central76PercentPass": true,
+    "marginGuideline": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/A10-64.png",
+    "visual64": "reviewed_pass",
+    "visual64Note": "Icy cable loop and three broad inward frost shards remain clear at 64px; open center is transparent.",
+    "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
+    "reviewedBy": "ranger_icons agent"
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A10.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-9d196366-8854-4933-94ad-d47d6a5d6900.png",
+  "sourceSha256": "893a90d15e66249ef41d71415c41734805ceddc3e8c22c501fbaaf461fcc4fe1",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A10.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A10.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:19:41.671747+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-9d196366-8854-4933-94ad-d47d6a5d6900.png",
+      "sourceSha256": "893a90d15e66249ef41d71415c41734805ceddc3e8c22c501fbaaf461fcc4fe1",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

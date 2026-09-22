@@ -1,0 +1,89 @@
+{
+  "id": "MP10",
+  "heroClass": "Mage",
+  "name": {
+    "ko": "얼음의 잔향",
+    "en": "Ice Reverberation"
+  },
+  "kind": "passive",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP10.png",
+  "effectSummary": {
+    "ko": "M06·M09의 직접 빙결 적용에 성공하면 최대 HP 5% 보호막을 3초간 얻습니다. 보스에게 유효한 제압 수치를 준 경우도 인정하며 재발동 간격은 4초입니다.",
+    "en": "Successfully applying direct freeze with M06 or M09 grants a 5% maximum-HP barrier for 3s. Valid boss stagger credit also qualifies; 4s interval."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, MP10 Ice Reverberation / 얼음의 잔향, passive.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. One large six-point ice crystal partly embraced by two broad transparent cyan protective shell segments. A subtle repeated offset shard behind the main crystal suggests an echo, while the front silhouette remains bold. Freezing creates a small barrier; static defensive emblem, not an outward nova.\nEffect context: Successfully applying direct freeze with M06 or M09 grants a 5% maximum-HP barrier for 3s. Valid boss stagger credit also qualifies; 4s interval.\nRelevant equipment linkage: LM03, LM22, LM30, LM31, LM33, LM34, LM35, LM36, DES_LM42. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null,
+    "nativeTransparencyRequired": true
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 973997,
+      "alphaBBox": [
+        0,
+        9,
+        1214,
+        1254
+      ],
+      "coreBBox": [
+        126,
+        154,
+        1131,
+        1107
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-04.png",
+    "visualReview": {
+      "ko": "큰 얼음 결정과 두 보호막 조각이 64px에서 함께 식별됩니다. 결정과 외곽 보호 형태 사이의 투명한 틈이 유지됩니다.",
+      "en": "The large ice crystal and two barrier segments remain identifiable at 64px, with transparent gaps between the crystal and protection."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "reuse": false,
+  "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
+  "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP10.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-e6bba113-bdff-4082-b3ab-cfbddd21f68d.png",
+  "sourceSha256": "4d8a95c60434bcf3c66ee28595438cb34cb0a389aa7f99e3641d7a0e405a95e6",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP10.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:42:18.627231+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-e6bba113-bdff-4082-b3ab-cfbddd21f68d.png",
+      "sourceSha256": "4d8a95c60434bcf3c66ee28595438cb34cb0a389aa7f99e3641d7a0e405a95e6",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "MP15",
+  "heroClass": "Mage",
+  "name": {
+    "ko": "안정된 시전",
+    "en": "Steady Casting"
+  },
+  "kind": "passive",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP15.png",
+  "effectSummary": {
+    "ko": "1초 이상 제자리에 있은 뒤 일반 액티브를 준비·집중하는 동안 받는 피해가 8% 감소합니다. 이동하거나 시전이 끝나면 해제됩니다.",
+    "en": "After standing still for 1s, take 8% less damage while preparing or channeling a normal active. End on movement or completion."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, MP15 Steady Casting / 안정된 시전, passive.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. Two steady gloved mage hands aligned symmetrically around an upright dark crystal focus, braced by a short broad pale-blue arc beneath their knuckles. The quiet balanced silhouette conveys patient stationary casting and resistance to damage. No swirling charging ribbons, outgoing bolt, pedestal or floor.\nEffect context: After standing still for 1s, take 8% less damage while preparing or channeling a normal active. End on movement or completion.\nRelevant equipment linkage: LM02, LM05, LM06, LM07, LM08, LM09, LM10, LM26, LM39, DES_LM41, DES_LM44. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null,
+    "nativeTransparencyRequired": true
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1058384,
+      "alphaBBox": [
+        0,
+        0,
+        1218,
+        1254
+      ],
+      "coreBBox": [
+        125,
+        120,
+        1129,
+        1140
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-04.png",
+    "visualReview": {
+      "ko": "대칭으로 안정된 두 손과 곧은 수정이 64px에서 읽힙니다. 한 손으로 마나를 아끼는 MP14와 실루엣이 다릅니다.",
+      "en": "Two steady symmetrical hands and an upright crystal remain legible at 64px, distinct from the single conserving hand in MP14."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "reuse": false,
+  "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
+  "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP15.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-e0e3413f-9da1-40a5-9853-a0f3e92ac130.png",
+  "sourceSha256": "c29229c0affe0d9e82570c613b6f646a8a83db4287002855a1a8cf34b7e5ee6f",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP15.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:46:30.347716+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-e0e3413f-9da1-40a5-9853-a0f3e92ac130.png",
+      "sourceSha256": "c29229c0affe0d9e82570c613b6f646a8a83db4287002855a1a8cf34b7e5ee6f",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

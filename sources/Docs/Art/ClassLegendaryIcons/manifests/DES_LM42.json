@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "DES_LM42",
+  "name": {
+    "ko": "유리빙하 지팡이",
+    "en": "Glassglacier Staff"
+  },
+  "heroClass": "Mage",
+  "slot": 0,
+  "slotName": "weapon",
+  "effectSummary": {
+    "ko": "빙하창이 직접 빙결시킨 적을 서리 구체가 맞히면 D60% 냉기 추가 폭발을 반경 2m·최대 5명에게 줍니다. 같은 구체는 한 번만 폭발하며 3초 간격입니다. 보스 제압만으로 빙결 조건을 충족하지 않습니다.",
+    "en": "If Frost Globe hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze."
+  },
+  "directSkillIds": [
+    "M09",
+    "M10"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "M09",
+      "name": {
+        "ko": "빙하창",
+        "en": "Glacial Lance"
+      },
+      "description": {
+        "ko": "길이 9m·폭 0.7m의 창으로 최대 3명에게 D130% 냉기 피해를 줍니다. 이미 둔화된 적은 0.8초 빙결하고, 나머지는 3초간 35% 둔화시킵니다.",
+        "en": "Hit up to 3 enemies with a 9m-long, 0.7m-wide lance for D130% cold damage. Freeze already-slowed enemies for 0.8s; otherwise slow them by 35% for 3s."
+      }
+    },
+    {
+      "id": "M10",
+      "name": {
+        "ko": "서리 구체",
+        "en": "Frost Globe"
+      },
+      "description": {
+        "ko": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
+        "en": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage."
+      }
+    }
+  ],
+  "sourceStatus": "design_only",
+  "sourceRuntimeEnabled": false,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/DES_LM42.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/DES_LM42.png",
+  "concept": "A long glassglacier mage staff whose crown combines one spear-point transparent blue crystal and a small solid frost-glass globe seated within a broad bifurcated silver ice brace. Weathered pale branch shaft, distinct lance-and-orb physical structure, no snowfall.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/DES_LM42.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: DES_LM42, Glassglacier Staff, class Mage, slot weapon.\nSubject design: A long glassglacier mage staff whose crown combines one spear-point transparent blue crystal and a small solid frost-glass globe seated within a broad bifurcated silver ice brace. Weathered pale branch shaft, distinct lance-and-orb physical structure, no snowfall.\nPower that informs materials and structure, not a spell illustration: If Frost Globe hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze.\nDirect skill context: M09 Glacial Lance — Hit up to 3 enemies with a 9m-long, 0.7m-wide lance for D130% cold damage. Freeze already-slowed enemies for 0.8s; otherwise slow them by 35% for 3s.; M10 Frost Globe — Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-25d61228-a68d-4029-9998-58cd0be7485d.png",
+    "sourceSha256": "cd5e23ae6b4cdba59fcd015dfa4d45f6810fd09e6c615d2cb174073c3426d550",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-25d61228-a68d-4029-9998-58cd0be7485d.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:49:15.686160+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "9c83e0c1132fd887a21f50d01018277536b14f8bc5631a347bc624e229a38c9d",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "cd5e23ae6b4cdba59fcd015dfa4d45f6810fd09e6c615d2cb174073c3426d550",
+    "nativeAlpha": true,
+    "transparentPixels": 1420880,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 151636,
+    "nearlyOpaquePixels": 92436,
+    "alphaBoundingBox": [
+      103,
+      53,
+      1093,
+      1236
+    ],
+    "alpha16BoundingBox": [
+      217,
+      123,
+      1088,
+      1149
+    ],
+    "transparentPixelFraction": 0.9035710924403949,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-005.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-005-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝은 바탕과 어두운 바탕의 64px 축소본 및 원본 해상도 가장자리를 확인했습니다. 부위와 항목별 구조를 구분할 수 있고 잘림과 눈에 띄는 배경 테두리가 없습니다.",
+      "en": "The pointed glacier lance and seated globe stay visible on the long staff. Inspected native-resolution edges and actual 64px samples on dark/light backgrounds."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

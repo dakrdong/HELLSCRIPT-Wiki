@@ -1,0 +1,105 @@
+{
+  "id": "WP12",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "전투 준비",
+    "en": "Combat Preparation"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP12.png",
+  "effectSummary": {
+    "ko": "같은 적에게 기본 공격 3회 적중 후 다음 분쇄 일격의 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+    "en": "Three basic hits on one enemy prepare +15 percentage points of cost reduction for the next Crush within 4s. One charge; counting pauses for 3s after triggering."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW03",
+    "LW13",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW28",
+    "LW39"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP12 Combat Preparation (passive). Gameplay meaning: Three basic hits on one enemy prepare +15 percentage points of cost reduction for the next Crush within 4s. One charge; counting pauses for 3s after triggering.\nSubject and composition: PASSIVE EMBLEM: three short worn steel strike notches flowing toward one poised massive maul head, with a single saved ember tucked under its cheek. Broad layered silhouette of practiced preparation and economical heavy attack. No numerals.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1059501,
+      "alphaBBox": [
+        0,
+        19,
+        1200,
+        1254
+      ],
+      "coreBBox": [
+        124,
+        178,
+        1134,
+        1141
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-01.png",
+    "visualReview": {
+      "ko": "세 번의 타격 흔적과 준비된 큰 망치가 64px에서 구분되며, 인접한 패시브와 실루엣이 다릅니다.",
+      "en": "Three strike traces feeding a prepared maul remain legible at 64px and differ from the adjacent passive silhouettes."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:21:00.573881+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-a685974d-73ef-4d85-922f-cad7b12c1719.png",
+      "sourceSha256": "d53aa368b6b7e4709aa11a368782b5fd3f43296e5a331c93efc09fd1dc6874e1",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP12.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-a685974d-73ef-4d85-922f-cad7b12c1719.png",
+  "sourceSha256": "d53aa368b6b7e4709aa11a368782b5fd3f43296e5a331c93efc09fd1dc6874e1",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP12.png"
+}

@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "DES_LA43",
+  "name": {
+    "ko": "미끼를 두른 외투",
+    "en": "Decoy Mantle"
+  },
+  "heroClass": "Ranger",
+  "slot": 2,
+  "slotName": "torso armor",
+  "effectSummary": {
+    "ko": "미끼가 살아 있는 동안 연막 엄폐를 쓰면 미끼에게 일반 적을 유인하는 시간이 현재부터 2초로 갱신됩니다. 같은 미끼당 1회이며 보스·정예 도발과 추가 폭발은 만들지 않습니다.",
+    "en": "Using Smoke Cover while your decoy lives refreshes its normal-enemy lure to 2s from now. Once per decoy; no elite or boss taunt and no extra explosion."
+  },
+  "directSkillIds": [
+    "A11",
+    "A12"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "A11",
+      "name": {
+        "ko": "미끼 투영",
+        "en": "Decoy Projection"
+      },
+      "description": {
+        "ko": "7m 안에 최대 HP 10%의 미끼 하나를 6초간 만듭니다. 일반 적은 최초 2.5초 동안 미끼를 우선 공격합니다. 미끼가 파괴되거나 만료하면 2.5m 안의 최대 5명에게 D80% 물리 추가 피해를 줍니다. 보스·정예를 강제로 도발하지 않습니다.",
+        "en": "Create one decoy within 7m with 10% of hero maximum HP for 6s. Normal enemies prefer it for the first 2.5s. Destruction or expiry causes D80% secondary physical damage to up to 5 enemies within 2.5m. It cannot force elite or boss aggro."
+      }
+    },
+    {
+      "id": "A12",
+      "name": {
+        "ko": "연막 엄폐",
+        "en": "Smoke Cover"
+      },
+      "description": {
+        "ko": "3초간 받는 피해가 20% 감소하고 이동속도가 20% 증가합니다. 은신·무적·대상 지정 해제는 제공하지 않습니다. 후퇴 도약으로 처리하지 않습니다.",
+        "en": "Gain 20% damage reduction and 20% movement speed for 3s. This grants no invisibility, invulnerability or target break, and does not count as Retreat."
+      }
+    }
+  ],
+  "sourceStatus": "design_only",
+  "sourceRuntimeEnabled": false,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/DES_LA43.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/DES_LA43.png",
+  "concept": "A wearable charcoal ranger mantle with two overlapping folded hood-shaped shoulder flaps like a decoy double, a ragged but compact layered hem and smoky gray lining. Dark leather ties and one bronze lure bell clasp, no wearer or smoke cloud.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/DES_LA43.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: DES_LA43, Decoy Mantle, class Ranger, slot torso armor.\nSubject design: A wearable charcoal ranger mantle with two overlapping folded hood-shaped shoulder flaps like a decoy double, a ragged but compact layered hem and smoky gray lining. Dark leather ties and one bronze lure bell clasp, no wearer or smoke cloud.\nPower that informs materials and structure, not a spell illustration: Using Smoke Cover while your decoy lives refreshes its normal-enemy lure to 2s from now. Once per decoy; no elite or boss taunt and no extra explosion.\nDirect skill context: A11 Decoy Projection — Create one decoy within 7m with 10% of hero maximum HP for 6s. Normal enemies prefer it for the first 2.5s. Destruction or expiry causes D80% secondary physical damage to up to 5 enemies within 2.5m. It cannot force elite or boss aggro.; A12 Smoke Cover — Gain 20% damage reduction and 20% movement speed for 3s. This grants no invisibility, invulnerability or target break, and does not count as Retreat.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: square native PNG with real transparent alpha; the built-in 1254 by 1254 output is accepted, and 1024 by 1024 is also accepted. Preserve native pixels and alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Aim to contain the entire subject, including all tips and chain, within the central 76% with generous transparent padding. No part may be clipped or missing. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-955bb212-5070-46ac-9fba-b5402894647a.png",
+    "sourceSha256": "7f50792bff1f65c37c4a7b1f7f0c210f7b86385c09d14b935e13656feacf3781",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-955bb212-5070-46ac-9fba-b5402894647a.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:39:09.132086+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "614a6f0efdb1bf3073189d737f6924dd3e5382e64e37995efe5bd5baf8f0daa4",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "7f50792bff1f65c37c4a7b1f7f0c210f7b86385c09d14b935e13656feacf3781",
+    "nativeAlpha": true,
+    "transparentPixels": 747254,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 825262,
+    "nearlyOpaquePixels": 785660,
+    "alphaBoundingBox": [
+      0,
+      21,
+      1200,
+      1222
+    ],
+    "alpha16BoundingBox": [
+      118,
+      42,
+      1174,
+      1210
+    ],
+    "transparentPixelFraction": 0.475196436793012,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true,
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-004.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-004-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px의 밝은·어두운 바탕 비교와 원본 가장자리 표본에서 부위·개별 구조가 구분됩니다. 물체 형태가 잘리지 않았으며 배경 테두리가 보이지 않습니다. 일부 캔버스 가장자리의 매우 낮은 알파값은 측정값으로 보존했습니다.",
+      "en": "Distinct slot and item structure at actual 64px on dark/light backgrounds. Native edge crops show complete geometry and no visible matte. Very low-alpha pixels at some canvas borders remain documented without modifying the native output."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

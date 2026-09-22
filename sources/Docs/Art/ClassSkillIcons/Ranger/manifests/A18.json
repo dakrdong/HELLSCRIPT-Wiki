@@ -1,0 +1,120 @@
+{
+  "id": "A18",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "그림자 추격",
+    "en": "Shadow Pursuit"
+  },
+  "kind": "ultimate",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png",
+  "effectSummary": {
+    "ko": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
+    "en": "Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs."
+  },
+  "tags": [
+    "Shadow",
+    "Ultimate"
+  ],
+  "equipmentIds": [
+    "DES_LA46"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "ULTIMATE: a dominant shadowy hooded ranger draws a spectral bow while a single imposing violet-black winglike echo sweeps forward behind the shoulders. One bright dark-violet arrow and its trailing shadow double aim at the same direction. Dense heroic central silhouette conveys mobile pursuit and echo damage, no scenery.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): A18 Shadow Pursuit. Skill type: ultimate. Effect: Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs. Tags: Shadow, Ultimate. Linked equipment IDs for identity context only: DES_LA46. Subject and composition: ULTIMATE: a dominant shadowy hooded ranger draws a spectral bow while a single imposing violet-black winglike echo sweeps forward behind the shoulders. One bright dark-violet arrow and its trailing shadow double aim at the same direction. Dense heroic central silhouette conveys mobile pursuit and echo damage, no scenery. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-ce5b2b05-01e7-4efa-b42e-30680dc24a8d.png",
+    "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A18.png",
+    "sourceSha256": "1cff4af9369ace5cde3bd791d55578bcfc0fa36d4c0f06ef5e866d5f4d1c10c0",
+    "modelEvidence": "Tool returned only image_url and output_hint; model not exposed."
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pass",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1114867,
+      "alphaBBox": [
+        41,
+        39,
+        1230,
+        1214
+      ],
+      "coreBBox": [
+        176,
+        224,
+        1124,
+        1062
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "mode": "RGBA",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "dimensionPass": true,
+    "fullyTransparentPixels": 1114867,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBounds": [
+      41,
+      39,
+      1230,
+      1214
+    ],
+    "bboxAlphaGreaterThan16": [
+      175,
+      224,
+      1134,
+      1065
+    ],
+    "central76PercentPass": false,
+    "marginGuideline": "warning",
+    "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/A18-64.png",
+    "visual64": "reviewed_pass",
+    "visual64Note": "At64px, hooded bow figure and large violet echo read as shadow pursuit; the original shows one following spectral double aimed in the same direction. No canvas clipping.",
+    "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
+    "reviewedBy": "ranger_icons agent"
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A18.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-ce5b2b05-01e7-4efa-b42e-30680dc24a8d.png",
+  "sourceSha256": "1cff4af9369ace5cde3bd791d55578bcfc0fa36d4c0f06ef5e866d5f4d1c10c0",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:28:51.389698+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-ce5b2b05-01e7-4efa-b42e-30680dc24a8d.png",
+      "sourceSha256": "1cff4af9369ace5cde3bd791d55578bcfc0fa36d4c0f06ef5e866d5f4d1c10c0",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

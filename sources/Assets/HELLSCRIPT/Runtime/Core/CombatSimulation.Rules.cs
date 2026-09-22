@@ -267,12 +267,24 @@ namespace Hellscript
             // document's category and attack order; a skill whose automatic use is off is not inspected.
             var candidates=EdictRuleOrder.ForSimulation(State.build.rules,edictSource)
                 .Select(o=>o.skipReason==""?InspectRule(o.rule,o.row):new RuleCandidate{rule=o.rule,row=o.row,destination=State.position,code="EDICT_OFF",detail=o.skipReason}).ToArray();
+            if(ClassSkillsActive)foreach(var c in candidates)
+            {
+                if(c.rule.action!=RuleAction.Skill&&c.rule.action!=RuleAction.Basic)continue;
+                string id=c.rule.action==RuleAction.Basic?"BASIC":ClassSkills.LegacyId(c.rule.skill);
+                if(!Loadout.automatic.Contains(id)){c.target=null;c.code="AUTO_OFF";}
+                else if(c.ready)c.code="ID_ORDER";
+                c.ready=false;
+            }
             // Gathering walks toward remembered enemies before fighting; attacks wait until it ends.
             if(Gathering)foreach(var c in candidates)if(c.ready&&(c.rule.action==RuleAction.Skill||c.rule.action==RuleAction.Basic)){c.ready=false;c.code="GATHERING";c.detail="몰이 중에는 공격을 보류합니다.";}
             RuleCandidate selected=null;foreach(var c in LandingPreferenceOrder(candidates)){if(!c.ready)continue;if(EdictAimGate(c)){selected=c;break;}}
             selected=ApplyDiscoveryOrder(candidates,ReviewShieldOpening(candidates,selected));
+            // ID-based attacks are dispatched above this rule loop. Their range failures still
+            // own navigation ahead of exploration, while survival, gathering and loot keep priority.
+            if(ClassSkillsActive&&!Gathering&&!HeroActionBusy&&selected?.rule.action==RuleAction.Explore&&
+                candidates.Any(c=>c.target!=null&&(c.code=="RANGE"||c.code=="LINE_OF_FIRE")))selected=null;
             foreach(var c in candidates)RecordDecision(c.rule,c.row,c==selected?"SELECTED":c.ready?"PRIORITY":c.code,c.ready&&c!=selected?
-                EdictRuleOrder.IsCompiledRule(selected.rule.id)?Loc.F("{0}이 먼저 실행됩니다.",DecisionSource(selected)):Loc.F("{0}번 규칙이 먼저 실행됩니다.",selected.row+1):c.detail,c.target);
+                selected==null?Loc.T("공격 위치 확보"):EdictRuleOrder.IsCompiledRule(selected.rule.id)?Loc.F("{0}이 먼저 실행됩니다.",DecisionSource(selected)):Loc.F("{0}번 규칙이 먼저 실행됩니다.",selected.row+1):c.detail,c.target);
             if(selected==null)
             {
                 if(HeroActionBusy)
@@ -291,7 +303,7 @@ namespace Hellscript
             if((selected.rule.id=="edict:M06"||selected.rule.id=="edict:A02")&&selected.code=="APPROACH")
             {SelectTarget(selected.target,selected.detail,selected.rule.id);State.destination=selected.destination;State.action=selected.detail;return;}
             if(selected.rule.action==RuleAction.Skill||selected.rule.action==RuleAction.Basic)
-            {SelectTarget(selected.target,DecisionSource(selected),selected.rule.id);StartHeroAction(selected.rule.action==RuleAction.Basic?-1:selected.rule.skill,selected.target,selected.destination,selected.cost,selected.row,selected.rule.escape,explicitRule:EdictRuleOrder.IsCompiledRule(selected.rule.id)?selected.rule:null,aim:selected.aim);}
+            {SelectTarget(selected.target,DecisionSource(selected),selected.rule.id);StartHeroAction(selected.rule.action==RuleAction.Basic?-1:selected.rule.skill,selected.target,selected.destination,selected.cost,selected.row,selected.rule.escape,explicitRule:selected!=null&&EdictRuleOrder.IsCompiledRule(selected.rule.id)?selected.rule:null,aim:selected.aim);}
             else if(selected.rule.action==RuleAction.Loot)State.movementDrop=FindRuleLoot()?.id??-1;
         }
     }

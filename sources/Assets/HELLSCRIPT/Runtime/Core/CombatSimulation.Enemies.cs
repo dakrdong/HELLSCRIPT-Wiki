@@ -138,6 +138,7 @@ namespace Hellscript
                 if(hard){if(e.boss)InterruptBossAction(e,"보스 제압");else InterruptEnemyAction(e,"기절·빙결");e.stun=Mathf.Max(0,e.stun-dt);e.freeze=Mathf.Max(0,e.freeze-dt);continue;}
                 if(e.goblin){TickGoldenGoblin(e,dt);continue;}
                 if(e.boss){TickBoss(e,dt);continue;}
+                if(TickClassDecoyEnemy(e,dt))continue;
                 var b=e.brain;float distance=Vector2.Distance(e.position,State.position);bool visible=distance<=14&&Map.LineClear(e.position,State.position);
                 if(visible)
                 {
@@ -204,7 +205,7 @@ namespace Hellscript
             ObserveHazardImpact(h,inside,visible);
             if(!inside||!visible)return;
             Hurt(h.damage,h.element,h.enemyId.ToString(),h.definitionId,h.actionId,h.id,h.interval>0?DamageKind.Periodic:DamageKind.Direct);
-            if(h.heroSlow>0)State.enemySlowTime=Mathf.Max(State.enemySlowTime,2);
+            if(h.heroSlow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,2);
         }
         bool EnemyThreatAt(Vector2 point,float warning,bool activeOnly=false)
             =>EnemyCombat.Threats(State,Map).Any(t=>t.delay<=(activeOnly?0:warning)+.00001f&&Vector2.Distance(State.position,t.origin)<=14+t.radius&&Map.LineClear(State.position,t.origin)&&EnemyCombat.Contains(t,point)&&Map.LineClear(t.origin,point));

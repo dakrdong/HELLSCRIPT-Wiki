@@ -1,0 +1,516 @@
+{
+  "heroClass": "Ranger",
+  "sets": [
+    {
+      "setId": "REF_SA01",
+      "name": {
+        "ko": "유랑 사냥꾼",
+        "en": "Wandering Hunter"
+      },
+      "concept": {
+        "ko": "이동·수집",
+        "en": "Movement and collection"
+      },
+      "gameplayLoop": {
+        "ko": "거리 유지와 전리품 회수 속도를 함께 높입니다.",
+        "en": "Improve spacing and loot collection speed."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA01_B2",
+          "description": {
+            "ko": "이동속도 +10%.",
+            "en": "Movement speed +10%."
+          },
+          "parameters": {
+            "moveSpeedPct": 10
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SA01_B3",
+          "description": {
+            "ko": "공격속도 +5%, 몬스터 처치 골드 +10%, 영웅 처치 경험치 +5%.",
+            "en": "Attack speed +5%, monster gold +10%, and hero kill XP +5%."
+          },
+          "parameters": {
+            "attackSpeedPct": 5,
+            "monsterGoldPct": 10,
+            "heroKillExperiencePct": 5
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "짙은 황갈색 왁스 가죽과 낡은 황동을 사용합니다. 앞을 가리키는 갈라진 잎 모양 화살을 모든 부위에 반복하고, 날렵한 비대칭 접힘으로 이동과 회수를 나타냅니다.",
+        "en": "Dark tawny waxed leather and weathered brass. Repeat a forward split-leaf arrow on every piece, with lean asymmetric folds suggesting movement and collection."
+      },
+      "emblemSubject": "a sculpted brass split-leaf arrow with one swept-back leather tassel, a single coherent symbolic object",
+      "pieceSubjects": {
+        "REF_SA01_P01": "lean pointed boots with one folded cuff",
+        "REF_SA01_P02": "a supple belt with a split-leaf arrow brass buckle",
+        "REF_SA01_P03": "a split-leaf arrow pendant on a short loop of worn cord"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA01_B2",
+        "REF_SA01_B3"
+      ]
+    },
+    {
+      "setId": "REF_SA02",
+      "name": {
+        "ko": "생환자의 외투",
+        "en": "Survivor Mantle"
+      },
+      "concept": {
+        "ko": "피격 대응",
+        "en": "Hit recovery"
+      },
+      "gameplayLoop": {
+        "ko": "후퇴 도약 뒤의 방어 시간으로 추격을 견딥니다.",
+        "en": "Survive pursuit with a defensive window after Retreat."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA02_B2",
+          "description": {
+            "ko": "방어도와 모든 속성 저항 +12%.",
+            "en": "Armor and all elemental resistances +12%."
+          },
+          "parameters": {
+            "armorPct": 12,
+            "allResistancePct": 12
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SA02_B3",
+          "description": {
+            "ko": "후퇴 도약 이동을 마치면 4초간 받는 피해 15% 감소.",
+            "en": "Completing Retreat grants 15% damage reduction for 4 seconds."
+          },
+          "parameters": {
+            "damageReductionPct": 15,
+            "durationSeconds": 4
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "남청색 누빔 천과 훈연한 은판을 겹칩니다. 제비 날개처럼 접힌 방패 모양을 반복하여 후퇴 뒤 방어 시간을 표현합니다. 둥글게 감싸는 큰 윤곽을 유지합니다.",
+        "en": "Layer midnight-blue quilted cloth and smoke-tarnished silver. Repeat a folded swallow-wing shield to express the defensive window after Retreat. Keep a rounded enclosing silhouette."
+      },
+      "emblemSubject": "one folded swallow-wing shield made from smoked silver over a midnight-blue cloth inset, no enclosing frame",
+      "pieceSubjects": {
+        "REF_SA02_P01": "a low hooded crown with a folded swallow-wing brow guard",
+        "REF_SA02_P02": "a padded ranger mantle cuirass with overlapping swallow-wing chest plates",
+        "REF_SA02_P03": "a thick signet ring bearing a raised folded swallow-wing shield"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA02_B2",
+        "REF_SA02_B3"
+      ]
+    },
+    {
+      "setId": "REF_SA03",
+      "name": {
+        "ko": "명사수의 교본",
+        "en": "Marksman Manual"
+      },
+      "concept": {
+        "ko": "사격 기술 숙련",
+        "en": "Shooting mastery"
+      },
+      "gameplayLoop": {
+        "ko": "관통·다중 사격의 등급과 표식 대상의 자원 효율을 높입니다.",
+        "en": "Improve Pierce/Multi ranks and resource efficiency against marked targets."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA03_B2",
+          "description": {
+            "ko": "이미 배운 관통 사격·다중 사격 등급 +1.",
+            "en": "Learned Pierce and Multi gain 1 rank."
+          },
+          "parameters": {
+            "learnedShootingSkillRanks": 1
+          }
+        },
+        {
+          "requiredPieces": 4,
+          "effectId": "REF_SA03_B4",
+          "description": {
+            "ko": "표식 대상에게 A01·A02 직접 적중 시 시전당 자원 4를 회복합니다. 표식 대상에게 주는 A01·A02 직접 피해 +15%.",
+            "en": "A01/A02 direct hits on a marked target restore 4 resource per cast and deal 15% more direct damage to marked targets."
+          },
+          "parameters": {
+            "resourcePerCast": 4,
+            "directDamageToMarkedPct": 15
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "흑갈색 가죽과 물푸레나무, 차분한 청회색 강철을 사용합니다. 홈이 있는 직선 화살과 열린 마름모 표식을 공유하며, 정렬된 긴 축과 넓은 면으로 조준 숙련을 보여 줍니다.",
+        "en": "Use dark umber leather, ash wood and quiet blue-gray steel. Share a notched straight arrow and open diamond mark, using aligned long axes and broad planes to suggest practiced aim."
+      },
+      "emblemSubject": "one long notched steel arrow passing through an open diamond mark, fused into a single emblem",
+      "pieceSubjects": {
+        "REF_SA03_P01": "a precision ash-wood longbow with broad blue-gray steel limb tips and a notched arrow inset at the grip",
+        "REF_SA03_P02": "a close ranger hood with a blue-gray steel brow strip and one open diamond mark",
+        "REF_SA03_P03": "a pair of practical shooting gloves with broad notched arrow steel bracers",
+        "REF_SA03_P04": "an open diamond pendant crossed by one notched straight arrow on a short cord"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA03_B2",
+        "REF_SA03_B4"
+      ]
+    },
+    {
+      "setId": "REF_SA04",
+      "name": {
+        "ko": "거수 사냥",
+        "en": "Colossus Hunt"
+      },
+      "concept": {
+        "ko": "정예·보스 집중",
+        "en": "Elite and boss focus"
+      },
+      "gameplayLoop": {
+        "ko": "같은 강적에게 사격을 집중해 세 번째 시전에 추가 피해를 줍니다.",
+        "en": "Focus one strong target for an extra hit on every third qualifying cast."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA04_B2",
+          "description": {
+            "ko": "정예·보스에게 주는 직접 사격 피해 +15%.",
+            "en": "Direct shooting damage to elites and bosses +15%."
+          },
+          "parameters": {
+            "directShootingDamageToElitesPct": 15
+          }
+        },
+        {
+          "requiredPieces": 4,
+          "effectId": "REF_SA04_B4",
+          "description": {
+            "ko": "표식이 있는 같은 정예·보스에게 6초 안에 A01·A02를 세 번 적중하면 세 번째 시전에 D100% 물리 피해를 추가하고 누적을 비웁니다. 시전당 1회만 셉니다.",
+            "en": "Land three A01/A02 casts on the same marked elite or boss within 6 seconds to add 100% D physical damage on the third cast, then reset. Count once per cast."
+          },
+          "parameters": {
+            "requiredCasts": 3,
+            "windowSeconds": 6,
+            "damageDPct": 100
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "적갈색 강화 가죽, 거친 흑철, 오래된 상아색 뿔을 조합합니다. 갈라진 뿔 모양의 V자 장식과 두꺼운 삼각 면을 반복하여 거수 한 마리를 겨누는 집중력을 드러냅니다.",
+        "en": "Combine oxblood reinforced hide, rough black iron and aged ivory horn. Repeat a cleft-horn V motif and thick triangular planes to express focus on one massive quarry."
+      },
+      "emblemSubject": "a single sculpted cleft beast horn trophy pierced by one broad iron arrowhead, an angular compact hunting emblem",
+      "pieceSubjects": {
+        "REF_SA04_P01": "a heavy reinforced ranger cuirass with broad ivory cleft-horn chest plates",
+        "REF_SA04_P02": "a pair of broad-soled reinforced boots with short ivory horn shin guards",
+        "REF_SA04_P03": "a broad oxblood belt with a heavy cleft-horn iron buckle",
+        "REF_SA04_P04": "a broad black-iron signet ring bearing a cleft ivory horn V crest"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA04_B2",
+        "REF_SA04_B4"
+      ]
+    },
+    {
+      "setId": "REF_SA05",
+      "name": {
+        "ko": "복수의 시선",
+        "en": "Vengeful Sight"
+      },
+      "concept": {
+        "ko": "기본 사격·연속 사격",
+        "en": "Basic-shot barrage"
+      },
+      "gameplayLoop": {
+        "ko": "기본 사격으로 복수를 쌓고 주력 사격에 추가 화살을 연결합니다.",
+        "en": "Build Vengeance with basic shots, then attach extra arrows to core shots."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA05_B2",
+          "description": {
+            "ko": "기본 사격 직접 적중 시 6초간 복수 1중첩을 얻습니다. 최대 5중첩이며 중첩당 A01·A02 직접 피해 +3%. 재획득하면 전체 지속시간을 갱신합니다.",
+            "en": "Basic-shot direct hits grant one Vengeance stack for 6 seconds, up to five. Each adds 3% A01/A02 direct damage; new stacks refresh the full duration."
+          },
+          "parameters": {
+            "maxStacks": 5,
+            "durationSeconds": 6,
+            "directShootingDamagePerStackPct": 3
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SA05_B3",
+          "description": {
+            "ko": "복수 중첩당 이동속도 +2%, 최대 10%.",
+            "en": "Movement speed +2% per Vengeance stack, up to 10%."
+          },
+          "parameters": {
+            "moveSpeedPerStackPct": 2,
+            "maxMoveSpeedPct": 10
+          }
+        },
+        {
+          "requiredPieces": 5,
+          "effectId": "REF_SA05_B5",
+          "description": {
+            "ko": "복수가 5중첩인 A01·A02 시전의 첫 적중 대상에게 0.1초 간격으로 D25% 물리 화살 3발을 추가합니다. 시전당 1회, 2초에 1회입니다. 복수는 소비하지 않습니다.",
+            "en": "At five Vengeance, an A01/A02 cast adds three 25% D physical arrows at 0.1-second intervals to its first target. Once per cast with a 2-second cooldown; Vengeance is retained."
+          },
+          "parameters": {
+            "arrowCount": 3,
+            "damagePerArrowDPct": 25,
+            "intervalSeconds": 0.1,
+            "internalCooldownSeconds": 2
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "숯빛 가죽과 검게 그을린 강철에 짙은 진홍색 눈을 박습니다. 뒤로 갈라지는 깃 모양 판금과 길게 뜬 눈 모양을 반복하여 연속 사격과 복수의 축적을 표현합니다.",
+        "en": "Set a deep crimson eye into charcoal leather and blackened steel. Repeat swept forked-feather plates and an elongated eye shape to express sustained shooting and accumulated vengeance."
+      },
+      "emblemSubject": "a single crimson stone eye held in swept forked-feather black steel, with three solid arrowhead prongs fused at the lower end",
+      "pieceSubjects": {
+        "REF_SA05_P01": "a compact brutal crossbow with swept forked-feather black steel limbs and a crimson eye on its stock",
+        "REF_SA05_P02": "an angular ranger half-helm with swept forked-feather plates and a crimson eye brow jewel",
+        "REF_SA05_P03": "a pair of sharp black leather shooting gauntlets with forked-feather plates and crimson eye cabochons",
+        "REF_SA05_P04": "a pair of swept black ranger boots with forked-feather ankle plates and small crimson eye insets",
+        "REF_SA05_P05": "a black steel signet ring with one long crimson eye and split-feather shoulders"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA05_B2",
+        "REF_SA05_B3",
+        "REF_SA05_B5"
+      ]
+    },
+    {
+      "setId": "REF_SA06",
+      "name": {
+        "ko": "연금 사냥터",
+        "en": "Alchemical Hunting Ground"
+      },
+      "concept": {
+        "ko": "덫·군중 제어",
+        "en": "Traps and crowd control"
+      },
+      "gameplayLoop": {
+        "ko": "덫으로 적을 묶은 뒤 후퇴하며 새 사격 위치를 잡습니다.",
+        "en": "Control enemies with traps, then retreat into a new firing position."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA06_B2",
+          "description": {
+            "ko": "맹독 덫 재사용 대기시간 감소 +15%p.",
+            "en": "Poison Trap cooldown reduction +15 percentage points."
+          },
+          "parameters": {
+            "trapCooldownReductionPct": 15
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SA06_B3",
+          "description": {
+            "ko": "활성 맹독 덫 1개당 받는 피해 5% 감소, 최대 10%.",
+            "en": "Take 5% less damage per active Poison Trap, up to 10%."
+          },
+          "parameters": {
+            "damageReductionPerTrapPct": 5,
+            "maxDamageReductionPct": 10
+          }
+        },
+        {
+          "requiredPieces": 5,
+          "effectId": "REF_SA06_B5",
+          "description": {
+            "ko": "각 맹독 덫이 처음 피해를 주면 덫 중심 반경 2m에 D80% 물리 폭발과 0.75초 기절을 1회 시도합니다. 그 폭발에 맞은 대상은 해당 덫의 독 피해를 20% 더 받습니다. 보스는 기절만 면역입니다.",
+            "en": "The first damaging tick of each Poison Trap triggers one 80% D physical burst and a 0.75-second stun attempt within 2 m. Targets hit take 20% more poison damage from that trap. Bosses resist the stun only."
+          },
+          "parameters": {
+            "damageDPct": 80,
+            "radiusMeters": 2,
+            "stunSeconds": 0.75,
+            "sameTrapPoisonDamagePct": 20,
+            "procsPerTrap": 1
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "이끼빛 가죽과 녹슨 구리, 탁한 황록색 유리를 사용합니다. 덫의 맞물린 이빨과 밀봉된 삼각 유리병을 큰 모양으로 반복하여 덫의 최초 폭발을 나타냅니다.",
+        "en": "Use moss leather, corroded copper and cloudy yellow-green glass. Repeat large interlocking trap teeth and a sealed triangular vial to express a trap first-burst effect."
+      },
+      "emblemSubject": "a single sealed triangular green-glass vial gripped by two corroded copper trap jaws, compact and coherent",
+      "pieceSubjects": {
+        "REF_SA06_P01": "a short alchemist ranger hood with copper trap-tooth brow plates and one sealed triangular vial at the temple",
+        "REF_SA06_P02": "a practical moss leather coat cuirass with broad copper trap-tooth plates and one sealed triangular chest vial",
+        "REF_SA06_P03": "a pair of thick moss leather gloves with copper trap-tooth cuffs and a triangular green-glass inset",
+        "REF_SA06_P04": "a broad utility belt with copper trap-tooth buckle and one attached sealed triangular vial",
+        "REF_SA06_P05": "a sealed triangular green-glass vial pendant cradled in copper trap teeth on a short dark cord"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA06_B2",
+        "REF_SA06_B3",
+        "REF_SA06_B5"
+      ]
+    },
+    {
+      "setId": "REF_SA07",
+      "name": {
+        "ko": "삼독의 화살",
+        "en": "Threefold Venom"
+      },
+      "concept": {
+        "ko": "속성 주입 사격",
+        "en": "Imbued shooting"
+      },
+      "gameplayLoop": {
+        "ko": "그림자 화살의 유효 사격 횟수를 살려 냉기·독을 함께 묻힙니다.",
+        "en": "Use Shadow Arrow charges to add cold and poison to shooting."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA07_B2",
+          "description": {
+            "ko": "그림자 화살의 암흑 추가 피해 +20%.",
+            "en": "Shadow Arrow secondary shadow damage +20%."
+          },
+          "parameters": {
+            "shadowArrowDamagePct": 20
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SA07_B3",
+          "description": {
+            "ko": "A06 충전을 소비한 시전이 적중하면 최대 체력 2%를 회복합니다. 시전당 1회이며 내부 대기시간은 1초입니다.",
+            "en": "A hit from an A06-charged cast restores 2% maximum Life, once per cast with a 1-second cooldown."
+          },
+          "parameters": {
+            "healMaxLifePct": 2,
+            "internalCooldownSeconds": 1
+          }
+        },
+        {
+          "requiredPieces": 5,
+          "effectId": "REF_SA07_B5",
+          "description": {
+            "ko": "A06 충전을 소비한 사격이 맞힌 각 대상에게 D30% 냉기 추가 피해와 3초 동안 총 D45% 독을 부여하고 2초간 20% 둔화합니다. 대상·시전당 1회이며 같은 세트 독은 강한 값으로 교체합니다.",
+            "en": "Each target hit by an A06-charged shot takes 30% D cold damage and 45% D poison over 3 seconds, plus a 20% slow for 2 seconds. Once per target per cast; stronger set poison replaces weaker poison."
+          },
+          "parameters": {
+            "coldDamageDPct": 30,
+            "poisonDamageDPct": 45,
+            "poisonDurationSeconds": 3,
+            "slowPct": 20,
+            "slowDurationSeconds": 2
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "군청 흑철과 뱀 비늘 가죽을 바탕으로 암자주·서리 청록·독 이끼색을 소량 배치합니다. 세 갈래 송곳니 하나를 모든 부위의 중심 문양으로 공유하며, 얇은 파형 윤곽을 유지합니다.",
+        "en": "Base the set on blue-black iron and snakescale leather, with restrained dark violet, frost teal and venom moss accents. Share one three-pronged fang motif at each center and keep a thin undulating outline."
+      },
+      "emblemSubject": "one three-pronged serpent fang crest in blue-black iron, the three thick prongs inset with dark violet, frost teal and venom moss stone, no numerals",
+      "pieceSubjects": {
+        "REF_SA07_P01": "a sinuous blue-black serpent recurve bow with a three-pronged fang grip and three restrained stone insets",
+        "REF_SA07_P02": "a fitted snakescale ranger cuirass with one broad three-pronged fang breastplate",
+        "REF_SA07_P03": "a pair of sinuous snakescale boots with three-pronged fang ankle guards",
+        "REF_SA07_P04": "a narrow snakescale belt with a three-pronged fang buckle and three stone insets",
+        "REF_SA07_P05": "a sinuous blue-black signet ring bearing a three-pronged fang face with three small stone insets"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA07_B2",
+        "REF_SA07_B3",
+        "REF_SA07_B5"
+      ]
+    },
+    {
+      "setId": "REF_SA08",
+      "name": {
+        "ko": "눈먼 그림자",
+        "en": "Sightless Shadow"
+      },
+      "concept": {
+        "ko": "후퇴·그림자 복제",
+        "en": "Retreat and shadow echoes"
+      },
+      "gameplayLoop": {
+        "ko": "후퇴 후 공격 시간을 잡아 주력 사격을 그림자가 반복하도록 합니다.",
+        "en": "Attack after Retreat so a shadow repeats your core shots."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SA08_B2",
+          "description": {
+            "ko": "후퇴 도약 재사용 대기시간 감소 +15%p.",
+            "en": "Retreat cooldown reduction +15 percentage points."
+          },
+          "parameters": {
+            "retreatCooldownReductionPct": 15
+          }
+        },
+        {
+          "requiredPieces": 4,
+          "effectId": "REF_SA08_B4",
+          "description": {
+            "ko": "후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.",
+            "en": "Completing Retreat grants 20% A01/A02 direct damage for 6 seconds."
+          },
+          "parameters": {
+            "directShootingDamagePct": 20,
+            "durationSeconds": 6
+          }
+        },
+        {
+          "requiredPieces": 6,
+          "effectId": "REF_SA08_B6",
+          "description": {
+            "ko": "후퇴 후 6초 동안 A01·A02 시전은 0.25초 뒤 같은 원점·방향·형상에 그림자 사격을 1회 남깁니다. 대상당 D70% 물리 피해이며 최대 5명을 맞힙니다. 시전당 1회, 2초에 1회입니다.",
+            "en": "For 6 seconds after Retreat, A01/A02 casts create one echo after 0.25 seconds with the same origin, direction, and shape. It deals 70% D physical damage per target to at most five targets. Once per cast with a 2-second cooldown."
+          },
+          "parameters": {
+            "durationSeconds": 6,
+            "delaySeconds": 0.25,
+            "damageDPct": 70,
+            "maxTargets": 5,
+            "internalCooldownSeconds": 2
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "무광 남보라색 천과 흑요석, 훈연한 은을 사용합니다. 어긋난 두 초승달과 눈을 가린 좁은 틈을 반복하며, 긴 비대칭 가장자리로 지연된 그림자 사격을 암시합니다.",
+        "en": "Use matte indigo cloth, obsidian and smoked silver. Repeat two offset crescents and a blind narrow slit, with long asymmetric edges suggesting a delayed shadow shot."
+      },
+      "emblemSubject": "a single blind obsidian mask sliver paired with two offset smoked-silver crescents, fused as one asymmetric shadow emblem",
+      "pieceSubjects": {
+        "REF_SA08_P01": "an asymmetric obsidian bow with two offset smoked-silver crescent limbs and a blind narrow slit at the grip",
+        "REF_SA08_P02": "a long indigo ranger hood with a blind obsidian face guard and two offset silver crescents",
+        "REF_SA08_P03": "an asymmetric indigo ranger cuirass with long layered cloth, a blind narrow chest slit and offset silver crescents",
+        "REF_SA08_P04": "a pair of slim indigo gloves with long asymmetric smoked-silver cuffs bearing two offset crescents",
+        "REF_SA08_P05": "a pair of slim indigo boots with asymmetric folded shafts and offset smoked-silver crescents",
+        "REF_SA08_P06": "a blind obsidian sliver pendant held between two offset silver crescents on a short indigo cord"
+      },
+      "sharedEmblemForEffectIds": [
+        "REF_SA08_B2",
+        "REF_SA08_B4",
+        "REF_SA08_B6"
+      ]
+    }
+  ]
+}

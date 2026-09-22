@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "DES_LA44",
+  "name": {
+    "ko": "갈라진 독니",
+    "en": "Forked Fang"
+  },
+  "heroClass": "Ranger",
+  "slot": 6,
+  "slotName": "necklace",
+  "effectSummary": {
+    "ko": "자신의 독화살 독이 남은 첫 대상에게 갈라지는 화살을 맞히면 분열 화살의 대상 수가 2명에서 3명으로 늘어납니다. 분열 화살은 D50%를 유지하고 독·표식·그림자 충전을 복제하지 않습니다.",
+    "en": "If Forking Arrow's first target has your Venom Arrow poison, increase its secondary target count from 2 to 3. Secondary arrows remain D50% and copy no poison, mark or shadow charge."
+  },
+  "directSkillIds": [
+    "A13",
+    "A14"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "A13",
+      "name": {
+        "ko": "독화살",
+        "en": "Venom Arrow"
+      },
+      "description": {
+        "ko": "10m 안의 적 하나에게 D80% 물리 직접 피해와 4초간 총 D100% 독 피해를 줍니다. 같은 기술의 독은 강한 잔여량만 유지합니다.",
+        "en": "Deal D80% direct physical damage and D100% poison damage over 4s to one enemy within 10m. Keep only the greater remaining total for this skill's poison ledger."
+      }
+    },
+    {
+      "id": "A14",
+      "name": {
+        "ko": "갈라지는 화살",
+        "en": "Forking Arrow"
+      },
+      "description": {
+        "ko": "10m 안의 첫 적에게 D100% 물리 직접 피해를 줍니다. 적중 후 주변 3m의 서로 다른 적 2명에게 D50% 추가 화살을 보냅니다. 첫 대상 재방문과 재분열은 불가합니다.",
+        "en": "Deal D100% direct physical damage to a first target within 10m, then send D50% secondary arrows to 2 different enemies within 3m. No return to the first target or repeated splitting."
+      }
+    }
+  ],
+  "sourceStatus": "design_only",
+  "sourceRuntimeEnabled": false,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/DES_LA44.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/DES_LA44.png",
+  "concept": "A necklace bearing one large ivory viper fang split into three short pointed silver-tipped prongs near the bottom, a deep green resin channel down its center and a short tarnished chain. Clear forked tangible pendant; no snake or projectile.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/DES_LA44.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: DES_LA44, Forked Fang, class Ranger, slot necklace.\nSubject design: A necklace bearing one large ivory viper fang split into three short pointed silver-tipped prongs near the bottom, a deep green resin channel down its center and a short tarnished chain. Clear forked tangible pendant; no snake or projectile.\nPower that informs materials and structure, not a spell illustration: If Forking Arrow's first target has your Venom Arrow poison, increase its secondary target count from 2 to 3. Secondary arrows remain D50% and copy no poison, mark or shadow charge.\nDirect skill context: A13 Venom Arrow — Deal D80% direct physical damage and D100% poison damage over 4s to one enemy within 10m. Keep only the greater remaining total for this skill's poison ledger.; A14 Forking Arrow — Deal D100% direct physical damage to a first target within 10m, then send D50% secondary arrows to 2 different enemies within 3m. No return to the first target or repeated splitting.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-a461e63a-6cbf-4fb6-9431-a7525052e7ab.png",
+    "sourceSha256": "07856be6850ba994c53523e063f0d63a82bb148485f1d9e338cb0d21020c74d0",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-a461e63a-6cbf-4fb6-9431-a7525052e7ab.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:52:48.053398+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "8a0cea2746fb38da19fc4563d8d13ddeab736ae4acb7090065ad49a5ef4ee0b2",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "07856be6850ba994c53523e063f0d63a82bb148485f1d9e338cb0d21020c74d0",
+    "nativeAlpha": true,
+    "transparentPixels": 1343710,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 228806,
+    "nearlyOpaquePixels": 180623,
+    "alphaBoundingBox": [
+      57,
+      19,
+      1230,
+      1228
+    ],
+    "alpha16BoundingBox": [
+      282,
+      122,
+      1002,
+      1116
+    ],
+    "transparentPixelFraction": 0.8544968699841528,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-005.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-005-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝은 바탕과 어두운 바탕의 64px 축소본 및 원본 해상도 가장자리를 확인했습니다. 부위와 항목별 구조를 구분할 수 있고 잘림과 눈에 띄는 배경 테두리가 없습니다.",
+      "en": "Three ivory fang prongs and the sealed green channel remain distinct at 64px. Inspected native-resolution edges and actual 64px samples on dark/light backgrounds."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

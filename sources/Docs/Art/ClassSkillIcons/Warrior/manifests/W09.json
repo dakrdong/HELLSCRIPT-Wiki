@@ -1,0 +1,95 @@
+{
+  "id": "W09",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "찢어낸 상처",
+    "en": "Raking Wound"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W09.png",
+  "effectSummary": {
+    "ko": "전방 3m·90도 안의 최대 5명에게 D50% 물리 피해와 4초간 총 D120% 출혈을 줍니다. 자신의 W09 출혈만 강한 잔여량으로 갱신합니다.",
+    "en": "Hit up to 5 enemies in a 3m, 90-degree cone for D50% physical damage and D120% bleed over 4s. Refresh only the W09 ledger, keeping the greater remaining total."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW42"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W09 Raking Wound (active). Gameplay meaning: Hit up to 5 enemies in a 3m, 90-degree cone for D50% physical damage and D120% bleed over 4s. Refresh only the W09 ledger, keeping the greater remaining total.\nSubject and composition: A broad serrated axe edge ripping three long parallel deep-crimson energy gashes through the air. Stylized battle wound symbolism without exposed flesh. Three emphatic cuts and two heavy crimson drops, fan-shaped forward action.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1186727,
+      "alphaBBox": [
+        49,
+        47,
+        1226,
+        1230
+      ],
+      "coreBBox": [
+        133,
+        169,
+        1147,
+        1091
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
+        "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:22:26.945313+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-07b86867-de9e-4f40-ac12-9a32ab45cd9c.png",
+      "sourceSha256": "0092720bb8e531a89b714fcc32f8767ecc26f3168a83fea2a8475843ef5a6426",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W09.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-07b86867-de9e-4f40-ac12-9a32ab45cd9c.png",
+  "sourceSha256": "0092720bb8e531a89b714fcc32f8767ecc26f3168a83fea2a8475843ef5a6426",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W09.png"
+}

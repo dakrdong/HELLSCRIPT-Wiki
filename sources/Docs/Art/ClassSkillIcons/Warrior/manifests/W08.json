@@ -1,0 +1,95 @@
+{
+  "id": "W08",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "꿰뚫는 갈고리",
+    "en": "Impaling Hook"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W08.png",
+  "effectSummary": {
+    "ko": "6m 안의 적 하나에게 D65% 물리 피해를 주고 최대 2m 끌어옵니다. 직접 적중하면 자원 10을 회복합니다. 보스에게는 이동 대신 제압 수치를 줍니다.",
+    "en": "Deal D65% physical damage to one enemy within 6m and pull it up to 2m. Restore 10 resource on a direct hit. Bosses receive stagger credit instead of movement."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW41"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W08 Impaling Hook (active). Gameplay meaning: Deal D65% physical damage to one enemy within 6m and pull it up to 2m. Restore 10 resource on a direct hit. Bosses receive stagger credit instead of movement.\nSubject and composition: One oversized barbed iron hook on a short sweeping chain, point embedded in a dark fragment of armor and pulling it back toward the foreground. Large open S silhouette, clearly inward tugging motion; three or four large chain links only.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1144406,
+      "alphaBBox": [
+        33,
+        19,
+        1220,
+        1254
+      ],
+      "coreBBox": [
+        72,
+        60,
+        1210,
+        1218
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
+        "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:20:12.893058+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-c7fac3c8-1291-4a36-bab8-0b9948f4e5f0.png",
+      "sourceSha256": "53b71df584c166c9ebdc71affe7e62f734b3fdb3c87c026da9bddbe5f6ff8ef3",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W08.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-c7fac3c8-1291-4a36-bab8-0b9948f4e5f0.png",
+  "sourceSha256": "53b71df584c166c9ebdc71affe7e62f734b3fdb3c87c026da9bddbe5f6ff8ef3",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W08.png"
+}

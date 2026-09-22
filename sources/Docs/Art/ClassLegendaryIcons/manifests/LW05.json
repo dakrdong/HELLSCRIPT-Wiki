@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LW05",
+  "name": {
+    "ko": "회전하는 형틀",
+    "en": "Turning Rack"
+  },
+  "heroClass": "Warrior",
+  "slot": 0,
+  "slotName": "weapon",
+  "effectSummary": {
+    "ko": "회오리를 2초 이상 유지하는 동안, 회오리 피해가 별도 전설 가산으로 25% 증가합니다.",
+    "en": "While channeling whirlwind for at least 2s, Whirlwind damage gains +25% in the legendary damage pool."
+  },
+  "directSkillIds": [
+    "W01"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "W01",
+      "name": {
+        "ko": "회오리",
+        "en": "Whirlwind"
+      },
+      "description": {
+        "ko": "주변 적에게 0.25초마다 피해. 이동하며 유지합니다.",
+        "en": "Damages nearby enemies every 0.25 seconds. Can be held while moving."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LW05.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LW05.png",
+  "concept": "A two-handed double-ended war axe with opposed inward-curving heavy blades around a thick central spindle and an iron cage-like guard. Distinct wheel-balanced weapon structure, tarnished steel and dull brass, short enough to read in a square icon; no actual execution rack.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LW05.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LW05, Turning Rack, class Warrior, slot weapon.\nSubject design: A two-handed double-ended war axe with opposed inward-curving heavy blades around a thick central spindle and an iron cage-like guard. Distinct wheel-balanced weapon structure, tarnished steel and dull brass, short enough to read in a square icon; no actual execution rack.\nPower that informs materials and structure, not a spell illustration: While channeling whirlwind for at least 2s, Whirlwind damage gains +25% in the legendary damage pool.\nDirect skill context: W01 Whirlwind — Damages nearby enemies every 0.25 seconds. Can be held while moving.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: square native PNG with real transparent alpha; the built-in 1254 by 1254 output is accepted, and 1024 by 1024 is also accepted. Preserve native pixels and alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Aim to contain the entire subject, including all tips and chain, within the central 76% with generous transparent padding. No part may be clipped or missing. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-927d36fd-f97a-4ff5-ba1d-f11c75ce8723.png",
+    "sourceSha256": "d4ce4f45d1d7d8ad752a31842010049b9d59b31716e04515261136441614ffca",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-927d36fd-f97a-4ff5-ba1d-f11c75ce8723.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:27:53.233426+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "ab010ed089dcaf49fe3dac1cf938f7e15d364a2dd0957801ecfd4ea2ccaca0bb",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "d4ce4f45d1d7d8ad752a31842010049b9d59b31716e04515261136441614ffca",
+    "nativeAlpha": true,
+    "transparentPixels": 1117686,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 454830,
+    "nearlyOpaquePixels": 378264,
+    "alphaBoundingBox": [
+      0,
+      21,
+      1234,
+      1254
+    ],
+    "alpha16BoundingBox": [
+      42,
+      59,
+      1218,
+      1189
+    ],
+    "transparentPixelFraction": 0.71076287936021,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-003.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-003-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝고 어두운 바탕의 64px 축소본과 원본 해상도 가장자리 표본을 직접 확인했습니다. 장비 부위와 항목별 구조를 구분할 수 있으며 잘림과 눈에 띄는 배경 테두리가 없습니다.",
+      "en": "Opposed double-ended axe blades and the spindle cage clearly distinguish the spinning weapon. Inspected actual 64px samples and native-resolution edges on dark/light backgrounds."
+    },
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

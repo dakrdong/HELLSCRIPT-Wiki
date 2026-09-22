@@ -1,0 +1,95 @@
+{
+  "id": "W10",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "피의 회수",
+    "en": "Blood Reclamation"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W10.png",
+  "effectSummary": {
+    "ko": "4m 안의 최대 5명에게 D80% 물리 피해를 주고 자신의 W09 잔여 출혈만 100% 즉시 정산합니다. 정산 대상마다 최대 HP 1%, 시전당 최대 5%를 회복합니다. 세트·장비의 지속 피해는 소비하지 않습니다.",
+    "en": "Deal D80% physical damage to up to 5 enemies within 4m and cash out 100% of only your W09 remaining bleed. Heal 1% maximum HP per cashed-out enemy, up to 5% per cast. Never consume set or item ledgers."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW42"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W10 Blood Reclamation (active). Gameplay meaning: Deal D80% physical damage to up to 5 enemies within 4m and cash out 100% of only your W09 remaining bleed. Heal 1% maximum HP per cashed-out enemy, up to 5% per cast. Never consume set or item ledgers.\nSubject and composition: Several thick crimson droplets being pulled inward along two curved ribbons into a steel-clad open hand cupping a bright red core. Strong converging motion communicates collecting existing wounds into healing. No anatomy gore.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1125663,
+      "alphaBBox": [
+        37,
+        21,
+        1240,
+        1230
+      ],
+      "coreBBox": [
+        204,
+        115,
+        1135,
+        1191
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
+        "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:22:27.112515+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-14ac4a3c-f67a-4cba-b60b-a14cbc9241b8.png",
+      "sourceSha256": "c687a07a8986d38eeb9661295cca5d9b285db4adc315e435c953446ea4a444a7",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W10.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-14ac4a3c-f67a-4cba-b60b-a14cbc9241b8.png",
+  "sourceSha256": "c687a07a8986d38eeb9661295cca5d9b285db4adc315e435c953446ea4a444a7",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W10.png"
+}

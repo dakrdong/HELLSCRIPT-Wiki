@@ -1,0 +1,108 @@
+{
+  "id": "WP06",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "처형자의 눈",
+    "en": "Executioner's Eye"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP06.png",
+  "effectSummary": {
+    "ko": "HP가 30% 이하인 적에게 가산 피해 +20%를 적용합니다.",
+    "en": "Adds +20% damage against enemies at or below 30% HP."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW03",
+    "LW13",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW23",
+    "LW24",
+    "LW25",
+    "LW26",
+    "LW27",
+    "LW28",
+    "LW39"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP06 Executioner's Eye (passive). Gameplay meaning: Adds +20% damage against enemies at or below 30% HP.\nSubject and composition: PASSIVE EMBLEM: a fierce gold eye under an angular blackened iron executioner brow, with one small downward crimson blade-shaped tear. Dominant horizontal eye and very sharp pointed lower accent symbolize seeking weakened enemies.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1211547,
+      "alphaBBox": [
+        19,
+        40,
+        1204,
+        1222
+      ],
+      "coreBBox": [
+        117,
+        129,
+        1138,
+        1125
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "가로로 넓은 황금 눈과 아래의 작은 붉은 칼날이 또렷하게 구분됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "A wide golden eye and small crimson downward blade remain distinct. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:42:03.746416+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-f094897b-b617-447d-9164-24e633932736.png",
+      "sourceSha256": "92f9ceae319bd3deaa6c6a1e640ac9487652f547cc05c8aaae737ea8b896301d",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP06.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-f094897b-b617-447d-9164-24e633932736.png",
+  "sourceSha256": "92f9ceae319bd3deaa6c6a1e640ac9487652f547cc05c8aaae737ea8b896301d",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP06.png"
+}

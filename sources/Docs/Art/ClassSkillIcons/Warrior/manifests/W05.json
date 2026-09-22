@@ -1,0 +1,99 @@
+{
+  "id": "W05",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "철벽",
+    "en": "Iron Wall"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W05.png",
+  "effectSummary": {
+    "ko": "최대 HP 30% 보호막을 4초 유지합니다.",
+    "en": "Holds a shield worth 30% of max HP for 4 seconds."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Shield"
+  ],
+  "equipmentIds": [
+    "LW29",
+    "LW30",
+    "LW32",
+    "LW31"
+  ],
+  "setIds": [
+    "REF_SW02"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W05 Iron Wall (active). Gameplay meaning: Holds a shield worth 30% of max HP for 4 seconds.\nSubject and composition: A large convex iron kite shield with thick blackened steel face and luminous pale-gold protective outer facets, three clear reinforcing ribs. A strong upright uninterrupted silhouette embodying a temporary barrier, not a UI frame.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 881829,
+      "alphaBBox": [
+        0,
+        47,
+        1249,
+        1254
+      ],
+      "coreBBox": [
+        167,
+        78,
+        1114,
+        1156
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 밝은/어두운 배경의 64px 미리보기를 직접 확인했습니다. 주된 동작과 실루엣을 구별할 수 있으며, 잘림·불투명 바탕·눈에 띄는 매트나 헤일로가 없습니다.",
+        "en": "Reviewed the original and 64px previews on dark and light backgrounds. Primary actions and silhouettes are distinct, with no visible clipping, opaque backdrop, matte or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:13:14.791314+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-06014a3c-fd74-4c05-93a3-a85987b47c34.png",
+      "sourceSha256": "fdfa30aa75d1f01af2bd2ee97f0c7d480438b9f6c1c18fa7323a378154c699eb",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W05.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-06014a3c-fd74-4c05-93a3-a85987b47c34.png",
+  "sourceSha256": "fdfa30aa75d1f01af2bd2ee97f0c7d480438b9f6c1c18fa7323a378154c699eb",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W05.png"
+}

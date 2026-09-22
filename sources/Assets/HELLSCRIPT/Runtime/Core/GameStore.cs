@@ -47,7 +47,9 @@ namespace Hellscript
                 if(!File.Exists(file))return null;var a=JsonUtility.FromJson<AccountSave>(File.ReadAllText(file));
                 if(a!=null&&a.schema>MaximumSchemaVersion)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
                 if(a==null||a.schema<1||a.heroes==null||a.heroes.Count!=3||a.cores==null||a.cores.Length!=8)return null;
-                if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>30))return null;
+                if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>40))return null;
+                if(a.heroes.Any(h=>h.level>ClassSkills.LevelCap(h)||!ClassSkillLoadout.IsAbsent(h.build.classSkills)&&!ClassSkills.Enabled(h)))
+                    throw new NotSupportedException("This save requires the class-skill release. The original file is preserved.");
                 Normalize(a);
                 if(a.schema>=2)
                 {
@@ -118,7 +120,14 @@ namespace Hellscript
                 HuntEdictV2Storage.Normalize(h);
                 NormalizePresetSlots(h);
                 HuntEdictStorage.Normalize(h);
+                if(ClassSkillLoadout.IsAbsent(h.build.classSkills))h.build.classSkills=null;
+                else
+                {
+                    try{ClassSkillLoadout.Validate(h.build.classSkills,h);h.build.classSkills.ProjectLegacy(h.build,null);a.schema=Math.Max(a.schema,7);}
+                    catch(Exception error){throw new NotSupportedException("Unsupported class-skill save; the original file is preserved.",error);}
+                }
             }
+            if(a.suspendedRun!=null)ClassSkillPersistence.ValidateRun(a.suspendedRun,a.heroes.Single(h=>h.id==a.suspendedRun.heroId));
             RepeatHunt.Normalize(a);
             EquipmentShop.Normalize(a);
         }
@@ -134,7 +143,13 @@ namespace Hellscript
                 // JsonUtility can materialize null as a default BuildConfig. Persist absence explicitly instead.
                 if(!BuildEditing.HasPreset(preset)||emptyLegacy||preset.rules==null||string.IsNullOrEmpty(preset.name)&&string.IsNullOrEmpty(preset.version))
                     hero.presets[n]=new BuildConfig{emptySlot=true,name="",version=""};
-                else BehaviorRules.Normalize(preset);
+                else
+                {
+                    BehaviorRules.Normalize(preset);
+                    if(ClassSkillLoadout.IsAbsent(preset.classSkills))preset.classSkills=null;
+                    else try{preset.classSkills=ClassSkillLoadout.Canonical(preset.classSkills);}
+                    catch(Exception error){throw new NotSupportedException("Unsupported skill preset; original preserved.",error);}
+                }
             }
             while(hero.presets.Count<HuntEdict.PresetSlots)hero.presets.Add(new BuildConfig{emptySlot=true,name="",version=""});
         }
@@ -306,7 +321,15 @@ namespace Hellscript
                 GemInventory.Normalize(data);data.schema=MaximumSchemaVersion;
                 ContentUnlocks.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
-                foreach(var hero in data.heroes)NormalizePresetSlots(hero);
+                foreach(var hero in data.heroes)
+                {
+                    NormalizePresetSlots(hero);
+                    if(!ClassSkillLoadout.IsAbsent(hero.build.classSkills))ClassSkillLoadout.Validate(hero.build.classSkills,hero);
+                }
+                // JsonUtility can materialize an absent optional run as an empty object.
+                // Only the new ID-bearing runtime requires this additional ownership check.
+                if(data.suspendedRun?.build!=null&&!ClassSkillLoadout.IsAbsent(data.suspendedRun.build.classSkills))
+                    ClassSkillPersistence.ValidateRun(data.suspendedRun,data.heroes.Single(h=>h.id==data.suspendedRun.heroId));
                 // A schema boundary also protects historical quality when every owned bag is empty.
                 foreach(var item in PersistedItems(data))
                 {

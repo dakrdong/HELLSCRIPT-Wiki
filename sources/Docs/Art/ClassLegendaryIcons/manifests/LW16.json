@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LW16",
+  "name": {
+    "ko": "침묵시키는 낙하",
+    "en": "Silencing Descent"
+  },
+  "heroClass": "Warrior",
+  "slot": 1,
+  "slotName": "head armor",
+  "effectSummary": {
+    "ko": "도약 내려찍기 효과 실행 시, 자신 중심 3m 안의 적 최대 5명에게 1초 동안 기절을 적용합니다. 재발동 간격은 8초입니다.",
+    "en": "On Leap release, apply stun to up to 5 enemies within 3m of you for 1s. Internal cooldown: 8s."
+  },
+  "directSkillIds": [
+    "W02"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "W02",
+      "name": {
+        "ko": "도약 내려찍기",
+        "en": "Leap Slam"
+      },
+      "description": {
+        "ko": "유효한 위치로 도약해 착지 충격을 줍니다.",
+        "en": "Leaps to a valid spot and deals impact damage on landing."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LW16.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LW16.png",
+  "concept": "One enclosed drop-shaped warrior helmet with a heavy downward-pointed brow, narrow dark visor and a thick bell-like lower rim. Muted blackened steel and worn brass cheek plates. Weighted silent falling silhouette, no head inside.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LW16.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LW16, Silencing Descent, class Warrior, slot head armor.\nSubject design: One enclosed drop-shaped warrior helmet with a heavy downward-pointed brow, narrow dark visor and a thick bell-like lower rim. Muted blackened steel and worn brass cheek plates. Weighted silent falling silhouette, no head inside.\nPower that informs materials and structure, not a spell illustration: On Leap release, apply stun to up to 5 enemies within 3m of you for 1s. Internal cooldown: 8s.\nDirect skill context: W02 Leap Slam — Leaps to a valid spot and deals impact damage on landing.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-67af84e6-8b0d-47bb-95fd-47651977b8bb.png",
+    "sourceSha256": "02d246c6d89a4a32c87e572a302ddb36c9c33de4a321c72a1a4b45db9bbcc832",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-67af84e6-8b0d-47bb-95fd-47651977b8bb.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:02:13.249107+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "1c67ee8322b8b80a549311f1a4fb1427439ea8c874f36fae31433a4daa718b26",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "02d246c6d89a4a32c87e572a302ddb36c9c33de4a321c72a1a4b45db9bbcc832",
+    "nativeAlpha": true,
+    "transparentPixels": 1141510,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 431006,
+    "nearlyOpaquePixels": 414270,
+    "alphaBoundingBox": [
+      33,
+      21,
+      1230,
+      1254
+    ],
+    "alpha16BoundingBox": [
+      270,
+      107,
+      1017,
+      1130
+    ],
+    "transparentPixelFraction": 0.7259131226645706,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-006.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-006-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝은 바탕과 어두운 바탕의 64px 표본에서 부위와 실루엣을 확인했습니다. 원본 해상도 가장자리 표본에서 불필요한 테두리나 배경 잔여물, 형태 잘림이 보이지 않습니다.",
+      "en": "A pointed closed helm with a narrow eye slit reads clearly. Dark/light 64px samples and native edge crops reviewed; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

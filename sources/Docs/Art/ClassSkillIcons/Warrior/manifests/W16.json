@@ -1,0 +1,97 @@
+{
+  "id": "W16",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "수호의 맹약",
+    "en": "Guardian's Vow"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W16.png",
+  "effectSummary": {
+    "ko": "최대 HP 12% 보호막을 5초간 얻고 현재 걸린 둔화·속박을 제거합니다. 이후 2초간 둔화·속박에 면역입니다. 철벽 시전으로 처리하지 않습니다.",
+    "en": "Gain a 12% maximum-HP barrier for 5s and remove current slow and root effects. Become immune to slow and root for 2s. This does not cast Iron Wall."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW45",
+    "LW31",
+    "LW32"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W16 Guardian's Vow (active). Gameplay meaning: Gain a 12% maximum-HP barrier for 5s and remove current slow and root effects. Become immune to slow and root for 2s. This does not cast Iron Wall.\nSubject and composition: A thick steel gauntlet clenched over the heart, protected by a small pale-gold shield of light while two broken restraint chains fly apart below. The vow visibly frees the warrior from bonds; compact vertical triangular silhouette.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1045249,
+      "alphaBBox": [
+        0,
+        19,
+        1224,
+        1254
+      ],
+      "coreBBox": [
+        198,
+        114,
+        1070,
+        1137
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "가슴에 댄 손, 보호막과 끊어진 사슬이 보이며 단독 방패인 W05와 구별됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Hand over chest, barrier and broken chains distinguish it from the single shield in W05. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:31:26.088829+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-7f7687b5-a871-4811-bdd0-bd440a4e87dd.png",
+      "sourceSha256": "962b6596389bad6d1d289c33d7f0a98f2ff5dd5c9d437dff24589560340f333f",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W16.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-7f7687b5-a871-4811-bdd0-bd440a4e87dd.png",
+  "sourceSha256": "962b6596389bad6d1d289c33d7f0a98f2ff5dd5c9d437dff24589560340f333f",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W16.png"
+}

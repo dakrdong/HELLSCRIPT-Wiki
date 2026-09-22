@@ -1,0 +1,101 @@
+{
+  "id": "WP14",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "전장의 압력",
+    "en": "Battlefield Pressure"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP14.png",
+  "effectSummary": {
+    "ko": "제어 상태인 적에게 일반 액티브가 처음 직접 적중하면 장착한 지면 강타의 남은 쿨타임을 0.5초 줄입니다. 2초 간격이며 0 아래로 줄이지 않습니다.",
+    "en": "The first direct normal-active hit on a controlled enemy reduces equipped Slam's remaining cooldown by 0.5s. A 2s interval applies; never reduce below zero."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW23",
+    "LW24",
+    "LW25",
+    "LW26",
+    "LW27",
+    "DES_LW44"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP14 Battlefield Pressure (passive). Gameplay meaning: The first direct normal-active hit on a controlled enemy reduces equipped Slam's remaining cooldown by 0.5s. A 2s interval applies; never reduce below zero.\nSubject and composition: PASSIVE EMBLEM: one iron mailed fist pressing down on a bound dark helmet, with two small ochre pressure wedges tightening inward. Weight, control and readiness symbolized in a simple squat stack. No clock face or numbers.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1071789,
+      "alphaBBox": [
+        29,
+        21,
+        1196,
+        1254
+      ],
+      "coreBBox": [
+        165,
+        119,
+        1132,
+        1130
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-01.png",
+    "visualReview": {
+      "ko": "묶인 투구를 누르는 건틀릿과 안쪽 압력 표시가 64px에서 식별됩니다. 실제 가장자리 잘림은 없습니다.",
+      "en": "The gauntlet pressing a bound helmet and inward pressure marks are identifiable at 64px, with no visible clipping."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:22:41.628330+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-ffb00d2b-0fe1-44c4-a7b9-3f31ab9a990b.png",
+      "sourceSha256": "820d06d19ebe4f20fe68fdfb92c1262c766143bed93ace3924c27edda4b20520",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP14.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-ffb00d2b-0fe1-44c4-a7b9-3f31ab9a990b.png",
+  "sourceSha256": "820d06d19ebe4f20fe68fdfb92c1262c766143bed93ace3924c27edda4b20520",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP14.png"
+}

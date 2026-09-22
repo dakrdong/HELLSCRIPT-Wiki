@@ -1,0 +1,58 @@
+{
+  "sourceWorkspace": "/Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT",
+  "sourceReadOnly": true,
+  "inputs": {
+    "legendaries.json": "3a252b0628a0047116decfe284d7a6f7d05db68454688d80bca019182c766001",
+    "skills.json": "e326808204ea2e055444ff5aadb504adbb48a39129d914826bdcad53f5c204c7",
+    "legendaries.revision-1.json": "80cd482cd6b3b72692555a9d182a74def90d2916e337e2dadb47ed3960fd4544",
+    "Class_Legendary_Handoff.md": "d611a706e89edfd17561ac967ec346f7ca948b851e2ffa760ac23bfb614146ab"
+  },
+  "styleReferences": [
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/EquipmentAtlas.png",
+      "sha256": "6030455d309fdf71821c96fa45f322627788564bfe3f5bf8e242fcbdf9cb46e5",
+      "inspectedWith": "view_image",
+      "role": "style_only"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/GlobalHUD/passive-WP04.png",
+      "sha256": "edee3bcdebe138730a40debf4ce95e8cd3ec23a65f210db5c243ffee574453f2",
+      "inspectedWith": "view_image",
+      "role": "style_only"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/GlobalHUD/passive-AP03.png",
+      "sha256": "12e5864fcfd34466183c6a53a6318a89cd23d955d64310df5ec26b413498550a",
+      "inspectedWith": "view_image",
+      "role": "style_only"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/class-skill-runtime/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/GlobalHUD/passive-MP01.png",
+      "sha256": "f748f7e2bad12eb3c3038846f92e697d2364e9da7f144b95fc2bfcd192977a45",
+      "inspectedWith": "view_image",
+      "role": "style_only"
+    }
+  ],
+  "styleDecision": {
+    "ko": "EquipmentAtlas의 마모된 금속·가죽과 방향성 명암을 참고한다. GlobalHUD의 작은 크기 가독성은 유지하되 패널·마름모 바탕은 포함하지 않는다.",
+    "en": "Use EquipmentAtlas weathered metal/leather and directional contrast. Preserve GlobalHUD small-size legibility without its panels or diamond backplates."
+  },
+  "effectRevisions": [
+    {
+      "id": "DES_LM44",
+      "sourceThreadId": "01a0c6d5-75e8-7a32-9993-499d9b2001c9",
+      "previousDescription": {
+        "ko": "자신의 균열 결계 안에서 마력 회수의 마지막 회복 틱까지 마치면 최대 HP 10% 보호막을 4초간 얻습니다. 집중 중단·교체·장면 종료는 보상을 주지 않습니다.",
+        "en": "Completing Mana Reclaim's final restoration tick inside your Rift Ward grants a 10% maximum-HP barrier for 4s. Interruption, replacement or scene exit grants none."
+      },
+      "currentDescription": {
+        "ko": "마력 회수를 1.5초 이상 중단 없이 유지하고 자신의 균열 결계 안에 있으면 최대 HP 10% 보호막을 4초간 얻습니다. 재발동 간격은 6초입니다. 충전 재시작으로 이 간격을 초기화하지 않습니다.",
+        "en": "After channeling Mana Reclaim uninterrupted for at least 1.5s inside your own Rift Ward, gain a 10% maximum-health shield for 4s. Internal cooldown: 6s; restarting the channel does not reset it."
+      },
+      "artConceptChanged": false
+    }
+  ],
+  "sourceOriginalFileNames": {
+    "Class_Legendary_Handoff.md": "README.md"
+  }
+}

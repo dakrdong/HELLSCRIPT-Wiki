@@ -196,7 +196,7 @@ namespace Hellscript
         public static ItemBaseDefinition Base(string id)=>baseById.TryGetValue(id??"",out var d)?d:throw new InvalidOperationException(Loc.F("알 수 없는 베이스 ID: {0}", id));
         public static ItemBaseDefinition Base(Item item)=>item.contentVersion>0?Base(item.baseId):Bases.Single(b=>b.legacyIndex==item.baseIndex);
         public static AffixDefinition Affix(string id)=>affixById.TryGetValue(id??"",out var d)?d:throw new InvalidOperationException(Loc.F("알 수 없는 접사 ID: {0}", id));
-        public static UniqueItemDefinition Unique(string id)=>uniqueById.TryGetValue(id??"",out var d)?d:null;
+        public static UniqueItemDefinition Unique(string id)=>uniqueById.TryGetValue(id??"",out var d)?d:ClassSkills.Data.gear.FirstOrDefault(g=>g.id==id)?.Item;
         public static int AtlasIndex(Item item)=>Math.Min(23,Base(item).legacyIndex);
         public static float MainValue(Item item)=>GearEnhancement.Value(item);
         public static string Name(Item item)
@@ -292,8 +292,8 @@ namespace Hellscript
             if(rarity==3)
             {
                 var pool=ItemCatalog.Uniques.Where(d=>d.Fits(c,slot)).ToList();
-                var d=uniqueId==null?Pick(pool,x=>x.weight,ref next):pool.SingleOrDefault(x=>x.id==uniqueId);
-                if(d==null)throw new InvalidOperationException("부위·직업에 맞지 않는 고유 장비입니다.");item.special=d.id;
+                var d=uniqueId==null?Pick(pool,x=>x.weight,ref next):ItemCatalog.Unique(uniqueId);
+                if(d==null||!d.Fits(c,slot))throw new InvalidOperationException("부위·직업에 맞지 않는 고유 장비입니다.");item.special=d.id;
             }
             else if(uniqueId!=null)throw new InvalidOperationException("고유 장비는 전설 등급이어야 합니다.");
             item.awakened=ItemQuality.RollAwakening(rarity,riftStage,ref next);

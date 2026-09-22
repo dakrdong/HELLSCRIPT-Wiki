@@ -1,0 +1,110 @@
+{
+  "id": "W03",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "분쇄 일격",
+    "en": "Crushing Blow"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W03.png",
+  "effectSummary": {
+    "ko": "전방의 적에게 강한 물리 피해를 줍니다.",
+    "en": "Deals heavy physical damage to enemies in front."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Crush"
+  ],
+  "equipmentIds": [
+    "LW03",
+    "LW13",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW28",
+    "LW39"
+  ],
+  "setIds": [
+    "REF_SW04",
+    "REF_SW05",
+    "REF_SW06",
+    "REF_SW07",
+    "REF_SW08",
+    "SWB"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W03 Crushing Blow (active). Gameplay meaning: Deals heavy physical damage to enemies in front.\nSubject and composition: One enormous squared steel maul head crushing forward diagonally into three large fractured iron shards. Broad wedge-shaped impact and a single warm white strike highlight. Heavy forward blow, no leap arc or circular sweep.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1019706,
+      "alphaBBox": [
+        41,
+        21,
+        1230,
+        1230
+      ],
+      "coreBBox": [
+        179,
+        159,
+        1102,
+        1108
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 밝은/어두운 배경의 64px 미리보기를 직접 확인했습니다. 주된 동작과 실루엣을 구별할 수 있으며, 잘림·불투명 바탕·눈에 띄는 매트나 헤일로가 없습니다.",
+        "en": "Reviewed the original and 64px previews on dark and light backgrounds. Primary actions and silhouettes are distinct, with no visible clipping, opaque backdrop, matte or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:09:52.689261+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-0b72d71d-727c-4488-97ea-0bc9d465c540.png",
+      "sourceSha256": "c8996fa1aab40319f668b8b5b553b71e6778ac587ac5a036935a1b35b3d7ac15",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W03.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-0b72d71d-727c-4488-97ea-0bc9d465c540.png",
+  "sourceSha256": "c8996fa1aab40319f668b8b5b553b71e6778ac587ac5a036935a1b35b3d7ac15",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W03.png"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "MP11",
+  "heroClass": "Mage",
+  "name": {
+    "ko": "과부하",
+    "en": "Overcharge"
+  },
+  "kind": "passive",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP11.png",
+  "effectSummary": {
+    "ko": "5초 안에 일반 번개 기술을 3회 시전하면 다음 M03·M12의 직접 피해 +15%를 4초간 준비합니다. 완성한 세 번째 시전에 소급하지 않으며 1충전입니다.",
+    "en": "Three normal lightning casts within 5s prepare +15% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, MP11 Overcharge / 과부하, passive.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A dark spiked crystal capacitor swollen with three thick nested white-blue lightning veins, its jagged apex blazing with stored pressure. The asymmetrical saturated core looks fully charged and ready, symbolizing a prepared stronger next lightning hit. Static emblem, no flying spear or active orb satellites.\nEffect context: Three normal lightning casts within 5s prepare +15% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast.\nRelevant equipment linkage: LM04, LM17, LM18, LM19, LM20, LM21, LM22, LM31, DES_LM43. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null,
+    "nativeTransparencyRequired": true
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1153560,
+      "alphaBBox": [
+        57,
+        20,
+        1222,
+        1254
+      ],
+      "coreBBox": [
+        278,
+        41,
+        977,
+        1212
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-04.png",
+    "visualReview": {
+      "ko": "세로 결정 안의 강한 번개 줄기가 64px에서 축적된 전력을 나타냅니다. 끝부분이 화면 가장자리에 닿거나 잘리지 않습니다.",
+      "en": "Strong lightning veins within the vertical crystal convey stored charge at 64px; the tips do not touch the canvas edge or clip."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "reuse": false,
+  "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
+  "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP11.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-474045af-0d68-4056-9e78-b85e0d4c1a5b.png",
+  "sourceSha256": "ecfc16b5d6c9e6f463eb077b81c6a7202001e5fcac92d38cc120e70a88f13d46",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP11.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:43:10.505020+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-474045af-0d68-4056-9e78-b85e0d4c1a5b.png",
+      "sourceSha256": "ecfc16b5d6c9e6f463eb077b81c6a7202001e5fcac92d38cc120e70a88f13d46",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

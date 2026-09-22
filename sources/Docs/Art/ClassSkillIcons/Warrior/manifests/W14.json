@@ -1,0 +1,97 @@
+{
+  "id": "W14",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "전율의 파동",
+    "en": "Tremor Wave"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W14.png",
+  "effectSummary": {
+    "ko": "길이 7m·폭 1m의 파동으로 최대 5명에게 D150% 물리 피해를 주고 3초간 30% 둔화시킵니다. 이동 거리와 공격 범위는 별개입니다.",
+    "en": "Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage and a 30% slow for 3s. Attack reach does not grant movement."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW44",
+    "LW17",
+    "LW24"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W14 Tremor Wave (active). Gameplay meaning: Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage and a 30% slow for 3s. Attack reach does not grant movement.\nSubject and composition: A narrow powerful diagonal wave of three rising jagged stone fins, each larger toward the front, driven by a single bright ochre seam. Long straight piercing tremor motion, transparent void between fragments, no ground or landscape.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1155218,
+      "alphaBBox": [
+        0,
+        53,
+        1222,
+        1226
+      ],
+      "coreBBox": [
+        132,
+        172,
+        1146,
+        1075
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "한 방향으로 커지는 세 바위 날이 일직선의 파동으로 읽히며 원형 강타와 구별됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Three growing stone fins read as a linear wave, distinct from the circular slam. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:28:48.666482+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-46c97634-ffef-4956-8724-849af36af0cf.png",
+      "sourceSha256": "40ab400fd34cffa41a75a22279cec63a360b44e6722149b4e55b48b57b517fb3",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W14.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-46c97634-ffef-4956-8724-849af36af0cf.png",
+  "sourceSha256": "40ab400fd34cffa41a75a22279cec63a360b44e6722149b4e55b48b57b517fb3",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W14.png"
+}

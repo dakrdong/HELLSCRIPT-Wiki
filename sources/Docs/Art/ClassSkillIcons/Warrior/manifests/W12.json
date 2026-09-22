@@ -1,0 +1,95 @@
+{
+  "id": "W12",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "무쇠 자세",
+    "en": "Iron Stance"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W12.png",
+  "effectSummary": {
+    "ko": "4초간 방어 확률 +15%p를 얻습니다. 이 자세 중 방어에 성공하면 전방 3m에 D80% 반격을 가하며 시전당 최대 2회, 1초 간격으로 발동합니다. 반격은 추가 피해입니다.",
+    "en": "Gain +15 percentage points of block chance for 4s. A successful block produces a D80% counter in a 3m front arc, at most twice per stance with a 1s interval. Counters are secondary damage."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW43"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W12 Iron Stance (active). Gameplay meaning: Gain +15 percentage points of block chance for 4s. A successful block produces a D80% counter in a 3m front arc, at most twice per stance with a 1s interval. Counters are secondary damage.\nSubject and composition: Two heavy crossed steel forearm bracers catching an incoming nicked blade; one short amber counterstrike hook snaps back outward from the crossing. Broad close-up block posture, grounded in silhouette without showing any ground.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 823711,
+      "alphaBBox": [
+        0,
+        4,
+        1222,
+        1254
+      ],
+      "coreBBox": [
+        75,
+        78,
+        1199,
+        1183
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
+        "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:25:31.017201+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-6dc702f7-8899-4905-9d41-8af5c60b3d1d.png",
+      "sourceSha256": "cad8dc54e78d8bc186b50228e716e25396afffec56d916becdb860fd055a5974",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W12.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-6dc702f7-8899-4905-9d41-8af5c60b3d1d.png",
+  "sourceSha256": "cad8dc54e78d8bc186b50228e716e25396afffec56d916becdb860fd055a5974",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W12.png"
+}

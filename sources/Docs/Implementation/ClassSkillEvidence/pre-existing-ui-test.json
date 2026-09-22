@@ -1,0 +1,31 @@
+{
+  "test": "Hellscript.Tests.GraphicComponentTests.EveryCustomGraphicBringsItsOwnCanvasRenderer",
+  "status": "pre-existing failure outside the requested non-UI scope",
+  "baselineCommit": "1d3ef1f87fd9459d499e65685db69f46618442e1",
+  "files": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/TitleFrameGraphic.cs": {
+      "types": [
+        "TitleFrameGraphic",
+        "TitleOrnament"
+      ],
+      "sha256": "11ebd5e75ddad50fdad5c071cf2aeba6c2eb0353b7f1943e124f3983e4ebb305",
+      "identicalToBaseline": true
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/CharacterSelectionStage.cs": {
+      "types": [
+        "SelectionGroundShadow",
+        "SelectionRune"
+      ],
+      "sha256": "7f2584da9514c978fed3a0f500c74ce7e060fa41ad82b3b4b0cde0acdb5a155c",
+      "identicalToBaseline": true
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentRevealGraphic.cs": {
+      "types": [
+        "EquipmentRevealGraphic"
+      ],
+      "sha256": "51d9318ce1a56383a5538dfd191acc71b01cbbf79f302c4c99b32a85f3bb126e",
+      "identicalToBaseline": true
+    }
+  },
+  "action": "Preserved UI ownership; no presentation changes made."
+}

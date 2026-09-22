@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LA16",
+  "name": {
+    "ko": "여유로운 사수",
+    "en": "Unhurried Archer"
+  },
+  "heroClass": "Ranger",
+  "slot": 7,
+  "slotName": "finger ring",
+  "effectSummary": {
+    "ko": "자원이 최대치의 75% 이상이면, 다중 사격 자원 소모 감소가 20%p 증가합니다. 전체 감소 상한은 50%입니다.",
+    "en": "While resource is at least 75%, Multi-Shot resource cost reduction gains 20 percentage points, within the overall 50% cap."
+  },
+  "directSkillIds": [
+    "A02"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "A02",
+      "name": {
+        "ko": "다중 사격",
+        "en": "Multishot"
+      },
+      "description": {
+        "ko": "60도 부채꼴로 화살 3발을 발사합니다.",
+        "en": "Fires 3 arrows in a 60 degree arc."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LA16.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LA16.png",
+  "concept": "One delicate but sturdy finger ring with a broad calm oval bezel enclosing three narrow parallel silver reeds, a smooth green stone tucked at their base. Aged bronze band and transparent ring opening. Readable serene archer jewelry.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LA16.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LA16, Unhurried Archer, class Ranger, slot finger ring.\nSubject design: One delicate but sturdy finger ring with a broad calm oval bezel enclosing three narrow parallel silver reeds, a smooth green stone tucked at their base. Aged bronze band and transparent ring opening. Readable serene archer jewelry.\nPower that informs materials and structure, not a spell illustration: While resource is at least 75%, Multi-Shot resource cost reduction gains 20 percentage points, within the overall 50% cap.\nDirect skill context: A02 Multishot — Fires 3 arrows in a 60 degree arc.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-502913a9-c1cc-40e1-ad45-4265700292e3.png",
+    "sourceSha256": "5ddc26ddce07014b1a11b206a565303d33f3c5471c28becbaf0d02c839878407",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-502913a9-c1cc-40e1-ad45-4265700292e3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:22:04.654185+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "c1835c45fd145a8c356577314636ba352d43532a36a1d7398285c97b20e2521d",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "5ddc26ddce07014b1a11b206a565303d33f3c5471c28becbaf0d02c839878407",
+    "nativeAlpha": true,
+    "transparentPixels": 1195792,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 376724,
+    "nearlyOpaquePixels": 357945,
+    "alphaBoundingBox": [
+      55,
+      39,
+      1200,
+      1230
+    ],
+    "alpha16BoundingBox": [
+      286,
+      203,
+      993,
+      999
+    ],
+    "transparentPixelFraction": 0.7604323262847564,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-010.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-010-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px 밝은·어두운 바탕에서 장비 형태와 부위를 확인했습니다. 가는 시위와 끝부분이 유지되며, 원본 가장자리 표본에서 배경 잔여물·불필요한 테두리·잘림이 보이지 않습니다.",
+      "en": "Parallel silver reeds and green stone distinguish the open-center ring. Dark/light 64px samples and native edge crops reviewed; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

@@ -1,0 +1,95 @@
+{
+  "id": "W11",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "결연한 전진",
+    "en": "Resolute Advance"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W11.png",
+  "effectSummary": {
+    "ko": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
+    "en": "Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW43"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W11 Resolute Advance (active). Gameplay meaning: Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit.\nSubject and composition: An armored shoulder and forward-pointing shield surging horizontally through a short wedge of warm steel motion strokes. Low resolute charge with a trailing cloak fragment and a firm protected silhouette. No jumping arc.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 880511,
+      "alphaBBox": [
+        0,
+        19,
+        1222,
+        1254
+      ],
+      "coreBBox": [
+        78,
+        196,
+        1211,
+        1114
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
+        "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:25:30.829563+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-7ab2a2b4-6e56-461d-8386-2b86dafa177d.png",
+      "sourceSha256": "60bb02a85709ad4819cecb5ff167e0f3f8ff725c2e79242289730a489f68c93c",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W11.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-7ab2a2b4-6e56-461d-8386-2b86dafa177d.png",
+  "sourceSha256": "60bb02a85709ad4819cecb5ff167e0f3f8ff725c2e79242289730a489f68c93c",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W11.png"
+}

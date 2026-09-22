@@ -1,0 +1,127 @@
+{
+  "id": "AP08",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "사냥감의 발자취",
+    "en": "Quarry Tracks"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP08.png",
+  "effectSummary": {
+    "ko": "관측한 중독 적이 10m 안에 있으면 이동속도가 10% 증가합니다. 시야 밖의 적 위치를 알아내는 기능은 제공하지 않습니다.",
+    "en": "Gain 10% movement speed while an observed poisoned enemy is within 10m. This does not reveal enemies outside observation."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LA03",
+    "LA17",
+    "LA18",
+    "LA19",
+    "LA20",
+    "LA21",
+    "LA22",
+    "LA26",
+    "DES_LA44"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring tracking emblem: a pair of broad clawed prey tracks made from aged bone, with a thin viridian venom stain in their centers and one small pale wind notch. Two separated readable footprints imply moving faster near observed poisoned prey; no ground map.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP08 Quarry Tracks. Skill type: passive. Effect: Gain 10% movement speed while an observed poisoned enemy is within 10m. This does not reveal enemies outside observation. Tags: Passive. Linked equipment IDs for identity context only: LA03, LA17, LA18, LA19, LA20, LA21, LA22, LA26, DES_LA44. Subject and composition: An enduring tracking emblem: a pair of broad clawed prey tracks made from aged bone, with a thin viridian venom stain in their centers and one small pale wind notch. Two separated readable footprints imply moving faster near observed poisoned prey; no ground map. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-414e70f1-1966-408a-abbb-59bccce1f0f3.png",
+    "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP08.png",
+    "sourceSha256": "466ef4a91b996f7e8a9a087f55b63c4f12a91183dd2b8112ac132d9a4b716d7e",
+    "modelEvidence": "Tool returned only image_url and output_hint; model not exposed."
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pass",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1275752,
+      "alphaBBox": [
+        27,
+        19,
+        1234,
+        1230
+      ],
+      "coreBBox": [
+        271,
+        238,
+        1011,
+        1008
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "mode": "RGBA",
+    "rawSize": [
+      1254,
+      1254
+    ],
+    "dimensionPass": true,
+    "fullyTransparentPixels": 1275752,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "alphaBounds": [
+      27,
+      19,
+      1234,
+      1230
+    ],
+    "bboxAlphaGreaterThan16": [
+      264,
+      237,
+      1012,
+      1014
+    ],
+    "central76PercentPass": true,
+    "marginGuideline": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/AP08-64.png",
+    "visual64": "reviewed_pass",
+    "visual64Note": "At64px, two clawed tracks with venom green centers and pale wind accents remain distinct from boots and trap shapes.",
+    "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
+    "reviewedBy": "ranger_icons agent"
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP08.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-414e70f1-1966-408a-abbb-59bccce1f0f3.png",
+  "sourceSha256": "466ef4a91b996f7e8a9a087f55b63c4f12a91183dd2b8112ac132d9a4b716d7e",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP08.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP08.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:38:53.757514+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-414e70f1-1966-408a-abbb-59bccce1f0f3.png",
+      "sourceSha256": "466ef4a91b996f7e8a9a087f55b63c4f12a91183dd2b8112ac132d9a4b716d7e",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

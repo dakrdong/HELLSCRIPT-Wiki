@@ -1,0 +1,95 @@
+{
+  "id": "W18",
+  "heroClass": "Warrior",
+  "kind": "ultimate",
+  "name": {
+    "ko": "거인의 심판",
+    "en": "Titan's Judgment"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W18.png",
+  "effectSummary": {
+    "ko": "0.9초 준비 후 4m 안의 최대 8명에게 D600% 물리 피해와 2초 기절을 줍니다. 이후 6초간 분쇄 일격·지면 강타의 직접 피해가 가산 25% 증가합니다. 보스 기절은 제압 수치로 바꿉니다.",
+    "en": "After a 0.9s wind-up, deal D600% physical damage and a 2s stun to up to 8 enemies within 4m. For 6s, Crush and Slam gain +25% additive direct damage. Boss stun becomes stagger credit."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Ultimate"
+  ],
+  "equipmentIds": [
+    "DES_LW46"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W18 Titan's Judgment (ultimate). Gameplay meaning: After a 0.9s wind-up, deal D600% physical damage and a 2s stun to up to 8 enemies within 4m. For 6s, Crush and Slam gain +25% additive direct damage. Boss stun becomes stagger credit.\nSubject and composition: ULTIMATE: one colossal ancient iron warhammer descending head-first through a broad crown-shaped burst of ochre force and three immense floating cracked slabs. Overwhelming central hammer mass, brilliant compact impact core and heavy black-gold contrast, no floor or scene.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 668648,
+      "alphaBBox": [
+        0,
+        21,
+        1234,
+        1254
+      ],
+      "coreBBox": [
+        66,
+        39,
+        1199,
+        1224
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "수직으로 내려오는 거대 망치와 넓은 충격이 보입니다. 대각선의 W03보다 중심 덩어리가 커 궁극기로 구분됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "A descending vertical titan hammer and broad impact create a larger central mass than diagonal W03. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:34:10.312080+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-e4f020fa-a311-46ac-b54d-26f11790bf6b.png",
+      "sourceSha256": "e99b9619530b0bdeb385edd4e39e610b672328a6d946da9b48a298b926ca5851",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W18.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-e4f020fa-a311-46ac-b54d-26f11790bf6b.png",
+  "sourceSha256": "e99b9619530b0bdeb385edd4e39e610b672328a6d946da9b48a298b926ca5851",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W18.png"
+}

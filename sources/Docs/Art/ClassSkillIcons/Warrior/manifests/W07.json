@@ -1,0 +1,96 @@
+{
+  "id": "W07",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "도발의 낙인",
+    "en": "Brand of Challenge"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W07.png",
+  "effectSummary": {
+    "ko": "8m 안의 적 하나에게 6초간 전사 표식을 남기고 자원 10을 회복합니다. 그 적에게 받는 피해가 10% 감소합니다. 표식은 피해 증가를 따로 주지 않으며 전사의 Marked 조건을 충족합니다. 동시에 하나만 유지합니다.",
+    "en": "Brand one enemy within 8m for 6s and restore 10 resource. Take 10% less damage from that enemy. The brand supplies Marked without a separate damage bonus. Only one Warrior brand may exist."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Normal"
+  ],
+  "equipmentIds": [
+    "DES_LW41",
+    "LW22"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W07 Brand of Challenge (active). Gameplay meaning: Brand one enemy within 8m for 6s and restore 10 resource. Take 10% less damage from that enemy. The brand supplies Marked without a separate damage bonus. Only one Warrior brand may exist.\nSubject and composition: An angular red-hot iron challenge brand hovering over one dark enemy helmet, with a short hooked amber stroke locking attention inward. A single imposing pointed sigil built from metal, not any letter or rune text; visual tension and focused challenge.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1033086,
+      "alphaBBox": [
+        0,
+        19,
+        1240,
+        1254
+      ],
+      "coreBBox": [
+        265,
+        42,
+        1071,
+        1200
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
+        "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:20:12.716441+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-04fbb4a4-b300-434a-a64d-f321d91029e8.png",
+      "sourceSha256": "86192ca0f24e64fbb26ad850cb621e43393d9abd5d6a813cfaadcc5d297c0a72",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W07.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-04fbb4a4-b300-434a-a64d-f321d91029e8.png",
+  "sourceSha256": "86192ca0f24e64fbb26ad850cb621e43393d9abd5d6a813cfaadcc5d297c0a72",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W07.png"
+}

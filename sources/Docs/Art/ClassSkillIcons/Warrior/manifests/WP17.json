@@ -1,0 +1,110 @@
+{
+  "id": "WP17",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "결전의 비축",
+    "en": "Battle Reserve"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP17.png",
+  "effectSummary": {
+    "ko": "시전 전 자원이 80% 이상이면 분쇄 일격·지면 강타의 직접 피해가 가산 10% 증가합니다. 자원은 비용 차감 전에 확인합니다.",
+    "en": "Crush and Slam gain +10% additive direct damage when pre-cast resource is at least 80%. Check before paying the cost."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW03",
+    "LW13",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW23",
+    "LW24",
+    "LW25",
+    "LW26",
+    "LW27",
+    "LW28",
+    "LW39",
+    "DES_LW45"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP17 Battle Reserve (passive). Gameplay meaning: Crush and Slam gain +10% additive direct damage when pre-cast resource is at least 80%. Check before paying the cost.\nSubject and composition: PASSIVE EMBLEM: a large sealed iron fighting gauntlet holding a nearly full bright amber core, three heavy knuckle plates like a stored reserve ready for release. Dense rounded core and angular iron contrast; no meter, gauge or text.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 966959,
+      "alphaBBox": [
+        0,
+        21,
+        1222,
+        1254
+      ],
+      "coreBBox": [
+        181,
+        125,
+        1119,
+        1159
+      ]
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ],
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "visualReview": {
+      "ko": "밝은 저장 자원을 쥔 건틀릿이 64px에서 분명합니다. 압박을 나타내는 WP14와 손의 방향과 중심 형태가 다릅니다.",
+      "en": "The gauntlet holding a bright reserve is clear at 64px, with a different orientation and central shape from WP14."
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:27:18.615620+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-63a87fdf-ecd6-48df-bea8-cff9368e0a8f.png",
+      "sourceSha256": "2a416b94f0254487a08d4d2fbcfbdfbf218ffcdf6f302fff56630408ac149ffa",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP17.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-63a87fdf-ecd6-48df-bea8-cff9368e0a8f.png",
+  "sourceSha256": "2a416b94f0254487a08d4d2fbcfbdfbf218ffcdf6f302fff56630408ac149ffa",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP17.png"
+}

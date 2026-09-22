@@ -1,0 +1,101 @@
+{
+  "id": "AP14",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "유인 전술",
+    "en": "Decoy Tactics"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP14.png",
+  "effectSummary": {
+    "ko": "자신의 살아 있는 미끼 3m 안의 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 미끼의 폭발 피해에는 적용하지 않습니다.",
+    "en": "Gain +10% additive normal-active direct damage against enemies within 3m of your living decoy. Does not amplify the decoy's explosion."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "DES_LA43",
+    "DES_LA44"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring decoy tactics emblem: a small pale hooded decoy bust at center is flanked by two inward pointing broad dark arrowheads, creating a deliberate ambush composition. The decoy is a calm carved spectral effigy, no explosion or full battlefield.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP14 Decoy Tactics. Skill type: passive. Effect: Gain +10% additive normal-active direct damage against enemies within 3m of your living decoy. Does not amplify the decoy's explosion. Tags: Passive. Linked equipment IDs for identity context only: DES_LA43, DES_LA44. Subject and composition: An enduring decoy tactics emblem: a small pale hooded decoy bust at center is flanked by two inward pointing broad dark arrowheads, creating a deliberate ambush composition. The decoy is a calm carved spectral effigy, no explosion or full battlefield. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1304722,
+      "alphaBBox": [
+        39,
+        21,
+        1196,
+        1214
+      ],
+      "coreBBox": [
+        245,
+        291,
+        1008,
+        967
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-03.png",
+    "visualReview": {
+      "ko": "밝은 미끼와 양쪽의 안쪽 화살촉이 64px에서 유인 상징으로 구분됩니다.",
+      "en": "The pale decoy and inward arrowheads remain distinguishable as a lure symbol at 64px."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP14.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-e919f522-422e-430e-9abf-460e2810ab4b.png",
+  "sourceSha256": "54fd0383f04f73c98cbaa9744678aa593b5e6518216f924ff0d648e81a3aa5c9",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP14.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP14.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:35:02.847153+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-e919f522-422e-430e-9abf-460e2810ab4b.png",
+      "sourceSha256": "54fd0383f04f73c98cbaa9744678aa593b5e6518216f924ff0d648e81a3aa5c9",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

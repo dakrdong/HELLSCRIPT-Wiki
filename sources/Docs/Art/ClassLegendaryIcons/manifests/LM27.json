@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LM27",
+  "name": {
+    "ko": "틈새의 외투",
+    "en": "Riftwoven Mantle"
+  },
+  "heroClass": "Mage",
+  "slot": 2,
+  "slotName": "torso armor",
+  "effectSummary": {
+    "ko": "순간이동 효과 실행 시, 최대 HP의 10%에 해당하는 보호막을 3초 동안 얻습니다. 재발동 간격은 6초입니다.",
+    "en": "On Teleport release, gain a barrier equal to 10% maximum HP for 3s. Internal cooldown: 6s."
+  },
+  "directSkillIds": [
+    "M04"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "M04",
+      "name": {
+        "ko": "순간이동",
+        "en": "Teleport"
+      },
+      "description": {
+        "ko": "위험이 낮은 유효한 지점으로 이동합니다.",
+        "en": "Moves to a valid spot with less danger."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LM27.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LM27.png",
+  "concept": "A hollow dark violet mage mantle with overlapping offset front panels, a high divided collar and pale silver reinforcing seams bridging the gaps. Worn layered cloth and metal shoulder anchors. One protective garment, no portal or person.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LM27.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LM27, Riftwoven Mantle, class Mage, slot torso armor.\nSubject design: A hollow dark violet mage mantle with overlapping offset front panels, a high divided collar and pale silver reinforcing seams bridging the gaps. Worn layered cloth and metal shoulder anchors. One protective garment, no portal or person.\nPower that informs materials and structure, not a spell illustration: On Teleport release, gain a barrier equal to 10% maximum HP for 3s. Internal cooldown: 6s.\nDirect skill context: M04 Teleport — Moves to a valid spot with less danger.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-48d57fd9-a086-497a-b674-54addab9c6d1.png",
+    "sourceSha256": "a34b9fcfbdc0890db72bedc59b47f5e36c2a92f3cc97cd4f3e0cb7b8dfd10ea1",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-48d57fd9-a086-497a-b674-54addab9c6d1.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:54:51.973013+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "809a4ccab40d22caa61a2b0ffaefdcacc15c44719b58aa4ad574e16f96ced3a8",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "a34b9fcfbdc0890db72bedc59b47f5e36c2a92f3cc97cd4f3e0cb7b8dfd10ea1",
+    "nativeAlpha": true,
+    "transparentPixels": 1019213,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 553303,
+    "nearlyOpaquePixels": 515315,
+    "alphaBoundingBox": [
+      43,
+      21,
+      1218,
+      1190
+    ],
+    "alpha16BoundingBox": [
+      241,
+      115,
+      1013,
+      1138
+    ],
+    "transparentPixelFraction": 0.6481415769378499,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-014.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-014-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px 밝은·어두운 바탕에서 장비의 부위와 구조를 확인했습니다. 원본 가장자리 표본에 배경 잔여물이나 번짐이 없고 장비 끝부분도 유지됩니다.",
+      "en": "The divided collar, offset mantle panels and shoulder plates remain readable. Dark/light 64px samples and native edge crops reviewed; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

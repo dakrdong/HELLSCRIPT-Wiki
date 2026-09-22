@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LM15",
+  "name": {
+    "ko": "얼어붙는 문장",
+    "en": "Freezing Sigil"
+  },
+  "heroClass": "Mage",
+  "slot": 3,
+  "slotName": "gloves or gauntlets",
+  "effectSummary": {
+    "ko": "눈보라 적중 4회마다, 적중 대상에게 1초 동안 빙결을 적용합니다. 재발동 간격은 5초입니다. 적중 집계는 5초 동안 새 적중이 없으면 초기화됩니다.",
+    "en": "After every 4 qualifying Blizzard target hits, apply freeze to the hit target for 1s. Internal cooldown: 5s. The hit count resets after 5s without another counted hit."
+  },
+  "directSkillIds": [
+    "M02"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "M02",
+      "name": {
+        "ko": "눈보라",
+        "en": "Blizzard"
+      },
+      "description": {
+        "ko": "6초간 냉기 피해와 35% 둔화. 최대 2개.",
+        "en": "Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LM15.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LM15.png",
+  "concept": "A compact pair of mage gloves with broad hexagonal ice-stone backplates locked by four visible silver clamps, dark blue cloth fingers and frost-white cuffs. Physical geometric seals with no written glyphs; no floating snowflakes.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LM15.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LM15, Freezing Sigil, class Mage, slot gloves or gauntlets.\nSubject design: A compact pair of mage gloves with broad hexagonal ice-stone backplates locked by four visible silver clamps, dark blue cloth fingers and frost-white cuffs. Physical geometric seals with no written glyphs; no floating snowflakes.\nPower that informs materials and structure, not a spell illustration: After every 4 qualifying Blizzard target hits, apply freeze to the hit target for 1s. Internal cooldown: 5s. The hit count resets after 5s without another counted hit.\nDirect skill context: M02 Blizzard — Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-469ea63d-1f81-4bd5-97f9-a4afe4ea713e.png",
+    "sourceSha256": "6204d1a3b5aac57a3dc5968e2cd1da583a358a653401a03d2601954ffc37ed86",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-469ea63d-1f81-4bd5-97f9-a4afe4ea713e.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:47:36.449017+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "8dbe2f8b30d1da05b0e65ea783f4447c8b49bd7012c6c9bf86f0794c1066cfd9",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "6204d1a3b5aac57a3dc5968e2cd1da583a358a653401a03d2601954ffc37ed86",
+    "nativeAlpha": true,
+    "transparentPixels": 1051435,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 521081,
+    "nearlyOpaquePixels": 489174,
+    "alphaBoundingBox": [
+      57,
+      53,
+      1184,
+      1222
+    ],
+    "alpha16BoundingBox": [
+      158,
+      204,
+      1152,
+      1117
+    ],
+    "transparentPixelFraction": 0.6686323064439408,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-013.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-013-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px 밝은·어두운 바탕에서 부위와 장비 특징을 확인했습니다. 긴 지팡이와 목걸이도 끝부분까지 유지되며, 원본 가장자리 표본에서 배경 잔여물·번짐·잘림이 보이지 않습니다.",
+      "en": "Hexagonal ice plates and cloth fingers distinguish the gloves. Dark/light 64px samples and native edge crops reviewed; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

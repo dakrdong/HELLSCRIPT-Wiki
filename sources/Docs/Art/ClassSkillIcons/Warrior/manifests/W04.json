@@ -1,0 +1,102 @@
+{
+  "id": "W04",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "지면 강타",
+    "en": "Ground Slam"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W04.png",
+  "effectSummary": {
+    "ko": "주변 적에게 피해와 1.5초 기절을 줍니다.",
+    "en": "Damages nearby enemies and stuns them for 1.5 seconds."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Slam"
+  ],
+  "equipmentIds": [
+    "LW23",
+    "LW24",
+    "LW25",
+    "LW26",
+    "LW27",
+    "LW17"
+  ],
+  "setIds": [
+    "REF_SW05",
+    "REF_SW08"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W04 Ground Slam (active). Gameplay meaning: Damages nearby enemies and stuns them for 1.5 seconds.\nSubject and composition: One iron gauntlet punching vertically downward into a squat starburst of floating stone fragments with two wide low ripples radiating outward. Compact radial stun impact; no ground surface and no terrain.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 944022,
+      "alphaBBox": [
+        0,
+        21,
+        1222,
+        1254
+      ],
+      "coreBBox": [
+        80,
+        130,
+        1176,
+        1145
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 밝은/어두운 배경의 64px 미리보기를 직접 확인했습니다. 주된 동작과 실루엣을 구별할 수 있으며, 잘림·불투명 바탕·눈에 띄는 매트나 헤일로가 없습니다.",
+        "en": "Reviewed the original and 64px previews on dark and light backgrounds. Primary actions and silhouettes are distinct, with no visible clipping, opaque backdrop, matte or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:11:42.950598+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-176c2d6f-8e27-4182-a4a1-0c7a6ddb9bdd.png",
+      "sourceSha256": "fd8b32e255ed5fddb41e2bce4da167d27a2b46ec6eb038cd38d8cf70d719441f",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W04.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-176c2d6f-8e27-4182-a4a1-0c7a6ddb9bdd.png",
+  "sourceSha256": "fd8b32e255ed5fddb41e2bce4da167d27a2b46ec6eb038cd38d8cf70d719441f",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W04.png"
+}

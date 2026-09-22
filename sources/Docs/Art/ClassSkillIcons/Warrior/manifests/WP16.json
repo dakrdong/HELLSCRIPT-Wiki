@@ -1,0 +1,107 @@
+{
+  "id": "WP16",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "전열 유지",
+    "en": "Hold Formation"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP16.png",
+  "effectSummary": {
+    "ko": "보호막이 남아 있는 동안 회오리를 유지하면 받는 피해가 8% 감소합니다. 회오리 중단 또는 보호막 소진 시 즉시 해제합니다.",
+    "en": "Take 8% less damage while channeling Whirlwind with an active barrier. End immediately when channeling or the barrier ends."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW01",
+    "LW05",
+    "LW06",
+    "LW07",
+    "LW08",
+    "LW09",
+    "LW10",
+    "LW25",
+    "LW29",
+    "LW30",
+    "LW32",
+    "DES_LW45"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP16 Hold Formation (passive). Gameplay meaning: Take 8% less damage while channeling Whirlwind with an active barrier. End immediately when channeling or the barrier ends.\nSubject and composition: PASSIVE EMBLEM: three overlapping broad steel shield scales sheltering a compact silver whirlwind curl underneath. Stable defensive formation sustaining rotation, clean outer silhouette, gold joining seams and open transparency.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 926722,
+      "alphaBBox": [
+        0,
+        19,
+        1234,
+        1254
+      ],
+      "coreBBox": [
+        143,
+        130,
+        1112,
+        1109
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-02.png",
+    "visualReview": {
+      "ko": "세 방패가 회오리를 감싸는 형태가 64px에서도 읽히며, 방패와 회전의 결합이 다른 전사 패시브와 구분됩니다.",
+      "en": "Three shields sheltering a whirlwind remain legible at 64px; the combination is distinct from the other Warrior passives."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:26:13.199914+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-3ff8e918-eec4-4f8f-b4ff-c87f231e70a4.png",
+      "sourceSha256": "f6744f300f8f4a22c7a7371c0ecc6d21a4c833159da516eb7e5ffcc851ed83ab",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP16.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-3ff8e918-eec4-4f8f-b4ff-c87f231e70a4.png",
+  "sourceSha256": "f6744f300f8f4a22c7a7371c0ecc6d21a4c833159da516eb7e5ffcc851ed83ab",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP16.png"
+}

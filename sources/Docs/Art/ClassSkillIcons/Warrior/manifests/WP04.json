@@ -1,0 +1,111 @@
+{
+  "id": "WP04",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "피의 회복",
+    "en": "Blood Recovery"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP04.png",
+  "effectSummary": {
+    "ko": "처치 시 최대 HP의 2%를 회복합니다. 한 번 발동한 뒤 1초 동안 기다립니다.",
+    "en": "Restores 2% of max HP on a kill, then waits 1 second before it can trigger again."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW01",
+    "LW03",
+    "LW05",
+    "LW06",
+    "LW07",
+    "LW08",
+    "LW09",
+    "LW10",
+    "LW13",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW25",
+    "LW28",
+    "LW39"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP04 Blood Recovery (passive). Gameplay meaning: Restores 2% of max HP on a kill, then waits 1 second before it can trigger again.\nSubject and composition: PASSIVE EMBLEM: one deep red drop nested inside a steel hand-shaped vessel with a warm living ember at its core. Quiet regenerative symbol with bold closed main mass and two large supporting iron fingers. No gore, no medical cross.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1149593,
+      "alphaBBox": [
+        49,
+        57,
+        1134,
+        1198
+      ],
+      "coreBBox": [
+        232,
+        128,
+        1023,
+        1122
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "손 모양의 금속 지지부와 하나의 큰 붉은 방울이 회복 상징으로 읽힙니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "A metal hand-shaped support and one large crimson drop read as recovery. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:42:03.718240+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-5e52b29d-2785-4998-b68b-25c8a7f8cb1c.png",
+      "sourceSha256": "83b816f90d153f1f2a031ac56e39a986e753e4093efe96191a7292ae87d2a126",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP04.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-5e52b29d-2785-4998-b68b-25c8a7f8cb1c.png",
+  "sourceSha256": "83b816f90d153f1f2a031ac56e39a986e753e4093efe96191a7292ae87d2a126",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP04.png"
+}

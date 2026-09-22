@@ -20,7 +20,8 @@ namespace Hellscript
         void AddShield(string definition,float baseAmount,float duration,int root)
         {
             var old=State.shields.Find(s=>s.definitionId==definition);
-            float amount=baseAmount*Stats.shieldMultiplier;
+            float generation=definition=="W05"&&Set("REF_SW02",3)?.25f:definition=="M05"&&Set("REF_SM01",3)?.3f:0;
+            float amount=baseAmount*(Stats.shieldMultiplier+generation);
             if(old!=null)
             {
                 amount=Mathf.Max(amount,old.amount);

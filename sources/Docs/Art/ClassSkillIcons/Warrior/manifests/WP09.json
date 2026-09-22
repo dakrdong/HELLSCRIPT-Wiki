@@ -1,0 +1,97 @@
+{
+  "id": "WP09",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "반격의 호흡",
+    "en": "Counter Rhythm"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP09.png",
+  "effectSummary": {
+    "ko": "적의 공격을 방어하고 생존하면 자원 4를 회복합니다. 1초 간격이며 반격 자체로는 발동하지 않습니다.",
+    "en": "Restore 4 resource after surviving a successful block. A 1s interval applies; counter damage cannot trigger it."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW29",
+    "LW30",
+    "LW32",
+    "DES_LW43"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP09 Counter Rhythm (passive). Gameplay meaning: Restore 4 resource after surviving a successful block. A 1s interval applies; counter damage cannot trigger it.\nSubject and composition: PASSIVE EMBLEM: an iron shield fragment cradling an ember-gold inward spiral like a slow breath, with one short mirrored silver return stroke. Calm recurring resource recovered after a block; static layered mark, no frame.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1059410,
+      "alphaBBox": [
+        0,
+        21,
+        1199,
+        1254
+      ],
+      "coreBBox": [
+        217,
+        102,
+        1056,
+        1130
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "깨진 방패 조각 안의 지속되는 나선과 반사 곡선이 보이며 W05의 철벽과 구별됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "A sustained spiral and return curve inside a shield fragment differ from the solid Iron Wall in W05. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:47:41.530378+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-73d5eab7-17d0-48aa-a428-2203fc2b49fa.png",
+      "sourceSha256": "58914eb81cc50062f942c1b1e07ce40991a9344bef462223d6886f2208bb762d",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP09.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-73d5eab7-17d0-48aa-a428-2203fc2b49fa.png",
+  "sourceSha256": "58914eb81cc50062f942c1b1e07ce40991a9344bef462223d6886f2208bb762d",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP09.png"
+}

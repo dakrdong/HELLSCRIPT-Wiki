@@ -1,0 +1,109 @@
+{
+  "id": "WP08",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "상처 추적",
+    "en": "Wound Tracking"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP08.png",
+  "effectSummary": {
+    "ko": "자신의 W09 또는 붉은 상흔 세트 출혈이 남은 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 다른 물리 지속 피해를 임의로 출혈로 간주하지 않습니다.",
+    "en": "Gain +10% additive normal-active direct damage against enemies with your W09 or Red Scars set bleed. Other physical damage over time is not automatically classified as bleed."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW03",
+    "LW13",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW23",
+    "LW24",
+    "LW25",
+    "LW26",
+    "LW27",
+    "LW28",
+    "LW39",
+    "DES_LW42"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP08 Wound Tracking (passive). Gameplay meaning: Gain +10% additive normal-active direct damage against enemies with your W09 or Red Scars set bleed. Other physical damage over time is not automatically classified as bleed.\nSubject and composition: PASSIVE EMBLEM: a worn steel tracking claw resting across three deep crimson scar-shaped ribbons. Claw and scar form one diagonal symbol of exploiting persistent wounds, static purposeful geometry and large transparent gaps.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1097690,
+      "alphaBBox": [
+        33,
+        19,
+        1234,
+        1222
+      ],
+      "coreBBox": [
+        131,
+        137,
+        1117,
+        1140
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "세 갈래 금속 발톱과 붉은 상흔의 교차 형태로, 도끼가 베는 W09와 구별됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Three metal tracking claws cross crimson scars, distinct from the axe slash in W09. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:47:41.514676+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-109c837f-3507-4d56-8ceb-fc84b6f9715d.png",
+      "sourceSha256": "d363c15efa361b5ee01c7b57aebc7b1d3d4618f7b7a0d90165c14557d30d3db7",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP08.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-109c837f-3507-4d56-8ceb-fc84b6f9715d.png",
+  "sourceSha256": "d363c15efa361b5ee01c7b57aebc7b1d3d4618f7b7a0d90165c14557d30d3db7",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP08.png"
+}

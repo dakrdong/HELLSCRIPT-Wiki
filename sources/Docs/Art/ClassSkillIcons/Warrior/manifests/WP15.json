@@ -1,0 +1,123 @@
+{
+  "id": "WP15",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "무기 연계",
+    "en": "Weapon Sequence"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP15.png",
+  "effectSummary": {
+    "ko": "직전 4초 안에 시전한 것과 다른 일반 공격 스킬을 시전하면 그 시전의 직접 피해가 가산 10% 증가합니다. 기본 공격·궁극기·추가 피해는 기록을 바꾸지 않습니다.",
+    "en": "Casting a different normal offensive skill from the one used within the previous 4s grants that cast +10% additive direct damage. BASIC, ultimates and secondary damage do not update the record."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW01",
+    "LW02",
+    "LW03",
+    "LW04",
+    "LW05",
+    "LW06",
+    "LW07",
+    "LW08",
+    "LW09",
+    "LW10",
+    "LW11",
+    "LW12",
+    "LW13",
+    "LW14",
+    "LW15",
+    "LW16",
+    "LW17",
+    "LW18",
+    "LW19",
+    "LW20",
+    "LW21",
+    "LW22",
+    "LW25",
+    "LW28",
+    "LW37",
+    "LW39",
+    "DES_LW41",
+    "DES_LW44"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP15 Weapon Sequence (passive). Gameplay meaning: Casting a different normal offensive skill from the one used within the previous 4s grants that cast +10% additive direct damage. BASIC, ultimates and secondary damage do not update the record.\nSubject and composition: PASSIVE EMBLEM: one broad sword blade and one square hammer head linked by a short open twisting steel ribbon. Clearly different weapons forming an alternating rhythm, warm highlight passing between them. Static arsenal emblem, not crossed-swords duplication.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1057869,
+      "alphaBBox": [
+        33,
+        21,
+        1230,
+        1236
+      ],
+      "coreBBox": [
+        144,
+        119,
+        1176,
+        1130
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-01.png",
+    "visualReview": {
+      "ko": "검과 망치를 연결하는 열린 철 띠가 64px에서 읽히며, 같은 무기를 겹친 그림과 구별됩니다.",
+      "en": "The sword and hammer joined by an open steel ribbon remain readable at 64px and are distinct from duplicated crossed weapons."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:23:40.325608+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-fb314981-29f1-4783-b36b-63e402f2a627.png",
+      "sourceSha256": "10ade33a8438a9541269d33c1fa27df958b2b6d6c9a9a3c5b19350462bf34389",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP15.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-fb314981-29f1-4783-b36b-63e402f2a627.png",
+  "sourceSha256": "10ade33a8438a9541269d33c1fa27df958b2b6d6c9a9a3c5b19350462bf34389",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP15.png"
+}

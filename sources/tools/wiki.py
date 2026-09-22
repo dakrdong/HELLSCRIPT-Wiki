@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """Build a local, source-grounded HELLSCRIPT wiki. Never writes game assets."""
 from __future__ import annotations
 import argparse
@@ -43,6 +44,8 @@ def save(path, obj):
         temporary.replace(path)
 
 def page_id(path):
+    if Path(path).as_posix().endswith('Docs/Art/ClassSetIcons/brief/README.md'):
+        return 'class-set-icons-brief'
     return Path(path).stem.lower().removeprefix('hellscript_').replace('_', '-')
 
 def slug(text):
@@ -485,22 +488,48 @@ def build_resources(databases):
             related=['blacksmith-unity-integration','blacksmith-unity-integration.en','blacksmith-validation']))
     return db('resources','리소스 DB','타이틀 배경을 포함한 이미지 원본, 아틀라스 영역, 코드로 만드는 표현과 제작 과제를 함께 관리합니다. 영역·표현·과제는 독립 이미지 파일이 아닙니다.',rows)
 
+def build_class_abilities():
+    path='Assets/HELLSCRIPT/Resources/Data/ClassSkills.json'
+    content=json.loads(read(path));status='능력 구현 · UI 공개 대기'
+    categories={'active':'일반 액티브','passive':'패시브','ultimate':'궁극기'}
+    skills=[record(row['id'],row['name'],CLASSES[row['heroClass']]+' · '+categories[row['category']],row['description'],
+        {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'해금 레벨':row['unlock'],'목록 순서':row['order'],'최대 투자 등급':row['maxRank'],
+         '자동 조건':row['automatic'],'Automatic condition':row['automaticEn'],'수치':{p['key']:p['value'] for p in row['parameters']},
+         '일반 플레이 활성화':content['playerEnabled'],'기존 기술':row['legacy']},path,status=status,related=['class-skill-runtime']) for row in content['skills']]
+    gear=[record(row['id'],row['name'],'신규 세트 장비' if row['setId'] else '신규 전설',row['description'],
+        {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'직업':CLASSES[row['heroClass']],'부위':SLOTS[row['slot']],
+         '세트 ID':row['setId'],'일반 드롭 등록':False,'드롭 가중치':'미정'},path,status=status,related=['class-skill-runtime']) for row in content['gear']]
+    bonuses=[record(row['id'],row['setId']+' · '+str(row['count'])+'세트','세트 효과',row['description'],
+        {'세트 ID':row['setId'],'필요한 서로 다른 장비 수':row['count'],'English description':row['descriptionEn'],
+         '수치':{p['key']:p['value'] for p in row['parameters']}},path,status=status,related=['class-skill-runtime']) for row in content['bonuses']]
+    options=[record(option['id']+':'+choice['id'],option['name']+' · '+choice['name'],'스킬 사용 규칙',choice['benefit'],
+        {'스킬 ID':option['skillId'],'옵션 ID':option['id'],'선택 값':choice['id'],'영어 이름':choice['nameEn'],
+         '얻는 이득':choice['benefit'],'Gain':choice['benefitEn'],'감수할 손해':choice['cost'],'Cost':choice['costEn'],
+         '관찰 지표':option['metrics'],'기본 선택':choice['id']==option['initial'],'일반 플레이 활성화':False},path,status=status,related=['class-skill-use-policies','class-skill-runtime'])
+        for option in content.get('options',[]) for choice in option['choices']]
+    return [db('class-abilities','스킬 능력 108종','직업별 36종의 실행 데이터입니다. 새 기술과 40레벨 성장은 개발 검증용 계정에서만 활성화됩니다.',skills),
+            db('class-ability-gear','스킬 연계 신규 장비','신규 전설 18종과 신규 세트 장비 105개입니다. 일반 드롭은 아직 활성화하지 않았습니다.',gear),
+            db('class-set-bonuses','신규 세트 효과 60단계','실제 장착 수에 따라 적용하는 신규 세트 24종의 효과입니다.',bonuses),
+            db('class-skill-options','스킬 사용 선택지 164개','사용 시점·대상·위치·대기의 이득과 손해를 비교하는 55개 옵션 묶음입니다.',options)]
+
 def build_evidence():
     rows=[]
-    paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml')))
+    paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'ClassSkillEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'CompletedMergeEvidence').glob('*editmode*.xml')))
     for path in paths:
         relative=str(path.relative_to(ROOT));raw=read(relative);root=ET.fromstring(raw)
         tokens=path.stem.split('-');cut=next((i for i,t in enumerate(tokens) if t in ('editmode','final')),len(tokens))
         stage='-'.join(tokens[:cut]) or '초기 빌드';variant='-'.join(t for t in tokens[cut:] if t!='editmode') or '단일 보고서'
-        rows.append(record(path.stem,path.name,'Unity Edit Mode',f'{root.get("passed")} / {root.get("total")} 통과 · {root.get("result")} · {stage}',
+        rows.append(record(('class-skills-' if 'ClassSkillEvidence' in relative else '')+path.stem,path.name,'Unity Edit Mode',f'{root.get("passed")} / {root.get("total")} 통과 · {root.get("result")} · {stage}',
             {'검사 단계':stage,'보고서 구분':variant,'보고된 결과':root.get('result'),'전체 검사':root.get('total'),'통과':root.get('passed'),'실패':root.get('failed'),
              '건너뜀':root.get('skipped'),'검사 종료 (UTC)':root.get('end-time'),'소요 시간 (초)':root.get('duration'),
-             '해석':('전설 확장 작업에서 실행한 Unity 검사 원본입니다. 집중 검사와 전체 검사의 수는 합산하지 않습니다. macOS 앱과 화면 검증은 연결된 구현 기록에서 확인합니다.' if 'LegendaryExpansionEvidence' in relative else '저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다.')},relative,
-            status='당시 통과' if root.get('result')=='Passed' else '당시 실패',related=['legendary-powers-implementation'] if 'LegendaryExpansionEvidence' in relative else ['current-status'],endTime=root.get('end-time')))
+             '해석':('완료 작업 통합본에서 실행한 검사 원본입니다. 전체 3,568개 검사와 이후 추가한 저장 호환성 검사 1개는 별도 실행이며 합산하지 않습니다. macOS 실행 증거와 이미지 후보 상태는 통합 기록에서 확인합니다.' if 'CompletedMergeEvidence' in relative else '스킬 능력 확장의 검사 원본입니다. 최종 결과와 macOS 실행 증거는 구현 기록에서 확인합니다. 과거 실패 및 부분 검사와 전체 검사 수를 합산하지 않습니다.' if 'ClassSkillEvidence' in relative else '전설 확장 작업에서 실행한 Unity 검사 원본입니다. 집중 검사와 전체 검사의 수는 합산하지 않습니다. macOS 앱과 화면 검증은 연결된 구현 기록에서 확인합니다.' if 'LegendaryExpansionEvidence' in relative else '저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다.')},relative,
+            status='당시 통과' if root.get('result')=='Passed' else '당시 실패',related=['completed-work-merge'] if 'CompletedMergeEvidence' in relative else ['class-skill-runtime'] if 'ClassSkillEvidence' in relative else ['legendary-powers-implementation'] if 'LegendaryExpansionEvidence' in relative else ['current-status'],endTime=root.get('end-time')))
     rows.sort(key=lambda r:r['endTime'],reverse=True)
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'completed-work-merge':('후속 개발 기록','완료 작업·이미지 리소스 통합','남은 작업 이력과 이미지 후보를 통합하고 저장 호환성·전체 검사·macOS 실행을 검증한 기록입니다.'),
+ 'completed-work-merge.en':('후속 개발 기록','Completed work and image-resource integration','Integration history, candidate artwork, save compatibility, full regression and native macOS evidence.'),
  'aspect-runestone':('장비와 빌드','위상 각인석·위상 성장','전설 분해 자동 수집, 123종의 다섯 레벨, 수동 레벨업과 장비 각인 규칙입니다.'),
  'aspect-runestone.en':('장비와 빌드','Aspect Runestone and progression','Automatic salvage collection, five levels for 123 aspects, manual upgrades and equipment imprinting.'),
  'aspect-runestone-implementation':('후속 개발 기록','위상 각인석 구현·검증','공통 UI, 마을 기물, 계정 저장·전투 적용과 macOS 검증 근거입니다.'),
@@ -511,10 +540,32 @@ PAGE_META={
  'shared-ui-validation.en':('후속 개발 기록','Shared UI integration validation','Integrated UI and Hunt Edict, persistence/input/equipment regression and native macOS evidence.'),
  'class-set-reference':('장비와 빌드','직업별 세트 24종 기획·레퍼런스','디아블로 4 부적 세트를 참고한 직업별 8종, 개별 장비 105개와 효과 60단계의 게임 미반영 검토안입니다.'),
  'class-set-reference.en':('장비와 빌드','24 class set concepts and references','Design-only Diablo IV-inspired catalog: eight sets per class, 105 pieces and 60 bonus tiers.'),
+ 'policy-comparison':('후속 개발 기록','스킬 사용 옵션 비교 결과','같은 장비에서 도약 거리 확보·마력 충전의 위치와 종료 목표만 바꾼 전투 18건입니다.'),
+ 'policy-comparison.en':('후속 개발 기록','Skill-use policy comparisons','Eighteen controlled fights compare leap spacing, charging position and recovery goals.'),
+ 'build-comparison':('후속 개발 기록','스킬 빌드 전투 90건','기획된 30개 빌드를 단일 적·다수 적·보스 조건에서 실행한 결과입니다.'),
+ 'build-comparison.en':('후속 개발 기록','Ninety build/scenario fights','Thirty prescribed builds compared against one enemy, eight enemies and a boss.'),
+ 'skill-resource-delegation':('후속 개발 기록','스킬·장비 이미지 제작 인계','스킬·전설 장비·세트 장비·위상의 네 가지 별도 제작 범위와 UI 연결 경계입니다.'),
+ 'skill-resource-delegation.en':('후속 개발 기록','Skill and equipment image handoff','Four separate production scopes for skills, legendaries, sets and aspects, with UI ownership boundaries.'),
+ 'class-skill-use-policies':('장비와 빌드','스킬 사용 규칙과 실험','사용 방식 55개 묶음·164개 선택지의 이득과 손해, 도약 거리와 마력 충전의 실험 기준입니다.'),
+ 'class-skill-use-policies.en':('장비와 빌드','Skill-use rules and experiments','Gains and costs for 164 choices across 55 policy groups, including leap spacing and mana charging.'),
+ 'class-skill-runtime':('후속 개발 기록','스킬 능력·장비 연동 구현','108개 스킬, ID 저장, 궁극기 선택, 신규 장비와 전투 검증 기록입니다.'),
+ 'class-skill-runtime.en':('후속 개발 기록','Class skill runtime and equipment integration','Ability implementation, persistence, exclusive ultimates, equipment and validation evidence.'),
+ 'class-skills':('장비와 빌드','장비 연계 스킬 108종','직업별 일반 액티브 16·패시브 18·궁극기 2개, 최종 단계 선택 규칙과 참고 근거입니다.'),
+ 'class-skills.en':('장비와 빌드','108 equipment-linked skills','Approved class skill design, equipment links and exclusive final-tier ultimates; execution evidence is tracked separately.'),
+ 'warrior-skills':('장비와 빌드','전사 스킬·장비 빌드','전사 스킬 36종과 전설·세트 연계 빌드 10개를 정리한 기획안입니다.'),
+ 'warrior-skills.en':('장비와 빌드','Warrior skills and builds','Design-only class skills, equipment links and exclusive final-tier ultimates.'),
+ 'ranger-skills':('장비와 빌드','궁수 스킬·장비 빌드','궁수 스킬 36종과 전설·세트 연계 빌드 10개를 정리한 기획안입니다.'),
+ 'ranger-skills.en':('장비와 빌드','Ranger skills and builds','Design-only class skills, equipment links and exclusive final-tier ultimates.'),
+ 'mage-skills':('장비와 빌드','마법사 스킬·장비 빌드','마법사 스킬 36종과 전설·세트 연계 빌드 10개를 정리한 기획안입니다.'),
+ 'mage-skills.en':('장비와 빌드','Mage skills and builds','Design-only class skills, equipment links and exclusive final-tier ultimates.'),
+ 'skill-equipment':('장비와 빌드','스킬·장비 대응표','기존 전설 123종·추가 전설 기획 18종·세트 30종을 연결합니다.'),
+ 'skill-equipment.en':('장비와 빌드','Skill and equipment matrix','Design-only class skills, equipment links and exclusive final-tier ultimates.'),
  'legendary-class-expansion':('장비와 빌드','직업별 전설 40종','전사·궁수·마법사 전설 120종의 효과, 부위, 참고 위상과 공통 전투 규칙입니다.'),
  'legendary-class-expansion.en':('장비와 빌드','Class legendaries (English)','Forty class legendaries per class, with effects, slots and source inspirations.'),
  'legendary-powers-implementation':('후속 개발 기록','직업별 전설 구현·검증','신규 전설 108종의 실제 전투 연결과 저장·화면·검사 근거입니다.'),
  'legendary-powers-implementation.en':('후속 개발 기록','Legendary power validation (English)','Runtime integration, persistence, native UI evidence and test results for 108 new powers.'),
+ 'class-set-reference':('장비와 빌드','직업별 세트 24종 기획·레퍼런스','디아블로 4 부적 세트를 참고한 직업별 8종, 개별 장비 105개와 효과 60단계의 게임 미반영 검토안입니다.'),
+ 'class-set-reference.en':('장비와 빌드','24 class set concepts and references','Design-only Diablo IV-inspired catalog: eight sets per class, 105 pieces and 60 bonus tiers.'),
  'rune-mastery':('장비와 빌드','무기별 룬 성장','여섯 무기 보드, 자유 회수, 전체 배치 프리셋 5칸과 기본·고급·최상위 능력 등급을 정리합니다.'),
  'rune-mastery.en':('장비와 빌드','Weapon rune mastery','Six weapon boards, reusable runes, five global presets and graded mastery abilities.'),
  'rune-mastery-implementation':('후속 개발 기록','무기별 룬 성장 구현 기록','PackBound 이식, 무기별 전투 적용, 저장·합성·프리셋과 macOS 검증 결과입니다.'),
@@ -759,7 +810,7 @@ def build_public(dataset):
 
 def build():
     INPUTS.clear();pages=build_pages();databases=build_databases();resources=build_resources(databases)
-    databases.insert(0,resources);databases.append(build_evidence())
+    databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_evidence())
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
     for path in ['tools/wiki.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,

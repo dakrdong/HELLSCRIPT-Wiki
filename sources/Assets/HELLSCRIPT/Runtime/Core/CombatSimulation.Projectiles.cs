@@ -122,7 +122,7 @@ namespace Hellscript
             {
                 if(trap.createdAt>=State.time-.00001f)continue;
                 float elapsed=dt;
-                if(trap.arm>0){elapsed=Mathf.Max(0,dt-trap.arm);trap.arm=Mathf.Max(0,trap.arm-dt);if(trap.arm>.00001f)continue;}
+                if(trap.arm>0){elapsed=Mathf.Max(0,dt-trap.arm);trap.arm=Mathf.Max(0,trap.arm-dt);if(trap.arm>.00001f)continue;if(trap.definitionId=="A03")ClassTrapArmed(trap.actionId);}
                 if(!trap.triggered)
                 {
                     var enemies=AreaTargets(trap.position,trap.radius,default,360);

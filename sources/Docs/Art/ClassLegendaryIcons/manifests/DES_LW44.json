@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "DES_LW44",
+  "name": {
+    "ko": "산맥의 진동",
+    "en": "Mountain Tremor"
+  },
+  "heroClass": "Warrior",
+  "slot": 5,
+  "slotName": "belt",
+  "effectSummary": {
+    "ko": "전장의 고리가 실제 적을 맞히면 다음 전율의 파동 1회를 5초간 강화합니다. 강화 파동은 폭이 1m에서 1.5m로 넓어지고 직접 피해가 전설 가산 25% 증가합니다.",
+    "en": "An actual Battlefield Ring hit empowers the next Tremor Wave within 5s: width increases from 1m to 1.5m and direct damage gains +25% in the legendary pool."
+  },
+  "directSkillIds": [
+    "W13",
+    "W14"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "W13",
+      "name": {
+        "ko": "전장의 고리",
+        "en": "Battlefield Ring"
+      },
+      "description": {
+        "ko": "4m 안의 최대 5명에게 D70% 물리 피해를 주고 최대 1.5m 끌어옵니다. 벽·몸체를 통과하지 않습니다. 보스는 이동하지 않고 제압 수치만 얻습니다.",
+        "en": "Deal D70% physical damage to up to 5 enemies within 4m and pull them up to 1.5m without crossing walls or bodies. Bosses receive stagger credit without moving."
+      }
+    },
+    {
+      "id": "W14",
+      "name": {
+        "ko": "전율의 파동",
+        "en": "Tremor Wave"
+      },
+      "description": {
+        "ko": "길이 7m·폭 1m의 파동으로 최대 5명에게 D150% 물리 피해를 주고 3초간 30% 둔화시킵니다. 이동 거리와 공격 범위는 별개입니다.",
+        "en": "Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage and a 30% slow for 3s. Attack reach does not grant movement."
+      }
+    }
+  ],
+  "sourceStatus": "design_only",
+  "sourceRuntimeEnabled": false,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/DES_LW44.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/DES_LW44.png",
+  "concept": "A broad curved war belt with a central jagged mountain-ridge basalt buckle and two concentric iron compression bands running around the leather strap. Earthy gray, brass repairs, a strong low-wide mountain silhouette, no landscape.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/DES_LW44.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: DES_LW44, Mountain Tremor, class Warrior, slot belt.\nSubject design: A broad curved war belt with a central jagged mountain-ridge basalt buckle and two concentric iron compression bands running around the leather strap. Earthy gray, brass repairs, a strong low-wide mountain silhouette, no landscape.\nPower that informs materials and structure, not a spell illustration: An actual Battlefield Ring hit empowers the next Tremor Wave within 5s: width increases from 1m to 1.5m and direct damage gains +25% in the legendary pool.\nDirect skill context: W13 Battlefield Ring — Deal D70% physical damage to up to 5 enemies within 4m and pull them up to 1.5m without crossing walls or bodies. Bosses receive stagger credit without moving.; W14 Tremor Wave — Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage and a 30% slow for 3s. Attack reach does not grant movement.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: square native PNG with real transparent alpha; the built-in 1254 by 1254 output is accepted, and 1024 by 1024 is also accepted. Preserve native pixels and alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Aim to contain the entire subject, including all tips and chain, within the central 76% with generous transparent padding. No part may be clipped or missing. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-46465607-1df0-4f04-924a-0790b322aaf8.png",
+    "sourceSha256": "f5672d0e545a3b319045560b7e8cf121651d28e7aa294eabe3097256fa4cefa9",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-46465607-1df0-4f04-924a-0790b322aaf8.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:36:12.401820+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "3d3a1982ed21279b5629ec17b2e518d308c63236884e81a07f3521c5e4f149c6",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "f5672d0e545a3b319045560b7e8cf121651d28e7aa294eabe3097256fa4cefa9",
+    "nativeAlpha": true,
+    "transparentPixels": 914891,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 657625,
+    "nearlyOpaquePixels": 628772,
+    "alphaBoundingBox": [
+      0,
+      21,
+      1242,
+      1222
+    ],
+    "alpha16BoundingBox": [
+      27,
+      304,
+      1236,
+      1007
+    ],
+    "transparentPixelFraction": 0.5818007575121652,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true,
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-004.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-004-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px의 밝은·어두운 바탕 비교와 원본 가장자리 표본에서 부위·개별 구조가 구분됩니다. 물체 형태가 잘리지 않았으며 배경 테두리가 보이지 않습니다. 일부 캔버스 가장자리의 매우 낮은 알파값은 측정값으로 보존했습니다.",
+      "en": "Distinct slot and item structure at actual 64px on dark/light backgrounds. Native edge crops show complete geometry and no visible matte. Very low-alpha pixels at some canvas borders remain documented without modifying the native output."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

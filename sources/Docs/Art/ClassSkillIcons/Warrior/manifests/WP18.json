@@ -1,0 +1,95 @@
+{
+  "id": "WP18",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "선조의 유산",
+    "en": "Ancestral Legacy"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP18.png",
+  "effectSummary": {
+    "ko": "선조의 전쟁 중 실제 선조 적중이 있으면 초당 자원 1, 시전 전체 최대 8을 회복합니다. 거인의 심판을 선택했다면 직접 맞힌 적마다 최대 HP 3%, 최대 15% 보호막을 4초간 얻습니다. 선택한 궁극기의 효과만 적용합니다.",
+    "en": "During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8. With Titan's Judgment selected, gain a 4s barrier of 3% maximum HP per direct target, capped at 15%. Only the selected ultimate branch applies."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "DES_LW46"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP18 Ancestral Legacy (passive). Gameplay meaning: During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8. With Titan's Judgment selected, gain a 4s barrier of 3% maximum HP per direct target, capped at 15%. Only the selected ultimate branch applies.\nSubject and composition: PASSIVE EMBLEM: an ancient split iron ancestor mask above a smaller living warrior crest, linked by one warm gold descending ember. Broad ancestral brow, modest two-pronged crest beneath, static symbol of inherited ultimate power with no frame.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1115001,
+      "alphaBBox": [
+        0,
+        20,
+        1226,
+        1238
+      ],
+      "coreBBox": [
+        280,
+        140,
+        978,
+        1131
+      ]
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ],
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "visualReview": {
+      "ko": "큰 선조 가면과 작은 전사 투구를 잇는 세로 불씨가 64px에서 식별됩니다.",
+      "en": "The large ancestor mask, smaller warrior helmet and vertical connecting ember remain identifiable at 64px."
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:28:18.778702+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-65718466-ada8-4949-8dc5-061cb9142f28.png",
+      "sourceSha256": "27ace6ba4ba47d36c71b827327cd92257ddfd631838bf8240ec27ee705457031",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP18.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-65718466-ada8-4949-8dc5-061cb9142f28.png",
+  "sourceSha256": "27ace6ba4ba47d36c71b827327cd92257ddfd631838bf8240ec27ee705457031",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP18.png"
+}

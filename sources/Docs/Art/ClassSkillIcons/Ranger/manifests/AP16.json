@@ -1,0 +1,101 @@
+{
+  "id": "AP16",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "빈틈 없는 재장전",
+    "en": "Seamless Reload"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP16.png",
+  "effectSummary": {
+    "ko": "연막 엄폐·사냥 준비를 사용하면 6초 안의 다음 유료 일반 액티브 비용 감소 +15%p를 준비합니다. 1충전이며 두 기술은 6초 재발동 간격을 공유합니다.",
+    "en": "Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction for the next paid normal active within 6s. One charge; both share a 6s interval."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "DES_LA43",
+    "DES_LA45"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring efficient reload emblem: a thick leather-gloved hand locks a fresh broad silver bolt into a compact dark crossbow mechanism, with one restrained amber ember at the latch and small smoke curl. Static readiness and economy, no projectile being fired.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP16 Seamless Reload. Skill type: passive. Effect: Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction for the next paid normal active within 6s. One charge; both share a 6s interval. Tags: Passive. Linked equipment IDs for identity context only: DES_LA43, DES_LA45. Subject and composition: An enduring efficient reload emblem: a thick leather-gloved hand locks a fresh broad silver bolt into a compact dark crossbow mechanism, with one restrained amber ember at the latch and small smoke curl. Static readiness and economy, no projectile being fired. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1263518,
+      "alphaBBox": [
+        49,
+        21,
+        1198,
+        1200
+      ],
+      "coreBBox": [
+        193,
+        253,
+        1066,
+        1015
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-03.png",
+    "visualReview": {
+      "ko": "볼트를 끼우는 손과 가로 쇠뇌가 64px에서 재장전 형태로 식별됩니다.",
+      "en": "The loading hand and horizontal crossbow remain identifiable as a reload at 64px."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP16.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-c7e67060-9ba4-4f41-9a16-b2c5b0fb2be4.png",
+  "sourceSha256": "0ec7e06cc58600ed610096eb5fac6beb9a36e0b73698d26c5a6a74a16a919f7e",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP16.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP16.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:36:54.978897+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-c7e67060-9ba4-4f41-9a16-b2c5b0fb2be4.png",
+      "sourceSha256": "0ec7e06cc58600ed610096eb5fac6beb9a36e0b73698d26c5a6a74a16a919f7e",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

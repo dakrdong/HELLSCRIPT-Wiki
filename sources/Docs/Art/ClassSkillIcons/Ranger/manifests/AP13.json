@@ -1,0 +1,110 @@
+{
+  "id": "AP13",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "집중 조준",
+    "en": "Focused Aim"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP13.png",
+  "effectSummary": {
+    "ko": "시전 시작 전 0.8초 이상 제자리에 있었다면 관통 사격·응시 사격의 직접 피해가 가산 15% 증가합니다. 이동하면 대기 시간을 다시 셉니다.",
+    "en": "Pierce and Patient Shot gain +15% additive direct damage if stationary for at least 0.8s before cast start. Movement resets the timer."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LA01",
+    "LA05",
+    "LA06",
+    "LA07",
+    "LA08",
+    "LA09",
+    "LA10",
+    "LA17",
+    "LA30",
+    "LA38",
+    "DES_LA41"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring stationary aim emblem: a heavy archers bracer firmly clasps a vertical bow grip, with one perfectly centered broad silver arrowhead and tiny amber focus glint. A stable symmetrical locked pose, substantial leather and metal forms, no motion streaks.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP13 Focused Aim. Skill type: passive. Effect: Pierce and Patient Shot gain +15% additive direct damage if stationary for at least 0.8s before cast start. Movement resets the timer. Tags: Passive. Linked equipment IDs for identity context only: LA01, LA05, LA06, LA07, LA08, LA09, LA10, LA17, LA30, LA38, DES_LA41. Subject and composition: An enduring stationary aim emblem: a heavy archers bracer firmly clasps a vertical bow grip, with one perfectly centered broad silver arrowhead and tiny amber focus glint. A stable symmetrical locked pose, substantial leather and metal forms, no motion streaks. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1348989,
+      "alphaBBox": [
+        33,
+        21,
+        1192,
+        1228
+      ],
+      "coreBBox": [
+        296,
+        232,
+        958,
+        1026
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-03.png",
+    "visualReview": {
+      "ko": "중앙의 곧은 화살과 이를 고정한 손이 64px에서 안정된 조준 형태로 읽힙니다.",
+      "en": "The straight central arrow and steady grip read as a stable aiming emblem at 64px."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP13.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-93f4e0ca-b90e-4f16-8ef5-2cb4d175731a.png",
+  "sourceSha256": "bfff1c0a71e15bcbd66455345d763f0755dd8e49f181608f2e8a7a89e1400332",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP13.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP13.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:34:05.850172+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-93f4e0ca-b90e-4f16-8ef5-2cb4d175731a.png",
+      "sourceSha256": "bfff1c0a71e15bcbd66455345d763f0755dd8e49f181608f2e8a7a89e1400332",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

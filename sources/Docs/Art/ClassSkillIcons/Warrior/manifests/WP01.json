@@ -1,0 +1,105 @@
+{
+  "id": "WP01",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "군중 속으로",
+    "en": "Into the Crowd"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP01.png",
+  "effectSummary": {
+    "ko": "3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +15%를 적용합니다.",
+    "en": "Adds +15% damage while three or more living enemies stand within 3m."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW01",
+    "LW05",
+    "LW06",
+    "LW07",
+    "LW08",
+    "LW09",
+    "LW10",
+    "LW23",
+    "LW24",
+    "LW25",
+    "LW26",
+    "LW27"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP01 Into the Crowd (passive). Gameplay meaning: Adds +15% damage while three or more living enemies stand within 3m.\nSubject and composition: PASSIVE EMBLEM: a single bright iron warrior helmet remaining resolute within three inward-facing darker hostile helmets. Four bold heads total in a compact clustered silhouette, protective warm highlights on the center. Static emblem of strength amid a crowd, no active spell or enclosing plate.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 974240,
+      "alphaBBox": [
+        39,
+        57,
+        1230,
+        1214
+      ],
+      "coreBBox": [
+        133,
+        115,
+        1146,
+        1108
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "밝은 중앙 투구와 주변 세 투구가 정적인 군중 전투 상징으로 읽힙니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "A bright central helmet and three darker surrounding helmets read as a static crowd-combat emblem. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:38:21.256843+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-64c8c5f7-85d9-4ee7-aa6b-eec959f7e583.png",
+      "sourceSha256": "cfc6359a1a423de3bcaa2da46f521389f6ff44a21f10ff67614d2c3d0cc9bcde",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP01.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-64c8c5f7-85d9-4ee7-aa6b-eec959f7e583.png",
+  "sourceSha256": "cfc6359a1a423de3bcaa2da46f521389f6ff44a21f10ff67614d2c3d0cc9bcde",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP01.png"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "MP17",
+  "heroClass": "Mage",
+  "name": {
+    "ko": "초과 마력",
+    "en": "Overflowing Mana"
+  },
+  "kind": "passive",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP17.png",
+  "effectSummary": {
+    "ko": "시전 전 자원이 80% 이상이면 일반 액티브의 첫 직접 적중 피해가 가산 10% 증가합니다. 장판 틱·추가 피해에는 적용하지 않습니다.",
+    "en": "At 80% pre-cast resource or more, a normal active's first direct hit gains +10% additive damage. Exclude field ticks and secondary damage."
+  },
+  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, MP17 Overflowing Mana / 초과 마력, passive.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A deep faceted cobalt crystal chalice-like reservoir filled past the brim with one broad crest of luminous blue mana, whose upper crest sharpens to a single bright point. The reservoir is magical crystal, no handle or potion flask. A heavy full-resource emblem implying stronger first impact, not active charging.\nEffect context: At 80% pre-cast resource or more, a normal active's first direct hit gains +10% additive damage. Exclude field ticks and secondary damage.\nRelevant equipment linkage: LM02, LM04, LM05, LM06, LM07, LM08, LM09, LM10, LM17, LM18, LM19, LM20, LM21, LM22, LM26, LM31, LM39, DES_LM44. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null,
+    "nativeTransparencyRequired": true
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1165193,
+      "alphaBBox": [
+        41,
+        21,
+        1234,
+        1254
+      ],
+      "coreBBox": [
+        268,
+        40,
+        1029,
+        1208
+      ]
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ],
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "visualReview": {
+      "ko": "수정 저장체 위로 넘치는 마나와 좁은 하부가 64px에서 축적된 자원의 고유 실루엣을 만듭니다.",
+      "en": "Overflowing mana above a crystal reservoir and its narrow lower shape create a distinct stored-resource silhouette at 64px."
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png"
+  },
+  "reuse": false,
+  "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
+  "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP17.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-d0091366-3c9d-4d27-bfaf-f4416a9685bb.png",
+  "sourceSha256": "d098b2881bb9ebe5146e021b658d7fa7bee45cd79a1fac99d30b9d6c5dee0829",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP17.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:50:35.446839+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-d0091366-3c9d-4d27-bfaf-f4416a9685bb.png",
+      "sourceSha256": "d098b2881bb9ebe5146e021b658d7fa7bee45cd79a1fac99d30b9d6c5dee0829",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

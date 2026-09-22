@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LM19",
+  "name": {
+    "ko": "폭풍의 연속음",
+    "en": "Storm Continuum"
+  },
+  "heroClass": "Mage",
+  "slot": 3,
+  "slotName": "gloves or gauntlets",
+  "effectSummary": {
+    "ko": "연쇄 번개 극대화 적중 시, 4초 동안 연쇄 번개 피해가 별도 전설 가산으로 20% 증가합니다. 재발동 간격은 4초입니다.",
+    "en": "On Chain Lightning critical hit, gain +20% Chain Lightning damage in the legendary pool for 4s. Internal cooldown: 4s."
+  },
+  "directSkillIds": [
+    "M03"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "M03",
+      "name": {
+        "ko": "연쇄 번개",
+        "en": "Chain Lightning"
+      },
+      "description": {
+        "ko": "4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.",
+        "en": "Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LM19.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LM19.png",
+  "concept": "A compact pair of mage gloves with stepped copper conductor bars running continuously across knuckles into broad cuff coils, dark indigo leather and small blue mineral nodes. Repeated solid metal waves, no emitted lightning or music marks.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LM19.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LM19, Storm Continuum, class Mage, slot gloves or gauntlets.\nSubject design: A compact pair of mage gloves with stepped copper conductor bars running continuously across knuckles into broad cuff coils, dark indigo leather and small blue mineral nodes. Repeated solid metal waves, no emitted lightning or music marks.\nPower that informs materials and structure, not a spell illustration: On Chain Lightning critical hit, gain +20% Chain Lightning damage in the legendary pool for 4s. Internal cooldown: 4s.\nDirect skill context: M03 Chain Lightning — Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-f43384eb-cc2f-474c-bd82-a44d0f34a0ee.png",
+    "sourceSha256": "0513e5005c247139dcae1065b11b16f7d97c072292d53483aa3baac09275fb9b",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-f43384eb-cc2f-474c-bd82-a44d0f34a0ee.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:48:53.372006+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "26462623d45ded4c329d909fb82bfc80013e2f9fd4a6d42a4b0cbaf8fa4a6f32",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "0513e5005c247139dcae1065b11b16f7d97c072292d53483aa3baac09275fb9b",
+    "nativeAlpha": true,
+    "transparentPixels": 1028930,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 543586,
+    "nearlyOpaquePixels": 505600,
+    "alphaBoundingBox": [
+      57,
+      21,
+      1230,
+      1254
+    ],
+    "alpha16BoundingBox": [
+      152,
+      141,
+      1130,
+      1116
+    ],
+    "transparentPixelFraction": 0.6543208463379705,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-014.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-014-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px 밝은·어두운 바탕에서 장비의 부위와 구조를 확인했습니다. 원본 가장자리 표본에 배경 잔여물이나 번짐이 없고 장비 끝부분도 유지됩니다.",
+      "en": "Copper knuckle bars and round cuff coils distinguish the paired gloves. Dark/light 64px samples and native edge crops reviewed; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

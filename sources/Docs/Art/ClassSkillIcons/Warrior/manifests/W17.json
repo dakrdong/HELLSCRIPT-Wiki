@@ -1,0 +1,95 @@
+{
+  "id": "W17",
+  "heroClass": "Warrior",
+  "kind": "ultimate",
+  "name": {
+    "ko": "선조의 전쟁",
+    "en": "War of the Ancestors"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W17.png",
+  "effectSummary": {
+    "ko": "8초간 선조 2명을 불러냅니다. 각 선조는 1초마다 주위 6m 안의 적 하나에게 D65% 물리 추가 피해를 주며 총 8회씩 공격합니다. 그동안 자신이 받는 피해가 15% 감소합니다. 선조는 별도 몸체나 도발 판정을 갖지 않습니다.",
+    "en": "Call 2 ancestors for 8s. Each attacks one enemy within 6m each second for D65% secondary physical damage, up to 8 attacks each. Take 15% less damage while active. Ancestors have no blocking body or taunt."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Physical",
+    "Ultimate"
+  ],
+  "equipmentIds": [
+    "DES_LW46"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W17 War of the Ancestors (ultimate). Gameplay meaning: Call 2 ancestors for 8s. Each attacks one enemy within 6m each second for D65% secondary physical damage, up to 8 attacks each. Take 15% less damage while active. Ancestors have no blocking body or taunt.\nSubject and composition: ULTIMATE: two monumental ancestral warrior spirits rise symmetrically behind one small central living steel warrior. One ancestor carries a broad axe, the other a hammer; dense sweeping golden spirit shapes form a powerful three-peak composition. Spirits protect and strike, with bright central unity. Exactly two ancestors, no army, no frame.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 704394,
+      "alphaBBox": [
+        0,
+        16,
+        1248,
+        1254
+      ],
+      "coreBBox": [
+        58,
+        117,
+        1211,
+        1159
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "두 선조와 중앙 전사의 실루엣을 확인했습니다. 64px에서도 세 인물의 배치와 강한 황금 중심이 유지됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Two ancestors and the central warrior remain a recognizable three-figure group with a strong golden mass at 64px. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:34:10.117782+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-f753ec1e-8c49-4ac9-81b2-8f79360deb17.png",
+      "sourceSha256": "01a31e1252abfa286b37ad18c93317784a62a9fd3f74806823c681bc763a8bae",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W17.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-f753ec1e-8c49-4ac9-81b2-8f79360deb17.png",
+  "sourceSha256": "01a31e1252abfa286b37ad18c93317784a62a9fd3f74806823c681bc763a8bae",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W17.png"
+}

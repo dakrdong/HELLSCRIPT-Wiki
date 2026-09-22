@@ -23,12 +23,13 @@ namespace Hellscript
                 }
             }
         }
-        public bool HeroActionBusy=>State.heroAction.phase!=HeroActionPhase.Idle;
+        public bool HeroActionBusy=>CSBusy||State.heroAction.phase!=HeroActionPhase.Idle;
         public bool HeroTravelling=>State.heroAction.phase==HeroActionPhase.Travelling;
         public float HeroAirHeight=>HeroTravelling?Mathf.Sin(Mathf.Clamp01(State.heroAction.elapsed/Mathf.Max(.001f,State.heroAction.travel))*Mathf.PI)*2.5f:0;
         void ActionEvent(HeroActionState action,string kind,string reason)
         {
             CombatTelemetry.Action(State.statistics,action.skill,kind);
+            if(ClassSkillsActive)CSEvent(ClassSkills.LegacyId(action.skill),kind.Replace("ACTION_","CAST_"),action.id,action.targetId);
             if(kind=="ACTION_TRAVEL"||action.skill==15&&kind=="ACTION_RELEASE")ObserveMovementStart(action);
             State.actionEvents.Add(new CombatActionEvent{actionId=action.id,skill=action.skill,targetId=action.targetId,time=State.time,resource=State.resource,kind=kind,reason=reason,buildVersion=action.policy?.buildVersion??State.build.version,position=State.position});
             if(State.actionEvents.Count>600)State.actionEvents.RemoveAt(0);
@@ -48,7 +49,7 @@ namespace Hellscript
         {
             StopEdictWalk();
             if(HeroActionBusy)InterruptHeroAction("상위 생존 행동으로 전환");CancelChest("스킬 실행");CancelShrine("스킬 실행");
-            var timing=CombatActions.Timing(index,Hero.heroClass,Mathf.Min(1.5f,Stats.attackSpeed+LegendaryBuff(LegendaryEffect.Haste)));
+            var timing=CombatActions.Timing(index,Hero.heroClass,Mathf.Min(1.5f,Stats.attackSpeed+ClassAttackSpeedBonus+LegendaryBuff(LegendaryEffect.Haste)));
             var config=explicitRule??(rule>=0&&rule<State.build.rules.Count?State.build.rules[rule]:null);
             var a=new HeroActionState{id=State.nextId++,skill=index,rule=rule,targetId=target?.id??-1,origin=State.position,aim=aim??(GroundSkill(index)?destination:target?.position??State.position),destination=destination,blizzardMode=config?.blizzardMode??BlizzardMode.Follow,
                 startedAt=State.time,prepare=timing.prepare,travel=timing.travel,recovery=timing.recovery,cost=index==0?0:cost,escape=escape,
@@ -57,18 +58,19 @@ namespace Hellscript
             CaptureWarriorEdictAction(a,edictSource);
             CaptureRangerEdictAction(a,edictSource);
             if(edictTarget!=null)a.policy.edictTarget=JsonUtility.FromJson<EdictTargetPolicy>(JsonUtility.ToJson(edictTarget));
+            OriginalClassCast(a);a.prepare*=ClassTiming(a.id);a.recovery*=ClassTiming(a.id);
             State.heroAction=a;State.activeSkill=index;State.resource-=a.cost;ConsumeCostEffects(a.cost,a);ReserveCastCharges(a);
             ObserveShieldOpeningAction(index);
             if(index<0&&target!=null&&lastBasic!=target.id){lastBasic=target.id;basicCount=0;}
             if(index>=0)
             {
                 var skill=catalog.skills[index];State.lastSkillStarts[index]=State.time;
-                State.cooldowns[index]=SkillEffects.Cooldown(skill,SkillEffects.ActiveRank(Ranks,index))*(1-Mathf.Min(.4f,Stats.cdr+Stats.runeSkillCooldown[index]/100+(index==1&&Stats.SetPieces("SWB")>=2?.15f:0)));
+                State.cooldowns[index]=SkillEffects.Cooldown(skill,SkillEffects.ActiveRank(Ranks,index))*(1-Mathf.Min(.4f,Stats.cdr+ClassCooldownReduction(skill.id)+Stats.runeSkillCooldown[index]/100+(index==1&&Stats.SetPieces("SWB")>=2?.15f:0)));
                 State.cooldownTotals[index]=State.cooldowns[index];
                 if(index!=4&&index!=5&&index!=11&&index!=16)State.lastAttackTime=State.time;
             }
             else State.lastAttackTime=State.time;
-            State.actionCd=timing.prepare+timing.travel+timing.recovery;State.action=Loc.F("{0} · 준비", (index<0?"기본 공격":catalog.skills[index].name));
+            State.actionCd=a.prepare+a.travel+a.recovery;State.action=Loc.F("{0} · 준비", (index<0?"기본 공격":catalog.skills[index].name));
             ActionEvent(a,"ACTION_START",Loc.F("실행 확정 / 자원 {0:0.##} 사용", a.cost));
             if(index==0){State.channelTime=0;State.channelTick=.25f;State.action="회오리 · 유지";}
             if(a.phase==HeroActionPhase.Travelling)BeginTravel(a);
@@ -112,7 +114,7 @@ namespace Hellscript
             a.released=true;a.snapshot=CaptureDamage();a.phase=HeroActionPhase.Recovering;
             ActionEvent(a,"ACTION_RELEASE",a.travel>0?"착지 완료":"효과 실행");
             if(a.skill<0)ReleaseBasic(a);else
-            {ResolveSkill(a);TriggerLegendary(LegendaryTrigger.Cast,SkillId(a.skill),State.enemies.Find(e=>e.id==a.targetId&&!e.dead),a.id,a.snapshot);}
+            {ResolveSkill(a);OriginalClassRelease(a);TriggerLegendary(LegendaryTrigger.Cast,SkillId(a.skill),State.enemies.Find(e=>e.id==a.targetId&&!e.dead),a.id,a.snapshot);}
         }
         void CompleteHeroAction(HeroActionState a,string reason="동작 완료")
         {
@@ -123,6 +125,7 @@ namespace Hellscript
         }
         void InterruptHeroAction(string reason)
         {
+            if(CSBusy)CancelClassSkill(reason);
             if(!HeroActionBusy)return;var a=State.heroAction;ActionEvent(a,"ACTION_INTERRUPTED",reason);
             if(a.whirlwindReserved&&!a.released)EffectEvent("SW4","RESERVATION_LOST",root:a.id,reason:reason);
             if(a.retreatTrapId>0&&!a.released&&string.IsNullOrEmpty(a.policy?.retreatFollowUp))State.traps.RemoveAll(t=>t.id==a.retreatTrapId);

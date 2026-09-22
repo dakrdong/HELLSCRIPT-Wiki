@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LM30",
+  "name": {
+    "ko": "회복의 결정막",
+    "en": "Mending Crystal Veil"
+  },
+  "heroClass": "Mage",
+  "slot": 5,
+  "slotName": "belt",
+  "effectSummary": {
+    "ko": "원소 보호막 효과 실행 시, 최대 HP의 6%를 회복합니다. 재발동 간격은 8초입니다.",
+    "en": "On Elemental Shield release, heal for 6% of maximum HP. Internal cooldown: 8s."
+  },
+  "directSkillIds": [
+    "M05"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "M05",
+      "name": {
+        "ko": "원소 보호막",
+        "en": "Elemental Shield"
+      },
+      "description": {
+        "ko": "최대 HP 35% 보호막을 4초 유지합니다.",
+        "en": "Holds a shield worth 35% of max HP for 4 seconds."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LM30.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LM30.png",
+  "concept": "A broad woven mage belt with a curved translucent rose-blue crystal buckle protected by two rounded silver ribs and a pale mended seam through its center. Dark cloth sash, calm healing glint entirely inside crystal.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LM30.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: LM30, Mending Crystal Veil, class Mage, slot belt.\nSubject design: A broad woven mage belt with a curved translucent rose-blue crystal buckle protected by two rounded silver ribs and a pale mended seam through its center. Dark cloth sash, calm healing glint entirely inside crystal.\nPower that informs materials and structure, not a spell illustration: On Elemental Shield release, heal for 6% of maximum HP. Internal cooldown: 8s.\nDirect skill context: M05 Elemental Shield — Holds a shield worth 35% of max HP for 4 seconds.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: 1024 by 1024 pixel square PNG requested, with genuinely native transparent alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Scale the equipment down within the square: the full object should occupy only the CENTRAL 72% of canvas width and height. Keep at least 14% completely empty transparent margin on ALL FOUR sides, including above crown peaks and around both weapon tips. Do not zoom in or maximize its size. Complete object, no clipping, no missing tips. This visible empty margin is essential. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-085e06f0-8757-4e39-a3f5-24af092ed5ab.png",
+    "sourceSha256": "fbbb021f60fae3b52ba134672deef164432284ef19f39496c17401f46704ac25",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-085e06f0-8757-4e39-a3f5-24af092ed5ab.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T08:56:58.385411+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "54f8020575b3a1d6b6f2b2872d0456e066166ed094523b1755e974cc7c74e318",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "fbbb021f60fae3b52ba134672deef164432284ef19f39496c17401f46704ac25",
+    "nativeAlpha": true,
+    "transparentPixels": 1080939,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 491577,
+    "nearlyOpaquePixels": 457125,
+    "alphaBoundingBox": [
+      57,
+      40,
+      1210,
+      1228
+    ],
+    "alpha16BoundingBox": [
+      110,
+      252,
+      1152,
+      1109
+    ],
+    "transparentPixelFraction": 0.6873945956670711,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-015.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-015-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px 밝은·어두운 바탕에서 장비의 종류와 주요 구조를 확인했습니다. 원본 가장자리 표본에 배경 잔여물이나 번짐이 없고 지팡이·천·금속의 끝부분도 유지됩니다.",
+      "en": "The rose-blue crystal buckle, mended central seam and cloth sash remain distinct. Dark/light 64px samples and native edge crops reviewed; no visible matte, halo or clipped structure."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

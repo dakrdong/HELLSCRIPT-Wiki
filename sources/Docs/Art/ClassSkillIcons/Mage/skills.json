@@ -1,0 +1,2196 @@
+[
+  {
+    "id": "M01",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "화염구",
+      "en": "Fireball"
+    },
+    "displayOrder": 1,
+    "activeOrder": 1,
+    "status": "existing_runtime",
+    "unlockLevel": 1,
+    "maxRank": 5,
+    "description": {
+      "ko": "착탄 지점에 폭발 피해를 줍니다.",
+      "en": "Deals blast damage at the point of impact."
+    },
+    "parameters": {
+      "cooldownSeconds": 0,
+      "resourceCost": 25,
+      "coefficient": 2.1,
+      "rangeMeters": 10,
+      "radiusMeters": 2.5,
+      "durationSeconds": 0.7
+    },
+    "source": {
+      "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "line": 402
+    },
+    "anchors": [
+      "M01"
+    ],
+    "tags": [
+      "Fireball"
+    ],
+    "references": [
+      "D3_wizard_active"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM02",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM26",
+      "LM39"
+    ],
+    "auto": {
+      "ko": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
+      "en": "Keep the existing Hunt Edict conditions, placement and target settings."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [
+      "REF_SM02",
+      "REF_SM04",
+      "REF_SM05",
+      "REF_SM08",
+      "SM"
+    ],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM03",
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM05",
+      "BUILD_REF_SM08",
+      "BUILD_SM"
+    ],
+    "elements": [
+      "Fire"
+    ]
+  },
+  {
+    "id": "M02",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "눈보라",
+      "en": "Blizzard"
+    },
+    "displayOrder": 2,
+    "activeOrder": 2,
+    "status": "existing_runtime",
+    "unlockLevel": 3,
+    "maxRank": 5,
+    "description": {
+      "ko": "6초간 냉기 피해와 35% 둔화. 최대 2개.",
+      "en": "Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once."
+    },
+    "parameters": {
+      "cooldownSeconds": 6,
+      "resourceCost": 30,
+      "coefficient": 0.65,
+      "rangeMeters": 10,
+      "radiusMeters": 3,
+      "durationSeconds": 6
+    },
+    "source": {
+      "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "line": 403
+    },
+    "anchors": [
+      "M02"
+    ],
+    "tags": [
+      "Blizzard"
+    ],
+    "references": [
+      "D3_wizard_active"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM01",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM36",
+      "LM29",
+      "LM35"
+    ],
+    "auto": {
+      "ko": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
+      "en": "Keep the existing Hunt Edict conditions, placement and target settings."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [
+      "REF_SM02",
+      "REF_SM06",
+      "REF_SM08",
+      "SM"
+    ],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM06",
+      "BUILD_REF_SM08",
+      "BUILD_SM"
+    ],
+    "elements": [
+      "Cold"
+    ]
+  },
+  {
+    "id": "M03",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "연쇄 번개",
+      "en": "Chain Lightning"
+    },
+    "displayOrder": 3,
+    "activeOrder": 3,
+    "status": "existing_runtime",
+    "unlockLevel": 6,
+    "maxRank": 5,
+    "description": {
+      "ko": "4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.",
+      "en": "Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one."
+    },
+    "parameters": {
+      "cooldownSeconds": 2,
+      "resourceCost": 25,
+      "coefficient": 1.1,
+      "rangeMeters": 10,
+      "radiusMeters": 4,
+      "durationSeconds": 0.45
+    },
+    "source": {
+      "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "line": 404
+    },
+    "anchors": [
+      "M03"
+    ],
+    "tags": [
+      "Chain"
+    ],
+    "references": [
+      "D3_wizard_active"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM04",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM31"
+    ],
+    "auto": {
+      "ko": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
+      "en": "Keep the existing Hunt Edict conditions, placement and target settings."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [
+      "REF_SM02",
+      "REF_SM04",
+      "REF_SM07",
+      "REF_SM08",
+      "SMB"
+    ],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM07",
+      "BUILD_REF_SM08",
+      "BUILD_SMB"
+    ],
+    "elements": [
+      "Lightning"
+    ]
+  },
+  {
+    "id": "M04",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "순간이동",
+      "en": "Teleport"
+    },
+    "displayOrder": 4,
+    "activeOrder": 4,
+    "status": "existing_runtime",
+    "unlockLevel": 10,
+    "maxRank": 5,
+    "description": {
+      "ko": "위험이 낮은 유효한 지점으로 이동합니다.",
+      "en": "Moves to a valid spot with less danger."
+    },
+    "parameters": {
+      "cooldownSeconds": 9,
+      "resourceCost": 0,
+      "coefficient": 0,
+      "rangeMeters": 8,
+      "radiusMeters": 0,
+      "durationSeconds": 0.2
+    },
+    "source": {
+      "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "line": 405
+    },
+    "anchors": [
+      "M04"
+    ],
+    "tags": [
+      "Teleport"
+    ],
+    "references": [
+      "D3_wizard_active"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM10",
+      "LM23",
+      "LM24",
+      "LM25",
+      "LM26",
+      "LM27",
+      "LM28",
+      "LM32"
+    ],
+    "auto": {
+      "ko": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
+      "en": "Keep the existing Hunt Edict conditions, placement and target settings."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [
+      "REF_SM03"
+    ],
+    "exampleBuildIds": [
+      "BUILD_REF_SM03",
+      "BUILD_SM"
+    ],
+    "elements": []
+  },
+  {
+    "id": "M05",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "원소 보호막",
+      "en": "Elemental Shield"
+    },
+    "displayOrder": 5,
+    "activeOrder": 5,
+    "status": "existing_runtime",
+    "unlockLevel": 15,
+    "maxRank": 5,
+    "description": {
+      "ko": "최대 HP 35% 보호막을 4초 유지합니다.",
+      "en": "Holds a shield worth 35% of max HP for 4 seconds."
+    },
+    "parameters": {
+      "cooldownSeconds": 14,
+      "resourceCost": 0,
+      "coefficient": 0,
+      "rangeMeters": 0,
+      "radiusMeters": 0,
+      "durationSeconds": 4
+    },
+    "source": {
+      "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "line": 406
+    },
+    "anchors": [
+      "M05"
+    ],
+    "tags": [
+      "Shield"
+    ],
+    "references": [
+      "D3_wizard_active"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM03",
+      "LM30",
+      "LM31",
+      "LM33",
+      "LM32"
+    ],
+    "auto": {
+      "ko": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
+      "en": "Keep the existing Hunt Edict conditions, placement and target settings."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [
+      "REF_SM01"
+    ],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01",
+      "BUILD_REF_SM07",
+      "BUILD_SM",
+      "BUILD_SMB"
+    ],
+    "elements": []
+  },
+  {
+    "id": "M06",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "서리 폭발",
+      "en": "Frost Nova"
+    },
+    "displayOrder": 6,
+    "activeOrder": 6,
+    "status": "existing_runtime",
+    "unlockLevel": 20,
+    "maxRank": 5,
+    "description": {
+      "ko": "주변 적에게 냉기 피해와 1.5초 빙결.",
+      "en": "Deals cold damage to nearby enemies and freezes them for 1.5 seconds."
+    },
+    "parameters": {
+      "cooldownSeconds": 10,
+      "resourceCost": 20,
+      "coefficient": 1,
+      "rangeMeters": 3,
+      "radiusMeters": 3,
+      "durationSeconds": 0.35
+    },
+    "source": {
+      "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
+      "line": 407
+    },
+    "anchors": [
+      "M06"
+    ],
+    "tags": [
+      "Nova"
+    ],
+    "references": [
+      "D3_wizard_active"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM22",
+      "LM34",
+      "LM35",
+      "LM36",
+      "LM16",
+      "LM37"
+    ],
+    "auto": {
+      "ko": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
+      "en": "Keep the existing Hunt Edict conditions, placement and target settings."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [
+      "REF_SM02",
+      "REF_SM04",
+      "REF_SM06",
+      "SMB"
+    ],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM06",
+      "BUILD_SMB"
+    ],
+    "elements": [
+      "Cold"
+    ]
+  },
+  {
+    "id": "MP01",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "밀집 연소",
+      "en": "Dense Burn"
+    },
+    "displayOrder": 17,
+    "passiveOrder": 1,
+    "status": "existing_runtime",
+    "unlockLevel": null,
+    "maxRank": 5,
+    "description": {
+      "ko": "화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +15%를 적용합니다.",
+      "en": "Adds +15% damage to the Fireball blast itself when it catches three or more enemies."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM02",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM26",
+      "LM39"
+    ],
+    "auto": {
+      "ko": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
+      "en": "Applies automatically while equipped and its condition is met."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM03",
+      "BUILD_REF_SM05",
+      "BUILD_SM"
+    ]
+  },
+  {
+    "id": "MP02",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "깊은 한기",
+      "en": "Deep Chill"
+    },
+    "displayOrder": 18,
+    "passiveOrder": 2,
+    "status": "existing_runtime",
+    "unlockLevel": null,
+    "maxRank": 5,
+    "description": {
+      "ko": "눈보라의 둔화가 35%에서 55%로 강해집니다. 다른 둔화와는 가장 강한 값만 적용합니다.",
+      "en": "Strengthens the Blizzard slow from 35% to 55%. Only the strongest slow applies."
+    },
+    "parameters": {},
+    "anchors": [
+      "M02"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM01",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM36"
+    ],
+    "auto": {
+      "ko": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
+      "en": "Applies automatically while equipped and its condition is met."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM06",
+      "BUILD_SM"
+    ]
+  },
+  {
+    "id": "MP03",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "번개의 사슬",
+      "en": "Chain of Lightning"
+    },
+    "displayOrder": 19,
+    "passiveOrder": 3,
+    "status": "existing_runtime",
+    "unlockLevel": null,
+    "maxRank": 5,
+    "description": {
+      "ko": "연쇄 번개의 총 타격 수가 4회에서 5회로 늘어납니다.",
+      "en": "Chain Lightning strikes 5 times instead of 4."
+    },
+    "parameters": {},
+    "anchors": [
+      "M03"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM04",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM31"
+    ],
+    "auto": {
+      "ko": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
+      "en": "Applies automatically while equipped and its condition is met."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM07",
+      "BUILD_SMB"
+    ]
+  },
+  {
+    "id": "MP04",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "안정된 결계",
+      "en": "Stable Ward"
+    },
+    "displayOrder": 20,
+    "passiveOrder": 4,
+    "status": "existing_runtime",
+    "unlockLevel": null,
+    "maxRank": 5,
+    "description": {
+      "ko": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
+      "en": "Adds +20%p to shield strength, stacking with the bonus from Willpower."
+    },
+    "parameters": {},
+    "anchors": [
+      "M05"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM03",
+      "LM30",
+      "LM31",
+      "LM33"
+    ],
+    "auto": {
+      "ko": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
+      "en": "Applies automatically while equipped and its condition is met."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01",
+      "BUILD_SM"
+    ]
+  },
+  {
+    "id": "MP05",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "마나 순환",
+      "en": "Mana Circulation"
+    },
+    "displayOrder": 21,
+    "passiveOrder": 5,
+    "status": "existing_runtime",
+    "unlockLevel": null,
+    "maxRank": 5,
+    "description": {
+      "ko": "초당 자원 회복이 20% 증가합니다. 평면 자원 회복 옵션에도 적용됩니다.",
+      "en": "Increases resource regeneration per second by 20%, including flat regeneration affixes."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M02",
+      "M03"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM01",
+      "LM02",
+      "LM04",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM26",
+      "LM31",
+      "LM36",
+      "LM39"
+    ],
+    "auto": {
+      "ko": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
+      "en": "Applies automatically while equipped and its condition is met."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_SMB"
+    ]
+  },
+  {
+    "id": "MP06",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "원소 교차",
+      "en": "Element crossover"
+    },
+    "displayOrder": 22,
+    "passiveOrder": 6,
+    "status": "existing_runtime",
+    "unlockLevel": null,
+    "maxRank": 5,
+    "description": {
+      "ko": "최근 4초 안에 서로 다른 두 속성으로 피해를 주면 4초간 가산 피해 +10%를 얻습니다. 중첩되지 않습니다.",
+      "en": "Dealing damage with two different elements within 4 seconds grants +10% damage for 4 seconds. It does not stack."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M02",
+      "M03"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "preserve_existing_SkillEffects",
+    "equipmentIds": [
+      "LM01",
+      "LM02",
+      "LM04",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM26",
+      "LM31",
+      "LM36",
+      "LM39"
+    ],
+    "auto": {
+      "ko": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
+      "en": "Applies automatically while equipped and its condition is met."
+    },
+    "implementationNeeds": [],
+    "mechanicReference": "Existing HELLSCRIPT definition",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM08"
+    ]
+  },
+  {
+    "id": "M07",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "잿불창",
+      "en": "Ember Lance"
+    },
+    "displayOrder": 7,
+    "activeOrder": 7,
+    "status": "design_only",
+    "unlockLevel": 22,
+    "maxRank": 5,
+    "description": {
+      "ko": "길이 10m·폭 0.6m의 불꽃 창으로 최대 3명에게 D140% 화염 직접 피해와 3초간 총 D60% 연소를 줍니다. 연소는 자기 기술의 강한 잔여량으로 갱신합니다.",
+      "en": "Fire a 10m-long, 0.6m-wide lance through up to 3 enemies for D140% direct fire damage plus D60% burn over 3s. Refresh only this skill's stronger remaining burn total."
+    },
+    "parameters": {
+      "cooldownSeconds": 3,
+      "resourceCost": 18,
+      "element": "Fire"
+    },
+    "anchors": [
+      "M01"
+    ],
+    "tags": [
+      "Fire",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM41"
+    ],
+    "auto": {
+      "ko": "일직선의 적 또는 아직 연소하지 않는 정예에게 사용합니다.",
+      "en": "Use against aligned enemies or an elite that is not burning."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Fireball; D3 Magic Missile",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01",
+      "BUILD_REF_SM05"
+    ],
+    "elements": [
+      "Fire"
+    ]
+  },
+  {
+    "id": "M08",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "화염 장벽",
+      "en": "Firewall"
+    },
+    "displayOrder": 8,
+    "activeOrder": 8,
+    "status": "design_only",
+    "unlockLevel": 22,
+    "maxRank": 5,
+    "description": {
+      "ko": "8m 안에 길이 5m·폭 1m의 불길을 4초간 만듭니다. 1초마다 최대 5명에게 D60% 화염 지속 피해를 주며 장벽 안의 적을 연소 상태로 봅니다. 이동을 막지는 않습니다. 최대 1개입니다.",
+      "en": "Create a 5m-long, 1m-wide fire line within 8m for 4s. Deal D60% fire damage each second to up to 5 enemies and mark occupants as Burning. It does not block movement. Limit 1."
+    },
+    "parameters": {
+      "cooldownSeconds": 8,
+      "resourceCost": 25,
+      "element": "Fire"
+    },
+    "anchors": [
+      "M01",
+      "M02"
+    ],
+    "tags": [
+      "Fire",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM41"
+    ],
+    "auto": {
+      "ko": "눈보라 안의 무리 또는 적의 접근 경로에 설치합니다.",
+      "en": "Place across a Blizzard cluster or an enemy approach path."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Firewall",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM05"
+    ],
+    "elements": [
+      "Fire"
+    ]
+  },
+  {
+    "id": "M09",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "빙하창",
+      "en": "Glacial Lance"
+    },
+    "displayOrder": 9,
+    "activeOrder": 9,
+    "status": "design_only",
+    "unlockLevel": 26,
+    "maxRank": 5,
+    "description": {
+      "ko": "길이 9m·폭 0.7m의 창으로 최대 3명에게 D130% 냉기 피해를 줍니다. 이미 둔화된 적은 0.8초 빙결하고, 나머지는 3초간 35% 둔화시킵니다.",
+      "en": "Hit up to 3 enemies with a 9m-long, 0.7m-wide lance for D130% cold damage. Freeze already-slowed enemies for 0.8s; otherwise slow them by 35% for 3s."
+    },
+    "parameters": {
+      "cooldownSeconds": 4,
+      "resourceCost": 18,
+      "element": "Cold"
+    },
+    "anchors": [
+      "M02",
+      "M06"
+    ],
+    "tags": [
+      "Cold",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM42",
+      "LM14",
+      "LM16",
+      "LM35",
+      "LM37"
+    ],
+    "auto": {
+      "ko": "눈보라의 둔화 대상이나 접근하는 적에게 사용합니다.",
+      "en": "Use against Blizzard-slowed targets or approaching enemies."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Glacial Spike",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM06"
+    ],
+    "elements": [
+      "Cold"
+    ]
+  },
+  {
+    "id": "M10",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "서리 구체",
+      "en": "Frost Globe"
+    },
+    "displayOrder": 10,
+    "activeOrder": 10,
+    "status": "design_only",
+    "unlockLevel": 26,
+    "maxRank": 5,
+    "description": {
+      "ko": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
+      "en": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage."
+    },
+    "parameters": {
+      "cooldownSeconds": 6,
+      "resourceCost": 25,
+      "element": "Cold"
+    },
+    "anchors": [
+      "M02",
+      "M06"
+    ],
+    "tags": [
+      "Cold",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM42",
+      "LM14"
+    ],
+    "auto": {
+      "ko": "적의 이동을 관측해 무리 중심을 겨냥합니다.",
+      "en": "Aim at the observed center of an approaching group."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Frozen Orb",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM03",
+      "BUILD_REF_SM06"
+    ],
+    "elements": [
+      "Cold"
+    ]
+  },
+  {
+    "id": "M11",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "축전 구체",
+      "en": "Capacitor Orb"
+    },
+    "displayOrder": 11,
+    "activeOrder": 11,
+    "status": "design_only",
+    "unlockLevel": 30,
+    "maxRank": 5,
+    "description": {
+      "ko": "8m 안에 구체 하나를 6초간 설치합니다. 1초마다 반경 3m의 최대 3명에게 D30% 번개 피해를 줍니다. 지속 중 M03을 유효 시전할 때마다 1충전, 최대 3충전을 얻고 자연 만료 시 D80%+충전당 D30% 번개 추가 폭발을 줍니다.",
+      "en": "Place one orb within 8m for 6s. Each second, deal D30% lightning damage to up to 3 enemies within 3m. Each valid M03 cast adds one charge, up to 3. Natural expiry causes a secondary lightning blast for D80% plus D30% per charge."
+    },
+    "parameters": {
+      "cooldownSeconds": 10,
+      "resourceCost": 25,
+      "element": "Lightning"
+    },
+    "anchors": [
+      "M03"
+    ],
+    "tags": [
+      "Lightning",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM43"
+    ],
+    "auto": {
+      "ko": "연쇄 번개를 사용할 자원이 있고 정예와 지속 교전할 때 설치합니다.",
+      "en": "Place for sustained elite combat with enough resource to cast Chain Lightning."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Thunder Storm; D3 Storm Armor",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM07"
+    ],
+    "elements": [
+      "Lightning"
+    ]
+  },
+  {
+    "id": "M12",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "번개 창",
+      "en": "Storm Spear"
+    },
+    "displayOrder": 12,
+    "activeOrder": 12,
+    "status": "design_only",
+    "unlockLevel": 30,
+    "maxRank": 5,
+    "description": {
+      "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
+      "en": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s."
+    },
+    "parameters": {
+      "cooldownSeconds": 5,
+      "resourceCost": 22,
+      "element": "Lightning"
+    },
+    "anchors": [
+      "M03"
+    ],
+    "tags": [
+      "Lightning",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM43"
+    ],
+    "auto": {
+      "ko": "연쇄 번개에 맞은 정예 또는 일직선의 적에게 사용합니다.",
+      "en": "Use against a recently chained elite or aligned enemies."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Lightning; D3 Electrocute",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM07"
+    ],
+    "elements": [
+      "Lightning"
+    ]
+  },
+  {
+    "id": "M13",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "마력 회수",
+      "en": "Mana Reclaim"
+    },
+    "displayOrder": 13,
+    "activeOrder": 13,
+    "status": "design_only",
+    "unlockLevel": 34,
+    "maxRank": 5,
+    "description": {
+      "ko": "제자리에서 마력을 집중해 기본 마나 회복 속도의 10배로 회복한다. 이동하거나 공격하면 자동으로 종료되며, 피격만으로는 종료되지 않는다. 쿨타임이 없다.",
+      "en": "Stand still and channel mana at ten times the base regeneration rate. Moving or attacking cancels the channel; taking damage alone does not. No cooldown."
+    },
+    "parameters": {
+      "cooldownSeconds": 14,
+      "resourceCost": 0,
+      "element": "Physical"
+    },
+    "anchors": [
+      "M01",
+      "M02",
+      "M03"
+    ],
+    "tags": [
+      "Physical",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM44"
+    ],
+    "auto": {
+      "ko": "자원이 35% 이하이고 3m 안에 적이나 위험 장판이 없을 때 사용합니다.",
+      "en": "Use at 35% resource or less with no enemy or hazard within 3m."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Warmth; D3 Prodigy",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01",
+      "BUILD_REF_SM05",
+      "BUILD_SMB"
+    ],
+    "elements": [],
+    "visualConcept": {
+      "ko": "고정된 마력의 핵으로 푸른 에너지가 안쪽으로 모인다. 공격 폭발이나 방어 무적의 형상과 구별한다.",
+      "en": "Blue energy gathers inward into a stationary arcane core. Distinguish it from an attack explosion or invulnerability."
+    }
+  },
+  {
+    "id": "M14",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "균열 결계",
+      "en": "Rift Ward"
+    },
+    "displayOrder": 14,
+    "activeOrder": 14,
+    "status": "design_only",
+    "unlockLevel": 34,
+    "maxRank": 5,
+    "description": {
+      "ko": "현재 위치에 반경 3m의 결계를 6초간 만들고 최대 HP 10% 보호막을 4초간 얻습니다. 결계 안에 있는 동안 받는 피해가 10% 감소합니다. 최대 1개이며 M05 시전으로 처리하지 않습니다.",
+      "en": "Create a 3m ward at the current position for 6s and a 10% maximum-HP barrier for 4s. Take 10% less damage while inside. Limit 1; it does not count as casting M05."
+    },
+    "parameters": {
+      "cooldownSeconds": 16,
+      "resourceCost": 10,
+      "element": "Physical"
+    },
+    "anchors": [
+      "M04",
+      "M05"
+    ],
+    "tags": [
+      "Physical",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM44",
+      "LM32"
+    ],
+    "auto": {
+      "ko": "위험 장판이 없는 사격 위치에서 보호막이 없을 때 사용합니다.",
+      "en": "Use at a hazard-free casting position when no barrier is active."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D2 Energy Shield; D3 Slow Time",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01"
+    ],
+    "elements": []
+  },
+  {
+    "id": "M15",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "원소 나침반",
+      "en": "Elemental Compass"
+    },
+    "displayOrder": 15,
+    "activeOrder": 15,
+    "status": "design_only",
+    "unlockLevel": 38,
+    "maxRank": 5,
+    "description": {
+      "ko": "자원 20을 회복합니다. 8초 안의 다음 화염·냉기·번개 일반 액티브를 원소별 한 번씩 비용 감소 +15%p로 시전합니다. 최대 3회이며 한 원소를 반복해도 남은 다른 원소 충전을 쓰지 않습니다.",
+      "en": "Restore 20 resource. Within 8s, grant +15 percentage points of cost reduction to the next normal fire, cold and lightning active, once per element and up to 3 casts. Repeating an element does not consume another element's charge."
+    },
+    "parameters": {
+      "cooldownSeconds": 18,
+      "resourceCost": 0,
+      "element": "Physical"
+    },
+    "anchors": [
+      "M01",
+      "M02",
+      "M03"
+    ],
+    "tags": [
+      "Physical",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM45"
+    ],
+    "auto": {
+      "ko": "서로 다른 원소의 유료 기술 2개 이상을 장착했고 자원이 70% 이하일 때 사용합니다.",
+      "en": "Use at 70% resource or less with at least 2 paid elemental skills of different elements equipped."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D3 Elemental Exposure; D4 skill variants",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM08"
+    ],
+    "elements": []
+  },
+  {
+    "id": "M16",
+    "heroClass": "Mage",
+    "kind": "active",
+    "name": {
+      "ko": "자력 소용돌이",
+      "en": "Magnetic Vortex"
+    },
+    "displayOrder": 16,
+    "activeOrder": 16,
+    "status": "design_only",
+    "unlockLevel": 38,
+    "maxRank": 5,
+    "description": {
+      "ko": "8m 안의 반경 3m에 소용돌이를 4초간 만듭니다. 생성 시 최대 5명을 중심으로 1.5m 끌어오고, 1초마다 D30% 번개 피해를 줍니다. 최대 1개이며 보스는 이동하지 않고 제압 수치만 얻습니다.",
+      "en": "Create a 3m vortex within 8m for 4s. On creation, pull up to 5 enemies 1.5m toward the center; deal D30% lightning damage each second. Limit 1. Bosses receive stagger credit without moving."
+    },
+    "parameters": {
+      "cooldownSeconds": 12,
+      "resourceCost": 20,
+      "element": "Lightning"
+    },
+    "anchors": [
+      "M01",
+      "M02",
+      "M06"
+    ],
+    "tags": [
+      "Lightning",
+      "Normal"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "new_normal_magnitude_only",
+    "equipmentIds": [
+      "DES_LM45"
+    ],
+    "auto": {
+      "ko": "적 3명 이상을 눈보라·화염 장벽 범위로 모을 수 있을 때 사용합니다.",
+      "en": "Use when at least 3 enemies can be grouped inside Blizzard or Firewall."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": null,
+    "mechanicReference": "D3 Black Hole / Energy Twister",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM03"
+    ],
+    "elements": [
+      "Lightning"
+    ]
+  },
+  {
+    "id": "M17",
+    "heroClass": "Mage",
+    "kind": "ultimate",
+    "name": {
+      "ko": "삼원소 붕괴",
+      "en": "Triune Collapse"
+    },
+    "displayOrder": 35,
+    "activeOrder": 17,
+    "status": "design_only",
+    "unlockLevel": 40,
+    "maxRank": 1,
+    "description": {
+      "ko": "10m 안의 반경 4m에 화염 D200%, 0.5초 뒤 냉기 D150%, 다시 0.5초 뒤 번개 D150%를 가합니다. 각 단계 최대 8명이며 냉기는 1초 빙결을 줍니다. M01·M02·M03을 대신 시전한 것으로 세지 않습니다.",
+      "en": "Strike a 4m area within 10m for D200% fire, then D150% cold after 0.5s, then D150% lightning after another 0.5s. Each stage hits up to 8 enemies; cold freezes for 1s. These stages do not count as M01, M02 or M03 casts."
+    },
+    "parameters": {
+      "cooldownSeconds": 60,
+      "resourceCost": 0,
+      "element": "TriElement"
+    },
+    "anchors": [
+      "M01",
+      "M02",
+      "M03",
+      "M06"
+    ],
+    "tags": [
+      "TriElement",
+      "Ultimate"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "fixed_rank_1",
+    "equipmentIds": [
+      "DES_LM46"
+    ],
+    "auto": {
+      "ko": "원소 순환 강화를 만들 수 있는 구성은 강화를 확보한 뒤 사용합니다. 강화 수단이 없는 구성은 대기하지 않으며, 두 경우 모두 정예·보스 또는 적 4명 이상을 대상으로 합니다.",
+      "en": "If the loadout can generate an elemental-cycle buff, wait for it. Otherwise do not wait for an unavailable buff. In both cases, target an elite, boss, or at least four enemies."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": "M_ULTIMATE",
+    "mechanicReference": "D3 Meteor / Frost Nova / Electrocute",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01",
+      "BUILD_REF_SM03",
+      "BUILD_REF_SM05",
+      "BUILD_REF_SM06",
+      "BUILD_REF_SM07",
+      "BUILD_SM",
+      "BUILD_SMB"
+    ],
+    "elements": [
+      "Fire",
+      "Cold",
+      "Lightning"
+    ]
+  },
+  {
+    "id": "M18",
+    "heroClass": "Mage",
+    "kind": "ultimate",
+    "name": {
+      "ko": "현자의 화신",
+      "en": "Sage Incarnate"
+    },
+    "displayOrder": 36,
+    "activeOrder": 18,
+    "status": "design_only",
+    "unlockLevel": 40,
+    "maxRank": 1,
+    "description": {
+      "ko": "8초간 최대 HP 25% 보호막을 얻고 일반 액티브 피해 +20%, 비용 감소 +20%p를 얻습니다. 이 시간에 서로 다른 세 원소의 일반 액티브를 시전하면 마지막 기술의 첫 적중 위치에 반경 2.5m·최대 5명에게 원소별 D40% 추가 폭발이 일어납니다. 순환 완성당 1회, 시전 전체 최대 2회입니다.",
+      "en": "Gain a 25% maximum-HP barrier for 8s, +20% normal-active damage and +20 percentage points of normal-active cost reduction. Completing a three-element normal-active cast cycle triggers D40% per element within 2.5m, up to 5 targets, at the last skill's first impact. Once per completed cycle, at most twice per ultimate."
+    },
+    "parameters": {
+      "cooldownSeconds": 60,
+      "resourceCost": 0,
+      "element": "TriElement"
+    },
+    "anchors": [
+      "M01",
+      "M02",
+      "M03",
+      "M05"
+    ],
+    "tags": [
+      "TriElement",
+      "Ultimate"
+    ],
+    "references": [
+      "D3_wizard_active",
+      "D2_sorceress",
+      "D4_rework"
+    ],
+    "rankPolicy": "fixed_rank_1",
+    "equipmentIds": [
+      "DES_LM46"
+    ],
+    "auto": {
+      "ko": "서로 다른 원소 기술을 3개 장착한 정예·보스 전투에서 사용합니다.",
+      "en": "Use in elite or boss combat with three different elemental skills equipped."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "source_owned_effects",
+      "hunt_edict_conditions",
+      "run_snapshot"
+    ],
+    "exclusiveGroup": "M_ULTIMATE",
+    "mechanicReference": "D3 Archon / Elemental Exposure",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM08"
+    ],
+    "elements": [
+      "Fire",
+      "Cold",
+      "Lightning"
+    ]
+  },
+  {
+    "id": "MP07",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "점화의 되먹임",
+      "en": "Ignition Feedback"
+    },
+    "displayOrder": 23,
+    "passiveOrder": 7,
+    "status": "design_only",
+    "unlockLevel": 22,
+    "maxRank": 5,
+    "description": {
+      "ko": "연소한 적에게 일반 화염 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 연소 틱으로 재발동하지 않습니다.",
+      "en": "The first direct hit of a normal fire skill on a burning enemy restores 3 resource, with a 2s interval. Burn ticks cannot retrigger it."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M07",
+      "M08"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM02",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM26",
+      "LM39",
+      "DES_LM41"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM05"
+    ]
+  },
+  {
+    "id": "MP08",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "그을린 갑옷",
+      "en": "Scorched Armor"
+    },
+    "displayOrder": 24,
+    "passiveOrder": 8,
+    "status": "design_only",
+    "unlockLevel": 22,
+    "maxRank": 5,
+    "description": {
+      "ko": "자신의 M07 연소가 남아 있거나 M08 안에 있는 공격자에게 받는 피해가 8% 감소합니다.",
+      "en": "Take 8% less damage from an attacker with your M07 burn or currently inside your M08."
+    },
+    "parameters": {},
+    "anchors": [
+      "M07",
+      "M08",
+      "M05"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM03",
+      "LM30",
+      "LM31",
+      "LM33",
+      "DES_LM41"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM05"
+    ]
+  },
+  {
+    "id": "MP09",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "냉기의 틈",
+      "en": "Opening in the Cold"
+    },
+    "displayOrder": 25,
+    "passiveOrder": 9,
+    "status": "design_only",
+    "unlockLevel": 22,
+    "maxRank": 5,
+    "description": {
+      "ko": "제어된 적에게 일반 냉기 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 눈보라 지속 틱은 제외합니다.",
+      "en": "The first direct hit of a normal cold skill on a controlled target restores 3 resource, with a 2s interval. Blizzard ticks are excluded."
+    },
+    "parameters": {},
+    "anchors": [
+      "M02",
+      "M06",
+      "M09"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM01",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM22",
+      "LM34",
+      "LM35",
+      "LM36",
+      "DES_LM42"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM06"
+    ]
+  },
+  {
+    "id": "MP10",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "얼음의 잔향",
+      "en": "Ice Reverberation"
+    },
+    "displayOrder": 26,
+    "passiveOrder": 10,
+    "status": "design_only",
+    "unlockLevel": 26,
+    "maxRank": 5,
+    "description": {
+      "ko": "M06·M09의 직접 빙결 적용에 성공하면 최대 HP 5% 보호막을 3초간 얻습니다. 보스에게 유효한 제압 수치를 준 경우도 인정하며 재발동 간격은 4초입니다.",
+      "en": "Successfully applying direct freeze with M06 or M09 grants a 5% maximum-HP barrier for 3s. Valid boss stagger credit also qualifies; 4s interval."
+    },
+    "parameters": {},
+    "anchors": [
+      "M06",
+      "M09",
+      "M05"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM03",
+      "LM22",
+      "LM30",
+      "LM31",
+      "LM33",
+      "LM34",
+      "LM35",
+      "LM36",
+      "DES_LM42"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM06"
+    ]
+  },
+  {
+    "id": "MP11",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "과부하",
+      "en": "Overcharge"
+    },
+    "displayOrder": 27,
+    "passiveOrder": 11,
+    "status": "design_only",
+    "unlockLevel": 26,
+    "maxRank": 5,
+    "description": {
+      "ko": "5초 안에 일반 번개 기술을 3회 시전하면 다음 M03·M12의 직접 피해 +15%를 4초간 준비합니다. 완성한 세 번째 시전에 소급하지 않으며 1충전입니다.",
+      "en": "Three normal lightning casts within 5s prepare +15% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast."
+    },
+    "parameters": {},
+    "anchors": [
+      "M03",
+      "M11",
+      "M12"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM04",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM31",
+      "DES_LM43"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM07"
+    ]
+  },
+  {
+    "id": "MP12",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "축전 회수",
+      "en": "Reclaim Charge"
+    },
+    "displayOrder": 28,
+    "passiveOrder": 12,
+    "status": "design_only",
+    "unlockLevel": 26,
+    "maxRank": 5,
+    "description": {
+      "ko": "축전 구체가 자연 만료하면 자원 10을 회복합니다. 교체·장면 종료·장비 해제로 사라진 구체는 회복하지 않습니다.",
+      "en": "Natural expiry of Capacitor Orb restores 10 resource. Replacement, scene exit or equipment-removal cleanup grants none."
+    },
+    "parameters": {},
+    "anchors": [
+      "M11",
+      "M03"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM04",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM31",
+      "DES_LM43"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM07"
+    ]
+  },
+  {
+    "id": "MP13",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "결계의 호흡",
+      "en": "Ward Breathing"
+    },
+    "displayOrder": 29,
+    "passiveOrder": 13,
+    "status": "design_only",
+    "unlockLevel": 30,
+    "maxRank": 5,
+    "description": {
+      "ko": "보호막이 남아 있는 동안 초당 자원 회복이 15% 증가합니다. 마력 회수의 고정 회복량에는 곱하지 않습니다.",
+      "en": "While a barrier remains, increase per-second resource regeneration by 15%. Do not multiply Mana Reclaim's fixed restoration."
+    },
+    "parameters": {},
+    "anchors": [
+      "M05",
+      "M13",
+      "M14"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM03",
+      "LM30",
+      "LM31",
+      "LM33",
+      "DES_LM44"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01",
+      "BUILD_SMB"
+    ]
+  },
+  {
+    "id": "MP14",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "마력 절약",
+      "en": "Mana Thrift"
+    },
+    "displayOrder": 30,
+    "passiveOrder": 14,
+    "status": "design_only",
+    "unlockLevel": 30,
+    "maxRank": 5,
+    "description": {
+      "ko": "기본 공격이 2회 직접 적중하면 다음 유료 일반 액티브 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+      "en": "Two direct basic hits prepare +15 percentage points of cost reduction for the next paid normal active within 4s. One charge; pause counting for 3s after triggering."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M02",
+      "M03"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM01",
+      "LM02",
+      "LM04",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM26",
+      "LM31",
+      "LM36",
+      "LM39"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM03"
+    ]
+  },
+  {
+    "id": "MP15",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "안정된 시전",
+      "en": "Steady Casting"
+    },
+    "displayOrder": 31,
+    "passiveOrder": 15,
+    "status": "design_only",
+    "unlockLevel": 30,
+    "maxRank": 5,
+    "description": {
+      "ko": "1초 이상 제자리에 있은 뒤 일반 액티브를 준비·집중하는 동안 받는 피해가 8% 감소합니다. 이동하거나 시전이 끝나면 해제됩니다.",
+      "en": "After standing still for 1s, take 8% less damage while preparing or channeling a normal active. End on movement or completion."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M08",
+      "M13"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM02",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM26",
+      "LM39",
+      "DES_LM41",
+      "DES_LM44"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM01"
+    ]
+  },
+  {
+    "id": "MP16",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "삼색의 기억",
+      "en": "Threefold Memory"
+    },
+    "displayOrder": 32,
+    "passiveOrder": 16,
+    "status": "design_only",
+    "unlockLevel": 34,
+    "maxRank": 5,
+    "description": {
+      "ko": "6초 안에 화염·냉기·번개 일반 액티브를 각각 한 번 시전하면 최대 HP 8% 보호막을 4초간 얻습니다. 완성·만료 시 기록을 비우며 재발동 간격은 8초입니다.",
+      "en": "Cast one normal fire, cold and lightning active within 6s to gain an 8% maximum-HP barrier for 4s. Clear the record on completion or expiry; 8s interval."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M02",
+      "M03",
+      "M15"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM01",
+      "LM02",
+      "LM04",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM11",
+      "LM12",
+      "LM13",
+      "LM14",
+      "LM15",
+      "LM16",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM26",
+      "LM31",
+      "LM36",
+      "LM39",
+      "DES_LM45"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM02",
+      "BUILD_REF_SM04",
+      "BUILD_REF_SM08"
+    ]
+  },
+  {
+    "id": "MP17",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "초과 마력",
+      "en": "Overflowing Mana"
+    },
+    "displayOrder": 33,
+    "passiveOrder": 17,
+    "status": "design_only",
+    "unlockLevel": 34,
+    "maxRank": 5,
+    "description": {
+      "ko": "시전 전 자원이 80% 이상이면 일반 액티브의 첫 직접 적중 피해가 가산 10% 증가합니다. 장판 틱·추가 피해에는 적용하지 않습니다.",
+      "en": "At 80% pre-cast resource or more, a normal active's first direct hit gains +10% additive damage. Exclude field ticks and secondary damage."
+    },
+    "parameters": {},
+    "anchors": [
+      "M01",
+      "M03",
+      "M13"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "LM02",
+      "LM04",
+      "LM05",
+      "LM06",
+      "LM07",
+      "LM08",
+      "LM09",
+      "LM10",
+      "LM17",
+      "LM18",
+      "LM19",
+      "LM20",
+      "LM21",
+      "LM22",
+      "LM26",
+      "LM31",
+      "LM39",
+      "DES_LM44"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM03"
+    ]
+  },
+  {
+    "id": "MP18",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "대마법사의 유언",
+      "en": "Archmage's Testament"
+    },
+    "displayOrder": 34,
+    "passiveOrder": 18,
+    "status": "design_only",
+    "unlockLevel": 34,
+    "maxRank": 5,
+    "description": {
+      "ko": "삼원소 붕괴의 세 번째 단계가 실제 적중하면 자원 15을 한 번 회복합니다. 현자의 화신을 선택했다면 해당 궁극기의 보호막 생성량에 최대 HP 10%를 더합니다. 선택한 궁극기에만 적용합니다.",
+      "en": "If Triune Collapse's third stage actually hits, restore 15 resource once. With Sage Incarnate selected, add 10% maximum HP to its barrier. Apply only the selected ultimate branch."
+    },
+    "parameters": {},
+    "anchors": [
+      "M17",
+      "M18"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "DES_LM46"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM08"
+    ]
+  }
+]

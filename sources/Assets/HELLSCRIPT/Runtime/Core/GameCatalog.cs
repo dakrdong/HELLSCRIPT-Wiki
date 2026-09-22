@@ -53,6 +53,7 @@ namespace Hellscript
     [Serializable]
     public sealed class BuildConfig
     {
+        public ClassSkillLoadout classSkills;
         public bool emptySlot;
         public int ruleSchema;
         public List<int> activeSkills=new List<int>();
@@ -120,6 +121,8 @@ namespace Hellscript
     public sealed class HeroSave
     {
         public SlotProgress slotProgress=new SlotProgress();
+        public bool classSkillValidation;
+        public float classUltimateRemaining,classUltimateTotal;
         public EquipmentShopState equipmentShop=new EquipmentShopState();
         public int legacyPassiveSlots;
         public PotionInventory potions=new PotionInventory();
@@ -245,6 +248,7 @@ namespace Hellscript
     {
         public string[] aspectIds;
         public int[] aspectLevels;
+        public float classWildcardEmpower;
         public string[] legendaryPowers;
         public float[] legendaryDamage;
         public float[] runeV13;
@@ -285,6 +289,7 @@ namespace Hellscript
     public sealed class RunState
     {
         public int[] slotLevels;
+        public ClassSkillRuntimeState classSkills;
         public PotionRuntimeState potions=new PotionRuntimeState();
         public float[] cooldownTotals=new float[18];
         public uint gemRng;

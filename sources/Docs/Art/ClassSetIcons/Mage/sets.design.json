@@ -1,0 +1,466 @@
+{
+  "class": "Mage",
+  "sets": [
+    {
+      "id": "REF_SM01",
+      "name": {
+        "ko": "수호 결계",
+        "en": "Warding Aegis"
+      },
+      "concept": {
+        "ko": "보호막 생존",
+        "en": "Barrier survival"
+      },
+      "gameplayLoop": {
+        "ko": "원소 보호막을 강화해 근접 압박을 견딥니다.",
+        "en": "Strengthen Elemental Shield to survive close pressure."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM01_B2",
+          "description": {
+            "ko": "모든 속성 저항 +15%.",
+            "en": "All elemental resistances +15%."
+          },
+          "parameters": {
+            "allResistancePct": 15
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SM01_B3",
+          "description": {
+            "ko": "원소 보호막 생성량 +30%, 최대 체력 +10%.",
+            "en": "Elemental Shield generation +30% and maximum Life +10%."
+          },
+          "parameters": {
+            "shieldGenerationPct": 30,
+            "maxLifePct": 10
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "무광 백랍과 옅은 옥, 짙은 남색 직물을 결합합니다. 겹친 첨두 아치 세 개와 방패 모양 보석을 반복하여 원소 보호막과 버티는 힘을 나타냅니다. 넓고 닫힌 외곽선과 큰 판 구조를 사용합니다.",
+        "en": "Matte pewter, pale jade, and deep navy cloth. Repeat three nested pointed arches and a shield-shaped jade inset to express elemental barriers and endurance. Broad closed silhouettes and substantial plates."
+      },
+      "setEmblemReuse": [
+        "REF_SM01_B2",
+        "REF_SM01_B3"
+      ]
+    },
+    {
+      "id": "REF_SM02",
+      "name": {
+        "ko": "깊은 학식",
+        "en": "Deep Scholarship"
+      },
+      "concept": {
+        "ko": "기술 등급",
+        "en": "Skill ranks"
+      },
+      "gameplayLoop": {
+        "ko": "특정 발동 조건 없이 배운 공격 기술의 기반을 높입니다.",
+        "en": "Improve learned offensive skills without conditional procs."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM02_B2",
+          "description": {
+            "ko": "이미 배운 화염구·눈보라·연쇄 번개·서리 폭발 등급 +1.",
+            "en": "Learned Fireball, Blizzard, Chain Lightning, and Frost Nova gain 1 rank."
+          },
+          "parameters": {
+            "learnedOffensiveSkillRanks": 1
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SM02_B3",
+          "description": {
+            "ko": "이미 배운 화염구·눈보라·연쇄 번개 등급을 추가로 +1 높입니다. 미습득 기술은 해금하지 않습니다.",
+            "en": "Learned Fireball, Blizzard, and Chain Lightning gain 1 additional rank; unlearned skills remain locked."
+          },
+          "parameters": {
+            "additionalLearnedCoreSkillRanks": 1
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "오래된 황동과 짙은 호두나무, 갈색 가죽을 바탕으로 상아색 양피지 층을 겹칩니다. 펼친 책의 두 날개 형태와 세로 책등을 반복하여 학식과 기술 숙련을 나타냅니다. 글자와 기호 대신 면과 접힌 형태만 사용합니다.",
+        "en": "Aged brass, dark walnut, brown leather, and layered ivory vellum. Repeat a two-wing open-folio silhouette and central book spine to express scholarship and learned skill ranks. Use planes and folds, never writing or glyphs."
+      },
+      "setEmblemReuse": [
+        "REF_SM02_B2",
+        "REF_SM02_B3"
+      ]
+    },
+    {
+      "id": "REF_SM03",
+      "name": {
+        "ko": "차원 순례",
+        "en": "Rift Pilgrimage"
+      },
+      "concept": {
+        "ko": "순간이동·탐험",
+        "en": "Teleport and exploration"
+      },
+      "gameplayLoop": {
+        "ko": "이동과 회수 시간을 줄여 반복 탐험의 효율을 높입니다.",
+        "en": "Reduce movement and collection time in repeated exploration."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM03_B2",
+          "description": {
+            "ko": "이동속도 +8%, 획득 반경 +1m.",
+            "en": "Movement speed +8% and pickup radius +1 m."
+          },
+          "parameters": {
+            "moveSpeedPct": 8,
+            "pickupRadiusMeters": 1
+          }
+        },
+        {
+          "requiredPieces": 4,
+          "effectId": "REF_SM03_B4",
+          "description": {
+            "ko": "순간이동 재사용 대기시간 감소 +15%p. 몬스터 처치 골드 +10%, 영웅 처치 경험치 +5%.",
+            "en": "Teleport cooldown reduction +15 percentage points, monster gold +10%, and hero kill XP +5%."
+          },
+          "parameters": {
+            "teleportCooldownReductionPct": 15,
+            "monsterGoldPct": 10,
+            "heroKillExperiencePct": 5
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "검은 흑요석과 산화된 은, 먼지 낀 보라색 천을 사용합니다. 갈라진 마름모와 안쪽을 향한 초승달 조각을 반복하여 순간이동 통로를 나타냅니다. 길고 가벼운 외곽선과 큰 빈 공간으로 다른 세트와 구별합니다.",
+        "en": "Black obsidian, oxidized silver, and dusty violet cloth. Repeat a split lozenge and inward-facing crescent halves to express a teleport passage. Long light silhouettes and deliberate large openings distinguish this set."
+      },
+      "setEmblemReuse": [
+        "REF_SM03_B2",
+        "REF_SM03_B4"
+      ]
+    },
+    {
+      "id": "REF_SM04",
+      "name": {
+        "ko": "변덕스러운 계약",
+        "en": "Capricious Pact"
+      },
+      "concept": {
+        "ko": "행운의 원소 발동",
+        "en": "Lucky elemental procs"
+      },
+      "gameplayLoop": {
+        "ko": "한 속성을 반복 사용해도 다른 원소의 추가 타격이 발생합니다.",
+        "en": "Repeated single-element attacks can trigger another element."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM04_B2",
+          "description": {
+            "ko": "직접 마법 피해 +10%.",
+            "en": "Direct magic damage +10%."
+          },
+          "parameters": {
+            "directMagicDamagePct": 10
+          }
+        },
+        {
+          "requiredPieces": 4,
+          "effectId": "REF_SM04_B4",
+          "description": {
+            "ko": "직접 마법 적중 시 시전당 25% 확률로 첫 대상에게 D70% 원소 피해를 1회 줍니다. 화염·냉기·번개를 균등 추첨합니다. 내부 대기시간 1.5초이며 눈보라 틱은 제외합니다.",
+            "en": "Each direct-hit magic cast has a 25% chance to deal 70% D of an equally random fire, cold, or lightning element to its first target. Internal cooldown: 1.5 seconds; excludes Blizzard ticks."
+          },
+          "parameters": {
+            "procChancePct": 25,
+            "damageDPct": 70,
+            "internalCooldownSeconds": 1.5,
+            "elements": [
+              "Fire",
+              "Cold",
+              "Lightning"
+            ]
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "그을린 청동에 불규칙한 세 갈래 갈고리를 만듭니다. 크기가 서로 다른 석류빛, 얼음빛, 호박빛 보석 세 개를 기울여 달아 우연한 원소 발동을 나타냅니다. 균형 잡힌 삼원소 세트와 달리 비대칭이고 깨진 쐐기 형태를 사용합니다.",
+        "en": "Charred bronze with irregular three-pronged hooks. Three unequal garnet, icy-blue, and amber stones sit at tilted angles to express chance elemental procs. Asymmetric broken wedges distinguish it from the balanced Threefold Cycle set."
+      },
+      "setEmblemReuse": [
+        "REF_SM04_B2",
+        "REF_SM04_B4"
+      ]
+    },
+    {
+      "id": "REF_SM05",
+      "name": {
+        "ko": "과열의 도가니",
+        "en": "Overheat Crucible"
+      },
+      "concept": {
+        "ko": "화염 연속 시전",
+        "en": "Sustained fire casting"
+      },
+      "gameplayLoop": {
+        "ko": "화염구를 이어 사용해 열기를 유지하고 과열 폭발을 일으킵니다.",
+        "en": "Chain Fireballs to maintain Heat and trigger Overheat bursts."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM05_B2",
+          "description": {
+            "ko": "유효 화염구 시전마다 열기 1중첩을 얻습니다. 중첩당 화염구 피해 +3%, 최대 5중첩. 3초간 새 열기가 없으면 매초 1중첩을 잃습니다.",
+            "en": "Each valid Fireball grants one Heat stack: +3% Fireball damage per stack, up to five. After 3 seconds without new Heat, lose one stack per second."
+          },
+          "parameters": {
+            "damagePerStackPct": 3,
+            "maxStacks": 5,
+            "decayDelaySeconds": 3,
+            "decayIntervalSeconds": 1
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SM05_B3",
+          "description": {
+            "ko": "열기 중첩당 받는 피해 2% 감소, 최대 10%.",
+            "en": "Take 2% less damage per Heat stack, up to 10%."
+          },
+          "parameters": {
+            "damageReductionPerStackPct": 2,
+            "maxDamageReductionPct": 10
+          }
+        },
+        {
+          "requiredPieces": 5,
+          "effectId": "REF_SM05_B5",
+          "description": {
+            "ko": "시전 전 열기가 5중첩이면 화염구 비용 감소 +20%p. 적중 지점에 반경 2m, D80% 화염 폭발을 추가합니다. 추가 폭발은 시전당 1회, 2초에 1회입니다.",
+            "en": "At five Heat before casting, Fireball gains 20 percentage points of cost reduction and an 80% D fire burst within 2 m of impact. One burst per cast with a 2-second cooldown."
+          },
+          "parameters": {
+            "resourceCostReductionPct": 20,
+            "damageDPct": 80,
+            "radiusMeters": 2,
+            "internalCooldownSeconds": 2
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "검게 그을린 철과 두꺼운 구리 테두리, 잿빛 천을 결합합니다. 도가니의 넓은 그릇 형태와 주황색 열기가 보이는 굵은 통풍 틈을 반복합니다. 둥근 용광로 중심과 넓은 사다리꼴 판으로 연속 화염 시전을 표현합니다.",
+        "en": "Blackened iron, thick copper lips, and ash-gray cloth. Repeat the broad crucible bowl and large vent slits containing restrained orange heat. A rounded furnace core and broad trapezoid plates express sustained fire casting."
+      },
+      "setEmblemReuse": [
+        "REF_SM05_B2",
+        "REF_SM05_B3",
+        "REF_SM05_B5"
+      ]
+    },
+    {
+      "id": "REF_SM06",
+      "name": {
+        "ko": "얼어붙은 심해",
+        "en": "Frozen Deep"
+      },
+      "concept": {
+        "ko": "동상 축적·빙결 정산",
+        "en": "Frostbite and freeze cash-out"
+      },
+      "gameplayLoop": {
+        "ko": "눈보라로 동상을 쌓은 뒤 서리 폭발로 남은 피해를 정산합니다.",
+        "en": "Build Frostbite with Blizzard, then cash it out with Frost Nova."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM06_B2",
+          "description": {
+            "ko": "눈보라의 실제 피해 틱마다 대상에게 D15% 동상을 추가합니다. 동상은 6초 동안 지속 피해로 소진되며 남은 피해 상한은 D90%입니다.",
+            "en": "Each damaging Blizzard tick adds 15% D Frostbite, draining over 6 seconds; remaining damage is capped at 90% D."
+          },
+          "parameters": {
+            "frostbiteAddedDPct": 15,
+            "durationSeconds": 6,
+            "maxRemainingDPct": 90
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SM06_B3",
+          "description": {
+            "ko": "자신의 눈보라 안에 있는 동안 받는 피해 12% 감소.",
+            "en": "Take 12% less damage inside your own Blizzard."
+          },
+          "parameters": {
+            "damageReductionPct": 12
+          }
+        },
+        {
+          "requiredPieces": 5,
+          "effectId": "REF_SM06_B5",
+          "description": {
+            "ko": "서리 폭발 적중 시 자신의 잔여 동상 피해의 150%를 즉시 주고 동상을 제거합니다. 대상당 4초에 1회입니다. 보스에게 빙결을 강제로 부여하지 않습니다.",
+            "en": "Frost Nova consumes this set's remaining Frostbite for 150% of its damage immediately, once per target every 4 seconds. It does not force bosses to freeze."
+          },
+          "parameters": {
+            "remainingFrostbiteMultiplier": 1.5,
+            "perTargetCooldownSeconds": 4
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "짙은 심해 청색 천과 흐린 은, 두껍고 우윳빛인 얼음을 사용합니다. 아래를 향한 큰 물방울과 겹친 조개 능선을 반복합니다. 동상의 축적과 폭발을 닫힌 얼음 저장고 형태로 표현하고 얇은 눈송이 장식은 피합니다.",
+        "en": "Deep ocean-blue cloth, clouded silver, and thick milky ice. Repeat a downward teardrop and overlapping shell ribs. Express stored Frostbite and its release through a closed ice-reservoir shape; avoid fine snowflake decoration."
+      },
+      "setEmblemReuse": [
+        "REF_SM06_B2",
+        "REF_SM06_B3",
+        "REF_SM06_B5"
+      ]
+    },
+    {
+      "id": "REF_SM07",
+      "name": {
+        "ko": "변덕스러운 뇌성",
+        "en": "Wild Thunder"
+      },
+      "concept": {
+        "ko": "확률형 번개 폭발",
+        "en": "Random lightning spikes"
+      },
+      "gameplayLoop": {
+        "ko": "연쇄 번개마다 피해 보너스를 굴리고 최고 결과의 추가 낙뢰를 노립니다.",
+        "en": "Roll each Chain Lightning bonus and seek a maximum-result bolt."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM07_B2",
+          "description": {
+            "ko": "연쇄 번개 시전마다 피해 보너스 0·10·20·30% 중 하나를 균등 추첨합니다. 모든 연결은 같은 결과를 사용합니다.",
+            "en": "Each Chain Lightning rolls an equally likely 0%, 10%, 20%, or 30% damage bonus shared by every jump."
+          },
+          "parameters": {
+            "damageOutcomesPct": [
+              0,
+              10,
+              20,
+              30
+            ],
+            "rolls": 1
+          }
+        },
+        {
+          "requiredPieces": 3,
+          "effectId": "REF_SM07_B3",
+          "description": {
+            "ko": "30% 결과이면 첫 적중 대상에게 0.5초 기절을 시도합니다. 시전당 1회이며 보스의 제어 면역을 유지합니다.",
+            "en": "A 30% result attempts a 0.5-second stun on the first target, once per cast; boss immunity remains intact."
+          },
+          "parameters": {
+            "maximumOutcomePct": 30,
+            "stunSeconds": 0.5
+          }
+        },
+        {
+          "requiredPieces": 5,
+          "effectId": "REF_SM07_B5",
+          "description": {
+            "ko": "피해 보너스를 두 번 굴려 큰 값을 사용합니다. 최종 결과가 30%이면 첫 대상에게 D80% 번개 피해를 추가합니다. 시전당 1회입니다.",
+            "en": "Roll twice and use the higher bonus. A final 30% result adds one 80% D lightning hit to the first target."
+          },
+          "parameters": {
+            "replacementRolls": 2,
+            "maximumOutcomePct": 30,
+            "damageDPct": 80
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "흑연색 금속과 오래된 황백금, 남보라색 가죽을 사용합니다. 꺾인 번개 쐐기와 둘로 갈라진 접점 형태를 반복합니다. 분기한 꼭짓점과 비대칭 높이로 연쇄 번개의 변동성과 강한 낙뢰를 나타냅니다.",
+        "en": "Graphite metal, aged electrum, and indigo leather. Repeat a bent lightning wedge and paired forked contact shape. Branched points and unequal heights express the variable chain and high-result bolt."
+      },
+      "setEmblemReuse": [
+        "REF_SM07_B2",
+        "REF_SM07_B3",
+        "REF_SM07_B5"
+      ]
+    },
+    {
+      "id": "REF_SM08",
+      "name": {
+        "ko": "삼원소의 대순환",
+        "en": "Threefold Cycle"
+      },
+      "concept": {
+        "ko": "세 원소 순환",
+        "en": "Three-element rotation"
+      },
+      "gameplayLoop": {
+        "ko": "화염구·눈보라·연쇄 번개를 순환하고 다음 공격으로 복합 폭발을 해방합니다.",
+        "en": "Rotate Fireball, Blizzard, and Chain Lightning, then release a combined burst."
+      },
+      "bonuses": [
+        {
+          "requiredPieces": 2,
+          "effectId": "REF_SM08_B2",
+          "description": {
+            "ko": "직전과 다른 M01·M02·M03을 8초 안에 시전하면 해당 기술 피해 +12%.",
+            "en": "Casting a different M01/M02/M03 within 8 seconds grants that skill 12% damage."
+          },
+          "parameters": {
+            "rotationWindowSeconds": 8,
+            "skillDamagePct": 12
+          }
+        },
+        {
+          "requiredPieces": 4,
+          "effectId": "REF_SM08_B4",
+          "description": {
+            "ko": "새 원소를 유효 시전할 때 최대 체력 5% 보호막을 4초 얻습니다. 같은 순환의 서로 다른 원소를 합쳐 최대 15%이며 중복 원소는 더하지 않습니다.",
+            "en": "A new element grants a 5% maximum-Life barrier for 4 seconds. Different elements in the same rotation add up to 15%; repeated elements add nothing."
+          },
+          "parameters": {
+            "barrierPerElementMaxLifePct": 5,
+            "maxBarrierMaxLifePct": 15,
+            "durationSeconds": 4
+          }
+        },
+        {
+          "requiredPieces": 6,
+          "effectId": "REF_SM08_B6",
+          "description": {
+            "ko": "8초 안에 세 원소를 모두 시전하면 기록을 비우고 6초짜리 충전 1개를 얻습니다. 다음 공격 기술의 첫 적중 위치에 반경 2.5m, 화염·냉기·번개 D40%씩을 1회 추가합니다. 충전 생성은 6초에 1회입니다.",
+            "en": "All three elements within 8 seconds reset the history and grant one 6-second charge. The next offensive skill's first hit releases one 2.5 m burst for 40% D each of fire, cold, and lightning. Charge creation cooldown: 6 seconds."
+          },
+          "parameters": {
+            "distinctElementsRequired": 3,
+            "chargeDurationSeconds": 6,
+            "damagePerElementDPct": 40,
+            "radiusMeters": 2.5,
+            "internalCooldownSeconds": 6
+          }
+        }
+      ],
+      "visualLanguage": {
+        "ko": "오래된 금과 검은 도자기, 상아색 천을 결합합니다. 같은 크기의 불꽃 잎, 얼음 잎, 번개 잎 세 개를 순환 방향으로 맞물립니다. 정돈된 삼각 균형과 세 갈래 회전 형태로 다른 원소를 차례로 사용한다는 규칙을 나타냅니다.",
+        "en": "Aged gold, black porcelain, and ivory cloth. Three equal flame, ice, and lightning petals interlock in a clear rotational direction. Ordered triangular balance and a three-lobed turning shape express alternating different elements in sequence."
+      },
+      "setEmblemReuse": [
+        "REF_SM08_B2",
+        "REF_SM08_B4",
+        "REF_SM08_B6"
+      ]
+    }
+  ]
+}

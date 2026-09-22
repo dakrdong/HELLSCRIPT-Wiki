@@ -19,6 +19,7 @@ namespace Hellscript
         }
         void LandingPassives(HeroActionState action)
         {
+            ClassLanding(ClassSkills.LegacyId(action.skill),action.id);
             if(action.skill==1&&Hero.heroClass==HeroClass.Warrior&&Stats.passives[2])
             {leapDefense=2;EffectEvent("WP03","BUFF",root:action.id,value:2);}
             if(action.skill==9&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[1])

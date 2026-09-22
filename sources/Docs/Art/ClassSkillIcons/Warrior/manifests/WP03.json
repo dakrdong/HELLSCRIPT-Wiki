@@ -1,0 +1,102 @@
+{
+  "id": "WP03",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "착지 자세",
+    "en": "Landing Stance"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP03.png",
+  "effectSummary": {
+    "ko": "도약 착지 후 2초 동안 받는 피해가 15% 감소합니다.",
+    "en": "Reduces incoming damage by 15% for 2 seconds after a leap lands."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW02",
+    "LW04",
+    "LW11",
+    "LW12",
+    "LW13",
+    "LW14",
+    "LW15",
+    "LW16",
+    "LW37"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP03 Landing Stance (passive). Gameplay meaning: Reduces incoming damage by 15% for 2 seconds after a leap lands.\nSubject and composition: PASSIVE EMBLEM: two sturdy plated greaves bent into a stable landing stance, a broad silver chevron of bracing force nested between them. Compact low-center silhouette and a small golden protective glint. No platform or ground.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 996254,
+      "alphaBBox": [
+        0,
+        21,
+        1238,
+        1236
+      ],
+      "coreBBox": [
+        147,
+        168,
+        1123,
+        1082
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "낮게 버틴 두 다리와 중앙 받침 모양이 착지 안정성을 나타냅니다. 바닥은 없습니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
+        "en": "Two braced legs and the central stabilizing chevron convey landing stability without a floor. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:38:21.621268+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-f353d2b0-9400-4fdc-b8d3-d8de5457185a.png",
+      "sourceSha256": "587e094be6914c54a93397a9e9165c7aae15fc96ba66aa1ffd413170df14c016",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP03.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-f353d2b0-9400-4fdc-b8d3-d8de5457185a.png",
+  "sourceSha256": "587e094be6914c54a93397a9e9165c7aae15fc96ba66aa1ffd413170df14c016",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP03.png"
+}

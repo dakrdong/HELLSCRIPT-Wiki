@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "id": "DES_LA41",
+  "name": {
+    "ko": "인내하는 사냥활",
+    "en": "Patient Hunter's Bow"
+  },
+  "heroClass": "Ranger",
+  "slot": 0,
+  "slotName": "weapon",
+  "effectSummary": {
+    "ko": "잇단 사격·응시 사격이 표식 대상에게 처음 직접 적중하면 D50% 물리 추가 피해와 자원 4 회복을 한 번 얻습니다. 두 기술은 1초 재발동 간격을 공유합니다.",
+    "en": "The first direct Successive Shots or Patient Shot hit on a marked target adds D50% secondary physical damage and restores 4 resource. Both share a 1s interval."
+  },
+  "directSkillIds": [
+    "A07",
+    "A08"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "A07",
+      "name": {
+        "ko": "잇단 사격",
+        "en": "Successive Shots"
+      },
+      "description": {
+        "ko": "10m 안의 적 하나에게 0.15초 간격으로 D45% 화살 3발을 쏩니다. 한 번의 시전이며 기본 공격으로 세지 않습니다. 각 화살은 벽에 막힙니다.",
+        "en": "Fire 3 D45% physical arrows at one target within 10m, 0.15s apart. This is one cast, not three basic attacks. Each arrow collides with walls."
+      }
+    },
+    {
+      "id": "A08",
+      "name": {
+        "ko": "응시 사격",
+        "en": "Patient Shot"
+      },
+      "description": {
+        "ko": "0.9초 조준 후 12m 안의 적 하나에게 D240% 물리 피해를 줍니다. 적중 시 표식이 있으면 직접 피해가 가산 25% 증가합니다. 조준 중 이동하면 취소됩니다.",
+        "en": "Aim for 0.9s, then deal D240% physical damage to one enemy within 12m. Gain +25% additive direct damage if the target is marked at impact. Moving during aim cancels the cast."
+      }
+    }
+  ],
+  "sourceStatus": "design_only",
+  "sourceRuntimeEnabled": false,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/DES_LA41.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/DES_LA41.png",
+  "concept": "A long patient hunter bow with a broad stable horn-and-yew grip, two nested aiming arcs physically fixed around its small amber sight and strong restrained recurved limbs. Aged black wood and pale ivory, taut bowstring, quietly precise silhouette.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/DES_LA41.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one original HELLSCRIPT legendary equipment icon. Metadata only, never write it in the image: DES_LA41, Patient Hunter's Bow, class Ranger, slot weapon.\nSubject design: A long patient hunter bow with a broad stable horn-and-yew grip, two nested aiming arcs physically fixed around its small amber sight and strong restrained recurved limbs. Aged black wood and pale ivory, taut bowstring, quietly precise silhouette.\nPower that informs materials and structure, not a spell illustration: The first direct Successive Shots or Patient Shot hit on a marked target adds D50% secondary physical damage and restores 4 resource. Both share a 1s interval.\nDirect skill context: A07 Successive Shots — Fire 3 D45% physical arrows at one target within 10m, 0.15s apart. This is one cast, not three basic attacks. Each arrow collides with walls.; A08 Patient Shot — Aim for 0.9s, then deal D240% physical damage to one enemy within 12m. Gain +25% additive direct damage if the target is marked at impact. Moving during aim cancels the cast.\nStyle: dark gothic painterly fantasy equipment, worn and chipped metal, rough leather or aged cloth, strong directional upper-left highlights, deep but readable shadows. Earthy charcoal, silver, restrained old bronze; individual restrained effect colors only within the physical object. Large shapes, few decisive details, silhouette and material structure distinguish the item. Never a flat vector symbol.\nComposition and file: square native PNG with real transparent alpha; the built-in 1254 by 1254 output is accepted, and 1024 by 1024 is also accepted. Preserve native pixels and alpha. ONE tangible item, or ONE tightly overlapping pair for hands or feet, with no wearer. Aim to contain the entire subject, including all tips and chain, within the central 76% with generous transparent padding. No part may be clipped or missing. Make the item strong and clear at 64px. Weapons diagonal; jewelry at three-quarter angle; other armor mostly frontal three-quarter view.\nTransparency is mandatory: genuinely transparent surrounding area and internal empty holes with preserved native alpha, clean antialiased edges, no matte, no colored fringe. The image file must contain a real alpha channel; never paint a checkerboard.\nAvoid: any text, letters, digits, readable runes, labels, watermark, UI frame, border, panel, badge, background, scenery, solid backdrop, gradient, floor, cast shadow, glow cloud, fog, detached particles, floating spell effects, duplicate items, collage, human body or hands. Equipment shape dominates; do not cover it with enormous effects. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-39eb0ca3-3e9e-426c-a63f-d9edb59a6b0c.png",
+    "sourceSha256": "3b862a5b6985901b646e9f9e5767dbcacea2511a0f2fc3a5eb7c823490dfe324",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-39eb0ca3-3e9e-426c-a63f-d9edb59a6b0c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:38:09.326241+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "e282708283df992c44d84a1f73f6559e93f2eaa97912367da9f6ce16f9521214",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "3b862a5b6985901b646e9f9e5767dbcacea2511a0f2fc3a5eb7c823490dfe324",
+    "nativeAlpha": true,
+    "transparentPixels": 1373156,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 199360,
+    "nearlyOpaquePixels": 131403,
+    "alphaBoundingBox": [
+      0,
+      15,
+      1253,
+      1196
+    ],
+    "alpha16BoundingBox": [
+      11,
+      22,
+      1240,
+      1177
+    ],
+    "transparentPixelFraction": 0.8732222756398027,
+    "central76": false,
+    "outermostBorderFullyTransparent": false,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "originalFileUnchanged": true,
+    "status": "passed_candidate_model_unknown",
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "outermostBorderMaxAlpha": 1,
+    "physicalGeometryInsideCanvas": true,
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/batch-004.png",
+      "Docs/Art/ClassLegendaryIcons/qa/batch-004-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "64px의 밝은·어두운 바탕 비교와 원본 가장자리 표본에서 부위·개별 구조가 구분됩니다. 물체 형태가 잘리지 않았으며 배경 테두리가 보이지 않습니다. 일부 캔버스 가장자리의 매우 낮은 알파값은 측정값으로 보존했습니다.",
+      "en": "Distinct slot and item structure at actual 64px on dark/light backgrounds. Native edge crops show complete geometry and no visible matte. Very low-alpha pixels at some canvas borders remain documented without modifying the native output."
+    }
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}

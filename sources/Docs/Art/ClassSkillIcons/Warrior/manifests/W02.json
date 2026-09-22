@@ -1,0 +1,112 @@
+{
+  "id": "W02",
+  "heroClass": "Warrior",
+  "kind": "active",
+  "name": {
+    "ko": "도약 내려찍기",
+    "en": "Leap Slam"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W02.png",
+  "effectSummary": {
+    "ko": "유효한 위치로 도약해 착지 충격을 줍니다.",
+    "en": "Leaps to a valid spot and deals impact damage on landing."
+  },
+  "visualConcept": {
+    "ko": "긴 도약 궤적 끝의 강한 착지 충격. 거리를 확보하면 위력이 커지지만 뒤로 물러나는 동안 공격을 멈춘다.",
+    "en": "A long leap arc ending in a heavy landing impact. Gaining distance increases impact power but retreat costs attack time."
+  },
+  "tags": [
+    "Leap"
+  ],
+  "equipmentIds": [
+    "LW02",
+    "LW04",
+    "LW11",
+    "LW12",
+    "LW13",
+    "LW14",
+    "LW15",
+    "LW16",
+    "LW37"
+  ],
+  "setIds": [
+    "REF_SW03",
+    "REF_SW06",
+    "REF_SW07",
+    "SW",
+    "SWB"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W02 Leap Slam (active). Gameplay meaning: Leaps to a valid spot and deals impact damage on landing.\nSubject and composition: A compact armored warrior at the END of a long high leap, both hands driving one massive steel blade straight down. One long tapering golden motion arc climbs from the lower left, arches far overhead, then terminates in the downward blade and a bold fan of ochre impact shards. The long airborne journey and heavy landing must both read clearly. No ground plane, only detached impact strokes in transparency.\nAuthoritative visual concept: A long leap arc ending in a heavy landing impact. Gaining distance increases impact power but retreat costs attack time.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "central76": "guideline_warning",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 922797,
+      "alphaBBox": [
+        0,
+        19,
+        1234,
+        1254
+      ],
+      "coreBBox": [
+        43,
+        38,
+        1211,
+        1215
+      ]
+    },
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "원본과 밝은/어두운 배경의 64px 미리보기를 직접 확인했습니다. 주된 동작과 실루엣을 구별할 수 있으며, 잘림·불투명 바탕·눈에 띄는 매트나 헤일로가 없습니다.",
+        "en": "Reviewed the original and 64px previews on dark and light backgrounds. Primary actions and silhouettes are distinct, with no visible clipping, opaque backdrop, matte or halo."
+      }
+    }
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:05:27.408319+00:00",
+      "surface": "built-in image_gen",
+      "promptFile": "Docs/Art/ClassSkillIcons/Warrior/prompts/W02.txt",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-400df20e-a655-4441-bf84-17f03c44f8be.png",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W02.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-4ccd-7cc1-940d-1a1d31b5d57c/exec-400df20e-a655-4441-bf84-17f03c44f8be.png",
+  "sourceSha256": "3b97102c08dada1817003437868b58aa0968d35e60e119fc340384b4e1bee196",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W02.png"
+}

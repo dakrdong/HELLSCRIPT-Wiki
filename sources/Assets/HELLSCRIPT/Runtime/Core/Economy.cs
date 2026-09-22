@@ -42,7 +42,7 @@ namespace Hellscript
         public bool[] passives=new bool[6];
         float baseSpeed,potionMoveBonus;
         public float Bonus(StatId id)=>bonuses[(int)id];
-        public float SpeedWithBonus(float bonus)=>baseSpeed*(1+Mathf.Min(.5f,bonuses[21]/100+bonus+potionMoveBonus));
+        public float SpeedWithBonus(float bonus)=>baseSpeed*(1+Mathf.Min(.5f,bonuses[21]/100+bonus+potionMoveBonus+classMoveBonus));
         public HeroStats WithPotion(PotionDefinition potion,int level)
         {
             var result=(HeroStats)MemberwiseClone();
@@ -63,7 +63,7 @@ namespace Hellscript
         // resistance beside the all-resistance roll for the other five. Read rather than stored,
         // so that overwriting armour or resistance moves what depends on them.
         public float Resistance(int element)
-            =>element==Element.Physical?armor:Mathf.Max(0,resistance+Bonus(Element.Resistance(element)));
+            =>element==Element.Physical?armor:Mathf.Max(0,resistance+Bonus(Element.Resistance(element))*(1+classElementResistanceBonus));
         public float Conditional(DamageCondition condition)
             =>Bonus((StatId)((int)StatId.CloseDamage+(int)condition))/100;
         // The finished number for one line of the sheet — what Diablo IV's character screen shows,
@@ -123,7 +123,7 @@ namespace Hellscript
         {
             ApplySlotGrowth(hero);
             if(slotSkillBonus>0){hero=RuneGrowth.Copy(hero);hero.build.skillRanks=(int[])effectiveSkillRanks.Clone();}
-            int level=training?30:hero.level; int c=(int)hero.heroClass;
+            int level=training?ClassSkills.LevelCap(hero):hero.level; int c=(int)hero.heroClass;
             foreach(int p in hero.build.passives) if(p>=0&&p<6)passives[p]=true;
             var equipped=hero.inventory.Where(x=>x.equipped).ToList();
             foreach(var item in equipped)
@@ -144,7 +144,7 @@ namespace Hellscript
                 if(!string.IsNullOrEmpty(power)&&(aspect==null||aspect.heroClass<0||aspect.heroClass==c))
                 {specials.Add(power);if(aspect!=null)aspectLevels[power]=Mathf.Max(AspectLevel(power),AspectStone.PowerLevel(item));}
                 var unique=ItemCatalog.Unique(item.special);
-                if(unique!=null&&!string.IsNullOrEmpty(unique.setId))
+                if(unique!=null&&unique.Fits(hero.heroClass,item.slot)&&!string.IsNullOrEmpty(unique.setId))
                 {if(!sets.TryGetValue(unique.setId,out var slots))sets[unique.setId]=slots=new HashSet<int>();slots.Add(item.slot);}
             }
             foreach(var effect in RuneGrowth.Contributions(runes,Hellscript.Runes.RuneMasteryCatalog.EquippedWeapon(hero)))AddRune(effect);
@@ -184,6 +184,7 @@ namespace Hellscript
             // roll all raise the same number, so they are summed here rather than kept apart.
             shieldMultiplier=1+will*.001f+(c==0&&passives[4]?SkillEffects.Passive(hero.build.skillRanks,HeroClass.Warrior,4):c==2&&passives[3]?SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,3):0)+bonuses[(int)StatId.BarrierGeneration]/100;
             DeriveExtendedStats(will,dex,c==1?SkillEffects.MarkBonus(SkillEffects.ActiveRank(hero.build.skillRanks,10)):25);
+            ApplyClassSetStats(hero);
         }
         // Diablo IV's own derivations: strength feeds armour, dexterity feeds dodge, intelligence
         // feeds resistance and willpower feeds healing, overpower damage and resource generation.
@@ -228,9 +229,9 @@ namespace Hellscript
         public static int XpRequired(int level) => 100+60*(level-1)+15*(level-1)*(level-1);
         public static void AddXp(HeroSave hero,int xp)
         {
-            if(hero.level>=30)return;hero.xp+=xp;
-            while(hero.level<30&&hero.xp>=XpRequired(hero.level)){hero.xp-=XpRequired(hero.level);hero.level++;}
-            if(hero.level==30)hero.xp=0;
+            int cap=ClassSkills.LevelCap(hero);if(hero.level>=cap)return;hero.xp+=xp;
+            while(hero.level<cap&&hero.xp>=XpRequired(hero.level)){hero.xp-=XpRequired(hero.level);hero.level++;}
+            if(hero.level==cap)hero.xp=0;
         }
         public static bool AllowedAffix(int a,int s)=>ItemCatalog.Affixes.Any(d=>d.stat==a&&d.Allows(s));
         public static Item CreateItem(HeroClass c,int slot,int rarity,int level,ref uint rng,string id=null)

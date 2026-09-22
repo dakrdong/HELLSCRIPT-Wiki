@@ -1,0 +1,726 @@
+{
+    "status": "development_only",
+    "conditions": "Level 40, rank 1, item level 30, seed 9137, 60 seconds. W02 uses BUILD_SWB; M13 uses BUILD_REF_SM05. Only selected use policies change within a scenario. This is functional evidence, not a final balance certification.",
+    "results": [
+        {
+            "build": "BUILD_SWB",
+            "scenario": "single",
+            "policy": "W02=natural",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 37.399715423583984,
+            "hpRemaining": 2169.460205078125,
+            "resourceRemaining": 9.000099182128906,
+            "movementMeters": 7.102601528167725,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 0.0,
+            "manaRecovered": 0.0,
+            "policyWaitSeconds": 6.999997615814209,
+            "damage": 12779.045761108398,
+            "damagePerSecond": 212.98633033399614,
+            "incomingDamage": 93.4230785369873,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 35
+                },
+                {
+                    "id": "W02",
+                    "count": 1
+                },
+                {
+                    "id": "W03",
+                    "count": 40
+                },
+                {
+                    "id": "W07",
+                    "count": 6
+                }
+            ],
+            "secondaryHits": []
+        },
+        {
+            "build": "BUILD_SWB",
+            "scenario": "single",
+            "policy": "W02=space",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 34.24976348876953,
+            "hpRemaining": 2171.57275390625,
+            "resourceRemaining": 18.800203323364258,
+            "movementMeters": 46.23345184326172,
+            "spacingMeters": 41.42874526977539,
+            "chargingSeconds": 0.0,
+            "manaRecovered": 0.0,
+            "policyWaitSeconds": 13.799995422363281,
+            "damage": 13288.319458007813,
+            "damagePerSecond": 221.47431432481534,
+            "incomingDamage": 75.27427196502686,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 24
+                },
+                {
+                    "id": "W02",
+                    "count": 7
+                },
+                {
+                    "id": "W03",
+                    "count": 35
+                },
+                {
+                    "id": "W07",
+                    "count": 6
+                }
+            ],
+            "secondaryHits": []
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "single",
+            "policy": "M13=hold",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 27.04987335205078,
+            "hpRemaining": 1637.4268798828125,
+            "resourceRemaining": 13.416592597961426,
+            "movementMeters": 49.091548919677734,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 3.6499977111816406,
+            "manaRecovered": 500.779541015625,
+            "policyWaitSeconds": 0.6000000238418579,
+            "damage": 23279.697509765625,
+            "damagePerSecond": 387.9990287678875,
+            "incomingDamage": 100.01999306678772,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "M01",
+                    "count": 69
+                },
+                {
+                    "id": "M13",
+                    "count": 13
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 24
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "single",
+            "policy": "M13=hold,M13:goal=full",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 14.550037384033203,
+            "hpRemaining": 1634.492431640625,
+            "resourceRemaining": 27.807666778564453,
+            "movementMeters": 43.86903762817383,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 4.049997329711914,
+            "manaRecovered": 555.659423828125,
+            "policyWaitSeconds": 0.4000000059604645,
+            "damage": 24002.890655517578,
+            "damagePerSecond": 400.0523743083802,
+            "incomingDamage": 102.71999287605286,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "M01",
+                    "count": 70
+                },
+                {
+                    "id": "M13",
+                    "count": 7
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 22
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "single",
+            "policy": "M13=retreat",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 36.19973373413086,
+            "hpRemaining": 1641.366943359375,
+            "resourceRemaining": 33.23854446411133,
+            "movementMeters": 76.6003189086914,
+            "spacingMeters": 40.04275131225586,
+            "chargingSeconds": 1.2999998331069946,
+            "manaRecovered": 178.36001586914063,
+            "policyWaitSeconds": 11.399995803833008,
+            "damage": 19477.640426635742,
+            "damagePerSecond": 324.6307459559811,
+            "incomingDamage": 56.81999611854553,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 7
+                },
+                {
+                    "id": "M01",
+                    "count": 54
+                },
+                {
+                    "id": "M13",
+                    "count": 8
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 24
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "single",
+            "policy": "M13=retreat,M13:goal=full",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 27.449867248535156,
+            "hpRemaining": 1639.06201171875,
+            "resourceRemaining": 32.325984954833984,
+            "movementMeters": 68.03839111328125,
+            "spacingMeters": 31.24606704711914,
+            "chargingSeconds": 1.8999992609024048,
+            "manaRecovered": 260.6800231933594,
+            "policyWaitSeconds": 9.399996757507324,
+            "damage": 20113.82420349121,
+            "damagePerSecond": 335.233920135296,
+            "incomingDamage": 64.91999554634094,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 5
+                },
+                {
+                    "id": "M01",
+                    "count": 57
+                },
+                {
+                    "id": "M13",
+                    "count": 4
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 22
+                }
+            ]
+        },
+        {
+            "build": "BUILD_SWB",
+            "scenario": "group",
+            "policy": "W02=natural",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 41.49965286254883,
+            "hpRemaining": 1485.2171630859375,
+            "resourceRemaining": 14.000085830688477,
+            "movementMeters": 7.311502933502197,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 0.0,
+            "manaRecovered": 0.0,
+            "policyWaitSeconds": 6.999997615814209,
+            "damage": 24024.18324279785,
+            "damagePerSecond": 400.4072544858926,
+            "incomingDamage": 802.6141650676727,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 35
+                },
+                {
+                    "id": "W02",
+                    "count": 1
+                },
+                {
+                    "id": "W03",
+                    "count": 39
+                },
+                {
+                    "id": "W07",
+                    "count": 5
+                }
+            ],
+            "secondaryHits": []
+        },
+        {
+            "build": "BUILD_SWB",
+            "scenario": "group",
+            "policy": "W02=space",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 33.699771881103516,
+            "hpRemaining": 1648.70361328125,
+            "resourceRemaining": 30.600122451782227,
+            "movementMeters": 27.504596710205078,
+            "spacingMeters": 21.624849319458008,
+            "chargingSeconds": 0.0,
+            "manaRecovered": 0.0,
+            "policyWaitSeconds": 10.79999828338623,
+            "damage": 71467.94325256348,
+            "damagePerSecond": 1191.1448831498285,
+            "incomingDamage": 722.1466686725616,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 29
+                },
+                {
+                    "id": "W02",
+                    "count": 3
+                },
+                {
+                    "id": "W03",
+                    "count": 36
+                },
+                {
+                    "id": "W07",
+                    "count": 5
+                }
+            ],
+            "secondaryHits": []
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "group",
+            "policy": "M13=hold",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 25.64989471435547,
+            "hpRemaining": 957.4693603515625,
+            "resourceRemaining": 35.84859085083008,
+            "movementMeters": 47.629234313964844,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 2.049999237060547,
+            "manaRecovered": 281.260009765625,
+            "policyWaitSeconds": 0.0,
+            "damage": 191760.21632957458,
+            "damagePerSecond": 3196.0371332567206,
+            "incomingDamage": 780.2399489879608,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "M01",
+                    "count": 70
+                },
+                {
+                    "id": "M07",
+                    "count": 3
+                },
+                {
+                    "id": "M13",
+                    "count": 7
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 115
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "group",
+            "policy": "M13=hold,M13:goal=full",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 14.450037002563477,
+            "hpRemaining": 942.7692260742188,
+            "resourceRemaining": 76.71775817871094,
+            "movementMeters": 45.12242889404297,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 2.2999989986419678,
+            "manaRecovered": 315.5599365234375,
+            "policyWaitSeconds": 0.0,
+            "damage": 192059.30725479126,
+            "damagePerSecond": 3201.022034304025,
+            "incomingDamage": 794.9399468898773,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "M01",
+                    "count": 71
+                },
+                {
+                    "id": "M07",
+                    "count": 2
+                },
+                {
+                    "id": "M13",
+                    "count": 4
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 110
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "group",
+            "policy": "M13=retreat",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 32.3997917175293,
+            "hpRemaining": 1098.8885498046875,
+            "resourceRemaining": 22.10650634765625,
+            "movementMeters": 66.8144760131836,
+            "spacingMeters": 29.16727066040039,
+            "chargingSeconds": 0.40000003576278687,
+            "manaRecovered": 54.8800048828125,
+            "policyWaitSeconds": 7.199997425079346,
+            "damage": 178249.64269256592,
+            "damagePerSecond": 2970.8585437558313,
+            "incomingDamage": 638.8199574947357,
+            "survived": true,
+            "ultimateCasts": 1,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 2
+                },
+                {
+                    "id": "M01",
+                    "count": 60
+                },
+                {
+                    "id": "M07",
+                    "count": 4
+                },
+                {
+                    "id": "M13",
+                    "count": 2
+                },
+                {
+                    "id": "M17",
+                    "count": 1
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 105
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "group",
+            "policy": "M13=retreat,M13:goal=full",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 23.149932861328125,
+            "hpRemaining": 1058.3892822265625,
+            "resourceRemaining": 23.023868560791016,
+            "movementMeters": 58.28311538696289,
+            "spacingMeters": 15.87640380859375,
+            "chargingSeconds": 0.9000001549720764,
+            "manaRecovered": 123.48001098632813,
+            "policyWaitSeconds": 4.200000286102295,
+            "damage": 181846.4537563324,
+            "damagePerSecond": 3030.8060236926976,
+            "incomingDamage": 679.3199546337128,
+            "survived": true,
+            "ultimateCasts": 1,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 3
+                },
+                {
+                    "id": "M01",
+                    "count": 63
+                },
+                {
+                    "id": "M07",
+                    "count": 3
+                },
+                {
+                    "id": "M13",
+                    "count": 2
+                },
+                {
+                    "id": "M17",
+                    "count": 1
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 110
+                }
+            ]
+        },
+        {
+            "build": "BUILD_SWB",
+            "scenario": "boss",
+            "policy": "W02=natural",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 40.2996711730957,
+            "hpRemaining": 1912.077392578125,
+            "resourceRemaining": 22.99997329711914,
+            "movementMeters": 6.6847968101501465,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 0.0,
+            "manaRecovered": 0.0,
+            "policyWaitSeconds": 7.599997043609619,
+            "damage": 12811.759323120117,
+            "damagePerSecond": 213.5315620872335,
+            "incomingDamage": 369.4562096595764,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 38
+                },
+                {
+                    "id": "W02",
+                    "count": 1
+                },
+                {
+                    "id": "W03",
+                    "count": 40
+                },
+                {
+                    "id": "W07",
+                    "count": 6
+                }
+            ],
+            "secondaryHits": []
+        },
+        {
+            "build": "BUILD_SWB",
+            "scenario": "boss",
+            "policy": "W02=space",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 36.099735260009766,
+            "hpRemaining": 2051.248291015625,
+            "resourceRemaining": 6.200006484985352,
+            "movementMeters": 40.359378814697266,
+            "spacingMeters": 35.183292388916016,
+            "chargingSeconds": 0.0,
+            "manaRecovered": 0.0,
+            "policyWaitSeconds": 13.199995994567871,
+            "damage": 12756.152450561523,
+            "damagePerSecond": 212.6047711554998,
+            "incomingDamage": 309.5898814201355,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 26
+                },
+                {
+                    "id": "W02",
+                    "count": 6
+                },
+                {
+                    "id": "W03",
+                    "count": 36
+                },
+                {
+                    "id": "W07",
+                    "count": 5
+                }
+            ],
+            "secondaryHits": []
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "boss",
+            "policy": "M13=hold",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 27.799861907958984,
+            "hpRemaining": 1357.5479736328125,
+            "resourceRemaining": 7.808582305908203,
+            "movementMeters": 47.62923812866211,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 4.049997329711914,
+            "manaRecovered": 555.659423828125,
+            "policyWaitSeconds": 0.0,
+            "damage": 23295.908895492554,
+            "damagePerSecond": 388.26922136443613,
+            "incomingDamage": 379.2249975204468,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "M01",
+                    "count": 68
+                },
+                {
+                    "id": "M07",
+                    "count": 4
+                },
+                {
+                    "id": "M13",
+                    "count": 14
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 23
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "boss",
+            "policy": "M13=hold,M13:goal=full",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 14.000035285949707,
+            "hpRemaining": 1345.4730224609375,
+            "resourceRemaining": 23.373695373535156,
+            "movementMeters": 41.98891830444336,
+            "spacingMeters": 0.0,
+            "chargingSeconds": 4.499999046325684,
+            "manaRecovered": 617.3992919921875,
+            "policyWaitSeconds": 0.0,
+            "damage": 23223.65468978882,
+            "damagePerSecond": 387.06497196962835,
+            "incomingDamage": 391.29999923706055,
+            "survived": true,
+            "ultimateCasts": 0,
+            "casts": [
+                {
+                    "id": "M01",
+                    "count": 71
+                },
+                {
+                    "id": "M07",
+                    "count": 2
+                },
+                {
+                    "id": "M13",
+                    "count": 8
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 23
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "boss",
+            "policy": "M13=retreat",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 39.39968490600586,
+            "hpRemaining": 1420.548095703125,
+            "resourceRemaining": 14.150479316711426,
+            "movementMeters": 77.89860534667969,
+            "spacingMeters": 45.51905059814453,
+            "chargingSeconds": 0.7000001072883606,
+            "manaRecovered": 96.04000854492188,
+            "policyWaitSeconds": 11.999993324279785,
+            "damage": 18508.161506652832,
+            "damagePerSecond": 308.47259445051094,
+            "incomingDamage": 316.2249975204468,
+            "survived": true,
+            "ultimateCasts": 1,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 10
+                },
+                {
+                    "id": "M01",
+                    "count": 50
+                },
+                {
+                    "id": "M07",
+                    "count": 4
+                },
+                {
+                    "id": "M13",
+                    "count": 4
+                },
+                {
+                    "id": "M17",
+                    "count": 1
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 20
+                }
+            ]
+        },
+        {
+            "build": "BUILD_REF_SM05",
+            "scenario": "boss",
+            "policy": "M13=retreat,M13:goal=full",
+            "seconds": 59.99937057495117,
+            "resourceStarvedSeconds": 33.64977264404297,
+            "hpRemaining": 1416.34814453125,
+            "resourceRemaining": 18.412179946899414,
+            "movementMeters": 54.94883346557617,
+            "spacingMeters": 27.50995635986328,
+            "chargingSeconds": 1.3499997854232788,
+            "manaRecovered": 185.2200164794922,
+            "policyWaitSeconds": 8.199996948242188,
+            "damage": 19210.236530303955,
+            "damagePerSecond": 320.17396759698573,
+            "incomingDamage": 320.42499923706055,
+            "survived": true,
+            "ultimateCasts": 1,
+            "casts": [
+                {
+                    "id": "BASIC",
+                    "count": 12
+                },
+                {
+                    "id": "M01",
+                    "count": 54
+                },
+                {
+                    "id": "M07",
+                    "count": 4
+                },
+                {
+                    "id": "M13",
+                    "count": 3
+                },
+                {
+                    "id": "M17",
+                    "count": 1
+                }
+            ],
+            "secondaryHits": [
+                {
+                    "id": "EXTRA:REF_SM05_B5",
+                    "count": 21
+                }
+            ]
+        }
+    ]
+}

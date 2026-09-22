@@ -1,0 +1,108 @@
+{
+  "id": "AP10",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "독의 순환",
+    "en": "Venom Cycle"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP10.png",
+  "effectSummary": {
+    "ko": "중독된 적을 직접 공격으로 처치하면 자원 6을 회복합니다. 2초 간격이며 독 틱·장비 추가 피해 처치는 제외합니다.",
+    "en": "A direct attack killing a poisoned enemy restores 6 resource, with a 2s interval. Poison ticks and item secondary kills are excluded."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LA03",
+    "LA17",
+    "LA18",
+    "LA19",
+    "LA20",
+    "LA21",
+    "LA22",
+    "LA26",
+    "DES_LA44"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring venom renewal emblem: one thick barbed arrowhead crosses a curved serpent fang containing an emerald droplet, with a restrained amber inward glint beneath it. A compact almost spiral composition suggests resource restored by a poisonous kill, not a circular UI frame.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP10 Venom Cycle. Skill type: passive. Effect: A direct attack killing a poisoned enemy restores 6 resource, with a 2s interval. Poison ticks and item secondary kills are excluded. Tags: Passive. Linked equipment IDs for identity context only: LA03, LA17, LA18, LA19, LA20, LA21, LA22, LA26, DES_LA44. Subject and composition: An enduring venom renewal emblem: one thick barbed arrowhead crosses a curved serpent fang containing an emerald droplet, with a restrained amber inward glint beneath it. A compact almost spiral composition suggests resource restored by a poisonous kill, not a circular UI frame. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1291510,
+      "alphaBBox": [
+        33,
+        19,
+        1223,
+        1228
+      ],
+      "coreBBox": [
+        319,
+        243,
+        968,
+        993
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-02.png",
+    "visualReview": {
+      "ko": "독니와 화살, 회수되는 녹색 방울이 64px에서 구분됩니다. 부드러운 곡선과 날카로운 화살촉이 고유 실루엣을 만듭니다.",
+      "en": "The fang, arrow and returning green droplet are distinct at 64px; curved bone and a sharp arrowhead define the silhouette."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP10.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-0764bff8-b70c-490f-b4af-006f3f757b16.png",
+  "sourceSha256": "67c89af8dd58ac6e39f0b27acab2c4f8e2634ae74cebcc2120d2f4fcb6dc6bbf",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP10.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP10.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:29:17.061273+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-0764bff8-b70c-490f-b4af-006f3f757b16.png",
+      "sourceSha256": "67c89af8dd58ac6e39f0b27acab2c4f8e2634ae74cebcc2120d2f4fcb6dc6bbf",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

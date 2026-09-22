@@ -1,0 +1,100 @@
+{
+  "id": "WP10",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "함성의 여운",
+    "en": "Lingering Shout"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP10.png",
+  "effectSummary": {
+    "ko": "전투 함성 시전 후 3초간 매초 최대 HP의 1%를 회복합니다. 같은 효과는 중첩하지 않으며 재발동 간격은 6초입니다.",
+    "en": "After casting Battle Shout, heal 1% maximum HP each second for 3s. Refresh without stacking; 6s interval."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW21",
+    "LW34",
+    "LW35",
+    "LW36",
+    "LW37"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP10 Lingering Shout (passive). Gameplay meaning: After casting Battle Shout, heal 1% maximum HP each second for 3s. Refresh without stacking; 6s interval.\nSubject and composition: PASSIVE EMBLEM: a weathered war horn with a small glowing red life-drop sheltered inside two lingering golden breath curls. Sustained healing resonance, horn diagonal and curls compact; no letters or surrounding ring.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1070820,
+      "alphaBBox": [
+        33,
+        40,
+        1208,
+        1228
+      ],
+      "coreBBox": [
+        235,
+        162,
+        1091,
+        1081
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-01.png",
+    "visualReview": {
+      "ko": "나팔과 붉은 생명 방울이 64px에서도 구분됩니다. 금빛 잔향은 회복 지속을 나타냅니다.",
+      "en": "The horn and red life droplet remain distinct at 64px; lingering golden breath conveys sustained healing."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:17:56.722216+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-d5129ce0-c188-4ea6-aaaf-b0d215f6960c.png",
+      "sourceSha256": "708688a8601e0550a04cc897d35e79bcf9478c65abc31975cad47d3f2b13a202",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP10.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-d5129ce0-c188-4ea6-aaaf-b0d215f6960c.png",
+  "sourceSha256": "708688a8601e0550a04cc897d35e79bcf9478c65abc31975cad47d3f2b13a202",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP10.png"
+}

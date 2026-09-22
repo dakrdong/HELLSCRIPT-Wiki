@@ -1,0 +1,104 @@
+{
+  "id": "WP13",
+  "heroClass": "Warrior",
+  "kind": "passive",
+  "name": {
+    "ko": "거친 호흡",
+    "en": "Ragged Breathing"
+  },
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP13.png",
+  "effectSummary": {
+    "ko": "HP가 50% 이하인 동안 초당 자원 회복이 20% 증가합니다. 적중·함성의 즉시 회복에는 곱하지 않습니다.",
+    "en": "Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply instant on-hit or shout restoration."
+  },
+  "visualConcept": null,
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LW01",
+    "LW05",
+    "LW06",
+    "LW07",
+    "LW08",
+    "LW09",
+    "LW10",
+    "LW25",
+    "DES_LW45"
+  ],
+  "setIds": [],
+  "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: WP13 Ragged Breathing (passive). Gameplay meaning: Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply instant on-hit or shout restoration.\nSubject and composition: PASSIVE EMBLEM: a battered cracked breastplate over a pair of stylized iron lung shapes, rekindled by one ember-gold rising breath. Distress transforming into endurance; static chest fragment, no person portrait or background.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "generationSurface": "built-in image_gen",
+  "reuse": false,
+  "reuseReason": {
+    "ko": "기존 HUD 아이콘은 256px 평면 도형이므로 이번 회화풍 1024px 원본 규격에 맞지 않습니다.",
+    "en": "Existing HUD icons are 256px flat symbols and do not meet the requested painterly 1024px master specification."
+  },
+  "qa": {
+    "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 895108,
+      "alphaBBox": [
+        51,
+        21,
+        1230,
+        1254
+      ],
+      "coreBBox": [
+        59,
+        69,
+        1183,
+        1181
+      ]
+    },
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-01.png",
+    "visualReview": {
+      "ko": "깨진 흉갑 안의 폐와 위로 향하는 숨결이 64px에서 자원 재생을 나타내는 고유 상징으로 읽힙니다.",
+      "en": "The lungs within a broken breastplate and rising breath form a distinct resource-regeneration symbol at 64px."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:21:37.788276+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-033d5ea7-cd86-4dd6-9fb2-2e2a15086960.png",
+      "sourceSha256": "f14880f1bf2e2b3934efc69b31213e605043df02542a66950a1731037aff6325",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ],
+  "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP13.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-033d5ea7-cd86-4dd6-9fb2-2e2a15086960.png",
+  "sourceSha256": "f14880f1bf2e2b3934efc69b31213e605043df02542a66950a1731037aff6325",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP13.png"
+}

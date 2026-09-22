@@ -1,0 +1,114 @@
+{
+  "id": "AP12",
+  "heroClass": "Ranger",
+  "name": {
+    "ko": "준비된 도주",
+    "en": "Prepared Escape"
+  },
+  "kind": "passive",
+  "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP12.png",
+  "effectSummary": {
+    "ko": "맹독 덫·가시 덫·서리 올가미를 직접 설치하면 장착한 후퇴 도약의 남은 쿨타임을 1초 줄입니다. 4초 간격입니다.",
+    "en": "Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat's remaining cooldown by 1s, with a 4s interval."
+  },
+  "tags": [
+    "Passive"
+  ],
+  "equipmentIds": [
+    "LA03",
+    "LA10",
+    "LA17",
+    "LA18",
+    "LA19",
+    "LA20",
+    "LA21",
+    "LA22",
+    "LA23",
+    "LA24",
+    "LA25",
+    "LA26",
+    "LA27",
+    "LA28",
+    "DES_LA42"
+  ],
+  "visualConceptFromHandoff": null,
+  "productionConcept": "An enduring prepared escape emblem: a weathered leather boot rises above a folded compact iron trap, connected by one broad pale feather-shaped upward curl. Static stacked talisman composition signifies trap placement enabling earlier retreat, no full action figure.",
+  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP12 Prepared Escape. Skill type: passive. Effect: Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat's remaining cooldown by 1s, with a 4s interval. Tags: Passive. Linked equipment IDs for identity context only: LA03, LA10, LA17, LA18, LA19, LA20, LA21, LA22, LA23, LA24, LA25, LA26, LA27, LA28, DES_LA42. Subject and composition: An enduring prepared escape emblem: a weathered leather boot rises above a folded compact iron trap, connected by one broad pale feather-shaped upward curl. Static stacked talisman composition signifies trap placement enabling earlier retreat, no full action figure. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "status": "generated",
+  "approval": "candidate",
+  "model": "unknown",
+  "modelEvidence": null,
+  "provenance": {
+    "surface": "built-in image_gen",
+    "sourcePath": null
+  },
+  "reuse": {
+    "reused": false,
+    "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
+  },
+  "qa": {
+    "status": "pending",
+    "alpha": "pass",
+    "nativeAlpha": true,
+    "dimensions": "pass",
+    "rawMetrics": {
+      "mode": "RGBA",
+      "size": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 1266739,
+      "alphaBBox": [
+        33,
+        21,
+        1192,
+        1206
+      ],
+      "coreBBox": [
+        357,
+        207,
+        911,
+        1059
+      ]
+    },
+    "edges": "pass",
+    "readability64": "pass",
+    "distinctness": "pass",
+    "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-02.png",
+    "visualReview": {
+      "ko": "가죽 장화와 덫 사이의 밝은 위쪽 흐름이 64px에서 도주 준비를 나타냅니다.",
+      "en": "The leather boot and bright upward flow above a trap convey prepared escape at 64px."
+    },
+    "edgeReview": {
+      "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
+      "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
+    },
+    "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
+    "comparisonPreview64": [
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
+      "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
+    ]
+  },
+  "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP12.png",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-debedb19-a535-4d1e-a2b7-5ec49e5ac814.png",
+  "sourceSha256": "4d24f0af70afede2116819df589d9115a392ea0baf49899e7b15c990dc92b87c",
+  "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP12.png",
+  "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP12.png",
+  "attempts": [
+    {
+      "timestamp": "2026-09-22T07:31:15.836798+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-d54c-7390-8d5e-b647a795406d/exec-debedb19-a535-4d1e-a2b7-5ec49e5ac814.png",
+      "sourceSha256": "4d24f0af70afede2116819df589d9115a392ea0baf49899e7b15c990dc92b87c",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown"
+    }
+  ]
+}

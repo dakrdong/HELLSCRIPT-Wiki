@@ -23,6 +23,13 @@ namespace Hellscript
                     throw new ArgumentException("진행 중인 균열을 이어서 연 뒤 행동 수정에서 저장하세요.");
                 staged=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(Data));
                 var candidate=prepared==null?requested.Copy():prepared.snapshot.build.Copy();
+                if(!ClassSkillLoadout.IsAbsent(candidate.classSkills))
+                {
+                    if(!ClassSkills.Enabled(staged.Hero))throw new ArgumentException("Class skills await UI integration.");
+                    ClassSkillLoadout.Validate(candidate.classSkills,staged.Hero);
+                    candidate.classSkills.ProjectLegacy(candidate,catalog);
+                }
+                else if(!ClassSkillLoadout.IsAbsent(staged.Hero.build.classSkills))throw new ArgumentException("Use the ID-based skill loadout.");
                 var errors=BehaviorRules.Validate(candidate,staged.Hero.heroClass);
                 string passiveError=ContentUnlocks.PassiveError(staged.Hero,candidate);if(passiveError!="")errors.Add(passiveError);
                 if(errors.Count>0)throw new ArgumentException(errors[0]);

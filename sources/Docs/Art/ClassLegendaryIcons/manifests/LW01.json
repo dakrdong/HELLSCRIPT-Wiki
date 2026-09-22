@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "LW01",
+  "name": {
+    "ko": "소용돌이의 송곳니",
+    "en": "Fang of the Maelstrom"
+  },
+  "heroClass": "Warrior",
+  "slot": 0,
+  "slotName": "weapon",
+  "effectSummary": {
+    "ko": "회오리 1초 유지 후 유료 틱에서 1초마다, 3.5m 내 적을 최대 1.5m 끌어옵니다. 벽·몸체 앞에서 멈추며 보스·이동 불가 적은 제외합니다.",
+    "en": "After Whirlwind has been held for 1 second, each paid tick pulls enemies within 3.5m up to 1.5m closer, once per second. They stop at walls and bodies, and bosses and immobile enemies are not pulled."
+  },
+  "directSkillIds": [
+    "W01"
+  ],
+  "linkedSkillContext": [
+    {
+      "id": "W01",
+      "name": {
+        "ko": "회오리",
+        "en": "Whirlwind"
+      },
+      "description": {
+        "ko": "주변 적에게 0.25초마다 피해. 이동하며 유지합니다.",
+        "en": "Damages nearby enemies every 0.25 seconds. Can be held while moving."
+      }
+    }
+  ],
+  "sourceStatus": "existing_runtime",
+  "sourceRuntimeEnabled": null,
+  "file": "Assets/HELLSCRIPT/Resources/Art/ClassLegendaryIcons/LW01.png",
+  "originalFile": "Docs/Art/ClassLegendaryIcons/originals/LW01.png",
+  "concept": "A heavy crescent cleaver-sword with inward-hooked fang tip, deep spine recess and spiral-forged ridges converging at a bronze vortex boss. Blackened iron, chipped silver edge, oxblood leather grip. Diagonal, hilt low left, point high right.",
+  "promptFile": "Docs/Art/ClassLegendaryIcons/prompts/LW01-initial.txt",
+  "prompt": "Use case: stylized-concept.\nCreate one completely new HELLSCRIPT legendary equipment icon: LW01, Fang of the Maelstrom, a Warrior weapon for Whirlwind which pulls foes inward. The ID and name are metadata only: draw NO text.\nSubject: one tangible heavy curved cleaver-sword, diagonal lower-left hilt to upper-right blade, with a very broad inward-hooked fang tip and a deep crescent recess near its spine. The blackened steel blade has two large spiral-forged sweeping ridges converging at a small old bronze vortex boss near the guard; these material structures suggest inward pull, without any floating cyclone or spell effect. Dark oxblood leather grip, chipped cold silver cutting edge, restrained warm bronze fittings. Make the curved fang silhouette unmistakable.\nStyle: painterly dark gothic game equipment art, convincing worn steel and rough leather, broad readable shapes, restrained detail, directional upper-left warm highlights and deep charcoal shadows. It should match an earthy aged-metal fantasy equipment atlas, never flat line icons.\nOutput: exactly 1024x1024 square PNG with NATIVE fully transparent alpha. One isolated equipment subject, fully contained within the central 76 percent of the canvas, at least 12 percent empty margin on every side. Strong solid silhouette readable when reduced to 64 pixels. All surrounding space and internal empty gaps are genuinely transparent. Preserve native alpha and clean antialiased edges; no matte or colored fringe.\nAvoid: text, letters, numbers, symbols resembling writing, watermark, UI border, panel, frame, badge, backdrop, scenery, floor, drop shadow, background gradient, checkerboard pattern, haze, huge magic effects, detached sparks, people or hands. Do not copy any existing game icon.\n",
+  "generation": {
+    "status": "generated",
+    "surface": "built_in_image_gen",
+    "requestedDefaultModel": "gpt-image-2",
+    "actualModel": "unknown",
+    "modelEvidence": null,
+    "reuse": false,
+    "reuseReason": {
+      "ko": "현재 체크아웃과 원본 Art 폴더에서 이 ID에 대응하는 독립 원본을 찾지 못했습니다.",
+      "en": "No standalone exact-ID source was found in the checkout or source Art folder."
+    },
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-8d22a64c-0c40-43da-8ccf-2cdb36772fb4.png",
+    "sourceSha256": "9cc7ca0695e401981a17647ad1a9ce56cdd665b22c772d02a5ebaf635bc6d7c3",
+    "returnedKeys": [
+      "image_url",
+      "output_hint"
+    ],
+    "outputHint": "Generated images are saved to /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72 as /Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e7-778a-7212-a8f8-30b5b852cf72/exec-8d22a64c-0c40-43da-8ccf-2cdb36772fb4.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+    "generatedAtUtc": "2026-09-22T07:09:54.304556+00:00",
+    "nativeTransparencyRequested": true,
+    "rawBackgroundParameterExposed": false,
+    "rawFormatParameterExposed": false,
+    "embeddedProvenance": {
+      "c2paChunkPresent": true,
+      "c2paChunkSha256": "3355473130893470b03982b61f5d3a30d59af9f1896e5035c452665c86cd7ab4",
+      "observedSoftwareAgent": {
+        "name": "ChatGPT",
+        "version": "gpt-image"
+      },
+      "exactModelIdentifier": null,
+      "signatureValidation": "not_performed",
+      "note": "Embedded software-agent fields do not identify gpt-image-2; actual model stays unknown."
+    }
+  },
+  "qa": {
+    "fileFormat": "PNG",
+    "mode": "RGBA",
+    "width": 1254,
+    "height": 1254,
+    "png1024": false,
+    "acceptedNativeSize": true,
+    "sha256": "9cc7ca0695e401981a17647ad1a9ce56cdd665b22c772d02a5ebaf635bc6d7c3",
+    "nativeAlpha": true,
+    "transparentPixels": 1246717,
+    "alphaExtrema": [
+      0,
+      255
+    ],
+    "nonTransparentPixels": 325799,
+    "nearlyOpaquePixels": 300276,
+    "alphaBoundingBox": [
+      47,
+      48,
+      1192,
+      1198
+    ],
+    "alpha16BoundingBox": [
+      82,
+      94,
+      1183,
+      1162
+    ],
+    "transparentPixelFraction": 0.79281673445612,
+    "central76": false,
+    "outermostBorderFullyTransparent": true,
+    "nativeAlphaSourceUnchanged": true,
+    "edgeReview": "pass",
+    "readability64px": "pass",
+    "status": "passed_candidate_model_unknown",
+    "originalFileUnchanged": true,
+    "central76Policy": "composition_guideline_only_per_handoff_revision",
+    "shapeAndSlot": "pass",
+    "clipping": "none",
+    "opaqueBackground": "none",
+    "visualReviewEvidence": [
+      "Docs/Art/ClassLegendaryIcons/qa/first-ten.png",
+      "Docs/Art/ClassLegendaryIcons/qa/first-ten-native-edges.png"
+    ],
+    "reviewNotes": {
+      "ko": "밝고 어두운 바탕의 64px 축소본과 원본 해상도 가장자리 표본을 직접 확인했습니다. 부위와 개별 형태를 구분할 수 있으며 잘림과 눈에 띄는 배경 테두리가 없습니다.",
+      "en": "The inward-curved blade and spiral boss stay distinct from straight weapons. Inspected dark/light 64px samples and native-resolution edge samples; no clipping or visible matte."
+    },
+    "outermostBorderMaxAlpha": 0,
+    "physicalGeometryInsideCanvas": true
+  },
+  "approval": "candidate_model_unknown",
+  "outstanding": [
+    "model_provenance"
+  ],
+  "handoffRevision": "Docs/Art/ClassLegendaryIcons/handoff-revision.json"
+}
