@@ -97,7 +97,7 @@ namespace Hellscript
                 Txt(dialog,"상점과 공유하는 자동 선택 설정",14,top,w-182,28,11,gold);
                 Btn(dialog,"자동 선택 설정",w-160,top,146,29,()=>OpenAutoSettings(true),false,11).name="salvage-settings";
                 top+=34;var settings=Hero.equipmentShop.auto;
-                Txt(dialog,Loc.F("등급 {0}개 · 장비 종류 {1}개 · 제외 옵션 적용",ShopAutoSelect.Grades.Where((g,n)=>(settings.gradeMask&(1<<n))!=0).Count(),settings.types.Count(t=>t.sell)),14,top,w-28,28,10,muted);
+                Txt(dialog,Loc.F("등급 {0}개 · 장비 종류 {1}개 · 제외 옵션 적용",ShopAutoSelect.AvailableGrades.Count(n=>(settings.gradeMask&(1<<n))!=0),settings.types.Count(t=>t.sell)),14,top,w-28,28,10,muted);
                 top+=34;
             }
             else {Txt(dialog,"선택한 아이템을 분해하시겠습니까?",14,top,w-28,30,14,gold);top+=38;}

@@ -51,8 +51,8 @@ namespace Hellscript
             if(safe!=UiSafeArea.Current||language!=Loc.Language||Mathf.Abs(textScale-readingScale())>.001f)Reflow();
             if(messageUntil>0&&Time.unscaledTime>messageUntil){messageUntil=0;message="";UpdateStatus();}
         }
-        public void Close(){if(!ready)return;ready=false;if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
-        public void Escape(){if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){Dismiss();return;}if(selecting){ToggleSelection();return;}Close();}
+        public void Close(){if(!ready)return;CancelDrag();ready=false;if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
+        public void Escape(){if(ghost!=null){CancelDrag();return;}if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){Dismiss();return;}if(selecting){ToggleSelection();return;}Close();}
         void Reflow()
         {
             string kind=dialogKind,id=detailId,filter=filterKind;RememberScroll();CancelDrag();
@@ -71,7 +71,7 @@ namespace Hellscript
         }
         void RememberScroll(){if(bagScroll!=null)bagOffset=bagScroll.content.anchoredPosition.y;}
         public void Repaint(){Repaint(false);}
-        void Repaint(bool resetScroll){RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Draw();}
+        void Repaint(bool resetScroll){CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Draw();}
         void Draw()
         {
             var header=Panel(body,"Header","342c20","211e16","80643d");Place(header,0,0,width,34);
@@ -138,8 +138,7 @@ namespace Hellscript
             }
             grid.sizeDelta=new Vector2(0,Mathf.Ceil(count/(float)columns)*step-6);
             float by=h-bottom;var rail=Panel(panel,"Inventory actions","24251b","1a1c14","5a4c32");Place(rail,14,by,w-28,bottom-5);
-            Txt(rail,selecting?Loc.F("{0}개 선택",selected.Count):"아이템을 캐릭터에게 끌어서 장착",4,0,w-171,20,9,muted);
-            Btn(rail,"자동 선택 설정",w-162,0,132,20,()=>OpenAutoSettings(false),false,9).name="inventory-auto-settings";
+            Txt(rail,selecting?Loc.F("{0}개 선택",selected.Count):"아이템을 캐릭터에게 끌어서 장착",4,0,w-36,20,9,muted);
             float bw=(w-48)/3;
             Btn(rail,selecting?"분해 취소":"분해",0,23,bw,34,ToggleSelection,false,11).name="inventory-dismantle";
             Btn(rail,selecting?"자동 선택":"일괄 분해",bw+10,23,bw,34,()=>{if(selecting)AutoSelect();else ShowSalvage(true);},false,11).name="inventory-bulk";

@@ -35,6 +35,8 @@ namespace Hellscript
             RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)cell.transform,data.position,null,out var local);
             var rect=((RectTransform)cell.transform).rect;dragOffset=new Vector2(local.x-rect.xMin,rect.yMax-local.y);
             ghost=DrawCell(overlays,item,0,0,SlotSize,false);ghost.name="Inventory drag ghost";var group=ghost.gameObject.AddComponent<CanvasGroup>();group.blocksRaycasts=false;group.alpha=.88f;
+            foreach(var target in body.GetComponentsInChildren<InventoryDropTarget>().Where(t=>t.slot>=0))
+                target.GetComponent<EquipmentSlotView>()?.SetDropHighlight(!draggingEquipped&&EquipmentSlots.PlanDrop(Hero,item,target.slot,target.index).Valid);
             Drag(data);
         }
         internal void Drag(PointerEventData data)
@@ -42,6 +44,8 @@ namespace Hellscript
             if(ghost==null)return;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(frame,data.position,null,out var point);
             Place(ghost,point.x-frame.rect.xMin-dragOffset.x,frame.rect.yMax-point.y-dragOffset.y,SlotSize,SlotSize);
+            foreach(var slot in body.GetComponentsInChildren<EquipmentSlotView>().Where(s=>s.DropHighlighted))
+                slot.SetDropHighlight(true,RectTransformUtility.RectangleContainsScreenPoint((RectTransform)slot.transform,data.position,null));
         }
         internal void EndDrag(PointerEventData data)
         {
@@ -52,8 +56,16 @@ namespace Hellscript
             if(target==null)return;
             var item=FindItem(id);if(item==null)return;
             if(equipped){if(target.slot==-2)Unequip(id);return;}
-            if(target.slot==-1)Equip(id);else if(target.slot==item.slot)Equip(id,target.index);else Toast("이 장비를 해당 장착 위치에 넣을 수 없습니다.");
+            if(target.slot==-1){Equip(id);return;}
+            var plan=EquipmentSlots.PlanDrop(Hero,item,target.slot,target.index);
+            if(plan.Valid)Equip(id,plan.index);else Toast(plan.error);
         }
-        void CancelDrag(){if(ghost!=null){ghost.gameObject.SetActive(false);Destroy(ghost.gameObject);}ghost=null;draggingId=null;}
+        void CancelDrag()
+        {
+            if(body!=null)foreach(var slot in body.GetComponentsInChildren<EquipmentSlotView>())slot.SetDropHighlight(false);
+            if(ghost!=null){ghost.gameObject.SetActive(false);Destroy(ghost.gameObject);}ghost=null;draggingId=null;
+        }
+        void OnDisable()=>CancelDrag();
+        void OnApplicationFocus(bool focus){if(!focus)CancelDrag();}
     }
 }

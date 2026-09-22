@@ -64,3 +64,18 @@ If equip conditions fail, show the condition in red and omit the resulting-chara
 - The same item, equipment and language must yield the same comparison text across consumers.
 - Cover unchanged/new/lost properties, units, zero deltas, quality ranges, both ring positions, two-handed changes, equip restrictions, immutable source data and fixed geometry.
 - Record executed checks and their limits in [implementation evidence](../Implementation/Equipment_Comparison.en.md).
+
+## Shared item-card presentation
+
+Every equipment detail uses `ItemDetailView`: a dark surface, rarity-tinted corner metalwork and a thin double border, identity and level at the top, then a prominent primary value. Engraved dividers separate base properties, additional options, special powers and sockets/progression. Affixes use small diamond markers; special powers use an inset panel. Narrow comparison cards stack the icon above the identity and wrap text. Decorations never intercept input.
+
+- `ItemTooltip` / `ItemComparison` retain text and numeric ownership. The separate primary `label` / `value` come from the same calculation.
+- Mobile/desktop, Korean/English and enlarged text share the presentation. Outer bounds remain fixed while content scrolls. Range On/Off and Ctrl preserve row geometry and scroll.
+- Inventory, salvage inspection, storage, shop, acquisition rewards, forge, gem equipment, aspect imprinting, training and the equipment catalogue use the same view. Existing transaction, draft and snapshot ownership remains unchanged.
+- References: the rarity/requirements structure in [Diablo II basic item information](https://classic.battle.net/diablo2exp/items/basics.shtml), the rarity border description in [Diablo III's Ancient/Primal guide](https://news.blizzard.com/en-gb/article/22989464/legendary-an-ancient-primal-guide), and the hierarchy in the user-provided Diablo IV comparison images linked above. Use original vector ornaments and HELLSCRIPT equipment art, not copied game artwork.
+
+## Drag guidance and filters
+
+Dragging bag equipment illuminates eligible character-slot borders in gold, with a stronger border on hover. `EquipmentSlots.PlanDrop` uses the actual ownership, level, class, pairing and bag-capacity checks. Test both ring positions independently. Two-handed items indicate both slots and can land on either while storing one main-hand instance. Clear highlights on drop, cancellation, Esc, focus loss, window closing and reflow. Guidance never equips, saves or changes slot geometry.
+
+Current rarities are Normal, Magic, Rare, Legendary and Set. `UniqueItemDefinition` defines legendary powers, not a separate Unique rarity. Remove the disabled Unique option without renumbering saved masks: bit 4 remains reserved and Set stays at bit 5. The separate inventory-footer auto-selection settings entry is removed; the bulk-salvage entry remains.

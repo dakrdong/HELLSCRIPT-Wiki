@@ -76,6 +76,14 @@ namespace Hellscript
             if(hero.inventory.Count(i=>!i.equipped)-1+plan.outgoing.Count>hero.capacity)plan.error="교체할 장비를 돌려받을 소지품 공간이 부족합니다.";
             return plan;
         }
+        // A two-handed weapon may land on either physical hand; the stored anchor remains main hand.
+        // The hint and the eventual drop share all class, level, pairing and bag-capacity checks.
+        public static EquipmentPlan PlanDrop(HeroSave hero,Item item,int slot,int index)
+        {
+            if(item==null||slot!=item.slot||index<0||index>1||slot!=0&&slot!=7&&index!=0)
+                return new EquipmentPlan{error="이 장비를 해당 장착 위치에 넣을 수 없습니다."};
+            return Plan(hero,item,slot==0&&TwoHanded(item)?0:index);
+        }
         public static bool Equip(HeroSave hero,Item item,int index=-1)
         {
             var plan=Plan(hero,item,index);if(!plan.Valid)return false;
