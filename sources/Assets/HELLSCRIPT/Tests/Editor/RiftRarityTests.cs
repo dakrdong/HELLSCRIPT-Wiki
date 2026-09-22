@@ -345,17 +345,21 @@ namespace Hellscript.Tests
         {
             string[] weight20 = { "LW03", "LA02", "LM03" };
             string[] weight10 = { "LW04", "LA04", "LM04" };
-            Assert.AreEqual(39, ItemCatalog.Uniques.Count);
-            foreach (var item in ItemCatalog.Uniques)
+            var existing=ItemCatalog.Uniques.Where(item=>LegendaryPowers.Find(item.id)==null).ToArray();
+            Assert.AreEqual(39, existing.Length);
+            foreach (var item in existing)
                 Assert.AreEqual(weight20.Contains(item.id) ? 20 : weight10.Contains(item.id) ? 10 : 100, item.weight, item.id);
+            Assert.AreEqual(108,LegendaryPowers.All.Count);
+            foreach(var power in LegendaryPowers.All)Assert.AreEqual(20,power.Item.weight,power.Id);
             const int samples = 20000;
             const uint seed = 112681;
             uint rng = seed;
             int rareMember = 0;
             for (int n = 0; n < samples; n++)
                 if (ItemGenerator.Create(HeroClass.Warrior, 6, 3, 30, ref rng).special == "LW04") rareMember++;
-            AssertFrequency(rareMember, samples, 10d / 110, "Legendary member LW04");
-            TestContext.WriteLine("Legendary composition simulation: seed=" + seed + ", samples=" + samples + ", LW04=" + rareMember + ", expected=10/110, tolerance=max(0.001,6*sqrt(p*(1-p)/N)).");
+            // LW13/LW25/LW34/LW39 each add weight 20 to this slot; the old 10/100 weights stay intact.
+            AssertFrequency(rareMember, samples, 10d / 190, "Legendary member LW04");
+            TestContext.WriteLine("Legendary composition simulation: seed=" + seed + ", samples=" + samples + ", LW04=" + rareMember + ", expected=10/190, tolerance=max(0.001,6*sqrt(p*(1-p)/N)).");
         }
 
         [Test]

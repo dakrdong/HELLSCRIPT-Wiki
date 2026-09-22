@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-21",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "filters": [
+      "EquipmentShopTests",
+      "GambleShopTests",
+      "LocalizationTests"
+    ],
+    "total": 54,
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "editmode.xml"
+  },
+  "macOSDevelopmentBuild": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "runtime": {
+    "result": "PASS",
+    "uiRaycastPointerClicks": 41,
+    "checks": [
+      "transparent reveal outer surface without border or inset",
+      "standard item art row and equipped-comparison detail card",
+      "inline stat deltas",
+      "hidden details before reveal",
+      "reward saved before reveal",
+      "persistent animation skip",
+      "confirm and outside-click dismissal",
+      "portrait, landscape and PC layout",
+      "Korean and English"
+    ],
+    "evidence": "runtime-equipment-shop-smoke.txt"
+  },
+  "captures": {
+    "portrait": "440x956",
+    "landscape": "956x440",
+    "PC": "1920x1080"
+  },
+  "limits": [
+    "Native macOS player in an isolated checkout/account. Mobile dimensions are macOS windows, not physical iPhone or Android testing."
+  ]
+}

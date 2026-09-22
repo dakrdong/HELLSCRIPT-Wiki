@@ -61,10 +61,10 @@ namespace Hellscript.Tests
         }
         [Test]public void EnhancementRefundCannotCreateMaterials()
         {
-            var a=GameStore.NewAccount();a.gold=100000;a.materials=10000;uint rng=1;var item=Economy.CreateItem(HeroClass.Warrior,1,2,1,ref rng);a.Hero.inventory.Add(item);
+            var a=GameStore.NewAccount();a.gold=1000000;a.materials=10000;uint rng=1;var item=Economy.CreateItem(HeroClass.Warrior,1,2,1,ref rng);a.Hero.inventory.Add(item);
             a.Hero.highestClear=1;
-            for(int i=0;i<5;i++)Assert.IsTrue(Economy.Enhance(a,item));Assert.IsFalse(Economy.Enhance(a,item));
-            Assert.IsTrue(Economy.Dismantle(a,a.Hero,item));Assert.AreEqual(10000-620+496+5,a.materials);
+            for(int i=0;i<100;i++)Assert.IsTrue(Economy.Enhance(a,item));Assert.IsFalse(Economy.Enhance(a,item));
+            Assert.IsTrue(Economy.Dismantle(a,a.Hero,item));Assert.AreEqual(10005,a.materials);Assert.AreEqual(5,a.enhancementStones);Assert.AreEqual(0,item.investedMaterials);
         }
         [Test]public void SaveRestoresRunIdentityHealthCooldownAndDropIds()
         {

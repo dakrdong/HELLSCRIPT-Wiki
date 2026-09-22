@@ -16,7 +16,7 @@ PackBound의 육각 조각 34종, 7영역·427칸 배치, 60도 회전, 시작�
 
 보드 편집, 자유 회수, 전체 저장·되돌리기, 전역 프리셋 저장·불러오기·삭제, 합성·결과 수령, 연습 화면을 기존 UGUI에 연결했습니다. 보관함은 보드 오른쪽에서 독립적으로 스크롤하며 탭 선택과 드래그를 지원합니다. 가로 화면은 상단 간격을 줄이고 방향 전환 시 편집 중 배치를 유지합니다. 문구는 한국어와 영어를 함께 제공합니다.
 
-신규·기존 계정에는 처음 한 번 G0 룬 16개를 지급합니다. 실제 보스 처치 시 룬 4개를 지급하며, 실행 ID로 중복을 막습니다. 같은 등급·크기 두 개의 합성은 수수료 없이 항상 성공합니다. 미수령 결과와 실제 룬 ID를 저장하므로 다시 실행해도 결과가 유지되고 프리셋이 룬을 복제하지 않습니다.
+신규·기존 계정에는 처음 한 번 G0 룬 16개를 지급합니다. 실제 보스 처치 시 룬 4개를 지급하며, 실행 ID로 중복을 막습니다. 같은 색·등급·크기 두 개의 합성은 수수료 없이 항상 성공합니다. 미수령 결과와 실제 룬 ID를 저장하므로 다시 실행해도 결과가 유지되고 프리셋이 룬을 복제하지 않습니다.
 
 ## 저장과 전투 경계
 
@@ -68,7 +68,7 @@ The native build succeeded with zero errors. Initial and process-restart result 
 
 `EnemyState.runeRewardRolled`는 성공과 실패 모두의 판정 완료를 기록합니다. 결과는 실행 ID와 몬스터 ID로 고정하고 별도 난수를 사용하므로 처치 순서·전투 난수·장비 보상 난수에 영향을 주지 않습니다. 이미 죽음 처리를 마친 기존 저장의 몬스터는 재처리하거나 소급 지급하지 않습니다. 보스 지급 기록과 기존 룬·프리셋·미수령 합성 결과는 유지합니다.
 
-합성은 같은 등급·크기 두 개에서 한 개로 진행합니다. 1~4칸은 같은 등급에서 한 칸 커지고, 5칸 두 개는 다음 등급 1칸이 됩니다. G6 5칸은 최종 단계입니다. 화면에서 각 행의 결과 등급·크기와 성공률 100%를 미리 확인할 수 있습니다. 결과 모양은 해당 크기의 모양 중 균등하게 선택합니다.
+합성은 같은 색·등급·크기 두 개에서 한 개로 진행합니다. 1~4칸은 같은 등급에서 한 칸 커지고, 5칸 두 개는 다음 등급 1칸이 됩니다. G6 5칸은 최종 단계입니다. 화면에서 각 행의 결과 등급·크기와 성공률 100%를 미리 확인할 수 있습니다. 결과 모양은 해당 크기의 모양 중 균등하게 선택합니다.
 
 [드롭 DB](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/db/rune-drops)는 몬스터 분류 3종 × 단계 구간 7종의 21개 기록을, [합성 DB](https://dakrdong.github.io/HELLSCRIPT-Wiki/#/db/rune-fusion)는 최종 단계까지 포함한 35개 규칙을 제공합니다. 드롭 성공 확률과 성공 후 크기 조건부 확률을 구분해 표시합니다.
 
@@ -90,3 +90,9 @@ Every eligible corpse records its attempted roll, including misses. Results use 
 몬스터 실행 검사는 결과가 재현되는 별도 시험 계정을 사용했습니다. 실측 드롭 통계나 자연 플레이의 성장 속도를 측정한 결과는 아닙니다. 모바일 실기기와 장기 성장 경제는 후속 플레이 검증이 필요합니다.
 
 All **138 affected Edit Mode tests passed**, covering percentile boundaries, tier transitions, forbidden sizes, source rates, all 35 fusion rules, native death integration, persistence, consumed-item duplicate prevention, RNG/order independence and existing mastery/outcome/rarity/save/localization regression. The macOS development build succeeded with zero errors. Initial UI, native monster rewards and process-restart checks all passed. The linked screenshots cover Korean portrait, English landscape at 140% text and fusion output previews. Monster verification uses an isolated deterministic fixture; it is not empirical drop-rate, natural progression or physical mobile-device validation.
+
+## 2026-09-21 룬 공방 연결
+
+[룬 마스터](Rune_Master.md)에 재형성과 승급을 연결했다. 승급은 같은 색끼리만 합성하며 잠금·보드·프리셋에 사용 중인 룬을 보호한다. NPC와 기존 룬 보드 화면이 같은 검증 규칙을 사용한다.
+
+The [Rune Master](Rune_Master.en.md) now provides reshaping and ascension. Ascension requires matching colors and protects locked, placed and preset-linked runes. The NPC and existing rune-board entry share one validation rule.

@@ -17,15 +17,16 @@ namespace Hellscript
         void DescribeQualityMain(Transform parent,Item item,ItemBaseDefinition basis,string mainName)
         {
             InventoryNote(parent,ItemQuality.Summary(item),21,gold);
-            InventoryNote(parent,Loc.F("{0}\n{1} {2:0.0}\n기본 {3:0.0} × 강화 {4:0.###} × 각성 {5:0.##} × 걸작 {6:0.###}",basis.name,mainName,ItemCatalog.MainValue(item),basis.main*(1+.08f*(item.level-1)),1+.05f*item.enhancement,item.awakened?1.25f:1,Mathf.Pow(1.02f,item.masterwork)));
+            InventoryNote(parent,Loc.F("{0}\n{1} {2}\n각성·걸작을 반영한 기본값 {3:0.##} + 강화 보너스 {4:0.##}",basis.name,Loc.T(GearEnhancement.Name(item)),GearEnhancement.Format(item,ItemCatalog.MainValue(item)),GearEnhancement.Base(item),GearEnhancement.Step(item)*item.enhancement));
             if(basis.resistance>0)InventoryNote(parent,Loc.F("고정 부가 저항 {0:0.0}",basis.resistance*(1+.08f*(item.level-1))),18,muted);
             if(basis.attackSpeed!=0)InventoryNote(parent,Loc.F("고정 공격속도 {0:+0%;-0%}",basis.attackSpeed),18,muted);
         }
         void DescribeQualityAffix(Transform parent,Item item,AffixRoll roll)
         {
-            var def=ItemCatalog.Affix(roll.affixId);float factor=ItemQuality.LineMultiplier(item,roll);
-            int minimum=roll.greater?10000:item.awakened?4000:0;
-            InventoryNote(parent,Loc.F("{0}{1} · {2} [{3}]\n{4} +{5:0.##} · 가능 범위 {6:0.##}~{7:0.##}",roll.greater?Loc.T("◆ 상위 ·")+" ":"",roll.side==AffixSide.Prefix?"접두":"접미",def.phrase,roll.tierId,StatCatalog.Name(def.stat),ItemQuality.AffixValue(item,roll),def.Value(item.level,minimum)*factor,def.Value(item.level,10000)*factor),20,roll.greater?gold:pale);
+            var def=ItemCatalog.Affix(roll.affixId);
+            string heading=Loc.F("{0} · {1} [{2}]",roll.side==AffixSide.Prefix?"접두":"접미",def.phrase,roll.tierId)+"\n";
+            string hidden=heading+ItemTooltip.AffixText(item,roll,false),shown=heading+ItemTooltip.AffixText(item,roll,true);
+            ItemRangeText.Bind(InventoryNote(parent,shown,20,roll.greater?gold:pale),hidden,shown);
             if(roll.greater)InventoryNote(parent,"최고치 고정 · 상위 접사 ×1.5",18,gold);
             int hits=ItemQuality.LineHits(item,roll.slotId);
             if(hits>0)InventoryNote(parent,Loc.F("걸작 접사 강화 {0}회 · ×{1:0.##}",hits,1+.25f*hits),18,setGreen);

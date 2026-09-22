@@ -1,0 +1,444 @@
+{
+  "slots": [
+    {
+      "id": "mainhand",
+      "name": {
+        "ko": "주무기",
+        "en": "Main hand"
+      },
+      "art": "sword",
+      "role": {
+        "ko": "공격과 치명타",
+        "en": "Attack & critical strikes"
+      },
+      "growth": [
+        {
+          "stat": "attack",
+          "unlock": 1,
+          "rate": 5,
+          "once": false
+        },
+        {
+          "stat": "crit",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "critDamage",
+          "unlock": 50,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "attackSpeed",
+          "unlock": 75,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "allSkills",
+          "unlock": 100,
+          "rate": 1,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "offhand",
+      "name": {
+        "ko": "보조손",
+        "en": "Off hand"
+      },
+      "art": "shield",
+      "role": {
+        "ko": "피해 경감과 생존",
+        "en": "Mitigation & sustain"
+      },
+      "growth": [
+        {
+          "stat": "armor",
+          "unlock": 1,
+          "rate": 3,
+          "once": false
+        },
+        {
+          "stat": "allResistance",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "damageReduction",
+          "unlock": 50,
+          "rate": 0.08,
+          "once": false
+        },
+        {
+          "stat": "lifePercent",
+          "unlock": 75,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "lifeRegen",
+          "unlock": 100,
+          "rate": 5,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "name": {
+        "ko": "머리",
+        "en": "Head"
+      },
+      "art": "helm",
+      "role": {
+        "ko": "자원과 스킬 운용",
+        "en": "Resources & skill uptime"
+      },
+      "growth": [
+        {
+          "stat": "armor",
+          "unlock": 1,
+          "rate": 2,
+          "once": false
+        },
+        {
+          "stat": "resource",
+          "unlock": 25,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "cooldown",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "controlReduction",
+          "unlock": 75,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "allStats",
+          "unlock": 100,
+          "rate": 20,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "chest",
+      "name": {
+        "ko": "몸통",
+        "en": "Chest"
+      },
+      "art": "armor",
+      "role": {
+        "ko": "생명력과 방어",
+        "en": "Life & protection"
+      },
+      "growth": [
+        {
+          "stat": "life",
+          "unlock": 1,
+          "rate": 20,
+          "once": false
+        },
+        {
+          "stat": "armor",
+          "unlock": 25,
+          "rate": 3,
+          "once": false
+        },
+        {
+          "stat": "allResistance",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "damageReduction",
+          "unlock": 75,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "lifePercent",
+          "unlock": 100,
+          "rate": 10,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "hands",
+      "name": {
+        "ko": "손",
+        "en": "Hands"
+      },
+      "art": "gloves",
+      "role": {
+        "ko": "공격 속도와 정밀함",
+        "en": "Speed & precision"
+      },
+      "growth": [
+        {
+          "stat": "attack",
+          "unlock": 1,
+          "rate": 2,
+          "once": false
+        },
+        {
+          "stat": "attackSpeed",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "crit",
+          "unlock": 50,
+          "rate": 0.05,
+          "once": false
+        },
+        {
+          "stat": "critDamage",
+          "unlock": 75,
+          "rate": 0.3,
+          "once": false
+        },
+        {
+          "stat": "luckyHit",
+          "unlock": 100,
+          "rate": 5,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "feet",
+      "name": {
+        "ko": "발",
+        "en": "Feet"
+      },
+      "art": "boots",
+      "role": {
+        "ko": "기동성과 회피",
+        "en": "Mobility & evasion"
+      },
+      "growth": [
+        {
+          "stat": "armor",
+          "unlock": 1,
+          "rate": 1.5,
+          "once": false
+        },
+        {
+          "stat": "moveSpeed",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "dodge",
+          "unlock": 50,
+          "rate": 0.08,
+          "once": false
+        },
+        {
+          "stat": "stamina",
+          "unlock": 75,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "staminaRegen",
+          "unlock": 100,
+          "rate": 2,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "neck",
+      "name": {
+        "ko": "목걸이",
+        "en": "Neck"
+      },
+      "art": "amulet",
+      "role": {
+        "ko": "능력치와 스킬 효율",
+        "en": "Attributes & skill efficiency"
+      },
+      "growth": [
+        {
+          "stat": "allStats",
+          "unlock": 1,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "allResistance",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "cooldown",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "resource",
+          "unlock": 75,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "lifePercent",
+          "unlock": 100,
+          "rate": 5,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "waist",
+      "name": {
+        "ko": "허리",
+        "en": "Waist"
+      },
+      "art": "belt",
+      "role": {
+        "ko": "회복과 유지력",
+        "en": "Recovery & endurance"
+      },
+      "growth": [
+        {
+          "stat": "life",
+          "unlock": 1,
+          "rate": 10,
+          "once": false
+        },
+        {
+          "stat": "healing",
+          "unlock": 25,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "lifeRegen",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "resourceCost",
+          "unlock": 75,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "potionHealing",
+          "unlock": 100,
+          "rate": 25,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "leftRing",
+      "name": {
+        "ko": "왼쪽 반지",
+        "en": "Left ring"
+      },
+      "art": "ring",
+      "role": {
+        "ko": "치명타 공격",
+        "en": "Critical offense"
+      },
+      "growth": [
+        {
+          "stat": "attack",
+          "unlock": 1,
+          "rate": 1.5,
+          "once": false
+        },
+        {
+          "stat": "crit",
+          "unlock": 25,
+          "rate": 0.05,
+          "once": false
+        },
+        {
+          "stat": "critDamage",
+          "unlock": 50,
+          "rate": 0.3,
+          "once": false
+        },
+        {
+          "stat": "attackSpeed",
+          "unlock": 75,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "allStats",
+          "unlock": 100,
+          "rate": 15,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "rightRing",
+      "name": {
+        "ko": "오른쪽 반지",
+        "en": "Right ring"
+      },
+      "art": "ring",
+      "role": {
+        "ko": "자원 순환",
+        "en": "Resource sustain"
+      },
+      "growth": [
+        {
+          "stat": "resource",
+          "unlock": 1,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "resourceRegen",
+          "unlock": 25,
+          "rate": 0.05,
+          "once": false
+        },
+        {
+          "stat": "resourceCost",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "luckyHit",
+          "unlock": 75,
+          "rate": 0.15,
+          "once": false
+        },
+        {
+          "stat": "cooldown",
+          "unlock": 100,
+          "rate": 3,
+          "once": true
+        }
+      ]
+    }
+  ]
+}

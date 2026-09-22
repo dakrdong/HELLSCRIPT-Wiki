@@ -22,7 +22,7 @@ ART = 'Assets/HELLSCRIPT/Resources/Art/'
 DESIGN = 'Docs/Design/'
 IMPL = 'Docs/Implementation/'
 CLASSES = ['전사', '궁수', '마법사']
-SLOTS = ['무기', '머리', '몸통', '손', '발', '허리', '목걸이', '반지']
+SLOTS = ['무기', '머리', '몸통', '손', '발', '벨트', '목걸이', '반지']
 NOW = dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).isoformat(timespec='seconds')
 INPUTS = {}
 
@@ -186,12 +186,21 @@ def build_databases():
         t=tables[key]; rows.append(record(key,preset_names[i],CLASSES[i//2],t['cells'][4],t['fields'],DESIGN+'HELLSCRIPT_Content_Catalog.md',t['line'],status='기획·구현 기록',refs=[source_ref(CORE+'BehaviorPresets.cs')],related=['build-integration-detail','build-integration-expansion']))
     data.append(db('builds','추천 빌드','6개 추천 빌드의 기획 요약입니다. 실제 규칙 생성은 BehaviorPresets의 현재 소스를 따릅니다.',rows))
     rows=[]
+    equipment_path=CORE+'EquipmentSlots.cs'
+    equipment_source=read(equipment_path)
+    weapon_kinds={}
+    for cases,kind in re.findall(r'((?:case\s+"B\d+"\s*:\s*)+)return WeaponKind\.(\w+);',equipment_source):
+        weapon_kinds.update({key:kind for key in re.findall(r'"(B\d+)"',cases)})
+    two_handed=set(re.findall(r'WeaponKind\.(\w+)',re.search(r'bool TwoHanded\(.*?;',equipment_source)[0]))
     for a,line in constructors(item_path,'ItemBaseDefinition'):
         a=a+[0]*(9-len(a)); c=CLASSES[a[4]] if a[4]>=0 else '공용'
+        kind=weapon_kinds.get(a[0])
+        icon={'image':{'file':'EquipmentAtlas.png','cell':a[2]}} if a[2]<24 else {'vector':kind.lower()}
         rows.append(record(a[0],a[1],SLOTS[a[3]],f'{c} · {SLOTS[a[3]]} · 기본값 {a[5]}',
           {'직업':c,'부위':SLOTS[a[3]],'기본 주 수치':a[5],'기본 비물리 저항':a[6],'공격속도 보정':a[7],
-           '수치 해석':'아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다.'},item_path,line,image={'file':'EquipmentAtlas.png','cell':a[2]},related=['itemization-detail','itemization-expansion']))
-    data.append(db('items','장비 베이스','B01–B24의 베이스·직업·부위·기본 수치와 실제 아틀라스 아이콘입니다.',rows))
+           '무기 종류':kind or '해당 없음','무기 슬롯 점유':2 if kind in two_handed else 1 if kind else '해당 없음',
+           '수치 해석':'아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다.'},item_path,line,**icon,refs=[source_ref(equipment_path)],related=['native-inventory','itemization-detail','itemization-expansion']))
+    data.append(db('items','장비 베이스','B01–B30의 베이스·직업·부위·기본 수치입니다. B01–B24는 아틀라스, B25–B30은 런타임 벡터 아이콘을 사용합니다.',rows))
     # The stat table is the one place a stat's name and unit are written, so both the attribute
     # database and the affix database read it rather than keeping a list of their own.
     attribute_path = CORE + 'Attributes.cs'
@@ -214,7 +223,7 @@ def build_databases():
            '전투 적용':inert if inert else '전투 계산에 연결되어 있습니다.',
            '번호 보존':'0–23번은 저장 파일이 적어 둔 접사 번호이므로 뜻을 바꾸지 않습니다.' if index<24 else '24번부터는 디아블로4 캐릭터 시트를 옮기며 새로 붙인 번호입니다.'},
           attribute_path,line,related=['attribute-system-detail','attribute-system-expansion']))
-    data.append(db('attributes','능력치','디아블로4 캐릭터 시트에서 옮긴 57개 속성입니다. 분류·단위·상한과 저장 번호를 표시합니다.',rows))
+    data.append(db('attributes','능력치','기존 57개 속성과 대장간의 원소 저항 백분율을 포함한 58개 속성입니다. 저항 수치와 백분율을 구분하고 분류·단위·상한·저장 번호를 표시합니다.',rows))
     rows=[]
     for a,line in constructors(item_path,'AffixDefinition'):
         rows.append(record(a[0],statnames[a[1]],'접두사' if a[2]=='P' else '접미사',a[3]+' · '+statnames[a[1]],
@@ -229,7 +238,20 @@ def build_databases():
         c=CLASSES[a[2]] if a[2]>=0 else '공용'
         legends.append(record(a[0],a[1],c,a[5],{'직업':c,'부위':SLOTS[a[3]],'상대 가중치':a[4],
           '효과':a[5],'요구 스킬':a[6] if len(a)>6 else '없음','아이콘':'사용한 베이스 아이콘을 공유합니다. 독립 전설 아트가 아닙니다.'},item_path,line,related=['itemization-detail','legendary-expansion']))
-    data.append(db('legendaries','개별 전설','전설 15종의 현재 설명입니다. 가중치 100 / 20 / 1은 드롭 백분율이 아닙니다.',legends))
+    power_path='Assets/HELLSCRIPT/Resources/Data/LegendaryPowers.json'
+    power_source=read(power_path)
+    for p in json.loads(power_source)['powers']:
+        c=CLASSES[p['heroClass']]
+        line=next(i for i,text in enumerate(power_source.splitlines(),1) if '"id": "'+p['id']+'"' in text)
+        legends.append(record(p['id'],p['name'],c,p['description'],{
+            '직업':c,'부위':SLOTS[p['slot']],'상대 가중치':p['weight'],'효과':p['description'],
+            '영문 이름':p['nameEn'],'영문 효과':p['descriptionEn'],'발동 스킬':p['skill'],'강화 스킬':p['affectedSkill'],
+            '발동 유형':p['trigger'],'효과 유형':p['effect'],'추가 조건':p['condition'],
+            '계수 또는 수치':p['amount'],'지속 시간 (초)':p['duration'],'재발동 간격 (초)':p['cooldown'],
+            '반경 (m)':p['radius'],'필요 적중 횟수':p['count'],'참고 위상':p['reference'],'참고 자료':p['referenceUrl'],
+            '아이콘':'사용한 베이스 아이콘을 공유합니다. 독립 전설 아트가 아닙니다.'},power_path,line,
+            related=['legendary-class-expansion','legendary-class-expansion.en']))
+    data.append(db('legendaries','개별 전설',f'직업 전용 40종씩과 공용 3종, 총 {len(legends)}종입니다. 가중치는 드롭 백분율이 아닙니다. 신규 수치는 밸런스 시험안입니다.',legends))
     sets=[]; pieces=[]
     for a,line in constructors(item_path,'SetDefinition'):
         c=CLASSES[['HeroClass.Warrior','HeroClass.Ranger','HeroClass.Mage'].index(a[2])]
@@ -262,7 +284,7 @@ def build_databases():
             ' · '.join(t['cells'][1:]),t['fields'],DESIGN+'HELLSCRIPT_Rift_Exploration_Detail.md',t['line'],status='기획·구현 기록',
             refs=[source_ref(CORE+'RiftFieldContent.cs')],related=['field-expansion','rift-exploration-detail'],resource='procedural-interactions'))
     data.append(db('field','상자·성소','CH01–CH03과 SH01–SH02입니다. 초기 기획의 구현 순서와 현재 적용 여부는 개발 기록을 함께 봅니다.',rows))
-    expected={'content-unlocks':9,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':24,'attributes':57,'affixes':54,'legendaries':15,'sets':6,'set-items':24,'enemies':12,'elites':6,'bosses':3,'rooms':12,'field':5}
+    expected={'content-unlocks':9,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':30,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':12,'elites':6,'bosses':3,'rooms':12,'field':5}
     for table in data:
         if len(table['rows']) != expected[table['id']]: raise ValueError('Review changed catalog count: '+table['id'])
     import wiki_runes
@@ -295,6 +317,51 @@ def build_resources(databases):
                    IMPL+'Asset_Provenance.md',status='임시 사용',image={'file':filename},assetPath=path,
                    refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/'+('WorldView.Rift.cs' if filename=='RiftStone.png' else 'GameUI.cs'))],
                    related=['asset-provenance','equipment-atlas-prompt' if filename=='EquipmentAtlas.png' else 'rift-stone-prompt' if filename=='RiftStone.png' else 'image-prompts']))
+    title_path=ART+'Title/TitleSanctuary.png'
+    title_raw=(ROOT/title_path).read_bytes();INPUTS[title_path]=digest(title_raw)
+    title_meta=read(title_path+'.meta')
+    with Image.open(ROOT/title_path) as title_image:
+        title_size=f'{title_image.width} × {title_image.height}'
+    rows.append(record('asset-title-sanctuary','TitleSanctuary.png','이미지 원본',
+        'iPhone 17 Pro Max 가로·세로와 PC에 대응하는 타이틀 배경입니다. 안개·구름 그림자·균열 조명·불씨는 별도 셰이더로 움직입니다.',
+        {'원본 경로':title_path,'해상도':title_size,'SHA-256':digest(title_raw),
+         'Unity GUID':re.search(r'^guid: (\w+)',title_meta,re.M)[1],
+         '제작 방법':'Codex 내장 image_gen; 생성 원본 PNG를 변경 없이 복사',
+         '출처 확인':'도구와 C2PA 정보에 정확한 모델 버전이 없어 gpt-image-2 사용 여부는 미확인입니다.',
+         '승인 상태':'개발용 배경이며 출시 확정 자산이 아닙니다.'},
+        IMPL+'Title_Screen.md',status='임시 사용',image={'file':'Title/TitleSanctuary.png'},assetPath=title_path,
+        refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Title.cs'),
+              source_ref('Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs'),
+              source_ref(ART+'Title/TitleAtmosphere.shader'),source_ref(IMPL+'Title_Screen_Prompt.txt')],
+        related=['title-screen','title-screen.en','resource-guide']))
+    selection_qc=json.loads(read(IMPL+'CharacterSelectionEvidence/art-qc.json'))
+    for hero_name in ('Warrior','Mage','Ranger'):
+        file='CharacterSelection/'+hero_name+'.png';path=ART+file
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        qc=next(row for row in selection_qc if row['asset']==path)
+        rows.append(record('asset-selection-'+hero_name.lower(),hero_name+' selection atlas','이미지 원본',
+            '로그인 다음 화면에서 대기 동작과 전투 준비 자세를 보여 주는 투명 캐릭터 아틀라스입니다.',
+            {'원본 경로':path,'해상도':'1024 × 1536','프레임 수':6,'색상 모드':'RGBA',
+             '완전 투명 픽셀 비율':qc['nativeTransparentFraction'],'SHA-256':digest(raw),
+             'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '제작 방법':'내장 image_gen; 원본 PNG와 네이티브 알파 유지; 배경 제거 없음',
+             '출처 확인':'ChatGPT / gpt-image; 정확한 모델 버전 미확인',
+             '승인 상태':'개발용 선택 화면 아트; 출시 확정 자산이 아닙니다.'},
+            IMPL+'Character_Selection.md',status='임시 사용',image={'file':file},assetPath=path,
+            refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/CharacterSelectionStage.cs'),
+                  source_ref(ART+'CharacterSelection/'+hero_name+'.atlas.json'),
+                  source_ref(IMPL+'Character_Selection_Prompts.txt')],
+            related=['character-selection','character-selection.en','title-screen','resource-guide']))
+    courtyard_path=ART+'CharacterSelection/SelectionCourtyard.png'
+    courtyard_raw=(ROOT/courtyard_path).read_bytes();INPUTS[courtyard_path]=digest(courtyard_raw)
+    courtyard_meta=read(courtyard_path+'.meta')
+    rows.append(record('asset-selection-courtyard','SelectionCourtyard.png','이미지 원본',
+        '세 캐릭터가 함께 대기하는 평평한 성소 마당의 배경입니다.',
+        {'원본 경로':courtyard_path,'해상도':'1672 × 941','SHA-256':digest(courtyard_raw),
+         'Unity GUID':re.search(r'^guid: (\w+)',courtyard_meta,re.M)[1],
+         '제작 방법':'내장 image_gen 원본; 픽셀 변경 없음','출처 확인':'정확한 모델 버전 미확인'},
+        IMPL+'Character_Selection.md',status='임시 사용',image={'file':'CharacterSelection/SelectionCourtyard.png'},assetPath=courtyard_path,
+        refs=[source_ref(IMPL+'Character_Selection_Prompts.txt')],related=['character-selection','character-selection.en']))
     storage_path=ART+'GlobalHUD/menu-storage.png'
     storage_raw=(ROOT/storage_path).read_bytes();INPUTS[storage_path]=digest(storage_raw)
     storage_meta=read(storage_path+'.meta')
@@ -309,8 +376,19 @@ def build_resources(databases):
     byid={d['id']:d for d in databases}
     for group in ['skills','heroes','items']:
         for item in byid[group]['rows']:
-            image=item['image'];cell=image['cell'];width,height=sizes[image['file']]
             item['resource']='icon-'+item['id']
+            if item.get('vector'):
+                glyph_path='Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs'
+                glyph_source=read(glyph_path);symbol=item['vector']
+                match=re.search(r'case "'+re.escape(symbol)+r'":',glyph_source)
+                if not match: raise ValueError('Missing vector equipment icon: '+item['id'])
+                rows.append(record(item['resource'],item['name']+' 아이콘','장비 아이콘',
+                    f'{item["id"]} · StorageGlyph · {symbol}',
+                    {'콘텐츠 ID':item['id'],'벡터 심볼':symbol,'등록 방식':'기존 uGUI 벡터 아이콘 체계로 그립니다. 별도 래스터 파일이나 아틀라스 셀은 없습니다.'},
+                    glyph_path,glyph_source[:match.start()].count('\n')+1,status='현재 사용',
+                    content={'db':group,'id':item['id']},related=['native-inventory','resource-guide']))
+                continue
+            image=item['image'];cell=image['cell'];width,height=sizes[image['file']]
             rows.append(record('icon-'+item['id'],item['name']+' 아이콘','장비 아이콘' if group=='items' else '스킬·직업 아이콘',
                 f'{item["id"]} · {image["file"]} · {cell//6+1}행 {cell%6+1}열',
                 {'콘텐츠 ID':item['id'],'원본':image['file'],'셀 번호 (0부터)':cell,'행·열 (1부터)':f'{cell//6+1}행 {cell%6+1}열',
@@ -350,7 +428,7 @@ def build_resources(databases):
     for ident,name,summary,path,extra,related,follow in [
         ('procedural-battle-hud','전투 HUD 배치','화면 크기·보스 표시에 따라 HUD 영역과 카메라 표시 사각형을 계산하고 같은 HUD 객체를 재배치합니다.','BattleHudLayout.cs',['GameUI.BattleLayout.cs'],['battle-layout-expansion','screen-layout-detail'],'성소·사냥 칙령·결과·훈련 등 나머지 화면의 재배치와 모바일 실기기의 회전·밀도·터치·노치 검증이 남아 있습니다.'),
         ('procedural-exploration','탐색 안개·미니맵','방문 기록과 고정 관찰 범위에 따라 생성 지형을 방·통로 단위로 표시하고 미니맵을 그립니다. 카메라 크기로 탐색 기록을 추가하지 않습니다.','WorldView.Exploration.cs',['RiftMinimap.cs'],['battle-layout-expansion','rift-exploration-detail'],'탐색 안개 경계의 미술적 개선과 실제 기기의 렌더링 비용 측정이 남아 있습니다.'),
-        ('procedural-inventory','장비 목록·비교 화면','화면 너비에 따라 목록·상세·비교를 한 영역·두 영역·세 영역으로 배치하고 필터·정렬·일괄 정리 미리보기를 표시합니다.','InventoryLayout.cs',['GameUI.InventoryLayout.cs'],['inventory-management-expansion','itemization-detail'],'실제 모바일 밀도·터치 검증과 도감·상점 등 나머지 장비 화면의 재배치가 남아 있습니다.'),
+        ('procedural-inventory','가방·장착·분해 화면','모바일 가로 16:9와 세로 9:16의 고정 프레임에 장착·소지품·비교·58개 능력치·잠금·선택 분해·일괄 분해를 표시합니다.','InventoryWindow.cs',['InventoryWindow.Controls.cs','InventoryWindow.Dialogs.cs','InventoryWindow.Drag.cs','GameUI.PlayInventory.cs'],['native-inventory','native-inventory.en','itemization-detail'],'macOS 실행 검증과 모바일 실기기 터치·회전 검증을 구분합니다. 기존 InventoryLayout은 다른 장비 관리 화면이 계속 사용합니다.'),
         ('procedural-settings','톱니바퀴 설정·실제 플레이 화면','가로 화면은 오른쪽 반쪽 메뉴와 왼쪽의 실제 마을·사냥터 플레이어, 세로 화면은 전체 메뉴를 표시합니다. X·배경 닫기, 화면·소리·언어·캐릭터 변경, 비율 10종과 글자 크기·가시거리 각각 50~150%를 제공합니다.','GameUI.ScreenSettings.cs',['GameUI.SettingsFrame.cs','SettingsControls.cs','WorldView.Settings.cs','GameUI.ViewDistance.cs'],['settings-revision','screen-settings-expansion','reading-size-expansion','touch-and-safe-area-expansion'],'글자 크기와 가시거리는 각각 5%씩 조절하며 캐릭터 변경 후 마을로 돌아갑니다. 모바일 실기기 방향 전환과 터치는 후속 검증 대상입니다.'),
         ('procedural-guide','첫 플레이 안내 화면','성소·게임 안내·결과에서 여는 아홉 단계 안내와 진행 수 표시입니다. 숨기기는 추천 표시만 끄고 기록을 바꾸지 않습니다.','GameUI.Guide.cs',[],['first-play-expansion','first-play-detail'],'신규 사용자의 첫 15분 관찰과 이해도 검사는 자동 검사로 대체하지 않습니다.'),
         ('procedural-growth','성장·레벨업 화면','레벨업 기록, 능력치·해금 표시와 현재 레벨 추천안의 미리보기·명시적 적용 화면입니다.','GameUI.Growth.cs',[],['growth-expansion','growth-detail'],'여러 시드에서의 실제 성장 구간 비교와 화면 검증이 남아 있습니다.'),
@@ -392,11 +470,24 @@ def build_resources(databases):
     rows.append(record('todo-fog-art','탐색 안개 경계 미술','제작 과제','실시간 시야와 회색 지형 기억을 구현했습니다. 안개 경계의 미술적 개선과 실제 기기의 성능 측정은 남아 있습니다.',
         {'현재 표현':'실제 바닥과 차폐 판정을 공유하는 0.35m 격자의 360도 시야, 누적 탐색 마스크와 플레이어 중심 윤곽 지도를 사용합니다. 미탐색 지형은 검은색, 시야 밖의 탐색 지형은 회색이며 오브젝트는 현재 시야에서만 표시합니다.','현재 공백':'안개 경계의 미술적 개선과 모바일 실기기의 렌더링 비용 측정이 남아 있습니다.',
          '상태 해석':'기능 구현과 별개인 후속 미술·기기 검증 과제이며 완성 이미지 자산 수에 포함하지 않습니다.'},IMPL+'Rift_Visibility_Expansion.md',status='제작 대기',related=['rift-visibility-expansion','resource-guide']))
-    return db('resources','리소스 DB','이미지 원본 4개, 아틀라스 영역, 코드로 만드는 표현과 제작 과제를 함께 관리합니다. 영역·표현·과제는 독립 이미지 파일이 아닙니다.',rows)
+    forge_manifest='Prototypes/Blacksmith/UnityResources/manifest.json'
+    for entry in json.loads(read(forge_manifest))['entries']:
+        path='Assets/HELLSCRIPT/Resources/'+entry['resource']+'.png'
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+        if digest(raw)!=entry['sha256']:raise ValueError('Stale blacksmith resource: '+path)
+        rows.append(record('forge-'+entry['id'],entry['id'],'대장간 UI 리소스',
+            '기존 시연의 SVG 원본을 투명 PNG로 변환한 Unity 적용 리소스입니다.',
+            {'원본':entry['source'],'해상도':f'{entry["width"]} × {entry["height"]}','알파 채널':entry['alpha'],
+             '용도':'빈 장착 부위 표식' if entry['id'].startswith('slot-') else '기능·재화 아이콘',
+             '임포트':'Default Texture2D · Clamp · Bilinear · 밉맵 없음 · 압축 없음','SHA-256':entry['sha256']},
+            forge_manifest,status='적용 리소스',image={'file':'Blacksmith/'+entry['id']+'.png'},assetPath=path,
+            refs=[source_ref(entry['source']),source_ref('Assets/HELLSCRIPT/Editor/BlacksmithArtImporter.cs')],
+            related=['blacksmith-unity-integration','blacksmith-unity-integration.en','blacksmith-validation']))
+    return db('resources','리소스 DB','타이틀 배경을 포함한 이미지 원본, 아틀라스 영역, 코드로 만드는 표현과 제작 과제를 함께 관리합니다. 영역·표현·과제는 독립 이미지 파일이 아닙니다.',rows)
 
 def build_evidence():
     rows=[]
-    paths=sorted((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))
+    paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml')))
     for path in paths:
         relative=str(path.relative_to(ROOT));raw=read(relative);root=ET.fromstring(raw)
         tokens=path.stem.split('-');cut=next((i for i,t in enumerate(tokens) if t in ('editmode','final')),len(tokens))
@@ -404,14 +495,18 @@ def build_evidence():
         rows.append(record(path.stem,path.name,'Unity Edit Mode',f'{root.get("passed")} / {root.get("total")} 통과 · {root.get("result")} · {stage}',
             {'검사 단계':stage,'보고서 구분':variant,'보고된 결과':root.get('result'),'전체 검사':root.get('total'),'통과':root.get('passed'),'실패':root.get('failed'),
              '건너뜀':root.get('skipped'),'검사 종료 (UTC)':root.get('end-time'),'소요 시간 (초)':root.get('duration'),
-             '해석':'저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다.'},relative,
-            status='당시 통과' if root.get('result')=='Passed' else '당시 실패',related=['current-status'],endTime=root.get('end-time')))
+             '해석':('전설 확장 작업에서 실행한 Unity 검사 원본입니다. 집중 검사와 전체 검사의 수는 합산하지 않습니다. macOS 앱과 화면 검증은 연결된 구현 기록에서 확인합니다.' if 'LegendaryExpansionEvidence' in relative else '저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다.')},relative,
+            status='당시 통과' if root.get('result')=='Passed' else '당시 실패',related=['legendary-powers-implementation'] if 'LegendaryExpansionEvidence' in relative else ['current-status'],endTime=root.get('end-time')))
     rows.sort(key=lambda r:r['endTime'],reverse=True)
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
  'class-set-reference':('장비와 빌드','직업별 세트 24종 기획·레퍼런스','디아블로 4 부적 세트를 참고한 직업별 8종, 개별 장비 105개와 효과 60단계의 게임 미반영 검토안입니다.'),
  'class-set-reference.en':('장비와 빌드','24 class set concepts and references','Design-only Diablo IV-inspired catalog: eight sets per class, 105 pieces and 60 bonus tiers.'),
+ 'legendary-class-expansion':('장비와 빌드','직업별 전설 40종','전사·궁수·마법사 전설 120종의 효과, 부위, 참고 위상과 공통 전투 규칙입니다.'),
+ 'legendary-class-expansion.en':('장비와 빌드','Class legendaries (English)','Forty class legendaries per class, with effects, slots and source inspirations.'),
+ 'legendary-powers-implementation':('후속 개발 기록','직업별 전설 구현·검증','신규 전설 108종의 실제 전투 연결과 저장·화면·검사 근거입니다.'),
+ 'legendary-powers-implementation.en':('후속 개발 기록','Legendary power validation (English)','Runtime integration, persistence, native UI evidence and test results for 108 new powers.'),
  'rune-mastery':('장비와 빌드','무기별 룬 성장','여섯 무기 보드, 자유 회수, 전체 배치 프리셋 5칸과 기본·고급·최상위 능력 등급을 정리합니다.'),
  'rune-mastery.en':('장비와 빌드','Weapon rune mastery','Six weapon boards, reusable runes, five global presets and graded mastery abilities.'),
  'rune-mastery-implementation':('후속 개발 기록','무기별 룬 성장 구현 기록','PackBound 이식, 무기별 전투 적용, 저장·합성·프리셋과 macOS 검증 결과입니다.'),
@@ -511,7 +606,11 @@ def link_target(target, source, page_paths):
     fragment=unquote(parsed.fragment)
     if not parsed.path: dest=source
     else:
-        dest=str((ROOT/source).parent.joinpath(unquote(parsed.path)).resolve().relative_to(ROOT))
+        candidate=(ROOT/source).parent.joinpath(unquote(parsed.path))
+        if candidate.is_dir():return None
+        dest=str(candidate.resolve().relative_to(ROOT))
+    # Local build directories are not portable wiki attachments, even on a clean checkout.
+    if dest.startswith('Builds/') and dest.endswith('.app'): return None
     if dest in page_paths:
         return '#/page/'+page_paths[dest]+('?section='+quote(fragment) if fragment else '')
     if (ROOT/dest).is_dir(): return None
@@ -590,7 +689,7 @@ def build_pages():
         if ident in ('idle-mode-detail','class-set-reference','class-set-reference.en'):status='기획 검토안'
         if public:status='공개 안내'
         notice='이 문서는 최초 빌드 당시 기록입니다. 최신 상태는 현재 개발 현황과 후속 개발 기록을 확인하세요.' if status=='당시 기록' else '기존 178개 정의를 보존한 초기 카탈로그입니다. 세트 등 현재 수량은 DB와 후속 명세를 따릅니다.' if ident=='content-catalog' else ''
-        date_match=re.search(r'(?:정리 기준일|갱신일|작성일)[: ]+(\d{4}-\d{2}-\d{2})',body)
+        date_match=re.search(r'(?:정리 기준일|갱신일|작성일|확인일|As of|Updated on|Updated|Verified)[: ]+(\d{4}-\d{2}-\d{2})',body)
         date=date_match[1] if date_match else '2026-09-09'
         history_path=ROOT/'Wiki/history'/f'{ident}.json';versions=json.loads(history_path.read_text()) if history_path.exists() else []
         hash_value=digest(body.encode())
@@ -661,12 +760,20 @@ def build():
     for path,expected in INPUTS.items():
         actual=(ROOT/path).read_bytes()
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
-        if path.startswith(('Docs/','Wiki/content/','Assets/','Artifacts/','tools/')) or ('/' not in path and path.endswith('.md')):
+        if path.startswith(('Docs/','Wiki/content/','Assets/','Artifacts/','tools/','Prototypes/')) or ('/' not in path and path.endswith('.md')):
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
     for file in (ROOT/ART).glob('*.png'):
         target=SITE/'media'/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,target)
     (SITE/'media/GlobalHUD').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'GlobalHUD/menu-storage.png',SITE/'media/GlobalHUD/menu-storage.png')
+    (SITE/'media/Title').mkdir(parents=True,exist_ok=True)
+    shutil.copyfile(ROOT/ART/'Title/TitleSanctuary.png',SITE/'media/Title/TitleSanctuary.png')
+    (SITE/'media/CharacterSelection').mkdir(parents=True,exist_ok=True)
+    for name in ('Warrior','Mage','Ranger','SelectionCourtyard'):
+        shutil.copyfile(ROOT/ART/('CharacterSelection/'+name+'.png'),SITE/'media/CharacterSelection'/(name+'.png'))
+    (SITE/'media/Blacksmith').mkdir(parents=True,exist_ok=True)
+    for file in (ROOT/ART/'Blacksmith').glob('*.png'):
+        shutil.copyfile(file,SITE/'media/Blacksmith'/file.name)
     report=validate(dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')
@@ -716,7 +823,7 @@ def validate(dataset):
     return {'result':'passed','generatedAt':dataset['generatedAt'],'pages':len(dataset['pages']),
             'databases':len(dataset['databases']),'records':sum(len(d['rows']) for d in dataset['databases']),
             'recordsByDatabase':{d['id']:len(d['rows']) for d in dataset['databases']},'documentLinks':links,
-            'imageReferences':images,'uniqueImageFiles':len(list((ROOT/ART).glob('*.png'))),
+            'imageReferences':images,'uniqueImageFiles':len({r['assetPath'] for d in dataset['databases'] if d['id']=='resources' for r in d['rows'] if r['category']=='이미지 원본'}),
             'sourceFiles':len(dataset['inputManifest']),'gameExecution':'not performed; preserved reports only'}
 
 def check():

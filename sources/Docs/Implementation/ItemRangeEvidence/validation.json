@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-22",
+  "unity": "6000.6.0f1",
+  "platform": "macOS native player",
+  "baseCommit": "8a5c88d50097f89b24230a842fd8b13fbc36396d",
+  "editMode": {
+    "total": 96,
+    "passed": 96,
+    "failed": 0,
+    "skipped": 0,
+    "scopes": [
+      "ItemTooltipSettingsTests",
+      "ItemComparisonTests",
+      "NativeInventoryTests",
+      "LocalizationTests",
+      "StoredLocalizationTests"
+    ]
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "runtime": {
+    "result": "HELLSCRIPT_ITEM_RANGES_RUNTIME_OK",
+    "exitCode": 0,
+    "locales": [
+      "ko",
+      "en"
+    ],
+    "windowSizes": [
+      "1600x900",
+      "810x1440"
+    ],
+    "input": "Native uGUI raycasts and synthetic Unity InputSystem keyboard events",
+    "save": "Isolated fixture directory"
+  },
+  "verified": [
+    "Inventory/detail/quick-info compact On/Off controls",
+    "Mouse hover hint and touch suppression",
+    "Saved preference readback and reinitialization",
+    "Global inventory/storage/shop/reward detail and comparison range display",
+    "Left and right Ctrl press/release",
+    "Range changes preserve text-row geometry, content size, scrolling and comparison context",
+    "Temporary Ctrl does not mutate account, preference bytes or preference modification time",
+    "Actual level, awakening, greater affix and masterwork range math",
+    "Unknown legacy ranges remain omitted"
+  ],
+  "limits": [
+    "Focused tests, not full-project regression",
+    "Native macOS portrait/landscape windows, not physical mobile hardware",
+    "Training and blacksmith reuse the shared formatter and were compile-checked; their full UI flows were not exercised",
+    "Focus-loss behavior is covered by the preference-state unit tests; native runtime Ctrl checks use a focused player"
+  ],
+  "files": {
+    "editmode.xml": "b01a3a19cc7c2e4ac4faa2a5a8b40144563e53afc698b68e246925c4ad309cbc",
+    "ranges-comparison-on-portrait-en.png": "21290db5ee5542c0d8acff14ff1e9a7a7c2d52a3eade5a3baad0471077d499d9",
+    "ranges-detail-off-landscape-ko.png": "b3b2f12b27f6e6da99ebe95f7e94dbebe4b73349db5529a798746250a20d319c",
+    "ranges-detail-on-landscape-ko.png": "a315f0a8c87ab9929c23ad85f3175d50a553021378c59a48cd184c74780cfeac",
+    "ranges-hint-portrait-en.png": "498f10d1e10600aca31dac57c34f16f66fcd2a49292926cd689127f4d26ea237",
+    "ranges-reward-ctrl-portrait-en.png": "e2e9941d8da9588b7d2de131ee4852ead8aea9053529407670711299c005b8c7",
+    "ranges-shop-on-landscape-ko.png": "b83c4a895151300b7f26cf5fd7a4936fc66588b56cb6d220f83a262cbd39721f",
+    "runtime.txt": "1383c5f8da79a7f0e6571db2dfcec6dc4f91d651fbbc0ef7f30943800fbc8ac1"
+  }
+}

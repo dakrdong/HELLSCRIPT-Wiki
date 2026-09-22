@@ -86,7 +86,7 @@ namespace Hellscript
         public HeroSave Hero=>Copy<HeroSave>(baselineHeroJson);
         public RuneGrowthState Runes=>equipment.Runes;
         public IReadOnlyList<TrainingEquipmentCandidate> EquipmentCandidates=>equipment.Candidates;
-        public HeroSave PreviewEquipment(IEnumerable<string> ids)=>equipment.WithEquipment(ids);
+        public HeroSave PreviewEquipment(IEnumerable<string> ids,IReadOnlyList<int> positions=null)=>equipment.WithEquipment(ids,positions);
         public TrainingAttempt A=>Copy(resultA);
         public TrainingAttempt B=>Copy(resultB);
         static T Copy<T>(T value) where T:class=>value==null?null:JsonUtility.FromJson<T>(JsonUtility.ToJson(value));
@@ -107,11 +107,11 @@ namespace Hellscript
         {
             RequireIdle();resultA=resultB=null;completed=null;environmentJson=null;currentIsB=false;return Start(Hero);
         }
-        public string ValidateB(BuildConfig build,IEnumerable<string> ids=null,HuntEdictV2Document edict=null)
+        public string ValidateB(BuildConfig build,IEnumerable<string> ids=null,HuntEdictV2Document edict=null,IReadOnlyList<int> positions=null)
         {
             if(!BuildEditing.HasPreset(build))return "비교할 행동 설정이 없습니다.";
             HeroSave hero;
-            try{hero=ids==null?Hero:equipment.WithEquipment(ids);}
+            try{hero=ids==null?Hero:equipment.WithEquipment(ids,positions);}
             catch(Exception e){return e.Message;}
             string passiveError=ContentUnlocks.PassiveError(hero,build);if(passiveError!="")return passiveError;
             if(hero.useEdict)
@@ -135,11 +135,11 @@ namespace Hellscript
                 if(catalog.skills[rule.skill].unlock>hero.level)return Loc.F("{0}은 Lv.{1}에 해금됩니다. 해당 규칙을 끄고 시험해 주세요.", catalog.skills[rule.skill].name, catalog.skills[rule.skill].unlock);
             return "";
         }
-        public CombatSimulation StartB(BuildConfig build,IEnumerable<string> ids=null,HuntEdictV2Document edict=null)
+        public CombatSimulation StartB(BuildConfig build,IEnumerable<string> ids=null,HuntEdictV2Document edict=null,IReadOnlyList<int> positions=null)
         {
             RequireIdle();if(resultA==null)throw new InvalidOperationException("A 훈련 결과를 먼저 확인해 주세요.");
-            var selected=ids?.ToArray();string error=ValidateB(build,selected,edict);if(error!="")throw new InvalidOperationException(error);
-            var hero=selected==null?Hero:equipment.WithEquipment(selected);hero.build=build.Copy();
+            var selected=ids?.ToArray();string error=ValidateB(build,selected,edict,positions);if(error!="")throw new InvalidOperationException(error);
+            var hero=selected==null?Hero:equipment.WithEquipment(selected,positions);hero.build=build.Copy();
             if(hero.useEdict)hero.edict=HuntEdictV2.Canonical(edict??hero.edict);
             currentIsB=true;resultB=null;completed=null;return Start(hero);
         }

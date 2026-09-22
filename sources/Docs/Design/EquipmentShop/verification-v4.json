@@ -1,0 +1,827 @@
+{
+  "revision": 4,
+  "executedAt": "2026-09-20T12:48:44.503Z",
+  "scope": "Information-density and focused transaction verification in the interactive planning mockup",
+  "browser": "Codex In-app Browser (iab)",
+  "priorFunctionalVerification": {
+    "path": "verification-v3.json",
+    "commit": "106ba1b",
+    "checks": 43,
+    "note": "Historical revision 3 evidence; not all rerun for this density change"
+  },
+  "before": {
+    "detailContentHeight": 600,
+    "detailHeight": 191,
+    "detailText": "12px",
+    "detailVisibleRatio": 0.31833333333333336,
+    "offerIcon": 44,
+    "offerRow": 54,
+    "titleFont": "20px",
+    "viewport": [
+      956,
+      440
+    ],
+    "visibleOffers": 3
+  },
+  "after": {
+    "columns": 2,
+    "detailContentHeight": 263,
+    "detailHeight": 263,
+    "detailVisibleRatio": 1,
+    "offerIcon": 32,
+    "offerRow": 40,
+    "titleFont": "16px",
+    "viewport": [
+      956,
+      440
+    ],
+    "visibleOffers": 6
+  },
+  "passed": 16,
+  "total": 16,
+  "checks": [
+    {
+      "name": "Landscape shows all six offers and complete selected item without scrolling",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 350,
+          "height": 263,
+          "right": 893,
+          "width": 461.4453125,
+          "x": 431.5546875,
+          "y": 87
+        },
+        "detailColumns": "228.172px 211.273px",
+        "detailHeight": 263,
+        "detailScroll": 263,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "ko",
+        "layout": "wide",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 287,
+          "height": 37.5,
+          "right": 887,
+          "width": 201.2734375,
+          "x": 685.7265625,
+          "y": 249.5
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          956,
+          440
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "English landscape retains every detail without clipping",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 350,
+          "height": 263,
+          "right": 893,
+          "width": 461.4453125,
+          "x": 431.5546875,
+          "y": 87
+        },
+        "detailColumns": "228.172px 211.273px",
+        "detailHeight": 263,
+        "detailScroll": 263,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "en",
+        "layout": "wide",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 287,
+          "height": 37.5,
+          "right": 887,
+          "width": 201.2734375,
+          "x": 685.7265625,
+          "y": 249.5
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          956,
+          440
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Portrait English shows six offers and all item information",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 853,
+          "height": 266.8046875,
+          "right": 439,
+          "width": 438,
+          "x": 1,
+          "y": 586.1953125
+        },
+        "detailColumns": "216px 200px",
+        "detailHeight": 267,
+        "detailScroll": 267,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "en",
+        "layout": "portrait",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 786.1953125,
+          "height": 37.5,
+          "right": 433,
+          "width": 190,
+          "x": 243,
+          "y": 748.6953125
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          440,
+          956
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Portrait Korean shows all information at smaller type and icon sizes",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 853,
+          "height": 266.8046875,
+          "right": 439,
+          "width": 438,
+          "x": 1,
+          "y": 586.1953125
+        },
+        "detailColumns": "216px 200px",
+        "detailHeight": 267,
+        "detailScroll": 267,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "ko",
+        "layout": "portrait",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 786.1953125,
+          "height": 37.5,
+          "right": 433,
+          "width": 190,
+          "x": 243,
+          "y": 748.6953125
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          440,
+          956
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Portrait inventory preserves eight square columns and exposes all fifty positions",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 853,
+          "height": 266.8046875,
+          "right": 439,
+          "width": 438,
+          "x": 1,
+          "y": 586.1953125
+        },
+        "detailColumns": "216px 200px",
+        "detailHeight": 267,
+        "detailScroll": 267,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 8,
+        "inventoryVisible": true,
+        "lang": "ko",
+        "layout": "portrait",
+        "slot": {
+          "bottom": 249.125,
+          "height": 43.125,
+          "right": 80.125,
+          "width": 43.125,
+          "x": 37,
+          "y": 206
+        },
+        "tab": "sell",
+        "tradeRect": {
+          "bottom": 729.9453125,
+          "height": 20.75,
+          "right": 433,
+          "width": 190,
+          "x": 243,
+          "y": 709.1953125
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          440,
+          956
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Dense layout preserves multi-sale totals and separate buyback rows",
+      "passed": true,
+      "evidence": {
+        "gold": "30,180",
+        "bag": "12 / 50",
+        "rows": [
+          "bag-1",
+          "bag-0"
+        ],
+        "metrics": {
+          "allDetailsVisible": true,
+          "bagCount": "12 / 50",
+          "clippedCells": [],
+          "detailBounds": {
+            "bottom": 853,
+            "height": 266.8046875,
+            "right": 439,
+            "width": 438,
+            "x": 1,
+            "y": 586.1953125
+          },
+          "detailColumns": "216px 200px",
+          "detailHeight": 267,
+          "detailScroll": 267,
+          "gold": "30,180",
+          "horizontalOverflow": false,
+          "inventoryColumns": 50,
+          "inventoryVisible": false,
+          "lang": "ko",
+          "layout": "portrait",
+          "slot": {
+            "bottom": 0,
+            "height": 0,
+            "right": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "tab": "back",
+          "tradeRect": {
+            "bottom": 746.6953125,
+            "height": 37.5,
+            "right": 433,
+            "width": 190,
+            "x": 243,
+            "y": 709.1953125
+          },
+          "verticalOverflow": false,
+          "viewport": [
+            440,
+            956
+          ],
+          "visibleOffers": 2,
+          "visibleSlots": 50
+        }
+      }
+    },
+    {
+      "name": "Buyback action remains usable in the dense layout",
+      "passed": true,
+      "evidence": {
+        "gold": "29,660",
+        "bag": "13 / 50",
+        "rows": [
+          "bag-0"
+        ]
+      }
+    },
+    {
+      "name": "Buyback exposes every affix, upgrade record and original price without scrolling",
+      "passed": true,
+      "evidence": {
+        "metrics": {
+          "allDetailsVisible": true,
+          "bagCount": "13 / 50",
+          "clippedCells": [],
+          "detailBounds": {
+            "bottom": 853,
+            "height": 266.8046875,
+            "right": 439,
+            "width": 438,
+            "x": 1,
+            "y": 586.1953125
+          },
+          "detailColumns": "216px 200px",
+          "detailHeight": 267,
+          "detailScroll": 267,
+          "gold": "20,700",
+          "horizontalOverflow": false,
+          "inventoryColumns": 50,
+          "inventoryVisible": false,
+          "lang": "ko",
+          "layout": "portrait",
+          "slot": {
+            "bottom": 0,
+            "height": 0,
+            "right": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "tab": "back",
+          "tradeRect": {
+            "bottom": 786.1953125,
+            "height": 37.5,
+            "right": 433,
+            "width": 190,
+            "x": 243,
+            "y": 748.6953125
+          },
+          "verticalOverflow": false,
+          "viewport": [
+            440,
+            956
+          ],
+          "visibleOffers": 2,
+          "visibleSlots": 50
+        },
+        "detail": "15\n현재 장착\n강철 대검\n16\n판매했던 장비\n강인한 강철 대검\n\t현재 장착\t판매했던 장비\n공격력\t42.4\t44 (+3.8%)\n방어력\t—\t—\n공격 속도\t1.00\t1.00\n아이템 레벨\t15\t16\n요구 레벨\t8\t8\n종류\n무기\n장착 부위\n주 무기\n등급\n레어\n아이템 옵션\n힘\n+15.9\n물리 피해\n+5.8%\n극대화 확률\n+3%\n업그레이드 정보\n\n기록 없음\n\n당시 판매가격\n1,280\n되사기 금액\n1,280"
+      }
+    },
+    {
+      "name": "Landscape inventory retains eight square slots with more visible rows",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "13 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 350,
+          "height": 263,
+          "right": 893,
+          "width": 461.4453125,
+          "x": 431.5546875,
+          "y": 87
+        },
+        "detailColumns": "228.172px 211.273px",
+        "detailHeight": 263,
+        "detailScroll": 263,
+        "gold": "20,700",
+        "horizontalOverflow": false,
+        "inventoryColumns": 8,
+        "inventoryVisible": true,
+        "lang": "ko",
+        "layout": "wide",
+        "slot": {
+          "bottom": 185.1875,
+          "height": 41.1875,
+          "right": 110.1875,
+          "width": 41.1875,
+          "x": 69,
+          "y": 144
+        },
+        "tab": "sell",
+        "tradeRect": {
+          "bottom": 230.75,
+          "height": 20.75,
+          "right": 887,
+          "width": 201.2734375,
+          "x": 685.7265625,
+          "y": 210
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          956,
+          440
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 40
+      }
+    },
+    {
+      "name": "English sell controls and information fit the landscape layout",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "13 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 350,
+          "height": 263,
+          "right": 893,
+          "width": 461.4453125,
+          "x": 431.5546875,
+          "y": 87
+        },
+        "detailColumns": "228.172px 211.273px",
+        "detailHeight": 263,
+        "detailScroll": 263,
+        "gold": "20,700",
+        "horizontalOverflow": false,
+        "inventoryColumns": 8,
+        "inventoryVisible": true,
+        "lang": "en",
+        "layout": "wide",
+        "slot": {
+          "bottom": 185.1875,
+          "height": 41.1875,
+          "right": 110.1875,
+          "width": 41.1875,
+          "x": 69,
+          "y": 144
+        },
+        "tab": "sell",
+        "tradeRect": {
+          "bottom": 230.75,
+          "height": 20.75,
+          "right": 887,
+          "width": 201.2734375,
+          "x": 685.7265625,
+          "y": 210
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          956,
+          440
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 40
+      }
+    },
+    {
+      "name": "PC purchase uses smaller rows and fully visible item data",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "13 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 825,
+          "height": 726,
+          "right": 1599,
+          "width": 1030,
+          "x": 569,
+          "y": 99
+        },
+        "detailColumns": "516.109px 477.891px",
+        "detailHeight": 726,
+        "detailScroll": 726,
+        "gold": "20,700",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "ko",
+        "layout": "wide",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 331.265625,
+          "height": 39.59375,
+          "right": 1589,
+          "width": 462.890625,
+          "x": 1126.109375,
+          "y": 291.671875
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          1600,
+          900
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "PC English has no clipped stat or property labels",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 1005,
+          "height": 906,
+          "right": 1919,
+          "width": 1350,
+          "x": 569,
+          "y": 99
+        },
+        "detailColumns": "682.266px 631.734px",
+        "detailHeight": 906,
+        "detailScroll": 906,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "en",
+        "layout": "wide",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 331.265625,
+          "height": 39.59375,
+          "right": 1909,
+          "width": 616.734375,
+          "x": 1292.265625,
+          "y": 291.671875
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          1920,
+          1080
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "PC inventory keeps eight square columns and all fifty slots visible",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 1005,
+          "height": 906,
+          "right": 1919,
+          "width": 1350,
+          "x": 569,
+          "y": 99
+        },
+        "detailColumns": "682.266px 631.734px",
+        "detailHeight": 906,
+        "detailScroll": 906,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 8,
+        "inventoryVisible": true,
+        "lang": "en",
+        "layout": "wide",
+        "slot": {
+          "bottom": 229.875,
+          "height": 64.875,
+          "right": 75.875,
+          "width": 64.875,
+          "x": 11,
+          "y": 165
+        },
+        "tab": "sell",
+        "tradeRect": {
+          "bottom": 262.484375,
+          "height": 21.296875,
+          "right": 1909,
+          "width": 616.734375,
+          "x": 1292.265625,
+          "y": 241.1875
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          1920,
+          1080
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Compact desktop view fits inventory and item details",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 501,
+          "height": 402,
+          "right": 1023,
+          "width": 625.640625,
+          "x": 397.359375,
+          "y": 99
+        },
+        "detailColumns": "306.156px 283.484px",
+        "detailHeight": 402,
+        "detailScroll": 402,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 8,
+        "inventoryVisible": true,
+        "lang": "en",
+        "layout": "wide",
+        "slot": {
+          "bottom": 208.4140625,
+          "height": 43.4140625,
+          "right": 54.4140625,
+          "width": 43.4140625,
+          "x": 11,
+          "y": 165
+        },
+        "tab": "sell",
+        "tradeRect": {
+          "bottom": 262.484375,
+          "height": 21.296875,
+          "right": 1013,
+          "width": 268.484375,
+          "x": 744.515625,
+          "y": 241.1875
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          1024,
+          576
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Embedded landscape keeps all six offers and complete details after uniform scaling",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 269.4560546875,
+          "height": 202.4769744873047,
+          "right": 687.4978637695312,
+          "width": 355.25494384765625,
+          "x": 332.242919921875,
+          "y": 66.97908020019531
+        },
+        "detailColumns": "228.172px 211.273px",
+        "detailHeight": 263,
+        "detailScroll": 263,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "ko",
+        "layout": "wide",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 220.95396423339844,
+          "height": 28.870285034179688,
+          "right": 682.878662109375,
+          "width": 154.955322265625,
+          "x": 527.92333984375,
+          "y": 192.08367919921875
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          736,
+          360
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    },
+    {
+      "name": "Embedded portrait retains all details on a narrow conversation surface",
+      "passed": true,
+      "evidence": {
+        "allDetailsVisible": true,
+        "bagCount": "14 / 50",
+        "clippedCells": [],
+        "detailBounds": {
+          "bottom": 620.3636474609375,
+          "height": 194.03976440429688,
+          "right": 319.2727439403534,
+          "width": 318.54547119140625,
+          "x": 0.7272727489471436,
+          "y": 426.3238830566406
+        },
+        "detailColumns": "216px 200px",
+        "detailHeight": 267,
+        "detailScroll": 267,
+        "gold": "28,460",
+        "horizontalOverflow": false,
+        "inventoryColumns": 50,
+        "inventoryVisible": false,
+        "lang": "ko",
+        "layout": "portrait",
+        "slot": {
+          "bottom": 0,
+          "height": 0,
+          "right": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "tab": "buy",
+        "tradeRect": {
+          "bottom": 571.7784423828125,
+          "height": 27.27276611328125,
+          "right": 314.9090881347656,
+          "width": 138.1818084716797,
+          "x": 176.72727966308594,
+          "y": 544.5056762695312
+        },
+        "verticalOverflow": false,
+        "viewport": [
+          320,
+          740
+        ],
+        "visibleOffers": 6,
+        "visibleSlots": 50
+      }
+    }
+  ],
+  "consoleErrors": [],
+  "unverified": [
+    "Physical iPhone touch targets, safe areas and text scaling",
+    "Unity runtime, real player saves and full regression",
+    "Combat and economy balance",
+    "Long real upgrade records and canonical socket/gem rendering"
+  ],
+  "notes": [
+    "Grid metrics are evaluated only when inventoryVisible is true.",
+    "Standard fixture details fit without scrolling; longer item records retain interior scrolling."
+  ]
+}

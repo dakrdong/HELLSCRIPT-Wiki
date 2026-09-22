@@ -16,6 +16,7 @@ namespace Hellscript
             if(a.gold<gold||a.materials<materials||Economy.FreeSlots(a.Hero)<=0||mode==2&&a.cores[slot]<ContentUnlocks.Rules.coreCount)return false;
             uint next=rng;float roll=RandomStream.Unit(ref next);int rarity=mode==2?3:mode==1?2:roll<.02f?3:roll<.4f?2:1;
             var created=Economy.CreateItem(a.Hero.heroClass,slot,rarity,level,ref next);
+            created.acquisitionKind="craft";
             if(!Economy.AddItem(a.Hero,created,BagPolicy.Ignore,a))return false;
             a.gold-=(int)gold;a.materials-=materials;if(mode==2)a.cores[slot]-=ContentUnlocks.Rules.coreCount;
             item=created;rng=next;return true;

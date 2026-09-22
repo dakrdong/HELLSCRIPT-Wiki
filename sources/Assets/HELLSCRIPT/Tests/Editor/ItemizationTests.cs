@@ -29,7 +29,7 @@ namespace Hellscript.Tests
         }
         [Test]public void EveryUniqueHasAValidBaseAndExactlyFourOptions()
         {
-            Assert.AreEqual(24,ItemCatalog.Bases.Count);Assert.AreEqual(StatCatalog.Count-3,ItemCatalog.Affixes.Count,"One affix per stat that does something.");Assert.AreEqual(6,ItemCatalog.Sets.Count);Assert.AreEqual(39,ItemCatalog.Uniques.Count);
+            Assert.AreEqual(30,ItemCatalog.Bases.Count);Assert.AreEqual(StatCatalog.Count-4,ItemCatalog.Affixes.Count,"Exclude reserved and blacksmith-only stats from the affix catalog.");Assert.AreEqual(6,ItemCatalog.Sets.Count);Assert.AreEqual(147,ItemCatalog.Uniques.Count);
             uint rng=234;
             foreach(var d in ItemCatalog.Uniques)
             {

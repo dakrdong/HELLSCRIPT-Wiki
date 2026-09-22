@@ -27,7 +27,7 @@ namespace Hellscript
         HeroStats BuildChangeStats(BuildConfig candidate)
         {
             if(State.training<0)return baseStats;
-            var hero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));hero.build=candidate;
+            var hero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));hero.build=candidate;hero.slotProgress=new SlotProgress{levels=(int[])State.slotLevels.Clone()};
             return new HeroStats(hero,FullSkillTraining,account.runes);
         }
         // This transition has no external callbacks, I/O, time reads, or random draws.
@@ -45,7 +45,7 @@ namespace Hellscript
             // quarter-second boundary without buying another tick; repeated saves cannot defer it.
             if(State.heroAction.phase==HeroActionPhase.Channeling)State.heroAction.exitChannelForBuild=true;
             State.movementRule=-1;State.shotApproachReview=0;Map.Repath();
-            ResetUnavailableCharges();ResetUnavailableAreaEffects();ResetUnavailablePassives();
+            ResetUnavailableCharges();ResetUnavailableAreaEffects();ResetUnavailablePassives();ResetUnavailableLegendaryBuffs();
             Log("BUILD_CHANGED",Loc.F("{0} → {1} · 행동 {2}행 변경", previous.version, State.build.version, BuildEditing.ChangedRows(previous,State.build)));
         }
         internal bool IsOwnedBy(AccountSave owner)=>ReferenceEquals(account,owner)&&ReferenceEquals(Hero,owner.Hero)&&State.heroId==Hero.id;

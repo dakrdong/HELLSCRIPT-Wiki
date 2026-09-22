@@ -59,11 +59,11 @@ namespace Hellscript
         // built once when the type loads, so those parts are kept and joined when the text is read;
         // joining them at load time would freeze whichever language happened to be active then.
         readonly SetDefinition set;
-        readonly string slotWord;
-        public UniqueItemDefinition(string id,string name,int heroClass,int slot,int weight,string description,string skill="",string setId="",SetDefinition set=null,string slotWord="")
-        {this.id=id;this.name=name;this.heroClass=heroClass;this.slot=slot;this.weight=weight;this.description=description;requiredSkill=skill;this.setId=setId;this.set=set;this.slotWord=slotWord;}
-        public string Name=>set==null?Loc.T(name):Loc.F("{0}의 {1}",set.name,slotWord);
-        public string Description=>set==null?Loc.T(description):Loc.F("2세트: {0}\n4세트: {1}",set.two,set.four);
+        readonly string slotWord,nameEn,descriptionEn;
+        public UniqueItemDefinition(string id,string name,int heroClass,int slot,int weight,string description,string skill="",string setId="",SetDefinition set=null,string slotWord="",string nameEn="",string descriptionEn="")
+        {this.id=id;this.name=name;this.heroClass=heroClass;this.slot=slot;this.weight=weight;this.description=description;requiredSkill=skill;this.setId=setId;this.set=set;this.slotWord=slotWord;this.nameEn=nameEn;this.descriptionEn=descriptionEn;}
+        public string Name=>set==null?(Loc.Language=="en"&&!string.IsNullOrEmpty(nameEn)?nameEn:Loc.T(name)):Loc.F("{0}의 {1}",set.name,slotWord);
+        public string Description=>set==null?(Loc.Language=="en"&&!string.IsNullOrEmpty(descriptionEn)?descriptionEn:Loc.T(description)):Loc.F("2세트: {0}\n4세트: {1}",set.two,set.four);
         public bool Fits(HeroClass c,int s)=>slot==s&&(heroClass<0||heroClass==(int)c);
     }
 
@@ -78,7 +78,7 @@ namespace Hellscript
     // Stable content IDs are authoritative. Legacy indices are only an import adapter.
     public static class ItemCatalog
     {
-        public const int Version=4;
+        public const int Version=5;
         const AffixSide P=AffixSide.Prefix,S=AffixSide.Suffix;
         public static readonly IReadOnlyList<ItemBaseDefinition> Bases=Array.AsReadOnly(new[]{
             new ItemBaseDefinition("B01","녹슨 도검",0,0,0,17,0,.15f),new ItemBaseDefinition("B02","강철 대검",1,0,0,20),new ItemBaseDefinition("B03","묵철 도끼",2,0,0,23,0,-.15f),
@@ -90,7 +90,10 @@ namespace Hellscript
             new ItemBaseDefinition("B16","가죽 장화",15,4,-1,8,8),new ItemBaseDefinition("B17","철 장화",16,4,-1,14),
             new ItemBaseDefinition("B18","직물 허리띠",17,5,-1,10,8),new ItemBaseDefinition("B19","철 버클 허리띠",18,5,-1,16),
             new ItemBaseDefinition("B20","뼈 목걸이",19,6,-1,20),new ItemBaseDefinition("B21","은 목걸이",20,6,-1,25),new ItemBaseDefinition("B22","봉인 목걸이",21,6,-1,30),
-            new ItemBaseDefinition("B23","철 반지",22,7,-1,5),new ItemBaseDefinition("B24","은 반지",23,7,-1,5)
+            new ItemBaseDefinition("B23","철 반지",22,7,-1,5),new ItemBaseDefinition("B24","은 반지",23,7,-1,5),
+            new ItemBaseDefinition("B25","재의 한손 지팡이",24,0,2,17,0,.1f),new ItemBaseDefinition("B26","봉인된 오브",25,0,2,5),
+            new ItemBaseDefinition("B27","마법 스크롤",26,0,2,5),new ItemBaseDefinition("B28","철 방패",27,0,-1,24),
+            new ItemBaseDefinition("B29","사냥 화살",28,0,1,5),new ItemBaseDefinition("B30","사냥꾼 단검",29,0,1,17,0,.15f)
         });
         public static readonly IReadOnlyList<AffixDefinition> Affixes=Array.AsReadOnly(new[]{
             new AffixDefinition("AF01",0,P,"생명 어린","FlatHealth",100,40,100,true,1,2,5,6,7),
@@ -182,6 +185,7 @@ namespace Hellscript
         static UniqueItemDefinition[] BuildUniques()
         {
             var result=legends.ToList();
+            result.AddRange(LegendaryPowers.All.Select(p=>p.Item));
             foreach(var set in Sets)for(int slot=1;slot<=4;slot++)
             {
                 string part=new[]{"","관","갑옷","손아귀","걸음"}[slot];
@@ -193,7 +197,8 @@ namespace Hellscript
         public static ItemBaseDefinition Base(Item item)=>item.contentVersion>0?Base(item.baseId):Bases.Single(b=>b.legacyIndex==item.baseIndex);
         public static AffixDefinition Affix(string id)=>affixById.TryGetValue(id??"",out var d)?d:throw new InvalidOperationException(Loc.F("알 수 없는 접사 ID: {0}", id));
         public static UniqueItemDefinition Unique(string id)=>uniqueById.TryGetValue(id??"",out var d)?d:null;
-        public static float MainValue(Item item)=>Base(item).main*(1+.08f*(item.level-1))*(1+.05f*item.enhancement)*ItemQuality.MainMultiplier(item);
+        public static int AtlasIndex(Item item)=>Math.Min(23,Base(item).legacyIndex);
+        public static float MainValue(Item item)=>GearEnhancement.Value(item);
         public static string Name(Item item)
         {
             var unique=Unique(item.special);if(unique!=null)return ItemQuality.Name(item,unique.Name);
@@ -226,7 +231,7 @@ namespace Hellscript
         {
             GemCatalog.ValidateSockets(item);
             var b=Base(item.baseId);
-            if(string.IsNullOrWhiteSpace(item.id)||item.slot!=b.slot||item.level<1||item.rarity<0||item.rarity>3||item.enhancement<0||item.enhancement>5||item.investedMaterials<0||item.rerolls<0||item.contentVersion<1||item.contentVersion>Version)
+            if(string.IsNullOrWhiteSpace(item.id)||item.slot!=b.slot||item.level<1||item.rarity<0||item.rarity>3||item.enhancement<0||item.enhancement>GearEnhancement.Maximum||item.investedMaterials<0||item.rerolls<0||item.contentVersion<1||item.contentVersion>Version)
                 throw new InvalidOperationException(Loc.F("장비 기본 데이터가 올바르지 않습니다: {0}", item.id));
             if(!string.IsNullOrEmpty(item.special)&&(Unique(item.special)==null||Unique(item.special).slot!=item.slot||item.rarity!=3))throw new InvalidOperationException(Loc.F("고유 장비 참조 오류: {0}", item.special));
             if(item.rolls==null||item.rolls.Count>4||item.rolls.Any(r=>r==null)||item.rolls.Select(r=>r.slotId).Distinct().Count()!=item.rolls.Count)throw new InvalidOperationException(Loc.F("접사 슬롯 오류: {0}", item.id));
@@ -281,7 +286,7 @@ namespace Hellscript
             if((int)c<0||(int)c>2||slot<0||slot>7||rarity<0||rarity>3||level<1)throw new ArgumentOutOfRangeException();
             level=Math.Min(ItemQuality.MaximumItemLevel,level);
             uint next=rng;
-            var bases=ItemCatalog.Bases.Where(b=>b.Fits(c,slot)).ToList();var b=Pick(bases,_=>1,ref next);
+            var bases=ItemCatalog.Bases.Where(b=>b.Fits(c,slot)&&(rarity<3||!EquipmentSlots.IsOffhand(EquipmentSlots.Kind(b.id)))).ToList();var b=Pick(bases,_=>1,ref next);
             var item=new Item{id=id??Guid.NewGuid().ToString("N"),baseId=b.id,baseIndex=b.legacyIndex,slot=slot,rarity=rarity,level=level,lootClass=c,contentVersion=ItemCatalog.Version};
             if(rarity==3)
             {

@@ -1,0 +1,626 @@
+{
+  "revision": 3,
+  "executedAt": "2026-09-20T12:31:49.912Z",
+  "scope": "Interactive HTML planning mockup only; no Unity runtime or player data changes",
+  "browser": "Codex In-app Browser (iab)",
+  "viewports": [
+    {
+      "name": "PC",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "name": "PC English",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "name": "Compact PC preview",
+      "width": 1024,
+      "height": 576
+    },
+    {
+      "name": "iPhone 17 Pro Max portrait design coordinates",
+      "width": 440,
+      "height": 956
+    },
+    {
+      "name": "iPhone 17 Pro Max landscape design coordinates",
+      "width": 956,
+      "height": 440
+    }
+  ],
+  "phoneResolutionSource": "https://support.apple.com/ko-kr/125091",
+  "phoneCoordinateScale": "1320x2868 / 3 = 440x956; design conversion, not a measured device DPR",
+  "safeArea": "Portrait 62 top/34 bottom; landscape 62 sides/21 bottom; illustrative assumptions only",
+  "passed": 43,
+  "total": 43,
+  "consoleErrors": [],
+  "checks": [
+    {
+      "name": "Buy hides inventory and compares equipped item only",
+      "passed": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bodyText": "HELLSCRIPT성소 · 전사 Lv.12\n무기 · 장비 상점\nEN\n×\n구매\n판매\n되사기\n성소 · 전사 Lv.12\n다음 입고\n42:18\n상점\n6 / 6\n전체 등급\n일반\n마법\n레어\n전설\n세트\n위치순\n최근순\n등급순\n레벨순\n전체\n무기\n방어구\n장신구\n16\n강인한 강철 대검\n레어 · I16소폭 개선\n10,240\n16\n분쇄하는 묵철 도끼\n레어 · I16\n10,240\n16\n견고한 철 갑옷\n레어 · I16소폭 개선\n10,240\n15\n강인한 철 장갑\n마법 · I15\n4,800\n15\n가죽 장화 · 바람\n마법 · I15\n4,800\n15\n생명 어린 은 목걸이\n마법 · I15\n4,800\n구매\n아이템 정보\n15\n현재 장착\n강철 대검\n16\n판매 상품\n강인한 강철 대검\n\t현재 장착\t판매 상품\n공격력\t42.4\t44 (+3.8%)\n방어력\t—\t—\n공격 속도\t1.00\t1.00\n아이템 레벨\t15\t16\n요구 레벨\t8\t8\n종류\n무기\n장착 부위\n주 무기\n등급\n레어\n아이템 옵션\n힘\n+15.9\n물리 피해\n+5.8%\n극대화 확률\n+3%\n업그레이드 정보\n\n기록 없음\n\n판매 금액\n1,280\n구매가격\n10,240\n구매가격\n 10,240\n구매하기\n28,460\n3,000\n구매 · 판매 · 되사기를 선택하세요.\n기록\n안내",
+        "bulkCount": "",
+        "cells": 50,
+        "detail": "15\n현재 장착\n강철 대검\n16\n판매 상품\n강인한 강철 대검\n\t현재 장착\t판매 상품\n공격력\t42.4\t44 (+3.8%)\n방어력\t—\t—\n공격 속도\t1.00\t1.00\n아이템 레벨\t15\t16\n요구 레벨\t8\t8\n종류\n무기\n장착 부위\n주 무기\n등급\n레어\n아이템 옵션\n힘\n+15.9\n물리 피해\n+5.8%\n극대화 확률\n+3%\n업그레이드 정보\n\n기록 없음\n\n판매 금액\n1,280\n구매가격\n10,240",
+        "dock": "구매가격\n 10,240\n구매하기",
+        "gold": "28,460",
+        "inventoryHidden": true,
+        "overflow": false,
+        "rows": [
+          "sword16",
+          "axe16",
+          "chest16",
+          "gloves15",
+          "boots15",
+          "amulet15"
+        ],
+        "selected": [],
+        "shopHidden": false,
+        "tab": "buy"
+      }
+    },
+    {
+      "name": "Purchase deducts exact price and blocks repeat purchase",
+      "passed": true,
+      "evidence": {
+        "gold": "18,220",
+        "bag": "15 / 50"
+      }
+    },
+    {
+      "name": "Sell uses inventory and exposes item detail with sale button",
+      "passed": true,
+      "evidence": {
+        "gold": "18,220",
+        "bag": "15 / 50",
+        "detail": "15\n현재 장착\n철 투구\n13\n소지품 장비\n천 두건\n\t현재 장착\t소지품 장비\n공격력\t—\t—\n방어력\t42.4\t23.52 (-44.5%)\n아이템 레벨\t15\t13\n요구 레벨\t8\t7\n종류\n방어구\n장착 부위\n머리\n등급\n마법\n아이템 옵션\n\n추가 옵션 없음\n\n업그레이드 정보\n\n기록 없음\n\n판매 금액\n520",
+        "dock": "판매 금액\n 520\n판매하기"
+      }
+    },
+    {
+      "name": "PC inventory preserves eight square slots per row",
+      "passed": true,
+      "evidence": {
+        "columns": 8,
+        "first": {
+          "height": 85.375,
+          "width": 85.375,
+          "x": 15,
+          "y": 222
+        },
+        "ninth": {
+          "height": 85.375,
+          "width": 85.375,
+          "x": 15,
+          "y": 311.375
+        },
+        "square": true
+      }
+    },
+    {
+      "name": "Single sale transfers exact gold and item",
+      "passed": true,
+      "evidence": {
+        "gold": "18,740",
+        "bag": "14 / 50"
+      }
+    },
+    {
+      "name": "Buyback is a row list containing sold items only",
+      "passed": true,
+      "evidence": {
+        "rows": [
+          "bag-1"
+        ],
+        "detail": "15\n현재 장착\n철 투구\n13\n판매했던 장비\n천 두건\n\t현재 장착\t판매했던 장비\n공격력\t—\t—\n방어력\t42.4\t23.52 (-44.5%)\n아이템 레벨\t15\t13\n요구 레벨\t8\t7\n종류\n방어구\n장착 부위\n머리\n등급\n마법\n아이템 옵션\n\n추가 옵션 없음\n\n업그레이드 정보\n\n기록 없음\n\n당시 판매가격\n520\n되사기 금액\n520",
+        "dock": "되사기 금액\n 520\n되사기"
+      }
+    },
+    {
+      "name": "Buyback restores original item and original price",
+      "passed": true,
+      "evidence": {
+        "gold": "18,220",
+        "bag": "15 / 50",
+        "rows": []
+      }
+    },
+    {
+      "name": "Buyback selection preserves every affix and complete item information",
+      "passed": true,
+      "evidence": "15\n현재 장착\n강철 대검\n16\n판매했던 장비\n강인한 강철 대검\n\t현재 장착\t판매했던 장비\n공격력\t42.4\t44 (+3.8%)\n방어력\t—\t—\n공격 속도\t1.00\t1.00\n아이템 레벨\t15\t16\n요구 레벨\t8\t8\n종류\n무기\n장착 부위\n주 무기\n등급\n레어\n아이템 옵션\n힘\n+15.9\n물리 피해\n+5.8%\n극대화 확률\n+3%\n업그레이드 정보\n\n기록 없음\n\n당시 판매가격\n1,280\n되사기 금액\n1,280"
+    },
+    {
+      "name": "Locked gear cannot be sold",
+      "passed": true,
+      "evidence": "판매 금액\n 1,200\n보호된 장비"
+    },
+    {
+      "name": "Preset gear cannot be sold",
+      "passed": true,
+      "evidence": "판매 금액\n 1,200\n보호된 장비"
+    },
+    {
+      "name": "Multi-selection persists through filters and sorting with hidden-selection notice",
+      "passed": true,
+      "evidence": {
+        "bulkCount": "2 개 선택",
+        "detail": "2 개 선택\n\n현재 필터에서 숨겨진 선택 · 1\n\n15\n묵철 도끼\n레어 · I15 · 1,200\n정보\n13\n천 두건\n마법 · I13 · 520\n정보",
+        "dock": "판매 합계 · 2\n 1,720\n일괄 판매"
+      }
+    },
+    {
+      "name": "Select-visible retains hidden selection and excludes protected gear",
+      "passed": true,
+      "evidence": {
+        "bulkCount": "3 개 선택",
+        "selected": [
+          "purchased-sword16",
+          "bag-0"
+        ],
+        "dock": "판매 합계 · 3\n 3,000\n일괄 판매"
+      }
+    },
+    {
+      "name": "Bulk sale applies the exact total and inventory count",
+      "passed": true,
+      "evidence": {
+        "gold": "21,220",
+        "bag": "12 / 50",
+        "bulkCount": "0 개 선택"
+      }
+    },
+    {
+      "name": "Bulk-sold items appear as separate buyback rows",
+      "passed": true,
+      "evidence": [
+        "purchased-sword16",
+        "bag-1",
+        "bag-0"
+      ]
+    },
+    {
+      "name": "Portrait rotation preserves transaction state",
+      "passed": true,
+      "evidence": {
+        "dock": 823,
+        "foot": 889,
+        "header": 63,
+        "layout": "portrait",
+        "scroll": 0
+      }
+    },
+    {
+      "name": "Portrait details scroll while purchase action and navigation stay fixed",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "dock": 823,
+          "foot": 889,
+          "header": 63,
+          "layout": "portrait",
+          "scroll": 0
+        },
+        "after": {
+          "dock": 823,
+          "foot": 889,
+          "header": 63,
+          "overflow": false,
+          "scroll": 344
+        }
+      }
+    },
+    {
+      "name": "iPhone portrait inventory is eight square columns with details below",
+      "passed": true,
+      "evidence": {
+        "columns": 8,
+        "detailAfter": true,
+        "layout": "portrait",
+        "outerOverflow": false,
+        "panels": [
+          {
+            "height": 366,
+            "width": 438,
+            "x": 1,
+            "y": 147
+          },
+          {
+            "height": 366,
+            "width": 438,
+            "x": 1,
+            "y": 523
+          }
+        ],
+        "phone": "true",
+        "slot": {
+          "height": 49.875,
+          "width": 49.875
+        },
+        "square": true,
+        "viewport": [
+          440,
+          956
+        ]
+      }
+    },
+    {
+      "name": "Portrait English purchase fits viewport",
+      "passed": true,
+      "evidence": {
+        "overflow": false,
+        "dock": "Purchase price\n 10,240\nPurchase"
+      }
+    },
+    {
+      "name": "Landscape inventory retains eight square columns and details on the right",
+      "passed": true,
+      "evidence": {
+        "columns": 8,
+        "detailAfter": true,
+        "layout": "wide",
+        "outerOverflow": false,
+        "panels": [
+          {
+            "height": 301,
+            "width": 407,
+            "x": 63,
+            "y": 85
+          },
+          {
+            "height": 301,
+            "width": 407,
+            "x": 486,
+            "y": 85
+          }
+        ],
+        "phone": "true",
+        "slot": {
+          "height": 46,
+          "width": 46
+        },
+        "square": true,
+        "viewport": [
+          956,
+          440
+        ]
+      }
+    },
+    {
+      "name": "Rotation retains multi-selection",
+      "passed": true,
+      "evidence": {
+        "bulkCount": "2 selected",
+        "dock": "Total sale value · 2\n 1,720\nSell selected"
+      }
+    },
+    {
+      "name": "Landscape English purchase hides inventory and fits safe area",
+      "passed": true,
+      "evidence": {
+        "columns": 50,
+        "detailAfter": true,
+        "layout": "wide",
+        "outerOverflow": false,
+        "panels": [
+          {
+            "height": 301,
+            "width": 407,
+            "x": 63,
+            "y": 85
+          },
+          {
+            "height": 301,
+            "width": 407,
+            "x": 486,
+            "y": 85
+          }
+        ],
+        "phone": "true",
+        "slot": {
+          "height": 0,
+          "width": 0
+        },
+        "square": true,
+        "viewport": [
+          956,
+          440
+        ]
+      }
+    },
+    {
+      "name": "PC 1920 English layout fits",
+      "passed": true,
+      "evidence": {
+        "columns": 50,
+        "detailAfter": true,
+        "layout": "wide",
+        "outerOverflow": false,
+        "panels": [
+          {
+            "height": 952,
+            "width": 899,
+            "x": 1,
+            "y": 91
+          },
+          {
+            "height": 952,
+            "width": 899,
+            "x": 1020,
+            "y": 91
+          }
+        ],
+        "phone": "false",
+        "slot": {
+          "height": 0,
+          "width": 0
+        },
+        "square": true,
+        "viewport": [
+          1920,
+          1080
+        ]
+      }
+    },
+    {
+      "name": "Select-visible excludes both protected inventory items",
+      "passed": true,
+      "evidence": {
+        "bulkCount": "12 selected",
+        "selected": [
+          "bag-0",
+          "bag-1",
+          "bag-3",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11",
+          "bag-12",
+          "bag-13"
+        ]
+      }
+    },
+    {
+      "name": "Clear selection removes every selected item",
+      "passed": true,
+      "evidence": "0 selected"
+    },
+    {
+      "name": "Help dialog opens",
+      "passed": true,
+      "evidence": "Buy compares vendor gear with equipped gear. In Sell, select inventory gear to see its details and sell it, or use Multi-select to sell several items. Select a Buyback row to inspect the complete item as it was sold.\n\nLocked, equipped and preset gear cannot be sold."
+    },
+    {
+      "name": "Escape closes dialog",
+      "passed": true,
+      "evidence": "Closed via Escape"
+    },
+    {
+      "name": "Close and reopen preserve the mock account",
+      "passed": true,
+      "evidence": "Closed screen visible"
+    },
+    {
+      "name": "Reopen returns to same account state",
+      "passed": true,
+      "evidence": {
+        "gold": "28,460",
+        "bag": "14 / 50",
+        "tab": "sell"
+      }
+    },
+    {
+      "name": "Insufficient-gold scenario blocks purchase",
+      "passed": true,
+      "evidence": {
+        "gold": "3,000",
+        "dock": "구매가격\n 10,240\n골드 부족"
+      }
+    },
+    {
+      "name": "Full inventory scenario blocks purchase",
+      "passed": true,
+      "evidence": {
+        "bag": "50 / 50",
+        "dock": "구매가격\n 10,240\n소지품 가득 참"
+      }
+    },
+    {
+      "name": "Selling frees a slot and permits purchase",
+      "passed": true,
+      "evidence": {
+        "bag": "49 / 50",
+        "gold": "29,660"
+      }
+    },
+    {
+      "name": "Buyback eviction requires a visible warning before sale",
+      "passed": true,
+      "evidence": "판매 후 최근 12개만 되살 수 있습니다. 오래된 장비 31개가 되사기 목록에서 제외됩니다.\n\n판매 합계 · 37,180"
+    },
+    {
+      "name": "Overflow warning does not mutate gold or inventory",
+      "passed": true,
+      "evidence": {
+        "gold": 29660,
+        "bag": 49,
+        "count": 42,
+        "total": 37180
+      }
+    },
+    {
+      "name": "Confirmed bulk sale atomically transfers all selected items",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "gold": 29660,
+          "bag": 49,
+          "count": 42,
+          "total": 37180
+        },
+        "after": {
+          "gold": "66,840",
+          "bag": "7 / 50"
+        }
+      }
+    },
+    {
+      "name": "Overflow retains the latest twelve exact buyback identities",
+      "passed": true,
+      "evidence": [
+        "filler-49",
+        "filler-48",
+        "filler-47",
+        "filler-46",
+        "filler-45",
+        "filler-43",
+        "filler-42",
+        "filler-41",
+        "filler-40",
+        "filler-39",
+        "filler-38",
+        "filler-37"
+      ]
+    },
+    {
+      "name": "Canceling overflow sale preserves gold, items and selection",
+      "passed": true,
+      "evidence": {
+        "gold": "28,460",
+        "bag": "50 / 50",
+        "bulkCount": "43 개 선택"
+      }
+    },
+    {
+      "name": "Multi-selection item detail dialog exposes all information and sale action",
+      "passed": true,
+      "evidence": "판매 금액 1,200\n판매하기"
+    },
+    {
+      "name": "Bulk buyback ordering follows original inventory slots after a prior reclaim",
+      "passed": true,
+      "evidence": [
+        "bag-3",
+        "bag-0",
+        "bag-1"
+      ]
+    },
+    {
+      "name": "Compact PC preview remains within the viewport",
+      "passed": true,
+      "evidence": {
+        "columns": 50,
+        "detailAfter": true,
+        "layout": "wide",
+        "outerOverflow": false,
+        "panels": [
+          {
+            "height": 448,
+            "width": 451,
+            "x": 1,
+            "y": 91
+          },
+          {
+            "height": 448,
+            "width": 451,
+            "x": 572,
+            "y": 91
+          }
+        ],
+        "phone": "false",
+        "slot": {
+          "height": 0,
+          "width": 0
+        },
+        "square": true,
+        "viewport": [
+          1024,
+          576
+        ]
+      }
+    },
+    {
+      "name": "Compact PC inventory remains eight square columns",
+      "passed": true,
+      "evidence": {
+        "columns": 8,
+        "detailAfter": true,
+        "layout": "wide",
+        "outerOverflow": false,
+        "panels": [
+          {
+            "height": 448,
+            "width": 451,
+            "x": 1,
+            "y": 91
+          },
+          {
+            "height": 448,
+            "width": 451,
+            "x": 572,
+            "y": 91
+          }
+        ],
+        "phone": "false",
+        "slot": {
+          "height": 49.375,
+          "width": 49.375
+        },
+        "square": true,
+        "viewport": [
+          1024,
+          576
+        ]
+      }
+    },
+    {
+      "name": "Embedded landscape preview scales the complete 956-wide device without reflow",
+      "passed": true,
+      "evidence": {
+        "horizontalOverflow": false,
+        "layoutWidth": 956,
+        "root": {
+          "height": 338.7447509765625,
+          "width": 736
+        },
+        "stage": {
+          "height": 338.7421875,
+          "width": 736
+        }
+      }
+    },
+    {
+      "name": "Embedded portrait preview scales the full 440-wide device on narrow conversation surfaces",
+      "passed": true,
+      "evidence": {
+        "layoutWidth": 440,
+        "overflow": false,
+        "renderedWidth": 320
+      }
+    },
+    {
+      "name": "Standalone viewport is unchanged by inline scaling",
+      "passed": true,
+      "evidence": {
+        "height": 900,
+        "overflow": false,
+        "width": 1600
+      }
+    }
+  ],
+  "unverified": [
+    "Unity implementation and real account persistence",
+    "Physical iPhone touch, safe area, text scaling and performance",
+    "Combat balance and economy tuning",
+    "Enhancement design and any post-enhancement power calculation",
+    "Non-empty real upgrade records and canonical socket/gem details",
+    "Full Unity regression"
+  ]
+}

@@ -130,7 +130,7 @@ namespace Hellscript.Tests
         public void AFlightAndItsCapturedPolicySurviveSerializationWithoutReplayingTheCost()
         {
             var sim=Fixture(HeroClass.Ranger);var d=Configure(sim,"A04");Set(d,"survival.escapeSkill","A04");var e=sim.ExecuteEdictSurvival(d);Advance(sim,.15f);int id=sim.State.heroAction.id;float resource=sim.State.resource;
-            var restored=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(restored);var resumed=new CombatSimulation(account,catalog,1,restore:restored);Advance(resumed,.35f);
+            var restored=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(restored);var resumed=new CombatSimulation(account,catalog,1,restore:restored);resumed.Stats.regen=0;Advance(resumed,.35f);
             Assert.Less(Vector2.Distance(e.plan.selected.destination,resumed.State.position),.001f);Assert.AreEqual(resource,resumed.State.resource,.001f);Assert.AreEqual(1,resumed.State.actionEvents.Count(a=>a.actionId==id&&a.kind=="ACTION_START"));Assert.AreEqual(1,resumed.State.actionEvents.Count(a=>a.actionId==id&&a.kind=="ACTION_RELEASE"));Assert.IsTrue(resumed.State.edictResponse.memory.active);
         }
         [Test]
@@ -187,7 +187,7 @@ namespace Hellscript.Tests
             var sim=Fixture(HeroClass.Warrior);sim.State.health=100;var d=Configure(sim,"W02","W05");Set(d,"survival.lowHp","OFF");Set(d,"survival.escapeSkill","W02");Set(d,"dodge.area.policy","ALWAYS");Danger(sim);CurrentAttack(sim,HeroActionPhase.Channeling);
             sim.State.build.rules.Add(new Rule(4){id="priority-shield"});sim.State.build.rules.Add(new Rule(0){id="old-attack"});sim.State.heroAction.rule=1;
             sim.ExecuteEdictSurvival(d);var copy=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(copy);Assert.AreEqual(5,copy.combatVersion);Assert.IsTrue(copy.heroAction.exitChannelForSurvival);
-            var resumed=new CombatSimulation(account,catalog,1,restore:copy);resumed.State.resource=100;Advance(resumed,.05f);Assert.AreEqual(HeroActionPhase.Channeling,resumed.State.heroAction.phase);Advance(resumed,.05f);
+            var resumed=new CombatSimulation(account,catalog,1,restore:copy);resumed.State.resource=100;resumed.Stats.regen=0;Advance(resumed,.05f);Assert.AreEqual(HeroActionPhase.Channeling,resumed.State.heroAction.phase);Advance(resumed,.05f);
             Assert.IsFalse(resumed.HeroActionBusy);Assert.AreEqual(100,resumed.State.resource,.0001f);Assert.IsFalse(resumed.State.actionEvents.Any(a=>a.skill==4&&a.kind=="ACTION_START"));
         }
         [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M05")]

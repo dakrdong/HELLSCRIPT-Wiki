@@ -258,21 +258,21 @@ namespace Hellscript
             if(!StageRuneBoard())return;
             if(RuneDirty){ShowToast("합성 전에 전체 배치를 저장하거나 되돌려 주세요.");return;}
             runeFusionSelection.RemoveWhere(id=>!game.Store.Data.runes.owned.Any(r=>r.id==id&&!r.pending));
-            pageRepaint=ShowRuneFusion;Base("rune-fusion","룬 합성","같은 등급·크기 두 개로 성장 · 실패와 수수료 없음");
+            pageRepaint=ShowRuneFusion;Base("rune-fusion","룬 합성","같은 색·등급·크기 두 개로 성장 · 실패와 수수료 없음");
             var grades=Row(content,76);for(int g=0;g<7;g++){int grade=g;var b=Button(grades,"G"+g,()=>{runeFusionGrade=grade;runeFusionSelection.Clear();ShowRuneFusion();},g==runeFusionGrade?gold:panel);Across(b,g,7,2,70);}
-            Note(content,"1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다. 같은 색끼리 먼저 짝을 지으며 그 색을 유지합니다. 다른 색 한 쌍은 다섯 색 중 무작위로 결정됩니다.",20,115,pale);
+            Note(content,"1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다. 같은 색끼리만 짝을 지으며 결과에도 그 색을 유지합니다.",20,115,pale);
             var rates=BigButton(content,"룬 드롭 확률",ShowRuneDropRates);rates.name="rune-drop-rates";
             var state=game.Store.Data.runes;
             for(int size=1;size<=5;size++)
             {
-                int rowSize=size;var owned=state.owned.Where(r=>r.grade==runeFusionGrade&&!r.pending&&RuneMasteryCatalog.ShapeById(r.shapeId).Size==rowSize&&!state.placements.Any(p=>p.runeId==r.id)).ToArray();
+                int rowSize=size;var owned=state.owned.Where(r=>r.grade==runeFusionGrade&&!r.pending&&RuneMasteryCatalog.ShapeById(r.shapeId).Size==rowSize&&!RuneReshape.ProtectedRune(state,r.id)).ToArray();
                 var pending=state.owned.Where(r=>r.pending&&r.sourceGrade==runeFusionGrade&&r.sourceSize==rowSize).ToArray();
                 Note(content,Loc.F("{0}칸 · 보관 {1}개 · 선택 {2}개 · 미수령 {3}개",size,owned.Length,owned.Count(r=>runeFusionSelection.Contains(r.id)),pending.Length),22,62,gold);
                 Note(content,RuneEconomy.FusionOutput(runeFusionGrade,size,out int nextGrade,out int nextSize)?Loc.F("G{0} {1}칸 ×2 → G{2} {3}칸 ×1 · 성공률 100%",runeFusionGrade,size,nextGrade,nextSize):Loc.T("최종 단계 · 더 이상 합성할 수 없습니다."),20,70,pale);
                 var row=Row(content,80);
-                Across(Button(row,"한 쌍 선택",()=>{foreach(var r in owned.Where(r=>!runeFusionSelection.Contains(r.id)).Take(Math.Min(2,200-runeFusionSelection.Count)))runeFusionSelection.Add(r.id);ShowRuneFusion();}),0,3,2,74);
+                Across(Button(row,"한 쌍 선택",()=>{foreach(var r in owned.Where(r=>!runeFusionSelection.Contains(r.id)).GroupBy(r=>r.type).FirstOrDefault(g=>g.Count()>=2)?.Take(Math.Min(2,200-runeFusionSelection.Count))??Enumerable.Empty<OwnedRune>())runeFusionSelection.Add(r.id);ShowRuneFusion();}),0,3,2,74);
                 Across(Button(row,"행 선택 해제",()=>{foreach(var r in owned)runeFusionSelection.Remove(r.id);ShowRuneFusion();}),1,3,2,74);
-                var fuse=Button(row,"이 행 합성",()=>FuseSelectedRunes(owned.Where(r=>runeFusionSelection.Contains(r.id)).Select(r=>r.id).ToArray()));Across(fuse,2,3,2,74);fuse.interactable=owned.Count(r=>runeFusionSelection.Contains(r.id))>=2&&owned.Count(r=>runeFusionSelection.Contains(r.id))%2==0&&pending.Length==0&&!(size==5&&runeFusionGrade==6);
+                var fuse=Button(row,"이 행 합성",()=>FuseSelectedRunes(owned.Where(r=>runeFusionSelection.Contains(r.id)).Select(r=>r.id).ToArray()));Across(fuse,2,3,2,74);fuse.interactable=RuneAscension.Validate(state,owned.Where(r=>runeFusionSelection.Contains(r.id)).Select(r=>r.id).ToArray())=="";
                 var shapes=Rect("Fusion shapes",content);var grid=shapes.gameObject.AddComponent<GridLayoutGroup>();grid.cellSize=new Vector2(142,112);grid.spacing=new Vector2(8,8);grid.constraint=GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=4;shapes.gameObject.AddComponent<RuneAdaptiveGrid>();shapes.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
                 foreach(var group in owned.GroupBy(r=>new{r.shapeId,r.type}))
                 {

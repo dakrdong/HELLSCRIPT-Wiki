@@ -114,9 +114,9 @@ namespace Hellscript.Tests
         }
         [Test] public void U27_EconomyFirstUseDeficitsAreVisibleAndNotGifted()
         {
-            var a=New();var item=a.Hero.inventory[0];Assert.AreEqual(200,Economy.EnhancementGold(item));Assert.AreEqual(20,Economy.EnhancementMaterials(item));
+            var a=New();var item=a.Hero.inventory[0];Assert.AreEqual(110,Economy.EnhancementGold(item));Assert.AreEqual(0,Economy.EnhancementMaterials(item));
             // Stage 1 boss + first clear guarantees 1,950 gold and 15 materials, before chest/dismantle income.
-            Assert.AreEqual(1950,(800+50)+(1000+100));Assert.AreEqual(5,Economy.EnhancementMaterials(item)-(5+10));
+            Assert.AreEqual(1950,(800+50)+(1000+100));Assert.AreEqual(12,BlacksmithCatalog.RewardStones(1));Assert.AreEqual(0,a.enhancementStones);
             a.Hero.highestClear=3;uint rng=55;Assert.IsFalse(ContentServices.Purchase(a,0,1,ref rng,out _));Assert.AreEqual(0,a.gold);Assert.AreEqual(0,a.materials);
         }
         [Test] public void U03U23_BossRewardSettlementUnlocksOnceAndRestoreDoesNotDuplicate()

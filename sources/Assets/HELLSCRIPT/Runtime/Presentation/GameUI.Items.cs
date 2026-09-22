@@ -11,9 +11,11 @@ namespace Hellscript
         bool GearServiceAvailable=>!game.Active&&game.Store.Data.suspendedRun==null;
         void EquipmentIcon(Transform parent,Item item,float x,float y,float size)
         {
+            if(ItemCatalog.Base(item).legacyIndex>=24)
+            {var symbol=Rect("Equipment "+item.baseId,parent);Place(symbol,x+size*.12f,y+size*.12f,size*.76f,size*.76f);var icon=symbol.gameObject.AddComponent<StorageGlyph>();icon.symbol=EquipmentSlots.Kind(item).ToString().ToLowerInvariant();icon.color=gold;icon.raycastTarget=false;return;}
             if(equipmentAtlas==null){Icon(parent,item.slot==0?21:item.slot>=6?23:22,x,y,size);return;}
             var r=Rect("Equipment "+item.baseId,parent);Place(r,x,y,size,size);var image=r.gameObject.AddComponent<UnityEngine.UI.RawImage>();image.texture=equipmentAtlas;
-            int index=int.Parse(ItemCatalog.Base(item).id.Substring(1))-1;image.uvRect=new Rect(index%6/6f,1-(index/6+1)/4f,1/6f,1/4f);image.raycastTarget=false;
+            int index=ItemCatalog.AtlasIndex(item);image.uvRect=new Rect(index%6/6f,1-(index/6+1)/4f,1/6f,1/4f);image.raycastTarget=false;
         }
         string Grade(Item item)=>!string.IsNullOrEmpty(ItemCatalog.Unique(item.special)?.setId)?"세트":GameCatalog.Rarities[item.rarity];
         Color ItemColor(Item item)=>Grade(item)=="세트"?setGreen:RarityColor(item.rarity);
@@ -38,38 +40,16 @@ namespace Hellscript
             string request=Guid.NewGuid().ToString("N");return ()=>ItemTransaction(request,operation,mutation,refresh,success);
         }
         static Item FindOwned(AccountSave a,string id)=>a.Hero.inventory.Find(i=>i.id==id);
-        void RenderEquipment(bool portal) => OpenInventory(false,portal);
+        void RenderEquipment(bool portal) => OpenNativeInventory(portal);
         public void ShowItemDetail(string id,bool portal=false)
         {
-            if(inventoryList==null||inventoryWarehouse||portalBag!=portal)OpenInventory(false,portal);
-            SelectInventoryItem(id);
+            OpenNativeInventory(portal);nativeInventory?.ShowDetail(id);
         }
-        void ShowEquipmentComparison(HeroSave hero,Item item,RuneGrowthState frozenRunes=null)
+        void ShowEquipmentComparison(HeroSave hero,Item item,RuneGrowthState frozenRunes=null,int targetIndex=-1)
         {
-            if(item.equipped)return;
-            string error=Economy.EquipError(hero,item);if(error!=""){Note(content,Loc.F("장착 조건: {0}", error),20,70,gold);return;}
-            var copy=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(hero));var candidate=copy.inventory.Find(i=>i.id==item.id);var old=hero.inventory.Find(i=>i.equipped&&i.slot==item.slot);
-            var runes=frozenRunes??game.Store.Data.runes;
-            var before=new HeroStats(hero,false,runes);Economy.Equip(copy,candidate);var after=new HeroStats(copy,false,runes);
-            Note(content,Loc.F("교체 후 전체 능력치\n현재: {0}", (old?.DisplayName??"빈 부위")),22,94,gold);
-            CompareStat("최대 HP",before.hp,after.hp);CompareStat("공격 기준",before.damage,after.damage);CompareStat("방어도",before.armor,after.armor);CompareStat("비물리 저항",before.resistance,after.resistance);
-            CompareStat("치명 확률 %",before.crit*100,after.crit*100);CompareStat("치명 피해 %",before.critDamage*100,after.critDamage*100);
-            CompareStat("자원 회복 / 초",before.regen,after.regen);CompareStat("자원 소모 감소 %",before.costReduction*100,after.costReduction*100);CompareStat("쿨타임 감소 %",before.cdr*100,after.cdr*100);CompareStat("이동속도 m/s",before.speed,after.speed);
-            for(int i=4;i<=9;i++)if(before.bonuses[i]!=after.bonuses[i])CompareStat(StatCatalog.Get(i),before.bonuses[i],after.bonuses[i]);
-            foreach(var stat in new[]{StatId.FireResistance,StatId.ColdResistance,StatId.LightningResistance,StatId.PoisonResistance,StatId.ShadowResistance,StatId.BarrierGeneration,StatId.PotionHealing})
-                if(Mathf.Abs(before.Sheet(stat)-after.Sheet(stat))>.0001f)CompareStat(StatCatalog.Get(stat),before.Sheet(stat),after.Sheet(stat));
-            if(before.gemBuffReduction!=after.gemBuffReduction)CompareStat("보석의 받는 피해 감소 %",before.gemBuffReduction*100,after.gemBuffReduction*100);
-            if(before.gemPeriodicReduction!=after.gemPeriodicReduction)CompareStat("보석의 지속 피해 감소 %",before.gemPeriodicReduction*100,after.gemPeriodicReduction*100);
-            if(GemCatalog.HasGem(old))Note(content,Loc.F("교체로 빠지는 보석 효과\n{0}\n보석은 기존 장비에 남습니다.",GemCatalog.SocketSummary(old)),19,118,gold);
-            foreach(var set in ItemCatalog.Sets)
-            {
-                int from=before.SetPieces(set.id),to=after.SetPieces(set.id);if(from==0&&to==0)continue;
-                string change=from>=4&&to<4?" · 4세트 해제":from>=2&&to<2?" · 2세트 해제":from<4&&to>=4?" · 4세트 활성":from<2&&to>=2?" · 2세트 활성":"";
-                Note(content,Loc.F("{0}  {1} → {2}부위{3}", set.name, from, to, change),20,76,change.Contains("해제")?gold:setGreen);
-                if(from>=4&&to<4)Note(content,Loc.F("해제되는 4세트 효과\n{0}", set.four),19,105,gold);
-                if(from>=2&&to<2)Note(content,Loc.F("해제되는 2세트 효과\n{0}", set.two),19,95,gold);
-            }
-            if(old!=null&&!string.IsNullOrEmpty(old.special)&&old.special!=item.special&&string.IsNullOrEmpty(ItemCatalog.Unique(old.special).setId))Note(content,Loc.F("교체로 빠지는 전설 효과: {0}\n{1}", old.DisplayName, ItemCatalog.Unique(old.special).description),19,130,gold);
+            if(item==null||item.equipped)return;
+            var host=Row(content,520);host.name="Legacy equipment comparison";
+            EquipmentComparisonView.Create(host,hero,item,frozenRunes??game.Store.Data.runes,font,equipmentAtlas,1.25f,targetIndex);
         }
         void CompareStat(string label,float before,float after)
         {float delta=after-before;Note(content,Loc.F("{0}   {1:0.#} → {2:0.#}   ({3:+0.#;-0.#;0})",label,before,after,delta),20,44,Mathf.Abs(delta)<.001f?muted:delta>0?setGreen:gold);}
@@ -79,11 +59,11 @@ namespace Hellscript
         void RenderWarehouse(bool portal) => OpenInventory(true,portal);
         void RenderItemShop()
         {
-            var a=game.Store.Data;var h=a.Hero;pageRepaint=()=>RenderItemShop();Base("shop","수수께끼 상인","모든 제작 경로에서 전설·세트를 발견할 수 있습니다");
+            var a=game.Store.Data;var h=a.Hero;pageRepaint=()=>RenderItemShop();Base("shop","장비 제작","모든 제작 경로에서 전설·세트를 발견할 수 있습니다");
             int level=Mathf.Max(1,h.highestClear),slot=selectedSlot;Note(content,Loc.F("골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준", a.gold, a.materials, Mathf.Min(level,ItemQuality.MaximumItemLevel)),22,90,pale);
             Cycle(content,"선택 부위",GameCatalog.Slots,slot,i=>{selectedSlot=i;ShowShop();});
-            int gambleCost=500+50*h.highestClear;
-            ContentButton(ContentUnlocks.Shop,Loc.F("미확인 {0} · {1:N0} 골드", GameCatalog.Slots[slot], gambleCost),PurchaseAction(slot,level,0,gambleCost,0));
+            ContentButton(ContentUnlocks.Shop,"갬블 상인 찾아가기",()=>{ShowTown();game.RequestStation(TownStation.Gambler);});
+            content.GetComponentsInChildren<UnityEngine.UI.Button>().Last().name="gamble-route";
             ContentButton(ContentUnlocks.RareCraft,Loc.F("희귀 제작 · 재료 50 / {0:N0} 골드", 500L*level),PurchaseAction(slot,level,1,500*level,50));
             ContentButton(ContentUnlocks.CoreCraft,Loc.F("전설·세트 제작 · {0} 코어 {1}/10", GameCatalog.Slots[slot], a.cores[slot]),PurchaseAction(slot,level,2,0,0),true);
             Note(content,"베이스와 옵션은 확정 시 생성됩니다. 직업·부위에 맞는 접두/접미와 수치 티어를 적용합니다.",20,95);
@@ -116,7 +96,7 @@ namespace Hellscript
             }
             foreach(var definition in ItemCatalog.Uniques.Where(d=>string.IsNullOrEmpty(d.setId)&&(d.heroClass<0||d.heroClass==(int)h.heroClass)))
             {
-                Note(content,Loc.F("{0}{1} / {2}", (all.Any(i=>i.special==definition.id)?"보유 · ":"미보유 · "), definition.name, GameCatalog.Slots[definition.slot]),23,68,gold);
+                Note(content,Loc.F("{0}{1} / {2}", (all.Any(i=>i.special==definition.id)?"보유 · ":"미보유 · "), definition.Name, GameCatalog.Slots[definition.slot]),23,68,gold);
                 Note(content,definition.Description,20,116,pale);
                 Note(content,Loc.F("획득: 균열 전리품 · 소탕 · 상점 · 해당 부위 코어 제작\n호환 베이스: {0}", string.Join(", ",ItemCatalog.Bases.Where(b=>b.Fits(h.heroClass,definition.slot)).Select(b=>b.name))),18,90);
             }

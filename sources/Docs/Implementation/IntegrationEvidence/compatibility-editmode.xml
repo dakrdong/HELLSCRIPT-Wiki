@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="128" result="Passed" total="128" passed="128" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="1.3828617">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="3062" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="1.382862" total="128" passed="128" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="4572" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/ui-consolidation/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="3062" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="1.335064" total="128" passed="128" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="72248" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="4573" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="3062" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="1.297678" total="128" passed="128" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="4574" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="3062" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="1.261625" total="128" passed="128" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="2594" name="EditorNullPatternTests" fullname="Hellscript.Tests.EditorNullPatternTests" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.113337" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="2598" name="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput" fullname="Hellscript.Tests.EditorNullPatternTests.EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.009502" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2595" name="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput(null)" fullname="Hellscript.Tests.EditorNullPatternTests.EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput(null)" methodname="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" seed="2102249547" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005452" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2596" name="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput(&quot;&quot;)" fullname="Hellscript.Tests.EditorNullPatternTests.EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput(&quot;&quot;)" methodname="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" seed="1789794257" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.000186" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2597" name="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput(&quot;unknown&quot;)" fullname="Hellscript.Tests.EditorNullPatternTests.EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput(&quot;unknown&quot;)" methodname="EmptyOrUnrecognizedInventoryOriginDoesNotBlockGameInput" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" seed="1945214031" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.000090" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2600" name="NoGetComponentResultIsCombinedWithCSharpNullOperators" fullname="Hellscript.Tests.EditorNullPatternTests.NoGetComponentResultIsCombinedWithCSharpNullOperators" methodname="NoGetComponentResultIsCombinedWithCSharpNullOperators" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" seed="1921505405" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.097882" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2599" name="ResetTownInputAfterLeavingTownIgnoresItsDestroyedJoystick" fullname="Hellscript.Tests.EditorNullPatternTests.ResetTownInputAfterLeavingTownIgnoresItsDestroyedJoystick" methodname="ResetTownInputAfterLeavingTownIgnoresItsDestroyedJoystick" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" seed="1941844942" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.001144" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3557" name="LegendaryExpansionTests" fullname="Hellscript.Tests.LegendaryExpansionTests" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" testcasecount="123" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="1.061493" total="123" passed="123" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="3683" name="CancelledPreparationDoesNotGrantCastPowerAndLethalIncomingHitCannotHeal" fullname="Hellscript.Tests.LegendaryExpansionTests.CancelledPreparationDoesNotGrantCastPowerAndLethalIncomingHitCannotHeal" methodname="CancelledPreparationDoesNotGrantCastPowerAndLethalIncomingHitCannotHeal" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1810622513" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.127739" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="3671" name="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.057003" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3668" name="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused(&quot;LW07&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused(&quot;LW07&quot;)" methodname="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="738506317" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.021997" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3669" name="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused(&quot;LA11&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused(&quot;LA11&quot;)" methodname="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1113686174" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.013668" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3670" name="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused(&quot;LM11&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused(&quot;LM11&quot;)" methodname="CooldownAndPartialHitCountsSurviveSaveAndDoNotAdvanceWhilePaused" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1881405641" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.020542" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="3675" name="CooldownReopensOnTheSameSimulationTickAtLongRunTimes" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownReopensOnTheSameSimulationTickAtLongRunTimes" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.019871" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3672" name="CooldownReopensOnTheSameSimulationTickAtLongRunTimes(0.0f)" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownReopensOnTheSameSimulationTickAtLongRunTimes(0.0f)" methodname="CooldownReopensOnTheSameSimulationTickAtLongRunTimes" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1037831079" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006821" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3673" name="CooldownReopensOnTheSameSimulationTickAtLongRunTimes(128.0f)" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownReopensOnTheSameSimulationTickAtLongRunTimes(128.0f)" methodname="CooldownReopensOnTheSameSimulationTickAtLongRunTimes" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="94246531" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006287" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3674" name="CooldownReopensOnTheSameSimulationTickAtLongRunTimes(256.0f)" fullname="Hellscript.Tests.LegendaryExpansionTests.CooldownReopensOnTheSameSimulationTickAtLongRunTimes(256.0f)" methodname="CooldownReopensOnTheSameSimulationTickAtLongRunTimes" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1135151713" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006117" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="3558" name="CountsAreClassExclusiveAndEveryItemGeneratesEquipsAndTranslates" fullname="Hellscript.Tests.LegendaryExpansionTests.CountsAreClassExclusiveAndEveryItemGeneratesEquipsAndTranslates" methodname="CountsAreClassExclusiveAndEveryItemGeneratesEquipsAndTranslates" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="239575028" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005099" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3681" name="CrowdControlCreditsBossStaggerInsteadOfFreezingBossAndAreaStopsAtFiveTargets" fullname="Hellscript.Tests.LegendaryExpansionTests.CrowdControlCreditsBossStaggerInsteadOfFreezingBossAndAreaStopsAtFiveTargets" methodname="CrowdControlCreditsBossStaggerInsteadOfFreezingBossAndAreaStopsAtFiveTargets" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="979183776" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.019993" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3679" name="DelayedDamageRestoresExactlyAndUsesCapturedAttackPower" fullname="Hellscript.Tests.LegendaryExpansionTests.DelayedDamageRestoresExactlyAndUsesCapturedAttackPower" methodname="DelayedDamageRestoresExactlyAndUsesCapturedAttackPower" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="512800979" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.019709" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="3667" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" testcasecount="108" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="0.768212" total="108" passed="108" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3559" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW05&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW05&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="211977635" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006258" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3560" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW06&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW06&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="111106225" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.009488" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3561" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW07&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW07&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1196719473" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005825" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3562" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW08&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW08&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2019951227" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006034" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3563" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW09&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW09&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1638657141" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005839" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3564" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW10&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW10&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1314555083" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.008552" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3565" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW11&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW11&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="185597246" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.010971" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3566" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW12&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW12&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1084848463" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006137" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3567" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW13&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW13&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1061586988" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006668" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3568" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW14&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW14&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1545371711" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006639" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3569" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW15&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW15&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2094494312" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005794" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3570" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW16&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW16&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="418672352" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006560" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3571" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW17&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW17&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1136789488" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005620" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3572" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW18&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW18&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="536027954" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.008811" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3573" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW19&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW19&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="255551255" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.010096" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3574" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW20&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW20&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="228731010" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005817" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3575" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW21&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW21&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1556948064" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005803" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3576" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW22&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW22&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1786291018" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005736" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3577" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW23&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW23&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1384896906" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006202" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3578" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW24&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW24&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="661001905" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005582" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3579" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW25&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW25&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="253903276" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006301" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3580" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW26&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW26&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="854144225" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.005408" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3581" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW27&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW27&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1487482838" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.008519" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3582" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW28&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW28&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1534090593" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.010602" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3583" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW29&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW29&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1940491878" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:51Z" duration="0.006798" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3584" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW30&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW30&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="65856911" result="Passed" start-time="2026-09-22 05:32:51Z" end-time="2026-09-22 05:32:52Z" duration="0.006576" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3585" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW31&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW31&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1425550659" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011783" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3586" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW32&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW32&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="986131164" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006318" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3587" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW33&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW33&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="50541881" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006524" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3588" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW34&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW34&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="674562494" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006039" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3589" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW35&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW35&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1919562913" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.010549" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3590" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW36&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW36&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="792192588" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009281" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3591" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW37&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW37&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="850830677" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006069" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3592" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW38&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW38&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="654509340" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005381" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3593" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW39&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW39&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1850437764" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005508" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3594" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW40&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LW40&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2090546791" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.007017" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3595" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA05&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA05&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2049857040" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005486" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3596" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA06&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA06&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1478591165" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005481" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3597" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA07&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA07&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1286785499" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005351" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3598" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA08&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA08&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1329059302" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009898" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3599" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA09&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA09&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="237010253" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005633" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3600" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA10&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA10&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1360145018" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3601" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA11&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA11&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2094993568" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005574" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3602" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA12&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA12&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1709158196" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005562" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3603" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA13&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA13&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="999489598" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005458" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3604" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA14&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA14&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1006231929" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005387" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3605" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA15&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA15&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1352994785" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005498" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3606" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA16&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA16&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="967931333" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005620" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3607" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA17&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA17&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="121927267" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009358" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3608" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA18&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA18&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1693670830" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009223" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3609" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA19&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA19&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1670021140" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.007659" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3610" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA20&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA20&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="16070948" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005718" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3611" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA21&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA21&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2107960634" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005840" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3612" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA22&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA22&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1550757033" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005820" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3613" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA23&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA23&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="533716433" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006461" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3614" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA24&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA24&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1505317057" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006693" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3615" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA25&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA25&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="771107034" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009372" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3616" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA26&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA26&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1810112527" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011821" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3617" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA27&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA27&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="79459349" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006572" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3618" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA28&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA28&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1572800230" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006571" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3619" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA29&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA29&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2036488071" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006321" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3620" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA30&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA30&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1346949729" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005925" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3621" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA31&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA31&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1034306582" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005965" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3622" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA32&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA32&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="387024494" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006027" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3623" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA33&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA33&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1773292445" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006361" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3624" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA34&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA34&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1302301724" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011492" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3625" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA35&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA35&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1715325322" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009615" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3626" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA36&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA36&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="482280148" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006016" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3627" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA37&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA37&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="833073837" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006058" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3628" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA38&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA38&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="312488111" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006063" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3629" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA39&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA39&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="326357617" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005864" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3630" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA40&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LA40&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="78356899" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005716" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3631" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM05&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM05&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="499505519" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005406" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3632" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM06&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM06&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="55837604" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005519" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3633" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM07&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM07&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="423991652" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.008674" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3634" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM08&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM08&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1041241905" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011332" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3635" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM09&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM09&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="906634304" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005795" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3636" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM10&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM10&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1925808289" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005721" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3637" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM11&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM11&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="534600995" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005728" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3638" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM12&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM12&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="934259949" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005507" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3639" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM13&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM13&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="860345773" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005605" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3640" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM14&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM14&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="457619326" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005432" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3641" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM15&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM15&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="864203897" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005410" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3642" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM16&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM16&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="504354698" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.008690" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3643" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM17&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM17&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1152025001" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.010377" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3644" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM18&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM18&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1903491965" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005661" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3645" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM19&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM19&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="831715601" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005679" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3646" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM20&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM20&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1447557291" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005649" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3647" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM21&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM21&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="120792907" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005371" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3648" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM22&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM22&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="345120707" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005642" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3649" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM23&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM23&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1319439757" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.007145" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3650" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM24&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM24&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="239744513" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005986" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3651" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM25&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM25&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1399131816" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009277" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3652" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM26&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM26&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1861468916" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011695" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3653" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM27&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM27&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1440054878" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006247" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3654" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM28&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM28&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1037544171" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006020" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3655" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM29&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM29&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="325838436" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011493" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3656" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM30&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM30&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1707969074" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3657" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM31&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM31&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2083349398" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005938" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3658" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM32&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM32&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1844671521" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005854" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3659" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM33&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM33&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1438390254" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009220" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3660" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM34&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM34&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="870714637" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011831" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3661" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM35&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM35&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="134857496" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006314" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3662" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM36&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM36&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1956922803" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006773" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3663" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM37&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM37&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1367313213" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006115" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3664" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM38&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM38&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1591664241" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006245" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3665" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM39&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM39&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1664049076" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006211" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3666" name="EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM40&quot;)" fullname="Hellscript.Tests.LegendaryExpansionTests.EveryPowerChangesActualCombatStateOrDamageWhenEquipped(&quot;LM40&quot;)" methodname="EveryPowerChangesActualCombatStateOrDamageWhenEquipped" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2052123030" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.005844" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="3680" name="ExpiredBuffsAndUnequippedBuffsStopButCooldownCannotBeResetBySwapping" fullname="Hellscript.Tests.LegendaryExpansionTests.ExpiredBuffsAndUnequippedBuffsStopButCooldownCannotBeResetBySwapping" methodname="ExpiredBuffsAndUnequippedBuffsStopButCooldownCannotBeResetBySwapping" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="248085338" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006270" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3678" name="ExtraDamageKillDoesNotCreditTheSourceSkillKillTrigger" fullname="Hellscript.Tests.LegendaryExpansionTests.ExtraDamageKillDoesNotCreditTheSourceSkillKillTrigger" methodname="ExtraDamageKillDoesNotCreditTheSourceSkillKillTrigger" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="197678247" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.009406" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3677" name="LegendaryDamageCannotRecursivelyProcAndWrongSkillOrUnequippedItemCannotProc" fullname="Hellscript.Tests.LegendaryExpansionTests.LegendaryDamageCannotRecursivelyProcAndWrongSkillOrUnequippedItemCannotProc" methodname="LegendaryDamageCannotRecursivelyProcAndWrongSkillOrUnequippedItemCannotProc" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="1187627497" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.011610" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3682" name="PassiveThresholdRequiresTheConditionAndDoesNotAffectUnrelatedSkills" fullname="Hellscript.Tests.LegendaryExpansionTests.PassiveThresholdRequiresTheConditionAndDoesNotAffectUnrelatedSkills" methodname="PassiveThresholdRequiresTheConditionAndDoesNotAffectUnrelatedSkills" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="660363969" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006133" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3676" name="RefreshingDamageOverTimeDoesNotDeferItsNextTick" fullname="Hellscript.Tests.LegendaryExpansionTests.RefreshingDamageOverTimeDoesNotDeferItsNextTick" methodname="RefreshingDamageOverTimeDoesNotDeferItsNextTick" classname="Hellscript.Tests.LegendaryExpansionTests" runstate="Runnable" seed="2089162932" result="Passed" start-time="2026-09-22 05:32:52Z" end-time="2026-09-22 05:32:52Z" duration="0.006287" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

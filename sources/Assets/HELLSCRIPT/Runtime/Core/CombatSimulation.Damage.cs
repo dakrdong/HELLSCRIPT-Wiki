@@ -35,12 +35,15 @@ namespace Hellscript
         {
             if(enemy==null||enemy.dead)return null;
             float defense=element==0?10+2*(State.stage-1):5+State.stage-1;
+            var legendary=PrepareLegendaryHit(snapshot,definition,enemy);
+            independent*=1+LegendaryDamageBonus(snapshot,definition,enemy);
             var numbers=DamageMath.Calculate(baseAttack,additive,independent,critMultiplier,defense,snapshot.level,element,TargetReduction(enemy,element,projectile,origin));
             var damage=new DamageEvent{id=State.nextDamageId++,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=State.heroId,targetId=enemy.id,triggerTargetId=triggerTarget,kind=kind,element=element,tick=EffectTick,time=State.time,
                 baseAttack=baseAttack,additive=additive,independent=independent,critical=critical,criticalMultiplier=critMultiplier,attackBeforeDefense=numbers.beforeDefense,projectile=projectile,attackOrigin=origin??State.position,
                 defenseReduction=numbers.defenseReduction,buffReduction=numbers.buffReduction,finalDamage=numbers.final,hpLoss=Mathf.Min(Mathf.Max(0,enemy.health),numbers.final)};
             RecordDamage(damage);Deal(enemy,numbers.final,critical);
             if(numbers.final>0)RecordElementHit(element,snapshot,root);
+            FinishLegendaryHit(legendary,enemy,damage,snapshot);
             return damage;
         }
         DamageEvent Hit(EnemyState enemy,float coefficient,int element,bool procs=true,float extraBonus=0,DamageSnapshot snapshot=null,bool canCrit=true,bool? shadowShot=null,string definition=null,int root=0,int instance=0,DamageKind kind=DamageKind.Direct,bool projectile=false,Vector2? origin=null)
@@ -50,7 +53,7 @@ namespace Hellscript
             int masterySkill=definition.Length==3&&definition[0]=='W'?int.Parse(definition.Substring(1))-1:definition.Length==3&&definition[0]=='A'?int.Parse(definition.Substring(1))+5:definition.Length==3&&definition[0]=='M'?int.Parse(definition.Substring(1))+11:-1;
             if(masterySkill>=0&&masterySkill<18&&snap.runeSkillPower!=null&&snap.runeSkillPower.Length==18)coefficient*=1+snap.runeSkillPower[masterySkill]/100;
             extraBonus+=RuneAreaBonus(snap,definition);
-            float crit=snap.crit+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?SkillEffects.Passive(snap.ranks,HeroClass.Ranger,5):0);
+            float crit=snap.crit+LegendaryCriticalBonus(snap,definition,enemy)+(Hero.heroClass==HeroClass.Ranger&&snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f)?SkillEffects.Passive(snap.ranks,HeroClass.Ranger,5):0);
             bool critical=canCrit&&RandomStream.Unit(ref State.rng)<Mathf.Min(.75f,crit);
             if(!enemy.boss&&enemy.kind==6&&enemy.brain.rearWindow>0&&(kind==DamageKind.Direct||kind==DamageKind.Basic)&&Vector2.Angle(-enemy.brain.facing,(origin??State.position)-enemy.position)<=60)extraBonus+=.25f;
             bool overpowered=OverpowerRoll(kind);
@@ -135,6 +138,8 @@ namespace Hellscript
             {State.cooldowns[1]=0;ItemEffects.lw04Cooldown=30;EffectEvent("LW04","COOLDOWN_RESET",root:root,value:30);}
             if(before>Stats.hp*.35f&&State.health>0&&State.health<=Stats.hp*.35f&&hpLoss>0&&Stats.specials.Contains("ELITE_RESOLVE")&&ItemEffects.eliteResolveCooldown<=.00001f)
             {AddShield("ELITE_RESOLVE",Stats.hp*.2f,4,root);ItemEffects.eliteResolveCooldown=30;}
+            if(numbers.final>0&&State.health>0)
+            {TriggerLegendary(LegendaryTrigger.Hurt,"*",attacker,root);if(blocked)TriggerLegendary(LegendaryTrigger.Block,"*",attacker,root);}
             ApplyThorns(attacker);
             State.lastDamageTime=State.time;CancelChest("피격으로 개봉 중단");CancelShrine("피격으로 사용 중단");
             State.portalCast=0;Visual?.Invoke(State.position,State.position,32,numbers.final-absorbed);

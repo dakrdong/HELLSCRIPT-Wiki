@@ -25,7 +25,8 @@ namespace Hellscript.Tests
         {Loc.UseSource();UnityEngine.Object.DestroyImmediate(catalog);if(Directory.Exists(directory))Directory.Delete(directory,true);}
         Item Gear(int slot=0,int rarity=2,int level=30,bool awakened=false)
         {
-            Item item;do{item=ItemGenerator.Create(account.Hero.heroClass,slot,rarity,level,ref rng,riftStage:awakened?100:0);}while(awakened&&!item.awakened);
+            // These fixtures exercise a single equipped main stat; dependent offhands require a paired fixture.
+            Item item;do{item=ItemGenerator.Create(account.Hero.heroClass,slot,rarity,level,ref rng,riftStage:awakened?100:0);}while(awakened&&!item.awakened||slot==0&&EquipmentSlots.Offhand(item));
             foreach(var old in account.Hero.inventory.Where(i=>i.slot==slot))old.equipped=false;
             item.equipped=true;account.Hero.inventory.Add(item);return item;
         }
@@ -138,7 +139,7 @@ namespace Hellscript.Tests
         {
             var item=Gear(2,0);Enhanced(item);float before=ItemCatalog.MainValue(item);
             for(int n=0;n<12;n++)Assert.IsTrue(ItemQuality.Advance(account,item,ref rng));
-            Assert.Zero(item.masterworkLines.Count);Assert.AreEqual(before*Math.Pow(1.02,12),ItemCatalog.MainValue(item),.001);
+            Assert.Zero(item.masterworkLines.Count);float flat=GearEnhancement.Step(item)*item.enhancement;Assert.AreEqual((before-flat)*Math.Pow(1.02,12)+flat,ItemCatalog.MainValue(item),.001);
         }
         [Test]
         public void HigherAccountClearExtendsExistingGearAndLowerDamagedProgressDoesNotReduceIt()
@@ -160,13 +161,17 @@ namespace Hellscript.Tests
                 foreach(var r in item.rolls)r.greater=false;item.awakened=false;
                 var before=new HeroStats(account.Hero);float main=ItemCatalog.MainValue(item);
                 item.awakened=true;item.masterwork=12;var after=new HeroStats(account.Hero);double factor=1.25*Math.Pow(1.02,12);
-                Assert.AreEqual(main*factor,ItemCatalog.MainValue(item),.003);
-                if(slot==0)Assert.AreEqual(before.damage*factor,after.damage,.005);
-                else if(slot<=5)Assert.AreEqual(main*(factor-1),after.armor-before.armor,.005);
-                else if(slot==6)Assert.AreEqual(main*(factor-1)*(1+before.bonuses[1]/100),after.hp-before.hp,.005);
-                else Assert.AreEqual(main*(factor-1),after.resistance-before.resistance,.005);
-                if(slot!=7)Assert.AreEqual(before.resistance,after.resistance);
-                Assert.AreEqual(before.attackSpeed,after.attackSpeed);Assert.AreEqual(before.speed,after.speed);
+                float flat=GearEnhancement.Step(item)*item.enhancement;double delta=(main-flat)*(factor-1);
+                Assert.AreEqual((main-flat)*factor+flat,ItemCatalog.MainValue(item),.003);
+                if(slot==0)Assert.AreEqual(delta*(1+.002*new[]{before.strength,before.dexterity,before.intelligence}[c]),after.damage-before.damage,.005);
+                else if(slot<=2)Assert.AreEqual(delta,after.armor-before.armor,.005);
+                else if(slot==3)Assert.AreEqual(delta,after.Bonus(StatId.AttackSpeed)-before.Bonus(StatId.AttackSpeed),.005);
+                else if(slot==4)Assert.AreEqual(delta,after.Bonus(StatId.MovementSpeed)-before.Bonus(StatId.MovementSpeed),.005);
+                else if(slot==5)Assert.AreEqual(delta*(1+before.bonuses[1]/100),after.hp-before.hp,.005);
+                else if(slot==6)Assert.AreEqual(delta,after.Bonus(StatId.AllResistancePercent)-before.Bonus(StatId.AllResistancePercent),.005);
+                else Assert.AreEqual(delta,after.Bonus(StatId.CriticalStrikeChance)-before.Bonus(StatId.CriticalStrikeChance),.005);
+                Assert.AreEqual(before.resistance,after.resistance);
+                if(slot!=3)Assert.AreEqual(before.attackSpeed,after.attackSpeed);if(slot!=4)Assert.AreEqual(before.speed,after.speed);
             }
         }
         [Test]
@@ -251,7 +256,7 @@ namespace Hellscript.Tests
             account.records.Add(new RunRecord{review=new CombatReview{version=CombatHistory.Version,equipment=new List<Item>{JsonUtility.FromJson<Item>(Json(item))}}});
             account.Hero.inventory.Remove(item);foreach(var owned in account.heroes.SelectMany(h=>h.inventory))owned.contentVersion=3;
             var store=Store();Assert.AreEqual(GameStore.MaximumSchemaVersion,account.schema);Assert.IsTrue(account.heroes.SelectMany(h=>h.inventory).All(i=>i.contentVersion==3));
-            var old=account.records.Last().review.equipment.Single();old.contentVersion=5;string path=Path.Combine(directory,"hellscript-local-v1.json"),original=Json(account);File.WriteAllText(path,original);
+            var old=account.records.Last().review.equipment.Single();old.contentVersion=ItemCatalog.Version+1;string path=Path.Combine(directory,"hellscript-local-v1.json"),original=Json(account);File.WriteAllText(path,original);
             Assert.Throws<NotSupportedException>(()=>new GameStore(directory,catalog));Assert.AreEqual(original,File.ReadAllText(path));
         }
         [Test]
@@ -306,7 +311,8 @@ namespace Hellscript.Tests
             Loc.Use("en",LocalizationTable.Parse(Resources.Load<TextAsset>("Localization/en").text).Entries);
             Assert.That(awakened.DisplayName,Does.StartWith("[Awakened]"));Assert.That(ItemQuality.Summary(awakened),Does.Contain("Masterwork 12"));
             // The filter builds every unique/set option, including names composed by the catalog.
-            foreach(var unique in ItemCatalog.Uniques)Loc.T(unique.name);
+            foreach(var unique in ItemCatalog.Uniques)
+                Assert.IsFalse(unique.Name.Any(c=>c>='가'&&c<='힣'),unique.id);
             Assert.AreEqual(0,Loc.MissingCount,string.Join("; ",Loc.Missing));Assert.IsFalse(normal.awakened);
         }
         [TestCase(19)][TestCase(100)]
@@ -356,12 +362,12 @@ namespace Hellscript.Tests
             var report=policy.Apply(account);Assert.AreEqual(1,report.protectedItems);Assert.Zero(report.salvaged);Assert.IsTrue(account.Hero.inventory.Contains(item));
         }
         [Test]
-        public void TheDocumentedWeaponLayersReachAboutOnePointEightInActualDamage()
+        public void WeaponQualityAndFlatBlacksmithBonusesComposeSeparatelyInActualDamage()
         {
             account.Hero.inventory.Clear();account.Hero.build.passives=Array.Empty<int>();var item=Gear(0,2,30,true);Enhanced(item);
             // Isolate section 5.2's stated +60% additive baseline. Affix boosts are a separate test.
             foreach(var roll in item.rolls)roll.greater=false;item.awakened=false;
-            var before=new CombatSimulation(account,catalog,30,seed:61722);
+            float unenhanced=GearEnhancement.Base(item),flat=GearEnhancement.Step(item)*item.enhancement;var before=new CombatSimulation(account,catalog,30,seed:61722);
             item.awakened=true;item.masterwork=12;item.sockets.Add(new SocketState{index=0,gemId="G06",tier=6});
             var after=new CombatSimulation(account,catalog,30,seed:61722);
             DamageEvent Hit(CombatSimulation sim)
@@ -370,10 +376,10 @@ namespace Hellscript.Tests
                 var enemy=new EnemyState{id=9811,position=sim.State.position+Vector2.up*6,health=1000000,maxHealth=1000000,brain=new EnemyBrain{initialized=true}};
                 sim.State.enemies.Add(enemy);return (DamageEvent)Call(sim,"Hit",enemy,1f,Element.Physical,false,0f,null,false);
             }
-            var baseline=Hit(before);var quality=Hit(after);double expected=1.25*Math.Pow(1.02,12)*1.83/1.6;
+            var baseline=Hit(before);var quality=Hit(after);double fixedAttack=flat+before.Stats.slotAttack;double expected=(unenhanced*1.25*Math.Pow(1.02,12)+fixedAttack)/(unenhanced+fixedAttack)*1.83/1.6;
             Assert.AreEqual(.6,baseline.additive,.0001);Assert.AreEqual(.83,quality.additive,.0001);
             Assert.AreEqual(expected,quality.finalDamage/baseline.finalDamage,.0001);
-            Assert.That(quality.finalDamage/baseline.finalDamage,Is.InRange(1.8f,1.82f));
+            Assert.Greater(quality.finalDamage,baseline.finalDamage);
             TestContext.WriteLine($"QUALITY_CONTROLLED_DAMAGE baseline={baseline.finalDamage} quality={quality.finalDamage} ratio={quality.finalDamage/baseline.finalDamage} scope=isolated-section-5.2-hit");
         }
         [TestCase(30,12)][TestCase(60,102)][TestCase(90,192)]

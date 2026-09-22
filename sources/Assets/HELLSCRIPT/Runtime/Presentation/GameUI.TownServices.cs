@@ -24,23 +24,9 @@ namespace Hellscript
         }
         public void ShowTownMerchant()
         {
-            if(!TownService("town-merchant","장비 상인","장비 구매 · 판매",ShowTownMerchant))return;
-            Note(content,"기본 장비를 골드로 구매할 수 있습니다. 장비를 판매하려면 판매할 장비를 선택하세요.",21,100,pale);
-            Cycle(content,"선택 부위",GameCatalog.Slots,selectedSlot,i=>{selectedSlot=i;ShowTownMerchant();});
-            int slot=selectedSlot,cost=TownTrade.EquipmentPrice(game.Store.Data.Hero);
-            TownPurchase("town-buy-equipment",Loc.F("일반 {0} 구매 · {1:N0} 골드",GameCatalog.Slots[slot],cost),cost,r=>game.Store.BuyTownEquipment(r,slot),ShowTownMerchant,Economy.FreeSlots(game.Store.Data.Hero)>0);
-            BigButton(content,"장비 판매 · 가방 열기",()=>ShowBag());
-            BigButton(content,"미확인 장비 · 제작 상점",ShowShop);
-            FooterButton(0,1,"마을로 돌아가기",ShowTown);
+            ShowEquipmentShop(EquipmentShopTab.Buy);
         }
-        public void ShowTownSmith()
-        {
-            if(!TownService("town-smith","대장간","장비 재련 · 강화 · 제작",ShowTownSmith))return;
-            Note(content,"작업할 장비를 선택한 뒤 강화하거나 옵션을 재설정하세요. 각 작업의 해금 조건과 비용은 장비 상세에 표시됩니다.",21,130,pale);
-            BigButton(content,"장비 재련 · 강화할 장비 선택",()=>ShowBag(),true);
-            BigButton(content,"장비 제작",ShowShop);
-            FooterButton(0,1,"마을로 돌아가기",ShowTown);
-        }
+        public void ShowTownSmith()=>ShowBlacksmith();
         public void ShowTownGemShop()
         {
             if(!TownService("town-gems","보석 상인","보석 구매 · 소켓 관리",ShowTownGemShop))return;

@@ -2,6 +2,10 @@
 
 작성일: 2026-09-11 · 상태: 신규 상세 시험안
 
+2026-09-22 대장간 갱신: 장비 강화는 +100까지의 고정 가산 성장으로 변경했다. 각성·걸작 배율을 미강화 기본값에 적용한 뒤 강화 보너스를 더하며, 걸작 조건은 +5 이상이다. 아래의 강화 배율 곱셈과 비교표는 변경 전 기획 이력이다. 현재 공식은 [대장간 적용 명세](../Implementation/Blacksmith_Unity_Integration.md)를 따른다.
+
+English update, 2026-09-22: equipment enhancement now adds a fixed bonus up to +100 after awakening/masterwork multiply the unenhanced base. Masterwork requires +5 or higher. Enhancement multipliers and comparison tables below preserve the earlier proposal; use the [current blacksmith specification](../Implementation/Blacksmith_Unity_Integration.en.md).
+
 2026-09-13 개발 갱신: 각성·상위 접사·걸작의 생성·서비스·저장·화면을 구현했다. 전체 검사 2,442개와 실제 앱 검사 3회가 통과했고, 1,800회 전투 비교를 완료했으며 고단계 밸런스는 후속 검토가 필요하다. 구현 계약과 실제 검사 상태는 [개발 기록](../Implementation/Item_Quality_Expansion.md)을 따른다. English: all 2,442 tests and three native processes passed; the 1,800-run combat comparison is complete; high-stage balance remains under review. See the [implementation record](../Implementation/Item_Quality_Expansion.en.md).
 
 ## 1. 범위와 자료 방침

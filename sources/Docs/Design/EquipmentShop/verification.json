@@ -1,115 +1,418 @@
 {
-  "date": "2026-09-20",
-  "scope": "Browser design prototype only; no Unity code or player save integration",
-  "browser": "Codex In-app Browser (iab)",
-  "checkedFlowCount": 13,
+  "revision": 8,
+  "date": "2026-09-21",
+  "scope": "Focused HTML prototype checks in the Codex in-app browser on macOS, including standalone PC/iPhone-size viewports and an embedded portrait preview.",
+  "passed": 18,
+  "total": 18,
   "checks": [
-    "Enhancement preview shows 42.4 -> 46.2, +9.0%, with 3,200 gold + 20 materials.",
-    "Purchase deducts only 10,240, moves bag 3 -> 4 and disables duplicate purchase.",
-    "Locked ring sale remains disabled.",
-    "Sell and buyback transfer the same fixture item for 520; gold returns to 18,220.",
-    "Weapon filter returns exactly two offers; Korean/English visible copy switches.",
-    "390px portrait switches list -> details; purchase control ends at y=777.6 in an 844px viewport.",
-    "320px Korean and English details have no horizontal overflow or out-of-bounds controls.",
-    "844x390 uses two columns without horizontal overflow; content scrolls in this review preview.",
-    "Insufficient-funds fixture disables purchase at 3,000 gold.",
-    "Warehouse comparison uses I17 power 45.6 versus offer 44, showing -3.5% and its location.",
-    "Full bag blocks purchase at 50/50; selling one item changes 49/50 and re-enables it.",
-    "Ceiling fixture uses I18 power 47.2, removes recommendation badges and shows no-upgrade message.",
-    "Close and reopen restore the shop view."
-  ],
-  "viewportChecks": [
     {
-      "width": 1600,
-      "height": 900,
-      "language": [
-        "ko",
-        "en"
-      ]
+      "name": "Unconfigured Auto-select shows a notice without opening settings or entering manual mode",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": false,
+        "checked": [],
+        "checkmarks": 0,
+        "clearVisible": false,
+        "count": "",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": "자동 선택 설정에서 판매할 등급과 장비 종류를 선택하세요."
+      }
     },
     {
-      "width": 390,
-      "height": 844,
-      "language": [
-        "ko"
-      ],
-      "purchaseButtonBottom": 777.5859375
+      "name": "Missing settings preserve an existing manual selection and its mode",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1"
+        ],
+        "checkmarks": 1,
+        "clearVisible": true,
+        "count": "1 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "true",
+        "modeLabel": "선택 마치기",
+        "notice": "자동 선택 설정에서 판매할 등급과 장비 종류를 선택하세요."
+      }
     },
     {
-      "width": 320,
-      "height": 740,
-      "language": [
-        "ko",
-        "en"
-      ],
-      "horizontalOverflow": false
+      "name": "Only the Settings button opens the editor and saving does not select items",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": false,
+        "checked": [],
+        "checkmarks": 0,
+        "clearVisible": false,
+        "count": "",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": ""
+      }
     },
     {
-      "width": 844,
-      "height": 390,
-      "language": [
-        "en"
-      ],
-      "columns": 2,
-      "horizontalOverflow": false
+      "name": "Configured Auto-select checks eight matching items and exposes bulk sale while manual mode stays off",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": ""
+      }
     },
     {
-      "width": 1024,
-      "height": 900,
-      "language": [
-        "ko"
-      ]
+      "name": "Repeated Auto-select is stable and does not toggle manual mode",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": ""
+      }
+    },
+    {
+      "name": "Inspecting a checked item opens its information without changing checks or manual mode",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 개 선택",
+        "dialog": true,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": "",
+        "title": "아이템 정보"
+      }
+    },
+    {
+      "name": "Entering manual selection explicitly preserves automatic checks for adjustment",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "true",
+        "modeLabel": "선택 마치기",
+        "notice": ""
+      }
+    },
+    {
+      "name": "Manual mode can remove an automatic selection",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 7,
+        "clearVisible": true,
+        "count": "7 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "true",
+        "modeLabel": "선택 마치기",
+        "notice": ""
+      }
+    },
+    {
+      "name": "Auto-select preserves an already active manual mode",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "true",
+        "modeLabel": "선택 마치기",
+        "notice": ""
+      }
+    },
+    {
+      "name": "Automatic selections can be sold directly without entering manual mode",
+      "pass": true,
+      "evidence": {
+        "bag": "6 / 50",
+        "bulkSale": false,
+        "checked": [],
+        "checkmarks": 0,
+        "clearVisible": false,
+        "count": "",
+        "dialog": false,
+        "gold": "31,380",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": ""
+      }
+    },
+    {
+      "name": "No matches show an inline notice and leave manual mode off",
+      "pass": true,
+      "evidence": {
+        "bag": "6 / 50",
+        "bulkSale": false,
+        "checked": [],
+        "checkmarks": 0,
+        "clearVisible": false,
+        "count": "",
+        "dialog": false,
+        "gold": "31,380",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": "조건에 맞는 판매 장비가 없습니다."
+      }
+    },
+    {
+      "name": "Portrait displays missing-settings guidance without a dialog",
+      "pass": true,
+      "evidence": {
+        "h": 27.5,
+        "hidden": false,
+        "overflow": false,
+        "text": "자동 선택 설정에서 판매할 등급과 장비 종류를 선택하세요.",
+        "w": 438
+      }
+    },
+    {
+      "name": "Portrait retains eight inventory columns, automatic checks and unchanged manual mode",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 개 선택",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "다중 선택",
+        "notice": "",
+        "columns": 8,
+        "overflow": false
+      }
+    },
+    {
+      "name": "English landscape retains automatic checks without changing the Multi-select button",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": true,
+        "checked": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "checkmarks": 8,
+        "clearVisible": true,
+        "count": "8 selected",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "Multi-select",
+        "notice": ""
+      }
+    },
+    {
+      "name": "Clear removes automatic checks and bulk actions while leaving normal item browsing active",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulkSale": false,
+        "checked": [],
+        "checkmarks": 0,
+        "clearVisible": false,
+        "count": "",
+        "dialog": false,
+        "gold": "28,460",
+        "mode": "false",
+        "modeLabel": "Multi-select",
+        "notice": ""
+      }
+    },
+    {
+      "name": "Inventory filters retain automatic selection and disclose hidden selected items outside manual mode",
+      "pass": true,
+      "evidence": {
+        "count": "8 selected",
+        "detail": "8 selected\n\nSelected items hidden by filters · 8\n\n13\nCloth Hood\nMagic · I13 · 520\nDetails\n15\nLeather Boots\nCommon · I15 · 300\nDetails\n15\nFabric Belt\nCommon · I15 · 300\nDetails\n15\nSilver Amulet\nMagic · I15 · 600\nDetails\n15\nSilver Ring\nCommon · I15 · 300\nDetails\n15\nCloth Hood\nCommon · I15 · 300\nDetails\n15\nIron Armor\nCommon · I15 · 300\nDetails\n15\nCloth Gloves\nCommon · I15 · 300\nDetails"
+      }
+    },
+    {
+      "name": "Embedded portrait also leaves settings closed when filters are missing",
+      "pass": true,
+      "evidence": {
+        "dialog": false,
+        "mode": "false",
+        "notice": "자동 선택 설정에서 판매할 등급과 장비 종류를 선택하세요."
+      }
+    },
+    {
+      "name": "Embedded state updates retain automatic checks with manual mode off",
+      "pass": true,
+      "evidence": {
+        "bulk": true,
+        "dialog": false,
+        "ids": [
+          "bag-0"
+        ],
+        "mode": "false"
+      }
     }
   ],
-  "captureMode": "Native visible-viewport JPEG at the tested browser dimensions; page scrolling is intentional for review. Recaptured to avoid full-page screenshot scaling errors at devicePixelRatio 2.",
-  "unverified": [
-    "Unity integration",
-    "Game persistence and transaction receipts",
-    "Full combat recommendation evaluator",
-    "Progression balance and economy calibration",
-    "Physical mobile touch/safe area/performance",
-    "Full Unity regression"
-  ],
-  "art": {
-    "source": "Assets/HELLSCRIPT/Resources/Art/EquipmentAtlas.png",
-    "sourceSha256": "6030455d309fdf71821c96fa45f322627788564bfe3f5bf8e242fcbdf9cb46e5",
-    "preview": "equipment-preview.png",
-    "previewSha256": "58726beed9590f312d912d836562a5e5e3edd1fe87a0f063ff58b9fd70bb8c5d",
-    "method": "deterministic 768px thumbnail, PNG alpha retained; source unchanged"
+  "policyChecks": {
+    "file": "auto-selection-policy-checks.json",
+    "passed": 39,
+    "total": 39
   },
+  "behavior": {
+    "autoSelect": "Apply saved filters to item checks without opening settings or changing manual Multi-select mode.",
+    "unconfigured": "Keep existing selection and show inline guidance.",
+    "noMatches": "Clear outdated item checks and show an inline no-match notice.",
+    "inspection": "Open item information without changing automatically checked items.",
+    "manualEntry": "Retain automatic checks for explicit manual adjustment.",
+    "sale": "Separate explicit sale remains available with manual mode off."
+  },
+  "viewports": {
+    "standalone": [
+      [
+        1600,
+        900
+      ],
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ]
+    ],
+    "embedded": [
+      [
+        360,
+        820
+      ]
+    ]
+  },
+  "consoleErrors": [],
   "captures": [
     {
-      "file": "buyback-ko.jpg",
-      "format": "JPEG"
+      "path": "auto-select-v8-landscape-result-en.jpg",
+      "bytes": 56082
     },
     {
-      "file": "landscape-en.jpg",
-      "format": "JPEG"
+      "path": "auto-select-v8-pc-result-ko.jpg",
+      "bytes": 92559
     },
     {
-      "file": "landscape-ko.jpg",
-      "format": "JPEG"
-    },
-    {
-      "file": "landscape-phone-en.jpg",
-      "format": "JPEG"
-    },
-    {
-      "file": "portrait-320-en.jpg",
-      "format": "JPEG"
-    },
-    {
-      "file": "portrait-detail-ko.jpg",
-      "format": "JPEG"
-    },
-    {
-      "file": "portrait-list-ko.jpg",
-      "format": "JPEG"
-    },
-    {
-      "file": "warehouse-comparison-ko.jpg",
-      "format": "JPEG"
+      "path": "auto-select-v8-portrait-result-ko.jpg",
+      "bytes": 53471
     }
   ],
-  "browserConsoleErrors": []
+  "notVerified": [
+    "Unity implementation and real account saves",
+    "Physical iPhone or Windows input and performance",
+    "Full game regression"
+  ]
 }

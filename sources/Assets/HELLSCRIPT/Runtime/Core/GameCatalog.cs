@@ -71,6 +71,7 @@ namespace Hellscript
         public float shrineDetour=12, cursedMinimumTime=90;
         public List<Rule> rules=new List<Rule>();
         public List<string> equipmentIds=new List<string>();
+        public List<int> equipmentPositions=new List<int>();
         public int[] passives={0,1,2};
         public int[] skillRanks=SkillProgression.BaseRanks();
         public BuildConfig Copy() => JsonUtility.FromJson<BuildConfig>(JsonUtility.ToJson(this));
@@ -79,6 +80,7 @@ namespace Hellscript
     [Serializable]
     public sealed class Item
     {
+        public string acquisitionKind="";
         public string id, name, special="";
         public string baseId="", rerollSlotId="";
         public int contentVersion, investedMaterials;
@@ -92,6 +94,7 @@ namespace Hellscript
         public List<SocketState> sockets=new List<SocketState>();
         public int baseIndex, slot, rarity, level=1, enhancement;
         public bool locked, equipped;
+        public int equipIndex;
         // Where the item sits in its container (bag tab 0, or a warehouse tab) and, while worn, where it came from.
         public int storageTab=-1, storageSlot=-1;
         public string origin="";
@@ -114,6 +117,8 @@ namespace Hellscript
     [Serializable]
     public sealed class HeroSave
     {
+        public SlotProgress slotProgress=new SlotProgress();
+        public EquipmentShopState equipmentShop=new EquipmentShopState();
         public int legacyPassiveSlots;
         public PotionInventory potions=new PotionInventory();
         public TrainingComparisonRecord trainingComparison;
@@ -141,6 +146,9 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public int enhancementStones;
+        public ForgeAccount forge=new ForgeAccount();
+        public SalvagePreferences salvage=new SalvagePreferences();
         public int gemCapacity=GemInventory.DefaultCapacity;
         public List<GemStack> gems=new List<GemStack>();
         public RuneGrowthState runes=new RuneGrowthState();
@@ -232,6 +240,8 @@ namespace Hellscript
     [Serializable]
     public sealed class DamageSnapshot
     {
+        public string[] legendaryPowers;
+        public float[] legendaryDamage;
         public float[] runeV13;
         public float[] runeSkillPower;
         public float[] runeBonuses;
@@ -245,6 +255,8 @@ namespace Hellscript
     [Serializable]
     public sealed class CombatEffectState
     {
+        public List<LegendaryPowerState> legendaryPowers=new List<LegendaryPowerState>();
+        public List<LegendaryPulse> legendaryPulses=new List<LegendaryPulse>();
         public float runeMobilityGuardUntil;
         public float lc02Charge,ap05Cooldown,ap05Movement;
         public bool ap05Ready;
@@ -267,6 +279,7 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public int[] slotLevels;
         public PotionRuntimeState potions=new PotionRuntimeState();
         public float[] cooldownTotals=new float[18];
         public uint gemRng;
@@ -351,7 +364,7 @@ namespace Hellscript
     {
         public List<SkillDefinition> skills=new List<SkillDefinition>();
         public string[] classNames={"전사","궁수","마법사"};
-        public static readonly string[] Slots={"무기","머리","몸통","손","발","허리","목걸이","반지"};
+        public static readonly string[] Slots={"무기","머리","몸통","손","발","벨트","목걸이","반지"};
         public static readonly string[] Rarities={"일반","마법","희귀","전설"};
         public static readonly string[] EnemyNames={"쇠사슬 시체","무덤 사냥개","해골 궁병","역병 시종","장송 사제","부푼 순례자","철갑 망령","광신 돌격병","흑철 석궁병","잿불 사술사","종지기","균열 파편체"};
         public static readonly string[] BossNames={"묘지의 집행자","종말의 합창자","균열의 포식자"};

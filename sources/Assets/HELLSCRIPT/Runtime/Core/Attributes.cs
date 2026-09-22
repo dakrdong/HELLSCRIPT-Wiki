@@ -77,6 +77,7 @@ namespace Hellscript
         DamageToHealthy = 54,
         MaximumStamina = 55,
         StaminaRegeneration = 56,
+        AllResistancePercent = 57,
     }
 
     // The conditions Diablo IV lets a damage bonus depend on. The order is the index of the
@@ -180,6 +181,7 @@ namespace Hellscript
             new StatDefinition(StatId.MaximumLifePercent, "최대 생명력 증가", Def, Pct),
             new StatDefinition(StatId.Armor, "방어도", Def, Flat),
             new StatDefinition(StatId.AllResistance, "모든 원소 저항", Def, Flat),
+            new StatDefinition(StatId.AllResistancePercent, "모든 원소 저항 증가", Def, Pct, 70),
             new StatDefinition(StatId.FireResistance, "화염 저항", Def, Flat),
             new StatDefinition(StatId.ColdResistance, "냉기 저항", Def, Flat),
             new StatDefinition(StatId.LightningResistance, "번개 저항", Def, Flat),

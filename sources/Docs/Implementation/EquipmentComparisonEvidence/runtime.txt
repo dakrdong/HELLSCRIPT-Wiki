@@ -1,0 +1,12 @@
+2026-09-22 / Unity 6000.6.0f1 / native macOS development player
+Build: Succeeded, errors=0
+
+PASS: Native inventory portrait/landscape, Korean/English, belt label, no new/awakened filters, multi-rarity dropdown with at least one choice, single-choice sort dropdown, fixed filter/dialog geometry, side-by-side full item comparison, two/one-ring comparison, 57 stats, lock, selected/bulk dismantle, shared shop/salvage settings persisted, drag offset/equip, touch swipe/held drag, gameplay return and pause gate. Runtime handlers/raycasts, not physical mobile input.
+
+PASS: merchant proximity guards, explicit Buy/Sell choices and matching tabs, blocked background walking, empty comparison, real purchase, auto-selection without modal/mode switch, immutable inspection selection, atomic reviewed bulk sale, protected gear, row buyback with original item data, persistent detail filters, 8-column inventory, portrait/landscape/PC layout, Korean/English, disk reload. UI raycast and pointer-event clicks: 48. Native macOS development player; isolated account; no physical mobile input proof.
+PASS: separate gambler NPC, Buy/Sell routing, eight unidentified slot offers, fixed price, saved reward before pulse/reveal, complete item details, bounded content-fit tooltip, independent detail scrolling, transparent outer surface, portrait/landscape/PC result, persistent skip, immediate skipped result, confirm and outside dismissal, inventory details, Korean/English, disk reload.
+
+PASS: reward Compare opens EquipmentComparisonView through a raycast/pointer click; portrait rotation preserves it and Close dismisses it.
+
+Console success markers: HELLSCRIPT_INVENTORY_SMOKE_OK; HELLSCRIPT_EQUIPMENT_SHOP_RUNTIME_OK
+Scope: isolated saves, synthetic Unity pointer handlers/raycasts, real transactions and disk reload. No physical mobile-device or full-regression claim. Training uses the shared adapter and focused core tests; its full UI flow was not exercised here.

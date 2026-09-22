@@ -1,0 +1,33 @@
+{
+  "baseCommit": "8852c6ca18778519762908ceb1216d42012a791b",
+  "finding": "EveryCustomGraphicBringsItsOwnCanvasRenderer fails for five existing classes. The test and owners are byte-identical to the base commit. No clean-base Unity rerun was performed.",
+  "missingCanvasRenderer": [
+    "EquipmentRevealGraphic",
+    "SelectionGroundShadow",
+    "SelectionRune",
+    "TitleFrameGraphic",
+    "TitleOrnament"
+  ],
+  "files": [
+    {
+      "path": "Assets/HELLSCRIPT/Tests/Editor/GraphicComponentTests.cs",
+      "sha256": "2adae2f0577c4e6f9932c0b33e7fe23baab872f6fb308fbd0cb5bf86dfa64d1b",
+      "matchesBase": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentRevealGraphic.cs",
+      "sha256": "51d9318ce1a56383a5538dfd191acc71b01cbbf79f302c4c99b32a85f3bb126e",
+      "matchesBase": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleFrameGraphic.cs",
+      "sha256": "11ebd5e75ddad50fdad5c071cf2aeba6c2eb0353b7f1943e124f3983e4ebb305",
+      "matchesBase": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/CharacterSelectionStage.cs",
+      "sha256": "7f2584da9514c978fed3a0f500c74ce7e060fa41ad82b3b4b0cde0acdb5a155c",
+      "matchesBase": true
+    }
+  ]
+}

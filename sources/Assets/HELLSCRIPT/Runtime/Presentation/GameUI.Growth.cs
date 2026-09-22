@@ -40,6 +40,7 @@ namespace Hellscript
                 string state=!learned?Loc.F("Lv.{0} 해금 예정", skill.unlock):!build.activeSkills.Contains(n)?"배움 · 장착하지 않음":enabled==0?"장착됨 · 켜진 규칙 없음":Loc.F("장착됨 · 켜진 규칙 {0}개", enabled);
                 var runeStats=combat?.Stats??new HeroStats(hero,false,game.Store.Data.runes);
                 Note(content,Loc.F("{0}\n{1}",skill.name,state),21,78,learned?pale:muted);
+                if(learned&&runeStats.slotSkillBonus>0)Note(content,Loc.F("슬롯 강화 +{0} · 유효 Lv.{1}",runeStats.slotSkillBonus,runeStats.SkillLevel(n,true)),19,56,gold);
                 if(runeStats.runeSkillLevels[n]>0||runeStats.runeSkillPower[n]>0||runeStats.runeSkillCost[n]>0)Note(content,Loc.F("룬 마스터리 · 스킬 Lv.{0} · 추가 피해 {1:0.#}% · 자원 소모 감소 {2:0.#}%",runeStats.SkillLevel(n,learned),runeStats.runeSkillPower[n]+runeStats.runeSkillLevels[n]*10,runeStats.runeSkillCost[n]),19,76,gold);
             }
             if(run!=null)foreach(var change in run.growthEvents.AsEnumerable().Reverse().Take(3))

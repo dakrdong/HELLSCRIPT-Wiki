@@ -57,13 +57,13 @@ namespace Hellscript
     public sealed class InventoryBulkEntry
     {
         public readonly string id,name,excludedReason,snapshot;
-        public readonly long gold,materials;
+        public readonly long gold,materials,stones;
         internal InventoryBulkEntry(AccountSave account,Item item,InventoryBulkOperation operation)
         {
             id=item.id;name=item.DisplayName;excludedReason=InventoryBulkPlan.Exclusion(account,item);snapshot=InventoryBulkPlan.Fingerprint(account,item);
             if(excludedReason!="")return;
             if(operation==InventoryBulkOperation.Sell)gold=item.Price;
-            else materials=new[]{1,2,5}[item.rarity]+(item.contentVersion>0?item.investedMaterials:20L*((1<<item.enhancement)-1))*4/5;
+            else{materials=new[]{1,2,5}[item.rarity]+(item.contentVersion>0?item.investedMaterials:20L*((1<<Math.Clamp(item.enhancement,0,5))-1))*4/5;stones=BlacksmithCatalog.SalvageStones(item);}
         }
     }
     public sealed class InventoryBulkPlan
@@ -74,6 +74,7 @@ namespace Hellscript
         public int Count=>entries.Count(e=>e.excludedReason=="");
         public long Gold=>entries.Sum(e=>e.gold);
         public long Materials=>entries.Sum(e=>e.materials);
+        public long Stones=>entries.Sum(e=>e.stones);
         public InventoryBulkPlan(AccountSave account,IEnumerable<string> ids,InventoryBulkOperation operation)
         {
             this.operation=operation;heroId=account.Hero.id;requestId=Guid.NewGuid().ToString("N");
@@ -94,7 +95,7 @@ namespace Hellscript
         // Apply only to GameStore.Transact's staged account. Revalidate every previewed instance before mutation.
         public bool Apply(AccountSave staged)
         {
-            if(staged.Hero.id!=heroId||Count==0||Gold>int.MaxValue-staged.gold||Materials>int.MaxValue-staged.materials)return false;
+            if(staged.Hero.id!=heroId||Count==0||Gold>int.MaxValue-staged.gold||Materials>int.MaxValue-staged.materials||Stones>int.MaxValue-staged.enhancementStones)return false;
             var items=new List<Item>();
             foreach(var entry in entries)
             {

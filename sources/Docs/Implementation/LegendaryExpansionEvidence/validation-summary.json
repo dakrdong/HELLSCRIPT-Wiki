@@ -1,0 +1,86 @@
+{
+  "checkedOn": "2026-09-22",
+  "unityVersion": "6000.6.0f1",
+  "platform": "macOS isolated worktree",
+  "fullSuiteRerunAfterCorrections": false,
+  "runtimeAndDataUnchangedAfterNativeAndFullRun": true,
+  "runs": [
+    {
+      "scope": "initial focused",
+      "file": "legendary-class-focused-editmode.xml",
+      "sha256": "9419b048ec8f2055f4740447918982eb30420ac2661813c880c19838aae2f40d",
+      "result": "Passed",
+      "total": "163",
+      "passed": "163",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "3.2379888",
+      "start-time": "2026-09-22 02:40:45Z",
+      "end-time": "2026-09-22 02:40:48Z"
+    },
+    {
+      "scope": "full regression before test-only corrections",
+      "file": "legendary-class-all-editmode.xml",
+      "sha256": "ffb370c61bc30320f36f980865da5c8339d6ac95b566b944386373f6a7453163",
+      "result": "Failed(Child)",
+      "total": "2944",
+      "passed": "2940",
+      "failed": "4",
+      "skipped": "0",
+      "duration": "1511.3215084",
+      "start-time": "2026-09-22 02:46:02Z",
+      "end-time": "2026-09-22 03:11:13Z"
+    },
+    {
+      "scope": "final related regression",
+      "file": "legendary-class-regression-editmode.xml",
+      "sha256": "87b106d9a46db6a17219441413c80dd553fa064fb5bed9cdd420a8df2050e845",
+      "result": "Passed",
+      "total": "305",
+      "passed": "305",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "240.4827277",
+      "start-time": "2026-09-22 03:14:56Z",
+      "end-time": "2026-09-22 03:18:57Z"
+    }
+  ],
+  "correctedFindings": [
+    {
+      "test": "AwakenedFilterAndDescriptionsDistinguishQualityWithoutChangingRarity",
+      "change": "Validate the production localized Name property."
+    },
+    {
+      "test": "ExistingLegendaryMemberWeightsIncludingSetsRemainUnchanged",
+      "change": "Keep original 39 weights and account for 108 new entries; Warrior belt denominator is 190."
+    },
+    {
+      "test": "ArchetypeBalanceSimulationRunnerRunsAcrossAll6ArchetypesWithoutExceptions",
+      "change": "Timeout 180s -> 300s; all assertions retained. Full run 185.017s; rerun 179.861s. No performance improvement claim."
+    }
+  ],
+  "remainingFailure": {
+    "test": "EveryCustomGraphicBringsItsOwnCanvasRenderer",
+    "affectedExistingClasses": [
+      "EquipmentRevealGraphic",
+      "SelectionGroundShadow",
+      "SelectionRune",
+      "TitleFrameGraphic",
+      "TitleOrnament"
+    ],
+    "evidence": "existing-graphic-failure.json",
+    "cleanBaseUnityRerun": false
+  },
+  "native": {
+    "initial": "Passed",
+    "resume": "Passed",
+    "weapons": [
+      "LW07",
+      "LA05",
+      "LM05"
+    ],
+    "screenshots": 12,
+    "physicalMobile": false,
+    "evidence": "native-summary.json"
+  }
+}

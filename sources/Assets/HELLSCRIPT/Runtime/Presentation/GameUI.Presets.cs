@@ -44,6 +44,7 @@ namespace Hellscript
                 {
                     if(!PresetSourceSaved)return;var source=(game.Active?game.Combat.State.build:hero.build).Copy();
                     source.equipmentIds=(game.Active?game.Combat.Hero:hero).inventory.Where(item=>item.equipped).Select(item=>item.id).ToList();
+                    source.equipmentPositions=(game.Active?game.Combat.Hero:hero).inventory.Where(item=>item.equipped).Select(item=>item.equipIndex).ToList();
                     ShowPresetNameDialog(slot,source,name=>game.Store.SaveBuildPreset(hero.id,slot,source,name),RenderBuild);
                 });presetSaveButtons.Add(save);
                 var load=Button(row,Loc.F("슬롯 {0} 불러오기", i+1),()=>{if(occupied)LoadEditing(existing);});load.interactable=occupied;

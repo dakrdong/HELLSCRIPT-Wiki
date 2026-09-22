@@ -45,10 +45,11 @@ namespace Hellscript
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
             CombatTelemetry.Normalize(State);
             RiftResources.Normalize(State);GemInventory.Normalize(this.account);
-            State.itemEffects??=new CombatEffectState();
+            State.itemEffects??=new CombatEffectState();InitializeLegendaryState();
             State.growthEvents??=new List<GrowthEvent>();
             BehaviorRules.Normalize(State.build);
-            var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;
+            if(State.slotLevels==null)State.slotLevels=(int[])(Hero.slotProgress??new SlotProgress()).levels.Clone();
+            var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;statsHero.slotProgress=new SlotProgress{levels=(int[])State.slotLevels.Clone()};
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
             PrepareEdict(restore!=null);
             InitializePotions(restore==null);
@@ -161,7 +162,7 @@ namespace Hellscript
             var walkingOrigin=State.position;MoveHero(dt);TrackWalking(Vector2.Distance(walkingOrigin,State.position),dt,passiveWalkingTime);TickChannel(dt);
             if(State.potions.version>0&&Vector2.Distance(walkingOrigin,State.position)>.0001f)TryUseUtilityPotion(true);
             TickItemAilments(dt);
-            TickEnemies(dt);TickProjectiles(dt);TickTraps(dt);TickEffects(dt);TickEnemyHazards(dt);
+            TickEnemies(dt);TickProjectiles(dt);TickTraps(dt);TickEffects(dt);TickEnemyHazards(dt);TickLegendaryPulses();
             RemoveCancelledEvasions();
             ResolveCombatDeaths();
             TickFieldEvents(dt);if(!string.IsNullOrEmpty(State.navigationError)){CommitExperience();return;}
@@ -185,7 +186,7 @@ namespace Hellscript
         public float DisplaySkillCost(SkillDefinition skill)=>Cost(skill);
         // Invested ranks travel with the build the run fights with; a run restored from before
         // ranks existed has none and reads as rank one everywhere.
-        int[] Ranks=>State.build.skillRanks;
+        int[] Ranks=>Stats.effectiveSkillRanks;
         public float SkillRange(int index)=>SkillEffects.Range(catalog.skills[index],SkillEffects.ActiveRank(Ranks,index));
         float ShoutBonus=>State.shoutBonus>0?State.shoutBonus:SkillEffects.ShoutBonus(SkillEffects.ActiveRank(Ranks,5));
         float ShadowFraction=>State.shadowFraction>0?State.shadowFraction:SkillEffects.ShadowFraction(SkillEffects.ActiveRank(Ranks,11));
@@ -193,7 +194,7 @@ namespace Hellscript
         float SlowStrength(DamageSnapshot snapshot)=>.35f+(snapshot.passives[1]?SkillEffects.Passive(snapshot.ranks,HeroClass.Mage,1):0);
         float Cost(SkillDefinition skill,bool withoutConsumables=false)
         {
-            float reduction=Stats.costReduction+Stats.runeSkillCost[catalog.skills.IndexOf(skill)]/100+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?SkillEffects.Passive(Ranks,HeroClass.Ranger,4):0);
+            float reduction=LegendaryCostReduction(skill.id)+Stats.costReduction+Stats.runeSkillCost[catalog.skills.IndexOf(skill)]/100+(!withoutConsumables&&reducedNext?.5f:0)+(!withoutConsumables&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[4]&&ItemEffects.ap05Ready?SkillEffects.Passive(Ranks,HeroClass.Ranger,4):0);
             if(skill.kind==SkillKind.Whirlwind){if(Stats.passives[1]&&State.channelTime>=2-.00001f)reduction+=SkillEffects.Passive(Ranks,HeroClass.Warrior,1);if(Stats.SetPieces("SW")>=2)reduction+=.15f;}
             if(skill.kind==SkillKind.Blizzard&&Stats.SetPieces("SM")>=2)reduction+=.2f;
             if(skill.kind==SkillKind.Pierce&&Stats.SetPieces("SAB")>=2||skill.kind==SkillKind.Chain&&Stats.SetPieces("SMB")>=2)reduction+=.15f;
@@ -382,7 +383,7 @@ namespace Hellscript
             var targets=AreaTargets(pos,radius,direction,arc);var snapshot=CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             foreach(var e in targets)Hit(e,coefficient,element,procs,RuneMultiBonus(snapshot,targets.Length),snapshot,definition:definition,root:root,kind:kind);return targets.Length;
         }
-        DamageSnapshot CaptureDamage()=>new DamageSnapshot{runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
+        DamageSnapshot CaptureDamage()=>new DamageSnapshot{legendaryPowers=EquippedLegendaryPowers().Select(p=>p.Id).ToArray(),legendaryDamage=CaptureLegendaryDamage(),runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
             level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),ranks=Ranks==null?null:(int[])Ranks.Clone(),
             crowdCaptured=Hero.heroClass==HeroClass.Warrior,crowdQualified=Hero.heroClass==HeroClass.Warrior&&CountNear(State.position,3)>=3};
         void Deal(EnemyState e,float damage,bool critical)
@@ -511,6 +512,7 @@ namespace Hellscript
             if(State.bossRewarded)return;CompleteReadyChest();if(!string.IsNullOrEmpty(State.navigationError))return;CloseUnopenedChests();State.bossRewarded=true;State.phase=RunPhase.Looting;InterruptHeroAction("보스 처치 후 전리품 정리");State.activeSkill=-1;
             RiftResources.Add(State,RiftResourceKind.Gold,State.position,Gold(800+50*State.stage));
             RiftResources.Add(State,RiftResourceKind.Material,State.position,5+State.stage/5);
+            RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,BlacksmithCatalog.RewardStones(State.stage));
             RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(1000+100*State.stage));account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}

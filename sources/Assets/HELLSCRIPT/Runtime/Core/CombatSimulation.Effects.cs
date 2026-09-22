@@ -83,6 +83,7 @@ namespace Hellscript
             if(State.potions.version>0)ConsumePotion(def);
             if(before<=Stats.hp*.2f&&Stats.specials.Contains("LC03")&&ItemEffects.lc03Cooldown<=.00001f)
             {AddShield("LC03",Stats.hp*.25f,3,0);ItemEffects.lc03Cooldown=20;}
+            TriggerLegendary(LegendaryTrigger.Potion,"*",null,0);
             Visual?.Invoke(State.position,State.position,20,1);if(State.potions.version==0)Log("POTION","자동 물약 사용");return true;
         }
         void ApplyStatus(EnemyState enemy,StatusKind kind,string definition,float duration,int root,float strength=1,int area=0)

@@ -1,0 +1,3169 @@
+{
+  "version": 1,
+  "slotSource": "Assets/HELLSCRIPT/Resources/BlacksmithSlots.json",
+  "slots": [
+    {
+      "id": "mainhand",
+      "name": {
+        "ko": "주무기",
+        "en": "Main hand"
+      },
+      "art": "sword",
+      "role": {
+        "ko": "공격과 치명타",
+        "en": "Attack & critical strikes"
+      },
+      "growth": [
+        {
+          "stat": "attack",
+          "unlock": 1,
+          "rate": 5,
+          "once": false
+        },
+        {
+          "stat": "crit",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "critDamage",
+          "unlock": 50,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "attackSpeed",
+          "unlock": 75,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "allSkills",
+          "unlock": 100,
+          "rate": 1,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "offhand",
+      "name": {
+        "ko": "보조손",
+        "en": "Off hand"
+      },
+      "art": "shield",
+      "role": {
+        "ko": "피해 경감과 생존",
+        "en": "Mitigation & sustain"
+      },
+      "growth": [
+        {
+          "stat": "armor",
+          "unlock": 1,
+          "rate": 3,
+          "once": false
+        },
+        {
+          "stat": "allResistance",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "damageReduction",
+          "unlock": 50,
+          "rate": 0.08,
+          "once": false
+        },
+        {
+          "stat": "lifePercent",
+          "unlock": 75,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "lifeRegen",
+          "unlock": 100,
+          "rate": 5,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "head",
+      "name": {
+        "ko": "머리",
+        "en": "Head"
+      },
+      "art": "helm",
+      "role": {
+        "ko": "자원과 스킬 운용",
+        "en": "Resources & skill uptime"
+      },
+      "growth": [
+        {
+          "stat": "armor",
+          "unlock": 1,
+          "rate": 2,
+          "once": false
+        },
+        {
+          "stat": "resource",
+          "unlock": 25,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "cooldown",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "controlReduction",
+          "unlock": 75,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "allStats",
+          "unlock": 100,
+          "rate": 20,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "chest",
+      "name": {
+        "ko": "몸통",
+        "en": "Chest"
+      },
+      "art": "armor",
+      "role": {
+        "ko": "생명력과 방어",
+        "en": "Life & protection"
+      },
+      "growth": [
+        {
+          "stat": "life",
+          "unlock": 1,
+          "rate": 20,
+          "once": false
+        },
+        {
+          "stat": "armor",
+          "unlock": 25,
+          "rate": 3,
+          "once": false
+        },
+        {
+          "stat": "allResistance",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "damageReduction",
+          "unlock": 75,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "lifePercent",
+          "unlock": 100,
+          "rate": 10,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "hands",
+      "name": {
+        "ko": "손",
+        "en": "Hands"
+      },
+      "art": "gloves",
+      "role": {
+        "ko": "공격 속도와 정밀함",
+        "en": "Speed & precision"
+      },
+      "growth": [
+        {
+          "stat": "attack",
+          "unlock": 1,
+          "rate": 2,
+          "once": false
+        },
+        {
+          "stat": "attackSpeed",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "crit",
+          "unlock": 50,
+          "rate": 0.05,
+          "once": false
+        },
+        {
+          "stat": "critDamage",
+          "unlock": 75,
+          "rate": 0.3,
+          "once": false
+        },
+        {
+          "stat": "luckyHit",
+          "unlock": 100,
+          "rate": 5,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "feet",
+      "name": {
+        "ko": "발",
+        "en": "Feet"
+      },
+      "art": "boots",
+      "role": {
+        "ko": "기동성과 회피",
+        "en": "Mobility & evasion"
+      },
+      "growth": [
+        {
+          "stat": "armor",
+          "unlock": 1,
+          "rate": 1.5,
+          "once": false
+        },
+        {
+          "stat": "moveSpeed",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "dodge",
+          "unlock": 50,
+          "rate": 0.08,
+          "once": false
+        },
+        {
+          "stat": "stamina",
+          "unlock": 75,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "staminaRegen",
+          "unlock": 100,
+          "rate": 2,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "neck",
+      "name": {
+        "ko": "목걸이",
+        "en": "Neck"
+      },
+      "art": "amulet",
+      "role": {
+        "ko": "능력치와 스킬 효율",
+        "en": "Attributes & skill efficiency"
+      },
+      "growth": [
+        {
+          "stat": "allStats",
+          "unlock": 1,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "allResistance",
+          "unlock": 25,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "cooldown",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "resource",
+          "unlock": 75,
+          "rate": 0.5,
+          "once": false
+        },
+        {
+          "stat": "lifePercent",
+          "unlock": 100,
+          "rate": 5,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "waist",
+      "name": {
+        "ko": "허리",
+        "en": "Waist"
+      },
+      "art": "belt",
+      "role": {
+        "ko": "회복과 유지력",
+        "en": "Recovery & endurance"
+      },
+      "growth": [
+        {
+          "stat": "life",
+          "unlock": 1,
+          "rate": 10,
+          "once": false
+        },
+        {
+          "stat": "healing",
+          "unlock": 25,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "lifeRegen",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "resourceCost",
+          "unlock": 75,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "potionHealing",
+          "unlock": 100,
+          "rate": 25,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "leftRing",
+      "name": {
+        "ko": "왼쪽 반지",
+        "en": "Left ring"
+      },
+      "art": "ring",
+      "role": {
+        "ko": "치명타 공격",
+        "en": "Critical offense"
+      },
+      "growth": [
+        {
+          "stat": "attack",
+          "unlock": 1,
+          "rate": 1.5,
+          "once": false
+        },
+        {
+          "stat": "crit",
+          "unlock": 25,
+          "rate": 0.05,
+          "once": false
+        },
+        {
+          "stat": "critDamage",
+          "unlock": 50,
+          "rate": 0.3,
+          "once": false
+        },
+        {
+          "stat": "attackSpeed",
+          "unlock": 75,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "allStats",
+          "unlock": 100,
+          "rate": 15,
+          "once": true
+        }
+      ]
+    },
+    {
+      "id": "rightRing",
+      "name": {
+        "ko": "오른쪽 반지",
+        "en": "Right ring"
+      },
+      "art": "ring",
+      "role": {
+        "ko": "자원 순환",
+        "en": "Resource sustain"
+      },
+      "growth": [
+        {
+          "stat": "resource",
+          "unlock": 1,
+          "rate": 0.2,
+          "once": false
+        },
+        {
+          "stat": "resourceRegen",
+          "unlock": 25,
+          "rate": 0.05,
+          "once": false
+        },
+        {
+          "stat": "resourceCost",
+          "unlock": 50,
+          "rate": 0.1,
+          "once": false
+        },
+        {
+          "stat": "luckyHit",
+          "unlock": 75,
+          "rate": 0.15,
+          "once": false
+        },
+        {
+          "stat": "cooldown",
+          "unlock": 100,
+          "rate": 3,
+          "once": true
+        }
+      ]
+    }
+  ],
+  "slotCosts": [
+    {
+      "target": 2,
+      "stones": 10,
+      "seconds": 300,
+      "cumulativeStones": 10,
+      "cumulativeSeconds": 300
+    },
+    {
+      "target": 3,
+      "stones": 15,
+      "seconds": 600,
+      "cumulativeStones": 25,
+      "cumulativeSeconds": 900
+    },
+    {
+      "target": 4,
+      "stones": 20,
+      "seconds": 900,
+      "cumulativeStones": 45,
+      "cumulativeSeconds": 1800
+    },
+    {
+      "target": 5,
+      "stones": 25,
+      "seconds": 1200,
+      "cumulativeStones": 70,
+      "cumulativeSeconds": 3000
+    },
+    {
+      "target": 6,
+      "stones": 30,
+      "seconds": 1500,
+      "cumulativeStones": 100,
+      "cumulativeSeconds": 4500
+    },
+    {
+      "target": 7,
+      "stones": 35,
+      "seconds": 1800,
+      "cumulativeStones": 135,
+      "cumulativeSeconds": 6300
+    },
+    {
+      "target": 8,
+      "stones": 40,
+      "seconds": 2100,
+      "cumulativeStones": 175,
+      "cumulativeSeconds": 8400
+    },
+    {
+      "target": 9,
+      "stones": 45,
+      "seconds": 2400,
+      "cumulativeStones": 220,
+      "cumulativeSeconds": 10800
+    },
+    {
+      "target": 10,
+      "stones": 50,
+      "seconds": 2700,
+      "cumulativeStones": 270,
+      "cumulativeSeconds": 13500
+    },
+    {
+      "target": 11,
+      "stones": 55,
+      "seconds": 3000,
+      "cumulativeStones": 325,
+      "cumulativeSeconds": 16500
+    },
+    {
+      "target": 12,
+      "stones": 60,
+      "seconds": 3300,
+      "cumulativeStones": 385,
+      "cumulativeSeconds": 19800
+    },
+    {
+      "target": 13,
+      "stones": 65,
+      "seconds": 3600,
+      "cumulativeStones": 450,
+      "cumulativeSeconds": 23400
+    },
+    {
+      "target": 14,
+      "stones": 70,
+      "seconds": 3900,
+      "cumulativeStones": 520,
+      "cumulativeSeconds": 27300
+    },
+    {
+      "target": 15,
+      "stones": 75,
+      "seconds": 4200,
+      "cumulativeStones": 595,
+      "cumulativeSeconds": 31500
+    },
+    {
+      "target": 16,
+      "stones": 80,
+      "seconds": 4500,
+      "cumulativeStones": 675,
+      "cumulativeSeconds": 36000
+    },
+    {
+      "target": 17,
+      "stones": 85,
+      "seconds": 4800,
+      "cumulativeStones": 760,
+      "cumulativeSeconds": 40800
+    },
+    {
+      "target": 18,
+      "stones": 90,
+      "seconds": 5100,
+      "cumulativeStones": 850,
+      "cumulativeSeconds": 45900
+    },
+    {
+      "target": 19,
+      "stones": 95,
+      "seconds": 5400,
+      "cumulativeStones": 945,
+      "cumulativeSeconds": 51300
+    },
+    {
+      "target": 20,
+      "stones": 100,
+      "seconds": 5700,
+      "cumulativeStones": 1045,
+      "cumulativeSeconds": 57000
+    },
+    {
+      "target": 21,
+      "stones": 105,
+      "seconds": 6000,
+      "cumulativeStones": 1150,
+      "cumulativeSeconds": 63000
+    },
+    {
+      "target": 22,
+      "stones": 110,
+      "seconds": 6300,
+      "cumulativeStones": 1260,
+      "cumulativeSeconds": 69300
+    },
+    {
+      "target": 23,
+      "stones": 115,
+      "seconds": 6600,
+      "cumulativeStones": 1375,
+      "cumulativeSeconds": 75900
+    },
+    {
+      "target": 24,
+      "stones": 120,
+      "seconds": 6900,
+      "cumulativeStones": 1495,
+      "cumulativeSeconds": 82800
+    },
+    {
+      "target": 25,
+      "stones": 130,
+      "seconds": 7500,
+      "cumulativeStones": 1625,
+      "cumulativeSeconds": 90300
+    },
+    {
+      "target": 26,
+      "stones": 140,
+      "seconds": 8100,
+      "cumulativeStones": 1765,
+      "cumulativeSeconds": 98400
+    },
+    {
+      "target": 27,
+      "stones": 150,
+      "seconds": 8700,
+      "cumulativeStones": 1915,
+      "cumulativeSeconds": 107100
+    },
+    {
+      "target": 28,
+      "stones": 160,
+      "seconds": 9300,
+      "cumulativeStones": 2075,
+      "cumulativeSeconds": 116400
+    },
+    {
+      "target": 29,
+      "stones": 170,
+      "seconds": 9900,
+      "cumulativeStones": 2245,
+      "cumulativeSeconds": 126300
+    },
+    {
+      "target": 30,
+      "stones": 180,
+      "seconds": 10500,
+      "cumulativeStones": 2425,
+      "cumulativeSeconds": 136800
+    },
+    {
+      "target": 31,
+      "stones": 190,
+      "seconds": 11100,
+      "cumulativeStones": 2615,
+      "cumulativeSeconds": 147900
+    },
+    {
+      "target": 32,
+      "stones": 200,
+      "seconds": 11700,
+      "cumulativeStones": 2815,
+      "cumulativeSeconds": 159600
+    },
+    {
+      "target": 33,
+      "stones": 210,
+      "seconds": 12300,
+      "cumulativeStones": 3025,
+      "cumulativeSeconds": 171900
+    },
+    {
+      "target": 34,
+      "stones": 220,
+      "seconds": 12900,
+      "cumulativeStones": 3245,
+      "cumulativeSeconds": 184800
+    },
+    {
+      "target": 35,
+      "stones": 230,
+      "seconds": 13500,
+      "cumulativeStones": 3475,
+      "cumulativeSeconds": 198300
+    },
+    {
+      "target": 36,
+      "stones": 240,
+      "seconds": 14100,
+      "cumulativeStones": 3715,
+      "cumulativeSeconds": 212400
+    },
+    {
+      "target": 37,
+      "stones": 250,
+      "seconds": 14700,
+      "cumulativeStones": 3965,
+      "cumulativeSeconds": 227100
+    },
+    {
+      "target": 38,
+      "stones": 260,
+      "seconds": 15300,
+      "cumulativeStones": 4225,
+      "cumulativeSeconds": 242400
+    },
+    {
+      "target": 39,
+      "stones": 270,
+      "seconds": 15900,
+      "cumulativeStones": 4495,
+      "cumulativeSeconds": 258300
+    },
+    {
+      "target": 40,
+      "stones": 280,
+      "seconds": 16500,
+      "cumulativeStones": 4775,
+      "cumulativeSeconds": 274800
+    },
+    {
+      "target": 41,
+      "stones": 290,
+      "seconds": 17100,
+      "cumulativeStones": 5065,
+      "cumulativeSeconds": 291900
+    },
+    {
+      "target": 42,
+      "stones": 300,
+      "seconds": 17700,
+      "cumulativeStones": 5365,
+      "cumulativeSeconds": 309600
+    },
+    {
+      "target": 43,
+      "stones": 310,
+      "seconds": 18300,
+      "cumulativeStones": 5675,
+      "cumulativeSeconds": 327900
+    },
+    {
+      "target": 44,
+      "stones": 320,
+      "seconds": 18900,
+      "cumulativeStones": 5995,
+      "cumulativeSeconds": 346800
+    },
+    {
+      "target": 45,
+      "stones": 330,
+      "seconds": 19500,
+      "cumulativeStones": 6325,
+      "cumulativeSeconds": 366300
+    },
+    {
+      "target": 46,
+      "stones": 340,
+      "seconds": 20100,
+      "cumulativeStones": 6665,
+      "cumulativeSeconds": 386400
+    },
+    {
+      "target": 47,
+      "stones": 350,
+      "seconds": 20700,
+      "cumulativeStones": 7015,
+      "cumulativeSeconds": 407100
+    },
+    {
+      "target": 48,
+      "stones": 360,
+      "seconds": 21300,
+      "cumulativeStones": 7375,
+      "cumulativeSeconds": 428400
+    },
+    {
+      "target": 49,
+      "stones": 370,
+      "seconds": 21900,
+      "cumulativeStones": 7745,
+      "cumulativeSeconds": 450300
+    },
+    {
+      "target": 50,
+      "stones": 390,
+      "seconds": 23700,
+      "cumulativeStones": 8135,
+      "cumulativeSeconds": 474000
+    },
+    {
+      "target": 51,
+      "stones": 410,
+      "seconds": 25500,
+      "cumulativeStones": 8545,
+      "cumulativeSeconds": 499500
+    },
+    {
+      "target": 52,
+      "stones": 430,
+      "seconds": 27300,
+      "cumulativeStones": 8975,
+      "cumulativeSeconds": 526800
+    },
+    {
+      "target": 53,
+      "stones": 450,
+      "seconds": 29100,
+      "cumulativeStones": 9425,
+      "cumulativeSeconds": 555900
+    },
+    {
+      "target": 54,
+      "stones": 470,
+      "seconds": 30900,
+      "cumulativeStones": 9895,
+      "cumulativeSeconds": 586800
+    },
+    {
+      "target": 55,
+      "stones": 490,
+      "seconds": 32700,
+      "cumulativeStones": 10385,
+      "cumulativeSeconds": 619500
+    },
+    {
+      "target": 56,
+      "stones": 510,
+      "seconds": 34500,
+      "cumulativeStones": 10895,
+      "cumulativeSeconds": 654000
+    },
+    {
+      "target": 57,
+      "stones": 530,
+      "seconds": 36300,
+      "cumulativeStones": 11425,
+      "cumulativeSeconds": 690300
+    },
+    {
+      "target": 58,
+      "stones": 550,
+      "seconds": 38100,
+      "cumulativeStones": 11975,
+      "cumulativeSeconds": 728400
+    },
+    {
+      "target": 59,
+      "stones": 570,
+      "seconds": 39900,
+      "cumulativeStones": 12545,
+      "cumulativeSeconds": 768300
+    },
+    {
+      "target": 60,
+      "stones": 590,
+      "seconds": 41700,
+      "cumulativeStones": 13135,
+      "cumulativeSeconds": 810000
+    },
+    {
+      "target": 61,
+      "stones": 610,
+      "seconds": 43500,
+      "cumulativeStones": 13745,
+      "cumulativeSeconds": 853500
+    },
+    {
+      "target": 62,
+      "stones": 630,
+      "seconds": 45300,
+      "cumulativeStones": 14375,
+      "cumulativeSeconds": 898800
+    },
+    {
+      "target": 63,
+      "stones": 650,
+      "seconds": 47100,
+      "cumulativeStones": 15025,
+      "cumulativeSeconds": 945900
+    },
+    {
+      "target": 64,
+      "stones": 670,
+      "seconds": 48900,
+      "cumulativeStones": 15695,
+      "cumulativeSeconds": 994800
+    },
+    {
+      "target": 65,
+      "stones": 690,
+      "seconds": 50700,
+      "cumulativeStones": 16385,
+      "cumulativeSeconds": 1045500
+    },
+    {
+      "target": 66,
+      "stones": 710,
+      "seconds": 52500,
+      "cumulativeStones": 17095,
+      "cumulativeSeconds": 1098000
+    },
+    {
+      "target": 67,
+      "stones": 730,
+      "seconds": 54300,
+      "cumulativeStones": 17825,
+      "cumulativeSeconds": 1152300
+    },
+    {
+      "target": 68,
+      "stones": 750,
+      "seconds": 56100,
+      "cumulativeStones": 18575,
+      "cumulativeSeconds": 1208400
+    },
+    {
+      "target": 69,
+      "stones": 770,
+      "seconds": 57900,
+      "cumulativeStones": 19345,
+      "cumulativeSeconds": 1266300
+    },
+    {
+      "target": 70,
+      "stones": 790,
+      "seconds": 59700,
+      "cumulativeStones": 20135,
+      "cumulativeSeconds": 1326000
+    },
+    {
+      "target": 71,
+      "stones": 810,
+      "seconds": 61500,
+      "cumulativeStones": 20945,
+      "cumulativeSeconds": 1387500
+    },
+    {
+      "target": 72,
+      "stones": 830,
+      "seconds": 63300,
+      "cumulativeStones": 21775,
+      "cumulativeSeconds": 1450800
+    },
+    {
+      "target": 73,
+      "stones": 850,
+      "seconds": 65100,
+      "cumulativeStones": 22625,
+      "cumulativeSeconds": 1515900
+    },
+    {
+      "target": 74,
+      "stones": 870,
+      "seconds": 66900,
+      "cumulativeStones": 23495,
+      "cumulativeSeconds": 1582800
+    },
+    {
+      "target": 75,
+      "stones": 920,
+      "seconds": 70500,
+      "cumulativeStones": 24415,
+      "cumulativeSeconds": 1653300
+    },
+    {
+      "target": 76,
+      "stones": 970,
+      "seconds": 74100,
+      "cumulativeStones": 25385,
+      "cumulativeSeconds": 1727400
+    },
+    {
+      "target": 77,
+      "stones": 1020,
+      "seconds": 77700,
+      "cumulativeStones": 26405,
+      "cumulativeSeconds": 1805100
+    },
+    {
+      "target": 78,
+      "stones": 1070,
+      "seconds": 81300,
+      "cumulativeStones": 27475,
+      "cumulativeSeconds": 1886400
+    },
+    {
+      "target": 79,
+      "stones": 1120,
+      "seconds": 84900,
+      "cumulativeStones": 28595,
+      "cumulativeSeconds": 1971300
+    },
+    {
+      "target": 80,
+      "stones": 1170,
+      "seconds": 88500,
+      "cumulativeStones": 29765,
+      "cumulativeSeconds": 2059800
+    },
+    {
+      "target": 81,
+      "stones": 1220,
+      "seconds": 92100,
+      "cumulativeStones": 30985,
+      "cumulativeSeconds": 2151900
+    },
+    {
+      "target": 82,
+      "stones": 1270,
+      "seconds": 95700,
+      "cumulativeStones": 32255,
+      "cumulativeSeconds": 2247600
+    },
+    {
+      "target": 83,
+      "stones": 1320,
+      "seconds": 99300,
+      "cumulativeStones": 33575,
+      "cumulativeSeconds": 2346900
+    },
+    {
+      "target": 84,
+      "stones": 1370,
+      "seconds": 102900,
+      "cumulativeStones": 34945,
+      "cumulativeSeconds": 2449800
+    },
+    {
+      "target": 85,
+      "stones": 1420,
+      "seconds": 106500,
+      "cumulativeStones": 36365,
+      "cumulativeSeconds": 2556300
+    },
+    {
+      "target": 86,
+      "stones": 1470,
+      "seconds": 110100,
+      "cumulativeStones": 37835,
+      "cumulativeSeconds": 2666400
+    },
+    {
+      "target": 87,
+      "stones": 1520,
+      "seconds": 113700,
+      "cumulativeStones": 39355,
+      "cumulativeSeconds": 2780100
+    },
+    {
+      "target": 88,
+      "stones": 1570,
+      "seconds": 117300,
+      "cumulativeStones": 40925,
+      "cumulativeSeconds": 2897400
+    },
+    {
+      "target": 89,
+      "stones": 1620,
+      "seconds": 120900,
+      "cumulativeStones": 42545,
+      "cumulativeSeconds": 3018300
+    },
+    {
+      "target": 90,
+      "stones": 1670,
+      "seconds": 124500,
+      "cumulativeStones": 44215,
+      "cumulativeSeconds": 3142800
+    },
+    {
+      "target": 91,
+      "stones": 1720,
+      "seconds": 128100,
+      "cumulativeStones": 45935,
+      "cumulativeSeconds": 3270900
+    },
+    {
+      "target": 92,
+      "stones": 1770,
+      "seconds": 131700,
+      "cumulativeStones": 47705,
+      "cumulativeSeconds": 3402600
+    },
+    {
+      "target": 93,
+      "stones": 1820,
+      "seconds": 135300,
+      "cumulativeStones": 49525,
+      "cumulativeSeconds": 3537900
+    },
+    {
+      "target": 94,
+      "stones": 1870,
+      "seconds": 138900,
+      "cumulativeStones": 51395,
+      "cumulativeSeconds": 3676800
+    },
+    {
+      "target": 95,
+      "stones": 1920,
+      "seconds": 142500,
+      "cumulativeStones": 53315,
+      "cumulativeSeconds": 3819300
+    },
+    {
+      "target": 96,
+      "stones": 1970,
+      "seconds": 146100,
+      "cumulativeStones": 55285,
+      "cumulativeSeconds": 3965400
+    },
+    {
+      "target": 97,
+      "stones": 2020,
+      "seconds": 149700,
+      "cumulativeStones": 57305,
+      "cumulativeSeconds": 4115100
+    },
+    {
+      "target": 98,
+      "stones": 2070,
+      "seconds": 153300,
+      "cumulativeStones": 59375,
+      "cumulativeSeconds": 4268400
+    },
+    {
+      "target": 99,
+      "stones": 2120,
+      "seconds": 156900,
+      "cumulativeStones": 61495,
+      "cumulativeSeconds": 4425300
+    },
+    {
+      "target": 100,
+      "stones": 2620,
+      "seconds": 243300,
+      "cumulativeStones": 64115,
+      "cumulativeSeconds": 4668600
+    }
+  ],
+  "gearCostSamples": {
+    "1": [
+      {
+        "target": 1,
+        "gold": 110
+      },
+      {
+        "target": 2,
+        "gold": 116
+      },
+      {
+        "target": 3,
+        "gold": 123
+      },
+      {
+        "target": 4,
+        "gold": 129
+      },
+      {
+        "target": 5,
+        "gold": 137
+      },
+      {
+        "target": 6,
+        "gold": 145
+      },
+      {
+        "target": 7,
+        "gold": 153
+      },
+      {
+        "target": 8,
+        "gold": 162
+      },
+      {
+        "target": 9,
+        "gold": 172
+      },
+      {
+        "target": 10,
+        "gold": 182
+      },
+      {
+        "target": 11,
+        "gold": 193
+      },
+      {
+        "target": 12,
+        "gold": 204
+      },
+      {
+        "target": 13,
+        "gold": 216
+      },
+      {
+        "target": 14,
+        "gold": 228
+      },
+      {
+        "target": 15,
+        "gold": 241
+      },
+      {
+        "target": 16,
+        "gold": 255
+      },
+      {
+        "target": 17,
+        "gold": 269
+      },
+      {
+        "target": 18,
+        "gold": 283
+      },
+      {
+        "target": 19,
+        "gold": 299
+      },
+      {
+        "target": 20,
+        "gold": 314
+      },
+      {
+        "target": 21,
+        "gold": 330
+      },
+      {
+        "target": 22,
+        "gold": 347
+      },
+      {
+        "target": 23,
+        "gold": 365
+      },
+      {
+        "target": 24,
+        "gold": 382
+      },
+      {
+        "target": 25,
+        "gold": 401
+      },
+      {
+        "target": 26,
+        "gold": 420
+      },
+      {
+        "target": 27,
+        "gold": 439
+      },
+      {
+        "target": 28,
+        "gold": 459
+      },
+      {
+        "target": 29,
+        "gold": 480
+      },
+      {
+        "target": 30,
+        "gold": 501
+      },
+      {
+        "target": 31,
+        "gold": 523
+      },
+      {
+        "target": 32,
+        "gold": 545
+      },
+      {
+        "target": 33,
+        "gold": 568
+      },
+      {
+        "target": 34,
+        "gold": 591
+      },
+      {
+        "target": 35,
+        "gold": 615
+      },
+      {
+        "target": 36,
+        "gold": 640
+      },
+      {
+        "target": 37,
+        "gold": 665
+      },
+      {
+        "target": 38,
+        "gold": 690
+      },
+      {
+        "target": 39,
+        "gold": 717
+      },
+      {
+        "target": 40,
+        "gold": 743
+      },
+      {
+        "target": 41,
+        "gold": 770
+      },
+      {
+        "target": 42,
+        "gold": 798
+      },
+      {
+        "target": 43,
+        "gold": 827
+      },
+      {
+        "target": 44,
+        "gold": 855
+      },
+      {
+        "target": 45,
+        "gold": 885
+      },
+      {
+        "target": 46,
+        "gold": 915
+      },
+      {
+        "target": 47,
+        "gold": 945
+      },
+      {
+        "target": 48,
+        "gold": 976
+      },
+      {
+        "target": 49,
+        "gold": 1008
+      },
+      {
+        "target": 50,
+        "gold": 1040
+      },
+      {
+        "target": 51,
+        "gold": 1073
+      },
+      {
+        "target": 52,
+        "gold": 1106
+      },
+      {
+        "target": 53,
+        "gold": 1140
+      },
+      {
+        "target": 54,
+        "gold": 1174
+      },
+      {
+        "target": 55,
+        "gold": 1209
+      },
+      {
+        "target": 56,
+        "gold": 1245
+      },
+      {
+        "target": 57,
+        "gold": 1281
+      },
+      {
+        "target": 58,
+        "gold": 1317
+      },
+      {
+        "target": 59,
+        "gold": 1355
+      },
+      {
+        "target": 60,
+        "gold": 1392
+      },
+      {
+        "target": 61,
+        "gold": 1430
+      },
+      {
+        "target": 62,
+        "gold": 1469
+      },
+      {
+        "target": 63,
+        "gold": 1509
+      },
+      {
+        "target": 64,
+        "gold": 1548
+      },
+      {
+        "target": 65,
+        "gold": 1589
+      },
+      {
+        "target": 66,
+        "gold": 1630
+      },
+      {
+        "target": 67,
+        "gold": 1671
+      },
+      {
+        "target": 68,
+        "gold": 1713
+      },
+      {
+        "target": 69,
+        "gold": 1756
+      },
+      {
+        "target": 70,
+        "gold": 1799
+      },
+      {
+        "target": 71,
+        "gold": 1843
+      },
+      {
+        "target": 72,
+        "gold": 1887
+      },
+      {
+        "target": 73,
+        "gold": 1932
+      },
+      {
+        "target": 74,
+        "gold": 1977
+      },
+      {
+        "target": 75,
+        "gold": 2023
+      },
+      {
+        "target": 76,
+        "gold": 2070
+      },
+      {
+        "target": 77,
+        "gold": 2117
+      },
+      {
+        "target": 78,
+        "gold": 2164
+      },
+      {
+        "target": 79,
+        "gold": 2213
+      },
+      {
+        "target": 80,
+        "gold": 2261
+      },
+      {
+        "target": 81,
+        "gold": 2310
+      },
+      {
+        "target": 82,
+        "gold": 2360
+      },
+      {
+        "target": 83,
+        "gold": 2411
+      },
+      {
+        "target": 84,
+        "gold": 2461
+      },
+      {
+        "target": 85,
+        "gold": 2513
+      },
+      {
+        "target": 86,
+        "gold": 2565
+      },
+      {
+        "target": 87,
+        "gold": 2617
+      },
+      {
+        "target": 88,
+        "gold": 2670
+      },
+      {
+        "target": 89,
+        "gold": 2724
+      },
+      {
+        "target": 90,
+        "gold": 2778
+      },
+      {
+        "target": 91,
+        "gold": 2833
+      },
+      {
+        "target": 92,
+        "gold": 2888
+      },
+      {
+        "target": 93,
+        "gold": 2944
+      },
+      {
+        "target": 94,
+        "gold": 3000
+      },
+      {
+        "target": 95,
+        "gold": 3057
+      },
+      {
+        "target": 96,
+        "gold": 3115
+      },
+      {
+        "target": 97,
+        "gold": 3173
+      },
+      {
+        "target": 98,
+        "gold": 3231
+      },
+      {
+        "target": 99,
+        "gold": 3291
+      },
+      {
+        "target": 100,
+        "gold": 3350
+      }
+    ],
+    "10": [
+      {
+        "target": 1,
+        "gold": 2000
+      },
+      {
+        "target": 2,
+        "gold": 2105
+      },
+      {
+        "target": 3,
+        "gold": 2220
+      },
+      {
+        "target": 4,
+        "gold": 2345
+      },
+      {
+        "target": 5,
+        "gold": 2480
+      },
+      {
+        "target": 6,
+        "gold": 2625
+      },
+      {
+        "target": 7,
+        "gold": 2780
+      },
+      {
+        "target": 8,
+        "gold": 2945
+      },
+      {
+        "target": 9,
+        "gold": 3120
+      },
+      {
+        "target": 10,
+        "gold": 3305
+      },
+      {
+        "target": 11,
+        "gold": 3500
+      },
+      {
+        "target": 12,
+        "gold": 3705
+      },
+      {
+        "target": 13,
+        "gold": 3920
+      },
+      {
+        "target": 14,
+        "gold": 4145
+      },
+      {
+        "target": 15,
+        "gold": 4380
+      },
+      {
+        "target": 16,
+        "gold": 4625
+      },
+      {
+        "target": 17,
+        "gold": 4880
+      },
+      {
+        "target": 18,
+        "gold": 5145
+      },
+      {
+        "target": 19,
+        "gold": 5420
+      },
+      {
+        "target": 20,
+        "gold": 5705
+      },
+      {
+        "target": 21,
+        "gold": 6000
+      },
+      {
+        "target": 22,
+        "gold": 6305
+      },
+      {
+        "target": 23,
+        "gold": 6620
+      },
+      {
+        "target": 24,
+        "gold": 6945
+      },
+      {
+        "target": 25,
+        "gold": 7280
+      },
+      {
+        "target": 26,
+        "gold": 7625
+      },
+      {
+        "target": 27,
+        "gold": 7980
+      },
+      {
+        "target": 28,
+        "gold": 8345
+      },
+      {
+        "target": 29,
+        "gold": 8720
+      },
+      {
+        "target": 30,
+        "gold": 9105
+      },
+      {
+        "target": 31,
+        "gold": 9500
+      },
+      {
+        "target": 32,
+        "gold": 9905
+      },
+      {
+        "target": 33,
+        "gold": 10320
+      },
+      {
+        "target": 34,
+        "gold": 10745
+      },
+      {
+        "target": 35,
+        "gold": 11180
+      },
+      {
+        "target": 36,
+        "gold": 11625
+      },
+      {
+        "target": 37,
+        "gold": 12080
+      },
+      {
+        "target": 38,
+        "gold": 12545
+      },
+      {
+        "target": 39,
+        "gold": 13020
+      },
+      {
+        "target": 40,
+        "gold": 13505
+      },
+      {
+        "target": 41,
+        "gold": 14000
+      },
+      {
+        "target": 42,
+        "gold": 14505
+      },
+      {
+        "target": 43,
+        "gold": 15020
+      },
+      {
+        "target": 44,
+        "gold": 15545
+      },
+      {
+        "target": 45,
+        "gold": 16080
+      },
+      {
+        "target": 46,
+        "gold": 16625
+      },
+      {
+        "target": 47,
+        "gold": 17180
+      },
+      {
+        "target": 48,
+        "gold": 17745
+      },
+      {
+        "target": 49,
+        "gold": 18320
+      },
+      {
+        "target": 50,
+        "gold": 18905
+      },
+      {
+        "target": 51,
+        "gold": 19500
+      },
+      {
+        "target": 52,
+        "gold": 20105
+      },
+      {
+        "target": 53,
+        "gold": 20720
+      },
+      {
+        "target": 54,
+        "gold": 21345
+      },
+      {
+        "target": 55,
+        "gold": 21980
+      },
+      {
+        "target": 56,
+        "gold": 22625
+      },
+      {
+        "target": 57,
+        "gold": 23280
+      },
+      {
+        "target": 58,
+        "gold": 23945
+      },
+      {
+        "target": 59,
+        "gold": 24620
+      },
+      {
+        "target": 60,
+        "gold": 25305
+      },
+      {
+        "target": 61,
+        "gold": 26000
+      },
+      {
+        "target": 62,
+        "gold": 26705
+      },
+      {
+        "target": 63,
+        "gold": 27420
+      },
+      {
+        "target": 64,
+        "gold": 28145
+      },
+      {
+        "target": 65,
+        "gold": 28880
+      },
+      {
+        "target": 66,
+        "gold": 29625
+      },
+      {
+        "target": 67,
+        "gold": 30380
+      },
+      {
+        "target": 68,
+        "gold": 31145
+      },
+      {
+        "target": 69,
+        "gold": 31920
+      },
+      {
+        "target": 70,
+        "gold": 32705
+      },
+      {
+        "target": 71,
+        "gold": 33500
+      },
+      {
+        "target": 72,
+        "gold": 34305
+      },
+      {
+        "target": 73,
+        "gold": 35120
+      },
+      {
+        "target": 74,
+        "gold": 35945
+      },
+      {
+        "target": 75,
+        "gold": 36780
+      },
+      {
+        "target": 76,
+        "gold": 37625
+      },
+      {
+        "target": 77,
+        "gold": 38480
+      },
+      {
+        "target": 78,
+        "gold": 39345
+      },
+      {
+        "target": 79,
+        "gold": 40220
+      },
+      {
+        "target": 80,
+        "gold": 41105
+      },
+      {
+        "target": 81,
+        "gold": 42000
+      },
+      {
+        "target": 82,
+        "gold": 42905
+      },
+      {
+        "target": 83,
+        "gold": 43820
+      },
+      {
+        "target": 84,
+        "gold": 44745
+      },
+      {
+        "target": 85,
+        "gold": 45680
+      },
+      {
+        "target": 86,
+        "gold": 46625
+      },
+      {
+        "target": 87,
+        "gold": 47580
+      },
+      {
+        "target": 88,
+        "gold": 48545
+      },
+      {
+        "target": 89,
+        "gold": 49520
+      },
+      {
+        "target": 90,
+        "gold": 50505
+      },
+      {
+        "target": 91,
+        "gold": 51500
+      },
+      {
+        "target": 92,
+        "gold": 52505
+      },
+      {
+        "target": 93,
+        "gold": 53520
+      },
+      {
+        "target": 94,
+        "gold": 54545
+      },
+      {
+        "target": 95,
+        "gold": 55580
+      },
+      {
+        "target": 96,
+        "gold": 56625
+      },
+      {
+        "target": 97,
+        "gold": 57680
+      },
+      {
+        "target": 98,
+        "gold": 58745
+      },
+      {
+        "target": 99,
+        "gold": 59820
+      },
+      {
+        "target": 100,
+        "gold": 60905
+      }
+    ],
+    "30": [
+      {
+        "target": 1,
+        "gold": 12000
+      },
+      {
+        "target": 2,
+        "gold": 12630
+      },
+      {
+        "target": 3,
+        "gold": 13320
+      },
+      {
+        "target": 4,
+        "gold": 14070
+      },
+      {
+        "target": 5,
+        "gold": 14880
+      },
+      {
+        "target": 6,
+        "gold": 15750
+      },
+      {
+        "target": 7,
+        "gold": 16680
+      },
+      {
+        "target": 8,
+        "gold": 17670
+      },
+      {
+        "target": 9,
+        "gold": 18720
+      },
+      {
+        "target": 10,
+        "gold": 19830
+      },
+      {
+        "target": 11,
+        "gold": 21000
+      },
+      {
+        "target": 12,
+        "gold": 22230
+      },
+      {
+        "target": 13,
+        "gold": 23520
+      },
+      {
+        "target": 14,
+        "gold": 24870
+      },
+      {
+        "target": 15,
+        "gold": 26280
+      },
+      {
+        "target": 16,
+        "gold": 27750
+      },
+      {
+        "target": 17,
+        "gold": 29280
+      },
+      {
+        "target": 18,
+        "gold": 30870
+      },
+      {
+        "target": 19,
+        "gold": 32520
+      },
+      {
+        "target": 20,
+        "gold": 34230
+      },
+      {
+        "target": 21,
+        "gold": 36000
+      },
+      {
+        "target": 22,
+        "gold": 37830
+      },
+      {
+        "target": 23,
+        "gold": 39720
+      },
+      {
+        "target": 24,
+        "gold": 41670
+      },
+      {
+        "target": 25,
+        "gold": 43680
+      },
+      {
+        "target": 26,
+        "gold": 45750
+      },
+      {
+        "target": 27,
+        "gold": 47880
+      },
+      {
+        "target": 28,
+        "gold": 50070
+      },
+      {
+        "target": 29,
+        "gold": 52320
+      },
+      {
+        "target": 30,
+        "gold": 54630
+      },
+      {
+        "target": 31,
+        "gold": 57000
+      },
+      {
+        "target": 32,
+        "gold": 59430
+      },
+      {
+        "target": 33,
+        "gold": 61920
+      },
+      {
+        "target": 34,
+        "gold": 64470
+      },
+      {
+        "target": 35,
+        "gold": 67080
+      },
+      {
+        "target": 36,
+        "gold": 69750
+      },
+      {
+        "target": 37,
+        "gold": 72480
+      },
+      {
+        "target": 38,
+        "gold": 75270
+      },
+      {
+        "target": 39,
+        "gold": 78120
+      },
+      {
+        "target": 40,
+        "gold": 81030
+      },
+      {
+        "target": 41,
+        "gold": 84000
+      },
+      {
+        "target": 42,
+        "gold": 87030
+      },
+      {
+        "target": 43,
+        "gold": 90120
+      },
+      {
+        "target": 44,
+        "gold": 93270
+      },
+      {
+        "target": 45,
+        "gold": 96480
+      },
+      {
+        "target": 46,
+        "gold": 99750
+      },
+      {
+        "target": 47,
+        "gold": 103080
+      },
+      {
+        "target": 48,
+        "gold": 106470
+      },
+      {
+        "target": 49,
+        "gold": 109920
+      },
+      {
+        "target": 50,
+        "gold": 113430
+      },
+      {
+        "target": 51,
+        "gold": 117000
+      },
+      {
+        "target": 52,
+        "gold": 120630
+      },
+      {
+        "target": 53,
+        "gold": 124320
+      },
+      {
+        "target": 54,
+        "gold": 128070
+      },
+      {
+        "target": 55,
+        "gold": 131880
+      },
+      {
+        "target": 56,
+        "gold": 135750
+      },
+      {
+        "target": 57,
+        "gold": 139680
+      },
+      {
+        "target": 58,
+        "gold": 143670
+      },
+      {
+        "target": 59,
+        "gold": 147720
+      },
+      {
+        "target": 60,
+        "gold": 151830
+      },
+      {
+        "target": 61,
+        "gold": 156000
+      },
+      {
+        "target": 62,
+        "gold": 160230
+      },
+      {
+        "target": 63,
+        "gold": 164520
+      },
+      {
+        "target": 64,
+        "gold": 168870
+      },
+      {
+        "target": 65,
+        "gold": 173280
+      },
+      {
+        "target": 66,
+        "gold": 177750
+      },
+      {
+        "target": 67,
+        "gold": 182280
+      },
+      {
+        "target": 68,
+        "gold": 186870
+      },
+      {
+        "target": 69,
+        "gold": 191520
+      },
+      {
+        "target": 70,
+        "gold": 196230
+      },
+      {
+        "target": 71,
+        "gold": 201000
+      },
+      {
+        "target": 72,
+        "gold": 205830
+      },
+      {
+        "target": 73,
+        "gold": 210720
+      },
+      {
+        "target": 74,
+        "gold": 215670
+      },
+      {
+        "target": 75,
+        "gold": 220680
+      },
+      {
+        "target": 76,
+        "gold": 225750
+      },
+      {
+        "target": 77,
+        "gold": 230880
+      },
+      {
+        "target": 78,
+        "gold": 236070
+      },
+      {
+        "target": 79,
+        "gold": 241320
+      },
+      {
+        "target": 80,
+        "gold": 246630
+      },
+      {
+        "target": 81,
+        "gold": 252000
+      },
+      {
+        "target": 82,
+        "gold": 257430
+      },
+      {
+        "target": 83,
+        "gold": 262920
+      },
+      {
+        "target": 84,
+        "gold": 268470
+      },
+      {
+        "target": 85,
+        "gold": 274080
+      },
+      {
+        "target": 86,
+        "gold": 279750
+      },
+      {
+        "target": 87,
+        "gold": 285480
+      },
+      {
+        "target": 88,
+        "gold": 291270
+      },
+      {
+        "target": 89,
+        "gold": 297120
+      },
+      {
+        "target": 90,
+        "gold": 303030
+      },
+      {
+        "target": 91,
+        "gold": 309000
+      },
+      {
+        "target": 92,
+        "gold": 315030
+      },
+      {
+        "target": 93,
+        "gold": 321120
+      },
+      {
+        "target": 94,
+        "gold": 327270
+      },
+      {
+        "target": 95,
+        "gold": 333480
+      },
+      {
+        "target": 96,
+        "gold": 339750
+      },
+      {
+        "target": 97,
+        "gold": 346080
+      },
+      {
+        "target": 98,
+        "gold": 352470
+      },
+      {
+        "target": 99,
+        "gold": 358920
+      },
+      {
+        "target": 100,
+        "gold": 365430
+      }
+    ],
+    "60": [
+      {
+        "target": 1,
+        "gold": 42000
+      },
+      {
+        "target": 2,
+        "gold": 44205
+      },
+      {
+        "target": 3,
+        "gold": 46620
+      },
+      {
+        "target": 4,
+        "gold": 49245
+      },
+      {
+        "target": 5,
+        "gold": 52080
+      },
+      {
+        "target": 6,
+        "gold": 55125
+      },
+      {
+        "target": 7,
+        "gold": 58380
+      },
+      {
+        "target": 8,
+        "gold": 61845
+      },
+      {
+        "target": 9,
+        "gold": 65520
+      },
+      {
+        "target": 10,
+        "gold": 69405
+      },
+      {
+        "target": 11,
+        "gold": 73500
+      },
+      {
+        "target": 12,
+        "gold": 77805
+      },
+      {
+        "target": 13,
+        "gold": 82320
+      },
+      {
+        "target": 14,
+        "gold": 87045
+      },
+      {
+        "target": 15,
+        "gold": 91980
+      },
+      {
+        "target": 16,
+        "gold": 97125
+      },
+      {
+        "target": 17,
+        "gold": 102480
+      },
+      {
+        "target": 18,
+        "gold": 108045
+      },
+      {
+        "target": 19,
+        "gold": 113820
+      },
+      {
+        "target": 20,
+        "gold": 119805
+      },
+      {
+        "target": 21,
+        "gold": 126000
+      },
+      {
+        "target": 22,
+        "gold": 132405
+      },
+      {
+        "target": 23,
+        "gold": 139020
+      },
+      {
+        "target": 24,
+        "gold": 145845
+      },
+      {
+        "target": 25,
+        "gold": 152880
+      },
+      {
+        "target": 26,
+        "gold": 160125
+      },
+      {
+        "target": 27,
+        "gold": 167580
+      },
+      {
+        "target": 28,
+        "gold": 175245
+      },
+      {
+        "target": 29,
+        "gold": 183120
+      },
+      {
+        "target": 30,
+        "gold": 191205
+      },
+      {
+        "target": 31,
+        "gold": 199500
+      },
+      {
+        "target": 32,
+        "gold": 208005
+      },
+      {
+        "target": 33,
+        "gold": 216720
+      },
+      {
+        "target": 34,
+        "gold": 225645
+      },
+      {
+        "target": 35,
+        "gold": 234780
+      },
+      {
+        "target": 36,
+        "gold": 244125
+      },
+      {
+        "target": 37,
+        "gold": 253680
+      },
+      {
+        "target": 38,
+        "gold": 263445
+      },
+      {
+        "target": 39,
+        "gold": 273420
+      },
+      {
+        "target": 40,
+        "gold": 283605
+      },
+      {
+        "target": 41,
+        "gold": 294000
+      },
+      {
+        "target": 42,
+        "gold": 304605
+      },
+      {
+        "target": 43,
+        "gold": 315420
+      },
+      {
+        "target": 44,
+        "gold": 326445
+      },
+      {
+        "target": 45,
+        "gold": 337680
+      },
+      {
+        "target": 46,
+        "gold": 349125
+      },
+      {
+        "target": 47,
+        "gold": 360780
+      },
+      {
+        "target": 48,
+        "gold": 372645
+      },
+      {
+        "target": 49,
+        "gold": 384720
+      },
+      {
+        "target": 50,
+        "gold": 397005
+      },
+      {
+        "target": 51,
+        "gold": 409500
+      },
+      {
+        "target": 52,
+        "gold": 422205
+      },
+      {
+        "target": 53,
+        "gold": 435120
+      },
+      {
+        "target": 54,
+        "gold": 448245
+      },
+      {
+        "target": 55,
+        "gold": 461580
+      },
+      {
+        "target": 56,
+        "gold": 475125
+      },
+      {
+        "target": 57,
+        "gold": 488880
+      },
+      {
+        "target": 58,
+        "gold": 502845
+      },
+      {
+        "target": 59,
+        "gold": 517020
+      },
+      {
+        "target": 60,
+        "gold": 531405
+      },
+      {
+        "target": 61,
+        "gold": 546000
+      },
+      {
+        "target": 62,
+        "gold": 560805
+      },
+      {
+        "target": 63,
+        "gold": 575820
+      },
+      {
+        "target": 64,
+        "gold": 591045
+      },
+      {
+        "target": 65,
+        "gold": 606480
+      },
+      {
+        "target": 66,
+        "gold": 622125
+      },
+      {
+        "target": 67,
+        "gold": 637980
+      },
+      {
+        "target": 68,
+        "gold": 654045
+      },
+      {
+        "target": 69,
+        "gold": 670320
+      },
+      {
+        "target": 70,
+        "gold": 686805
+      },
+      {
+        "target": 71,
+        "gold": 703500
+      },
+      {
+        "target": 72,
+        "gold": 720405
+      },
+      {
+        "target": 73,
+        "gold": 737520
+      },
+      {
+        "target": 74,
+        "gold": 754845
+      },
+      {
+        "target": 75,
+        "gold": 772380
+      },
+      {
+        "target": 76,
+        "gold": 790125
+      },
+      {
+        "target": 77,
+        "gold": 808080
+      },
+      {
+        "target": 78,
+        "gold": 826245
+      },
+      {
+        "target": 79,
+        "gold": 844620
+      },
+      {
+        "target": 80,
+        "gold": 863205
+      },
+      {
+        "target": 81,
+        "gold": 882000
+      },
+      {
+        "target": 82,
+        "gold": 901005
+      },
+      {
+        "target": 83,
+        "gold": 920220
+      },
+      {
+        "target": 84,
+        "gold": 939645
+      },
+      {
+        "target": 85,
+        "gold": 959280
+      },
+      {
+        "target": 86,
+        "gold": 979125
+      },
+      {
+        "target": 87,
+        "gold": 999180
+      },
+      {
+        "target": 88,
+        "gold": 1019445
+      },
+      {
+        "target": 89,
+        "gold": 1039920
+      },
+      {
+        "target": 90,
+        "gold": 1060605
+      },
+      {
+        "target": 91,
+        "gold": 1081500
+      },
+      {
+        "target": 92,
+        "gold": 1102605
+      },
+      {
+        "target": 93,
+        "gold": 1123920
+      },
+      {
+        "target": 94,
+        "gold": 1145445
+      },
+      {
+        "target": 95,
+        "gold": 1167180
+      },
+      {
+        "target": 96,
+        "gold": 1189125
+      },
+      {
+        "target": 97,
+        "gold": 1211280
+      },
+      {
+        "target": 98,
+        "gold": 1233645
+      },
+      {
+        "target": 99,
+        "gold": 1256220
+      },
+      {
+        "target": 100,
+        "gold": 1279005
+      }
+    ],
+    "100": [
+      {
+        "target": 1,
+        "gold": 110000
+      },
+      {
+        "target": 2,
+        "gold": 115775
+      },
+      {
+        "target": 3,
+        "gold": 122100
+      },
+      {
+        "target": 4,
+        "gold": 128975
+      },
+      {
+        "target": 5,
+        "gold": 136400
+      },
+      {
+        "target": 6,
+        "gold": 144375
+      },
+      {
+        "target": 7,
+        "gold": 152900
+      },
+      {
+        "target": 8,
+        "gold": 161975
+      },
+      {
+        "target": 9,
+        "gold": 171600
+      },
+      {
+        "target": 10,
+        "gold": 181775
+      },
+      {
+        "target": 11,
+        "gold": 192500
+      },
+      {
+        "target": 12,
+        "gold": 203775
+      },
+      {
+        "target": 13,
+        "gold": 215600
+      },
+      {
+        "target": 14,
+        "gold": 227975
+      },
+      {
+        "target": 15,
+        "gold": 240900
+      },
+      {
+        "target": 16,
+        "gold": 254375
+      },
+      {
+        "target": 17,
+        "gold": 268400
+      },
+      {
+        "target": 18,
+        "gold": 282975
+      },
+      {
+        "target": 19,
+        "gold": 298100
+      },
+      {
+        "target": 20,
+        "gold": 313775
+      },
+      {
+        "target": 21,
+        "gold": 330000
+      },
+      {
+        "target": 22,
+        "gold": 346775
+      },
+      {
+        "target": 23,
+        "gold": 364100
+      },
+      {
+        "target": 24,
+        "gold": 381975
+      },
+      {
+        "target": 25,
+        "gold": 400400
+      },
+      {
+        "target": 26,
+        "gold": 419375
+      },
+      {
+        "target": 27,
+        "gold": 438900
+      },
+      {
+        "target": 28,
+        "gold": 458975
+      },
+      {
+        "target": 29,
+        "gold": 479600
+      },
+      {
+        "target": 30,
+        "gold": 500775
+      },
+      {
+        "target": 31,
+        "gold": 522500
+      },
+      {
+        "target": 32,
+        "gold": 544775
+      },
+      {
+        "target": 33,
+        "gold": 567600
+      },
+      {
+        "target": 34,
+        "gold": 590975
+      },
+      {
+        "target": 35,
+        "gold": 614900
+      },
+      {
+        "target": 36,
+        "gold": 639375
+      },
+      {
+        "target": 37,
+        "gold": 664400
+      },
+      {
+        "target": 38,
+        "gold": 689975
+      },
+      {
+        "target": 39,
+        "gold": 716100
+      },
+      {
+        "target": 40,
+        "gold": 742775
+      },
+      {
+        "target": 41,
+        "gold": 770000
+      },
+      {
+        "target": 42,
+        "gold": 797775
+      },
+      {
+        "target": 43,
+        "gold": 826100
+      },
+      {
+        "target": 44,
+        "gold": 854975
+      },
+      {
+        "target": 45,
+        "gold": 884400
+      },
+      {
+        "target": 46,
+        "gold": 914375
+      },
+      {
+        "target": 47,
+        "gold": 944900
+      },
+      {
+        "target": 48,
+        "gold": 975975
+      },
+      {
+        "target": 49,
+        "gold": 1007600
+      },
+      {
+        "target": 50,
+        "gold": 1039775
+      },
+      {
+        "target": 51,
+        "gold": 1072500
+      },
+      {
+        "target": 52,
+        "gold": 1105775
+      },
+      {
+        "target": 53,
+        "gold": 1139600
+      },
+      {
+        "target": 54,
+        "gold": 1173975
+      },
+      {
+        "target": 55,
+        "gold": 1208900
+      },
+      {
+        "target": 56,
+        "gold": 1244375
+      },
+      {
+        "target": 57,
+        "gold": 1280400
+      },
+      {
+        "target": 58,
+        "gold": 1316975
+      },
+      {
+        "target": 59,
+        "gold": 1354100
+      },
+      {
+        "target": 60,
+        "gold": 1391775
+      },
+      {
+        "target": 61,
+        "gold": 1430000
+      },
+      {
+        "target": 62,
+        "gold": 1468775
+      },
+      {
+        "target": 63,
+        "gold": 1508100
+      },
+      {
+        "target": 64,
+        "gold": 1547975
+      },
+      {
+        "target": 65,
+        "gold": 1588400
+      },
+      {
+        "target": 66,
+        "gold": 1629375
+      },
+      {
+        "target": 67,
+        "gold": 1670900
+      },
+      {
+        "target": 68,
+        "gold": 1712975
+      },
+      {
+        "target": 69,
+        "gold": 1755600
+      },
+      {
+        "target": 70,
+        "gold": 1798775
+      },
+      {
+        "target": 71,
+        "gold": 1842500
+      },
+      {
+        "target": 72,
+        "gold": 1886775
+      },
+      {
+        "target": 73,
+        "gold": 1931600
+      },
+      {
+        "target": 74,
+        "gold": 1976975
+      },
+      {
+        "target": 75,
+        "gold": 2022900
+      },
+      {
+        "target": 76,
+        "gold": 2069375
+      },
+      {
+        "target": 77,
+        "gold": 2116400
+      },
+      {
+        "target": 78,
+        "gold": 2163975
+      },
+      {
+        "target": 79,
+        "gold": 2212100
+      },
+      {
+        "target": 80,
+        "gold": 2260775
+      },
+      {
+        "target": 81,
+        "gold": 2310000
+      },
+      {
+        "target": 82,
+        "gold": 2359775
+      },
+      {
+        "target": 83,
+        "gold": 2410100
+      },
+      {
+        "target": 84,
+        "gold": 2460975
+      },
+      {
+        "target": 85,
+        "gold": 2512400
+      },
+      {
+        "target": 86,
+        "gold": 2564375
+      },
+      {
+        "target": 87,
+        "gold": 2616900
+      },
+      {
+        "target": 88,
+        "gold": 2669975
+      },
+      {
+        "target": 89,
+        "gold": 2723600
+      },
+      {
+        "target": 90,
+        "gold": 2777775
+      },
+      {
+        "target": 91,
+        "gold": 2832500
+      },
+      {
+        "target": 92,
+        "gold": 2887775
+      },
+      {
+        "target": 93,
+        "gold": 2943600
+      },
+      {
+        "target": 94,
+        "gold": 2999975
+      },
+      {
+        "target": 95,
+        "gold": 3056900
+      },
+      {
+        "target": 96,
+        "gold": 3114375
+      },
+      {
+        "target": 97,
+        "gold": 3172400
+      },
+      {
+        "target": 98,
+        "gold": 3230975
+      },
+      {
+        "target": 99,
+        "gold": 3290100
+      },
+      {
+        "target": 100,
+        "gold": 3349775
+      }
+    ]
+  },
+  "salvage": {
+    "common": 0,
+    "magic": 1,
+    "rare": 5,
+    "set": 10,
+    "legendaryWithoutUnique": 10,
+    "nonSetCatalogUnique": 15
+  },
+  "workstationUnlock": [
+    0,
+    0,
+    10,
+    50,
+    250
+  ],
+  "bossAndSweepFormula": "10 + 2 * rewardStage"
+}

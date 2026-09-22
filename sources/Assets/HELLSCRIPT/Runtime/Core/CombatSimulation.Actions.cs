@@ -48,7 +48,7 @@ namespace Hellscript
         {
             StopEdictWalk();
             if(HeroActionBusy)InterruptHeroAction("상위 생존 행동으로 전환");CancelChest("스킬 실행");CancelShrine("스킬 실행");
-            var timing=CombatActions.Timing(index,Hero.heroClass,Stats.attackSpeed);
+            var timing=CombatActions.Timing(index,Hero.heroClass,Mathf.Min(1.5f,Stats.attackSpeed+LegendaryBuff(LegendaryEffect.Haste)));
             var config=explicitRule??(rule>=0&&rule<State.build.rules.Count?State.build.rules[rule]:null);
             var a=new HeroActionState{id=State.nextId++,skill=index,rule=rule,targetId=target?.id??-1,origin=State.position,aim=aim??(GroundSkill(index)?destination:target?.position??State.position),destination=destination,blizzardMode=config?.blizzardMode??BlizzardMode.Follow,
                 startedAt=State.time,prepare=timing.prepare,travel=timing.travel,recovery=timing.recovery,cost=index==0?0:cost,escape=escape,
@@ -111,7 +111,8 @@ namespace Hellscript
             {InterruptHeroAction("보호막 생성 직전 같은 보호막 또는 합계 상한 때문에 추가 생성할 수 없습니다.");return;}
             a.released=true;a.snapshot=CaptureDamage();a.phase=HeroActionPhase.Recovering;
             ActionEvent(a,"ACTION_RELEASE",a.travel>0?"착지 완료":"효과 실행");
-            if(a.skill<0)ReleaseBasic(a);else ResolveSkill(a);
+            if(a.skill<0)ReleaseBasic(a);else
+            {ResolveSkill(a);TriggerLegendary(LegendaryTrigger.Cast,SkillId(a.skill),State.enemies.Find(e=>e.id==a.targetId&&!e.dead),a.id,a.snapshot);}
         }
         void CompleteHeroAction(HeroActionState a,string reason="동작 완료")
         {

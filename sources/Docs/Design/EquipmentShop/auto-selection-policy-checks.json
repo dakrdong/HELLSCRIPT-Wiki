@@ -1,0 +1,164 @@
+{
+  "scope": "HTML prototype exclusion policy, selection action and preview state only",
+  "passed": 39,
+  "total": 39,
+  "privateStateBytes": 14046,
+  "checks": [
+    {
+      "name": "Unchecked types are never selected",
+      "pass": true
+    },
+    {
+      "name": "Checked type with zero conditions selects an eligible item",
+      "pass": true
+    },
+    {
+      "name": "Zero match count disables stat exclusions",
+      "pass": true
+    },
+    {
+      "name": "A protected item is never selected even with zero count",
+      "pass": true
+    },
+    {
+      "name": "A protected item is never selected even below its thresholds",
+      "pass": true
+    },
+    {
+      "name": "Below threshold remains selected",
+      "pass": true
+    },
+    {
+      "name": "Equality counts as a match and excludes",
+      "pass": true
+    },
+    {
+      "name": "Above threshold excludes",
+      "pass": true
+    },
+    {
+      "name": "One of two matches excludes at count one",
+      "pass": true
+    },
+    {
+      "name": "One of two matches remains selected at count two",
+      "pass": true
+    },
+    {
+      "name": "Both matches exclude at count two",
+      "pass": true
+    },
+    {
+      "name": "An absent affix does not satisfy a zero threshold",
+      "pass": true
+    },
+    {
+      "name": "A present zero-valued affix satisfies a zero threshold",
+      "pass": true
+    },
+    {
+      "name": "Invalid numeric thresholds fail closed",
+      "pass": true
+    },
+    {
+      "name": "Invalid match counts fail closed",
+      "pass": true
+    },
+    {
+      "name": "An option unavailable to a slot fails validation",
+      "pass": true
+    },
+    {
+      "name": "Numeric strings from inputs preserve decimal comparisons",
+      "pass": true
+    },
+    {
+      "name": "Rules for one type do not depend on another type",
+      "pass": true
+    },
+    {
+      "name": "Coarse selection ignores stored stat exclusions while detailed rules are off",
+      "pass": true
+    },
+    {
+      "name": "Inactive detailed rules do not block coarse selection with unfinished fields",
+      "pass": true
+    },
+    {
+      "name": "Matching equipment is excluded when its rarity is unchecked",
+      "pass": true
+    },
+    {
+      "name": "Matching rarity does not override an unchecked equipment type",
+      "pass": true
+    },
+    {
+      "name": "Both coarse filters select without detailed rules",
+      "pass": true
+    },
+    {
+      "name": "Detailed exclusions apply after both coarse filters match",
+      "pass": true
+    },
+    {
+      "name": "Detailed-rule bypass never bypasses sale protection",
+      "pass": true
+    },
+    {
+      "name": "Unique and set filters are distinct categories",
+      "pass": true
+    },
+    {
+      "name": "The 24 existing equipment bases map to exactly one kind",
+      "pass": true
+    },
+    {
+      "name": "Pants remain a proposal without existing matching bases",
+      "pass": true
+    },
+    {
+      "name": "Weapon attack and critical chance use the supported slot masks",
+      "pass": true
+    },
+    {
+      "name": "Option identifiers and translated names are complete",
+      "pass": true
+    },
+    {
+      "name": "Saved preview state restores inventory, trades and all type rules exactly",
+      "pass": true
+    },
+    {
+      "name": "Full-bag preview state with every rule fits the host state budget",
+      "pass": true
+    },
+    {
+      "name": "Saving a disabled type preserves an empty threshold for later validation",
+      "pass": true
+    },
+    {
+      "name": "Previous preview settings retain their detailed rules during migration",
+      "pass": true
+    },
+    {
+      "name": "Auto-select without rarity settings keeps the current mode and selection without opening a dialog",
+      "pass": true
+    },
+    {
+      "name": "Auto-select without enabled equipment types only reports missing settings",
+      "pass": true
+    },
+    {
+      "name": "Auto-select replaces item checks without switching the manual selection mode",
+      "pass": true
+    },
+    {
+      "name": "No matching items clears outdated item checks without opening a dialog or changing mode",
+      "pass": true
+    },
+    {
+      "name": "Auto-select leaves currency and saved filter settings untouched",
+      "pass": true
+    }
+  ]
+}

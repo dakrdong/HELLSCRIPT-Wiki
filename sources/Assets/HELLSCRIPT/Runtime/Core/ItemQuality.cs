@@ -39,7 +39,7 @@ namespace Hellscript
             if(item==null||!account.heroes.Any(h=>h.inventory.Contains(item)))return "보유한 장비만 걸작을 진행할 수 있습니다.";
             if(account.suspendedRun!=null)return "균열을 완료하고 성소에서 걸작을 진행해 주세요.";
             if(!ContentUnlocks.Has(account,ContentUnlocks.Enhance))return ContentUnlocks.Condition(ContentUnlocks.Enhance);
-            if(item.enhancement!=5)return "강화 +5를 마친 장비만 걸작을 진행할 수 있습니다.";
+            if(item.enhancement<5)return "강화 +5 이상 장비만 걸작을 진행할 수 있습니다.";
             if(item.masterwork<0||item.masterwork>MaximumMasterwork)return "장비 품질 기록을 확인해 주세요.";
             if(item.masterwork>=MasterworkCap(account))return "현재 걸작 상한에 도달했습니다. 더 높은 균열을 실제로 클리어하면 상한이 열립니다.";
             int next=item.masterwork+1;
@@ -75,7 +75,7 @@ namespace Hellscript
         }
         public static void Validate(Item item)
         {
-            if(item.masterwork<0||item.masterwork>MaximumMasterwork||item.masterwork>0&&item.enhancement!=5||
+            if(item.masterwork<0||item.masterwork>MaximumMasterwork||item.masterwork>0&&item.enhancement<5||
                 item.masterworkInvestedMaterials<0||item.masterworkInvestedMaterials>item.investedMaterials)
                 throw new InvalidOperationException("장비 품질 기록을 확인해 주세요.");
             if(item.awakened&&(item.rarity<2||item.rolls.Any(r=>r!=null&&r.rollBasisPoints<4000)))
@@ -89,7 +89,7 @@ namespace Hellscript
         public static bool RepairValues(Item item)
         {
             item.masterworkLines??=new List<string>();bool changed=false;
-            if(item.masterwork<0||item.masterwork>MaximumMasterwork||item.masterwork>0&&item.enhancement!=5)
+            if(item.masterwork<0||item.masterwork>MaximumMasterwork||item.masterwork>0&&item.enhancement<5)
             {item.masterwork=0;changed=true;}
             if(item.masterworkInvestedMaterials<0||item.masterworkInvestedMaterials>item.investedMaterials)
             {item.masterworkInvestedMaterials=0;changed=true;}

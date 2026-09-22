@@ -23,11 +23,11 @@ namespace Hellscript.Runes
         public static string Name(string id)=>Loc.T(Names[Array.IndexOf(Weapons,id)]);
         public static string EquippedWeapon(HeroSave hero)
         {
-            var item=hero.inventory.FirstOrDefault(i=>i.equipped&&i.slot==0);if(item==null)return null;
+            var item=EquipmentSlots.At(hero,0,0)??hero.inventory.FirstOrDefault(i=>i.equipped&&i.slot==0&&!EquipmentSlots.Offhand(i));if(item==null)return null;
             switch(ItemCatalog.Base(item).id)
-            {case "B01":return "sword";case "B02":return "greatsword";case "B03":return "axe";
+            {case "B01":case "B30":return "sword";case "B02":return "greatsword";case "B03":return "axe";
              case "B04":case "B05":return "bow";case "B06":return "crossbow";
-             case "B07":case "B08":case "B09":return "staff";default:return null;}
+             case "B07":case "B08":case "B09":case "B25":return "staff";default:return null;}
         }
         public static int UnlockedGrade(AccountSave account)=>Math.Min(6,account.heroes.Max(h=>h.highestClear)/5);
         // Retained only for legacy save migration and historical verification tools.

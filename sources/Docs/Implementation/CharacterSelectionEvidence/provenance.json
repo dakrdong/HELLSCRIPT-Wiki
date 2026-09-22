@@ -1,0 +1,33 @@
+{
+  "created": "2026-09-20",
+  "surface": "Codex built-in image_gen",
+  "exactModelVersionVerified": false,
+  "requestedModelPolicy": "gpt-image-2; callable built-in interface has no model selector",
+  "status": "development asset; no release art approval recorded",
+  "reference": "Assets/HELLSCRIPT/Art/Characters/Barbarian/Barbarian_Reference_v1.png",
+  "promptSet": "Docs/Implementation/Character_Selection_Prompts.txt",
+  "nativeTransparency": true,
+  "pixelEdits": false,
+  "backgroundRemoval": false,
+  "generatedSources": {
+    "Warrior": "exec-fb6fa383-be24-4276-93c7-ed86475f795f.png",
+    "Mage": "exec-d933e7e0-c0b3-4aaf-9a8b-bd5920cde8af.png",
+    "Ranger": "exec-aff73529-bb2f-4115-a11c-5a108ae52063.png"
+  },
+  "layout": "Warrior/Mage 2 columns x 3 rows; Ranger generated 3 columns x 2 rows. Explicit measured UV rectangles preserve all six complete figures, including weapon tips crossing the nominal square grid. No image resampling or background processing.",
+  "validation": "See art-qc.json for native alpha, file hashes, full silhouette bounds and scale variance.",
+  "c2paCreationSoftwareAgent": {
+    "name": "ChatGPT",
+    "version": "gpt-image"
+  },
+  "backdrop": {
+    "asset": "Assets/HELLSCRIPT/Resources/Art/CharacterSelection/SelectionCourtyard.png",
+    "source": "exec-0df44cf4-7f53-49df-bf3d-8905b77c06f7.png",
+    "size": [
+      1672,
+      941
+    ],
+    "sha256": "7846593f5dd525eb2e611fb3853df4fc25d078a66e12c8d233064005ad9708ea",
+    "originalPixelsUnchanged": true
+  }
+}

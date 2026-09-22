@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-20",
+  "platform": "macOS native player",
+  "method": "CUA native window screenshots and pointer/keyboard input; separate from scripted uGUI smoke",
+  "checks": [
+    "Mouse click opened login dialog after focusing the player",
+    "Typed fictional account name and masked password",
+    "Tab moved between account and password",
+    "Return completed mock login and changed the account label",
+    "Mouse selected Black Belfry and the home server label changed",
+    "Restored Ashen Sanctuary and signed out",
+    "Player left open at the animated title with isolated preview saves"
+  ],
+  "physicalIPhoneTested": false,
+  "windowsPlayerTested": false,
+  "nativeBuild": {
+    "result": "succeeded",
+    "errors": 0,
+    "warnings": 39,
+    "job": "build-6238c78b5b"
+  },
+  "warningScope": "Existing project shader/import warnings; title shader has no compiler errors."
+}

@@ -8,7 +8,7 @@ namespace Hellscript
     {
         bool contentDockOpen;
         // Content shortcuts fold out beneath the settings gear on the play screens (plaza and battle).
-        // Character is still a placeholder until its screen exists; the rest open the real screens.
+        // Character opens the owned-equipment screen and remembers the play screen it came from.
         void AddContentDock(float top,float size)
         {
             const float gap=6;
@@ -22,7 +22,7 @@ namespace Hellscript
                 if(sprite!=null)b.targetGraphic=Emblem(b,sprite);
                 else{var label=b.GetComponentInChildren<Text>();label.fontSize=Mathf.RoundToInt(size*.3f);label.color=gold;}
             }
-            Add("캐릭터","menu-character",()=>ShowToast("준비 중인 콘텐츠입니다."));
+            Add("캐릭터","menu-character",ShowPlayInventory);
             Add("사냥 칙령","menu-hunt-edict",ShowEdictEditor);
             Add("룬 보드","menu-rune-board",ShowRunes);
             Add("창고","menu-storage",ShowStorage);

@@ -10,11 +10,11 @@ The three layers in the [item quality specification](../Design/HELLSCRIPT_Item_Q
 
 The shared monster/boss drop owner, generated chest equipment and sweep rewards receive their actual rift stage. Shop purchases and both crafting services do not roll awakening. Every new item-generation route caps item level at 60. Existing saved items above level 60 retain their level and values.
 
-The main stat applies enhancement, awakening and masterwork multipliers once each. This covers weapon damage, armor-piece armor, necklace HP and ring resistance. Fixed secondary resistance and weapon attack speed do not receive the quality multiplier. Greater affixes and masterwork affix boosts are derived once from the unchanged stored raw roll.
+From the 2026-09-22 blacksmith revision, awakening and masterwork multiply the unenhanced base, followed by the fixed enhancement bonus. See the [blacksmith specification](Blacksmith_Unity_Integration.en.md) for the current per-slot abilities and increments. Fixed secondary resistance and weapon attack speed do not receive the quality multiplier. Greater affixes and masterwork affix boosts are derived once from the unchanged stored raw roll.
 
 ## Blacksmith and equipment UI
 
-Only enhancement +5 equipment can advance one masterwork level per transaction. The cap is `min(200, 12 + 3 × max(0, H − 30))`, where `H` is the account's highest actual clear. Every level multiplies the main stat by 1.02. Levels 4, 8 and 12 each choose one random affix for a 25% boost. Repeated selections add as `1 + 0.25 × hits`. Levels 13 and above grant no additional affix boosts.
+Only equipment at enhancement +5 or higher can advance one masterwork level per transaction. The cap is `min(200, 12 + 3 × max(0, H − 30))`, where `H` is the account's highest actual clear. Every level multiplies the unenhanced base stat by 1.02. Levels 4, 8 and 12 each choose one random affix for a 25% boost. Repeated selections add as `1 + 0.25 × hits`. Levels 13 and above grant no additional affix boosts.
 
 The next level `k` costs `20 + 2k` materials and `200k` gold. Level 12 costs 396 materials and 15,600 gold cumulatively; level 200 costs 44,200 materials and 4,020,000 gold. Service transactions check ownership, an active rift, stale equipment quotes and durable save success. Retrying a failed masterwork save uses the same random choice for that request.
 
@@ -48,7 +48,7 @@ All 15 Korean/English screenshots were directly reviewed, including portrait and
 
 Among 100,000 actual generated stage-30 items, 21,944 awakened, 8,809 affix lines were greater, and 7,550 awakened items had at least one greater affix. Separate fixed-seed samples of 100,000 draws at stages 20, 25, 30, 40, 44 and 100 were also checked against the designed probabilities. These are distribution checks, not promises for individual loot rolls.
 
-An actual damage calculation isolating specification section 5.2 produced 153.5032 baseline damage and 278.3303 quality damage, a **1.813189 ratio**. The fixture used item level 30, enhancement +5, awakening, masterwork 12 and a tier-6 weapon diamond, explicitly matching the stated 60% existing additive-damage baseline. This is not an average damage increase across builds. Greater affixes and random masterwork affix boosts are checked separately.
+The following is historical evidence from before the 2026-09-22 blacksmith revision. Current quality multipliers exclude fixed enhancement and slot attack, so this ratio must not be reused unchanged. An earlier actual damage calculation isolating specification section 5.2 produced 153.5032 baseline damage and 278.3303 quality damage, a **1.813189 ratio**. The fixture used item level 30, enhancement +5, awakening, masterwork 12 and a tier-6 weapon diamond, explicitly matching the stated 60% existing additive-damage baseline. This is not an average damage increase across builds. Greater affixes and random masterwork affix boosts are checked separately.
 
 The **1,800-run comparison completed**: five stages (30/45/60/75/90), six builds, 30 seeds and paired quality/baseline profiles. All runs terminated. Seed, layout and initial-encounter matching passed for all 900 pairs, and all 60 equipment sample files matched their hashes. The [final analysis](../../Artifacts/Validation/ItemQuality/Curve1-analysis.json) separates outcomes, clear-rate confidence intervals and mean times of successful runs.
 

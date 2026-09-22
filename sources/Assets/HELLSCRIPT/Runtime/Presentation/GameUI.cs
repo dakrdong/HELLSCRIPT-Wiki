@@ -58,7 +58,7 @@ namespace Hellscript
         {
             UpdateAspectMask();
             Rect s=UiSafeArea.Current;
-            if(Page!="runes"&&Page!="battle"&&Page!="plaza"&&Page!="title"&&Page!="recovery"&&globalHud?.Layout!=null)
+            if(Page!="runes"&&Page!="battle"&&Page!="plaza"&&Page!="title"&&Page!="characters"&&Page!="recovery"&&globalHud?.Layout!=null)
             {float inset=Mathf.Min(globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12,s.height*.42f);s.yMin+=inset;}
             float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;
@@ -94,7 +94,7 @@ namespace Hellscript
             if(root==null)return;
             bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
-            pageRepaint?.Invoke();
+            if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
             if(!panelOpen)return;
             ShowCommonPanel(false);SelectSettingsTab(tab);
             Canvas.ForceUpdateCanvases();
@@ -145,6 +145,8 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
+            CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();
+            if(PlayInventoryOpen&&page!="bag"&&page!="warehouse")ReleasePlayInventory();
             if(page!="battle")game.ExitIdle();
             CloseHudPanel();ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
             ApplyScaler(root.parent.GetComponent<CanvasScaler>(),battle||responsive);
@@ -217,7 +219,7 @@ namespace Hellscript
             ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
             BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);
             ContentButton(ContentUnlocks.Gem,"보석 장착·교체·합성",ShowGemMenu);
-            BigButton(content,"수수께끼 상인 · 제작",ShowShop);
+            BigButton(content,"장비 제작",ShowShop);
             ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowTown));
             Note(content,"개발용 로컬 플레이 · 계정 연동과 결제는 연결 전입니다.",17,54);
             FooterButton(0,2,"전투 기록",ShowRecords);FooterButton(1,2,"게임 안내",ShowHelp);

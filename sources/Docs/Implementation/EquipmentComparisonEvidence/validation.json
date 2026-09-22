@@ -1,0 +1,102 @@
+{
+  "date": "2026-09-22",
+  "ruleVersion": "equipment-comparison-v1",
+  "unity": "6000.6.0f1",
+  "platform": "macOS development player",
+  "sourceBase": "cee986a4529f8e9aa87f6884ff16b2b10ebd770f",
+  "editMode": {
+    "scope": [
+      "ItemComparisonTests",
+      "SharedEquipmentSelectionTests",
+      "NativeInventoryTests",
+      "EquipmentShopTests",
+      "TrainingEquipmentTests",
+      "LocalizationTests",
+      "StoredLocalizationTests"
+    ],
+    "passed": 157,
+    "failed": 0,
+    "skipped": 0,
+    "start": "2026-09-22 02:53:41Z",
+    "end": "2026-09-22 02:54:31Z"
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "runtime": {
+    "inventory": "PASS",
+    "shopAndRewards": "PASS",
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "inventoryResolutions": [
+      [
+        1600,
+        900
+      ],
+      [
+        810,
+        1440
+      ]
+    ],
+    "shopResolutions": [
+      [
+        1600,
+        900
+      ],
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "input": "Unity raycasts and pointer-event handlers",
+    "save": "separate fixture directory; live account untouched",
+    "comparisonAssertions": [
+      "equipped left / candidate right",
+      "same candidate text in inventory/storage/shop",
+      "right-ring replacement and unchanged account",
+      "bounded independent scrolling",
+      "reward comparison survives rotation"
+    ],
+    "selectionAssertions": [
+      "shop to inventory and inventory to shop",
+      "shared per-character settings persisted after disk reload",
+      "cancel discards draft",
+      "auto-select changes checkboxes only",
+      "protected items excluded",
+      "review and explicit confirmation before destruction"
+    ]
+  },
+  "limits": [
+    "Not physical-mobile validation.",
+    "Focused tests, not the full project suite.",
+    "Training adapter compiled and core tests passed; full training UI flow not exercised."
+  ],
+  "evidenceSha256": {
+    "auto-settings-portrait-en.png": "4165decf32023bc2fbccccd944630fce52ceaf9844b4b793a6b45734d8aec14f",
+    "comparison-landscape-ko.png": "46e746a0036e6868c8123f342345ed1d5ff71428362a3a69915c0de1fa2015ad",
+    "comparison-portrait-ko.png": "1d121e83d52225f362f44f861c697b1234656c8d7812d37a590eba0372c2738c",
+    "editmode.xml": "a626edc294f52ec1e8b8de560bfab56d76af4c2345c1deeb41d4017cd80d28f9",
+    "lost-properties-landscape-ko.png": "bfbc96dff9bd5127204c4158245338b9ccd72fab59c35178f1dec96aca6725b4",
+    "reward-comparison-portrait-en.png": "a384b68e828819125568ac7410cdb699c36149e187194065ed7f0cf06ae68ca4",
+    "right-ring-baseline-portrait-en.png": "2ff16db9f334bf7bdcd0eff7a0698002cadb2ab380b97b92f7f25842289fd2c2",
+    "runtime.txt": "f8bd2a0e42ed36316fc09c60706dda2b86e2ede60da5d70826189a8c13bc3feb",
+    "shop-landscape-ko.png": "65d3548aa7d98cfa13162fc7f05f15330d1360eb87c13dfe0ad3dc3bf4b54738",
+    "storage-portrait-en.png": "c09a9dacd5ec191e00942a44b6ce48f9e424ad592748fde3e0eaa94f324bc431"
+  },
+  "codeSha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/ItemComparison.cs": "26e08f37932805c482fe23e0d64e55be38d6f0470a4448991a1de54d13db37b8",
+    "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentComparisonView.cs": "4e69effe214e0d4773602d267ecd8246ffccd3eb49c89297a9337df5baf323f2",
+    "Assets/HELLSCRIPT/Tests/Editor/ItemComparisonTests.cs": "009bac5be88b3893dfa346f1b9d4a23a243d8754d1b82cccd3d17619865abc6b"
+  }
+}

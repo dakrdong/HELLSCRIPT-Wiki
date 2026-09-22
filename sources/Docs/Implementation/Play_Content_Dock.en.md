@@ -1,5 +1,8 @@
 # HELLSCRIPT Play-Screen Content Dock
 
+The follow-up on 2026-09-21 ports the HTML inventory design and paired weapon slots to Unity. See [Native inventory and paired weapon slots](Native_Inventory.en.md) for the current screen and behavior. The old-inventory hookup and captures below document the preceding stage.
+
+
 From September 20, 2026, the fourth shortcut uses the attached warehouse icon. The town uses a 44-unit header, a 20-unit gear and a dock starting at 48 units from the top. Earlier measurements below are historical; see [Town HUD improvements](Town_Hud_Responsive.en.md).
 
 Date: 2026-09-15
@@ -11,11 +14,24 @@ A folding group of content shortcuts sits beneath the settings gear in the upper
 
 | Order | Button | Connection |
 |---|---|---|
-| 1 | Character (bag and equipped items) | No screen yet. Pressing shows only the notice `This content is still in preparation.` |
+| 1 | Character (bag and equipped items) | Since 2026-09-21, `ShowPlayInventory` opens the existing in-game inventory. Closing returns to the originating play screen. |
 | 2 | Hunt Edict (skill management and edict editing) | Opens the existing Hunt Edict entry point `ShowEdictEditor`. |
 | 3 | Rune Board (rune block placement and management) | Opens the existing Rune Growth screen `ShowRunes` since 2026-09-17. Before that it showed only the notice. |
 
-The Character and Rune Board screens were out of scope for this work: only the buttons and their art were present. The Rune Board was wired to its existing screen on 2026-09-17; Character is still a placeholder.
+The Character and Rune Board screens were out of scope for this work: only the buttons and their art were present. The Rune Board was wired to its existing screen on 2026-09-17, and Character on 2026-09-21.
+
+## Character inventory shortcut — 2026-09-21
+
+The first circular shortcut beneath Settings opens the existing inventory using the actual account and owned equipment. `GameUI.ContentDock` calls `GameUI.PlayInventory`, which reuses `ShowBag`. This hookup does not use the HTML prototype data and does not port its slot layout or weapon system to Unity.
+
+In town, input and navigation targets are cleared while the player position and open dock are retained. Close in the inventory footer returns to that same town. In combat, `CommonPanelOpen` suspends the gameplay and repeat clocks without changing the saved pause flag, portal flag or active run object. A previously paused run stays paused; a running one continues after closing.
+
+Leaving for another page releases the inventory entry state. Equipment, comparison, protection, dismantling and storage continue to use the existing transaction services. Older screenshots and validation counts remain historical evidence.
+
+Unity 6000.6.0f1 passed all 81 focused Edit Mode tests covering inventory layout, transactions, localization and a destroyed town joystick reference. The macOS development build completed without errors. Player acceptance covered town entry, language changes within the bag, position and dock retention, battle-clock suspension with the original pause flag retained, existing Hunt Edict/Rune Board routes and landscape/portrait dock layouts. See the [test results](PlayInventoryEvidence/editmode.xml) and [runtime record](PlayInventoryEvidence/runtime.txt). Player acceptance used UI callbacks and raycasts; it is not physical-mobile input verification.
+
+![Existing inventory opened from town](PlayInventoryEvidence/plaza-inventory.png)
+![Existing inventory opened during combat](PlayInventoryEvidence/battle-inventory.png)
 
 ## Screens
 

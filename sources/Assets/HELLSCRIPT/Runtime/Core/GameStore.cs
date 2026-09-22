@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=6;
+        public const int MaximumSchemaVersion=8;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -21,8 +21,9 @@ namespace Hellscript
         long? pendingLocalIdleThrough;
         bool settlingLocalIdle;
         readonly string path;
-        public GameStore(string directory,GameCatalog catalog=null)
+        public GameStore(string directory,GameCatalog catalog=null,Func<long> forgeClock=null)
         {
+            if(forgeClock!=null)ForgeClock=forgeClock;
             Directory.CreateDirectory(directory);path=Path.Combine(directory,"hellscript-local-v1.json");
             string source=path;
             Data=Read(path);
@@ -35,7 +36,9 @@ namespace Hellscript
                 Migrate(Data);
             }
             ContentUnlocks.Normalize(Data);
+            EquipmentShop.Normalize(Data);
             SettleLocalIdle();
+            BlacksmithCatalog.Normalize(Data);SettleForgeJobs();
         }
         AccountSave Read(string file)
         {
@@ -92,7 +95,9 @@ namespace Hellscript
         {
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             RuneGrowth.Normalize(a);
+            BlacksmithCatalog.Normalize(a);
             Storage.Normalize(a);
+            a.salvage??=new SalvagePreferences();a.salvage.Normalize();
             a.speed=CombatSpeedAccess.Resolve(a.speed);
             ItemAcquisition.NormalizeCounter(a);
             FirstPlayGuide.Normalize(a);
@@ -114,6 +119,7 @@ namespace Hellscript
                 HuntEdictStorage.Normalize(h);
             }
             RepeatHunt.Normalize(a);
+            EquipmentShop.Normalize(a);
         }
         static void NormalizePresetSlots(HeroSave hero)
         {
@@ -177,13 +183,15 @@ namespace Hellscript
             var items=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).Concat(RecordedItems(a));
             foreach(var run in new[]{a.suspendedRun,a.repeatHunt?.pendingResult})
                 if(run!=null)items=items.Concat(run.drops.Select(d=>d.item)).Concat(run.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
-            return items;
+            return items.Concat(EquipmentShop.PersistedItems(a));
         }
         static void ValidateItems(AccountSave a)
         {
+            EquipmentShop.Validate(a);
+            BlacksmithCatalog.Validate(a);
             foreach(var h in a.heroes)h.potions.Validate();
             if(a.gold<0||a.materials<0||a.cores.Any(c=>c<0))throw new InvalidDataException("재화 값이 음수입니다.");
-            if(a.heroes.Any(h=>h.inventory.Where(i=>i.equipped).GroupBy(i=>i.slot).Any(g=>g.Count()>1)))throw new InvalidDataException("같은 부위에 여러 장비가 장착되어 있습니다.");
+            if(a.heroes.Any(h=>!EquipmentSlots.Valid(h.inventory.Where(i=>i.equipped),h.heroClass)))throw new InvalidDataException("같은 부위에 여러 장비가 장착되어 있습니다.");
             var owned=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).ToArray();
             if(owned.Select(i=>i.id).Distinct().Count()!=owned.Length)throw new InvalidDataException("중복 장비 인스턴스 ID");
             Storage.Validate(a);
@@ -262,10 +270,12 @@ namespace Hellscript
                 var target=Data.heroes[i];var source=staged.heroes[i];
                 target.legacyPassiveSlots=source.legacyPassiveSlots;target.level=source.level;target.xp=source.xp;target.highestClear=source.highestClear;target.capacity=source.capacity;
                 target.lastRiftFingerprint=source.lastRiftFingerprint;target.lastRiftBoss=source.lastRiftBoss;
-                target.potions=source.potions;
+                target.potions=source.potions;target.guide=source.guide;target.slotProgress=source.slotProgress;
+                target.equipmentShop=source.equipmentShop;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
-            Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
+            Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;
+            Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;

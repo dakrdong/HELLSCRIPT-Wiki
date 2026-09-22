@@ -25,8 +25,15 @@ namespace Hellscript
             {
                 if(s.building.width>0)BuildTownHouse(layout,s);
                 if(s.id==TownStation.Training)BuildTrainingYard(layout,s);
-                if(s.id==TownStation.RiftKeeper){BuildTownPortal(layout,s.position);continue;}
-                var attendant=CreateTownAttendant(s);attendant.transform.SetParent(world.transform,false);attendant.transform.position=TownPoint(s.position);attendant.transform.rotation=TownRotation;
+                if(s.id==TownStation.RiftKeeper)BuildTownPortal(layout,s.position);
+                var attendant=CreateTownAttendant(s);attendant.transform.SetParent(world.transform,false);attendant.transform.position=TownPoint(s.NpcPosition);attendant.transform.rotation=TownRotation;
+            }
+            for(int i=0;i<TownLayout.Residents.Length;i++)
+            {
+                var resident=TownLayout.Residents[i];
+                var cloth=i==0?TownMat("Resident blue",.2f,.29f,.4f):i==1?TownMat("Resident burgundy",.4f,.19f,.23f):TownMat("Resident green",.24f,.36f,.29f);
+                var figure=CreateTownFigure("Resident "+resident.id,cloth);
+                figure.transform.SetParent(world.transform,false);figure.transform.position=TownPoint(resident.position);figure.transform.rotation=TownRotation*Quaternion.Euler(0,i==0?-25:i==1?20:-15,0);
             }
             foreach(var s in TownLayout.Stations)
             {
@@ -52,12 +59,17 @@ namespace Hellscript
             station=default;if(world==null||viewCamera==null)return false;var projected=new List<(TownStation,Vector2)>();
             foreach(var s in TownLayout.Stations)
             {
-                var p=viewCamera.WorldToViewportPoint(TownPoint(s.position,1.6f));if(p.z<=0||p.x<0||p.x>1||p.y<0||p.y>1)continue;
-                var pixel=viewCamera.WorldToScreenPoint(TownPoint(s.position,1.6f));projected.Add((s.id,new Vector2(pixel.x,pixel.y)));
+                void AddTarget(Vector2 point)
+                {
+                    var p=viewCamera.WorldToViewportPoint(TownPoint(point,1.6f));if(p.z<=0||p.x<0||p.x>1||p.y<0||p.y>1)return;
+                    var pixel=viewCamera.WorldToScreenPoint(TownPoint(point,1.6f));projected.Add((s.id,new Vector2(pixel.x,pixel.y)));
+                }
+                AddTarget(s.NpcPosition);if(s.id==TownStation.RiftKeeper)AddTarget(s.position);
             }
             return TownPick.Nearest(projected,screen,Mathf.Max(32,Screen.height*.045f),out station);
         }
-        public Vector3 TownStationScreen(TownStation station)=>viewCamera.WorldToScreenPoint(TownPoint(TownLayout.Station(station).position,2.9f));
+        public Vector3 TownNpcScreen(Vector2 position)=>viewCamera.WorldToScreenPoint(TownPoint(position,2.9f));
+        public Vector3 TownStationScreen(TownStation station)=>TownNpcScreen(TownLayout.Station(station).NpcPosition);
         public void PresentTown(TownWalk walk,float dt)
         {
             if(world==null||hero==null)return;elapsed+=dt;hero.transform.position=TownPoint(walk.Position);
@@ -142,13 +154,13 @@ namespace Hellscript
             for(int n=0;n<110;n++)
             {
                 float x=R(-55,55),z=R(-35,35);if(Mathf.Abs(z)<5||Mathf.Abs(x)<4)continue;
-                if(TownLayout.Stations.Any(s=>Vector2.Distance(s.position,new Vector2(x,z))<5||s.building.Contains(new Vector2(x,z))))continue;
+                if(TownLayout.Stations.Any(s=>Vector2.Distance(s.position,new Vector2(x,z))<5||s.building.Contains(new Vector2(x,z)))||TownLayout.Residents.Any(r=>Vector2.Distance(r.position,new Vector2(x,z))<2))continue;
                 Shape("Mossy stone",PrimitiveType.Sphere,layout,new Vector3(x,-.05f,z),new Vector3(R(.4f,1.3f),R(.12f,.6f),R(.4f,1.2f)),n%3==0?stone:moss);
             }
             for(int n=0;n<180;n++)
             {
                 float x=R(-54,54),z=R(-34,34);var point=new Vector2(x,z);
-                if(Mathf.Abs(z)<5||Mathf.Abs(x)<5||TownLayout.Stations.Any(s=>Vector2.Distance(s.position,point)<5||s.building.Contains(point)))continue;
+                if(Mathf.Abs(z)<5||Mathf.Abs(x)<5||TownLayout.Stations.Any(s=>Vector2.Distance(s.position,point)<5||s.building.Contains(point))||TownLayout.Residents.Any(r=>Vector2.Distance(r.position,point)<2))continue;
                 var bush=MeshPart(layout,"Low forest scrub",pine,new Vector3(x,0,z),n%2==0?moss:needlesLight);
                 bush.transform.localScale=new Vector3(R(.6f,1.5f),R(.4f,1.2f),R(.6f,1.5f));bush.transform.localRotation=Quaternion.Euler(0,R(0,360),0);
             }
@@ -247,7 +259,7 @@ namespace Hellscript
             }
             else
             {
-                Material cloth=s.id==TownStation.Merchant?TownMat("Merchant canvas",.42f,.23f,.15f):s.id==TownStation.GemMerchant?TownMat("Jewel canvas",.2f,.35f,.33f):TownMat("Rune canvas",.3f,.23f,.4f);
+                Material cloth=s.id==TownStation.Merchant?TownMat("Merchant canvas",.42f,.23f,.15f):s.id==TownStation.Gambler?TownMat("Gambler canvas",.27f,.14f,.32f):s.id==TownStation.GemMerchant?TownMat("Jewel canvas",.2f,.35f,.33f):TownMat("Rune canvas",.3f,.23f,.4f);
                 var canopy=Block(p,"Shop awning",new Vector3(-w*.23f,3.5f,z-.5f),new Vector3(w*.43f,.13f,2.5f),cloth);canopy.transform.localRotation=Quaternion.Euler(-9,0,0);
                 foreach(float x in new[]{-w*.45f,-w*.02f})Block(p,"Awning pole",new Vector3(x,1.7f,z-1.6f),new Vector3(.12f,3.4f,.12f),wood);
                 Block(p,"Display counter",new Vector3(-w*.23f,.9f,z-.5f),new Vector3(w*.4f,1.5f,1.4f),wood);
@@ -255,16 +267,21 @@ namespace Hellscript
                 {
                     var pos=new Vector3(-w*.4f+n*.8f,1.9f,z-.6f);
                     if(s.id==TownStation.GemMerchant){var gem=MeshPart(p,"Gem display",ConeMesh(.25f,.55f,5),pos,n%2==0?blue:purple);gem.transform.localRotation=Quaternion.Euler(12,n*47,15);}
-                    else if(s.id==TownStation.RuneMerchant){var tile=Shape("Rune block",PrimitiveType.Cylinder,p,pos,new Vector3(.5f,.13f,.5f),purple);Block(p,"Rune engraving",pos+Vector3.up*.15f,new Vector3(.22f,.02f,.055f),trim);}
+                    else if((s.id==TownStation.RuneMerchant||s.id==TownStation.RuneMaster)){var tile=Shape("Rune block",PrimitiveType.Cylinder,p,pos,new Vector3(.5f,.13f,.5f),purple);Block(p,"Rune engraving",pos+Vector3.up*.15f,new Vector3(.22f,.02f,.055f),trim);}
+                    else if(s.id==TownStation.Gambler){Block(p,"Sealed parcel",pos,new Vector3(.55f,.55f,.7f),cloth);Block(p,"Parcel seal",pos+Vector3.up*.29f,new Vector3(.2f,.02f,.3f),trim);}
                     else {Block(p,"Weapon grip",pos,new Vector3(.13f,.2f,.6f),iron);Block(p,"Sword blade",pos+Vector3.forward*.6f,new Vector3(.23f,.1f,.95f),stone);}
                 }
             }
         }
         GameObject CreateTownAttendant(TownStationDefinition s)
         {
-            var npc=new GameObject("NPC "+s.id);var p=npc.transform;
+            var cloth=s.id==TownStation.Blacksmith?TownMat("Smith apron",.32f,.19f,.1f):s.id==TownStation.Gambler?TownMat("Gambler coat",.29f,.15f,.33f):s.id==TownStation.GemMerchant?TownMat("Jewel coat",.17f,.37f,.34f):(s.id==TownStation.RuneMerchant||s.id==TownStation.RuneMaster)?TownMat("Rune robe",.35f,.22f,.42f):TownMat("Settler coat",.34f,.36f,.24f);
+            return CreateTownFigure("NPC "+s.id,cloth,s.id);
+        }
+        GameObject CreateTownFigure(string name,Material cloth,TownStation? station=null)
+        {
+            var npc=new GameObject(name);var p=npc.transform;
             var skin=TownMat("Skin",.59f,.43f,.32f);var boots=TownMat("Boot leather",.1f,.09f,.07f);
-            var cloth=s.id==TownStation.Blacksmith?TownMat("Smith apron",.32f,.19f,.1f):s.id==TownStation.GemMerchant?TownMat("Jewel coat",.17f,.37f,.34f):s.id==TownStation.RuneMerchant?TownMat("Rune robe",.35f,.22f,.42f):TownMat("Settler coat",.34f,.36f,.24f);
             foreach(float x in new[]{-.23f,.23f})
             {
                 Shape("Boot",PrimitiveType.Capsule,p,new Vector3(x,.48f,0),new Vector3(.3f,.5f,.35f),boots);
@@ -276,10 +293,10 @@ namespace Hellscript
             Shape("Head",PrimitiveType.Sphere,p,new Vector3(0,2.23f,0),new Vector3(.54f,.65f,.54f),skin);
             Shape("Hair",PrimitiveType.Sphere,p,new Vector3(0,2.47f,.08f),new Vector3(.57f,.25f,.51f),boots);
             foreach(float x in new[]{-.12f,.12f})Shape("Eye",PrimitiveType.Sphere,p,new Vector3(x,2.28f,-.25f),Vector3.one*.055f,boots);
-            if(s.id==TownStation.Blacksmith){Block(p,"Hammer shaft",new Vector3(.57f,1.12f,-.35f),new Vector3(.1f,.65f,.1f),boots);Block(p,"Hammer head",new Vector3(.57f,1.46f,-.35f),new Vector3(.5f,.2f,.22f),stone);}
-            else if(s.id==TownStation.RuneMerchant){Block(p,"Rune staff",new Vector3(.65f,1.45f,-.1f),new Vector3(.1f,2.9f,.1f),trim);Shape("Staff crystal",PrimitiveType.Sphere,p,new Vector3(.65f,3,-.1f),Vector3.one*.3f,purple);}
-            else if(s.id==TownStation.Training){Block(p,"Training blade",new Vector3(.68f,1.5f,-.1f),new Vector3(.17f,2,.16f),stone);Block(p,"Crossguard",new Vector3(.68f,.85f,-.1f),new Vector3(.7f,.12f,.2f),trim);}
-            else {Block(p,"Ledger",new Vector3(.55f,1.18f,-.28f),new Vector3(.38f,.45f,.12f),trim);}
+            if(station==TownStation.Blacksmith){Block(p,"Hammer shaft",new Vector3(.57f,1.12f,-.35f),new Vector3(.1f,.65f,.1f),boots);Block(p,"Hammer head",new Vector3(.57f,1.46f,-.35f),new Vector3(.5f,.2f,.22f),stone);}
+            else if(station==TownStation.RuneMerchant||station==TownStation.RuneMaster||station==TownStation.RiftKeeper){Block(p,"Rune staff",new Vector3(.65f,1.45f,-.1f),new Vector3(.1f,2.9f,.1f),trim);Shape("Staff crystal",PrimitiveType.Sphere,p,new Vector3(.65f,3,-.1f),Vector3.one*.3f,purple);}
+            else if(station==TownStation.Training){Block(p,"Training blade",new Vector3(.68f,1.5f,-.1f),new Vector3(.17f,2,.16f),stone);Block(p,"Crossguard",new Vector3(.68f,.85f,-.1f),new Vector3(.7f,.12f,.2f),trim);}
+            else if(station.HasValue){Block(p,"Ledger",new Vector3(.55f,1.18f,-.28f),new Vector3(.38f,.45f,.12f),trim);}
             BatchTownGeometry(p);return npc;
         }
         void BuildTrainingYard(Transform p,TownStationDefinition s)

@@ -1,0 +1,2652 @@
+{
+  "revision": 5,
+  "date": "2026-09-21",
+  "scope": "Interactive HTML comparison mockup; Codex in-app browser on macOS. Not Unity runtime, full regression or physical-device testing.",
+  "passed": 36,
+  "total": 36,
+  "checks": [
+    {
+      "name": "Initial comparison area is empty",
+      "pass": true,
+      "evidence": {
+        "bagCount": "14 / 50",
+        "bulkRows": 0,
+        "deltas": [],
+        "detail": {
+          "bottom": 897,
+          "h": 430,
+          "right": 439,
+          "w": 438,
+          "x": 1,
+          "y": 467
+        },
+        "detailScroll": [
+          430,
+          430
+        ],
+        "detailText": "",
+        "dockHidden": true,
+        "empty": "true",
+        "gold": "28,460",
+        "gridColumns": "repeat(8, minmax(0px, 1fr))",
+        "horizontalOverflow": [
+          440,
+          440,
+          438,
+          438
+        ],
+        "inventoryHidden": true,
+        "lang": "ko",
+        "layout": "portrait",
+        "lost": [],
+        "popups": [],
+        "rows": [
+          {
+            "bottom": 218,
+            "h": 40,
+            "id": "sword16",
+            "right": 422,
+            "visible": 1,
+            "w": 415,
+            "x": 7,
+            "y": 178
+          },
+          {
+            "bottom": 262,
+            "h": 40,
+            "id": "axe16",
+            "right": 422,
+            "visible": 1,
+            "w": 415,
+            "x": 7,
+            "y": 222
+          },
+          {
+            "bottom": 306,
+            "h": 40,
+            "id": "chest16",
+            "right": 422,
+            "visible": 1,
+            "w": 415,
+            "x": 7,
+            "y": 266
+          },
+          {
+            "bottom": 350,
+            "h": 40,
+            "id": "gloves15",
+            "right": 422,
+            "visible": 1,
+            "w": 415,
+            "x": 7,
+            "y": 310
+          },
+          {
+            "bottom": 394,
+            "h": 40,
+            "id": "boots15",
+            "right": 422,
+            "visible": 1,
+            "w": 415,
+            "x": 7,
+            "y": 354
+          },
+          {
+            "bottom": 438,
+            "h": 40,
+            "id": "amulet15",
+            "right": 422,
+            "visible": 1,
+            "w": 415,
+            "x": 7,
+            "y": 398
+          },
+          {
+            "bottom": 482,
+            "h": 40,
+            "id": "helm16",
+            "right": 422,
+            "visible": 0.475,
+            "w": 415,
+            "x": 7,
+            "y": 442
+          },
+          {
+            "bottom": 526,
+            "h": 40,
+            "id": "ring15",
+            "right": 422,
+            "visible": 0,
+            "w": 415,
+            "x": 7,
+            "y": 486
+          }
+        ],
+        "size": [
+          440,
+          956
+        ],
+        "stock": {
+          "bottom": 461,
+          "h": 287,
+          "right": 439,
+          "w": 438,
+          "x": 1,
+          "y": 174
+        },
+        "stockCount": "8 / 8"
+      }
+    },
+    {
+      "name": "Portrait shows six complete rows and half of seventh",
+      "pass": true,
+      "evidence": [
+        {
+          "bottom": 218,
+          "h": 40,
+          "id": "sword16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 178
+        },
+        {
+          "bottom": 262,
+          "h": 40,
+          "id": "axe16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 222
+        },
+        {
+          "bottom": 306,
+          "h": 40,
+          "id": "chest16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 266
+        },
+        {
+          "bottom": 350,
+          "h": 40,
+          "id": "gloves15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 310
+        },
+        {
+          "bottom": 394,
+          "h": 40,
+          "id": "boots15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 354
+        },
+        {
+          "bottom": 438,
+          "h": 40,
+          "id": "amulet15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 398
+        },
+        {
+          "bottom": 482,
+          "h": 40,
+          "id": "helm16",
+          "right": 422,
+          "visible": 0.475,
+          "w": 415,
+          "x": 7,
+          "y": 442
+        },
+        {
+          "bottom": 526,
+          "h": 40,
+          "id": "ring15",
+          "right": 422,
+          "visible": 0,
+          "w": 415,
+          "x": 7,
+          "y": 486
+        }
+      ]
+    },
+    {
+      "name": "Click opens selected and equipped item popups",
+      "pass": true,
+      "evidence": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 832.859375,
+            "h": 359.859375,
+            "right": 217,
+            "w": 210,
+            "x": 7,
+            "y": 473
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 768.484375,
+            "h": 295.484375,
+            "right": 433,
+            "w": 210,
+            "x": 223,
+            "y": 473
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ]
+    },
+    {
+      "name": "Every displayed base stat and affix has a parenthetical delta",
+      "pass": true,
+      "evidence": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Positive negative new and unchanged values compare correctly",
+      "pass": true,
+      "evidence": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "name": "Lost properties exclude reduced properties",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ]
+    },
+    {
+      "name": "Clicking the same offer clears comparison",
+      "pass": true,
+      "evidence": "true"
+    },
+    {
+      "name": "Popup close returns to blank area",
+      "pass": true,
+      "evidence": "true"
+    },
+    {
+      "name": "Escape closes comparison",
+      "pass": true,
+      "evidence": "true"
+    },
+    {
+      "name": "Filtering the selected item out clears comparison",
+      "pass": true,
+      "evidence": [
+        "chest16",
+        "gloves15",
+        "boots15",
+        "helm16"
+      ]
+    },
+    {
+      "name": "Unchanged affix is neutral zero",
+      "pass": true,
+      "evidence": [
+        {
+          "group": "base",
+          "key": "defense",
+          "text": "(0)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(0)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+2.4%)",
+          "tone": "hs-delta hs-good",
+          "value": 2.4
+        }
+      ]
+    },
+    {
+      "name": "English portrait keeps comparison within viewport",
+      "pass": true,
+      "evidence": [
+        440,
+        440,
+        438,
+        438
+      ]
+    },
+    {
+      "name": "Landscape has offers left and comparison right",
+      "pass": true,
+      "evidence": {
+        "bagCount": "14 / 50",
+        "bulkRows": 0,
+        "deltas": [
+          {
+            "group": "base",
+            "key": "power",
+            "text": "(+1.6)",
+            "tone": "hs-delta hs-good",
+            "value": 1.6
+          },
+          {
+            "group": "base",
+            "key": "speed",
+            "text": "(0 attacks/s)",
+            "tone": "hs-delta ",
+            "value": 0
+          },
+          {
+            "group": "affix",
+            "key": "strength",
+            "text": "(+1.9)",
+            "tone": "hs-delta hs-good",
+            "value": 1.9
+          },
+          {
+            "group": "affix",
+            "key": "physical",
+            "text": "(−0.7%)",
+            "tone": "hs-delta hs-bad",
+            "value": -0.7
+          },
+          {
+            "group": "affix",
+            "key": "critical",
+            "text": "(+3%)",
+            "tone": "hs-delta hs-good",
+            "value": 3
+          }
+        ],
+        "detail": {
+          "bottom": 394,
+          "h": 335,
+          "right": 893,
+          "w": 461.453125,
+          "x": 431.546875,
+          "y": 59
+        },
+        "detailScroll": [
+          291,
+          372
+        ],
+        "detailText": "Vendor item×\n      Strong Steel GreatswordRare · Main weaponItem level 1616\n      Attack 44 (+1.6)Attack speed 1 attacks/s (0 attacks/s)\n      Strength +15.9 (+1.9)Physical damage +5.8% (−0.7%)Critical chance +3% (+3%)\n      Properties lost when equippedMovement speed 3%\n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,280Purchase price10,240\n      \n      Equipped\n      Steel GreatswordRare · Main weaponItem level 1515\n      Attack 42.4Attack speed 1 attacks/s\n      Strength +14Physical damage +6.5%Movement speed +3%\n      \n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,200",
+        "dockHidden": false,
+        "empty": "false",
+        "gold": "28,460",
+        "gridColumns": "repeat(8, minmax(0px, 1fr))",
+        "horizontalOverflow": [
+          956,
+          956,
+          450,
+          450
+        ],
+        "inventoryHidden": true,
+        "lang": "en",
+        "layout": "wide",
+        "lost": [
+          {
+            "key": "move",
+            "text": "Movement speed 3%"
+          }
+        ],
+        "popups": [
+          {
+            "equipped": "false",
+            "id": "sword16",
+            "rect": {
+              "bottom": 424.859375,
+              "h": 359.859375,
+              "right": 653.765625,
+              "w": 216.21875,
+              "x": 437.546875,
+              "y": 65
+            },
+            "text": "Vendor item\n×\nStrong Steel Greatsword\nRare · Main weapon\nItem level 16\n16\nAttack 44 (+1.6)\nAttack speed 1 attacks/s (0 attacks/s)\nStrength +15.9 (+1.9)\nPhysical damage +5.8% (−0.7%)\nCritical chance +3% (+3%)\nProperties lost when equipped\nMovement speed 3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,280\nPurchase price\n10,240"
+          },
+          {
+            "equipped": "true",
+            "id": "equipped-0",
+            "rect": {
+              "bottom": 360.484375,
+              "h": 295.484375,
+              "right": 876,
+              "w": 216.234375,
+              "x": 659.765625,
+              "y": 65
+            },
+            "text": "Equipped\nSteel Greatsword\nRare · Main weapon\nItem level 15\n15\nAttack 42.4\nAttack speed 1 attacks/s\nStrength +14\nPhysical damage +6.5%\nMovement speed +3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,200"
+          }
+        ],
+        "rows": [
+          {
+            "bottom": 156,
+            "h": 40,
+            "id": "sword16",
+            "right": 408.546875,
+            "visible": 1,
+            "w": 339.546875,
+            "x": 69,
+            "y": 116
+          },
+          {
+            "bottom": 200,
+            "h": 40,
+            "id": "axe16",
+            "right": 408.546875,
+            "visible": 1,
+            "w": 339.546875,
+            "x": 69,
+            "y": 160
+          },
+          {
+            "bottom": 244,
+            "h": 40,
+            "id": "chest16",
+            "right": 408.546875,
+            "visible": 1,
+            "w": 339.546875,
+            "x": 69,
+            "y": 204
+          },
+          {
+            "bottom": 288,
+            "h": 40,
+            "id": "gloves15",
+            "right": 408.546875,
+            "visible": 1,
+            "w": 339.546875,
+            "x": 69,
+            "y": 248
+          },
+          {
+            "bottom": 332,
+            "h": 40,
+            "id": "boots15",
+            "right": 408.546875,
+            "visible": 1,
+            "w": 339.546875,
+            "x": 69,
+            "y": 292
+          },
+          {
+            "bottom": 376,
+            "h": 40,
+            "id": "amulet15",
+            "right": 408.546875,
+            "visible": 1,
+            "w": 339.546875,
+            "x": 69,
+            "y": 336
+          },
+          {
+            "bottom": 420,
+            "h": 40,
+            "id": "helm16",
+            "right": 408.546875,
+            "visible": 0.35,
+            "w": 339.546875,
+            "x": 69,
+            "y": 380
+          },
+          {
+            "bottom": 464,
+            "h": 40,
+            "id": "ring15",
+            "right": 408.546875,
+            "visible": 0,
+            "w": 339.546875,
+            "x": 69,
+            "y": 424
+          }
+        ],
+        "size": [
+          956,
+          440
+        ],
+        "stock": {
+          "bottom": 394,
+          "h": 282,
+          "right": 425.546875,
+          "w": 362.546875,
+          "x": 63,
+          "y": 112
+        },
+        "stockCount": "8 / 8"
+      }
+    },
+    {
+      "name": "Landscape English stays within its pane with interior scrolling",
+      "pass": true,
+      "evidence": [
+        956,
+        956,
+        450,
+        450
+      ]
+    },
+    {
+      "name": "PC 1600x900 list and popups remain side by side",
+      "pass": true,
+      "evidence": {
+        "size": [
+          1600,
+          900
+        ],
+        "stock": {
+          "bottom": 873,
+          "h": 745,
+          "right": 561,
+          "w": 560,
+          "x": 1,
+          "y": 128
+        },
+        "detail": {
+          "bottom": 873,
+          "h": 806,
+          "right": 1599,
+          "w": 1030,
+          "x": 569,
+          "y": 67
+        }
+      }
+    },
+    {
+      "name": "PC 1920x1080 English shows complete comparison",
+      "pass": true,
+      "evidence": {
+        "scroll": [
+          938,
+          938
+        ],
+        "popups": [
+          {
+            "bottom": 502.390625,
+            "h": 427.390625,
+            "right": 1239,
+            "w": 660,
+            "x": 579,
+            "y": 75
+          },
+          {
+            "bottom": 426.890625,
+            "h": 351.890625,
+            "right": 1909,
+            "w": 660,
+            "x": 1249,
+            "y": 75
+          }
+        ]
+      }
+    },
+    {
+      "name": "Purchase uses original price and does not equip",
+      "pass": true,
+      "evidence": {
+        "gold": "18,220",
+        "bag": "15 / 50",
+        "stock": "7 / 8",
+        "equipped": "equipped-0"
+      }
+    },
+    {
+      "name": "Sell tab starts empty and preserves eight columns",
+      "pass": true,
+      "evidence": {
+        "empty": "true",
+        "columns": "43.125px 43.125px 43.125px 43.125px 43.125px 43.125px 43.125px 43.125px"
+      }
+    },
+    {
+      "name": "Inventory selection shows full comparison and sell action",
+      "pass": true,
+      "evidence": "소지품 장비\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280"
+    },
+    {
+      "name": "Sale clears selection and credits price",
+      "pass": true,
+      "evidence": {
+        "empty": "true",
+        "gold": "19,500",
+        "bag": "14 / 50"
+      }
+    },
+    {
+      "name": "Buyback keeps one sold item per row and no default selection",
+      "pass": true,
+      "evidence": [
+        {
+          "bottom": 218,
+          "h": 40,
+          "id": "purchased-sword16",
+          "right": 433,
+          "visible": 1,
+          "w": 426,
+          "x": 7,
+          "y": 178
+        }
+      ]
+    },
+    {
+      "name": "Buyback retains affixes deltas original price and upgrade information",
+      "pass": true,
+      "evidence": "판매했던 장비\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n당시 판매가격\n1,280\n되사기 금액\n1,280"
+    },
+    {
+      "name": "Rebuy restores original item and returns comparison to empty",
+      "pass": true,
+      "evidence": {
+        "empty": "true",
+        "gold": "18,220",
+        "bag": "15 / 50"
+      }
+    },
+    {
+      "name": "Keyboard Escape works immediately after clicking an item",
+      "pass": true,
+      "evidence": "true"
+    },
+    {
+      "name": "No bulk selection keeps detail pane empty",
+      "pass": true,
+      "evidence": "true"
+    },
+    {
+      "name": "Locked and preset items remain protected in bulk mode",
+      "pass": true,
+      "evidence": "bag-2 and bag-8 disabled"
+    },
+    {
+      "name": "Multi-selection shows two items and bulk sale",
+      "pass": true,
+      "evidence": 2
+    },
+    {
+      "name": "Bulk item inspection uses full comparison including speed loss",
+      "pass": true,
+      "evidence": "아이템 정보\n×\n소지품 장비\n묵철 도끼\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 48.76 (+6.36)\n공격 속도 0.85 회/초 (−0.15 회/초)\n\n추가 옵션 없음\n\n장착 시 사라지는 속성\n힘 14\n물리 피해 6.5%\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200\n현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200\n판매 금액 1,200\n판매하기"
+    },
+    {
+      "name": "Bulk sale still applies both selected items",
+      "pass": true,
+      "evidence": {
+        "bag": "12 / 50",
+        "gold": "30,180",
+        "empty": "true"
+      }
+    },
+    {
+      "name": "Bulk sale produces two one-item buyback rows",
+      "pass": true,
+      "evidence": [
+        {
+          "bottom": 218,
+          "h": 40,
+          "id": "bag-1",
+          "right": 433,
+          "visible": 1,
+          "w": 426,
+          "x": 7,
+          "y": 178
+        },
+        {
+          "bottom": 262,
+          "h": 40,
+          "id": "bag-0",
+          "right": 433,
+          "visible": 1,
+          "w": 426,
+          "x": 7,
+          "y": 222
+        }
+      ]
+    },
+    {
+      "name": "Embedded portrait keeps device proportions at 360 pixels",
+      "pass": true,
+      "evidence": {
+        "row": 32.727264404296875,
+        "seventh": 0.4750001864961843,
+        "detail": {
+          "bottom": 733.9090576171875,
+          "h": 351.8181457519531,
+          "right": 359.1818292737007,
+          "w": 358.3636474609375,
+          "x": 0.8181818127632141,
+          "y": 382.0909118652344
+        }
+      }
+    },
+    {
+      "name": "Embedded landscape keeps left-right layout at 736 pixels",
+      "pass": true,
+      "evidence": {
+        "row": 30.79498291015625,
+        "stock": {
+          "bottom": 303.3305358886719,
+          "h": 217.10459899902344,
+          "right": 327.61769104003906,
+          "w": 279.1156005859375,
+          "x": 48.50209045410156,
+          "y": 86.22593688964844
+        },
+        "detail": {
+          "bottom": 303.33055114746094,
+          "h": 257.907958984375,
+          "right": 687.4978637695312,
+          "w": 355.2609558105469,
+          "x": 332.2369079589844,
+          "y": 45.42259216308594
+        }
+      }
+    },
+    {
+      "name": "Embedded PC keeps comparison visible at 1024 pixels",
+      "pass": true,
+      "evidence": {
+        "stock": {
+          "bottom": 549,
+          "h": 421,
+          "right": 389.359375,
+          "w": 388.359375,
+          "x": 1,
+          "y": 128
+        },
+        "detail": {
+          "bottom": 549,
+          "h": 482,
+          "right": 1023,
+          "w": 625.640625,
+          "x": 397.359375,
+          "y": 67
+        },
+        "overflow": [
+          1024,
+          1024,
+          615,
+          615
+        ]
+      }
+    },
+    {
+      "name": "Insufficient gold blocks purchase from comparison",
+      "pass": true,
+      "evidence": "구매가격\n 10,240\n골드 부족"
+    },
+    {
+      "name": "Full inventory blocks purchase from comparison",
+      "pass": true,
+      "evidence": "구매가격\n 10,240\n소지품 가득 참"
+    },
+    {
+      "name": "Landscape detail scroll exposes prices while action remains fixed",
+      "pass": true,
+      "evidence": {
+        "actionY": 350,
+        "bodyTop": 0,
+        "detail": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240\n현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200",
+        "top": 81
+      }
+    }
+  ],
+  "metrics": {
+    "portraitKo": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 897,
+        "h": 430,
+        "right": 439,
+        "w": 438,
+        "x": 1,
+        "y": 467
+      },
+      "detailScroll": [
+        386,
+        386
+      ],
+      "detailText": "판매 상품×\n      강인한 강철 대검레어 · 주 무기아이템 레벨 1616\n      공격력 44 (+1.6)공격 속도 1 회/초 (0 회/초)\n      힘 +15.9 (+1.9)물리 피해 +5.8% (−0.7%)극대화 확률 +3% (+3%)\n      장착 시 사라지는 속성이동 속도 3%\n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,280구매가격10,240\n      \n      현재 장착\n      강철 대검레어 · 주 무기아이템 레벨 1515\n      공격력 42.4공격 속도 1 회/초\n      힘 +14물리 피해 +6.5%이동 속도 +3%\n      \n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        440,
+        440,
+        438,
+        438
+      ],
+      "inventoryHidden": true,
+      "lang": "ko",
+      "layout": "portrait",
+      "lost": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 832.859375,
+            "h": 359.859375,
+            "right": 217,
+            "w": 210,
+            "x": 7,
+            "y": 473
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 768.484375,
+            "h": 295.484375,
+            "right": 433,
+            "w": 210,
+            "x": 223,
+            "y": 473
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 218,
+          "h": 40,
+          "id": "sword16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 178
+        },
+        {
+          "bottom": 262,
+          "h": 40,
+          "id": "axe16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 222
+        },
+        {
+          "bottom": 306,
+          "h": 40,
+          "id": "chest16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 266
+        },
+        {
+          "bottom": 350,
+          "h": 40,
+          "id": "gloves15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 310
+        },
+        {
+          "bottom": 394,
+          "h": 40,
+          "id": "boots15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 354
+        },
+        {
+          "bottom": 438,
+          "h": 40,
+          "id": "amulet15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 398
+        },
+        {
+          "bottom": 482,
+          "h": 40,
+          "id": "helm16",
+          "right": 422,
+          "visible": 0.475,
+          "w": 415,
+          "x": 7,
+          "y": 442
+        },
+        {
+          "bottom": 526,
+          "h": 40,
+          "id": "ring15",
+          "right": 422,
+          "visible": 0,
+          "w": 415,
+          "x": 7,
+          "y": 486
+        }
+      ],
+      "size": [
+        440,
+        956
+      ],
+      "stock": {
+        "bottom": 461,
+        "h": 287,
+        "right": 439,
+        "w": 438,
+        "x": 1,
+        "y": 174
+      },
+      "stockCount": "8 / 8"
+    },
+    "portraitEn": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 attacks/s)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 897,
+        "h": 430,
+        "right": 439,
+        "w": 438,
+        "x": 1,
+        "y": 467
+      },
+      "detailScroll": [
+        386,
+        386
+      ],
+      "detailText": "Vendor item×\n      Strong Steel GreatswordRare · Main weaponItem level 1616\n      Attack 44 (+1.6)Attack speed 1 attacks/s (0 attacks/s)\n      Strength +15.9 (+1.9)Physical damage +5.8% (−0.7%)Critical chance +3% (+3%)\n      Properties lost when equippedMovement speed 3%\n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,280Purchase price10,240\n      \n      Equipped\n      Steel GreatswordRare · Main weaponItem level 1515\n      Attack 42.4Attack speed 1 attacks/s\n      Strength +14Physical damage +6.5%Movement speed +3%\n      \n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        440,
+        440,
+        438,
+        438
+      ],
+      "inventoryHidden": true,
+      "lang": "en",
+      "layout": "portrait",
+      "lost": [
+        {
+          "key": "move",
+          "text": "Movement speed 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 832.859375,
+            "h": 359.859375,
+            "right": 217,
+            "w": 210,
+            "x": 7,
+            "y": 473
+          },
+          "text": "Vendor item\n×\nStrong Steel Greatsword\nRare · Main weapon\nItem level 16\n16\nAttack 44 (+1.6)\nAttack speed 1 attacks/s (0 attacks/s)\nStrength +15.9 (+1.9)\nPhysical damage +5.8% (−0.7%)\nCritical chance +3% (+3%)\nProperties lost when equipped\nMovement speed 3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,280\nPurchase price\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 768.484375,
+            "h": 295.484375,
+            "right": 433,
+            "w": 210,
+            "x": 223,
+            "y": 473
+          },
+          "text": "Equipped\nSteel Greatsword\nRare · Main weapon\nItem level 15\n15\nAttack 42.4\nAttack speed 1 attacks/s\nStrength +14\nPhysical damage +6.5%\nMovement speed +3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 218,
+          "h": 40,
+          "id": "sword16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 178
+        },
+        {
+          "bottom": 262,
+          "h": 40,
+          "id": "axe16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 222
+        },
+        {
+          "bottom": 306,
+          "h": 40,
+          "id": "chest16",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 266
+        },
+        {
+          "bottom": 350,
+          "h": 40,
+          "id": "gloves15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 310
+        },
+        {
+          "bottom": 394,
+          "h": 40,
+          "id": "boots15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 354
+        },
+        {
+          "bottom": 438,
+          "h": 40,
+          "id": "amulet15",
+          "right": 422,
+          "visible": 1,
+          "w": 415,
+          "x": 7,
+          "y": 398
+        },
+        {
+          "bottom": 482,
+          "h": 40,
+          "id": "helm16",
+          "right": 422,
+          "visible": 0.475,
+          "w": 415,
+          "x": 7,
+          "y": 442
+        },
+        {
+          "bottom": 526,
+          "h": 40,
+          "id": "ring15",
+          "right": 422,
+          "visible": 0,
+          "w": 415,
+          "x": 7,
+          "y": 486
+        }
+      ],
+      "size": [
+        440,
+        956
+      ],
+      "stock": {
+        "bottom": 461,
+        "h": 287,
+        "right": 439,
+        "w": 438,
+        "x": 1,
+        "y": 174
+      },
+      "stockCount": "8 / 8"
+    },
+    "landscapeEn": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 attacks/s)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 394,
+        "h": 335,
+        "right": 893,
+        "w": 461.453125,
+        "x": 431.546875,
+        "y": 59
+      },
+      "detailScroll": [
+        291,
+        372
+      ],
+      "detailText": "Vendor item×\n      Strong Steel GreatswordRare · Main weaponItem level 1616\n      Attack 44 (+1.6)Attack speed 1 attacks/s (0 attacks/s)\n      Strength +15.9 (+1.9)Physical damage +5.8% (−0.7%)Critical chance +3% (+3%)\n      Properties lost when equippedMovement speed 3%\n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,280Purchase price10,240\n      \n      Equipped\n      Steel GreatswordRare · Main weaponItem level 1515\n      Attack 42.4Attack speed 1 attacks/s\n      Strength +14Physical damage +6.5%Movement speed +3%\n      \n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        956,
+        956,
+        450,
+        450
+      ],
+      "inventoryHidden": true,
+      "lang": "en",
+      "layout": "wide",
+      "lost": [
+        {
+          "key": "move",
+          "text": "Movement speed 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 424.859375,
+            "h": 359.859375,
+            "right": 653.765625,
+            "w": 216.21875,
+            "x": 437.546875,
+            "y": 65
+          },
+          "text": "Vendor item\n×\nStrong Steel Greatsword\nRare · Main weapon\nItem level 16\n16\nAttack 44 (+1.6)\nAttack speed 1 attacks/s (0 attacks/s)\nStrength +15.9 (+1.9)\nPhysical damage +5.8% (−0.7%)\nCritical chance +3% (+3%)\nProperties lost when equipped\nMovement speed 3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,280\nPurchase price\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 360.484375,
+            "h": 295.484375,
+            "right": 876,
+            "w": 216.234375,
+            "x": 659.765625,
+            "y": 65
+          },
+          "text": "Equipped\nSteel Greatsword\nRare · Main weapon\nItem level 15\n15\nAttack 42.4\nAttack speed 1 attacks/s\nStrength +14\nPhysical damage +6.5%\nMovement speed +3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 156,
+          "h": 40,
+          "id": "sword16",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 116
+        },
+        {
+          "bottom": 200,
+          "h": 40,
+          "id": "axe16",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 160
+        },
+        {
+          "bottom": 244,
+          "h": 40,
+          "id": "chest16",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 204
+        },
+        {
+          "bottom": 288,
+          "h": 40,
+          "id": "gloves15",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 248
+        },
+        {
+          "bottom": 332,
+          "h": 40,
+          "id": "boots15",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 292
+        },
+        {
+          "bottom": 376,
+          "h": 40,
+          "id": "amulet15",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 336
+        },
+        {
+          "bottom": 420,
+          "h": 40,
+          "id": "helm16",
+          "right": 408.546875,
+          "visible": 0.35,
+          "w": 339.546875,
+          "x": 69,
+          "y": 380
+        },
+        {
+          "bottom": 464,
+          "h": 40,
+          "id": "ring15",
+          "right": 408.546875,
+          "visible": 0,
+          "w": 339.546875,
+          "x": 69,
+          "y": 424
+        }
+      ],
+      "size": [
+        956,
+        440
+      ],
+      "stock": {
+        "bottom": 394,
+        "h": 282,
+        "right": 425.546875,
+        "w": 362.546875,
+        "x": 63,
+        "y": 112
+      },
+      "stockCount": "8 / 8"
+    },
+    "landscapeKo": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 394,
+        "h": 335,
+        "right": 893,
+        "w": 461.453125,
+        "x": 431.546875,
+        "y": 59
+      },
+      "detailScroll": [
+        291,
+        372
+      ],
+      "detailText": "판매 상품×\n      강인한 강철 대검레어 · 주 무기아이템 레벨 1616\n      공격력 44 (+1.6)공격 속도 1 회/초 (0 회/초)\n      힘 +15.9 (+1.9)물리 피해 +5.8% (−0.7%)극대화 확률 +3% (+3%)\n      장착 시 사라지는 속성이동 속도 3%\n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,280구매가격10,240\n      \n      현재 장착\n      강철 대검레어 · 주 무기아이템 레벨 1515\n      공격력 42.4공격 속도 1 회/초\n      힘 +14물리 피해 +6.5%이동 속도 +3%\n      \n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        956,
+        956,
+        450,
+        450
+      ],
+      "inventoryHidden": true,
+      "lang": "ko",
+      "layout": "wide",
+      "lost": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 424.859375,
+            "h": 359.859375,
+            "right": 653.765625,
+            "w": 216.21875,
+            "x": 437.546875,
+            "y": 65
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 360.484375,
+            "h": 295.484375,
+            "right": 876,
+            "w": 216.234375,
+            "x": 659.765625,
+            "y": 65
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 156,
+          "h": 40,
+          "id": "sword16",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 116
+        },
+        {
+          "bottom": 200,
+          "h": 40,
+          "id": "axe16",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 160
+        },
+        {
+          "bottom": 244,
+          "h": 40,
+          "id": "chest16",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 204
+        },
+        {
+          "bottom": 288,
+          "h": 40,
+          "id": "gloves15",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 248
+        },
+        {
+          "bottom": 332,
+          "h": 40,
+          "id": "boots15",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 292
+        },
+        {
+          "bottom": 376,
+          "h": 40,
+          "id": "amulet15",
+          "right": 408.546875,
+          "visible": 1,
+          "w": 339.546875,
+          "x": 69,
+          "y": 336
+        },
+        {
+          "bottom": 420,
+          "h": 40,
+          "id": "helm16",
+          "right": 408.546875,
+          "visible": 0.35,
+          "w": 339.546875,
+          "x": 69,
+          "y": 380
+        },
+        {
+          "bottom": 464,
+          "h": 40,
+          "id": "ring15",
+          "right": 408.546875,
+          "visible": 0,
+          "w": 339.546875,
+          "x": 69,
+          "y": 424
+        }
+      ],
+      "size": [
+        956,
+        440
+      ],
+      "stock": {
+        "bottom": 394,
+        "h": 282,
+        "right": 425.546875,
+        "w": 362.546875,
+        "x": 63,
+        "y": 112
+      },
+      "stockCount": "8 / 8"
+    },
+    "pcKo": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 873,
+        "h": 806,
+        "right": 1599,
+        "w": 1030,
+        "x": 569,
+        "y": 67
+      },
+      "detailScroll": [
+        758,
+        758
+      ],
+      "detailText": "판매 상품×\n      강인한 강철 대검레어 · 주 무기아이템 레벨 1616\n      공격력 44 (+1.6)공격 속도 1 회/초 (0 회/초)\n      힘 +15.9 (+1.9)물리 피해 +5.8% (−0.7%)극대화 확률 +3% (+3%)\n      장착 시 사라지는 속성이동 속도 3%\n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,280구매가격10,240\n      \n      현재 장착\n      강철 대검레어 · 주 무기아이템 레벨 1515\n      공격력 42.4공격 속도 1 회/초\n      힘 +14물리 피해 +6.5%이동 속도 +3%\n      \n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        1600,
+        1600,
+        1030,
+        1030
+      ],
+      "inventoryHidden": true,
+      "lang": "ko",
+      "layout": "wide",
+      "lost": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 502.390625,
+            "h": 427.390625,
+            "right": 1079,
+            "w": 500,
+            "x": 579,
+            "y": 75
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 426.890625,
+            "h": 351.890625,
+            "right": 1589,
+            "w": 500,
+            "x": 1089,
+            "y": 75
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 187,
+          "h": 54,
+          "id": "sword16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 133
+        },
+        {
+          "bottom": 245,
+          "h": 54,
+          "id": "axe16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 191
+        },
+        {
+          "bottom": 303,
+          "h": 54,
+          "id": "chest16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 249
+        },
+        {
+          "bottom": 361,
+          "h": 54,
+          "id": "gloves15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 307
+        },
+        {
+          "bottom": 419,
+          "h": 54,
+          "id": "boots15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 365
+        },
+        {
+          "bottom": 477,
+          "h": 54,
+          "id": "amulet15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 423
+        },
+        {
+          "bottom": 535,
+          "h": 54,
+          "id": "helm16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 481
+        },
+        {
+          "bottom": 593,
+          "h": 54,
+          "id": "ring15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 539
+        }
+      ],
+      "size": [
+        1600,
+        900
+      ],
+      "stock": {
+        "bottom": 873,
+        "h": 745,
+        "right": 561,
+        "w": 560,
+        "x": 1,
+        "y": 128
+      },
+      "stockCount": "8 / 8"
+    },
+    "pcEn": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 attacks/s)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 1053,
+        "h": 986,
+        "right": 1919,
+        "w": 1350,
+        "x": 569,
+        "y": 67
+      },
+      "detailScroll": [
+        938,
+        938
+      ],
+      "detailText": "Vendor item×\n      Strong Steel GreatswordRare · Main weaponItem level 1616\n      Attack 44 (+1.6)Attack speed 1 attacks/s (0 attacks/s)\n      Strength +15.9 (+1.9)Physical damage +5.8% (−0.7%)Critical chance +3% (+3%)\n      Properties lost when equippedMovement speed 3%\n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,280Purchase price10,240\n      \n      Equipped\n      Steel GreatswordRare · Main weaponItem level 1515\n      Attack 42.4Attack speed 1 attacks/s\n      Strength +14Physical damage +6.5%Movement speed +3%\n      \n      Upgrade informationNo record\n      TypeWeaponsRequired level8Sale value1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        1920,
+        1920,
+        1350,
+        1350
+      ],
+      "inventoryHidden": true,
+      "lang": "en",
+      "layout": "wide",
+      "lost": [
+        {
+          "key": "move",
+          "text": "Movement speed 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 502.390625,
+            "h": 427.390625,
+            "right": 1239,
+            "w": 660,
+            "x": 579,
+            "y": 75
+          },
+          "text": "Vendor item\n×\nStrong Steel Greatsword\nRare · Main weapon\nItem level 16\n16\nAttack 44 (+1.6)\nAttack speed 1 attacks/s (0 attacks/s)\nStrength +15.9 (+1.9)\nPhysical damage +5.8% (−0.7%)\nCritical chance +3% (+3%)\nProperties lost when equipped\nMovement speed 3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,280\nPurchase price\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 426.890625,
+            "h": 351.890625,
+            "right": 1909,
+            "w": 660,
+            "x": 1249,
+            "y": 75
+          },
+          "text": "Equipped\nSteel Greatsword\nRare · Main weapon\nItem level 15\n15\nAttack 42.4\nAttack speed 1 attacks/s\nStrength +14\nPhysical damage +6.5%\nMovement speed +3%\nUpgrade information\n\nNo record\n\nType\nWeapons\nRequired level\n8\nSale value\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 187,
+          "h": 54,
+          "id": "sword16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 133
+        },
+        {
+          "bottom": 245,
+          "h": 54,
+          "id": "axe16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 191
+        },
+        {
+          "bottom": 303,
+          "h": 54,
+          "id": "chest16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 249
+        },
+        {
+          "bottom": 361,
+          "h": 54,
+          "id": "gloves15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 307
+        },
+        {
+          "bottom": 419,
+          "h": 54,
+          "id": "boots15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 365
+        },
+        {
+          "bottom": 477,
+          "h": 54,
+          "id": "amulet15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 423
+        },
+        {
+          "bottom": 535,
+          "h": 54,
+          "id": "helm16",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 481
+        },
+        {
+          "bottom": 593,
+          "h": 54,
+          "id": "ring15",
+          "right": 551,
+          "visible": 1,
+          "w": 540,
+          "x": 11,
+          "y": 539
+        }
+      ],
+      "size": [
+        1920,
+        1080
+      ],
+      "stock": {
+        "bottom": 1053,
+        "h": 925,
+        "right": 561,
+        "w": 560,
+        "x": 1,
+        "y": 128
+      },
+      "stockCount": "8 / 8"
+    },
+    "inlinePortrait": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 733.9090576171875,
+        "h": 351.8181457519531,
+        "right": 359.1818292737007,
+        "w": 358.3636474609375,
+        "x": 0.8181818127632141,
+        "y": 382.0909118652344
+      },
+      "detailScroll": [
+        386,
+        386
+      ],
+      "detailText": "판매 상품×\n      강인한 강철 대검레어 · 주 무기아이템 레벨 1616\n      공격력 44 (+1.6)공격 속도 1 회/초 (0 회/초)\n      힘 +15.9 (+1.9)물리 피해 +5.8% (−0.7%)극대화 확률 +3% (+3%)\n      장착 시 사라지는 속성이동 속도 3%\n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,280구매가격10,240\n      \n      현재 장착\n      강철 대검레어 · 주 무기아이템 레벨 1515\n      공격력 42.4공격 속도 1 회/초\n      힘 +14물리 피해 +6.5%이동 속도 +3%\n      \n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        440,
+        440,
+        438,
+        438
+      ],
+      "inventoryHidden": true,
+      "lang": "ko",
+      "layout": "portrait",
+      "lost": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 681.430419921875,
+            "h": 294.430419921875,
+            "right": 177.5454487800598,
+            "w": 171.81817626953125,
+            "x": 5.7272725105285645,
+            "y": 387
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 628.7599487304688,
+            "h": 241.75994873046875,
+            "right": 354.2727355957031,
+            "w": 171.8181915283203,
+            "x": 182.4545440673828,
+            "y": 387
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 178.36363220214844,
+          "h": 32.727264404296875,
+          "id": "sword16",
+          "right": 345.2727437019348,
+          "visible": 1,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 145.63636779785156
+        },
+        {
+          "bottom": 214.36363220214844,
+          "h": 32.727264404296875,
+          "id": "axe16",
+          "right": 345.2727437019348,
+          "visible": 1,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 181.63636779785156
+        },
+        {
+          "bottom": 250.36363220214844,
+          "h": 32.727264404296875,
+          "id": "chest16",
+          "right": 345.2727437019348,
+          "visible": 1,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 217.63636779785156
+        },
+        {
+          "bottom": 286.3636474609375,
+          "h": 32.72727966308594,
+          "id": "gloves15",
+          "right": 345.2727437019348,
+          "visible": 1,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 253.63636779785156
+        },
+        {
+          "bottom": 322.3636474609375,
+          "h": 32.727294921875,
+          "id": "boots15",
+          "right": 345.2727437019348,
+          "visible": 1,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 289.6363525390625
+        },
+        {
+          "bottom": 358.3636474609375,
+          "h": 32.727294921875,
+          "id": "amulet15",
+          "right": 345.2727437019348,
+          "visible": 1,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 325.6363525390625
+        },
+        {
+          "bottom": 394.3636474609375,
+          "h": 32.727294921875,
+          "id": "helm16",
+          "right": 345.2727437019348,
+          "visible": 0.4750001864961843,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 361.6363525390625
+        },
+        {
+          "bottom": 430.3636474609375,
+          "h": 32.727294921875,
+          "id": "ring15",
+          "right": 345.2727437019348,
+          "visible": 0,
+          "w": 339.54547119140625,
+          "x": 5.7272725105285645,
+          "y": 397.6363525390625
+        }
+      ],
+      "size": [
+        360,
+        820
+      ],
+      "stock": {
+        "bottom": 377.1818237304687,
+        "h": 234.8181915283203,
+        "right": 359.1818292737007,
+        "w": 358.3636474609375,
+        "x": 0.8181818127632141,
+        "y": 142.36363220214844
+      },
+      "stockCount": "8 / 8"
+    },
+    "inlineLandscape": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 303.33055114746094,
+        "h": 257.907958984375,
+        "right": 687.4978637695312,
+        "w": 355.2609558105469,
+        "x": 332.2369079589844,
+        "y": 45.42259216308594
+      },
+      "detailScroll": [
+        291,
+        372
+      ],
+      "detailText": "판매 상품×\n      강인한 강철 대검레어 · 주 무기아이템 레벨 1616\n      공격력 44 (+1.6)공격 속도 1 회/초 (0 회/초)\n      힘 +15.9 (+1.9)물리 피해 +5.8% (−0.7%)극대화 확률 +3% (+3%)\n      장착 시 사라지는 속성이동 속도 3%\n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,280구매가격10,240\n      \n      현재 장착\n      강철 대검레어 · 주 무기아이템 레벨 1515\n      공격력 42.4공격 속도 1 회/초\n      힘 +14물리 피해 +6.5%이동 속도 +3%\n      \n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        956,
+        956,
+        450,
+        450
+      ],
+      "inventoryHidden": true,
+      "lang": "ko",
+      "layout": "wide",
+      "lost": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 327.08837890625,
+            "h": 277.0465393066406,
+            "right": 503.31744384765625,
+            "w": 166.46127319335938,
+            "x": 336.8561706542969,
+            "y": 50.041839599609375
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 277.5277099609375,
+            "h": 227.48587036132812,
+            "right": 674.4100341796875,
+            "w": 166.47332763671875,
+            "x": 507.9367065429687,
+            "y": 50.041839599609375
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 120.10041809082033,
+          "h": 30.79498291015625,
+          "id": "sword16",
+          "right": 314.5298156738281,
+          "visible": 1,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 89.30543518066406
+        },
+        {
+          "bottom": 153.97488403320312,
+          "h": 30.794967651367188,
+          "id": "axe16",
+          "right": 314.5298156738281,
+          "visible": 1,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 123.17991638183594
+        },
+        {
+          "bottom": 187.849365234375,
+          "h": 30.79498291015625,
+          "id": "chest16",
+          "right": 314.5298156738281,
+          "visible": 1,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 157.05438232421875
+        },
+        {
+          "bottom": 221.72384643554688,
+          "h": 30.79498291015625,
+          "id": "gloves15",
+          "right": 314.5298156738281,
+          "visible": 1,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 190.92886352539065
+        },
+        {
+          "bottom": 255.5983123779297,
+          "h": 30.794967651367188,
+          "id": "boots15",
+          "right": 314.5298156738281,
+          "visible": 1,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 224.8033447265625
+        },
+        {
+          "bottom": 289.4728088378906,
+          "h": 30.79498291015625,
+          "id": "amulet15",
+          "right": 314.5298156738281,
+          "visible": 1,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 258.6778259277344
+        },
+        {
+          "bottom": 323.3472595214844,
+          "h": 30.794952392578125,
+          "id": "helm16",
+          "right": 314.5298156738281,
+          "visible": 0.34999985135107015,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 292.55230712890625
+        },
+        {
+          "bottom": 357.22174072265625,
+          "h": 30.79498291015625,
+          "id": "ring15",
+          "right": 314.5298156738281,
+          "visible": 0,
+          "w": 261.4084777832031,
+          "x": 53.121337890625,
+          "y": 326.4267578125
+        }
+      ],
+      "size": [
+        736,
+        500
+      ],
+      "stock": {
+        "bottom": 303.3305358886719,
+        "h": 217.10459899902344,
+        "right": 327.61769104003906,
+        "w": 279.1156005859375,
+        "x": 48.50209045410156,
+        "y": 86.22593688964844
+      },
+      "stockCount": "8 / 8"
+    },
+    "inlinePc": {
+      "bagCount": "14 / 50",
+      "bulkRows": 0,
+      "deltas": [
+        {
+          "group": "base",
+          "key": "power",
+          "text": "(+1.6)",
+          "tone": "hs-delta hs-good",
+          "value": 1.6
+        },
+        {
+          "group": "base",
+          "key": "speed",
+          "text": "(0 회/초)",
+          "tone": "hs-delta ",
+          "value": 0
+        },
+        {
+          "group": "affix",
+          "key": "strength",
+          "text": "(+1.9)",
+          "tone": "hs-delta hs-good",
+          "value": 1.9
+        },
+        {
+          "group": "affix",
+          "key": "physical",
+          "text": "(−0.7%)",
+          "tone": "hs-delta hs-bad",
+          "value": -0.7
+        },
+        {
+          "group": "affix",
+          "key": "critical",
+          "text": "(+3%)",
+          "tone": "hs-delta hs-good",
+          "value": 3
+        }
+      ],
+      "detail": {
+        "bottom": 549,
+        "h": 482,
+        "right": 1023,
+        "w": 625.640625,
+        "x": 397.359375,
+        "y": 67
+      },
+      "detailScroll": [
+        434,
+        443
+      ],
+      "detailText": "판매 상품×\n      강인한 강철 대검레어 · 주 무기아이템 레벨 1616\n      공격력 44 (+1.6)공격 속도 1 회/초 (0 회/초)\n      힘 +15.9 (+1.9)물리 피해 +5.8% (−0.7%)극대화 확률 +3% (+3%)\n      장착 시 사라지는 속성이동 속도 3%\n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,280구매가격10,240\n      \n      현재 장착\n      강철 대검레어 · 주 무기아이템 레벨 1515\n      공격력 42.4공격 속도 1 회/초\n      힘 +14물리 피해 +6.5%이동 속도 +3%\n      \n      업그레이드 정보기록 없음\n      종류무기요구 레벨8판매 금액1,200",
+      "dockHidden": false,
+      "empty": "false",
+      "gold": "28,460",
+      "gridColumns": "repeat(8, minmax(0px, 1fr))",
+      "horizontalOverflow": [
+        1024,
+        1024,
+        615,
+        615
+      ],
+      "inventoryHidden": true,
+      "lang": "ko",
+      "layout": "wide",
+      "lost": [
+        {
+          "key": "move",
+          "text": "이동 속도 3%"
+        }
+      ],
+      "popups": [
+        {
+          "equipped": "false",
+          "id": "sword16",
+          "rect": {
+            "bottom": 502.390625,
+            "h": 427.390625,
+            "right": 699.671875,
+            "w": 292.3125,
+            "x": 407.359375,
+            "y": 75
+          },
+          "text": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+        },
+        {
+          "equipped": "true",
+          "id": "equipped-0",
+          "rect": {
+            "bottom": 426.890625,
+            "h": 351.890625,
+            "right": 1002,
+            "w": 292.328125,
+            "x": 709.671875,
+            "y": 75
+          },
+          "text": "현재 장착\n강철 대검\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 42.4\n공격 속도 1 회/초\n힘 +14\n물리 피해 +6.5%\n이동 속도 +3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,200"
+        }
+      ],
+      "rows": [
+        {
+          "bottom": 187,
+          "h": 54,
+          "id": "sword16",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 133
+        },
+        {
+          "bottom": 245,
+          "h": 54,
+          "id": "axe16",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 191
+        },
+        {
+          "bottom": 303,
+          "h": 54,
+          "id": "chest16",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 249
+        },
+        {
+          "bottom": 361,
+          "h": 54,
+          "id": "gloves15",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 307
+        },
+        {
+          "bottom": 419,
+          "h": 54,
+          "id": "boots15",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 365
+        },
+        {
+          "bottom": 477,
+          "h": 54,
+          "id": "amulet15",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 423
+        },
+        {
+          "bottom": 535,
+          "h": 54,
+          "id": "helm16",
+          "right": 368.359375,
+          "visible": 1,
+          "w": 357.359375,
+          "x": 11,
+          "y": 481
+        },
+        {
+          "bottom": 593,
+          "h": 54,
+          "id": "ring15",
+          "right": 368.359375,
+          "visible": 0.18518518518518515,
+          "w": 357.359375,
+          "x": 11,
+          "y": 539
+        }
+      ],
+      "size": [
+        1024,
+        720
+      ],
+      "stock": {
+        "bottom": 549,
+        "h": 421,
+        "right": 389.359375,
+        "w": 388.359375,
+        "x": 1,
+        "y": 128
+      },
+      "stockCount": "8 / 8"
+    }
+  }
+}

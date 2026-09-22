@@ -31,7 +31,7 @@ namespace Hellscript
         public float runeAttack;
         public float[] runeSkillPower=new float[18],runeSkillCost=new float[18];
         public int[] runeSkillLevels=new int[18];
-        public int SkillLevel(int index,bool learned)=>learned?1+runeSkillLevels[index]:0;
+        public int SkillLevel(int index,bool learned)=>learned?effectiveSkillRanks[6+index%6]+runeSkillLevels[index]:0;
         public float[] bonuses=new float[StatCatalog.Count];
         public HashSet<string> specials=new HashSet<string>();
         readonly Dictionary<string,HashSet<int>> sets=new Dictionary<string,HashSet<int>>();
@@ -118,12 +118,15 @@ namespace Hellscript
         }
         public HeroStats(HeroSave hero, bool training=false,RuneGrowthState runes=null)
         {
+            ApplySlotGrowth(hero);
+            if(slotSkillBonus>0){hero=RuneGrowth.Copy(hero);hero.build.skillRanks=(int[])effectiveSkillRanks.Clone();}
             int level=training?30:hero.level; int c=(int)hero.heroClass;
             foreach(int p in hero.build.passives) if(p>=0&&p<6)passives[p]=true;
             var equipped=hero.inventory.Where(x=>x.equipped).ToList();
             foreach(var item in equipped)
             {
                 for(int i=0;i<bonuses.Length;i++)bonuses[i]+=item.Value(i);
+                if(item.slot>0)AddForgeStat(GearEnhancement.Stat(item),ItemCatalog.MainValue(item));
                 if(GemCatalog.TryEffect(item,out var gem,out float value))
                 {
                     switch(gem.kind)
@@ -153,18 +156,18 @@ namespace Hellscript
             strength=str;dexterity=dex;intelligence=intel;willpower=will;
             float flatHp=bonuses[0]; armor=str*2+bonuses[2];resistance=intel+bonuses[3];
             float weapon=20, weaponSpeed=0;
+            var weapons=equipped.Where(i=>i.slot==0&&!EquipmentSlots.Offhand(i)).ToArray();
+            if(weapons.Length>0){weapon=weapons.Average(ItemCatalog.MainValue);weaponSpeed=weapons.Average(i=>ItemCatalog.Base(i).attackSpeed);}
             foreach(var item in equipped)
             {
                 var basis=ItemCatalog.Base(item);float upgraded=ItemCatalog.MainValue(item);
-                if(item.slot==0){weapon=upgraded;weaponSpeed=basis.attackSpeed;}
-                else if(item.slot<=5)armor+=upgraded;
-                else if(item.slot==6)flatHp+=upgraded;
-                else resistance+=upgraded;
+                if(item.slot==0){if(EquipmentSlots.Kind(item)==WeaponKind.Shield)armor+=upgraded;else if(EquipmentSlots.Offhand(item))weapon+=upgraded;}
+
                 resistance+=basis.resistance*(1+.08f*(item.level-1));
             }
             armor*=1+gemArmorPercent;
             hp=(new[]{300,240,210}[c]+new[]{35,28,25}[c]*(level-1)+flatHp)*(1+bonuses[1]/100);
-            damage=(weapon+runeAttack)*(1+.002f*primary);attackPower=damage;
+            damage=(weapon+runeAttack+slotAttack)*(1+.002f*primary);attackPower=damage;
             regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1+SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,4);
             baseSpeed=new[]{4f,4.4f,4f}[c];speed=SpeedWithBonus(0);
             pickup=Mathf.Min(6,1.5f+bonuses[22]+(specials.Contains("LC01")?2.5f:0));
@@ -228,7 +231,7 @@ namespace Hellscript
         public static Item CreateItem(HeroClass c,int slot,int rarity,int level,ref uint rng,string id=null)
             =>ItemGenerator.Create(c,slot,rarity,level,ref rng,id);
         public static Item CreateRiftItem(HeroClass c,int slot,int rarity,int level,int stage,ref uint rng,string id=null)
-            =>ItemGenerator.Create(c,slot,rarity,level,ref rng,id,riftStage:stage);
+        {var item=ItemGenerator.Create(c,slot,rarity,level,ref rng,id,riftStage:stage);item.acquisitionKind="rift";return item;}
         public static bool Referenced(HeroSave hero,Item item)=>
             (hero.build.equipmentIds?.Contains(item.id)??false)||hero.presets.Any(p=>p?.equipmentIds?.Contains(item.id)??false);
         public static bool Protected(HeroSave hero,Item item)=>item.locked||item.equipped||Referenced(hero,item)||GemCatalog.HasGem(item);
@@ -236,35 +239,32 @@ namespace Hellscript
         static bool TownService(AccountSave a)=>a.suspendedRun==null||a.suspendedRun.phase==RunPhase.Cleared||a.suspendedRun.phase==RunPhase.Failed;
         public static string EquipError(HeroSave hero,Item item)
         {
-            if(item==null||!hero.inventory.Contains(item))return "이 캐릭터가 보유한 장비만 장착할 수 있습니다.";
-            if(item.equipped)return "이미 장착한 장비입니다.";
-            if(hero.level<item.RequiredLevel)return Loc.F("캐릭터 레벨 {0}이 필요합니다.", item.RequiredLevel);
-            if(!ItemCatalog.Base(item).Fits(hero.heroClass,item.slot)||ItemCatalog.Unique(item.special) is UniqueItemDefinition u&&!u.Fits(hero.heroClass,item.slot))return "다른 직업의 전용 장비입니다.";
-            return "";
+            return EquipmentSlots.Plan(hero,item).error;
         }
         // rarityOnly compares grades alone; a tie keeps the equipment already in the bag.
         public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false)
         {
             if(item==null||hero.inventory.Any(i=>i.id==item.id))return false;
-            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);return true;}
+            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);return true;}
             if(policy!=BagPolicy.Replace)return false;
             var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
             if(worst==null||(rarityOnly?item.rarity.CompareTo(worst.rarity):Compare(item,worst))<=0)return false;
-            ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);return true;
+            ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);return true;
         }
         static int Compare(Item a,Item b) {int c=a.rarity.CompareTo(b.rarity);if(c==0)c=a.level.CompareTo(b.level);return c==0?a.Price.CompareTo(b.Price):c;}
         public static bool Equip(HeroSave hero,Item item)
         {
-            if(!string.IsNullOrEmpty(EquipError(hero,item)))return false;
-            var outgoing=hero.inventory.Where(i=>i.equipped&&i.slot==item.slot&&i!=item).ToList();
-            foreach(var i in outgoing)i.equipped=false;
-            item.equipped=true;Storage.HandOff(item,outgoing);return true;
+            return EquipmentSlots.Equip(hero,item);
         }
         public static bool Dismantle(AccountSave account,HeroSave hero,Item item)
         {
             if(!aOwns(account,hero,item)||(Protected(hero,item)||account.heroes.Any(h=>Referenced(h,item))))return false;
+            int stones=BlacksmithCatalog.SalvageStones(item);
+            long refund=(item.contentVersion>0?item.investedMaterials:20L*((1<<Math.Clamp(item.enhancement,0,5))-1))*4/5;
+            if(stones>int.MaxValue-account.enhancementStones||refund+(item.rarity==3?0:new[]{1,2,5}[item.rarity])>int.MaxValue-account.materials||item.rarity==3&&account.cores[item.slot]==int.MaxValue)return false;
+            account.enhancementStones+=stones;
             if(item.rarity==3)account.cores[item.slot]++;else account.materials+=new[]{1,2,5}[item.rarity];
-            int invested=item.contentVersion>0?item.investedMaterials:20*((1<<item.enhancement)-1);account.materials+=(int)(invested*4L/5);hero.inventory.Remove(item);ContentUnlocks.Reconcile(account);return true;
+            int invested=item.contentVersion>0?item.investedMaterials:20*((1<<Math.Clamp(item.enhancement,0,5))-1);account.materials+=(int)(invested*4L/5);hero.inventory.Remove(item);ContentUnlocks.Reconcile(account);return true;
         }
         static bool aOwns(AccountSave a,HeroSave h,Item i)=>i!=null&&a.heroes.Contains(h)&&h.inventory.Contains(i);
         public static bool Sell(AccountSave a,HeroSave h,Item item)
@@ -273,8 +273,8 @@ namespace Hellscript
             if((long)a.gold+item.Price>int.MaxValue)return false;
             a.gold+=item.Price;h.inventory.Remove(item);return true;
         }
-        public static int EnhancementMaterials(Item item)=>item.enhancement>=5?0:20*(1<<item.enhancement);
-        public static long EnhancementGold(Item item)=>item.enhancement>=5?0:200L*(item.enhancement+1)*item.level;
+        public static int EnhancementMaterials(Item item)=>0;
+        public static long EnhancementGold(Item item)=>item.enhancement>=GearEnhancement.Maximum?0:GearEnhancement.Cost(item.level,item.enhancement+1);
         public static long RerollGold(Item item)
         {
             // Test coefficients: 500*L + 50*L*(L-1), independent of previous rerolls.
@@ -282,12 +282,7 @@ namespace Hellscript
             return factor>long.MaxValue/50?long.MaxValue:50*factor;
         }
         public static bool Enhance(AccountSave a,Item item)
-        {
-            if(!ContentUnlocks.Has(a,ContentUnlocks.Enhance)||!Owned(a,item)||!TownService(a)||item.enhancement>=5)return false;
-            int mats=EnhancementMaterials(item);long gold=EnhancementGold(item);
-            if(a.materials<mats||a.gold<gold)return false;
-            a.materials-=mats;a.gold-=(int)gold;item.enhancement++;item.investedMaterials+=mats;return true;
-        }
+            =>item!=null&&GearEnhancement.Apply(a,item,GearEnhancement.Quote(item,a.gold));
         public static bool Reroll(AccountSave a,Item item,int index,ref uint rng)
             =>item!=null&&index>=0&&index<item.rolls.Count&&Reroll(a,item,item.rolls[index].slotId,ref rng);
         public static bool Reroll(AccountSave a,Item item,string slotId,ref uint rng)
@@ -300,7 +295,7 @@ namespace Hellscript
         }
         public static bool Sweep(AccountSave account,string requestId,ref uint rng)
         {
-            if(!ContentUnlocks.Has(account,ContentUnlocks.Sweep)||!TownService(account)||string.IsNullOrWhiteSpace(requestId)||account.receipts.Contains(requestId))return false;
+            if(!ContentUnlocks.Has(account,ContentUnlocks.Sweep)||!TownService(account)||string.IsNullOrWhiteSpace(requestId)||account.receipts.Contains(requestId)||BlacksmithCatalog.RewardStones(account.Hero.highestClear)>int.MaxValue-account.enhancementStones)return false;
             string day=DateTime.UtcNow.ToString("yyyy-MM-dd");int used=account.sweepDay==day?account.sweepCount:0;
             var h=account.Hero;if(h.highestClear<1||used>=3||FreeSlots(h)<3)return false;
             GemInventory.Normalize(account);
@@ -308,7 +303,7 @@ namespace Hellscript
             for(int i=0;i<GemCatalog.DropCount(RiftRewardSource.Boss);i++)if(!GemStacks.TryAdd(gems,account.gemCapacity,GemCatalog.Roll(h.highestClear,ref gemRandom)))return false;
             for(int i=0;i<3;i++)AddItem(h,CreateRiftItem(h.heroClass,RandomStream.Range(ref rng,0,8),RiftRarity.Roll(RiftRewardSource.Boss,h.highestClear,ref rng),RandomStream.Range(ref rng,Mathf.Max(1,h.highestClear-2),h.highestClear+3),h.highestClear,ref rng),BagPolicy.Ignore,account);
             account.gems=gems;ContentUnlocks.RecordGemAcquisition(account);
-            account.gold+=800+50*h.highestClear;account.materials+=5+h.highestClear/5;account.sweepDay=day;account.sweepCount=used+1;account.receipts.Add(requestId);return true;
+            account.enhancementStones+=BlacksmithCatalog.RewardStones(h.highestClear);account.gold+=800+50*h.highestClear;account.materials+=5+h.highestClear/5;account.sweepDay=day;account.sweepCount=used+1;account.receipts.Add(requestId);return true;
         }
     }
 }

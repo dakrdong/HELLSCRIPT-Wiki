@@ -1,0 +1,670 @@
+{
+  "revision": 7,
+  "date": "2026-09-21",
+  "scope": "Interactive HTML equipment-shop prototype; Codex in-app browser on macOS. Not Unity runtime, real account storage, full game regression or physical-device evidence.",
+  "passed": 30,
+  "total": 30,
+  "checks": [
+    {
+      "name": "Separate rarity and equipment filters start without sale candidates",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "detailActive": "false",
+        "disabled": false,
+        "error": "",
+        "fields": 0,
+        "gold": "28,460",
+        "grades": [
+          {
+            "id": "common",
+            "on": false
+          },
+          {
+            "id": "magic",
+            "on": false
+          },
+          {
+            "id": "rare",
+            "on": false
+          },
+          {
+            "id": "legendary",
+            "on": false
+          },
+          {
+            "id": "unique",
+            "on": false
+          },
+          {
+            "id": "set",
+            "on": false
+          }
+        ],
+        "preview": "자동 선택 대상 0개",
+        "selected": [],
+        "types": []
+      }
+    },
+    {
+      "name": "Rarity alone cannot override unchecked equipment types",
+      "pass": true,
+      "evidence": "자동 선택 대상 0개"
+    },
+    {
+      "name": "Two coarse filters select eight common or magic items without detailed setup",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "detailActive": "false",
+        "disabled": false,
+        "error": "",
+        "fields": 0,
+        "gold": "28,460",
+        "grades": [
+          {
+            "id": "common",
+            "on": true
+          },
+          {
+            "id": "magic",
+            "on": true
+          },
+          {
+            "id": "rare",
+            "on": false
+          },
+          {
+            "id": "legendary",
+            "on": false
+          },
+          {
+            "id": "unique",
+            "on": false
+          },
+          {
+            "id": "set",
+            "on": false
+          }
+        ],
+        "preview": "자동 선택 대상 8개",
+        "selected": [],
+        "types": [
+          "sword",
+          "greatsword",
+          "axe",
+          "bow",
+          "crossbow",
+          "staff",
+          "head",
+          "chest",
+          "hands",
+          "legs",
+          "feet",
+          "belt",
+          "neck",
+          "ring"
+        ]
+      }
+    },
+    {
+      "name": "Saved coarse filters select exactly the intended inventory IDs",
+      "pass": true,
+      "evidence": [
+        "bag-1",
+        "bag-4",
+        "bag-5",
+        "bag-6",
+        "bag-7",
+        "bag-9",
+        "bag-10",
+        "bag-11"
+      ]
+    },
+    {
+      "name": "Automatic selection leaves inventory and gold unchanged",
+      "pass": true,
+      "evidence": {
+        "gold": "28,460",
+        "bag": "14 / 50"
+      }
+    },
+    {
+      "name": "Opening detailed settings does not enable them",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "detailActive": "false",
+        "detailOn": false,
+        "disabled": false,
+        "error": "",
+        "fields": 1,
+        "gold": "28,460",
+        "grades": [
+          {
+            "id": "common",
+            "on": true
+          },
+          {
+            "id": "magic",
+            "on": true
+          },
+          {
+            "id": "rare",
+            "on": true
+          },
+          {
+            "id": "legendary",
+            "on": false
+          },
+          {
+            "id": "unique",
+            "on": false
+          },
+          {
+            "id": "set",
+            "on": false
+          }
+        ],
+        "preview": "자동 선택 대상 10개",
+        "selected": [
+          "bag-1",
+          "bag-4",
+          "bag-5",
+          "bag-6",
+          "bag-7",
+          "bag-9",
+          "bag-10",
+          "bag-11"
+        ],
+        "types": [
+          "sword",
+          "greatsword",
+          "axe",
+          "bow",
+          "crossbow",
+          "staff",
+          "head",
+          "chest",
+          "hands",
+          "legs",
+          "feet",
+          "belt",
+          "neck",
+          "ring"
+        ]
+      }
+    },
+    {
+      "name": "Enabling detailed rules activates the controls and highlights the equipment button",
+      "pass": true,
+      "evidence": {
+        "active": "true",
+        "preview": "자동 선택 대상 10개"
+      }
+    },
+    {
+      "name": "One equipment type can keep valuable gear while other types remain coarse",
+      "pass": true,
+      "evidence": "자동 선택 대상 9개"
+    },
+    {
+      "name": "Existing match-count logic remains available inside detailed settings",
+      "pass": true,
+      "evidence": "자동 선택 대상 10개"
+    },
+    {
+      "name": "Turning detailed rules off bypasses stored exclusions and removes highlight",
+      "pass": true,
+      "evidence": {
+        "preview": "자동 선택 대상 10개",
+        "active": "false"
+      }
+    },
+    {
+      "name": "Turning detailed rules back on restores the prior thresholds",
+      "pass": true,
+      "evidence": "자동 선택 대상 9개"
+    },
+    {
+      "name": "Enabled detailed rules reject unfinished thresholds",
+      "pass": true,
+      "evidence": "도끼 · 기준값은 0 이상의 숫자, 충족 개수는 0~2의 정수로 입력하세요."
+    },
+    {
+      "name": "Unused detailed rules do not block saving coarse filters",
+      "pass": true,
+      "evidence": {
+        "preview": "자동 선택 대상 10개",
+        "error": ""
+      }
+    },
+    {
+      "name": "Mixed coarse and detailed settings omit only the matching axe and protected gear",
+      "pass": true,
+      "evidence": [
+        "bag-1",
+        "bag-3",
+        "bag-4",
+        "bag-5",
+        "bag-6",
+        "bag-7",
+        "bag-9",
+        "bag-10",
+        "bag-11"
+      ]
+    },
+    {
+      "name": "Reopening keeps rarity choices and detailed-rule status without expanding fields",
+      "pass": true,
+      "evidence": {
+        "grades": [
+          {
+            "id": "common",
+            "on": true
+          },
+          {
+            "id": "magic",
+            "on": true
+          },
+          {
+            "id": "rare",
+            "on": true
+          },
+          {
+            "id": "legendary",
+            "on": false
+          },
+          {
+            "id": "unique",
+            "on": false
+          },
+          {
+            "id": "set",
+            "on": false
+          }
+        ],
+        "active": "true",
+        "fields": 0
+      }
+    },
+    {
+      "name": "Clearing all rarities produces zero candidates",
+      "pass": true,
+      "evidence": "자동 선택 대상 0개"
+    },
+    {
+      "name": "Cancel restores the saved coarse filters instead of applying a draft",
+      "pass": true,
+      "evidence": [
+        "bag-1",
+        "bag-3",
+        "bag-4",
+        "bag-5",
+        "bag-6",
+        "bag-7",
+        "bag-9",
+        "bag-10",
+        "bag-11"
+      ]
+    },
+    {
+      "name": "PC filter overview fits the 1600 by 900 viewport",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 885,
+          "right": 1225,
+          "x": 375,
+          "y": 15
+        },
+        "foot": {
+          "bottom": 884,
+          "right": 1224,
+          "x": 376,
+          "y": 837
+        },
+        "overflow": false,
+        "rows": [
+          156.1875,
+          156.1875,
+          156.1875,
+          156.1875,
+          156.1875,
+          156.1875
+        ],
+        "size": [
+          1600,
+          900
+        ]
+      }
+    },
+    {
+      "name": "English overview exposes translated rarity and equipment filters",
+      "pass": true,
+      "evidence": "Items to auto-select: 9"
+    },
+    {
+      "name": "Portrait arranges rarity choices in two rows without clipping",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 913,
+          "right": 431,
+          "x": 9,
+          "y": 71
+        },
+        "foot": {
+          "bottom": 912,
+          "right": 430,
+          "x": 10,
+          "y": 846
+        },
+        "overflow": false,
+        "rows": [
+          234.1875,
+          234.1875,
+          234.1875,
+          271.1875,
+          271.1875,
+          271.1875
+        ],
+        "size": [
+          440,
+          956
+        ]
+      }
+    },
+    {
+      "name": "Portrait detail controls stay inside the settings panel",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 913,
+          "right": 431,
+          "x": 9,
+          "y": 71
+        },
+        "foot": {
+          "bottom": 912,
+          "right": 430,
+          "x": 10,
+          "y": 846
+        },
+        "overflow": false,
+        "rows": [
+          234.1875,
+          234.1875,
+          234.1875,
+          271.1875,
+          271.1875,
+          271.1875
+        ],
+        "size": [
+          440,
+          956
+        ]
+      }
+    },
+    {
+      "name": "Landscape overview respects the iPhone safe margins",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 410,
+          "right": 885,
+          "x": 71,
+          "y": 9
+        },
+        "foot": {
+          "bottom": 409,
+          "right": 884,
+          "x": 72,
+          "y": 366
+        },
+        "overflow": false,
+        "rows": [
+          138.09375,
+          138.09375,
+          138.09375,
+          138.09375,
+          138.09375,
+          138.09375
+        ],
+        "size": [
+          956,
+          440
+        ]
+      }
+    },
+    {
+      "name": "Landscape detail fields use two columns within the dialog",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 410,
+          "right": 885,
+          "x": 71,
+          "y": 9
+        },
+        "foot": {
+          "bottom": 409,
+          "right": 884,
+          "x": 72,
+          "y": 366
+        },
+        "overflow": false,
+        "rows": [
+          -166.90625,
+          -166.90625,
+          -166.90625,
+          -166.90625,
+          -166.90625,
+          -166.90625
+        ],
+        "size": [
+          956,
+          440
+        ]
+      }
+    },
+    {
+      "name": "English landscape coarse filters remain inside safe margins",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 410,
+          "right": 885,
+          "x": 71,
+          "y": 9
+        },
+        "foot": {
+          "bottom": 409,
+          "right": 884,
+          "x": 72,
+          "y": 366
+        },
+        "overflow": false,
+        "rows": [
+          138.09375,
+          138.09375,
+          138.09375,
+          138.09375,
+          138.09375,
+          138.09375
+        ],
+        "size": [
+          956,
+          440
+        ]
+      }
+    },
+    {
+      "name": "Inline portrait supports coarse filters without opening details or dismissing the dialog",
+      "pass": true,
+      "evidence": {
+        "detailFields": 0,
+        "device": "portrait",
+        "dialog": {
+          "bottom": 680.6000022888184,
+          "right": 321.2909393310547,
+          "x": 6.7090911865234375
+        },
+        "overflow": false,
+        "preview": "자동 선택 대상 2개"
+      },
+      "harnessCorrection": "Retested with the candidate status scoped to the settings footer; the generic status selector had read the shop toast."
+    },
+    {
+      "name": "Inline portrait selects only Common and Magic helmets",
+      "pass": true,
+      "evidence": [
+        "bag-1",
+        "bag-9"
+      ]
+    },
+    {
+      "name": "Inline landscape enables optional exclusions and keeps the settings dialog within bounds",
+      "pass": true,
+      "evidence": {
+        "active": "true",
+        "device": "landscape",
+        "dialog": {
+          "bottom": 301.92467308044434,
+          "right": 651.7154273986816,
+          "x": 52.28451919555664
+        },
+        "overflow": false,
+        "preview": "자동 선택 대상 0개"
+      }
+    },
+    {
+      "name": "Inline landscape keeps an axe that meets its enabled exclusion",
+      "pass": true,
+      "evidence": {
+        "expectedSelection": 0
+      }
+    },
+    {
+      "name": "Inline PC coarse Select all keeps protected items out and requires no detailed setup",
+      "pass": true,
+      "evidence": {
+        "details": 0,
+        "device": "pc",
+        "dialog": {
+          "bottom": 543,
+          "right": 921,
+          "x": 71
+        },
+        "overflow": false,
+        "preview": "자동 선택 대상 12개"
+      }
+    },
+    {
+      "name": "Inline PC auto-selection replaces the selection with twelve eligible items",
+      "pass": true,
+      "evidence": [
+        "bag-0",
+        "bag-1",
+        "bag-3",
+        "bag-4",
+        "bag-5",
+        "bag-6",
+        "bag-7",
+        "bag-9",
+        "bag-10",
+        "bag-11",
+        "bag-12",
+        "bag-13"
+      ]
+    }
+  ],
+  "policyChecks": {
+    "file": "auto-selection-policy-v7.json",
+    "passed": 34,
+    "total": 34
+  },
+  "semantics": {
+    "coarseFilters": "Checked rarity AND checked equipment type, over the whole inventory.",
+    "details": "Ignored unless the equipment type and Use detailed rules are both enabled. Values are retained when disabled.",
+    "zeroMatchCount": "Disable stat exclusions; retain coarse filters and sale protection.",
+    "selection": "Replace selection only. Save settings and sell are separate actions.",
+    "unique": "Requested independent UI category with no sample items; production rarity/special mapping remains a design decision.",
+    "pants": "Requested type with no catalogue bases; provisional chest affix mask."
+  },
+  "viewports": {
+    "standalone": [
+      [
+        1600,
+        900
+      ],
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ]
+    ],
+    "inline": [
+      [
+        1024,
+        720
+      ],
+      [
+        360,
+        820
+      ],
+      [
+        736,
+        500
+      ]
+    ]
+  },
+  "notVerified": [
+    "Unity implementation and game services",
+    "Real account storage and saves",
+    "Physical iPhone or Windows input, keyboard behavior or performance",
+    "Full game regression"
+  ],
+  "consoleErrors": [],
+  "captures": [
+    {
+      "path": "auto-select-v7-landscape-details-ko.jpg",
+      "bytes": 28480
+    },
+    {
+      "path": "auto-select-v7-landscape-filters-en.jpg",
+      "bytes": 33044
+    },
+    {
+      "path": "auto-select-v7-landscape-filters-ko.jpg",
+      "bytes": 31845
+    },
+    {
+      "path": "auto-select-v7-pc-details-ko.jpg",
+      "bytes": 64786
+    },
+    {
+      "path": "auto-select-v7-pc-filters-en.jpg",
+      "bytes": 72926
+    },
+    {
+      "path": "auto-select-v7-pc-filters-ko.jpg",
+      "bytes": 94227
+    },
+    {
+      "path": "auto-select-v7-portrait-details-ko.jpg",
+      "bytes": 45863
+    },
+    {
+      "path": "auto-select-v7-portrait-filters-en.jpg",
+      "bytes": 43329
+    },
+    {
+      "path": "auto-select-v7-portrait-filters-ko.jpg",
+      "bytes": 48975
+    }
+  ]
+}

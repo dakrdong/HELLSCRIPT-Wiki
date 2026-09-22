@@ -31,6 +31,7 @@ namespace Hellscript
             string saveDirectory=Application.persistentDataPath;
             string[] args=Environment.GetCommandLineArgs();for(int i=0;i<args.Length-1;i++)if(args[i]=="-hellscriptSavePath")saveDirectory=args[i+1];
             InitializeLanguage(saveDirectory);
+            ItemRangeDisplay.Initialize(saveDirectory);
             InitializeDisplaySettings(saveDirectory);
             InitializeInterfaceScale(saveDirectory);
             InitializeIdle(saveDirectory);
@@ -49,6 +50,11 @@ namespace Hellscript
         }
         public bool ChangeCharacterFromSettings(int index)
         {
+            if(UI.Page=="title"||UI.Page=="characters")
+            {
+                if(!SaveEntryCharacter(index))return false;
+                UI.CloseCommonPanel();if(UI.EntrySession.SignedIn)UI.OpenCharacterSelection();else UI.ShowTitle();return true;
+            }
             if(!Store.SwitchCharacter(index,catalog,Combat?.State)){Notify(Store.Error);return false;}
             CancelPotionDeparture();
             UI.CloseCommonPanel();ExitIdle(false);RestoreForegroundClock();
@@ -143,6 +149,11 @@ namespace Hellscript
             if(Town==null||Active||UI.Page!="plaza"||UI.CommonPanelOpen||UI.TownNavigationOpen)return;
             if(Town.Nearby.HasValue)UI.OpenStation(Town.Nearby.Value);
         }
+        public void InteractEquipmentMerchant(EquipmentShopTab tab)
+        {
+            if(Town==null||Active||UI.Page!="plaza"||UI.CommonPanelOpen||UI.TownNavigationOpen||Town.Nearby!=TownStation.Merchant&&Town.Nearby!=TownStation.Gambler)return;
+            UI.ShowEquipmentShop(tab,Town.Nearby==TownStation.Gambler);
+        }
         public void TapPlaza(Vector2 screen)
         {
             if(Town==null||UI==null||UI.Page!="plaza"||Active||UI.CommonPanelOpen||UI.TownNavigationOpen||!UiSafeArea.Frame.Contains(screen))return;
@@ -187,6 +198,7 @@ namespace Hellscript
             if(Combat==null||!Combat.OwnedTraining||slot<0||slot>=HuntEdict.PresetSlots||Combat.Hero.id!=Store.Data.Hero.id)return false;
             var build=Combat.State.build.Copy();if(BehaviorRules.Validate(build,Combat.Hero.heroClass).Count>0)return false;
             build.equipmentIds=Combat.Hero.inventory.Where(item=>item.equipped).Select(item=>item.id).ToList();
+            build.equipmentPositions=Combat.Hero.inventory.Where(item=>item.equipped).Select(item=>item.equipIndex).ToList();
             if(Store.SaveBuildPreset(Store.Data.Hero.id,slot,build,name??build.name))return true;
             Notify(Store.Error);return false;
         }
@@ -212,8 +224,10 @@ namespace Hellscript
             if(Combat!=null&&!Active&&Store.Data.repeatHunt?.runId==Combat.State.id)Store.Data.repeatHunt.pendingResult=Combat.State;
             if(!Store.Save()){Notice=Store.Error;BlockRepeat(RepeatBlock.Save,Store.Error);PreserveIdleSaveFailure();}
         }
+        float forgeSettlementTick;
         void Update()
         {
+            if(Store!=null&&Time.unscaledTime>=forgeSettlementTick){forgeSettlementTick=Time.unscaledTime+1;Store.SettleForgeJobs();}
             double elapsed=combatClock.Sample(Time.realtimeSinceStartupAsDouble);
             UpdateDisplaySettings();
             float repeatReal=UpdateRepeatClock();

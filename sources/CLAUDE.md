@@ -1,5 +1,9 @@
 # HELLSCRIPT 프로젝트 지침
 
+Unity Editor 연동에는 `AGENTS.md`의 **CoplayDev Unity MCP 활용 기준**을 함께 따른다. 도구 선택, 대상 프로젝트 확인, 변경 후 검증과 연결 실패 시 대응 기준은 그 문서를 단일 기준으로 유지한다.
+
+For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `AGENTS.md` as the single source for tool selection, project targeting, verification, and connection recovery.
+
 ## 언어: 한국어와 영어를 함께 제공한다
 
 이 프로젝트의 모든 개발 결과물은 한국어와 영어를 기본으로 갖춘다. 한쪽만 있는 상태를 완성으로 보지 않는다.

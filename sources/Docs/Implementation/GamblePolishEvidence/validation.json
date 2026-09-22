@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-21",
+  "unity": "6000.6.0f1",
+  "change": "Compact equipment reward presentation with content-fit detail height, restrained rarity halo and etched accents.",
+  "editMode": {
+    "filters": [
+      "EquipmentShopTests",
+      "GambleShopTests",
+      "LocalizationTests"
+    ],
+    "total": 54,
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "editmode.xml"
+  },
+  "nativeBuild": {
+    "result": "Succeeded",
+    "errors": 0,
+    "finalBuildLog": "/tmp/gamble-polish-build-v2.log"
+  },
+  "nativeAcceptance": {
+    "result": "PASS",
+    "pointerEventClicks": 42,
+    "checks": [
+      "detail width capped at 304 canvas units",
+      "no excess empty height beneath the actual content",
+      "icon and card do not overlap",
+      "card and confirmation remain inside the screen",
+      "scrolling moves the detail content without dismissing the result",
+      "inside click keeps the result open",
+      "confirm and outside click dismiss",
+      "skip removes animation and persists",
+      "item saved before reveal",
+      "Korean and English localized content"
+    ],
+    "evidence": "runtime-equipment-shop-smoke.txt"
+  },
+  "captureSizes": {
+    "portrait": "440x956",
+    "landscape": "956x440",
+    "pcKorean": "1600x900",
+    "pcEnglish": "1920x1080"
+  },
+  "references": [
+    "https://news.blizzard.com/en-gb/article/24292852/the-3-2-0-ptr-what-you-need-to-know",
+    "https://news.blizzard.com/en-us/article/24244451/deliver-sanctuary-from-madness"
+  ],
+  "limits": [
+    "Native macOS development player with an isolated account. Mobile-sized windows are not physical-mobile proof."
+  ]
+}

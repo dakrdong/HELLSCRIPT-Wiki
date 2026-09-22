@@ -165,7 +165,7 @@ namespace Hellscript
             foreach(var id in ids)
             {
                 var left=x.skills.Find(s=>s.definitionId==id)??new SkillStatistics();var right=y?.skills.Find(s=>s.definitionId==id)??new SkillStatistics();
-                string name=id=="BASIC"?"기본 공격":game.catalog.skills.FirstOrDefault(s=>s.id==id)?.name??ItemCatalog.Unique(id)?.name??ItemCatalog.Sets.FirstOrDefault(s=>s.id+"4"==id)?.name??id;
+                string name=id=="BASIC"?"기본 공격":game.catalog.skills.FirstOrDefault(s=>s.id==id)?.name??ItemCatalog.Unique(id)?.Name??ItemCatalog.Sets.FirstOrDefault(s=>s.id+"4"==id)?.name??id;
                 Note(content,name,22,58,gold);ComparisonValue("사용/발동",$"{left.starts}/{left.releases}",y==null?null:$"{right.starts}/{right.releases}");
                 ComparisonValue("중단",left.interruptions.ToString(),y==null?null:right.interruptions.ToString());ComparisonValue("피해",left.damage.ToString("N0"),y==null?null:right.damage.ToString("N0"));
                 ComparisonValue("자원 부족 판정",left.resourceChecks.ToString(),y==null?null:right.resourceChecks.ToString());
@@ -183,7 +183,7 @@ namespace Hellscript
         }
         void ShowComparisonChoice(TrainingComparisonRecord record,bool useB)
         {
-            var chosen=(useB?record.b:record.a).build.Copy();chosen.equipmentIds=record.Equipment(useB).Select(i=>i.id).ToList();
+            var chosen=(useB?record.b:record.a).build.Copy();chosen.equipmentIds=record.Equipment(useB).Select(i=>i.id).ToList();chosen.equipmentPositions=record.Equipment(useB).Select(i=>i.equipIndex).ToList();
             pageRepaint=()=>ShowComparisonChoice(record,useB);Base("comparison-choice",Loc.F("{0} 설정 활용", (useB?"B":"A")),"현재 장비는 유지됩니다");
             var changes=record.useEdict?TrainingComparisonChanges.Describe(game.Store.Data.Hero,record.AttemptHero(useB),game.catalog):BuildEditing.DescribeCombatChanges(game.Store.Data.Hero.build,chosen,game.catalog,game.Store.Data.Hero.heroClass);
             ComparisonNote(record.useEdict?"슬롯에는 선택한 장비 참조·패시브·기본 행동을 저장합니다. 사냥 칙령 원본은 아래에서 별도로 불러온 뒤 직접 적용하세요.":"현재 행동과 선택한 설정의 차이를 확인하세요. 슬롯에 저장하거나, 성소의 행동 설계에서 편집안으로 불러와 직접 적용할 수 있습니다.");

@@ -1,0 +1,82 @@
+{
+  "date": "2026-09-21",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "runs": [
+      {
+        "file": "equipment-shop-gamble-editmode.xml",
+        "result": "Failed(Child)",
+        "total": "537",
+        "passed": "536",
+        "failed": "1",
+        "skipped": "0",
+        "duration": "124.1461902",
+        "start-time": "2026-09-21 03:51:47Z",
+        "end-time": "2026-09-21 03:53:51Z"
+      },
+      {
+        "file": "equipment-shop-localization.xml",
+        "result": "Passed",
+        "total": "33",
+        "passed": "33",
+        "failed": "0",
+        "skipped": "0",
+        "duration": "0.3671952",
+        "start-time": "2026-09-21 03:54:42Z",
+        "end-time": "2026-09-21 03:54:43Z"
+      },
+      {
+        "file": "equipment-shop-routing.xml",
+        "result": "Passed",
+        "total": "95",
+        "passed": "95",
+        "failed": "0",
+        "skipped": "0",
+        "duration": "25.805252",
+        "start-time": "2026-09-21 04:07:06Z",
+        "end-time": "2026-09-21 04:07:31Z"
+      }
+    ],
+    "latestResultPerCase": {
+      "total": 538,
+      "passed": 538,
+      "failed": 0
+    },
+    "correction": "One missing English price label in the first run was added; all 33 localization tests passed on rerun."
+  },
+  "nativeRuntime": {
+    "platform": "macOS development player",
+    "result": "passed",
+    "screenSizes": [
+      [
+        1600,
+        900
+      ],
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "interaction": "41 UI raycast and pointer-event clicks; isolated account",
+    "saveBeforeReveal": true,
+    "hiddenUntilReveal": true,
+    "separateGamblerNpc": true,
+    "physicalMobileTested": false,
+    "legacyEntryRoutesToNpc": true
+  },
+  "publication": "Work branch; public wiki deployment belongs to the main merge.",
+  "liveEditor": {
+    "project": "HELLSCRIPT main checkout",
+    "state": "ready after script reload",
+    "consoleErrors": 0,
+    "playModeChanged": false
+  }
+}

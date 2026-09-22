@@ -11,10 +11,8 @@
 \n고정 공격속도 {0:+0%;-0%}	\nFixed attack speed {0:+0%;-0%}
 \n고정 부가 저항 {0:0.0}	\nFixed extra resistance {0:0.0}
 \n골드 +{0:N0}	\nGold +{0:N0}
-\n기존 수치를 보존한 옵션입니다.	\nThis affix keeps its older value.
 \n번역 파일을 찾지 못해 번역이 없는 줄은 한국어로 표시합니다.	\nThe translation file was not found, so lines without a translation are shown in Korean.
 \n재료 +{0:N0}	\nMaterials +{0:N0}
-\n재설정 대상으로 선택한 줄입니다.	\nThis is the line chosen for rerolling.
 \n해금: {0}	\nUnlocked: {0}
   (미장착)	  (not equipped)
   ·  꺼짐	  ·  off
@@ -22,10 +20,6 @@
  + 강화 재료 {0}개	 + {0} enhancement materials
  / 장비 드롭	 / gear dropped
  / 환류 기준 {0:0}{1}	 / feedback threshold {0:0}{1}
- · 2세트 해제	 · loses the 2 set
- · 2세트 활성	 · gains the 2 set
- · 4세트 해제	 · loses the 4 set
- · 4세트 활성	 · gains the 4 set
  · HP 비율을 유지했습니다.	 · your HP ratio was kept.
  · {0:0.00}초 뒤 실행	 · runs in {0:0.00}s
  · {0} 해금 · 성장에서 설정 확인	 · {0} unlocked · check the settings under growth
@@ -131,7 +125,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0}\n현재 장착 {1}부위 · 현재 캐릭터 보유 {2}개 · 창고 {3}개\n2세트{4}: {5}\n4세트{6}: {7}	{0}\n{1} slots equipped · {2} on this character · {3} in the warehouse\n2 set{4}: {5}\n4 set{6}: {7}
 {0}   Lv.{1}\n최고 실클리어 {2}단계\n{3}	{0}   Lv.{1}\nBest clear stage {2}\n{3}
 {0}   Lv.{1}   최고 실클리어 {2}단계\n오늘 소탕 {3}/3 회 사용   가방 빈칸 {4}칸	{0}   Lv.{1}   best clear stage {2}\nSweeps used today {3}/3   free bag slots {4}
-{0}  {1} → {2}부위{3}	{0}  {1} → {2} slots{3}
 {0}  ·  {1}{2}   ({3:0.###}~{4:0.###} · {5:0.###} 단위)	{0}  ·  {1}{2}   ({3:0.###}~{4:0.###} · steps of {5:0.###})
 {0} #{1} 사망	{0} #{1} died
 {0} +{1}\n{2} · {3} · I{4} · 요구 Lv.{5}\n{6}{7}	{0} +{1}\n{2} · {3} · I{4} · needs Lv.{5}\n{6}{7}
@@ -140,7 +133,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0} Lv.{1} · 현재 장비와 해금한 스킬\nHP {2:0} · 공격 기준 {3:0.0}	{0} Lv.{1} · current gear and unlocked skills\nHP {2:0} · Attack {3:0.0}
 {0} Lv.{1} · 현재 장비와 행동을 확인합니다	{0} Lv.{1} · review your gear and behavior
 {0} · Lv.{1} 추천	{0} · recommended for Lv.{1}
-{0} · {1} [{2}]\n{3} +{4:0.##} · 가능 범위 {5:0.##}~{6:0.##}{7}{8}	{0} · {1} [{2}]\n{3} +{4:0.##} · possible range {5:0.##}~{6:0.##}{7}{8}
 {0} · {1} · {2}\n목표 {3} {4:0.#}m · {5}\n{6} · 설치 {7} · {8} · {9}	{0} · {1} · {2}\nTarget {3} {4:0.#}m · {5}\n{6} · placement {7} · {8} · {9}
 {0} · {1} · {2}\n아이템 레벨 {3} · 요구 Lv.{4}\n{5}	{0} · {1} · {2}\nItem level {3} · needs Lv.{4}\n{5}
 {0} · {1} · 조건을 고정해 시험합니다	{0} · {1} · tested with the conditions held fixed
@@ -278,10 +270,8 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 갑옷	Armor
 강인한	Tenacious
 강철 대검	Steel Greatsword
-강화 +{0} · 재료 {1} / {2:N0} 골드	Enhance +{0} · {1} materials / {2:N0} gold
 강화 장비 추가 보호	Extra protection for enhanced gear
 강화된 액티브 사격 먼저 검토	Consider the empowered active shot first
-강화를 완료했습니다.	Enhancement complete.
 강화할 교전	Fights worth boosting
 같은 거래 요청에 다른 내용이 들어왔습니다.	The same transaction request arrived with different contents.
 같은 균열의 상태 다시 확인	Check the state of this rift again
@@ -405,8 +395,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 교전의 기준 대상	Reference target for the fight
 교전이 시작되면|다음 공격이 닿을 때	As the fight opens|As the next attack lands
 교체 불가 시	When nothing can be replaced
-교체 후 전체 능력치\n현재: {0}	Your stats after the swap\nNow: {0}
-교체로 빠지는 전설 효과: {0}\n{1}	The legendary effect this swap gives up: {0}\n{1}
 군중 속으로	Into the Crowd
 군중 제어 지속시간 감소	Crowd Control Duration Reduction
 군중 제어/침묵	Crowd control or silence
@@ -605,7 +593,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 대상과 거리	Distance to the target
 대상의 위험 시전	Target casting something dangerous
 대상이 생기면|오래 싸울 적에게	As soon as there is a target|Only on a long fight
-대장장이	Blacksmith
 대체 적용	Substituted
 더 높은 우선순위로 변경	Switch for a higher priority
 더 새로운 균열 지도 버전이 필요합니다. 저장 파일은 보존했습니다.	A newer rift map version is needed. The save file was kept.
@@ -762,7 +749,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 미충족	not met
 미탐색 영역으로 이동	Moving to an unexplored area
 미탐색 지점으로 이동	Moving to an unexplored spot
-미확인 {0} · {1:N0} 골드	Unidentified {0} · {1:N0} gold
 민첩성	Dexterity
 밀집 연소	Dense Burn
 밀집 중심	Centre of the pack
@@ -1100,8 +1086,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 손	Hands
 손아귀	Grasp
 쇠사슬 시체	Chained Corpse
-수수께끼 상인	Enigmatic Merchant
-수수께끼 상인 · 제작	Enigmatic merchant · Crafting
 수정한 설정 훈련	Train the change
 수정한 설정을 훈련했다면 새 균열에 도전하세요. 아래에서 반복 여부와 성공·실패 후의 행동, 가방이 찼을 때의 처리 방법을 확인할 수 있습니다. 필요하면 반복 정책을 바꾸고 출발하세요.	Once you have trained the change, take on a new rift. Below you can check whether it repeats, what happens after a win or a loss, and what to do when the bag fills up. Adjust the repeat policy if you want, then set off.
 순간 범위 공격	Instant area attacks
@@ -1330,7 +1314,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 이동: {0} {1:0.#}m → {2} {3:0.#}m	Movement: {0} {1:0.#}m → {2} {3:0.#}m
 이동·공격·장비 수집은 자동입니다. 플레이어는 행동 설계에서 위에서부터 검사할 규칙과 조건을 정합니다. 1배·1.5배·2배는 공격뿐 아니라 균열 제한시간도 함께 흐르게 합니다.	Moving, attacking and picking up gear are automatic. What you decide, in behavior design, is which rules and conditions get checked and in what order. 1×, 1.5× and 2× speed up the rift timer as well as the fighting.
 이동기 시작/완료	Movement skills started/finished
-이동속도 m/s	Movement speed m/s
 이동의 최소 개선	Minimum gain from moving
 이름 변경	Rename
 이름 입력	Enter a name
@@ -1403,8 +1386,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 자원 부족 판정	Blocked by resource
 자원 생성	Resource Generation
 자원 소모 감소	Resource Cost Reduction
-자원 소모 감소 %	Resource Cost Reduction %
-자원 회복 / 초	Resource per second
 잔향 생성 공간 확인	Checking the room for the echo
 잔향 생성점 부족	Not enough spawn points for the echo
 잔향 진압 {0:0.0}초 남음	Suppressing the echo · {0:0.0}s left
@@ -1851,8 +1832,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 충족	met
 취소	Cancel
 취약 피해	Vulnerable Damage
-치명 피해 %	Critical damage %
-치명 확률 %	Critical chance %
 치명적 피해 대응	React to lethal damage
 치명타 피해	Critical Strike Damage
 치명타 확률	Critical Strike Chance
@@ -1876,7 +1855,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 코드의 정규 표현을 확인해 주세요.	Check the code's canonical form.
 코드의 중첩이 너무 깊습니다.	The code nests too deeply.
 코어 회수	Collect cores
-쿨타임 감소 %	Cooldown reduction %
 클립보드에 코드가 없습니다. 받은 코드를 복사한 뒤 다시 누르세요.	There is no code on the clipboard. Copy the code you were given and press this again.
 클립보드의 코드 확인	Review the code on the clipboard
 타오르는	Blazing
@@ -1974,9 +1952,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 해금 레벨 {0}	Unlocks at level {0}
 해당 스킬에 없는 핵심 옵션입니다: {0}	That skill has no such core option: {0}
 해당 스킬의 핵심 옵션 번호를 확인하세요.	Check the core option number for that skill.
-해제	loses
-해제되는 2세트 효과\n{0}	The 2 set effect you lose\n{0}
-해제되는 4세트 효과\n{0}	The 4 set effect you lose\n{0}
 핵심 공격을 아직 배우지 않아 기본 공격 중심으로 진행합니다. 지금 사용할 공격이 더 많은 다른 추천안도 비교해 보세요.	You have not learned the key attack yet, so this leans on the basic attack. It is worth comparing the other recommendation, which has more attacks you can use now.
 핵심 능력치	Core
 핵심 능력치가 나머지 줄을 만듭니다. 힘은 방어도를, 민첩성은 회피를, 지능은 저항을, 의지력은 받는 치유와 압도 피해를 올립니다.	The core attributes make the rest of the sheet. Strength raises armor, Dexterity raises dodge, Intelligence raises resistance, and Willpower raises healing received and overpower damage.
@@ -2033,15 +2008,12 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 현재 위치|예상 착탄 위치	Where they stand|Where they are predicted to be
 현재 위치에서만|현재 교전 안에서 접근	Only from where you stand|Move in within the fight
 현재 위치의 위험	Danger at your position
-현재 이 부위는 비어 있습니다.	This slot is empty.
 현재 자원	Current resource
 현재 작성 중인 편집안과 비교합니다. 실제 장비는 교체하지 않습니다.	Compared against the draft you are writing. No gear is actually swapped.
 현재 장비·장착 기준으로 {0}개 항목이 비활성·대체·충돌 상태입니다. 해당 항목 아래에서 사유를 확인하세요.	With your current gear and equipped skills, {0} entries are inactive, substituted or in conflict. The reason is shown under each one.
 현재 장비는 유지됩니다	Your current gear stays
 현재 장비로 미리보기 갱신	Refresh the preview with the current gear
 현재 장비와 후보의 요구 레벨·접두사·접미사·전설·세트 효과를 비교하세요. 공격 기준 하나만으로 우열을 정하지 않습니다. 지금 바꿀 후보가 없다면 비교할 항목부터 확인합니다.	Compare the level requirement, prefix, suffix and legendary or set effects of a candidate against what you wear. One attack number does not settle it. If nothing is worth swapping right now, start by learning what to compare.
-현재 장착 중인 장비를 보고 있습니다.	You are looking at the piece you have equipped.
-현재 장착한 장비	Currently equipped
 현재 저장된 설정을 이름과 함께 보관합니다. 불러온 설정은 적용 전까지 편집본입니다.	Keeps the settings you have saved, under a name. A loaded setup stays a draft until you apply it.
 현재 전투·회수 후 이동	Finish the fight and collecting, then head over
 현재 지원하는 사냥 칙령·콘텐츠 버전이 아닙니다.	This hunt edict or content version is not supported.
@@ -2396,8 +2368,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 계정 창고 · 장비 보관	Shared storage · Equipment
 구매한 물품을 보관했습니다.	Your purchase has been stored.
 균열 열기	Open rift
-균열 포탈	Rift portal
-기본 장비를 골드로 구매할 수 있습니다. 장비를 판매하려면 판매할 장비를 선택하세요.	Buy basic equipment with gold. To sell equipment, select an item in your bag.
 단계 선택 · 균열 입장	Select stage · Enter rift
 대장간	Blacksmith
 대장간 이용	Use forge
@@ -2408,33 +2378,22 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 룬 상점 열기	Open rune shop
 마을 도착부터 언제든 이용 가능	Available any time after entering town
 마을로 돌아가기	Return to town
-미확인 장비 · 제작 상점	Unidentified gear · Crafting
 보석 구매 · 소켓 관리	Buy gems · Manage sockets
 보석 보관함 · 소켓 관리	Gem storage · Manage sockets
 보석 상인	Gem merchant
 보석 상점 열기	Open gem shop
 보유 골드 {0:N0}	Gold: {0:N0}
 상점 열기	Open shop
-선택한 캐릭터	Selected character
 시설 안내	Town guide
-이 캐릭터 선택	Select this character
-일반 {0} 구매 · {1:N0} 골드	Buy common {0} · {1:N0} gold
-입장하기	Enter town
-입장하면 마을에 도착합니다. 원형 조이스틱으로 움직여 주민들을 만나 보세요.	Enter the settlement, then use the circular joystick to move and meet its residents.
 자유 훈련 · 설정 비교	Training · Compare builds
-작업할 장비를 선택한 뒤 강화하거나 옵션을 재설정하세요. 각 작업의 해금 조건과 비용은 장비 상세에 표시됩니다.	Select equipment to enhance it or reroll an affix. Unlock requirements and costs appear in the equipment details.
 장비 구매 · 판매	Buy and sell equipment
 장비 상인	Equipment merchant
 장비 재련 · 강화 · 제작	Reforge · Enhance · Craft
-장비 재련 · 강화할 장비 선택	Select equipment to reforge or enhance
 장비 제작	Craft equipment
-장비 판매 · 가방 열기	Sell equipment · Open bag
 잿빛 숲 · 정착민 마을	Ashwood · Settlers' village
 잿빛 숲 너머, 당신의 이야기가 시작됩니다	Beyond the ashen woods, your story begins.
 조이스틱으로 이동 · 주민에게 가까이 가서 대화하세요	Move with the joystick · Approach a resident to interact
 진행 중인 균열을 먼저 완료하면 거래할 수 있습니다.	Finish your current rift before trading.
-진행 중인 균열의 캐릭터로 입장합니다. 마을 포탈에서 이어갈 수 있습니다.	Enter with the character in your saved rift. Resume the run at the town portal.
-창고 관리자	Warehouse keeper
 창고 열기	Open storage
 캐릭터 선택하기	Select a character
 훈련 교관	Training instructor
@@ -2467,7 +2426,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 캐릭터	Character
 룬 보드	Rune Board
 콘텐츠 메뉴	Content menu
-준비 중인 콘텐츠입니다.	This content is still in preparation.
 골드	Gold
 유료재화	Premium currency
 잠긴 탭입니다. 먼저 구매해 주세요.	This tab is locked. Buy it first.
@@ -2495,7 +2453,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 이 프리셋에는 등록된 장비가 없습니다.	This preset has no registered equipment.
 같은 장비가 두 번 등록되어 있습니다.	The same item is registered twice.
 {0} · 다른 캐릭터가 보유	{0} · held by another character
-같은 부위에 두 장비가 등록되어 있습니다.	Two items are registered for the same slot.
 창고 {0}번 탭 {1}칸 초과	Warehouse tab {0} over by {1}
 소지품 {0}칸 초과	Bag over by {0}
 {0} → 소지품 {1}번 칸	{0} → bag slot {1}
@@ -2585,7 +2542,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 프리셋에서 장비 변경	Change gear from a preset
 잠금 상태를 유지한 채 이동합니다. 강화·옵션·프리셋 등록도 유지됩니다.	Moves keep the lock, along with enhancement, affixes and preset registration.
 아이템 이동 시 강화·옵션·잠금·프리셋 등록을 유지합니다.	Moving an item keeps its enhancement, affixes, lock and preset registration.
-교체 후 전체 능력치 · 현재: {0}	Full sheet after the swap · now: {0}
 일반 재료	Materials
 보유 {0:N0}개 · 계정 공용	{0:N0} owned · account-wide
 강화·걸작·소켓 내기에 사용합니다. 세 캐릭터가 함께 쓰며 창고와 소지품 사이를 옮기는 재화가 아닙니다.	Used for enhancing, masterworking and opening sockets. All three characters share it; it is not moved between the warehouse and the bag.
@@ -2751,6 +2707,95 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 잠긴 보관함의 이름은 바꿀 수 없습니다.	Unlock the vault before renaming it.
 보관함 이름은 1~12자로 입력해 주세요.	Enter a vault name with 1 to 12 characters.
 레어	Rare
+
+# Living title screen
+잿빛 성소	Ashen Sanctuary
+검은 종탑	Black Belfry
+망각의 문	Gate of Oblivion
+원활	Available
+혼잡	Busy
+점검 중	Maintenance
+방랑자	Wanderer
+연출 켜짐	Motion on
+연출 멈춤	Motion off
+금지된 기록이 깨어난다	THE FORBIDDEN SCRIPT AWAKENS
+재가 된 성소에서, 다시 깨어나라.	Awaken once more in a sanctuary of ash.
+계정 로그인	Account login
+게스트로 계속	Continue as guest
+서버 선택	Select server
+로그인하거나 게스트로 시작하세요.	Sign in or continue as a guest.
+로그인·서버 선택 체험 화면	Login & server preview
+{0} · 계정	{0} · Account
+로그아웃	Sign out
+성소로 향하는 중…	Entering sanctuary…
+선택한 캐릭터로 성소에 입장합니다.	Enter the sanctuary with your selected character.
+로그인 체험입니다. 실제 계정 정보는 입력하지 마세요.	Login preview. Please use fictional account details.
+계정 이름	Account name
+방랑자의 이름을 입력하세요	Enter a wanderer name
+비밀번호	Password
+체험용 문자를 입력하세요	Enter a fictional password
+로그인	Sign in
+계정 이름과 체험용 비밀번호를 입력하세요.	Enter an account name and a fictional password.
+체험 서버 · 어느 서버를 골라도 현재 캐릭터로 시작합니다.	Preview servers share your current characters and progress.
+선택됨	Selected
+한국 · 체험 서버	Korea · Preview server
+
+한손 지팡이	Wand
+오브	Orb
+방패	Shield
+화살	Arrows
+단검	Dagger
+
+# Native inventory
+ · 각성	 · Awakened
+{0} · {1} · 아이템 Lv.{2} · 요구 Lv.{3}	{0} · {1} · Item Lv.{2} · Requires Lv.{3}
+{0}개 분해	Dismantle {0}
+{0}에 장착	Equip: {0}
+강화 +{0} · 걸작 {1}{2}	Enhancement +{0} · Masterwork {1}{2}
+공격 기준  {0:0.#} → {1:0.#}	Attack  {0:0.#} → {1:0.#}
+분해 대상 · {0}개	Selected items · {0}
+선택 분해	Dismantle selected
+선택한 아이템을 분해하시겠습니까?	Dismantle the selected items?
+선택한 아이템을 분해했습니다.	The selected items were dismantled.
+아이템 정보	Item information
+아이템을 누르면 정보를 확인할 수 있습니다.	Tap an item to inspect it.
+이 게임에는 아직 적용되는 곳이 없습니다	This attribute is not used in gameplay yet.
+일괄 분해	Bulk dismantle
+잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.	Equipped, locked, socketed and preset items are protected.
+장비를 소지품으로 옮겼습니다.	Equipment returned to the bag.
+장착 비교	Compare equipment
+전체 {0}개 속성	All {0} attributes
+전체 능력치	All attributes
+보호 중인 아이템은 분해할 수 없습니다.	Protected items cannot be dismantled.
+분해 취소	Cancel dismantle
+아이템을 캐릭터에게 끌어서 장착	Drag an item onto the character to equip it.
+아이템을 터치해 선택하거나 해제할 수 있습니다.	Tap items to select or deselect them.
+양손 점유	Both hands
+이 장비를 해당 장착 위치에 넣을 수 없습니다.	This item cannot be equipped in that position.
+교체할 장비를 돌려받을 소지품 공간이 부족합니다.	There is not enough bag space for the replaced equipment.
+보조 장비	Off-hand equipment
+보조무기	Off hand
+양손 무기 · 두 칸 점유	Two-handed · occupies both slots
+오른쪽 반지	Right ring
+오브와 마법 스크롤은 한손 지팡이와 함께 장착할 수 있습니다.	Orbs and magic scrolls require a one-handed wand.
+왼쪽 반지	Left ring
+장비를 돌려받을 소지품 공간이 부족합니다.	There is not enough bag space to unequip this gear.
+장착한 장비를 선택해 주세요.	Select an equipped item.
+주무기	Main hand
+한손 무기	One-handed weapon
+현재 주무기와 함께 장착할 수 없습니다.	This item is incompatible with the current main-hand weapon.
+화살은 활과 함께 장착할 수 있습니다.	Arrows require a bow.
+분해할 수 없는 아이템이 포함되어 있습니다.	The selection includes items that cannot be dismantled.
+이 캐릭터가 보유한 장비만 선택할 수 있습니다.	Select equipment owned by this character.
+재의 한손 지팡이	Ash Wand
+봉인된 오브	Sealed Orb
+마법 스크롤	Magic Scroll
+철 방패	Iron Shield
+사냥 화살	Hunting Arrows
+사냥꾼 단검	Hunter's Dagger
+장착 위치나 무기 조합이 올바르지 않습니다.	The equipment positions or weapon combination are invalid.
+오래된 순	Oldest first
+
 # --- composed at runtime; no source literal holds these ---
 # Legacy saved rift errors
 통로 연결 실패	A corridor failed to connect
@@ -3323,7 +3368,7 @@ G{0} · {1}칸	G{0} · {1} hexes
 프리셋만 지웁니다. 실제 룬과 현재 배치는 유지됩니다.	Only the preset will be cleared. Owned runes and current layouts are preserved.
 룬 보드로	Back to rune board
 합성 전에 전체 배치를 저장하거나 되돌려 주세요.	Save or revert all layouts before fusing runes.
-같은 등급·크기 두 개로 성장 · 실패와 수수료 없음	Fuse two of the same grade and size · No failure or fee
+같은 색·등급·크기 두 개로 성장 · 실패와 수수료 없음	Grow with two runes of the same color, grade and size · no failure or fee
 1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다.	Two 1–4-hex runes become the next size at the same grade. Two 5-hex runes become one hex at the next grade. Shapes may differ. Fuse up to 100 pairs at once.
 {0}칸 · 보관 {1}개 · 선택 {2}개 · 미수령 {3}개	{0} hexes · {1} stored · {2} selected · {3} pending
 한 쌍 선택	Select a pair
@@ -3517,7 +3562,6 @@ HP {0:0}/{1:0} · 자원 {2:0}\n위치 ({3:0.0}, {4:0.0}) · 대상 {5}\n{6} · 
 상위 접사 {0}개 · 걸작 {1}단계	Greater affixes {0} · Masterwork {1}
 보유한 장비만 걸작을 진행할 수 있습니다.	Only owned equipment can be masterworked.
 균열을 완료하고 성소에서 걸작을 진행해 주세요.	Finish the rift and return to the sanctuary to masterwork equipment.
-강화 +5를 마친 장비만 걸작을 진행할 수 있습니다.	Equipment must reach enhancement +5 before masterworking.
 장비 품질 기록을 확인해 주세요.	Check the equipment quality record.
 현재 걸작 상한에 도달했습니다. 더 높은 균열을 실제로 클리어하면 상한이 열립니다.	The current masterwork cap has been reached. Clear a higher rift to raise it.
 걸작에 필요한 재료 또는 골드가 부족합니다.	Not enough materials or gold for masterworking.
@@ -3529,7 +3573,6 @@ HP {0:0}/{1:0} · 자원 {2:0}\n위치 ({3:0.0}, {4:0.0}) · 대상 {5}\n{6} · 
 각성 장비의 등급 또는 접사 품질이 올바르지 않습니다.	The awakened equipment rarity or affix quality is invalid.
 걸작 접사 강화 기록이 올바르지 않습니다.	The masterwork affix boost record is invalid.
 상위 접사 기록이 올바르지 않습니다.	The greater affix record is invalid.
-{0}\n{1} {2:0.0}\n기본 {3:0.0} × 강화 {4:0.###} × 각성 {5:0.##} × 걸작 {6:0.###}	{0}\n{1} {2:0.0}\nBase {3:0.0} × Enhancement {4:0.###} × Awakening {5:0.##} × Masterwork {6:0.###}
 고정 부가 저항 {0:0.0}	Fixed extra resistance {0:0.0}
 고정 공격속도 {0:+0%;-0%}	Fixed attack speed {0:+0%;-0%}
 {0}{1} · {2} [{3}]\n{4} +{5:0.##} · 가능 범위 {6:0.##}~{7:0.##}	{0}{1} · {2} [{3}]\n{4} +{5:0.##} · Possible range {6:0.##}–{7:0.##}
@@ -4121,7 +4164,7 @@ M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 
 슬롯 {0}에 모든 무기의 현재 배치를 등록합니다.	Store the current layouts of all weapons in slot {0}.
 각인 배치	Inscribed layout
 프리셋의 룬이 없거나 현재 개방 경로에 맞지 않아 적용하지 않았습니다.	The preset was not applied: a rune is missing or its placement does not match the current unlock paths.
-1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다. 같은 색끼리 먼저 짝을 지으며 그 색을 유지합니다. 다른 색 한 쌍은 다섯 색 중 무작위로 결정됩니다.	Two 1–4-cell runes become the next size at the same grade. Two 5-cell runes become one cell at the next grade. Shapes may differ; combine up to 100 pairs. Matching colors are paired first and preserved. A mixed-color pair yields one of five colors at random.
+1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다. 같은 색끼리만 짝을 지으며 결과에도 그 색을 유지합니다.	Two 1–4-cell runes become the next size at the same grade. Two 5-cell runes become a 1-cell rune at the next grade. Shapes may differ. Fuse up to 100 pairs per request. Only same-color runes may pair, and the result keeps that color.
 아래 크기 확률은 룬 드롭에 성공했을 때의 비율입니다. 보스의 룬도 같은 표를 따릅니다. 획득 등급·능력 색·보드 능력 등급은 서로 다릅니다. 각 능력 색의 확률은 20%입니다.	Size probabilities below are conditional on a successful rune drop. Boss runes use the same table. Acquisition grade, ability color and board ability tier are separate. Each ability color has a 20% chance.
 이전 저장 → 현재 편집	Last saved → Current draft
 활성	Active
@@ -4136,3 +4179,271 @@ M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 
 공격 계열	Attack
 무기 선택	Select weapon
 영역 선택	Select region
+
+# Character selection stage
+로그인 후 캐릭터를 선택합니다.	Choose your character after signing in.
+운명을 선택하라	CHOOSE YOUR FATE
+성소의 부름에 응할 자는 누구인가.	Who will answer the sanctuary's call?
+‹ 타이틀	‹ Title
+캐릭터를 누르면 전투 태세를 취합니다.	Select a character to ready them for battle.
+강철의 의지 · 검으로 길을 여는 전사	Iron resolve · A warrior who carves the way.
+금지된 지식 · 원소를 지배하는 마법사	Forbidden lore · A mage who commands the elements.
+침묵의 추적자 · 어둠을 꿰뚫는 궁수	Silent hunter · A ranger who pierces the dark.
+진행 중인 균열의 캐릭터로 이어갑니다.	Continue with the character in your active rift.
+전투 태세를 갖추는 중…	Preparing for battle…
+시작하기	START
+
+# Equipment merchant
+한손검	One-handed sword
+양손검	Two-handed sword
+헬멧	Helmet
+가슴 방어구	Chest armor
+장갑	Gloves
+신발	Boots
+허리띠	Belt
+고유	Unique
+보유하지 않은 장비	Not owned
+프리셋 참조	Used by a preset
+현재 장착과 비교	Compare with equipped
+장착 장비 없음	Nothing equipped
+구매	Buy
+되사기	Buyback
+{0} · {1:N0} 골드	{0} · {1:N0} gold
+장비를 구매했습니다.	Equipment purchased.
+장비를 되샀습니다.	Equipment bought back.
+고정 저항 {0:0.##}	Fixed resistance {0:0.##}
+기본 공격 속도 {0:0.##}	Base attack speed {0:0.##}
+강화 +{0} · 걸작 {1}단계	Enhancement +{0} · Masterwork {1}
+재설정 {0}회	Rerolls: {0}
+장착 시 사라지는 속성	Properties lost on equip
+판매가 {0:N0} 골드	Sell value: {0:N0} gold
+다중 선택 종료	End selection
+다중 선택	Multi-select
+자동 선택	Auto-select
+자동 선택 설정	Auto-select settings
+대표 옵션	Common options
+추가 옵션	Additional options
+＋ 제외 옵션 추가	＋ Add exclusion
+옵션 목록 닫기	Close option list
+사용 중인 제외 옵션 {0}개 · 설정 범위 0~{0}	{0} active exclusions · Allowed: 0–{0}
+{0}개 선택 · 판매가 {1:N0}	{0} selected · Sell for {1:N0}
+일괄 판매	Sell selected
+골드 {0:N0}	Gold {0:N0}
+{0} · 아이템 레벨 {1}	{0} · Item level {1}
+구매 완료	Purchased
+현재 판매할 장비가 없습니다.	No equipment is available.
+판매한 장비가 없습니다.	No sold equipment.
+자동 선택 설정에서 판매할 등급과 장비를 체크하세요.	Choose grades and equipment types in auto-select settings.
+조건에 맞는 판매 대상이 없습니다.	No equipment matches the sale filters.
+{0}개를 선택했습니다. 일괄 판매로 확인하세요.	Selected {0} items. Review them with Sell selected.
+장비 판매 확인	Confirm equipment sale
+{0}개 판매 · 골드 +{1:N0}	Sell {0} items · Gold +{1:N0}
+되사기는 최근 12개만 보관합니다. 한도를 넘으면 가장 오래된 장비부터 영구 삭제됩니다.	Buyback keeps the last 12 items. Exceeding this limit permanently removes the oldest items first.
+체크한 등급과 장비 종류가 모두 맞는 아이템을 판매 대상으로 선택합니다.	Selects equipment matching both a checked grade and a checked type.
+1. 판매할 등급	1. Grades to sell
+고유 등급과 바지 부위는 현재 장비 목록에 없어 선택할 수 없습니다.	Unique grade and leg armor are not in the current equipment catalog and cannot be selected.
+2. 판매할 장비	2. Equipment to sell
+세부 설정 사용 중	Details enabled
+세부 설정	Details
+세부 설정 사용	Enable detailed filters
+기준값 이상인 옵션이 지정한 개수만큼 일치하면 판매 대상에서 제외합니다. 0개는 제외 조건을 적용하지 않습니다.	Keep an item when the required number of attributes meet their thresholds. Zero disables exclusions.
+제외 옵션 일치 개수	Required matches to keep
+장착·잠금·프리셋 참조·보석 장착 장비는 항상 제외합니다. 설정 저장은 아이템을 판매하거나 선택하지 않습니다.	Equipped, locked, preset-referenced and gemmed items are always protected. Saving settings does not select or sell items.
+설정 저장	Save settings
+자동 선택 설정을 저장했습니다.	Auto-select settings saved.
+
+# Gambling merchant
+갬블 상인	Gambler
+미확인 장비 구매 · 판매	Buy unidentified gear · sell equipment
+갬블 상점 열기	Open gambling shop
+미확인 {0}	Unidentified {0}
+구매하면 장비의 정체가 드러납니다.	Purchase to reveal the equipment.
+아이템 레벨 {0} · 부위별 고정 가격	Item level {0} · fixed price per slot
+등급과 능력치는 구매 후 공개됩니다.	Rarity and attributes are revealed after purchase.
+봉인이 풀리고 있습니다…	The seal is breaking…
+획득한 장비	Acquired equipment
+연출 제거	Skip animation
+장비 획득	Equipment acquired
+{0:N0} 골드	{0:N0} gold
+갬블 상인 찾아가기	Visit the gambler
+# Blacksmith runtime
++10레벨 강화	Upgrade +10
++1레벨 강화	Upgrade +1
+/초	/s
+100레벨 성장 계획	Growth plan to Lv.100
+1레벨부터 기본 능력이 적용됩니다. 25·50·75레벨에서 새 능력이 열리고, 열린 레벨부터 매 레벨 누적됩니다. 100레벨 보상은 한 번 적용됩니다.	Base bonuses apply from Lv.1. New bonuses unlock at Lv.25, 50 and 75 and grow each level thereafter. The Lv.100 reward applies once.
+Lv.{0} 달성 보상 · 1회 적용	Lv.{0} milestone · One-time bonus
+Lv.{0}부터 매 레벨 {1}	{1} per level from Lv.{0}
+{0} 해금	{0} unlocked
+{0}분 {1}초	{0}m {1}s
+{0}시간 {1}분	{0}h {1}m
+{0}일 {1}시간 {2}분	{0}d {1}h {2}m
+‹ 다른 장비 선택	‹ Choose equipment
+가능 범위 {0}	Possible range: {0}
+가능 옵션과 수치 범위	Possible affixes & ranges
+강화 +{0} 완료 · {1:N0} 골드 사용	Enhanced to +{0} · Spent {1:N0} gold
+강화 성장 미리보기	Enhancement preview
+강화 작업	Upgrade jobs
+강화 작업  {0} / {1}칸 작업 중	Upgrade jobs  {0} / {1} busy
+강화 작업 기록을 확인해 주세요.	Check the upgrade job record.
+강화 작업 기록이 중복되었습니다.	Duplicate upgrade job records.
+강화 작업 칸을 개방했습니다.	Workstation unlocked.
+강화 정보를 확인해 주세요.	Check the enhancement details.
+강화석 {0:N0}   ◇ {1:N0}	Stones {0:N0}   ◇ {1:N0}
+걸작 {0} / {1}단계	Masterwork {0} / {1}
+걸작 강화 · 재료 {0:N0} / 골드 {1:N0}	Masterwork · {0:N0} materials / {1:N0} gold
+걸작 상세	Masterwork details
+걸작 초기화	Reset masterwork
+걸작을 초기화합니다. 골드 {0:N0}를 내고 일반 재료 {1:N0}개를 돌려받습니다. 강화·각성·보석은 유지됩니다.	Reset masterwork for {0:N0} gold and recover {1:N0} materials. Enhancement, awakening and gems are retained.
+걸작을 초기화했습니다.	Masterwork reset.
+계속 돌리기 ({0:N0}회)	Continue ({0:N0} left)
+남은 횟수 {0:N0}	{0:N0} rolls left
+다른 옵션은 고정되어 있습니다.	Other affixes are locked.
+단계마다 미강화 기본 능력이 2%씩 증가합니다. 4·8·12단계에는 무작위 접사 한 줄이 25% 강화됩니다.	Each level increases the unenhanced base stat by 2%. At levels 4, 8 and 12, one random affix is boosted by 25%.
+단계별 능력 배정	Milestone bonuses
+달성 보상 · 1회 적용	One-time milestone bonus
+대장간 성장 기록을 확인해 주세요.	Check the blacksmith growth record.
+대장장이 근처에서 대장간을 이용해 주세요.	Approach the blacksmith to use the forge.
+더 새로운 대장간 저장 버전이 필요합니다.	This blacksmith save requires a newer version.
+매 단계 {0}	{0} per enhancement
+매 레벨 {0}	{0} per level
+멈추기	Stop
+모든 스킬 레벨	All skill levels
+목표 옵션 발견	Target affix found
+목표 옵션 선택	Choose target affixes
+목표 옵션을 유지했습니다.	Target affix retained.
+미리보기 Lv.{0}	Preview Lv.{0}
+미해금	Locked
+반복 횟수 {0:N0} / 최대 {1:N0}	Rolls {0:N0} / Max {1:N0}
+받는 치유량	Healing received
+변경 가능한 장비가 없습니다.	No eligible equipment.
+변경할 옵션 선택	Select an affix to reroll
+설정한 횟수를 모두 사용했습니다.	All requested rolls completed.
+성장 상세	Growth details
+성장 상태 자동 저장	Growth saved automatically
+슬롯 강화 시작	Start slot upgrade
+슬롯 강화 작업을 시작했습니다.	Slot upgrade started.
+슬롯 강화가 완료되었습니다.	Slot upgrade completed.
+아이템 Lv.{0} · 강화 +{1}	Item Lv.{0} · Enhancement +{1}
+아이템 없이도 적용되는 상시 패시브	Permanent bonuses, even without equipment
+아이템을 착용하면 적용됩니다.	Applies while the item is equipped.
+옵션 변경	Affix reroll
+옵션 변경 비용  {0:N0} G	Reroll cost  {0:N0} G
+옵션을 변경했습니다.	Affix rerolled.
+이 옵션 위치만 변경할 수 있습니다.	Only this affix slot can be rerolled.
+인벤토리	Inventory
+자동 변경	Auto reroll
+자동 변경 멈추기	Stop auto reroll
+자동 변경 시작	Start auto reroll
+자동 변경을 멈췄습니다.	Auto reroll stopped.
+자동 변경이 종료되었습니다.	Auto reroll ended.
+자동 옵션 변경	Auto affix reroll
+자원 소모량 감소	Resource cost reduction
+작업 중 · {0}	In progress · {0}
+작업 칸 {0}	Workstation {0}
+작업 칸 개방 · ◇ {0}	Unlock workstation · ◇ {0}
+작업 칸은 모든 캐릭터가 함께 사용합니다.	Workstations are shared by all characters.
+작업 칸이 모두 사용 중입니다.	All workstations are busy.
+장비 선택	Choose equipment
+장비를 선택해 주세요.	Select an item.
+장착 부위	Equipment slots
+장착 부위를 확인해 주세요.	Check the equipment slot.
+장착 슬롯 강화	Slot upgrades
+재료 {0:N0} · 코어 {1} · 강화석 {2:N0}	Materials {0:N0} · Cores {1} · Stones {2:N0}
+제작	Craft
+지금 완료 · ◇ {0:N0}	Finish now · ◇ {0:N0}
+최대 강화	Upgrade max
+최대 레벨 달성	Maximum level reached
+최초 변경 시 이 위치가 영구 고정됩니다.	The first paid roll permanently locks this slot.
+항상 적용되는 패시브	Permanent passive bonuses
+현재 → 다음 강화	Current → Next enhancement
+현재 강화 +{0} / 100	Enhancement +{0} / 100
+모든 원소 저항 증가	All elemental resistance bonus
+강화석 {0:N0}개 획득	Obtained {0:N0} enhancement stones
+강화 +5 이상 장비만 걸작을 진행할 수 있습니다.	Equipment must be enhanced to +5 or higher for masterworking.
+대장간에서 장비 강화	Enhance at the forge
+슬롯 강화 +{0} · 유효 Lv.{1}	Slot upgrade +{0} · Effective Lv.{1}
+강화석	Enhancement stones
+보조손	Off hand
+{0}\n{1} {2}\n각성·걸작을 반영한 기본값 {3:0.##} + 강화 보너스 {4:0.##}	{0}\n{1} {2}\nAwakened/masterworked base {3:0.##} + enhancement bonus {4:0.##}
+벨트	Belt
+등급 · {0}개	Rarity · {0} selected
+장착 중 · {0}	Equipped · {0}
+모양을 바꾸기 위해서는 똑같은 색, 똑같은 모양의 룬 블럭이 하나 더 필요합니다	Changing the shape requires one more rune block of the same color and shape.
+3칸 이상의 룬 블록만 형상을 변환할 수 있습니다.	Only rune blocks with at least 3 cells can be reshaped.
+잠겨 있거나 보드·프리셋에 사용 중인 룬은 재료로 사용할 수 없습니다.	Locked runes and runes used by boards or presets cannot be consumed.
+형상 변환에는 같은 등급의 룬 블록이 필요합니다.	Reshaping requires rune blocks of the same grade.
+보관 중인 룬 블록을 선택하세요.	Select a stored rune block.
+변환할 수 있는 다른 모양이 없습니다.	No other shape is available.
+이미 처리한 형상 변환입니다.	This reshaping request has already been processed.
+진행 중인 균열을 먼저 완료하면 이용할 수 있습니다.	Complete the current rift to use this service.
+룬 보유 상태가 바뀌었습니다. 재료를 다시 선택하세요.	Your runes have changed. Select the materials again.
+룬 마스터	Rune Master
+룬 재형성 · 룬 승급	Rune reshaping and ascension
+룬 공방 열기	Open rune workshop
+룬 재형성	Reshape
+룬 승급	Ascend
+보관함에서 룬을 끌거나 눌러 재료를 선택하세요.	Drag or tap a stored rune to select materials.
+두 개의 룬, 새로운 형상	Two runes. A new shape.
+같은 색 · 같은 모양 · 같은 등급	Same color · shape · grade
+형상 변환 완료	Reshaping complete
+룬의 형상이 변하고 있습니다…	Reshaping the runes…
+색과 칸 수, 등급을 유지한 다른 모양으로 변환됩니다.	Creates a different shape with the same color, cell count and grade.
+합성 중…	Fusing…
+재료 1	Material 1
+재료 2	Material 2
+3칸 이상 · 배치 및 프리셋에 사용 중인 룬은 보호됩니다.	3+ cells · Board and preset runes are protected.
+{0} · G{1} · {2}칸 · 모양 {3}	{0} · G{1} · {2} cells · Shape {3}
+새로운 룬 블록을 보관함에 넣었습니다.	The new rune block is now in storage.
+준비 중입니다.	Coming soon.
+합성	Fuse
+합성할 룬을 선택하세요.	Select runes to fuse.
+한 번에 최대 100쌍까지 합성할 수 있습니다.	You can fuse up to 100 pairs at once.
+같은 룬을 중복해서 사용할 수 없습니다.	A rune cannot be used more than once.
+보관 중인 룬 블록만 합성할 수 있습니다.	Only stored rune blocks can be fused.
+같은 등급의 룬끼리 합성하세요.	Fuse runes of the same grade.
+이 칸 수의 합성 결과를 먼저 수령하세요.	Claim the results for this cell count first.
+같은 색·등급·칸 수의 룬을 짝수로 맞추세요.	Use even counts of each matching color, grade and cell count.
+이미 처리한 룬 승급입니다.	This ascension request has already been processed.
+같은 색·등급·칸 수의 룬 두 개로 승급합니다.	Ascend two runes of the same color, grade and cell count.
+{0}개 재료 → {1}개 결과	{0} materials → {1} results
+한번에 조합하기	Fuse all groups
+G{0} {1}칸 → G{2} {3}칸	G{0} {1} cells → G{2} {3} cells
+최종 단계	Maximum stage
+그룹 합성	Fuse group
+결과를 눌러 모두 수령하세요.	Tap a result to claim all.
+룬을 선택하면 여기에 등록됩니다.	Selected runes appear here.
+결과 {0}개	{0} results
+룬을 누르면 한 개씩 재료로 등록됩니다.	Tap a rune to register one material.
+완성된 룬을 모두 보관함에 넣었습니다.	All completed runes are now in storage.
+
+# Named town NPCs
+무기 상인	Weapon Merchant
+균열	Rift
+마르크 쿠스	Marc Kus
+제이크 보쿤	Jake Bokun
+차도르 사마프	Chador Samaf
+안톤 진다크	Anton Jindark
+인젤 미르	Injel Mir
+표냐 내르뭰	Pyonya Nermwen
+쟝 죠린	Jean Jorin
+달크 알뷔	Darc Alvi
+초당 {0}	{0} per second
+보석 · {0}	Gem · {0}
+{0} · {1}세트 · {2}	{0} · {1}-piece set · {2}
+함께 교체되는 장비: {0}	Equipment replaced together: {0}
+{0} 교체 기준	Replacing {0}
+상점과 분해가 같은 캐릭터의 자동 선택 설정을 사용합니다.	The shop and salvage share this character's auto-selection settings.
+1. 선택할 등급	1. Rarities to select
+2. 선택할 장비	2. Equipment to select
+기준값 이상인 옵션이 지정한 개수만큼 일치하면 분해 대상에서 제외합니다. 0개는 제외 조건을 적용하지 않습니다.	Exclude an item from salvage when the selected number of attributes meet their thresholds. Zero disables attribute exclusions.
+장착·잠금·프리셋 참조·보석 장착 장비는 항상 제외합니다. 설정 저장은 아이템을 분해하거나 선택하지 않습니다.	Equipped, locked, preset-referenced and gem-socketed items are always excluded. Saving settings does not salvage or select items.
+상점과 공유하는 자동 선택 설정	Shared shop auto-selection settings
+등급 {0}개 · 장비 종류 {1}개 · 제외 옵션 적용	{0} rarities · {1} equipment types · exclusions applied
+고정 부가 저항	Fixed bonus resistance
+기본 공격 속도	Base attack speed
+교체 후 전체 능력치	Character attributes after replacement
+옵션의 최소~최대 범위를 표시합니다.	Shows the minimum and maximum option values.
+컨트롤 키로 일시 활성화	Hold Ctrl to show ranges temporarily
+아이템 옵션 범위 설정을 읽지 못했습니다. 기본값으로 표시합니다.	Could not read the item range preference. Using the default display.
+옵션 범위 설정을 저장하지 못했습니다. 다시 시도해 주세요.	Could not save the range preference. Please try again.

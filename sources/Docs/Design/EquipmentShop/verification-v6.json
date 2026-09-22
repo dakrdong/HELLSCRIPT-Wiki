@@ -1,0 +1,1082 @@
+{
+  "revision": 6,
+  "date": "2026-09-21",
+  "scope": "Interactive HTML equipment-shop prototype; Codex in-app browser on macOS. Not Unity runtime, real account storage, full game regression or physical-device evidence.",
+  "passed": 44,
+  "total": 44,
+  "checks": [
+    {
+      "name": "Enabling an equipment type without conditions previews eligible gear",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "body": {
+          "bottom": 825.34375,
+          "clientHeight": 664,
+          "clientWidth": 833,
+          "h": 664.078125,
+          "right": 840,
+          "scrollHeight": 952,
+          "scrollWidth": 833,
+          "w": 848,
+          "x": -8,
+          "y": 161.265625
+        },
+        "count": "",
+        "dialog": {
+          "bottom": 892.34375,
+          "clientHeight": 767,
+          "clientWidth": 848,
+          "h": 769.078125,
+          "right": 841,
+          "scrollHeight": 767,
+          "scrollWidth": 848,
+          "w": 850,
+          "x": -9,
+          "y": 123.265625
+        },
+        "error": "",
+        "foot": {
+          "bottom": 891.34375,
+          "clientHeight": 65,
+          "clientWidth": 848,
+          "h": 66,
+          "right": 840,
+          "scrollHeight": 65,
+          "scrollWidth": 848,
+          "w": 848,
+          "x": -8,
+          "y": 825.34375
+        },
+        "gold": "28,460",
+        "minimum": [
+          {
+            "key": "axe",
+            "max": "0",
+            "value": "0"
+          }
+        ],
+        "modalHidden": false,
+        "preview": "자동 선택 대상 1개",
+        "saveDisabled": false,
+        "selected": [],
+        "size": [
+          811,
+          964
+        ],
+        "toolbar": "다중 선택자동 선택자동 선택 설정선택 해제",
+        "types": [
+          {
+            "checked": false,
+            "key": "sword"
+          },
+          {
+            "checked": false,
+            "key": "greatsword"
+          },
+          {
+            "checked": true,
+            "key": "axe"
+          },
+          {
+            "checked": false,
+            "key": "bow"
+          },
+          {
+            "checked": false,
+            "key": "crossbow"
+          },
+          {
+            "checked": false,
+            "key": "staff"
+          },
+          {
+            "checked": false,
+            "key": "head"
+          },
+          {
+            "checked": false,
+            "key": "chest"
+          },
+          {
+            "checked": false,
+            "key": "hands"
+          },
+          {
+            "checked": false,
+            "key": "legs"
+          },
+          {
+            "checked": false,
+            "key": "feet"
+          },
+          {
+            "checked": false,
+            "key": "belt"
+          },
+          {
+            "checked": false,
+            "key": "neck"
+          },
+          {
+            "checked": false,
+            "key": "ring"
+          }
+        ],
+        "values": [
+          {
+            "disabled": true,
+            "key": "axe:p",
+            "value": "50"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s15",
+            "value": "3"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s16",
+            "value": "10"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s17",
+            "value": "5"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s10",
+            "value": "15"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Attack below the threshold remains eligible",
+      "pass": true,
+      "evidence": "자동 선택 대상 1개"
+    },
+    {
+      "name": "One matching critical threshold excludes an item when count is one",
+      "pass": true,
+      "evidence": "자동 선택 대상 0개"
+    },
+    {
+      "name": "One of two matching exclusions remains eligible at count two",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "axe",
+          "max": "2",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "Equality at both thresholds excludes the item at count two",
+      "pass": true,
+      "evidence": [
+        {
+          "disabled": false,
+          "key": "axe:p",
+          "value": "48.76"
+        },
+        {
+          "disabled": false,
+          "key": "axe:s15",
+          "value": "3"
+        },
+        {
+          "disabled": true,
+          "key": "axe:s16",
+          "value": "10"
+        },
+        {
+          "disabled": true,
+          "key": "axe:s17",
+          "value": "5"
+        },
+        {
+          "disabled": true,
+          "key": "axe:s10",
+          "value": "15"
+        }
+      ]
+    },
+    {
+      "name": "Count zero disables stat exclusions for that equipment type",
+      "pass": true,
+      "evidence": "자동 선택 대상 1개"
+    },
+    {
+      "name": "Negative stat threshold blocks saving",
+      "pass": true,
+      "evidence": "도끼 · 기준값은 0 이상의 숫자, 충족 개수는 0~2의 정수로 입력하세요."
+    },
+    {
+      "name": "Empty enabled threshold blocks saving",
+      "pass": true,
+      "evidence": {
+        "value": "",
+        "error": "도끼 · 기준값은 0 이상의 숫자, 충족 개수는 0~2의 정수로 입력하세요."
+      },
+      "harnessCorrection": "Empty fill was a no-op in the UI bridge; retested using Select All and Backspace and verified the DOM value was empty."
+    },
+    {
+      "name": "Match count above enabled conditions blocks saving",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "axe",
+          "max": "2",
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "name": "Fractional match count blocks saving",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "axe",
+          "max": "2",
+          "value": "1.5"
+        }
+      ]
+    },
+    {
+      "name": "Removing a condition clamps the count to the new maximum",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "axe",
+          "max": "1",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "Saving settings does not select or sell gear",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "body": {
+          "bottom": 0,
+          "clientHeight": 0,
+          "clientWidth": 0,
+          "h": 0,
+          "right": 0,
+          "scrollHeight": 0,
+          "scrollWidth": 0,
+          "w": 0,
+          "x": 0,
+          "y": 0
+        },
+        "count": "",
+        "dialog": {
+          "bottom": 0,
+          "clientHeight": 0,
+          "clientWidth": 0,
+          "h": 0,
+          "right": 0,
+          "scrollHeight": 0,
+          "scrollWidth": 0,
+          "w": 0,
+          "x": 0,
+          "y": 0
+        },
+        "error": "",
+        "foot": {
+          "bottom": 0,
+          "clientHeight": 0,
+          "clientWidth": 0,
+          "h": 0,
+          "right": 0,
+          "scrollHeight": 0,
+          "scrollWidth": 0,
+          "w": 0,
+          "x": 0,
+          "y": 0
+        },
+        "gold": "28,460",
+        "minimum": [
+          {
+            "key": "axe",
+            "max": "1",
+            "value": "1"
+          }
+        ],
+        "modalHidden": true,
+        "preview": "자동 선택 대상 1개",
+        "saveDisabled": false,
+        "selected": [],
+        "size": [
+          811,
+          964
+        ],
+        "toolbar": "다중 선택자동 선택자동 선택 설정선택 해제",
+        "types": [
+          {
+            "checked": false,
+            "key": "sword"
+          },
+          {
+            "checked": false,
+            "key": "greatsword"
+          },
+          {
+            "checked": true,
+            "key": "axe"
+          },
+          {
+            "checked": false,
+            "key": "bow"
+          },
+          {
+            "checked": false,
+            "key": "crossbow"
+          },
+          {
+            "checked": false,
+            "key": "staff"
+          },
+          {
+            "checked": false,
+            "key": "head"
+          },
+          {
+            "checked": false,
+            "key": "chest"
+          },
+          {
+            "checked": false,
+            "key": "hands"
+          },
+          {
+            "checked": false,
+            "key": "legs"
+          },
+          {
+            "checked": false,
+            "key": "feet"
+          },
+          {
+            "checked": false,
+            "key": "belt"
+          },
+          {
+            "checked": false,
+            "key": "neck"
+          },
+          {
+            "checked": false,
+            "key": "ring"
+          }
+        ],
+        "values": [
+          {
+            "disabled": false,
+            "key": "axe:p",
+            "value": "50"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s15",
+            "value": "3"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s16",
+            "value": "10"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s17",
+            "value": "5"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s10",
+            "value": "15"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Saved type and thresholds are restored when reopening settings",
+      "pass": true,
+      "evidence": [
+        {
+          "key": "axe",
+          "max": "1",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "Cancel discards draft edits and Auto-select uses saved settings",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulk": "일괄 판매",
+        "gold": "28,460",
+        "ids": [
+          "bag-0"
+        ]
+      }
+    },
+    {
+      "name": "Auto-select only selects and leaves sale as a separate action",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "bulk": "일괄 판매",
+        "gold": "28,460",
+        "ids": [
+          "bag-0"
+        ]
+      }
+    },
+    {
+      "name": "Auto-select replaces earlier manual selection",
+      "pass": true,
+      "evidence": [
+        "bag-0"
+      ]
+    },
+    {
+      "name": "Auto-select evaluates all inventory independently of current filters",
+      "pass": true,
+      "evidence": {
+        "count": "1 개 선택",
+        "detail": "1 개 선택현재 필터에서 숨겨진 선택 · 115묵철 도끼레어 · I15 · 1,200정보",
+        "visible": [
+          "bag-1",
+          "bag-2",
+          "bag-3",
+          "bag-4",
+          "bag-5",
+          "bag-9",
+          "bag-10",
+          "bag-11",
+          "bag-12",
+          "bag-13"
+        ]
+      }
+    },
+    {
+      "name": "Chest conditions use armor stats without weapon attack or critical chance",
+      "pass": true,
+      "evidence": [
+        {
+          "disabled": true,
+          "key": "chest:s2",
+          "value": "80"
+        },
+        {
+          "disabled": true,
+          "key": "chest:s0",
+          "value": "50"
+        },
+        {
+          "disabled": true,
+          "key": "chest:s3",
+          "value": "20"
+        },
+        {
+          "disabled": true,
+          "key": "chest:s32",
+          "value": "5"
+        }
+      ]
+    },
+    {
+      "name": "Additional slot-compatible exclusions can be added",
+      "pass": true,
+      "evidence": [
+        {
+          "disabled": true,
+          "key": "chest:s2",
+          "value": "80"
+        },
+        {
+          "disabled": true,
+          "key": "chest:s0",
+          "value": "50"
+        },
+        {
+          "disabled": true,
+          "key": "chest:s3",
+          "value": "20"
+        },
+        {
+          "disabled": true,
+          "key": "chest:s32",
+          "value": "5"
+        },
+        {
+          "disabled": false,
+          "key": "chest:s10",
+          "value": "15"
+        }
+      ]
+    },
+    {
+      "name": "Locked chest and preset sword stay excluded even with zero stat exclusions",
+      "pass": true,
+      "evidence": [
+        "bag-0",
+        "bag-10"
+      ]
+    },
+    {
+      "name": "Repeated auto-selection does not toggle or duplicate selected items",
+      "pass": true,
+      "evidence": [
+        "bag-0",
+        "bag-10"
+      ]
+    },
+    {
+      "name": "Bulk sale processes only auto-selected eligible items",
+      "pass": true,
+      "evidence": {
+        "gold": "29,960",
+        "bag": "12 / 50"
+      }
+    },
+    {
+      "name": "Auto-selected sale retains original affixes and prices in buyback",
+      "pass": true,
+      "evidence": "판매했던 장비\n×\n묵철 도끼\n레어 · 주 무기\n아이템 레벨 15\n15\n공격력 48.76 (+6.36)\n공격 속도 0.85 회/초 (−0.15 회/초)\n극대화 확률 +3% (+3%)\n힘 +16 (+2)\n장착 시 사라지는 속성\n물리 피해 6.5%\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n당시 판매가격\n1,200\n되사기 금액\n1,200"
+    },
+    {
+      "name": "Buyback restores the original auto-selected item",
+      "pass": true,
+      "evidence": {
+        "gold": "28,760",
+        "bag": "13 / 50"
+      }
+    },
+    {
+      "name": "Auto-select opens settings when no types have been chosen",
+      "pass": true,
+      "evidence": {
+        "title": "자동 선택 설정",
+        "preview": "자동 선택 대상 0개"
+      }
+    },
+    {
+      "name": "Portrait settings fit the 440 by 956 viewport without horizontal overflow",
+      "pass": true,
+      "evidence": {
+        "bag": "14 / 50",
+        "body": {
+          "bottom": 846,
+          "clientHeight": 737,
+          "clientWidth": 405,
+          "h": 737,
+          "right": 430,
+          "scrollHeight": 952,
+          "scrollWidth": 405,
+          "w": 420,
+          "x": 10,
+          "y": 109
+        },
+        "count": "",
+        "dialog": {
+          "bottom": 913,
+          "clientHeight": 840,
+          "clientWidth": 420,
+          "h": 842,
+          "right": 431,
+          "scrollHeight": 840,
+          "scrollWidth": 420,
+          "w": 422,
+          "x": 9,
+          "y": 71
+        },
+        "error": "",
+        "foot": {
+          "bottom": 912,
+          "clientHeight": 65,
+          "clientWidth": 420,
+          "h": 66,
+          "right": 430,
+          "scrollHeight": 65,
+          "scrollWidth": 420,
+          "w": 420,
+          "x": 10,
+          "y": 846
+        },
+        "gold": "28,460",
+        "minimum": [
+          {
+            "key": "axe",
+            "max": "2",
+            "value": "2"
+          }
+        ],
+        "modalHidden": false,
+        "preview": "자동 선택 대상 1개",
+        "saveDisabled": false,
+        "selected": [],
+        "size": [
+          440,
+          956
+        ],
+        "toolbar": "다중 선택자동 선택자동 선택 설정선택 해제",
+        "types": [
+          {
+            "checked": false,
+            "key": "sword"
+          },
+          {
+            "checked": false,
+            "key": "greatsword"
+          },
+          {
+            "checked": true,
+            "key": "axe"
+          },
+          {
+            "checked": false,
+            "key": "bow"
+          },
+          {
+            "checked": false,
+            "key": "crossbow"
+          },
+          {
+            "checked": false,
+            "key": "staff"
+          },
+          {
+            "checked": false,
+            "key": "head"
+          },
+          {
+            "checked": false,
+            "key": "chest"
+          },
+          {
+            "checked": false,
+            "key": "hands"
+          },
+          {
+            "checked": false,
+            "key": "legs"
+          },
+          {
+            "checked": false,
+            "key": "feet"
+          },
+          {
+            "checked": false,
+            "key": "belt"
+          },
+          {
+            "checked": false,
+            "key": "neck"
+          },
+          {
+            "checked": false,
+            "key": "ring"
+          }
+        ],
+        "values": [
+          {
+            "disabled": false,
+            "key": "axe:p",
+            "value": "50"
+          },
+          {
+            "disabled": false,
+            "key": "axe:s15",
+            "value": "3"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s16",
+            "value": "10"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s17",
+            "value": "5"
+          },
+          {
+            "disabled": true,
+            "key": "axe:s10",
+            "value": "15"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Portrait keeps eight inventory columns and replaces the old selection button",
+      "pass": true,
+      "evidence": {
+        "body": [
+          440,
+          440
+        ],
+        "columns": "43.125px 43.125px 43.125px 43.125px 43.125px 43.125px 43.125px 43.125px",
+        "oldButton": false,
+        "sale": "일괄 판매",
+        "selected": [
+          "bag-0"
+        ]
+      },
+      "harnessCorrection": "Browser returned eight resolved pixel columns rather than the repeat() form; inspected the actual eight values."
+    },
+    {
+      "name": "English portrait settings and numeric fields fit horizontally",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 913,
+          "clientHeight": 840,
+          "clientWidth": 420,
+          "h": 842,
+          "right": 431,
+          "scrollHeight": 840,
+          "scrollWidth": 420,
+          "w": 422,
+          "x": 9,
+          "y": 71
+        },
+        "body": {
+          "bottom": 846,
+          "clientHeight": 737,
+          "clientWidth": 405,
+          "h": 737,
+          "right": 430,
+          "scrollHeight": 969,
+          "scrollWidth": 405,
+          "w": 420,
+          "x": 10,
+          "y": 109
+        },
+        "preview": "1 items to auto-select"
+      }
+    },
+    {
+      "name": "Landscape settings retain fixed actions inside safe margins",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 410,
+          "clientHeight": 399,
+          "clientWidth": 812,
+          "h": 401,
+          "right": 885,
+          "scrollHeight": 399,
+          "scrollWidth": 812,
+          "w": 814,
+          "x": 71,
+          "y": 9
+        },
+        "body": {
+          "bottom": 366,
+          "clientHeight": 319,
+          "clientWidth": 797,
+          "h": 319,
+          "right": 884,
+          "scrollHeight": 952,
+          "scrollWidth": 797,
+          "w": 812,
+          "x": 72,
+          "y": 47
+        },
+        "foot": {
+          "bottom": 409,
+          "clientHeight": 42,
+          "clientWidth": 812,
+          "h": 43,
+          "right": 884,
+          "scrollHeight": 42,
+          "scrollWidth": 812,
+          "w": 812,
+          "x": 72,
+          "y": 366
+        }
+      }
+    },
+    {
+      "name": "Keyboard focus remains on a type after revealing its conditions",
+      "pass": true,
+      "evidence": "axe"
+    },
+    {
+      "name": "PC settings fit the 1600 by 900 viewport",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 885,
+          "clientHeight": 868,
+          "clientWidth": 848,
+          "h": 870,
+          "right": 1225,
+          "scrollHeight": 868,
+          "scrollWidth": 848,
+          "w": 850,
+          "x": 375,
+          "y": 15
+        },
+        "body": {
+          "bottom": 837,
+          "clientHeight": 780,
+          "clientWidth": 833,
+          "h": 780,
+          "right": 1224,
+          "scrollHeight": 1028,
+          "scrollWidth": 833,
+          "w": 848,
+          "x": 376,
+          "y": 57
+        },
+        "foot": {
+          "bottom": 884,
+          "clientHeight": 46,
+          "clientWidth": 848,
+          "h": 47,
+          "right": 1224,
+          "scrollHeight": 46,
+          "scrollWidth": 848,
+          "w": 848,
+          "x": 376,
+          "y": 837
+        }
+      }
+    },
+    {
+      "name": "English PC settings retain translated fields and fixed actions",
+      "pass": true,
+      "evidence": {
+        "preview": "Items to auto-select: 1",
+        "dialog": {
+          "bottom": 1065,
+          "clientHeight": 1048,
+          "clientWidth": 848,
+          "h": 1050,
+          "right": 1385,
+          "scrollHeight": 1048,
+          "scrollWidth": 848,
+          "w": 850,
+          "x": 535,
+          "y": 15
+        }
+      }
+    },
+    {
+      "name": "Validation errors remain visible above fixed mobile actions",
+      "pass": true,
+      "evidence": {
+        "bottom": 859,
+        "text": "Axe · Enter non-negative thresholds and a whole-number match count from 0 to 2.",
+        "y": 842.5
+      }
+    },
+    {
+      "name": "Escape discards an unsaved settings edit",
+      "pass": true,
+      "evidence": [
+        "bag-0"
+      ]
+    },
+    {
+      "name": "Portrait Buy still hides inventory and shows six and a half offers with blank comparison",
+      "pass": true,
+      "evidence": {
+        "empty": "true",
+        "inventoryHidden": true,
+        "rows": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0.475,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Existing item comparison retains inline deltas and lost properties",
+      "pass": true,
+      "evidence": "판매 상품\n×\n강인한 강철 대검\n레어 · 주 무기\n아이템 레벨 16\n16\n공격력 44 (+1.6)\n공격 속도 1 회/초 (0 회/초)\n힘 +15.9 (+1.9)\n물리 피해 +5.8% (−0.7%)\n극대화 확률 +3% (+3%)\n장착 시 사라지는 속성\n이동 속도 3%\n업그레이드 정보\n\n기록 없음\n\n종류\n무기\n요구 레벨\n8\n판매 금액\n1,280\n구매가격\n10,240"
+    },
+    {
+      "name": "Landscape packs detailed conditions into two columns without overflow",
+      "pass": true,
+      "evidence": {
+        "dialog": {
+          "bottom": 410,
+          "clientHeight": 399,
+          "clientWidth": 812,
+          "h": 401,
+          "right": 885,
+          "scrollHeight": 399,
+          "scrollWidth": 812,
+          "w": 814,
+          "x": 71,
+          "y": 9
+        },
+        "body": {
+          "bottom": 366,
+          "clientHeight": 319,
+          "clientWidth": 797,
+          "h": 319,
+          "right": 884,
+          "scrollHeight": 877,
+          "scrollWidth": 797,
+          "w": 812,
+          "x": 72,
+          "y": 47
+        }
+      }
+    },
+    {
+      "name": "English landscape condition grid has no horizontal clipping",
+      "pass": true,
+      "evidence": {
+        "body": {
+          "bottom": 366,
+          "clientHeight": 319,
+          "clientWidth": 797,
+          "h": 319,
+          "right": 884,
+          "scrollHeight": 877,
+          "scrollWidth": 797,
+          "w": 812,
+          "x": 72,
+          "y": 47
+        },
+        "preview": "Items to auto-select: 1"
+      }
+    },
+    {
+      "name": "Inline portrait starts on Sell and keeps settings within a 360-wide review surface",
+      "pass": true,
+      "evidence": {
+        "bodyOverflow": false,
+        "device": "portrait",
+        "dialog": {
+          "bottom": 680.6000022888184,
+          "right": 321.2909393310547,
+          "x": 6.7090911865234375
+        },
+        "preview": "자동 선택 대상 3개",
+        "tab": "sell"
+      }
+    },
+    {
+      "name": "Inline preview applies configured helmet selection through visible controls",
+      "pass": true,
+      "evidence": [
+        "bag-1",
+        "bag-9",
+        "bag-13"
+      ]
+    },
+    {
+      "name": "Inline landscape preserves its device layout and keeps settings in bounds",
+      "pass": true,
+      "evidence": {
+        "bottom": 301.92467308044434,
+        "device": "landscape",
+        "overflow": false,
+        "right": 651.7154273986816,
+        "tab": "sell"
+      }
+    },
+    {
+      "name": "Inline PC starts on Sell and supports the settings interaction",
+      "pass": true,
+      "evidence": {
+        "bottom": 543,
+        "device": "pc",
+        "overflow": false,
+        "right": 921,
+        "tab": "sell"
+      }
+    },
+    {
+      "name": "Re-enabling a type with an unfinished threshold requires correction",
+      "pass": true,
+      "evidence": {
+        "value": "",
+        "error": "도끼 · 기준값은 0 이상의 숫자, 충족 개수는 0~2의 정수로 입력하세요."
+      },
+      "harnessCorrection": "Retested after clearing the field using keyboard input; empty-string fill had left the prior value unchanged."
+    },
+    {
+      "name": "Final inline state echo does not dismiss settings or revert selection",
+      "pass": true,
+      "evidence": [
+        "bag-0"
+      ]
+    }
+  ],
+  "policyChecks": {
+    "file": "auto-selection-policy-v6.json",
+    "passed": 25,
+    "total": 25
+  },
+  "assumptions": {
+    "zeroMatchCount": "Disable stat exclusions while keeping equipment-type and sale-protection rules.",
+    "selectionScope": "Entire inventory; replaces prior selection; separate explicit bulk sale.",
+    "pants": "Requested UI kind with zero catalogue bases; provisional chest affix mask."
+  },
+  "issuesResolved": [
+    "Constrained the settings dialog grid so intrinsic width cannot overflow mobile viewports.",
+    "Kept invalid-input feedback visible above fixed dialog actions.",
+    "Preserved keyboard focus after rendering a type or condition.",
+    "Ignored this preview session's own saved-state echoes so inline dialogs remain open.",
+    "Packed preview inventory and settings to remain within the host state budget."
+  ],
+  "notVerified": [
+    "Unity implementation and game services",
+    "Real save compatibility or account persistence",
+    "Physical iPhone/Windows input, keyboard behavior or performance",
+    "Full game regression"
+  ],
+  "consoleErrors": [],
+  "captures": [
+    {
+      "path": "auto-select-v6-landscape-selection-ko.jpg",
+      "bytes": 40681
+    },
+    {
+      "path": "auto-select-v6-landscape-settings-en.jpg",
+      "bytes": 29690
+    },
+    {
+      "path": "auto-select-v6-landscape-settings-ko.jpg",
+      "bytes": 28716
+    },
+    {
+      "path": "auto-select-v6-pc-settings-en.jpg",
+      "bytes": 104721
+    },
+    {
+      "path": "auto-select-v6-pc-settings-ko.jpg",
+      "bytes": 80371
+    },
+    {
+      "path": "auto-select-v6-portrait-selection-ko.jpg",
+      "bytes": 40500
+    },
+    {
+      "path": "auto-select-v6-portrait-settings-en.jpg",
+      "bytes": 46678
+    },
+    {
+      "path": "auto-select-v6-portrait-settings-ko.jpg",
+      "bytes": 44871
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-09-21",
+  "unity": "6000.6.0f1",
+  "scopedEditMode": {
+    "total": "297",
+    "passed": "297",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "119.6549482"
+  },
+  "fullRegressionBeforeFinalFixes": {
+    "total": "2807",
+    "passed": "2803",
+    "failed": "4",
+    "skipped": "0",
+    "duration": "1317.5658382"
+  },
+  "remainingUnrelatedRegression": "GraphicComponentTests: SelectionGroundShadow, SelectionRune, TitleFrameGraphic and TitleOrnament lack automatic CanvasRenderer requirements. These source files were not changed.",
+  "runtime": "PASS: native uGUI handlers and raycasts, real isolated GameStore commits, landscape 1600x900 and portrait 810x1440, ko/en, touch event simulation, single/two-ring comparison, equip/unequip, drag, lock, selected/bulk dismantling, filter persistence, fixed geometry, 57 stats, mage/ranger offhands, gameplay return and pause gate.",
+  "liveEditor": "HUD character button raycast reached its Button; opening produced Page=bag and native inventory; closing returned to plaza. Game View captured; test Play session exited.",
+  "notVerified": [
+    "Physical iPhone or Android touch, notch, rotation and performance",
+    "A clean pass of the final full regression suite"
+  ],
+  "wikiPublication": "Prepared on codex/inventory-play-shortcut. Public publication is reserved for the main merger.",
+  "macOSBuild": {
+    "job": "build-6fdeaf08b5",
+    "errors": 0,
+    "warnings": 39,
+    "completedUtc": "2026-09-21T04:49:53.1743820Z"
+  },
+  "shopIntegrationRuntime": "PASS: 41 raycast/pointer clicks; merchant purchase/sale/buyback, independent type filters, English/Korean, gambling reveal, reload. See shop-runtime.txt."
+}
