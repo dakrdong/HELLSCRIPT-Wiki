@@ -2,7 +2,7 @@
 
 갱신일: 2026-09-23
 
-인벤토리의 무기 슬롯 옆 구석에 작은 물약 전용 슬롯 3개를 배치하고, 하단에 실제 보유 재화를 표시한다. 물약은 캐릭터별 재고, 재화는 계정 공용 잔액을 읽는다. HTML 시안이 아닌 Unity 플레이 씬의 기존 인벤토리에 연결한 기능이다.
+인벤토리의 무기 슬롯 옆 구석에 작은 물약 전용 슬롯 3개를 배치하고, 최상단 제목 바로 아래에 실제 보유 재화를 표시한다. 물약은 캐릭터별 재고, 재화는 계정 공용 잔액을 읽는다. HTML 시안이 아닌 Unity 플레이 씬의 기존 인벤토리에 연결한 기능이다.
 
 English: [Inventory potion slots and account balances](Potion_Slots.en.md)
 
@@ -20,7 +20,7 @@ English: [Inventory potion slots and account balances](Potion_Slots.en.md)
 
 ## 재화 수량
 
-하단의 고정 영역에 이름과 수량을 표시한다. 0개도 숨기지 않고, 큰 수량은 천 단위 구분을 포함한 정확한 숫자로 표시한다.
+가로·세로 모두 최상단 제목 바로 아래의 고정 영역에 이름과 수량을 표시한다. 재화 줄은 창 전체 너비를 사용하고, 캐릭터와 소지품은 그 아래에 배치한다. 0개도 숨기지 않고, 큰 수량은 천 단위 구분을 포함한 정확한 숫자로 표시한다. 소지품을 스크롤하거나 수량이 갱신되어도 재화 줄의 위치와 크기는 바뀌지 않는다.
 
 | 표시 | 실제 저장 데이터 |
 | --- | --- |
@@ -39,11 +39,12 @@ English: [Inventory potion slots and account balances](Potion_Slots.en.md)
 기존 `InventoryWindow`의 고정 배치 어댑터 안에서 `EquipmentSlotView`, `UiTheme`, `UiFonts`를 재사용한다. `PotionArt`는 HUD와 인벤토리의 병 그림을 공유한다. 재화 표시는 `InventoryWindow.Wallet`이 계정 상태를 읽고 `StoreViewBinding`의 저장 성공 알림에 맞춰 갱신한다. 물약 말풍선은 최초 크기를 유지하며 필터·선택 조작 때문에 가방 내용이 밀리지 않는다.
 
 - Unity 6000.6.0f1의 관련 Edit Mode 검사 **126개 통과, 실패·건너뜀 0개**: 소진 순서·중복 배치·잘못된 종류·저장 실패·재접속·전투·훈련 격리·기존 HUD·현지화를 포함한다. [결과 XML](PotionSlotsEvidence/compact-editmode.xml)
-- macOS 개발 빌드에서 세로 440×956·가로 956×440·PC 1440×810/1440×900/1680×720과 한국어·영어, 글자 100%·150%의 **20조합**을 통과했다. 실제 uGUI 이벤트·레이캐스트로 선택, 배치 변경, 장비 드롭 거부, 저장 재읽기, HUD 반영을 검사했다. [실행 결과](PotionSlotsEvidence/compact-potion-slots-result.txt)
+- 재화 표시를 최상단으로 옮긴 뒤 인벤토리·현지화 관련 Edit Mode 검사 **69개 통과, 실패·건너뜀 0개**를 확인했다. 아래 macOS 검증에는 재화 줄이 제목 바로 아래에 있고, 창 전체 너비를 사용하며, 장비·소지품과 겹치지 않는지도 포함한다. [상단 재화 검사 XML](PotionSlotsEvidence/header-editmode.xml)
+- macOS 개발 빌드에서 세로 440×956·가로 956×440·PC 1440×810/1440×900/1680×720과 한국어·영어, 글자 100%·150%의 **20조합**을 통과했다. 실제 uGUI 이벤트·레이캐스트로 선택, 배치 변경, 장비 드롭 거부, 저장 재읽기, HUD 반영을 검사했다. [실행 결과](PotionSlotsEvidence/header-potion-slots-result.txt)
 - 재화 4종과 코어 8종의 실제 저장값, 0개·2,147,483,647개의 정확한 표시, 원본 주화 아이콘 로드, 조회 시 무변경, 저장 성공 후 숫자 갱신과 스크롤 보존을 확인했다.
 - 공통 UI 소유 검사와 검사기 9개, 물약 DB 검사 1개가 통과했다. 실제 휴대폰의 터치·성능 검증은 하지 않았다. macOS 자동 입력과 격리된 검사 저장 데이터를 사용했다.
 
-대표 화면: [세로](PotionSlotsEvidence/compact-slots-440x956-ko-100.png) · [가로](PotionSlotsEvidence/compact-slots-956x440-ko-100.png) · [영문 확대 말풍선](PotionSlotsEvidence/compact-policy-440x956-en-150.png) · [가로 확대 말풍선](PotionSlotsEvidence/compact-policy-956x440-ko-150.png) · [재화·코어 스크롤](PotionSlotsEvidence/compact-wallet-scrolled-440x956-en-150.png) · [PC 21:9](PotionSlotsEvidence/compact-slots-1680x720-en-100.png)
+대표 화면: [세로](PotionSlotsEvidence/header-slots-440x956-ko-100.png) · [가로](PotionSlotsEvidence/header-slots-956x440-ko-100.png) · [영문 확대 말풍선](PotionSlotsEvidence/header-policy-440x956-en-150.png) · [가로 확대 말풍선](PotionSlotsEvidence/header-policy-956x440-ko-150.png) · [재화·코어 스크롤](PotionSlotsEvidence/header-wallet-scrolled-440x956-en-150.png) · [PC 21:9](PotionSlotsEvidence/header-slots-1680x720-en-100.png)
 
 ## 주요 코드
 

@@ -7,7 +7,7 @@ namespace Hellscript
 {
     public sealed partial class InventoryWindow
     {
-        const float WalletFooterHeight=62;
+        const float WalletSummaryHeight=34;
         // Read account-owned balances only. This view never grants or transfers resources.
         IEnumerable<(string id,string label,int amount,string icon)> WalletRows()
         {

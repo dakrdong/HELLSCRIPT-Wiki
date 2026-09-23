@@ -47,6 +47,9 @@ namespace Hellscript
             bool Overlaps(Rect a,Rect b)=>Mathf.Min(a.xMax,b.xMax)-Mathf.Max(a.xMin,b.xMin)>.5f&&Mathf.Min(a.yMax,b.yMax)-Mathf.Max(a.yMin,b.yMin)>.5f;
             Require(!Overlaps(Bounds(Named("Wallet summary")),Bounds(Named("Bag panel"))),"Wallet overlaps the bag.");
             Require(!Overlaps(Bounds(Named("Wallet summary")),Bounds(Named("Character equipment"))),"Wallet overlaps equipment.");
+            var summary=Bounds(Named("Wallet summary"));var header=Bounds(Named("Header"));var frame=Bounds(View.FrameRect);
+            Require(Mathf.Abs(summary.yMax-header.yMin)<1&&Mathf.Abs(summary.xMin-frame.xMin)<1&&Mathf.Abs(summary.xMax-frame.xMax)<1,"Balances must span the top directly below the title.");
+            Require(Bounds(Named("Character equipment")).yMax<=summary.yMin+.5f&&Bounds(Named("Bag panel")).yMax<=summary.yMin+.5f,"Content appears above the balance strip.");
             if(details)
             {
                 for(int i=0;i<a.cores.Length;i++)Require(texts.Single(t=>t.name=="wallet-detail-value-core-"+i).text==a.cores[i].ToString("N0"),"Core balance is stale.");

@@ -80,12 +80,13 @@ namespace Hellscript
             Txt(header,"HELLSCRIPT",12,0,95,34,10,gold);
             Txt(header,"가방",width/2-55,0,110,34,20,pale,TextAnchor.MiddleCenter);
             Btn(header,"×",width-34,2,30,30,Close,false,20).name="inventory-close";
-            float characterWidth=landscape?258:width,characterHeight=landscape?388:238;
-            DrawCharacter(0,34,characterWidth,characterHeight);
-            float bagTop=landscape?34:272;
-            DrawBag(landscape?258:0,bagTop,landscape?542:width,height-bagTop-WalletFooterHeight);
-            var wallet=Panel(body,"Wallet summary","28261b","191c14","655237");Place(wallet,landscape?258:0,height-WalletFooterHeight,landscape?542:width,WalletFooterHeight-28);
+            var wallet=Panel(body,"Wallet summary","28261b","191c14","655237");Place(wallet,0,34,width,WalletSummaryHeight);
             DrawWalletSummary(wallet);
+            float contentTop=34+WalletSummaryHeight;
+            float characterWidth=landscape?258:width,characterHeight=landscape?height-contentTop-28:238;
+            DrawCharacter(0,contentTop,characterWidth,characterHeight);
+            float bagTop=contentTop+(landscape?0:characterHeight);
+            DrawBag(landscape?258:0,bagTop,landscape?542:width,height-bagTop-28);
             var footer=Panel(body,"Footer","28261b","191c14","655237");Place(footer,0,height-28,width,28);
             float footerLine=0;
             Btn(footer,"전체 재화",8,footerLine+2,112,24,ShowWallet,false,10).name="inventory-wallet";
@@ -100,7 +101,7 @@ namespace Hellscript
             var target=panel.gameObject.AddComponent<InventoryDropTarget>();target.window=this;target.slot=-1;
             Txt(panel,catalog.classNames[(int)Hero.heroClass],12,2,125,28,15,pale);
             Btn(panel,"전체 능력치",w-111,3,99,25,ShowStats,false,10).name="inventory-stats";
-            float equipmentHeight=landscape?350:230;
+            float equipmentHeight=landscape?328:230;
             var equipment=CharacterEquipmentView.Create(panel,Hero,w,equipmentHeight,landscape,EquipmentViewSource.Owned,(host,p)=>EquipmentCell(host,p.slot,p.index,p.rect.x,p.rect.y),weaponTray:landscape);equipment.transform.SetAsFirstSibling();
             var weapon=CharacterEquipmentView.Positions(w,equipmentHeight,landscape,weaponTray:landscape).First(p=>p.slot==0&&p.index==1).rect;
             if(EquipmentSlots.TwoHanded(EquipmentSlots.At(Hero,0,0)))

@@ -2,7 +2,7 @@
 
 Updated: 2026-09-23
 
-Three small potion-only slots sit in the corner beside the weapon slots, and actual owned balances appear at the bottom of the inventory. Potions belong to each character; currencies and crafting materials belong to the shared account. This is connected to the existing Unity play-scene inventory, not just an HTML prototype.
+Three small potion-only slots sit in the corner beside the weapon slots, and actual owned balances appear at the top, directly below the inventory title. Potions belong to each character; currencies and crafting materials belong to the shared account. This is connected to the existing Unity play-scene inventory, not just an HTML prototype.
 
 한국어: [인벤토리 물약 슬롯과 보유 재화](Potion_Slots.md)
 
@@ -20,7 +20,7 @@ All eight current Unity definitions have grade 0 and no same-effect tier alterna
 
 ## Owned resources
 
-A fixed bottom strip shows names and exact counts, including zero balances and thousands separators.
+A fixed strip directly below the title spans the full window width in portrait and landscape, with equipment and the bag below it. It shows names and exact counts, including zero balances and thousands separators. Bag scrolling and balance updates do not move or resize the strip.
 
 | Display | Existing save field |
 | --- | --- |
@@ -39,11 +39,12 @@ The Abyssal Coin PNG is copied unchanged from the blacksmith prototype. Its [pro
 The existing fixed `InventoryWindow` adapter reuses `EquipmentSlotView`, `UiTheme` and `UiFonts`. `PotionArt` shares bottle rendering between inventory and HUD. `InventoryWindow.Wallet` reads account state and refreshes through `StoreViewBinding` after successful saves. Potion bubbles keep their initial dimensions; selection changes never shift the bag.
 
 - Unity 6000.6.0f1: **126 focused Edit Mode tests passed, zero failed or skipped**, covering fallback ordering, duplicate/type rejection, save failures, reload, combat, training isolation, existing HUD and localization. [XML results](PotionSlotsEvidence/compact-editmode.xml)
-- Native macOS development build: **20 combinations** of 440×956, 956×440, 1440×810, 1440×900 and 1680×720; Korean/English; 100%/150% text. Actual uGUI events and raycasts verify policy choice, assignment, rejected equipment drops, reload and HUD propagation. [Runtime result](PotionSlotsEvidence/compact-potion-slots-result.txt)
+- After moving balances to the top, **69 inventory/localization Edit Mode tests passed, zero failed or skipped**. The native checks below also require the strip to sit directly below the title, span the full window width and avoid overlapping equipment or the bag. [Header-balance XML](PotionSlotsEvidence/header-editmode.xml)
+- Native macOS development build: **20 combinations** of 440×956, 956×440, 1440×810, 1440×900 and 1680×720; Korean/English; 100%/150% text. Actual uGUI events and raycasts verify policy choice, assignment, rejected equipment drops, reload and HUD propagation. [Runtime result](PotionSlotsEvidence/header-potion-slots-result.txt)
 - All four balances and eight core counts match account state. Exact zero and 2,147,483,647 values, original coin loading, read-only inspection, successful-save refresh and retained scroll position pass.
 - Shared UI ownership checks, nine checker tests and the potion DB test pass. Physical-phone input and performance have not been tested; native acceptance uses synthetic macOS input and isolated fixture saves.
 
-Representative captures: [portrait](PotionSlotsEvidence/compact-slots-440x956-ko-100.png), [landscape](PotionSlotsEvidence/compact-slots-956x440-ko-100.png), [large English bubble](PotionSlotsEvidence/compact-policy-440x956-en-150.png), [large landscape bubble](PotionSlotsEvidence/compact-policy-956x440-ko-150.png), [resource/core scrolling](PotionSlotsEvidence/compact-wallet-scrolled-440x956-en-150.png), [21:9 PC](PotionSlotsEvidence/compact-slots-1680x720-en-100.png).
+Representative captures: [portrait](PotionSlotsEvidence/header-slots-440x956-ko-100.png), [landscape](PotionSlotsEvidence/header-slots-956x440-ko-100.png), [large English bubble](PotionSlotsEvidence/header-policy-440x956-en-150.png), [large landscape bubble](PotionSlotsEvidence/header-policy-956x440-ko-150.png), [resource/core scrolling](PotionSlotsEvidence/header-wallet-scrolled-440x956-en-150.png), [21:9 PC](PotionSlotsEvidence/header-slots-1680x720-en-100.png).
 
 ## Source owners
 
