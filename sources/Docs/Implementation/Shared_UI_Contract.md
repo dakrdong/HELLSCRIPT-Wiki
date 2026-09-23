@@ -89,3 +89,7 @@
 ## 인벤토리 물약 배치
 
 사용자 지정에 따라 물약 칸만 세로 32·가로 28의 작은 크기로 표시한다. 장비 칸의 세로 52·가로 54 기준은 유지한다. `EquipmentSlotView`를 작은 표시 어댑터로 재사용하고, `CharacterEquipmentView`의 무기 줄 옆에 배치해 별도 줄을 늘리지 않는다. 슬롯별 선택과 공통 사용 순서 설정을 구분하며 톱니바퀴는 그룹 옆에 하나만 둔다. [물약 슬롯 검증](Potion_Slots.md)에 화면·입력·저장 결과를 기록한다.
+
+## 보석상
+
+`JewelerWindow`는 `ContentWindowView`, `EquipmentViewSource.Owned`, `StoreViewBinding`과 `GameStore` 거래를 사용한다. 종류·등급별 보석 수량 행렬은 장비 위치가 아닌 콘텐츠 전용 표시다. 가로에서는 두 목록을 독립 스크롤하고 세로에서는 탐색 탭으로 전환하며, 제조 행동은 공통 하단 영역에 고정한다. 소켓 장비 상세는 기존 공통 표시를 유지한다. 자세한 규칙은 [보석상 NPC 콘텐츠](Jeweler_Runtime.md)를 따른다.

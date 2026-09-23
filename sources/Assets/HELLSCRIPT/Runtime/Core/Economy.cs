@@ -42,9 +42,10 @@ namespace Hellscript
         public bool[] passives=new bool[6];
         float baseSpeed,potionMoveBonus;
         public float Bonus(StatId id)=>bonuses[(int)id];
-        public float SpeedWithBonus(float bonus)=>baseSpeed*(1+Mathf.Min(.5f,bonuses[21]/100+bonus+potionMoveBonus+classMoveBonus));
+        public float SpeedWithBonus(float bonus)=>baseSpeed*Mathf.Min(1.5f,(1+Mathf.Min(.5f,bonuses[21]/100+bonus+potionMoveBonus+classMoveBonus))*potionMoveMultiplier);
         public HeroStats WithPotion(PotionDefinition potion,int level)
         {
+            if(potion.Crafted)return new HeroStats(potionSource,potionTraining,potionRunes,potion);
             var result=(HeroStats)MemberwiseClone();
             switch(potion.id)
             {
@@ -119,8 +120,9 @@ namespace Hellscript
                 default: return Bonus(id);
             }
         }
-        public HeroStats(HeroSave hero, bool training=false,RuneGrowthState runes=null)
+        public HeroStats(HeroSave hero, bool training=false,RuneGrowthState runes=null,PotionDefinition elixir=null)
         {
+            potionSource=hero;potionTraining=training;potionRunes=runes;
             ApplySlotGrowth(hero);
             if(slotSkillBonus>0){hero=RuneGrowth.Copy(hero);hero.build.skillRanks=(int[])effectiveSkillRanks.Clone();}
             int level=training?ClassSkills.LevelCap(hero):hero.level; int c=(int)hero.heroClass;
@@ -153,6 +155,7 @@ namespace Hellscript
             if(specials.Contains("ELITE_INHERIT"))
                 foreach(int skill in hero.build.activeSkills)
                     if(skill>=0&&skill<runeSkillLevels.Length)runeSkillLevels[skill]=Mathf.Min(5,runeSkillLevels[skill]+1);
+            ElixirAttributes(elixir);
             float primary=30+2*(level-1)+bonuses[10+c]+bonuses[14];
             float str=(c==0?30+2*(level-1):10+level-1)+bonuses[10]+bonuses[14];
             float dex=(c==1?30+2*(level-1):10+level-1)+bonuses[11]+bonuses[14];
@@ -184,7 +187,7 @@ namespace Hellscript
             // roll all raise the same number, so they are summed here rather than kept apart.
             shieldMultiplier=1+will*.001f+(c==0&&passives[4]?SkillEffects.Passive(hero.build.skillRanks,HeroClass.Warrior,4):c==2&&passives[3]?SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,3):0)+bonuses[(int)StatId.BarrierGeneration]/100;
             DeriveExtendedStats(will,dex,c==1?SkillEffects.MarkBonus(SkillEffects.ActiveRank(hero.build.skillRanks,10)):25);
-            ApplyClassSetStats(hero);
+            ApplyClassSetStats(hero);ElixirEffects(elixir);
         }
         // Diablo IV's own derivations: strength feeds armour, dexterity feeds dodge, intelligence
         // feeds resistance and willpower feeds healing, overpower damage and resource generation.

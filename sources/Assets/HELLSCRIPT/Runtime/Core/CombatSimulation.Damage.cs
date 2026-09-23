@@ -72,7 +72,7 @@ namespace Hellscript
             if(damage!=null)
             {
                 if(overpowered)EffectEvent(definition,"OVERPOWER",instance,root,value:damage.finalDamage);
-                StealLife(damage.hpLoss);LuckyHit(damage.hpLoss);
+                StealLife(damage.hpLoss);StealMana(damage.hpLoss);LuckyHit(damage.hpLoss);
                 EliteDirectHit(enemy,damage,critical,element,snap,root,instance,kind);
             }
             if(procs&&Hero.heroClass==HeroClass.Ranger&&(shadowShot??State.shadowCharges>0)&&element==0&&!enemy.dead)
@@ -134,6 +134,8 @@ namespace Hellscript
                 EffectEvent(definition,"DODGED",instance,root);Visual?.Invoke(State.position,State.position,32,0);
                 Log("DODGE","공격을 회피했습니다.");return;
             }
+            if(kind!=DamageKind.Periodic&&Stats.perfectBlock>0&&SheetRoll()<Stats.perfectBlock)
+            {EffectEvent(definition,"PERFECT_BLOCK",instance,root);Log("BLOCK","완벽하게 방어했습니다.");return;}
             bool blocked=BlockIncoming();
             var numbers=IncomingDamageNumbers(damage,element,IncomingReduction(attacker,element,blocked),kind==DamageKind.Periodic);
             if(blocked)EffectEvent(definition,"BLOCKED",instance,root,value:numbers.final);

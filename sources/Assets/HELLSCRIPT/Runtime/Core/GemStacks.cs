@@ -54,12 +54,37 @@ namespace Hellscript
         }
         public static bool TryAdd(List<GemStack> stacks,int capacity,GemStack reward)
             =>TryExchange(stacks,capacity,Array.Empty<GemStack>(),new[]{reward});
-        public static bool TryFuse(List<GemStack> stacks,int capacity,string id,int tier,ref int gold)
+        // Capacity is not monotonic: consuming the last source stack may make a larger batch fit.
+        // Evaluate freed-stack boundaries instead of looping once for every gem.
+        public static int ConversionCount(IReadOnlyList<GemStack> stacks,int capacity,string id,int tier,bool upgrade,GemBatch batch)
         {
-            if(!GemCatalog.Valid(id,tier)||tier>=GemCatalog.MaximumTier)return false;
-            int cost=GemCatalog.FusionGold(tier+1);if(gold<cost)return false;
-            if(!TryExchange(stacks,capacity,new[]{new GemStack{gemId=id,tier=tier,count=3}},new[]{new GemStack{gemId=id,tier=tier+1,count=1}}))return false;
-            gold-=cost;return true;
+            if(!Jeweler.ValidBatch(batch)||!GemCatalog.Valid(id,tier)||upgrade&&tier==6||!upgrade&&tier==1)return 0;
+            int target=tier+(upgrade?1:-1),input=upgrade?5:1,output=upgrade?1:5;
+            var sources=stacks.Where(s=>s.gemId==id&&s.tier==tier).OrderBy(s=>s.count).ToArray();
+            long maximum=sources.Sum(s=>(long)s.count)/input;
+            long room=(long)(capacity-stacks.Count)*GemCatalog.StackLimit+stacks.Where(s=>s.gemId==id&&s.tier==target).Sum(s=>(long)GemCatalog.StackLimit-s.count);
+            if(batch!=GemBatch.All)
+            {
+                int count=(int)batch;if(count>maximum)return 0;
+                long left=(long)count*input;foreach(var s in sources){if(left<s.count)break;left-=s.count;room+=GemCatalog.StackLimit;}
+                return (long)count*output<=room?count:0;
+            }
+            long consumed=0,best=0;
+            for(int freed=0;freed<=sources.Length;freed++)
+            {
+                long candidate=Math.Min(maximum,(room+(long)freed*GemCatalog.StackLimit)/output);
+                if(candidate*input>=consumed)best=Math.Max(best,candidate);
+                if(freed<sources.Length)consumed+=sources[freed].count;
+            }
+            return checked((int)best);
         }
+        public static bool TryConvert(List<GemStack> stacks,int capacity,string id,int tier,bool upgrade,GemBatch batch)
+        {
+            Validate(stacks,capacity);int count=ConversionCount(stacks,capacity,id,tier,upgrade,batch);if(count==0)return false;
+            return TryExchange(stacks,capacity,new[]{new GemStack{gemId=id,tier=tier,count=checked(count*(upgrade?5:1))}},
+                new[]{new GemStack{gemId=id,tier=tier+(upgrade?1:-1),count=checked(count*(upgrade?1:5))}});
+        }
+        public static bool TryFuse(List<GemStack> stacks,int capacity,string id,int tier,ref int gold)
+            =>TryConvert(stacks,capacity,id,tier,true,GemBatch.One);
     }
 }

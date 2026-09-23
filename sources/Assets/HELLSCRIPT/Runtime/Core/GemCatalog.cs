@@ -108,12 +108,12 @@ namespace Hellscript
         public static int FusionGold(int targetTier)
         {
             if(targetTier<2||targetTier>MaximumTier)throw new ArgumentOutOfRangeException(nameof(targetTier));
-            int cost=300;for(int i=1;i<targetTier;i++)cost=checked(cost*3);return cost;
+            return 0;
         }
         public static int TierOneMaterials(int tier)
-        {if(tier<1||tier>MaximumTier)throw new ArgumentOutOfRangeException(nameof(tier));int count=1;for(int i=1;i<tier;i++)count*=3;return count;}
+        {if(tier<1||tier>MaximumTier)throw new ArgumentOutOfRangeException(nameof(tier));int count=1;for(int i=1;i<tier;i++)count*=5;return count;}
         public static long TotalFusionGold(int tier)
-        {TierOneMaterials(tier);long total=0;for(int t=2;t<=tier;t++)total=checked(total*3+FusionGold(t));return total;}
+        {TierOneMaterials(tier);long total=0;for(int t=2;t<=tier;t++)total=checked(total*5+FusionGold(t));return total;}
         public static int DropBasisPoints(RiftRewardSource source)=>source switch
         {RiftRewardSource.Normal=>150,RiftRewardSource.Elite=>800,RiftRewardSource.Boss=>10000,_=>throw new ArgumentOutOfRangeException(nameof(source))};
         public static int DropCount(RiftRewardSource source)=>source switch

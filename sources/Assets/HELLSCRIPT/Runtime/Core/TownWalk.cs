@@ -41,7 +41,7 @@ namespace Hellscript
             new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-6,-24),House(-6,-16,11,9)),
             new TownStationDefinition(TownStation.Blacksmith,"대장간","장비 재련 · 강화 · 제작","대장간 이용",new Vector2(14,17),House(14,25,14,9),"마르크 쿠스"),
             new TownStationDefinition(TownStation.Training,"훈련 교관","자유 훈련 · 설정 비교","훈련하기",new Vector2(37,9)),
-            new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 구매 · 소켓 관리","보석 상점 열기",new Vector2(-32,-24),House(-32,-16,11,9)),
+            new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 변환 · 물약 제조 · 소켓 관리","보석상 열기",new Vector2(-32,-24),House(-32,-16,11,9)),
             new TownStationDefinition(TownStation.RuneMerchant,"룬 상인","룬 블록 구매 · 룬 배치","룬 상점 열기",new Vector2(21,-24),House(21,-16,12,9)),
             new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(43,-24),House(43,-16,11,9),"인젤 미르"),
             new TownStationDefinition(TownStation.RiftKeeper,"균열","단계 선택 · 균열 입장","균열 열기",new Vector2(8,0),npcName:"안톤 진다크"),

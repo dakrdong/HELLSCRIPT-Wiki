@@ -154,7 +154,7 @@ namespace Hellscript
         public Sprite Sprite(string id)
         {
             if(string.IsNullOrEmpty(id))return null;
-            if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility")return PotionArt.Bottle(id);
+            if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility"||id.StartsWith("elixir-",StringComparison.Ordinal))return PotionArt.Bottle(id);
             if(!sprites.TryGetValue(id,out var value))
             {
                 value=Resources.Load<Sprite>("Art/GlobalHUD/"+id);

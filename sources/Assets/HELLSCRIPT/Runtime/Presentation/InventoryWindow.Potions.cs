@@ -72,11 +72,12 @@ namespace Hellscript
             foreach(var def in PotionCatalog.All)
             {
                 string id=def.id;int count=Hero.potions.Count(id);bool occupied=slots.Where((s,n)=>n!=index).Any(s=>s.id==id),chosen=slots[index].id==id;
-                var row=Btn(content,"",5,y,w-42,80,()=>AssignPotion(index,id),chosen);row.name="potion-pick-"+id;row.interactable=count>0&&!occupied;
+                float rowHeight=def.Crafted?128:80;
+                var row=Btn(content,"",5,y,w-42,rowHeight,()=>AssignPotion(index,id),chosen);row.name="potion-pick-"+id;row.interactable=count>0&&!occupied;
                 PotionArt.Draw(row.transform,def,8,12,48);
-                Txt(row.transform,Loc.T(def.name)+" · ×"+count,66,4,w-123,27,12,chosen?gold:pale);
-                Txt(row.transform,occupied?"다른 슬롯에 지정됨":count==0?"보유하지 않음":def.description,66,32,w-123,41,10,muted);
-                if(chosen)Glyph(row.transform,"check",w-66,5,14,gold);y+=86;
+                Txt(row.transform,GemElixirs.Name(def)+" · ×"+count,66,4,w-123,def.Crafted?42:27,12,chosen?gold:pale);
+                Txt(row.transform,occupied?"다른 슬롯에 지정됨":count==0?"보유하지 않음":GemElixirs.Description(def),66,def.Crafted?48:32,w-123,rowHeight-39,10,muted);
+                if(chosen)Glyph(row.transform,"check",w-66,5,14,gold);y+=rowHeight+6;
             }
             content.sizeDelta=new Vector2(0,y);
             Btn(dialog,"해제",12,h-41,87,30,()=>AssignPotion(index,""),false,11).name="potion-clear";

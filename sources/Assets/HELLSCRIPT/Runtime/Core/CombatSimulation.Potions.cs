@@ -56,7 +56,11 @@ namespace Hellscript
             var p=State.potions;if(p.version==0)return;
             p.resourceCooldown=Mathf.Max(0,p.resourceCooldown-dt);p.utilityCooldown=Mathf.Max(0,p.utilityCooldown-dt);
             p.utilityRemaining=Mathf.Max(0,p.utilityRemaining-dt);
-            if(p.utilityRemaining==0)p.utilityId="";
+            if(p.utilityRemaining==0&&!string.IsNullOrEmpty(p.utilityId))
+            {
+                p.utilityId="";State.shields.RemoveAll(s=>s.definitionId=="GEM_ELIXIR_SHIELD");MirrorShields();
+                State.health=Mathf.Min(State.health,Stats.hp);State.resource=Mathf.Min(State.resource,Stats.maxResource);
+            }
         }
         void UsePotion()
         {
@@ -83,7 +87,7 @@ namespace Hellscript
                 string condition=p.condition=="DEFAULT"?PotionCatalog.DefaultCondition(id):p.condition;
                 bool ready=condition=="MOVING"?moved:condition=="COMBAT"?combat:condition=="ELITE"?sensed.Any(e=>!e.dead&&(e.boss||e.elite>=0)):
                     condition=="DANGER"&&(State.health<=Stats.hp*.6f||InDanger);
-                if(ready&&TryUseUtility(id))break;
+                if(ready&&State.potions.utilityRemaining<=0&&TryUseUtility(id))break;
             }
         }
         public bool TryUseEquippedUtility()
@@ -91,21 +95,31 @@ namespace Hellscript
             string id=ResolvedPotionSlots.FirstOrDefault(id=>id!=null&&PotionCatalog.IsUtility(id));
             return id!=null&&TryUseUtility(id);
         }
+        public bool TryUseUtilitySlot(string id)=>ResolvedPotionSlots.Contains(id)&&PotionCatalog.IsUtility(id)&&TryUseUtility(id);
         bool TryUseUtility(string id)
         {
             var state=State.potions;
-            if(state.version==0||State.health<=0||state.utilityCooldown>0||state.utilityRemaining>0||Hero.potions.Count(id)<=0)return false;
-            var def=PotionCatalog.Get(id);var changed=baseStats.WithPotion(def,EffectiveLevel);
-            if(!baseStats.PotionChanges(changed))return false;
+            if(state.version==0||State.health<=0||state.utilityCooldown>0||Hero.potions.Count(id)<=0)return false;
+            var def=PotionCatalog.Get(id);if(state.utilityRemaining>0&&!def.Crafted)return false;var changed=baseStats.WithPotion(def,EffectiveLevel);
+            if(!def.Crafted&&!baseStats.PotionChanges(changed))return false;
             state.utilityId=def.id;state.utilityRemaining=state.utilityDuration=def.duration;
-            state.utilityCooldown=state.utilityTotal=RunePotionCooldown(def.cooldown);ConsumePotion(def);return true;
+            state.utilityCooldown=state.utilityTotal=RunePotionCooldown(def.cooldown);
+            State.shields.RemoveAll(s=>s.definitionId=="GEM_ELIXIR_SHIELD");MirrorShields();
+            State.health=Mathf.Min(State.health,Stats.hp);State.resource=Mathf.Min(State.resource,Stats.maxResource);
+            if(def.gemId=="G06")
+            {
+                float amount=Mathf.Min(Stats.hp*GemElixirs.Family("G06").third[def.grade-1]/100,Mathf.Max(0,Stats.hp-State.shield));
+                if(amount>0)State.shields.Add(new ShieldEffect{id=State.nextId++,definitionId="GEM_ELIXIR_SHIELD",remaining=def.duration,amount=amount,createdMaxHp=Stats.hp,createdTick=EffectTick});
+                MirrorShields();EffectEvent(def.id,"ELIXIR_SHIELD",value:amount);
+            }
+            ConsumePotion(def);return true;
         }
         void ConsumePotion(PotionDefinition def)
         {
             var slots=ActivePotionSlots;int index=Array.IndexOf(ResolvedPotionSlots,def.id);
             bool newest=index>=0&&slots[index].id!=def.id&&Hero.potions.SharedFallback==PotionFallback.Newest;
             Hero.potions.Consume(def.id,newest);Hero.potions.revision++;State.potions.uses++;
-            Log("POTION",Loc.F("{0} 사용 · 남은 수량 {1}",Loc.T(def.name),Hero.potions.Count(def.id)));
+            Log("POTION",Loc.F("{0} 사용 · 남은 수량 {1}",GemElixirs.Name(def),Hero.potions.Count(def.id)));
         }
         public bool EquipTrainingPotion(string id)
         {

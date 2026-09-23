@@ -66,3 +66,7 @@ See [completed-work integration](Completed_Work_Integration.en.md) for the initi
 ## Inventory potion placement
 
 At the user's request, potion cells use smaller dimensions of 32 in portrait and 28 in landscape. Equipment retains its 52/54 baseline. The adapter reuses `EquipmentSlotView` and sits beside the weapon row owned by `CharacterEquipmentView`, without adding a row. Per-cell assignment is separate from the shared use-order setting, with one gear beside the group. [Potion slot validation](Potion_Slots.en.md) records geometry, input and persistence evidence.
+
+## Jeweler
+
+`JewelerWindow` uses `ContentWindowView`, `EquipmentViewSource.Owned`, `StoreViewBinding` and `GameStore` transactions. Its gem-type/tier count matrix is a specialized adapter rather than equipment-slot geometry. Landscape uses two independent scroll panels; portrait uses navigation tabs and the same fixed craft action. Socket details retain the common equipment owners. See [Jeweler runtime](Jeweler_Runtime.en.md).

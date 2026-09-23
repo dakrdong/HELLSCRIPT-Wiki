@@ -1,0 +1,104 @@
+{
+  "date": "2026-09-23",
+  "unity": "6000.6.0f1",
+  "platform": "native macOS development player",
+  "build": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "editMode": {
+    "total": "556",
+    "passed": "556",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "69.6969954"
+  },
+  "editModeScope": "Gem elixirs, gem services/socket, potions/loadouts, localization, shared UI, rarity, attributes, shields, rune combat/layout, town access and foreground combat clock. Final tier-label width adjustment was verified by the subsequent native acceptance.",
+  "native": {
+    "result": "passed",
+    "raycastVerifiedSyntheticClicks": 103,
+    "displayCombinations": 20,
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1440,
+        810
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "readingPercent": [
+      100,
+      150
+    ],
+    "initial": "PASS: NPC approach and distance gate; 103 raycast-verified synthetic uGUI clicks; 1/5/all adjacent conversions; recipe crafting; inventory assignment; actual combat use and shield; 20 viewport/language/text-scale combinations; imported gem/potion art. Native macOS, isolated save. Physical mobile not tested.",
+    "resume": "PASS: fresh native process restored conversion/crafting costs, potion assignment, consumed stock, active elixir and shield. Native simulation expired both after 30 combat seconds."
+  },
+  "physicalMobileTested": false,
+  "liveEditorVerification": "No Unity Editor instance was connected after continuation; compilation and execution were verified with the isolated batch build and native player.",
+  "knownRuntimeDiagnostics": [
+    "URP TemporalAA/PaniniProjection postprocessing shaders reported unsupported or stripped.",
+    "Unity development player emitted shutdown thread/memory diagnostics; no jeweler assertion or exception failure."
+  ],
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Editor/JewelerArtImporter.cs": "9c92eb88c5e1134eac3fffdbbd78854e7e7aa743bc39ea977fff02c76380b930",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Attributes.cs": "8d92167031d6b5355805224b558168d4d2c0679e1ce6634cdc1ca07ee1a8e701",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Bosses.cs": "1cba911b56fc0d37db96038e3a2e402406698aab63f0f87f355a46b4ba8a7d40",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Damage.cs": "6550a7afcea823667ef4f7fc065991f80ca8564def33cf5ab2fabd7f154909ed",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Enemies.cs": "1a593dd27a5695475c6d1d6490f56a3f10a12b7a9a569cab962ed685487f59ea",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Goblin.cs": "fde8574010c8ce2f844549388d68bfaa633348bc6fed5360eaf39f8ccd6a8971",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Potions.cs": "3559efc41f1af03ee507721408e7456f46ce6cab70b5166e675cd71a42b01d46",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs": "4ef4aae979c2602f872edfb3d8ee4a1386bc4a68abbb91343376d1a3468a423e",
+    "Assets/HELLSCRIPT/Runtime/Core/Economy.cs": "48c90ef98e141eb44d4153d630b821c4b48c74bc1188c8d4f748fd7c6a441d66",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Runes.cs": "393ddeb4be82cf339224c7997d1a14e26fa54eb96f46ef0cdd6481e8ca6dc24e",
+    "Assets/HELLSCRIPT/Runtime/Core/GemCatalog.cs": "99e442a838afa902fa793cabba783c494b4ed356988e05d1ae10303bad73ecec",
+    "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs": "0976ef77006915ab66730223d814c621be7a4781385254b295c561fd7451ca91",
+    "Assets/HELLSCRIPT/Runtime/Core/GemStacks.cs": "e7a6f8ce378f5dfc535f511dbc5f78f190a1ae25e44fd6cdc4b9719ef7a3e741",
+    "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs": "be885ea310bcecadb2cf851802b33c0b67b400c91604f37eab9fc144ad9514e0",
+    "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs": "ec0f8515e30287e921fb5b3a550f6c6594f706da3fd86b883d2bfc2756f1ca5f",
+    "Assets/HELLSCRIPT/Runtime/Core/Potions.cs": "de1b76c60310af03ac5720fe522c8f9d18a971615b02c26973a1934110d0a57e",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftRarity.cs": "e937cd7a0b5988c227af67bff689a7b7ca0aa0f81333762b6e5a88ed805c436e",
+    "Assets/HELLSCRIPT/Runtime/Core/TownWalk.cs": "9e34fa8e674a2dfe246aebbceaf76c72d04b4a6134567c1efa18ef96b91c8723",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Gems.cs": "5085ebe5bfe2084aa85d0a9032351f6350ae9359718e2db9ab48bba8fa8636df",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.GlobalHud.cs": "26b40820e8be392498ef1898549e1363be9c48ddfbd3b26a3aa0d3457543a405",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Jeweler.cs": "d25cbaaec20c5a4d7226f882138029fe12bec8fcd9ee45f91bf046995b5e4399",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TownServices.cs": "23188528e4d0bbe0ac6e47bce61a9648b01dfced6c0333d4de78f86972fff71c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "b2bfe11e5a099cba0b1cd1d8533e2d57d442eeb9bf693e93632bcdd880baedbe",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs": "266c7c6638d1934011ff4cb12ed5f114279f5f159b23aa3d8aa75d278d5a1e1f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs": "1055008ab354349487c41dbe679308113b573617adc754fcb3be0f62abb21952",
+    "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs": "723d86bafa771d53b3f898f4c120534e42c82b46ca129e43ed0f51fdfb80ee0b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/JewelerArt.cs": "9f3fdbe6de76bddd5a1f46f04937ffebf58827a967949a9749092ce0695e2b8e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs": "792c93d01c5400f1da20db140bdf69981592d6353c228913ed95d890320420fe",
+    "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs": "61ee31dd5ad27a415e48aed525b383830c4411c4bc40f071ea486fdbcdc0c99c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeJewelerSmoke.cs": "f00130fbd603c7b3ecfe8f265d4bf47bde4526029e9c26cd69e882a7f64afe31",
+    "Assets/HELLSCRIPT/Tests/Editor/GemServiceTests.cs": "c744ec52708dfce8684232dbe888e2da3470c3dedb30c3458d3d4541c3ba20a5",
+    "Assets/HELLSCRIPT/Tests/Editor/GemSocketTests.cs": "65d015ad74d3c40cd3d975efb19db69b031fe69081f9e572cb7f09052e92dfae",
+    "Assets/HELLSCRIPT/Tests/Editor/JewelerTests.cs": "5d40ff84a832b6ee762234cb0b6634081b8af3c4b39884fc969c4805c69528d7"
+  },
+  "evidenceSha256": {
+    "active-shield.png": "bdda6975b4739c780edc799c80184aade94f7f51525fb228f1f2d00b8fc17fa4",
+    "editmode.xml": "a6a434da0204167c2baa2bc5a66eac7623b380e88fc14f0714e5e3b7f90fbeb9",
+    "gems-portrait.png": "89c6dee67e8de30b4149b1b8de9b4ee6028ba33702628fea0958d7b00d9ecaf4",
+    "initial.txt": "b480de5016aeb7440755d26e61434f3380d76a73d94b590944658d3dd1b50204",
+    "jeweler-landscape.png": "b291cf8588f296b6b5a8f7b4f54775d06311c12bf3804e34c27c72d442af9a19",
+    "potions-portrait-en-150.png": "72a2a31bb8811580607d1334ab57f0047045ea2fca84f97f6cdb767c49d50c32",
+    "resume.txt": "989d682ec52c14ca8eb57cd3ae6d5edbb058f71c00e4dcaec792847bb2917edc"
+  }
+}

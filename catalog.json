@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T16:00:49+09:00",
+  "generatedAt": "2026-09-23T16:48:54+09:00",
   "databases": [
     {
       "id": "resources",
@@ -91079,7 +91079,7 @@
     {
       "id": "potions",
       "name": "물약 / Potions",
-      "description": "HP·자원·보조 6종의 실제 런타임 데이터 / Runtime HP, resource and six utility types.",
+      "description": "기존 물약 8종과 보석 물약 36종의 실제 런타임 데이터 / Eight original potions and 36 gem elixirs from runtime sources.",
       "rows": [
         {
           "id": "PH01",
@@ -91327,6 +91327,1266 @@
           ],
           "related": [
             "globalhud-05-potions"
+          ]
+        },
+        {
+          "id": "PE-G03-1",
+          "name": "부서진 토파즈 물약 / Chipped Topaz Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "매직찬스 +5%p; 이동 속도 +5%; 획득 반경 +10% / Magic chance +5 pp; Move speed +5%; Pickup radius +10%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "매직찬스 +5%p; 이동 속도 +5%; 획득 반경 +10% / Magic chance +5 pp; Move speed +5%; Pickup radius +10%",
+            "등급 / Grade": 1,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G03 T1 ×1 → ×1",
+            "색상 / Color": "#E6B754",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 23
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G03-2",
+          "name": "흐린 토파즈 물약 / Clouded Topaz Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "매직찬스 +10%p; 이동 속도 +7%; 획득 반경 +15% / Magic chance +10 pp; Move speed +7%; Pickup radius +15%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "매직찬스 +10%p; 이동 속도 +7%; 획득 반경 +15% / Magic chance +10 pp; Move speed +7%; Pickup radius +15%",
+            "등급 / Grade": 2,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G03 T2 ×1 → ×1",
+            "색상 / Color": "#E6B754",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 23
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G03-3",
+          "name": "맑은 토파즈 물약 / Clear Topaz Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "매직찬스 +15%p; 이동 속도 +10%; 획득 반경 +25% / Magic chance +15 pp; Move speed +10%; Pickup radius +25%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "매직찬스 +15%p; 이동 속도 +10%; 획득 반경 +25% / Magic chance +15 pp; Move speed +10%; Pickup radius +25%",
+            "등급 / Grade": 3,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G03 T3 ×1 → ×1",
+            "색상 / Color": "#E6B754",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 23
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G03-4",
+          "name": "벼려진 토파즈 물약 / Tempered Topaz Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "매직찬스 +22%p; 이동 속도 +13%; 획득 반경 +35% / Magic chance +22 pp; Move speed +13%; Pickup radius +35%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "매직찬스 +22%p; 이동 속도 +13%; 획득 반경 +35% / Magic chance +22 pp; Move speed +13%; Pickup radius +35%",
+            "등급 / Grade": 4,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G03 T4 ×1 → ×1",
+            "색상 / Color": "#E6B754",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 23
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G03-5",
+          "name": "완전한 토파즈 물약 / Perfect Topaz Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "매직찬스 +30%p; 이동 속도 +17%; 획득 반경 +50% / Magic chance +30 pp; Move speed +17%; Pickup radius +50%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "매직찬스 +30%p; 이동 속도 +17%; 획득 반경 +50% / Magic chance +30 pp; Move speed +17%; Pickup radius +50%",
+            "등급 / Grade": 5,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G03 T5 ×1 → ×1",
+            "색상 / Color": "#E6B754",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 23
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G03-6",
+          "name": "왕관의 토파즈 물약 / Crowned Topaz Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "매직찬스 +40%p; 이동 속도 +22%; 획득 반경 +70% / Magic chance +40 pp; Move speed +22%; Pickup radius +70%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "매직찬스 +40%p; 이동 속도 +22%; 획득 반경 +70% / Magic chance +40 pp; Move speed +22%; Pickup radius +70%",
+            "등급 / Grade": 6,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G03 T6 ×1 → ×1",
+            "색상 / Color": "#E6B754",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 23
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G05-1",
+          "name": "부서진 자수정 물약 / Chipped Amethyst Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "힘 +10; 최대 생명력 +5%; 생명력 훔침 +0.5%p / Strength +10; Maximum life +5%; Life steal +0.5 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "힘 +10; 최대 생명력 +5%; 생명력 훔침 +0.5%p / Strength +10; Maximum life +5%; Life steal +0.5 pp",
+            "등급 / Grade": 1,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G05 T1 ×1 → ×1",
+            "색상 / Color": "#B777DA",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 24
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G05-2",
+          "name": "흐린 자수정 물약 / Clouded Amethyst Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "힘 +20; 최대 생명력 +8%; 생명력 훔침 +1%p / Strength +20; Maximum life +8%; Life steal +1 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "힘 +20; 최대 생명력 +8%; 생명력 훔침 +1%p / Strength +20; Maximum life +8%; Life steal +1 pp",
+            "등급 / Grade": 2,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G05 T2 ×1 → ×1",
+            "색상 / Color": "#B777DA",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 24
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G05-3",
+          "name": "맑은 자수정 물약 / Clear Amethyst Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "힘 +35; 최대 생명력 +12%; 생명력 훔침 +1.5%p / Strength +35; Maximum life +12%; Life steal +1.5 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "힘 +35; 최대 생명력 +12%; 생명력 훔침 +1.5%p / Strength +35; Maximum life +12%; Life steal +1.5 pp",
+            "등급 / Grade": 3,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G05 T3 ×1 → ×1",
+            "색상 / Color": "#B777DA",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 24
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G05-4",
+          "name": "벼려진 자수정 물약 / Tempered Amethyst Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "힘 +55; 최대 생명력 +17%; 생명력 훔침 +2%p / Strength +55; Maximum life +17%; Life steal +2 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "힘 +55; 최대 생명력 +17%; 생명력 훔침 +2%p / Strength +55; Maximum life +17%; Life steal +2 pp",
+            "등급 / Grade": 4,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G05 T4 ×1 → ×1",
+            "색상 / Color": "#B777DA",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 24
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G05-5",
+          "name": "완전한 자수정 물약 / Perfect Amethyst Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "힘 +80; 최대 생명력 +23%; 생명력 훔침 +3%p / Strength +80; Maximum life +23%; Life steal +3 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "힘 +80; 최대 생명력 +23%; 생명력 훔침 +3%p / Strength +80; Maximum life +23%; Life steal +3 pp",
+            "등급 / Grade": 5,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G05 T5 ×1 → ×1",
+            "색상 / Color": "#B777DA",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 24
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G05-6",
+          "name": "왕관의 자수정 물약 / Crowned Amethyst Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "힘 +120; 최대 생명력 +30%; 생명력 훔침 +4%p / Strength +120; Maximum life +30%; Life steal +4 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "힘 +120; 최대 생명력 +30%; 생명력 훔침 +4%p / Strength +120; Maximum life +30%; Life steal +4 pp",
+            "등급 / Grade": 6,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G05 T6 ×1 → ×1",
+            "색상 / Color": "#B777DA",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 24
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G02-1",
+          "name": "부서진 사파이어 물약 / Chipped Sapphire Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "마법력 +10; 최대 마나 +5%; 마나 훔침 +0.5%p / Magic power +10; Maximum mana +5%; Mana steal +0.5 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "마법력 +10; 최대 마나 +5%; 마나 훔침 +0.5%p / Magic power +10; Maximum mana +5%; Mana steal +0.5 pp",
+            "등급 / Grade": 1,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G02 T1 ×1 → ×1",
+            "색상 / Color": "#639AFF",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 25
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G02-2",
+          "name": "흐린 사파이어 물약 / Clouded Sapphire Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "마법력 +20; 최대 마나 +8%; 마나 훔침 +1%p / Magic power +20; Maximum mana +8%; Mana steal +1 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "마법력 +20; 최대 마나 +8%; 마나 훔침 +1%p / Magic power +20; Maximum mana +8%; Mana steal +1 pp",
+            "등급 / Grade": 2,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G02 T2 ×1 → ×1",
+            "색상 / Color": "#639AFF",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 25
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G02-3",
+          "name": "맑은 사파이어 물약 / Clear Sapphire Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "마법력 +35; 최대 마나 +12%; 마나 훔침 +1.5%p / Magic power +35; Maximum mana +12%; Mana steal +1.5 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "마법력 +35; 최대 마나 +12%; 마나 훔침 +1.5%p / Magic power +35; Maximum mana +12%; Mana steal +1.5 pp",
+            "등급 / Grade": 3,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G02 T3 ×1 → ×1",
+            "색상 / Color": "#639AFF",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 25
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G02-4",
+          "name": "벼려진 사파이어 물약 / Tempered Sapphire Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "마법력 +55; 최대 마나 +17%; 마나 훔침 +2%p / Magic power +55; Maximum mana +17%; Mana steal +2 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "마법력 +55; 최대 마나 +17%; 마나 훔침 +2%p / Magic power +55; Maximum mana +17%; Mana steal +2 pp",
+            "등급 / Grade": 4,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G02 T4 ×1 → ×1",
+            "색상 / Color": "#639AFF",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 25
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G02-5",
+          "name": "완전한 사파이어 물약 / Perfect Sapphire Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "마법력 +80; 최대 마나 +23%; 마나 훔침 +3%p / Magic power +80; Maximum mana +23%; Mana steal +3 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "마법력 +80; 최대 마나 +23%; 마나 훔침 +3%p / Magic power +80; Maximum mana +23%; Mana steal +3 pp",
+            "등급 / Grade": 5,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G02 T5 ×1 → ×1",
+            "색상 / Color": "#639AFF",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 25
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G02-6",
+          "name": "왕관의 사파이어 물약 / Crowned Sapphire Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "마법력 +120; 최대 마나 +30%; 마나 훔침 +4%p / Magic power +120; Maximum mana +30%; Mana steal +4 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "마법력 +120; 최대 마나 +30%; 마나 훔침 +4%p / Magic power +120; Maximum mana +30%; Mana steal +4 pp",
+            "등급 / Grade": 6,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G02 T6 ×1 → ×1",
+            "색상 / Color": "#639AFF",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 25
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G04-1",
+          "name": "부서진 에메랄드 물약 / Chipped Emerald Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "민첩력 +10; 회피 확률 +2%p; 공격 속도 +5% / Dexterity +10; Dodge chance +2 pp; Attack speed +5%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "민첩력 +10; 회피 확률 +2%p; 공격 속도 +5% / Dexterity +10; Dodge chance +2 pp; Attack speed +5%",
+            "등급 / Grade": 1,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G04 T1 ×1 → ×1",
+            "색상 / Color": "#60CD91",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 26
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G04-2",
+          "name": "흐린 에메랄드 물약 / Clouded Emerald Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "민첩력 +20; 회피 확률 +3%p; 공격 속도 +8% / Dexterity +20; Dodge chance +3 pp; Attack speed +8%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "민첩력 +20; 회피 확률 +3%p; 공격 속도 +8% / Dexterity +20; Dodge chance +3 pp; Attack speed +8%",
+            "등급 / Grade": 2,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G04 T2 ×1 → ×1",
+            "색상 / Color": "#60CD91",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 26
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G04-3",
+          "name": "맑은 에메랄드 물약 / Clear Emerald Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "민첩력 +35; 회피 확률 +5%p; 공격 속도 +12% / Dexterity +35; Dodge chance +5 pp; Attack speed +12%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "민첩력 +35; 회피 확률 +5%p; 공격 속도 +12% / Dexterity +35; Dodge chance +5 pp; Attack speed +12%",
+            "등급 / Grade": 3,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G04 T3 ×1 → ×1",
+            "색상 / Color": "#60CD91",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 26
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G04-4",
+          "name": "벼려진 에메랄드 물약 / Tempered Emerald Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "민첩력 +55; 회피 확률 +7%p; 공격 속도 +17% / Dexterity +55; Dodge chance +7 pp; Attack speed +17%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "민첩력 +55; 회피 확률 +7%p; 공격 속도 +17% / Dexterity +55; Dodge chance +7 pp; Attack speed +17%",
+            "등급 / Grade": 4,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G04 T4 ×1 → ×1",
+            "색상 / Color": "#60CD91",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 26
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G04-5",
+          "name": "완전한 에메랄드 물약 / Perfect Emerald Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "민첩력 +80; 회피 확률 +10%p; 공격 속도 +23% / Dexterity +80; Dodge chance +10 pp; Attack speed +23%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "민첩력 +80; 회피 확률 +10%p; 공격 속도 +23% / Dexterity +80; Dodge chance +10 pp; Attack speed +23%",
+            "등급 / Grade": 5,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G04 T5 ×1 → ×1",
+            "색상 / Color": "#60CD91",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 26
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G04-6",
+          "name": "왕관의 에메랄드 물약 / Crowned Emerald Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "민첩력 +120; 회피 확률 +14%p; 공격 속도 +30% / Dexterity +120; Dodge chance +14 pp; Attack speed +30%",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "민첩력 +120; 회피 확률 +14%p; 공격 속도 +30% / Dexterity +120; Dodge chance +14 pp; Attack speed +30%",
+            "등급 / Grade": 6,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G04 T6 ×1 → ×1",
+            "색상 / Color": "#60CD91",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 26
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G01-1",
+          "name": "부서진 루비 물약 / Chipped Ruby Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "방어력 +10%; HP 회복 +0.5%/초; 완벽한 방어 확률 +2%p / Armor +10%; HP regeneration +0.5%/s; Perfect block chance +2 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "방어력 +10%; HP 회복 +0.5%/초; 완벽한 방어 확률 +2%p / Armor +10%; HP regeneration +0.5%/s; Perfect block chance +2 pp",
+            "등급 / Grade": 1,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G01 T1 ×1 → ×1",
+            "색상 / Color": "#E56D74",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 27
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G01-2",
+          "name": "흐린 루비 물약 / Clouded Ruby Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "방어력 +16%; HP 회복 +0.8%/초; 완벽한 방어 확률 +3%p / Armor +16%; HP regeneration +0.8%/s; Perfect block chance +3 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "방어력 +16%; HP 회복 +0.8%/초; 완벽한 방어 확률 +3%p / Armor +16%; HP regeneration +0.8%/s; Perfect block chance +3 pp",
+            "등급 / Grade": 2,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G01 T2 ×1 → ×1",
+            "색상 / Color": "#E56D74",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 27
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G01-3",
+          "name": "맑은 루비 물약 / Clear Ruby Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "방어력 +24%; HP 회복 +1.2%/초; 완벽한 방어 확률 +5%p / Armor +24%; HP regeneration +1.2%/s; Perfect block chance +5 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "방어력 +24%; HP 회복 +1.2%/초; 완벽한 방어 확률 +5%p / Armor +24%; HP regeneration +1.2%/s; Perfect block chance +5 pp",
+            "등급 / Grade": 3,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G01 T3 ×1 → ×1",
+            "색상 / Color": "#E56D74",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 27
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G01-4",
+          "name": "벼려진 루비 물약 / Tempered Ruby Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "방어력 +34%; HP 회복 +1.8%/초; 완벽한 방어 확률 +7%p / Armor +34%; HP regeneration +1.8%/s; Perfect block chance +7 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "방어력 +34%; HP 회복 +1.8%/초; 완벽한 방어 확률 +7%p / Armor +34%; HP regeneration +1.8%/s; Perfect block chance +7 pp",
+            "등급 / Grade": 4,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G01 T4 ×1 → ×1",
+            "색상 / Color": "#E56D74",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 27
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G01-5",
+          "name": "완전한 루비 물약 / Perfect Ruby Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "방어력 +46%; HP 회복 +2.5%/초; 완벽한 방어 확률 +10%p / Armor +46%; HP regeneration +2.5%/s; Perfect block chance +10 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "방어력 +46%; HP 회복 +2.5%/초; 완벽한 방어 확률 +10%p / Armor +46%; HP regeneration +2.5%/s; Perfect block chance +10 pp",
+            "등급 / Grade": 5,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G01 T5 ×1 → ×1",
+            "색상 / Color": "#E56D74",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 27
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G01-6",
+          "name": "왕관의 루비 물약 / Crowned Ruby Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "방어력 +60%; HP 회복 +3.5%/초; 완벽한 방어 확률 +14%p / Armor +60%; HP regeneration +3.5%/s; Perfect block chance +14 pp",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "방어력 +60%; HP 회복 +3.5%/초; 완벽한 방어 확률 +14%p / Armor +60%; HP regeneration +3.5%/s; Perfect block chance +14 pp",
+            "등급 / Grade": 6,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G01 T6 ×1 → ×1",
+            "색상 / Color": "#E56D74",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 27
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G06-1",
+          "name": "부서진 다이아몬드 물약 / Chipped Diamond Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "모든 저항력 +10; CC 지속시간 -10%; 최대 HP의 5% 보호막 / All resistance +10; CC duration -10%; Shield: 5% of maximum HP",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "모든 저항력 +10; CC 지속시간 -10%; 최대 HP의 5% 보호막 / All resistance +10; CC duration -10%; Shield: 5% of maximum HP",
+            "등급 / Grade": 1,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G06 T1 ×1 → ×1",
+            "색상 / Color": "#D5E8EB",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 28
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G06-2",
+          "name": "흐린 다이아몬드 물약 / Clouded Diamond Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "모든 저항력 +18; CC 지속시간 -15%; 최대 HP의 8% 보호막 / All resistance +18; CC duration -15%; Shield: 8% of maximum HP",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "모든 저항력 +18; CC 지속시간 -15%; 최대 HP의 8% 보호막 / All resistance +18; CC duration -15%; Shield: 8% of maximum HP",
+            "등급 / Grade": 2,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G06 T2 ×1 → ×1",
+            "색상 / Color": "#D5E8EB",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 28
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G06-3",
+          "name": "맑은 다이아몬드 물약 / Clear Diamond Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "모든 저항력 +28; CC 지속시간 -22%; 최대 HP의 12% 보호막 / All resistance +28; CC duration -22%; Shield: 12% of maximum HP",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "모든 저항력 +28; CC 지속시간 -22%; 최대 HP의 12% 보호막 / All resistance +28; CC duration -22%; Shield: 12% of maximum HP",
+            "등급 / Grade": 3,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G06 T3 ×1 → ×1",
+            "색상 / Color": "#D5E8EB",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 28
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G06-4",
+          "name": "벼려진 다이아몬드 물약 / Tempered Diamond Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "모든 저항력 +40; CC 지속시간 -30%; 최대 HP의 17% 보호막 / All resistance +40; CC duration -30%; Shield: 17% of maximum HP",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "모든 저항력 +40; CC 지속시간 -30%; 최대 HP의 17% 보호막 / All resistance +40; CC duration -30%; Shield: 17% of maximum HP",
+            "등급 / Grade": 4,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G06 T4 ×1 → ×1",
+            "색상 / Color": "#D5E8EB",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 28
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G06-5",
+          "name": "완전한 다이아몬드 물약 / Perfect Diamond Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "모든 저항력 +55; CC 지속시간 -40%; 최대 HP의 23% 보호막 / All resistance +55; CC duration -40%; Shield: 23% of maximum HP",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "모든 저항력 +55; CC 지속시간 -40%; 최대 HP의 23% 보호막 / All resistance +55; CC duration -40%; Shield: 23% of maximum HP",
+            "등급 / Grade": 5,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G06 T5 ×1 → ×1",
+            "색상 / Color": "#D5E8EB",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 28
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
+          ]
+        },
+        {
+          "id": "PE-G06-6",
+          "name": "왕관의 다이아몬드 물약 / Crowned Diamond Elixir",
+          "category": "보석 물약 / Gem elixir",
+          "summary": "모든 저항력 +75; CC 지속시간 -50%; 최대 HP의 30% 보호막 / All resistance +75; CC duration -50%; Shield: 30% of maximum HP",
+          "fields": {
+            "종류 / Type": "보석 물약 / Gem elixir",
+            "효과 / Effect": "모든 저항력 +75; CC 지속시간 -50%; 최대 HP의 30% 보호막 / All resistance +75; CC duration -50%; Shield: 30% of maximum HP",
+            "등급 / Grade": 6,
+            "지속 (초) / Duration (s)": 30.0,
+            "재사용 (초) / Cooldown (s)": 30.0,
+            "가격 (금화) / Price (gold)": "제조 전용 / Crafted only",
+            "제조 / Craft": "G06 T6 ×1 → ×1",
+            "색상 / Color": "#D5E8EB",
+            "재고 / Inventory": "캐릭터별 별도 재고 / Separate per-character stock"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 28
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HeroStats.Elixirs.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "jeweler-runtime"
           ]
         }
       ]

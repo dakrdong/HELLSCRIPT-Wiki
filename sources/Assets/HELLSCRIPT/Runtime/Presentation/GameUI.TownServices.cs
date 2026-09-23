@@ -27,17 +27,6 @@ namespace Hellscript
             ShowEquipmentShop(EquipmentShopTab.Buy);
         }
         public void ShowTownSmith()=>ShowBlacksmith();
-        public void ShowTownGemShop()
-        {
-            if(!TownService("town-gems","보석 상인","보석 구매 · 소켓 관리",ShowTownGemShop))return;
-            Note(content,"1단계 보석을 판매합니다. 구매한 보석은 계정 보관함에 들어가며, 같은 보석을 모아 합성할 수 있습니다.",21,110,pale);
-            foreach(var gem in GemCatalog.Gems)
-            {
-                string id=gem.id;TownPurchase("town-buy-gem-"+id,Loc.F("{0} 구매 · {1:N0} 골드",GemInventory.Name(id,1),TownTrade.GemPrice),TownTrade.GemPrice,r=>game.Store.BuyTownGem(r,id),ShowTownGemShop,GemInventory.CanAdd(game.Store.Data,new GemStack{gemId=id,tier=1,count=1}));
-            }
-            BigButton(content,"보석 보관함 · 소켓 관리",ShowGemMenu);
-            FooterButton(0,1,"마을로 돌아가기",ShowTown);
-        }
         public void ShowTownRuneShop()
         {
             if(!TownService("town-runes","룬 상인","룬 블록 구매 · 룬 배치",ShowTownRuneShop))return;

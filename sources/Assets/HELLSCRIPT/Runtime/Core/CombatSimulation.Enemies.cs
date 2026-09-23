@@ -205,7 +205,7 @@ namespace Hellscript
             ObserveHazardImpact(h,inside,visible);
             if(!inside||!visible)return;
             Hurt(h.damage,h.element,h.enemyId.ToString(),h.definitionId,h.actionId,h.id,h.interval>0?DamageKind.Periodic:DamageKind.Direct);
-            if(h.heroSlow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,2);
+            if(h.heroSlow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,2*(1-Stats.ccReduction));
         }
         bool EnemyThreatAt(Vector2 point,float warning,bool activeOnly=false)
             =>EnemyCombat.Threats(State,Map).Any(t=>t.delay<=(activeOnly?0:warning)+.00001f&&Vector2.Distance(State.position,t.origin)<=14+t.radius&&Map.LineClear(State.position,t.origin)&&EnemyCombat.Contains(t,point)&&Map.LineClear(t.origin,point));

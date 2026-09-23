@@ -132,7 +132,7 @@ namespace Hellscript
         public void Tick(float dt)
         {
             if(State.paused||State.portal||!string.IsNullOrEmpty(State.navigationError)||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;
-            if(State.phase==RunPhase.Looting){CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
+            if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
             float observedTime=State.time,observedHealth=State.health;
@@ -414,7 +414,7 @@ namespace Hellscript
                     RiftResources.RollGems(State,e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,e.position);
                     QueueExperience(Mathf.FloorToInt((e.elite>=0?50:10)*(1+.05f*(State.stage-1))));
                     bool drop=e.elite>=0||RandomStream.Unit(ref State.rewardRng)<.02f;
-                    if(drop)Drop(e.position,RiftRarity.Roll(e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,State.stage,ref State.rewardRng));
+                    if(drop)Drop(e.position,RiftRarity.Roll(e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,State.stage,ref State.rewardRng,Stats.magicFind));
                 }
             }
 
@@ -522,7 +522,7 @@ namespace Hellscript
             RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(1000+100*State.stage));account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
-            for(int i=0;i<3;i++)Drop(State.position+new Vector2(i-1,1),RiftRarity.Roll(RiftRewardSource.Boss,State.stage,ref State.rewardRng));
+            for(int i=0;i<3;i++)Drop(State.position+new Vector2(i-1,1),RiftRarity.Roll(RiftRewardSource.Boss,State.stage,ref State.rewardRng,Stats.magicFind));
             RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);
             Log("BOSS_CLEAR","보스 처치 · 전리품 정리");

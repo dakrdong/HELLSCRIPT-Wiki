@@ -147,15 +147,15 @@ namespace Hellscript.Tests
         }
         static GemStack Stack(string id="G01",int tier=1,int count=1)=>new GemStack{gemId=id,tier=tier,count=count};
         [Test]
-        public void FusionFromTierOneToTierSixConsumesExactly243MaterialsAnd364500Gold()
+        public void FusionFromTierOneToTierSixConsumesExactly3125MaterialsAndNoGold()
         {
-            var bag=new List<GemStack>{Stack(count:243)};int gold=364500;
-            for(int tier=1;tier<6;tier++)while(GemStacks.Count(bag,"G01",tier)>=3)Assert.IsTrue(GemStacks.TryFuse(bag,50,"G01",tier,ref gold));
-            Assert.AreEqual(0,gold);Assert.AreEqual(1,bag.Count);Assert.AreEqual(6,bag[0].tier);Assert.AreEqual(1,bag[0].count);
-            Assert.AreEqual(243,GemCatalog.TierOneMaterials(6));Assert.AreEqual(364500,GemCatalog.TotalFusionGold(6));
-            CollectionAssert.AreEqual(new[]{900,2700,8100,24300,72900},Enumerable.Range(2,5).Select(GemCatalog.FusionGold));
+            var bag=new List<GemStack>();Assert.IsTrue(GemStacks.TryAdd(bag,50,Stack(count:3125)));int gold=100;
+            for(int tier=1;tier<6;tier++)while(GemStacks.Count(bag,"G01",tier)>=5)Assert.IsTrue(GemStacks.TryFuse(bag,50,"G01",tier,ref gold));
+            Assert.AreEqual(100,gold);Assert.AreEqual(1,bag.Count);Assert.AreEqual(6,bag[0].tier);Assert.AreEqual(1,bag[0].count);
+            Assert.AreEqual(3125,GemCatalog.TierOneMaterials(6));Assert.AreEqual(0,GemCatalog.TotalFusionGold(6));
+            CollectionAssert.AreEqual(new[]{0,0,0,0,0},Enumerable.Range(2,5).Select(GemCatalog.FusionGold));
         }
-        [TestCase(2,900,50)][TestCase(3,899,50)][TestCase(4,900,1)]
+        [TestCase(2,900,50)][TestCase(3,899,50)][TestCase(6,900,1)]
         public void FailedFusionLeavesAllStacksAndGoldIntact(int count,int gold,int capacity)
         {
             var bag=new List<GemStack>{Stack(count:count)};int beforeGold=gold;string before=Json(bag[0]);
@@ -164,9 +164,9 @@ namespace Hellscript.Tests
         [Test]
         public void AConsumedStackCanSupplyTheOutputSlotAndTopTierCannotBeFused()
         {
-            var bag=new List<GemStack>{Stack(count:3)};int gold=100000;
-            Assert.IsTrue(GemStacks.TryFuse(bag,1,"G01",1,ref gold));Assert.AreEqual(99100,gold);Assert.AreEqual(2,bag.Single().tier);
-            bag[0].tier=6;bag[0].count=3;Assert.IsFalse(GemStacks.TryFuse(bag,1,"G01",6,ref gold));Assert.AreEqual(99100,gold);Assert.AreEqual(3,bag[0].count);
+            var bag=new List<GemStack>{Stack(count:5)};int gold=100000;
+            Assert.IsTrue(GemStacks.TryFuse(bag,1,"G01",1,ref gold));Assert.AreEqual(100000,gold);Assert.AreEqual(2,bag.Single().tier);
+            bag[0].tier=6;bag[0].count=3;Assert.IsFalse(GemStacks.TryFuse(bag,1,"G01",6,ref gold));Assert.AreEqual(100000,gold);Assert.AreEqual(3,bag[0].count);
         }
         [Test]
         public void StacksFillTo999AndOverflowOrExchangeIsAtomic()
@@ -177,12 +177,12 @@ namespace Hellscript.Tests
             Assert.IsFalse(GemStacks.TryExchange(bag,2,new[]{Stack(count:3)},new[]{Stack("G02")}));CollectionAssert.AreEqual(references,bag);Assert.AreEqual(1998,GemStacks.Count(bag,"G01",1));
             Assert.IsTrue(GemStacks.TryExchange(bag,2,new[]{Stack(count:999)},new[]{Stack("G02")}));Assert.AreEqual(999,GemStacks.Count(bag,"G01",1));Assert.AreEqual(1,GemStacks.Count(bag,"G02",1));
         }
-        [TestCase(3,true)][TestCase(4,false)]
+        [TestCase(5,true)][TestCase(6,false)]
         public void FusionConsumesTheSmallOverflowStackBeforeAFullStackToReuseItsSlot(int overflow,bool succeeds)
         {
             var bag=new List<GemStack>{Stack(count:999),Stack(count:overflow)};int gold=900;
             Assert.AreEqual(succeeds,GemStacks.TryFuse(bag,2,"G01",1,ref gold));
-            Assert.AreEqual(succeeds?0:900,gold);Assert.AreEqual(succeeds?999:999+overflow,GemStacks.Count(bag,"G01",1));Assert.AreEqual(succeeds?1:0,GemStacks.Count(bag,"G01",2));
+            Assert.AreEqual(900,gold);Assert.AreEqual(succeeds?999:999+overflow,GemStacks.Count(bag,"G01",1));Assert.AreEqual(succeeds?1:0,GemStacks.Count(bag,"G01",2));
         }
         [TestCase("INVALID",1,1)][TestCase("G01",0,1)][TestCase("G01",7,1)][TestCase("G01",1,0)][TestCase("G01",1,-1)][TestCase("G01",1,1000)]
         public void InvalidPersistedStacksAreRejectedWithoutRepairingTheirQuantities(string id,int tier,int count)
