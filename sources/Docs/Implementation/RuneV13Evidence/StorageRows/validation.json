@@ -1,0 +1,23 @@
+{
+  "base_commit": "660f0f767d82d10e36b25e4904c5328c4a2b3e9c",
+  "unity": "6000.6.0f1",
+  "editmode": {
+    "result": "Passed",
+    "total": "159",
+    "passed": "159",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "test_scope": "Runes, LocalizationTests, StoredLocalizationTests and SharedUiTests. The pre-existing unrelated GraphicComponentTests failure is outside this focused run.",
+  "matrix_conditions": 24,
+  "portrait_conditions": 8,
+  "storage": "All 24 cards in the first three rows fit inside the viewport. 440x956: 3.053 rows; 960x1440: 3.042 rows at 100% text.",
+  "board_height": "At 100% text: 440x956 grows from 464.667 to 479.104 UI units; 960x1440 reallocates height from 582.400 to 535.600 UI units to accommodate three larger rows.",
+  "source_hashes": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Runes.cs": "5a0c0a0ad7d8ceead9fbb11959908672fcd02337256308a3c06035d3cdfe583f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRuneV13Smoke.cs": "52c80fd3957f9e35f82304a52b0c2758541b6d4728194b23473e6908c4b3a023",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRuneV13Smoke.Clarity.cs": "5b16f36d226be6cc282317176257bc95bbe092049c23a158dcba202394821457",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "a613679839eb8fdafbfe05eea92bbf0328bf45b3dde05ecc5ebf78de384b69d3"
+  },
+  "limitations": "Automated native macOS input and screenshots with isolated saves, not physical-mobile or human-mouse validation. No packages, scene/prefab assets or serialized settings changed."
+}

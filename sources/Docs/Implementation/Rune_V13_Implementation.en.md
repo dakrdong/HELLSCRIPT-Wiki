@@ -90,6 +90,20 @@ The [Edit Mode run](RuneV13Evidence/PortraitControls/editmode.xml) had **159 pas
 
 [960×1440 portrait](RuneV13Evidence/PortraitControls/wide-portrait-ko.png) · [440×956 portrait](RuneV13Evidence/PortraitControls/portrait-ko.png) · [No selection](RuneV13Evidence/PortraitControls/no-selection.png) · [Selected rotated block](RuneV13Evidence/PortraitControls/selected-rotated-block.png) · [Rotated drag](RuneV13Evidence/PortraitControls/rotated-drag.png) · [Color list](RuneV13Evidence/PortraitControls/color-list.png) · [Multiple sizes](RuneV13Evidence/PortraitControls/size-list.png) · [English at 140%](RuneV13Evidence/PortraitControls/portrait-en-large.png)
 
+## 2026-09-23: Weapon-tab progression and three storage rows
+
+Every portrait weapon tab shows that weapon's level, numeric XP, XP bar and available slot points. The separate mastery panel is removed, along with the saved-state/active-cell message row below the board. Per-color effects and save/undo/revert actions remain available. Landscape retains its mastery panel and gives the removed status row's space to the board.
+
+Portrait storage height is derived from the actual eight-column square slot size and row spacing, rather than a fixed proportion. It reserves room for at least three complete rows beneath the title, filters and rotation control. Weapon tabs read draft progression, so unlocking and undo update the visible points immediately without writing the account before Save changes. The existing `GameUI.Runes` adapter continues to use shared safe-area, font, button and border owners and the existing rune edit/save paths.
+
+[Focused Edit Mode tests](RuneV13Evidence/StorageRows/editmode.xml) passed **159/159** across runes, localization and shared UI. The UI ownership check and its nine regression tests also passed. The unrelated equipment graphic-declaration failure recorded in the previous task was outside this focused run; this is not a full regression result.
+
+The [macOS interaction check](RuneV13Evidence/StorageRows/runtime.txt) verifies all six weapons' XP, maximum-level and point displays, complete card bounds across three rows, filter selection, rotated pickup/placement/recovery, undo and save/reload. The [rune lifecycle check](RuneV13Evidence/StorageRows/lifecycle.txt) covers tab points after unlocking and undo, account/draft isolation, cross-weapon reuse and all five presets.
+
+Validation combines 440×956, 956×440, 960×1440, 1920×1080, 1920×1200 and 2520×1080 with Korean/English and 100%/140% text. Evidence includes [storage rows](RuneV13Evidence/StorageRows/storage-rows.tsv), [before/after board height](RuneV13Evidence/StorageRows/board-space.tsv), [window widths](RuneV13Evidence/StorageRows/window-widths.tsv), [build result](RuneV13Evidence/StorageRows/build.txt) and [scope/source hashes](RuneV13Evidence/StorageRows/validation.json). This is automated native macOS input with isolated saves, not physical-mobile or human-input validation.
+
+[Portrait 960×1440](RuneV13Evidence/StorageRows/wide-portrait-ko.png) · [Portrait 440×956](RuneV13Evidence/StorageRows/portrait-ko.png) · [Korean 140%](RuneV13Evidence/StorageRows/portrait-ko-large.png) · [English 140%](RuneV13Evidence/StorageRows/portrait-en-large.png) · [Landscape 956×440](RuneV13Evidence/StorageRows/landscape-ko.png) · [Rotated drag](RuneV13Evidence/StorageRows/rotated-drag.png)
+
 ## Maintenance
 
 [Runtime reference data](../../Assets/HELLSCRIPT/Resources/Runes/V13/catalog.json) is checked against the [Unity export](Rune_Mastery_Catalog.json) and wiki databases. The [importer](../../tools/runes/import_v13.py) checks the supplied archive hash without executing embedded scripts. The [art converter](../../tools/runes/render_v13.cjs) regenerates assets from supplied SVGs and images.

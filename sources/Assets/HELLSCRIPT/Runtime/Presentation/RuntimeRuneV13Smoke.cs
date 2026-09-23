@@ -132,6 +132,9 @@ namespace Hellscript
             Click("닫기");yield return null;
             RuneMasteryProgress.AddExperience(RuneMasteryProgress.Get(game.Store.Data.runes,"sword"),100);game.Store.Save();game.UI.ShowRunes();Click("rune-weapon-sword");
             Tap(new HexCell(3,0));Click("rune-unlock");Require(RuneMasteryProgress.Get(game.Store.Data.runes,"sword").unlocked.Count==19,"Slot draft leaked before Save");
+            yield return null;VerifyWeaponTabProgress("sword",RuneMasteryProgress.Get(game.Store.Data.runes,"sword"),5);
+            Click("rune-undo");yield return null;VerifyWeaponTabProgress("sword",RuneMasteryProgress.Get(game.Store.Data.runes,"sword"),6);
+            Tap(new HexCell(3,0));Click("rune-unlock");yield return null;VerifyWeaponTabProgress("sword",RuneMasteryProgress.Get(game.Store.Data.runes,"sword"),5);
             Click("rune-save");Require(RuneMasteryProgress.Get(game.Store.Data.runes,"sword").unlocked.Count==20,"Slot unlock failed");Click("닫기");yield return null;
             game.Store.Data.runes=JsonUtility.FromJson<RuneGrowthState>(File.ReadAllText(Arg("-hellscriptRuneFixture")));RuneGrowth.Normalize(game.Store.Data);game.Store.Save();
             game.UI.ShowRunes();Click("rune-weapon-sword");yield return Capture("reference-landscape-ko",1280,720);
@@ -153,7 +156,7 @@ namespace Hellscript
             var search=game.UI.GetComponentsInChildren<InputField>().Single();search.text="연쇄";yield return Capture("codex-search-ko",1280,720);
             Click("rune-codex-regions");Click("기교");yield return Capture("codex-region-ko",1280,720);Click("rune-dialog-close");
             yield return Resize(720,1280);Click("rune-codex");yield return Capture("codex-portrait-ko",720,1280);Click("rune-dialog-close");
-            File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: exact 259-cell boards; tap placement, account save, cross-weapon recovery, mastery slot unlock draft/save, five global preset drafts/save/disk reload/load, undo; supplied v13 sample; landscape/portrait, map, region preview, per-color effects, codex weapon/region selection/search and English.\nMissing translations: "+string.Join(" | ",missing));
+            File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: exact 259-cell boards; tap placement, account save, cross-weapon recovery, mastery slot unlock draft/save with tab points and undo, five global preset drafts/save/disk reload/load, undo; supplied v13 sample; landscape/portrait, map, region preview, per-color effects, codex weapon/region selection/search and English.\nMissing translations: "+string.Join(" | ",missing));
             Require(missing.Count==0,"Missing translations: "+string.Join(" | ",missing));Application.Quit(0);
         }
     }

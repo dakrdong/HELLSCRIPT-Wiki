@@ -111,6 +111,20 @@
 
 [세로 960×1440](RuneV13Evidence/PortraitControls/wide-portrait-ko.png) · [세로 440×956](RuneV13Evidence/PortraitControls/portrait-ko.png) · [선택 전](RuneV13Evidence/PortraitControls/no-selection.png) · [선택 후 회전](RuneV13Evidence/PortraitControls/selected-rotated-block.png) · [회전한 블록 드래그](RuneV13Evidence/PortraitControls/rotated-drag.png) · [색상 목록](RuneV13Evidence/PortraitControls/color-list.png) · [복수 크기 목록](RuneV13Evidence/PortraitControls/size-list.png) · [영어 140%](RuneV13Evidence/PortraitControls/portrait-en-large.png)
 
+## 2026-09-23: 무기 탭의 성장 정보와 보관함 세 줄
+
+세로 화면의 무기 탭마다 해당 무기의 레벨·경험치 수치·경험치 진행 막대·남은 슬롯 포인트를 함께 표시합니다. 기존의 별도 숙련도 영역은 제거하고, 보드 아래의 ‘저장된 상태 · 활성 능력’ 메시지 줄도 없앴습니다. 색상별 활성 능력 버튼과 저장·실행 취소·되돌리기 기능은 유지합니다. 가로 화면은 기존 숙련도 영역을 사용하며, 상태 메시지 줄을 없앤 공간만 배치판에 추가합니다.
+
+세로 보관함 높이는 고정 비율 대신 8열 정사각형 슬롯의 실제 크기와 줄 간격을 기준으로 계산합니다. 제목·필터·회전 조작 아래에 최소 세 줄이 잘리지 않고 들어갈 높이를 먼저 확보합니다. 무기 탭은 현재 편집본의 포인트를 읽으므로 칸 개방과 실행 취소 결과가 즉시 반영되고, 변경 저장 전에는 실제 계정에 쓰지 않습니다. `GameUI.Runes` 어댑터에서 공통 안전 영역·글꼴·버튼·테두리와 기존 룬 편집·저장 경로를 사용합니다.
+
+[관련 Edit Mode 검사](RuneV13Evidence/StorageRows/editmode.xml)는 룬·번역·공통 UI **159/159 통과**입니다. 공통 UI 계약 검사와 회귀 검사 9개도 통과했습니다. 이전 작업에서 확인한 장비 그래픽 선언 검사 실패는 이번의 룬 관련 검사 범위에 포함하지 않았으며, 전체 회귀 검사 통과로 보고하지 않습니다.
+
+[macOS 조작 검사](RuneV13Evidence/StorageRows/runtime.txt)는 무기 6종의 경험치·최고 레벨·포인트 표시, 세 줄의 모든 슬롯 경계, 필터 선택, 회전한 블록의 집기·배치·회수·실행 취소·저장 재읽기를 확인합니다. [룬 이용 흐름 검사](RuneV13Evidence/StorageRows/lifecycle.txt)는 칸 개방 후 탭의 포인트 감소와 실행 취소, 실제 계정의 저장 전후 분리, 다른 무기에서 재사용, 프리셋 5칸을 포함합니다.
+
+검증 해상도는 440×956·956×440·960×1440·1920×1080·1920×1200·2520×1080이며, 한국어·영어와 글자 크기 100%·140%를 조합합니다. [세 줄 높이 측정](RuneV13Evidence/StorageRows/storage-rows.tsv) · [배치판 전후 높이](RuneV13Evidence/StorageRows/board-space.tsv) · [창 너비](RuneV13Evidence/StorageRows/window-widths.tsv) · [빌드 결과](RuneV13Evidence/StorageRows/build.txt) · [검사 범위와 소스 해시](RuneV13Evidence/StorageRows/validation.json)를 보존합니다. 검증은 격리된 저장 파일을 사용하는 macOS 자동 입력이며, 모바일 실기기와 사람의 물리 입력 검증은 포함하지 않습니다.
+
+[세로 960×1440](RuneV13Evidence/StorageRows/wide-portrait-ko.png) · [세로 440×956](RuneV13Evidence/StorageRows/portrait-ko.png) · [한국어 140%](RuneV13Evidence/StorageRows/portrait-ko-large.png) · [영어 140%](RuneV13Evidence/StorageRows/portrait-en-large.png) · [가로 956×440](RuneV13Evidence/StorageRows/landscape-ko.png) · [회전 블록 드래그](RuneV13Evidence/StorageRows/rotated-drag.png)
+
 ## 유지보수 경로
 
 보드와 능력의 원본은 [v13 런타임 카탈로그](../../Assets/HELLSCRIPT/Resources/Runes/V13/catalog.json)이며 [Unity 내보내기](Rune_Mastery_Catalog.json)와 공개 DB가 이를 대조합니다. [추출 도구](../../tools/runes/import_v13.py)는 승인한 패키지 해시를 확인하고 내장 스크립트를 실행하지 않습니다. [리소스 변환 도구](../../tools/runes/render_v13.cjs)는 원본 SVG와 이미지를 사용해 재생성합니다.

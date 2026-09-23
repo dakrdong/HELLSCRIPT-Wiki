@@ -53,6 +53,8 @@ Landscape uses a left weapon rail, central board and right storage. Portrait sta
 
 Portrait omits the region-button strip below the board and the selection-detail panel. Regions remain accessible through the minimap. Two dropdown lists beside the storage title select color and sizes from one to five cells; sizes support multiple simultaneous selections. Selecting a stored block shows only a Rotate 60° action in storage. Each rotation updates the block in its inventory slot, and dragging preserves its displayed orientation and grabbed cell. Drag placed blocks back to storage to recover them. Tapping an empty board slot opens its ability and unlock actions. Space reclaimed from the controls goes to the placement board; landscape retains its region strip and detail panel.
 
+In portrait, every weapon tab shows its own level, numeric XP, XP bar and available slot points. The separate mastery panel and the saved-state message row below the board are removed. Storage reserves enough height for at least three complete rows, derived from the square slot size and spacing. Slot unlocking displays the draft points, including updates after undo and save. Save/revert actions and the unsaved-close confirmation remain available.
+
 The interface includes mastery/points, region preview, map/minimap, pan/zoom/fit, view/edit mode, active effects, codex, guide, selected-slot details, rotation/retrieval, undo/revert and save. Inventory and dialog contents scroll independently.
 
 Editing pauses combat. Selecting a board does not equip a weapon. Save changes writes all weapons' unlock paths, layouts and preset changes together. Closing an unsaved draft prompts before discarding. Undo retains the latest 50 changes.
