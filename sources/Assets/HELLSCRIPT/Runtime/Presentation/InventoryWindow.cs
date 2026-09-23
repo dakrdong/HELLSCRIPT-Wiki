@@ -43,7 +43,7 @@ namespace Hellscript
             var go=new GameObject("Inventory",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
             go.transform.SetParent(parent,false);var canvas=go.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=310;
             var view=go.AddComponent<InventoryWindow>();view.store=store;view.catalog=catalog;view.font=font;view.readingScale=readingScale;view.closed=closed;view.equipmentChanged=equipmentChanged;
-            view.canvasRoot=(RectTransform)go.transform;view.atlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");view.ready=true;view.Reflow();ContentWindowHost.Attach(view,view.Escape);StoreViewBinding.Attach(view,store,view.Repaint,()=>view.dialog==null);return view;
+            view.canvasRoot=(RectTransform)go.transform;view.atlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");view.ready=true;view.Reflow();ContentWindowHost.Attach(view,view.Escape);StoreViewBinding.Attach(view,store,view.RefreshCommittedView,()=>view.dialog==null||view.dialogKind=="wallet");return view;
         }
         void Update()
         {
@@ -67,6 +67,8 @@ namespace Hellscript
             Draw();
             if(kind=="detail"&&FindItem(id)!=null)ShowDetail(id);else if(kind=="compare"&&FindItem(id)!=null)ShowComparison(id);
             else if(kind=="stats")ShowStats();else if(kind=="bulk")ShowSalvage(true);else if(kind=="selected")ShowSalvage(false);
+            else if(kind=="potion")ShowPotionSettings(potionSlotIndex);else if(kind=="potion-picker")ShowPotionPicker(potionSlotIndex);
+            else if(kind=="wallet")ShowWallet();
             else if(filter!=null)ShowFilter(filter);
         }
         void RememberScroll(){if(bagScroll!=null)bagOffset=bagScroll.content.anchoredPosition.y;}
@@ -78,15 +80,18 @@ namespace Hellscript
             Txt(header,"HELLSCRIPT",12,0,95,34,10,gold);
             Txt(header,"가방",width/2-55,0,110,34,20,pale,TextAnchor.MiddleCenter);
             Btn(header,"×",width-34,2,30,30,Close,false,20).name="inventory-close";
-            float characterWidth=landscape?258:width,characterHeight=landscape?388:230;
+            float characterWidth=landscape?258:width,characterHeight=landscape?388:288;
             DrawCharacter(0,34,characterWidth,characterHeight);
-            DrawBag(landscape?258:0,landscape?34:264,landscape?542:width,landscape?388:428);
+            float bagTop=landscape?34:322;
+            DrawBag(landscape?258:0,bagTop,landscape?542:width,height-bagTop-WalletFooterHeight);
+            var wallet=Panel(body,"Wallet summary","28261b","191c14","655237");Place(wallet,landscape?258:0,height-WalletFooterHeight,landscape?542:width,WalletFooterHeight-28);
+            DrawWalletSummary(wallet);
             var footer=Panel(body,"Footer","28261b","191c14","655237");Place(footer,0,height-28,width,28);
-            Glyph(footer,"coin",12,7,14,gold);Txt(footer,store.Data.gold.ToString("N0"),32,0,100,28,11,gold);
-            Glyph(footer,"gem",141,7,14,muted);Txt(footer,store.Data.materials.ToString("N0"),161,0,72,28,11,pale);
-            var classLabel=Txt(footer,Loc.T(catalog.classNames[(int)Hero.heroClass])+" · Lv."+Hero.level,width-168,0,96,28,10,muted,TextAnchor.MiddleRight);
+            float footerLine=0;
+            Btn(footer,"전체 재화",8,footerLine+2,112,24,ShowWallet,false,10).name="inventory-wallet";
+            var classLabel=Txt(footer,Loc.T(catalog.classNames[(int)Hero.heroClass])+" · Lv."+Hero.level,width-168,footerLine,96,28,10,muted,TextAnchor.MiddleRight);
             classLabel.resizeTextForBestFit=true;classLabel.resizeTextMinSize=8;classLabel.resizeTextMaxSize=classLabel.fontSize;
-            RangeToggle(footer,width-64,0,"inventory-range-toggle");
+            RangeToggle(footer,width-64,footerLine,"inventory-range-toggle");
             Canvas.ForceUpdateCanvases();bagScroll.content.anchoredPosition=new Vector2(0,Mathf.Clamp(bagOffset,0,Mathf.Max(0,bagScroll.content.rect.height-bagScroll.viewport.rect.height)));
         }
         void DrawCharacter(float x,float y,float w,float h)
@@ -94,11 +99,13 @@ namespace Hellscript
             var panel=Panel(body,"Character equipment","26271d","171b13","5e5039");Place(panel,x,y,w,h);
             var target=panel.gameObject.AddComponent<InventoryDropTarget>();target.window=this;target.slot=-1;
             Txt(panel,catalog.classNames[(int)Hero.heroClass],12,2,125,28,15,pale);
-            Btn(panel,"전체 능력치",w-111,landscape?30:3,99,25,ShowStats,false,10).name="inventory-stats";
-            var equipment=CharacterEquipmentView.Create(panel,Hero,w,h,landscape,EquipmentViewSource.Owned,(host,p)=>EquipmentCell(host,p.slot,p.index,p.rect.x,p.rect.y));equipment.transform.SetAsFirstSibling();
-            float weaponY=CharacterEquipmentView.Positions(w,h,landscape).First(p=>p.slot==0).rect.y;
+            Btn(panel,"전체 능력치",w-111,3,99,25,ShowStats,false,10).name="inventory-stats";
+            float equipmentHeight=landscape?326:230;
+            var equipment=CharacterEquipmentView.Create(panel,Hero,w,equipmentHeight,landscape,EquipmentViewSource.Owned,(host,p)=>EquipmentCell(host,p.slot,p.index,p.rect.x,p.rect.y));equipment.transform.SetAsFirstSibling();
+            float weaponY=CharacterEquipmentView.Positions(w,equipmentHeight,landscape).First(p=>p.slot==0).rect.y;
             if(EquipmentSlots.TwoHanded(EquipmentSlots.At(Hero,0,0)))
             {var link=Panel(panel,"Two hand link","ba9a5e","ba9a5e");Place(link,w/2-3,weaponY+SlotSize/2,6,3);link.GetComponent<Image>().raycastTarget=false;}
+            DrawPotionSlots(panel,w,landscape?292:208);
             var stats=EquipmentStats(Hero);float sw=(w-24)/3;
             foreach(var entry in new[]{("공격 기준",stats.damage),("방어도",stats.armor),("최대 HP",stats.hp)}.Select((v,n)=>(v,n)))
             {Txt(panel,entry.v.Item1,12+sw*entry.n,h-25,sw*.48f,23,9,muted);Txt(panel,entry.v.Item2.ToString("0"),12+sw*entry.n+sw*.48f,h-25,sw*.52f,23,13,gold);}

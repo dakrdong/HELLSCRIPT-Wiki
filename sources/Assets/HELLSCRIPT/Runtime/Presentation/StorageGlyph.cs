@@ -13,6 +13,9 @@ namespace Hellscript
             mesh.Clear();
             switch(symbol)
             {
+                case "gear":
+                    Path(mesh,9,2,15,2,16,5,19,5,22,10,20,12,22,14,19,19,16,19,15,22,9,22,8,19,5,19,2,14,4,12,2,10,5,5,8,5,9,2);
+                    Path(mesh,10,8,14,8,16,10,16,14,14,16,10,16,8,14,8,10,10,8);break;
                 case "shield":Path(mesh,3,3,12,1,21,3,20,14,17,19,12,23,7,19,4,14,3,3);Path(mesh,12,4,12,19);break;
                 case "orb":Gem(mesh);Path(mesh,6,22,18,22);break;
                 case "scroll":Path(mesh,4,3,18,3,21,6,19,9,17,7,17,20,4,20,2,17,4,15,7,17,7,3);Path(mesh,10,8,14,8);Path(mesh,10,12,14,12);break;

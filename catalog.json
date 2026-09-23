@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T14:47:24+09:00",
+  "generatedAt": "2026-09-23T15:29:02+09:00",
   "databases": [
     {
       "id": "resources",
@@ -416,6 +416,45 @@
           "related": [
             "town-hud-responsive",
             "play-content-dock"
+          ]
+        },
+        {
+          "id": "currency-abyssal-coin",
+          "name": "심연 주화 / Abyssal Coin",
+          "category": "이미지 원본",
+          "summary": "기존 premium 잔액을 표시하는 인벤토리 아이콘입니다. / Inventory icon for the existing premium balance.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "SHA-256": "6f48ca86c7f47f886c7c009176200a30c0d942b5c6f610a2dc2631f8a7ee9097",
+            "Unity GUID": "443177b4fbfd5493f8dd8147db954268",
+            "저장 키 / Save key": "premium",
+            "제작 방법": "기존 내장 image_gen 원본 복사, 픽셀 변경 없음 / Unchanged original",
+            "승인 상태": "개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-abyssal-coin.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png",
+          "refs": [
+            {
+              "path": "Docs/Implementation/PotionSlotsEvidence/abyssal-coin-source.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en"
           ]
         },
         {
@@ -1825,7 +1864,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 20
+            "line": 23
           },
           "status": "현재 사용",
           "content": {
@@ -1849,7 +1888,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 17
+            "line": 20
           },
           "status": "현재 사용",
           "content": {
@@ -1873,7 +1912,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 18
+            "line": 21
           },
           "status": "현재 사용",
           "content": {
@@ -1897,7 +1936,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 16
+            "line": 19
           },
           "status": "현재 사용",
           "content": {
@@ -1921,7 +1960,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 19
+            "line": 22
           },
           "status": "현재 사용",
           "content": {
@@ -1945,7 +1984,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 21
+            "line": 24
           },
           "status": "현재 사용",
           "content": {
@@ -91050,6 +91089,7 @@
           "fields": {
             "종류 / Type": "회복 / Recovery",
             "효과 / Effect": "체력 회복 / Restore health",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.35,
             "지속 (초) / Duration (s)": 0,
             "재사용 (초) / Cooldown (s)": 20,
@@ -91080,6 +91120,7 @@
           "fields": {
             "종류 / Type": "회복 / Recovery",
             "효과 / Effect": "자원 회복 / Restore resource",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.35,
             "지속 (초) / Duration (s)": 0,
             "재사용 (초) / Cooldown (s)": 20,
@@ -91089,7 +91130,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 16
+            "line": 17
           },
           "status": "현재 정의",
           "refs": [
@@ -91110,6 +91151,7 @@
           "fields": {
             "종류 / Type": "보조 / Utility",
             "효과 / Effect": "이동속도 증가 +20%p / Movement speed bonus +20 percentage points",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.2,
             "지속 (초) / Duration (s)": 8,
             "재사용 (초) / Cooldown (s)": 30,
@@ -91119,7 +91161,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 27
+            "line": 29
           },
           "status": "현재 정의",
           "refs": [
@@ -91140,6 +91182,7 @@
           "fields": {
             "종류 / Type": "보조 / Utility",
             "효과 / Effect": "공격력 +15% / Attack power +15%",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.15,
             "지속 (초) / Duration (s)": 8,
             "재사용 (초) / Cooldown (s)": 30,
@@ -91149,7 +91192,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 38
+            "line": 41
           },
           "status": "현재 정의",
           "refs": [
@@ -91170,6 +91213,7 @@
           "fields": {
             "종류 / Type": "보조 / Utility",
             "효과 / Effect": "모든 속성 저항 +20 + 영웅 레벨×3 / All elemental resistance ratings +20 + hero level x3",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 20,
             "지속 (초) / Duration (s)": 8,
             "재사용 (초) / Cooldown (s)": 30,
@@ -91179,7 +91223,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 49
+            "line": 53
           },
           "status": "현재 정의",
           "refs": [
@@ -91200,6 +91244,7 @@
           "fields": {
             "종류 / Type": "보조 / Utility",
             "효과 / Effect": "방어도 +30% / Armor +30%",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.3,
             "지속 (초) / Duration (s)": 8,
             "재사용 (초) / Cooldown (s)": 30,
@@ -91209,7 +91254,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 60
+            "line": 65
           },
           "status": "현재 정의",
           "refs": [
@@ -91230,6 +91275,7 @@
           "fields": {
             "종류 / Type": "보조 / Utility",
             "효과 / Effect": "공격속도 증가 +15%p / Attack speed bonus +15 percentage points",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.15,
             "지속 (초) / Duration (s)": 8,
             "재사용 (초) / Cooldown (s)": 30,
@@ -91239,7 +91285,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 71
+            "line": 77
           },
           "status": "현재 정의",
           "refs": [
@@ -91260,6 +91306,7 @@
           "fields": {
             "종류 / Type": "보조 / Utility",
             "효과 / Effect": "치명타 확률 +10%p / Critical strike chance +10 percentage points",
+            "등급 / Grade": 0,
             "효과 계수 / Magnitude": 0.1,
             "지속 (초) / Duration (s)": 8,
             "재사용 (초) / Cooldown (s)": 30,
@@ -91269,7 +91316,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
-            "line": 82
+            "line": 89
           },
           "status": "현재 정의",
           "refs": [

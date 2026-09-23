@@ -154,12 +154,10 @@ namespace Hellscript
         public Sprite Sprite(string id)
         {
             if(string.IsNullOrEmpty(id))return null;
+            if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility")return PotionArt.Bottle(id);
             if(!sprites.TryGetValue(id,out var value))
             {
                 value=Resources.Load<Sprite>("Art/GlobalHUD/"+id);
-                // Display bounds exclude native transparent padding; source pixels/alpha are unchanged.
-                Rect bounds=id=="potion-hp"?new Rect(291,86,672,1106):id=="potion-mp"?new Rect(364,69,526,1126):id=="potion-utility"?new Rect(254,79,747,1095):default;
-                if(value!=null&&bounds.width>0){value=UnityEngine.Sprite.Create(value.texture,bounds,new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect);owned.Add(value);}
                 sprites[id]=value;
             }
             return value;

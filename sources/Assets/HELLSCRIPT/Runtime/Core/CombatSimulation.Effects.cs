@@ -77,7 +77,7 @@ namespace Hellscript
         bool TryUsePotion(float threshold)
         {
             if(threshold<=0||State.health<=0||State.health/Stats.hp*100>threshold||State.potionCd>0||!HasHpPotion)return false;
-            var def=PotionCatalog.Get("PH01");
+            var def=State.potions.version==0?PotionCatalog.Get("PH01"):ReadyPotion("hp");
             float before=State.health;State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*def.magnitude*Stats.healing*Stats.potionHealing);
             if(State.health<=before)return false;
             State.potionCd=State.potions.hpTotal=RunePotionCooldown(def.cooldown);

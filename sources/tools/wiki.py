@@ -376,6 +376,20 @@ def build_resources(databases):
          'Unity GUID':re.search(r'^guid: (\w+)',storage_meta,re.M)[1],'사용처':'GameUI.ContentDock → ShowStorage'},
         IMPL+'Town_Hud_Responsive.md',status='사용 중',image={'file':'GlobalHUD/menu-storage.png'},assetPath=storage_path,
         refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs')],related=['town-hud-responsive','play-content-dock']))
+    coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'
+    coin_raw=(ROOT/coin_path).read_bytes();INPUTS[coin_path]=digest(coin_raw)
+    coin_meta=read(coin_path+'.meta')
+    coin_source=IMPL+'PotionSlotsEvidence/abyssal-coin-source.json'
+    coin_provenance=json.loads(read(coin_source))
+    if digest(coin_raw)!=coin_provenance['sha256']:raise ValueError('Abyssal Coin source image changed')
+    rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',
+        '기존 premium 잔액을 표시하는 인벤토리 아이콘입니다. / Inventory icon for the existing premium balance.',
+        {'원본 경로':coin_path,'해상도':'1254 × 1254','색상 모드':'RGBA','SHA-256':digest(coin_raw),
+         'Unity GUID':re.search(r'^guid: (\w+)',coin_meta,re.M)[1],
+         '저장 키 / Save key':'premium','제작 방법':'기존 내장 image_gen 원본 복사, 픽셀 변경 없음 / Unchanged original',
+         '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
+        IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,
+        refs=[source_ref(coin_source),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs')],related=['potion-slots','potion-slots.en']))
     byid={d['id']:d for d in databases}
     for group in ['skills','heroes','items']:
         for item in byid[group]['rows']:
@@ -829,6 +843,7 @@ def build():
         target=SITE/'media'/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,target)
     (SITE/'media/GlobalHUD').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'GlobalHUD/menu-storage.png',SITE/'media/GlobalHUD/menu-storage.png')
+    shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')
     (SITE/'media/Title').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'Title/TitleSanctuary.png',SITE/'media/Title/TitleSanctuary.png')
     (SITE/'media/CharacterSelection').mkdir(parents=True,exist_ok=True)

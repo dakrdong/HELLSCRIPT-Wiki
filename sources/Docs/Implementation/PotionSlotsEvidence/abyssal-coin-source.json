@@ -1,0 +1,64 @@
+{
+  "id": "currency.abyssal-coin",
+  "version": 1,
+  "name": {
+    "ko": "심연 주화",
+    "en": "Abyssal Coin",
+    "enPlural": "Abyssal Coins"
+  },
+  "status": "prototype-candidate",
+  "source": "abyssal-coin-v1.png",
+  "sha256": "6f48ca86c7f47f886c7c009176200a30c0d942b5c6f610a2dc2631f8a7ee9097",
+  "generation": {
+    "date": "2026-09-23",
+    "surface": "built-in image_gen.imagegen",
+    "model": null,
+    "modelVerified": false,
+    "requiredModel": "gpt-image-2",
+    "limitation": "The callable surface exposes no model selector and returned no model provenance. Do not mark as a production-approved gpt-image-2 asset.",
+    "prompt": "generation-prompt.txt",
+    "edits": "None. Original PNG and native alpha copied without modification."
+  },
+  "image": {
+    "width": 1254,
+    "height": 1254,
+    "mode": "RGBA",
+    "bytes": 2478569,
+    "alphaRange": [
+      0,
+      255
+    ],
+    "fullyTransparentPixels": 604767,
+    "opaquePixels": 1087,
+    "partialAlphaPixels": 966662,
+    "visibleBoundsAlpha32": [
+      79,
+      61,
+      1175,
+      1182
+    ],
+    "transparentCorners": true
+  },
+  "suggestedUnityImport": {
+    "textureType": "Sprite (2D and UI)",
+    "spriteMode": "Single",
+    "sRGB": true,
+    "alphaSource": "Input Texture Alpha",
+    "alphaIsTransparency": true,
+    "mipmaps": false,
+    "wrap": "Clamp",
+    "filter": "Bilinear",
+    "compression": "Uncompressed",
+    "maxSize": 2048,
+    "pixelsPerUnit": 100
+  },
+  "consumers": [
+    "HTML core crafting",
+    "HTML slot enhancement"
+  ],
+  "savedDataKeysUnchanged": [
+    "premium",
+    "diamonds"
+  ],
+  "nativeUnityIntegrated": false
+}

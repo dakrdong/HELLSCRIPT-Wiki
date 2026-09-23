@@ -1,8 +1,8 @@
 # Global HUD 05: potions and hunting edicts
 
-Date: 2026-09-14
+Created: 2026-09-14 · Updated: 2026-09-23
 
-Three slots display real per-character HP, resource and utility stock without taking equipment bag space. Selecting a slot opens information; it never manually consumes a potion. Bottle art is 45 logical units in landscape and 60 in portrait. Counts and cooldown text are separate.
+Three slots display distinct potions assigned in the inventory and their actual per-character stock without taking equipment bag space. Initial assignments are HP, resource and Iron; existing saves retain their edict utility selection. Selecting a HUD slot opens information; it never manually consumes a potion. Bottle art is 45 logical units in landscape and 60 in portrait. Counts and cooldown text are separate.
 
 ## Default data
 
@@ -17,23 +17,38 @@ Three slots display real per-character HP, resource and utility stock without ta
 | PU05 | Haste | Attack speed bonus +15 percentage points | 8s | 30s | 15 |
 | PU06 | Focus | Critical strike chance +10 percentage points | 8s | 30s | 15 |
 
-The source is `Assets/HELLSCRIPT/Resources/Data/Potions.json`. HP and resource types are fixed. Equip one of six utility types; all use the amber bottle plus a distinct glyph and appear in the effect strip when active. Retain existing movement bonus 50%, attack speed bonus 50% and critical chance 75% caps. Resistance adds to the five elemental ratings, not physical armor, and retains existing mitigation caps. Do not stack or consume while the utility effect remains active, or when caps prevent any effective change.
+The source is `Assets/HELLSCRIPT/Resources/Data/Potions.json`. Each slot accepts an owned potion, with no duplicate IDs and no fixed slot category. Utility types use the amber bottle plus a distinct glyph and appear in the effect strip when active. All eight current definitions have grade 0; no new tier balance has been introduced.
+
+Retain existing movement bonus 50%, attack speed bonus 50% and critical chance 75% caps. Resistance adds to the five elemental ratings, not physical armor, and retains existing mitigation caps. Do not stack or consume while the utility effect remains active, or when caps prevent any effective change.
 
 ## Automatic use and equipment
 
 Preserve the existing HP threshold; new defaults are HP 40% and resource 30%. Each recovery type has its own enable switch and threshold in the hunting edict. The default utility is Iron. The default condition maps Sprint to actual movement, Assault/Haste/Focus to combat, and Resistance/Iron to HP at or below 60% or existing danger detection. Explicit conditions are off, moving, combat, elite/boss combat and danger.
 
-Change utility type in the sanctuary edict. Saving a type change during a real rift is rejected, including imported codes. In training, the utility slot inspector can change the copied loadout; real stock stays unchanged. An active utility effect must expire before training equipment changes.
+Change assigned potions through the inventory slots in town. Until an explicit assignment is saved, the existing edict utility selection applies. Afterwards the inventory loadout owns the assignments. Saving an assignment change during an active real rift is rejected. In training, the utility inspector changes only the training copy; real stock stays unchanged. An active utility effect must expire before training equipment changes.
+
+## Per-slot exhaustion policy
+
+The three inventory slots share equipment-cell dimensions and have a gear icon at the top right. Clicking a slot opens a fixed-size speech bubble with “When the assigned potion runs out” and four exclusive choices. The selected row has a check and highlighted color; changing it never moves the inventory or resizes the bubble.
+
+- Use higher-grade potions: descending grade within the same effect.
+- Use lower-grade potions: ascending grade within the same effect.
+- Use the most recently acquired potions first: newest remaining acquisition batch.
+- Use the oldest acquired potions first: oldest remaining acquisition batch.
+
+The assigned potion always takes priority while available. After exhaustion, candidates must have the **same effect** and must not be assigned to another slot or already resolved as another fallback. Grade ties use the oldest remaining acquisition sequence, then ID. With no candidate, the slot stops using potions. Current data has no alternative tiers for the same effect, so real grade-based replacement becomes available when such data is added.
+
+Policies persist per character and slot and can change during battle. Multiple utility assignments still share the existing cooldown and single active utility effect. Purchases and grants record acquisition batches. Old saves without acquisition history migrate once using stored stack order; this is not a reconstruction of historical timestamps. See the [implementation and validation](../../Implementation/Potion_Slots.en.md).
 
 ## Restocking and departure
 
-Targets are 20 HP, 20 resource and 10 equipped utility potions. Purchase in that order, respecting both the cumulative 500-gold visit budget and the 200-gold reserve. The edict exposes automatic purchasing, individual targets, budget and reserve. Automatic use, purchase targets and departure rules are independent. Disabled automatic use does not suppress restocking; set a slot target to zero to stop buying that type.
+Targets apply to assigned effects: 20 HP, 20 resource and 10 of each utility potion. Empty slots and unassigned types are not purchased. Purchase in HP, resource, utility order, respecting both the cumulative 500-gold visit budget and the 200-gold reserve. The edict exposes automatic purchasing, effect-specific targets, budget and reserve. Automatic use, purchase targets and departure rules are independent. Disabled automatic use does not suppress restocking; set a target to zero to stop buying that type.
 
 Restock on actual sanctuary arrival and preparation for the next repeated run. Persist visit identity and spending; redraws, opening settings and retries do not reset the budget. The existing staged transaction writes inventory, gold and visit state before adopting them in memory. Disk failure leaves all unchanged.
 
 | Shortage policy | Behavior |
 |---|---|
-| Wait if no HP potions | Wait when HP stock is zero, regardless of automatic-use toggles. New default. |
+| Wait if no HP potions | Wait when an HP slot is assigned and no same-effect potion is available, regardless of automatic-use toggles. New default. |
 | Wait for stock targets | Wait if any of the three slots has less than its saved target. |
 | Depart with insufficient supplies | Depart regardless of missing stock. |
 
