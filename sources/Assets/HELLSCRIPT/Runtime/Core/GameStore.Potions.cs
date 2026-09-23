@@ -17,13 +17,13 @@ namespace Hellscript
                 var slots=PotionPolicy.Resolve(hero).Slots;slots[index].id=potionId;PotionLoadout.Validate(slots);
                 hero.potions.slots=slots;hero.potions.revision++;return true;
             });
-        public bool SetPotionFallback(string request,string heroId,int index,PotionFallback fallback)
-            =>Transact(request,"potion-fallback:"+heroId+":"+index+":"+fallback,a=>
+        public bool SetPotionFallback(string request,string heroId,PotionFallback fallback)
+            =>Transact(request,"potion-fallback:"+heroId+":"+fallback,a=>
             {
                 var hero=a.heroes.Single(h=>h.id==heroId);
-                if(a.Hero.id!=heroId||index<0||index>=PotionLoadout.SlotCount)throw new ArgumentException("잘못된 물약 슬롯입니다.");
-                var slots=PotionPolicy.Resolve(hero).Slots;slots[index].fallback=fallback;PotionLoadout.Validate(slots);
-                hero.potions.slots=slots;hero.potions.revision++;return true;
+                if(a.Hero.id!=heroId)throw new ArgumentException("잘못된 물약 슬롯입니다.");
+                if(!Enum.IsDefined(typeof(PotionFallback),fallback))throw new ArgumentException("Invalid potion fallback.");
+                hero.potions.fallback=fallback;hero.potions.fallbackVersion=1;hero.potions.revision++;return true;
             });
         public bool PreparePotions(string heroId,string visit)
         {

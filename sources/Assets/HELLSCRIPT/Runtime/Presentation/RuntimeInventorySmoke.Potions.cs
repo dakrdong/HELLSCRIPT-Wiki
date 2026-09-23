@@ -13,10 +13,14 @@ namespace Hellscript
         void PotionGeometry()
         {
             Geometry();var slots=Enumerable.Range(0,3).Select(i=>Named("inventory-potion-"+i)).ToArray();
+            var weapon=Named("equipment-0-1");var gear=Named("inventory-potion-settings");
+            Require(View.GetComponentsInChildren<Button>().Count(b=>b.name=="inventory-potion-settings")==1&&gear.Find("gear")!=null,"Expected one shared settings gear.");
+            Require(Bounds(gear).xMin>=Bounds(slots[2]).xMax&&Mathf.Abs(Center(gear).y-Center(weapon).y)<1,"Gear is not beside the potion group.");
             foreach(var slot in slots)
             {
-                Require(Mathf.Abs(slot.rect.width-View.SlotSize)<.01f&&slot.rect.width==slot.rect.height,"Potion slot differs from equipment size.");
-                Require(slot.Find("Potion settings icon/gear")!=null,"Potion settings gear missing.");
+                Require(slot.rect.width<View.SlotSize*.7f&&slot.rect.width==slot.rect.height,"Potion slot should be smaller than equipment.");
+                Require(slot.Find("Potion settings icon")==null,"Individual potion gear remains.");
+                Require(Bounds(slot).xMin>=Bounds(weapon).xMax&&Mathf.Abs(Center(slot).y-Center(weapon).y)<1,"Potion added a row instead of sitting beside weapons.");
                 var art=slot.Find("Potion art").GetComponent<Image>();var mesh=art.canvasRenderer.GetMesh();
                 Require(mesh.vertexCount>0,"Potion has no rendered artwork.");var center=art.transform.TransformPoint(mesh.bounds.center);
                 Require(Vector2.Distance(center,Center(slot))<1,"Potion artwork is off centre: "+slot.name);
@@ -72,11 +76,11 @@ namespace Hellscript
                 yield return new WaitForEndOfFrame();yield return new WaitForEndOfFrame();WalletGeometry(true);
                 Require(walletDialog==View.DialogRect&&walletBounds==Bounds(View.DialogRect)&&balanceScroll.verticalNormalizedPosition<.01f,"Balance refresh moved the sheet or reset scrolling.");
                 Click(View.Find("inventory-wallet-close"));yield return new WaitForEndOfFrame();
-                for(int i=0;i<3;i++)
+                for(int i=0;i<4;i++)
                 {
-                    Click(View.Find("inventory-potion-"+i));yield return new WaitForEndOfFrame();PotionGeometry();var bubble=View.DialogRect;var bounds=Bounds(bubble);
+                    Click(View.Find("inventory-potion-settings"));yield return new WaitForEndOfFrame();PotionGeometry();var bubble=View.DialogRect;var bounds=Bounds(bubble);
                     int choice=(checks+i)%4;Click(View.Find("potion-fallback-"+choice));yield return new WaitForEndOfFrame();
-                    Require(Hero.potions.slots[i].fallback==(PotionFallback)choice,"Policy selection did not save.");
+                    Require(Hero.potions.SharedFallback==(PotionFallback)choice,"Shared policy selection did not save.");
                     Require(View.DialogRect==bubble&&Bounds(bubble)==bounds,"Policy selection moved or rebuilt the bubble.");
                     for(int n=0;n<4;n++)
                     {
@@ -87,16 +91,18 @@ namespace Hellscript
                     if(i==0)yield return Capture("policy-"+suffix);
                     Click(View.Find("potion-settings-close"));yield return new WaitForEndOfFrame();
                 }
-                Click(View.Find("inventory-potion-2"));yield return new WaitForEndOfFrame();Click(View.Find("potion-change"));yield return new WaitForEndOfFrame();PotionGeometry();
+                Click(View.Find("inventory-potion-2"));yield return new WaitForEndOfFrame();PotionGeometry();
                 Require(!View.Find("potion-pick-PH01").interactable&&!View.Find("potion-pick-PM01").interactable,"Another slot's potion can be assigned twice.");
                 if(percent==150&&size.Item1==440)yield return Capture("picker-"+suffix);
                 Click(View.Find("potion-picker-back"));yield return new WaitForEndOfFrame();View.Dismiss();yield return new WaitForEndOfFrame();checks++;
             }
             game.UI.ClosePlayInventory();game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();game.ApplyLanguage("ko");yield return PolishResize(440,956);game.UI.ShowPlayInventory();yield return new WaitForEndOfFrame();
-            Click(View.Find("inventory-potion-2"));yield return new WaitForEndOfFrame();Click(View.Find("potion-change"));yield return new WaitForEndOfFrame();Click(View.Find("potion-pick-PU01"));yield return new WaitForEndOfFrame();
+            Click(View.Find("inventory-potion-2"));yield return new WaitForEndOfFrame();Click(View.Find("potion-clear"));yield return new WaitForEndOfFrame();
+            Require(Hero.potions.slots[2].id=="","Potion slot was not cleared.");
+            Click(View.Find("potion-pick-PU01"));yield return new WaitForEndOfFrame();
             Require(Hero.potions.slots[2].id=="PU01","Owned potion was not assigned.");
             var saved=new GameStore(Environment.GetCommandLineArgs()[Array.IndexOf(Environment.GetCommandLineArgs(),"-hellscriptSavePath")+1]);
-            Require(saved.Data.Hero.potions.slots.Select(s=>s.id+":"+s.fallback).SequenceEqual(Hero.potions.slots.Select(s=>s.id+":"+s.fallback)),"Potion slots did not round-trip.");
+            Require(saved.Data.Hero.potions.slots.Select(s=>s.id).SequenceEqual(Hero.potions.slots.Select(s=>s.id))&&saved.Data.Hero.potions.SharedFallback==Hero.potions.SharedFallback,"Potion slots and shared policy did not round-trip.");
             View.Dismiss();yield return new WaitForEndOfFrame();
             var cell=View.Cell("drag-candidate",true);
             var pointer=new PointerEventData(EventSystem.current){position=Center((RectTransform)cell.transform),button=PointerEventData.InputButton.Left};
@@ -111,7 +117,7 @@ namespace Hellscript
                 Require(mesh.vertexCount>0&&Mathf.Abs(image.transform.TransformPoint(mesh.bounds.center).x-Center((RectTransform)root).x)<1,"HUD bottle is not centred.");
             }
             Require(Loc.MissingCount==0,"Missing potion translations: "+string.Join(";",Loc.Missing));
-            File.WriteAllText(Path.Combine(output,"potion-slots-result.txt"),"PASS: 20 resolution/language/text-scale combinations; three equal-size potion-only slots, gear icons, anchored fixed-size speech bubbles, four exclusive persisted choices, owned selection, duplicate prevention, equipment-drop rejection, save reload, HUD assignment and rendered bottle centring. Four account balance counters plus eight core balances: exact zero/int.MaxValue values, original Abyssal Coin art, no UI-only grants or spending, committed changes refresh the open sheet without moving it or resetting scroll. Native macOS with synthetic uGUI input and isolated saves; physical mobile not tested.\n");
+            File.WriteAllText(Path.Combine(output,"potion-slots-result.txt"),"PASS: 20 resolution/language/text-scale combinations; three compact potion-only slots beside the weapon row, one shared gear, anchored fixed-size speech bubble, four exclusive persisted choices applying to all slots, direct owned-potion selection and clearing, duplicate prevention, equipment-drop rejection, save reload, HUD assignment and rendered bottle centring. Four account balance counters plus eight core balances: exact zero/int.MaxValue values, original Abyssal Coin art, no UI-only grants or spending, committed changes refresh the open sheet without moving it or resetting scroll. Native macOS with synthetic uGUI input and isolated saves; physical mobile not tested.\n");
             Debug.Log("HELLSCRIPT_POTION_SLOTS_RUNTIME_OK");Application.Quit(0);
         }
     }

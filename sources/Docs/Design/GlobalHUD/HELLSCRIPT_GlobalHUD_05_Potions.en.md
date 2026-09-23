@@ -27,9 +27,9 @@ Preserve the existing HP threshold; new defaults are HP 40% and resource 30%. Ea
 
 Change assigned potions through the inventory slots in town. Until an explicit assignment is saved, the existing edict utility selection applies. Afterwards the inventory loadout owns the assignments. Saving an assignment change during an active real rift is rejected. In training, the utility inspector changes only the training copy; real stock stays unchanged. An active utility effect must expire before training equipment changes.
 
-## Per-slot exhaustion policy
+## Shared exhaustion policy
 
-The three inventory slots share equipment-cell dimensions and have a gear icon at the top right. Clicking a slot opens a fixed-size speech bubble with “When the assigned potion runs out” and four exclusive choices. The selected row has a check and highlighted color; changing it never moves the inventory or resizes the bubble.
+The three potion cells are smaller than equipment: 32 in portrait and 28 in landscape. They occupy the right corner of the weapon row. Clicking a cell opens its potion picker. One shared gear beside the group opens a fixed-size speech bubble with “When the assigned potion runs out” and four exclusive choices. The selected row has a check and highlighted color; changing it never moves the inventory or resizes the bubble.
 
 - Use higher-grade potions: descending grade within the same effect.
 - Use lower-grade potions: ascending grade within the same effect.
@@ -38,7 +38,7 @@ The three inventory slots share equipment-cell dimensions and have a gear icon a
 
 The assigned potion always takes priority while available. After exhaustion, candidates must have the **same effect** and must not be assigned to another slot or already resolved as another fallback. Grade ties use the oldest remaining acquisition sequence, then ID. With no candidate, the slot stops using potions. Current data has no alternative tiers for the same effect, so real grade-based replacement becomes available when such data is added.
 
-Policies persist per character and slot and can change during battle. Multiple utility assignments still share the existing cooldown and single active utility effect. Purchases and grants record acquisition batches. Old saves without acquisition history migrate once using stored stack order; this is not a reconstruction of historical timestamps. See the [implementation and validation](../../Implementation/Potion_Slots.en.md).
+A single policy persists per character, applies to all three slots and can change during battle. Older per-slot settings migrate once from the first assigned cell. Multiple utility assignments still share the existing cooldown and single active utility effect. Purchases and grants record acquisition batches. Old saves without acquisition history migrate once using stored stack order; this is not a reconstruction of historical timestamps. See the [implementation and validation](../../Implementation/Potion_Slots.en.md).
 
 ## Restocking and departure
 

@@ -67,7 +67,7 @@ namespace Hellscript
             Draw();
             if(kind=="detail"&&FindItem(id)!=null)ShowDetail(id);else if(kind=="compare"&&FindItem(id)!=null)ShowComparison(id);
             else if(kind=="stats")ShowStats();else if(kind=="bulk")ShowSalvage(true);else if(kind=="selected")ShowSalvage(false);
-            else if(kind=="potion")ShowPotionSettings(potionSlotIndex);else if(kind=="potion-picker")ShowPotionPicker(potionSlotIndex);
+            else if(kind=="potion")ShowPotionSettings();else if(kind=="potion-picker")ShowPotionPicker(potionSlotIndex);
             else if(kind=="wallet")ShowWallet();
             else if(filter!=null)ShowFilter(filter);
         }
@@ -80,9 +80,9 @@ namespace Hellscript
             Txt(header,"HELLSCRIPT",12,0,95,34,10,gold);
             Txt(header,"가방",width/2-55,0,110,34,20,pale,TextAnchor.MiddleCenter);
             Btn(header,"×",width-34,2,30,30,Close,false,20).name="inventory-close";
-            float characterWidth=landscape?258:width,characterHeight=landscape?388:288;
+            float characterWidth=landscape?258:width,characterHeight=landscape?388:238;
             DrawCharacter(0,34,characterWidth,characterHeight);
-            float bagTop=landscape?34:322;
+            float bagTop=landscape?34:272;
             DrawBag(landscape?258:0,bagTop,landscape?542:width,height-bagTop-WalletFooterHeight);
             var wallet=Panel(body,"Wallet summary","28261b","191c14","655237");Place(wallet,landscape?258:0,height-WalletFooterHeight,landscape?542:width,WalletFooterHeight-28);
             DrawWalletSummary(wallet);
@@ -100,12 +100,12 @@ namespace Hellscript
             var target=panel.gameObject.AddComponent<InventoryDropTarget>();target.window=this;target.slot=-1;
             Txt(panel,catalog.classNames[(int)Hero.heroClass],12,2,125,28,15,pale);
             Btn(panel,"전체 능력치",w-111,3,99,25,ShowStats,false,10).name="inventory-stats";
-            float equipmentHeight=landscape?326:230;
-            var equipment=CharacterEquipmentView.Create(panel,Hero,w,equipmentHeight,landscape,EquipmentViewSource.Owned,(host,p)=>EquipmentCell(host,p.slot,p.index,p.rect.x,p.rect.y));equipment.transform.SetAsFirstSibling();
-            float weaponY=CharacterEquipmentView.Positions(w,equipmentHeight,landscape).First(p=>p.slot==0).rect.y;
+            float equipmentHeight=landscape?350:230;
+            var equipment=CharacterEquipmentView.Create(panel,Hero,w,equipmentHeight,landscape,EquipmentViewSource.Owned,(host,p)=>EquipmentCell(host,p.slot,p.index,p.rect.x,p.rect.y),weaponTray:landscape);equipment.transform.SetAsFirstSibling();
+            var weapon=CharacterEquipmentView.Positions(w,equipmentHeight,landscape,weaponTray:landscape).First(p=>p.slot==0&&p.index==1).rect;
             if(EquipmentSlots.TwoHanded(EquipmentSlots.At(Hero,0,0)))
-            {var link=Panel(panel,"Two hand link","ba9a5e","ba9a5e");Place(link,w/2-3,weaponY+SlotSize/2,6,3);link.GetComponent<Image>().raycastTarget=false;}
-            DrawPotionSlots(panel,w,landscape?292:208);
+            {var link=Panel(panel,"Two hand link","ba9a5e","ba9a5e");Place(link,weapon.x-UiTheme.Gap,weapon.y+SlotSize/2,UiTheme.Gap,3);link.GetComponent<Image>().raycastTarget=false;}
+            DrawPotionSlots(panel,w,weapon);
             var stats=EquipmentStats(Hero);float sw=(w-24)/3;
             foreach(var entry in new[]{("공격 기준",stats.damage),("방어도",stats.armor),("최대 HP",stats.hp)}.Select((v,n)=>(v,n)))
             {Txt(panel,entry.v.Item1,12+sw*entry.n,h-25,sw*.48f,23,9,muted);Txt(panel,entry.v.Item2.ToString("0"),12+sw*entry.n+sw*.48f,h-25,sw*.52f,23,13,gold);}

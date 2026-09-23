@@ -34,20 +34,22 @@ namespace Hellscript.Tests
             CollectionAssert.AreEqual(new[]{"PH01","PU01","PU02"},new GameStore(directory).Data.Hero.potions.slots.Select(s=>s.id));
         }
         [TestCase(PotionFallback.HigherGrade)][TestCase(PotionFallback.LowerGrade)][TestCase(PotionFallback.Newest)][TestCase(PotionFallback.Oldest)]
-        public void FallbackPersistsPerSlotWithoutConsumingOrSpending(PotionFallback choice)
+        public void SharedFallbackPersistsWithoutChangingSlotsConsumingOrSpending(PotionFallback choice)
         {
             string stock=string.Join(";",Hero.potions.stacks.Select(s=>s.id+":"+s.count));int gold=store.Data.gold;
-            Assert.IsTrue(store.SetPotionFallback("policy",Hero.id,1,choice),store.Error);
-            var loaded=new GameStore(directory);Assert.AreEqual(choice,loaded.Data.Hero.potions.slots[1].fallback);
-            Assert.AreEqual(PotionFallback.HigherGrade,loaded.Data.Hero.potions.slots[0].fallback);Assert.AreEqual(gold,loaded.Data.gold);
+            var assigned=PotionPolicy.Resolve(Hero).Slots.Select(s=>s.id).ToArray();
+            Assert.IsTrue(store.SetPotionFallback("policy",Hero.id,choice),store.Error);
+            var loaded=new GameStore(directory);Assert.AreEqual(choice,loaded.Data.Hero.potions.SharedFallback);
+            CollectionAssert.AreEqual(assigned,PotionPolicy.Resolve(loaded.Data.Hero).Slots.Select(s=>s.id));Assert.AreEqual(gold,loaded.Data.gold);
+            Assert.AreEqual(PotionFallback.HigherGrade,loaded.Data.heroes[1].potions.SharedFallback);
             Assert.AreEqual(stock,string.Join(";",loaded.Data.Hero.potions.stacks.Select(s=>s.id+":"+s.count)));
-            Assert.IsFalse(store.SetPotionFallback("invalid",Hero.id,0,(PotionFallback)99));
+            Assert.IsFalse(store.SetPotionFallback("invalid",Hero.id,(PotionFallback)99));
         }
         [Test] public void FailedPolicySavePreservesDiskAndMemory()
         {
             Assert.IsTrue(store.Save());string before=JsonUtility.ToJson(Hero.potions);string path=Path.Combine(directory,"hellscript-local-v1.json"),disk=File.ReadAllText(path);
             Directory.CreateDirectory(path+".tmp");LogAssert.Expect(LogType.Error,new Regex("저장하지 못했습니다:"));
-            Assert.IsFalse(store.SetPotionFallback("fail",Hero.id,0,PotionFallback.Oldest));
+            Assert.IsFalse(store.SetPotionFallback("fail",Hero.id,PotionFallback.Oldest));
             Assert.AreEqual(before,JsonUtility.ToJson(Hero.potions));Assert.AreEqual(disk,File.ReadAllText(path));
         }
         PotionDefinition[] TierFixture()
@@ -59,10 +61,34 @@ namespace Hellscript.Tests
         [TestCase(PotionFallback.Newest,"PU05")][TestCase(PotionFallback.Oldest,"PU01")]
         public void ExhaustionUsesSameEffectAndRequestedOrder(PotionFallback rule,string expected)
         {
-            var slots=PotionLoadout.Defaults();slots[0].fallback=rule;Hero.potions.Set("PH01",1);
+            Assert.IsTrue(store.SetPotionFallback("fallback",Hero.id,rule));var slots=PotionLoadout.Defaults();Hero.potions.Set("PH01",1);
             Assert.AreEqual("PH01",PotionLoadout.Resolve(Hero.potions,slots,TierFixture())[0]);Hero.potions.Consume("PH01");
             string before=JsonUtility.ToJson(Hero.potions);Assert.AreEqual(expected,PotionLoadout.Resolve(Hero.potions,slots,TierFixture())[0]);Assert.AreEqual(before,JsonUtility.ToJson(Hero.potions));
             Assert.IsNull(PotionLoadout.Resolve(Hero.potions,slots)[0],"Live catalog has no same-effect replacement; never substitute a buff for healing.");
+        }
+        [TestCase(PotionFallback.HigherGrade)][TestCase(PotionFallback.LowerGrade)]
+        [TestCase(PotionFallback.Newest)][TestCase(PotionFallback.Oldest)]
+        public void OnePolicyDrivesEverySlotEvenWhenLegacyPerSlotRulesDiffer(PotionFallback choice)
+        {
+            Assert.IsTrue(store.SetPotionFallback("shared",Hero.id,choice));Hero.potions.Set("PH01",0);
+            foreach(int index in Enumerable.Range(0,3))
+            {
+                var slots=new[]{new PotionSlot(),new PotionSlot(),new PotionSlot()};
+                slots[index]=new PotionSlot{id="PH01",fallback=(PotionFallback)(((int)choice+1)%4)};
+                string expected=choice==PotionFallback.HigherGrade?"PU02":choice==PotionFallback.Newest?"PU05":"PU01";
+                Assert.AreEqual(expected,PotionLoadout.Resolve(Hero.potions,slots,TierFixture())[index]);
+            }
+        }
+        [TestCase(false)][TestCase(true)]
+        public void LegacyPerSlotPolicyMigratesOnceFromFirstAssignedSlot(bool emptyFirst)
+        {
+            var stock=JsonUtility.FromJson<PotionInventory>("{\"version\":1,\"slots\":[{\"id\":\"PH01\",\"fallback\":2},{\"id\":\"PM01\",\"fallback\":1},{\"id\":\"PU04\",\"fallback\":3}]}");
+            if(emptyFirst)stock.slots[0].id="";
+            var expected=emptyFirst?PotionFallback.LowerGrade:PotionFallback.Newest;string before=JsonUtility.ToJson(stock);
+            Assert.AreEqual(expected,stock.SharedFallback);Assert.AreEqual(before,JsonUtility.ToJson(stock));
+            stock.Validate();Assert.AreEqual(expected,stock.fallback);Assert.AreEqual(1,stock.fallbackVersion);
+            stock.slots[emptyFirst?1:0].fallback=PotionFallback.Oldest;stock.Validate();Assert.AreEqual(expected,stock.SharedFallback);
+            Assert.AreEqual(expected,JsonUtility.FromJson<PotionInventory>(JsonUtility.ToJson(stock)).SharedFallback);
         }
         [Test] public void ReservedAndAlreadyResolvedPotionsAreNotReusedByOtherSlots()
         {
@@ -96,7 +122,7 @@ namespace Hellscript.Tests
             int count=Hero.potions.Count("PU01");Assert.IsTrue(sim.TryUseEquippedUtility());Assert.AreEqual(count-1,Hero.potions.Count("PU01"));Assert.AreEqual("PU01",sim.State.potions.utilityId);
             Assert.IsFalse(sim.TryUseEquippedUtility(),"Slot changes must not bypass shared utility cooldown.");
             store.Data.suspendedRun=sim.State;Assert.IsFalse(store.SetPotionSlot("in-run",Hero.id,0,"PH01"));
-            Assert.IsTrue(store.SetPotionFallback("in-run-policy",Hero.id,0,PotionFallback.Oldest));Assert.AreEqual(PotionFallback.Oldest,sim.ActivePotionSlots[0].fallback);
+            Assert.IsTrue(store.SetPotionFallback("in-run-policy",Hero.id,PotionFallback.Oldest));Assert.AreEqual(PotionFallback.Oldest,sim.Hero.potions.SharedFallback);
             store.Data.suspendedRun=null;
             var training=new CombatSimulation(store.Data,catalog,1,0,ownedTraining:true);count=Hero.potions.Count("PU01");Assert.IsTrue(training.TryUseEquippedUtility());Assert.AreEqual(count,Hero.potions.Count("PU01"));
         }

@@ -8,7 +8,7 @@ namespace Hellscript
     [Serializable] public sealed class PotionSlot
     {
         public string id="";
-        public PotionFallback fallback;
+        public PotionFallback fallback; // Legacy per-slot value, read only when migrating old saves.
     }
     [Serializable] public sealed class PotionBatch
     {
@@ -31,7 +31,7 @@ namespace Hellscript
         }
         public static string[] Resolve(PotionInventory stock,PotionSlot[] slots,IReadOnlyList<PotionDefinition> catalog=null)
         {
-            catalog??=PotionCatalog.All;
+            catalog??=PotionCatalog.All;var fallback=stock.SharedFallback;
             var result=new string[SlotCount];var reserved=new HashSet<string>(slots.Where(s=>!string.IsNullOrEmpty(s.id)).Select(s=>s.id));
             for(int i=0;i<SlotCount;i++)
             {
@@ -39,9 +39,9 @@ namespace Hellscript
                 var assigned=catalog.Single(p=>p.id==slot.id);
                 if(stock.Count(slot.id)>0){result[i]=slot.id;continue;}
                 var candidates=catalog.Where(p=>p.effect==assigned.effect&&stock.Count(p.id)>0&&!reserved.Contains(p.id));
-                IOrderedEnumerable<PotionDefinition> ordered=slot.fallback==PotionFallback.HigherGrade?candidates.OrderByDescending(p=>p.grade):
-                    slot.fallback==PotionFallback.LowerGrade?candidates.OrderBy(p=>p.grade):
-                    slot.fallback==PotionFallback.Newest?candidates.OrderByDescending(p=>stock.Acquired(p.id,true)):
+                IOrderedEnumerable<PotionDefinition> ordered=fallback==PotionFallback.HigherGrade?candidates.OrderByDescending(p=>p.grade):
+                    fallback==PotionFallback.LowerGrade?candidates.OrderBy(p=>p.grade):
+                    fallback==PotionFallback.Newest?candidates.OrderByDescending(p=>stock.Acquired(p.id,true)):
                     candidates.OrderBy(p=>stock.Acquired(p.id,false));
                 var next=ordered.ThenBy(p=>stock.Acquired(p.id,false)).ThenBy(p=>p.id,StringComparer.Ordinal).FirstOrDefault();
                 if(next!=null){result[i]=next.id;reserved.Add(next.id);}
@@ -52,6 +52,11 @@ namespace Hellscript
     public sealed partial class PotionInventory
     {
         public PotionSlot[] slots;
+        public PotionFallback fallback;
+        public int fallbackVersion;
+        // Resolving a preview is read-only. Older saves inherit the first assigned slot's rule once.
+        public PotionFallback SharedFallback=>fallbackVersion>0?fallback:
+            slots?.FirstOrDefault(s=>!string.IsNullOrEmpty(s?.id))?.fallback??PotionFallback.HigherGrade;
         public int acquisitionVersion,acquisitionSequence;
         public List<PotionBatch> batches=new List<PotionBatch>();
         void EnsureAcquisitions()
@@ -90,6 +95,9 @@ namespace Hellscript
         void ValidateLoadout()
         {
             PotionLoadout.Validate(slots);
+            if(fallbackVersion<0||fallbackVersion>1)throw new NotSupportedException("Invalid potion fallback version.");
+            if(fallbackVersion==0){fallback=SharedFallback;fallbackVersion=1;}
+            if(!Enum.IsDefined(typeof(PotionFallback),fallback))throw new ArgumentException("Invalid potion fallback.");
             if(slots?.Length==0)slots=null;
             if(acquisitionVersion<0||acquisitionVersion>1||acquisitionSequence<0)throw new NotSupportedException("Invalid potion acquisition version.");
             EnsureAcquisitions();

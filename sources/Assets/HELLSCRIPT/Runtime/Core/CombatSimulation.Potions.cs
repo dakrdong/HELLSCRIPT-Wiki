@@ -103,7 +103,7 @@ namespace Hellscript
         void ConsumePotion(PotionDefinition def)
         {
             var slots=ActivePotionSlots;int index=Array.IndexOf(ResolvedPotionSlots,def.id);
-            bool newest=index>=0&&slots[index].id!=def.id&&slots[index].fallback==PotionFallback.Newest;
+            bool newest=index>=0&&slots[index].id!=def.id&&Hero.potions.SharedFallback==PotionFallback.Newest;
             Hero.potions.Consume(def.id,newest);Hero.potions.revision++;State.potions.uses++;
             Log("POTION",Loc.F("{0} 사용 · 남은 수량 {1}",Loc.T(def.name),Hero.potions.Count(def.id)));
         }
