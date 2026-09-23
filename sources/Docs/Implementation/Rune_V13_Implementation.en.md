@@ -1,6 +1,6 @@
 # Rune board v13 implementation
 
-갱신일: 2026-09-22 · [한국어](Rune_V13_Implementation.md) · [Current design](../Design/HELLSCRIPT_Rune_Mastery.en.md)
+갱신일: 2026-09-23 · [한국어](Rune_V13_Implementation.md) · [Current design](../Design/HELLSCRIPT_Rune_Mastery.en.md)
 
 ## Reference and implementation
 
@@ -14,7 +14,7 @@ The reference did not implement combat mastery rewards. The initial integration 
 
 ## Native UI and combat
 
-The existing UGUI screen was replaced with the reference's landscape weapon rail, board and storage arrangement, and its portrait weapon row, board and storage arrangement. Portrait and landscape windows use the full shared safe-area width. Storage and ability details scroll independently while the enlarged selected-block pickup tile and actions remain fixed. The initial import extracted six supplied weapon images and 328 SVG glyphs, converting them into transparent runtime assets; no new AI-generated artwork was used. The weapon icons now use the new assets described below; the imported originals remain intact. Shared internal edges are removed to draw solid blocks and continuous region boundaries.
+The existing UGUI screen was replaced with the reference's landscape weapon rail, board and storage arrangement, and its portrait weapon row, board and storage arrangement. Portrait and landscape windows use the full shared safe-area width. Storage and ability dialogs scroll independently. Portrait rotates and picks blocks directly from storage; landscape also retains the enlarged detail pickup tile. Save stays fixed at the bottom. The initial import extracted six supplied weapon images and 328 SVG glyphs, converting them into transparent runtime assets; no new AI-generated artwork was used. The weapon icons now use the new assets described below; the imported originals remain intact. Shared internal edges are removed to draw solid blocks and continuous region boundaries.
 
 The screen provides pan, zoom, fit, full map, a seven-region minimap, anchored region previews, view/edit modes, color and multi-size filters, per-color active effects, searchable codex with weapon/region choices, assigned-slot navigation, rotation, recovery, 50-step undo, revert and save. Korean, English, landscape, portrait and 140% interface size are checked. Unity and browser font rendering can differ. Reference screenshots use isolated fixture ownership; real new accounts do not receive the demo's 160 runes.
 
@@ -75,6 +75,20 @@ The specialized hex board and storage layout remains in its existing `GameUI.Run
 Focused Edit Mode tests passed **145/145**. The [native macOS run](RuneV13Evidence/PortraitWidth/runtime.txt) verified rotation, detail pickup, placement, storage return, undo and save/reload. **24 combinations** cover 440×956, 956×440, 960×1440, 1920×1080, 1920×1200 and 2520×1080, Korean/English and 100%/140% reading size. Every window matches its safe-area width and keeps close/save/undo/revert within that area. Evidence includes [measured widths](RuneV13Evidence/PortraitWidth/window-widths.tsv), [scope and source hashes](RuneV13Evidence/PortraitWidth/validation.json), [Edit Mode results](RuneV13Evidence/PortraitWidth/editmode.xml) and [build results](RuneV13Evidence/PortraitWidth/build.txt). This is automated native macOS input verification, not physical-mobile testing.
 
 [Portrait 440×956](RuneV13Evidence/PortraitWidth/portrait-ko.png) · [Wide portrait 960×1440](RuneV13Evidence/PortraitWidth/wide-portrait-ko.png) · [Landscape 956×440](RuneV13Evidence/PortraitWidth/landscape-ko.png) · [PC 16:9](RuneV13Evidence/PortraitWidth/pc-16-9-ko.png) · [PC 16:10](RuneV13Evidence/PortraitWidth/pc-16-10-ko.png) · [PC 21:9](RuneV13Evidence/PortraitWidth/pc-21-9-ko.png) · [Korean 140%](RuneV13Evidence/PortraitWidth/portrait-ko-large.png) · [English 140%](RuneV13Evidence/PortraitWidth/portrait-en-large.png)
+
+## 2026-09-23: larger portrait board and rotation in storage
+
+Portrait omits the region-button strip below the board and the selection-detail panel. Regions remain accessible through the minimap. Two dropdown lists beside the storage title select color and sizes from one to five cells; sizes support multiple simultaneous selections. Selecting a stored block shows only a Rotate 60° action in storage. Each rotation updates the block in its inventory slot, and dragging preserves its displayed orientation and grabbed cell. Drag placed blocks back to storage to recover them. Tapping an empty board slot opens its ability and unlock actions. Space reclaimed from the controls goes to the placement board; landscape retains its region strip and detail panel.
+
+The existing `GameUI.Runes` adapter keeps shared safe-area, font, button and border ownership. Dropdowns change only view filters; rotation, placement and recovery use the existing draft and persistence transactions. Portrait hides the rotation action without a stored selection or after placement. Unplaced rotation previews remain session state; placed rotations persist through Save changes.
+
+The [native macOS interaction run](RuneV13Evidence/PortraitControls/runtime.txt) passed dropdown opening, color and multiple size selection, outside-click dismissal, all six storage rotations, and pickup/placement/recovery/undo/save/reload through the real UI input module. The [complete rune lifecycle run](RuneV13Evidence/PortraitControls/lifecycle.txt) also passed portrait slot unlocking, cross-weapon transfer and all five global preset save/load paths. The [development build](RuneV13Evidence/PortraitControls/build.txt) succeeded with zero errors.
+
+**24 combinations** cover 440×956, 956×440, 960×1440, 1920×1080, 1920×1200 and 2520×1080 with Korean/English and 100%/140% text. [Board measurements](RuneV13Evidence/PortraitControls/board-space.tsv), [window widths](RuneV13Evidence/PortraitControls/window-widths.tsv) and [scope/source hashes](RuneV13Evidence/PortraitControls/validation.json) are retained. At 960×1440 with default text, the board viewport grew from 264.224 to 582.4 logical UI units, approximately **2.2 times** its former height. This is automated native macOS evidence, not physical mobile-device or human mouse testing.
+
+The [Edit Mode run](RuneV13Evidence/PortraitControls/editmode.xml) had **159 passed and one failed out of 160**. All selected rune, localization and shared-UI tests passed. The existing `GraphicComponentTests.EveryCustomGraphicBringsItsOwnCanvasRenderer` failed because base commit `12505e0` already contained `EquipmentDropHighlight` and `ItemCardTrim` without `RequireComponent(CanvasRenderer)` declarations. Those equipment files are unchanged by this task; the broad run is not reported as fully passing. The UI contract check and nine contract regression tests passed.
+
+[960×1440 portrait](RuneV13Evidence/PortraitControls/wide-portrait-ko.png) · [440×956 portrait](RuneV13Evidence/PortraitControls/portrait-ko.png) · [No selection](RuneV13Evidence/PortraitControls/no-selection.png) · [Selected rotated block](RuneV13Evidence/PortraitControls/selected-rotated-block.png) · [Rotated drag](RuneV13Evidence/PortraitControls/rotated-drag.png) · [Color list](RuneV13Evidence/PortraitControls/color-list.png) · [Multiple sizes](RuneV13Evidence/PortraitControls/size-list.png) · [English at 140%](RuneV13Evidence/PortraitControls/portrait-en-large.png)
 
 ## Maintenance
 

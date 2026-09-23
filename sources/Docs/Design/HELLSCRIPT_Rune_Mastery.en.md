@@ -1,6 +1,6 @@
 # Weapon Rune Growth — v13 Implementation Design
 
-갱신일: 2026-09-20 · Version 13 · [한국어](HELLSCRIPT_Rune_Mastery.md)
+갱신일: 2026-09-23 · Version 13 · [한국어](HELLSCRIPT_Rune_Mastery.md)
 
 ## Authority and scope
 
@@ -50,6 +50,8 @@ Placement, rotation and retrieval validate the entire layout. An invalid operati
 ## Native interface and saving
 
 Landscape uses a left weapon rail, central board and right storage. Portrait stacks the weapon strip, board and storage. The interface imports the supplied weapon illustrations, 328 SVG symbols, colors, continuous block contours and gold borders. Storage has eight columns, five color filters and multiple simultaneous size filters.
+
+Portrait omits the region-button strip below the board and the selection-detail panel. Regions remain accessible through the minimap. Two dropdown lists beside the storage title select color and sizes from one to five cells; sizes support multiple simultaneous selections. Selecting a stored block shows only a Rotate 60° action in storage. Each rotation updates the block in its inventory slot, and dragging preserves its displayed orientation and grabbed cell. Drag placed blocks back to storage to recover them. Tapping an empty board slot opens its ability and unlock actions. Space reclaimed from the controls goes to the placement board; landscape retains its region strip and detail panel.
 
 The interface includes mastery/points, region preview, map/minimap, pan/zoom/fit, view/edit mode, active effects, codex, guide, selected-slot details, rotation/retrieval, undo/revert and save. Inventory and dialog contents scroll independently.
 

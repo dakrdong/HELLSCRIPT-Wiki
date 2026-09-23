@@ -1,6 +1,6 @@
 # 룬 보드 v13 적용 기록
 
-갱신일: 2026-09-22 · [English](Rune_V13_Implementation.en.md) · [현재 기획](../Design/HELLSCRIPT_Rune_Mastery.md)
+갱신일: 2026-09-23 · [English](Rune_V13_Implementation.en.md) · [현재 기획](../Design/HELLSCRIPT_Rune_Mastery.md)
 
 ## 적용 기준과 변경점
 
@@ -19,7 +19,7 @@
 
 ## 실제 게임 화면
 
-웹 화면을 띄우는 방식이 아니라 기존 게임의 UGUI 화면을 교체했습니다. 가로 화면은 왼쪽 무기 목록·중앙 보드·오른쪽 보관함, 세로 화면은 위쪽 무기 목록·보드·보관함으로 구성합니다. 세로·가로 화면 모두 공통 안전 영역의 전체 너비를 사용합니다. 보관함과 능력 상세 내용은 내부에서 스크롤하고, 선택한 블록의 큰 집기 영역과 배치 조작·저장 버튼은 고정합니다.
+웹 화면을 띄우는 방식이 아니라 기존 게임의 UGUI 화면을 교체했습니다. 가로 화면은 왼쪽 무기 목록·중앙 보드·오른쪽 보관함, 세로 화면은 위쪽 무기 목록·보드·보관함으로 구성합니다. 세로·가로 화면 모두 공통 안전 영역의 전체 너비를 사용합니다. 보관함과 능력 상세 창은 내부에서 스크롤합니다. 세로 화면은 보관함에서 직접 회전·배치하며, 가로 화면은 큰 선택 상세 집기 영역도 제공합니다. 변경 저장 버튼은 하단에 고정합니다.
 
 최초 적용에서는 원본의 무기 그림 6개와 SVG 문양 328개를 추출해 사용했습니다. 현재 무기 아이콘은 아래 선명도 개선 항목의 새 리소스로 교체했으며 원본 파일은 보존합니다. 무기 이미지는 원본의 색 보정·가장자리 투명도를 반영한 PNG, 문양은 투명 아틀라스로 변환했습니다. 블록은 공유 변을 제거한 하나의 외곽선과 입체 테두리로 그립니다. 영역도 내부 변을 제거한 연속 경계로 구분합니다. 새 AI 생성 그림은 사용하지 않았습니다.
 
@@ -96,6 +96,20 @@
 관련 Edit Mode 검사는 **145/145 통과**했고, [macOS 실행 검사](RuneV13Evidence/PortraitWidth/runtime.txt)에서 회전·상세 집기·배치·회수·실행 취소·저장 재읽기를 확인했습니다. 440×956, 956×440, 960×1440, 1920×1080, 1920×1200, 2520×1080을 한국어·영어와 글자 크기 100%·140%로 조합한 **24개 조건**에서 창 너비가 안전 영역 너비와 일치하며 닫기·저장·실행 취소·되돌리기 버튼이 영역 안에 있는지 확인했습니다. [너비 측정](RuneV13Evidence/PortraitWidth/window-widths.tsv), [검사 범위와 소스 해시](RuneV13Evidence/PortraitWidth/validation.json), [Edit Mode 결과](RuneV13Evidence/PortraitWidth/editmode.xml), [빌드 결과](RuneV13Evidence/PortraitWidth/build.txt)를 보존합니다. 이는 macOS 자동 입력 검증이며 모바일 실기기 검증은 아닙니다.
 
 [세로 440×956](RuneV13Evidence/PortraitWidth/portrait-ko.png) · [넓은 세로 960×1440](RuneV13Evidence/PortraitWidth/wide-portrait-ko.png) · [가로 956×440](RuneV13Evidence/PortraitWidth/landscape-ko.png) · [PC 16:9](RuneV13Evidence/PortraitWidth/pc-16-9-ko.png) · [PC 16:10](RuneV13Evidence/PortraitWidth/pc-16-10-ko.png) · [PC 21:9](RuneV13Evidence/PortraitWidth/pc-21-9-ko.png) · [한국어 140%](RuneV13Evidence/PortraitWidth/portrait-ko-large.png) · [영어 140%](RuneV13Evidence/PortraitWidth/portrait-en-large.png)
+
+## 2026-09-23: 세로 배치판 확대와 보관함 회전
+
+세로 화면에서는 배치판 아래의 구역 버튼과 선택 정보 패널을 표시하지 않습니다. 구역 이동은 미니맵을 사용합니다. 보관함 제목 옆의 목록상자 두 개에서 색상과 1~5칸 크기를 고르며, 크기는 여러 종류를 동시에 선택할 수 있습니다. 보관함 블록을 선택하면 보관함에 60° 회전 버튼만 나타납니다. 버튼을 누를 때마다 보관함의 블록 자체가 60도씩 회전하고, 표시된 방향과 집은 칸을 유지한 채 끌어 배치합니다. 배치한 블록은 보관함으로 끌어 회수합니다. 빈 보드 칸의 능력 확인·개방은 해당 칸을 눌러 여는 창에서 처리합니다. 줄어든 조작 영역의 높이는 배치판에 배정하며, 가로 화면의 구역 버튼과 상세 패널은 유지합니다.
+
+룬 화면은 기존 `GameUI.Runes` 어댑터와 공통 안전 영역·글꼴·버튼·테두리를 사용합니다. 목록상자는 화면의 필터 상태만 바꾸고, 회전·배치·회수는 기존 편집 모델과 저장 거래를 사용합니다. 세로 모드에서 선택하지 않았거나 이미 배치한 블록에는 회전 버튼을 표시하지 않습니다. 보관함의 회전 미리보기는 편집 세션 안에서 유지되며, 배치된 회전값은 변경 저장 후 계정에 보존됩니다.
+
+[macOS 조작 검사](RuneV13Evidence/PortraitControls/runtime.txt)는 목록 열기·색 필터·크기 복수 선택·목록 밖 클릭으로 닫기, 보관함의 6방향 회전과 실제 입력 모듈을 거친 집기·배치·회수·실행 취소·저장 재읽기를 통과했습니다. [기존 전체 룬 이용 흐름](RuneV13Evidence/PortraitControls/lifecycle.txt)도 통과했으며 세로 모드의 칸 개방, 다른 무기로 이동, 전역 프리셋 5칸의 등록·저장·불러오기를 포함합니다. [macOS 개발 빌드](RuneV13Evidence/PortraitControls/build.txt)는 오류 0개입니다.
+
+440×956·956×440·960×1440·1920×1080·1920×1200·2520×1080, 한국어·영어, 글자 크기 100%·140%의 **24가지 조합**을 검사했습니다. [측정 결과](RuneV13Evidence/PortraitControls/board-space.tsv), [창 너비](RuneV13Evidence/PortraitControls/window-widths.tsv)와 [소스 해시·검사 범위](RuneV13Evidence/PortraitControls/validation.json)를 보존합니다. 960×1440의 기본 글자 크기에서 실제 배치판 높이는 264.224에서 582.4 UI 단위로 **약 2.2배** 늘어났습니다. 모바일 실기기와 사람의 물리 입력은 이번 검증에 포함하지 않습니다.
+
+[Edit Mode 결과](RuneV13Evidence/PortraitControls/editmode.xml)는 **160개 중 159개 통과, 1개 실패**입니다. 룬·번역·공통 UI 검사는 모두 통과했습니다. 기존 `GraphicComponentTests.EveryCustomGraphicBringsItsOwnCanvasRenderer`는 기준 커밋 `12505e0`에 이미 있던 `EquipmentDropHighlight`와 `ItemCardTrim`의 `RequireComponent(CanvasRenderer)` 선언 누락으로 실패했습니다. 해당 장비 화면 코드는 이번 변경에서 수정하지 않았으며, 이 결과를 전체 검사 통과로 보고하지 않습니다. 공통 UI 계약 검사와 계약 회귀 검사 9개는 통과했습니다.
+
+[세로 960×1440](RuneV13Evidence/PortraitControls/wide-portrait-ko.png) · [세로 440×956](RuneV13Evidence/PortraitControls/portrait-ko.png) · [선택 전](RuneV13Evidence/PortraitControls/no-selection.png) · [선택 후 회전](RuneV13Evidence/PortraitControls/selected-rotated-block.png) · [회전한 블록 드래그](RuneV13Evidence/PortraitControls/rotated-drag.png) · [색상 목록](RuneV13Evidence/PortraitControls/color-list.png) · [복수 크기 목록](RuneV13Evidence/PortraitControls/size-list.png) · [영어 140%](RuneV13Evidence/PortraitControls/portrait-en-large.png)
 
 ## 유지보수 경로
 

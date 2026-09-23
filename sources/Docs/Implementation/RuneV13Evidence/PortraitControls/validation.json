@@ -1,0 +1,22 @@
+{
+  "base_commit": "12505e0040f0f3c6585a2d3003719697675169e0",
+  "unity": "6000.6.0f1",
+  "editmode": {
+    "total": "160",
+    "passed": "159",
+    "failed": "1",
+    "skipped": "0"
+  },
+  "existing_failure": "GraphicComponentTests.EveryCustomGraphicBringsItsOwnCanvasRenderer: unchanged base EquipmentDropHighlight and ItemCardTrim do not declare RequireComponent(CanvasRenderer).",
+  "runtime": "Passed native clarity and complete rune lifecycle smoke, including new dropdown input and rotated inventory pickup, placement, recovery, undo, slot unlock, five global presets, save and disk reload.",
+  "matrix_conditions": 24,
+  "comparison": "960x1440, 100% text: board viewport height 264.224 -> 582.4. 440x956: 207.7083 -> 464.6667. Values are logical UI units measured from the same layout.",
+  "source_hashes": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Runes.cs": "492e469f97bdebe1cc8a9c3efe903bb717af4c075c1324dbb9b8b2e02688cfdf",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RunePanels.cs": "66bc6d6205e60d9010527ede052cc46c585888826b9c0fb7da34ce9b3620bc25",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRuneV13Smoke.cs": "e7454827a14b5adc8c471a937504a59a65fe2b265f30ce1645d7ebcb22612cb0",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRuneV13Smoke.Clarity.cs": "b5091bc6b3e290112c482a6698632423307d0573e3bd4bb2eadf9c34b745fff9",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "b11404e8c80937e359275035ca418fbf1479e3758b74b8e104f86d2bf092d0d7"
+  },
+  "scope": "Automated native macOS UI input and screenshots, isolated fixture/save. No physical mobile-device or human mouse verification. The broad graphic declaration check is a pre-existing failure; all 159 other selected tests passed."
+}

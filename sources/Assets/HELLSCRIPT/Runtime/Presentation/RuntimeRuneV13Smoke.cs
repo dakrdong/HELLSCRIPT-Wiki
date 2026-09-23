@@ -46,6 +46,12 @@ namespace Hellscript
             e.position+=Vector2.right*.5f;Board.OnBeginDrag(e);e.dragging=true;
             Require(Board.Dragging,"Fast mouse pickup panned the board instead of lifting the piece");return e;
         }
+        void RecoverSelected()
+        {
+            if(Screen.width>Screen.height){Click("rune-remove");return;}
+            var placement=Board.editor.DraftPlacements.Single(p=>p.InstanceId==Board.piece.InstanceId);
+            var e=BeginBoardDrag(placement,out _,out _);e.position=ScreenCenter(Board.storageDropTarget);Board.OnDrag(e);Board.OnEndDrag(e);
+        }
         IEnumerator VerifyInputModuleDrag()
         {
             yield return Resize(1280,720);
@@ -121,7 +127,7 @@ namespace Hellscript
             Click("rune-weapon-sword");yield return null;
             string id=game.Store.Data.runes.owned[0].id;Click("rune-card-"+id);Tap(new HexCell(1,0));Require(Board.editor.DraftPlacements.Count==1,"Tap placement failed");Click("rune-save");yield return null;
             Require(game.Store.Data.runes.placements.Single().runeId==id,"Save failed");
-            Tap(new HexCell(1,0));Click("rune-remove");Click("rune-weapon-bow");yield return null;
+            Tap(new HexCell(1,0));RecoverSelected();Click("rune-weapon-bow");yield return null;
             Click("rune-card-"+id);Tap(new HexCell(1,0));Click("rune-save");Require(game.Store.Data.runes.placements.Single().weapon=="bow","Cross-weapon transfer failed");
             Click("닫기");yield return null;
             RuneMasteryProgress.AddExperience(RuneMasteryProgress.Get(game.Store.Data.runes,"sword"),100);game.Store.Save();game.UI.ShowRunes();Click("rune-weapon-sword");
@@ -133,11 +139,11 @@ namespace Hellscript
             for(int i=0;i<5;i++){Click("rune-preset-save-"+i);yield return null;Click("rune-preset-confirm");yield return null;}
             Require(game.Store.Data.runes.presets.All(p=>!p.occupied),"Preset draft leaked before Save");Click("rune-dialog-close");Click("rune-save");yield return null;
             var reopened=new GameStore(Arg("-hellscriptSavePath"),game.catalog);Require(reopened.Data.runes.presets.All(p=>p.occupied&&p.placements.Count==5),"Global presets failed disk reload");
-            Tap(new HexCell(1,0));Click("rune-remove");Require(Board.editor.DraftPlacements.Count==4,"Retrieve sample failed");Click("rune-undo");Require(Board.editor.DraftPlacements.Count==5,"Undo did not restore sample");
-            Tap(new HexCell(1,0));Click("rune-remove");Click("rune-presets");Click("rune-preset-load-0");Require(Board.editor.DraftPlacements.Count==5,"Preset load did not restore all placements");
+            Tap(new HexCell(1,0));RecoverSelected();Require(Board.editor.DraftPlacements.Count==4,"Retrieve sample failed");Click("rune-undo");Require(Board.editor.DraftPlacements.Count==5,"Undo did not restore sample");
+            Tap(new HexCell(1,0));RecoverSelected();Click("rune-presets");Click("rune-preset-load-0");Require(Board.editor.DraftPlacements.Count==5,"Preset load did not restore all placements");
             Click("rune-presets");yield return Capture("global-presets-ko",1280,720);Click("rune-dialog-close");
             yield return Capture("reference-portrait-ko",720,1280);
-            Click("rune-weapon-sword");Click("rune-region-1");yield return Capture("region-preview-ko",1280,720);
+            Click("rune-weapon-sword");Click("rune-mini-1");yield return Capture("region-preview-ko",1280,720);
             Click("rune-region-lock-1");yield return Capture("region-dialog-ko",1280,720);Click("rune-dialog-close");
             Click("rune-region-0");Click("rune-overview");yield return Capture("full-map-ko",1280,720);
             Click("rune-fit");game.ApplyLanguage("en");yield return Capture("reference-landscape-en",1280,720);yield return Capture("reference-portrait-en",720,1280);

@@ -11,8 +11,8 @@ namespace Hellscript
     {
         RuneInventory runeInventory;RuneBoardEditor runeEditor;RuneBoardGraphic runeCanvas;
         RuneGrowthState runeSource;string runeWeapon="sword",runeSelected;int runeRotation,runeColor=-1,runeSize;
-        bool runeWasPaused,runeSession,runeViewing;RectTransform runeStorage,runeDetails,runeStage,runeModal;
-        Text runeDetail,runeSummary,runeStorageCount;Button runeSave,runeUndoButton,runeRevertButton; readonly Text[] runeTypeCounts=new Text[5];RunePracticeModel runePractice;
+        bool runeWasPaused,runeSession,runeViewing,runePortrait;RectTransform runeStorage,runeDetails,runeStage,runeModal;
+        Text runeDetail,runeSummary,runeStorageCount;Button runeSave,runeUndoButton,runeRevertButton,runeRotateButton,runeColorFilter,runeSizeFilter; readonly Text[] runeTypeCounts=new Text[5];RunePracticeModel runePractice;
         readonly HashSet<string> runeFusionSelection=new HashSet<string>();int runeFusionGrade;float runeRevealUntil;
         readonly Dictionary<string,Vector3> runeViews=new Dictionary<string,Vector3>();
         readonly Dictionary<string,int> runeStorageRotations=new Dictionary<string,int>();
@@ -47,7 +47,7 @@ namespace Hellscript
             pageRepaint=ShowRunes;Base("runes","룬 보드","",responsive:true);runeModal=null;
             header.gameObject.SetActive(false);footer.gameObject.SetActive(false);content.parent.gameObject.SetActive(false);
             runeScreen=new Vector2(Screen.width,Screen.height);runeInterface=InterfaceFactor;Canvas.ForceUpdateCanvases();
-            float availableWidth=root.rect.width,height=root.rect.height;bool portrait=availableWidth<height;
+            float availableWidth=root.rect.width,height=root.rect.height;bool portrait=availableWidth<height;runePortrait=portrait;runeDetails=null;runeRotateButton=null;runeColorFilter=null;runeSizeFilter=null;
             float width=availableWidth;
             runeUnit=Mathf.Clamp(portrait?width/480f:width/1280f,.4f,1.6f);
             float s=runeUnit,margin=6*s,head=44*s,foot=46*s,bodyY=head+margin,bodyH=height-head-foot-margin*2;
@@ -71,7 +71,7 @@ namespace Hellscript
                 RuneTextAt(b.transform,"Lv. "+RuneMasteryProgress.Get(runeSource,weapon).level,3*s,portrait?56*s:wh*.80f,ww-9*s,12*s,9,TextAnchor.MiddleCenter);
             }
             float workX=margin+rail,workW=width-margin*2-rail,workY=bodyY+weaponH,workH=bodyH-weaponH;
-            float boardW=portrait?workW:workW*.5f,boardH=portrait?Mathf.Min(workH*.56f,Mathf.Max(230*s,bodyH*.43f)):workH;
+            float boardW=portrait?workW:workW*.5f,boardH=portrait?workH-Mathf.Min(210*s,workH*.34f):workH;
             var boardPanel=RuneBox("Rune board panel",frame);Place(boardPanel,workX,workY,boardW,boardH);
             var mastery=RuneBox("Weapon mastery",boardPanel);Place(mastery,0,0,boardW,56*s);
             RuneTextAt(mastery,Loc.F("{0} 숙련도",RuneMasteryCatalog.Name(runeWeapon)),10*s,3*s,boardW*.36f,24*s,16);
@@ -89,33 +89,46 @@ namespace Hellscript
             RuneButton(tools,"rune-zoom-in","+",()=>runeCanvas.Zoom(.2f),tx+103*s,2*s,tw,30*s);
             RuneButton(tools,"rune-fit","⌖",()=>runeCanvas.Focus(runeFocus),tx+141*s,2*s,tw,30*s);
             RuneButton(tools,"rune-overview","지도",()=>{runeOverview=true;runeCanvas.Focus(runeFocus,true);},tx+179*s,2*s,38*s,30*s);
-            runeStage=Rect("rune-board-viewport",boardPanel);Place(runeStage,1,90*s,boardW-2,boardH-178*s);runeStage.gameObject.AddComponent<RectMask2D>();
+            runeStage=Rect("rune-board-viewport",boardPanel);Place(runeStage,1,90*s,boardW-2,boardH-(portrait?146:178)*s);runeStage.gameObject.AddComponent<RectMask2D>();
             runeCanvas=MakeRuneGraphic(runeStage,"rune-board");runeCanvas.editor=runeEditor;runeCanvas.viewOnly=runeViewing;runeCanvas.focusRegion=runeFocus;runeCanvas.overview=runeOverview;
             runeCanvas.piece=runeSelected==null?null:runeInventory.FindOwned(runeSelected);runeCanvas.rotation=runeRotation;
             if(runeViews.TryGetValue(runeWeapon,out var view)){runeCanvas.pan=new Vector2(view.x,view.y);runeCanvas.zoom=view.z;}
             runeCanvas.inputBlocked=()=>runeModal!=null||CommonPanelOpen;runeCanvas.rotateSelected=RotateRune;runeCanvas.clearSelected=()=>{runeSelected=null;runeCanvas.piece=null;runeCanvas.Refresh();RenderRuneDetail();};runeCanvas.inspect=InspectRuneCell;runeCanvas.beforeChange=PushRuneUndo;runeCanvas.changed=RuneChanged;runeCanvas.rejected=ShowToast;runeCanvas.Refresh();
             CreateRuneRegionMarkers();CreateRuneMinimap();
-            var regions=Rect("Region navigation",boardPanel);Place(regions,0,boardH-88*s,boardW,32*s);
-            for(int i=0;i<7;i++){int region=i;var b=RuneButton(regions,"rune-region-"+i,RuneV13Catalog.RegionName(i),()=>FocusRuneRegion(region),i*boardW/7,0,boardW/7-1,32*s,region==runeFocus);b.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(11*s);}
+            if(!portrait)
+            {
+                var regions=Rect("Region navigation",boardPanel);Place(regions,0,boardH-88*s,boardW,32*s);
+                for(int i=0;i<7;i++){int region=i;var b=RuneButton(regions,"rune-region-"+i,RuneV13Catalog.RegionName(i),()=>FocusRuneRegion(region),i*boardW/7,0,boardW/7-1,32*s,region==runeFocus);b.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(11*s);}
+            }
             runeSummary=RuneTextAt(boardPanel,"",9*s,boardH-56*s,boardW-18*s,26*s,11);runeSummary.name="rune-summary";
             var counts=Rect("Rune type activation",boardPanel);Place(counts,0,boardH-28*s,boardW,28*s);
             var effects=RuneEffects();for(int i=0;i<5;i++){int type=i;var count=RuneButton(counts,"rune-effects-type-"+i,"",()=>ShowRuneEffects(type),i*boardW/5+2*s,0,boardW/5-4*s,26*s);runeTypeCounts[i]=count.GetComponentInChildren<Text>();runeTypeCounts[i].color=RuneBoardGraphic.TypeColor(i);}
             var storagePanel=RuneBox("Rune storage panel",frame);float storageW=portrait?workW:workW-boardW,storageH=portrait?workH-boardH:workH;
             runeCanvas.storageDropTarget=storagePanel;runeCanvas.recover=()=>{runeSelected=runeCanvas.piece?.InstanceId;runeRotation=runeCanvas.rotation;RemoveRune();};
             Place(storagePanel,portrait?workX:workX+boardW,portrait?workY+boardH:workY,storageW,storageH);
-            RuneTextAt(storagePanel,"룬 보관함",10*s,3*s,storageW*.5f,30*s,17);
+            RuneTextAt(storagePanel,"룬 보관함",10*s,3*s,portrait?130*s:storageW*.5f,30*s,17);
             RuneButton(storagePanel,"rune-effects","활성 효과",ShowRuneEffects,storageW-92*s,5*s,82*s,27*s);
-            float filtersY=38*s;
-            for(int i=-1;i<5;i++){int type=i;RuneButton(storagePanel,"rune-color-"+i,i<0?"전체":RuneV13Catalog.TypeName(i),()=>{runeColor=type;ShowRunes();},8*s+(i+1)*(storageW-16*s)/6,filtersY,(storageW-16*s)/6-3*s,30*s,type==runeColor);}
-            for(int i=0;i<=5;i++){int size=i;bool on=i==0?runeSizes.Count==5:runeSizes.Contains(i);RuneButton(storagePanel,"rune-size-"+i,(on?"☑ ":"☐ ")+(i==0?Loc.T("전부"):Loc.F("{0}칸",i)),()=>{if(size==0){if(runeSizes.Count==5)runeSizes.Clear();else runeSizes.UnionWith(new[]{1,2,3,4,5});}else if(!runeSizes.Remove(size))runeSizes.Add(size);ShowRunes();},8*s+i*(storageW-16*s)/6,filtersY+34*s,(storageW-16*s)/6-2*s,26*s);}
-            runeStorageCount=RuneTextAt(storagePanel,"",10*s,104*s,storageW-20*s,20*s,10);
-            float detailH=portrait?194*s:214*s,gridY=129*s;
+            if(portrait)
+            {
+                runeColorFilter=RuneButton(storagePanel,"rune-color-filter","",()=>ShowRuneFilter(false),storageW-318*s,5*s,110*s,27*s);
+                runeSizeFilter=RuneButton(storagePanel,"rune-size-filter","",()=>ShowRuneFilter(true),storageW-204*s,5*s,108*s,27*s);
+                runeRotateButton=RuneButton(storagePanel,"rune-rotate","60° 회전",RotateRune,storageW-110*s,39*s,100*s,29*s,true);
+                UpdateRuneFilterLabels();
+            }
+            else
+            {
+                float filtersY=38*s;
+                for(int i=-1;i<5;i++){int type=i;RuneButton(storagePanel,"rune-color-"+i,i<0?"전체":RuneV13Catalog.TypeName(i),()=>{runeColor=type;ShowRunes();},8*s+(i+1)*(storageW-16*s)/6,filtersY,(storageW-16*s)/6-3*s,30*s,type==runeColor);}
+                for(int i=0;i<=5;i++){int size=i;bool on=i==0?runeSizes.Count==5:runeSizes.Contains(i);RuneButton(storagePanel,"rune-size-"+i,(on?"☑ ":"☐ ")+(i==0?Loc.T("전부"):Loc.F("{0}칸",i)),()=>{ToggleRuneSize(size);ShowRunes();},8*s+i*(storageW-16*s)/6,filtersY+34*s,(storageW-16*s)/6-2*s,26*s);}
+            }
+            runeStorageCount=RuneTextAt(storagePanel,"",10*s,(portrait?39:104)*s,storageW-(portrait?130:20)*s,portrait?29*s:20*s,10);
+            float detailH=portrait?0:214*s,gridY=(portrait?76:129)*s;
             var storageView=Rect("Rune storage viewport",storagePanel);Place(storageView,9*s,gridY,storageW-18*s,Mathf.Max(36*s,storageH-gridY-detailH-5*s));storageView.gameObject.AddComponent<Image>().color=Color.clear;storageView.gameObject.AddComponent<RectMask2D>();
             var scroll=storageView.gameObject.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.viewport=storageView;
             runeStorage=Rect("Rune storage",storageView);runeStorage.anchorMin=new Vector2(0,1);runeStorage.anchorMax=Vector2.one;runeStorage.pivot=new Vector2(.5f,1);runeStorage.sizeDelta=Vector2.zero;scroll.content=runeStorage;
             var grid=runeStorage.gameObject.AddComponent<GridLayoutGroup>();grid.constraint=GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=8;float slot=(storageView.rect.width-4*s*7)/8;grid.cellSize=new Vector2(slot,slot);grid.spacing=new Vector2(4*s,4*s);
             runeStorage.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
-            runeDetails=RuneBox("Selection details",storagePanel);Place(runeDetails,0,storageH-detailH,storageW,detailH);
+            if(!portrait){runeDetails=RuneBox("Selection details",storagePanel);Place(runeDetails,0,storageH-detailH,storageW,detailH);}
             var bottom=RuneBox("Rune save bar",frame);Place(bottom,margin,height-foot,width-margin*2,foot-margin);
             if(!portrait)RuneTextAt(bottom,"개방과 활성은 별개입니다.",10*s,0,width*.43f,foot-margin,10);
             float bw=bottom.rect.width;
@@ -159,7 +172,7 @@ namespace Hellscript
             runeSave.interactable=validation.IsValid&&RuneDirty&&runeSource.revision==game.Store.Data.runes.revision;runeCanvas.Refresh();
         }
         void InspectRuneCell(HexCell coordinate)
-        {if(!runeEditor.Board.TryGetCell(coordinate,out _))return;runeNode=coordinate;if(runeViewing||!runeEditor.DraftPlacements.Any(p=>p.OccupiedCells.Contains(coordinate))){runeSelected=null;runeCanvas.piece=null;}RenderRuneDetail();}
+        {if(!runeEditor.Board.TryGetCell(coordinate,out var cell))return;runeNode=coordinate;if(runeViewing||!runeEditor.DraftPlacements.Any(p=>p.OccupiedCells.Contains(coordinate))){runeSelected=null;runeCanvas.piece=null;}RenderRuneDetail();if(runePortrait&&(runeViewing||!runeEditor.DraftPlacements.Any(p=>p.OccupiedCells.Contains(coordinate))))ShowRuneAbility(cell);}
         static string RuneAbilityLine(RuneBoardCell cell)=>cell.Ability.Meaning=="root"?Loc.T("공용 시작점"):cell.IsElite?RuneMasteryCatalog.AbilityName(cell.Ability.Meaning):RuneMasteryCatalog.AbilityName(cell.Ability.Meaning)+" +"+cell.Value.ToString("0.##")+cell.Unit;
         RectTransform RuneDetailScroll(float height)
         {
@@ -169,6 +182,7 @@ namespace Hellscript
         }
         void RenderRuneDetail()
         {
+            if(runeRotateButton!=null)runeRotateButton.gameObject.SetActive(!runeViewing&&runeSelected!=null&&!runeEditor.IsInDraft(runeSelected)&&runeInventory.GetCommittedOwner(runeSelected)==null);
             if(runeDetails==null)return;foreach(Transform child in runeDetails){child.gameObject.SetActive(false);Destroy(child.gameObject);}float s=runeUnit,w=runeDetails.rect.width,h=runeDetails.rect.height;
             RuneTextAt(runeDetails,"선택 정보",10*s,4*s,w*.4f,19*s,10);
             RuneButton(runeDetails,"rune-clear-selection","선택 해제",()=>{runeSelected=null;runeCanvas.piece=null;runeNode=new HexCell(0,0);runeCanvas.Refresh();RenderRuneDetail();},w-80*s,3*s,74*s,22*s);
