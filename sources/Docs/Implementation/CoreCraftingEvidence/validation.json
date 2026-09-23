@@ -1,0 +1,109 @@
+{
+  "date": "2026-09-23",
+  "unity": "6000.6.0f1",
+  "sourceBase": "ff25bae",
+  "branch": "codex/blacksmith-cores-runtime",
+  "editMode": {
+    "result": "Passed",
+    "total": "354",
+    "passed": "354",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "145.067888",
+    "base": "2cfff9a"
+  },
+  "prototypeTests": {
+    "passed": 103,
+    "failed": 0
+  },
+  "uiContract": {
+    "passed": 9,
+    "failed": 0
+  },
+  "build": "macOS development / succeeded / 0 build errors",
+  "native": {
+    "result": "passed",
+    "processes": 2,
+    "input": "Unity uGUI raycasts, synthetic pointer and Input System keyboard events",
+    "dimensions": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "readingScale": [
+      100,
+      150
+    ],
+    "physicalMobileTested": false,
+    "realAccountModified": false,
+    "coreStart": 96,
+    "coreEnd": 76,
+    "coinStart": 12000,
+    "coinEnd": 4000,
+    "craftedItems": 2,
+    "pendingResultRestored": true,
+    "confirmedAfterRestart": true,
+    "limitations": [
+      "No physical mobile, notched safe-area or mobile performance validation.",
+      "Existing URP post-processing shader warnings remain in development-player startup."
+    ],
+    "verifiedMainBase": "ff25bae"
+  },
+  "files": {
+    "Docs/Implementation/CoreCraftingEvidence/landscape-en-forge.png": "c9717b43bfc89213d6a75c66ec0a0ff36272f0ca33eeddb041cc153bf2b0d4af",
+    "Docs/Implementation/CoreCraftingEvidence/large-text-landscape.png": "a9db3f2a502866a3b9ec5858957601b81dca2d9501d1065b73930694b1bdd03c",
+    "Docs/Implementation/CoreCraftingEvidence/large-text-pc.png": "43ae719fca9511655bb04db68e74405f08779a65e9e271fa546e2fa5b21cfba0",
+    "Docs/Implementation/CoreCraftingEvidence/large-text-portrait.png": "dbac68c4677f135bd607c87f0353e43e60e09a095ba73ddccf5804c35e4d0895",
+    "Docs/Implementation/CoreCraftingEvidence/pc-16x10-en-forge.png": "a88c40699001e85a0c26dbcda4615921a1c1eb53024a72ed2aa06679a4480da5",
+    "Docs/Implementation/CoreCraftingEvidence/pc-16x9-ko-catalogue.png": "b8d02e9d63f5a204776a3f7a92596f34f16c5bd8994b815e294abe2b8f0944df",
+    "Docs/Implementation/CoreCraftingEvidence/pc-21x9-ko-forge.png": "6044500ec034254c054b70a626451affbaabf5dbd2a14f8b33b7398641708f3a",
+    "Docs/Implementation/CoreCraftingEvidence/portrait-cores.png": "08b0c1cd0f54a5acf2bfd83e95ac338b9f687c83d75ba3aac5bbaaedd14f385f",
+    "Docs/Implementation/CoreCraftingEvidence/portrait-crafted-result.png": "655bd9cc1ab48eb050c66c491b16e96ededd937ac60f2a49e97210931718db56",
+    "Docs/Implementation/CoreCraftingEvidence/portrait-definition-popup.png": "054205b424fc8b87e5f1e2b0e69812e098017c69729004163c14588596c228e8",
+    "Docs/Implementation/CoreCraftingEvidence/portrait-ko-catalogue.png": "64d08215f7d1406698dc69a24ca8228729a32b2ec89c8b62c4c144abe12f7652",
+    "Docs/Implementation/CoreCraftingEvidence/portrait-ko-forge.png": "f53fe42bb446185bb1db0048395827db5ebcacae90a1f1f89e17d639f1cdbef3",
+    "Docs/Implementation/CoreCraftingEvidence/restart-pending-result.png": "0860ad38de9e098b78c34279bd70239312e5152bd64f5f46cc412107e9f22cc4",
+    "Docs/Implementation/CoreCraftingEvidence/restart-result.txt": "6710f50d353ba2f531cc830c240a6c0fa853286724cce22e85009e5e68a64c51",
+    "Docs/Implementation/CoreCraftingEvidence/result.txt": "64b9aa27d428b844b5463b0edc48f0ef008a26274e0c07b8cd8f12af0748c851"
+  },
+  "mainIntegration": {
+    "base": "ff25bae",
+    "editMode": {
+      "result": "Passed",
+      "total": "130",
+      "passed": "130",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "6.3976791"
+    }
+  },
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs": "d6348c7ec9e13bed56576076515ee86a641cb2d517c7a51de78a9cadf383a568",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs": "54a86276c5c68bedd192845cc945a69a3fb7471a5c73f21f0285ec056076e743",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs": "a9af5e563ce8fd4c92e4c082d326dcb033dc893c89e8429c15a3f71abf6e8758",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Dialogs.cs": "ab0ce87180f85890f49a9d1be7991b5bf2b9318e62cb8dcde22461a746fe9058",
+    "Assets/HELLSCRIPT/Runtime/Presentation/CoreQualityGauge.cs": "d7e3e39edeb1e8bae7c2326f9d19b764aa0b849f3600a4d08525ace93f0fa8bf",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs": "ce267d3706a15567278b74676d90e2340073dcc34854215bea644417d4f5f272"
+  }
+}

@@ -7,10 +7,19 @@ namespace Hellscript
     {
         // The rift keeper gathers stage choice, sweep and training in one place. Every action here is
         // the same call the sanctuary menu makes, with the same eligibility, so no route is cheaper.
+        RiftEntryWindow riftEntryWindow;
         public void ShowRiftKeeper()
         {
+            if(game.Active)return;
+            if(riftEntryWindow!=null)return;
+            if(!game.Store.ActivateSkillTrees(game.catalog)||!game.Store.RefreshRiftDay()){ShowToast(game.Store.Error);return;}
+            riftEntryWindow=RiftEntryWindow.Open(transform,game,()=>InterfaceFactor,()=>{riftEntryWindow=null;RefreshHud();RefreshPlaza();});
+        }
+        public void CloseRiftEntry(){if(riftEntryWindow!=null)riftEntryWindow.Close();}
+        public void ShowRiftServices()
+        {
             var a=game.Store.Data;var h=a.Hero;
-            pageRepaint=()=>ShowRiftKeeper();Base("rift-keeper","균열 관리자","단계 선택 · 소탕 · 훈련은 성소 메뉴와 같은 조건으로 열립니다");
+            pageRepaint=()=>ShowRiftServices();Base("rift-keeper","균열 관리자","단계 선택 · 소탕 · 훈련은 성소 메뉴와 같은 조건으로 열립니다");
             string today=DateTime.UtcNow.ToString("yyyy-MM-dd");int sweeps=a.sweepDay==today?a.sweepCount:0;
             Note(content,Loc.F("{0}   Lv.{1}   최고 실클리어 {2}단계\n오늘 소탕 {3}/3 회 사용   가방 빈칸 {4}칸", game.catalog.classNames[(int)h.heroClass], h.level, h.highestClear, sweeps, Economy.FreeSlots(h)),22,84,pale);
             Note(content,"입장은 최고 실클리어 다음 단계까지 허용합니다. 진행 중인 균열이 있으면 먼저 이어서 마쳐야 새 균열에 들어갑니다.",19,66,muted);

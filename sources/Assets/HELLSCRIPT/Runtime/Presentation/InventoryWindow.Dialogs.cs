@@ -11,7 +11,7 @@ namespace Hellscript
         void Modal(string kind,string title,float w,float h)
         {
             Dismiss();dialogKind=kind;
-            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="inventory-dialog-backdrop";shade.GetComponent<StorageSurface>().Paint("050805ce","050805ce");
+            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("050805ce","050805ce");
             dialog=Panel(overlays,"Inventory dialog "+kind,"302b1f","1b1e15","a68b59");Place(dialog,(width-w)/2,(height-h)/2,w,h);
             bool itemWindow=kind=="detail"||kind=="compare";
             Txt(dialog,title,14,0,w-(itemWindow?130:58),39,16,gold);Btn(dialog,"×",w-34,4,27,28,Dismiss,false,19).name="inventory-dialog-close";Rule(dialog,40,w);
@@ -31,7 +31,7 @@ namespace Hellscript
             var lockButton=Btn(dialog,item.locked?"잠금 해제":"잠금",w-96,fy+9,84,34,()=>
             {
                 if(store.SetInventoryLock(Guid.NewGuid().ToString("N"),id,!item.locked)){selected.Remove(id);Repaint();ShowDetail(id);}else Toast(store.Error);
-            },item.locked,11);lockButton.name="inventory-lock";
+            },item.locked,11);lockButton.name="inventory-lock";UiTheme.Choice(lockButton,item.locked,false);
             Btn(dialog,item.equipped?"장착 해제":"장착",12,fy+9,w-118,34,()=>{if(item.equipped)Unequip(id);else RequestEquip(id);},true,12).name="inventory-equip";
             if(!item.equipped)Btn(dialog,"장착 비교",12,fy+51,112,29,()=>ShowComparison(id),false,11).name="inventory-compare";
             Btn(dialog,"닫기",w-96,fy+51,84,29,Dismiss,false,11).name="inventory-detail-close";
@@ -126,7 +126,7 @@ namespace Hellscript
             {
                 if(store.DismantleInventory(plan)){selected.Clear();selecting=false;Dismiss();Repaint();Toast("선택한 아이템을 분해했습니다.");}
                 else ShowError(store.Error);
-            },true,12);confirm.name="salvage-confirm";confirm.interactable=items.Length>0;
+            },true,12);confirm.name="salvage-confirm";UiTheme.Button(confirm,destructive:true);confirm.interactable=items.Length>0;
         }
         void ClosePopover(){CloseRangeHelp();if(popover!=null){popover.gameObject.SetActive(false);Destroy(popover.gameObject);}popover=null;}
         public void Inspect(string id)

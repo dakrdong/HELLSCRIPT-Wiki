@@ -32,7 +32,7 @@ namespace Hellscript
             {if(!existing.TryGetComponent<CanvasGroup>(out var group))group=existing.gameObject.AddComponent<CanvasGroup>();commonBackgrounds.Add((group,group.alpha));}
             commonModal=Rect("Screen and help modal",transform);var canvas=commonModal.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=120;canvas.pixelPerfect=true;
             ApplyScaler(commonModal.gameObject.AddComponent<CanvasScaler>(),true);commonModal.gameObject.AddComponent<GraphicRaycaster>();ContentWindowHost.Attach(commonModal,CloseCommonPanel);
-            commonBackdrop=Button(commonModal,"",CloseCommonPanel,new Color(.025f,.035f,.049f,1));commonBackdrop.name="settings-backdrop";Stretch((RectTransform)commonBackdrop.transform);commonBackdrop.transition=Selectable.Transition.None;
+            commonBackdrop=Button(commonModal,"",CloseCommonPanel,new Color(.025f,.035f,.049f,1));commonBackdrop.name="settings-backdrop";UiTheme.Backdrop(commonBackdrop);Stretch((RectTransform)commonBackdrop.transform);commonBackdrop.transition=Selectable.Transition.None;
             commonSafe=Rect("Common safe area",commonModal);Stretch(commonSafe);
             commonWorld=Rect("Settings world area",commonSafe);commonWorld.anchorMin=Vector2.zero;commonWorld.anchorMax=new Vector2(.5f,1);commonWorld.offsetMin=commonWorld.offsetMax=Vector2.zero;
             var hint=Label(commonWorld,"배경을 누르면 닫힙니다.",17,pale,TextAnchor.MiddleCenter);hint.rectTransform.anchorMin=new Vector2(0,0);hint.rectTransform.anchorMax=new Vector2(1,0);hint.rectTransform.sizeDelta=new Vector2(-24,40);hint.rectTransform.anchoredPosition=new Vector2(0,28);
@@ -107,16 +107,16 @@ namespace Hellscript
         {
             if(SettingsPanes[(int)section]==null)section=SettingsSection.Screen;commonTab=section;commonSound=section==SettingsSection.Sound;
             for(int i=0;i<SettingsPanes.Length;i++)if(SettingsPanes[i]!=null)SettingsPanes[i].gameObject.SetActive(i==(int)section);
-            foreach(var b in commonTabs.GetComponentsInChildren<Button>())b.GetComponent<Image>().color=b.name=="settings-tab-"+section?gold*.4f:panel;
+            foreach(var b in commonTabs.GetComponentsInChildren<Button>())UiTheme.Choice(b,b.name=="settings-tab-"+section);
             commonHeading.text=Loc.T(section==SettingsSection.Help?"게임 안내":section==SettingsSection.Combat?"전투 상태":"설정");commonScreenSize=Vector2.zero;RefreshScreenSettings();ReflowCommonPanel();if(commonSound)RefreshAudioSettings();
         }
         void RefreshScreenSettings()
         {
             if(commonModal==null)return;
-            foreach(var choice in aspectButtons)choice.button.GetComponent<Image>().color=choice.id==game.Aspect?gold*.4f:new Color(.14f,.17f,.2f);
+            foreach(var choice in aspectButtons)UiTheme.Choice(choice.button,choice.id==game.Aspect,false);
             aspectMessage.text=Loc.T(string.IsNullOrEmpty(game.AspectMessage)?Loc.F("현재 비율 · {0}",game.Aspect=="auto"?Loc.T("화면에 맞춤"):game.Aspect):game.AspectMessage);
             RefreshOverlayMapControl();RefreshViewDistanceControl();var scale=game.InterfaceScale;scaleSlider.SetValueWithoutNotify((scale.Percent-50)/5);scaleValue.text=scale.Percent+"%";scaleMessage.text=string.IsNullOrEmpty(scale.Message)?Loc.T(game.InterfaceScaleLoadNotice):scale.Message;scaleRetry.gameObject.SetActive(scale.CanRetrySave);
-            foreach(var choice in languageButtons)choice.button.GetComponent<Image>().color=choice.code==game.Language.Language?gold*.4f:new Color(.14f,.17f,.2f);
+            foreach(var choice in languageButtons)UiTheme.Choice(choice.button,choice.code==game.Language.Language,false);
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
         }
         void ReflowCommonPanel()

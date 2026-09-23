@@ -463,7 +463,7 @@ def build_resources(databases):
         ('todo-town','숲속 마을의 미술 품질·실기기 검증','타이틀, 원형 조이스틱, 건물 앞 NPC 6명, 주황·금빛 포탈, 수동 상호작용과 건물 가림 투명화를 구현했습니다. 미술 품질 개선과 모바일 실기기 검증이 남아 있습니다.'),
         ('todo-audio','전투·보상·환경 음향','타격·피격·회피·획득·보스 예고·결과의 정식 음원과 재생 규칙을 연결해야 합니다.'),
         ('todo-animation','정식 캐릭터·적 애니메이션','기존 코드 동작을 기준으로 준비·공격·회피·피격·사망의 정식 애니메이션을 제작해야 합니다.'),
-        ('todo-gems','보석 데이터·아이콘','선정한 단일 패치의 종류·등급·수치를 검증한 뒤 HELLSCRIPT의 8부위에 적용해야 합니다.')]:
+        ('todo-gems','보석 데이터·아이콘','해골을 제외한 보석 6종·6단계와 5개 소켓 부위를 사용합니다. 투명 PNG 시안 6개를 제작했으며 생성 모델 출처 확인과 게임 화면 적용은 남아 있습니다.')]:
         rows.append(record(ident,name,'제작 과제',summary,{'현재 공백':summary,'상태 해석':'기획에 필요한 제작 과제이며 완성 자산 수에 포함하지 않습니다.'},
                            DESIGN+'HELLSCRIPT_Gameplay_Completion_Checklist.md',status='제작 대기',related=['resource-guide','remaining-development-backlog']))
     barb='Assets/HELLSCRIPT/Art/Characters/Barbarian/'
@@ -600,7 +600,7 @@ PAGE_META={
  'gameplay-completion-checklist':('기획과 범위','게임 완성 체크리스트','성장·행동·전투·화면·온라인·기기 품질의 완료 기준을 모았습니다.'),
  'remaining-development-backlog':('기획과 범위','남은 개발 작업표','현재 이어서 만들 기능과 검증 기준, 소유자 선택이 필요한 항목입니다.'),
  'itemization-detail':('장비와 빌드','장비·빌드 상세안','접두·접미, 전설·6세트, 파밍·강화·분해·재설정의 상세 규칙입니다.'),
- 'gem-socket-detail':('장비와 빌드','보석·소켓 상세안','보석 7종과 6단계, 부위별 소켓 5개, 합성·장착·분리 비용과 드롭 규칙입니다.'),
+ 'gem-socket-detail':('장비와 빌드','보석·소켓 상세안','보석 6종과 6단계, 부위별 소켓 5개, 합성·장착·분리 비용과 드롭 규칙입니다.'),
  'item-quality-detail':('장비와 빌드','장비 품질 상세안','각성 품질, 상위 접사, 걸작 12단계와 기존 성장 곡선에 미치는 실제 크기입니다.'),
  'itemization-open-items':('장비와 빌드','장비 미결 항목 정리','카탈로그가 남긴 장비 미결 6건의 결론과 전설 후보군·확률 계산입니다.'),
  'build-integration-detail':('장비와 빌드','빌드 통합 검사 기준','같은 부위의 장비 충돌을 피하고 6개 빌드의 역할을 비교합니다.'),

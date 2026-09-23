@@ -127,9 +127,12 @@ namespace Hellscript
         {var r=Rect("Text row",parent);var le=r.gameObject.AddComponent<LayoutElement>();le.preferredHeight=height;le.minHeight=height;var label=Label(r,text,size,color??muted);Inset(label.rectTransform,4,4,0,0);return label;}
         Button Button(Transform parent,string text,Action action,Color? color=null)
         {
-            var r=Box(text,parent,color??UiTheme.Panel);var b=r.gameObject.AddComponent<Button>();
-            r.gameObject.AddComponent<UIRectBorder>();UiTheme.Button(b);
-            var colors=b.colors;colors.highlightedColor=new Color(1.15f,1.15f,1.15f);colors.pressedColor=new Color(.75f,.75f,.75f);b.colors=colors;
+            var r=Box(text,parent,color??UiTheme.Panel);var b=r.gameObject.AddComponent<UiButton>();
+            r.gameObject.AddComponent<UIRectBorder>();b.targetGraphic=r.GetComponent<Image>();
+            UiTheme.Button(b,color.HasValue&&(color.Value==UiTheme.Primary||color.Value==gold*.55f));
+            if(color.HasValue&&color.Value==gold*.4f)UiTheme.Choice(b,true,false);
+            if(color.HasValue&&color.Value==Color.clear)b.Configure(UiButtonRole.Item);
+
             var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
         }
         Button BigButton(Transform parent,string text,Action action,bool primary=false)
@@ -195,7 +198,7 @@ namespace Hellscript
             Note(content,"SANCTUARY  /  잿빛 성소",18,45,gold);
             var heroCard=Row(content,158);Icon(heroCard,18+(int)h.heroClass,15,15,125);
             var info=Label(heroCard,Loc.F("{0}   Lv.{1}\n최고 실클리어 {2}단계\n{3}", game.catalog.classNames[(int)h.heroClass], h.level, h.highestClear, h.build.name),25,pale);Place(info.rectTransform,160,10,470,135);
-            var classes=Row(content,96);for(int i=0;i<3;i++){int id=i;var b=Button(classes,game.catalog.classNames[i],()=>game.SelectHero(id),i==a.selectedHero?new Color(.35f,.25f,.14f):panel);Across(b,i,3,8,TouchHeight);b.interactable=a.suspendedRun==null;}
+            var classes=Row(content,96);for(int i=0;i<3;i++){int id=i;var b=Button(classes,game.catalog.classNames[i],()=>game.SelectHero(id),i==a.selectedHero?new Color(.35f,.25f,.14f):panel);UiTheme.Choice(b,i==a.selectedHero,false);Across(b,i,3,8,TouchHeight);b.interactable=a.suspendedRun==null;}
             AddTownGuide();
             Note(content,Loc.F("골드 {0:N0}    일반 재료 {1:N0}    가방 {2}/{3}", a.gold, a.materials, h.inventory.Count(x=>!x.equipped), h.capacity),21,50,pale);
             var stage=Row(content,100);var minus=Button(stage,"−",()=>{game.SelectedStage=Mathf.Max(1,game.SelectedStage-1);ShowTownMenu();});Place((RectTransform)minus.transform,12,10,TouchHeight,TouchHeight);

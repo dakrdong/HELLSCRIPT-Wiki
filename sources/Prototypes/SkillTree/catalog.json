@@ -1,0 +1,5122 @@
+{
+  "version": 4,
+  "status": "html_design_proposal",
+  "levelCap": 40,
+  "ultimatePrerequisite": {
+    "from": 30,
+    "to": 39
+  },
+  "phases": [
+    {
+      "from": 1,
+      "to": 9,
+      "name": {
+        "ko": "전투의 기초",
+        "en": "Foundations"
+      },
+      "note": {
+        "ko": "핵심 공격과 첫 연계",
+        "en": "Core attacks and first synergies"
+      }
+    },
+    {
+      "from": 10,
+      "to": 19,
+      "name": {
+        "ko": "생존과 운용",
+        "en": "Survival"
+      },
+      "note": {
+        "ko": "이동 · 방어 · 자원 관리",
+        "en": "Movement, defence and resource control"
+      }
+    },
+    {
+      "from": 20,
+      "to": 29,
+      "name": {
+        "ko": "전투 방식 확립",
+        "en": "Specialisation"
+      },
+      "note": {
+        "ko": "상태 부여 후 연계와 회수",
+        "en": "Apply conditions, then combine and recover"
+      }
+    },
+    {
+      "from": 30,
+      "to": 39,
+      "name": {
+        "ko": "빌드의 완성",
+        "en": "Mastery"
+      },
+      "note": {
+        "ko": "복합 연계와 강화 패시브",
+        "en": "Advanced combinations and supporting passives"
+      }
+    },
+    {
+      "from": 40,
+      "to": 40,
+      "name": {
+        "ko": "궁극의 선택",
+        "en": "Ascendancy"
+      },
+      "note": {
+        "ko": "궁극기 1개와 최종 패시브",
+        "en": "One equipped ultimate and its final passive"
+      }
+    }
+  ],
+  "ultimateUnlockLevel": 40,
+  "slots": {
+    "active": 4,
+    "passive": 3,
+    "ultimate": 1
+  },
+  "passiveSlotLevels": [
+    3,
+    6,
+    10
+  ],
+  "source": {
+    "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
+    "runtimeSha256": "d4367852e759b2e0d741db0e47b17bb81670637886720f36e9a9de14ac3dae26",
+    "design": "Docs/Design/ClassSkills/catalog.json",
+    "designSha256": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
+    "gameEnabled": false
+  },
+  "classes": [
+    {
+      "id": "Warrior",
+      "name": {
+        "ko": "전사",
+        "en": "Warrior"
+      },
+      "subtitle": {
+        "ko": "전장을 가르고, 끝까지 버틴다.",
+        "en": "Break their lines. Hold your ground."
+      },
+      "accent": "#d2ab70",
+      "emblem": "W",
+      "branches": [
+        {
+          "ko": "회전과 출혈",
+          "en": "Whirlwind & blood"
+        },
+        {
+          "ko": "돌파와 제압",
+          "en": "Impact & control"
+        },
+        {
+          "ko": "수호와 함성",
+          "en": "Guard & warcry"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "W01",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "회오리",
+            "en": "Whirlwind"
+          },
+          "description": {
+            "ko": "주변 적에게 0.25초마다 피해. 이동하며 유지합니다.",
+            "en": "Damages nearby enemies every 0.25 seconds. Can be held while moving."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W01.png",
+          "tags": [
+            "Whirlwind"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW25"
+          ],
+          "setIds": [
+            "REF_SW04",
+            "REF_SW06",
+            "SW"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 66,
+          "y": 64
+        },
+        {
+          "id": "W02",
+          "level": 3,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "도약 내려찍기",
+            "en": "Leap Slam"
+          },
+          "description": {
+            "ko": "유효한 위치로 도약해 착지 충격을 줍니다. 신규 능력 검증 경로에서는 실제 도약 거리 2m를 넘는 1m마다 직접 피해 가산 +15%를 얻으며 8m에서 +90%입니다. 거리 확보 선택 시 최대 2초 후퇴를 시도합니다.",
+            "en": "Leap to a valid landing and deal impact damage. In the new-ability validation path, each actual meter beyond 2m adds 15% direct damage, capped at +90% at 8m. The spacing policy may retreat for up to 2s first."
+          },
+          "sourceUnlock": 3,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W02.png",
+          "tags": [
+            "Leap"
+          ],
+          "equipmentIds": [
+            "LW02",
+            "LW04",
+            "LW11",
+            "LW12",
+            "LW13",
+            "LW14",
+            "LW15",
+            "LW16",
+            "LW37"
+          ],
+          "setIds": [
+            "REF_SW03",
+            "REF_SW06",
+            "REF_SW07",
+            "SW",
+            "SWB"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 336,
+          "y": 64
+        },
+        {
+          "id": "WP01",
+          "level": 3,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "군중 속으로",
+            "en": "Into the Crowd"
+          },
+          "description": {
+            "ko": "3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +15%를 적용합니다.",
+            "en": "Adds +15% damage while three or more living enemies stand within 3m."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP01.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW23",
+            "LW24",
+            "LW25",
+            "LW26",
+            "LW27"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 190,
+          "y": 64
+        },
+        {
+          "id": "W03",
+          "level": 6,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "분쇄 일격",
+            "en": "Crushing Blow"
+          },
+          "description": {
+            "ko": "전방의 적에게 강한 물리 피해를 줍니다.",
+            "en": "Deals heavy physical damage to enemies in front."
+          },
+          "sourceUnlock": 6,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W03.png",
+          "tags": [
+            "Crush"
+          ],
+          "equipmentIds": [
+            "LW03",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW28",
+            "LW39"
+          ],
+          "setIds": [
+            "REF_SW04",
+            "REF_SW05",
+            "REF_SW06",
+            "REF_SW07",
+            "REF_SW08",
+            "SWB"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 460,
+          "y": 64
+        },
+        {
+          "id": "WP03",
+          "level": 6,
+          "branch": 1,
+          "all": [
+            {
+              "id": "W02",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "착지 자세",
+            "en": "Landing Stance"
+          },
+          "description": {
+            "ko": "도약 착지 후 2초 동안 받는 피해가 15% 감소합니다.",
+            "en": "Reduces incoming damage by 15% for 2 seconds after a leap lands."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP03.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW02",
+            "LW04",
+            "LW11",
+            "LW12",
+            "LW13",
+            "LW14",
+            "LW15",
+            "LW16",
+            "LW37"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "도약 내려찍기의 착지 직후 방어 효과를 더합니다.",
+            "en": "Adds damage reduction after Leap Slam lands."
+          },
+          "phase": 0,
+          "row": 1,
+          "x": 336,
+          "y": 204
+        },
+        {
+          "id": "WP02",
+          "level": 8,
+          "branch": 0,
+          "all": [
+            {
+              "id": "W01",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "끝나지 않는 회전",
+            "en": "Endless Spin"
+          },
+          "description": {
+            "ko": "회오리를 2초 유지하면 비용 감소 +20%를 적용합니다. 중단하면 해제됩니다.",
+            "en": "Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it clears the bonus."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP02.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW25"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "회오리의 유지 비용을 줄이는 전용 강화입니다.",
+            "en": "Specifically reduces the sustained cost of Whirlwind."
+          },
+          "phase": 0,
+          "row": 1,
+          "x": 66,
+          "y": 204
+        },
+        {
+          "id": "W04",
+          "level": 10,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "지면 강타",
+            "en": "Ground Slam"
+          },
+          "description": {
+            "ko": "주변 적에게 피해와 1.5초 기절을 줍니다.",
+            "en": "Damages nearby enemies and stuns them for 1.5 seconds."
+          },
+          "sourceUnlock": 10,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W04.png",
+          "tags": [
+            "Slam"
+          ],
+          "equipmentIds": [
+            "LW23",
+            "LW24",
+            "LW25",
+            "LW26",
+            "LW27",
+            "LW17"
+          ],
+          "setIds": [
+            "REF_SW05",
+            "REF_SW08"
+          ],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 336,
+          "y": 434
+        },
+        {
+          "id": "WP04",
+          "level": 12,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "피의 회복",
+            "en": "Blood Recovery"
+          },
+          "description": {
+            "ko": "처치 시 최대 HP의 2%를 회복합니다. 한 번 발동한 뒤 1초 동안 기다립니다.",
+            "en": "Restores 2% of max HP on a kill, then waits 1 second before it can trigger again."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP04.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW03",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW25",
+            "LW28",
+            "LW39"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 66,
+          "y": 434
+        },
+        {
+          "id": "W05",
+          "level": 15,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "철벽",
+            "en": "Iron Wall"
+          },
+          "description": {
+            "ko": "최대 HP 30% 보호막을 4초 유지합니다.",
+            "en": "Holds a shield worth 30% of max HP for 4 seconds."
+          },
+          "sourceUnlock": 15,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W05.png",
+          "tags": [
+            "Shield"
+          ],
+          "equipmentIds": [
+            "LW29",
+            "LW30",
+            "LW32",
+            "LW31"
+          ],
+          "setIds": [
+            "REF_SW02"
+          ],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 606,
+          "y": 434
+        },
+        {
+          "id": "WP05",
+          "level": 16,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "단단한 의지",
+            "en": "Hardened Will"
+          },
+          "description": {
+            "ko": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
+            "en": "Adds +20%p to shield strength, stacking with the bonus from Willpower."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP05.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW29",
+            "LW30",
+            "LW32"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 730,
+          "y": 434
+        },
+        {
+          "id": "WP06",
+          "level": 18,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "처형자의 눈",
+            "en": "Executioner's Eye"
+          },
+          "description": {
+            "ko": "HP가 30% 이하인 적에게 가산 피해 +20%를 적용합니다.",
+            "en": "Adds +20% damage against enemies at or below 30% HP."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP06.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW03",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW23",
+            "LW24",
+            "LW25",
+            "LW26",
+            "LW27",
+            "LW28",
+            "LW39"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 460,
+          "y": 434
+        },
+        {
+          "id": "W06",
+          "level": 20,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "전투 함성",
+            "en": "Battle Shout"
+          },
+          "description": {
+            "ko": "자원 40 회복, 6초간 피해 +20%.",
+            "en": "Restores 40 resource and adds +20% damage for 6 seconds."
+          },
+          "sourceUnlock": 20,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W06.png",
+          "tags": [
+            "Shout"
+          ],
+          "equipmentIds": [
+            "LW21",
+            "LW34",
+            "LW35",
+            "LW36",
+            "LW37",
+            "LW06",
+            "LW28"
+          ],
+          "setIds": [
+            "REF_SW07",
+            "REF_SW08"
+          ],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 606,
+          "y": 664
+        },
+        {
+          "id": "W07",
+          "level": 22,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "도발의 낙인",
+            "en": "Brand of Challenge"
+          },
+          "description": {
+            "ko": "8m 안의 적 하나에게 6초간 전사 표식을 남기고 자원 10을 회복합니다. 그 적에게 받는 피해가 10% 감소합니다. 표식은 피해 증가를 따로 주지 않으며 전사의 Marked 조건을 충족합니다. 동시에 하나만 유지합니다.",
+            "en": "Brand one enemy within 8m for 6s and restore 10 resource. Take 10% less damage from that enemy. The brand supplies Marked without a separate damage bonus. Only one Warrior brand may exist."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W07.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW41",
+            "LW22"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 730,
+          "y": 664
+        },
+        {
+          "id": "W08",
+          "level": 22,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "꿰뚫는 갈고리",
+            "en": "Impaling Hook"
+          },
+          "description": {
+            "ko": "6m 안의 적 하나에게 D65% 물리 피해를 주고 최대 2m 끌어옵니다. 직접 적중하면 자원 10을 회복합니다. 보스에게는 이동 대신 제압 수치를 줍니다.",
+            "en": "Deal D65% physical damage to one enemy within 6m and pull it up to 2m. Restore 10 resource on a direct hit. Bosses receive stagger credit instead of movement."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W08.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 336,
+          "y": 664
+        },
+        {
+          "id": "WP07",
+          "level": 23,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "낙인 추격",
+            "en": "Brand Pursuit"
+          },
+          "description": {
+            "ko": "표식 대상에게 일반 액티브가 처음 직접 적중하면 자원 2를 회복합니다. 시전당 1회, 1초 간격입니다.",
+            "en": "The first direct normal-active hit against a marked target restores 2 resource. Once per cast, with a 1s interval."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP07.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW03",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW28",
+            "LW39",
+            "DES_LW41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 1,
+          "x": 606,
+          "y": 804
+        },
+        {
+          "id": "WP10",
+          "level": 24,
+          "branch": 2,
+          "all": [
+            {
+              "id": "W06",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "함성의 여운",
+            "en": "Lingering Shout"
+          },
+          "description": {
+            "ko": "전투 함성 시전 후 3초간 매초 최대 HP의 1%를 회복합니다. 같은 효과는 중첩하지 않으며 재발동 간격은 6초입니다.",
+            "en": "After casting Battle Shout, heal 1% maximum HP each second for 3s. Refresh without stacking; 6s interval."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP10.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW21",
+            "LW34",
+            "LW35",
+            "LW36",
+            "LW37"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "전투 함성 시전 후 회복 효과를 더합니다.",
+            "en": "Adds recovery after casting Battle Shout."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 730,
+          "y": 804
+        },
+        {
+          "id": "W09",
+          "level": 26,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "찢어낸 상처",
+            "en": "Raking Wound"
+          },
+          "description": {
+            "ko": "전방 3m·90도 안의 최대 5명에게 D50% 물리 피해와 4초간 총 D120% 출혈을 줍니다. 자신의 W09 출혈만 강한 잔여량으로 갱신합니다.",
+            "en": "Hit up to 5 enemies in a 3m, 90-degree cone for D50% physical damage and D120% bleed over 4s. Refresh only the W09 ledger, keeping the greater remaining total."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W09.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW42"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 66,
+          "y": 664
+        },
+        {
+          "id": "WP08",
+          "level": 27,
+          "branch": 0,
+          "all": [
+            {
+              "id": "W09",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "상처 추적",
+            "en": "Wound Tracking"
+          },
+          "description": {
+            "ko": "자신의 W09 또는 붉은 상흔 세트 출혈이 남은 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 다른 물리 지속 피해를 임의로 출혈로 간주하지 않습니다.",
+            "en": "Gain +10% additive normal-active direct damage against enemies with your W09 or Red Scars set bleed. Other physical damage over time is not automatically classified as bleed."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP08.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW03",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW23",
+            "LW24",
+            "LW25",
+            "LW26",
+            "LW27",
+            "LW28",
+            "LW39",
+            "DES_LW42"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "찢어낸 상처의 출혈에 직접 반응합니다. 장비로 생기는 추가 출혈은 별도 효과이며, 트리는 기본 스킬 관계를 표시합니다.",
+            "en": "Directly reads Raking Wound bleeding. Additional equipment bleeding is separate; the tree shows the base skill relationship."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 66,
+          "y": 804
+        },
+        {
+          "id": "W11",
+          "level": 30,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "결연한 전진",
+            "en": "Resolute Advance"
+          },
+          "description": {
+            "ko": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
+            "en": "Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W11.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW43"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 336,
+          "y": 1034
+        },
+        {
+          "id": "WP11",
+          "level": 27,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "W02",
+              "rank": 1
+            },
+            {
+              "id": "W11",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "바위 같은 착지",
+            "en": "Stone Landing"
+          },
+          "description": {
+            "ko": "도약 내려찍기 또는 결연한 전진을 마치면 최대 HP 5% 보호막을 3초간 얻습니다. 두 기술은 3초 재발동 간격을 공유합니다.",
+            "en": "After completing Leap or Resolute Advance, gain a 5% maximum-HP barrier for 3s. Both skills share a 3s interval."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP11.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW02",
+            "LW04",
+            "LW11",
+            "LW12",
+            "LW13",
+            "LW14",
+            "LW15",
+            "LW16",
+            "LW37",
+            "DES_LW43"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "도약 내려찍기 또는 결연한 전진의 착지에 보호막을 더합니다. 직접 발동시키는 두 스킬 중 하나가 필요합니다.",
+            "en": "Adds a barrier on landing Leap Slam or Resolute Advance. Unlock either direct trigger."
+          },
+          "phase": 2,
+          "row": 0,
+          "x": 460,
+          "y": 664
+        },
+        {
+          "id": "W10",
+          "level": 28,
+          "branch": 0,
+          "all": [
+            {
+              "id": "W09",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "피의 회수",
+            "en": "Blood Reclamation"
+          },
+          "description": {
+            "ko": "4m 안의 최대 5명에게 D80% 물리 피해를 주고 자신의 W09 잔여 출혈만 100% 즉시 정산합니다. 정산 대상마다 최대 HP 1%, 시전당 최대 5%를 회복합니다. 세트·장비의 지속 피해는 소비하지 않습니다.",
+            "en": "Deal D80% physical damage to up to 5 enemies within 4m and cash out 100% of only your W09 remaining bleed. Heal 1% maximum HP per cashed-out enemy, up to 5% per cast. Never consume set or item ledgers."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W10.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW42"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "찢어낸 상처가 남긴 출혈을 직접 정산하므로 해당 스킬의 활성화가 필요합니다.",
+            "en": "Consumes the remaining bleed from Raking Wound, so that skill must be unlocked."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 190,
+          "y": 804
+        },
+        {
+          "id": "WP12",
+          "level": 28,
+          "branch": 1,
+          "all": [
+            {
+              "id": "W03",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "전투 준비",
+            "en": "Combat Preparation"
+          },
+          "description": {
+            "ko": "같은 적에게 기본 공격 3회 적중 후 다음 분쇄 일격의 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+            "en": "Three basic hits on one enemy prepare +15 percentage points of cost reduction for the next Crush within 4s. One charge; counting pauses for 3s after triggering."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP12.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW03",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW28",
+            "LW39"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "기본 공격으로 준비한 효과가 분쇄 일격의 비용을 줄입니다.",
+            "en": "Basic attacks prepare a cost reduction specifically for Crushing Blow."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 336,
+          "y": 804
+        },
+        {
+          "id": "W12",
+          "level": 30,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "무쇠 자세",
+            "en": "Iron Stance"
+          },
+          "description": {
+            "ko": "4초간 방어 확률 +15%p를 얻습니다. 이 자세 중 방어에 성공하면 전방 3m에 D80% 반격을 가하며 시전당 최대 2회, 1초 간격으로 발동합니다. 반격은 추가 피해입니다.",
+            "en": "Gain +15 percentage points of block chance for 4s. A successful block produces a D80% counter in a 3m front arc, at most twice per stance with a 1s interval. Counters are secondary damage."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W12.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW43"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 606,
+          "y": 1034
+        },
+        {
+          "id": "WP09",
+          "level": 31,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "반격의 호흡",
+            "en": "Counter Rhythm"
+          },
+          "description": {
+            "ko": "적의 공격을 방어하고 생존하면 자원 4를 회복합니다. 1초 간격이며 반격 자체로는 발동하지 않습니다.",
+            "en": "Restore 4 resource after surviving a successful block. A 1s interval applies; counter damage cannot trigger it."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP09.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW29",
+            "LW30",
+            "LW32",
+            "DES_LW43"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "일반적인 방어 성공에 발동합니다. 무쇠 자세를 사용해야만 발동하는 효과가 아닙니다.",
+            "en": "Triggers on a successful block; using Iron Stance is not necessary."
+          },
+          "phase": 3,
+          "row": 0,
+          "x": 730,
+          "y": 1034
+        },
+        {
+          "id": "WP13",
+          "level": 32,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "거친 호흡",
+            "en": "Ragged Breathing"
+          },
+          "description": {
+            "ko": "HP가 50% 이하인 동안 초당 자원 회복이 20% 증가합니다. 적중·함성의 즉시 회복에는 곱하지 않습니다.",
+            "en": "Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply instant on-hit or shout restoration."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP13.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW25",
+            "DES_LW45"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 1,
+          "x": 606,
+          "y": 1174
+        },
+        {
+          "id": "WP15",
+          "level": 32,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "무기 연계",
+            "en": "Weapon Sequence"
+          },
+          "description": {
+            "ko": "직전 4초 안에 시전한 것과 다른 일반 공격 스킬을 시전하면 그 시전의 직접 피해가 가산 10% 증가합니다. 기본 공격·궁극기·추가 피해는 기록을 바꾸지 않습니다.",
+            "en": "Casting a different normal offensive skill from the one used within the previous 4s grants that cast +10% additive direct damage. BASIC, ultimates and secondary damage do not update the record."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP15.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW02",
+            "LW03",
+            "LW04",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW11",
+            "LW12",
+            "LW13",
+            "LW14",
+            "LW15",
+            "LW16",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW25",
+            "LW28",
+            "LW37",
+            "LW39",
+            "DES_LW41",
+            "DES_LW44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 460,
+          "y": 1034
+        },
+        {
+          "id": "W13",
+          "level": 34,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "전장의 고리",
+            "en": "Battlefield Ring"
+          },
+          "description": {
+            "ko": "4m 안의 최대 5명에게 D70% 물리 피해를 주고 최대 1.5m 끌어옵니다. 벽·몸체를 통과하지 않습니다. 보스는 이동하지 않고 제압 수치만 얻습니다.",
+            "en": "Deal D70% physical damage to up to 5 enemies within 4m and pull them up to 1.5m without crossing walls or bodies. Bosses receive stagger credit without moving."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W13.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 1,
+          "x": 336,
+          "y": 1174
+        },
+        {
+          "id": "W14",
+          "level": 34,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "전율의 파동",
+            "en": "Tremor Wave"
+          },
+          "description": {
+            "ko": "길이 7m·폭 1m의 파동으로 최대 5명에게 D150% 물리 피해를 주고 3초간 30% 둔화시킵니다. 이동 거리와 공격 범위는 별개입니다.",
+            "en": "Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage and a 30% slow for 3s. Attack reach does not grant movement."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W14.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW44",
+            "LW17",
+            "LW24"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 1,
+          "x": 460,
+          "y": 1174
+        },
+        {
+          "id": "WP14",
+          "level": 35,
+          "branch": 1,
+          "all": [
+            {
+              "id": "W04",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "전장의 압력",
+            "en": "Battlefield Pressure"
+          },
+          "description": {
+            "ko": "제어 상태인 적에게 일반 액티브가 처음 직접 적중하면 장착한 지면 강타의 남은 쿨타임을 0.5초 줄입니다. 2초 간격이며 0 아래로 줄이지 않습니다.",
+            "en": "The first direct normal-active hit on a controlled enemy reduces equipped Slam's remaining cooldown by 0.5s. A 2s interval applies; never reduce below zero."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP14.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW23",
+            "LW24",
+            "LW25",
+            "LW26",
+            "LW27",
+            "DES_LW44"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "지면 강타의 쿨타임을 직접 줄입니다. 제어 상태를 만드는 다른 스킬은 선행 조건으로 강제하지 않습니다.",
+            "en": "Directly reduces Ground Slam cooldown. No particular source of crowd control is required to unlock it."
+          },
+          "phase": 3,
+          "row": 2,
+          "x": 336,
+          "y": 1314
+        },
+        {
+          "id": "WP16",
+          "level": 36,
+          "branch": 0,
+          "all": [
+            {
+              "id": "W01",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "전열 유지",
+            "en": "Hold Formation"
+          },
+          "description": {
+            "ko": "보호막이 남아 있는 동안 회오리를 유지하면 받는 피해가 8% 감소합니다. 회오리 중단 또는 보호막 소진 시 즉시 해제합니다.",
+            "en": "Take 8% less damage while channeling Whirlwind with an active barrier. End immediately when channeling or the barrier ends."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP16.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW01",
+            "LW05",
+            "LW06",
+            "LW07",
+            "LW08",
+            "LW09",
+            "LW10",
+            "LW25",
+            "LW29",
+            "LW30",
+            "LW32",
+            "DES_LW45"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "회오리를 유지하는 동안 적용됩니다. 보호막은 스킬이나 장비 등으로 마련할 수 있어 철벽을 요구하지 않습니다.",
+            "en": "Applies while sustaining Whirlwind. The barrier can come from a skill or equipment, so Iron Wall is not required."
+          },
+          "phase": 3,
+          "row": 0,
+          "x": 66,
+          "y": 1034
+        },
+        {
+          "id": "W15",
+          "level": 38,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "결전의 호흡",
+            "en": "Breath Before Battle"
+          },
+          "description": {
+            "ko": "4초간 1초마다 자원 8을 회복합니다. 회복은 최대 자원을 넘지 않습니다. 공격이나 이동을 막지 않으며 함성으로 분류하지 않습니다.",
+            "en": "Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout."
+          },
+          "sourceUnlock": 38,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W15.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW45",
+            "LW06"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 1,
+          "x": 730,
+          "y": 1174
+        },
+        {
+          "id": "W16",
+          "level": 38,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "수호의 맹약",
+            "en": "Guardian's Vow"
+          },
+          "description": {
+            "ko": "최대 HP 12% 보호막을 5초간 얻고 현재 걸린 둔화·속박을 제거합니다. 이후 2초간 둔화·속박에 면역입니다. 철벽 시전으로 처리하지 않습니다.",
+            "en": "Gain a 12% maximum-HP barrier for 5s and remove current slow and root effects. Become immune to slow and root for 2s. This does not cast Iron Wall."
+          },
+          "sourceUnlock": 38,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W16.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LW45",
+            "LW31",
+            "LW32"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 2,
+          "x": 606,
+          "y": 1314
+        },
+        {
+          "id": "WP17",
+          "level": 39,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "W03",
+              "rank": 1
+            },
+            {
+              "id": "W04",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "결전의 비축",
+            "en": "Battle Reserve"
+          },
+          "description": {
+            "ko": "시전 전 자원이 80% 이상이면 분쇄 일격·지면 강타의 직접 피해가 가산 10% 증가합니다. 자원은 비용 차감 전에 확인합니다.",
+            "en": "Crush and Slam gain +10% additive direct damage when pre-cast resource is at least 80%. Check before paying the cost."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP17.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LW03",
+            "LW13",
+            "LW17",
+            "LW18",
+            "LW19",
+            "LW20",
+            "LW21",
+            "LW22",
+            "LW23",
+            "LW24",
+            "LW25",
+            "LW26",
+            "LW27",
+            "LW28",
+            "LW39",
+            "DES_LW45"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "분쇄 일격과 지면 강타의 피해를 강화합니다. 강화 대상 중 하나를 먼저 활성화합니다.",
+            "en": "Improves Crushing Blow and Ground Slam. Unlock one of these targets first."
+          },
+          "phase": 3,
+          "row": 2,
+          "x": 460,
+          "y": 1314
+        },
+        {
+          "id": "W17",
+          "level": 40,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "ultimate",
+          "maxRank": 1,
+          "name": {
+            "ko": "선조의 전쟁",
+            "en": "War of the Ancestors"
+          },
+          "description": {
+            "ko": "8초간 선조 2명을 불러냅니다. 각 선조는 1초마다 주위 6m 안의 적 하나에게 D65% 물리 추가 피해를 주며 총 8회씩 공격합니다. 그동안 자신이 받는 피해가 15% 감소합니다. 선조는 별도 몸체나 도발 판정을 갖지 않습니다.",
+            "en": "Call 2 ancestors for 8s. Each attacks one enemy within 6m each second for D65% secondary physical damage, up to 8 attacks each. Take 15% less damage while active. Ancestors have no blocking body or taunt."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W17.png",
+          "tags": [
+            "Physical",
+            "Ultimate"
+          ],
+          "equipmentIds": [
+            "DES_LW46"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 4,
+          "row": 0,
+          "x": 606,
+          "y": 1544
+        },
+        {
+          "id": "W18",
+          "level": 40,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "ultimate",
+          "maxRank": 1,
+          "name": {
+            "ko": "거인의 심판",
+            "en": "Titan's Judgment"
+          },
+          "description": {
+            "ko": "0.9초 준비 후 4m 안의 최대 8명에게 D600% 물리 피해와 2초 기절을 줍니다. 이후 6초간 분쇄 일격·지면 강타의 직접 피해가 가산 25% 증가합니다. 보스 기절은 제압 수치로 바꿉니다.",
+            "en": "After a 0.9s wind-up, deal D600% physical damage and a 2s stun to up to 8 enemies within 4m. For 6s, Crush and Slam gain +25% additive direct damage. Boss stun becomes stagger credit."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W18.png",
+          "tags": [
+            "Physical",
+            "Ultimate"
+          ],
+          "equipmentIds": [
+            "DES_LW46"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 4,
+          "row": 0,
+          "x": 336,
+          "y": 1544
+        },
+        {
+          "id": "WP18",
+          "level": 40,
+          "branch": 2,
+          "all": [
+            {
+              "id": "W17",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "선조의 유산",
+            "en": "Ancestral Legacy"
+          },
+          "description": {
+            "ko": "선조의 전쟁 중 실제 선조 적중이 있으면 초당 자원 1, 시전 전체 최대 8을 회복합니다.",
+            "en": "During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8 per cast."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP18.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LW46"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "선조의 전쟁 전용 패시브입니다. 선조의 실제 적중으로 자원을 회복합니다.",
+            "en": "Dedicated to War of the Ancestors; actual ancestor hits restore resources."
+          },
+          "phase": 4,
+          "row": 1,
+          "x": 606,
+          "y": 1684
+        },
+        {
+          "id": "WP19",
+          "level": 40,
+          "branch": 1,
+          "all": [
+            {
+              "id": "W18",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "거인의 보루",
+            "en": "Titan's Bulwark"
+          },
+          "description": {
+            "ko": "거인의 심판으로 직접 맞힌 적마다 최대 HP 3%, 최대 15% 보호막을 4초간 얻습니다.",
+            "en": "Each enemy directly hit by Titan's Judgment grants a 4s barrier of 3% maximum HP, capped at 15%."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP19.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LW46"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "거인의 심판 전용 패시브입니다. 직접 맞힌 적 수에 따라 보호막을 얻습니다.",
+            "en": "Dedicated to Titan's Judgment; direct targets grant a barrier."
+          },
+          "phase": 4,
+          "row": 1,
+          "x": 336,
+          "y": 1684
+        }
+      ],
+      "examples": [
+        {
+          "name": {
+            "ko": "출혈 회수",
+            "en": "Blood recovery"
+          },
+          "level": 30,
+          "targets": [
+            "W09",
+            "W10",
+            "WP08",
+            "WP04"
+          ],
+          "equip": [
+            "W01",
+            "W02",
+            "W09",
+            "W10",
+            "WP01",
+            "WP04",
+            "WP08"
+          ]
+        },
+        {
+          "name": {
+            "ko": "거인의 제압",
+            "en": "Titan control"
+          },
+          "level": 40,
+          "targets": [
+            "W18",
+            "WP14",
+            "WP17",
+            "WP18"
+          ],
+          "equip": [
+            "W03",
+            "W04",
+            "W14",
+            "W15",
+            "W18",
+            "WP14",
+            "WP17",
+            "WP18"
+          ]
+        }
+      ],
+      "bands": [
+        {
+          "from": 1,
+          "to": 9,
+          "name": {
+            "ko": "전투의 기초",
+            "en": "Foundations"
+          },
+          "note": {
+            "ko": "핵심 공격과 첫 연계",
+            "en": "Core attacks and first synergies"
+          },
+          "top": 0,
+          "height": 370
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "name": {
+            "ko": "생존과 운용",
+            "en": "Survival"
+          },
+          "note": {
+            "ko": "이동 · 방어 · 자원 관리",
+            "en": "Movement, defence and resource control"
+          },
+          "top": 370,
+          "height": 230
+        },
+        {
+          "from": 20,
+          "to": 29,
+          "name": {
+            "ko": "전투 방식 확립",
+            "en": "Specialisation"
+          },
+          "note": {
+            "ko": "상태 부여 후 연계와 회수",
+            "en": "Apply conditions, then combine and recover"
+          },
+          "top": 600,
+          "height": 370
+        },
+        {
+          "from": 30,
+          "to": 39,
+          "name": {
+            "ko": "빌드의 완성",
+            "en": "Mastery"
+          },
+          "note": {
+            "ko": "복합 연계와 강화 패시브",
+            "en": "Advanced combinations and supporting passives"
+          },
+          "top": 970,
+          "height": 510
+        },
+        {
+          "from": 40,
+          "to": 40,
+          "name": {
+            "ko": "궁극의 선택",
+            "en": "Ascendancy"
+          },
+          "note": {
+            "ko": "궁극기 1개와 최종 패시브",
+            "en": "One equipped ultimate and its final passive"
+          },
+          "top": 1480,
+          "height": 370
+        }
+      ],
+      "height": 1858,
+      "width": 878
+    },
+    {
+      "id": "Ranger",
+      "name": {
+        "ko": "궁수",
+        "en": "Ranger"
+      },
+      "subtitle": {
+        "ko": "거리를 지배하고, 빈틈을 꿰뚫는다.",
+        "en": "Own the distance. Find the opening."
+      },
+      "accent": "#a5bd82",
+      "emblem": "R",
+      "branches": [
+        {
+          "ko": "정밀 사격",
+          "en": "Precision"
+        },
+        {
+          "ko": "덫과 맹독",
+          "en": "Traps & venom"
+        },
+        {
+          "ko": "기동과 그림자",
+          "en": "Mobility & shadow"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "A01",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "관통 사격",
+            "en": "Piercing Shot"
+          },
+          "description": {
+            "ko": "일직선으로 최대 5명을 관통합니다.",
+            "en": "Pierces up to 5 enemies in a straight line."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A01.png",
+          "tags": [
+            "Pierce"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA17",
+            "LA30",
+            "LA38"
+          ],
+          "setIds": [
+            "REF_SA03",
+            "REF_SA04",
+            "REF_SA05",
+            "REF_SA07",
+            "REF_SA08",
+            "SA",
+            "SAB"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 66,
+          "y": 64
+        },
+        {
+          "id": "A02",
+          "level": 3,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "다중 사격",
+            "en": "Multishot"
+          },
+          "description": {
+            "ko": "60도 부채꼴로 화살 3발을 발사합니다.",
+            "en": "Fires 3 arrows in a 60 degree arc."
+          },
+          "sourceUnlock": 3,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A02.png",
+          "tags": [
+            "Multi"
+          ],
+          "equipmentIds": [
+            "LA02",
+            "LA11",
+            "LA12",
+            "LA13",
+            "LA14",
+            "LA15",
+            "LA16",
+            "LA27"
+          ],
+          "setIds": [
+            "REF_SA03",
+            "REF_SA04",
+            "REF_SA05",
+            "REF_SA07",
+            "REF_SA08"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 190,
+          "y": 64
+        },
+        {
+          "id": "AP01",
+          "level": 3,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "긴 사거리",
+            "en": "Long Reach"
+          },
+          "description": {
+            "ko": "적중할 때 대상과 7m 이상 떨어져 있으면 가산 피해 +15%를 적용합니다.",
+            "en": "Adds +15% damage when the target is 7m or further away on hit."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP01.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA17",
+            "LA30",
+            "LA38"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 0,
+          "row": 1,
+          "x": 66,
+          "y": 204
+        },
+        {
+          "id": "A03",
+          "level": 6,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "맹독 덫",
+            "en": "Venom Trap"
+          },
+          "description": {
+            "ko": "5초 독 장판을 설치합니다. 최대 2개.",
+            "en": "Places a poison zone for 5 seconds. Up to 2 at once."
+          },
+          "sourceUnlock": 6,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A03.png",
+          "tags": [
+            "Trap"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA26",
+            "LA14",
+            "LA35",
+            "LA39"
+          ],
+          "setIds": [
+            "REF_SA06",
+            "SA"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 336,
+          "y": 64
+        },
+        {
+          "id": "AP03",
+          "level": 6,
+          "branch": 0,
+          "all": [
+            {
+              "id": "A01",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "꿰뚫는 시선",
+            "en": "Piercing Gaze"
+          },
+          "description": {
+            "ko": "관통 사격의 최대 대상이 5명에서 7명으로 늘어납니다.",
+            "en": "Piercing Shot hits up to 7 targets instead of 5."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP03.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA17",
+            "LA30",
+            "LA38"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "관통 사격의 최대 적중 대상 수를 늘립니다.",
+            "en": "Increases the target limit of Piercing Shot."
+          },
+          "phase": 0,
+          "row": 1,
+          "x": 190,
+          "y": 204
+        },
+        {
+          "id": "AP06",
+          "level": 8,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "마무리 사격",
+            "en": "Finishing Shot"
+          },
+          "description": {
+            "ko": "HP가 30% 이하인 적에게 치명 확률 +10%p를 적용합니다. 최종 상한은 75%입니다.",
+            "en": "Adds +10%p critical chance against enemies at or below 30% HP, capped at 75%."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP06.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA02",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA11",
+            "LA12",
+            "LA13",
+            "LA14",
+            "LA15",
+            "LA16",
+            "LA17",
+            "LA27",
+            "LA30",
+            "LA38"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 0,
+          "row": 2,
+          "x": 66,
+          "y": 344
+        },
+        {
+          "id": "AP08",
+          "level": 9,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "사냥감의 발자취",
+            "en": "Quarry Tracks"
+          },
+          "description": {
+            "ko": "관측한 중독 적이 10m 안에 있으면 이동속도가 10% 증가합니다. 시야 밖의 적 위치를 알아내는 기능은 제공하지 않습니다.",
+            "en": "Gain 10% movement speed while an observed poisoned enemy is within 10m. This does not reveal enemies outside observation."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP08.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA26",
+            "DES_LA44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 460,
+          "y": 64
+        },
+        {
+          "id": "A04",
+          "level": 10,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "후퇴 도약",
+            "en": "Retreat Leap"
+          },
+          "description": {
+            "ko": "적과 거리를 벌리는 위치로 도약합니다.",
+            "en": "Leaps to a spot that opens distance from enemies."
+          },
+          "sourceUnlock": 10,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A04.png",
+          "tags": [
+            "Retreat"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA10",
+            "LA23",
+            "LA24",
+            "LA25",
+            "LA26",
+            "LA27",
+            "LA28"
+          ],
+          "setIds": [
+            "REF_SA02",
+            "REF_SA06",
+            "REF_SA08",
+            "SAB"
+          ],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 606,
+          "y": 574
+        },
+        {
+          "id": "AP02",
+          "level": 11,
+          "branch": 2,
+          "all": [
+            {
+              "id": "A04",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "탈출의 발걸음",
+            "en": "Escaping Step"
+          },
+          "description": {
+            "ko": "후퇴 도약 착지 후 2초 동안 이동속도 증가에 +20%p를 더합니다.",
+            "en": "Adds +20%p movement speed for 2 seconds after Retreat Leap lands."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP02.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA10",
+            "LA23",
+            "LA24",
+            "LA25",
+            "LA26",
+            "LA27",
+            "LA28"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "후퇴 도약의 착지 후 이동속도를 강화합니다.",
+            "en": "Improves movement speed after Retreat Leap lands."
+          },
+          "phase": 1,
+          "row": 1,
+          "x": 606,
+          "y": 714
+        },
+        {
+          "id": "AP05",
+          "level": 12,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "절약된 집중",
+            "en": "Saved focus"
+          },
+          "description": {
+            "ko": "1초 보행 후 다음 유료 스킬의 비용이 25% 감소합니다. 사용 후 대기시간은 4초입니다.",
+            "en": "After walking for 1 second the next skill that costs resource is 25% cheaper. The effect then waits 4 seconds."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP05.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA02",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA11",
+            "LA12",
+            "LA13",
+            "LA14",
+            "LA15",
+            "LA16",
+            "LA17",
+            "LA27",
+            "LA30",
+            "LA38"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 730,
+          "y": 574
+        },
+        {
+          "id": "A05",
+          "level": 15,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "사냥꾼의 표식",
+            "en": "Hunter's Mark"
+          },
+          "description": {
+            "ko": "표식 대상에게 주는 피해 +25%.",
+            "en": "Adds +25% damage against the marked target."
+          },
+          "sourceUnlock": 15,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A05.png",
+          "tags": [
+            "Mark"
+          ],
+          "equipmentIds": [
+            "LA29",
+            "LA32",
+            "LA33",
+            "LA07",
+            "LA15",
+            "LA21",
+            "LA30",
+            "LA31"
+          ],
+          "setIds": [
+            "REF_SA03",
+            "REF_SA04"
+          ],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 66,
+          "y": 574
+        },
+        {
+          "id": "AP07",
+          "level": 16,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "표식의 빈틈",
+            "en": "Marked Opening"
+          },
+          "description": {
+            "ko": "표식 대상에 대한 일반 액티브의 직접 치명 확률이 5%p 증가합니다. 전체 75% 상한을 공유합니다.",
+            "en": "Gain +5 percentage points of normal-active direct critical chance against marked enemies, sharing the 75% global cap."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP07.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA17",
+            "LA29",
+            "LA30",
+            "LA32",
+            "LA33",
+            "LA38",
+            "DES_LA41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 190,
+          "y": 574
+        },
+        {
+          "id": "A06",
+          "level": 20,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "그림자 화살",
+            "en": "Shadow Arrow"
+          },
+          "description": {
+            "ko": "다음 사격 3회에 암흑 추가 피해.",
+            "en": "Adds dark damage to the next 3 shots."
+          },
+          "sourceUnlock": 20,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A06.png",
+          "tags": [
+            "Shadow"
+          ],
+          "equipmentIds": [
+            "LA04",
+            "LA34",
+            "LA35",
+            "LA36",
+            "LA37"
+          ],
+          "setIds": [
+            "REF_SA07"
+          ],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 606,
+          "y": 944
+        },
+        {
+          "id": "AP09",
+          "level": 21,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "다시 당기는 시위",
+            "en": "Drawing Again"
+          },
+          "description": {
+            "ko": "기본 공격 직접 적중 시 자원 2를 회복합니다. 0.5초 간격이며 분열·쇠뇌·그림자 추가 피해는 기본 공격으로 세지 않습니다.",
+            "en": "A direct basic hit restores 2 resource, with a 0.5s interval. Splits, ballista shots and shadow echoes are not basic attacks."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP09.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA02",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA11",
+            "LA12",
+            "LA13",
+            "LA14",
+            "LA15",
+            "LA16",
+            "LA17",
+            "LA27",
+            "LA30",
+            "LA38"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 66,
+          "y": 944
+        },
+        {
+          "id": "A07",
+          "level": 22,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "잇단 사격",
+            "en": "Successive Shots"
+          },
+          "description": {
+            "ko": "10m 안의 적 하나에게 0.15초 간격으로 D45% 화살 3발을 쏩니다. 한 번의 시전이며 기본 공격으로 세지 않습니다. 각 화살은 벽에 막힙니다.",
+            "en": "Fire 3 D45% physical arrows at one target within 10m, 0.15s apart. This is one cast, not three basic attacks. Each arrow collides with walls."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A07.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 190,
+          "y": 944
+        },
+        {
+          "id": "A08",
+          "level": 22,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "응시 사격",
+            "en": "Patient Shot"
+          },
+          "description": {
+            "ko": "0.9초 조준 후 12m 안의 적 하나에게 D240% 물리 피해를 줍니다. 적중 시 표식이 있으면 직접 피해가 가산 25% 증가합니다. 조준 중 이동하면 취소됩니다.",
+            "en": "Aim for 0.9s, then deal D240% physical damage to one enemy within 12m. Gain +25% additive direct damage if the target is marked at impact. Moving during aim cancels the cast."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A08.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 1,
+          "x": 66,
+          "y": 1084
+        },
+        {
+          "id": "AP10",
+          "level": 23,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "독의 순환",
+            "en": "Venom Cycle"
+          },
+          "description": {
+            "ko": "중독된 적을 직접 공격으로 처치하면 자원 6을 회복합니다. 2초 간격이며 독 틱·장비 추가 피해 처치는 제외합니다.",
+            "en": "A direct attack killing a poisoned enemy restores 6 resource, with a 2s interval. Poison ticks and item secondary kills are excluded."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP10.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA26",
+            "DES_LA44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 336,
+          "y": 944
+        },
+        {
+          "id": "AP13",
+          "level": 24,
+          "branch": 0,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "A01",
+              "rank": 1
+            },
+            {
+              "id": "A08",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "집중 조준",
+            "en": "Focused Aim"
+          },
+          "description": {
+            "ko": "시전 시작 전 0.8초 이상 제자리에 있었다면 관통 사격·응시 사격의 직접 피해가 가산 15% 증가합니다. 이동하면 대기 시간을 다시 셉니다.",
+            "en": "Pierce and Patient Shot gain +15% additive direct damage if stationary for at least 0.8s before cast start. Movement resets the timer."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP13.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA01",
+            "LA05",
+            "LA06",
+            "LA07",
+            "LA08",
+            "LA09",
+            "LA10",
+            "LA17",
+            "LA30",
+            "LA38",
+            "DES_LA41"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "관통 사격과 응시 사격의 피해를 강화합니다. 강화 대상 중 하나를 먼저 활성화합니다.",
+            "en": "Improves Piercing Shot and Patient Shot. Unlock one of these targets first."
+          },
+          "phase": 2,
+          "row": 2,
+          "x": 66,
+          "y": 1224
+        },
+        {
+          "id": "A09",
+          "level": 26,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "가시 덫",
+            "en": "Briar Trap"
+          },
+          "description": {
+            "ko": "6m 안에 덫을 설치합니다. 0.4초 후 무장하고 최대 6초 기다립니다. 적 진입 시 반경 2.5m의 최대 5명에게 D80% 물리 피해와 1.2초 속박을 주며 사라집니다. 최대 1개입니다.",
+            "en": "Place a trap within 6m. It arms after 0.4s and waits up to 6s. On enemy entry, hit up to 5 enemies in 2.5m for D80% physical damage and a 1.2s root, then remove it. Limit 1."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A09.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA42"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 460,
+          "y": 944
+        },
+        {
+          "id": "AP04",
+          "level": 27,
+          "branch": 1,
+          "all": [
+            {
+              "id": "A03",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "덫 사냥꾼",
+            "en": "Trap Hunter"
+          },
+          "description": {
+            "ko": "직접 설치한 덫과 후퇴 덫의 속박 시간이 25% 늘어납니다.",
+            "en": "Extends the root from placed traps and retreat traps by 25%."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP04.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA10",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA23",
+            "LA24",
+            "LA25",
+            "LA26",
+            "LA27",
+            "LA28"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "맹독 덫의 속박 시간을 늘립니다. 후퇴 덫은 장비가 만드는 추가 효과이며 가시 덫의 속박에는 적용되지 않습니다.",
+            "en": "Extends Venom Trap roots. Retreat traps require equipment; Briar Trap roots do not use this passive."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 336,
+          "y": 1084
+        },
+        {
+          "id": "A10",
+          "level": 28,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "서리 올가미",
+            "en": "Frost Snare"
+          },
+          "description": {
+            "ko": "6m 안에 최대 1개의 올가미를 설치합니다. 0.4초 후 무장해 6초 기다리며, 적 진입 시 반경 2.5m의 최대 5명에게 D60% 냉기 피해와 3초간 40% 둔화를 줍니다. 적중 당시 중독된 적은 0.75초 빙결됩니다.",
+            "en": "Place one snare within 6m; arm after 0.4s and wait up to 6s. On entry, hit up to 5 enemies in 2.5m for D60% cold damage and a 40% slow for 3s. Enemies poisoned at impact are frozen for 0.75s."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A10.png",
+          "tags": [
+            "Cold",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA42"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 1,
+          "x": 460,
+          "y": 1084
+        },
+        {
+          "id": "AP11",
+          "level": 27,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "A03",
+              "rank": 1
+            },
+            {
+              "id": "A09",
+              "rank": 1
+            },
+            {
+              "id": "A10",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "연금 숙련",
+            "en": "Alchemical Practice"
+          },
+          "description": {
+            "ko": "직접 설치한 맹독 덫·가시 덫·서리 올가미가 무장하면 3초간 받는 피해가 8% 감소합니다. 여러 덫은 같은 버프를 갱신합니다.",
+            "en": "When a directly placed Poison Trap, Briar Trap or Frost Snare arms, gain 8% damage reduction for 3s. Multiple traps refresh the same buff."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP11.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA26",
+            "DES_LA42"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "직접 설치한 세 종류의 덫이 준비되면 발동합니다. 해당 덫 중 하나가 필요합니다.",
+            "en": "Triggers when one of the three directly placed traps arms. Unlock one of these traps."
+          },
+          "phase": 2,
+          "row": 2,
+          "x": 336,
+          "y": 1224
+        },
+        {
+          "id": "AP12",
+          "level": 29,
+          "branch": 2,
+          "all": [
+            {
+              "id": "A04",
+              "rank": 1
+            }
+          ],
+          "oneOf": [
+            {
+              "id": "A03",
+              "rank": 1
+            },
+            {
+              "id": "A09",
+              "rank": 1
+            },
+            {
+              "id": "A10",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "준비된 도주",
+            "en": "Prepared Escape"
+          },
+          "description": {
+            "ko": "맹독 덫·가시 덫·서리 올가미를 직접 설치하면 장착한 후퇴 도약의 남은 쿨타임을 1초 줄입니다. 4초 간격입니다.",
+            "en": "Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat's remaining cooldown by 1s, with a 4s interval."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP12.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA10",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA23",
+            "LA24",
+            "LA25",
+            "LA26",
+            "LA27",
+            "LA28",
+            "DES_LA42"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "후퇴 도약과 덫 하나가 필요합니다. 덫을 설치하면 후퇴 도약의 남은 쿨타임을 줄입니다.",
+            "en": "Requires Retreat Leap and one trap. Placing the trap reduces Retreat Leap cooldown."
+          },
+          "phase": 2,
+          "row": 2,
+          "x": 606,
+          "y": 1224
+        },
+        {
+          "id": "AP15",
+          "level": 29,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "독과 서리",
+            "en": "Venom and Frost"
+          },
+          "description": {
+            "ko": "중독과 둔화가 동시에 걸린 적에게 일반 액티브 직접 피해가 가산 12% 증가합니다. 빙결만으로 둔화가 있다고 간주하지 않습니다.",
+            "en": "Gain +12% additive normal-active direct damage against enemies that are both poisoned and slowed. Freeze alone does not imply Slow."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP15.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA17",
+            "LA18",
+            "LA19",
+            "LA20",
+            "LA21",
+            "LA22",
+            "LA26",
+            "DES_LA42",
+            "DES_LA44"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "중독과 둔화를 만드는 방법을 특정 스킬로 제한하지 않습니다.",
+            "en": "The sources of poison and slow are not restricted to particular skills."
+          },
+          "phase": 2,
+          "row": 2,
+          "x": 460,
+          "y": 1224
+        },
+        {
+          "id": "A11",
+          "level": 30,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "미끼 투영",
+            "en": "Decoy Projection"
+          },
+          "description": {
+            "ko": "7m 안에 최대 HP 10%의 미끼 하나를 6초간 만듭니다. 일반 적은 최초 2.5초 동안 미끼를 우선 공격합니다. 미끼가 파괴되거나 만료하면 2.5m 안의 최대 5명에게 D80% 물리 추가 피해를 줍니다. 보스·정예를 강제로 도발하지 않습니다.",
+            "en": "Create one decoy within 7m with 10% of hero maximum HP for 6s. Normal enemies prefer it for the first 2.5s. Destruction or expiry causes D80% secondary physical damage to up to 5 enemies within 2.5m. It cannot force elite or boss aggro."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A11.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA43"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 606,
+          "y": 1454
+        },
+        {
+          "id": "AP14",
+          "level": 31,
+          "branch": 2,
+          "all": [
+            {
+              "id": "A11",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "유인 전술",
+            "en": "Decoy Tactics"
+          },
+          "description": {
+            "ko": "자신의 살아 있는 미끼 3m 안의 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 미끼의 폭발 피해에는 적용하지 않습니다.",
+            "en": "Gain +10% additive normal-active direct damage against enemies within 3m of your living decoy. Does not amplify the decoy's explosion."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP14.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LA43",
+            "DES_LA44"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "미끼 투영이 만든 살아 있는 미끼를 기준으로 피해가 증가합니다.",
+            "en": "The damage bonus depends on the living decoy created by Decoy Projection."
+          },
+          "phase": 3,
+          "row": 1,
+          "x": 606,
+          "y": 1594
+        },
+        {
+          "id": "A12",
+          "level": 32,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "연막 엄폐",
+            "en": "Smoke Cover"
+          },
+          "description": {
+            "ko": "3초간 받는 피해가 20% 감소하고 이동속도가 20% 증가합니다. 은신·무적·대상 지정 해제는 제공하지 않습니다. 후퇴 도약으로 처리하지 않습니다.",
+            "en": "Gain 20% damage reduction and 20% movement speed for 3s. This grants no invisibility, invulnerability or target break, and does not count as Retreat."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A12.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA43"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 730,
+          "y": 1454
+        },
+        {
+          "id": "A16",
+          "level": 38,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "사냥 준비",
+            "en": "Hunt Preparation"
+          },
+          "description": {
+            "ko": "자원 25를 회복하고 6초 안의 다음 유료 일반 액티브 한 번에 비용 감소 +20%p를 부여합니다. 무료 스킬·궁극기는 충전을 쓰지 않습니다.",
+            "en": "Restore 25 resource and grant +20 percentage points of cost reduction to the next paid normal active within 6s. Free skills and ultimates do not consume the charge."
+          },
+          "sourceUnlock": 38,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A16.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA45",
+            "LA16"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 1,
+          "x": 730,
+          "y": 1594
+        },
+        {
+          "id": "AP16",
+          "level": 33,
+          "branch": 2,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "A12",
+              "rank": 1
+            },
+            {
+              "id": "A16",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "빈틈 없는 재장전",
+            "en": "Seamless Reload"
+          },
+          "description": {
+            "ko": "연막 엄폐·사냥 준비를 사용하면 6초 안의 다음 유료 일반 액티브 비용 감소 +15%p를 준비합니다. 1충전이며 두 기술은 6초 재발동 간격을 공유합니다.",
+            "en": "Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction for the next paid normal active within 6s. One charge; both share a 6s interval."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP16.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LA43",
+            "DES_LA45"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "연막 엄폐 또는 사냥 준비가 다음 유료 스킬의 비용 감소를 준비합니다. 발동 스킬 중 하나가 필요합니다.",
+            "en": "Smoke Cover or Hunt Preparation prepares the next paid skill cost reduction. Unlock one trigger."
+          },
+          "phase": 3,
+          "row": 2,
+          "x": 606,
+          "y": 1734
+        },
+        {
+          "id": "A13",
+          "level": 34,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "독화살",
+            "en": "Venom Arrow"
+          },
+          "description": {
+            "ko": "10m 안의 적 하나에게 D80% 물리 직접 피해와 4초간 총 D100% 독 피해를 줍니다. 같은 기술의 독은 강한 잔여량만 유지합니다.",
+            "en": "Deal D80% direct physical damage and D100% poison damage over 4s to one enemy within 10m. Keep only the greater remaining total for this skill's poison ledger."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A13.png",
+          "tags": [
+            "Poison",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA44",
+            "LA14",
+            "LA18",
+            "LA35",
+            "LA39"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 336,
+          "y": 1454
+        },
+        {
+          "id": "A14",
+          "level": 34,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "갈라지는 화살",
+            "en": "Forking Arrow"
+          },
+          "description": {
+            "ko": "10m 안의 첫 적에게 D100% 물리 직접 피해를 줍니다. 적중 후 주변 3m의 서로 다른 적 2명에게 D50% 추가 화살을 보냅니다. 첫 대상 재방문과 재분열은 불가합니다.",
+            "en": "Deal D100% direct physical damage to a first target within 10m, then send D50% secondary arrows to 2 different enemies within 3m. No return to the first target or repeated splitting."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A14.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 66,
+          "y": 1454
+        },
+        {
+          "id": "A15",
+          "level": 38,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "경계 쇠뇌",
+            "en": "Watch Ballista"
+          },
+          "description": {
+            "ko": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
+            "en": "Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01."
+          },
+          "sourceUnlock": 38,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LA45"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 460,
+          "y": 1454
+        },
+        {
+          "id": "AP17",
+          "level": 39,
+          "branch": 1,
+          "all": [
+            {
+              "id": "A15",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "길잡이",
+            "en": "Pathfinder"
+          },
+          "description": {
+            "ko": "자신과 경계 쇠뇌 사이의 거리가 5m 이상이면 그 쇠뇌의 피해가 가산 10% 증가합니다. 각 쇠뇌 사격 생성 시 거리를 확인합니다.",
+            "en": "Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP17.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LA03",
+            "LA10",
+            "LA23",
+            "LA24",
+            "LA25",
+            "LA26",
+            "LA27",
+            "LA28",
+            "DES_LA45"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "설치한 경계 쇠뇌의 피해를 직접 강화합니다.",
+            "en": "Directly improves the damage of the deployed Watch Ballista."
+          },
+          "phase": 3,
+          "row": 1,
+          "x": 336,
+          "y": 1594
+        },
+        {
+          "id": "A17",
+          "level": 40,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "ultimate",
+          "maxRank": 1,
+          "name": {
+            "ko": "일제 소탕",
+            "en": "Killing Rain"
+          },
+          "description": {
+            "ko": "10m 안의 반경 4m에 0.5초 간격으로 6차례 화살을 내립니다. 매 회 최대 8명에게 D80% 물리 피해를 줍니다. 위치는 시전 시 고정되며 A02 시전이나 A06 충전 사격으로 처리하지 않습니다.",
+            "en": "Rain arrows at a fixed point within 10m, in a 4m radius. Six pulses 0.5s apart deal D80% physical damage to up to 8 enemies each. These are not A02 casts or A06 charged shots."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A17.png",
+          "tags": [
+            "Physical",
+            "Ultimate"
+          ],
+          "equipmentIds": [
+            "DES_LA46"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 4,
+          "row": 0,
+          "x": 66,
+          "y": 1964
+        },
+        {
+          "id": "A18",
+          "level": 40,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "ultimate",
+          "maxRank": 1,
+          "name": {
+            "ko": "그림자 추격",
+            "en": "Shadow Pursuit"
+          },
+          "description": {
+            "ko": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
+            "en": "Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png",
+          "tags": [
+            "Shadow",
+            "Ultimate"
+          ],
+          "equipmentIds": [
+            "DES_LA46"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 4,
+          "row": 0,
+          "x": 606,
+          "y": 1964
+        },
+        {
+          "id": "AP18",
+          "level": 40,
+          "branch": 0,
+          "all": [
+            {
+              "id": "A17",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "무음의 살수",
+            "en": "Silent Execution"
+          },
+          "description": {
+            "ko": "일제 소탕의 첫 파동이 표식 대상을 맞히면 그 대상에게 D100% 물리 추가 피해를 한 번 줍니다.",
+            "en": "If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP18.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LA46"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "일제 소탕 전용 패시브입니다. 첫 파동의 표식 대상에게 추가 피해를 줍니다.",
+            "en": "Dedicated to Killing Rain; the first wave deals extra damage to a marked target."
+          },
+          "phase": 4,
+          "row": 1,
+          "x": 66,
+          "y": 2104
+        },
+        {
+          "id": "AP19",
+          "level": 40,
+          "branch": 2,
+          "all": [
+            {
+              "id": "A18",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "끝없는 추격",
+            "en": "Relentless Pursuit"
+          },
+          "description": {
+            "ko": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
+            "en": "Shadow Pursuit lasts 2s longer and allows 2 additional total procs."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP19.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LA46"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "그림자 추격 전용 패시브입니다. 지속시간과 총 발동 횟수를 늘립니다.",
+            "en": "Dedicated to Shadow Pursuit; extends duration and total proc count."
+          },
+          "phase": 4,
+          "row": 1,
+          "x": 606,
+          "y": 2104
+        }
+      ],
+      "examples": [
+        {
+          "name": {
+            "ko": "독과 서리",
+            "en": "Venom & frost"
+          },
+          "level": 30,
+          "targets": [
+            "A10",
+            "AP15",
+            "AP11"
+          ],
+          "equip": [
+            "A01",
+            "A03",
+            "A04",
+            "A10",
+            "AP08",
+            "AP11",
+            "AP15"
+          ]
+        },
+        {
+          "name": {
+            "ko": "그림자 추격자",
+            "en": "Shadow pursuer"
+          },
+          "level": 40,
+          "targets": [
+            "A18",
+            "A16",
+            "AP18"
+          ],
+          "equip": [
+            "A01",
+            "A06",
+            "A12",
+            "A16",
+            "A18",
+            "AP01",
+            "AP16",
+            "AP18"
+          ]
+        }
+      ],
+      "bands": [
+        {
+          "from": 1,
+          "to": 9,
+          "name": {
+            "ko": "전투의 기초",
+            "en": "Foundations"
+          },
+          "note": {
+            "ko": "핵심 공격과 첫 연계",
+            "en": "Core attacks and first synergies"
+          },
+          "top": 0,
+          "height": 510
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "name": {
+            "ko": "생존과 운용",
+            "en": "Survival"
+          },
+          "note": {
+            "ko": "이동 · 방어 · 자원 관리",
+            "en": "Movement, defence and resource control"
+          },
+          "top": 510,
+          "height": 370
+        },
+        {
+          "from": 20,
+          "to": 29,
+          "name": {
+            "ko": "전투 방식 확립",
+            "en": "Specialisation"
+          },
+          "note": {
+            "ko": "상태 부여 후 연계와 회수",
+            "en": "Apply conditions, then combine and recover"
+          },
+          "top": 880,
+          "height": 510
+        },
+        {
+          "from": 30,
+          "to": 39,
+          "name": {
+            "ko": "빌드의 완성",
+            "en": "Mastery"
+          },
+          "note": {
+            "ko": "복합 연계와 강화 패시브",
+            "en": "Advanced combinations and supporting passives"
+          },
+          "top": 1390,
+          "height": 510
+        },
+        {
+          "from": 40,
+          "to": 40,
+          "name": {
+            "ko": "궁극의 선택",
+            "en": "Ascendancy"
+          },
+          "note": {
+            "ko": "궁극기 1개와 최종 패시브",
+            "en": "One equipped ultimate and its final passive"
+          },
+          "top": 1900,
+          "height": 370
+        }
+      ],
+      "height": 2278,
+      "width": 878
+    },
+    {
+      "id": "Mage",
+      "name": {
+        "ko": "마법사",
+        "en": "Mage"
+      },
+      "subtitle": {
+        "ko": "원소를 엮어, 전장의 흐름을 바꾼다.",
+        "en": "Weave the elements. Rewrite the battle."
+      },
+      "accent": "#a5a8df",
+      "emblem": "M",
+      "branches": [
+        {
+          "ko": "화염과 원소 순환",
+          "en": "Flame & convergence"
+        },
+        {
+          "ko": "냉기와 번개",
+          "en": "Frost & lightning"
+        },
+        {
+          "ko": "비전과 결계",
+          "en": "Arcane & wards"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "M01",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "화염구",
+            "en": "Fireball"
+          },
+          "description": {
+            "ko": "착탄 지점에 폭발 피해를 줍니다.",
+            "en": "Deals blast damage at the point of impact."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M01.png",
+          "tags": [
+            "Fireball"
+          ],
+          "equipmentIds": [
+            "LM02",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM26",
+            "LM39"
+          ],
+          "setIds": [
+            "REF_SM02",
+            "REF_SM04",
+            "REF_SM05",
+            "REF_SM08",
+            "SM"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 66,
+          "y": 64
+        },
+        {
+          "id": "M02",
+          "level": 3,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "눈보라",
+            "en": "Blizzard"
+          },
+          "description": {
+            "ko": "6초간 냉기 피해와 35% 둔화. 최대 2개.",
+            "en": "Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once."
+          },
+          "sourceUnlock": 3,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M02.png",
+          "tags": [
+            "Blizzard"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM36",
+            "LM29",
+            "LM35"
+          ],
+          "setIds": [
+            "REF_SM02",
+            "REF_SM06",
+            "REF_SM08",
+            "SM"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 336,
+          "y": 64
+        },
+        {
+          "id": "MP01",
+          "level": 3,
+          "branch": 0,
+          "all": [
+            {
+              "id": "M01",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "밀집 연소",
+            "en": "Dense Burn"
+          },
+          "description": {
+            "ko": "화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +15%를 적용합니다.",
+            "en": "Adds +15% damage to the Fireball blast itself when it catches three or more enemies."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP01.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM02",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM26",
+            "LM39"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "화염구의 직접 폭발 피해를 강화합니다.",
+            "en": "Improves the direct explosion damage of Fireball."
+          },
+          "phase": 0,
+          "row": 1,
+          "x": 66,
+          "y": 204
+        },
+        {
+          "id": "M03",
+          "level": 6,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "연쇄 번개",
+            "en": "Chain Lightning"
+          },
+          "description": {
+            "ko": "4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.",
+            "en": "Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one."
+          },
+          "sourceUnlock": 6,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M03.png",
+          "tags": [
+            "Chain"
+          ],
+          "equipmentIds": [
+            "LM04",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM31"
+          ],
+          "setIds": [
+            "REF_SM02",
+            "REF_SM04",
+            "REF_SM07",
+            "REF_SM08",
+            "SMB"
+          ],
+          "rationale": null,
+          "phase": 0,
+          "row": 0,
+          "x": 460,
+          "y": 64
+        },
+        {
+          "id": "MP02",
+          "level": 6,
+          "branch": 1,
+          "all": [
+            {
+              "id": "M02",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "깊은 한기",
+            "en": "Deep Chill"
+          },
+          "description": {
+            "ko": "눈보라의 둔화가 35%에서 55%로 강해집니다. 다른 둔화와는 가장 강한 값만 적용합니다.",
+            "en": "Strengthens the Blizzard slow from 35% to 55%. Only the strongest slow applies."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP02.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM36"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "눈보라가 주는 둔화의 강도를 높입니다.",
+            "en": "Increases the strength of the slow applied by Blizzard."
+          },
+          "phase": 0,
+          "row": 1,
+          "x": 336,
+          "y": 204
+        },
+        {
+          "id": "MP03",
+          "level": 8,
+          "branch": 1,
+          "all": [
+            {
+              "id": "M03",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "번개의 사슬",
+            "en": "Chain of Lightning"
+          },
+          "description": {
+            "ko": "연쇄 번개의 총 타격 수가 4회에서 5회로 늘어납니다.",
+            "en": "Chain Lightning strikes 5 times instead of 4."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP03.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM04",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM31"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "연쇄 번개의 총 타격 수를 늘립니다.",
+            "en": "Increases the total number of Chain Lightning hits."
+          },
+          "phase": 0,
+          "row": 1,
+          "x": 460,
+          "y": 204
+        },
+        {
+          "id": "M04",
+          "level": 10,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "순간이동",
+            "en": "Teleport"
+          },
+          "description": {
+            "ko": "위험이 낮은 유효한 지점으로 이동합니다.",
+            "en": "Moves to a valid spot with less danger."
+          },
+          "sourceUnlock": 10,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M04.png",
+          "tags": [
+            "Teleport"
+          ],
+          "equipmentIds": [
+            "LM10",
+            "LM23",
+            "LM24",
+            "LM25",
+            "LM26",
+            "LM27",
+            "LM28",
+            "LM32"
+          ],
+          "setIds": [
+            "REF_SM03"
+          ],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 606,
+          "y": 434
+        },
+        {
+          "id": "MP05",
+          "level": 11,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "마나 순환",
+            "en": "Mana Circulation"
+          },
+          "description": {
+            "ko": "초당 자원 회복이 20% 증가합니다. 평면 자원 회복 옵션에도 적용됩니다.",
+            "en": "Increases resource regeneration per second by 20%, including flat regeneration affixes."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP05.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM02",
+            "LM04",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM26",
+            "LM31",
+            "LM36",
+            "LM39"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 0,
+          "x": 730,
+          "y": 434
+        },
+        {
+          "id": "MP06",
+          "level": 12,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "원소 교차",
+            "en": "Element crossover"
+          },
+          "description": {
+            "ko": "최근 4초 안에 서로 다른 두 속성으로 피해를 주면 4초간 가산 피해 +10%를 얻습니다. 중첩되지 않습니다.",
+            "en": "Dealing damage with two different elements within 4 seconds grants +10% damage for 4 seconds. It does not stack."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP06.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM02",
+            "LM04",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM26",
+            "LM31",
+            "LM36",
+            "LM39"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "서로 다른 두 속성의 피해에 적용됩니다. 사용할 원소 기술을 자유롭게 선택합니다.",
+            "en": "Applies to damage from two different elements. You can freely choose the elemental skills."
+          },
+          "phase": 1,
+          "row": 0,
+          "x": 66,
+          "y": 434
+        },
+        {
+          "id": "M05",
+          "level": 15,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "원소 보호막",
+            "en": "Elemental Shield"
+          },
+          "description": {
+            "ko": "최대 HP 35% 보호막을 4초 유지합니다.",
+            "en": "Holds a shield worth 35% of max HP for 4 seconds."
+          },
+          "sourceUnlock": 15,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M05.png",
+          "tags": [
+            "Shield"
+          ],
+          "equipmentIds": [
+            "LM03",
+            "LM30",
+            "LM31",
+            "LM33",
+            "LM32"
+          ],
+          "setIds": [
+            "REF_SM01"
+          ],
+          "rationale": null,
+          "phase": 1,
+          "row": 1,
+          "x": 606,
+          "y": 574
+        },
+        {
+          "id": "MP04",
+          "level": 16,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "안정된 결계",
+            "en": "Stable Ward"
+          },
+          "description": {
+            "ko": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
+            "en": "Adds +20%p to shield strength, stacking with the bonus from Willpower."
+          },
+          "sourceUnlock": 1,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP04.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM03",
+            "LM30",
+            "LM31",
+            "LM33"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 1,
+          "x": 730,
+          "y": 574
+        },
+        {
+          "id": "MP13",
+          "level": 18,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "결계의 호흡",
+            "en": "Ward Breathing"
+          },
+          "description": {
+            "ko": "보호막이 남아 있는 동안 초당 자원 회복이 15% 증가합니다. 마력 회수의 고정 회복량에는 곱하지 않습니다.",
+            "en": "While a barrier remains, increase per-second resource regeneration by 15%. Do not multiply Mana Reclaim's fixed restoration."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP13.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM03",
+            "LM30",
+            "LM31",
+            "LM33",
+            "DES_LM44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 1,
+          "row": 2,
+          "x": 606,
+          "y": 714
+        },
+        {
+          "id": "M06",
+          "level": 20,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "서리 폭발",
+            "en": "Frost Nova"
+          },
+          "description": {
+            "ko": "주변 적에게 냉기 피해와 1.5초 빙결.",
+            "en": "Deals cold damage to nearby enemies and freezes them for 1.5 seconds."
+          },
+          "sourceUnlock": 20,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M06.png",
+          "tags": [
+            "Nova"
+          ],
+          "equipmentIds": [
+            "LM22",
+            "LM34",
+            "LM35",
+            "LM36",
+            "LM16",
+            "LM37"
+          ],
+          "setIds": [
+            "REF_SM02",
+            "REF_SM04",
+            "REF_SM06",
+            "SMB"
+          ],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 336,
+          "y": 944
+        },
+        {
+          "id": "MP14",
+          "level": 20,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "마력 절약",
+            "en": "Mana Thrift"
+          },
+          "description": {
+            "ko": "기본 공격이 2회 직접 적중하면 다음 유료 일반 액티브 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+            "en": "Two direct basic hits prepare +15 percentage points of cost reduction for the next paid normal active within 4s. One charge; pause counting for 3s after triggering."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP14.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM02",
+            "LM04",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM26",
+            "LM31",
+            "LM36",
+            "LM39"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 606,
+          "y": 944
+        },
+        {
+          "id": "MP09",
+          "level": 21,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "냉기의 틈",
+            "en": "Opening in the Cold"
+          },
+          "description": {
+            "ko": "제어된 적에게 일반 냉기 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 눈보라 지속 틱은 제외합니다.",
+            "en": "The first direct hit of a normal cold skill on a controlled target restores 3 resource, with a 2s interval. Blizzard ticks are excluded."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP09.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM22",
+            "LM34",
+            "LM35",
+            "LM36",
+            "DES_LM42"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 460,
+          "y": 944
+        },
+        {
+          "id": "M07",
+          "level": 22,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "잿불창",
+            "en": "Ember Lance"
+          },
+          "description": {
+            "ko": "길이 10m·폭 0.6m의 불꽃 창으로 최대 3명에게 D140% 화염 직접 피해와 3초간 총 D60% 연소를 줍니다. 연소는 자기 기술의 강한 잔여량으로 갱신합니다.",
+            "en": "Fire a 10m-long, 0.6m-wide lance through up to 3 enemies for D140% direct fire damage plus D60% burn over 3s. Refresh only this skill's stronger remaining burn total."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M07.png",
+          "tags": [
+            "Fire",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 66,
+          "y": 944
+        },
+        {
+          "id": "M08",
+          "level": 24,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "화염 장벽",
+            "en": "Firewall"
+          },
+          "description": {
+            "ko": "8m 안에 길이 5m·폭 1m의 불길을 4초간 만듭니다. 1초마다 최대 5명에게 D60% 화염 지속 피해를 주며 장벽 안의 적을 연소 상태로 봅니다. 이동을 막지는 않습니다. 최대 1개입니다.",
+            "en": "Create a 5m-long, 1m-wide fire line within 8m for 4s. Deal D60% fire damage each second to up to 5 enemies and mark occupants as Burning. It does not block movement. Limit 1."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M08.png",
+          "tags": [
+            "Fire",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM41"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 0,
+          "x": 190,
+          "y": 944
+        },
+        {
+          "id": "MP07",
+          "level": 23,
+          "branch": 0,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "M07",
+              "rank": 1
+            },
+            {
+              "id": "M08",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "점화의 되먹임",
+            "en": "Ignition Feedback"
+          },
+          "description": {
+            "ko": "연소한 적에게 일반 화염 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 연소 틱으로 재발동하지 않습니다.",
+            "en": "The first direct hit of a normal fire skill on a burning enemy restores 3 resource, with a 2s interval. Burn ticks cannot retrigger it."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP07.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM02",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM26",
+            "LM39",
+            "DES_LM41"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "잿불창의 연소와 화염 장벽 안의 적에게 직접 반응합니다. 실제 효과가 참조하는 두 스킬 중 하나가 필요합니다.",
+            "en": "Directly checks Ember Lance burning or an enemy inside Firewall. Unlock one of the two sources used by the effect."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 66,
+          "y": 1084
+        },
+        {
+          "id": "MP08",
+          "level": 25,
+          "branch": 0,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "M07",
+              "rank": 1
+            },
+            {
+              "id": "M08",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "그을린 갑옷",
+            "en": "Scorched Armor"
+          },
+          "description": {
+            "ko": "자신의 M07 연소가 남아 있거나 M08 안에 있는 공격자에게 받는 피해가 8% 감소합니다.",
+            "en": "Take 8% less damage from an attacker with your M07 burn or currently inside your M08."
+          },
+          "sourceUnlock": 22,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP08.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM03",
+            "LM30",
+            "LM31",
+            "LM33",
+            "DES_LM41"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "잿불창의 연소 또는 화염 장벽 안에 있는 적에게 받는 피해를 줄입니다.",
+            "en": "Reduces damage from enemies burning from Ember Lance or standing in Firewall."
+          },
+          "phase": 2,
+          "row": 1,
+          "x": 190,
+          "y": 1084
+        },
+        {
+          "id": "M09",
+          "level": 26,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "빙하창",
+            "en": "Glacial Lance"
+          },
+          "description": {
+            "ko": "길이 9m·폭 0.7m의 창으로 최대 3명에게 D130% 냉기 피해를 줍니다. 이미 둔화된 적은 0.8초 빙결하고, 나머지는 3초간 35% 둔화시킵니다.",
+            "en": "Hit up to 3 enemies with a 9m-long, 0.7m-wide lance for D130% cold damage. Freeze already-slowed enemies for 0.8s; otherwise slow them by 35% for 3s."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M09.png",
+          "tags": [
+            "Cold",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM42",
+            "LM14",
+            "LM16",
+            "LM35",
+            "LM37"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 1,
+          "x": 336,
+          "y": 1084
+        },
+        {
+          "id": "MP10",
+          "level": 27,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "M06",
+              "rank": 1
+            },
+            {
+              "id": "M09",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "얼음의 잔향",
+            "en": "Ice Reverberation"
+          },
+          "description": {
+            "ko": "M06·M09의 직접 빙결 적용에 성공하면 최대 HP 5% 보호막을 3초간 얻습니다. 보스에게 유효한 제압 수치를 준 경우도 인정하며 재발동 간격은 4초입니다.",
+            "en": "Successfully applying direct freeze with M06 or M09 grants a 5% maximum-HP barrier for 3s. Valid boss stagger credit also qualifies; 4s interval."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP10.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM03",
+            "LM22",
+            "LM30",
+            "LM31",
+            "LM33",
+            "LM34",
+            "LM35",
+            "LM36",
+            "DES_LM42"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "서리 폭발 또는 빙하창의 빙결·보스 제압 성공에 반응합니다.",
+            "en": "Triggers on a successful freeze or boss control from Frost Nova or Glacial Lance."
+          },
+          "phase": 2,
+          "row": 2,
+          "x": 336,
+          "y": 1224
+        },
+        {
+          "id": "M10",
+          "level": 28,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "서리 구체",
+            "en": "Frost Globe"
+          },
+          "description": {
+            "ko": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
+            "en": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M10.png",
+          "tags": [
+            "Cold",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM42",
+            "LM14"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 2,
+          "row": 1,
+          "x": 460,
+          "y": 1084
+        },
+        {
+          "id": "M11",
+          "level": 30,
+          "branch": 1,
+          "all": [
+            {
+              "id": "M03",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "축전 구체",
+            "en": "Capacitor Orb"
+          },
+          "description": {
+            "ko": "8m 안에 구체 하나를 6초간 설치합니다. 1초마다 반경 3m의 최대 3명에게 D30% 번개 피해를 줍니다. 지속 중 M03을 유효 시전할 때마다 1충전, 최대 3충전을 얻고 자연 만료 시 D80%+충전당 D30% 번개 추가 폭발을 줍니다.",
+            "en": "Place one orb within 8m for 6s. Each second, deal D30% lightning damage to up to 3 enemies within 3m. Each valid M03 cast adds one charge, up to 3. Natural expiry causes a secondary lightning blast for D80% plus D30% per charge."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M11.png",
+          "tags": [
+            "Lightning",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM43"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "연쇄 번개를 시전해 축전 구체의 추가 폭발을 충전합니다.",
+            "en": "Chain Lightning casts charge the additional explosion of Capacitor Orb."
+          },
+          "phase": 3,
+          "row": 0,
+          "x": 336,
+          "y": 1454
+        },
+        {
+          "id": "MP12",
+          "level": 31,
+          "branch": 1,
+          "all": [
+            {
+              "id": "M11",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "축전 회수",
+            "en": "Reclaim Charge"
+          },
+          "description": {
+            "ko": "축전 구체가 자연 만료하면 자원 10을 회복합니다. 교체·장면 종료·장비 해제로 사라진 구체는 회복하지 않습니다.",
+            "en": "Natural expiry of Capacitor Orb restores 10 resource. Replacement, scene exit or equipment-removal cleanup grants none."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP12.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM04",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM31",
+            "DES_LM43"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "축전 구체가 자연 만료될 때만 자원을 회복합니다.",
+            "en": "Recovers resources specifically when Capacitor Orb expires naturally."
+          },
+          "phase": 3,
+          "row": 1,
+          "x": 336,
+          "y": 1594
+        },
+        {
+          "id": "M12",
+          "level": 32,
+          "branch": 1,
+          "all": [
+            {
+              "id": "M03",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "번개 창",
+            "en": "Storm Spear"
+          },
+          "description": {
+            "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
+            "en": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M12.png",
+          "tags": [
+            "Lightning",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM43"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "자신의 연쇄 번개에 맞은 적에게 적중하면 자원을 회복합니다.",
+            "en": "Recovers resources when it hits an enemy recently struck by your Chain Lightning."
+          },
+          "phase": 3,
+          "row": 0,
+          "x": 460,
+          "y": 1454
+        },
+        {
+          "id": "MP11",
+          "level": 33,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            {
+              "id": "M03",
+              "rank": 1
+            },
+            {
+              "id": "M12",
+              "rank": 1
+            }
+          ],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "과부하",
+            "en": "Overcharge"
+          },
+          "description": {
+            "ko": "5초 안에 일반 번개 기술을 3회 시전하면 다음 M03·M12의 직접 피해 +15%를 4초간 준비합니다. 완성한 세 번째 시전에 소급하지 않으며 1충전입니다.",
+            "en": "Three normal lightning casts within 5s prepare +15% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast."
+          },
+          "sourceUnlock": 26,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP11.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM04",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM31",
+            "DES_LM43"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "연쇄 번개와 번개 창의 다음 직접 피해를 강화합니다. 두 강화 대상을 모두 표시합니다.",
+            "en": "Improves the next direct damage from Chain Lightning or Storm Spear. Both direct targets are listed."
+          },
+          "phase": 3,
+          "row": 1,
+          "x": 460,
+          "y": 1594
+        },
+        {
+          "id": "M13",
+          "level": 34,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "마력 회수",
+            "en": "Mana Reclaim"
+          },
+          "description": {
+            "ko": "정지한 채 마력을 집중합니다. 1등급에서 평소 마나 회복 속도의 10배로 회복하며 등급마다 회복 배율이 10% 증가합니다. 쿨타임과 최대 지속 시간은 없습니다. 이동·다른 유효한 공격을 시작하면 취소되며 단순 피격으로는 취소되지 않습니다. 자동 충전은 마나 35% 이하에서 시작하고 선택한 50% 또는 90%에 종료합니다. 무적은 제공하지 않습니다.",
+            "en": "Channel mana while standing still. Rank 1 regenerates at ten times the ordinary rate; each rank increases this multiplier by 10%. No cooldown or maximum duration. Moving or starting another valid attack cancels it; taking damage alone does not. Automatic charging begins at 35% mana or less and stops at the selected 50% or 90% goal. Grants no invulnerability."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M13.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 606,
+          "y": 1454
+        },
+        {
+          "id": "M14",
+          "level": 34,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "균열 결계",
+            "en": "Rift Ward"
+          },
+          "description": {
+            "ko": "현재 위치에 반경 3m의 결계를 6초간 만들고 최대 HP 10% 보호막을 4초간 얻습니다. 결계 안에 있는 동안 받는 피해가 10% 감소합니다. 최대 1개이며 M05 시전으로 처리하지 않습니다.",
+            "en": "Create a 3m ward at the current position for 6s and a 10% maximum-HP barrier for 4s. Take 10% less damage while inside. Limit 1; it does not count as casting M05."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M14.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM44",
+            "LM32"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 730,
+          "y": 1454
+        },
+        {
+          "id": "MP15",
+          "level": 35,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "안정된 시전",
+            "en": "Steady Casting"
+          },
+          "description": {
+            "ko": "1초 이상 제자리에 있은 뒤 일반 액티브를 준비·집중하는 동안 받는 피해가 8% 감소합니다. 이동하거나 시전이 끝나면 해제됩니다.",
+            "en": "After standing still for 1s, take 8% less damage while preparing or channeling a normal active. End on movement or completion."
+          },
+          "sourceUnlock": 30,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP15.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM02",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM26",
+            "LM39",
+            "DES_LM41",
+            "DES_LM44"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "일반 액티브의 준비·집중에 적용됩니다. 마력 회수만을 위한 전용 강화가 아닙니다.",
+            "en": "Applies while preparing or channelling normal actives; it is not specific to Mana Reclaim."
+          },
+          "phase": 3,
+          "row": 1,
+          "x": 606,
+          "y": 1594
+        },
+        {
+          "id": "MP16",
+          "level": 36,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "삼색의 기억",
+            "en": "Threefold Memory"
+          },
+          "description": {
+            "ko": "6초 안에 화염·냉기·번개 일반 액티브를 각각 한 번 시전하면 최대 HP 8% 보호막을 4초간 얻습니다. 완성·만료 시 기록을 비우며 재발동 간격은 8초입니다.",
+            "en": "Cast one normal fire, cold and lightning active within 6s to gain an 8% maximum-HP barrier for 4s. Clear the record on completion or expiry; 8s interval."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP16.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM01",
+            "LM02",
+            "LM04",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM11",
+            "LM12",
+            "LM13",
+            "LM14",
+            "LM15",
+            "LM16",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM26",
+            "LM31",
+            "LM36",
+            "LM39",
+            "DES_LM45"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 66,
+          "y": 1454
+        },
+        {
+          "id": "M15",
+          "level": 38,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "원소 나침반",
+            "en": "Elemental Compass"
+          },
+          "description": {
+            "ko": "자원 20을 회복합니다. 8초 안의 다음 화염·냉기·번개 일반 액티브를 원소별 한 번씩 비용 감소 +15%p로 시전합니다. 최대 3회이며 한 원소를 반복해도 남은 다른 원소 충전을 쓰지 않습니다.",
+            "en": "Restore 20 resource. Within 8s, grant +15 percentage points of cost reduction to the next normal fire, cold and lightning active, once per element and up to 3 casts. Repeating an element does not consume another element's charge."
+          },
+          "sourceUnlock": 38,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M15.png",
+          "tags": [
+            "Physical",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM45"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 0,
+          "x": 190,
+          "y": 1454
+        },
+        {
+          "id": "M16",
+          "level": 38,
+          "branch": 1,
+          "all": [],
+          "oneOf": [],
+          "kind": "active",
+          "maxRank": 5,
+          "name": {
+            "ko": "자력 소용돌이",
+            "en": "Magnetic Vortex"
+          },
+          "description": {
+            "ko": "8m 안의 반경 3m에 소용돌이를 4초간 만듭니다. 생성 시 최대 5명을 중심으로 1.5m 끌어오고, 1초마다 D30% 번개 피해를 줍니다. 최대 1개이며 보스는 이동하지 않고 제압 수치만 얻습니다.",
+            "en": "Create a 3m vortex within 8m for 4s. On creation, pull up to 5 enemies 1.5m toward the center; deal D30% lightning damage each second. Limit 1. Bosses receive stagger credit without moving."
+          },
+          "sourceUnlock": 38,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M16.png",
+          "tags": [
+            "Lightning",
+            "Normal"
+          ],
+          "equipmentIds": [
+            "DES_LM45"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 2,
+          "x": 336,
+          "y": 1734
+        },
+        {
+          "id": "MP17",
+          "level": 39,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "초과 마력",
+            "en": "Overflowing Mana"
+          },
+          "description": {
+            "ko": "시전 전 자원이 80% 이상이면 일반 액티브의 첫 직접 적중 피해가 가산 10% 증가합니다. 장판 틱·추가 피해에는 적용하지 않습니다.",
+            "en": "At 80% pre-cast resource or more, a normal active's first direct hit gains +10% additive damage. Exclude field ticks and secondary damage."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP17.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "LM02",
+            "LM04",
+            "LM05",
+            "LM06",
+            "LM07",
+            "LM08",
+            "LM09",
+            "LM10",
+            "LM17",
+            "LM18",
+            "LM19",
+            "LM20",
+            "LM21",
+            "LM22",
+            "LM26",
+            "LM31",
+            "LM39",
+            "DES_LM44"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 3,
+          "row": 1,
+          "x": 730,
+          "y": 1594
+        },
+        {
+          "id": "M17",
+          "level": 40,
+          "branch": 0,
+          "all": [],
+          "oneOf": [],
+          "kind": "ultimate",
+          "maxRank": 1,
+          "name": {
+            "ko": "삼원소 붕괴",
+            "en": "Triune Collapse"
+          },
+          "description": {
+            "ko": "10m 안의 반경 4m에 화염 D200%, 0.5초 뒤 냉기 D150%, 다시 0.5초 뒤 번개 D150%를 가합니다. 각 단계 최대 8명이며 냉기는 1초 빙결을 줍니다. M01·M02·M03을 대신 시전한 것으로 세지 않습니다.",
+            "en": "Strike a 4m area within 10m for D200% fire, then D150% cold after 0.5s, then D150% lightning after another 0.5s. Each stage hits up to 8 enemies; cold freezes for 1s. These stages do not count as M01, M02 or M03 casts."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M17.png",
+          "tags": [
+            "TriElement",
+            "Ultimate"
+          ],
+          "equipmentIds": [
+            "DES_LM46"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 4,
+          "row": 0,
+          "x": 66,
+          "y": 1964
+        },
+        {
+          "id": "M18",
+          "level": 40,
+          "branch": 2,
+          "all": [],
+          "oneOf": [],
+          "kind": "ultimate",
+          "maxRank": 1,
+          "name": {
+            "ko": "현자의 화신",
+            "en": "Sage Incarnate"
+          },
+          "description": {
+            "ko": "8초간 최대 HP 25% 보호막을 얻고 일반 액티브 피해 +20%, 비용 감소 +20%p를 얻습니다. 이 시간에 서로 다른 세 원소의 일반 액티브를 시전하면 마지막 기술의 첫 적중 위치에 반경 2.5m·최대 5명에게 원소별 D40% 추가 폭발이 일어납니다. 순환 완성당 1회, 시전 전체 최대 2회입니다.",
+            "en": "Gain a 25% maximum-HP barrier for 8s, +20% normal-active damage and +20 percentage points of normal-active cost reduction. Completing a three-element normal-active cast cycle triggers D40% per element within 2.5m, up to 5 targets, at the last skill's first impact. Once per completed cycle, at most twice per ultimate."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M18.png",
+          "tags": [
+            "TriElement",
+            "Ultimate"
+          ],
+          "equipmentIds": [
+            "DES_LM46"
+          ],
+          "setIds": [],
+          "rationale": null,
+          "phase": 4,
+          "row": 0,
+          "x": 606,
+          "y": 1964
+        },
+        {
+          "id": "MP18",
+          "level": 40,
+          "branch": 0,
+          "all": [
+            {
+              "id": "M17",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "대마법사의 유언",
+            "en": "Archmage's Testament"
+          },
+          "description": {
+            "ko": "삼원소 붕괴의 세 번째 단계가 실제 적중하면 자원 15를 한 번 회복합니다.",
+            "en": "If Triune Collapse's third stage actually hits, restore 15 resource once."
+          },
+          "sourceUnlock": 34,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP18.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LM46"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "삼원소 붕괴 전용 패시브입니다. 세 번째 단계의 실제 적중으로 자원을 회복합니다.",
+            "en": "Dedicated to Triune Collapse; a hit in the third stage restores resources."
+          },
+          "phase": 4,
+          "row": 1,
+          "x": 66,
+          "y": 2104
+        },
+        {
+          "id": "MP19",
+          "level": 40,
+          "branch": 2,
+          "all": [
+            {
+              "id": "M18",
+              "rank": 1
+            }
+          ],
+          "oneOf": [],
+          "kind": "passive",
+          "maxRank": 5,
+          "name": {
+            "ko": "현자의 수호",
+            "en": "Sage's Ward"
+          },
+          "description": {
+            "ko": "현자의 화신이 생성하는 보호막에 최대 HP 10%를 더합니다.",
+            "en": "Add 10% maximum HP to the barrier created by Sage Incarnate."
+          },
+          "sourceUnlock": 40,
+          "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP19.png",
+          "tags": [
+            "Passive"
+          ],
+          "equipmentIds": [
+            "DES_LM46"
+          ],
+          "setIds": [],
+          "rationale": {
+            "ko": "현자의 화신 전용 패시브입니다. 해당 궁극기의 보호막 생성량을 늘립니다.",
+            "en": "Dedicated to Sage Incarnate; increases the barrier it creates."
+          },
+          "phase": 4,
+          "row": 1,
+          "x": 606,
+          "y": 2104
+        }
+      ],
+      "examples": [
+        {
+          "name": {
+            "ko": "축전 연계",
+            "en": "Stored lightning"
+          },
+          "level": 35,
+          "targets": [
+            "M11",
+            "M12",
+            "MP11",
+            "MP12"
+          ],
+          "equip": [
+            "M03",
+            "M05",
+            "M11",
+            "M12",
+            "MP03",
+            "MP11",
+            "MP12"
+          ]
+        },
+        {
+          "name": {
+            "ko": "삼원소 순환",
+            "en": "Triune cycle"
+          },
+          "level": 40,
+          "targets": [
+            "M17",
+            "MP16",
+            "MP18"
+          ],
+          "equip": [
+            "M01",
+            "M02",
+            "M03",
+            "M15",
+            "M17",
+            "MP06",
+            "MP16",
+            "MP18"
+          ]
+        }
+      ],
+      "bands": [
+        {
+          "from": 1,
+          "to": 9,
+          "name": {
+            "ko": "전투의 기초",
+            "en": "Foundations"
+          },
+          "note": {
+            "ko": "핵심 공격과 첫 연계",
+            "en": "Core attacks and first synergies"
+          },
+          "top": 0,
+          "height": 370
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "name": {
+            "ko": "생존과 운용",
+            "en": "Survival"
+          },
+          "note": {
+            "ko": "이동 · 방어 · 자원 관리",
+            "en": "Movement, defence and resource control"
+          },
+          "top": 370,
+          "height": 510
+        },
+        {
+          "from": 20,
+          "to": 29,
+          "name": {
+            "ko": "전투 방식 확립",
+            "en": "Specialisation"
+          },
+          "note": {
+            "ko": "상태 부여 후 연계와 회수",
+            "en": "Apply conditions, then combine and recover"
+          },
+          "top": 880,
+          "height": 510
+        },
+        {
+          "from": 30,
+          "to": 39,
+          "name": {
+            "ko": "빌드의 완성",
+            "en": "Mastery"
+          },
+          "note": {
+            "ko": "복합 연계와 강화 패시브",
+            "en": "Advanced combinations and supporting passives"
+          },
+          "top": 1390,
+          "height": 510
+        },
+        {
+          "from": 40,
+          "to": 40,
+          "name": {
+            "ko": "궁극의 선택",
+            "en": "Ascendancy"
+          },
+          "note": {
+            "ko": "궁극기 1개와 최종 패시브",
+            "en": "One equipped ultimate and its final passive"
+          },
+          "top": 1900,
+          "height": 370
+        }
+      ],
+      "height": 2278,
+      "width": 878
+    }
+  ]
+}

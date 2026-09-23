@@ -16,7 +16,7 @@ namespace Hellscript
             {
                 int index=i;var slot=slots[i];var root=EquipmentSlotView.Create(parent,null,left+i*(size+gap),y,size,font);
                 root.name="inventory-potion-"+i;var target=root.gameObject.AddComponent<InventoryDropTarget>();target.window=this;target.slot=-3;
-                var button=root.gameObject.AddComponent<Button>();button.targetGraphic=root.GetComponent<StorageSurface>();UiTheme.Button(button);button.onClick.AddListener(()=>ShowPotionPicker(index));
+                var button=root.gameObject.AddComponent<UiButton>();button.targetGraphic=root.GetComponent<StorageSurface>();button.Configure(UiButtonRole.Item);button.onClick.AddListener(()=>ShowPotionPicker(index));
                 if(!string.IsNullOrEmpty(slot.id))
                 {
                     var def=PotionCatalog.Get(slot.id);var art=PotionArt.Draw(root,def,3,3,size-6);art.color=Hero.potions.Count(slot.id)>0?Color.white:new Color(1,1,1,.35f);
@@ -32,7 +32,7 @@ namespace Hellscript
         public void ShowPotionSettings()
         {
             Dismiss();dialogKind="potion";
-            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="potion-settings-backdrop";shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
+            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="potion-settings-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
             float w=Mathf.Min(352,width-16),h=310;
             var anchor=(RectTransform)Find("inventory-potion-settings").transform;var corners=new Vector3[4];anchor.GetWorldCorners(corners);
             var point=frame.InverseTransformPoint((corners[0]+corners[3])*.5f);float ax=point.x-frame.rect.xMin,ay=frame.rect.yMax-point.y;
@@ -46,7 +46,7 @@ namespace Hellscript
             for(int n=0;n<PotionLoadout.FallbackLabels.Length;n++)
             {
                 var choice=(PotionFallback)n;bool chosen=Hero.potions.SharedFallback==choice;
-                var row=Btn(dialog,"",10,73+n*43,w-20,40,()=>ChoosePotionFallback(choice),chosen,11);row.name="potion-fallback-"+n;
+                var row=Btn(dialog,"",10,73+n*43,w-20,40,()=>ChoosePotionFallback(choice),chosen,11);row.name="potion-fallback-"+n;UiTheme.Choice(row,chosen,false);
                 Txt(row.transform,PotionLoadout.FallbackLabels[n],33,2,w-68,36,11,chosen?gold:pale);
                 Check(row.transform,9,12,15,chosen);
             }
@@ -58,7 +58,7 @@ namespace Hellscript
             // Keep the bubble, hit areas and inventory layout stable while changing only selection styling.
             for(int n=0;n<PotionLoadout.FallbackLabels.Length;n++)
             {
-                var row=Find("potion-fallback-"+n);bool chosen=n==(int)choice;UiTheme.Button(row,chosen);
+                var row=Find("potion-fallback-"+n);bool chosen=n==(int)choice;UiTheme.Choice(row,chosen,false);
                 foreach(var text in row.GetComponentsInChildren<Text>())text.color=chosen?gold:pale;
                 var check=row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?"c4a774":"13180f",chosen?"c4a774":"13180f","c0a475");
                 if(check.childCount==0&&chosen)Glyph(check,"check",1,1,13,ink);else if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);
@@ -71,9 +71,9 @@ namespace Hellscript
             Scroll(dialog,"Owned potions",10,47,w-20,h-96,out var content);float y=4;
             foreach(var def in PotionCatalog.All)
             {
-                string id=def.id;int count=Hero.potions.Count(id);bool occupied=slots.Where((s,n)=>n!=index).Any(s=>s.id==id),chosen=slots[index].id==id;
+                string id=def.id;int count=Hero.potions.Count(id);bool occupied=slots.Where((s,n)=>n!=index).Any(s=>!string.IsNullOrEmpty(s.id)&&PotionCatalog.Family(s.id)==PotionCatalog.Family(id)),chosen=slots[index].id==id;
                 float rowHeight=def.Crafted?128:80;
-                var row=Btn(content,"",5,y,w-42,rowHeight,()=>AssignPotion(index,id),chosen);row.name="potion-pick-"+id;row.interactable=count>0&&!occupied;
+                var row=Btn(content,"",5,y,w-42,rowHeight,()=>AssignPotion(index,id),chosen);row.name="potion-pick-"+id;UiTheme.Choice(row,chosen,false);row.interactable=count>0&&!occupied;
                 PotionArt.Draw(row.transform,def,8,12,48);
                 Txt(row.transform,GemElixirs.Name(def)+" · ×"+count,66,4,w-123,def.Crafted?42:27,12,chosen?gold:pale);
                 Txt(row.transform,occupied?"다른 슬롯에 지정됨":count==0?"보유하지 않음":GemElixirs.Description(def),66,def.Crafted?48:32,w-123,rowHeight-39,10,muted);

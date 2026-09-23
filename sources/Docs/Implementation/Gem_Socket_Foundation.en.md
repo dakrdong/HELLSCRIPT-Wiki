@@ -2,6 +2,8 @@
 
 > 2026-09-23: The jeweler supersedes the original 3:1, gold-cost fusion below with 5:1 upgrades and 1:5 downgrades at no gold cost. Historical foundation evidence is retained. See [Jeweler runtime](Jeweler_Runtime.en.md).
 
+Updated: 2026-09-23. The current catalog has **six gems and six tiers**, with Skull retired. See the [current design](../Design/HELLSCRIPT_Gem_Socket_Detail.en.md). The seven-gem implementation and results below describe the historical 2026-09-13 baseline, not the current content count.
+
 Date: 2026-09-13 · [한국어](Gem_Socket_Foundation.md)
 
 Status: effects, equipment protection, persistence and inspection UI are implemented. All 2,380 final Editor tests and three native launch/restart/recovery processes passed. This is not a completion record for gem acquisition, storage ownership or the entire service flow.

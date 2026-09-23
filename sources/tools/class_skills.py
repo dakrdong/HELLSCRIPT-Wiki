@@ -30,13 +30,14 @@ def loadout_issues(c,hero,level,normal,passives,ultimates):
 
 def validate(c):
     assert c['status']=='design_only' and c['runtimeEnabled'] is False
-    assert c['quotaPerClass']==dict(normalActives=16,passives=18,ultimates=2,total=36)
+    assert c['quotaPerClass']==dict(normalActives=16,passives=19,ultimates=2,total=37)
     by={s['id']:s for s in c['skills']};eq={e['id']:e for e in c['equipment']};sources={s['id'] for s in c['sources']};links={s['setId']:s for s in c['setLinks']}
-    assert len(by)==len(c['skills'])==108 and len(eq)==len(c['equipment'])==141
+    assert len(by)==len(c['skills'])==111 and len(eq)==len(c['equipment'])==141
     for hero in c['classes']:
+        assert all(hero[key]==value for key,value in c['quotaPerClass'].items())
         rows=[s for s in c['skills'] if s['heroClass']==hero['id']]
-        assert collections.Counter(s['kind'] for s in rows)=={'active':16,'passive':18,'ultimate':2}
-        assert sorted(s['displayOrder'] for s in rows)==list(range(1,37))
+        assert collections.Counter(s['kind'] for s in rows)=={'active':16,'passive':19,'ultimate':2}
+        assert sorted(s['displayOrder'] for s in rows)==list(range(1,38))
         ordered=sorted(rows,key=lambda s:s['displayOrder'])
         assert [s['kind'] for s in ordered[-2:]]==['ultimate','ultimate']
         assert [s['activeOrder'] for s in ordered[-2:]]==[17,18]
@@ -107,7 +108,7 @@ def validate(c):
         assert s['name']['ko']==a[1] and s['description']['ko']==a[12] and s['unlockLevel']==a[4]
         assert [p[x] for x in ['cooldownSeconds','resourceCost','coefficient','rangeMeters','radiusMeters','durationSeconds']]==a[5:11]
     assert len([s for s in by.values() if s['status']=='existing_runtime'])==36
-    return {'skills':108,'perClass':36,'ultimatesPerClass':2,'existingSkillsPreserved':36,'linkedLegendaryRecords':141,'newLegendaryConcepts':18,'sets':30,'newSetBonusTiers':60,'legalBuildExamples':30,'status':'design_only','runtimeEnabled':False,'ultimateContractNegativeCases':5}
+    return {'skills':111,'perClass':37,'ultimatesPerClass':2,'existingSkillsPreserved':36,'linkedLegendaryRecords':141,'newLegendaryConcepts':18,'sets':30,'newSetBonusTiers':60,'legalBuildExamples':30,'status':'design_only','runtimeEnabled':False,'ultimateContractNegativeCases':5}
 
 def table(headers,rows):
     return '| '+' | '.join(headers)+' |\n|'+'|'.join('---' for _ in headers)+'|\n'+''.join('| '+' | '.join(str(v).replace('|',' / ').replace('\n',' ') for v in row)+' |\n' for row in rows)+'\n'
@@ -119,11 +120,11 @@ def skill_list(ids,by,lang):return ', '.join(by[x]['name'][lang]+' (`'+x+'`)' fo
 def class_page(c,hero,lang):
     ko=lang=='ko';by={s['id']:s for s in c['skills']};eq={e['id']:e for e in c['equipment']};sl={s['setId']:s for s in c['setLinks']};suffix='' if ko else '.en'
     rows=sorted([s for s in c['skills'] if s['heroClass']==hero['id']],key=lambda s:s['displayOrder'])
-    out=f"# HELLSCRIPT {hero['name'][lang]} "+('스킬 36종\n\n' if ko else '— 36 skills\n\n')
+    out=f"# HELLSCRIPT {hero['name'][lang]} "+('스킬 37종\n\n' if ko else '— 37 skills\n\n')
     out+=('정리 기준일: ' if ko else 'Updated: ')+c['updatedOn']+'\n\n'
     out+=('상태: 확정 기획 · 능력·장비 구현의 검증 상태는 ' if ko else 'Status: approved design. Ability and equipment implementation status is tracked in ')+f"[{'구현 기록' if ko else 'the implementation record'}](../Implementation/Class_Skill_Runtime{suffix}.md). "+('일반 플레이 공개와 UI 연결은 대기 중입니다. 아래 수치는 1등급 기준입니다.\n\n' if ko else 'General release and UI integration are pending. Values below are for rank one.\n\n')
     out+=f"[{'공통 규칙·출처' if ko else 'Rules and sources'}](HELLSCRIPT_Class_Skills{suffix}.md) · [{'장비 대응표' if ko else 'Equipment matrix'}](HELLSCRIPT_Skill_Equipment{suffix}.md) · [{'English' if ko else '한국어'}]({page_name(hero['id'],'en' if ko else 'ko')})\n\n"
-    out+=('일반 액티브 16개·패시브 18개·궁극기 2개입니다. 장착은 일반 액티브 최대 4개, 패시브 최대 3개, 궁극기 1개를 제안합니다. 기본 공격은 별도입니다. 전체 목록 35·36번인 궁극기는 같은 최종 단계에 놓고 둘 중 하나만 선택합니다.\n\n' if ko else '16 normal actives, 18 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 35 and 36 share the final tier and are mutually exclusive.\n\n')
+    out+=('일반 액티브 16개·패시브 19개·궁극기 2개입니다. 장착은 일반 액티브 최대 4개, 패시브 최대 3개, 궁극기 1개를 제안합니다. 기본 공격은 별도입니다. 전체 목록 36·37번인 궁극기는 같은 최종 단계에 놓고 둘 중 하나만 선택합니다.\n\n' if ko else '16 normal actives, 19 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 36 and 37 share the final tier and are mutually exclusive.\n\n')
     out+=('## 장비에서 출발한 빌드 예시\n\n' if ko else '## Equipment-led build examples\n\n')
     out+=('각 행은 해당 세트 전체를 착용하는 예시입니다. 제시한 전설은 세트와 부위가 겹치지 않습니다. 남은 부위에는 희귀 장비를 사용합니다. 각 빌드의 기술 순서를 사냥 칙령으로 설정하며, 자동 사용 조건은 아래 기술별 제안을 따릅니다.\n\n' if ko else 'Each example wears the full named set. Listed legendaries occupy different slots; use rares elsewhere. Configure the sequence in Hunt Edict, using the per-skill automatic-use suggestions below.\n\n')
     for b in [b for b in c['builds'] if b['heroClass']==hero['id']]:
@@ -132,7 +133,7 @@ def class_page(c,hero,lang):
         out+=('패시브: ' if ko else 'Passives: ')+skill_list(b['passives'],by,lang)+'. '+('선택 궁극기: ' if ko else 'Selected ultimate: ')+skill_list([b['ultimate']],by,lang)+'.\n\n'
         if b['legendaryIds']:out+=('함께 착용하는 전설: ' if ko else 'Compatible legendaries: ')+', '.join(equipment_link(eq[e],lang) for e in b['legendaryIds'])+'.\n\n'
         out+=b['loop'][lang]+'\n\n'
-    for kind,title in [('active','일반 액티브 · 01–16' if ko else 'Normal actives · 01–16'),('passive','패시브 · 17–34' if ko else 'Passives · 17–34'),('ultimate','최종 단계: 궁극기 · 35–36 · 하나만 선택' if ko else 'Final tier: ultimates · 35–36 · choose one')]:
+    for kind,title in [('active','일반 액티브 · 01–16' if ko else 'Normal actives · 01–16'),('passive','패시브 · 17–35' if ko else 'Passives · 17–35'),('ultimate','최종 단계: 궁극기 · 36–37 · 하나만 선택' if ko else 'Final tier: ultimates · 36–37 · choose one')]:
         out+='## '+title+'\n\n'
         for s in [s for s in rows if s['kind']==kind]:
             out+=f"### {s['displayOrder']:02}. {s['name'][lang]} · `{s['id']}`\n\n"

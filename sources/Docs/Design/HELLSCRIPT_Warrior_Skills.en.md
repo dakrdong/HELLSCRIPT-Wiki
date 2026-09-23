@@ -1,12 +1,12 @@
-# HELLSCRIPT Warrior — 36 skills
+# HELLSCRIPT Warrior — 37 skills
 
-Updated: 2026-09-22
+Updated: 2026-09-23
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
 [Rules and sources](HELLSCRIPT_Class_Skills.en.md) · [Equipment matrix](HELLSCRIPT_Skill_Equipment.en.md) · [한국어](HELLSCRIPT_Warrior_Skills.md)
 
-16 normal actives, 18 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 35 and 36 share the final tier and are mutually exclusive.
+16 normal actives, 19 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 36 and 37 share the final tier and are mutually exclusive.
 
 ## Equipment-led build examples
 
@@ -86,7 +86,7 @@ After Shout, the first Leap or Crush hit releases the set echo; the ultimate anc
 
 Normal actives: Crushing Blow (`W03`), Ground Slam (`W04`), Battle Shout (`W06`), Breath Before Battle (`W15`).
 
-Passives: Battle Reserve (`WP17`), Lingering Shout (`WP10`), Executioner's Eye (`WP06`). Selected ultimate: Titan's Judgment (`W18`).
+Passives: Battle Reserve (`WP17`), Lingering Shout (`WP10`), Titan's Bulwark (`WP19`). Selected ultimate: Titan's Judgment (`W18`).
 
 Compatible legendaries: Ankle-Binding Rift (`LW27`), Horn of Resentment (`LW34`).
 
@@ -322,7 +322,7 @@ Gain a 12% maximum-HP barrier for 5s and remove current slow and root effects. B
 
 **Mechanic reference:** D3 Ignore Pain.
 
-## Passives · 17–34
+## Passives · 17–35
 
 ### 17. Into the Crowd · `WP01`
 
@@ -520,17 +520,29 @@ Crush and Slam gain +10% additive direct damage when pre-cast resource is at lea
 
 New proposal · Lv.34
 
-During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8. With Titan's Judgment selected, gain a 4s barrier of 3% maximum HP per direct target, capped at 15%. Only the selected ultimate branch applies.
+During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8 per cast.
 
 **Equipment links:** Ancestral King's Crown (`DES_LW46`).
 
-**Companion skills:** War of the Ancestors (`W17`), Titan's Judgment (`W18`).
+**Companion skills:** War of the Ancestors (`W17`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
-## Final tier: ultimates · 35–36 · choose one
+### 35. Titan's Bulwark · `WP19`
 
-### 35. War of the Ancestors · `W17`
+New proposal · Lv.40
+
+Each enemy directly hit by Titan's Judgment grants a 4s barrier of 3% maximum HP, capped at 15%.
+
+**Equipment links:** Ancestral King's Crown (`DES_LW46`).
+
+**Companion skills:** Titan's Judgment (`W18`).
+
+**Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
+
+## Final tier: ultimates · 36–37 · choose one
+
+### 36. War of the Ancestors · `W17`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 
@@ -544,7 +556,7 @@ Call 2 ancestors for 8s. Each attacks one enemy within 6m each second for D65% s
 
 **Mechanic reference:** D3 Call of the Ancients.
 
-### 36. Titan's Judgment · `W18`
+### 37. Titan's Judgment · `W18`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 

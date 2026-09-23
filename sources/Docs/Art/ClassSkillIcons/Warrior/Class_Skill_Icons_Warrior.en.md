@@ -1,5 +1,7 @@
 # Warrior skill icon production record
 
+[Titan's Bulwark WP19](manifests/WP19.json) was added on 2026-09-23, bringing the class total to 37. The record below describes the initial 36 icons. New Sprite import and HTML verification are recorded in the [combined report](../Class_Skill_Icons.en.md).
+
 Updated on: 2026-09-22
 
 [한국어](Class_Skill_Icons_Warrior.md)

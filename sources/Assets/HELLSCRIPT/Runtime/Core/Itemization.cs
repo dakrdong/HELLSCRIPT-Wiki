@@ -258,6 +258,8 @@ namespace Hellscript
             do{n=RandomStream.Next(ref rng)-1;}while(n>=limit);
             return min+(int)(n%range);
         }
+        public static int UniformQuality(ref uint rng,int minimum)
+        {if(minimum<0||minimum>10000)throw new ArgumentOutOfRangeException(nameof(minimum));return Integer(ref rng,minimum,10001);}
         struct Allocation { public int prefixes,suffixes,weight;public Allocation(int p,int s,int w){prefixes=p;suffixes=s;weight=w;} }
         static readonly Allocation[][] allocations={new[]{new Allocation(0,0,1)},new[]{new Allocation(1,0,1),new Allocation(0,1,1)},new[]{new Allocation(1,1,1)},new[]{new Allocation(2,1,50),new Allocation(1,2,50)},new[]{new Allocation(2,2,60),new Allocation(3,1,20),new Allocation(1,3,20)}};
         static readonly List<AffixDefinition>[] affixPools=Enumerable.Range(0,8).Select(slot=>ItemCatalog.Affixes.Where(a=>a.Allows(slot)).ToList()).ToArray();

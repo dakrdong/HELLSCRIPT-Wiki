@@ -129,7 +129,7 @@ namespace Hellscript
             var panel=Panel(body,"Bag panel","1f221a","181b14");Place(panel,x,y,w,h);var drop=panel.gameObject.AddComponent<InventoryDropTarget>();drop.window=this;drop.slot=-2;
             Txt(panel,"소지품",14,0,94,30,16,pale);Txt(panel,Loc.F("{0} / {1}",Hero.inventory.Count(i=>!i.equipped),Hero.capacity),w-113,0,99,30,11,gold,TextAnchor.MiddleRight);
             string[] categories={"전체","무기","방어구","장신구"};float tab=(w-28)/4;
-            for(int n=0;n<4;n++){int c=n;Btn(panel,categories[n],14+n*tab,30,tab,26,()=>{category=c;Repaint(true);},category==n,11).name="inventory-category-"+n;}
+            for(int n=0;n<4;n++){int c=n;var button=Btn(panel,categories[n],14+n*tab,30,tab-3,26,()=>{category=c;Repaint(true);},false,11);button.name="inventory-category-"+n;UiTheme.Choice(button,category==n);}
             float filterWidth=(w-36)/2;
             FilterButton(panel,grades==31?Loc.T("모든 등급"):Loc.F("등급 · {0}개",GradeNames.Where((g,n)=>(grades&(1<<n))!=0).Count()),14,61,filterWidth,"grade");
             FilterButton(panel,Loc.F("정렬 · {0}",OrderLabels[Array.IndexOf(Orders,order)]),22+filterWidth,61,filterWidth,"order");
@@ -150,7 +150,7 @@ namespace Hellscript
             float bw=(w-48)/3;
             Btn(rail,selecting?"분해 취소":"분해",0,23,bw,34,ToggleSelection,false,11).name="inventory-dismantle";
             Btn(rail,selecting?"자동 선택":"일괄 분해",bw+10,23,bw,34,()=>{if(selecting)AutoSelect();else ShowSalvage(true);},false,11).name="inventory-bulk";
-            var action=Btn(rail,"선택 분해",(bw+10)*2,23,bw,34,()=>ShowSalvage(false),true,11);action.name="inventory-selected";action.gameObject.SetActive(selecting&&selected.Count>0);
+            var action=Btn(rail,"선택 분해",(bw+10)*2,23,bw,34,()=>ShowSalvage(false),true,11);action.name="inventory-selected";UiTheme.Button(action,destructive:true);action.gameObject.SetActive(selecting&&selected.Count>0);
         }
         void UpdateStatus(){if(status!=null)status.text=message!=""?Loc.T(message):selecting?Loc.T("아이템을 터치해 선택하거나 해제할 수 있습니다."):Loc.T("잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.");}
         public void Toast(string value){message=value;messageUntil=Time.unscaledTime+3.2f;UpdateStatus();}

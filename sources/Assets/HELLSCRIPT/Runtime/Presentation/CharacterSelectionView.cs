@@ -59,7 +59,7 @@ namespace Hellscript
             heroName.gameObject.SetActive(selected);description.gameObject.SetActive(selected);
             start.gameObject.SetActive(selected&&Stage.Ready);start.interactable=selected&&Stage.Ready&&!session.Entering;
             for(int i=0;i<classButtons.Length;i++)
-                classButtons[i].GetComponent<Image>().color=state.Selected==i?new Color(.24f,.11f,.065f,.97f):new Color(.035f,.039f,.045f,.9f);
+                UiTheme.Choice(classButtons[i],state.Selected==i,false);
             if(selected)
             {
                 var h=game.Store.Data.heroes[state.Selected];heroName.text=Loc.F("{0}  ·  Lv.{1}",game.catalog.classNames[(int)h.heroClass],h.level);
@@ -131,9 +131,9 @@ namespace Hellscript
             var r=Rect(name,parent);var image=r.gameObject.AddComponent<Image>();image.color=primary?new Color(.36f,.064f,.045f,.98f):new Color(.035f,.039f,.045f,.9f);
             var border=Rect("Etched frame",r);border.anchorMin=Vector2.zero;border.anchorMax=Vector2.one;border.offsetMin=border.offsetMax=Vector2.zero;
             var frame=border.gameObject.AddComponent<TitleFrameGraphic>();frame.color=Gold;frame.raycastTarget=false;
-            var b=r.gameObject.AddComponent<Button>();b.targetGraphic=image;var colors=b.colors;colors.highlightedColor=new Color(1.4f,1.3f,1.15f);colors.selectedColor=colors.highlightedColor;colors.disabledColor=new Color(.4f,.4f,.4f,.7f);b.colors=colors;
+            var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=image;
             var t=Caption(r,"Caption",label,size,Bone);t.rectTransform.anchorMin=Vector2.zero;t.rectTransform.anchorMax=Vector2.one;t.rectTransform.offsetMin=new Vector2(8,3);t.rectTransform.offsetMax=new Vector2(-8,-3);
-            b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
+            UiTheme.Button(b,primary);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
         }
     }
 }

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "WP19",
+    "heroClass": "Warrior",
+    "kind": "passive",
+    "name": {
+      "ko": "거인의 보루",
+      "en": "Titan's Bulwark"
+    },
+    "displayOrder": 35,
+    "passiveOrder": 19,
+    "status": "design_only",
+    "unlockLevel": 40,
+    "maxRank": 5,
+    "description": {
+      "ko": "거인의 심판으로 직접 맞힌 적마다 최대 HP 3%, 최대 15% 보호막을 4초간 얻습니다.",
+      "en": "Each enemy directly hit by Titan's Judgment grants a 4s barrier of 3% maximum HP, capped at 15%."
+    },
+    "parameters": {},
+    "anchors": [
+      "W18"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_barbarian_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "DES_LW46"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SW08"
+    ]
+  },
+  {
+    "id": "AP19",
+    "heroClass": "Ranger",
+    "kind": "passive",
+    "name": {
+      "ko": "끝없는 추격",
+      "en": "Relentless Pursuit"
+    },
+    "displayOrder": 35,
+    "passiveOrder": 19,
+    "status": "design_only",
+    "unlockLevel": 40,
+    "maxRank": 5,
+    "description": {
+      "ko": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
+      "en": "Shadow Pursuit lasts 2s longer and allows 2 additional total procs."
+    },
+    "parameters": {},
+    "anchors": [
+      "A18"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_demon-hunter_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "DES_LA46"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SA08"
+    ]
+  },
+  {
+    "id": "MP19",
+    "heroClass": "Mage",
+    "kind": "passive",
+    "name": {
+      "ko": "현자의 수호",
+      "en": "Sage's Ward"
+    },
+    "displayOrder": 35,
+    "passiveOrder": 19,
+    "status": "design_only",
+    "unlockLevel": 40,
+    "maxRank": 5,
+    "description": {
+      "ko": "현자의 화신이 생성하는 보호막에 최대 HP 10%를 더합니다.",
+      "en": "Add 10% maximum HP to the barrier created by Sage Incarnate."
+    },
+    "parameters": {},
+    "anchors": [
+      "M18"
+    ],
+    "tags": [
+      "Passive"
+    ],
+    "references": [
+      "D3_wizard_passive"
+    ],
+    "rankPolicy": "new_passive_magnitude_only",
+    "equipmentIds": [
+      "DES_LM46"
+    ],
+    "auto": {
+      "ko": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
+      "en": "Applies while equipped when the stated condition is satisfied."
+    },
+    "implementationNeeds": [
+      "id_based_skill_registry",
+      "passive_evaluation",
+      "run_snapshot"
+    ],
+    "mechanicReference": "D3 conditional passive structure; HELLSCRIPT equipment requirements",
+    "setIds": [],
+    "exampleBuildIds": [
+      "BUILD_REF_SM08"
+    ]
+  }
+]

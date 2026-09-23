@@ -21,7 +21,7 @@ namespace Hellscript
         public int SelectedStage=1;
         public bool Running => Combat!=null;
         public bool Active => Combat!=null&&Combat.State.phase!=RunPhase.Cleared&&Combat.State.phase!=RunPhase.Failed;
-        public float EffectiveSpeed => CombatSpeedAccess.Resolve(Store?.Data.speed ?? 1f);
+        public float EffectiveSpeed => Combat?.State.training<0&&Combat.State.riftAttendance?.version==1?Combat.State.riftAttendance.speed:1f;
         float saveClock,resultDelay;
         bool resultShown,backgroundPaused;
         void Awake()
@@ -35,7 +35,7 @@ namespace Hellscript
             InitializeDisplaySettings(saveDirectory);
             InitializeInterfaceScale(saveDirectory);
             InitializeIdle(saveDirectory);
-            try{Store=new GameStore(saveDirectory,catalog);}
+            try{Store=new GameStore(saveDirectory,catalog);if(!Store.ActivateSkillTrees(catalog))throw new InvalidOperationException(Store.Error);}
             catch(Exception e){Notice=e.Message;UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);enabled=false;return;}
             SelectedStage=Mathf.Max(1,Store.Data.Hero.highestClear+1);Notice=Store.OfflineMessage;
             if(Store.GemRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.GemRecoveryMessage;
@@ -70,9 +70,10 @@ namespace Hellscript
             BeginRun(training,false,null,true);
 #endif
         }
-        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false)
+        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1)
         {
             if(Active)return;
+            if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}
             if(!continueRepeat)ExitIdle(false);
             if(training>=0&&!fullSkillTraining&&!ContentUnlocks.Has(Store.Data,ContentUnlocks.Train)){Notify(ContentUnlocks.Condition(ContentUnlocks.Train));return;}
             if(!resume&&Store.Data.suspendedRun!=null){Notice="진행 중인 균열을 먼저 이어서 완료해 주세요.";UI.ShowTown();return;}
@@ -81,9 +82,11 @@ namespace Hellscript
             if(snapshot!=null){int hero=Store.Data.heroes.FindIndex(h=>h.id==snapshot.heroId);if(hero<0){Notify("저장된 영웅을 찾을 수 없습니다.");return;}Store.Data.selectedHero=hero;}
             if(training<0&&snapshot==null)
             {
+                // A paid confirmation must not become a delayed free launch after changing supplies.
+                if(riftSpeed!=1)CancelPotionDeparture();
                 string visit=PotionVisit();
                 if(!PrepareDeparturePotions(visit,continueRepeat))
-                {if(!continueRepeat&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;}return;}
+                {if(!continueRepeat&&riftSpeed==1&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;}return;}
             }
             CancelPotionDeparture();
             var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
@@ -99,12 +102,13 @@ namespace Hellscript
                 if(!resume&&Combat.EdictActive&&!Store.Data.repeatHunt.policy.stopWhenFull&&Economy.FreeSlots(Store.Data.Hero)<=0)Combat.State.limitedLoot=true;
             }
             else Store.Data.repeatHunt=null;
-            if(!Store.Save())
+            if(!(training<0?Store.CommitRiftEntry(Combat.State,riftSpeed,resume):Store.Save()))
             {
                 Combat=previous;Store.Data.repeatHunt=previousSession;Store.Data.suspendedRun=previousSuspended;
                 Store.Data.Hero.lastRiftFingerprint=fingerprint;Store.Data.Hero.lastRiftBoss=boss;
                 BlockRepeat(RepeatBlock.Save,Store.Error);Notify(Store.Error);return;
             }
+            UI.CloseRiftEntry();
             if(previous!=null)previous.Visual-=World.Effect;
             repeatRestored=false;portalCleanupTried=false;repeatClock=Time.realtimeSinceStartupAsDouble;
             FirstPlayGuide.Enter(Store.Data,Combat.State,resume);
@@ -112,6 +116,7 @@ namespace Hellscript
             if(DisplayDimmed)World.DeferDungeon();else{World.BuildDungeon(Combat.State);UI.ShowBattle();}
             RestoreForegroundClock();resultDelay=0;resultShown=false;Save();
         }
+        public void BeginRiftEntry(bool accelerated)=>BeginRun(-1,false,null,false,false,accelerated?1.5f:1);
         public void TogglePause()
         {if(!Active)return;if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
         public void SetSpeed(float speed)
@@ -137,6 +142,7 @@ namespace Hellscript
         public void EnterPlaza(bool fresh=false)
         {
             if(Active)return;
+            if(!Store.ActivateSkillTrees(catalog)){Notify(Store.Error);return;}
             if(fresh||Town==null)VisitSanctuary(PotionVisit());
             if(Combat!=null){Combat.Visual-=World.Effect;Combat=null;}
             if(fresh||Town==null)Town=new TownWalk();
@@ -184,6 +190,7 @@ namespace Hellscript
         }
         public void ReturnTown()
         {
+            SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
             ExitIdle(false);RestoreForegroundClock();
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();
             Comparison=null;ComparisonError="";
@@ -235,9 +242,10 @@ namespace Hellscript
             if(Combat==null){TickPlaza(Mathf.Min(Time.unscaledDeltaTime,.25f));return;}
             // This display-only pause is not serialized into the run. Existing pause reasons
             // and the partial simulation tick remain exactly as they were on entry.
-            if(UI.CommonPanelOpen)return;
+            SettleRiftAttendance(elapsed);
+            if(UI.CommonPanelOpen&&Active){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}
             var run=Combat.State;float real=(float)elapsed;bool wasActive=Active;
-            if(Active&&!backgroundPaused)run.realTime+=real;
+            if(Active&&!backgroundPaused){if(run.riftAttendance?.version==1)run.realTime=(float)(run.riftAttendance.elapsedMs/1000);else run.realTime+=real;}
             if(Active&&!run.paused&&!run.portal&&!backgroundPaused&&!foregroundResumeRequired&&string.IsNullOrEmpty(run.navigationError))
             {
                 combatClock.Accumulate(elapsed,EffectiveSpeed);int guard=0;
@@ -254,8 +262,16 @@ namespace Hellscript
             if(!backgroundPaused){saveClock+=real;if(saveClock>=3){saveClock=0;Save();}}
             UpdateIdlePresentation();
         }
+        void SettleRiftAttendance(double elapsed)
+        {
+            if(!Active||Combat.State.training>=0||backgroundPaused||foregroundResumeRequired)return;
+            double charged=Store.AttendRift(Combat.State,elapsed*1000);
+            Combat.State.realTime=(float)(Combat.State.riftAttendance.elapsedMs/1000);
+            if(charged+0.001<elapsed*1000||Store.Data.riftFatigue.Total<=0)Combat.ExhaustFatigue();
+        }
         void OnApplicationPause(bool paused)
         {
+            if(paused)SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
             bool wasPaused=backgroundPaused;backgroundPaused=paused;repeatClock=Time.realtimeSinceStartupAsDouble;combatClock.Reset(repeatClock);
             if(paused&&wasPaused)return;
             if(paused&&Combat?.State.training<0){PauseForForeground("앱을 나가 사냥을 보존했습니다. 계속하려면 재개를 눌러 주세요.");ExitIdle(false);}
@@ -272,6 +288,6 @@ namespace Hellscript
         }
         // Desktop players can suspend updates on focus loss without a mobile pause callback.
         void OnApplicationFocus(bool focused){if(!focused){Town?.Cancel();UI?.ResetTownInput();}repeatClock=Time.realtimeSinceStartupAsDouble;combatClock.Reset(repeatClock);}
-        void OnApplicationQuit(){if(Store!=null)Save();}
+        void OnApplicationQuit(){if(Store!=null){SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));Save();}}
     }
 }

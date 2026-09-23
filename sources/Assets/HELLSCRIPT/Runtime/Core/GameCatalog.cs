@@ -120,6 +120,7 @@ namespace Hellscript
     [Serializable]
     public sealed class HeroSave
     {
+        public RiftEntryProgress riftProgress=new RiftEntryProgress();
         public SlotProgress slotProgress=new SlotProgress();
         public bool classSkillValidation;
         public float classUltimateRemaining,classUltimateTotal;
@@ -151,9 +152,11 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public RiftFatigue riftFatigue=new RiftFatigue();
         public List<AspectProgress> aspects=new List<AspectProgress>();
         public int enhancementStones;
         public ForgeAccount forge=new ForgeAccount();
+        public CoreCraftState coreCraft=new CoreCraftState();
         public SalvagePreferences salvage=new SalvagePreferences();
         public int gemCapacity=GemInventory.DefaultCapacity;
         public List<GemStack> gems=new List<GemStack>();
@@ -288,6 +291,7 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public RiftAttendance riftAttendance=new RiftAttendance();
         public int[] slotLevels;
         public ClassSkillRuntimeState classSkills;
         public PotionRuntimeState potions=new PotionRuntimeState();

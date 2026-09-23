@@ -21,7 +21,7 @@ namespace Hellscript
         Button Btn(Transform parent,string label,float x,float y,float w,float h,Action click,bool primary=false,int size=11)
         {
             var r=Panel(parent,label,primary?"71352a":"343428",primary?"482219":"25261c",primary?"b18b5a":"786342");Place(r,x,y,w,h);r.GetComponent<StorageSurface>().inset=true;
-            var b=r.gameObject.AddComponent<Button>();b.targetGraphic=r.GetComponent<Image>();var colors=b.colors;colors.highlightedColor=new Color(1.2f,1.13f,1.03f);colors.pressedColor=new Color(.75f,.72f,.64f);b.colors=colors;UiTheme.Button(b,primary);
+            var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=r.GetComponent<Image>();UiTheme.Button(b,primary);
             var t=Txt(r,label,4,0,w-8,h,size,pale,TextAnchor.MiddleCenter);t.resizeTextForBestFit=true;t.resizeTextMinSize=8;t.resizeTextMaxSize=t.fontSize;b.onClick.AddListener(()=>click());return b;
         }
         void Glyph(Transform parent,string symbol,float x,float y,float size,Color color)
@@ -41,7 +41,7 @@ namespace Hellscript
             var corners=new Vector3[4];anchor.GetWorldCorners(corners);var bottom=frame.InverseTransformPoint(corners[0]);
             float w=anchor.rect.width,h=kind=="grade"?232:200;
             filterMenu=Rect("Inventory filter layer",overlays);Stretch(filterMenu);
-            var shade=Btn(filterMenu,"",0,0,width,height,CloseFilter);shade.name="inventory-filter-backdrop";shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
+            var shade=Btn(filterMenu,"",0,0,width,height,CloseFilter);shade.name="inventory-filter-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
             var menu=Panel(filterMenu,"Inventory filter list","343023","202419","a68b59");
             Place(menu,Mathf.Clamp(bottom.x,8,width-w-8),Mathf.Clamp(frame.rect.yMax-bottom.y+4,8,height-h-8),w,h);
             Txt(menu,kind=="grade"?"등급":"정렬",10,0,w-48,30,12,gold);
@@ -53,7 +53,7 @@ namespace Hellscript
                 {
                     if(kind=="grade"){if(grades==bit)return;grades^=bit;Repaint(true);RefreshGradeFilter();}
                     else {order=Orders[index];CloseFilter();Repaint(true);}
-                },chosen,11);row.name="inventory-"+kind+"-option-"+n;
+                },chosen,11);row.name="inventory-"+kind+"-option-"+n;UiTheme.Choice(row,chosen,false);
                 Place(row.GetComponentInChildren<Text>().rectTransform,29,0,w-53,29);row.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
                 if(kind=="grade"){Check(row.transform,7,7,15,chosen);row.interactable=grades!=bit;}
                 else if(chosen)Glyph(row.transform,"check",7,6,16,gold);
@@ -66,7 +66,7 @@ namespace Hellscript
             for(int n=0;n<GradeNames.Length;n++)
             {
                 int bit=1<<n;bool chosen=(grades&bit)!=0;var row=Find("inventory-grade-option-"+n);row.interactable=grades!=bit;
-                UiTheme.Button(row,chosen);
+                UiTheme.Choice(row,chosen,false);
                 var check=(RectTransform)row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?"c4a774":"13180f",chosen?"c4a774":"13180f","c0a475");
                 if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);else if(chosen)Glyph(check,"check",1,1,13,ink);
             }

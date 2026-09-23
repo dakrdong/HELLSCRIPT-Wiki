@@ -41,15 +41,15 @@ namespace Hellscript.Tests
         static IEnumerable Effects()
         {
             float[] attack={3,5,8,12,17,23},resist={8,14,22,32,45,60},utility={4,7,11,16,22,30};
-            float[][] armor={new float[]{2,3.5f,5,7,9.5f,12},new float[]{1,1.5f,2.5f,3.5f,5,6.5f},new float[]{.4f,.7f,1.1f,1.6f,2.2f,3},new float[]{3,5,8,11,15,20},new float[]{1,1.5f,2.5f,3.5f,4.5f,6},new float[]{3,5,8,12,16,21},new float[]{3,5,8,12,16,21}};
-            StatId[] weaponStats={StatId.FireDamage,StatId.ColdDamage,StatId.LightningDamage,StatId.PoisonDamage,StatId.ShadowDamage,StatId.PhysicalDamage,StatId.CriticalStrikeDamage};
-            StatId[] armorStats={StatId.MaximumLifePercent,StatId.DamageReduction,StatId.ResourceGeneration,StatId.DamageReduction,StatId.MovementSpeed,StatId.BarrierGeneration,StatId.Armor};
-            StatId[] jewelryStats={StatId.FireResistance,StatId.ColdResistance,StatId.LightningResistance,StatId.PoisonResistance,StatId.ShadowResistance,StatId.AllResistance,StatId.PotionHealing};
-            GemEffectKind[] armorKinds={GemEffectKind.Stat,GemEffectKind.BuffReduction,GemEffectKind.Stat,GemEffectKind.PeriodicReduction,GemEffectKind.Stat,GemEffectKind.Stat,GemEffectKind.ArmorPercent};
-            for(int gem=0;gem<7;gem++)for(int tier=1;tier<=6;tier++)
+            float[][] armor={new float[]{2,3.5f,5,7,9.5f,12},new float[]{1,1.5f,2.5f,3.5f,5,6.5f},new float[]{.4f,.7f,1.1f,1.6f,2.2f,3},new float[]{3,5,8,11,15,20},new float[]{1,1.5f,2.5f,3.5f,4.5f,6},new float[]{3,5,8,12,16,21}};
+            StatId[] weaponStats={StatId.FireDamage,StatId.ColdDamage,StatId.LightningDamage,StatId.PoisonDamage,StatId.ShadowDamage,StatId.PhysicalDamage};
+            StatId[] armorStats={StatId.MaximumLifePercent,StatId.DamageReduction,StatId.ResourceGeneration,StatId.DamageReduction,StatId.MovementSpeed,StatId.BarrierGeneration};
+            StatId[] jewelryStats={StatId.FireResistance,StatId.ColdResistance,StatId.LightningResistance,StatId.PoisonResistance,StatId.ShadowResistance,StatId.AllResistance};
+            GemEffectKind[] armorKinds={GemEffectKind.Stat,GemEffectKind.BuffReduction,GemEffectKind.Stat,GemEffectKind.PeriodicReduction,GemEffectKind.Stat,GemEffectKind.Stat};
+            for(int gem=0;gem<6;gem++)for(int tier=1;tier<=6;tier++)
             {
                 string id="G0"+(gem+1);
-                yield return new TestCaseData(id,tier,0,GemEffectKind.Stat,weaponStats[gem],(gem==6?utility:attack)[tier-1]).SetName($"Gem_{id}_Tier{tier}_Weapon");
+                yield return new TestCaseData(id,tier,0,GemEffectKind.Stat,weaponStats[gem],attack[tier-1]).SetName($"Gem_{id}_Tier{tier}_Weapon");
                 yield return new TestCaseData(id,tier,1,armorKinds[gem],armorStats[gem],armor[gem][tier-1]).SetName($"Gem_{id}_Tier{tier}_Armor");
                 yield return new TestCaseData(id,tier,6,GemEffectKind.Stat,jewelryStats[gem],(gem>=5?utility:resist)[tier-1]).SetName($"Gem_{id}_Tier{tier}_Jewelry");
             }
@@ -90,13 +90,11 @@ namespace Hellscript.Tests
             Call(sim,"AddShield","GEM_TEST_CAP",100000f,5f,2);Assert.AreEqual(sim.Stats.hp,sim.State.shield,.001f);
         }
         [Test]
-        public void MaximumLifeResourceAndPotionBonusesAffectFinishedValuesAndActualHealing()
+        public void MaximumLifeAndResourceBonusesAffectFinishedValues()
         {
             var head=Gear(1);var before=new HeroStats(account.Hero);Install(head,"G01");var after=new HeroStats(account.Hero);
             Assert.AreEqual(before.hp/(1+before.Bonus(StatId.MaximumLifePercent)/100)*.12f,after.hp-before.hp,.001f);
             Install(head,"G03");after=new HeroStats(account.Hero);Assert.AreEqual(3,after.regen-before.regen,.001f);
-            var ring=Gear(7);Install(ring,"G07");var sim=Simulation();sim.State.health=1;sim.State.potionCd=0;
-            Assert.IsTrue((bool)Call(sim,"TryUsePotion",1f));Assert.AreEqual(Mathf.Min(sim.Stats.hp,1+sim.Stats.hp*.35f*sim.Stats.healing*sim.Stats.potionHealing),sim.State.health,.001f);
         }
         [TestCase("G01",Element.Fire)][TestCase("G02",Element.Cold)][TestCase("G03",Element.Lightning)][TestCase("G04",Element.Poison)][TestCase("G05",Element.Shadow)][TestCase("G06",Element.Physical)]
         public void WeaponGemsEnterActualAdditiveDamageWithoutAnIndependentMultiplier(string id,int element)
@@ -190,13 +188,13 @@ namespace Hellscript.Tests
         [TestCase(1,1,1)][TestCase(9,1,1)][TestCase(10,1,2)][TestCase(19,1,2)][TestCase(20,2,3)][TestCase(29,2,3)][TestCase(30,3,3)][TestCase(100,3,3)]
         public void RewardTierBoundariesAndSeedReplayNeverProduceFusionOnlyTiers(int stage,int minimum,int maximum)
         {
-            uint a=81723,b=a;var counts=new int[7];int lower=0;
+            uint a=81723,b=a;var counts=new int[6];int lower=0;
             for(int n=0;n<10000;n++)
             {
                 var left=GemCatalog.Roll(stage,ref a);var right=GemCatalog.Roll(stage,ref b);Assert.AreEqual(Json(left),Json(right));Assert.That(left.tier,Is.InRange(minimum,maximum));Assert.AreEqual(1,left.count);
                 counts[int.Parse(left.gemId.Substring(1))-1]++;if(left.tier==minimum)lower++;
             }
-            foreach(int count in counts)Assert.That(count,Is.InRange(1200,1650));if(minimum!=maximum)Assert.That(lower,Is.InRange(6700,7300));
+            foreach(int count in counts)Assert.That(count,Is.InRange(1400,1900));if(minimum!=maximum)Assert.That(lower,Is.InRange(6700,7300));
         }
         [Test]
         public void GemmedEquipmentCannotBeSoldSalvagedOrAutomaticallyReplaced()
@@ -230,8 +228,8 @@ namespace Hellscript.Tests
         [Test]
         public void ValidSocketsSurviveARealStoreRestartAndLegacyAbsenceStaysEmpty()
         {
-            var store=new GameStore(directory,catalog);account=store.Data;var item=Gear();Install(item,"G07");Assert.IsTrue(store.Save());string id=item.id;
-            var loaded=new GameStore(directory,catalog);Assert.AreEqual("G07",loaded.Data.Hero.inventory.Single(i=>i.id==id).sockets.Single().gemId);Assert.IsEmpty(loaded.GemRecoveryArchive);
+            var store=new GameStore(directory,catalog);account=store.Data;var item=Gear();Install(item,"G06");Assert.IsTrue(store.Save());string id=item.id;
+            var loaded=new GameStore(directory,catalog);Assert.AreEqual("G06",loaded.Data.Hero.inventory.Single(i=>i.id==id).sockets.Single().gemId);Assert.IsEmpty(loaded.GemRecoveryArchive);
             Assert.IsTrue(loaded.Data.heroes.Skip(1).SelectMany(h=>h.inventory).All(i=>i.sockets.Count==0));
         }
         [TestCase("G99",1)][TestCase("G01",0)][TestCase("G01",7)][TestCase("",5)]
@@ -255,6 +253,48 @@ namespace Hellscript.Tests
             var store=new GameStore(directory,catalog);account=store.Data;var item=Gear();item.contentVersion=2;Install(item,"G01");
             Assert.IsTrue(store.Save());Assert.AreEqual(GemCatalog.SocketItemVersion,item.contentVersion);Assert.Greater(item.contentVersion,2);
             var loaded=new GameStore(directory,catalog);Assert.AreEqual(GemCatalog.SocketItemVersion,loaded.Data.Hero.inventory.Single(i=>i.id==item.id).contentVersion);
+        }
+        [Test]
+        public void OnlySixElementalGemsAreAvailableAndSkullTransactionsAreRejected()
+        {
+            CollectionAssert.AreEqual(new[]{"G01","G02","G03","G04","G05","G06"},GemCatalog.Gems.Select(g=>g.id));
+            Assert.AreEqual(6,GemCatalog.MaximumTier);Assert.IsNull(GemCatalog.Find("G07"));
+            var bag=new List<GemStack>();Assert.IsFalse(GemStacks.TryAdd(bag,50,Stack("G07")));
+            int gold=10000;Assert.IsFalse(GemStacks.TryFuse(bag,50,"G07",1,ref gold));Assert.AreEqual(10000,gold);
+            var item=Gear();Install(item,"G07");Assert.IsFalse(GemCatalog.TryEffect(item,out _,out _));
+            Assert.Throws<ArgumentException>(()=>GemCatalog.ValidateSockets(item));
+        }
+        [TestCase(false)][TestCase(true)]
+        public void RetiredSkullsMigrateWithoutLosingStacksSocketsOrPendingRewards(bool completedRun)
+        {
+            var store=new GameStore(directory,catalog);account=store.Data;
+            var run=new CombatSimulation(account,catalog,1,seed:991).State;run.training=-1;
+            account.gemCapacity=2;account.gems.Add(Stack("G06",6,999));account.gems.Add(Stack("G07",6,999));
+            var equipped=Gear();Install(equipped,"G07",4);
+            var warehouse=Gear(6,2,false);Install(warehouse,"G07",2);account.Hero.inventory.Remove(warehouse);account.warehouse.Add(warehouse);
+            run.resources.Clear();run.resources.Add(new RiftResourceDrop{id=701,kind=RiftResourceKind.Gem,gemId="G07",tier=3,amount=2,claimed=true});
+            run.resources.Add(new RiftResourceDrop{id=702,kind=RiftResourceKind.Gem,gemId="G07",tier=1,amount=1});
+            if(completedRun)
+            {run.phase=RunPhase.Cleared;var policy=RepeatHuntPolicy.Compile(account.Hero.build,null);account.repeatHunt=RepeatHunt.Start(run,policy);RepeatHunt.Complete(account.repeatHunt,run,policy,account.Hero.highestClear);}
+            else account.suspendedRun=run;
+            string path=Path.Combine(directory,"hellscript-local-v1.json"),original=Json(account);File.WriteAllText(path,original);
+            var loaded=new GameStore(directory,catalog);var migrated=loaded.Data;
+            Assert.AreEqual(1998,GemStacks.Count(migrated.gems,"G06",6));Assert.AreEqual(2,migrated.gems.Count);Assert.AreEqual(2,migrated.gemCapacity);
+            var socket=migrated.Hero.inventory.Single(i=>i.id==equipped.id).sockets.Single();Assert.AreEqual("G06",socket.gemId);Assert.AreEqual(4,socket.tier);
+            socket=migrated.warehouse.Single(i=>i.id==warehouse.id).sockets.Single();Assert.AreEqual("G06",socket.gemId);Assert.AreEqual(2,socket.tier);
+            var result=completedRun?migrated.repeatHunt.pendingResult:migrated.suspendedRun;
+            Assert.IsTrue(result.resources.All(g=>g.gemId=="G06"));CollectionAssert.AreEqual(new[]{2,1},result.resources.Select(g=>g.amount));
+            CollectionAssert.AreEqual(new[]{3,1},result.resources.Select(g=>g.tier));Assert.IsTrue(result.resources[0].claimed);Assert.IsFalse(result.resources[1].claimed);
+            Assert.AreEqual(original,File.ReadAllText(loaded.GemRecoveryArchive));Assert.That(loaded.GemRecoveryMessage,Does.Contain("금강석"));
+            Assert.IsTrue(loaded.Save());var again=new GameStore(directory,catalog);Assert.IsEmpty(again.GemRecoveryArchive);
+            Assert.AreEqual(1998,GemStacks.Count(again.Data.gems,"G06",6));Assert.AreEqual(1,Directory.GetFiles(directory,"*.gem-recovery-*.json").Length);
+        }
+        [Test]
+        public void InvalidRetiredStackStillStopsLoadingAndPreservesOriginal()
+        {
+            var store=new GameStore(directory,catalog);account=store.Data;account.gems.Add(Stack("G07",6,1000));
+            string path=Path.Combine(directory,"hellscript-local-v1.json"),original=Json(account);File.WriteAllText(path,original);
+            Assert.Throws<NotSupportedException>(()=>new GameStore(directory,catalog));Assert.AreEqual(original,File.ReadAllText(path));
         }
         [Test]
         public void EverySocketDescriptionHasCompleteEnglishIncludingFractionalArmorEffects()

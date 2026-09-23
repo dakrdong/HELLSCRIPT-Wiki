@@ -31,7 +31,7 @@ Use `HeroStats`, `StatCatalog` and `ItemComparison` for numeric meaning; `Equipm
 
 `TownWalk` and `ContentUnlocks` own access. `UiTime` formats durations but never chooses a clock: UTC work and pausable battle time remain separate. `GlobalHudSnapshot`, `SkillIconView` and saved combat/training snapshots preserve consistent labels/icons without recomputing history from live gear. `UiSafeArea`, `Loc` and existing device display/text/audio preferences remain shared.
 
-Pass `EquipmentViewSource.Owned`, `Draft`, `BattleSnapshot` or `Catalog`. Detail/comparison views copy their input and never mutate the account. Catalog definitions have no acquired roll; never fabricate one for display. Controllers supply domain commands and drafts.
+Pass `EquipmentViewSource.Owned`, `Draft`, `BattleSnapshot`, `Catalog` or `RewardSnapshot`. Detail/comparison views copy their input and never mutate the account. Catalog definitions have no acquired roll; never fabricate one for display. Craft results and reward history use `RewardSnapshot` to preserve committed values. Controllers supply domain commands and drafts.
 
 ## Hunt Edict
 
@@ -55,14 +55,32 @@ Check identical equipment data, two rings/two hands/offhand/presets, unchanged s
 
 See [completed-work integration](Completed_Work_Integration.en.md) for the initial merge and excluded skill work, and [shared UI validation](Shared_UI_Validation.en.md) for implementation evidence.
 
+## Forge core crafting
+
+`BlacksmithWindow.Cores` extends the existing forge adapter with a fourth tab, reusing shared slots, rarity colors, details, fonts, scale and window/input ownership. Definitions use `ItemTooltip.CatalogRanges` and `ItemDetailView.AppendCatalog`; results pass saved items. The reasons for retaining portrait page navigation, three equal wide columns and the quality gauge inside the forge, along with validation, are documented in [core crafting](Core_Crafting.en.md).
+
 ## Aspect Runestone
 
 `AspectStoneWindow` is generated from the new-content template and opens `ContentWindowView` with `EquipmentViewSource.Owned`. It composes `CharacterEquipmentView`, `EquipmentSlotView` and `ItemDetailView` inside the shared navigation, scrolling body and fixed action region. Landscape has equipment, library and detail columns; portrait uses three steps. The confirmation step contains an inline equipment picker so changing slots preserves the selected aspect. `AspectStoneSession` owns selection and filters; `GameStore` owns collection, level-up and imprint transactions. Rune glyphs and red upgrade dots are content-specific meaning, while fonts, slots, window scale and panel colors use the shared owners. There is no field placement tab.
+
+## Buttons and tabs
+
+Follow the [shared button interaction contract](Button_UX.en.md). Create new buttons with `ContentWindowView.Button` and supply persistent selection with `UiTheme.Choice`. Do not duplicate button palettes or pointer transitions per screen.
+
+
+Shared UI does not require a rectangular frame for every control. Vaults use `UiButtonRole.Icon` and `StorageChestGraphic` for open, closed, purchasable and locked chests. Shared input state, theme and fonts remain authoritative; `StorageWindow` and `GameStore` own selection and transactions. Ambiguous filters retain text labels.
 
 ## Town and combat HUD placement
 
 `GlobalHudLayout` owns the persistent vitals, skills and potions; `GameUI.Plaza` and `TownJoystick` own the town heading, shortcuts and movement input. This HUD is an adapter using its existing canvas and proportional screen layout, rather than a content window. Potion and title backings reuse `StorageSurface` and `UiTheme` colors without new raster artwork. Presentation does not save accounts or consume potions. See [town HUD validation](Town_Hud_Responsive.en.md) for the portrait bottom baseline, centered movement pad and enlarged-text layout.
 
+## Native skill tree adapter
+
+The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives always apply; a slot menu opens that skill’s edict settings. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).
+
+## Rift entry adapter
+
+`RiftEntryWindow` uses the shared `ContentWindowView` owned-data entry point. Landscape fixes the sanctuary illustration and tier selection beside independently scrolling preparation, keeping the tier and entry conditions visible together. Pickers use the shared optional maximum size without a new canvas or lifecycle. It reuses `UiTheme` paid-fatigue colors, `PotionArt`, `SkillIconView` and existing `GameStore` transactions. First-clear rewards show empty icon slots in recycled rows without invented payouts. See [implementation and validation](Rift_Entry.en.md).
 ## Inventory potion placement
 
 At the user's request, potion cells use smaller dimensions of 32 in portrait and 28 in landscape. Equipment retains its 52/54 baseline. The adapter reuses `EquipmentSlotView` and sits beside the weapon row owned by `CharacterEquipmentView`, without adding a row. Per-cell assignment is separate from the shared use-order setting, with one gear beside the group. [Potion slot validation](Potion_Slots.en.md) records geometry, input and persistence evidence.

@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=9;
+        public const int MaximumSchemaVersion=11;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -50,6 +50,7 @@ namespace Hellscript
                 if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>40))return null;
                 if(a.heroes.Any(h=>h.level>ClassSkills.LevelCap(h)||!ClassSkillLoadout.IsAbsent(h.build.classSkills)&&!ClassSkills.Enabled(h)))
                     throw new NotSupportedException("This save requires the class-skill release. The original file is preserved.");
+                bool gemsMigrated=MigrateRetiredGemStacks(a);
                 Normalize(a);
                 if(a.schema>=2)
                 {
@@ -59,14 +60,15 @@ namespace Hellscript
                     if(socketItems.Any(i=>i.sockets!=null&&i.sockets.Count>0&&(!GemCatalog.AllowsSocket(i)||i.sockets.Count>1||i.sockets[0]==null||i.sockets[0].index!=0)))
                         throw new NotSupportedException(Loc.T("소켓 구조를 안전하게 읽을 수 없어 불러오기를 중단했습니다. 저장 파일은 보존했습니다."));
                     bool repaired=false,qualityRepaired=false;foreach(var item in socketItems)
-                    {repaired|=GemCatalog.RepairGemValues(item);qualityRepaired|=ItemQuality.RepairValues(item);}
+                    {gemsMigrated|=MigrateRetiredGemSockets(item);repaired|=GemCatalog.RepairGemValues(item);qualityRepaired|=ItemQuality.RepairValues(item);}
                     ValidateItems(a);
-                    if(repaired||qualityRepaired)
+                    if(repaired||qualityRepaired||gemsMigrated)
                     {
-                        string archive=file+(repaired?".gem-recovery-":".quality-recovery-")+Guid.NewGuid().ToString("N")+".json";
+                        string archive=file+(repaired||gemsMigrated?".gem-recovery-":".quality-recovery-")+Guid.NewGuid().ToString("N")+".json";
                         try{File.Copy(file,archive,false);}
-                        catch(Exception error){throw new NotSupportedException(Loc.T(repaired?"보석 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다.":"품질 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다."),error);}
+                        catch(Exception error){throw new NotSupportedException(Loc.T(repaired||gemsMigrated?"보석 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다.":"품질 복구 원본을 보관하지 못해 불러오기를 중단했습니다. 저장 파일은 보존했습니다."),error);}
                         if(repaired){GemRecoveryArchive=archive;GemRecoveryMessage=Loc.T("잘못된 보석 값을 빈 소켓으로 복구했습니다. 장비와 원본 저장 파일은 보존했습니다.");}
+                        if(gemsMigrated){GemRecoveryArchive=archive;GemRecoveryMessage=(repaired?GemRecoveryMessage+"\n":"")+Loc.T("해골 보석을 같은 단계와 수량의 금강석으로 바꿨습니다. 원본 저장 파일은 보존했습니다.");}
                         if(qualityRepaired){QualityRecoveryArchive=archive;QualityRecoveryMessage=Loc.T("잘못된 장비 품질 기록을 복구했습니다. 장비와 투자 원장, 원본 저장 파일은 보존했습니다.");}
                     }
                 }
@@ -96,7 +98,9 @@ namespace Hellscript
         static void Normalize(AccountSave a)
         {
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
+            a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
             AspectStone.Normalize(a);
+            CoreCrafting.Normalize(a);
             RuneGrowth.Normalize(a);
             BlacksmithCatalog.Normalize(a);
             Storage.Normalize(a);
@@ -114,6 +118,7 @@ namespace Hellscript
             a.transactions??=new System.Collections.Generic.List<EconomyReceipt>();
             foreach(var h in a.heroes)
             {
+                h.riftProgress??=new RiftEntryProgress();h.riftProgress.best??=new System.Collections.Generic.List<RiftBestTime>();h.riftProgress.claimed??=new System.Collections.Generic.List<int>();
                 h.potions??=new PotionInventory();h.potions.Validate();
                 if(h.trainingComparison!=null&&string.IsNullOrEmpty(h.trainingComparison.id))h.trainingComparison=null;
                 BehaviorRules.Normalize(h.build);
@@ -200,11 +205,12 @@ namespace Hellscript
             var items=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).Concat(RecordedItems(a));
             foreach(var run in new[]{a.suspendedRun,a.repeatHunt?.pendingResult})
                 if(run!=null)items=items.Concat(run.drops.Select(d=>d.item)).Concat(run.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
-            return items.Concat(EquipmentShop.PersistedItems(a));
+            return items.Concat(EquipmentShop.PersistedItems(a)).Concat(a.coreCraft.history.Select(r=>r.item));
         }
         static void ValidateItems(AccountSave a)
         {
             EquipmentShop.Validate(a);
+            CoreCrafting.Validate(a);
             BlacksmithCatalog.Validate(a);
             foreach(var h in a.heroes)h.potions.Validate();
             if(a.gold<0||a.materials<0||a.cores.Any(c=>c<0))throw new InvalidDataException("재화 값이 음수입니다.");
@@ -230,8 +236,10 @@ namespace Hellscript
                 h.build.passives=Array.Empty<int>();
                 h.edict=HuntEdictV2Storage.CreateForHero(h);
                 HuntEdictStorage.InitializeNewHero(h,catalog);
+                h.potions.Validate();
                 var w=Economy.CreateItem(h.heroClass,0,0,1,ref rng);w.baseId=new[]{"B02","B05","B08"}[i];w.baseIndex=i*3+1;w.name=w.DisplayName;w.equipped=true;ItemAcquisition.Stamp(a,w);h.inventory.Add(w);a.heroes.Add(h);
             }
+            a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
             AspectStone.Normalize(a);
             RuneGrowth.Normalize(a);return a;
         }
@@ -288,13 +296,13 @@ namespace Hellscript
                 var target=Data.heroes[i];var source=staged.heroes[i];
                 target.legacyPassiveSlots=source.legacyPassiveSlots;target.level=source.level;target.xp=source.xp;target.highestClear=source.highestClear;target.capacity=source.capacity;
                 target.lastRiftFingerprint=source.lastRiftFingerprint;target.lastRiftBoss=source.lastRiftBoss;
-                target.potions=source.potions;target.guide=source.guide;target.slotProgress=source.slotProgress;
+                target.riftProgress=source.riftProgress;target.potions=source.potions;target.guide=source.guide;target.slotProgress=source.slotProgress;
                 target.equipmentShop=source.equipmentShop;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
-            Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;
+            Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
-            Data.premium=staged.premium;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
+            Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;

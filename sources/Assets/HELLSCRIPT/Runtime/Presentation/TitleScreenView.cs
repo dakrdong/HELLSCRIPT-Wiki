@@ -167,10 +167,10 @@ namespace Hellscript
         }
         Button ActionButton(Transform parent,string id,string text,Action action,bool primary=false,int fontSize=16)
         {
-            var r=Plate(id,parent,primary?Red:Slate);var button=r.gameObject.AddComponent<Button>();button.targetGraphic=r.GetComponent<Image>();
-            var colors=button.colors;colors.normalColor=Color.white;colors.highlightedColor=new Color(1.45f,1.32f,1.15f);colors.selectedColor=colors.highlightedColor;colors.pressedColor=new Color(.7f,.64f,.55f);colors.disabledColor=new Color(.35f,.35f,.35f,.7f);colors.colorMultiplier=1;colors.fadeDuration=.13f;button.colors=colors;
+            var r=Plate(id,parent,primary?Red:Slate);var button=r.gameObject.AddComponent<UiButton>();button.targetGraphic=r.GetComponent<Image>();
+
             var label=Caption(r,"Caption",text,fontSize,primary?Bone:Muted);Fill(label.rectTransform);label.rectTransform.offsetMin=new Vector2(12,3);label.rectTransform.offsetMax=new Vector2(-12,-3);
-            button.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return button;
+            UiTheme.Button(button,primary);button.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return button;
         }
         static void SetCaption(Button b,string text)=>b.GetComponentInChildren<Text>().text=text;
 

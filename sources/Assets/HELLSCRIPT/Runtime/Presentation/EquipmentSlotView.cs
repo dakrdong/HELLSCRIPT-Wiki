@@ -63,6 +63,7 @@ namespace Hellscript
         public static void Glyph(Transform parent,string name,string symbol,float x,float y,float size,Color color)
         {var r=UiLayout.Rect(name,parent);UiLayout.Place(r,x,y,size,size);var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=color;glyph.raycastTarget=false;}
     }
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class EquipmentDropHighlight:MaskableGraphic
     {
         public bool hovered;

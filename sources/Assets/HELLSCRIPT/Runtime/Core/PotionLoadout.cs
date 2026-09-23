@@ -28,6 +28,7 @@ namespace Hellscript
             var ids=slots.Where(s=>!string.IsNullOrEmpty(s.id)).Select(s=>s.id).ToArray();
             if(ids.Distinct().Count()!=ids.Length)throw new ArgumentException("같은 물약은 여러 슬롯에 지정할 수 없습니다.");
             foreach(string id in ids)PotionCatalog.Get(id);
+            if(ids.Select(PotionCatalog.Family).Distinct().Count()!=ids.Length)throw new ArgumentException(Loc.T("같은 종류의 물약은 여러 슬롯에 지정할 수 없습니다."));
         }
         public static string[] Resolve(PotionInventory stock,PotionSlot[] slots,IReadOnlyList<PotionDefinition> catalog=null)
         {
@@ -53,7 +54,7 @@ namespace Hellscript
     {
         public PotionSlot[] slots;
         public PotionFallback fallback;
-        public int fallbackVersion;
+        public int fallbackVersion,familyVersion;
         // Resolving a preview is read-only. Older saves inherit the first assigned slot's rule once.
         public PotionFallback SharedFallback=>fallbackVersion>0?fallback:
             slots?.FirstOrDefault(s=>!string.IsNullOrEmpty(s?.id))?.fallback??PotionFallback.HigherGrade;
@@ -94,6 +95,19 @@ namespace Hellscript
         }
         void ValidateLoadout()
         {
+            if(familyVersion<0||familyVersion>1)throw new NotSupportedException("Invalid potion family version.");
+            if(familyVersion==0)
+            {
+                // Older saves could equip different grades of one gem. Preserve stock and the first slot.
+                var used=new Dictionary<string,string>();
+                if(slots?.Length==PotionLoadout.SlotCount&&slots.All(s=>s!=null))foreach(var slot in slots)
+                {
+                    if(string.IsNullOrEmpty(slot.id))continue;string family=PotionCatalog.Family(slot.id);
+                    if(used.TryGetValue(family,out var first)&&first!=slot.id)slot.id="";
+                    else used[family]=slot.id;
+                }
+                familyVersion=1;
+            }
             PotionLoadout.Validate(slots);
             if(fallbackVersion<0||fallbackVersion>1)throw new NotSupportedException("Invalid potion fallback version.");
             if(fallbackVersion==0){fallback=SharedFallback;fallbackVersion=1;}

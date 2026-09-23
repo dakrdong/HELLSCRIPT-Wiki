@@ -36,7 +36,7 @@ namespace Hellscript
             var rect=((RectTransform)cell.transform).rect;dragOffset=new Vector2(local.x-rect.xMin,rect.yMax-local.y);
             ghost=DrawCell(overlays,item,0,0,SlotSize,false);ghost.name="Inventory drag ghost";var group=ghost.gameObject.AddComponent<CanvasGroup>();group.blocksRaycasts=false;group.alpha=.88f;
             foreach(var target in body.GetComponentsInChildren<InventoryDropTarget>().Where(t=>t.slot>=0))
-                target.GetComponent<EquipmentSlotView>()?.SetDropHighlight(!draggingEquipped&&EquipmentSlots.PlanDrop(Hero,item,target.slot,target.index).Valid);
+                if(target.TryGetComponent<EquipmentSlotView>(out var slot))slot.SetDropHighlight(!draggingEquipped&&EquipmentSlots.PlanDrop(Hero,item,target.slot,target.index).Valid);
             Drag(data);
         }
         internal void Drag(PointerEventData data)

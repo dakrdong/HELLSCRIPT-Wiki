@@ -1,12 +1,12 @@
-# HELLSCRIPT Mage — 36 skills
+# HELLSCRIPT Mage — 37 skills
 
-Updated: 2026-09-22
+Updated: 2026-09-23
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
 [Rules and sources](HELLSCRIPT_Class_Skills.en.md) · [Equipment matrix](HELLSCRIPT_Skill_Equipment.en.md) · [한국어](HELLSCRIPT_Mage_Skills.md)
 
-16 normal actives, 18 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 35 and 36 share the final tier and are mutually exclusive.
+16 normal actives, 19 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 36 and 37 share the final tier and are mutually exclusive.
 
 ## Equipment-led build examples
 
@@ -86,7 +86,7 @@ Roll the set with Chain Lightning and charge Capacitor Orb. Storm Spear provides
 
 Normal actives: Fireball (`M01`), Blizzard (`M02`), Chain Lightning (`M03`), Elemental Compass (`M15`).
 
-Passives: Element crossover (`MP06`), Threefold Memory (`MP16`), Archmage's Testament (`MP18`). Selected ultimate: Sage Incarnate (`M18`).
+Passives: Element crossover (`MP06`), Threefold Memory (`MP16`), Sage's Ward (`MP19`). Selected ultimate: Sage Incarnate (`M18`).
 
 Compatible legendaries: Unquenched Heart (`LC03`).
 
@@ -96,7 +96,7 @@ After Compass, complete the set cycle with the three original skills. Sage Incar
 
 Normal actives: Blizzard (`M02`), Fireball (`M01`), Teleport (`M04`), Elemental Shield (`M05`).
 
-Passives: Dense Burn (`MP01`), Deep Chill (`MP02`), Stable Ward (`MP04`). Selected ultimate: Triune Collapse (`M17`).
+Passives: Dense Burn (`MP01`), Deep Chill (`MP02`), Archmage's Testament (`MP18`). Selected ultimate: Triune Collapse (`M17`).
 
 Keep the original two/four-piece skill triggers. The new ultimate uses a separate slot and does not impersonate a set-bound skill.
 
@@ -322,7 +322,7 @@ Create a 3m vortex within 8m for 4s. On creation, pull up to 5 enemies 1.5m towa
 
 **Mechanic reference:** D3 Black Hole / Energy Twister.
 
-## Passives · 17–34
+## Passives · 17–35
 
 ### 17. Dense Burn · `MP01`
 
@@ -520,17 +520,29 @@ At 80% pre-cast resource or more, a normal active's first direct hit gains +10% 
 
 New proposal · Lv.34
 
-If Triune Collapse's third stage actually hits, restore 15 resource once. With Sage Incarnate selected, add 10% maximum HP to its barrier. Apply only the selected ultimate branch.
+If Triune Collapse's third stage actually hits, restore 15 resource once.
 
 **Equipment links:** Threefold Crownstone (`DES_LM46`).
 
-**Companion skills:** Triune Collapse (`M17`), Sage Incarnate (`M18`).
+**Companion skills:** Triune Collapse (`M17`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
-## Final tier: ultimates · 35–36 · choose one
+### 35. Sage's Ward · `MP19`
 
-### 35. Triune Collapse · `M17`
+New proposal · Lv.40
+
+Add 10% maximum HP to the barrier created by Sage Incarnate.
+
+**Equipment links:** Threefold Crownstone (`DES_LM46`).
+
+**Companion skills:** Sage Incarnate (`M18`).
+
+**Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
+
+## Final tier: ultimates · 36–37 · choose one
+
+### 36. Triune Collapse · `M17`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 
@@ -544,7 +556,7 @@ Strike a 4m area within 10m for D200% fire, then D150% cold after 0.5s, then D15
 
 **Mechanic reference:** D3 Meteor / Frost Nova / Electrocute.
 
-### 36. Sage Incarnate · `M18`
+### 37. Sage Incarnate · `M18`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 

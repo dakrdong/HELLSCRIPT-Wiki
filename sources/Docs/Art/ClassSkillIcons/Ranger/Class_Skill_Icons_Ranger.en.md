@@ -1,5 +1,7 @@
 # Ranger skill icon production record
 
+[Relentless Pursuit AP19](manifests/AP19.json) was added on 2026-09-23, bringing the class total to 37. The record below describes the initial 36 icons. New Sprite import and HTML verification are recorded in the [combined report](../Class_Skill_Icons.en.md).
+
 Updated on: 2026-09-22
 
 Thirty-six Ranger skills now have independent PNG files: 16 normal actives, 2 ultimates and 18 passives. Every item is candidate art made through one distinct built-in image-generation request. No existing icons were duplicated or palette-swapped to fill coverage.

@@ -34,7 +34,7 @@ namespace Hellscript
         {
             var b=Button(parent,text,action,selected?RuneV13Art.Color("#393622"):RuneBg);b.name=name;Place((RectTransform)b.transform,x,y,w,h);
             var t=b.GetComponentInChildren<Text>();t.fontSize=Mathf.RoundToInt(11*runeUnit*InterfaceFactor);t.resizeTextForBestFit=true;t.resizeTextMinSize=Mathf.Max(7,Mathf.RoundToInt(10*runeUnit));t.resizeTextMaxSize=t.fontSize;
-            t.color=RuneText;var border=b.GetComponent<UIRectBorder>();border.color=selected?RuneV13Art.Color("#cfb77c"):RuneLine;return b;
+            UiTheme.Choice(b,selected);t.color=RuneText;var border=b.GetComponent<UIRectBorder>();border.color=selected?RuneV13Art.Color("#cfb77c"):RuneLine;return b;
         }
         void RuneIcon(Transform parent,string glyph,float x,float y,float size,Color? color=null)
         {var r=Rect("Icon "+glyph,parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();raw.texture=RuneV13Art.Atlas;raw.uvRect=RuneV13Art.Glyph("g-"+glyph);raw.color=color??RuneText;raw.raycastTarget=false;}
@@ -151,7 +151,7 @@ namespace Hellscript
             (runeUndoButton=RuneButton(bottom,"rune-undo","↶",UndoRunes,bw-234*s,4*s,34*s,foot-margin-8*s)).interactable=runeUndo.Count>0;
             (runeRevertButton=RuneButton(bottom,"rune-revert","되돌리기",()=>Confirm(Loc.T("모든 무기 보드의 미저장 변경을 버릴까요?"),()=>{ReloadRuneDraft();ShowRunes();}),bw-196*s,4*s,86*s,foot-margin-8*s)).interactable=RuneDirty;
             runeSave=RuneButton(bottom,"rune-save","변경 저장",SaveRuneDraft,bw-106*s,4*s,100*s,foot-margin-8*s,true);
-            runeSave.GetComponent<Image>().color=RuneV13Art.Color("#56251f");
+            UiTheme.Button(runeSave,true);
             overlay.SetAsLastSibling();UpdateRuneContents();RenderRuneDetail();
         }
         RuneBoardGraphic MakeRuneGraphic(RectTransform parent,string name){var r=Rect(name,parent);Stretch(r);return r.gameObject.AddComponent<RuneBoardGraphic>();}
@@ -288,7 +288,7 @@ namespace Hellscript
             if(RuneDirty){ShowToast("합성 전에 전체 배치를 저장하거나 되돌려 주세요.");return;}
             runeFusionSelection.RemoveWhere(id=>!game.Store.Data.runes.owned.Any(r=>r.id==id&&!r.pending));
             pageRepaint=ShowRuneFusion;Base("rune-fusion","룬 합성","같은 색·등급·크기 두 개로 성장 · 실패와 수수료 없음");
-            var grades=Row(content,76);for(int g=0;g<7;g++){int grade=g;var b=Button(grades,"G"+g,()=>{runeFusionGrade=grade;runeFusionSelection.Clear();ShowRuneFusion();},g==runeFusionGrade?gold:panel);Across(b,g,7,2,70);}
+            var grades=Row(content,76);for(int g=0;g<7;g++){int grade=g;var b=Button(grades,"G"+g,()=>{runeFusionGrade=grade;runeFusionSelection.Clear();ShowRuneFusion();},g==runeFusionGrade?gold:panel);UiTheme.Choice(b,g==runeFusionGrade);Across(b,g,7,2,70);}
             Note(content,"1~4칸 두 개는 같은 등급의 다음 크기가 됩니다. 5칸 두 개는 다음 등급 1칸이 됩니다. 모양은 달라도 되며, 한 번에 최대 100쌍을 합성합니다. 같은 색끼리만 짝을 지으며 결과에도 그 색을 유지합니다.",20,115,pale);
             var rates=BigButton(content,"룬 드롭 확률",ShowRuneDropRates);rates.name="rune-drop-rates";
             var state=game.Store.Data.runes;

@@ -1504,7 +1504,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 전설 효과 보호	Protect legendary effects
 전설·세트 도감	Legendary and set compendium
 전설·세트 자동 처리 별도 허용	Allow automatic handling of legendary and set gear
-전설·세트 제작 · {0} 코어 {1}/10	Legendary and set craft · {0} cores {1}/10
 전설·세트 효과	Legendary and set effect
 전설·세트 효과 · {0}	Legendary and set effect · {0}
 전설·세트는 개별 처리	Legendary and set pieces are handled one at a time
@@ -2606,26 +2605,11 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 변환 내용에 동의하고 계속	Accept the conversion and continue
 저장 위치 선택	Choose a slot
 저장할 프리셋을 선택하세요	Choose the preset slot to save to
-스킬 관리	Skill Management
-스킬 사냥 칙령	Skill Hunt Edict
 남은 스킬 포인트 {0} P	{0} skill points left
-초기화	Reset
-투자한 스킬 포인트를 모두 되돌리시겠습니까?	Refund all invested skill points?
-패시브 스킬	Passive skills
-액티브 스킬	Active skills
 장착 해제	Unequip
 액티브	Active
-스킬 아이콘을 누르면 설명과 다음 레벨의 효과를 확인할 수 있습니다.	Tap a skill icon to see its description and next-level effect.
 스킬 설명 닫기	Close skill details
-영웅 Lv.{0}에 해금됩니다.	Unlocks at hero Lv.{0}.
 교체할 장착 칸을 선택하세요.	Choose the equipped slot to replace.
-소모 자원 없음 · 상시 효과	No resource cost · always active
-{0} {1:0.##} · 쿨타임 {2:0.##}초	{0} {1:0.##} · cooldown {2:0.##}s
-현재 Lv.{0}	Current Lv.{0}
-다음 Lv.{0}	Next Lv.{0}
-장착한 패시브 스킬이 없습니다.	No passive skill is equipped.
-장착한 액티브 스킬이 없습니다.	No active skill is equipped.
-공통 옵션	Common options
 위에 있는 공격부터 사용을 검토합니다.	Attacks higher in the list are considered first.
 전투	Combat
 생존	Survival
@@ -2682,7 +2666,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 계정 공용	Account shared
 기록	History
 안내	Guide
-순차 개방	Unlock in order
 잠긴 보관함의 이름은 바꿀 수 없습니다.	Unlock the vault before renaming it.
 보관함 이름은 1~12자로 입력해 주세요.	Enter a vault name with 1 to 12 characters.
 레어	Rare
@@ -4632,5 +4615,227 @@ G{0} {1}칸 → G{2} {3}칸	G{0} {1} cells → G{2} {3} cells
 모든 캐릭터가 함께 사용하는 보유 수량입니다.	These balances are shared by all characters.
 {0} 코어	{0} core
 심연 주화	Abyssal Coins
+# Native hunt edict skill tree
+스킬 레벨을 변경할 수 없습니다.	This skill rank cannot be changed.
+스킬 포인트가 부족하거나 아직 해금하지 않은 스킬입니다.	Insufficient skill points, or the skill is still locked.
+상시 · {0}/{1}	Always · {0}/{1}
+스킬 빼기	Remove skill
+사냥 칙령 편집	Edit hunt edict
+공통 공격 설정	Attack settings
+스킬 트리로	Skill tree
+스킬을 누르면 효과와 해금 조건을 확인할 수 있습니다.	Select a skill to see its effects and unlock requirements.
+해금되어 항상 적용됩니다.	Unlocked. Always active.
+해금되면 항상 적용됩니다.	Always active once unlocked.
+해금 조건	Unlock requirements
+영웅 Lv.{0} 이상	Hero Lv.{0} or higher
+{0} 활성화	Unlock {0}
+직접 연계 스킬 중 하나 활성화: {0}	Unlock one direct synergy: {0}
+Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30–39 stage
+투자 등급 {0} · 다음 등급 {1}	Invested rank {0} · next rank {1}
+기본 효과 배율 {0:0}% → {1:0}%	Base effect scaling {0:0}% → {1:0}%
+상시 적용	Always active
+자동 사용 켜짐	Automatic use: On
+자동 사용 꺼짐	Automatic use: Off
+전투의 기초	Foundations
+생존과 운용	Survival
+전투 방식 확립	Specialisation
+빌드의 완성	Mastery
+궁극의 선택	Ascendancy
+# Historical skill-management text
+스킬 관리	Skill Management
+스킬 사냥 칙령	Skill Hunt Edict
+초기화	Reset
+투자한 스킬 포인트를 모두 되돌리시겠습니까?	Refund all invested skill points?
+패시브 스킬	Passive skills
+액티브 스킬	Active skills
+스킬 아이콘을 누르면 설명과 다음 레벨의 효과를 확인할 수 있습니다.	Tap a skill icon to see its description and next-level effect.
+영웅 Lv.{0}에 해금됩니다.	Unlocks at hero Lv.{0}.
+소모 자원 없음 · 상시 효과	No resource cost · always active
+{0} {1:0.##} · 쿨타임 {2:0.##}초	{0} {1:0.##} · cooldown {2:0.##}s
+현재 Lv.{0}	Current Lv.{0}
+다음 Lv.{0}	Next Lv.{0}
+장착한 패시브 스킬이 없습니다.	No passive skill is equipped.
+장착한 액티브 스킬이 없습니다.	No active skill is equipped.
+공통 옵션	Common options
+배분 초기화	Reset points
+배분한 스킬 포인트를 모두 되돌릴까요?	Refund all invested skill points?
+궁극기	Ultimate
+액티브 4칸 · 궁극기 1칸	4 actives · 1 ultimate
+
+# Gem elixirs
+부서진 행운의 물약	Chipped Fortune Elixir
+매직찬스 확률 +5%p · 이동 속도 +5% · 아이템 획득 반경 +10% · 30초	Magic find chance +5%p · Movement speed +5% · Pickup radius +10% · 30 s
+흐린 행운의 물약	Clouded Fortune Elixir
+매직찬스 확률 +10%p · 이동 속도 +7% · 아이템 획득 반경 +15% · 30초	Magic find chance +10%p · Movement speed +7% · Pickup radius +15% · 30 s
+맑은 행운의 물약	Clear Fortune Elixir
+매직찬스 확률 +15%p · 이동 속도 +10% · 아이템 획득 반경 +25% · 30초	Magic find chance +15%p · Movement speed +10% · Pickup radius +25% · 30 s
+벼려진 행운의 물약	Tempered Fortune Elixir
+매직찬스 확률 +22%p · 이동 속도 +13% · 아이템 획득 반경 +35% · 30초	Magic find chance +22%p · Movement speed +13% · Pickup radius +35% · 30 s
+완전한 행운의 물약	Perfect Fortune Elixir
+매직찬스 확률 +30%p · 이동 속도 +17% · 아이템 획득 반경 +50% · 30초	Magic find chance +30%p · Movement speed +17% · Pickup radius +50% · 30 s
+왕관의 행운의 물약	Crowned Fortune Elixir
+매직찬스 확률 +40%p · 이동 속도 +22% · 아이템 획득 반경 +70% · 30초	Magic find chance +40%p · Movement speed +22% · Pickup radius +70% · 30 s
+부서진 생명의 물약	Chipped Vitality Elixir
+힘 +10 · 최대 생명력 +5% · 생명력 훔침 +0.5%p · 30초	Strength +10 · Maximum life +5% · Life steal +0.5%p · 30 s
+흐린 생명의 물약	Clouded Vitality Elixir
+힘 +20 · 최대 생명력 +8% · 생명력 훔침 +1%p · 30초	Strength +20 · Maximum life +8% · Life steal +1%p · 30 s
+맑은 생명의 물약	Clear Vitality Elixir
+힘 +35 · 최대 생명력 +12% · 생명력 훔침 +1.5%p · 30초	Strength +35 · Maximum life +12% · Life steal +1.5%p · 30 s
+벼려진 생명의 물약	Tempered Vitality Elixir
+힘 +55 · 최대 생명력 +17% · 생명력 훔침 +2%p · 30초	Strength +55 · Maximum life +17% · Life steal +2%p · 30 s
+완전한 생명의 물약	Perfect Vitality Elixir
+힘 +80 · 최대 생명력 +23% · 생명력 훔침 +3%p · 30초	Strength +80 · Maximum life +23% · Life steal +3%p · 30 s
+왕관의 생명의 물약	Crowned Vitality Elixir
+힘 +120 · 최대 생명력 +30% · 생명력 훔침 +4%p · 30초	Strength +120 · Maximum life +30% · Life steal +4%p · 30 s
+부서진 지혜의 물약	Chipped Wisdom Elixir
+마법력 +10 · 최대 마나 +5% · 마나 훔침 +0.5%p · 30초	Magic power +10 · Maximum mana +5% · Mana steal +0.5%p · 30 s
+흐린 지혜의 물약	Clouded Wisdom Elixir
+마법력 +20 · 최대 마나 +8% · 마나 훔침 +1%p · 30초	Magic power +20 · Maximum mana +8% · Mana steal +1%p · 30 s
+맑은 지혜의 물약	Clear Wisdom Elixir
+마법력 +35 · 최대 마나 +12% · 마나 훔침 +1.5%p · 30초	Magic power +35 · Maximum mana +12% · Mana steal +1.5%p · 30 s
+벼려진 지혜의 물약	Tempered Wisdom Elixir
+마법력 +55 · 최대 마나 +17% · 마나 훔침 +2%p · 30초	Magic power +55 · Maximum mana +17% · Mana steal +2%p · 30 s
+완전한 지혜의 물약	Perfect Wisdom Elixir
+마법력 +80 · 최대 마나 +23% · 마나 훔침 +3%p · 30초	Magic power +80 · Maximum mana +23% · Mana steal +3%p · 30 s
+왕관의 지혜의 물약	Crowned Wisdom Elixir
+마법력 +120 · 최대 마나 +30% · 마나 훔침 +4%p · 30초	Magic power +120 · Maximum mana +30% · Mana steal +4%p · 30 s
+부서진 기민함의 물약	Chipped Agility Elixir
+민첩력 +10 · 회피 확률 +2%p · 공격 속도 +5% · 30초	Dexterity +10 · Dodge chance +2%p · Attack speed +5% · 30 s
+흐린 기민함의 물약	Clouded Agility Elixir
+민첩력 +20 · 회피 확률 +3%p · 공격 속도 +8% · 30초	Dexterity +20 · Dodge chance +3%p · Attack speed +8% · 30 s
+맑은 기민함의 물약	Clear Agility Elixir
+민첩력 +35 · 회피 확률 +5%p · 공격 속도 +12% · 30초	Dexterity +35 · Dodge chance +5%p · Attack speed +12% · 30 s
+벼려진 기민함의 물약	Tempered Agility Elixir
+민첩력 +55 · 회피 확률 +7%p · 공격 속도 +17% · 30초	Dexterity +55 · Dodge chance +7%p · Attack speed +17% · 30 s
+완전한 기민함의 물약	Perfect Agility Elixir
+민첩력 +80 · 회피 확률 +10%p · 공격 속도 +23% · 30초	Dexterity +80 · Dodge chance +10%p · Attack speed +23% · 30 s
+왕관의 기민함의 물약	Crowned Agility Elixir
+민첩력 +120 · 회피 확률 +14%p · 공격 속도 +30% · 30초	Dexterity +120 · Dodge chance +14%p · Attack speed +30% · 30 s
+부서진 불굴의 물약	Chipped Fortitude Elixir
+방어력 +10% · HP 회복속도 +최대 생명력의 0.5%/초 · 완벽한 방어 확률 +2%p · 30초	Armor +10% · HP regeneration +0.5% max life / s · Perfect block chance +2%p · 30 s
+흐린 불굴의 물약	Clouded Fortitude Elixir
+방어력 +16% · HP 회복속도 +최대 생명력의 0.8%/초 · 완벽한 방어 확률 +3%p · 30초	Armor +16% · HP regeneration +0.8% max life / s · Perfect block chance +3%p · 30 s
+맑은 불굴의 물약	Clear Fortitude Elixir
+방어력 +24% · HP 회복속도 +최대 생명력의 1.2%/초 · 완벽한 방어 확률 +5%p · 30초	Armor +24% · HP regeneration +1.2% max life / s · Perfect block chance +5%p · 30 s
+벼려진 불굴의 물약	Tempered Fortitude Elixir
+방어력 +34% · HP 회복속도 +최대 생명력의 1.8%/초 · 완벽한 방어 확률 +7%p · 30초	Armor +34% · HP regeneration +1.8% max life / s · Perfect block chance +7%p · 30 s
+완전한 불굴의 물약	Perfect Fortitude Elixir
+방어력 +46% · HP 회복속도 +최대 생명력의 2.5%/초 · 완벽한 방어 확률 +10%p · 30초	Armor +46% · HP regeneration +2.5% max life / s · Perfect block chance +10%p · 30 s
+왕관의 불굴의 물약	Crowned Fortitude Elixir
+방어력 +60% · HP 회복속도 +최대 생명력의 3.5%/초 · 완벽한 방어 확률 +14%p · 30초	Armor +60% · HP regeneration +3.5% max life / s · Perfect block chance +14%p · 30 s
+부서진 수호의 물약	Chipped Warding Elixir
+모든 저항력 +10 · CC기 저항 −10% · 보호막 생성 +최대 생명력의 5% · 30초	All resistances +10 · Crowd control resistance −10% · Shield +5% max life · 30 s
+흐린 수호의 물약	Clouded Warding Elixir
+모든 저항력 +18 · CC기 저항 −15% · 보호막 생성 +최대 생명력의 8% · 30초	All resistances +18 · Crowd control resistance −15% · Shield +8% max life · 30 s
+맑은 수호의 물약	Clear Warding Elixir
+모든 저항력 +28 · CC기 저항 −22% · 보호막 생성 +최대 생명력의 12% · 30초	All resistances +28 · Crowd control resistance −22% · Shield +12% max life · 30 s
+벼려진 수호의 물약	Tempered Warding Elixir
+모든 저항력 +40 · CC기 저항 −30% · 보호막 생성 +최대 생명력의 17% · 30초	All resistances +40 · Crowd control resistance −30% · Shield +17% max life · 30 s
+완전한 수호의 물약	Perfect Warding Elixir
+모든 저항력 +55 · CC기 저항 −40% · 보호막 생성 +최대 생명력의 23% · 30초	All resistances +55 · Crowd control resistance −40% · Shield +23% max life · 30 s
+왕관의 수호의 물약	Crowned Warding Elixir
+모든 저항력 +75 · CC기 저항 −50% · 보호막 생성 +최대 생명력의 30% · 30초	All resistances +75 · Crowd control resistance −50% · Shield +30% max life · 30 s
+
+# Rift entry
+균열 입장	Rift entry
+성소 › 균열의 문	Sanctuary › Rift gate
+균 열	R I F T
+어둠을 넘어, 더 깊은 곳으로.	Beyond the dark, into the depths.
+최초 보상	First-clear rewards
+도전 단계	Challenge tier
+최고 돌파 {0}단계	Highest clear: tier {0}
+최단 {0}	Best {0}
+새로운 도전	New challenge
+최단 기록 없음	No clear time recorded
+출전 준비	Preparation
+남은 피로도	Remaining fatigue
+이어서 진행	Resume rift
+1.5x 진행하기	Enter at 1.5×
+피로도 회복 · {0}분	Restore · {0} min
+일일 지급분 {0}분	Daily: {0} min
+유료 회복분 {0}분	Restored: {0} min
+오늘 회복 {0} / 3회	Restores today: {0} / 3
+초기화까지 {0}	Resets in {0}
+장착 물약	Equipped potions
+궁극기 선택	Select ultimate
+소탕 · 훈련 · 반복 설정	Sweep · Training · Repeat settings
+피로도 이용 안내	Fatigue guide
+균열에 참여한 실제 시간만큼 차감됩니다.\n중도 복귀·사망 시에도 사용한 시간은 반환되지 않습니다.	Fatigue decreases by actual time spent in the rift.\nTime already spent is not refunded on return or death.
+매일 00:00(KST)에 일일 피로도 2시간이 지급됩니다. 일일 지급분을 먼저 사용합니다.	Two hours of daily fatigue are granted at 00:00 KST. The daily allowance is used first.
+피로도가 0이 되면 심연 주화 500개로 20분을 회복할 수 있습니다. 매일 최대 3회이며, 남은 유료 회복분은 다음 날의 2시간에 더해집니다.	At zero fatigue, spend 500 Abyssal Coins to restore 20 minutes, up to three times daily. Unused paid time carries over in addition to the next daily two hours.
+1.5배속 입장에는 심연 주화 200개가 필요합니다. 피로도는 배속과 관계없이 실제 참여 시간만큼 사용합니다. 다음 자동 반복 입장은 기본 배속으로 진행됩니다.	A 1.5× entry costs 200 Abyssal Coins. Fatigue uses real participation time at either speed. Subsequent automatic repeats start at normal speed.
+일시정지와 전투 중 창을 연 시간도 참여 시간에 포함됩니다. 앱이 중단되어 전투를 보존한 동안에는 차감하지 않습니다.	Pauses and time in combat windows count as participation. Time is not deducted while the app is suspended and combat is preserved.
+최단 기록은 정상 클리어한 실제 시간을 기준으로 하며, 더 빠르게 클리어했을 때만 갱신됩니다.	Best times use actual successful clear time and update only when a faster clear is recorded.
+1.5배속으로 입장	Enter at 1.5×
+게임에 입장할 때 심연 주화 200개를 소비합니다. 취소하면 소비하지 않으며, 입장 후 귀환·사망 시에는 반환되지 않습니다.	Spend 200 Abyssal Coins when entry succeeds. Cancelling costs nothing. Returning or dying after entry does not refund the cost.
+보유 심연 주화 {0}개	Abyssal Coins owned: {0}
+입장하기	Enter
+피로도 회복	Restore fatigue
+심연 주화 500개로 피로도 20분을 회복합니다. 사용하지 않은 회복분은 다음 날에도 유지됩니다.	Restore 20 minutes for 500 Abyssal Coins. Unused restored time carries over to the next day.
+회복하기	Restore
+물약 교체	Replace potion
+사용 중	In use
+슬롯 {0} · 보유한 등급을 눌러 바로 교체	Slot {0} · Tap an owned tier to equip
+눌러서 교체	Tap to equip
+미보유	Not owned
+궁극기 교체	Replace ultimate
+사용 스킬 교체	Replace active skill
+활성화된 스킬을 선택하세요.	Select an unlocked skill.
+교체할 수 있는 활성화된 스킬이 없습니다.	No unlocked replacement skill is available.
+교체하기	Replace
+보상 아이템은 추후 추가됩니다. · 1–1000단계	Reward items will be added later. · Tiers 1–1000
+입장할 균열을 확인하세요.	Check the rift selected for entry.
+남은 피로도가 없습니다.	No fatigue remains.
+이미 입장이 처리되었습니다.	This entry has already been processed.
+심연 주화가 부족합니다.	Not enough Abyssal Coins.
+피로도를 모두 사용한 뒤 회복할 수 있습니다.	Use all remaining fatigue before restoring.
+오늘의 피로도 회복을 모두 사용했습니다.	All fatigue restores for today have been used.
+피로도를 모두 사용했습니다.	Your fatigue has been exhausted.
+스킬은 출전 준비 화면에서 변경해 주세요.	Change skills in the preparation screen.
+다른 슬롯에서 사용 중입니다.	Already used in another slot.
+같은 종류의 물약은 여러 슬롯에 지정할 수 없습니다.	The same potion type cannot be equipped in multiple slots.
+# Potion family suffix used by compact tabs
+의 물약	 Elixir
 
 해골 보석 구매 · {0:N0} 골드	Buy chipped skull · {0:N0} gold
+01 / 코어 선택	01 / CORE SELECTION
+1개당 +0.01% · 최대 8,000개 (80%)	+0.01% per coin · Up to 8,000 (80%)
+{0} 코어 × 10 · Lv.{1}	{0} cores × 10 · Lv.{1}
+{0}개 더 필요	Need {0} more
+‹ 장비 목록으로	‹ Equipment list
+‹ 코어 목록으로	‹ Core list
+가방에 장비를 받을 공간이 필요합니다.	Make room in your bag for the crafted item.
+각 옵션의 수치는 개별 추첨됩니다.	Each affix rolls independently.
+고유 효과	Legendary power
+균열을 완료하고 대장간에서 제작해 주세요.	Finish the rift before crafting at the forge.
+보유 코어	Owned cores
+보유 한도 {0:N0}개 · 최대 {1:0.##}%	Wallet limit {0:N0} · Up to {1:0.##}%
+세트 효과	Set bonuses
+심연 주화는 0~8,000개까지 사용할 수 있습니다.	Use between 0 and 8,000 Abyssal Coins.
+아직 제작한 장비가 없습니다.	No equipment crafted yet.
+옵션별 추첨 구간	Affix roll interval
+이전 제작 결과를 먼저 확인해 주세요.	Confirm your previous crafting result first.
+인벤토리·창고 공용	Shared across bag and storage
+장비 다시 선택	Change equipment
+장비 이름 검색	Search equipment
+장비 제련	Refine
+전설·세트 장비 1개 분해 → 같은 부위 코어 1개	Salvage a legendary/set item → 1 matching core
+제작 가능	Ready to craft
+제작 기록	Crafting history
+제작 옵션 범위	Affix ranges
+제작 완료	Craft complete
+제작 정보가 바뀌었습니다. 다시 선택해 주세요.	Crafting details changed. Select the equipment again.
+제작 후 심연 주화 {0:N0}개	Abyssal Coins after crafting: {0:N0}
+제작할 장비 선택	Choose equipment to craft
+제작할 장비를 선택해 주세요.	Select equipment to craft.
+조건에 맞는 장비가 없습니다.	No matching equipment.
+최소 보장 품질	Minimum quality
+최소 품질 {0:0.##}% · 심연 주화 {1:N0}개	Minimum {0:0.##}% · {1:N0} Abyssal Coins
+코어 10개 · 심연 주화 {0:N0}개	10 cores · {0:N0} Abyssal Coins
+투입 심연 주화	Invest Abyssal Coins
+해당 부위의 코어가 10개 필요합니다.	You need 10 cores for this equipment slot.
+대장간 코어 제작	Core crafting at the forge
+코어 제작	Core crafting
+최소 보장 {0}	Guaranteed min. {0}
+
+해골 보석을 같은 단계와 수량의 금강석으로 바꿨습니다. 원본 저장 파일은 보존했습니다.	Skull gems were converted to Diamonds of the same tier and quantity. The original save file was preserved.

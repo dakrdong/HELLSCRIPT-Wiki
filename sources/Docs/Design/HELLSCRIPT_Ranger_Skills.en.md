@@ -1,12 +1,12 @@
-# HELLSCRIPT Ranger — 36 skills
+# HELLSCRIPT Ranger — 37 skills
 
-Updated: 2026-09-22
+Updated: 2026-09-23
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
 [Rules and sources](HELLSCRIPT_Class_Skills.en.md) · [Equipment matrix](HELLSCRIPT_Skill_Equipment.en.md) · [한국어](HELLSCRIPT_Ranger_Skills.md)
 
-16 normal actives, 18 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 35 and 36 share the final tier and are mutually exclusive.
+16 normal actives, 19 passives and 2 ultimates. Proposed loadout: up to 4 normal actives, up to 3 passives and exactly 1 ultimate after unlock. BASIC is separate. Entries 36 and 37 share the final tier and are mutually exclusive.
 
 ## Equipment-led build examples
 
@@ -86,7 +86,7 @@ Pre-poison with Venom Arrow, prepare Shadow Arrow, then consume charges with Pie
 
 Normal actives: Retreat Leap (`A04`), Piercing Shot (`A01`), Multishot (`A02`), Smoke Cover (`A12`).
 
-Passives: Escaping Step (`AP02`), Saved focus (`AP05`), Seamless Reload (`AP16`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Escaping Step (`AP02`), Saved focus (`AP05`), Relentless Pursuit (`AP19`). Selected ultimate: Shadow Pursuit (`A18`).
 
 Compatible legendaries: Oath of Two Hunts (`DES_LA46`), Unquenched Heart (`LC03`).
 
@@ -322,7 +322,7 @@ Restore 25 resource and grant +20 percentage points of cost reduction to the nex
 
 **Mechanic reference:** D3 Preparation.
 
-## Passives · 17–34
+## Passives · 17–35
 
 ### 17. Long Reach · `AP01`
 
@@ -520,17 +520,29 @@ Watch Ballista gains +10% additive damage while the hero is at least 5m away. Ch
 
 New proposal · Lv.34
 
-If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target. With Shadow Pursuit selected, add 2s duration and 2 total allowed procs. Apply only the selected branch.
+If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target.
 
 **Equipment links:** Oath of Two Hunts (`DES_LA46`).
 
-**Companion skills:** Killing Rain (`A17`), Shadow Pursuit (`A18`).
+**Companion skills:** Killing Rain (`A17`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
-## Final tier: ultimates · 35–36 · choose one
+### 35. Relentless Pursuit · `AP19`
 
-### 35. Killing Rain · `A17`
+New proposal · Lv.40
+
+Shadow Pursuit lasts 2s longer and allows 2 additional total procs.
+
+**Equipment links:** Oath of Two Hunts (`DES_LA46`).
+
+**Companion skills:** Shadow Pursuit (`A18`).
+
+**Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
+
+## Final tier: ultimates · 36–37 · choose one
+
+### 36. Killing Rain · `A17`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 
@@ -544,7 +556,7 @@ Rain arrows at a fixed point within 10m, in a 4m radius. Six pulses 0.5s apart d
 
 **Mechanic reference:** D3 Rain of Vengeance.
 
-### 36. Shadow Pursuit · `A18`
+### 37. Shadow Pursuit · `A18`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 

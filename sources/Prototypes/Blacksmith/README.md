@@ -6,6 +6,8 @@
 
 2026-09-22: The native Unity forge now connects real equipment, account currencies and persistence. Earlier validation entries below describe the HTML prototype at that time. See the [integration specification](../../Docs/Implementation/Blacksmith_Unity_Integration.en.md) and [validation record](../../Docs/Implementation/Blacksmith_Validation.en.md) for current Unity behavior. Prototype item names use the shared inventory grade palette; unique effects do not introduce a new grade.
 
+2026-09-23: **코어 제작** 탭을 추가했습니다. [코어 제작 시연 명세](CORE-CRAFTING.md)를 확인하세요. 코어 제작은 아직 HTML 전용이며 위 Unity 구현 범위에 포함되지 않습니다. / Added **Core crafting**; see the [bilingual prototype specification](CORE-CRAFTING.md). This new tab is HTML-only and is not part of the native integration described above.
+
 ## 한국어
 
 착용 장비와 인벤토리의 시연 장비 10개를 선택할 수 있습니다. 변경할 옵션 줄을 고르면 해당 장비 부위·접두/접미·다른 줄의 중복 그룹을 반영한 후보와 수치 범위, 출현 확률을 표시합니다. 첫 유료 실행에서 선택한 슬롯 ID를 고정합니다. 이후 장비 전환이나 새로고침으로 다른 줄을 선택할 수 없으며, 같은 종류나 더 낮은 수치가 다시 나올 수도 있습니다.
@@ -52,11 +54,11 @@ The current value and parenthesized percentage form one unbroken group, separate
 
 상단의 **장착 슬롯 강화**를 선택하거나 `?service=slots`로 시작합니다. [상세 기획서](SLOT-ENHANCEMENT.md)에 10개 부위의 1·25·50·75·100레벨 능력 배정, 레벨당 성장량, 최종 능력치와 재화·시간 계산을 정리했습니다. [99단계 계산 CSV](slot-enhancement-costs.csv)에는 각 강화의 필요 강화석·소요 시간과 누적값을 숫자로 제공합니다.
 
-각 부위는 1레벨에서 시작합니다. 장비를 장착하지 않아도 적용되는 패시브를 선택해서 확인하고, 강화석을 사용해 작업을 시작할 수 있습니다. 동시에 2개 부위를 강화할 수 있으며 3·4·5번째 작업 칸을 다이아 10·50·250개로 차례로 엽니다. 최초 시연 재화는 강화석 10,000개와 다이아 500개입니다. 강화석은 시작 시 차감하고 능력치는 완료 시 적용합니다. 작업 중 같은 부위에 중복 작업을 등록할 수 없으며 100레벨을 넘길 수 없습니다.
+각 부위는 1레벨에서 시작합니다. 장비를 장착하지 않아도 적용되는 패시브를 선택해서 확인하고, 강화석을 사용해 작업을 시작할 수 있습니다. 동시에 2개 부위를 강화할 수 있으며 3·4·5번째 작업 칸을 심연 주화 10·50·250개로 차례로 엽니다. 최초 시연 재화는 강화석 10,000개와 심연 주화 500개입니다. 강화석은 시작 시 차감하고 능력치는 완료 시 적용합니다. 작업 중 같은 부위에 중복 작업을 등록할 수 없으며 100레벨을 넘길 수 없습니다.
 
 **성장 상세**를 누르면 해당 부위의 전체 성장 계획을 봅니다. 메인 화면의 원형 1·25·50·75·100 단계 버튼은 해당 단계의 능력을 ‘모든 원소 저항 해금’처럼 버튼 근처의 작은 말풍선에 3초간 표시합니다. 다른 단계를 누르면 문구와 표시 시간을 새로 갱신합니다. 10부위 모두 해금되는 능력과 해금 레벨부터의 증가량을 표시하며, 표 오른쪽에 선택한 미리보기 레벨의 누적값을 표시합니다. 아직 해금되지 않은 능력은 잠김으로 표시합니다. 상단에는 첫 설명 문단만 남기고, 단계 버튼 아래의 중복 능력치·비용·시간·전체 계산표는 팝업에서 제거했습니다. 부위 선택·레벨 직접 입력·슬라이더·단계 버튼으로 계산을 확인할 수 있으며 실제 강화 상태는 바뀌지 않습니다. 팝업은 화면 전체를 사용하고 본문만 스크롤합니다. PC·가로는 3열을 같은 너비로 표시하고, 세로는 캐릭터와 능력치를 위아래로 배치하며 하단 강화 버튼을 고정합니다.
 
-진행 중인 각 작업과 선택 부위의 하단에 **지금 완료** 버튼을 표시합니다. 비용은 클릭 시점의 `max(0, floor(남은 밀리초 / 60,000))` 다이아이며, 1분은 1개·59초 이하는 0개입니다. 버튼의 비용은 남은 시간에 맞춰 갱신되고, 잔액이 부족하면 비활성화됩니다. 해당 작업만 즉시 완료하고 레벨·패시브와 저장 상태를 갱신하며, 다른 작업은 계속 진행됩니다. 작업 칸 해제와 동일한 다이아 잔액을 사용합니다. 세로 화면 상단의 작업 칸 표시는 진행 중인 칸만 1.5초 주기로 금색 점멸을 반복하며, 작업 완료 시 멈춥니다.
+진행 중인 각 작업과 선택 부위의 하단에 **지금 완료** 버튼을 표시합니다. 비용은 클릭 시점의 `max(0, floor(남은 밀리초 / 60,000))` 심연 주화이며, 1분은 1개·59초 이하는 0개입니다. 버튼의 비용은 남은 시간에 맞춰 갱신되고, 잔액이 부족하면 비활성화됩니다. 해당 작업만 즉시 완료하고 레벨·패시브와 저장 상태를 갱신하며, 다른 작업은 계속 진행됩니다. 작업 칸 해제와 동일한 심연 주화 잔액을 사용합니다. 세로 화면 상단의 작업 칸 표시는 진행 중인 칸만 1.5초 주기로 금색 점멸을 반복하며, 작업 완료 시 멈춥니다.
 
 성장 계획 팝업은 가로 화면에서 왼쪽에 단계별 능력 배정, 오른쪽에 레벨 슬라이더와 세로로 나열한 Lv.1·25·50·75·100 버튼을 같은 너비로 배치합니다. 모바일 가로에서는 여백과 행 높이를 줄여 한 화면에서 확인하도록 구성하고, 세로 화면은 기존의 위아래 배치를 유지합니다.
 
@@ -66,17 +68,17 @@ The current value and parenthesized percentage form one unbroken group, separate
 
 2026-09-21 검증: 기존 옵션 변경 30개와 슬롯 강화 23개, 총 **53/53개**의 Node 검사를 통과했습니다. 비용은 구간별 등차수열로 별도 대조했고, 25·50·75·100레벨 해금과 10부위 최종 능력치, 동시 작업·중복 등록·재화 부족·저장 복구·100레벨 상한을 확인했습니다. 내장 브라우저에서는 첫 5분 작업의 실제 시간 경과 완료, 진행 중 새로고침, 2칸 제한, 10→50→250개 차감과 작업 칸 해제, 24→25와 99→100 전환, 재화 부족 차단, 성장 상세 10부위·5단계, 레벨 입력 검증, 미리보기 상태 분리와 전체 화면 팝업을 직접 확인했습니다. 440×956·956×440 뷰포트 및 PC 16:9·16:10·21:9 미리보기와 한국어·영어 표시를 점검했습니다. 슬롯 시연 초기화 후에도 기존 옵션 변경 골드 1,363,800과 고정 옵션 요약이 유지됐습니다. 모바일 실기기와 Unity 실행 검증은 이 HTML 작업에 포함하지 않습니다.
 
-가로 팝업·지금 완료 추가 검증: 총 **60/60개**의 Node 검사를 통과했습니다. 내장 브라우저에서 모바일 가로 956×440의 10부위 영문 성장표와 PC 16:9·16:10·21:9 팝업에 가로·세로 스크롤이 없고, 좌우 너비가 같은 것을 확인했습니다. 세로 배치와 단계 버튼·숫자 입력·슬라이더도 확인했습니다. 별도 시연 저장 상태에서 4다이아 차감, 다른 작업 유지, 잔액 부족 차단, 카운트다운 비용 갱신을 확인했으며, 실제 남은 시간이 1분 미만이 되면 0다이아 버튼이 활성화되어 잔액 0에서도 완료됐습니다. 완료 후 새로고침에서도 레벨과 잔액이 유지됐습니다. 기존 시연 페이지의 재화·선택 부위·미리보기 레벨은 보존했습니다.
+가로 팝업·지금 완료 추가 검증: 총 **60/60개**의 Node 검사를 통과했습니다. 내장 브라우저에서 모바일 가로 956×440의 10부위 영문 성장표와 PC 16:9·16:10·21:9 팝업에 가로·세로 스크롤이 없고, 좌우 너비가 같은 것을 확인했습니다. 세로 배치와 단계 버튼·숫자 입력·슬라이더도 확인했습니다. 별도 시연 저장 상태에서 심연 주화 4개 차감, 다른 작업 유지, 잔액 부족 차단, 카운트다운 비용 갱신을 확인했으며, 실제 남은 시간이 1분 미만이 되면 심연 주화 0개 버튼이 활성화되어 잔액 0에서도 완료됐습니다. 완료 후 새로고침에서도 레벨과 잔액이 유지됐습니다. 기존 시연 페이지의 재화·선택 부위·미리보기 레벨은 보존했습니다.
 
 단계 안내·작업 상태 점멸 검증: 기존 **60/60개** 검사를 통과했습니다. 내장 브라우저에서 원형 단계 클릭이 팝업을 열지 않고 부위별 해금 능력을 표시하며, 3초 뒤 말풍선과 접근성 연결이 제거되는 것을 확인했습니다. 보조손 5단계 안내, 연속 클릭 시 문구 교체, 별도 성장 상세 버튼, 키보드 입력, 한국어·영어 및 세로·가로·PC 화면 경계를 확인했습니다. 작업 시작 시 해당 칸만 점멸하고, 지금 완료 후 점멸이 멈추는 것도 확인했습니다. 기존 시연의 선택 부위와 재화는 보존했습니다.
 
 Select **Enhance equipment slots**, or start with `?service=slots`. The [bilingual design](SLOT-ENHANCEMENT.md) specifies all ten slots at levels 1/25/50/75/100, per-level growth, final stats and resource/time calculations. The [99-step CSV](slot-enhancement-costs.csv) contains numeric step and cumulative costs/durations.
 
-Every slot starts at level 1 and grants permanent passives independent of equipped items. Two concurrent workstations are free; unlock the third, fourth and fifth in order for 10, 50 and 250 diamonds. Demo wallets start with 10,000 stones and 500 diamonds. Stones are spent at job start, while levels and passives apply at completion. Duplicate jobs for the same slot and levels above 100 are rejected.
+Every slot starts at level 1 and grants permanent passives independent of equipped items. Two concurrent workstations are free; unlock the third, fourth and fifth in order for 10, 50 and 250 abyssal coins. Demo wallets start with 10,000 stones and 500 abyssal coins. Stones are spent at job start, while levels and passives apply at completion. Duplicate jobs for the same slot and levels above 100 are rejected.
 
 **Growth details** opens all five unlocks and growth rules, with contributions at the selected preview level shown on the right. Future passives show Locked. The circular 1/25/50/75/100 markers in the main view show a small nearby unlock tooltip for three seconds, such as “Unlocks All resistance.” Clicking another marker replaces the text and restarts its duration. Only the first introductory paragraph remains; duplicate stats and cost/time/calculation tables below the milestone buttons are omitted from the popup. Change the previewed slot or level using the dropdown, number field, slider or milestone buttons without changing real progress. The detail overlay fills the screen and scrolls internally. Desktop/landscape use three equal columns; portrait stacks character and stats above a fixed upgrade action.
 
-Every active workstation and the selected slot’s footer display **Finish now**. The click-time cost is `max(0, floor(remaining milliseconds / 60,000))` diamonds: 1 at exactly one minute, 0 below one minute. Prices update with the countdown, and insufficient funds disable the button. Only that job completes, updating its level, passives and saved state while other work continues. It uses the same diamond wallet as workstation unlocks. The portrait work-status indicators pulse gold every 1.5 seconds only while their jobs are active, and stop on completion.
+Every active workstation and the selected slot’s footer display **Finish now**. The click-time cost is `max(0, floor(remaining milliseconds / 60,000))` abyssal coins: 1 at exactly one minute, 0 below one minute. Prices update with the countdown, and insufficient funds disable the button. Only that job completes, updating its level, passives and saved state while other work continues. It uses the same abyssal coin wallet as workstation unlocks. The portrait work-status indicators pulse gold every 1.5 seconds only while their jobs are active, and stop on completion.
 
 On horizontal screens, the growth popup splits into equal-width columns: the milestone roadmap on the left, and the slider followed by vertical Lv.1/25/50/75/100 buttons on the right. Compact spacing fits phone landscape, while portrait keeps the stacked layout.
 
@@ -86,7 +88,7 @@ Slot progress uses the separate `hellscript.blacksmith.slots.prototype.v1` key. 
 
 Validation on 2026-09-21: **53/53 Node tests passed** (30 enchanting, 23 slot enhancement). Independent arithmetic-series checks covered costs; model tests covered all milestone boundaries and final allocations, concurrency, duplication, balances, persistence and the cap. In-app-browser interaction verified a real five-minute completion, active-job reload, the two-station limit, exact 10/50/250 unlock charges, 24→25 and 99→100 transitions, insufficient balances, all ten five-stage roadmaps, numeric validation, separate preview state and full-screen details. Checked 440×956 and 956×440 viewports, three desktop ratios and both languages. Slot reset preserved the existing 1,363,800 gold and locked-affix summaries. Physical mobile and Unity runtime were not part of this HTML validation.
 
-Landscape popup / instant-completion validation: **60/60 Node tests passed**. In-app checks found no horizontal or vertical dialog scrolling for all ten English roadmaps at 956×440 and desktop 16:9, 16:10 and 21:9, with equal column widths. Portrait layout, presets, numeric input and slider remained functional. A separate demo origin verified a 4-diamond charge, independent parallel work, insufficient-funds blocking and countdown price updates. Once real remaining time dropped below a minute, the zero-cost button enabled and completed the job with a zero balance. Reload retained the completed level and balance. The original demo wallet, slot selection and preview level were preserved.
+Landscape popup / instant-completion validation: **60/60 Node tests passed**. In-app checks found no horizontal or vertical dialog scrolling for all ten English roadmaps at 956×440 and desktop 16:9, 16:10 and 21:9, with equal column widths. Portrait layout, presets, numeric input and slider remained functional. A separate demo origin verified a 4-abyssal coin charge, independent parallel work, insufficient-funds blocking and countdown price updates. Once real remaining time dropped below a minute, the zero-cost button enabled and completed the job with a zero balance. Reload retained the completed level and balance. The original demo wallet, slot selection and preview level were preserved.
 
 Milestone tooltip / work-indicator validation: the existing **60/60 tests passed**. In-app checks verified a nearby passive-unlock tooltip without opening a dialog, removal of the tooltip and its accessibility association after three seconds, all five off-hand milestones, replacement on successive clicks, the separate Growth details action, keyboard input, both languages and portrait/landscape/desktop bounds. Only the active station pulsed after starting work, and its pulse stopped after Finish now. The original slot selection and wallet were preserved.
 
@@ -120,8 +122,14 @@ Bulk-enhancement validation: **80/80 tests passed**, covering equivalence with i
 
 ```sh
 node Prototypes/Blacksmith/build.cjs
-node --test Prototypes/Blacksmith/engine.test.cjs Prototypes/Blacksmith/slot-engine.test.cjs Prototypes/Blacksmith/gear-engine.test.cjs
+node --test Prototypes/Blacksmith/*engine.test.cjs
 python3 -m http.server 4186 --bind 127.0.0.1 --directory Prototypes/Blacksmith
 ```
 
 Open `http://127.0.0.1:4186/HELLSCRIPT-Blacksmith.html`. `page.html` is the build template; the finished downloadable file is `HELLSCRIPT-Blacksmith.html`. Changes to the source files require rebuilding and reloading the page. Building also regenerates both enhancement design reports and the slot cost CSV from their shared models.
+
+## 심연 주화 리소스 / Abyssal Coin resource
+
+유료 재화의 표시 이름은 심연 주화로 정했습니다. 이미지 원본·생성 요청·투명도 검사·시연 적용 범위는 [심연 주화 리소스 기록](Resources/Currency/README.md)을 따릅니다.
+
+The premium currency is named Abyssal Coin. See the [resource record](Resources/Currency/README.md) for the original image, generation prompt, alpha validation and prototype integration scope.

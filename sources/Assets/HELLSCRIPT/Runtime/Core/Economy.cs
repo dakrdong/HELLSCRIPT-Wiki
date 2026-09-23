@@ -126,7 +126,9 @@ namespace Hellscript
             ApplySlotGrowth(hero);
             if(slotSkillBonus>0){hero=RuneGrowth.Copy(hero);hero.build.skillRanks=(int[])effectiveSkillRanks.Clone();}
             int level=training?ClassSkills.LevelCap(hero):hero.level; int c=(int)hero.heroClass;
-            foreach(int p in hero.build.passives) if(p>=0&&p<6)passives[p]=true;
+            if(ClassSkillTree.Uses(hero.build.classSkills))
+            {var available=ClassSkillTree.Unlocked(hero.build.classSkills,hero.level);for(int p=0;p<6;p++)passives[p]=available.Contains(SkillProgression.Id(hero.heroClass,p));}
+            else foreach(int p in hero.build.passives) if(p>=0&&p<6)passives[p]=true;
             var equipped=hero.inventory.Where(x=>x.equipped).ToList();
             foreach(var item in equipped)
             {

@@ -527,6 +527,7 @@ namespace Hellscript
             ContentUnlocks.Reconcile(account);
             Log("BOSS_CLEAR","보스 처치 · 전리품 정리");
         }
+        public void ExhaustFatigue()=>Finish(false,Loc.T("피로도를 모두 사용했습니다."),CombatFinish.Abandoned);
         public void Abandon() { if(State.phase==RunPhase.Looting){foreach(var d in State.drops)if(!d.claimed)d.ignored=true;foreach(var d in State.resources)if(!d.claimed)d.ignored=true;Finish(true,"전리품 정리 종료",CombatFinish.Abandoned);}else Finish(false,"마을로 귀환",CombatFinish.Abandoned); }
         void Finish(bool won,string reason,CombatFinish completion=CombatFinish.Other)
         {
@@ -536,6 +537,7 @@ namespace Hellscript
             CombatTelemetry.Finish(State.statistics,completion);
             CloseUnopenedChests();State.phase=won?RunPhase.Cleared:RunPhase.Failed;State.action=reason;Log("RUN_END",reason);
             if(State.training>=0)return;
+            RiftEntryRules.Complete(Hero,State,completion);
             ContentUnlocks.RecordRunEnd(account);
             if(account.records.Any(r=>r.id==State.id))return;
             account.records.Insert(0,new RunRecord{id=State.id,hero=catalog.classNames[(int)Hero.heroClass],result=reason,stage=State.stage,kills=State.kills,loot=State.lootCount,chestsOpened=State.layout.chests.Count(c=>c.phase==ChestPhase.Opened),chestsTotal=State.layout.chests.Count,mapFingerprint=State.layout.fingerprint,objective=State.training<0?RiftObjectives.Capture(State):null,simulationSeconds=State.time,realSeconds=State.realTime,damageDealt=State.dealt,logs=new List<string>(State.logs)});

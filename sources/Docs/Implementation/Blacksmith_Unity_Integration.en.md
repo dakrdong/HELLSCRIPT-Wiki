@@ -4,6 +4,8 @@ Date: 2026-09-22
 
 [한국어](Blacksmith_Unity_Integration.md)
 
+2026-09-23 addition: the fourth [core crafting](Core_Crafting.en.md) tab selects legendary/set recipes and uses Abyssal Coins to set minimum affix quality. The legacy core-crafting entry now routes here; rare crafting retains its previous screen. Rules and historical verification of the three original tabs below remain preserved.
+
 ## Scope and ownership
 
 The existing town blacksmith opens the native uGUI forge through the interaction button or PC E key inside the existing 2.8 m range. Affix reroll, slot upgrades and equipment enhancement use actual `GameStore` equipment, character progression and account currency. Crafting retains its existing screen. Awakening, masterworking, sockets and invested-material ledgers remain intact. Persistence uses the project's existing local development adapter.

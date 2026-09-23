@@ -68,6 +68,28 @@ namespace Hellscript
             }
             File.WriteAllText(Path.Combine(directory,"combat-comparison.json"),Json(new Samples{method="Seeded level-30 legal rare gear, tier-six gems on five eligible slots, stage 10, seed 73551, ignore new loot if the equipment bag is full. Fixed-step native simulation. Gem acquisition was not exercised. One paired sample; not a balance guarantee. Damage totals use the run-wide telemetry.",rows=samples.ToArray()}));
         }
+        IEnumerator SixGemMenu(string language,int width,int height)
+        {
+            Screen.SetResolution(width,height,FullScreenMode.Windowed);
+            float end=Time.realtimeSinceStartup+6;
+            while((Screen.width!=width||Screen.height!=height)&&Time.realtimeSinceStartup<end)yield return null;
+            Require(Screen.width==width&&Screen.height==height,"Six-gem menu resize failed");
+            game.ApplyLanguage(language);game.UI.ShowGemMenu();yield return new WaitForSecondsRealtime(.4f);
+            string labels=string.Join("\n",game.UI.GetComponentsInChildren<Text>().Select(t=>t.text));
+            foreach(var gem in GemCatalog.Gems)Require(labels.Contains(Loc.T(gem.name)),"Missing gem in actual menu: "+gem.id);
+            Require(!labels.Contains("Skull")&&!labels.Contains("해골"),"Retired gem in current menu");
+            Require(Loc.MissingCount==0,"Missing six-gem translations");
+            ScreenCapture.CaptureScreenshot(Path.Combine(directory,"six-gems-"+language+".png"));yield return new WaitForSecondsRealtime(.3f);
+            if(width>height)foreach(var gem in GemCatalog.Gems)
+            {
+                var text=game.UI.GetComponentsInChildren<Text>().First(t=>t.text.Contains(Loc.T(gem.name)));
+                DialogReadingAnchor.Show(text.rectTransform);yield return new WaitForSecondsRealtime(.15f);Canvas.ForceUpdateCanvases();
+                var scroll=text.GetComponentInParent<ScrollRect>();
+                var bounds=RectTransformUtility.CalculateRelativeRectTransformBounds(scroll.viewport,text.rectTransform);
+                Require(bounds.min.y>=scroll.viewport.rect.yMin-2&&bounds.max.y<=scroll.viewport.rect.yMax+2,"Gem label outside visible scroll area: "+gem.id);
+                ScreenCapture.CaptureScreenshot(Path.Combine(directory,"six-gems-"+language+"-"+gem.id+".png"));yield return new WaitForSecondsRealtime(.2f);
+            }
+        }
         IEnumerator Start()
         {
             var args=Environment.GetCommandLineArgs();for(int i=0;i<args.Length-1;i++)
@@ -75,10 +97,30 @@ namespace Hellscript
             Require(!string.IsNullOrEmpty(saveDirectory)&&!string.IsNullOrEmpty(directory)&&!string.IsNullOrEmpty(stage),"Use explicit isolated gem fixture paths and stage");
             Directory.CreateDirectory(directory);yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Gem fixture account did not load");game.enabled=false;
             var account=game.Store.Data;var hero=account.Hero;
-            if(stage=="initial")
+            if(stage=="six-gems")
+            {
+                Require(GemCatalog.Gems.Count==6&&GemCatalog.MaximumTier==6&&GemCatalog.Find("G07")==null,"Six-gem catalog mismatch");
+                account.gold=50000;account.gems.Clear();
+                foreach(var gem in GemCatalog.Gems)Require(GemInventory.Add(account,new GemStack{gemId=gem.id,tier=1,count=5}),"Gem fixture grant failed");
+                Require(game.Store.Save(),"Six-gem fixture save failed");
+                Require(game.Store.FuseGems("six-gems-ruby-fusion","G01",1),"Native fusion failed");
+                Require(GemStacks.Count(account.gems,"G01",1)==0&&GemStacks.Count(account.gems,"G01",2)==1&&account.gold==50000,"Native fusion changed wrong materials or gold");
+                Require(!game.Store.FuseGems("six-gems-retired","G07",1),"Retired gem transaction accepted");
+                uint random=91233;for(int n=0;n<10000;n++)Require(GemCatalog.Roll(30,ref random).gemId!="G07","Skull drop after retirement");
+                string migrationDirectory=Path.Combine(directory,"legacy-save");Directory.CreateDirectory(migrationDirectory);
+                var legacy=JsonUtility.FromJson<AccountSave>(Json(account));legacy.gems.Add(new GemStack{gemId="G07",tier=6,count=9});
+                string original=Json(legacy);File.WriteAllText(Path.Combine(migrationDirectory,"hellscript-local-v1.json"),original);
+                var migrated=new GameStore(migrationDirectory,game.catalog);
+                Require(GemStacks.Count(migrated.Data.gems,"G06",6)==9&&File.ReadAllText(migrated.GemRecoveryArchive)==original,"Native migration lost gems or original bytes");
+                Require(migrated.Save(),"Native migration save failed");var restarted=new GameStore(migrationDirectory,game.catalog);
+                Require(restarted.GemRecoveryArchive==""&&GemStacks.Count(restarted.Data.gems,"G06",6)==9,"Native migration repeated after restart");
+                game.ApplyInterfaceScale(100);yield return SixGemMenu("ko",440,956);yield return SixGemMenu("en",1920,1080);
+                File.WriteAllText(Path.Combine(directory,"six-gems-evidence.txt"),"PASS: 6 types x 6 tiers; native 5:1 fusion with no gold cost; G07 rejected; 10000 rolls without Skull; legacy G07 to G06 retains tier/count, exact-byte archive and restart idempotence; actual Korean portrait and English landscape gem menus. Generated icon candidates are not installed.\n");
+            }
+            else if(stage=="initial")
             {
                 hero.level=30;hero.highestClear=10;hero.inventory.Clear();hero.build=BehaviorPresets.ForLevel(HeroClass.Warrior,0,30,game.catalog);hero.build.autoRepeat=false;hero.useEdict=false;account.guide.hintsHidden=true;
-                var weapon=Add(0,"G06");var head=Add(1,"G02");var body=Add(2,"G04");var neck=Add(6,"G01");var ring=Add(7,"G07");
+                var weapon=Add(0,"G06");var head=Add(1,"G02");var body=Add(2,"G04");var neck=Add(6,"G01");var ring=Add(7,"G06");
                 foreach(var item in hero.inventory)item.equipped=true;
                 var candidate=Add(1);game.Save();File.WriteAllText(Path.Combine(directory,"candidate-id.txt"),candidate.id);File.WriteAllText(Path.Combine(directory,"gemmed-id.txt"),head.id);
                 game.ApplyLanguage("ko");game.UI.ShowItemDetail(head.id);yield return Capture("socket-ko",1920,1080,"소켓 ·");

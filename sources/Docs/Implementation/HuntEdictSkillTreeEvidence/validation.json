@@ -1,0 +1,74 @@
+{
+  "result": "passed",
+  "date": "2026-09-23",
+  "engine": "Unity 6000.6.0f1",
+  "loadout": {
+    "normalActiveSlots": 4,
+    "ultimateSlots": 1,
+    "passives": "all unlocked; no equipment slots"
+  },
+  "tests": [
+    {
+      "file": "editmode.xml",
+      "total": "417",
+      "passed": "417",
+      "failed": "0",
+      "skipped": "0",
+      "end-time": "2026-09-23 05:05:08Z"
+    },
+    {
+      "file": "transactions.xml",
+      "total": "71",
+      "passed": "71",
+      "failed": "0",
+      "skipped": "0",
+      "end-time": "2026-09-23 05:05:58Z"
+    }
+  ],
+  "native": {
+    "platform": "macOS development player",
+    "pointer": "uGUI raycast + pointer down/up/click, checked before/after state",
+    "classes": [
+      "Warrior",
+      "Ranger",
+      "Mage"
+    ],
+    "resolutions": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "largeText": {
+      "percent": 150,
+      "languages": [
+        "ko",
+        "en"
+      ]
+    },
+    "restart": "second player process, same isolated account",
+    "physicalMobile": "not tested"
+  },
+  "sources": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Skills.cs": "15ba85a06789f75dbafe422085ab3a7aefdbc1fe96abe9f6fc13e849a5fe5688",
+    "Assets/HELLSCRIPT/Runtime/Core/ClassSkillTree.cs": "1b54dfcb95f8ac4b361ab1f2caa8328235dcd00435c441ce698a773fc94db386",
+    "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json": "fd0b6eb174a90e02c2e937d2d091f1c3963eda5a4ef77e02c435b9aff3c3d17f",
+    "Assets/HELLSCRIPT/Runtime/Core/HuntEdictLoadout.cs": "8f2f535614605d19f9bff0c4a28ee24f85ac596c57e0e003e88133bbb4233d46"
+  }
+}

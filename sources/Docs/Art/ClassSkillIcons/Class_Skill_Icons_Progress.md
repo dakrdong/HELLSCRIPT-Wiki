@@ -1,10 +1,10 @@
 # 스킬 아이콘 제작 목록 / Skill icon production checklist
 
-작성일: 2026-09-22
+작성일: 2026-09-23
 
-108개 ID를 모두 개별 생성하고 파일 및 시각 검수를 마쳤습니다. 모델은 `unknown`이며 모든 항목은 제작 후보입니다. 이 목록은 게임 UI 통합이나 최종 모델 확인을 뜻하지 않습니다.
+111개 ID를 모두 개별 생성하고 파일 및 시각 검수를 마쳤습니다. 모델은 `unknown`이며 모든 항목은 제작 후보입니다. 이 목록은 게임 UI 통합이나 최종 모델 확인을 뜻하지 않습니다.
 
-All 108 IDs were individually generated and reviewed. The actual model remains `unknown`, and every item is candidate art. This checklist does not claim game UI integration or verified model identity.
+All 111 IDs were individually generated and reviewed. The actual model remains `unknown`, and every item is candidate art. This checklist does not claim game UI integration or verified model identity.
 
 | 직업 / Class | ID | 이름 / Name | 종류 / Kind | 제작 / Production | QA | 원본 / Master |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -44,6 +44,7 @@ All 108 IDs were individually generated and reviewed. The actual model remains `
 | Mage | [MP16](Mage/manifests/MP16.json) | 삼색의 기억 / Threefold Memory | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP16.png) |
 | Mage | [MP17](Mage/manifests/MP17.json) | 초과 마력 / Overflowing Mana | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP17.png) |
 | Mage | [MP18](Mage/manifests/MP18.json) | 대마법사의 유언 / Archmage's Testament | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP18.png) |
+| Mage | [MP19](Mage/manifests/MP19.json) | 현자의 수호 / Sage's Ward | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP19.png) |
 | Ranger | [A01](Ranger/manifests/A01.json) | 관통 사격 / Piercing Shot | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A01.png) |
 | Ranger | [A02](Ranger/manifests/A02.json) | 다중 사격 / Multishot | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A02.png) |
 | Ranger | [A03](Ranger/manifests/A03.json) | 맹독 덫 / Venom Trap | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A03.png) |
@@ -80,6 +81,7 @@ All 108 IDs were individually generated and reviewed. The actual model remains `
 | Ranger | [AP16](Ranger/manifests/AP16.json) | 빈틈 없는 재장전 / Seamless Reload | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP16.png) |
 | Ranger | [AP17](Ranger/manifests/AP17.json) | 길잡이 / Pathfinder | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP17.png) |
 | Ranger | [AP18](Ranger/manifests/AP18.json) | 무음의 살수 / Silent Execution | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP18.png) |
+| Ranger | [AP19](Ranger/manifests/AP19.json) | 끝없는 추격 / Relentless Pursuit | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP19.png) |
 | Warrior | [W01](Warrior/manifests/W01.json) | 회오리 / Whirlwind | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W01.png) |
 | Warrior | [W02](Warrior/manifests/W02.json) | 도약 내려찍기 / Leap Slam | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W02.png) |
 | Warrior | [W03](Warrior/manifests/W03.json) | 분쇄 일격 / Crushing Blow | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W03.png) |
@@ -116,3 +118,4 @@ All 108 IDs were individually generated and reviewed. The actual model remains `
 | Warrior | [WP16](Warrior/manifests/WP16.json) | 전열 유지 / Hold Formation | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP16.png) |
 | Warrior | [WP17](Warrior/manifests/WP17.json) | 결전의 비축 / Battle Reserve | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP17.png) |
 | Warrior | [WP18](Warrior/manifests/WP18.json) | 선조의 유산 / Ancestral Legacy | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP18.png) |
+| Warrior | [WP19](Warrior/manifests/WP19.json) | 거인의 보루 / Titan's Bulwark | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP19.png) |

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-09-22T07:56:52.268325+00:00",
+  "generatedAtUtc": "2026-09-23T03:16:26.356952+00:00",
   "handoff": "Docs/Art/ClassSkillIcons/handoff/skills.json",
   "handoffSha256": "e326808204ea2e055444ff5aadb504adbb48a39129d914826bdcad53f5c204c7",
   "classes": [
@@ -24,34 +24,17 @@
     "en": "Pixel checks do not prove native generation, semantic readability, absence of recolored similar images, or absence of painted mattes and halos. Check original-file hash equality and separate visual review records. Unknown-model art remains candidate art. Live Unity importing and physical-device validation are outside this tool's scope."
   },
   "summary": {
-    "pass": 108,
-    "expected": 108,
-    "pngPresent": 108,
-    "rawPresent": 108,
-    "automatedAssetPass": 108,
-    "warnings": 308,
+    "pass": 111,
+    "expected": 111,
+    "pngPresent": 111,
+    "rawPresent": 111,
+    "automatedAssetPass": 111,
+    "warnings": 319,
     "globalErrors": 0
   },
-  "createdMetadata": [
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP10.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP11.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP12.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP13.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP14.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP15.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP16.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP17.png.meta",
-    "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP18.png.meta"
-  ],
+  "createdMetadata": [],
   "globalErrors": [],
-  "previews": [
-    "Docs/Art/ClassSkillIcons/qa/Warrior-64px-dark.png",
-    "Docs/Art/ClassSkillIcons/qa/Warrior-64px-light.png",
-    "Docs/Art/ClassSkillIcons/qa/Ranger-64px-dark.png",
-    "Docs/Art/ClassSkillIcons/qa/Ranger-64px-light.png",
-    "Docs/Art/ClassSkillIcons/qa/Mage-64px-dark.png",
-    "Docs/Art/ClassSkillIcons/qa/Mage-64px-light.png"
-  ],
+  "previews": [],
   "items": [
     {
       "id": "W01",
@@ -3762,6 +3745,111 @@
       "result": "pass"
     },
     {
+      "id": "WP19",
+      "heroClass": "Warrior",
+      "kind": "passive",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/WP19.png",
+      "errors": [],
+      "warnings": [
+        {
+          "code": "model_unknown",
+          "detail": "The generating model is not independently verified; this remains candidate art."
+        },
+        {
+          "code": "faint_border",
+          "detail": "Low-alpha edge pixels are present; visually inspect for a clipped form or unwanted halo."
+        },
+        {
+          "code": "core_padding",
+          "detail": "The alpha > 127 core extends beyond the central 76% guideline; review readability and clipping."
+        },
+        {
+          "code": "faint_padding",
+          "detail": "Alpha > 8 pixels extend beyond the central 76%; inspect faint wisps and edge quality."
+        }
+      ],
+      "outstanding": [],
+      "manifest": "Docs/Art/ClassSkillIcons/Warrior/manifests/WP19.json",
+      "manifestStatus": "generated",
+      "approval": "candidate",
+      "model": "unknown",
+      "sha256": "1d2f13839e1bac0b3230f3f7913c72ba438a3b426806e5fbc75096368af5c7f2",
+      "pixels": {
+        "format": "PNG",
+        "mode": "RGBA",
+        "width": 1254,
+        "height": 1254,
+        "pngBitDepth": 8,
+        "pngColorType": 6,
+        "transparentPixels": 1050717,
+        "nontransparentPixels": 521799,
+        "opaquePixels": 149,
+        "semitransparentPixels": 521650,
+        "transparentFraction": 0.668176,
+        "corePixels": 495631,
+        "coreFraction": 0.315183,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "outerBorderMaxAlpha": 1,
+        "bboxAlphaAbove0": [
+          49,
+          21,
+          1230,
+          1254
+        ],
+        "bboxAlphaAbove8": [
+          212,
+          110,
+          1038,
+          1135
+        ],
+        "bboxAlphaAbove127": [
+          214,
+          111,
+          1035,
+          1134
+        ],
+        "central76BoundsExclusive": [
+          151,
+          151,
+          1103,
+          1103
+        ],
+        "faintInsideCentral76": false,
+        "coreInsideCentral76": false,
+        "at64px": {
+          "bboxAlphaAbove127": [
+            11,
+            6,
+            53,
+            58
+          ],
+          "corePixels": 1288
+        }
+      },
+      "rgbaSha256": "3b2c4ab6982e650a62e12916d87e7b934c2baa9b7a2898ce2ac46432b829a8ba",
+      "silhouetteSha256": "7f9508108128862569dd79200a443fecb3372ff61a783a62e47391efaa17dd13",
+      "guid": "c54b3d64f0974995ac44f6a89d1241e7",
+      "originalProof": {
+        "sourceFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP19.png",
+        "sourceSha256": "1d2f13839e1bac0b3230f3f7913c72ba438a3b426806e5fbc75096368af5c7f2",
+        "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/WP19.png",
+        "masterSha256": "1d2f13839e1bac0b3230f3f7913c72ba438a3b426806e5fbc75096368af5c7f2",
+        "sourceAvailable": true,
+        "observedSourceSha256": "1d2f13839e1bac0b3230f3f7913c72ba438a3b426806e5fbc75096368af5c7f2",
+        "rawFormat": "PNG",
+        "rawMode": "RGBA",
+        "rawSize": [
+          1254,
+          1254
+        ]
+      },
+      "rawPresent": true,
+      "result": "pass"
+    },
+    {
       "id": "A01",
       "heroClass": "Ranger",
       "kind": "active",
@@ -7139,6 +7227,111 @@
         "masterSha256": "a30b73697e3e338a22da15744f78deb9932f96e772ae63c8d403176190faf52c",
         "sourceAvailable": true,
         "observedSourceSha256": "a30b73697e3e338a22da15744f78deb9932f96e772ae63c8d403176190faf52c",
+        "rawFormat": "PNG",
+        "rawMode": "RGBA",
+        "rawSize": [
+          1254,
+          1254
+        ]
+      },
+      "rawPresent": true,
+      "result": "pass"
+    },
+    {
+      "id": "AP19",
+      "heroClass": "Ranger",
+      "kind": "passive",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP19.png",
+      "errors": [],
+      "warnings": [
+        {
+          "code": "model_unknown",
+          "detail": "The generating model is not independently verified; this remains candidate art."
+        },
+        {
+          "code": "faint_border",
+          "detail": "Low-alpha edge pixels are present; visually inspect for a clipped form or unwanted halo."
+        },
+        {
+          "code": "core_padding",
+          "detail": "The alpha > 127 core extends beyond the central 76% guideline; review readability and clipping."
+        },
+        {
+          "code": "faint_padding",
+          "detail": "Alpha > 8 pixels extend beyond the central 76%; inspect faint wisps and edge quality."
+        }
+      ],
+      "outstanding": [],
+      "manifest": "Docs/Art/ClassSkillIcons/Ranger/manifests/AP19.json",
+      "manifestStatus": "generated",
+      "approval": "candidate",
+      "model": "unknown",
+      "sha256": "5fcc94d13c66ffcb50943db1664dd5791bf70b7d147721afec9a6f7b75bb49c9",
+      "pixels": {
+        "format": "PNG",
+        "mode": "RGBA",
+        "width": 1254,
+        "height": 1254,
+        "pngBitDepth": 8,
+        "pngColorType": 6,
+        "transparentPixels": 1085779,
+        "nontransparentPixels": 486737,
+        "opaquePixels": 171,
+        "semitransparentPixels": 486566,
+        "transparentFraction": 0.690472,
+        "corePixels": 398144,
+        "coreFraction": 0.253189,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "outerBorderMaxAlpha": 1,
+        "bboxAlphaAbove0": [
+          0,
+          19,
+          1232,
+          1254
+        ],
+        "bboxAlphaAbove8": [
+          196,
+          162,
+          1202,
+          1102
+        ],
+        "bboxAlphaAbove127": [
+          197,
+          164,
+          1182,
+          1099
+        ],
+        "central76BoundsExclusive": [
+          151,
+          151,
+          1103,
+          1103
+        ],
+        "faintInsideCentral76": false,
+        "coreInsideCentral76": false,
+        "at64px": {
+          "bboxAlphaAbove127": [
+            10,
+            8,
+            60,
+            56
+          ],
+          "corePixels": 1038
+        }
+      },
+      "rgbaSha256": "3d312d92a2d1f7f983a08ed261cc33cbbd41bd51a8c384858f1ddd7f9f8bf05b",
+      "silhouetteSha256": "d6b6837abfcb1d2700ec22dbb1180b28b10387ea81c5e80ccaa7d14665fe1430",
+      "guid": "2901238379ab48aaa4758fde911e0cad",
+      "originalProof": {
+        "sourceFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP19.png",
+        "sourceSha256": "5fcc94d13c66ffcb50943db1664dd5791bf70b7d147721afec9a6f7b75bb49c9",
+        "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP19.png",
+        "masterSha256": "5fcc94d13c66ffcb50943db1664dd5791bf70b7d147721afec9a6f7b75bb49c9",
+        "sourceAvailable": true,
+        "observedSourceSha256": "5fcc94d13c66ffcb50943db1664dd5791bf70b7d147721afec9a6f7b75bb49c9",
         "rawFormat": "PNG",
         "rawMode": "RGBA",
         "rawSize": [
@@ -10887,6 +11080,107 @@
         "masterSha256": "4efb69386903bfa46608ebb96f4d7177e53881767f1bedecfb877cacebf34c2f",
         "sourceAvailable": true,
         "observedSourceSha256": "4efb69386903bfa46608ebb96f4d7177e53881767f1bedecfb877cacebf34c2f",
+        "rawFormat": "PNG",
+        "rawMode": "RGBA",
+        "rawSize": [
+          1254,
+          1254
+        ]
+      },
+      "rawPresent": true,
+      "result": "pass"
+    },
+    {
+      "id": "MP19",
+      "heroClass": "Mage",
+      "kind": "passive",
+      "file": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/MP19.png",
+      "errors": [],
+      "warnings": [
+        {
+          "code": "model_unknown",
+          "detail": "The generating model is not independently verified; this remains candidate art."
+        },
+        {
+          "code": "core_padding",
+          "detail": "The alpha > 127 core extends beyond the central 76% guideline; review readability and clipping."
+        },
+        {
+          "code": "faint_padding",
+          "detail": "Alpha > 8 pixels extend beyond the central 76%; inspect faint wisps and edge quality."
+        }
+      ],
+      "outstanding": [],
+      "manifest": "Docs/Art/ClassSkillIcons/Mage/manifests/MP19.json",
+      "manifestStatus": "generated",
+      "approval": "candidate",
+      "model": "unknown",
+      "sha256": "7078a84fc65c54a556e4dc5ac61859e38829da6a4e22ecfa8ba674ffb143b7ec",
+      "pixels": {
+        "format": "PNG",
+        "mode": "RGBA",
+        "width": 1254,
+        "height": 1254,
+        "pngBitDepth": 8,
+        "pngColorType": 6,
+        "transparentPixels": 991088,
+        "nontransparentPixels": 581428,
+        "opaquePixels": 679,
+        "semitransparentPixels": 580749,
+        "transparentFraction": 0.630256,
+        "corePixels": 548651,
+        "coreFraction": 0.3489,
+        "alphaExtrema": [
+          0,
+          255
+        ],
+        "outerBorderMaxAlpha": 0,
+        "bboxAlphaAbove0": [
+          49,
+          21,
+          1228,
+          1214
+        ],
+        "bboxAlphaAbove8": [
+          167,
+          140,
+          1089,
+          1130
+        ],
+        "bboxAlphaAbove127": [
+          168,
+          141,
+          1087,
+          1129
+        ],
+        "central76BoundsExclusive": [
+          151,
+          151,
+          1103,
+          1103
+        ],
+        "faintInsideCentral76": false,
+        "coreInsideCentral76": false,
+        "at64px": {
+          "bboxAlphaAbove127": [
+            9,
+            8,
+            55,
+            57
+          ],
+          "corePixels": 1425
+        }
+      },
+      "rgbaSha256": "f93ab6a6ce40abd40747d3382040f5af43ee954f7696785e8fed5a535c89d228",
+      "silhouetteSha256": "c66626ad31218e5fc6167bb8511c46a21151d483d385c11d2bf2c02d925f349a",
+      "guid": "373e20404e3d476a8e1ef10ebd1c5565",
+      "originalProof": {
+        "sourceFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP19.png",
+        "sourceSha256": "7078a84fc65c54a556e4dc5ac61859e38829da6a4e22ecfa8ba674ffb143b7ec",
+        "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/MP19.png",
+        "masterSha256": "7078a84fc65c54a556e4dc5ac61859e38829da6a4e22ecfa8ba674ffb143b7ec",
+        "sourceAvailable": true,
+        "observedSourceSha256": "7078a84fc65c54a556e4dc5ac61859e38829da6a4e22ecfa8ba674ffb143b7ec",
         "rawFormat": "PNG",
         "rawMode": "RGBA",
         "rawSize": [

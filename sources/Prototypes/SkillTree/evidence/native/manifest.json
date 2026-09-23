@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "date": "2026-09-23",
+  "unity": "6000.6.0f1",
+  "platform": "macOS ARM64 development player",
+  "mode": "batchmode nographics; separate initial and resumed processes",
+  "buildErrors": 0,
+  "ultimateSupportCases": [
+    {
+      "ultimate": "W17",
+      "passive": "WP18",
+      "baseline": 0.0,
+      "matching": 1.0,
+      "unrelated": 0.0
+    },
+    {
+      "ultimate": "W18",
+      "passive": "WP19",
+      "baseline": 0.0,
+      "matching": 84.84547,
+      "unrelated": 0.0
+    },
+    {
+      "ultimate": "A17",
+      "passive": "AP18",
+      "baseline": 399.0456,
+      "matching": 517.1243,
+      "unrelated": 399.0456
+    },
+    {
+      "ultimate": "A18",
+      "passive": "AP19",
+      "baseline": 16.2,
+      "matching": 20.2,
+      "unrelated": 16.2
+    },
+    {
+      "ultimate": "M17",
+      "passive": "MP18",
+      "baseline": 0.0,
+      "matching": 15.0,
+      "unrelated": 0.0
+    },
+    {
+      "ultimate": "M18",
+      "passive": "MP19",
+      "baseline": 453.1937,
+      "matching": 634.4711,
+      "unrelated": 453.1937
+    }
+  ],
+  "restartCases": 7,
+  "caseKeys": [
+    "A07",
+    "M11",
+    "M13",
+    "W02",
+    "W09-after-kill",
+    "W09-before-kill",
+    "W18"
+  ],
+  "floatAbsoluteTolerance": {
+    "health": 0.002,
+    "resource": 0.002,
+    "ultimateRemaining": 0.002,
+    "chargingSeconds": 0.002,
+    "spacingMeters": 0.002,
+    "damage": 0.01
+  },
+  "observedNonzeroDifferences": {
+    "W09-after-kill:damage": 1.4210854715202004e-14
+  },
+  "discreteFields": "exact match",
+  "baselineCommit": "790d6d853642e003c1e69eb99260d80d18f7f7bf",
+  "buildEvidence": [
+    "CLASS_SKILL_BUILD_OK /Users/t8g-2410-pn-005/.codex/worktrees/class-skill-tree/HELLSCRIPT/Builds/ClassSkills/HELLSCRIPT.app errors=0"
+  ],
+  "binarySha256": "cf02cf752ecf4557c6de0177e3404f613ee7b8ccf09e8606b17e55ebf3156bfb",
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json": "d4367852e759b2e0d741db0e47b17bb81670637886720f36e9a9de14ac3dae26",
+    "Assets/HELLSCRIPT/Runtime/Core/ClassSkillCodec.cs": "c48fb458f4f4da28b7f4bf011618ada00874f7fb05af81a0ebb258956cd3b6b8",
+    "Assets/HELLSCRIPT/Runtime/Core/ClassSkillNativeSmoke.cs": "f5c814b6397019a8d37fd4972ecc78978a0d2429e6234f8c0c0d66b72cb9a352",
+    "Assets/HELLSCRIPT/Runtime/Core/ClassSkills.cs": "d433b5c7e5e9df85af9796714c54ae70d0b69d2a78b1051a6a8927392a4c68c5",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillEffects.cs": "25d02a7c6bed913369063a15132f13e2b975a85b914cefe9c21add25cc28a414",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillIconView.cs": "d050dff66291a0c99f9c706b875da6b9bc67ecd8051f6db35dd0de7f22453d89",
+    "Assets/HELLSCRIPT/Tests/Editor/ClassSkillBoundaryTests.cs": "9db5835efa3ec37193abc58dd3aa51071a77c056d3eecb2b3f3ae8398b51f3cf",
+    "Assets/HELLSCRIPT/Tests/Editor/ClassSkillPassiveTests.cs": "31d220c3688de858ba7d3bc2339cefc5ba7b86928162623b87529061c38b8423",
+    "Assets/HELLSCRIPT/Tests/Editor/ClassSkillRuntimeTests.cs": "b3dec58fedca15287c229e87f75a23f610b33ad812074326c9ed60d212b4e933",
+    "Docs/Design/ClassSkills/catalog.json": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
+    "Docs/Design/ClassSkills/runtime_parameters.json": "356f3bd9c028ebdf6387aabde5bec4f9eb2c787d38b6936cde83ca781b33ae9b"
+  },
+  "scope": "Combat effects and real GameStore save/restart on isolated validation accounts. UI, visual effects, input and physical mobile devices were not assessed."
+}

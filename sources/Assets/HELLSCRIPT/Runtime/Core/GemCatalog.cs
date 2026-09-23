@@ -44,7 +44,7 @@ namespace Hellscript
     // HELLSCRIPT's own six-tier table. The reference game's values are not imported.
     public static class GemCatalog
     {
-        public const int Version=1,SocketItemVersion=3,MaximumTier=6,StackLimit=999;
+        public const int Version=2,SocketItemVersion=3,MaximumTier=6,StackLimit=999;
         public static readonly IReadOnlyList<string> TierNames=Array.AsReadOnly(new[]{"부서진","흐린","맑은","벼려진","완전한","왕관의"});
         static GemEffectRow Weapon(string name,StatId stat)=>new GemEffectRow(name,stat,true,3,5,8,12,17,23);
         static GemEffectRow Resist(string name,StatId stat)=>new GemEffectRow(name,stat,false,8,14,22,32,45,60);
@@ -60,9 +60,7 @@ namespace Hellscript
             new GemDefinition("G05","자수정",Element.Shadow,Weapon("암흑 피해 증가",StatId.ShadowDamage),
                 new GemEffectRow("이동 속도 증가",StatId.MovementSpeed,true,1,1.5f,2.5f,3.5f,4.5f,6),Resist("암흑 저항",StatId.ShadowResistance)),
             new GemDefinition("G06","금강석",Element.Physical,Weapon("물리 피해 증가",StatId.PhysicalDamage),
-                new GemEffectRow("보호막 흡수량 증가",StatId.BarrierGeneration,true,3,5,8,12,16,21),new GemEffectRow("모든 저항",StatId.AllResistance,false,4,7,11,16,22,30)),
-            new GemDefinition("G07","해골",-1,new GemEffectRow("극대화 피해 증가",StatId.CriticalStrikeDamage,true,4,7,11,16,22,30),
-                new GemEffectRow("방어도 증가",GemEffectKind.ArmorPercent,StatId.Armor,true,3,5,8,12,16,21),new GemEffectRow("물약 회복량 증가",StatId.PotionHealing,true,4,7,11,16,22,30))});
+                new GemEffectRow("보호막 흡수량 증가",StatId.BarrierGeneration,true,3,5,8,12,16,21),new GemEffectRow("모든 저항",StatId.AllResistance,false,4,7,11,16,22,30))});
         public static GemDefinition Find(string id)=>Gems.FirstOrDefault(g=>g.id==id);
         public static bool Valid(string id,int tier)=>Find(id)!=null&&tier>=1&&tier<=MaximumTier;
         public static bool AllowsSocket(Item item)=>item!=null&&item.rarity>=2&&item.rarity<=3&&(item.slot==0||item.slot==1||item.slot==2||item.slot==6||item.slot==7);

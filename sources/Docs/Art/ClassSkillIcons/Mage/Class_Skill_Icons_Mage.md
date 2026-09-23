@@ -1,5 +1,7 @@
 # 마법사 스킬 아이콘 제작 기록
 
+2026-09-23에 [현자의 수호 MP19](manifests/MP19.json)를 추가해 현재 마법사 아이콘은 37개입니다. 아래 내용은 최초 36개 제작 당시의 기록이며, 신규 아이콘의 Sprite 임포트와 HTML 반영은 [통합 제작 기록](../Class_Skill_Icons.md)에 정리했습니다.
+
 작성일: 2026-09-22
 
 [English](Class_Skill_Icons_Mage.en.md)

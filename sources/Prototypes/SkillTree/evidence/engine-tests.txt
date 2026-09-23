@@ -1,0 +1,47 @@
+✔ Warrior: all 37 skills are individually affordable at their unlock level (3.209792ms)
+✔ Warrior: all branches are jointly reachable with 39 points (1.74025ms)
+✔ Warrior: each level 1–40 retains a valid and reachable progression (21.611917ms)
+✔ Warrior: names and rank-one effects are copied exactly from runtime data (0.183625ms)
+✔ Warrior: each ultimate support requires its matching ultimate activation at level 40 (0.477292ms)
+✔ Warrior: both ultimates require level 40 and any unlocked skill in the preceding stage (6.862125ms)
+✔ Warrior: suggested loadouts obey points, prerequisites and slot limits (1.400458ms)
+✔ Ranger: all 37 skills are individually affordable at their unlock level (1.57025ms)
+✔ Ranger: all branches are jointly reachable with 39 points (1.357292ms)
+✔ Ranger: each level 1–40 retains a valid and reachable progression (23.80925ms)
+✔ Ranger: names and rank-one effects are copied exactly from runtime data (0.099333ms)
+✔ Ranger: each ultimate support requires its matching ultimate activation at level 40 (0.113708ms)
+✔ Ranger: both ultimates require level 40 and any unlocked skill in the preceding stage (4.651334ms)
+✔ Ranger: suggested loadouts obey points, prerequisites and slot limits (1.221791ms)
+✔ Mage: all 37 skills are individually affordable at their unlock level (1.290333ms)
+✔ Mage: all branches are jointly reachable with 39 points (1.301125ms)
+✔ Mage: each level 1–40 retains a valid and reachable progression (23.241625ms)
+✔ Mage: names and rank-one effects are copied exactly from runtime data (0.0985ms)
+✔ Mage: each ultimate support requires its matching ultimate activation at level 40 (0.097625ms)
+✔ Mage: both ultimates require level 40 and any unlocked skill in the preceding stage (5.264459ms)
+✔ Mage: suggested loadouts obey points, prerequisites and slot limits (0.9245ms)
+✔ only the starting active is available at level one (0.152667ms)
+✔ a dedicated modifier checks its source activation independently of the player level (0.426083ms)
+✔ upgrades preserve the point budget and cap (0.965167ms)
+✔ refunding a source upgrade preserves its base activation and equipped modifier (0.347083ms)
+✔ lowering level removes unavailable allocation and frees dependent loadout slots (1.581875ms)
+✔ passive equipment slots follow levels 3, 6 and 10; actives cap at four (1.50675ms)
+✔ selecting a different ultimate replaces just the ultimate (1.400458ms)
+✔ prerequisite equipment is not required for unlocking a branch (0.136333ms)
+✔ planner export round trips and rejects runtime formats, unknown IDs, overspending and invalid ranks (1.370333ms)
+✔ every source reference is classified independently of the configured tree links (66.17375ms)
+✔ planner actions never mutate catalog or other class plans (0.827542ms)
+✔ ultimate equipment slot opens exactly at level 40 (0.05075ms)
+✔ generic combat states do not impose invented skill sources (0.188125ms)
+✔ ultimates preserve the stage condition without imposing additional upgrade spending (0.183292ms)
+✔ level reduction refunds unavailable upgrades and restores capacity without changing independent investment (0.519875ms)
+✔ each split passive stays locked when only the other ultimate is active (2.038417ms)
+✔ direct alternatives accept each actual source and reject an unrelated unlocked skill (9.238667ms)
+✔ old planner exports move ultimate support ranks to the selected branch once (0.417167ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 250.099875

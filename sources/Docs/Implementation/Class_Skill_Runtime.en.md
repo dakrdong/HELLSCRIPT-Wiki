@@ -1,33 +1,44 @@
 # Class skill abilities and equipment integration
 
-Recorded: 2026-09-22 · [한국어](Class_Skill_Runtime.md)
+Updated: 2026-09-23 · [한국어](Class_Skill_Runtime.md)
 
-**Status: abilities and equipment integration verified; UI integration and player release pending.**
+**Status: native Hunt Edict skill tree integrated with player persistence and combat.**
 
-This work implements the [approved skill design](../Design/HELLSCRIPT_Class_Skills.en.md). Player release remains gated until UI integration. Images, icons, layout, animation and visual effects are outside this change.
+This work implements the [approved skill design](../Design/HELLSCRIPT_Class_Skills.en.md). The player UI and adoption path now follow the integration record linked below. The 2026-09-23 follow-up adds three dedicated ultimate passives and icons, with progression prerequisites recorded separately in the HTML skill tree.
+
+
+**Current player UI:** [Hunt edict skill tree integration](Hunt_Edict_Skill_Tree.en.md) supersedes the initial validation-only loadout described below. Player builds use four normal actives and one separate ultimate, all unlocked passives, level 40 progression and unified persistence. Version 1–2 details below document compatibility for earlier validation snapshots.
 
 ## Implemented scope
 
-Warrior, Ranger and Mage each have 16 normal actives, 18 passives and two ultimates. The original 36 skills retain their indices and calculation paths. The 72 additions use stable string IDs. Eighteen new legendaries and 24 new sets with 105 pieces and 60 bonus thresholds are registered separately from weighted drops.
+Warrior, Ranger and Mage each have 16 normal actives, 19 passives and two ultimates. The original 36 skills retain their indices and calculation paths. The 75 additions use stable string IDs. Eighteen new legendaries and 24 new sets with 105 pieces and 60 bonus thresholds are registered separately from weighted drops.
 
-Level 40 and new skills are enabled only for development validation heroes. Regular heroes retain the level-30 cap. The level-40 investment budget is 39 points, with no retroactive award of experience discarded at the old cap.
+Integrated player configurations enable level 40 and new skills. Earlier development-only configurations retain their compatibility path. The level-40 investment budget is 39 points, with no retroactive award of experience discarded at the old cap.
 
 ## Persistence and combat rules
 
 A saved loadout includes ID-based investments, four normal slots, three passive slots, one selected ultimate, use policies, automatic-use flags and action priority. The old 18 active indices remain W01–W06, A01–A06 and M01–M06. HED4 carries new IDs, ranks and ultimate selection; HED1–HED3 import remains available.
 
-Ultimates unlock at level 40, always occupy metadata positions 35 and 36, and are mutually exclusive. Selection changes are allowed in town. Their shared cooldown starts at 60 seconds and cannot fall below 45 seconds after reduction. Save, restore and selection changes preserve its remaining duration.
+Ultimates unlock at level 40, always occupy metadata positions 36 and 37, and are mutually exclusive. Selection changes are allowed in town. Their shared cooldown starts at 60 seconds and cannot fall below 45 seconds after reduction. Save, restore and selection changes preserve its remaining duration.
 
 Every cast and derived effect retains an origin skill and cast ID. Direct hits, periodic damage, splits, summons and item damage use separate paths. Warrior brands do not inherit Ranger vulnerability, skill bleed is separate from set bleed, and the original Shadow Arrow is distinct from Shadow Pursuit.
 
 ## UI contract
 
-- `ClassSkills.For`: 36 ordered definitions per class, with Korean and English names and descriptions.
+- `ClassSkills.For`: 37 ordered definitions per class, with Korean and English names and descriptions.
 - `ReadClassSkills`: unlock and equipment state, invested and bonus ranks, costs, cooldowns and calculated values.
 - `ClassSkillLoadout.Validate` and `GameStore.CommitClassSkills`: validation and atomic adoption.
 - `InspectClassSkill` and `TryCastClassSkill`: readiness/reason and actual execution.
 - `ReadClassSkillEffects`: detached read copies of active buffs, placements and charges.
 - `ClassSkillChanged`: skill, source, cast, target and position events for later presentation integration.
+
+## 2026-09-23 dedicated ultimate support
+
+Ultimate support now has separate IDs. WP18/AP18/MP18 only affect the first ultimate, while WP19/AP19/MP19 only affect the second. Magnitudes and rank caps are retained. Existing runtime passive unlock levels remain unchanged for save compatibility; HTML level-40 prerequisites are a separate progression proposal.
+
+`ClassSkillLoadout` version 2 validates the old 36 entries before migrating to 37. Selecting the second ultimate moves P18 investment and equipment to P19, resetting P18 to rank 1 without adding points or slots. The first ultimate keeps the old investment. HED4 integrity and unknown-field rejection remain. New icons use the existing `SkillIconAssets` resolver.
+
+This focused Edit Mode run passed 352 tests. The macOS player verified all six matching ultimate/passive effects and seven save-restoration cases across separate processes. See the [current validation record](../../Prototypes/SkillTree/evidence/validation-summary.json), [Edit Mode results](../../Prototypes/SkillTree/evidence/ultimate-split-editmode.xml) and [native receipts](../../Prototypes/SkillTree/evidence/native/manifest.json). Counts below document earlier runs and are not added to this run.
 
 ## Validation record
 
@@ -65,7 +76,7 @@ M17 originally required an elemental-cycle buff that some specified builds could
 
 ## Use policies and controlled experiments
 
-The [policy design](../Design/Class_Skill_Use_Policies.en.md) defines 164 choices across 55 groups. Fifty-four actives/ultimates expose timing, target, positioning and waiting choices; Mana Reclaim also exposes a recovery goal. The 54 passives compete for the existing three passive slots.
+The [policy design](../Design/Class_Skill_Use_Policies.en.md) defines 164 choices across 55 groups. Fifty-four actives/ultimates expose timing, target, positioning and waiting choices; Mana Reclaim also exposes a recovery goal. The 57 passives compete for the existing three passive slots.
 
 W02 Leap Slam gains damage from actual travel distance. Players can leap from the current distance or spend at most two seconds creating space. M13 Mana Reclaim regenerates mana at ten times the ordinary rate at rank one while stationary. It has no cooldown or fixed duration. Movement or another valid attack cancels it; damage alone does not. Players choose holding versus retreating and resuming attacks at 50% versus 90% mana.
 

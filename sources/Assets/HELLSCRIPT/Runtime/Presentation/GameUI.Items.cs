@@ -58,7 +58,7 @@ namespace Hellscript
             ContentButton(ContentUnlocks.Shop,"갬블 상인 찾아가기",()=>{ShowTown();game.RequestStation(TownStation.Gambler);});
             content.GetComponentsInChildren<UnityEngine.UI.Button>().Last().name="gamble-route";
             ContentButton(ContentUnlocks.RareCraft,Loc.F("희귀 제작 · 재료 50 / {0:N0} 골드", 500L*level),PurchaseAction(slot,level,1,500*level,50));
-            ContentButton(ContentUnlocks.CoreCraft,Loc.F("전설·세트 제작 · {0} 코어 {1}/10", GameCatalog.Slots[slot], a.cores[slot]),PurchaseAction(slot,level,2,0,0),true);
+            ContentButton(ContentUnlocks.CoreCraft,"대장간 코어 제작",()=>{ShowTown();if(CanUseBlacksmith)ShowBlacksmith(3);else game.RequestStation(TownStation.Blacksmith);},true);
             Note(content,"베이스와 옵션은 확정 시 생성됩니다. 직업·부위에 맞는 접두/접미와 수치 티어를 적용합니다.",20,95);
             BigButton(content,"전설·세트 도감",ShowItemCollection);
             FooterButton(0,2,"장비 보기",()=>ShowBag());FooterButton(1,2,"성소로",ShowTown);

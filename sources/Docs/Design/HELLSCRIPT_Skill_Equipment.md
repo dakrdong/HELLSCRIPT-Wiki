@@ -1,6 +1,6 @@
 # HELLSCRIPT 스킬·장비 대응표
 
-정리 기준일: 2026-09-22
+정리 기준일: 2026-09-23
 
 [설계 원칙](HELLSCRIPT_Class_Skills.md) · [JSON](ClassSkills/catalog.json)
 

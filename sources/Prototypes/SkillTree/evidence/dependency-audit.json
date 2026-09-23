@@ -1,0 +1,2027 @@
+{
+  "source": {
+    "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
+    "runtimeSha256": "d4367852e759b2e0d741db0e47b17bb81670637886720f36e9a9de14ac3dae26",
+    "design": "Docs/Design/ClassSkills/catalog.json",
+    "designSha256": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
+    "gameEnabled": false
+  },
+  "result": "pass",
+  "auditedSkills": 111,
+  "policy": "Direct effect targets/triggers only. Dedicated ultimate support pairs. Shared states remain level-only; ultimates use the previous-stage gate.",
+  "records": [
+    {
+      "id": "W01",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "주변 적에게 0.25초마다 피해. 이동하며 유지합니다.",
+      "sourceSha256": "2c01da235457f54856fb1641500b913a07cd9a7085aed2dacf88f9fdf14d8a07"
+    },
+    {
+      "id": "W02",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "유효한 위치로 도약해 착지 충격을 줍니다. 신규 능력 검증 경로에서는 실제 도약 거리 2m를 넘는 1m마다 직접 피해 가산 +15%를 얻으며 8m에서 +90%입니다. 거리 확보 선택 시 최대 2초 후퇴를 시도합니다.",
+      "sourceSha256": "01183fd375ab9555fa903cc3e72b09905c6303fdfbde095833e825095be64fd2"
+    },
+    {
+      "id": "W03",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "전방의 적에게 강한 물리 피해를 줍니다.",
+      "sourceSha256": "9b6fe7c92452a4b4acb0f86b01db60502e613a837ff808cf85d097c808262d37"
+    },
+    {
+      "id": "W04",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "주변 적에게 피해와 1.5초 기절을 줍니다.",
+      "sourceSha256": "199e078a7e28b63b2a0e4baea5200e8ffad14e70db27870d7759859ea27e841a"
+    },
+    {
+      "id": "W05",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "최대 HP 30% 보호막을 4초 유지합니다.",
+      "sourceSha256": "71c4e84b03b763c79029a7711e1e99e7d41f2709eb76a0d086b03a811b49858e"
+    },
+    {
+      "id": "W06",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "자원 40 회복, 6초간 피해 +20%.",
+      "sourceSha256": "a37ae4f4e676f17aa8319da66b54af942c6746e2169c2cc0e12cbdc51ece9a6c"
+    },
+    {
+      "id": "A01",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "일직선으로 최대 5명을 관통합니다.",
+      "sourceSha256": "a4d0d285740981c4b063377059b1b918db0d571aac0fd4e947661ed9310c463b"
+    },
+    {
+      "id": "A02",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "60도 부채꼴로 화살 3발을 발사합니다.",
+      "sourceSha256": "7be7c8a708b3e451a8e8e37bd0ef6027b17024e02a304b93d8c23af2f4664920"
+    },
+    {
+      "id": "A03",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "5초 독 장판을 설치합니다. 최대 2개.",
+      "sourceSha256": "66ac2fc9affd08e939c675f48d8b50b686aeaec9eab295bf86f106df6f6c2c81"
+    },
+    {
+      "id": "A04",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "적과 거리를 벌리는 위치로 도약합니다.",
+      "sourceSha256": "3e61a5fcc6ccfac9695262f1b753a077679b0c4adfb069b1be159bd527a4c85d"
+    },
+    {
+      "id": "A05",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "표식 대상에게 주는 피해 +25%.",
+      "sourceSha256": "64c19a68e5573e791f53719f8d112c141d7d292699db13d9b61cabee3344afb3"
+    },
+    {
+      "id": "A06",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "다음 사격 3회에 암흑 추가 피해.",
+      "sourceSha256": "95a489aa063b4458e8ba11a310b9abf0b77db31d3b2e4f61ebca80d9f39ff05d"
+    },
+    {
+      "id": "M01",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "착탄 지점에 폭발 피해를 줍니다.",
+      "sourceSha256": "f95809a6ec1cc0d66c6c53752bd790e3548ef81df6daa48570d5d15e31cf47f4"
+    },
+    {
+      "id": "M02",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "6초간 냉기 피해와 35% 둔화. 최대 2개.",
+      "sourceSha256": "635e692925c6a30804c53fc79321bbbc9761ecd7e05e299ea757f22854494d7f"
+    },
+    {
+      "id": "M03",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.",
+      "sourceSha256": "506050e18767ee6d35ce3f920e8b5db498aa99e20fff43b7662c4456fa2c1a22"
+    },
+    {
+      "id": "M04",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "위험이 낮은 유효한 지점으로 이동합니다.",
+      "sourceSha256": "0b4e6e55d491492e0e46a7f00a992a78324fa175b572fcafac8213a034f1be08"
+    },
+    {
+      "id": "M05",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "최대 HP 35% 보호막을 4초 유지합니다.",
+      "sourceSha256": "63bfbbbff74953386c2cafbf778f8bf24d1f8c98ed7db0ccac7c61165dd249c7"
+    },
+    {
+      "id": "M06",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "주변 적에게 냉기 피해와 1.5초 빙결.",
+      "sourceSha256": "6d0cbc54bc36850d2c484c773c7208f05c677b8d8624eea1964b36b843ddc9ce"
+    },
+    {
+      "id": "WP01",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +15%를 적용합니다.",
+      "sourceSha256": "48646644d3e7b65ddd5f642f0353dd992e0fe09dc4cdda838b938dbc456fe1e2"
+    },
+    {
+      "id": "WP02",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W01",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W01"
+      ],
+      "directEffectReferences": [
+        "W01"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "회오리를 2초 유지하면 비용 감소 +20%를 적용합니다. 중단하면 해제됩니다.",
+      "sourceSha256": "73d495e1241fa630b20d975f5d0a4f3f43e6d32c6bd723a45c358688d3505b35"
+    },
+    {
+      "id": "WP03",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W02",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [
+        "W02"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Passives.cs",
+          "line": 23,
+          "cue": "action.skill==1"
+        }
+      ],
+      "sourceDescription": "도약 착지 후 2초 동안 받는 피해가 15% 감소합니다.",
+      "sourceSha256": "6e1713516e4ae4bd3e695ed69737a0eacdb247ab553ee6990cc25624fafefe1c"
+    },
+    {
+      "id": "WP04",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "처치 시 최대 HP의 2%를 회복합니다. 한 번 발동한 뒤 1초 동안 기다립니다.",
+      "sourceSha256": "c445523a38e70d6d20d998cd17ad3876b6927b113393238130e9691c896ea046"
+    },
+    {
+      "id": "WP05",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
+      "sourceSha256": "f3c8fd3f4cba3edf50599c080d573514ca58dac09d69e3fb4b712e74f22a24f8"
+    },
+    {
+      "id": "WP06",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "HP가 30% 이하인 적에게 가산 피해 +20%를 적용합니다.",
+      "sourceSha256": "31935c6741ba6328d16662c5e93391f44cf2cd4860f34691fe86b5d6f8b28ba2"
+    },
+    {
+      "id": "AP01",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "적중할 때 대상과 7m 이상 떨어져 있으면 가산 피해 +15%를 적용합니다.",
+      "sourceSha256": "da8812c8da08adf182be9c22fe4f086c1dd9c82a9b1b4dd77d9f3617851e2d35"
+    },
+    {
+      "id": "AP02",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A04",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A04"
+      ],
+      "directEffectReferences": [
+        "A04"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "후퇴 도약 착지 후 2초 동안 이동속도 증가에 +20%p를 더합니다.",
+      "sourceSha256": "2d4343767f6ef01d43599fb24941bc2713a6fae78226964475954d5dbd907515"
+    },
+    {
+      "id": "AP03",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A01",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A01"
+      ],
+      "directEffectReferences": [
+        "A01"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "관통 사격의 최대 대상이 5명에서 7명으로 늘어납니다.",
+      "sourceSha256": "3735d02251701eb973936312020b7e36c0e7c44ec5a63fb6ed3f4930247aa19d"
+    },
+    {
+      "id": "AP04",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A03",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [
+        "A03"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Projectiles.cs",
+          "line": 130,
+          "cue": "trap.snapshot.passives[3]"
+        },
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Projectiles.cs",
+          "line": 115,
+          "cue": "definitionId=action.skill==9?\"LA03\":\"A03\""
+        }
+      ],
+      "sourceDescription": "직접 설치한 덫과 후퇴 덫의 속박 시간이 25% 늘어납니다.",
+      "sourceSha256": "50ac79d1ab31a2f754fc7675216bb161431125d1b08e20d4bc2c45e2aa6045f6"
+    },
+    {
+      "id": "AP05",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "1초 보행 후 다음 유료 스킬의 비용이 25% 감소합니다. 사용 후 대기시간은 4초입니다.",
+      "sourceSha256": "088a3e28ae0fc60cacc0064082d3e68ceabce93ed6dab5bc7e5054b71e2e2dbb"
+    },
+    {
+      "id": "AP06",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "HP가 30% 이하인 적에게 치명 확률 +10%p를 적용합니다. 최종 상한은 75%입니다.",
+      "sourceSha256": "e1e65f0ebb9f83c182ada0296fea32d7ef7c66e35b05393565e7b434636c11ef"
+    },
+    {
+      "id": "MP01",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M01",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M01"
+      ],
+      "directEffectReferences": [
+        "M01"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +15%를 적용합니다.",
+      "sourceSha256": "60214e43771c0ce84aa7e77b3a956a94b75a4ee0bea049990397020781f25a7f"
+    },
+    {
+      "id": "MP02",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M02",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M02"
+      ],
+      "directEffectReferences": [
+        "M02"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "눈보라의 둔화가 35%에서 55%로 강해집니다. 다른 둔화와는 가장 강한 값만 적용합니다.",
+      "sourceSha256": "24dca013eea7811814ec8b87d6d4104646178d5c2942edcd0b73d1e09b256523"
+    },
+    {
+      "id": "MP03",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M03",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M03"
+      ],
+      "directEffectReferences": [
+        "M03"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "연쇄 번개의 총 타격 수가 4회에서 5회로 늘어납니다.",
+      "sourceSha256": "3ff11c2ab97115dee259258b5778b9fbb438490205a76a553e36317ae40469db"
+    },
+    {
+      "id": "MP04",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
+      "sourceSha256": "f3c8fd3f4cba3edf50599c080d573514ca58dac09d69e3fb4b712e74f22a24f8"
+    },
+    {
+      "id": "MP05",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "초당 자원 회복이 20% 증가합니다. 평면 자원 회복 옵션에도 적용됩니다.",
+      "sourceSha256": "2425779da08b72e36c6ecbd25b483ce2086d0cd23203a4ebb6f3ae40a38fa00f"
+    },
+    {
+      "id": "MP06",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "최근 4초 안에 서로 다른 두 속성으로 피해를 주면 4초간 가산 피해 +10%를 얻습니다. 중첩되지 않습니다.",
+      "sourceSha256": "b13ac4e6c72e3c66d7535bc6a9f140f0980d33af39dd8023723c79502c7266e0"
+    },
+    {
+      "id": "W07",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8m 안의 적 하나에게 6초간 전사 표식을 남기고 자원 10을 회복합니다. 그 적에게 받는 피해가 10% 감소합니다. 표식은 피해 증가를 따로 주지 않으며 전사의 Marked 조건을 충족합니다. 동시에 하나만 유지합니다.",
+      "sourceSha256": "d216806e117680d1116773fde121b029fd56287168d0282494d7903e452c6561"
+    },
+    {
+      "id": "W08",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "6m 안의 적 하나에게 D65% 물리 피해를 주고 최대 2m 끌어옵니다. 직접 적중하면 자원 10을 회복합니다. 보스에게는 이동 대신 제압 수치를 줍니다.",
+      "sourceSha256": "cf865b7cbc7c20a9a7b353ff76737917329a390a6cb6871415fe08ea7339db0b"
+    },
+    {
+      "id": "W09",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "전방 3m·90도 안의 최대 5명에게 D50% 물리 피해와 4초간 총 D120% 출혈을 줍니다. 자신의 W09 출혈만 강한 잔여량으로 갱신합니다.",
+      "sourceSha256": "f87f1453b2664a28bcbb3db53ec1bda52fe4f7fa1281482b84330727a5e315d5"
+    },
+    {
+      "id": "W10",
+      "kind": "active",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W09",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W09"
+      ],
+      "directEffectReferences": [
+        "W09"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "4m 안의 최대 5명에게 D80% 물리 피해를 주고 자신의 W09 잔여 출혈만 100% 즉시 정산합니다. 정산 대상마다 최대 HP 1%, 시전당 최대 5%를 회복합니다. 세트·장비의 지속 피해는 소비하지 않습니다.",
+      "sourceSha256": "06bd99cad0bbb7cd332ebdaed973c8ebc5788f8faf573d8accd2951cd83ead20"
+    },
+    {
+      "id": "W11",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
+      "sourceSha256": "18f23f0b791f79e611b6143208c04a2ebd4f40293aed954408884ddbc7e45d1b"
+    },
+    {
+      "id": "W12",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "4초간 방어 확률 +15%p를 얻습니다. 이 자세 중 방어에 성공하면 전방 3m에 D80% 반격을 가하며 시전당 최대 2회, 1초 간격으로 발동합니다. 반격은 추가 피해입니다.",
+      "sourceSha256": "0b4efb0c5a93dc7a18bb50b0432f868acd6616f3acb6f2291f980da042a412f7"
+    },
+    {
+      "id": "W13",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "4m 안의 최대 5명에게 D70% 물리 피해를 주고 최대 1.5m 끌어옵니다. 벽·몸체를 통과하지 않습니다. 보스는 이동하지 않고 제압 수치만 얻습니다.",
+      "sourceSha256": "ba7080d13d588c923a6fc8b4e27c9ae0a69286a903c1f7810677868adfa322dd"
+    },
+    {
+      "id": "W14",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "길이 7m·폭 1m의 파동으로 최대 5명에게 D150% 물리 피해를 주고 3초간 30% 둔화시킵니다. 이동 거리와 공격 범위는 별개입니다.",
+      "sourceSha256": "25542ff4f1ad7ede1429f2713f98c7d350802aa4d55cc0b26cc9dd73637bb8e5"
+    },
+    {
+      "id": "W15",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "4초간 1초마다 자원 8을 회복합니다. 회복은 최대 자원을 넘지 않습니다. 공격이나 이동을 막지 않으며 함성으로 분류하지 않습니다.",
+      "sourceSha256": "feea9fefd8b6f86ccbb60675aa93c3f8a15a2ff3c34b4c20e0a8743c0f8e7c11"
+    },
+    {
+      "id": "W16",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W05"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "W05",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "최대 HP 12% 보호막을 5초간 얻고 현재 걸린 둔화·속박을 제거합니다. 이후 2초간 둔화·속박에 면역입니다. 철벽 시전으로 처리하지 않습니다.",
+      "sourceSha256": "accbb66a29da76ab35d56252020a2e276a4671c18dd1a1f79122a05c911e703f"
+    },
+    {
+      "id": "W17",
+      "kind": "ultimate",
+      "classification": "shared_ultimate_gate",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8초간 선조 2명을 불러냅니다. 각 선조는 1초마다 주위 6m 안의 적 하나에게 D65% 물리 추가 피해를 주며 총 8회씩 공격합니다. 그동안 자신이 받는 피해가 15% 감소합니다. 선조는 별도 몸체나 도발 판정을 갖지 않습니다.",
+      "sourceSha256": "b459bbe1286c3bf6d0c8ecf5b57a5cf27435736197e8778f9c3bf90c64333189"
+    },
+    {
+      "id": "W18",
+      "kind": "ultimate",
+      "classification": "shared_ultimate_gate",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W03",
+        "W04"
+      ],
+      "directEffectReferences": [
+        "W03",
+        "W04"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "0.9초 준비 후 4m 안의 최대 8명에게 D600% 물리 피해와 2초 기절을 줍니다. 이후 6초간 분쇄 일격·지면 강타의 직접 피해가 가산 25% 증가합니다. 보스 기절은 제압 수치로 바꿉니다.",
+      "sourceSha256": "f321779feadb93a3c33b4ec80a9e27054eb93b651e70b0f1a3afcc0c58f67a39"
+    },
+    {
+      "id": "A07",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "10m 안의 적 하나에게 0.15초 간격으로 D45% 화살 3발을 쏩니다. 한 번의 시전이며 기본 공격으로 세지 않습니다. 각 화살은 벽에 막힙니다.",
+      "sourceSha256": "6147c9de71b75b5cfe1ff9d7ad45625c09f10f9fe92f251b27475d2d653bced6"
+    },
+    {
+      "id": "A08",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "0.9초 조준 후 12m 안의 적 하나에게 D240% 물리 피해를 줍니다. 적중 시 표식이 있으면 직접 피해가 가산 25% 증가합니다. 조준 중 이동하면 취소됩니다.",
+      "sourceSha256": "7d3616c7e3566a4d3f189cec3d9c76d629f5203ac52b8da360f055ac9735df69"
+    },
+    {
+      "id": "A09",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "6m 안에 덫을 설치합니다. 0.4초 후 무장하고 최대 6초 기다립니다. 적 진입 시 반경 2.5m의 최대 5명에게 D80% 물리 피해와 1.2초 속박을 주며 사라집니다. 최대 1개입니다.",
+      "sourceSha256": "c3f04b74c1e63214f8b0f601c5a41b73610b9d9b7c5f2b99d5f36da90306d431"
+    },
+    {
+      "id": "A10",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "6m 안에 최대 1개의 올가미를 설치합니다. 0.4초 후 무장해 6초 기다리며, 적 진입 시 반경 2.5m의 최대 5명에게 D60% 냉기 피해와 3초간 40% 둔화를 줍니다. 적중 당시 중독된 적은 0.75초 빙결됩니다.",
+      "sourceSha256": "bcdeaff8ee60c5bb450807380c1383bc66d3affd79b1dc7ac03e8094538788f6"
+    },
+    {
+      "id": "A11",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "7m 안에 최대 HP 10%의 미끼 하나를 6초간 만듭니다. 일반 적은 최초 2.5초 동안 미끼를 우선 공격합니다. 미끼가 파괴되거나 만료하면 2.5m 안의 최대 5명에게 D80% 물리 추가 피해를 줍니다. 보스·정예를 강제로 도발하지 않습니다.",
+      "sourceSha256": "97a93eda6382a5489c16cf471a97f100bb87d51efa0a0a87e7ee016240024a71"
+    },
+    {
+      "id": "A12",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A04"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "A04",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "3초간 받는 피해가 20% 감소하고 이동속도가 20% 증가합니다. 은신·무적·대상 지정 해제는 제공하지 않습니다. 후퇴 도약으로 처리하지 않습니다.",
+      "sourceSha256": "07731d227238ebbb20e8f4cfead25ae00aea62a75d942cc7d21339fc5c3c9651"
+    },
+    {
+      "id": "A13",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "10m 안의 적 하나에게 D80% 물리 직접 피해와 4초간 총 D100% 독 피해를 줍니다. 같은 기술의 독은 강한 잔여량만 유지합니다.",
+      "sourceSha256": "82714d8f8dd93f59976af7eb031fe3d266525864fc5cfb2e50ee007d33d33a07"
+    },
+    {
+      "id": "A14",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "10m 안의 첫 적에게 D100% 물리 직접 피해를 줍니다. 적중 후 주변 3m의 서로 다른 적 2명에게 D50% 추가 화살을 보냅니다. 첫 대상 재방문과 재분열은 불가합니다.",
+      "sourceSha256": "1c41a01a94dedffa070fa98aadd2c8e5ecf0b8699a4ec5bb0157973ddf133b28"
+    },
+    {
+      "id": "A15",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A01"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "A01",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
+      "sourceSha256": "d15c65cd5cab2224c05dda3d9e39ed3f531621154eccc1ded4ecbbea22eb9d68"
+    },
+    {
+      "id": "A16",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "자원 25를 회복하고 6초 안의 다음 유료 일반 액티브 한 번에 비용 감소 +20%p를 부여합니다. 무료 스킬·궁극기는 충전을 쓰지 않습니다.",
+      "sourceSha256": "0fa94bec2d5cc8ae72b6284fc776f7ec59c7b54ff08786a5a210290b0b364c92"
+    },
+    {
+      "id": "A17",
+      "kind": "ultimate",
+      "classification": "shared_ultimate_gate",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A02",
+        "A06"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "A02",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        },
+        {
+          "id": "A06",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "10m 안의 반경 4m에 0.5초 간격으로 6차례 화살을 내립니다. 매 회 최대 8명에게 D80% 물리 피해를 줍니다. 위치는 시전 시 고정되며 A02 시전이나 A06 충전 사격으로 처리하지 않습니다.",
+      "sourceSha256": "2c8d7c1af658079428b01f13938548e06a4f33c4388d108a375fbd5003c79f96"
+    },
+    {
+      "id": "A18",
+      "kind": "ultimate",
+      "classification": "shared_ultimate_gate",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A01",
+        "A02",
+        "A07",
+        "A08",
+        "A13",
+        "A14"
+      ],
+      "directEffectReferences": [
+        "A01",
+        "A02",
+        "A07",
+        "A08",
+        "A13",
+        "A14"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
+      "sourceSha256": "b8f69782b828795a58e06f72d795b9425cf0260f2bdf41a0325ead6878e172da"
+    },
+    {
+      "id": "M07",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "길이 10m·폭 0.6m의 불꽃 창으로 최대 3명에게 D140% 화염 직접 피해와 3초간 총 D60% 연소를 줍니다. 연소는 자기 기술의 강한 잔여량으로 갱신합니다.",
+      "sourceSha256": "21e48e6307af9e9fdf980a0e05dbeaa334732b83cb8cc71dd477a5a194d77a9d"
+    },
+    {
+      "id": "M08",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8m 안에 길이 5m·폭 1m의 불길을 4초간 만듭니다. 1초마다 최대 5명에게 D60% 화염 지속 피해를 주며 장벽 안의 적을 연소 상태로 봅니다. 이동을 막지는 않습니다. 최대 1개입니다.",
+      "sourceSha256": "5ae86f584bedb65020ac9253a3a496442edf6c5683666d751bfb36cd367299c4"
+    },
+    {
+      "id": "M09",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "길이 9m·폭 0.7m의 창으로 최대 3명에게 D130% 냉기 피해를 줍니다. 이미 둔화된 적은 0.8초 빙결하고, 나머지는 3초간 35% 둔화시킵니다.",
+      "sourceSha256": "3d304acd4f57bd8ddc5158beb574da5034fd781117dfb37b408cfe5eb73c4883"
+    },
+    {
+      "id": "M10",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
+      "sourceSha256": "48576cfca7b0786a87fb6941b31c6b110f4e05835bc1859c6d39d6c59eecfbde"
+    },
+    {
+      "id": "M11",
+      "kind": "active",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M03",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M03"
+      ],
+      "directEffectReferences": [
+        "M03"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8m 안에 구체 하나를 6초간 설치합니다. 1초마다 반경 3m의 최대 3명에게 D30% 번개 피해를 줍니다. 지속 중 M03을 유효 시전할 때마다 1충전, 최대 3충전을 얻고 자연 만료 시 D80%+충전당 D30% 번개 추가 폭발을 줍니다.",
+      "sourceSha256": "7280222729d45d99dd370c378f2476f1f99c40632b5d92dd6eafd151c76821f1"
+    },
+    {
+      "id": "M12",
+      "kind": "active",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M03",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M03"
+      ],
+      "directEffectReferences": [
+        "M03"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
+      "sourceSha256": "7905f5d0513effdae5f361d32849cb03097894f8eb65da9eb92349f30b5247c1"
+    },
+    {
+      "id": "M13",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "정지한 채 마력을 집중합니다. 1등급에서 평소 마나 회복 속도의 10배로 회복하며 등급마다 회복 배율이 10% 증가합니다. 쿨타임과 최대 지속 시간은 없습니다. 이동·다른 유효한 공격을 시작하면 취소되며 단순 피격으로는 취소되지 않습니다. 자동 충전은 마나 35% 이하에서 시작하고 선택한 50% 또는 90%에 종료합니다. 무적은 제공하지 않습니다.",
+      "sourceSha256": "4baba5ed727af684bc01abeb66a4b63d80983148df9d55a8de3ce09a852355ef"
+    },
+    {
+      "id": "M14",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M05"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "M05",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "현재 위치에 반경 3m의 결계를 6초간 만들고 최대 HP 10% 보호막을 4초간 얻습니다. 결계 안에 있는 동안 받는 피해가 10% 감소합니다. 최대 1개이며 M05 시전으로 처리하지 않습니다.",
+      "sourceSha256": "1b97d99d5f523d0a8dc8ab43963af5df584e97bea2a3d69d2aeb8e9cbc6df775"
+    },
+    {
+      "id": "M15",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "자원 20을 회복합니다. 8초 안의 다음 화염·냉기·번개 일반 액티브를 원소별 한 번씩 비용 감소 +15%p로 시전합니다. 최대 3회이며 한 원소를 반복해도 남은 다른 원소 충전을 쓰지 않습니다.",
+      "sourceSha256": "a7ff9139909b4a14270524f5a4e91e3d07503ae4359ee15700af331f9eb2e809"
+    },
+    {
+      "id": "M16",
+      "kind": "active",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8m 안의 반경 3m에 소용돌이를 4초간 만듭니다. 생성 시 최대 5명을 중심으로 1.5m 끌어오고, 1초마다 D30% 번개 피해를 줍니다. 최대 1개이며 보스는 이동하지 않고 제압 수치만 얻습니다.",
+      "sourceSha256": "5bb13080d19772675d3f00755c35e7d169ac9ead830065c99d1561fee8673db1"
+    },
+    {
+      "id": "M17",
+      "kind": "ultimate",
+      "classification": "shared_ultimate_gate",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M01",
+        "M02",
+        "M03"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "M01",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        },
+        {
+          "id": "M02",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        },
+        {
+          "id": "M03",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "10m 안의 반경 4m에 화염 D200%, 0.5초 뒤 냉기 D150%, 다시 0.5초 뒤 번개 D150%를 가합니다. 각 단계 최대 8명이며 냉기는 1초 빙결을 줍니다. M01·M02·M03을 대신 시전한 것으로 세지 않습니다.",
+      "sourceSha256": "ed789ca25d99afb7f025abb7ac4d2be690b2f5d79d43b3a4a7c7b21839ff18da"
+    },
+    {
+      "id": "M18",
+      "kind": "ultimate",
+      "classification": "shared_ultimate_gate",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "8초간 최대 HP 25% 보호막을 얻고 일반 액티브 피해 +20%, 비용 감소 +20%p를 얻습니다. 이 시간에 서로 다른 세 원소의 일반 액티브를 시전하면 마지막 기술의 첫 적중 위치에 반경 2.5m·최대 5명에게 원소별 D40% 추가 폭발이 일어납니다. 순환 완성당 1회, 시전 전체 최대 2회입니다.",
+      "sourceSha256": "5bf6ad8ba01db80fceb3db5863e43a3f1406af639675b19bce1b98864c2592be"
+    },
+    {
+      "id": "WP07",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "표식 대상에게 일반 액티브가 처음 직접 적중하면 자원 2를 회복합니다. 시전당 1회, 1초 간격입니다.",
+      "sourceSha256": "1950f0d895a5b9fa16949184350e2eb24cef52ff3de60bdea8a008f600ef8734"
+    },
+    {
+      "id": "WP08",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W09",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W09"
+      ],
+      "directEffectReferences": [
+        "W09"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 106,
+          "cue": "HasDot(\"W09\",enemy)||HasDot(\"REF_SW05_B2\",enemy)"
+        }
+      ],
+      "sourceDescription": "자신의 W09 또는 붉은 상흔 세트 출혈이 남은 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 다른 물리 지속 피해를 임의로 출혈로 간주하지 않습니다.",
+      "sourceSha256": "422005ff11f4f9dc2164fc5911da9147913842a7b44a64bc012ae71446dc451c"
+    },
+    {
+      "id": "WP09",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "적의 공격을 방어하고 생존하면 자원 4를 회복합니다. 1초 간격이며 반격 자체로는 발동하지 않습니다.",
+      "sourceSha256": "487f0027fb7e0c39829a87555f6077e6afaaea437bf1a2e62a7e52b7d91f2d52"
+    },
+    {
+      "id": "WP10",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W06",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W06"
+      ],
+      "directEffectReferences": [
+        "W06"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "전투 함성 시전 후 3초간 매초 최대 HP의 1%를 회복합니다. 같은 효과는 중첩하지 않으며 재발동 간격은 6초입니다.",
+      "sourceSha256": "4c893ad3eac7055e6454f0441917fe47f68454da1f6fa8712d004dd2219646b9"
+    },
+    {
+      "id": "WP11",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "W02",
+          "rank": 1
+        },
+        {
+          "id": "W11",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "W02",
+        "W11"
+      ],
+      "directEffectReferences": [
+        "W02",
+        "W11"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 59,
+          "cue": "id==\"W02\"||id==\"W11\""
+        }
+      ],
+      "sourceDescription": "도약 내려찍기 또는 결연한 전진을 마치면 최대 HP 5% 보호막을 3초간 얻습니다. 두 기술은 3초 재발동 간격을 공유합니다.",
+      "sourceSha256": "add59dba78954a469f59db3918274a2c6fc5f44f2788413e9914e915019a9eb2"
+    },
+    {
+      "id": "WP12",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W03",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W03"
+      ],
+      "directEffectReferences": [
+        "W03"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "같은 적에게 기본 공격 3회 적중 후 다음 분쇄 일격의 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+      "sourceSha256": "93ddfbf6e6216bfddd4ee555c74d1e30c4d4c95ed5138ae54103adb5eedee208"
+    },
+    {
+      "id": "WP13",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "HP가 50% 이하인 동안 초당 자원 회복이 20% 증가합니다. 적중·함성의 즉시 회복에는 곱하지 않습니다.",
+      "sourceSha256": "80303bda35c0c2815e64f3ddffa2786836d77eb8ea980b5e328e472336f339d6"
+    },
+    {
+      "id": "WP14",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W04",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W04"
+      ],
+      "directEffectReferences": [
+        "W04"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "제어 상태인 적에게 일반 액티브가 처음 직접 적중하면 장착한 지면 강타의 남은 쿨타임을 0.5초 줄입니다. 2초 간격이며 0 아래로 줄이지 않습니다.",
+      "sourceSha256": "a0a44a1aee52baaeecd648bf6e308e753f2a164568d827b4f6e7433b268af78c"
+    },
+    {
+      "id": "WP15",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "직전 4초 안에 시전한 것과 다른 일반 공격 스킬을 시전하면 그 시전의 직접 피해가 가산 10% 증가합니다. 기본 공격·궁극기·추가 피해는 기록을 바꾸지 않습니다.",
+      "sourceSha256": "620b61af7231a875aa314b0f17b972ea0109e91b3ac246f6b028e94d497a662c"
+    },
+    {
+      "id": "WP16",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W01",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W01"
+      ],
+      "directEffectReferences": [
+        "W01"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "보호막이 남아 있는 동안 회오리를 유지하면 받는 피해가 8% 감소합니다. 회오리 중단 또는 보호막 소진 시 즉시 해제합니다.",
+      "sourceSha256": "996c4be7ce0fbb3946b049a73a60e903f8e5d0093b4da2a6cb473a53aca9e032"
+    },
+    {
+      "id": "WP17",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "W03",
+          "rank": 1
+        },
+        {
+          "id": "W04",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "W03",
+        "W04"
+      ],
+      "directEffectReferences": [
+        "W03",
+        "W04"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 27,
+          "cue": "Passive(\"WP17\")"
+        }
+      ],
+      "sourceDescription": "시전 전 자원이 80% 이상이면 분쇄 일격·지면 강타의 직접 피해가 가산 10% 증가합니다. 자원은 비용 차감 전에 확인합니다.",
+      "sourceSha256": "b5c5712ce3b791ba40a9d59bf1f7a9ba74e891bf4c24f1f14385bcee774d5559"
+    },
+    {
+      "id": "WP18",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W17",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W17"
+      ],
+      "directEffectReferences": [
+        "W17"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "선조의 전쟁 중 실제 선조 적중이 있으면 초당 자원 1, 시전 전체 최대 8을 회복합니다.",
+      "sourceSha256": "954891e53f3671a4ee856e0f0eb49181d3db423c16b8dc16984fe3ca44630b28"
+    },
+    {
+      "id": "AP07",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "표식 대상에 대한 일반 액티브의 직접 치명 확률이 5%p 증가합니다. 전체 75% 상한을 공유합니다.",
+      "sourceSha256": "f37e66115fcac27894ae68457a062bc64d9f95b1b68039bea7e062a3e0881da6"
+    },
+    {
+      "id": "AP08",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "관측한 중독 적이 10m 안에 있으면 이동속도가 10% 증가합니다. 시야 밖의 적 위치를 알아내는 기능은 제공하지 않습니다.",
+      "sourceSha256": "899d1d77a7be4de52ee6f2efc219716049764b629ad995f1bde8f3259eaaddd6"
+    },
+    {
+      "id": "AP09",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "기본 공격 직접 적중 시 자원 2를 회복합니다. 0.5초 간격이며 분열·쇠뇌·그림자 추가 피해는 기본 공격으로 세지 않습니다.",
+      "sourceSha256": "a4f65e4b5c51560250a699e93b02132a40d1c1c3347cd78c0eb2c07e301436c8"
+    },
+    {
+      "id": "AP10",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "중독된 적을 직접 공격으로 처치하면 자원 6을 회복합니다. 2초 간격이며 독 틱·장비 추가 피해 처치는 제외합니다.",
+      "sourceSha256": "4f8f0ebc2d17e8431b660943fe059e17097eebf3bf04dc7f8eb25b7434f94e49"
+    },
+    {
+      "id": "AP11",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "A03",
+          "rank": 1
+        },
+        {
+          "id": "A09",
+          "rank": 1
+        },
+        {
+          "id": "A10",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "A03",
+        "A09",
+        "A10"
+      ],
+      "directEffectReferences": [
+        "A03",
+        "A09",
+        "A10"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 69,
+          "cue": "ClassTrapArmed"
+        }
+      ],
+      "sourceDescription": "직접 설치한 맹독 덫·가시 덫·서리 올가미가 무장하면 3초간 받는 피해가 8% 감소합니다. 여러 덫은 같은 버프를 갱신합니다.",
+      "sourceSha256": "4f5303e339142c85668cb281b8a79cbe387f68e4d9b7df06042929cd98136235"
+    },
+    {
+      "id": "AP12",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A04",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [
+        {
+          "id": "A03",
+          "rank": 1
+        },
+        {
+          "id": "A09",
+          "rank": 1
+        },
+        {
+          "id": "A10",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "A03",
+        "A04",
+        "A09",
+        "A10"
+      ],
+      "directEffectReferences": [
+        "A03",
+        "A04",
+        "A09",
+        "A10"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 52,
+          "cue": "Passive(\"AP12\")"
+        }
+      ],
+      "sourceDescription": "맹독 덫·가시 덫·서리 올가미를 직접 설치하면 장착한 후퇴 도약의 남은 쿨타임을 1초 줄입니다. 4초 간격입니다.",
+      "sourceSha256": "9f913097a4c04ac133404acf98b8c449f7d48be9aa7d1fd161ba6cbf9a53b960"
+    },
+    {
+      "id": "AP13",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "A01",
+          "rank": 1
+        },
+        {
+          "id": "A08",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "A01",
+        "A08"
+      ],
+      "directEffectReferences": [
+        "A01",
+        "A08"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 28,
+          "cue": "Passive(\"AP13\")"
+        }
+      ],
+      "sourceDescription": "시전 시작 전 0.8초 이상 제자리에 있었다면 관통 사격·응시 사격의 직접 피해가 가산 15% 증가합니다. 이동하면 대기 시간을 다시 셉니다.",
+      "sourceSha256": "d06c89aa88daad1738c8466fb7cec55642b87f3e20ba8a28d6c6244e8168978c"
+    },
+    {
+      "id": "AP14",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A11",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [
+        "A11"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 109,
+          "cue": "Passive(\"AP14\")"
+        }
+      ],
+      "sourceDescription": "자신의 살아 있는 미끼 3m 안의 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 미끼의 폭발 피해에는 적용하지 않습니다.",
+      "sourceSha256": "0af5436ccc9997f92ae7c4c579e769b47e42c70ec3a0f1a02d84209b246d6d0e"
+    },
+    {
+      "id": "AP15",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "중독과 둔화가 동시에 걸린 적에게 일반 액티브 직접 피해가 가산 12% 증가합니다. 빙결만으로 둔화가 있다고 간주하지 않습니다.",
+      "sourceSha256": "7a729313df1b9313fff9f0d1a4ea3a9c23a0acfb589b1285e2ccff6785f0379f"
+    },
+    {
+      "id": "AP16",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "A12",
+          "rank": 1
+        },
+        {
+          "id": "A16",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "A12",
+        "A16"
+      ],
+      "directEffectReferences": [
+        "A12",
+        "A16"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 51,
+          "cue": "Passive(\"AP16\")"
+        }
+      ],
+      "sourceDescription": "연막 엄폐·사냥 준비를 사용하면 6초 안의 다음 유료 일반 액티브 비용 감소 +15%p를 준비합니다. 1충전이며 두 기술은 6초 재발동 간격을 공유합니다.",
+      "sourceSha256": "c9502ed77f2f0d2e751be13ee9041ea6cd6f49acd7000c42dd3b3bb3afd8083e"
+    },
+    {
+      "id": "AP17",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A15",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A15"
+      ],
+      "directEffectReferences": [
+        "A15"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "자신과 경계 쇠뇌 사이의 거리가 5m 이상이면 그 쇠뇌의 피해가 가산 10% 증가합니다. 각 쇠뇌 사격 생성 시 거리를 확인합니다.",
+      "sourceSha256": "ceb432ce5947dc13eed7e6ffdea1409403154ed8d4d02734843e588fb15cd066"
+    },
+    {
+      "id": "AP18",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A17",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A17"
+      ],
+      "directEffectReferences": [
+        "A17"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "일제 소탕의 첫 파동이 표식 대상을 맞히면 그 대상에게 D100% 물리 추가 피해를 한 번 줍니다.",
+      "sourceSha256": "f7279c7f0a6dd0543db39d1f7568b803f8301e2f3e407c44bc00d16aead0256f"
+    },
+    {
+      "id": "MP07",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "M07",
+          "rank": 1
+        },
+        {
+          "id": "M08",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [],
+      "directEffectReferences": [
+        "M07",
+        "M08"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 96,
+          "cue": "HasDot(\"M07\",enemy)||InFirewall(enemy.position)"
+        },
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 128,
+          "cue": "Passive(\"MP07\")"
+        }
+      ],
+      "sourceDescription": "연소한 적에게 일반 화염 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 연소 틱으로 재발동하지 않습니다.",
+      "sourceSha256": "c23e2f5add9e7bb50f7afdba74555bf1f62db8f334ede96cc4a1db16ca215d11"
+    },
+    {
+      "id": "MP08",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "M07",
+          "rank": 1
+        },
+        {
+          "id": "M08",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "M07",
+        "M08"
+      ],
+      "directEffectReferences": [
+        "M07",
+        "M08"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 184,
+          "cue": "Passive(\"MP08\")"
+        }
+      ],
+      "sourceDescription": "자신의 M07 연소가 남아 있거나 M08 안에 있는 공격자에게 받는 피해가 8% 감소합니다.",
+      "sourceSha256": "5319a77804fc1c21809d9cffbad81b4eda480d489e462f206bb73d26d8b1d33c"
+    },
+    {
+      "id": "MP09",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M02"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "M02",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "제어된 적에게 일반 냉기 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 눈보라 지속 틱은 제외합니다.",
+      "sourceSha256": "df5cdf68deeb702b63dd920807e5ace43ab25f9cafd70f521cd3e3597028cbbf"
+    },
+    {
+      "id": "MP10",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "M06",
+          "rank": 1
+        },
+        {
+          "id": "M09",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "M06",
+        "M09"
+      ],
+      "directEffectReferences": [
+        "M06",
+        "M09"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 73,
+          "cue": "id!=\"M06\"&&id!=\"M09\""
+        }
+      ],
+      "sourceDescription": "M06·M09의 직접 빙결 적용에 성공하면 최대 HP 5% 보호막을 3초간 얻습니다. 보스에게 유효한 제압 수치를 준 경우도 인정하며 재발동 간격은 4초입니다.",
+      "sourceSha256": "af4990d75a5a4b85d1449623c416c0e982e200c823b890ac27110d62655e2682"
+    },
+    {
+      "id": "MP11",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [],
+      "oneDirectSource": [
+        {
+          "id": "M03",
+          "rank": 1
+        },
+        {
+          "id": "M12",
+          "rank": 1
+        }
+      ],
+      "sourceReferences": [
+        "M03",
+        "M12"
+      ],
+      "directEffectReferences": [
+        "M03",
+        "M12"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [
+        {
+          "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
+          "line": 29,
+          "cue": "a.id==\"M03\"||a.id==\"M12\""
+        }
+      ],
+      "sourceDescription": "5초 안에 일반 번개 기술을 3회 시전하면 다음 M03·M12의 직접 피해 +15%를 4초간 준비합니다. 완성한 세 번째 시전에 소급하지 않으며 1충전입니다.",
+      "sourceSha256": "0d7aa2958facb30347c63b4eb0fb0bd66b563d3f31532ebb8a81f9faa6806f4d"
+    },
+    {
+      "id": "MP12",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M11",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M11"
+      ],
+      "directEffectReferences": [
+        "M11"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "축전 구체가 자연 만료하면 자원 10을 회복합니다. 교체·장면 종료·장비 해제로 사라진 구체는 회복하지 않습니다.",
+      "sourceSha256": "ab5a8ca55ccb2d774b4e58a5672a73df50c31d23e05f36cfe6526978dc1cc60f"
+    },
+    {
+      "id": "MP13",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M13"
+      ],
+      "directEffectReferences": [],
+      "exclusions": [
+        {
+          "id": "M13",
+          "reason": "Explicitly excluded by the effect description; not a prerequisite."
+        }
+      ],
+      "runtimeEvidence": [],
+      "sourceDescription": "보호막이 남아 있는 동안 초당 자원 회복이 15% 증가합니다. 마력 회수의 고정 회복량에는 곱하지 않습니다.",
+      "sourceSha256": "f74bf742046a4314e0a0ae7d09dc113e583c4bc847204f7c846952cf48d9e491"
+    },
+    {
+      "id": "MP14",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "기본 공격이 2회 직접 적중하면 다음 유료 일반 액티브 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+      "sourceSha256": "19d4a9fddc7936fa65d2f4c46dabcce63ac59674e002e6b6e78e39bf8215297c"
+    },
+    {
+      "id": "MP15",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "1초 이상 제자리에 있은 뒤 일반 액티브를 준비·집중하는 동안 받는 피해가 8% 감소합니다. 이동하거나 시전이 끝나면 해제됩니다.",
+      "sourceSha256": "07698e46fea6b0806b470e00badfac7f2e412d109595d9bfc51b3ccbf845a7b8"
+    },
+    {
+      "id": "MP16",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "6초 안에 화염·냉기·번개 일반 액티브를 각각 한 번 시전하면 최대 HP 8% 보호막을 4초간 얻습니다. 완성·만료 시 기록을 비우며 재발동 간격은 8초입니다.",
+      "sourceSha256": "65eb1eb156b0b980308b1b3e3f5efc3a007c4ae51302db3ab57f6d41e641df58"
+    },
+    {
+      "id": "MP17",
+      "kind": "passive",
+      "classification": "level_only",
+      "required": [],
+      "oneDirectSource": [],
+      "sourceReferences": [],
+      "directEffectReferences": [],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "시전 전 자원이 80% 이상이면 일반 액티브의 첫 직접 적중 피해가 가산 10% 증가합니다. 장판 틱·추가 피해에는 적용하지 않습니다.",
+      "sourceSha256": "8f2194c52ce12e54fe85f0490983eb8121fa5f8592ef77b6c5a44529b2654e96"
+    },
+    {
+      "id": "MP18",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M17",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M17"
+      ],
+      "directEffectReferences": [
+        "M17"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "삼원소 붕괴의 세 번째 단계가 실제 적중하면 자원 15를 한 번 회복합니다.",
+      "sourceSha256": "bfb094c8abf03b3f5c6502bf3d06d7b68133e38f50ff6d5d2ff8a2cd393b553b"
+    },
+    {
+      "id": "WP19",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "W18",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "W18"
+      ],
+      "directEffectReferences": [
+        "W18"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "거인의 심판으로 직접 맞힌 적마다 최대 HP 3%, 최대 15% 보호막을 4초간 얻습니다.",
+      "sourceSha256": "364792561e10d364e061832a0e1968ff941421a63b540c000df06fc595ead90b"
+    },
+    {
+      "id": "AP19",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "A18",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "A18"
+      ],
+      "directEffectReferences": [
+        "A18"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
+      "sourceSha256": "2b5c3f2a71ab7c0e52390f19ad1c28460a2f70ee1c01232e23f336877195922f"
+    },
+    {
+      "id": "MP19",
+      "kind": "passive",
+      "classification": "direct_effect",
+      "required": [
+        {
+          "id": "M18",
+          "rank": 1
+        }
+      ],
+      "oneDirectSource": [],
+      "sourceReferences": [
+        "M18"
+      ],
+      "directEffectReferences": [
+        "M18"
+      ],
+      "exclusions": [],
+      "runtimeEvidence": [],
+      "sourceDescription": "현자의 화신이 생성하는 보호막에 최대 HP 10%를 더합니다.",
+      "sourceSha256": "6cf2c6c4f7afc8fdca3785fa251568ac3b071efa71541a70bf94febe5838ba32"
+    }
+  ]
+}

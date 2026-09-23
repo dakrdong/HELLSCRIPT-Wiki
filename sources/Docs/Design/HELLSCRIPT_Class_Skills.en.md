@@ -6,16 +6,16 @@ As of 2026-09-22 · **Approved design / ability validation in progress / general
 
 ## Proposed counts and navigation
 
-Each class receives **16 normal actives, 18 passives and 2 ultimates: 36 skills**. Counting ultimates as active abilities gives 18 actives and 18 passives. BASIC, ranks and item-generated attacks are not additional skills.
+Each class receives **16 normal actives, 19 passives and 2 ultimates: 37 skills**. Counting ultimates as active abilities gives 18 actives and 19 passives. BASIC, ranks and item-generated attacks are not additional skills.
 
 | Class | Normal actives | Passives | Ultimates | Total | Catalogue |
 |---|---:|---:|---:|---:|---|
-| Warrior | 16 | 18 | 2 | 36 | [Warrior skills and builds](HELLSCRIPT_Warrior_Skills.en.md) |
-| Ranger | 16 | 18 | 2 | 36 | [Ranger skills and builds](HELLSCRIPT_Ranger_Skills.en.md) |
-| Mage | 16 | 18 | 2 | 36 | [Mage skills and builds](HELLSCRIPT_Mage_Skills.en.md) |
-| Total | 48 | 54 | 6 | **108** | [Equipment matrix](HELLSCRIPT_Skill_Equipment.en.md) |
+| Warrior | 16 | 19 | 2 | 37 | [Warrior skills and builds](HELLSCRIPT_Warrior_Skills.en.md) |
+| Ranger | 16 | 19 | 2 | 37 | [Ranger skills and builds](HELLSCRIPT_Ranger_Skills.en.md) |
+| Mage | 16 | 19 | 2 | 37 | [Mage skills and builds](HELLSCRIPT_Mage_Skills.en.md) |
+| Total | 48 | 57 | 6 | **111** | [Equipment matrix](HELLSCRIPT_Skill_Equipment.en.md) |
 
-Preserve the existing six actives and six passives per class: 36 existing IDs and effects. Add ten normal actives, twelve passives and two ultimates per class, creating 72 new designs. The labels “Existing runtime retained” and “New proposal” distinguish these scopes. Track runtime implementation and executed evidence in the [implementation record](../Implementation/Class_Skill_Runtime.en.md); general player access awaits UI integration.
+Preserve the existing six actives and six passives per class: 36 existing IDs and effects. Add ten normal actives, thirteen passives and two ultimates per class, creating 75 new designs. The labels “Existing runtime retained” and “New proposal” distinguish these scopes. Track runtime implementation and executed evidence in the [implementation record](../Implementation/Class_Skill_Runtime.en.md); general player access awaits UI integration.
 
 ## Reference findings
 
@@ -53,13 +53,13 @@ The design includes all 24 new set concepts and 60 bonus tiers, plus six existin
 
 1. Retain up to four normal actives and three passives. BASIC remains a separate fallback when resources run out. Propose one dedicated ultimate slot; the slot and HUD expansion are not implemented yet.
 2. Preserve existing unlock levels and spent points. New normal actives unlock in pairs at levels 22/26/30/34/38. New passives unlock in groups of three at 22/26/30/34. Both ultimates appear at level 40 in the same final tier. Level 40 is enabled only for development validation profiles.
-3. The complete view orders normal actives 01–16, passives 17–34, then ultimates 35–36. In an active-only view, ultimates are entries 17 and 18 and remain last even when other sorting is applied.
+3. The complete view orders normal actives 01–16, passives 17–35, then ultimates 36–37. In an active-only view, ultimates are entries 17 and 18 and remain last even when other sorting is applied.
 4. Before level 40, neither ultimate can be selected. Afterwards, select exactly one, and only that ability can be learned, equipped or cast. An unselected eligible hero is prompted before departure; loading a save itself must remain possible.
 5. Reject presets containing both ultimates, a foreign-class ultimate or an ultimate in a normal slot at UI, save-application, share-code import, run-start and cast boundaries. Equipment, passives and automatic procs cannot cast the unselected ability.
 6. Switch only in town. Preserve a class-wide next-ultimate-ready timestamp through swaps, unequips and save restoration. Both base cooldowns are 60s, with a 45s effective minimum after ordinary reduction. Direct cooldown refunds target only explicitly named normal skills.
 7. Switching ends the previous ultimate's buffs, summons and charges. Point allocation cannot retain both. Ultimates are fixed rank one and do not receive additional skill points.
 
-| Class | Full entry 35 / active 17 | Full entry 36 / active 18 | Choice |
+| Class | Full entry 36 / active 17 | Full entry 37 / active 18 | Choice |
 |---|---|---|---|
 | Warrior | War of the Ancestors `W17` | Titan's Judgment `W18` | Sustained support/reduction versus immediate area impact. |
 | Ranger | Killing Rain `A17` | Shadow Pursuit `A18` | Fixed-area clearing versus mobile shooting support. |
@@ -93,4 +93,4 @@ The JSON under `Docs/Design` is retained as the design source. Its `runtimeEnabl
 
 The [catalogue tool](../../tools/class_skills.py) generates class lists and the equipment matrix from JSON. Run `python3 tools/class_skills.py build` and `python3 tools/class_skills.py check` after data edits. Keep this rules document and its Korean version aligned.
 
-Checks cover equal counts, order 1–36, two final ultimates, class/slot/level restrictions, rejected dual/unselected/misplaced ultimates, preserved existing skills/source fingerprints, 141 item links, 30 sets/60 new bonus tiers, and required skills/slot conflicts in thirty builds. This is **design-data and selection-contract consistency validation**, not Unity execution or balance proof for the new skills.
+Checks cover equal counts, order 1–37, two final ultimates, class/slot/level restrictions, rejected dual/unselected/misplaced ultimates, preserved existing skills/source fingerprints, 141 item links, 30 sets/60 new bonus tiers, and required skills/slot conflicts in thirty builds. This is **design-data and selection-contract consistency validation**, not Unity execution or balance proof for the new skills.

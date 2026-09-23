@@ -4,7 +4,7 @@
 
 The fun of combat configuration comes from choosing conditional behavior, observing its result, and revising it. Good choices should depend on enemies and equipment. These options change timing, targets, positions and waiting; they grant no free stats merely for being selected.
 
-There is one use-policy group for each of the 54 active/ultimate skills, plus a separate Mana Reclaim recovery goal: 55 groups and 164 choices. The 54 passives compete for three passive slots rather than automatic-cast conditions. Existing detailed edict values are preserved; legacy choices below project their selected value onto the existing edict. Defaults keep the original conditions.
+There is one use-policy group for each of the 54 active/ultimate skills, plus a separate Mana Reclaim recovery goal: 55 groups and 164 choices. The 57 passives compete for three passive slots rather than automatic-cast conditions. Existing detailed edict values are preserved; legacy choices below project their selected value onto the existing edict. Defaults keep the original conditions.
 
 ## Two reference cases
 

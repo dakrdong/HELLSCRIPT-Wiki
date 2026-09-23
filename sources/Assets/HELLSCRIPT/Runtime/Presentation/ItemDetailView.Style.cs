@@ -106,6 +106,7 @@ namespace Hellscript
         }
     }
     // Lightweight vector metalwork. No raster copies, layout participation or input interception.
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class ItemCardTrim:MaskableGraphic
     {
         public bool divider;
