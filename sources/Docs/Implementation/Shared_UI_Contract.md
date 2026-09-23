@@ -1,6 +1,6 @@
 # 공통 UI와 신규 콘텐츠 개발 규칙
 
-갱신일: 2026-09-22
+갱신일: 2026-09-23
 최신 인벤토리를 장비 표시의 기준으로 삼는다. 신규 콘텐츠는 아래 공통 부품을 조합해 만든다. 화면별로 같은 규칙을 다시 구현하지 않는다. 특수한 배치와 콘텐츠의 게임 규칙은 유지한다.
 
 영어판: [Shared UI contract](Shared_UI_Contract.en.md)
@@ -81,3 +81,7 @@
 ## 위상 각인석
 
 `AspectStoneWindow`는 신규 콘텐츠 템플릿에서 시작하며 `ContentWindowView`를 `EquipmentViewSource.Owned`로 연다. 공통 탐색·스크롤 본문·고정 행동 영역 안에 `CharacterEquipmentView`, `EquipmentSlotView`, `ItemDetailView`를 조합한다. 가로는 장비·도감·상세의 세 열, 세로는 세 단계로 배치한다. 확인 단계 안의 착용 장비 목록에서 부위를 바꿔도 위상 선택을 유지한다. 선택·필터는 `AspectStoneSession`, 수집·레벨업·각인 거래는 `GameStore`가 소유한다. 룬석 문양과 빨간 레벨업 점은 콘텐츠의 의미 표시이며, 글꼴·슬롯·창 배율·패널 색은 공통 소유자를 사용한다. 필드 배치 탭은 두지 않는다.
+
+## 마을·전투 HUD 배치
+
+`GlobalHudLayout`은 지속 표시되는 생명력·스킬·물약의 화면 좌표를, `GameUI.Plaza`와 `TownJoystick`은 마을 제목·바로가기·이동 입력을 소유한다. 이 HUD는 콘텐츠 창이 아니므로 기존 캔버스와 화면 비례 배치를 유지하는 어댑터다. 물약 뒷판과 제목 배경은 `StorageSurface` 및 `UiTheme` 색상을 재사용하며 별도 래스터 이미지를 만들지 않는다. 표시 변경은 계정 저장·물약 소비를 실행하지 않는다. 세로 하단 기준선·중앙 이동 패드·글자 확대에 따른 배치 근거는 [마을 HUD 검증](Town_Hud_Responsive.md)을 따른다.

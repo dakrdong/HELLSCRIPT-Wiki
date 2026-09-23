@@ -83,6 +83,26 @@ namespace Hellscript.Tests
             Assert.That(GlobalHudLayout.FadeWidths(99,100).y,Is.EqualTo(1));Assert.That(GlobalHudLayout.FadeWidths(0,0),Is.EqualTo(Vector2.zero));
             Assert.That(GlobalHudLayout.EdgeAlpha(0,22),Is.Zero);Assert.That(GlobalHudLayout.EdgeAlpha(11,22),Is.EqualTo(.5f));Assert.That(GlobalHudLayout.EdgeAlpha(22,22),Is.EqualTo(1));
         }
+        [TestCase(440,956)] [TestCase(956,440)] [TestCase(1600,900)] [TestCase(1600,1000)] [TestCase(2100,900)]
+        [TestCase(360,640)]
+        public void BottomAnchoredActionsAndPotionTrayDoNotOverlapVitals(int width,int height)
+        {
+            var style=GlobalHudStyle.Load();
+            foreach(float factor in new[]{.5f,1,1.5f})
+            {
+                var p=new GlobalHudLayout(width,height,factor,style);
+                float baseline=p.landscape?Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8):style.skillBottom;
+                Assert.That(p.actives[0].yMin,Is.EqualTo(baseline),"The bottom row must not float upward in portrait.");
+                if(p.landscape)Assert.That(p.actives[0].yMin-style.captionHeight,Is.GreaterThan(p.xp.yMax),"Skill captions must clear the XP line.");
+                Assert.That(p.potionTray.yMin,Is.GreaterThan(p.passives.Max(r=>r.yMax)));
+                Assert.That(p.potionTray.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(p.potionTray.xMax,Is.LessThanOrEqualTo(p.width));
+                foreach(var bottle in p.potions)
+                {Assert.IsTrue(p.potionTray.Contains(bottle.min));Assert.IsTrue(p.potionTray.Contains(bottle.max));}
+                foreach(var left in new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.status,p.xpText})
+                foreach(var right in p.actives.Concat(p.passives).Append(p.potionTray))
+                    Assert.IsFalse(left.Overlaps(right),$"{width}x{height} at {factor}: {left} overlaps {right}");
+            }
+        }
         [Test] public void CooldownsRoundUpAndNeverFabricateReadyTime()
         {Assert.That(GlobalHudSnapshot.TimeLabel(0),Is.Empty);Assert.That(GlobalHudSnapshot.TimeLabel(3.21f),Is.EqualTo("3.3"));Assert.That(GlobalHudSnapshot.TimeLabel(10.01f),Is.EqualTo("11"));}
     }

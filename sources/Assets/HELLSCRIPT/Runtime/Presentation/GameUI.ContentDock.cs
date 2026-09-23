@@ -7,13 +7,14 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         bool contentDockOpen;
+        ContentDockView contentDock;
         // Content shortcuts fold out beneath the settings gear on the play screens (plaza and battle).
         // Character opens the owned-equipment screen and remembers the play screen it came from.
         void AddContentDock(float top,float size)
         {
             const float gap=6;
             var dock=Rect("Content dock",header);Right(dock,12,top,size,size);
-            var view=dock.gameObject.AddComponent<ContentDockView>();
+            var view=dock.gameObject.AddComponent<ContentDockView>();contentDock=view;
             var items=Rect("Shortcuts",dock);Place(items,0,0,size,0);items.gameObject.AddComponent<RectMask2D>();
             int count=0;
             void Add(string name,string sprite,Action action)
@@ -31,6 +32,7 @@ namespace Hellscript
         }
         Image Emblem(Button button,string sprite)
         {
+            var border=button.GetComponent<UIRectBorder>();if(border!=null)border.enabled=false;
             button.GetComponentInChildren<Text>().text="";
             var art=Rect("Emblem",button.transform);Stretch(art);var image=art.gameObject.AddComponent<Image>();
             image.sprite=Resources.Load<Sprite>("Art/GlobalHUD/"+sprite);image.preserveAspect=true;return image;
@@ -53,6 +55,13 @@ namespace Hellscript
             toggle.anchorMin=toggle.anchorMax=new Vector2(0,1);toggle.pivot=new Vector2(.5f,.5f);toggle.sizeDelta=new Vector2(size,size);
         }
         public void Set(bool open)=>Open=open;
+        public void Reflow(float buttonSize,float gap)
+        {
+            if(Mathf.Approximately(size,buttonSize)&&Mathf.Approximately(reach,items.childCount*(buttonSize+gap)))return;
+            size=buttonSize;reach=items.childCount*(size+gap);
+            for(int i=0;i<items.childCount;i++)UiLayout.Place((RectTransform)items.GetChild(i),0,i*(size+gap),size,size);
+            toggle.sizeDelta=new Vector2(size,size);Apply();
+        }
         public void Snap(bool open){Open=open;slide=turn=open?1:0;Apply();}
         void Update()
         {

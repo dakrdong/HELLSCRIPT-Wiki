@@ -8,7 +8,8 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         Text plazaStatus,plazaActionText,plazaServiceName,plazaServiceDetail,plazaNpcName;
-        RectTransform plazaAction,plazaJoystickRect,plazaGuide;
+        RectTransform plazaAction,plazaJoystickRect,plazaGuide,plazaTitlePlate;
+        Button plazaSettings;
         TownJoystick plazaJoystick;
         Button plazaInteract,plazaBuy,plazaSell;
         readonly Dictionary<TownStation,RectTransform> plazaBubbles=new Dictionary<TownStation,RectTransform>();
@@ -89,8 +90,11 @@ namespace Hellscript
             headerApron.gameObject.SetActive(false);headerSubtitle.gameObject.SetActive(false);
             header.Find("Gold divider").gameObject.SetActive(false);
             headerTitle.fontSize=18;Span(headerTitle.rectTransform,14,4,64,32);OutlinePlazaText(headerTitle);
-            var settings=header.GetComponentInChildren<Button>();Right((RectTransform)settings.transform,4,0,44,44);
+            plazaTitlePlate=Rect("Town title backing",header);plazaTitlePlate.SetAsFirstSibling();
+            var plate=plazaTitlePlate.gameObject.AddComponent<StorageSurface>();plate.Paint(UiTheme.BackgroundHex+"d4",UiTheme.BackgroundHex+"a8");plate.raycastTarget=false;
+            var settings=header.GetComponentInChildren<Button>();plazaSettings=settings;Right((RectTransform)settings.transform,4,0,44,44);
             settings.GetComponent<Image>().color=Color.clear;
+            settings.GetComponent<UIRectBorder>().enabled=false;
             var gear=(RectTransform)settings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*12;gear.offsetMax=-Vector2.one*12;
         }
         static void OutlinePlazaText(Text label)
@@ -107,8 +111,19 @@ namespace Hellscript
             {
                 var layout=globalHud.Layout;float scale=root.parent.GetComponent<Canvas>().scaleFactor;
                 var safe=UiSafeArea.Current;
-                plazaJoystick.Reflow(TownJoystick.Bounds(safe.width,safe.height,layout.status.yMax*layout.scale),scale);
+                plazaJoystick.Reflow(TownJoystick.Bounds(safe.width,safe.height,layout),scale);
                 float cardScale=layout.scale/Mathf.Max(.001f,scale);
+                float gap=UiTheme.Gap*cardScale,edge=12*cardScale;
+                float iconSize=Mathf.Max(44/scale,layout.actives[0].width*1.15f*cardScale);
+                float available=(safe.height-layout.potionTray.yMax*layout.scale)/scale-3*edge;
+                iconSize=Mathf.Min(iconSize,(available-5*gap)/6);
+                Right((RectTransform)plazaSettings.transform,edge,edge,iconSize,iconSize);
+                var gear=(RectTransform)plazaSettings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(iconSize*.2f);gear.offsetMax=-gear.offsetMin;
+                Right((RectTransform)contentDock.transform,edge,edge+iconSize+gap,iconSize,iconSize);contentDock.Reflow(iconSize,gap);
+                headerTitle.fontSize=18;float fullTitleWidth=headerTitle.preferredWidth;
+                float titleWidth=Mathf.Min(fullTitleWidth+24,root.rect.width-iconSize-3*edge);
+                headerTitle.fontSize=Mathf.Clamp(Mathf.FloorToInt(18*(titleWidth-24)/Mathf.Max(1,fullTitleWidth)),10,18);
+                Place(plazaTitlePlate,8,4,titleWidth,32);Place(headerTitle.rectTransform,20,4,titleWidth-24,32);
                 plazaAction.localScale=Vector3.one*cardScale;
                 float hudTop=layout.potions.Concat(layout.actives).Max(r=>r.yMax)*layout.scale/scale;
                 float halfHeight=plazaAction.rect.height*cardScale/2;

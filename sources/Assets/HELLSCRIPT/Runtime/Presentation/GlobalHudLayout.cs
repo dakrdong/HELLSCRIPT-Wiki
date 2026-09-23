@@ -12,7 +12,7 @@ namespace Hellscript
         public float minimumScale=.4f,sealX=24,sealY=60,landscapeSeal=112,portraitSeal=96,levelY=42,levelWidth=88,levelHeight=24;
         public float landscapeVitalsX=152,portraitVitalsX=136,landscapeVitalWidth=300,portraitVitalWidth=260,minimumVitalWidth=120;
         public float landscapeVitalHeight=20,portraitVitalHeight=18,vitalGap=8,landscapeVitalY=86,portraitVitalY=96;
-        public float centerClearance=160,portraitWrapWidth=760,landscapeSkillY=52,portraitSkillY=148,portraitWrappedSkillY=340,rowGap=28;
+        public float centerClearance=160,portraitWrapWidth=760,skillBottom=32,rowGap=28;
         public float potionRowGap=36,landscapePotionPitch=96,portraitPotionPitch=84;
         public float portraitStatusIcon=40,landscapeStatusY=150,portraitStatusY=188,portraitStatusX=56,statusTextHeight=24;
         public float portraitXpY=72,landscapeXpTextY=24,portraitXpTextY=44;
@@ -68,7 +68,7 @@ namespace Hellscript
     {
         public readonly float scale,width,height,statusIcon,statusGap,buttonHit,maximumStatusWidth;
         public readonly bool landscape,wrapped;
-        public readonly Rect seal,level,hp,resource,shield,shieldLine,status,xp,xpText;
+        public readonly Rect seal,level,hp,resource,shield,shieldLine,status,xp,xpText,potionTray;
         public readonly Rect[] passives=new Rect[3],actives=new Rect[4],potions=new Rect[3];
         public readonly float occupiedHeight;
         // Reading pages reserve at most 42% for the persistent HUD. Fit the entire HUD into that
@@ -90,9 +90,17 @@ namespace Hellscript
             width=pixelsWide/scale;height=pixelsHigh/scale;
             float m=style.margin,s=landscape?style.landscapeSkill:style.portraitSkill,g=style.skillGap;
             float left=landscape?style.landscapeVitalsX:style.portraitVitalsX,barWidth=landscape?style.landscapeVitalWidth:style.portraitVitalWidth;
+            float row4=4*s+3*g,row3=3*s+2*g,row7=row4+row3+style.groupGap;
+            wrapped=landscape?width<left+barWidth+style.centerClearance+row7+m:width<style.portraitWrapWidth;
+            float rightStart=width-m-(landscape&&!wrapped?row7:row4);
+            // Keep the action row on the bottom baseline. At enlarged portrait sizes, stack
+            // vitals above the class seal instead of pushing the whole action group upward.
+            bool stackedVitals=!landscape&&left+barWidth+g>rightStart;
+            if(stackedVitals){left=style.sealX;barWidth=rightStart-g-left;}
             barWidth=Mathf.Min(barWidth,Mathf.Max(style.minimumVitalWidth,width-left-m));
             float vitalHeight=Mathf.Max(landscape?style.landscapeVitalHeight:style.portraitVitalHeight,FontSize(style.valueFont,(int)style.minimumValueFont)/scale+2),baseY=landscape?style.landscapeVitalY:style.portraitVitalY;
             float sealSize=landscape?style.landscapeSeal:style.portraitSeal;
+            if(stackedVitals)baseY=style.sealY+sealSize+style.rowGap+style.xpTextHeight+style.vitalGap;
             // Text and its row shrink together. Compensate only for whole-pixel font rounding,
             // never for an unscaled pixel floor that would enlarge text after the next HUD refresh.
             float Row(float height,float font)=>Mathf.Max(height,FontSize(font,1)/scale);
@@ -102,11 +110,8 @@ namespace Hellscript
             hp=new Rect(left,baseY+vitalHeight+style.vitalGap,barWidth,vitalHeight);
             shieldLine=new Rect(left,hp.yMax+1,barWidth,2);
             shield=new Rect(left,hp.yMax+3,barWidth,Row(style.shieldHeight,style.shieldFont));
-            float row4=4*s+3*g,row3=3*s+2*g,row7=row4+row3+style.groupGap;
-            wrapped=landscape?width<left+barWidth+style.centerClearance+row7+m:width<style.portraitWrapWidth;
-            float activeY=landscape?style.landscapeSkillY:style.portraitSkillY;
-            if(!landscape&&wrapped)activeY=style.portraitWrappedSkillY;
-            float rightStart=width-m-(landscape&&!wrapped?row7:row4);
+            float activeY=style.skillBottom;
+            if(landscape)activeY=Mathf.Max(activeY,style.xpBottom+style.xpThickness+style.captionHeight+8);
             if(landscape&&!wrapped)
             {
                 for(int i=0;i<3;i++)passives[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
@@ -119,14 +124,17 @@ namespace Hellscript
             float pitch=landscape?style.landscapePotionPitch:style.portraitPotionPitch;
             float potionStart=width-m-3*pitch;
             for(int i=0;i<3;i++)potions[i]=new Rect(potionStart+i*pitch+(pitch-bottle)*.5f,potionY,bottle,bottle);
+            potionTray=new Rect(potionStart,potionY-style.captionHeight-8,3*pitch,bottle+style.captionHeight+16);
             statusIcon=landscape?style.statusIcon:style.portraitStatusIcon;statusGap=style.statusGap;buttonHit=Mathf.Max(44,40/scale);
             float sy=Mathf.Max(landscape?style.landscapeStatusY:style.portraitStatusY,shield.yMax+1);
             status=new Rect(landscape?left:style.portraitStatusX,sy,landscape?style.collapsed:4*statusIcon+3*statusGap,statusIcon+style.statusTextHeight);
+            if(stackedVitals)status=new Rect(left,Mathf.Max(sy,shield.yMax+style.vitalGap),Mathf.Min(status.width,barWidth),status.height);
             float other=landscape?passives[0].x:width-m;
             maximumStatusWidth=landscape?Mathf.Max(style.collapsed,Mathf.Min(style.expanded,other-status.x-buttonHit-20)):status.width;
             xp=new Rect(landscape?m:left,landscape?style.xpBottom:style.portraitXpY,landscape?width-2*m:barWidth,style.xpThickness);
             xpText=new Rect(landscape?m:left,landscape?style.landscapeXpTextY:style.portraitXpTextY,200,Row(style.xpTextHeight,style.captionFont));
-            occupiedHeight=Mathf.Max(status.yMax,Mathf.Max(passives[0].yMax,potions[0].yMax+24))+16;
+            if(stackedVitals){xp.y=seal.yMax+8;xpText.y=xp.yMax+4;xpText.width=barWidth;}
+            occupiedHeight=Mathf.Max(status.yMax,Mathf.Max(passives[0].yMax,potionTray.yMax))+16;
         }
         public Rect Pixels(Rect r)=>new Rect(r.x*scale,r.y*scale,r.width*scale,r.height*scale);
         public int FontSize(float basis,int minimum)=>Mathf.Max(1,Mathf.RoundToInt(Mathf.Max(basis,minimum)*scale));

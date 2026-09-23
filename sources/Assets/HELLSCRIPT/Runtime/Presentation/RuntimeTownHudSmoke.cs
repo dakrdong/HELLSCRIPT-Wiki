@@ -22,6 +22,12 @@ namespace Hellscript
         static void Require(bool ok,string message){if(!ok)throw new InvalidOperationException(message);}
         static Rect Pixels(RectTransform rect)
         {var corners=new Vector3[4];rect.GetWorldCorners(corners);return Rect.MinMaxRect(corners[0].x,corners[0].y,corners[2].x,corners[2].y);}
+        static bool Clickable(Button button)
+        {
+            var hits=new System.Collections.Generic.List<RaycastResult>();
+            EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current){position=Pixels((RectTransform)button.transform).center},hits);
+            return hits.Count>0&&hits[0].gameObject.GetComponentInParent<Button>()==button;
+        }
         IEnumerator Capture(string name)
         {
             Canvas.ForceUpdateCanvases();yield return new WaitForEndOfFrame();
@@ -73,7 +79,7 @@ namespace Hellscript
                     var button=game.UI.GetComponentsInChildren<Button>().Single(b=>b.name==buttonName);
                     Require(!game.UI.EquipmentShopOpen&&!game.UI.StorageOpen&&!game.UI.RuneMasterOpen,"A service opened on arrival.");
                     ExecuteEvents.Execute(button.gameObject,new PointerEventData(EventSystem.current){button=PointerEventData.InputButton.Left},ExecuteEvents.pointerClickHandler);yield return null;
-                    bool opened=station.id==TownStation.Blacksmith?game.UI.Page=="town-smith":station.id==TownStation.Merchant?game.UI.EquipmentShopOpen:station.id==TownStation.Warehouse?game.UI.StorageOpen:station.id==TownStation.RuneMaster?game.UI.RuneMasterOpen:game.UI.Page=="rift-keeper";
+                    bool opened=station.id==TownStation.Blacksmith?game.UI.BlacksmithOpen:station.id==TownStation.Merchant?game.UI.EquipmentShopOpen:station.id==TownStation.Warehouse?game.UI.StorageOpen:station.id==TownStation.RuneMaster?game.UI.RuneMasterOpen:game.UI.Page=="rift-keeper";
                     Require(opened,"Named NPC opened the wrong service: "+station.id);
                     game.UI.CloseStorage();game.UI.CloseEquipmentShop();game.UI.CloseRuneMaster();game.UI.ShowTown();yield return null;
                 }
@@ -98,6 +104,15 @@ namespace Hellscript
             Require(Mathf.Abs(rect.width-Mathf.Min(safe.width,safe.height)*.2f)<2,"Joystick did not scale with safe area: "+name);
             Require(Mathf.Abs(rect.width-rect.height)<1&&rect.yMin>safe.yMin+hud.status.yMax*hud.scale,"Joystick shape or HUD clearance: "+name);
             Require(rect.xMin>=safe.xMin&&rect.xMax<=safe.xMax&&rect.yMax<=safe.yMax,"Joystick escaped safe area: "+name);
+            if(!hud.landscape)Require(Mathf.Abs(rect.center.x-safe.center.x)<1,"Portrait joystick is not centred: "+name);
+            foreach(var obstacle in hud.actives.Concat(hud.passives).Append(hud.potionTray))
+            {var bounds=hud.Pixels(obstacle);bounds.position+=safe.position;Require(!rect.Overlaps(bounds),"Joystick overlaps controls: "+name);}
+            var style=game.UI.GlobalHud.Style;
+            float baseline=hud.landscape?Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8):style.skillBottom;
+            Require(Mathf.Abs(hud.actives[0].y-baseline)<.01f,"Action row is not bottom anchored: "+name);
+            var tray=game.UI.GlobalHud.transform.Find("HUD safe area/Potion tray").GetComponent<StorageSurface>();
+            Require(tray.isActiveAndEnabled&&tray.top.a>.5f&&!tray.raycastTarget,"Potion backing missing or blocks input.");
+            for(int i=0;i<3;i++)Require(Clickable(game.UI.GlobalHud.transform.Find("HUD safe area/Potion "+i).GetComponent<Button>()),"Potion input is obscured: "+name);
             foreach(var potion in hud.potions)foreach(var skill in hud.actives.Concat(hud.passives))
                 Require(potion.yMin>skill.yMax,"Potion below skill: "+name);
             var texts=game.UI.GetComponentsInChildren<Text>();
@@ -105,7 +120,18 @@ namespace Hellscript
             var header=game.UI.GetComponentsInChildren<RectTransform>().Single(t=>t.name=="Header");
             Require(!header.GetComponent<Image>().enabled&&header.rect.height<=44,"Header background or height regressed.");
             var title=header.GetComponentsInChildren<Text>().Single(t=>t.text==Loc.T("잿빛 숲 · 정착민 마을"));
-            Require(title.fontSize==18&&title.GetComponent<Outline>()!=null,"Compact title missing.");
+            Require(title.fontSize<=18&&title.GetComponent<Outline>()!=null,"Compact title missing.");
+            Require(title.preferredWidth<=title.rectTransform.rect.width+1&&title.preferredHeight<=title.rectTransform.rect.height+1,"Town title clipped: "+name);
+            var plate=header.Find("Town title backing").GetComponent<StorageSurface>();
+            Require(plate.top.a>0&&plate.top.a<1&&!plate.raycastTarget&&plate.rectTransform.rect.width<header.rect.width,"Translucent title backing missing.");
+            var dock=game.UI.GetComponentInChildren<ContentDockView>();dock.Snap(true);Canvas.ForceUpdateCanvases();
+            foreach(var button in dock.GetComponentsInChildren<Button>().Append(header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내")))
+            {
+                Require(!button.GetComponent<UIRectBorder>().enabled,"Shortcut still has a rectangular border.");
+                Require(Clickable(button),"Shortcut input is obscured: "+button.name+" / "+name);
+                var bounds=Pixels((RectTransform)button.transform);
+                Require(bounds.xMin>=safe.xMin&&bounds.xMax<=safe.xMax&&bounds.yMax<=safe.yMax&&bounds.yMin>=safe.yMin+hud.potionTray.yMax*hud.scale,"Shortcut escaped its safe column: "+name);
+            }
             foreach(var bubble in game.UI.GetComponentsInChildren<RectTransform>(true).Where(t=>t.name.StartsWith("NPC bubble ")))
             {
                 Require(bubble.GetComponentInChildren<Image>(true)==null,"NPC background still exists.");
@@ -121,12 +147,14 @@ namespace Hellscript
             yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Game failed to initialize.");
             game.EnterPlaza(true);UiSafeArea.AspectRatio=0;game.ApplyLanguage("ko");
             game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();yield return VisitNamedNpcs();
-            foreach(var size in new[]{new Vector2Int(1600,900),new Vector2Int(900,1600),new Vector2Int(844,390),new Vector2Int(390,844),new Vector2Int(640,360),new Vector2Int(360,640)})
+            foreach(string language in new[]{"ko","en"})
+            foreach(var size in new[]{new Vector2Int(1600,900),new Vector2Int(1600,1000),new Vector2Int(2100,900),new Vector2Int(900,1600),new Vector2Int(956,440),new Vector2Int(440,956),new Vector2Int(640,360),new Vector2Int(360,640)})
             foreach(int percent in new[]{50,100,150})
             {
-                Screen.SetResolution(size.x,size.y,FullScreenMode.Windowed);game.InterfaceScale.Apply(percent);game.UI.ApplyInterfaceScale();
+                game.ApplyLanguage(language);Screen.SetResolution(size.x,size.y,FullScreenMode.Windowed);game.InterfaceScale.Apply(percent);game.UI.ApplyInterfaceScale();
                 yield return new WaitForSecondsRealtime(.5f);game.UI.RefreshHud();yield return null;
-                string name=size.x+"x"+size.y+"-"+percent;CheckLayout(name);
+                Require(Screen.width==size.x&&Screen.height==size.y,"Resolution request did not apply.");
+                string name=size.x+"x"+size.y+"-"+percent+"-"+language;CheckLayout(name);
                 var stick=game.UI.GetComponentInChildren<TownJoystick>();var visibility=stick.GetComponent<CanvasGroup>();
                 Require(Mathf.Abs(visibility.alpha-.3f)<.001f,"Initial joystick opacity.");
                 var center=Pixels((RectTransform)stick.transform).center;
@@ -141,20 +169,27 @@ namespace Hellscript
                 yield return new WaitForSecondsRealtime(.15f);
                 Require(stick.Value==Vector2.zero&&stick.Knob.anchoredPosition==Vector2.zero&&Mathf.Abs(visibility.alpha-.3f)<.001f,"Release did not reset input and opacity.");
                 Require(game.Town.Position==before,"Player continued moving after release.");
-                if(percent==100&&(size.x==1600||size.x==900||size.x==390||size.x==844)||percent==150&&size.x==360)yield return Capture(name);
+                if(percent==100||percent==150&&size.x==440)yield return Capture(name);
             }
             Screen.SetResolution(1600,900,FullScreenMode.Windowed);game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();
             UiSafeArea.Simulate(90,30,12,24);yield return new WaitForSecondsRealtime(.6f);game.UI.RefreshHud();yield return null;CheckLayout("safe-area");yield return Capture("safe-area");
+            UiSafeArea.StopSimulating();Screen.SetResolution(440,956,FullScreenMode.Windowed);UiSafeArea.Simulate(0,34,0,44);
+            yield return new WaitForSecondsRealtime(.6f);game.UI.RefreshHud();yield return null;CheckLayout("portrait-safe-area");yield return Capture("portrait-safe-area");
+            Screen.SetResolution(1600,900,FullScreenMode.Windowed);yield return new WaitForSecondsRealtime(.6f);
             UiSafeArea.StopSimulating();game.ApplyLanguage("en");yield return new WaitForSecondsRealtime(.3f);CheckLayout("english");
             var dock=game.UI.GetComponentInChildren<ContentDockView>();dock.Snap(true);
             var storage=dock.Items.GetComponentsInChildren<Button>().Single(b=>b.name=="창고");
             Require(storage.GetComponentInChildren<Text>().text==""&&storage.targetGraphic is Image art&&art.sprite!=null&&art.sprite.name=="menu-storage","Attached warehouse icon missing.");
+            dock.Toggle.GetComponent<Button>().onClick.Invoke();yield return new WaitForSecondsRealtime(.6f);
+            Require(dock.Settled&&!dock.Open&&!Clickable(storage),"Folded shortcut remains clickable.");
+            dock.Toggle.GetComponent<Button>().onClick.Invoke();yield return new WaitForSecondsRealtime(.6f);
+            Require(dock.Settled&&dock.Open&&Clickable(storage),"Reopened shortcut is inaccessible.");
             yield return Capture("storage-shortcut");storage.onClick.Invoke();Require(game.UI.StorageOpen,"Storage shortcut did not open real storage.");
             game.UI.CloseStorage();game.EnterPlaza();game.ApplyLanguage("ko");yield return null;
             var pad=game.UI.GetComponentInChildren<TownJoystick>();var eventData=new PointerEventData(EventSystem.current){pointerId=2,position=Pixels((RectTransform)pad.transform).center+Vector2.right*20};pad.OnPointerDown(eventData);
             game.UI.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내").onClick.Invoke();yield return null;
             Require(game.UI.CommonPanelOpen&&pad.Value==Vector2.zero&&Mathf.Abs(pad.GetComponent<CanvasGroup>().alpha-.3f)<.001f,"Settings did not stop movement.");
-            File.WriteAllText(Path.Combine(output,"runtime.txt"),"PASS: 18 resolution/scale combinations, safe area, Korean/English, production movement, release, second-pointer ownership, idle 0.3 / active 1.0 opacity, outlined names, compact header, native attached storage icon and real storage action. Desktop simulated pointer input; physical mobile not tested.\n");
+            File.WriteAllText(Path.Combine(output,"runtime.txt"),"PASS: 48 resolution/scale/language combinations, safe area, bottom-anchored actions, potion tray, centred portrait joystick, borderless shortcut buttons, title backing, production movement/release/second-pointer ownership, idle 0.3 / active 1.0 opacity, NPC names, original storage icon and real storage action. Desktop simulated pointer input; physical mobile not tested.\n");
             Debug.Log("HELLSCRIPT_TOWN_HUD_SMOKE_OK");Application.Quit(0);
         }
     }

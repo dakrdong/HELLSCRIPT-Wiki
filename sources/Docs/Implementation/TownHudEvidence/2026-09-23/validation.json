@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-23",
+  "unity": "6000.6.0f1",
+  "baseCommit": "12505e0040f0f3c6585a2d3003719697675169e0",
+  "editMode": {
+    "passed": 63,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "GlobalHudTests",
+      "GlobalHudResourceTests",
+      "TownWalkTests",
+      "InterfaceScaleTests"
+    ]
+  },
+  "uiContractTests": 9,
+  "macOSBuildErrors": 0,
+  "runtime": {
+    "combinations": 48,
+    "sizes": [
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ],
+      [
+        900,
+        1600
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        440,
+        956
+      ],
+      [
+        640,
+        360
+      ],
+      [
+        360,
+        640
+      ]
+    ],
+    "scales": [
+      50,
+      100,
+      150
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "safeAreas": [
+      "landscape asymmetrical insets",
+      "portrait bottom 34 top 44"
+    ],
+    "input": "production EventSystem callbacks plus real UI raycasts",
+    "checks": [
+      "movement and stop",
+      "pointer ownership and opacity",
+      "portrait center",
+      "bottom baseline",
+      "potion tray bounds and input",
+      "borderless shortcut column and input",
+      "fold and unfold input gating",
+      "one-line translated title",
+      "real storage and settings",
+      "named NPC services"
+    ],
+    "physicalMobileTested": false
+  },
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Resources/Data/GlobalHudLayout.json": "a9d4615903177f11eff332a479bbecd7b047ce0cedd52e7b2fb9f5ca41280b4d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs": "ae4f4a7b6fe966e2c741af0ca63f4ea30e3030a009830b841f36dc823ac012eb",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Plaza.cs": "6d4307b4a38d4977d1ee69569b5827044110ca1caf35b09bff04bd3cb38315b3",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudLayout.cs": "0778f8964703014bd750d0a04dd3823baf3fc4450a4f627741309f05a4ffd13e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs": "6a4d70eb7c76e272a61ff193c2f86636d88569f39889a2b28d86a7181920d39c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTownHudSmoke.cs": "4ab69ac57e761059a7552b09667c41852dfb240f5ca6e0942437e22ce4b27a54",
+    "Assets/HELLSCRIPT/Runtime/Presentation/TownJoystick.cs": "584dbe95254f6913ec0409e7f5b992d069496bb9507b87fb4869a4c008e88d9e",
+    "Assets/HELLSCRIPT/Tests/Editor/GlobalHudTests.cs": "bd70944fb1910497727ce8bcf7fb69328a219ba64ca780a14b42791d3a6bbcec",
+    "Assets/HELLSCRIPT/Tests/Editor/TownWalkTests.cs": "d0a29c953ae67b266ca6a0c40382348c3c846ad12519a74c9b48b89a82407803"
+  }
+}

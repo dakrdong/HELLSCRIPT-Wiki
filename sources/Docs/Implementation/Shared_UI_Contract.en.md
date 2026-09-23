@@ -1,6 +1,6 @@
 # Shared UI and new-content contract
 
-Updated: 2026-09-22
+Updated: 2026-09-23
 Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
 
 [Korean version](Shared_UI_Contract.md)
@@ -58,3 +58,7 @@ See [completed-work integration](Completed_Work_Integration.en.md) for the initi
 ## Aspect Runestone
 
 `AspectStoneWindow` is generated from the new-content template and opens `ContentWindowView` with `EquipmentViewSource.Owned`. It composes `CharacterEquipmentView`, `EquipmentSlotView` and `ItemDetailView` inside the shared navigation, scrolling body and fixed action region. Landscape has equipment, library and detail columns; portrait uses three steps. The confirmation step contains an inline equipment picker so changing slots preserves the selected aspect. `AspectStoneSession` owns selection and filters; `GameStore` owns collection, level-up and imprint transactions. Rune glyphs and red upgrade dots are content-specific meaning, while fonts, slots, window scale and panel colors use the shared owners. There is no field placement tab.
+
+## Town and combat HUD placement
+
+`GlobalHudLayout` owns the persistent vitals, skills and potions; `GameUI.Plaza` and `TownJoystick` own the town heading, shortcuts and movement input. This HUD is an adapter using its existing canvas and proportional screen layout, rather than a content window. Potion and title backings reuse `StorageSurface` and `UiTheme` colors without new raster artwork. Presentation does not save accounts or consume potions. See [town HUD validation](Town_Hud_Responsive.en.md) for the portrait bottom baseline, centered movement pad and enlarged-text layout.

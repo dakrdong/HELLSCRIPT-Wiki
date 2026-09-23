@@ -26,11 +26,15 @@ namespace Hellscript
         public void OnPointerUp(PointerEventData e){if(pointer==e.pointerId)ResetInput();}
         public void ResetInput(){pointer=null;Value=Vector2.zero;if(Knob!=null)Knob.anchoredPosition=Vector2.zero;if(Visibility!=null)Visibility.alpha=IdleOpacity;}
         // Geometry is measured in usable display pixels, then converted once to the page canvas.
-        public static Rect Bounds(float width,float height,float hudTop)
+        public static Rect Bounds(float width,float height,GlobalHudLayout hud)
         {
-            float shortSide=Mathf.Min(width,height),margin=shortSide*.03f,bottom=hudTop+margin;
+            float shortSide=Mathf.Min(width,height),margin=shortSide*.03f,bottom=hud.status.yMax*hud.scale+margin;
             float diameter=Mathf.Min(shortSide*.2f,Mathf.Max(1,height-bottom-48-margin));
-            return new Rect(margin,bottom,diameter,diameter);
+            float x=height>width?(width-diameter)*.5f:margin;
+            // A centred thumb must also clear the right-hand controls when text is enlarged.
+            var tray=hud.Pixels(hud.potionTray);
+            if(height>width&&x<tray.xMax&&x+diameter>tray.xMin)bottom=Mathf.Max(bottom,tray.yMax+margin);
+            return new Rect(x,bottom,diameter,diameter);
         }
         public void Reflow(Rect pixels,float canvasScale)
         {
