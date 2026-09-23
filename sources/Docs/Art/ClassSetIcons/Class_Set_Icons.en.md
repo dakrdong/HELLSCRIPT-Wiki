@@ -2,6 +2,8 @@
 
 Updated: 2026-09-22
 
+Subsequent integration: on 2026-09-23, all 105 equipment images and 24 emblems were wired to shared equipment presentation. See [equipment artwork integration](../../Implementation/Equipment_Art_Integration.en.md) for current coverage and validation; the original production scope and evidence below are preserved.
+
 [한국어](Class_Set_Icons.md)
 
 This batch contains **105 equipment icons and 24 emblems for 24 new sets: 129 images total**. Every item has a PNG, bilingual name and effects, its actual prompt, a preserved generated original, hashes, and QA records. The six existing sets are excluded.

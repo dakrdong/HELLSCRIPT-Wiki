@@ -2,6 +2,8 @@
 
 Updated on: 2026-09-22 (Korea Standard Time)
 
+Subsequent integration: on 2026-09-23, all 141 legendary equipment images were wired to shared equipment presentation. See [equipment artwork integration](../../Implementation/Equipment_Art_Integration.en.md) for current validation; the original production evidence below is preserved.
+
 Created 141 actual native PNG masters out of 141 requested legendary items. The [complete index](manifest.json) and item manifests track all 123 existing expansion items and 18 new skill-linked items. Generated counts exclude placeholders, duplicates and prompt-only work.
 
 ## Handoff format and provenance
