@@ -10,6 +10,7 @@ namespace Hellscript
     {
         public GameCatalog catalog;
         public GameStore Store {get;private set;}
+        public AttendancePopupSettings AttendancePopups {get;private set;}
         CombatSimulation combat;
         public CombatSimulation Combat {get=>combat;private set {combat=value;Audio?.Bind(value);}}
         public GameAudio Audio {get;private set;}
@@ -30,6 +31,7 @@ namespace Hellscript
             if(catalog==null){catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();}
             string saveDirectory=Application.persistentDataPath;
             string[] args=Environment.GetCommandLineArgs();for(int i=0;i<args.Length-1;i++)if(args[i]=="-hellscriptSavePath")saveDirectory=args[i+1];
+            AttendancePopups=new AttendancePopupSettings(saveDirectory);
             InitializeLanguage(saveDirectory);
             ItemRangeDisplay.Initialize(saveDirectory);
             InitializeDisplaySettings(saveDirectory);

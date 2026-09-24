@@ -37,7 +37,7 @@ namespace Hellscript.Tests
             Assert.AreEqual(123456,A.riftFatigue.dailyMs);Assert.AreEqual(654321,A.riftFatigue.paidMs);Assert.AreEqual(2,A.riftFatigue.recoveries);
             Assert.AreEqual(32100,H.riftProgress.Best(24));Assert.AreEqual("claimed",H.riftProgress.Chest(24));
             Assert.IsTrue(store.AcknowledgeCoreCraft("integrated-craft"),store.Error);store=new GameStore(directory,catalog);
-            Assert.AreEqual(11,A.schema);Assert.IsEmpty(A.coreCraft.pendingId);Assert.AreEqual(1,A.coreCraft.history.Count);
+            Assert.AreEqual(GameStore.MaximumSchemaVersion,A.schema);Assert.IsEmpty(A.coreCraft.pendingId);Assert.AreEqual(1,A.coreCraft.history.Count);
             Assert.AreEqual(654321,A.riftFatigue.paidMs);Assert.AreEqual(32100,H.riftProgress.Best(24));Assert.AreEqual(4000,A.premium);
             Assert.IsEmpty(store.GemRecoveryArchive);
         }

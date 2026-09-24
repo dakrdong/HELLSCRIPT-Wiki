@@ -1,6 +1,6 @@
 # Shared UI and new-content contract
 
-Updated: 2026-09-23
+Updated: 2026-09-24
 Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
 
 [Korean version](Shared_UI_Contract.md)
@@ -88,3 +88,7 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 ## Jeweler
 
 `JewelerWindow` uses `ContentWindowView`, `EquipmentViewSource.Owned`, `StoreViewBinding` and `GameStore` transactions. Its gem-type/tier count matrix is a specialized adapter rather than equipment-slot geometry. Landscape uses two independent scroll panels; portrait uses navigation tabs and the same fixed craft action. Socket details retain the common equipment owners. See [Jeweler runtime](Jeweler_Runtime.en.md).
+
+## Attendance events
+
+`AttendanceWindow` starts from the new-content template and uses `ContentWindowView`. Day tiles describe reward definitions; account attendance and claim state are supplied by the controller. Shared navigation and scrolling body sit above fixed suppression, selected-reward and claim controls. Larger text increases action height and reduces tile columns. `AttendanceSwipe` routes horizontal gestures to pages and vertical gestures to the shared body scroll. `ContentWindowHost` owns combat pause, `GameStore` owns account transactions, and `StoreViewBinding` refreshes after committed saves. See [attendance events](Attendance_Events.en.md) for calendar, reward and verification rules.

@@ -152,6 +152,7 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public AttendanceState attendance;
         public RiftFatigue riftFatigue=new RiftFatigue();
         public List<AspectProgress> aspects=new List<AspectProgress>();
         public int enhancementStones;
@@ -164,7 +165,7 @@ namespace Hellscript
         public ContentUnlockState contentUnlocks=new ContentUnlockState();
         public AccountGuide guide=new AccountGuide();
         public int schema=2, selectedHero, gold, materials, sweepCount;
-        // Paid currency balance. Nothing grants it yet; the warehouse quotes it for its last two tabs.
+        // Shared Abyssal Coins, including attendance grants.
         public int premium;
         public int[] cores=new int[8];
         // Purchased capacity per warehouse tab; 0 is a locked tab. Items keep their own tab and slot.

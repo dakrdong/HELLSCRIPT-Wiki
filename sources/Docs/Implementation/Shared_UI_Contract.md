@@ -1,6 +1,6 @@
 # 공통 UI와 신규 콘텐츠 개발 규칙
 
-갱신일: 2026-09-23
+갱신일: 2026-09-24
 최신 인벤토리를 장비 표시의 기준으로 삼는다. 신규 콘텐츠는 아래 공통 부품을 조합해 만든다. 화면별로 같은 규칙을 다시 구현하지 않는다. 특수한 배치와 콘텐츠의 게임 규칙은 유지한다.
 
 영어판: [Shared UI contract](Shared_UI_Contract.en.md)
@@ -111,3 +111,7 @@
 ## 보석상
 
 `JewelerWindow`는 `ContentWindowView`, `EquipmentViewSource.Owned`, `StoreViewBinding`과 `GameStore` 거래를 사용한다. 종류·등급별 보석 수량 행렬은 장비 위치가 아닌 콘텐츠 전용 표시다. 가로에서는 두 목록을 독립 스크롤하고 세로에서는 탐색 탭으로 전환하며, 제조 행동은 공통 하단 영역에 고정한다. 소켓 장비 상세는 기존 공통 표시를 유지한다. 자세한 규칙은 [보석상 NPC 콘텐츠](Jeweler_Runtime.md)를 따른다.
+
+## 출석 이벤트
+
+`AttendanceWindow`는 신규 창 템플릿의 `ContentWindowView`를 사용한다. 일차별 보상 타일은 실제 소유 장비가 아닌 보상 정의이며, 출석·수령 상태는 계정에서 전달한다. 공통 본문 스크롤과 탐색 영역을 사용하고 하단에는 숨김 체크박스·선택 보상·수령 버튼을 고정한다. 글자 확대 시 하단 높이와 타일 열 수를 조정한다. `AttendanceSwipe`는 가로 입력을 페이지 이동에, 세로 입력을 기존 본문 스크롤에 전달한다. 전투 일시정지는 `ContentWindowHost`, 계정 쓰기는 `GameStore`, 저장 후 표시 갱신은 `StoreViewBinding`이 소유한다. [출석 이벤트](Attendance_Events.md)에 날짜·보상·검증 규칙을 기록한다.

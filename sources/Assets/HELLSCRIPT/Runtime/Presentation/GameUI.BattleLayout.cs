@@ -20,7 +20,7 @@ namespace Hellscript
             footer.gameObject.SetActive(false);headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);
             meterText=Label(header,"",15,pale);timerText=Label(header,"",18,gold);actionText=Label(header,"",14,gold);
             var menu=Button(header,"☰",ShowObservationMenu,Color.clear);menu.name="관찰 메뉴";
-            AddContentDock(58,44);
+            AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
             AddRiftMinimap(run);RefreshHud();ReflowBattleHud();
         }
@@ -43,7 +43,8 @@ namespace Hellscript
             Place(actionText.rectTransform,18,narrow?112:88,w-36,22);
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,w-56,8,44,44);
             var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,w-108,8,44,44);
-            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f);Place(bossHud,(w-bossWidth)*.5f,narrow?146:116,bossWidth,66);
+            // On narrow fields the event button has its own row above the boss status.
+            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f);Place(bossHud,(w-bossWidth)*.5f,w<600?(narrow?212:176):116,bossWidth,66);
             Place(bossTitle.rectTransform,0,0,bossWidth,25);Place(bossActionLabel.rectTransform,0,27,bossWidth,30);
             Place((RectTransform)bossHealthFill.transform.parent,0,62,bossWidth,4);ReflowBossText();
             var mini=root.Find("Rift minimap") as RectTransform;

@@ -92,7 +92,7 @@ namespace Hellscript
             if(root==null)return;
             bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
-            if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
+            if(AttendancePanel!=null)AttendancePanel.Repaint();else if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
             if(!panelOpen)return;
             ShowCommonPanel(false);SelectSettingsTab(tab);
             Canvas.ForceUpdateCanvases();
@@ -146,7 +146,7 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
-            CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
+            CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
             if(PlayInventoryOpen&&page!="bag"&&page!="warehouse")ReleasePlayInventory();
             if(page!="battle")game.ExitIdle();
             CloseHudPanel();ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
@@ -453,7 +453,7 @@ namespace Hellscript
         void Update()
         {
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
-            TickGlobalHud();
+            TickGlobalHud();TickAttendance();
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();

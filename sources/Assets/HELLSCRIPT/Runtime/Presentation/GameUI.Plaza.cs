@@ -20,7 +20,7 @@ namespace Hellscript
         public void ShowPlaza()
         {
             pageRepaint=ShowPlaza;Base("plaza","잿빛 숲 · 정착민 마을","조이스틱으로 이동 · 주민에게 가까이 가서 대화하세요",battle:true);
-            CompactPlazaHeader();AddContentDock(48,52);
+            CompactPlazaHeader();AddContentDock(48,52);AddEventButton();
             footer.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);plazaBubbles.Clear();plazaResidentBubbles.Clear();
             plazaStatus=Label(root,"",17,pale);Span(plazaStatus.rectTransform,22,90,20,40);
             var guide=Button(root,"시설 안내",ToggleTownGuide);Place((RectTransform)guide.transform,20,140,126,52);
