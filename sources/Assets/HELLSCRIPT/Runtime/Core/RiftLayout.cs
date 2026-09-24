@@ -131,12 +131,12 @@ namespace Hellscript
         public RiftOfferingAltar altar;
         public RiftObjectiveRecord objectiveRecord;
         public bool gateOpen,gateOpenedByMeter;
-        public const int CurrentVersion=7;
+        public const int CurrentVersion=8;
         public int contentStage;
         public int version=CurrentVersion,theme,bossRoom,bossKind,candidate;
         public uint mapSeed,layoutSeed,decorationSeed,encounterSeed,combatSeed,rewardSeed;
         public string fingerprint, fallbackId="";
-        public bool legacy,roamingBoss;
+        public bool legacy,roamingBoss,introductory;
         public Vector2 start;
         public List<RiftRoom> rooms=new List<RiftRoom>();
         public List<RiftCorridor> corridors=new List<RiftCorridor>();

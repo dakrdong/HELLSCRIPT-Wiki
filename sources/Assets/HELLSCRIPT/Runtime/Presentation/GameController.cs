@@ -27,7 +27,7 @@ namespace Hellscript
         bool resultShown,backgroundPaused;
         void Awake()
         {
-            Application.targetFrameRate=60;Screen.sleepTimeout=SleepTimeout.NeverSleep;
+            Application.runInBackground=true;Application.targetFrameRate=60;Screen.sleepTimeout=SleepTimeout.NeverSleep;
             if(catalog==null){catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();}
             string saveDirectory=Application.persistentDataPath;
             string[] args=Environment.GetCommandLineArgs();for(int i=0;i<args.Length-1;i++)if(args[i]=="-hellscriptSavePath")saveDirectory=args[i+1];
@@ -236,16 +236,16 @@ namespace Hellscript
         float forgeSettlementTick;
         void Update()
         {
-            if(Store!=null&&Time.unscaledTime>=forgeSettlementTick){forgeSettlementTick=Time.unscaledTime+1;Store.SettleForgeJobs();}
+            if(!backgroundPaused&&Store!=null&&Time.unscaledTime>=forgeSettlementTick){forgeSettlementTick=Time.unscaledTime+1;Store.SettleForgeJobs();}
             double elapsed=combatClock.Sample(Time.realtimeSinceStartupAsDouble);
             UpdateDisplaySettings();
             float repeatReal=UpdateRepeatClock();
             TickPotionWait();
-            if(Combat==null){TickPlaza(Mathf.Min(Time.unscaledDeltaTime,.25f));return;}
+            if(Combat==null){TickPlaza(Mathf.Min(Time.unscaledDeltaTime,.25f));if(!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}}return;}
             // This display-only pause is not serialized into the run. Existing pause reasons
             // and the partial simulation tick remain exactly as they were on entry.
             SettleRiftAttendance(elapsed);
-            if(UI.CommonPanelOpen&&Active){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}
+            if(UI.CommonPanelOpen&&Active&&!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}
             var run=Combat.State;float real=(float)elapsed;bool wasActive=Active;
             if(Active&&!backgroundPaused){if(run.riftAttendance?.version==1)run.realTime=(float)(run.riftAttendance.elapsedMs/1000);else run.realTime+=real;}
             if(Active&&!run.paused&&!run.portal&&!backgroundPaused&&!foregroundResumeRequired&&string.IsNullOrEmpty(run.navigationError))
@@ -281,7 +281,7 @@ namespace Hellscript
             if(!paused&&wasPaused&&Store!=null&&!Store.SettleLocalIdle())
             {
                 foregroundSaveBlocked=foregroundResumeRequired=true;
-                ForegroundPauseReason="미실행 보상을 저장하지 못했습니다. 저장 공간을 확인한 뒤 재개를 눌러 주세요.";
+                ForegroundPauseReason="미접속 보급을 저장하지 못했습니다. 저장 공간을 확인한 뒤 재개를 눌러 주세요.";
                 if(Active)Combat.State.paused=true;Notify(ForegroundPauseReason);return;
             }
             if(!paused&&foregroundResumeRequired)Notify(ForegroundPauseReason);

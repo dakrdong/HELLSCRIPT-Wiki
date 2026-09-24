@@ -29,6 +29,7 @@ namespace Hellscript
         public void ShowTownSmith()=>ShowBlacksmith();
         public void ShowTownRuneShop()
         {
+            if(!RequireContent(ContentUnlocks.Rune))return;
             if(!TownService("town-runes","룬 상인","룬 블록 구매 · 룬 배치",ShowTownRuneShop))return;
             Note(content,"G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보유 목록에서 바로 배치할 수 있습니다.",21,110,pale);
             for(int n=1;n<=3;n++)

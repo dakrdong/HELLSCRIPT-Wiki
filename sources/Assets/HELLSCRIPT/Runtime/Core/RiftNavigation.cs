@@ -136,12 +136,19 @@ namespace Hellscript
                 var o=index<staticCount?Layout.obstacles[index]:Layout.gates[index-staticCount].barrier;
                 if(!(mode==0?o.blocksSight:mode==1?o.blocksProjectile:o.blocksWalk))continue;
                 float margin=mode==0?0:radius;
-                if(o.radius>0)
-                {Vector2 delta=b-a;float t=delta.sqrMagnitude<.000001f?0:Mathf.Clamp01(Vector2.Dot(o.position-a,delta)/delta.sqrMagnitude);if((a+t*delta-o.position).sqrMagnitude<(o.radius+margin)*(o.radius+margin))return false;}
-                else
-                {var half=o.halfSize+Vector2.one*margin-Vector2.one*.00001f;if(Clip(new Rect(o.position-half,half*2),a,b,out _,out _))return false;}
+                if(ObstacleBlocks(o,a,b,margin))return false;
             }
             return true;
+        }
+        internal static bool ObstacleBlocks(RiftObstacle o,Vector2 a,Vector2 b,float margin)
+        {
+            if(o.radius>0)
+            {
+                Vector2 delta=b-a;float t=delta.sqrMagnitude<.000001f?0:Mathf.Clamp01(Vector2.Dot(o.position-a,delta)/delta.sqrMagnitude);
+                return (a+t*delta-o.position).sqrMagnitude<(o.radius+margin)*(o.radius+margin);
+            }
+            var half=o.halfSize+Vector2.one*margin-Vector2.one*.00001f;
+            return Clip(new Rect(o.position-half,half*2),a,b,out _,out _);
         }
         bool SegmentOnFloor(Vector2 a,Vector2 b)
         {return Surface.SegmentOnFloor(a,b);}

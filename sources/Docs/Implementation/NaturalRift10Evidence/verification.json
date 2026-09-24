@@ -1,0 +1,44 @@
+{
+  "production_commit": "8d5725ec8ffff7291570cff1958bde36a3289d6c",
+  "unity": "6000.6.0f1",
+  "scope": "One uninterrupted fresh Warrior progression, production core and GameStore, normal R1-R10, 1x virtual attendance. Town time omitted. Not manual UI or mobile play.",
+  "raw_sha256": "c0de45ddacae28a6e73b446da3174bbfe53358e45c4ff191117e1bcccefc1450",
+  "initial_focused_editmode": {
+    "passed": 101,
+    "failed": 2,
+    "reason": "Two pre-existing RiftRarityTests fixtures were below new R60 sweep / R25 reroll gates. Test setup corrected; runtime gate unchanged."
+  },
+  "final_focused_editmode": {
+    "result": "Passed",
+    "total": "103",
+    "passed": "103",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "52.6781325"
+  },
+  "native_readback": {
+    "result": "passed",
+    "surface": "macOS development Player, 440x956",
+    "startup_offline_gold": 0,
+    "startup_offline_materials": 0,
+    "pointer_check": "CUA opened the reward-box inventory from the earned hero inventory; displayed zero boxes after all claimed boxes had been opened.",
+    "initial_readback_check": "First native attempt credited 6 legitimate offline gold during startup. Proof now reconciles GameStore.LocalIdleGoldAwarded separately; original playthrough ledger is unchanged."
+  },
+  "public_wiki": "Branch only; publish after merge into main.",
+  "shared_ui": {
+    "contract": "passed",
+    "tests": 9
+  },
+  "ledger_validation": "passed: time, failures, normal-clear records, claims, equipment conservation and resource balances",
+  "native_build": "Passed macOS development build; no combat or reward tuning changes",
+  "wiki": {
+    "build": "passed",
+    "check": "passed",
+    "python_tests": 10,
+    "javascript_routes": "passed"
+  },
+  "driver_notes": [
+    "Boss drop attribution and escaped-goblin observer labels corrected against saved production state; original attempts retained.",
+    "Choice-gem boxes selected G01 twice because both belonged to one owned stack."
+  ]
+}

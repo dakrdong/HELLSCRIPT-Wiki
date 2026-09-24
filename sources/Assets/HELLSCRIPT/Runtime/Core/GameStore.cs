@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=12;
+        public const int MaximumSchemaVersion=14;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -17,19 +17,23 @@ namespace Hellscript
         public string QualityRecoveryMessage {get;private set;}="";
         public string QualityRecoveryArchive {get;private set;}="";
         public int LocalIdleGoldAwarded {get;private set;}
-        public int LocalIdleMaterialsAwarded {get;private set;}
+        public int LocalIdleMaterialsAwarded => 0; // Kept for existing development evidence readers.
+        public int LocalIdleStonesAwarded {get;private set;}
+        readonly Func<long> offlineClock;
+        long SeenNow()=>Math.Max(Data.lastSeenUtc,offlineClock());
         long? pendingLocalIdleThrough;
         bool settlingLocalIdle;
         readonly string path;
-        public GameStore(string directory,GameCatalog catalog=null,Func<long> forgeClock=null)
+        public GameStore(string directory,GameCatalog catalog=null,Func<long> forgeClock=null,Func<long> offlineClock=null)
         {
+            this.offlineClock=offlineClock??(()=>DateTimeOffset.UtcNow.ToUnixTimeSeconds());
             if(forgeClock!=null)ForgeClock=forgeClock;
             Directory.CreateDirectory(directory);path=Path.Combine(directory,"hellscript-local-v1.json");
             string source=path;
             Data=Read(path);
             if(Data==null){source=path+".bak";Data=Read(source);}
             if(Data==null&&(File.Exists(path)||File.Exists(path+".bak")))throw new InvalidDataException(Loc.F("저장 파일과 백업을 복구할 수 없습니다. 원본은 그대로 보존했습니다.\n{0}", path));
-            if(Data==null)Data=NewAccount(catalog);
+            if(Data==null){Data=NewAccount(catalog);Data.lastSeenUtc=this.offlineClock();}
             else if(Data.schema==1)
             {
                 File.Copy(source,path+".schema1-"+DateTime.UtcNow.Ticks+".json",false);
@@ -50,8 +54,14 @@ namespace Hellscript
                 if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>40))return null;
                 if(a.heroes.Any(h=>h.level>ClassSkills.LevelCap(h)||!ClassSkillLoadout.IsAbsent(h.build.classSkills)&&!ClassSkills.Enabled(h)))
                     throw new NotSupportedException("This save requires the class-skill release. The original file is preserved.");
+                bool unlocksMigrated=a.schema<13&&(a.contentUnlocks?.version??0)<ContentUnlocks.Version;
                 bool gemsMigrated=MigrateRetiredGemStacks(a);
                 Normalize(a);
+                if(unlocksMigrated)
+                {
+                    string archive=file+".before-content-unlocks-v2.json";
+                    if(!File.Exists(archive))File.Copy(file,archive,false);
+                }
                 if(a.schema>=2)
                 {
                     var allItems=PersistedItems(a);
@@ -97,7 +107,8 @@ namespace Hellscript
         }
         static void Normalize(AccountSave a)
         {
-            Attendance.Normalize(a);
+            RewardBoxes.Normalize(a);
+            Attendance.Normalize(a);OfflineSupplies.Normalize(a);
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
             AspectStone.Normalize(a);
@@ -210,8 +221,9 @@ namespace Hellscript
         }
         static void ValidateItems(AccountSave a)
         {
+            RewardBoxes.Validate(a);
             EquipmentShop.Validate(a);
-            CoreCrafting.Validate(a);Attendance.Validate(a.attendance);
+            CoreCrafting.Validate(a);Attendance.Validate(a.attendance);OfflineSupplies.Validate(a);
             BlacksmithCatalog.Validate(a);
             foreach(var h in a.heroes)h.potions.Validate();
             if(a.gold<0||a.materials<0||a.cores.Any(c=>c<0))throw new InvalidDataException("재화 값이 음수입니다.");
@@ -228,7 +240,7 @@ namespace Hellscript
         }
         public static AccountSave NewAccount(GameCatalog catalog=null)
         {
-            var a=new AccountSave{contentUnlocks=new ContentUnlockState{version=1},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
+            var a=new AccountSave{contentUnlocks=new ContentUnlockState{version=ContentUnlocks.Version},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
             uint rng=112358;
             for(int i=0;i<3;i++)
             {
@@ -242,37 +254,43 @@ namespace Hellscript
             }
             a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
             AspectStone.Normalize(a);
-            RuneGrowth.Normalize(a);Attendance.Normalize(a);return a;
+            RuneGrowth.Normalize(a);RewardBoxes.Normalize(a);Attendance.Normalize(a);OfflineSupplies.Normalize(a);return a;
         }
         public bool SettleLocalIdle()
         {
-            pendingLocalIdleThrough??=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            long through=pendingLocalIdleThrough.Value;int best=Data.heroes.Max(h=>h.highestClear),gold=0,materials=0;
-            LocalIdleGoldAwarded=LocalIdleMaterialsAwarded=0;OfflineMessage="";
-            if(ContentUnlocks.Has(Data,ContentUnlocks.Offline)&&best>0&&Data.lastSeenUtc>0)
-            {
-                double hours=Math.Min(12,Math.Max(0,through-Math.Max(Data.lastSeenUtc,Data.contentUnlocks.offlineActivatedUtc))/3600d);
-                gold=(int)(hours*(200+40*best));materials=(int)(hours*(5+best/5));
-            }
-            // Keep the failed interval fixed. Neither another save nor an inventory transaction
-            // can move its cursor forward before its rewards commit successfully.
+            pendingLocalIdleThrough??=offlineClock();
+            long through=pendingLocalIdleThrough.Value;OfflineSupplies.Normalize(Data);
+            var quote=OfflineSupplies.Quote(Data,through);string id="offline-supplies:"+Data.lastSeenUtc+":"+quote.through;
+            LocalIdleGoldAwarded=LocalIdleStonesAwarded=0;OfflineMessage="";
+            // Retain a failed interval, including fractional income. No other transaction may
+            // advance the cursor until this exact interval commits.
             settlingLocalIdle=true;bool success;
             try
             {
-                success=gold>0||materials>0?Transact("local-idle:"+Data.lastSeenUtc+":"+through,"local-idle",staged=>
-                {staged.gold=checked(staged.gold+gold);staged.materials=checked(staged.materials+materials);return true;}):Save();
+                bool accrued=quote.gold>0||quote.stones>0||quote.goldFraction!=Data.offlineSupplies.goldFraction||quote.stoneFraction!=Data.offlineSupplies.stoneFraction;
+                if(accrued)success=Transact(id,"offline-supplies",staged=>{OfflineSupplies.Apply(staged,quote,id);return true;});
+                else
+                {
+                    // Persist migrations and backup recovery even at the same timestamp. An empty
+                    // financial receipt would suppress that write when its request ID is reused.
+                    long previous=Data.lastSeenUtc;Data.lastSeenUtc=quote.through;
+                    success=Write(Data);if(!success)Data.lastSeenUtc=previous;else NotifyCommitted("save");
+                }
             }
             finally{settlingLocalIdle=false;}
             if(!success)return false;
-            pendingLocalIdleThrough=null;LocalIdleGoldAwarded=gold;LocalIdleMaterialsAwarded=materials;
-            if(gold>0||materials>0)OfflineMessage=Loc.F("미실행 보상 · 골드 {0:N0} / 재료 {1}",gold,materials);
+            pendingLocalIdleThrough=null;LocalIdleGoldAwarded=quote.gold;LocalIdleStonesAwarded=quote.stones;
+            if(quote.gold>0||quote.stones>0)OfflineMessage=Loc.F("미접속 보급 · 골드 {0:N0} / 강화석 {1:N0}",quote.gold,quote.stones);
             return true;
         }
+        public bool AcknowledgeOfflineSupplies(string id)
+            =>Transact("offline-seen:"+id,"offline-seen",a=>
+            {if(a.offlineSupplies.receipt?.id!=id)return false;a.offlineSupplies.receipt.acknowledged=true;return true;});
         public bool Save()
         {
             if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle&&!SettleLocalIdle())return false;
-            Data.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            if(!Write(Data))return false;NotifyCommitted("save");return true;
+            long previous=Data.lastSeenUtc;Data.lastSeenUtc=SeenNow();
+            if(!Write(Data)){Data.lastSeenUtc=previous;return false;}NotifyCommitted("save");return true;
         }
         // Stage the whole account before disk commit. Failed saves never consume the player's inputs.
         public bool Transact(string requestId,string operation,Func<AccountSave,bool> mutation)
@@ -287,7 +305,7 @@ namespace Hellscript
             {
                 if(!mutation(staged)){Error="소유권·보호 상태·재화·가방 공간을 확인해 주세요.";return false;}
                 staged.transactions.Add(new EconomyReceipt{requestId=requestId,operation=operation,committedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()});
-                ContentUnlocks.Reconcile(staged);ValidateItems(staged);staged.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                ContentUnlocks.Reconcile(staged);ValidateItems(staged);staged.lastSeenUtc=settlingLocalIdle?Math.Max(staged.lastSeenUtc,pendingLocalIdleThrough.Value):SeenNow();
             }
             catch(Exception e){Error=Loc.F("거래를 적용하지 않았습니다: {0}", e.Message);return false;}
             if(!Write(staged))return false;
@@ -301,12 +319,13 @@ namespace Hellscript
                 target.equipmentShop=source.equipmentShop;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
-            Data.attendance=staged.attendance;Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
+            Data.offlineSupplies=staged.offlineSupplies;Data.attendance=staged.attendance;Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             Data.repeatHunt=staged.repeatHunt;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
+            Data.rewardBoxes=staged.rewardBoxes;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";NotifyCommitted(operation);return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)
@@ -325,9 +344,12 @@ namespace Hellscript
         }
         bool Write(AccountSave data)
         {
+            // Direct build/preset/character writers must not bypass a failed offline interval.
+            if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle)
+            {Error=Loc.T("미접속 보급 정산을 먼저 완료해 주세요.");return false;}
             try
             {
-                GemInventory.Normalize(data);data.schema=MaximumSchemaVersion;
+                ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
                 ContentUnlocks.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
                 foreach(var hero in data.heroes)

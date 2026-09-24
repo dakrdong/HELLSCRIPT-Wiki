@@ -2,7 +2,9 @@
 
 Date: 2026-09-13 · [한국어](Idle_Display.md)
 
-Status: the desktop implementation checkpoint passed all 2,471 tests, final native initial/restart checks, 13 screenshot reviews and five same-source profile captures. Android devices and platform-specific idle policies remain unfinished.
+Current reward policy: [Idle hunting and Offline Supplies](Idle_Offline_Supplies.en.md) supersedes the former gold/materials offline allowance with gold and enhancement stones at 5% of the last normal clear rate, capped at 12 hours. Production account/server wiring remains pending.
+
+Historical status: the desktop implementation checkpoint passed all 2,471 tests, final native initial/restart checks, 13 screenshot reviews and five same-source profile captures. Android devices and platform-specific idle policies remain unfinished.
 
 ## Presentation and hunting
 
@@ -18,7 +20,7 @@ A monotonic clock accumulates exact 1/20-second intervals for the existing 0.05-
 
 Repeat hunting depends on committed results rather than the visibility of the result page. Existing delays, stop conditions, cleanup and reward commits remain authoritative. Stop after this rift finishes the current rift and its settlement before stopping repetition. Save failures or insufficient bag space remain visible on the dimmed summary.
 
-Application suspension saves and pauses combat. Returning restores the normal display and requires Resume; suspended time is not converted into catch-up combat ticks. The local development adapter retains account-wide offline gold/materials and the twelve-hour cap. Rewards and their time cursor commit together. A failed interval remains fixed, and subsequent saves or equipment transactions retry it first. Display-mode transitions themselves create no offline income. Online account ownership and server settlement remain separate work.
+Application suspension saves and pauses combat. Returning restores the normal display and requires Resume; suspended time is not converted into catch-up combat ticks. Since 2026-09-24, the local adapter grants gold and enhancement stones at 5% of the last normal clear rate, with a twelve-hour cap. Rewards and their time cursor commit together. A failed interval remains fixed, and subsequent saves or equipment transactions retry it first. Display-mode transitions themselves create no offline income. Online account ownership and server settlement remain separate work.
 
 Public gameplay stays at 1×. Internal checks exercise 1.5×/2× without unlocking those speeds for players.
 

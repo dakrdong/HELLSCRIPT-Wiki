@@ -17,6 +17,7 @@ namespace Hellscript
         static readonly InventoryOrder[] Orders={InventoryOrder.Equipment,InventoryOrder.Newest,InventoryOrder.Oldest,InventoryOrder.Grade,InventoryOrder.Level};
         static readonly string[] OrderLabels={"위치순","최근순","오래된 순","등급순","레벨순"};
         EquipmentShopWindow autoSettings;
+        ContentWindowView rewardBoxesWindow;
         bool selecting;readonly HashSet<string> selected=new HashSet<string>();
         string detailId,dialogKind;Text status;float messageUntil;string message="";
         readonly Color ink=UiTheme.Background,gold=UiTheme.Gold,pale=UiTheme.Text,muted=UiTheme.Muted,green=UiTheme.Success,red=UiTheme.Danger;
@@ -51,7 +52,7 @@ namespace Hellscript
             if(safe!=UiSafeArea.Current||language!=Loc.Language||Mathf.Abs(textScale-readingScale())>.001f)Reflow();
             if(messageUntil>0&&Time.unscaledTime>messageUntil){messageUntil=0;message="";UpdateStatus();}
         }
-        public void Close(){if(!ready)return;CancelDrag();ready=false;if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
+        public void Close(){if(!ready)return;CancelDrag();ready=false;rewardBoxesWindow?.Close();if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
         public void Escape(){if(ghost!=null){CancelDrag();return;}if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){Dismiss();return;}if(selecting){ToggleSelection();return;}Close();}
         void Reflow()
         {
@@ -90,6 +91,7 @@ namespace Hellscript
             var footer=Panel(body,"Footer","28261b","191c14","655237");Place(footer,0,height-28,width,28);
             float footerLine=0;
             Btn(footer,"전체 재화",8,footerLine+2,112,24,ShowWallet,false,10).name="inventory-wallet";
+            Btn(footer,"보상 상자",124,footerLine+2,105,24,()=>{rewardBoxesWindow?.Close();rewardBoxesWindow=RewardBoxesWindow.Open(transform.parent,store,readingScale,()=>rewardBoxesWindow=null);},false,10).name="inventory-reward-boxes";
             var classLabel=Txt(footer,Loc.T(catalog.classNames[(int)Hero.heroClass])+" · Lv."+Hero.level,width-168,footerLine,96,28,10,muted,TextAnchor.MiddleRight);
             classLabel.resizeTextForBestFit=true;classLabel.resizeTextMinSize=8;classLabel.resizeTextMaxSize=classLabel.fontSize;
             RangeToggle(footer,width-64,footerLine,"inventory-range-toggle");

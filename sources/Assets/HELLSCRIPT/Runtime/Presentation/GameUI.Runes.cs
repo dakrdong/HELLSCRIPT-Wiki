@@ -40,6 +40,7 @@ namespace Hellscript
         {var r=Rect("Icon "+glyph,parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();raw.texture=RuneV13Art.Atlas;raw.uvRect=RuneV13Art.Glyph("g-"+glyph);raw.color=color??RuneText;raw.raycastTarget=false;}
         public void ShowRunes()
         {
+            if(!RequireContent(ContentUnlocks.Rune))return;
             if(game.ComparisonRun){if(game.Active)ShowComparisonConditions();ShowToast(TrainingComparisonSession.RuneLockedMessage);return;}
             if(runeCanvas!=null&&runeCanvas.editor!=null){runeViews[runeWeapon]=new Vector3(runeCanvas.pan.x,runeCanvas.pan.y,runeCanvas.zoom);runeFocus=runeCanvas.focusRegion;runeOverview=runeCanvas.overview;}
             if(!runeSession){runeSession=true;runeWasPaused=game.Combat?.State.paused??false;runeWeapon=RuneMasteryCatalog.EquippedWeapon(game.Store.Data.Hero)??"sword";ReloadRuneDraft();}

@@ -1,0 +1,95 @@
+{
+  "date": "2026-09-24",
+  "branch": "codex/balance-1000-analysis",
+  "sourceBase": "834914d279255783231a93490a92d326076343c0",
+  "schema": 12,
+  "boxDefinitions": 96,
+  "art": {
+    "count": 96,
+    "format": "RGBA PNG, 256x256 + editable SVG",
+    "provenance": "code-authored vectors",
+    "imageModelUsed": false
+  },
+  "unity": {
+    "version": "6000.6.0f1",
+    "editMode": {
+      "total": "158",
+      "passed": "158",
+      "failed": "0",
+      "skipped": "0"
+    },
+    "build": "macOS Development, succeeded, 0 errors",
+    "runtimeChecks": 25,
+    "layoutCombinations": 20,
+    "resolutions": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "readingScales": [
+      100,
+      150
+    ],
+    "inputEvidence": "Raycast-validated synthetic pointer events through Unity EventSystem in the macOS Player. Not physical device input.",
+    "actualCombatRuns": 0,
+    "physicalMobileTested": false,
+    "userSaveModified": false
+  },
+  "pythonBalanceTests": 22,
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Runtime/Core/RewardBoxes.cs": "7b4178f8ecbf8bcfbf3a69a07eb36d87dc9ccfa8ceee225a20f80911511a9012",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.RewardBoxes.cs": "da74916edafcf69ce3b4785b3fdff29aa35dc934dfebdb7dd291ecbebbbfad24",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.cs": "ae17ee0f1f281b93b22dd43d55e84f5af816206d2fef69f35f6ec6ebc107eca4",
+    "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs": "b691e3c1a8d1de93492d394a1ace401ae82b570571fdf25d6b765f6009c7136f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs": "cfe35aa33a7ac07ec44fa4d5aef67fe505755d26879cc498ed54452992dd0750",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardList.cs": "680eded53a2fa71f1c5d0849e5399332fb2dc03753a8ccb5e27b6beec5550f08",
+    "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs": "a8386029b3b3b6c8192ba843438f0d3a58d8ee0a3eb15d114bb9c34952ae75c0",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRewardBoxSmoke.cs": "ba7de671204c9ac4dd2596c455aa15e4c41beba5d5a669463a873a5d32f67a09",
+    "Assets/HELLSCRIPT/Resources/Data/RewardBoxes.json": "c60e7e50355444689f50b20cd80d82d97cf40eb863802a1e7d841829cb1b0033",
+    "Assets/HELLSCRIPT/Tests/Editor/RewardBoxTests.cs": "71eee0f828b528949ce9fab7462fa3d45fe89d84e5738d8ca29d2b23fd436b1c",
+    "tools/generate_reward_boxes.py": "0985585ae6a3d598b1c6a7cea946dcf6c2af5267c63c4ed373a5ef7b83f07d0d"
+  },
+  "publication": "Development branch; public wiki awaits main integration",
+  "sharedUi": {
+    "contract": "passed",
+    "testsPassed": 9
+  },
+  "wiki": {
+    "build": "passed",
+    "check": "passed",
+    "pythonTestsPassed": 10,
+    "uiChecks": "passed",
+    "pages": 338,
+    "databases": 30,
+    "records": 3950,
+    "boxRecords": 96,
+    "firstClearRecords": 1000,
+    "uniqueImageFiles": 137,
+    "browser": "Codex In-app Browser, localhost read-only public mirror",
+    "browserBoxImages": 96,
+    "brokenBoxImages": 0,
+    "browserConsoleErrors": 0,
+    "publicDeployment": false
+  }
+}

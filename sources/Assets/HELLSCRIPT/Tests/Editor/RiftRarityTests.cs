@@ -32,14 +32,14 @@ namespace Hellscript.Tests
         }
 
         [Test]
-        public void FirstStageAndNonpositiveStagesKeepEveryExistingBaseline()
+        public void EarlyStagesExcludeLegendaryAndKeepNonlegendaryRatios()
         {
             foreach (var source in Sources)
-            foreach (int stage in new[] { int.MinValue, -1, 0, 1 })
+            foreach (int stage in new[] { int.MinValue, -1, 0, 1, 10, 29 })
             {
                 var probabilities = RiftRarity.Get(source, stage);
                 for (int grade = 0; grade < 4; grade++)
-                    Assert.AreEqual(Baselines[(int)source][grade], probabilities[grade], 1e-12, source + " / " + stage + " / " + grade);
+                    Assert.AreEqual(ExpectedProbabilities(source, stage)[grade], probabilities[grade], 1e-12, source + " / " + stage + " / " + grade);
             }
         }
 
@@ -57,6 +57,19 @@ namespace Hellscript.Tests
                 var halfway = RiftRarity.Get(source, 50);
                 Assert.AreEqual((Baselines[(int)source][3] + Caps[(int)source]) / 2, halfway.Legendary, 1e-12);
             }
+        }
+        [Test] public void RiftEquipmentBoundaryExcludesBothUniquePoolsBeforeThirty()
+        {
+            uint rng=7731;bool legendary=false,set=false;
+            for(int n=0;n<500;n++)
+            {
+                var early=Economy.CreateRiftItem(HeroClass.Warrior,n%8,3,60,29,ref rng);
+                Assert.AreEqual(2,early.rarity);Assert.IsTrue(string.IsNullOrEmpty(early.special));
+                var allowed=Economy.CreateRiftItem(HeroClass.Warrior,n%8,3,30,30,ref rng);
+                Assert.AreEqual(3,allowed.rarity);
+                if(string.IsNullOrEmpty(ItemCatalog.Unique(allowed.special).setId))legendary=true;else set=true;
+            }
+            Assert.IsTrue(legendary&&set);
         }
 
         [Test]
@@ -108,8 +121,8 @@ namespace Hellscript.Tests
             foreach (int stage in new[] { 1, 10, 50, 1000, int.MaxValue })
             {
                 var p = RiftRarity.Get(source, stage);
-                Assert.AreEqual(3, p.Roll(0));
-                Assert.AreEqual(3, p.Roll(p.Legendary - 1e-12));
+                Assert.AreEqual(p.Legendary > 0 ? 3 : 2, p.Roll(0));
+                if (p.Legendary > 0) Assert.AreEqual(3, p.Roll(p.Legendary - 1e-12));
                 Assert.AreEqual(2, p.Roll(p.Legendary));
                 if (p.Magic > 0) Assert.AreEqual(1, p.Roll(p.Legendary + p.Rare));
                 if (p.Common > 0) Assert.AreEqual(0, p.Roll(p.Legendary + p.Rare + p.Magic));
@@ -129,7 +142,7 @@ namespace Hellscript.Tests
             double[] caps = { .12, .30, .50 };
             foreach (var source in Sources)
             {
-                Assert.AreEqual((Baselines[(int)source][3] + caps[(int)source]) / 2, RiftRarity.Get(source, 10, parameters).Legendary, 1e-12);
+                Assert.AreEqual(Baselines[(int)source][3] + (caps[(int)source] - Baselines[(int)source][3]) * 29d / 38d, RiftRarity.Get(source, 30, parameters).Legendary, 1e-12);
                 Assert.AreEqual(ExpectedProbabilities(source, 10)[3], RiftRarity.Get(source, 10).Legendary, 1e-12);
             }
             Assert.AreEqual(49d, RiftRarityBalance.Current.GrowthHalfSpan);
@@ -305,12 +318,13 @@ namespace Hellscript.Tests
         public void SweepReceiptSurvivesReconnectionAndDoesNotRerollAtANewHighestStage()
         {
             var store = new GameStore(directory, catalog);
-            store.Data.Hero.highestClear = 50;
+            store.Data.Hero.highestClear = 60; // Current sweep gate; this test covers receipt idempotence.
             uint rng = 56199;
             Assert.IsTrue(Economy.Sweep(store.Data, "saved-rarity-sweep", ref rng));
             Assert.IsTrue(store.Save());
             var loaded = new GameStore(directory, catalog);
             loaded.Data.Hero.highestClear = 300;
+            ContentUnlocks.Reconcile(loaded.Data); // Settle the fixture's newly granted stage before testing the receipt.
             string before = JsonUtility.ToJson(loaded.Data);
             uint settledRng = rng;
             Assert.IsFalse(Economy.Sweep(loaded.Data, "saved-rarity-sweep", ref rng));
@@ -319,11 +333,12 @@ namespace Hellscript.Tests
         }
 
         [Test]
-        public void OfflineSettlementStillAwardsOnlyGoldAndCommonMaterials()
+        public void OfflineSettlementAwardsGoldAndStonesWithoutEquipmentOrMaterials()
         {
             Directory.CreateDirectory(directory);
             var account = GameStore.NewAccount();
             account.Hero.highestClear = 1000;
+            account.offlineSupplies = null; // Pre-supply save migration.
             account.lastSeenUtc = DateTimeOffset.UtcNow.ToUnixTimeSeconds() - 3600;
             ContentUnlocks.Reconcile(account);
             account.contentUnlocks.offlineActivatedUtc = account.lastSeenUtc;
@@ -331,8 +346,9 @@ namespace Hellscript.Tests
             int[] cores = (int[])account.cores.Clone();
             File.WriteAllText(Path.Combine(directory, "hellscript-local-v1.json"), JsonUtility.ToJson(account));
             var loaded = new GameStore(directory);
-            Assert.GreaterOrEqual(loaded.LocalIdleGoldAwarded, 40200);
-            Assert.GreaterOrEqual(loaded.LocalIdleMaterialsAwarded, 205);
+            Assert.GreaterOrEqual(loaded.LocalIdleGoldAwarded, 147210);
+            Assert.GreaterOrEqual(loaded.LocalIdleStonesAwarded, 1955);
+            Assert.AreEqual(account.materials, loaded.Data.materials);
             CollectionAssert.AreEqual(inventories, loaded.Data.heroes.SelectMany(h => h.inventory).Select(i => ItemFingerprint(i)));
             CollectionAssert.AreEqual(cores, loaded.Data.cores);
             Assert.IsEmpty(loaded.Data.warehouse);
@@ -399,7 +415,7 @@ namespace Hellscript.Tests
         public void RepeatedRerollTransactionsDebitTheSameCost()
         {
             var account = GameStore.NewAccount();
-            account.Hero.highestClear = 8;
+            account.Hero.highestClear = 35; // Current reroll gate; item level still owns the cost.
             account.gold = 1000000;
             uint rng = 12983;
             var item = ItemGenerator.Create(HeroClass.Warrior, 6, 2, 30, ref rng);
@@ -447,7 +463,7 @@ namespace Hellscript.Tests
         {
             double t = Math.Max(0d, (double)stage - 1), q = t / (t + 49d);
             double[] baseline = Baselines[(int)source];
-            double p = baseline[3] + (Caps[(int)source] - baseline[3]) * q;
+            double p = stage < 30 ? 0 : baseline[3] + (Caps[(int)source] - baseline[3]) * q;
             return new[] { baseline[0] * (1 - p) / (1 - baseline[3]), baseline[1] * (1 - p) / (1 - baseline[3]), baseline[2] * (1 - p) / (1 - baseline[3]), p };
         }
 

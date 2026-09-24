@@ -1,0 +1,178 @@
+{
+  "date": "2026-09-24",
+  "branch": "codex/balance-1000-analysis",
+  "baseCommit": "3df6cbb2",
+  "unity": "6000.6.0f1",
+  "editorRoute": "Coplay MCP found only the original checkout; isolated worktree verified through existing Unity batch tools and standalone macOS Player.",
+  "editMode": {
+    "focusedPassed": 216,
+    "supplementaryPassed": 24,
+    "failed": 0,
+    "skipped": 0
+  },
+  "macOS": {
+    "developmentBuild": "Succeeded",
+    "buildErrors": 0,
+    "nativeChecks": 28,
+    "displayCombinations": 20,
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textScale": [
+      100,
+      150
+    ],
+    "naturalSaveReadback": true,
+    "nativePointerFullAttributes": "Observed with CUA window input after focusing; no equipment or currency mutation requested.",
+    "nativeStartupGoldExcluded": 10
+  },
+  "naturalProgression": {
+    "Warrior": {
+      "attempts": 10,
+      "clears": 10,
+      "failures": 0,
+      "deaths": 0,
+      "timeouts": 0,
+      "farms": 0,
+      "days": 1,
+      "riftSeconds": 1303.849999999362,
+      "failedRiftSeconds": 0.0,
+      "wallSeconds": 201.0644772,
+      "calendarRestSeconds": 0.0,
+      "target": 10,
+      "earlySeconds": 481.35,
+      "finalLevel": 13,
+      "riftEquipment": {
+        "magic": 31,
+        "rare": 50,
+        "common": 6
+      },
+      "allLedgersReconciled": true
+    },
+    "Ranger": {
+      "attempts": 5,
+      "clears": 5,
+      "failures": 0,
+      "deaths": 0,
+      "timeouts": 0,
+      "farms": 0,
+      "days": 1,
+      "riftSeconds": 516.8500000000777,
+      "failedRiftSeconds": 0.0,
+      "wallSeconds": 69.0570639,
+      "calendarRestSeconds": 0.0,
+      "target": 5,
+      "earlySeconds": 516.85,
+      "finalLevel": 8,
+      "riftEquipment": {
+        "rare": 24,
+        "magic": 7,
+        "common": 2
+      },
+      "allLedgersReconciled": true
+    },
+    "Mage": {
+      "attempts": 5,
+      "clears": 5,
+      "failures": 0,
+      "deaths": 0,
+      "timeouts": 0,
+      "farms": 0,
+      "days": 1,
+      "riftSeconds": 545.5000000000516,
+      "failedRiftSeconds": 0.0,
+      "wallSeconds": 66.5568469,
+      "calendarRestSeconds": 0.0,
+      "target": 5,
+      "earlySeconds": 545.5,
+      "finalLevel": 8,
+      "riftEquipment": {
+        "rare": 23,
+        "magic": 7,
+        "common": 2
+      },
+      "allLedgersReconciled": true
+    }
+  },
+  "model": {
+    "testsPassed": 22,
+    "parity": true,
+    "stages": 1000,
+    "riftMinutesDaily": 120,
+    "days": 180,
+    "populationWinRateVerified": false
+  },
+  "sharedUI": {
+    "ownershipCheck": "passed",
+    "testsPassed": 9
+  },
+  "importOnlyFilesRestored": 507,
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Runtime/Core/RiftRarity.cs": "fd2c1f226f4ca16b23c6ffbde20e73eb754be74874d1aff12604ef13599193d3",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftSurface.cs": "ec75056a8ac7fa2c972dd90532ae961e2dd48adafcf44a573b248b15a3e0ff44",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftLayout.cs": "91cf59bf49cda8d4e9cc186c9494dbff4fe7b090277611b9044eff50f7d3d85b",
+    "Assets/HELLSCRIPT/Runtime/Core/RewardBoxes.cs": "37edd861617a9b1ed11263a8f8951f63a0d1e0d6b1c910172807635488f44b6f",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs": "d11c1b29dc070dec2f242b7f220b3e9f269d3e4088bcecb8e61554e33abc4584",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftGenerator.cs": "5486fbe9a242deb4088aefff3e7c722c7573e7670a0dd024524a5c5fc57c5253",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftCrossRoutes.cs": "d03dba0062f6f3fc172edbed356281e83f5b900417bb6403a461547d29c2c279",
+    "Assets/HELLSCRIPT/Runtime/Core/Economy.cs": "d54cb5a81d54fab92f813454c79097fde1e7047744578ddd24a60c77290d1d09",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftFieldContent.cs": "5f04c38e9cd0795c4672cc0cf52b2f07a1c2b5b86cad1fdb317bd388d2c99c3f",
+    "Assets/HELLSCRIPT/Runtime/Core/IntroductoryRift.cs": "8ed549f15a78d70ab7ae20bb2adebf78efd74ea4c89a3ebb58f91880fd477ddd",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftRarityBalance.cs": "b69465887892956b23c71ccd7b0ff1416f715ca9623081d904f80a203a45b9a8",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs": "21dd608f7c668bcd44367aaf333f52dd2b368a176ebe37cc8ef3ebed0dc28a5c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftRewards.cs": "1b7091d5e56119c23c423c5f094fccecffece5248e6c55df1c24867128996e75",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardList.cs": "173163dfb499eb7b4d6523ce073dc76c3319c177d8cd63c50f2c0a0d60bca376",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftUnlockSmoke.cs": "e5e963577385cd4221c5241d89366a38b6ebb6727eeaa3a0c6647614504f57d4",
+    "Assets/HELLSCRIPT/Tests/Editor/RewardBoxTests.cs": "703d85932ab15d08b77335416e64850aad53327753dda4319ff6dbf468afd073",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftContentUnlockTests.cs": "4b24bddd7ea02ff20efc962d0235574359cb4df8f5d1f58324d2bf4f158bf30e",
+    "Assets/HELLSCRIPT/Tests/Editor/GambleShopTests.cs": "d3aa275cb4d942eeda0614cbc20893c32a6e850619c2940724894071885608d1",
+    "Assets/HELLSCRIPT/Tests/Editor/ContentUnlockTests.cs": "52722acfdf0af3ee5b4b11a4a79d7b459ed712bd853bf27353903254b8ee5c43",
+    "Assets/HELLSCRIPT/Tests/Editor/ItemQualityTests.cs": "d3889318beb33bdc9e7cd2c91d30a37dc1c95efb3888c6b49a89a2411f41b038",
+    "Assets/HELLSCRIPT/Tests/Editor/IntroductoryRiftTests.cs": "d3ce7f3de028b47856f3d9995a71c1cb1ae23008f1312461d86c05a7b7d4a8be",
+    "Assets/HELLSCRIPT/Tests/Editor/OrganicRiftTests.cs": "ae50a6cca8f1306e8979e823c4904d68a4502c989e019b4f37a7153b23c33f11",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftRarityTests.cs": "3745b7e2b0d95afca600431c46cf4ac72fc00624927f2393613ded6e027d1726",
+    "Assets/HELLSCRIPT/Tests/Editor/ItemizationTests.cs": "7444bb0933865a7f14c889da543e2ffba04cd3057fcc98006a84a00fc4fea16e",
+    "Assets/HELLSCRIPT/Editor/NaturalRiftProgressionAudit.cs": "4d75e1bae7ebf9755ed417ef1a11d30188522ddb1c0b4d2e50bd6c2d3bf4c225",
+    "Assets/HELLSCRIPT/Editor/RiftValidation.cs": "0d934c0f666eff19f5ad9b9a6a9ff0fdf8033c438703df297910a780329b37c8",
+    "Assets/HELLSCRIPT/Resources/ContentUnlocks.json": "9c99ea127a34ec65d9e79d7ea701247949f853b944628d17744df286a698d67f",
+    "Assets/HELLSCRIPT/Resources/Data/RewardBoxes.json": "d406c6cd8995285c31cf14dd12877840291b204aca95bc81dfce749bbd542d2d",
+    "tools/balance_1000.py": "375691d4d588117baff9c08156150870cad2f710a23787ad9fcbdb18a4c01d9e",
+    "tools/report_natural_rift_progression.py": "58949f1c85c8f76fa5db841c7965723adf08244fcef4d4d5d2279bdb3c42d01a",
+    "Docs/Design/Balance1000/projection.json": "9bd615b4e378dda93dcc28c8deacbe73803f08ec1343ff8e4a1d4f274a349c00"
+  },
+  "publication": "Source branch; not merged into main or published to public wiki.",
+  "limitations": [
+    "Three continuous predefined-seed class routes; not a population survival estimate.",
+    "CPU-accelerated production-core play excludes town management time.",
+    "Native unlock UI uses an isolated prepared fixture, distinct from naturally earned accounts.",
+    "Physical mobile and natural progression to R1000 not tested.",
+    "Full proposed R1–1000 drop, enemy and growth-cost curves remain unapplied."
+  ],
+  "archive": {
+    "file": "raw-evidence.zip",
+    "sha256": "3871eac4795b27dd71012035b91d3f31dbadb92baf71a0a89631c0270b6e6f48"
+  }
+}

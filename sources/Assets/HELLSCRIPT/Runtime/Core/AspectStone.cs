@@ -24,7 +24,7 @@ namespace Hellscript
         public static AspectProgress Progress(AccountSave account,string id)=>account?.aspects?.Find(p=>p.id==id);
         public static int Count(AccountSave account,string id)=>Progress(account,id)?.count??0;
         public static int Level(AccountSave account,string id)=>Progress(account,id)?.level??0;
-        public static bool CanUpgrade(AccountSave account,string id)=>Level(account,id)>0&&Level(account,id)<Attainable(Count(account,id));
+        public static bool CanUpgrade(AccountSave account,string id)=>ContentUnlocks.Has(account,ContentUnlocks.Aspect)&&Level(account,id)>0&&Level(account,id)<Attainable(Count(account,id));
         public static int UpgradableCount(AccountSave account)=>account.aspects.Count(p=>CanUpgrade(account,p.id));
         public static void Normalize(AccountSave account)
         {
@@ -67,7 +67,7 @@ namespace Hellscript
         {heroId=account.Hero.id;itemId=item?.id;aspectId=aspect;level=AspectStone.Level(account,aspect);fingerprint=item==null?"":JsonUtility.ToJson(item);}
         public bool Apply(AccountSave account)
         {
-            if(account.suspendedRun!=null||account.Hero.id!=heroId||AspectStone.Definition(aspectId)==null||level<1||level!=AspectStone.Level(account,aspectId))return false;
+            if(!ContentUnlocks.Has(account,ContentUnlocks.Aspect)||account.suspendedRun!=null||account.Hero.id!=heroId||AspectStone.Definition(aspectId)==null||level<1||level!=AspectStone.Level(account,aspectId))return false;
             var item=account.Hero.inventory.Find(i=>i.id==itemId);
             if(!AspectStone.Eligible(item)||!item.equipped||JsonUtility.ToJson(item)!=fingerprint||AspectStone.PowerId(item)==aspectId&&AspectStone.PowerLevel(item)>=level)return false;
             item.rarity=3;item.aspectId=aspectId;item.aspectLevel=level;

@@ -1,5 +1,7 @@
 # Content unlock implementation and validation
 
+> Historical implementation record. The current gates and migration policy are documented in [Rift-based content unlocks](../Design/HELLSCRIPT_Rift_Content_Unlocks.en.md).
+
 2026-09-12. HELLSCRIPT v0.1 test draft; these are not externally verified game values.
 
 The actual project code, existing GDD and original workbook were updated. The current GDD was extended, not replaced with its attachment snapshot. The workbook preserves all 25 original sheets, 23 tables, 3,397 existing populated cells, formulas, styles and controls, and adds two sheets for unlock rules and U01–U30 validation. Runtime and workbook rules originate in `Assets/HELLSCRIPT/Resources/ContentUnlocks.json`.

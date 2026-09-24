@@ -242,7 +242,12 @@ namespace Hellscript
         public static Item CreateItem(HeroClass c,int slot,int rarity,int level,ref uint rng,string id=null)
             =>ItemGenerator.Create(c,slot,rarity,level,ref rng,id);
         public static Item CreateRiftItem(HeroClass c,int slot,int rarity,int level,int stage,ref uint rng,string id=null)
-        {var item=ItemGenerator.Create(c,slot,rarity,level,ref rng,id,riftStage:stage);item.acquisitionKind="rift";return item;}
+        {
+            // All natural rift sources, including pre-rolled field chests, share this boundary.
+            // Sets belong to rarity 3, so capping the roll also excludes the entire set pool.
+            var item=ItemGenerator.Create(c,slot,RiftRarityBalance.AllowedRarity(rarity,stage),level,ref rng,id,riftStage:stage);
+            item.acquisitionKind="rift";return item;
+        }
         public static bool Referenced(HeroSave hero,Item item)=>
             (hero.build.equipmentIds?.Contains(item.id)??false)||hero.presets.Any(p=>p?.equipmentIds?.Contains(item.id)??false);
         public static bool Protected(HeroSave hero,Item item)=>item.locked||item.equipped||Referenced(hero,item)||GemCatalog.HasGem(item);

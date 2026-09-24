@@ -34,6 +34,7 @@ namespace Hellscript
             else BigButton(content,"균열에 진입",()=>game.Begin(),true);
             bool sweepable=h.highestClear>=1&&sweeps<3&&Economy.FreeSlots(h)>=3;
             Note(content,sweepable?"소탕은 최고 실클리어 단계의 보상을 즉시 정산합니다. 하루 3회, 가방 3칸이 필요합니다.":"소탕에는 실클리어 기록, 남은 소탕 횟수, 가방 3칸이 필요합니다.",19,66,sweepable?pale:muted);
+            ContentButton(ContentUnlocks.Offline,"미접속 보급",ShowOfflineSupplies);
             ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowRiftKeeper));
             ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
             ContentButton(ContentUnlocks.Train,"같은 조건으로 A/B 비교",ShowComparisonPicker);

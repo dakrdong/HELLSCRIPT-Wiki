@@ -41,7 +41,7 @@ namespace Hellscript
             game.Begin(seed:849);game.Combat.Abandon();game.ReturnTown();
             Require(ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Train),"Failed first attempt did not unlock training.");
             Require(!ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Enhance),"Failure unlocked enhancement.");
-            game.Store.Data.Hero.highestClear=15;ContentUnlocks.Reconcile(game.Store.Data);game.Save();
+            game.Store.Data.Hero.highestClear=ContentUnlocks.Rules.features.Max(f=>f.stage);ContentUnlocks.Reconcile(game.Store.Data);game.Save();
             game.UI.ShowContentUnlocks();yield return Capture("unlocked-en-bottom",720,1280,0);
             game.UI.ShowContentGuide(ContentUnlocks.Reroll);yield return Capture("replay-guide-en",720,1280);
             var skip=game.UI.GetComponentsInChildren<Button>().First(b=>b.GetComponentInChildren<Text>()?.text==Loc.T("안내 확인 / 건너뛰기"));skip.onClick.Invoke();

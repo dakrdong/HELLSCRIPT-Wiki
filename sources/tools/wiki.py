@@ -161,9 +161,9 @@ def build_databases():
     unlocks = json.loads(read(unlock_path))
     unlock_rows = [record(f['id'],f['name'],'계정 공통',f['guide'],
         {'조건': '마을 도착부터 언제든 이용 가능' if f['id']=='UL01_TRAIN' else f"최고 실제 보상 확정 클리어 >= {f['stage']}단",
-         '조기 해금':f['early'] or '없음','권한 유지':'소비·안내 건너뛰기 후에도 유지','수치 상태':unlocks['status']},unlock_path,
-        status='테스트 초안',related=['content-unlock-expansion','content-unlock-spec-v0.1']) for f in unlocks['features']]
-    data.append(db('content-unlocks','콘텐츠 해금','실제 게임의 공통 JSON을 읽습니다. 보석 획득·소켓·합성은 로컬 플레이에 연결했으며, 서버 동기화는 후속 범위입니다.',unlock_rows))
+         '조기 해금':f['early'] or '없음','권한 유지':'기존 권한 보존 · 소비·안내·상자 수령과 독립','수치 상태':unlocks['status']},unlock_path,
+        status='개발 브랜치 구현',related=['rift-content-unlocks','rift-content-unlocks.en']) for f in unlocks['features']]
+    data.append(db('content-unlocks','콘텐츠 해금','14개 기능의 계정 공통 개방 조건입니다. 최초 보상 팝업과 실제 실행 권한이 같은 JSON을 사용하며, 기존 계정의 이용 권한은 보존합니다.',unlock_rows))
     passive_slots = ' / '.join(f'Lv.{level}: {i+1}개' for i,level in enumerate(unlocks['passiveLevels']))+' (적법한 기존 슬롯 보존)'
     names=string_array(catalog_path,'Passives'); desc=string_array(catalog_path,'PassiveDescriptions'); rows=[]
     for i,(name,description) in enumerate(zip(names,desc)):
@@ -287,13 +287,15 @@ def build_databases():
             ' · '.join(t['cells'][1:]),t['fields'],DESIGN+'HELLSCRIPT_Rift_Exploration_Detail.md',t['line'],status='기획·구현 기록',
             refs=[source_ref(CORE+'RiftFieldContent.cs')],related=['field-expansion','rift-exploration-detail'],resource='procedural-interactions'))
     data.append(db('field','상자·성소','CH01–CH03과 SH01–SH02입니다. 초기 기획의 구현 순서와 현재 적용 여부는 개발 기록을 함께 봅니다.',rows))
-    expected={'content-unlocks':9,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':30,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':12,'elites':6,'bosses':3,'rooms':12,'field':5}
+    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':30,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':12,'elites':6,'bosses':3,'rooms':12,'field':5}
     for table in data:
         if len(table['rows']) != expected[table['id']]: raise ValueError('Review changed catalog count: '+table['id'])
     import wiki_runes
     data.extend(wiki_runes.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db, constructors=constructors)))
     import wiki_potions
     data.extend(wiki_potions.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
+    import wiki_reward_boxes
+    data.extend(wiki_reward_boxes.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
     import wiki_attendance
     data.extend(wiki_attendance.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
     return data
@@ -323,6 +325,14 @@ def build_resources(databases):
                    IMPL+'Asset_Provenance.md',status='임시 사용',image={'file':filename},assetPath=path,
                    refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/'+('WorldView.Rift.cs' if filename=='RiftStone.png' else 'GameUI.cs'))],
                    related=['asset-provenance','equipment-atlas-prompt' if filename=='EquipmentAtlas.png' else 'rift-stone-prompt' if filename=='RiftStone.png' else 'image-prompts']))
+    box_art=json.loads(read('Docs/Art/RewardBoxes/manifest.json'))
+    for icon in box_art['icons']:
+        path=ART+'RewardBoxes/'+icon['id']+'.png';raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+        rows.append(record('asset-reward-box-'+icon['id'],icon['id'],'보상 상자 아이콘','보상 상자의 등급·내용물·보석 단계를 표시합니다.',
+            {'해상도':'256 × 256','색상 모드':'RGBA','완전 투명 픽셀':icon['transparentPixels'],'SHA-256':digest(raw),
+             '제작 방식':box_art['provenance'],'SVG 원본':'Docs/Art/RewardBoxes/'+icon['id']+'.svg'},
+            'Docs/Art/RewardBoxes/'+icon['id']+'.svg',status='현재 등록',image={'file':'RewardBoxes/'+icon['id']+'.png'},assetPath=path,
+            content={'db':'reward-boxes','id':icon['id']},related=['reward-boxes','reward-boxes.en']))
     title_path=ART+'Title/TitleSanctuary.png'
     title_raw=(ROOT/title_path).read_bytes();INPUTS[title_path]=digest(title_raw)
     title_meta=read(title_path+'.meta')
@@ -546,6 +556,18 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'rift-content-unlocks':('전투와 성장','균열 단계별 콘텐츠 개방','신규 계정의 14개 콘텐츠 개방 단계, 최초 보상 팝업, 실행 권한과 기존 계정 이관 규칙입니다.'),
+ 'rift-content-unlocks.en':('전투와 성장','Rift-based content unlocks','Fourteen account service gates, first-clear guidance, execution guards and preserved legacy entitlements.'),
+ 'reward-boxes':('장비와 빌드','지급용 보상 상자와 최초 보상','96종 상자, 계정 최초 보상, 저장·개봉 거래, 투명 아이콘의 구현과 검증 범위입니다.'),
+ 'reward-boxes.en':('장비와 빌드','Consumable reward boxes and first clears','96 box definitions, account first clears, atomic opening and transparent vector artwork.'),
+ 'rift-rewards-1000':('전투와 성장','균열별 드랍·재료·최초 클리어 보상','1~1000단계 장비 등급·보석·룬·재료 수급, 보스와 완료 보상, 첫 보상 및 분해 예산의 기획 검토안입니다.'),
+ 'rift-rewards-1000.en':('전투와 성장','Rift drops and first-clear rewards','Proposed per-stage equipment rarity, gems, runes, currencies, boss/completion splits and first-clear gifts.'),
+ 'rift-reward-tables':('전투와 성장','균열 보상 계산표','등급별 확률과 판당·일일 획득량, 보스·반복·첫 보상 계산표입니다. 게임 미반영입니다.'),
+ 'rift-reward-tables.en':('전투와 성장','Rift reward calculations','Generated rarity, per-run and daily quantities, currency splits and first-clear budgets; not applied to gameplay.'),
+ 'balance-1000':('전투와 성장','균열 1~1000 수치 밸런스 검토안','하루 2시간·180일 성장 가정, 현재 능력치 계산, 콘텐츠 해금·기여도·적 난이도와 재화 예산입니다. 게임에는 미반영된 기획안입니다.'),
+ 'balance-1000.en':('전투와 성장','Rift 1–1000 balance proposal','Current-stat evidence and a provisional two-hour, 180-day progression model; not applied to the game.'),
+ 'balance-1000-tables':('전투와 성장','균열별 능력치·기여도 계산표','균열 1~1000 검토안의 주요 구간 수치와 성장 콘텐츠별 DPS 비중입니다.'),
+ 'balance-1000-tables.en':('전투와 성장','Rift balance milestone calculations','Milestone targets and DPS attribution generated by the provisional rift 1–1000 planning model.'),
  'completed-work-merge':('후속 개발 기록','완료 작업·이미지 리소스 통합','남은 작업 이력과 이미지 후보를 통합하고 저장 호환성·전체 검사·macOS 실행을 검증한 기록입니다.'),
  'completed-work-merge.en':('후속 개발 기록','Completed work and image-resource integration','Integration history, candidate artwork, save compatibility, full regression and native macOS evidence.'),
  'aspect-runestone':('장비와 빌드','위상 각인석·위상 성장','전설 분해 자동 수집, 123종의 다섯 레벨, 수동 레벨업과 장비 각인 규칙입니다.'),
@@ -769,7 +791,7 @@ def build_pages():
         public=path.startswith('Wiki/public-content/')
         if public: category,summary='공개 안내',metadata.get(ident,{}).get('summary','게임의 기본 개념을 소개합니다.')
         status='현재 정리' if path.startswith('Wiki/content/') else '당시 기록' if ident in ('playable-build','validation-report') else '기획 초안' if ident=='content-catalog' else '기획 기준' if '/Design/' in path else '개발 기록'
-        if ident in ('idle-mode-detail','class-set-reference','class-set-reference.en'):status='기획 검토안'
+        if ident in ('idle-mode-detail','class-set-reference','class-set-reference.en','balance-1000','balance-1000.en','balance-1000-tables','balance-1000-tables.en','rift-rewards-1000','rift-rewards-1000.en','rift-reward-tables','rift-reward-tables.en'):status='기획 검토안'
         if public:status='공개 안내'
         notice='이 문서는 최초 빌드 당시 기록입니다. 최신 상태는 현재 개발 현황과 후속 개발 기록을 확인하세요.' if status=='당시 기록' else '기존 178개 정의를 보존한 초기 카탈로그입니다. 세트 등 현재 수량은 DB와 후속 명세를 따릅니다.' if ident=='content-catalog' else ''
         date_match=re.search(r'(?:정리 기준일|갱신일|작성일|확인일|As of|Updated on|Updated|Verified)[: ]+(\d{4}-\d{2}-\d{2})',body)
@@ -832,7 +854,7 @@ def build():
     INPUTS.clear();pages=build_pages();databases=build_databases();resources=build_resources(databases)
     databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_evidence())
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
-    for path in ['tools/wiki.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
+    for path in ['tools/wiki.py','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,
              'inputManifest':dict(sorted(INPUTS.items()))}
     old=SITE/'data.json'
@@ -861,6 +883,9 @@ def build():
     (SITE/'media/Attendance').mkdir(parents=True,exist_ok=True)
     for file in (ROOT/ART/'Attendance').glob('*.png'):
         shutil.copyfile(file,SITE/'media/Attendance'/file.name)
+    (SITE/'media/RewardBoxes').mkdir(parents=True,exist_ok=True)
+    for file in (ROOT/ART/'RewardBoxes').glob('*.png'):
+        shutil.copyfile(file,SITE/'media/RewardBoxes'/file.name)
     report=validate(dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')
@@ -910,7 +935,7 @@ def validate(dataset):
     return {'result':'passed','generatedAt':dataset['generatedAt'],'pages':len(dataset['pages']),
             'databases':len(dataset['databases']),'records':sum(len(d['rows']) for d in dataset['databases']),
             'recordsByDatabase':{d['id']:len(d['rows']) for d in dataset['databases']},'documentLinks':links,
-            'imageReferences':images,'uniqueImageFiles':len({r['assetPath'] for d in dataset['databases'] if d['id']=='resources' for r in d['rows'] if r['category']=='이미지 원본'}),
+            'imageReferences':images,'uniqueImageFiles':len({r['image']['file'] for d in dataset['databases'] for r in d['rows'] if r.get('image')}),
             'sourceFiles':len(dataset['inputManifest']),'gameExecution':'not performed; preserved reports only'}
 
 def check():

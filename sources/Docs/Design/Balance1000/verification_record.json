@@ -1,0 +1,308 @@
+{
+  "date": "2026-09-24",
+  "scope": "v0.5 planning with implemented introductory R1–5 maps/combat, R25 purchases, R30 rift legendary/set rewards and R35 rerolls",
+  "fullCombatAndDropTuningApplied": false,
+  "firstClearBoxesImplemented": true,
+  "publicDeploymentPerformed": false,
+  "publicationState": "Development branch only; public wiki after main integration",
+  "model": {
+    "stages": 1000,
+    "unitTestsPassed": 22,
+    "balanceTestsPassed": 10,
+    "rewardTestsPassed": 12,
+    "unitTestsFailed": 0,
+    "generatedParity": "passed",
+    "dailyRiftMinutes": 120,
+    "targetDays": 180,
+    "resourceOrTimerDeficitStages": {
+      "gold": 0,
+      "materials": 0,
+      "stones": 0,
+      "gem_mean_supply": 0,
+      "rune_cell_capacity": 0,
+      "forge_time": 0
+    },
+    "noChestOrGoblinDeficitStages": {
+      "gold": 0,
+      "materials": 0,
+      "stones": 0
+    },
+    "successfulRuns": 5469.821845989515,
+    "currencyTotals": {
+      "gold_earned": 760092334.1523083,
+      "gold_required": 613091043.88,
+      "materials_earned": 582628.533741676,
+      "materials_required": 459270.0,
+      "stones_earned": 808436.4942954476,
+      "stones_required": 641150
+    },
+    "equipmentCountDistribution": "Exact finite independent Bernoulli convolution per successful clear",
+    "slotCoverage": "Poisson thinning approximation, with distinct guaranteed slots",
+    "firstClearGemCount": 90,
+    "firstClearAbyssalCoins": 5600,
+    "runtimePackageParityStages": 1000
+  },
+  "boxImplementationEvidence": "../../Implementation/RewardBoxEvidence/verification.json",
+  "previousVerification": {
+    "date": "2026-09-24",
+    "scope": "Planning v0.2: full reward economics, not live balance implementation",
+    "gameBalanceChanged": false,
+    "publicDeploymentPerformed": false,
+    "publicationState": "Source branch only; publish after main integration",
+    "unity": {
+      "version": "6000.6.0f1",
+      "attributeConditions": 63,
+      "syntheticProbes": 21,
+      "itemValidatedFixtures": 33,
+      "productionSkillTreeFixtures": 9,
+      "combatRuns": 0,
+      "userSaveModified": false,
+      "executionDate": "2026-09-23",
+      "rerunForRewardPlanning": false
+    },
+    "model": {
+      "stages": 1000,
+      "unitTestsPassed": 21,
+      "balanceTestsPassed": 10,
+      "rewardTestsPassed": 11,
+      "unitTestsFailed": 0,
+      "generatedParity": "passed",
+      "dailyRiftMinutes": 120,
+      "targetDays": 180,
+      "resourceOrTimerDeficitStages": {
+        "gold": 0,
+        "materials": 0,
+        "stones": 0,
+        "gem_mean_supply": 0,
+        "rune_cell_capacity": 0,
+        "forge_time": 0
+      },
+      "noChestOrGoblinDeficitStages": {
+        "gold": 0,
+        "materials": 0,
+        "stones": 0
+      },
+      "successfulRuns": 5463.919497655068,
+      "currencyTotals": {
+        "gold_earned": 760087311.4851755,
+        "gold_required": 613089543.88,
+        "materials_earned": 582480.149362888,
+        "materials_required": 459270.0,
+        "stones_earned": 808263.359691235,
+        "stones_required": 641150
+      },
+      "equipmentCountDistribution": "Exact finite independent Bernoulli convolution per successful clear",
+      "slotCoverage": "Poisson thinning approximation, with distinct guaranteed slots"
+    },
+    "browser": {
+      "family": "Codex In-app Browser",
+      "type": "iab",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "languages": [
+        "ko",
+        "en"
+      ],
+      "stageChecks": [
+        1,
+        9,
+        10,
+        15,
+        100,
+        300,
+        1000
+      ],
+      "inputBounds": {
+        "0": 1,
+        "1001": 1000
+      },
+      "calendarSwitches": [
+        90,
+        180
+      ],
+      "pageHorizontalOverflow": false,
+      "consoleErrors": 0,
+      "milestonePackagesDisplayed": 16,
+      "rift10ChoiceGemsDisplayed": 6,
+      "r1000Boss": {
+        "gold": 30480,
+        "materials": 59,
+        "stones": 74
+      },
+      "r1000Completion": {
+        "gold": 20320,
+        "materials": 22,
+        "stones": 49
+      },
+      "r1000DailyEquipmentDisplayed": 232.63,
+      "r1000DailyRunesDisplayed": 93.88,
+      "visualReview": "Korean reward table inspected in actual 1280x720 viewport; no physical-mobile claim"
+    },
+    "http": {
+      "bind": "127.0.0.1",
+      "port": 8768,
+      "dashboardStatus": 200,
+      "projectionStatus": 200,
+      "projectionStages": 1000
+    },
+    "wiki": {
+      "build": "passed",
+      "check": "passed",
+      "pythonTestsPassed": 10,
+      "pageRoutes": 335,
+      "databaseRoutes": 28,
+      "recordDetails": 2758,
+      "nodeRouteChecks": "passed",
+      "newRewardHistoriesHaveOneVersion": true,
+      "historicalEvidenceFilesReusedUnchanged": 272,
+      "historicalEvidenceIsNewTesting": false
+    },
+    "sharedUIContract": {
+      "check": "passed",
+      "testsPassed": 9
+    },
+    "sourceHashes": {
+      "tools/balance_1000.py": "6e1c87cac1a8f4c897a9658072970598581f8a3951868cbc24c2687ad8a4912a",
+      "tools/balance_rewards.py": "e51d5a416cd9f268bf59a6e81f4cb42a9bb2f69e5792b9f765a98a0c762e3128",
+      "tools/test_balance_1000.py": "b02e0a8f292a5c283686221a08d6b94d54e03ee12e0fd5c972891ff88ce07ea6",
+      "tools/test_balance_rewards.py": "5351ac92466d768f7f6fd91153d5984ebcea5ab33e0351b389f0836a33067e04",
+      "tools/templates/balance_dashboard.html": "17e100a104a2c41a9df92603b5113ed0c78f154b788879b09236668c9a5d588e",
+      "tools/wiki.py": "be80f3dd1ca6c09a030c40660afbd1140778b6344b8f700143aa15704b9dbc8b",
+      "Docs/Design/Balance1000/parameters.json": "d6e1ebab1a5ec87d2dc2e16bacaccdaa110313d27289a7b6f185a7c18dbfdc85",
+      "Docs/Design/Balance1000/reward_parameters.json": "9084e6eb104a4ad3fe98a3bf87277a3d1d6d642e8c171cd381ef83ffb6523b1f",
+      "Docs/Design/Balance1000/projection.json": "80c72a59e33dccf629d75693153b82628a0f63fa161a7c2a7c6abc23b321c0dc",
+      "Docs/Design/Balance1000/dashboard.html": "a2ee5318859eca8bdf6094eeb59989611a956e3720e7af8626524b6de3e4004e",
+      "Docs/Design/HELLSCRIPT_Balance_1000.md": "a766d004d798c1af355d3df5e04a70c8fdf237730ddef7611245513eb910785f",
+      "Docs/Design/HELLSCRIPT_Balance_1000.en.md": "c2600744016e7ef9a7226e4e763bcbd72729fc76c2ea5d70ad02a57f66617c1c",
+      "Docs/Design/HELLSCRIPT_Rift_Rewards_1000.md": "33965971b221cf146bd92d7dd8be79ec85c72a73065165ad59112f2c7c92cae4",
+      "Docs/Design/HELLSCRIPT_Rift_Rewards_1000.en.md": "5a9653e9529a02b100d5a63bd3646f16cbb41551e31e6dc0ebe50b1b5b082a6f"
+    },
+    "previousVerification": {
+      "date": "2026-09-23",
+      "scope": "Planning analysis, not live balance implementation",
+      "gameBalanceChanged": false,
+      "publicDeploymentPerformed": false,
+      "unity": {
+        "version": "6000.6.0f1",
+        "attributeConditions": 63,
+        "syntheticProbes": 21,
+        "itemValidatedFixtures": 33,
+        "productionSkillTreeFixtures": 9,
+        "combatRuns": 0,
+        "userSaveModified": false
+      },
+      "model": {
+        "stages": 1000,
+        "unitTestsPassed": 10,
+        "unitTestsFailed": 0,
+        "generatedParity": "passed",
+        "dailyRiftMinutes": 120,
+        "targetDays": 180,
+        "resourceOrTimerDeficitStages": {
+          "gold": 0,
+          "materials": 0,
+          "stones": 0,
+          "gem_mean_supply": 0,
+          "rune_cell_capacity": 0,
+          "forge_time": 0
+        }
+      },
+      "browser": {
+        "family": "Codex In-app Browser",
+        "type": "iab",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "languages": [
+          "ko",
+          "en"
+        ],
+        "stageChecks": [
+          1,
+          6,
+          100,
+          1000
+        ],
+        "inputBounds": {
+          "0": 1,
+          "1001": 1000
+        },
+        "metrics": [
+          "attack_share",
+          "dps_share",
+          "ehp_share",
+          "power_share"
+        ],
+        "calendarSwitches": [
+          90,
+          180
+        ],
+        "pageHorizontalOverflow": false,
+        "consoleErrors": 0,
+        "r1000Displayed": {
+          "attack": 2118,
+          "dps": 15864,
+          "day": 180
+        }
+      },
+      "wiki": {
+        "build": "passed",
+        "check": "passed",
+        "pythonTestsPassed": 10,
+        "pageRoutes": 331,
+        "databaseRoutes": 28,
+        "recordDetails": 2758,
+        "nodeRouteChecks": "passed",
+        "historicalEvidenceFilesReusedUnchanged": 272,
+        "historicalEvidenceIsNewTesting": false
+      },
+      "sharedUIContract": {
+        "check": "passed",
+        "testsPassed": 9
+      },
+      "sourceHashes": {
+        "tools/balance_1000.py": "68c8814f676beb11af597dba959f64693dcf575542de1822f45453ec4bd10c7d",
+        "tools/test_balance_1000.py": "b02e0a8f292a5c283686221a08d6b94d54e03ee12e0fd5c972891ff88ce07ea6",
+        "tools/templates/balance_dashboard.html": "1e915e7a715ef259b384398390b1796fef672d5a60c43f4e2a1a1856516335fa",
+        "Docs/Design/Balance1000/parameters.json": "f930b6938c3ed20102eb999cfd96d71b04d22a3ff79694b17a52a2a1131a8b13",
+        "Docs/Design/Balance1000/projection.json": "1f0ae1e3e5287865223ad149d1c8dcaf4634c0af598ad4b42eeaee3280261600",
+        "Docs/Design/Balance1000/dashboard.html": "c8f62d46b4278c9e625bf5b736a919bd1af83c4617961a1e57be7e9ae1c9cc3b"
+      },
+      "notVerified": [
+        "Natural new-save progression",
+        "Combat clear probability",
+        "Physical mobile behavior",
+        "Actual forge queue scheduling",
+        "Rune color and shape placement",
+        "All conditional skill and legendary rotations"
+      ]
+    },
+    "notVerified": [
+      "Natural new-save progression",
+      "Real combat success rate",
+      "Physical mobile behavior",
+      "Save migration and first-clear transaction implementation",
+      "Rune shape/color placement and gem-color tail risk",
+      "Inventory selection and actual salvage fractions",
+      "Actual forge job scheduling"
+    ]
+  },
+  "browserUpdate": {
+    "family": "Codex In-app Browser",
+    "type": "iab",
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "rift10ChoiceGemsDisplayed": 20,
+    "rift10CoinsDisplayed": 100,
+    "consoleErrors": 0
+  },
+  "contentUnlocksImplemented": true,
+  "contentUnlockEvidence": "../../Implementation/RiftUnlockEvidence/verification.json",
+  "introductoryRiftsImplemented": true,
+  "earlyBalanceEvidence": "../../Implementation/RiftOnboardingEvidence/verification.json"
+}

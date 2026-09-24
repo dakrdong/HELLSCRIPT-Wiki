@@ -29,17 +29,24 @@ namespace Hellscript
     public static class ContentUnlocks
     {
         public const string Train="UL01_TRAIN", Enhance="UL02_ENHANCE", Offline="UL03_OFFLINE", RareCraft="UL04_RARE_CRAFT",
-            Gem="UL05_GEM", Reroll="UL06_REROLL", Shop="UL07_UNIDENTIFIED_SHOP", Sweep="UL08_SWEEP", CoreCraft="UL09_CORE_CRAFT";
+            Gem="UL05_GEM", Reroll="UL06_REROLL", Shop="UL07_UNIDENTIFIED_SHOP", Sweep="UL08_SWEEP", CoreCraft="UL09_CORE_CRAFT",
+            SlotEnhance="UL10_SLOT_ENHANCE", Rune="UL11_RUNE", Aspect="UL12_ASPECT", Elixir="UL13_ELIXIR", Masterwork="UL14_MASTERWORK";
+        public const int Version=2;
         static ContentUnlockData data;
         public static ContentUnlockData Rules=>data??=JsonUtility.FromJson<ContentUnlockData>(Resources.Load<TextAsset>("ContentUnlocks").text);
         public static int AccountClear(AccountSave a)=>a.heroes.Count==0?0:a.heroes.Max(h=>Math.Max(0,h.highestClear));
+        public static ContentUnlockDefinition[] AtStage(int stage)=>Rules.features.Where(f=>f.stage==stage).ToArray();
+        public static ContentUnlockDefinition NextAfter(int stage)=>Rules.features.Where(f=>f.stage>stage).OrderBy(f=>f.stage).FirstOrDefault();
+        public static string StageSummary(int stage)=>string.Join(" · ",AtStage(stage).Select(f=>Loc.T(f.name)));
         public static int PassiveSlots(HeroSave h)=>Math.Max(Mathf.Clamp(h.legacyPassiveSlots,0,3),Rules.passiveLevels.Count(p=>h.level>=p));
         public static string PassiveError(HeroSave h,BuildConfig b)=>b.passives.Length<=PassiveSlots(h)?"":Loc.F("현재 영웅의 패시브 슬롯은 {0}개입니다.",PassiveSlots(h));
         public static void Normalize(AccountSave a,bool legacy=false)
         {
+            if(a.schema>=13&&(a.contentUnlocks==null||a.contentUnlocks.version!=Version))
+                throw new NotSupportedException("Unsupported content unlock save version.");
             a.contentUnlocks??=new ContentUnlockState();var s=a.contentUnlocks;
             s.unlocked??=new List<string>();s.guidesCompleted??=new List<string>();
-            if(s.version>1)throw new NotSupportedException("Unsupported content unlock save version.");
+            if(s.version<0||s.version>Version)throw new NotSupportedException("Unsupported content unlock save version.");
             if(legacy&&s.version==0)
             {
                 // These services and three passive slots were available to every schema-1/2 user.
@@ -48,12 +55,28 @@ namespace Hellscript
                 if(AccountClear(a)>0){Grant(s,Offline);s.offlineActivatedUtc=a.lastSeenUtc;}
                 s.firstRunEnded=a.records.Count>0||AccountClear(a)>0;
             }
-            s.version=1;
+            if(s.version==1||legacy&&s.version==0)PreservePreviousAccess(a);
+            s.version=Version;
             Reconcile(a);
+        }
+        static void PreservePreviousAccess(AccountSave a)
+        {
+            var s=a.contentUnlocks;int best=AccountClear(a);
+            // Freeze the released v1 policy here: future balance edits must not rewrite migration.
+            string[] ids={Enhance,Offline,RareCraft,Gem,Reroll,Shop,Sweep,CoreCraft};
+            int[] stages={1,1,3,5,8,10,12,15};
+            for(int i=0;i<ids.Length;i++)if(best>=stages[i])Grant(s,ids[i]);
+            if(s.gemAcquired||(a.gems?.Count??0)>0)Grant(s,Gem);
+            if(s.coreReady||a.cores.Any(c=>c>=10))Grant(s,CoreCraft);
+            Grant(s,Rune);Grant(s,Aspect); // Both editors were available from town arrival.
+            if(s.unlocked.Contains(Enhance)){Grant(s,SlotEnhance);Grant(s,Masterwork);}
+            if(s.unlocked.Contains(Gem))Grant(s,Elixir);
+            if(s.unlocked.Contains(Offline)&&s.offlineActivatedUtc==0)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
         static void Grant(ContentUnlockState s,string id){if(!s.unlocked.Contains(id))s.unlocked.Add(id);}
         public static void Reconcile(AccountSave a)
         {
+            if(a.contentUnlocks?.version!=Version){Normalize(a);return;}
             a.contentUnlocks??=new ContentUnlockState();var s=a.contentUnlocks;
             s.unlocked??=new List<string>();s.guidesCompleted??=new List<string>();
             s.coreReady|=a.cores.Any(c=>c>=Rules.coreCount);
@@ -62,7 +85,7 @@ namespace Hellscript
             s.firstRunEnded|=best>0;
             foreach(var f in Rules.features)
             {
-                bool eligible=f.stage>0&&best>=f.stage||f.id==Train||f.id==Gem&&s.gemAcquired||f.id==CoreCraft&&s.coreReady;
+                bool eligible=best>=f.stage;
                 if(!eligible||s.unlocked.Contains(f.id))continue;
                 Grant(s,f.id);
                 if(f.id==Offline)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
@@ -91,7 +114,12 @@ namespace Hellscript
         public static void MergeVerified(AccountSave a,ContentUnlockState incoming)
         {
             Normalize(a);if(incoming==null)return;
-            if(incoming.version>1)throw new NotSupportedException("Unsupported content unlock save version.");
+            if(incoming.version<0||incoming.version>Version)throw new NotSupportedException("Unsupported content unlock save version.");
+            if(incoming.version<Version)
+            {
+                var previous=new AccountSave{contentUnlocks=JsonUtility.FromJson<ContentUnlockState>(JsonUtility.ToJson(incoming))};
+                Normalize(previous,legacy:true);incoming=previous.contentUnlocks;
+            }
             foreach(var f in Rules.features)if(incoming.unlocked?.Contains(f.id)==true)Grant(a.contentUnlocks,f.id);
             foreach(var f in Rules.features)if(incoming.guidesCompleted?.Contains(f.id)==true)CompleteGuide(a,f.id);
             a.contentUnlocks.firstRunEnded|=incoming.firstRunEnded;a.contentUnlocks.gemAcquired|=incoming.gemAcquired;a.contentUnlocks.coreReady|=incoming.coreReady;

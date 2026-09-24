@@ -37,7 +37,7 @@ namespace Hellscript
                 staged.Hero.build=candidate;
                 FirstPlayGuide.Applied(staged,staged.Hero,before,candidate,catalog);
                 if(prepared!=null)staged.suspendedRun=prepared.snapshot;
-                staged.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                staged.lastSeenUtc=SeenNow();
             }
             catch(Exception e){Error=Loc.F("사냥 설정을 적용하지 않았습니다: {0}", e.Message);return false;}
             if(!Write(staged)){Error="사냥 설정을 저장하지 못했습니다. 기존 설정과 편집 내용은 유지됩니다. 저장 상태를 확인한 뒤 다시 시도하세요.";return false;}

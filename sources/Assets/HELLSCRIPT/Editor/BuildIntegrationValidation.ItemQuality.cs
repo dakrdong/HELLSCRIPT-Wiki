@@ -44,7 +44,7 @@ namespace Hellscript.Editor
             var account=GameStore.NewAccount();account.selectedHero=(int)heroClass;
             var hero=account.Hero;hero.level=30;hero.highestClear=stage;hero.capacity=100;hero.inventory.Clear();
             hero.build=GameCatalog.Preset(heroClass,variant);hero.build.autoRepeat=false;hero.build.bagPolicy=BagPolicy.Ignore;hero.useEdict=false;
-            account.gold=100000000;account.materials=10000000;ContentUnlocks.Reconcile(account);
+            account.gold=100000000;account.materials=10000000;ContentUnlocks.Reconcile(account);account.contentUnlocks.unlocked.Add(ContentUnlocks.Masterwork); // Preserve released access for isolated legacy quality-curve probes.
             for(int slot=0;slot<8;slot++)
             {
                 uint random=seed^unchecked((uint)(slot+1)*0x9E3779B9u);string unique=Sets[(int)heroClass*2+variant][slot];Item item=null;

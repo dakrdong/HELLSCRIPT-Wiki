@@ -20,10 +20,10 @@ namespace Hellscript.Tests
         {for(int i=0;i<8;i++)Assert.IsTrue(RiftMap.LineClear(RiftMap.Rooms[i],RiftMap.Rooms[(i+1)%8]));Assert.IsFalse(RiftMap.Walkable(Vector2.zero));}
         [Test]public void MovementReachesDistantRoomWithoutOscillating()
         {var p=RiftMap.Rooms[0]+new Vector2(3,-3);for(int i=0;i<2000;i++)p=RiftMap.Move(p,RiftMap.Rooms[4],.2f);Assert.Less(Vector2.Distance(p,RiftMap.Rooms[4]),.3f);}
-        [Test]public void GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds()
+        [TestCase(1,75)] [TestCase(6,150)]public void GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(int stage,int points)
         {
-            var sim=new CombatSimulation(GameStore.NewAccount(),catalog,1);
-            Assert.GreaterOrEqual(sim.State.enemies.Sum(e=>e.elite>=0?5:1),150);
+            var sim=new CombatSimulation(GameStore.NewAccount(),catalog,stage);
+            Assert.AreEqual(points,sim.State.enemies.Sum(e=>e.elite>=0?5:1));
             Assert.AreEqual(sim.State.enemies.Count,sim.State.enemies.Select(e=>e.id).Distinct().Count());
             Assert.IsTrue(sim.State.enemies.All(e=>sim.Map.Walkable(e.position,.4f)));
         }

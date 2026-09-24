@@ -26,29 +26,32 @@ namespace Hellscript.Tests
             Assert.DoesNotThrow(()=>new CombatSimulation(a,catalog,1,0,seed:90,ownedTraining:true));
         }
         [TestCase(ContentUnlocks.Enhance,1)] [TestCase(ContentUnlocks.Offline,1)]
-        [TestCase(ContentUnlocks.RareCraft,3)] [TestCase(ContentUnlocks.Gem,5)]
-        [TestCase(ContentUnlocks.Reroll,8)] [TestCase(ContentUnlocks.Shop,10)]
-        [TestCase(ContentUnlocks.Sweep,12)] [TestCase(ContentUnlocks.CoreCraft,15)]
+        [TestCase(ContentUnlocks.RareCraft,3)] [TestCase(ContentUnlocks.Gem,10)]
+        [TestCase(ContentUnlocks.Reroll,35)] [TestCase(ContentUnlocks.Shop,25)]
+        [TestCase(ContentUnlocks.Sweep,60)] [TestCase(ContentUnlocks.CoreCraft,120)]
+        [TestCase(ContentUnlocks.SlotEnhance,5)] [TestCase(ContentUnlocks.Rune,15)]
+        [TestCase(ContentUnlocks.Aspect,40)] [TestCase(ContentUnlocks.Elixir,60)] [TestCase(ContentUnlocks.Masterwork,80)]
         public void U03To15_ThresholdsUseGreaterOrEqualAndPersist(string id,int threshold)
         {
             var a=New();a.heroes[1].highestClear=threshold-1;Assert.IsFalse(ContentUnlocks.Has(a,id));
             a.heroes[1].highestClear=threshold;Assert.IsTrue(ContentUnlocks.Has(a,id));
             a.heroes[1].highestClear=0;Assert.IsTrue(ContentUnlocks.Has(a,id));
-            var jump=New();jump.heroes[2].highestClear=50;Assert.IsTrue(ContentUnlocks.Has(jump,id));
+            var jump=New();jump.heroes[2].highestClear=1000;Assert.IsTrue(ContentUnlocks.Has(jump,id));
         }
         [Test] public void U06_GemAcquisitionHistorySurvivesReloadAndConsumption()
         {
             var a=New();ContentUnlocks.RecordGemAcquisition(a);var copy=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(a));
-            ContentUnlocks.Normalize(copy);Assert.IsTrue(ContentUnlocks.Has(copy,ContentUnlocks.Gem));Assert.AreEqual(0,copy.gold);
+            ContentUnlocks.Normalize(copy);Assert.IsTrue(copy.contentUnlocks.gemAcquired);Assert.IsFalse(ContentUnlocks.Has(copy,ContentUnlocks.Gem));Assert.AreEqual(0,copy.gold);
+            copy.Hero.highestClear=10;Assert.IsTrue(ContentUnlocks.Has(copy,ContentUnlocks.Gem));
         }
         [Test] public void U07_RerollCostsDoNotEscalate()
         {
-            var a=New();a.Hero.highestClear=8;a.gold=10000000;uint rng=9;var item=Economy.CreateItem(a.Hero.heroClass,0,2,8,ref rng);a.Hero.inventory.Add(item);
+            var a=New();a.Hero.highestClear=35;a.gold=10000000;uint rng=9;var item=Economy.CreateItem(a.Hero.heroClass,0,2,8,ref rng);a.Hero.inventory.Add(item);
             foreach(int count in new[]{0,9,99}){item.rerolls=count;long cost=Economy.RerollGold(item);Assert.AreEqual(6800,cost);int before=a.gold;Assert.IsTrue(Economy.Reroll(a,item,item.rolls[0].slotId,ref rng));Assert.AreEqual(cost,before-a.gold);}
         }
         [Test] public void U10U11_SweepUsesSelectedHeroAndRejectsNoRecord()
         {
-            var a=New();a.heroes[0].highestClear=50;a.selectedHero=1;uint rng=730;uint before=rng;
+            var a=New();a.heroes[0].highestClear=60;a.selectedHero=1;uint rng=730;uint before=rng;
             Assert.IsFalse(Economy.Sweep(a,"no-record",ref rng));Assert.AreEqual(before,rng);
             a.Hero.highestClear=3;uint expected=rng;var h=a.Hero;
             for(int n=0;n<3;n++){int slot=RandomStream.Range(ref expected,0,8);int rarity=RiftRarity.Roll(RiftRewardSource.Boss,3,ref expected);int level=RandomStream.Range(ref expected,1,6);Economy.CreateItem(h.heroClass,slot,rarity,level,ref expected);}
@@ -57,7 +60,7 @@ namespace Hellscript.Tests
         [Test] public void U12To14_CoreRequiresSameSlotAndConsumptionKeepsPrivilege()
         {
             var a=New();a.cores[0]=5;a.cores[1]=5;Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));
-            a.cores[0]=10;Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));Assert.AreEqual(10,a.cores[0]);
+            a.cores[0]=10;Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));a.Hero.highestClear=120;Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));Assert.AreEqual(10,a.cores[0]);
             uint rng=82;Assert.IsTrue(ContentServices.Purchase(a,0,2,ref rng,out var item));Assert.AreEqual(3,item.rarity);Assert.AreEqual(0,a.cores[0]);
             Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));Assert.IsFalse(ContentServices.Purchase(a,0,2,ref rng,out _));
         }
@@ -109,7 +112,7 @@ namespace Hellscript.Tests
         [Test] public void U24_SaveLoadPreservesUnlockAndGuide()
         {
             string dir=Path.Combine(Path.GetTempPath(),"unlock-test-"+Guid.NewGuid());
-            try{var store=new GameStore(dir,catalog);store.Data.Hero.highestClear=15;ContentUnlocks.Reconcile(store.Data);ContentUnlocks.CompleteGuide(store.Data,ContentUnlocks.Reroll);Assert.IsTrue(store.Save());var loaded=new GameStore(dir,catalog);Assert.IsTrue(ContentUnlocks.Has(loaded.Data,ContentUnlocks.CoreCraft));Assert.Contains(ContentUnlocks.Reroll,loaded.Data.contentUnlocks.guidesCompleted);}
+            try{var store=new GameStore(dir,catalog);store.Data.Hero.highestClear=120;ContentUnlocks.Reconcile(store.Data);ContentUnlocks.CompleteGuide(store.Data,ContentUnlocks.Reroll);Assert.IsTrue(store.Save());var loaded=new GameStore(dir,catalog);Assert.IsTrue(ContentUnlocks.Has(loaded.Data,ContentUnlocks.CoreCraft));Assert.Contains(ContentUnlocks.Reroll,loaded.Data.contentUnlocks.guidesCompleted);}
             finally{if(Directory.Exists(dir))Directory.Delete(dir,true);}
         }
         [Test] public void U27_EconomyFirstUseDeficitsAreVisibleAndNotGifted()
@@ -126,7 +129,6 @@ namespace Hellscript.Tests
             sim.State.enemies.Add(new EnemyState{boss=true,dead=true});
             sim.Tick(.05f);Assert.AreEqual(1,a.Hero.highestClear);Assert.IsTrue(sim.State.bossRewarded);
             Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.Enhance));int gold=a.gold+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed).Sum(r=>r.amount),mats=a.materials+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed).Sum(r=>r.amount);var grants=a.contentUnlocks.unlocked.ToList();
-            if(sim.State.resources.Any(r=>r.kind==RiftResourceKind.Gem&&!r.claimed)&&!grants.Contains(ContentUnlocks.Gem))grants.Add(ContentUnlocks.Gem);
             a.suspendedRun=sim.State;var copy=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(a));
             var restored=new CombatSimulation(copy,catalog,50,restore:copy.suspendedRun);restored.Tick(.05f);
             Assert.AreEqual(gold,copy.gold);Assert.AreEqual(mats,copy.materials);CollectionAssert.AreEquivalent(grants,copy.contentUnlocks.unlocked);Assert.AreEqual(1,restored.State.stage);

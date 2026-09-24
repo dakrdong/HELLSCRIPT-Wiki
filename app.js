@@ -102,10 +102,11 @@
     const db=D.databases.find(d=>d.id===id);if(!db)return missing();
     document.title=db.name+' · HELLSCRIPT 위키';
     const categories=[...new Set(db.rows.map(r=>r.category))],statuses=[...new Set(db.rows.map(r=>r.status))];
+    const sourceImageCount=new Set(db.rows.filter(r=>r.image).map(r=>r.image.file)).size;
     let query=params.get('q')||'',category=params.get('category')||'',status=params.get('status')||'',view=params.get('view')||(id==='resources'?'gallery':'table'),sort=params.get('sort')||'id';
     if(!['gallery','table'].includes(view))view='table';if(!['id','name'].includes(sort))sort='id';
     $('#main').innerHTML=`<div class="page-heading"><div><p class="eyebrow">${id==='resources'?'RESOURCE LIBRARY':'CONTENT DATABASE'}</p><h1>${esc(db.name)}</h1><p class="lead">${esc(db.description)}</p></div><div class="actions"><button id="download">JSON 내려받기</button></div></div>
-      <div class="notice">${id==='resources'?'원본 이미지·아틀라스 영역·코드 생성 표현·제작 과제를 구분합니다. 원본 파일은 4개입니다.':'정의가 존재하거나 당시 검사에 통과한 사실을 출시·밸런스 검증 완료로 해석하지 않습니다.'} <a href="#/page/${id==='resources'?'resource-guide':'current-status'}">관리 기준 보기</a></div>
+      <div class="notice">${id==='resources'?'원본 이미지·아틀라스 영역·코드 생성 표현·제작 과제를 구분합니다. 미리보기 원본 이미지는 '+sourceImageCount+'개입니다.':'정의가 존재하거나 당시 검사에 통과한 사실을 출시·밸런스 검증 완료로 해석하지 않습니다.'} <a href="#/page/${id==='resources'?'resource-guide':'current-status'}">관리 기준 보기</a></div>
       <div class="toolbar" aria-label="DB 검색과 필터"><input id="db-search" type="search" aria-label="${esc(db.name)} 검색" placeholder="이름·ID·효과·사용처 검색" value="${esc(query)}">
       <label>분류 <select id="category"><option value="">전체 ${db.rows.length}개</option>${categories.map(c=>`<option value="${esc(c)}" ${c===category?'selected':''}>${esc(c)} · ${db.rows.filter(r=>r.category===c).length}</option>`).join('')}</select></label>
       <label>상태 <select id="status"><option value="">전체 상태</option>${statuses.map(s=>`<option value="${esc(s)}" ${s===status?'selected':''}>${esc(s)}</option>`).join('')}</select></label>

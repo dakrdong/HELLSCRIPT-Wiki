@@ -38,7 +38,7 @@ namespace Hellscript
         {
             if(item==null||!account.heroes.Any(h=>h.inventory.Contains(item)))return "보유한 장비만 걸작을 진행할 수 있습니다.";
             if(account.suspendedRun!=null)return "균열을 완료하고 성소에서 걸작을 진행해 주세요.";
-            if(!ContentUnlocks.Has(account,ContentUnlocks.Enhance))return ContentUnlocks.Condition(ContentUnlocks.Enhance);
+            if(!ContentUnlocks.Has(account,ContentUnlocks.Masterwork))return ContentUnlocks.Condition(ContentUnlocks.Masterwork);
             if(item.enhancement<5)return "강화 +5 이상 장비만 걸작을 진행할 수 있습니다.";
             if(item.masterwork<0||item.masterwork>MaximumMasterwork)return "장비 품질 기록을 확인해 주세요.";
             if(item.masterwork>=MasterworkCap(account))return "현재 걸작 상한에 도달했습니다. 더 높은 균열을 실제로 클리어하면 상한이 열립니다.";

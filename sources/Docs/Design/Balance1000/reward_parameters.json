@@ -1,0 +1,530 @@
+{
+  "version": 4,
+  "status": "Rift drop and enemy balance proposal; first-clear consumable boxes implemented on the development branch.",
+  "extra_seconds_per_attempt": 12,
+  "equipment": {
+    "normal_drop_chance": 0.01,
+    "elite_drop_chance": 0.35,
+    "boss_rolls": 3,
+    "chest_equipment_rolls": 2,
+    "chest_open_fraction": 0.5,
+    "goblin_spawn_chance": 0.1,
+    "goblin_kill_fraction": 0.8,
+    "goblin_from_stage": 5
+  },
+  "nonlegendary_columns": [
+    "stage",
+    "normal_common",
+    "normal_magic",
+    "elite_magic",
+    "chest_magic"
+  ],
+  "nonlegendary_anchors": [
+    [
+      1,
+      0.7,
+      0.25,
+      0.65,
+      0.8
+    ],
+    [
+      10,
+      0.45,
+      0.4,
+      0.5,
+      0.65
+    ],
+    [
+      30,
+      0.2,
+      0.4,
+      0.3,
+      0.45
+    ],
+    [
+      50,
+      0.1,
+      0.35,
+      0.15,
+      0.3
+    ],
+    [
+      100,
+      0.02,
+      0.23,
+      0.05,
+      0.1
+    ],
+    [
+      200,
+      0,
+      0.1,
+      0,
+      0
+    ],
+    [
+      500,
+      0,
+      0.02,
+      0,
+      0
+    ],
+    [
+      1000,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "awakening_chance_anchors": [
+    [
+      1,
+      0
+    ],
+    [
+      99,
+      0
+    ],
+    [
+      100,
+      0.02
+    ],
+    [
+      200,
+      0.2
+    ],
+    [
+      300,
+      0.35
+    ],
+    [
+      500,
+      0.45
+    ],
+    [
+      750,
+      0.5
+    ],
+    [
+      1000,
+      0.5
+    ]
+  ],
+  "item_level_offsets": [
+    [
+      -2,
+      0.1
+    ],
+    [
+      -1,
+      0.15
+    ],
+    [
+      0,
+      0.5
+    ],
+    [
+      1,
+      0.15
+    ],
+    [
+      2,
+      0.1
+    ]
+  ],
+  "gems": {
+    "normal_chance": 0.005,
+    "elite_chance": 0.1,
+    "boss_count": 2,
+    "family_count": 6,
+    "fusion_ratio": 5,
+    "tier_starts": [
+      1,
+      100,
+      300
+    ],
+    "unlock": 10
+  },
+  "runes": {
+    "unlock": 15,
+    "normal_chance": 0.005,
+    "elite_chance": 0.1,
+    "boss_count": 2,
+    "type_count": 5,
+    "grade_starts": [
+      15,
+      40,
+      100,
+      180,
+      300,
+      500,
+      650
+    ],
+    "size_weights": [
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0.8,
+        0.2,
+        0,
+        0,
+        0
+      ],
+      [
+        0.45,
+        0.4,
+        0.15,
+        0,
+        0
+      ],
+      [
+        0.15,
+        0.35,
+        0.35,
+        0.15,
+        0
+      ],
+      [
+        0.05,
+        0.15,
+        0.4,
+        0.3,
+        0.1
+      ],
+      [
+        0,
+        0.05,
+        0.3,
+        0.4,
+        0.25
+      ],
+      [
+        0,
+        0,
+        0.2,
+        0.4,
+        0.4
+      ]
+    ]
+  },
+  "currency": {
+    "boss_gold_fraction": 0.6,
+    "clear_gold_fraction": 0.4,
+    "boss_material_base": 4,
+    "boss_material_divisor": 18,
+    "clear_material_base": 2,
+    "clear_material_divisor": 50,
+    "boss_stone_fraction": 0.6,
+    "clear_stone_fraction": 0.4,
+    "stone_anchor_stage": 20,
+    "stone_anchor_count": 50,
+    "stone_late_slope": 0.075,
+    "offline_divisor": 20
+  },
+  "salvage": {
+    "ordinary_fraction": 0.8,
+    "legendary_fraction_anchors": [
+      [
+        1,
+        0
+      ],
+      [
+        10,
+        0
+      ],
+      [
+        30,
+        0.4
+      ],
+      [
+        100,
+        0.75
+      ],
+      [
+        200,
+        0.85
+      ],
+      [
+        1000,
+        0.9
+      ]
+    ],
+    "include_investment_refunds": false
+  },
+  "first_clear": {
+    "base_gold": 1000,
+    "gold_per_stage": 100,
+    "base_materials": 10,
+    "material_divisor": 10,
+    "base_stones": 2,
+    "stone_divisor": 50,
+    "ten_stage_material_base": 20,
+    "ten_stage_material_divisor": 20,
+    "fifty_stage_stone_base": 50,
+    "fifty_stage_stone_divisor": 2,
+    "basic_owner": "character for automatic gold/materials; account for stones and 10/50-tier extra boxes",
+    "milestone_owner": "account",
+    "equipment_policy": "Hero-compatible natural pool only; expanded unreleased gear excluded; no salvage credit for retained first-clear gear."
+  },
+  "milestones": [
+    {
+      "stage": 1,
+      "name_ko": "첫 무기 교체",
+      "name_en": "First weapon replacement",
+      "equipment": [
+        {
+          "rarity": 2,
+          "slot": 0,
+          "awakened": false,
+          "min_quality": 0.5
+        }
+      ],
+      "box_delivery": true
+    },
+    {
+      "stage": 3,
+      "name_ko": "희귀 제작 재료",
+      "name_en": "Rare crafting materials",
+      "materials": 50,
+      "box_delivery": true
+    },
+    {
+      "stage": 5,
+      "name_ko": "슬롯 강화 시작",
+      "name_en": "Start slot growth",
+      "stones": 30,
+      "box_delivery": true
+    },
+    {
+      "stage": 10,
+      "name_ko": "보석 입문 보급",
+      "name_en": "Gem starter supply",
+      "gems": [
+        {
+          "tier": 1,
+          "count": 10,
+          "choice": true,
+          "reference_family": "diamond"
+        },
+        {
+          "tier": 1,
+          "count": 10,
+          "choice": true,
+          "reference_family": "ruby"
+        }
+      ],
+      "premium": 100,
+      "box_delivery": true
+    },
+    {
+      "stage": 15,
+      "name_ko": "룬 배치 입문",
+      "name_en": "Rune placement introduction",
+      "runes": [
+        {
+          "grade": 0,
+          "size": 1,
+          "count": 5,
+          "one_of_each_type": true
+        }
+      ],
+      "box_delivery": true
+    },
+    {
+      "stage": 30,
+      "name_ko": "첫 전설 주무기·보석 2단계",
+      "name_en": "First legendary main-hand and tier-two gems",
+      "gems": [
+        {
+          "tier": 2,
+          "count": 10,
+          "choice": true
+        }
+      ],
+      "box_delivery": true,
+      "equipment": [
+        {
+          "rarity": 3,
+          "slot": 0,
+          "awakened": false,
+          "min_quality": 0.5
+        }
+      ]
+    },
+    {
+      "stage": 35,
+      "name_ko": "옵션 재설정 지원금",
+      "name_en": "Affix reroll gold supply",
+      "box_delivery": true,
+      "gold": 20400
+    },
+    {
+      "stage": 50,
+      "name_ko": "심연 주화 보급",
+      "name_en": "Abyssal coin supply",
+      "premium": 200,
+      "box_delivery": true
+    },
+    {
+      "stage": 80,
+      "name_ko": "걸작 입문 재료",
+      "name_en": "Masterwork starter materials",
+      "materials": 200,
+      "gold": 10000,
+      "box_delivery": true
+    },
+    {
+      "stage": 100,
+      "name_ko": "각성 전설 머리",
+      "name_en": "Awakened legendary helm",
+      "equipment": [
+        {
+          "rarity": 3,
+          "slot": 1,
+          "awakened": true,
+          "min_quality": 0.6
+        }
+      ],
+      "gems": [
+        {
+          "tier": 3,
+          "count": 10,
+          "choice": true
+        }
+      ],
+      "premium": 300,
+      "box_delivery": true
+    },
+    {
+      "stage": 120,
+      "name_ko": "코어 선택 제작 1회분",
+      "name_en": "Cores for one targeted craft",
+      "selected_slot_cores": 10,
+      "box_delivery": true
+    },
+    {
+      "stage": 200,
+      "name_ko": "기존 직업 세트 몸통 랜덤",
+      "name_en": "Random chest from a released class set",
+      "equipment": [
+        {
+          "rarity": 3,
+          "slot": 2,
+          "awakened": false,
+          "min_quality": 0.6,
+          "set_only": true
+        }
+      ],
+      "premium": 500,
+      "box_delivery": true
+    },
+    {
+      "stage": 300,
+      "name_ko": "보석 4단계·룬 G4",
+      "name_en": "Tier-four gem and G4 rune",
+      "gems": [
+        {
+          "tier": 4,
+          "count": 10,
+          "choice": true
+        }
+      ],
+      "runes": [
+        {
+          "grade": 4,
+          "size": 5,
+          "count": 1
+        }
+      ],
+      "premium": 500,
+      "box_delivery": true
+    },
+    {
+      "stage": 500,
+      "name_ko": "보석 5단계·룬 G5",
+      "name_en": "Tier-five gem and G5 rune",
+      "gems": [
+        {
+          "tier": 5,
+          "count": 10,
+          "choice": true
+        }
+      ],
+      "runes": [
+        {
+          "grade": 5,
+          "size": 5,
+          "count": 1
+        }
+      ],
+      "premium": 1000,
+      "box_delivery": true
+    },
+    {
+      "stage": 650,
+      "name_ko": "룬 G6",
+      "name_en": "G6 rune",
+      "runes": [
+        {
+          "grade": 6,
+          "size": 5,
+          "count": 1
+        }
+      ],
+      "box_delivery": true
+    },
+    {
+      "stage": 750,
+      "name_ko": "보석 6단계",
+      "name_en": "Tier-six gem",
+      "gems": [
+        {
+          "tier": 6,
+          "count": 10,
+          "choice": true
+        }
+      ],
+      "premium": 1000,
+      "box_delivery": true
+    },
+    {
+      "stage": 1000,
+      "name_ko": "1000단계 완주 보상",
+      "name_en": "Rift-1000 completion reward",
+      "gold": 1000000,
+      "materials": 1500,
+      "stones": 3000,
+      "equipment": [
+        {
+          "rarity": 3,
+          "slot": 0,
+          "awakened": true,
+          "min_quality": 0.9
+        }
+      ],
+      "gems": [
+        {
+          "tier": 6,
+          "count": 20,
+          "choice": true
+        }
+      ],
+      "premium": 2000,
+      "box_delivery": true
+    }
+  ],
+  "notes": [
+    "A success kills 110 normals and eight elites. Summoned adds do not grant these rewards.",
+    "Boss and repeat-clear currency split the existing gold bundle; they are not two copies of it.",
+    "Regular first-clear currency is per hero. New milestone packages are once per account, with an explicit migration rule required.",
+    "Rarity is conditional on an equipment roll; awakening overlays rare/legendary, and sets are inside legendary rarity.",
+    "Choice gems are delivered in packs of ten of one selected color; 90 gems total. First-clear coins total 5600 and are not spent in the two-hour baseline.",
+    "First-clear box transactions, account claims and exact normal-clear eligibility are implemented. Other proposed drops, unlocks, material scaling and enemy balance remain unapplied."
+  ]
+}

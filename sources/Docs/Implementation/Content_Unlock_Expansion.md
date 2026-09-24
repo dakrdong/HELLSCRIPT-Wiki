@@ -1,5 +1,7 @@
 # 콘텐츠 공개·해금 구현 및 검증 기록
 
+> 이 문서는 이전 구현의 기록이다. 현재 개방 단계와 이관 규칙은 [균열 단계별 콘텐츠 개방](../Design/HELLSCRIPT_Rift_Content_Unlocks.md)을 따른다. / Historical record; see the linked current schedule.
+
 작성일: 2026-09-12. HELLSCRIPT 테스트 초안 v0.1. 외부 게임의 확정 수치가 아니다.
 
 ## 실제 반영 범위

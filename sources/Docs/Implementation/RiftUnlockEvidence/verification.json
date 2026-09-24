@@ -1,0 +1,130 @@
+{
+  "date": "2026-09-24",
+  "branch": "codex/balance-1000-analysis",
+  "sourceBase": "c13168a4bcfa74057d15531c72fe76c62aa2f53a",
+  "schema": 13,
+  "unlockStateVersion": 2,
+  "contentDefinitions": 14,
+  "unity": {
+    "version": "6000.6.0f1",
+    "editMode": {
+      "total": 403,
+      "passed": 403,
+      "failed": 0,
+      "skipped": 0
+    },
+    "build": "macOS Development succeeded, 0 errors",
+    "runtime": {
+      "platform": "macOS Development Player",
+      "checks": 24,
+      "passed": 24,
+      "failed": 0,
+      "marker": "HELLSCRIPT_RIFT_UNLOCK_RUNTIME_OK",
+      "layoutCombinations": 20,
+      "resolutions": [
+        [
+          440,
+          956
+        ],
+        [
+          956,
+          440
+        ],
+        [
+          1600,
+          900
+        ],
+        [
+          1600,
+          1000
+        ],
+        [
+          2100,
+          900
+        ]
+      ],
+      "languages": [
+        "ko",
+        "en"
+      ],
+      "textScalePercent": [
+        100,
+        150
+      ],
+      "input": "Unity EventSystem pointer with raycast and transaction state assertions",
+      "save": "isolated fixture",
+      "naturalPlaythrough": false
+    },
+    "physicalMobileTested": false,
+    "userSaveModified": false
+  },
+  "sharedUiTests": 9,
+  "balanceTests": 22,
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Editor/BuildIntegrationValidation.ItemQuality.cs": "13b9e038eb4368f89974ba1292a2b06631df62fc7df1f5e841cee24be701e478",
+    "Assets/HELLSCRIPT/Resources/ContentUnlocks.json": "5022c0f2f6538f57f35edf000995053dd4eb2a5657a53eee8ca959c28ac9392d",
+    "Assets/HELLSCRIPT/Runtime/Core/AspectStone.cs": "be325ac8211e0fd30ee8eaf28f57cf4bfc82b06ab0eb8a9b4f35ad71b2ceab4e",
+    "Assets/HELLSCRIPT/Runtime/Core/ContentUnlocks.cs": "32263c25363addb782fab15404ba3d9133df197ebbb413a8f6c9626aa2c22a63",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Blacksmith.cs": "0a2fbdbe573c326c1dacf31431b65e93675684b214573fbd5b88cf790003b510",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Runes.cs": "9fc54d8a65c9712c84d804f2492681d3dbedfe6051d453a67f52d2d415b8fa89",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.cs": "414af138586b2e743951a54fc2d622fc81c016a09e95a9358872b753b77063f8",
+    "Assets/HELLSCRIPT/Runtime/Core/ItemQuality.cs": "a21b8f0aa19913629570858835085b2e9ed63fc942a634b312945996ed643273",
+    "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs": "04862c770255b88a65b41661fdfbceadaaed1de7882742f7125acf6b1175ef9e",
+    "Assets/HELLSCRIPT/Runtime/Core/RuneAscension.cs": "a66a1aadf82e6a88261f94b2af94432633a7525f1fefcc6ff58c342fb353a9ad",
+    "Assets/HELLSCRIPT/Runtime/Core/RuneGrowth.cs": "772377b81c37e884a605e06f1c5dcc86d4fd60de4cddcc4c3a75477c4238df33",
+    "Assets/HELLSCRIPT/Runtime/Core/RuneReshape.cs": "04a933de2ca12704116db280bd94efbbefcb16158c6c5aabc30fabe91862e2b5",
+    "Assets/HELLSCRIPT/Runtime/Core/TownTrade.cs": "192d3dd1ce29f7f0894fb2f3367b8ff3e17ef0b7ebc4d958d063ff74ec099165",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Actions.cs": "58391f980f235434431e43b6c6c213ff54d2e0ae51de983c82dd497f3893f232",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.cs": "a4bc7132fdc0ff22cbb8dee850f8bbf156ddad356194ecf94e51001f9fcbc28f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.cs": "8b78420e3458aa716c60c9db3b66a23433881a7f4508e06c0135e43ef8c690a2",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.AspectStone.cs": "3b79dccde87b23db087de339d5c39c6f582b0d6a2f06e7e2418fb49675cde317",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentUnlocks.cs": "d4e816a5c21192562a17488f3585fe126f1ed360b82e7d338a98f550ce7f87c9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RuneMaster.cs": "1f736c6af547403229f3043b89552c4c2821cd548acce3847e40f2dc4417aab5",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Runes.cs": "e8d83eb6a03930fa5751e6bd40706d22fb3ec9ab7bae320d2e9032bb525264e3",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TownServices.cs": "f8013ebeb9d1886972b52d9e50bfc4bedca349ff7005cd68e92f1c9f5f6f708a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs": "483d819fd36e6aa333ad2e1fff7f3d14f3d07dfa76eb30016481bd116c91d341",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs": "7d225ffbdd6a3764ae522256c5e193424fd006ca399e51315af3605a29015d11",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs": "be3dd6c1a8d9a9ecb235233b06a243396a3a8fa5d5c056af0cb5eb00901b0648",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardList.cs": "7ea836e3fea3c79aeced41e8814a54ffdc0fd8422b8eb9c61d633fc6c07ab619",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftUnlockSmoke.cs": "5d1138fcce9bd122d40d7285d81c81f04e62643a599f5113cc8d6a735c7e1bc9",
+    "Assets/HELLSCRIPT/Tests/Editor/AspectStoneTests.cs": "bf3b4a6590c49156d28a43f3711d57f5e6237cb8972c5a6eb6b6e092f900a42c",
+    "Assets/HELLSCRIPT/Tests/Editor/ContentUnlockTests.cs": "cee78e6508017323eb8f98980661e200f621c3133bd7d85eb54760414a48b616",
+    "Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs": "851aa468484abe2c8d51ba217dcfbf018cbd4fc320b8e3050e130bf26a127b6f",
+    "Assets/HELLSCRIPT/Tests/Editor/GemServiceTests.cs": "4da50b3003ece892809b62ac6407f3c929043750a829527f0326c52a3f54518a",
+    "Assets/HELLSCRIPT/Tests/Editor/ItemQualityTests.cs": "e7e7a1053773b8cff621e7411dafac73dbbb299a8a11be6d3b54ed0e9d07c631",
+    "Assets/HELLSCRIPT/Tests/Editor/JewelerTests.cs": "78ddbb8b869cce8ca66416f1ea8a389cd1a026586259ad1a61bcc96cb6ea03d3",
+    "Assets/HELLSCRIPT/Tests/Editor/RewardBoxTests.cs": "9ac4edb1dcd9c4235c603100f12e95ff6f5cb8adacf76534fd215537db69a600",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftContentUnlockTests.cs": "207d8fb62e029d44ca3d1feada5bdd50fb7af097abd6ba14bb141e2031056a3c",
+    "Assets/HELLSCRIPT/Tests/Editor/RuneAscensionTests.cs": "371361a9107ba97e2f36bdb401010fdf83c6788dfb8256136ff511c551d54bf5",
+    "Assets/HELLSCRIPT/Tests/Editor/RuneMasteryTests.cs": "3f599976077bb8fab26e5ffa277e743c12c2e55a27ee59d7838ff90066b6dcc5",
+    "Assets/HELLSCRIPT/Tests/Editor/RuneReshapeTests.cs": "d710f5f5fd85f611a903fce87602bc07f24abdabe77fa5be87df6f18fca6566e",
+    "Assets/HELLSCRIPT/Tests/Editor/TownTradeTests.cs": "5ab11f5c8dea5c81bd697a31dc83e204f5ba9e25f598df964a10ce43fc78bc0d",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "4114491cb1b8c170d63beb7e3e420a2238008a819584d74e09c0b05a60e385e6"
+  },
+  "publicDeploymentPerformed": false,
+  "balanceProjection": {
+    "tiers": 1000,
+    "validationErrors": 0,
+    "meanBudgetShortageTiers": 0,
+    "combatCurvesApplied": false
+  },
+  "importBaselineRestored": 506,
+  "wiki": {
+    "build": "passed",
+    "check": "passed",
+    "pythonTests": 10,
+    "javascriptChecks": "passed",
+    "pages": 341,
+    "databases": 30,
+    "records": 3955,
+    "browser": "Codex In-app Browser / iab",
+    "localBrowserVerified": [
+      "Rift unlock design table",
+      "14 content entitlement definitions",
+      "R60 potion unlock detail",
+      "R60 first-clear rewards with sweep and potion unlocks"
+    ],
+    "publicDeploymentPerformed": false
+  },
+  "validationBoundary": "The 403-test result and native 24-check result cover the recorded production source hashes. The older RuntimeContentUnlockSmoke fixture was also updated to obtain its all-unlocked stage from the catalog; that historical harness was not rerun."
+}

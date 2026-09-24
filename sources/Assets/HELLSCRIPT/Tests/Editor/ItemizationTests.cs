@@ -66,7 +66,7 @@ namespace Hellscript.Tests
         }
         [Test]public void RerollKeepsSelectedIdentitySideAndCreationClass()
         {
-            var a=GameStore.NewAccount();a.gold=100000000;a.Hero.highestClear=8;uint rng=918;
+            var a=GameStore.NewAccount();a.gold=100000000;a.Hero.highestClear=35;uint rng=918;
             var item=ItemGenerator.Create(HeroClass.Mage,6,2,30,ref rng);a.Hero.inventory.Add(item);
             var selected=item.rolls.Last();var untouched=item.rolls.Take(item.rolls.Count-1).Select(JsonUtility.ToJson).ToArray();
             Assert.IsTrue(ItemGenerator.RerollPool(item,selected.slotId).Any(d=>d.id==selected.affixId));

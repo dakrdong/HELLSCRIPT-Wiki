@@ -205,6 +205,7 @@ namespace Hellscript
             var st=Label(stage,Loc.F("균열 {0:00}단계", game.SelectedStage),28,gold,TextAnchor.MiddleCenter);Span(st.rectTransform,102,19,102,62);
             var plus=Button(stage,"+",()=>{game.SelectedStage=Mathf.Min(h.highestClear+1,game.SelectedStage+1);ShowTownMenu();});Right((RectTransform)plus.transform,12,10,TouchHeight,TouchHeight);
             BigButton(content,"단계별 등급 확률",ShowRiftRewards);
+            ContentButton(ContentUnlocks.Offline,"미접속 보급",ShowOfflineSupplies);
             AddRepeatPreparation();
             if(!game.Running&&a.repeatHunt?.pendingResult!=null)BigButton(content,"저장된 반복 결과 확인",game.ResumeRepeatResult,true);
             if(a.suspendedRun!=null)BigButton(content,"진행 중인 균열 이어하기",()=>game.Begin(resume:true),true);
@@ -453,7 +454,7 @@ namespace Hellscript
         void Update()
         {
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
-            TickGlobalHud();TickAttendance();
+            TickGlobalHud();TickOfflineSupplies();TickAttendance();
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();

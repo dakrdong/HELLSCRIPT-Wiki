@@ -17,7 +17,7 @@ namespace Hellscript.Tests
         {
             directory=Path.Combine(Path.GetTempPath(),"hellscript-core-craft-"+Guid.NewGuid().ToString("N"));
             catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();store=new GameStore(directory,catalog);
-            H.highestClear=30;A.premium=12000;for(int n=0;n<8;n++)A.cores[n]=20;ContentUnlocks.Reconcile(A);
+            H.highestClear=30;A.premium=12000;for(int n=0;n<8;n++)A.cores[n]=20;ContentUnlocks.Reconcile(A);A.contentUnlocks.unlocked.Add(ContentUnlocks.CoreCraft);
         }
         [TearDown] public void Cleanup(){UnityEngine.Object.DestroyImmediate(catalog);if(Directory.Exists(directory))Directory.Delete(directory,true);}
         CoreCraftQuote Quote(int investment=0)=>CoreCrafting.Quote(A,Recipe,investment);
@@ -37,7 +37,7 @@ namespace Hellscript.Tests
             Assert.AreEqual(123456,A.riftFatigue.dailyMs);Assert.AreEqual(654321,A.riftFatigue.paidMs);Assert.AreEqual(2,A.riftFatigue.recoveries);
             Assert.AreEqual(32100,H.riftProgress.Best(24));Assert.AreEqual("claimed",H.riftProgress.Chest(24));
             Assert.IsTrue(store.AcknowledgeCoreCraft("integrated-craft"),store.Error);store=new GameStore(directory,catalog);
-            Assert.AreEqual(GameStore.MaximumSchemaVersion,A.schema);Assert.IsEmpty(A.coreCraft.pendingId);Assert.AreEqual(1,A.coreCraft.history.Count);
+            Assert.AreEqual(GameStore.MaximumSchemaVersion,A.schema);Assert.AreEqual(RewardBoxes.Version,A.rewardBoxes.version);Assert.IsEmpty(A.coreCraft.pendingId);Assert.AreEqual(1,A.coreCraft.history.Count);
             Assert.AreEqual(654321,A.riftFatigue.paidMs);Assert.AreEqual(32100,H.riftProgress.Best(24));Assert.AreEqual(4000,A.premium);
             Assert.IsEmpty(store.GemRecoveryArchive);
         }

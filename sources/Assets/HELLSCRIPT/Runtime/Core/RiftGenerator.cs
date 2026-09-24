@@ -67,6 +67,9 @@ namespace Hellscript
         {
             uint basis=structuralSeed==0?Derive(seed,"candidate:"+candidate):structuralSeed;
             var map=new RiftLayout{version=arenaBoss?5:RiftLayout.CurrentVersion,roamingBoss=!arenaBoss,bossRoom=-1,contentStage=stage,theme=theme,mapSeed=seed,candidate=candidate,layoutSeed=Derive(basis,"layout"),decorationSeed=Derive(basis,"decoration"),encounterSeed=Derive(basis,"encounter"),combatSeed=Derive(seed,"combat"),rewardSeed=Derive(seed,"reward")};
+            map.introductory=!arenaBoss&&IntroductoryRift.Applies(stage);
+            // Keep established non-intro layouts/fingerprints at v7; v8 carries the smaller budget.
+            map.version=map.introductory?RiftLayout.CurrentVersion:arenaBoss?5:7;
             map.objective=!arenaBoss||stage<ObjectiveFirstStage?RiftObjectiveKind.None:forcedObjective??RiftObjectives.Select(seed,stage);
             uint layout=map.layoutSeed,decor=map.decorationSeed;
             var pool=RiftTemplates.All.Skip(theme*6).Take(arenaBoss?6:5).ToList();var templates=new List<RoomTemplate>(pool);
@@ -162,6 +165,7 @@ namespace Hellscript
             AddJunctions(map);AssignRoles(map,spine);
             var first=map.rooms[0];map.start=first.Transform(-RiftTemplates.Get(first.templateId).size*.5f+Vector2.one*2);
             RiftOrganicGeometry.ShapeRooms(map);
+            IntroductoryRift.ScaleGeometry(map);
             if(map.version>=7)RiftDensity.Validate(map);
             var nav=new RiftNavigation(map);if(!nav.Reachable(map.start))throw new InvalidOperationException("시작점 접근 불가");
             foreach(var corridor in map.corridors)for(int n=1;n<corridor.points.Count;n++)
@@ -181,6 +185,7 @@ namespace Hellscript
             PlaceEncounters(map,nav,stage,ref encounter);PlaceChests(map,nav,runId,stage,hero);RiftFieldContent.AddBodiesAndValidate(map);PlaceSeals(map,new RiftNavigation(map),stage);
             RiftObjectives.Place(map,new RiftNavigation(map));
             var shape=new StringBuilder();shape.Append(map.version).Append(':').Append(map.layoutSeed).Append('|');
+            if(map.introductory)shape.Append("intro|");
             foreach(var r in map.rooms)shape.Append($"{r.templateId}.{r.rotation}.{r.variant}|");foreach(var c in map.corridors)shape.Append($"{c.roomA}:{c.doorA}-{c.roomB}:{c.doorB}|");
             map.fingerprint=Derive(0,shape.ToString()).ToString("x8");RiftGates.Place(map);Validate(map);return map;
         }
@@ -288,8 +293,11 @@ namespace Hellscript
             var result=new (int normal,int elite,int group)[map.rooms.Count];
             if(map.roamingBoss)
             {
-                var rooms=map.rooms.Where(r=>r.index!=0).OrderByDescending(r=>r.central).ThenByDescending(r=>r.doors.Count(d=>d.corridor>=0)).ThenBy(r=>r.index).ToArray();
-                int normal=100,remainingElites=8;result[0]=(10,0,5);
+                var distance=GraphDistances(map,0);
+                // With only four introductory elites, reserve the second pack for a room
+                // eligible for the sealed chest instead of spending both packs beside entry.
+                var rooms=map.rooms.Where(r=>r.index!=0).OrderByDescending(r=>r.central).ThenByDescending(r=>map.introductory&&distance[r.index]>=2).ThenByDescending(r=>r.doors.Count(d=>d.corridor>=0)).ThenBy(r=>r.index).ToArray();
+                int normal=map.introductory?50:100,remainingElites=map.introductory?IntroductoryRift.EliteCount:8;result[0]=(map.introductory?5:10,0,5);
                 for(int i=0;i<rooms.Length;i++)
                 {
                     int amount=normal/(rooms.Length-i);normal-=amount;int elite=Mathf.Min(2,remainingElites);remainingElites-=elite;
@@ -402,9 +410,11 @@ namespace Hellscript
             {
                 var room=eligible[n%eligible.Count];var used=map.chests.Where(c=>c.room==room.index).ToList();if(used.Count>=2)throw new InvalidOperationException("상자 분산 불가");
                 var anchors=room.chestAnchors.ToList();Shuffle(anchors,ref rng);RiftChest chest=null;
+                if(map.introductory)anchors.AddRange(RiftFieldContent.SupplementaryAnchors(room,nav));
                 foreach(var anchor in anchors)
                 {
                     if(used.Any(c=>Vector2.Distance(c.position,anchor)<3)||Vector2.Distance(map.start,anchor)<(map.version>=7?26:45)||!nav.Reachable(anchor))continue;
+                    if(map.introductory&&(!RiftFieldContent.ClearOfSpawns(map,anchor,new Vector2(.6f,.425f))||!RiftFieldContent.ClearOfPassages(map,anchor,new Vector2(.6f,.425f))))continue;
                     var points=new List<Vector2>();foreach(var offset in new[]{Vector2.up,Vector2.down,Vector2.left,Vector2.right}){Vector2 p=anchor+offset*1.15f;if(nav.Reachable(p)&&nav.TravelClear(p,anchor))points.Add(p);}
                     if(points.Count<2)continue;string id="chest-"+n.ToString("00");
                     chest=new RiftChest{id=id,requestId=runId+":"+id+":open",definitionId=n==0?"CH02":"CH01",room=room.index,position=anchor,accessPoints=points,openingPosition=points[0]};break;
@@ -430,7 +440,8 @@ namespace Hellscript
         public static void Validate(RiftLayout map)
         {
             if(map.rooms.Count<(map.roamingBoss?7:6)||map.rooms.Count>(map.roamingBoss?9:8)||map.rooms.Count(r=>r.boss)!=(map.roamingBoss?0:1)||map.corridors.Count<map.rooms.Count)throw new InvalidOperationException("지도 구조 불일치");
-            if(map.spawns.Count(s=>s.elite<0)!=110||map.spawns.Count(s=>s.elite>=0)!=8)throw new InvalidOperationException("전투 예산 불일치");
+            if(map.introductory&&(!map.roamingBoss||!IntroductoryRift.Applies(map.contentStage)))throw new InvalidOperationException("Invalid introductory rift.");
+            if(map.spawns.Count(s=>s.elite<0)!=(map.introductory?IntroductoryRift.NormalCount:110)||map.spawns.Count(s=>s.elite>=0)!=(map.introductory?IntroductoryRift.EliteCount:8))throw new InvalidOperationException("전투 예산 불일치");
             if(map.chests.Count!=map.rooms.Count-2||map.chests.Count(c=>c.reward!=null)!=2)throw new InvalidOperationException("상자 예산 불일치");
             if((map.contentStage==0||map.contentStage>=ContentUnlocks.Rules.expandedEnemiesStage)&&map.spawns.Select(s=>s.kind).Distinct().Count()<4||map.groups.Select(g=>g.archetype).Distinct().Count()<3)throw new InvalidOperationException("적 다양성 부족");
             if(map.rooms.Any(r=>r.doors.Count(d=>d.corridor>=0)<(r.role==RiftRoomRole.Wing?1:2))||GraphDistances(map,0).Any(d=>d==999))throw new InvalidOperationException("끊어진 연결");

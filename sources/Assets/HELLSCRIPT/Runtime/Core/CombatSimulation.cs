@@ -111,6 +111,8 @@ namespace Hellscript
             float health=70*Mathf.Pow(1.08f,spawnRun.stage-1)*(boss?45:hp[kind])*(elite>=0?3:1);
             var e=new EnemyState{id=spawnRun.nextId++,room=room,kind=kind,position=pos,health=health,maxHealth=health,
                 attack=18*Mathf.Pow(1.055f,spawnRun.stage-1)*(boss?3:atk[kind])*(elite>=0?1.5f:1),speed=boss?2:speed[kind],elite=elite,boss=boss,add=add,cooldown=1+RandomStream.Unit(ref spawnRun.rng)};
+            if(spawnRun.training<0&&spawnRun.layout.introductory)
+            {e.health*=IntroductoryRift.HealthMultiplier(spawnRun.stage,boss);e.maxHealth=e.health;e.attack*=IntroductoryRift.AttackMultiplier(spawnRun.stage);}
             if(boss){spawnRun.bossId=e.id;e.pattern=spawnRun.layout.legacy?(spawnRun.stage-1)%3:spawnRun.layout.bossKind;if(e.pattern==1){e.health*=.85f;e.attack*=.9f;}if(e.pattern==2){e.health*=1.1f;e.attack*=1.1f;}e.maxHealth=e.health;}
             InitializeEnemyBrain(e,spawnRun);spawnRun.enemies.Add(e);
         }
@@ -405,7 +407,7 @@ namespace Hellscript
             if(e.goblin){RewardGoldenGoblin(e);return;}
             if(!e.add)
             {
-                State.meter+=e.elite>=0?5:1;
+                State.meter+=(e.elite>=0?5:1)*(State.layout.introductory?2:1);
                 if(State.training<0)
                 {
                     var rune=RuneGrowth.GrantMonster(account,State,e);
@@ -538,6 +540,7 @@ namespace Hellscript
             CloseUnopenedChests();State.phase=won?RunPhase.Cleared:RunPhase.Failed;State.action=reason;Log("RUN_END",reason);
             if(State.training>=0)return;
             RiftEntryRules.Complete(Hero,State,completion);
+            OfflineSupplies.RecordClear(account,State,RepeatPolicy.resultSeconds);
             ContentUnlocks.RecordRunEnd(account);
             if(account.records.Any(r=>r.id==State.id))return;
             account.records.Insert(0,new RunRecord{id=State.id,hero=catalog.classNames[(int)Hero.heroClass],result=reason,stage=State.stage,kills=State.kills,loot=State.lootCount,chestsOpened=State.layout.chests.Count(c=>c.phase==ChestPhase.Opened),chestsTotal=State.layout.chests.Count,mapFingerprint=State.layout.fingerprint,objective=State.training<0?RiftObjectives.Capture(State):null,simulationSeconds=State.time,realSeconds=State.realTime,damageDealt=State.dealt,logs=new List<string>(State.logs)});

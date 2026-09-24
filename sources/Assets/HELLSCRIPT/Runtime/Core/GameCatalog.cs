@@ -153,6 +153,7 @@ namespace Hellscript
     public sealed class AccountSave
     {
         public AttendanceState attendance;
+        public OfflineSupplyState offlineSupplies;
         public RiftFatigue riftFatigue=new RiftFatigue();
         public List<AspectProgress> aspects=new List<AspectProgress>();
         public int enhancementStones;
@@ -162,10 +163,11 @@ namespace Hellscript
         public int gemCapacity=GemInventory.DefaultCapacity;
         public List<GemStack> gems=new List<GemStack>();
         public RuneGrowthState runes=new RuneGrowthState();
+        public RewardBoxState rewardBoxes=new RewardBoxState();
         public ContentUnlockState contentUnlocks=new ContentUnlockState();
         public AccountGuide guide=new AccountGuide();
         public int schema=2, selectedHero, gold, materials, sweepCount;
-        // Shared Abyssal Coins, including attendance grants.
+        // Shared Abyssal Coins, including first-clear boxes and attendance grants.
         public int premium;
         public int[] cores=new int[8];
         // Purchased capacity per warehouse tab; 0 is a locked tab. Items keep their own tab and slot.

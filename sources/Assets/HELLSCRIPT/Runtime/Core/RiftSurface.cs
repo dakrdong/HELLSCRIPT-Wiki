@@ -124,6 +124,10 @@ namespace Hellscript
         public bool SegmentOnFloor(Vector2 a,Vector2 b)
         {
             if(!Contains(a)||!Contains(b))return false;
+            // Movement uses short steps. A fixed parametric tolerance shrank to sub-micrometre
+            // world gaps and could reject a 0.2 m prefix of an accepted 0.3 m path at a shared seam.
+            // Keep a 0.01 mm world tolerance; this does not bridge meaningful floor gaps.
+            float tolerance=Mathf.Max(.000001f,.00001f/Mathf.Max(.01f,Vector2.Distance(a,b)));
             intervals.Clear();if(++stamp==int.MaxValue){Array.Clear(stamps,0,stamps.Length);stamp=1;}
             var cell=Bucket(a);var goal=Bucket(b);var delta=b-a;
             int stepX=delta.x>=0?1:-1,stepY=delta.y>=0?1:-1;
@@ -141,14 +145,14 @@ namespace Hellscript
                 {
                     if(stamps[i]==stamp)continue;stamps[i]=stamp;
                     if(!patches[i].Clip(a,b,out float first,out float last))continue;
-                    if(first<=.000001f&&last>=1-.000001f)return true;
+                    if(first<=tolerance&&last>=1-tolerance)return true;
                     intervals.Add(new Vector2(first,last));
                 }
                 if(cell==goal)break;
                 if(nextX<nextY){cell.x+=stepX;nextX+=strideX;}else{cell.y+=stepY;nextY+=strideY;}
             }
             intervals.Sort((x,y)=>x.x.CompareTo(y.x));float covered=0;
-            foreach(var interval in intervals){if(interval.x>covered+.000001f)return false;covered=Mathf.Max(covered,interval.y);if(covered>=1-.000001f)return true;}
+            foreach(var interval in intervals){if(interval.x>covered+tolerance)return false;covered=Mathf.Max(covered,interval.y);if(covered>=1-tolerance)return true;}
             return false;
         }
     }

@@ -10,7 +10,7 @@ namespace Hellscript
         public static bool ValidBatch(GemBatch batch)=>batch==GemBatch.One||batch==GemBatch.Five||batch==GemBatch.All;
         public static int CraftCount(AccountSave a,string gemId,int tier,GemBatch batch)
         {
-            if(!Available(a)||!ValidBatch(batch)||GemElixirs.Family(gemId)==null||!GemCatalog.Valid(gemId,tier))return 0;
+            if(!Available(a)||!ContentUnlocks.Has(a,ContentUnlocks.Elixir)||!ValidBatch(batch)||GemElixirs.Family(gemId)==null||!GemCatalog.Valid(gemId,tier))return 0;
             long maximum=Math.Min(GemStacks.Count(a.gems,gemId,tier),GemElixirs.PotionLimit-a.Hero.potions.Count(GemElixirs.Id(gemId,tier)));
             int count=batch==GemBatch.All?(int)maximum:(int)batch;return count>0&&count<=maximum?count:0;
         }

@@ -79,7 +79,7 @@ namespace Hellscript.Tests
                 foreach(var c in map.corridors)
                 {
                     Assert.AreEqual(c.points.Count,c.widths.Count);Assert.AreEqual(4,c.widths[0]);Assert.AreEqual(4,c.widths[c.widths.Count-1]);
-                    Assert.Greater(c.widths.Max(),4.5f);Assert.Greater(c.points.Count,5);
+                    if(map.introductory)Assert.GreaterOrEqual(c.widths.Min(),4);else Assert.Greater(c.widths.Max(),4.5f);Assert.Greater(c.points.Count,5);
                     for(int n=1;n<c.points.Count;n++)Assert.IsTrue(nav.TravelClear(c.points[n-1],c.points[n],1.2f),"Corridor clearance "+seed+":"+c.index+":"+n);
                 }
                 string json=JsonUtility.ToJson(map);var loaded=JsonUtility.FromJson<RiftLayout>(json);

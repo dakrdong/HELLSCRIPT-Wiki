@@ -17,7 +17,7 @@ namespace Hellscript
         public void ShowContentUnlocks()
         {
             var a=game.Store.Data;ContentUnlocks.Reconcile(a);
-            pageRepaint=ShowContentUnlocks;Base("content-unlocks","콘텐츠 해금 · 안내","공개 단계와 영웅 레벨은 테스트 초안입니다");
+            pageRepaint=ShowContentUnlocks;Base("content-unlocks","콘텐츠 해금 · 안내","균열 클리어 단계에 따라 계정 전체에 개방됩니다");
             Note(content,Loc.F("계정 최고 실제 클리어 {0}단계 · 선택 영웅 {1}단계",ContentUnlocks.AccountClear(a),a.Hero.highestClear),21,65,pale);
             var next=ContentUnlocks.Rules.features.FirstOrDefault(f=>!ContentUnlocks.Has(a,f.id));
             if(next!=null)Note(content,Loc.F("다음 목표: {0}\n{1}",Loc.T(next.name),ContentUnlocks.Condition(next.id)),20,95,gold);

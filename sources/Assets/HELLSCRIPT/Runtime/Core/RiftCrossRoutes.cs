@@ -170,6 +170,7 @@ namespace Hellscript
                     if(index<3||index+3>=route.points.Count)break;
                     var a=route.points[index-3]-junction.position;var b=route.points[index+3]-junction.position;
                     float arm=map.version>=7?3.9f:8.9f;
+                    if(map.introductory)arm*=IntroductoryRift.GeometryScale;
                     if(a.magnitude<arm||b.magnitude<arm||Vector2.Dot(a.normalized,b.normalized)>-.99f)break;
                     axes.Add(a.normalized);
                 }
@@ -182,7 +183,7 @@ namespace Hellscript
             var centers=map.rooms.Where(r=>r.central).ToArray();
             if(centers.Length<1||centers.Any(r=>r.boss||r.role==RiftRoomRole.Wing||r.position.magnitude>10||r.doors.Count(d=>d.corridor>=0)<2))
                 throw new InvalidOperationException("An interior room with independent exits is required.");
-            var crossing=Crossing(map);if(crossing==null||map.rooms.Any(r=>Expand(r.Bounds,3).Contains(crossing.position)))
+            var crossing=Crossing(map);if(crossing==null||map.rooms.Any(r=>Expand(r.Bounds,map.introductory?3*IntroductoryRift.GeometryScale:3).Contains(crossing.position)))
                 throw new InvalidOperationException("Two transverse routes must meet at an exterior X crossing.");
             var nav=new RiftNavigation(map,true);
             if(!nav.Reachable(crossing.position)||!nav.CanLand(crossing.position,1.2f))throw new InvalidOperationException("The X crossing is not traversable.");

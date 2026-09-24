@@ -166,9 +166,9 @@ namespace Hellscript.Tests
             string dir=Path.Combine(Path.GetTempPath(),"hellscript-idle-audit-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(dir);
             try
             {
-                var account=GameStore.NewAccount();account.Hero.highestClear=1;account.Hero.firstClears.Add(1);account.gold=1950;account.materials=15;account.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()-3600;ContentUnlocks.Reconcile(account);account.contentUnlocks.offlineActivatedUtc=account.lastSeenUtc;
+                var account=GameStore.NewAccount();account.Hero.highestClear=1;account.Hero.firstClears.Add(1);account.offlineSupplies=null;account.gold=1950;account.materials=15;account.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()-3600;ContentUnlocks.Reconcile(account);account.contentUnlocks.offlineActivatedUtc=account.lastSeenUtc;
                 File.WriteAllText(Path.Combine(dir,"hellscript-local-v1.json"),JsonUtility.ToJson(account));var loaded=new GameStore(dir);
-                Assert.GreaterOrEqual(loaded.LocalIdleGoldAwarded,240);Assert.AreEqual(loaded.LocalIdleGoldAwarded,loaded.Data.gold-account.gold);Assert.AreEqual(loaded.LocalIdleMaterialsAwarded,loaded.Data.materials-account.materials);
+                Assert.GreaterOrEqual(loaded.LocalIdleGoldAwarded,1971);Assert.AreEqual(loaded.LocalIdleGoldAwarded,loaded.Data.gold-account.gold);Assert.AreEqual(account.materials,loaded.Data.materials);Assert.AreEqual(loaded.LocalIdleStonesAwarded,loaded.Data.enhancementStones-account.enhancementStones);
                 CollectionAssert.AreEqual(account.Hero.firstClears,loaded.Data.Hero.firstClears);int gold=loaded.Data.gold;var reloaded=new GameStore(dir);Assert.AreEqual(reloaded.LocalIdleGoldAwarded,reloaded.Data.gold-gold);
             }
             finally{Directory.Delete(dir,true);}

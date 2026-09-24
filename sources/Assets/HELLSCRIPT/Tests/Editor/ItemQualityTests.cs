@@ -18,7 +18,7 @@ namespace Hellscript.Tests
         [SetUp] public void Setup()
         {
             Loc.UseSource();catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();account=GameStore.NewAccount(catalog);
-            account.Hero.level=30;account.Hero.highestClear=30;account.gold=10000000;account.materials=1000000;ContentUnlocks.Reconcile(account);
+            account.Hero.level=30;account.Hero.highestClear=30;account.gold=10000000;account.materials=1000000;ContentUnlocks.Reconcile(account);account.contentUnlocks.unlocked.AddRange(new[]{ContentUnlocks.Reroll,ContentUnlocks.Masterwork,ContentUnlocks.CoreCraft,ContentUnlocks.Sweep}); // Quality probes retain released-account access.
             rng=778911;directory=Path.Combine(Path.GetTempPath(),"hellscript-quality-"+Guid.NewGuid());
         }
         [TearDown] public void Teardown()

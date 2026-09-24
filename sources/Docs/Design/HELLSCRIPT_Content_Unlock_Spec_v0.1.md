@@ -1,5 +1,7 @@
 # HELLSCRIPT — 콘텐츠 공개·해금 구현 명세 v0.1
 
+> 이 문서는 이전 구현의 기록이다. 현재 개방 단계와 이관 규칙은 [균열 단계별 콘텐츠 개방](HELLSCRIPT_Rift_Content_Unlocks.md)을 따른다. / Historical record; see the linked current schedule.
+
 작성일: 2026-09-12  
 문서 유형: Work 구현 전달용 변경 명세  
 적용 대상: 기존 HELLSCRIPT 프로젝트의 코드·기획서·콘텐츠 데이터표  

@@ -11,11 +11,16 @@ namespace Hellscript.Tests
     public sealed class RiftTests
     {
         static GameCatalog Catalog(){var catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();return catalog;}
-        [Test]
-        public void AllSixFallbackLayoutsPassWithDifferentRewardSeeds()
+        [TestCase(0,0)] [TestCase(0,1)] [TestCase(0,2)] [TestCase(1,0)] [TestCase(1,1)] [TestCase(1,2)]
+        public void AllSixFallbackLayoutsPassWithDifferentRewardSeeds(int theme,int index)
         {
-            for(int theme=0;theme<2;theme++)for(int index=0;index<3;index++)for(uint seed=1;seed<=5;seed++)
-            {var map=RiftGenerator.Fallback(seed,"fallback-test",seed%2==0?30:1,HeroClass.Warrior,theme,index);RiftGenerator.Validate(map);Assert.AreEqual(7,map.rooms.Count);Assert.IsNotEmpty(map.fallbackId);}
+            for(uint seed=1;seed<=5;seed++)foreach(int stage in new[]{1,5,30})
+            {
+                var map=RiftGenerator.Fallback(seed,"fallback-test",stage,HeroClass.Warrior,theme,index);RiftGenerator.Validate(map);Assert.AreEqual(7,map.rooms.Count);Assert.IsNotEmpty(map.fallbackId);
+                if(!map.introductory)continue;var nav=new RiftNavigation(map);
+                foreach(var room in map.rooms)foreach(var door in room.doors.Where(d=>d.corridor>=0))
+                    Assert.IsTrue(nav.TravelClear(door.position-door.direction*3,door.position+door.direction*3,1.2f),"Blocked doorway, seed "+seed);
+            }
         }
         [Test]
         public void BossExclusionRemainsEvenAcrossAdjacentSeeds()
