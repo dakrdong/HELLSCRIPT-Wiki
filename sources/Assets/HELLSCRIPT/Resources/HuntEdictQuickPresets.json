@@ -1,0 +1,2643 @@
+{
+  "version": 1,
+  "presets": [
+    {
+      "scope": "global/position.engage",
+      "id": "balanced",
+      "name": "가까운 적과 균형 전투",
+      "nameEn": "Balanced engagement",
+      "description": "적에게 접근한 뒤 2m 거리를 기준으로 선회합니다.",
+      "descriptionEn": "Approach enemies, then orbit at a preferred distance of 2 m.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/position.engage",
+      "id": "close",
+      "name": "중앙 돌파",
+      "nameEn": "Push into the pack",
+      "description": "적 무리의 중심을 향해 접근합니다. 근접 광역 공격에 맞는 배치입니다.",
+      "descriptionEn": "Close in toward the pack center for melee area attacks.",
+      "values": [
+        {
+          "id": "position.mode",
+          "value": "CENTER"
+        },
+        {
+          "id": "position.distance",
+          "value": "1"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/position.engage",
+      "id": "ranged",
+      "name": "안전 거리 유지",
+      "nameEn": "Keep your distance",
+      "description": "기본 공격 사거리를 기준으로 적과 거리를 유지합니다.",
+      "descriptionEn": "Keep enemies at your basic attack range.",
+      "values": [
+        {
+          "id": "position.engage",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.mode",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "BASIC_RANGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/position.surrounded",
+      "id": "hold",
+      "name": "현재 무리와 전투",
+      "nameEn": "Fight the current pack",
+      "description": "추가로 적을 모으지 않고 현재 위치에서 전투를 이어 갑니다.",
+      "descriptionEn": "Fight the current pack without gathering more enemies.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/position.surrounded",
+      "id": "escape",
+      "name": "포위되면 이탈",
+      "nameEn": "Escape encirclement",
+      "description": "포위되면 이탈을 시도하고 추가 적을 유인하지 않습니다.",
+      "descriptionEn": "Attempt to escape when surrounded without drawing in more enemies.",
+      "values": [
+        {
+          "id": "position.surrounded",
+          "value": "ESCAPE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/position.surrounded",
+      "id": "gather",
+      "name": "세 마리씩 몰이",
+      "nameEn": "Gather small packs",
+      "description": "최대 5초 동안 적 세 마리를 모으고 포위되면 외곽으로 이동합니다.",
+      "descriptionEn": "Gather three enemies for up to 5 seconds; move to the edge if surrounded.",
+      "values": [
+        {
+          "id": "position.surrounded",
+          "value": "MOVE_EDGE"
+        },
+        {
+          "id": "position.gather",
+          "value": "ON"
+        },
+        {
+          "id": "position.addEnemies",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/target.default",
+      "id": "nearest",
+      "name": "가까운 적부터",
+      "nameEn": "Nearest enemy first",
+      "description": "가까운 적부터 공격하고 보스전에서는 보스를 우선합니다.",
+      "descriptionEn": "Attack the nearest enemy; prioritize the boss in boss fights.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/target.default",
+      "id": "priority",
+      "name": "위험한 적 우선",
+      "nameEn": "Dangerous enemies first",
+      "description": "지원형·원거리 적을 우선하고 위험한 시전을 방해합니다.",
+      "descriptionEn": "Prioritize support and ranged enemies and interrupt dangerous casts.",
+      "values": [
+        {
+          "id": "target.specialEnabled",
+          "value": "BOSS,ELITE,SUPPORT,RANGED"
+        },
+        {
+          "id": "target.specialOrder",
+          "value": "SUPPORT,RANGED,ELITE,BOSS"
+        },
+        {
+          "id": "target.interruptCaster",
+          "value": "ON"
+        },
+        {
+          "id": "target.bossFight",
+          "value": "DANGEROUS_SUPPORT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/target.default",
+      "id": "pack",
+      "name": "밀집 무리 정리",
+      "nameEn": "Clear dense packs",
+      "description": "밀집한 적을 먼저 노리고 보스전에서는 주변 적부터 처리합니다.",
+      "descriptionEn": "Target dense packs and clear adds first during boss fights.",
+      "values": [
+        {
+          "id": "target.default",
+          "value": "DENSE"
+        },
+        {
+          "id": "target.bossFight",
+          "value": "ADDS"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/target.switch",
+      "id": "balanced",
+      "name": "일반 추적",
+      "nameEn": "Balanced pursuit",
+      "description": "우선순위에 따라 대상을 바꾸며 최대 30m·20초까지 추적합니다.",
+      "descriptionEn": "Follow target priority and pursue for up to 30 m or 20 seconds.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/target.switch",
+      "id": "short",
+      "name": "짧게 추적",
+      "nameEn": "Short pursuit",
+      "description": "적을 10m·5초까지만 추적하고 시야에서 사라지면 중단합니다.",
+      "descriptionEn": "Pursue for up to 10 m or 5 seconds; stop when the target leaves sight.",
+      "values": [
+        {
+          "id": "target.chaseDistance",
+          "value": "10"
+        },
+        {
+          "id": "target.chaseTime",
+          "value": "5"
+        },
+        {
+          "id": "target.lostSight",
+          "value": "STOP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/target.switch",
+      "id": "finish",
+      "name": "한 대상 마무리",
+      "nameEn": "Finish one target",
+      "description": "대상이 쓰러질 때까지 유지하고 고블린은 최대 40m·30초까지 추적합니다.",
+      "descriptionEn": "Keep attacking until the target dies; pursue goblins for up to 40 m or 30 seconds.",
+      "values": [
+        {
+          "id": "target.switch",
+          "value": "UNTIL_DEATH"
+        },
+        {
+          "id": "target.goblin",
+          "value": "ON"
+        },
+        {
+          "id": "target.goblinDistance",
+          "value": "40"
+        },
+        {
+          "id": "target.goblinTime",
+          "value": "30"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/common.order",
+      "id": "survival",
+      "name": "생존 후 전투",
+      "nameEn": "Survive, then fight",
+      "description": "긴급 생존과 회피를 가장 먼저 검토합니다.",
+      "descriptionEn": "Check emergency survival and dodging before other actions.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/common.order",
+      "id": "combat",
+      "name": "전투 후 회수",
+      "nameEn": "Fight, then collect",
+      "description": "생존·회피 다음에 공격을 검토하고 전리품은 그 뒤에 회수합니다.",
+      "descriptionEn": "After survival and dodging, attack before collecting loot.",
+      "values": [
+        {
+          "id": "common.order",
+          "value": "EMERGENCY,DODGE,ATTACK,PRIORITY_LOOT,AFTER_COMBAT_LOOT,EXPLORE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/common.order",
+      "id": "recovery",
+      "name": "회수 먼저 정리",
+      "nameEn": "Collect before advancing",
+      "description": "생존·회피 다음에 회수 행동을 검토하고 남은 적을 공격합니다.",
+      "descriptionEn": "After survival and dodging, consider collection before attacking remaining enemies.",
+      "values": [
+        {
+          "id": "common.order",
+          "value": "EMERGENCY,DODGE,PRIORITY_LOOT,AFTER_COMBAT_LOOT,ATTACK,EXPLORE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.lowHp",
+      "id": "careful",
+      "name": "생존 우선",
+      "nameEn": "Survival first",
+      "description": "HP 45%에서 후퇴하고 75%까지 회복한 뒤 복귀합니다. 치명적 피해와 지속 피해에도 대응합니다.",
+      "descriptionEn": "Retreat at 45% HP and return at 75%; respond to lethal and ongoing damage.",
+      "values": [
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "45"
+        },
+        {
+          "id": "survival.lethal",
+          "value": "ON"
+        },
+        {
+          "id": "survival.dot",
+          "value": "ON"
+        },
+        {
+          "id": "survival.dotHpPercent",
+          "value": "7"
+        },
+        {
+          "id": "survival.returnHpPercent",
+          "value": "75"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.lowHp",
+      "id": "balanced",
+      "name": "균형 생존",
+      "nameEn": "Balanced survival",
+      "description": "HP 30%에서 후퇴하고 55%에서 복귀합니다. 치명적 피해를 피합니다.",
+      "descriptionEn": "Retreat at 30% HP and return at 55%; react to lethal damage.",
+      "values": [
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lethal",
+          "value": "ON"
+        },
+        {
+          "id": "survival.returnHpPercent",
+          "value": "55"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.lowHp",
+      "id": "emergency",
+      "name": "위급할 때만 후퇴",
+      "nameEn": "Emergency retreat",
+      "description": "HP 20% 이하나 치명적 위험에만 대응하고 40%에서 복귀합니다.",
+      "descriptionEn": "React at 20% HP or to lethal danger; return at 40% HP.",
+      "values": [
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "20"
+        },
+        {
+          "id": "survival.lethal",
+          "value": "ON"
+        },
+        {
+          "id": "survival.returnHpPercent",
+          "value": "40"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.potion",
+      "id": "balanced",
+      "name": "균형 보급",
+      "nameEn": "Balanced supplies",
+      "description": "HP 40%·자원 30%에서 물약을 사용합니다. 성소에서 방문당 500금화까지 보충합니다.",
+      "descriptionEn": "Use potions at 40% HP or 30% resource. Restock up to 500 gold per sanctuary visit.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.potion",
+      "id": "careful",
+      "name": "넉넉한 생존 보급",
+      "nameEn": "Extra survival supplies",
+      "description": "HP 60%·자원 45%에서 사용합니다. 목표 수량을 채운 뒤 출정하며 구매 후 500금화를 남깁니다.",
+      "descriptionEn": "Use at 60% HP or 45% resource. Wait for target stocks before departure and retain 500 gold.",
+      "values": [
+        {
+          "id": "survival.potionHpPercent",
+          "value": "60"
+        },
+        {
+          "id": "potion.resourcePercent",
+          "value": "45"
+        },
+        {
+          "id": "potion.hpTarget",
+          "value": "30"
+        },
+        {
+          "id": "potion.resourceTarget",
+          "value": "30"
+        },
+        {
+          "id": "potion.utilityTarget",
+          "value": "15"
+        },
+        {
+          "id": "potion.budget",
+          "value": "1000"
+        },
+        {
+          "id": "potion.reserve",
+          "value": "500"
+        },
+        {
+          "id": "potion.shortage",
+          "value": "UNTIL_TARGET"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.potion",
+      "id": "frugal",
+      "name": "물약 절약",
+      "nameEn": "Conserve potions",
+      "description": "HP 25%·자원 15%에서 사용하고 자동 구매를 끕니다. HP 물약이 없으면 대기합니다.",
+      "descriptionEn": "Use at 25% HP or 15% resource without automatic purchases; wait if HP potions run out.",
+      "values": [
+        {
+          "id": "survival.potionHpPercent",
+          "value": "25"
+        },
+        {
+          "id": "potion.resourcePercent",
+          "value": "15"
+        },
+        {
+          "id": "potion.condition",
+          "value": "OFF"
+        },
+        {
+          "id": "potion.autoBuy",
+          "value": "OFF"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/dodge.ground.policy",
+      "id": "all",
+      "name": "모든 예고 회피",
+      "nameEn": "Avoid all warnings",
+      "description": "지속 장판·범위 공격·직접 타격의 회피를 항상 시도합니다.",
+      "descriptionEn": "Always attempt to evade ground, area and direct attacks.",
+      "values": [
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/dodge.ground.policy",
+      "id": "balanced",
+      "name": "큰 피해 위주 회피",
+      "nameEn": "Avoid heavy damage",
+      "description": "예상 HP 손실이 10% 이상인 공격을 회피합니다.",
+      "descriptionEn": "Evade attacks expected to remove at least 10% of maximum HP.",
+      "values": [
+        {
+          "id": "dodge.ground.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "DAMAGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/dodge.ground.policy",
+      "id": "attack",
+      "name": "공격 유지 우선",
+      "nameEn": "Maintain attacks",
+      "description": "장판은 피하고 범위·직접 공격은 예상 HP 손실 25%부터 피합니다.",
+      "descriptionEn": "Always evade ground hazards; evade area and direct attacks from 25% expected HP loss.",
+      "values": [
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "dodge.area.hpPercent",
+          "value": "25"
+        },
+        {
+          "id": "dodge.direct.hpPercent",
+          "value": "25"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/dodge.control",
+      "id": "careful",
+      "name": "제어와 중첩 피해 회피",
+      "nameEn": "Avoid control and overlapping damage",
+      "description": "기절·빙결·속박·끌어당김과 1초 내 합산 피해 15%에 대응합니다. 필요하면 공격을 취소합니다.",
+      "descriptionEn": "React to control effects and 15% combined damage within 1 second; cancel interruptible attacks.",
+      "values": [
+        {
+          "id": "dodge.control",
+          "value": "STUN,FREEZE,ROOT,PULL"
+        },
+        {
+          "id": "dodge.overlap",
+          "value": "ON"
+        },
+        {
+          "id": "dodge.totalHpPercent",
+          "value": "15"
+        },
+        {
+          "id": "dodge.method",
+          "value": "SKILL_IF_NEEDED"
+        },
+        {
+          "id": "dodge.interrupt",
+          "value": "CANCEL_ALLOWED"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/dodge.control",
+      "id": "balanced",
+      "name": "걷기 우선 회피",
+      "nameEn": "Walk away first",
+      "description": "걷기로 위험을 피하고 기절·빙결과 합산 피해 25%에 대응합니다.",
+      "descriptionEn": "Prefer walking; react to stun, freeze and 25% combined damage.",
+      "values": [
+        {
+          "id": "dodge.control",
+          "value": "STUN,FREEZE"
+        },
+        {
+          "id": "dodge.overlap",
+          "value": "ON"
+        },
+        {
+          "id": "dodge.totalHpPercent",
+          "value": "25"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/dodge.control",
+      "id": "finish",
+      "name": "현재 공격 마무리",
+      "nameEn": "Finish the current attack",
+      "description": "공격을 마친 뒤 걷기로 회피합니다. 합산 피해 기준은 40%입니다.",
+      "descriptionEn": "Finish the current attack before walking away; use a 40% combined damage threshold.",
+      "values": [
+        {
+          "id": "dodge.overlap",
+          "value": "ON"
+        },
+        {
+          "id": "dodge.totalHpPercent",
+          "value": "40"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.defenseSkill",
+      "id": "walk",
+      "name": "보행 후퇴",
+      "nameEn": "Retreat on foot",
+      "description": "지정 스킬 없이 보행 후퇴를 우선합니다.",
+      "descriptionEn": "Prioritize walking away without assigning a survival skill.",
+      "values": [
+        {
+          "id": "survival.order",
+          "value": "WALK,DEFENSE,ESCAPE"
+        },
+        {
+          "id": "survival.fallback",
+          "value": "WALK"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.defenseSkill",
+      "id": "defend",
+      "name": "방어 후 이탈",
+      "nameEn": "Defend, then escape",
+      "description": "장착한 생존기를 지정해 방어 후 이탈합니다. 사용할 수 없으면 걷기로 후퇴합니다.",
+      "descriptionEn": "Assign equipped survival skills, defend, then escape; walk if skills are unavailable.",
+      "values": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "@equipped"
+        },
+        {
+          "id": "survival.escapeSkill",
+          "value": "@equipped"
+        },
+        {
+          "id": "survival.fallbackSkill",
+          "value": "@equipped"
+        },
+        {
+          "id": "survival.fallback",
+          "value": "WALK"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "ON"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/survival.defenseSkill",
+      "id": "escape",
+      "name": "이탈기 우선",
+      "nameEn": "Escape skill first",
+      "description": "장착한 회피기를 우선하고 이탈용 자원을 남깁니다. 회피기가 없으면 걷기로 후퇴합니다.",
+      "descriptionEn": "Prioritize an equipped escape skill and reserve its resource; walk if none is available.",
+      "values": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "@equipped"
+        },
+        {
+          "id": "survival.escapeSkill",
+          "value": "@equipped"
+        },
+        {
+          "id": "survival.order",
+          "value": "ESCAPE,WALK,DEFENSE"
+        },
+        {
+          "id": "survival.fallback",
+          "value": "WALK"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "ON"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.NORMAL",
+      "id": "all",
+      "name": "전투 후 모두 회수",
+      "nameEn": "Collect all after combat",
+      "description": "모든 등급의 장비를 전투가 끝난 뒤 회수합니다.",
+      "descriptionEn": "Collect equipment of every rarity after combat.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.NORMAL",
+      "id": "rare",
+      "name": "희귀 이상 회수",
+      "nameEn": "Rare and better",
+      "description": "일반·마법 장비는 두고 희귀 이상만 전투 후 회수합니다.",
+      "descriptionEn": "Leave normal and magic equipment; collect rare and better items after combat.",
+      "values": [
+        {
+          "id": "loot.NORMAL",
+          "value": "IGNORE"
+        },
+        {
+          "id": "loot.MAGIC",
+          "value": "IGNORE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.NORMAL",
+      "id": "legendary",
+      "name": "전설·세트 집중",
+      "nameEn": "Focus on legendary and set items",
+      "description": "희귀 이하 장비는 두고 전설·세트 장비만 우선 회수합니다.",
+      "descriptionEn": "Leave lower rarities and prioritize legendary and set items.",
+      "values": [
+        {
+          "id": "loot.NORMAL",
+          "value": "IGNORE"
+        },
+        {
+          "id": "loot.MAGIC",
+          "value": "IGNORE"
+        },
+        {
+          "id": "loot.RARE",
+          "value": "IGNORE"
+        },
+        {
+          "id": "loot.LEGENDARY",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "loot.SET",
+          "value": "PRIORITY"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.class",
+      "id": "all",
+      "name": "모든 장비 확인",
+      "nameEn": "Consider all equipment",
+      "description": "직업과 부위를 가리지 않고 레벨 1 이상 장비를 검토합니다.",
+      "descriptionEn": "Consider all classes and slots from item level 1.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.class",
+      "id": "own",
+      "name": "내 직업 중심",
+      "nameEn": "My class first",
+      "description": "내 직업 장비를 검토하되 전설·세트는 직업 필터의 예외로 둡니다.",
+      "descriptionEn": "Filter for your class, with exceptions for legendary and set items.",
+      "values": [
+        {
+          "id": "loot.class",
+          "value": "OWN"
+        },
+        {
+          "id": "loot.exceptLegendary",
+          "value": "ON"
+        },
+        {
+          "id": "loot.exceptSet",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.class",
+      "id": "weapons",
+      "name": "무기 성장 집중",
+      "nameEn": "Focus on weapons",
+      "description": "무기만 검토하되 전설·세트는 부위 필터의 예외로 둡니다.",
+      "descriptionEn": "Consider weapons, with slot-filter exceptions for legendary and set items.",
+      "values": [
+        {
+          "id": "loot.slots",
+          "value": "WEAPON"
+        },
+        {
+          "id": "loot.exceptLegendary",
+          "value": "ON"
+        },
+        {
+          "id": "loot.exceptSet",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.gold",
+      "id": "balanced",
+      "name": "이동과 회수 균형",
+      "nameEn": "Balanced collection",
+      "description": "금화는 지나가며, 재료·보석·코어는 전투 후 회수합니다.",
+      "descriptionEn": "Collect gold on your path and materials, gems and cores after combat.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.gold",
+      "id": "all",
+      "name": "자원 우선 회수",
+      "nameEn": "Prioritize resources",
+      "description": "금화·재료·보석·코어를 모두 우선 회수합니다.",
+      "descriptionEn": "Prioritize collecting gold, materials, gems and cores.",
+      "values": [
+        {
+          "id": "loot.gold",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "loot.material",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "loot.gem",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "loot.core",
+          "value": "PRIORITY"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.gold",
+      "id": "path",
+      "name": "가는 길에서만",
+      "nameEn": "Collect along the way",
+      "description": "자원을 향한 우회보다 진행을 우선하고 지나가는 경로에서 회수합니다.",
+      "descriptionEn": "Collect resources along your route instead of taking detours.",
+      "values": [
+        {
+          "id": "loot.material",
+          "value": "PASSING"
+        },
+        {
+          "id": "loot.gem",
+          "value": "PASSING"
+        },
+        {
+          "id": "loot.core",
+          "value": "PASSING"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.distance",
+      "id": "balanced",
+      "name": "전투 후 안전 회수",
+      "nameEn": "Safe collection",
+      "description": "최대 20m까지 회수하고 위험이 해소되기를 기다립니다. 종료 전 남은 전리품을 확인합니다.",
+      "descriptionEn": "Collect within 20 m after danger clears and check remaining loot before leaving.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.distance",
+      "id": "near",
+      "name": "가까운 것만 빠르게",
+      "nameEn": "Nearby loot only",
+      "description": "8m 안에서 안전한 경로로 회수하고 종료 시 남은 전리품은 두고 갑니다.",
+      "descriptionEn": "Collect within 8 m along safe paths; leave remaining loot when finishing.",
+      "values": [
+        {
+          "id": "loot.distance",
+          "value": "8"
+        },
+        {
+          "id": "loot.danger",
+          "value": "SAFE_PATH"
+        },
+        {
+          "id": "loot.finish",
+          "value": "LEAVE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/loot.distance",
+      "id": "thorough",
+      "name": "남김없이 회수",
+      "nameEn": "Thorough collection",
+      "description": "40m 안의 전리품을 위험이 해소된 뒤 회수하고 종료 전에도 확인합니다.",
+      "descriptionEn": "Wait for safety and collect loot within 40 m, including a final check before leaving.",
+      "values": [
+        {
+          "id": "loot.distance",
+          "value": "40"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.trigger",
+      "id": "full",
+      "name": "가득 차면 귀환",
+      "nameEn": "Return when full",
+      "description": "가방이 가득 차면 정리를 위해 귀환합니다.",
+      "descriptionEn": "Return to tidy your bag when it is full.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.trigger",
+      "id": "early",
+      "name": "미리 공간 확보",
+      "nameEn": "Make room early",
+      "description": "빈칸이 다섯 개 이하가 되면 정리를 위해 귀환합니다.",
+      "descriptionEn": "Return to tidy your bag when five or fewer slots remain.",
+      "values": [
+        {
+          "id": "bag.trigger",
+          "value": "FREE_SLOTS"
+        },
+        {
+          "id": "bag.freeSlots",
+          "value": "5"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.trigger",
+      "id": "replace",
+      "name": "가치 높은 장비로 교체",
+      "nameEn": "Replace lower-value items",
+      "description": "가방이 차면 등급·레벨·가격으로 가치를 비교해 교체합니다. 불가능하면 귀환합니다.",
+      "descriptionEn": "When full, replace items by rarity, level and price; return if no replacement is possible.",
+      "values": [
+        {
+          "id": "bag.policy",
+          "value": "REPLACE"
+        },
+        {
+          "id": "bag.replacementRank",
+          "value": "RARITY_LEVEL_PRICE"
+        },
+        {
+          "id": "bag.replacementFail",
+          "value": "PORTAL"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.cleanupAt",
+      "id": "keep",
+      "name": "모두 보관",
+      "nameEn": "Keep everything",
+      "description": "자동 판매·분해 없이 장비를 가방에 보관합니다.",
+      "descriptionEn": "Keep equipment in your bag without automatic selling or salvaging.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.cleanupAt",
+      "id": "sell",
+      "name": "일반·마법 장비 판매",
+      "nameEn": "Sell normal and magic items",
+      "description": "균열 종료 후 일반·마법 장비만 판매합니다. 희귀·전설·세트는 보관합니다.",
+      "descriptionEn": "After each rift, sell normal and magic items; keep rare, legendary and set items.",
+      "values": [
+        {
+          "id": "bag.cleanupAt",
+          "value": "AFTER_RIFT"
+        },
+        {
+          "id": "bag.cleanup.NORMAL",
+          "value": "SELL"
+        },
+        {
+          "id": "bag.cleanup.MAGIC",
+          "value": "SELL"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.cleanupAt",
+      "id": "salvage",
+      "name": "일반·마법 장비 분해",
+      "nameEn": "Salvage normal and magic items",
+      "description": "균열 종료 후 일반·마법 장비만 분해합니다. 희귀·전설·세트는 보관합니다.",
+      "descriptionEn": "After each rift, salvage normal and magic items; keep rare, legendary and set items.",
+      "values": [
+        {
+          "id": "bag.cleanupAt",
+          "value": "AFTER_RIFT"
+        },
+        {
+          "id": "bag.cleanup.NORMAL",
+          "value": "SALVAGE"
+        },
+        {
+          "id": "bag.cleanup.MAGIC",
+          "value": "SALVAGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.protectEnhanced",
+      "id": "invested",
+      "name": "투자한 장비 보호",
+      "nameEn": "Protect invested equipment",
+      "description": "강화하거나 보석을 장착한 장비를 자동 정리에서 보호합니다.",
+      "descriptionEn": "Protect enhanced and socketed equipment from automatic cleanup.",
+      "values": [
+        {
+          "id": "bag.protectEnhanced",
+          "value": "ON"
+        },
+        {
+          "id": "bag.protectSocketed",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.protectEnhanced",
+      "id": "all",
+      "name": "전설·세트까지 보호",
+      "nameEn": "Protect effects and sets too",
+      "description": "투자 장비와 지정 가능한 모든 전설 효과·세트를 보호합니다.",
+      "descriptionEn": "Protect invested equipment and all selectable legendary effects and sets.",
+      "values": [
+        {
+          "id": "bag.protectEnhanced",
+          "value": "ON"
+        },
+        {
+          "id": "bag.protectSocketed",
+          "value": "ON"
+        },
+        {
+          "id": "bag.protectEffects",
+          "value": "LW01,LW02,LW03,LW04,LA01,LA02,LA03,LA04,LM01,LM02,LM03,LM04,LC01,LC02,LC03"
+        },
+        {
+          "id": "bag.protectSets",
+          "value": "SW,SWB,SA,SAB,SM,SMB"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.protectEnhanced",
+      "id": "base",
+      "name": "기본 보호만 적용",
+      "nameEn": "Use base protections",
+      "description": "추가 보호 필터를 끕니다. 잠금·장착 등 서비스의 기본 보호는 유지됩니다.",
+      "descriptionEn": "Disable additional filters; service protections such as locked and equipped items still apply.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.warehouseFull",
+      "id": "keep",
+      "name": "보관 후 중단",
+      "nameEn": "Keep items and stop",
+      "description": "창고가 차면 가방에 보관하고 공간이 부족하면 반복을 중단합니다.",
+      "descriptionEn": "Keep items in the bag if storage is full and stop repeating when space is insufficient.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.warehouseFull",
+      "id": "stop",
+      "name": "정리 화면에서 대기",
+      "nameEn": "Wait for manual cleanup",
+      "description": "창고나 가방 공간이 부족하면 반복을 중단하고 정리를 기다립니다.",
+      "descriptionEn": "Stop repeating and wait for cleanup when storage or bag space is insufficient.",
+      "values": [
+        {
+          "id": "bag.warehouseFull",
+          "value": "STOP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/bag.warehouseFull",
+      "id": "limited",
+      "name": "획득을 줄이고 계속",
+      "nameEn": "Continue with limited loot",
+      "description": "창고가 차면 가방에 보관하고 정리 후에도 부족하면 획득을 제한해 계속합니다.",
+      "descriptionEn": "Keep items in the bag if storage is full; continue with limited loot if cleanup leaves too little space.",
+      "values": [
+        {
+          "id": "bag.stillFull",
+          "value": "LIMIT_LOOT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.mode",
+      "id": "balanced",
+      "name": "오른쪽 벽 따라 탐색",
+      "nameEn": "Follow the right wall",
+      "description": "오른쪽 벽을 따라 탐색하고 현재 전투·회수를 마친 뒤 보스로 이동합니다.",
+      "descriptionEn": "Follow the right wall, then finish current combat and collection before heading to the boss.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.mode",
+      "id": "rush",
+      "name": "보스 빠르게 진행",
+      "nameEn": "Rush the boss",
+      "description": "감지한 적을 찾아 진행하고 보스가 열리면 바로 향합니다. 45초 이하에서는 우회를 줄입니다.",
+      "descriptionEn": "Advance toward detected enemies and head straight to the unlocked boss; reduce detours below 45 seconds.",
+      "values": [
+        {
+          "id": "explore.mode",
+          "value": "DETECTED_ENEMIES"
+        },
+        {
+          "id": "explore.bossUnlocked",
+          "value": "BOSS"
+        },
+        {
+          "id": "explore.lowTime",
+          "value": "ON"
+        },
+        {
+          "id": "explore.lowTimeSeconds",
+          "value": "45"
+        },
+        {
+          "id": "explore.lowTimeLoot",
+          "value": "LEGENDARY,SET"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.mode",
+      "id": "thorough",
+      "name": "구석까지 탐색",
+      "nameEn": "Explore thoroughly",
+      "description": "가까운 미탐색 지역과 상자를 우선하고 보스가 열려도 추가로 탐색합니다.",
+      "descriptionEn": "Prioritize nearby unexplored areas and chests; continue exploring after the boss unlocks.",
+      "values": [
+        {
+          "id": "explore.mode",
+          "value": "NEAREST_UNSEEN"
+        },
+        {
+          "id": "explore.order",
+          "value": "CHESTS,SHRINES,ENEMIES,LOOT"
+        },
+        {
+          "id": "explore.bossUnlocked",
+          "value": "EXPLORE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.chests",
+      "id": "path",
+      "name": "이동 경로에서 개봉",
+      "nameEn": "Open chests on the way",
+      "description": "일반·봉인 상자를 경로에서 열고 최대 12m까지 우회합니다.",
+      "descriptionEn": "Open normal and sealed chests along the route, with detours up to 12 m.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.chests",
+      "id": "all",
+      "name": "상자 우선 탐색",
+      "nameEn": "Prioritize chests",
+      "description": "일반·봉인 상자를 우선 개봉하고 보스 처치 후에도 최대 25m까지 확인합니다.",
+      "descriptionEn": "Prioritize normal and sealed chests, including after the boss, with detours up to 25 m.",
+      "values": [
+        {
+          "id": "explore.normalChest",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "explore.sealedChest",
+          "value": "PRIORITY"
+        },
+        {
+          "id": "explore.chestDetour",
+          "value": "25"
+        },
+        {
+          "id": "explore.chestsAfterBoss",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.chests",
+      "id": "skip",
+      "name": "상자 우회 생략",
+      "nameEn": "Skip chest detours",
+      "description": "일반·봉인 상자 이용을 끄고 진행에 집중합니다.",
+      "descriptionEn": "Disable normal and sealed chest collection to focus on progress.",
+      "values": [
+        {
+          "id": "explore.chests",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.normalChest",
+          "value": "IGNORE"
+        },
+        {
+          "id": "explore.sealedChest",
+          "value": "IGNORE"
+        },
+        {
+          "id": "explore.chestDetour",
+          "value": "0"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.cursedChest",
+      "id": "skip",
+      "name": "저주 상자 피하기",
+      "nameEn": "Avoid cursed chests",
+      "description": "저주 상자를 열지 않습니다.",
+      "descriptionEn": "Do not open cursed chests.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.cursedChest",
+      "id": "safe",
+      "name": "여유 있을 때 도전",
+      "nameEn": "Attempt with a safety margin",
+      "description": "HP 85% 이상이고 120초 이상 남았을 때만 도전합니다. 장착한 생존기도 확인합니다.",
+      "descriptionEn": "Attempt only with at least 85% HP and 120 seconds remaining; check an equipped survival skill.",
+      "values": [
+        {
+          "id": "explore.cursedChest",
+          "value": "CONDITIONAL"
+        },
+        {
+          "id": "explore.cursedHpPercent",
+          "value": "85"
+        },
+        {
+          "id": "explore.cursedMinimumTime",
+          "value": "120"
+        },
+        {
+          "id": "explore.cursedDefense",
+          "value": "@equipped"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.cursedChest",
+      "id": "after",
+      "name": "전투 후 도전",
+      "nameEn": "Attempt after combat",
+      "description": "현재 전투를 마친 뒤 저주 상자를 개봉합니다.",
+      "descriptionEn": "Open cursed chests after finishing the current fight.",
+      "values": [
+        {
+          "id": "explore.cursedChest",
+          "value": "AFTER_COMBAT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.shrine",
+      "id": "found",
+      "name": "발견한 성소 이용",
+      "nameEn": "Use discovered shrines",
+      "description": "발견한 성소를 이용하며 최대 12m까지 우회합니다.",
+      "descriptionEn": "Use discovered shrines with detours up to 12 m.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.shrine",
+      "id": "needed",
+      "name": "필요할 때만 이용",
+      "nameEn": "Use shrines when needed",
+      "description": "필요한 효과의 성소만 최대 8m까지 우회해 이용합니다.",
+      "descriptionEn": "Use shrines with needed effects, taking detours of up to 8 m.",
+      "values": [
+        {
+          "id": "explore.shrine",
+          "value": "NEEDED"
+        },
+        {
+          "id": "explore.shrineDetour",
+          "value": "8"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/explore.shrine",
+      "id": "skip",
+      "name": "성소 우회 생략",
+      "nameEn": "Skip shrines",
+      "description": "성소 이용을 끄고 탐색과 전투에 집중합니다.",
+      "descriptionEn": "Skip shrines to focus on exploration and combat.",
+      "values": [
+        {
+          "id": "explore.shrine",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.guideShrine",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.resolveShrine",
+          "value": "OFF"
+        },
+        {
+          "id": "explore.shrineDetour",
+          "value": "0"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.enabled",
+      "id": "once",
+      "name": "한 판씩 플레이",
+      "nameEn": "One run at a time",
+      "description": "자동 반복을 끄고 한 판씩 직접 시작합니다.",
+      "descriptionEn": "Disable automatic repetition and start each run yourself.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.enabled",
+      "id": "farm",
+      "name": "같은 단계 반복",
+      "nameEn": "Repeat the same stage",
+      "description": "성공하면 같은 단계를 반복하고 실패하면 중단합니다.",
+      "descriptionEn": "Repeat the same stage on success and stop on failure.",
+      "values": [
+        {
+          "id": "repeat.enabled",
+          "value": "ON"
+        },
+        {
+          "id": "repeat.failure",
+          "value": "STOP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.enabled",
+      "id": "climb",
+      "name": "성장 단계 도전",
+      "nameEn": "Climb stages",
+      "description": "성공하면 다음 단계에 도전하고 실패하면 한 단계 내려갑니다.",
+      "descriptionEn": "Advance one stage on success and go down one stage on failure.",
+      "values": [
+        {
+          "id": "repeat.enabled",
+          "value": "ON"
+        },
+        {
+          "id": "repeat.success",
+          "value": "NEXT"
+        },
+        {
+          "id": "repeat.failure",
+          "value": "LOWER"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.failures",
+      "id": "short",
+      "name": "다섯 판 짧게",
+      "nameEn": "A short five-run session",
+      "description": "완료 5회·15분·연속 실패 2회 중 먼저 도달하는 조건에서 중단합니다.",
+      "descriptionEn": "Stop at the first of 5 completed runs, 15 minutes or 2 consecutive failures.",
+      "values": [
+        {
+          "id": "repeat.count",
+          "value": "5"
+        },
+        {
+          "id": "repeat.minutes",
+          "value": "15"
+        },
+        {
+          "id": "repeat.failures",
+          "value": "2"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.failures",
+      "id": "half-hour",
+      "name": "30분 사냥",
+      "nameEn": "A 30-minute session",
+      "description": "30분 또는 연속 실패 3회에 도달하면 중단합니다.",
+      "descriptionEn": "Stop after 30 minutes or 3 consecutive failures.",
+      "values": [
+        {
+          "id": "repeat.minutes",
+          "value": "30"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.failures",
+      "id": "unlimited",
+      "name": "시간·횟수 제한 없음",
+      "nameEn": "No time or run limit",
+      "description": "시간·완료 횟수 목표 없이 진행하되 연속 실패 3회에는 중단합니다.",
+      "descriptionEn": "Continue without time or completion limits, but stop after 3 consecutive failures.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.freeSlots",
+      "id": "balanced",
+      "name": "일반 준비",
+      "nameEn": "Standard preparation",
+      "description": "가방 여유 제한 없이 결과를 3초간 확인한 뒤 다음 판을 검토합니다.",
+      "descriptionEn": "Review results for 3 seconds before the next run, with no minimum free-slot requirement.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.freeSlots",
+      "id": "space",
+      "name": "가방 여유 확보",
+      "nameEn": "Require bag space",
+      "description": "빈칸 다섯 개를 확보하고 결과를 5초간 표시합니다.",
+      "descriptionEn": "Require five free slots and show results for 5 seconds.",
+      "values": [
+        {
+          "id": "repeat.freeSlots",
+          "value": "5"
+        },
+        {
+          "id": "repeat.resultSeconds",
+          "value": "5"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "global/repeat.freeSlots",
+      "id": "fast",
+      "name": "빠른 다음 판",
+      "nameEn": "Quick next run",
+      "description": "빈칸 한 개 이상을 확보하고 결과 대기를 1초로 줄입니다.",
+      "descriptionEn": "Require at least one free slot and reduce the result wait to 1 second.",
+      "values": [
+        {
+          "id": "repeat.freeSlots",
+          "value": "1"
+        },
+        {
+          "id": "repeat.resultSeconds",
+          "value": "1"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W01",
+      "id": "center",
+      "name": "빠른 중앙 침투",
+      "nameEn": "Quick center entry",
+      "description": "회전 중 적 무리의 중심으로 이동하며 공격을 이어 갑니다.",
+      "descriptionEn": "Move toward the pack center while spinning.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ANY"
+        },
+        {
+          "id": "3",
+          "value": "CENTER"
+        },
+        {
+          "id": "4",
+          "value": "CONTINUE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W01",
+      "id": "edge",
+      "name": "생존 우선 전투",
+      "nameEn": "Survival-first combat",
+      "description": "무리의 가장자리를 돌며 회전합니다. 적 한 명에게도 사용합니다.",
+      "descriptionEn": "Circle the edge of the pack while spinning; also use against a single enemy.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ANY"
+        },
+        {
+          "id": "3",
+          "value": "EDGE"
+        },
+        {
+          "id": "4",
+          "value": "CONTINUE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W01",
+      "id": "stand",
+      "name": "제자리 집중 회전",
+      "nameEn": "Stationary spin",
+      "description": "현재 자리에서 3초씩 끊어 회전합니다.",
+      "descriptionEn": "Spin in place in three-second bursts.",
+      "values": [
+        {
+          "id": "3",
+          "value": "STAND"
+        },
+        {
+          "id": "4",
+          "value": "THREE_SECONDS"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W02",
+      "id": "dense",
+      "name": "무리 중심 진입",
+      "nameEn": "Land in the pack",
+      "description": "공격용으로 무리 중심에 착지하고 회오리를 우선 검토합니다.",
+      "descriptionEn": "Leap into the pack for offense, then favor Whirlwind.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ATTACK"
+        },
+        {
+          "id": "3",
+          "value": "DENSE"
+        },
+        {
+          "id": "4",
+          "value": "2"
+        },
+        {
+          "id": "5",
+          "value": "W01"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W02",
+      "id": "escape",
+      "name": "생존 이탈용 보존",
+      "nameEn": "Reserve for escape",
+      "description": "도약을 생존 이탈용으로 남깁니다.",
+      "descriptionEn": "Reserve Leap for survival escapes.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ESCAPE"
+        },
+        {
+          "id": "3",
+          "value": "EDGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W02",
+      "id": "balanced",
+      "name": "공격과 이탈 겸용",
+      "nameEn": "Attack and escape",
+      "description": "4m 이상 거리에서는 공격 진입, 위급할 때는 생존 이탈에 사용합니다.",
+      "descriptionEn": "Use for offensive entry from at least 4 m and emergency escapes.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/W03",
+      "id": "group",
+      "name": "무리 한 번에 분쇄",
+      "nameEn": "Crush the pack",
+      "description": "여러 적을 포함하는 방향으로 무리를 공격합니다.",
+      "descriptionEn": "Aim to hit several enemies when fighting a pack.",
+      "values": [
+        {
+          "id": "3",
+          "value": "MOST_HITS"
+        },
+        {
+          "id": "4",
+          "value": "GROUP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W03",
+      "id": "elite",
+      "name": "정예 집중 타격",
+      "nameEn": "Focus elite targets",
+      "description": "정예·보스를 우선하고 사용할 수 있을 때 공격합니다.",
+      "descriptionEn": "Prioritize elites and bosses and strike when ready.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ELITE"
+        },
+        {
+          "id": "4",
+          "value": "READY"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W03",
+      "id": "charge",
+      "name": "충전 연계 분쇄",
+      "nameEn": "Crush with a charge",
+      "description": "분쇄 충전이 준비될 때까지 기다립니다.",
+      "descriptionEn": "Wait for a Crushing Charge before striking.",
+      "values": [
+        {
+          "id": "4",
+          "value": "CRUSH_CHARGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W04",
+      "id": "group",
+      "name": "무리 제어",
+      "nameEn": "Control packs",
+      "description": "제어되지 않은 적이 있는 무리에 사용합니다.",
+      "descriptionEn": "Use on packs containing enemies that are not already controlled.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/W04",
+      "id": "interrupt",
+      "name": "위험 시전 차단",
+      "nameEn": "Interrupt dangerous casts",
+      "description": "일반 적의 위험한 시전을 방해하기 위해 보존합니다.",
+      "descriptionEn": "Reserve it to interrupt dangerous casts by ordinary enemies.",
+      "values": [
+        {
+          "id": "2",
+          "value": "INTERRUPT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W04",
+      "id": "retreat",
+      "name": "후퇴 지원",
+      "nameEn": "Cover a retreat",
+      "description": "후퇴를 보조하고 보스에게는 제압 완성 시점을 노립니다.",
+      "descriptionEn": "Support retreats and aim to complete boss stagger.",
+      "values": [
+        {
+          "id": "2",
+          "value": "RETREAT"
+        },
+        {
+          "id": "4",
+          "value": "COMPLETE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W05",
+      "id": "prevent",
+      "name": "위험 미리 대비",
+      "nameEn": "Prevent damage",
+      "description": "위험을 예상해 보호막을 사용하며 다른 방어와 함께 쓸 수 있습니다.",
+      "descriptionEn": "Use a shield preventively, allowing overlap with other defenses.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/W05",
+      "id": "chain",
+      "name": "방어 시간 늘리기",
+      "nameEn": "Extend protection",
+      "description": "다른 보호막과 도약 방어가 끝난 뒤 철벽을 사용합니다.",
+      "descriptionEn": "Wait for other shields and Leap defense to end before using Iron Wall.",
+      "values": [
+        {
+          "id": "3",
+          "value": "AFTER"
+        },
+        {
+          "id": "4",
+          "value": "AFTER"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W05",
+      "id": "emergency",
+      "name": "긴급 생존용",
+      "nameEn": "Emergency protection",
+      "description": "위급한 생존 상황에서 보호막을 사용합니다.",
+      "descriptionEn": "Use the shield in survival emergencies.",
+      "values": [
+        {
+          "id": "2",
+          "value": "EMERGENCY"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W06",
+      "id": "balanced",
+      "name": "자원과 공격 보완",
+      "nameEn": "Resource and damage support",
+      "description": "자원을 보충하고 정예·보스전의 다음 공격을 강화합니다.",
+      "descriptionEn": "Replenish resource and empower the next attack against elites or bosses.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/W06",
+      "id": "resource",
+      "name": "자원 보충 집중",
+      "nameEn": "Focus on resource recovery",
+      "description": "비전투 중에도 자원 보충을 허용합니다.",
+      "descriptionEn": "Focus on replenishing resource, including outside combat.",
+      "values": [
+        {
+          "id": "2",
+          "value": "RESOURCE"
+        },
+        {
+          "id": "5",
+          "value": "ON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/W06",
+      "id": "boss",
+      "name": "보스 공격 준비",
+      "nameEn": "Prepare for the boss",
+      "description": "보스전에서 공격이 닿기 직전에 공격 강화를 사용합니다.",
+      "descriptionEn": "Empower attacks just before they can reach the boss.",
+      "values": [
+        {
+          "id": "2",
+          "value": "DAMAGE"
+        },
+        {
+          "id": "3",
+          "value": "BOSS"
+        },
+        {
+          "id": "4",
+          "value": "IN_RANGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A01",
+      "id": "steady",
+      "name": "한 명도 빠르게 관통",
+      "nameEn": "Pierce without waiting",
+      "description": "적 한 명부터 현재 대상을 포함해 관통합니다.",
+      "descriptionEn": "Fire from a single enemy, aiming through the current target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ONE"
+        },
+        {
+          "id": "3",
+          "value": "CURRENT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A01",
+      "id": "pack",
+      "name": "두 명 이상 관통",
+      "nameEn": "Pierce multiple enemies",
+      "description": "두 명 이상을 포함하는 사선을 기다립니다.",
+      "descriptionEn": "Wait for a firing line that includes at least two enemies.",
+      "values": [
+        {
+          "id": "2",
+          "value": "TWO"
+        },
+        {
+          "id": "4",
+          "value": "MOST_HITS"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A01",
+      "id": "elite",
+      "name": "정예 집중 관통",
+      "nameEn": "Pierce priority enemies",
+      "description": "정예·보스를 우선하고 대상 방향으로 사격합니다.",
+      "descriptionEn": "Prioritize elites and bosses and aim directly at the target.",
+      "values": [
+        {
+          "id": "3",
+          "value": "ELITE"
+        },
+        {
+          "id": "4",
+          "value": "TARGET"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A02",
+      "id": "pack",
+      "name": "무리 정리",
+      "nameEn": "Clear packs",
+      "description": "여러 적을 정리하는 사격을 사용합니다.",
+      "descriptionEn": "Use volleys to clear groups of enemies.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/A02",
+      "id": "focus",
+      "name": "한 대상 집중",
+      "nameEn": "Focus one target",
+      "description": "정예·보스에게 화살이 집중되는 위치를 노립니다.",
+      "descriptionEn": "Seek a position that concentrates arrows on an elite or boss.",
+      "values": [
+        {
+          "id": "2",
+          "value": "FOCUS"
+        },
+        {
+          "id": "3",
+          "value": "ELITE"
+        },
+        {
+          "id": "4",
+          "value": "FOCUS"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A02",
+      "id": "safe",
+      "name": "먼 거리 사격",
+      "nameEn": "Fire from range",
+      "description": "사용 가능하면 먼 사거리에서 바로 공격합니다.",
+      "descriptionEn": "Fire immediately when ready from long range.",
+      "values": [
+        {
+          "id": "2",
+          "value": "IMMEDIATE"
+        },
+        {
+          "id": "4",
+          "value": "FAR"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A03",
+      "id": "pack",
+      "name": "무리 중심 매복",
+      "nameEn": "Trap the pack",
+      "description": "무리 중심에 설치하고 새 적이 들어오지 않으면 기존 덫을 유지합니다.",
+      "descriptionEn": "Place traps in pack centers and keep them when no new targets enter.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/A03",
+      "id": "renew",
+      "name": "덫 위치 갱신",
+      "nameEn": "Refresh trap positions",
+      "description": "대상 발밑에 설치하고 오래된 덫을 교체합니다.",
+      "descriptionEn": "Place traps under the target, replacing older traps.",
+      "values": [
+        {
+          "id": "2",
+          "value": "TARGET"
+        },
+        {
+          "id": "3",
+          "value": "ONE"
+        },
+        {
+          "id": "4",
+          "value": "REPLACE"
+        },
+        {
+          "id": "5",
+          "value": "ALLOW"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A03",
+      "id": "defend",
+      "name": "추격 경로 차단",
+      "nameEn": "Trap pursuing enemies",
+      "description": "추격 경로에 덫을 놓아 접근하는 적을 상대합니다.",
+      "descriptionEn": "Place traps along pursuit paths to catch approaching enemies.",
+      "values": [
+        {
+          "id": "2",
+          "value": "PATH"
+        },
+        {
+          "id": "3",
+          "value": "ONE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A04",
+      "id": "safe",
+      "name": "안전 거리 복구",
+      "nameEn": "Restore a safe distance",
+      "description": "위험이 적은 곳으로 이동하고 희망 거리까지 후퇴합니다.",
+      "descriptionEn": "Land in a safer area and retreat to your preferred distance.",
+      "values": [
+        {
+          "id": "2",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "3",
+          "value": "SAFE"
+        },
+        {
+          "id": "4",
+          "value": "RETREAT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A04",
+      "id": "trap",
+      "name": "자기 덫으로 유도",
+      "nameEn": "Lure onto your trap",
+      "description": "자기 덫 방향으로 물러나 덫과 연계합니다.",
+      "descriptionEn": "Fall back toward your own trap to set up a combination.",
+      "values": [
+        {
+          "id": "2",
+          "value": "TRAP_LINK"
+        },
+        {
+          "id": "3",
+          "value": "OWN_TRAP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A04",
+      "id": "escape",
+      "name": "생존용 보존",
+      "nameEn": "Reserve for survival",
+      "description": "일반 전투에서는 사용하지 않고 생존 상황에 남깁니다.",
+      "descriptionEn": "Do not use in ordinary combat; reserve it for survival situations.",
+      "values": [
+        {
+          "id": "2",
+          "value": "OFF"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A05",
+      "id": "elite",
+      "name": "강한 적 표식 유지",
+      "nameEn": "Maintain a priority mark",
+      "description": "오래 싸울 정예·보스에게 표식을 유지합니다.",
+      "descriptionEn": "Keep the mark on an elite or boss in a long fight.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ELITE"
+        },
+        {
+          "id": "3",
+          "value": "LONG_FIGHT"
+        },
+        {
+          "id": "4",
+          "value": "KEEP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A05",
+      "id": "switch",
+      "name": "대상마다 빠른 표식",
+      "nameEn": "Mark each new target",
+      "description": "새 대상이 생기면 곧바로 표식을 이전합니다.",
+      "descriptionEn": "Apply immediately and transfer the mark to each new target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "CURRENT"
+        },
+        {
+          "id": "3",
+          "value": "IMMEDIATE"
+        },
+        {
+          "id": "4",
+          "value": "NEW_TARGET"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A05",
+      "id": "health",
+      "name": "체력 높은 적 공략",
+      "nameEn": "Mark high-health targets",
+      "description": "남은 HP가 가장 많은 적을 우선해 표식합니다.",
+      "descriptionEn": "Prioritize marking the enemy with the most remaining HP.",
+      "values": [
+        {
+          "id": "2",
+          "value": "HIGH_HP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A06",
+      "id": "steady",
+      "name": "평소 사격 강화",
+      "nameEn": "Empower everyday shots",
+      "description": "적이 있을 때 기본 사격을 준비해 강화합니다.",
+      "descriptionEn": "Empower prepared basic shots whenever enemies are present.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/A06",
+      "id": "elite",
+      "name": "정예 관통 연계",
+      "nameEn": "Empower elite piercing",
+      "description": "정예·보스전에서 관통 사격이 준비되기를 기다립니다.",
+      "descriptionEn": "Wait for Piercing Shot against elites and bosses.",
+      "values": [
+        {
+          "id": "2",
+          "value": "ELITE"
+        },
+        {
+          "id": "3",
+          "value": "A01"
+        },
+        {
+          "id": "4",
+          "value": "ELITE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/A06",
+      "id": "poison",
+      "name": "독 전염 사격",
+      "nameEn": "Spread poison with volleys",
+      "description": "자기 덫에 중독된 적을 중심으로 다중 사격과 연계합니다.",
+      "descriptionEn": "Combine with Multi Shot around enemies poisoned by your trap.",
+      "values": [
+        {
+          "id": "2",
+          "value": "POISON_SPREAD"
+        },
+        {
+          "id": "3",
+          "value": "A02"
+        },
+        {
+          "id": "4",
+          "value": "OWN_POISON"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M01",
+      "id": "steady",
+      "name": "꾸준히 발사",
+      "nameEn": "Steady fire",
+      "description": "현재 전역 대상을 향해 예상 위치로 화염구를 발사합니다.",
+      "descriptionEn": "Keep firing at the global target, aiming at its predicted position.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/M01",
+      "id": "pack",
+      "name": "폭발 효율 우선",
+      "nameEn": "Maximize explosions",
+      "description": "밀집한 무리를 우선해 예상 착탄 위치를 노립니다.",
+      "descriptionEn": "Prioritize dense packs and predicted impact positions.",
+      "values": [
+        {
+          "id": "2",
+          "value": "GROUP"
+        },
+        {
+          "id": "3",
+          "value": "DENSE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M01",
+      "id": "elite",
+      "name": "정예 집중 화력",
+      "nameEn": "Focus on elites",
+      "description": "정예·보스를 향해 꾸준히 화염구를 발사합니다.",
+      "descriptionEn": "Fire steadily at elites and bosses.",
+      "values": [
+        {
+          "id": "3",
+          "value": "ELITE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M02",
+      "id": "area",
+      "name": "새 영역 확보",
+      "nameEn": "Cover new ground",
+      "description": "무리 중심에 고정 장판을 깔고 오래된 장판을 교체합니다.",
+      "descriptionEn": "Place fixed areas at pack centers, replacing older areas.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/M02",
+      "id": "keep",
+      "name": "대상 위 눈보라 유지",
+      "nameEn": "Maintain Blizzard on target",
+      "description": "대상 위치의 장판을 유지하며 대상을 추적하게 합니다.",
+      "descriptionEn": "Maintain Blizzard on the combat target and let it follow the target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "KEEP_TARGET"
+        },
+        {
+          "id": "3",
+          "value": "TARGET"
+        },
+        {
+          "id": "4",
+          "value": "KEEP"
+        },
+        {
+          "id": "5",
+          "value": "FOLLOW"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M02",
+      "id": "defend",
+      "name": "접근 경로 차단",
+      "nameEn": "Cover approach paths",
+      "description": "자신을 향한 이동 경로에 눈보라를 설치합니다.",
+      "descriptionEn": "Place Blizzard along enemy approach paths.",
+      "values": [
+        {
+          "id": "3",
+          "value": "PATH"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M03",
+      "id": "steady",
+      "name": "단독 적도 공격",
+      "nameEn": "Attack isolated enemies",
+      "description": "연결이 없는 단독 적도 공격합니다.",
+      "descriptionEn": "Use Chain Lightning even against isolated enemies.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/M03",
+      "id": "linked",
+      "name": "연결 무리 집중",
+      "nameEn": "Focus linked packs",
+      "description": "번개가 연결될 수 있는 적 무리를 기다립니다.",
+      "descriptionEn": "Wait for a group that lightning can chain through.",
+      "values": [
+        {
+          "id": "2",
+          "value": "LINKED"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M03",
+      "id": "charge",
+      "name": "충전 낭비 줄이기",
+      "nameEn": "Conserve charges",
+      "description": "충전 낭비를 줄이며 정예·보스를 첫 대상으로 우선합니다.",
+      "descriptionEn": "Reduce wasted charges and prioritize elites or bosses as the first target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "SAVE_CHARGE"
+        },
+        {
+          "id": "3",
+          "value": "ELITE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M04",
+      "id": "survival",
+      "name": "생존용 보존",
+      "nameEn": "Reserve for survival",
+      "description": "순간이동을 긴급 생존에만 사용합니다.",
+      "descriptionEn": "Reserve Teleport for survival emergencies.",
+      "values": [
+        {
+          "id": "2",
+          "value": "SURVIVAL"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M04",
+      "id": "distance",
+      "name": "거리 조정 겸용",
+      "nameEn": "Also adjust distance",
+      "description": "일반 전투에서도 안전한 교전 거리를 맞추는 데 사용합니다.",
+      "descriptionEn": "Also use Teleport to adjust combat distance.",
+      "values": [
+        {
+          "id": "2",
+          "value": "DISTANCE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M04",
+      "id": "sparse",
+      "name": "빈 공간으로 이탈",
+      "nameEn": "Escape to Open Space",
+      "description": "적이 적은 곳으로 순간이동해 생존 공간을 확보합니다. 감지 피해 위험이 없는 도착지만 허용합니다.",
+      "descriptionEn": "Teleport to a less crowded spot for survival. Only allow destinations with no detected damage risk.",
+      "values": [
+        {
+          "id": "2",
+          "value": "SURVIVAL"
+        },
+        {
+          "id": "3",
+          "value": "SPARSE"
+        },
+        {
+          "id": "4",
+          "value": "NO_DAMAGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M05",
+      "id": "prevent",
+      "name": "위험 미리 대비",
+      "nameEn": "Prevent damage",
+      "description": "위험을 예상해 보호막을 사용합니다.",
+      "descriptionEn": "Use a shield to prepare for danger.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "skill/M05",
+      "id": "chain",
+      "name": "보호막 이어 쓰기",
+      "nameEn": "Chain shields",
+      "description": "다른 보호막이 소진된 뒤 사용해 방어 시간을 늘립니다.",
+      "descriptionEn": "Wait for other shields to expire to extend protection.",
+      "values": [
+        {
+          "id": "3",
+          "value": "AFTER"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M05",
+      "id": "emergency",
+      "name": "긴급 생존용",
+      "nameEn": "Emergency protection",
+      "description": "긴급 생존 상황에서 보호막을 사용합니다.",
+      "descriptionEn": "Use the shield in survival emergencies.",
+      "values": [
+        {
+          "id": "2",
+          "value": "EMERGENCY"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M06",
+      "id": "here",
+      "name": "제자리 빙결",
+      "nameEn": "Freeze in place",
+      "description": "제자리에서 범위에 들어온 적을 빙결합니다.",
+      "descriptionEn": "Freeze enemies entering range without approaching.",
+      "values": [
+        {
+          "id": "3",
+          "value": "HERE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M06",
+      "id": "approach",
+      "name": "무리로 접근 후 빙결",
+      "nameEn": "Approach and freeze",
+      "description": "무리를 상대할 때 빙결 범위로 접근합니다.",
+      "descriptionEn": "Approach into freezing range when fighting a group.",
+      "values": [
+        {
+          "id": "2",
+          "value": "GROUP"
+        },
+        {
+          "id": "3",
+          "value": "APPROACH"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M06",
+      "id": "charge",
+      "name": "연쇄 충전 연계",
+      "nameEn": "Set up chain charges",
+      "description": "연쇄 번개 충전과 연계할 때 사용합니다.",
+      "descriptionEn": "Use to set up Chain Lightning charges.",
+      "values": [
+        {
+          "id": "2",
+          "value": "CHAIN_CHARGE"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "skill/M13",
+      "id": "native",
+      "name": "기본 충전",
+      "nameEn": "Standard recovery",
+      "description": "기본 조건에 따라 짧게 마력을 회복합니다.",
+      "descriptionEn": "Recover mana briefly using the standard conditions.",
+      "values": [],
+      "choices": [
+        {
+          "id": "M13",
+          "choice": "native"
+        },
+        {
+          "id": "M13:goal",
+          "choice": "short"
+        }
+      ]
+    },
+    {
+      "scope": "skill/M13",
+      "id": "hold",
+      "name": "제자리 빠른 충전",
+      "nameEn": "Quick recovery in place",
+      "description": "현재 자리에서 짧게 충전합니다. 충전 중 이동하지 않습니다.",
+      "descriptionEn": "Charge briefly in place without moving during the channel.",
+      "values": [],
+      "choices": [
+        {
+          "id": "M13",
+          "choice": "hold"
+        },
+        {
+          "id": "M13:goal",
+          "choice": "short"
+        }
+      ]
+    },
+    {
+      "scope": "skill/M13",
+      "id": "retreat",
+      "name": "안전 확보 후 충분히 충전",
+      "nameEn": "Retreat and recharge",
+      "description": "적과 거리를 벌린 뒤 충분히 충전합니다. 안전한 위치를 찾지 못하면 보류합니다.",
+      "descriptionEn": "Create distance, then charge fully; wait if no safe position can be found.",
+      "values": [],
+      "choices": [
+        {
+          "id": "M13",
+          "choice": "retreat"
+        },
+        {
+          "id": "M13:goal",
+          "choice": "full"
+        }
+      ]
+    },
+    {
+      "scope": "basic/WARRIOR",
+      "id": "fill",
+      "name": "스킬 사이 공격",
+      "nameEn": "Fill between skills",
+      "description": "기본 공격으로 스킬 사이의 빈 시간을 채웁니다.",
+      "descriptionEn": "Use basic attacks to fill gaps between skills.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "basic/WARRIOR",
+      "id": "resource",
+      "name": "자원 보충 우선",
+      "nameEn": "Recover resources",
+      "description": "기본 공격을 자원 보충에 맞추고 현재 대상을 우선합니다.",
+      "descriptionEn": "Use basic attacks for resource recovery and favor the current target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "RESOURCE"
+        },
+        {
+          "id": "3",
+          "value": "CURRENT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "basic/WARRIOR",
+      "id": "finish",
+      "name": "약한 적 마무리",
+      "nameEn": "Finish weak enemies",
+      "description": "남은 HP가 적은 대상을 기본 공격으로 마무리합니다.",
+      "descriptionEn": "Finish low-health enemies with basic attacks.",
+      "values": [
+        {
+          "id": "2",
+          "value": "FINISH"
+        },
+        {
+          "id": "3",
+          "value": "LOW_HP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "basic/RANGER",
+      "id": "fill",
+      "name": "스킬 사이 공격",
+      "nameEn": "Fill between skills",
+      "description": "기본 공격으로 스킬 사이의 빈 시간을 채웁니다.",
+      "descriptionEn": "Use basic attacks to fill gaps between skills.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "basic/RANGER",
+      "id": "resource",
+      "name": "자원 보충 우선",
+      "nameEn": "Recover resources",
+      "description": "기본 공격을 자원 보충에 맞추고 현재 대상을 우선합니다.",
+      "descriptionEn": "Use basic attacks for resource recovery and favor the current target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "RESOURCE"
+        },
+        {
+          "id": "3",
+          "value": "CURRENT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "basic/RANGER",
+      "id": "finish",
+      "name": "약한 적 마무리",
+      "nameEn": "Finish weak enemies",
+      "description": "남은 HP가 적은 대상을 기본 공격으로 마무리합니다.",
+      "descriptionEn": "Finish low-health enemies with basic attacks.",
+      "values": [
+        {
+          "id": "2",
+          "value": "FILL"
+        },
+        {
+          "id": "3",
+          "value": "LOW_HP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "basic/MAGE",
+      "id": "fill",
+      "name": "스킬 사이 공격",
+      "nameEn": "Fill between skills",
+      "description": "기본 공격으로 스킬 사이의 빈 시간을 채웁니다.",
+      "descriptionEn": "Use basic attacks to fill gaps between skills.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "basic/MAGE",
+      "id": "resource",
+      "name": "자원 보충 우선",
+      "nameEn": "Recover resources",
+      "description": "기본 공격을 자원 보충에 맞추고 현재 대상을 우선합니다.",
+      "descriptionEn": "Use basic attacks for resource recovery and favor the current target.",
+      "values": [
+        {
+          "id": "2",
+          "value": "RESOURCE"
+        },
+        {
+          "id": "3",
+          "value": "CURRENT"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "basic/MAGE",
+      "id": "finish",
+      "name": "약한 적 마무리",
+      "nameEn": "Finish weak enemies",
+      "description": "남은 HP가 적은 대상을 기본 공격으로 마무리합니다.",
+      "descriptionEn": "Finish low-health enemies with basic attacks.",
+      "values": [
+        {
+          "id": "2",
+          "value": "FILL"
+        },
+        {
+          "id": "3",
+          "value": "LOW_HP"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "scope": "order",
+      "id": "slots",
+      "name": "장착 순서대로",
+      "nameEn": "Equipment slot order",
+      "description": "액티브 장착 순서, 궁극기, 기본 공격 순서로 검토합니다.",
+      "descriptionEn": "Consider normal actives in slot order, then the ultimate and basic attack.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "order",
+      "id": "ultimate-first",
+      "name": "궁극기 우선",
+      "nameEn": "Ultimate first",
+      "description": "궁극기를 먼저 검토하고 액티브 장착 순서와 기본 공격으로 이어 갑니다.",
+      "descriptionEn": "Consider the ultimate first, then normal actives in slot order and the basic attack.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "order",
+      "id": "basic-first",
+      "name": "기본 공격 우선",
+      "nameEn": "Basic attack first",
+      "description": "기본 공격을 먼저 검토한 뒤 액티브와 궁극기를 검토합니다.",
+      "descriptionEn": "Consider basic attacks before normal actives and the ultimate.",
+      "values": [],
+      "choices": []
+    }
+  ]
+}

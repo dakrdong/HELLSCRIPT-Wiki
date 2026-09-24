@@ -594,6 +594,8 @@ PAGE_META={
  'hunt-edict-skill-options':('기획과 범위','사냥 칙령: 스킬 화면','스킬별 핵심 옵션과 전역 판단의 경계, 장착·저장·간소화 화면 구조입니다.'),
  'hunt-edict-skill-option-catalog':('기획과 범위','사냥 칙령: 스킬별 핵심 옵션','모든 액티브·기본 공격을 자동 사용 포함 4~5개로 줄인 개별 설계와 패시브 자동 반영 기준입니다.'),
  'hunt-edict-implementation-contract':('기획과 범위','사냥 칙령: 구현 계약','저장·공유와 실행 연결의 구현 순서, 핵심 옵션 v0.2 간소화의 우선 적용과 HED1 기록의 보존 범위입니다.'),
+ 'hunt-edict-quick-presets':('후속 개발 기록','사냥 칙령: 항목별 간편 프리셋','83개 항목의 249개 프리셋, 직접 설정 전환, 기존 저장·공유 연결과 실행 검증을 정리합니다.'),
+ 'hunt-edict-quick-presets.en':('후속 개발 기록','Hunt Edict quick presets','249 recipes across 83 scopes, Custom Settings, existing save/share transactions and native validation.'),
  'project-overview':('프로젝트','프로젝트 개요','게임 방향, 플레이 순환과 기획·DB를 읽는 순서를 정리합니다.'),
  'current-status':('프로젝트','현재 개발 현황','현재 구현, 초기 기록과의 차이, 검사 근거와 남은 과제를 연결합니다.'),
  'unity-implementation-plan':('기획과 범위','상위 구현 기획','확정 정책, 게임 규칙, 화면 흐름과 공통 수식의 기준입니다.'),

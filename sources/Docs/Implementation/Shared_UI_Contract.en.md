@@ -78,6 +78,8 @@ Shared UI does not require a rectangular frame for every control. Vaults use `Ui
 
 The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives always apply; a slot menu opens that skill’s edict settings. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).
 
+Per-item quick presets use the same draft and selection dialog. A recipe replaces only its own option values; opening Custom Settings or navigating never saves. See the [quick preset coverage and verification](Hunt_Edict_Quick_Presets.en.md).
+
 ## Rift entry adapter
 
 `RiftEntryWindow` uses the shared `ContentWindowView` owned-data entry point. Landscape fixes the sanctuary illustration and tier selection beside independently scrolling preparation, keeping the tier and entry conditions visible together. Pickers use the shared optional maximum size without a new canvas or lifecycle. It reuses `UiTheme` paid-fatigue colors, `PotionArt`, `SkillIconView` and existing `GameStore` transactions. First-clear rewards show empty icon slots in recycled rows without invented payouts. See [implementation and validation](Rift_Entry.en.md).

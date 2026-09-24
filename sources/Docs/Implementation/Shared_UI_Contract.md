@@ -101,6 +101,8 @@
 
 기존 `HuntEdictWindow`가 편집본을 소유하고 `UiTheme`, `SkillIconView`, `ContentWindowHost`, 고정 행동과 독립 스크롤을 유지한다. 새 창 체계를 만들지 않는다. [통합 기록](Hunt_Edict_Skill_Tree.md)을 따른다.
 
+항목별 간편 프리셋도 같은 편집본과 선택 창을 사용한다. 프리셋은 해당 항목의 옵션 값만 교체하며, 직접 설정을 열거나 화면을 전환하는 동작은 저장하지 않는다. 적용 범위와 검증은 [간편 프리셋 기록](Hunt_Edict_Quick_Presets.md)을 따른다.
+
 ## 균열 입장 어댑터
 
 `RiftEntryWindow`는 `ContentWindowView`의 실제 소유 데이터 진입점을 사용한다. 가로 화면에서는 성소 원화·단계 선택을 고정하고 준비 항목만 독립적으로 스크롤한다. 이는 입장 조건과 단계 선택을 동시에 확인하기 위한 배치다. 선택 팝업은 공통 창의 선택적 최대 크기를 사용하며 별도 캔버스나 창 수명 주기를 만들지 않는다. `UiTheme`의 유료 피로도 의미 색, `PotionArt`, `SkillIconView`, 기존 `GameStore` 거래를 공유한다. 최초 보상은 빈 아이콘 칸과 재사용 목록 행만 표시하며 임의의 지급을 만들지 않는다. [구현과 검증](Rift_Entry.md)을 따른다.
