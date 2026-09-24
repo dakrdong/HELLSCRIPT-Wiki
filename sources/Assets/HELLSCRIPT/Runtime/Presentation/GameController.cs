@@ -14,6 +14,7 @@ namespace Hellscript
         CombatSimulation combat;
         public CombatSimulation Combat {get=>combat;private set {combat=value;Audio?.Bind(value);}}
         public GameAudio Audio {get;private set;}
+        public CombatTelemetryUploader Telemetry {get;private set;}
         // Session-only plaza walk; nothing here is saved or affects a run.
         public TownWalk Town {get;private set;}
         public GameUI UI {get;private set;}
@@ -42,6 +43,7 @@ namespace Hellscript
             SelectedStage=Mathf.Max(1,Store.Data.Hero.highestClear+1);Notice=Store.OfflineMessage;
             if(Store.GemRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.GemRecoveryMessage;
             if(Store.QualityRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.QualityRecoveryMessage;
+            Telemetry=gameObject.AddComponent<CombatTelemetryUploader>();Telemetry.Initialize(Store.CombatArchive);
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
             Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);
             UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);

@@ -152,6 +152,8 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public string telemetryAccountId;
+        public long combatSequence,combatTelemetryLossCount;
         public AttendanceState attendance;
         public OfflineSupplyState offlineSupplies;
         public RiftFatigue riftFatigue=new RiftFatigue();
@@ -197,6 +199,7 @@ namespace Hellscript
     [Serializable]
     public sealed class RunRecord
     {
+        public CombatJournalData journal;
         public CombatReview review;
         public string id, hero, result;
         public int stage, kills, loot;
@@ -294,6 +297,7 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public CombatJournalData journal;
         public RiftAttendance riftAttendance=new RiftAttendance();
         public int[] slotLevels;
         public ClassSkillRuntimeState classSkills;

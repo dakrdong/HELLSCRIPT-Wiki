@@ -865,7 +865,7 @@ def build():
     for path,expected in INPUTS.items():
         actual=(ROOT/path).read_bytes()
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
-        if path.startswith(('Docs/','Wiki/content/','Assets/','Artifacts/','tools/','Prototypes/')) or ('/' not in path and path.endswith('.md')):
+        if path.startswith(('Docs/','Wiki/content/','Assets/','Artifacts/','tools/','Prototypes/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql')):
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
     for file in (ROOT/ART).glob('*.png'):
         target=SITE/'media'/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,target)

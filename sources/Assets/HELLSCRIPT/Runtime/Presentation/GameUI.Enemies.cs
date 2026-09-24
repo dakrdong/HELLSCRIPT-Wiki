@@ -51,7 +51,7 @@ namespace Hellscript
                     if(e.pattern==1)Note(content,Loc.F("살아 있는 소환 부하 {0}/8\n부하가 있으면 받는 피해 20% 감소", run.enemies.Count(x=>!x.dead&&BossCombat.OwnAdd(x,e))),19,88,pale);
                     if(b.boss.refuges.Count>0)Note(content,Loc.F("폭발을 피할 지점 {0}곳\n파란 윤곽은 이번 연속 폭발의 범위 밖입니다.", b.boss.refuges.Count),19,88,pale);
                 }
-                string traits=string.Join(" / ",Enumerable.Range(0,6).Where(i=>EnemyCombat.Trait(e,i)).Select(i=>new[]{"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적"}[i]));
+                string traits=string.Join(" / ",Enumerable.Range(0,6).Where(i=>EnemyCombat.Trait(e,i)).Select(i=>EnemyCombat.TraitNames[i]));
                 if(traits!="")Note(content,traits,19,64,pale);
                 if(b.auraSource>=0)Note(content,"종지기 오라 · 공격 +20%",19,56,gold);
                 if(b.rageStacks>0)Note(content,Loc.F("분노 {0}/5 · 공격 +{1}%", b.rageStacks, b.rageStacks*10),19,56,gold);

@@ -9,6 +9,7 @@ namespace Hellscript
         void RecordDamage(DamageEvent damage)
         {
             CombatTelemetry.Damage(State.statistics,damage);
+            JournalDamage(damage);
             State.damageEvents.Add(damage);
             if(State.damageEvents.Count>2000)State.damageEvents.RemoveAt(0);
         }

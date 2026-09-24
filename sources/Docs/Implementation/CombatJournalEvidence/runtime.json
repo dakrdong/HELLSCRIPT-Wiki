@@ -1,0 +1,120 @@
+{
+  "method": "macOS development Player; two seconds of normal updates followed by direct fixed-step simulation; outcome not forced",
+  "runId": "cfc867ba8a5549eb812e5658c7e843e3",
+  "seed": 9138,
+  "stage": 1,
+  "outcome": "victory",
+  "bossDefeated": true,
+  "simulationSeconds": 102.80167388916016,
+  "attendanceSeconds": 2.010512351989746,
+  "kills": 43,
+  "gold": 2276,
+  "equipmentCollected": 5,
+  "events": 937,
+  "fileBytes": 731407,
+  "sha256": "6cf254d3fa1cd8684adabc4e12d205734bac08233cbee7a02f2b808d54c62098",
+  "serverEvents": 937,
+  "matchedServerAck": true,
+  "outboxAfterAck": 0,
+  "ui": {
+    "historyRows": 100,
+    "fixtures": "99 synthetic rows plus one real run; synthetic rows removed before final save",
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "scales": [
+      100,
+      140
+    ],
+    "liveCases": 20,
+    "historyCases": 20,
+    "input": "EventSystem raycast + pointer down/up/click for rift entry, dropdown and details",
+    "restart": "separate process restored full journal"
+  },
+  "sqlQueries": [
+    {
+      "columns": [
+        "account_id",
+        "hero_id",
+        "stage",
+        "attempts",
+        "victories",
+        "defeats",
+        "clear_simulation_seconds",
+        "clear_attendance_seconds",
+        "reported_gold",
+        "reported_boss_kills"
+      ],
+      "rows": 3
+    },
+    {
+      "columns": [
+        "hero_id",
+        "source",
+        "kind",
+        "observations",
+        "actual_hp_damage"
+      ],
+      "rows": 33
+    },
+    {
+      "columns": [
+        "account_id",
+        "run_id",
+        "category",
+        "claimed",
+        "ignored",
+        "dropped"
+      ],
+      "rows": 6
+    },
+    {
+      "columns": [
+        "account_id",
+        "run_id",
+        "hero_id",
+        "stage",
+        "initial_skills",
+        "final_skills",
+        "equipment",
+        "potions"
+      ],
+      "rows": 3
+    },
+    {
+      "columns": [
+        "account_id",
+        "run_id",
+        "signals_json",
+        "revision",
+        "evidence_json"
+      ],
+      "rows": 3
+    }
+  ],
+  "physicalMobile": "not tested",
+  "production": "not configured"
+}

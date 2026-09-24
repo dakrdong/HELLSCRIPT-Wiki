@@ -10,6 +10,7 @@ namespace Hellscript
         {
             State.enemyEvents.Add(new EnemyCombatEvent{enemyId=e.id,actionId=action,definitionId=definition??(e.boss?"BOSS0"+(e.pattern+1):EnemyCombat.Id(e.kind)),kind=kind,time=State.time,value=value,position=e.position,aim=aim??e.aim});
             if(State.enemyEvents.Count>400)State.enemyEvents.RemoveAt(0);
+            JournalEnemy(e,kind,definition??(e.boss?"BOSS0"+(e.pattern+1):EnemyCombat.Id(e.kind)),action,value,aim??e.aim);
         }
         void EnemyMode(EnemyState e,string state)
         {if(e.brain.state==state)return;e.brain.state=state;EnemyEvent(e,"STATE:"+state);}

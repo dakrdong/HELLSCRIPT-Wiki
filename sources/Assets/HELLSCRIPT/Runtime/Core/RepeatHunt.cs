@@ -133,6 +133,7 @@ namespace Hellscript
             if(amount<=0||run.training>=0)return;
             int awarded=(int)Math.Min(amount,(long)int.MaxValue-account.gold);
             account.gold+=awarded;run.earnedGold+=awarded;
+            CombatJournal.Append(run,"GOLD_GRANTED",Loc.Source("골드 {0} 획득 · 이번 균열 누적 {1}",awarded,run.earnedGold),trigger:"RIFT_REWARD");
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true)
         {
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
             bool owned=restore!=null?restore.training>=0&&restore.trainingUsesOwnedHero:ownedTraining&&training>=0;
@@ -43,6 +43,7 @@ namespace Hellscript
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
+            uint journalSeed=State.rng;
             CombatTelemetry.Normalize(State);
             RiftResources.Normalize(State);GemInventory.Normalize(this.account);
             State.itemEffects??=new CombatEffectState();InitializeLegendaryState();
@@ -59,6 +60,7 @@ namespace Hellscript
             InitializeRift(restore==null,forcedObjective);
             RiftVisibility.Initialize(State,Map,restore!=null);
             if(Hero.heroClass==HeroClass.Mage||Hero.heroClass==HeroClass.Warrior)EnsureShieldEngagement();
+            InitializeJournal(restore!=null,journalSeed,recordResume);
             if(restore==null)
             {
                 State.health=Stats.hp;State.visited.Add(0);State.exploreRoom=0;
@@ -127,6 +129,9 @@ namespace Hellscript
         }
         public void Log(string kind,string text)
         {
+            CombatJournal.Append(State,kind,text,target:State.targetId,actionId:State.heroAction.id);
+            if(kind=="HUNT_EDICT_CHANGED"&&State.training<0&&State.journal!=null&&edictSource!=null)
+                State.journal.events.Last().edicts=new[]{edictSource.Copy()};
             State.logs.Add($"{State.time:000.0}s [{kind}] {text}");
             if(State.logs.Count>600)State.logs.RemoveAt(0);
         }
@@ -134,12 +139,13 @@ namespace Hellscript
         public void Tick(float dt)
         {
             if(State.paused||State.portal||!string.IsNullOrEmpty(State.navigationError)||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;
+            journalMovementReason=null;journalMovementTrigger=null;
             if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
             float observedTime=State.time,observedHealth=State.health;
             tickingClassEvents=true;
-            try{TickCombat(dt);}finally{RecordTickTelemetry(State.time-observedTime,observedHealth);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
+            try{TickCombat(dt);}finally{JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
         }
         void TickCombat(float dt)
         {
@@ -271,12 +277,12 @@ namespace Hellscript
         {
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
-            if(MoveEdictResponse(dt))return;
-            if(MoveClassSkillIntent(dt))return;
-            if(MoveEdictGather(dt))return;
-            if(MoveEdictRanger(dt))return;
-            if(MoveEdictNova(dt))return;
-            if(MoveEdictWhirlwind(dt))return;
+            if(MoveEdictResponse(dt)){journalMovementTrigger="SURVIVAL_RESPONSE";return;}
+            if(MoveClassSkillIntent(dt)){journalMovementTrigger="SKILL_POSITIONING";return;}
+            if(MoveEdictGather(dt)){journalMovementTrigger="GATHER";return;}
+            if(MoveEdictRanger(dt)){journalMovementTrigger="RANGER_POLICY";return;}
+            if(MoveEdictNova(dt)){journalMovementTrigger="NOVA_POLICY";return;}
+            if(MoveEdictWhirlwind(dt)){journalMovementTrigger="WHIRLWIND_POLICY";return;}
             var policy=HeroActionBusy?State.heroAction.policy:null;
             var movementRule=State.movementRule>=0&&State.movementRule<State.build.rules.Count?State.build.rules[State.movementRule]:null;
             if(edictSource!=null&&State.movementRule>=0&&(State.movementAction==RuleAction.Skill||State.movementAction==RuleAction.Basic)&&
@@ -294,6 +300,7 @@ namespace Hellscript
             {
                 Vector2 delta=State.position-target.position;float d=delta.magnitude;float range=policy?.distance??(movementRule!=null&&movementRule.overrideMovement?movementRule.distance:Policy.distance);
                 var movement=policy?.movement??(movementRule!=null&&movementRule.overrideMovement?movementRule.movement:Policy.movement);
+                journalMovementReason=Loc.Source("대상과 거리 {0:0.0}m · 이동 정책 {1}",d,new[]{"접근","선회","거리 유지","제자리 유지","후퇴"}[(int)movement]);
                 float standRange=Hero.heroClass==HeroClass.Warrior?(movementRule?.id=="edict:WARRIOR:BASIC"?2:2.5f):movementRule?.id=="edict:A02"?8:movementRule?.id=="edict:A03"?6:movementRule?.id=="edict:A06"&&HuntEdictV2.Value(edictSource,"A06",3)=="A02"?8:10;
                 if(policy==null&&EdictFieldGoal(target,range,ref goal)){}
                 else
@@ -544,7 +551,12 @@ namespace Hellscript
             ContentUnlocks.RecordRunEnd(account);
             if(account.records.Any(r=>r.id==State.id))return;
             account.records.Insert(0,new RunRecord{id=State.id,hero=catalog.classNames[(int)Hero.heroClass],result=reason,stage=State.stage,kills=State.kills,loot=State.lootCount,chestsOpened=State.layout.chests.Count(c=>c.phase==ChestPhase.Opened),chestsTotal=State.layout.chests.Count,mapFingerprint=State.layout.fingerprint,objective=State.training<0?RiftObjectives.Capture(State):null,simulationSeconds=State.time,realSeconds=State.realTime,damageDealt=State.dealt,logs=new List<string>(State.logs)});
-            while(account.records.Count>CombatHistory.RecordLimit)account.records.RemoveAt(account.records.Count-1);
+            while(account.records.Count>CombatHistory.RecordLimit)
+            {
+                var expired=account.records[account.records.Count-1];
+                if(expired.journal!=null&&!expired.journal.archived)account.combatTelemetryLossCount++;
+                account.records.RemoveAt(account.records.Count-1);
+            }
             CaptureCompletedReview();
         }
     }

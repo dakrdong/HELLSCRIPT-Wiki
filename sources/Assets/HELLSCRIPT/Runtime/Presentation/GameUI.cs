@@ -242,6 +242,7 @@ namespace Hellscript
         public void RefreshHud()
         {
             RefreshGlobalHud();
+            RefreshLiveJournal();
             if(game.DisplayDimmed||Page!="battle"||game.Combat==null||timerText==null)return;
             var run=game.Combat.State;RefreshGrowthHud();
             int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-run.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
@@ -358,13 +359,7 @@ namespace Hellscript
         Color RarityColor(int r)=>StorageSurface.Hex(EquipmentGradePalette.Hex[Mathf.Clamp(r,0,4)]);
         void ShowWarehouse(bool portal)=>RenderWarehouse(portal);
         public void ShowShop()=>RenderItemShop();
-        public void ShowRecords()
-        {
-            pageRepaint=()=>ShowRecords();Base("records","전투 기록","최근 균열 10회 · 행동 이유와 실패 원인을 확인합니다");
-            if(game.Store.Data.records.Count==0)Note(content,"아직 완료한 균열이 없습니다.",24,80);
-            foreach(var record in game.Store.Data.records){var r=record;BigButton(content,Loc.F("{0} · {1}단계 · {2}", r.hero, r.stage, r.result),()=>ShowLog(r));}
-            FooterButton(0,1,"성소로",ShowTown);
-        }
+        public void ShowRecords()=>OpenCombatRecords();
         void ShowLog(RunRecord record)
         {ShowRunReview(record);}
         public void ShowResult()

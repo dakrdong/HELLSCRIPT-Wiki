@@ -133,7 +133,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0} · {1} · {2}\n목표 {3} {4:0.#}m · {5}\n{6} · 설치 {7} · {8} · {9}	{0} · {1} · {2}\nTarget {3} {4:0.#}m · {5}\n{6} · placement {7} · {8} · {9}
 {0} · {1} · 조건을 고정해 시험합니다	{0} · {1} · tested with the conditions held fixed
 {0} · {1}단계\n\n처치 {2}   /   획득 {3}개\n전투 시간 {4:0.0}초   /   실제 {5:0.0}초\n총 피해 {6:N0}	{0} · Stage {1}\n\nKills {2}   /   Loot {3}\nCombat time {4:0.0}s   /   Real {5:0.0}s\nTotal damage {6:N0}
-{0} · {1}단계 · {2}	{0} · Stage {1} · {2}
 {0} · 골드 {1} / 재료 {2}{3}	{0} · gold {1} / materials {2}{3}
 {0} · 동작 마무리	{0} · finishing
 {0} · 보유 {1}/4 · 장착 {2}/4	{0} · owned {1}/4 · equipped {2}/4
@@ -1144,7 +1143,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 아이템 레벨순	Item level
 아직 얻지 못한 줄 보기	Show the lines you have none of
 아직 얻지 못한 줄 접기	Fold the lines you have none of
-아직 완료한 균열이 없습니다.	No rift has been completed yet.
 아직 전투 행동을 바꾸지 않았습니다. 조건을 바꾸면 적용 전후의 설명이 여기에 표시됩니다.	You have not changed any combat behavior yet. Change a condition and the before and after appear here.
 아직 해금하지 않은 스킬입니다.	That skill is not unlocked yet.
 안	inside
@@ -1784,7 +1782,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 최근 HP 피해	Recent HP damage
 최근 {0:0}초 / 	Last {0:0}s / 
 최근 {0}초	Last {0}s
-최근 균열 10회 · 행동 이유와 실패 원인을 확인합니다	Last 10 rifts · read why each behavior ran and what failed
 최근 저장한 비교	Last saved comparison
 최근 적용한 변경\n{0}	Last applied change\n{0}
 최근 적중 시간	Time since the last hit
@@ -2833,6 +2830,10 @@ CC 지속시간 -{0:0.##}%	CC duration -{0:0.##}%
 보석 5개를 사용해 한 단계 합성합니다.	Use 5 gems to upgrade by one tier.
 매직찬스는 일반 등급의 드롭 확률을 매직으로 전환합니다. 희귀·전설 확률은 유지됩니다.	Magic chance shifts common drops to magic. Rare and legendary probabilities remain unchanged.
 마법력은 지능에 더해지며, 마나 효과는 각 직업의 전투 자원에 적용됩니다.	Magic power adds intelligence. Mana effects apply to each class’s combat resource.
+{0} 공격	{0} attack
+{0} · {1} 예고: {2:0.0}초 후 · 목표 위치 ({3:0.0}, {4:0.0})	{0} telegraphs {1}: in {2:0.0}s · aim ({3:0.0}, {4:0.0})
+{0} 격노: 강화된 공격에 주의하세요.	{0} enrages: watch for empowered attacks.
+{0} 공격 중단: {1}	{0} attack interrupted: {1}
 # --- composed at runtime; no source literal holds these ---
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
@@ -4948,3 +4949,52 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 한 번에 최대 12시간을 정산합니다. 1개 미만의 보상은 다음 정산으로 이월됩니다. 초회 보상·상자·판매 수익·장비·보석·경험치는 포함하지 않습니다.	Up to 12 hours per settlement. Fractional rewards carry over. First-clear grants, chests, sales, equipment, gems and XP are excluded.
 이전 저장의 보급은 단계별 기본 수치로 계산합니다. 다음 정상 클리어부터 실제 사냥 기록으로 갱신됩니다.	Older saves use a base rate for their rift tier. Your next normal clear updates it to your actual hunting record.
 미접속 보급 정산을 먼저 완료해 주세요.	Finish settling Offline Supplies first.
+
+저장된 균열을 {0:0.0}초 지점부터 이어갑니다.	Resuming the saved rift at {0:0.0} seconds.
+대상 #{0}	Target #{0}
+{0} 선택: {1} · {2}	Selected {0}: {1} · {2}
+{0} 대기: {1} · {2}	Waiting for {0}: {1} · {2}
+대상과 거리 {0:0.0}m · 이동 정책 {1}	Target distance {0:0.0} m · Movement policy: {1}
+제자리 유지	Hold position
+이동: {0} → ({1:0.0}, {2:0.0}) · {3}	Moving: {0} → ({1:0.0}, {2:0.0}) · {3}
+이동 중지: {0} · 위치 ({1:0.0}, {2:0.0}) · {3}	Movement stopped: {0} · Position ({1:0.0}, {2:0.0}) · {3}
+{0} · {1} 피격: HP {2:0.##} 감소, 보호막 {3:0.##} 흡수 → HP {4:0.##}/{5:0.##}	Hit by {0} with {1}: lost {2:0.##} HP, shield absorbed {3:0.##} → HP {4:0.##}/{5:0.##}
+{0} 적중 → {1}: HP 피해 {2:0.##}{3}	{0} hit → {1}: {2:0.##} HP damage{3}
+ · 치명타	 · Critical hit
+{0}: {1} · 값 {2:0.##} · 대상 #{3}	{0}: {1} · Value {2:0.##} · Target #{3}
+스킬 중단	Skill interrupted
+회복	Healing
+전투 종료: {0} · {1:0.0}초 · 처치 {2} · 획득 골드 {3}	Battle ended: {0} · {1:0.0} s · {2} kills · {3} gold earned
+마지막 {0:0.0}초 HP 손실 {1:0.##}, 주요 피격원 {2} ({3:0.##})	Lost {1:0.##} HP in the last {0:0.0} s; largest damage source: {2} ({3:0.##})
+{0} 대기 사유: {1}	{0} waiting reason: {1}
+골드 {0} 획득 · 이번 균열 누적 {1}	Gained {0} gold · Rift total {1}
+시간 미기록	Time not recorded
+최근 {0}회 · 최신순	{0} recent runs · Newest first
+최근 100회 · 최신순	Last 100 runs · Newest first
+승리	Victory
+패배	Defeat
+결과 미기록	Outcome not recorded
+{0} · {1}\n{2} · 균열 {3}단계 · {4:0.0}초\n{5}	{0} · {1}\n{2} · Rift {3} · {4:0.0} s\n{5}
+조건에 맞는 전투 기록이 없습니다.	No battle records match this filter.
+최근 100회를 보관하며, 오래된 기록은 자동으로 삭제됩니다.	The latest 100 runs are kept. Older records are deleted automatically.
+기록 파일 저장을 다시 시도하고 있습니다. 저장 공간을 확인해 주세요.	Retrying battle record storage. Please check available disk space.
+승리만	Victories only
+패배만	Defeats only
+시간순으로 전투의 흐름과 행동 이유를 표시합니다	Battle events and reasons in chronological order
+상세 파일을 읽지 못했습니다. 저장된 요약과 이전 문자 로그를 표시합니다.	The detailed file could not be read. Showing the saved summary and legacy text log.
+이벤트 한도를 넘어 {0}개가 생략되었습니다. 전체 합계는 유지합니다.	The event limit omitted {0} entries. Full aggregate totals are preserved.
+{0} / {1}쪽 · 기록 {2}줄	Page {0} / {1} · {2} entries
+이전 기록	Previous entries
+다음 기록	Next entries
+{0} · 사용 설정 {1}: {2}	{0} · Use setting {1}: {2}
+기본 설정	Default setting
+조건 충족	Conditions met
+설정한 발동 조건 대기	Waiting for configured trigger conditions
+설정한 위치로 이동	Moving to the configured position
+이동 경로를 확보하지 못함	No usable movement path
+사거리 또는 시야 제한	Out of range or blocked line of sight
+유효한 대상 없음	No valid target
+전투 중이 아님	Not in active combat
+{0} 실행 이유: {1} · HP {2:0.##}, 자원 {3:0.##}, 비용 {4:0.##}	{0} cast trigger: {1} · HP {2:0.##}, resource {3:0.##}, cost {4:0.##}
+자동 사용 조건 충족	Automatic use conditions met
+플레이어 입력	Player input

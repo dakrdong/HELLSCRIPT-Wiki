@@ -15,7 +15,7 @@ namespace Hellscript
             for(int kind=(int)BossAttack.Basic;kind<=(int)BossAttack.Legacy;kind++)if(BossCombat.Definition(kind)==id)return BossCombat.Name(kind);
             if(id!=null&&id.Length==6&&id.StartsWith("BOSS0")&&int.TryParse(id.Substring(5),out int boss)&&boss>=1&&boss<=3)return GameCatalog.BossNames[boss-1];
             if(id!=null&&id.StartsWith("N")&&id.Length>=3&&int.TryParse(id.Substring(1,2),out int number)&&number>=1&&number<=12)return Loc.F("{0}{1}", GameCatalog.EnemyNames[number-1], (id.EndsWith("DEATH")?" · 사망 효과":" · 공격"));
-            if(id!=null&&id.StartsWith("E")&&id.Length==3&&int.TryParse(id.Substring(1),out int trait)&&trait>=1&&trait<=6)return new[]{"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적"}[trait-1];
+            if(id!=null&&id.StartsWith("E")&&id.Length==3&&int.TryParse(id.Substring(1),out int trait)&&trait>=1&&trait<=6)return EnemyCombat.TraitNames[trait-1];
             switch(id)
             {
                 case "BASIC":return "기본 공격";case "SW4":return "소용돌이 세트 추가타";case "SA4":return "맹독 세트 추가 독";case "SM4":return "서리 세트 추가타";

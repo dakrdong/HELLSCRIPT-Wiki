@@ -1,0 +1,83 @@
+{
+  "base": "4fdcde328010504f4663a46e69821df0b91bd2e9",
+  "branch": "codex/rift-combat-journal",
+  "editor": "Unity 6000.6.0f1 batch mode in isolated worktree",
+  "editMode": [
+    {
+      "file": "editmode-regression.xml",
+      "total": "488",
+      "passed": "488",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-09-24 20:20:02Z",
+      "end-time": "2026-09-24 20:24:41Z",
+      "duration": "278.9603222"
+    },
+    {
+      "file": "editmode-final.xml",
+      "total": "155",
+      "passed": "155",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-09-24 20:37:48Z",
+      "end-time": "2026-09-24 20:38:32Z",
+      "duration": "44.8708369"
+    },
+    {
+      "file": "editmode-defeat.xml",
+      "total": "137",
+      "passed": "137",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-09-24 20:53:29Z",
+      "end-time": "2026-09-24 20:54:09Z",
+      "duration": "40.7850307"
+    }
+  ],
+  "serverTests": 9,
+  "uiContractTests": 9,
+  "physicalMobile": "not tested",
+  "productionTelemetry": "not configured",
+  "publicWiki": "feature branch; deployment occurs after main merge",
+  "naturalDefeat": "Stage 30, seed 9138; observed lethal damage, final-window source, and complete KO/EN summary; outcome not forced",
+  "build": "Succeeded errors=0",
+  "native": {
+    "historyRows": 100,
+    "fixtures": "99 synthetic rows plus one real run; synthetic rows removed before final save",
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "scales": [
+      100,
+      140
+    ],
+    "liveCases": 20,
+    "historyCases": 20,
+    "input": "EventSystem raycast + pointer down/up/click for rift entry, dropdown and details",
+    "restart": "separate process restored full journal"
+  },
+  "runtimeDllSha256": "0c716c4dc32d3454ecc454ccb885abec61ac8055d91fc221e440c53b2d64078b"
+}

@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=14;
+        public const int MaximumSchemaVersion=15;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -28,6 +28,7 @@ namespace Hellscript
         {
             this.offlineClock=offlineClock??(()=>DateTimeOffset.UtcNow.ToUnixTimeSeconds());
             if(forgeClock!=null)ForgeClock=forgeClock;
+            CombatArchive=new CombatJournalArchive(directory);
             Directory.CreateDirectory(directory);path=Path.Combine(directory,"hellscript-local-v1.json");
             string source=path;
             Data=Read(path);
@@ -107,6 +108,9 @@ namespace Hellscript
         }
         static void Normalize(AccountSave a)
         {
+            if(string.IsNullOrEmpty(a.telemetryAccountId))a.telemetryAccountId=Guid.NewGuid().ToString("N");
+            a.records??=new System.Collections.Generic.List<RunRecord>();
+            a.records=a.records.Where(r=>r!=null).OrderByDescending(r=>r.journal?.attempt??0).Take(CombatHistory.RecordLimit).ToList();
             RewardBoxes.Normalize(a);
             Attendance.Normalize(a);OfflineSupplies.Normalize(a);
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
@@ -126,7 +130,8 @@ namespace Hellscript
             if(a.suspendedRun!=null&&string.IsNullOrEmpty(a.suspendedRun.id))a.suspendedRun=null;
             if(a.suspendedRun!=null)NormalizeRun(a.suspendedRun);
             if(a.records!=null)foreach(var record in a.records)
-                if(record?.review!=null&&record.review.version==0)record.review=null;
+                {if(record?.review!=null&&record.review.version==0)record.review=null;
+                 if(record?.journal!=null&&record.journal.version==0)record.journal=null;}
             a.transactions??=new System.Collections.Generic.List<EconomyReceipt>();
             foreach(var h in a.heroes)
             {
@@ -323,7 +328,8 @@ namespace Hellscript
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
-            Data.repeatHunt=staged.repeatHunt;
+            Data.repeatHunt=staged.repeatHunt;Data.records=staged.records;
+            Data.telemetryAccountId=staged.telemetryAccountId;Data.combatSequence=staged.combatSequence;Data.combatTelemetryLossCount=staged.combatTelemetryLossCount;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
             Data.rewardBoxes=staged.rewardBoxes;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";NotifyCommitted(operation);return true;
@@ -340,7 +346,7 @@ namespace Hellscript
             if(committed==null){Error="상자 지급 기록과 진행 상태가 다릅니다. 저장된 균열을 다시 불러와 주세요.";return false;}
             var result=committed.layout.chests.Single(c=>c.id==chest.id);
             chest.phase=result.phase;chest.progress=result.progress;chest.dropId=result.dropId;
-            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;return true;
+            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;run.journal=committed.journal;return true;
         }
         bool Write(AccountSave data)
         {
@@ -371,6 +377,7 @@ namespace Hellscript
                     data.schema=Math.Max(data.schema,MaximumSchemaVersion);
                 File.WriteAllText(path+".tmp",JsonUtility.ToJson(data,true));
                 if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
+                CombatArchive.Synchronize(data);
                 Error="";return true;
             }
             catch(Exception e)

@@ -115,6 +115,7 @@ namespace Hellscript
         }
         void RecordDecision(Rule r,int row,string code,string detail,EnemyState target)
         {
+            JournalDecision(r,code,detail,target);
             if(code=="RESOURCE")CombatTelemetry.ResourceBlocked(State.statistics,r.skill);
             RecordBlockedDecision(r,row,code,detail,target);
             var old=State.decisions.LastOrDefault(d=>d.ruleId==r.id);

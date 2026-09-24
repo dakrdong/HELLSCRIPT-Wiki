@@ -117,3 +117,7 @@
 ## 출석 이벤트
 
 `AttendanceWindow`는 신규 창 템플릿의 `ContentWindowView`를 사용한다. 일차별 보상 타일은 실제 소유 장비가 아닌 보상 정의이며, 출석·수령 상태는 계정에서 전달한다. 공통 본문 스크롤과 탐색 영역을 사용하고 하단에는 숨김 체크박스·선택 보상·수령 버튼을 고정한다. 글자 확대 시 하단 높이와 타일 열 수를 조정한다. `AttendanceSwipe`는 가로 입력을 페이지 이동에, 세로 입력을 기존 본문 스크롤에 전달한다. 전투 일시정지는 `ContentWindowHost`, 계정 쓰기는 `GameStore`, 저장 후 표시 갱신은 `StoreViewBinding`이 소유한다. [출석 이벤트](Attendance_Events.md)에 날짜·보상·검증 규칙을 기록한다.
+
+## 전투 기록
+
+`CombatRecordsWindow`는 신규 창 템플릿의 `ContentWindowView`와 `EquipmentViewSource.BattleSnapshot`을 사용한다. Unity의 공통 `Dropdown`으로 승패를 고르고, 목록 본문만 스크롤한다. 선택·필터는 창이, 기록 파일과 거래 후 내보내기는 `GameStore`가 소유한다. 기존 상세 분석 화면을 재사용하며 하단 실시간 로그는 전투 HUD 어댑터로 배치한다. [전투 기록과 서버 수집](Combat_Journal_Server.md)에 보관·신뢰·검증 범위를 기록한다.

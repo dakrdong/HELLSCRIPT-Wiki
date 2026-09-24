@@ -1,5 +1,7 @@
 # Detailed history for completed rifts
 
+For the current 100-run history, live journal and server integration preparation, see [combat journal](Combat_Journal_Server.en.md). The following describes the original implementation and its historical verification.
+
 Date: 2026-09-13 · [한국어](Combat_History_Expansion.md)
 
 Status: **the latest-ten detailed archive and existing result navigation are implemented; all 2,156 editor tests and three native launches/restarts passed.**

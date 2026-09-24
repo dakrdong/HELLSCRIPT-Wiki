@@ -67,6 +67,7 @@ namespace Hellscript
     }
     public static class EnemyCombat
     {
+        public static readonly string[] TraitNames={"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적"};
         public static bool Trait(EnemyState enemy,int id)=>!enemy.boss&&(enemy.elite==id||enemy.eliteTraits!=null&&enemy.eliteTraits.Contains(id));
         public static string Id(int kind)=>kind>=100?BossCombat.Definition(kind):"N"+(kind+1).ToString("00");
         public static EnemyAttackDefinition Attack(int kind)

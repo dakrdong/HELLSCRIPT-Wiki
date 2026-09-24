@@ -22,7 +22,7 @@ namespace Hellscript
             var menu=Button(header,"☰",ShowObservationMenu,Color.clear);menu.name="관찰 메뉴";
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
-            AddRiftMinimap(run);RefreshHud();ReflowBattleHud();
+            AddRiftMinimap(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
         }
         void ReflowBattleHud()
         {

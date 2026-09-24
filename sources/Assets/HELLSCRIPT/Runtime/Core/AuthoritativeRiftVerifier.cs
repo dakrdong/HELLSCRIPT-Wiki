@@ -10,6 +10,7 @@ namespace Hellscript
         public string accountId,leaseId,runId;
         public long revision,sequence,ticks,issuedMs,heartbeatMs;
         public AccountSave account;
+        public RunRecord combatTelemetry;
     }
     // The host authenticates the principal, loads its account and commits by compare-and-swap.
     // Commit must atomically store BOTH the account and replay cursor, and reject stale leases.
@@ -75,7 +76,7 @@ namespace Hellscript
                 var next=Copy(current);var account=next.account;run=account.suspendedRun;
                 try
                 {
-                    var sim=new CombatSimulation(account,catalog,run.stage,restore:run);
+                    var sim=new CombatSimulation(account,catalog,run.stage,restore:run,recordResume:false);
                     for(int n=0;n<count;n++)
                     {
                         if(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed||run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError))break;
@@ -90,6 +91,16 @@ namespace Hellscript
                         account.repeatHunt=RepeatHunt.Start(run,sim.RepeatPolicy,account.repeatHunt);
                         RepeatHunt.Complete(account.repeatHunt,run,sim.RepeatPolicy,account.Hero.highestClear);
                         account.suspendedRun=null;
+                    }
+                    if(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed)
+                    {
+                        var record=account.records.Find(r=>r.id==run.id);
+                        if(record?.journal!=null)
+                        {
+                            next.combatTelemetry=CombatJournal.Copy(record);
+                            next.combatTelemetry.journal.trust="server_replay";
+                            next.combatTelemetry.journal.completedUtcMs=now;
+                        }
                     }
                     account.lastSeenUtc=Math.Max(account.lastSeenUtc,now/1000);
                     next.sequence=request.sequence;next.ticks=request.totalTicks;next.revision++;next.heartbeatMs=now;

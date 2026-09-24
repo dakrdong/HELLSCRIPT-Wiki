@@ -94,3 +94,7 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 ## Attendance events
 
 `AttendanceWindow` starts from the new-content template and uses `ContentWindowView`. Day tiles describe reward definitions; account attendance and claim state are supplied by the controller. Shared navigation and scrolling body sit above fixed suppression, selected-reward and claim controls. Larger text increases action height and reduces tile columns. `AttendanceSwipe` routes horizontal gestures to pages and vertical gestures to the shared body scroll. `ContentWindowHost` owns combat pause, `GameStore` owns account transactions, and `StoreViewBinding` refreshes after committed saves. See [attendance events](Attendance_Events.en.md) for calendar, reward and verification rules.
+
+## Combat records
+
+`CombatRecordsWindow` uses the new-content starter, `ContentWindowView` and `EquipmentViewSource.BattleSnapshot`. A standard Unity `Dropdown` selects the outcome; the record body scrolls independently. The window owns selection/filter state, while `GameStore` owns post-commit file export. Existing review pages remain shared; live text uses the battle HUD adapter. See [combat journal and server collection](Combat_Journal_Server.en.md).
