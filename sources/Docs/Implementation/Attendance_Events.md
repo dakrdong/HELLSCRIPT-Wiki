@@ -43,7 +43,21 @@
 
 마을과 균열 필드 왼쪽 위의 **이벤트** 버튼은 숨김 설정과 관계없이 1번인 7일 출석을 연다. 2번은 28일 출석이다. 좌우 스와이프, 탐색 탭, 양쪽 화살표로 이동한다. 위아래 스크롤은 보상 목록만 움직인다. 오늘 받을 수 있는 보상, 수령 완료, 아직 출석하지 않은 보상을 문구와 색으로 구분한다. 수령 가능한 보상이 남으면 이벤트 버튼에 표시한다.
 
-공통 `ContentWindowView`의 제목·안전 영역·탐색·본문·고정 행동 영역을 사용한다. 출석 타일은 장비 상세가 아니라 일차별 보상 정의다. 기존 `UiTheme`, `UiFonts`, 보석·주화 이미지와 `RiftRewardChest`를 재사용한다. 전투 중 열면 `ContentWindowHost`가 일시정지와 입력을 관리하고 닫을 때 이전 상태로 복원한다.
+공통 `ContentWindowView`의 제목·안전 영역·탐색·본문·고정 행동 영역을 사용한다. 출석 타일은 장비 상세가 아니라 일차별 보상 정의다. 기존 `UiTheme`, `UiFonts`와 보석·심연 주화 이미지를 재사용하고, 골드·코어·전설 상자는 `AttendanceArt`의 전용 이미지를 표시한다. 전투 중 열면 `ContentWindowHost`가 일시정지와 입력을 관리하고 닫을 때 이전 상태로 복원한다.
+
+## 보상 아이콘 교체
+
+골드·무작위 부위 코어·전설 상자의 단순 도형을 투명 PNG로 교체했다. 주간과 월간은 같은 리소스를 사용하며, 보상 수량·수령 상태·저장 규칙은 바꾸지 않았다. 심연 주화와 세 보석을 겹친 무작위 보석 표시는 기존 이미지를 유지한다.
+
+| 리소스 | 표현 |
+| --- | --- |
+| [골드](../../Assets/HELLSCRIPT/Resources/Art/Attendance/reward-gold.png) | 낡은 금화 여러 개를 겹쳐 묶음 보상을 나타낸다. |
+| [무작위 부위 코어](../../Assets/HELLSCRIPT/Resources/Art/Attendance/reward-random-core.png) | 어두운 광물과 황동 테두리 안에 호박색 핵을 배치해 보석과 구분한다. |
+| [전설 상자](../../Assets/HELLSCRIPT/Resources/Art/Attendance/reward-legendary-chest.png) | 검은 철제 몸체·황동 장식·호박색 봉인을 가진 닫힌 상자다. |
+
+내장 `image_gen`으로 생성한 1254×1254 RGBA 원본을 바이트 변경 없이 등록했다. 별도의 배경 제거·색상 키·확대 처리는 하지 않았다. `AttendanceArtImporter`가 새 폴더만 Sprite·알파 유지·512픽셀 상한·밉맵 없음·무압축으로 가져온다. 화면에서는 종횡비를 유지하고 입력을 가로채지 않는다.
+
+생성 요청에는 `gpt-image-2`를 지정했지만, 호출 인터페이스와 반환 메타데이터에서 실제 모델명을 확인할 수 없었다. 따라서 **모델 미확인 개발용 리소스**(`candidate_model_unknown`, `productionApproved=false`)로 기록하며 정식 출시 승인으로 해석하지 않는다. [전체 프롬프트와 출처](../Art/Attendance/source-manifest.json), [알파와 원본 해시 검사](../Art/Attendance/alpha-validation.json)를 함께 보관한다. 위키의 출석 보상 DB와 리소스 DB도 같은 PNG를 표시한다.
 
 ## 저장과 경계
 
@@ -52,6 +66,8 @@
 저장 스키마는 12다. 기존 저장은 빈 출석 기록으로 시작하며 미래 버전이나 잘못된 기록은 원본을 보존하고 읽기를 중단한다. 지난 기간의 화면에서 누른 수령과 시계를 이전 출석일보다 되돌린 요청은 거절한다. 현재 개발용 로컬 저장·기기 시계를 사용한다. 서버 권위 시각과 서버 계정 인증은 아직 별도의 제품 경계다.
 
 ## 참고와 검증
+
+아래 최초 기능 검증은 아이콘 교체 전 커밋 `9f98daa6`의 기록이다. 이미지 교체 후의 검증은 다음 절에서 구분한다.
 
 [검은사막 모바일의 공식 주간 출석 이벤트](https://www.world.blackdesertm.com/Ocean/News/Detail?boardNo=4064)에서 이벤트 버튼, 일차별 보상, 직접 수령, 00:00 갱신 흐름을 참고했다. HELLSCRIPT에서는 계정 공유, 별도 주간·월간 초기화와 기존 테마를 적용한다.
 
@@ -62,3 +78,11 @@
 - **모바일 실기기는 검사하지 않았다.** 기존 URP 후처리 셰이더 경고는 출석 기능 오류와 구분한다.
 
 [7일 출석 세로 화면](AttendanceEvidence/weekly-440x956-ko-100.png) · [28일 출석 영어·150% 화면](AttendanceEvidence/monthly-440x956-en-150.png) · [필드 이벤트 버튼](AttendanceEvidence/field-button-440x956-150.png)
+
+## 아이콘 교체 후 검증
+
+- 새 아이콘과 공통 UI의 Edit Mode 검사 **27개가 통과했으며 실패·건너뜀은 0개**다. 실제 리소스 경로·서로 다른 GUID·원본 알파·Sprite 등록과 주간·월간 보상 연결을 검사했다. [검사 결과](AttendanceArtEvidence/editmode.xml)를 보관한다.
+- macOS 개발 빌드는 오류 0개로 성공했다. 기존 출석 시나리오를 다시 실행해 **40개 화면 조합에서 보상 이미지 600건**, 클릭 97회와 드래그 22회를 검증했다. 모든 이미지가 올바른 Sprite를 사용하고 종횡비를 유지하며 입력을 가로채지 않는지 확인했다. [이미지 검사](AttendanceArtEvidence/art.txt), [실행 결과](AttendanceArtEvidence/initial.txt), [재시작 결과](AttendanceArtEvidence/resume.txt), [검증 범위와 소스 해시](AttendanceArtEvidence/validation.json)를 남긴다.
+- 원본 알파를 유지한 상태에서 세로 화면과 PC 화면의 형태·가독성·배경 경계를 확인했다. 모바일 실기기는 검사하지 않았다.
+
+[새 아이콘이 적용된 7일 출석](AttendanceArtEvidence/weekly-440x956-ko-100.png) · [영어·150% 글자](AttendanceArtEvidence/weekly-440x956-en-150.png) · [PC 주간](AttendanceArtEvidence/weekly-1440x810-ko-100.png) · [PC 월간](AttendanceArtEvidence/monthly-1440x900-ko-100.png) · [가로 월간](AttendanceArtEvidence/monthly-956x440-en-150.png)

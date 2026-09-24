@@ -41,9 +41,25 @@ Entering the game opens weekly attendance first, then monthly attendance as sepa
 
 The **Events** button near the upper left of town and rift fields always opens page 1, weekly attendance, even when automatic popups are hidden. Page 2 is monthly attendance. Horizontal swipes, tabs and arrows switch pages; vertical drags scroll rewards. Claimed, claimable and upcoming days have explicit labels. A badge shows outstanding rewards.
 
-The shared `ContentWindowView` provides safe area, title, navigation, scrolling body and fixed actions. Reward tiles describe attendance days, not owned equipment. Existing theme, fonts, coin/gem art and chest graphics are reused. `ContentWindowHost` pauses combat and restores its previous state when closed.
+The shared `ContentWindowView` provides safe area, title, navigation, scrolling body and fixed actions. Reward tiles describe attendance days, not owned equipment. Existing theme, fonts and coin/gem art are reused; `AttendanceArt` supplies dedicated gold, core and legendary-chest images. `ContentWindowHost` pauses combat and restores its previous state when closed.
+
+## Reward artwork
+
+Dedicated transparent PNGs replace the gold, random-slot core and legendary-chest glyphs. Weekly and monthly rewards share the same assets. Reward amounts, claims and persistence remain unchanged. Existing Abyssal Coin art and the three-gem composition are preserved.
+
+| Asset | Visual |
+| --- | --- |
+| [Gold](../../Assets/HELLSCRIPT/Resources/Art/Attendance/reward-gold.png) | A compact pile of weathered gold coins. |
+| [Random-slot core](../../Assets/HELLSCRIPT/Resources/Art/Attendance/reward-random-core.png) | Dark mineral, a brass collar and an amber heart, distinct from polished gems. |
+| [Legendary chest](../../Assets/HELLSCRIPT/Resources/Art/Attendance/reward-legendary-chest.png) | A closed dark-iron chest with brass reinforcement and an amber seal. |
+
+The built-in `image_gen` outputs are native 1254×1254 RGBA PNGs, copied byte for byte without background removal, chroma keys or upscaling. `AttendanceArtImporter` targets only the new folder: Sprite, preserved alpha, 512px import limit, no mipmaps and no compression. UI images preserve aspect ratio and do not intercept input.
+
+The prompts requested `gpt-image-2`, but the callable interface and returned metadata do not verify the actual model. These are therefore **development assets with unverified model provenance**, recorded as `candidate_model_unknown` and `productionApproved=false`. Runtime integration is not a production-art approval. See the [full prompts and provenance](../Art/Attendance/source-manifest.json) and [alpha/source-hash report](../Art/Attendance/alpha-validation.json). Attendance and resource database previews use these same PNGs.
 
 ## Persistence and verification
+
+The original functional verification below refers to commit `9f98daa6`, before the artwork replacement. Artwork acceptance is recorded separately in the final section.
 
 `AccountSave.attendance` owns progress, claims and unopened chests. GameStore transactions atomically commit rewards and entitlement, then notify views. Gem capacity or disk failures cannot grant partial rewards. Account/period/day seeds keep random results stable on retry. Popup preferences use a separate device file.
 
@@ -58,3 +74,11 @@ The [official Black Desert Mobile weekly login event](https://www.world.blackdes
 - **Physical mobile devices were not tested.** Existing URP post-processing shader warnings are distinct from attendance feature failures.
 
 [Weekly portrait](AttendanceEvidence/weekly-440x956-en-100.png) · [Monthly at 150% text](AttendanceEvidence/monthly-440x956-en-150.png) · [Field event button](AttendanceEvidence/field-button-440x956-150.png)
+
+## Artwork acceptance
+
+- **27 Edit Mode tests passed, with zero failures or skips**, covering the new sprite paths, distinct GUIDs, native alpha, import settings, weekly/monthly mappings and shared UI. [Test results](AttendanceArtEvidence/editmode.xml) are preserved.
+- The macOS development build succeeded with zero errors. Re-running the attendance acceptance scenario verified **600 reward-sprite instances across 40 page-layout combinations**, plus 97 raycast-verified clicks and 22 drags. Assertions check correct sprites, preserved aspect ratio and disabled image raycast targets. See [art checks](AttendanceArtEvidence/art.txt), [native results](AttendanceArtEvidence/initial.txt), [fresh-process results](AttendanceArtEvidence/resume.txt) and [scope/source hashes](AttendanceArtEvidence/validation.json).
+- Portrait and PC captures were visually inspected for silhouette, readability and alpha edges. **Physical mobile devices were not tested.**
+
+[Updated weekly portrait](AttendanceArtEvidence/weekly-440x956-ko-100.png) · [English at 150%](AttendanceArtEvidence/weekly-440x956-en-150.png) · [PC weekly](AttendanceArtEvidence/weekly-1440x810-ko-100.png) · [PC monthly](AttendanceArtEvidence/monthly-1440x900-ko-100.png) · [Landscape monthly](AttendanceArtEvidence/monthly-956x440-en-150.png)

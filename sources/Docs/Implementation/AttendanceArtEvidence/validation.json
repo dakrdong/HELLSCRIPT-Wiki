@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-24",
+  "unity": "6000.6.0f1",
+  "build": "Succeeded, errors=0",
+  "editMode": {
+    "total": "27",
+    "passed": "27",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "runtime": "PASS: login order, both claims, independent hide-today checkboxes, same-day suppression and manual reopen, midnight rollover, weekly rewards, legendary box opening, battle pause restoration, 97 raycast-verified clicks, 22 uGUI drag gestures, 40 viewport/language/scale page checks. Isolated native macOS player; physical mobile not tested.",
+  "art": "PASS: 600 reward sprite checks across 40 viewport/language/scale page checks. Gold, random cores and legendary chests use their dedicated alpha sprites; existing coins and gems are preserved.",
+  "restart": "PASS: fresh process restored account progress, all reward balances, opened legendary and both device popup preferences. Manual event button bypassed suppression.",
+  "screenshotsCaptured": 45,
+  "representativeScreenshots": [
+    "weekly-440x956-ko-100.png",
+    "weekly-440x956-en-150.png",
+    "weekly-1440x810-ko-100.png",
+    "monthly-1440x900-ko-100.png",
+    "monthly-956x440-en-150.png"
+  ],
+  "physicalMobile": "not tested",
+  "model": "unverified; built-in tool did not return model provenance",
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs": "8e5344f6a1af9acbf02b1b95f571fd4c02345864e11638f5238f2d18e6e02895",
+    "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs": "8d57978ecebc036386d23a0433ded3732f1bcf02a93d39261d3a9c5c8571beb0",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAttendanceSmoke.cs": "e0f3e44f073c50005604b0e8bc653691716ec98c770ed6dd80e5cef1258ecde3",
+    "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs": "64d8f7a6bcb9fed93806c3efdd6107c3acfbed4cd500560120468928901473ea",
+    "Assets/HELLSCRIPT/Tests/Editor/AttendanceArtTests.cs": "6ecff91f9330dcafcd32ac2543e2138b5760079ddb63fa7231fbc3d125136953"
+  }
+}

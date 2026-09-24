@@ -300,6 +300,7 @@ def build_databases():
 
 def build_resources(databases):
     from PIL import Image
+    from wiki_attendance import resource_rows as attendance_resource_rows
     rows=[]
     uses={'Sanctuary.png':'성소·결과 화면의 배경','SkillAtlas.png':'액티브 18개·직업 3개와 기존 장비용 3셀',
           'EquipmentAtlas.png':'B01–B24 장비 목록·상세 아이콘','RiftStone.png':'균열 바닥 재질'}
@@ -502,6 +503,7 @@ def build_resources(databases):
             forge_manifest,status='적용 리소스',image={'file':'Blacksmith/'+entry['id']+'.png'},assetPath=path,
             refs=[source_ref(entry['source']),source_ref('Assets/HELLSCRIPT/Editor/BlacksmithArtImporter.cs')],
             related=['blacksmith-unity-integration','blacksmith-unity-integration.en','blacksmith-validation']))
+    rows.extend(attendance_resource_rows(sys.modules[__name__]))
     return db('resources','리소스 DB','타이틀 배경을 포함한 이미지 원본, 아틀라스 영역, 코드로 만드는 표현과 제작 과제를 함께 관리합니다. 영역·표현·과제는 독립 이미지 파일이 아닙니다.',rows)
 
 def build_class_abilities():
@@ -854,6 +856,9 @@ def build():
     (SITE/'media/Blacksmith').mkdir(parents=True,exist_ok=True)
     for file in (ROOT/ART/'Blacksmith').glob('*.png'):
         shutil.copyfile(file,SITE/'media/Blacksmith'/file.name)
+    (SITE/'media/Attendance').mkdir(parents=True,exist_ok=True)
+    for file in (ROOT/ART/'Attendance').glob('*.png'):
+        shutil.copyfile(file,SITE/'media/Attendance'/file.name)
     report=validate(dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')

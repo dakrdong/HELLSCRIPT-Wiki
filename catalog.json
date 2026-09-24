@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T19:02:45+09:00",
+  "generatedAt": "2026-09-24T20:43:46+09:00",
   "databases": [
     {
       "id": "resources",
@@ -4743,6 +4743,126 @@
             "blacksmith-unity-integration",
             "blacksmith-unity-integration.en",
             "blacksmith-validation"
+          ]
+        },
+        {
+          "id": "attendance-art-reward-gold",
+          "name": "골드 / Gold",
+          "category": "이미지 원본",
+          "summary": "출석 보상의 도형을 대체한 투명 이미지 / Transparent artwork replacing reward glyphs",
+          "fields": {
+            "원본 경로 / Path": "Assets/HELLSCRIPT/Resources/Art/Attendance/reward-gold.png",
+            "해상도 / Size": "1254 × 1254",
+            "색상 모드 / Mode": "RGBA",
+            "완전 투명 픽셀 / Transparent pixels": 879038,
+            "SHA-256": "27e5899053efde1791e234fec88f792d1d5ecae10a9e270db423a5ae60b36af6",
+            "Unity GUID": "e21aebf44bfc64d03a18e69b606aac34",
+            "제작 방법 / Surface": "built-in image_gen",
+            "생성 모델 / Verified model": "미확인 / Unverified",
+            "승인 상태 / Status": "모델 미확인 개발용 / Development art; model unverified",
+            "사용처 / Use": "AttendanceArt → AttendanceWindow; weekly and monthly rewards"
+          },
+          "source": {
+            "path": "Docs/Art/Attendance/source-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "Attendance/reward-gold.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/Attendance/reward-gold.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "attendance-events"
+          ]
+        },
+        {
+          "id": "attendance-art-reward-random-core",
+          "name": "무작위 부위 코어 / Random Slot Core",
+          "category": "이미지 원본",
+          "summary": "출석 보상의 도형을 대체한 투명 이미지 / Transparent artwork replacing reward glyphs",
+          "fields": {
+            "원본 경로 / Path": "Assets/HELLSCRIPT/Resources/Art/Attendance/reward-random-core.png",
+            "해상도 / Size": "1254 × 1254",
+            "색상 모드 / Mode": "RGBA",
+            "완전 투명 픽셀 / Transparent pixels": 726131,
+            "SHA-256": "f487fdcd53e9377b2de1ee16ab31872e2b27b8bc8172f06652641fc6ec7dd955",
+            "Unity GUID": "c6d87439e8048490988d53baa30b697e",
+            "제작 방법 / Surface": "built-in image_gen",
+            "생성 모델 / Verified model": "미확인 / Unverified",
+            "승인 상태 / Status": "모델 미확인 개발용 / Development art; model unverified",
+            "사용처 / Use": "AttendanceArt → AttendanceWindow; weekly and monthly rewards"
+          },
+          "source": {
+            "path": "Docs/Art/Attendance/source-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "Attendance/reward-random-core.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/Attendance/reward-random-core.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "attendance-events"
+          ]
+        },
+        {
+          "id": "attendance-art-reward-legendary-chest",
+          "name": "전설 상자 / Legendary Chest",
+          "category": "이미지 원본",
+          "summary": "출석 보상의 도형을 대체한 투명 이미지 / Transparent artwork replacing reward glyphs",
+          "fields": {
+            "원본 경로 / Path": "Assets/HELLSCRIPT/Resources/Art/Attendance/reward-legendary-chest.png",
+            "해상도 / Size": "1254 × 1254",
+            "색상 모드 / Mode": "RGBA",
+            "완전 투명 픽셀 / Transparent pixels": 698574,
+            "SHA-256": "48578b1669d8b695d61a991446fd18bdd0acfad35b32983739be0afa50d0fa13",
+            "Unity GUID": "9e30678cf9c8d453c8e68d6ccffd9869",
+            "제작 방법 / Surface": "built-in image_gen",
+            "생성 모델 / Verified model": "미확인 / Unverified",
+            "승인 상태 / Status": "모델 미확인 개발용 / Development art; model unverified",
+            "사용처 / Use": "AttendanceArt → AttendanceWindow; weekly and monthly rewards"
+          },
+          "source": {
+            "path": "Docs/Art/Attendance/source-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "Attendance/reward-legendary-chest.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/Attendance/reward-legendary-chest.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "attendance-events"
           ]
         }
       ]
@@ -92710,7 +92830,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-gold.png"
+          },
+          "resource": "attendance-art-reward-gold"
         },
         {
           "id": "attendance-weekly-05",
@@ -92768,7 +92892,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-random-core.png"
+          },
+          "resource": "attendance-art-reward-random-core"
         },
         {
           "id": "attendance-weekly-07",
@@ -92797,7 +92925,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-legendary-chest.png"
+          },
+          "resource": "attendance-art-reward-legendary-chest"
         },
         {
           "id": "attendance-monthly-01",
@@ -92913,7 +93045,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-gold.png"
+          },
+          "resource": "attendance-art-reward-gold"
         },
         {
           "id": "attendance-monthly-05",
@@ -92971,7 +93107,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-random-core.png"
+          },
+          "resource": "attendance-art-reward-random-core"
         },
         {
           "id": "attendance-monthly-07",
@@ -93000,7 +93140,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-legendary-chest.png"
+          },
+          "resource": "attendance-art-reward-legendary-chest"
         },
         {
           "id": "attendance-monthly-08",
@@ -93116,7 +93260,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-gold.png"
+          },
+          "resource": "attendance-art-reward-gold"
         },
         {
           "id": "attendance-monthly-12",
@@ -93174,7 +93322,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-random-core.png"
+          },
+          "resource": "attendance-art-reward-random-core"
         },
         {
           "id": "attendance-monthly-14",
@@ -93203,7 +93355,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-legendary-chest.png"
+          },
+          "resource": "attendance-art-reward-legendary-chest"
         },
         {
           "id": "attendance-monthly-15",
@@ -93319,7 +93475,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-gold.png"
+          },
+          "resource": "attendance-art-reward-gold"
         },
         {
           "id": "attendance-monthly-19",
@@ -93377,7 +93537,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-random-core.png"
+          },
+          "resource": "attendance-art-reward-random-core"
         },
         {
           "id": "attendance-monthly-21",
@@ -93406,7 +93570,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-legendary-chest.png"
+          },
+          "resource": "attendance-art-reward-legendary-chest"
         },
         {
           "id": "attendance-monthly-22",
@@ -93522,7 +93690,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-gold.png"
+          },
+          "resource": "attendance-art-reward-gold"
         },
         {
           "id": "attendance-monthly-26",
@@ -93580,7 +93752,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-random-core.png"
+          },
+          "resource": "attendance-art-reward-random-core"
         },
         {
           "id": "attendance-monthly-28",
@@ -93609,7 +93785,11 @@
           ],
           "related": [
             "attendance-events"
-          ]
+          ],
+          "image": {
+            "file": "Attendance/reward-legendary-chest.png"
+          },
+          "resource": "attendance-art-reward-legendary-chest"
         }
       ]
     },
