@@ -1,6 +1,6 @@
 # Live operations and server configuration releases
 
-Updated: 2026-09-25
+Updated: 2026-09-26
 
 [한국어](Live_Operations.md) · [Open operations tool](https://hellscript-production.up.railway.app/ops) · [Combat journals and server ingestion](Combat_Journal_Server.en.md)
 
@@ -52,19 +52,21 @@ The table defines the integrated host configuration. Actual deployment, uploads 
 | --- | --- |
 | Service | Railway `dazzling-love / production / HELLSCRIPT`, one replica |
 | Origin | `https://hellscript-production.up.railway.app` |
-| Storage | 500 MB volume; `/data/hellscript/telemetry.sqlite` and `liveops.sqlite` |
+| Storage | 500 MB volume; `/data/hellscript/telemetry.sqlite`, `liveops.sqlite` and `accounts.sqlite` |
 | Automatic deployment | Changes on GitHub `main` to `server/**`, `Dockerfile`, `.dockerignore` or the original `RewardBoxes.json` trigger deployment. Documentation-only changes do not restart the server. |
-| Health | `GET /healthz`; both databases must remain readable. |
+| Health | `GET /healthz`; telemetry, operations and the enabled Google account database must remain readable. |
 | Player reads | `GET /v1/liveops/current` and `/v1/liveops/releases/{version}` expose published configuration only. |
 | Operators | `/ops`; separate `HELLSCRIPT_OPS_TOKENS` and exact `HELLSCRIPT_OPS_ORIGIN` |
 | Combat uploads | `POST /v1/combat-runs`; per-QA-account keys from `HELLSCRIPT_TELEMETRY_TOKENS` |
 | Persistence | Atomic SQLite publication, immutable releases/audit, revision comparison |
 
-`Resources/Data/ServerConnection.json` contains only the public origin and automatically connects configuration reads. Development builds and the Editor connect combat uploads using an operator-issued `qa-session.json` in the save directory, or a path passed with `-hellscriptQaSessionFile`. The file's server and upload purpose are validated. QA upload tokens are separate from web operator keys, and the server enforces their different permissions. Ordinary release builds exclude this development-file connection path. This provides pseudonymous QA-account attribution until production user authentication is integrated. Real session contents and private paths are not published.
+`Resources/Data/ServerConnection.json` contains only the public origin and automatically connects configuration reads. Development builds and the Editor connect combat uploads using an operator-issued `qa-session.json` in the save directory, or a path passed with `-hellscriptQaSessionFile`. The file's server and upload purpose are validated. QA upload tokens are separate from web operator keys, and the server enforces their different permissions. Ordinary release builds exclude this development-file connection path. This provides pseudonymous QA-account attribution separately from Google player authentication. Real session contents and private paths are not published.
 
 Credentials and QA session files are excluded from Git and the public wiki. Operators use HttpOnly/Secure/SameSite cookies, exact Origin checks and CSRF tokens. Anonymous pages cannot mutate configuration. Missing operator credentials keep the operator API closed. Requests, timeouts and login attempts have explicit limits.
 
 During setup, this Railway trial account's Backups screen required Pro. The plan was not upgraded, and neither platform nor scheduled backups were configured. Both databases received a one-time backup through SQLite's online backup API into private local storage. Independent copies returned `ok` from `quick_check`; the production databases were not restored. Persistent-volume retention, a one-time backup and copy checks are distinct from automatic backups or a production restore test. See the [storage and backup evidence](../../Artifacts/Validation/live-operations-20260925/cloud-storage-backup.json). Check available backup methods, schedules and restoration procedures in the [Railway backup documentation](https://docs.railway.com/volumes/backups) and configure them separately. Backing up running SQLite databases requires each database's backup API, not a database-file copy that omits the WAL.
+
+Stable Google account IDs and sessions use a separate `accounts.sqlite`. [Google sign-in](Google_Login.en.md) grants neither operator nor QA-upload permissions. The one-time backup evidence above predates Google sign-in and covers only the telemetry and operations databases, not backup or restoration of the new account database.
 
 ## Verification record
 

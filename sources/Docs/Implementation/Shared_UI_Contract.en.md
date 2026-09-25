@@ -99,6 +99,10 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 
 `CombatRecordsWindow` uses the new-content starter, `ContentWindowView` and `EquipmentViewSource.BattleSnapshot`. A standard Unity `Dropdown` selects the outcome; the record body scrolls independently. The window owns selection/filter state, while `GameStore` owns post-commit file export. Existing review pages remain shared; live text uses the battle HUD adapter. See [combat journal and server collection](Combat_Journal_Server.en.md).
 
+## Title adapter before sign-in
+
+The Google sign-in dialog in `TitleScreenView` remains part of the existing full-screen title adapter. It preserves safe areas, a scrolling body and fixed close control while sharing `UiFonts`, `UiTheme` and `UiButton`. `GoogleLoginClient` owns authentication; `GameController.Accounts` and `AccountProfiles` own save binding. Presentation code cannot create a successful login or directly change save ownership. Provider branding is an explicit exception: the official Google palette and English Roboto font belong to `UiButtonRole.GoogleSignIn`, `UiTheme` and `UiFonts.GoogleSignIn`. See [Google sign-in](Google_Login.en.md) for scope and validation.
+
 ## Tutorial guidance
 
 `TutorialJournalWindow` uses the shared content template. Practice selection distinguishes owned equipment from recipe definitions and reuses `ItemDetailView`. Native inventory and `GameStore` own actual equipment mutations. `TutorialAnchorRing` attaches to logical button IDs and owned inventory cells, does not intercept input and never mutates account state. Brief combat guidance and the entry button use the existing HUD adapter. See [implementation](Tutorial_Progression.en.md).

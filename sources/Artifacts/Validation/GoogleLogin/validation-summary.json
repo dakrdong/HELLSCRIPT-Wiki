@@ -1,0 +1,72 @@
+{
+  "baseCommit": "fed12df8bf8625d036528f05fa64c98100d9e57c",
+  "unityVersion": "6000.6.0f1",
+  "editMode": {
+    "total": 101,
+    "passed": 101,
+    "failed": 0,
+    "skipped": 0
+  },
+  "serverTests": {
+    "passed": 80,
+    "failed": 0
+  },
+  "macBuild": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "nativeTitle": {
+    "passed": true,
+    "claims": 31,
+    "googleDialogCombinations": 20
+  },
+  "nativeCharacterSelection": {
+    "passed": true,
+    "claims": 11
+  },
+  "realGoogleAuthentication": {
+    "status": "passed",
+    "realLogins": 2,
+    "runtimeExitCode": 0,
+    "evidence": "real-google/acceptance.json"
+  },
+  "windowsAndPhysicalMobile": "not tested",
+  "publicServerDeployment": {
+    "status": "active",
+    "commit": "64a9a18a045ecd602de0c61768e1347be33c5e68",
+    "deploymentId": "8b2ba0b3-0815-43a6-9da9-1ef3dc9bced7"
+  },
+  "publicWikiDeployment": "generated from merged main; Pages deployment is verified separately",
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Editor/GoogleLoginBuild.cs": "e3dcc0182ace9c53c455fb1aba52249430c1ca06867eb70542bdc73edc2e331a",
+    "Assets/HELLSCRIPT/Runtime/Core/AccountProfiles.cs": "8dd25f814c27f48eefc2907ce6b39bef9c52803d79dd4ac9db291caaeae19a16",
+    "Assets/HELLSCRIPT/Runtime/Core/GoogleLoginProtocol.cs": "c988dae0a5f6f92e9d622c8c2f8327789ea7b66c252d3a4dadae06f33064a4b7",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Accounts.cs": "e085fe3b892203bad6a92a4017bfabe0317de66d98e2fdc35e6716de7aac2d16",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Accounts.cs": "1cbec9ba7338cbdafdcb6f3dfbb2735447018a3412bdcbae013d1f6241f81fcc",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GoogleLoginClient.cs": "484e8220f01144897ebe1a3d69510870fbfabbd61d5b8d78c86be1c75a1e0574",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeGoogleLoginSmoke.cs": "302f801809ae646a6ddd619c9ffe0059a583031480b961977c142935eac30c51",
+    "Assets/HELLSCRIPT/Tests/Editor/AccountLoginTests.cs": "4a5b95def89c7440ee9c9c0021e0a688b7de28b53ee26155274e6aa3ddcd2951",
+    "Assets/HELLSCRIPT/Tests/Editor/GoogleLoginBuildTests.cs": "6f6719ae753a545eac859c6be8ebfa552f13eee13695f1ae809b82b986fd7b30",
+    "server/player_auth.py": "bd398cf45e9ebae6c0f4bf3fce075da411101bded74ed0ad649debc1bff08d61",
+    "server/test_player_auth.py": "4b7b59332bcfec01fbd658b7e00bafcddeb5715ce31aebc2439160c2cbefcd91",
+    "Assets/HELLSCRIPT/Runtime/Core/TitleSession.cs": "d7e7547b7f97ac82dc8a5ea18bc90d22008df3b7b44dea4d4fa0932ae11153a9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/CombatTelemetryUploader.cs": "1224e65f8a5873d38d915be2337543b0ce14a811f569492bc8e43401c36f058c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.cs": "cdf31729bf0bc614e5e591c9c1dcc3dfcd2a7367c60aee72600f62db3a6a4540",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs": "c88e402aedfe2d16237e5103e6bb3da4756cb7e4f6e339a731501bdd4399716d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCharacterSelectionSmoke.cs": "407ad79fc1f8b3dce755e00055bcbaf0b1009ad62ed373f50d92c8e7cb80829b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTitleSmoke.cs": "5878a83e3022cb849e220c392fab4d0ff6bba34810c399763777a9f2be581f06",
+    "Assets/HELLSCRIPT/Runtime/Presentation/TitleScreenView.Dialogs.cs": "2d1d9d7f99b254a94050535d37a08f71e5da347e361e42e449d4a9a7041ff645",
+    "Assets/HELLSCRIPT/Runtime/Presentation/TitleScreenView.cs": "1e915ed8f350dd93d027f2bd6434d97184e9c1b953d95da5bb97305b100b51e9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiButton.cs": "04f32ab7a469961fc8bf8950ab80238eb416abb10d61472d60dd59e2f71afe2c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiButtonFace.cs": "1574f52facaf6e07e78d6c3463a737e2a44b3c808b8a24f02632feb9c52cd2ae",
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiTheme.cs": "9ac550bd9a990bcae8435c06eb5eddb0ada09bad7388b22adec3743bad42c6e4",
+    "Assets/HELLSCRIPT/Tests/Editor/TitleScreenTests.cs": "ce621bfdf7baa42d6a7c4da23d7b1582a83b63bed7480cfa2e2366f7721b3d58",
+    "server/requirements.txt": "a5cf3ae3f00d27e9c52058dbeecd2555e116b044d7de20749eb27342a417fd0e",
+    "server/telemetry_wsgi.py": "9d1f146fa1e4df1272113aba6863b162a8a8a720adbcc078d0e11ff52d5a7a8f"
+  },
+  "mainIntegration": {
+    "mergedPullRequest": "https://github.com/dakrdong/HELLSCRIPT/pull/12",
+    "sourceCommit": "64a9a18a045ecd602de0c61768e1347be33c5e68",
+    "rootDirtyFilesPreserved": 408
+  }
+}

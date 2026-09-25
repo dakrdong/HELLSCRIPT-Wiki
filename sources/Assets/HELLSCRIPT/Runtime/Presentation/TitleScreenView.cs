@@ -40,19 +40,20 @@ namespace Hellscript
             var seal=Rect("Sanctuary sigil",logoGroup);var ornament=seal.gameObject.AddComponent<TitleOrnament>();ornament.color=Gold;ornament.raycastTarget=false;
             tagline=Caption(logoGroup,"tagline","재가 된 성소에서, 다시 깨어나라.",15,Bone);
             home=Rect("Title entry controls",root);homeGroup=home.gameObject.AddComponent<CanvasGroup>();
-            login=ActionButton(home,"title-login","계정 로그인",ShowLogin,false,16);
+            login=GoogleButton(home,"title-login","Google로 계속",ShowLogin,14,1);
             guest=ActionButton(home,"title-guest","게스트로 계속",GuestAction,false,15);
             server=ActionButton(home,"title-server","서버 선택",ShowServers,false,16);
             enter=ActionButton(home,"title-enter","캐릭터 선택하기",Enter,true,22);
             entryHint=Caption(home,"entry-hint","로그인하거나 게스트로 시작하세요.",12,Muted);
             footline=Rect("Title footer",root);
-            footnote=Caption(footline,"demo-note","로그인·서버 선택 체험 화면",11,Muted,TextAnchor.MiddleLeft);
+            footnote=Caption(footline,"demo-note","진행 상황은 현재 기기에 저장됩니다.",11,Muted,TextAnchor.MiddleLeft);
             version=Caption(footline,"version","HELLSCRIPT  /  "+Application.version,11,Muted,TextAnchor.MiddleRight);
             Refresh();Reflow(true);
+            if(game.GoogleLogin.Busy||game.GoogleLogin.Ready&&(!Session.SignedIn||Session.Guest))ShowLogin();
         }
         void Refresh()
         {
-            SetCaption(login,Session.SignedIn?Loc.F("{0} · 계정",Session.DisplayName):Loc.T("계정 로그인"));
+            SetCaption(login,Loc.T(Session.SignedIn&&!Session.Guest?"Google 계정":"Google로 계속"));
             SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("게스트로 계속"));
             guest.onClick.RemoveAllListeners();guest.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);GuestAction();});
             SetCaption(server,Loc.F("{0}   ·   {1}   ›",TitleSession.ServerNames[Session.Server],TitleSession.ServerStates[Session.Server]));
@@ -72,8 +73,8 @@ namespace Hellscript
         }
         void GuestAction()
         {
-            if(Session.SignedIn){Session.SignOut();Refresh();return;}
-            Session.SignInAsGuest();game.UI.OpenCharacterSelection();
+            if(Session.SignedIn){if(!game.SignOutAccount())game.UI.ShowToast(game.Notice);Refresh();return;}
+            if(!game.EnterAsGuest())game.UI.ShowToast(game.Notice);
         }
         void Enter()
         {
@@ -83,6 +84,7 @@ namespace Hellscript
         void Update()
         {
             Reflow();
+            RefreshGoogleLogin();
             if(dialog!=null&&lastKeyboardHeight!=(TouchScreenKeyboard.visible?TouchScreenKeyboard.area.height/root.GetComponentInParent<Canvas>().scaleFactor:0))ReflowDialog();
             if(game==null)return;
             bool blocked=game.UI.CommonPanelOpen;
@@ -90,17 +92,6 @@ namespace Hellscript
             if(blocked||Session.Entering)return;
             var keys=Keyboard.current;
             if(keys==null)return;
-            if(DialogKind=="login"&&keys.tabKey.wasPressedThisFrame)
-            {
-                var fields=new Selectable[]{accountInput,passwordInput,Find("title-login-submit"),Find("title-login-guest"),dialogClose};
-                var current=EventSystem.current?.currentSelectedGameObject;
-                int index=Array.FindIndex(fields,x=>x!=null&&x.gameObject==current);
-                int next=(index+(keys.leftShiftKey.isPressed||keys.rightShiftKey.isPressed?-1:1)+fields.Length)%fields.Length;
-                EventSystem.current?.SetSelectedGameObject(fields[next].gameObject);
-                if(fields[next] is InputField input)input.ActivateInputField();
-            }
-            if(DialogKind=="login"&&keys.enterKey.wasPressedThisFrame&&EventSystem.current?.currentSelectedGameObject==passwordInput.gameObject)
-            {Find("title-login-submit").onClick.Invoke();return;}
             if(keys.escapeKey.wasPressedThisFrame){if(DialogOpen)CloseDialog();else settings();}
             // InputField and Button already handle submit/navigation through the EventSystem.
             if(keys.enterKey.wasPressedThisFrame&&!DialogOpen&&EventSystem.current?.currentSelectedGameObject==null)Enter();
@@ -171,6 +162,18 @@ namespace Hellscript
 
             var label=Caption(r,"Caption",text,fontSize,primary?Bone:Muted);Fill(label.rectTransform);label.rectTransform.offsetMin=new Vector2(12,3);label.rectTransform.offsetMax=new Vector2(-12,-3);
             UiTheme.Button(button,primary);button.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return button;
+        }
+        Button GoogleButton(Transform parent,string id,string text,Action action,int fontSize,float read)
+        {
+            var button=(UiButton)ActionButton(parent,id,text,action,false,fontSize);button.Configure(UiButtonRole.GoogleSignIn);
+            button.transform.Find("Etched frame").gameObject.SetActive(false);
+            var caption=button.GetComponentInChildren<Text>();caption.font=UiFonts.GoogleSignIn;caption.color=StorageSurface.Hex("1f1f1f");
+            caption.rectTransform.offsetMin=new Vector2(40*read,3);caption.rectTransform.offsetMax=new Vector2(-12*read,-3);
+            var icon=Rect("Official Google G",button.transform);icon.anchorMin=icon.anchorMax=new Vector2(0,.5f);icon.pivot=new Vector2(0,.5f);
+            var texture=Resources.Load<Texture2D>("Authentication/GoogleG");
+            icon.anchoredPosition=new Vector2(12*read,0);icon.sizeDelta=new Vector2(18*read,18*read*(texture!=null?(float)texture.height/texture.width:1));
+            var graphic=icon.gameObject.AddComponent<RawImage>();graphic.texture=texture;graphic.raycastTarget=false;
+            return button;
         }
         static void SetCaption(Button b,string text)=>b.GetComponentInChildren<Text>().text=text;
 

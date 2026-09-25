@@ -7,10 +7,10 @@ namespace Hellscript
     public sealed partial class TitleScreenView
     {
         RectTransform dialog,dialogPanel,dialogScroll,dialogBody;Text dialogHeading,loginError;
-        InputField accountInput,passwordInput;Button dialogClose;float dialogHeight,dialogWidth,lastKeyboardHeight;
+        Button dialogClose,googleContinue;float dialogHeight,dialogWidth,lastKeyboardHeight;bool googleAccountOpenAttempted;
         void OpenDialog(string kind,string heading,float contentHeight)
         {
-            CloseDialog();DialogKind=kind;
+            CloseDialog(false);DialogKind=kind;
             dialog=Plate("title-modal",root,new Color(.008f,.009f,.012f,.83f),false);Fill(dialog);
             dialogPanel=Plate("Title dialog",dialog,new Color(.038f,.037f,.038f,.99f));
             dialogHeading=Caption(dialogPanel,"dialog-heading",heading,24,Bone,TextAnchor.MiddleLeft);
@@ -34,11 +34,11 @@ namespace Hellscript
             Put(dialogHeading.rectTransform,20,12,dialogWidth-102,46);Put((RectTransform)dialogClose.transform,dialogWidth-72,12,56,44);
             Put(dialogScroll,20,70,dialogWidth-40,panelHeight-84);
         }
-        public void CloseDialog()
+        public void CloseDialog()=>CloseDialog(true);
+        void CloseDialog(bool cancelLogin)
         {
-            if(accountInput!=null){accountInput.DeactivateInputField();accountInput.text="";}
-            if(passwordInput!=null){passwordInput.DeactivateInputField();passwordInput.text="";}
-            accountInput=passwordInput=null;
+            if(cancelLogin&&(DialogKind=="login"||DialogKind=="google-profile"))game.GoogleLogin.SignOut();
+            googleContinue=null;loginError=null;
             if(dialog!=null){dialog.gameObject.SetActive(false);Destroy(dialog.gameObject);}
             dialog=null;DialogKind="";
             if(homeGroup!=null)homeGroup.interactable=!Session.Entering;
@@ -51,30 +51,60 @@ namespace Hellscript
         }
         public void ShowLogin()
         {
-            OpenDialog("login","계정 로그인",366);
-            var note=Caption(dialogBody,"login-note","로그인 체험입니다. 실제 계정 정보는 입력하지 마세요.",13,Muted,TextAnchor.MiddleLeft);BodyRect(note.rectTransform,0,46);
-            var nameLabel=Caption(dialogBody,"account-label","계정 이름",13,Gold,TextAnchor.MiddleLeft);BodyRect(nameLabel.rectTransform,54,22);
-            accountInput=Field("title-account","방랑자의 이름을 입력하세요",false);BodyRect((RectTransform)accountInput.transform,80,48);
-            var passwordLabel=Caption(dialogBody,"password-label","비밀번호",13,Gold,TextAnchor.MiddleLeft);BodyRect(passwordLabel.rectTransform,137,22);
-            passwordInput=Field("title-password","체험용 문자를 입력하세요",true);BodyRect((RectTransform)passwordInput.transform,164,48);
-            loginError=Caption(dialogBody,"login-error","",12,new Color(.96f,.53f,.4f),TextAnchor.MiddleLeft);BodyRect(loginError.rectTransform,219,30);
-            var submit=ActionButton(dialogBody,"title-login-submit","로그인",()=>
+            float read=game.InterfaceScale.Factor;
+            if(Session.SignedIn&&!Session.Guest)
             {
-                if(!Session.SignIn(accountInput.text,passwordInput.text)){loginError.text=Loc.T("계정 이름과 체험용 비밀번호를 입력하세요.");return;}
-                CloseDialog();game.UI.OpenCharacterSelection();
-            },true,18);BodyRect((RectTransform)submit.transform,257,54);
-            var asGuest=ActionButton(dialogBody,"title-login-guest","게스트로 계속",()=>{Session.SignInAsGuest();CloseDialog();game.UI.OpenCharacterSelection();},false,15);BodyRect((RectTransform)asGuest.transform,321,44);
-            var n=accountInput.navigation;n.mode=Navigation.Mode.Explicit;n.selectOnDown=passwordInput;accountInput.navigation=n;
-            n=passwordInput.navigation;n.mode=Navigation.Mode.Explicit;n.selectOnUp=accountInput;n.selectOnDown=submit;passwordInput.navigation=n;
+                OpenDialog("account","Google 계정",150*read);
+                var identity=Caption(dialogBody,"google-account",Session.AccountName,Mathf.RoundToInt(15*read),Bone,TextAnchor.MiddleLeft);
+                BodyRect(identity.rectTransform,0,85*read);
+                var local=Caption(dialogBody,"account-storage-note","진행 상황은 현재 기기에 저장됩니다.",Mathf.RoundToInt(13*read),Muted,TextAnchor.MiddleLeft);
+                BodyRect(local.rectTransform,90*read,60*read);return;
+            }
+            OpenDialog("login","계정 로그인",260*read);
+            googleAccountOpenAttempted=false;
+            loginError=Caption(dialogBody,"google-login-status",game.GoogleLogin.Message,Mathf.RoundToInt(15*read),Bone,TextAnchor.MiddleLeft);
+            BodyRect(loginError.rectTransform,0,100*read);
+            googleContinue=GoogleButton(dialogBody,"title-google-login","Google로 계속",()=>
+            {if(game.GoogleLogin.Ready)googleAccountOpenAttempted=false;else game.GoogleLogin.Begin();},Mathf.RoundToInt(14*read),read);
+            BodyRect((RectTransform)googleContinue.transform,110*read,56*read);
+            var asGuest=ActionButton(dialogBody,"title-login-guest","게스트로 계속",()=>
+            {if(!game.EnterAsGuest())loginError.text=game.Notice;},false,Mathf.RoundToInt(15*read));
+            BodyRect((RectTransform)asGuest.transform,178*read,50*read);
+            RefreshGoogleLogin();
         }
-        InputField Field(string id,string placeholder,bool password)
+        void RefreshGoogleLogin()
         {
-            var r=Plate(id,dialogBody,new Color(.02f,.022f,.027f,1));
-            var value=Caption(r,"Input value","",17,Bone,TextAnchor.MiddleLeft);Fill(value.rectTransform);value.rectTransform.offsetMin=new Vector2(12,4);value.rectTransform.offsetMax=new Vector2(-12,-4);
-            var hint=Caption(r,"Input placeholder",placeholder,14,Muted,TextAnchor.MiddleLeft);Fill(hint.rectTransform);hint.rectTransform.offsetMin=new Vector2(12,4);hint.rectTransform.offsetMax=new Vector2(-12,-4);
-            var input=r.gameObject.AddComponent<InputField>();input.targetGraphic=r.GetComponent<Image>();input.textComponent=value;input.placeholder=hint;
-            input.lineType=InputField.LineType.SingleLine;input.characterLimit=password?64:24;input.contentType=password?InputField.ContentType.Password:InputField.ContentType.Standard;
-            input.caretColor=Bone;input.customCaretColor=true;input.selectionColor=new Color(.6f,.25f,.1f,.4f);input.onValueChanged.AddListener(_=>{if(loginError!=null)loginError.text="";});return input;
+            if(DialogKind!="login")return;
+            var auth=game.GoogleLogin;
+            if(auth.Ready)
+            {
+                if(googleAccountOpenAttempted)return;googleAccountOpenAttempted=true;
+                if(googleContinue!=null)googleContinue.interactable=true;
+                try
+                {
+                    if(game.GoogleProfileExists){if(!game.CompleteGoogleLogin(false))loginError.text=game.Notice;return;}
+                    ShowGoogleProfileChoice();return;
+                }
+                catch(System.Exception){loginError.text=Loc.T("계정 저장을 열지 못했습니다. 기존 저장은 보존했습니다. 다시 시도해 주세요.");return;}
+            }
+            if(loginError!=null)loginError.text=auth.Message;
+            if(googleContinue!=null)googleContinue.interactable=!auth.Busy;
+        }
+        void ShowGoogleProfileChoice()
+        {
+            float read=game.InterfaceScale.Factor;
+            OpenDialog("google-profile","진행 상황 선택",390*read);
+            var name=Caption(dialogBody,"google-account",game.GoogleLogin.Session.displayName,Mathf.RoundToInt(15*read),Bone,TextAnchor.MiddleLeft);
+            BodyRect(name.rectTransform,0,75*read);
+            var note=Caption(dialogBody,"google-profile-note","이 기기의 게스트 진행 상황을 Google 계정에 연결하거나 새 게임을 시작할 수 있습니다. 진행 상황은 현재 기기에 저장됩니다.",Mathf.RoundToInt(14*read),Muted,TextAnchor.MiddleLeft);
+            BodyRect(note.rectTransform,78*read,116*read);
+            loginError=Caption(dialogBody,"google-profile-error","",Mathf.RoundToInt(12*read),Bone,TextAnchor.MiddleLeft);BodyRect(loginError.rectTransform,198*read,52*read);
+            var link=ActionButton(dialogBody,"title-google-link-guest","게스트 진행 상황 연결",()=>
+            {if(!game.CompleteGoogleLogin(true))loginError.text=game.Notice;},true,Mathf.RoundToInt(16*read));
+            BodyRect((RectTransform)link.transform,258*read,54*read);link.interactable=game.CanLinkGuest;
+            var fresh=ActionButton(dialogBody,"title-google-new-game","새 게임으로 시작",()=>
+            {if(!game.CompleteGoogleLogin(false))loginError.text=game.Notice;},false,Mathf.RoundToInt(15*read));
+            BodyRect((RectTransform)fresh.transform,324*read,50*read);
         }
         public void ShowServers()
         {

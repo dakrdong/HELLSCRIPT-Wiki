@@ -2,13 +2,15 @@ using System;
 
 namespace Hellscript
 {
-    // Presentation-only state. No network client, account save, password storage or server migration.
+    // Presentation state after the controller has verified identity and selected its local profile.
     public sealed class TitleSession
     {
         public static readonly string[] ServerNames={"잿빛 성소","검은 종탑","망각의 문"};
         public static readonly string[] ServerStates={"원활","혼잡","점검 중"};
-        public bool SignedIn {get;private set;}
+        bool signedIn;long expiresAt;
+        public bool SignedIn=>signedIn&&(Guest||expiresAt>DateTimeOffset.UtcNow.ToUnixTimeSeconds());
         public bool Guest {get;private set;}
+        public string AccountId {get;private set;}="";
         public string AccountName {get;private set;}="";
         public int Server {get;private set;}
         public bool Entering {get;private set;}
@@ -19,15 +21,14 @@ namespace Hellscript
             if(Entering||index<0||index>=ServerNames.Length||index==2)return false;
             Server=index;return true;
         }
-        public bool SignIn(string name,string password)
+        public bool SignInWithGoogle(GooglePlayerSession session)
         {
-            if(Entering||string.IsNullOrWhiteSpace(name)||string.IsNullOrWhiteSpace(password))return false;
-            name=name.Trim();
-            if(name.Length>24||Array.Exists(name.ToCharArray(),char.IsControl))return false;
-            AccountName=name;Guest=false;SignedIn=true;return true;
+            if(Entering||session==null||!session.Valid(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))return false;
+            AccountId=session.accountId;AccountName=session.displayName;expiresAt=session.expiresAt;
+            Guest=false;signedIn=true;return true;
         }
-        public void SignInAsGuest(){if(Entering)return;AccountName="";Guest=true;SignedIn=true;}
-        public void SignOut(){if(Entering)return;AccountName="";Guest=false;SignedIn=false;}
+        public void SignInAsGuest(){if(Entering)return;AccountId=AccountName="";expiresAt=0;Guest=true;signedIn=true;}
+        public void SignOut(){if(Entering)return;AccountId=AccountName="";expiresAt=0;Guest=false;signedIn=false;}
         public bool BeginEntry(){if(!SignedIn||Entering)return false;Entering=true;return true;}
         public void CancelEntry()=>Entering=false;
     }
