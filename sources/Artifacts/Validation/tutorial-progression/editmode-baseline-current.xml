@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="85" result="Failed(Child)" total="85" passed="42" failed="43" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-25 02:48:57Z" end-time="2026-09-25 02:49:27Z" duration="29.4495936">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="3930" result="Failed" site="Child" start-time="2026-09-25 02:48:57Z" end-time="2026-09-25 02:49:27Z" duration="29.449594" total="85" passed="42" failed="43" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="5528" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="3930" result="Failed" site="Child" start-time="2026-09-25 02:48:57Z" end-time="2026-09-25 02:49:27Z" duration="29.415522" total="85" passed="42" failed="43" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="86074" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="5529" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="3930" result="Failed" site="Child" start-time="2026-09-25 02:48:57Z" end-time="2026-09-25 02:49:27Z" duration="29.398669" total="85" passed="42" failed="43" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="5530" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="3930" result="Failed" site="Child" start-time="2026-09-25 02:48:57Z" end-time="2026-09-25 02:49:27Z" duration="29.379775" total="85" passed="42" failed="43" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="ActionContinuityTests" fullname="Hellscript.Tests.ActionContinuityTests" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" testcasecount="39" result="Failed" site="Child" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:59Z" duration="1.165270" total="39" passed="3" failed="36" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1022" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" testcasecount="20" result="Failed" site="Child" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.700566" total="20" passed="0" failed="20" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1002" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(1)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(1)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1528087058" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.248772" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21203 but was 21954. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1003" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(2)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(2)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="17451806" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.021083" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21020 but was 21770. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1004" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(3)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(3)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1452021970" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020675" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21021 but was 21772. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1005" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(4)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(4)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1681280907" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.024360" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21166 but was 21917. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1006" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(5)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(5)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="2040768592" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.027321" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21170 but was 21921. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1007" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(6)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(6)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1880526574" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020530" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21120 but was 21870. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1008" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(7)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(7)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="333900269" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.019990" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21120 but was 21870. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1009" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(8)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(8)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1055224258" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.031075" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21119 but was 21869. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1010" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(9)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(9)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="902021981" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.023039" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21147 but was 21898. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1011" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(10)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(10)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1686774435" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020332" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21134 but was 21885. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1012" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(11)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(11)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="2138902459" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.022953" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21119 but was 21869. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1013" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(12)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(12)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="429446968" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.027123" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21180 but was 21929. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1014" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(13)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(13)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="134060308" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020596" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21182 but was 21931. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1015" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(14)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(14)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1167655495" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020095" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21188 but was 21937. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1016" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(15)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(15)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="792502497" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.033585" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21214 but was 21964. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1017" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(16)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(16)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="833515216" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020714" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21177 but was 21927. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1018" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(17)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(17)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1462968261" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.020191" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21025 but was 21774. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1019" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Warrior)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Warrior)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="664814859" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.019836" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21014 but was 21765. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1020" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Ranger)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Ranger)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="135161258" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.029996" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21130 but was 21881. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1021" name="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Mage)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Mage)" methodname="ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="747599538" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.019838" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21188 but was 21938. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease (System.Int32 skill, Hellscript.HeroClass basicClass) [0x0011c] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:49
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1037" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.256084" total="10" passed="0" failed="10" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1027" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,0)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,0)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1687376520" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.023474" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21133 but was 23791. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1028" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,0)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,0)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="983480968" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.025952" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21195 but was 23853. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1029" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,0)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,0)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="189728109" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.026767" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21250 but was 23908. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1030" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,0)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,0)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1840446570" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.021082" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21386 but was 24029. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1031" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,0)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,0)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1474074131" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.021105" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21700 but was 24626. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1032" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,2)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,2)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="567611407" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.040011" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 23076 but was 25738. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1033" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,2)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,2)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="598514119" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.021481" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 23297 but was 25959. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1034" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,2)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,2)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="688301494" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.021133" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 23081 but was 25743. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1035" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,2)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,2)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1382378417" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.024120" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 23080 but was 25742. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1036" name="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,2)" fullname="Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,2)" methodname="ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="2080359084" result="Failed" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:58Z" duration="0.028248" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 23239 but was 26203. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage (System.Int32 offset, System.Int32 paidTicks) [0x0016e] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:78
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1026" name="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease" fullname="Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-09-25 02:48:58Z" end-time="2026-09-25 02:48:59Z" duration="0.077576" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1023" name="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(1,5)" fullname="Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(1,5)" methodname="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="472273817" result="Failed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.023172" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21989 but was 23091. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease (System.Int32 skill, System.Int32 ticks) [0x00098] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:61
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1024" name="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(9,4)" fullname="Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(9,4)" methodname="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1030709393" result="Failed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.021273" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21762 but was 22864. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease (System.Int32 skill, System.Int32 ticks) [0x00098] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:61
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1025" name="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(-1,10)" fullname="Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(-1,10)" methodname="EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="153412070" result="Failed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.032051" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 23187 but was 24316. Strings differ at index 28.
+  Expected: "{"liveOps":{"schemaVersion":0,"version":0,"stage":0,"configHa..."
+  But was:  "{"liveOps":{"schemaVersion":1,"version":0,"stage":1,"configHa..."
+  ---------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease (System.Int32 skill, System.Int32 ticks) [0x00098] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:61
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="1038" name="PendingChannelUsesOriginalMovementAndTargetPolicyEvenAfterRowReplacement" fullname="Hellscript.Tests.ActionContinuityTests.PendingChannelUsesOriginalMovementAndTargetPolicyEvenAfterRowReplacement" methodname="PendingChannelUsesOriginalMovementAndTargetPolicyEvenAfterRowReplacement" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1077671571" result="Passed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.022770" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="ReusedRuleIdForAnotherSkillCannotBecomeTheOldActionsPriorityAnchor" fullname="Hellscript.Tests.ActionContinuityTests.ReusedRuleIdForAnotherSkillCannotBecomeTheOldActionsPriorityAnchor" methodname="ReusedRuleIdForAnotherSkillCannotBecomeTheOldActionsPriorityAnchor" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="908905703" result="Passed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.014690" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1039" name="SurvivalPriorityFollowsRuleIdentityWhenItsRowMoves" fullname="Hellscript.Tests.ActionContinuityTests.SurvivalPriorityFollowsRuleIdentityWhenItsRowMoves" methodname="SurvivalPriorityFollowsRuleIdentityWhenItsRowMoves" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="899239268" result="Passed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.009978" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1044" name="VersionThreeActionMigrationPreservesTimingCostAndReleaseState" fullname="Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.072927" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1041" name="VersionThreeActionMigrationPreservesTimingCostAndReleaseState(0)" fullname="Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(0)" methodname="VersionThreeActionMigrationPreservesTimingCostAndReleaseState" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1801078957" result="Failed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.023780" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21319 but was 22246. Strings differ at index 1506.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":2,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState (System.Int32 skill) [0x00161] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:123
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1042" name="VersionThreeActionMigrationPreservesTimingCostAndReleaseState(1)" fullname="Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(1)" methodname="VersionThreeActionMigrationPreservesTimingCostAndReleaseState" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1637396959" result="Failed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.027957" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21527 but was 22446. Strings differ at index 1506.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":2,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState (System.Int32 skill) [0x00161] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:123
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1043" name="VersionThreeActionMigrationPreservesTimingCostAndReleaseState(12)" fullname="Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(12)" methodname="VersionThreeActionMigrationPreservesTimingCostAndReleaseState" classname="Hellscript.Tests.ActionContinuityTests" runstate="Runnable" seed="1911206646" result="Failed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:48:59Z" duration="0.020370" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21506 but was 22417. Strings differ at index 1506.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":2,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState (System.Int32 skill) [0x00161] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/ActionContinuityTests.cs:123
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="2024" name="CoreTests" fullname="Hellscript.Tests.CoreTests" classname="Hellscript.Tests.CoreTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:49:03Z" duration="4.013587" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2038" name="AllThreeClassesAdvanceInTraining" fullname="Hellscript.Tests.CoreTests.AllThreeClassesAdvanceInTraining" methodname="AllThreeClassesAdvanceInTraining" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1031115587" result="Passed" start-time="2026-09-25 02:48:59Z" end-time="2026-09-25 02:49:00Z" duration="1.189301" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2039" name="BossRewardPaysOnceAndFirstClearBelongsToEachHero" fullname="Hellscript.Tests.CoreTests.BossRewardPaysOnceAndFirstClearBelongsToEachHero" methodname="BossRewardPaysOnceAndFirstClearBelongsToEachHero" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="384875162" result="Passed" start-time="2026-09-25 02:49:00Z" end-time="2026-09-25 02:49:01Z" duration="0.725267" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2025" name="CatalogHasEighteenDistinctSkillsAndFourEquippedPerPreset" fullname="Hellscript.Tests.CoreTests.CatalogHasEighteenDistinctSkillsAndFourEquippedPerPreset" methodname="CatalogHasEighteenDistinctSkillsAndFourEquippedPerPreset" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="450030867" result="Passed" start-time="2026-09-25 02:49:01Z" end-time="2026-09-25 02:49:01Z" duration="0.000709" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2036" name="EnhancementRefundCannotCreateMaterials" fullname="Hellscript.Tests.CoreTests.EnhancementRefundCannotCreateMaterials" methodname="EnhancementRefundCannotCreateMaterials" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="606492369" result="Passed" start-time="2026-09-25 02:49:01Z" end-time="2026-09-25 02:49:01Z" duration="0.008993" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2033" name="FullBagSweepDoesNotSpendOrPayAndRequestCannotPayTwice" fullname="Hellscript.Tests.CoreTests.FullBagSweepDoesNotSpendOrPayAndRequestCannotPayTwice" methodname="FullBagSweepDoesNotSpendOrPayAndRequestCannotPayTwice" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1075250811" result="Passed" start-time="2026-09-25 02:49:01Z" end-time="2026-09-25 02:49:01Z" duration="0.009950" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2030" name="GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds" fullname="Hellscript.Tests.CoreTests.GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds" classname="Hellscript.Tests.CoreTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-25 02:49:01Z" end-time="2026-09-25 02:49:02Z" duration="0.895548" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2028" name="GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(1,75)" fullname="Hellscript.Tests.CoreTests.GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(1,75)" methodname="GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1401082596" result="Passed" start-time="2026-09-25 02:49:01Z" end-time="2026-09-25 02:49:01Z" duration="0.326150" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2029" name="GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(6,150)" fullname="Hellscript.Tests.CoreTests.GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(6,150)" methodname="GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1662830074" result="Passed" start-time="2026-09-25 02:49:01Z" end-time="2026-09-25 02:49:02Z" duration="0.567422" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2035" name="LegendaryPoolAndAffixConstraintsHoldForEveryClassAndSlot" fullname="Hellscript.Tests.CoreTests.LegendaryPoolAndAffixConstraintsHoldForEveryClassAndSlot" methodname="LegendaryPoolAndAffixConstraintsHoldForEveryClassAndSlot" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1745335832" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:02Z" duration="0.071823" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2027" name="MovementReachesDistantRoomWithoutOscillating" fullname="Hellscript.Tests.CoreTests.MovementReachesDistantRoomWithoutOscillating" methodname="MovementReachesDistantRoomWithoutOscillating" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1417765757" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:02Z" duration="0.004148" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2031" name="PauseAndPortalFreezeAllSimulationTime" fullname="Hellscript.Tests.CoreTests.PauseAndPortalFreezeAllSimulationTime" methodname="PauseAndPortalFreezeAllSimulationTime" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="948745615" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:02Z" duration="0.314680" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2034" name="ReplacementProtectsLocksEquippedAndLegendaries" fullname="Hellscript.Tests.CoreTests.ReplacementProtectsLocksEquippedAndLegendaries" methodname="ReplacementProtectsLocksEquippedAndLegendaries" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1726576444" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:02Z" duration="0.005975" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2026" name="RingRoomsRemainWalkablyConnected" fullname="Hellscript.Tests.CoreTests.RingRoomsRemainWalkablyConnected" methodname="RingRoomsRemainWalkablyConnected" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="1391212486" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:02Z" duration="0.000243" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2037" name="SaveRestoresRunIdentityHealthCooldownAndDropIds" fullname="Hellscript.Tests.CoreTests.SaveRestoresRunIdentityHealthCooldownAndDropIds" methodname="SaveRestoresRunIdentityHealthCooldownAndDropIds" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="879833505" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:02Z" duration="0.427363" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2032" name="TrainingCannotChangeEconomyExperienceOrClearRecord" fullname="Hellscript.Tests.CoreTests.TrainingCannotChangeEconomyExperienceOrClearRecord" methodname="TrainingCannotChangeEconomyExperienceOrClearRecord" classname="Hellscript.Tests.CoreTests" runstate="Runnable" seed="432402881" result="Passed" start-time="2026-09-25 02:49:02Z" end-time="2026-09-25 02:49:03Z" duration="0.355126" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2040" name="CurrentBuildSaveTests" fullname="Hellscript.Tests.CurrentBuildSaveTests" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="14" result="Failed" site="Child" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:04Z" duration="1.267927" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2056" name="ForeignRunPortalAndUnopenedSuspendedRunCannotOverwriteCurrentSettings" fullname="Hellscript.Tests.CurrentBuildSaveTests.ForeignRunPortalAndUnopenedSuspendedRunCannotOverwriteCurrentSettings" methodname="ForeignRunPortalAndUnopenedSuspendedRunCannotOverwriteCurrentSettings" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="827033009" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.086886" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2055" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.336684" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2050" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(0)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(0)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="52681909" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.065752" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2051" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(1)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(1)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="973526867" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.086288" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2052" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(2)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(2)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="768891158" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.059208" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2053" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(3)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(3)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="862058166" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.060610" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2054" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(4)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(4)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1643187204" result="Passed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.063157" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2046" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:04Z" duration="0.560495" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="2042" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1930911767" result="Failed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.136697" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 28350 but was 29957. Strings differ at index 1327.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-68694e82d17a425b8f9ec77b0543bb91/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="2043" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="2099712898" result="Failed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:03Z" duration="0.125275" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 22672 but was 24249. Strings differ at index 1327.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-05f26895f1d748fab167be209670d3c0/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="2044" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1912622662" result="Failed" start-time="2026-09-25 02:49:03Z" end-time="2026-09-25 02:49:04Z" duration="0.128853" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 21612 but was 23186. Strings differ at index 1327.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-9dafb9b1c51945069e23c23992c1873c/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="2045" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="820182880" result="Failed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.162169" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 24312 but was 25902. Strings differ at index 1327.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-f89de71dc5674bc48a1386e2701d5e68/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-case id="2057" name="SettingsComparisonIgnoresPresentationMetadataButIncludesFarmingAndBehaviorValues" fullname="Hellscript.Tests.CurrentBuildSaveTests.SettingsComparisonIgnoresPresentationMetadataButIncludesFarmingAndBehaviorValues" methodname="SettingsComparisonIgnoresPresentationMetadataButIncludesFarmingAndBehaviorValues" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1048943264" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.028306" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2041" name="TownSaveFailureRetainsAccountGuideDraftDiskAndIdentitiesThenRetryPersists" fullname="Hellscript.Tests.CurrentBuildSaveTests.TownSaveFailureRetainsAccountGuideDraftDiskAndIdentitiesThenRetryPersists" methodname="TownSaveFailureRetainsAccountGuideDraftDiskAndIdentitiesThenRetryPersists" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="881794550" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.089891" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-864330e9cbe14ccdb3df0b1ff7d51a54/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2049" name="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" fullname="Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.162502" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2047" name="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(False)" fullname="Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(False)" methodname="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="310398640" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.080709" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2048" name="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(True)" fullname="Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(True)" methodname="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="466658998" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.080812" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="2221" name="EdictDriveTests" fullname="Hellscript.Tests.EdictDriveTests" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:15Z" duration="11.150099" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2234" name="ADocumentForAnotherClassLeavesTheEdictInactiveWithoutEndingTheRun" fullname="Hellscript.Tests.EdictDriveTests.ADocumentForAnotherClassLeavesTheEdictInactiveWithoutEndingTheRun" methodname="ADocumentForAnotherClassLeavesTheEdictInactiveWithoutEndingTheRun" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="921722309" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.046469" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2233" name="ADocumentWhoseSlotsDoNotMatchTheLiveBuildIsRefused" fullname="Hellscript.Tests.EdictDriveTests.ADocumentWhoseSlotsDoNotMatchTheLiveBuildIsRefused" methodname="ADocumentWhoseSlotsDoNotMatchTheLiveBuildIsRefused" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1137226719" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.121123" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2236" name="AnAbsentDocumentLeavesTheEdictInactive" fullname="Hellscript.Tests.EdictDriveTests.AnAbsentDocumentLeavesTheEdictInactive" methodname="AnAbsentDocumentLeavesTheEdictInactive" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1592834633" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.027437" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2235" name="AnEmergencyLetsTheEdictTakeTheMainAction" fullname="Hellscript.Tests.EdictDriveTests.AnEmergencyLetsTheEdictTakeTheMainAction" methodname="AnEmergencyLetsTheEdictTakeTheMainAction" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1037747431" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:04Z" duration="0.104447" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2231" name="AnOptedInRunStillReachesTheFixtureEnd" fullname="Hellscript.Tests.EdictDriveTests.AnOptedInRunStillReachesTheFixtureEnd" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:13Z" duration="9.057478" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2228" name="AnOptedInRunStillReachesTheFixtureEnd(0)" fullname="Hellscript.Tests.EdictDriveTests.AnOptedInRunStillReachesTheFixtureEnd(0)" methodname="AnOptedInRunStillReachesTheFixtureEnd" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1276280240" result="Passed" start-time="2026-09-25 02:49:04Z" end-time="2026-09-25 02:49:07Z" duration="3.107984" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2229" name="AnOptedInRunStillReachesTheFixtureEnd(1)" fullname="Hellscript.Tests.EdictDriveTests.AnOptedInRunStillReachesTheFixtureEnd(1)" methodname="AnOptedInRunStillReachesTheFixtureEnd" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="896073379" result="Passed" start-time="2026-09-25 02:49:07Z" end-time="2026-09-25 02:49:11Z" duration="3.511727" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2230" name="AnOptedInRunStillReachesTheFixtureEnd(2)" fullname="Hellscript.Tests.EdictDriveTests.AnOptedInRunStillReachesTheFixtureEnd(2)" methodname="AnOptedInRunStillReachesTheFixtureEnd" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="414696350" result="Passed" start-time="2026-09-25 02:49:11Z" end-time="2026-09-25 02:49:13Z" duration="2.436246" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2223" name="OptingInLetsTheDecisionCycleConsultTheDocument" fullname="Hellscript.Tests.EdictDriveTests.OptingInLetsTheDecisionCycleConsultTheDocument" methodname="OptingInLetsTheDecisionCycleConsultTheDocument" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1017127821" result="Passed" start-time="2026-09-25 02:49:13Z" end-time="2026-09-25 02:49:14Z" duration="0.267386" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2222" name="TheEdictStaysInactiveUntilTheHeroOptsIn" fullname="Hellscript.Tests.EdictDriveTests.TheEdictStaysInactiveUntilTheHeroOptsIn" methodname="TheEdictStaysInactiveUntilTheHeroOptsIn" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1634533979" result="Passed" start-time="2026-09-25 02:49:14Z" end-time="2026-09-25 02:49:14Z" duration="0.043659" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2227" name="TurningItOnDoesNotChangeARunThatIsAlreadyDecided" fullname="Hellscript.Tests.EdictDriveTests.TurningItOnDoesNotChangeARunThatIsAlreadyDecided" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-09-25 02:49:14Z" end-time="2026-09-25 02:49:14Z" duration="0.240015" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2224" name="TurningItOnDoesNotChangeARunThatIsAlreadyDecided(0)" fullname="Hellscript.Tests.EdictDriveTests.TurningItOnDoesNotChangeARunThatIsAlreadyDecided(0)" methodname="TurningItOnDoesNotChangeARunThatIsAlreadyDecided" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1034988565" result="Passed" start-time="2026-09-25 02:49:14Z" end-time="2026-09-25 02:49:14Z" duration="0.078710" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2225" name="TurningItOnDoesNotChangeARunThatIsAlreadyDecided(1)" fullname="Hellscript.Tests.EdictDriveTests.TurningItOnDoesNotChangeARunThatIsAlreadyDecided(1)" methodname="TurningItOnDoesNotChangeARunThatIsAlreadyDecided" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="2070388533" result="Passed" start-time="2026-09-25 02:49:14Z" end-time="2026-09-25 02:49:14Z" duration="0.079790" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2226" name="TurningItOnDoesNotChangeARunThatIsAlreadyDecided(2)" fullname="Hellscript.Tests.EdictDriveTests.TurningItOnDoesNotChangeARunThatIsAlreadyDecided(2)" methodname="TurningItOnDoesNotChangeARunThatIsAlreadyDecided" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="253988940" result="Passed" start-time="2026-09-25 02:49:14Z" end-time="2026-09-25 02:49:14Z" duration="0.079538" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2232" name="TwoOptedInRunsOfTheSameSeedStayIdentical" fullname="Hellscript.Tests.EdictDriveTests.TwoOptedInRunsOfTheSameSeedStayIdentical" methodname="TwoOptedInRunsOfTheSameSeedStayIdentical" classname="Hellscript.Tests.EdictDriveTests" runstate="Runnable" seed="1135594071" result="Passed" start-time="2026-09-25 02:49:14Z" end-time="2026-09-25 02:49:15Z" duration="1.237972" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="4884" name="RestoreFidelityTests" fullname="Hellscript.Tests.RestoreFidelityTests" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-09-25 02:49:15Z" end-time="2026-09-25 02:49:27Z" duration="11.423701" total="5" passed="2" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="4888" name="ARestoredRiftKeepsFightingTheSameFight" fullname="Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-09-25 02:49:15Z" end-time="2026-09-25 02:49:25Z" duration="9.501775" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="4885" name="ARestoredRiftKeepsFightingTheSameFight(1)" fullname="Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(1)" methodname="ARestoredRiftKeepsFightingTheSameFight" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" seed="132980243" result="Failed" start-time="2026-09-25 02:49:15Z" end-time="2026-09-25 02:49:18Z" duration="2.838614" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  a restored run must save back to the same file
+  Expected string length 437485 but was 440300. Strings differ at index 1508.
+  Expected: "...al":{"version":1,"sequence":171,"omittedEvents":0,"resumes..."
+  But was:  "...al":{"version":1,"sequence":176,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight (System.Int32 stage) [0x00178] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/RestoreFidelityTests.cs:39
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="4886" name="ARestoredRiftKeepsFightingTheSameFight(5)" fullname="Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(5)" methodname="ARestoredRiftKeepsFightingTheSameFight" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" seed="1800373227" result="Failed" start-time="2026-09-25 02:49:18Z" end-time="2026-09-25 02:49:21Z" duration="2.860601" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  a restored run must save back to the same file
+  Expected string length 462622 but was 465441. Strings differ at index 1502.
+  Expected: "...nal":{"version":1,"sequence":167,"omittedEvents":0,"resume..."
+  But was:  "...nal":{"version":1,"sequence":172,"omittedEvents":0,"resume..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight (System.Int32 stage) [0x00178] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/RestoreFidelityTests.cs:39
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="4887" name="ARestoredRiftKeepsFightingTheSameFight(12)" fullname="Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(12)" methodname="ARestoredRiftKeepsFightingTheSameFight" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" seed="1288580927" result="Failed" start-time="2026-09-25 02:49:21Z" end-time="2026-09-25 02:49:25Z" duration="3.801732" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  a restored run must save back to the same file
+  Expected string length 701103 but was 701479. Strings differ at index 1453.
+  Expected: "...al":{"version":1,"sequence":237,"omittedEvents":0,"resumes..."
+  But was:  "...al":{"version":1,"sequence":238,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight (System.Int32 stage) [0x00178] in /Users/t8g-2410-pn-005/.codex/worktrees/tutorial-baseline-validation/Assets/HELLSCRIPT/Tests/Editor/RestoreFidelityTests.cs:39
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-case id="4890" name="OnlyTheAccumulatedDamageTelemetryLosesPrecisionInTheSaveFormat" fullname="Hellscript.Tests.RestoreFidelityTests.OnlyTheAccumulatedDamageTelemetryLosesPrecisionInTheSaveFormat" methodname="OnlyTheAccumulatedDamageTelemetryLosesPrecisionInTheSaveFormat" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" seed="2103662889" result="Passed" start-time="2026-09-25 02:49:25Z" end-time="2026-09-25 02:49:26Z" duration="1.785577" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4889" name="ReopeningARunDoesNotRepeatTheEdictBlockedLine" fullname="Hellscript.Tests.RestoreFidelityTests.ReopeningARunDoesNotRepeatTheEdictBlockedLine" methodname="ReopeningARunDoesNotRepeatTheEdictBlockedLine" classname="Hellscript.Tests.RestoreFidelityTests" runstate="Runnable" seed="2073258355" result="Passed" start-time="2026-09-25 02:49:26Z" end-time="2026-09-25 02:49:27Z" duration="0.134833" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,18 @@
+using System.IO;
+using System.Linq;
+using UnityEngine;
+namespace Hellscript.Editor {
+public static class TutorialBaselineProbe {
+ public static void Run() {
+  var catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();
+  for(uint seed=1;seed<=100;seed++) {
+   var sim=new CombatSimulation(GameStore.NewAccount(),catalog,6,seed:seed);
+   int points=sim.State.enemies.Sum(e=>e.elite>=0?5:1);
+   if(points!=150) {
+    string text="BASE 32baf0fcb3d0d8872eb9188c699604b52e6a432f; stage=6; seed="+seed+"; expectedByExistingTest=150; actual="+points+"; goblins="+sim.State.enemies.Count(e=>e.goblin)+"; excludingGoblin="+sim.State.enemies.Where(e=>!e.goblin).Sum(e=>e.elite>=0?5:1);
+    File.WriteAllText("/tmp/hellscript-tutorial-baseline-current-goblin.txt",text+"\n");Debug.Log(text);Object.DestroyImmediate(catalog);return;
+   }
+  }
+  throw new System.InvalidOperationException("No reproducer in seeds 1..100");
+ }
+}}

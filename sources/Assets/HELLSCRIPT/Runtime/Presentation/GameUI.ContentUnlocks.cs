@@ -7,7 +7,7 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         bool RequireContent(string id)
-        {if(ContentUnlocks.Has(game.Store.Data,id))return true;ShowToast(ContentUnlocks.Condition(id));return false;}
+        {if(ContentUnlocks.Has(game.Store.Data,id)){QueueTutorialContext(id);return true;}ShowToast(ContentUnlocks.Condition(id));return false;}
         void ContentButton(string id,string title,Action action,bool accent=false)
         {
             bool open=ContentUnlocks.Has(game.Store.Data,id);
@@ -32,15 +32,7 @@ namespace Hellscript
             if(a.contentUnlocks.setAcquired)EquipmentUnlockGuide("GUIDE_SET","세트 장비는 서로 다른 부위의 2·4세트 효과를 도감에서 확인하세요. 별도의 콘텐츠 단계 제한은 없습니다.");
             FooterButton(0,1,"성소로",ShowTown);
         }
-        public void ShowContentGuide(string id)
-        {
-            var f=ContentUnlocks.Rules.features.Single(x=>x.id==id);
-            pageRepaint=()=>ShowContentGuide(id);Base("content-guide",f.name,"콘텐츠 해금 · 안내");
-            Note(content,ContentUnlocks.Condition(id),21,125,gold);Note(content,f.guide,21,180,pale);
-            if(ContentUnlocks.Has(game.Store.Data,id)&&!game.Store.Data.contentUnlocks.guidesCompleted.Contains(id))
-                BigButton(content,"안내 확인 / 건너뛰기",()=>{game.Store.Transact(Guid.NewGuid().ToString("N"),"content-guide:"+id,staged=>{ContentUnlocks.CompleteGuide(staged,id);return true;});ShowContentGuide(id);});
-            FooterButton(0,1,"콘텐츠 해금 · 안내",ShowContentUnlocks);
-        }
+        public void ShowContentGuide(string id)=>ShowTutorialJournal(id);
         void EquipmentUnlockGuide(string id,string text)
         {
             Note(content,text,19,150,pale);BigButton(content,"전설·세트 도감",ShowItemCollection);

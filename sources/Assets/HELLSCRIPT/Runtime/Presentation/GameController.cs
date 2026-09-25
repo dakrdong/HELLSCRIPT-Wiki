@@ -60,6 +60,7 @@ namespace Hellscript
         }
         public bool ChangeCharacterFromSettings(int index)
         {
+            if(TutorialActive){Notify(Loc.T("성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다."));return false;}
             if(UI.Page=="title"||UI.Page=="characters")
             {
                 if(!SaveEntryCharacter(index))return false;
@@ -83,6 +84,7 @@ namespace Hellscript
         void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false)
         {
             if(Active||liveOpsAdmissionPending)return;
+            if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
             if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
             {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed));return;}
             if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}
@@ -124,7 +126,7 @@ namespace Hellscript
             UI.CloseRiftEntry();
             if(previous!=null)previous.Visual-=World.Effect;
             repeatRestored=false;portalCleanupTried=false;repeatClock=Time.realtimeSinceStartupAsDouble;
-            FirstPlayGuide.Enter(Store.Data,Combat.State,resume);
+            FirstPlayGuide.Enter(Store.Data,Combat.State,resume);TutorialProgress.Enter(Store.Data,Combat.State,resume);
             Combat.Visual+=World.Effect;Combat.GateOpened+=UI.ShowToast;
             if(DisplayDimmed)World.DeferDungeon();else{World.BuildDungeon(Combat.State);UI.ShowBattle();}
             RestoreForegroundClock();resultDelay=0;resultShown=false;Save();
@@ -175,6 +177,7 @@ namespace Hellscript
         {
             CancelRiftEntry();
             if(Active)return;
+            if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
             if(!Store.ActivateSkillTrees(catalog)){Notify(Store.Error);return;}
             if(fresh||Town==null)VisitSanctuary(PotionVisit());
             if(Combat!=null){Combat.Visual-=World.Effect;Combat=null;}
@@ -224,6 +227,7 @@ namespace Hellscript
         public void ReturnTown()
         {
             CancelRiftEntry();
+            if(TutorialActive){if(Combat.State.tutorialPhase==5||Combat.State.tutorialReplay)FinishTutorial();else UI.ShowTutorialPrompt();return;}
             SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
             ExitIdle(false);RestoreForegroundClock();
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();
@@ -261,6 +265,7 @@ namespace Hellscript
         public void Notify(string message){Notice=message;UI.ShowToast(message);}
         public void Save()
         {
+            if(TutorialActive){if(Combat.State.tutorialReplay)return;Store.Data.guide.tutorialRun=Combat.State;if(!Store.Save())Notify(Store.Error);return;}
             if(Combat!=null)Store.Data.suspendedRun=Combat.State.training<0&&Active?Combat.State:null;
             if(Combat!=null&&!Active&&Store.Data.repeatHunt?.runId==Combat.State.id)Store.Data.repeatHunt.pendingResult=Combat.State;
             if(!Store.Save()){Notice=Store.Error;BlockRepeat(RepeatBlock.Save,Store.Error);PreserveIdleSaveFailure();}
@@ -277,6 +282,7 @@ namespace Hellscript
             // This display-only pause is not serialized into the run. Existing pause reasons
             // and the partial simulation tick remain exactly as they were on entry.
             SettleRiftAttendance(elapsed);
+            TickTutorial();
             if(UI.CommonPanelOpen&&Active&&!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}
             var run=Combat.State;float real=(float)elapsed;bool wasActive=Active;
             if(Active&&!backgroundPaused){if(run.riftAttendance?.version==1)run.realTime=(float)(run.riftAttendance.elapsedMs/1000);else run.realTime+=real;}
@@ -291,7 +297,7 @@ namespace Hellscript
             if(!DisplayDimmed&&!backgroundPaused)World.Present(run,Mathf.Min(real,.25f));
             if(run.portal&&!portalCleanupTried)TryPortalCleanup();else if(!run.portal)portalCleanupTried=false;
             if(run.portal&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse"&&UI.Page!="gem-menu")UI.ShowBag(true);
-            if(!Active&&!resultShown){resultShown=true;if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();if(!IdleHunting)UI.ShowResult();}
+            if(!Active&&!resultShown){resultShown=true;if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();if(!IdleHunting){if(TutorialActive)UI.ShowTutorialPrompt();else UI.ShowResult();}}
             if(!Active&&!wasActive&&!backgroundPaused&&!foregroundResumeRequired&&!UI.BlocksRepeat&&(IdleHunting||UI.Page=="result")&&run.training<0)TickRepeat(repeatReal);
             if(!backgroundPaused){saveClock+=real;if(saveClock>=3){saveClock=0;Save();}}
             UpdateIdlePresentation();

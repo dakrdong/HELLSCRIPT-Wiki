@@ -228,11 +228,11 @@ namespace Hellscript
             FooterButton(0,2,"전투 기록",ShowRecords);FooterButton(1,2,"게임 안내",ShowHelp);
             if(!string.IsNullOrEmpty(game.Notice))ShowToast(game.Notice);
         }
-        string BattleHeading(RunState run)=>run.training>=0?(game.ComparisonRun?"TRAINING / "+(game.Comparison.IsB?"B":"A"):"TRAINING"):"RIFT / "+run.stage.ToString("00");
+        string BattleHeading(RunState run)=>run.tutorial?Loc.T("성소로 가는 길"):run.training>=0?(game.ComparisonRun?"TRAINING / "+(game.Comparison.IsB?"B":"A"):"TRAINING"):"RIFT / "+run.stage.ToString("00");
         public void ShowBattle()
         {
             if(game.Combat==null){ShowTown();return;}
-            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.training>=0?(game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):run.theme==0?"잊힌 묘지 · 처치 게이지를 채워 보스를 소환하세요":"무너진 성채 · 처치 게이지를 채워 보스를 소환하세요",battle:true);
+            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T("자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):run.theme==0?"잊힌 묘지 · 처치 게이지를 채워 보스를 소환하세요":"무너진 성채 · 처치 게이지를 채워 보스를 소환하세요",battle:true);
             BuildBattleHud(run);
         }
         Image Bar(Transform parent,Vector2 pos,Vector2 size,Color color)
@@ -366,7 +366,7 @@ namespace Hellscript
         public void ShowResult()
         {
             if(game.ComparisonRun){ShowComparisonResult();return;}
-            if(game.Combat==null)return;var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.action,ShowResult);
+            if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.action,ShowResult);
             game.RecordGuide(()=>FirstPlayGuide.ReadResult(game.Store.Data,r));
             Note(content,r.training>=0?"TRAINING":won?"VICTORY":"RECALIBRATE",42,98,gold);
             if(r.training<0)AddRepeatResult();
@@ -450,7 +450,7 @@ namespace Hellscript
         void Update()
         {
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
-            TickGlobalHud();TickOfflineSupplies();TickAttendance();
+            TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();

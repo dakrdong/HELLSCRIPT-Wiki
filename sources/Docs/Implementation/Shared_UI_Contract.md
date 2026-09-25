@@ -121,3 +121,7 @@
 ## 전투 기록
 
 `CombatRecordsWindow`는 신규 창 템플릿의 `ContentWindowView`와 `EquipmentViewSource.BattleSnapshot`을 사용한다. Unity의 공통 `Dropdown`으로 승패를 고르고, 목록 본문만 스크롤한다. 선택·필터는 창이, 기록 파일과 거래 후 내보내기는 `GameStore`가 소유한다. 기존 상세 분석 화면을 재사용하며 하단 실시간 로그는 전투 HUD 어댑터로 배치한다. [전투 기록과 서버 수집](Combat_Journal_Server.md)에 보관·신뢰·검증 범위를 기록한다.
+
+## 튜토리얼 안내
+
+`TutorialJournalWindow`는 공통 창 템플릿을 사용한다. 실습 선택은 실제 소유품과 제작 정의를 구분하고 `ItemDetailView`를 재사용한다. 필수 장착은 기존 인벤토리와 `GameStore` 거래가 소유한다. `TutorialAnchorRing`은 실제 버튼의 논리 ID와 소유 아이템 칸에 연결되는 표시 부품이며 입력을 가로채거나 계정 상태를 변경하지 않는다. 전투 중의 짧은 안내와 HUD 진입 버튼은 기존 전투 HUD의 어댑터를 사용한다. [튜토리얼 구현](Tutorial_Progression.md)을 따른다.

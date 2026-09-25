@@ -116,6 +116,7 @@ namespace Hellscript
         }
         void ConsumePotion(PotionDefinition def)
         {
+            if(IsTutorial)return;
             var slots=ActivePotionSlots;int index=Array.IndexOf(ResolvedPotionSlots,def.id);
             bool newest=index>=0&&slots[index].id!=def.id&&Hero.potions.SharedFallback==PotionFallback.Newest;
             Hero.potions.Consume(def.id,newest);Hero.potions.revision++;State.potions.uses++;

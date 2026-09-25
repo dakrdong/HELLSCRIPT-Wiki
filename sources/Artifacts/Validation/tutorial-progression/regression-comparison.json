@@ -1,0 +1,97 @@
+{
+  "wholeSuite": {
+    "total": 3923,
+    "passed": 3875,
+    "failed": 48,
+    "scope": "Audit before final regression fixes; not a final green full-suite result."
+  },
+  "baselineTargeted": {
+    "total": 85,
+    "passed": 42,
+    "failed": 43
+  },
+  "identicalFailedTestNames": [
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Mage)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Ranger)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Warrior)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(1)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(10)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(11)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(12)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(13)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(14)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(15)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(16)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(17)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(3)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(4)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(5)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(6)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(7)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(8)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(9)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,2)",
+    "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(-1,10)",
+    "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(1,5)",
+    "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(9,4)",
+    "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(0)",
+    "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(1)",
+    "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(12)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)",
+    "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(1)",
+    "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(12)",
+    "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(5)"
+  ],
+  "fullAuditOnly": {
+    "Hellscript.Tests.CoreTests.GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(6,150)": "  Expected: 150\n  But was:  151\n",
+    "Hellscript.Tests.EdictDriveTests.ADocumentForAnotherClassLeavesTheEdictInactiveWithoutEndingTheRun": "System.ArgumentException : 패시브 장착은 중복 없이 빈칸을 포함해 세 칸이어야 합니다.",
+    "Hellscript.Tests.EdictDriveTests.AnAbsentDocumentLeavesTheEdictInactive": "System.ArgumentException : 알 수 없는 직업입니다.",
+    "Hellscript.Tests.EditorNullPatternTests.NoGetComponentResultIsCombinedWithCSharpNullOperators": "  Use TryGetComponent or a Unity == null check instead of ?? / ?. on GetComponent results:\nGameUI.Tutorials.cs:141  bool visible=(Page==\"plaza\"||Page==\"battle\")&&!CommonPanelOpen&&tutorialJournal==null&&GetComponent<ContentWindowHost>()?.Count==0;\n  Expected: <empty>\n  But was:  < \"GameUI.Tutorials.cs:141  bool visible=(Page==\"plaza\"||Page==\"battle\")&&!CommonPanelOpen&&tutorialJournal==null&&GetComponent<ContentWindowHost>()?.Count==0;\" >\n",
+    "Hellscript.Tests.GraphicComponentTests.EveryCustomGraphicBringsItsOwnCanvasRenderer": "  Add [RequireComponent(typeof(CanvasRenderer))] to: TutorialAnchorRing\n  Expected: <empty>\n  But was:  < \"TutorialAnchorRing\" >\n"
+  },
+  "correctedFeatureFailures": [
+    "EdictDriveTests: absent/foreign edict must remain inactive without blocking combat",
+    "EditorNullPatternTests: Unity component null check",
+    "GraphicComponentTests: required CanvasRenderer attribute"
+  ],
+  "baselineRandomFailureReproducer": {
+    "test": "CoreTests.GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(6,150)",
+    "seed": 2,
+    "expected": 150,
+    "actual": 151,
+    "goblins": 1,
+    "nonGoblinPoints": 150,
+    "probeSource": "baseline-goblin-probe.cs.txt"
+  },
+  "remainingScope": "43 baseline journal equality failures plus the independently reproduced baseline random-goblin assertion; no unrelated combat fixes included.",
+  "initialBaseCommit": "bdf659139c7705f59047eccd57111b07eccf1d66",
+  "integratedBaseCommit": "32baf0fcb3d0d8872eb9188c699604b52e6a432f",
+  "currentBaseTargeted": {
+    "total": 85,
+    "passed": 42,
+    "failed": 43,
+    "skipped": 0
+  },
+  "currentBaseRandomFailureReproducer": {
+    "seed": 2,
+    "stage": 6,
+    "expected": 150,
+    "actual": 151,
+    "goblins": 1,
+    "nonGoblinPoints": 150,
+    "probeSource": "baseline-goblin-current-probe.cs.txt"
+  }
+}

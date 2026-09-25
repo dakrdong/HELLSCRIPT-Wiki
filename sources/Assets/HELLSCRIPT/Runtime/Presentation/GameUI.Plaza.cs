@@ -146,6 +146,8 @@ namespace Hellscript
         }
         public void OpenStation(TownStation station)
         {
+            if(game.Town?.Nearby==station){if(station==TownStation.RiftKeeper)Tutorials.Performed(game.Store.Data,"F01");
+                string hint=station==TownStation.Warehouse?"H04":station==TownStation.Merchant||station==TownStation.Gambler?"H02":null;if(hint!=null)Tutorials.Discover(game.Store.Data,hint);}
             ResetTownInput();game.Town?.Cancel();
             switch(station)
             {

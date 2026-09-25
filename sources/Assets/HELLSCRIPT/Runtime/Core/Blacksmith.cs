@@ -75,6 +75,15 @@ namespace Hellscript
     [Serializable] public sealed class ForgeCatalogData { public List<ForgeSlot> slots; }
     public static class BlacksmithCatalog
     {
+        public static bool Start(AccountSave a,string request,string hero,string slot,int expectedLevel,long now)
+        {
+                if(a.Hero.id!=hero||a.suspendedRun!=null||!ContentUnlocks.Has(a,ContentUnlocks.SlotEnhance))return false;
+                BlacksmithCatalog.Settle(a,now);int index=BlacksmithCatalog.Index(slot),level=a.Hero.slotProgress.levels[index];
+                if(level!=expectedLevel||level>=100||a.forge.jobs.Count>=a.forge.stations||a.forge.jobs.Any(j=>j.heroId==hero&&j.slot==slot))return false;
+                int cost=BlacksmithCatalog.Stones(level+1);if(a.enhancementStones<cost)return false;
+                int station=Enumerable.Range(0,a.forge.stations).First(n=>a.forge.jobs.All(j=>j.station!=n));
+                a.enhancementStones-=cost;a.forge.jobs.Add(new ForgeJob{id=request,heroId=hero,slot=slot,station=station,from=level,target=level+1,paidStones=cost,startedUtc=now,finishUtc=checked(now+BlacksmithCatalog.Seconds(level+1))});return true;
+        }
         static ForgeCatalogData data;
         public static IReadOnlyList<ForgeSlot> Slots=>(data??=JsonUtility.FromJson<ForgeCatalogData>(Resources.Load<TextAsset>("BlacksmithSlots").text)).slots;
         public static int Index(string id){for(int n=0;n<Slots.Count;n++)if(Slots[n].id==id)return n;throw new ArgumentException("장착 부위를 확인해 주세요.");}

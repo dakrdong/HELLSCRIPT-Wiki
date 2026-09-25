@@ -298,6 +298,9 @@ namespace Hellscript
     public sealed class RunState
     {
         public LiveOpsRunSnapshot liveOps;
+        public bool tutorial,tutorialReplay;
+        public int tutorialPhase;
+        public string guideSetup="";
         public CombatJournalData journal;
         public RiftAttendance riftAttendance=new RiftAttendance();
         public int[] slotLevels;

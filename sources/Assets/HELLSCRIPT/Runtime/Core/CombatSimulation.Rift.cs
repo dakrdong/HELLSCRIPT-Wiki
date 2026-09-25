@@ -43,6 +43,7 @@ namespace Hellscript
         void InitializeRift(bool fresh,RiftObjectiveKind? forcedObjective=null)
         {
             State.exploration??=new RiftExplorationState();State.exploration.enemies??=new System.Collections.Generic.List<EnemyObservation>();
+            if(fresh&&IsTutorial){State.layout=TutorialMap();State.position=State.layout.start;}
             if(fresh&&State.training<0)
             {
                 State.layout=RiftGenerator.Generate(State.rng,State.id,State.stage,Hero.heroClass,Hero.lastRiftFingerprint,Hero.lastRiftBoss,forcedObjective:forcedObjective,tuning:Tuning);

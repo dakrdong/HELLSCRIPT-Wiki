@@ -98,3 +98,7 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 ## Combat records
 
 `CombatRecordsWindow` uses the new-content starter, `ContentWindowView` and `EquipmentViewSource.BattleSnapshot`. A standard Unity `Dropdown` selects the outcome; the record body scrolls independently. The window owns selection/filter state, while `GameStore` owns post-commit file export. Existing review pages remain shared; live text uses the battle HUD adapter. See [combat journal and server collection](Combat_Journal_Server.en.md).
+
+## Tutorial guidance
+
+`TutorialJournalWindow` uses the shared content template. Practice selection distinguishes owned equipment from recipe definitions and reuses `ItemDetailView`. Native inventory and `GameStore` own actual equipment mutations. `TutorialAnchorRing` attaches to logical button IDs and owned inventory cells, does not intercept input and never mutates account state. Brief combat guidance and the entry button use the existing HUD adapter. See [implementation](Tutorial_Progression.en.md).

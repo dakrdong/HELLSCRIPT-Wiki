@@ -11,7 +11,7 @@ namespace Hellscript
         public readonly RunState State;
         public readonly HeroSave Hero;
         public bool OwnedTraining=>State.training>=0&&State.trainingUsesOwnedHero;
-        bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero;
+        bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero&&!IsTutorial;
         public int EffectiveLevel=>FullSkillTraining?ClassSkills.LevelCap(Hero):Hero.level;
         public float TimeLimit=>OwnedTraining?60:State.training>=0?300:LiveOpsConfig.For(State).timeLimitSeconds;
         LiveOpsRiftSettings Tuning=>LiveOpsConfig.For(State);
@@ -32,17 +32,18 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false)
         {
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
             bool owned=restore!=null?restore.training>=0&&restore.trainingUsesOwnedHero:ownedTraining&&training>=0;
             if(owned&&(restore?.training??training)>2)throw new ArgumentOutOfRangeException(nameof(training));
             // Owned training and every stocked training session own their account copy. Keep the
             // pre-inventory developer fixture contract until its hero adopts the new inventory.
-            bool copyAccount=owned||(restore?.training??training)>=0&&account.Hero.potions?.version>0;
+            bool isTutorial=tutorial||restore?.tutorial==true;
+            bool copyAccount=!isTutorial&&(owned||(restore?.training??training)>=0&&account.Hero.potions?.version>0);
             this.account=copyAccount?JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account)):account;this.catalog=catalog;Hero=this.account.Hero;
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
-                rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
+                tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
             if(restore==null&&training<0)State.liveOps=liveOps==null?LiveOpsConfig.Capture(null,State.stage):CombatJournal.Copy(liveOps);
             LiveOpsConfig.NormalizeRun(State);
@@ -65,6 +66,7 @@ namespace Hellscript
             RiftVisibility.Initialize(State,Map,restore!=null);
             if(Hero.heroClass==HeroClass.Mage||Hero.heroClass==HeroClass.Warrior)EnsureShieldEngagement();
             InitializeJournal(restore!=null,journalSeed,recordResume);
+            if(restore==null)State.guideSetup=TutorialProgress.Signature(Hero);
             if(restore==null)
             {
                 State.health=Stats.hp;State.visited.Add(0);State.exploreRoom=0;
@@ -72,10 +74,11 @@ namespace Hellscript
                 if(State.training<0)Log("LIVEOPS_VERSION","Balance release "+State.liveOps.version+" / "+State.liveOps.configHash);
                 Log("RUN_START",training>=0?"훈련 시작 · 실제 재화와 성장에 반영하지 않습니다.":Loc.F("균열 {0}단계 진입", stage));
             }
-            State.paused=false;
+            State.paused=IsTutorial&&(State.tutorialPhase==0||State.tutorialPhase==2||State.tutorialPhase==3);
         }
         void SpawnDungeon()
         {
+            if(IsTutorial){SpawnTutorial();return;}
             if(OwnedTraining){SpawnOwnedTraining();return;}
             if(State.training>=0)
             {
@@ -193,7 +196,7 @@ namespace Hellscript
             if(SettleCombatOutcome())return;
             TickChests(dt);TickSeals(dt);TickOfferings();if(!string.IsNullOrEmpty(State.navigationError))return;
             TickShrine(dt);if(!string.IsNullOrEmpty(State.navigationError))return;Loot(dt);
-            if(State.training>=0&&State.enemies.All(e=>e.dead))Finish(true,"훈련 완료",CombatFinish.TargetsDefeated);
+            if(State.training>=0&&!IsTutorial&&State.enemies.All(e=>e.dead))Finish(true,"훈련 완료",CombatFinish.TargetsDefeated);
         }
         void Sense()
         {

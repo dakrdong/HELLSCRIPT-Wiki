@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=16;
+        public const int MaximumSchemaVersion=17;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -123,7 +123,7 @@ namespace Hellscript
             a.salvage??=new SalvagePreferences();a.salvage.Normalize();
             a.speed=CombatSpeedAccess.Resolve(a.speed);
             ItemAcquisition.NormalizeCounter(a);
-            FirstPlayGuide.Normalize(a);
+            FirstPlayGuide.Normalize(a);Tutorials.Normalize(a);
             ContentUnlocks.Normalize(a,legacy:true);
             if(a.gems.Count>0)ContentUnlocks.RecordGemAcquisition(a);
             // JsonUtility materializes a null plain serializable class as an empty object.
@@ -246,7 +246,7 @@ namespace Hellscript
         }
         public static AccountSave NewAccount(GameCatalog catalog=null)
         {
-            var a=new AccountSave{contentUnlocks=new ContentUnlockState{version=ContentUnlocks.Version},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
+            var a=new AccountSave{telemetryAccountId=Guid.NewGuid().ToString("N"),guide=new AccountGuide{tutorialVersion=Tutorials.Version},contentUnlocks=new ContentUnlockState{version=ContentUnlocks.Version},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
             uint rng=112358;
             for(int i=0;i<3;i++)
             {
@@ -310,6 +310,7 @@ namespace Hellscript
             try
             {
                 if(!mutation(staged)){Error="소유권·보호 상태·재화·가방 공간을 확인해 주세요.";return false;}
+                Tutorials.ObserveTransaction(staged,operation);
                 staged.transactions.Add(new EconomyReceipt{requestId=requestId,operation=operation,committedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()});
                 ContentUnlocks.Reconcile(staged);ValidateItems(staged);staged.lastSeenUtc=settlingLocalIdle?Math.Max(staged.lastSeenUtc,pendingLocalIdleThrough.Value):SeenNow();
             }
@@ -325,7 +326,7 @@ namespace Hellscript
                 target.equipmentShop=source.equipmentShop;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
-            Data.offlineSupplies=staged.offlineSupplies;Data.attendance=staged.attendance;Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
+            Data.guide=staged.guide;Data.offlineSupplies=staged.offlineSupplies;Data.attendance=staged.attendance;Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
@@ -356,7 +357,7 @@ namespace Hellscript
             {Error=Loc.T("미접속 보급 정산을 먼저 완료해 주세요.");return false;}
             try
             {
-                ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
+                Tutorials.Normalize(data);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
                 ContentUnlocks.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
                 foreach(var hero in data.heroes)
