@@ -15,6 +15,10 @@ namespace Hellscript
         public CombatSimulation Combat {get=>combat;private set {combat=value;Audio?.Bind(value);}}
         public GameAudio Audio {get;private set;}
         public CombatTelemetryUploader Telemetry {get;private set;}
+        public LiveOpsClient LiveOps {get;private set;}
+        readonly RiftAdmissionRequest liveOpsAdmission=new RiftAdmissionRequest();
+        bool liveOpsAdmissionPending=>liveOpsAdmission.Pending;
+        public bool RiftEntryPending=>liveOpsAdmission.Pending;
         // Session-only plaza walk; nothing here is saved or affects a run.
         public TownWalk Town {get;private set;}
         public GameUI UI {get;private set;}
@@ -44,13 +48,15 @@ namespace Hellscript
             if(Store.GemRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.GemRecoveryMessage;
             if(Store.QualityRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.QualityRecoveryMessage;
             Telemetry=gameObject.AddComponent<CombatTelemetryUploader>();Telemetry.Initialize(Store.CombatArchive);
+            LiveOps=gameObject.AddComponent<LiveOpsClient>();LiveOps.Initialize(saveDirectory);Store.LiveOpsPreview=LiveOps.Capture;Store.LiveOpsPreviewVersion=()=>LiveOps.Version;
+            GameServerConnection.Configure(this,saveDirectory);
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
             Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);
             UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);
         }
         public void SelectHero(int index)
         {
-            if(Running)return;CancelPotionDeparture();Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
+            if(Running)return;CancelRiftEntry();CancelPotionDeparture();Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
         public bool ChangeCharacterFromSettings(int index)
         {
@@ -74,9 +80,11 @@ namespace Hellscript
             BeginRun(training,false,null,true);
 #endif
         }
-        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1)
+        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false)
         {
-            if(Active)return;
+            if(Active||liveOpsAdmissionPending)return;
+            if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
+            {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed));return;}
             if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}
             if(!continueRepeat)ExitIdle(false);
             if(training>=0&&!fullSkillTraining&&!ContentUnlocks.Has(Store.Data,ContentUnlocks.Train)){Notify(ContentUnlocks.Condition(ContentUnlocks.Train));return;}
@@ -95,7 +103,8 @@ namespace Hellscript
             CancelPotionDeparture();
             var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
             string fingerprint=Store.Data.Hero.lastRiftFingerprint;int boss=Store.Data.Hero.lastRiftBoss;
-            try{Combat=new CombatSimulation(Store.Data,catalog,Mathf.Clamp(SelectedStage,1,Store.Data.Hero.highestClear+1),training,snapshot,seed,ownedTraining:!fullSkillTraining);}
+            int stage=Mathf.Clamp(SelectedStage,1,Mathf.Min(1000,Store.Data.Hero.highestClear+1));
+            try{Combat=new CombatSimulation(Store.Data,catalog,stage,training,snapshot,seed,ownedTraining:!fullSkillTraining,liveOps:training<0&&snapshot==null?LiveOps?.Capture(stage):null);}
             catch(Exception e){Combat=previous;BlockRepeat(RepeatBlock.Configuration,e.Message);Notify(e.Message);return;}
             if(training<0){Store.Data.suspendedRun=Combat.State;Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
             if(training<0)
@@ -119,6 +128,25 @@ namespace Hellscript
             Combat.Visual+=World.Effect;Combat.GateOpened+=UI.ShowToast;
             if(DisplayDimmed)World.DeferDungeon();else{World.BuildDungeon(Combat.State);UI.ShowBattle();}
             RestoreForegroundClock();resultDelay=0;resultShown=false;Save();
+        }
+        System.Collections.IEnumerator RefreshLiveOpsAndBegin(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat,float riftSpeed)
+        {
+            long request=liveOpsAdmission.Begin(Store.Data.Hero.id,SelectedStage);
+            Notify("균열 설정을 확인하고 있습니다. 취소하면 입장하지 않습니다.");
+            try
+            {
+                yield return LiveOps.Refresh();
+                // Consume only this still-authorized request before any potion, fatigue or paid-entry write.
+                if(!liveOpsAdmission.Complete(request,Store.Data.Hero.id,SelectedStage))yield break;
+                if(Active||backgroundPaused||Store.Data.suspendedRun!=null||continueRepeat&&!RepeatHunt.Ready(RepeatSession))yield break;
+                BeginRun(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,true);
+            }
+            finally{liveOpsAdmission.Cancel(request);}
+        }
+        public void CancelRiftEntry()
+        {
+            if(!liveOpsAdmission.Cancel())return;
+            CancelPotionDeparture();Notify("입장을 취소했습니다.");
         }
         public void BeginRiftEntry(bool accelerated)=>BeginRun(-1,false,null,false,false,accelerated?1.5f:1);
         public void TogglePause()
@@ -145,6 +173,7 @@ namespace Hellscript
         }
         public void EnterPlaza(bool fresh=false)
         {
+            CancelRiftEntry();
             if(Active)return;
             if(!Store.ActivateSkillTrees(catalog)){Notify(Store.Error);return;}
             if(fresh||Town==null)VisitSanctuary(PotionVisit());
@@ -194,6 +223,7 @@ namespace Hellscript
         }
         public void ReturnTown()
         {
+            CancelRiftEntry();
             SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
             ExitIdle(false);RestoreForegroundClock();
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();

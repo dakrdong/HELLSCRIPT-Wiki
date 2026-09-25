@@ -193,6 +193,7 @@ namespace Hellscript
         public void ShowTown()=>game.EnterPlaza();
         public void ShowTownMenu()
         {
+            game.CancelRiftEntry();
             var a=game.Store.Data;var h=a.Hero;
             pageRepaint=()=>ShowTownMenu();Base("town","HELLSCRIPT","행동을 설계하고, 균열을 지배하라",true);
             Note(content,"SANCTUARY  /  잿빛 성소",18,45,gold);
@@ -359,7 +360,7 @@ namespace Hellscript
         Color RarityColor(int r)=>StorageSurface.Hex(EquipmentGradePalette.Hex[Mathf.Clamp(r,0,4)]);
         void ShowWarehouse(bool portal)=>RenderWarehouse(portal);
         public void ShowShop()=>RenderItemShop();
-        public void ShowRecords()=>OpenCombatRecords();
+        public void ShowRecords(){game.CancelRiftEntry();OpenCombatRecords();}
         void ShowLog(RunRecord record)
         {ShowRunReview(record);}
         public void ShowResult()

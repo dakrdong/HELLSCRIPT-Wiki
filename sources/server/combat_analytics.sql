@@ -28,3 +28,11 @@ FROM runs;
 SELECT r.account_id,r.run_id,r.signals_json,a.revision,a.evidence_json
 FROM runs r LEFT JOIN authority_evidence a USING(account_id,run_id)
 WHERE r.signals_json <> '["CLIENT_OBSERVATION_UNVERIFIED"]';
+
+-- Compare balance releases without mixing cached/bundled and published configurations.
+-- The reference is still client-observed; the hash is an identifier, not an anti-cheat signature.
+SELECT COALESCE(c.source,'legacy') AS config_source,c.version,c.config_hash,r.stage,
+       COUNT(*) AS attempts,SUM(r.outcome='victory') AS victories,
+       AVG(r.simulation_seconds) AS average_seconds,AVG(r.earned_gold) AS average_gold
+FROM runs r LEFT JOIN run_configuration c USING(account_id,run_id)
+GROUP BY c.source,c.version,c.config_hash,r.stage;

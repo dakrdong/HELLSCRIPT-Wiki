@@ -45,7 +45,7 @@ namespace Hellscript
             State.exploration??=new RiftExplorationState();State.exploration.enemies??=new System.Collections.Generic.List<EnemyObservation>();
             if(fresh&&State.training<0)
             {
-                State.layout=RiftGenerator.Generate(State.rng,State.id,State.stage,Hero.heroClass,Hero.lastRiftFingerprint,Hero.lastRiftBoss,forcedObjective:forcedObjective);
+                State.layout=RiftGenerator.Generate(State.rng,State.id,State.stage,Hero.heroClass,Hero.lastRiftFingerprint,Hero.lastRiftBoss,forcedObjective:forcedObjective,tuning:Tuning);
                 State.position=State.layout.start;State.theme=State.layout.theme;State.rng=State.layout.combatSeed;State.rewardRng=State.layout.rewardSeed;
                 Hero.lastRiftFingerprint=State.layout.fingerprint;Hero.lastRiftBoss=State.layout.bossKind;
             }

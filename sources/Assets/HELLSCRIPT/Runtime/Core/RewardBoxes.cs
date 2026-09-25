@@ -36,9 +36,12 @@ namespace Hellscript
         public int version;
         public List<OwnedRewardBox> owned=new List<OwnedRewardBox>();
         public List<int> claimedStages=new List<int>();
+        public List<RewardBoxPromise> firstClearPromises=new List<RewardBoxPromise>();
         // Only exact normal-clear records are eligible, including existing RiftBestTime entries.
         // Historical boss-defeat flags/highestClear do not prove a completed run.
     }
+    [Serializable] public sealed class RewardBoxPromise
+    {public int stage,itemLevel,liveOpsVersion;public string configHash;public RewardBoxGrant[] grants;}
     public static class RewardBoxCatalog
     {
         static RewardBoxDatabase database;
@@ -114,6 +117,10 @@ namespace Hellscript
                 if(a.rewardBoxes!=null&&((a.rewardBoxes.owned?.Count??0)>0||(a.rewardBoxes.claimedStages?.Count??0)>0))throw new NotSupportedException("Unversioned reward box state.");
                 a.rewardBoxes=new RewardBoxState{version=Version};
             }
+            a.rewardBoxes.firstClearPromises??=new List<RewardBoxPromise>();
+            // Existing exact clears keep their shipped package even when first opened after deployment.
+            if(a.schema<16)foreach(int stage in a.heroes.SelectMany(h=>h.riftProgress?.best??new List<RiftBestTime>()).Where(b=>b.milliseconds>0).Select(b=>b.stage).Distinct())
+                CapturePromise(a,stage,null);
             Validate(a);
         }
         public static void Validate(AccountSave a)
@@ -121,6 +128,9 @@ namespace Hellscript
             var r=a.rewardBoxes;
             if(r==null||r.version!=Version||r.owned==null||r.claimedStages==null||a.premium<0||a.enhancementStones<0)throw new NotSupportedException("Unsupported reward box state; original save preserved.");
             if(r.claimedStages.Any(s=>s<1||s>1000)||r.claimedStages.Distinct().Count()!=r.claimedStages.Count)throw new NotSupportedException("Invalid first-clear claims.");
+            if(r.firstClearPromises==null||r.firstClearPromises.Count>1000||r.firstClearPromises.Any(p=>p==null||p.stage<1||p.stage>1000||p.itemLevel<1||p.itemLevel>60||p.liveOpsVersion<0)||r.firstClearPromises.Select(p=>p.stage).Distinct().Count()!=r.firstClearPromises.Count)
+                throw new NotSupportedException("Invalid first-clear promises.");
+            foreach(var promise in r.firstClearPromises)LiveOpsConfig.ValidateGrants(promise.grants,promise.stage);
             var ids=new HashSet<string>();
             foreach(var box in r.owned)
             {
@@ -130,16 +140,36 @@ namespace Hellscript
         }
         public static bool Eligible(AccountSave a,int stage)=>stage>=1&&stage<=1000&&a.heroes.Any(h=>(h.riftProgress?.Best(stage)??0)>0);
         public static string Status(AccountSave a,int stage)=>a.rewardBoxes.claimedStages.Contains(stage)?"claimed":Eligible(a,stage)?"ready":"locked";
+        public static RewardBoxGrant[] Preview(AccountSave a,int stage,LiveOpsRunSnapshot next=null)
+        {
+            var promise=a.rewardBoxes.firstClearPromises?.FirstOrDefault(p=>p.stage==stage);
+            return (promise?.grants??(a.rewardBoxes.claimedStages.Contains(stage)?RewardBoxCatalog.FirstClear(stage):next?.firstClearRewards)??RewardBoxCatalog.FirstClear(stage)).Select(CombatJournal.Copy).ToArray();
+        }
+        public static void CaptureClear(AccountSave a,RunState run)
+        {
+            if(run.training>=0||run.phase!=RunPhase.Cleared||!Eligible(a,run.stage))return;
+            CapturePromise(a,run.stage,run.liveOps);
+        }
+        static void CapturePromise(AccountSave a,int stage,LiveOpsRunSnapshot snapshot)
+        {
+            if(a.rewardBoxes.claimedStages.Contains(stage)||a.rewardBoxes.firstClearPromises.Any(p=>p.stage==stage))return;
+            var grants=snapshot?.firstClearRewards??RewardBoxCatalog.FirstClear(stage);LiveOpsConfig.ValidateGrants(grants,stage);
+            a.rewardBoxes.firstClearPromises.Add(new RewardBoxPromise{stage=stage,itemLevel=RewardBoxCatalog.ItemLevel(stage),liveOpsVersion=snapshot?.version??0,
+                configHash=snapshot?.configHash??"",grants=grants.Select(CombatJournal.Copy).ToArray()});
+        }
         // The caller must be a staged GameStore transaction; this is not a public inventory write path.
         internal static bool Claim(AccountSave a,int stage)
         {
             if(a.suspendedRun!=null||!Eligible(a,stage)||a.rewardBoxes.claimedStages.Contains(stage))return false;
+            // Legacy clear fixtures and imported pre-live-ops records have no remote promise.
+            CapturePromise(a,stage,null);
+            var promise=a.rewardBoxes.firstClearPromises.Single(p=>p.stage==stage);
             int n=0;
-            foreach(var grant in RewardBoxCatalog.FirstClear(stage))
+            foreach(var grant in promise.grants)
             {
                 string id="rift-first-"+stage+"-"+n++;
                 a.rewardBoxes.owned.Add(new OwnedRewardBox{id=id,boxId=grant.boxId,count=grant.count,sourceStage=stage,
-                    itemLevel=RewardBoxCatalog.ItemLevel(stage),minimumQuality=grant.minimumQuality,seed=RuneEconomy.Seed(Guid.NewGuid().ToString("N"))|1u});
+                    itemLevel=promise.itemLevel,minimumQuality=grant.minimumQuality,seed=RuneEconomy.Seed(Guid.NewGuid().ToString("N"))|1u});
             }
             a.rewardBoxes.claimedStages.Add(stage);return true;
         }

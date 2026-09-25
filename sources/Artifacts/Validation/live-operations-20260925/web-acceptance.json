@@ -1,0 +1,51 @@
+{
+  "date": "2026-09-25",
+  "environment": "Codex In-app Browser on macOS, localhost QA service",
+  "physicalMobile": false,
+  "sizes": [
+    [
+      440,
+      956
+    ],
+    [
+      956,
+      440
+    ],
+    [
+      1600,
+      900
+    ],
+    [
+      1600,
+      1000
+    ],
+    [
+      2100,
+      900
+    ]
+  ],
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "textSizes": [
+    100,
+    140
+  ],
+  "checks": {
+    "monsters_firstClear_history_horizontalOverflow_and_fixedActions": 60,
+    "historyDialog_scroll_and_fixedFooter": 20,
+    "login_horizontalOverflow_and_controlBounds": 20
+  },
+  "failuresAfterFix": 0,
+  "consoleWarningsOrErrors": 0,
+  "fixedFinding": "At 440x956 and English 140%, wrapped history footer extended below dialog; flex column and shrinking scroll body preserve fixed header/footer. All 20 dialog combinations were then rechecked.",
+  "interactions": [
+    "Operator sign-in and sign-out with local-only fixture credential",
+    "Save and publish local version 1; separate HTTP read confirmed monsterHealth=1.2 and bossEquipmentChance=0.75",
+    "Stage 2 original first-clear grant preview: rift-stones x1",
+    "Version 0 versus version 1 differences include named reward boxes and minimum quality percentages"
+  ],
+  "productionDeploymentVerified": false,
+  "notes": "Viewport reset after tests. Evidence consists of actual CUA DOM measurements and representative screenshots in the task; this is not physical device input or performance validation."
+}

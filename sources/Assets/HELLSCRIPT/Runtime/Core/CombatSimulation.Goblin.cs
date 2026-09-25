@@ -66,7 +66,7 @@ namespace Hellscript
             var g=State.goblin;if(g==null||g.rewarded)return;g.rewarded=true;
             if(State.training>=0)return;
             RiftResources.Add(State,RiftResourceKind.Gold,e.position,KillGold(GoldenGoblin.GoldMultiplier*(25+5*State.stage)));
-            int rarity=Mathf.Max(2,RiftRarity.Roll(RiftRewardSource.Elite,State.stage,ref g.rng,Stats.magicFind));
+            int rarity=Mathf.Max(2,RollRarity(RiftRewardSource.Elite,ref g.rng));
             DropFrom(e.position,rarity,ref g.rng);
             Log("GOBLIN_KILLED",Loc.F("{0} 처치 · 정예 금화 {1}배와 희귀 이상 장비 1개",GoldenGoblin.Name,GoldenGoblin.GoldMultiplier));
         }

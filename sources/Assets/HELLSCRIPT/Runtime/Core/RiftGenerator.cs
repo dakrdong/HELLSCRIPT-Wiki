@@ -30,8 +30,9 @@ namespace Hellscript
         static Rect Expand(Rect r,float amount)=>new Rect(r.min-Vector2.one*amount,r.size+Vector2.one*amount*2);
         // Normal entries use roaming bosses. Explicit objective/arena overrides are retained for
         // compatibility fixtures and development tools for the saved pre-v6 rule set.
-        public static RiftLayout Generate(uint seed,string runId,int stage,HeroClass hero,string previous="",int lastBoss=-1,int forcedTheme=-1,int forcedCount=0,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false)
+        public static RiftLayout Generate(uint seed,string runId,int stage,HeroClass hero,string previous="",int lastBoss=-1,int forcedTheme=-1,int forcedCount=0,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null)
         {
+            tuning??=new LiveOpsRiftSettings();LiveOpsConfig.Validate(tuning);
             arenaBoss|=forcedObjective.HasValue;
             uint choice=Derive(seed,"choice");int theme=forcedTheme>=0?forcedTheme:RandomStream.Range(ref choice,0,ContentUnlocks.ThemeCount(stage));
             int count=forcedCount>0?forcedCount:RandomStream.Range(ref choice,6,9);string lastError="";
@@ -39,7 +40,7 @@ namespace Hellscript
             {
                 try
                 {
-                    var map=Candidate(seed,runId,stage,hero,theme,count,candidate,lastBoss,forcedObjective:forcedObjective,arenaBoss:arenaBoss);
+                    var map=Candidate(seed,runId,stage,hero,theme,count,candidate,lastBoss,forcedObjective:forcedObjective,arenaBoss:arenaBoss,tuning:tuning);
                     if(map.fingerprint==previous)continue;return map;
                 }
                 catch(InvalidOperationException e){lastError=e.Message;}
@@ -50,23 +51,24 @@ namespace Hellscript
             {
                 try
                 {
-                    return Fallback(seed,runId,stage,hero,theme,n,lastBoss,forcedObjective,arenaBoss);
+                    return Fallback(seed,runId,stage,hero,theme,n,lastBoss,forcedObjective,arenaBoss,tuning);
                 }
                 catch(InvalidOperationException e){lastError=e.Message;}
             }
             throw new InvalidOperationException(Loc.F("균열을 안전하게 생성하지 못했습니다. 입장 시간과 보상을 변경하지 않았습니다. {0}", lastError));
         }
-        public static RiftLayout Fallback(uint seed,string runId,int stage,HeroClass hero,int theme,int index,int lastBoss=-1,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false)
+        public static RiftLayout Fallback(uint seed,string runId,int stage,HeroClass hero,int theme,int index,int lastBoss=-1,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null)
         {
             arenaBoss|=forcedObjective.HasValue;
             if(theme<0||theme>1||index<0||index>2)throw new ArgumentOutOfRangeException();
-            var map=Candidate(seed,runId,stage,hero,theme,6,0,lastBoss,arenaBoss?(uint)(81001+theme*100+index):CompactFallbackSeeds[theme,index],allowWings:false,forcedObjective:forcedObjective,arenaBoss:arenaBoss);
+            var map=Candidate(seed,runId,stage,hero,theme,6,0,lastBoss,arenaBoss?(uint)(81001+theme*100+index):CompactFallbackSeeds[theme,index],allowWings:false,forcedObjective:forcedObjective,arenaBoss:arenaBoss,tuning:tuning);
             map.fallbackId=$"F{theme+1}-{index+1}";map.candidate=24+index;return map;
         }
-        static RiftLayout Candidate(uint seed,string runId,int stage,HeroClass hero,int theme,int count,int candidate,int lastBoss,uint structuralSeed=0,bool allowWings=true,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false)
+        static RiftLayout Candidate(uint seed,string runId,int stage,HeroClass hero,int theme,int count,int candidate,int lastBoss,uint structuralSeed=0,bool allowWings=true,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null)
         {
+            tuning??=new LiveOpsRiftSettings();
             uint basis=structuralSeed==0?Derive(seed,"candidate:"+candidate):structuralSeed;
-            var map=new RiftLayout{version=arenaBoss?5:RiftLayout.CurrentVersion,roamingBoss=!arenaBoss,bossRoom=-1,contentStage=stage,theme=theme,mapSeed=seed,candidate=candidate,layoutSeed=Derive(basis,"layout"),decorationSeed=Derive(basis,"decoration"),encounterSeed=Derive(basis,"encounter"),combatSeed=Derive(seed,"combat"),rewardSeed=Derive(seed,"reward")};
+            var map=new RiftLayout{liveOpsMapScale=tuning.mapScale,liveOpsPackSpread=tuning.packSpread,liveOpsNormalDensity=tuning.normalDensity,version=arenaBoss?5:RiftLayout.CurrentVersion,roamingBoss=!arenaBoss,bossRoom=-1,contentStage=stage,theme=theme,mapSeed=seed,candidate=candidate,layoutSeed=Derive(basis,"layout"),decorationSeed=Derive(basis,"decoration"),encounterSeed=Derive(basis,"encounter"),combatSeed=Derive(seed,"combat"),rewardSeed=Derive(seed,"reward")};
             map.introductory=!arenaBoss&&IntroductoryRift.Applies(stage);
             // Keep established non-intro layouts/fingerprints at v7; v8 carries the smaller budget.
             map.version=map.introductory?RiftLayout.CurrentVersion:arenaBoss?5:7;
@@ -165,7 +167,7 @@ namespace Hellscript
             AddJunctions(map);AssignRoles(map,spine);
             var first=map.rooms[0];map.start=first.Transform(-RiftTemplates.Get(first.templateId).size*.5f+Vector2.one*2);
             RiftOrganicGeometry.ShapeRooms(map);
-            IntroductoryRift.ScaleGeometry(map);
+            IntroductoryRift.ScaleGeometry(map,(map.introductory?IntroductoryRift.GeometryScale:1)*tuning.mapScale);
             if(map.version>=7)RiftDensity.Validate(map);
             var nav=new RiftNavigation(map);if(!nav.Reachable(map.start))throw new InvalidOperationException("시작점 접근 불가");
             foreach(var corridor in map.corridors)for(int n=1;n<corridor.points.Count;n++)
@@ -182,10 +184,11 @@ namespace Hellscript
             if(map.bossPoints.Count!=5)throw new InvalidOperationException("보스 공간 부족");
             }
             uint encounter=map.encounterSeed;map.bossKind=SelectBossForStage(ref encounter,lastBoss,stage);
-            PlaceEncounters(map,nav,stage,ref encounter);PlaceChests(map,nav,runId,stage,hero);RiftFieldContent.AddBodiesAndValidate(map);PlaceSeals(map,new RiftNavigation(map),stage);
+            PlaceEncounters(map,nav,stage,ref encounter);PlaceChests(map,nav,runId,stage,hero,tuning);RiftFieldContent.AddBodiesAndValidate(map);PlaceSeals(map,new RiftNavigation(map),stage);
             RiftObjectives.Place(map,new RiftNavigation(map));
             var shape=new StringBuilder();shape.Append(map.version).Append(':').Append(map.layoutSeed).Append('|');
             if(map.introductory)shape.Append("intro|");
+            if(tuning.mapScale!=1||tuning.packSpread!=1||tuning.normalDensity!=1)shape.Append(tuning.mapScale.ToString(System.Globalization.CultureInfo.InvariantCulture)).Append(':').Append(tuning.packSpread.ToString(System.Globalization.CultureInfo.InvariantCulture)).Append(':').Append(tuning.normalDensity.ToString(System.Globalization.CultureInfo.InvariantCulture)).Append('|');
             foreach(var r in map.rooms)shape.Append($"{r.templateId}.{r.rotation}.{r.variant}|");foreach(var c in map.corridors)shape.Append($"{c.roomA}:{c.doorA}-{c.roomB}:{c.doorB}|");
             map.fingerprint=Derive(0,shape.ToString()).ToString("x8");RiftGates.Place(map);Validate(map);return map;
         }
@@ -297,11 +300,12 @@ namespace Hellscript
                 // With only four introductory elites, reserve the second pack for a room
                 // eligible for the sealed chest instead of spending both packs beside entry.
                 var rooms=map.rooms.Where(r=>r.index!=0).OrderByDescending(r=>r.central).ThenByDescending(r=>map.introductory&&distance[r.index]>=2).ThenByDescending(r=>r.doors.Count(d=>d.corridor>=0)).ThenBy(r=>r.index).ToArray();
-                int normal=map.introductory?50:100,remainingElites=map.introductory?IntroductoryRift.EliteCount:8;result[0]=(map.introductory?5:10,0,5);
+                int entry=Mathf.RoundToInt((map.introductory?5:10)*Density(map));
+                int normal=NormalBudget(map)-entry,remainingElites=map.introductory?IntroductoryRift.EliteCount:8;result[0]=(entry,0,Mathf.CeilToInt(5*Density(map)));
                 for(int i=0;i<rooms.Length;i++)
                 {
                     int amount=normal/(rooms.Length-i);normal-=amount;int elite=Mathf.Min(2,remainingElites);remainingElites-=elite;
-                    result[rooms[i].index]=(amount,elite,rooms[i].central?7:5);
+                    result[rooms[i].index]=(amount,elite,Mathf.CeilToInt((rooms[i].central?7:5)*Density(map)));
                 }
                 return result;
             }
@@ -327,6 +331,11 @@ namespace Hellscript
                 result[room.index]=(result[room.index].normal,e,result[room.index].group);
             }
             if(elites>0)throw new InvalidOperationException("정예 배치 공간 부족");
+            if(Density(map)!=1)
+            {
+                int normalTotal=0;for(int i=0;i<result.Length;i++){result[i]=(Mathf.RoundToInt(result[i].normal*Density(map)),result[i].elite,Mathf.CeilToInt(result[i].group*Density(map)));normalTotal+=result[i].normal;}
+                result[ante.index]=(result[ante.index].normal+NormalBudget(map)-normalTotal,result[ante.index].elite,result[ante.index].group);
+            }
             return result;
         }
         static void AddJunctions(RiftLayout map)
@@ -367,7 +376,7 @@ namespace Hellscript
                         bool placed=false;
                         for(int attempt=0;attempt<48;attempt++)
                         {
-                            float angle=(n+attempt*.37f)*Mathf.PI*2/(members+groupElite);float radial=1.15f+(attempt/16)*.25f;
+                            float angle=(n+attempt*.37f)*Mathf.PI*2/(members+groupElite);float radial=(1.15f+(attempt/16)*.25f)*(map.liveOpsPackSpread>0?map.liveOpsPackSpread:1);
                             Vector2 p=group.position+new Vector2(Mathf.Cos(angle),Mathf.Sin(angle))*radial;
                             if(!nav.Walkable(p)||room.boss&&Vector2.Distance(p,room.position)<8||room.index==0&&Vector2.Distance(p,map.start)<10||room.doors.Any(d=>Vector2.Distance(d.position,p)<3)||map.spawns.Any(s=>(s.position-p).sqrMagnitude<.65f*.65f))continue;
                             if(!nav.Reachable(p))continue;
@@ -398,7 +407,7 @@ namespace Hellscript
             while(queue.Count>0){int p=queue.Dequeue();foreach(var c in map.corridors.Where(c=>c.roomA==p||c.roomB==p)){int next=c.roomA==p?c.roomB:c.roomA;if(distance[next]<=distance[p]+1)continue;distance[next]=distance[p]+1;queue.Enqueue(next);}}
             return distance;
         }
-        static void PlaceChests(RiftLayout map,RiftNavigation nav,string runId,int stage,HeroClass hero)
+        static void PlaceChests(RiftLayout map,RiftNavigation nav,string runId,int stage,HeroClass hero,LiveOpsRiftSettings tuning)
         {
             uint rng=map.rewardSeed;var distances=GraphDistances(map,0);int count=map.rooms.Count-2;
             var eligible=map.rooms.Where(r=>r.index!=0&&distances[r.index]>=2).ToList();Shuffle(eligible,ref rng);
@@ -424,7 +433,7 @@ namespace Hellscript
                 map.chests.Add(chest);
             }
             int cursed=RiftFieldContent.Place(map,nav,runId,stage);
-            int gold=Mathf.FloorToInt(.15f*(800+50*stage));map.chests[0].gold=gold/2;map.chests[0].materials=Mathf.Max(1,Mathf.FloorToInt(.2f*(5+stage/5)));
+            int gold=LiveOpsConfig.Scale(Mathf.FloorToInt(.15f*tuning.ClearGold(stage)),tuning.goldMultiplier);map.chests[0].gold=gold/2;map.chests[0].materials=tuning.ClearMaterials(stage)==0?0:Mathf.Max(1,Mathf.FloorToInt(.2f*tuning.ClearMaterials(stage)));
             int rest=gold-map.chests[0].gold,weight=count-1+(cursed>=0?1:0),distributed=0;
             for(int n=1;n<count;n++){map.chests[n].gold=rest*(n==cursed?2:1)/weight;distributed+=map.chests[n].gold;}
             for(int n=1;distributed<rest;n++,distributed++)map.chests[n].gold++;
@@ -437,11 +446,13 @@ namespace Hellscript
             }
             map.rewardSeed=rng;
         }
+        static float Density(RiftLayout map)=>map.liveOpsNormalDensity>0?map.liveOpsNormalDensity:1;
+        static int NormalBudget(RiftLayout map)=>Mathf.RoundToInt((map.introductory?IntroductoryRift.NormalCount:110)*Density(map));
         public static void Validate(RiftLayout map)
         {
             if(map.rooms.Count<(map.roamingBoss?7:6)||map.rooms.Count>(map.roamingBoss?9:8)||map.rooms.Count(r=>r.boss)!=(map.roamingBoss?0:1)||map.corridors.Count<map.rooms.Count)throw new InvalidOperationException("지도 구조 불일치");
             if(map.introductory&&(!map.roamingBoss||!IntroductoryRift.Applies(map.contentStage)))throw new InvalidOperationException("Invalid introductory rift.");
-            if(map.spawns.Count(s=>s.elite<0)!=(map.introductory?IntroductoryRift.NormalCount:110)||map.spawns.Count(s=>s.elite>=0)!=(map.introductory?IntroductoryRift.EliteCount:8))throw new InvalidOperationException("전투 예산 불일치");
+            if(map.spawns.Count(s=>s.elite<0)!=NormalBudget(map)||map.spawns.Count(s=>s.elite>=0)!=(map.introductory?IntroductoryRift.EliteCount:8))throw new InvalidOperationException("전투 예산 불일치");
             if(map.chests.Count!=map.rooms.Count-2||map.chests.Count(c=>c.reward!=null)!=2)throw new InvalidOperationException("상자 예산 불일치");
             if((map.contentStage==0||map.contentStage>=ContentUnlocks.Rules.expandedEnemiesStage)&&map.spawns.Select(s=>s.kind).Distinct().Count()<4||map.groups.Select(g=>g.archetype).Distinct().Count()<3)throw new InvalidOperationException("적 다양성 부족");
             if(map.rooms.Any(r=>r.doors.Count(d=>d.corridor>=0)<(r.role==RiftRoomRole.Wing?1:2))||GraphDistances(map,0).Any(d=>d==999))throw new InvalidOperationException("끊어진 연결");

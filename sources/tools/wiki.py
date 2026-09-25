@@ -643,6 +643,8 @@ PAGE_META={
  'first-play-detail':('전투와 성장','첫 플레이 안내 상세안','실제 캐릭터로 첫 균열·장비 비교·규칙 수정·훈련·재도전을 안내하는 단계와 기록 경계입니다. 보상을 지급하거나 완료를 위조하지 않습니다.'),
  'training-comparison-detail':('전투와 성장','훈련 A/B 비교 상세안','같은 캐릭터·훈련 환경에서 설정 A와 B의 행동·결과 차이를 보여 주는 기준입니다. 한 표본을 승률로 표시하지 않습니다.'),
  'resource-guide':('리소스와 운영','리소스 제작·관리','현재 이미지, 아틀라스 영역, 임시 표현과 정식 제작 과제를 정리합니다.'),
+ 'live-operations':('리소스와 운영','게임 운영툴·균열 설정 게시','몬스터·드랍·맵·최초 보상 조정, 인증된 초안·게시·복원과 다음 균열 적용 규칙입니다.'),
+ 'live-operations.en':('리소스와 운영','Live operations and rift releases','Authenticated tuning, draft publication and restoration, first-clear promises and next-rift configuration snapshots.'),
  'wiki-maintenance':('리소스와 운영','위키·DB 갱신 규칙','원본과 조회본의 관계, 버전 보존, 상태 표시와 갱신 방법입니다.'),
  'asset-provenance':('리소스와 운영','임시 리소스 출처','이미지 생성 경로와 모델 확인 범위, 자체 제작과 글꼴 사용 기록입니다.'),
  'image-prompts':('리소스와 운영','배경·스킬 생성 프롬프트','기존 성소 배경과 스킬 아틀라스의 생성 프롬프트를 보존합니다.'),

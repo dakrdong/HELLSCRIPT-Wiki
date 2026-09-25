@@ -133,6 +133,7 @@ namespace Hellscript
         public bool gateOpen,gateOpenedByMeter;
         public const int CurrentVersion=8;
         public int contentStage;
+        public float liveOpsMapScale=1,liveOpsPackSpread=1,liveOpsNormalDensity=1;
         public int version=CurrentVersion,theme,bossRoom,bossKind,candidate;
         public uint mapSeed,layoutSeed,decorationSeed,encounterSeed,combatSeed,rewardSeed;
         public string fingerprint, fallbackId="";

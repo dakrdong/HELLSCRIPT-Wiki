@@ -135,5 +135,13 @@ namespace Hellscript
             account.gold+=awarded;run.earnedGold+=awarded;
             CombatJournal.Append(run,"GOLD_GRANTED",Loc.Source("골드 {0} 획득 · 이번 균열 누적 {1}",awarded,run.earnedGold),trigger:"RIFT_REWARD");
         }
+        public static void GrantMaterials(AccountSave account,RunState run,int amount)
+        {
+            if(amount<=0||run.training>=0)return;
+            int awarded=(int)Math.Min(amount,(long)int.MaxValue-account.materials),excess=amount-awarded;
+            account.materials+=awarded;
+            if(awarded>0)CombatJournal.Append(run,"MATERIAL_GRANTED",Loc.Source("제작 재료 {0}개 획득",awarded),trigger:"RIFT_REWARD");
+            if(excess>0)CombatJournal.Append(run,"REWARD_CAP",Loc.Source("제작 재료 보유 한도 · 초과 {0}개는 지급하지 않음",excess),trigger:"MATERIAL_CAP");
+        }
     }
 }

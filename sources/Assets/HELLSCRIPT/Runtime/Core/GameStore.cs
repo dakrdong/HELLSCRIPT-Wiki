@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=15;
+        public const int MaximumSchemaVersion=16;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -177,6 +177,7 @@ namespace Hellscript
         }
         public static void NormalizeRun(RunState run)
         {
+            LiveOpsConfig.NormalizeRun(run);
             run.potions??=new PotionRuntimeState();run.potions.Validate();
             if(run.cooldownTotals==null||run.cooldownTotals.Length!=18)run.cooldownTotals=new float[18];
             try{RiftResources.Normalize(run);}catch(Exception error){throw new NotSupportedException(Loc.T("균열의 재화·보석 기록을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}

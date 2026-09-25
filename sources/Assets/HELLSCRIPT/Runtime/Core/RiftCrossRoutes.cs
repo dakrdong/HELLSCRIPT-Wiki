@@ -171,6 +171,8 @@ namespace Hellscript
                     var a=route.points[index-3]-junction.position;var b=route.points[index+3]-junction.position;
                     float arm=map.version>=7?3.9f:8.9f;
                     if(map.introductory)arm*=IntroductoryRift.GeometryScale;
+                    // The straight-arm template scales with the map; physical traversal remains independently validated.
+                    arm*=map.liveOpsMapScale>0?map.liveOpsMapScale:1;
                     if(a.magnitude<arm||b.magnitude<arm||Vector2.Dot(a.normalized,b.normalized)>-.99f)break;
                     axes.Add(a.normalized);
                 }

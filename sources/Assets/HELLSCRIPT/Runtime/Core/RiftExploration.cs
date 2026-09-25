@@ -154,7 +154,7 @@ namespace Hellscript
             if(chest.guardGroup>=0&&run.enemies.Any(e=>e.group==chest.guardGroup&&!e.dead))return false;
             if(chest.definitionId=="CH03"&&!run.layout.events.Any(e=>e.chestId==chest.id&&e.phase==RiftEventPhase.Succeeded))return false;
             if(account.transactions.Any(r=>r.requestId==chest.requestId))return false;
-            RiftEarnings.GrantGold(account,run,chest.gold);account.materials+=chest.materials;
+            RiftEarnings.GrantGold(account,run,chest.gold);RiftEarnings.GrantMaterials(account,run,chest.materials);
             if(chest.reward!=null&&!string.IsNullOrEmpty(chest.reward.id))
             {chest.dropId=run.nextId++;run.drops.Add(new DropState{id=chest.dropId,position=chest.position,item=chest.reward});}
             chest.phase=ChestPhase.Opened;chest.progress=chest.Duration;

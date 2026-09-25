@@ -12,6 +12,7 @@ import math
 import os
 import re
 import sqlite3
+import tempfile
 import time
 from contextlib import closing
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -65,6 +66,16 @@ def validate(record):
         raise Rejected(422, "boss_result")
     if "finish" in j and (not isinstance(j["finish"], str) or len(j["finish"]) > 128):
         raise Rejected(422, "finish")
+    tuning = j.get('liveOps')
+    if tuning is not None:
+        if (not isinstance(tuning, dict) or tuning.get('schemaVersion') != 1
+                or type(tuning.get('version')) is not int or not 0 <= tuning['version'] < 2**31
+                or tuning.get('source') not in ('builtin', 'published')
+                or not re.fullmatch(r'[0-9a-f]{64}', str(tuning.get('configHash', '')))
+                or tuning.get('stage') != j['stage']
+                or j.get('liveOpsVersion') != tuning['version']
+                or j.get('liveOpsConfigHash') != tuning['configHash']):
+            raise Rejected(422, 'liveops_reference')
     for key in ("simulationSeconds", "attendanceSeconds", "observedFrom", "walkingDistance", "maxHealth"):
         if type(j.get(key)) not in (int, float) or not math.isfinite(j[key]) or j[key] < 0:
             raise Rejected(422, "number_" + key)
@@ -120,9 +131,28 @@ def validate(record):
 
 
 class Repository:
+    INITIALIZED_MARKER = b'telemetry-v1\n'
+
     def __init__(self, path):
         self.path = str(path)
-        with closing(self.connect()) as db, db:
+        self.marker_path = Path(self.path + '.initialized')
+        initialized = self._read_marker()
+        if initialized and not Path(self.path).is_file():
+            raise sqlite3.DatabaseError('telemetry_initialized_storage_missing')
+        with closing(self.connect(create=not initialized)) as db, db:
+            if initialized:
+                # Do not silently repair a truncated/replaced known store as an
+                # empty schema. A markerless legacy store may still add the new
+                # run_configuration table during its first upgrade below.
+                for table, columns in (
+                    ('runs', 'account_id,run_id,payload_hash,received_utc_ms,hero_id,stage,outcome,finish,started_utc_ms,completed_utc_ms,simulation_seconds,attendance_seconds,earned_gold,kills,boss_defeated,equipment_collected,signals_json,payload'),
+                    ('events', 'account_id,run_id,sequence,seconds,kind,source,trigger,target,action_id,hp,resource,detail_json'),
+                    ('drops', 'account_id,run_id,category,ordinal,claimed,ignored,detail_json'),
+                    ('authority_evidence', 'account_id,run_id,revision,evidence_json'),
+                    ('run_configuration', 'account_id,run_id,version,config_hash,source'),
+                    ('audit', 'received_utc_ms,account_id,run_id,code,payload_hash'),
+                ):
+                    db.execute(f'SELECT {columns} FROM {table} LIMIT 0').fetchall()
             db.executescript("""
                 CREATE TABLE IF NOT EXISTS runs (
                   account_id TEXT NOT NULL, run_id TEXT NOT NULL, payload_hash TEXT NOT NULL,
@@ -143,12 +173,52 @@ class Repository:
                 CREATE TABLE IF NOT EXISTS authority_evidence (
                   account_id TEXT, run_id TEXT, revision INTEGER, evidence_json TEXT,
                   PRIMARY KEY(account_id, run_id));
+                CREATE TABLE IF NOT EXISTS run_configuration (
+                  account_id TEXT NOT NULL, run_id TEXT NOT NULL, version INTEGER NOT NULL,
+                  config_hash TEXT NOT NULL, source TEXT NOT NULL,
+                  PRIMARY KEY(account_id, run_id));
+                CREATE INDEX IF NOT EXISTS run_configuration_version ON run_configuration(version,config_hash);
                 CREATE TABLE IF NOT EXISTS audit (
                   received_utc_ms INTEGER, account_id TEXT, run_id TEXT, code TEXT, payload_hash TEXT);
             """)
+        if not initialized:
+            # Commit the schema before the marker. A failed marker write fails
+            # startup; retry adopts this intact DB without replacing receipts.
+            # Losing both the DB and marker with the volume requires a backup.
+            self._write_marker()
 
-    def connect(self):
-        db = sqlite3.connect(self.path, timeout=10)
+    def _read_marker(self):
+        if not self.marker_path.exists() and not self.marker_path.is_symlink():
+            return False
+        if not self.marker_path.is_file() or self.marker_path.is_symlink():
+            raise sqlite3.DatabaseError('telemetry_initialization_marker_invalid')
+        with self.marker_path.open('rb') as marker:
+            if marker.read(len(self.INITIALIZED_MARKER) + 1) != self.INITIALIZED_MARKER:
+                raise sqlite3.DatabaseError('telemetry_initialization_marker_invalid')
+        return True
+
+    def _write_marker(self):
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(mode='wb', dir=Path(self.path).parent,
+                                             prefix=self.marker_path.name + '.', suffix='.tmp', delete=False) as marker:
+                temporary = Path(marker.name)
+                marker.write(self.INITIALIZED_MARKER)
+                marker.flush()
+                os.fsync(marker.fileno())
+            os.replace(temporary, self.marker_path)
+            descriptor = os.open(Path(self.path).parent, os.O_RDONLY | getattr(os, 'O_DIRECTORY', 0))
+            try:
+                os.fsync(descriptor)
+            finally:
+                os.close(descriptor)
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+
+    def connect(self, create=False):
+        uri = Path(self.path).resolve().as_uri() + ('?mode=rwc' if create else '?mode=rw')
+        db = sqlite3.connect(uri, uri=True, timeout=10)
         db.execute("PRAGMA journal_mode=WAL")
         db.execute("PRAGMA synchronous=FULL")
         return db
@@ -183,6 +253,10 @@ class Repository:
                     j["startedUtcMs"], j["completedUtcMs"], j["simulationSeconds"], j["attendanceSeconds"],
                     j["earnedGold"], j["kills"], bool(j.get("bossDefeated")), j.get("equipmentCollected", 0),
                     json.dumps(signals), raw.decode("utf-8")))
+                tuning = j.get('liveOps')
+                if tuning is not None:
+                    db.execute('INSERT INTO run_configuration VALUES(?,?,?,?,?)',
+                               (account_id, run_id, tuning['version'], tuning['configHash'], tuning['source']))
                 db.executemany("INSERT INTO events VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", [
                     (account_id, run_id, e["sequence"], e["seconds"], e["kind"], e.get("source"), e.get("trigger"),
                      e.get("target"), e.get("actionId"), e.get("hp"), e.get("resource"), json.dumps(e, ensure_ascii=False)) for e in j["events"]])

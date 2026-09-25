@@ -22,7 +22,9 @@ namespace Hellscript
         public int version=1, sequence, omittedEvents, resumes;
         public long startedUtcMs, completedUtcMs, attempt;
         public string localAccountId, heroId, buildVersion, buildGuid, platform, outcome, finish, trust="client_observed";
-        public int saveSchema, itemCatalogVersion, layoutVersion;
+        public int saveSchema, itemCatalogVersion, layoutVersion,liveOpsVersion;
+        public string liveOpsConfigHash;
+        public LiveOpsRunSnapshot liveOps;
         public HeroClass heroClass;
         public int initialLevel, finalLevel, stage, kills, bossesKilled, equipmentCollected, runesAwarded;
         public uint seed;
@@ -103,9 +105,16 @@ namespace Hellscript
                 State.journal=new CombatJournalData{localAccountId=account.telemetryAccountId,heroId=Hero.id,heroClass=Hero.heroClass,
                     stage=State.stage,attempt=++account.combatSequence,startedUtcMs=restoring?0:DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
                     observedFrom=State.time,seed=restoring?0:seed,initialLevel=Hero.level,buildVersion=Application.version,buildGuid=Application.buildGUID,saveSchema=GameStore.MaximumSchemaVersion,itemCatalogVersion=ItemCatalog.Version,layoutVersion=RiftLayout.CurrentVersion,platform=Application.platform.ToString(),
+                    liveOpsVersion=State.liveOps?.version??0,liveOpsConfigHash=State.liveOps?.configHash,liveOps=CombatJournal.Copy(State.liveOps),
                     initialBuild=State.build.Copy(),initialEdict=edictSource?.Copy(),initialEquipment=Hero.inventory.Where(i=>i.equipped).Select(CombatJournal.Copy).ToList(),
                     runeConfigurationJson=JsonUtility.ToJson(account.runes),slotLevels=(int[])State.slotLevels.Clone(),initialPotions=CombatJournal.Copy(State.potions),maxHealth=Stats.hp};
                 if(restoring)State.journal.integritySignals.Add("PARTIAL_LEGACY_RUN");
+            }
+            if(State.journal.liveOps==null||State.journal.liveOps.schemaVersion==0)
+            {
+                State.journal.liveOps=CombatJournal.Copy(State.liveOps);State.journal.liveOpsVersion=State.liveOps.version;State.journal.liveOpsConfigHash=State.liveOps.configHash;
+                State.journal.integritySignals??=new List<string>();
+                if(!State.journal.integritySignals.Contains("BALANCE_REFERENCE_ADDED_ON_RESUME"))State.journal.integritySignals.Add("BALANCE_REFERENCE_ADDED_ON_RESUME");
             }
             journalPosition=State.position;
             if(restoring&&recordResume)

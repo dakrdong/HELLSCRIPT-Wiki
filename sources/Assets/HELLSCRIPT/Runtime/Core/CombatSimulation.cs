@@ -13,7 +13,8 @@ namespace Hellscript
         public bool OwnedTraining=>State.training>=0&&State.trainingUsesOwnedHero;
         bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero;
         public int EffectiveLevel=>FullSkillTraining?ClassSkills.LevelCap(Hero):Hero.level;
-        public float TimeLimit=>OwnedTraining?60:300;
+        public float TimeLimit=>OwnedTraining?60:State.training>=0?300:LiveOpsConfig.For(State).timeLimitSeconds;
+        LiveOpsRiftSettings Tuning=>LiveOpsConfig.For(State);
         readonly AccountSave account;
         readonly GameCatalog catalog;
         readonly List<EnemyState> sensed=new List<EnemyState>();
@@ -31,7 +32,7 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null)
         {
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
             bool owned=restore!=null?restore.training>=0&&restore.trainingUsesOwnedHero:ownedTraining&&training>=0;
@@ -43,6 +44,9 @@ namespace Hellscript
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
+            if(restore==null&&training<0)State.liveOps=liveOps==null?LiveOpsConfig.Capture(null,State.stage):CombatJournal.Copy(liveOps);
+            LiveOpsConfig.NormalizeRun(State);
+            if(State.liveOps!=null&&State.liveOps.stage!=State.stage)throw new ArgumentException("Live operations snapshot belongs to another stage.");
             uint journalSeed=State.rng;
             CombatTelemetry.Normalize(State);
             RiftResources.Normalize(State);GemInventory.Normalize(this.account);
@@ -64,7 +68,9 @@ namespace Hellscript
             if(restore==null)
             {
                 State.health=Stats.hp;State.visited.Add(0);State.exploreRoom=0;
-                SpawnDungeon();Log("RUN_START",training>=0?"훈련 시작 · 실제 재화와 성장에 반영하지 않습니다.":Loc.F("균열 {0}단계 진입", stage));
+                SpawnDungeon();
+                if(State.training<0)Log("LIVEOPS_VERSION","Balance release "+State.liveOps.version+" / "+State.liveOps.configHash);
+                Log("RUN_START",training>=0?"훈련 시작 · 실제 재화와 성장에 반영하지 않습니다.":Loc.F("균열 {0}단계 진입", stage));
             }
             State.paused=false;
         }
@@ -116,6 +122,12 @@ namespace Hellscript
             if(spawnRun.training<0&&spawnRun.layout.introductory)
             {e.health*=IntroductoryRift.HealthMultiplier(spawnRun.stage,boss);e.maxHealth=e.health;e.attack*=IntroductoryRift.AttackMultiplier(spawnRun.stage);}
             if(boss){spawnRun.bossId=e.id;e.pattern=spawnRun.layout.legacy?(spawnRun.stage-1)%3:spawnRun.layout.bossKind;if(e.pattern==1){e.health*=.85f;e.attack*=.9f;}if(e.pattern==2){e.health*=1.1f;e.attack*=1.1f;}e.maxHealth=e.health;}
+            if(spawnRun.training<0)
+            {
+                var tuning=LiveOpsConfig.For(spawnRun);
+                e.health*=boss?tuning.bossHealth:elite>=0?tuning.eliteHealth:tuning.monsterHealth;e.maxHealth=e.health;
+                e.attack*=boss?tuning.bossAttack:elite>=0?tuning.eliteAttack:tuning.monsterAttack;e.speed*=boss?tuning.bossSpeed:elite>=0?tuning.eliteSpeed:tuning.monsterSpeed;
+            }
             InitializeEnemyBrain(e,spawnRun);spawnRun.enemies.Add(e);
         }
         public bool ApplyBuild(BuildConfig build)
@@ -422,12 +434,15 @@ namespace Hellscript
                     RiftResources.Add(State,RiftResourceKind.Gold,e.position,KillGold(e.elite>=0?25+5*State.stage:5+State.stage));
                     RiftResources.RollGems(State,e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,e.position);
                     QueueExperience(Mathf.FloorToInt((e.elite>=0?50:10)*(1+.05f*(State.stage-1))));
-                    bool drop=e.elite>=0||RandomStream.Unit(ref State.rewardRng)<.02f;
-                    if(drop)Drop(e.position,RiftRarity.Roll(e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,State.stage,ref State.rewardRng,Stats.magicFind));
+                    // Preserve the guaranteed elite path and its RNG sequence at the shipped settings.
+                    float chance=e.elite>=0?Tuning.eliteEquipmentChance:Tuning.normalEquipmentChance;
+                    bool drop=e.elite>=0&&chance>=1||RandomStream.Unit(ref State.rewardRng)<chance;
+                    if(drop)Drop(e.position,RollRarity(e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,ref State.rewardRng));
                 }
             }
 
         }
+        int RollRarity(RiftRewardSource source,ref uint random)=>RiftRarity.WithMagicChance(RiftRarity.Get(source,State.stage,Tuning.Rarity),Stats.magicFind).Roll(RandomStream.Unit(ref random));
         void Drop(Vector2 pos,int rarity)=>DropFrom(pos,rarity,ref State.rewardRng);
         // Named apart from Drop so reflection by name in the tests still finds one method.
         void DropFrom(Vector2 pos,int rarity,ref uint rng)
@@ -525,13 +540,15 @@ namespace Hellscript
         void BossClear()
         {
             if(State.bossRewarded)return;CompleteReadyChest();if(!string.IsNullOrEmpty(State.navigationError))return;CloseUnopenedChests();State.bossRewarded=true;State.phase=RunPhase.Looting;InterruptHeroAction("보스 처치 후 전리품 정리");State.activeSkill=-1;
-            RiftResources.Add(State,RiftResourceKind.Gold,State.position,KillGold(800+50*State.stage));
-            RiftResources.Add(State,RiftResourceKind.Material,State.position,5+State.stage/5);
-            RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,BlacksmithCatalog.RewardStones(State.stage));
+            RiftResources.Add(State,RiftResourceKind.Gold,State.position,KillGold(Tuning.ClearGold(State.stage)));
+            RiftResources.Add(State,RiftResourceKind.Material,State.position,Tuning.ClearMaterials(State.stage));
+            RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,LiveOpsConfig.Scale(BlacksmithCatalog.RewardStones(State.stage),Tuning.bossStoneMultiplier));
             RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
-            if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(1000+100*State.stage));account.materials+=10+State.stage/5;Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
-            for(int i=0;i<3;i++)Drop(State.position+new Vector2(i-1,1),RiftRarity.Roll(RiftRewardSource.Boss,State.stage,ref State.rewardRng,Stats.magicFind));
+            if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(Tuning.FirstGold(State.stage)));RiftEarnings.GrantMaterials(account,State,Tuning.FirstMaterials(State.stage));Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
+            for(int i=0;i<Tuning.bossEquipmentCount;i++)
+                if(Tuning.bossEquipmentChance>=1||RandomStream.Unit(ref State.rewardRng)<Tuning.bossEquipmentChance)
+                    Drop(State.position+new Vector2(i%3-1,1+i/3*.3f),RollRarity(RiftRewardSource.Boss,ref State.rewardRng));
             RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);
             Log("BOSS_CLEAR","보스 처치 · 전리품 정리");
@@ -547,6 +564,7 @@ namespace Hellscript
             CloseUnopenedChests();State.phase=won?RunPhase.Cleared:RunPhase.Failed;State.action=reason;Log("RUN_END",reason);
             if(State.training>=0)return;
             RiftEntryRules.Complete(Hero,State,completion);
+            if(won&&completion!=CombatFinish.Abandoned)RewardBoxes.CaptureClear(account,State);
             OfflineSupplies.RecordClear(account,State,RepeatPolicy.resultSeconds);
             ContentUnlocks.RecordRunEnd(account);
             if(account.records.Any(r=>r.id==State.id))return;

@@ -4,6 +4,9 @@ namespace Hellscript
 {
     public sealed partial class GameStore
     {
+        public System.Func<int,LiveOpsRunSnapshot> LiveOpsPreview;
+        public System.Func<int> LiveOpsPreviewVersion;
+        public RewardBoxGrant[] FirstClearRewards(int stage)=>RewardBoxes.Preview(Data,stage,LiveOpsPreview?.Invoke(stage));
         public IReadOnlyList<Item> LastBoxEquipment {get;private set;}=System.Array.Empty<Item>();
         public bool ClaimRiftFirstRewards(string request,int stage)
             =>Transact(request,"first-clear-boxes:"+stage,a=>RewardBoxes.Claim(a,stage));
