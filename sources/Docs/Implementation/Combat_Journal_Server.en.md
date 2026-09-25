@@ -56,6 +56,35 @@ The login host supplies an `ICombatTelemetrySession` to `GameController.Telemetr
 
 An operational endpoint, login session adapter and production admission/reward repository are not connected in this change. Production integration must supply TLS, authentication, request limits, backups, retention and the trusted replay worker. Local HTTP proof is not production collection proof.
 
+## Railway deployment for a small QA group
+
+The root `Dockerfile` runs **only the combat telemetry API** with Python 3.12 and Gunicorn 26.2.0. `.dockerignore` allows only the required server files, excluding Unity assets, saves, the development wiki and local credentials from the image. `server/telemetry_wsgi.py` reuses the existing `Repository` validation and transactions. Normal access logging never prints combat payloads or authorization headers.
+
+Connect a Railway service to the repository's `main` branch and configure the following values. This table describes deployment settings, not evidence of a created or successfully deployed service.
+
+| Setting | Value and reason |
+| --- | --- |
+| Root Directory / Dockerfile | Repository root / `Dockerfile`. Do not set a Unity build command. |
+| Start command | Leave empty to use the image's Gunicorn command. It listens on `0.0.0.0:$PORT`, defaulting to 8080. |
+| Volume | Attach persistent storage at `/data`. The database is `/data/hellscript/telemetry.sqlite`, with its WAL files in the same directory. |
+| Healthcheck | GET `/healthz`. Checks the existing database without exposing authentication data. |
+| Replicas | 1. Do not share the SQLite volume across replicas. |
+| Restart | On failure, at most five retries. Invalid configuration must remain visible. |
+| Automatic deployment | `main`. Watch Paths may be restricted to `server/**`, `Dockerfile` and `.dockerignore`. |
+| Authentication variable | Store a JSON mapping of strong tokens to QA account IDs in the secret `HELLSCRIPT_TELEMETRY_TOKENS` variable. |
+
+Issue separate tester tokens, for example with `secrets.token_urlsafe(32)`. Keys must contain 32–256 letters, digits, underscores or hyphens. QA account IDs allow 1–128 of those characters plus dots and colons; do not use real names or email addresses. Never embed a shared token in the game or commit real credentials to source or the public wiki. Add a replacement token for the same account before removing the old token to rotate gradually. This QA mapping does not replace production login and short-lived token issuance.
+
+The adapter uses Railway's injected `RAILWAY_VOLUME_MOUNT_PATH`. On Railway it refuses to start without this variable or when the database path is outside the volume. Local runs require an explicit absolute `HELLSCRIPT_TELEMETRY_DATA_DIR`. An empty or invalid authentication map also fails startup. Requests are authenticated before checking JSON content type, the 16 MiB body limit and the existing schema. ACK follows the database commit. No public query, administration or reward-grant API is exposed.
+
+For the first deployment, verify its HTTPS domain and `/healthz`, then use labeled synthetic QA data to exercise authentication rejection, persistence and identical retries. Verify the same ACK and database row after redeployment before connecting tester uploads. Real game data is not sent until the client's `ICombatTelemetrySession` is configured. Redeployment with a SQLite volume may cause brief downtime; the client outbox retries.
+
+Enable Railway volume backups and verify the restore path before starting QA. File-based backups of a running SQLite database must use the SQLite backup API; copying only the database while omitting its WAL can lose data. Server records are retained separately from the player's latest-100 limit. Monitor storage and billing alerts, and define long-term retention and deletion as an operating policy. Automatic sanctions or confirmed rewards still require server-owned admission data and replay.
+
+The deployment adapter and existing receiver passed **19/19** tests. Real HTTP requests to Gunicorn verified identical ACKs and one database row across process termination and restart. `.github/workflows/telemetry.yml` runs the Python tests and builds the Docker image. No local Docker runtime is installed, so container build and Railway deployment outcomes must be verified separately.
+
+References: [Railway volumes](https://docs.railway.com/volumes/reference), [Infrastructure as Code](https://docs.railway.com/infrastructure-as-code). Legacy `railway.toml`/`railway.json` configuration is deprecated and unavailable to new services, so this deployment does not introduce either file. Import the actual project into the current IaC system if configuration management becomes necessary.
+
 ## Verification and delivery
 
 Focused results and macOS evidence live in `CombatJournalEvidence/`. The original dirty checkout and its running Editor are preserved; batch verification and development builds use an isolated checkout from current `main`. macOS synthetic pointer evidence is separate from physical-mobile validation.

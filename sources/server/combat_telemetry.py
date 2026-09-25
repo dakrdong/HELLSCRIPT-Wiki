@@ -13,6 +13,7 @@ import os
 import re
 import sqlite3
 import time
+from contextlib import closing
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -121,7 +122,7 @@ def validate(record):
 class Repository:
     def __init__(self, path):
         self.path = str(path)
-        with self.connect() as db:
+        with closing(self.connect()) as db, db:
             db.executescript("""
                 CREATE TABLE IF NOT EXISTS runs (
                   account_id TEXT NOT NULL, run_id TEXT NOT NULL, payload_hash TEXT NOT NULL,
@@ -168,7 +169,7 @@ class Repository:
             raise Rejected(422, "shape")
         j, run_id = record["journal"], record["id"]
         now_ms = int(time.time() * 1000) if now_ms is None else now_ms
-        with self.connect() as db:
+        with closing(self.connect()) as db, db:
             db.execute("BEGIN IMMEDIATE")
             previous = db.execute("SELECT payload_hash FROM runs WHERE account_id=? AND run_id=?", (account_id, run_id)).fetchone()
             if previous:
@@ -196,7 +197,7 @@ class Repository:
         No HTTP route exposes this method. Evidence must be server-owned replay results,
         admission seed/configuration, lease, sequence/ticks, rewards and rejection codes.
         """
-        with self.connect() as db:
+        with closing(self.connect()) as db, db:
             db.execute("INSERT INTO authority_evidence VALUES(?,?,?,?) ON CONFLICT(account_id,run_id) DO UPDATE SET revision=excluded.revision,evidence_json=excluded.evidence_json WHERE excluded.revision>authority_evidence.revision",
                        (account_id, run_id, revision, json.dumps(evidence, ensure_ascii=False)))
 

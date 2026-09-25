@@ -63,6 +63,35 @@
 
 운영 서비스의 주소·로그인 세션 어댑터·서버 입장/보상 저장소는 이 작업 시점에 연결되어 있지 않다. 운영 반영 때 TLS·인증·요청 제한·백업·보관 정책과 재연산 워커를 실제 호스트에 연결해야 한다. 로컬 HTTP 검증을 운영 서버 수집 완료로 간주하지 않는다.
 
+## 소규모 QA용 Railway 배포
+
+저장소 루트의 `Dockerfile`은 Python 3.12와 Gunicorn 26.2.0으로 **전투 기록 수신 API만** 실행한다. `.dockerignore`는 필요한 서버 파일만 허용하므로 Unity 에셋·저장 파일·개발 위키·로컬 자격 증명은 이미지에 들어가지 않는다. `server/telemetry_wsgi.py`는 기존 `Repository`의 검증과 트랜잭션을 재사용한다. 일반 접근 로그에는 전투 본문이나 인증 헤더를 출력하지 않는다.
+
+Railway에서 GitHub 저장소의 `main`을 연결한 서비스에 다음 값을 설정한다. 이 표는 배포 설정이며, 실제 서비스 생성·배포 성공을 뜻하지 않는다.
+
+| 설정 | 값과 이유 |
+| --- | --- |
+| Root Directory / Dockerfile | 저장소 루트 / `Dockerfile`. Unity 빌드 명령을 지정하지 않는다. |
+| 시작 명령 | 비워 두고 이미지의 Gunicorn 명령을 사용한다. `0.0.0.0:$PORT`에 수신하며 기본 포트는 8080이다. |
+| Volume | `/data`에 영구 볼륨을 연결한다. DB는 `/data/hellscript/telemetry.sqlite`와 같은 경로의 WAL 파일을 사용한다. |
+| Healthcheck | `/healthz`, GET. 인증 정보를 노출하지 않고 기존 DB의 조회 가능 여부를 확인한다. |
+| Replicas | 1. SQLite 영구 볼륨을 여러 복제본에 공유하지 않는다. |
+| 재시작 | 실패 시 재시작, 최대 5회. 잘못된 설정은 자동 복구로 숨기지 않는다. |
+| 자동 배포 대상 | `main`. Watch Paths는 `server/**`, `Dockerfile`, `.dockerignore`로 좁힐 수 있다. |
+| 인증 변수 | `HELLSCRIPT_TELEMETRY_TOKENS`에 강한 토큰과 QA 계정 ID의 JSON 대응표를 비밀 변수로 넣는다. |
+
+토큰은 `secrets.token_urlsafe(32)` 등으로 발급한 테스터별 값으로 준비한다. 토큰 키는 영문·숫자·밑줄·하이픈 32~256자, QA 계정 ID는 해당 문자와 점·콜론으로 이루어진 1~128자이며 실명·이메일을 사용하지 않는다. 공통 토큰을 게임에 넣거나 저장소·공개 위키에 실제 값을 기록하지 않는다. 같은 계정에 새 토큰을 추가한 뒤 이전 토큰을 제거하면 순차 교체할 수 있다. 이 QA 대응표는 정식 로그인·단기 토큰 발급 시스템을 대신하지 않는다.
+
+Railway가 주입한 `RAILWAY_VOLUME_MOUNT_PATH`를 사용한다. Railway 환경에서 볼륨 변수가 없거나 DB 경로가 볼륨 밖이면 시작을 거부한다. 로컬 실행에는 절대 경로의 `HELLSCRIPT_TELEMETRY_DATA_DIR`를 별도로 지정한다. 인증표가 비었거나 잘못되어도 시작을 거부한다. 요청은 인증 후 JSON 형식·16 MiB 제한과 기존 스키마를 검사하고, DB 커밋 이후 ACK한다. 조회·관리·보상 지급 API는 공개하지 않는다.
+
+처음 배포할 때 HTTPS 도메인과 `/healthz`를 확인하고, 별도로 표시한 합성 QA 자료로 인증 거절·저장·동일 본문 재전송을 검사한다. 재배포 후에도 같은 ACK와 DB 행이 유지되는지 확인한 뒤 테스터 업로드를 연결한다. 클라이언트의 `ICombatTelemetrySession` 설정 전에는 실제 게임 자료가 전송되지 않는다. SQLite 볼륨을 사용하는 재배포에는 짧은 중단이 생길 수 있으며 클라이언트 대기열이 재시도한다.
+
+QA를 시작하기 전에 Railway 볼륨의 자동 백업을 켜고 복원 경로를 확인한다. 실행 중인 SQLite를 파일로 백업할 때는 SQLite backup API를 사용해야 하며 DB 파일만 복사하고 WAL을 빠뜨리면 안 된다. 서버 수집본은 플레이어의 최근 100회 제한과 별개로 보관한다. 볼륨 사용량과 과금 알림을 확인하고, 장기 보관·삭제 기간은 QA 운영 정책으로 따로 정한다. 자동 제재나 보상 확정에는 여전히 서버 소유 입장 자료와 재연산이 필요하다.
+
+배포 어댑터는 기존 서버 검사와 함께 **19/19** 검사를 통과했다. 실제 Gunicorn 프로세스에 HTTP 요청을 보낸 뒤 종료·재시작하여 동일 ACK와 단일 DB 행의 유지를 확인했다. `.github/workflows/telemetry.yml`은 Python 검사와 Docker 이미지 빌드를 수행한다. 로컬에 Docker 실행기가 없으므로 컨테이너 빌드 결과와 Railway 배포 결과는 별도로 확인해야 한다.
+
+참고: [Railway 볼륨](https://docs.railway.com/volumes/reference), [Infrastructure as Code](https://docs.railway.com/infrastructure-as-code). 기존 `railway.toml`/`railway.json` 방식은 폐기 예정이며 신규 서비스에서 사용할 수 없으므로 이번 배포에는 추가하지 않는다. 필요하면 실제 프로젝트를 가져와 최신 IaC 방식으로 관리한다.
+
 ## 검증과 전달 범위
 
 검사 결과와 macOS 화면 증거는 `CombatJournalEvidence/`에 기록한다. 원래 작업 폴더의 사용자 변경과 실행 중인 Editor를 보존하고, 최신 `main`에서 만든 별도 작업 폴더에서 Unity 배치 검사와 개발 빌드를 수행한다. macOS 포인터 합성 검사는 모바일 실기기 검사와 구분한다.
