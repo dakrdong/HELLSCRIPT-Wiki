@@ -49,7 +49,7 @@ namespace Hellscript
         public void Choose(int index)
         {
             if(session.Entering||game.UI.CommonPanelOpen||!state.Choose(game.Store.Data,index))return;
-            game.Audio?.Play(SoundCue.Select);ready=false;Refresh();
+            game.Audio?.Play("char.select."+GameAudio.ClassKey(game.Store.Data.heroes[state.Selected].heroClass));ready=false;Refresh();
         }
         void Back(){if(session.Entering)return;game.UI.ShowTitle();}
         void Refresh()
@@ -71,7 +71,7 @@ namespace Hellscript
         void StartGame()
         {
             if(!Stage.Ready||session.Entering||!session.SignedIn||!game.CommitEntryCharacter(state.Selected))return;
-            if(!session.BeginEntry())return;Refresh();StartCoroutine(Enter());
+            if(!session.BeginEntry())return;game.Audio?.Play("flow.game_start");Refresh();StartCoroutine(Enter());
         }
         IEnumerator Enter()
         {
@@ -133,7 +133,7 @@ namespace Hellscript
             var frame=border.gameObject.AddComponent<TitleFrameGraphic>();frame.color=Gold;frame.raycastTarget=false;
             var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=image;
             var t=Caption(r,"Caption",label,size,Bone);t.rectTransform.anchorMin=Vector2.zero;t.rectTransform.anchorMax=Vector2.one;t.rectTransform.offsetMin=new Vector2(8,3);t.rectTransform.offsetMax=new Vector2(-8,-3);
-            UiTheme.Button(b,primary);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
+            UiTheme.Button(b,primary);b.onClick.AddListener(()=>action());return b;
         }
     }
 }

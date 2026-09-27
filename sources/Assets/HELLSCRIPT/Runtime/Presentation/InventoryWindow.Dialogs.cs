@@ -55,7 +55,7 @@ namespace Hellscript
         }
         void ShowError(string value)
         {
-            Toast(value);
+            GameAudio.Refuse();Toast(value);
             if(dialog!=null){ClosePopover();popover=Panel(overlays,"Inventory notice","3d2b1d","292317","ae8256");float w=Mathf.Min(width-32,330);Place(popover,(width-w)/2,height/2-75,w,150);Txt(popover,value,14,12,w-28,84,12,red);Btn(popover,"확인",w-91,106,77,31,ClosePopover,true).name="inventory-notice-close";}
         }
         public void ShowComparison(string id)

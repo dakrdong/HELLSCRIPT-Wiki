@@ -55,7 +55,7 @@ namespace Hellscript
         {
             SetCaption(login,Loc.T(Session.SignedIn&&!Session.Guest?"Google 계정":"Google로 계속"));
             SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("게스트로 계속"));
-            guest.onClick.RemoveAllListeners();guest.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);GuestAction();});
+            guest.onClick.RemoveAllListeners();guest.onClick.AddListener(GuestAction);
             SetCaption(server,Loc.F("{0}   ·   {1}   ›",TitleSession.ServerNames[Session.Server],TitleSession.ServerStates[Session.Server]));
             SetCaption(motion,Loc.T(Session.MotionEnabled?"연출 켜짐":"연출 멈춤"));
             SetCaption(enter,Loc.T("캐릭터 선택하기"));
@@ -74,12 +74,12 @@ namespace Hellscript
         void GuestAction()
         {
             if(Session.SignedIn){if(!game.SignOutAccount())game.UI.ShowToast(game.Notice);Refresh();return;}
-            if(!game.EnterAsGuest())game.UI.ShowToast(game.Notice);
+            if(!game.EnterAsGuest())game.UI.ShowToast(game.Notice);else game.Audio?.Play("flow.title_start");
         }
         void Enter()
         {
             if(!Session.SignedIn){ShowLogin();return;}
-            game.UI.OpenCharacterSelection();
+            game.Audio?.Play("flow.title_start");game.UI.OpenCharacterSelection();
         }
         void Update()
         {
@@ -161,7 +161,7 @@ namespace Hellscript
             var r=Plate(id,parent,primary?Red:Slate);var button=r.gameObject.AddComponent<UiButton>();button.targetGraphic=r.GetComponent<Image>();
 
             var label=Caption(r,"Caption",text,fontSize,primary?Bone:Muted);Fill(label.rectTransform);label.rectTransform.offsetMin=new Vector2(12,3);label.rectTransform.offsetMax=new Vector2(-12,-3);
-            UiTheme.Button(button,primary);button.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return button;
+            UiTheme.Button(button,primary);button.onClick.AddListener(()=>action());return button;
         }
         Button GoogleButton(Transform parent,string id,string text,Action action,int fontSize,float read)
         {

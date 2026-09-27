@@ -2,6 +2,8 @@
 
 Date: 2026-09-13 · [한국어](Audio_Skill_Presentation.md)
 
+> Updated 2026-09-26: sound effects now come from the new bank described in [Sound effects replacement](Sound_Effects_Bank.en.md). The temporary synthesized cues below describe the earlier state; the music and the sound settings screen are unchanged.
+
 Following the owner's priority of finishing gameplay, this batch fills the missing audio and makes skill shapes recognizable with primitives, lines and short body/weapon motions. It creates no new image assets, production models or animation packs. Combat numbers and reward randomness remain unchanged.
 
 ## Audio and settings

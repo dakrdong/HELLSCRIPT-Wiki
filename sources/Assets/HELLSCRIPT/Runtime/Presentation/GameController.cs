@@ -52,7 +52,7 @@ namespace Hellscript
             GoogleLogin=gameObject.AddComponent<GoogleLoginClient>();deviceSaveDirectory=saveDirectory;
             GameServerConnection.Configure(this,saveDirectory);
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
-            Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);
+            Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);Audio.Watch(Store);
             UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);
         }
         public void SelectHero(int index)
@@ -130,7 +130,7 @@ namespace Hellscript
             FirstPlayGuide.Enter(Store.Data,Combat.State,resume);TutorialProgress.Enter(Store.Data,Combat.State,resume);
             Combat.Visual+=World.Effect;Combat.GateOpened+=UI.ShowToast;
             if(DisplayDimmed)World.DeferDungeon();else{World.BuildDungeon(Combat.State);UI.ShowBattle();}
-            RestoreForegroundClock();resultDelay=0;resultShown=false;Save();
+            RestoreForegroundClock();resultDelay=0;resultShown=false;Save();Audio?.RunStarted();
         }
         System.Collections.IEnumerator RefreshLiveOpsAndBegin(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat,float riftSpeed)
         {
@@ -234,7 +234,7 @@ namespace Hellscript
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();
             Comparison=null;ComparisonError="";
             if(Combat!=null){if(Active)Combat.Abandon();Combat.Visual-=World.Effect;Combat=null;}
-            Store.Data.suspendedRun=null;Store.Data.repeatHunt=null;repeatRestored=false;World.ClearDungeon();Save();UI.ShowTown();
+            Store.Data.suspendedRun=null;Store.Data.repeatHunt=null;repeatRestored=false;World.ClearDungeon();Save();UI.ShowTown();Audio?.Play("flow.rift_exit");
             VisitSanctuary(visit);
         }
         public void EditBuild()

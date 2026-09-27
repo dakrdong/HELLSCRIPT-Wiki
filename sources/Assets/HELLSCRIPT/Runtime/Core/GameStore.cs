@@ -309,13 +309,13 @@ namespace Hellscript
             Normalize(staged);
             try
             {
-                if(!mutation(staged)){Error="소유권·보호 상태·재화·가방 공간을 확인해 주세요.";return false;}
+                if(!mutation(staged)){Error="소유권·보호 상태·재화·가방 공간을 확인해 주세요.";return Refuse(operation);}
                 Tutorials.ObserveTransaction(staged,operation);
                 staged.transactions.Add(new EconomyReceipt{requestId=requestId,operation=operation,committedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()});
                 ContentUnlocks.Reconcile(staged);ValidateItems(staged);staged.lastSeenUtc=settlingLocalIdle?Math.Max(staged.lastSeenUtc,pendingLocalIdleThrough.Value):SeenNow();
             }
-            catch(Exception e){Error=Loc.F("거래를 적용하지 않았습니다: {0}", e.Message);return false;}
-            if(!Write(staged))return false;
+            catch(Exception e){Error=Loc.F("거래를 적용하지 않았습니다: {0}", e.Message);return Refuse(operation);}
+            if(!Write(staged))return Refuse(operation);
             // The simulation holds the account and hero objects; retain their identities during portal cleanup.
             for(int i=0;i<Data.heroes.Count;i++)
             {

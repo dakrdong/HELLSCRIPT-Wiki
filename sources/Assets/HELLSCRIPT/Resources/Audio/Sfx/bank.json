@@ -1,0 +1,4437 @@
+{
+ "revision": "hellscript-sfx-v1",
+ "sampleRate": 48000,
+ "sounds": [
+  {
+   "id": "ui.click",
+   "ko": "버튼 누름",
+   "en": "Button press",
+   "category": "ui",
+   "clips": [
+    "ui_click_1",
+    "ui_click_2",
+    "ui_click_3",
+    "ui_click_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.04,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.click_primary",
+   "ko": "주요 버튼",
+   "en": "Primary button",
+   "category": "ui",
+   "clips": [
+    "ui_click_primary_1",
+    "ui_click_primary_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.04,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.click_heavy",
+   "ko": "위험 행동 버튼",
+   "en": "Destructive button",
+   "category": "ui",
+   "clips": [
+    "ui_click_heavy_1",
+    "ui_click_heavy_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.04,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.tab",
+   "ko": "탭·선택지 전환",
+   "en": "Tab / option",
+   "category": "ui",
+   "clips": [
+    "ui_tab_1",
+    "ui_tab_2",
+    "ui_tab_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.04,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.disabled",
+   "ko": "비활성 버튼",
+   "en": "Unavailable button",
+   "category": "ui",
+   "clips": [
+    "ui_disabled_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.04,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.open",
+   "ko": "창 열기",
+   "en": "Window open",
+   "category": "ui",
+   "clips": [
+    "ui_open_1",
+    "ui_open_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.12,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.close",
+   "ko": "창 닫기",
+   "en": "Window close",
+   "category": "ui",
+   "clips": [
+    "ui_close_1",
+    "ui_close_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.12,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.confirm",
+   "ko": "확정·성공",
+   "en": "Confirm / success",
+   "category": "ui",
+   "clips": [
+    "ui_confirm_1",
+    "ui_confirm_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.1,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.error",
+   "ko": "거절·실패",
+   "en": "Rejected",
+   "category": "ui",
+   "clips": [
+    "ui_error_1",
+    "ui_error_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.18,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.slider",
+   "ko": "슬라이더 조절",
+   "en": "Slider tick",
+   "category": "ui",
+   "clips": [
+    "ui_slider_1",
+    "ui_slider_2",
+    "ui_slider_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ui.notify",
+   "ko": "알림",
+   "en": "Notice",
+   "category": "ui",
+   "clips": [
+    "ui_notify_1",
+    "ui_notify_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.blade",
+   "ko": "칼날 무기 집기",
+   "en": "Pick up blade weapon",
+   "category": "item",
+   "clips": [
+    "item_pick_blade_1",
+    "item_pick_blade_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.blade",
+   "ko": "칼날 무기 장착",
+   "en": "Equip blade weapon",
+   "category": "item",
+   "clips": [
+    "item_equip_blade_1",
+    "item_equip_blade_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.plate",
+   "ko": "판금 방어구 집기",
+   "en": "Pick up plate armor",
+   "category": "item",
+   "clips": [
+    "item_pick_plate_1",
+    "item_pick_plate_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.plate",
+   "ko": "판금 방어구 장착",
+   "en": "Equip plate armor",
+   "category": "item",
+   "clips": [
+    "item_equip_plate_1",
+    "item_equip_plate_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.leather",
+   "ko": "가죽 장비 집기",
+   "en": "Pick up leather gear",
+   "category": "item",
+   "clips": [
+    "item_pick_leather_1",
+    "item_pick_leather_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.leather",
+   "ko": "가죽 장비 장착",
+   "en": "Equip leather gear",
+   "category": "item",
+   "clips": [
+    "item_equip_leather_1",
+    "item_equip_leather_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.jewelry",
+   "ko": "장신구 집기",
+   "en": "Pick up jewelry",
+   "category": "item",
+   "clips": [
+    "item_pick_jewelry_1",
+    "item_pick_jewelry_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.jewelry",
+   "ko": "장신구 장착",
+   "en": "Equip jewelry",
+   "category": "item",
+   "clips": [
+    "item_equip_jewelry_1",
+    "item_equip_jewelry_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.bow",
+   "ko": "활 집기",
+   "en": "Pick up bow",
+   "category": "item",
+   "clips": [
+    "item_pick_bow_1",
+    "item_pick_bow_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.bow",
+   "ko": "활 장착",
+   "en": "Equip bow",
+   "category": "item",
+   "clips": [
+    "item_equip_bow_1",
+    "item_equip_bow_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.staff",
+   "ko": "지팡이·완드 집기",
+   "en": "Pick up staff / wand",
+   "category": "item",
+   "clips": [
+    "item_pick_staff_1",
+    "item_pick_staff_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.staff",
+   "ko": "지팡이·완드 장착",
+   "en": "Equip staff / wand",
+   "category": "item",
+   "clips": [
+    "item_equip_staff_1",
+    "item_equip_staff_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.orb",
+   "ko": "보주 집기",
+   "en": "Pick up orb",
+   "category": "item",
+   "clips": [
+    "item_pick_orb_1",
+    "item_pick_orb_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.orb",
+   "ko": "보주 장착",
+   "en": "Equip orb",
+   "category": "item",
+   "clips": [
+    "item_equip_orb_1",
+    "item_equip_orb_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.paper",
+   "ko": "두루마리 집기",
+   "en": "Pick up scroll",
+   "category": "item",
+   "clips": [
+    "item_pick_paper_1",
+    "item_pick_paper_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.paper",
+   "ko": "두루마리 장착",
+   "en": "Equip scroll",
+   "category": "item",
+   "clips": [
+    "item_equip_paper_1",
+    "item_equip_paper_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.shield",
+   "ko": "방패 집기",
+   "en": "Pick up shield",
+   "category": "item",
+   "clips": [
+    "item_pick_shield_1",
+    "item_pick_shield_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.equip.shield",
+   "ko": "방패 장착",
+   "en": "Equip shield",
+   "category": "item",
+   "clips": [
+    "item_equip_shield_1",
+    "item_equip_shield_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.place",
+   "ko": "가방에 내려놓기",
+   "en": "Place in bag",
+   "category": "item",
+   "clips": [
+    "item_place_1",
+    "item_place_2",
+    "item_place_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.lock",
+   "ko": "잠금",
+   "en": "Lock item",
+   "category": "item",
+   "clips": [
+    "item_lock_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.unlock",
+   "ko": "잠금 해제",
+   "en": "Unlock item",
+   "category": "item",
+   "clips": [
+    "item_unlock_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.salvage",
+   "ko": "아이템 분해",
+   "en": "Salvage item",
+   "category": "item",
+   "clips": [
+    "item_salvage_1",
+    "item_salvage_2",
+    "item_salvage_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.12,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.salvage_bulk",
+   "ko": "일괄 분해",
+   "en": "Bulk salvage",
+   "category": "item",
+   "clips": [
+    "item_salvage_bulk_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.3,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.discard",
+   "ko": "아이템 버리기",
+   "en": "Discard item",
+   "category": "item",
+   "clips": [
+    "item_discard_1",
+    "item_discard_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.sort",
+   "ko": "정렬",
+   "en": "Sort items",
+   "category": "item",
+   "clips": [
+    "item_sort_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "gold.pickup",
+   "ko": "골드 획득",
+   "en": "Gold pickup",
+   "category": "economy",
+   "clips": [
+    "gold_pickup_1",
+    "gold_pickup_2",
+    "gold_pickup_3",
+    "gold_pickup_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.06,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "gold.pickup_large",
+   "ko": "많은 골드 획득",
+   "en": "Large gold pickup",
+   "category": "economy",
+   "clips": [
+    "gold_pickup_large_1",
+    "gold_pickup_large_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.15,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "gold.spend",
+   "ko": "골드 지불",
+   "en": "Spend gold",
+   "category": "economy",
+   "clips": [
+    "gold_spend_1",
+    "gold_spend_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "gold.gain",
+   "ko": "골드 받기",
+   "en": "Receive gold",
+   "category": "economy",
+   "clips": [
+    "gold_gain_1",
+    "gold_gain_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.material",
+   "ko": "재료 획득",
+   "en": "Material pickup",
+   "category": "economy",
+   "clips": [
+    "loot_material_1",
+    "loot_material_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.core",
+   "ko": "코어 획득",
+   "en": "Core pickup",
+   "category": "economy",
+   "clips": [
+    "loot_core_1",
+    "loot_core_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.stone",
+   "ko": "강화석 획득",
+   "en": "Enhancement stone pickup",
+   "category": "economy",
+   "clips": [
+    "loot_stone_1",
+    "loot_stone_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.gem",
+   "ko": "보석 획득",
+   "en": "Gem pickup",
+   "category": "economy",
+   "clips": [
+    "loot_gem_1",
+    "loot_gem_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.bag_full",
+   "ko": "가방 가득 참",
+   "en": "Bag full",
+   "category": "economy",
+   "clips": [
+    "loot_bag_full_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.5,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.drop.normal",
+   "ko": "일반 장비 떨어짐",
+   "en": "Common item drops",
+   "category": "loot",
+   "clips": [
+    "loot_drop_normal_1",
+    "loot_drop_normal_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.drop.magic",
+   "ko": "마법 장비 떨어짐",
+   "en": "Magic item drops",
+   "category": "loot",
+   "clips": [
+    "loot_drop_magic_1",
+    "loot_drop_magic_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.drop.rare",
+   "ko": "희귀 장비 떨어짐",
+   "en": "Rare item drops",
+   "category": "loot",
+   "clips": [
+    "loot_drop_rare_1",
+    "loot_drop_rare_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.drop.legendary",
+   "ko": "전설 장비 떨어짐",
+   "en": "Legendary item drops",
+   "category": "loot",
+   "clips": [
+    "loot_drop_legendary_1",
+    "loot_drop_legendary_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.6,
+   "priority": 100,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.drop.special",
+   "ko": "세트·고유 장비 떨어짐",
+   "en": "Set / unique item drops",
+   "category": "loot",
+   "clips": [
+    "loot_drop_special_1",
+    "loot_drop_special_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.6,
+   "priority": 100,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "shop.gamble_beat",
+   "ko": "도박 공개 두근거림",
+   "en": "Gamble reveal beat",
+   "category": "town",
+   "clips": [
+    "shop_gamble_beat_1",
+    "shop_gamble_beat_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.reroll",
+   "ko": "옵션 변경",
+   "en": "Enchant reroll",
+   "category": "town",
+   "clips": [
+    "forge_reroll_1",
+    "forge_reroll_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.reroll_jackpot",
+   "ko": "원하는 옵션 획득",
+   "en": "Reroll jackpot",
+   "category": "town",
+   "clips": [
+    "forge_reroll_jackpot_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.enhance",
+   "ko": "장비 강화",
+   "en": "Gear enhancement",
+   "category": "town",
+   "clips": [
+    "forge_enhance_1",
+    "forge_enhance_2",
+    "forge_enhance_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.upgrade_start",
+   "ko": "장비 슬롯 강화 시작",
+   "en": "Forge job start",
+   "category": "town",
+   "clips": [
+    "forge_upgrade_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.upgrade_done",
+   "ko": "장비 슬롯 강화 완료",
+   "en": "Forge job complete",
+   "category": "town",
+   "clips": [
+    "forge_upgrade_done_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.masterwork",
+   "ko": "명작 강화",
+   "en": "Masterwork upgrade",
+   "category": "town",
+   "clips": [
+    "forge_masterwork_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.unlock",
+   "ko": "대장간 작업대 개방",
+   "en": "Forge station unlock",
+   "category": "town",
+   "clips": [
+    "forge_unlock_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.core_craft",
+   "ko": "코어 제작",
+   "en": "Core crafting",
+   "category": "town",
+   "clips": [
+    "forge_core_craft_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "forge.core_invest",
+   "ko": "코어 투입",
+   "en": "Core investment",
+   "category": "town",
+   "clips": [
+    "forge_core_invest_1",
+    "forge_core_invest_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "gem.socket",
+   "ko": "보석 장착",
+   "en": "Socket gem",
+   "category": "town",
+   "clips": [
+    "gem_socket_1",
+    "gem_socket_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "gem.remove",
+   "ko": "보석 제거",
+   "en": "Remove gem",
+   "category": "town",
+   "clips": [
+    "gem_remove_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "gem.fuse",
+   "ko": "보석 합성",
+   "en": "Fuse gems",
+   "category": "town",
+   "clips": [
+    "gem_fuse_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "gem.open_socket",
+   "ko": "소켓 뚫기",
+   "en": "Open socket",
+   "category": "town",
+   "clips": [
+    "gem_open_socket_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "rune.place",
+   "ko": "룬 배치",
+   "en": "Place rune",
+   "category": "town",
+   "clips": [
+    "rune_place_1",
+    "rune_place_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "rune.rotate",
+   "ko": "룬 회전",
+   "en": "Rotate rune",
+   "category": "town",
+   "clips": [
+    "rune_rotate_1",
+    "rune_rotate_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "rune.remove",
+   "ko": "룬 제거",
+   "en": "Remove rune",
+   "category": "town",
+   "clips": [
+    "rune_remove_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "rune.fuse",
+   "ko": "룬 융합",
+   "en": "Fuse runes",
+   "category": "town",
+   "clips": [
+    "rune_fuse_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "rune.ascend",
+   "ko": "룬 승급",
+   "en": "Rune ascension",
+   "category": "town",
+   "clips": [
+    "rune_ascend_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "rune.unlock",
+   "ko": "룬 칸 개방",
+   "en": "Unlock rune cell",
+   "category": "town",
+   "clips": [
+    "rune_unlock_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "aspect.imprint",
+   "ko": "위상 각인",
+   "en": "Imprint aspect",
+   "category": "town",
+   "clips": [
+    "aspect_imprint_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "aspect.upgrade",
+   "ko": "위상 강화",
+   "en": "Upgrade aspect",
+   "category": "town",
+   "clips": [
+    "aspect_upgrade_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "reward.box_open",
+   "ko": "보상 상자 열기",
+   "en": "Open reward box",
+   "category": "town",
+   "clips": [
+    "reward_box_open_1",
+    "reward_box_open_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "reward.claim",
+   "ko": "보상 받기",
+   "en": "Claim reward",
+   "category": "town",
+   "clips": [
+    "reward_claim_1",
+    "reward_claim_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "reward.chest",
+   "ko": "출석 보물 상자",
+   "en": "Attendance chest",
+   "category": "town",
+   "clips": [
+    "reward_chest_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.08,
+   "priority": 75,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "flow.title_start",
+   "ko": "게임 입장",
+   "en": "Enter the game",
+   "category": "flow",
+   "clips": [
+    "flow_title_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.game_start",
+   "ko": "모험 시작",
+   "en": "Begin adventure",
+   "category": "flow",
+   "clips": [
+    "flow_game_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "char.select.warrior",
+   "ko": "전사 선택",
+   "en": "Warrior selected",
+   "category": "flow",
+   "clips": [
+    "char_select_warrior_1",
+    "char_select_warrior_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.2,
+   "priority": 80,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "char.select.mage",
+   "ko": "마법사 선택",
+   "en": "Mage selected",
+   "category": "flow",
+   "clips": [
+    "char_select_mage_1",
+    "char_select_mage_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.2,
+   "priority": 80,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "char.select.ranger",
+   "ko": "궁수 선택",
+   "en": "Ranger selected",
+   "category": "flow",
+   "clips": [
+    "char_select_ranger_1",
+    "char_select_ranger_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.2,
+   "priority": 80,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.rift_enter",
+   "ko": "균열 진입",
+   "en": "Enter rift",
+   "category": "flow",
+   "clips": [
+    "flow_rift_enter_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.rift_exit",
+   "ko": "마을 귀환",
+   "en": "Return to town",
+   "category": "flow",
+   "clips": [
+    "flow_rift_exit_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.portal_cast",
+   "ko": "귀환 차원문 시전",
+   "en": "Town portal channel",
+   "category": "flow",
+   "clips": [
+    "flow_portal_cast_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.victory",
+   "ko": "균열 정복",
+   "en": "Rift cleared",
+   "category": "flow",
+   "clips": [
+    "flow_victory_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.defeat",
+   "ko": "균열 실패",
+   "en": "Rift failed",
+   "category": "flow",
+   "clips": [
+    "flow_defeat_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.level_up",
+   "ko": "레벨 업",
+   "en": "Level up",
+   "category": "flow",
+   "clips": [
+    "flow_level_up_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.skill_unlock",
+   "ko": "새 기능·스킬 개방",
+   "en": "New skill / feature unlocked",
+   "category": "flow",
+   "clips": [
+    "flow_skill_unlock_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.tutorial",
+   "ko": "안내",
+   "en": "Tutorial prompt",
+   "category": "flow",
+   "clips": [
+    "flow_tutorial_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.4,
+   "priority": 60,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.objective",
+   "ko": "목표 달성",
+   "en": "Objective complete",
+   "category": "flow",
+   "clips": [
+    "flow_objective_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "flow.gate_open",
+   "ko": "보스 관문 개방",
+   "en": "Boss gate opens",
+   "category": "flow",
+   "clips": [
+    "flow_gate_open_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.0,
+   "cooldown": 0.5,
+   "priority": 95,
+   "limit": 1,
+   "group": ""
+  },
+  {
+   "id": "warrior.swing",
+   "ko": "전사 기본 공격",
+   "en": "Warrior basic swing",
+   "category": "skill",
+   "clips": [
+    "warrior_swing_1",
+    "warrior_swing_2",
+    "warrior_swing_3",
+    "warrior_swing_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 60,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "ranger.shot",
+   "ko": "궁수 기본 공격",
+   "en": "Ranger basic shot",
+   "category": "skill",
+   "clips": [
+    "ranger_shot_1",
+    "ranger_shot_2",
+    "ranger_shot_3",
+    "ranger_shot_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 60,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "mage.bolt",
+   "ko": "마법사 기본 공격",
+   "en": "Mage basic bolt",
+   "category": "skill",
+   "clips": [
+    "mage_bolt_1",
+    "mage_bolt_2",
+    "mage_bolt_3",
+    "mage_bolt_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 60,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "hit.slash",
+   "ko": "베기 적중",
+   "en": "Slash hit",
+   "category": "hit",
+   "clips": [
+    "hit_slash_1",
+    "hit_slash_2",
+    "hit_slash_3",
+    "hit_slash_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.pierce",
+   "ko": "관통 적중",
+   "en": "Arrow hit",
+   "category": "hit",
+   "clips": [
+    "hit_pierce_1",
+    "hit_pierce_2",
+    "hit_pierce_3",
+    "hit_pierce_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.blunt",
+   "ko": "강타 적중",
+   "en": "Heavy hit",
+   "category": "hit",
+   "clips": [
+    "hit_blunt_1",
+    "hit_blunt_2",
+    "hit_blunt_3",
+    "hit_blunt_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.fire",
+   "ko": "화염 적중",
+   "en": "Fire hit",
+   "category": "hit",
+   "clips": [
+    "hit_fire_1",
+    "hit_fire_2",
+    "hit_fire_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.cold",
+   "ko": "냉기 적중",
+   "en": "Cold hit",
+   "category": "hit",
+   "clips": [
+    "hit_cold_1",
+    "hit_cold_2",
+    "hit_cold_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.lightning",
+   "ko": "번개 적중",
+   "en": "Lightning hit",
+   "category": "hit",
+   "clips": [
+    "hit_lightning_1",
+    "hit_lightning_2",
+    "hit_lightning_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.poison",
+   "ko": "독 적중",
+   "en": "Poison hit",
+   "category": "hit",
+   "clips": [
+    "hit_poison_1",
+    "hit_poison_2",
+    "hit_poison_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.shadow",
+   "ko": "암흑 적중",
+   "en": "Shadow hit",
+   "category": "hit",
+   "clips": [
+    "hit_shadow_1",
+    "hit_shadow_2",
+    "hit_shadow_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.035,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hit.crit",
+   "ko": "치명타",
+   "en": "Critical hit",
+   "category": "hit",
+   "clips": [
+    "hit_crit_1",
+    "hit_crit_2",
+    "hit_crit_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.08,
+   "priority": 45,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "mat.bone",
+   "ko": "뼈 재질 적중",
+   "en": "Bone material",
+   "category": "hit",
+   "clips": [
+    "mat_bone_1",
+    "mat_bone_2",
+    "mat_bone_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.12,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "mat.metal",
+   "ko": "금속 재질 적중",
+   "en": "Metal material",
+   "category": "hit",
+   "clips": [
+    "mat_metal_1",
+    "mat_metal_2",
+    "mat_metal_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.12,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "mat.crystal",
+   "ko": "수정 재질 적중",
+   "en": "Crystal material",
+   "category": "hit",
+   "clips": [
+    "mat_crystal_1",
+    "mat_crystal_2",
+    "mat_crystal_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.12,
+   "priority": 25,
+   "limit": 4,
+   "group": ""
+  },
+  {
+   "id": "hero.hurt",
+   "ko": "영웅 피격",
+   "en": "Hero hurt",
+   "category": "hero",
+   "clips": [
+    "hero_hurt_1",
+    "hero_hurt_2",
+    "hero_hurt_3",
+    "hero_hurt_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.12,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "hero.block",
+   "ko": "막기",
+   "en": "Block",
+   "category": "hero",
+   "clips": [
+    "hero_block_1",
+    "hero_block_2",
+    "hero_block_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.1,
+   "priority": 55,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hero.dodge",
+   "ko": "회피",
+   "en": "Dodge",
+   "category": "hero",
+   "clips": [
+    "hero_dodge_1",
+    "hero_dodge_2",
+    "hero_dodge_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.1,
+   "priority": 55,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hero.absorb",
+   "ko": "보호막 흡수",
+   "en": "Barrier absorbs",
+   "category": "hero",
+   "clips": [
+    "hero_absorb_1",
+    "hero_absorb_2",
+    "hero_absorb_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.1,
+   "priority": 55,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hero.death",
+   "ko": "영웅 쓰러짐",
+   "en": "Hero falls",
+   "category": "hero",
+   "clips": [
+    "hero_death_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 1.0,
+   "priority": 100,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hero.heartbeat",
+   "ko": "빈사 심장 박동",
+   "en": "Low health heartbeat",
+   "category": "hero",
+   "clips": [
+    "hero_heartbeat_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 1.6,
+   "priority": 80,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hero.potion",
+   "ko": "물약 사용",
+   "en": "Drink potion",
+   "category": "hero",
+   "clips": [
+    "hero_potion_1",
+    "hero_potion_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.3,
+   "priority": 80,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "vo.warrior.effort",
+   "ko": "전사 기합",
+   "en": "Warrior effort",
+   "category": "voice",
+   "clips": [
+    "vo_warrior_effort_1",
+    "vo_warrior_effort_2",
+    "vo_warrior_effort_3",
+    "vo_warrior_effort_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.9,
+   "priority": 85,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.warrior.big",
+   "ko": "전사 필살 기합",
+   "en": "Warrior ultimate shout",
+   "category": "voice",
+   "clips": [
+    "vo_warrior_big_1",
+    "vo_warrior_big_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.5,
+   "priority": 90,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.warrior.battlecry",
+   "ko": "전사 함성",
+   "en": "Warrior battle cry",
+   "category": "voice",
+   "clips": [
+    "vo_warrior_battlecry_1",
+    "vo_warrior_battlecry_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 4.0,
+   "priority": 90,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.warrior.hurt",
+   "ko": "전사 신음",
+   "en": "Warrior pain",
+   "category": "voice",
+   "clips": [
+    "vo_warrior_hurt_1",
+    "vo_warrior_hurt_2",
+    "vo_warrior_hurt_3",
+    "vo_warrior_hurt_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.2,
+   "priority": 80,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.warrior.death",
+   "ko": "전사 죽음",
+   "en": "Warrior death cry",
+   "category": "voice",
+   "clips": [
+    "vo_warrior_death_1",
+    "vo_warrior_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 2.0,
+   "priority": 100,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.warrior.lowhp",
+   "ko": "전사 가쁜 숨",
+   "en": "Warrior gasping",
+   "category": "voice",
+   "clips": [
+    "vo_warrior_lowhp_1",
+    "vo_warrior_lowhp_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 3.0,
+   "priority": 75,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.ranger.effort",
+   "ko": "궁수 기합",
+   "en": "Ranger effort",
+   "category": "voice",
+   "clips": [
+    "vo_ranger_effort_1",
+    "vo_ranger_effort_2",
+    "vo_ranger_effort_3",
+    "vo_ranger_effort_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.9,
+   "priority": 85,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.ranger.big",
+   "ko": "궁수 필살 기합",
+   "en": "Ranger ultimate shout",
+   "category": "voice",
+   "clips": [
+    "vo_ranger_big_1",
+    "vo_ranger_big_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.5,
+   "priority": 90,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.ranger.battlecry",
+   "ko": "궁수 함성",
+   "en": "Ranger battle cry",
+   "category": "voice",
+   "clips": [
+    "vo_ranger_battlecry_1",
+    "vo_ranger_battlecry_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 4.0,
+   "priority": 90,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.ranger.hurt",
+   "ko": "궁수 신음",
+   "en": "Ranger pain",
+   "category": "voice",
+   "clips": [
+    "vo_ranger_hurt_1",
+    "vo_ranger_hurt_2",
+    "vo_ranger_hurt_3",
+    "vo_ranger_hurt_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.2,
+   "priority": 80,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.ranger.death",
+   "ko": "궁수 죽음",
+   "en": "Ranger death cry",
+   "category": "voice",
+   "clips": [
+    "vo_ranger_death_1",
+    "vo_ranger_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 2.0,
+   "priority": 100,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.ranger.lowhp",
+   "ko": "궁수 가쁜 숨",
+   "en": "Ranger gasping",
+   "category": "voice",
+   "clips": [
+    "vo_ranger_lowhp_1",
+    "vo_ranger_lowhp_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 3.0,
+   "priority": 75,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.mage.effort",
+   "ko": "마법사 기합",
+   "en": "Mage effort",
+   "category": "voice",
+   "clips": [
+    "vo_mage_effort_1",
+    "vo_mage_effort_2",
+    "vo_mage_effort_3",
+    "vo_mage_effort_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.9,
+   "priority": 85,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.mage.big",
+   "ko": "마법사 필살 기합",
+   "en": "Mage ultimate shout",
+   "category": "voice",
+   "clips": [
+    "vo_mage_big_1",
+    "vo_mage_big_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.5,
+   "priority": 90,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.mage.battlecry",
+   "ko": "마법사 함성",
+   "en": "Mage battle cry",
+   "category": "voice",
+   "clips": [
+    "vo_mage_battlecry_1",
+    "vo_mage_battlecry_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 4.0,
+   "priority": 90,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.mage.hurt",
+   "ko": "마법사 신음",
+   "en": "Mage pain",
+   "category": "voice",
+   "clips": [
+    "vo_mage_hurt_1",
+    "vo_mage_hurt_2",
+    "vo_mage_hurt_3",
+    "vo_mage_hurt_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 1.2,
+   "priority": 80,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.mage.death",
+   "ko": "마법사 죽음",
+   "en": "Mage death cry",
+   "category": "voice",
+   "clips": [
+    "vo_mage_death_1",
+    "vo_mage_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 2.0,
+   "priority": 100,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "vo.mage.lowhp",
+   "ko": "마법사 가쁜 숨",
+   "en": "Mage gasping",
+   "category": "voice",
+   "clips": [
+    "vo_mage_lowhp_1",
+    "vo_mage_lowhp_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 3.0,
+   "priority": 75,
+   "limit": 1,
+   "group": "vo.hero"
+  },
+  {
+   "id": "skill.W01",
+   "ko": "회오리 시작",
+   "en": "Whirlwind start",
+   "category": "skill",
+   "clips": [
+    "skill_W01_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W01.tick",
+   "ko": "회오리 회전",
+   "en": "Whirlwind spin",
+   "category": "skill",
+   "clips": [
+    "skill_W01_tick_1",
+    "skill_W01_tick_2",
+    "skill_W01_tick_3",
+    "skill_W01_tick_4"
+   ],
+   "volume": 1.0,
+   "pitch": 0.06,
+   "cooldown": 0.18,
+   "priority": 60,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "skill.W02",
+   "ko": "도약",
+   "en": "Leap takeoff",
+   "category": "skill",
+   "clips": [
+    "skill_W02_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W02.land",
+   "ko": "도약 내려찍기 착지",
+   "en": "Leap slam landing",
+   "category": "skill",
+   "clips": [
+    "skill_W02_land_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W03",
+   "ko": "분쇄 일격",
+   "en": "Crushing Blow",
+   "category": "skill",
+   "clips": [
+    "skill_W03_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W04",
+   "ko": "지면 강타",
+   "en": "Ground Slam",
+   "category": "skill",
+   "clips": [
+    "skill_W04_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W05",
+   "ko": "철벽",
+   "en": "Iron Wall",
+   "category": "skill",
+   "clips": [
+    "skill_W05_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W06",
+   "ko": "전투 함성",
+   "en": "Battle Shout",
+   "category": "skill",
+   "clips": [
+    "skill_W06_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W07",
+   "ko": "도발의 낙인",
+   "en": "Brand of Challenge",
+   "category": "skill",
+   "clips": [
+    "skill_W07_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W08",
+   "ko": "꿰뚫는 갈고리",
+   "en": "Impaling Hook",
+   "category": "skill",
+   "clips": [
+    "skill_W08_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W09",
+   "ko": "찢어낸 상처",
+   "en": "Raking Wound",
+   "category": "skill",
+   "clips": [
+    "skill_W09_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W10",
+   "ko": "피의 회수",
+   "en": "Blood Reclamation",
+   "category": "skill",
+   "clips": [
+    "skill_W10_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W11",
+   "ko": "결연한 전진",
+   "en": "Resolute Advance",
+   "category": "skill",
+   "clips": [
+    "skill_W11_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W12",
+   "ko": "무쇠 자세",
+   "en": "Iron Stance",
+   "category": "skill",
+   "clips": [
+    "skill_W12_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W13",
+   "ko": "전장의 고리",
+   "en": "Battlefield Ring",
+   "category": "skill",
+   "clips": [
+    "skill_W13_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W14",
+   "ko": "전율의 파동",
+   "en": "Tremor Wave",
+   "category": "skill",
+   "clips": [
+    "skill_W14_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W15",
+   "ko": "결전의 호흡",
+   "en": "Breath Before Battle",
+   "category": "skill",
+   "clips": [
+    "skill_W15_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W16",
+   "ko": "수호의 맹약",
+   "en": "Guardian's Vow",
+   "category": "skill",
+   "clips": [
+    "skill_W16_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W17",
+   "ko": "선조의 전쟁",
+   "en": "War of the Ancestors",
+   "category": "skill",
+   "clips": [
+    "skill_W17_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W17.hit",
+   "ko": "선조의 일격",
+   "en": "Ancestor strike",
+   "category": "skill",
+   "clips": [
+    "skill_W17_hit_1",
+    "skill_W17_hit_2",
+    "skill_W17_hit_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.25,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W18.start",
+   "ko": "거인의 심판 준비",
+   "en": "Titan's Judgment wind-up",
+   "category": "skill",
+   "clips": [
+    "skill_W18_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.W18",
+   "ko": "거인의 심판",
+   "en": "Titan's Judgment",
+   "category": "skill",
+   "clips": [
+    "skill_W18_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 90,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A01",
+   "ko": "관통 사격",
+   "en": "Piercing Shot",
+   "category": "skill",
+   "clips": [
+    "skill_A01_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A02",
+   "ko": "다중 사격",
+   "en": "Multishot",
+   "category": "skill",
+   "clips": [
+    "skill_A02_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A03",
+   "ko": "맹독 덫 설치",
+   "en": "Venom Trap set",
+   "category": "skill",
+   "clips": [
+    "skill_A03_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A03.trigger",
+   "ko": "맹독 덫 발동",
+   "en": "Venom Trap sprung",
+   "category": "skill",
+   "clips": [
+    "skill_A03_trigger_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A04",
+   "ko": "후퇴 도약",
+   "en": "Retreat Leap",
+   "category": "skill",
+   "clips": [
+    "skill_A04_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A05",
+   "ko": "사냥꾼의 표식",
+   "en": "Hunter's Mark",
+   "category": "skill",
+   "clips": [
+    "skill_A05_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A06",
+   "ko": "그림자 화살",
+   "en": "Shadow Arrow",
+   "category": "skill",
+   "clips": [
+    "skill_A06_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A07",
+   "ko": "잇단 사격",
+   "en": "Successive Shots",
+   "category": "skill",
+   "clips": [
+    "skill_A07_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A08.start",
+   "ko": "응시 사격 조준",
+   "en": "Patient Shot aim",
+   "category": "skill",
+   "clips": [
+    "skill_A08_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A08",
+   "ko": "응시 사격",
+   "en": "Patient Shot",
+   "category": "skill",
+   "clips": [
+    "skill_A08_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A09",
+   "ko": "가시 덫 설치",
+   "en": "Briar Trap set",
+   "category": "skill",
+   "clips": [
+    "skill_A09_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A09.hit",
+   "ko": "가시 덫 폭발",
+   "en": "Briar Trap burst",
+   "category": "skill",
+   "clips": [
+    "skill_A09_hit_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.25,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A10",
+   "ko": "서리 올가미 설치",
+   "en": "Frost Snare set",
+   "category": "skill",
+   "clips": [
+    "skill_A10_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A10.hit",
+   "ko": "서리 올가미 발동",
+   "en": "Frost Snare triggers",
+   "category": "skill",
+   "clips": [
+    "skill_A10_hit_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.25,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A11",
+   "ko": "미끼 투영",
+   "en": "Decoy Projection",
+   "category": "skill",
+   "clips": [
+    "skill_A11_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A11.hit",
+   "ko": "미끼 폭발",
+   "en": "Decoy detonates",
+   "category": "skill",
+   "clips": [
+    "skill_A11_hit_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A12",
+   "ko": "연막 엄폐",
+   "en": "Smoke Cover",
+   "category": "skill",
+   "clips": [
+    "skill_A12_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A13",
+   "ko": "독화살",
+   "en": "Venom Arrow",
+   "category": "skill",
+   "clips": [
+    "skill_A13_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A14",
+   "ko": "갈라지는 화살",
+   "en": "Forking Arrow",
+   "category": "skill",
+   "clips": [
+    "skill_A14_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A15",
+   "ko": "경계 쇠뇌 설치",
+   "en": "Watch Ballista deploy",
+   "category": "skill",
+   "clips": [
+    "skill_A15_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A15.hit",
+   "ko": "경계 쇠뇌 발사",
+   "en": "Ballista bolt",
+   "category": "skill",
+   "clips": [
+    "skill_A15_hit_1",
+    "skill_A15_hit_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A16",
+   "ko": "사냥 준비",
+   "en": "Hunt Preparation",
+   "category": "skill",
+   "clips": [
+    "skill_A16_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A17",
+   "ko": "일제 소탕",
+   "en": "Killing Rain",
+   "category": "skill",
+   "clips": [
+    "skill_A17_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A17.hit",
+   "ko": "화살비 착탄",
+   "en": "Arrow rain impacts",
+   "category": "skill",
+   "clips": [
+    "skill_A17_hit_1",
+    "skill_A17_hit_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.35,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A18",
+   "ko": "그림자 추격",
+   "en": "Shadow Pursuit",
+   "category": "skill",
+   "clips": [
+    "skill_A18_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.A18.hit",
+   "ko": "그림자 잔영 공격",
+   "en": "Shadow echo strike",
+   "category": "skill",
+   "clips": [
+    "skill_A18_hit_1",
+    "skill_A18_hit_2",
+    "skill_A18_hit_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M01",
+   "ko": "화염구 시전",
+   "en": "Fireball cast",
+   "category": "skill",
+   "clips": [
+    "skill_M01_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M01.hit",
+   "ko": "화염구 폭발",
+   "en": "Fireball explosion",
+   "category": "skill",
+   "clips": [
+    "skill_M01_hit_1",
+    "skill_M01_hit_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.12,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M02",
+   "ko": "눈보라",
+   "en": "Blizzard",
+   "category": "skill",
+   "clips": [
+    "skill_M02_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M03",
+   "ko": "연쇄 번개",
+   "en": "Chain Lightning",
+   "category": "skill",
+   "clips": [
+    "skill_M03_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M03.hop",
+   "ko": "번개 연쇄",
+   "en": "Lightning chain hop",
+   "category": "skill",
+   "clips": [
+    "skill_M03_hop_1",
+    "skill_M03_hop_2",
+    "skill_M03_hop_3"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.06,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M04",
+   "ko": "순간이동",
+   "en": "Teleport",
+   "category": "skill",
+   "clips": [
+    "skill_M04_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M05",
+   "ko": "원소 보호막",
+   "en": "Elemental Shield",
+   "category": "skill",
+   "clips": [
+    "skill_M05_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M06",
+   "ko": "서리 폭발",
+   "en": "Frost Nova",
+   "category": "skill",
+   "clips": [
+    "skill_M06_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M07",
+   "ko": "잿불창",
+   "en": "Ember Lance",
+   "category": "skill",
+   "clips": [
+    "skill_M07_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M08",
+   "ko": "화염 장벽",
+   "en": "Firewall",
+   "category": "skill",
+   "clips": [
+    "skill_M08_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M09",
+   "ko": "빙하창",
+   "en": "Glacial Lance",
+   "category": "skill",
+   "clips": [
+    "skill_M09_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M10",
+   "ko": "서리 구체",
+   "en": "Frost Globe",
+   "category": "skill",
+   "clips": [
+    "skill_M10_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M10.hit",
+   "ko": "서리 구체 폭발",
+   "en": "Frost Globe bursts",
+   "category": "skill",
+   "clips": [
+    "skill_M10_hit_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M11",
+   "ko": "축전 구체",
+   "en": "Capacitor Orb",
+   "category": "skill",
+   "clips": [
+    "skill_M11_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M11.hit",
+   "ko": "축전 구체 방전",
+   "en": "Capacitor Orb discharge",
+   "category": "skill",
+   "clips": [
+    "skill_M11_hit_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M12",
+   "ko": "번개 창",
+   "en": "Storm Spear",
+   "category": "skill",
+   "clips": [
+    "skill_M12_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M13",
+   "ko": "마력 회수",
+   "en": "Mana Reclaim",
+   "category": "skill",
+   "clips": [
+    "skill_M13_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M14",
+   "ko": "균열 결계",
+   "en": "Rift Ward",
+   "category": "skill",
+   "clips": [
+    "skill_M14_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M15",
+   "ko": "원소 나침반",
+   "en": "Elemental Compass",
+   "category": "skill",
+   "clips": [
+    "skill_M15_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M16",
+   "ko": "자력 소용돌이",
+   "en": "Magnetic Vortex",
+   "category": "skill",
+   "clips": [
+    "skill_M16_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 60,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M17",
+   "ko": "삼원소 붕괴",
+   "en": "Triune Collapse",
+   "category": "skill",
+   "clips": [
+    "skill_M17_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 90,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "skill.M18",
+   "ko": "현자의 화신",
+   "en": "Sage Incarnate",
+   "category": "skill",
+   "clips": [
+    "skill_M18_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.05,
+   "priority": 90,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N01.windup",
+   "ko": "쇠사슬 시체 공격 준비",
+   "en": "Chained Corpse wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N01_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N01.attack",
+   "ko": "쇠사슬 시체 공격",
+   "en": "Chained Corpse attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N01_attack_1",
+    "enemy_N01_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N01.death",
+   "ko": "쇠사슬 시체 죽음",
+   "en": "Chained Corpse death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N01_death_1",
+    "enemy_N01_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N02.windup",
+   "ko": "무덤 사냥개 공격 준비",
+   "en": "Grave Hound wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N02_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N02.attack",
+   "ko": "무덤 사냥개 공격",
+   "en": "Grave Hound attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N02_attack_1",
+    "enemy_N02_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N02.death",
+   "ko": "무덤 사냥개 죽음",
+   "en": "Grave Hound death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N02_death_1",
+    "enemy_N02_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N03.windup",
+   "ko": "해골 궁병 공격 준비",
+   "en": "Skeleton Archer wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N03_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N03.attack",
+   "ko": "해골 궁병 공격",
+   "en": "Skeleton Archer attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N03_attack_1",
+    "enemy_N03_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N03.death",
+   "ko": "해골 궁병 죽음",
+   "en": "Skeleton Archer death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N03_death_1",
+    "enemy_N03_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N04.windup",
+   "ko": "역병 시종 공격 준비",
+   "en": "Plague Attendant wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N04_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N04.attack",
+   "ko": "역병 시종 공격",
+   "en": "Plague Attendant attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N04_attack_1",
+    "enemy_N04_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N04.death",
+   "ko": "역병 시종 죽음",
+   "en": "Plague Attendant death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N04_death_1",
+    "enemy_N04_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N05.windup",
+   "ko": "장송 사제 공격 준비",
+   "en": "Funeral Priest wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N05_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N05.attack",
+   "ko": "장송 사제 공격",
+   "en": "Funeral Priest attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N05_attack_1",
+    "enemy_N05_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N05.death",
+   "ko": "장송 사제 죽음",
+   "en": "Funeral Priest death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N05_death_1",
+    "enemy_N05_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N06.windup",
+   "ko": "부푼 순례자 공격 준비",
+   "en": "Bloated Pilgrim wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N06_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N06.attack",
+   "ko": "부푼 순례자 공격",
+   "en": "Bloated Pilgrim attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N06_attack_1",
+    "enemy_N06_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N06.death",
+   "ko": "부푼 순례자 죽음",
+   "en": "Bloated Pilgrim death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N06_death_1",
+    "enemy_N06_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N07.windup",
+   "ko": "철갑 망령 공격 준비",
+   "en": "Ironclad Wraith wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N07_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N07.attack",
+   "ko": "철갑 망령 공격",
+   "en": "Ironclad Wraith attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N07_attack_1",
+    "enemy_N07_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N07.death",
+   "ko": "철갑 망령 죽음",
+   "en": "Ironclad Wraith death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N07_death_1",
+    "enemy_N07_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N08.windup",
+   "ko": "광신 돌격병 공격 준비",
+   "en": "Zealot Charger wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N08_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N08.attack",
+   "ko": "광신 돌격병 공격",
+   "en": "Zealot Charger attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N08_attack_1",
+    "enemy_N08_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N08.death",
+   "ko": "광신 돌격병 죽음",
+   "en": "Zealot Charger death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N08_death_1",
+    "enemy_N08_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N09.windup",
+   "ko": "흑철 석궁병 공격 준비",
+   "en": "Black-iron Crossbowman wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N09_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N09.attack",
+   "ko": "흑철 석궁병 공격",
+   "en": "Black-iron Crossbowman attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N09_attack_1",
+    "enemy_N09_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N09.death",
+   "ko": "흑철 석궁병 죽음",
+   "en": "Black-iron Crossbowman death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N09_death_1",
+    "enemy_N09_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N10.windup",
+   "ko": "잿불 사술사 공격 준비",
+   "en": "Ember Sorcerer wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N10_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N10.attack",
+   "ko": "잿불 사술사 공격",
+   "en": "Ember Sorcerer attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N10_attack_1",
+    "enemy_N10_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N10.death",
+   "ko": "잿불 사술사 죽음",
+   "en": "Ember Sorcerer death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N10_death_1",
+    "enemy_N10_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N11.windup",
+   "ko": "종지기 공격 준비",
+   "en": "Bell-Ringer wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N11_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N11.attack",
+   "ko": "종지기 공격",
+   "en": "Bell-Ringer attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N11_attack_1",
+    "enemy_N11_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N11.death",
+   "ko": "종지기 죽음",
+   "en": "Bell-Ringer death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N11_death_1",
+    "enemy_N11_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N12.windup",
+   "ko": "균열 파편체 공격 준비",
+   "en": "Rift Shard wind-up",
+   "category": "enemy",
+   "clips": [
+    "enemy_N12_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N12.attack",
+   "ko": "균열 파편체 공격",
+   "en": "Rift Shard attack",
+   "category": "enemy",
+   "clips": [
+    "enemy_N12_attack_1",
+    "enemy_N12_attack_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.2,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.N12.death",
+   "ko": "균열 파편체 죽음",
+   "en": "Rift Shard death",
+   "category": "enemy",
+   "clips": [
+    "enemy_N12_death_1",
+    "enemy_N12_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.08,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hazard.poison",
+   "ko": "독 웅덩이",
+   "en": "Poison pool",
+   "category": "enemy",
+   "clips": [
+    "hazard_poison_1",
+    "hazard_poison_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.4,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hazard.fire",
+   "ko": "화염 장판 예고",
+   "en": "Fire hazard",
+   "category": "enemy",
+   "clips": [
+    "hazard_fire_1",
+    "hazard_fire_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.4,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hazard.ice",
+   "ko": "얼음 고리 예고",
+   "en": "Ice ring hazard",
+   "category": "enemy",
+   "clips": [
+    "hazard_ice_1",
+    "hazard_ice_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.4,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "hazard.blast",
+   "ko": "폭발 예고",
+   "en": "Blast warning",
+   "category": "enemy",
+   "clips": [
+    "hazard_blast_1",
+    "hazard_blast_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.4,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.elite_death",
+   "ko": "정예 처치",
+   "en": "Elite slain",
+   "category": "enemy",
+   "clips": [
+    "enemy_elite_death_1",
+    "enemy_elite_death_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 70,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.rage",
+   "ko": "분노 축적",
+   "en": "Enemy enrages",
+   "category": "enemy",
+   "clips": [
+    "enemy_rage_1",
+    "enemy_rage_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.8,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.heal",
+   "ko": "적 치유",
+   "en": "Enemy heals ally",
+   "category": "enemy",
+   "clips": [
+    "enemy_heal_1",
+    "enemy_heal_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.6,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.aura",
+   "ko": "종지기의 종",
+   "en": "Bell-Ringer toll",
+   "category": "enemy",
+   "clips": [
+    "enemy_aura_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 1.5,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "enemy.corpse",
+   "ko": "시체 폭발",
+   "en": "Corpse explosion",
+   "category": "enemy",
+   "clips": [
+    "enemy_corpse_1",
+    "enemy_corpse_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.05,
+   "cooldown": 0.3,
+   "priority": 35,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "boss.BOSS01.spawn",
+   "ko": "묘지의 집행자 등장",
+   "en": "Graveyard Executioner appears",
+   "category": "boss",
+   "clips": [
+    "boss_BOSS01_spawn_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.BOSS02.spawn",
+   "ko": "종말의 합창자 등장",
+   "en": "Choir of the End appears",
+   "category": "boss",
+   "clips": [
+    "boss_BOSS02_spawn_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.BOSS03.spawn",
+   "ko": "균열의 포식자 등장",
+   "en": "Rift Devourer appears",
+   "category": "boss",
+   "clips": [
+    "boss_BOSS03_spawn_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.basic.windup",
+   "ko": "보스 기본 공격 준비",
+   "en": "Boss basic attack wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_basic_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.basic",
+   "ko": "보스 기본 공격",
+   "en": "Boss basic attack",
+   "category": "boss",
+   "clips": [
+    "boss_basic_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.slam.windup",
+   "ko": "내려찍기 준비",
+   "en": "Slam wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_slam_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.slam",
+   "ko": "내려찍기",
+   "en": "Slam",
+   "category": "boss",
+   "clips": [
+    "boss_slam_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.hook.windup",
+   "ko": "갈고리 준비",
+   "en": "Hook wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_hook_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.hook",
+   "ko": "갈고리",
+   "en": "Hook",
+   "category": "boss",
+   "clips": [
+    "boss_hook_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.summon.windup",
+   "ko": "소환 준비",
+   "en": "Summon wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_summon_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.summon",
+   "ko": "소환",
+   "en": "Summon",
+   "category": "boss",
+   "clips": [
+    "boss_summon_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.beam.windup",
+   "ko": "집중 광선 준비",
+   "en": "Beam wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_beam_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.beam",
+   "ko": "집중 광선",
+   "en": "Beam",
+   "category": "boss",
+   "clips": [
+    "boss_beam_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.charge.windup",
+   "ko": "돌진 준비",
+   "en": "Charge wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_charge_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.charge",
+   "ko": "돌진",
+   "en": "Charge",
+   "category": "boss",
+   "clips": [
+    "boss_charge_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.blast.windup",
+   "ko": "연속 폭발 준비",
+   "en": "Blasts wind-up",
+   "category": "boss",
+   "clips": [
+    "boss_blast_windup_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.4,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.blast",
+   "ko": "연속 폭발",
+   "en": "Blasts",
+   "category": "boss",
+   "clips": [
+    "boss_blast_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.3,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.enrage",
+   "ko": "보스 격노",
+   "en": "Boss enrages",
+   "category": "boss",
+   "clips": [
+    "boss_enrage_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.stagger",
+   "ko": "보스 제압",
+   "en": "Boss staggered",
+   "category": "boss",
+   "clips": [
+    "boss_stagger_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.death",
+   "ko": "보스 처치",
+   "en": "Boss slain",
+   "category": "boss",
+   "clips": [
+    "boss_death_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 2.0,
+   "priority": 100,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "boss.summoned",
+   "ko": "보스 소환물 등장",
+   "en": "Boss minions arrive",
+   "category": "boss",
+   "clips": [
+    "boss_summoned_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.6,
+   "priority": 90,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "goblin.spawn",
+   "ko": "황금 고블린 등장",
+   "en": "Golden goblin appears",
+   "category": "field",
+   "clips": [
+    "goblin_spawn_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "goblin.flee",
+   "ko": "황금 고블린 도주",
+   "en": "Golden goblin flees",
+   "category": "field",
+   "clips": [
+    "goblin_flee_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 2.0,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "goblin.escape",
+   "ko": "황금 고블린 탈출",
+   "en": "Golden goblin escapes",
+   "category": "field",
+   "clips": [
+    "goblin_escape_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "goblin.death",
+   "ko": "황금 고블린 처치",
+   "en": "Golden goblin slain",
+   "category": "field",
+   "clips": [
+    "goblin_death_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 95,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.chest_start",
+   "ko": "상자 여는 중",
+   "en": "Chest unlocking",
+   "category": "field",
+   "clips": [
+    "field_chest_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.chest_open",
+   "ko": "상자 개봉",
+   "en": "Chest opens",
+   "category": "field",
+   "clips": [
+    "field_chest_open_1",
+    "field_chest_open_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.chest_interrupt",
+   "ko": "상자 열기 중단",
+   "en": "Chest interrupted",
+   "category": "field",
+   "clips": [
+    "field_chest_interrupt_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.shrine_start",
+   "ko": "신단 활성화 중",
+   "en": "Shrine channel",
+   "category": "field",
+   "clips": [
+    "field_shrine_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.shrine_use",
+   "ko": "신단 발동",
+   "en": "Shrine empowers",
+   "category": "field",
+   "clips": [
+    "field_shrine_use_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.curse_start",
+   "ko": "저주받은 상자 발동",
+   "en": "Cursed chest triggered",
+   "category": "field",
+   "clips": [
+    "field_curse_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.curse_done",
+   "ko": "저주 해제",
+   "en": "Curse lifted",
+   "category": "field",
+   "clips": [
+    "field_curse_done_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.curse_fail",
+   "ko": "저주 실패",
+   "en": "Curse failed",
+   "category": "field",
+   "clips": [
+    "field_curse_fail_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.seal_start",
+   "ko": "봉인 파괴 시작",
+   "en": "Seal channel",
+   "category": "field",
+   "clips": [
+    "field_seal_start_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.seal_broken",
+   "ko": "봉인 파괴",
+   "en": "Seal broken",
+   "category": "field",
+   "clips": [
+    "field_seal_broken_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.offering_pick",
+   "ko": "제물 획득",
+   "en": "Offering collected",
+   "category": "field",
+   "clips": [
+    "field_offering_pick_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.offering_deliver",
+   "ko": "제물 봉헌",
+   "en": "Offering delivered",
+   "category": "field",
+   "clips": [
+    "field_offering_deliver_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "field.rune_drop",
+   "ko": "룬 발견",
+   "en": "Rune found",
+   "category": "field",
+   "clips": [
+    "field_rune_drop_1"
+   ],
+   "volume": 1.0,
+   "pitch": 0.02,
+   "cooldown": 0.2,
+   "priority": 70,
+   "limit": 2,
+   "group": ""
+  }
+ ]
+}

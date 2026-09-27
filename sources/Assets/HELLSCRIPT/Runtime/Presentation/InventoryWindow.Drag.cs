@@ -34,7 +34,7 @@ namespace Hellscript
             draggingId=item.id;draggingEquipped=item.equipped;
             RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)cell.transform,data.position,null,out var local);
             var rect=((RectTransform)cell.transform).rect;dragOffset=new Vector2(local.x-rect.xMin,rect.yMax-local.y);
-            ghost=DrawCell(overlays,item,0,0,SlotSize,false);ghost.name="Inventory drag ghost";var group=ghost.gameObject.AddComponent<CanvasGroup>();group.blocksRaycasts=false;group.alpha=.88f;
+            GameAudio.Pick(item);ghost=DrawCell(overlays,item,0,0,SlotSize,false);ghost.name="Inventory drag ghost";var group=ghost.gameObject.AddComponent<CanvasGroup>();group.blocksRaycasts=false;group.alpha=.88f;
             foreach(var target in body.GetComponentsInChildren<InventoryDropTarget>().Where(t=>t.slot>=0))
                 if(target.TryGetComponent<EquipmentSlotView>(out var slot))slot.SetDropHighlight(!draggingEquipped&&EquipmentSlots.PlanDrop(Hero,item,target.slot,target.index).Valid);
             Drag(data);
@@ -53,12 +53,12 @@ namespace Hellscript
             var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(data,hits);
             var target=hits.Select(h=>h.gameObject.GetComponentInParent<InventoryDropTarget>()).FirstOrDefault(t=>t!=null&&t.window==this);
             CancelDrag();suppressClickUntil=Time.unscaledTime+.2f;
-            if(target==null)return;
+            if(target==null){GameAudio.Fx("item.place");return;}
             var item=FindItem(id);if(item==null)return;
             if(equipped){if(target.slot==-2)Unequip(id);return;}
             if(target.slot==-1){Equip(id);return;}
             var plan=EquipmentSlots.PlanDrop(Hero,item,target.slot,target.index);
-            if(plan.Valid)Equip(id,plan.index);else Toast(plan.error);
+            if(plan.Valid)Equip(id,plan.index);else{GameAudio.Refuse();Toast(plan.error);}
         }
         void CancelDrag()
         {

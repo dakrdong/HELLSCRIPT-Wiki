@@ -133,7 +133,7 @@ namespace Hellscript
             if(color.HasValue&&color.Value==gold*.4f)UiTheme.Choice(b,true,false);
             if(color.HasValue&&color.Value==Color.clear)b.Configure(UiButtonRole.Item);
 
-            var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>{game.Audio?.Play(SoundCue.Select);action();});return b;
+            var label=Label(r,text,22,pale,TextAnchor.MiddleCenter);Inset(label.rectTransform,5,5,2,2);b.onClick.AddListener(()=>action());return b;
         }
         Button BigButton(Transform parent,string text,Action action,bool primary=false)
         {var b=Button(parent,text,action,primary?UiTheme.Primary:panel);var le=b.gameObject.AddComponent<LayoutElement>();le.minHeight=TouchHeight;le.preferredHeight=TouchHeight;return b;}
@@ -437,7 +437,7 @@ namespace Hellscript
             var text=Label(card,message,25,pale,TextAnchor.MiddleCenter);text.rectTransform.anchorMin=new Vector2(.06f,.35f);text.rectTransform.anchorMax=new Vector2(.94f,.94f);text.rectTransform.offsetMin=text.rectTransform.offsetMax=Vector2.zero;
             void Close(){ContentWindowHost.Detach(modal);modal.gameObject.SetActive(false);Destroy(modal.gameObject);}
             ContentWindowHost.Attach(modal,Close);
-            var cancel=Button(card,"취소",Close);var ok=Button(card,"확인",()=>{game.Audio?.Play(SoundCue.Confirm);Close();action();},new Color(.45f,.28f,.12f));
+            var cancel=Button(card,"취소",Close);var ok=Button(card,"확인",()=>{Close();action();},new Color(.45f,.28f,.12f));
             foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
         }
         public void ShowToast(string text)

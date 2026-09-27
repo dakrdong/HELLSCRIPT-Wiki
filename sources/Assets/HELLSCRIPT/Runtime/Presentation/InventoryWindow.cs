@@ -173,8 +173,9 @@ namespace Hellscript
         {
             if(Time.unscaledTime<suppressClickUntil)return;
             var item=FindItem(id);if(item==null)return;
-            if(!selecting||item.equipped){ShowDetail(id);return;}
-            if(!InventorySalvagePlan.Eligible(store.Data,item)){Toast("보호 중인 아이템은 분해할 수 없습니다.");return;}
+            if(!selecting||item.equipped){GameAudio.Pick(item);ShowDetail(id);return;}
+            if(!InventorySalvagePlan.Eligible(store.Data,item)){GameAudio.Refuse();Toast("보호 중인 아이템은 분해할 수 없습니다.");return;}
+            GameAudio.Pick(item);
             if(!selected.Remove(id))selected.Add(id);Repaint();
         }
         RectTransform DrawCell(Transform parent,Item item,float x,float y,float size,bool bag)

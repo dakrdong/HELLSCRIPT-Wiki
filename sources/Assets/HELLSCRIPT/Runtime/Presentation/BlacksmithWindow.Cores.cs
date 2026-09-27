@@ -186,7 +186,7 @@ namespace Hellscript
             coreRefresh+=Refresh;Refresh();return y;
         }
         public void SetCoreInvestment(int value)
-        {coreInvestment=Math.Clamp(value,0,CoreCrafting.InvestmentLimit(store.Data));coreRequest=null;coreRefresh?.Invoke();}
+        {int previous=coreInvestment;coreInvestment=Math.Clamp(value,0,CoreCrafting.InvestmentLimit(store.Data));coreRequest=null;if(coreInvestment!=previous)GameAudio.Fx("forge.core_invest");coreRefresh?.Invoke();}
         void DrawCoreActions(Transform parent,float y,float w,float h)
         {
             var rail=Panel(parent,"Core craft actions","292d1e","202419","585337");Place(rail,0,y,w,h);

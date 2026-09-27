@@ -52,7 +52,7 @@ namespace Hellscript
                 var row=Btn(menu,kind=="grade"?GradeNames[n]:OrderLabels[n],8,32+n*32,w-16,29,()=>
                 {
                     if(kind=="grade"){if(grades==bit)return;grades^=bit;Repaint(true);RefreshGradeFilter();}
-                    else {order=Orders[index];CloseFilter();Repaint(true);}
+                    else {order=Orders[index];CloseFilter();GameAudio.Fx("item.sort");Repaint(true);}
                 },chosen,11);row.name="inventory-"+kind+"-option-"+n;UiTheme.Choice(row,chosen,false);
                 Place(row.GetComponentInChildren<Text>().rectTransform,29,0,w-53,29);row.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;
                 if(kind=="grade"){Check(row.transform,7,7,15,chosen);row.interactable=grades!=bit;}

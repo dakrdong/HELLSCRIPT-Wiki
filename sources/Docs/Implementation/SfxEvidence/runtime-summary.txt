@@ -1,0 +1,40 @@
+Bank: 283 sounds, missing clips 0, listener True
+PASS title · 1 distinct sounds
+PASS characters · 4 distinct sounds
+PASS tutorial · 32 distinct sounds
+PASS rift-warrior · 44 distinct sounds
+Inventory drag: plate item, valid slot False, invalid slot True
+PASS inventory · 10 distinct sounds
+PASS rift-ranger · 28 distinct sounds
+PASS rift-mage · 33 distinct sounds
+Town fixture: gold and highest clear raised to open the shop and forge (no progression claim).
+Invoked (pointer covered by tutorial-visibility): gamble-buy
+Invoked (pointer covered by tutorial-defer): gamble-reveal-confirm
+Invoked (pointer covered by content-close): shop-close
+Forge item cell for 01ced8c2712348fdb973d85d07689778: False
+Invoked (pointer covered by Content scroll): forge-upgrade-1
+Invoked (pointer covered by content-close): forge-close
+PASS town · 9 distinct sounds
+PASS settings · 5 distinct sounds
+HEARD title: flow.title_start
+HEARD characters: char.select.warrior, char.select.mage, char.select.ranger, flow.game_start
+HEARD tutorial: ui.open, warrior.swing, hit.*, enemy.*, item.pick.*, item.equip.*
+HEARD rift-warrior: flow.rift_enter, vo.warrior.battlecry, warrior.swing, hit.*, enemy.*, skill.*, flow.victory, flow.rift_exit
+HEARD rift-ranger: flow.rift_enter, ranger.shot, hit.*, enemy.*, skill.*
+HEARD rift-mage: flow.rift_enter, mage.bolt, hit.*, enemy.*, skill.*
+
+Distinct sounds heard: 84
+title (1, listener peak 0.043): flow.title_start
+characters (4, listener peak 0.476): char.select.mage char.select.ranger char.select.warrior flow.game_start
+tutorial (32, listener peak 0.700): boss.basic boss.basic.windup boss.death boss.enrage boss.hook boss.hook.windup boss.slam boss.slam.windup enemy.N01.attack enemy.N01.death enemy.N01.windup enemy.N02.attack enemy.N02.death enemy.N02.windup enemy.N03.attack enemy.N03.death enemy.N03.windup flow.tutorial flow.victory hero.hurt hit.crit hit.slash item.equip.plate item.pick.plate mat.bone mat.metal skill.W01 skill.W01.tick ui.click ui.close ui.open warrior.swing
+rift-warrior (44, listener peak 0.700): boss.basic boss.basic.windup boss.BOSS01.spawn boss.death boss.enrage boss.hook boss.hook.windup boss.slam boss.slam.windup enemy.elite_death enemy.N01.attack enemy.N01.death enemy.N01.windup field.chest_interrupt field.chest_open field.chest_start flow.level_up flow.rift_enter flow.rift_exit flow.skill_unlock flow.victory gold.pickup gold.pickup_large hazard.fire hero.hurt hero.potion hit.crit hit.slash item.pick.leather item.pick.plate loot.drop.magic loot.drop.rare loot.gem loot.material loot.stone mat.metal skill.W01 skill.W01.tick ui.click_primary ui.close ui.notify ui.open vo.warrior.battlecry warrior.swing
+inventory (10, listener peak 0.369): item.lock item.pick.leather item.pick.plate item.salvage item.unlock ui.click ui.click_heavy ui.close ui.error ui.open
+rift-ranger (28, listener peak 0.700): enemy.elite_death enemy.N01.attack enemy.N01.death enemy.N01.windup field.chest_open field.chest_start flow.level_up flow.rift_enter flow.rift_exit flow.skill_unlock gold.pickup hero.dodge hero.hurt hero.potion hit.crit hit.pierce item.pick.jewelry item.pick.leather loot.drop.magic loot.drop.rare ranger.shot skill.A01 ui.click_primary ui.close ui.notify ui.open vo.ranger.battlecry vo.ranger.effort
+rift-mage (33, listener peak 0.700): enemy.elite_death enemy.N01.attack enemy.N01.death enemy.N01.windup field.chest_interrupt field.chest_open field.chest_start field.rune_drop flow.level_up flow.rift_enter flow.rift_exit flow.skill_unlock gold.pickup gold.pickup_large hero.hurt hero.potion hit.crit hit.fire hit.lightning item.pick.jewelry item.pick.leather item.pick.plate loot.drop.magic loot.drop.rare loot.gem mage.bolt skill.M01 skill.M01.hit ui.click_primary ui.close ui.notify ui.open vo.mage.battlecry
+town (9, listener peak 0.457): forge.enhance gold.spend item.pick.staff loot.drop.rare shop.gamble_beat ui.click ui.close ui.open ui.tab
+settings (5, listener peak 0.448): loot.drop.legendary ui.click ui.close ui.open ui.tab
+
+Errors logged: 0
+
+
+macOS development build, synthetic EventSystem input. No physical mobile or human listening claim.

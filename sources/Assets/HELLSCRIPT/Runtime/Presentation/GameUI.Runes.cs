@@ -239,18 +239,19 @@ namespace Hellscript
         void RotateRune()
         {
             if(runeSelected==null||runeCanvas.Dragging)return;int next=(runeRotation+1)%6;var p=runeEditor.DraftPlacements.FirstOrDefault(p=>p.InstanceId==runeSelected);
-            if(p!=null){if(!runeEditor.ValidatePlacement(p.InstanceId,p.Anchor,next).IsValid){ShowToast("회전하면 연결이 끊기거나 다른 룬과 겹칩니다.");return;}PushRuneUndo();runeEditor.TryRotateDraft(p.InstanceId,1,out _);runeEditor.TryCommit(out _);}
+            if(p!=null){if(!runeEditor.ValidatePlacement(p.InstanceId,p.Anchor,next).IsValid){GameAudio.Refuse();ShowToast("회전하면 연결이 끊기거나 다른 룬과 겹칩니다.");return;}PushRuneUndo();runeEditor.TryRotateDraft(p.InstanceId,1,out _);runeEditor.TryCommit(out _);}
+            GameAudio.Fx("rune.rotate");
             runeRotation=next;runeStorageRotations[runeSelected]=next;runeCanvas.rotation=next;UpdateRuneContents();RenderRuneDetail();
         }
         void RemoveRune()
         {
             if(runeSelected==null)return;var remaining=runeEditor.DraftPlacements.Where(p=>p.InstanceId!=runeSelected).ToArray();
-            if(!RunePlacementValidator.Validate(runeEditor.Board,6,remaining).IsValid){ShowToast("이 블록을 빼면 연결이 끊어집니다. 바깥 블록부터 회수하세요.");return;}
-            PushRuneUndo();runeStorageRotations[runeSelected]=runeRotation;runeEditor.TryRemoveDraft(runeSelected,out _);runeEditor.TryCommit(out _);UpdateRuneContents();RenderRuneDetail();
+            if(!RunePlacementValidator.Validate(runeEditor.Board,6,remaining).IsValid){GameAudio.Refuse();ShowToast("이 블록을 빼면 연결이 끊어집니다. 바깥 블록부터 회수하세요.");return;}
+            GameAudio.Fx("rune.remove");PushRuneUndo();runeStorageRotations[runeSelected]=runeRotation;runeEditor.TryRemoveDraft(runeSelected,out _);runeEditor.TryCommit(out _);UpdateRuneContents();RenderRuneDetail();
         }
         void RebuildRuneOpenCells()
         {runeSource.placements=RuneGrowth.Capture(runeInventory);runeInventory=RuneGrowth.Restore(runeSource,6);runeEditor=runeInventory.BeginEdit(runeWeapon);ShowRunes();}
-        void UnlockRuneCell(HexCell coordinate){if(runeViewing||!RuneMasteryProgress.CanUnlock(RuneProgress,coordinate))return;PushRuneUndo();RuneMasteryProgress.Unlock(RuneProgress,coordinate);RebuildRuneOpenCells();}
+        void UnlockRuneCell(HexCell coordinate){if(runeViewing||!RuneMasteryProgress.CanUnlock(RuneProgress,coordinate))return;PushRuneUndo();RuneMasteryProgress.Unlock(RuneProgress,coordinate);GameAudio.Fx("rune.unlock");RebuildRuneOpenCells();}
         void FocusRuneRegion(int region){runeCanvas=null;runeFocus=region;runeOverview=false;runeViews.Remove(runeWeapon);runeEditor.Board.TryGetStart(region,out runeNode);runeSelected=null;ShowRunes();}
         void SaveRuneDraft()
         {if(!StageRuneBoard())return;if(!game.Store.CommitRuneBoardState(RuneGrowth.Capture(runeInventory),runeSource.mastery,runeSource.revision,game.Active?game.Combat:null,runeSource.presets)){ShowToast(game.Store.Error);return;}ReloadRuneDraft();ShowRunes();ShowToast("모든 무기의 개방 경로와 룬 배치를 저장했습니다.");}
