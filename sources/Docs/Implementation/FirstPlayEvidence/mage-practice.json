@@ -1,0 +1,119 @@
+{
+  "automated": {
+    "jobId": "ae4b70f4c40a4b73b752c77af86c91b4",
+    "mode": "EditMode",
+    "status": "succeeded",
+    "tests": [
+      "Hellscript.Tests.FirstPlayExperienceTests",
+      "Hellscript.Tests.TrainingComparisonTests",
+      "Hellscript.Tests.PlayerTrainingTests"
+    ],
+    "total": 92,
+    "passed": 92,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 41.089327
+  },
+  "layout": {
+    "combinations": 20,
+    "screenshots": 40,
+    "result": "passed",
+    "checksSHA256": "aef3eed3c4edf65873f2268d9c36f12f89fda7eb7ab36e883324344a8de024ca"
+  },
+  "initialNaturalPair": {
+    "a": {
+      "hpDamage": 10719.926769256592,
+      "skills": [
+        {
+          "definitionId": "M01",
+          "releases": 43,
+          "hpDamage": 9925.216766357422
+        },
+        {
+          "definitionId": "BASIC",
+          "releases": 32,
+          "hpDamage": 794.7100028991699
+        }
+      ]
+    },
+    "b": {
+      "hpDamage": 10719.926769256592,
+      "skills": [
+        {
+          "definitionId": "M01",
+          "releases": 43,
+          "hpDamage": 9925.216766357422
+        },
+        {
+          "definitionId": "BASIC",
+          "releases": 32,
+          "hpDamage": 794.7100028991699
+        }
+      ]
+    }
+  },
+  "naturalRepeat": {
+    "method": "Native UI, owned level-4 Mage, normal 1x, 60 combat seconds each; no injected gear, currency, levels or time.",
+    "level": 4,
+    "sameEquipmentAsInitialPair": true,
+    "sameSkillRanksAndOptions": true,
+    "h17Practiced": true,
+    "appliedOrder": [
+      "M02",
+      "M01",
+      "BASIC"
+    ],
+    "comparisonSHA256": "50799ace525d187dc2839f890989dfe1a00d4f11b826fe9b51bf23764d06354c",
+    "a": {
+      "seconds": 59.99937057495117,
+      "realSeconds": 60.00885772705078,
+      "hpDamage": 10719.926769256592,
+      "order": [
+        "M01",
+        "M02",
+        "BASIC"
+      ],
+      "skills": [
+        {
+          "definitionId": "M01",
+          "releases": 43,
+          "hpDamage": 9925.216766357422
+        },
+        {
+          "definitionId": "BASIC",
+          "releases": 32,
+          "hpDamage": 794.7100028991699
+        }
+      ]
+    },
+    "b": {
+      "seconds": 59.99937057495117,
+      "realSeconds": 60.013755798339844,
+      "hpDamage": 17064.923553466797,
+      "order": [
+        "M02",
+        "M01",
+        "BASIC"
+      ],
+      "skills": [
+        {
+          "definitionId": "M02",
+          "releases": 8,
+          "hpDamage": 8524.961059570312
+        },
+        {
+          "definitionId": "M01",
+          "releases": 34,
+          "hpDamage": 7598.868492126465
+        },
+        {
+          "definitionId": "BASIC",
+          "releases": 37,
+          "hpDamage": 941.0940017700196
+        }
+      ]
+    }
+  },
+  "physicalMobile": "not tested",
+  "runtimeSHA256": "218ce92aaddd12a27e08f9c2674a8b7a4d1d0f97a8accbbc9bf7a56ea11d138d"
+}

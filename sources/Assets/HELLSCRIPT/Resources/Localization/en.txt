@@ -5159,12 +5159,12 @@ Lv.{0} → Lv.{1} · 골드 +{2:N0} · 장비 {3}개	Lv.{0} → Lv.{1} · Gold +
 나중에 보기	Read later
 다른 행동 진행 중	Another action in progress
 다음 목표 · 균열 {0}단계	Next goal · Rift tier {0}
-마법사 · 눈보라 유지와 위치 갱신	Mage · Keep or relocate Blizzard
+마법사 · 눈보라 우선순위	Mage · Blizzard priority
 모든 후보를 확인했습니다.	All candidates reviewed.
 보관	Store
 보관할 창고 선택	Choose a storage tab
 보관함 {0} · {1}/{2}	Storage tab {0} · {1}/{2}
-비교 조건: 눈보라 유지 또는 위치 갱신. 발동 횟수·효과 유지·피해와 자원 부족 판단을 보세요.	Change: keep or relocate Blizzard. Compare releases, effect uptime, damage, and resource checks.
+비교 조건: 눈보라를 공격 순서 맨 앞으로 이동합니다. 이미 맨 앞이면 기본 공격 뒤로 옮깁니다. 실제 발동 횟수와 피해를 보세요.	Change: move Blizzard to the first attack priority. If it is already first, move it after the basic attack. Compare actual releases and damage.
 비교 조건: 지속 피해 장판 회피 방침. 받은 피해와 공격·이동 시간을 함께 보세요.	Change: ground-hazard avoidance. Compare damage taken and time spent attacking or moving.
 사냥 칙령 해제	Hunt Edict disabled
 사냥 칙령을 켠 뒤 실습할 수 있습니다.	Enable Hunt Edict before starting this practice.
@@ -5206,7 +5206,7 @@ Lv.{0} → Lv.{1} · 골드 +{2:N0} · 장비 {3}개	Lv.{0} → Lv.{1} · Gold +
 직업별 한 가지 실험	One-condition class practice
 진행 중	In progress
 집계 한도에 도달해 일부 효과 기록이 생략되었습니다.	The aggregate limit was reached. Some effect records were omitted.
-한 조건 바꿔 B 시작	Change one condition and start B
+B 시작	Start B
 한 조건 바꿔 보기	Change one condition
 현재 설정으로 A 시작	Start A with the current setup
 현재 설정으로 A를 실행하고, 조건 하나만 바꾼 B를 같은 장비·레벨·난수로 시험하세요. 실제 발동이나 행동 차이를 확인한 뒤 적용 여부를 선택합니다.	Run A with the current setup, then change one condition for B while keeping equipment, level, and random seed fixed. Observe the difference before choosing whether to apply it.
@@ -5237,3 +5237,4 @@ A 조건: {0}\nB 조건: {1}	A setting: {0}\nB setting: {1}
 지급받을 장비 부위를 선택하세요.	Choose an equipment slot.
 운영 보상 지급 조건을 확인해 주세요.	Check the requirements for this operations reward.
 운영 지급 ID가 올바르지 않습니다.	Invalid operations delivery ID.
+눈보라 검사 순서: {0}번째	Blizzard priority: {0}
