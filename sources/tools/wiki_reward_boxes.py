@@ -13,7 +13,7 @@ def build(api):
     for b in data['boxes']:
         fields={'영어 이름':b['nameEn'],'종류':b['kind'],'상자당 수량':b['amount'] if not b['formula'] else b['formula'],
                 '장비 등급':b['rarity'],'부위':b['slot'],'보석 단계':b['tier'],'보석 종류':b['gemId'] or '선택 / Choice' if b['kind']=='gem' else '',
-                '각성':b.get('awakened',False),'직업 세트 한정':b.get('setOnly',False),'룬 등급':b['grade'],'룬 크기':b['size'],
+                '각성':b.get('awakened',False),'직업 세트 한정':b.get('setOnly',False),'부위 선택':b.get('chooseSlot',False),'물약 ID':b.get('potionId',''),'룬 등급':b['grade'],'룬 크기':b['size'],
                 '소유자':'계정 / Account','개봉':'GameStore.OpenRewardBox; 최대 10개 / Up to 10',
                 '아이콘 원본':'Docs/Art/RewardBoxes/'+b['icon']+'.svg','이미지 제작':'코드로 작성한 벡터 원본 / Code-authored vectors'}
         rows.append(api.record(b['id'],b['nameKo'],b['kind'],'균열 최초 보상 등에 쓰는 소비형 지급 상자 / Consumable grant item',fields,path,
@@ -29,5 +29,5 @@ def build(api):
                 '중복 방지':'계정당 단계별 1회 / Once per account per stage','기존 보상':'자동 골드·재료는 재지급하지 않음 / No duplicate automatic currency',
                 '지급 데이터':grants,'상자별 내용물 수':[amount(definitions[g['boxId']],stage) for g in grants]}
         stages.append(api.record('rift-first-'+str(stage),'균열 '+str(stage)+'단계','최초 보상',' / '.join(names),fields,path,status='개발 브랜치 구현',related=['reward-boxes','rift-rewards-1000','rift-content-unlocks'],refs=[api.source_ref(unlock_path)]))
-    return [api.db('reward-boxes','지급용 보상 상자 / Reward boxes','실제 소비형 상자 96종의 정의 / Runtime definitions of 96 consumable boxes.',rows),
+    return [api.db('reward-boxes','지급용 보상 상자 / Reward boxes',f'실제 소비형 상자 {len(rows)}종의 정의 / Runtime definitions of {len(rows)} consumable boxes.',rows),
             api.db('rift-first-boxes','균열 최초 지급 상자 / First-clear boxes','1~1000단계 계정 최초 보상의 실제 상자 묶음 / Account-once runtime packages for tiers 1–1000.',stages)]

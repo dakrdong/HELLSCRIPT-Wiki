@@ -8,9 +8,9 @@ namespace Hellscript
 {
     [Serializable] public sealed class RewardBoxDefinition
     {
-        public string id,nameKo,nameEn,kind,gemId,formula,icon;
+        public string id,nameKo,nameEn,kind,gemId,formula,icon,potionId;
         public int amount=1,slot=-1,rarity,tier,grade,size;
-        public bool awakened,setOnly,eachType;
+        public bool awakened,setOnly,eachType,chooseSlot;
         public string Name=>Loc.Language=="en"?nameEn:nameKo;
     }
     [Serializable] public sealed class RewardBoxGrant
@@ -28,7 +28,7 @@ namespace Hellscript
     }
     [Serializable] public sealed class OwnedRewardBox
     {
-        public string id,boxId;public int count,sourceStage,itemLevel,minimumQuality,opened;
+        public string id,boxId,sourcePackage;public int count,sourceStage,itemLevel,minimumQuality,opened;
         public uint seed;
     }
     [Serializable] public sealed class RewardBoxState
@@ -37,6 +37,7 @@ namespace Hellscript
         public List<OwnedRewardBox> owned=new List<OwnedRewardBox>();
         public List<int> claimedStages=new List<int>();
         public List<RewardBoxPromise> firstClearPromises=new List<RewardBoxPromise>();
+        public List<RewardBoxReceipt> openingReceipts=new List<RewardBoxReceipt>();
         // Only exact normal-clear records are eligible, including existing RiftBestTime entries.
         // Historical boss-defeat flags/highestClear do not prove a completed run.
     }
@@ -61,11 +62,14 @@ namespace Hellscript
         {
             if(d==null||d.version!=1||d.boxes==null||d.milestones==null||d.firstClearRules==null||d.itemLevels==null)
                 throw new NotSupportedException("Unsupported reward box catalog.");
-            var kinds=new[]{"equipment","gem","stones","materials","gold","premium","cores","rune"};
+            var kinds=new[]{"equipment","gem","stones","materials","gold","premium","cores","rune","potion"};
             if(d.boxes.Any(b=>b==null||string.IsNullOrWhiteSpace(b.id)||string.IsNullOrWhiteSpace(b.nameKo)||string.IsNullOrWhiteSpace(b.nameEn)||b.icon!=b.id||!kinds.Contains(b.kind)||b.amount<1||b.slot< -1||b.slot>7)||d.boxes.Select(b=>b.id).Distinct().Count()!=d.boxes.Length)
                 throw new InvalidOperationException("Invalid reward box definitions.");
             foreach(var b in d.boxes)
             {
+                if(b.chooseSlot&&(b.kind!="equipment"||b.slot!=-1||b.setOnly))throw new InvalidOperationException("Invalid equipment choice box.");
+                if(b.kind=="potion"&&(string.IsNullOrEmpty(b.potionId)||!PotionCatalog.All.Any(p=>p.id==b.potionId)||b.amount>9999))throw new InvalidOperationException("Invalid potion box.");
+                if(b.kind!="potion"&&!string.IsNullOrEmpty(b.potionId))throw new InvalidOperationException("Unexpected potion payload.");
                 if(b.kind=="equipment"&&(b.rarity<2||b.rarity>3||b.amount!=1||b.setOnly&&b.rarity!=3))throw new InvalidOperationException("Invalid equipment box.");
                 if(b.kind=="gem"&&(b.amount!=10||b.tier<1||b.tier>6||!string.IsNullOrEmpty(b.gemId)&&GemCatalog.Find(b.gemId)==null))throw new InvalidOperationException("Invalid gem box.");
                 if(b.kind=="rune"&&(b.grade<0||b.grade>6||b.size<1||b.size>5||b.eachType&&b.amount!=5))throw new InvalidOperationException("Invalid rune box.");
@@ -118,6 +122,7 @@ namespace Hellscript
                 a.rewardBoxes=new RewardBoxState{version=Version};
             }
             a.rewardBoxes.firstClearPromises??=new List<RewardBoxPromise>();
+            a.rewardBoxes.openingReceipts??=new List<RewardBoxReceipt>();
             // Existing exact clears keep their shipped package even when first opened after deployment.
             if(a.schema<16)foreach(int stage in a.heroes.SelectMany(h=>h.riftProgress?.best??new List<RiftBestTime>()).Where(b=>b.milliseconds>0).Select(b=>b.stage).Distinct())
                 CapturePromise(a,stage,null);
@@ -128,6 +133,8 @@ namespace Hellscript
             var r=a.rewardBoxes;
             if(r==null||r.version!=Version||r.owned==null||r.claimedStages==null||a.premium<0||a.enhancementStones<0)throw new NotSupportedException("Unsupported reward box state; original save preserved.");
             if(r.claimedStages.Any(s=>s<1||s>1000)||r.claimedStages.Distinct().Count()!=r.claimedStages.Count)throw new NotSupportedException("Invalid first-clear claims.");
+            if(r.openingReceipts==null||r.openingReceipts.Count>20||r.openingReceipts.Any(p=>p==null||string.IsNullOrEmpty(p.request)||p.boxes<1||p.boxes>MaximumOpen||p.entries==null||p.entries.Count>50||p.entries.Any(e=>e==null||e.count<1)||p.equipment==null||p.equipment.Count>MaximumOpen)||r.openingReceipts.Select(p=>p.request).Distinct().Count()!=r.openingReceipts.Count)
+                throw new NotSupportedException("Invalid reward opening receipts.");
             if(r.firstClearPromises==null||r.firstClearPromises.Count>1000||r.firstClearPromises.Any(p=>p==null||p.stage<1||p.stage>1000||p.itemLevel<1||p.itemLevel>60||p.liveOpsVersion<0)||r.firstClearPromises.Select(p=>p.stage).Distinct().Count()!=r.firstClearPromises.Count)
                 throw new NotSupportedException("Invalid first-clear promises.");
             foreach(var promise in r.firstClearPromises)LiveOpsConfig.ValidateGrants(promise.grants,promise.stage);
@@ -181,13 +188,15 @@ namespace Hellscript
             int pick=RandomStream.Range(ref random,0,total);foreach(var u in pool){pick-=u.weight;if(pick<0)return u.id;}
             throw new InvalidOperationException("Invalid class set weights.");
         }
-        internal static bool Open(AccountSave a,string id,int count,string choice,List<Item> results)
+        internal static bool Open(AccountSave a,string id,int count,string choice,List<Item> results,RewardBoxReceipt receipt=null)
         {
             if(a.suspendedRun!=null||count<1||count>MaximumOpen)return false;
             var box=a.rewardBoxes.owned.SingleOrDefault(b=>b.id==id);if(box==null||box.count<count)return false;
             var d=RewardBoxCatalog.Find(box.boxId);int amount=checked(RewardBoxCatalog.Amount(d,box.sourceStage)*count);
             bool choosingGem=d.kind=="gem"&&string.IsNullOrEmpty(d.gemId),choosingCore=d.kind=="cores"&&d.slot<0;
-            if(!choosingGem&&!choosingCore&&!string.IsNullOrEmpty(choice))return false;
+            bool choosingSlot=d.kind=="equipment"&&d.chooseSlot;int selectedSlot=-1;
+            if(!choosingGem&&!choosingCore&&!choosingSlot&&!string.IsNullOrEmpty(choice))return false;
+            if(choosingSlot&&(!int.TryParse(choice,out selectedSlot)||selectedSlot<0||selectedSlot>7))return false;
             string gem=choosingGem?choice:d.gemId;
             int core=d.slot;
             if(choosingGem&&!GemCatalog.Valid(gem,d.tier)||choosingCore&&(!int.TryParse(choice,out core)||core<0||core>7))return false;
@@ -198,12 +207,12 @@ namespace Hellscript
                 case "equipment":
                     for(int i=0;i<count;i++)
                     {
-                        int slot=d.slot<0?RandomStream.Range(ref random,0,8):d.slot;
+                        int slot=choosingSlot?selectedSlot:d.slot<0?RandomStream.Range(ref random,0,8):d.slot;
                         string unique=EquipmentUnique(d,a.Hero.heroClass,slot,ref random);
                         // The catalog gates new first-clear grants. Previously owned guarantee boxes
                         // keep their promise and deterministic seed; never downgrade an owned reward.
                         var item=ItemGenerator.Create(a.Hero.heroClass,slot,d.rarity,box.itemLevel,ref random,id+"-item-"+(box.opened+i),unique);
-                        if(d.slot==0&&EquipmentSlots.Offhand(item))
+                        if((d.slot==0||choosingSlot&&selectedSlot==0)&&EquipmentSlots.Offhand(item))
                         {
                             var bases=ItemCatalog.Bases.Where(b=>b.Fits(a.Hero.heroClass,0)&&!EquipmentSlots.IsOffhand(EquipmentSlots.Kind(b.id))).ToArray();
                             var basis=bases[RandomStream.Range(ref random,0,bases.Length)];item.baseId=basis.id;item.baseIndex=basis.legacyIndex;
@@ -219,6 +228,10 @@ namespace Hellscript
                 case "gem":
                     if(!GemStacks.TryExchange(a.gems,a.gemCapacity,Array.Empty<GemStack>(),new[]{new GemStack{gemId=gem,tier=d.tier,count=amount}}))return false;
                     ContentUnlocks.RecordGemAcquisition(a);break;
+                case "potion":
+                    a.Hero.potions.Activate();
+                    a.Hero.potions.Set(d.potionId,checked(a.Hero.potions.Count(d.potionId)+amount));
+                    a.Hero.potions.revision=checked(a.Hero.potions.revision+1);break;
                 case "gold":a.gold=checked(a.gold+amount);break;
                 case "materials":a.materials=checked(a.materials+amount);break;
                 case "stones":a.enhancementStones=checked(a.enhancementStones+amount);break;
@@ -226,10 +239,20 @@ namespace Hellscript
                 case "cores":a.cores[core]=checked(a.cores[core]+amount);break;
                 case "rune":
                     var shapes=RuneMasteryCatalog.Shapes.Where(s=>s.Size==d.size).ToArray();
-                    for(int i=0;i<amount;i++)a.runes.owned.Add(new OwnedRune{id=id+"-rune-"+(box.opened*d.amount+i),grade=d.grade,
-                        shapeId=shapes[RandomStream.Range(ref random,0,shapes.Length)].Id,type=d.eachType?i%5:RandomStream.Range(ref random,0,5)});
+                    for(int i=0;i<amount;i++)
+                    {
+                        var rune=new OwnedRune{id=id+"-rune-"+(box.opened*d.amount+i),grade=d.grade,
+                            shapeId=shapes[RandomStream.Range(ref random,0,shapes.Length)].Id,type=d.eachType?i%5:RandomStream.Range(ref random,0,5)};
+                        a.runes.owned.Add(rune);receipt?.entries.Add(new RewardReceiptEntry{kind="rune",id=rune.id,count=1,grade=rune.grade,type=rune.type,size=d.size});
+                    }
                     a.runes.revision=checked(a.runes.revision+1);break;
                 default:return false;
+            }
+            if(receipt!=null)
+            {
+                receipt.boxId=box.boxId;receipt.boxes=count;receipt.heroId=a.Hero.id;
+                if(d.kind=="equipment")receipt.equipment=results.Select(RuneGrowth.Copy).ToList();
+                else if(d.kind!="rune")receipt.entries.Add(new RewardReceiptEntry{kind=d.kind,id=d.kind=="potion"?d.potionId:gem??d.kind,count=amount,tier=d.tier,slot=core});
             }
             box.count-=count;box.opened=checked(box.opened+count);box.seed=random;
             if(box.count==0)a.rewardBoxes.owned.Remove(box);

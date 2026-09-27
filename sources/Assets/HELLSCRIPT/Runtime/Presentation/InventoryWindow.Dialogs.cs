@@ -11,10 +11,10 @@ namespace Hellscript
         void Modal(string kind,string title,float w,float h)
         {
             Dismiss();dialogKind=kind;
-            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("050805ce","050805ce");
+            var shade=Btn(overlays,"",0,0,width,height,DismissReview);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("050805ce","050805ce");
             dialog=Panel(overlays,"Inventory dialog "+kind,"302b1f","1b1e15","a68b59");Place(dialog,(width-w)/2,(height-h)/2,w,h);
             bool itemWindow=kind=="detail"||kind=="compare";
-            Txt(dialog,title,14,0,w-(itemWindow?130:58),39,16,gold);Btn(dialog,"×",w-34,4,27,28,Dismiss,false,19).name="inventory-dialog-close";Rule(dialog,40,w);
+            Txt(dialog,title,14,0,w-(itemWindow?130:58),39,16,gold);Btn(dialog,"×",w-34,4,27,28,DismissReview,false,19).name="inventory-dialog-close";Rule(dialog,40,w);
             if(itemWindow)RangeToggle(dialog,w-102,5,"inventory-detail-range-toggle");
         }
         void ItemInfo(Transform parent,Item item,float w,ref float y,bool concise=false,bool stackedHeader=false)
@@ -24,6 +24,7 @@ namespace Hellscript
         }
         public void ShowDetail(string id)
         {
+            reviewQueue=Array.Empty<string>();
             var item=FindItem(id);if(item==null)return;if(!store.ReviewInventoryItem(id))Toast(store.Error);float w=landscape?360:width-16,h=height-16;
             Modal("detail","아이템 정보",w,h);detailId=id;Place(dialog,width-w-8,8,w,h);
             Scroll(dialog,"Item information",8,45,w-16,h-148,out var content);float y=8;ItemInfo(content,item,w-22,ref y);content.sizeDelta=new Vector2(0,y+8);
@@ -45,7 +46,7 @@ namespace Hellscript
         public bool Equip(string id,int index=-1)
         {
             bool ok=store.EquipInventoryItem(Guid.NewGuid().ToString("N"),id,index);
-            if(ok){equipmentChanged?.Invoke();selected.Remove(id);Dismiss();Repaint();Toast("장비를 교체했습니다.");}
+            if(ok){equipmentChanged?.Invoke();selected.Remove(id);Dismiss();Repaint();Toast("장비를 교체했습니다.");if(Reviewing)ShowReviewCandidate(1);}
             else ShowError(store.Error);return ok;
         }
         public bool Unequip(string id)
@@ -61,12 +62,13 @@ namespace Hellscript
         public void ShowComparison(string id)
         {
             var item=FindItem(id);if(item==null||item.equipped)return;if(!store.ReviewInventoryItem(id,true))Toast(store.Error);
-            float w=width-16,h=landscape?422:height-32;Modal("compare","장착 비교",w,h);detailId=id;
+            float w=width-16,h=landscape?422:height-32;Modal("compare",Reviewing?Loc.F("장착 비교 · {0}/{1}",reviewIndex+1,reviewQueue.Length):"장착 비교",w,h);detailId=id;
             var targets=EquipmentSlots.Targets(Hero,item);
-            var host=Rect("Inventory comparison body",dialog);Place(host,12,46,w-24,h-99);
+            var host=Rect("Inventory comparison body",dialog);Place(host,12,46,w-24,h-(Reviewing?137:99));
             EquipmentComparisonView.Create(host,EquipmentPreviewHero(Hero),item,store.Data.runes,font,atlas,textScale);
             float bw=(w-24-(targets.Length-1)*8)/targets.Length;
             for(int n=0;n<targets.Length;n++){int index=targets[n];Btn(dialog,Loc.F("{0}에 장착",EquipmentSlots.Label(item.slot,index)),12+n*(bw+8),h-43,bw,32,()=>Equip(id,index),true,11).name="inventory-equip-"+index;}
+            if(Reviewing)DrawReviewNavigation(item,w,h-81);
         }
         public void ShowStats()
         {

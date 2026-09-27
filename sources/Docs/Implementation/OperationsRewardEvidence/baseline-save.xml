@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="14" result="Failed(Child)" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:08Z" duration="2.7027758">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="3971" result="Failed" site="Child" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:08Z" duration="2.702776" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="5576" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/operations-baseline-check/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="3971" result="Failed" site="Child" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:08Z" duration="2.643599" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="97970" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="5577" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="3971" result="Failed" site="Child" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:08Z" duration="2.579296" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="5578" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="3971" result="Failed" site="Child" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:08Z" duration="2.533447" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="2054" name="CurrentBuildSaveTests" fullname="Hellscript.Tests.CurrentBuildSaveTests" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="14" result="Failed" site="Child" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:08Z" duration="2.424091" total="14" passed="10" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2070" name="ForeignRunPortalAndUnopenedSuspendedRunCannotOverwriteCurrentSettings" fullname="Hellscript.Tests.CurrentBuildSaveTests.ForeignRunPortalAndUnopenedSuspendedRunCannotOverwriteCurrentSettings" methodname="ForeignRunPortalAndUnopenedSuspendedRunCannotOverwriteCurrentSettings" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="542979396" result="Passed" start-time="2026-09-26 00:56:06Z" end-time="2026-09-26 00:56:07Z" duration="0.611089" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2069" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.370343" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2064" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(0)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(0)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1750996830" result="Passed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.079147" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2065" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(1)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(1)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="758788144" result="Passed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.088664" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2066" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(2)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(2)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="373442954" result="Passed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.058937" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2067" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(3)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(3)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="353389219" result="Passed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.082153" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2068" name="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(4)" fullname="Hellscript.Tests.CurrentBuildSaveTests.InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt(4)" methodname="InvalidDraftDoesNotChangeTheRunOrWriteARejectionLogIntoIt" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1789179500" result="Passed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.058370" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2060" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:08Z" duration="0.914645" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="2056" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1914906376" result="Failed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.206535" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 37296 but was 38903. Strings differ at index 10273.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/operations-baseline-check/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-00b033fee1bd4044927dd2c60569da1d/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="2057" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1766886920" result="Failed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.188578" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 31618 but was 33195. Strings differ at index 10273.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/operations-baseline-check/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-ddea3d74e86248228233e1dab9bf864a/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="2058" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="2013604235" result="Failed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:07Z" duration="0.190651" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 30505 but was 32079. Strings differ at index 10220.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/operations-baseline-check/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-0cd95b55d1ae4807ac2338d2577d16b3/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="2059" name="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)" fullname="Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)" methodname="RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="1389610558" result="Failed" start-time="2026-09-26 00:56:07Z" end-time="2026-09-26 00:56:08Z" duration="0.327439" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 33205 but was 34795. Strings differ at index 10220.
+  Expected: "...rnal":{"version":1,"sequence":0,"omittedEvents":0,"resumes..."
+  But was:  "...rnal":{"version":1,"sequence":1,"omittedEvents":0,"resumes..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition (System.Int32 skill, System.Int32 ticks) [0x001ed] in /Users/t8g-2410-pn-005/.codex/worktrees/operations-baseline-check/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/CurrentBuildSaveTests.cs:61
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-3517c9fefc0e4a9d89f34520d41680be/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-case id="2071" name="SettingsComparisonIgnoresPresentationMetadataButIncludesFarmingAndBehaviorValues" fullname="Hellscript.Tests.CurrentBuildSaveTests.SettingsComparisonIgnoresPresentationMetadataButIncludesFarmingAndBehaviorValues" methodname="SettingsComparisonIgnoresPresentationMetadataButIncludesFarmingAndBehaviorValues" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="486484143" result="Passed" start-time="2026-09-26 00:56:08Z" end-time="2026-09-26 00:56:08Z" duration="0.030120" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2055" name="TownSaveFailureRetainsAccountGuideDraftDiskAndIdentitiesThenRetryPersists" fullname="Hellscript.Tests.CurrentBuildSaveTests.TownSaveFailureRetainsAccountGuideDraftDiskAndIdentitiesThenRetryPersists" methodname="TownSaveFailureRetainsAccountGuideDraftDiskAndIdentitiesThenRetryPersists" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="992917107" result="Passed" start-time="2026-09-26 00:56:08Z" end-time="2026-09-26 00:56:08Z" duration="0.174844" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-current-build-4aab2f129b23498abd82c8acd9b4d5a5/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2063" name="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" fullname="Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-26 00:56:08Z" end-time="2026-09-26 00:56:08Z" duration="0.309442" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2061" name="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(False)" fullname="Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(False)" methodname="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="400319406" result="Passed" start-time="2026-09-26 00:56:08Z" end-time="2026-09-26 00:56:08Z" duration="0.171843" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2062" name="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(True)" fullname="Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(True)" methodname="UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState" classname="Hellscript.Tests.CurrentBuildSaveTests" runstate="Runnable" seed="2039000109" result="Passed" start-time="2026-09-26 00:56:08Z" end-time="2026-09-26 00:56:08Z" duration="0.121373" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -59,19 +59,36 @@ namespace Hellscript.Editor
         }
         public static void BuildMac()
         {
-            string output="Builds/macOS/HELLSCRIPT.app";var args=Environment.GetCommandLineArgs();
-            int outputIndex=Array.IndexOf(args,"-hellscriptBuildOutput");
-            if(outputIndex>=0)
-            {
-                if(outputIndex+1>=args.Length||args[outputIndex+1].StartsWith("-",StringComparison.Ordinal))throw new ArgumentException("-hellscriptBuildOutput requires an .app path.");
-                output=args[outputIndex+1];
-            }
-            output=Path.GetFullPath(output);
-            if(!output.EndsWith(".app",StringComparison.OrdinalIgnoreCase))throw new ArgumentException("macOS build output must end in .app.");
+            string output=BuildOutput("Builds/macOS/HELLSCRIPT.app",".app");
             Setup();Directory.CreateDirectory(Path.GetDirectoryName(output));
             BuildReport report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=output,target=BuildTarget.StandaloneOSX,options=BuildOptions.Development});
             Debug.Log("HELLSCRIPT_BUILD "+report.summary.result+" errors="+report.summary.totalErrors+" output="+output);
             if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("HELLSCRIPT build failed");
+        }
+        // Release APK by default. -hellscriptDevelopment keeps the Debug.isDebugBuild smokes and QA hooks, and
+        // com.unity.pipeline then preserves whole assemblies, so a development APK is much larger.
+        public static void BuildAndroid()
+        {
+            string output=BuildOutput("Builds/Android/HELLSCRIPT.apk",".apk");
+            if(EditorUserBuildSettings.activeBuildTarget!=BuildTarget.Android)throw new InvalidOperationException("Start Unity with -buildTarget Android.");
+            bool development=Environment.GetCommandLineArgs().Contains("-hellscriptDevelopment");
+            Setup();Directory.CreateDirectory(Path.GetDirectoryName(output));EditorUserBuildSettings.buildAppBundle=false;
+            var options=development?BuildOptions.Development|BuildOptions.CompressWithLz4:BuildOptions.CompressWithLz4HC;
+            BuildReport report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=output,target=BuildTarget.Android,options=options});
+            Debug.Log("HELLSCRIPT_BUILD "+report.summary.result+" errors="+report.summary.totalErrors+" development="+development+" output="+output);
+            if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("HELLSCRIPT build failed");
+        }
+        static string BuildOutput(string fallback,string extension)
+        {
+            var args=Environment.GetCommandLineArgs();string output=fallback;int outputIndex=Array.IndexOf(args,"-hellscriptBuildOutput");
+            if(outputIndex>=0)
+            {
+                if(outputIndex+1>=args.Length||args[outputIndex+1].StartsWith("-",StringComparison.Ordinal))throw new ArgumentException("-hellscriptBuildOutput requires a "+extension+" path.");
+                output=args[outputIndex+1];
+            }
+            output=Path.GetFullPath(output);
+            if(!output.EndsWith(extension,StringComparison.OrdinalIgnoreCase))throw new ArgumentException("Build output must end in "+extension+".");
+            return output;
         }
         public static void ValidateSimulation()
         {

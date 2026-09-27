@@ -298,6 +298,8 @@ def build_databases():
     data.extend(wiki_reward_boxes.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
     import wiki_attendance
     data.extend(wiki_attendance.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
+    import wiki_operations_rewards
+    data.extend(wiki_operations_rewards.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
     return data
 
 def build_resources(databases):

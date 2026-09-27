@@ -161,7 +161,27 @@ namespace Hellscript
             UI.RefreshHud();
         }
         public void ContinuePortal()
-        {if(Combat==null)return;if(Combat.GemBagBlocked){Notify("보석을 합성해 공간을 만들거나 남은 보상을 두고 종료해 주세요.");return;}if(Economy.FreeSlots(Store.Data.Hero)<=0&&!Combat.State.limitedLoot){Notify("판매·분해·창고 이동으로 가방을 비워 주세요.");return;}Combat.State.portal=false;Combat.State.portalCast=0;Combat.State.paused=false;if(!DisplayDimmed)UI.ShowBattle();Save();}
+        {TryContinuePortal();}
+        public bool TryContinuePortal()
+        {
+            string error=PortalRecovery.ResumeError(Store.Data,Combat?.State);
+            if(error!=""){Notify(error);return false;}
+            if(!Store.ResumePortal(Combat.State,Guid.NewGuid().ToString("N"))){PausePortalSaveFailure();return false;}
+            ContentWindowHost.AcceptPauseState(this,Combat.State,false);RestoreForegroundClock();
+            if(!DisplayDimmed)UI.ShowBattle();return true;
+        }
+        void PausePortalSaveFailure()
+        {
+            foregroundResumeRequired=foregroundSaveBlocked=true;Combat.State.paused=true;
+            ForegroundPauseReason=Store.Error;combatClock.Reset(Time.realtimeSinceStartupAsDouble);Notify(Store.Error);
+        }
+        public bool TryReturnFromPortal()
+        {
+            if(Combat?.State.portal!=true)return false;
+            SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
+            if(!Store.ReturnFromPortal(Combat.State,Guid.NewGuid().ToString("N"),catalog)){PausePortalSaveFailure();return false;}
+            ContentWindowHost.AcceptPauseState(this,Combat.State,false);ReturnTown();return true;
+        }
         public void LeaveUncollectedLoot(string request)
         {
             if(Combat==null)return;
@@ -171,7 +191,8 @@ namespace Hellscript
                 foreach(var drop in run.drops)if(!drop.claimed)drop.ignored=true;
                 foreach(var drop in run.resources)if(!drop.claimed)drop.ignored=true;
                 run.portal=false;run.paused=false;return true;
-            })){Notify(Store.Error);return;}
+            })){PausePortalSaveFailure();return;}
+            ContentWindowHost.AcceptPauseState(this,Combat.State,false);RestoreForegroundClock();
             UI.ShowBattle();
         }
         public void EnterPlaza(bool fresh=false)

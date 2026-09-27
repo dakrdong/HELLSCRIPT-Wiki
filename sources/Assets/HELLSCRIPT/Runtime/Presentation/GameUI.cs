@@ -185,10 +185,11 @@ namespace Hellscript
                 content.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;sr.content=content;sr.viewport=scroll;
             }
         }
-        void FooterButton(int index,int count,string title,Action action,bool primary=false)
+        Button FooterButton(int index,int count,string title,Action action,bool primary=false)
         {
             var b=Button(footer,title,action,primary?UiTheme.Primary:UiTheme.Panel);var r=(RectTransform)b.transform;
             r.anchorMin=new Vector2((float)index/count,0);r.anchorMax=new Vector2((float)(index+1)/count,1);r.offsetMin=new Vector2(8,10);r.offsetMax=new Vector2(-8,-10);
+            return b;
         }
         public void ShowTown()=>game.EnterPlaza();
         public void ShowTownMenu()
@@ -265,7 +266,8 @@ namespace Hellscript
             BigButton(content,"01  단일 적 · 스킬 순환",()=>game.Begin(0),true);
             BigButton(content,"02  다수 적 · 밀집과 선회",()=>game.Begin(1));
             BigButton(content,"03  위험 지대 · 생존과 회피",()=>game.Begin(2));
-            BigButton(content,"같은 조건으로 A/B 비교",ShowComparisonPicker,true);
+            BigButton(content,ClassPracticeLesson.Title(hero.heroClass),ShowClassPractice,true);
+            BigButton(content,"같은 조건으로 A/B 비교",ShowComparisonPicker);
             Note(content,"단일·다수 표적은 공격하지 않습니다. 위험 훈련은 실제 예고와 피해가 발생하며 사망할 수 있습니다.\n종류마다 배치와 시드가 고정됩니다. 앱을 종료하면 훈련을 새로 시작합니다.",20,150,pale);
             FooterButton(0,1,"성소로 돌아가기",ShowTown);
         }
@@ -366,12 +368,13 @@ namespace Hellscript
         public void ShowResult()
         {
             if(game.ComparisonRun){ShowComparisonResult();return;}
-            if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.action,ShowResult);
+            if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.training>=0?r.action:Loc.F("균열 {0}단계",r.stage)+" · "+Loc.StoredText(r.action),ShowResult);
             game.RecordGuide(()=>FirstPlayGuide.ReadResult(game.Store.Data,r));
-            Note(content,r.training>=0?"TRAINING":won?"VICTORY":"RECALIBRATE",42,98,gold);
-            if(r.training<0)AddRepeatResult();
+            var next=r.training<0?FirstPlayRecommendation.Choose(game.Store.Data,r):null;
+            if(r.training<0)ShowResultProgress(r,next);
             string summary=r.training>=0?Loc.F("{0} Lv.{1} · 고정 훈련 {2}\n\n표적 처치 {3} / {4} · 남은 HP {5:0}\n전투 시간 {6:0.0}초 / 실제 {7:0.0}초\n총 피해 {8:N0} · 전투 초당 {9:0.0}", game.catalog.classNames[(int)game.Combat.Hero.heroClass], game.Combat.EffectiveLevel, r.training+1, r.kills, r.enemies.Count, Mathf.Max(0,r.health), r.time, r.realTime, r.dealt, r.dealt/Mathf.Max(CombatSimulation.Step,r.time)):Loc.F("{0} · {1}단계\n\n처치 {2}   /   획득 {3}개\n전투 시간 {4:0.0}초   /   실제 {5:0.0}초\n총 피해 {6:N0}", game.catalog.classNames[(int)game.Store.Data.Hero.heroClass], r.stage, r.kills, r.lootCount, r.time, r.realTime, r.dealt);
-            var card=Row(content,250);var t=Label(card,summary,27,pale);Inset(t.rectTransform,24,24,18,18);
+            ReviewText(summary,pale,21);
+            if(r.training<0)AddRepeatResult();
             if(r.training>=0)Note(content,"훈련 결과입니다. 실제 계정 보상은 지급하지 않습니다.",21,70,gold);
             else Note(content,Loc.F("상자 개봉 {0} / {1}개\n미개봉 상자 보상은 다음 판으로 이월되지 않습니다.", r.layout.chests.Count(c=>c.phase==ChestPhase.Opened), r.layout.chests.Count),21,92,gold);
             if(r.runesAwarded>0)Note(content,Loc.F("룬 {0}개 획득 · 룬 성장에서 배치할 수 있습니다.",r.runesAwarded),21,70,gold);
@@ -379,12 +382,21 @@ namespace Hellscript
             if(r.training<0)ObjectiveResult(RiftObjectives.Capture(r));
             if(r.training<0&&r.phase==RunPhase.Failed&&r.health<=0)BigButton(content,"사망 원인 분석 (최근 5초 기록)",ShowDefeatAnalysis,true);
             var completed=game.Store.Data.records.FirstOrDefault(record=>record.id==r.id);
-            if(r.training<0&&HasReview(completed))BigButton(content,"전투 상세 기록",()=>ShowRunReview(completed,true));
+            if(r.training<0&&HasReview(completed))
+            {BigButton(content,"스킬 사용과 미사용 원인",()=>ShowReviewSkills(completed,true),true);BigButton(content,"전투 상세 기록",()=>ShowRunReview(completed,true));}
             if(game.Combat.OwnedTraining)BigButton(content,"시험한 설정을 슬롯에 저장",ShowTrainingPresetSave);
             if(r.training<0)Note(content,"성공·실패와 관계없이 이미 얻은 XP·장비·재화는 유지됩니다. 다음 해금과 변경할 행동을 확인한 뒤 다시 도전하세요.",20,104,pale);
             BigButton(content,"첫 플레이 안내 · 다음 할 일",ShowOnboarding);
-            foreach(string log in r.logs.Skip(Math.Max(0,r.logs.Count-8)))Note(content,Loc.LogLine(log),17,45);
-            FooterButton(0,2,"성소로",()=>game.ReturnTown());FooterButton(1,2,"다시 도전",()=>{int training=r.training;game.ReturnTown();game.Begin(training);},true);
+            if(completed!=null)BigButton(content,"문자 로그 보기",()=>ShowReviewLog(completed,true));
+            int actions=next==null?2:3;
+            FooterButton(0,actions,"성소 귀환",()=>game.ReturnTown());
+            if(next!=null)FooterButton(1,actions,NextStepTitle(next),()=>OpenNextStep(next),true).name="result-next-action";
+            FooterButton(actions-1,actions,"다시 도전",()=>{int training=r.training;game.ReturnTown();game.Begin(training);},next==null);
+            historySize=Vector2.zero;ReflowHistory();
+            // A newly opened result starts at its growth summary. Subsequent resizes
+            // preserve the reader's position through ReflowHistory as usual.
+            historyScroll.StopMovement();content.anchoredPosition=Vector2.zero;Canvas.ForceUpdateCanvases();
+            historyAnchor=DialogReadingAnchor.Capture(historyScroll);
         }
         public void ShowDefeatAnalysis()
         {

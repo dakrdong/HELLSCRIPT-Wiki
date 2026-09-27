@@ -22,7 +22,7 @@ namespace Hellscript
         }
         static readonly string[] UtilityNames={"스킬","기본 공격","장비 회수","상자 개봉","탐색·성소"};
         string NamedConditions(string value)
-        {for(int i=0;i<game.catalog.skills.Count;i++)value=value.Replace(Loc.F("스킬 {0} / ", i+1),Loc.F("{0} / ",game.catalog.skills[i].name));return value;}
+        {for(int i=0;i<game.catalog.skills.Count;i++)value=value.Replace(Loc.F("스킬 {0} / ", i+1),Loc.F("{0} / ",game.catalog.skills[i].name));return ClassSkillTree.Display(value);}
         string RuleName(Rule r)=>r.action==RuleAction.Skill&&r.skill>=0&&r.skill<game.catalog.skills.Count?game.catalog.skills[r.skill].name:UtilityNames[Mathf.Clamp((int)r.action,0,4)];
         bool ValidateEditing()
         {

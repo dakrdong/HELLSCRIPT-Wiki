@@ -158,9 +158,9 @@ namespace Hellscript
             if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
-            float observedTime=State.time,observedHealth=State.health;
+            float observedTime=State.time,observedHealth=State.health;var observedPosition=State.position;
             tickingClassEvents=true;
-            try{TickCombat(dt);}finally{JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
+            try{TickCombat(dt);}finally{JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);RecordFeedbackTick(State.time-observedTime,observedPosition);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
         }
         void TickCombat(float dt)
         {
@@ -377,7 +377,7 @@ namespace Hellscript
             if(action.exitChannelForSurvival){CompleteHeroAction(action,"전역 회피 · 유지 구간 종료");return;}
             float cost=Cost(catalog.skills[0]);if(State.resource<cost){InterruptHeroAction("회오리 자원 부족");return;}
             if(EndEdictWhirlwindBeforeTick(action,cost))return;
-            State.channelTick+=.25f;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;AreaHit(State.position,RuneSkillRadius(0,2.5f),.5f,0);Visual?.Invoke(State.position,State.position,0,RuneSkillRadius(0,2.5f));
+            State.channelTick+=.25f;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;RecordFeedbackChannelTick(action);AreaHit(State.position,RuneSkillRadius(0,2.5f),.5f,0);Visual?.Invoke(State.position,State.position,0,RuneSkillRadius(0,2.5f));
             State.action=Loc.F("회오리 · {0:0.0}초 유지", State.channelTime);
             PullWhirlwindTargets();
             EndTimedEdictWhirlwind(action);
@@ -547,6 +547,7 @@ namespace Hellscript
             RiftResources.Add(State,RiftResourceKind.Material,State.position,Tuning.ClearMaterials(State.stage));
             RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,LiveOpsConfig.Scale(BlacksmithCatalog.RewardStones(State.stage),Tuning.bossStoneMultiplier));
             RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
+            var upcoming=ContentUnlocks.NextLocked(account);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(Tuning.FirstGold(State.stage)));RiftEarnings.GrantMaterials(account,State,Tuning.FirstMaterials(State.stage));Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
             for(int i=0;i<Tuning.bossEquipmentCount;i++)
@@ -554,6 +555,11 @@ namespace Hellscript
                     Drop(State.position+new Vector2(i%3-1,1+i/3*.3f),RollRarity(RiftRewardSource.Boss,ref State.rewardRng));
             RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);
+            if(State.journal!=null)
+            {
+                State.journal.openedContent??=new List<string>();
+                State.journal.openedContent.AddRange(upcoming.Where(f=>account.contentUnlocks.unlocked.Contains(f.id)).Select(f=>f.id));
+            }
             Log("BOSS_CLEAR","보스 처치 · 전리품 정리");
         }
         public void ExhaustFatigue()=>Finish(false,Loc.T("피로도를 모두 사용했습니다."),CombatFinish.Abandoned);

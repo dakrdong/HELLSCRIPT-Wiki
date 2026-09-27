@@ -1,8 +1,8 @@
 # HELLSCRIPT Hunt Edict — Shared UI resources
 
-작성일: 2026-09-15
+갱신일: 2026-09-26
 
-This is the original approved resource-pack guide. Its package paths describe the original delivery structure. Game PNGs have now been copied to `Assets/HELLSCRIPT/Resources/Art/HuntEdict/`; the Hunt Edict Game UI implementation record describes the current integration status.
+This is the original approved resource-pack guide. Its package paths describe the original delivery structure. The glyphs the game loads are in `Assets/HELLSCRIPT/Resources/Art/HuntEdict/Glyphs/`. The skin atlas, controls and `resource-manifest.json`, which the game does not load at runtime, moved to `Assets/HELLSCRIPT/Art/HuntEdict/` on 2026-09-26 so they no longer ship in player builds; the Hunt Edict Game UI implementation record describes the current integration status.
 
 This pack covers the 119 non-skill options and the preset/share interface using the approved ink-blue, charcoal, aged-brass and jade visual language.
 

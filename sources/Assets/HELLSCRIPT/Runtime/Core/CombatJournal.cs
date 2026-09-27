@@ -41,6 +41,7 @@ namespace Hellscript
         public List<RiftResourceDrop> resourceDrops=new List<RiftResourceDrop>();
         public List<CombatJournalEvent> events=new List<CombatJournalEvent>();
         public List<string> integritySignals=new List<string>();
+        public List<string> openedContent=new List<string>();
     }
     public enum CombatRecordFilter { All, Victory, Defeat }
     public static class CombatJournal

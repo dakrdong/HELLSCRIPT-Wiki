@@ -95,15 +95,29 @@ namespace Hellscript
             Shape("Body",enemy&&role==5?PrimitiveType.Sphere:enemy&&type==6?PrimitiveType.Cube:PrimitiveType.Capsule,root.transform,new Vector3(0,1,0),bodyScale,body);
             Shape("Head",PrimitiveType.Sphere,root.transform,new Vector3(0,2.05f,0),new Vector3(.66f,.65f,.6f),body);
             Shape("Face light",PrimitiveType.Cube,root.transform,new Vector3(0,2.07f,.28f),new Vector3(.4f,.08f,.06f),enemy?red:ember);
-            var shoulders=Shape("Shoulders",PrimitiveType.Cube,root.transform,new Vector3(0,1.6f,0),new Vector3(1.2f,.32f,.7f),body);shoulders.transform.localRotation=Quaternion.Euler(0,0,-4);
+            var shoulders=Shape("Shoulders",PrimitiveType.Capsule,root.transform,new Vector3(0,1.6f,0),new Vector3(.4f,.62f,.6f),body);shoulders.transform.localRotation=Quaternion.Euler(0,0,86);
+            if(!enemy&&type==0)Shape("Warrior shield",PrimitiveType.Cylinder,root.transform,new Vector3(-.6f,1.15f,.12f),new Vector3(.75f,.1f,.95f),trim).transform.localRotation=Quaternion.Euler(75,0,0);
             var weapon=Shape("Weapon",PrimitiveType.Cube,root.transform,new Vector3(.68f,1.3f,.35f),new Vector3(.17f,1.6f,.25f),enemy?darkStone:trim);weapon.transform.localRotation=Quaternion.Euler(25,0,-25);
             if(!enemy&&type==1){weapon.transform.localScale=new Vector3(.12f,1.3f,.12f);SkillLine("Simple bow",weapon.transform,new[]{new Vector3(0,-.5f,0),new Vector3(0,-.25f,2),new Vector3(0,.25f,2),new Vector3(0,.5f,0),new Vector3(0,-.5f,0)},trim,.55f);}
             if(!enemy&&type==2)Shape("Staff tip",PrimitiveType.Sphere,weapon.transform,new Vector3(0,.55f,0),new Vector3(2,.2f,1.5f),blue);
             if(enemy&&role==2)weapon.transform.localScale=new Vector3(1.2f,.15f,.4f);
             if(enemy&&role==4)Shape("Support lantern",PrimitiveType.Sphere,root.transform,new Vector3(.68f,2.3f,.35f),Vector3.one*.4f,purple);
-            if(!enemy)Ring(root.transform,Vector3.up*.08f,1.05f,ember,.055f);
-            if(boss)root.transform.localScale=Vector3.one*2;
+            if(!enemy){Ring(root.transform,Vector3.up*.08f,1.05f,ember,.09f);AddHeroOcclusion(root);}
+            if(boss)root.transform.localScale=new Vector3(2,1.7f,2);
             return root;
+        }
+        void AddHeroOcclusion(GameObject actor)
+        {
+            var shader=Resources.Load<Shader>("HeroOcclusion");if(shader==null||!shader.isSupported)return;
+            if(!materials.TryGetValue("Hero occlusion",out var material))
+            {material=new Material(shader){name="HELLSCRIPT Hero occlusion"};materials.Add("Hero occlusion",material);}
+            // Only the player's existing meshes get an occluded pass. Threats and fog keep their owners.
+            foreach(var mesh in actor.GetComponentsInChildren<MeshFilter>())
+            {
+                var silhouette=new GameObject("Hero occlusion silhouette",typeof(MeshFilter),typeof(MeshRenderer));silhouette.transform.SetParent(mesh.transform,false);
+                silhouette.GetComponent<MeshFilter>().sharedMesh=mesh.sharedMesh;var renderer=silhouette.GetComponent<MeshRenderer>();renderer.sharedMaterial=material;
+                renderer.shadowCastingMode=ShadowCastingMode.Off;renderer.receiveShadows=false;
+            }
         }
         GameObject Ring(Transform parent,Vector3 pos,float radius,Material mat,float width)
         {

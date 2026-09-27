@@ -2228,7 +2228,6 @@ LM01이 없어 새 눈보라를 위치 고정으로 설치합니다.	Without LM0
 자동 반복 이어가기	Resume auto repeat
 반복 준비 다시 확인	Check repeat readiness
 반복 설정과 종료 조건	Repeat settings and stop conditions
-가방·창고 정리	Manage bag and storage
 자동 반복 종료 · {0}	Auto repeat ended · {0}
 자동 반복이 꺼져 있습니다.	Auto repeat is off.
 사용자가 중지했습니다.	Stopped by the player.
@@ -4830,7 +4829,7 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 지급받을 보석 색상을 선택하세요.	Choose a gem color to receive.
 지급받을 코어 부위를 선택하세요.	Choose an equipment slot for the cores.
 균열을 마치고 성소에서 상자를 개봉하세요.	Finish the rift and open boxes in the sanctuary.
-상자 {0}개를 개봉했습니다.	Opened {0} boxes.
+상자 {0}개를 개봉했습니다.	Boxes opened: {0}.
 1개 개봉	Open One
 {0}개 개봉	Open {0}
 상자 {0}개	{0} boxes
@@ -4853,7 +4852,6 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 이 단계에서 열리는 콘텐츠	Content unlocked at this tier
 콘텐츠는 클리어 기록이 확정되면 계정 전체에 자동으로 개방됩니다. 상자 수령 여부와는 관계없습니다.	Content unlocks automatically for the account when the clear record is confirmed. Claiming reward boxes is not required.
 클리어 후 개방	Unlocks after clearing
-다음 콘텐츠 · 균열 {0}단계: {1}	Next unlock at Rift {0}: {1}
 최초 클리어 상자	First-clear boxes
 콘텐츠 개방: {0}	Unlocks: {0}
 콘텐츠 개방과 최초 보상 · 단계를 눌러 상세 확인	Content unlocks and first rewards · Tap a tier for details
@@ -5128,3 +5126,114 @@ G0 한 칸 룬을 구입하고 룬 보드에서 배치를 확인하세요. 최�
 설명: {0} · 실습: {1}	Explanation: {0} · Practice: {1}
 새 안내: {0} · 모험 안내에서 확인하세요.	New guide: {0} · Open Guides.
 변경할 속성 {0}: {1}  ▸	Affix to reroll {0}: {1}  ▸
+정리가 끝났습니다. 균열로 복귀할 수 있습니다.	Cleanup complete. You can return to the rift.
+균열로 복귀	Resume rift
+남은 보상 두고 완료	Finish without remaining loot
+현재 등급 {0} · 추가 등급 {1}	Current rank {0} · bonus ranks {1}
+현재 효과 배율 {0:0}%	Current effect scale {0:0}%
+현재 사용 비용 {0:0.##}	Current resource cost {0:0.##}
+기본 등급 설명	Base-rank description
+사용 순서 {0} · 자동 사용 {1}	Priority {0} · automatic use {1}
+기본 공격보다 뒤에 있습니다. 앞선 행동이 선택되면 이 기술을 검사하지 않을 수 있습니다.	This skill follows basic attack. When an earlier action is selected, this skill may not be evaluated.
+사용 조건 확인	Inspect activation conditions
+기본 공격 앞으로	Move before basic attack
+60초 A/B 실습 · 실제 계정은 유지됩니다	60-second A/B practice · Your account stays unchanged
+A 결과로	Back to A results
+A는 현재 설정입니다. B에서는 제안한 조건 하나만 바꿉니다. 두 결과를 확인한 뒤 저장과 적용을 직접 선택하세요.	A uses your current setup. B changes one proposed condition. Compare both results, then choose whether to save or apply a setup.
+B에서 바꿀 조건	Condition to change in B
+Lv.{0} → Lv.{1} · 골드 +{2:N0} · 장비 {3}개	Lv.{0} → Lv.{1} · Gold +{2:N0} · {3} equipment items
+{0} {1}회	{0}: {1} checks
+{0} · G{1} · {2}칸	{0} · G{1} · {2} cells
+{0}단계 {1}	Tier {0} {1}
+가방 여유가 적습니다. 새 장비를 비교하고 보호·보관할 장비를 정하세요.	Your bag is almost full. Compare new equipment and choose what to lock or store.
+가방 정리 필요	Bag cleanup needed
+같은 단계 이전 기록: {0:0.0}초 → {1:0.0}초 · 피해 {2:N0} → {3:N0}\n레벨 {4} → {5} · 장비 변경 {6} · 설정 변경 {7}	Previous run at this tier: {0:0.0}s → {1:0.0}s · Damage {2:N0} → {3:N0}\nLevel {4} → {5} · Equipment changed: {6} · Setup changed: {7}
+관련 화면 열기	Open related screen
+관찰한 실습 완료 기록	Record observed practice completion
+관측 {0:0.0}초부터 · 주 행동 {1:0.0}초\n공격 {2:0.0} · 회피 {3:0.0} · 이동 {4:0.0} · 획득 행동 {5:0.0} · 대기 {6:0.0}	Observed from {0:0.0}s · Primary actions: {1:0.0}s\nAttack {2:0.0} · Evade {3:0.0} · Move {4:0.0} · Gather {5:0.0} · Wait {6:0.0}
+관측 구간에서 발동하지 않았습니다.	No release was observed during this window.
+궁극기 · Lv.40에 해금	Ultimate · Unlocks at Lv.40
+궁수 · 다중 사격 우선순위	Ranger · Multishot priority
+균열 입장 · 1배속	Enter rift · 1× speed
+기록된 사용 방해 없음	No blocked-use reason recorded
+나중에 보기	Read later
+다른 행동 진행 중	Another action in progress
+다음 목표 · 균열 {0}단계	Next goal · Rift tier {0}
+마법사 · 눈보라 유지와 위치 갱신	Mage · Keep or relocate Blizzard
+모든 후보를 확인했습니다.	All candidates reviewed.
+보관	Store
+보관할 창고 선택	Choose a storage tab
+보관함 {0} · {1}/{2}	Storage tab {0} · {1}/{2}
+비교 조건: 눈보라 유지 또는 위치 갱신. 발동 횟수·효과 유지·피해와 자원 부족 판단을 보세요.	Change: keep or relocate Blizzard. Compare releases, effect uptime, damage, and resource checks.
+비교 조건: 지속 피해 장판 회피 방침. 받은 피해와 공격·이동 시간을 함께 보세요.	Change: ground-hazard avoidance. Compare damage taken and time spent attacking or moving.
+사냥 칙령 해제	Hunt Edict disabled
+사냥 칙령을 켠 뒤 실습할 수 있습니다.	Enable Hunt Edict before starting this practice.
+사망 전 피해를 확인하고 물약 조건과 회피 방침을 점검하세요.	Review damage before death, then check potion conditions and evasion settings.
+사용 위치로 이동 중	Moving into position
+사용 조건 대기	Waiting for activation conditions
+사용하지 않은 스킬 포인트가 있습니다. 현재 효과와 다음 등급을 비교하세요.	You have unspent skill points. Compare current effects with the next rank.
+상위 행동으로 검사 기회 없음	Not evaluated after a higher-priority action
+새 액티브 스킬을 장착하고 사용 순서와 조건을 확인하세요.	Equip a new active skill and inspect its priority and activation conditions.
+새 장비 연속 비교 · {0}개	Review new equipment · {0} items
+설정 변경과 실제 행동 차이를 확인했습니다. 결과를 읽고 적용할 설정을 선택하세요.	The changed setting produced an observed behavior difference. Review the results and choose which setup to apply.
+설정은 바뀌었지만 이번 시험에서는 발동·행동 차이를 확인하지 못했습니다. 완료로 처리하지 않고 조건과 기록을 다시 확인하세요.	The setting changed, but this trial did not show a release or behavior difference. Review the conditions and records before marking practice complete.
+수령할 최초 클리어 보상이 있습니다. 상자를 받고 개봉 내역을 확인하세요.	First-clear rewards are ready. Claim the boxes and review their opening receipts.
+스킬 사용과 미사용 원인	Skill use and unused-skill reasons
+시야 막힘	Line of sight blocked
+실습 결과를 기록했습니다.	Practice result recorded.
+실습 스킬을 해금해 장착하고 자동 사용을 켜세요.	Unlock and equip the practice skill, then enable automatic use.
+실습할 장비 선택	Choose equipment for practice
+실행 대상으로 선택됨	Selected for execution
+아직 실제 설정에는 적용하지 않았습니다	Your actual setup has not been changed
+여러 개 개봉	Open multiple
+열린 콘텐츠 · {0}	Available content · {0}
+완료	Completed
+원인 집계 기록 없음	No cause aggregate recorded
+유료 1.5배속	Paid 1.5× speed
+일반 입장 1배속 · 일시정지 중에도 피로도 차감	Normal entry is 1× speed. Fatigue also drains while paused.
+있음	Yes
+자동 사용 해제	Automatic use disabled
+장착 비교 · {0}/{1}	Equipment comparison · {0}/{1}
+적 모으기 진행 중	Gathering enemies
+전사 · 장판 회피와 공격 유지	Warrior · Hazard avoidance and attack uptime
+전투 로그	Combat log
+접기	Collapse
+제한시간에 도달했습니다. 미사용 스킬과 공격 중단 기록을 확인하고 한 조건씩 시험하세요.	The time limit was reached. Review unused skills and interrupted attacks, then test one condition at a time.
+주 행동은 전투 틱마다 하나만 집계합니다. 메뉴·종료 후 정리 시간은 제외하며, 효과 유지 시간은 서로 겹칠 수 있습니다. 판단 횟수는 사용 가능 횟수가 아닙니다.	One primary action is counted per combat tick. Menus and cleanup after combat are excluded. Effect uptimes may overlap. Check counts do not mean the skill was usable.
+중단: {0} · {1}회	Interrupted: {0} · {1} times
+지금 할 일	Next action
+지도와 전투 상황도 달라질 수 있으므로 변화의 원인을 한 설정으로 단정하지 않습니다.	The map and encounter conditions may also differ. A change cannot be attributed to one setting alone.
+직업별 한 가지 실험	One-condition class practice
+진행 중	In progress
+집계 한도에 도달해 일부 효과 기록이 생략되었습니다.	The aggregate limit was reached. Some effect records were omitted.
+한 조건 바꿔 B 시작	Change one condition and start B
+한 조건 바꿔 보기	Change one condition
+현재 설정으로 A 시작	Start A with the current setup
+현재 설정으로 A를 실행하고, 조건 하나만 바꾼 B를 같은 장비·레벨·난수로 시험하세요. 실제 발동이나 행동 차이를 확인한 뒤 적용 여부를 선택합니다.	Run A with the current setup, then change one condition for B while keeping equipment, level, and random seed fixed. Observe the difference before choosing whether to apply it.
+확인 완료	Finish reviewing
+획득 내역	Rewards received
+효과 적용 대상 {0}{1}명 · 효과 유지 {2:0.0}초\n실제 회복 {3:0} · 보호막 흡수 {4:0} · 자원 회복 {5:0}	Effect applied to {0}{1} targets · Active for {2:0.0}s\nActual healing {3:0} · Shield absorption {4:0} · Resource restored {5:0}
+유지 공격 판정 {0}회 · 발동은 각 유지 공격의 첫 판정만 셉니다.	Channel ticks {0} · Releases count the first tick of each channel.
+최근 개봉 내역	Recent openings
+저장된 최근 개봉 내역이 없습니다.	No recent openings have been saved.
+최근 20건의 실제 지급 내역입니다.	Actual rewards from the 20 most recent openings.
+장비 정리	Review Gear
+보상 받기	Claim Boxes
+스킬 확인	Review Skills
+생존 설정	Survival
+성소 귀환	Sanctuary
+다음 계정 콘텐츠 · 균열 {0}단계: {1}	Next account unlock at Rift {0}: {1}
+예상 HP 손실 {0}% 이상이면 장판 회피	Avoid ground hazards when expected HP loss is at least {0}%
+지속 피해 장판을 항상 회피	Always avoid damaging ground hazards
+지속 피해 장판을 회피하지 않음	Do not avoid damaging ground hazards
+A 조건: {0}\nB 조건: {1}	A setting: {0}\nB setting: {1}
+다중 사격 검사 순서: {0}번째	Multishot priority: {0}
+비교 조건: 다중 사격을 공격 순서 맨 앞으로 이동합니다. 이미 맨 앞이면 기본 공격 뒤로 옮깁니다. 실제 발동 횟수와 피해를 보세요.	Comparison: move Multishot to the first attack priority. If already first, move it after Basic Attack. Compare actual releases and damage.
+현재 조건: {0}\n선택한 조건: {1}	Current setting: {0}\nSelected setting: {1}
+
+선택한 부위의 장비를 지급합니다. 옵션과 전설 효과는 무작위입니다.	Grants equipment for your selected slot. Affixes and legendary powers are random.
+{0} · {1}개\n개봉하는 캐릭터의 물약 보관함에 지급합니다.	{0} · {1}\nDelivered to the character opening this box.
+운영 패키지 보상	Operations package reward
+지급받을 장비 부위를 선택하세요.	Choose an equipment slot.
+운영 보상 지급 조건을 확인해 주세요.	Check the requirements for this operations reward.
+운영 지급 ID가 올바르지 않습니다.	Invalid operations delivery ID.

@@ -49,6 +49,19 @@ def catalog():
     add('rune-starter','입문 룬 상자 · 5종','Starter Rune Box · Five Types','rune',amount=5,grade=0,size=1,eachType=True)
     for grade in [4,5,6]:
         add(f'rune-g{grade}',f'G{grade} 5칸 룬 상자',f'G{grade} Five-cell Rune Box','rune',grade=grade,size=5)
+    # Operational stock is available to explicit grants; first-clear schedules stay unchanged.
+    for rarity,key,ko,en in [(2,'rare','희귀','Rare'),(3,'legendary','전설','Legendary')]:
+        add(key+'-slot-choice',ko+' 장비 부위 선택 상자',en+' Equipment Slot Choice Box','equipment',rarity=rarity,chooseSlot=True)
+    for slot,suffix,ko,en in [(1,'helm','머리','Helm'),(3,'gloves','장갑','Gloves'),(4,'boots','신발','Boots')]:
+        add('set-'+suffix,'직업 세트 '+ko+' 상자','Class Set '+en+' Box','equipment',rarity=3,slot=slot,setOnly=True)
+    for grade in [1,2,3]:
+        add(f'rune-g{grade}',f'G{grade} 5칸 룬 상자',f'G{grade} Five-cell Rune Box','rune',grade=grade,size=5)
+    translations={line.split('\t',1)[0]:line.split('\t',1)[1] for line in (ROOT/'Assets/HELLSCRIPT/Resources/Localization/en.txt').read_text().splitlines() if '\t' in line and not line.startswith('#')}
+    for potion in json.loads((ROOT/'Assets/HELLSCRIPT/Resources/Data/Potions.json').read_text())['items']:
+        add('potion-'+potion['id'].lower(),potion['name']+' 보급 상자 · 10개',translations[potion['name']]+' Supply Box · 10','potion',potionId=potion['id'],amount=10)
+    for gid,ko,en in [('G01','루비','Ruby'),('G02','사파이어','Sapphire'),('G03','토파즈','Topaz'),('G04','에메랄드','Emerald'),('G05','자수정','Amethyst'),('G06','다이아몬드','Diamond')]:
+        for tier in range(1,7):
+            add(f'elixir-{gid.lower()}-t{tier}',f'{tier}단계 {ko} 영약 상자 · 5개',f'T{tier} {en} Elixir Box · 5','potion',potionId=f'PE-{gid}-{tier}',amount=5,gemId=gid,tier=tier)
     def grant(id,count=1,quality=0):return dict(boxId=id,count=count,minimumQuality=quality)
     milestones = {
         1:[grant('rare-weapon',quality=5000)],3:[grant('materials-50')],5:[grant('stones-30')],
@@ -125,6 +138,10 @@ def artwork(box):
             c.line([(110,117),(111,134),(126,149),(143,134),(144,117)],light,3);c.polygon([(126,137),(134,148),(126,159),(118,148)],accent)
         elif slot==7:
             c.ellipse(113,126,29,29,light);c.ellipse(118,131,19,19,'#25302e');c.polygon([(126,111),(136,120),(126,130),(116,120)],accent)
+    elif kind=='potion':
+        c.rect(118,109,18,7,light);c.rect(120,115,14,12,light)
+        c.polygon([(120,124),(109,137),(109,153),(116,159),(138,159),(145,153),(145,137),(134,124)],light)
+        c.polygon([(114,139),(140,139),(140,151),(136,155),(118,155),(114,151)],accents.get(gem,'#df7b72'))
     elif kind=='gem':
         c.polygon([(111,115),(140,115),(148,128),(126,158),(104,128)],accent)
         c.line([(111,115),(118,130),(126,158),(134,130),(140,115)],light,2);c.line([(104,128),(148,128)],light,2)
@@ -141,7 +158,7 @@ def artwork(box):
     marks=box['tier'] if kind=='gem' else box['grade'] if kind=='rune' else 0
     for n in range(marks):c.rect(126-marks*5+n*10,189,6,8,accent)
     # A colored wax tab identifies choice packs. Counts are supplied by the UI, never baked tiny text.
-    if kind in ('gem','cores') and (not gem if kind=='gem' else slot<0):
+    if box.get('chooseSlot') or kind in ('gem','cores') and (not gem if kind=='gem' else slot<0):
         for n,color in enumerate(list(accents.values())[:3]):c.polygon([(184+n*7,155),(191+n*7,155),(191+n*7,181),(187+n*7,176),(184+n*7,181)],color)
     return c
 
@@ -151,7 +168,13 @@ def main():
     DATA.write_text(json.dumps(db,ensure_ascii=False,indent=2)+'\n')
     manifest=[];tiles=[]
     for row in db['boxes']:
-        c=artwork(row);png=c.image.resize((256,256),Image.Resampling.LANCZOS);path=ART/(row['id']+'.png');png.save(path)
+        c=artwork(row);png=c.image.resize((256,256),Image.Resampling.LANCZOS);path=ART/(row['id']+'.png')
+        # Keep existing bytes when only the encoder version differs.
+        same=False
+        if path.exists():
+            with Image.open(path) as previous:
+                same=previous.mode==png.mode and previous.size==png.size and previous.tobytes()==png.tobytes()
+        if not same:png.save(path)
         (SOURCE/(row['id']+'.svg')).write_text('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">'+''.join(c.svg)+'</svg>\n')
         alpha=png.getchannel('A');assert alpha.getextrema()==(0,255)
         assert all(alpha.getpixel((x,y))==0 for x,y in [(0,0),(255,0),(0,255),(255,255)])

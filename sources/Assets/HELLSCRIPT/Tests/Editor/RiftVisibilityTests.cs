@@ -86,16 +86,16 @@ namespace Hellscript.Tests
             }
             finally { UnityEngine.Object.DestroyImmediate(catalog); }
         }
-        [Test] public void OverlayPreferenceDefaultsOnPersistsAndRecoversFromFailedWrites()
+        [Test] public void OverlayPreferenceDefaultsOffPreservesExistingChoicesAndRecoversFromFailedWrites()
         {
             string dir = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "rift-overlay-" + Guid.NewGuid().ToString("N"));
             try
             {
-                var preference = new OverlayMapSettings(dir); Assert.IsTrue(preference.Enabled);
+                var preference = new OverlayMapSettings(dir); Assert.IsFalse(preference.Enabled);
                 Assert.IsTrue(preference.Apply(false)); Assert.IsFalse(new OverlayMapSettings(dir).Enabled);
                 Directory.CreateDirectory(preference.Path + ".tmp"); Assert.IsFalse(preference.Apply(true)); Assert.IsTrue(preference.Enabled); Assert.IsTrue(preference.CanRetrySave);
                 Assert.IsFalse(new OverlayMapSettings(dir).Enabled); Directory.Delete(preference.Path + ".tmp"); Assert.IsTrue(preference.Apply(true));
-                File.WriteAllText(preference.Path, "invalid"); var invalid = new OverlayMapSettings(dir); Assert.IsTrue(invalid.Enabled); Assert.IsNotEmpty(invalid.Message); Assert.AreEqual("invalid", File.ReadAllText(preference.Path));
+                File.WriteAllText(preference.Path, "invalid"); var invalid = new OverlayMapSettings(dir); Assert.IsFalse(invalid.Enabled); Assert.IsNotEmpty(invalid.Message); Assert.AreEqual("invalid", File.ReadAllText(preference.Path));
             }
             finally { if (Directory.Exists(dir)) Directory.Delete(dir, true); }
         }

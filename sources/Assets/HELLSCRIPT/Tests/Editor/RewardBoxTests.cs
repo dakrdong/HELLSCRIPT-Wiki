@@ -27,8 +27,8 @@ namespace Hellscript.Tests
         }
         [Test] public void CatalogCoversEveryRequestedRaritySlotGemAndIcon()
         {
-            RewardBoxCatalog.Validate(RewardBoxCatalog.Data);Assert.AreEqual(96,RewardBoxCatalog.All.Count);
-            foreach(int rarity in new[]{2,3})foreach(int slot in Enumerable.Range(-1,9))Assert.AreEqual(1,RewardBoxCatalog.All.Count(d=>d.kind=="equipment"&&d.rarity==rarity&&d.slot==slot&&!d.setOnly&&!d.awakened));
+            RewardBoxCatalog.Validate(RewardBoxCatalog.Data);Assert.AreEqual(148,RewardBoxCatalog.All.Count);
+            foreach(int rarity in new[]{2,3})foreach(int slot in Enumerable.Range(-1,9))Assert.AreEqual(1,RewardBoxCatalog.All.Count(d=>d.kind=="equipment"&&d.rarity==rarity&&d.slot==slot&&!d.setOnly&&!d.awakened&&!d.chooseSlot));
             foreach(var gem in GemCatalog.Gems)foreach(int tier in Enumerable.Range(1,6))Assert.AreEqual(10,RewardBoxCatalog.All.Single(d=>d.kind=="gem"&&d.gemId==gem.id&&d.tier==tier).amount);
             foreach(var d in RewardBoxCatalog.All)Assert.IsNotNull(Resources.Load<Sprite>("Art/RewardBoxes/"+d.icon),d.id);
         }
@@ -65,7 +65,7 @@ namespace Hellscript.Tests
         [TestCase(0)] [TestCase(1)] [TestCase(2)] public void AllGearBoxesProduceOnlyLegalReleasedClassEquipment(int hero)
         {
             A.selectedHero=hero;A.Hero.capacity=500;
-            foreach(var definition in RewardBoxCatalog.All.Where(d=>d.kind=="equipment"))
+            foreach(var definition in RewardBoxCatalog.All.Where(d=>d.kind=="equipment"&&!d.chooseSlot))
             {
                 var box=Add(definition.id,3);Assert.IsTrue(store.OpenRewardBox(Guid.NewGuid().ToString(),box.id,3),store.Error);
                 foreach(var item in store.LastBoxEquipment)

@@ -1,6 +1,6 @@
 # Legendary-power emblem production record
 
-Updated: 2026-09-22
+Updated: 2026-09-26
 
 ## Scope and authority
 
@@ -18,7 +18,7 @@ The requested default is `gpt-image-2`, but the callable interface exposes neith
 
 ## Native masters and QA copies
 
-Only native transparent PNG results are accepted. The updated handoff targets 1024px and also accepts native 1254px output. Each asset-folder `aspect-ID.png` and its archival copy in `native/` are byte-identical to the returned image. Actual dimensions, alpha measurements and matching source/asset SHA-256 values are in the [manifest](manifest.json). Display size and Unity import settings remain decisions for UI integration.
+Only native transparent PNG results are accepted. The updated handoff targets 1024px and also accepts native 1254px output. Each archival copy `aspect-ID.png` in `native/` is byte-identical to the returned image. Actual dimensions, alpha measurements and matching source/asset SHA-256 values are in the [manifest](manifest.json). Display size and Unity import settings remain decisions for UI integration.
 
 Only conservative QA copies in `qa/previews/` are normalized: crop empty alpha bounds, proportionally resample with premultiplied alpha to a maximum content dimension of 756px, then center on a transparent 1024px square canvas. This changes size and padding only and never replaces the delivered native master. No chroma keying, background removal, recoloring, repainting or duplicate-based variation is used. A result without genuine alpha remains incomplete. Early 1024px asset copies were replaced with native originals after the revised handoff was confirmed; subsequent normalized images are QA-only.
 
@@ -26,9 +26,11 @@ Only conservative QA copies in `qa/previews/` are normalized: crop empty alpha b
 
 The manifest covers every handoff ID with bilingual names and effects, linked skills, asset paths, concepts, prompts, generation attempts, provenance limits, reuse decisions, source and master hashes, automated alpha/padding checks and visual review. Per-item generation receipts are stored in `generation/`.
 
-Automated checks cover native RGBA, fully transparent and opaque pixels, accepted square dimensions, byte identity with returned originals, complete unique IDs, duplicate file hashes and GUID collisions. Native border alpha is recorded without modification. Separate QA-copy checks cover 1024px dimensions, clear borders and content within the central 76%. Contact sheets in `qa/contact-*.png` show these conservative-fit copies at 192px alongside actual 64px composites on light and dark backgrounds. Visual review checks meaningful silhouette differences, readable actions and the absence of visible matte or unwanted borders.
+Automated checks cover native RGBA, fully transparent and opaque pixels, accepted square dimensions, byte identity with returned originals, complete unique IDs and duplicate file hashes. Native border alpha is recorded without modification. Separate QA-copy checks cover 1024px dimensions, clear borders and content within the central 76%. Contact sheets in `qa/contact-*.png` show these conservative-fit copies at 192px alongside actual 64px composites on light and dark backgrounds. Visual review checks meaningful silhouette differences, readable actions and the absence of visible matte or unwanted borders.
 
 New PNGs and their folder have unique GUIDs. GUIDs assigned earlier in this task remain unchanged after replacing asset copies with native masters. Initial provisional Sprite import settings were removed, leaving minimal metadata for UI integration to configure. Assets and metadata that predated this task were not changed. Unity import, game UI integration, macOS runtime and physical-mobile validation are not claimed by this art-only task.
+
+2026-09-26: no game code loads these emblems yet, but their copies sat in a `Resources` folder, so every player build shipped them. The legacy minimal metas made each one import at about 32 MB, and the 123 files accounted for about 3.9 GB of uncompressed build data in the Unity build report (the whole APK was about 2.1 GB). The copies and metas in `Assets/HELLSCRIPT/Resources/Art/ClassAspectIcons` were therefore deleted. The masters remain byte-identical in `native/`, and both the `file` fields in the [manifest](manifest.json) and `prepare_assets.py` now point there. No Unity `.meta` files remain, so the GUID-collision check in `prepare_assets.py` and `newGuidsChecked` in `qa/validation.json` were removed. When an Aspect UI loads the emblems, import them again with settings sized for their display. See [APK size optimization](../../Implementation/APK_Size_Optimization.en.md).
 
 Current counts are recorded in the [validation report](qa/validation.json) and [production progress](Class_Aspect_Icons_Progress.md). Generation, automated QA, visual review and model verification remain separate statuses. Main integration and public wiki deployment are outside this handoff's scope.
 
@@ -53,6 +55,6 @@ Each sheet pairs 192px previews with actual 64px emblems on light and dark backg
 
 ## Re-running validation
 
-From the repository root, run `python3 Docs/Art/ClassAspectIcons/prepare_assets.py --contacts`. It preserves native originals, prepares only missing or changed QA copies and refreshes contact sheets and the automated report. Existing metadata and reviews for unchanged originals are retained. When a regenerated source changes its hash, its previous visual review moves to history and the new original requires another review.
+From the repository root, run `python3 Docs/Art/ClassAspectIcons/prepare_assets.py --contacts`. It preserves native originals, prepares only missing or changed QA copies and refreshes contact sheets and the automated report. Visual reviews for unchanged originals are retained. When a regenerated source changes its hash, its previous visual review moves to history and the new original requires another review.
 
 See [Class_Aspect_Icons.md](Class_Aspect_Icons.md) for the Korean production record.

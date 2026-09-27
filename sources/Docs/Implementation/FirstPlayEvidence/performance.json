@@ -1,0 +1,579 @@
+{
+  "method": "Three sequential 20-second captures per build on one Mac. Same seeded stage-30 Mage fixture and input account. Both profiling harnesses wait for normal asynchronous admission. Native Development Mono, 1280x720, normal 1x. Not natural progression or mobile evidence.",
+  "trials": {
+    "before": [
+      {
+        "frames": 1123,
+        "combatTicks": 401,
+        "frameP50Ms": 16.817542000000074,
+        "frameP95Ms": 24.746750000002038,
+        "peakRssMiB": 629.984375,
+        "metrics": {
+          "Gfx.WaitForPresentOnGfxThread": {
+            "unit": "TimeNanoseconds",
+            "mean": 344.09082813891365,
+            "p95": 917
+          },
+          "Main Thread": {
+            "unit": "TimeNanoseconds",
+            "mean": 17791377.73107747,
+            "p95": 18015917
+          },
+          "GC Allocated In Frame": {
+            "unit": "Bytes",
+            "mean": 234911.63668744435,
+            "p95": 464599
+          },
+          "Batches Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Draw Calls Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Triangles Count": {
+            "unit": "Count",
+            "mean": 35337.710596616205,
+            "p95": 44783
+          },
+          "SetPass Calls Count": {
+            "unit": "Count",
+            "mean": 38.959038290293854,
+            "p95": 43
+          },
+          "HELLSCRIPT.World.Present": {
+            "unit": "TimeNanoseconds",
+            "mean": 233128.26357969723,
+            "p95": 398416
+          },
+          "HELLSCRIPT.World.Effect": {
+            "unit": "TimeNanoseconds",
+            "mean": 6970.988423864648,
+            "p95": 0
+          },
+          "HELLSCRIPT.UI.Update": {
+            "unit": "TimeNanoseconds",
+            "mean": 189786.58682101514,
+            "p95": 1819459
+          },
+          "HELLSCRIPT.Combat.Tick": {
+            "unit": "TimeNanoseconds",
+            "mean": 1044119.1665182547,
+            "p95": 4866334
+          }
+        },
+        "liveOpsVersion": 0,
+        "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+        "mapFingerprint": "cb352198",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "backend": "Mono"
+      },
+      {
+        "frames": 1122,
+        "combatTicks": 401,
+        "frameP50Ms": 16.77291699999728,
+        "frameP95Ms": 25.197249999999727,
+        "peakRssMiB": 637.390625,
+        "metrics": {
+          "Gfx.WaitForPresentOnGfxThread": {
+            "unit": "TimeNanoseconds",
+            "mean": 342.3663101604278,
+            "p95": 833
+          },
+          "Main Thread": {
+            "unit": "TimeNanoseconds",
+            "mean": 17806753.116755795,
+            "p95": 26345708
+          },
+          "GC Allocated In Frame": {
+            "unit": "Bytes",
+            "mean": 235238.6862745098,
+            "p95": 465221
+          },
+          "Batches Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Draw Calls Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Triangles Count": {
+            "unit": "Count",
+            "mean": 35275.525846702316,
+            "p95": 61778
+          },
+          "SetPass Calls Count": {
+            "unit": "Count",
+            "mean": 38.99554367201426,
+            "p95": 72
+          },
+          "HELLSCRIPT.World.Present": {
+            "unit": "TimeNanoseconds",
+            "mean": 241180.31818181818,
+            "p95": 431666
+          },
+          "HELLSCRIPT.World.Effect": {
+            "unit": "TimeNanoseconds",
+            "mean": 6323.456327985739,
+            "p95": 0
+          },
+          "HELLSCRIPT.UI.Update": {
+            "unit": "TimeNanoseconds",
+            "mean": 188914.66399286987,
+            "p95": 1744875
+          },
+          "HELLSCRIPT.Combat.Tick": {
+            "unit": "TimeNanoseconds",
+            "mean": 1030542.1844919786,
+            "p95": 4793000
+          }
+        },
+        "liveOpsVersion": 0,
+        "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+        "mapFingerprint": "cb352198",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "backend": "Mono"
+      },
+      {
+        "frames": 1127,
+        "combatTicks": 401,
+        "frameP50Ms": 16.843354000000588,
+        "frameP95Ms": 24.691000000000685,
+        "peakRssMiB": 625.21875,
+        "metrics": {
+          "Gfx.WaitForPresentOnGfxThread": {
+            "unit": "TimeNanoseconds",
+            "mean": 294.72759538598046,
+            "p95": 834
+          },
+          "Main Thread": {
+            "unit": "TimeNanoseconds",
+            "mean": 17727309.919254657,
+            "p95": 17583500
+          },
+          "GC Allocated In Frame": {
+            "unit": "Bytes",
+            "mean": 233918.5536823425,
+            "p95": 465003
+          },
+          "Batches Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Draw Calls Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Triangles Count": {
+            "unit": "Count",
+            "mean": 35288.53327417924,
+            "p95": 71482
+          },
+          "SetPass Calls Count": {
+            "unit": "Count",
+            "mean": 38.94764862466726,
+            "p95": 72
+          },
+          "HELLSCRIPT.World.Present": {
+            "unit": "TimeNanoseconds",
+            "mean": 245596.43566992015,
+            "p95": 432375
+          },
+          "HELLSCRIPT.World.Effect": {
+            "unit": "TimeNanoseconds",
+            "mean": 6208.558118899734,
+            "p95": 0
+          },
+          "HELLSCRIPT.UI.Update": {
+            "unit": "TimeNanoseconds",
+            "mean": 179545.61934338952,
+            "p95": 1581209
+          },
+          "HELLSCRIPT.Combat.Tick": {
+            "unit": "TimeNanoseconds",
+            "mean": 1017857.2546583851,
+            "p95": 4630541
+          }
+        },
+        "liveOpsVersion": 0,
+        "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+        "mapFingerprint": "cb352198",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "backend": "Mono"
+      }
+    ],
+    "after": [
+      {
+        "frames": 1153,
+        "combatTicks": 401,
+        "frameP50Ms": 16.669166499999832,
+        "frameP95Ms": 23.360124999999954,
+        "peakRssMiB": 631.953125,
+        "metrics": {
+          "Gfx.WaitForPresentOnGfxThread": {
+            "unit": "TimeNanoseconds",
+            "mean": 377.8300086730269,
+            "p95": 875
+          },
+          "Main Thread": {
+            "unit": "TimeNanoseconds",
+            "mean": 17328661.882914137,
+            "p95": 16789083
+          },
+          "GC Allocated In Frame": {
+            "unit": "Bytes",
+            "mean": 224432.44752818733,
+            "p95": 458989
+          },
+          "Batches Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Draw Calls Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Triangles Count": {
+            "unit": "Count",
+            "mean": 37873.653946227234,
+            "p95": 51855
+          },
+          "SetPass Calls Count": {
+            "unit": "Count",
+            "mean": 38.01561144839549,
+            "p95": 66
+          },
+          "HELLSCRIPT.World.Present": {
+            "unit": "TimeNanoseconds",
+            "mean": 252165.32176929747,
+            "p95": 419708
+          },
+          "HELLSCRIPT.World.Effect": {
+            "unit": "TimeNanoseconds",
+            "mean": 6874.997398091934,
+            "p95": 0
+          },
+          "HELLSCRIPT.UI.Update": {
+            "unit": "TimeNanoseconds",
+            "mean": 43711.33824804857,
+            "p95": 292375
+          },
+          "HELLSCRIPT.Combat.Tick": {
+            "unit": "TimeNanoseconds",
+            "mean": 1097360.6496097138,
+            "p95": 5306292
+          }
+        },
+        "liveOpsVersion": 0,
+        "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+        "mapFingerprint": "cb352198",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "backend": "Mono"
+      },
+      {
+        "frames": 1140,
+        "combatTicks": 401,
+        "frameP50Ms": 16.713834000000816,
+        "frameP95Ms": 23.992082999999553,
+        "peakRssMiB": 614.890625,
+        "metrics": {
+          "Gfx.WaitForPresentOnGfxThread": {
+            "unit": "TimeNanoseconds",
+            "mean": 362.79824561403507,
+            "p95": 833
+          },
+          "Main Thread": {
+            "unit": "TimeNanoseconds",
+            "mean": 17526200.266666666,
+            "p95": 17028750
+          },
+          "GC Allocated In Frame": {
+            "unit": "Bytes",
+            "mean": 226908.07719298246,
+            "p95": 460107
+          },
+          "Batches Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Draw Calls Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Triangles Count": {
+            "unit": "Count",
+            "mean": 37890.52807017544,
+            "p95": 49495
+          },
+          "SetPass Calls Count": {
+            "unit": "Count",
+            "mean": 38.02368421052632,
+            "p95": 42
+          },
+          "HELLSCRIPT.World.Present": {
+            "unit": "TimeNanoseconds",
+            "mean": 273349.3087719298,
+            "p95": 457208
+          },
+          "HELLSCRIPT.World.Effect": {
+            "unit": "TimeNanoseconds",
+            "mean": 8260.708771929825,
+            "p95": 0
+          },
+          "HELLSCRIPT.UI.Update": {
+            "unit": "TimeNanoseconds",
+            "mean": 53513.80614035088,
+            "p95": 337000
+          },
+          "HELLSCRIPT.Combat.Tick": {
+            "unit": "TimeNanoseconds",
+            "mean": 1246373.8280701754,
+            "p95": 5673875
+          }
+        },
+        "liveOpsVersion": 0,
+        "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+        "mapFingerprint": "cb352198",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "backend": "Mono"
+      },
+      {
+        "frames": 1138,
+        "combatTicks": 400,
+        "frameP50Ms": 16.701917000002453,
+        "frameP95Ms": 24.47462499999986,
+        "peakRssMiB": 614.0625,
+        "metrics": {
+          "Gfx.WaitForPresentOnGfxThread": {
+            "unit": "TimeNanoseconds",
+            "mean": 299.23374340949033,
+            "p95": 750
+          },
+          "Main Thread": {
+            "unit": "TimeNanoseconds",
+            "mean": 17557169.74516696,
+            "p95": 17315791
+          },
+          "GC Allocated In Frame": {
+            "unit": "Bytes",
+            "mean": 227317.97188049208,
+            "p95": 461331
+          },
+          "Batches Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Draw Calls Count": {
+            "unit": "Count",
+            "mean": 0,
+            "p95": 0
+          },
+          "Triangles Count": {
+            "unit": "Count",
+            "mean": 37871.28646748682,
+            "p95": 49449
+          },
+          "SetPass Calls Count": {
+            "unit": "Count",
+            "mean": 38.02811950790861,
+            "p95": 42
+          },
+          "HELLSCRIPT.World.Present": {
+            "unit": "TimeNanoseconds",
+            "mean": 259556.90421792617,
+            "p95": 434875
+          },
+          "HELLSCRIPT.World.Effect": {
+            "unit": "TimeNanoseconds",
+            "mean": 7638.477152899824,
+            "p95": 0
+          },
+          "HELLSCRIPT.UI.Update": {
+            "unit": "TimeNanoseconds",
+            "mean": 50424.55272407733,
+            "p95": 315541
+          },
+          "HELLSCRIPT.Combat.Tick": {
+            "unit": "TimeNanoseconds",
+            "mean": 1205769.48857645,
+            "p95": 5564292
+          }
+        },
+        "liveOpsVersion": 0,
+        "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+        "mapFingerprint": "cb352198",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "backend": "Mono"
+      }
+    ]
+  },
+  "medianAcrossTrials": {
+    "before": {
+      "frameP50Ms": 16.817542000000074,
+      "frameP95Ms": 24.746750000002038,
+      "peakRssMiB": 629.984375,
+      "metrics": {
+        "Batches Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p95": 0
+        },
+        "Draw Calls Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p95": 0
+        },
+        "GC Allocated In Frame": {
+          "unit": "Bytes",
+          "mean": 234911.63668744435,
+          "p95": 465003
+        },
+        "Gfx.WaitForPresentOnGfxThread": {
+          "unit": "TimeNanoseconds",
+          "mean": 342.3663101604278,
+          "p95": 834
+        },
+        "HELLSCRIPT.Combat.Tick": {
+          "unit": "TimeNanoseconds",
+          "mean": 1030542.1844919786,
+          "p95": 4793000
+        },
+        "HELLSCRIPT.UI.Update": {
+          "unit": "TimeNanoseconds",
+          "mean": 188914.66399286987,
+          "p95": 1744875
+        },
+        "HELLSCRIPT.World.Effect": {
+          "unit": "TimeNanoseconds",
+          "mean": 6323.456327985739,
+          "p95": 0
+        },
+        "HELLSCRIPT.World.Present": {
+          "unit": "TimeNanoseconds",
+          "mean": 241180.31818181818,
+          "p95": 431666
+        },
+        "Main Thread": {
+          "unit": "TimeNanoseconds",
+          "mean": 17791377.73107747,
+          "p95": 18015917
+        },
+        "SetPass Calls Count": {
+          "unit": "Count",
+          "mean": 38.959038290293854,
+          "p95": 72
+        },
+        "Triangles Count": {
+          "unit": "Count",
+          "mean": 35288.53327417924,
+          "p95": 61778
+        }
+      }
+    },
+    "after": {
+      "frameP50Ms": 16.701917000002453,
+      "frameP95Ms": 23.992082999999553,
+      "peakRssMiB": 614.890625,
+      "metrics": {
+        "Batches Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p95": 0
+        },
+        "Draw Calls Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p95": 0
+        },
+        "GC Allocated In Frame": {
+          "unit": "Bytes",
+          "mean": 226908.07719298246,
+          "p95": 460107
+        },
+        "Gfx.WaitForPresentOnGfxThread": {
+          "unit": "TimeNanoseconds",
+          "mean": 362.79824561403507,
+          "p95": 833
+        },
+        "HELLSCRIPT.Combat.Tick": {
+          "unit": "TimeNanoseconds",
+          "mean": 1205769.48857645,
+          "p95": 5564292
+        },
+        "HELLSCRIPT.UI.Update": {
+          "unit": "TimeNanoseconds",
+          "mean": 50424.55272407733,
+          "p95": 315541
+        },
+        "HELLSCRIPT.World.Effect": {
+          "unit": "TimeNanoseconds",
+          "mean": 7638.477152899824,
+          "p95": 0
+        },
+        "HELLSCRIPT.World.Present": {
+          "unit": "TimeNanoseconds",
+          "mean": 259556.90421792617,
+          "p95": 434875
+        },
+        "Main Thread": {
+          "unit": "TimeNanoseconds",
+          "mean": 17526200.266666666,
+          "p95": 17028750
+        },
+        "SetPass Calls Count": {
+          "unit": "Count",
+          "mean": 38.02368421052632,
+          "p95": 42
+        },
+        "Triangles Count": {
+          "unit": "Count",
+          "mean": 37873.653946227234,
+          "p95": 49495
+        }
+      }
+    }
+  }
+}

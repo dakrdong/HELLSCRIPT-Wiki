@@ -1,0 +1,849 @@
+{
+  "version": 1,
+  "automaticDistribution": false,
+  "packages": [
+    {
+      "id": "welcome-v1",
+      "nameKo": "신규 모험가 보급",
+      "nameEn": "New Adventurer Supplies",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "gold-10000",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-ph01",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pm01",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "daily-supplies-v1",
+      "nameKo": "일일 보급",
+      "nameEn": "Daily Supplies",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "stones-30",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-ph01",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "weekly-supplies-v1",
+      "nameKo": "주간 보급",
+      "nameEn": "Weekly Supplies",
+      "status": "ready",
+      "minimumStage": 10,
+      "grants": [
+        {
+          "boxId": "gold-10000",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "stones-100",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "gem-choice-t1",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "maintenance-v1",
+      "nameKo": "점검 보상",
+      "nameEn": "Maintenance Compensation",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "premium-100",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-ph01",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "incident-v1",
+      "nameKo": "장애 보상",
+      "nameEn": "Incident Compensation",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "premium-300",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "gold-10000",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "stones-100",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "returning-v1",
+      "nameKo": "복귀 모험가 보급",
+      "nameEn": "Returning Adventurer Supplies",
+      "status": "ready",
+      "minimumStage": 10,
+      "grants": [
+        {
+          "boxId": "rare-slot-choice",
+          "count": 1,
+          "minimumQuality": 5000
+        },
+        {
+          "boxId": "gem-choice-t1",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-ph01",
+          "count": 2,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pm01",
+          "count": 2,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "event-participation-v1",
+      "nameKo": "이벤트 참여 보상",
+      "nameEn": "Event Participation Rewards",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "premium-100",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "gold-10000",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "event-completion-v1",
+      "nameKo": "이벤트 완주 보상",
+      "nameEn": "Event Completion Rewards",
+      "status": "ready",
+      "minimumStage": 30,
+      "grants": [
+        {
+          "boxId": "legendary-slot-choice",
+          "count": 1,
+          "minimumQuality": 5000
+        },
+        {
+          "boxId": "premium-300",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "anniversary-v1",
+      "nameKo": "기념일 선물",
+      "nameEn": "Anniversary Gift",
+      "status": "ready",
+      "minimumStage": 10,
+      "grants": [
+        {
+          "boxId": "premium-500",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "gem-choice-t2",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "rare-slot-choice",
+          "count": 1,
+          "minimumQuality": 6000
+        }
+      ]
+    },
+    {
+      "id": "blacksmith-v1",
+      "nameKo": "대장간 보급",
+      "nameEn": "Blacksmith Supplies",
+      "status": "ready",
+      "minimumStage": 30,
+      "grants": [
+        {
+          "boxId": "materials-200",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "stones-100",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "core-choice",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "gem-apprentice-v1",
+      "nameKo": "보석 입문 보급",
+      "nameEn": "Gem Apprentice Supplies",
+      "status": "ready",
+      "minimumStage": 10,
+      "grants": [
+        {
+          "boxId": "gem-choice-t1",
+          "count": 2,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "gem-adept-v1",
+      "nameKo": "보석 숙련 보급",
+      "nameEn": "Gem Adept Supplies",
+      "status": "ready",
+      "minimumStage": 100,
+      "grants": [
+        {
+          "boxId": "gem-choice-t3",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "rune-apprentice-v1",
+      "nameKo": "룬 입문 보급",
+      "nameEn": "Rune Apprentice Supplies",
+      "status": "ready",
+      "minimumStage": 15,
+      "grants": [
+        {
+          "boxId": "rune-starter",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "rune-g1",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "rune-adept-v1",
+      "nameKo": "룬 숙련 보급",
+      "nameEn": "Rune Adept Supplies",
+      "status": "ready",
+      "minimumStage": 100,
+      "grants": [
+        {
+          "boxId": "rune-g2",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "rune-g3",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "legendary-hunt-v1",
+      "nameKo": "전설 사냥 보상",
+      "nameEn": "Legendary Hunt Rewards",
+      "status": "ready",
+      "minimumStage": 30,
+      "grants": [
+        {
+          "boxId": "legendary-slot-choice",
+          "count": 1,
+          "minimumQuality": 5000
+        },
+        {
+          "boxId": "stones-100",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "class-set-v1",
+      "nameKo": "직업 세트 보급",
+      "nameEn": "Class Set Supplies",
+      "status": "ready",
+      "minimumStage": 200,
+      "grants": [
+        {
+          "boxId": "set-helm",
+          "count": 1,
+          "minimumQuality": 6000
+        },
+        {
+          "boxId": "set-body",
+          "count": 1,
+          "minimumQuality": 6000
+        },
+        {
+          "boxId": "set-gloves",
+          "count": 1,
+          "minimumQuality": 6000
+        },
+        {
+          "boxId": "set-boots",
+          "count": 1,
+          "minimumQuality": 6000
+        }
+      ]
+    },
+    {
+      "id": "combat-potions-v1",
+      "nameKo": "전투 물약 보급",
+      "nameEn": "Combat Potion Supplies",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "potion-ph01",
+          "count": 2,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pm01",
+          "count": 2,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pu04",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "utility-potions-v1",
+      "nameKo": "전술 물약 보급",
+      "nameEn": "Utility Potion Supplies",
+      "status": "ready",
+      "minimumStage": 1,
+      "grants": [
+        {
+          "boxId": "potion-pu01",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pu02",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pu03",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pu04",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pu05",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "potion-pu06",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "elixir-t1-v1",
+      "nameKo": "1단계 영약 종합 보급",
+      "nameEn": "T1 Complete Elixir Supplies",
+      "status": "ready",
+      "minimumStage": 10,
+      "grants": [
+        {
+          "boxId": "elixir-g01-t1",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g02-t1",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g03-t1",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g04-t1",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g05-t1",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g06-t1",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "elixir-t3-v1",
+      "nameKo": "3단계 영약 종합 보급",
+      "nameEn": "T3 Complete Elixir Supplies",
+      "status": "ready",
+      "minimumStage": 100,
+      "grants": [
+        {
+          "boxId": "elixir-g01-t3",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g02-t3",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g03-t3",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g04-t3",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g05-t3",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g06-t3",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "elixir-t6-v1",
+      "nameKo": "6단계 영약 종합 보급",
+      "nameEn": "T6 Complete Elixir Supplies",
+      "status": "ready",
+      "minimumStage": 750,
+      "grants": [
+        {
+          "boxId": "elixir-g01-t6",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g02-t6",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g03-t6",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g04-t6",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g05-t6",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "elixir-g06-t6",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "milestone-v1",
+      "nameKo": "성장 단계 달성 보상",
+      "nameEn": "Progression Milestone Rewards",
+      "status": "ready",
+      "minimumStage": 30,
+      "grants": [
+        {
+          "boxId": "legendary-slot-choice",
+          "count": 1,
+          "minimumQuality": 5000
+        },
+        {
+          "boxId": "gem-choice-t2",
+          "count": 1,
+          "minimumQuality": 0
+        },
+        {
+          "boxId": "rune-g1",
+          "count": 1,
+          "minimumQuality": 0
+        }
+      ]
+    },
+    {
+      "id": "event-token-reserved",
+      "nameKo": "행사 인장",
+      "nameEn": "Event Seal",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기간별 교환 상점, 교환 한도, 종료 후 처리 규칙이 필요합니다.",
+      "reasonEn": "Requires an event exchange, limits and an end-of-event policy.",
+      "grants": []
+    },
+    {
+      "id": "season-token-reserved",
+      "nameKo": "시즌 증표",
+      "nameEn": "Season Token",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "시즌 저장 구분과 종료 시 이전·소멸 규칙이 필요합니다.",
+      "reasonEn": "Requires season ownership and end-of-season settlement.",
+      "grants": []
+    },
+    {
+      "id": "honor-token-reserved",
+      "nameKo": "공적 훈장",
+      "nameEn": "Merit Medal",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "공적 획득 조건과 반복 교환 한도가 필요합니다.",
+      "reasonEn": "Requires merit eligibility and exchange limits.",
+      "grants": []
+    },
+    {
+      "id": "guild-token-reserved",
+      "nameKo": "길드 공헌 증표",
+      "nameEn": "Guild Contribution Token",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "길드 소유권과 기여도 판정이 필요합니다.",
+      "reasonEn": "Requires guild ownership and contribution validation.",
+      "grants": []
+    },
+    {
+      "id": "pvp-token-reserved",
+      "nameKo": "투기장 증표",
+      "nameEn": "Arena Token",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "대전 결과의 서버 판정과 교환 상점이 필요합니다.",
+      "reasonEn": "Requires server-validated PvP results and an exchange.",
+      "grants": []
+    },
+    {
+      "id": "market-credit-reserved",
+      "nameKo": "거래소 재화",
+      "nameEn": "Market Credit",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "거래소·에스크로·수수료·회수 처리가 필요합니다.",
+      "reasonEn": "Requires a market, escrow, fees and reversal handling.",
+      "grants": []
+    },
+    {
+      "id": "paid-credit-reserved",
+      "nameKo": "구매 전용 재화",
+      "nameEn": "Purchased Currency",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "구매 영수증과 환불·무료 지급분 구분이 필요합니다.",
+      "reasonEn": "Requires purchase receipts, refunds and separation from free grants.",
+      "grants": []
+    },
+    {
+      "id": "rift-key-reserved",
+      "nameKo": "도전 균열 열쇠",
+      "nameEn": "Challenge Rift Key",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "입장권 전용 콘텐츠와 입장 실패 환급 거래가 필요합니다.",
+      "reasonEn": "Requires a keyed activity and failed-entry refunds.",
+      "grants": []
+    },
+    {
+      "id": "boss-key-reserved",
+      "nameKo": "토벌 봉인석",
+      "nameEn": "Boss Seal",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "보스 소환과 참여자 보상 소유권이 필요합니다.",
+      "reasonEn": "Requires boss summoning and participant reward ownership.",
+      "grants": []
+    },
+    {
+      "id": "boss-fragment-reserved",
+      "nameKo": "토벌 봉인 조각",
+      "nameEn": "Boss Seal Fragment",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "조각 합성과 봉인석 소비처가 필요합니다.",
+      "reasonEn": "Requires fragment conversion and a boss-seal consumer.",
+      "grants": []
+    },
+    {
+      "id": "treasure-key-reserved",
+      "nameKo": "보물고 열쇠",
+      "nameEn": "Vault Key",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "보물고 콘텐츠와 보상 확정 거래가 필요합니다.",
+      "reasonEn": "Requires a vault activity and reward settlement.",
+      "grants": []
+    },
+    {
+      "id": "rift-modifier-reserved",
+      "nameKo": "균열 변이 인장",
+      "nameEn": "Rift Modifier Sigil",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "입장 스냅샷과 보상 배율의 별도 계약이 필요합니다.",
+      "reasonEn": "Requires admission snapshots and a reward modifier contract.",
+      "grants": []
+    },
+    {
+      "id": "guarantee-fragment-reserved",
+      "nameKo": "확정 제작 파편",
+      "nameEn": "Guaranteed Crafting Fragment",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "중복 재료를 늘리기 전에 기존 코어와 역할을 구분해야 합니다.",
+      "reasonEn": "Must establish a distinct role from existing equipment cores.",
+      "grants": []
+    },
+    {
+      "id": "reforge-voucher-reserved",
+      "nameKo": "옵션 재련권",
+      "nameEn": "Affix Reforge Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 재련 거래의 비용 대체·재시도 계약이 필요합니다.",
+      "reasonEn": "Requires a cost-substitution contract in existing reforge transactions.",
+      "grants": []
+    },
+    {
+      "id": "socket-voucher-reserved",
+      "nameKo": "소켓 가공권",
+      "nameEn": "Socket Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 소켓 가공 거래와 동일한 보호·비용 검사가 필요합니다.",
+      "reasonEn": "Requires existing socket protection and cost checks.",
+      "grants": []
+    },
+    {
+      "id": "upgrade-catalyst-reserved",
+      "nameKo": "각성 촉매",
+      "nameEn": "Awakening Catalyst",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "각성 획득 구조와 확률·천장 설계가 필요합니다.",
+      "reasonEn": "Requires awakening acquisition and probability guarantees.",
+      "grants": []
+    },
+    {
+      "id": "crafting-manual-reserved",
+      "nameKo": "제작 비전서",
+      "nameEn": "Crafting Manual",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "계정 제작법 해금 소유자와 중복 획득 규칙이 필요합니다.",
+      "reasonEn": "Requires account recipe unlocks and duplicate handling.",
+      "grants": []
+    },
+    {
+      "id": "charm-reserved",
+      "nameKo": "수호 부적",
+      "nameEn": "Guardian Charm",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "새 장착 구조보다 기존 룬·위상과 역할을 먼저 비교해야 합니다.",
+      "reasonEn": "Requires a role distinct from existing runes and aspects.",
+      "grants": []
+    },
+    {
+      "id": "legendary-gem-reserved",
+      "nameKo": "전설 보석",
+      "nameEn": "Legendary Gem",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 보석 소켓과 별도의 전투·성장 설계가 필요합니다.",
+      "reasonEn": "Requires explicit combat and progression rules beyond normal gems.",
+      "grants": []
+    },
+    {
+      "id": "respec-voucher-reserved",
+      "nameKo": "기술 재설정권",
+      "nameEn": "Skill Reset Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 무료 편집 기능에 비용을 추가하지 않습니다. 유료 초기화가 생길 때만 검토합니다.",
+      "reasonEn": "Do not charge for current free editing; revisit only if a paid reset exists.",
+      "grants": []
+    },
+    {
+      "id": "fatigue-voucher-reserved",
+      "nameKo": "탐험 시간 회복권",
+      "nameEn": "Exploration Time Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 회복 횟수·이월 규칙과의 관계를 확정해야 합니다.",
+      "reasonEn": "Requires an explicit contract with current recovery limits and carryover.",
+      "grants": []
+    },
+    {
+      "id": "speed-voucher-reserved",
+      "nameKo": "집중 탐험권",
+      "nameEn": "Focused Exploration Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "1.5배속 입장 비용과 취소 환급에 연결해야 합니다.",
+      "reasonEn": "Requires integration with 1.5x admission cost and cancellation.",
+      "grants": []
+    },
+    {
+      "id": "forge-voucher-reserved",
+      "nameKo": "대장간 시간 단축권",
+      "nameEn": "Forge Time Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 작업 완료 거래와 중복 소비 방지가 필요합니다.",
+      "reasonEn": "Requires existing forge completion and duplicate-use protection.",
+      "grants": []
+    },
+    {
+      "id": "stash-voucher-reserved",
+      "nameKo": "보관함 확장권",
+      "nameEn": "Stash Expansion Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "구매한 확장 단계와 충돌하지 않는 거래가 필요합니다.",
+      "reasonEn": "Requires a transaction consistent with already purchased capacity.",
+      "grants": []
+    },
+    {
+      "id": "xp-boost-reserved",
+      "nameKo": "수련 축복",
+      "nameEn": "Training Blessing",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "경험치 적용 시점·중첩·만료·전투 저장 규칙이 필요합니다.",
+      "reasonEn": "Requires XP timing, stacking, expiry and run persistence.",
+      "grants": []
+    },
+    {
+      "id": "loot-boost-reserved",
+      "nameKo": "풍요의 축복",
+      "nameEn": "Abundance Blessing",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "기존 영약·운영 배율과 중첩 관계를 확정해야 합니다.",
+      "reasonEn": "Requires stacking rules with existing elixirs and live-ops multipliers.",
+      "grants": []
+    },
+    {
+      "id": "cosmetic-token-reserved",
+      "nameKo": "외형 교환권",
+      "nameEn": "Cosmetic Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "외형 도감·장착·중복 교환 거래가 필요합니다.",
+      "reasonEn": "Requires cosmetic collection, equip and duplicate exchange.",
+      "grants": []
+    },
+    {
+      "id": "title-token-reserved",
+      "nameKo": "칭호 교환권",
+      "nameEn": "Title Voucher",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "칭호 소유·표시·조건 검사가 필요합니다.",
+      "reasonEn": "Requires title ownership, presentation and eligibility.",
+      "grants": []
+    },
+    {
+      "id": "pet-token-reserved",
+      "nameKo": "동료 계약서",
+      "nameEn": "Companion Contract",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "동료 콘텐츠와 성장·전투 소유자가 필요합니다.",
+      "reasonEn": "Requires companion content and progression/combat owners.",
+      "grants": []
+    },
+    {
+      "id": "battle-pass-reserved",
+      "nameKo": "여정 포인트",
+      "nameEn": "Journey Points",
+      "status": "reserved",
+      "minimumStage": 1,
+      "reasonKo": "여정 보상 트랙·기간·중복 수령 방지가 필요합니다.",
+      "reasonEn": "Requires a reward track, schedule and claim protection.",
+      "grants": []
+    }
+  ]
+}

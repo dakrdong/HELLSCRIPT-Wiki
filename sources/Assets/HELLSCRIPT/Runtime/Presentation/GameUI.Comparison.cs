@@ -21,6 +21,7 @@ namespace Hellscript
         {Note(content,text,size,Mathf.Max(82,text.Split('\n').Sum(s=>Mathf.Max(1,Mathf.CeilToInt(s.Length/28f)))*(size+7)+30),color??pale);}
         public void ShowComparisonPicker()
         {
+            classPractice=false;
             if(!RequireContent(ContentUnlocks.Train))return;
             pageRepaint=()=>ShowComparisonPicker();Base("comparison-picker","훈련 A/B 비교","같은 캐릭터로 행동·소유 장비의 차이를 확인합니다");
             ComparisonNote("A는 현재 설정으로 훈련합니다. 결과를 읽고 B의 조건을 바꾸면, 같은 시작 상태와 배치에서 다시 훈련합니다. 한 번에 한 조건씩 바꾸면 차이를 이해하기 쉽습니다.");
@@ -71,7 +72,7 @@ namespace Hellscript
             else RenderComparisonMetrics(a,null,pair.Training);
             ComparisonNote("두 시도를 마치기 전에는 완성한 비교로 저장하지 않습니다. 실제 캐릭터의 경험치·장비·재화는 유지됩니다.",muted);
             FooterButton(0,a==null?1:2,"성소로",()=>game.ReturnTown());
-            if(a!=null)FooterButton(1,2,"B 설정 만들기",ShowComparisonEditor,true);
+            if(a!=null)FooterButton(1,2,classPractice?"한 조건 바꿔 보기":"B 설정 만들기",classPractice?ShowClassPracticeB:ShowComparisonEditor,true);
         }
         public void ShowComparisonRecord(TrainingComparisonRecord record)
         {
@@ -81,6 +82,12 @@ namespace Hellscript
             var frozen=JsonUtility.FromJson<TrainingComparisonRecord>(JsonUtility.ToJson(record));var hero=JsonUtility.FromJson<HeroSave>(frozen.baselineHeroJson);
             pageRepaint=()=>ShowComparisonRecord(record);Base("comparison-result","훈련 A/B 결과",Loc.F("{0} Lv.{1} · {2} · {3}", game.catalog.classNames[(int)hero.heroClass], hero.level, TrainingNames[frozen.training],frozen.EquipmentChanged?"장비 변경 비교":"같은 기준 장비"),true);
             BigButton(content,"변경한 조건 보기",()=>ShowComparisonChanges(frozen));
+            if(classPractice)
+            {
+                bool observed=ClassPracticeLesson.Observed(frozen,game.catalog);
+                ComparisonNote(observed?"설정 변경과 실제 행동 차이를 확인했습니다. 결과를 읽고 적용할 설정을 선택하세요.":"설정은 바뀌었지만 이번 시험에서는 발동·행동 차이를 확인하지 못했습니다. 완료로 처리하지 않고 조건과 기록을 다시 확인하세요.",gold);
+                if(observed)BigButton(content,"관찰한 실습 완료 기록",()=>{ShowToast(game.Store.CompleteClassPractice(frozen,game.catalog)?"실습 결과를 기록했습니다.":game.Store.Error);});
+            }
             RenderComparisonMetrics(frozen.a,frozen.b,frozen.training);
             BigButton(content,"이 비교 결과 저장",()=>
             {
@@ -165,7 +172,7 @@ namespace Hellscript
             foreach(var id in ids)
             {
                 var left=x.skills.Find(s=>s.definitionId==id)??new SkillStatistics();var right=y?.skills.Find(s=>s.definitionId==id)??new SkillStatistics();
-                string name=id=="BASIC"?"기본 공격":game.catalog.skills.FirstOrDefault(s=>s.id==id)?.name??ItemCatalog.Unique(id)?.Name??ItemCatalog.Sets.FirstOrDefault(s=>s.id+"4"==id)?.name??id;
+                string name=id=="BASIC"?"기본 공격":ClassSkills.Find(id)?.Name??game.catalog.skills.FirstOrDefault(s=>s.id==id)?.name??ItemCatalog.Unique(id)?.Name??ItemCatalog.Sets.FirstOrDefault(s=>s.id+"4"==id)?.name??id;
                 Note(content,name,22,58,gold);ComparisonValue("사용/발동",$"{left.starts}/{left.releases}",y==null?null:$"{right.starts}/{right.releases}");
                 ComparisonValue("중단",left.interruptions.ToString(),y==null?null:right.interruptions.ToString());ComparisonValue("피해",left.damage.ToString("N0"),y==null?null:right.damage.ToString("N0"));
                 ComparisonValue("자원 부족 판정",left.resourceChecks.ToString(),y==null?null:right.resourceChecks.ToString());
@@ -176,7 +183,8 @@ namespace Hellscript
             pageRepaint=()=>ShowComparisonChanges(record);Base("comparison-changes","A와 B의 변경 조건","캐릭터·레벨·시드·시작 배치는 같습니다");
             var changes=record.DescribeChanges(game.catalog);
             if(changes.Count==0)ComparisonNote("A와 B는 같은 전투 설정입니다. 같은 조건에서 결과가 재현되는지 확인한 비교입니다.",gold);
-            foreach(string change in changes)ComparisonNote(NamedConditions(change));
+            if(classPractice)ComparisonNote(Loc.F("A 조건: {0}\nB 조건: {1}",ClassPracticeLesson.Condition(record.AttemptHero(false)),ClassPracticeLesson.Condition(record.AttemptHero(true))));
+            else foreach(string change in changes)ComparisonNote(NamedConditions(change));
             ComparisonNote(record.version==1?"이전 기록에는 계정 룬 보드가 포함되지 않았습니다.":"비교 시작 때의 룬 보드를 사용합니다. 무기를 바꾸면 해당 무기의 보드 효과를 계산합니다.",muted);
             for(int side=0;side<2;side++){bool second=side==1;BigButton(content,second?"B 장비 원본 보기":"A 장비 원본 보기",()=>ShowComparisonEquipmentRecord(record,second));}
             FooterButton(0,1,"비교 결과로",()=>ShowComparisonRecord(record));
@@ -187,7 +195,9 @@ namespace Hellscript
             pageRepaint=()=>ShowComparisonChoice(record,useB);Base("comparison-choice",Loc.F("{0} 설정 활용", (useB?"B":"A")),"현재 장비는 유지됩니다");
             var changes=record.useEdict?TrainingComparisonChanges.Describe(game.Store.Data.Hero,record.AttemptHero(useB),game.catalog):BuildEditing.DescribeCombatChanges(game.Store.Data.Hero.build,chosen,game.catalog,game.Store.Data.Hero.heroClass);
             ComparisonNote(record.useEdict?"슬롯에는 선택한 장비 참조·패시브·기본 행동을 저장합니다. 사냥 칙령 원본은 아래에서 별도로 불러온 뒤 직접 적용하세요.":"현재 행동과 선택한 설정의 차이를 확인하세요. 슬롯에 저장하거나, 성소의 행동 설계에서 편집안으로 불러와 직접 적용할 수 있습니다.");
-            if(changes.Count==0)ComparisonNote("현재 행동과 같은 설정입니다.",gold);foreach(string change in changes)ComparisonNote(NamedConditions(change));
+            if(changes.Count==0)ComparisonNote("현재 행동과 같은 설정입니다.",gold);
+            else if(classPractice)ComparisonNote(Loc.F("현재 조건: {0}\n선택한 조건: {1}",ClassPracticeLesson.Condition(game.Store.Data.Hero),ClassPracticeLesson.Condition(record.AttemptHero(useB))));
+            else foreach(string change in changes)ComparisonNote(NamedConditions(change));
             for(int i=0;i<HuntEdict.PresetSlots;i++){int slot=i;BigButton(content,Loc.F("슬롯 {0}에 선택한 설정 저장", i+1),()=>
             {
                 ShowPresetNameDialog(slot,chosen,name=>game.SaveComparisonPreset(record,useB,slot,name),()=>ShowComparisonChoice(record,useB));
@@ -198,7 +208,7 @@ namespace Hellscript
             {
                 game.ReturnTown();ShowEdictEditor();
                 if(huntEdictWindow==null)return;
-                var loadout=HuntEdictLoadout.FromHero(game.Store.Data.Hero);loadout.edict=(useB?record.b:record.a).edict.Copy();
+                var loadout=HuntEdictLoadout.FromHero(record.AttemptHero(useB));
                 huntEdictWindow.Session.ReplaceDraft(loadout);huntEdictWindow.Repaint();
             },true);
             else BigButton(content,"실제 행동 편집안으로 불러오기",()=>{game.ReturnTown();ShowBuild();LoadEditing(chosen);},true);

@@ -9,6 +9,7 @@ namespace Hellscript
         int EffectTick=>Mathf.RoundToInt(State.time/Step);
         void EffectEvent(string definition,string kind,int instance=0,int root=0,int target=-1,float value=0,string reason="")
         {
+            FeedbackEffect(definition,kind,target,value);
             State.effectEvents.Add(new EffectEvent{definitionId=definition,kind=kind,instanceId=instance,rootCastId=root,targetId=target,tick=EffectTick,time=State.time,value=value,reason=reason});
             if(State.effectEvents.Count>600)State.effectEvents.RemoveAt(0);
         }

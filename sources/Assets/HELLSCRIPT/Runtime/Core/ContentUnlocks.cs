@@ -37,6 +37,12 @@ namespace Hellscript
         public static int AccountClear(AccountSave a)=>a.heroes.Count==0?0:a.heroes.Max(h=>Math.Max(0,h.highestClear));
         public static ContentUnlockDefinition[] AtStage(int stage)=>Rules.features.Where(f=>f.stage==stage).ToArray();
         public static ContentUnlockDefinition NextAfter(int stage)=>Rules.features.Where(f=>f.stage>stage).OrderBy(f=>f.stage).FirstOrDefault();
+        public static ContentUnlockDefinition[] NextLocked(AccountSave account)
+        {
+            int best=AccountClear(account);
+            var pending=Rules.features.Where(f=>f.stage>best&&account.contentUnlocks?.unlocked?.Contains(f.id)!=true).OrderBy(f=>f.stage).ToArray();
+            return pending.Length==0?Array.Empty<ContentUnlockDefinition>():pending.Where(f=>f.stage==pending[0].stage).ToArray();
+        }
         public static string StageSummary(int stage)=>string.Join(" · ",AtStage(stage).Select(f=>Loc.T(f.name)));
         public static int PassiveSlots(HeroSave h)=>Math.Max(Mathf.Clamp(h.legacyPassiveSlots,0,3),Rules.passiveLevels.Count(p=>h.level>=p));
         public static string PassiveError(HeroSave h,BuildConfig b)=>b.passives.Length<=PassiveSlots(h)?"":Loc.F("현재 영웅의 패시브 슬롯은 {0}개입니다.",PassiveSlots(h));

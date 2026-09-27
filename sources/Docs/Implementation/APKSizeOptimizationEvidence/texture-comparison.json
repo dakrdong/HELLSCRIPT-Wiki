@@ -1,0 +1,160 @@
+{
+ "method": "Each Android-imported texture drawn at its largest on-screen size with bilinear filtering and no mipmaps (as the game draws it) over rgb(24,22,26), in the pre-change project (a1bc4825) and the post-change project, on an Apple M3 Pro GPU with -buildTarget Android. PSNR compares those two drawings; luma shift is on 0-255 over opaque pixels.",
+ "displaySizesPx": {
+  "ClassLegendaryIcons": 569,
+  "ClassSkillIcons": 384,
+  "ClassSetIcons": 396,
+  "Jeweler/Gems": 139,
+  "Jeweler/Potions": 185,
+  "RewardBoxes": 242,
+  "Attendance": 224,
+  "Blacksmith": 114,
+  "GlobalHUD potion": 185,
+  "GlobalHUD coin": 256,
+  "GlobalHUD portrait": 301,
+  "GlobalHUD menu": 264
+ },
+ "glyphAtlasUvSpacePsnr": 33.8,
+ "groups": [
+  {
+   "group": "Art/Attendance",
+   "files": 3,
+   "before": "RGBA32 512x512",
+   "after": "ASTC_4x4 256x256",
+   "psnrMin": 28.9,
+   "psnrAvg": 29.2,
+   "meanLumaShiftAvg": 0.15,
+   "meanLumaShiftMaxAbs": 0.33
+  },
+  {
+   "group": "Art/Blacksmith",
+   "files": 30,
+   "before": "RGBA32 240x320",
+   "after": "ASTC_4x4 240x320",
+   "psnrMin": 47.7,
+   "psnrAvg": 56.4,
+   "meanLumaShiftAvg": 0.12,
+   "meanLumaShiftMaxAbs": 0.48
+  },
+  {
+   "group": "Art/ClassLegendaryIcons",
+   "files": 141,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 25.6,
+   "psnrAvg": 30.0,
+   "meanLumaShiftAvg": -0.14,
+   "meanLumaShiftMaxAbs": -0.79
+  },
+  {
+   "group": "Art/ClassSetIcons",
+   "files": 129,
+   "before": "RGBA32 1024x1024",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 30.5,
+   "psnrAvg": 33.0,
+   "meanLumaShiftAvg": -0.41,
+   "meanLumaShiftMaxAbs": -1.33
+  },
+  {
+   "group": "Art/ClassSkillIcons/Mage",
+   "files": 37,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 26.4,
+   "psnrAvg": 29.4,
+   "meanLumaShiftAvg": 0.04,
+   "meanLumaShiftMaxAbs": -0.37
+  },
+  {
+   "group": "Art/ClassSkillIcons/Ranger",
+   "files": 37,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 28.5,
+   "psnrAvg": 31.3,
+   "meanLumaShiftAvg": 0.12,
+   "meanLumaShiftMaxAbs": 0.54
+  },
+  {
+   "group": "Art/ClassSkillIcons/Warrior",
+   "files": 37,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 26.2,
+   "psnrAvg": 28.9,
+   "meanLumaShiftAvg": -0.01,
+   "meanLumaShiftMaxAbs": -0.38
+  },
+  {
+   "group": "Art/GlobalHUD/currency-*",
+   "files": 1,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 1254x1254",
+   "psnrMin": 38.7,
+   "psnrAvg": 38.7,
+   "meanLumaShiftAvg": -0.18,
+   "meanLumaShiftMaxAbs": -0.18
+  },
+  {
+   "group": "Art/GlobalHUD/menu-*",
+   "files": 5,
+   "before": "RGBA32 512x512",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 26.7,
+   "psnrAvg": 35.7,
+   "meanLumaShiftAvg": -0.08,
+   "meanLumaShiftMaxAbs": 0.31
+  },
+  {
+   "group": "Art/GlobalHUD/portrait-*",
+   "files": 1,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 512x512",
+   "psnrMin": 29.3,
+   "psnrAvg": 29.3,
+   "meanLumaShiftAvg": -0.1,
+   "meanLumaShiftMaxAbs": -0.1
+  },
+  {
+   "group": "Art/GlobalHUD/potion-*",
+   "files": 3,
+   "before": "RGBA32 1254x1254",
+   "after": "ASTC_6x6 1254x1254",
+   "psnrMin": 40.1,
+   "psnrAvg": 41.0,
+   "meanLumaShiftAvg": -0.15,
+   "meanLumaShiftMaxAbs": -0.17
+  },
+  {
+   "group": "Art/Jeweler/Gems",
+   "files": 36,
+   "before": "RGBA32 512x512",
+   "after": "ASTC_6x6 256x256",
+   "psnrMin": 30.4,
+   "psnrAvg": 32.7,
+   "meanLumaShiftAvg": -0.14,
+   "meanLumaShiftMaxAbs": -0.98
+  },
+  {
+   "group": "Art/Jeweler/Potions",
+   "files": 36,
+   "before": "RGBA32 512x512",
+   "after": "ASTC_6x6 256x256",
+   "psnrMin": 29.5,
+   "psnrAvg": 31.9,
+   "meanLumaShiftAvg": -0.08,
+   "meanLumaShiftMaxAbs": -0.78
+  },
+  {
+   "group": "Art/RewardBoxes",
+   "files": 148,
+   "before": "RGBA32 256x256",
+   "after": "ASTC_4x4 256x256",
+   "psnrMin": 53.5,
+   "psnrAvg": 55.0,
+   "meanLumaShiftAvg": -0.01,
+   "meanLumaShiftMaxAbs": -0.01
+  }
+ ]
+}

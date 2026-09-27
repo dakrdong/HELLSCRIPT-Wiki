@@ -24,6 +24,12 @@ namespace Hellscript
                 nativeInventory=null;if(Page=="bag"){Page=playInventoryOrigin;pageRepaint=inventoryPreviousRepaint;}playInventoryOrigin=null;
                 RefreshHud();
             },()=>{if(game.Combat!=null&&game.Combat.Hero==game.Store.Data.Hero)game.Combat.RefreshEquipment();});
+            if(portal||game.Combat?.State.portal==true)nativeInventory.ConfigurePortal(
+                ()=>PortalRecovery.ResumeError(game.Store.Data,game.Combat?.State),
+                ()=>PortalRecovery.CanLeaveLoot(game.Combat?.State),
+                ()=>game.TryContinuePortal(),ShowStorage,ShowGemMenu,
+                ()=>{game.LeaveUncollectedLoot(Guid.NewGuid().ToString("N"));return game.Combat?.State.portal!=true;},
+                ()=>game.TryReturnFromPortal());
             pageRepaint=()=>nativeInventory?.Repaint();
         }
         public void ClosePlayInventory(){if(nativeInventory!=null)nativeInventory.Close();}

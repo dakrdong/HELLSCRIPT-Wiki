@@ -29,6 +29,7 @@ namespace Hellscript
         void ActionEvent(HeroActionState action,string kind,string reason)
         {
             CombatTelemetry.Action(State.statistics,action.skill,kind);
+            if(kind=="ACTION_INTERRUPTED")State.statistics.feedback?.Interrupted(SkillId(action.skill),reason);
             if(ClassSkillsActive)CSEvent(ClassSkills.LegacyId(action.skill),kind.Replace("ACTION_","CAST_"),action.id,action.targetId);
             if(kind=="ACTION_TRAVEL"||action.skill==15&&kind=="ACTION_RELEASE")ObserveMovementStart(action);
             State.actionEvents.Add(new CombatActionEvent{actionId=action.id,skill=action.skill,targetId=action.targetId,time=State.time,resource=State.resource,kind=kind,reason=reason,buildVersion=action.policy?.buildVersion??State.build.version,position=State.position});

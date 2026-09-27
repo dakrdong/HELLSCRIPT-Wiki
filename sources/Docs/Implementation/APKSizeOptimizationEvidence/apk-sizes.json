@@ -1,0 +1,83 @@
+{
+ "before-development-a1bc4825": {
+  "apkBytes": 2097620190,
+  "entries": {
+   "assets/bin/Data/data.unity3d": {
+    "uncompressed": 2028705753,
+    "inApk": 2028705753
+   },
+   "lib/arm64-v8a/libil2cpp.so": {
+    "uncompressed": 116930312,
+    "inApk": 33960895
+   },
+   "lib/arm64-v8a/libunity.so": {
+    "uncompressed": 55853512,
+    "inApk": 21395052
+   },
+   "assets/bin/Data/Managed/Metadata/global-metadata.dat": {
+    "uncompressed": 23173184,
+    "inApk": 8184255
+   },
+   "classes.dex": {
+    "uncompressed": 7485248,
+    "inApk": 3027489
+   }
+  }
+ },
+ "after-development": {
+  "apkBytes": 88376002,
+  "entries": {
+   "assets/bin/Data/data.unity3d": {
+    "uncompressed": 34288211,
+    "inApk": 34288211
+   },
+   "lib/arm64-v8a/libil2cpp.so": {
+    "uncompressed": 61145544,
+    "inApk": 20911013
+   },
+   "lib/arm64-v8a/libunity.so": {
+    "uncompressed": 55176760,
+    "inApk": 21049059
+   },
+   "assets/bin/Data/Managed/Metadata/global-metadata.dat": {
+    "uncompressed": 19681348,
+    "inApk": 6762661
+   },
+   "classes.dex": {
+    "uncompressed": 7485248,
+    "inApk": 3027489
+   }
+  }
+ },
+ "after-release": {
+  "apkBytes": 60072342,
+  "entries": {
+   "assets/bin/Data/data.unity3d": {
+    "uncompressed": 31859760,
+    "inApk": 31859760
+   },
+   "lib/arm64-v8a/libil2cpp.so": {
+    "uncompressed": 33398040,
+    "inApk": 11183873
+   },
+   "lib/arm64-v8a/libunity.so": {
+    "uncompressed": 22006096,
+    "inApk": 9669368
+   },
+   "assets/bin/Data/Managed/Metadata/global-metadata.dat": {
+    "uncompressed": 9259176,
+    "inApk": 3021501
+   },
+   "classes.dex": {
+    "uncompressed": 6452016,
+    "inApk": 2360211
+   }
+  }
+ },
+ "notes": {
+  "before": "HEAD a1bc4825, BuildOptions.Development|CompressWithLz4 (same options as the 2026-09-26 delivery APK)",
+  "after-development": "ProjectBuilder.BuildAndroid -hellscriptDevelopment (Development|CompressWithLz4)",
+  "after-release": "ProjectBuilder.BuildAndroid default (CompressWithLz4HC)",
+  "device": "not installed or run on any Android device or emulator"
+ }
+}

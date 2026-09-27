@@ -1,0 +1,163 @@
+{
+  "baselineCommit": "246940407ea4ac3914285f4d59b27f2b91ea562c",
+  "note": "Runs overlap and must not be summed. Full suite was not rerun after focused repairs. Existing baseline failures remain outside the first-play change scope. Native and natural progression are separate evidence.",
+  "runs": [
+    {
+      "file": "baseline.xml",
+      "sha256": "d23ab5a7d4214693f10585a7ba47215c737927f4f5fc19a7356e24e8550ceec3",
+      "mode": "EditMode",
+      "counts": {
+        "total": "159",
+        "passed": "159",
+        "failed": "0",
+        "skipped": "0",
+        "result": "Passed"
+      },
+      "finishedUtc": "2026-09-26 23:23:36Z"
+    },
+    {
+      "file": "full-editmode.xml",
+      "sha256": "8be66ef258d2a63df2dc803b2c85e45556fc8200fe51ef0a25a018bdb1f1454a",
+      "mode": "EditMode",
+      "counts": {
+        "total": "4009",
+        "passed": "3957",
+        "failed": "52",
+        "skipped": "0",
+        "result": "Failed(Child)"
+      },
+      "finishedUtc": "2026-09-27 00:47:44Z"
+    },
+    {
+      "file": "followup-confirm.xml",
+      "sha256": "6c85acb915ecdab156b1c02a52c61519644774eb75629cfea89d9108dfedba61",
+      "mode": "EditMode",
+      "counts": {
+        "total": "89",
+        "passed": "89",
+        "failed": "0",
+        "skipped": "0",
+        "result": "Passed"
+      },
+      "finishedUtc": "2026-09-27 01:00:38Z"
+    },
+    {
+      "file": "result-layout-editmode.xml",
+      "sha256": "2691b41b92584550e15df177bcb99df3b5536b176066df8ce0a0953cb52ac276",
+      "mode": "EditMode",
+      "counts": {
+        "total": "33",
+        "passed": "33",
+        "failed": "0",
+        "skipped": "0",
+        "result": "Passed"
+      },
+      "finishedUtc": "2026-09-27 01:12:24Z"
+    },
+    {
+      "file": "shared-account-editmode.xml",
+      "sha256": "8a01d705b2e830ff5abc34863500c84f6c49fa89e2451fcce35b3b300f28f570",
+      "mode": "EditMode",
+      "counts": {
+        "total": "79",
+        "passed": "79",
+        "failed": "0",
+        "skipped": "0",
+        "result": "Passed"
+      },
+      "finishedUtc": "2026-09-27 01:37:48Z"
+    },
+    {
+      "file": "training-confirm.xml",
+      "sha256": "11f49e658fbbb16f4ec06c0df91218c4fbac70081adcd71a4751d37433ca6248",
+      "mode": "EditMode",
+      "counts": {
+        "total": "42",
+        "passed": "42",
+        "failed": "0",
+        "skipped": "0",
+        "result": "Passed"
+      },
+      "finishedUtc": "2026-09-27 01:53:14Z"
+    },
+    {
+      "file": "scroll-loc.xml",
+      "sha256": "b89bce58c888224e8121801528a6fb03a7037ab8fe0d1f27754364878d90b37d",
+      "mode": "EditMode",
+      "counts": {
+        "total": "42",
+        "passed": "42",
+        "failed": "0",
+        "skipped": "0",
+        "result": "Passed"
+      },
+      "finishedUtc": "2026-09-27 02:07:52Z"
+    }
+  ],
+  "exactBaselineRelatedRun": {
+    "id": "2",
+    "testcasecount": "334",
+    "result": "Failed(Child)",
+    "total": "334",
+    "passed": "287",
+    "failed": "47",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-09-27 00:52:32Z",
+    "end-time": "2026-09-27 00:52:59Z",
+    "duration": "26.6832941"
+  },
+  "preExistingFailures": [
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Mage)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Ranger)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Warrior)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(1)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(10)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(11)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(12)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(13)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(14)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(15)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(16)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(17)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(3)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(4)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(5)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(6)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(7)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(8)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(9)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,2)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,0)",
+    "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,2)",
+    "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(-1,10)",
+    "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(1,5)",
+    "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(9,4)",
+    "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(0)",
+    "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(1)",
+    "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(12)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)",
+    "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)",
+    "Hellscript.Tests.EdictTargetIntegrationTests.ANewerActionTargetPolicyIsNotSilentlyDowngraded",
+    "Hellscript.Tests.EnemyTests.DeathPayloadRestoresIndependentlyAndNeverRepeatsItsReward(11,0.9f)",
+    "Hellscript.Tests.EnemyTests.DeathPayloadRestoresIndependentlyAndNeverRepeatsItsReward(5,1.0f)",
+    "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(1)",
+    "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(12)",
+    "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(5)",
+    "Hellscript.Tests.RuleTests.LegacyRunDoesNotInventUnobservedNoEnemyHistory"
+  ],
+  "introducedInitialFailuresFixed": 5
+}
