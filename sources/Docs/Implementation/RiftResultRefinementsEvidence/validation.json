@@ -1,0 +1,107 @@
+{
+  "date": "2026-09-27",
+  "branch": "codex/rift-result-refinements",
+  "base": "c751d84d39e2a7d30bfec393c410e1d10ba08bf1",
+  "scope": "Only this conversation’s rift-result refinements. Other feature integration and ongoing 3D branches excluded.",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "total": "138",
+    "passed": "138",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "15.094459"
+  },
+  "editModeCoverage": [
+    "role metric definitions",
+    "actual capped recovery and mana-channel incremental attribution",
+    "disjoint mitigation and unchanged block RNG",
+    "whole-run incoming source aggregation",
+    "boss per-attack Top 3 and nonboss per-type Top 5",
+    "top-only denominators",
+    "zero, unknown and legacy records",
+    "snapshot retention and save/reload",
+    "shared UI, navigation and localization"
+  ],
+  "afterEditMode": "Only result portrait layout and native fixture viewport assertions changed afterward; rebuilt and native acceptance rerun.",
+  "uiContract": {
+    "ownership": "PASS",
+    "tests": 9
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0,
+    "log": "Artifacts/RiftResultRefinements20260927/build-layout-final.log",
+    "liveEditorConsoleClaim": false
+  },
+  "native": {
+    "platform": "macOS development player",
+    "viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "readingScale": [
+      100,
+      120
+    ],
+    "safeAreas": "simulated",
+    "fixtures": [
+      "victory",
+      "utility",
+      "defeat"
+    ],
+    "resultLayouts": 60,
+    "incomingLayouts": 60,
+    "logLayouts": 40,
+    "checks": [
+      "complete first loot slot row visible",
+      "raycast-validated pointer/wheel input",
+      "item snapshot common shell and dispositions",
+      "repeat and saved-result protections",
+      "same result and read-only account after modal Close"
+    ],
+    "independentRestart": "PASS",
+    "nativePointer": "native-pointer.json"
+  },
+  "html": {
+    "built": true,
+    "syntax": "PASS",
+    "bytes": 31922970,
+    "bilingualStrings": 331,
+    "embeddedUnchangedPngs": 16,
+    "currentBrowserRendering": "NOT VERIFIED: in-app browser rejected navigation to the local URL; no alternate-surface workaround"
+  },
+  "limits": [
+    "Focused tests, not the full Unity suite.",
+    "No live Editor/MCP Console-zero assertion.",
+    "No physical iOS/Android device validation.",
+    "Natural complete combat is not claimed for deterministic UI fixtures.",
+    "The broad existing combat-history smoke was not run; the result-specific log flow was tested."
+  ],
+  "publication": {
+    "mainMerged": false,
+    "publicWikiDeployed": false,
+    "policy": "Publish only after main integration."
+  }
+}

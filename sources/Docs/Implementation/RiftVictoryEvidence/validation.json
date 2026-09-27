@@ -1,0 +1,49 @@
+{
+  "regression-final.xml": {
+    "total": "162",
+    "passed": "162",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "32.4952864"
+  },
+  "snapshot-tests.xml": {
+    "total": "23",
+    "passed": "23",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "5.8962125"
+  },
+  "distinctCases": 173,
+  "allPassed": true,
+  "sharedUi": {
+    "ownership": "PASS",
+    "tests": 9
+  },
+  "browser": {
+    "baseLayouts": 20,
+    "localePairs": 297,
+    "consoleErrors": 0,
+    "detailPopupLayouts": 20,
+    "rangeRowGeometry": "stable",
+    "inspectedSlots": 13
+  },
+  "native": {
+    "build": "Unity 6000.6.0f1 macOS development",
+    "layouts": 20,
+    "input": "uGUI raycast plus synthetic pointer/wheel and native macOS CUA pointer/Escape",
+    "separateProcessReload": "PASS",
+    "physicalMobile": "not tested",
+    "inventoryPopup": "PASS focused detail/card/range/compare/lock/equip/reload, 5 ratios x KO/EN, 100% and 150%"
+  },
+  "shared-popup-tests.xml": {
+    "total": "69",
+    "passed": "69",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "7.1296325"
+  },
+  "extendedSmokeLimitations": {
+    "ItemPolishAcceptance": "Stopped after all ten detail/compare layouts passed: drag cancellation account-equality assertion (Cancel equipped an item). Not counted as a full pass; cause not baseline-isolated.",
+    "RangeAcceptance": "Inventory detail/help/Ctrl and storage passed for first layout; later shop pointer target was null at RuntimeInventorySmoke.Ranges.cs:81. Not counted as a full pass."
+  }
+}
