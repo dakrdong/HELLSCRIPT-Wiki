@@ -1,6 +1,6 @@
 # 사냥 칙령 스킬 트리 통합
 
-작성일: 2026-09-23 · 갱신일: 2026-09-27 · [English](Hunt_Edict_Skill_Tree.en.md)
+갱신일: 2026-09-27 · 최초 작성 2026-09-23 · [English](Hunt_Edict_Skill_Tree.en.md)
 
 ## 화면과 조작
 
