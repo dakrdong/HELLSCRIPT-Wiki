@@ -1,6 +1,6 @@
 # Shared UI and new-content contract
 
-Updated: 2026-09-24
+Updated: 2026-09-27
 Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
 
 [Korean version](Shared_UI_Contract.md)
@@ -77,6 +77,8 @@ Shared UI does not require a rectangular frame for every control. Vaults use `Ui
 ## Native skill tree adapter
 
 The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives always apply; a slot menu opens that skill’s edict settings. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).
+
+Since the 2026-09-27 redesign, the tree is a dedicated layout that draws three branch trunks, level-stage gates and prerequisite links. Trunks, links and glows are a texture-free `SkillTreeGraphic` mesh; node positions come from the presentation-only `SkillTreeLayout`. `ClassSkillTree` still owns unlock, rank and equipment rules. Nodes and skill-bar sockets use the `UiButton` `Icon` role like the storage chests, and their ornament graphic reads the common button's hover, press and focus state. Selection is shown with light rather than an outline. `SkillIconView` draws the icons; the ornate frames, backdrop and point gem are content art generated with GPT at the user's request. This is separate from the rule that common button decoration uses no raster art, and icons are fitted to each frame's measured transparent opening. Production records and checks are in the [skill tree screen art record](../Art/SkillTreeUi/Skill_Tree_UI_Art.en.md).
 
 Per-item quick presets use the same draft and selection dialog. A recipe replaces only its own option values; opening Custom Settings or navigating never saves. See the [quick preset coverage and verification](Hunt_Edict_Quick_Presets.en.md).
 

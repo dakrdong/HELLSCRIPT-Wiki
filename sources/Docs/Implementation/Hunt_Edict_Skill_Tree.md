@@ -1,6 +1,6 @@
 # 사냥 칙령 스킬 트리 통합
 
-작성일: 2026-09-23 · [English](Hunt_Edict_Skill_Tree.en.md)
+작성일: 2026-09-23 · 갱신일: 2026-09-27 · [English](Hunt_Edict_Skill_Tree.en.md)
 
 ## 화면과 조작
 
@@ -10,7 +10,21 @@
 
 장착된 액티브를 누르면 **스킬 빼기**, **사냥 칙령 편집** 메뉴가 열린다. 편집을 선택하면 해당 스킬의 자동 사용과 사용 조건을 편집한다. 스킬 트리로 돌아가도 편집 내용은 유지된다. 별도의 ‘스킬 사냥 칙령’ 하위 탭은 제거했다. 기본 공격과 공격 순서는 ‘공통 공격 설정’에서 편집한다.
 
-가로 화면은 트리와 상세 설명을 나란히 배치하고, 세로 화면은 트리 아래에 상세 설명을 배치한다. 장착 칸·주요 분류·하단 저장 버튼은 고정하며, 트리와 설명·설정 본문은 각각 스크롤한다. 한국어·영어와 글자 확대를 지원한다.
+가로 화면은 왼쪽에 트리, 오른쪽 열 위에 스킬 설명, 그 아래에 장착 칸을 둔다. 세로 화면은 위에 트리, 맨 아래에 장착 칸을 고정하고, 스킬을 고르면 둘 사이에 설명이 열린다. 장착 칸·주요 분류·하단 저장 버튼은 고정하며, 트리와 설명·설정 본문은 각각 스크롤한다. 스킬별 칙령 편집 화면도 장착 칸을 아래에 둔다. 한국어·영어와 글자 확대를 지원한다.
+
+## 전통 핵앤슬래시식 트리 화면 (2026-09-27 개편)
+
+사용자는 기존 트리가 스킬마다 상자를 나열해 아이콘이 상자 위쪽에 붙어 어긋나 보이고 허술하다고 지적했다. 모바일 액션 RPG와 디아블로 3·4를 참고해 전통 핵앤슬래시의 스킬 트리처럼 다시 만들었다. 디아블로 4·3 화면은 내장 브라우저로 확인했으며, 다른 게임의 이미지나 화면은 가져오지 않았다.
+
+- **디아블로 4 참고**: 해금한 길을 따라 빛나는 가지, 단계 관문의 마름모, 아이콘 아래의 등급 표시(`2/5`), 트리 옆의 설명, 남은 포인트 표시.
+- **디아블로 3 참고**: 장식 테두리의 둥근 장착 칸, 장식선이 있는 단계 제목.
+- **모바일 참고**: 세로 화면에서 아래에서 열리는 설명, 맨 아래에 고정한 장착 칸, 잠긴 스킬의 해금 레벨 표시, 큰 누름 영역.
+
+세 계열을 세로 줄기로 그린다. 레벨만 필요한 스킬은 줄기에 달리고, 같은 단계의 선행 스킬이 있는 스킬은 그 바로 아래에 연결선으로 달린다. 영웅 레벨이 닿은 곳까지 줄기와 연결선이 황동색으로 빛나고, 아직 열리지 않은 단계는 어둡게 가리며 스킬마다 `Lv.26`처럼 해금 레벨을 보여 준다. 궁극기는 마지막 단계에서 줄기 끝에 놓인다. 스킬을 고르면 다른 단계나 계열에 있는 선행 스킬과, 그 스킬이 여는 스킬까지 밝은 선으로 이어 준다.
+
+액티브는 원형, 패시브는 사각, 궁극기는 네 갈래 문장 테두리를 쓴다. 테두리·트리 배경·포인트 보석은 사용자 요청에 따라 GPT로 생성했다. 테두리의 투명한 안쪽 폭을 측정해 아이콘을 그 안에 가운데 맞추므로 테두리와 아이콘이 어긋나지 않는다. 등급을 올린 스킬과 장착한 스킬은 은은한 빛, 고른 스킬은 밝은 빛으로 표시하고, 장착한 스킬에는 장착 칸 번호(궁극기는 마름모)를 붙인다. 선택을 테두리 선으로 그리면 다시 상자처럼 보여 빛만 사용한다. 제작 기록은 [스킬 트리 화면 이미지 제작 기록](../Art/SkillTreeUi/Skill_Tree_UI_Art.md)에 있다.
+
+저장과 규칙은 바뀌지 않았다. 해금·등급·장착은 기존 `ClassSkillTree`와 편집본이 판정하고, 새 배치 코드(`SkillTreeLayout`)와 장식 메시(`SkillTreeGraphic`)는 화면에만 쓰인다. 기존 버튼 이름을 유지해 튜토리얼 안내와 다른 스모크가 같은 버튼을 찾는다.
 
 ## 성장과 전투 적용
 
@@ -46,3 +60,23 @@
 - [조작 결과](HuntEdictSkillTreeEvidence/runtime.txt) · [재실행 결과](HuntEdictSkillTreeEvidence/restart.txt)
 
 세로 440×956, 가로 956×440, PC 1600×900·1600×1000·2100×900을 확인했다. 현재 열린 Unity 편집기와 모바일 실기기에서 실행한 결과는 아니다.
+
+### 2026-09-27 개편 검증
+
+최신 `main`(`c751d84d`)에서 만든 별도 작업 폴더를 복제한 프로젝트로 빌드하고 검사했다. 사용자가 열어 둔 Unity 편집기와 실제 계정 저장은 사용하지 않았다.
+
+- Unity Edit Mode 관련 검사 **131개 통과, 실패 0, 건너뜀 0**. 새 트리 배치 검사 3개(직업별)와 번역·공통 UI·버튼·사냥 칙령·빠른 설정·패시브 검사를 포함한다. 첫 실행에서는 번역 검사 1개가 실패했다. 원인은 이번 변경이 아니라 기존 커밋 `ce236394`의 첫 플레이 검증 문구 두 줄에 영어 항목이 없던 것이며, 항목을 추가한 뒤 다시 실행해 통과했다. [검사 XML](HuntEdictSkillTreeRedesignEvidence/editmode.xml)
+- 공통 UI 소유 검사와 회귀 9개, 테두리 안쪽 폭 측정 검사(`Docs/Art/SkillTreeUi/measure.py`)가 통과했다.
+- macOS 개발 빌드가 성공했다. 스킬 트리 스모크는 실제 uGUI 레이캐스트와 포인터 누름·놓음·클릭으로 등급 투자, 장착, 장착 칸 메뉴, 제거, 스킬별 칙령 편집, 화면 회전, 언어 전환, 저장을 확인했고, 별도 플레이어 프로세스에서 저장을 다시 읽어 같은 구성을 확인했다. [조작 결과](HuntEdictSkillTreeRedesignEvidence/runtime.txt) · [재실행 결과](HuntEdictSkillTreeRedesignEvidence/restart.txt)
+- 이 스모크는 새 계정이 필수 튜토리얼부터 시작하도록 바뀐 뒤 칙령 창이 열리지 않아 실패하고 있었다. 튜토리얼을 마친 계정으로 시작하도록 고쳤다. 가로 화면의 영어·한국어 150% 글자와 레벨 18 영웅의 잠긴 단계 캡처도 추가했다.
+- 확인한 화면: 세로 440×956, 가로 956×440, PC 1600×900(16:9)·1600×1000(16:10)·2100×900(21:9), 한국어·영어, 글자 150%(세로·가로).
+
+캡처:
+- [PC 16:9 · 패시브 선택](HuntEdictSkillTreeRedesignEvidence/mage-detail-ko.png) · [PC 16:10 · 궁극기 단계](HuntEdictSkillTreeRedesignEvidence/layout-1600x1000-ko.png) · [PC 21:9](HuntEdictSkillTreeRedesignEvidence/layout-2100x900-ko.png)
+- [세로 440×956](HuntEdictSkillTreeRedesignEvidence/layout-440x956-ko.png) · [가로 956×440](HuntEdictSkillTreeRedesignEvidence/layout-956x440-ko.png)
+- [세로 150% 한국어](HuntEdictSkillTreeRedesignEvidence/portrait-large-ko.png) · [세로 150% 영어](HuntEdictSkillTreeRedesignEvidence/portrait-large-en.png) · [가로 150% 한국어](HuntEdictSkillTreeRedesignEvidence/landscape-large-ko.png) · [가로 150% 영어](HuntEdictSkillTreeRedesignEvidence/landscape-large-en.png)
+- [레벨 18 전사: 빛나는 가지와 잠긴 단계](HuntEdictSkillTreeRedesignEvidence/progress-lv18-440x956.png)
+- [장착 칸 메뉴](HuntEdictSkillTreeRedesignEvidence/slot-menu.png) · [스킬별 칙령 편집](HuntEdictSkillTreeRedesignEvidence/selected-skill-policy.png) · [칙령 편집 150% 영어](HuntEdictSkillTreeRedesignEvidence/policy-large-en.png)
+- 개편 전: [가로](HuntEdictSkillTreeEvidence/layout-1600x900-ko.png) · [세로](HuntEdictSkillTreeEvidence/layout-440x956-ko.png)
+
+모바일 비율은 macOS 창에서 재현했다. 모바일 실기기의 터치·성능은 확인하지 않았다.
