@@ -31,6 +31,15 @@ namespace Hellscript.Tests
             var a=Account((int)source.Hero.heroClass,source.Hero.level);a.heroes[a.selectedHero]=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(source.Hero));
             var state=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(source.State));GameStore.NormalizeRun(state);return new CombatSimulation(a,catalog,1,restore:state);
         }
+        [Test] public void CapturedBossDamageUsesReadableNamesAndStableGroupingKeys()
+        {
+            var sim=Quiet();var enemy=sim.State.enemies[0];enemy.boss=true;enemy.pattern=0;
+            Call(sim,"RecordTickIncomingDamage",82.75f,78.5f,enemy.id.ToString(),"BOSS01_SLAM");
+            var sources=(System.Collections.Generic.List<TickDamageSource>)typeof(CombatSimulation).GetField("pendingTickDamage",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(sim);
+            var source=sources.Single();Assert.AreEqual("BOSS01_SLAM:BOSS01",source.sourceId);
+            Assert.AreEqual(GameCatalog.BossNames[0]+" · 내려찍기",source.sourceName);
+            Assert.AreEqual(82.75f,source.damage);Assert.AreEqual(78.5f,source.hpLoss);Assert.IsTrue(source.isBoss);
+        }
         [Test]
         public void CompleteOwnedFixturesUseAllDamageSourcesAndDoNotChangeAccount([Values(0,1,2)]int hero,[Values(0,1,2)]int training)
         {

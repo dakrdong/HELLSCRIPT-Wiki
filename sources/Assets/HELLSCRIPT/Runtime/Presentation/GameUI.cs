@@ -416,7 +416,7 @@ namespace Hellscript
                 Note(content,"주요 사망 원인 피격원:",21,45,pale);
                 foreach(var src in analysis.fatalSources)
                 {
-                    Note(content,Loc.F("• {0}: {1:N0} ({2:0.0}%)",src.sourceName,src.totalDamage,src.percentage),20,40,pale);
+                    Note(content,Loc.F("• {0}: {1:N0} ({2:0.0}%)",Loc.StoredText(CombatJournal.DamageSourceName(src.sourceId,src.sourceName)),src.totalDamage,src.percentage),20,40,pale);
                 }
                 if(analysis.blockedSummary.Count>0)
                 {

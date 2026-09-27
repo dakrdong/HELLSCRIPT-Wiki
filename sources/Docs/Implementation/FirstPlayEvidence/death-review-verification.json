@@ -1,0 +1,82 @@
+{
+  "scope": "Archived natural Mage Rift 6 death displayed in an isolated native UI fixture; no new natural clears claimed.",
+  "baseCommit": "ce236394db1483d7aa7fd631af844377d33aac92",
+  "editMode": {
+    "job": "bf7f0d1d82dd4670a8d62735724a2c48",
+    "mode": "EditMode",
+    "tests": [
+      "CombatStatisticsTests",
+      "StoredLocalizationTests",
+      "CombatJournalTests"
+    ],
+    "total": 65,
+    "passed": 65,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 22.1151025,
+    "scope": "Focused source/record localization regression; not a full-suite result"
+  },
+  "native": {
+    "exitCode": 0,
+    "combinations": 20,
+    "screenshots": 40,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textScale": [
+      100,
+      150
+    ],
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "checks": [
+      "Readable names in summary and tick detail",
+      "No raw boss attack identifiers in displayed text",
+      "No covering tutorial modal",
+      "Text height fits",
+      "Translated attack label visible in scroll viewport",
+      "Back action raycast and routing",
+      "Archived record unchanged after every display combination"
+    ],
+    "physicalMobile": false
+  },
+  "record": {
+    "id": "64f6945cef7944359b2f879b413aca5d",
+    "stage": 6,
+    "class": 2,
+    "outcome": "defeat",
+    "sha256": "d9d2ea8ddc52d2c76ebb26bb19fb1ced968e46ae4a23ba1f21b6c809e2ee8cfd"
+  },
+  "priorAttempts": [
+    {
+      "directory": "native",
+      "result": "Failed short-landscape viewport; fixed with shared side-action adapter"
+    },
+    {
+      "directory": "native-layout",
+      "result": "Assertions passed but visual inspection found tutorial overlay; superseded by native-final"
+    }
+  ],
+  "runtimeDllSha256": "266f54be623bb030a1f45d41687ed2a5bdbbde6ed8fe8532205cc60d3744218d"
+}

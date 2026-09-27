@@ -64,6 +64,32 @@ namespace Hellscript
                 builds=kind=="BUILD_CHANGED"||kind=="HUNT_EDICT_CHANGED"?new[]{run.build.Copy()}:Array.Empty<BuildConfig>()});
             if(journal.events.Count>EventLimit){journal.events.RemoveAt(1);journal.omittedEvents++;}
         }
+        public static string AttackName(string id)
+        {
+            string name=ClassSkills.Find(id)?.name;if(name!=null)return name;
+            foreach(BossAttack attack in Enum.GetValues(typeof(BossAttack)))if(BossCombat.Definition((int)attack)==id)return BossCombat.Name((int)attack);
+            if(id?.Length==3&&int.TryParse(id.Substring(1),out int index))
+            {
+                if(id[0]=='N'&&index>=1&&index<=GameCatalog.EnemyNames.Length)return Loc.Source("{0} 공격",GameCatalog.EnemyNames[index-1]);
+                if(id[0]=='E'&&index>=1&&index<=EnemyCombat.TraitNames.Length)return EnemyCombat.TraitNames[index-1];
+            }
+            if(id!=null&&id.StartsWith("N",StringComparison.Ordinal)&&id.EndsWith("_DEATH",StringComparison.Ordinal)&&
+                int.TryParse(id.Substring(1,2),out int dead)&&dead>=1&&dead<=GameCatalog.EnemyNames.Length)
+                return GameCatalog.EnemyNames[dead-1]+" · 사망 효과";
+            return id=="BASIC"?"기본 공격":id=="ENEMY_ATTACK"?"일반 공격":id=="ENEMY_GROUND"?"적 장판 피해":id??"적 공격";
+        }
+        // Read old records without changing their stored labels, grouping keys or damage totals.
+        public static string DamageSourceName(string sourceId,string savedName)
+        {
+            string label=savedName??"적 공격";
+            string id=sourceId?.Split(':')[0];
+            if(string.IsNullOrEmpty(id))return label;
+            string name=AttackName(id);
+            if(name==id)return label;
+            if(label==id)return name;
+            string suffix=" · "+id;
+            return label.EndsWith(suffix,StringComparison.Ordinal)?label.Substring(0,label.Length-id.Length)+name:label;
+        }
         public static string PolicyReason(string code)=>code switch
         {
             "READY"=>"조건 충족", "COOLDOWN"=>"재사용 대기중", "RESOURCE"=>"자원 부족", "BUSY"=>"행동 잠김",
@@ -161,32 +187,18 @@ namespace Hellscript
         void JournalDamage(DamageEvent damage)
         {
             if(State.journal==null)return;
-            string name=JournalAttackName(damage.definitionId);
+            string name=CombatJournal.AttackName(damage.definitionId);
             string message=damage.incoming?Loc.Source("{0} · {1} 피격: HP {2:0.##} 감소, 보호막 {3:0.##} 흡수 → HP {4:0.##}/{5:0.##}",
                 int.TryParse(damage.casterId,out int attackerId)?JournalTarget(attackerId):"적 공격",name,damage.hpLoss,damage.absorbed,State.health,Stats.hp):
                 Loc.Source("{0} 적중 → {1}: HP 피해 {2:0.##}{3}",name,JournalTarget(damage.targetId),damage.hpLoss,damage.critical?" · 치명타":"");
             CombatJournal.Append(State,damage.incoming?"HIT_TAKEN":"HIT_DEALT",message,damage.definitionId,damage.kind.ToString(),damage.targetId,damage.rootCastId,damage);
-        }
-        static string JournalAttackName(string id)
-        {
-            string name=ClassSkills.Find(id)?.name;if(name!=null)return name;
-            foreach(BossAttack attack in Enum.GetValues(typeof(BossAttack)))if(BossCombat.Definition((int)attack)==id)return BossCombat.Name((int)attack);
-            if(id?.Length==3&&int.TryParse(id.Substring(1),out int index))
-            {
-                if(id[0]=='N'&&index>=1&&index<=GameCatalog.EnemyNames.Length)return Loc.Source("{0} 공격",GameCatalog.EnemyNames[index-1]);
-                if(id[0]=='E'&&index>=1&&index<=EnemyCombat.TraitNames.Length)return EnemyCombat.TraitNames[index-1];
-            }
-            if(id!=null&&id.StartsWith("N",StringComparison.Ordinal)&&id.EndsWith("_DEATH",StringComparison.Ordinal)&&
-                int.TryParse(id.Substring(1,2),out int dead)&&dead>=1&&dead<=GameCatalog.EnemyNames.Length)
-                return GameCatalog.EnemyNames[dead-1]+" · 사망 효과";
-            return id=="BASIC"?"기본 공격":id=="ENEMY_ATTACK"?"일반 공격":id=="ENEMY_GROUND"?"적 장판 피해":id??"적 공격";
         }
         void JournalEnemy(EnemyState enemy,string kind,string definition,int action,float value,Vector2 aim)
         {
             if(State.journal==null||State.training>=0)return;
             string message=null;
             if(kind=="PREPARE"||kind=="FOLLOWUP_PREPARE"||kind=="HAZARD_CREATED")
-                message=Loc.Source("{0} · {1} 예고: {2:0.0}초 후 · 목표 위치 ({3:0.0}, {4:0.0})",JournalTarget(enemy.id),JournalAttackName(definition),value,aim.x,aim.y);
+                message=Loc.Source("{0} · {1} 예고: {2:0.0}초 후 · 목표 위치 ({3:0.0}, {4:0.0})",JournalTarget(enemy.id),CombatJournal.AttackName(definition),value,aim.x,aim.y);
             else if(kind=="ENRAGED")message=Loc.Source("{0} 격노: 강화된 공격에 주의하세요.",JournalTarget(enemy.id));
             else if(kind.StartsWith("INTERRUPTED:",StringComparison.Ordinal))message=Loc.Source("{0} 공격 중단: {1}",JournalTarget(enemy.id),kind.Substring(12));
             if(message==null)return;

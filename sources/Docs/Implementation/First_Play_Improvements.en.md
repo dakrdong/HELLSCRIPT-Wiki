@@ -108,3 +108,11 @@ Three 20-second captures per build used an Apple M3 Pro, macOS Development Mono,
 | Peak process RSS | 630.0MiB | 614.9MiB |
 
 Every trial observed 401 actual combat ticks. Increased combat work is reported separately from frame-time changes. This short desktop sample does not prove mobile, thermal or battery performance, or absence of memory leaks. Draw Calls and Batches returned only zeros and were excluded from conclusions. Both harnesses received identical asynchronous-admission waiting and valid main-weapon fixture fixes. Baseline gameplay code was preserved; the two profiling-harness source hashes match.
+
+## Natural-play follow-up: readable death sources
+
+The actual Mage Rift 6 defeat exposed `BOSS_BASIC`, `BOSS01_SLAM`, and `BOSS01_HOOK` as attack labels. The journal's existing attack-name mapping is now shared through `CombatJournal.AttackName` by death summaries and tick details. Known raw identifiers in old records are resolved only for display; stored names, damage, HP loss, and grouping keys remain unchanged. Unknown identifiers and custom stored labels are preserved. Korean and English reuse the existing translations.
+
+Native verification also reproduced a collapsed content viewport at 956×440 with enlarged text. Death summaries, final windows, and tick details now use the result screen's fixed side actions on short landscape screens and reflow after constructing those actions. Newly opened pages start at the beginning.
+
+All 65 focused Edit Mode tests passed. A copy of the actual defeat record was displayed in 20 macOS combinations, with 40 summary/detail captures and raycast back-action checks. Visual inspection caught a tutorial overlay missed by the first fixture assertions; that fixture was corrected and rerun. Final evidence: [verification](FirstPlayEvidence/death-review-verification.json), [layout checks](FirstPlayEvidence/death-review-checks.txt), [landscape English 150%](FirstPlayEvidence/death-review-landscape-en-150.png), and [portrait Korean 150%](FirstPlayEvidence/death-review-portrait-ko-150.png). This does not complete the three-class natural Rift 20 run or establish physical-mobile acceptance.
