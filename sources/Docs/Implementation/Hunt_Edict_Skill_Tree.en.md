@@ -1,6 +1,6 @@
 # Hunt edict skill tree integration
 
-Updated: 2026-09-28 · [한국어](Hunt_Edict_Skill_Tree.md)
+Updated: 2026-09-29 · [한국어](Hunt_Edict_Skill_Tree.md)
 
 ## Screen and interaction
 
@@ -100,3 +100,19 @@ The 20-layout matrix combined 440×956 portrait, 956×440 landscape and 1600×90
 - [Validation summary](HuntEdictSkillResetEvidence/validation.json) · [Allocation/persistence tests](HuntEdictSkillResetEvidence/editmode.xml) · [Combat regressions](HuntEdictSkillResetEvidence/combat-editmode.xml) · [Build result](HuntEdictSkillResetEvidence/build.txt)
 - [Pointer interactions](HuntEdictSkillResetEvidence/runtime.txt) · [Zero-rank restart](HuntEdictSkillResetEvidence/restart.txt) · [Existing allocation interactions](HuntEdictSkillResetEvidence/legacy-runtime.txt) · [Existing allocation restart](HuntEdictSkillResetEvidence/legacy-restart.txt)
 - [Desktop Korean](HuntEdictSkillResetEvidence/desktop-ko.png) · [Portrait English 150%](HuntEdictSkillResetEvidence/portrait-en-150.png) · [Landscape Korean](HuntEdictSkillResetEvidence/landscape-ko.png) · [Landscape English 150%](HuntEdictSkillResetEvidence/landscape-en-150.png) · [Empty slots and refunded point](HuntEdictSkillResetEvidence/reset-empty-ko.png)
+
+## 2026-09-29 compact menu beside equipped skills
+
+Clicking an equipped normal active or ultimate opens a compact menu immediately above that socket. It falls below the socket if there is insufficient room above and stays inside the safe area at either horizontal edge. The screen remains undimmed. The menu contains only the skill name, close control, **Remove skill** and **Edit Hunt Edict**.
+
+Clicking outside, closing or going back dismisses only this menu. An outside click is consumed rather than activating the underlying tab or button. Rotation, safe-area, language and text-size changes rebuild the menu against the same newly rendered socket. Opening or dismissing the menu never changes the draft or save; removal and policy editing retain their existing transaction paths.
+
+### Compact menu verification
+
+All 99 related Unity Edit Mode tests and 9 shared UI regressions passed, and the macOS development build completed without errors. The 20-layout matrix combined 440×956 portrait, 956×440 landscape, 1600×900/1600×1000/2100×900 desktop, Korean/English and 100%/150% text. Each of the five equipped slots was clicked in every layout, checking 100 menus for placement, size, text clipping and outside-click handling.
+
+Verification also covered rotation, language and text-size changes while a menu remained open, simulated safe-area insets, policy navigation, active/ultimate removal, revert and save. A separate player process restored the removed slot as empty while retaining the other skills. Checks used synthetic uGUI pointer input in a native macOS development player with isolated saves. No connected Unity Editor or physical mobile device was used.
+
+- [Validation summary](HuntEdictSkillMenuEvidence/validation.json) · [Edit Mode tests](HuntEdictSkillMenuEvidence/editmode.xml) · [Build result](HuntEdictSkillMenuEvidence/build.txt)
+- [Pointer interactions](HuntEdictSkillMenuEvidence/runtime.txt) · [Fresh-process restoration](HuntEdictSkillMenuEvidence/restart.txt)
+- [Desktop Korean](HuntEdictSkillMenuEvidence/desktop-ko.png) · [Portrait English 150%](HuntEdictSkillMenuEvidence/portrait-en-150.png) · [Landscape Korean](HuntEdictSkillMenuEvidence/landscape-ko.png) · [Right-edge ultimate, English 150%](HuntEdictSkillMenuEvidence/ultimate-edge-en.png) · [Simulated safe area](HuntEdictSkillMenuEvidence/safe-area.png)

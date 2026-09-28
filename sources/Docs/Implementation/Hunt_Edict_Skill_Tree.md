@@ -1,6 +1,6 @@
 # 사냥 칙령 스킬 트리 통합
 
-갱신일: 2026-09-28 · 최초 작성 2026-09-23 · [English](Hunt_Edict_Skill_Tree.en.md)
+갱신일: 2026-09-29 · 최초 작성 2026-09-23 · [English](Hunt_Edict_Skill_Tree.en.md)
 
 ## 화면과 조작
 
@@ -100,3 +100,19 @@ macOS 개발 빌드에서 세 직업의 1레벨 캐릭터로 초기화, 되돌�
 - [검증 요약](HuntEdictSkillResetEvidence/validation.json) · [초기화·저장 검사](HuntEdictSkillResetEvidence/editmode.xml) · [전투 회귀 검사](HuntEdictSkillResetEvidence/combat-editmode.xml) · [빌드 결과](HuntEdictSkillResetEvidence/build.txt)
 - [포인터 조작](HuntEdictSkillResetEvidence/runtime.txt) · [0등급 재실행 복원](HuntEdictSkillResetEvidence/restart.txt) · [기존 구성 조작](HuntEdictSkillResetEvidence/legacy-runtime.txt) · [기존 구성 재실행 복원](HuntEdictSkillResetEvidence/legacy-restart.txt)
 - [PC 한국어](HuntEdictSkillResetEvidence/desktop-ko.png) · [세로 영어 150%](HuntEdictSkillResetEvidence/portrait-en-150.png) · [가로 한국어](HuntEdictSkillResetEvidence/landscape-ko.png) · [가로 영어 150%](HuntEdictSkillResetEvidence/landscape-en-150.png) · [초기화 후 빈 장착 칸과 반환 포인트](HuntEdictSkillResetEvidence/reset-empty-ko.png)
+
+## 2026-09-29 장착 스킬 옆의 작은 메뉴
+
+장착한 일반 액티브나 궁극기를 누르면 해당 아이콘 바로 위에 작은 메뉴가 열린다. 위쪽 공간이 부족하면 아래에 놓고, 좌우 끝에서는 안전 영역 안으로 옮긴다. 전체 화면에 어두운 배경을 덮지 않으며, 스킬 이름과 닫기, **스킬 빼기**, **사냥 칙령 편집**만 보여 준다.
+
+바깥을 누르거나 닫기·뒤로가기를 실행하면 메뉴만 닫힌다. 바깥을 누른 입력이 아래의 다른 탭이나 버튼으로 전달되지는 않는다. 화면 방향·안전 영역·언어·글자 크기가 바뀌면 새로 그린 같은 장착 칸을 기준으로 메뉴 위치를 다시 계산한다. 메뉴를 열고 닫는 동작은 편집본과 저장에 영향을 주지 않으며, 제거·편집은 기존 거래 경로를 사용한다.
+
+### 작은 메뉴 검증
+
+Unity Edit Mode 관련 검사 99개와 공통 UI 회귀 검사 9개가 통과했고, macOS 개발 빌드는 오류 없이 완료됐다. 세로 440×956, 가로 956×440, PC 1600×900·1600×1000·2100×900에 한국어·영어, 글자 100%·150%를 조합한 20개 화면에서 장착 칸 다섯 개를 각각 눌렀다. 총 100개 메뉴의 위치·크기·문자 잘림·바깥 클릭 처리를 확인했다.
+
+메뉴를 연 상태의 화면 회전·언어·글자 크기 변경과 모의 안전 영역, 칙령 편집으로 이동, 일반 액티브·궁극기 제거, 되돌리기와 저장을 확인했다. 별도 게임 프로세스로 저장을 다시 읽어 제거한 칸은 비어 있고 다른 스킬은 유지되는 것도 확인했다. 검증은 분리된 저장을 사용하는 macOS 개발 플레이어의 uGUI 포인터 입력으로 수행했다. 연결된 Unity 편집기와 모바일 실기기는 사용하지 않았다.
+
+- [검증 요약](HuntEdictSkillMenuEvidence/validation.json) · [Edit Mode 검사](HuntEdictSkillMenuEvidence/editmode.xml) · [빌드 결과](HuntEdictSkillMenuEvidence/build.txt)
+- [포인터 조작](HuntEdictSkillMenuEvidence/runtime.txt) · [재실행 복원](HuntEdictSkillMenuEvidence/restart.txt)
+- [PC 한국어](HuntEdictSkillMenuEvidence/desktop-ko.png) · [세로 영어 150%](HuntEdictSkillMenuEvidence/portrait-en-150.png) · [가로 한국어](HuntEdictSkillMenuEvidence/landscape-ko.png) · [오른쪽 끝 궁극기·영어 150%](HuntEdictSkillMenuEvidence/ultimate-edge-en.png) · [모의 안전 영역](HuntEdictSkillMenuEvidence/safe-area.png)

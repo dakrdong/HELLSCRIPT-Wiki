@@ -82,6 +82,8 @@ The Skills tab presents the approved 37-skill class tree, four normal active slo
 
 Since the 2026-09-27 redesign, the tree is a dedicated layout that draws three branch trunks, level-stage gates and prerequisite links. Trunks, links and glows are a texture-free `SkillTreeGraphic` mesh; node positions come from the presentation-only `SkillTreeLayout`. `ClassSkillTree` still owns unlock, rank and equipment rules. Nodes and skill-bar sockets use the `UiButton` `Icon` role like the storage chests, and their ornament graphic reads the common button's hover, press and focus state. Selection is shown with light rather than an outline. `SkillIconView` draws the icons; the ornate frames, backdrop and point gem are content art generated with GPT at the user's request. This is separate from the rule that common button decoration uses no raster art, and icons are fitted to each frame's measured transparent opening. Production records and checks are in the [skill tree screen art record](../Art/SkillTreeUi/Skill_Tree_UI_Art.en.md).
 
+Equipped-skill actions use a compact menu anchored to the pressed socket within this window. They reuse its buttons, theme, back handling and draft; reflow reads the same socket's rebuilt coordinates. A transparent outside-click layer neither dims the screen nor activates controls underneath. Save confirmations and normal option pickers retain their centered layout.
+
 Per-item quick presets use the same draft and selection dialog. A recipe replaces only its own option values; opening Custom Settings or navigating never saves. See the [quick preset coverage and verification](Hunt_Edict_Quick_Presets.en.md).
 
 ## Rift entry adapter

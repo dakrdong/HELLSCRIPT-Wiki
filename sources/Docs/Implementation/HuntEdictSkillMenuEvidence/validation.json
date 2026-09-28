@@ -1,0 +1,92 @@
+{
+  "date": "2026-09-29",
+  "change": "Compact equipped-skill action menu anchored to its socket",
+  "unity": "6000.6.0f1",
+  "verification_path": "Existing batch Edit Mode and macOS development-player runner; CoplayDev instance count was zero",
+  "editmode": {
+    "result": "Passed",
+    "total": "99",
+    "passed": "99",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "editmode_filter": [
+    "SkillTreeIntegrationTests",
+    "SharedUiTests",
+    "UiButtonTests",
+    "LocalizationTests"
+  ],
+  "shared_ui": {
+    "ownership_check": "PASS",
+    "regression_tests_passed": 9
+  },
+  "macos_build": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "pointer_matrix": {
+    "resolutions": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "text_scale_percent": [
+      100,
+      150
+    ],
+    "layouts": 20,
+    "slots_per_layout": 5,
+    "slot_checks": 100,
+    "result": "PASS"
+  },
+  "verified": [
+    "Actual uGUI raycast and pointer down/up/click dispatch",
+    "Compact menu anchored next to the selected active/ultimate socket",
+    "Bounds and enabled text fit inside the window",
+    "Transparent outside input target; no screen dimming",
+    "Close X, common back handler, and consumed outside click",
+    "No draft/save mutation on open or dismiss",
+    "Open-menu restoration across orientation, language and text-size changes",
+    "Simulated safe-area insets of 32/24/40/28 pixels",
+    "Policy navigation from the menu",
+    "Active/ultimate removal, revert, save",
+    "Saved removal survives a fresh player process while other slots remain intact"
+  ],
+  "limitations": [
+    "Synthetic uGUI input in a native macOS player, not physical touch",
+    "No connected live Unity Editor",
+    "Physical mobile input and performance not verified"
+  ],
+  "evidence": [
+    "editmode.xml",
+    "build.txt",
+    "runtime.txt",
+    "restart.txt",
+    "desktop-ko.png",
+    "portrait-en-150.png",
+    "landscape-ko.png",
+    "ultimate-edge-en.png",
+    "safe-area.png"
+  ]
+}
