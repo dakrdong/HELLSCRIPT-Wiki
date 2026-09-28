@@ -118,7 +118,9 @@ namespace Hellscript
         void ClearFlashes(){foreach(var s in flashes)ReturnTelegraph(s.view);flashes.Clear();}
 
         // progress = windup fraction (0 just started .. 1 lands/active); boss telegraphs are brighter; flash 1..0 = release flash.
-        public void ShowFill(TelegraphView view,AttackShape shape,Vector2 origin,Vector2 end,Vector2 direction,float radius,float inner,float angle,float progress,bool boss,float flash=0)
+        // tint (alpha > 0) replaces the danger colour: a zone that already landed burns in its element's colour, faint enough
+        // for its own effects to show through.
+        public void ShowFill(TelegraphView view,AttackShape shape,Vector2 origin,Vector2 end,Vector2 direction,float radius,float inner,float angle,float progress,bool boss,float flash=0,Color tint=default)
         {
             var t=view.go.transform;Vector3 at=new Vector3(origin.x,FillHeight,origin.y);Vector4 edges=Vector4.zero;
             var forward=new Vector3(direction.x,0,direction.y);if(forward.sqrMagnitude<1e-6f)forward=Vector3.forward;
@@ -137,7 +139,7 @@ namespace Hellscript
                 default:
                     view.filter.sharedMesh=Disc();t.SetPositionAndRotation(at,Quaternion.identity);t.localScale=new Vector3(radius,1,radius);break;
             }
-            block.Clear();block.SetFloat(ProgressId,Mathf.Clamp01(progress));block.SetFloat(FlashId,Mathf.Clamp01(flash));block.SetVector(EdgesId,edges);block.SetColor(TintId,boss?BossTelegraph:EnemyTelegraph);
+            block.Clear();block.SetFloat(ProgressId,Mathf.Clamp01(progress));block.SetFloat(FlashId,Mathf.Clamp01(flash));block.SetVector(EdgesId,edges);block.SetColor(TintId,tint.a>0?tint:boss?BossTelegraph:EnemyTelegraph);
             view.renderer.SetPropertyBlock(block);
         }
         public void ShowRefuge(TelegraphView view,Vector2 position,float radius)=>Place(view,position,radius*2);

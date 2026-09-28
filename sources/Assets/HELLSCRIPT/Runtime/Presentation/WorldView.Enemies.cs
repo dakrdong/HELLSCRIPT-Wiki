@@ -28,6 +28,18 @@ namespace Hellscript
             renderer.textureMode=tiled?LineTextureMode.Tile:LineTextureMode.Stretch;
             for(int i=0;i<points.Length;i++)renderer.SetPosition(i,Position(points[i])+Vector3.up*.19f);
         }
+        // A lingering zone that already landed (poison pool, fire patch, beam, whirl) changes from the danger gauge to its
+        // element's colour at lower strength; warnings that have not landed keep the red gauge.
+        Color LandedZoneTint(RunState run,in EnemyThreat threat)
+        {
+            if(threat.delay>0||!threat.key.StartsWith("hazard-",StringComparison.Ordinal)||!int.TryParse(threat.key.Substring(7),out int id))return default;
+            foreach(var h in run.enemyHazards)
+            {
+                if(h.id!=id)continue;if(h.duration<=0)return default;
+                var c=ElementColor(h.element!=0?h.element:AttackElement(h.definitionId));c.a=.5f;return c;
+            }
+            return default;
+        }
         WorldFx.TelegraphView ThreatView(WorldFx library,string key,WorldFx.TelegraphKind kind)
         {
             activeFills.Add(key);
@@ -49,7 +61,7 @@ namespace Hellscript
                 foreach(var line in EnemyCombat.Outlines(threat))EnemyOutline(threat.key+"-"+index++,line,edge,width,activeThreats);
                 // The footprint fills like a gauge and is full on the step the attack lands (CHK-P04: shape and fill, not colour alone).
                 if(library!=null)library.ShowFill(ThreatView(library,threat.key,WorldFx.TelegraphKind.Fill),threat.shape,threat.origin,threat.end,threat.direction,
-                    threat.radius,threat.innerRadius,threat.angle,progress,boss);
+                    threat.radius,threat.innerRadius,threat.angle,progress,boss,0,LandedZoneTint(run,threat));
             }
             foreach(var e in run.enemies.Where(e=>!e.dead&&Vector2.Distance(run.position,e.position)<=12&&game.Combat.Map.LineClear(run.position,e.position)))
             {
@@ -84,7 +96,7 @@ namespace Hellscript
             foreach(var key in staleThreats){if(library!=null)library.ReturnTelegraph(threatFills[key]);threatFills.Remove(key);}
             gauge.EndFrame(run);
             // A full gauge that landed flashes its whole footprint once; shots show their flight instead.
-            if(library!=null)foreach(var warning in completedWarnings)if(!TelegraphGauge.Shot(warning.definition))library.ReleaseFlash(warning);
+            if(library!=null)foreach(var warning in completedWarnings)if(!TelegraphGauge.Shot(warning.definition)){library.ReleaseFlash(warning);LandAttack(library,run,warning);}
         }
     }
 }

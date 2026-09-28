@@ -54,7 +54,7 @@ namespace Hellscript
             RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
-            if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();
+            if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearAttackFx();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
@@ -91,6 +91,7 @@ namespace Hellscript
             BindRiftTerrain();
             hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false);
             hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);
+            SeedCombatFeedback(run);
         }
         GameObject CreateBody(string name,int type,bool enemy,bool boss)
         {
@@ -138,7 +139,7 @@ namespace Hellscript
             if(presentationSuspended||world==null)return;
             using var sample=PresentationMetrics.World.Auto();
             PresentationMetrics.WorldCalls++;
-            if(world==null)return;bool frozen=run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError);elapsed+=frozen?0:dt*game.EffectiveSpeed;
+            if(world==null)return;bool frozen=run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError);elapsed+=frozen?0:dt*game.EffectiveSpeed;motionStep=frozen?0:dt*game.EffectiveSpeed;
             PresentExploredGeometry(run);
             Vector3 hp=Position(run.position)+Vector3.up*game.Combat.HeroAirHeight;Vector3 movement=hp-hero.transform.position;movement.y=0;
             hero.transform.position=snapPresentation?hp:Vector3.Lerp(hero.transform.position,hp,Mathf.Min(1,dt*22));
@@ -150,7 +151,7 @@ namespace Hellscript
             ApplyBattleViewport();
             foreach(var enemy in run.enemies)
             {
-                if(enemy.dead){if(actors.TryGetValue(enemy.id,out var dead)){Destroy(dead);actors.Remove(enemy.id);}continue;}
+                if(enemy.dead){if(actors.TryGetValue(enemy.id,out var dead)){StartDying(dead,enemy,run);actors.Remove(enemy.id);}continue;}
                 if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!game.Combat.Map.LineClear(run.position,enemy.position))
                 {if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);continue;}
                 if(!actors.TryGetValue(enemy.id,out var actor))
@@ -162,7 +163,7 @@ namespace Hellscript
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
                 actor.SetActive(true);actor.transform.position=snapPresentation?Position(enemy.position):Vector3.Lerp(actor.transform.position,Position(enemy.position),Mathf.Min(1,dt*20));
                 Vector3 facing=Position(enemy.brain.facing);facing.y=0;if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
-                actor.transform.GetChild(0).localRotation=Quaternion.Euler(enemy.brain.action.phase==EnemyActionPhase.Charging?25:enemy.brain.action.phase==EnemyActionPhase.Preparing?-12:0,0,0);
+                PoseEnemy(actor,enemy,run);AttackMotes(Fx,actor,enemy,run);
                 var bar=actor.transform.Find("Health");bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);
             }
             foreach(var drop in run.drops)
@@ -174,6 +175,7 @@ namespace Hellscript
                 visual.transform.rotation=Quaternion.Euler(15,elapsed*55,25);
             }
             PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
+            PresentCombatFeedback(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
             var active=new HashSet<int>();
             foreach(var fx in run.effects)
             {
@@ -200,7 +202,8 @@ namespace Hellscript
             else if(kind==6||kind==14||kind==18||kind==25)
             {if(!CanDisplayEnemyMarker(run,origin)||!CanDisplayEnemyMarker(run,target))return;}
             else if(!CanDisplayEnemyMarker(run,kind==0||kind==3||kind==4||kind==5||kind==11||kind==16||kind==17||kind==20?origin:target,kind==24?2:Mathf.Clamp(amount,.8f,4)))return;
-            if(kind==30||kind==31||kind==32){if(kind==30&&amount<8)return;var spark=Shape("Hit",PrimitiveType.Sphere,world.transform,Position(origin)+Vector3.up*1.5f,Vector3.one*(kind==31?.35f:.15f),kind==32?red:ember);effects.Add(new VisualFx{go=spark,life=.15f,total=.15f,scale=spark.transform.localScale});return;}
+            // Hits, crits and hero damage are shown from the damage events (WorldView.ActorMotion); a dodge kicks up dust.
+            if(kind==30||kind==31||kind==32){if(kind==32&&amount<=0&&Fx!=null)Fx.Burst("dust",Position(origin)+Vector3.up*.3f,.6f);return;}
             if(SkillEffect(origin,target,kind,amount))return;
             Material mat=kind>=12&&kind<=17?blue:kind==8?green:kind==24||kind==25?red:ember;
             GameObject go;

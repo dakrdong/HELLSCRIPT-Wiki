@@ -1,0 +1,12 @@
+Enemy smoke on two macOS development builds, 2026-09-28 (isolated saves, 1600x900, Metal).
+v1f = stage 2 item 1 (5ea13540) plus only the enemy smoke fixture fix; g4 = item 2 (180c9c36).
+Both builds pass the first launch (charge scenario) and stop at the same step of the relaunch (the death-burst scene,
+waiting for three delayed payloads at once), so the relaunch failure predates item 2's presentation changes.
+
+v1f enemy  exit=0
+v1f enemy -hellscriptEnemyResume exit=1
+v1f enemy -hellscriptDeathResume exit=1
+g4 enemy  exit=0
+g4 enemy -hellscriptEnemyResume exit=1
+g4 enemy -hellscriptDeathResume exit=1
+g4 attackfx exit=0
