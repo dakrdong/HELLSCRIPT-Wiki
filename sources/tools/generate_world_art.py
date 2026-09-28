@@ -55,8 +55,8 @@ BUDGETS = {
     "fx": (800, 1024),
 }
 BIG_TOWN = ("Building_", "Gatehouse", "Portal_Ring", "Aspect_Runestone")
-# "World/<Family>/<Id>" for Resources.Load, or "<Family>/<Id>" for WorldArt paths; interpolated strings are skipped.
-CODE_REF = re.compile(r'"(?:World/)?((?:Characters|Bosses|Props|Town|Fx|Fields/F\d+)/[A-Za-z0-9_]+)"')
+# Check complete literal paths; dynamically constructed paths are covered by the runtime asset tests.
+CODE_REF = re.compile(r'"(?:World/)?((?:Characters|Bosses|Props|Town|Fx|Fields/F\d+)/[A-Za-z0-9_]+)"(?!\s*\+)')
 OUTPUTS = (".fbx", "_A.png", "_N.png")
 ROLES = {"fbx": ".fbx", "albedo": "_A.png", "normal": "_N.png"}  # role-keyed hashes, as manifest_enemies_a.json writes them
 FX = "Fx"
@@ -192,9 +192,9 @@ def strip_comments(line):
 def code_refs(code=CODE):
     refs = {}
     for path in sorted(Path(code).rglob("*.cs")):
-        for line in path.read_text(encoding="utf-8").splitlines():
-            for m in CODE_REF.finditer(strip_comments(line)):
-                refs.setdefault(m.group(1), path.name)
+        source = "\n".join(strip_comments(line) for line in path.read_text(encoding="utf-8").splitlines())
+        for m in CODE_REF.finditer(source):
+            refs.setdefault(m.group(1), path.name)
     return refs
 
 

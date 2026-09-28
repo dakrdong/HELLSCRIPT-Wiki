@@ -1,0 +1,14 @@
+# Task: two battle HUD button medallions for HELLSCRIPT
+
+Use the installed `imagegen` skill in its built-in `image_gen` mode. Make exactly ONE image generation call per asset below (two calls in total). Do not edit, recolour, crop, resize, chroma-key or remove backgrounds from any output. Keep each PNG exactly as generated.
+
+After each call, copy the generated PNG byte-for-byte from `~/.codex/generated_images/...` into this folder as `out/<id>.png`. Then write `out/manifest.json` with one entry per asset: `id`, the exact prompt you used, the source path you copied from, pixel size, whether the PNG has an alpha channel, the fraction of fully transparent pixels, the alpha of the four corners and of the centre pixel, and `"model": "unknown"` (the built-in surface does not report a model; do not guess one). Finally print a one-line summary per asset.
+
+Reference images attached (`style-menu-*.png`): existing HUD menu medallions of this game, shown on grey only for viewing; the real files are transparent. Match their exact family: a round medallion with a thick aged-brass ring, small diamond studs at the four cardinal points, a dark recessed interior with a richly painted emblem, warm golden rim light.
+
+Shared requirements for every asset (write them into each prompt):
+Create ONE finished 2D game UI icon for the dark-fantasy RPG HELLSCRIPT. Use case: stylized-concept. Square 1:1 transparent PNG (1024x1024) with preserved native alpha: exactly one round medallion centred with comfortable padding, the same aged-brass ring with four diamond studs as the reference HUD medallions, a dark recessed interior with a painted emblem that stays readable at 48 pixels. Style: richly hand-painted premium dark-fantasy RPG UI art matching the references, controlled detail, clean silhouette. Fully transparent outside the medallion, clean antialiased alpha edges. No text, no letters, no numbers, no scenery outside the medallion, no solid backdrop, no checkerboard pattern, no drop shadow outside the ring, no watermark.
+
+Assets:
+1. `hud-power-saving`: emblem for an idle/power-saving mode that keeps hunting quietly: a pale silver crescent moon above a small dimmed brass lantern whose flame is low and soft blue, cool moonlight on a deep navy interior.
+2. `hud-escape`: emblem for leaving the fight and returning to town: a stone archway doorway glowing with warm ember light from beyond, and a bold brass arrow sweeping out through the doorway toward the viewer's right, deep crimson-black interior.

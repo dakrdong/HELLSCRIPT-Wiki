@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T16:20:40+09:00",
+  "generatedAt": "2026-09-28T17:12:08+09:00",
   "databases": [
     {
       "id": "resources",
@@ -5829,6 +5829,92 @@
           "related": [
             "tutorial-staging",
             "tutorial-staging.en"
+          ]
+        },
+        {
+          "id": "ui-menu-power-saving",
+          "name": "절전 모드 메달 / Power saving medallion",
+          "category": "이미지 원본",
+          "summary": "전투 화면 위쪽 가운데에 나란히 놓이는 버튼 메달입니다. / Button medallion side by side at the top centre of the battle screen.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-power-saving.png",
+            "해상도": "1254 × 1254",
+            "SHA-256": "0a99f4bb6097f0d3b475bde1b00b2c97b3cd7db79c22d6da27b91b8d82b70f43",
+            "Unity GUID": "9d9882021084426f91ed69486d3d2acb",
+            "사용처": "GameUI.BattleLayout → GameController.RequestIdle",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified"
+          },
+          "source": {
+            "path": "Docs/Art/HudButtons/hud-buttons-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/menu-power-saving.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-power-saving.png",
+          "refs": [
+            {
+              "path": "Docs/Art/HudButtons/hud-buttons-manifest.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/HudButtons/hud-buttons-prompt.txt",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "battle-escape",
+            "battle-escape.en"
+          ]
+        },
+        {
+          "id": "ui-menu-escape",
+          "name": "탈출 메달 / Escape medallion",
+          "category": "이미지 원본",
+          "summary": "전투 화면 위쪽 가운데에 나란히 놓이는 버튼 메달입니다. / Button medallion side by side at the top centre of the battle screen.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-escape.png",
+            "해상도": "1254 × 1254",
+            "SHA-256": "f395e5ad8118e9c7591c06f210e7c04a2b7c4a9966808adfc031706f89cd2625",
+            "Unity GUID": "b62873325f3d4b409a9fb5f2a488fe2c",
+            "사용처": "GameUI.BattleEscape → ConfirmEscape",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified"
+          },
+          "source": {
+            "path": "Docs/Art/HudButtons/hud-buttons-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/menu-escape.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-escape.png",
+          "refs": [
+            {
+              "path": "Docs/Art/HudButtons/hud-buttons-manifest.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/HudButtons/hud-buttons-prompt.txt",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "battle-escape",
+            "battle-escape.en"
           ]
         },
         {

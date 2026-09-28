@@ -48,7 +48,7 @@ Facts read from code and data on `main` (`672e4a0c`) on 2026-09-28.
 
 ### The overview
 
-1. **Combat style**: Aggressive, Balanced and Careful cards. A card sets seven combat and survival groups at once (engagement position, encirclement, target, emergency retreat, potions, dodging by damage type, special hazards). The matching card carries a ✓; when nothing matches, the overview says so, and a warning appears when dodging and emergency retreat are both off.
+1. **Combat style**: Aggressive, Balanced and Careful cards. A card sets seven combat and survival groups at once (engagement position, encirclement, target, emergency retreat, potions, dodging by damage type, special hazards). The matching card carries a ✓; when nothing matches, the overview says so, and a warning appears when dodging and emergency retreat are both off. New heroes start on Balanced, so the warning shows for older heroes that kept the defaults.
 2. **Advice from your last hunt**: stage, result and time of the hero's last finished rift, and up to three changes drawn from that record. Each piece of advice states what was observed, which setting and preset to use, and the preset's description. Tapping applies it to the draft; after saving it leaves the list. When advice exists it comes before the styles.
 3. **Equipped skills and their use**: equipped actives, the ultimate and the basic attack with their use-policy preset names; a tap opens that skill's policy page. A link opens the skill tree.
 4. **Combat judgment**: the current preset and description of the seven style groups. The list doubles as the plain-language summary of how the edict fights. A tap opens the quick-preset picker, and Custom there opens the group's detailed options in its tab.
@@ -95,11 +95,11 @@ The thresholds are starting values chosen from how the recorders count. They nee
 
 ### Unchanged
 
-The nine existing tabs, the IDs, values and ranges of the 35 groups and 151 options, the 249 quick presets, Save/Revert and the leave confirmation, the five preset slots, HED5 share codes and the account save format. New hero defaults are unchanged too.
+The nine existing tabs, the IDs, values and ranges of the 35 groups and 151 options, the 249 quick presets, Save/Revert and the leave confirmation, the five preset slots, HED5 share codes and the account save format. Option defaults are unchanged as well; only newly created heroes start on Balanced (see the decision below).
 
 ## Open items
 
-- **New hero defaults**: new heroes start with dodging and retreat off. The overview warns about it and recommends Balanced, but the defaults are tied to early-rift balance and were not changed here. Starting new heroes on Balanced should be decided together with an early-balance check.
+- **New hero defaults (decided 2026-09-28)**: at the user's decision, newly created heroes start on Balanced. Option defaults and existing heroes are unchanged; a hero created earlier that kept the defaults still gets the warning and the Balanced recommendation. The early-balance comparison is in the [implementation record](../Implementation/Hunt_Edict_Overview.en.md).
 - **Advice thresholds**: starting values; tune them from recorded hunts.
 - **Training comparison**: comparing a new style against the previous one in the training ground under the same conditions is out of scope; the existing A/B comparison could be opened from the overview.
 - **Landscape tab height**: with ten tabs, one landscape tab at 956×440 shrinks from about 40 to 36 logical units. The edict editor is measured but not enforced by the 48dp touch rule (`RuntimeTouchLayoutSmoke`); if the tabs prove hard to hit on a phone, a 2×5 landscape grid is the next option.

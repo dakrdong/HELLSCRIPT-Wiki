@@ -63,3 +63,8 @@ Hunt Edict overview · full Edit Mode suite (Unity 6000.6.0f1 batch mode on an A
 
 3) Merge 4c85f5e7 (origin/main b418de72, enemy attacks only) was not rerun in full. The 23 related classes,
    including the new enemy-attack and telegraph-gauge tests, pass 871/871 (editmode-related.xml).
+
+4) main bfaf2ddc + new heroes starting on Balanced (claude/new-hero-balanced-edict)
+   total 4620 · passed 4573 · failed 47 · skipped 0 · 2285 s
+   The failing tests are the same 47 as in runs 1 and 2. No new failure.
+   The run overlapped with the two early-balance audits on other clones; the timing-limited archetype sweep still passed.

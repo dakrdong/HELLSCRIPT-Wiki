@@ -30,7 +30,7 @@ namespace Hellscript
     // Each recipe fully defines its own scope and is applied to a detached draft atomically.
     public static class HuntEdictQuickPresets
     {
-        public const string Custom="custom",AttackOrder="order";
+        public const string Custom="custom",AttackOrder="order",NewHeroStyle="balanced";
         static EdictQuickPresetCatalog catalog;
         public static string GlobalScope(HuntEdictUiGroup group)=>"global/"+HuntEdictSummary.Key(group);
         public static string SkillScope(string id,string heroClass)=>id=="BASIC"?"basic/"+heroClass:"skill/"+id;

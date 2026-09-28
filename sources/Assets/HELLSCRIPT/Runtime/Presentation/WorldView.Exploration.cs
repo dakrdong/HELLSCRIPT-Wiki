@@ -8,6 +8,8 @@ namespace Hellscript
         readonly Dictionary<int, GameObject> roomGeometry = new Dictionary<int, GameObject>();
         sealed class PassageView { public GameObject go; public int roomA, roomB; public Vector2 center; }
         readonly List<PassageView> passageGeometry = new List<PassageView>();
+        // Wall columns and torches: remembered with the walls they hang on.
+        readonly List<Renderer> terrainProps = new List<Renderer>();
         RiftFogView riftFog;
         Color? riftBackground;
         public RiftFogView RiftFog => riftFog;
@@ -31,6 +33,7 @@ namespace Hellscript
             foreach (var room in roomGeometry.Values)
                 foreach (var renderer in room.GetComponentsInChildren<MeshRenderer>(true))
                     if (renderer.GetComponent<RiftFloorMesh>() != null || renderer.name.EndsWith(" floor") || renderer.name == "Stone inlay" || renderer.name == "Room boundary") riftFog.Bind(renderer, true);
+            foreach (var renderer in terrainProps) if (renderer != null) riftFog.Bind(renderer, true);
             foreach (var passage in passageGeometry)
             { passage.go.SetActive(true); foreach (var renderer in passage.go.GetComponentsInChildren<MeshRenderer>(true)) riftFog.Bind(renderer, true); }
         }

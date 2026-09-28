@@ -58,8 +58,10 @@ namespace Hellscript
             RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
-            if(world!=null)Destroy(world);world=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearAttackFx();
-            roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
+            // Destroy is deferred to the end of the frame, so forget the old root's effects library now: a world rebuilt in the
+            // same frame must not borrow it (its materials die with the old root and its effects would render magenta).
+            if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
+            roomGeometry.Clear();passageGeometry.Clear();terrainProps.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
         {
@@ -93,9 +95,11 @@ namespace Hellscript
             }
             }
             BindRiftTerrain();
+            // Camera-following field particles; they live on the world root's effects library and end with it.
+            Fx?.Ambience(run.layout.legacy?FieldLook.LegacyTheme(run.theme).particles:FieldLook.Field(run.layout.Field).particles);
             hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false,HeroBodyArt((int)game.Store.Data.Hero.heroClass));
             hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);FigureOf(hero);
-            SeedCombatFeedback(run);
+            SeedCombatFeedback(run);SeedClassSkillFx(run);
         }
         GameObject CreateBody(string name,int type,bool enemy,bool boss,string art=null)
         {

@@ -10,6 +10,7 @@ import http.server
 import json
 import re
 import shutil
+import struct
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
@@ -445,6 +446,22 @@ def build_resources(databases):
             hero_art,status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
             refs=[source_ref(hero_art),source_ref('Docs/Art/HeroPortraits/hero-portraits-prompt.txt'),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/StoryDialogueWindow.cs')],
             related=['tutorial-staging','tutorial-staging.en']))
+    hud_art='Docs/Art/HudButtons/hud-buttons-manifest.json'
+    hud_manifest=json.loads(read(hud_art))
+    hud_use={'menu-power-saving':('절전 모드 메달 / Power saving medallion','GameUI.BattleLayout → GameController.RequestIdle'),
+             'menu-escape':('탈출 메달 / Escape medallion','GameUI.BattleEscape → ConfirmEscape')}
+    for icon in hud_manifest['assets']:
+        path=icon['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        if digest(raw)!=icon['sha256']:raise ValueError('HUD medallion differs from its native generated source: '+icon['id'])
+        name,use=hud_use[icon['id']]
+        rows.append(record('ui-'+icon['id'],name,'이미지 원본',
+            '전투 화면 위쪽 가운데에 나란히 놓이는 버튼 메달입니다. / Button medallion side by side at the top centre of the battle screen.',
+            {'원본 경로':path,'해상도':' × '.join(map(str,struct.unpack('>II',raw[16:24]))),'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '사용처':use,'제작 방법':'Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved','출처 확인':hud_manifest['provenance'],
+             '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
+            hud_art,status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
+            refs=[source_ref(hud_art),source_ref('Docs/Art/HudButtons/hud-buttons-prompt.txt'),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs')],
+            related=['battle-escape','battle-escape.en']))
     byid={d['id']:d for d in databases}
     for group in ['skills','heroes','items']:
         for item in byid[group]['rows']:
@@ -968,6 +985,7 @@ def build():
     (SITE/'media/GlobalHUD').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'GlobalHUD/menu-storage.png',SITE/'media/GlobalHUD/menu-storage.png')
     shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')
+    for name in ('menu-power-saving','menu-escape'):shutil.copyfile(ROOT/ART/('GlobalHUD/'+name+'.png'),SITE/'media/GlobalHUD'/(name+'.png'))
     (SITE/'media/Title').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'Title/TitleSanctuary.png',SITE/'media/Title/TitleSanctuary.png')
     (SITE/'media/CharacterSelection').mkdir(parents=True,exist_ok=True)

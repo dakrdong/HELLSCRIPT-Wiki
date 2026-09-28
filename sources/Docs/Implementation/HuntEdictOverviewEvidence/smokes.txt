@@ -1,21 +1,12 @@
-Hunt Edict overview · runtime smokes on the macOS development build of merge 4c85f5e7 (origin/main b418de72)
-Build: ProjectBuilder.BuildMac on an APFS clone, HELLSCRIPT_BUILD Succeeded errors=0
-The five smokes ran one after another with no other Unity job, each with its own isolated save directory.
-Exit code 0 means every Require passed; the tutorial resume also wrote its result file and logged HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK.
+Hunt Edict overview · runtime smokes on the macOS development build with new heroes starting on Balanced
+(main bfaf2ddc + claude/new-hero-balanced-edict). Build: HELLSCRIPT_BUILD Succeeded errors=0
+Every launch below ran with no other Unity job, each smoke with its own isolated save directory. Exit code 0 means every
+Require passed; the tutorial resume also wrote its result file and logged HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK.
 
-overview exit=0
-overview-resume exit=0
-skilltree exit=0
-skilltree-resume exit=0
-quickpreset exit=0
-quickpreset-resume exit=0
-tutorial exit=0
-tutorial-resume exit=0
-victory exit=0
-
-== overview: runtime.txt
-Overview repaint 42.7 ms average over 5 repaints at 1600x900 (macOS development build)
-Style cards: balanced applied to the draft only, reverted, careful saved to the hero PASS
+== overview: initial exit=0, restart exit=0
+-- runtime.txt
+Overview repaint 47.3 ms average over 5 repaints at 1600x900 (macOS development build)
+New hero starts on Balanced; aggressive applied to the draft only and reverted; old-save safety warning shown; careful saved to the hero PASS
 Judgment preset, custom details, basic attack policy, skill tree and automation links through real pointer taps PASS
 Advice from a recorded timeout: loot, route and range tips shown, loot tip applied, saved and retired PASS
 Overview layout/pointer/labels 440x956-ko-100 PASS
@@ -38,10 +29,11 @@ Overview layout/pointer/labels 2100x900-ko-100 PASS
 Overview layout/pointer/labels 2100x900-ko-150 PASS
 Overview layout/pointer/labels 2100x900-en-100 PASS
 Overview layout/pointer/labels 2100x900-en-150 PASS
-== overview: restart.txt
+-- restart.txt
 PASS: a fresh native process reloaded the careful style and the applied loot advice, and the window reopened on the overview.
 
-== skilltree: runtime.txt
+== skilltree: initial exit=0, restart exit=0
+-- runtime.txt
 mage-detail: 1600x900 ko PASS
 layout-440x956: 440x956 ko PASS
 layout-956x440: 956x440 ko PASS
@@ -59,10 +51,11 @@ class-0: 1600x900 ko PASS
 class-1: 1600x900 ko PASS
 progress-1600: 1600x900 ko PASS
 progress-440: 440x956 ko PASS
-== skilltree: restart.txt
+-- restart.txt
 PASS: four slots, passive rank, skill policy and tree restored in a fresh player process.
 
-== quickpreset: runtime.txt
+== quickpreset: initial exit=0, restart exit=0
+-- runtime.txt
 Open preset dialog survives portrait-to-landscape rotation, language and text-size change PASS
 Layout/pointer/labels 440x956 ko 100% PASS
 Layout/pointer/labels 440x956 ko 150% PASS
@@ -86,13 +79,14 @@ Layout/pointer/labels 2100x900 en 100% PASS
 Layout/pointer/labels 2100x900 en 150% PASS
 Real pointer preset/custom selection in the 24 global groups with a quick preset picker, every detailed option in them reachable PASS
 Whirlwind center/edge, clean Custom, detached draft, revert, save/reopen, basic attack/order and native A07/M13 policies PASS
-== quickpreset: restart.txt
+-- restart.txt
 PASS: Whirlwind and survival preset values reloaded in a fresh native process.
 
-== tutorial: phase-one.txt
+== tutorial: phase one exit=0, resume exit=0
+-- phase-one.txt
 PASS: mandatory actual combat, all 20 intro layout profiles, once-only armor checkpoint. Restart required.
 
-== tutorial: runtime-tutorial-smoke.txt
+-- runtime-tutorial-smoke.txt
 PASS independent process restored mandatory map and exactly one real armor.
 PASS real comparison/equip pointer actions, real boss death, town arrival, no rift rewards or clear records.
 PASS journal layout in 20 resolution/language/text-size profiles.
@@ -104,7 +98,8 @@ PASS supported enhancement uses pointer-confirmed atomic domain transaction; lat
 PASS complete level 1 replay leaves actual equipment, economy and progression unchanged.
 macOS synthetic EventSystem pointers. No physical mobile or human comprehension claim.
 Renderer=Metal
-== victory: runtime.txt
+== victory: exit=0
+-- runtime.txt
 PASS layout 440x956 ko 100%: 2x2+ultimate noninteractive cards, role-aware damage/recovery/protection metrics, fixed actions, text and safe area.
 PASS layout 440x956 ko 120%: 2x2+ultimate noninteractive cards, role-aware damage/recovery/protection metrics, fixed actions, text and safe area.
 PASS layout 440x956 en 100%: 2x2+ultimate noninteractive cards, role-aware damage/recovery/protection metrics, fixed actions, text and safe area.
@@ -133,7 +128,8 @@ PASS reward, Hunt Edict policy tab and shared text log modal: 20 layouts, Close-
 PASS stopped save failure recovery, no auto restart, persisted result.
 Development fixture; macOS uGUI synthetic input; no physical-mobile claim.
 
-== earlier attempt
-On merge 89905568, run alongside the full Edit Mode suite, the tutorial resume once exited 0 during the first rift
-without its result file, OK marker, exception or failure.txt. Rerun alone on that build it passed, and it passed again
-above on the newest merge.
+== earlier notes
+- Before this change, on merge 89905568 and alongside the full Edit Mode suite, the tutorial resume once exited 0 during the
+  first rift without its result file, OK marker, exception or failure.txt; it passed when rerun alone and on every later build.
+- Overview, skill tree and quick preset smokes also passed on this build while the full Edit Mode suite ran (repaint 100.8 ms
+  under that load); the results above are the rerun with no other job.

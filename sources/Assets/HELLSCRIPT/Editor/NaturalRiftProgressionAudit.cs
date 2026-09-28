@@ -268,8 +268,11 @@ namespace Hellscript.Editor
         {
             var args=Environment.GetCommandLineArgs();int at=Array.IndexOf(args,"-hellscriptNaturalOutput");
             if(at<0)throw new ArgumentException("An isolated output root is required.");
-            foreach(int hero in new[]{0,1,2})RunSession(new[]{"-hellscriptNaturalOutput",Path.Combine(args[at+1],((HeroClass)hero).ToString()),
-                "-hellscriptNaturalHero",hero.ToString(),"-hellscriptNaturalTarget",hero==0?"10":"5"});
+            // Optional comma-separated seeds compare paths instead of one sample; each seed writes its own folder.
+            int list=Array.IndexOf(args,"-hellscriptNaturalSeeds");string[] seeds=list<0?new[]{"20260924"}:args[list+1].Split(',');
+            foreach(string seed in seeds)
+                foreach(int hero in new[]{0,1,2})RunSession(new[]{"-hellscriptNaturalOutput",Path.Combine(args[at+1],list<0?"":seed,((HeroClass)hero).ToString()),
+                    "-hellscriptNaturalHero",hero.ToString(),"-hellscriptNaturalTarget",hero==0?"10":"5","-hellscriptNaturalSeed",seed});
         }
         static void RunSession(string[] args)
         {

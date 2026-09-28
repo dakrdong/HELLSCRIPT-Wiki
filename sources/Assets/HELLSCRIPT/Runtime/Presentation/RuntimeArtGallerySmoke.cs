@@ -20,7 +20,7 @@ namespace Hellscript
         enum ShotKind{Room,Enemies,Boss,Elites,Effect,Fx,Town}
         sealed class Shot
         {
-            public ShotKind kind;public string name;public int field,first,count,pattern,effect,width=1600,height=900;public float age;public TownStation station;
+            public ShotKind kind;public string name;public int field,first,count,pattern,effect,width=1600,height=900;public float age;public TownStation station;public bool reveal;
         }
         const int Stage=40,EnemyBase=900;
         // Every Visual kind Core emits (VFX.md coverage checklist), sent through WorldView.Effect, with the presentation
@@ -35,6 +35,7 @@ namespace Hellscript
             for(int f=0;f<6;f++)shots.Add(new Shot{kind=ShotKind.Room,name="room-field"+f,field=f});
             shots.Add(new Shot{kind=ShotKind.Room,name="room-field0-956x440",field=0,width=956,height=440});
             shots.Add(new Shot{kind=ShotKind.Room,name="room-field1-440x956",field=1,width=440,height=956});
+            for(int f=0;f<3;f++)shots.Add(new Shot{kind=ShotKind.Room,name="room-field"+f+"-revealed",field=f,reveal=true});
             int kinds=GameCatalog.EnemyNames.Length;
             for(int k=0;k<kinds;k+=6)shots.Add(new Shot{kind=ShotKind.Enemies,name=$"enemies-{k:00}-{Mathf.Min(kinds,k+6)-1:00}",first=k,count=Mathf.Min(6,kinds-k)});
             for(int p=0;p<GameCatalog.BossNames.Length;p++)shots.Add(new Shot{kind=ShotKind.Boss,name="boss-"+p,pattern=p});
@@ -117,6 +118,13 @@ namespace Hellscript
                     $"enemy kinds {shot.first}..{shot.first+shot.count-1}, odd slots winding up";
             }
             yield return Enter(fixture);
+            if(shot.reveal)
+            {
+                // Evidence only: paint the fog texture explored and in sight so the dressed floors, walls and decor around the
+                // start show past the hero's sight; the fog re-uploads only on a visibility revision, which a paused run skips.
+                var tex=game.World.RiftFog.Texture;var px=tex.GetPixels32();for(int i=0;i<px.Length;i++)px[i]=new Color32(255,255,0,255);tex.SetPixels32(px);tex.Apply(false);
+                what+=", fog painted open for the capture";yield return new WaitForSecondsRealtime(.2f);
+            }
             yield return Resize(shot.width,shot.height);
             string facts=ActorFacts();
             yield return Capture(shot.name);
@@ -153,7 +161,7 @@ namespace Hellscript
         // VFX core (WorldFx) review: monster tiers, telegraph fills, hits and deaths by surface, status overlays, loot beams,
         // fires, generic bursts and each field's ambience. The gallery drives the library directly; the actor, skill and
         // environment presenters make the same calls in later phases.
-        static readonly string[] FxShots={"fx-tiers","fx-telegraphs","fx-telegraphs-boss","fx-hits","fx-hits-crit","fx-deaths","fx-status","fx-loot","fx-fire","fx-bursts","fx-hero-behind-wall"};
+        static readonly string[] FxShots={"fx-tiers","fx-telegraphs","fx-telegraphs-boss","fx-hits","fx-hits-crit","fx-deaths","fx-status","fx-loot","fx-fire","fx-bursts","fx-hero-behind-wall","fx-class-lasting","fx-class-releases"};
         static readonly int[] SurfaceKinds={0,2,6,11,18,3,0};
         IEnumerator FxShot(Shot shot)
         {
@@ -261,6 +269,34 @@ namespace Hellscript
                     fx.Shockwave(At(new Vector2(0,-4.5f)),2.2f);fx.Beam(At(new Vector2(-6,-4),1.2f),At(new Vector2(-2,-5),1.2f));fx.Slash(At(new Vector2(5,-4.5f),1),Vector3.forward,2.2f,110);
                     Advance(.18f);what="bursts "+string.Join(", ",ids)+" (rows from the back), shockwave, beam and slash in front";break;
                 }
+                case "fx-class-lasting":case "fx-class-releases":
+                {
+                    // Class skills (WorldView.SkillFx) drawn from their state: lasting effects laid around the hero with one pulse
+                    // each, or casts released after the entry so every one plays its burst. The run is re-frozen after these edits.
+                    var cs=run.classSkills??(run.classSkills=new ClassSkillRuntimeState());float now=run.time;
+                    ClassSkillEffect E(string id,string kind,Vector2 offset,Vector2 dir,float radius=0)=>
+                        new ClassSkillEffect{id=id+":gallery",source=id,kind=kind,created=now,until=now+30,position=hero+offset,direction=dir,radius=radius,width=1};
+                    if(name=="fx-class-lasting")
+                    {
+                        cs.effects.AddRange(new[]{E("M08","firewall",new Vector2(0,3.5f),Vector2.right),E("A10","trap",new Vector2(-4,1),Vector2.up,1.5f),
+                            E("M14","ward",Vector2.zero,Vector2.up,3),E("M16","vortex",new Vector2(4,2.5f),Vector2.up,3),E("M11","orb",new Vector2(-2.5f,4.5f),Vector2.up,3),
+                            E("A17","rain",new Vector2(0,7.5f),Vector2.up,4),E("W17","ancestor",new Vector2(-1.8f,.6f),Vector2.up),E("A11","decoy",new Vector2(2.2f,-1),Vector2.up),
+                            E("A15","ballista",new Vector2(-3.5f,-2.5f),Vector2.up),E("A07","arrow",new Vector2(1.2f,0),Vector2.right),E("M10","globe",new Vector2(-1.2f,-1.4f),new Vector2(-1,-.3f).normalized)});
+                        run.enemies.Add(Enemy(run,EnemyBase+40,0,new Vector2(-4,5.5f)));frozen=Json(run);Advance(.3f);
+                        foreach(var e in cs.effects)if(e.kind=="rain"||e.kind=="orb"||e.kind=="vortex"||e.kind=="ancestor")e.count=1;
+                        frozen=Json(run);Advance(.12f);
+                        int views=Private<System.Collections.IDictionary>("classEffectViews")?.Count??-1;
+                        what=$"class skill lasting effects (firewall, frost snare, rift ward, vortex, orb, killing rain, ancestor, decoy, ballista, arrow, frost globe) with one pulse each; {views} view(s)";
+                    }
+                    else
+                    {
+                        int castRoot=9000;ClassSkillCast C(string id,Vector2 aim)=>new ClassSkillCast{id=id,root=castRoot++,released=true,origin=hero,aim=hero+aim,destination=hero+aim};
+                        cs.casts.AddRange(new[]{C("W18",Vector2.up),C("M07",Vector2.right*10),C("M12",new Vector2(-.6f,.8f)*12),C("W09",Vector2.down*3)});
+                        frozen=Json(run);Advance(.14f);
+                        what="class skill releases: Titan's Judgment, Ember Lance (east), Storm Spear (north-west) and Raking Wound (south) 0.14 s after release";
+                    }
+                    frozen=Json(run);break;
+                }
                 case "fx-hero-behind-wall":
                 {
                     // A wall between the camera and the model hero: the golden silhouette shows on the wall where it hides the
@@ -346,7 +382,13 @@ namespace Hellscript
             }
             int planned=EnemyCombat.Threats(run,game.Combat.Map).Count(),drawn=threats.Values.Count(v=>v!=null&&v.activeSelf);
             Require(planned==0||drawn>0,"Wind-up telegraphs were not drawn.");
-            return $"{shown} actor root(s) active on the ground, {planned} planned telegraph(s), {drawn} threat view(s)";
+            // Field dressing (WorldView.Rift/Props): wall columns, torches, decor and obstacle models in the whole rift.
+            var world=GameObject.Find("Rift Runtime");int Named(string n)=>world==null?0:world.GetComponentsInChildren<Transform>(true).Count(t=>t.name==n);
+            // Chests, shrines and the offering altar are field content with views of their own, not obstacle props.
+            var obstacles=run.layout.obstacles.Where(o=>o.kind!="Chest"&&o.kind!="Shrine"&&o.kind!="OfferingAltar").ToList();
+            int props=world==null?0:obstacles.Count(o=>WorldView.ObstacleArt(run.layout.Field,o) is string art&&WorldArt.Has(art));
+            return $"{shown} actor root(s) active on the ground, {planned} planned telegraph(s), {drawn} threat view(s); "+
+                $"{Named("Wall column")} wall column(s), {Named("Wall torch")} torch(es), {Named("Decor")} decor, {props}/{obstacles.Count} obstacle(s) with a field model";
         }
         T Private<T>(string name)=>(T)typeof(WorldView).GetField(name,BindingFlags.NonPublic|BindingFlags.Instance).GetValue(game.World);
 

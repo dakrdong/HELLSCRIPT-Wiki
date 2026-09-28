@@ -1,0 +1,30 @@
+{
+ "surface": "built-in image_gen via Codex CLI (imagegen skill)",
+ "requestedBy": "user request: decorate the battle power-saving and escape buttons with art drawn by Codex",
+ "verifiedModel": null,
+ "provenance": "candidate_model_unknown",
+ "productionApproved": false,
+ "alpha": "native PNG alpha; no chroma key or background-removal postprocessing",
+ "references": [
+  "GlobalHUD menu-character, menu-rune-board, menu-toggle, menu-hunt-edict (style)"
+ ],
+ "review": "Accepted 2026-09-28 by Claude: same brass medallion family as the HUD menu icons, readable at 48 px; transparent corners.",
+ "assets": [
+  {
+   "id": "menu-power-saving",
+   "generatedAs": "hud-power-saving",
+   "file": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-power-saving.png",
+   "sha256": "0a99f4bb6097f0d3b475bde1b00b2c97b3cd7db79c22d6da27b91b8d82b70f43",
+   "prompt": "Create ONE finished 2D game UI icon for the dark-fantasy RPG HELLSCRIPT. Use case: stylized-concept. Square 1:1 transparent PNG (1024x1024) with preserved native alpha: exactly one round medallion centred with comfortable padding, the same aged-brass ring with four diamond studs as the reference HUD medallions, a dark recessed interior with a painted emblem that stays readable at 48 pixels. Style: richly hand-painted premium dark-fantasy RPG UI art matching the references, controlled detail, clean silhouette. Fully transparent outside the medallion, clean antialiased alpha edges. No text, no letters, no numbers, no scenery outside the medallion, no solid backdrop, no checkerboard pattern, no drop shadow outside the ring, no watermark.\n\nThe four attached style-menu reference images are style references only, not edit targets. Match their exact family: a thick aged-brass circular ring, small diamond studs at the four cardinal points, dark recessed interior, richly painted emblem and warm golden rim light. Grey in the references is for viewing only: generate actual native transparency, not grey. One isolated medallion, fully transparent surrounding space and any internal empty space; retain the painted dark interior within the ring.\n\nEmblem for an idle/power-saving mode that keeps hunting quietly: a pale silver crescent moon above a small dimmed brass lantern whose flame is low and soft blue, cool moonlight on a deep navy interior.",
+   "model": "unknown"
+  },
+  {
+   "id": "menu-escape",
+   "generatedAs": "hud-escape",
+   "file": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/menu-escape.png",
+   "sha256": "f395e5ad8118e9c7591c06f210e7c04a2b7c4a9966808adfc031706f89cd2625",
+   "prompt": "Create ONE finished 2D game UI icon for the dark-fantasy RPG HELLSCRIPT. Use case: stylized-concept. Square 1:1 transparent PNG (1024x1024) with preserved native alpha: exactly one round medallion centred with comfortable padding, the same aged-brass ring with four diamond studs as the reference HUD medallions, a dark recessed interior with a painted emblem that stays readable at 48 pixels. Style: richly hand-painted premium dark-fantasy RPG UI art matching the references, controlled detail, clean silhouette. Fully transparent outside the medallion, clean antialiased alpha edges. No text, no letters, no numbers, no scenery outside the medallion, no solid backdrop, no checkerboard pattern, no drop shadow outside the ring, no watermark.\n\nThe four attached style-menu reference images are style references only, not edit targets. Match their exact family: a thick aged-brass circular ring, small diamond studs at the four cardinal points, dark recessed interior, richly painted emblem and warm golden rim light. Grey in the references is for viewing only: generate actual native transparency, not grey. One isolated medallion, fully transparent surrounding space and any internal empty space; retain the painted dark interior within the ring.\n\nEmblem for leaving the fight and returning to town: a stone archway doorway glowing with warm ember light from beyond, and a bold brass arrow sweeping out through the doorway toward the viewer's right, deep crimson-black interior.",
+   "model": "unknown"
+  }
+ ]
+}

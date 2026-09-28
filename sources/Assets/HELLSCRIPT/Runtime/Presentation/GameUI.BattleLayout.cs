@@ -7,7 +7,7 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         RectTransform battleWorld;
-        Button powerSavingButton;
+        Button powerSavingButton,escapeButton;Text powerSavingCaption,escapeCaption;
         Vector2 battleSize;
         Rect battleSafe;
         float battleJournalTop,battleBossHeight;
@@ -26,9 +26,14 @@ namespace Hellscript
             footer.gameObject.SetActive(false);headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);
             meterText=Label(header,"",15,pale);timerText=Label(header,"",18,gold);actionText=Label(header,"",14,gold);
             var menu=Button(header,"☰",ShowObservationMenu,Color.clear);menu.name="관찰 메뉴";
-            powerSavingButton=Button(header,"절전 모드",game.RequestIdle);
+            // Medallions from the HUD menu family, each captioned underneath; the mandatory road has no way out.
+            powerSavingButton=Button(header,"절전 모드",game.RequestIdle,Color.clear);powerSavingButton.targetGraphic=Emblem(powerSavingButton,"menu-power-saving");
             powerSavingButton.name="power-saving-entry";
             powerSavingButton.gameObject.SetActive(run.training<0&&!run.tutorial);
+            escapeButton=Button(header,"탈출",ConfirmEscape,Color.clear);escapeButton.targetGraphic=Emblem(escapeButton,"menu-escape");
+            escapeButton.name="battle-escape";escapeButton.gameObject.SetActive(!run.tutorial||run.tutorialReplay);
+            powerSavingCaption=Label(header,"절전 모드",13,pale,TextAnchor.UpperCenter);powerSavingCaption.gameObject.SetActive(powerSavingButton.gameObject.activeSelf);
+            escapeCaption=Label(header,"탈출",13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
             AddRiftMinimap(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
@@ -50,8 +55,9 @@ namespace Hellscript
             battleWorld.anchorMin=BattleViewport.min;battleWorld.anchorMax=BattleViewport.max;battleWorld.offsetMin=battleWorld.offsetMax=Vector2.zero;
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
             var mini=riftMinimapPanel;var panel=default(Rect);float map=0;if(mini!=null)panel=ReflowRiftMinimap(mini,narrow,float.MaxValue,out map);
-            // Header lines that share rows with a landscape map panel stop short of it.
-            float End(float y,float h)=>panel.width>0&&panel.yMin<y+h&&panel.yMax>y?panel.xMin-8:w-18;
+            var medals=ReflowBattleMedallions(w,panel);
+            // Header lines that share rows with a landscape map panel or the medallions stop short of them.
+            float End(float y,float h)=>Mathf.Min(panel.width>0&&panel.yMin<y+h&&panel.yMax>y?panel.xMin-8:w-18,medals.width>0&&medals.yMin<y+h&&medals.yMax>y?medals.xMin-8:w-18);
             Place(header,0,0,w,narrow?154:116);
             headerTitle.text=BattleHeading(game.Combat.State);
             Place(headerTitle.rectTransform,18,8,Mathf.Min(textWidth,End(8,28)-18),28);headerTitle.fontSize=narrow?16:21;
@@ -61,16 +67,8 @@ namespace Hellscript
             Place(actionText.rectTransform,18,narrow?112:88,Mathf.Min(w-36,End(narrow?112:88,22)-18),22);
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,w-56,8,44,44);
             var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,w-108,8,44,44);
-            if(powerSavingButton!=null)
-            {
-                float bw=Mathf.Min(160*InterfaceFactor,w-144);
-                float by=w<720?118:8;
-                Place((RectTransform)powerSavingButton.transform,(w-bw)*.5f,by,bw,44);
-                powerSavingButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(14*InterfaceFactor);
-                powerSavingButton.interactable=game.CanEnterIdle;
-            }
             // On narrow fields the event button has its own row above the boss status.
-            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=w<720?(narrow?218:176):116;
+            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=Mathf.Max(w<720?(narrow?218:176):116,medals.height>0?medals.yMax+6:0);
             // The boss status stays clear of the map panel: beside it when 240 remain right of the left
             // column (the events and adventure guide buttons end at 132), otherwise below it.
             bool below=panel.width>0&&bossX+bossWidth>panel.xMin-8&&bossY<panel.yMax+8;
@@ -91,6 +89,32 @@ namespace Hellscript
                 bossY=Mathf.Max(bossY,panel.yMax+8);bossHud.anchoredPosition=new Vector2(bossX,-bossY);
             }
             UpdateBattleBrief();
+        }
+        // The power saving and escape medallions, side by side with a caption under each. A wide field has them
+        // at the top centre, the band ending above the timer and kill row at 63. A narrow one has them in the row
+        // under the header, between the left column (the events and adventure guide buttons end at 132) and the
+        // map panel, where the gap closes and captions wrap to fit.
+        Rect ReflowBattleMedallions(float w,Rect panel)
+        {
+            if(powerSavingButton==null)return default;
+            powerSavingButton.interactable=game.CanEnterIdle;
+            var pair=new[]{(powerSavingButton,powerSavingCaption),(escapeButton,escapeCaption)}.Where(p=>p.Item1.gameObject.activeSelf).ToArray();
+            if(pair.Length==0)return default;
+            foreach(var p in pair)p.Item2.fontSize=12;
+            float natural=pair.Max(p=>Mathf.Ceil(TextWidth(p.Item2,p.Item2.text))+4),line=pair.Max(p=>Mathf.Ceil(TextHeight(p.Item2,p.Item2.text,natural))+2);
+            bool row=w<720;float top=row?118:4,left=row?140:0,side=row?52:Mathf.Clamp(63-top-line,32,44);
+            float right=!row?w:panel.width>0&&panel.yMin<top+side+48&&panel.yMax>top?panel.xMin-8:w-68;
+            // Each caption spans its medallion and half of each neighbouring gap, less 2 on either side.
+            float gap=Mathf.Max(30,natural-side+4);if(row)gap=Mathf.Clamp((right-left+4)/pair.Length-side,12,gap);
+            float x=(left+right-pair.Length*side-(pair.Length-1)*gap)*.5f,cw=side+gap-4,bottom=top+side;
+            var area=UnityEngine.Rect.MinMaxRect(x-(gap-4)*.5f,top,x+pair.Length*(side+gap)-gap+(gap-4)*.5f,top+side);
+            foreach(var (button,label) in pair)
+            {
+                Place((RectTransform)button.transform,x,top,side,side);
+                float ch=Mathf.Ceil(TextHeight(label,label.text,cw))+2;Place(label.rectTransform,x-(gap-4)*.5f,top+side,cw,ch);
+                bottom=Mathf.Max(bottom,top+side+ch);x+=side+gap;
+            }
+            area.yMax=bottom;return area;
         }
         // The hero stands at the centre of the camera frame; in page units from the top-left of the safe area.
         Vector2 HeroOnPage()
