@@ -14,7 +14,7 @@ namespace Hellscript.Editor
     public sealed class WorldArtImporter:AssetPostprocessor
     {
         public const string Root="Assets/HELLSCRIPT/Resources/World/",Fixtures="Assets/HELLSCRIPT/Tests/Editor/Fixtures/WorldArt/";
-        public override uint GetVersion()=>2;
+        public override uint GetVersion()=>3;
         static string Relative(string path)=>path.StartsWith(Root,StringComparison.Ordinal)?path.Substring(Root.Length):path.StartsWith(Fixtures,StringComparison.Ordinal)?path.Substring(Fixtures.Length):null;
         static bool Keep(Transform t)=>t.name.StartsWith("Pivot_",StringComparison.Ordinal)||t.name.StartsWith("Socket_",StringComparison.Ordinal);
         void OnPreprocessModel()
@@ -98,6 +98,8 @@ namespace Hellscript.Editor
         {
             string rel=Relative(assetPath);if(rel==null)return;
             var t=(TextureImporter)assetImporter;string file=System.IO.Path.GetFileNameWithoutExtension(assetPath);
+            // Old minimal .meta files can migrate to Cubemap. These are sampled as 2D maps.
+            t.textureShape=TextureImporterShape.Texture2D;
             bool normal=file.EndsWith("_N",StringComparison.Ordinal),albedo=file.EndsWith("_A",StringComparison.Ordinal),fx=rel.StartsWith("Fx/",StringComparison.Ordinal);
             t.textureType=normal?TextureImporterType.NormalMap:TextureImporterType.Default;t.sRGBTexture=!normal;
             t.alphaSource=TextureImporterAlphaSource.FromInput;t.alphaIsTransparency=fx&&!albedo&&!normal;

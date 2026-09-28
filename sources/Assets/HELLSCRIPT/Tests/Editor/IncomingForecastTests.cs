@@ -125,7 +125,11 @@ namespace Hellscript.Tests
         {
             var sim=Fixture();var e=sim.State.enemies[0];e.boss=true;e.pattern=kind==BossAttack.Legacy?1:BossTests.Pattern(kind);e.position=sim.State.position+Vector2.up*2;e.attack=10;e.brain.boss.initialized=true;e.brain.boss.cooldowns=new[]{1000f,1000f,1000f};
             var a=new EnemyActionState{id=99,kind=(int)kind,phase=EnemyActionPhase.Preparing,origin=e.position,aim=sim.State.position,direction=Vector2.down,preparation=.2f,remaining=.2f,remainingCharges=1};a.points.Add(sim.State.position);a.points.Add(sim.State.position+Vector2.right);a.points.Add(sim.State.position+Vector2.left);e.brain.action=a;
-            if(kind==BossAttack.Beam||kind==BossAttack.TailLash||kind==BossAttack.IceLance||kind==BossAttack.RiftTear)a.aim=e.position+Vector2.down*10;
+            if(kind==BossAttack.Beam||kind==BossAttack.TailLash||kind==BossAttack.IceLance)a.aim=e.position+Vector2.down*10;
+            // Moving attacks: the tear's dash crosses the hero and lands its rift within the second; the dirge appears 3 m away,
+            // so the hero stands in its ring rather than in the safe middle.
+            if(kind==BossAttack.RiftTear)a.aim=sim.State.position+Vector2.down*2;
+            if(kind==BossAttack.DirgeRing)a.aim=sim.State.position+Vector2.right*3;
             if(BossCombat.Volley(kind,out var volley))a.points=BossCombat.FanAngles(volley.count,volley.spread).Select(angle=>a.origin+EnemyCombat.Rotate(a.direction,angle)*volley.range).ToList();
             var f=sim.ForecastIncoming(1);Assert.Greater(f.hits.Count,0);Advance(sim,1);Assert.AreEqual(f.HpLoss,IncomingHp(sim),.001f,kind.ToString());
         }

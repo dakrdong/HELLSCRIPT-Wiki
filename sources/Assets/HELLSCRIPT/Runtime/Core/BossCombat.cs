@@ -45,6 +45,17 @@ namespace Hellscript
         public BossHit(float power,int element,float duration=0,float interval=0,float spacing=0,float hold=0,bool slow=false)
         {this.power=power;this.element=element;this.duration=duration;this.interval=interval;this.spacing=spacing;this.hold=hold;this.slow=slow;}
     }
+    // How a moving boss attack travels: Dash, Burrow and Glide run pace metres per second along their legs, Leap and Blink
+    // take pace seconds per leg. contact is the attack multiplier a dash deals once to a hero its body sweeps. hold is the
+    // recovery after the last leg. carriesWhirl: the whirl hazard rides along with the boss for the whole travel.
+    public enum BossLegStyle{Dash,Leap,Burrow,Glide,Blink}
+    public readonly struct BossMotion
+    {
+        public readonly BossLegStyle style;public readonly float pace,contact,hold;public readonly bool carriesWhirl;
+        public BossMotion(BossLegStyle style,float pace,float contact=0,float hold=.4f,bool carriesWhirl=false){this.style=style;this.pace=pace;this.contact=contact;this.hold=hold;this.carriesWhirl=carriesWhirl;}
+        public bool Timed=>style==BossLegStyle.Leap||style==BossLegStyle.Blink;
+        public float LegTime(Vector2 from,Vector2 to)=>Timed?pace:Vector2.Distance(from,to)/Mathf.Max(.01f,pace);
+    }
     public readonly struct BossVolley
     {
         public readonly int count;
@@ -111,39 +122,98 @@ namespace Hellscript
                 case BossAttack.Summon:return new EnemyAttackDefinition(12,.8f,14);case BossAttack.Beam:return new EnemyAttackDefinition(12,1.5f,8);
                 case BossAttack.Charge:return new EnemyAttackDefinition(8,1,7);case BossAttack.Blasts:return new EnemyAttackDefinition(12,1.3f,12);
                 case BossAttack.Roar:return new EnemyAttackDefinition(99,1.5f,0);
-                case BossAttack.ReapingSweep:return new EnemyAttackDefinition(3.5f,1,8);case BossAttack.ExecutionLeap:return new EnemyAttackDefinition(9,1.2f,10);
-                case BossAttack.ChainWhirl:return new EnemyAttackDefinition(4,1,11);case BossAttack.GraveToll:return new EnemyAttackDefinition(9,1.2f,12);
-                case BossAttack.DirgeRing:return new EnemyAttackDefinition(4.5f,1.2f,9);case BossAttack.RequiemChoir:return new EnemyAttackDefinition(12,1.6f,12);
+                case BossAttack.ReapingSweep:return new EnemyAttackDefinition(7,1,8);case BossAttack.ExecutionLeap:return new EnemyAttackDefinition(9,1.2f,10);
+                case BossAttack.ChainWhirl:return new EnemyAttackDefinition(6,1,11);case BossAttack.GraveToll:return new EnemyAttackDefinition(9,1.2f,12);
+                case BossAttack.DirgeRing:return new EnemyAttackDefinition(9,1.2f,9);case BossAttack.RequiemChoir:return new EnemyAttackDefinition(12,1.6f,12);
                 case BossAttack.HymnOfSilence:return new EnemyAttackDefinition(6,1.6f,14);case BossAttack.LamentOrbs:return new EnemyAttackDefinition(10,1.2f,9);
-                case BossAttack.MawSnap:return new EnemyAttackDefinition(5,.7f,7);case BossAttack.RiftTear:return new EnemyAttackDefinition(12,1.2f,11);
+                case BossAttack.MawSnap:return new EnemyAttackDefinition(7,.7f,7);case BossAttack.RiftTear:return new EnemyAttackDefinition(12,1.2f,11);
                 case BossAttack.ShardStorm:return new EnemyAttackDefinition(10,1,10);case BossAttack.DevouringPull:return new EnemyAttackDefinition(8,1,12);
                 case BossAttack.TailLash:return new EnemyAttackDefinition(6,.9f,7);case BossAttack.VenomSpray:return new EnemyAttackDefinition(9,1,8);
                 case BossAttack.BurrowStrike:return new EnemyAttackDefinition(10,1.4f,11);case BossAttack.QuicksandMaelstrom:return new EnemyAttackDefinition(5,1.3f,13);
                 case BossAttack.ScarabSwarm:return new EnemyAttackDefinition(12,.9f,15);case BossAttack.TripleEruption:return new EnemyAttackDefinition(12,1.2f,11);
-                case BossAttack.IceLance:return new EnemyAttackDefinition(11,1.1f,7);case BossAttack.FrostNova:return new EnemyAttackDefinition(4.5f,1.4f,10);
+                case BossAttack.IceLance:return new EnemyAttackDefinition(11,1.1f,7);case BossAttack.FrostNova:return new EnemyAttackDefinition(6.5f,1.4f,10);
                 case BossAttack.GlacialSpikes:return new EnemyAttackDefinition(10,1.2f,9);case BossAttack.BlizzardVeil:return new EnemyAttackDefinition(12,1.3f,13);
                 case BossAttack.FrozenSentinels:return new EnemyAttackDefinition(12,.9f,15);case BossAttack.ShatterFan:return new EnemyAttackDefinition(10,1.1f,9);
                 default:return new EnemyAttackDefinition(3,.6f,2);
             }
         }
         // Damage per hit (x attack) and timing of the attacks added with the phase kits. Hazards with a
-        // duration tick every interval; a spacing chains delayed circles; hold keeps the boss in place.
+        // duration tick every interval; hold keeps the boss in place. Travelling patterns take their timing from Moves.
         public static BossHit Hit(BossAttack kind)
         {
             switch(kind)
             {
                 case BossAttack.Roar:return new BossHit(.8f,5);
                 case BossAttack.ReapingSweep:return new BossHit(1.2f,0);case BossAttack.ExecutionLeap:return new BossHit(1.6f,0);
-                case BossAttack.ChainWhirl:return new BossHit(.5f,0,1.5f,.5f,hold:1.5f);case BossAttack.GraveToll:return new BossHit(1,5,spacing:.4f,hold:.8f);
+                case BossAttack.ChainWhirl:return new BossHit(.5f,0,interval:.5f);case BossAttack.GraveToll:return new BossHit(1,5);
                 case BossAttack.DirgeRing:return new BossHit(1.2f,5);case BossAttack.RequiemChoir:return new BossHit(.3f,5,1.5f,.25f,hold:1.5f);
                 case BossAttack.HymnOfSilence:return new BossHit(1.6f,5);case BossAttack.LamentOrbs:return new BossHit(1,5);
                 case BossAttack.MawSnap:return new BossHit(1.4f,0);case BossAttack.RiftTear:return new BossHit(.35f,5,3,.5f);
                 case BossAttack.ShardStorm:return new BossHit(1,0);case BossAttack.DevouringPull:return new BossHit(1.4f,0);
                 case BossAttack.TailLash:return new BossHit(1.3f,0);case BossAttack.VenomSpray:return new BossHit(.9f,4);case BossAttack.BurrowStrike:return new BossHit(1.5f,0);
-                case BossAttack.QuicksandMaelstrom:return new BossHit(.3f,0,3,.5f,slow:true);case BossAttack.TripleEruption:return new BossHit(1.2f,1,spacing:.4f,hold:.8f);
+                case BossAttack.QuicksandMaelstrom:return new BossHit(.3f,0,3,.5f,slow:true);case BossAttack.TripleEruption:return new BossHit(1.2f,1);
                 case BossAttack.IceLance:return new BossHit(1.3f,2,slow:true);case BossAttack.FrostNova:return new BossHit(1.4f,2,slow:true);case BossAttack.GlacialSpikes:return new BossHit(1.3f,2);
                 case BossAttack.BlizzardVeil:return new BossHit(.3f,2,3,.5f,slow:true);case BossAttack.ShatterFan:return new BossHit(1,2);
                 default:return new BossHit(0,0);
+            }
+        }
+        // Attacks that travel before they strike. Waypoints are planned at announce: the multi-leg ones in points, the
+        // others in aim (an older save without planned legs lands on its aim).
+        public static bool Moves(BossAttack kind,out BossMotion motion)
+        {
+            switch(kind)
+            {
+                case BossAttack.ReapingSweep:motion=new BossMotion(BossLegStyle.Dash,14,.8f,.45f);return true;
+                case BossAttack.ExecutionLeap:motion=new BossMotion(BossLegStyle.Leap,.55f,0,.5f);return true;
+                case BossAttack.ChainWhirl:motion=new BossMotion(BossLegStyle.Dash,WhirlSpeed,0,.3f,true);return true;
+                case BossAttack.GraveToll:motion=new BossMotion(BossLegStyle.Leap,.4f,0,.45f);return true;
+                case BossAttack.DirgeRing:motion=new BossMotion(BossLegStyle.Blink,.35f,0,.3f);return true;
+                case BossAttack.LamentOrbs:motion=new BossMotion(BossLegStyle.Blink,.3f,0,.25f);return true;
+                case BossAttack.MawSnap:motion=new BossMotion(BossLegStyle.Dash,16,0,.35f);return true;
+                case BossAttack.RiftTear:motion=new BossMotion(BossLegStyle.Dash,18,0,.4f);return true;
+                case BossAttack.BurrowStrike:motion=new BossMotion(BossLegStyle.Burrow,9,0,.45f);return true;
+                case BossAttack.TripleEruption:motion=new BossMotion(BossLegStyle.Burrow,7,0,.45f);return true;
+                case BossAttack.FrostNova:motion=new BossMotion(BossLegStyle.Glide,10,0,.4f);return true;
+                case BossAttack.ShatterFan:motion=new BossMotion(BossLegStyle.Blink,.3f,0,.25f);return true;
+                default:motion=default;return false;
+            }
+        }
+        public static bool Moves(int kind)=>Moves((BossAttack)kind,out _);
+        public const float WhirlSpeed=3,WhirlRadius=3.2f;
+        static bool MultiLeg(BossAttack kind)=>kind==BossAttack.GraveToll||kind==BossAttack.TripleEruption;
+        public static int Legs(EnemyActionState a)=>MultiLeg((BossAttack)a.kind)&&a.points.Count>0?a.points.Count:1;
+        public static Vector2 Waypoint(EnemyActionState a,int leg)=>MultiLeg((BossAttack)a.kind)&&a.points.Count>0?a.points[Mathf.Clamp(leg,0,a.points.Count-1)]:a.aim;
+        public static Vector2 LegStart(EnemyActionState a,int leg)=>leg<=0?a.origin:Waypoint(a,leg-1);
+        public static Vector2 LegDirection(EnemyActionState a,int leg)
+        {
+            // A blink faces the hero it read at announce; everything else faces where it travels.
+            var d=a.kind==(int)BossAttack.DirgeRing||a.kind==(int)BossAttack.LamentOrbs||a.kind==(int)BossAttack.ShatterFan?a.direction:(Waypoint(a,leg)-LegStart(a,leg)).normalized;
+            return d.sqrMagnitude<1e-6f?a.direction:d;
+        }
+        // Seconds from now until the boss finishes leg `leg`: the preparation still to run while preparing, then every leg up to it.
+        public static float Arrival(EnemyActionState a,in BossMotion motion,int leg)
+        {
+            bool moving=a.phase==EnemyActionPhase.Charging;float t=moving?0:Mathf.Max(0,a.remaining);int first=moving?a.leg:0;
+            for(int i=first;i<=leg;i++){float total=motion.LegTime(LegStart(a,i),Waypoint(a,i));t+=moving&&i==first?Mathf.Max(0,total-a.legElapsed):total;}
+            return t;
+        }
+        // What lands where the boss arrives at the end of a leg.
+        public static EnemyThreat LegStrike(EnemyActionState a,int leg,string key,float delay)
+        {
+            var kind=(BossAttack)a.kind;string d=Definition(a.kind);var at=Waypoint(a,leg);var dir=LegDirection(a,leg);
+            EnemyThreat Circle(float radius)=>new EnemyThreat(key,d,AttackShape.Circle,at,at,dir,radius,delay:delay);
+            switch(kind)
+            {
+                case BossAttack.ReapingSweep:return new EnemyThreat(key,d,AttackShape.Sector,at,at+dir,dir,3.5f,angle:220,delay:delay);
+                case BossAttack.MawSnap:return new EnemyThreat(key,d,AttackShape.Sector,at,at+dir,dir,4,angle:70,delay:delay);
+                case BossAttack.DirgeRing:return new EnemyThreat(key,d,AttackShape.Ring,at,at,dir,4.5f,2,delay:delay);
+                case BossAttack.RiftTear:return new EnemyThreat(key,d,AttackShape.Line,a.origin,at,dir,.8f,delay:delay);
+                case BossAttack.ExecutionLeap:return Circle(3);
+                case BossAttack.BurrowStrike:return Circle(2.8f);
+                case BossAttack.TripleEruption:return Circle(2.4f);
+                case BossAttack.FrostNova:return Circle(4.5f);
+                case BossAttack.GraveToll:return Circle(2);
+                default:return Circle(2);
             }
         }
         public static bool Volley(BossAttack kind,out BossVolley volley)
@@ -166,7 +236,7 @@ namespace Hellscript
             return GameCatalog.EnemyNames.Length>wanted?wanted:0;
         }
         // A plan that can fail (no room for adds, no safe blast layout, no landing) retries after planRetry.
-        public static bool Planned(BossAttack kind)=>Summons((int)kind)||kind==BossAttack.Blasts||kind==BossAttack.ExecutionLeap||kind==BossAttack.BurrowStrike;
+        public static bool Planned(BossAttack kind)=>Summons((int)kind)||kind==BossAttack.Blasts||Moves(kind,out _);
         // Aimed shots need a clear projectile line of this radius to be chosen; -1 means no check.
         public static float ShotRadius(BossAttack kind)
         {
@@ -218,26 +288,39 @@ namespace Hellscript
             // skip starts the line that far from the boss, so a fan of lines does not stack at its feet.
             EnemyThreat Line(Vector2 end,float radius,int index=-1,float skip=0)
             {var from=a.origin+(end-a.origin).normalized*Mathf.Min(skip,Vector2.Distance(a.origin,end));return new EnemyThreat(index<0?key:key+"-"+index,d,AttackShape.Line,from,end,(end-a.origin).normalized,radius,delay:delay);}
+            if(Moves(kind,out var motion))
+            {
+                // A travelling attack warns its path while the body still has to cover it, and each landing at the moment it lands.
+                bool moving=a.phase==EnemyActionPhase.Charging;
+                if(motion.carriesWhirl)
+                {
+                    // The whirl warns the whole lane it will sweep; once it runs, the remaining lane reads full.
+                    var start=moving?Vector2.MoveTowards(a.origin,a.aim,a.legElapsed*motion.pace):a.origin;
+                    list.Add(new EnemyThreat(key+"-path",d,AttackShape.Line,start,a.aim,a.direction,WhirlRadius,delay:moving?0:delay));
+                    return list;
+                }
+                if(motion.contact>0&&(!moving||!a.hitHero))
+                {var start=moving?Vector2.MoveTowards(LegStart(a,a.leg),Waypoint(a,a.leg),a.legElapsed*motion.pace):a.origin;list.Add(new EnemyThreat(key+"-path",d,AttackShape.Line,start,Waypoint(a,0),a.direction,1.2f,delay:moving?0:delay));}
+                if(Volley(kind,out var shots))
+                {
+                    float at=delay-Mathf.Max(0,a.remaining)+Arrival(a,motion,0);
+                    for(int i=0;i<a.points.Count;i++)list.Add(new EnemyThreat(key+"-"+i,d,AttackShape.Line,a.aim+(a.points[i]-a.aim).normalized*Mathf.Min(1.2f,Vector2.Distance(a.aim,a.points[i])),a.points[i],(a.points[i]-a.aim).normalized,shots.radius+.45f,delay:at));
+                    return list;
+                }
+                for(int i=moving?a.leg:0;i<Legs(a);i++)list.Add(LegStrike(a,i,key+"-"+i,delay-Mathf.Max(0,a.remaining)+Arrival(a,motion,i)));
+                return list;
+            }
             switch(kind)
             {
                 case BossAttack.Roar:list.Add(Circle(a.origin,4));break;
-                case BossAttack.ReapingSweep:list.Add(new EnemyThreat(key,d,AttackShape.Sector,a.origin,a.aim,a.direction,3.5f,angle:220,delay:delay));break;
-                case BossAttack.MawSnap:list.Add(new EnemyThreat(key,d,AttackShape.Sector,a.origin,a.aim,a.direction,5,angle:60,delay:delay));break;
-                case BossAttack.ExecutionLeap:list.Add(Circle(a.aim,3));break;
-                case BossAttack.BurrowStrike:list.Add(Circle(a.aim,2.8f));break;
-                case BossAttack.ChainWhirl:list.Add(Circle(a.origin,4));break;
                 case BossAttack.HymnOfSilence:list.Add(Circle(a.origin,5));break;
-                case BossAttack.FrostNova:list.Add(Circle(a.origin,4.5f));break;
                 case BossAttack.DevouringPull:list.Add(Circle(a.origin,3,a.remainingCharges>1?.8f:0));break;
-                case BossAttack.DirgeRing:list.Add(new EnemyThreat(key,d,AttackShape.Ring,a.origin,a.origin,a.direction,4.5f,2,delay:delay));break;
                 case BossAttack.QuicksandMaelstrom:list.Add(new EnemyThreat(key,d,AttackShape.Ring,a.origin,a.origin,a.direction,5,1.5f,delay:delay));break;
-                case BossAttack.GraveToll:for(int i=0;i<a.points.Count;i++)list.Add(Circle(a.points[i],2,i*.4f,i));break;
-                case BossAttack.TripleEruption:for(int i=0;i<a.points.Count;i++)list.Add(Circle(a.points[i],2.4f,i*.4f,i));break;
                 case BossAttack.GlacialSpikes:for(int i=0;i<a.points.Count;i++)list.Add(Circle(a.points[i],2,0,i));break;
                 case BossAttack.BlizzardVeil:for(int i=0;i<a.points.Count;i++)list.Add(Circle(a.points[i],1.8f,0,i));break;
                 case BossAttack.RequiemChoir:for(int i=0;i<a.points.Count;i++)list.Add(Line(a.points[i],.5f,i,2));break;
                 case BossAttack.TailLash:list.Add(Line(a.aim,1.1f));break;
-                case BossAttack.IceLance:case BossAttack.RiftTear:list.Add(Line(a.aim,.8f));break;
+                case BossAttack.IceLance:list.Add(Line(a.aim,.8f));break;
                 default:
                     // Volleys warn along each shot's wall-clipped path.
                     if(Volley(kind,out var volley))for(int i=0;i<a.points.Count;i++)list.Add(Line(a.points[i],volley.radius+.45f,i));
@@ -252,7 +335,7 @@ namespace Hellscript
                 var a=enemy.brain.action;if(a.phase==EnemyActionPhase.Idle||a.phase==EnemyActionPhase.Recovering)continue;
                 string key="boss-"+a.id,definition=Definition(a.kind);var kind=(BossAttack)a.kind;
                 if(Summons(a.kind))continue;
-                if(Shaped(a.kind)){foreach(var shape in Shapes(a,key,a.remaining))yield return shape;continue;}
+                if(Shaped(a.kind)){foreach(var shape in Shapes(a,key,a.phase==EnemyActionPhase.Charging?0:a.remaining))yield return shape;continue;}
                 if(kind==BossAttack.Blasts)
                 {for(int i=0;i<a.points.Count;i++)yield return new EnemyThreat(key+"-"+i,definition,AttackShape.Circle,a.points[i],a.points[i],a.direction,2.5f,delay:a.remaining+i*.35f);}
                 else if(kind==BossAttack.Hook||kind==BossAttack.Beam||kind==BossAttack.Charge)

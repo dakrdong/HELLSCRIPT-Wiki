@@ -32,7 +32,7 @@ python3 Docs/Art/SkillTreeUi/measure.py
 
 ## 가져오기 설정과 용량
 
-기본 설정은 테두리·보석 최대 512px, 배경 최대 1024px이며 압축합니다. `AndroidTextureBudget`에 같은 한도의 ASTC 6×6 항목을 추가했습니다. 휴대폰에서 테두리는 약 250px 이하로 표시되고, 배경은 패널 전체를 덮습니다.
+기본 설정은 테두리·보석 최대 512px, 배경 최대 1024px이며 압축합니다. `ResourceTextureBudget`에 같은 한도의 ASTC 6×6 항목을 추가했습니다. 휴대폰에서 테두리는 약 250px 이하로 표시되고, 배경은 패널 전체를 덮습니다.
 
 ## 상태
 

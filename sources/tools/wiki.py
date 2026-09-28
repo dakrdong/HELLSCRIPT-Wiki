@@ -334,11 +334,11 @@ def build_resources(databases):
                    related=['asset-provenance','equipment-atlas-prompt' if filename=='EquipmentAtlas.png' else 'rift-stone-prompt' if filename=='RiftStone.png' else 'image-prompts']))
     box_art=json.loads(read('Docs/Art/RewardBoxes/manifest.json'))
     for icon in box_art['icons']:
-        path=ART+'RewardBoxes/'+icon['id']+'.png';raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+        path=ART+'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png';raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
         rows.append(record('asset-reward-box-'+icon['id'],icon['id'],'보상 상자 아이콘','보상 상자의 등급·내용물·보석 단계를 표시합니다.',
             {'해상도':'256 × 256','색상 모드':'RGBA','완전 투명 픽셀':icon['transparentPixels'],'SHA-256':digest(raw),
              '제작 방식':box_art['provenance'],'SVG 원본':'Docs/Art/RewardBoxes/'+icon['id']+'.svg'},
-            'Docs/Art/RewardBoxes/'+icon['id']+'.svg',status='현재 등록',image={'file':'RewardBoxes/'+icon['id']+'.png'},assetPath=path,
+            'Docs/Art/RewardBoxes/'+icon['id']+'.svg',status='현재 등록',image={'file':'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png'},assetPath=path,
             content={'db':'reward-boxes','id':icon['id']},related=['reward-boxes','reward-boxes.en']))
     title_path=ART+'Title/TitleSanctuary.png'
     title_raw=(ROOT/title_path).read_bytes();INPUTS[title_path]=digest(title_raw)
@@ -580,7 +580,7 @@ def build_resources(databases):
             '기존 시연의 SVG 원본을 투명 PNG로 변환한 Unity 적용 리소스입니다.',
             {'원본':entry['source'],'해상도':f'{entry["width"]} × {entry["height"]}','알파 채널':entry['alpha'],
              '용도':'빈 장착 부위 표식' if entry['id'].startswith('slot-') else '기능·재화 아이콘',
-             '임포트':'Default Texture2D · Clamp · Bilinear · 밉맵 없음 · 압축 없음','SHA-256':entry['sha256']},
+             '임포트':'Default Texture2D · Clamp · Bilinear · 밉맵 없음. 기본 무압축; Standalone BC7 · Android ASTC 4×4(ResourceTextureBudget)','SHA-256':entry['sha256']},
             forge_manifest,status='적용 리소스',image={'file':'Blacksmith/'+entry['id']+'.png'},assetPath=path,
             refs=[source_ref(entry['source']),source_ref('Assets/HELLSCRIPT/Editor/BlacksmithArtImporter.cs')],
             related=['blacksmith-unity-integration','blacksmith-unity-integration.en','blacksmith-validation']))
@@ -627,6 +627,8 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'build-optimization-20260928':('리소스와 운영','빌드 리소스와 시작 메모리 최적화','출시 앱·APK의 실제 크기, 중복 이미지 정리, 텍스처 예산, 효과음 지연 로딩과 검증 범위입니다.'),
+ 'build-optimization-20260928.en':('리소스와 운영','Build resources and startup memory optimization','Measured release sizes, shared images, texture budgets, lazy audio and native validation.'),
  'feature-integration-20260927':('후속 개발 기록','균열 결과창·장비·오디오 개발 통합','완료된 5개 개발 브랜치의 통합, 3D 개편 제외, 저장 호환성과 실행 검증을 기록합니다.'),
  'feature-integration-20260927.en':('후속 개발 기록','Rift, equipment and audio integration','Five completed branches, excluded 3D work, save compatibility, regression and native runtime evidence.'),
  'npc-dialogue-portraits':('리소스와 운영','NPC 초상화와 음식 콘셉트 대화','필드 NPC 12명의 기존 인물 설정, 개별 초상화·인사말, 훈련 교관과 대화·시설 접근 검증입니다.'),
@@ -967,6 +969,11 @@ def build():
     (SITE/'media/RewardBoxes').mkdir(parents=True,exist_ok=True)
     for file in (ROOT/ART/'RewardBoxes').glob('*.png'):
         shutil.copyfile(file,SITE/'media/RewardBoxes'/file.name)
+    # Archived pages keep their original URLs; game builds contain only canonical sprites.
+    for icon in json.loads((ROOT/'Docs/Art/RewardBoxes/manifest.json').read_text())['icons']:
+        resource=icon.get('resourceId',icon['id'])
+        if resource!=icon['id']:
+            shutil.copyfile(ROOT/ART/'RewardBoxes'/(resource+'.png'),SITE/'media/RewardBoxes'/(icon['id']+'.png'))
     (SITE/'media/EquipmentVariants').mkdir(parents=True,exist_ok=True)
     for file in (ROOT/ART/'EquipmentVariants').glob('*.png'):
         shutil.copyfile(file,SITE/'media/EquipmentVariants'/file.name)

@@ -1,3 +1,4 @@
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 using System;
 using System.Collections;
 using System.IO;
@@ -43,7 +44,7 @@ namespace Hellscript
                 Require(text.cachedTextGenerator.lineCount==1,"Wallet amount wraps or truncates: "+text.text);
                 if(details)Require(texts.Single(t=>t.name=="wallet-detail-value-"+row.Item1).text==row.Item2.ToString("N0"),"Detailed balance is stale: "+row.Item1);
             }
-            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name=="Abyssal Coin"&&i.sprite!=null&&i.sprite.texture.width==1254),"Original Abyssal Coin sprite was not imported.");
+            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name=="Abyssal Coin"&&i.sprite!=null&&i.sprite.texture==Resources.Load<Texture2D>("Art/GlobalHUD/currency-abyssal-coin")),"Original Abyssal Coin sprite was not imported.");
             bool Overlaps(Rect a,Rect b)=>Mathf.Min(a.xMax,b.xMax)-Mathf.Max(a.xMin,b.xMin)>.5f&&Mathf.Min(a.yMax,b.yMax)-Mathf.Max(a.yMin,b.yMin)>.5f;
             Require(!Overlaps(Bounds(Named("Wallet summary")),Bounds(Named("Bag panel"))),"Wallet overlaps the bag.");
             Require(!Overlaps(Bounds(Named("Wallet summary")),Bounds(Named("Character equipment"))),"Wallet overlaps equipment.");
@@ -125,3 +126,5 @@ namespace Hellscript
         }
     }
 }
+
+#endif

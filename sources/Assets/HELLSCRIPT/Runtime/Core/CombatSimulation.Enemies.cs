@@ -185,6 +185,8 @@ namespace Hellscript
         {
             foreach(var h in State.enemyHazards.ToArray())
             {
+                // A whirl rides with its boss: this tick's move is already done (TickEnemies runs first).
+                if(h.followsCaster){var caster=State.enemies.Find(x=>x.id==h.enemyId&&!x.dead);if(caster!=null)h.position=h.end=caster.position;}
                 if(h.createdAt>=State.time-.00001f)continue;
                 float active=Mathf.Max(0,dt-h.delay);h.delay=Mathf.Max(0,h.delay-dt);if(h.delay>.00001f)continue;
                 if(h.shardBurst)

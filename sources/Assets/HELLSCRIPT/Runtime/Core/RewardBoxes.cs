@@ -63,10 +63,14 @@ namespace Hellscript
             if(d==null||d.version!=1||d.boxes==null||d.milestones==null||d.firstClearRules==null||d.itemLevels==null)
                 throw new NotSupportedException("Unsupported reward box catalog.");
             var kinds=new[]{"equipment","gem","stones","materials","gold","premium","cores","rune","potion"};
-            if(d.boxes.Any(b=>b==null||string.IsNullOrWhiteSpace(b.id)||string.IsNullOrWhiteSpace(b.nameKo)||string.IsNullOrWhiteSpace(b.nameEn)||b.icon!=b.id||!kinds.Contains(b.kind)||b.amount<1||b.slot< -1||b.slot>7)||d.boxes.Select(b=>b.id).Distinct().Count()!=d.boxes.Length)
+            if(d.boxes.Any(b=>b==null||string.IsNullOrWhiteSpace(b.id)||string.IsNullOrWhiteSpace(b.nameKo)||string.IsNullOrWhiteSpace(b.nameEn)||string.IsNullOrWhiteSpace(b.icon)||!kinds.Contains(b.kind)||b.amount<1||b.slot< -1||b.slot>7)||d.boxes.Select(b=>b.id).Distinct().Count()!=d.boxes.Length)
                 throw new InvalidOperationException("Invalid reward box definitions.");
             foreach(var b in d.boxes)
             {
+                // Display-only aliases must terminate at a catalog-owned canonical icon.
+                // Reward/save identity remains b.id; never follow aliases when granting rewards.
+                var art=d.boxes.FirstOrDefault(other=>other.id==b.icon);
+                if(art==null||art.icon!=art.id)throw new InvalidOperationException("Invalid reward box icon reference.");
                 if(b.chooseSlot&&(b.kind!="equipment"||b.slot!=-1||b.setOnly))throw new InvalidOperationException("Invalid equipment choice box.");
                 if(b.kind=="potion"&&(string.IsNullOrEmpty(b.potionId)||!PotionCatalog.All.Any(p=>p.id==b.potionId)||b.amount>9999))throw new InvalidOperationException("Invalid potion box.");
                 if(b.kind!="potion"&&!string.IsNullOrEmpty(b.potionId))throw new InvalidOperationException("Unexpected potion payload.");

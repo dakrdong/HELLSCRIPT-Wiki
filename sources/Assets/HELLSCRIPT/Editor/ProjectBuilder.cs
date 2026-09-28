@@ -59,9 +59,29 @@ namespace Hellscript.Editor
         }
         public static void BuildMac()
         {
+            BuildMacPlayer(true);
+        }
+        // Keep the existing development entry point for native acceptance, and provide a
+        // reproducible release build with the same content and no development-only hooks.
+        public static void BuildMacRelease()
+        {
+            BuildMacPlayer(false);
+        }
+        static void BuildMacPlayer(bool development)
+        {
             string output=BuildOutput("Builds/macOS/HELLSCRIPT.app",".app");
             Setup();Directory.CreateDirectory(Path.GetDirectoryName(output));
-            BuildReport report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=output,target=BuildTarget.StandaloneOSX,options=BuildOptions.Development});
+            var options=development?BuildOptions.Development:BuildOptions.CompressWithLz4HC;
+            var target=UnityEditor.Build.NamedBuildTarget.Standalone;
+            var previousStripping=PlayerSettings.GetManagedStrippingLevel(target);
+            BuildReport report;
+            try
+            {
+                if(!development)PlayerSettings.SetManagedStrippingLevel(target,ManagedStrippingLevel.Low);
+                report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=output,target=BuildTarget.StandaloneOSX,options=options|BuildOptions.DetailedBuildReport});
+                BuildSizeAudit.Write(report);
+            }
+            finally {PlayerSettings.SetManagedStrippingLevel(target,previousStripping);}
             Debug.Log("HELLSCRIPT_BUILD "+report.summary.result+" errors="+report.summary.totalErrors+" output="+output);
             if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("HELLSCRIPT build failed");
         }
@@ -74,7 +94,8 @@ namespace Hellscript.Editor
             bool development=Environment.GetCommandLineArgs().Contains("-hellscriptDevelopment");
             Setup();Directory.CreateDirectory(Path.GetDirectoryName(output));EditorUserBuildSettings.buildAppBundle=false;
             var options=development?BuildOptions.Development|BuildOptions.CompressWithLz4:BuildOptions.CompressWithLz4HC;
-            BuildReport report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=output,target=BuildTarget.Android,options=options});
+            BuildReport report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{ScenePath},locationPathName=output,target=BuildTarget.Android,options=options|BuildOptions.DetailedBuildReport});
+            BuildSizeAudit.Write(report);
             Debug.Log("HELLSCRIPT_BUILD "+report.summary.result+" errors="+report.summary.totalErrors+" development="+development+" output="+output);
             if(report.summary.result!=BuildResult.Succeeded)throw new InvalidOperationException("HELLSCRIPT build failed");
         }

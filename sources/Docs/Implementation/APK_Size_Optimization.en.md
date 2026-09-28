@@ -1,5 +1,7 @@
 # APK size optimization
 
+2026-09-28 follow-up: see [build optimization](Build_Optimization_20260928.en.md) for current Standalone/Android budgets, shared reward images and release QA exclusion. The measurements and remaining options below preserve the 2026-09-27 snapshot.
+
 Updated: 2026-09-27
 
 The Android development APK built on 2026-09-26 was 2.1 GB (2,096,429,914 bytes). The game ships almost no sound or model data; import settings and unused content made it large. This work removes those causes without changing game behaviour or screens.

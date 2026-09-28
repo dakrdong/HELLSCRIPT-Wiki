@@ -18,6 +18,9 @@ namespace Hellscript
         public float startedAt;
         public bool hitHero,empowered,released;
         public List<Vector2> points=new List<Vector2>();
+        // Moving boss attacks (BossCombat.Moves): the leg being travelled and the time spent on it.
+        public int leg;
+        public float legElapsed;
     }
     [Serializable] public sealed class EnemyBrain
     {
@@ -52,6 +55,8 @@ namespace Hellscript
         public Vector2 position,end,direction;
         public float createdAt,delay,duration,interval,tick,damage,radius,innerRadius,angle,heroSlow;
         public bool shardBurst;
+        // Follows its caster (enemyId) every tick: a boss's whirl that chases the hero.
+        public bool followsCaster;
     }
     public readonly struct EnemyAttackDefinition
     {

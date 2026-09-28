@@ -165,10 +165,13 @@ def artwork(box):
 
 def main():
     db=catalog();ART.mkdir(parents=True,exist_ok=True);SOURCE.mkdir(parents=True,exist_ok=True);DATA.parent.mkdir(parents=True,exist_ok=True)
-    DATA.write_text(json.dumps(db,ensure_ascii=False,indent=2)+'\n')
-    manifest=[];tiles=[]
+    manifest=[];tiles=[];canonical={};retired=[]
     for row in db['boxes']:
-        c=artwork(row);png=c.image.resize((256,256),Image.Resampling.LANCZOS);path=ART/(row['id']+'.png')
+        c=artwork(row);png=c.image.resize((256,256),Image.Resampling.LANCZOS)
+        # Content identity, not reward identity: amounts, tiers, slots and save IDs stay distinct.
+        fingerprint=hashlib.sha256(png.tobytes()).hexdigest()
+        resource=canonical.setdefault(fingerprint,row['id']);row['icon']=resource;path=ART/(resource+'.png')
+        if resource!=row['id']:retired.append(ART/(row['id']+'.png'))
         # Keep existing bytes when only the encoder version differs.
         same=False
         if path.exists():
@@ -178,14 +181,18 @@ def main():
         (SOURCE/(row['id']+'.svg')).write_text('<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">'+''.join(c.svg)+'</svg>\n')
         alpha=png.getchannel('A');assert alpha.getextrema()==(0,255)
         assert all(alpha.getpixel((x,y))==0 for x,y in [(0,0),(255,0),(0,255),(255,255)])
-        manifest.append(dict(id=row['id'],width=256,height=256,mode=png.mode,transparentPixels=alpha.histogram()[0],sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
+        manifest.append(dict(id=row['id'],resourceId=resource,width=256,height=256,mode=png.mode,transparentPixels=alpha.histogram()[0],sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
         tile=Image.new('RGB',(180,198),'#181c19');tile.paste(png.resize((156,156)),(12,0),png.resize((156,156)))
         ImageDraw.Draw(tile).text((6,163),row['id'],fill='#ded4b6');tiles.append(tile)
     sheet=Image.new('RGB',(180*8,198*((len(tiles)+7)//8)),'#181c19')
     for n,tile in enumerate(tiles):sheet.paste(tile,(n%8*180,n//8*198))
     sheet.save(SOURCE/'contact-sheet.png')
+    # These are generated aliases only. Keep every SVG and wiki image URL for provenance/history.
+    for path in retired:
+        path.unlink(missing_ok=True);Path(str(path)+'.meta').unlink(missing_ok=True)
+    DATA.write_text(json.dumps(db,ensure_ascii=False,indent=2)+'\n')
     (SOURCE/'manifest.json').write_text(json.dumps(dict(provenance='Code-authored original vector artwork; no image model used',generator='tools/generate_reward_boxes.py',icons=manifest),indent=2)+'\n')
-    print(f'{len(db["boxes"])} box definitions, SVG originals and transparent PNG sprites generated.')
+    print(f'{len(db["boxes"])} box definitions and SVG originals; {len(canonical)} shared transparent PNG sprites.')
 
 
 if __name__=='__main__':main()

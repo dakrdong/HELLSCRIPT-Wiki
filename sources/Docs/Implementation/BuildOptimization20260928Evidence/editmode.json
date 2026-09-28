@@ -1,0 +1,442 @@
+{
+  "summary": {
+    "total": "107",
+    "passed": "107",
+    "failed": "0",
+    "skipped": "0",
+    "result": "Passed",
+    "start-time": "2026-09-28 03:49:49Z",
+    "end-time": "2026-09-28 03:49:58Z",
+    "duration": "8.9817269"
+  },
+  "tests": [
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.BothRewardSchedulesResolveExistingOrNewArtWithoutFallbackShapes",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.ClaimedSealKeepsNativeTransparency",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.EventShortcutUsesItsOwnNativeAlphaSprite",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.NewRewardSpritesKeepNativeTransparencyAndDedicatedIdentity(Gold,\"reward-gold\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.NewRewardSpritesKeepNativeTransparencyAndDedicatedIdentity(Cores,\"reward-random-core\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.NewRewardSpritesKeepNativeTransparencyAndDedicatedIdentity(LegendaryChest,\"reward-legendary-chest\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.AttendanceArtTests.PopupAltarIsAnOpaqueSquareBackdropSizedForPhones",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.MissingAndCyclicIconAliasesAreRejected",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PlayerIconBudgetsAreExplicitAndReimportKeepsIdentity(\"Art/ClassSkillIcons/Mage/M01\",512)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PlayerIconBudgetsAreExplicitAndReimportKeepsIdentity(\"Art/ClassLegendaryIcons/LW32\",512)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PlayerIconBudgetsAreExplicitAndReimportKeepsIdentity(\"Art/ClassSetIcons/REF_SW05\",512)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PlayerIconBudgetsAreExplicitAndReimportKeepsIdentity(\"Art/GlobalHUD/potion-hp\",512)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PotionCropsStayInBoundsAndKeepTheirAuthoredAspect(\"potion-hp\",0.6075949f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PotionCropsStayInBoundsAndKeepTheirAuthoredAspect(\"potion-mp\",0.4671403f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.PotionCropsStayInBoundsAndKeepTheirAuthoredAspect(\"potion-utility\",0.6821918f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.RewardDefinitionsShareExistingCanonicalImagesWithoutChangingIds",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.BuildResourceTests.WorldMapsAreLoadableAsTheTextureTypeUsedByMaterials",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.AllTwentyFourNewSetsUseTheirOwnSharedEmblem",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.EveryDeliveredLegendaryAndNewSetPieceLoadsItsOwnTexture",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.ImprintingDoesNotReplaceTheEquipmentIdentityOrInventAnImageForRareGear",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.MissingDedicatedArtKeepsTheExistingAtlasOrVectorFallback(\"B11\",False)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.MissingDedicatedArtKeepsTheExistingAtlasOrVectorFallback(\"B27\",True)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.SharedDetailShowsTheSetEmblemAlongsideUnchangedEffectText",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.SharedSlotUsesTheWholeDedicatedImageWithoutChangingTheItem(\"LW01\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.SharedSlotUsesTheWholeDedicatedImageWithoutChangingTheItem(\"REF_SW02_P01\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.SharedSlotUsesTheWholeDedicatedImageWithoutChangingTheItem(\"REF_SA01_P01\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.EquipmentArtTests.SharedSlotUsesTheWholeDedicatedImageWithoutChangingTheItem(\"REF_SM02_P01\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.GlobalHudResourceTests.ImportedHudSpritesPreserveAlphaIdentityAndSlicedBorders",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.GlobalHudResourceTests.PotionArtworkAndCooldownRenderAtTheSlotCenter",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.AllGearBoxesProduceOnlyLegalReleasedClassEquipment(0)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.AllGearBoxesProduceOnlyLegalReleasedClassEquipment(1)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.AllGearBoxesProduceOnlyLegalReleasedClassEquipment(2)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.CatalogCoversEveryRequestedRaritySlotGemAndIcon",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.ClaimRequiresExactNormalClearAndIsAccountOnceWithoutRepeatingDirectCurrencies",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.CurrencyOverflowAndInvalidQuantityNeverConsume",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.EveryStageHasAValidPackageAndTotalsMatchBudget",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.FailedSavePreservesBoxRandomStateAndRetryPaysOnce(False)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.FailedSavePreservesBoxRandomStateAndRetryPaysOnce(True)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.FixedColorAndCoreChoicePayExactBalances",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.FullBagsAndGemStorageRollBackTheEntireOpen",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.GemChoiceIsExplicitTenPerBoxAndRequestBindsChoice",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.MigrationIsIdempotentAndUsesNormalClearEvidenceOnly",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.NewFirstClearLegendaryGrantsBeginAtThirtyAndInvalidCatalogsAreRejected",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.PreviouslyOwnedLowStageGuaranteeBoxesKeepTheirPromise",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.RuneBoxesGrantExactlyFiveTypesOrOneFiveCellRuneWithoutMasteryXp",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.UnsupportedBoxStateStopsLoadWithoutFallingBackToBackup(\"version\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.UnsupportedBoxStateStopsLoadWithoutFallingBackToBackup(\"missing\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.RewardBoxTests.UnsupportedBoxStateStopsLoadWithoutFallingBackToBackup(\"unknown\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.ButtonsReportOnlyRealPresses",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.CommittedTransactionsChooseTheirSoundAndOnlyPlayerCausedFailuresSound",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.CooldownAndMuteGateEveryPlay",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.EveryBankEntryResolvesItsClips",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.EveryPlayableSkillEnemyBossAndVoiceHasASound",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.FinalBankContainsNoUnreferencedAudioAndSharedActionsStillPlay",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.HistoryCursorsSurviveARebuiltRunWithoutReplayingIt",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.ImportedMusicKeepsFourStereoStreamingAssetsAliveAfterShutdown",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.ItemsSoundLikeTheirMaterialAndRarity",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsMenusWhenNoRunIsActive(\"title\",\"title\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsMenusWhenNoRunIsActive(\"characters\",\"title\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsMenusWhenNoRunIsActive(\"plaza\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsMenusWhenNoRunIsActive(\"town\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsTheActualRunPhase(Exploring,\"title\",\"rift\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsTheActualRunPhase(Boss,\"rift\",\"boss\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsTheActualRunPhase(Looting,\"rift\",\"rift\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsTheActualRunPhase(Cleared,\"rift\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.MusicFollowsTheActualRunPhase(Failed,\"rift\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.RapidMusicTransitionsKeepHeadroomAndMuteEverySource",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.SharedCueReusesTheOriginalClipObjectsAndCategory",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.SoundBankTests.StartupAndRejectedPlaybackDoNotLoadEffects",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.BuildReplacesPartsWithOneSkinnedRendererAndKeepsPivotsAndSockets",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.DeathCollapsesOverOneSecondAndExposesProgress",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.EachLegBendsWhileItSwingsForward(Biped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.EachLegBendsWhileItSwingsForward(Quadruped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.EachLegBendsWhileItSwingsForward(Blob)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.EachLegBendsWhileItSwingsForward(Spider)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.GlowColourDecodesToTheLinearGlowTimesTheIntensity",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.HitFlinchSettlesAtTheDtClamp",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.ImportedFixtureIsOneSkinnedRendererOverItsPivots",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.ImportedPropIsOneStaticMeshWithAGlowMask",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.ImporterForcesTheWorldArtRulesOnFreshCopies",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.ManifestParsesFixtureFactsAndRejectsGarbageQuietly",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.ManifestsOfOneFamilyMergeAndOtherTextAssetsAreIgnored",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.MergeWeightsEveryPartToItsNearestPivotAndMarksGlowParts",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.MissingArtFallsBackWithoutThrowing",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RestoreHierarchyResolvesChainsInAnyOrderAndKeepsWorldPoses",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigIgnoresMissingBones",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Biped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Quadruped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Hover)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Blob)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Worm)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Spider)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigMovesWhileWalkingAndSettlesNearRestWhenIdle(Serpent)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Biped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Quadruped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Hover)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Blob)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Worm)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Spider)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigStaysFiniteAndBoundedForEveryArchetypeAndAction(Serpent)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Biped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Quadruped)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Hover)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Blob)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Worm)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Spider)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.WorldArtTests.RigTickDoesNotAllocate(Serpent)",
+      "result": "Passed"
+    }
+  ]
+}

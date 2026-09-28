@@ -32,7 +32,7 @@ python3 Docs/Art/SkillTreeUi/measure.py
 
 ## Import settings and size
 
-Default import caps frames and the gem at 512 px and the backdrop at 1024 px, compressed. `AndroidTextureBudget` has matching ASTC 6×6 rows. On a phone the frames display below about 250 px and the backdrop covers a whole panel.
+Default import caps frames and the gem at 512 px and the backdrop at 1024 px, compressed. `ResourceTextureBudget` has matching ASTC 6×6 rows. On a phone the frames display below about 250 px and the backdrop covers a whole panel.
 
 ## Status
 

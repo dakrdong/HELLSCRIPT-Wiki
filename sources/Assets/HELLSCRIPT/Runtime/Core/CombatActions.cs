@@ -73,7 +73,8 @@ namespace Hellscript
     public static class CombatActions
     {
         // 6: boss cooldowns grew to seven slots (EnemyCombat.Normalize widens older arrays).
-        public const int Version=6;
+        // 7: moving boss attacks save their leg and leg time; a boss whirl hazard can follow its caster.
+        public const int Version=7;
         public static HeroActionPolicy CapturePolicy(HeroActionState action,BuildConfig build,Rule explicitRule=null)
         {
             var rule=explicitRule??(build?.rules!=null&&action.rule>=0&&action.rule<build.rules.Count?build.rules[action.rule]:null);

@@ -71,6 +71,8 @@ namespace Hellscript
                     library.Decal(LandMark[element],at,f.radius*.8f);if(f.boss)library.Burst("dust",at,f.radius*.5f);
                     break;
             }
+            // The phase-change roar throws a second, wide wave and shakes the whole screen.
+            if(f.definition=="BOSS_ROAR"){library.Shockwave(at,f.radius*2,ElementColor(5),.7f);library.Burst("shadow",at+Vector3.up*1.5f,2.5f,ElementColor(5));lighting.Shake(.75f,.5f);return;}
             // A landing the hero stood in or next to shakes the camera; boss impacts shake harder.
             float gap=f.shape==AttackShape.Line?DistanceToSegment(run.position,f.origin,f.end)-f.radius:Vector2.Distance(run.position,f.origin)-f.radius;
             if(gap<2.5f)lighting.Shake(f.boss?.55f:.2f,f.boss?.34f:.18f);
@@ -83,7 +85,24 @@ namespace Hellscript
         void AttackMotes(WorldFx library,GameObject actor,EnemyState enemy,RunState run)
         {
             var a=enemy.brain.action;if(library==null||a.phase==EnemyActionPhase.Idle||!CanDisplayEnemyMarker(run,enemy.position))return;
-            if(a.phase==EnemyActionPhase.Charging){if(Tick(actor,.1f))library.Burst("dust",actor.transform.position+Vector3.up*.15f,enemy.boss?1.3f:.8f);return;}
+            if(a.phase==EnemyActionPhase.Charging)
+            {
+                // Trails of a travelling boss: sand thrown up over a burrow, frost behind a glide, dark sparks as a blink
+                // fades, dust behind dashes and whirls; nothing while a leap is in the air.
+                if(enemy.boss&&BossCombat.Moves((BossAttack)a.kind,out var travel))
+                {
+                    var at=actor.transform.position;
+                    switch(travel.style)
+                    {
+                        case BossLegStyle.Leap:return;
+                        case BossLegStyle.Burrow:if(Tick(actor,.07f))library.Burst("dust",at+Vector3.up*.1f,1.6f,new Color(1,.84f,.6f,1));return;
+                        case BossLegStyle.Glide:if(Tick(actor,.08f))library.Burst("frost",at+Vector3.up*.3f,1.1f,ElementColor(2));return;
+                        case BossLegStyle.Blink:if(Tick(actor,.1f))library.Burst("shadow",at+Vector3.up*1.6f,1.3f,ElementColor(5));return;
+                        default:if(Tick(actor,travel.carriesWhirl?.12f:.07f))library.Burst(travel.carriesWhirl?"sparks":"dust",at+Vector3.up*(travel.carriesWhirl?1.2f:.15f),1.4f);return;
+                    }
+                }
+                if(Tick(actor,.1f))library.Burst("dust",actor.transform.position+Vector3.up*.15f,enemy.boss?1.3f:.8f);return;
+            }
             if(a.phase!=EnemyActionPhase.Preparing)return;
             var motion=MotionOf(enemy,a.kind);if(motion!=AttackMotion.Cast&&!enemy.boss)return;
             int element=ActionElement(enemy,a.kind);float windup=Mathf.Clamp01(1-a.remaining/Mathf.Max(.01f,a.preparation));

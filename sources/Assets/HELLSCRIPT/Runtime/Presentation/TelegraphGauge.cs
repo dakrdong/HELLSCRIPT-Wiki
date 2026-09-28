@@ -108,7 +108,8 @@ namespace Hellscript
             {
                 for(int i=run.enemyEvents.Count-1;i>=0;i--)
                 {
-                    var ev=run.enemyEvents[i];if(ev.time<run.time-1)break;
+                    // A travelling boss lands up to about 2.5 s after it set off.
+                    var ev=run.enemyEvents[i];if(ev.time<run.time-3)break;
                     if(ev.actionId==id&&ev.kind=="RELEASE")return true;
                 }
                 return false;

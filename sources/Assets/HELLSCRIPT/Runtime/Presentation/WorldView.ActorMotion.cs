@@ -24,6 +24,7 @@ namespace Hellscript
         const float StrikeTime=.3f,DissolveTime=.65f,HeroFlashTime=.16f,EnemyFlashTime=.11f;
         static readonly Vector3 Shoulder=new Vector3(.35f,1.6f,0);
         readonly Dictionary<GameObject,Figure> figures=new Dictionary<GameObject,Figure>();
+        readonly HashSet<GameObject> enragedAuras=new HashSet<GameObject>();
         readonly List<GameObject> staleFigures=new List<GameObject>();
         sealed class Dying{public GameObject go;public float age;}
         readonly List<Dying> dying=new List<Dying>();
@@ -87,10 +88,36 @@ namespace Hellscript
                 case AttackMotion.Shoot:lean=-8*windup-8*strike;weapon=-40*windup+15*strike;lunge=-.22f*strike;break;
                 case AttackMotion.Cast:lift=.2f*windup;lean=-7*windup+12*strike;weapon=-145*windup+70*strike;lunge=.18f*strike;break;
             }
-            if(a.phase==EnemyActionPhase.Charging){lean=28;crouch=.08f;lift=Mathf.Abs(Mathf.Sin(elapsed*18))*.06f;}
+            bool blinking=false;
+            if(a.phase==EnemyActionPhase.Charging)
+            {
+                if(enemy.boss&&BossCombat.Moves((BossAttack)a.kind,out var travel))
+                {
+                    // A travelling boss: a leap arcs (root scaled 1.7 high, so 2.2 local is ~3.7 m at the top), a burrow sinks
+                    // under the floor and bursts up at the end, glides and dashes lean into the run, a whirl spins, a blink fades.
+                    float total=travel.LegTime(BossCombat.LegStart(a,a.leg),BossCombat.Waypoint(a,a.leg)),t=total>1e-4f?Mathf.Clamp01(a.legElapsed/total):1;
+                    switch(travel.style)
+                    {
+                        case BossLegStyle.Leap:lift=4*2.2f*t*(1-t);lean=14-28*t;break;
+                        case BossLegStyle.Burrow:lift=t<.8f?-2.6f:-2.6f*(1-(t-.8f)/.2f);break;
+                        case BossLegStyle.Glide:lean=18;lift=.12f;break;
+                        case BossLegStyle.Blink:blinking=true;f.dissolve=Mathf.Max(f.dissolve,t);break;
+                        default:if(travel.carriesWhirl){weapon=-70;actor.transform.rotation=Quaternion.Euler(0,elapsed*900,0);}else{lean=26;crouch=.06f;}break;
+                    }
+                }
+                else{lean=28;crouch=.08f;lift=Mathf.Abs(Mathf.Sin(elapsed*18))*.06f;}
+            }
+            // After a blink the body fades back in where it appeared.
+            if(!blinking&&f.dissolve>0)f.dissolve=Mathf.Max(0,f.dissolve-motionStep/.25f);
             ApplyPose(f,lean,crouch,lift,lunge,weapon,tremble*.035f*Mathf.Sin(elapsed*57));
             // The rim heats up with the gauge: bosses burn orange, regular enemies red.
             f.rim=preparing?windup*windup*.95f:strike*.6f;f.rimColor=enemy.boss?new Color(1,.45f,.12f):new Color(1,.2f,.14f);
+            // A boss in its second phase smoulders: a steady red rim and short-lived flames at its feet that stay with it.
+            if(enemy.boss&&enemy.brain.boss.enraged)
+            {
+                f.rim=Mathf.Max(f.rim,.3f+.08f*Mathf.Sin(elapsed*6));if(!preparing)f.rimColor=new Color(1,.25f,.1f);
+                if(enragedAuras.Add(actor)&&Fx!=null)Fx.Fire(actor.transform,.75f,new Color(1,.28f,.1f));
+            }
         }
         void ApplyPose(Figure f,float lean,float crouch,float lift,float lunge,float weapon,float jitter)
         {
@@ -163,7 +190,7 @@ namespace Hellscript
                 if(d.age>=DissolveTime){figures.Remove(d.go);Destroy(d.go);dying.RemoveAt(i);}
             }
         }
-        void ClearActorMotion(){figures.Clear();dying.Clear();lastDamageSeen=null;}
+        void ClearActorMotion(){figures.Clear();dying.Clear();enragedAuras.Clear();lastDamageSeen=null;}
         void SeedCombatFeedback(RunState run){lastDamageSeen=run.damageEvents.Count>0?run.damageEvents[run.damageEvents.Count-1]:null;}
     }
 }

@@ -1,0 +1,56 @@
+PASS: every displayed enemy and boss warning had a fill whose _Progress matched the gauge (90 warnings checked), gauges rose through 25/50/75% before release, each attack that landed flashed its footprint, and chained boss circles continued their gauges after release.
+Fixtures: isolated save, level 30 warrior standing still, stationary enemies and bosses with attack 5 and high HP, only the tested attack ready; one elite's timers and one death were forced. No physical input, Android, balance or performance claim.
+01-n01-swing-25: action-9=0.31
+01-n01-swing-50: action-9=0.54
+01-n01-swing-75: action-9=0.77
+01-n01-swing-release:
+02-n02-charge-25: action-9=0.25
+02-n02-charge-50: action-9=0.50
+02-n02-charge-75: action-9=0.75
+02-n02-charge-release: action-9=1.00
+03-n09-arrows-25: action-9--10=0.29 action-9-0=0.29 action-9-10=0.29
+03-n09-arrows-50: action-9--10=0.54 action-9-0=0.54 action-9-10=0.54
+03-n09-arrows-75: action-9--10=0.79 action-9-0=0.79 action-9-10=0.79
+03-n09-arrows-release:
+04-n04-pool-25: action-9=0.29
+04-n04-pool-50: action-9=0.54
+04-n04-pool-75: action-9=0.79
+04-n04-pool-release: hazard-11=1.00
+05-every-shape: hazard-11=0.75 hazard-14=0.33 hazard-19=0.40 action-17=0.62 action-13=0.75 action-21-0=0.30 action-10=0.57 action-16=0.69
+06-b01-sweep-25: boss-9-path=0.25 boss-9-0=0.19
+06-b01-sweep-50: boss-9-path=0.50 boss-9-0=0.38
+06-b01-sweep-75: boss-9-path=0.75 boss-9-0=0.57
+06-b01-sweep-release: boss-9-path=1.00 boss-9-0=0.76
+07-b01-toll-25: boss-9-0=0.22 boss-9-1=0.18 boss-9-2=0.15
+07-b01-toll-50: boss-9-0=0.41 boss-9-1=0.33 boss-9-2=0.27
+07-b01-toll-75: boss-9-0=0.59 boss-9-1=0.48 boss-9-2=0.40
+07-b01-toll-release: boss-9-1=0.80 boss-9-2=0.67
+07-b01-toll-chain: boss-9-2=0.83
+08-b02-dirge-25: boss-9-0=0.23
+08-b02-dirge-50: boss-9-0=0.42
+08-b02-dirge-75: boss-9-0=0.61
+08-b02-dirge-release:
+09-b02-hymn-25: boss-9=0.28
+09-b02-hymn-50: boss-9=0.53
+09-b02-hymn-75: boss-9=0.78
+09-b02-hymn-release:
+10-b03-blasts-25: boss-9-0=0.27 boss-9-1=0.21 boss-9-2=0.18
+10-b03-blasts-50: boss-9-0=0.54 boss-9-1=0.42 boss-9-2=0.35
+10-b03-blasts-75: boss-9-0=0.77 boss-9-1=0.61 boss-9-2=0.50
+10-b03-blasts-release: hazard-12=0.79 hazard-13=0.65
+10-b03-blasts-chain: hazard-13=0.83
+11-b04-eruption-25: boss-9-0=0.22 boss-9-1=0.18 boss-9-2=0.15
+11-b04-eruption-50: boss-9-0=0.41 boss-9-1=0.33 boss-9-2=0.28
+11-b04-eruption-75: boss-9-0=0.59 boss-9-1=0.49 boss-9-2=0.41
+11-b04-eruption-release: boss-9-1=0.85 boss-9-2=0.72
+11-b04-eruption-chain: boss-9-2=0.85
+12-b05-nova-25: boss-9-0=0.26
+12-b05-nova-50: boss-9-0=0.49
+12-b05-nova-75: boss-9-0=0.72
+12-b05-nova-release:
+13-b05-spikes-25: boss-9-0=0.29 boss-9-1=0.29 boss-9-2=0.29
+13-b05-spikes-50: boss-9-0=0.54 boss-9-1=0.54 boss-9-2=0.54
+13-b05-spikes-75: boss-9-0=0.79 boss-9-1=0.79 boss-9-2=0.79
+13-b05-spikes-release:
+Renderer=Metal
+Screen=1600x900
