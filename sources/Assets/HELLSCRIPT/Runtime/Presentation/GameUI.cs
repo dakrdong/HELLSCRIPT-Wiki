@@ -254,7 +254,6 @@ namespace Hellscript
             RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));ReflowBattleHud();UpdateBattleBrief();
             if(riftMinimap!=null)riftMinimap.SetVerticesDirty();
             if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);
-            if(fieldStatusText!=null)fieldStatusText.text=run.navigationError;
         }
         public void ShowTraining()
         {

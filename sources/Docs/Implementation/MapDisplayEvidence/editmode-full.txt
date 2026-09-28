@@ -1,0 +1,5 @@
+Full EditMode suite, macOS clone of claude/minimap-display-mode (Unity 6000.6.0f1), 2026-09-28:
+4107 tests, 4058 passed, 49 failed.
+- 47 failures are the known baseline list (main 24694040, work/baseline-failures.txt).
+- CoreTests.GeneratedDungeonContainsEnoughPointsAndUniqueEnemyIds(6,150): seeds from the clock and fails for about 26 of 300 seeds on the base as well; not related to this change.
+- LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry: pre-existing on origin/main (RuntimeFirstPlayAcceptance.cs literals). Fixed on this branch by adding the two en.txt rows; LocalizationTests, StoredLocalizationTests and MapDisplaySettingsTests then passed 63/63.

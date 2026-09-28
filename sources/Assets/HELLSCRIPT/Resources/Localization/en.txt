@@ -2554,6 +2554,7 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 변환 내용에 동의하고 계속	Accept the conversion and continue
 저장 위치 선택	Choose a slot
 저장할 프리셋을 선택하세요	Choose the preset slot to save to
+남은 스킬 포인트 {0} P	{0} skill points left
 장착 해제	Unequip
 액티브	Active
 스킬 설명 닫기	Close skill details
@@ -2794,6 +2795,22 @@ Google 로그인을 취소했습니다.	Google sign-in was cancelled.
 로그인 시간이 지났습니다. 다시 시도해 주세요.	Sign-in has expired. Please try again.
 Google 로그인에 실패했습니다. 연결을 확인하고 다시 시도해 주세요.	Google sign-in failed. Check your connection and try again.
 Google 계정으로 로그인하거나 게스트로 시작하세요.	Sign in with Google or continue as a guest.
+
+# Map display style (Settings → Screen)
+지도 표시 방식	Map display
+겹침 지도	Overlay map
+플레이어를 중심으로 발견한 던전 구조를 화면 가운데에 겹쳐 표시합니다.	Draws the explored dungeon over the middle of the screen, centred on the player.
+미니맵 창	Corner minimap
+화면 모서리의 작은 창에 지도를 따로 표시합니다.	Shows the map on its own in a small window in the corner of the screen.
+표시 안 함	Hidden
+지도를 표시하지 않습니다. 탐색 기록은 계속 쌓입니다.	No map is shown. Exploration is still recorded.
+지도 표시 설정은 이 기기에 저장됩니다.	The map display preference is saved on this device.
+지도 표시 설정을 읽지 못해 기본값으로 시작했습니다. 기존 파일은 보존했습니다.	Could not read the map preference. Started with the default and preserved the existing file.
+지도 표시를 적용했지만 기기에 저장하지 못했습니다. 저장을 다시 시도해 주세요.	Applied the map preference but could not save it on this device. Please retry saving.
+
+# First-play acceptance: search terms the native check looks for in the edict editor
+눈보라 검사 순서	Blizzard priority
+눈보라를 공격 순서	move Blizzard
 
 # --- composed at runtime; no source literal holds these ---
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
@@ -3741,12 +3758,6 @@ A/B 비교 중에는 룬 배치를 고정합니다. 비교를 마친 뒤 룬을 
 진행 중인 균열을 먼저 완료하면 보석 서비스를 이용할 수 있습니다.	Complete your suspended rift before using gem services.
 재설정 담당 · 접사 재설정은 장비 상세의 ‘한 줄 재설정’입니다. 보석은 자료 검증 전이라 아직 제공하지 않습니다.	Reroll keeper · an affix reroll is "Reroll one line" on the gear details. Gems are not offered yet, as their data is unverified.
 
-오버레이 지도	Overlay map
-오버레이 지도 표시	Show overlay map
-플레이어를 중심으로 발견한 던전 구조를 화면에 겹쳐 표시합니다. 지도를 꺼도 탐색 기록은 계속 쌓입니다.	Overlay explored dungeon outlines around the player. Exploration continues while the map is hidden.
-지도 표시 설정은 이 기기에 저장됩니다.	The map display preference is saved on this device.
-지도 표시 설정을 읽지 못해 기본값으로 시작했습니다. 기존 파일은 보존했습니다.	Could not read the map preference. Started with the default and preserved the existing file.
-지도 표시를 적용했지만 기기에 저장하지 못했습니다. 저장을 다시 시도해 주세요.	Applied the map preference but could not save it on this device. Please retry saving.
 
 # Global observation HUD and potion catalog
 HP 물약이 없어 사냥 칙령에 따라 출정을 기다립니다.	Waiting to depart: the hunting edict requires an HP potion.
@@ -4621,12 +4632,6 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 배분한 스킬 포인트를 모두 되돌릴까요?	Refund all invested skill points?
 궁극기	Ultimate
 액티브 4칸 · 궁극기 1칸	4 actives · 1 ultimate
-남은 스킬 포인트	Skill points left
-해금 {0}/{1}	Unlocked {0}/{1}
-장착 스킬	Equipped skills
-액티브 {0} · 패시브 {1} · 궁극기 {2}	{0} active · {1} passive · {2} ultimate
-그림자	Shadow
-삼원소	Tri-element
 
 # Gem elixirs
 부서진 행운의 물약	Chipped Fortune Elixir
@@ -5243,5 +5248,3 @@ A 조건: {0}\nB 조건: {1}	A setting: {0}\nB setting: {1}
 운영 보상 지급 조건을 확인해 주세요.	Check the requirements for this operations reward.
 운영 지급 ID가 올바르지 않습니다.	Invalid operations delivery ID.
 눈보라 검사 순서: {0}번째	Blizzard priority: {0}
-눈보라 검사 순서	Blizzard priority
-눈보라를 공격 순서	move Blizzard

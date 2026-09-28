@@ -28,6 +28,7 @@ namespace Hellscript
         }
         void Move(Vector2 p)
         { game.Combat.State.position = p; game.Combat.State.visibility.Update(); game.World.RevealPresentation(game.Combat.State); }
+        Button MapChoice(string id) => game.UI.GetComponentsInChildren<Button>().Single(b => b.name == "settings-map-" + id);
         void Click(string name)
         { game.UI.GetComponentsInChildren<Button>().Single(b => b.name == name).onClick.Invoke(); }
         void CheckOverlay()
@@ -46,17 +47,21 @@ namespace Hellscript
             var args = Environment.GetCommandLineArgs(); int pi = Array.IndexOf(args, "-hellscriptSavePath"), oi = Array.IndexOf(args, "-hellscriptScreenshots");
             Require(pi >= 0 && oi >= 0, "Isolated save and evidence paths are required."); save = args[pi + 1]; output = args[oi + 1]; Directory.CreateDirectory(output);
             yield return new WaitForSecondsRealtime(1); game = FindAnyObjectByType<GameController>();
+            // QA fixture: fresh accounts must play the tutorial first, so the acceptance account is past it, with
+            // guides and attendance popups closed so nothing covers the controls.
+            game.Store.Data.guide.legacyExempt = true; game.Store.Data.guide.hintsHidden = true;
+            game.AttendancePopups.SetHidden(AttendanceKind.Weekly, true, game.Store.AttendanceClock()); game.AttendancePopups.SetHidden(AttendanceKind.Monthly, true, game.Store.AttendanceClock()); game.UI.CloseAttendance();
             if (args.Contains("-hellscriptVisibilityResume"))
             {
-                Require(!game.OverlayMap.Enabled, "Overlay preference did not survive native restart.");
+                Require(game.MapDisplay.Mode == MapDisplayMode.Corner, "Map display preference did not survive native restart.");
                 int remembered = game.Store.Data.suspendedRun.discovery.cells.Count;
                 game.Begin(resume: true); game.Combat.State.paused = true;
                 Require(game.Combat.State.discovery.cells.Count >= remembered, "Native restart lost explored terrain.");
-                Require(game.UI.GetComponentsInChildren<RiftAutomap>().Length == 0, "Disabled overlay returned after restart.");
-                yield return Capture("09-restart"); File.WriteAllText(Path.Combine(output, "restart.txt"), "PASS: explored cells and disabled overlay survived a separate process.\n");
+                Require(game.UI.GetComponentsInChildren<RiftAutomap>().Length == 0, "Overlay returned after the corner choice was restored.");
+                yield return Capture("09-restart"); File.WriteAllText(Path.Combine(output, "restart.txt"), "PASS: explored cells and the corner map choice survived a separate process.\n");
                 Debug.Log("HELLSCRIPT_VISIBILITY_RESTART_OK"); Application.Quit(0); yield break;
             }
-            game.ApplyAspect("16:9"); yield return new WaitForSecondsRealtime(.4f);
+            game.ApplyAspect("16:9"); game.MapDisplay.Apply(MapDisplayMode.Overlay); yield return new WaitForSecondsRealtime(.4f);
             var fixture = new CombatSimulation(game.Store.Data, game.catalog, 1, seed: 7421).State;
             var enemy = fixture.enemies[0]; enemy.position = new Vector2(4, .25f); enemy.speed = 0; fixture.enemies.Clear(); fixture.enemies.Add(enemy);
             var map = new RiftLayout { version = RiftLayout.CurrentVersion, fingerprint = "visibility-acceptance", start = new Vector2(-2.5f,0), gateOpen = true, roamingBoss = true };
@@ -77,22 +82,25 @@ namespace Hellscript
             Move(new Vector2(-4,4)); yield return Capture("03-remembered");
             Require(run.visibility.Explored(new Vector2(5.25f,4.25f)) && !run.visibility.Visible(new Vector2(5,4)), "Remembered terrain lost its separate state.");
             Require(!GameObject.Find("Rift Runtime").transform.Find("visibility-chest").gameObject.activeSelf, "Remembered terrain retained the chest.");
-            game.UI.ShowScreenSettings(); Canvas.ForceUpdateCanvases(); DialogReadingAnchor.Show((RectTransform)game.UI.GetComponentsInChildren<Toggle>().Single(t => t.name == "settings-overlay-map").transform); yield return Capture("04-settings-ko");
-            var toggle = game.UI.GetComponentsInChildren<Toggle>().Single(t => t.name == "settings-overlay-map");
-            var center = Pixels((RectTransform)toggle.transform.Find("Toggle track")).center;var pointer = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left, position = center };
-            var hits = new List<RaycastResult>(); EventSystem.current.RaycastAll(pointer, hits);Require(hits.Count > 0 && hits[0].gameObject.GetComponentInParent<Toggle>() == toggle, "Pointer cannot reach overlay toggle.");
-            toggle.OnPointerClick(pointer); Require(!game.OverlayMap.Enabled && !new OverlayMapSettings(save).Enabled, "Toggle did not apply and persist.");
+            game.UI.ShowScreenSettings(); Canvas.ForceUpdateCanvases(); DialogReadingAnchor.Show((RectTransform)MapChoice("corner").transform); yield return Capture("04-settings-ko");
+            var choice = MapChoice("corner");
+            var center = Pixels((RectTransform)choice.transform).center;var pointer = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left, position = center };
+            var hits = new List<RaycastResult>(); EventSystem.current.RaycastAll(pointer, hits);Require(hits.Count > 0 && hits[0].gameObject.GetComponentInParent<Button>() == choice, "Pointer cannot reach the corner minimap choice.");
+            choice.OnPointerClick(pointer); Require(game.MapDisplay.Mode == MapDisplayMode.Corner && new MapDisplaySettings(save).Mode == MapDisplayMode.Corner, "Map choice did not apply and persist.");
             game.UI.CloseCommonPanel(); yield return Capture("05-overlay-off"); Require(game.UI.GetComponentsInChildren<RiftAutomap>().Length == 0, "Overlay remains visible when disabled.");
             Move(new Vector2(10,4)); int explored = run.discovery.cells.Count; Move(new Vector2(-4,4)); Require(run.discovery.cells.Count >= explored, "Hidden map stopped exploration.");
-            game.ApplyLanguage("en"); game.ApplyAspect("9:16"); yield return new WaitForSecondsRealtime(.4f); game.UI.ShowScreenSettings(); Canvas.ForceUpdateCanvases(); DialogReadingAnchor.Show((RectTransform)game.UI.GetComponentsInChildren<Toggle>().Single(t => t.name == "settings-overlay-map").transform); yield return Capture("06-settings-en-portrait");
-            Require(game.UI.GetComponentsInChildren<Text>().Any(t => t.text == "Show overlay map"), "English toggle label is missing.");
-            toggle = game.UI.GetComponentsInChildren<Toggle>().Single(t => t.name == "settings-overlay-map"); toggle.isOn = true; game.UI.CloseCommonPanel(); yield return Capture("07-overlay-portrait"); CheckOverlay();
-            game.ApplyAspect("16:9"); yield return new WaitForSecondsRealtime(.4f); game.ReturnTown(); game.Begin(seed: 7421); game.Combat.State.paused = false;
+            game.ApplyLanguage("en"); game.ApplyAspect("9:16"); yield return new WaitForSecondsRealtime(.4f); game.UI.ShowScreenSettings(); Canvas.ForceUpdateCanvases(); DialogReadingAnchor.Show((RectTransform)MapChoice("overlay").transform); yield return Capture("06-settings-en-portrait");
+            Require(game.UI.GetComponentsInChildren<Text>().Any(t => t.text == "Overlay map"), "English map choice label is missing.");
+            MapChoice("overlay").onClick.Invoke(); game.UI.CloseCommonPanel(); yield return Capture("07-overlay-portrait"); CheckOverlay();
+            game.ApplyAspect("16:9"); yield return new WaitForSecondsRealtime(.4f); game.ReturnTown(); game.Begin(seed: 7421);
+            // A new rift may wait for its live-ops admission first.
+            for (float until = Time.realtimeSinceStartup + 20; !game.Active && Time.realtimeSinceStartup < until;) yield return null;
+            Require(game.Active, "Generated rift did not start: " + game.Notice); game.Combat.State.paused = false;
             double start = Time.realtimeSinceStartupAsDouble; int frames = Time.frameCount; yield return new WaitForSecondsRealtime(4);
             Require(game.Combat.State.time > 1 && string.IsNullOrEmpty(game.Combat.State.navigationError), "Generated dungeon did not advance.");
             game.Combat.State.paused = true; yield return Capture("08-generated"); CheckOverlay();
-            File.WriteAllText(Path.Combine(output, "runtime.txt"), "PASS: doorway, remembered terrain, hidden props, centered noninteractive overlay, pointer toggle, two languages, two orientations, generated dungeon.\nFrames per second including gameplay: " + (Time.frameCount-frames)/(Time.realtimeSinceStartupAsDouble-start) + "\n");
-            game.OverlayMap.Apply(false); game.Save(); Debug.Log("HELLSCRIPT_VISIBILITY_SMOKE_OK"); Application.Quit(0);
+            File.WriteAllText(Path.Combine(output, "runtime.txt"), "PASS: doorway, remembered terrain, hidden props, centered noninteractive overlay, pointer map choice, two languages, two orientations, generated dungeon.\nFrames per second including gameplay: " + (Time.frameCount-frames)/(Time.realtimeSinceStartupAsDouble-start) + "\n");
+            game.MapDisplay.Apply(MapDisplayMode.Corner); game.Save(); Debug.Log("HELLSCRIPT_VISIBILITY_SMOKE_OK"); Application.Quit(0);
         }
     }
 }
