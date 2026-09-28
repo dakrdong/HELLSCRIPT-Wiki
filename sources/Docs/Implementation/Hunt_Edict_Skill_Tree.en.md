@@ -8,9 +8,9 @@ The Hunt Edict **Skills** tab shows all 37 skills of the current class, arranged
 
 There are four equipped normal active slots and one separate ultimate slot. At most one ultimate can be selected. Every unlocked passive with an assigned rank applies automatically, so there is no passive equipment area. Existing version 3 free base ranks count as assigned ranks. The combat HUD reads the same four normal slots, separate ultimate slot and actual cooldowns.
 
-Selecting an equipped active opens **Remove skill** and **Edit hunt edict**. Editing opens that skill's automatic use and policy settings. Returning to the tree preserves the draft. The separate skill-edict subtab is removed. Basic attack and attack priority remain available under **Attack settings**.
+Selecting an equipped active opens **Remove skill** and **Edit hunt edict**. Editing opens that skill's preset tabs and combat examples. Custom Settings has detailed controls without an example image; edits save immediately after activation. Returning to the tree preserves the saved policy. The separate skill-edict subtab is removed. Basic attack and attack priority remain available under **Attack settings**.
 
-Landscape puts the tree on the left, the inspector at the top of the right column and the skill bar beneath it. Portrait puts the tree on top, fixes the skill bar at the bottom and opens the inspector between them when a skill is selected. Equipped slots, main navigation and save controls stay fixed. The tree, details and policy content scroll separately. The per-skill policy page also keeps the skill bar at the bottom. Korean, English and larger text are supported.
+Landscape puts the tree on the left, the inspector at the top of the right column and the skill bar beneath it. Portrait puts the tree on top, fixes the skill bar at the bottom and opens the inspector between them when a skill is selected. Equipped slots, main navigation and skill-tree save controls stay fixed. The tree, details and policy content scroll separately. The per-skill policy page removes the manual-save footer and moves its skill bar to a right-hand vertical rail in landscape, retaining the bottom dock in portrait. Korean, English and larger text are supported.
 
 ## Traditional hack-and-slash tree (2026-09-27 redesign)
 
@@ -36,7 +36,7 @@ The existing six passives are evaluated by `HeroStats`; expanded passives use th
 
 ## Persistence and compatibility
 
-The detached `HuntEdictEditSession` draft is validated and atomically saved by `GameStore.CommitHuntEdict`. Ranks, four slot positions, ultimate, automatic use, skill policies, attack order and global edict settings are saved together. Reflow and language changes never save.
+The detached `HuntEdictEditSession` draft is validated and atomically saved by `GameStore.CommitHuntEdict`. Ranks, four slot positions, ultimate, automatic use, skill policies, attack order and global edict settings are saved together. Reflow and language changes never save. On the skill-policy page, `SaveSkillPolicy` saves only the selected skill policy through the same transaction, preserving other pending rank, equipment and global edits. See [quick presets](Hunt_Edict_Quick_Presets.en.md) for preview tabs, active markers, combat examples and Custom Settings.
 
 Existing player configurations use `ClassSkillLoadout` version 3; explicitly reset allocations use version 4. Production startup atomically upgrades owned heroes and preserves the original build. Investments below the new unlock level are refunded to free base rank. Existing version 1–2 development fixtures retain their original meaning. A legacy suspended run retains its snapshot; explicitly editing its skills uses the existing live-change transaction to adopt the tree.
 

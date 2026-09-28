@@ -37,7 +37,7 @@ Pass `EquipmentViewSource.Owned`, `Draft`, `BattleSnapshot`, `Catalog` or `Rewar
 
 Keep the original 25 groups and 130 global option IDs, values and ranges. Auto Equip and automatic cleanup share warehouse admission and full-warehouse repeat handling. [Auto Equip](Recommended_Equipment.en.md) adds a tab in the same window with 10 groups, 20 recommendation options and one warehouse-admission option, bringing the totals to 35 and 151. Changes use the existing draft and fixed Save/Revert actions. Landscape uses category, summary list and selected editor with independent scrolling. Portrait slides between summary and detail and restores list position. Search names/help/IDs across categories; optionally show changed groups only.
 
-Show current choices, numbers, sets and priorities compactly; open controls on demand. Disabled conditions remain explained inline. Skill rows show icon/name/rank/equipped state while commands belong to selected details. New skill design remains excluded. Keep dirty state, revert and save in a fixed footer. Navigation preserves drafts; close/preset replacement asks about unsaved edits.
+Show current choices, numbers, sets and priorities compactly; open controls on demand. Disabled conditions remain explained inline. Skill rows show icon/name/rank/equipped state while commands belong to selected details. New skill design remains excluded. Keep dirty state, revert and save in a fixed footer except on the skill-policy page, which uses a fixed activation action and scoped immediate saves through the existing transaction. Pending ranks, equipment and global settings stay detached. Navigation preserves drafts; close/preset replacement asks about unsaved edits.
 
 Opening the window lands on the **Overview** tab: three combat styles, advice from the last hunt, equipped skills with their use policies, the seven combat-judgment groups and the automation status. A style is a bundle of existing quick presets and advice reads only stored combat records; both edit the draft and go through the existing Save/Revert. See [Hunt Edict overview](Hunt_Edict_Overview.en.md).
 
@@ -84,7 +84,7 @@ Since the 2026-09-27 redesign, the tree is a dedicated layout that draws three b
 
 Equipped-skill actions use a compact menu anchored to the pressed socket within this window. They reuse its buttons, theme, back handling and draft; reflow reads the same socket's rebuilt coordinates. A transparent outside-click layer neither dims the screen nor activates controls underneath. Save confirmations and normal option pickers retain their centered layout.
 
-Per-item quick presets use the same draft and selection dialog. A recipe replaces only its own option values; opening Custom Settings or navigating never saves. See the [quick preset coverage and verification](Hunt_Edict_Quick_Presets.en.md).
+Global-group quick presets retain the existing draft and selection dialog. Skill policies use fixed preview tabs, a separate activation action and immediate scoped saving. The active check follows the saved owner, while browsing never saves. `SkillPresetExampleView` draws read-only tactical diagrams with shared icons/graphics; Custom Settings shows detailed controls without an image. Narrow layouts wrap the fixed tabs. This remains an adapter within the existing window, preserving unrelated drafts and shared theme/fonts/window ownership. See the [quick preset coverage and verification](Hunt_Edict_Quick_Presets.en.md).
 
 ## Rift entry adapter
 

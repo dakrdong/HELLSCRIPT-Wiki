@@ -1,0 +1,1059 @@
+{
+  "count": 174,
+  "skillExamples": 162,
+  "basicExamples": 9,
+  "orderExamples": 3,
+  "renderer": "SkillPresetExampleView using SkillTreeGraphic and existing SkillIconView sprites",
+  "custom": "Detailed controls only; no example image.",
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json": "a3efa8be46fe35913514f1a6382c9fdea63194760b91e74a4bf3acaa232e239c",
+    "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json": "43526be1f9d4310078006f244364d2a0fb575d74f6de29d27bd30171674a953b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillPresetExampleView.cs": "d0273974f106f739eca771c694702a240ba428c81abc7b35f7297ab7f97ee357"
+  },
+  "examples": [
+    {
+      "scope": "skill/W01",
+      "preset": "center",
+      "name": "빠른 중앙 침투",
+      "nameEn": "Quick center entry"
+    },
+    {
+      "scope": "skill/W01",
+      "preset": "edge",
+      "name": "생존 우선 전투",
+      "nameEn": "Survival-first combat"
+    },
+    {
+      "scope": "skill/W01",
+      "preset": "stand",
+      "name": "제자리 집중 회전",
+      "nameEn": "Stationary spin"
+    },
+    {
+      "scope": "skill/W02",
+      "preset": "dense",
+      "name": "무리 중심 진입",
+      "nameEn": "Land in the pack"
+    },
+    {
+      "scope": "skill/W02",
+      "preset": "escape",
+      "name": "생존 이탈용 보존",
+      "nameEn": "Reserve for escape"
+    },
+    {
+      "scope": "skill/W02",
+      "preset": "balanced",
+      "name": "공격과 이탈 겸용",
+      "nameEn": "Attack and escape"
+    },
+    {
+      "scope": "skill/W03",
+      "preset": "group",
+      "name": "무리 한 번에 분쇄",
+      "nameEn": "Crush the pack"
+    },
+    {
+      "scope": "skill/W03",
+      "preset": "elite",
+      "name": "정예 집중 타격",
+      "nameEn": "Focus elite targets"
+    },
+    {
+      "scope": "skill/W03",
+      "preset": "charge",
+      "name": "충전 연계 분쇄",
+      "nameEn": "Crush with a charge"
+    },
+    {
+      "scope": "skill/W04",
+      "preset": "group",
+      "name": "무리 제어",
+      "nameEn": "Control packs"
+    },
+    {
+      "scope": "skill/W04",
+      "preset": "interrupt",
+      "name": "위험 시전 차단",
+      "nameEn": "Interrupt dangerous casts"
+    },
+    {
+      "scope": "skill/W04",
+      "preset": "retreat",
+      "name": "후퇴 지원",
+      "nameEn": "Cover a retreat"
+    },
+    {
+      "scope": "skill/W05",
+      "preset": "prevent",
+      "name": "위험 미리 대비",
+      "nameEn": "Prevent damage"
+    },
+    {
+      "scope": "skill/W05",
+      "preset": "chain",
+      "name": "방어 시간 늘리기",
+      "nameEn": "Extend protection"
+    },
+    {
+      "scope": "skill/W05",
+      "preset": "emergency",
+      "name": "긴급 생존용",
+      "nameEn": "Emergency protection"
+    },
+    {
+      "scope": "skill/W06",
+      "preset": "balanced",
+      "name": "자원과 공격 보완",
+      "nameEn": "Resource and damage support"
+    },
+    {
+      "scope": "skill/W06",
+      "preset": "resource",
+      "name": "자원 보충 집중",
+      "nameEn": "Focus on resource recovery"
+    },
+    {
+      "scope": "skill/W06",
+      "preset": "boss",
+      "name": "보스 공격 준비",
+      "nameEn": "Prepare for the boss"
+    },
+    {
+      "scope": "skill/A01",
+      "preset": "steady",
+      "name": "한 명도 빠르게 관통",
+      "nameEn": "Pierce without waiting"
+    },
+    {
+      "scope": "skill/A01",
+      "preset": "pack",
+      "name": "두 명 이상 관통",
+      "nameEn": "Pierce multiple enemies"
+    },
+    {
+      "scope": "skill/A01",
+      "preset": "elite",
+      "name": "정예 집중 관통",
+      "nameEn": "Pierce priority enemies"
+    },
+    {
+      "scope": "skill/A02",
+      "preset": "pack",
+      "name": "무리 정리",
+      "nameEn": "Clear packs"
+    },
+    {
+      "scope": "skill/A02",
+      "preset": "focus",
+      "name": "한 대상 집중",
+      "nameEn": "Focus one target"
+    },
+    {
+      "scope": "skill/A02",
+      "preset": "safe",
+      "name": "먼 거리 사격",
+      "nameEn": "Fire from range"
+    },
+    {
+      "scope": "skill/A03",
+      "preset": "pack",
+      "name": "무리 중심 매복",
+      "nameEn": "Trap the pack"
+    },
+    {
+      "scope": "skill/A03",
+      "preset": "renew",
+      "name": "덫 위치 갱신",
+      "nameEn": "Refresh trap positions"
+    },
+    {
+      "scope": "skill/A03",
+      "preset": "defend",
+      "name": "추격 경로 차단",
+      "nameEn": "Trap pursuing enemies"
+    },
+    {
+      "scope": "skill/A04",
+      "preset": "safe",
+      "name": "안전 거리 복구",
+      "nameEn": "Restore a safe distance"
+    },
+    {
+      "scope": "skill/A04",
+      "preset": "trap",
+      "name": "자기 덫으로 유도",
+      "nameEn": "Lure onto your trap"
+    },
+    {
+      "scope": "skill/A04",
+      "preset": "escape",
+      "name": "생존용 보존",
+      "nameEn": "Reserve for survival"
+    },
+    {
+      "scope": "skill/A05",
+      "preset": "elite",
+      "name": "강한 적 표식 유지",
+      "nameEn": "Maintain a priority mark"
+    },
+    {
+      "scope": "skill/A05",
+      "preset": "switch",
+      "name": "대상마다 빠른 표식",
+      "nameEn": "Mark each new target"
+    },
+    {
+      "scope": "skill/A05",
+      "preset": "health",
+      "name": "체력 높은 적 공략",
+      "nameEn": "Mark high-health targets"
+    },
+    {
+      "scope": "skill/A06",
+      "preset": "steady",
+      "name": "평소 사격 강화",
+      "nameEn": "Empower everyday shots"
+    },
+    {
+      "scope": "skill/A06",
+      "preset": "elite",
+      "name": "정예 관통 연계",
+      "nameEn": "Empower elite piercing"
+    },
+    {
+      "scope": "skill/A06",
+      "preset": "poison",
+      "name": "독 전염 사격",
+      "nameEn": "Spread poison with volleys"
+    },
+    {
+      "scope": "skill/M01",
+      "preset": "steady",
+      "name": "꾸준히 발사",
+      "nameEn": "Steady fire"
+    },
+    {
+      "scope": "skill/M01",
+      "preset": "pack",
+      "name": "폭발 효율 우선",
+      "nameEn": "Maximize explosions"
+    },
+    {
+      "scope": "skill/M01",
+      "preset": "elite",
+      "name": "정예 집중 화력",
+      "nameEn": "Focus on elites"
+    },
+    {
+      "scope": "skill/M02",
+      "preset": "area",
+      "name": "새 영역 확보",
+      "nameEn": "Cover new ground"
+    },
+    {
+      "scope": "skill/M02",
+      "preset": "keep",
+      "name": "대상 위 눈보라 유지",
+      "nameEn": "Maintain Blizzard on target"
+    },
+    {
+      "scope": "skill/M02",
+      "preset": "defend",
+      "name": "접근 경로 차단",
+      "nameEn": "Cover approach paths"
+    },
+    {
+      "scope": "skill/M03",
+      "preset": "steady",
+      "name": "단독 적도 공격",
+      "nameEn": "Attack isolated enemies"
+    },
+    {
+      "scope": "skill/M03",
+      "preset": "linked",
+      "name": "연결 무리 집중",
+      "nameEn": "Focus linked packs"
+    },
+    {
+      "scope": "skill/M03",
+      "preset": "charge",
+      "name": "충전 낭비 줄이기",
+      "nameEn": "Conserve charges"
+    },
+    {
+      "scope": "skill/M04",
+      "preset": "survival",
+      "name": "생존용 보존",
+      "nameEn": "Reserve for survival"
+    },
+    {
+      "scope": "skill/M04",
+      "preset": "distance",
+      "name": "거리 조정 겸용",
+      "nameEn": "Also adjust distance"
+    },
+    {
+      "scope": "skill/M04",
+      "preset": "sparse",
+      "name": "빈 공간으로 이탈",
+      "nameEn": "Escape to Open Space"
+    },
+    {
+      "scope": "skill/M05",
+      "preset": "prevent",
+      "name": "위험 미리 대비",
+      "nameEn": "Prevent damage"
+    },
+    {
+      "scope": "skill/M05",
+      "preset": "chain",
+      "name": "보호막 이어 쓰기",
+      "nameEn": "Chain shields"
+    },
+    {
+      "scope": "skill/M05",
+      "preset": "emergency",
+      "name": "긴급 생존용",
+      "nameEn": "Emergency protection"
+    },
+    {
+      "scope": "skill/M06",
+      "preset": "here",
+      "name": "제자리 빙결",
+      "nameEn": "Freeze in place"
+    },
+    {
+      "scope": "skill/M06",
+      "preset": "approach",
+      "name": "무리로 접근 후 빙결",
+      "nameEn": "Approach and freeze"
+    },
+    {
+      "scope": "skill/M06",
+      "preset": "charge",
+      "name": "연쇄 충전 연계",
+      "nameEn": "Set up chain charges"
+    },
+    {
+      "scope": "skill/W07",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W07",
+      "preset": "opportunity",
+      "name": "자원 50% 이하에서",
+      "nameEn": "Below 50% resource"
+    },
+    {
+      "scope": "skill/W07",
+      "preset": "setup",
+      "name": "공격 예고에 대응",
+      "nameEn": "React to a windup"
+    },
+    {
+      "scope": "skill/W08",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W08",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/W08",
+      "preset": "setup",
+      "name": "먼 적에게 사용",
+      "nameEn": "Use against distant enemies"
+    },
+    {
+      "scope": "skill/W09",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W09",
+      "preset": "opportunity",
+      "name": "새 대상에게 분배",
+      "nameEn": "Spread to new targets"
+    },
+    {
+      "scope": "skill/W09",
+      "preset": "setup",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses"
+    },
+    {
+      "scope": "skill/W10",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W10",
+      "preset": "opportunity",
+      "name": "출혈 즉시 회수",
+      "nameEn": "Cash bleed out early"
+    },
+    {
+      "scope": "skill/W10",
+      "preset": "setup",
+      "name": "출혈 종료·회복에 맞추기",
+      "nameEn": "Time bleed expiry or healing"
+    },
+    {
+      "scope": "skill/W11",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W11",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/W11",
+      "preset": "setup",
+      "name": "먼 적에게 사용",
+      "nameEn": "Use against distant enemies"
+    },
+    {
+      "scope": "skill/W12",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W12",
+      "preset": "opportunity",
+      "name": "공격 예고에 대응",
+      "nameEn": "React to a windup"
+    },
+    {
+      "scope": "skill/W12",
+      "preset": "setup",
+      "name": "HP가 낮을 때 사용",
+      "nameEn": "Use at low health"
+    },
+    {
+      "scope": "skill/W13",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W13",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/W13",
+      "preset": "setup",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/W14",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W14",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/W14",
+      "preset": "setup",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/W15",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W15",
+      "preset": "opportunity",
+      "name": "자원 30% 이하에서",
+      "nameEn": "Below 30% resource"
+    },
+    {
+      "scope": "skill/W15",
+      "preset": "setup",
+      "name": "자원 75% 이하에서",
+      "nameEn": "Below 75% resource"
+    },
+    {
+      "scope": "skill/W16",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W16",
+      "preset": "opportunity",
+      "name": "보호막이 없을 때",
+      "nameEn": "When no shield remains"
+    },
+    {
+      "scope": "skill/W16",
+      "preset": "setup",
+      "name": "둔화 해제용 보존",
+      "nameEn": "Reserve for cleansing slow"
+    },
+    {
+      "scope": "skill/W17",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W17",
+      "preset": "opportunity",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses"
+    },
+    {
+      "scope": "skill/W17",
+      "preset": "setup",
+      "name": "HP가 낮을 때 사용",
+      "nameEn": "Use at low health"
+    },
+    {
+      "scope": "skill/W18",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/W18",
+      "preset": "opportunity",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/W18",
+      "preset": "setup",
+      "name": "함성 강화에 맞추기",
+      "nameEn": "Align with the shout"
+    },
+    {
+      "scope": "skill/A07",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A07",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A07",
+      "preset": "setup",
+      "name": "사용 후 자원 40% 보존",
+      "nameEn": "Leave 40% resource after casting"
+    },
+    {
+      "scope": "skill/A08",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A08",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A08",
+      "preset": "setup",
+      "name": "표식과 긴 거리 확보",
+      "nameEn": "Require a mark and distance"
+    },
+    {
+      "scope": "skill/A09",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A09",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A09",
+      "preset": "setup",
+      "name": "새로운 제어 우선",
+      "nameEn": "Prefer new control"
+    },
+    {
+      "scope": "skill/A10",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A10",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A10",
+      "preset": "setup",
+      "name": "중독 후 빙결",
+      "nameEn": "Freeze after poison"
+    },
+    {
+      "scope": "skill/A11",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A11",
+      "preset": "opportunity",
+      "name": "근접한 적에 대응",
+      "nameEn": "React to nearby enemies"
+    },
+    {
+      "scope": "skill/A11",
+      "preset": "setup",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/A12",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A12",
+      "preset": "opportunity",
+      "name": "근접한 적에 대응",
+      "nameEn": "React to nearby enemies"
+    },
+    {
+      "scope": "skill/A12",
+      "preset": "setup",
+      "name": "HP가 낮을 때 사용",
+      "nameEn": "Use at low health"
+    },
+    {
+      "scope": "skill/A13",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A13",
+      "preset": "opportunity",
+      "name": "새 대상에게 분배",
+      "nameEn": "Spread to new targets"
+    },
+    {
+      "scope": "skill/A13",
+      "preset": "setup",
+      "name": "표식 대상 집중",
+      "nameEn": "Focus the marked target"
+    },
+    {
+      "scope": "skill/A14",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A14",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A14",
+      "preset": "setup",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/A15",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A15",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A15",
+      "preset": "setup",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses"
+    },
+    {
+      "scope": "skill/A16",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A16",
+      "preset": "opportunity",
+      "name": "자원 30% 이하에서",
+      "nameEn": "Below 30% resource"
+    },
+    {
+      "scope": "skill/A16",
+      "preset": "setup",
+      "name": "유료 스킬 직전에",
+      "nameEn": "Before a paid skill"
+    },
+    {
+      "scope": "skill/A17",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A17",
+      "preset": "opportunity",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses"
+    },
+    {
+      "scope": "skill/A17",
+      "preset": "setup",
+      "name": "제어된 무리 기다리기",
+      "nameEn": "Wait for a controlled group"
+    },
+    {
+      "scope": "skill/A18",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/A18",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/A18",
+      "preset": "setup",
+      "name": "사용 후 자원 70% 보존",
+      "nameEn": "Leave 70% resource after casting"
+    },
+    {
+      "scope": "skill/M07",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M07",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M07",
+      "preset": "setup",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/M08",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M08",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M08",
+      "preset": "setup",
+      "name": "제어된 적 기다리기",
+      "nameEn": "Wait for control"
+    },
+    {
+      "scope": "skill/M09",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M09",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M09",
+      "preset": "setup",
+      "name": "둔화 후 빙결",
+      "nameEn": "Freeze after a slow"
+    },
+    {
+      "scope": "skill/M10",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M10",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M10",
+      "preset": "setup",
+      "name": "제어된 적 기다리기",
+      "nameEn": "Wait for control"
+    },
+    {
+      "scope": "skill/M11",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M11",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M11",
+      "preset": "setup",
+      "name": "연쇄 번개 준비 후",
+      "nameEn": "After Chain Lightning is ready"
+    },
+    {
+      "scope": "skill/M12",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M12",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M12",
+      "preset": "setup",
+      "name": "연쇄 번개 적중 후",
+      "nameEn": "After Chain Lightning hits"
+    },
+    {
+      "scope": "skill/M13",
+      "preset": "native",
+      "name": "기본 충전",
+      "nameEn": "Standard recovery"
+    },
+    {
+      "scope": "skill/M13",
+      "preset": "hold",
+      "name": "제자리 빠른 충전",
+      "nameEn": "Quick recovery in place"
+    },
+    {
+      "scope": "skill/M13",
+      "preset": "retreat",
+      "name": "안전 확보 후 충분히 충전",
+      "nameEn": "Retreat and recharge"
+    },
+    {
+      "scope": "skill/M14",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M14",
+      "preset": "opportunity",
+      "name": "보호막이 없을 때",
+      "nameEn": "When no shield remains"
+    },
+    {
+      "scope": "skill/M14",
+      "preset": "setup",
+      "name": "HP가 낮을 때 사용",
+      "nameEn": "Use at low health"
+    },
+    {
+      "scope": "skill/M15",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M15",
+      "preset": "opportunity",
+      "name": "자원 30% 이하에서",
+      "nameEn": "Below 30% resource"
+    },
+    {
+      "scope": "skill/M15",
+      "preset": "setup",
+      "name": "세 원소 빌드에서 사용",
+      "nameEn": "Use with three elements"
+    },
+    {
+      "scope": "skill/M16",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M16",
+      "preset": "opportunity",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available"
+    },
+    {
+      "scope": "skill/M16",
+      "preset": "setup",
+      "name": "여러 적을 기다리기",
+      "nameEn": "Wait for several targets"
+    },
+    {
+      "scope": "skill/M17",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M17",
+      "preset": "opportunity",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses"
+    },
+    {
+      "scope": "skill/M17",
+      "preset": "setup",
+      "name": "원소 강화 기다리기",
+      "nameEn": "Wait for elemental empowerment"
+    },
+    {
+      "scope": "skill/M18",
+      "preset": "native",
+      "name": "기본 칙령",
+      "nameEn": "Default edict"
+    },
+    {
+      "scope": "skill/M18",
+      "preset": "opportunity",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses"
+    },
+    {
+      "scope": "skill/M18",
+      "preset": "setup",
+      "name": "세 원소 순환 준비 후",
+      "nameEn": "Prepare a three-element cycle"
+    },
+    {
+      "scope": "basic/WARRIOR",
+      "preset": "fill",
+      "name": "스킬 사이 공격",
+      "nameEn": "Fill between skills"
+    },
+    {
+      "scope": "basic/WARRIOR",
+      "preset": "resource",
+      "name": "자원 보충 우선",
+      "nameEn": "Recover resources"
+    },
+    {
+      "scope": "basic/WARRIOR",
+      "preset": "finish",
+      "name": "약한 적 마무리",
+      "nameEn": "Finish weak enemies"
+    },
+    {
+      "scope": "basic/RANGER",
+      "preset": "fill",
+      "name": "스킬 사이 공격",
+      "nameEn": "Fill between skills"
+    },
+    {
+      "scope": "basic/RANGER",
+      "preset": "resource",
+      "name": "자원 보충 우선",
+      "nameEn": "Recover resources"
+    },
+    {
+      "scope": "basic/RANGER",
+      "preset": "finish",
+      "name": "약한 적 마무리",
+      "nameEn": "Finish weak enemies"
+    },
+    {
+      "scope": "basic/MAGE",
+      "preset": "fill",
+      "name": "스킬 사이 공격",
+      "nameEn": "Fill between skills"
+    },
+    {
+      "scope": "basic/MAGE",
+      "preset": "resource",
+      "name": "자원 보충 우선",
+      "nameEn": "Recover resources"
+    },
+    {
+      "scope": "basic/MAGE",
+      "preset": "finish",
+      "name": "약한 적 마무리",
+      "nameEn": "Finish weak enemies"
+    },
+    {
+      "scope": "order",
+      "preset": "slots",
+      "name": "장착 순서대로",
+      "nameEn": "Equipment slot order"
+    },
+    {
+      "scope": "order",
+      "preset": "ultimate-first",
+      "name": "궁극기 우선",
+      "nameEn": "Ultimate first"
+    },
+    {
+      "scope": "order",
+      "preset": "basic-first",
+      "name": "기본 공격 우선",
+      "nameEn": "Basic attack first"
+    }
+  ]
+}

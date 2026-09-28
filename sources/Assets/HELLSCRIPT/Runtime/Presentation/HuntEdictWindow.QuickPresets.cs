@@ -14,6 +14,7 @@ namespace Hellscript
         readonly Dictionary<string,string> chosenQuickPresets=new Dictionary<string,string>();
         public string QuickPresetSelection(string scope)
         {
+            if(HuntEdictSkillPresets.Owns(scope))return HuntEdictSkillPresets.Active(Session.Draft,scope);
             if(customQuickScopes.Contains(scope))return HuntEdictQuickPresets.Custom;
             if(chosenQuickPresets.TryGetValue(scope,out var id)&&HuntEdictQuickPresets.Matches(Session.Draft,scope,id))return id;
             return HuntEdictQuickPresets.Match(Session.Draft,scope);

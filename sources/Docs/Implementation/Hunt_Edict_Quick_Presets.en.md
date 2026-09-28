@@ -1,23 +1,62 @@
 # Hunt Edict quick presets
 
-Updated: 2026-09-24
+Updated: 2026-09-29 · [한국어](Hunt_Edict_Quick_Presets.md)
 
-Each configurable item offers named recipes and a final **Custom Settings** choice. Selecting a recipe updates only that item's detached draft; **Save** commits through the existing transaction. Custom Settings preserves current values and exposes every detailed option. The preset dialog describes each recipe before selection.
+Each item offers named recipes and a final **Custom Settings** tab. Skills, basic attacks and common attack order use tabs with descriptions and combat examples. **Activate preset** applies and immediately saves the previewed recipe; editing active Custom Settings also saves immediately. Global groups retain their existing picker and Save/Revert workflow.
 
-## Coverage and behavior
+## Skill tabs and combat examples
 
-- The 25 global groups cover all 130 existing options. There are also 54 active/ultimate skill scopes, three class-specific basic attack scopes, and one common attack-order scope: 83 scopes and 249 recipes across the three classes.
-- Only equipped skills appear in the UI. Always-on passives have no configurable edict policy and receive no artificial selector.
-- A recipe replaces every field in its scope, filling unspecified fields from the option catalog defaults. It preserves other groups, skill slots, investments and unrelated skill policies. Required survival references resolve to an eligible equipped skill; absent skills remain unassigned.
-- Custom Settings is always last. Choosing it alone never changes values or makes the draft dirty. Existing values that match no recipe initially show Current Settings with details collapsed. Selecting the final Custom Settings entry explicitly expands them. Search opens the matching group in Custom Settings so every matched option remains reachable.
-- Reopening derives the label from actual values; Custom view state is not a new account field. Saving, reverting, five-slot presets and HED5 sharing use the existing owners. A recipe name is never a second combat policy or a replacement for the stored settings.
-- Whirlwind's **Quick center entry** uses a skill-local `CENTER` movement policy, moving toward the nearest legal gap around the centroid of observed enemies within five meters of the selected target. **Survival-first combat** uses the existing edge orbit. Both retain hazard, pursuit and navigation gates; they do not change global positioning or movement speed.
+- Three recipe tabs plus Custom Settings stay fixed. Landscape uses one row and portrait two rows; only the description or detailed controls scroll.
+- The gold tab is the page being viewed; the green check marks the actually saved, active preset. Browsing tabs never changes or saves values.
+- The activation action stays in the same position on every tab. The applied tab says **Active**. A failed write keeps the previous active marker and values and reports the error.
+- All 54 active/ultimate skills have three examples each: 162 skill examples. Nine class-specific basic-attack examples and three common-order examples bring the total to 174. Circles represent the hero, diamonds enemies, and arrows movement/attacks. Scenes explain packs, elites, marks/control, shields, resource/HP conditions, movement, retreat, charging and attack order.
+- The game draws examples using existing skill icons and `SkillTreeGraphic` lines, rings and shapes. No raster generation model or new bitmap assets are used. Conditions and thresholds read the existing recipe/policy definitions; illustrative placement does not simulate or predict a battle outcome.
+- **Custom Settings has no example picture.** Detailed controls are visible before activation, and become editable after activation. Each selected option, confirmed number, or completed common-order drag is then saved immediately.
+- The skill-policy page has no Save/Revert footer. Equipped skills form a right-hand rail in landscape and remain in a bottom dock in portrait. Skill-tree investment/equipment and other categories retain their existing explicit-save workflow.
+
+## Coverage and persistence
+
+- Definitions cover the original 25 global groups and 130 options, 54 active/ultimate skills, three class basic-attack scopes and one common-order scope: 83 scopes and 249 recipes. A later change gives full-warehouse handling dedicated controls, leaving 24 global groups with a preset picker.
+- Only equipped skills appear. Always-on passives without an edict policy do not receive artificial presets.
+- Each recipe fills its entire scope, using catalog defaults for unspecified fields. Survival references resolve to eligible equipped skills and remain unassigned when none exist.
+- Skill auto-save uses a separate transaction that copies only the edited policy into the actual owner. It does not commit unrelated skill policies, pending ranks, equipment, global settings or a pending whole-preset slot selection. Those drafts remain pending; Revert cannot undo a policy already saved by this page.
+- Existing `GameStore.CommitHuntEdict` updates the currently owned whole-preset slot. A different pending slot stays pending. Live battles preserve health ratio, spent cooldowns and pause state; training/comparison keep their existing dedicated owners.
+- Optional `ClassSkillLoadout.presetSelections` stores explicit activation, including Custom. Custom reopens after restart/share even when its values match a named recipe. Older saves and share codes may omit the field. Unmatched old values remain applied while the first recipe is previewed, with the active check on Custom Settings.
+- Global-group Custom still only expands existing values and keeps its view state unsaved. Search opens the matching group in Custom Settings.
+- Whirlwind's **Quick center entry** uses skill-local `CENTER` movement toward a legal gap near the centroid of observed enemies within five meters of the selected target. **Survival-first combat** keeps the existing edge orbit. Both preserve hazard, pursuit and navigation gates without changing global positioning or movement speed.
 
 ## Ownership
 
-`HuntEdictQuickPresets` reads `Resources/HuntEdictQuickPresets.json` for curated recipes. Native skill policies reuse bilingual choices from `Resources/Data/ClassSkills.json`; Mana Charging recipes bind both its use policy and recovery goal. `HuntEdictWindow.QuickPresets` presents the selector using existing shared buttons, theme, modal and scroll owners. `HuntEdictEditSession` owns the draft; `GameStore.CommitHuntEdict` owns saving. No new save fields, rank mutations, currency operations, textures or window framework are introduced.
+`HuntEdictQuickPresets` and `Resources/HuntEdictQuickPresets.json` own recipes. Expanded skills reuse bilingual choices in `Resources/Data/ClassSkills.json`; Mana Recovery binds both use policy and recovery goal. `HuntEdictSkillPresets` validates active tabs and copies one policy. `HuntEdictEditSession.SaveSkillPolicy` invokes the existing atomic save callback and preserves owner/draft on failure.
 
-Sources: [curated recipes](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [scope/application owner](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [UI adapter](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.QuickPresets.cs), [Whirlwind movement](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
+The page remains an adapter within `HuntEdictWindow`, reusing shared buttons, theme, fonts and scrolling. `SkillPresetExampleView` receives recipe/loadout inputs and draws a read-only diagram without account access. HED4/HED5 preserve explicit tabs while continuing to read old codes and reject unknown fields.
+
+Sources: [recipes](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [scope/application](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [activation/policy copy](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictSkillPresets.cs), [preset page](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.SkillPresets.cs), [examples](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillPresetExampleView.cs), [Whirlwind movement](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
+
+## Tab and auto-save verification, 2026-09-29
+
+**146 focused Unity Edit Mode tests** and **9 shared UI regression tests** passed, together with the UI ownership check. The macOS Development build has zero compilation errors. This covers the changed UI, presets, transactions, sharing, class skills and localization, not the complete game suite.
+
+The native game used real uGUI raycasts and pointer down/up/click events to open, activate and save **all 174 examples**. The **20 layout combinations** cover 440×956 portrait, 956×440 landscape, 1600×900, 1600×1000 and 2100×900, Korean/English, and 100%/150% text. All four recipe tabs, the fixed activation action and main navigation stay visible without scrolling. The action does not move between tabs. Custom shows detailed controls without a picture.
+
+An intentionally failed disk write kept the previous active tab and values and allowed retry. Pending ranks, equipment and global settings were not captured by a skill auto-save. Read-only matching also resolves saved policies for a skill equipped only in the draft, without learning or equipping it on the owner. A common attack-order card drag saved on drop; a fresh player process restored the last Custom option, explicit tab and dragged order. Regression runs also covered the 24 global picker groups, pending-equipment policies, socket actions and the existing skill-tree allocation/save/restart flow. The injected failure remains in the logs; only the development-console overlay was hidden for captures.
+
+No live Unity Editor instance was connected, so verification used the existing project batch/build tools and a macOS player with isolated saves. The user's account save was untouched. Physical-phone/tablet touch input and performance remain unverified.
+
+- [Edit Mode results](HuntEdictSkillPresetEvidence/editmode.xml) · [Build](HuntEdictSkillPresetEvidence/build.txt) · [Native interaction](HuntEdictSkillPresetEvidence/runtime.txt) · [Restart](HuntEdictSkillPresetEvidence/restart.txt)
+- [174-example catalog and source hashes](HuntEdictSkillPresetEvidence/examples.json)
+
+![Landscape: Whirlwind center-entry preset](HuntEdictSkillPresetEvidence/preset-final-center.png)
+
+![Custom: detailed controls without an example image](HuntEdictSkillPresetEvidence/preset-restart.png)
+
+![Portrait: preview and active tab remain distinct](HuntEdictSkillPresetEvidence/preset-440x956-ko-100.png)
+
+![Short landscape: complete example at English 150%](HuntEdictSkillPresetEvidence/preset-956x440-en-150.png)
+
+![Frost Snare: follow poison with freeze](HuntEdictSkillPresetEvidence/example-A10-setup.png)
+
+![Mana Recovery: retreat and recover more mana](HuntEdictSkillPresetEvidence/example-M13-retreat.png)
 
 ## Recipe catalog
 

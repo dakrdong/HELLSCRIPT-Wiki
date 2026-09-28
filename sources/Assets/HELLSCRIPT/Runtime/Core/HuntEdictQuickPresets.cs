@@ -89,6 +89,10 @@ namespace Hellscript
             }).ToArray();
         }
         public static HuntEdictLoadout Apply(HuntEdictLoadout source,string scope,string presetId)
+            =>Apply(source,scope,presetId,true);
+        // Read-only recipe comparison also covers stored policies for unequipped skills. Reuse
+        // the same recipe writer on a detached copy without changing equipment or enabling it.
+        static HuntEdictLoadout Apply(HuntEdictLoadout source,string scope,string presetId,bool requireEquipped)
         {
             var preset=For(scope).SingleOrDefault(p=>p.id==presetId)??throw new ArgumentException("Unknown quick preset: "+presetId);
             var next=HuntEdictLoadout.Canonical(source);
@@ -106,7 +110,7 @@ namespace Hellscript
             }
             else
             {
-                string skill=Skill(scope,next);
+                string skill=Skill(scope,next,requireEquipped);
                 var definitions=skill=="BASIC"||ClassSkills.Find(skill).legacy?HuntEdictV2Options.ForSkill(skill,next.edict.heroClass):Array.Empty<EdictCoreOptionDefinition>();
                 ValidateValues(preset,Enumerable.Range(1,definitions.Count).Select(i=>i.ToString()));
                 // Reset every owned legacy field before overrides; previous custom values cannot leak.
@@ -119,7 +123,7 @@ namespace Hellscript
                         throw new ArgumentException("A quick preset contains an unrelated skill policy.");
                     next.classSkills.options.RemoveAll(o=>options.Any(d=>d.id==o.id));
                     foreach(var option in options)next.classSkills.options.Add(new ClassSkillOptionSelection{id=option.id,choice=preset.choices.FirstOrDefault(c=>c.id==option.id)?.choice??option.initial});
-                    if(!next.classSkills.automatic.Contains(skill))next.classSkills.automatic=next.classSkills.automatic.Concat(new[]{skill}).ToArray();
+                    if(next.classSkills.Equipped(skill)&&!next.classSkills.automatic.Contains(skill))next.classSkills.automatic=next.classSkills.automatic.Concat(new[]{skill}).ToArray();
                 }
             }
             next=HuntEdictLoadout.Canonical(next);
@@ -143,13 +147,13 @@ namespace Hellscript
                 throw new ArgumentException("A quick preset contains an unrelated or repeated option.");
         }
         static HuntEdictUiGroup Group(string scope)=>HuntEdictUiCatalog.Data.groups.Single(g=>GlobalScope(g)==scope);
-        static string Skill(string scope,HuntEdictLoadout source)
+        static string Skill(string scope,HuntEdictLoadout source,bool requireEquipped)
         {
             if(scope=="basic/"+source.edict.heroClass)return "BASIC";
             if(!scope.StartsWith("skill/",StringComparison.Ordinal))throw new ArgumentException("Quick-preset class mismatch.");
             string id=scope.Substring(6);var skill=ClassSkills.Find(id);
             if(skill==null||skill.Passive||skill.heroClass!=HuntEdict.ClassIndex(source.edict.heroClass)||
-                source.UsesTree&&!source.classSkills.Equipped(id)||!source.UsesTree&&!source.edict.slots.Contains(id))
+                requireEquipped&&(source.UsesTree?!source.classSkills.Equipped(id):!source.edict.slots.Contains(id)))
                 throw new ArgumentException("Quick presets require an equipped skill of this class.");
             return id;
         }
@@ -163,13 +167,13 @@ namespace Hellscript
                 var preset=For(scope).SingleOrDefault(p=>p.id==presetId)??throw new ArgumentException("Unknown quick preset: "+presetId);
                 return Group(scope).ids.All(id=>HuntEdictSummary.Value(source.edict,id)==GlobalValue(source,preset,id));
             }
-            return Fingerprint(source,scope)==Fingerprint(Apply(source,scope,presetId),scope);
+            return Fingerprint(source,scope)==Fingerprint(Apply(source,scope,presetId,false),scope);
         }
         static string Fingerprint(HuntEdictLoadout source,string scope)
         {
             if(scope.StartsWith("global/",StringComparison.Ordinal))return string.Join("|",Group(scope).ids.Select(id=>id+"="+HuntEdictSummary.Value(source.edict,id)));
             if(scope==AttackOrder)return string.Join(",",source.classSkills.order);
-            string skill=Skill(scope,source);var fields=new List<string>();
+            string skill=Skill(scope,source,false);var fields=new List<string>();
             if(skill=="BASIC"||ClassSkills.Find(skill).legacy)
                 for(int i=1;i<=HuntEdictV2Options.ForSkill(skill,source.edict.heroClass).Count;i++)fields.Add(HuntEdictV2.Value(source.edict,skill,i));
             if(source.UsesTree)
