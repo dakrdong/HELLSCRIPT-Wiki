@@ -32,7 +32,7 @@ namespace Hellscript
             float diameter=Mathf.Min(shortSide*.2f,Mathf.Max(1,height-bottom-48-margin));
             float x=height>width?(width-diameter)*.5f:margin;
             // A centred thumb must also clear the right-hand controls when text is enlarged.
-            var tray=hud.Pixels(hud.potionTray);
+            var tray=hud.Pixels(hud.potionBounds);
             if(height>width&&x<tray.xMax&&x+diameter>tray.xMin)bottom=Mathf.Max(bottom,tray.yMax+margin);
             return new Rect(x,bottom,diameter,diameter);
         }

@@ -119,7 +119,7 @@ namespace Hellscript
                 float cardScale=layout.scale/Mathf.Max(.001f,scale);
                 float gap=UiTheme.Gap*cardScale,edge=12*cardScale;
                 float iconSize=Mathf.Max(44/scale,layout.actives[0].width*1.15f*cardScale);
-                float available=(safe.height-layout.potionTray.yMax*layout.scale)/scale-3*edge;
+                float available=(safe.height-layout.potionBounds.yMax*layout.scale)/scale-3*edge;
                 iconSize=Mathf.Min(iconSize,(available-5*gap)/6);
                 Right((RectTransform)plazaSettings.transform,edge,edge,iconSize,iconSize);
                 var gear=(RectTransform)plazaSettings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(iconSize*.2f);gear.offsetMax=-gear.offsetMin;

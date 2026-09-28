@@ -68,8 +68,8 @@ namespace Hellscript
     {
         public readonly float scale,width,height,statusIcon,statusGap,buttonHit,maximumStatusWidth;
         public readonly bool landscape,wrapped;
-        public readonly Rect seal,level,hp,resource,shield,shieldLine,status,xp,xpText,potionTray;
-        public readonly Rect[] passives=new Rect[3],actives=new Rect[4],potions=new Rect[3];
+        public readonly Rect seal,level,hp,resource,shield,shieldLine,status,xp,xpText,potionBounds,ultimate;
+        public readonly Rect[] actives=new Rect[4],potions=new Rect[3];
         public readonly float occupiedHeight;
         // Reading pages reserve at most 42% for the persistent HUD. Fit the entire HUD into that
         // region instead of clipping the reservation while its controls still extend above it.
@@ -87,7 +87,7 @@ namespace Hellscript
             style??=new GlobalHudStyle();
             landscape=pixelsWide>=pixelsHigh;
             float s=style.landscapeSkill,g=style.skillGap;
-            float row4=4*s+3*g,row3=3*s+2*g,row7=row4+row3+style.groupGap;
+            float row5=5*s+4*g,row3=3*s+2*g,row8=row5+row3+style.groupGap;
             float requested=Mathf.Sqrt(Mathf.Max(1,pixelsWide*pixelsHigh)/(style.referenceLong*style.referenceShort))*interfaceFactor;
             // One immutable landscape composition, fitted as a group at every aspect ratio.
             // Portrait must not enlarge potions, shorten XP or split ultimate/active skills.
@@ -97,7 +97,7 @@ namespace Hellscript
             float origin=(width-style.referenceLong)*.5f,m=style.margin+origin;
             float left=style.landscapeVitalsX+origin,barWidth=style.landscapeVitalWidth;
             wrapped=false;
-            float rightStart=width-m-row7;
+            float rightStart=width-m-row8;
             barWidth=Mathf.Min(barWidth,Mathf.Max(style.minimumVitalWidth,width-left-m));
             float vitalHeight=Mathf.Max(style.landscapeVitalHeight,style.valueFont+2),baseY=style.landscapeVitalY;
             float sealSize=style.landscapeSeal;
@@ -111,22 +111,18 @@ namespace Hellscript
             shieldLine=new Rect(left,hp.yMax+1,barWidth,2);
             shield=new Rect(left,hp.yMax+3,barWidth,Row(style.shieldHeight,style.shieldFont));
             float activeY=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
-            for(int i=0;i<3;i++)passives[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
+            for(int i=0;i<3;i++)potions[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
+            potionBounds=new Rect(rightStart,activeY-style.captionHeight,row3,s+style.captionHeight);
             rightStart+=row3+style.groupGap;
-            for(int i=0;i<4;i++)actives[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
-            float bottle=style.landscapePotion;
-            float potionY=activeY+(s-bottle)*.5f;
-            float pitch=style.landscapePotionPitch;
-            float potionStart=passives[0].x-style.groupGap-3*pitch;
-            for(int i=0;i<3;i++)potions[i]=new Rect(potionStart+i*pitch+(pitch-bottle)*.5f,potionY,bottle,bottle);
-            potionTray=new Rect(potionStart,potionY-style.captionHeight-8,3*pitch,bottle+style.captionHeight+16);
+            ultimate=new Rect(rightStart,activeY,s,s);
+            for(int i=0;i<4;i++)actives[i]=new Rect(rightStart+(i+1)*(s+g),activeY,s,s);
             statusIcon=style.statusIcon;statusGap=style.statusGap;buttonHit=44;
             float sy=Mathf.Max(style.landscapeStatusY,shield.yMax+1);
             status=new Rect(left,sy,style.collapsed,statusIcon+style.statusTextHeight);
-            maximumStatusWidth=Mathf.Max(style.collapsed,Mathf.Min(style.expanded,passives[0].x-status.x-buttonHit-20));
+            maximumStatusWidth=Mathf.Max(style.collapsed,Mathf.Min(style.expanded,potions[0].x-status.x-buttonHit-20));
             xp=new Rect(m,style.xpBottom,style.referenceLong-2*style.margin,style.xpThickness);
             xpText=new Rect(m,style.landscapeXpTextY,200,Row(style.xpTextHeight,style.captionFont));
-            occupiedHeight=Mathf.Max(status.yMax,Mathf.Max(passives[0].yMax,potionTray.yMax))+16;
+            occupiedHeight=Mathf.Max(status.yMax,potionBounds.yMax)+16;
         }
         public Rect Pixels(Rect r)=>new Rect(r.x*scale,r.y*scale,r.width*scale,r.height*scale);
         public int FontSize(float basis,int minimum)=>Mathf.Max(1,Mathf.RoundToInt(Mathf.Max(basis,minimum)*scale));

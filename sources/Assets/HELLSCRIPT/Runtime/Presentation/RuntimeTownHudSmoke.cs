@@ -106,16 +106,15 @@ namespace Hellscript
             Require(Mathf.Abs(rect.width-rect.height)<1&&rect.yMin>safe.yMin+hud.status.yMax*hud.scale,"Joystick shape or HUD clearance: "+name);
             Require(rect.xMin>=safe.xMin&&rect.xMax<=safe.xMax&&rect.yMax<=safe.yMax,"Joystick escaped safe area: "+name);
             if(!hud.landscape)Require(Mathf.Abs(rect.center.x-safe.center.x)<1,"Portrait joystick is not centred: "+name);
-            foreach(var obstacle in hud.actives.Concat(hud.passives).Append(hud.potionTray))
+            foreach(var obstacle in hud.actives.Concat(hud.potions).Append(hud.ultimate))
             {var bounds=hud.Pixels(obstacle);bounds.position+=safe.position;Require(!rect.Overlaps(bounds),"Joystick overlaps controls: "+name);}
             var style=game.UI.GlobalHud.Style;
             float baseline=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
             Require(Mathf.Abs(hud.actives[0].y-baseline)<.01f,"Action row is not bottom anchored: "+name);
-            var tray=game.UI.GlobalHud.transform.Find("HUD safe area/Potion tray").GetComponent<StorageSurface>();
-            Require(tray.isActiveAndEnabled&&tray.top.a>.5f&&!tray.raycastTarget,"Potion backing missing or blocks input.");
+            Require(game.UI.GlobalHud.transform.Find("HUD safe area/Potion tray")==null,"Duplicate potion tray remains.");
             for(int i=0;i<3;i++)Require(Clickable(game.UI.GlobalHud.transform.Find("HUD safe area/Potion "+i).GetComponent<Button>()),"Potion input is obscured: "+name);
-            foreach(var potion in hud.potions)foreach(var skill in hud.actives.Concat(hud.passives))
-                Require(potion.yMin>skill.yMax,"Potion below skill: "+name);
+            foreach(var potion in hud.potions)foreach(var skill in hud.actives.Append(hud.ultimate))
+                Require(potion.xMax<skill.xMin&&Mathf.Abs(potion.yMin-skill.yMin)<.01f,"Potion row overlaps or wraps: "+name);
             var texts=game.UI.GetComponentsInChildren<Text>();
             Require(!texts.Any(t=>t.text.Contains("조이스틱으로 이동")||t.text.Contains("중앙 길 횡단")||t.text==Loc.T("시설 안내")||t.text==Loc.T("메뉴")),"Hidden town chrome is visible.");
             var header=game.UI.GetComponentsInChildren<RectTransform>().Single(t=>t.name=="Header");
@@ -131,7 +130,7 @@ namespace Hellscript
                 Require(!button.GetComponent<UIRectBorder>().enabled,"Shortcut still has a rectangular border.");
                 Require(Clickable(button),"Shortcut input is obscured: "+button.name+" / "+name);
                 var bounds=Pixels((RectTransform)button.transform);
-                Require(bounds.xMin>=safe.xMin&&bounds.xMax<=safe.xMax&&bounds.yMax<=safe.yMax&&bounds.yMin>=safe.yMin+hud.potionTray.yMax*hud.scale,"Shortcut escaped its safe column: "+name);
+                Require(bounds.xMin>=safe.xMin&&bounds.xMax<=safe.xMax&&bounds.yMax<=safe.yMax&&bounds.yMin>=safe.yMin+hud.potionBounds.yMax*hud.scale,"Shortcut escaped its safe column: "+name);
             }
             foreach(var bubble in game.UI.GetComponentsInChildren<RectTransform>(true).Where(t=>t.name.StartsWith("NPC bubble ")))
             {

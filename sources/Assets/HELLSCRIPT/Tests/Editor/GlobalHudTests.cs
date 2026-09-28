@@ -41,10 +41,10 @@ namespace Hellscript.Tests
         [Test] public void LandscapeLocksApprovedGeometry()
         {
             var p=new GlobalHudLayout(1600,900);
-            Assert.That(p.scale,Is.EqualTo(1));Assert.That(p.passives.Length,Is.EqualTo(3));Assert.That(p.actives.Length,Is.EqualTo(4));
+            Assert.That(p.scale,Is.EqualTo(1));Assert.That(p.potions.Length,Is.EqualTo(3));Assert.That(p.actives.Length,Is.EqualTo(4));
             Assert.That(p.actives.All(r=>Mathf.Abs(r.width-76.8f)<.001f),Is.True);
-            Assert.That(p.potions.All(r=>r.width==45&&Mathf.Abs(r.center.y-p.actives[0].center.y)<.001f),Is.True);
-            Assert.That(p.actives[0].x-p.passives[2].xMax,Is.EqualTo(24).Within(.001));
+            Assert.That(p.potions.All(r=>Mathf.Abs(r.width-76.8f)<.001f&&Mathf.Abs(r.center.y-p.actives[0].center.y)<.001f),Is.True);
+            Assert.That(p.ultimate.x-p.potions[2].xMax,Is.EqualTo(24).Within(.001));
             Assert.That(p.status.width,Is.EqualTo(230));Assert.That(p.maximumStatusWidth,Is.EqualTo(408));
             Assert.That(p.xp,Is.EqualTo(new Rect(32,16,1536,3)));
         }
@@ -69,15 +69,15 @@ namespace Hellscript.Tests
         [Test] public void PortraitKeepsTheSameHudCompositionAsLandscape()
         {
             var p=new GlobalHudLayout(900,1600);var wide=new GlobalHudLayout(1600,900);
-            Assert.That(p.passives.All(r=>r.y==p.actives[0].y),Is.True);
-            Assert.That(p.potions.All(r=>r.xMax<p.passives[0].xMin),Is.True);
+            Assert.That(p.potions.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
+            Assert.That(p.potions.All(r=>r.xMax<p.ultimate.xMin),Is.True);
             Assert.That(p.actives[0].width,Is.EqualTo(wide.actives[0].width));Assert.That(p.potions[0].width,Is.EqualTo(wide.potions[0].width));Assert.That(p.xp.width,Is.EqualTo(wide.xp.width));
         }
         [TestCase(440,956)] [TestCase(956,440)] [TestCase(1600,1000)] [TestCase(2100,900)]
         public void EveryHudPartPreservesItsSizeAndRelativePositionAsOneSet(int w,int h)
         {
             var reference=new GlobalHudLayout(1600,900);
-            Rect[] Parts(GlobalHudLayout p)=>new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.xp,p.xpText,p.status,p.potionTray}.Concat(p.passives).Concat(p.actives).Concat(p.potions).ToArray();
+            Rect[] Parts(GlobalHudLayout p)=>new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.xp,p.xpText,p.status,p.potionBounds,p.ultimate}.Concat(p.actives).Concat(p.potions).ToArray();
             var original=Parts(reference);
             foreach(float reading in new[]{.5f,1f,1.5f})
             {
@@ -91,15 +91,15 @@ namespace Hellscript.Tests
             }
         }
         [TestCase(640,360,.5f)] [TestCase(640,360,1.5f)] [TestCase(360,640,1.5f)] [TestCase(1200,900,1.5f)] [TestCase(2000,900,1)]
-        public void AllSevenSkillsAndThreePotionsStayInside(int w,int h,float scale)
+        public void AllFiveSkillsAndThreePotionsStayInside(int w,int h,float scale)
         {
             var p=new GlobalHudLayout(w,h,scale);
             Assert.IsFalse(p.wrapped,"Skill wrapping is forbidden at every size and reading preference.");
-            Assert.That(p.passives.Concat(p.actives).All(r=>r.y==p.actives[0].y),Is.True);
-            foreach(var r in p.passives.Concat(p.actives).Concat(p.potions))
+            Assert.That(p.actives.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
+            foreach(var r in p.actives.Append(p.ultimate).Concat(p.potions))
             {Assert.That(r.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.yMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.xMax,Is.LessThanOrEqualTo(p.width+.01f));Assert.That(r.yMax,Is.LessThanOrEqualTo(p.height+.01f));}
-            for(int a=0;a<p.actives.Length;a++)foreach(var passive in p.passives)Assert.That(p.actives[a].Overlaps(passive),Is.False);
-            foreach(var potion in p.potions)foreach(var skill in p.actives.Concat(p.passives))
+            for(int a=0;a<p.actives.Length;a++)foreach(var passive in p.potions.Append(p.ultimate))Assert.That(p.actives[a].Overlaps(passive),Is.False);
+            foreach(var potion in p.potions)foreach(var skill in p.actives.Append(p.ultimate))
                 Assert.That(potion.xMax,Is.LessThan(skill.xMin),"Potions must stay beside the single skill row.");
         }
         [Test] public void FadesOnlyHiddenEdgesAndApproachesBoundaryContinuously()
@@ -112,7 +112,7 @@ namespace Hellscript.Tests
         }
         [TestCase(440,956)] [TestCase(956,440)] [TestCase(1600,900)] [TestCase(1600,1000)] [TestCase(2100,900)]
         [TestCase(360,640)]
-        public void BottomAnchoredActionsAndPotionTrayDoNotOverlapVitals(int width,int height)
+        public void BottomAnchoredActionsAndPotionsDoNotOverlapVitals(int width,int height)
         {
             var style=GlobalHudStyle.Load();
             foreach(float factor in new[]{.5f,1,1.5f})
@@ -121,17 +121,32 @@ namespace Hellscript.Tests
                 float baseline=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
                 Assert.That(p.actives[0].yMin,Is.EqualTo(baseline),"The bottom row must not float upward in portrait.");
                 if(p.landscape)Assert.That(p.actives[0].yMin-style.captionHeight,Is.GreaterThan(p.xp.yMax),"Skill captions must clear the XP line.");
-                Assert.That(p.potionTray.xMax,Is.LessThan(p.passives.Min(r=>r.xMin)));
+                Assert.That(p.potionBounds.xMax,Is.LessThan(p.ultimate.xMin));
                 Assert.That(p.potions[0].center.y,Is.EqualTo(p.actives[0].center.y).Within(.001));
-                Assert.That(p.potionTray.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(p.potionTray.xMax,Is.LessThanOrEqualTo(p.width));
+                Assert.That(p.potionBounds.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(p.potionBounds.xMax,Is.LessThanOrEqualTo(p.width));
                 foreach(var bottle in p.potions)
-                {Assert.IsTrue(p.potionTray.Contains(bottle.min));Assert.IsTrue(p.potionTray.Contains(bottle.max));}
+                {Assert.That(bottle.xMin,Is.GreaterThanOrEqualTo(p.potionBounds.xMin-.001f));Assert.That(bottle.xMax,Is.LessThanOrEqualTo(p.potionBounds.xMax+.001f));Assert.That(bottle.yMax,Is.LessThanOrEqualTo(p.potionBounds.yMax+.001f));}
                 foreach(var left in new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.status,p.xpText})
-                foreach(var right in p.actives.Concat(p.passives).Append(p.potionTray))
+                foreach(var right in p.actives.Append(p.ultimate).Append(p.potionBounds))
                     Assert.IsFalse(left.Overlaps(right),$"{width}x{height} at {factor}: {left} overlaps {right}");
             }
         }
         [Test] public void CooldownsRoundUpAndNeverFabricateReadyTime()
         {Assert.That(GlobalHudSnapshot.TimeLabel(0),Is.Empty);Assert.That(GlobalHudSnapshot.TimeLabel(3.21f),Is.EqualTo("3.3"));Assert.That(GlobalHudSnapshot.TimeLabel(10.01f),Is.EqualTo("11"));}
+        [Test] public void EquippedPassivesRemainInspectableWithoutEmptyOrLockedPlaceholders()
+        {
+            var snapshot=GlobalHudSnapshot.Sample(2);
+            snapshot.passives[0].remaining=2.5f;snapshot.passives[0].total=4;
+            snapshot.passives[1].empty=true;snapshot.passives[2].locked=true;
+            string before=JsonUtility.ToJson(snapshot);
+            var visible=snapshot.ObservationEffects();
+            Assert.That(visible.Count,Is.EqualTo(3));
+            var passive=visible.Single(e=>e.key=="passive:MP01");
+            Assert.That(passive.remaining,Is.EqualTo(2.5f));Assert.That(passive.total,Is.EqualTo(4));Assert.IsFalse(passive.permanent);
+            Assert.That(passive.name,Is.EqualTo(snapshot.passives[0].name));
+            Assert.That(JsonUtility.ToJson(snapshot),Is.EqualTo(before),"Projecting the HUD changed its source snapshot");
+            snapshot.passives[0].remaining=0;
+            Assert.IsTrue(snapshot.ObservationEffects().Last().permanent);
+        }
     }
 }

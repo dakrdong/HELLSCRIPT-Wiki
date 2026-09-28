@@ -17,7 +17,7 @@ namespace Hellscript
         readonly Dictionary<int,Sprite> atlasSprites=new Dictionary<int,Sprite>();
         readonly List<Sprite> owned=new List<Sprite>();
         readonly List<Slot> slots=new List<Slot>();
-        RectTransform safe,seal,level,hp,resource,xp,potionTray;
+        RectTransform safe,seal,level,hp,resource,xp;
         Image face,hpFill,resourceFill,xpFill,sealFrame,shieldLine;
         Text levelLabel,hpLabel,resourceLabel,shieldLabel,xpLabel;
         readonly List<RectTransform> ticks=new List<RectTransform>();
@@ -27,7 +27,7 @@ namespace Hellscript
         public float BottomInset {get;private set;}
         Color Gold=>style.gold;Color Pale=>style.pale;
         sealed class Slot
-        {public RectTransform root;public Image icon,cover,frame,glyph;public SkillIconView skillView;public Text caption,number;public HudSlotState data;public bool passive,potion;}
+        {public RectTransform root;public Image icon,cover,frame,glyph;public SkillIconView skillView;public Text caption,number;public HudSlotState data;public bool potion;}
         public void Initialize(Font textFont,Texture2D skillAtlas)
         {
             font=textFont;atlas=skillAtlas;style=GlobalHudStyle.Load();
@@ -44,20 +44,9 @@ namespace Hellscript
             xpFill=Picture("Progress",xp,"fill-white");Stretch(xpFill.rectTransform);xpFill.color=style.xpColor;xpFill.type=Image.Type.Filled;xpFill.fillMethod=Image.FillMethod.Horizontal;
             for(int i=1;i<10;i++){var t=Picture("XP "+i*10+"%",xp,i==5?"xp-tick-major":"xp-tick");ticks.Add(t.rectTransform);}
             xpLabel=Text("XP text",safe,16);xpLabel.alignment=TextAnchor.MiddleLeft;xpLabel.color=Gold;
-            for(int i=0;i<3;i++)slots.Add(CreateSlot("Passive "+i,true,false));
-            for(int i=0;i<4;i++)slots.Add(CreateSlot("Active "+i,false,false));
-            potionTray=Rect("Potion tray",safe);
-            var tray=potionTray.gameObject.AddComponent<StorageSurface>();
-            tray.Paint(UiTheme.PanelHex+"e8",UiTheme.BackgroundHex+"d4",UiTheme.BorderHex+"c0");tray.inset=true;tray.raycastTarget=false;
-            for(int i=1;i<3;i++)
-            {
-                var divider=Rect("Potion divider "+i,potionTray);divider.anchorMin=new Vector2(i/3f,.14f);divider.anchorMax=new Vector2(i/3f,.86f);divider.pivot=new Vector2(.5f,.5f);divider.sizeDelta=new Vector2(1,0);
-                var line=divider.gameObject.AddComponent<Image>();line.color=new Color(UiTheme.Gold.r,UiTheme.Gold.g,UiTheme.Gold.b,.22f);line.raycastTarget=false;
-            }
-            var accent=Rect("Potion tray crest",potionTray);accent.anchorMin=accent.anchorMax=new Vector2(.5f,1);accent.pivot=new Vector2(.5f,.5f);accent.sizeDelta=new Vector2(4,4);accent.localRotation=Quaternion.Euler(0,0,45);
-            var crest=accent.gameObject.AddComponent<Image>();crest.color=UiTheme.Gold;crest.raycastTarget=false;
-            for(int i=0;i<3;i++)slots.Add(CreateSlot("Potion "+i,false,true));
-            slots.Add(CreateSlot("Ultimate",false,false));
+            for(int i=0;i<3;i++)slots.Add(CreateSlot("Potion "+i,true));
+            for(int i=0;i<4;i++)slots.Add(CreateSlot("Active "+i,false));
+            slots.Add(CreateSlot("Ultimate",false));
             var strip=Rect("Status strip",safe);StatusStrip=strip.gameObject.AddComponent<StatusStripView>();
             StatusStrip.Initialize(this,font,e=>EffectSelected?.Invoke(e),()=>AllEffectsSelected?.Invoke());ready=true;
         }
@@ -68,22 +57,23 @@ namespace Hellscript
             var border=Picture("Border",r,"frame-vital");Stretch(border.rectTransform);border.type=Image.Type.Sliced;
             label=Text(name+" value",r,16);Stretch(label.rectTransform);label.alignment=TextAnchor.MiddleLeft;return r;
         }
-        Slot CreateSlot(string name,bool passive,bool potion)
+        Slot CreateSlot(string name,bool potion)
         {
-            var slot=new Slot{root=Rect(name,safe),passive=passive,potion=potion};
+            var slot=new Slot{root=Rect(name,safe),potion=potion};
             if(!potion)
             {
-                slot.skillView=SkillIconView.Create(slot.root,passive);Stretch(slot.skillView.Rect);
+                slot.skillView=SkillIconView.Create(slot.root,false);Stretch(slot.skillView.Rect);
                 slot.icon=slot.skillView.Icon;slot.cover=slot.skillView.Cover;slot.frame=slot.skillView.Frame;
                 slot.skillView.Plate.color=style.slotPlate;slot.cover.color=style.cooldownTint;
             }
             else
             {
+                var plate=Picture("Plate",slot.root,"mask-square");Stretch(plate.rectTransform);plate.color=style.slotPlate;
                 // Image.preserveAspect aligns unused width to the RectTransform pivot.
                 slot.icon=Picture("Icon",slot.root,"");slot.icon.rectTransform.pivot=Vector2.one*.5f;Stretch(slot.icon.rectTransform);slot.icon.preserveAspect=true;
-                slot.cover=Picture("Cooldown",slot.root,"");slot.cover.rectTransform.pivot=Vector2.one*.5f;Stretch(slot.cover.rectTransform);slot.cover.color=style.cooldownTint;
+                slot.cover=Picture("Cooldown",slot.root,"mask-square");slot.cover.rectTransform.pivot=Vector2.one*.5f;Stretch(slot.cover.rectTransform);slot.cover.color=style.cooldownTint;
                 slot.cover.type=Image.Type.Filled;slot.cover.fillMethod=Image.FillMethod.Radial360;slot.cover.fillOrigin=2;slot.cover.fillClockwise=false;slot.cover.preserveAspect=true;
-                slot.frame=Picture("Frame",slot.root,"");slot.frame.enabled=false;
+                slot.frame=Picture("Frame",slot.root,"frame-active");Stretch(slot.frame.rectTransform);
             }
             slot.glyph=Picture("Potion kind",slot.root,"");slot.glyph.enabled=potion;
             slot.number=Text("Cooldown time",slot.root,25);Stretch(slot.number.rectTransform);
@@ -113,8 +103,8 @@ namespace Hellscript
             shieldLine.fillAmount=Ratio(data.shield,data.maxHealth);shieldLine.enabled=data.shield>0;
             xpFill.fillAmount=data.ExperienceRatio;xpLabel.text=data.maximumLevel?Loc.T("최대 레벨"):Loc.F("EXP  {0:0}%",Mathf.FloorToInt(100*xpFill.fillAmount));
             sealFrame.color=data.dead?style.deadTint:Color.white;
-            for(int i=0;i<slots.Count;i++)UpdateSlot(slots[i],i<3?data.passives[i]:i<7?data.actives[i-3]:i<10?data.potions[i-7]:data.ultimate);
-            StatusStrip.SetEffects(data.effects);
+            for(int i=0;i<slots.Count;i++)UpdateSlot(slots[i],i<3?data.potions[i]:i<7?data.actives[i-3]:data.ultimate);
+            StatusStrip.SetEffects(data.ObservationEffects());
         }
         static float Ratio(float value,float maximum)=>maximum>0?Mathf.Clamp01(value/maximum):0;
         void UpdateSlot(Slot slot,HudSlotState data)
@@ -122,14 +112,12 @@ namespace Hellscript
             slot.data=data;if(data==null){slot.root.gameObject.SetActive(false);return;}slot.root.gameObject.SetActive(true);
             slot.icon.sprite=!slot.potion&&SkillIconAssets.TryResolve(data.id,out _,out var skillSprite)?skillSprite:!slot.potion&&data.atlas>=0?SkillIconAssets.Active(data.atlas):Sprite(data.icon);slot.icon.enabled=slot.icon.sprite!=null;
             slot.icon.color=data.locked||data.empty||slot.potion&&data.count==0?style.disabledTint:Color.white;
-            slot.frame.enabled=!slot.potion;slot.frame.color=data.active?style.activeTint:Color.white;
-            slot.cover.sprite=slot.potion?slot.icon.sprite:slot.skillView.Plate.sprite;
+            slot.frame.enabled=true;slot.frame.color=data.active?style.activeTint:Color.white;
             slot.cover.fillAmount=data.total>0?Mathf.Clamp01(data.remaining/data.total):0;
             slot.number.text=data.locked?"—":GlobalHudSnapshot.TimeLabel(data.remaining);
             if(!slot.potion&&data.insufficient&&data.remaining<=0)slot.number.text="◇";
             slot.number.color=data.insufficient?style.resourceWarning:Pale;
-            slot.caption.text=slot.potion?(data.count<0?"∞":"×"+data.count):data.caption;
-            if(slot.passive&&data.caption==Loc.T("상시")&&slot.caption.preferredWidth>slot.caption.rectTransform.rect.width-2)slot.caption.text="∞";
+            slot.caption.text=slot.potion?(data.empty?Loc.T("빈칸"):data.count<0?"∞":"×"+data.count):data.caption;
             if(slot.potion&&data.id.StartsWith("PU",StringComparison.Ordinal)){slot.glyph.sprite=Sprite(PotionCatalog.Get(data.id).icon);slot.glyph.enabled=true;}else slot.glyph.enabled=false;
         }
         void Reflow()
@@ -137,14 +125,16 @@ namespace Hellscript
             void Place(RectTransform t,Rect r)=>SetRect(t,Layout.Pixels(r));
             Place(seal,Layout.seal);Place(level,Layout.level);Place(hp,Layout.hp);Place(resource,Layout.resource);Place(xp,Layout.xp);Place(xpLabel.rectTransform,Layout.xpText);
             Place(shieldLabel.rectTransform,Layout.shield);Place(shieldLine.rectTransform,Layout.shieldLine);
-            Place(potionTray,Layout.potionTray);
-            for(int i=1;i<3;i++)((RectTransform)potionTray.Find("Potion divider "+i)).sizeDelta=new Vector2(Layout.scale,0);
-            ((RectTransform)potionTray.Find("Potion tray crest")).sizeDelta=Vector2.one*(4*Layout.scale);
             for(int i=0;i<slots.Count;i++)
             {
-                var s=slots[i];var r=i<3?Layout.passives[i]:i<7?Layout.actives[i-3]:i<10?Layout.potions[i-7]:Layout.passives[1];Place(s.root,r);
-                SetRect(s.caption.rectTransform,new Rect(s.potion?-style.potionCaptionPadding*Layout.scale:0,-style.captionHeight*Layout.scale,(s.potion?r.width+2*style.potionCaptionPadding:r.width)*Layout.scale,style.captionHeight*Layout.scale));
-                float gs=style.potionGlyph*Layout.scale;SetRect(s.glyph.rectTransform,new Rect(-gs*.35f,0,gs,gs));
+                var s=slots[i];var r=i<3?Layout.potions[i]:i<7?Layout.actives[i-3]:Layout.ultimate;Place(s.root,r);
+                if(s.potion)
+                {
+                    var icon=s.icon.rectTransform;icon.anchorMin=icon.anchorMax=icon.pivot=Vector2.one*.5f;
+                    icon.anchoredPosition=Vector2.zero;icon.sizeDelta=Vector2.one*(style.landscapePotion*Layout.scale);
+                }
+                SetRect(s.caption.rectTransform,new Rect(0,-style.captionHeight*Layout.scale,r.width*Layout.scale,style.captionHeight*Layout.scale));
+                float gs=style.potionGlyph*Layout.scale;SetRect(s.glyph.rectTransform,new Rect(6*Layout.scale,6*Layout.scale,gs,gs));
                 s.number.fontSize=FontSize(s.potion?style.potionCooldownFont:style.cooldownFont);s.caption.fontSize=FontSize(style.captionFont,(int)style.minimumFont);
             }
             hpLabel.fontSize=resourceLabel.fontSize=FontSize(style.valueFont,(int)style.minimumValueFont);levelLabel.fontSize=FontSize(style.levelFont,(int)style.minimumLevelFont);xpLabel.fontSize=FontSize(style.captionFont,(int)style.minimumFont);shieldLabel.fontSize=FontSize(style.shieldFont,(int)style.minimumFont);

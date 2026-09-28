@@ -28,14 +28,14 @@ namespace Hellscript
             float expected=UiTheme.Scale(UiSafeArea.Current)*.5f*game.UI.InterfaceFactor;
             Require(Mathf.Abs(page.scaleFactor-expected)<.001f,"Page controls/text kept a fixed pixel scale: "+phase);
             var hud=game.UI.GlobalHud;var layout=hud.Layout;var style=GlobalHudStyle.Load();
-            Require(!layout.wrapped&&layout.passives.Concat(layout.actives).All(r=>Mathf.Abs(r.y-layout.actives[0].y)<.001f),"Skills split into two rows: "+phase);
+            Require(!layout.wrapped&&layout.actives.Append(layout.ultimate).All(r=>Mathf.Abs(r.y-layout.actives[0].y)<.001f),"Skills split into two rows: "+phase);
             var captions=hud.GetComponentsInChildren<Text>().Where(t=>t.name=="Caption").ToArray();
             var state=hud.Snapshot;
-            int expectedCaptions=state.passives.Count(s=>s!=null)+state.actives.Count(s=>s!=null)+state.potions.Count(s=>s!=null)+(state.ultimate==null?0:1);
+            int expectedCaptions=state.actives.Count(s=>s!=null)+state.potions.Count(s=>s!=null)+(state.ultimate==null?0:1);
             Require(captions.Length==expectedCaptions,"Missing actual HUD captions.");
             foreach(var t in captions)
                 Require(Mathf.Abs(t.fontSize-style.captionFont*layout.scale)<=.501f,"HUD text rebounded: "+phase);
-            var parts=new[]{("Class seal",layout.seal),("HP",layout.hp),("Resource",layout.resource),("Experience",layout.xp),("Potion tray",layout.potionTray)};
+            var parts=new[]{("Class seal",layout.seal),("HP",layout.hp),("Resource",layout.resource),("Experience",layout.xp),("Potion 0",layout.potions[0])};
             foreach(var part in parts)
             {
                 var rect=(RectTransform)hud.transform.Find("HUD safe area/"+part.Item1);
