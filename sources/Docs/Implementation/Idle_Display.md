@@ -1,78 +1,65 @@
-# 절전 방치와 잠깐 보기
+# 자동 사냥 절전 모드
 
-작성일: 2026-09-13 · [English](Idle_Display.en.md)
+갱신일: 2026-09-27
+영어판: [Power-saving hunt](Idle_Display.en.md)
 
-상태: 데스크톱 구현·검증 단계가 완료됐다. 전체 검사 2,471개, 최종 앱의 실행·재시작, 화면 13장과 같은 최종 빌드의 성능 측정 5회를 확인했다. Android 실기기와 플랫폼별 절전 정책은 아래의 남은 범위로 관리한다.
+## 화면과 조작
 
-## 화면과 사냥의 분리
+일반 균열의 자동 사냥 중 화면 중앙 상단에 `절전 모드` 버튼을 표시한다. 누르면 즉시 검은 절전 화면으로 바뀐다. 훈련·튜토리얼, 일시정지·귀환 포털·오류 대기 중에는 진입할 수 없다.
 
-[절전 방치 상세 기획](../Design/HELLSCRIPT_Idle_Mode_Detail.md)과 [화면 배치 기준](../Design/HELLSCRIPT_Screen_Layout_Detail.md)을 따라 일반 화면·절전 화면·잠깐 보기를 분리했다. 절전 버튼은 실제 균열 전투에서 제공한다. 훈련·일시정지·포탈 정리·편집·확인창에서는 새로 진입하지 않는다. 첫 안내에는 현재 반복 정책을 표시하며, 확인 여부는 계정 진행도와 분리된 기기 설정 파일에 저장한다. 짧은 가로 화면에서도 시작·취소 버튼을 하단에 유지한다.
+상단 `전투 진행 시간`은 이번 절전 모드 진입 후의 실제 경과 시간을 `HH:MM:SS`로 표시한다. 24시간이 지나도 시간이 00으로 돌아가지 않는다. 상세창을 보는 시간도 절전 세션 경과 시간에 포함되며, 상태 문구에서 사냥 일시정지를 구분한다.
 
-절전 중에도 같은 `CombatSimulation`과 `RunState`로 실제 전투를 계산한다. 전투 카메라와 월드 표시를 끄고, 일반 HUD·미니맵 갱신과 일회성 타격 효과 생성을 건너뛴다. 검은 화면의 요약은 기본 1초마다 바뀌며, 중단 사유를 우선 표시한다. 표시 영역은 60초 간격으로 조금씩 이동한다. 새 균열의 전투 데이터는 즉시 만들되 화면 객체는 확인 시점까지 만들지 않는다.
+시간 바로 아래에는 현재 위치와 행동을 표시한다. 목표형 균열은 `균열 Lv 15 : 진행도 1 / 3`처럼 실제 완료 수와 전체 목표 수를 읽고 봉인·정수 운반자·제물 목표를 구분한다. 목표가 없는 균열은 처치 게이지, 보스 단계는 보스 전투, 보상 단계는 전리품 회수를 표시한다. 귀환 포털의 가방·창고 정리 대기, 물약 보충 대기, 다음 균열 단계와 입장까지의 시간, 상세 열람·저장 실패에 따른 중단도 구분한다. 자동 정리는 포털이나 종료 시점의 즉시 거래이므로 실제로 하지 않는 마을 이동을 표시하지 않는다. 정리 완료는 저장된 정리 보고서가 있을 때만 표시한다.
 
-잠깐 보기는 현재 완료 틱의 영웅·적·카메라 위치로 장면을 맞추고, 살아 있는 투사체·장판·상자 상태를 표시한다. 끝난 타격 효과는 다시 재생하지 않는다. 표시 목표는 30 FPS이며 마지막 입력 후 10초가 지나면 절전 화면으로 돌아간다. 계속 보기나 메뉴 진입은 자동 복귀를 취소하고 기존 프레임·수직 동기화·화면 출력 간격·화면 자동 꺼짐 설정을 복원한다. 기기 전체 밝기는 변경하지 않는다.
+하단에는 현재 캐릭터의 얼굴 인장, 레벨과 경험치 바를 고정한다. `GlobalHudView`의 직업별 얼굴·인장과 `GlobalHudSnapshot.ReadGrowth`의 성장 표시 기준을 일반 HUD와 공유한다. 계정의 현재 레벨·경험치를 초당 한 번 읽어 레벨업과 최대 레벨을 반영한다. 세로에서는 해제 영역 위, 가로에서는 왼쪽 하단에 배치하여 기록을 최소 한 행 이상 온전히 읽을 수 있게 한다. 성장 정보, 자물쇠·게이지, 중앙 하단 해제 버튼은 서로 겹치지 않는다.
 
-## 시간·반복·중단 처리
+- 창고 정보는 모든 열린 창고 탭의 **남은 칸 / 전체 열린 칸**을 합산한다. `창고 자세히`는 실제 `StorageWindow`를 연다.
+- 착용 장비 변경은 저장이 성공한 교체마다 시각, 장착 위치, 이전 슬롯 → 이후 슬롯을 기록한다. 두 슬롯은 `EquipmentSlotView`를 쓰며, 터치하면 당시 장비의 복사본을 공통 `ItemDetailView`로 보여 준다. 이후 분해·이동·강화가 과거 상세를 바꾸지 않는다. `인벤토리 자세히`는 실제 `InventoryWindow`를 연다.
+- 얻은 장비는 매직·희귀·전설·세트·고유의 아이콘과 획득 개수를 표시한다. 기존 소유품이나 바닥에 남겨 둔 아이템은 세지 않으며, 나중에 분해·판매해도 이미 획득한 개수는 유지한다. 현재 데이터에서 `rarity=3`인 이름 있는 고유 정의는 고유, `setId`가 있으면 세트, 고유 정의가 없는 3등급은 전설로 구분한다. 드롭 확률이나 아이템 등급 체계는 바꾸지 않는다.
+- 클리어 정보는 현재 진행 중인 도전부터 모든 후속 도전의 균열 단계, 현지 도전 시작 시각, 실제 진행 시간, 진행 중·클리어·실패를 기록한다. 처음 진입한 도전은 기존 전투 기록의 실제 시작 시각을 사용한다. 결과의 소요 시간은 저장된 `run.realTime`이며, 완료 후 고정된다.
 
-단조 증가 시계의 실제 경과를 1/20초 단위로 누적해 기존 0.05초 전투 틱에 전달한다. 한 프레임의 전투 시간을 0.25초로 잘라 버리던 경로를 제거했다. 화면 상태 변경은 남은 부분 시간을 지우지 않는다. 한 갱신에서 최대 20틱을 처리하며, 처리하지 못한 시간이 실제 0.5초를 넘는 상태가 3초 지속되면 마지막 처리 틱에서 보존하고 명시적인 재개를 요구한다.
+장비 변경과 도전 기록은 각각 스크롤한다. 세션 기록은 개수 제한으로 잘라내지 않으며, 화면에 보이는 행만 생성한다. 세로에서는 위아래로 배치한다. 가로·PC에서는 왼쪽에 창고와 착용 장비 변경, 오른쪽에 얻은 장비와 클리어 정보를 같은 폭으로 배치하며 가운데 세로 구분선을 그린다. 구분선은 본문만 나누며 상단 시간·상태와 하단 성장·해제 영역은 가르지 않는다. 하단 해제 영역은 스크롤 밖에 고정한다.
 
-자동 반복은 결과 화면의 표시 여부와 분리했다. 기존 결과 대기시간·종료 조건·가방 정리·보상 저장을 유지한다. 다음 판부터 중단은 현재 판을 즉시 포기하지 않으며, 판 종료와 정산 뒤 반복을 멈춘다. 저장 실패나 가방 부족으로 막혀도 절전 화면에서 중단 이유를 확인할 수 있다.
+`이곳을 눌러 절전 모드 해제`를 한 번 누르면 바로 위에 흔들리는 자물쇠와 게이지를 표시한다. 단조 시계 기준 3초 후 일반 전투 화면으로 돌아온다. 다른 영역을 눌러도 해제되지 않는다. 별도 래스터 이미지를 만들지 않고 기존 `StorageGlyph`의 자물쇠를 사용한다.
 
-앱 중단은 전투를 저장하고 정지하며, 복귀 시 일반 화면에서 재개를 요구한다. 중단된 시간을 전투 틱으로 몰아서 계산하지 않는다. 2026-09-24부터 로컬 개발 빌드의 미접속 보급은 마지막 정상 클리어의 실제 골드·강화석 수급 속도 중 5%를 최대 12시간 지급한다. 일반 재료 지급은 제거했다. 수치·화면·서버 검증 모듈과 운영 연결의 남은 범위는 [방치 사냥과 미접속 보급](Idle_Offline_Supplies.md)을 따른다. 지급과 기준 시각을 함께 저장하고 실패한 정산 구간을 고정한다. 다른 저장이나 장비 거래도 미완료 정산을 먼저 재시도한다. 절전·잠깐 보기 전환 자체는 미실행 보상을 만들지 않는다. 실제 온라인 계정·서버 정산은 아직 연결되지 않았다.
+## 전투·저장·일시정지의 소유권
 
-일반 사용자는 계속 1배속만 사용한다. 1.5배속·2배속은 내부 계산 검증에서만 사용하며 기존 잠금 정책을 유지한다.
+`ForegroundCombatClock`과 동일한 `CombatSimulation`이 0.05초 고정 단계로 실제 전투를 계속한다. 화면 표시 빈도를 줄여도 전투 시간, 난수, 보상과 반복 사냥 정책을 별도 계산하지 않는다. 완료 저장과 자동 정리, 다음 도전은 기존 `GameStore`·`RepeatHunt` 경로를 따른다.
 
-## 현재 검증 근거와 남은 범위
+`IdleHuntJournal`은 절전 진입 시의 장비·획득 상태를 기준으로 삼고 `GameStore.Committed` 이후에만 교체·획득·결과를 관측한다. 저장 실패나 중복 저장으로 성공 기록이 생기지 않는다. 기록은 이번 전경 세션에 속하며, 절전 재진입 시 초기화한다. 계정 장비와 전투 체크포인트는 기존 저장 파일에 남지만, 절전 화면의 상세 로그를 별도로 영구 저장하지 않는다.
 
-시간·표시 상태·미실행 보상 관련 집중 검사 30개가 통과했다. 세 직업·두 빌드·세 배속에서 각각 1,000회 화면 상태를 전환한 뒤 고정 틱 기준 실행과 전투 상태 전체를 비교했다. 영웅·적·행동 단계·투사체·난수·보상 상태가 같았다. 일시적인 지연, 지속적인 처리 지연, 일시정지와 앱 중단, 정산 실패·재시도·재실행 및 기기 설정 파일 보호도 검사했다.
+창고·인벤토리·당시 장비 상세는 `ContentWindowHost`의 중첩 일시정지를 사용한다. 열려 있는 동안 전투, 피로도 소모, 자동 정리와 다음 도전의 대기 시간이 멈춘다. 마지막 상세창을 닫으면 이전 상태로 돌아가며, 이미 있던 수동 일시정지나 오류 대기를 강제로 해제하지 않는다. 해제 게이지 도중 상세창을 열면 해제 시도는 취소된다.
 
-Apple M3 Pro(Mac15,7), Unity 6000.6.0f1, Mono 개발 빌드, PC 품질, 1280×720에서 고정 시드 93171·30단계 마법사 연쇄 제어와 준비된 합법 장비를 사용했다. 3초 준비 후 20초를 측정했으며, 잠깐 보기는 자동 복귀 전인 8초를 측정했다. 아래의 출력 대상은 Unity의 출력 예약 프레임 수이며 실제 GPU 제출 횟수나 패널 전력이 아니다. 월드·효과·HUD 0회는 일반 표시 경로의 값이며 최소 요약 UI의 비용은 제외한다. Main Thread 값에는 프레임 제한 대기가 섞여 있고 Draw Calls/Batches는 일반 화면에서도 0이므로 CPU 작업 시간이나 GPU 절감률의 근거로 쓰지 않았다.
+앱 중단 시에는 기존 체크포인트를 저장하고 절전 화면을 해제한다. 복귀만으로 사냥을 자동 재개하거나 중단 시간을 전투로 따라잡지 않는다. 기존 미접속 보급 정산과 절전 화면의 기록은 별개다.
 
-| 측정 | 실제 시간(초) | 전투 틱 | 월드 / 효과 / 일반 HUD 갱신 | 출력 대상 프레임 | 원본 |
-|---|---:|---:|---|---:|---|
-| 변경 전 일반 1 | 20.015 | 401 | 1193 / 174 / 1193 | — | [JSON](../../Artifacts/Validation/IdleMode/Normal1/profile.json) |
-| 변경 전 일반 2 | 20.011 | 401 | 1193 / 174 / 1193 | — | [JSON](../../Artifacts/Validation/IdleMode/Normal2/profile.json) |
-| 변경 전 일반 3 | 20.015 | 401 | 1195 / 174 / 1195 | — | [JSON](../../Artifacts/Validation/IdleMode/Normal3/profile.json) |
-| 최종 일반 | 20.015 | 400 | 1188 / 174 / 1188 | 1188 | [JSON](../../Artifacts/Validation/IdleMode/AfterNormal1/profile.json) |
-| 최종 절전 1 | 20.006 | 400 | 0 / 0 / 0 | 21 | [JSON](../../Artifacts/Validation/IdleMode/Dim2/profile.json) |
-| 최종 절전 2 | 20.042 | 401 | 0 / 0 / 0 | 21 | [JSON](../../Artifacts/Validation/IdleMode/Dim3/profile.json) |
-| 최종 절전 3 | 20.011 | 401 | 0 / 0 / 0 | 21 | [JSON](../../Artifacts/Validation/IdleMode/Dim4/profile.json) |
-| 최종 잠깐 보기 | 8.026 | 161 | 240 / 75 / 240 | 240 | [JSON](../../Artifacts/Validation/IdleMode/Peek1/profile.json) |
+## 절전 동작과 공통 UI
 
-최종 일반·절전·잠깐 보기는 모두 Build10을 사용한다. 변경 전 시계와 최종 시계의 경계 처리 차이를 감추지 않고 원본을 보존했으며, 표시 작업의 직접 비교는 같은 최종 소스를 기준으로 한다.
+2026-09-28 밀도 개선: 장비 변경 로그의 시각과 부위명은 한 줄로 표시한다. 공통 장비 칸을 40 단위로 줄이고 행 간 여백을 6 단위로 맞춰 100% 기준 행 높이를 78에서 46으로 줄였다. 이전·이후 장비를 누르면 기존 상세창이 열린다. [현재 UI 규칙](Responsive_Hud_20260928.md)을 따른다.
 
-최종 실행 검사는 실제 UI 이벤트로 첫 안내·10초 자동 복귀·계속 보기·메뉴 진입·다음 판 중단·저장 실패·앱 복귀·재실행을 확인했다. 반복 경계를 검사할 때는 실제 포기 경로로 종료 결과를 만들었고, 앱 중단 콜백과 저장 오류를 의도적으로 주입했다. 자연 승리나 물리적 터치·OS 잠금 검사로 해석하지 않는다. 재실행 시에는 마을의 기존 균열 이어하기 조작으로 보존한 상태를 재개한다.
+검은 화면으로 덮는 것과 함께 실제 월드 오브젝트·전투 카메라·타격 효과 표시·일반 HUD 갱신을 중단한다. 반복 균열의 표시 오브젝트도 해제 전까지 생성하지 않는다. 오디오 재생·대기 효과·전투 오디오 관측을 정지하고, 해제 시 이미 지난 효과를 다시 재생하지 않는다.
 
-전체 검사 소스와 최종 앱의 차이는 재실행 검사 도구 한 파일뿐이다. 기존 이어하기 버튼을 누른 뒤 다시 일시정지를 요구하던 잘못된 검사 조건을 고쳤고, 최종 실제 앱에서 통과했다. 게임·UI·시계·번역·Edit Mode 검사 소스는 전체 검사와 동일하다.
+정지 상태의 업데이트 목표는 초당 20회, 렌더링 간격은 20프레임으로 약 초당 한 번 표시한다. 요약 텍스트도 초당 한 번 갱신한다. 스크롤·상세창·3초 해제 게이지를 조작할 때만 초당 30회 표시하며, 끝나면 다시 낮춘다. 해제 시 진입 전 프레임 제한·수직 동기화·렌더링 간격·화면 절전 정책을 복원한다. 화면 꺼짐은 실제 전투 지속과 양립하지 않으므로 방지하며, 기기 전체 밝기는 바꾸지 않는다.
 
-이 결과는 휴대폰 배터리 절감률이나 완성된 모바일 절전 기능을 뜻하지 않는다. Android의 기기별 전력·발열·장시간 동작, 실제 터치·잠금·최소화 이벤트, 앱 창 밝기, 저전력·열 상태에 따른 중단, 실제 오디오·진동 정책은 후속 검증·구현 범위다. 화면 복귀 지연의 기기별 p95 목표도 아직 입증하지 않았다.
+기존 `GameUI.Idle` 캔버스가 절전 HUD를 소유한다. 전투를 계속해야 하므로 이 배경 자체에는 콘텐츠 창의 일시정지를 걸지 않는다. 테마·글꼴·안전 영역·장비 슬롯은 공통 소유자를 사용한다. 새 장비 상세 진입점 `IdleEquipmentDetailWindow`는 `tools/new_content_ui.py`로 생성한 `ContentWindowView`를 사용하고 데이터 출처를 `RewardSnapshot`으로 명시한다.
 
-구현 근거: [전투 시계](../../Assets/HELLSCRIPT/Runtime/Core/ForegroundCombatClock.cs), [표시 상태](../../Assets/HELLSCRIPT/Runtime/Presentation/GameController.Idle.cs), [절전 UI](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Idle.cs), [월드 복원](../../Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Idle.cs), [미실행 정산](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.cs).
+## 위치·성장 표시 추가 검증
 
-## 검증 파일과 화면
+관련 Edit Mode 검사 **94/94**와 공통 UI 검사 **9/9**를 통과했다. 새 상태·성장 검사는 13개이며, 실제 목표 수, 처치 게이지, 보스·전리품·포털 상태, 정리·물약·저장 대기, 반복 입장과 레벨 상한을 확인한다. 기존 결과 문구인 클리어·실패의 영어 항목 두 개도 보완했다.
 
-[Validation summary](../../Artifacts/Validation/IdleMode/validation-summary.json) · [Full Edit Mode XML](../../Artifacts/Validation/idle-display-editmode.xml) · [Source hashes](../../Artifacts/Validation/IdleMode/validated-source.json) · [Harness diff](../../Artifacts/Validation/IdleMode/Full2-to-Build10.diff) · [Profile summary](../../Artifacts/Validation/IdleMode/profile-summary.json) · [Visual review](../../Artifacts/Validation/IdleMode/visual-review.json)
+macOS 실행본에서 5개 화면 크기 × 한국어·영어 × 글자 100%·150%의 20개 조합을 다시 검사했다. 경험치 50%인 39레벨 캐릭터가 전투 성장 처리로 40레벨에 도달한 뒤, 강제 화면 갱신 없이 레벨·경험치 표시가 바뀌는 것을 확인했다. 모든 상태 문구의 높이와 성장·해제 영역의 분리, 각 로그의 한 행 전체 표시를 검사했다. 낮은 가로 화면은 캡처 검토 후 성장 정보를 왼쪽 하단에 배치했다. 실제 포인터 열기·닫기·스크롤, 반복 사냥, 해제·저장 실패·재시작도 통과했다. MCP 연결 인스턴스가 없어 기존 배치 검사와 macOS 개발 실행본으로 검증했다.
 
-| Native8 | Capture |
-|---|---|
-| initial-01-battle-entry-ko | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-01-battle-entry-ko.png) |
-| initial-02-introduction-ko | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-02-introduction-ko.png) |
-| initial-03-introduction-en-140 | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-03-introduction-en-140.png) |
-| initial-04-dimmed-en-140 | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-04-dimmed-en-140.png) |
-| initial-05-peek-en-140 | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-05-peek-en-140.png) |
-| initial-06-automatic-dim-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-06-automatic-dim-en.png) |
-| initial-07-next-rift-deferred-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-07-next-rift-deferred-en.png) |
-| initial-08-repeat-stopped-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-08-repeat-stopped-en.png) |
-| initial-09-save-blocked-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-09-save-blocked-en.png) |
-| initial-10-foreground-resume-required-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-10-foreground-resume-required-en.png) |
-| restart-01-resume-choice-town-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/restart-01-resume-choice-town-en.png) |
-| restart-02-suspended-rift-restored-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/restart-02-suspended-rift-restored-en.png) |
-| restart-03-remembered-idle-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/restart-03-remembered-idle-en.png) |
+- [추가 검증 요약](IdleDisplayStatusEvidence/validation.json) · [Edit Mode 결과](IdleDisplayStatusEvidence/editmode.xml) · [실행 결과](IdleDisplayStatusEvidence/runtime.txt) · [재시작](IdleDisplayStatusEvidence/restart.txt) · [소스 해시](IdleDisplayStatusEvidence/source-hashes.json)
+- [레벨·경험치](IdleDisplayStatusEvidence/growth-live-ko.png) · [레벨업 반영](IdleDisplayStatusEvidence/growth-level-up-ko.png) · [가로 영어 화면](IdleDisplayStatusEvidence/idle-956x440-en.png) · [해제 게이지](IdleDisplayStatusEvidence/unlock-countdown-ko.png)
 
-| Profile | Capture |
-|---|---|
-| 최종 일반 | [PNG](../../Artifacts/Validation/IdleMode/AfterNormal1/profile.png) |
-| 최종 절전 1 | [PNG](../../Artifacts/Validation/IdleMode/Dim2/profile.png) |
-| 최종 절전 2 | [PNG](../../Artifacts/Validation/IdleMode/Dim3/profile.png) |
-| 최종 절전 3 | [PNG](../../Artifacts/Validation/IdleMode/Dim4/profile.png) |
-| 최종 잠깐 보기 | [PNG](../../Artifacts/Validation/IdleMode/Peek1/profile.png) |
+## 기존 절전 기능 검증
+
+Unity 6000.6.0f1, Apple M3 Pro의 macOS 개발 빌드에서 검증했다. 관련 Edit Mode 검사 **148/148**, 공통 UI 검사 **9/9**, 실행·재시작 검증이 통과했다. 다섯 화면 크기 × 한국어·영어 × 글자 100%·150%의 20개 조합에서 텍스트 높이, 고정 버튼의 안전 영역, 실제 포인터 입력과 스크롤을 검사했다. 창고·인벤토리의 실제 열기·닫기, 이전 장비 상세, 실패 결과 저장과 다음 균열, 3초 게이지, 상세창에 따른 해제 취소, 의도적인 저장 실패와 복구를 확인했다.
+
+같은 실행본에서 일반 화면은 2초 동안 월드·HUD를 갱신했다. 절전 화면은 약 2.2초 동안 전투가 같은 실제 시간만큼 진행됐고, 월드·일반 HUD 갱신은 0회, 카메라와 오디오는 정지 상태였다. 정확한 카운터는 [실행 결과](IdleDisplayEvidence/runtime.txt)에 기록했다. 이는 배터리 절감률이나 CPU·GPU 사용량을 측정한 결과가 아니다.
+
+- [검증 요약](IdleDisplayEvidence/validation.json) · [Edit Mode 결과](IdleDisplayEvidence/editmode.xml) · [재시작 결과](IdleDisplayEvidence/restart.txt) · [검증 소스 해시](IdleDisplayEvidence/source-hashes.json)
+- [세로 화면](IdleDisplayEvidence/idle-440x956-ko.png) · [가로 영어 화면](IdleDisplayEvidence/idle-956x440-en.png) · [3초 해제 게이지](IdleDisplayEvidence/unlock-countdown-ko.png)
+
+초기 검사에서 공통 UI 테스트가 이전 분류 수 25개를 고정하고 있었다. 선행 자동 착용 기능으로 이미 35개인 실제 분류에 맞춰 기대값을 수정했다. 첫 실행 검증은 비동기 균열 입장을 기다리도록 검사 절차를 보완한 뒤 재실행했다.
+
+최초 작업 브랜치는 `codex/power-saving-hunt`였다. 이후 [2026-09-28 전체 통합](All_Work_Integration_20260928.md)에 포함했고 공개 반영은 병합된 `main`을 기준으로 한다. 모바일 실기기의 배터리·발열·물리 터치와 OS 화면 잠금은 확인하지 않았다.

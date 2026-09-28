@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-28",
+  "unity": "6000.6.0f1",
+  "build": "macOS development build succeeded (Build Finished, Result: Success)",
+  "editMode": {
+    "total": "170",
+    "passed": "169",
+    "failed": "1",
+    "skipped": "0"
+  },
+  "editModeFailures": {
+    "Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry": "Pre-existing on origin/main c751d84d: RuntimeFirstPlayAcceptance.cs has two Korean search literals without table entries. Not touched by this change."
+  },
+  "runtime": "PASS: login order, both claims, independent hide-today checkboxes, same-day suppression and manual reopen, midnight rollover, weekly rewards, legendary box opening, battle pause restoration, automatic town heartbeat with preserved page/scroll, 97 raycast-verified clicks, 22 uGUI drag gestures, 42 viewport/language/scale page checks. Isolated native macOS player; physical mobile not tested.",
+  "art": "PASS: 612 reward sprite checks and 714 claimed-seal checks across 42 viewport/language/scale page checks, the altar backdrop on every page, and 364 day tiles inside the unscrolled body at 100% reading scale. Gold, random cores and legendary chests use their dedicated alpha sprites; existing coins and gems are preserved.",
+  "restart": "PASS: fresh process restored account progress, all reward balances, opened legendary and both device popup preferences. Manual event button bypassed suppression.",
+  "screenshotsCaptured": 47,
+  "representativeScreenshots": [
+    "field-button-440x956-150.png",
+    "field-button-956x440-150.png",
+    "field-event.png",
+    "monthly-1440x810-ko-100.png",
+    "monthly-1440x900-en-100.png",
+    "monthly-1680x720-en-150.png",
+    "monthly-440x956-en-150.png",
+    "monthly-440x956-ko-100.png",
+    "monthly-956x440-en-150.png",
+    "weekly-1440x810-ko-100.png",
+    "weekly-1680x720-ko-100.png",
+    "weekly-440x956-en-150.png",
+    "weekly-440x956-ko-100.png",
+    "weekly-956x440-ko-100.png",
+    "weekly-chest-stash-1440x810-ko-100.png",
+    "weekly-claimed-440x956-ko-100.png"
+  ],
+  "layouts": [
+    "440x956 portrait",
+    "956x440 landscape phone",
+    "1440x810 PC 16:9",
+    "1440x900 PC 16:10",
+    "1680x720 PC 21:9"
+  ],
+  "physicalMobile": "not tested",
+  "unityMcp": "not connected in this session; batchmode clone used instead",
+  "model": "unverified; Codex built-in generation returned model=null",
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs": "6631cd82f41fd49ff1c863833f35e46f0175ac4caf62a1cbaffba784496da781",
+    "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs": "55e716e0176d26b1b54dd5c43ce9c3b60ece0faa5fbd04f586c3ae27c6636fd4",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Attendance.cs": "7183806d16116988287b87038214591fbca4494035242bfd5ff0948a336dead4",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Tutorials.cs": "abe02a1c16dbe29c9839dcd00bda6e24cc66c203a9b2fcf5e537f3c97cee696e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs": "253818f56c225e3d2d8ab57bc05c1c0ba410a2ebda956511d38b15c628b67b94",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAttendanceSmoke.cs": "8504fbcd1dfcb061f98e9160a925d39528ff2e7772ac7986333978f51270a2ab",
+    "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs": "fe9cca308e80e46eed27862926ac8cde03c4befe10437496a547188f37adcecc",
+    "Assets/HELLSCRIPT/Editor/AndroidTextureBudget.cs": "c582868dd0e2a4ea287d55375cc7e5ac3d021c2096f68e363f54fa976c3c2dcb",
+    "Assets/HELLSCRIPT/Tests/Editor/AttendanceArtTests.cs": "5847d4c9761dec759556f7d938dc3e277d37bc9c0b32e78913b82b684d264056",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "fc7ec63b9de669528e7cf26ec11609e6fd265b92580828c4ba5fc56e5958a27c",
+    "Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png": "05d2b3df863412c16ca55b75dc6f9b4b37c4bd01f891ea569e8456aa409a3f44",
+    "Assets/HELLSCRIPT/Resources/Art/Attendance/claimed-seal.png": "6e175b6d864b25b237fc7a30e3793600c4fbc0849f863f2d029e214a1fb5614e"
+  }
+}

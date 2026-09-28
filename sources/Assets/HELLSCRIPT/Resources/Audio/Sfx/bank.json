@@ -1,5 +1,5 @@
 {
- "revision": "hellscript-sfx-v1",
+ "revision": "hellscript-elevenlabs-final-v1",
  "sampleRate": 48000,
  "sounds": [
   {
@@ -810,15 +810,16 @@
    "en": "Gamble reveal beat",
    "category": "town",
    "clips": [
-    "shop_gamble_beat_1",
-    "shop_gamble_beat_2"
+    "ui_click_heavy_1",
+    "ui_click_heavy_2"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.2,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "ui.click_heavy"
   },
   {
    "id": "forge.reroll",
@@ -965,15 +966,16 @@
    "en": "Socket gem",
    "category": "town",
    "clips": [
-    "gem_socket_1",
-    "gem_socket_2"
+    "item_equip_orb_1",
+    "item_equip_orb_2"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "item.equip.orb"
   },
   {
    "id": "gem.remove",
@@ -1026,15 +1028,16 @@
    "en": "Place rune",
    "category": "town",
    "clips": [
-    "rune_place_1",
-    "rune_place_2"
+    "forge_core_invest_1",
+    "forge_core_invest_2"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "forge.core_invest"
   },
   {
    "id": "rune.rotate",
@@ -1042,15 +1045,16 @@
    "en": "Rotate rune",
    "category": "town",
    "clips": [
-    "rune_rotate_1",
-    "rune_rotate_2"
+    "loot_stone_1",
+    "loot_stone_2"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "loot.stone"
   },
   {
    "id": "rune.remove",
@@ -1058,14 +1062,15 @@
    "en": "Remove rune",
    "category": "town",
    "clips": [
-    "rune_remove_1"
+    "gem_remove_1"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "gem.remove"
   },
   {
    "id": "rune.fuse",
@@ -1073,14 +1078,15 @@
    "en": "Fuse runes",
    "category": "town",
    "clips": [
-    "rune_fuse_1"
+    "gem_fuse_1"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "gem.fuse"
   },
   {
    "id": "rune.ascend",
@@ -1103,14 +1109,15 @@
    "en": "Unlock rune cell",
    "category": "town",
    "clips": [
-    "rune_unlock_1"
+    "aspect_upgrade_1"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "aspect.upgrade"
   },
   {
    "id": "aspect.imprint",
@@ -1148,15 +1155,15 @@
    "en": "Open reward box",
    "category": "town",
    "clips": [
-    "reward_box_open_1",
-    "reward_box_open_2"
+    "reward_chest_1"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "reward.chest"
   },
   {
    "id": "reward.claim",
@@ -1164,15 +1171,16 @@
    "en": "Claim reward",
    "category": "town",
    "clips": [
-    "reward_claim_1",
-    "reward_claim_2"
+    "ui_confirm_1",
+    "ui_confirm_2"
    ],
    "volume": 1.0,
    "pitch": 0.02,
    "cooldown": 0.08,
    "priority": 75,
    "limit": 2,
-   "group": ""
+   "group": "",
+   "sharedCue": "ui.confirm"
   },
   {
    "id": "reward.chest",
@@ -4433,5 +4441,6 @@
    "limit": 2,
    "group": ""
   }
- ]
+ ],
+ "sourceManifest": "AudioSources/ElevenLabs/manifest.json"
 }

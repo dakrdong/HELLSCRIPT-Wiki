@@ -19,6 +19,7 @@ namespace Hellscript
         readonly GameCatalog catalog;
         readonly List<EnemyState> sensed=new List<EnemyState>();
         public event Action<Vector2,Vector2,int,float> Visual;
+        public Func<string,BagPolicy,bool,EquipmentLootResult> CommitRecommendedLoot;
         CombatEffectState ItemEffects=>State.itemEffects;
         float lastLog {get=>ItemEffects.lastLog;set=>ItemEffects.lastLog=value;}
         float lastPull {get=>ItemEffects.lastPull;set=>ItemEffects.lastPull=value;}
@@ -44,6 +45,7 @@ namespace Hellscript
             this.account=copyAccount?JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account)):account;this.catalog=catalog;Hero=this.account.Hero;
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
+            if(restore==null)RiftResult.Begin(this.account,State);
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
             if(restore==null&&training<0)State.liveOps=liveOps==null?LiveOpsConfig.Capture(null,State.stage):CombatJournal.Copy(liveOps);
             LiveOpsConfig.NormalizeRun(State);
@@ -263,7 +265,7 @@ namespace Hellscript
                     if(skill.kind==SkillKind.Nova&&novaHits>0&&Stats.SetPieces("SMB")>=4){ItemEffects.chainCharge=6;ItemEffects.chainCharges=2;EffectEvent("SMB4","CHARGE",root:action.id,value:2);}
                     foreach(var e in AreaTargets(origin,3*ClassArea(action.id),default,360)){ApplyStatus(e,skill.kind==SkillKind.Nova?StatusKind.Freeze:StatusKind.Stun,SkillId(index),1.5f,action.id);if(skill.kind==SkillKind.Nova)ClassFreeze("M06",e,action.id);}break;
                 case SkillKind.Shield:AddShield(SkillId(index),Stats.hp*SkillEffects.ShieldFraction(Hero.heroClass,SkillEffects.ActiveRank(Ranks,index)),index==4&&Set("REF_SW02",3)?5:4,action.id);break;
-                case SkillKind.Shout:{int rank=SkillEffects.ActiveRank(Ranks,index);State.resource=Mathf.Min(Stats.maxResource,State.resource+SkillEffects.ShoutResource(rank));State.shoutTime=6;State.shoutBonus=SkillEffects.ShoutBonus(rank);break;}
+                case SkillKind.Shout:{int rank=SkillEffects.ActiveRank(Ranks,index);float before=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+SkillEffects.ShoutResource(rank));CombatTelemetry.Support(State.statistics,SkillId(index),SkillResultMetric.Resource,State.resource-before);State.shoutTime=6;State.shoutBonus=SkillEffects.ShoutBonus(rank);break;}
                 case SkillKind.Pierce:LaunchPierce(action);break;
                 case SkillKind.Multi:LaunchMulti(action);break;
                 case SkillKind.Trap:CreateTrap(action,aim,5);break;
@@ -450,9 +452,9 @@ namespace Hellscript
         int RollRarity(RiftRewardSource source,ref uint random)=>RiftRarity.WithMagicChance(RiftRarity.Get(source,State.stage,Tuning.Rarity),Stats.magicFind).Roll(RandomStream.Unit(ref random));
         void Drop(Vector2 pos,int rarity)=>DropFrom(pos,rarity,ref State.rewardRng);
         // Named apart from Drop so reflection by name in the tests still finds one method.
-        void DropFrom(Vector2 pos,int rarity,ref uint rng)
+        void DropFrom(Vector2 pos,int rarity,ref uint rng,RiftLootSource source=RiftLootSource.FieldMonster)
         {
-            int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,item=Economy.CreateRiftItem(Hero.heroClass,RandomStream.Range(ref rng,0,8),rarity,RandomStream.Range(ref rng,Mathf.Max(1,State.stage-2),State.stage+3),State.stage,ref rng,State.id+"-"+id)});
+            int id=State.nextId++;State.drops.Add(new DropState{id=id,position=pos,source=source,item=Economy.CreateRiftItem(Hero.heroClass,RandomStream.Range(ref rng,0,8),rarity,RandomStream.Range(ref rng,Mathf.Max(1,State.stage-2),State.stage+3),State.stage,ref rng,State.id+"-"+id)});
         }
         void AddGround(Vector2 pos,float radius,float delay,float duration,float damage,bool hostile,int kind,int element=0,string caster=null,string definition=null,int root=0,bool? followsTarget=null)
         {
@@ -536,7 +538,22 @@ namespace Hellscript
                 bool shortage=BagShort;
                 if(shortage&&Policy.bagPolicy==BagPolicy.Ignore){drop.ignored=true;continue;}
                 if(shortage&&Policy.bagPolicy==BagPolicy.Portal&&Economy.FreeSlots(Hero)>0){PortalForBag(dt);return;}
-                if(Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account,edictField?.replacementRank=="RARITY")){drop.claimed=true;State.lootCount++;Log("LOOT",drop.item.name);}
+                var rewardSnapshot=CombatJournal.Copy(drop.item);
+                bool atomic=State.training<0&&EquipmentRecommendation.Enabled(Hero)&&CommitRecommendedLoot!=null;
+                var acquired=atomic?CommitRecommendedLoot(drop.item.id,Policy.bagPolicy,edictField?.replacementRank=="RARITY"):
+                    Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account,edictField?.replacementRank=="RARITY")?EquipmentLootResult.Acquired:EquipmentLootResult.Rejected;
+                if(acquired==EquipmentLootResult.SaveFailed){State.paused=true;Log("LOOT_SAVE_FAILED",Loc.T("장비 획득을 저장하지 못해 사냥을 일시정지했습니다."));return;}
+                if(acquired==EquipmentLootResult.Acquired)
+                {
+                    drop.item=rewardSnapshot;drop.outcome=RiftLootOutcome.Kept;
+                    if(!atomic){drop.claimed=true;State.lootCount++;}Log("LOOT",drop.item.name);
+                    var owned=Hero.inventory.Find(i=>i.id==drop.item.id);
+                    if(owned!=null&&owned.equipped)
+                    {
+                        RefreshEquipment();State.health=Mathf.Min(State.health,Stats.hp);State.resource=Mathf.Min(State.resource,Stats.maxResource);
+                        Log("AUTO_EQUIP",Loc.F("추천 착용: {0} · 장비 점수 {1:0.0}",owned.DisplayName,EquipmentScore.Value(owned)));
+                    }
+                }
                 else if(Policy.bagPolicy==BagPolicy.Portal||Policy.bagPolicy==BagPolicy.Replace&&edictField?.replacementFail=="PORTAL"){PortalForBag(dt);return;}
                 else drop.ignored=true;
             }
@@ -546,15 +563,15 @@ namespace Hellscript
         {
             if(State.bossRewarded)return;CompleteReadyChest();if(!string.IsNullOrEmpty(State.navigationError))return;CloseUnopenedChests();State.bossRewarded=true;State.phase=RunPhase.Looting;InterruptHeroAction("보스 처치 후 전리품 정리");State.activeSkill=-1;
             RiftResources.Add(State,RiftResourceKind.Gold,State.position,KillGold(Tuning.ClearGold(State.stage)));
-            RiftResources.Add(State,RiftResourceKind.Material,State.position,Tuning.ClearMaterials(State.stage));
-            RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,LiveOpsConfig.Scale(BlacksmithCatalog.RewardStones(State.stage),Tuning.bossStoneMultiplier));
+            RiftResources.Add(State,RiftResourceKind.Material,State.position,Tuning.ClearMaterials(State.stage),source:RiftLootSource.BossMonster);
+            RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,LiveOpsConfig.Scale(BlacksmithCatalog.RewardStones(State.stage),Tuning.bossStoneMultiplier),source:RiftLootSource.BossMonster);
             RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
             var upcoming=ContentUnlocks.NextLocked(account);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(Tuning.FirstGold(State.stage)));RiftEarnings.GrantMaterials(account,State,Tuning.FirstMaterials(State.stage));Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
             for(int i=0;i<Tuning.bossEquipmentCount;i++)
                 if(Tuning.bossEquipmentChance>=1||RandomStream.Unit(ref State.rewardRng)<Tuning.bossEquipmentChance)
-                    Drop(State.position+new Vector2(i%3-1,1+i/3*.3f),RollRarity(RiftRewardSource.Boss,ref State.rewardRng));
+                    DropFrom(State.position+new Vector2(i%3-1,1+i/3*.3f),RollRarity(RiftRewardSource.Boss,ref State.rewardRng),ref State.rewardRng,RiftLootSource.BossMonster);
             RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);
             if(State.journal!=null)
@@ -574,6 +591,7 @@ namespace Hellscript
             CombatTelemetry.Finish(State.statistics,completion);
             CloseUnopenedChests();State.phase=won?RunPhase.Cleared:RunPhase.Failed;State.action=reason;Log("RUN_END",reason);
             if(State.training>=0)return;
+            RiftResult.Complete(Hero,State,completion);
             RiftEntryRules.Complete(Hero,State,completion);
             if(won&&completion!=CombatFinish.Abandoned)RewardBoxes.CaptureClear(account,State);
             OfflineSupplies.RecordClear(account,State,RepeatPolicy.resultSeconds);

@@ -37,6 +37,8 @@ namespace Hellscript
         public string runeConfigurationJson;
         public int[] slotLevels;
         public PotionRuntimeState initialPotions;
+        public RiftCombatRecord combatRecord;
+        public List<RiftRuneDrop> runeDrops=new List<RiftRuneDrop>();
         public List<DropState> equipmentDrops=new List<DropState>();
         public List<RiftResourceDrop> resourceDrops=new List<RiftResourceDrop>();
         public List<CombatJournalEvent> events=new List<CombatJournalEvent>();
@@ -215,6 +217,7 @@ namespace Hellscript
             j.priorUnexportedLossCount=account.combatTelemetryLossCount;
             if(j.priorUnexportedLossCount>0&&!j.integritySignals.Contains("LOCAL_EXPORT_LOSS"))j.integritySignals.Add("LOCAL_EXPORT_LOSS");
             j.runesAwarded=State.runesAwarded;j.walkingDistance=State.moveDistance;
+            j.combatRecord=CombatJournal.Copy(State.combatRecord);j.runeDrops=(State.runeDrops??new List<RiftRuneDrop>()).Select(CombatJournal.Copy).ToList();
             j.equipmentDrops=State.drops.Select(CombatJournal.Copy).ToList();j.resourceDrops=State.resources.Select(CombatJournal.Copy).ToList();
             var window=record.review?.finalWindow;
             string message=Loc.Source("전투 종료: {0} · {1:0.0}초 · 처치 {2} · 획득 골드 {3}",State.action,State.time,State.kills,State.earnedGold);

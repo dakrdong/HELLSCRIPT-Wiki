@@ -92,8 +92,9 @@ namespace Hellscript
         }
         static bool AcquiredGoal(RunState run,RepeatHuntPolicy policy)=>run.drops.Any(d=>d.claimed&&d.item!=null&&d.item.acquiredOrder>0&&
             (policy.effects.Contains(d.item.special)||policy.sets.Contains(ItemCatalog.Unique(d.item.special)?.setId??"")));
-        public static RepeatBlock SpaceBlock(RepeatHuntSession s,HeroSave hero)
+        public static RepeatBlock SpaceBlock(RepeatHuntSession s,HeroSave hero,AccountSave account=null)
         {
+            if(account!=null&&s.policy.cleanup?.stopOnWarehouseFull==true&&!EquipmentAutomation.HasWarehouseRoom(account))return RepeatBlock.Warehouse;
             int free=Economy.FreeSlots(hero);
             return free<s.policy.freeSlots||s.policy.stopWhenFull&&free<=0?RepeatBlock.Bag:RepeatBlock.None;
         }
@@ -121,7 +122,7 @@ namespace Hellscript
             p.stage>=0&&p.stage<=1000&&p.freeSlots>=0&&p.freeSlots<=100&&!float.IsNaN(p.resultSeconds)&&p.resultSeconds>=0&&p.resultSeconds<=30&&
             (p.success==RepeatOutcome.Same||p.success==RepeatOutcome.Next||p.success==RepeatOutcome.Stop)&&
             (p.failure==RepeatOutcome.Same||p.failure==RepeatOutcome.Lower||p.failure==RepeatOutcome.Stop)&&
-            (p.cleanup==null||p.cleanup.actions?.Length==5&&p.cleanup.actions.All(a=>Enum.IsDefined(typeof(EdictCleanupAction),a))&&Enum.IsDefined(typeof(EdictCleanupTime),p.cleanup.when)&&p.cleanup.effects!=null&&p.cleanup.sets!=null);
+            (p.cleanup==null||p.cleanup.actions?.Length==5&&p.cleanup.actions.All(a=>Enum.IsDefined(typeof(EdictCleanupAction),a))&&Enum.IsDefined(typeof(EdictCleanupTime),p.cleanup.when)&&Enum.IsDefined(typeof(WarehouseAdmission),p.cleanup.warehouseAdmission)&&p.cleanup.effects!=null&&p.cleanup.sets!=null);
     }
 
     public static class RiftEarnings

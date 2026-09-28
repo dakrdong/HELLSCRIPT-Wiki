@@ -90,7 +90,8 @@ namespace Hellscript
         public bool awakened;
         public int masterwork,masterworkInvestedMaterials;
         public List<string> masterworkLines=new List<string>();
-        public long acquiredOrder;
+        public long acquiredOrder,warehouseOrder;
+        public bool pendingAutoStorage;
         public bool reviewed;
         public HeroClass lootClass;
         public List<AffixRoll> rolls=new List<AffixRoll>();
@@ -177,7 +178,7 @@ namespace Hellscript
         public string[] warehouseNames=new string[StorageRules.Tabs];
         public string sweepDay="";
         public long lastSeenUtc;
-        public long itemSequence;
+        public long itemSequence,warehouseSequence;
         public float speed=1;
         public List<HeroSave> heroes=new List<HeroSave>();
         public List<Item> warehouse=new List<Item>();
@@ -293,7 +294,7 @@ namespace Hellscript
         public int chainCharges;
     }
     [Serializable]
-    public sealed class DropState { public int id; public Vector2 position; public Item item; public bool ignored, claimed, discovered; }
+    public sealed class DropState { public RiftLootSource source;public RiftLootOutcome outcome; public int id; public Vector2 position; public Item item; public bool ignored, claimed, discovered; }
     [Serializable]
     public sealed class RunState
     {
@@ -302,6 +303,8 @@ namespace Hellscript
         public int tutorialPhase;
         public string guideSetup="";
         public CombatJournalData journal;
+        public RiftCombatRecord combatRecord;
+        public List<RiftRuneDrop> runeDrops=new List<RiftRuneDrop>();
         public RiftAttendance riftAttendance=new RiftAttendance();
         public int[] slotLevels;
         public ClassSkillRuntimeState classSkills;

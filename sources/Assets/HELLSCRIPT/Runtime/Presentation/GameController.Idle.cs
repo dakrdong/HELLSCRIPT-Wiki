@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -9,6 +10,16 @@ namespace Hellscript
         readonly ForegroundCombatClock combatClock = new ForegroundCombatClock();
         readonly IdleDisplaySession idle = new IdleDisplaySession();
         IdlePreferenceStore idlePreferences;
+        public IdleHuntJournal IdleJournal { get; } = new IdleHuntJournal();
+        double unlockStarted = -1, idleInteractiveUntil;
+        public bool IdleUnlocking => unlockStarted >= 0;
+        public float IdleUnlockProgress => IdleUnlocking ? Mathf.Clamp01((float)((Time.realtimeSinceStartupAsDouble - unlockStarted) / 3)) : 0;
+        public void BeginIdleUnlock()
+        { if (DisplayDimmed && !UI.CommonPanelOpen && !IdleUnlocking) { unlockStarted = Time.realtimeSinceStartupAsDouble; ForceIdleFrame(); } }
+        public void WakeIdleInteraction()
+        { idleInteractiveUntil = Time.realtimeSinceStartupAsDouble + .7; ForceIdleFrame(); }
+        void ObserveIdleCommit(StoreChange change)
+        { if (IdleHunting) IdleJournal.Observe(Store.Data, Combat?.State, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()); }
         bool idleIntroduced, peekRequested, foregroundResumeRequired, foregroundSaveBlocked;
         int savedFrameRate, savedVSync, savedRenderInterval, savedSleepTimeout, forceIdleFrame, idleSummaryState;
         public IdleDisplayMode DisplayMode => idle.Mode;
@@ -22,12 +33,16 @@ namespace Hellscript
             !Combat.State.paused && !Combat.State.portal && !foregroundResumeRequired && !backgroundPaused &&
             string.IsNullOrEmpty(Combat.State.navigationError);
 
+        public string CommonIdleStatus()
+            => IdleHuntStatus.Read(Combat?.State, RepeatSession, UI.CommonPanelOpen,
+                !string.IsNullOrEmpty(ForegroundPauseReason), liveOpsAdmissionPending, repeatRestored);
+
         void InitializeIdle(string directory)
         { idlePreferences = new IdlePreferenceStore(directory); idleIntroduced = idlePreferences.Read(); combatClock.Reset(Time.realtimeSinceStartupAsDouble); }
         public void RequestIdle()
         {
             if (!CanEnterIdle) return;
-            if (!idleIntroduced) UI.ShowIdleIntroduction(); else EnterIdle();
+            EnterIdle();
         }
         public void EnterIdle()
         {
@@ -35,11 +50,14 @@ namespace Hellscript
             idleIntroduced = true; idlePreferences.Write();
             savedFrameRate = Application.targetFrameRate; savedVSync = QualitySettings.vSyncCount;
             savedRenderInterval = OnDemandRendering.renderFrameInterval; savedSleepTimeout = Screen.sleepTimeout;
+            IdleJournal.Begin(Store.Data, Combat.State, Time.realtimeSinceStartupAsDouble, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+            Store.Committed += ObserveIdleCommit;
+            unlockStarted = -1; idleInteractiveUntil = 0;
             idle.Enter(RepeatSession?.completed ?? 0); SetDimPresentation();
         }
         void SetDimPresentation()
         {
-            peekRequested = false; World.SuspendPresentation(); UI.ShowIdleDimmed();
+            peekRequested = false; World.SuspendPresentation(); Audio?.SetPowerSaving(true); UI.ShowIdleDimmed();
             Application.targetFrameRate = 20; QualitySettings.vSyncCount = 0;
             Screen.sleepTimeout = SleepTimeout.NeverSleep; ForceIdleFrame();
         }
@@ -51,11 +69,13 @@ namespace Hellscript
             ExitIdle(false);
             if (Combat == null) return;
             if (Combat.State.portal) UI.ShowBag(true); else if (Active) UI.ShowBattle(); else UI.ShowResult();
+            if (!string.IsNullOrEmpty(ForegroundPauseReason)) UI.ShowToast(ForegroundPauseReason);
         }
         public void ExitIdle(bool openingMenu = true)
         {
             if (!IdleHunting) return;
-            idle.Exit(); peekRequested = false;
+            Store.Committed -= ObserveIdleCommit;
+            idle.Exit(); peekRequested = false; unlockStarted = -1; Audio?.SetPowerSaving(false);
             Application.targetFrameRate = savedFrameRate; QualitySettings.vSyncCount = savedVSync;
             OnDemandRendering.renderFrameInterval = savedRenderInterval; Screen.sleepTimeout = savedSleepTimeout;
             UI.HideIdleOverlay();
@@ -68,6 +88,19 @@ namespace Hellscript
         {
             if (!IdleHunting) return;
             double now = Time.realtimeSinceStartupAsDouble;
+            if (IdleUnlocking && UI.CommonPanelOpen) unlockStarted = -1;
+            if (IdleUnlocking && now - unlockStarted >= 3) { KeepWatching(); return; }
+            if (DisplayDimmed && UI.CommonPanelOpen)
+            { Application.targetFrameRate = 30; OnDemandRendering.renderFrameInterval = 1; return; }
+            if (DisplayDimmed)
+            {
+                var input = Pointer.current;
+                if (input?.press.isPressed == true || Mouse.current != null && Mouse.current.scroll.ReadValue().sqrMagnitude > 0)
+                    idleInteractiveUntil = now + .7;
+                bool interactive = IdleUnlocking || now < idleInteractiveUntil;
+                Application.targetFrameRate = interactive ? 30 : 20;
+                if (interactive) ForceIdleFrame();
+            }
             if (DisplayMode == IdleDisplayMode.Peek)
             {
                 var pointer = Pointer.current;
@@ -111,7 +144,9 @@ namespace Hellscript
         }
         void OnDestroy()
         {
+            if (Store != null) Store.Committed -= ObserveIdleCommit;
             if (!IdleHunting) return;
+            Audio?.SetPowerSaving(false);
             Application.targetFrameRate=savedFrameRate;QualitySettings.vSyncCount=savedVSync;
             OnDemandRendering.renderFrameInterval=savedRenderInterval;Screen.sleepTimeout=savedSleepTimeout;
         }

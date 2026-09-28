@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-27",
+  "repairCommit": "13f8121b1751db8f9700aed353123bee35970a87",
+  "unity": "6000.6.0f1",
+  "initialFullEditMode": {
+    "total": 4214,
+    "passed": 4164,
+    "failed": 50,
+    "skipped": 0
+  },
+  "unchangedMainReproduction": {
+    "total": 47,
+    "passed": 0,
+    "failed": 47,
+    "skipped": 0
+  },
+  "newFailuresBeforeRepair": 3,
+  "repairedTargetedEditMode": {
+    "total": 311,
+    "passed": 311,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativeFlows": 11,
+  "nativeFailures": 0,
+  "build": "macOS development: succeeded, errors=0",
+  "uiContractTests": 9,
+  "audioToolTests": 7,
+  "equipmentVariantAudit": {
+    "inspected": 30,
+    "errors": 0
+  },
+  "limitations": [
+    "Full suite was not rerun after repair; 47 failures reproduce on unchanged main.",
+    "No live Unity MCP instance; batch Unity and standalone macOS validation.",
+    "Not physical-mobile touch/performance validation or human listening approval."
+  ],
+  "resultRefinements": {
+    "commit": "67a47973da83d74d74663b6055df2d4b47b700cf",
+    "editMode": {
+      "total": 147,
+      "passed": 147,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativeReruns": 5,
+    "distinctNativeFlows": 11,
+    "htmlLayouts": 20,
+    "successAndFailureNativeLayouts": 40,
+    "sharedFooterLogicalHeight": {
+      "previous": 94,
+      "keptItem": 50
+    },
+    "newArt": false,
+    "note": "Native macOS development player and synthetic uGUI input; no physical-mobile verification."
+  },
+  "focusRestoration": {
+    "commit": "949e844a50ff705db5307101581cdaa9a32b0cd3",
+    "editMode": {
+      "total": 42,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0
+    },
+    "nativeReruns": 2,
+    "nativePointerActions": 2,
+    "pointerReturnHasKeyboardBorder": false,
+    "keyboardNavigationPreserved": true
+  }
+}

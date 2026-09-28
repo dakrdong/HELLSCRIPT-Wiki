@@ -76,6 +76,7 @@ namespace Hellscript
             if(state.version==0||State.health<=0||state.resourceCooldown>0||def==null)return false;
             float next=Mathf.Min(Stats.maxResource,State.resource+Stats.maxResource*def.magnitude);
             if(next<=State.resource)return false;
+            CombatTelemetry.Support(State.statistics,def.id,SkillResultMetric.Resource,next-State.resource);
             State.resource=next;ConsumePotion(def);state.resourceCooldown=state.resourceTotal=RunePotionCooldown(def.cooldown);return true;
         }
         void TryUseUtilityPotion(bool moved)

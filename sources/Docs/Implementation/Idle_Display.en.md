@@ -1,80 +1,65 @@
-# Idle display and peek mode
+# Power-saving auto hunt
 
-Date: 2026-09-13 · [한국어](Idle_Display.md)
+Updated: 2026-09-27
+Korean: [자동 사냥 절전 모드](Idle_Display.md)
 
-Current reward policy: [Idle hunting and Offline Supplies](Idle_Offline_Supplies.en.md) supersedes the former gold/materials offline allowance with gold and enhancement stones at 5% of the last normal clear rate, capped at 12 hours. Production account/server wiring remains pending.
+## Display and interaction
 
-Historical status: the desktop implementation checkpoint passed all 2,471 tests, final native initial/restart checks, 13 screenshot reviews and five same-source profile captures. Android devices and platform-specific idle policies remain unfinished.
+An upper-center `Power saving` button appears during an ordinary automatic rift hunt. It immediately opens a black dashboard. Training, tutorials, paused combat, portals and recovery blockers cannot enter this mode.
 
-## Presentation and hunting
+`Hunt elapsed time` shows monotonic wall time since this entry as `HH:MM:SS`, including inspection time and without wrapping after 24 hours. The status distinguishes paused inspection from active hunting.
 
-The [idle specification](../Design/HELLSCRIPT_Idle_Mode_Detail.md) and [screen layout rules](../Design/HELLSCRIPT_Screen_Layout_Detail.md) guide three display states: normal, dimmed and peek. The entry button is available during an actual rift, excluding training, manual pause, portal cleanup, editing and confirmation dialogs. The first explanation displays the real repeat policy. Acceptance is stored as a separate device preference, never as account progression. Start and cancel remain in the footer on short landscape screens.
+The line below the timer shows current location and activity. Objective rifts read actual completed/total counts, such as `Rift Lv 15 : Progress 1 / 3`, and identify seals, essence carriers or offerings. Other rifts show the kill meter; boss and loot phases show their actual activity. The status also distinguishes return-portal inventory/storage blockers, potion replenishment, the next rift and entry countdown, inspection and save-failure pauses. Cleanup is an immediate portal/result transaction, so the display does not invent a walk through town. Completion is shown only with a committed cleanup report.
 
-The same `CombatSimulation` and `RunState` keep running. The dimmed state disables the battle camera and world presentation, skips normal HUD/minimap updates and suppresses transient impact creation. Its summary updates approximately once a second with priority for interruption reasons. The small summary shifts position every 60 seconds. Repeated rifts create their simulation data immediately but defer presentation objects until requested.
+A fixed bottom row shows the current character's face seal, level and XP bar. It shares class portraits and seal construction with `GlobalHudView`, and growth rules with `GlobalHudSnapshot.ReadGrowth`. Owned level and XP refresh once per second, including level-ups and the actual level cap. Portrait places growth above the unlock area; landscape places it at the bottom left so each log can show at least one complete row. Growth, lock/gauge and the bottom-center exit control do not overlap.
 
-Peek aligns the hero, visible enemies and camera to the current completed tick. Live projectiles, ground effects and chest states reflect their current state; expired impacts are not replayed. Peek targets 30 FPS and dims ten seconds after the last input. Keep watching or opening a menu cancels that timer and restores the prior frame target, v-sync, rendering interval and sleep policy. Global device brightness is not modified.
+- Warehouse: free slots / total capacity across every unlocked warehouse tab. Open storage launches the actual `StorageWindow`.
+- Equipment changes: committed change time, equipment position and before → after slots. Shared `EquipmentSlotView` controls open immutable historical copies through `ItemDetailView`. Later disposal, movement or enhancement cannot alter the captured item. Open inventory launches the actual `InventoryWindow`.
+- Equipment acquired: icon × count for magic, rare, legendary, set and unique. Pre-entry ownership and unclaimed floor drops are excluded; later disposal does not reduce acquired counts. Within the existing rarity-3 data, a definition with a set ID counts as set, another named unique as unique, and unnamed rarity-3 equipment as legendary. No drop probabilities or item rules change.
+- Rift attempts: every current/subsequent attempt retains its level, local start timestamp, actual elapsed run time and running/cleared/failed outcome. An in-progress rift uses its existing journal start timestamp. Duration is the committed `run.realTime` and freezes at completion.
 
-## Time, repetition and suspension
+Equipment and attempt logs scroll independently. Portrait stacks sections; landscape uses equal-width columns with warehouse and equipment changes on the left, acquired equipment and attempts on the right. A centered vertical divider separates only the body, leaving the shared timer/status and growth/unlock footer clear. Every session entry is retained; only visible rows create UI objects. The bottom exit control remains outside the scroll areas.
 
-A monotonic clock accumulates exact 1/20-second intervals for the existing 0.05-second simulation tick. Foreground elapsed time is no longer truncated to 0.25 seconds per frame, and display transitions retain the fractional tick. Each update has a 20-tick budget. More than 0.5 real seconds of pending work sustained for three seconds preserves the last completed tick and requires explicit resume.
+One tap on `Tap here to exit power saving` shows a shaking lock and a gauge directly above it. Normal presentation resumes after three monotonic seconds. Other blank areas do not unlock. The lock reuses the existing procedural `StorageGlyph`; no raster asset is generated.
 
-Repeat hunting depends on committed results rather than the visibility of the result page. Existing delays, stop conditions, cleanup and reward commits remain authoritative. Stop after this rift finishes the current rift and its settlement before stopping repetition. Save failures or insufficient bag space remain visible on the dimmed summary.
+## Combat, persistence and pause ownership
 
-Application suspension saves and pauses combat. Returning restores the normal display and requires Resume; suspended time is not converted into catch-up combat ticks. Since 2026-09-24, the local adapter grants gold and enhancement stones at 5% of the last normal clear rate, with a twelve-hour cap. Rewards and their time cursor commit together. A failed interval remains fixed, and subsequent saves or equipment transactions retry it first. Display-mode transitions themselves create no offline income. Online account ownership and server settlement remain separate work.
+The existing `ForegroundCombatClock` drives the same `CombatSimulation` at its 0.05-second fixed step. Reduced presentation frequency does not introduce another combat, RNG or reward calculation. Existing `GameStore` and `RepeatHunt` paths still own result commits, cleanup and the next attempt.
 
-Public gameplay stays at 1×. Internal checks exercise 1.5×/2× without unlocking those speeds for players.
+`IdleHuntJournal` captures an entry baseline and observes equipment, claimed drops and outcomes only after `GameStore.Committed`. Failed saves and repeated notifications do not create successful records. This is a foreground session journal, reset on re-entry; it has no separate permanent archive. Actual equipment and run checkpoints retain their existing persistence.
 
-## Current evidence and unfinished work
+Storage, inventory and historical detail use `ContentWindowHost` nested pause leases. Combat, fatigue consumption, automated cleanup and next-rift delay stop during inspection. Closing the last detail restores the previous pause state without clearing unrelated manual/error blockers. Opening a detail during the unlock countdown cancels that countdown.
 
-Thirty focused timing, display-state and settlement cases passed. Each of three classes, two builds and three speeds underwent 1,000 display-state transitions and was compared with a fixed-tick reference. Complete combat state matched, including actors, action phases, projectiles, RNG and rewards. Checks also cover temporary and persistent lag, pauses and suspension, failed settlement, retry/restart and independent preference-file preservation.
+Application suspension preserves the checkpoint and exits power saving. Returning does not automatically resume combat or convert suspended time into combat catch-up. Existing offline-supply settlement remains independent.
 
-Captures used Apple M3 Pro (Mac15,7), Unity 6000.6.0f1, Mono Development Build, PC quality, 1280×720, seed 93171, stage-30 Mage chain control and seeded legal gear. A three-second warmup preceded twenty-second windows; peek used eight seconds before automatic dimming. Scheduled frames are Unity render scheduling observations, not measured GPU submissions or panel power. Zero world/effect/HUD counts exclude the minimal idle summary. Main Thread includes frame-cap waits, and Draw Calls/Batches are zero even in visible captures; neither supports CPU busy-time or GPU savings claims.
+## Power-saving behavior and shared UI
 
-| Capture | Real seconds | Combat ticks | World / effects / normal HUD | Scheduled frames | Raw report |
-|---|---:|---:|---|---:|---|
-| Baseline normal 1 | 20.015 | 401 | 1193 / 174 / 1193 | — | [JSON](../../Artifacts/Validation/IdleMode/Normal1/profile.json) |
-| Baseline normal 2 | 20.011 | 401 | 1193 / 174 / 1193 | — | [JSON](../../Artifacts/Validation/IdleMode/Normal2/profile.json) |
-| Baseline normal 3 | 20.015 | 401 | 1195 / 174 / 1195 | — | [JSON](../../Artifacts/Validation/IdleMode/Normal3/profile.json) |
-| Final normal | 20.015 | 400 | 1188 / 174 / 1188 | 1188 | [JSON](../../Artifacts/Validation/IdleMode/AfterNormal1/profile.json) |
-| Final dimmed 1 | 20.006 | 400 | 0 / 0 / 0 | 21 | [JSON](../../Artifacts/Validation/IdleMode/Dim2/profile.json) |
-| Final dimmed 2 | 20.042 | 401 | 0 / 0 / 0 | 21 | [JSON](../../Artifacts/Validation/IdleMode/Dim3/profile.json) |
-| Final dimmed 3 | 20.011 | 401 | 0 / 0 / 0 | 21 | [JSON](../../Artifacts/Validation/IdleMode/Dim4/profile.json) |
-| Final peek | 8.026 | 161 | 240 / 75 / 240 | 240 | [JSON](../../Artifacts/Validation/IdleMode/Peek1/profile.json) |
+Density update, 2026-09-28: change time and equipment position share one line. Shared item slots use 40 units with a 6-unit gap, reducing 100% row height from 78 to 46. Both historical item-detail actions remain. See the [current UI rules](Responsive_Hud_20260928.en.md).
 
-All final normal/dimmed/peek captures use Build10. Baseline clock boundary handling differs, so direct presentation comparisons use the same final source. Raw captures retain that distinction.
+The mode disables world objects, the battle camera, transient effects and normal HUD updates, in addition to showing a black background. Repeated-rift presentation objects are deferred until reveal. Audio playback, queued effects and combat audio observation stop; exit seeds the observer at current events instead of replaying old effects.
 
-Final native checks invoke actual UI events for the first explanation, ten-second dimming, keep watching, menu exit, repeat stop, save failure, foreground return and restart. Repeat boundaries use the real abandon/result path; suspension callbacks and save errors are explicitly injected. These fixtures do not prove natural victory, physical touch or OS locking. Restart uses the existing town Continue Rift control to resume the preserved checkpoint.
+At rest, the update target is 20 Hz and rendering interval is 20 frames, approximately one presentation per second. Summary text refreshes once per second. Scrolling, inspection and the unlock countdown temporarily request 30 Hz presentation. Exit restores the previous frame target, v-sync, rendering interval and sleep policy. Screen sleep stays disabled to preserve real foreground combat. Global device brightness is unchanged.
 
-The full suite and final build differ only in the opt-in native restart harness. Its incorrect second pause/resume expectation was replaced with the existing explicit Continue Rift control and checkpoint assertions; final Native8 passes. Gameplay, UI, clock, localization and Edit Mode test sources are identical.
+The existing `GameUI.Idle` canvas owns this HUD adapter. Its background does not acquire a content-window pause lease because combat must continue. Shared theme, fonts, safe area and equipment slots remain authoritative. The new `IdleEquipmentDetailWindow` entry was generated with `tools/new_content_ui.py`, opens `ContentWindowView` and explicitly passes `RewardSnapshot` data.
 
-These are desktop presentation measurements, not mobile battery savings or completion of mobile idle support. Android power/thermal/long-session tests, physical touch/lock/minimize events, app-window brightness, low-battery/thermal interruption, and actual audio/haptics policies remain unfinished. Device-specific p95 reveal-latency targets are not yet established.
+## Location and growth validation
 
-Owners: [combat clock](../../Assets/HELLSCRIPT/Runtime/Core/ForegroundCombatClock.cs), [display controller](../../Assets/HELLSCRIPT/Runtime/Presentation/GameController.Idle.cs), [idle UI](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Idle.cs), [world restoration](../../Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Idle.cs), [offline settlement](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.cs).
+**94/94 focused Edit Mode tests** and **9/9 UI contract tests** passed. Thirteen new status/growth tests cover actual objective counts, kill meter, boss/loot/portal phases, inventory/storage/potion/save blockers, repeat entry and level caps. Missing English entries for the existing cleared/failed outcome labels were also added.
 
-## Evidence and captures
+The native macOS player passed twenty combinations of five viewports, Korean/English and 100%/150% text. A level-39 hero at 50% XP reached level 40 through combat growth; the level and XP display updated without forcing a refresh. Checks cover every status variant's text height, separate growth/unlock bounds and at least one fully visible row in each log. Visual review moved growth to the lower left in landscape to retain readable rows. Pointer open/close/scroll, repeated rifts, unlock, failed-save recovery and a fresh-process restart passed again. CoplayDev MCP reported no connected instances, so validation used the existing batch runner and native development player.
 
-[Validation summary](../../Artifacts/Validation/IdleMode/validation-summary.json) · [Full Edit Mode XML](../../Artifacts/Validation/idle-display-editmode.xml) · [Source hashes](../../Artifacts/Validation/IdleMode/validated-source.json) · [Harness diff](../../Artifacts/Validation/IdleMode/Full2-to-Build10.diff) · [Profile summary](../../Artifacts/Validation/IdleMode/profile-summary.json) · [Visual review](../../Artifacts/Validation/IdleMode/visual-review.json)
+- [Validation summary](IdleDisplayStatusEvidence/validation.json), [Edit Mode report](IdleDisplayStatusEvidence/editmode.xml), [runtime](IdleDisplayStatusEvidence/runtime.txt), [restart](IdleDisplayStatusEvidence/restart.txt), [source hashes](IdleDisplayStatusEvidence/source-hashes.json).
+- [Level and XP](IdleDisplayStatusEvidence/growth-live-ko.png), [level-up](IdleDisplayStatusEvidence/growth-level-up-ko.png), [English landscape](IdleDisplayStatusEvidence/idle-956x440-en.png), [unlock gauge](IdleDisplayStatusEvidence/unlock-countdown-ko.png).
 
-| Native8 | Capture |
-|---|---|
-| initial-01-battle-entry-ko | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-01-battle-entry-ko.png) |
-| initial-02-introduction-ko | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-02-introduction-ko.png) |
-| initial-03-introduction-en-140 | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-03-introduction-en-140.png) |
-| initial-04-dimmed-en-140 | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-04-dimmed-en-140.png) |
-| initial-05-peek-en-140 | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-05-peek-en-140.png) |
-| initial-06-automatic-dim-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-06-automatic-dim-en.png) |
-| initial-07-next-rift-deferred-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-07-next-rift-deferred-en.png) |
-| initial-08-repeat-stopped-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-08-repeat-stopped-en.png) |
-| initial-09-save-blocked-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-09-save-blocked-en.png) |
-| initial-10-foreground-resume-required-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/initial-10-foreground-resume-required-en.png) |
-| restart-01-resume-choice-town-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/restart-01-resume-choice-town-en.png) |
-| restart-02-suspended-rift-restored-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/restart-02-suspended-rift-restored-en.png) |
-| restart-03-remembered-idle-en | [PNG](../../Artifacts/Validation/IdleMode/Native8/restart-03-remembered-idle-en.png) |
+## Original power-saving validation
 
-| Profile | Capture |
-|---|---|
-| Final normal | [PNG](../../Artifacts/Validation/IdleMode/AfterNormal1/profile.png) |
-| Final dimmed 1 | [PNG](../../Artifacts/Validation/IdleMode/Dim2/profile.png) |
-| Final dimmed 2 | [PNG](../../Artifacts/Validation/IdleMode/Dim3/profile.png) |
-| Final dimmed 3 | [PNG](../../Artifacts/Validation/IdleMode/Dim4/profile.png) |
-| Final peek | [PNG](../../Artifacts/Validation/IdleMode/Peek1/profile.png) |
+Unity 6000.6.0f1 on an Apple M3 Pro passed **148/148 focused Edit Mode tests**, **9/9 UI contract tests**, native interaction and fresh-process restart checks. Twenty combinations cover five viewports, Korean/English and 100%/150% text. Checks include text height, safe control bounds, pointer open/close, scrolling, historical gear detail, saved failure/repeat transitions, the three-second gauge, cancellation by inspection, injected save failure and recovery.
+
+The same build's normal two-second observation updated the world and HUD. About 2.2 seconds in power saving advanced combat by the same elapsed duration with zero world/normal-HUD updates, disabled camera and stopped audio. Exact counters are in the [runtime results](IdleDisplayEvidence/runtime.txt). These observations do not measure battery savings or CPU/GPU busy time.
+
+- [Validation summary](IdleDisplayEvidence/validation.json), [Edit Mode results](IdleDisplayEvidence/editmode.xml), [restart results](IdleDisplayEvidence/restart.txt), [tested source hashes](IdleDisplayEvidence/source-hashes.json).
+- [Portrait](IdleDisplayEvidence/idle-440x956-ko.png), [English landscape](IdleDisplayEvidence/idle-956x440-en.png), [unlock gauge](IdleDisplayEvidence/unlock-countdown-ko.png).
+
+The initial shared-UI test still expected 25 groups, while prerequisite auto-equipment code already exposed 35. That stale expectation was corrected. The initial native harness was also corrected to await asynchronous rift admission before asserting that combat had begun.
+
+The initial work was on `codex/power-saving-hunt` and is now included in the [September 28 integration](All_Work_Integration_20260928.en.md). Public deployment uses merged main. Physical-mobile battery, thermal, touch and OS-lock behavior remain unverified.

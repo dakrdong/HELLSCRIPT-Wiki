@@ -133,6 +133,7 @@ namespace Hellscript
             foreach(var item in equipped)
             {
                 for(int i=0;i<bonuses.Length;i++)bonuses[i]+=item.Value(i);
+                foreach(var fixedStat in ItemCatalog.Base(item).bonuses)bonuses[fixedStat.stat]+=fixedStat.Value(item);
                 if(item.slot>0)AddForgeStat(GearEnhancement.Stat(item),ItemCatalog.MainValue(item));
                 if(GemCatalog.TryEffect(item,out var gem,out float value))
                 {
@@ -261,11 +262,11 @@ namespace Hellscript
         public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false)
         {
             if(item==null||hero.inventory.Any(i=>i.id==item.id))return false;
-            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);return true;}
+            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;}
             if(policy!=BagPolicy.Replace)return false;
             var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
             if(worst==null||(rarityOnly?item.rarity.CompareTo(worst.rarity):Compare(item,worst))<=0)return false;
-            ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);return true;
+            RiftResult.Disposed(account,worst.id,RiftLootOutcome.Discarded);ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;
         }
         static int Compare(Item a,Item b) {int c=a.rarity.CompareTo(b.rarity);if(c==0)c=a.level.CompareTo(b.level);return c==0?a.Price.CompareTo(b.Price):c;}
         public static bool Equip(HeroSave hero,Item item)
@@ -282,14 +283,22 @@ namespace Hellscript
             AspectStone.Collect(account,item);
             account.enhancementStones+=stones;
             if(item.rarity==3)account.cores[item.slot]++;else account.materials+=new[]{1,2,5}[item.rarity];
-            int invested=item.contentVersion>0?item.investedMaterials:20*((1<<Math.Clamp(item.enhancement,0,5))-1);account.materials+=(int)(invested*4L/5);hero.inventory.Remove(item);ContentUnlocks.Reconcile(account);return true;
+            int invested=item.contentVersion>0?item.investedMaterials:20*((1<<Math.Clamp(item.enhancement,0,5))-1);account.materials+=(int)(invested*4L/5);hero.inventory.Remove(item);RiftResult.Disposed(account,item.id,RiftLootOutcome.Salvaged);ContentUnlocks.Reconcile(account);return true;
         }
         static bool aOwns(AccountSave a,HeroSave h,Item i)=>i!=null&&a.heroes.Contains(h)&&h.inventory.Contains(i);
         public static bool Sell(AccountSave a,HeroSave h,Item item)
         {
             if(!aOwns(a,h,item)||(Protected(h,item)||a.heroes.Any(owner=>Referenced(owner,item))))return false;
             if((long)a.gold+item.Price>int.MaxValue)return false;
-            a.gold+=item.Price;h.inventory.Remove(item);return true;
+            a.gold+=item.Price;h.inventory.Remove(item);RiftResult.Disposed(a,item.id,RiftLootOutcome.Sold);return true;
+        }
+        public static bool CanSellStored(AccountSave account,Item item)=>item!=null&&account.warehouse.Contains(item)&&
+            !item.equipped&&!item.locked&&!GemCatalog.HasGem(item)&&!account.heroes.Any(h=>Referenced(h,item))&&
+            !Tutorials.RequiredArmor(account,item.id)&&item.Price>=0&&(long)account.gold+item.Price<=int.MaxValue;
+        public static bool SellStored(AccountSave account,Item item)
+        {
+            if(!CanSellStored(account,item))return false;
+            account.gold+=item.Price;account.warehouse.Remove(item);RiftResult.Disposed(account,item.id,RiftLootOutcome.Sold);Storage.SettleAll(account);return true;
         }
         public static int EnhancementMaterials(Item item)=>0;
         public static long EnhancementGold(Item item)=>item.enhancement>=GearEnhancement.Maximum?0:GearEnhancement.Cost(item.level,item.enhancement+1);

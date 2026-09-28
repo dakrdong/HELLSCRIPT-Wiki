@@ -8,7 +8,7 @@ namespace Hellscript
         static string SkillId(int skill)=>skill<0?"BASIC":new[]{"W","A","M"}[skill/6]+(skill%6+1).ToString("00");
         void RecordDamage(DamageEvent damage)
         {
-            CombatTelemetry.Damage(State.statistics,damage);
+            CombatTelemetry.Damage(State.statistics,damage,damage.incoming?Attacker(damage.casterId):null);
             JournalDamage(damage);
             State.damageEvents.Add(damage);
             if(State.damageEvents.Count>2000)State.damageEvents.RemoveAt(0);
@@ -41,7 +41,7 @@ namespace Hellscript
             int classFlags=ClassHitFlags(enemy);
             if(!attackResolved){additive+=ClassDamageBonus(definition,enemy,kind,root,instance,element);independent*=1+Mathf.Min(1.5f,LegendaryDamageBonus(snapshot,definition,enemy)+ClassLegendaryBonus(definition,root));}
             var numbers=DamageMath.Calculate(baseAttack,additive,independent,critMultiplier,defense,snapshot.level,element,TargetReduction(enemy,element,projectile,origin));
-            var damage=new DamageEvent{id=State.nextDamageId++,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=State.heroId,targetId=enemy.id,triggerTargetId=triggerTarget,kind=kind,element=element,tick=EffectTick,time=State.time,
+            var damage=new DamageEvent{id=State.nextDamageId++,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=State.heroId,targetId=enemy.id,targetIsBoss=enemy.boss,triggerTargetId=triggerTarget,kind=kind,element=element,tick=EffectTick,time=State.time,
                 baseAttack=baseAttack,additive=additive,independent=independent,critical=critical,criticalMultiplier=critMultiplier,attackBeforeDefense=numbers.beforeDefense,projectile=projectile,attackOrigin=origin??State.position,
                 defenseReduction=numbers.defenseReduction,buffReduction=numbers.buffReduction,finalDamage=numbers.final,hpLoss=Mathf.Min(Mathf.Max(0,enemy.health),numbers.final)};
             RecordDamage(damage);Deal(enemy,numbers.final,critical);
@@ -133,13 +133,15 @@ namespace Hellscript
             // recently damaged — happens either.
             if(DodgeIncoming())
             {
+                CombatTelemetry.Support(State.statistics,"DODGE",SkillResultMetric.Protection,Mathf.Max(0,damage));
                 EffectEvent(definition,"DODGED",instance,root);Visual?.Invoke(State.position,State.position,32,0);
                 Log("DODGE","공격을 회피했습니다.");return;
             }
             if(kind!=DamageKind.Periodic&&Stats.perfectBlock>0&&SheetRoll()<Stats.perfectBlock)
-            {EffectEvent(definition,"PERFECT_BLOCK",instance,root);Log("BLOCK","완벽하게 방어했습니다.");return;}
-            bool blocked=BlockIncoming();
+            {CombatTelemetry.Support(State.statistics,"PERFECT_BLOCK",SkillResultMetric.Protection,Mathf.Max(0,damage));EffectEvent(definition,"PERFECT_BLOCK",instance,root);Log("BLOCK","완벽하게 방어했습니다.");return;}
+            bool blocked=BlockIncoming(out bool skillBlock);
             var numbers=IncomingDamageNumbers(damage,element,IncomingReduction(attacker,element,blocked),kind==DamageKind.Periodic);
+            RecordProtection(damage,element,attacker,skillBlock,numbers,kind==DamageKind.Periodic);
             if(blocked)EffectEvent(definition,"BLOCKED",instance,root,value:numbers.final);
             float before=State.health,absorbed=AbsorbDamage(numbers.final);State.health=Mathf.Max(0,State.health-(numbers.final-absorbed));
             float hpLoss=Mathf.Min(Mathf.Max(0,before),Mathf.Max(0,numbers.final-absorbed));

@@ -15,6 +15,7 @@ namespace Hellscript
         {
             if (presentationSuspended) return;
             presentationSuspended = true; cameraWasEnabled = viewCamera != null && viewCamera.enabled;
+            lighting?.StopShake();
             if (viewCamera != null) viewCamera.enabled = false;
             if (world != null) world.SetActive(false);
             foreach (var effect in effects) if (effect.go != null) Destroy(effect.go);

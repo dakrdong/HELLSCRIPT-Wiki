@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="58" result="Failed(Child)" total="58" passed="57" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.6412136">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="4103" result="Failed" site="Child" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.641214" total="58" passed="57" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="5726" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/npc-dialogue-portraits/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="4103" result="Failed" site="Child" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.576363" total="58" passed="57" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="58682" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="5727" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="4103" result="Failed" site="Child" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.507269" total="58" passed="57" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="5728" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="4103" result="Failed" site="Child" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.448702" total="58" passed="57" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="4601" name="LocalizationTests" fullname="Hellscript.Tests.LocalizationTests" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" testcasecount="33" result="Failed" site="Child" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.243182" total="33" passed="32" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="4618" name="AChosenLanguageSurvivesANewStoreAndLeavesTheOtherSettingsAlone" fullname="Hellscript.Tests.LocalizationTests.AChosenLanguageSurvivesANewStoreAndLeavesTheOtherSettingsAlone" methodname="AChosenLanguageSurvivesANewStoreAndLeavesTheOtherSettingsAlone" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="2126644003" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.015468" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4627" name="AFailedSaveKeepsTheChoiceOnScreenAndAllowsOneRetry" fullname="Hellscript.Tests.LocalizationTests.AFailedSaveKeepsTheChoiceOnScreenAndAllowsOneRetry" methodname="AFailedSaveKeepsTheChoiceOnScreenAndAllowsOneRetry" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1916497804" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000973" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4628" name="ALanguageWhoseTableIsMissingStillAppliesAndSaysSo" fullname="Hellscript.Tests.LocalizationTests.ALanguageWhoseTableIsMissingStillAppliesAndSaysSo" methodname="ALanguageWhoseTableIsMissingStillAppliesAndSaysSo" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="128291099" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000842" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4629" name="ALoaderThatThrowsDoesNotStopTheLanguageFromApplying" fullname="Hellscript.Tests.LocalizationTests.ALoaderThatThrowsDoesNotStopTheLanguageFromApplying" methodname="ALoaderThatThrowsDoesNotStopTheLanguageFromApplying" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1065394619" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000191" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4612" name="AMissingEntryKeepsTheSourceAndIsRecordedOnce" fullname="Hellscript.Tests.LocalizationTests.AMissingEntryKeepsTheSourceAndIsRecordedOnce" methodname="AMissingEntryKeepsTheSourceAndIsRecordedOnce" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1905752969" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000762" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="4608" name="AnUnknownCodeBecomesTheDefault" fullname="Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.002361" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="4603" name="AnUnknownCodeBecomesTheDefault(null)" fullname="Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(null)" methodname="AnUnknownCodeBecomesTheDefault" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="572945649" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000179" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4604" name="AnUnknownCodeBecomesTheDefault(&quot;&quot;)" fullname="Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(&quot;&quot;)" methodname="AnUnknownCodeBecomesTheDefault" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="9009363" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000104" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4605" name="AnUnknownCodeBecomesTheDefault(&quot;jp&quot;)" fullname="Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(&quot;jp&quot;)" methodname="AnUnknownCodeBecomesTheDefault" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="701999148" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000071" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4606" name="AnUnknownCodeBecomesTheDefault(&quot;KO&quot;)" fullname="Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(&quot;KO&quot;)" methodname="AnUnknownCodeBecomesTheDefault" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="2024986240" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000068" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4607" name="AnUnknownCodeBecomesTheDefault(&quot;en-GB&quot;)" fullname="Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(&quot;en-GB&quot;)" methodname="AnUnknownCodeBecomesTheDefault" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1357310019" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000066" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="4614" name="ATranslationThatLostAPlaceholderFallsBackToTheSourceLine" fullname="Hellscript.Tests.LocalizationTests.ATranslationThatLostAPlaceholderFallsBackToTheSourceLine" methodname="ATranslationThatLostAPlaceholderFallsBackToTheSourceLine" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="226433799" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000208" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4609" name="EscapesSurviveAWriteAndReadOfTheSameLine" fullname="Hellscript.Tests.LocalizationTests.EscapesSurviveAWriteAndReadOfTheSameLine" methodname="EscapesSurviveAWriteAndReadOfTheSameLine" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="925687276" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000415" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4633" name="EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders" fullname="Hellscript.Tests.LocalizationTests.EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders" methodname="EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1633754395" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.023569" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4636" name="EveryKoreanLiteralInTheRuntimeHasAnEntry" fullname="Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry" methodname="EveryKoreanLiteralInTheRuntimeHasAnEntry" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="398159369" result="Failed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.084319" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  2 untranslated:
+RuntimeFirstPlayAcceptance.cs has no entry for: 눈보라 검사 순서
+RuntimeFirstPlayAcceptance.cs has no entry for: 눈보라를 공격 순서
+  Expected: <empty>
+  But was:  < "RuntimeFirstPlayAcceptance.cs has no entry for: 눈보라 검사 순서", "RuntimeFirstPlayAcceptance.cs has no entry for: 눈보라를 공격 순서" >
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry () [0x000fb] in /Users/t8g-2410-pn-005/.codex/worktrees/npc-dialogue-portraits/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/LocalizationTests.cs:257
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="4631" name="EveryLanguageThatNeedsATableShipsOne" fullname="Hellscript.Tests.LocalizationTests.EveryLanguageThatNeedsATableShipsOne" methodname="EveryLanguageThatNeedsATableShipsOne" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="195381853" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000384" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4613" name="FormatSpecifiersAndEscapedBracesSurviveTranslation" fullname="Hellscript.Tests.LocalizationTests.FormatSpecifiersAndEscapedBracesSurviveTranslation" methodname="FormatSpecifiersAndEscapedBracesSurviveTranslation" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1643538720" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000178" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="4624" name="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" fullname="Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.007176" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="4619" name="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{}&quot;)" fullname="Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{}&quot;)" methodname="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1368463431" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.001301" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4620" name="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{\&quot;version\&quot;:2,\&quot;language\&quot;:\&quot;en\&quot;}&quot;)" fullname="Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{\&quot;version\&quot;:2,\&quot;language\&quot;:\&quot;en\&quot;}&quot;)" methodname="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1226389450" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000919" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4621" name="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{\&quot;version\&quot;:1,\&quot;language\&quot;:\&quot;jp\&quot;}&quot;)" fullname="Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{\&quot;version\&quot;:1,\&quot;language\&quot;:\&quot;jp\&quot;}&quot;)" methodname="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="719672571" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000860" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4622" name="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{\&quot;version\&quot;:1,\&quot;language\&quot;:\&quot;\&quot;}&quot;)" fullname="Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;{\&quot;version\&quot;:1,\&quot;language\&quot;:\&quot;\&quot;}&quot;)" methodname="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="893593404" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.001051" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="4623" name="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;malformed&quot;)" fullname="Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(&quot;malformed&quot;)" methodname="InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1128741385" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.001039" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="4634" name="KnownLinesFromEveryCornerOfTheGameAreTranslated" fullname="Hellscript.Tests.LocalizationTests.KnownLinesFromEveryCornerOfTheGameAreTranslated" methodname="KnownLinesFromEveryCornerOfTheGameAreTranslated" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1636015745" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.003503" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4617" name="MissingPreferenceStartsAtTheDefaultWithoutCreatingFiles" fullname="Hellscript.Tests.LocalizationTests.MissingPreferenceStartsAtTheDefaultWithoutCreatingFiles" methodname="MissingPreferenceStartsAtTheDefaultWithoutCreatingFiles" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="713432356" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:52Z" duration="0.000262" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4635" name="NoEntryIsLeftBehindByARewordedLine" fullname="Hellscript.Tests.LocalizationTests.NoEntryIsLeftBehindByARewordedLine" methodname="NoEntryIsLeftBehindByARewordedLine" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1555965000" result="Passed" start-time="2026-09-27 12:25:52Z" end-time="2026-09-27 12:25:53Z" duration="0.075414" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4610" name="NotesBlankLinesAndDamagedLinesAreCountedAndSkipped" fullname="Hellscript.Tests.LocalizationTests.NotesBlankLinesAndDamagedLinesAreCountedAndSkipped" methodname="NotesBlankLinesAndDamagedLinesAreCountedAndSkipped" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1224976907" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000221" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4625" name="OversizedPreferenceIsPreserved" fullname="Hellscript.Tests.LocalizationTests.OversizedPreferenceIsPreserved" methodname="OversizedPreferenceIsPreserved" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1126754610" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000918" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4611" name="ReadingAStringWithoutATableReturnsTheSource" fullname="Hellscript.Tests.LocalizationTests.ReadingAStringWithoutATableReturnsTheSource" methodname="ReadingAStringWithoutATableReturnsTheSource" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="2074272895" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000229" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4616" name="SelectingALanguageAndReturningToTheSourceIsRepeatable" fullname="Hellscript.Tests.LocalizationTests.SelectingALanguageAndReturningToTheSourceIsRepeatable" methodname="SelectingALanguageAndReturningToTheSourceIsRepeatable" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="676476215" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000153" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4615" name="StringArgumentsAreTranslatedSoAComposedLineIsNotHalfKorean" fullname="Hellscript.Tests.LocalizationTests.StringArgumentsAreTranslatedSoAComposedLineIsNotHalfKorean" methodname="StringArgumentsAreTranslatedSoAComposedLineIsNotHalfKorean" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="752864673" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000111" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4632" name="TheEnglishTableParsesWithoutDamagedOrRepeatedLines" fullname="Hellscript.Tests.LocalizationTests.TheEnglishTableParsesWithoutDamagedOrRepeatedLines" methodname="TheEnglishTableParsesWithoutDamagedOrRepeatedLines" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1717606208" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.008290" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4630" name="TheSessionLoadsTheSavedLanguageWhenItIsCreated" fullname="Hellscript.Tests.LocalizationTests.TheSessionLoadsTheSavedLanguageWhenItIsCreated" methodname="TheSessionLoadsTheSavedLanguageWhenItIsCreated" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1063336038" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.001505" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4602" name="TheSourceLanguageIsListedFirstAndNeedsNoTable" fullname="Hellscript.Tests.LocalizationTests.TheSourceLanguageIsListedFirstAndNeedsNoTable" methodname="TheSourceLanguageIsListedFirstAndNeedsNoTable" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1594144981" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000850" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4626" name="WritingAnUnsupportedLanguageIsRefusedBeforeTouchingTheFile" fullname="Hellscript.Tests.LocalizationTests.WritingAnUnsupportedLanguageIsRefusedBeforeTouchingTheFile" methodname="WritingAnUnsupportedLanguageIsRefusedBeforeTouchingTheFile" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="2072549836" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000659" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="4680" name="NpcDialogueTests" fullname="Hellscript.Tests.NpcDialogueTests" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.020970" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="4683" name="EveryNpcApproachIsWalkableAndDoesNotAutoOpenAService" fullname="Hellscript.Tests.NpcDialogueTests.EveryNpcApproachIsWalkableAndDoesNotAutoOpenAService" methodname="EveryNpcApproachIsWalkableAndDoesNotAutoOpenAService" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" seed="1041432335" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.006049" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4681" name="EveryPlacedHumanHasExactlyOneCompleteProfile" fullname="Hellscript.Tests.NpcDialogueTests.EveryPlacedHumanHasExactlyOneCompleteProfile" methodname="EveryPlacedHumanHasExactlyOneCompleteProfile" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" seed="1479909344" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.001332" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4686" name="EveryPlacedNpcHasItsOwnImportedPortrait" fullname="Hellscript.Tests.NpcDialogueTests.EveryPlacedNpcHasItsOwnImportedPortrait" methodname="EveryPlacedNpcHasItsOwnImportedPortrait" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" seed="1071223582" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.007873" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4685" name="EverySpokenLineAndDisplayedNameHasAnEnglishTranslation" fullname="Hellscript.Tests.NpcDialogueTests.EverySpokenLineAndDisplayedNameHasAnEnglishTranslation" methodname="EverySpokenLineAndDisplayedNameHasAnEnglishTranslation" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" seed="1429514566" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.003853" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4682" name="ExistingNamesAndAgreedIdentitiesArePreserved" fullname="Hellscript.Tests.NpcDialogueTests.ExistingNamesAndAgreedIdentitiesArePreserved" methodname="ExistingNamesAndAgreedIdentitiesArePreserved" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" seed="2090159534" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000241" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4684" name="ReachUsesActualNpcPositionAndRejectsUnknownOrDistantNpcs" fullname="Hellscript.Tests.NpcDialogueTests.ReachUsesActualNpcPositionAndRejectsUnknownOrDistantNpcs" methodname="ReachUsesActualNpcPositionAndRejectsUnknownOrDistantNpcs" classname="Hellscript.Tests.NpcDialogueTests" runstate="Runnable" seed="610230171" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000310" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="5548" name="TownWalkTests" fullname="Hellscript.Tests.TownWalkTests" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.024617" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="5559" name="ArrivalIsOneEventAndRequiresExplicitInteractionElsewhere" fullname="Hellscript.Tests.TownWalkTests.ArrivalIsOneEventAndRequiresExplicitInteractionElsewhere" methodname="ArrivalIsOneEventAndRequiresExplicitInteractionElsewhere" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1322091755" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000729" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5566" name="CameraCoordinatesRoundTripAndPortalIsRightOfCenter" fullname="Hellscript.Tests.TownWalkTests.CameraCoordinatesRoundTripAndPortalIsRightOfCenter" methodname="CameraCoordinatesRoundTripAndPortalIsRightOfCenter" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="756227729" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000897" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5562" name="EveryStationPairHasACollisionFreeRoute" fullname="Hellscript.Tests.TownWalkTests.EveryStationPairHasACollisionFreeRoute" methodname="EveryStationPairHasACollisionFreeRoute" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1326790382" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.004682" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5565" name="GroundRequestsInsideBuildingsAreRejected" fullname="Hellscript.Tests.TownWalkTests.GroundRequestsInsideBuildingsAreRejected" methodname="GroundRequestsInsideBuildingsAreRejected" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1830962603" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000163" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="5556" name="JoystickScalesWithTheUsableScreenAboveTheHud" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.004217" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="5550" name="JoystickScalesWithTheUsableScreenAboveTheHud(1600,900)" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud(1600,900)" methodname="JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1123685551" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.002900" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5551" name="JoystickScalesWithTheUsableScreenAboveTheHud(900,1600)" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud(900,1600)" methodname="JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1437498820" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5552" name="JoystickScalesWithTheUsableScreenAboveTheHud(844,390)" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud(844,390)" methodname="JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1974923206" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000059" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5553" name="JoystickScalesWithTheUsableScreenAboveTheHud(390,844)" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud(390,844)" methodname="JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1736617903" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5554" name="JoystickScalesWithTheUsableScreenAboveTheHud(640,360)" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud(640,360)" methodname="JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="382434540" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000056" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5555" name="JoystickScalesWithTheUsableScreenAboveTheHud(360,640)" fullname="Hellscript.Tests.TownWalkTests.JoystickScalesWithTheUsableScreenAboveTheHud(360,640)" methodname="JoystickScalesWithTheUsableScreenAboveTheHud" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1074652668" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000055" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="5549" name="JoystickUsesTheVisualCenterAndKeepsPointerOwnership" fullname="Hellscript.Tests.TownWalkTests.JoystickUsesTheVisualCenterAndKeepsPointerOwnership" methodname="JoystickUsesTheVisualCenterAndKeepsPointerOwnership" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="520717421" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.003878" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5558" name="MainRoadTakesTwentySecondsAndDiagonalInputCannotSpeedUp" fullname="Hellscript.Tests.TownWalkTests.MainRoadTakesTwentySecondsAndDiagonalInputCannotSpeedUp" methodname="MainRoadTakesTwentySecondsAndDiagonalInputCannotSpeedUp" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="2042857709" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.001349" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5560" name="ManualInputCancelsThePreviousRouteAndArrival" fullname="Hellscript.Tests.TownWalkTests.ManualInputCancelsThePreviousRouteAndArrival" methodname="ManualInputCancelsThePreviousRouteAndArrival" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="702193178" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000164" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5564" name="ManualMotionCannotTunnelThroughBuildingsOrLeaveTheMap" fullname="Hellscript.Tests.TownWalkTests.ManualMotionCannotTunnelThroughBuildingsOrLeaveTheMap" methodname="ManualMotionCannotTunnelThroughBuildingsOrLeaveTheMap" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1899891387" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.002734" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5568" name="OcclusionOnlyFadesBuildingsBetweenTheCameraAndHero" fullname="Hellscript.Tests.TownWalkTests.OcclusionOnlyFadesBuildingsBetweenTheCameraAndHero" methodname="OcclusionOnlyFadesBuildingsBetweenTheCameraAndHero" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1216489025" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000346" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5561" name="ReplacingAndCancellingRequestsLeavesNoStaleInteraction" fullname="Hellscript.Tests.TownWalkTests.ReplacingAndCancellingRequestsLeavesNoStaleInteraction" methodname="ReplacingAndCancellingRequestsLeavesNoStaleInteraction" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="707336517" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000209" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5557" name="ServicesAreDistinctReachableAndFaceTheCamera" fullname="Hellscript.Tests.TownWalkTests.ServicesAreDistinctReachableAndFaceTheCamera" methodname="ServicesAreDistinctReachableAndFaceTheCamera" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1349748515" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.001323" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5567" name="TapSelectsNearestStationWithinRadius" fullname="Hellscript.Tests.TownWalkTests.TapSelectsNearestStationWithinRadius" methodname="TapSelectsNearestStationWithinRadius" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1347699936" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000547" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5563" name="WalkingBehindABuildingRoutesAroundItsFootprint" fullname="Hellscript.Tests.TownWalkTests.WalkingBehindABuildingRoutesAroundItsFootprint" methodname="WalkingBehindABuildingRoutesAroundItsFootprint" classname="Hellscript.Tests.TownWalkTests" runstate="Runnable" seed="1501324254" result="Passed" start-time="2026-09-27 12:25:53Z" end-time="2026-09-27 12:25:53Z" duration="0.000764" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

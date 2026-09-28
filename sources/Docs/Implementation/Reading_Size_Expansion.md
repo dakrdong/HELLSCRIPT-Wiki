@@ -1,5 +1,7 @@
 # 글자 크기 설정 개발 기록
 
+2026-09-28 갱신: 고정 픽셀 배율을 안전 영역 비례 배율로 바꿨다. 하단 HUD 전체는 하나의 기준 배치와 배율을 유지한다. 아래 기기 밀도 방식은 과거 기록이며 현재 동작은 [창 축소와 하단 HUD 통일](Responsive_Hud_20260928.md)을 따른다. English: fixed pixel scales now follow the safe area; the whole bottom HUD keeps one composition and scale. The density-based description below is historical; see the [current implementation](Responsive_Hud_20260928.en.md).
+
 작성일: 2026-09-11 · P4 1단계 읽기 크기 100~140%
 
 2026-09-14 갱신: 현재 조절 범위는 50~150%이며 5%씩 바뀐다. 슬라이더·휠·− / + 조작과 새 메뉴 배치는 [설정 메뉴 개편](Settings_Revision.md)을 따른다. 아래 내용은 초기 구현 기록이다. English: the current range is 50–150% in 5% steps; see the [settings revision](Settings_Revision.en.md) for slider, wheel and − / + controls and the new layout. The record below describes the initial implementation.

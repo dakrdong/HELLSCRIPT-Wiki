@@ -24,6 +24,7 @@ namespace Hellscript
         Font font;Texture2D atlas;GlobalHudStyle style;
         Rect previousSafe;float factor=-1;bool ready,contentLayout;
         public GlobalHudStyle Style=>style;
+        public float BottomInset {get;private set;}
         Color Gold=>style.gold;Color Pale=>style.pale;
         sealed class Slot
         {public RectTransform root;public Image icon,cover,frame,glyph;public SkillIconView skillView;public Text caption,number;public HudSlotState data;public bool passive,potion;}
@@ -33,9 +34,7 @@ namespace Hellscript
             var canvas=gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=105;
             gameObject.AddComponent<GraphicRaycaster>();
             safe=Rect("HUD safe area",transform);
-            seal=Rect("Class seal",safe);var clipping=Picture("Circle",seal,"mask-circle");Stretch(clipping.rectTransform);var mask=clipping.gameObject.AddComponent<Mask>();mask.showMaskGraphic=false;
-            face=Picture("Selected class",clipping.transform,"portrait-mage");Stretch(face.rectTransform);
-            sealFrame=Picture("Seal frame",seal,"frame-seal");Stretch(sealFrame.rectTransform);
+            seal=CreateSeal(safe,"Class seal",out face,out sealFrame);
             level=Rect("Level",safe);Stretch(Picture("Level badge",level,"badge-level").rectTransform);levelLabel=Text("Level text",level,20);Stretch(levelLabel.rectTransform);
             hp=Vital("HP",style.hpColor,out hpFill,out hpLabel);
             resource=Vital("Resource",style.resourceColor,out resourceFill,out resourceLabel);
@@ -92,15 +91,18 @@ namespace Hellscript
             var b=slot.root.gameObject.AddComponent<Button>();var target=slot.root.gameObject.AddComponent<Image>();target.color=Color.clear;b.targetGraphic=target;b.transition=Selectable.Transition.None;
             b.onClick.AddListener(()=>{if(slot.data!=null)SlotSelected?.Invoke(slot.data);});return slot;
         }
-        public void SetSnapshot(GlobalHudSnapshot data,float interfaceFactor,bool fitContent=false)
+        public void SetSnapshot(GlobalHudSnapshot data,float interfaceFactor,bool fitContent=false,float bottomInset=0)
         {
             if(!ready||data==null)return;
             if(Snapshot?.heroId!=data.heroId||Snapshot?.sessionId!=data.sessionId)StatusStrip.ResetPosition();
             Snapshot=data;
             Rect bounds=UiSafeArea.Current;
+            // Translate the complete HUD above the live journal without changing its scale or composition.
+            BottomInset=Mathf.Max(0,bottomInset);
+            SetRect(safe,new Rect(bounds.x,bounds.y+BottomInset,bounds.width,bounds.height));
             if(Layout==null||bounds!=previousSafe||factor!=interfaceFactor||contentLayout!=fitContent)
-            {factor=interfaceFactor;contentLayout=fitContent;previousSafe=bounds;SetRect(safe,bounds);float fitted=fitContent?GlobalHudLayout.ContentFactor(bounds.width,bounds.height,factor,style):factor;Layout=new GlobalHudLayout(bounds.width,bounds.height,fitted,style);Reflow();}
-            face.sprite=data.heroClass==HeroClass.Mage?Sprite("portrait-mage"):Atlas(18+(int)data.heroClass);
+            {factor=interfaceFactor;contentLayout=fitContent;previousSafe=bounds;float fitted=fitContent?GlobalHudLayout.ContentFactor(bounds.width,bounds.height,factor,style):factor;Layout=new GlobalHudLayout(bounds.width,bounds.height,fitted,style);Reflow();}
+            face.sprite=Portrait(data.heroClass);
             levelLabel.text="Lv."+data.level;hpFill.fillAmount=Ratio(data.health,data.maxHealth);resourceFill.fillAmount=Ratio(data.resource,data.maxResource);
             hpLabel.text=data.maxHealth>0?Loc.F("  HP  {0:0} / {1:0}",Mathf.Max(0,data.health),data.maxHealth):"  HP  —";
             if(data.dead)hpLabel.text+=" · "+Loc.T("사망");
@@ -109,7 +111,7 @@ namespace Hellscript
             if(!data.combat)resourceLabel.text=Loc.F("  {0}  — / {1:0}",Loc.T(data.resourceName),data.maxResource);
             shieldLabel.text=data.shield>0?Loc.F("보호막 +{0:0}",data.shield):"";
             shieldLine.fillAmount=Ratio(data.shield,data.maxHealth);shieldLine.enabled=data.shield>0;
-            xpFill.fillAmount=data.maximumLevel?1:Ratio(data.xp,data.xpRequired);xpLabel.text=data.maximumLevel?Loc.T("최대 레벨"):Loc.F("EXP  {0:0}%",Mathf.FloorToInt(100*xpFill.fillAmount));
+            xpFill.fillAmount=data.ExperienceRatio;xpLabel.text=data.maximumLevel?Loc.T("최대 레벨"):Loc.F("EXP  {0:0}%",Mathf.FloorToInt(100*xpFill.fillAmount));
             sealFrame.color=data.dead?style.deadTint:Color.white;
             for(int i=0;i<slots.Count;i++)UpdateSlot(slots[i],i<3?data.passives[i]:i<7?data.actives[i-3]:i<10?data.potions[i-7]:data.ultimate);
             StatusStrip.SetEffects(data.effects);
@@ -136,6 +138,8 @@ namespace Hellscript
             Place(seal,Layout.seal);Place(level,Layout.level);Place(hp,Layout.hp);Place(resource,Layout.resource);Place(xp,Layout.xp);Place(xpLabel.rectTransform,Layout.xpText);
             Place(shieldLabel.rectTransform,Layout.shield);Place(shieldLine.rectTransform,Layout.shieldLine);
             Place(potionTray,Layout.potionTray);
+            for(int i=1;i<3;i++)((RectTransform)potionTray.Find("Potion divider "+i)).sizeDelta=new Vector2(Layout.scale,0);
+            ((RectTransform)potionTray.Find("Potion tray crest")).sizeDelta=Vector2.one*(4*Layout.scale);
             for(int i=0;i<slots.Count;i++)
             {
                 var s=slots[i];var r=i<3?Layout.passives[i]:i<7?Layout.actives[i-3]:i<10?Layout.potions[i-7]:Layout.passives[1];Place(s.root,r);
@@ -152,6 +156,14 @@ namespace Hellscript
             StatusStrip.Configure(Layout,style);
         }
         public int FontSize(float basis,int minimum=11)=>Layout!=null?Layout.FontSize(basis,minimum):Mathf.Max(minimum,Mathf.RoundToInt(basis));
+        public Sprite Portrait(HeroClass heroClass)=>heroClass==HeroClass.Mage?Sprite("portrait-mage"):Atlas(18+(int)heroClass);
+        public RectTransform CreateSeal(Transform parent,string name,out Image portrait,out Image frame)
+        {
+            var root=Rect(name,parent);var clipping=Picture("Circle",root,"mask-circle");Stretch(clipping.rectTransform);
+            clipping.gameObject.AddComponent<Mask>().showMaskGraphic=false;
+            portrait=Picture("Selected class",clipping.transform,"portrait-mage");Stretch(portrait.rectTransform);
+            frame=Picture("Seal frame",root,"frame-seal");Stretch(frame.rectTransform);return root;
+        }
         public Sprite Sprite(string id)
         {
             if(string.IsNullOrEmpty(id))return null;

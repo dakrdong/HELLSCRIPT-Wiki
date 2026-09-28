@@ -17,13 +17,26 @@ namespace Hellscript
         public bool legacyRoll,greater;
     }
 
+    public sealed class ItemBaseBonus
+    {
+        public readonly int stat;public readonly float value;
+        public ItemBaseBonus(int stat,float value){this.stat=stat;this.value=value;}
+        public float Value(Item item)=>value*(stat==(int)StatId.Armor||stat==(int)StatId.MaximumLife||stat==(int)StatId.Thorns?1+.08f*(item.level-1):1);
+    }
+
     public sealed class ItemBaseDefinition
     {
         public readonly string id, name;
         public readonly int slot, heroClass, legacyIndex;
         public readonly float main, resistance, attackSpeed;
-        public ItemBaseDefinition(string id,string name,int index,int slot,int heroClass,float main,float resistance=0,float speed=0)
-        {this.id=id;this.name=name;legacyIndex=index;this.slot=slot;this.heroClass=heroClass;this.main=main;this.resistance=resistance;attackSpeed=speed;}
+        public readonly string material;
+        public readonly IReadOnlyList<ItemBaseBonus> bonuses;
+        public ItemBaseDefinition(string id,string name,int index,int slot,int heroClass,float main,float resistance=0,float speed=0,string material="",int stat=-1,float bonus=0,int secondStat=-1,float secondBonus=0)
+        {
+            this.id=id;this.name=name;legacyIndex=index;this.slot=slot;this.heroClass=heroClass;this.main=main;this.resistance=resistance;attackSpeed=speed;this.material=material;
+            var fixedStats=new List<ItemBaseBonus>();if(stat>=0)fixedStats.Add(new ItemBaseBonus(stat,bonus));if(secondStat>=0)fixedStats.Add(new ItemBaseBonus(secondStat,secondBonus));
+            bonuses=fixedStats.AsReadOnly();
+        }
         public bool Fits(HeroClass c,int s)=>slot==s&&(heroClass<0||heroClass==(int)c);
     }
 
@@ -78,7 +91,7 @@ namespace Hellscript
     // Stable content IDs are authoritative. Legacy indices are only an import adapter.
     public static class ItemCatalog
     {
-        public const int Version=5;
+        public const int Version=6;
         const AffixSide P=AffixSide.Prefix,S=AffixSide.Suffix;
         public static readonly IReadOnlyList<ItemBaseDefinition> Bases=Array.AsReadOnly(new[]{
             new ItemBaseDefinition("B01","녹슨 도검",0,0,0,17,0,.15f),new ItemBaseDefinition("B02","강철 대검",1,0,0,20),new ItemBaseDefinition("B03","묵철 도끼",2,0,0,23,0,-.15f),
@@ -93,7 +106,37 @@ namespace Hellscript
             new ItemBaseDefinition("B23","철 반지",22,7,-1,5),new ItemBaseDefinition("B24","은 반지",23,7,-1,5),
             new ItemBaseDefinition("B25","재의 한손 지팡이",24,0,2,17,0,.1f),new ItemBaseDefinition("B26","봉인된 오브",25,0,2,5),
             new ItemBaseDefinition("B27","마법 스크롤",26,0,2,5),new ItemBaseDefinition("B28","철 방패",27,0,-1,24),
-            new ItemBaseDefinition("B29","사냥 화살",28,0,1,5),new ItemBaseDefinition("B30","사냥꾼 단검",29,0,1,17,0,.15f)
+            new ItemBaseDefinition("B29","사냥 화살",28,0,1,5),new ItemBaseDefinition("B30","사냥꾼 단검",29,0,1,17,0,.15f),
+            new ItemBaseDefinition("B31","소형 원형 방패",30,0,-1,16,0,0,"",28,24,29,18),
+            new ItemBaseDefinition("B32","철테 원형 방패",31,0,-1,24,0,0,"",28,20,29,26),
+            new ItemBaseDefinition("B33","기사의 연형 방패",32,0,-1,32,0,0,"",28,16,29,36),
+            new ItemBaseDefinition("B34","성벽 대형 방패",33,0,-1,40,0,0,"",28,12,29,50),
+            new ItemBaseDefinition("B35","누빈 천 두건",34,1,-1,8,12,0,"천",-1,0,-1,0),
+            new ItemBaseDefinition("B36","사냥꾼 가죽 모자",35,1,-1,12,6,0,"가죽",27,1,-1,0),
+            new ItemBaseDefinition("B37","쇠사슬 두건",36,1,-1,17,3,0,"철",-1,0,-1,0),
+            new ItemBaseDefinition("B38","중장 판금 투구",37,1,-1,24,0,0,"판금",-1,0,-1,0),
+            new ItemBaseDefinition("B39","누빈 천 로브",38,2,-1,16,12,0,"천",-1,0,-1,0),
+            new ItemBaseDefinition("B40","사냥꾼 가죽 조끼",39,2,-1,24,6,0,"가죽",27,1,-1,0),
+            new ItemBaseDefinition("B41","쇠사슬 갑옷",40,2,-1,34,3,0,"철",-1,0,-1,0),
+            new ItemBaseDefinition("B42","중장 판금 갑옷",41,2,-1,48,0,0,"판금",-1,0,-1,0),
+            new ItemBaseDefinition("B43","누빈 천 장갑",42,3,-1,8,8,0,"천",2,2,-1,0),
+            new ItemBaseDefinition("B44","사냥꾼 가죽 장갑",43,3,-1,8,4,0,"가죽",2,5,27,1),
+            new ItemBaseDefinition("B45","쇠사슬 장갑",44,3,-1,8,2,0,"철",2,9,-1,0),
+            new ItemBaseDefinition("B46","중장 판금 건틀릿",45,3,-1,8,0,0,"판금",2,14,-1,0),
+            new ItemBaseDefinition("B47","누빈 천 신발",46,4,-1,8,8,0,"천",2,2,-1,0),
+            new ItemBaseDefinition("B48","사냥꾼 가죽 장화",47,4,-1,8,4,0,"가죽",2,5,27,1),
+            new ItemBaseDefinition("B49","쇠사슬 장화",48,4,-1,8,2,0,"철",2,9,-1,0),
+            new ItemBaseDefinition("B50","중장 판금 장화",49,4,-1,8,0,0,"판금",2,14,-1,0),
+            new ItemBaseDefinition("B51","누빈 천 허리띠",50,5,-1,9,8,0,"천",2,2,-1,0),
+            new ItemBaseDefinition("B52","사냥꾼 가죽 허리띠",51,5,-1,10,4,0,"가죽",2,5,27,1),
+            new ItemBaseDefinition("B53","쇠사슬 허리띠",52,5,-1,11,2,0,"철",2,9,-1,0),
+            new ItemBaseDefinition("B54","중장 판금 허리띠",53,5,-1,12,0,0,"판금",2,14,-1,0),
+            new ItemBaseDefinition("B55","석류석 목걸이",54,6,-1,20,0,0,"",0,35,-1,0),
+            new ItemBaseDefinition("B56","월석 목걸이",55,6,-1,20,0,0,"",42,8,-1,0),
+            new ItemBaseDefinition("B57","흑요석 목걸이",56,6,-1,20,0,0,"",30,8,-1,0),
+            new ItemBaseDefinition("B58","황동 인장 반지",57,7,-1,5,0,0,"",17,1.5f,-1,0),
+            new ItemBaseDefinition("B59","청금석 반지",58,7,-1,5,0,0,"",20,0.6f,-1,0),
+            new ItemBaseDefinition("B60","가시덩굴 반지",59,7,-1,5,0,0,"",27,1.5f,-1,0)
         });
         public static readonly IReadOnlyList<AffixDefinition> Affixes=Array.AsReadOnly(new[]{
             new AffixDefinition("AF01",0,P,"생명 어린","FlatHealth",100,40,100,true,1,2,5,6,7),
@@ -289,7 +332,10 @@ namespace Hellscript
             if((int)c<0||(int)c>2||slot<0||slot>7||rarity<0||rarity>3||level<1)throw new ArgumentOutOfRangeException();
             level=Math.Min(ItemQuality.MaximumItemLevel,level);
             uint next=rng;
-            var bases=ItemCatalog.Bases.Where(b=>b.Fits(c,slot)&&(rarity<3||!EquipmentSlots.IsOffhand(EquipmentSlots.Kind(b.id)))).ToList();var b=Pick(bases,_=>1,ref next);
+            var bases=ItemCatalog.Bases.Where(b=>b.Fits(c,slot)&&(rarity<3||!EquipmentSlots.IsOffhand(EquipmentSlots.Kind(b.id)))).ToList();
+            // More shield silhouettes must not crowd out the class's offensive weapon drops.
+            int shieldVariants=Math.Max(1,bases.Count(x=>EquipmentSlots.Kind(x.id)==WeaponKind.Shield));
+            var b=Pick(bases,x=>EquipmentSlots.Kind(x.id)==WeaponKind.Shield?1:shieldVariants,ref next);
             var item=new Item{id=id??Guid.NewGuid().ToString("N"),baseId=b.id,baseIndex=b.legacyIndex,slot=slot,rarity=rarity,level=level,lootClass=c,contentVersion=ItemCatalog.Version};
             if(rarity==3)
             {

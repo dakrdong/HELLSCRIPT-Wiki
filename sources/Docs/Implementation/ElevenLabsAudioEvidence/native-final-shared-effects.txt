@@ -1,0 +1,10 @@
+PASS shop.gamble_beat -> ui.click_heavy / ui_click_heavy_2: existing imported asset, listener peak=0.274641
+PASS gem.socket -> item.equip.orb / item_equip_orb_1: existing imported asset, listener peak=0.260256
+PASS rune.place -> forge.core_invest / forge_core_invest_2: existing imported asset, listener peak=0.449088
+PASS rune.rotate -> loot.stone / loot_stone_1: existing imported asset, listener peak=0.561593
+PASS rune.remove -> gem.remove / gem_remove_1: existing imported asset, listener peak=0.463550
+PASS rune.fuse -> gem.fuse / gem_fuse_1: existing imported asset, listener peak=0.231347
+PASS rune.unlock -> aspect.upgrade / aspect_upgrade_1: existing imported asset, listener peak=0.262094
+PASS reward.box_open -> reward.chest / reward_chest_1: existing imported asset, listener peak=0.307815
+PASS reward.claim -> ui.confirm / ui_confirm_2: existing imported asset, listener peak=0.460713
+Native playback API and listener output, not transaction/UI input coverage. No audio copies or new generation.

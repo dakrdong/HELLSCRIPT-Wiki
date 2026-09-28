@@ -10,19 +10,21 @@ namespace Hellscript
     public sealed class TownStationDefinition
     {
         public readonly TownStation id;
-        public readonly string name,service,action,npcName;
+        public readonly string name,service,action;
+        public string npcName=>NpcProfiles.ForStation(id)?.name??"";
         public readonly Vector2 position;
         public readonly Rect building;
         public Vector2 NpcPosition=>id==TownStation.AspectStone?building.center:id==TownStation.RiftKeeper?position+new Vector2(-2.2f,-1.6f):position;
-        internal TownStationDefinition(TownStation id,string name,string service,string action,Vector2 position,Rect building=default,string npcName="")
-        {this.id=id;this.name=name;this.service=service;this.action=action;this.position=position;this.building=building;this.npcName=npcName;}
+        internal TownStationDefinition(TownStation id,string name,string service,string action,Vector2 position,Rect building=default)
+        {this.id=id;this.name=name;this.service=service;this.action=action;this.position=position;this.building=building;}
     }
     public sealed class TownResidentDefinition
     {
-        public readonly string id,name;
+        public readonly string id;
+        public string name=>NpcProfiles.ForResident(id).name;
         public readonly Vector2 position;
-        internal TownResidentDefinition(string id,string name,Vector2 position)
-        {this.id=id;this.name=name;this.position=position;}
+        internal TownResidentDefinition(string id,Vector2 position)
+        {this.id=id;this.position=position;}
     }
     public static class TownLayout
     {
@@ -36,22 +38,22 @@ namespace Hellscript
         public static readonly TownStationDefinition[] Stations=
         {
             new TownStationDefinition(TownStation.AspectStone,"위상 각인석","위상 수집 · 레벨업 · 각인","각인석 열기",new Vector2(-34,1),House(-34,4,5,2)),
-            new TownStationDefinition(TownStation.Warehouse,"창고","계정 창고 · 장비 보관","창고 열기",new Vector2(-37,13),House(-37,21,14,10),"차도르 사마프"),
-            new TownStationDefinition(TownStation.Merchant,"무기 상인","장비 구매 · 판매","상점 열기",new Vector2(-14,16),House(-14,24),"제이크 보쿤"),
+            new TownStationDefinition(TownStation.Warehouse,"창고","계정 창고 · 장비 보관","창고 열기",new Vector2(-37,13),House(-37,21,14,10)),
+            new TownStationDefinition(TownStation.Merchant,"무기 상인","장비 구매 · 판매","상점 열기",new Vector2(-14,16),House(-14,24)),
             new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-6,-24),House(-6,-16,11,9)),
-            new TownStationDefinition(TownStation.Blacksmith,"대장간","장비 재련 · 강화 · 제작","대장간 이용",new Vector2(14,17),House(14,25,14,9),"마르크 쿠스"),
+            new TownStationDefinition(TownStation.Blacksmith,"대장간","장비 재련 · 강화 · 제작","대장간 이용",new Vector2(14,17),House(14,25,14,9)),
             new TownStationDefinition(TownStation.Training,"훈련 교관","자유 훈련 · 설정 비교","훈련하기",new Vector2(37,9)),
             new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 변환 · 물약 제조 · 소켓 관리","보석상 열기",new Vector2(-32,-24),House(-32,-16,11,9)),
             new TownStationDefinition(TownStation.RuneMerchant,"룬 상인","룬 블록 구매 · 룬 배치","룬 상점 열기",new Vector2(21,-24),House(21,-16,12,9)),
-            new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(43,-24),House(43,-16,11,9),"인젤 미르"),
-            new TownStationDefinition(TownStation.RiftKeeper,"균열","단계 선택 · 균열 입장","균열 열기",new Vector2(8,0),npcName:"안톤 진다크"),
+            new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(43,-24),House(43,-16,11,9)),
+            new TownStationDefinition(TownStation.RiftKeeper,"균열","단계 선택 · 균열 입장","균열 열기",new Vector2(8,0)),
         };
-        // Residents have no service ID, so their labels cannot dispatch a shop or interaction.
+        // Residents can converse, but never own a service ID or dispatch a shop.
         public static readonly TownResidentDefinition[] Residents=
         {
-            new TownResidentDefinition("Pyonya","표냐 내르뭰",new Vector2(-13,-7)),
-            new TownResidentDefinition("Jean","쟝 죠린",new Vector2(-11,7)),
-            new TownResidentDefinition("Darc","달크 알뷔",new Vector2(23,4)),
+            new TownResidentDefinition("Pyonya",new Vector2(-13,-7)),
+            new TownResidentDefinition("Jean",new Vector2(-11,7)),
+            new TownResidentDefinition("Darc",new Vector2(23,4)),
         };
         public static TownStationDefinition Station(TownStation id)=>Stations.Single(s=>s.id==(id==TownStation.Reroller?TownStation.Blacksmith:id));
         public static Vector2 Clamp(Vector2 p)=>new Vector2(Mathf.Clamp(p.x,-HalfWidth,HalfWidth),Mathf.Clamp(p.y,-HalfHeight,HalfHeight));
@@ -60,7 +62,7 @@ namespace Hellscript
         public static TownStation? Nearby(Vector2 p)
         {
             TownStation? result=null;float distance=InteractionRadius;
-            foreach(var s in Stations){float d=Vector2.Distance(p,s.position);if(d<=distance){distance=d;result=s.id;}}return result;
+            foreach(var s in Stations){float d=Vector2.Distance(p,s.position);if(s.id==TownStation.RiftKeeper)d=Mathf.Min(d,Vector2.Distance(p,s.NpcPosition));if(d<=distance){distance=d;result=s.id;}}return result;
         }
         public static bool ClearSegment(Vector2 a,Vector2 b)
         {

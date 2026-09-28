@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-27",
+  "branch": "codex/power-saving-hunt",
+  "unity": "6000.6.0f1",
+  "platform": "macOS development player",
+  "device": "Apple M3 Pro",
+  "editMode": {
+    "total": 94,
+    "passed": 94,
+    "failed": 0,
+    "skipped": 0,
+    "newStatusAndGrowthTests": 13,
+    "report": "editmode.xml"
+  },
+  "uiContract": {
+    "ownership": "passed",
+    "testsPassed": 9,
+    "testsFailed": 0
+  },
+  "build": "success",
+  "native": "passed",
+  "restart": "passed",
+  "viewports": [
+    "440x956",
+    "956x440",
+    "1600x900",
+    "1600x1000",
+    "2100x900"
+  ],
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "textScales": [
+    100,
+    150
+  ],
+  "nativeChecks": [
+    "live location and status variants including full-storage, potions, next-rift and pause",
+    "shared class portrait matches the owned hero",
+    "XP at level 39 updates automatically to level 40 and max-level bar through combat growth",
+    "at least one whole row visible in both logs",
+    "growth, unlock gauge and exit controls do not overlap",
+    "real pointer open/close and scroll",
+    "inspection pauses combat, fatigue and repeat delay",
+    "same simulation advances with world and normal HUD disabled",
+    "3-second unlock and inspection cancellation",
+    "save-failure preservation and explicit recovery",
+    "fresh-process saved gear and suspended battle"
+  ],
+  "corrections": [
+    "Added missing English entries for existing cleared/failed outcome labels.",
+    "Moved growth to the lower left in landscape after visual review to preserve full log rows."
+  ],
+  "editorConnection": "CoplayDev MCP instances returned zero; used the existing project batch runner and native macOS player.",
+  "limits": {
+    "physicalMobileVerified": false,
+    "batteryOrThermalMeasured": false,
+    "mergedToMain": false,
+    "publicWikiDeployed": false
+  }
+}

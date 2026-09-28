@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=18;
+        public const int MaximumSchemaVersion=19;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -330,11 +330,14 @@ namespace Hellscript
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
+            RiftResult.SyncDisposals(Data.suspendedRun,staged.suspendedRun);
+            var liveResult=Data.repeatHunt?.pendingResult;RiftResult.SyncDisposals(liveResult,staged.repeatHunt?.pendingResult);
+            if(liveResult!=null&&staged.repeatHunt?.pendingResult?.id==liveResult.id)staged.repeatHunt.pendingResult=liveResult;
             Data.repeatHunt=staged.repeatHunt;Data.records=staged.records;
             Data.telemetryAccountId=staged.telemetryAccountId;Data.combatSequence=staged.combatSequence;Data.combatTelemetryLossCount=staged.combatTelemetryLossCount;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
             Data.rewardBoxes=staged.rewardBoxes;
-            Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Error="";NotifyCommitted(operation);return true;
+            Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Data.warehouseSequence=staged.warehouseSequence;Error="";NotifyCommitted(operation);return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)
         {

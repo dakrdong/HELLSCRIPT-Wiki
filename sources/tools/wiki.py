@@ -195,15 +195,20 @@ def build_databases():
     for cases,kind in re.findall(r'((?:case\s+"B\d+"\s*:\s*)+)return WeaponKind\.(\w+);',equipment_source):
         weapon_kinds.update({key:kind for key in re.findall(r'"(B\d+)"',cases)})
     two_handed=set(re.findall(r'WeaponKind\.(\w+)',re.search(r'bool TwoHanded\(.*?;',equipment_source)[0]))
+    attribute_path=CORE+'Attributes.cs';numbers=stat_numbers(attribute_path)
+    base_stats={numbers[str(a[0]).split('.')[-1]]:(a[1],str(a[3])) for a,_ in constructors(attribute_path,'StatDefinition')}
     for a,line in constructors(item_path,'ItemBaseDefinition'):
-        a=a+[0]*(9-len(a)); c=CLASSES[a[4]] if a[4]>=0 else '공용'
+        a=a+([0,0,'',-1,0,-1,0][len(a)-6:] if len(a)<13 else []); c=CLASSES[a[4]] if a[4]>=0 else '공용'
         kind=weapon_kinds.get(a[0])
-        icon={'image':{'file':'EquipmentAtlas.png','cell':a[2]}} if a[2]<24 else {'vector':kind.lower()}
+        icon=({'image':{'file':'EquipmentVariants/'+('B32' if a[0]=='B28' else a[0])+'.png'}} if a[0]=='B28' or a[2]>=30
+              else {'image':{'file':'EquipmentAtlas.png','cell':a[2]}} if a[2]<24 else {'vector':kind.lower()})
+        fixed=[{'statId':a[n],'baseValue':a[n+1],'scalesWithLevel':a[n] in (0,2,30)} for n in (9,11) if a[n]>=0]
+        fixed_text=[f"{base_stats[x['statId']][0]} {x['baseValue']}{'%' if base_stats[x['statId']][1]=='Pct' else '/초' if base_stats[x['statId']][1]=='Sec' else ''} ({'레벨 비례' if x['scalesWithLevel'] else '고정'})" for x in fixed]
         rows.append(record(a[0],a[1],SLOTS[a[3]],f'{c} · {SLOTS[a[3]]} · 기본값 {a[5]}',
           {'직업':c,'부위':SLOTS[a[3]],'기본 주 수치':a[5],'기본 비물리 저항':a[6],'공격속도 보정':a[7],
-           '무기 종류':kind or '해당 없음','무기 슬롯 점유':2 if kind in two_handed else 1 if kind else '해당 없음',
-           '수치 해석':'아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다.'},item_path,line,**icon,refs=[source_ref(equipment_path)],related=['native-inventory','itemization-detail','itemization-expansion']))
-    data.append(db('items','장비 베이스','B01–B30의 베이스·직업·부위·기본 수치입니다. B01–B24는 아틀라스, B25–B30은 런타임 벡터 아이콘을 사용합니다.',rows))
+           '재질':a[8] or '해당 없음','고정 부가 능력치':fixed_text or ['없음'],'무기 종류':kind or '해당 없음','무기 슬롯 점유':2 if kind in two_handed else 1 if kind else '해당 없음',
+           '수치 해석':'아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다.'},item_path,line,**icon,implicitStats=fixed,refs=[source_ref(equipment_path),source_ref(attribute_path)],related=['equipment-variants','equipment-variants.en','native-inventory','itemization-detail','itemization-expansion']))
+    data.append(db('items','장비 베이스','B01–B60의 장비 베이스입니다. 신규 방패 4종, 부위별 재질 20종, 목걸이·반지 6종은 독립 PNG와 고정 특성을 사용합니다. B28도 원형 방패 PNG를 공유합니다.',rows))
     # The stat table is the one place a stat's name and unit are written, so both the attribute
     # database and the affix database read it rather than keeping a list of their own.
     attribute_path = CORE + 'Attributes.cs'
@@ -287,7 +292,7 @@ def build_databases():
             ' · '.join(t['cells'][1:]),t['fields'],DESIGN+'HELLSCRIPT_Rift_Exploration_Detail.md',t['line'],status='기획·구현 기록',
             refs=[source_ref(CORE+'RiftFieldContent.cs')],related=['field-expansion','rift-exploration-detail'],resource='procedural-interactions'))
     data.append(db('field','상자·성소','CH01–CH03과 SH01–SH02입니다. 초기 기획의 구현 순서와 현재 적용 여부는 개발 기록을 함께 봅니다.',rows))
-    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':30,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':20,'elites':6,'bosses':5,'rooms':12,'field':5}
+    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':60,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':20,'elites':6,'bosses':5,'rooms':12,'field':5}
     for table in data:
         if len(table['rows']) != expected[table['id']]: raise ValueError('Review changed catalog count: '+table['id'])
     import wiki_runes
@@ -405,6 +410,28 @@ def build_resources(databases):
          '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
         IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,
         refs=[source_ref(coin_source),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs')],related=['potion-slots','potion-slots.en']))
+    variant_manifest='Docs/Art/EquipmentVariants/manifest.json'
+    variant_art={a['id']:a for a in json.loads(read(variant_manifest))['assets']}
+    npc_path='Assets/HELLSCRIPT/Resources/NpcProfiles.json'
+    npc_art='Docs/Art/NpcPortraits/'
+    npc_provenance=json.loads(read(npc_art+'generation-results.json'))
+    npc_qa={p['id']:p for p in json.loads(read(npc_art+'alpha-validation.json'))}
+    for npc in json.loads(read(npc_path))['profiles']:
+        file=npc['portrait'].removeprefix('Art/')+'.png';path=ART+file
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=npc_qa[npc['id']]
+        if digest(raw)!=qc['sha256']:raise ValueError('NPC portrait differs from its native generated source: '+npc['id'])
+        rows.append(record('npc-portrait-'+npc['id'],npc['name'],'이미지 원본',
+            npc['food']+' 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.',
+            {'원본 경로':path,'NPC ID':npc['id'],'국적 모티브':npc['country'],'성별':npc['gender'],'음식 콘셉트':npc['food'],
+             '배치':npc['station'] or npc['residentId'],'색상과 특징':npc['palette'],
+             '해상도':' × '.join(map(str,qc['size'])),'색상 모드':qc['mode'],'완전 투명 픽셀':qc['transparentPixels'],
+             '알파 범위':str(qc['alphaExtrema']),'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '제작 방법':'Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved',
+             '출처 확인':npc_provenance['provenance'],'승인 상태':'현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs'},
+            npc_path,status='사용 중',image={'file':file},assetPath=path,
+            refs=[source_ref(npc_art+'prompts.json'),source_ref(npc_art+'generation-results.json'),source_ref(npc_art+'alpha-validation.json'),
+                  source_ref('Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs')],
+            related=['npc-dialogue-portraits','npc-dialogue-portraits.en']))
     byid={d['id']:d for d in databases}
     for group in ['skills','heroes','items']:
         for item in byid[group]['rows']:
@@ -420,7 +447,22 @@ def build_resources(databases):
                     glyph_path,glyph_source[:match.start()].count('\n')+1,status='현재 사용',
                     content={'db':group,'id':item['id']},related=['native-inventory','resource-guide']))
                 continue
-            image=item['image'];cell=image['cell'];width,height=sizes[image['file']]
+            image=item['image']
+            if 'cell' not in image:
+                provenance=variant_art['B32' if item['id']=='B28' else item['id']]
+                path=ART+image['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+                if digest(raw)!=provenance['sha256']:raise ValueError('Equipment variant provenance hash mismatch: '+path)
+                with Image.open(ROOT/path) as im:
+                    alpha=im.getchannel('A') if 'A' in im.getbands() else None
+                    fields={'콘텐츠 ID':item['id'],'원본':image['file'],'해상도':f'{im.width} × {im.height}',
+                            '색상 모드':im.mode,'완전 투명 픽셀':alpha.histogram()[0] if alpha else 0,
+                            'SHA-256':digest(raw),'생성 모델':provenance['model'],'승인 상태':provenance['status'],
+                            '등록 방식':'독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다.'}
+                rows.append(record(item['resource'],item['name']+' 아이콘','장비 아이콘',item['id']+' · 독립 PNG',fields,
+                    IMPL+'Equipment_Variants.md',status='개발용 사용 · 모델 미확인',image=image,assetPath=path,
+                    content={'db':group,'id':item['id']},refs=[source_ref(variant_manifest)],related=['equipment-variants','equipment-variants.en']))
+                continue
+            cell=image['cell'];width,height=sizes[image['file']]
             rows.append(record('icon-'+item['id'],item['name']+' 아이콘','장비 아이콘' if group=='items' else '스킬·직업 아이콘',
                 f'{item["id"]} · {image["file"]} · {cell//6+1}행 {cell%6+1}열',
                 {'콘텐츠 ID':item['id'],'원본':image['file'],'셀 번호 (0부터)':cell,'행·열 (1부터)':f'{cell//6+1}행 {cell%6+1}열',
@@ -474,9 +516,36 @@ def build_resources(databases):
         {'글꼴 후보':'Apple SD Gothic Neo, Malgun Gothic, Noto Sans CJK KR, Noto Sans CJK, Droid Sans Fallback, Arial',
          '재배포':'OS 글꼴 파일을 프로젝트에 복사하지 않았습니다.','후속 확인':'Android 배포 글꼴·사용권·긴 문구 표시를 확인합니다.'},
         'Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs',31,status='임시 사용',related=['asset-provenance']))
+    audio_manifest='AudioSources/ElevenLabs/manifest.json'
+    audio_assets=list(json.loads(read(audio_manifest))['assets'].values())
+    audio_bank='Assets/HELLSCRIPT/Resources/Audio/Sfx/bank.json'
+    audio_cues=json.loads(read(audio_bank))['sounds']
+    effects=[a for a in audio_assets if a['kind']=='sfx']
+    music=[a for a in audio_assets if a['kind']=='music']
+    adopted_cues=len({a['cue'] for a in effects})
+    shared_cues=sum(bool(cue.get('sharedCue')) for cue in audio_cues)
+    remaining_cues=len(audio_cues)-adopted_cues-shared_cues
+    audio_plan=json.loads(read('AudioSources/ElevenLabs/production-plan.json'))
+    pending_audio=[r for r in audio_plan['rows'] if r['status'] not in ('final_adopted','final_shared')]
+    next_audio=' · '.join(r['ko']+' / '+r['en'] for r in pending_audio) if pending_audio else '현재 음원을 최종본으로 확정했으며 추가 생성 계획은 없습니다. / Current assets are final; no additional generation is planned.'
+    audio_summary=f'최종 효과음 {len(effects)}개와 배경음 {len(music)}곡으로 모든 재생 상황 {len(audio_cues)+len(music)}종을 연결했습니다. 효과음 {shared_cues}종은 기존 최종 음원을 공유하며 이전 합성 음원은 제거했습니다.'
+    rows.append(record('audio-elevenlabs','ElevenLabs 게임 음향','게임 음향',audio_summary,
+        {'영문 이름 / English':'ElevenLabs game audio',
+         '효과음 종류 / SFX cues':len(audio_cues),'고유 원본 종류 / Distinct source cues':adopted_cues,'효과음 변주 / SFX variations':len(effects),
+         '공유 음원 사용 / Shared cues':shared_cues,
+         '배경음 / Music tracks':len(music),'남은 종류 / Remaining cues':remaining_cues,
+         '생성 모델 / Models':'eleven_text_to_sound_v2; eleven_music_v2',
+         '원본 / Sources':'MP3 originals; 48 kHz PCM16 runtime masters; hashes and prompts in the source manifest.',
+         '검토 / Review':'사용자 지시로 현재 음원을 최종본으로 확정했습니다. 새 청음 시험을 뜻하지 않습니다. Accepted as final by user instruction; no new listening test is claimed.',
+         '다음 제작 / Next production':next_audio},
+        audio_manifest,status='최종본 확정 · 이전 음원 정리',
+        refs=[source_ref(audio_bank),source_ref('AudioSources/ElevenLabs/production-plan.json'),
+              source_ref('AudioSources/ElevenLabs/sfx-catalog.json'),
+              source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs')],
+        related=['elevenlabs-game-audio','elevenlabs-game-audio.en','asset-provenance']))
     for ident,name,summary in [
         ('todo-town','숲속 마을의 미술 품질·실기기 검증','타이틀, 원형 조이스틱, 건물 앞 NPC 6명, 주황·금빛 포탈, 수동 상호작용과 건물 가림 투명화를 구현했습니다. 미술 품질 개선과 모바일 실기기 검증이 남아 있습니다.'),
-        ('todo-audio','전투·보상·환경 음향','타격·피격·회피·획득·보스 예고·결과의 정식 음원과 재생 규칙을 연결해야 합니다.'),
+        ('todo-audio','전투·보상·환경 음향',audio_summary),
         ('todo-animation','정식 캐릭터·적 애니메이션','기존 코드 동작을 기준으로 준비·공격·회피·피격·사망의 정식 애니메이션을 제작해야 합니다.'),
         ('todo-gems','보석 데이터·아이콘','해골을 제외한 보석 6종·6단계와 5개 소켓 부위를 사용합니다. 투명 PNG 시안 6개를 제작했으며 생성 모델 출처 확인과 게임 화면 적용은 남아 있습니다.')]:
         rows.append(record(ident,name,'제작 과제',summary,{'현재 공백':summary,'상태 해석':'기획에 필요한 제작 과제이며 완성 자산 수에 포함하지 않습니다.'},
@@ -558,6 +627,10 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'feature-integration-20260927':('후속 개발 기록','균열 결과창·장비·오디오 개발 통합','완료된 5개 개발 브랜치의 통합, 3D 개편 제외, 저장 호환성과 실행 검증을 기록합니다.'),
+ 'feature-integration-20260927.en':('후속 개발 기록','Rift, equipment and audio integration','Five completed branches, excluded 3D work, save compatibility, regression and native runtime evidence.'),
+ 'npc-dialogue-portraits':('리소스와 운영','NPC 초상화와 음식 콘셉트 대화','필드 NPC 12명의 기존 인물 설정, 개별 초상화·인사말, 훈련 교관과 대화·시설 접근 검증입니다.'),
+ 'npc-dialogue-portraits.en':('리소스와 운영','NPC portraits and food-inspired dialogue','Twelve authored identities, individual portraits and greetings, the training instructor and validated dialogue/service access.'),
  'rift-content-unlocks':('전투와 성장','균열 단계별 콘텐츠 개방','신규 계정의 14개 콘텐츠 개방 단계, 최초 보상 팝업, 실행 권한과 기존 계정 이관 규칙입니다.'),
  'rift-content-unlocks.en':('전투와 성장','Rift-based content unlocks','Fourteen account service gates, first-clear guidance, execution guards and preserved legacy entitlements.'),
  'reward-boxes':('장비와 빌드','지급용 보상 상자와 최초 보상','96종 상자, 계정 최초 보상, 저장·개봉 거래, 투명 아이콘의 구현과 검증 범위입니다.'),
@@ -618,6 +691,8 @@ PAGE_META={
  'hunt-edict-skill-options':('기획과 범위','사냥 칙령: 스킬 화면','스킬별 핵심 옵션과 전역 판단의 경계, 장착·저장·간소화 화면 구조입니다.'),
  'hunt-edict-skill-option-catalog':('기획과 범위','사냥 칙령: 스킬별 핵심 옵션','모든 액티브·기본 공격을 자동 사용 포함 4~5개로 줄인 개별 설계와 패시브 자동 반영 기준입니다.'),
  'hunt-edict-implementation-contract':('기획과 범위','사냥 칙령: 구현 계약','저장·공유와 실행 연결의 구현 순서, 핵심 옵션 v0.2 간소화의 우선 적용과 HED1 기록의 보존 범위입니다.'),
+ 'recommended-equipment':('장비와 빌드','장비 점수와 추천 착용','부위별 자동 착용 조건, 공통 상세 점수, 교체 보호와 저장 검증을 설명합니다.'),
+ 'recommended-equipment.en':('장비와 빌드','Gear score and auto equip','Per-slot replacement rules, shared detail scores, effect protection and persistence validation.'),
  'hunt-edict-quick-presets':('후속 개발 기록','사냥 칙령: 항목별 간편 프리셋','83개 항목의 249개 프리셋, 직접 설정 전환, 기존 저장·공유 연결과 실행 검증을 정리합니다.'),
  'hunt-edict-quick-presets.en':('후속 개발 기록','Hunt Edict quick presets','249 recipes across 83 scopes, Custom Settings, existing save/share transactions and native validation.'),
  'project-overview':('프로젝트','프로젝트 개요','게임 방향, 플레이 순환과 기획·DB를 읽는 순서를 정리합니다.'),
@@ -649,6 +724,8 @@ PAGE_META={
  'live-operations.en':('리소스와 운영','Live operations and rift releases','Authenticated tuning, draft publication and restoration, first-clear promises and next-rift configuration snapshots.'),
  'wiki-maintenance':('리소스와 운영','위키·DB 갱신 규칙','원본과 조회본의 관계, 버전 보존, 상태 표시와 갱신 방법입니다.'),
  'asset-provenance':('리소스와 운영','임시 리소스 출처','이미지 생성 경로와 모델 확인 범위, 자체 제작과 글꼴 사용 기록입니다.'),
+ 'elevenlabs-game-audio':('리소스와 운영','ElevenLabs 게임 음향','최종 음원 458개, 모든 재생 상황의 연결, 공유 효과음 9종과 이전 음원·중복 파일 정리 결과를 기록합니다.'),
+ 'elevenlabs-game-audio.en':('리소스와 운영','ElevenLabs game audio','458 final assets, complete playback routing, nine shared cues, and removal of retired audio and duplicate production files.'),
  'image-prompts':('리소스와 운영','배경·스킬 생성 프롬프트','기존 성소 배경과 스킬 아틀라스의 생성 프롬프트를 보존합니다.'),
  'equipment-atlas-prompt':('리소스와 운영','장비 아이콘 생성 기록','B01–B24의 원본 생성·투명도·6열×4행 아틀라스 기록입니다.'),
  'rift-stone-prompt':('리소스와 운영','균열 바닥 생성 기록','균열 바닥 PNG의 생성 출처와 Unity 가져오기 설정입니다.'),
@@ -869,7 +946,7 @@ def build():
     for path,expected in INPUTS.items():
         actual=(ROOT/path).read_bytes()
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
-        if path.startswith(('Docs/','Wiki/content/','Assets/','Artifacts/','tools/','Prototypes/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql')):
+        if path.startswith(('Docs/','Wiki/content/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql')):
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
     for file in (ROOT/ART).glob('*.png'):
         target=SITE/'media'/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,target)
@@ -890,6 +967,12 @@ def build():
     (SITE/'media/RewardBoxes').mkdir(parents=True,exist_ok=True)
     for file in (ROOT/ART/'RewardBoxes').glob('*.png'):
         shutil.copyfile(file,SITE/'media/RewardBoxes'/file.name)
+    (SITE/'media/EquipmentVariants').mkdir(parents=True,exist_ok=True)
+    for file in (ROOT/ART/'EquipmentVariants').glob('*.png'):
+        shutil.copyfile(file,SITE/'media/EquipmentVariants'/file.name)
+    (SITE/'media/NpcPortraits').mkdir(parents=True,exist_ok=True)
+    for file in (ROOT/ART/'NpcPortraits').glob('*.png'):
+        shutil.copyfile(file,SITE/'media/NpcPortraits'/file.name)
     report=validate(dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')

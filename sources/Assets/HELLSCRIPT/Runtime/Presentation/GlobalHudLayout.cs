@@ -86,54 +86,46 @@ namespace Hellscript
         {
             style??=new GlobalHudStyle();
             landscape=pixelsWide>=pixelsHigh;
-            scale=Mathf.Max(style.minimumScale,Mathf.Sqrt(Mathf.Max(1,pixelsWide*pixelsHigh)/(style.referenceLong*style.referenceShort))*interfaceFactor);
-            width=pixelsWide/scale;height=pixelsHigh/scale;
-            float m=style.margin,s=landscape?style.landscapeSkill:style.portraitSkill,g=style.skillGap;
-            float left=landscape?style.landscapeVitalsX:style.portraitVitalsX,barWidth=landscape?style.landscapeVitalWidth:style.portraitVitalWidth;
+            float s=style.landscapeSkill,g=style.skillGap;
             float row4=4*s+3*g,row3=3*s+2*g,row7=row4+row3+style.groupGap;
-            wrapped=landscape?width<left+barWidth+style.centerClearance+row7+m:width<style.portraitWrapWidth;
-            float rightStart=width-m-(landscape&&!wrapped?row7:row4);
-            // Keep the action row on the bottom baseline. At enlarged portrait sizes, stack
-            // vitals above the class seal instead of pushing the whole action group upward.
-            bool stackedVitals=!landscape&&left+barWidth+g>rightStart;
-            if(stackedVitals){left=style.sealX;barWidth=rightStart-g-left;}
+            float requested=Mathf.Sqrt(Mathf.Max(1,pixelsWide*pixelsHigh)/(style.referenceLong*style.referenceShort))*interfaceFactor;
+            // One immutable landscape composition, fitted as a group at every aspect ratio.
+            // Portrait must not enlarge potions, shorten XP or split ultimate/active skills.
+            float fit=Mathf.Min(pixelsWide/style.referenceLong,pixelsHigh/style.referenceShort);
+            scale=Mathf.Max(.01f,Mathf.Min(requested,fit));
+            width=pixelsWide/scale;height=pixelsHigh/scale;
+            float origin=(width-style.referenceLong)*.5f,m=style.margin+origin;
+            float left=style.landscapeVitalsX+origin,barWidth=style.landscapeVitalWidth;
+            wrapped=false;
+            float rightStart=width-m-row7;
             barWidth=Mathf.Min(barWidth,Mathf.Max(style.minimumVitalWidth,width-left-m));
-            float vitalHeight=Mathf.Max(landscape?style.landscapeVitalHeight:style.portraitVitalHeight,FontSize(style.valueFont,(int)style.minimumValueFont)/scale+2),baseY=landscape?style.landscapeVitalY:style.portraitVitalY;
-            float sealSize=landscape?style.landscapeSeal:style.portraitSeal;
-            if(stackedVitals)baseY=style.sealY+sealSize+style.rowGap+style.xpTextHeight+style.vitalGap;
+            float vitalHeight=Mathf.Max(style.landscapeVitalHeight,style.valueFont+2),baseY=style.landscapeVitalY;
+            float sealSize=style.landscapeSeal;
             // Text and its row shrink together. Compensate only for whole-pixel font rounding,
             // never for an unscaled pixel floor that would enlarge text after the next HUD refresh.
-            float Row(float height,float font)=>Mathf.Max(height,FontSize(font,1)/scale);
-            seal=new Rect(style.sealX,style.sealY,sealSize,sealSize);
+            float Row(float height,float font)=>Mathf.Max(height,font);
+            seal=new Rect(origin+style.sealX,style.sealY,sealSize,sealSize);
             level=new Rect(seal.center.x-style.levelWidth*.5f,style.levelY,style.levelWidth,Row(style.levelHeight,style.levelFont));
             resource=new Rect(left,baseY,barWidth,vitalHeight);
             hp=new Rect(left,baseY+vitalHeight+style.vitalGap,barWidth,vitalHeight);
             shieldLine=new Rect(left,hp.yMax+1,barWidth,2);
             shield=new Rect(left,hp.yMax+3,barWidth,Row(style.shieldHeight,style.shieldFont));
-            float activeY=style.skillBottom;
-            if(landscape)activeY=Mathf.Max(activeY,style.xpBottom+style.xpThickness+style.captionHeight+8);
-            if(landscape&&!wrapped)
-            {
-                for(int i=0;i<3;i++)passives[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
-                rightStart+=row3+style.groupGap;
-            }
-            else for(int i=0;i<3;i++)passives[i]=new Rect(rightStart+(row4-row3)*.5f+i*(s+g),activeY+s+style.rowGap,s,s);
+            float activeY=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
+            for(int i=0;i<3;i++)passives[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
+            rightStart+=row3+style.groupGap;
             for(int i=0;i<4;i++)actives[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
-            float bottle=landscape?style.landscapePotion:style.portraitPotion;
-            float potionY=Mathf.Max(actives[0].yMax,passives[0].yMax)+style.potionRowGap;
-            float pitch=landscape?style.landscapePotionPitch:style.portraitPotionPitch;
-            float potionStart=width-m-3*pitch;
+            float bottle=style.landscapePotion;
+            float potionY=activeY+(s-bottle)*.5f;
+            float pitch=style.landscapePotionPitch;
+            float potionStart=passives[0].x-style.groupGap-3*pitch;
             for(int i=0;i<3;i++)potions[i]=new Rect(potionStart+i*pitch+(pitch-bottle)*.5f,potionY,bottle,bottle);
             potionTray=new Rect(potionStart,potionY-style.captionHeight-8,3*pitch,bottle+style.captionHeight+16);
-            statusIcon=landscape?style.statusIcon:style.portraitStatusIcon;statusGap=style.statusGap;buttonHit=Mathf.Max(44,40/scale);
-            float sy=Mathf.Max(landscape?style.landscapeStatusY:style.portraitStatusY,shield.yMax+1);
-            status=new Rect(landscape?left:style.portraitStatusX,sy,landscape?style.collapsed:4*statusIcon+3*statusGap,statusIcon+style.statusTextHeight);
-            if(stackedVitals)status=new Rect(left,Mathf.Max(sy,shield.yMax+style.vitalGap),Mathf.Min(status.width,barWidth),status.height);
-            float other=landscape?passives[0].x:width-m;
-            maximumStatusWidth=landscape?Mathf.Max(style.collapsed,Mathf.Min(style.expanded,other-status.x-buttonHit-20)):status.width;
-            xp=new Rect(landscape?m:left,landscape?style.xpBottom:style.portraitXpY,landscape?width-2*m:barWidth,style.xpThickness);
-            xpText=new Rect(landscape?m:left,landscape?style.landscapeXpTextY:style.portraitXpTextY,200,Row(style.xpTextHeight,style.captionFont));
-            if(stackedVitals){xp.y=seal.yMax+8;xpText.y=xp.yMax+4;xpText.width=barWidth;}
+            statusIcon=style.statusIcon;statusGap=style.statusGap;buttonHit=44;
+            float sy=Mathf.Max(style.landscapeStatusY,shield.yMax+1);
+            status=new Rect(left,sy,style.collapsed,statusIcon+style.statusTextHeight);
+            maximumStatusWidth=Mathf.Max(style.collapsed,Mathf.Min(style.expanded,passives[0].x-status.x-buttonHit-20));
+            xp=new Rect(m,style.xpBottom,style.referenceLong-2*style.margin,style.xpThickness);
+            xpText=new Rect(m,style.landscapeXpTextY,200,Row(style.xpTextHeight,style.captionFont));
             occupiedHeight=Mathf.Max(status.yMax,Mathf.Max(passives[0].yMax,potionTray.yMax))+16;
         }
         public Rect Pixels(Rect r)=>new Rect(r.x*scale,r.y*scale,r.width*scale,r.height*scale);

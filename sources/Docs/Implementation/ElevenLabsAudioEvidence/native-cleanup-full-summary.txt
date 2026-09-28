@@ -1,0 +1,38 @@
+Bank: 283 sounds, missing clips 0, listener True
+PASS title · 1 distinct sounds
+PASS characters · 4 distinct sounds
+PASS tutorial · 33 distinct sounds
+PASS rift-warrior · 47 distinct sounds
+Inventory drag: jewelry item, valid slot False, invalid slot True
+SKIP inventory: Object reference not set to an instance of an object.
+FAIL rift-ranger: Timed out: rift keeper page=plaza
+PASS rift-mage · 31 distinct sounds
+Town fixture: gold and highest clear raised to open the shop and forge (no progression claim).
+Invoked (pointer covered by tutorial-visibility): gamble-buy
+Invoked (pointer covered by tutorial-defer): gamble-reveal-confirm
+Invoked (pointer covered by content-close): shop-close
+Forge item cell for 0f312f9ecd8f47528c250e389b881eca: False
+SKIP town: Pointer blocked: forge-item-0f312f9ecd8f47528c250e389b881eca
+PASS settings · 4 distinct sounds
+HEARD title: flow.title_start
+HEARD characters: char.select.warrior, char.select.mage, char.select.ranger, flow.game_start
+HEARD tutorial: ui.open, warrior.swing, hit.*, enemy.*, item.pick.*, item.equip.*
+HEARD rift-warrior: flow.rift_enter, vo.warrior.battlecry, warrior.swing, hit.*, enemy.*, skill.*, flow.victory, flow.rift_exit
+MISSING rift-ranger: flow.rift_enter, ranger.shot, hit.*, enemy.*, skill.*
+HEARD rift-mage: flow.rift_enter, mage.bolt, hit.*, enemy.*, skill.*
+
+Distinct sounds heard: 76
+title (1, listener peak 0.107): flow.title_start
+characters (4, listener peak 0.391): char.select.mage char.select.ranger char.select.warrior flow.game_start
+tutorial (33, listener peak 0.577): boss.basic boss.basic.windup boss.death boss.enrage boss.hook boss.hook.windup boss.slam boss.slam.windup enemy.N01.attack enemy.N01.death enemy.N01.windup enemy.N02.attack enemy.N02.death enemy.N02.windup enemy.N03.attack enemy.N03.death enemy.N03.windup flow.tutorial flow.victory hero.hurt hit.crit hit.slash item.equip.plate item.pick.plate mat.bone mat.metal skill.W01 skill.W01.tick ui.click ui.close ui.notify ui.open warrior.swing
+rift-warrior (47, listener peak 0.700): boss.basic boss.basic.windup boss.BOSS01.spawn boss.death boss.enrage boss.hook boss.hook.windup boss.slam boss.slam.windup enemy.elite_death enemy.N01.attack enemy.N01.death enemy.N01.windup enemy.rage field.chest_interrupt field.chest_open field.chest_start field.rune_drop flow.level_up flow.rift_enter flow.rift_exit flow.skill_unlock flow.victory gold.pickup gold.pickup_large hazard.ice hero.hurt hero.potion hit.crit hit.slash item.pick.jewelry item.pick.leather item.pick.plate loot.drop.magic loot.drop.rare loot.gem loot.material loot.stone mat.metal skill.W01 skill.W01.tick ui.click_primary ui.close ui.notify ui.open vo.warrior.battlecry warrior.swing
+inventory (5, listener peak 0.393): item.lock item.pick.jewelry item.unlock ui.click ui.open
+rift-ranger (3, listener peak 0.358): ui.close ui.notify ui.open
+rift-mage (31, listener peak 0.700): enemy.elite_death enemy.N01.attack enemy.N01.death enemy.N01.windup field.chest_interrupt field.chest_open field.chest_start field.rune_drop field.shrine_start field.shrine_use flow.level_up flow.rift_enter flow.rift_exit flow.skill_unlock gold.pickup hero.hurt hero.potion hit.crit hit.fire hit.lightning item.pick.leather item.pick.plate loot.drop.magic loot.drop.rare mage.bolt skill.M01 skill.M01.hit ui.click_primary ui.close ui.open vo.mage.battlecry
+town (7, listener peak 0.449): gold.spend loot.drop.rare shop.gamble_beat ui.click ui.close ui.open ui.tab
+settings (4, listener peak 0.466): loot.drop.legendary ui.click ui.close ui.tab
+
+Errors logged: 0
+
+
+macOS development build, synthetic EventSystem input. No physical mobile or human listening claim.

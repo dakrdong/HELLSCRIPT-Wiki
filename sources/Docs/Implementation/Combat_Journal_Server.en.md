@@ -1,6 +1,6 @@
 # Rift combat journal and server analytics
 
-Updated: 2026-09-25
+Updated: 2026-09-27
 
 Korean: [균열 전투 기록과 서버 분석 수집](Combat_Journal_Server.md) · [Live operations and configuration releases](Live_Operations.en.md)
 
@@ -11,6 +11,8 @@ The rift entry screen exposes **Battle records**, a newest-first account-wide li
 Defeats include death, timeout and returning before defeating the boss, distinguished by their termination reasons. Leaving loot after defeating the boss remains a victory. Training creates neither owned rift history nor analytics deliveries.
 
 During battle a live text panel sits above the persistent bottom HUD. Narrow screens retain as many complete recent messages as fit and abbreviate the preview when necessary. Completed text logs are chronological and paged in blocks of 100 entries. Existing summaries, final-five-second damage/blocked-action analysis and historical equipment/configuration remain available.
+
+The compact panel fills the rows above the current action with recent events. The expanded panel derives its row count from the actual font and available height, replacing the fixed three-event limit. Entries run chronologically from top to bottom; long messages are abbreviated only in their single-line previews. Panel dimensions, the expand/collapse control and stored events are preserved.
 
 The journal joins observed movement/stop reasons, targets/destinations, rules, selected actions, cast phases, automatic/player triggers, cooldown/resource/range/position waits, hits, shield absorption, deaths, bosses, chests, potions, rewards and configuration changes. Enemy attack/hazard telegraphs retain preparation time and aim, with interruption and enrage events. Damage records retain source/target/root-cast IDs and actual HP loss separately from overkill. Death summaries use the observed final window's HP loss, largest damage source and blocked-skill reasons. Missing evidence is never reconstructed as fact.
 

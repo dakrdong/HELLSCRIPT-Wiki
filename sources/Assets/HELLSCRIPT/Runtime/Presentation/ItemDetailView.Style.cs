@@ -54,14 +54,16 @@ namespace Hellscript
             var type=hidden.FirstOrDefault(l=>l.key=="type");
             if(type!=null)y+=Line(body,type,type,pad,y,titleWidth,UiTheme.Caption);
             if(!narrow&&art>0)y=Mathf.Max(y,titleY+art);
-            foreach(var metadata in hidden.Where(l=>l.key=="level"||l.key=="hands"))
+            foreach(var score in hidden.Where(l=>l.key.StartsWith("equipment-score")))
+                y+=Line(body,score,score,pad,y+5,inner,score.key=="equipment-score"?UiTheme.Heading:UiTheme.Caption)+5;
+            foreach(var metadata in hidden.Where(l=>l.key=="level"||l.key=="hands"||l.key=="material"))
                 y+=Line(body,metadata,metadata,pad,y+3,inner,UiTheme.Caption)+3;
             Divider(body,width,ref y);
             string previous="identity";
             for(int n=0;n<hidden.Length;n++)
             {
                 var line=hidden[n];string key=line.key;
-                if(key=="name"||key=="type"||key=="level"||key=="hands")continue;
+                if(key=="name"||key=="type"||key=="level"||key=="hands"||key=="material"||key.StartsWith("equipment-score"))continue;
                 string group=key.StartsWith("main:")||key.StartsWith("implicit:")?"base":
                     key.StartsWith("affix:")||key.StartsWith("gem:")?"affixes":
                     key=="special"||key=="aspect-salvage"?"power":key.StartsWith("lost-")?"lost":
@@ -78,8 +80,14 @@ namespace Hellscript
                 {
                     var label=new ItemTooltipLine(key+"-label",line.label,UiTheme.MutedHex);
                     y+=Line(body,label,label,pad,y,inner,UiTheme.Caption);
-                    var value=new ItemTooltipLine(key,line.value,line.color);var expanded=new ItemTooltipLine(key,shown[n].value,line.color);
-                    y+=Line(body,value,expanded,pad,y,inner,UiTheme.ItemValue)+3;continue;
+                    var value=new ItemTooltipLine(key,line.number??line.value,line.color);var expanded=new ItemTooltipLine(key,shown[n].number??shown[n].value,line.color);
+                    y+=Line(body,value,expanded,pad,y,inner,UiTheme.ItemValue)+3;
+                    if(!string.IsNullOrEmpty(line.difference))
+                    {
+                        var difference=new ItemTooltipLine("difference:"+key,line.difference,line.color);
+                        y+=Line(body,difference,difference,pad,y,inner,UiTheme.Body)+3;
+                    }
+                    continue;
                 }
                 bool bullet=group=="affixes"||key.StartsWith("implicit:");
                 if(bullet)

@@ -1,0 +1,108 @@
+{
+  "date": "2026-09-28",
+  "unity": "6000.6.0f1",
+  "path": "batch EditMode and isolated native macOS development players; no connected MCP Editor",
+  "finalRuntimeSource": "a41274bb5fa3f9736144f57645e7c4726df41736",
+  "fullSuite": "full-suite-summary.json",
+  "focusedScopes": [
+    {
+      "file": "editmode-ui-final.xml",
+      "total": "75",
+      "passed": "75",
+      "failed": "0",
+      "duration": "3.4097233"
+    },
+    {
+      "file": "editmode-ui-latest.xml",
+      "total": "163",
+      "passed": "162",
+      "failed": "1",
+      "duration": "9.2755873"
+    },
+    {
+      "file": "editmode-attendance-icon-fixed.xml",
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "2.3447283"
+    }
+  ],
+  "repairs": [
+    "OperationsRewardTests uses MaximumSchemaVersion instead of hard-coded 18.",
+    "AttendanceArtImporter explicitly uses Texture2D; all seven art tests pass.",
+    "Inactive power-saving canvas is included when resolving the HUD scale; idle and restart rerun."
+  ],
+  "latestSuccessfulCases": {
+    "art": "runtime-ui5",
+    "attendance": "runtime-ui4",
+    "attendance-restart": "runtime-ui4",
+    "audio": "runtime",
+    "equipment": "runtime",
+    "equipment-restart": "runtime",
+    "idle": "runtime-ui5",
+    "idle-restart": "runtime-ui5",
+    "journal": "runtime-ui5",
+    "map": "runtime-ui4",
+    "map-restart": "runtime-ui4",
+    "npc": "runtime-ui5",
+    "rift": "runtime",
+    "rift-defeat": "runtime",
+    "rift-restart": "runtime",
+    "rift-utility": "runtime",
+    "skills": "runtime",
+    "skills-restart": "runtime",
+    "hud-scale": "runtime-ui4",
+    "telegraph": "runtime-ui5"
+  },
+  "unresolvedNativeFailures": [],
+  "contractChecks": {
+    "check_ui_contract": "passed",
+    "test_ui_contract": 9,
+    "test_wiki_attendance": 2
+  },
+  "physicalMobileTested": false,
+  "batteryMeasured": false,
+  "baselineEditModeFailures": 47,
+  "journalMatrix": {
+    "sizes": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900",
+      "512x288"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "readingPercent": [
+      100,
+      140
+    ],
+    "states": [
+      "collapsed",
+      "expanded"
+    ],
+    "combinations": 48
+  },
+  "wikiValidation": {
+    "result": "passed",
+    "method": "JavaScript route and event-handler checks; browser verification recorded separately",
+    "pageRoutes": 404,
+    "databaseRoutes": 32,
+    "recordDetails": 4268,
+    "filterReset": true,
+    "search": true,
+    "viewToggle": true,
+    "timeline": true,
+    "dateRange": true,
+    "exactTags": true,
+    "historyComparison": true,
+    "publicMirror": true,
+    "publicDateOnly": true,
+    "pages": 404,
+    "databases": 32,
+    "records": 4268
+  }
+}

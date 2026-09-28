@@ -156,7 +156,7 @@ namespace Hellscript
             if(account.transactions.Any(r=>r.requestId==chest.requestId))return false;
             RiftEarnings.GrantGold(account,run,chest.gold);RiftEarnings.GrantMaterials(account,run,chest.materials);
             if(chest.reward!=null&&!string.IsNullOrEmpty(chest.reward.id))
-            {chest.dropId=run.nextId++;run.drops.Add(new DropState{id=chest.dropId,position=chest.position,item=chest.reward});}
+            {chest.dropId=run.nextId++;run.drops.Add(new DropState{id=chest.dropId,position=chest.position,item=chest.reward,source=RiftLootSource.Chest});}
             chest.phase=ChestPhase.Opened;chest.progress=chest.Duration;
             if(receipt)account.transactions.Add(new EconomyReceipt{requestId=chest.requestId,operation="chest:"+run.id+":"+chest.id,committedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()});
             return true;

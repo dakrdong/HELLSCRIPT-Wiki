@@ -16,7 +16,7 @@ Do not introduce foreign item power, durability or class systems. HELLSCRIPT's `
 | --- | --- |
 | Left | Current items labeled `Equipped · position`, with original values only. |
 | Right | `Selected equipment`, with parenthesized differences after its values. |
-| Order | Name; rarity/slot; item/required level; hand usage; base value; implicits; affixes; unique/set description; sockets/upgrades; lost properties; resulting character attributes. Numeric gem contributions use separate Gem rows. |
+| Order | Name; rarity/slot; gear score and before/after score; item/required level; hand usage; base value; implicits; affixes; unique/set description; sockets/upgrades; lost properties; resulting character attributes. Numeric gem contributions use separate Gem rows. |
 | Same item | An equipped item shows details without a self-comparison or comparison button. |
 | Empty position | Show an empty equipped placeholder. Missing properties have a baseline of zero. |
 | Space | Window/card bounds stay fixed. Long text wraps and scrolls inside each card. Changing the comparison position never changes window height. |
@@ -67,7 +67,9 @@ If equip conditions fail, show the condition in red and omit the resulting-chara
 
 ## Shared item-card presentation
 
-Every equipment detail uses `ItemDetailView`: a dark surface, rarity-tinted corner metalwork and a thin double border, identity and level at the top, then a prominent primary value. Engraved dividers separate base properties, additional options, special powers and sockets/progression. Affixes use small diamond markers; special powers use an inset panel. Narrow comparison cards stack the icon above the identity and wrap text. Decorations never intercept input.
+Every equipment detail uses `ItemDetailView`: a dark surface, rarity-tinted corner metalwork and a thin double border, identity followed by a prominent gear score, then level and the primary value. Engraved dividers separate base properties, additional options, special powers and sockets/progression. Affixes use small diamond markers; special powers use an inset panel. Narrow comparison cards stack the icon above the identity and wrap text. Decorations never intercept input.
+
+Use `EquipmentScore.Value` for intrinsic scores and `ItemComparison.Preview.scoreBefore` / `scoreAfter` for replacement scores. Weapons compare the whole hand configuration. Details, comparisons and automatic equipment share this calculation. Unrolled catalog ranges do not show a fabricated score. See [Gear score and automatic equipment](../Implementation/Recommended_Equipment.en.md) for the formula and scope.
 
 - `ItemTooltip` / `ItemComparison` retain text and numeric ownership. The separate primary `label` / `value` come from the same calculation.
 - Mobile/desktop, Korean/English and enlarged text share the presentation. Outer bounds remain fixed while content scrolls. Range On/Off and Ctrl preserve row geometry and scroll.

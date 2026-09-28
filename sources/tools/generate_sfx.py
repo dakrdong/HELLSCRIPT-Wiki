@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""Render HELLSCRIPT's procedural sound-effect bank.
+"""Validate and preview the final HELLSCRIPT sound bank without generating audio.
 
-    python3 tools/generate_sfx.py            # render WAVs, Unity metas and bank.json
-    python3 tools/generate_sfx.py --check    # re-render in memory and verify files + code references
-    python3 tools/generate_sfx.py --only ui. # render a subset (prefix match) for iteration
-    python3 tools/generate_sfx.py --sheets DIR --audition DIR   # spectrogram sheets / listening page
+    python3 tools/generate_sfx.py --check
+    python3 tools/generate_sfx.py --write-bank   # update metadata only
+    python3 tools/generate_sfx.py --audition Artifacts/Audio
 
-Needs numpy + scipy (matplotlib only for --sheets). Everything is synthesised from seeded DSP
-recipes in tools/sfx: no recordings, samples, speech engines or third-party game audio.
+The historical command name is retained. Retired synthesis cannot be invoked.
+Use elevenlabs_audio.py --rebuild to restore a final master from its retained source.
 """
 import argparse
 import hashlib
 import html
 import json
 import re
-import shutil
 import sys
 import wave
 from pathlib import Path
@@ -23,61 +21,23 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools/sfx"))
-import dsp  # noqa: E402
-import bank  # noqa: E402
-import recipes_system, recipes_heroes, recipes_world  # noqa: E402,F401
+import dsp
+import bank
+import elevenlabs_audio
 
 OUT = ROOT / "Assets/HELLSCRIPT/Resources/Audio/Sfx"
 CODE = ROOT / "Assets/HELLSCRIPT/Runtime"
-LONG = 2.0  # seconds; longer clips import as Vorbis, shorter as ADPCM
 
 
 def clip_name(sid, v):
     return re.sub(r"[^A-Za-z0-9]+", "_", sid) + f"_{v + 1}"
 
 
-def guid(rel):
-    return hashlib.md5(("hellscript-sfx:" + rel).encode()).hexdigest()
-
-
-def folder_meta(path):
-    rel = path.relative_to(ROOT).as_posix()
-    meta = path.with_name(path.name + ".meta")
-    if not meta.exists():
-        meta.write_text(f"fileFormatVersion: 2\nguid: {guid(rel)}\nfolderAsset: yes\nDefaultImporter:\n  externalObjects: {{}}\n"
-                        "  userData: \n  assetBundleName: \n  assetBundleVariant: \n")
-
-
-def audio_meta(path, seconds):
-    rel = path.relative_to(ROOT).as_posix()
-    long = seconds > LONG
-    return (f"fileFormatVersion: 2\nguid: {guid(rel)}\nAudioImporter:\n  externalObjects: {{}}\n  serializedVersion: 8\n"
-            f"  defaultSettings:\n    serializedVersion: 2\n    loadType: 1\n    sampleRateSetting: 0\n    sampleRateOverride: 44100\n"
-            f"    compressionFormat: {1 if long else 2}\n    quality: {0.7 if long else 1}\n    conversionMode: 0\n    preloadAudioData: 1\n"
-            "  platformSettingOverrides: {}\n  forceToMono: 1\n  normalize: 0\n  loadInBackground: 0\n  ambisonic: 0\n  3D: 0\n"
-            "  userData: \n  assetBundleName: \n  assetBundleVariant: \n")
-
-
-def pcm(x):
-    return np.round(np.clip(x, -1, 1) * 32767).astype("<i2")
-
-
-def render(entry, v):
-    rng = np.random.default_rng(bank.seed(entry["id"], v))
-    x = np.asarray(entry["fn"](rng, v), float)
-    if not np.all(np.isfinite(x)) or dsp.peak(x) < 1e-6:
-        raise ValueError(f"{entry['id']} variant {v} rendered silence or NaN")
-    return pcm(dsp.master(x, entry["lufs"], trim=-54 if entry["cat"] in ("flow", "boss", "loot") else -46))
-
-
-def write_wav(path, data):
-    with wave.open(str(path), "wb") as w:
-        w.setnchannels(1); w.setsampwidth(2); w.setframerate(dsp.SR); w.writeframes(data.tobytes())
-
-
 def read_wav(path):
-    with wave.open(str(path), "rb") as w:
-        return np.frombuffer(w.readframes(w.getnframes()), "<i2")
+    with wave.open(str(path), "rb") as stream:
+        if (stream.getnchannels(), stream.getsampwidth(), stream.getframerate()) != (1, 2, dsp.SR):
+            raise ValueError("Invalid SFX format: " + str(path))
+        return np.frombuffer(stream.readframes(stream.getnframes()), "<i2")
 
 
 def stats(data):
@@ -91,10 +51,14 @@ def stats(data):
 def manifest(entries, clips):
     sounds = []
     for e in entries:
-        sounds.append({"id": e["id"], "ko": e["ko"], "en": e["en"], "category": e["cat"], "clips": [c for c, _ in clips[e["id"]]],
-                       "volume": e["gain"], "pitch": e["pitch"], "cooldown": e["cooldown"], "priority": e["priority"],
-                       "limit": e["limit"], "group": e["group"]})
-    return {"revision": bank.REVISION, "sampleRate": dsp.SR, "sounds": sounds}
+        row = {"id": e["id"], "ko": e["ko"], "en": e["en"], "category": e["cat"],
+               "clips": [name for name, _ in clips[e["id"]]], "volume": e["gain"], "pitch": e["pitch"],
+               "cooldown": e["cooldown"], "priority": e["priority"], "limit": e["limit"], "group": e["group"]}
+        if e.get("sharedCue"):
+            row["sharedCue"] = e["sharedCue"]
+        sounds.append(row)
+    return {"revision": bank.REVISION, "sampleRate": dsp.SR, "sounds": sounds,
+            "sourceManifest": elevenlabs_audio.MANIFEST.relative_to(ROOT).as_posix()}
 
 
 CODE_ID = re.compile(r'(?:Fx|Play|PlayLater)\(\s*"([a-z][A-Za-z0-9_.]*[A-Za-z0-9_])"\s*[,)]')
@@ -103,108 +67,108 @@ CODE_ID = re.compile(r'(?:Fx|Play|PlayLater)\(\s*"([a-z][A-Za-z0-9_.]*[A-Za-z0-9
 def code_ids():
     found = {}
     for path in CODE.rglob("*.cs"):
-        for m in CODE_ID.finditer(path.read_text(encoding="utf-8")):
-            found.setdefault(m.group(1), path.relative_to(ROOT).as_posix())
+        for match in CODE_ID.finditer(path.read_text(encoding="utf-8")):
+            found.setdefault(match.group(1), path.relative_to(ROOT).as_posix())
     return found
 
 
 def dynamic_ids():
-    """Ids the runtime composes from game data (kept in sync with GameAudio.Routes)."""
     ids = set()
-    for mat in recipes_system.MATERIALS:
-        ids |= {"item.pick." + mat, "item.equip." + mat}
-    for eid in recipes_world.ENEMIES:
-        ids |= {f"enemy.{eid}.{k}" for k in ("windup", "attack", "death")}
-    for c in recipes_heroes.VOICE:
-        ids |= {f"vo.{c}.{k}" for k in ("effort", "big", "battlecry", "hurt", "death", "lowhp")} | {"char.select." + c}
+    for material in bank.ROUTES["materials"]:
+        ids |= {"item.pick." + material, "item.equip." + material}
+    for enemy in bank.ROUTES["enemies"]:
+        ids |= {f"enemy.{enemy}.{part}" for part in ("windup", "attack", "death")}
+    for hero in bank.ROUTES["heroes"]:
+        ids |= {f"vo.{hero}.{part}" for part in ("effort", "big", "battlecry", "hurt", "death", "lowhp")} | {"char.select." + hero}
     skills = json.loads((ROOT / "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json").read_text(encoding="utf-8"))
     for skill in skills["skills"] if isinstance(skills, dict) else skills:
         if skill.get("category") in ("active", "ultimate"):
             ids.add("skill." + skill["id"])
-    for b in recipes_world.BOSSES:
-        ids.add(f"boss.{b}.spawn")
-    for k in recipes_world.BOSS_ATTACKS:
-        ids |= {f"boss.{k}.windup", f"boss.{k}"}
+    for boss in bank.ROUTES["bosses"]:
+        ids.add(f"boss.{boss}.spawn")
+    for attack in bank.ROUTES["boss_attacks"]:
+        ids |= {f"boss.{attack}.windup", f"boss.{attack}"}
     return ids
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--check", action="store_true")
-    ap.add_argument("--only", default="")
-    ap.add_argument("--sheets", default="")
-    ap.add_argument("--audition", default="")
-    ap.add_argument("--audit", default="", help="write per-clip peak, loudness, DC, clipping and hash JSON")
-    args = ap.parse_args()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--write-bank", action="store_true", help="Write validated metadata without modifying any audio")
+    parser.add_argument("--only", default="")
+    parser.add_argument("--sheets", default="")
+    parser.add_argument("--audition", default="")
+    parser.add_argument("--audit", default="")
+    args = parser.parse_args()
+    if not (args.check or args.write_bank or args.sheets or args.audition or args.audit):
+        print("Procedural generation is retired. Use --check or elevenlabs_audio.py --rebuild.")
+        return 2
+    if args.write_bank and args.only:
+        parser.error("--write-bank must include the complete catalog")
+    if not elevenlabs_audio.MANIFEST.exists():
+        print("Final audio source provenance is missing; refusing to synthesize a replacement.")
+        return 2
     entries = [e for e in bank.REG.values() if e["id"].startswith(args.only)]
+    imported = elevenlabs_audio.read_manifest()["assets"]
     clips, rendered, problems = {}, {}, []
-    for e in entries:
-        clips[e["id"]] = []
-        for v in range(e["variants"]):
-            data = render(e, v)
-            name = clip_name(e["id"], v)
-            clips[e["id"]].append((name, data))
-            rendered[name] = (e, data)
+    for entry in entries:
+        source = bank.source_entry(entry)
+        clips[entry["id"]] = []
+        for variant in range(source["variants"]):
+            name = clip_name(source["id"], variant)
+            path = OUT / source["cat"] / (name + ".wav")
+            key = path.relative_to(ROOT).as_posix()
+            if name not in rendered:
+                record = imported.get(key)
+                if not record:
+                    problems.append(key + ": final source provenance is missing")
+                else:
+                    problems.extend(key + ": " + problem for problem in elevenlabs_audio.validate_record(key, record))
+                    if record["cue"] != source["id"] or record["kind"] != "sfx":
+                        problems.append(key + ": provenance refers to a different source cue")
+                try:
+                    data = read_wav(path)
+                    if not len(data):
+                        raise ValueError("Empty audio")
+                except (OSError, ValueError, wave.Error) as error:
+                    problems.append(key + ": " + str(error))
+                    data = np.zeros(1, dtype="<i2")
+                rendered[name] = (source, data)
+            clips[entry["id"]].append((name, rendered[name][1]))
     audit = {}
-    for name, (e, data) in rendered.items():
-        s = stats(data)
-        audit[name] = s
-        if s["clipped"] or abs(s["dc"]) > 0.01 or s["edges"] != [0, 0] or s["peakDb"] > -0.9:
-            problems.append(f"{name}: {s}")
-    bank_json = manifest(entries, {k: [(n, d) for n, d in v] for k, v in clips.items()})
+    for name, (entry, data) in rendered.items():
+        measured = stats(data)
+        audit[name] = measured
+        if measured["clipped"] or abs(measured["dc"]) > .01 or measured["edges"] != [0, 0] or not -80 <= measured["peakDb"] <= -.9:
+            problems.append(f"{name}: {measured}")
+    bank_json = manifest(entries, clips)
     known = set(bank.REG)
     for sid, where in code_ids().items():
         if sid not in known:
             problems.append(f"code references unknown sound '{sid}' ({where})")
     for sid in dynamic_ids() - known:
         problems.append(f"runtime route has no sound '{sid}'")
-
-    if args.check:
-        for name, (e, data) in rendered.items():
-            path = OUT / e["cat"] / (name + ".wav")
-            if not path.exists() or not np.array_equal(read_wav(path), data):
-                problems.append(f"{path.relative_to(ROOT)} differs from its recipe")
-        on_disk = json.loads((OUT / "bank.json").read_text(encoding="utf-8")) if (OUT / "bank.json").exists() else None
-        if not args.only and on_disk != bank_json:
-            problems.append("bank.json differs from the registry")
-    if not args.check and not args.sheets and not args.audition and not args.audit:
-        OUT.mkdir(parents=True, exist_ok=True)
-        for p in (OUT.parent, OUT):
-            folder_meta(p)
-        keep = set()
-        for name, (e, data) in rendered.items():
-            folder = OUT / e["cat"]
-            folder.mkdir(exist_ok=True)
-            folder_meta(folder)
-            path = folder / (name + ".wav")
-            write_wav(path, data)
-            meta = path.with_name(path.name + ".meta")
-            if not meta.exists():
-                meta.write_text(audio_meta(path, len(data) / dsp.SR))
-            keep.add(path)
-        if not args.only:
-            for old in OUT.rglob("*.wav"):
-                if old not in keep:
-                    old.unlink(); old.with_name(old.name + ".meta").unlink(missing_ok=True)
-            for folder in [p for p in OUT.iterdir() if p.is_dir()]:
-                if not any(folder.iterdir()):
-                    folder.rmdir(); folder.with_name(folder.name + ".meta").unlink(missing_ok=True)
-            (OUT / "bank.json").write_text(json.dumps(bank_json, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-            meta = OUT / "bank.json.meta"
-            if not meta.exists():
-                meta.write_text(f"fileFormatVersion: 2\nguid: {guid('bank.json')}\nTextScriptImporter:\n  externalObjects: {{}}\n"
-                                "  userData: \n  assetBundleName: \n  assetBundleVariant: \n")
+    if not args.only:
+        expected = {OUT / entry["cat"] / (name + ".wav") for name, (entry, _) in rendered.items()}
+        problems.extend("Unreferenced runtime audio: " + str(path.relative_to(ROOT)) for path in sorted(set(OUT.rglob("*.wav")) - expected))
+    if args.check and not args.only:
+        on_disk = json.loads((OUT / "bank.json").read_text(encoding="utf-8"))
+        if on_disk != bank_json:
+            problems.append("bank.json differs from the final catalog")
     if args.audit:
         Path(args.audit).write_text(json.dumps({"revision": bank.REVISION, "clips": audit}, indent=1) + "\n", encoding="utf-8")
-    if args.sheets:
-        sheets(Path(args.sheets), entries, clips)
-    if args.audition:
-        audition(Path(args.audition), entries, clips)
-    total = sum(len(d) for _, (_, d) in rendered.items()) * 2
-    print(f"{len(entries)} sounds, {len(rendered)} clips, {total / 1e6:.1f} MB PCM, {len(problems)} problems")
-    for p in problems:
-        print("  " + p)
-    return 1 if problems else 0
+    if not problems:
+        if args.write_bank:
+            (OUT / "bank.json").write_text(json.dumps(bank_json, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        if args.sheets:
+            sheets(Path(args.sheets), entries, clips)
+        if args.audition:
+            audition(Path(args.audition), entries, clips)
+    total = sum(len(data) for _, data in rendered.values()) * 2
+    print(f"{len(entries)} sounds, {len(rendered)} unique clips, {total / 1e6:.1f} MB PCM, {len(problems)} problems")
+    for problem in problems:
+        print("  " + problem)
+    return int(bool(problems))
 
 
 def sheets(folder, entries, clips):
@@ -237,7 +201,14 @@ def audition(folder, entries, clips):
     for e in entries:
         groups.setdefault(e["cat"], []).append(e)
         for name, data in clips[e["id"]]:
-            write_wav(folder / "clips" / (name + ".wav"), data)
+            source = bank.source_entry(e)
+            target = (OUT / source["cat"] / (name + ".wav")).resolve()
+            link = folder / "clips" / (name + ".wav")
+            if link.is_symlink():
+                link.unlink()
+            elif link.exists():
+                raise ValueError("Audition output already contains a regular audio file: " + str(link))
+            link.symlink_to(target)
     parts = []
     for cat, items in groups.items():
         parts.append(f"<h2>{html.escape(cat)}</h2><table>")

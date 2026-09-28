@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T11:41:15+09:00",
+  "generatedAt": "2026-09-28T11:50:18+09:00",
   "databases": [
     {
       "id": "resources",
@@ -5046,6 +5046,666 @@
           ]
         },
         {
+          "id": "npc-portrait-mark-kus",
+          "name": "마르크 쿠스",
+          "category": "이미지 원본",
+          "summary": "막국수 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/mark-kus.png",
+            "NPC ID": "mark-kus",
+            "국적 모티브": "독일",
+            "성별": "남성",
+            "음식 콘셉트": "막국수",
+            "배치": "Blacksmith",
+            "색상과 특징": "메밀빛 회갈색, 고추 양념의 붉은색, 오이의 초록색, 참깨빛 장식",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 516779,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "e227b683bfce7ac9a2b4a509080b52b1684a403a5ec834cf2e3fdf58f9788e17",
+            "Unity GUID": "a63cc2dd84b8646b08c08557bc4b88d6",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/mark-kus.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/mark-kus.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-jake-bokun",
+          "name": "제이크 보쿤",
+          "category": "이미지 원본",
+          "summary": "제육볶음 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jake-bokun.png",
+            "NPC ID": "jake-bokun",
+            "국적 모티브": "미국",
+            "성별": "남성",
+            "음식 콘셉트": "제육볶음",
+            "배치": "Merchant",
+            "색상과 특징": "매운 양념의 적갈색 가죽, 불에 그을린 가장자리, 파의 초록색 포인트",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 486587,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "5a4a53855e89420d0556e0078e22a3112f9b90820b7c7fad8f6ea01a99a3e3cc",
+            "Unity GUID": "c58b3b381c6304cd59dc2e3be958f953",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/jake-bokun.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jake-bokun.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-chador-samaf",
+          "name": "차도르 사마프",
+          "category": "이미지 원본",
+          "summary": "차돌 삼합 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/chador-samaf.png",
+            "NPC ID": "chador-samaf",
+            "국적 모티브": "이란",
+            "성별": "여성",
+            "음식 콘셉트": "차돌 삼합",
+            "배치": "Warehouse",
+            "색상과 특징": "고기의 적갈색과 흰 마블링, 채소의 짙은 초록색, 버섯의 크림색을 세 겹으로 구성",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 473810,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "4c5fe6ceb57475e0d68b25aa42bab2d6703b2bfa3d818417a348923087d9e148",
+            "Unity GUID": "08afad573b45544d2955073cbd60777b",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/chador-samaf.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/chador-samaf.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-anton-jindark",
+          "name": "안톤 진다크",
+          "category": "이미지 원본",
+          "summary": "안동찜닭 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/anton-jindark.png",
+            "NPC ID": "anton-jindark",
+            "국적 모티브": "폴란드",
+            "성별": "남성",
+            "음식 콘셉트": "안동찜닭",
+            "배치": "RiftKeeper",
+            "색상과 특징": "간장빛 윤기 나는 흑갈색, 당면의 투명한 호박색 보석, 말린 고추색 안감",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 511641,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "e455eb2b7286239f33dcce32699ef7211db7cc9ecc6290e07b964ba4fa8b17ac",
+            "Unity GUID": "0a6151892468640b799d8b2f4d6e48f6",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/anton-jindark.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/anton-jindark.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-injel-mir",
+          "name": "인젤 미르",
+          "category": "이미지 원본",
+          "summary": "인절미 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/injel-mir.png",
+            "NPC ID": "injel-mir",
+            "국적 모티브": "오스트리아",
+            "성별": "여성",
+            "음식 콘셉트": "인절미",
+            "배치": "RuneMaster",
+            "색상과 특징": "콩고물의 부드러운 금빛 베이지, 찹쌀의 상아색, 청회색 장포의 금빛 가루 자수",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 431526,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "65047636bce533d5df3893713ba6394a01503b764eae5cc0e6ea374bc2778dd7",
+            "Unity GUID": "91b1760b4ed274ced8e621fa220e6f2b",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/injel-mir.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/injel-mir.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-pyonya-nermwen",
+          "name": "표냐 내르뭰",
+          "category": "이미지 원본",
+          "summary": "평양 냉면 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/pyonya-nermwen.png",
+            "NPC ID": "pyonya-nermwen",
+            "국적 모티브": "카자흐스탄",
+            "성별": "여성",
+            "음식 콘셉트": "평양 냉면",
+            "배치": "Pyonya",
+            "색상과 특징": "맑은 육수의 은회색과 냉청색, 메밀의 회갈색, 오이의 옅은 초록색",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 584597,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "2b6ae59412bed3df60b41db12f96eeb4bf94102f30133fe9fa3ccb089ad6a7b6",
+            "Unity GUID": "4b9a55303a76d428e8535bb6f96c7bb5",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/pyonya-nermwen.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/pyonya-nermwen.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-jean-jorin",
+          "name": "쟝 죠린",
+          "category": "이미지 원본",
+          "summary": "장조림 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jean-jorin.png",
+            "NPC ID": "jean-jorin",
+            "국적 모티브": "중국",
+            "성별": "여성",
+            "음식 콘셉트": "장조림",
+            "배치": "Jean",
+            "색상과 특징": "간장색의 짙은 갈색, 달걀빛 상아색 단추, 고추색 붉은 자수와 초록 매듭",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 565758,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "bf085f5edb27a3e51ce1b40311bbdd82cf4d1ae3d3f0677286b6686e65560f18",
+            "Unity GUID": "cacd5ee59d2ff410baf86d42079ab044",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/jean-jorin.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jean-jorin.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-darc-alvi",
+          "name": "달크 알뷔",
+          "category": "이미지 원본",
+          "summary": "닭갈비 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/darc-alvi.png",
+            "NPC ID": "darc-alvi",
+            "국적 모티브": "헝가리",
+            "성별": "여성",
+            "음식 콘셉트": "닭갈비",
+            "배치": "Darc",
+            "색상과 특징": "매운 양념의 붉은 갑옷 끈, 양배추빛 녹색 갑옷, 떡빛 흰 망토, 불판의 검은 철",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 470981,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "716c0d15ce760f8d0e0c55c3b652b5f7216c3afeb8b6a09b920291bc3abbc27c",
+            "Unity GUID": "98c3bf18c24ea470cb157f1f8adf6f8d",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/darc-alvi.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/darc-alvi.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-jacques-chei",
+          "name": "자크 체이",
+          "category": "이미지 원본",
+          "summary": "잡채 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jacques-chei.png",
+            "NPC ID": "jacques-chei",
+            "국적 모티브": "프랑스",
+            "성별": "남성",
+            "음식 콘셉트": "잡채",
+            "배치": "Gambler",
+            "색상과 특징": "당면의 윤기 나는 갈색, 당근 주황색·시금치 초록색·달걀 금색이 엮인 자수",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 490449,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "08dd4e7831822ff1bb67f66cc485f1d0b4a96beef142b458c973ed2a5ebcfe77",
+            "Unity GUID": "fb81848a27eed4df099b0575ebb18bb1",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/jacques-chei.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jacques-chei.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-turk-garbi",
+          "name": "터크 가르비",
+          "category": "이미지 원본",
+          "summary": "떡갈비 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/turk-garbi.png",
+            "NPC ID": "turk-garbi",
+            "국적 모티브": "튀르키예",
+            "성별": "남성",
+            "음식 콘셉트": "떡갈비",
+            "배치": "Training",
+            "색상과 특징": "구운 고기의 밤갈색과 검은 석쇠 무늬, 꿀빛 황동, 파의 초록 매듭",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 475717,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "71bf7b19feb9ac4342122561c88114274de779852cfa812fb9624d74acc3e225",
+            "Unity GUID": "6e365ada42c6947c68bd2b3cebe54578",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/turk-garbi.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/turk-garbi.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-guzel-pan",
+          "name": "구젤 판",
+          "category": "이미지 원본",
+          "summary": "구절판 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/guzel-pan.png",
+            "NPC ID": "guzel-pan",
+            "국적 모티브": "아제르바이잔",
+            "성별": "여성",
+            "음식 콘셉트": "구절판",
+            "배치": "GemMerchant",
+            "색상과 특징": "옻칠의 검은색과 황금 테두리, 오방색 재료를 닮은 분할 보석 장식, 밀전병빛 상아색",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 515282,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "30bbd37fd6d9154fd1054a75b06e34b3dba88da0242fb747b0510c9b895cc630",
+            "Unity GUID": "227a0b9a856fa4977b08856351b43de2",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/guzel-pan.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/guzel-pan.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
+          "id": "npc-portrait-mishu-karu",
+          "name": "미슈 카루",
+          "category": "이미지 원본",
+          "summary": "미숫가루 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/mishu-karu.png",
+            "NPC ID": "mishu-karu",
+            "국적 모티브": "루마니아",
+            "성별": "여성",
+            "음식 콘셉트": "미숫가루",
+            "배치": "RuneMerchant",
+            "색상과 특징": "볶은 곡물의 황토색과 베이지, 호박빛 잠금장식, 곡물 알갱이 같은 작은 룬 주머니",
+            "해상도": "1024 × 1536",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 468241,
+            "알파 범위": "[0, 254]",
+            "SHA-256": "c7e79e80d3ad8ba6d8e9887a0acb5382b4b9543f1dbbf861085a910229df0498",
+            "Unity GUID": "fbab624bf3616481d89d464fb52c749a",
+            "제작 방법": "Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved",
+            "출처 확인": "candidate_model_unknown",
+            "승인 상태": "현재 내장 생성 이미지 사용 승인 / User approved these built-in outputs"
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/NpcProfiles.json",
+            "line": 1
+          },
+          "status": "사용 중",
+          "image": {
+            "file": "NpcPortraits/mishu-karu.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/mishu-karu.png",
+          "refs": [
+            {
+              "path": "Docs/Art/NpcPortraits/prompts.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/generation-results.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/NpcPortraits/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "npc-dialogue-portraits",
+            "npc-dialogue-portraits.en"
+          ]
+        },
+        {
           "id": "icon-W01",
           "name": "회오리 아이콘",
           "category": "스킬·직업 아이콘",
@@ -6516,24 +7176,40 @@
           "id": "icon-B28",
           "name": "철 방패 아이콘",
           "category": "장비 아이콘",
-          "summary": "B28 · StorageGlyph · shield",
+          "summary": "B28 · 독립 PNG",
           "fields": {
             "콘텐츠 ID": "B28",
-            "벡터 심볼": "shield",
-            "등록 방식": "기존 uGUI 벡터 아이콘 체계로 그립니다. 별도 래스터 파일이나 아틀라스 셀은 없습니다."
+            "원본": "EquipmentVariants/B32.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 769768,
+            "SHA-256": "608aae1188237f9743476e8d454a8cb029d8d684c1af9c0688ef9d4d3e349d1a",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
           },
           "source": {
-            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs",
-            "line": 19
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
           },
-          "status": "현재 사용",
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B32.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B32.png",
           "content": {
             "db": "items",
             "id": "B28"
           },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
           "related": [
-            "native-inventory",
-            "resource-guide"
+            "equipment-variants",
+            "equipment-variants.en"
           ]
         },
         {
@@ -6582,6 +7258,1206 @@
           "related": [
             "native-inventory",
             "resource-guide"
+          ]
+        },
+        {
+          "id": "icon-B31",
+          "name": "소형 원형 방패 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B31 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B31",
+            "원본": "EquipmentVariants/B31.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 648917,
+            "SHA-256": "e81c1dbf2315bbf0af6ca90ffeed383dd69471467202a149625604629a293a6c",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B31.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B31.png",
+          "content": {
+            "db": "items",
+            "id": "B31"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B32",
+          "name": "철테 원형 방패 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B32 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B32",
+            "원본": "EquipmentVariants/B32.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 769768,
+            "SHA-256": "608aae1188237f9743476e8d454a8cb029d8d684c1af9c0688ef9d4d3e349d1a",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B32.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B32.png",
+          "content": {
+            "db": "items",
+            "id": "B32"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B33",
+          "name": "기사의 연형 방패 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B33 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B33",
+            "원본": "EquipmentVariants/B33.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1139408,
+            "SHA-256": "cc5d47e9e5723f6178c4ae5eeee9c05975bd2fdfff00b82713be134fd918b79d",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B33.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B33.png",
+          "content": {
+            "db": "items",
+            "id": "B33"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B34",
+          "name": "성벽 대형 방패 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B34 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B34",
+            "원본": "EquipmentVariants/B34.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1062321,
+            "SHA-256": "bcaa744a14e921c3ee647fa0cb7542f785cf13734538175ea72f5cfd7d9bdabb",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B34.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B34.png",
+          "content": {
+            "db": "items",
+            "id": "B34"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B35",
+          "name": "누빈 천 두건 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B35 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B35",
+            "원본": "EquipmentVariants/B35.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 893497,
+            "SHA-256": "9ab7ae3fe247c6c40af904d6398fb7a0b81665a0ab8066b4309ccbeaf2a3e1d1",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B35.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B35.png",
+          "content": {
+            "db": "items",
+            "id": "B35"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B36",
+          "name": "사냥꾼 가죽 모자 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B36 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B36",
+            "원본": "EquipmentVariants/B36.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 924083,
+            "SHA-256": "eb79a355ddfea0ee6930c2ac647c970bd887a2e12b5e015070345799168350cf",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B36.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B36.png",
+          "content": {
+            "db": "items",
+            "id": "B36"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B37",
+          "name": "쇠사슬 두건 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B37 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B37",
+            "원본": "EquipmentVariants/B37.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 833782,
+            "SHA-256": "f0ea5215586e3c60cf345f676a61ad46876cd6ca43b2414c7fe40df63ce8a46b",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B37.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B37.png",
+          "content": {
+            "db": "items",
+            "id": "B37"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B38",
+          "name": "중장 판금 투구 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B38 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B38",
+            "원본": "EquipmentVariants/B38.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1003625,
+            "SHA-256": "e356ea8abeee8598afc454b07a52fd27c5d593bed17f54f344462325898c5568",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B38.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B38.png",
+          "content": {
+            "db": "items",
+            "id": "B38"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B39",
+          "name": "누빈 천 로브 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B39 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B39",
+            "원본": "EquipmentVariants/B39.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 955588,
+            "SHA-256": "3f0d2ef0b7817f6ad196213ebf59a0cfe55011e267bd52cf2e9b420eca2a09d7",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B39.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B39.png",
+          "content": {
+            "db": "items",
+            "id": "B39"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B40",
+          "name": "사냥꾼 가죽 조끼 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B40 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B40",
+            "원본": "EquipmentVariants/B40.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 871145,
+            "SHA-256": "e0cae403c407bf690ce26a4f214fbf6f238ae29b0491d8271c2efc3bb00e0ead",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B40.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B40.png",
+          "content": {
+            "db": "items",
+            "id": "B40"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B41",
+          "name": "쇠사슬 갑옷 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B41 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B41",
+            "원본": "EquipmentVariants/B41.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 871557,
+            "SHA-256": "ff969de2972dbad8c38397f0c75bf7dc7d6e832d9ef55c456b97772d0db3d350",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B41.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B41.png",
+          "content": {
+            "db": "items",
+            "id": "B41"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B42",
+          "name": "중장 판금 갑옷 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B42 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B42",
+            "원본": "EquipmentVariants/B42.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 843666,
+            "SHA-256": "e1aa8c7a0363946aca9fba61e0c038680ec353e6a5348ac0e015b33891c162a4",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B42.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B42.png",
+          "content": {
+            "db": "items",
+            "id": "B42"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B43",
+          "name": "누빈 천 장갑 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B43 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B43",
+            "원본": "EquipmentVariants/B43.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 865408,
+            "SHA-256": "17c96f22f08eaf867de9e79b9b40019a6618eb61a07cc0b60858bf8681191f38",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B43.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B43.png",
+          "content": {
+            "db": "items",
+            "id": "B43"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B44",
+          "name": "사냥꾼 가죽 장갑 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B44 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B44",
+            "원본": "EquipmentVariants/B44.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 820498,
+            "SHA-256": "5a583bd697b2e31d2696a68011e309d37750eb3bd6ed2c8844446cd690eabf20",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B44.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B44.png",
+          "content": {
+            "db": "items",
+            "id": "B44"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B45",
+          "name": "쇠사슬 장갑 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B45 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B45",
+            "원본": "EquipmentVariants/B45.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 761100,
+            "SHA-256": "5418a2e2e2f91ad8aec58eda93d9a551ec399fdae6d2c0dd8459eed22f2e9686",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B45.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B45.png",
+          "content": {
+            "db": "items",
+            "id": "B45"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B46",
+          "name": "중장 판금 건틀릿 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B46 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B46",
+            "원본": "EquipmentVariants/B46.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 914654,
+            "SHA-256": "66687aef61f41c60a724e449ac96d500987d1b6921c9580df7d85e4fb9e4387c",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B46.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B46.png",
+          "content": {
+            "db": "items",
+            "id": "B46"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B47",
+          "name": "누빈 천 신발 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B47 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B47",
+            "원본": "EquipmentVariants/B47.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 861213,
+            "SHA-256": "6f9a17473d0221b65cf9b71fd0d708bc30bd8d37fe5bbb2bfa927be4c951865b",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B47.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B47.png",
+          "content": {
+            "db": "items",
+            "id": "B47"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B48",
+          "name": "사냥꾼 가죽 장화 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B48 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B48",
+            "원본": "EquipmentVariants/B48.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 928297,
+            "SHA-256": "e8c394cf7a97cd6c96537e5396808dc2bc8d2bd7c931e2213be572403067bb2f",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B48.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B48.png",
+          "content": {
+            "db": "items",
+            "id": "B48"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B49",
+          "name": "쇠사슬 장화 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B49 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B49",
+            "원본": "EquipmentVariants/B49.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 879270,
+            "SHA-256": "77ef8777d1e4db065291289fc15ad057b23df950ffc29c818d4dbd1495118128",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B49.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B49.png",
+          "content": {
+            "db": "items",
+            "id": "B49"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B50",
+          "name": "중장 판금 장화 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B50 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B50",
+            "원본": "EquipmentVariants/B50.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 994986,
+            "SHA-256": "1c35471eb1b64d5cc815299f779e5ee7f0d2c9470ab871a64fab5786c0877b56",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B50.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B50.png",
+          "content": {
+            "db": "items",
+            "id": "B50"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B51",
+          "name": "누빈 천 허리띠 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B51 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B51",
+            "원본": "EquipmentVariants/B51.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1024508,
+            "SHA-256": "d63baa8888f5448c9505efd815bc557bd630b70b88d78e923d2ebabdda9412e5",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B51.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B51.png",
+          "content": {
+            "db": "items",
+            "id": "B51"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B52",
+          "name": "사냥꾼 가죽 허리띠 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B52 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B52",
+            "원본": "EquipmentVariants/B52.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1034858,
+            "SHA-256": "bc387cccb4e1e01369e4e218ea5d2eba2c5990a0063e765f523af4b1099a81e4",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B52.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B52.png",
+          "content": {
+            "db": "items",
+            "id": "B52"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B53",
+          "name": "쇠사슬 허리띠 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B53 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B53",
+            "원본": "EquipmentVariants/B53.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1055823,
+            "SHA-256": "014aebcd217bcd7d6f1ab44f7c110d456c15b6080d0a8c4cbbcd76ee61bdf051",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B53.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B53.png",
+          "content": {
+            "db": "items",
+            "id": "B53"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B54",
+          "name": "중장 판금 허리띠 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B54 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B54",
+            "원본": "EquipmentVariants/B54.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1047065,
+            "SHA-256": "910481dd1e5fd16e048b981e2dc6c3cf263ef3a4a2dc70294d980207aeefbf2a",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B54.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B54.png",
+          "content": {
+            "db": "items",
+            "id": "B54"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B55",
+          "name": "석류석 목걸이 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B55 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B55",
+            "원본": "EquipmentVariants/B55.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1293587,
+            "SHA-256": "fb57756a7c51aa8a13bc9a20cb56858fc283818a14f6805c1d2bf73cbea3cd5b",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B55.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B55.png",
+          "content": {
+            "db": "items",
+            "id": "B55"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B56",
+          "name": "월석 목걸이 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B56 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B56",
+            "원본": "EquipmentVariants/B56.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1252120,
+            "SHA-256": "0406c9731d67215e7cdb270420ce29aa3f64fde96ad7b14c967a4646f9e0b5a8",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B56.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B56.png",
+          "content": {
+            "db": "items",
+            "id": "B56"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B57",
+          "name": "흑요석 목걸이 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B57 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B57",
+            "원본": "EquipmentVariants/B57.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1159453,
+            "SHA-256": "a2ec9664bd9a7184ff9a200f2e4189e35eec8290803186a7949bd693b99700f2",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B57.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B57.png",
+          "content": {
+            "db": "items",
+            "id": "B57"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B58",
+          "name": "황동 인장 반지 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B58 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B58",
+            "원본": "EquipmentVariants/B58.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 992454,
+            "SHA-256": "5f2e4c7a2032d981b234154cb834f89e5ae808abba78c7eabea6351c3446e46c",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B58.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B58.png",
+          "content": {
+            "db": "items",
+            "id": "B58"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B59",
+          "name": "청금석 반지 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B59 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B59",
+            "원본": "EquipmentVariants/B59.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1259609,
+            "SHA-256": "a659ebad89ddbeafa0d31710ff4ff2386b69b779f8bb0dfe5f50591930028551",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B59.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B59.png",
+          "content": {
+            "db": "items",
+            "id": "B59"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
+          ]
+        },
+        {
+          "id": "icon-B60",
+          "name": "가시덩굴 반지 아이콘",
+          "category": "장비 아이콘",
+          "summary": "B60 · 독립 PNG",
+          "fields": {
+            "콘텐츠 ID": "B60",
+            "원본": "EquipmentVariants/B60.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1083675,
+            "SHA-256": "e0a3617a01a97882d92529465fda884991314979afb48d2b951591671bbae449",
+            "생성 모델": "unknown",
+            "승인 상태": "candidate_model_unknown",
+            "등록 방식": "독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/Equipment_Variants.md",
+            "line": 1
+          },
+          "status": "개발용 사용 · 모델 미확인",
+          "image": {
+            "file": "EquipmentVariants/B60.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/EquipmentVariants/B60.png",
+          "content": {
+            "db": "items",
+            "id": "B60"
+          },
+          "refs": [
+            {
+              "path": "Docs/Art/EquipmentVariants/manifest.json",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en"
           ]
         },
         {
@@ -8178,6 +10054,53 @@
           ]
         },
         {
+          "id": "audio-elevenlabs",
+          "name": "ElevenLabs 게임 음향",
+          "category": "게임 음향",
+          "summary": "최종 효과음 454개와 배경음 4곡으로 모든 재생 상황 287종을 연결했습니다. 효과음 9종은 기존 최종 음원을 공유하며 이전 합성 음원은 제거했습니다.",
+          "fields": {
+            "영문 이름 / English": "ElevenLabs game audio",
+            "효과음 종류 / SFX cues": 283,
+            "고유 원본 종류 / Distinct source cues": 274,
+            "효과음 변주 / SFX variations": 454,
+            "공유 음원 사용 / Shared cues": 9,
+            "배경음 / Music tracks": 4,
+            "남은 종류 / Remaining cues": 0,
+            "생성 모델 / Models": "eleven_text_to_sound_v2; eleven_music_v2",
+            "원본 / Sources": "MP3 originals; 48 kHz PCM16 runtime masters; hashes and prompts in the source manifest.",
+            "검토 / Review": "사용자 지시로 현재 음원을 최종본으로 확정했습니다. 새 청음 시험을 뜻하지 않습니다. Accepted as final by user instruction; no new listening test is claimed.",
+            "다음 제작 / Next production": "현재 음원을 최종본으로 확정했으며 추가 생성 계획은 없습니다. / Current assets are final; no additional generation is planned."
+          },
+          "source": {
+            "path": "AudioSources/ElevenLabs/manifest.json",
+            "line": 1
+          },
+          "status": "최종본 확정 · 이전 음원 정리",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Audio/Sfx/bank.json",
+              "line": 1
+            },
+            {
+              "path": "AudioSources/ElevenLabs/production-plan.json",
+              "line": 1
+            },
+            {
+              "path": "AudioSources/ElevenLabs/sfx-catalog.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "elevenlabs-game-audio",
+            "elevenlabs-game-audio.en",
+            "asset-provenance"
+          ]
+        },
+        {
           "id": "todo-town",
           "name": "숲속 마을의 미술 품질·실기기 검증",
           "category": "제작 과제",
@@ -8200,9 +10123,9 @@
           "id": "todo-audio",
           "name": "전투·보상·환경 음향",
           "category": "제작 과제",
-          "summary": "타격·피격·회피·획득·보스 예고·결과의 정식 음원과 재생 규칙을 연결해야 합니다.",
+          "summary": "최종 효과음 454개와 배경음 4곡으로 모든 재생 상황 287종을 연결했습니다. 효과음 9종은 기존 최종 음원을 공유하며 이전 합성 음원은 제거했습니다.",
           "fields": {
-            "현재 공백": "타격·피격·회피·획득·보스 예고·결과의 정식 음원과 재생 규칙을 연결해야 합니다.",
+            "현재 공백": "최종 효과음 454개와 배경음 4곡으로 모든 재생 상황 287종을 연결했습니다. 효과음 9종은 기존 최종 음원을 공유하며 이전 합성 음원은 제거했습니다.",
             "상태 해석": "기획에 필요한 제작 과제이며 완성 자산 수에 포함하지 않습니다."
           },
           "source": {
@@ -9692,6 +11615,126 @@
           "related": [
             "attendance-events"
           ]
+        },
+        {
+          "id": "attendance-art-popup-altar",
+          "name": "출석 팝업 제단 / Attendance Popup Altar",
+          "category": "이미지 원본",
+          "summary": "선택한 보상을 올려 두는 불투명 배경 원화 / Opaque backdrop the selected reward rests on",
+          "fields": {
+            "원본 경로 / Path": "Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png",
+            "해상도 / Size": "1254 × 1254",
+            "색상 모드 / Mode": "RGB",
+            "완전 투명 픽셀 / Transparent pixels": 0,
+            "SHA-256": "05d2b3df863412c16ca55b75dc6f9b4b37c4bd01f891ea569e8456aa409a3f44",
+            "Unity GUID": "688eef0212b544a0f9f9f673441bc601",
+            "제작 방법 / Surface": "codex exec built-in image generation (imagegen skill), requested by Claude Code at the user's instruction",
+            "생성 모델 / Verified model": "미확인 / Unverified",
+            "승인 상태 / Status": "모델 미확인 개발용 / Development art; model unverified",
+            "사용처 / Use": "AttendanceArt → AttendanceWindow; featured reward panel and claimed tiles"
+          },
+          "source": {
+            "path": "Docs/Art/Attendance/popup-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "Attendance/popup-altar.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "attendance-events"
+          ]
+        },
+        {
+          "id": "attendance-art-claimed-seal",
+          "name": "수령 완료 도장 / Claimed Seal",
+          "category": "이미지 원본",
+          "summary": "받은 일차에 찍는 투명 도장 / Transparent stamp on claimed days",
+          "fields": {
+            "원본 경로 / Path": "Assets/HELLSCRIPT/Resources/Art/Attendance/claimed-seal.png",
+            "해상도 / Size": "1254 × 1254",
+            "색상 모드 / Mode": "RGBA",
+            "완전 투명 픽셀 / Transparent pixels": 743404,
+            "SHA-256": "6e175b6d864b25b237fc7a30e3793600c4fbc0849f863f2d029e214a1fb5614e",
+            "Unity GUID": "1819e0957fa3c49e5af425a488d83ec4",
+            "제작 방법 / Surface": "codex exec built-in image generation (imagegen skill), requested by Claude Code at the user's instruction",
+            "생성 모델 / Verified model": "미확인 / Unverified",
+            "승인 상태 / Status": "모델 미확인 개발용 / Development art; model unverified",
+            "사용처 / Use": "AttendanceArt → AttendanceWindow; featured reward panel and claimed tiles"
+          },
+          "source": {
+            "path": "Docs/Art/Attendance/popup-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "Attendance/claimed-seal.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/Attendance/claimed-seal.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "attendance-events"
+          ]
+        },
+        {
+          "id": "attendance-art-event-attendance",
+          "name": "출석 이벤트 버튼 / Attendance Event Shortcut",
+          "category": "이미지 원본",
+          "summary": "달력과 보상 상자로 표시한 이벤트 진입 버튼 / Calendar and chest shortcut to attendance",
+          "fields": {
+            "원본 경로 / Path": "Assets/HELLSCRIPT/Resources/Art/Attendance/event-attendance.png",
+            "해상도 / Size": "1254 × 1254",
+            "색상 모드 / Mode": "RGBA",
+            "완전 투명 픽셀 / Transparent pixels": 473247,
+            "SHA-256": "fbef6c0f15b13f242512a96b84f2b304820b466142ce49f2b865e8c627ab1495",
+            "Unity GUID": "daa599789bfb48dc9e0e74603318dcd2",
+            "제작 방법 / Surface": "Codex built-in image_gen; transparent_background=true",
+            "생성 모델 / Verified model": "미확인 / Unverified",
+            "승인 상태 / Status": "모델 미확인 개발용 / Development art; model unverified",
+            "사용처 / Use": "AttendanceArt → GameUI.Attendance; plaza and battle shortcut"
+          },
+          "source": {
+            "path": "Docs/Art/Attendance/event-icon-manifest.json",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "Attendance/event-attendance.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/Attendance/event-attendance.png",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Editor/AttendanceArtImporter.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "attendance-events"
+          ]
         }
       ]
     },
@@ -9729,7 +11772,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 423
+              "line": 426
             }
           ],
           "related": [
@@ -9767,7 +11810,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 424
+              "line": 427
             }
           ],
           "related": [
@@ -9805,7 +11848,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 425
+              "line": 428
             }
           ],
           "related": [
@@ -9843,7 +11886,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 426
+              "line": 429
             }
           ],
           "related": [
@@ -9881,7 +11924,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 427
+              "line": 430
             }
           ],
           "related": [
@@ -9919,7 +11962,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 428
+              "line": 431
             }
           ],
           "related": [
@@ -9957,7 +12000,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 429
+              "line": 432
             }
           ],
           "related": [
@@ -9995,7 +12038,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 430
+              "line": 433
             }
           ],
           "related": [
@@ -10033,7 +12076,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 431
+              "line": 434
             }
           ],
           "related": [
@@ -10071,7 +12114,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 432
+              "line": 435
             }
           ],
           "related": [
@@ -10109,7 +12152,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 433
+              "line": 436
             }
           ],
           "related": [
@@ -10147,7 +12190,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 434
+              "line": 437
             }
           ],
           "related": [
@@ -10185,7 +12228,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 435
+              "line": 438
             }
           ],
           "related": [
@@ -10223,7 +12266,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 436
+              "line": 439
             }
           ],
           "related": [
@@ -10261,7 +12304,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 437
+              "line": 440
             }
           ],
           "related": [
@@ -10299,7 +12342,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 438
+              "line": 441
             }
           ],
           "related": [
@@ -10337,7 +12380,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 439
+              "line": 442
             }
           ],
           "related": [
@@ -10375,7 +12418,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 440
+              "line": 443
             }
           ],
           "related": [
@@ -10704,7 +12747,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 402
+            "line": 405
           },
           "status": "현재 정의",
           "related": [
@@ -10724,7 +12767,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 403
+            "line": 406
           },
           "status": "현재 정의",
           "related": [
@@ -10744,7 +12787,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 404
+            "line": 407
           },
           "status": "현재 정의",
           "related": [
@@ -10764,7 +12807,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 405
+            "line": 408
           },
           "status": "현재 정의",
           "related": [
@@ -10784,7 +12827,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 406
+            "line": 409
           },
           "status": "현재 정의",
           "related": [
@@ -10804,7 +12847,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 407
+            "line": 410
           },
           "status": "현재 정의",
           "related": [
@@ -10824,7 +12867,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 408
+            "line": 411
           },
           "status": "현재 정의",
           "related": [
@@ -10844,7 +12887,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 409
+            "line": 412
           },
           "status": "현재 정의",
           "related": [
@@ -10864,7 +12907,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 410
+            "line": 413
           },
           "status": "현재 정의",
           "related": [
@@ -10884,7 +12927,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 411
+            "line": 414
           },
           "status": "현재 정의",
           "related": [
@@ -10904,7 +12947,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 412
+            "line": 415
           },
           "status": "현재 정의",
           "related": [
@@ -10924,7 +12967,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 413
+            "line": 416
           },
           "status": "현재 정의",
           "related": [
@@ -10944,7 +12987,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 414
+            "line": 417
           },
           "status": "현재 정의",
           "related": [
@@ -10964,7 +13007,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 415
+            "line": 418
           },
           "status": "현재 정의",
           "related": [
@@ -10984,7 +13027,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 416
+            "line": 419
           },
           "status": "현재 정의",
           "related": [
@@ -11004,7 +13047,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 406
+            "line": 409
           },
           "status": "현재 정의",
           "related": [
@@ -11024,7 +13067,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 418
+            "line": 421
           },
           "status": "현재 정의",
           "related": [
@@ -11044,7 +13087,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 419
+            "line": 422
           },
           "status": "현재 정의",
           "related": [
@@ -11842,7 +13885,7 @@
     {
       "id": "items",
       "name": "장비 베이스",
-      "description": "B01–B30의 베이스·직업·부위·기본 수치입니다. B01–B24는 아틀라스, B25–B30은 런타임 벡터 아이콘을 사용합니다.",
+      "description": "B01–B60의 장비 베이스입니다. 신규 방패 4종, 부위별 재질 20종, 목걸이·반지 6종은 독립 PNG와 고정 특성을 사용합니다. B28도 원형 방패 PNG를 공유합니다.",
       "rows": [
         {
           "id": "B01",
@@ -11855,26 +13898,37 @@
             "기본 주 수치": 17,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Melee",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 84
+            "line": 97
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 0
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -11892,26 +13946,37 @@
             "기본 주 수치": 20,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Greatsword",
             "무기 슬롯 점유": 2,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 84
+            "line": 97
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 1
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -11929,26 +13994,37 @@
             "기본 주 수치": 23,
             "기본 비물리 저항": 0,
             "공격속도 보정": -0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Melee",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 84
+            "line": 97
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 2
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -11966,26 +14042,37 @@
             "기본 주 수치": 17,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Bow",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 85
+            "line": 98
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 3
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12003,26 +14090,37 @@
             "기본 주 수치": 20,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Bow",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 85
+            "line": 98
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 4
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12040,26 +14138,37 @@
             "기본 주 수치": 23,
             "기본 비물리 저항": 0,
             "공격속도 보정": -0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Crossbow",
             "무기 슬롯 점유": 2,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 85
+            "line": 98
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 5
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12077,26 +14186,37 @@
             "기본 주 수치": 17,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Staff",
             "무기 슬롯 점유": 2,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 86
+            "line": 99
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 6
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12114,26 +14234,37 @@
             "기본 주 수치": 20,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Staff",
             "무기 슬롯 점유": 2,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 86
+            "line": 99
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 7
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12151,26 +14282,37 @@
             "기본 주 수치": 23,
             "기본 비물리 저항": 0,
             "공격속도 보정": -0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Staff",
             "무기 슬롯 점유": 2,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 86
+            "line": 99
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 8
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12188,26 +14330,37 @@
             "기본 주 수치": 12,
             "기본 비물리 저항": 8,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 87
+            "line": 100
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 9
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12225,26 +14378,37 @@
             "기본 주 수치": 20,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 87
+            "line": 100
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 10
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12262,26 +14426,37 @@
             "기본 주 수치": 24,
             "기본 비물리 저항": 8,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 88
+            "line": 101
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 11
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12299,26 +14474,37 @@
             "기본 주 수치": 40,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 88
+            "line": 101
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 12
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12336,26 +14522,37 @@
             "기본 주 수치": 8,
             "기본 비물리 저항": 8,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 89
+            "line": 102
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 13
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12373,26 +14570,37 @@
             "기본 주 수치": 14,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 89
+            "line": 102
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 14
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12410,26 +14618,37 @@
             "기본 주 수치": 8,
             "기본 비물리 저항": 8,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 90
+            "line": 103
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 15
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12447,26 +14666,37 @@
             "기본 주 수치": 14,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 90
+            "line": 103
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 16
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12484,26 +14714,37 @@
             "기본 주 수치": 10,
             "기본 비물리 저항": 8,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 91
+            "line": 104
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 17
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12521,26 +14762,37 @@
             "기본 주 수치": 16,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 91
+            "line": 104
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 18
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12558,26 +14810,37 @@
             "기본 주 수치": 20,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 92
+            "line": 105
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 19
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12595,26 +14858,37 @@
             "기본 주 수치": 25,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 92
+            "line": 105
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 20
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12632,26 +14906,37 @@
             "기본 주 수치": 30,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 92
+            "line": 105
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 21
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12669,26 +14954,37 @@
             "기본 주 수치": 5,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 93
+            "line": 106
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 22
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12706,26 +15002,37 @@
             "기본 주 수치": 5,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "해당 없음",
             "무기 슬롯 점유": "해당 없음",
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 93
+            "line": 106
           },
           "status": "현재 정의",
           "image": {
             "file": "EquipmentAtlas.png",
             "cell": 23
           },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12743,23 +15050,34 @@
             "기본 주 수치": 17,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0.1,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Wand",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 94
+            "line": 107
           },
           "status": "현재 정의",
           "vector": "wand",
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12777,23 +15095,34 @@
             "기본 주 수치": 5,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Orb",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 94
+            "line": 107
           },
           "status": "현재 정의",
           "vector": "orb",
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12811,23 +15140,34 @@
             "기본 주 수치": 5,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Scroll",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 95
+            "line": 108
           },
           "status": "현재 정의",
           "vector": "scroll",
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12845,23 +15185,36 @@
             "기본 주 수치": 24,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Shield",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 95
+            "line": 108
           },
           "status": "현재 정의",
-          "vector": "shield",
+          "image": {
+            "file": "EquipmentVariants/B32.png"
+          },
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12879,23 +15232,34 @@
             "기본 주 수치": 5,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Arrows",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 96
+            "line": 109
           },
           "status": "현재 정의",
           "vector": "arrows",
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
@@ -12913,28 +15277,1635 @@
             "기본 주 수치": 17,
             "기본 비물리 저항": 0,
             "공격속도 보정": 0.15,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "없음"
+            ],
             "무기 종류": "Blade",
             "무기 슬롯 점유": 1,
             "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 96
+            "line": 109
           },
           "status": "현재 정의",
           "vector": "blade",
+          "implicitStats": [],
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
               "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
             }
           ],
           "related": [
+            "equipment-variants",
+            "equipment-variants.en",
             "native-inventory",
             "itemization-detail",
             "itemization-expansion"
           ],
           "resource": "icon-B30"
+        },
+        {
+          "id": "B31",
+          "name": "소형 원형 방패",
+          "category": "무기",
+          "summary": "공용 · 무기 · 기본값 16",
+          "fields": {
+            "직업": "공용",
+            "부위": "무기",
+            "기본 주 수치": 16,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "막기 확률 24% (고정)",
+              "막은 피해 감소 18% (고정)"
+            ],
+            "무기 종류": "Shield",
+            "무기 슬롯 점유": 1,
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 110
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B31.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 28,
+              "baseValue": 24,
+              "scalesWithLevel": false
+            },
+            {
+              "statId": 29,
+              "baseValue": 18,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B31"
+        },
+        {
+          "id": "B32",
+          "name": "철테 원형 방패",
+          "category": "무기",
+          "summary": "공용 · 무기 · 기본값 24",
+          "fields": {
+            "직업": "공용",
+            "부위": "무기",
+            "기본 주 수치": 24,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "막기 확률 20% (고정)",
+              "막은 피해 감소 26% (고정)"
+            ],
+            "무기 종류": "Shield",
+            "무기 슬롯 점유": 1,
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 111
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B32.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 28,
+              "baseValue": 20,
+              "scalesWithLevel": false
+            },
+            {
+              "statId": 29,
+              "baseValue": 26,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B32"
+        },
+        {
+          "id": "B33",
+          "name": "기사의 연형 방패",
+          "category": "무기",
+          "summary": "공용 · 무기 · 기본값 32",
+          "fields": {
+            "직업": "공용",
+            "부위": "무기",
+            "기본 주 수치": 32,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "막기 확률 16% (고정)",
+              "막은 피해 감소 36% (고정)"
+            ],
+            "무기 종류": "Shield",
+            "무기 슬롯 점유": 1,
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 112
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B33.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 28,
+              "baseValue": 16,
+              "scalesWithLevel": false
+            },
+            {
+              "statId": 29,
+              "baseValue": 36,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B33"
+        },
+        {
+          "id": "B34",
+          "name": "성벽 대형 방패",
+          "category": "무기",
+          "summary": "공용 · 무기 · 기본값 40",
+          "fields": {
+            "직업": "공용",
+            "부위": "무기",
+            "기본 주 수치": 40,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "막기 확률 12% (고정)",
+              "막은 피해 감소 50% (고정)"
+            ],
+            "무기 종류": "Shield",
+            "무기 슬롯 점유": 1,
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 113
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B34.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 28,
+              "baseValue": 12,
+              "scalesWithLevel": false
+            },
+            {
+              "statId": 29,
+              "baseValue": 50,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B34"
+        },
+        {
+          "id": "B35",
+          "name": "누빈 천 두건",
+          "category": "머리",
+          "summary": "공용 · 머리 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "머리",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 12,
+            "공격속도 보정": 0,
+            "재질": "천",
+            "고정 부가 능력치": [
+              "없음"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 114
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B35.png"
+          },
+          "implicitStats": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B35"
+        },
+        {
+          "id": "B36",
+          "name": "사냥꾼 가죽 모자",
+          "category": "머리",
+          "summary": "공용 · 머리 · 기본값 12",
+          "fields": {
+            "직업": "공용",
+            "부위": "머리",
+            "기본 주 수치": 12,
+            "기본 비물리 저항": 6,
+            "공격속도 보정": 0,
+            "재질": "가죽",
+            "고정 부가 능력치": [
+              "회피 확률 1% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 115
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B36.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 27,
+              "baseValue": 1,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B36"
+        },
+        {
+          "id": "B37",
+          "name": "쇠사슬 두건",
+          "category": "머리",
+          "summary": "공용 · 머리 · 기본값 17",
+          "fields": {
+            "직업": "공용",
+            "부위": "머리",
+            "기본 주 수치": 17,
+            "기본 비물리 저항": 3,
+            "공격속도 보정": 0,
+            "재질": "철",
+            "고정 부가 능력치": [
+              "없음"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 116
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B37.png"
+          },
+          "implicitStats": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B37"
+        },
+        {
+          "id": "B38",
+          "name": "중장 판금 투구",
+          "category": "머리",
+          "summary": "공용 · 머리 · 기본값 24",
+          "fields": {
+            "직업": "공용",
+            "부위": "머리",
+            "기본 주 수치": 24,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "판금",
+            "고정 부가 능력치": [
+              "없음"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 117
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B38.png"
+          },
+          "implicitStats": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B38"
+        },
+        {
+          "id": "B39",
+          "name": "누빈 천 로브",
+          "category": "몸통",
+          "summary": "공용 · 몸통 · 기본값 16",
+          "fields": {
+            "직업": "공용",
+            "부위": "몸통",
+            "기본 주 수치": 16,
+            "기본 비물리 저항": 12,
+            "공격속도 보정": 0,
+            "재질": "천",
+            "고정 부가 능력치": [
+              "없음"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 118
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B39.png"
+          },
+          "implicitStats": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B39"
+        },
+        {
+          "id": "B40",
+          "name": "사냥꾼 가죽 조끼",
+          "category": "몸통",
+          "summary": "공용 · 몸통 · 기본값 24",
+          "fields": {
+            "직업": "공용",
+            "부위": "몸통",
+            "기본 주 수치": 24,
+            "기본 비물리 저항": 6,
+            "공격속도 보정": 0,
+            "재질": "가죽",
+            "고정 부가 능력치": [
+              "회피 확률 1% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 119
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B40.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 27,
+              "baseValue": 1,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B40"
+        },
+        {
+          "id": "B41",
+          "name": "쇠사슬 갑옷",
+          "category": "몸통",
+          "summary": "공용 · 몸통 · 기본값 34",
+          "fields": {
+            "직업": "공용",
+            "부위": "몸통",
+            "기본 주 수치": 34,
+            "기본 비물리 저항": 3,
+            "공격속도 보정": 0,
+            "재질": "철",
+            "고정 부가 능력치": [
+              "없음"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 120
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B41.png"
+          },
+          "implicitStats": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B41"
+        },
+        {
+          "id": "B42",
+          "name": "중장 판금 갑옷",
+          "category": "몸통",
+          "summary": "공용 · 몸통 · 기본값 48",
+          "fields": {
+            "직업": "공용",
+            "부위": "몸통",
+            "기본 주 수치": 48,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "판금",
+            "고정 부가 능력치": [
+              "없음"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 121
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B42.png"
+          },
+          "implicitStats": [],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B42"
+        },
+        {
+          "id": "B43",
+          "name": "누빈 천 장갑",
+          "category": "손",
+          "summary": "공용 · 손 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "손",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 8,
+            "공격속도 보정": 0,
+            "재질": "천",
+            "고정 부가 능력치": [
+              "방어도 2 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 122
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B43.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 2,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B43"
+        },
+        {
+          "id": "B44",
+          "name": "사냥꾼 가죽 장갑",
+          "category": "손",
+          "summary": "공용 · 손 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "손",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 4,
+            "공격속도 보정": 0,
+            "재질": "가죽",
+            "고정 부가 능력치": [
+              "방어도 5 (레벨 비례)",
+              "회피 확률 1% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 123
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B44.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 5,
+              "scalesWithLevel": true
+            },
+            {
+              "statId": 27,
+              "baseValue": 1,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B44"
+        },
+        {
+          "id": "B45",
+          "name": "쇠사슬 장갑",
+          "category": "손",
+          "summary": "공용 · 손 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "손",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 2,
+            "공격속도 보정": 0,
+            "재질": "철",
+            "고정 부가 능력치": [
+              "방어도 9 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 124
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B45.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 9,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B45"
+        },
+        {
+          "id": "B46",
+          "name": "중장 판금 건틀릿",
+          "category": "손",
+          "summary": "공용 · 손 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "손",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "판금",
+            "고정 부가 능력치": [
+              "방어도 14 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 125
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B46.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 14,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B46"
+        },
+        {
+          "id": "B47",
+          "name": "누빈 천 신발",
+          "category": "발",
+          "summary": "공용 · 발 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "발",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 8,
+            "공격속도 보정": 0,
+            "재질": "천",
+            "고정 부가 능력치": [
+              "방어도 2 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 126
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B47.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 2,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B47"
+        },
+        {
+          "id": "B48",
+          "name": "사냥꾼 가죽 장화",
+          "category": "발",
+          "summary": "공용 · 발 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "발",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 4,
+            "공격속도 보정": 0,
+            "재질": "가죽",
+            "고정 부가 능력치": [
+              "방어도 5 (레벨 비례)",
+              "회피 확률 1% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 127
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B48.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 5,
+              "scalesWithLevel": true
+            },
+            {
+              "statId": 27,
+              "baseValue": 1,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B48"
+        },
+        {
+          "id": "B49",
+          "name": "쇠사슬 장화",
+          "category": "발",
+          "summary": "공용 · 발 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "발",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 2,
+            "공격속도 보정": 0,
+            "재질": "철",
+            "고정 부가 능력치": [
+              "방어도 9 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 128
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B49.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 9,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B49"
+        },
+        {
+          "id": "B50",
+          "name": "중장 판금 장화",
+          "category": "발",
+          "summary": "공용 · 발 · 기본값 8",
+          "fields": {
+            "직업": "공용",
+            "부위": "발",
+            "기본 주 수치": 8,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "판금",
+            "고정 부가 능력치": [
+              "방어도 14 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 129
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B50.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 14,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B50"
+        },
+        {
+          "id": "B51",
+          "name": "누빈 천 허리띠",
+          "category": "벨트",
+          "summary": "공용 · 벨트 · 기본값 9",
+          "fields": {
+            "직업": "공용",
+            "부위": "벨트",
+            "기본 주 수치": 9,
+            "기본 비물리 저항": 8,
+            "공격속도 보정": 0,
+            "재질": "천",
+            "고정 부가 능력치": [
+              "방어도 2 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 130
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B51.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 2,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B51"
+        },
+        {
+          "id": "B52",
+          "name": "사냥꾼 가죽 허리띠",
+          "category": "벨트",
+          "summary": "공용 · 벨트 · 기본값 10",
+          "fields": {
+            "직업": "공용",
+            "부위": "벨트",
+            "기본 주 수치": 10,
+            "기본 비물리 저항": 4,
+            "공격속도 보정": 0,
+            "재질": "가죽",
+            "고정 부가 능력치": [
+              "방어도 5 (레벨 비례)",
+              "회피 확률 1% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 131
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B52.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 5,
+              "scalesWithLevel": true
+            },
+            {
+              "statId": 27,
+              "baseValue": 1,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B52"
+        },
+        {
+          "id": "B53",
+          "name": "쇠사슬 허리띠",
+          "category": "벨트",
+          "summary": "공용 · 벨트 · 기본값 11",
+          "fields": {
+            "직업": "공용",
+            "부위": "벨트",
+            "기본 주 수치": 11,
+            "기본 비물리 저항": 2,
+            "공격속도 보정": 0,
+            "재질": "철",
+            "고정 부가 능력치": [
+              "방어도 9 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 132
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B53.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 9,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B53"
+        },
+        {
+          "id": "B54",
+          "name": "중장 판금 허리띠",
+          "category": "벨트",
+          "summary": "공용 · 벨트 · 기본값 12",
+          "fields": {
+            "직업": "공용",
+            "부위": "벨트",
+            "기본 주 수치": 12,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "판금",
+            "고정 부가 능력치": [
+              "방어도 14 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 133
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B54.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 2,
+              "baseValue": 14,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B54"
+        },
+        {
+          "id": "B55",
+          "name": "석류석 목걸이",
+          "category": "목걸이",
+          "summary": "공용 · 목걸이 · 기본값 20",
+          "fields": {
+            "직업": "공용",
+            "부위": "목걸이",
+            "기본 주 수치": 20,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "최대 생명력 35 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 134
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B55.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 0,
+              "baseValue": 35,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B55"
+        },
+        {
+          "id": "B56",
+          "name": "월석 목걸이",
+          "category": "목걸이",
+          "summary": "공용 · 목걸이 · 기본값 20",
+          "fields": {
+            "직업": "공용",
+            "부위": "목걸이",
+            "기본 주 수치": 20,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "최대 자원 8 (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 135
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B56.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 42,
+              "baseValue": 8,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B56"
+        },
+        {
+          "id": "B57",
+          "name": "흑요석 목걸이",
+          "category": "목걸이",
+          "summary": "공용 · 목걸이 · 기본값 20",
+          "fields": {
+            "직업": "공용",
+            "부위": "목걸이",
+            "기본 주 수치": 20,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "가시 8 (레벨 비례)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 136
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B57.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 30,
+              "baseValue": 8,
+              "scalesWithLevel": true
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B57"
+        },
+        {
+          "id": "B58",
+          "name": "황동 인장 반지",
+          "category": "반지",
+          "summary": "공용 · 반지 · 기본값 5",
+          "fields": {
+            "직업": "공용",
+            "부위": "반지",
+            "기본 주 수치": 5,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "공격 속도 1.5% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 137
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B58.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 17,
+              "baseValue": 1.5,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B58"
+        },
+        {
+          "id": "B59",
+          "name": "청금석 반지",
+          "category": "반지",
+          "summary": "공용 · 반지 · 기본값 5",
+          "fields": {
+            "직업": "공용",
+            "부위": "반지",
+            "기본 주 수치": 5,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "자원 생성 0.6/초 (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 138
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B59.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 20,
+              "baseValue": 0.6,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B59"
+        },
+        {
+          "id": "B60",
+          "name": "가시덩굴 반지",
+          "category": "반지",
+          "summary": "공용 · 반지 · 기본값 5",
+          "fields": {
+            "직업": "공용",
+            "부위": "반지",
+            "기본 주 수치": 5,
+            "기본 비물리 저항": 0,
+            "공격속도 보정": 0,
+            "재질": "해당 없음",
+            "고정 부가 능력치": [
+              "회피 확률 1.5% (고정)"
+            ],
+            "무기 종류": "해당 없음",
+            "무기 슬롯 점유": "해당 없음",
+            "수치 해석": "아이템 레벨과 강화가 적용되기 전의 베이스 값입니다. 주 수치의 능력치 종류는 부위별 적용 코드를 따릅니다."
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
+            "line": 139
+          },
+          "status": "현재 정의",
+          "image": {
+            "file": "EquipmentVariants/B60.png"
+          },
+          "implicitStats": [
+            {
+              "statId": 27,
+              "baseValue": 1.5,
+              "scalesWithLevel": false
+            }
+          ],
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/Attributes.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "equipment-variants",
+            "equipment-variants.en",
+            "native-inventory",
+            "itemization-detail",
+            "itemization-expansion"
+          ],
+          "resource": "icon-B60"
         }
       ]
     },
@@ -14362,7 +18333,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 99
+            "line": 142
           },
           "status": "현재 정의",
           "related": [
@@ -14390,7 +18361,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 100
+            "line": 143
           },
           "status": "현재 정의",
           "related": [
@@ -14418,7 +18389,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 101
+            "line": 144
           },
           "status": "현재 정의",
           "related": [
@@ -14446,7 +18417,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 102
+            "line": 145
           },
           "status": "현재 정의",
           "related": [
@@ -14474,7 +18445,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 103
+            "line": 146
           },
           "status": "현재 정의",
           "related": [
@@ -14502,7 +18473,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 104
+            "line": 147
           },
           "status": "현재 정의",
           "related": [
@@ -14530,7 +18501,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 105
+            "line": 148
           },
           "status": "현재 정의",
           "related": [
@@ -14558,7 +18529,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 106
+            "line": 149
           },
           "status": "현재 정의",
           "related": [
@@ -14586,7 +18557,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 107
+            "line": 150
           },
           "status": "현재 정의",
           "related": [
@@ -14614,7 +18585,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 108
+            "line": 151
           },
           "status": "현재 정의",
           "related": [
@@ -14642,7 +18613,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 109
+            "line": 152
           },
           "status": "현재 정의",
           "related": [
@@ -14670,7 +18641,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 110
+            "line": 153
           },
           "status": "현재 정의",
           "related": [
@@ -14698,7 +18669,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 111
+            "line": 154
           },
           "status": "현재 정의",
           "related": [
@@ -14726,7 +18697,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 112
+            "line": 155
           },
           "status": "현재 정의",
           "related": [
@@ -14754,7 +18725,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 113
+            "line": 156
           },
           "status": "현재 정의",
           "related": [
@@ -14782,7 +18753,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 114
+            "line": 157
           },
           "status": "현재 정의",
           "related": [
@@ -14810,7 +18781,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 115
+            "line": 158
           },
           "status": "현재 정의",
           "related": [
@@ -14838,7 +18809,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 116
+            "line": 159
           },
           "status": "현재 정의",
           "related": [
@@ -14866,7 +18837,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 117
+            "line": 160
           },
           "status": "현재 정의",
           "related": [
@@ -14894,7 +18865,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 118
+            "line": 161
           },
           "status": "현재 정의",
           "related": [
@@ -14922,7 +18893,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 119
+            "line": 162
           },
           "status": "현재 정의",
           "related": [
@@ -14950,7 +18921,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 120
+            "line": 163
           },
           "status": "현재 정의",
           "related": [
@@ -14978,7 +18949,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 121
+            "line": 164
           },
           "status": "현재 정의",
           "related": [
@@ -15006,7 +18977,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 122
+            "line": 165
           },
           "status": "현재 정의",
           "related": [
@@ -15034,7 +19005,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 125
+            "line": 168
           },
           "status": "현재 정의",
           "related": [
@@ -15062,7 +19033,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 126
+            "line": 169
           },
           "status": "현재 정의",
           "related": [
@@ -15090,7 +19061,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 127
+            "line": 170
           },
           "status": "현재 정의",
           "related": [
@@ -15118,7 +19089,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 128
+            "line": 171
           },
           "status": "현재 정의",
           "related": [
@@ -15146,7 +19117,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 129
+            "line": 172
           },
           "status": "현재 정의",
           "related": [
@@ -15174,7 +19145,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 130
+            "line": 173
           },
           "status": "현재 정의",
           "related": [
@@ -15202,7 +19173,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 131
+            "line": 174
           },
           "status": "현재 정의",
           "related": [
@@ -15230,7 +19201,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 132
+            "line": 175
           },
           "status": "현재 정의",
           "related": [
@@ -15258,7 +19229,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 133
+            "line": 176
           },
           "status": "현재 정의",
           "related": [
@@ -15286,7 +19257,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 134
+            "line": 177
           },
           "status": "현재 정의",
           "related": [
@@ -15314,7 +19285,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 135
+            "line": 178
           },
           "status": "현재 정의",
           "related": [
@@ -15342,7 +19313,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 136
+            "line": 179
           },
           "status": "현재 정의",
           "related": [
@@ -15370,7 +19341,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 137
+            "line": 180
           },
           "status": "현재 정의",
           "related": [
@@ -15398,7 +19369,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 138
+            "line": 181
           },
           "status": "현재 정의",
           "related": [
@@ -15426,7 +19397,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 139
+            "line": 182
           },
           "status": "현재 정의",
           "related": [
@@ -15454,7 +19425,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 140
+            "line": 183
           },
           "status": "현재 정의",
           "related": [
@@ -15482,7 +19453,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 141
+            "line": 184
           },
           "status": "현재 정의",
           "related": [
@@ -15510,7 +19481,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 142
+            "line": 185
           },
           "status": "현재 정의",
           "related": [
@@ -15538,7 +19509,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 143
+            "line": 186
           },
           "status": "현재 정의",
           "related": [
@@ -15566,7 +19537,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 144
+            "line": 187
           },
           "status": "현재 정의",
           "related": [
@@ -15594,7 +19565,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 145
+            "line": 188
           },
           "status": "현재 정의",
           "related": [
@@ -15622,7 +19593,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 146
+            "line": 189
           },
           "status": "현재 정의",
           "related": [
@@ -15650,7 +19621,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 147
+            "line": 190
           },
           "status": "현재 정의",
           "related": [
@@ -15678,7 +19649,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 148
+            "line": 191
           },
           "status": "현재 정의",
           "related": [
@@ -15706,7 +19677,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 149
+            "line": 192
           },
           "status": "현재 정의",
           "related": [
@@ -15734,7 +19705,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 150
+            "line": 193
           },
           "status": "현재 정의",
           "related": [
@@ -15762,7 +19733,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 151
+            "line": 194
           },
           "status": "현재 정의",
           "related": [
@@ -15790,7 +19761,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 152
+            "line": 195
           },
           "status": "현재 정의",
           "related": [
@@ -15818,7 +19789,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 153
+            "line": 196
           },
           "status": "현재 정의",
           "related": [
@@ -15846,7 +19817,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 154
+            "line": 197
           },
           "status": "현재 정의",
           "related": [
@@ -15876,7 +19847,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 165
+            "line": 208
           },
           "status": "현재 정의",
           "related": [
@@ -15899,7 +19870,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 166
+            "line": 209
           },
           "status": "현재 정의",
           "related": [
@@ -15922,7 +19893,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 167
+            "line": 210
           },
           "status": "현재 정의",
           "related": [
@@ -15945,7 +19916,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 168
+            "line": 211
           },
           "status": "현재 정의",
           "related": [
@@ -15968,7 +19939,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 169
+            "line": 212
           },
           "status": "현재 정의",
           "related": [
@@ -15991,7 +19962,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 170
+            "line": 213
           },
           "status": "현재 정의",
           "related": [
@@ -16014,7 +19985,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 171
+            "line": 214
           },
           "status": "현재 정의",
           "related": [
@@ -16037,7 +20008,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 172
+            "line": 215
           },
           "status": "현재 정의",
           "related": [
@@ -16060,7 +20031,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 173
+            "line": 216
           },
           "status": "현재 정의",
           "related": [
@@ -16083,7 +20054,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 174
+            "line": 217
           },
           "status": "현재 정의",
           "related": [
@@ -16106,7 +20077,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 175
+            "line": 218
           },
           "status": "현재 정의",
           "related": [
@@ -16129,7 +20100,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 176
+            "line": 219
           },
           "status": "현재 정의",
           "related": [
@@ -16152,7 +20123,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 177
+            "line": 220
           },
           "status": "현재 정의",
           "related": [
@@ -16175,7 +20146,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 178
+            "line": 221
           },
           "status": "현재 정의",
           "related": [
@@ -16198,7 +20169,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 179
+            "line": 222
           },
           "status": "현재 정의",
           "related": [
@@ -20114,7 +24085,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 157
+            "line": 200
           },
           "status": "현재 정의",
           "related": [
@@ -20135,7 +24106,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 158
+            "line": 201
           },
           "status": "현재 정의",
           "related": [
@@ -20156,7 +24127,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 159
+            "line": 202
           },
           "status": "현재 정의",
           "related": [
@@ -20177,7 +24148,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 160
+            "line": 203
           },
           "status": "현재 정의",
           "related": [
@@ -20198,7 +24169,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 161
+            "line": 204
           },
           "status": "현재 정의",
           "related": [
@@ -20219,7 +24190,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-            "line": 162
+            "line": 205
           },
           "status": "현재 정의",
           "related": [
@@ -20256,7 +24227,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 157
+              "line": 200
             }
           ],
           "related": [
@@ -20285,7 +24256,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 157
+              "line": 200
             }
           ],
           "related": [
@@ -20314,7 +24285,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 157
+              "line": 200
             }
           ],
           "related": [
@@ -20343,7 +24314,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 157
+              "line": 200
             }
           ],
           "related": [
@@ -20372,7 +24343,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 158
+              "line": 201
             }
           ],
           "related": [
@@ -20401,7 +24372,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 158
+              "line": 201
             }
           ],
           "related": [
@@ -20430,7 +24401,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 158
+              "line": 201
             }
           ],
           "related": [
@@ -20459,7 +24430,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 158
+              "line": 201
             }
           ],
           "related": [
@@ -20488,7 +24459,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 159
+              "line": 202
             }
           ],
           "related": [
@@ -20517,7 +24488,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 159
+              "line": 202
             }
           ],
           "related": [
@@ -20546,7 +24517,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 159
+              "line": 202
             }
           ],
           "related": [
@@ -20575,7 +24546,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 159
+              "line": 202
             }
           ],
           "related": [
@@ -20604,7 +24575,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 160
+              "line": 203
             }
           ],
           "related": [
@@ -20633,7 +24604,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 160
+              "line": 203
             }
           ],
           "related": [
@@ -20662,7 +24633,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 160
+              "line": 203
             }
           ],
           "related": [
@@ -20691,7 +24662,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 160
+              "line": 203
             }
           ],
           "related": [
@@ -20720,7 +24691,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 161
+              "line": 204
             }
           ],
           "related": [
@@ -20749,7 +24720,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 161
+              "line": 204
             }
           ],
           "related": [
@@ -20778,7 +24749,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 161
+              "line": 204
             }
           ],
           "related": [
@@ -20807,7 +24778,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 161
+              "line": 204
             }
           ],
           "related": [
@@ -20836,7 +24807,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 162
+              "line": 205
             }
           ],
           "related": [
@@ -20865,7 +24836,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 162
+              "line": 205
             }
           ],
           "related": [
@@ -20894,7 +24865,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 162
+              "line": 205
             }
           ],
           "related": [
@@ -20923,7 +24894,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/Itemization.cs",
-              "line": 162
+              "line": 205
             }
           ],
           "related": [

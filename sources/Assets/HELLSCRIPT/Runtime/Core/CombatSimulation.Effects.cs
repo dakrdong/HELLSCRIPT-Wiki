@@ -7,8 +7,9 @@ namespace Hellscript
     public sealed partial class CombatSimulation
     {
         int EffectTick=>Mathf.RoundToInt(State.time/Step);
-        void EffectEvent(string definition,string kind,int instance=0,int root=0,int target=-1,float value=0,string reason="")
+        void EffectEvent(string definition,string kind,int instance=0,int root=0,int target=-1,float value=0,string reason="",float? contributionValue=null)
         {
+            CombatTelemetry.Effect(State.statistics,definition,kind,contributionValue??value);
             FeedbackEffect(definition,kind,target,value);
             State.effectEvents.Add(new EffectEvent{definitionId=definition,kind=kind,instanceId=instance,rootCastId=root,targetId=target,tick=EffectTick,time=State.time,value=value,reason=reason});
             if(State.effectEvents.Count>600)State.effectEvents.RemoveAt(0);
@@ -81,6 +82,7 @@ namespace Hellscript
             var def=State.potions.version==0?PotionCatalog.Get("PH01"):ReadyPotion("hp");
             float before=State.health;State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*def.magnitude*Stats.healing*Stats.potionHealing);
             if(State.health<=before)return false;
+            CombatTelemetry.Support(State.statistics,def.id,SkillResultMetric.Healing,State.health-before);
             State.potionCd=State.potions.hpTotal=RunePotionCooldown(def.cooldown);
             if(State.potions.version>0)ConsumePotion(def);
             if(before<=Stats.hp*.2f&&Stats.specials.Contains("LC03")&&ItemEffects.lc03Cooldown<=.00001f)

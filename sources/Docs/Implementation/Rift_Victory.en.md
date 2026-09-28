@@ -1,5 +1,7 @@
 # Rift victory result window
 
+Integration update, 2026-09-28: game implementation and refinements are included in the [all-worktree integration](All_Work_Integration_20260928.en.md). Branch-only and documentation-only publication statements below are historical scope records; this update and the integration record describe the current state.
+
 Updated: 2026-09-27 · [한국어](Rift_Victory.md)
 
 The approved `Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html` composition now feeds the actual normal-rift victory and failure results. Four regular skills occupy a 2×2 grid; the ultimate spans the next row. Failed rifts use the same result adapter and open the existing failure analysis; training retains its existing result route.

@@ -25,7 +25,7 @@ namespace Hellscript
                 case "B06":return WeaponKind.Crossbow;
                 case "B07":case "B08":case "B09":return WeaponKind.Staff;
                 case "B25":return WeaponKind.Wand;case "B26":return WeaponKind.Orb;
-                case "B27":return WeaponKind.Scroll;case "B28":return WeaponKind.Shield;
+                case "B27":return WeaponKind.Scroll;case "B28":case "B31":case "B32":case "B33":case "B34":return WeaponKind.Shield;
                 case "B29":return WeaponKind.Arrows;case "B30":return WeaponKind.Blade;
                 default:return WeaponKind.None;
             }

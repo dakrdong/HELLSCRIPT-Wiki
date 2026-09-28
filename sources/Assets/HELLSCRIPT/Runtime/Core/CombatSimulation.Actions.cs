@@ -116,6 +116,7 @@ namespace Hellscript
             ActionEvent(a,"ACTION_RELEASE",a.travel>0?"착지 완료":"효과 실행");
             if(a.skill<0)ReleaseBasic(a);else
             {ResolveSkill(a);OriginalClassRelease(a);TriggerLegendary(LegendaryTrigger.Cast,SkillId(a.skill),State.enemies.Find(e=>e.id==a.targetId&&!e.dead),a.id,a.snapshot);}
+            if(CombatTelemetry.MovementSkill(a.skill))CombatTelemetry.Support(State.statistics,SkillId(a.skill),SkillResultMetric.Movement,Vector2.Distance(a.origin,State.position));
         }
         void CompleteHeroAction(HeroActionState a,string reason="동작 완료")
         {
@@ -145,8 +146,9 @@ namespace Hellscript
         {
             float extra=SnapshotRune(snapshot,RuneBonus.BasicResource);
             if(extra>0&&!State.procHits.Any(p=>p.rootCastId==root&&p.definitionId=="RUNE_BASIC_RESOURCE"))
-            {State.procHits.Add(new ProcReceipt{rootCastId=root,definitionId="RUNE_BASIC_RESOURCE"});State.resource=Mathf.Min(Stats.maxResource,State.resource+extra);}
-            State.resource=Mathf.Min(Stats.maxResource,State.resource+new[]{10,6,5}[(int)Hero.heroClass]);
+            {State.procHits.Add(new ProcReceipt{rootCastId=root,definitionId="RUNE_BASIC_RESOURCE"});float before=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+extra);CombatTelemetry.Support(State.statistics,"RUNE_BASIC_RESOURCE",SkillResultMetric.Resource,State.resource-before);}
+            float prior=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+new[]{10,6,5}[(int)Hero.heroClass]);
+            CombatTelemetry.Support(State.statistics,"BASIC",SkillResultMetric.Resource,State.resource-prior);
             if(!Stats.specials.Contains("LC02")||reducedNext||procCooldown>.00001f)return;
             if(lastBasic==target)basicCount++;else{lastBasic=target;basicCount=1;}
             if(basicCount>=3){reducedNext=true;ItemEffects.lc02Charge=Stats.AspectValue("LC02",5);basicCount=0;procCooldown=4;EffectEvent("LC02","CHARGE",target:target,value:ItemEffects.lc02Charge);}

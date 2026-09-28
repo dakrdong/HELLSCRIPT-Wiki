@@ -1,6 +1,6 @@
 # Weekly and monthly attendance events
 
-Updated: 2026-09-24
+Updated: 2026-09-28
 Korean: [7일·28일 출석 이벤트](Attendance_Events.md)
 
 Attendance uses **00:00 Korea Standard Time (UTC+9)**. Weekly attendance resets every Monday; monthly attendance resets on the first day of each calendar month. Both tracks grant independently and share account progress across characters.
@@ -39,9 +39,54 @@ Chests survive period resets. Each stores its reward seed, the claiming characte
 
 Entering the game opens weekly attendance first, then monthly attendance as separate popups. Visiting the monthly page from the first popup prevents a duplicate automatic monthly popup during that visit. Each page has an independent **Do not show again today** preference, persisted on the device until the next KST midnight. Unchecking re-enables it for the next entry.
 
-The **Events** button near the upper left of town and rift fields always opens page 1, weekly attendance, even when automatic popups are hidden. Page 2 is monthly attendance. Horizontal swipes, tabs and arrows switch pages; vertical drags scroll rewards. Claimed, claimable and upcoming days have explicit labels. A badge shows outstanding rewards.
+The **Events** button near the upper left of town and rift fields always opens weekly attendance, even when automatic popups are hidden. The top tabs or horizontal swipes switch to monthly attendance. A red dot marks a tab and a green exclamation badge marks the Events icon while rewards remain to be claimed. Vertical drags scroll only the body. The tutorial's **Adventure journal** button sits under the Events button; when narrow battle layouts move the Events button down to clear the boss status, the guide button moves with it.
 
-The shared `ContentWindowView` provides safe area, title, navigation, scrolling body and fixed actions. Reward tiles describe attendance days, not owned equipment. Existing theme, fonts and coin/gem art are reused; `AttendanceArt` supplies dedicated gold, core and legendary-chest images. `ContentWindowHost` pauses combat and restores its previous state when closed.
+Landscape and portrait use different arrangements. On wide screens such as 21:9 the popup stays at most 900 units wide.
+
+| Screen | Selected reward | Weekly | Monthly |
+| --- | --- | --- | --- |
+| Landscape (956×440, PC 16:9, 16:10 and 21:9) | Altar panel on the left | 3×2 grid on the right with a tall day-7 card | 7×4 calendar on the right |
+| Portrait (440×956) | Altar panel on top | 3×2 grid with a wide day-7 card | 7×4 calendar |
+
+At 100% text every day is visible without scrolling. Larger text enlarges the tiles and the body scrolls. The altar panel places the selected day's reward on the altar and shows its name, amount, state, check-in progress and reset date. Tapping a tile selects that day. The window opens on the earliest claimable day, or on the next day when nothing is claimable.
+
+| State | Tile | Altar panel text | Claim button |
+| --- | --- | --- | --- |
+| Claimable | Green light behind the item, persistent green border and dot | Ready to claim | **Claim Reward** |
+| Claimed | Darkened, crimson wax seal | Claimed | Claimed (disabled) |
+| Later day | Plain tile | Check-ins needed: N | Not Yet Available (disabled) |
+| Out of reach this period | Plain tile | Out of reach before the reset | Not Yet Available (disabled) |
+
+"Out of reach" means the day cannot be earned even by checking in on every remaining day before the reset. For example, with three check-ins on a Sunday, days 4 to 7 are out of reach. Legendary-chest days (7, 14, 21 and 28) have a gold top rule and a warmer background. Tiles show compact amounts (10,000 → 10K); the altar panel shows the exact amount. Stored legendary chests appear under the reward grid and open there.
+
+The fixed action area holds the claim button and **Do not show again today**, on one row in landscape and two rows in portrait. The left/right arrow buttons were removed because tabs and swipes cover the same paging.
+
+The shared `ContentWindowView` provides safe area, title, navigation, scrolling body and fixed actions. Reward tiles describe attendance days, not owned equipment. Existing theme, fonts and coin/gem art are reused; `AttendanceArt` loads the gold, core, legendary-chest, altar and seal images. Compact amounts reuse the jeweler's `JewelerSession.Compact`, the pulse reuses `ForgeWorkingPulse` and the round glow reuses `TownCircleGraphic`. `ContentWindowHost` pauses combat and restores its previous state when closed.
+
+## Popup redesign references
+
+On 2026-09-27, attendance and login-reward screens of mobile games were reviewed. Only layout and interaction patterns were used; no artwork, logos or copy were taken.
+
+| Reference | Pattern | Applied as |
+| --- | --- | --- |
+| [Honkai: Star Rail "Gift of Odyssey"](https://game8.co/games/Honkai-Star-Rail/archives/413645) | 3×2 days with a tall final-day card beside wide key art | Landscape weekly grid and the altar panel |
+| [Arknights monthly and 7-day sign-in](https://www.gameuidatabase.com/index.php?scrn=124) | A 7-column month on one screen, claimed marks, details of the chosen day | 7×4 monthly calendar and the altar panel detail |
+| [Bleach: Immortal Soul cumulative login](https://www.gameuidatabase.com/index.php?scrn=124) | "Claimed" stamps, a highlighted current day, a double-size final day | Wax seal, highlighted claimable tiles, the wide portrait day-7 card |
+| [Call of Duty: Mobile new-player login reward](https://www.gameuidatabase.com/index.php?scrn=124) | Per-tile state text, a large final reward, the event period | State text and the reset date |
+| [AFK Arena and Dragalia Lost daily rewards](https://www.gameuidatabase.com/index.php?scrn=124) | Stacked portrait layouts that feature today's reward | The portrait altar panel on top |
+
+## Popup resources
+
+At the user's instruction, two images were requested from GPT. Claude Code called Codex's built-in image generation through `codex exec`, received two variants of each image and chose one. The chosen originals are registered byte for byte.
+
+| Resource | Visual | Reason for the choice |
+| --- | --- | --- |
+| [Attendance popup altar](../../Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png) | An empty stone altar under a beam of light in a gothic chapel. 1254×1254 opaque RGB | Its plain front lets the reward icon stand out. The other variant's star emblem and statues competed with the icon. |
+| [Claimed seal](../../Assets/HELLSCRIPT/Resources/Art/Attendance/claimed-seal.png) | A crimson wax seal with a brass ring and a check mark. 1254×1254 RGBA | Its darker oxblood tone fits the UI. The other variant was brighter with a wider rim. |
+
+One square altar image is cropped to each panel's aspect ratio. The crop is computed so the altar's upper face, 46% from the top of the art, meets the bottom of the reward icon. `AttendanceArtImporter` imports only the altar with a 1024 px limit; the seal and existing icons stay at 512 px. The Android budget is 1024 px ASTC 6×6 for the altar and 256 px for the other attendance images.
+
+Codex reported that its built-in generator has no model selector and returned all four images without model information. Like the earlier icons, they are recorded as **development assets with unverified model provenance** (`candidate_model_unknown`, `productionApproved=false`). See the [request and selection record](../Art/Attendance/popup-manifest.json) and [alpha/source-hash report](../Art/Attendance/popup-validation.json). The seal's border alpha is at most 1 with 743,404 fully transparent pixels; the altar has no transparent pixels. The wiki resource database shows both images.
 
 ## Reward artwork
 
@@ -56,6 +101,10 @@ Dedicated transparent PNGs replace the gold, random-slot core and legendary-ches
 The built-in `image_gen` outputs are native 1254×1254 RGBA PNGs, copied byte for byte without background removal, chroma keys or upscaling. `AttendanceArtImporter` targets only the new folder: Sprite, preserved alpha, 512px import limit, no mipmaps and no compression. UI images preserve aspect ratio and do not intercept input.
 
 The prompts requested `gpt-image-2`, but the callable interface and returned metadata do not verify the actual model. These are therefore **development assets with unverified model provenance**, recorded as `candidate_model_unknown` and `productionApproved=false`. Runtime integration is not a production-art approval. See the [full prompts and provenance](../Art/Attendance/source-manifest.json) and [alpha/source-hash report](../Art/Attendance/alpha-validation.json). Attendance and resource database previews use these same PNGs.
+
+## Green claimable rewards — 2026-09-28
+
+All claimable uncollected rewards have a green light and persistent border, independently of selection. Claimed and locked tiles have no green highlight. The vector UI resource `AttendanceClaimGlow` and `UiTheme.Claimable` own this display. It uses no per-frame animation and preserves existing reward/altar artwork and account transactions. This replaces the earlier claimable pulse described above. See [window shrinking and a unified bottom HUD](Responsive_Hud_20260928.en.md).
 
 ## Persistence and verification
 
@@ -82,3 +131,20 @@ The [official Black Desert Mobile weekly login event](https://www.world.blackdes
 - Portrait and PC captures were visually inspected for silhouette, readability and alpha edges. **Physical mobile devices were not tested.**
 
 [Updated weekly portrait](AttendanceArtEvidence/weekly-440x956-ko-100.png) · [English at 150%](AttendanceArtEvidence/weekly-440x956-en-150.png) · [PC weekly](AttendanceArtEvidence/weekly-1440x810-ko-100.png) · [PC monthly](AttendanceArtEvidence/monthly-1440x900-ko-100.png) · [Landscape monthly](AttendanceArtEvidence/monthly-956x440-en-150.png)
+
+## Popup redesign acceptance
+
+- Unity 6000.6.0f1: **169 of 170 related Edit Mode tests passed, with 0 skipped**. The one failure, `LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry`, has failed on `main` since `c751d84d`: two Korean search strings in `RuntimeFirstPlayAcceptance.cs` have no table entries, unrelated to this change. New tests check the seal's native alpha and the altar's opaque square image, 1024 px limit and Android budget. [Test results](AttendancePopupEvidence/editmode.xml)
+- The macOS development build succeeded. Since 2026-09-25 the attendance smoke had stopped at its first popup check because fresh accounts start with the tutorial. Like other smokes, it now starts from a tutorial-exempt QA account and waits up to 20 seconds for rift admission.
+- **42 page-layout checks** passed across 440×956, 956×440, 1440×810, 1440×900 and 1680×720, Korean and English, and 100%/150% text. Besides the existing safe-area, text-height and fixed-action checks, they assert that at 100% text all 364 day tiles of both pages sit inside the unscrolled body, that every page shows the altar art, that only claimed days carry the seal (714 checks) and that 612 reward images use the right sprite.
+- 97 clicks and 22 drags confirmed their raycast targets first. Login order, suppression, claims, midnight rollover, chest storage and opening, and combat pause restoration were exercised; a separate process kept progress, balances, the opened item and device preferences. [Native results](AttendancePopupEvidence/initial.txt) · [Image checks](AttendancePopupEvidence/art.txt) · [Restart results](AttendancePopupEvidence/resume.txt) · [Scope and source hashes](AttendancePopupEvidence/validation.json)
+- The smoke found the Adventure journal button covering the Events button in portrait battle at 150% text; the journal button now stacks under the Events button. In landscape battle at 150% text, the journal button overlaps the character portrait and the combat-log bar covers the top-left run status. Those positions are unchanged by this work and remain a separate task.
+- Unity MCP was not connected in this session, so tests ran in batch mode on a cloned project. **Physical mobile devices were not tested.**
+
+[Portrait weekly](AttendancePopupEvidence/weekly-440x956-ko-100.png) · [Portrait monthly](AttendancePopupEvidence/monthly-440x956-ko-100.png) · [Portrait weekly, English 150%](AttendancePopupEvidence/weekly-440x956-en-150.png) · [Portrait monthly, English 150%](AttendancePopupEvidence/monthly-440x956-en-150.png) · [Portrait all claimed](AttendancePopupEvidence/weekly-claimed-440x956-ko-100.png) · [Landscape weekly](AttendancePopupEvidence/weekly-956x440-ko-100.png) · [Landscape monthly, English 150%](AttendancePopupEvidence/monthly-956x440-en-150.png) · [PC weekly](AttendancePopupEvidence/weekly-1440x810-ko-100.png) · [PC monthly](AttendancePopupEvidence/monthly-1440x810-ko-100.png) · [PC chest stash](AttendancePopupEvidence/weekly-chest-stash-1440x810-ko-100.png) · [PC 16:10 monthly, English](AttendancePopupEvidence/monthly-1440x900-en-100.png) · [21:9 weekly](AttendancePopupEvidence/weekly-1680x720-ko-100.png) · [21:9 monthly, English 150%](AttendancePopupEvidence/monthly-1680x720-en-150.png) · [Portrait battle buttons 150%](AttendancePopupEvidence/field-button-440x956-150.png) · [Landscape battle buttons 150%](AttendancePopupEvidence/field-button-956x440-150.png) · [Opened in battle](AttendancePopupEvidence/field-event.png)
+
+## Attendance event icon — 2026-09-28
+
+The main and combat event shortcut now shows a calendar, green check and reward chest. It shares the content-button `Emblem` component and sizes (52 in town, 44 in combat); a green exclamation badge marks pending rewards. Clicking opens the existing attendance window, retaining combat pause/restoration behavior.
+
+The native-alpha transparent PNG is copied unchanged into runtime resources. The built-in generation surface returned no model provenance, so it is registered as model-unverified development art. Preserve the [generation manifest](../Art/Attendance/event-icon-manifest.json) and [alpha validation](../Art/Attendance/event-icon-validation.json).

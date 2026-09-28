@@ -11,7 +11,7 @@ namespace Hellscript
         RectTransform plazaAction,plazaJoystickRect,plazaGuide,plazaTitlePlate;
         Button plazaSettings;
         TownJoystick plazaJoystick;
-        Button plazaInteract,plazaBuy,plazaSell;
+        Button plazaInteract,plazaBuy,plazaSell,plazaTalk;
         readonly Dictionary<TownStation,RectTransform> plazaBubbles=new Dictionary<TownStation,RectTransform>();
         readonly Dictionary<string,RectTransform> plazaResidentBubbles=new Dictionary<string,RectTransform>();
         public Vector2 TownMovement=>Page=="plaza"&&!CommonPanelOpen&&plazaJoystick!=null?plazaJoystick.Value:Vector2.zero;
@@ -42,15 +42,16 @@ namespace Hellscript
                 plazaBubbles[s.id]=CreateTownBubble("NPC bubble "+s.id,s.name,s.npcName);
             foreach(var resident in TownLayout.Residents)
                 plazaResidentBubbles[resident.id]=CreateTownBubble("Resident bubble "+resident.id,"",resident.name);
-            plazaAction=Box("Town interaction card",root,new Color(.045f,.053f,.042f,.97f));plazaAction.anchorMin=plazaAction.anchorMax=new Vector2(1,.35f);plazaAction.pivot=new Vector2(1,.5f);plazaAction.anchoredPosition=new Vector2(-22,0);plazaAction.sizeDelta=new Vector2(250,186);
-            var edge=Box("Interaction gold edge",plazaAction,gold);Place(edge,0,0,3,186);
+            plazaAction=Box("Town interaction card",root,new Color(.045f,.053f,.042f,.97f));plazaAction.anchorMin=plazaAction.anchorMax=new Vector2(1,.35f);plazaAction.pivot=new Vector2(1,.5f);plazaAction.anchoredPosition=new Vector2(-22,0);plazaAction.sizeDelta=new Vector2(250,232);
+            var edge=Box("Interaction gold edge",plazaAction,gold);Place(edge,0,0,3,232);
             plazaServiceName=Label(plazaAction,"",22,gold);Place(plazaServiceName.rectTransform,15,10,222,28);
             plazaNpcName=Label(plazaAction,"",14,pale);plazaNpcName.name="NPC name";Place(plazaNpcName.rectTransform,15,39,222,20);
             plazaServiceDetail=Label(plazaAction,"",15,muted);Place(plazaServiceDetail.rectTransform,15,64,222,42);
-            var interact=Button(plazaAction,"대화하기",game.InteractTown,new Color(.4f,.27f,.12f));interact.name="town-interact";Place((RectTransform)interact.transform,12,116,226,58);plazaActionText=interact.GetComponentInChildren<Text>();
+            plazaTalk=Button(plazaAction,"대화하기",game.TalkTown,UiTheme.Primary);plazaTalk.name="town-talk";Place((RectTransform)plazaTalk.transform,12,112,226,44);
+            var interact=Button(plazaAction,"대화하기",game.InteractTown,new Color(.4f,.27f,.12f));interact.name="town-interact";Place((RectTransform)interact.transform,12,168,226,52);plazaActionText=interact.GetComponentInChildren<Text>();
             plazaInteract=interact;
-            plazaBuy=Button(plazaAction,"구매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Buy),new Color(.4f,.27f,.12f));plazaBuy.name="town-merchant-buy";Place((RectTransform)plazaBuy.transform,12,116,110,58);
-            plazaSell=Button(plazaAction,"판매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Sell));plazaSell.name="town-merchant-sell";Place((RectTransform)plazaSell.transform,128,116,110,58);
+            plazaBuy=Button(plazaAction,"구매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Buy),new Color(.4f,.27f,.12f));plazaBuy.name="town-merchant-buy";Place((RectTransform)plazaBuy.transform,12,168,110,52);
+            plazaSell=Button(plazaAction,"판매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Sell));plazaSell.name="town-merchant-sell";Place((RectTransform)plazaSell.transform,128,168,110,52);
             overlay.SetAsLastSibling();RefreshPlaza();
         }
         RectTransform CreateTownBubble(string id,string contentName,string npcName)
@@ -106,7 +107,10 @@ namespace Hellscript
         public void RefreshPlaza()
         {
             if(Page!="plaza"||plazaStatus==null||game.Town==null)return;
-            var walk=game.Town;var near=walk.Nearby;
+            var walk=game.Town;var near=walk.Nearby;var npc=NpcProfiles.Nearby(walk.Position);
+            float cardHeight=npc!=null&&!npc.Station.HasValue?168:232;
+            plazaAction.sizeDelta=new Vector2(250,cardHeight);
+            ((RectTransform)plazaAction.Find("Interaction gold edge")).sizeDelta=new Vector2(3,cardHeight);
             if(globalHud?.Layout!=null&&plazaJoystickRect!=null)
             {
                 var layout=globalHud.Layout;float scale=root.parent.GetComponent<Canvas>().scaleFactor;
@@ -128,15 +132,20 @@ namespace Hellscript
                 float hudTop=layout.potions.Concat(layout.actives).Max(r=>r.yMax)*layout.scale/scale;
                 float halfHeight=plazaAction.rect.height*cardScale/2;
                 float center=Mathf.Min(root.rect.height-44-halfHeight,Mathf.Max(root.rect.height*.35f,hudTop+14*cardScale+halfHeight));
-                plazaAction.anchoredPosition=new Vector2(-22*cardScale,center-root.rect.height*.35f);
+                float cardRight=Mathf.Max(22*cardScale,edge+iconSize+gap);
+                plazaAction.anchoredPosition=new Vector2(-cardRight,center-root.rect.height*.35f);
             }
             plazaStatus.text=walk.Destination.HasValue?Loc.F("{0}으로 이동 중 · {1:0.0}m",TownLayout.Station(walk.Destination.Value).name,walk.Remaining):Loc.F("{0} Lv.{1} · 중앙 길 횡단 약 20초",game.catalog.classNames[(int)game.Store.Data.Hero.heroClass],game.Store.Data.Hero.level);
-            plazaAction.gameObject.SetActive(near.HasValue&&!TownNavigationOpen&&!CommonPanelOpen);
+            plazaAction.gameObject.SetActive((near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen);
+            plazaTalk.gameObject.SetActive(npc!=null);
+            plazaInteract.gameObject.SetActive(false);plazaBuy.gameObject.SetActive(false);plazaSell.gameObject.SetActive(false);
             if(near.HasValue)
             {
                 var s=TownLayout.Station(near.Value);plazaServiceName.text=Loc.T(s.name);plazaNpcName.text=Loc.T(s.npcName);plazaServiceDetail.text=Loc.T(s.service);plazaActionText.text=Loc.T(s.action);
                 bool merchant=near.Value==TownStation.Merchant||near.Value==TownStation.Gambler;plazaInteract.gameObject.SetActive(!merchant);plazaBuy.gameObject.SetActive(merchant);plazaSell.gameObject.SetActive(merchant);
             }
+            if(npc!=null&&!npc.Station.HasValue)
+            {plazaServiceName.text=Loc.T(npc.Role);plazaNpcName.text=Loc.T(npc.name);plazaServiceDetail.text="";}
             // Preserve the right inset while lifting interactions above actual HUD controls.
             foreach(var pair in plazaBubbles)
                 PositionTownBubble(pair.Value,game.World.TownStationScreen(pair.Key));

@@ -5,7 +5,16 @@ namespace Hellscript
     // Artwork follows the original equipment definition, independently of an imprinted power.
     public static class EquipmentArt
     {
-        public static Texture2D ForItem(Item item)=>ForDefinition(item?.special);
+        public static Texture2D ForItem(Item item)
+        {
+            if(item==null)return null;
+            return ForDefinition(item.special)??ForBase(ItemCatalog.Base(item).id);
+        }
+        public static Texture2D ForBase(string id)
+        {
+            // The legacy iron shield shares the ironbound round shield silhouette.
+            return Resources.Load<Texture2D>("Art/EquipmentVariants/"+(id=="B28"?"B32":id));
+        }
         public static Texture2D ForDefinition(string id)
         {
             if(string.IsNullOrEmpty(id))return null;

@@ -1,5 +1,7 @@
 # Map display option
 
+Bottom-layout update, 2026-09-28: the live journal is at the bottom, with the full HUD above it. The minimap reserves space above that stack and recalculates on journal expansion/collapse. See [integration validation](All_Work_Integration_20260928.en.md).
+
 Updated: 2026-09-28 · [한국어](Map_Display_Option.md)
 
 The on/off “Overlay map” toggle in Settings → Screen is now a single-choice “Map display” selector. It has three options, and the battle view draws only the map of the chosen style. The choice is saved on this device only and never in the account save. It applies immediately in an open battle without restarting it.

@@ -31,6 +31,47 @@ namespace Hellscript.Tests
             var a=Account((int)source.Hero.heroClass,source.Hero.level);a.heroes[a.selectedHero]=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(source.Hero));
             var state=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(source.State));GameStore.NormalizeRun(state);return new CombatSimulation(a,catalog,1,restore:state);
         }
+        [Test] public void TargetDamageSharesUseSeparateAllSourceTotalsAndSkillOwnedSecondaryEffects()
+        {
+            var sim=Quiet();var enemy=sim.State.enemies[0];sim.Stats.crit=0;
+            foreach(var boss in new[]{false,true})
+            {
+                enemy.boss=boss;
+                foreach(var id in new[]{"M01","EXTRA:M01","M01:cashout","BASIC","EXTRA:DES_LM41"})
+                {
+                    var hit=(DamageEvent)Call(sim,"Hit",enemy,.001f,0,false,0f,null,false,false,id,1,0,DamageKind.Direct);
+                    Assert.AreEqual(boss,hit.targetIsBoss);
+                }
+            }
+            var stats=sim.State.statistics;Assert.IsTrue(stats.targetDamageComplete);
+            Assert.AreEqual(stats.damage,stats.normalDamage+stats.bossDamage,.000001);
+            Assert.AreEqual(60,stats.DamageShare("M01",false).Value,.001);Assert.AreEqual(60,stats.DamageShare("M01",true).Value,.001);
+            Assert.AreEqual(0,stats.DamageShare("M05",true).Value);
+            var restored=Restore(sim);Assert.AreEqual(JsonUtility.ToJson(stats),JsonUtility.ToJson(restored.State.statistics));
+            Assert.AreEqual(60,restored.State.statistics.DamageShare("M01",true).Value,.001);
+        }
+        [Test] public void ZeroTargetDamageIsZeroAndIncomingDamageDoesNotPolluteTheDenominator()
+        {
+            var sim=Quiet();var stats=sim.State.statistics;
+            CombatTelemetry.Damage(stats,new DamageEvent{incoming=true,targetIsBoss=true,finalDamage=50,hpLoss=30});
+            Assert.AreEqual(0,stats.DamageShare("M01",true).Value);Assert.AreEqual(0,stats.DamageShare("M01",false).Value);
+            Assert.AreEqual(0,stats.normalDamage+stats.bossDamage);Assert.AreEqual(50,stats.incomingDamage);
+        }
+        [Test] public void LegacyTargetBreakdownRemainsUnknownWithoutLosingExistingDamage()
+        {
+            var sim=Quiet();sim.State.statistics=new CombatStatistics{version=1,fullRun=true,damage=90};sim.State.statistics.For("M01").damage=90;
+            CombatTelemetry.Normalize(sim.State);CombatTelemetry.Damage(sim.State.statistics,new DamageEvent{definitionId="M01",targetIsBoss=true,finalDamage=10});
+            Assert.AreEqual(100,sim.State.statistics.damage);Assert.AreEqual(10,sim.State.statistics.bossDamage);
+            Assert.IsNull(sim.State.statistics.DamageShare("M01",true));
+            var restored=Restore(sim);Assert.IsNull(restored.State.statistics.DamageShare("M01",false));Assert.AreEqual(100,restored.State.statistics.damage);
+        }
+        [Test] public void ActualIncomingHitsCaptureWholeBattleSourceBeforeSamplesAreTrimmed()
+        {
+            var sim=Quiet();var enemy=sim.State.enemies[0];enemy.boss=true;enemy.pattern=0;sim.State.health=1000000;sim.Stats.dodge=sim.Stats.perfectBlock=0;
+            for(int i=0;i<2005;i++)Call(sim,"Hurt",1f,0,enemy.id.ToString(),"BOSS01_SLAM");
+            Assert.AreEqual(2000,sim.State.damageEvents.Count);var top=sim.State.statistics.TopIncoming(true);Assert.AreEqual(1,top.Length);Assert.AreEqual(sim.State.statistics.incomingDamage,top[0].damage,.001);Assert.AreEqual(100,top[0].percentage);
+            var copy=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));CombatTelemetry.Normalize(copy);Assert.AreEqual(top[0].damage,copy.statistics.TopIncoming(true)[0].damage);
+        }
         [Test] public void CapturedBossDamageUsesReadableNamesAndStableGroupingKeys()
         {
             var sim=Quiet();var enemy=sim.State.enemies[0];enemy.boss=true;enemy.pattern=0;
@@ -53,9 +94,10 @@ namespace Hellscript.Tests
         public void DamageTotalsSurviveTheTwoThousandEventRetentionLimit()
         {
             var sim=Quiet();sim.Stats.crit=0;var enemy=sim.State.enemies[0];double expected=0;
-            for(int i=0;i<2501;i++){var hit=(DamageEvent)Call(sim,"Hit",enemy,.001f,0,false,0f,null,false,false,"BASIC",i+1,0,DamageKind.Basic);expected+=hit.finalDamage;}
+            for(int i=0;i<2501;i++){enemy.boss=i%2==0;var hit=(DamageEvent)Call(sim,"Hit",enemy,.001f,0,false,0f,null,false,false,"BASIC",i+1,0,DamageKind.Basic);expected+=hit.finalDamage;}
             Assert.AreEqual(2000,sim.State.damageEvents.Count);Assert.AreEqual(2501,sim.State.statistics.skills.Single().hits);Assert.AreEqual(expected,sim.State.statistics.damage,.000001);
             Assert.Greater(sim.State.statistics.damage,sim.State.damageEvents.Sum(e=>(double)e.finalDamage));
+            Assert.AreEqual(expected,sim.State.statistics.normalDamage+sim.State.statistics.bossDamage,.000001);Assert.AreEqual(100,sim.State.statistics.DamageShare("BASIC",true).Value);
         }
         [Test]
         public void ActionTotalsKeepCancelledPreparationsAfterOldEventsAreDiscarded()

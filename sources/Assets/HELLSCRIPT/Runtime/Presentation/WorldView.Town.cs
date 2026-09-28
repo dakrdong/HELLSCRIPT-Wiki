@@ -53,6 +53,19 @@ namespace Hellscript
             point=default;var ray=viewCamera.ScreenPointToRay(screen);if(!new Plane(Vector3.up,Vector3.zero).Raycast(ray,out float distance))return false;
             var p=ray.GetPoint(distance);point=TownLayout.FromWorld(new Vector2(p.x,p.z));return TownLayout.Walkable(point);
         }
+        public bool TryPickNpc(Vector2 screen,out NpcProfile profile)
+        {
+            profile=null;if(world==null||viewCamera==null)return false;
+            float best=Mathf.Max(32,Screen.height*.045f);
+            foreach(var npc in NpcProfiles.All)
+            {
+                var projected=viewCamera.WorldToScreenPoint(TownPoint(npc.Position,1.6f));
+                if(projected.z<=0||!UiSafeArea.Frame.Contains(projected))continue;
+                float distance=Vector2.Distance(screen,projected);
+                if(distance>best)continue;best=distance;profile=npc;
+            }
+            return profile!=null;
+        }
         public bool TryPickStation(Vector2 screen,out TownStation station)
         {
             station=default;if(world==null||viewCamera==null)return false;var projected=new List<(TownStation,Vector2)>();

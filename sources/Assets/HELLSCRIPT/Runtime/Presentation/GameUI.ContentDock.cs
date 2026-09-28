@@ -31,11 +31,13 @@ namespace Hellscript
             view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap));view.Snap(contentDockOpen);
         }
         Image Emblem(Button button,string sprite)
+            =>Emblem(button,Resources.Load<Sprite>("Art/GlobalHUD/"+sprite));
+        Image Emblem(Button button,Sprite sprite)
         {
             var border=button.GetComponent<UIRectBorder>();if(border!=null)border.enabled=false;
             button.GetComponentInChildren<Text>().text="";
             var art=Rect("Emblem",button.transform);Stretch(art);var image=art.gameObject.AddComponent<Image>();
-            image.sprite=Resources.Load<Sprite>("Art/GlobalHUD/"+sprite);image.preserveAspect=true;return image;
+            image.sprite=sprite;image.preserveAspect=true;return image;
         }
     }
     // Opening: the arrow slides down uncovering the shortcuts, then turns over to point up.

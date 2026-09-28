@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "date": "2026-09-27",
+  "surface": "codex exec built-in image generation (imagegen skill), requested by Claude Code at the user's instruction",
+  "codexThread": "01a0e283-fa0a-7871-813f-14cc60fdff3c",
+  "requestedModel": "gpt-image-2",
+  "verifiedModel": null,
+  "modelEvidence": "Codex replied that the native surface has no model selector and returned model=null for every image.",
+  "provenanceStatus": "candidate_model_unknown",
+  "runtimeUse": "development",
+  "productionApproved": false,
+  "postprocessing": "None; the chosen PNGs are copied byte for byte. Unity imports them through AttendanceArtImporter.",
+  "sharedInstruction": "You are producing two art assets for the attendance reward popup of HELLSCRIPT, a dark fantasy mobile action RPG. Use your built-in image generation tool. Use the available native GPT Image generation surface, with gpt-image-2 as the requested model if selectable.",
+  "assets": [
+    {
+      "id": "popup-altar",
+      "requestId": "attendance-altar",
+      "prompt": "Use case: stylized-concept. Asset type: one opaque square background illustration shown behind a featured reward icon in the attendance popup. Hand-painted realistic game illustration in a gothic dark fantasy mood, restrained fine material detail, dark iron and aged brass visual language, rich but controlled colors, light from above. Palette anchored on charcoal olive (#161813, #24271d), aged brass (#c8ac77) and warm ivory candlelight (#ded3bc); no saturated blue, purple or green. Composition (important: the game crops this image both to a near-square panel and to a wide 16:10 panel, so keep everything important in the central horizontal band): a single empty, flat-topped stone altar pedestal stands exactly in the horizontal center; its flat, empty top surface sits exactly at the vertical middle of the canvas. Nothing rests on the altar, its top is bare, because the game draws a reward icon there. A soft, narrow shaft of warm light falls from above onto the empty altar top and leaves a calm, uncluttered, darker space directly above the altar where the icon will float. Behind: a dim gothic crypt chapel with pointed arches, carved pillars and a few lit candles on both sides, fading into deep shadow toward all four edges. The lower third of the canvas (altar base and floor) stays dark and low in detail so light text can be overlaid there; a faint engraved circular sigil on the floor. Full-bleed opaque image: no transparency, no vignette frame, no border, no UI elements, no text, letters, numbers or word-like runes, no logo, no watermark, no characters, creatures, chests, coins, gems or other items.",
+      "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e283-fa0a-7871-813f-14cc60fdff3c/exec-dcfae08e-6058-406b-aa3e-c000a81fed37.png",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png",
+      "rejectedVariant": {
+        "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e283-fa0a-7871-813f-14cc60fdff3c/exec-27b8965d-dcc0-4617-b93b-3b6bf3e92225.png",
+        "sha256": "071a4502f6c53565e54360d0e5c37ecd562e2e4e823d49525ec78d7b3e6e6fa9",
+        "reason": "The gold star emblem on the altar front and the statues/banners compete with the reward icon placed on the altar."
+      }
+    },
+    {
+      "id": "claimed-seal",
+      "requestId": "attendance-seal",
+      "prompt": "Use case: stylized-concept. Asset type: a single square stamp icon that marks an attendance day whose reward was already collected. It is overlaid on dark olive reward cards and shown at 28 to 48 px. Hand-painted realistic game item illustration, crisp forms, strong readable silhouette at 32 px, dark iron/aged brass visual language, rich but controlled colors, light from upper left, no flat vector drawing. Center one isolated subject occupying about 80% of a square canvas with generous clear margin. Deliver a transparent PNG with preserved native alpha: fully transparent surrounding space, no scenery, no solid backdrop, no black or white background, no checkerboard, no floor, no frame, no cast/drop shadow, no glow extending beyond the subject. Preserve clean anti-aliased alpha edges, no matte/halo. Subject: one round crimson wax seal seen straight from the front, pressed flat with a slightly irregular melted rim, a thin aged-brass ring inset near the rim, and a bold raised check mark (tick) embossed in the center that stays readable at small sizes. Deep oxblood red wax with subtle highlights, dignified and weathered, not cute. No text, letters, numbers, word-like runes, ribbon or extra ornaments.",
+      "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e283-fa0a-7871-813f-14cc60fdff3c/exec-74254910-40a6-4bab-853d-e042b039626b.png",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/Attendance/claimed-seal.png",
+      "rejectedVariant": {
+        "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e283-fa0a-7871-813f-14cc60fdff3c/exec-6593f7d2-3195-4ddc-83c4-1ceeb0f15841.png",
+        "sha256": "baedcdb8491782e0edea7949317fd4a544d83f4f06c444daa7c368a52ceccd2c",
+        "reason": "Brighter red and a wider melted rim; the chosen variant keeps the darker oxblood tone of the dark UI."
+      }
+    }
+  ]
+}

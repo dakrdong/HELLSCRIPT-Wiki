@@ -1,6 +1,6 @@
 # Shared UI and new-content contract
 
-Updated: 2026-09-24
+Updated: 2026-09-28
 Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
 
 [Korean version](Shared_UI_Contract.md)
@@ -35,7 +35,7 @@ Pass `EquipmentViewSource.Owned`, `Draft`, `BattleSnapshot`, `Catalog` or `Rewar
 
 ## Hunt Edict
 
-Keep all 25 groups and 130 global option IDs, values, ranges and combat behavior. Landscape uses category, summary list and selected editor with independent scrolling. Portrait slides between summary and detail and restores list position. Search names/help/IDs across categories; optionally show changed groups only.
+Keep the original 25 groups and 130 global option IDs, values and ranges. Auto Equip and automatic cleanup share warehouse admission and full-warehouse repeat handling. [Auto Equip](Recommended_Equipment.en.md) adds a tab in the same window with 10 groups, 20 recommendation options and one warehouse-admission option, bringing the totals to 35 and 151. Changes use the existing draft and fixed Save/Revert actions. Landscape uses category, summary list and selected editor with independent scrolling. Portrait slides between summary and detail and restores list position. Search names/help/IDs across categories; optionally show changed groups only.
 
 Show current choices, numbers, sets and priorities compactly; open controls on demand. Disabled conditions remain explained inline. Skill rows show icon/name/rank/equipped state while commands belong to selected details. New skill design remains excluded. Keep dirty state, revert and save in a fixed footer. Navigation preserves drafts; close/preset replacement asks about unsaved edits.
 
@@ -78,6 +78,8 @@ Shared UI does not require a rectangular frame for every control. Vaults use `Ui
 
 The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives always apply; a slot menu opens that skill’s edict settings. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).
 
+Since the 2026-09-27 redesign, the tree is a dedicated layout that draws three branch trunks, level-stage gates and prerequisite links. Trunks, links and glows are a texture-free `SkillTreeGraphic` mesh; node positions come from the presentation-only `SkillTreeLayout`. `ClassSkillTree` still owns unlock, rank and equipment rules. Nodes and skill-bar sockets use the `UiButton` `Icon` role like the storage chests, and their ornament graphic reads the common button's hover, press and focus state. Selection is shown with light rather than an outline. `SkillIconView` draws the icons; the ornate frames, backdrop and point gem are content art generated with GPT at the user's request. This is separate from the rule that common button decoration uses no raster art, and icons are fitted to each frame's measured transparent opening. Production records and checks are in the [skill tree screen art record](../Art/SkillTreeUi/Skill_Tree_UI_Art.en.md).
+
 Per-item quick presets use the same draft and selection dialog. A recipe replaces only its own option values; opening Custom Settings or navigating never saves. See the [quick preset coverage and verification](Hunt_Edict_Quick_Presets.en.md).
 
 ## Rift entry adapter
@@ -93,7 +95,7 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 
 ## Attendance events
 
-`AttendanceWindow` starts from the new-content template and uses `ContentWindowView`. Day tiles describe reward definitions; account attendance and claim state are supplied by the controller. Shared navigation and scrolling body sit above fixed suppression, selected-reward and claim controls. Larger text increases action height and reduces tile columns. `AttendanceSwipe` routes horizontal gestures to pages and vertical gestures to the shared body scroll. `ContentWindowHost` owns combat pause, `GameStore` owns account transactions, and `StoreViewBinding` refreshes after committed saves. See [attendance events](Attendance_Events.en.md) for calendar, reward and verification rules.
+`AttendanceWindow` starts from the new-content template and uses `ContentWindowView`. Day tiles describe reward definitions; account attendance and claim state are supplied by the controller. Landscape places the altar panel with the selected reward beside the day grid; portrait stacks them. At 100% text every day is visible without scrolling; larger text enlarges the tiles and the shared body scrolls. Fixed actions hold the suppression checkbox and the claim button. The altar art and claimed seal come from `AttendanceArt`, compact tile amounts reuse the jeweler's `JewelerSession.Compact`, the pulse reuses `ForgeWorkingPulse` and the round glow reuses `TownCircleGraphic`. `AttendanceSwipe` routes horizontal gestures to pages and vertical gestures to the shared body scroll. `ContentWindowHost` owns combat pause, `GameStore` owns account transactions, and `StoreViewBinding` refreshes after committed saves. See [attendance events](Attendance_Events.en.md) for calendar, reward and verification rules.
 
 ## Combat records
 
@@ -106,3 +108,31 @@ The Google sign-in dialog in `TitleScreenView` remains part of the existing full
 ## Tutorial guidance
 
 `TutorialJournalWindow` uses the shared content template. Practice selection distinguishes owned equipment from recipe definitions and reuses `ItemDetailView`. Native inventory and `GameStore` own actual equipment mutations. `TutorialAnchorRing` attaches to logical button IDs and owned inventory cells, does not intercept input and never mutates account state. Brief combat guidance and the entry button use the existing HUD adapter. See [implementation](Tutorial_Progression.en.md).
+
+## Rift victory adapter
+
+`RiftVictoryWindow` uses the shared `RewardSnapshot` entry point. Three fixed result regions keep the whole summary visible, while source-grouped loot scrolls independently. Four regular skills and one ultimate read the combat snapshot. Slots, details, icons, safe area and button ownership remain shared, with no private canvas. Decorative numerals reuse `UiFonts.Display` at fixed size. The result page retains the host's input/Back stack while permitting the repeat clock; nested windows retain normal blocking. See [ownership and validation](Rift_Victory.en.md).
+
+Inventory and Rift reward inspection share `ItemDetailPopup` for the item-information header, range controls, fixed action boundary and card viewport. The popup receives explicit snapshots and callbacks; it has no live account access.
+
+Inventory and rift item inspection pass context, notes and actions to `ItemDetailPopup.SetFooter`; the shared owner measures the footer and lays out its controls. Content adapters must not duplicate footer heights or button coordinates. Failed rifts use the same result adapter and shared `UiTheme` failure colors. Skill damage cards are noninteractive readers of target-specific aggregates.
+
+When closing a nested detail window, `ContentWindowHost` restores both the prior selection and its input modality. Pointer selections must not become keyboard focus. Equipment rarity borders are preserved; keyboard focus cues return only for keyboard-originated selection.
+
+Text logs use the `CombatLogWindow` shared `ContentWindowView`/`BattleSnapshot` modal, preserving the underlying result with a Close-only footer. Skill contributions read shared `CombatStatistics` and catalog display roles; presentation must not replay combat events to calculate values.
+
+`IncomingDamageWindow` uses the same `ContentWindowView` / `BattleSnapshot` adapter. `CombatStatistics.TopIncoming` owns cumulative source rankings and their top-only denominators; the view does not duplicate aggregation or mutate saves.
+## Proportional scaling and one bottom HUD
+
+Follow [window shrinking and a unified bottom HUD](Responsive_Hud_20260928.en.md). The complete bottom HUD retains one landscape composition and one scale. Do not independently resize or rearrange potions, skills, seal, XP, HP or MP by aspect ratio. Ultimate and ordinary skills always share one row. Ordinary controls and text also shrink together. Landscape power saving uses equal-width columns and a centered vertical divider.
+
+Attendance update, 2026-09-28: claimable uncollected rewards use green `AttendanceClaimGlow` light and a persistent `UiTheme.Claimable` border, independently of selection. Claimed and locked rewards have no green highlight. The original gold glow remains; the older pulse description above does not apply to the new green indicator.
+
+## Power-saving hunt HUD
+
+The existing `GameUI.Idle` canvas is a HUD adapter that keeps real hunting active. Its background does not pause; storage, inventory and the new `IdleEquipmentDetailWindow` use the shared nested pause owner. `EquipmentSlotView`, `ItemDetailView` with `RewardSnapshot`, `UiFonts` and `UiTheme` own equipment rendering, typography, color and scale. Independent scrolling retains every session record while creating only visible rows. Rendering never executes a transaction or substitutes current ownership for captured historical gear. See [power-saving mode](Idle_Display.en.md) for behavior and validation boundaries.
+
+`IdleHuntStatus` reads actual `RunState` and `RepeatHuntSession` for location/activity. It reuses `RiftObjectives` counts; the footer reuses `GlobalHudView.CreateSeal`/`Portrait` and `GlobalHudSnapshot.ReadGrowth`. Refreshing the power-saving view does not rebuild the normal HUD's skill, potion or effect lists.
+## NPC dialogue
+
+`NpcDialogueWindow` uses the shared starter and `ContentWindowView` with `EquipmentViewSource.Catalog`. Portraits and greetings are catalog definitions; the view does not read or mutate an account. To keep the field visible, the shared bottomDock option anchors the window to the safe-area bottom, caps its height at 30% of the safe area and removes full-screen dimming. The portrait remains fixed on the left, the name sits above the independently scrolling greeting on the right, and actions remain fixed below. Portrait screens give actions the full panel width. Existing centered windows retain their default layout and backdrop. `GameController.NpcDialogue` revalidates distance and delegates to existing service access checks. [NPC portraits and dialogue](Npc_Dialogue_Portraits.en.md) records identities, art provenance and validation.

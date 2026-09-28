@@ -7,6 +7,7 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         RectTransform battleWorld;
+        Button powerSavingButton;
         Vector2 battleSize;
         Rect battleSafe;
         float battleJournalTop,battleBossHeight;
@@ -25,6 +26,9 @@ namespace Hellscript
             footer.gameObject.SetActive(false);headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);
             meterText=Label(header,"",15,pale);timerText=Label(header,"",18,gold);actionText=Label(header,"",14,gold);
             var menu=Button(header,"☰",ShowObservationMenu,Color.clear);menu.name="관찰 메뉴";
+            powerSavingButton=Button(header,"절전 모드",game.RequestIdle);
+            powerSavingButton.name="power-saving-entry";
+            powerSavingButton.gameObject.SetActive(run.training<0&&!run.tutorial);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
             AddRiftMinimap(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
@@ -57,8 +61,16 @@ namespace Hellscript
             Place(actionText.rectTransform,18,narrow?112:88,Mathf.Min(w-36,End(narrow?112:88,22)-18),22);
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,w-56,8,44,44);
             var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,w-108,8,44,44);
+            if(powerSavingButton!=null)
+            {
+                float bw=Mathf.Min(160*InterfaceFactor,w-144);
+                float by=w<720?118:8;
+                Place((RectTransform)powerSavingButton.transform,(w-bw)*.5f,by,bw,44);
+                powerSavingButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(14*InterfaceFactor);
+                powerSavingButton.interactable=game.CanEnterIdle;
+            }
             // On narrow fields the event button has its own row above the boss status.
-            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=w<600?(narrow?212:176):116;
+            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=w<720?(narrow?218:176):116;
             // The boss status stays clear of the map panel: beside it when 240 remain right of the left
             // column (the events and adventure guide buttons end at 132), otherwise below it.
             bool below=panel.width>0&&bossX+bossWidth>panel.xMin-8&&bossY<panel.yMax+8;

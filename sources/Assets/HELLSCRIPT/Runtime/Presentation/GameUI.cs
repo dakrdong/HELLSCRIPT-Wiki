@@ -64,13 +64,16 @@ namespace Hellscript
             if(footerApron!=null){footerApron.anchorMin=Vector2.zero;footerApron.anchorMax=new Vector2(1,s.y/h);footerApron.offsetMin=footerApron.offsetMax=Vector2.zero;}
         }
         public float InterfaceFactor=>game!=null&&game.InterfaceScale!=null?game.InterfaceScale.Factor:1f;
-        static float DevicePixelScale()=>Application.isMobilePlatform?Mathf.Clamp(Screen.dpi>0?Screen.dpi/160f:Mathf.Min(Screen.width,Screen.height)/720f,1,4):1;
+        Vector2 canvasScreenSize;
+        Rect canvasSafeArea;
+        // Legacy page coordinates are twice the shared content coordinates. Use the same fit
+        // ratio so controls and text shrink together, including on desktop window resizes.
         // Every canvas takes the same reading size. Enlarging the reference layout keeps each fixed
         // box in proportion with its text, so a larger choice never truncates a label.
         void ApplyScaler(CanvasScaler scaler,bool constantPixels)
         {
             float factor=InterfaceFactor;
-            if(constantPixels){scaler.uiScaleMode=CanvasScaler.ScaleMode.ConstantPixelSize;scaler.scaleFactor=DevicePixelScale()*factor;}
+            if(constantPixels){scaler.uiScaleMode=CanvasScaler.ScaleMode.ConstantPixelSize;scaler.scaleFactor=UiTheme.Scale(UiSafeArea.Current)*.5f*factor;}
             else{scaler.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new Vector2(720,1280)/factor;scaler.matchWidthOrHeight=.5f;}
         }
         // Clearing the cached screen size rather than the laid-out flag keeps the reading anchor, so the
@@ -84,6 +87,13 @@ namespace Hellscript
             if(presetModal!=null){ApplyScaler(presetModal.GetComponent<CanvasScaler>(),true);presetScreenSize=Vector2.zero;ReflowPresetDialog();}
             Canvas.ForceUpdateCanvases();
         }
+        void RefreshCanvasScale()
+        {
+            var size=new Vector2(Screen.width,Screen.height);var safe=UiSafeArea.Current;
+            if(canvasScreenSize==size&&canvasSafeArea==safe)return;
+            canvasScreenSize=size;canvasSafeArea=safe;
+            ApplyInterfaceScale();
+        }
         // Every line is written when its screen is drawn, so a new language reaches the player by
         // drawing the page that is in front of them again. The settings window is rebuilt on the same
         // tab and scrolled back to the language row, so the choice that was just made stays in view.
@@ -92,7 +102,7 @@ namespace Hellscript
             if(root==null)return;
             bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
-            if(AttendancePanel!=null)AttendancePanel.Repaint();else if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
+            if(npcDialogue!=null)npcDialogue.Repaint();else if(AttendancePanel!=null)AttendancePanel.Repaint();else if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
             if(!panelOpen)return;
             ShowCommonPanel(false);SelectSettingsTab(tab);
             Canvas.ForceUpdateCanvases();
@@ -146,7 +156,8 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
-            CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
+            if(combatLogView!=null){combatLogView.Close();combatLogView=null;}
+            CloseRiftVictory();CloseNpcDialogue();CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
             if(PlayInventoryOpen&&page!="bag"&&page!="warehouse")ReleasePlayInventory();
             if(page!="battle")game.ExitIdle();
             CloseHudPanel();ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
@@ -243,10 +254,12 @@ namespace Hellscript
         static void Fill(Image image,float ratio){var r=image.rectTransform;r.anchorMax=new Vector2(Mathf.Clamp01(ratio),1);r.offsetMin=r.offsetMax=Vector2.zero;}
         public void RefreshHud()
         {
+            if(game.DisplayDimmed)return;
             RefreshGlobalHud();
             RefreshLiveJournal();
             if(game.DisplayDimmed||Page!="battle"||game.Combat==null||timerText==null)return;
             var run=game.Combat.State;RefreshGrowthHud();
+            if(powerSavingButton!=null)powerSavingButton.interactable=game.CanEnterIdle;
             int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-run.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
             meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));
             if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
@@ -367,7 +380,7 @@ namespace Hellscript
         public void ShowResult()
         {
             if(game.ComparisonRun){ShowComparisonResult();return;}
-            if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.training>=0?r.action:Loc.F("균열 {0}단계",r.stage)+" · "+Loc.StoredText(r.action),ShowResult);
+            if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;if(r.training<0&&(won||r.phase==RunPhase.Failed)){ShowRiftVictory();return;}ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.training>=0?r.action:Loc.F("균열 {0}단계",r.stage)+" · "+Loc.StoredText(r.action),ShowResult);
             game.RecordGuide(()=>FirstPlayGuide.ReadResult(game.Store.Data,r));
             var next=r.training<0?FirstPlayRecommendation.Choose(game.Store.Data,r):null;
             if(r.training<0)ShowResultProgress(r,next);
@@ -460,9 +473,10 @@ namespace Hellscript
         }
         void Update()
         {
+            RefreshCanvasScale();
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
-            TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
+            TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();
             PresentationMetrics.HudCalls++;

@@ -109,7 +109,7 @@ namespace Hellscript
             int stage=Mathf.Clamp(SelectedStage,1,Mathf.Min(1000,Store.Data.Hero.highestClear+1));
             try{Combat=new CombatSimulation(Store.Data,catalog,stage,training,snapshot,seed,ownedTraining:!fullSkillTraining,liveOps:training<0&&snapshot==null?LiveOps?.Capture(stage):null);}
             catch(Exception e){Combat=previous;BlockRepeat(RepeatBlock.Configuration,e.Message);Notify(e.Message);return;}
-            if(training<0){Store.Data.suspendedRun=Combat.State;Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
+            if(training<0){Store.Data.suspendedRun=Combat.State;Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRecommendedLoot=(id,policy,rarityOnly)=>Store.CommitRecommendedLoot(Combat.State,id,policy,rarityOnly);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
             if(training<0)
             {
                 var continuing=(continueRepeat||resume)&&previousSession?.heroId==Combat.Hero.id&&(!resume||previousSession.runId==Combat.State.id)?
@@ -221,7 +221,8 @@ namespace Hellscript
         public void TapPlaza(Vector2 screen)
         {
             if(Town==null||UI==null||UI.Page!="plaza"||Active||UI.CommonPanelOpen||UI.TownNavigationOpen||!UiSafeArea.Frame.Contains(screen))return;
-            if(World.TryPickStation(screen,out var station))RequestStation(station);
+            if(World.TryPickNpc(screen,out var npc))RequestNpc(npc.id);
+            else if(World.TryPickStation(screen,out var station))RequestStation(station);
             else if(World.TryPickTownGround(screen,out var point))Town.RequestPoint(point);
         }
         readonly System.Collections.Generic.List<RaycastResult> townUIHits=new System.Collections.Generic.List<RaycastResult>();
@@ -239,7 +240,7 @@ namespace Hellscript
             {
                 input+=new Vector2((keyboard.dKey.isPressed||keyboard.rightArrowKey.isPressed?1:0)-(keyboard.aKey.isPressed||keyboard.leftArrowKey.isPressed?1:0),
                     (keyboard.wKey.isPressed||keyboard.upArrowKey.isPressed?1:0)-(keyboard.sKey.isPressed||keyboard.downArrowKey.isPressed?1:0));
-                if(keyboard.eKey.wasPressedThisFrame){InteractTown();return;}
+                if(keyboard.eKey.wasPressedThisFrame){TalkTown();return;}
             }
             var pointer=Pointer.current;
             if(pointer!=null&&pointer.press.wasPressedThisFrame&&!TownPointerOverUI(pointer.position.ReadValue()))TapPlaza(pointer.position.ReadValue());
@@ -303,6 +304,10 @@ namespace Hellscript
             if(Combat==null){TickPlaza(Mathf.Min(Time.unscaledDeltaTime,.25f));if(!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}}return;}
             // This display-only pause is not serialized into the run. Existing pause reasons
             // and the partial simulation tick remain exactly as they were on entry.
+            // Detail windows own a pause lease. Do not charge fatigue, advance repeat delay,
+            // or let portal automation touch the containers while the player is inspecting them.
+            if(IdleHunting && UI.CommonPanelOpen)
+            { combatClock.Pause(); UpdateIdlePresentation(); return; }
             SettleRiftAttendance(elapsed);
             TickTutorial();
             if(UI.CommonPanelOpen&&Active&&!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}

@@ -43,7 +43,7 @@ namespace Hellscript.Tests
             var p=new GlobalHudLayout(1600,900);
             Assert.That(p.scale,Is.EqualTo(1));Assert.That(p.passives.Length,Is.EqualTo(3));Assert.That(p.actives.Length,Is.EqualTo(4));
             Assert.That(p.actives.All(r=>Mathf.Abs(r.width-76.8f)<.001f),Is.True);
-            Assert.That(p.potions.All(r=>r.width==45&&r.y>p.actives[0].yMax),Is.True);
+            Assert.That(p.potions.All(r=>r.width==45&&Mathf.Abs(r.center.y-p.actives[0].center.y)<.001f),Is.True);
             Assert.That(p.actives[0].x-p.passives[2].xMax,Is.EqualTo(24).Within(.001));
             Assert.That(p.status.width,Is.EqualTo(230));Assert.That(p.maximumStatusWidth,Is.EqualTo(408));
             Assert.That(p.xp,Is.EqualTo(new Rect(32,16,1536,3)));
@@ -58,22 +58,49 @@ namespace Hellscript.Tests
                 for(int refresh=0;refresh<30;refresh++)Assert.That(new GlobalHudLayout(800,450).FontSize(font,10),Is.EqualTo(expected));
             }
         }
-        [Test] public void PortraitKeepsSeparateRowsAndShortXp()
+        [TestCase(800,450,.5f)] [TestCase(450,800,.5f)] [TestCase(640,360,1f)]
+        public void SmallerWindowsKeepShrinkingBelowTheOldMinimum(int width,int height,float reading)
         {
-            var p=new GlobalHudLayout(900,1600);
-            Assert.That(p.passives.All(r=>r.y>p.actives[0].yMax),Is.True);
-            Assert.That(p.potions.All(r=>r.y>p.passives[0].yMax),Is.True);
-            Assert.That(p.actives[0].width,Is.EqualTo(64));Assert.That(p.potions[0].width,Is.EqualTo(60));Assert.That(p.xp.width,Is.EqualTo(260));
+            var large=new GlobalHudLayout(width,height,reading);var small=new GlobalHudLayout(width/2f,height/2f,reading);
+            Assert.That(small.scale,Is.EqualTo(large.scale*.5f).Within(.0001));
+            Assert.That(small.Pixels(small.seal).width,Is.EqualTo(large.Pixels(large.seal).width*.5f).Within(.001));
+            Assert.That(UiTheme.Scale(new Rect(0,0,width/2f,height/2f)),Is.EqualTo(UiTheme.Scale(new Rect(0,0,width,height))*.5f).Within(.0001));
+        }
+        [Test] public void PortraitKeepsTheSameHudCompositionAsLandscape()
+        {
+            var p=new GlobalHudLayout(900,1600);var wide=new GlobalHudLayout(1600,900);
+            Assert.That(p.passives.All(r=>r.y==p.actives[0].y),Is.True);
+            Assert.That(p.potions.All(r=>r.xMax<p.passives[0].xMin),Is.True);
+            Assert.That(p.actives[0].width,Is.EqualTo(wide.actives[0].width));Assert.That(p.potions[0].width,Is.EqualTo(wide.potions[0].width));Assert.That(p.xp.width,Is.EqualTo(wide.xp.width));
+        }
+        [TestCase(440,956)] [TestCase(956,440)] [TestCase(1600,1000)] [TestCase(2100,900)]
+        public void EveryHudPartPreservesItsSizeAndRelativePositionAsOneSet(int w,int h)
+        {
+            var reference=new GlobalHudLayout(1600,900);
+            Rect[] Parts(GlobalHudLayout p)=>new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.xp,p.xpText,p.status,p.potionTray}.Concat(p.passives).Concat(p.actives).Concat(p.potions).ToArray();
+            var original=Parts(reference);
+            foreach(float reading in new[]{.5f,1f,1.5f})
+            {
+                var current=new GlobalHudLayout(w,h,reading);var parts=Parts(current);
+                for(int i=0;i<parts.Length;i++)
+                {
+                    Assert.That(parts[i].size,Is.EqualTo(original[i].size),"HUD parts must not resize independently");
+                    Assert.That((parts[i].position-current.seal.position-original[i].position+reference.seal.position).magnitude,Is.LessThan(.001f),"HUD parts must not rearrange on rotation");
+                }
+                Assert.That(current.occupiedHeight,Is.EqualTo(reference.occupiedHeight));
+            }
         }
         [TestCase(640,360,.5f)] [TestCase(640,360,1.5f)] [TestCase(360,640,1.5f)] [TestCase(1200,900,1.5f)] [TestCase(2000,900,1)]
         public void AllSevenSkillsAndThreePotionsStayInside(int w,int h,float scale)
         {
             var p=new GlobalHudLayout(w,h,scale);
+            Assert.IsFalse(p.wrapped,"Skill wrapping is forbidden at every size and reading preference.");
+            Assert.That(p.passives.Concat(p.actives).All(r=>r.y==p.actives[0].y),Is.True);
             foreach(var r in p.passives.Concat(p.actives).Concat(p.potions))
             {Assert.That(r.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.yMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.xMax,Is.LessThanOrEqualTo(p.width+.01f));Assert.That(r.yMax,Is.LessThanOrEqualTo(p.height+.01f));}
             for(int a=0;a<p.actives.Length;a++)foreach(var passive in p.passives)Assert.That(p.actives[a].Overlaps(passive),Is.False);
             foreach(var potion in p.potions)foreach(var skill in p.actives.Concat(p.passives))
-                Assert.That(potion.yMin,Is.GreaterThan(skill.yMax),"Potions must stay above every skill row.");
+                Assert.That(potion.xMax,Is.LessThan(skill.xMin),"Potions must stay beside the single skill row.");
         }
         [Test] public void FadesOnlyHiddenEdgesAndApproachesBoundaryContinuously()
         {
@@ -91,10 +118,11 @@ namespace Hellscript.Tests
             foreach(float factor in new[]{.5f,1,1.5f})
             {
                 var p=new GlobalHudLayout(width,height,factor,style);
-                float baseline=p.landscape?Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8):style.skillBottom;
+                float baseline=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
                 Assert.That(p.actives[0].yMin,Is.EqualTo(baseline),"The bottom row must not float upward in portrait.");
                 if(p.landscape)Assert.That(p.actives[0].yMin-style.captionHeight,Is.GreaterThan(p.xp.yMax),"Skill captions must clear the XP line.");
-                Assert.That(p.potionTray.yMin,Is.GreaterThan(p.passives.Max(r=>r.yMax)));
+                Assert.That(p.potionTray.xMax,Is.LessThan(p.passives.Min(r=>r.xMin)));
+                Assert.That(p.potions[0].center.y,Is.EqualTo(p.actives[0].center.y).Within(.001));
                 Assert.That(p.potionTray.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(p.potionTray.xMax,Is.LessThanOrEqualTo(p.width));
                 foreach(var bottle in p.potions)
                 {Assert.IsTrue(p.potionTray.Contains(bottle.min));Assert.IsTrue(p.potionTray.Contains(bottle.max));}

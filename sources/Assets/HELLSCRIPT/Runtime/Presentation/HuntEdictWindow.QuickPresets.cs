@@ -86,6 +86,7 @@ namespace Hellscript
         }
         string QuickGroupSummary(HuntEdictUiGroup group)
         {
+            if(group.tab=="autoEquip"||group.ids.Contains("bag.warehouseFull"))return HuntEdictSummary.ForGroup(group,Session.Draft.edict,SkillName);
             string scope=HuntEdictQuickPresets.GlobalScope(group),selected=QuickPresetSelection(scope);
             return selected==HuntEdictQuickPresets.Custom?Loc.T("직접 설정")+" · "+HuntEdictSummary.ForGroup(group,Session.Draft.edict,SkillName):HuntEdictQuickPresets.For(scope).Single(p=>p.id==selected).Name;
         }

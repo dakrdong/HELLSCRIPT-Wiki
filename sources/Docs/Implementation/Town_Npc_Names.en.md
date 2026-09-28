@@ -1,5 +1,6 @@
 # Town NPC names and service labels
 
+Updated on: 2026-09-27
 작성일: 2026-09-22
 
 [한국어](Town_Npc_Names.md)
@@ -58,3 +59,7 @@ The tested player included pre-existing changes in the active checkout. Input wa
 ![Rift attendant and town residents](TownNpcEvidence/npc-RiftKeeper-ko.png)
 
 ![Weapon merchant in English portrait](TownNpcEvidence/npc-Merchant-en.png)
+
+## Portrait dialogue expansion · 2026-09-27
+
+The existing eight names remain unchanged. Previously unnamed gambling, training, jewelry and rune attendants are assigned Jacques Chei, Turk Garbi, Guzel Pan and Mishu Karu from the original candidate list. All twelve NPCs receive distinct upper-body portraits and greetings. Residents gain conversation only, without services. See [NPC portraits and dialogue](Npc_Dialogue_Portraits.en.md) for identities, behavior and validation; the September 22 results above describe the earlier implementation.

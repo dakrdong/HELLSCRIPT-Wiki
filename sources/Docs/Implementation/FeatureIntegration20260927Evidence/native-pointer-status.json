@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "commit": "949e844a50ff705db5307101581cdaa9a32b0cd3",
+  "platform": "macOS",
+  "input": "Codex native pointer on isolated development player",
+  "checks": [
+    "Clicked kept item slot: shared ItemDetailPopup and compact source/status + Close footer appeared.",
+    "Clicked shared footer Close: result page returned with the original rarity border and no inner keyboard focus border."
+  ],
+  "screenshots": [
+    "native-pointer-compact-detail.png",
+    "native-pointer-result-return.png"
+  ],
+  "notVerified": [
+    "physical iPhone or Android"
+  ],
+  "note": "A transient ScreenCaptureKit capture error after close was resolved by observing the current screenshot."
+}

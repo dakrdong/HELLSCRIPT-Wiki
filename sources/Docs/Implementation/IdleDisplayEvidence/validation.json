@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-27",
+  "branch": "codex/power-saving-hunt",
+  "base": "bc71ab3f4761a0305e3607c0f97ccf12d6b0834d",
+  "unity": "6000.6.0f1",
+  "platform": "macOS Development Player",
+  "hardware": "Apple M3 Pro (Mac15,7)",
+  "build": "Builds/PowerSaving/HELLSCRIPT.app",
+  "buildErrors": 0,
+  "editMode": {
+    "passed": 148,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "ForegroundCombatClockTests",
+      "IdleHuntJournalTests",
+      "SharedUiTests",
+      "RepeatHuntTests",
+      "RecommendedEquipmentTests",
+      "IdleSettlementTests"
+    ]
+  },
+  "native": "passed",
+  "restart": "passed",
+  "uiContract": {
+    "passed": true,
+    "tests": 9
+  },
+  "viewportMatrix": [
+    "440x956",
+    "956x440",
+    "1600x900",
+    "1600x1000",
+    "2100x900"
+  ],
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "readingScales": [
+    100,
+    150
+  ],
+  "input": "Synthetic uGUI pointer raycasts, down/up/click and scroll; native macOS player",
+  "powerEvidence": "Same-build observer counters: see runtime.txt. No CPU busy time, GPU energy or battery measurement.",
+  "physicalMobile": "not tested",
+  "mainMerged": false,
+  "publicWikiDeployed": false,
+  "expectedError": "An isolated .tmp directory deliberately rejects the save; disk content is preserved and combat pauses.",
+  "harnessCorrection": "Await real asynchronous rift admission; source initial entry was not broken.",
+  "testCorrection": "SharedUiTests group count was 25 before prerequisite auto-equipment groups increased the unchanged source to 35; expectation is now 35."
+}

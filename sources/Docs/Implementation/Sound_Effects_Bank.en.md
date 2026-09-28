@@ -2,6 +2,8 @@
 
 Date: 2026-09-26 · [한국어](Sound_Effects_Bank.md)
 
+> Finalization, 2026-09-27: this document records the preceding DSP bank and its validation. [ElevenLabs game audio](ElevenLabs_Game_Audio.en.md) is now the final set; retired WAVs and synthesis recipes have been removed. The formats, techniques, test counts and generation commands below are historical, not current maintenance instructions.
+
 Every sound effect in the game was remade and wired in. The bank replaces the 20 temporary synthesized cues on `main` and covers system sounds (buttons, handling equipment, gold, salvage), all 54 class skills, battle cries, pain and death voices, 12 enemy archetypes, elites, 3 bosses and rift events: **283 sounds with 469 variations**. The sanctuary and rift music loops are unchanged.
 
 ## Direction and provenance

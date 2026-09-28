@@ -53,12 +53,22 @@ Unity 편집기의 AI 도구로 야만전사 참고 이미지 4장과 3D 모델 
 
 `Assets/HELLSCRIPT/Scenes/Hellscript.unity`의 최상위에 `Barbarian_Preview` 프리팹 인스턴스를 배치했다. 원점에 놓고 세워 보이도록 회전만 적용한 확인용 배치이며, 기존 전투의 영웅 표현을 이 모델로 교체한 것은 아니다. 실행하면 시작 씬에 함께 보이므로 정식 연결 전까지는 확인용이라는 점을 구분한다.
 
-## 효과음 뱅크 (2026-09-26)
+## 이전 효과음 뱅크 (2026-09-26)
+
+아래는 이전 DSP 합성음의 출처 기록이다. 현재 음원 교체는 [ElevenLabs 게임 음향](ElevenLabs_Game_Audio.md)을 따른다.
 
 - `Assets/HELLSCRIPT/Resources/Audio/Sfx`: 효과음 283종, WAV 469개, 48 kHz·16-bit 모노. `tools/generate_sfx.py`와 `tools/sfx`의 시드 고정 DSP 제작법으로 합성한 원본이다.
 - 외부 녹음·샘플·음성 합성 엔진·AI 음향 모델을 쓰지 않았다. 디아블로 4는 질감의 참고로만 삼았으며 그 게임의 음원은 추출하거나 사용하지 않았다.
 - 목소리(함성·신음·죽음·괴물 소리)도 성문 펄스와 성도 공명기 모델로 합성한 비언어 발성이다. 실제 사람의 목소리를 녹음하거나 흉내 낸 것이 아니다.
 - 출시 음향 승인과 청감 평가를 마친 자산이 아니다. 자세한 구성과 검증: [효과음 전면 교체](Sound_Effects_Bank.md).
+
+## ElevenLabs 게임 음향 (2026-09-27)
+
+- 효과음은 `eleven_text_to_sound_v2`, 배경음은 `eleven_music_v2`를 사용했다. 공식 MCP의 실제 생성 결과에서 모델 식별자를 확인했다.
+- 선택한 원본 MP3와 생성 ID·전체 프롬프트·매개변수·원본 및 편집본 SHA-256을 `AudioSources/ElevenLabs`에 보존한다. 게임은 48 kHz PCM16 WAV를 Unity에서 압축해 사용한다. WAV 변환을 무손실 원본 생성으로 표시하지 않는다.
+- 사람의 청감 검토와 출시 승인은 별도 상태로 남긴다. 전체 구성·편집·검증: [한국어](ElevenLabs_Game_Audio.md) · [English](ElevenLabs_Game_Audio.en.md).
+
+English: effects use the verified `eleven_text_to_sound_v2` model and music uses `eleven_music_v2` through the official MCP. Selected MP3 sources, prompts, parameters, generation IDs and source/master SHA-256 hashes are retained in `AudioSources/ElevenLabs`. Runtime WAV conversion does not recover lost MP3 detail. Human listening review and release approval remain separate.
 
 ## 절차적 3D 제작 도구와 월드 셰이더 (2026-09-28)
 
@@ -66,7 +76,11 @@ Unity 편집기의 AI 도구로 야만전사 참고 이미지 4장과 3D 모델 
 - `Assets/HELLSCRIPT/Tests/Editor/Fixtures/WorldArt/`: 가져오기 규칙을 검사하려고 `tools/art3d/fixture_probe.py`로 만든 시험용 모델과 텍스처다. `Resources` 밖에 있어 게임 빌드에 들어가지 않는다.
 - `Assets/HELLSCRIPT/Resources/RiftTerrain.shader`, `WorldFx.shader`, `WorldTelegraph.shader`와 `Resources/Rendering/WorldPost_*.asset`: 이 저장소에서 직접 작성한 셰이더와 후처리 설정이다.
 - 디아블로 4는 어둡고 무게감 있는 분위기의 참고로만 삼았다. 그 게임의 모델·텍스처·이펙트·이름·로고는 추출하거나 옮기지 않았다.
-- 이 도구로 만든 영웅·일반 적·보스·필드·소품·마을 모델은 작업 브랜치(`claude/art-*`)에 있으며 이번 병합에 포함하지 않았다. 게임 화면에 연결할 때 함께 병합하고 이 절에 기록한다. 모든 결과물은 개발용 후보 자산이며 출시 승인을 뜻하지 않는다. 자세한 내용: [다크 고딕 개편 1단계](Dark_Gothic_Overhaul_Stage1.md).
+- 이 도구로 만든 영웅·일반 적·보스·필드·소품·마을 모델의 소스와 자산은 2026-09-28 전체 브랜치 통합에 포함했다. 일부 모델의 실제 게임 화면 연결은 후속 작업으로 남아 있다. 모든 결과물은 개발용 후보 자산이며 출시 승인을 뜻하지 않는다. 자세한 내용: [다크 고딕 개편 1단계](Dark_Gothic_Overhaul_Stage1.md).
+
+## 출석 이벤트 진입 아이콘 — 2026-09-28
+
+`Art/Attendance/event-attendance.png`는 달력·체크·보상 상자가 있는 원형 황동 아이콘이다. 네이티브 RGBA 원본을 변경 없이 복사했다. 내장 도구의 `transparent_background=true`를 사용했고 실제 투명 픽셀과 가장자리 알파를 검증했다. 모델 선택 인자와 반환 모델 정보가 없어 `gpt-image-2` 제작으로 단정하지 않는다. 상태는 `candidate_model_unknown`, 개발용이며 출시 아트 승인은 별도다. [제작 기록](../Art/Attendance/event-icon-manifest.json)과 [알파 검사](../Art/Attendance/event-icon-validation.json)를 참조한다.
 
 ## 월드 이펙트 텍스처 (2026-09-28)
 
