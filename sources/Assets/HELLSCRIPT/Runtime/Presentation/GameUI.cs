@@ -45,6 +45,10 @@ namespace Hellscript
             shell=Rect("Display",canvasObject.transform);Stretch(shell);
             root=Rect("Safe area",canvasObject.transform);Stretch(root);ApplySafeArea();
             if(FindAnyObjectByType<EventSystem>()==null){var es=new GameObject("UI Input",typeof(EventSystem),typeof(InputSystemUIInputModule));es.GetComponent<InputSystemUIInputModule>().AssignDefaultActions();}
+            // Tutorial staging draws above the play HUD (105) and below every content window (400+).
+            var stage=new GameObject("Tutorial staging",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));stage.transform.SetParent(transform,false);
+            var stageCanvas=stage.GetComponent<Canvas>();stageCanvas.renderMode=RenderMode.ScreenSpaceOverlay;stageCanvas.sortingOrder=130;
+            cinematic=stage.AddComponent<TutorialCinematic>();cinematic.Initialize(()=>InterfaceFactor);
             InitializeGlobalHud();
             if(game.Store==null)
             {Base("recovery","저장 복구가 필요합니다","진행 기록을 덮어쓰지 않고 게임을 멈췄습니다");Note(content,game.Notice,22,360,pale);FooterButton(0,1,"게임 종료",()=>Application.Quit());}

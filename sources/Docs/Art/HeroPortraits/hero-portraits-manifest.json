@@ -1,0 +1,81 @@
+{
+ "surface": "built-in image_gen via Codex CLI (imagegen skill)",
+ "requestedBy": "user standing preference: request new screen art from GPT",
+ "verifiedModel": null,
+ "provenance": "candidate_model_unknown",
+ "productionApproved": false,
+ "alpha": "native PNG alpha; no chroma key or background-removal postprocessing",
+ "references": [
+  "NPC portraits anton-jindark, mark-kus (style)",
+  "CharacterSelection Warrior/Ranger/Mage frame 0 (identity)"
+ ],
+ "review": "Accepted 2026-09-28 by Claude for the dialogue listener: class identity, left-facing three-quarter pose, NPC portrait style; corners transparent, bottom edge opaque where the body is cut.",
+ "assets": [
+  {
+   "id": "hero-warrior",
+   "file": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/hero-warrior.png",
+   "sha256": "768ba062714bf668950acba46d83dea6449c1db78c4e695e21da1d8f128bec80",
+   "prompt": "Create ONE finished 2D character dialogue portrait for the dark-fantasy game HELLSCRIPT. Use case: stylized-concept. Vertical 2:3 transparent PNG (1024x1536) with preserved native alpha: exactly one isolated character shown from head to waist, the whole head, hair and both shoulders inside the image, the body continuing off the bottom edge so the bottom edge cuts through the waist. Three-quarter body angle facing slightly LEFT while looking toward the viewer (this character stands on the right side of a dialogue scene, facing the speaker on the left). Style: richly hand-painted premium dark-fantasy RPG illustration matching the style references, natural adult anatomy, expressive clearly readable face, grounded leather, metal and fabric, controlled detailed brushwork, warm golden key light and soft cool rim light, restrained palette, clean silhouette, high quality. Entire character opaque where appropriate, fully transparent surroundings and internal empty spaces, clean antialiased alpha edges. No scenery, no solid backdrop, no checkerboard pattern, no floor, no frame, no shadow outside the character, no watermark, no typography, no additional characters.\n\nSubject: The Warrior. Adult man, short swept-back dark brown hair, stubble, stern determined face, heavy dark leather armor with bronze-gold plate pauldrons and bracers, grey fur trim, crossed leather straps, holding a long steel greatsword upright across his body with the blade rising past his shoulder.\n\nReference images: style-anton-jindark.png and style-mark-kus.png are painting-style and dialogue-framing references only; do not copy their character identities. identity-warrior.png is the established character-identity reference: keep this character's face, hair, outfit, colours and weapon consistent while composing the requested waist-up portrait. The grey shown in the references is only a viewing background and must not appear in the output. Generate this one asset only: hero-warrior.",
+   "size": {
+    "width": 1024,
+    "height": 1536
+   },
+   "alpha": {
+    "has_alpha_channel": true,
+    "fully_transparent_pixel_fraction": 0.2521158854166667,
+    "corner_alpha": {
+     "top_left": 0,
+     "top_right": 0,
+     "bottom_left": 0,
+     "bottom_right": 248
+    },
+    "bottom_centre_alpha": 253
+   },
+   "model": "unknown"
+  },
+  {
+   "id": "hero-ranger",
+   "file": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/hero-ranger.png",
+   "sha256": "04ee34582d75efd992a592187cda37d08bfbc0d6b05b8fbc5a5062c745e54db0",
+   "prompt": "Create ONE finished 2D character dialogue portrait for the dark-fantasy game HELLSCRIPT. Use case: stylized-concept. Vertical 2:3 transparent PNG (1024x1536) with preserved native alpha: exactly one isolated character shown from head to waist, the whole head, hair and both shoulders inside the image, the body continuing off the bottom edge so the bottom edge cuts through the waist. Three-quarter body angle facing slightly LEFT while looking toward the viewer (this character stands on the right side of a dialogue scene, facing the speaker on the left). Style: richly hand-painted premium dark-fantasy RPG illustration matching the style references, natural adult anatomy, expressive clearly readable face, grounded leather, metal and fabric, controlled detailed brushwork, warm golden key light and soft cool rim light, restrained palette, clean silhouette, high quality. Entire character opaque where appropriate, fully transparent surroundings and internal empty spaces, clean antialiased alpha edges. No scenery, no solid backdrop, no checkerboard pattern, no floor, no frame, no shadow outside the character, no watermark, no typography, no additional characters.\n\nSubject: The Ranger. Adult woman, dark brown hair in a long side braid, calm focused face, dark green hood lowered over the shoulders, weathered dark brown leather coat with crossed belts and fur-edged hem, a quiver of arrows over the shoulder, holding a dark recurve bow in one hand.\n\nReference images: style-anton-jindark.png and style-mark-kus.png are painting-style and dialogue-framing references only; do not copy their character identities. identity-ranger.png is the established character-identity reference: keep this character's face, hair, outfit, colours and weapon consistent while composing the requested waist-up portrait. The grey shown in the references is only a viewing background and must not appear in the output. Generate this one asset only: hero-ranger.",
+   "size": {
+    "width": 1024,
+    "height": 1536
+   },
+   "alpha": {
+    "has_alpha_channel": true,
+    "fully_transparent_pixel_fraction": 0.2977174123128255,
+    "corner_alpha": {
+     "top_left": 0,
+     "top_right": 0,
+     "bottom_left": 0,
+     "bottom_right": 251
+    },
+    "bottom_centre_alpha": 253
+   },
+   "model": "unknown"
+  },
+  {
+   "id": "hero-mage",
+   "file": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/hero-mage.png",
+   "sha256": "3d55411a0d595708dc2847c1c362ddbd1e3957ac65bc513044aa593786883c8b",
+   "prompt": "Create ONE finished 2D character dialogue portrait for the dark-fantasy game HELLSCRIPT. Use case: stylized-concept. Vertical 2:3 transparent PNG (1024x1536) with preserved native alpha: exactly one isolated character shown from head to waist, the whole head, hair and both shoulders inside the image, the body continuing off the bottom edge so the bottom edge cuts through the waist. Three-quarter body angle facing slightly LEFT while looking toward the viewer (this character stands on the right side of a dialogue scene, facing the speaker on the left). Style: richly hand-painted premium dark-fantasy RPG illustration matching the style references, natural adult anatomy, expressive clearly readable face, grounded leather, metal and fabric, controlled detailed brushwork, warm golden key light and soft cool rim light, restrained palette, clean silhouette, high quality. Entire character opaque where appropriate, fully transparent surroundings and internal empty spaces, clean antialiased alpha edges. No scenery, no solid backdrop, no checkerboard pattern, no floor, no frame, no shadow outside the character, no watermark, no typography, no additional characters.\n\nSubject: The Mage. Adult woman, silver-white hair tied back with loose strands, pale skin, composed intense face, a hooded dark crimson and black embroidered robe with an ornate belt and pendant, one hand holding a softly glowing pale-blue orb of light and the other a dark staff topped with a pale-blue crystal.\n\nReference images: style-anton-jindark.png and style-mark-kus.png are painting-style and dialogue-framing references only; do not copy their character identities. identity-mage.png is the established character-identity reference: keep this character's face, hair, outfit, colours and weapon consistent while composing the requested waist-up portrait. The grey shown in the references is only a viewing background and must not appear in the output. Generate this one asset only: hero-mage.",
+   "size": {
+    "width": 1024,
+    "height": 1536
+   },
+   "alpha": {
+    "has_alpha_channel": true,
+    "fully_transparent_pixel_fraction": 0.2607460021972656,
+    "corner_alpha": {
+     "top_left": 0,
+     "top_right": 0,
+     "bottom_left": 0,
+     "bottom_right": 0
+    },
+    "bottom_centre_alpha": 252
+   },
+   "model": "unknown"
+  }
+ ]
+}

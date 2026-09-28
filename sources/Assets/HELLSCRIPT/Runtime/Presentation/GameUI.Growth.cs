@@ -19,6 +19,7 @@ namespace Hellscript
                 var next=game.catalog.skills.Where(s=>s.heroClass==combat.Hero.heroClass&&s.unlock>level).OrderBy(s=>s.unlock).FirstOrDefault();
                 headerSubtitle.text=Loc.F("{0}{1} · 성장 보기", (level>=30?"최대 레벨":$"XP {combat.Hero.xp:N0} / {Economy.XpRequired(level):N0}"), (next!=null?Loc.F(" · 다음 스킬 Lv.{0}", next.unlock):""));
             }
+            else if(run.tutorial)headerSubtitle.text=TutorialObjective(run);
             var last=run.growthEvents.LastOrDefault();if(last==null)return;
             if(growthRunId==run.id&&growthNotifiedLevel==last.toLevel)return;growthRunId=run.id;growthNotifiedLevel=last.toLevel;
             ShowToast(Loc.F("Lv.{0} 달성{1}", last.toLevel, (last.unlockedSkills.Count>0?Loc.F(" · {0} 해금 · 성장에서 설정 확인", string.Join(", ",last.unlockedSkills.Select(i=>game.catalog.skills[i].name))):" · HP 비율을 유지했습니다.")));

@@ -1,6 +1,6 @@
 # Tutorial progression and content guidance
 
-Updated: 2026-09-25
+Updated: 2026-09-28
 
 This design implements the approved flow: dedicated map → real armor acquisition and equipment → actual boss → town → rifts → Hunt Edict editing → new skill equipment → guidance at each content unlock.
 
@@ -25,6 +25,18 @@ This design implements the approved flow: dedicated map → real armor acquisiti
 | P06 | Read guardian preparation and continue. | Equipment stats refresh; original combat engine spawns a real boss. |
 | P07 | Defeat the guardian. | Actual boss death; death offers section retry without repeated rewards. |
 | P08 | Confirm town arrival. | Account completion and run removal saved atomically; armor remains owned. |
+
+### Staging
+
+Since 2026-09-28 each step is shown as a scene with spoken lines instead of an explanation window. The rift keeper Anton Jindark talks to the hero through his amber compass.
+
+- P01–P02: a fade-in from black, cinematic bars, the camera leaning in and the *Prologue · Road to the sanctuary* title card. During his lines the camera frames the monsters blocking the road.
+- P03: a new-objective notice, the kill count under the battle title and a short line from Anton at the first kill.
+- P04–P05: an objective-completed notice, the item reveal and the breathing border with a pointer in the inventory.
+- P06–P07: the red warning gauge explained, the entrance when the boss comes on screen (pause, camera, roar, name card), and the falling and victory cards.
+- P08: after a fade, the *Ashwood · Settlers' village* place card and Anton's town guidance.
+
+Staging never changes progression or saving, and any scene can be ended at once by tapping or skipping. See [tutorial staging](../Implementation/Tutorial_Staging.en.md).
 
 ## All 38 guide groups
 

@@ -432,6 +432,19 @@ def build_resources(databases):
             refs=[source_ref(npc_art+'prompts.json'),source_ref(npc_art+'generation-results.json'),source_ref(npc_art+'alpha-validation.json'),
                   source_ref('Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs')],
             related=['npc-dialogue-portraits','npc-dialogue-portraits.en']))
+    hero_art='Docs/Art/HeroPortraits/hero-portraits-manifest.json'
+    hero_manifest=json.loads(read(hero_art))
+    for hero in hero_manifest['assets']:
+        path=hero['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        if digest(raw)!=hero['sha256']:raise ValueError('Hero portrait differs from its native generated source: '+hero['id'])
+        rows.append(record('dialogue-portrait-'+hero['id'],hero['id'],'이미지 원본',
+            '대화에서 듣는 쪽에 어둡게 서는 주인공 상반신 초상화입니다. / Hero upper-body portrait that listens, dimmed, in dialogue scenes.',
+            {'원본 경로':path,'해상도':'1024 × 1536','SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '제작 방법':'Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved','출처 확인':hero_manifest['provenance'],
+             '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
+            hero_art,status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
+            refs=[source_ref(hero_art),source_ref('Docs/Art/HeroPortraits/hero-portraits-prompt.txt'),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/StoryDialogueWindow.cs')],
+            related=['tutorial-staging','tutorial-staging.en']))
     byid={d['id']:d for d in databases}
     for group in ['skills','heroes','items']:
         for item in byid[group]['rows']:

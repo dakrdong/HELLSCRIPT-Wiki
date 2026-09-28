@@ -1,0 +1,17 @@
+# Task: three hero dialogue portraits for HELLSCRIPT
+
+Use the installed `imagegen` skill in its built-in `image_gen` mode. Make exactly ONE image generation call per asset below (three calls in total). Do not edit, recolour, crop, resize, chroma-key or remove backgrounds from any output. Keep the PNG exactly as generated.
+
+After each call, copy the generated PNG byte-for-byte from `~/.codex/generated_images/...` into this folder as `out/<id>.png`. Then write `out/manifest.json` with one entry per asset: `id`, the exact prompt you used, the source path you copied from, pixel size, whether the PNG has an alpha channel, the fraction of fully transparent pixels, the alpha of the four corners and of the bottom-centre pixel, and `"model": "unknown"` (the built-in surface does not report a model; do not guess one). Finally print a one-line summary per asset.
+
+Reference images attached:
+- `style-anton-jindark.png`, `style-mark-kus.png`: the target painting style and framing (existing NPC dialogue portraits of this game, shown here on grey only for viewing; the real files are transparent).
+- `identity-warrior.png`, `identity-ranger.png`, `identity-mage.png`: the established look of each playable class (full-body selection art). Keep face, hair, outfit, colours and weapon consistent with these.
+
+Shared requirements for every asset (write them into each prompt):
+Create ONE finished 2D character dialogue portrait for the dark-fantasy game HELLSCRIPT. Use case: stylized-concept. Vertical 2:3 transparent PNG (1024x1536) with preserved native alpha: exactly one isolated character shown from head to waist, the whole head, hair and both shoulders inside the image, the body continuing off the bottom edge so the bottom edge cuts through the waist. Three-quarter body angle facing slightly LEFT while looking toward the viewer (this character stands on the right side of a dialogue scene, facing the speaker on the left). Style: richly hand-painted premium dark-fantasy RPG illustration matching the style references, natural adult anatomy, expressive clearly readable face, grounded leather, metal and fabric, controlled detailed brushwork, warm golden key light and soft cool rim light, restrained palette, clean silhouette, high quality. Entire character opaque where appropriate, fully transparent surroundings and internal empty spaces, clean antialiased alpha edges. No scenery, no solid backdrop, no checkerboard pattern, no floor, no frame, no shadow outside the character, no watermark, no typography, no additional characters.
+
+Assets:
+1. `hero-warrior`: the Warrior. Adult man, short swept-back dark brown hair, stubble, stern determined face, heavy dark leather armor with bronze-gold plate pauldrons and bracers, grey fur trim, crossed leather straps, holding a long steel greatsword upright across his body with the blade rising past his shoulder.
+2. `hero-ranger`: the Ranger. Adult woman, dark brown hair in a long side braid, calm focused face, dark green hood lowered over the shoulders, weathered dark brown leather coat with crossed belts and fur-edged hem, a quiver of arrows over the shoulder, holding a dark recurve bow in one hand.
+3. `hero-mage`: the Mage. Adult woman, silver-white hair tied back with loose strands, pale skin, composed intense face, a hooded dark crimson and black embroidered robe with an ornate belt and pendant, one hand holding a softly glowing pale-blue orb of light and the other a dark staff topped with a pale-blue crystal.

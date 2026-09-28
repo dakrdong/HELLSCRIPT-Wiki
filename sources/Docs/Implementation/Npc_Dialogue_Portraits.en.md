@@ -1,6 +1,6 @@
 # NPC portraits and food-inspired dialogue
 
-Updated on: 2026-09-27
+Updated on: 2026-09-28
 
 [한국어](Npc_Dialogue_Portraits.md)
 
@@ -42,6 +42,15 @@ Conversation reach uses the NPC's actual position. Services revalidate reach and
 The user approved using the available built-in image generation surface. Its response does not disclose the actual model, so these files are not claimed as verified `gpt-image-2` outputs. Provenance remains `candidate_model_unknown`, with user approval to use these built-in results recorded separately. Native PNG alpha is preserved without chroma key or background-removal postprocessing. The scoped importer preserves alpha, caps the imported long side at 1024, disables mipmaps and uses uncompressed textures; original PNG files remain intact.
 
 [Prompts](../Art/NpcPortraits/prompts.json) · [Generation results](../Art/NpcPortraits/generation-results.json) · [Alpha checks](../Art/NpcPortraits/alpha-validation.json) · [Portrait gallery](Npc_Dialogue_Portraits.md#초상화)
+
+## Story-scene layout (2026-09-28)
+
+NPC conversations are now drawn with the tutorial's [game dialogue box](Tutorial_Staging.en.md): as in the reference screen the user shared, large character art with transparent surroundings stands out of the text band. This section supersedes the layout described under *Interaction and ownership* below (a small picture inside the frame on the left).
+
+- A full-width band is docked to the bottom of the safe area at no more than 30% of its height. Its top fades in from clear, it is opaque behind text, and a cartouche on a brass rule carries the name and role.
+- In landscape the NPC stands on the left to about 80% of the screen height and the hero stands dimmed on the right. On a narrow portrait screen only the NPC stands, on the band. Figures stay inside the safe area and never overlap the greeting or the actions.
+- The greeting is centred and written glyph by glyph; one press completes it. Service, sell and goodbye can be pressed at once, even while it is being written. Close, Back, the E key, distance revalidation and service dispatch are unchanged.
+- The three hero busts were newly made with GPT; provenance and checks are in [tutorial staging](Tutorial_Staging.en.md).
 
 ## Compact bottom layout validation
 

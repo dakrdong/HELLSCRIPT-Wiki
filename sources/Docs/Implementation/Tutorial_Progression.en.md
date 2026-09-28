@@ -1,6 +1,6 @@
 # Tutorial implementation and validation
 
-Updated: 2026-09-25
+Updated: 2026-09-28
 
 The [design](../Design/Tutorial_Flow_Design.en.md) connects 38 guide groups to the existing game loop: dedicated map, real inventory equipment, town, rifts, Hunt Edict, skill changes and content practice.
 
@@ -35,7 +35,7 @@ Training, offline supplies, aspect imprinting and sweeping use existing free ope
 
 All new text uses the existing Korean keys and English localization table. Equipment and encounter variants have separate, localized explanations.
 
-`TutorialJournalWindow` was scaffolded with `tools/new_content_ui.py`. `ContentWindowView` owns the safe-area frame, navigation, scrolling body and actions. Actual inventory and shared details/comparison retain ownership of equipment UI. `TutorialAnchorRing` attaches to logical targets and follows their transforms through reflow. The journal records reading separately from actual execution.
+Since 2026-09-28 the mandatory map is told through the rift keeper Anton Jindark's lines and staged scenes, and the first use of a content is explained by its resident in the shared dialogue box; see [tutorial staging](Tutorial_Staging.en.md). `GameUI.TutorialStaging`, `StoryDialogueWindow` and `TutorialCinematic` own that staging. `TutorialJournalWindow` was scaffolded with `tools/new_content_ui.py`. `ContentWindowView` owns the safe-area frame, navigation, scrolling body and actions. Actual inventory and shared details/comparison retain ownership of equipment UI. `TutorialAnchorRing` attaches to logical targets, follows their transforms through reflow and draws a breathing border with a pointer. The journal records reading separately from actual execution.
 
 Mandatory map explanations pause safely. Regular rifts show nonblocking tips; full guidance stays in town. First content usage offers its guide with read, later and hide actions. Active practice takes priority. Attendance recording and offline settlement continue while their automatic popups are deferred during the first map, initial departure preparation and active combat.
 

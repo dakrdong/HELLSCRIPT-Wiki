@@ -137,7 +137,7 @@
 
 ## 튜토리얼 안내
 
-`TutorialJournalWindow`는 공통 창 템플릿을 사용한다. 실습 선택은 실제 소유품과 제작 정의를 구분하고 `ItemDetailView`를 재사용한다. 필수 장착은 기존 인벤토리와 `GameStore` 거래가 소유한다. `TutorialAnchorRing`은 실제 버튼의 논리 ID와 소유 아이템 칸에 연결되는 표시 부품이며 입력을 가로채거나 계정 상태를 변경하지 않는다. 전투 중의 짧은 안내와 HUD 진입 버튼은 기존 전투 HUD의 어댑터를 사용한다. [튜토리얼 구현](Tutorial_Progression.md)을 따른다.
+`TutorialJournalWindow`는 공통 창 템플릿을 사용한다. 실습 선택은 실제 소유품과 제작 정의를 구분하고 `ItemDetailView`를 재사용한다. 필수 장착은 기존 인벤토리와 `GameStore` 거래가 소유한다. `TutorialAnchorRing`은 실제 버튼의 논리 ID와 소유 아이템 칸에 연결되는 표시 부품이며 입력을 가로채거나 계정 상태를 변경하지 않는다. 전투 중의 짧은 안내와 HUD 진입 버튼은 기존 전투 HUD의 어댑터를 사용한다. 첫 맵의 설명과 콘텐츠 첫 이용 안내는 아래 이야기 대화창을 사용한다. [튜토리얼 구현](Tutorial_Progression.md)을 따른다.
 
 ## 균열 승리 결과 어댑터
 
@@ -157,4 +157,10 @@
 위치·행동 표시는 `IdleHuntStatus`가 실제 `RunState`·`RepeatHuntSession`을 읽는다. 목표 수는 `RiftObjectives`, 얼굴 인장은 `GlobalHudView.CreateSeal`·`Portrait`, 레벨·경험치는 `GlobalHudSnapshot.ReadGrowth`를 재사용한다. 절전 화면 갱신을 위해 일반 HUD 전체의 스킬·물약·효과 목록을 다시 만들지 않는다.
 ## NPC 대화
 
-`NpcDialogueWindow`는 공통 템플릿과 `ContentWindowView`를 사용하며, 표시 출처는 `EquipmentViewSource.Catalog`다. 인물 그림과 인사말은 콘텐츠 정의이며 계정 상태를 읽거나 변경하지 않는다. 필드를 최대한 드러내기 위해 공통 창의 `bottomDock` 옵션으로 안전 영역 하단에 배치한다. 높이는 안전 영역의 30% 이하이며 전체 화면을 어둡게 덮지 않는다. 그림은 왼쪽, 이름은 오른쪽 위, 인사말 스크롤은 오른쪽 본문에 두고 서비스·종료 행동은 하단에 고정한다. 세로에서는 행동 버튼이 창 전체 너비를 사용한다. 기존 중앙형 창은 기본 배치와 배경을 유지한다. `GameController.NpcDialogue`가 거리와 기존 서비스 접근을 재검증한다. [NPC 초상화와 대화](Npc_Dialogue_Portraits.md)에 인물·이미지 출처·검증을 기록한다.
+`NpcDialogueWindow`는 공통 템플릿과 `ContentWindowView`를 사용하며, 표시 출처는 `EquipmentViewSource.Catalog`다. 인물 그림과 인사말은 콘텐츠 정의이며 계정 상태를 읽거나 변경하지 않는다. 필드를 최대한 드러내기 위해 공통 창의 `bottomDock` 옵션으로 안전 영역 하단에 배치한다. 높이는 안전 영역의 30% 이하이며 전체 화면을 어둡게 덮지 않는다. 2026-09-28부터는 아래의 이야기 장면(`StoryDialogueWindow.Scene`)으로 그린다. 인물 그림은 띠 밖으로 솟되 안전 영역 안에 있고 인사말·행동과 겹치지 않는다. 인사말만 스크롤하며 서비스·종료 행동은 띠 아래쪽에 고정한다. 기존 중앙형 창은 기본 배치와 배경을 유지한다. `GameController.NpcDialogue`가 거리와 기존 서비스 접근을 재검증한다. [NPC 초상화와 대화](Npc_Dialogue_Portraits.md)에 인물·이미지 출처·검증을 기록한다.
+
+## 이야기 대화창과 튜토리얼 연출
+
+`StoryDialogueWindow`는 인물이 말하는 장면의 공통 대화창이다. `ContentWindowView`의 `bottomDock`을 사용하므로 안전 영역·입력 차단·뒤로가기·일시정지 임대는 창 관리자가 계속 소유한다. 화면 폭 전체의 대사 띠(위는 투명 그라데이션, 글자 뒤는 불투명), 금색 선 가운데의 장식 이름표, 띠 밖으로 솟은 투명 배경의 큰 인물(가로 화면은 오른쪽에 어둡게 선 주인공 포함), 가운데 정렬의 한 글자씩 표시, 다음·건너뛰기와 마지막 줄의 선택지를 제공한다. 버튼은 `ContentWindowView.Button`, 색은 `UiTheme`, 글꼴은 `UiFonts`를 사용한다. 한 글자씩 표시는 `Text.text`를 바꾸지 않고 글자 사각형의 투명도만 조절한다. `NpcDialogueWindow`는 `ContentWindowView.Open`에 `StoryDialogueWindow.Scene`을 넘겨 같은 장면을 그린다. 모든 문구는 한국어 원문을 전달하고 그릴 때 번역한다.
+
+튜토리얼 연출 층(`TutorialCinematic`)은 전투 HUD 위에 띠·암전·제목 카드·목표 알림·짧은 대사·장비 획득을 그리는 표시 전용 캔버스다. 캔버스는 기존 소유자인 `GameUI.cs`가 정렬 130으로 만들며, 콘텐츠 창(400 이상)보다 아래에 있다. 장비 획득은 `EquipmentSlotView`와 `EquipmentGradePalette`, 장식은 `EquipmentRevealGraphic`을 재사용한다. 계정을 읽거나 바꾸지 않으며 진행은 기존 `GameController` 명령이 소유한다. 전투 대화는 월드 표시를 이어 가도록 `blocksGameplay:false`로 열되 일시정지 임대는 유지한다. [튜토리얼 연출](Tutorial_Staging.md)에 흐름과 검증을 기록한다.

@@ -19,6 +19,10 @@ namespace Hellscript
         float elapsed;
         WorldLighting lighting;
         public WorldLighting Lighting=>lighting;
+        // Staging may frame a point and lean in; gameplay never reads these, and clearing them hands the camera back to the hero.
+        Vector2? stagedFocus;float stagedZoom=1,zoomNow=1;
+        public void Frame(Vector2? focus,float zoom=1,bool snap=false)
+        {stagedFocus=focus;stagedZoom=PlayerPrefs.GetInt(WorldLighting.ReduceMotionKey,0)!=0?1:zoom;if(snap)zoomNow=stagedZoom;}
         sealed class VisualFx {public GameObject go;public float life,total,growth=.35f,spin;public Vector3 scale,velocity;}
         public void Initialize(GameController controller)
         {
@@ -51,7 +55,7 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
-            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();
+            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearAttackFx();
@@ -147,7 +151,8 @@ namespace Hellscript
             if(snapPresentation&&currentFacing.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.LookRotation(currentFacing);
             else if(movement.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(movement),dt*14);
             var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(movement.sqrMagnitude>.001f?Mathf.Sin(elapsed*13)*.08f:0),0);
-            viewCamera.transform.position=snapPresentation?CameraPosition(run.position):Vector3.Lerp(viewCamera.transform.position,CameraPosition(run.position),dt*5);
+            var anchor=stagedFocus??run.position;
+            viewCamera.transform.position=snapPresentation?CameraPosition(anchor):Vector3.Lerp(viewCamera.transform.position,CameraPosition(anchor),dt*(stagedFocus.HasValue?2.4f:5));
             ApplyBattleViewport();
             foreach(var enemy in run.enemies)
             {
@@ -212,7 +217,7 @@ namespace Hellscript
             else go=Ring(world.transform,Position(kind==0||kind==4||kind==16||kind==20?origin:target)+Vector3.up*.15f,kind==24?2:Mathf.Clamp(amount,.8f,4),mat,kind==0?.16f:.09f);
             float life=kind==24?amount:kind==0?.22f:.45f;effects.Add(new VisualFx{go=go,life=life,total=life,scale=go.transform.localScale});
         }
-        void LateUpdate(){ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
+        void LateUpdate(){zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
         void ApplyBattleViewport()
         {
             if(viewCamera==null||presentationSuspended)return;
@@ -220,7 +225,7 @@ namespace Hellscript
             // the camera stays exact; it is held while the settings world frames the hero and dropped on a snap.
             lighting.ShakeHeld=settingsWorldOpen;if(snapPresentation)lighting.StopShake();
             if(settingsWorldOpen&&HasPresentedPlayer){ApplySettingsWorld();return;}
-            var viewport=GameplayViewport;viewCamera.rect=viewport;viewCamera.ResetAspect();viewCamera.orthographicSize=GameplayHalfHeight(viewport);
+            var viewport=GameplayViewport;viewCamera.rect=viewport;viewCamera.ResetAspect();viewCamera.orthographicSize=GameplayHalfHeight(viewport)*zoomNow;
         }
         void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);if(lighting!=null)lighting.Dispose();}
     }
