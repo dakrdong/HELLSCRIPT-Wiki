@@ -47,13 +47,20 @@ namespace Hellscript
             Vector2 offset=Vector2.ClampMagnitude((State.position-first.position)/(State.time-first.time),4);
             return Map.MoveDirect(State.position,State.position+offset,offset.magnitude,.1f);
         }
-        void BeginEnemyAction(EnemyState enemy,float? remaining=null)
+        void BeginEnemyAction(EnemyState enemy,float? remaining=null,int variant=0)
         {
-            var b=enemy.brain;var def=EnemyCombat.Attack(enemy.kind);var a=new EnemyActionState{id=State.nextId++,kind=enemy.kind,phase=EnemyActionPhase.Preparing,origin=enemy.position,aim=remaining.HasValue?enemy.aim:State.position,
-                preparation=remaining??def.preparation,remaining=remaining??def.preparation,remainingCharges=enemy.kind==7?2:enemy.kind==1?1:0};
+            var b=enemy.brain;var def=variant==1&&enemy.kind==14?EnemyCombat.GhoulLeap:EnemyCombat.Attack(enemy.kind);var a=new EnemyActionState{id=State.nextId++,kind=enemy.kind,phase=EnemyActionPhase.Preparing,origin=enemy.position,aim=remaining.HasValue?enemy.aim:State.position,
+                preparation=remaining??def.preparation,remaining=remaining??def.preparation,remainingCharges=enemy.kind==7||enemy.kind==12?2:enemy.kind==1?1:0,variant=variant};
             if(enemy.kind==9&&!remaining.HasValue)a.aim=EnemyPredictedAim(enemy);
             a.direction=(a.aim-a.origin).normalized;if(a.direction.sqrMagnitude<.00001f)a.direction=b.facing;
             if(enemy.kind==1||enemy.kind==7)a.aim=Map.MoveDirect(a.origin,a.origin+a.direction*8,8,.4f);
+            // The ghoul lands a metre short of the hero, never on top of it.
+            if(enemy.kind==14&&variant==1)a.aim=GhoulLanding(enemy);
+            // The briar witch's lance stops at the first wall.
+            if(enemy.kind==17)a.aim=Map.ProjectileEnd(a.origin,a.origin+a.direction*9,.35f,out _);
+            // The rime caller's ring is centred 2.6 m from the hero toward the caster: the hero stands in the band and
+            // escapes by stepping into the ring's middle or out past it.
+            if(enemy.kind==19&&!remaining.HasValue){var toward=a.origin-State.position;a.aim=State.position+(toward.sqrMagnitude>1e-6f?toward.normalized:Vector2.up)*2.6f;}
             b.action=a;b.facing=a.direction;enemy.aim=a.aim;enemy.windup=a.remaining;enemy.cooldown=Mathf.Max(enemy.cooldown,def.cooldown);
             EnemyMode(enemy,"공격 준비");EnemyEvent(enemy,"PREPARE",action:a.id,value:a.remaining,aim:a.aim);
         }
@@ -81,6 +88,15 @@ namespace Hellscript
         {
             var a=e.brain.action;float attack=EnemyAttackValue(e);EnemyEvent(e,"RELEASE",EnemyCombat.Id(a.kind),a.id);
             if(a.kind==1||a.kind==7){a.phase=EnemyActionPhase.Charging;a.damage=attack*1.5f;a.moved=0;a.hitHero=false;e.windup=0;EnemyMode(e,"돌진");return;}
+            // The sandworm tunnels and the ghoul leaps before they strike (a.moved counts seconds travelled).
+            if(EnemyCombat.Travels(a)){a.phase=EnemyActionPhase.Charging;a.moved=0;e.windup=0;EnemyMode(e,a.kind==13?"잠행":"도약");return;}
+            if(EnemyCombat.OwnShape(a,"",0) is EnemyThreat own)
+            {
+                StrikeOwn(e,a,own,attack);
+                // The marauder's second cut: the same arc again after 0.35 s.
+                if(a.kind==12&&--a.remainingCharges>0){a.phase=EnemyActionPhase.Preparing;a.remaining=a.preparation=.35f;e.windup=.35f;EnemyMode(e,"공격 준비");EnemyEvent(e,"FOLLOWUP_PREPARE",EnemyCombat.Id(a.kind),a.id,.35f,a.aim);return;}
+                FinishEnemyAction(e);return;
+            }
             if(a.kind==2||a.kind==8)EnemyProjectiles(e,a.id,a.origin,a.direction,attack,EnemyCombat.Id(a.kind),a.kind==8);
             else if(a.kind==3||a.kind==9)CreateEnemyHazard(e,EnemyCombat.Id(a.kind),a.aim,0,a.kind==3?4:3,attack*(a.kind==3?.25f:.3f),a.kind==3?4:1,action:a.id);
             else if(a.kind==4)
@@ -96,12 +112,26 @@ namespace Hellscript
             }
             FinishEnemyAction(e);
         }
+        Vector2 GhoulLanding(EnemyState e){var back=e.position-State.position;return Map.MoveDirect(State.position,State.position+(back.sqrMagnitude>1e-6f?back.normalized:Vector2.up),1,.4f);}
+        void StrikeOwn(EnemyState e,EnemyActionState a,in EnemyThreat shape,float attack)
+        {
+            var hit=EnemyCombat.OwnHit(a.kind);
+            if(!EnemyCombat.Contains(shape,State.position)||!Map.LineClear(shape.origin,State.position))return;
+            Hurt(attack*hit.power,hit.element,e.id.ToString(),EnemyCombat.Id(a.kind),a.id,a.id);
+            if(hit.slow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,hit.slow*(1-Stats.ccReduction));
+        }
         void TickEnemyAction(EnemyState e,float dt)
         {
             var a=e.brain.action;
             if(a.phase==EnemyActionPhase.Preparing)
             {a.remaining=Mathf.Max(0,a.remaining-dt);e.windup=a.remaining;if(a.remaining<=.00001f)ReleaseEnemyAction(e);return;}
             if(a.phase!=EnemyActionPhase.Charging)return;
+            if(EnemyCombat.Travels(a))
+            {
+                float total=EnemyCombat.Travel(a);a.moved+=dt;e.position=Vector2.Lerp(a.origin,a.aim,total>1e-5f?Mathf.Clamp01(a.moved/total):1);
+                if(a.moved<total-1e-5f)return;
+                e.position=a.aim;Map.Repath(e.id+1);StrikeOwn(e,a,EnemyCombat.OwnShape(a,"",0).Value,EnemyAttackValue(e));FinishEnemyAction(e);return;
+            }
             Vector2 from=e.position,to=Map.MoveDirect(from,a.aim,Mathf.Min(12*dt,Mathf.Max(0,8-a.moved)),.4f);float moved=Vector2.Distance(from,to);a.moved+=moved;e.position=to;
             if(!a.hitHero&&!float.IsInfinity(Entry(from,to,State.position,1.05f))&&Map.LineClear(from,State.position))
             {a.hitHero=true;Hurt(a.damage,0,e.id.ToString(),EnemyCombat.Id(a.kind),a.id,a.id);}
@@ -157,7 +187,10 @@ namespace Hellscript
                 }
                 if(!visible&&State.time-e.lastSeenTime>4){EnemyMode(e,"목표 상실");continue;}
                 var def=EnemyCombat.Attack(e.kind);
-                bool line=visible&&((e.kind!=2&&e.kind!=8)||Map.ProjectileClear(e.position,State.position,.2f));
+                // The ghoul leaps onto a hero 2.5-4.5 m away when it can land there; closer, it swings like N01.
+                if(e.kind==14&&visible&&e.cooldown<=.00001f&&distance>=EnemyCombat.GhoulLeapMin&&distance<=EnemyCombat.GhoulLeap.range&&Map.CanLand(GhoulLanding(e),.4f)&&!Immobilized(e))
+                {BeginEnemyAction(e,variant:1);continue;}
+                bool line=visible&&((e.kind!=2&&e.kind!=8&&e.kind!=17)||Map.ProjectileClear(e.position,State.position,e.kind==17?.35f:.2f));
                 if((distance>def.range||!line)&&!Immobilized(e))
                 {
                     Vector2 target=e.lastSeenPosition;
@@ -180,6 +213,8 @@ namespace Hellscript
             if(!e.boss&&!e.add&&!e.goblin)State.enemyCorpses.Add(new EnemyCorpse{id=State.nextId++,enemyId=e.id,position=e.position,createdAt=State.time});
             if(!e.boss&&e.kind==5)CreateEnemyHazard(e,"N06_DEATH",e.position,1,0,EnemyAttackValue(e)*2,0);
             if(!e.boss&&e.kind==11)CreateEnemyHazard(e,"N12_DEATH",e.position,.9f,0,EnemyAttackValue(e)*1.2f,0,shards:true);
+            // The sporebloat bursts into a poison cloud that lingers and slows.
+            if(!e.boss&&e.kind==15)CreateEnemyHazard(e,"N16_DEATH",e.position,.6f,4,EnemyAttackValue(e)*.25f,4,2.6f,slow:.35f);
         }
         void TickEnemyHazards(float dt)
         {

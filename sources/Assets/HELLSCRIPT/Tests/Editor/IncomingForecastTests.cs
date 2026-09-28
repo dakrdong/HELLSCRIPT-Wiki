@@ -142,10 +142,13 @@ namespace Hellscript.Tests
             var f=sim.ForecastIncoming(1.5f);Advance(sim,1.5f);Assert.AreEqual(f.HpLoss,IncomingHp(sim),.001f);Assert.AreEqual(distance<5.5f?1:0,f.hits.Count);
         }
         [TestCase(0)][TestCase(2)][TestCase(3)][TestCase(8)][TestCase(9)]
+        [TestCase(12)][TestCase(13)][TestCase(14)][TestCase(15)][TestCase(16)][TestCase(17)][TestCase(18)][TestCase(19)]
         public void AnnouncedNormalAttacksMatchActualIncomingDamage(int kind)
         {
             var sim=Fixture();var e=sim.State.enemies[0];e.kind=kind;e.position=sim.State.position+Vector2.up*2;e.attack=10;
             e.brain.action=new EnemyActionState{id=99,kind=kind,phase=EnemyActionPhase.Preparing,origin=e.position,aim=sim.State.position,direction=Vector2.down,preparation=.2f,remaining=.2f};
+            // The rime caller's ring sits 2.6 m toward the caster, the hero in its band; the witch's lance runs its full length.
+            if(kind==19)e.brain.action.aim=sim.State.position+Vector2.up*2.6f;if(kind==17)e.brain.action.aim=e.position+Vector2.down*9;
             var f=sim.ForecastIncoming(1);Assert.Greater(f.hits.Count,0);Advance(sim,1);Assert.AreEqual(f.HpLoss,IncomingHp(sim),.001f);
         }
         [Test]

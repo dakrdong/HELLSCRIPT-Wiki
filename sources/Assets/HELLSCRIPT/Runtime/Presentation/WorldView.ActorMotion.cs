@@ -77,7 +77,7 @@ namespace Hellscript
             float windup=preparing?Mathf.Clamp01(1-a.remaining/Mathf.Max(.01f,a.preparation)):0;
             // A windup that ended in a release (or a followup rewinding it) strikes; an interrupted one just relaxes.
             if(f.action>=0&&f.windup>=.6f&&(f.action!=a.id||!preparing||windup<f.windup-.4f)&&ReleasedRecently(run,f.action)){f.strikeAge=0;f.strikeMotion=f.motion;}
-            f.action=a.phase==EnemyActionPhase.Idle?-1:a.id;f.windup=windup;if(a.phase!=EnemyActionPhase.Idle)f.motion=MotionOf(enemy,a.kind);
+            f.action=a.phase==EnemyActionPhase.Idle?-1:a.id;f.windup=windup;if(a.phase!=EnemyActionPhase.Idle)f.motion=!enemy.boss&&a.kind==14&&a.variant==1?AttackMotion.Charge:MotionOf(enemy,a.kind);
             if(f.strikeAge>=0){f.strikeAge+=motionStep;if(f.strikeAge>StrikeTime)f.strikeAge=-1;}
             float strike=f.strikeAge<0?0:f.strikeAge<.06f?f.strikeAge/.06f:1-(f.strikeAge-.06f)/(StrikeTime-.06f);
             float lean=0,crouch=0,lift=0,lunge=0,weapon=0,tremble=preparing&&windup>.8f?(windup-.8f)*5:0;
@@ -104,6 +104,12 @@ namespace Hellscript
                         case BossLegStyle.Blink:blinking=true;f.dissolve=Mathf.Max(f.dissolve,t);break;
                         default:if(travel.carriesWhirl){weapon=-70;actor.transform.rotation=Quaternion.Euler(0,elapsed*900,0);}else{lean=26;crouch=.06f;}break;
                     }
+                }
+                else if(EnemyCombat.Travels(a))
+                {
+                    // The sandworm sinks under the floor and bursts up at the end; the ghoul arcs onto its landing.
+                    float t=Mathf.Clamp01(a.moved/Mathf.Max(.01f,EnemyCombat.Travel(a)));
+                    if(a.kind==13)lift=t<.8f?-1.9f:-1.9f*(1-(t-.8f)/.2f);else{lift=4*1.3f*t*(1-t);lean=14-28*t;}
                 }
                 else{lean=28;crouch=.08f;lift=Mathf.Abs(Mathf.Sin(elapsed*18))*.06f;}
             }

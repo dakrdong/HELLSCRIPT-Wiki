@@ -19,7 +19,7 @@ namespace Hellscript
             switch(definition)
             {
                 case null:case "":return 0;
-                case "N04":return 4;case "N10":case "E01":return 1;case "E02":return 2;case "E05":case "N12_DEATH":return 5;
+                case "N04":case "N16_DEATH":return 4;case "N10":case "E01":return 1;case "E02":case "N19":case "N20":return 2;case "E05":case "N12_DEATH":return 5;
             }
             if(bossAttackKinds==null)
             {bossAttackKinds=new Dictionary<string,int>(StringComparer.Ordinal);foreach(BossAttack k in Enum.GetValues(typeof(BossAttack)))bossAttackKinds[BossCombat.Definition((int)k)]=(int)k;}
@@ -101,6 +101,8 @@ namespace Hellscript
                         default:if(Tick(actor,travel.carriesWhirl?.12f:.07f))library.Burst(travel.carriesWhirl?"sparks":"dust",at+Vector3.up*(travel.carriesWhirl?1.2f:.15f),1.4f);return;
                     }
                 }
+                // The sandworm throws up sand as it tunnels; the ghoul is in the air.
+                if(!enemy.boss&&EnemyCombat.Travels(a)){if(a.kind==13&&Tick(actor,.07f))library.Burst("dust",actor.transform.position+Vector3.up*.1f,1.1f,new Color(1,.84f,.6f,1));return;}
                 if(Tick(actor,.1f))library.Burst("dust",actor.transform.position+Vector3.up*.15f,enemy.boss?1.3f:.8f);return;
             }
             if(a.phase!=EnemyActionPhase.Preparing)return;

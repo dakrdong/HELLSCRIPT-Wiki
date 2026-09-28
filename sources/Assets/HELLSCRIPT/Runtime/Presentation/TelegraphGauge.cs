@@ -36,8 +36,8 @@ namespace Hellscript
             string key=threat.key??"";float now=run.time,hit=now+Mathf.Max(0,threat.delay);
             if(!tracks.TryGetValue(key,out var track))
             {track=spare.Count>0?spare.Pop():new Track();track.start=Start(run,key,now);track.hit=hit;track.progress=0;track.delay=threat.delay;tracks[key]=track;}
-            // The previous warning of this key was due: a followup starts a gauge of its own.
-            else if(threat.delay>0&&track.hit<=now-1e-4f)track.start=Start(run,key,now);
+            // The previous warning of this key was due by now (a followup re-warned in its landing tick): a gauge of its own.
+            else if(threat.delay>0&&track.hit<=now+1e-4f)track.start=Start(run,key,now);
             track.hit=hit;float progress=threat.delay<=0?1:Fraction(now-track.start,hit-track.start);
             track.footprint=Footprint.Of(threat,boss);track.seen=true;
             // A followup rewinds the same key (the slam's second hit, the second charge): the first warning completed.

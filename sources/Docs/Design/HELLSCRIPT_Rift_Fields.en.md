@@ -30,20 +30,20 @@ Seal waves and cursed-chest echoes pick their enemies from the same table. Boss 
 
 ## Eight new regular enemies
 
-The names, fields, roles and stats of N13–N20 are in the game. Their own attacks are still in development; for now they use N01's melee swing with a 0.65 s warning. Their sounds and dedicated models come in the next stage.
+N13–N20 fight with their own attacks (2026-09-28). Every attack lands on the tick its warning gauge is full; tunnels and leaps land on the tick they arrive. Their sounds and dedicated models come in the next stage.
 
-| ID | Name | Field | Role | HP / attack multiplier / speed | Planned pattern |
+| ID | Name | Field | Role | HP / attack multiplier / speed | Attack |
 | --- | --- | --- | --- | --- | --- |
-| N13 | Dune Marauder | Scorched Desert | melee | 1 / 1 / 2.7 | Cuts a 2.3 m, 110° arc and cuts again 0.35 s later (0.6× each). |
-| N14 | Burrowing Sandworm | Scorched Desert | charger | 0.8 / 1.1 / 3.0 | Warns a 2.2 m circle at the hero's position within 8 m, travels underground and erupts there (1.4×). |
-| N15 | Cave Ghoul | Dank Cavern | melee | 1 / 1 / 2.7 | From 2.5–4.5 m, leaps onto the hero's position and hits a 1.6 m radius (1.1×). |
-| N16 | Sporebloat | Dank Cavern | death burst | 1.1 / 0.6 / 2.0 | 0.6 s after death, leaves a 2.6 m poison spore cloud for 4 s that also slows the hero. |
-| N17 | Thornhorn Brute | Dusk Grassland | melee | 1 / 1 / 2.7 | After a 0.9 s warning, whirls through a 2.1 m radius around itself (1.1×). |
-| N18 | Briar Witch | Dusk Grassland | ranged | 0.75 / 0.85 / 2.3 | Keeps 6 m away and instantly raises a 9 m × 0.7 m thorn lance that slows the hero. |
-| N19 | Frostbitten Revenant | Snowbound Highland | melee | 1 / 1 / 2.7 | A 2.4 m, 120° cold cleave that slows the hero for 1.5 s. |
-| N20 | Rime Caller | Snowbound Highland | area | 0.8 / 1.0 / 2.3 | Warns a frost ring from 1.6 m to 3.6 m at the hero's position for 1.4 s, then deals cold damage and slows (1.3×). |
+| N13 | Dune Marauder | Scorched Desert | melee | 1 / 1 / 2.7 | After a 0.65 s warning, cuts a 2.3 m, 110° arc and cuts again 0.35 s later (0.6× each, 1.8 s cooldown). |
+| N14 | Burrowing Sandworm | Scorched Desert | charger | 0.8 / 1.1 / 3.0 | Warns a 2.2 m circle at the hero's position within 8 m for 0.9 s, tunnels there at 12 m/s and erupts (1.4×, 6 s cooldown). |
+| N15 | Cave Ghoul | Dank Cavern | melee | 1 / 1 / 2.7 | Swings like N01 within 2.5 m; from 2.5–4.5 m it warns for 0.7 s, leaps for 0.45 s to 1 m short of the hero and hits a 1.6 m radius (0.9×, 5 s cooldown). |
+| N16 | Sporebloat | Dank Cavern | death burst | 1.1 / 0.6 / 2.0 | Swings like N01; 0.6 s after death, leaves a 2.6 m poison spore cloud for 4 s (0.25× every 0.5 s) that slows the hero. |
+| N17 | Thornhorn Brute | Dusk Grassland | melee | 1 / 1 / 2.7 | After a 0.9 s warning, whirls through a 2.1 m radius around itself (1.1×, 1.65 s cooldown). |
+| N18 | Briar Witch | Dusk Grassland | ranged | 0.75 / 0.85 / 2.3 | From 9 m, warns a 9 m × 0.7 m thorn lance for 0.8 s, then raises it (0.85×) and slows the hero for 1.5 s (3 s cooldown). |
+| N19 | Frostbitten Revenant | Snowbound Highland | melee | 1 / 1 / 2.7 | After a 0.65 s warning, a 2.4 m, 120° cold cleave (1.0×) that slows the hero for 1.5 s (1.6 s cooldown). |
+| N20 | Rime Caller | Snowbound Highland | area | 0.8 / 1.0 / 2.3 | Warns a frost ring from 1.6 m to 3.6 m for 1.4 s, centred 2.6 m from the hero toward the caster, then deals cold damage (1.3×) and slows for 2 s (6 s cooldown). |
 
-The new melee-slot enemies (N13, N15, N17, N19) start from N01's stat budget. When their planned patterns land, they are tuned so that time-to-kill and damage per second stay within ±15% of N01.
+The new melee-slot enemies (N13, N15, N17, N19) use N01's stat budget, and their cooldowns keep damage per second within ±15% of N01 (checked by `NewEnemyAttackTests`).
 
 ## Current presentation
 

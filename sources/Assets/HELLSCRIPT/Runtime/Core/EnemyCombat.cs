@@ -21,6 +21,8 @@ namespace Hellscript
         // Moving boss attacks (BossCombat.Moves): the leg being travelled and the time spent on it.
         public int leg;
         public float legElapsed;
+        // A regular enemy's second attack (1 = the Cave Ghoul's leap); 0 is its usual attack.
+        public int variant;
     }
     [Serializable] public sealed class EnemyBrain
     {
@@ -99,9 +101,44 @@ namespace Hellscript
                 case 3:return new EnemyAttackDefinition(8,1.2f,6);case 4:return new EnemyAttackDefinition(6,1,6);
                 case 7:return new EnemyAttackDefinition(8,.9f,7);case 8:return new EnemyAttackDefinition(9,1.2f,3);
                 case 9:return new EnemyAttackDefinition(8,1.5f,6);case 10:return new EnemyAttackDefinition(6,0,0);
+                // N13-N20. The melee slots keep N01's damage per second: 2 x 0.6 per 1.8 s, 1.1 per 1.65 s, 1.0 per 1.6 s.
+                case 12:return new EnemyAttackDefinition(2.3f,.65f,1.8f);case 13:return new EnemyAttackDefinition(8,.9f,6);
+                case 16:return new EnemyAttackDefinition(2.1f,.9f,1.65f);case 17:return new EnemyAttackDefinition(9,.8f,3);
+                case 18:return new EnemyAttackDefinition(2.4f,.65f,1.6f);case 19:return new EnemyAttackDefinition(8,1.4f,6);
                 default:return new EnemyAttackDefinition(2,.65f,1.5f);
             }
         }
+        // The Cave Ghoul swings like N01 up close and leaps onto a hero 2.5-4.5 m away.
+        public static readonly EnemyAttackDefinition GhoulLeap=new EnemyAttackDefinition(4.5f,.7f,5);
+        public const float GhoulLeapMin=2.5f,LeapTime=.45f,BurrowSpeed=12;
+        // Hit geometry of N13-N20 (kinds 12-19), shared by the release, the warnings and the forecast; null = N01's swing.
+        public static EnemyThreat? OwnShape(EnemyActionState a,string key,float delay)
+        {
+            string d=Id(a.kind);
+            switch(a.kind)
+            {
+                case 12:return new EnemyThreat(key,d,AttackShape.Sector,a.origin,a.aim,a.direction,2.3f,angle:110,delay:delay);
+                case 13:return new EnemyThreat(key,d,AttackShape.Circle,a.aim,a.aim,a.direction,2.2f,delay:delay);
+                case 14:return a.variant==1?new EnemyThreat(key,d,AttackShape.Circle,a.aim,a.aim,a.direction,1.6f,delay:delay):(EnemyThreat?)null;
+                case 16:return new EnemyThreat(key,d,AttackShape.Circle,a.origin,a.origin,a.direction,2.1f,delay:delay);
+                case 17:return new EnemyThreat(key,d,AttackShape.Line,a.origin,a.aim,a.direction,.35f,delay:delay);
+                case 18:return new EnemyThreat(key,d,AttackShape.Sector,a.origin,a.aim,a.direction,2.4f,angle:120,delay:delay);
+                case 19:return new EnemyThreat(key,d,AttackShape.Ring,a.aim,a.aim,a.direction,3.6f,1.6f,delay:delay);
+                default:return null;
+            }
+        }
+        // (attack multiplier, element, hero slow seconds) of those shapes.
+        public static (float power,int element,float slow) OwnHit(int kind)
+        {
+            switch(kind)
+            {
+                case 12:return (.6f,0,0);case 13:return (1.4f,0,0);case 14:return (.9f,0,0);case 16:return (1.1f,0,0);
+                case 17:return (.85f,0,1.5f);case 18:return (1,2,1.5f);case 19:return (1.3f,2,2);default:return (1,0,0);
+            }
+        }
+        // Seconds between the release and the landing of a travelling attack (the sandworm's tunnel, the ghoul's leap).
+        public static float Travel(EnemyActionState a)=>a.kind==13?Vector2.Distance(a.origin,a.aim)/BurrowSpeed:a.kind==14&&a.variant==1?LeapTime:0;
+        public static bool Travels(EnemyActionState a)=>a.kind==13||a.kind==14&&a.variant==1;
         public static Vector2 Rotate(Vector2 direction,float angle)
         {float a=angle*Mathf.Deg2Rad;return new Vector2(direction.x*Mathf.Cos(a)-direction.y*Mathf.Sin(a),direction.x*Mathf.Sin(a)+direction.y*Mathf.Cos(a));}
         public static bool Contains(EnemyThreat threat,Vector2 point)
@@ -142,6 +179,13 @@ namespace Hellscript
             {
                 var a=e.brain.action;int kind=a.kind;string key="action-"+a.id;
                 if(kind==4||kind==10)continue;
+                var own=OwnShape(a,key,0);
+                if(own.HasValue)
+                {
+                    // A travelling attack lands after its travel; while it travels, what remains of it.
+                    float delay=a.phase==EnemyActionPhase.Charging?Mathf.Max(0,Travel(a)-a.moved):a.remaining+Travel(a);
+                    var o=own.Value;yield return new EnemyThreat(key,o.definition,o.shape,o.origin,o.end,o.direction,o.radius,o.innerRadius,o.angle,delay);continue;
+                }
                 if(kind==1||kind==7)
                     yield return new EnemyThreat(key,Id(kind),AttackShape.Line,a.phase==EnemyActionPhase.Charging?e.position:a.origin,a.aim,a.direction,1.05f,delay:a.phase==EnemyActionPhase.Charging?0:a.remaining);
                 else if(kind==2||kind==8)
