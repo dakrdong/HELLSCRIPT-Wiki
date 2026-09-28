@@ -12,7 +12,7 @@ namespace Hellscript
         Color? riftBackground;
         public RiftFogView RiftFog => riftFog;
         Material RiftMaterial(Material source) => riftFog != null ? riftFog.Resolve(source) : source;
-        bool CanDisplayEnemyMarker(RunState run, Vector2 position, float radius = 0)
+        internal bool CanDisplayEnemyMarker(RunState run, Vector2 position, float radius = 0)
             => Vector2.Distance(run.position, position) <= 14 + radius && game.Combat.Map.LineClear(run.position, position);
         Transform RoomGeometry(int index, bool visited)
         {

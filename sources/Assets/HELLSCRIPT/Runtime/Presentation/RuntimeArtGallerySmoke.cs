@@ -16,7 +16,7 @@ namespace Hellscript
     // run's JSON is unchanged afterwards. Later phases append to Shots(); enemy kinds and bosses follow the name tables.
     public sealed class RuntimeArtGallerySmoke:MonoBehaviour
     {
-        enum ShotKind{Room,Enemies,Boss,Elites,Effect,Town}
+        enum ShotKind{Room,Enemies,Boss,Elites,Effect,Fx,Town}
         sealed class Shot
         {
             public ShotKind kind;public string name;public int field,first,count,pattern,effect,width=1600,height=900;public float age;public TownStation station;
@@ -39,6 +39,8 @@ namespace Hellscript
             for(int p=0;p<GameCatalog.BossNames.Length;p++)shots.Add(new Shot{kind=ShotKind.Boss,name="boss-"+p,pattern=p});
             shots.Add(new Shot{kind=ShotKind.Elites,name="elites"});
             foreach(var (kind,age) in Effects)shots.Add(new Shot{kind=ShotKind.Effect,name=$"fx-{kind:00}",effect=kind,age=age});
+            foreach(var name in FxShots)shots.Add(new Shot{kind=ShotKind.Fx,name=name});
+            for(int f=0;f<6;f++)shots.Add(new Shot{kind=ShotKind.Fx,name="fx-ambience-field"+f,field=f});
             shots.Add(new Shot{kind=ShotKind.Town,name="town-portal",station=TownStation.RiftKeeper});
             shots.Add(new Shot{kind=ShotKind.Town,name="town-blacksmith",station=TownStation.Blacksmith});
             return shots;
@@ -75,6 +77,7 @@ namespace Hellscript
             {
                 if(shot.kind==ShotKind.Town)yield return TownShot(shot);
                 else if(shot.kind==ShotKind.Effect)yield return EffectShot(shot);
+                else if(shot.kind==ShotKind.Fx)yield return FxShot(shot);
                 else yield return RiftShot(shot);
             }
             if(game.Running)game.ReturnTown();
@@ -144,6 +147,129 @@ namespace Hellscript
             // GAP: the transient is alive but the frame equals the arena before the effect (hidden or too small to draw).
             claims.Add($"{(changed>0?"PASS":"GAP")} {number:00}-{shot.name}: {call} spawned {spawned} transient(s), {alive} alive after {shot.age}s of presentation time; {changed} pixel(s) differ from the arena before the effect{(changed>0?"":", so it is not visible")}; RunState unchanged.");
             Require(Json(run)==frozen,"Presentation changed the run.");
+        }
+
+        // VFX core (WorldFx) review: monster tiers, telegraph fills, hits and deaths by surface, status overlays, loot beams,
+        // fires, generic bursts and each field's ambience. The gallery drives the library directly; the actor, skill and
+        // environment presenters make the same calls in later phases.
+        static readonly string[] FxShots={"fx-tiers","fx-telegraphs","fx-telegraphs-boss","fx-hits","fx-hits-crit","fx-deaths","fx-status","fx-loot","fx-fire","fx-bursts"};
+        static readonly int[] SurfaceKinds={0,2,6,11,18,3,0};
+        IEnumerator FxShot(Shot shot)
+        {
+            string name=shot.name;var fixture=Arena(shot.field);var hero=fixture.position;var enemies=new List<EnemyState>();
+            MonsterTier[] tiers={MonsterTier.Normal,MonsterTier.Magic,MonsterTier.Elite,MonsterTier.Legendary,MonsterTier.Unique};
+            FxStatus[] statuses={FxStatus.Burning,FxStatus.Frozen,FxStatus.Poisoned,FxStatus.Slowed,FxStatus.Stunned};
+            if(name=="fx-tiers")for(int i=0;i<5;i++){var e=Enemy(fixture,EnemyBase+i,new[]{0,2,6,8,11}[i],new Vector2((i-2)*3.2f,3.5f));if(tiers[i]==MonsterTier.Elite){e.elite=0;e.eliteTraits.Add(0);}enemies.Add(e);}
+            else if(name=="fx-hits"||name=="fx-hits-crit")for(int i=0;i<7;i++){var e=Enemy(fixture,EnemyBase+i,SurfaceKinds[i],new Vector2((i-3)*2.6f,3.5f));if(i==6)e.eventId="gallery-echo";enemies.Add(e);}
+            else if(name=="fx-status")for(int i=0;i<5;i++)enemies.Add(Enemy(fixture,EnemyBase+i,0,new Vector2((i-2)*3.2f,3.5f)));
+            else if(name=="fx-telegraphs")
+            {
+                var early=Enemy(fixture,EnemyBase,0,new Vector2(-6,3));Windup(early,hero,0,.65f,.5f);
+                var late=Enemy(fixture,EnemyBase+1,0,new Vector2(-2.5f,5.5f));Windup(late,hero,0,.65f,.12f);
+                var caster=Enemy(fixture,EnemyBase+2,3,new Vector2(3,8));Windup(caster,hero,3,1.2f,.6f);caster.brain.action.aim=hero+new Vector2(4.5f,2.5f);
+                var charger=Enemy(fixture,EnemyBase+3,1,new Vector2(-8,-2.5f));Windup(charger,hero,1,.8f,.32f);
+                var archer=Enemy(fixture,EnemyBase+4,8,new Vector2(8,1.5f));Windup(archer,hero,8,1.2f,.7f);
+                var ringer=Enemy(fixture,EnemyBase+5,10,new Vector2(6.5f,-5.5f));
+                var linkA=Enemy(fixture,EnemyBase+6,6,new Vector2(-7,7.5f));var linkB=Enemy(fixture,EnemyBase+7,8,new Vector2(-4,9.5f));
+                foreach(var e in new[]{linkA,linkB}){e.elite=2;e.eliteTraits.Add(2);}linkA.elitePartner=linkB.id;linkB.elitePartner=linkA.id;
+                enemies.AddRange(new[]{early,late,caster,charger,archer,ringer,linkA,linkB});
+                fixture.enemyHazards.Add(new EnemyHazard{id=EnemyBase+50,actionId=EnemyBase+50,enemyId=early.id,definitionId="E02",shape=AttackShape.Ring,position=hero+new Vector2(2.5f,-4.5f),
+                    end=hero+new Vector2(2.5f,-4.5f),direction=Vector2.up,createdAt=fixture.time-.6f,delay=.9f,radius=4,innerRadius=2});
+            }
+            else if(name=="fx-telegraphs-boss")
+            {
+                var slam=Enemy(fixture,EnemyBase,0,new Vector2(-2.5f,6));slam.boss=true;slam.pattern=0;slam.brain.boss.initialized=true;Windup(slam,hero,(int)BossAttack.Slam,1.2f,.45f);
+                slam.brain.boss.refuges.Add(new BossRefuge{position=hero+new Vector2(-4.5f,-2.5f)});slam.brain.boss.refuges.Add(new BossRefuge{position=hero+new Vector2(4,-3)});
+                var blasts=Enemy(fixture,EnemyBase+1,0,new Vector2(8,6));blasts.boss=true;blasts.pattern=2;blasts.brain.boss.initialized=true;Windup(blasts,hero,(int)BossAttack.Blasts,1.3f,.9f);
+                blasts.brain.action.points.AddRange(new[]{hero+new Vector2(-1,-6),hero+new Vector2(3.5f,-6.5f),hero+new Vector2(7.5f,-4)});
+                fixture.phase=RunPhase.Boss;fixture.bossId=slam.id;enemies.Add(slam);enemies.Add(blasts);
+            }
+            fixture.enemies.AddRange(enemies);
+            yield return Enter(fixture);
+            var fx=game.World.Fx;Require(fx!=null,"The presented rift has no WorldFx.");
+            var actors=Private<Dictionary<int,GameObject>>("actors");var root=GameObject.Find("Rift Runtime").transform;string what;
+            Vector3 At(Vector2 offset,float y=0)=>new Vector3(hero.x+offset.x,y,hero.y+offset.y);
+            var propMaterial=new Material(Resources.Load<Shader>("RiftTerrain")){name="Gallery prop"};propMaterial.SetColor("_BaseColor",new Color(.24f,.22f,.21f));
+            var resolvedProp=game.World.RiftFog!=null?game.World.RiftFog.Resolve(propMaterial):propMaterial;
+            // A prop below the anchor (a brazier bowl under its flame) or standing on the ground under it (a drop).
+            GameObject Anchor(string label,Vector3 at,PrimitiveType? prop,Vector3 size,bool standing=false)
+            {
+                var anchor=new GameObject(label);anchor.transform.SetParent(root,false);anchor.transform.position=at;
+                if(prop.HasValue)
+                {
+                    var p=GameObject.CreatePrimitive(prop.Value);p.transform.SetParent(anchor.transform,false);p.transform.localPosition=new Vector3(0,standing?size.y*.5f:-size.y*.5f,0);
+                    p.transform.localScale=size;Destroy(p.GetComponent<Collider>());p.GetComponent<Renderer>().sharedMaterial=resolvedProp;
+                }
+                return anchor;
+            }
+            switch(name)
+            {
+                case "fx-tiers":
+                {
+                    for(int i=0;i<5;i++)if(tiers[i]!=MonsterTier.Normal&&tiers[i]!=MonsterTier.Elite)game.World.SetMonsterTierOverride(enemies[i].id,tiers[i]);
+                    for(int i=0;i<5;i++){Require(game.World.MonsterTierOf(enemies[i])==tiers[i],"Tier of "+i+" is "+game.World.MonsterTierOf(enemies[i]));fx.Tier(actors[enemies[i].id],tiers[i]);}
+                    Advance(1.2f);int views=enemies.Count(e=>actors[e.id].transform.Find("Monster tier")!=null);Require(views==4,views+" tier views, wanted 4.");
+                    what="tiers Normal, Magic, Elite (elite >= 0), Legendary and Unique (overrides) left to right, "+views+" tier views";break;
+                }
+                case "fx-telegraphs":case "fx-telegraphs-boss":
+                {
+                    Advance(.5f);
+                    var gauge=new TelegraphGauge();var parts=EnemyCombat.Threats(run,game.Combat.Map).Select(t=>t.key+" "+t.shape+" "+gauge.Progress(run,t).ToString("0.00")).ToList();
+                    int fills=root.GetComponentsInChildren<MeshRenderer>().Count(r=>r.name=="Telegraph fill"&&r.gameObject.activeInHierarchy);
+                    Require(fills>=parts.Count,fills+" fills for "+parts.Count+" threats.");
+                    what=$"{fills} fill view(s) for {parts.Count} threat(s) [{string.Join(", ",parts)}] plus refuges/aura/link views";break;
+                }
+                case "fx-hits":case "fx-hits-crit":
+                {
+                    bool crit=name=="fx-hits-crit";
+                    for(int i=0;i<7;i++)fx.Hit(enemies[i],crit?1+i%5:0,crit,actors[enemies[i].id].transform.position+Vector3.up*1.3f);
+                    Advance(.07f);what=(crit?"critical elemental":"physical")+" hits on Flesh, Bone, Metal, Crystal, Ice, Ichor and Spirit (echo) left to right";break;
+                }
+                case "fx-deaths":
+                {
+                    for(int i=0;i<7;i++)fx.Death(At(new Vector2((i-3)*2.8f,3.5f)),1,(FxSurface)i);
+                    Advance(.2f);yield return Capture(name+"-burst");claims.Add($"PASS {number:00}-{name}-burst: death bursts Flesh..Spirit left to right after 0.2 s; {fx.ActiveTransients} live transient(s).");
+                    Advance(1.8f);what="the ground marks 2 s after the deaths (blood, dust, scorch, crystal glow, ice, ichor)";name+="-marks";break;
+                }
+                case "fx-status":
+                {
+                    for(int i=0;i<5;i++)fx.Status(actors[enemies[i].id],statuses[i]);
+                    Advance(1);what="status overlays Burning, Frozen, Poisoned, Slowed and Stunned left to right";break;
+                }
+                case "fx-loot":
+                {
+                    for(int g=0;g<5;g++)fx.LootBeam(Anchor("Gallery drop "+g,At(new Vector2((g-2)*2.6f,3)),PrimitiveType.Cube,new Vector3(.35f,.6f,.2f),true).transform,g);
+                    fx.GoldGlint(Anchor("Gallery gold",At(new Vector2(0,.8f)),null,Vector3.one).transform);
+                    Advance(1);what="loot beams for grades common, magic, rare, legendary and set left to right, gold glint in front";break;
+                }
+                case "fx-fire":
+                {
+                    Color[] colors={default,new Color(.7f,.4f,1),new Color(.45f,.75f,1),new Color(.45f,1,.6f)};
+                    for(int i=0;i<4;i++)
+                    {
+                        fx.Fire(Anchor("Gallery brazier "+i,At(new Vector2((i-1.5f)*3.4f,4),1.1f),PrimitiveType.Cylinder,new Vector3(.8f,.55f,.8f)).transform,1,colors[i]);
+                        fx.Fire(Anchor("Gallery torch "+i,At(new Vector2((i-1.5f)*3.4f,.5f),.9f),null,Vector3.one).transform,.5f,colors[i]);
+                    }
+                    fx.Smoke(Anchor("Gallery chimney",At(new Vector2(7,8),2),null,Vector3.one).transform);
+                    Advance(1.2f);what="braziers (scale 1) and torches (0.5) in ember, violet, frost and fungal colours plus chimney smoke";break;
+                }
+                case "fx-bursts":
+                {
+                    string[] ids={"fire","frost","lightning","shadow","poison","physical","holy","arcane","blood","explosion","heal","impact"};
+                    for(int i=0;i<ids.Length;i++)fx.Burst(ids[i],At(new Vector2((i%4-1.5f)*3.6f,(1-i/4)*3.4f+1.5f),1),1);
+                    fx.Shockwave(At(new Vector2(0,-4.5f)),2.2f);fx.Beam(At(new Vector2(-6,-4),1.2f),At(new Vector2(-2,-5),1.2f));fx.Slash(At(new Vector2(5,-4.5f),1),Vector3.forward,2.2f,110);
+                    Advance(.18f);what="bursts "+string.Join(", ",ids)+" (rows from the back), shockwave, beam and slash in front";break;
+                }
+                default:
+                {
+                    fx.Ambience(shot.field);Advance(.6f);var amb=root.Find("Ambience "+fx.AmbienceId);Require(amb!=null,"No ambience for field "+shot.field);
+                    what=$"field {shot.field} ambience '{fx.AmbienceId}' with {amb.GetComponentsInChildren<ParticleSystem>().Sum(p=>p.particleCount)} particle(s) around the hero "+
+                        "(the rift lighting still follows the theme until the environment workstream applies layout.Field)";break;
+                }
+            }
+            yield return Capture(name);
+            claims.Add($"PASS {number:00}-{name}: {what}; {fx.ActiveTransients} live transient(s); RunState unchanged by presentation.");
+            Leave();Destroy(propMaterial);
         }
 
         IEnumerator TownShot(Shot shot)

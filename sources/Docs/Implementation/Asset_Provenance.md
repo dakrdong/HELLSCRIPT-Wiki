@@ -67,3 +67,8 @@ Unity 편집기의 AI 도구로 야만전사 참고 이미지 4장과 3D 모델 
 - `Assets/HELLSCRIPT/Resources/RiftTerrain.shader`, `WorldFx.shader`, `WorldTelegraph.shader`와 `Resources/Rendering/WorldPost_*.asset`: 이 저장소에서 직접 작성한 셰이더와 후처리 설정이다.
 - 디아블로 4는 어둡고 무게감 있는 분위기의 참고로만 삼았다. 그 게임의 모델·텍스처·이펙트·이름·로고는 추출하거나 옮기지 않았다.
 - 이 도구로 만든 영웅·일반 적·보스·필드·소품·마을 모델은 작업 브랜치(`claude/art-*`)에 있으며 이번 병합에 포함하지 않았다. 게임 화면에 연결할 때 함께 병합하고 이 절에 기록한다. 모든 결과물은 개발용 후보 자산이며 출시 승인을 뜻하지 않는다. 자세한 내용: [다크 고딕 개편 1단계](Dark_Gothic_Overhaul_Stage1.md).
+
+## 월드 이펙트 텍스처 (2026-09-28)
+
+- `Assets/HELLSCRIPT/Resources/World/Fx/*.png` 34장과 `manifest_fx.json`: `tools/generate_fx_textures.py`가 이름마다 고정한 시드(`hellscript-fx-v1|<이름>`의 sha256)로 numpy·PIL 연산만 써서 만든다. 값 노이즈, 메타볼, 무작위 걸음 균열, 기하학 문양으로 구성했고 사진·스캔·내려받은 이미지·이미지 생성 AI·다른 게임의 이펙트를 쓰지 않았다. `--check`로 설치된 파일을 다시 만들어 비교할 수 있다.
+- Android 텍스처 예산의 `World/Fx/` 규칙(최대 1024, ASTC 6×6)이 적용된다. 개발용 후보 자산이며 출시 승인을 뜻하지 않는다. 사용처: [적·보스 공격 예고 게이지](Attack_Telegraph_Gauge.md).
