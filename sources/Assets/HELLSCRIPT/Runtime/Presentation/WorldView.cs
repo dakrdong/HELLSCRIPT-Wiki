@@ -58,7 +58,7 @@ namespace Hellscript
             RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
-            if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearAttackFx();
+            if(world!=null)Destroy(world);world=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearAttackFx();
             roomGeometry.Clear();passageGeometry.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
@@ -93,13 +93,15 @@ namespace Hellscript
             }
             }
             BindRiftTerrain();
-            hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false);
-            hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);
+            hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false,HeroBodyArt((int)game.Store.Data.Hero.heroClass));
+            hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);FigureOf(hero);
             SeedCombatFeedback(run);
         }
-        GameObject CreateBody(string name,int type,bool enemy,bool boss)
+        GameObject CreateBody(string name,int type,bool enemy,bool boss,string art=null)
         {
             var root=new GameObject(name);root.transform.SetParent(world.transform,false);
+            // World art when the model exists (WorldView.Actors); the primitive figure below is the fallback.
+            if(ModelBody(root,art,enemy?-1:type,boss)){if(!enemy){Ring(root.transform,Vector3.up*.08f,1.05f,ember,.09f);AddHeroOcclusion(root);}return root;}
             Material body=enemy?Mat("Enemy "+type,Color.Lerp(new Color(.35f,.3f,.34f),type%3==0?new Color(.44f,.2f,.16f):new Color(.2f,.33f,.37f),.6f)):type==0?Mat("Hero Iron",new Color(.37f,.44f,.53f)):type==1?Mat("Hunter Cloak",new Color(.19f,.34f,.28f)):Mat("Mage Cloak",new Color(.28f,.19f,.44f));
             // Rigid one-piece placeholder. The view adds bob, lean, and facing without a skeleton.
             int role=EnemyCombat.Role(type);Vector3 bodyScale=enemy&&role==1?new Vector3(.65f,.65f,1.1f):enemy&&role==5?new Vector3(1.25f,1,1.25f):enemy&&role==4?new Vector3(.55f,1.25f,.55f):new Vector3(.8f,1,.65f);
@@ -122,7 +124,10 @@ namespace Hellscript
             var shader=Resources.Load<Shader>("HeroOcclusion");if(shader==null||!shader.isSupported)return;
             if(!materials.TryGetValue("Hero occlusion",out var material))
             {material=new Material(shader){name="HELLSCRIPT Hero occlusion"};materials.Add("Hero occlusion",material);}
-            // Only the player's existing meshes get an occluded pass. Threats and fog keep their owners.
+            // Only the player's existing meshes get an occluded pass. Threats and fog keep their owners. A skinned model
+            // gets the occlusion material as a second material, which draws its one submesh again.
+            foreach(var skin in actor.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {var list=new List<Material>(skin.sharedMaterials){material};skin.sharedMaterials=list.ToArray();}
             foreach(var mesh in actor.GetComponentsInChildren<MeshFilter>())
             {
                 var silhouette=new GameObject("Hero occlusion silhouette",typeof(MeshFilter),typeof(MeshRenderer));silhouette.transform.SetParent(mesh.transform,false);
@@ -150,7 +155,8 @@ namespace Hellscript
             var currentFacing=CurrentHeroFacing(run);
             if(snapPresentation&&currentFacing.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.LookRotation(currentFacing);
             else if(movement.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(movement),dt*14);
-            var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(movement.sqrMagnitude>.001f?Mathf.Sin(elapsed*13)*.08f:0),0);
+            // The primitive figure bobs as it walks; a model body walks with its rig.
+            if(!HasModelBody(hero)){var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(movement.sqrMagnitude>.001f?Mathf.Sin(elapsed*13)*.08f:0),0);}
             var anchor=stagedFocus??run.position;
             viewCamera.transform.position=snapPresentation?CameraPosition(anchor):Vector3.Lerp(viewCamera.transform.position,CameraPosition(anchor),dt*(stagedFocus.HasValue?2.4f:5));
             ApplyBattleViewport();
@@ -160,10 +166,11 @@ namespace Hellscript
                 if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!game.Combat.Map.LineClear(run.position,enemy.position))
                 {if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);continue;}
                 if(!actors.TryGetValue(enemy.id,out var actor))
-                {actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
-                 if(enemy.elite>=0)Ring(actor.transform,Vector3.up*.1f,1.1f,purple,.1f);
+                {string art=EnemyBodyArt(enemy);actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss,art);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
+                 // Elites wear the tier effect (WorldFx.Tier); the old ring stays only where the effects library is missing.
+                 if(enemy.elite>=0&&Fx==null)Ring(actor.transform,Vector3.up*.1f,1.1f,purple,.1f);
                  if(!string.IsNullOrEmpty(enemy.eventId))Ring(actor.transform,Vector3.up*.15f,.9f,red,.1f);
-                 Shape("Health",PrimitiveType.Cube,actor.transform,new Vector3(0,2.65f,0),new Vector3(1,.1f,.1f),red);}
+                 Shape("Health",PrimitiveType.Cube,actor.transform,new Vector3(0,HasModelBody(actor)?BodyTop(actor,art)+.35f:2.65f,0),new Vector3(1,.1f,.1f),red);}
                 if(enemy.boss&&actor.transform.Find("Stagger")==null){var ring=Ring(actor.transform,Vector3.up*.12f,1.1f,blue,.09f);ring.name="Stagger";}
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
                 actor.SetActive(true);actor.transform.position=snapPresentation?Position(enemy.position):Vector3.Lerp(actor.transform.position,Position(enemy.position),Mathf.Min(1,dt*20));
@@ -227,6 +234,6 @@ namespace Hellscript
             if(settingsWorldOpen&&HasPresentedPlayer){ApplySettingsWorld();return;}
             var viewport=GameplayViewport;viewCamera.rect=viewport;viewCamera.ResetAspect();viewCamera.orthographicSize=GameplayHalfHeight(viewport)*zoomNow;
         }
-        void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);if(lighting!=null)lighting.Dispose();}
+        void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);if(lighting!=null)lighting.Dispose();DisposeArt();}
     }
 }

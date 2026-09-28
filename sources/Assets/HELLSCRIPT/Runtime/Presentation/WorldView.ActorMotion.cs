@@ -16,7 +16,7 @@ namespace Hellscript
         {
             public Transform[] parts;public Vector3[] restPosition;public Quaternion[] restRotation;public int weapon=-1;
             public Renderer[] renderers;
-            public float flash,flashTotal=.12f,rim,dissolve;public Color flashColor,rimColor;public bool shaded;
+            public float flash,flashTotal=.12f,rim,dissolve;public Color flashColor,rimColor,tierRim,baseRim;public bool shaded;
             public int action=-1;public float windup,strikeAge=-1;public AttackMotion motion,strikeMotion;
         }
         // Parts that make up the figure; rings, the health bar and marks keep their own placement.
@@ -44,7 +44,7 @@ namespace Hellscript
             var renderers=new List<Renderer>();
             foreach(var r in actor.GetComponentsInChildren<Renderer>(true))
                 if(!(r is LineRenderer)&&r.gameObject.name!="Health"&&r.gameObject.name!="Hero occlusion silhouette")renderers.Add(r);
-            f.renderers=renderers.ToArray();figures[actor]=f;return f;
+            f.renderers=renderers.ToArray();if(HasModelBody(actor))f.baseRim=WorldArtMaterials.Rim;figures[actor]=f;return f;
         }
         // How a body moves for an attack: regular enemies by kind, bosses by attack (item-specific bodies come with the kits).
         public static AttackMotion MotionOf(EnemyState enemy,int kind)
@@ -115,9 +115,14 @@ namespace Hellscript
             }
             // After a blink the body fades back in where it appeared.
             if(!blinking&&f.dissolve>0)f.dissolve=Mathf.Max(0,f.dissolve-motionStep/.25f);
+            // A model boss has no 2 x 1.7 root scale, so its travel offsets are scaled here to leap as high and sink as deep.
+            if(enemy.boss&&HasModelBody(actor)){lift*=1.7f;lunge*=2;}
             ApplyPose(f,lean,crouch,lift,lunge,weapon,tremble*.035f*Mathf.Sin(elapsed*57));
             // The rim heats up with the gauge: bosses burn orange, regular enemies red.
             f.rim=preparing?windup*windup*.95f:strike*.6f;f.rimColor=enemy.boss?new Color(1,.45f,.12f):new Color(1,.2f,.14f);
+            // The monster tier (elites today; gameplay sets the others later) wears its sigil effect and colours the rim.
+            var tier=MonsterTierOf(enemy);if(Fx!=null)Fx.Tier(actor,tier);f.tierRim=tier==MonsterTier.Normal?default:WorldFx.TierColor(tier)*.8f;
+            TickEnemyRig(actor,enemy,f);
             // A boss in its second phase smoulders: a steady red rim and short-lived flames at its feet that stay with it.
             if(enemy.boss&&enemy.brain.boss.enraged)
             {
@@ -153,14 +158,14 @@ namespace Hellscript
                 if(d.incoming)
                 {
                     if(d.hpLoss<=0&&d.absorbed<=0)return;
-                    var f=FigureOf(hero);f.flash=f.flashTotal=HeroFlashTime;f.flashColor=new Color(1,.28f,.2f);
+                    var f=FigureOf(hero);f.flash=f.flashTotal=HeroFlashTime;f.flashColor=new Color(1,.28f,.2f);FlinchRig(hero,false);
                     strongest=Mathf.Max(strongest,Mathf.Max(d.hpLoss,d.absorbed*.5f)/maxHealth);
                     if(library!=null)library.Burst(d.element>0&&d.element<6?ElementBurst[d.element]:"blood",hero.transform.position+Vector3.up*1.3f,.8f);
                     return;
                 }
                 if(!actors.TryGetValue(d.targetId,out var actor)||!actor.activeInHierarchy)return;
                 var enemy=run.enemies.Find(e=>e.id==d.targetId);if(enemy==null||!CanDisplayEnemyMarker(run,enemy.position))return;
-                var fig=FigureOf(actor);fig.flash=fig.flashTotal=EnemyFlashTime;fig.flashColor=d.critical?new Color(1,.9f,.55f):Color.white;
+                var fig=FigureOf(actor);fig.flash=fig.flashTotal=EnemyFlashTime;fig.flashColor=d.critical?new Color(1,.9f,.55f):Color.white;if(d.kind!=DamageKind.Periodic)FlinchRig(actor,d.critical);
                 if(library!=null&&d.kind!=DamageKind.Periodic)library.Hit(enemy,d.element,d.critical,actor.transform.position+Vector3.up*(enemy.boss?2.4f:1.4f));
             },(a,b)=>a.id==b.id&&a.time==b.time);
             // Share of max health: a scratch nudges the camera, a quarter of the bar or more hits hard.
@@ -176,7 +181,7 @@ namespace Hellscript
             {
                 var f=pair.Value;if(pair.Key==null){staleFigures.Add(pair.Key);continue;}
                 f.flash=Mathf.Max(0,f.flash-step);
-                bool any=f.flash>0||f.rim>.001f||f.dissolve>0;if(!any&&!f.shaded)continue;
+                bool any=f.flash>0||f.rim>.001f||f.dissolve>0||f.tierRim.maxColorComponent>0||f.baseRim.maxColorComponent>0;if(!any&&!f.shaded)continue;
                 var block=ShadeBlock;
                 foreach(var r in f.renderers)
                 {
@@ -184,7 +189,8 @@ namespace Hellscript
                     if(!any){r.SetPropertyBlock(null);continue;}
                     r.GetPropertyBlock(block);
                     block.SetFloat(FlashId,f.flashTotal>0?f.flash/f.flashTotal:0);block.SetColor(FlashColorId,f.flashColor);
-                    block.SetColor(RimColorId,f.rimColor*f.rim);block.SetFloat(DissolveId,f.dissolve);r.SetPropertyBlock(block);
+                    var rim=f.rimColor*f.rim;rim=new Color(Mathf.Max(rim.r,Mathf.Max(f.tierRim.r,f.baseRim.r)),Mathf.Max(rim.g,Mathf.Max(f.tierRim.g,f.baseRim.g)),Mathf.Max(rim.b,Mathf.Max(f.tierRim.b,f.baseRim.b)),1);
+                    block.SetColor(RimColorId,rim);block.SetFloat(DissolveId,f.dissolve);r.SetPropertyBlock(block);
                 }
                 f.shaded=any;
             }
@@ -192,8 +198,11 @@ namespace Hellscript
             for(int i=dying.Count-1;i>=0;i--)
             {
                 var d=dying[i];if(d.go==null){dying.RemoveAt(i);continue;}
-                d.age+=step;var f=FigureOf(d.go);f.dissolve=Mathf.Clamp01(d.age/DissolveTime);
-                if(d.age>=DissolveTime){figures.Remove(d.go);Destroy(d.go);dying.RemoveAt(i);}
+                // A model collapses with its rig first and dissolves after; a primitive figure just dissolves.
+                d.age+=step;var f=FigureOf(d.go);bool rigged=rigs.TryGetValue(d.go,out var rig)&&rig!=null;float total=rigged?ActorRig.DeathSeconds+DissolveTime*.6f:DissolveTime;
+                if(rigged)rig.Tick(step,new ActorPose{action=ActorAction.Dead,progress=Mathf.Clamp01(d.age/ActorRig.DeathSeconds),time=elapsed});
+                f.dissolve=Mathf.Clamp01((d.age-(rigged?ActorRig.DeathSeconds*.55f:0))/(total-(rigged?ActorRig.DeathSeconds*.55f:0)));
+                if(d.age>=total){figures.Remove(d.go);rigs.Remove(d.go);rigPositions.Remove(d.go);Destroy(d.go);dying.RemoveAt(i);}
             }
         }
         void ClearActorMotion(){figures.Clear();dying.Clear();enragedAuras.Clear();lastDamageSeen=null;}

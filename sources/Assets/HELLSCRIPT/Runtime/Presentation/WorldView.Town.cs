@@ -39,13 +39,13 @@ namespace Hellscript
             {
                 var mark=Ring(world.transform,TownPoint(s.position,.09f),TownLayout.InteractionRadius,trim,.065f);mark.name="Service reach "+s.id;mark.SetActive(false);stationMarks[s.id]=mark;
             }
-            hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false);hero.transform.position=TownPoint(walk.Position);
+            hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false,HeroBodyArt((int)game.Store.Data.Hero.heroClass));hero.transform.position=TownPoint(walk.Position);
             hero.transform.rotation=Quaternion.LookRotation(TownPoint(walk.Facing));
             viewCamera.transform.position=CameraPosition(TownLayout.ToWorld(walk.Position));
         }
         void ClearTownPresentation()
         {
-            foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();portalSparks.Clear();townPortal=null;
+            foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();portalSparks.Clear();townPortal=null;ClearRigs();
             foreach(var m in townMeshes)if(m!=null)Destroy(m);townMeshes.Clear();
         }
         public bool TryPickTownGround(Vector2 screen,out Vector2 point)
@@ -86,7 +86,9 @@ namespace Hellscript
         {
             if(world==null||hero==null)return;elapsed+=dt;hero.transform.position=TownPoint(walk.Position);
             Vector3 facing=TownPoint(walk.Facing);if(facing.sqrMagnitude>.01f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(facing),dt*14);
-            var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(walk.Walking?Mathf.Sin(elapsed*13)*.08f:0),0);
+            // The primitive figure bobs as it walks; a model body walks with its rig.
+            if(rigs.TryGetValue(hero,out var rig)&&rig!=null)rig.Tick(dt,new ActorPose{time=elapsed,speed=walk.Walking?3.2f:0,action=ActorAction.Idle,aimLocal=Vector3.forward});
+            else{var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(walk.Walking?Mathf.Sin(elapsed*13)*.08f:0),0);}
             viewCamera.transform.position=Vector3.Lerp(viewCamera.transform.position,CameraPosition(TownLayout.ToWorld(walk.Position)),1-Mathf.Exp(-dt*8));
             foreach(var pair in stationMarks)pair.Value.SetActive(walk.Nearby==pair.Key||walk.Destination==pair.Key);
             ApplyBattleViewport();

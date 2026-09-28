@@ -1,0 +1,6 @@
+total 4602, passed 4554, failed 48
+failed 48, new vs 47-test baseline 1, baseline tests now passing 0
+NEW Hellscript.Tests.ObjectiveProgressTests.ExplorationWalksToEveryKnownOfferingAndDeliversWithoutTeleporting
+  timed out: 190.0 s against its 180 s limit in the full run; rerun alone on the tree merged with main: 200.6 s, timed out again
+  (both while other Unity builds and Blender bakes were running); it passed in 168.1 s in item 4's full run.
+  The test only runs the simulation core (CombatSimulation), which this item does not change.

@@ -153,7 +153,7 @@ namespace Hellscript
         // VFX core (WorldFx) review: monster tiers, telegraph fills, hits and deaths by surface, status overlays, loot beams,
         // fires, generic bursts and each field's ambience. The gallery drives the library directly; the actor, skill and
         // environment presenters make the same calls in later phases.
-        static readonly string[] FxShots={"fx-tiers","fx-telegraphs","fx-telegraphs-boss","fx-hits","fx-hits-crit","fx-deaths","fx-status","fx-loot","fx-fire","fx-bursts"};
+        static readonly string[] FxShots={"fx-tiers","fx-telegraphs","fx-telegraphs-boss","fx-hits","fx-hits-crit","fx-deaths","fx-status","fx-loot","fx-fire","fx-bursts","fx-hero-behind-wall"};
         static readonly int[] SurfaceKinds={0,2,6,11,18,3,0};
         IEnumerator FxShot(Shot shot)
         {
@@ -260,6 +260,17 @@ namespace Hellscript
                     for(int i=0;i<ids.Length;i++)fx.Burst(ids[i],At(new Vector2((i%4-1.5f)*3.6f,(1-i/4)*3.4f+1.5f),1),1);
                     fx.Shockwave(At(new Vector2(0,-4.5f)),2.2f);fx.Beam(At(new Vector2(-6,-4),1.2f),At(new Vector2(-2,-5),1.2f));fx.Slash(At(new Vector2(5,-4.5f),1),Vector3.forward,2.2f,110);
                     Advance(.18f);what="bursts "+string.Join(", ",ids)+" (rows from the back), shockwave, beam and slash in front";break;
+                }
+                case "fx-hero-behind-wall":
+                {
+                    // A wall between the camera and the model hero: the golden silhouette shows on the wall where it hides the
+                    // hero, and nowhere on the hero's own overlapping parts (the stencil bit on the hero's materials).
+                    var skin=Private<GameObject>("hero").GetComponentInChildren<SkinnedMeshRenderer>();
+                    Require(skin!=null&&skin.sharedMaterials.Any(m=>m!=null&&m.shader.name=="HELLSCRIPT/HeroOcclusion"),"The model hero has no occlusion pass.");
+                    Require(skin.sharedMaterials.Where(m=>m!=null&&m.HasProperty("_HeroStencil")).All(m=>m.GetFloat("_HeroStencil")==64),"The hero's materials do not mark the stencil.");
+                    var toCamera=new Vector2(12,-18).normalized;var wall=Anchor("Gallery wall",At(toCamera*1.7f),PrimitiveType.Cube,new Vector3(3.4f,4.6f,.6f),true);
+                    wall.transform.rotation=Quaternion.LookRotation(new Vector3(toCamera.x,0,toCamera.y));
+                    Advance(.2f);what="a 4.6 m wall 1.7 m in front of the model hero toward the camera, the hero's silhouette showing through it";break;
                 }
                 default:
                 {

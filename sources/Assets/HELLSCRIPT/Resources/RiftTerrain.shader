@@ -32,6 +32,7 @@ Shader "HELLSCRIPT/Rift Terrain Visibility"
         _ObjectVisibility("Whole object visibility", Float) = -1
         [HideInInspector] _FogBounds("Fog bounds", Vector) = (0,0,1,1)
         [HideInInspector] _FogSize("Fog size", Vector) = (1,1,0,0)
+        [HideInInspector] _HeroStencil("Hero stencil bit", Float) = 0
     }
     SubShader
     {
@@ -89,6 +90,9 @@ Shader "HELLSCRIPT/Rift Terrain Visibility"
         {
             Name "ForwardLit"
             Tags { "LightMode"="UniversalForward" }
+            // Stencil bit 64 marks the pixels where the hero is the nearest surface: the hero's materials write 64, everything
+            // else clears it, so HeroOcclusion draws the see-through silhouette only where something else covers the hero.
+            Stencil { Ref [_HeroStencil] WriteMask 64 Comp Always Pass Replace }
             HLSLPROGRAM
             #pragma target 2.0
             #pragma vertex Vert

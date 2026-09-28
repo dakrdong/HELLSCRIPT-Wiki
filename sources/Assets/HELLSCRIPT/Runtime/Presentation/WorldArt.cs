@@ -123,6 +123,8 @@ namespace Hellscript
     {
         public static readonly Color DefaultGlow=new Color(1,.46f,.1f);
         public const float GlowIntensity=3;
+        // The cool rim every world-art material starts with; WorldView keeps it under hit flashes and windup rims.
+        public static readonly Color Rim=new Color(.3f,.38f,.5f);
         readonly Dictionary<string,Material> cache=new Dictionary<string,Material>(StringComparer.Ordinal);
         Shader shader;
         public int Count=>cache.Count;
@@ -143,7 +145,7 @@ namespace Hellscript
             // HDR emission for the vertex-colour glow mask. World-shader colours are gamma values that Unity linearises on
             // upload (SetVector included, pow 2.2 above 1), so store the gamma of the wanted linear colour x GlowIntensity.
             var glow=((info.found?info.glow:DefaultGlow).linear*GlowIntensity).gamma;glow.a=1;material.SetColor("_GlowColor",glow);
-            material.SetColor("_RimColor",new Color(.3f,.38f,.5f));material.SetFloat("_RimPower",3.5f);material.SetFloat("_FogEnabled",0);
+            material.SetColor("_RimColor",Rim);material.SetFloat("_RimPower",3.5f);material.SetFloat("_FogEnabled",0);
             return material;
         }
         public void Dispose()

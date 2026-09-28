@@ -31,7 +31,7 @@ namespace Hellscript
                 go.GetComponent<LineRenderer>().widthMultiplier=trap.triggered?.16f:.055f;
             }
             foreach(int id in trapViews.Keys.ToArray())if(!run.traps.Any(t=>t.id==id)){Destroy(trapViews[id]);trapViews.Remove(id);}
-            AnimateHeroSkill(run);
+            AnimateHeroSkill(run);TickHeroRig(run);
         }
     }
 }
