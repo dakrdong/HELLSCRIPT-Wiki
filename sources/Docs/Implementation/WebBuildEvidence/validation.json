@@ -1,0 +1,78 @@
+{
+  "date": "2026-09-28",
+  "includedMain": "8dd402c94b4b46c17aa2d89650fd4fe611f2eb8d",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "result": "Passed",
+    "total": "59",
+    "passed": "59",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "suites": [
+    "BuildResourceTests",
+    "WebFontTests",
+    "TitleScreenTests",
+    "LocalizationTests"
+  ],
+  "uiContract": {
+    "result": "Passed",
+    "tests": 9
+  },
+  "webPackage": {
+    "result": "Passed",
+    "tests": 5
+  },
+  "webLoader": {
+    "result": "Passed",
+    "tests": 5
+  },
+  "web": {
+    "build": "Succeeded",
+    "errors": 0,
+    "development": false,
+    "downloadBytes": 163844655,
+    "browser": "Codex In-app Browser on macOS",
+    "consoleErrors": 0,
+    "observedWarnings": [
+      "Unity URP reports unsupported/stripped FSR upscaling shader; rendered title, combat, equipment and town were verified."
+    ],
+    "checks": [
+      "Korean title and guest entry",
+      "Warrior selection and tutorial combat",
+      "Armor acquisition, detail and equip: defense 68 to 92",
+      "Reload, same armor equipped and defense 92",
+      "Tutorial completion and town entry",
+      "English language and 140 percent reading size",
+      "Viewport checks: 440x956, 956x440, 1280x720, 1440x900, 1680x720"
+    ],
+    "generatedPerformanceTestResources": false,
+    "initialBuildRetry": "Unity Bee reached its six-pass graph regeneration limit; the incremental retry succeeded without source changes."
+  },
+  "android": {
+    "build": "Succeeded",
+    "errors": 0,
+    "development": false,
+    "bytes": 142832282,
+    "sha256": "f723d09d1b5af2bfb05e7777f8dbaba2c39dd2feca575702f73eecef13ffef41",
+    "applicationId": "com.UnityTechnologies.com.unity.template.urpblank",
+    "version": "0.1.0",
+    "versionCode": 1,
+    "minimumSdk": 26,
+    "targetSdk": 36,
+    "abi": [
+      "arm64-v8a"
+    ],
+    "signature": "APK v2 verified, existing Android Debug certificate",
+    "webFontIncluded": false,
+    "physicalDeviceTested": false
+  },
+  "nativeResources": {
+    "result": "Passed",
+    "soundCues": 283,
+    "effectClips": 454,
+    "potionCrops": "Passed",
+    "worldTextureType": "Texture2D",
+    "runtimeExceptions": 0
+  }
+}

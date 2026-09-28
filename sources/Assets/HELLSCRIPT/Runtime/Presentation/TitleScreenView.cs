@@ -60,6 +60,12 @@ namespace Hellscript
             SetCaption(motion,Loc.T(Session.MotionEnabled?"연출 켜짐":"연출 멈춤"));
             SetCaption(enter,Loc.T("캐릭터 선택하기"));
             entryHint.text=Loc.T("로그인 후 캐릭터를 선택합니다.");
+            if(Application.platform==RuntimePlatform.WebGLPlayer)
+            {
+                login.gameObject.SetActive(false);
+                entryHint.text=Loc.T("게스트로 시작하고 이 브라우저에서 이어서 플레이하세요.");
+                footnote.text=Loc.T("웹 게스트 · 이 브라우저에 저장됩니다.");
+            }
         }
         public Button Find(string id)
         {
@@ -78,7 +84,7 @@ namespace Hellscript
         }
         void Enter()
         {
-            if(!Session.SignedIn){ShowLogin();return;}
+            if(!Session.SignedIn){if(Application.platform==RuntimePlatform.WebGLPlayer)GuestAction();else ShowLogin();return;}
             game.Audio?.Play("flow.title_start");game.UI.OpenCharacterSelection();
         }
         void Update()
@@ -108,6 +114,7 @@ namespace Hellscript
             Fit(home,(w-column)/2,homeY,column,compact?182:214);home.localScale=Vector3.one*scale;
             float half=(column-10)/2;
             Put((RectTransform)login.transform,0,0,half,46);Put((RectTransform)guest.transform,half+10,0,half,46);
+            if(Application.platform==RuntimePlatform.WebGLPlayer)Put((RectTransform)guest.transform,0,0,column,46);
             Put((RectTransform)server.transform,0,56,column,54);
             Put((RectTransform)enter.transform,0,120,column,62);Put(entryHint.rectTransform,0,192,column,22);
             entryHint.gameObject.SetActive(!compact);
