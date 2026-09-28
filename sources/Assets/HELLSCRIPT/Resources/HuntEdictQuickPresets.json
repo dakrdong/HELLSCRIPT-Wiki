@@ -2639,5 +2639,149 @@
       "values": [],
       "choices": []
     }
+  ],
+  "styles": [
+    {
+      "id": "aggressive",
+      "name": "공격적",
+      "nameEn": "Aggressive",
+      "description": "적 무리를 빠르게 정리합니다. 큰 피해만 피하고 HP 20% 이하에서만 물러나므로 사냥이 빨라지지만 받는 피해가 늘어납니다.",
+      "descriptionEn": "Clears packs quickly. It only avoids heavy hits and falls back only below 20% HP, so hunts go faster but you take more damage.",
+      "picks": [
+        {
+          "scope": "global/position.engage",
+          "preset": "close",
+          "classes": "WARRIOR"
+        },
+        {
+          "scope": "global/position.engage",
+          "preset": "balanced",
+          "classes": "RANGER,MAGE"
+        },
+        {
+          "scope": "global/position.surrounded",
+          "preset": "hold",
+          "classes": ""
+        },
+        {
+          "scope": "global/target.default",
+          "preset": "pack",
+          "classes": ""
+        },
+        {
+          "scope": "global/survival.lowHp",
+          "preset": "emergency",
+          "classes": ""
+        },
+        {
+          "scope": "global/survival.potion",
+          "preset": "balanced",
+          "classes": ""
+        },
+        {
+          "scope": "global/dodge.ground.policy",
+          "preset": "attack",
+          "classes": ""
+        },
+        {
+          "scope": "global/dodge.control",
+          "preset": "finish",
+          "classes": ""
+        }
+      ]
+    },
+    {
+      "id": "balanced",
+      "name": "균형",
+      "nameEn": "Balanced",
+      "description": "공격과 생존을 고르게 챙깁니다. HP를 10% 이상 깎는 공격을 피하고 HP 30%에서 물러나 회복합니다. 처음이라면 이 방식을 권장합니다.",
+      "descriptionEn": "Balances offense and survival. It avoids attacks that would take 10% HP or more and falls back at 30% HP to recover. Recommended if you are new.",
+      "picks": [
+        {
+          "scope": "global/position.engage",
+          "preset": "balanced",
+          "classes": ""
+        },
+        {
+          "scope": "global/position.surrounded",
+          "preset": "hold",
+          "classes": ""
+        },
+        {
+          "scope": "global/target.default",
+          "preset": "nearest",
+          "classes": ""
+        },
+        {
+          "scope": "global/survival.lowHp",
+          "preset": "balanced",
+          "classes": ""
+        },
+        {
+          "scope": "global/survival.potion",
+          "preset": "balanced",
+          "classes": ""
+        },
+        {
+          "scope": "global/dodge.ground.policy",
+          "preset": "balanced",
+          "classes": ""
+        },
+        {
+          "scope": "global/dodge.control",
+          "preset": "balanced",
+          "classes": ""
+        }
+      ]
+    },
+    {
+      "id": "careful",
+      "name": "신중",
+      "nameEn": "Careful",
+      "description": "위험을 먼저 피합니다. 예고된 공격을 모두 피하고 HP 45%에서 물러나며 물약을 넉넉히 챙깁니다. 사냥은 느려지지만 잘 쓰러지지 않습니다.",
+      "descriptionEn": "Puts safety first. It dodges every telegraphed attack, falls back at 45% HP and carries extra potions. Hunts are slower, but you rarely fall.",
+      "picks": [
+        {
+          "scope": "global/position.engage",
+          "preset": "balanced",
+          "classes": "WARRIOR"
+        },
+        {
+          "scope": "global/position.engage",
+          "preset": "ranged",
+          "classes": "RANGER,MAGE"
+        },
+        {
+          "scope": "global/position.surrounded",
+          "preset": "escape",
+          "classes": ""
+        },
+        {
+          "scope": "global/target.default",
+          "preset": "priority",
+          "classes": ""
+        },
+        {
+          "scope": "global/survival.lowHp",
+          "preset": "careful",
+          "classes": ""
+        },
+        {
+          "scope": "global/survival.potion",
+          "preset": "careful",
+          "classes": ""
+        },
+        {
+          "scope": "global/dodge.ground.policy",
+          "preset": "all",
+          "classes": ""
+        },
+        {
+          "scope": "global/dodge.control",
+          "preset": "careful",
+          "classes": ""
+        }
+      ]
+    }
   ]
 }

@@ -39,6 +39,8 @@ Keep the original 25 groups and 130 global option IDs, values and ranges. Auto E
 
 Show current choices, numbers, sets and priorities compactly; open controls on demand. Disabled conditions remain explained inline. Skill rows show icon/name/rank/equipped state while commands belong to selected details. New skill design remains excluded. Keep dirty state, revert and save in a fixed footer. Navigation preserves drafts; close/preset replacement asks about unsaved edits.
 
+Opening the window lands on the **Overview** tab: three combat styles, advice from the last hunt, equipped skills with their use policies, the seven combat-judgment groups and the automation status. A style is a bundle of existing quick presets and advice reads only stored combat records; both edit the draft and go through the existing Save/Revert. See [Hunt Edict overview](Hunt_Edict_Overview.en.md).
+
 ## New content workflow
 
 1. Start in a checkout containing the latest merged `main`, then run `python3 tools/new_content_ui.py FeatureName`. Keep unfinished changes in an older checkout intact and use a separate current checkout. Existing files are never overwritten.

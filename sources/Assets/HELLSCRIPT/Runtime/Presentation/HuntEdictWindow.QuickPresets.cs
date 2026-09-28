@@ -26,6 +26,9 @@ namespace Hellscript
                 HuntEdictQuickPresets.For(scope);
                 if(id==HuntEdictQuickPresets.Custom)
                 {
+                    // Custom from the overview means "show me the details": open the group where they live.
+                    if(SelectedTab=="overview"&&scope.StartsWith("global/",StringComparison.Ordinal))
+                    {DismissDialog();FocusGlobalOption(HuntEdictUiCatalog.Data.groups.Single(g=>HuntEdictQuickPresets.GlobalScope(g)==scope).ids[0]);return;}
                     customQuickScopes.Add(scope);
                     collapsed.Remove(scope.StartsWith("basic/",StringComparison.Ordinal)?"skill/BASIC":scope);
                 }

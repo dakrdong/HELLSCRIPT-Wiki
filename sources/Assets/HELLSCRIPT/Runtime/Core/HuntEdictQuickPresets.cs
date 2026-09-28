@@ -13,8 +13,18 @@ namespace Hellscript
         public string Name=>Loc.Language=="en"?nameEn:name;
         public string Description=>ClassSkillTree.Display(Loc.Language=="en"?descriptionEn:description);
     }
+    [Serializable] public sealed class EdictStylePick { public string scope,preset,classes=""; }
+    // A combat style is a named bundle of existing group presets; it owns no option values of its own.
+    [Serializable] public sealed class EdictStyle
+    {
+        public string id,name,nameEn,description,descriptionEn;
+        public EdictStylePick[] picks=Array.Empty<EdictStylePick>();
+        public string Name=>Loc.Language=="en"?nameEn:name;
+        public string Description=>Loc.Language=="en"?descriptionEn:description;
+        public IEnumerable<EdictStylePick> For(string heroClass)=>picks.Where(p=>string.IsNullOrEmpty(p.classes)||p.classes.Split(',').Contains(heroClass));
+    }
     [Serializable] public sealed class EdictQuickPresetCatalog
-    { public int version; public EdictQuickPreset[] presets; }
+    { public int version; public EdictQuickPreset[] presets; public EdictStyle[] styles; }
 
     // Quick presets are recipes for existing option values, never a second combat/save format.
     // Each recipe fully defines its own scope and is applied to a detached draft atomically.
@@ -34,9 +44,35 @@ namespace Hellscript
                     string.IsNullOrWhiteSpace(p.name)||string.IsNullOrWhiteSpace(p.nameEn)||string.IsNullOrWhiteSpace(p.description)||string.IsNullOrWhiteSpace(p.descriptionEn))||
                     loaded.presets.Select(p=>p.scope+"/"+p.id).Distinct().Count()!=loaded.presets.Length)
                     throw new InvalidOperationException("Invalid quick-preset catalog.");
+                ValidateStyles(loaded);
                 catalog=loaded;return catalog;
             }
         }
+        // Every style must name authored global presets and cover the same groups once per class,
+        // so choosing another style always replaces the whole bundle.
+        static void ValidateStyles(EdictQuickPresetCatalog loaded)
+        {
+            var styles=loaded.styles??Array.Empty<EdictStyle>();
+            bool Authored(EdictStylePick p)=>p!=null&&p.scope.StartsWith("global/",StringComparison.Ordinal)&&loaded.presets.Any(q=>q.scope==p.scope&&q.id==p.preset);
+            string Scopes(EdictStyle s,string cls)=>string.Join("|",s.For(cls).Select(p=>p.scope).OrderBy(x=>x,StringComparer.Ordinal));
+            if(styles.Length==0||styles.Select(s=>s?.id).Distinct().Count()!=styles.Length||styles.Any(s=>s==null||string.IsNullOrWhiteSpace(s.id)||
+                new[]{s.name,s.nameEn,s.description,s.descriptionEn}.Any(string.IsNullOrWhiteSpace)||s.picks==null||!s.picks.All(Authored)||
+                HuntEdict.ClassIds.Any(c=>s.For(c).Select(p=>p.scope).Distinct().Count()!=s.For(c).Count()||Scopes(s,c)!=Scopes(styles[0],c))))
+                throw new InvalidOperationException("Invalid combat-style catalog.");
+        }
+        public static IReadOnlyList<EdictStyle> Styles=>Catalog.styles;
+        public static EdictStyle Style(string id)=>Catalog.styles.SingleOrDefault(s=>s.id==id)??throw new ArgumentException("Unknown combat style: "+id);
+        // The groups a style decides for this class, in catalog order.
+        public static string[] StyleScopes(string heroClass)=>Catalog.styles[0].For(heroClass).Select(p=>p.scope).ToArray();
+        public static HuntEdictLoadout ApplyStyle(HuntEdictLoadout source,string id)
+        {
+            var next=source;
+            foreach(var pick in Style(id).For(source.edict.heroClass))next=Apply(next,pick.scope,pick.preset);
+            return next;
+        }
+        // Null when the current values differ from every style in at least one of its groups.
+        public static string MatchStyle(HuntEdictLoadout source)=>
+            Catalog.styles.FirstOrDefault(s=>s.For(source.edict.heroClass).All(p=>Matches(source,p.scope,p.preset)))?.id;
         public static IReadOnlyList<EdictQuickPreset> For(string scope)
         {
             var authored=Catalog.presets.Where(p=>p.scope==scope).ToArray();
@@ -59,13 +95,7 @@ namespace Hellscript
             if(scope.StartsWith("global/",StringComparison.Ordinal))
             {
                 var group=Group(scope);ValidateValues(preset,group.ids);
-                foreach(string id in group.ids)
-                {
-                    var definition=EdictOptions.Global.Single(d=>d.id==id);
-                    string value=preset.values.FirstOrDefault(v=>v.id==id)?.value??definition.initial;
-                    if(value=="@equipped")value=next.edict.slots.FirstOrDefault(s=>s!=""&&definition.choices.Contains(s))??"";
-                    next.edict.global.Single(o=>o.id==id).value=definition.CanonicalValue(value,next.edict.heroClass);
-                }
+                foreach(string id in group.ids)next.edict.global.Single(o=>o.id==id).value=GlobalValue(next,preset,id);
             }
             else if(scope==AttackOrder)
             {
@@ -98,6 +128,14 @@ namespace Hellscript
             if(next.UsesTree)next.classSkills.legacyEdict=next.edict.Copy();
             return next;
         }
+        // The value a global recipe writes for one option of its group.
+        static string GlobalValue(HuntEdictLoadout source,EdictQuickPreset preset,string id)
+        {
+            var definition=EdictOptions.Global.Single(d=>d.id==id);
+            string value=preset.values.FirstOrDefault(v=>v.id==id)?.value??definition.initial;
+            if(value=="@equipped")value=source.edict.slots.FirstOrDefault(s=>s!=""&&definition.choices.Contains(s))??"";
+            return definition.CanonicalValue(value,source.edict.heroClass);
+        }
         static void ValidateValues(EdictQuickPreset preset,IEnumerable<string> owned)
         {
             var ids=owned.ToHashSet();
@@ -115,14 +153,18 @@ namespace Hellscript
                 throw new ArgumentException("Quick presets require an equipped skill of this class.");
             return id;
         }
-        public static string Match(HuntEdictLoadout source,string scope)
+        public static string Match(HuntEdictLoadout source,string scope)=>For(scope).FirstOrDefault(p=>Matches(source,scope,p.id))?.id??Custom;
+        public static bool Matches(HuntEdictLoadout source,string scope,string presetId)
         {
-            string current=Fingerprint(source,scope);
-            foreach(var preset in For(scope))if(Fingerprint(Apply(source,scope,preset.id),scope)==current)return preset.id;
-            return Custom;
+            // A global recipe only writes its own group's values, so compare those directly instead of
+            // copying and re-projecting the whole loadout. Callers hold canonical drafts.
+            if(scope.StartsWith("global/",StringComparison.Ordinal))
+            {
+                var preset=For(scope).SingleOrDefault(p=>p.id==presetId)??throw new ArgumentException("Unknown quick preset: "+presetId);
+                return Group(scope).ids.All(id=>HuntEdictSummary.Value(source.edict,id)==GlobalValue(source,preset,id));
+            }
+            return Fingerprint(source,scope)==Fingerprint(Apply(source,scope,presetId),scope);
         }
-        public static bool Matches(HuntEdictLoadout source,string scope,string presetId)=>
-            Fingerprint(source,scope)==Fingerprint(Apply(source,scope,presetId),scope);
         static string Fingerprint(HuntEdictLoadout source,string scope)
         {
             if(scope.StartsWith("global/",StringComparison.Ordinal))return string.Join("|",Group(scope).ids.Select(id=>id+"="+HuntEdictSummary.Value(source.edict,id)));

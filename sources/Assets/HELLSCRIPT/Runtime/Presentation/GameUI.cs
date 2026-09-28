@@ -443,7 +443,8 @@ namespace Hellscript
                     Note(content,"5초 동안 자원/쿨다운으로 인한 스킬 불발은 감지되지 않았습니다.",19,50,muted);
                 }
             }
-            BigButton(content,"사냥 칙령 수정하러 가기",ShowBuild,true);
+            // The label promises the hunt edict; its overview opens on advice drawn from this defeat.
+            BigButton(content,"사냥 칙령 수정하러 가기",ShowEdictEditor,true);
             FooterButton(0,1,"결과 화면으로",ShowResult);
         }
         public void ShowTrainingPresetSave()
