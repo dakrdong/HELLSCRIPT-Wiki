@@ -143,12 +143,14 @@ def build_databases():
     asset_text = read(skills_path)
     asset = yaml.safe_load('\n'.join(x for x in asset_text.splitlines() if not x.startswith(('%', '---'))))['MonoBehaviour']['skills']
     definitions = {a[0]:(a,line) for a,line in constructors(catalog_path,'SkillDefinition')}
+    tree_path='Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json'
+    tree_levels={n['id']:n['level'] for c in json.loads(read(tree_path))['classes'] for n in c['nodes']}
     rows = []
     for s in asset:
         a, line = definitions[s['id']]
         for field,index in [('name',1),('unlock',4),('cooldown',5),('cost',6),('coefficient',7),('range',8),('radius',9),('duration',10),('icon',11),('description',12)]:
             if s[field] != a[index]: raise ValueError(f'Skill asset/source mismatch: {s["id"]}.{field}')
-        fields = {'직업':CLASSES[s['heroClass']], '해금 레벨':s['unlock'], 'CD (초)':s['cooldown'],
+        fields = {'직업':CLASSES[s['heroClass']], '해금 레벨':tree_levels[s['id']], '이전 구성 해금 레벨':s['unlock'], 'CD (초)':s['cooldown'],
                   '자원 비용':str(s['cost'])+(' / 0.25초 유료 틱' if s['id']=='W01' else ' / 1회'),
                   '기본 계수 (D 배수)':s['coefficient'], '거리 필드 range (m)':s['range'],
                   '공간 필드 radius':s['radius'], '시간 필드 duration (초)':s['duration'],
@@ -156,7 +158,7 @@ def build_databases():
                   '효과 설명':s['description']}
         rows.append(record(s['id'],s['name'],CLASSES[s['heroClass']],s['description'],fields,skills_path,
                            next(i for i,x in enumerate(asset_text.splitlines(),1) if x.strip()=='- id: '+s['id']),
-                           image={'file':'SkillAtlas.png','cell':s['icon']},refs=[source_ref(catalog_path,line)],related=['action-expansion','effect-expansion']))
+                           image={'file':'SkillAtlas.png','cell':s['icon']},refs=[source_ref(catalog_path,line),source_ref(tree_path)],related=['action-expansion','effect-expansion']))
     data.append(db('skills','액티브 스킬','현재 에셋과 생성 코드가 일치하는 액티브 18종입니다. 수치는 개발 시험값입니다.',rows))
     unlock_path = 'Assets/HELLSCRIPT/Resources/ContentUnlocks.json'
     unlocks = json.loads(read(unlock_path))
@@ -619,12 +621,14 @@ def build_resources(databases):
 
 def build_class_abilities():
     path='Assets/HELLSCRIPT/Resources/Data/ClassSkills.json'
+    tree_path='Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json'
+    tree_levels={n['id']:n['level'] for c in json.loads(read(tree_path))['classes'] for n in c['nodes']}
     content=json.loads(read(path));status='능력 구현 · UI 공개 대기'
     categories={'active':'일반 액티브','passive':'패시브','ultimate':'궁극기'}
     skills=[record(row['id'],row['name'],CLASSES[row['heroClass']]+' · '+categories[row['category']],row['description'],
-        {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'해금 레벨':row['unlock'],'목록 순서':row['order'],'최대 투자 등급':row['maxRank'],
+        {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'해금 레벨':tree_levels[row['id']],'이전 구성 해금 레벨':row['unlock'],'목록 순서':row['order'],'최대 투자 등급':row['maxRank'],
          '자동 조건':row['automatic'],'Automatic condition':row['automaticEn'],'수치':{p['key']:p['value'] for p in row['parameters']},
-         '일반 플레이 활성화':content['playerEnabled'],'기존 기술':row['legacy']},path,status=status,related=['class-skill-runtime']) for row in content['skills']]
+         '일반 플레이 활성화':content['playerEnabled'],'기존 기술':row['legacy']},path,status=status,refs=[source_ref(tree_path)],related=['class-skill-runtime']) for row in content['skills']]
     gear=[record(row['id'],row['name'],'신규 세트 장비' if row['setId'] else '신규 전설',row['description'],
         {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'직업':CLASSES[row['heroClass']],'부위':SLOTS[row['slot']],
          '세트 ID':row['setId'],'일반 드롭 등록':False,'드롭 가중치':'미정'},path,status=status,related=['class-skill-runtime']) for row in content['gear']]

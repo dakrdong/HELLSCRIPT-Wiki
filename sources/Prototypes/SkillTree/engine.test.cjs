@@ -49,7 +49,7 @@ for(const hero of data.classes){
     hero.examples.forEach((preset,index)=>{const state=E.example(data,hero.id,index),v=E.evaluate(data,state);assert.equal(state.level,preset.level);assert.deepEqual(state.equipped,preset.equip);assert.ok(v.remaining>=0);for(const id of state.equipped)assert.ok(v.available[id]);});
   });
 }
-test('only the starting active is available at level one',()=>{for(const hero of data.classes){const v=E.evaluate(data,E.empty(data,hero.id));assert.equal(v.unlocked,1);assert.equal(v.nodes.find(n=>v.available[n.id]).kind,'active');}});
+test('all three first-row actives are available at level one',()=>{for(const hero of data.classes){const v=E.evaluate(data,E.empty(data,hero.id));const available=v.nodes.filter(n=>v.available[n.id]);assert.equal(v.unlocked,3);assert.ok(available.every(n=>n.kind==='active'));assert.deepEqual(available.map(n=>n.id).sort(),hero.nodes.filter(n=>n.kind==='active').slice(0,3).map(n=>n.id).sort());}});
 test('a dedicated modifier checks its source activation independently of the player level',()=>{
  const fixture=E.clone(data),hero=fixture.classes.find(c=>c.id==='Warrior');
  // Model an unavailable source independently of normal level ordering.

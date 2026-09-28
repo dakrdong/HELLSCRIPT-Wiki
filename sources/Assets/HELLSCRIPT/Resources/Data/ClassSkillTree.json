@@ -1,0 +1,932 @@
+{
+  "version": 1,
+  "levelCap": 40,
+  "ultimateFrom": 30,
+  "ultimateTo": 39,
+  "classes": [
+    {
+      "heroClass": 0,
+      "name": "전사",
+      "nameEn": "Warrior",
+      "branches": [
+        {
+          "ko": "회전과 출혈",
+          "en": "Whirlwind & blood"
+        },
+        {
+          "ko": "돌파와 제압",
+          "en": "Impact & control"
+        },
+        {
+          "ko": "수호와 함성",
+          "en": "Guard & warcry"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "W01",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W02",
+          "level": 1,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W03",
+          "level": 1,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W04",
+          "level": 10,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W05",
+          "level": 15,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W06",
+          "level": 20,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W07",
+          "level": 22,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W08",
+          "level": 22,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W09",
+          "level": 26,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W10",
+          "level": 28,
+          "branch": 0,
+          "all": [
+            "W09"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "W11",
+          "level": 30,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W12",
+          "level": 30,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W13",
+          "level": 34,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W14",
+          "level": 34,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W15",
+          "level": 38,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W16",
+          "level": 38,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W17",
+          "level": 40,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "W18",
+          "level": 40,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP01",
+          "level": 3,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP02",
+          "level": 8,
+          "branch": 0,
+          "all": [
+            "W01"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP03",
+          "level": 6,
+          "branch": 1,
+          "all": [
+            "W02"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP04",
+          "level": 12,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP05",
+          "level": 16,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP06",
+          "level": 18,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP07",
+          "level": 23,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP08",
+          "level": 27,
+          "branch": 0,
+          "all": [
+            "W09"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP09",
+          "level": 31,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP10",
+          "level": 24,
+          "branch": 2,
+          "all": [
+            "W06"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP11",
+          "level": 27,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            "W02",
+            "W11"
+          ]
+        },
+        {
+          "id": "WP12",
+          "level": 28,
+          "branch": 1,
+          "all": [
+            "W03"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP13",
+          "level": 32,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP14",
+          "level": 35,
+          "branch": 1,
+          "all": [
+            "W04"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP15",
+          "level": 32,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "WP16",
+          "level": 36,
+          "branch": 0,
+          "all": [
+            "W01"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP17",
+          "level": 39,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            "W03",
+            "W04"
+          ]
+        },
+        {
+          "id": "WP18",
+          "level": 40,
+          "branch": 2,
+          "all": [
+            "W17"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "WP19",
+          "level": 40,
+          "branch": 1,
+          "all": [
+            "W18"
+          ],
+          "oneOf": []
+        }
+      ]
+    },
+    {
+      "heroClass": 1,
+      "name": "궁수",
+      "nameEn": "Ranger",
+      "branches": [
+        {
+          "ko": "정밀 사격",
+          "en": "Precision"
+        },
+        {
+          "ko": "덫과 맹독",
+          "en": "Traps & venom"
+        },
+        {
+          "ko": "기동과 그림자",
+          "en": "Mobility & shadow"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "A01",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A02",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A03",
+          "level": 1,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A04",
+          "level": 10,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A05",
+          "level": 15,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A06",
+          "level": 20,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A07",
+          "level": 22,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A08",
+          "level": 22,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A09",
+          "level": 26,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A10",
+          "level": 28,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A11",
+          "level": 30,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A12",
+          "level": 32,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A13",
+          "level": 34,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A14",
+          "level": 34,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A15",
+          "level": 38,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A16",
+          "level": 38,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A17",
+          "level": 40,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "A18",
+          "level": 40,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP01",
+          "level": 3,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP02",
+          "level": 11,
+          "branch": 2,
+          "all": [
+            "A04"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "AP03",
+          "level": 6,
+          "branch": 0,
+          "all": [
+            "A01"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "AP04",
+          "level": 27,
+          "branch": 1,
+          "all": [
+            "A03"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "AP05",
+          "level": 12,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP06",
+          "level": 8,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP07",
+          "level": 16,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP08",
+          "level": 9,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP09",
+          "level": 21,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP10",
+          "level": 23,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP11",
+          "level": 27,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            "A03",
+            "A09",
+            "A10"
+          ]
+        },
+        {
+          "id": "AP12",
+          "level": 29,
+          "branch": 2,
+          "all": [
+            "A04"
+          ],
+          "oneOf": [
+            "A03",
+            "A09",
+            "A10"
+          ]
+        },
+        {
+          "id": "AP13",
+          "level": 24,
+          "branch": 0,
+          "all": [],
+          "oneOf": [
+            "A01",
+            "A08"
+          ]
+        },
+        {
+          "id": "AP14",
+          "level": 31,
+          "branch": 2,
+          "all": [
+            "A11"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "AP15",
+          "level": 29,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "AP16",
+          "level": 33,
+          "branch": 2,
+          "all": [],
+          "oneOf": [
+            "A12",
+            "A16"
+          ]
+        },
+        {
+          "id": "AP17",
+          "level": 39,
+          "branch": 1,
+          "all": [
+            "A15"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "AP18",
+          "level": 40,
+          "branch": 0,
+          "all": [
+            "A17"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "AP19",
+          "level": 40,
+          "branch": 2,
+          "all": [
+            "A18"
+          ],
+          "oneOf": []
+        }
+      ]
+    },
+    {
+      "heroClass": 2,
+      "name": "마법사",
+      "nameEn": "Mage",
+      "branches": [
+        {
+          "ko": "화염과 원소 순환",
+          "en": "Flame & convergence"
+        },
+        {
+          "ko": "냉기와 번개",
+          "en": "Frost & lightning"
+        },
+        {
+          "ko": "비전과 결계",
+          "en": "Arcane & wards"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "M01",
+          "level": 1,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M02",
+          "level": 1,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M03",
+          "level": 1,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M04",
+          "level": 10,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M05",
+          "level": 15,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M06",
+          "level": 20,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M07",
+          "level": 22,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M08",
+          "level": 24,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M09",
+          "level": 26,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M10",
+          "level": 28,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M11",
+          "level": 30,
+          "branch": 1,
+          "all": [
+            "M03"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "M12",
+          "level": 32,
+          "branch": 1,
+          "all": [
+            "M03"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "M13",
+          "level": 34,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M14",
+          "level": 34,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M15",
+          "level": 38,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M16",
+          "level": 38,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M17",
+          "level": 40,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "M18",
+          "level": 40,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP01",
+          "level": 3,
+          "branch": 0,
+          "all": [
+            "M01"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "MP02",
+          "level": 6,
+          "branch": 1,
+          "all": [
+            "M02"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "MP03",
+          "level": 8,
+          "branch": 1,
+          "all": [
+            "M03"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "MP04",
+          "level": 16,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP05",
+          "level": 11,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP06",
+          "level": 12,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP07",
+          "level": 23,
+          "branch": 0,
+          "all": [],
+          "oneOf": [
+            "M07",
+            "M08"
+          ]
+        },
+        {
+          "id": "MP08",
+          "level": 25,
+          "branch": 0,
+          "all": [],
+          "oneOf": [
+            "M07",
+            "M08"
+          ]
+        },
+        {
+          "id": "MP09",
+          "level": 21,
+          "branch": 1,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP10",
+          "level": 27,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            "M06",
+            "M09"
+          ]
+        },
+        {
+          "id": "MP11",
+          "level": 33,
+          "branch": 1,
+          "all": [],
+          "oneOf": [
+            "M03",
+            "M12"
+          ]
+        },
+        {
+          "id": "MP12",
+          "level": 31,
+          "branch": 1,
+          "all": [
+            "M11"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "MP13",
+          "level": 18,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP14",
+          "level": 20,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP15",
+          "level": 35,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP16",
+          "level": 36,
+          "branch": 0,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP17",
+          "level": 39,
+          "branch": 2,
+          "all": [],
+          "oneOf": []
+        },
+        {
+          "id": "MP18",
+          "level": 40,
+          "branch": 0,
+          "all": [
+            "M17"
+          ],
+          "oneOf": []
+        },
+        {
+          "id": "MP19",
+          "level": 40,
+          "branch": 2,
+          "all": [
+            "M18"
+          ],
+          "oneOf": []
+        }
+      ]
+    }
+  ]
+}

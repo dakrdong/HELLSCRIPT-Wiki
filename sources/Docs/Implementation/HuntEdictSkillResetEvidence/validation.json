@@ -1,0 +1,83 @@
+{
+  "date": "2026-09-28",
+  "baseCommit": "eadd9b7ba7d7a7141bc23ccbcf189b73a7d5b4e5",
+  "unity": "6000.6.0f1",
+  "editorConnection": "No running CoplayDev Unity Editor instance; used the established batch test/build path in the current checkout.",
+  "build": {
+    "target": "StandaloneOSX",
+    "development": true,
+    "errors": 0
+  },
+  "tests": [
+    {
+      "file": "editmode.xml",
+      "mode": "EditMode",
+      "result": "Passed",
+      "total": 112,
+      "passed": 112,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "file": "combat-editmode.xml",
+      "mode": "EditMode",
+      "result": "Passed",
+      "total": 502,
+      "passed": 502,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "prototypeTests": {
+    "passed": 39,
+    "failed": 0
+  },
+  "uiContract": {
+    "ownership": "PASS",
+    "regressionPassed": 9
+  },
+  "native": {
+    "resetPointerFlow": "PASS for Warrior, Ranger and Mage at level 1",
+    "resetFreshProcess": "PASS for all three classes, zero ranks, empty slots, one unspent point",
+    "legacyPointerFlow": "PASS for existing version 3 allocation, investment, slots and policy editing",
+    "legacyFreshProcess": "PASS",
+    "resolutions": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textScales": [
+      100,
+      150
+    ],
+    "resetLayoutCombinations": 20,
+    "exceptions": 0,
+    "input": "uGUI raycast and PointerEventData down/up/click lifecycle",
+    "saveIsolation": "Separate temporary save directories; production accounts untouched"
+  },
+  "limits": [
+    "No active Unity Editor Game View verification",
+    "No physical Android or iOS input/performance validation"
+  ]
+}

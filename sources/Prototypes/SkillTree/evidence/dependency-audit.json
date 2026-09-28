@@ -1,7 +1,7 @@
 {
   "source": {
     "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
-    "runtimeSha256": "d4367852e759b2e0d741db0e47b17bb81670637886720f36e9a9de14ac3dae26",
+    "runtimeSha256": "43526be1f9d4310078006f244364d2a0fb575d74f6de29d27bd30171674a953b",
     "design": "Docs/Design/ClassSkills/catalog.json",
     "designSha256": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
     "gameEnabled": false
@@ -33,8 +33,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "유효한 위치로 도약해 착지 충격을 줍니다. 신규 능력 검증 경로에서는 실제 도약 거리 2m를 넘는 1m마다 직접 피해 가산 +15%를 얻으며 8m에서 +90%입니다. 거리 확보 선택 시 최대 2초 후퇴를 시도합니다.",
-      "sourceSha256": "01183fd375ab9555fa903cc3e72b09905c6303fdfbde095833e825095be64fd2"
+      "sourceDescription": "유효한 위치로 도약해 착지 충격을 줍니다. 실제 도약 거리 2m를 넘는 1m마다 직접 피해 가산 +15%를 얻으며 8m에서 +90%입니다. 거리 확보 선택 시 최대 2초 후퇴를 시도합니다.",
+      "sourceSha256": "a720c8b84df108ae5c4dbe9ed9ceb623e438ebe46ac56557387efd58b37d763b"
     },
     {
       "id": "W03",
@@ -1746,7 +1746,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 184,
+          "line": 185,
           "cue": "Passive(\"MP08\")"
         }
       ],

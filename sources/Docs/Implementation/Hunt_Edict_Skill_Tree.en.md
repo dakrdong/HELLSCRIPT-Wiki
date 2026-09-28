@@ -1,12 +1,12 @@
 # Hunt edict skill tree integration
 
-Updated: 2026-09-27 · [한국어](Hunt_Edict_Skill_Tree.md)
+Updated: 2026-09-28 · [한국어](Hunt_Edict_Skill_Tree.md)
 
 ## Screen and interaction
 
 The Hunt Edict **Skills** tab shows all 37 skills of the current class, arranged by level stage and three branches. Selecting an icon displays effects, unlock requirements and ranks. Development skill IDs in descriptions are replaced by localized skill names.
 
-There are four equipped normal active slots and one separate ultimate slot. At most one ultimate can be selected. Every unlocked passive applies automatically, so there is no passive equipment area. The combat HUD reads the same four normal slots, separate ultimate slot and actual cooldowns.
+There are four equipped normal active slots and one separate ultimate slot. At most one ultimate can be selected. Every unlocked passive with an assigned rank applies automatically, so there is no passive equipment area. Existing version 3 free base ranks count as assigned ranks. The combat HUD reads the same four normal slots, separate ultimate slot and actual cooldowns.
 
 Selecting an equipped active opens **Remove skill** and **Edit hunt edict**. Editing opens that skill's automatic use and policy settings. Returning to the tree preserves the draft. The separate skill-edict subtab is removed. Basic attack and attack priority remain available under **Attack settings**.
 
@@ -28,17 +28,17 @@ Saving and rules are unchanged. `ClassSkillTree` and the draft still decide unlo
 
 ## Progression and combat
 
-`tools/build_skill_tree.cjs` compiles the levels and prerequisites from `Prototypes/SkillTree/tree-design.cjs` into the native `ClassSkillTree.json` resource. HTML and native progression do not maintain separate handwritten graphs. Base rank one is free once unlocked. Upgrades receive one point per level after level one: 39 points at level 40.
+`tools/build_skill_tree.cjs` compiles the levels and prerequisites from `Prototypes/SkillTree/tree-design.cjs` into the native `ClassSkillTree.json` resource. HTML and native progression do not maintain separate handwritten graphs. Existing version 3 allocations retain their free base ranks and upgrade budget. Explicitly resetting the allocation switches that draft to version 4, clears all ranks to zero and refunds a budget equal to hero level, including the starting point. Every rank from 0 to 1 onward costs one point: one point at level 1 and 40 at level 40. Uninvested skills cannot be equipped or grant passive effects. Merely opening or loading an existing build never redistributes its ranks.
 
 Direct effect dependencies remain required. Ultimates require level 40 and any unlocked skill in the preceding level 30–39 stage. Unlocking a prerequisite does not require equipping it in an active slot.
 
-The existing six passives are evaluated by `HeroStats`; expanded passives use the existing combat effect owners. Always active means available once unlocked; their hit, freeze and other trigger conditions remain intact.
+The existing six passives are evaluated by `HeroStats`; expanded passives use the existing combat effect owners. Both check unlock eligibility and assigned ranks. Always active means available once unlocked and invested; their hit, freeze and other trigger conditions remain intact.
 
 ## Persistence and compatibility
 
 The detached `HuntEdictEditSession` draft is validated and atomically saved by `GameStore.CommitHuntEdict`. Ranks, four slot positions, ultimate, automatic use, skill policies, attack order and global edict settings are saved together. Reflow and language changes never save.
 
-Player configurations use `ClassSkillLoadout` version 3. Production startup atomically upgrades owned heroes and preserves the original build. Investments below the new unlock level are refunded to free base rank. Existing version 1–2 development fixtures retain their original meaning. A legacy suspended run retains its snapshot; explicitly editing its skills uses the existing live-change transaction to adopt the tree.
+Existing player configurations use `ClassSkillLoadout` version 3; explicitly reset allocations use version 4. Production startup atomically upgrades owned heroes and preserves the original build. Investments below the new unlock level are refunded to free base rank. Existing version 1–2 development fixtures retain their original meaning. A legacy suspended run retains its snapshot; explicitly editing its skills uses the existing live-change transaction to adopt the tree.
 
 HED5 shares the preset name and full skill configuration. Existing HED1–HED3 import and HED4 skill decoding remain available. Received allocations over the receiver's point budget can be stored but cannot be applied.
 
@@ -80,3 +80,23 @@ Captures:
 - Before the redesign: [landscape](HuntEdictSkillTreeEvidence/layout-1600x900-ko.png) · [portrait](HuntEdictSkillTreeEvidence/layout-440x956-ko.png)
 
 Mobile ratios were reproduced in a macOS window. Touch and performance on physical mobile devices were not verified.
+
+## 2026-09-28 allocation reset and inspector cleanup
+
+- Removed the unlocked-skill count under remaining points. Removed the inspector's attack-order, automatic-use and policy summary, along with its duplicate usage-conditions button. The equipped-slot menu still opens the skill policy editor.
+- All three first-row actives now become available at level 1: Whirlwind, Leap Slam and Crushing Blow; Piercing Shot, Multishot and Poison Trap; Fireball, Blizzard and Chain Lightning. Passive and later-stage level requirements remain unchanged.
+- Reset clears all ranks and equipment in the detached draft. Revert restores it; only Save changes the owned hero. A skill must receive a point before equipping it. Refunding its last point also removes its slot and attack-order entry.
+- `ClassSkillTree` and `ClassSkillLoadout` own zero ranks and point accounting. Older saves and presets retain their original rules. Saving a reset allocation, reopening it and restarting the game never reintroduce a free starting rank.
+- Legacy combat checks also read `ClassSkillTree.UnlockLevel`, so actual automatic casts do not remain locked behind the old level 3/6 requirements.
+
+### Verification for this change
+
+Unity 6000.6.0f1 Edit Mode passed 112 allocation/transaction/persistence/sharing/localization cases and 502 combat regression cases, with zero failures or skips in either run. The HTML tree's 39 tests and the shared UI ownership check with 9 regressions also passed.
+
+In a macOS development player, uGUI pointer events verified reset, revert, investment and equipment of the second/third first-row active, slot-based policy navigation, save/reopen and last-point refunds for all three level-one classes. A separate player process restored all-zero allocations with one remaining point and empty slots. Existing version 3 investment, equipment, policy editing and fresh-process restoration also passed.
+
+The 20-layout matrix combined 440×956 portrait, 956×440 landscape and 1600×900/1600×1000/2100×900 desktop with Korean/English and 100%/150% text. No Unity Editor instance was connected, so this task used the established batch test/build path. Production account saves were untouched. Physical mobile input and performance were not verified.
+
+- [Validation summary](HuntEdictSkillResetEvidence/validation.json) · [Allocation/persistence tests](HuntEdictSkillResetEvidence/editmode.xml) · [Combat regressions](HuntEdictSkillResetEvidence/combat-editmode.xml) · [Build result](HuntEdictSkillResetEvidence/build.txt)
+- [Pointer interactions](HuntEdictSkillResetEvidence/runtime.txt) · [Zero-rank restart](HuntEdictSkillResetEvidence/restart.txt) · [Existing allocation interactions](HuntEdictSkillResetEvidence/legacy-runtime.txt) · [Existing allocation restart](HuntEdictSkillResetEvidence/legacy-restart.txt)
+- [Desktop Korean](HuntEdictSkillResetEvidence/desktop-ko.png) · [Portrait English 150%](HuntEdictSkillResetEvidence/portrait-en-150.png) · [Landscape Korean](HuntEdictSkillResetEvidence/landscape-ko.png) · [Landscape English 150%](HuntEdictSkillResetEvidence/landscape-en-150.png) · [Empty slots and refunded point](HuntEdictSkillResetEvidence/reset-empty-ko.png)

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T18:07:09+09:00",
+  "generatedAt": "2026-09-28T20:11:46+09:00",
   "databases": [
     {
       "id": "resources",
@@ -11963,6 +11963,7 @@
           "fields": {
             "직업": "전사",
             "해금 레벨": 1,
+            "이전 구성 해금 레벨": 1,
             "CD (초)": 0,
             "자원 비용": "6 / 0.25초 유료 틱",
             "기본 계수 (D 배수)": 0.5,
@@ -11985,6 +11986,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 426
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12000,7 +12005,8 @@
           "summary": "유효한 위치로 도약해 착지 충격을 줍니다.",
           "fields": {
             "직업": "전사",
-            "해금 레벨": 3,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 3,
             "CD (초)": 8,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 1.8,
@@ -12023,6 +12029,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 427
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12038,7 +12048,8 @@
           "summary": "전방의 적에게 강한 물리 피해를 줍니다.",
           "fields": {
             "직업": "전사",
-            "해금 레벨": 6,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 6,
             "CD (초)": 0,
             "자원 비용": "25 / 1회",
             "기본 계수 (D 배수)": 2.2,
@@ -12061,6 +12072,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 428
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12077,6 +12092,7 @@
           "fields": {
             "직업": "전사",
             "해금 레벨": 10,
+            "이전 구성 해금 레벨": 10,
             "CD (초)": 10,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 1.2,
@@ -12099,6 +12115,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 429
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12115,6 +12135,7 @@
           "fields": {
             "직업": "전사",
             "해금 레벨": 15,
+            "이전 구성 해금 레벨": 15,
             "CD (초)": 14,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 0,
@@ -12137,6 +12158,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 430
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12153,6 +12178,7 @@
           "fields": {
             "직업": "전사",
             "해금 레벨": 20,
+            "이전 구성 해금 레벨": 20,
             "CD (초)": 16,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 0,
@@ -12175,6 +12201,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 431
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12191,6 +12221,7 @@
           "fields": {
             "직업": "궁수",
             "해금 레벨": 1,
+            "이전 구성 해금 레벨": 1,
             "CD (초)": 0,
             "자원 비용": "20 / 1회",
             "기본 계수 (D 배수)": 1.8,
@@ -12213,6 +12244,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 432
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12228,7 +12263,8 @@
           "summary": "60도 부채꼴로 화살 3발을 발사합니다.",
           "fields": {
             "직업": "궁수",
-            "해금 레벨": 3,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 3,
             "CD (초)": 3,
             "자원 비용": "30 / 1회",
             "기본 계수 (D 배수)": 0.8,
@@ -12251,6 +12287,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 433
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12266,7 +12306,8 @@
           "summary": "5초 독 장판을 설치합니다. 최대 2개.",
           "fields": {
             "직업": "궁수",
-            "해금 레벨": 6,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 6,
             "CD (초)": 8,
             "자원 비용": "20 / 1회",
             "기본 계수 (D 배수)": 0.6,
@@ -12289,6 +12330,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 434
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12305,6 +12350,7 @@
           "fields": {
             "직업": "궁수",
             "해금 레벨": 10,
+            "이전 구성 해금 레벨": 10,
             "CD (초)": 8,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 0,
@@ -12327,6 +12373,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 435
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12343,6 +12393,7 @@
           "fields": {
             "직업": "궁수",
             "해금 레벨": 15,
+            "이전 구성 해금 레벨": 15,
             "CD (초)": 10,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 0,
@@ -12365,6 +12416,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 436
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12381,6 +12436,7 @@
           "fields": {
             "직업": "궁수",
             "해금 레벨": 20,
+            "이전 구성 해금 레벨": 20,
             "CD (초)": 12,
             "자원 비용": "10 / 1회",
             "기본 계수 (D 배수)": 0.25,
@@ -12403,6 +12459,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 437
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12419,6 +12479,7 @@
           "fields": {
             "직업": "마법사",
             "해금 레벨": 1,
+            "이전 구성 해금 레벨": 1,
             "CD (초)": 0,
             "자원 비용": "25 / 1회",
             "기본 계수 (D 배수)": 2.1,
@@ -12441,6 +12502,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 438
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12456,7 +12521,8 @@
           "summary": "6초간 냉기 피해와 35% 둔화. 최대 2개.",
           "fields": {
             "직업": "마법사",
-            "해금 레벨": 3,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 3,
             "CD (초)": 6,
             "자원 비용": "30 / 1회",
             "기본 계수 (D 배수)": 0.65,
@@ -12479,6 +12545,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 439
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12494,7 +12564,8 @@
           "summary": "4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.",
           "fields": {
             "직업": "마법사",
-            "해금 레벨": 6,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 6,
             "CD (초)": 2,
             "자원 비용": "25 / 1회",
             "기본 계수 (D 배수)": 1.1,
@@ -12517,6 +12588,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 440
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12533,6 +12608,7 @@
           "fields": {
             "직업": "마법사",
             "해금 레벨": 10,
+            "이전 구성 해금 레벨": 10,
             "CD (초)": 9,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 0,
@@ -12555,6 +12631,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 441
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12571,6 +12651,7 @@
           "fields": {
             "직업": "마법사",
             "해금 레벨": 15,
+            "이전 구성 해금 레벨": 15,
             "CD (초)": 14,
             "자원 비용": "0 / 1회",
             "기본 계수 (D 배수)": 0,
@@ -12593,6 +12674,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 442
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -12609,6 +12694,7 @@
           "fields": {
             "직업": "마법사",
             "해금 레벨": 20,
+            "이전 구성 해금 레벨": 20,
             "CD (초)": 10,
             "자원 비용": "20 / 1회",
             "기본 계수 (D 배수)": 1,
@@ -12631,6 +12717,10 @@
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
               "line": 443
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
             }
           ],
           "related": [
@@ -155073,6 +155163,7 @@
             "영어 이름": "Whirlwind",
             "English description": "Damages nearby enemies every 0.25 seconds. Can be held while moving.",
             "해금 레벨": 1,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 1,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155093,6 +155184,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155105,7 +155202,8 @@
           "fields": {
             "영어 이름": "Leap Slam",
             "English description": "Leap to a valid landing and deal impact damage. Each actual meter beyond 2m adds 15% direct damage, capped at +90% at 8m. The spacing policy may retreat for up to 2s first.",
-            "해금 레벨": 3,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 3,
             "목록 순서": 2,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155129,6 +155227,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155141,7 +155245,8 @@
           "fields": {
             "영어 이름": "Crushing Blow",
             "English description": "Deals heavy physical damage to enemies in front.",
-            "해금 레벨": 6,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 6,
             "목록 순서": 3,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155162,6 +155267,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155175,6 +155286,7 @@
             "영어 이름": "Ground Slam",
             "English description": "Damages nearby enemies and stuns them for 1.5 seconds.",
             "해금 레벨": 10,
+            "이전 구성 해금 레벨": 10,
             "목록 순서": 4,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155195,6 +155307,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155208,6 +155326,7 @@
             "영어 이름": "Iron Wall",
             "English description": "Holds a shield worth 30% of max HP for 4 seconds.",
             "해금 레벨": 15,
+            "이전 구성 해금 레벨": 15,
             "목록 순서": 5,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155228,6 +155347,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155241,6 +155366,7 @@
             "영어 이름": "Battle Shout",
             "English description": "Restores 40 resource and adds +20% damage for 6 seconds.",
             "해금 레벨": 20,
+            "이전 구성 해금 레벨": 20,
             "목록 순서": 6,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155261,6 +155387,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155274,6 +155406,7 @@
             "영어 이름": "Piercing Shot",
             "English description": "Pierces up to 5 enemies in a straight line.",
             "해금 레벨": 1,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 1,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155294,6 +155427,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155306,7 +155445,8 @@
           "fields": {
             "영어 이름": "Multishot",
             "English description": "Fires 3 arrows in a 60 degree arc.",
-            "해금 레벨": 3,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 3,
             "목록 순서": 2,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155327,6 +155467,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155339,7 +155485,8 @@
           "fields": {
             "영어 이름": "Venom Trap",
             "English description": "Places a poison zone for 5 seconds. Up to 2 at once.",
-            "해금 레벨": 6,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 6,
             "목록 순서": 3,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155360,6 +155507,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155373,6 +155526,7 @@
             "영어 이름": "Retreat Leap",
             "English description": "Leaps to a spot that opens distance from enemies.",
             "해금 레벨": 10,
+            "이전 구성 해금 레벨": 10,
             "목록 순서": 4,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155393,6 +155547,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155406,6 +155566,7 @@
             "영어 이름": "Hunter's Mark",
             "English description": "Adds +25% damage against the marked target.",
             "해금 레벨": 15,
+            "이전 구성 해금 레벨": 15,
             "목록 순서": 5,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155426,6 +155587,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155439,6 +155606,7 @@
             "영어 이름": "Shadow Arrow",
             "English description": "Adds dark damage to the next 3 shots.",
             "해금 레벨": 20,
+            "이전 구성 해금 레벨": 20,
             "목록 순서": 6,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155459,6 +155627,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155472,6 +155646,7 @@
             "영어 이름": "Fireball",
             "English description": "Deals blast damage at the point of impact.",
             "해금 레벨": 1,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 1,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155492,6 +155667,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155504,7 +155685,8 @@
           "fields": {
             "영어 이름": "Blizzard",
             "English description": "Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once.",
-            "해금 레벨": 3,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 3,
             "목록 순서": 2,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155525,6 +155707,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155537,7 +155725,8 @@
           "fields": {
             "영어 이름": "Chain Lightning",
             "English description": "Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one.",
-            "해금 레벨": 6,
+            "해금 레벨": 1,
+            "이전 구성 해금 레벨": 6,
             "목록 순서": 3,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155558,6 +155747,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155571,6 +155766,7 @@
             "영어 이름": "Teleport",
             "English description": "Moves to a valid spot with less danger.",
             "해금 레벨": 10,
+            "이전 구성 해금 레벨": 10,
             "목록 순서": 4,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155591,6 +155787,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155604,6 +155806,7 @@
             "영어 이름": "Elemental Shield",
             "English description": "Holds a shield worth 35% of max HP for 4 seconds.",
             "해금 레벨": 15,
+            "이전 구성 해금 레벨": 15,
             "목록 순서": 5,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155624,6 +155827,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155637,6 +155846,7 @@
             "영어 이름": "Frost Nova",
             "English description": "Deals cold damage to nearby enemies and freezes them for 1.5 seconds.",
             "해금 레벨": 20,
+            "이전 구성 해금 레벨": 20,
             "목록 순서": 6,
             "최대 투자 등급": 5,
             "자동 조건": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
@@ -155657,6 +155867,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155669,7 +155885,8 @@
           "fields": {
             "영어 이름": "Into the Crowd",
             "English description": "Adds +15% damage while three or more living enemies stand within 3m.",
-            "해금 레벨": 1,
+            "해금 레벨": 3,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 17,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155683,6 +155900,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155695,7 +155918,8 @@
           "fields": {
             "영어 이름": "Endless Spin",
             "English description": "Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it clears the bonus.",
-            "해금 레벨": 1,
+            "해금 레벨": 8,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 18,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155709,6 +155933,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155721,7 +155951,8 @@
           "fields": {
             "영어 이름": "Landing Stance",
             "English description": "Reduces incoming damage by 15% for 2 seconds after a leap lands.",
-            "해금 레벨": 1,
+            "해금 레벨": 6,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 19,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155735,6 +155966,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155747,7 +155984,8 @@
           "fields": {
             "영어 이름": "Blood Recovery",
             "English description": "Restores 2% of max HP on a kill, then waits 1 second before it can trigger again.",
-            "해금 레벨": 1,
+            "해금 레벨": 12,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 20,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155761,6 +155999,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155773,7 +156017,8 @@
           "fields": {
             "영어 이름": "Hardened Will",
             "English description": "Adds +20%p to shield strength, stacking with the bonus from Willpower.",
-            "해금 레벨": 1,
+            "해금 레벨": 16,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 21,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155787,6 +156032,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155799,7 +156050,8 @@
           "fields": {
             "영어 이름": "Executioner's Eye",
             "English description": "Adds +20% damage against enemies at or below 30% HP.",
-            "해금 레벨": 1,
+            "해금 레벨": 18,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 22,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155813,6 +156065,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155825,7 +156083,8 @@
           "fields": {
             "영어 이름": "Long Reach",
             "English description": "Adds +15% damage when the target is 7m or further away on hit.",
-            "해금 레벨": 1,
+            "해금 레벨": 3,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 17,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155839,6 +156098,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155851,7 +156116,8 @@
           "fields": {
             "영어 이름": "Escaping Step",
             "English description": "Adds +20%p movement speed for 2 seconds after Retreat Leap lands.",
-            "해금 레벨": 1,
+            "해금 레벨": 11,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 18,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155865,6 +156131,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155877,7 +156149,8 @@
           "fields": {
             "영어 이름": "Piercing Gaze",
             "English description": "Piercing Shot hits up to 7 targets instead of 5.",
-            "해금 레벨": 1,
+            "해금 레벨": 6,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 19,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155891,6 +156164,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155903,7 +156182,8 @@
           "fields": {
             "영어 이름": "Trap Hunter",
             "English description": "Extends the root from placed traps and retreat traps by 25%.",
-            "해금 레벨": 1,
+            "해금 레벨": 27,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 20,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155917,6 +156197,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155929,7 +156215,8 @@
           "fields": {
             "영어 이름": "Saved focus",
             "English description": "After walking for 1 second the next skill that costs resource is 25% cheaper. The effect then waits 4 seconds.",
-            "해금 레벨": 1,
+            "해금 레벨": 12,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 21,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155943,6 +156230,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155955,7 +156248,8 @@
           "fields": {
             "영어 이름": "Finishing Shot",
             "English description": "Adds +10%p critical chance against enemies at or below 30% HP, capped at 75%.",
-            "해금 레벨": 1,
+            "해금 레벨": 8,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 22,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155969,6 +156263,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -155981,7 +156281,8 @@
           "fields": {
             "영어 이름": "Dense Burn",
             "English description": "Adds +15% damage to the Fireball blast itself when it catches three or more enemies.",
-            "해금 레벨": 1,
+            "해금 레벨": 3,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 17,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -155995,6 +156296,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156007,7 +156314,8 @@
           "fields": {
             "영어 이름": "Deep Chill",
             "English description": "Strengthens the Blizzard slow from 35% to 55%. Only the strongest slow applies.",
-            "해금 레벨": 1,
+            "해금 레벨": 6,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 18,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -156021,6 +156329,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156033,7 +156347,8 @@
           "fields": {
             "영어 이름": "Chain of Lightning",
             "English description": "Chain Lightning strikes 5 times instead of 4.",
-            "해금 레벨": 1,
+            "해금 레벨": 8,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 19,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -156047,6 +156362,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156059,7 +156380,8 @@
           "fields": {
             "영어 이름": "Stable Ward",
             "English description": "Adds +20%p to shield strength, stacking with the bonus from Willpower.",
-            "해금 레벨": 1,
+            "해금 레벨": 16,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 20,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -156073,6 +156395,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156085,7 +156413,8 @@
           "fields": {
             "영어 이름": "Mana Circulation",
             "English description": "Increases resource regeneration per second by 20%, including flat regeneration affixes.",
-            "해금 레벨": 1,
+            "해금 레벨": 11,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 21,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -156099,6 +156428,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156111,7 +156446,8 @@
           "fields": {
             "영어 이름": "Element crossover",
             "English description": "Dealing damage with two different elements within 4 seconds grants +10% damage for 4 seconds. It does not stack.",
-            "해금 레벨": 1,
+            "해금 레벨": 12,
+            "이전 구성 해금 레벨": 1,
             "목록 순서": 22,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 조건을 충족하면 자동으로 적용됩니다.",
@@ -156125,6 +156461,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156138,6 +156480,7 @@
             "영어 이름": "Brand of Challenge",
             "English description": "Brand one enemy within 8m for 6s and restore 10 resource. Take 10% less damage from that enemy. The brand supplies Marked without a separate damage bonus. Only one Warrior brand may exist.",
             "해금 레벨": 22,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 7,
             "최대 투자 등급": 5,
             "자동 조건": "정예·보스를 우선하며 남은 표식이 1초 이하일 때 사용합니다.",
@@ -156165,6 +156508,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156178,6 +156527,7 @@
             "영어 이름": "Impaling Hook",
             "English description": "Deal D65% physical damage to one enemy within 6m and pull it up to 2m. Restore 10 resource on a direct hit. Bosses receive stagger credit instead of movement.",
             "해금 레벨": 22,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 8,
             "최대 투자 등급": 5,
             "자동 조건": "주력 근접 기술의 범위 밖에 있는 적을 끌어옵니다.",
@@ -156205,6 +156555,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156218,6 +156574,7 @@
             "영어 이름": "Raking Wound",
             "English description": "Hit up to 5 enemies in a 3m, 90-degree cone for D50% physical damage and D120% bleed over 4s. Refresh only the W09 ledger, keeping the greater remaining total.",
             "해금 레벨": 26,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 9,
             "최대 투자 등급": 5,
             "자동 조건": "출혈이 없는 정예 또는 적 3명 이상을 우선합니다.",
@@ -156243,6 +156600,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156255,7 +156618,8 @@
           "fields": {
             "영어 이름": "Blood Reclamation",
             "English description": "Deal D80% physical damage to up to 5 enemies within 4m and cash out 100% of only your W09 remaining bleed. Heal 1% maximum HP per cashed-out enemy, up to 5% per cast. Never consume set or item ledgers.",
-            "해금 레벨": 26,
+            "해금 레벨": 28,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 10,
             "최대 투자 등급": 5,
             "자동 조건": "W09 출혈이 2초 이상 남은 대상이 있거나, 출혈 대상이 있고 HP가 60% 이하일 때 사용합니다.",
@@ -156283,6 +156647,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156296,6 +156666,7 @@
             "영어 이름": "Resolute Advance",
             "English description": "Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit.",
             "해금 레벨": 30,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 11,
             "최대 투자 등급": 5,
             "자동 조건": "적에게 접근하되 도착 지점의 위험도가 현재보다 높으면 보류합니다.",
@@ -156323,6 +156694,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156336,6 +156713,7 @@
             "영어 이름": "Iron Stance",
             "English description": "Gain +15 percentage points of block chance for 4s. A successful block produces a D80% counter in a 3m front arc, at most twice per stance with a 1s interval. Counters are secondary damage.",
             "해금 레벨": 30,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 12,
             "최대 투자 등급": 5,
             "자동 조건": "가까운 적이 공격 준비 중이거나 HP가 60% 이하일 때 사용합니다.",
@@ -156363,6 +156741,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156376,6 +156760,7 @@
             "영어 이름": "Battlefield Ring",
             "English description": "Deal D70% physical damage to up to 5 enemies within 4m and pull them up to 1.5m without crossing walls or bodies. Bosses receive stagger credit without moving.",
             "해금 레벨": 34,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 13,
             "최대 투자 등급": 5,
             "자동 조건": "적 3명 이상을 회오리·지면 강타의 범위에 모을 수 있을 때 사용합니다.",
@@ -156402,6 +156787,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156415,6 +156806,7 @@
             "영어 이름": "Tremor Wave",
             "English description": "Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage and a 30% slow for 3s. Attack reach does not grant movement.",
             "해금 레벨": 34,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 14,
             "최대 투자 등급": 5,
             "자동 조건": "일직선의 적 2명 이상 또는 접근하기 어려운 정예에게 사용합니다.",
@@ -156441,6 +156833,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156454,6 +156852,7 @@
             "영어 이름": "Breath Before Battle",
             "English description": "Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout.",
             "해금 레벨": 38,
+            "이전 구성 해금 레벨": 38,
             "목록 순서": 15,
             "최대 투자 등급": 5,
             "자동 조건": "자원이 60% 이하이고 다음 공격을 준비할 때 사용합니다.",
@@ -156481,6 +156880,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156494,6 +156899,7 @@
             "영어 이름": "Guardian's Vow",
             "English description": "Gain a 12% maximum-HP barrier for 5s and remove current slow and root effects. Become immune to slow and root for 2s. This does not cast Iron Wall.",
             "해금 레벨": 38,
+            "이전 구성 해금 레벨": 38,
             "목록 순서": 16,
             "최대 투자 등급": 5,
             "자동 조건": "둔화·속박 상태이거나 보호막 없이 HP가 55% 이하이면 사용합니다.",
@@ -156521,6 +156927,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156534,6 +156946,7 @@
             "영어 이름": "War of the Ancestors",
             "English description": "Call 2 ancestors for 8s. Each attacks one enemy within 6m each second for D65% secondary physical damage, up to 8 attacks each. Take 15% less damage while active. Ancestors have no blocking body or taunt.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 36,
             "최대 투자 등급": 1,
             "자동 조건": "정예·보스 교전 중이며 근처 적이 3명 이상이거나 HP가 65% 이하일 때 사용합니다.",
@@ -156562,6 +156975,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156575,6 +156994,7 @@
             "영어 이름": "Titan's Judgment",
             "English description": "After a 0.9s wind-up, deal D600% physical damage and a 2s stun to up to 8 enemies within 4m. For 6s, Crush and Slam gain +25% additive direct damage. Boss stun becomes stagger credit.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 37,
             "최대 투자 등급": 1,
             "자동 조건": "전투 함성이 켜져 있거나 자원이 80% 이상일 때 정예·보스 또는 적 4명 이상에게 사용합니다.",
@@ -156602,6 +157022,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156615,6 +157041,7 @@
             "영어 이름": "Successive Shots",
             "English description": "Fire 3 D45% physical arrows at one target within 10m, 0.15s apart. This is one cast, not three basic attacks. Each arrow collides with walls.",
             "해금 레벨": 22,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 7,
             "최대 투자 등급": 5,
             "자동 조건": "표식 대상에게 집중하고 자원을 25% 이상 남깁니다.",
@@ -156641,6 +157068,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156654,6 +157087,7 @@
             "영어 이름": "Patient Shot",
             "English description": "Aim for 0.9s, then deal D240% physical damage to one enemy within 12m. Gain +25% additive direct damage if the target is marked at impact. Moving during aim cancels the cast.",
             "해금 레벨": 22,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 8,
             "최대 투자 등급": 5,
             "자동 조건": "7m 이상 떨어진 표식 대상에게 사용하며 근접 위험이 있으면 보류합니다.",
@@ -156680,6 +157114,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156693,6 +157133,7 @@
             "영어 이름": "Briar Trap",
             "English description": "Place a trap within 6m. It arms after 0.4s and waits up to 6s. On enemy entry, hit up to 5 enemies in 2.5m for D80% physical damage and a 1.2s root, then remove it. Limit 1.",
             "해금 레벨": 26,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 9,
             "최대 투자 등급": 5,
             "자동 조건": "맹독 덫 안 또는 관측한 적의 이동 경로에 설치합니다.",
@@ -156720,6 +157161,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156732,7 +157179,8 @@
           "fields": {
             "영어 이름": "Frost Snare",
             "English description": "Place one snare within 6m; arm after 0.4s and wait up to 6s. On entry, hit up to 5 enemies in 2.5m for D60% cold damage and a 40% slow for 3s. Enemies poisoned at impact are frozen for 0.75s.",
-            "해금 레벨": 26,
+            "해금 레벨": 28,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 10,
             "최대 투자 등급": 5,
             "자동 조건": "중독된 적이 접근할 때 설치합니다.",
@@ -156762,6 +157210,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156775,6 +157229,7 @@
             "영어 이름": "Decoy Projection",
             "English description": "Create one decoy within 7m with 10% of hero maximum HP for 6s. Normal enemies prefer it for the first 2.5s. Destruction or expiry causes D80% secondary physical damage to up to 5 enemies within 2.5m. It cannot force elite or boss aggro.",
             "해금 레벨": 30,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 11,
             "최대 투자 등급": 5,
             "자동 조건": "사격 위치와 떨어진 안전한 지점에 배치합니다.",
@@ -156802,6 +157257,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156814,7 +157275,8 @@
           "fields": {
             "영어 이름": "Smoke Cover",
             "English description": "Gain 20% damage reduction and 20% movement speed for 3s. This grants no invisibility, invulnerability or target break, and does not count as Retreat.",
-            "해금 레벨": 30,
+            "해금 레벨": 32,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 12,
             "최대 투자 등급": 5,
             "자동 조건": "HP가 55% 이하이거나 근접 적이 2명 이상일 때 사용합니다.",
@@ -156842,6 +157304,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156855,6 +157323,7 @@
             "영어 이름": "Venom Arrow",
             "English description": "Deal D80% direct physical damage and D100% poison damage over 4s to one enemy within 10m. Keep only the greater remaining total for this skill's poison ledger.",
             "해금 레벨": 34,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 13,
             "최대 투자 등급": 5,
             "자동 조건": "맹독 덫 밖에 있는 중독되지 않은 표식·정예 대상을 우선합니다.",
@@ -156880,6 +157349,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156893,6 +157368,7 @@
             "영어 이름": "Forking Arrow",
             "English description": "Deal D100% direct physical damage to a first target within 10m, then send D50% secondary arrows to 2 different enemies within 3m. No return to the first target or repeated splitting.",
             "해금 레벨": 34,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 14,
             "최대 투자 등급": 5,
             "자동 조건": "표식 대상 주변에 다른 적이 2명 이상 있을 때 사용합니다.",
@@ -156919,6 +157395,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156932,6 +157414,7 @@
             "영어 이름": "Watch Ballista",
             "English description": "Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01.",
             "해금 레벨": 38,
+            "이전 구성 해금 레벨": 38,
             "목록 순서": 15,
             "최대 투자 등급": 5,
             "자동 조건": "정예 전투가 이어질 때 위험 장판 밖에 설치합니다.",
@@ -156958,6 +157441,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -156971,6 +157460,7 @@
             "영어 이름": "Hunt Preparation",
             "English description": "Restore 25 resource and grant +20 percentage points of cost reduction to the next paid normal active within 6s. Free skills and ultimates do not consume the charge.",
             "해금 레벨": 38,
+            "이전 구성 해금 레벨": 38,
             "목록 순서": 16,
             "최대 투자 등급": 5,
             "자동 조건": "자원이 50% 이하이고 유료 기술을 곧 사용할 때 발동합니다.",
@@ -156998,6 +157488,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157011,6 +157507,7 @@
             "영어 이름": "Killing Rain",
             "English description": "Rain arrows at a fixed point within 10m, in a 4m radius. Six pulses 0.5s apart deal D80% physical damage to up to 8 enemies each. These are not A02 casts or A06 charged shots.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 36,
             "최대 투자 등급": 1,
             "자동 조건": "표식 정예·보스 또는 속박·둔화된 적 4명 이상에게 사용합니다.",
@@ -157037,6 +157534,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157050,6 +157553,7 @@
             "영어 이름": "Shadow Pursuit",
             "English description": "Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 37,
             "최대 투자 등급": 1,
             "자동 조건": "이동이 필요한 정예·보스 전투에서 사격할 자원이 있을 때 사용합니다.",
@@ -157077,6 +157581,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157090,6 +157600,7 @@
             "영어 이름": "Ember Lance",
             "English description": "Fire a 10m-long, 0.6m-wide lance through up to 3 enemies for D140% direct fire damage plus D60% burn over 3s. Refresh only this skill's stronger remaining burn total.",
             "해금 레벨": 22,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 7,
             "최대 투자 등급": 5,
             "자동 조건": "일직선의 적 또는 아직 연소하지 않는 정예에게 사용합니다.",
@@ -157115,6 +157626,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157127,7 +157644,8 @@
           "fields": {
             "영어 이름": "Firewall",
             "English description": "Create a 5m-long, 1m-wide fire line within 8m for 4s. Deal D60% fire damage each second to up to 5 enemies and mark occupants as Burning. It does not block movement. Limit 1.",
-            "해금 레벨": 22,
+            "해금 레벨": 24,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 8,
             "최대 투자 등급": 5,
             "자동 조건": "눈보라 안의 무리 또는 적의 접근 경로에 설치합니다.",
@@ -157155,6 +157673,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157168,6 +157692,7 @@
             "영어 이름": "Glacial Lance",
             "English description": "Hit up to 3 enemies with a 9m-long, 0.7m-wide lance for D130% cold damage. Freeze already-slowed enemies for 0.8s; otherwise slow them by 35% for 3s.",
             "해금 레벨": 26,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 9,
             "최대 투자 등급": 5,
             "자동 조건": "눈보라의 둔화 대상이나 접근하는 적에게 사용합니다.",
@@ -157195,6 +157720,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157207,7 +157738,8 @@
           "fields": {
             "영어 이름": "Frost Globe",
             "English description": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage.",
-            "해금 레벨": 26,
+            "해금 레벨": 28,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 10,
             "최대 투자 등급": 5,
             "자동 조건": "적의 이동을 관측해 무리 중심을 겨냥합니다.",
@@ -157237,6 +157769,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157250,6 +157788,7 @@
             "영어 이름": "Capacitor Orb",
             "English description": "Place one orb within 8m for 6s. Each second, deal D30% lightning damage to up to 3 enemies within 3m. Each valid M03 cast adds one charge, up to 3. Natural expiry causes a secondary lightning blast for D80% plus D30% per charge.",
             "해금 레벨": 30,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 11,
             "최대 투자 등급": 5,
             "자동 조건": "연쇄 번개를 사용할 자원이 있고 정예와 지속 교전할 때 설치합니다.",
@@ -157278,6 +157817,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157290,7 +157835,8 @@
           "fields": {
             "영어 이름": "Storm Spear",
             "English description": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s.",
-            "해금 레벨": 30,
+            "해금 레벨": 32,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 12,
             "최대 투자 등급": 5,
             "자동 조건": "연쇄 번개에 맞은 정예 또는 일직선의 적에게 사용합니다.",
@@ -157317,6 +157863,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157330,6 +157882,7 @@
             "영어 이름": "Mana Reclaim",
             "English description": "Channel mana while standing still. Rank 1 regenerates at ten times the ordinary rate; each rank increases this multiplier by 10%. No cooldown or maximum duration. Moving or starting another valid attack cancels it; taking damage alone does not. Automatic charging begins at 35% mana or less and stops at the selected 50% or 90% goal. Grants no invulnerability.",
             "해금 레벨": 34,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 13,
             "최대 투자 등급": 5,
             "자동 조건": "마나 35% 이하에서 충전합니다. 기본은 주위가 안전할 때만 시작하며, 제자리 피격 감수 또는 최대 2초 거리 확보를 선택할 수 있습니다. 종료 목표는 50% 또는 90%입니다.",
@@ -157357,6 +157910,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157370,6 +157929,7 @@
             "영어 이름": "Rift Ward",
             "English description": "Create a 3m ward at the current position for 6s and a 10% maximum-HP barrier for 4s. Take 10% less damage while inside. Limit 1; it does not count as casting M05.",
             "해금 레벨": 34,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 14,
             "최대 투자 등급": 5,
             "자동 조건": "위험 장판이 없는 사격 위치에서 보호막이 없을 때 사용합니다.",
@@ -157398,6 +157958,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157411,6 +157977,7 @@
             "영어 이름": "Elemental Compass",
             "English description": "Restore 20 resource. Within 8s, grant +15 percentage points of cost reduction to the next normal fire, cold and lightning active, once per element and up to 3 casts. Repeating an element does not consume another element's charge.",
             "해금 레벨": 38,
+            "이전 구성 해금 레벨": 38,
             "목록 순서": 15,
             "최대 투자 등급": 5,
             "자동 조건": "서로 다른 원소의 유료 기술 2개 이상을 장착했고 자원이 70% 이하일 때 사용합니다.",
@@ -157439,6 +158006,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157452,6 +158025,7 @@
             "영어 이름": "Magnetic Vortex",
             "English description": "Create a 3m vortex within 8m for 4s. On creation, pull up to 5 enemies 1.5m toward the center; deal D30% lightning damage each second. Limit 1. Bosses receive stagger credit without moving.",
             "해금 레벨": 38,
+            "이전 구성 해금 레벨": 38,
             "목록 순서": 16,
             "최대 투자 등급": 5,
             "자동 조건": "적 3명 이상을 눈보라·화염 장벽 범위로 모을 수 있을 때 사용합니다.",
@@ -157479,6 +158053,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157492,6 +158072,7 @@
             "영어 이름": "Triune Collapse",
             "English description": "Strike a 4m area within 10m for D200% fire, then D150% cold after 0.5s, then D150% lightning after another 0.5s. Each stage hits up to 8 enemies; cold freezes for 1s. These stages do not count as M01, M02 or M03 casts.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 36,
             "최대 투자 등급": 1,
             "자동 조건": "원소 순환 강화를 만들 수 있는 구성은 강화를 확보한 뒤 사용합니다. 강화 수단이 없는 구성은 대기하지 않으며, 두 경우 모두 정예·보스 또는 적 4명 이상을 대상으로 합니다.",
@@ -157519,6 +158100,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157532,6 +158119,7 @@
             "영어 이름": "Sage Incarnate",
             "English description": "Gain a 25% maximum-HP barrier for 8s, +20% normal-active damage and +20 percentage points of normal-active cost reduction. Completing a three-element normal-active cast cycle triggers D40% per element within 2.5m, up to 5 targets, at the last skill's first impact. Once per completed cycle, at most twice per ultimate.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 37,
             "최대 투자 등급": 1,
             "자동 조건": "서로 다른 원소 기술을 3개 장착한 정예·보스 전투에서 사용합니다.",
@@ -157561,6 +158149,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157573,7 +158167,8 @@
           "fields": {
             "영어 이름": "Brand Pursuit",
             "English description": "The first direct normal-active hit against a marked target restores 2 resource. Once per cast, with a 1s interval.",
-            "해금 레벨": 22,
+            "해금 레벨": 23,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 23,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157589,6 +158184,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157601,7 +158202,8 @@
           "fields": {
             "영어 이름": "Wound Tracking",
             "English description": "Gain +10% additive normal-active direct damage against enemies with your W09 or Red Scars set bleed. Other physical damage over time is not automatically classified as bleed.",
-            "해금 레벨": 22,
+            "해금 레벨": 27,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 24,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157617,6 +158219,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157629,7 +158237,8 @@
           "fields": {
             "영어 이름": "Counter Rhythm",
             "English description": "Restore 4 resource after surviving a successful block. A 1s interval applies; counter damage cannot trigger it.",
-            "해금 레벨": 22,
+            "해금 레벨": 31,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 25,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157645,6 +158254,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157657,7 +158272,8 @@
           "fields": {
             "영어 이름": "Lingering Shout",
             "English description": "After casting Battle Shout, heal 1% maximum HP each second for 3s. Refresh without stacking; 6s interval.",
-            "해금 레벨": 26,
+            "해금 레벨": 24,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 26,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157673,6 +158289,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157685,7 +158307,8 @@
           "fields": {
             "영어 이름": "Stone Landing",
             "English description": "After completing Leap or Resolute Advance, gain a 5% maximum-HP barrier for 3s. Both skills share a 3s interval.",
-            "해금 레벨": 26,
+            "해금 레벨": 27,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 27,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157701,6 +158324,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157713,7 +158342,8 @@
           "fields": {
             "영어 이름": "Combat Preparation",
             "English description": "Three basic hits on one enemy prepare +15 percentage points of cost reduction for the next Crush within 4s. One charge; counting pauses for 3s after triggering.",
-            "해금 레벨": 26,
+            "해금 레벨": 28,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 28,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157729,6 +158359,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157741,7 +158377,8 @@
           "fields": {
             "영어 이름": "Ragged Breathing",
             "English description": "Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply instant on-hit or shout restoration.",
-            "해금 레벨": 30,
+            "해금 레벨": 32,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 29,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157757,6 +158394,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157769,7 +158412,8 @@
           "fields": {
             "영어 이름": "Battlefield Pressure",
             "English description": "The first direct normal-active hit on a controlled enemy reduces equipped Slam's remaining cooldown by 0.5s. A 2s interval applies; never reduce below zero.",
-            "해금 레벨": 30,
+            "해금 레벨": 35,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 30,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157785,6 +158429,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157797,7 +158447,8 @@
           "fields": {
             "영어 이름": "Weapon Sequence",
             "English description": "Casting a different normal offensive skill from the one used within the previous 4s grants that cast +10% additive direct damage. BASIC, ultimates and secondary damage do not update the record.",
-            "해금 레벨": 30,
+            "해금 레벨": 32,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 31,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157813,6 +158464,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157825,7 +158482,8 @@
           "fields": {
             "영어 이름": "Hold Formation",
             "English description": "Take 8% less damage while channeling Whirlwind with an active barrier. End immediately when channeling or the barrier ends.",
-            "해금 레벨": 34,
+            "해금 레벨": 36,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 32,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157841,6 +158499,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157853,7 +158517,8 @@
           "fields": {
             "영어 이름": "Battle Reserve",
             "English description": "Crush and Slam gain +10% additive direct damage when pre-cast resource is at least 80%. Check before paying the cost.",
-            "해금 레벨": 34,
+            "해금 레벨": 39,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 33,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157869,6 +158534,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157881,7 +158552,8 @@
           "fields": {
             "영어 이름": "Ancestral Legacy",
             "English description": "During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8 per cast.",
-            "해금 레벨": 34,
+            "해금 레벨": 40,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 34,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157897,6 +158569,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157909,7 +158587,8 @@
           "fields": {
             "영어 이름": "Marked Opening",
             "English description": "Gain +5 percentage points of normal-active direct critical chance against marked enemies, sharing the 75% global cap.",
-            "해금 레벨": 22,
+            "해금 레벨": 16,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 23,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157925,6 +158604,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157937,7 +158622,8 @@
           "fields": {
             "영어 이름": "Quarry Tracks",
             "English description": "Gain 10% movement speed while an observed poisoned enemy is within 10m. This does not reveal enemies outside observation.",
-            "해금 레벨": 22,
+            "해금 레벨": 9,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 24,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157953,6 +158639,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157965,7 +158657,8 @@
           "fields": {
             "영어 이름": "Drawing Again",
             "English description": "A direct basic hit restores 2 resource, with a 0.5s interval. Splits, ballista shots and shadow echoes are not basic attacks.",
-            "해금 레벨": 22,
+            "해금 레벨": 21,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 25,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -157981,6 +158674,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -157993,7 +158692,8 @@
           "fields": {
             "영어 이름": "Venom Cycle",
             "English description": "A direct attack killing a poisoned enemy restores 6 resource, with a 2s interval. Poison ticks and item secondary kills are excluded.",
-            "해금 레벨": 26,
+            "해금 레벨": 23,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 26,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158009,6 +158709,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158021,7 +158727,8 @@
           "fields": {
             "영어 이름": "Alchemical Practice",
             "English description": "When a directly placed Poison Trap, Briar Trap or Frost Snare arms, gain 8% damage reduction for 3s. Multiple traps refresh the same buff.",
-            "해금 레벨": 26,
+            "해금 레벨": 27,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 27,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158037,6 +158744,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158049,7 +158762,8 @@
           "fields": {
             "영어 이름": "Prepared Escape",
             "English description": "Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat's remaining cooldown by 1s, with a 4s interval.",
-            "해금 레벨": 26,
+            "해금 레벨": 29,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 28,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158065,6 +158779,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158077,7 +158797,8 @@
           "fields": {
             "영어 이름": "Focused Aim",
             "English description": "Pierce and Patient Shot gain +15% additive direct damage if stationary for at least 0.8s before cast start. Movement resets the timer.",
-            "해금 레벨": 30,
+            "해금 레벨": 24,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 29,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158093,6 +158814,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158105,7 +158832,8 @@
           "fields": {
             "영어 이름": "Decoy Tactics",
             "English description": "Gain +10% additive normal-active direct damage against enemies within 3m of your living decoy. Does not amplify the decoy's explosion.",
-            "해금 레벨": 30,
+            "해금 레벨": 31,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 30,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158121,6 +158849,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158133,7 +158867,8 @@
           "fields": {
             "영어 이름": "Venom and Frost",
             "English description": "Gain +12% additive normal-active direct damage against enemies that are both poisoned and slowed. Freeze alone does not imply Slow.",
-            "해금 레벨": 30,
+            "해금 레벨": 29,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 31,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158149,6 +158884,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158161,7 +158902,8 @@
           "fields": {
             "영어 이름": "Seamless Reload",
             "English description": "Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction for the next paid normal active within 6s. One charge; both share a 6s interval.",
-            "해금 레벨": 34,
+            "해금 레벨": 33,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 32,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158177,6 +158919,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158189,7 +158937,8 @@
           "fields": {
             "영어 이름": "Pathfinder",
             "English description": "Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created.",
-            "해금 레벨": 34,
+            "해금 레벨": 39,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 33,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158205,6 +158954,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158217,7 +158972,8 @@
           "fields": {
             "영어 이름": "Silent Execution",
             "English description": "If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target.",
-            "해금 레벨": 34,
+            "해금 레벨": 40,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 34,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158233,6 +158989,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158245,7 +159007,8 @@
           "fields": {
             "영어 이름": "Ignition Feedback",
             "English description": "The first direct hit of a normal fire skill on a burning enemy restores 3 resource, with a 2s interval. Burn ticks cannot retrigger it.",
-            "해금 레벨": 22,
+            "해금 레벨": 23,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 23,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158261,6 +159024,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158273,7 +159042,8 @@
           "fields": {
             "영어 이름": "Scorched Armor",
             "English description": "Take 8% less damage from an attacker with your M07 burn or currently inside your M08.",
-            "해금 레벨": 22,
+            "해금 레벨": 25,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 24,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158289,6 +159059,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158301,7 +159077,8 @@
           "fields": {
             "영어 이름": "Opening in the Cold",
             "English description": "The first direct hit of a normal cold skill on a controlled target restores 3 resource, with a 2s interval. Blizzard ticks are excluded.",
-            "해금 레벨": 22,
+            "해금 레벨": 21,
+            "이전 구성 해금 레벨": 22,
             "목록 순서": 25,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158317,6 +159094,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158329,7 +159112,8 @@
           "fields": {
             "영어 이름": "Ice Reverberation",
             "English description": "Successfully applying direct freeze with M06 or M09 grants a 5% maximum-HP barrier for 3s. Valid boss stagger credit also qualifies; 4s interval.",
-            "해금 레벨": 26,
+            "해금 레벨": 27,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 26,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158345,6 +159129,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158357,7 +159147,8 @@
           "fields": {
             "영어 이름": "Overcharge",
             "English description": "Three normal lightning casts within 5s prepare +15% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast.",
-            "해금 레벨": 26,
+            "해금 레벨": 33,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 27,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158373,6 +159164,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158385,7 +159182,8 @@
           "fields": {
             "영어 이름": "Reclaim Charge",
             "English description": "Natural expiry of Capacitor Orb restores 10 resource. Replacement, scene exit or equipment-removal cleanup grants none.",
-            "해금 레벨": 26,
+            "해금 레벨": 31,
+            "이전 구성 해금 레벨": 26,
             "목록 순서": 28,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158401,6 +159199,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158413,7 +159217,8 @@
           "fields": {
             "영어 이름": "Ward Breathing",
             "English description": "While a barrier remains, increase per-second resource regeneration by 15%. Do not multiply Mana Reclaim's fixed restoration.",
-            "해금 레벨": 30,
+            "해금 레벨": 18,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 29,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158429,6 +159234,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158441,7 +159252,8 @@
           "fields": {
             "영어 이름": "Mana Thrift",
             "English description": "Two direct basic hits prepare +15 percentage points of cost reduction for the next paid normal active within 4s. One charge; pause counting for 3s after triggering.",
-            "해금 레벨": 30,
+            "해금 레벨": 20,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 30,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158457,6 +159269,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158469,7 +159287,8 @@
           "fields": {
             "영어 이름": "Steady Casting",
             "English description": "After standing still for 1s, take 8% less damage while preparing or channeling a normal active. End on movement or completion.",
-            "해금 레벨": 30,
+            "해금 레벨": 35,
+            "이전 구성 해금 레벨": 30,
             "목록 순서": 31,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158485,6 +159304,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158497,7 +159322,8 @@
           "fields": {
             "영어 이름": "Threefold Memory",
             "English description": "Cast one normal fire, cold and lightning active within 6s to gain an 8% maximum-HP barrier for 4s. Clear the record on completion or expiry; 8s interval.",
-            "해금 레벨": 34,
+            "해금 레벨": 36,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 32,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158513,6 +159339,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158525,7 +159357,8 @@
           "fields": {
             "영어 이름": "Overflowing Mana",
             "English description": "At 80% pre-cast resource or more, a normal active's first direct hit gains +10% additive damage. Exclude field ticks and secondary damage.",
-            "해금 레벨": 34,
+            "해금 레벨": 39,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 33,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158541,6 +159374,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158553,7 +159392,8 @@
           "fields": {
             "영어 이름": "Archmage's Testament",
             "English description": "If Triune Collapse's third stage actually hits, restore 15 resource once.",
-            "해금 레벨": 34,
+            "해금 레벨": 40,
+            "이전 구성 해금 레벨": 34,
             "목록 순서": 34,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158569,6 +159409,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158582,6 +159428,7 @@
             "영어 이름": "Titan's Bulwark",
             "English description": "Each enemy directly hit by Titan's Judgment grants a 4s barrier of 3% maximum HP, capped at 15%.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 35,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158597,6 +159444,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158610,6 +159463,7 @@
             "영어 이름": "Relentless Pursuit",
             "English description": "Shadow Pursuit lasts 2s longer and allows 2 additional total procs.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 35,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158625,6 +159479,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]
@@ -158638,6 +159498,7 @@
             "영어 이름": "Sage's Ward",
             "English description": "Add 10% maximum HP to the barrier created by Sage Incarnate.",
             "해금 레벨": 40,
+            "이전 구성 해금 레벨": 40,
             "목록 순서": 35,
             "최대 투자 등급": 5,
             "자동 조건": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
@@ -158653,6 +159514,12 @@
             "line": 1
           },
           "status": "능력 구현 · UI 공개 대기",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
+              "line": 1
+            }
+          ],
           "related": [
             "class-skill-runtime"
           ]

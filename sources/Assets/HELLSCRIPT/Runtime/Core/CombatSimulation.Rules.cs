@@ -56,7 +56,7 @@ namespace Hellscript
                     {actual=c.choice==0?CombatEffects.Remaining(target,StatusKind.Poisoned):c.choice==1?CombatEffects.Remaining(target,StatusKind.Slow):c.choice==2?CombatEffects.Remaining(target,StatusKind.Stun):c.choice==3?CombatEffects.Remaining(target,StatusKind.Freeze):c.choice==4?CombatEffects.Remaining(target,StatusKind.Mark):c.choice==5?target.frostMarkTime:OwnArea(target,c.choice==7)?1:0;result=Compare(actual,c);}break;
                 case "SC14":valid=target!=null&&seen.Contains(target);if(valid){actual=Mathf.Max(0,target.windup);result=actual>0&&(c.comparison!=Comparison.Soon||actual<=c.value+.0001f);}break;
                 case "SC15":
-                    valid=State.build.activeSkills.Contains(c.skill)&&catalog.skills[c.skill].unlock<=EffectiveLevel;
+                    valid=State.build.activeSkills.Contains(c.skill)&&SkillUnlockLevel(catalog.skills[c.skill])<=EffectiveLevel;
                     if(valid){actual=State.cooldowns[c.skill];result=c.comparison==Comparison.Present?actual<=0:Compare(actual,c);}break;
                 case "SC16":valid=State.heroAction.phase==HeroActionPhase.Channeling;actual=State.channelTime;result=valid&&Compare(actual,c);break;
                 case "SC17":valid=seen.Length==0;actual=valid?Mathf.Max(0,State.time-State.noEnemySince):0;result=valid&&Compare(actual,c);break;
@@ -176,7 +176,7 @@ namespace Hellscript
                 c.ready=true;c.code="READY";return c;
             }
             var skill=catalog.skills[r.skill];
-            if(skill.heroClass!=Hero.heroClass||skill.unlock>EffectiveLevel){c.code="LEVEL_LOCK";c.detail=Loc.F("해금 레벨 {0}", skill.unlock);return c;}
+            if(skill.heroClass!=Hero.heroClass||SkillUnlockLevel(skill)>EffectiveLevel){c.code="LEVEL_LOCK";c.detail=Loc.F("해금 레벨 {0}", SkillUnlockLevel(skill));return c;}
             if(r.id=="edict:A03"||r.id=="edict:A04"||r.id=="edict:A05"||r.id=="edict:A06")
             {
                 var plan=r.skill==8?PlanEdictTrap(edictSource,c.target):r.skill==9?PlanEdictRetreat(edictSource,c.target):r.skill==10?PlanEdictMark(edictSource,c.target):PlanEdictShadow(edictSource,c.target);

@@ -62,7 +62,7 @@ module.exports = {
     { id: 'Warrior', name: label('전사', 'Warrior'), subtitle: label('전장을 가르고, 끝까지 버틴다.', 'Break their lines. Hold your ground.'), accent: '#d2ab70', emblem: 'W',
       branches: [label('회전과 출혈', 'Whirlwind & blood'), label('돌파와 제압', 'Impact & control'), label('수호와 함성', 'Guard & warcry')],
       nodes: [
-        node('W01',1,0), node('W02',3,1), node('W03',6,1),
+        node('W01',1,0), node('W02',1,1), node('W03',1,1),
         node('W04',10,1), node('W05',15,2), node('W06',20,2),
         node('W07',22,2), node('W08',22,1), node('W09',26,0),
         node('W10',28,0), node('W11',30,1), node('W12',30,2),
@@ -84,7 +84,7 @@ module.exports = {
     { id: 'Ranger', name: label('궁수', 'Ranger'), subtitle: label('거리를 지배하고, 빈틈을 꿰뚫는다.', 'Own the distance. Find the opening.'), accent: '#a5bd82', emblem: 'R',
       branches: [label('정밀 사격', 'Precision'), label('덫과 맹독', 'Traps & venom'), label('기동과 그림자', 'Mobility & shadow')],
       nodes: [
-        node('A01',1,0), node('A02',3,0), node('A03',6,1),
+        node('A01',1,0), node('A02',1,0), node('A03',1,1),
         node('A04',10,2), node('A05',15,0), node('A06',20,2),
         node('A07',22,0), node('A08',22,0), node('A09',26,1),
         node('A10',28,1), node('A11',30,2), node('A12',32,2),
@@ -105,7 +105,7 @@ module.exports = {
     { id: 'Mage', name: label('마법사', 'Mage'), subtitle: label('원소를 엮어, 전장의 흐름을 바꾼다.', 'Weave the elements. Rewrite the battle.'), accent: '#a5a8df', emblem: 'M',
       branches: [label('화염과 원소 순환', 'Flame & convergence'), label('냉기와 번개', 'Frost & lightning'), label('비전과 결계', 'Arcane & wards')],
       nodes: [
-        node('M01',1,0), node('M02',3,1), node('M03',6,1),
+        node('M01',1,0), node('M02',1,1), node('M03',1,1),
         node('M04',10,2), node('M05',15,2), node('M06',20,1),
         node('M07',22,0), node('M08',24,0), node('M09',26,1),
         node('M10',28,1), node('M11',30,1), node('M12',32,1),
