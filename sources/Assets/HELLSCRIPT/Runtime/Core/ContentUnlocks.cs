@@ -24,7 +24,7 @@ namespace Hellscript
         public string status;
         public ContentUnlockDefinition[] features;
         public int[] passiveLevels;
-        public int expandedEnemiesStage,secondThemeStage,secondBossStage,thirdBossStage,doubleEliteStage,coreCount;
+        public int expandedEnemiesStage,secondThemeStage,secondBossStage,thirdBossStage,fourthBossStage,fifthBossStage,doubleEliteStage,coreCount;
     }
     public static class ContentUnlocks
     {
@@ -136,7 +136,9 @@ namespace Hellscript
             Reconcile(a);
         }
         public static int ThemeCount(int stage)=>stage>=Rules.secondThemeStage?2:1;
-        public static int BossCount(int stage)=>stage>=Rules.thirdBossStage?3:stage>=Rules.secondBossStage?2:1;
+        public static int BossCount(int stage)=>Unlocked(Rules.fifthBossStage,stage)?5:Unlocked(Rules.fourthBossStage,stage)?4:stage>=Rules.thirdBossStage?3:stage>=Rules.secondBossStage?2:1;
+        // A stage missing from older data (0) keeps that boss locked.
+        static bool Unlocked(int unlockStage,int stage)=>unlockStage>0&&stage>=unlockStage;
         public static int EliteTraits(int stage)=>stage>=Rules.doubleEliteStage?2:1;
     }
 }

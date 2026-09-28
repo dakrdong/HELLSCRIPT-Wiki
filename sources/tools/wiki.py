@@ -266,9 +266,9 @@ def build_databases():
     data.append(db('sets','세트 효과','현재 6세트입니다. 초기 카탈로그의 3세트 기록은 당시 범위로 보존합니다.',sets))
     data.append(db('set-items','세트 장비','6세트 × 머리·몸통·손·발의 24종입니다. 세트 정의 자체는 아이템 수에 추가하지 않습니다.',pieces))
     for key,name,prefix,count,name_index,code,related in [
-        ('enemies','일반 몬스터','N',12,1,'EnemyCombat.cs','enemy-expansion'),
+        ('enemies','일반 몬스터','N',20,1,'EnemyCombat.cs','enemy-expansion'),
         ('elites','정예 특성','E',6,1,'CombatSimulation.Enemies.cs','enemy-expansion'),
-        ('bosses','보스','BOSS',3,1,'BossCombat.cs','boss-expansion')]:
+        ('bosses','보스','BOSS',5,1,'BossCombat.cs','boss-expansion')]:
         rows=[]
         for i in range(1,count+1):
             ident=f'{prefix}{i:02}'; t=tables[ident]
@@ -287,7 +287,7 @@ def build_databases():
             ' · '.join(t['cells'][1:]),t['fields'],DESIGN+'HELLSCRIPT_Rift_Exploration_Detail.md',t['line'],status='기획·구현 기록',
             refs=[source_ref(CORE+'RiftFieldContent.cs')],related=['field-expansion','rift-exploration-detail'],resource='procedural-interactions'))
     data.append(db('field','상자·성소','CH01–CH03과 SH01–SH02입니다. 초기 기획의 구현 순서와 현재 적용 여부는 개발 기록을 함께 봅니다.',rows))
-    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':30,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':12,'elites':6,'bosses':3,'rooms':12,'field':5}
+    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':30,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':20,'elites':6,'bosses':5,'rooms':12,'field':5}
     for table in data:
         if len(table['rows']) != expected[table['id']]: raise ValueError('Review changed catalog count: '+table['id'])
     import wiki_runes
@@ -626,7 +626,7 @@ PAGE_META={
  'screen-layout-detail':('기획과 범위','화면 비율·방향 대응','모바일 가로·세로, 방향 설정, PC의 가로 구성 확장과 전환 중 상태 보존을 정리한 개발 전 기획입니다.'),
  'speed-access-detail':('기획과 범위','배속 잠금·시간 사용권','현재 1배속 제공과 고배속 잠금, 향후 월 구독·이벤트 쿠폰, 사용 시간 누적과 차감 기준안입니다.'),
  'development-expansion-plan':('기획과 범위','후속 개발 기획','장비 발견과 행동 수정이 균열 탐험으로 이어지는 후속 개발 범위입니다.'),
- 'content-catalog':('기획과 범위','초기 콘텐츠 카탈로그','기존 178개 정의를 보존한 검토용 초안입니다. 현재 수량은 콘텐츠 DB를 확인합니다.'),
+ 'content-catalog':('기획과 범위','초기 콘텐츠 카탈로그','초기 178개 정의에 2026-09-28 일반 적 8종과 보스 2종을 더한 검토용 초안입니다. 현재 수량은 콘텐츠 DB를 확인합니다.'),
  'gameplay-completion-checklist':('기획과 범위','게임 완성 체크리스트','성장·행동·전투·화면·온라인·기기 품질의 완료 기준을 모았습니다.'),
  'remaining-development-backlog':('기획과 범위','남은 개발 작업표','현재 이어서 만들 기능과 검증 기준, 소유자 선택이 필요한 항목입니다.'),
  'itemization-detail':('장비와 빌드','장비·빌드 상세안','접두·접미, 전설·6세트, 파밍·강화·분해·재설정의 상세 규칙입니다.'),
@@ -637,8 +637,8 @@ PAGE_META={
  'rift-exploration-detail':('균열과 탐험','균열·탐험 상세안','방 생성, 연결, 시야, 탐색, 상자·성소와 보상의 계약입니다.'),
  'dungeon-composition-detail':('균열과 탐험','던전 구성 상세안','방의 역할과 곁방, 목표 사슬 3종과 보스 관문, 구간별 전투 예산입니다.'),
  'idle-mode-detail':('균열과 탐험','절전 방치 모드','실제 균열 사냥을 유지하는 절전 화면, 잠깐 보기, 연속 복귀와 배터리 검증의 설계안입니다.'),
- 'enemy-combat-detail':('전투와 성장','일반 적·정예 상세안','일반 적 12종과 정예 6특성의 행동과 위험 형상을 정의합니다.'),
- 'boss-combat-detail':('전투와 성장','보스 전투 상세안','보스 3종의 패턴, 후반 변화와 안전한 회피 경로를 정의합니다.'),
+ 'enemy-combat-detail':('전투와 성장','일반 적·정예 상세안','일반 적 20종과 정예 6특성의 행동과 위험 형상을 정의합니다. N13–N20의 고유 공격은 개발 중입니다.'),
+ 'boss-combat-detail':('전투와 성장','보스 전투 상세안','보스 5종의 1페이즈·2페이즈 패턴 각 3종, 전환 포효와 안전한 회피 경로를 정의합니다.'),
  'passive-combat-detail':('전투와 성장','패시브 전투 상세안','패시브의 시간·HP 경계와 실제 장비 조합을 확인합니다.'),
  'player-training-detail':('전투와 성장','플레이어 훈련 상세안','실제 캐릭터 복사본, 해금·보상 격리와 60초 훈련의 기준입니다.'),
  'growth-detail':('전투와 성장','성장·저레벨 추천 상세안','전투 중 경험치 정산, 레벨업 시 HP 비율 유지, 성장 기록과 저레벨 추천 행동의 기준입니다.'),
@@ -665,7 +665,7 @@ DEV_SUMMARY={
  'charge':'세트 충전과 다음 유료 스킬 할인 효과의 예약·소비·만료를 기록합니다.',
  'outcome':'전염의 원 표적, 보스 제어 만료와 같은 틱의 사망 정산을 정리합니다.',
  'area':'눈보라 고정·추적과 중독·서리 노출의 시간 처리를 기록합니다.',
- 'enemy':'일반 적 12종·정예 6특성의 개별 행동과 실제 위험 영역을 연결했습니다.',
+ 'enemy':'일반 적 20종·정예 6특성의 개별 행동과 실제 위험 영역을 연결했습니다. 신규 8종의 고유 공격은 개발 중입니다.',
  'boss':'보스별 패턴·후반 변화·피난 경로와 HUD·저장을 구현했습니다.',
  'passive':'패시브 설명·시간·HP 경계, 실제 조합과 원소 교차 복원을 보완했습니다.',
  'build-integration':'실제 8부위의 6빌드 비교와 벽 모서리 이동·서리 추천 규칙을 보완했습니다.',
@@ -797,7 +797,7 @@ def build_pages():
         status='현재 정리' if path.startswith('Wiki/content/') else '당시 기록' if ident in ('playable-build','validation-report') else '기획 초안' if ident=='content-catalog' else '기획 기준' if '/Design/' in path else '개발 기록'
         if ident in ('idle-mode-detail','class-set-reference','class-set-reference.en','balance-1000','balance-1000.en','balance-1000-tables','balance-1000-tables.en','rift-rewards-1000','rift-rewards-1000.en','rift-reward-tables','rift-reward-tables.en'):status='기획 검토안'
         if public:status='공개 안내'
-        notice='이 문서는 최초 빌드 당시 기록입니다. 최신 상태는 현재 개발 현황과 후속 개발 기록을 확인하세요.' if status=='당시 기록' else '기존 178개 정의를 보존한 초기 카탈로그입니다. 세트 등 현재 수량은 DB와 후속 명세를 따릅니다.' if ident=='content-catalog' else ''
+        notice='이 문서는 최초 빌드 당시 기록입니다. 최신 상태는 현재 개발 현황과 후속 개발 기록을 확인하세요.' if status=='당시 기록' else '초기 178개 정의에 일반 적 8종과 보스 2종을 더한 카탈로그입니다. 세트 등 현재 수량은 DB와 후속 명세를 따릅니다.' if ident=='content-catalog' else ''
         date_match=re.search(r'(?:정리 기준일|갱신일|작성일|확인일|As of|Updated on|Updated|Verified)[: ]+(\d{4}-\d{2}-\d{2})',body)
         date=date_match[1] if date_match else '2026-09-09'
         history_path=ROOT/'Wiki/history'/f'{ident}.json';versions=json.loads(history_path.read_text()) if history_path.exists() else []

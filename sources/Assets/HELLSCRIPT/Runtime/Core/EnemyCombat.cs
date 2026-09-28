@@ -14,6 +14,8 @@ namespace Hellscript
         public EnemyActionPhase phase;
         public Vector2 origin,aim,direction;
         public float remaining,preparation,damage,moved;
+        // Run time at which a boss announced this action (regular enemies leave it 0).
+        public float startedAt;
         public bool hitHero,empowered,released;
         public List<Vector2> points=new List<Vector2>();
     }
@@ -70,6 +72,20 @@ namespace Hellscript
         public static readonly string[] TraitNames={"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적"};
         public static bool Trait(EnemyState enemy,int id)=>!enemy.boss&&(enemy.elite==id||enemy.eliteTraits!=null&&enemy.eliteTraits.Contains(id));
         public static string Id(int kind)=>kind>=100?BossCombat.Definition(kind):"N"+(kind+1).ToString("00");
+        // Pack role per kind: 0 melee, 1 charger, 2 ranged, 3 area, 4 support, 5 exploder.
+        // Kinds 0-11 keep their old kind%6 meaning; 12-19 are the field-specific additions.
+        static readonly int[] Roles={0,1,2,3,4,5,0,1,2,3,4,5,0,1,0,5,0,2,0,3};
+        public static int Role(int kind)=>kind>=0&&kind<Roles.Length?Roles[kind]:0;
+        public static bool IsSupport(int kind)=>Role(kind)==4;
+        // Hunt edict "RANGED" also covers ground casters, as it always has (kinds 2, 3, 8, 9).
+        public static bool IsRangedTarget(int kind)=>Role(kind)==2||Role(kind)==3;
+        // Fields (biomes): 0 Graveyard, 1 Fortress, 2 Desert, 3 Cavern, 4 Grassland, 5 Highland.
+        // A field reuses the room templates of its set; the roster slot is the pack role.
+        public const int FieldCount=6;
+        static readonly int[] TemplateSets={0,1,1,0,0,1};
+        static readonly int[][] Rosters={new[]{0,1,2,3,4,5},new[]{6,7,8,9,10,11},new[]{12,13,2,9,10,5},new[]{14,1,2,3,4,15},new[]{16,1,17,9,4,11},new[]{18,7,8,19,10,11}};
+        public static int FieldTemplateSet(int field)=>TemplateSets[field];
+        public static int RosterKind(int field,int slot)=>Rosters[field][slot];
         public static EnemyAttackDefinition Attack(int kind)
         {
             switch(kind)
@@ -136,7 +152,7 @@ namespace Hellscript
             {
                 e.brain??=new EnemyBrain();e.brain.action??=new EnemyActionState();e.brain.action.points??=new List<Vector2>();e.brain.observations??=new List<MotionObservation>();
                 if(e.brain.traitCooldowns==null||e.brain.traitCooldowns.Length!=6)e.brain.traitCooldowns=new float[6];
-                e.brain.boss??=new BossPatternState();e.brain.boss.refuges??=new List<BossRefuge>();if(e.brain.boss.cooldowns==null||e.brain.boss.cooldowns.Length!=3)e.brain.boss.cooldowns=new float[3];
+                e.brain.boss??=new BossPatternState();e.brain.boss.refuges??=new List<BossRefuge>();BossCombat.EnsureSlots(e.brain.boss);
             }
         }
     }

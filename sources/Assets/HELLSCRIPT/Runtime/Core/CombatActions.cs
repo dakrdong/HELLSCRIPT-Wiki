@@ -72,7 +72,8 @@ namespace Hellscript
     }
     public static class CombatActions
     {
-        public const int Version=5;
+        // 6: boss cooldowns grew to seven slots (EnemyCombat.Normalize widens older arrays).
+        public const int Version=6;
         public static HeroActionPolicy CapturePolicy(HeroActionState action,BuildConfig build,Rule explicitRule=null)
         {
             var rule=explicitRule??(build?.rules!=null&&action.rule>=0&&action.rule<build.rules.Count?build.rules[action.rule]:null);

@@ -59,3 +59,11 @@ Unity 편집기의 AI 도구로 야만전사 참고 이미지 4장과 3D 모델 
 - 외부 녹음·샘플·음성 합성 엔진·AI 음향 모델을 쓰지 않았다. 디아블로 4는 질감의 참고로만 삼았으며 그 게임의 음원은 추출하거나 사용하지 않았다.
 - 목소리(함성·신음·죽음·괴물 소리)도 성문 펄스와 성도 공명기 모델로 합성한 비언어 발성이다. 실제 사람의 목소리를 녹음하거나 흉내 낸 것이 아니다.
 - 출시 음향 승인과 청감 평가를 마친 자산이 아니다. 자세한 구성과 검증: [효과음 전면 교체](Sound_Effects_Bank.md).
+
+## 절차적 3D 제작 도구와 월드 셰이더 (2026-09-28)
+
+- `tools/art3d/hs3d.py`, `tools/generate_world_art.py`, `tools/art3d/build_one.py`: Blender 5.2를 명령줄로 실행해 모델을 만드는 저장소 내부 도구다. 형태는 시드 고정 기하 연산으로, 재질은 Blender 기본 절차 노드로 만들고, 알베도·거칠기·노멀을 2배 해상도로 구운 뒤 줄인다. 외부 메시·텍스처·스캔·폰트를 내려받지 않았고, 이미지·3D 생성 AI 모델을 쓰지 않았다.
+- `Assets/HELLSCRIPT/Tests/Editor/Fixtures/WorldArt/`: 가져오기 규칙을 검사하려고 `tools/art3d/fixture_probe.py`로 만든 시험용 모델과 텍스처다. `Resources` 밖에 있어 게임 빌드에 들어가지 않는다.
+- `Assets/HELLSCRIPT/Resources/RiftTerrain.shader`, `WorldFx.shader`, `WorldTelegraph.shader`와 `Resources/Rendering/WorldPost_*.asset`: 이 저장소에서 직접 작성한 셰이더와 후처리 설정이다.
+- 디아블로 4는 어둡고 무게감 있는 분위기의 참고로만 삼았다. 그 게임의 모델·텍스처·이펙트·이름·로고는 추출하거나 옮기지 않았다.
+- 이 도구로 만든 영웅·일반 적·보스·필드·소품·마을 모델은 작업 브랜치(`claude/art-*`)에 있으며 이번 병합에 포함하지 않았다. 게임 화면에 연결할 때 함께 병합하고 이 절에 기록한다. 모든 결과물은 개발용 후보 자산이며 출시 승인을 뜻하지 않는다. 자세한 내용: [다크 고딕 개편 1단계](Dark_Gothic_Overhaul_Stage1.md).

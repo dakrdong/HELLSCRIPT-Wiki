@@ -24,6 +24,7 @@ namespace Hellscript
             {
                 var r=renderers[i];opaque[i]=r.sharedMaterial;shadows[i]=r.shadowCastingMode;
                 transparent[i]=new Material(shader){name=opaque[i].name+" faded"};transparent[i].SetColor("_BaseColor",opaque[i].color);
+                if(opaque[i].mainTexture!=null){transparent[i].mainTexture=opaque[i].mainTexture;transparent[i].mainTextureScale=opaque[i].mainTextureScale;transparent[i].mainTextureOffset=opaque[i].mainTextureOffset;}
                 // Measure in the building's own axes. A rotated world AABB includes empty front-yard space.
                 var local=r.localBounds;var matrix=frame.worldToLocalMatrix*r.localToWorldMatrix;
                 for(int corner=0;corner<8;corner++)

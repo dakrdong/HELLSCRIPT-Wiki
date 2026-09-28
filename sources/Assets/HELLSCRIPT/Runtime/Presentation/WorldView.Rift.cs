@@ -11,7 +11,7 @@ namespace Hellscript
         readonly Dictionary<string,GameObject> shrineViews=new Dictionary<string,GameObject>();
         void BuildGeneratedGeometry(RunState run)
         {
-            var layout=run.layout;Material ground=run.theme==0?Mat("Grave Paving",new Color(.7f,.78f,.84f)):Mat("Fortress Slate",new Color(.85f,.72f,.69f));
+            var layout=run.layout;Material ground=FieldGround(layout.Field);
             var paving=Resources.Load<Texture2D>("Art/RiftStone");if(paving!=null)ground.mainTexture=paving;
             if(layout.rooms.Any(r=>r.outline!=null&&r.outline.Count>=3))BuildOrganicFloor(run,ground);
             else
@@ -67,7 +67,7 @@ namespace Hellscript
                 var parent=owner!=null&&roomGeometry.TryGetValue(owner.index,out var group)?group.transform:world.transform;
                 var obstacleView=Shape(o.kind,type,parent,Position(o.position)+Vector3.up*o.height*.5f,size,material);
                 riftFog?.ObserveObstacle(obstacleView.GetComponent<Renderer>(),o);
-                if(o.kind=="Brazier"){var glow=Shape("Brazier light",PrimitiveType.Sphere,parent,Position(o.position)+Vector3.up*(o.height+.25f),new Vector3(.45f,.5f,.45f),ember);riftFog?.ObserveObstacle(glow.GetComponent<Renderer>(),o);}
+                if(o.kind=="Brazier"){var glow=Shape("Brazier light",PrimitiveType.Sphere,parent,Position(o.position)+Vector3.up*(o.height+.25f),new Vector3(.45f,.5f,.45f),ember);riftFog?.ObserveObstacle(glow.GetComponent<Renderer>(),o);lighting.RegisterEmitter(glow.transform,new Color(1,.55f,.25f),9,8);}
             }
             foreach(var chest in layout.chests)
             {
@@ -87,6 +87,16 @@ namespace Hellscript
                 var light=Shape("Blessing light",PrimitiveType.Sphere,root.transform,Vector3.up*1.65f,Vector3.one*.45f,shrine.definitionId=="SH01"?blue:ember);
                 Ring(root.transform,Vector3.up*.04f,.85f,shrine.definitionId=="SH01"?blue:ember,.07f);
                 shrineViews[shrine.id]=root;root.SetActive(false);
+            }
+        }
+        // Tints the shared rift stone per field until each field's own floor art is wired in.
+        Material FieldGround(int field)
+        {
+            switch(field)
+            {
+                case 1:return Mat("Fortress Slate",new Color(.85f,.72f,.69f));case 2:return Mat("Desert Sandstone",new Color(1,.84f,.62f));
+                case 3:return Mat("Cavern Rock",new Color(.52f,.62f,.64f));case 4:return Mat("Grassland Earth",new Color(.74f,.8f,.6f));
+                case 5:return Mat("Highland Frost",new Color(.9f,.96f,1));default:return Mat("Grave Paving",new Color(.7f,.78f,.84f));
             }
         }
         void BuildOrganicFloor(RunState run,Material ground)

@@ -135,6 +135,9 @@ namespace Hellscript
         public int contentStage;
         public float liveOpsMapScale=1,liveOpsPackSpread=1,liveOpsNormalDensity=1;
         public int version=CurrentVersion,theme,bossRoom,bossKind,candidate;
+        // Biome drawn within the theme's template set. -1 (saves before fields) means the theme's own field.
+        public int field=-1;
+        public int Field=>field>=0?field:theme;
         public uint mapSeed,layoutSeed,decorationSeed,encounterSeed,combatSeed,rewardSeed;
         public string fingerprint, fallbackId="";
         public bool legacy,roamingBoss,introductory;

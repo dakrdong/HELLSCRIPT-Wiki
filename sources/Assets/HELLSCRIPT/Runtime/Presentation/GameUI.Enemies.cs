@@ -44,12 +44,14 @@ namespace Hellscript
             {
                 var b=e.brain;var a=b.action;string name=e.boss?GameCatalog.BossNames[e.pattern]:GameCatalog.EnemyNames[e.kind];
                 Note(content,Loc.F("{0}\n{1} · HP {2:0} / {3:0}", name, (e.boss&&e.bossControl.staggered>0?"제압됨":b.state), e.health, e.maxHealth),22,94,gold);
-                if(a.phase!=EnemyActionPhase.Idle)Note(content,Loc.F("{0}\n조준 방향 고정{1}", (a.phase==EnemyActionPhase.Preparing?Loc.F("예고 {0:0.00}초", a.remaining):a.phase==EnemyActionPhase.Charging?"돌진 중":Loc.F("효과 진행 {0:0.00}초", a.remaining)), (a.kind==7||a.kind==(int)BossAttack.Charge?Loc.F(" · 남은 돌진 {0}회", a.remainingCharges):a.kind==(int)BossAttack.Slam?Loc.F(" · 남은 타격 {0}회", a.remainingCharges):"")),19,88,pale);
+                if(a.phase!=EnemyActionPhase.Idle)Note(content,Loc.F("{0}\n조준 방향 고정{1}", (a.phase==EnemyActionPhase.Preparing?Loc.F("예고 {0:0.00}초", a.remaining):a.phase==EnemyActionPhase.Charging?"돌진 중":Loc.F("효과 진행 {0:0.00}초", a.remaining)), (a.kind==7||a.kind==(int)BossAttack.Charge?Loc.F(" · 남은 돌진 {0}회", a.remainingCharges):a.kind==(int)BossAttack.Slam?Loc.F(" · 남은 타격 {0}회", a.remainingCharges):a.kind==(int)BossAttack.DevouringPull&&a.remainingCharges>1?" · 끌어당긴 뒤 물기":"")),19,88,pale);
                 if(e.boss)
                 {
                     Note(content,Loc.F("{0} · 제압 {1:0}/100\n{2}", (b.boss.enraged?"후반 패턴":"전반 패턴"), e.bossControl.meter, (e.bossControl.staggered>0?Loc.F("무력화 {0:0.0}초", e.bossControl.staggered):e.bossControl.immunity>0?Loc.F("제압 면역 {0:0.0}초", e.bossControl.immunity):"제압 가능")),19,88,gold);
-                    if(e.pattern==1)Note(content,Loc.F("살아 있는 소환 부하 {0}/8\n부하가 있으면 받는 피해 20% 감소", run.enemies.Count(x=>!x.dead&&BossCombat.OwnAdd(x,e))),19,88,pale);
-                    if(b.boss.refuges.Count>0)Note(content,Loc.F("폭발을 피할 지점 {0}곳\n파란 윤곽은 이번 연속 폭발의 범위 밖입니다.", b.boss.refuges.Count),19,88,pale);
+                    int adds=run.enemies.Count(x=>!x.dead&&BossCombat.OwnAdd(x,e));
+                    if(e.pattern==1)Note(content,Loc.F("살아 있는 소환 부하 {0}/8\n부하가 있으면 받는 피해 20% 감소", adds),19,88,pale);
+                    else if(adds>0)Note(content,Loc.F("살아 있는 소환 부하 {0}/8", adds),19,64,pale);
+                    if(b.boss.refuges.Count>0)Note(content,a.kind==(int)BossAttack.HymnOfSilence?Loc.F("찬가를 피할 지점 {0}곳\n파란 윤곽 안에서는 침묵의 찬가 피해를 받지 않습니다.", b.boss.refuges.Count):Loc.F("폭발을 피할 지점 {0}곳\n파란 윤곽은 이번 연속 폭발의 범위 밖입니다.", b.boss.refuges.Count),19,88,pale);
                 }
                 string traits=string.Join(" / ",Enumerable.Range(0,6).Where(i=>EnemyCombat.Trait(e,i)).Select(i=>EnemyCombat.TraitNames[i]));
                 if(traits!="")Note(content,traits,19,64,pale);

@@ -27,16 +27,30 @@ namespace Hellscript
             if (originals.TryGetValue(original, out var resolved)) original = resolved;
             var cache = remember ? terrain : objects;
             if (cache.TryGetValue(original, out var found)) return found;
-            var material = new Material(shader) { name = original.name + (remember ? " explored terrain" : " current sight") };
-            var color = original.HasProperty("_BaseColor") ? original.GetColor("_BaseColor") : original.color;
-            material.SetColor("_BaseColor", color);
-            material.SetColor("_EmissionColor", original.IsKeywordEnabled("_EMISSION") && original.HasProperty("_EmissionColor") ? original.GetColor("_EmissionColor") : Color.black);
-            if (original.mainTexture != null) material.SetTexture("_BaseMap", original.mainTexture);
+            // Fog-aware shaders (world lit, FX, telegraph) keep their shader and every property; URP Lit is converted.
+            var material = original.HasProperty("_FogTex") ? new Material(original) : Convert(original);
+            material.name = original.name + (remember ? " explored terrain" : " current sight");
+            material.SetFloat("_FogEnabled", 1);
             material.SetFloat("_RememberTerrain", remember ? 1 : 0);
             material.SetTexture("_FogTex", Texture);
             material.SetVector("_FogBounds", new Vector4(Visibility.Origin.x, Visibility.Origin.y, Visibility.Width * RiftVisibility.CellSize, Visibility.Height * RiftVisibility.CellSize));
             material.SetVector("_FogSize", new Vector4(Visibility.Width, Visibility.Height, 0, 0));
             cache.Add(original, material); originals.Add(material, original); return material;
+        }
+        static readonly string[] SurfaceValues = { "_BumpScale", "_Smoothness", "_Metallic" };
+        Material Convert(Material original)
+        {
+            var material = new Material(shader);
+            material.SetColor("_BaseColor", original.HasProperty("_BaseColor") ? original.GetColor("_BaseColor") : original.color);
+            material.SetColor("_EmissionColor", original.IsKeywordEnabled("_EMISSION") && original.HasProperty("_EmissionColor") ? original.GetColor("_EmissionColor") : Color.black);
+            if (original.mainTexture != null)
+            {
+                material.SetTexture("_BaseMap", original.mainTexture);
+                material.SetTextureScale("_BaseMap", original.mainTextureScale); material.SetTextureOffset("_BaseMap", original.mainTextureOffset);
+            }
+            if (original.HasProperty("_BumpMap") && original.GetTexture("_BumpMap") != null) material.SetTexture("_BumpMap", original.GetTexture("_BumpMap"));
+            foreach (var name in SurfaceValues) if (original.HasProperty(name)) material.SetFloat(name, original.GetFloat(name));
+            return material;
         }
         public void Bind(Renderer renderer, bool remember = false)
         {

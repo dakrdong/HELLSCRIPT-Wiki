@@ -49,7 +49,7 @@ namespace Hellscript
                 case "SC08":actual=DangerAt(State.position,c.comparison==Comparison.Soon?c.value:1.5f,c.comparison!=Comparison.Soon)?1:0;result=c.comparison==Comparison.Outside?actual==0:actual>0;break;
                 case "SC09":valid=target!=null;if(valid){actual=Vector2.Distance(State.position,target.position);result=Compare(actual,c);}break;
                 case "SC10":valid=target!=null;if(valid){actual=100*target.health/target.maxHealth;result=Compare(actual,c);}break;
-                case "SC11":valid=target!=null;if(valid){actual=target.kind%6;result=(int)actual==c.choice;}break;
+                case "SC11":valid=target!=null;if(valid){actual=EnemyCombat.Role(target.kind);result=(int)actual==c.choice;}break;
                 case "SC12":valid=target!=null;if(valid){actual=target.boss?2:target.elite>=0?1:0;result=c.comparison==Comparison.AtLeast?actual>=c.choice:actual==c.choice;}break;
                 case "SC13":
                     valid=target!=null;if(valid)
@@ -98,7 +98,7 @@ namespace Hellscript
             float Score(EnemyState e)
             {
                 float score=Vector2.Distance(State.position,e.position);
-                if(mode==RuleTarget.Elite&&(e.elite>=0||e.boss)||mode==RuleTarget.Support&&e.kind%6==4||mode==RuleTarget.Ranged&&e.kind%6==2||mode==RuleTarget.OwnBlizzard&&OwnArea(e,false)||mode==RuleTarget.OwnTrap&&OwnArea(e,true))score-=30;
+                if(mode==RuleTarget.Elite&&(e.elite>=0||e.boss)||mode==RuleTarget.Support&&EnemyCombat.IsSupport(e.kind)||mode==RuleTarget.Ranged&&EnemyCombat.Role(e.kind)==2||mode==RuleTarget.OwnBlizzard&&OwnArea(e,false)||mode==RuleTarget.OwnTrap&&OwnArea(e,true))score-=30;
                 if(mode==RuleTarget.LowHealth)score+=e.health/e.maxHealth*15;
                 if(mode==RuleTarget.Dense)score-=candidates.Count(x=>Vector2.Distance(e.position,x.position)<=r.targetRadius&&Map.LineClear(e.position,x.position))*3;
                 return score;

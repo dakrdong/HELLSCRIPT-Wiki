@@ -391,8 +391,9 @@ namespace Hellscript
         public string[] classNames={"전사","궁수","마법사"};
         public static readonly string[] Slots={"무기","머리","몸통","손","발","벨트","목걸이","반지"};
         public static readonly string[] Rarities={"일반","마법","희귀","전설"};
-        public static readonly string[] EnemyNames={"쇠사슬 시체","무덤 사냥개","해골 궁병","역병 시종","장송 사제","부푼 순례자","철갑 망령","광신 돌격병","흑철 석궁병","잿불 사술사","종지기","균열 파편체"};
-        public static readonly string[] BossNames={"묘지의 집행자","종말의 합창자","균열의 포식자"};
+        public static readonly string[] EnemyNames={"쇠사슬 시체","무덤 사냥개","해골 궁병","역병 시종","장송 사제","부푼 순례자","철갑 망령","광신 돌격병","흑철 석궁병","잿불 사술사","종지기","균열 파편체","사구 약탈자","모래굴 벌레","동굴 식인귀","포자 부풀이","가시뿔 야수인","가시덤불 마녀","서리 망자","빙결 술사"};
+        public static readonly string[] FieldNames={"잊힌 묘지","무너진 성채","작열 사막","습한 동굴","황혼 초원","눈 덮인 고원"};
+        public static readonly string[] BossNames={"묘지의 집행자","종말의 합창자","균열의 포식자","사구의 폭군","혹한의 여사제"};
         public static readonly string[] BaseNames={"녹슨 도검","강철 대검","묵철 도끼","사냥 활","전쟁 활","중형 쇠뇌","재의 지팡이","봉인 지팡이","흑요석 지팡이","천 두건","철 투구","가죽 외투","철 갑옷","천 장갑","철 장갑","가죽 장화","철 장화","직물 허리띠","철 버클 허리띠","뼈 목걸이","은 목걸이","봉인 목걸이","철 반지","은 반지"};
         public static readonly float[] BaseValues={17,20,23,17,20,23,17,20,23,12,20,24,40,8,14,8,14,10,16,20,25,30,5,5};
         public static readonly int[] BaseSlots={0,0,0,0,0,0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,6,7,7};

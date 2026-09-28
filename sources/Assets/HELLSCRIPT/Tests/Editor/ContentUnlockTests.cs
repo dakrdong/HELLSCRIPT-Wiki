@@ -91,7 +91,7 @@ namespace Hellscript.Tests
                 var map=RiftGenerator.Generate(seed,"unlock-"+seed,stage,(HeroClass)(seed%3),lastBoss:2);
                 Assert.Less(map.theme,themes);Assert.Less(map.bossKind,bosses);Assert.IsTrue(map.spawns.All(s=>s.traits.Count<=traits));
                 Assert.IsFalse(map.spawns.Any(s=>s.traits.Contains(0)&&s.traits.Contains(1)));
-                if(stage<=5)Assert.IsTrue(map.spawns.All(s=>s.kind==0));
+                if(stage<=5)Assert.IsTrue(map.spawns.All(s=>s.kind==EnemyCombat.RosterKind(map.Field,0)));
             }
         }
         [Test] public void U22U24U29_GuideSkipAndVerifiedMergeAreIndependentAndIdempotent()

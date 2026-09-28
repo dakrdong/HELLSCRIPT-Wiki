@@ -186,7 +186,7 @@ namespace Hellscript.Tests
         {
             var sim=Fixture(HeroClass.Warrior);sim.State.health=100;var d=Configure(sim,"W02","W05");Set(d,"survival.lowHp","OFF");Set(d,"survival.escapeSkill","W02");Set(d,"dodge.area.policy","ALWAYS");Danger(sim);CurrentAttack(sim,HeroActionPhase.Channeling);
             sim.State.build.rules.Add(new Rule(4){id="priority-shield"});sim.State.build.rules.Add(new Rule(0){id="old-attack"});sim.State.heroAction.rule=1;
-            sim.ExecuteEdictSurvival(d);var copy=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(copy);Assert.AreEqual(5,copy.combatVersion);Assert.IsTrue(copy.heroAction.exitChannelForSurvival);
+            sim.ExecuteEdictSurvival(d);var copy=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(copy);Assert.AreEqual(CombatActions.Version,copy.combatVersion);Assert.IsTrue(copy.heroAction.exitChannelForSurvival);
             var resumed=new CombatSimulation(account,catalog,1,restore:copy);resumed.State.resource=100;resumed.Stats.regen=0;Advance(resumed,.05f);Assert.AreEqual(HeroActionPhase.Channeling,resumed.State.heroAction.phase);Advance(resumed,.05f);
             Assert.IsFalse(resumed.HeroActionBusy);Assert.AreEqual(100,resumed.State.resource,.0001f);Assert.IsFalse(resumed.State.actionEvents.Any(a=>a.skill==4&&a.kind=="ACTION_START"));
         }

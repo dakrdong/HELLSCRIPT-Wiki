@@ -64,12 +64,12 @@ namespace Hellscript
         }
         void FinishEnemyAction(EnemyState enemy)
         {var a=enemy.brain.action;EnemyEvent(enemy,"ACTION_END",EnemyCombat.Id(a.kind),a.id);enemy.brain.action=new EnemyActionState();enemy.windup=0;EnemyMode(enemy,"재사용 대기");}
-        void EnemyProjectiles(EnemyState e,int action,Vector2 origin,Vector2 direction,float damage,string definition,bool fan=false,float spread=10,float distance=9,float speed=10)
+        void EnemyProjectiles(EnemyState e,int action,Vector2 origin,Vector2 direction,float damage,string definition,bool fan=false,float spread=10,float distance=9,float speed=10,int count=3,float radius=.2f,int element=0)
         {
             if(fan)State.projectileGroups.Add(new ProjectileGroup{actionId=action,maxPerVictim=1});
-            foreach(float angle in fan?new[]{-spread,0,spread}:new[]{0f})
+            foreach(float angle in fan?BossCombat.FanAngles(count,spread):new[]{0f})
                 State.projectiles.Add(new CombatProjectile{id=State.nextId++,actionId=action,hostile=true,casterId=e.id.ToString(),definitionId=definition,origin=origin,position=origin,direction=EnemyCombat.Rotate(direction,angle),
-                    remaining=distance,speed=speed,radius=.2f,damage=damage,createdAt=State.time});
+                    remaining=distance,speed=speed,radius=radius,damage=damage,element=element,createdAt=State.time});
         }
         void CreateEnemyHazard(EnemyState enemy,string definition,Vector2 position,float delay,float duration,float damage,int element,float radius=2.5f,float inner=0,int action=0,float slow=0,bool shards=false)
         {

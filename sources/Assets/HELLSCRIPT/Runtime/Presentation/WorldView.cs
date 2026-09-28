@@ -17,6 +17,8 @@ namespace Hellscript
         readonly List<VisualFx> effects=new List<VisualFx>();
         Material stone,darkStone,trim,ember,blue,red,green,purple;
         float elapsed;
+        WorldLighting lighting;
+        public WorldLighting Lighting=>lighting;
         sealed class VisualFx {public GameObject go;public float life,total,growth=.35f,spin;public Vector3 scale,velocity;}
         public void Initialize(GameController controller)
         {
@@ -24,11 +26,10 @@ namespace Hellscript
             viewCamera=Camera.main;
             if(viewCamera==null){var obj=new GameObject("Hellscript Camera");viewCamera=obj.AddComponent<Camera>();obj.tag="MainCamera";obj.AddComponent<AudioListener>();}
             viewCamera.orthographic=true;viewCamera.orthographicSize=12.5f;viewCamera.nearClipPlane=.1f;viewCamera.farClipPlane=180;
-            viewCamera.clearFlags=CameraClearFlags.SolidColor;viewCamera.backgroundColor=new Color(.022f,.033f,.05f);
+            viewCamera.clearFlags=CameraClearFlags.SolidColor;
             viewCamera.transform.rotation=Quaternion.LookRotation(new Vector3(-12,-25,18));
-            RenderSettings.ambientMode=AmbientMode.Flat;RenderSettings.ambientLight=new Color(.29f,.34f,.43f);
-            RenderSettings.fog=true;RenderSettings.fogColor=new Color(.035f,.05f,.075f);RenderSettings.fogMode=FogMode.Linear;RenderSettings.fogStartDistance=35;RenderSettings.fogEndDistance=95;
-            if(FindAnyObjectByType<Light>()==null){var l=new GameObject("Moonlight").AddComponent<Light>();l.type=LightType.Directional;l.intensity=1.3f;l.color=new Color(.68f,.78f,1);l.transform.rotation=Quaternion.Euler(45,-25,0);l.shadows=LightShadows.Soft;}
+            // Background, ambient, fog, the key light and post-processing come from FieldLook presets.
+            lighting=new WorldLighting(viewCamera,WorldLighting.MobileQuality);lighting.ApplyLegacy(0);
             stone=Mat("Basalt",new Color(.17f,.21f,.25f));darkStone=Mat("Obsidian",new Color(.07f,.1f,.14f));trim=Mat("Aged Brass",new Color(.51f,.34f,.17f));
             ember=Mat("Amber",new Color(1,.46f,.1f),true);blue=Mat("Frost",new Color(.2f,.7f,1),true);red=Mat("Danger",new Color(.9f,.1f,.14f),true);
             green=Mat("Poison",new Color(.3f,.9f,.38f),true);purple=Mat("Arcane",new Color(.6f,.3f,1),true);
@@ -38,7 +39,9 @@ namespace Hellscript
             if(materials.TryGetValue(name,out var found))return found;
             Shader shader=Shader.Find("Universal Render Pipeline/Lit")??Shader.Find("Standard");var material=new Material(shader){name="HELLSCRIPT "+name,color=color};
             if(material.HasProperty("_BaseColor"))material.SetColor("_BaseColor",color);
-            if(emission){material.EnableKeyword("_EMISSION");material.SetColor("_EmissionColor",color*1.8f);}
+            // Rift objects render through RiftTerrain, which linearises this colour; x1.8 put Danger red at ~2.9 linear, where
+            // the post chain's ACES shoulder bleaches it to salmon. x.8 keeps hostile red, gold and the other signals below it.
+            if(emission){material.EnableKeyword("_EMISSION");material.SetColor("_EmissionColor",color*.8f);}
             if(material.HasProperty("_Smoothness"))material.SetFloat("_Smoothness",.15f);materials.Add(name,material);return material;
         }
         GameObject Shape(string name,PrimitiveType type,Transform parent,Vector3 pos,Vector3 scale,Material mat)
@@ -48,7 +51,7 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
-            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;
+            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
             if(world!=null)Destroy(world);world=null;hero=null;actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();
@@ -57,6 +60,8 @@ namespace Hellscript
         public void BuildDungeon(RunState run)
         {
             ClearDungeon();presentedRunId=run.id;world=new GameObject("Rift Runtime");
+            // Field = theme until RiftLayout.Field lands; apply before the fog view forces its black background.
+            if(run.layout.legacy)lighting.ApplyLegacy(run.theme);else lighting.Apply(run.layout.Field);
             InitializeRiftVisibility(run);
             if(!run.layout.legacy){BuildGeneratedGeometry(run);BuildObjectives(run);BuildGates(run);BuildObjectiveChains(run);}
             else
@@ -76,7 +81,8 @@ namespace Hellscript
                     Vector3 pos=new Vector3(room.x+(corner%2==0?-7:7),0,room.y+(corner<2?-7:7));
                     Shape("Pillar",PrimitiveType.Cylinder,world.transform,pos+Vector3.up*1.8f,new Vector3(1.1f,1.8f,1.1f),darkStone);
                     Shape("Brazier",PrimitiveType.Cylinder,world.transform,pos+Vector3.up*3.6f,new Vector3(1.4f,.15f,1.4f),trim);
-                    Shape("Ember",PrimitiveType.Sphere,world.transform,pos+Vector3.up*3.9f,new Vector3(.5f,.65f,.5f),run.theme==0?ember:purple);
+                    var flame=Shape("Ember",PrimitiveType.Sphere,world.transform,pos+Vector3.up*3.9f,new Vector3(.5f,.65f,.5f),run.theme==0?ember:purple);
+                    lighting.RegisterEmitter(flame.transform,run.theme==0?new Color(1,.55f,.25f):new Color(.65f,.4f,1),9,8);
                 }
                 Vector2 next=RiftMap.Rooms[(i+1)%8],mid=(room+next)/2;bool horizontal=room.y==next.y;
                 Shape("Connected passage",PrimitiveType.Cube,world.transform,new Vector3(mid.x,-.4f,mid.y),horizontal?new Vector3(7,.7f,6):new Vector3(6,.7f,7),darkStone);
@@ -91,7 +97,7 @@ namespace Hellscript
             var root=new GameObject(name);root.transform.SetParent(world.transform,false);
             Material body=enemy?Mat("Enemy "+type,Color.Lerp(new Color(.35f,.3f,.34f),type%3==0?new Color(.44f,.2f,.16f):new Color(.2f,.33f,.37f),.6f)):type==0?Mat("Hero Iron",new Color(.37f,.44f,.53f)):type==1?Mat("Hunter Cloak",new Color(.19f,.34f,.28f)):Mat("Mage Cloak",new Color(.28f,.19f,.44f));
             // Rigid one-piece placeholder. The view adds bob, lean, and facing without a skeleton.
-            int role=type%6;Vector3 bodyScale=enemy&&role==1?new Vector3(.65f,.65f,1.1f):enemy&&role==5?new Vector3(1.25f,1,1.25f):enemy&&role==4?new Vector3(.55f,1.25f,.55f):new Vector3(.8f,1,.65f);
+            int role=EnemyCombat.Role(type);Vector3 bodyScale=enemy&&role==1?new Vector3(.65f,.65f,1.1f):enemy&&role==5?new Vector3(1.25f,1,1.25f):enemy&&role==4?new Vector3(.55f,1.25f,.55f):new Vector3(.8f,1,.65f);
             Shape("Body",enemy&&role==5?PrimitiveType.Sphere:enemy&&type==6?PrimitiveType.Cube:PrimitiveType.Capsule,root.transform,new Vector3(0,1,0),bodyScale,body);
             Shape("Head",PrimitiveType.Sphere,root.transform,new Vector3(0,2.05f,0),new Vector3(.66f,.65f,.6f),body);
             Shape("Face light",PrimitiveType.Cube,root.transform,new Vector3(0,2.07f,.28f),new Vector3(.4f,.08f,.06f),enemy?red:ember);
@@ -148,7 +154,7 @@ namespace Hellscript
                 if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!game.Combat.Map.LineClear(run.position,enemy.position))
                 {if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);continue;}
                 if(!actors.TryGetValue(enemy.id,out var actor))
-                {actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?new[]{6,10,7}[enemy.pattern]:enemy.kind,true,enemy.boss);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
+                {actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
                  if(enemy.elite>=0)Ring(actor.transform,Vector3.up*.1f,1.1f,purple,.1f);
                  if(!string.IsNullOrEmpty(enemy.eventId))Ring(actor.transform,Vector3.up*.15f,.9f,red,.1f);
                  Shape("Health",PrimitiveType.Cube,actor.transform,new Vector3(0,2.65f,0),new Vector3(1,.1f,.1f),red);}
@@ -203,13 +209,16 @@ namespace Hellscript
             else go=Ring(world.transform,Position(kind==0||kind==4||kind==16||kind==20?origin:target)+Vector3.up*.15f,kind==24?2:Mathf.Clamp(amount,.8f,4),mat,kind==0?.16f:.09f);
             float life=kind==24?amount:kind==0?.22f:.45f;effects.Add(new VisualFx{go=go,life=life,total=life,scale=go.transform.localScale});
         }
-        void LateUpdate()=>ApplyBattleViewport();
+        void LateUpdate(){ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
         void ApplyBattleViewport()
         {
             if(viewCamera==null||presentationSuspended)return;
+            // The shake offset is added only while the camera renders (WorldLighting.BeginCamera), so every gameplay read of
+            // the camera stays exact; it is held while the settings world frames the hero and dropped on a snap.
+            lighting.ShakeHeld=settingsWorldOpen;if(snapPresentation)lighting.StopShake();
             if(settingsWorldOpen&&HasPresentedPlayer){ApplySettingsWorld();return;}
             var viewport=GameplayViewport;viewCamera.rect=viewport;viewCamera.ResetAspect();viewCamera.orthographicSize=GameplayHalfHeight(viewport);
         }
-        void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);}
+        void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);if(lighting!=null)lighting.Dispose();}
     }
 }

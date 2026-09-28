@@ -116,12 +116,26 @@ namespace Hellscript.Tests
             Assert.IsEmpty(sim.ForecastIncoming(1,h.position).sources);Assert.IsEmpty(sim.ForecastIncoming(1,h.position).hits);
         }
         [TestCase(BossAttack.Basic)][TestCase(BossAttack.Slam)][TestCase(BossAttack.Beam)][TestCase(BossAttack.Blasts)][TestCase(BossAttack.Legacy)]
+        [TestCase(BossAttack.Roar)][TestCase(BossAttack.ReapingSweep)][TestCase(BossAttack.ExecutionLeap)][TestCase(BossAttack.ChainWhirl)][TestCase(BossAttack.GraveToll)]
+        [TestCase(BossAttack.DirgeRing)][TestCase(BossAttack.RequiemChoir)][TestCase(BossAttack.HymnOfSilence)][TestCase(BossAttack.LamentOrbs)]
+        [TestCase(BossAttack.MawSnap)][TestCase(BossAttack.RiftTear)][TestCase(BossAttack.ShardStorm)][TestCase(BossAttack.DevouringPull)]
+        [TestCase(BossAttack.TailLash)][TestCase(BossAttack.VenomSpray)][TestCase(BossAttack.BurrowStrike)][TestCase(BossAttack.QuicksandMaelstrom)][TestCase(BossAttack.TripleEruption)]
+        [TestCase(BossAttack.IceLance)][TestCase(BossAttack.FrostNova)][TestCase(BossAttack.GlacialSpikes)][TestCase(BossAttack.BlizzardVeil)][TestCase(BossAttack.ShatterFan)]
         public void AnnouncedBossAttacksMatchDamageBeforeAnyNewDecision(BossAttack kind)
         {
-            var sim=Fixture();var e=sim.State.enemies[0];e.boss=true;e.pattern=kind==BossAttack.Legacy?1:0;e.position=sim.State.position+Vector2.up*2;e.attack=10;e.brain.boss.initialized=true;e.brain.boss.cooldowns=new[]{1000f,1000f,1000f};
+            var sim=Fixture();var e=sim.State.enemies[0];e.boss=true;e.pattern=kind==BossAttack.Legacy?1:BossTests.Pattern(kind);e.position=sim.State.position+Vector2.up*2;e.attack=10;e.brain.boss.initialized=true;e.brain.boss.cooldowns=new[]{1000f,1000f,1000f};
             var a=new EnemyActionState{id=99,kind=(int)kind,phase=EnemyActionPhase.Preparing,origin=e.position,aim=sim.State.position,direction=Vector2.down,preparation=.2f,remaining=.2f,remainingCharges=1};a.points.Add(sim.State.position);a.points.Add(sim.State.position+Vector2.right);a.points.Add(sim.State.position+Vector2.left);e.brain.action=a;
-            if(kind==BossAttack.Beam)a.aim=e.position+Vector2.down*10;
+            if(kind==BossAttack.Beam||kind==BossAttack.TailLash||kind==BossAttack.IceLance||kind==BossAttack.RiftTear)a.aim=e.position+Vector2.down*10;
+            if(BossCombat.Volley(kind,out var volley))a.points=BossCombat.FanAngles(volley.count,volley.spread).Select(angle=>a.origin+EnemyCombat.Rotate(a.direction,angle)*volley.range).ToList();
             var f=sim.ForecastIncoming(1);Assert.Greater(f.hits.Count,0);Advance(sim,1);Assert.AreEqual(f.HpLoss,IncomingHp(sim),.001f,kind.ToString());
+        }
+        // The pull moves the hero before the bite, so the forecast has to judge the bite at the pulled spot.
+        [TestCase(2.6f)][TestCase(3.4f)][TestCase(4.5f)][TestCase(6f)]
+        public void DevouringPullForecastJudgesTheBiteWhereThePullLeavesTheHero(float distance)
+        {
+            var sim=Fixture();var e=sim.State.enemies[0];e.boss=true;e.pattern=2;e.position=sim.State.position+Vector2.up*distance;e.attack=10;e.brain.boss.initialized=true;e.brain.boss.cooldowns=new[]{1000f,1000f,1000f};
+            e.brain.action=new EnemyActionState{id=99,kind=(int)BossAttack.DevouringPull,phase=EnemyActionPhase.Preparing,origin=e.position,aim=sim.State.position,direction=Vector2.down,preparation=.1f,remaining=.1f,remainingCharges=2};
+            var f=sim.ForecastIncoming(1.5f);Advance(sim,1.5f);Assert.AreEqual(f.HpLoss,IncomingHp(sim),.001f);Assert.AreEqual(distance<5.5f?1:0,f.hits.Count);
         }
         [TestCase(0)][TestCase(2)][TestCase(3)][TestCase(8)][TestCase(9)]
         public void AnnouncedNormalAttacksMatchActualIncomingDamage(int kind)

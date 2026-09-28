@@ -12,8 +12,8 @@ Eighteen fights change only use policies within the same build. Warrior BUILD_SW
 | single | Create space | 221.47 | 75.27 | 34.25s | 41.43m | 7 |
 | group | Current distance | 400.41 | 802.61 | 41.50s | 0.00m | 1 |
 | group | Create space | 1191.14 | 722.15 | 33.70s | 21.62m | 3 |
-| boss | Current distance | 213.53 | 369.46 | 40.30s | 0.00m | 1 |
-| boss | Create space | 212.60 | 309.59 | 36.10s | 35.18m | 6 |
+| boss | Current distance | 206.83 | 394.62 | 40.05s | 0.00m | 1 |
+| boss | Create space | 210.61 | 311.36 | 35.05s | 43.28m | 7 |
 
 ## Mana Reclaim
 
@@ -27,17 +27,17 @@ Eighteen fights change only use policies within the same build. Warrior BUILD_SW
 | group | Hold / 90% | 3201.02 | 794.94 | 14.45s | 0.00m | 4 | 2.30s | 315.56 |
 | group | Retreat / 50% | 2970.86 | 638.82 | 32.40s | 29.17m | 2 | 0.40s | 54.88 |
 | group | Retreat / 90% | 3030.81 | 679.32 | 23.15s | 15.88m | 2 | 0.90s | 123.48 |
-| boss | Hold / 50% | 388.27 | 379.22 | 27.80s | 0.00m | 14 | 4.05s | 555.66 |
-| boss | Hold / 90% | 387.06 | 391.30 | 14.00s | 0.00m | 8 | 4.50s | 617.40 |
-| boss | Retreat / 50% | 308.47 | 316.22 | 39.40s | 45.52m | 4 | 0.70s | 96.04 |
-| boss | Retreat / 90% | 320.17 | 320.42 | 33.65s | 27.51m | 3 | 1.35s | 185.22 |
+| boss | Hold / 50% | 375.28 | 374.88 | 27.15s | 0.00m | 14 | 4.10s | 562.52 |
+| boss | Hold / 90% | 381.77 | 383.28 | 16.65s | 0.00m | 8 | 4.60s | 631.12 |
+| boss | Retreat / 50% | 318.02 | 369.95 | 45.30s | 19.84m | 1 | 0.15s | 20.58 |
+| boss | Retreat / 90% | 332.23 | 384.30 | 41.90s | 13.12m | 1 | 0.45s | 61.74 |
 
 ## Interpretation
 
-Every character survived. In the integrated build, leap spacing increased single-target and group DPS but slightly reduced boss DPS. Incoming damage fell in all three scenarios. Retreat suspends other attacks, so narrow paths, faster pursuit and short fights remain useful conditions to compare.
+Every character survived. In the integrated build, leap spacing increased DPS in all three scenarios, only slightly against the boss. Incoming damage fell in all three scenarios. Retreat suspends other attacks, so narrow paths, faster pursuit and short fights remain useful conditions to compare.
 
-Holding produced higher DPS than retreating with the same recovery goal, while retreating reduced incoming damage. Against eight enemies, retreating did begin charging: 0.40 seconds at the 50% goal and 0.90 seconds at the 90% goal. The earlier isolated-branch observation of zero charging time does not describe this integrated build.
+Holding produced higher DPS than retreating with the same recovery goal. Retreating usually reduced incoming damage; against the boss with the 90% goal the two were about equal. Against eight enemies, retreating did begin charging: 0.40 seconds at the 50% goal and 0.90 seconds at the 90% goal. The earlier isolated-branch observation of zero charging time does not describe this integrated build.
 
-The 90% recovery goal was not universally stronger. Holding increased single-target and group DPS but slightly reduced boss DPS. For retreating, the 90% goal increased both DPS and incoming damage in all three scenarios. These are controlled observations, not a universal optimum or a final balance conclusion.
+The 90% recovery goal raised DPS in all three scenarios for both holding and retreating, but it also raised incoming damage in each of them, so it is not universally better. These are controlled observations, not a universal optimum or a final balance conclusion.
 
 Spacing movement counts deliberate retreat only. Charging time counts actual channel time; recovered mana is the real increase after the resource cap. Per-skill waits may overlap. The JSON also preserves total movement, total damage, remaining health and ultimate/other skill cast counts.

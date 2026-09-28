@@ -99,7 +99,7 @@ namespace Hellscript
             {
                 float x=RandomStream.Unit(ref State.rng)*12-6,z=RandomStream.Unit(ref State.rng)*12-6;
                 if(room==0&&z<0)z+=5;
-                SpawnEnemy(room,State.theme*6+RandomStream.Range(ref State.rng,0,6),RiftMap.Rooms[room]+new Vector2(x,z),i==17?RandomStream.Range(ref State.rng,0,6):-1);
+                SpawnEnemy(room,EnemyCombat.RosterKind(State.layout.Field,RandomStream.Range(ref State.rng,0,6)),RiftMap.Rooms[room]+new Vector2(x,z),i==17?RandomStream.Range(ref State.rng,0,6):-1);
             }
         }
         void SpawnOwnedTraining()
@@ -116,15 +116,17 @@ namespace Hellscript
         void SpawnEnemy(int room,int kind,Vector2 pos,int elite,bool boss=false,bool add=false,RunState into=null)
         {
             var spawnRun=into??State;
-            float[] hp={1,.7f,.7f,.85f,.9f,1.2f,1.4f,.9f,.8f,.8f,1.1f,.65f};
-            float[] atk={1,1.1f,.8f,.8f,.3f,.6f,1.1f,1.3f,1,1,.4f,.7f};
-            float[] speed={2.7f,3.6f,2.4f,2.3f,2.2f,2,2.2f,3.2f,2.2f,2.3f,2,3};
+            // Kinds 12-19 are provisional: the field fillers (12,14,16,18) carry N01's exact budget, so
+            // early rifts play alike in every field until their own attacks are tuned.
+            float[] hp={1,.7f,.7f,.85f,.9f,1.2f,1.4f,.9f,.8f,.8f,1.1f,.65f,1,.8f,1,1.1f,1,.75f,1,.8f};
+            float[] atk={1,1.1f,.8f,.8f,.3f,.6f,1.1f,1.3f,1,1,.4f,.7f,1,1.1f,1,.6f,1,.85f,1,1};
+            float[] speed={2.7f,3.6f,2.4f,2.3f,2.2f,2,2.2f,3.2f,2.2f,2.3f,2,3,2.7f,3,2.7f,2,2.7f,2.3f,2.7f,2.3f};
             float health=70*Mathf.Pow(1.08f,spawnRun.stage-1)*(boss?45:hp[kind])*(elite>=0?3:1);
             var e=new EnemyState{id=spawnRun.nextId++,room=room,kind=kind,position=pos,health=health,maxHealth=health,
                 attack=18*Mathf.Pow(1.055f,spawnRun.stage-1)*(boss?3:atk[kind])*(elite>=0?1.5f:1),speed=boss?2:speed[kind],elite=elite,boss=boss,add=add,cooldown=1+RandomStream.Unit(ref spawnRun.rng)};
             if(spawnRun.training<0&&spawnRun.layout.introductory)
             {e.health*=IntroductoryRift.HealthMultiplier(spawnRun.stage,boss);e.maxHealth=e.health;e.attack*=IntroductoryRift.AttackMultiplier(spawnRun.stage);}
-            if(boss){spawnRun.bossId=e.id;e.pattern=spawnRun.layout.legacy?(spawnRun.stage-1)%3:spawnRun.layout.bossKind;if(e.pattern==1){e.health*=.85f;e.attack*=.9f;}if(e.pattern==2){e.health*=1.1f;e.attack*=1.1f;}e.maxHealth=e.health;}
+            if(boss){spawnRun.bossId=e.id;e.pattern=spawnRun.layout.legacy?(spawnRun.stage-1)%3:spawnRun.layout.bossKind;var profile=BossCombat.ProfileOf(e.pattern);e.health*=profile.health;e.attack*=profile.attack;e.maxHealth=e.health;}
             if(spawnRun.training<0)
             {
                 var tuning=LiveOpsConfig.For(spawnRun);

@@ -233,7 +233,7 @@ namespace Hellscript
         public void ShowBattle()
         {
             if(game.Combat==null){ShowTown();return;}
-            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T("자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):run.theme==0?"잊힌 묘지 · 처치 게이지를 채워 보스를 소환하세요":"무너진 성채 · 처치 게이지를 채워 보스를 소환하세요",battle:true);
+            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T("자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):Loc.F("{0} · 처치 게이지를 채워 보스를 소환하세요",GameCatalog.FieldNames[run.layout.Field]),battle:true);
             BuildBattleHud(run);
         }
         Image Bar(Transform parent,Vector2 pos,Vector2 size,Color color)

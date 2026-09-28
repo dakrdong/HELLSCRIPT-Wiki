@@ -12,35 +12,52 @@ namespace Hellscript
         static readonly uint[,] CompactFallbackSeeds={{81002,81005,81008},{81101,81103,81105}};
         public static uint Derive(uint seed,string stream)
         {uint hash=2166136261;foreach(char c in stream){hash^=c;hash*=16777619;}hash^=seed;return RandomStream.Next(ref hash);}
-        public static int SelectBoss(ref uint encounter,int previous)
+        public static int SelectBoss(ref uint encounter,int previous,int count=3)
         {
             // Diffuse adjacent development seeds before the history-dependent exclusion.
             // Consume exactly one encounter value; placement keeps its own deterministic sequence.
             uint choice=RandomStream.Next(ref encounter);choice^=choice>>16;choice*=0x7feb352du;choice^=choice>>15;choice*=0x846ca68bu;choice^=choice>>16;
-            int roll=RandomStream.Range(ref choice,0,previous>=0?2:3);return previous>=0&&roll>=previous?roll+1:roll;
+            // A previous boss this stage has not unlocked (a replay of a lower stage) excludes nothing.
+            bool excluded=previous>=0&&previous<count;
+            int roll=RandomStream.Range(ref choice,0,excluded?count-1:count);return excluded&&roll>=previous?roll+1:roll;
         }
         public static int SelectBossForStage(ref uint encounter,int previous,int stage)
         {
-            int count=ContentUnlocks.BossCount(stage);if(count==3)return SelectBoss(ref encounter,previous);
+            int count=ContentUnlocks.BossCount(stage);if(count>=3)return SelectBoss(ref encounter,previous,count);
             var candidates=Enumerable.Range(0,count).ToList();if(count>1)candidates.Remove(previous);
             return candidates[RandomStream.Range(ref encounter,0,candidates.Count)];
+        }
+        // Its own derived stream, so adding fields left every existing seed's theme, rooms and packs
+        // unchanged. Diffused like SelectBoss so adjacent development seeds spread over the fields.
+        public static int SelectField(uint seed,int theme)
+        {
+            var fields=Enumerable.Range(0,EnemyCombat.FieldCount).Where(f=>EnemyCombat.FieldTemplateSet(f)==theme).ToArray();
+            uint stream=Derive(seed,"field");stream^=stream>>16;stream*=0x7feb352du;stream^=stream>>15;stream*=0x846ca68bu;stream^=stream>>16;
+            return fields[RandomStream.Range(ref stream,0,fields.Length)];
         }
         static void Shuffle<T>(List<T> list,ref uint rng)
         {for(int n=list.Count-1;n>0;n--){int p=RandomStream.Range(ref rng,0,n+1);(list[n],list[p])=(list[p],list[n]);}}
         static Rect Expand(Rect r,float amount)=>new Rect(r.min-Vector2.one*amount,r.size+Vector2.one*amount*2);
         // Normal entries use roaming bosses. Explicit objective/arena overrides are retained for
         // compatibility fixtures and development tools for the saved pre-v6 rule set.
-        public static RiftLayout Generate(uint seed,string runId,int stage,HeroClass hero,string previous="",int lastBoss=-1,int forcedTheme=-1,int forcedCount=0,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null)
+        public static RiftLayout Generate(uint seed,string runId,int stage,HeroClass hero,string previous="",int lastBoss=-1,int forcedTheme=-1,int forcedCount=0,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null,int forcedField=-1)
         {
             tuning??=new LiveOpsRiftSettings();LiveOpsConfig.Validate(tuning);
             arenaBoss|=forcedObjective.HasValue;
+            if(forcedField>=0)
+            {
+                // A field only exists over its own template set; a contradicting theme is a caller bug.
+                int set=EnemyCombat.FieldTemplateSet(forcedField);if(forcedTheme>=0&&forcedTheme!=set)throw new ArgumentOutOfRangeException(nameof(forcedField));
+                forcedTheme=set;
+            }
             uint choice=Derive(seed,"choice");int theme=forcedTheme>=0?forcedTheme:RandomStream.Range(ref choice,0,ContentUnlocks.ThemeCount(stage));
             int count=forcedCount>0?forcedCount:RandomStream.Range(ref choice,6,9);string lastError="";
+            int field=forcedField>=0?forcedField:forcedTheme>=0?forcedTheme:SelectField(seed,theme);
             for(int candidate=0;candidate<24;candidate++)
             {
                 try
                 {
-                    var map=Candidate(seed,runId,stage,hero,theme,count,candidate,lastBoss,forcedObjective:forcedObjective,arenaBoss:arenaBoss,tuning:tuning);
+                    var map=Candidate(seed,runId,stage,hero,theme,count,candidate,lastBoss,forcedObjective:forcedObjective,arenaBoss:arenaBoss,tuning:tuning,field:field);
                     if(map.fingerprint==previous)continue;return map;
                 }
                 catch(InvalidOperationException e){lastError=e.Message;}
@@ -51,24 +68,24 @@ namespace Hellscript
             {
                 try
                 {
-                    return Fallback(seed,runId,stage,hero,theme,n,lastBoss,forcedObjective,arenaBoss,tuning);
+                    return Fallback(seed,runId,stage,hero,theme,n,lastBoss,forcedObjective,arenaBoss,tuning,field);
                 }
                 catch(InvalidOperationException e){lastError=e.Message;}
             }
             throw new InvalidOperationException(Loc.F("균열을 안전하게 생성하지 못했습니다. 입장 시간과 보상을 변경하지 않았습니다. {0}", lastError));
         }
-        public static RiftLayout Fallback(uint seed,string runId,int stage,HeroClass hero,int theme,int index,int lastBoss=-1,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null)
+        public static RiftLayout Fallback(uint seed,string runId,int stage,HeroClass hero,int theme,int index,int lastBoss=-1,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null,int field=-1)
         {
             arenaBoss|=forcedObjective.HasValue;
             if(theme<0||theme>1||index<0||index>2)throw new ArgumentOutOfRangeException();
-            var map=Candidate(seed,runId,stage,hero,theme,6,0,lastBoss,arenaBoss?(uint)(81001+theme*100+index):CompactFallbackSeeds[theme,index],allowWings:false,forcedObjective:forcedObjective,arenaBoss:arenaBoss,tuning:tuning);
+            var map=Candidate(seed,runId,stage,hero,theme,6,0,lastBoss,arenaBoss?(uint)(81001+theme*100+index):CompactFallbackSeeds[theme,index],allowWings:false,forcedObjective:forcedObjective,arenaBoss:arenaBoss,tuning:tuning,field:field);
             map.fallbackId=$"F{theme+1}-{index+1}";map.candidate=24+index;return map;
         }
-        static RiftLayout Candidate(uint seed,string runId,int stage,HeroClass hero,int theme,int count,int candidate,int lastBoss,uint structuralSeed=0,bool allowWings=true,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null)
+        static RiftLayout Candidate(uint seed,string runId,int stage,HeroClass hero,int theme,int count,int candidate,int lastBoss,uint structuralSeed=0,bool allowWings=true,RiftObjectiveKind? forcedObjective=null,bool arenaBoss=false,LiveOpsRiftSettings tuning=null,int field=-1)
         {
             tuning??=new LiveOpsRiftSettings();
             uint basis=structuralSeed==0?Derive(seed,"candidate:"+candidate):structuralSeed;
-            var map=new RiftLayout{liveOpsMapScale=tuning.mapScale,liveOpsPackSpread=tuning.packSpread,liveOpsNormalDensity=tuning.normalDensity,version=arenaBoss?5:RiftLayout.CurrentVersion,roamingBoss=!arenaBoss,bossRoom=-1,contentStage=stage,theme=theme,mapSeed=seed,candidate=candidate,layoutSeed=Derive(basis,"layout"),decorationSeed=Derive(basis,"decoration"),encounterSeed=Derive(basis,"encounter"),combatSeed=Derive(seed,"combat"),rewardSeed=Derive(seed,"reward")};
+            var map=new RiftLayout{liveOpsMapScale=tuning.mapScale,liveOpsPackSpread=tuning.packSpread,liveOpsNormalDensity=tuning.normalDensity,version=arenaBoss?5:RiftLayout.CurrentVersion,roamingBoss=!arenaBoss,bossRoom=-1,contentStage=stage,theme=theme,field=field>=0?field:theme,mapSeed=seed,candidate=candidate,layoutSeed=Derive(basis,"layout"),decorationSeed=Derive(basis,"decoration"),encounterSeed=Derive(basis,"encounter"),combatSeed=Derive(seed,"combat"),rewardSeed=Derive(seed,"reward")};
             map.introductory=!arenaBoss&&IntroductoryRift.Applies(stage);
             // Keep established non-intro layouts/fingerprints at v7; v8 carries the smaller budget.
             map.version=map.introductory?RiftLayout.CurrentVersion:arenaBoss?5:7;
@@ -372,7 +389,7 @@ namespace Hellscript
                     for(int n=0;n<members+groupElite;n++)
                     {
                         bool isElite=n>=members;int type=stage<ContentUnlocks.Rules.expandedEnemiesStage?0:n==members-1?new[]{2,4,1,3,5}[archetype]:0;
-                        var spawn=new RiftSpawn{index=map.spawns.Count,group=group.index,room=room.index,kind=map.theme*6+type};
+                        var spawn=new RiftSpawn{index=map.spawns.Count,group=group.index,room=room.index,kind=EnemyCombat.RosterKind(map.Field,type)};
                         bool placed=false;
                         for(int attempt=0;attempt<48;attempt++)
                         {

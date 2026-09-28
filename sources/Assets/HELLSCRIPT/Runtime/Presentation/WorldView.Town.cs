@@ -17,8 +17,7 @@ namespace Hellscript
         static readonly Quaternion TownRotation=Quaternion.LookRotation(TownPoint(Vector2.up));
         public void BuildTown(TownWalk walk)
         {
-            ClearDungeon();world=new GameObject("Ashwood Settlement");
-            RenderSettings.ambientLight=new Color(.4f,.43f,.39f);RenderSettings.fogColor=new Color(.09f,.13f,.12f);
+            ClearDungeon();world=new GameObject("Ashwood Settlement");lighting.ApplyTown();
             var layout=new GameObject("Village ground").transform;layout.SetParent(world.transform,false);layout.rotation=TownRotation;
             BuildForestGround(layout);
             foreach(var s in TownLayout.Stations)
@@ -48,7 +47,6 @@ namespace Hellscript
         {
             foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();portalSparks.Clear();townPortal=null;
             foreach(var m in townMeshes)if(m!=null)Destroy(m);townMeshes.Clear();
-            RenderSettings.ambientLight=new Color(.29f,.34f,.43f);RenderSettings.fogColor=new Color(.035f,.05f,.075f);
         }
         public bool TryPickTownGround(Vector2 screen,out Vector2 point)
         {
@@ -106,6 +104,9 @@ namespace Hellscript
             Shape("Lantern post",PrimitiveType.Cylinder,p,at+Vector3.up*1.65f,new Vector3(.17f,1.65f,.17f),iron);
             Block(p,"Lantern",at+Vector3.up*3.2f,new Vector3(.45f,.65f,.45f),glow);
             Block(p,"Lantern cap",at+Vector3.up*3.58f,new Vector3(.67f,.12f,.67f),iron);
+            // The lantern meshes are merged into static batches, so the light follows its own anchor.
+            var source=new GameObject("Lantern light source").transform;source.SetParent(world.transform,false);source.position=p.TransformPoint(at+Vector3.up*3.2f);
+            lighting.RegisterEmitter(source,new Color(1,.62f,.3f),8,6);
         }
         Mesh ConeMesh(float radius,float height,int sides=9)
         {

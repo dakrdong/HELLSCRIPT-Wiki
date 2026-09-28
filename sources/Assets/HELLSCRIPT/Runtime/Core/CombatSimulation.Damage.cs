@@ -34,7 +34,8 @@ namespace Hellscript
         }
         DamageEvent ApplyOutgoing(EnemyState enemy,float baseAttack,float additive,float independent,float critMultiplier,bool critical,int element,DamageSnapshot snapshot,string definition,int root,int instance,DamageKind kind,int triggerTarget=-1,bool projectile=false,Vector2? origin=null,bool attackResolved=false)
         {
-            if(enemy==null||enemy.dead)return null;
+            // The phase-change roar is the boss's only invulnerable window.
+            if(enemy==null||enemy.dead||BossCombat.Roaring(enemy,State.time))return null;
             float defense=element==0?10+2*(State.stage-1):5+State.stage-1;
             var legendary=PrepareLegendaryHit(snapshot,definition,enemy);
             int classFlags=ClassHitFlags(enemy);
