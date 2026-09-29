@@ -1,6 +1,6 @@
 # Weekly and monthly attendance events
 
-Updated: 2026-09-28
+Updated: 2026-09-29
 Korean: [7일·28일 출석 이벤트](Attendance_Events.md)
 
 Attendance uses **00:00 Korea Standard Time (UTC+9)**. Weekly attendance resets every Monday; monthly attendance resets on the first day of each calendar month. Both tracks grant independently and share account progress across characters.
@@ -145,6 +145,18 @@ The [official Black Desert Mobile weekly login event](https://www.world.blackdes
 
 ## Attendance event icon — 2026-09-28
 
-The main and combat event shortcut now shows a calendar, green check and reward chest. It shares the content-button `Emblem` component and sizes (52 in town, 44 in combat); a green exclamation badge marks pending rewards. Clicking opens the existing attendance window, retaining combat pause/restoration behavior.
+The main and combat event shortcut now shows a calendar, green check and reward chest. It shares the content-button `Emblem` component; a green exclamation badge marks pending rewards. Clicking opens the existing attendance window, retaining combat pause/restoration behavior.
 
 The native-alpha transparent PNG is copied unchanged into runtime resources. The built-in generation surface returned no model provenance, so it is registered as model-unverified development art. Preserve the [generation manifest](../Art/Attendance/event-icon-manifest.json) and [alpha validation](../Art/Attendance/event-icon-validation.json).
+
+## Matching left and right shortcut sizes — 2026-09-29
+
+The left attendance icon used a fixed size of 52 in town while the right content icons grew with the viewport. `GameUI.Attendance` now reads `ContentDockView.ButtonSize`, and the town layout refreshes attendance immediately after resizing the right dock. The existing right-side calculation remains authoritative. Attendance artwork fills its source image while dock emblems include transparent padding, so attendance receives a 7% inset on each edge to match the visible circular rim. Source artwork, position, reward state and attendance navigation are unchanged.
+
+The existing `RuntimeAttendanceSmoke` compares the actual screen rectangles of both buttons instead of a hard-coded size and checks that attendance stays inside the safe area. The same checks run through the existing viewport, Korean/English and reading-size scenarios, with separate measurements for the artwork rectangles.
+
+All 33 focused Edit Mode tests passed, and the final macOS development build succeeded with zero errors. The player passed 56 viewport/language/reading-size page checks, 98 raycast-verified clicks and 22 drag gestures. Checks cover equal button sizes in town and combat, attendance navigation and combat pause restoration. No Unity MCP instance was connected, so validation used the established batch build and synthetic macOS pointer input. Physical mobile devices were not tested.
+
+[Validation summary](AttendanceIconSizeEvidence/validation.json) · [Measured sizes](AttendanceIconSizeEvidence/event-icons.txt) · [Artwork padding measurements](AttendanceIconSizeEvidence/artwork-footprints.json) · [Runtime result](AttendanceIconSizeEvidence/initial.txt) · [Edit Mode results](AttendanceIconSizeEvidence/editmode.xml)
+
+![Town with matching attendance and content icon sizes](AttendanceIconSizeEvidence/plaza-event-icon.png)

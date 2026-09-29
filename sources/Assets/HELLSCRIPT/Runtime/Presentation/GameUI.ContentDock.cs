@@ -49,6 +49,7 @@ namespace Hellscript
         public bool Open {get;private set;}
         public RectTransform Items=>items;
         public RectTransform Toggle=>toggle;
+        public float ButtonSize=>size;
         public float Reach=>reach;
         public bool Settled=>Open?slide>=1&&turn>=1:slide<=0&&turn<=0;
         public void Configure(RectTransform shortcuts,RectTransform arrow,float buttonSize,float travel)

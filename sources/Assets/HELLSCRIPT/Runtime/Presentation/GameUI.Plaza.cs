@@ -124,6 +124,7 @@ namespace Hellscript
                 Right((RectTransform)plazaSettings.transform,edge,edge,iconSize,iconSize);
                 var gear=(RectTransform)plazaSettings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(iconSize*.2f);gear.offsetMax=-gear.offsetMin;
                 Right((RectTransform)contentDock.transform,edge,edge+iconSize+gap,iconSize,iconSize);contentDock.Reflow(iconSize,gap);
+                ReflowEventButton();
                 headerTitle.fontSize=18;float fullTitleWidth=headerTitle.preferredWidth;
                 float titleWidth=Mathf.Min(fullTitleWidth+24,root.rect.width-iconSize-3*edge);
                 headerTitle.fontSize=Mathf.Clamp(Mathf.FloorToInt(18*(titleWidth-24)/Mathf.Max(1,fullTitleWidth)),10,18);
