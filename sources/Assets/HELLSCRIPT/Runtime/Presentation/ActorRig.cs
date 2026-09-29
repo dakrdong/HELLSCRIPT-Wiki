@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Hellscript
 {
     public enum ActorArchetype{Biped,Quadruped,Hover,Blob,Worm,Spider,Serpent}
-    public enum ActorAction{Idle,Windup,Release,Recover,Channel,Charge,Travel,Cast,Stagger,Hit,Dead}
+    public enum ActorAction{Idle,Windup,Release,Recover,Channel,Charge,Travel,Cast,Stagger,Hit,Dead,Despair,Offer}
     // Presentation state the caller derives each frame. speed in m/s (model units), progress 0..1 through the action,
     // time = presentation clock (add a per-actor offset to desync packs), aimLocal = target direction in the actor's space.
     public struct ActorPose{public float speed;public ActorAction action;public float progress;public float time;public Vector3 aimLocal;}
@@ -127,6 +127,10 @@ namespace Hellscript
                 case ActorAction.Cast:{float w=Mathf.Sin(time*6)*6;Set(-6,0,-85+w,15,-20,-85-w,-15,-20,.1f,-8,15,0,.06f);target[Wave]=.6f;break;}
                 case ActorAction.Stagger:Set(18,Mathf.Sin(time*2.3f)*8,-8,10,-10,-8,-10,-10,.45f,22,18,0,-.08f);target[Tilt]=Mathf.Sin(time*3.1f)*7;target[Wave]=.5f;break;
                 case ActorAction.Dead:Set(-10,0,-20,50,-10,-20,-50,-10,.6f,-20,22,0,0);break;
+                // Staged prologue poses. Despair: sunk to one knee, head bowed, arms hanging, a faint tremble.
+                case ActorAction.Despair:Set(24*s,0,12*s,14*s,-18*s,12*s,-14*s,-18*s,.62f*s,(32+Mathf.Sin(time*9)*1.5f)*s,0,0,-.04f*s);break;
+                // Offer: rising up, both arms stretched to the sky holding the scroll, face turned up to the light.
+                case ActorAction.Offer:Set(-12*s,0,-172*s,-6*s,-6*s,-168*s,6*s,-6*s,0,-30*s,8*s,0,.06f*s);break;
             }
         }
         void Released(float r)=>Set(Mathf.Lerp(-10,16,r),Mathf.Lerp(20,-35,r),Mathf.Lerp(-155,-30,r),Mathf.Lerp(20,-10,r),Mathf.Lerp(-55,-10,r),Mathf.Lerp(-25,15,r),-15,-10,Mathf.Lerp(.35f,.55f,r),Mathf.Lerp(-6,6,r),25*(1-r),0,Mathf.Lerp(.12f,-.18f,r));

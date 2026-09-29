@@ -139,6 +139,13 @@ namespace Hellscript
         void Inset(RectTransform r,float left=18,float right=18,float top=8,float bottom=8){Stretch(r);r.offsetMin=new Vector2(left,bottom);r.offsetMax=new Vector2(-right,-top);}
         Text Note(Transform parent,string text,int size=21,float height=60,Color? color=null)
         {var r=Rect("Text row",parent);var le=r.gameObject.AddComponent<LayoutElement>();le.preferredHeight=height;le.minHeight=height;var label=Label(r,text,size,color??muted);Inset(label.rectTransform,4,4,0,0);return label;}
+        // The prologue gate draws above every content window (400+) and sits outside ContentWindowHost, which would
+        // otherwise disable its input while the Hunt Edict window it guides is open.
+        static GameObject PrologueOverlay()
+        {
+            var go=new GameObject("Prologue gate",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
+            var canvas=go.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=2000;return go;
+        }
         Button Button(Transform parent,string text,Action action,Color? color=null)
         {
             var r=Box(text,parent,color??UiTheme.Panel);var b=r.gameObject.AddComponent<UiButton>();
@@ -244,7 +251,7 @@ namespace Hellscript
             FooterButton(0,2,"전투 기록",ShowRecords);FooterButton(1,2,"게임 안내",ShowHelp);
             if(!string.IsNullOrEmpty(game.Notice))ShowToast(game.Notice);
         }
-        string BattleHeading(RunState run)=>run.tutorial?Loc.T("성소로 가는 길"):run.training>=0?(game.ComparisonRun?"TRAINING / "+(game.Comparison.IsB?"B":"A"):"TRAINING"):"RIFT / "+run.stage.ToString("00");
+        string BattleHeading(RunState run)=>run.tutorial?Loc.T("칙령의 목소리"):run.training>=0?(game.ComparisonRun?"TRAINING / "+(game.Comparison.IsB?"B":"A"):"TRAINING"):"RIFT / "+run.stage.ToString("00");
         public void ShowBattle()
         {
             if(game.Combat==null){ShowTown();return;}

@@ -85,7 +85,7 @@ namespace Hellscript
                 if(State.training<0)Log("LIVEOPS_VERSION","Balance release "+State.liveOps.version+" / "+State.liveOps.configHash);
                 Log("RUN_START",training>=0?"훈련 시작 · 실제 재화와 성장에 반영하지 않습니다.":Loc.F("균열 {0}단계 진입", stage));
             }
-            State.paused=IsTutorial&&(State.tutorialPhase==0||State.tutorialPhase==2||State.tutorialPhase==3);
+            State.paused=TutorialWaiting;
         }
         void SpawnDungeon()
         {

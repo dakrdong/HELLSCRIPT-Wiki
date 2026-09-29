@@ -264,7 +264,7 @@ namespace Hellscript
         public void ReturnTown()
         {
             CancelRiftEntry();
-            if(TutorialActive){if(Combat.State.tutorialPhase==5||Combat.State.tutorialReplay)FinishTutorial();else UI.ShowTutorialPrompt();return;}
+            if(TutorialActive){if(Combat.State.tutorialReplay)FinishTutorial();else UI.ShowTutorialPrompt();return;}
             SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
             ExitIdle(false);RestoreForegroundClock();
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();

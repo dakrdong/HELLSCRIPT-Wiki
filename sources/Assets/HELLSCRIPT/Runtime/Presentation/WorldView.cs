@@ -55,7 +55,7 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
-            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
+            RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;StagedHeroAction=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
             // Destroy is deferred to the end of the frame, so forget the old root's effects library now: a world rebuilt in the

@@ -1,8 +1,10 @@
 # Tutorial staging and the game dialogue box
 
-Updated: 2026-09-28
+Updated: 2026-09-29
 
 [한국어](Tutorial_Staging.md)
+
+> 2026-09-29: the mandatory map is now the "Voice of the Edict" prologue. The armor award and equip step are gone; the current flow is [Prologue — the Voice of the Edict](Prologue_Edict_Voice.en.md).
 
 The first tutorial used to advance through explanation windows and a "Continue" button, with no staging at all. The mandatory map, *Road to the sanctuary*, is now told through staged scenes and a speaking character. The plain dialogue window became a game dialogue box, and NPC conversations and first-use content guides use the same box.
 

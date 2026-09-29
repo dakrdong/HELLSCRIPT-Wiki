@@ -8,6 +8,7 @@ namespace Hellscript
     {
         bool contentDockOpen;
         ContentDockView contentDock;
+        Button contentDockEdict;
         // Content shortcuts fold out beneath the settings gear on the play screens (plaza and battle).
         // Character opens the owned-equipment screen and remembers the play screen it came from.
         void AddContentDock(float top,float size)
@@ -17,18 +18,22 @@ namespace Hellscript
             var view=dock.gameObject.AddComponent<ContentDockView>();contentDock=view;
             var items=Rect("Shortcuts",dock);Place(items,0,0,size,0);items.gameObject.AddComponent<RectMask2D>();
             int count=0;
-            void Add(string name,string sprite,Action action)
+            Button Add(string name,string sprite,Action action)
             {
                 var b=Button(items,name,action,sprite==null?new Color(.07f,.085f,.1f,.92f):Color.clear);Place((RectTransform)b.transform,0,count++*(size+gap),size,size);
                 if(sprite!=null)b.targetGraphic=Emblem(b,sprite);
                 else{var label=b.GetComponentInChildren<Text>();label.fontSize=Mathf.RoundToInt(size*.3f);label.color=gold;}
+                return b;
             }
-            Add("캐릭터","menu-character",ShowPlayInventory);
-            Add("사냥 칙령","menu-hunt-edict",ShowEdictEditor);
-            Add("룬 보드","menu-rune-board",ShowRunes);
-            Add("창고","menu-storage",ShowStorage);
+            // The prologue hands over the Hunt Edict alone: the emblem lands here and is the only shortcut until the town.
+            bool prologue=game.TutorialActive;
+            if(!prologue)Add("캐릭터","menu-character",ShowPlayInventory);
+            contentDockEdict=Add("사냥 칙령","menu-hunt-edict",ShowEdictEditor);
+            if(!prologue){Add("룬 보드","menu-rune-board",ShowRunes);Add("창고","menu-storage",ShowStorage);}
             var toggle=Button(dock,"콘텐츠 메뉴",()=>{view.Set(!view.Open);contentDockOpen=view.Open;},Color.clear);toggle.targetGraphic=Emblem(toggle,"menu-toggle");
-            view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap));view.Snap(contentDockOpen);
+            view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap));view.Snap(contentDockOpen||prologue);
+            // Before the scroll arrives the dock is laid out but unseen, so the emblem has a place to fly to.
+            if(prologue&&game.Combat.State.tutorialPhase==ProloguePhase.Surrounded){var hidden=dock.gameObject.AddComponent<CanvasGroup>();hidden.alpha=0;hidden.blocksRaycasts=false;}
         }
         Image Emblem(Button button,string sprite)
             =>Emblem(button,Resources.Load<Sprite>("Art/GlobalHUD/"+sprite));

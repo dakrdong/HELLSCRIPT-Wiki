@@ -82,7 +82,8 @@ namespace Hellscript
             var line=state.Current;var profile=NpcProfiles.Find(line.speaker);
             var safe=UiSafeArea.Current.size/UiTheme.Scale(UiSafeArea.Current);float w=view.Width,h=view.Frame.rect.height;bool narrow=w<600;
             // A narrow screen has room for the speaker only; two figures side by side would hide the whole field.
-            var speakerArt=profile!=null?Resources.Load<Texture2D>(profile.portrait):null;var listenerArt=!narrow&&listenerPath!=""?Resources.Load<Texture2D>(listenerPath):null;
+            var speakerArt=profile!=null?Resources.Load<Texture2D>(profile.portrait):null;// A line the listener speaks shows that figure once, as the speaker.
+            var listenerArt=!narrow&&listenerPath!=""&&profile?.portrait!=listenerPath?Resources.Load<Texture2D>(listenerPath):null;
             view.Frame.GetComponent<Image>().color=Color.clear;view.Title.gameObject.SetActive(false);view.Navigation.gameObject.SetActive(false);
             var close=view.Frame.Find("content-close");
             // Landscape figures stand from the bottom of the safe area and rise far above the band, in front of it; on a narrow

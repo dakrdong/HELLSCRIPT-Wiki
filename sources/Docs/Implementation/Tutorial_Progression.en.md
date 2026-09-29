@@ -4,6 +4,8 @@ Updated: 2026-09-29
 
 The [design](../Design/Tutorial_Flow_Design.en.md) connects 38 guide groups to the existing game loop: dedicated map, real inventory equipment, town, rifts, Hunt Edict, skill changes and content practice.
 
+> 2026-09-29: the mandatory map is now the "Voice of the Edict" prologue. The armor award and equip step are gone; the current flow is [Prologue — the Voice of the Edict](Prologue_Edict_Voice.en.md).
+
 ## Ownership
 
 `AccountGuide` owns versioned read, practiced, deferred and hidden records. `Tutorials` defines the 38 groups and resolves unlocks from the existing content catalog. `TutorialProgress` observes committed gameplay. Existing `HeroGuide.completed` fields preserve old-save compatibility; the player-facing entrypoint is the shared journal.
