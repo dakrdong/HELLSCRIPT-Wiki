@@ -36,8 +36,7 @@ namespace Hellscript
             Note(content,sweepable?"소탕은 최고 실클리어 단계의 보상을 즉시 정산합니다. 하루 3회, 가방 3칸이 필요합니다.":"소탕에는 실클리어 기록, 남은 소탕 횟수, 가방 3칸이 필요합니다.",19,66,sweepable?pale:muted);
             ContentButton(ContentUnlocks.Offline,"미접속 보급",ShowOfflineSupplies);
             ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowRiftKeeper));
-            ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
-            ContentButton(ContentUnlocks.Train,"같은 조건으로 A/B 비교",ShowComparisonPicker);
+            ContentButton(ContentUnlocks.Train,"훈련장",ShowTraining);
             FooterButton(0,2,"성소 메뉴",ShowTownMenu);FooterButton(1,2,"광장으로",()=>game.EnterPlaza());
         }
         Action SweepAction(Action refresh)

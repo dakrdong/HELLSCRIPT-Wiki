@@ -125,7 +125,7 @@ namespace Hellscript
                 if(rule.action==RuleAction.Skill)BigButton(content,c.predicted?"선택 스킬의 예상 명중 영역":"자신을 중심으로 감지",()=>{c.predicted=!c.predicted;RenderBuild();});
                 if(!c.predicted)Cycle(content,"반경",BehaviorRules.Radii.Select(v=>$"{v}m").ToArray(),Mathf.Max(0,Array.IndexOf(BehaviorRules.Radii,c.radius)),i=>{c.radius=BehaviorRules.Radii[i];RenderBuild();});
             }
-            string[] choices=c.id=="SC07"?new[]{"정예 또는 보스","정예","보스"}:c.id=="SC11"?new[]{"근접","돌진","원거리","장판","지원","폭발"}:c.id=="SC12"?new[]{"일반","정예","보스"}:c.id=="SC13"?BehaviorRules.States:c.id=="SC20"?new[]{"미등장","교전","처치"}:null;
+            string[] choices=c.id=="SC07"?new[]{"정예 또는 보스","정예","보스"}:c.id=="SC11"?EnemyCombat.RoleNames:c.id=="SC12"?new[]{"일반","정예","보스"}:c.id=="SC13"?BehaviorRules.States:c.id=="SC20"?new[]{"미등장","교전","처치"}:null;
             if(choices!=null)Cycle(content,"선택",choices,Mathf.Clamp(c.choice,0,choices.Length-1),i=>{c.choice=i;RenderBuild();});
             if(c.id=="SC09"&&c.comparison==Comparison.Between)SliderRow(content,"거리 끝값",c.upper,c.value,12,v=>c.upper=Mathf.Round(v*2)/2,"m");
             if(c.id=="SC15"||c.id=="SC22")

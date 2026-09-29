@@ -129,6 +129,7 @@ namespace Hellscript
         public int legacyPassiveSlots;
         public PotionInventory potions=new PotionInventory();
         public TrainingComparisonRecord trainingComparison;
+        public TrainingGroundProgress trainingGround=new TrainingGroundProgress();
         public string id;
         public HeroClass heroClass;
         public int level=1, xp, highestClear, capacity=50;
@@ -370,6 +371,7 @@ namespace Hellscript
         public string edictBlockLogged="";
         public int stage, theme, training=-1, kills, meter, lootCount, nextId=1, bossId=-1;
         public bool trainingUsesOwnedHero;
+        public TrainingGroundRunState trainingGround=new TrainingGroundRunState();
         public RunPhase phase;
         public float time, realTime, health, resource=100, shield, shieldTime, potionCd, actionCd, channelTime, channelTick,
             shoutTime, shadowTime, dealt, moveDistance, decisionTime, saveTime, portalCast;

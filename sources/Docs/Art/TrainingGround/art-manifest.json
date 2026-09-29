@@ -1,0 +1,379 @@
+{
+ "version": 1,
+ "date": "2026-09-28",
+ "purpose": "Training Ground HTML mockup art requested from GPT at the user's instruction: lobby/result key art and 25 enemy/boss portraits for the enemy list box.",
+ "surface": "codex exec (codex-cli 0.155.0) built-in image_gen via the installed imagegen skill, one request per asset, four parallel runs",
+ "requestedModel": "gpt-image-2",
+ "verifiedModel": null,
+ "modelEvidence": "Codex reported no model name for any image (verifiedModel null).",
+ "provenanceStatus": "candidate_model_unknown",
+ "productionApproved": false,
+ "runtimeUse": "Training ground UI (Assets/HELLSCRIPT/Resources/Art/TrainingGround, sized by TrainingGroundArtImporter and ResourceTextureBudget) and the HTML mockup",
+ "postprocessing": "None on these files: copied byte for byte from ~/.codex/generated_images. build.cjs embeds downscaled JPEG copies made with macOS sips.",
+ "styleReferences": [
+  {
+   "file": "Assets/HELLSCRIPT/Resources/Art/Title/TitleSanctuary.png",
+   "sha256": "5580ca0b49fd162e78d50106f3b84f05167033921dcbf5dc559a5a4c8b877717"
+  },
+  {
+   "file": "Assets/HELLSCRIPT/Resources/Art/CharacterSelection/SelectionCourtyard.png",
+   "sha256": "7846593f5dd525eb2e611fb3853df4fc25d078a66e12c8d233064005ad9708ea"
+  },
+  {
+   "file": "Assets/HELLSCRIPT/Resources/Art/NpcPortraits/turk-garbi.png",
+   "sha256": "71bf7b19feb9ac4342122561c88114274de779852cfa812fb9624d74acc3e225"
+  }
+ ],
+ "requestedSize": "portraits 1024x1024, key art 1536x1024; the tool returned 1254x1254 portraits",
+ "review": "Visually reviewed on a contact sheet by Claude Code: consistent dark gothic rendering, no text or frames. Some portraits face right or sit close to the top edge (see Codex notes); acceptable for list thumbnails.",
+ "assets": [
+  {
+   "id": "training-yard",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/training-yard.png",
+   "codexRun": "run-a",
+   "prompt": "Use case: stylized-concept. Asset type: one opaque wide background illustration, 1536x1024 PNG, for the Training Ground lobby and training result screens of HELLSCRIPT, a dark gothic fantasy action RPG. Rendering: hand-painted realistic dark gothic fantasy environment with the same painterly realism, palette and low-key lighting as the attached reference images (style only; do not copy their scenery). Subject: a sanctuary training yard at night enclosed by ruined gothic walls. In the middle, a circular flagstone sparring arena with a faint engraved aged-brass ring inlaid in the floor. Three battered straw-and-wood training dummies bound with iron bands and chains stand inside the ring: one at the centre, two slightly behind to the left and right. A wooden weapon rack with old swords, a spear and a round shield stands to one side; two iron braziers with warm ember fire stand left and right. Pointed arches, broken pillars and torn dark banners behind, thin ground mist, clouded moonlit sky. Composition (important: the game crops this image to a tall portrait panel about 9:16 around the horizontal centre, to a square, and to a wide banner): keep the central dummy and the ring inside the middle 40% of the width; the lower third (floor) stays dark and low in detail so light text can be overlaid there; the top 15% is dark sky and arches. Palette: charcoal olive (#161813, #24271d), aged brass (#c8ac77), warm ember accents (#ff8a3a), warm ivory candle highlights (#ded3bc); no saturated blue, purple or green. Strict exclusions: no people, no monsters, no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame. Generate one image only. All banners must be plain unmarked dark cloth: absolutely no emblems, sigils, symbols, lines or insignia on fabric. No gargoyle figures. The entire brass floor ring must fit inside the central 40 percent of image width.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-f2d506a4-4f05-4977-b08f-8ae87673fc7e.png",
+   "sha256": "2d236b311f215543d560a9f6526087bddee753463327d9152b1fec32201332b4",
+   "width": 1536,
+   "height": 1024,
+   "mode": "RGB",
+   "rejected": [
+    {
+     "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-33c7d5f0-85e3-487c-a9d4-0c6c60fdd251.png",
+     "reason": "Rune-like emblems on hanging banners.",
+     "sha256": "1e4904b6506be5fe8b0d3f0aabc3c770a7b09ed9b438f34c959bbe77d1a411c5"
+    }
+   ]
+  },
+  {
+   "id": "B01",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B01.png",
+   "codexRun": "run-a",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no unrelated props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. This is a BOSS: make it more imposing and larger than life, camera slightly low looking up, a stronger emissive accent, and a faint ember-gold rim light on the silhouette edge so it reads as a boss next to ordinary monsters. Subject: a hulking hooded headsman wearing an iron mask, gripping a huge gravedigger greataxe, a hook-chain wound on the left arm, a stitched leather apron, chains, melted candles burning on the shoulders. Accent: candle flames and ember. Generate one image only.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-3c966ce9-cf3b-40fc-ad13-36461423cb48.png",
+   "sha256": "9fcfb072fc22acaa46c3bbb7b9957d061741525e4e15b62eab37b3cdee2b1341",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "B02",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B02.png",
+   "codexRun": "run-a",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no unrelated props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. This is a BOSS: make it more imposing and larger than life, camera slightly low looking up, a stronger emissive accent, and a faint ember-gold rim light on the silhouette edge so it reads as a boss next to ordinary monsters. Subject: a towering robed cantor with a long veiled face on which sewn-shut mouths show through the veil, a floating ring of small choir lanterns forming a halo behind the head, long sleeves. Accent: pale gold halo. The lantern halo is a subject accessory, not a border or vignette. Generate one image only. Framing correction: zoom out. Leave a generous 10 percent dark empty margin above the ENTIRE lantern halo and every ornament. No clipping of any part of the head or its halo. Subject and accessories must fit within the middle 80 percent of the square.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-beefdc28-35bd-4da2-903d-66ccc290c1ad.png",
+   "sha256": "bda4ba331bf82659e7bd4359dad25dbf752d812edbd1413c138a97451332bbf3",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": [
+    {
+     "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-c54964cf-74a0-4853-a0c4-d561f6085cf0.png",
+     "reason": "Upper head-halo ornament is clipped by the top edge.",
+     "sha256": "b7bbe4f85430e72ea0b3b2cf2e025517b18f5af6c18c7ecf435cba150897eeba"
+    }
+   ]
+  },
+  {
+   "id": "B03",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B03.png",
+   "codexRun": "run-a",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no unrelated props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. This is a BOSS: make it more imposing and larger than life, camera slightly low looking up, a stronger emissive accent, and a faint ember-gold rim light on the silhouette edge so it reads as a boss next to ordinary monsters. Subject: a quadruped rift beast seen from the front, a split vertical maw opening wide, glowing violet crystal spines along its back, heavy clawed forelimbs. Accent: violet. Prioritize the explicitly requested frontal quadruped pose over the general three-quarter portrait direction. Generate one image only. Framing correction: pull the camera back enough to leave 10 percent empty dark margin above the highest head crystal and on both sides. Entire head and all upper crystal tips must be visible without clipping. Keep the backdrop entirely smoky with no visible ground.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-41db503c-d3f2-4a8e-89cd-83ac8126eb20.png",
+   "sha256": "8d5bf1a5ade2eaecedbf24ab66f6e8b0b76a32156924babe9d78f27fe1d4ccb5",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": [
+    {
+     "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-3e7f1174-dbdb-41a6-b489-93978c19be51.png",
+     "reason": "Tall crystal spine at the top of the head silhouette is cut off by the upper edge.",
+     "sha256": "7dcb60bbf59e5211de00a169673923b63461b6783324cd7313d4c5709566abdd"
+    }
+   ]
+  },
+  {
+   "id": "B04",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B04.png",
+   "codexRun": "run-a",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no unrelated props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. This is a BOSS: make it more imposing and larger than life, camera slightly low looking up, a stronger emissive accent, and a faint ember-gold rim light on the silhouette edge so it reads as a boss next to ordinary monsters. Subject: a giant scorpion-worm with sand-crusted armoured chitin, a raised segmented tail with a stinger arching above, huge pincers, glowing venom sacs. Accent: acid yellow-green (#c8ff3a). Keep the complete raised tail and stinger within the clear margin. Generate one image only.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-49caf119-03be-4bd2-968f-e1f852ea4939.png",
+   "sha256": "e7cad4d13a9884444846348da20f7b814af83bbd52f29b34362e39227a3f2571",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "B05",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B05.png",
+   "codexRun": "run-a",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no unrelated props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. This is a BOSS: make it more imposing and larger than life, camera slightly low looking up, a stronger emissive accent, and a faint ember-gold rim light on the silhouette edge so it reads as a boss next to ordinary monsters. Subject: a tall frost priestess with a crown of ice spikes, layered frozen robes, floating ice shards around her, holding an ice staff. Accent: ice blue (#bfefff). Keep the entire crown within the clear margin. Generate one image only. Framing correction: zoom out. Leave a generous 10 percent dark empty margin ABOVE THE ENTIRE CROWN and staff tip. Do not cut off any crown spike. Keep the head and torso centered, figure and accessories within the middle 80 percent of the square.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-f097c2c3-d203-45c4-97b3-c48d30fed77a.png",
+   "sha256": "689a7e930d6fd31464cb23cbc51660775c450e4d67dfcc4b16facbbe70afd9f3",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": [
+    {
+     "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3585-7da3-8561-5442c6b95ccd/exec-36e95933-7718-4627-b0fe-0f526e34f3b6.png",
+     "reason": "Central crown spike is clipped at the top of the head silhouette.",
+     "sha256": "19bc7d894cea46365f2dae76cc34d53476333d04e7b97b076313dc29311b3d17"
+    }
+   ]
+  },
+  {
+   "id": "N01",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N01.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a hunched, gaunt undead corpse wrapped in rusted grave chains and burial rags, iron manacles on its wrists trailing a chain flail, sunken grey skin, glowing red eyes. Accent: dull red eye glow.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-875b5f82-7910-4e2b-a2dc-0b7ccaa6ab2a.png",
+   "sha256": "7507f44d6a49aac0c6dc038c91cdf56982abc738043702e83851f480e9de8b55",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N02",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N02.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a skinless, low, lean undead hound seen from the front three-quarter, head and shoulders, exposed ribs and sinew, a tattered burial-cloth mane, bone spurs along the neck, bared teeth, pale dead eyes. Accent: faint sickly yellow eye glow.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-678af563-6f76-44fe-8eab-e65f87a310d2.png",
+   "sha256": "9955eeb4eaab0b9d71fe2cc92064536edb7d11dbe2687e1a703e32dc0897f155",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N03",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N03.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a skeleton archer in a torn dark tabard and ragged hood, a small lit candle stub fixed on top of its skull, holding a longbow made of bone. Accent: warm candle flame.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-dcf47c3c-178f-49d6-825b-a0225809761c.png",
+   "sha256": "9856e9be2770ced4f588ba147f21aebc21fb8e56054220872c62f89431c51779",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N04",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N04.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a robed plague servant carrying a brass thurible that pours green censer smoke, face covered in boils under a heavy hood, stitched sackcloth robe. Accent: toxic green smoke glow (#7dff6a).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-2eaa1ff7-fe75-4c76-a947-65f7bfefed9b.png",
+   "sha256": "ddff299e40c1eaeb60654e6cb74b8bdbf5c7a31c1b9ca583e43d3617470b6444",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N05",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N05.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a tall, gaunt funeral priest whose face is hidden behind a long black mourning veil, holding a shepherd's crook with a hanging lantern. Accent: pale gold lantern light.\nCorrection: completely plain unmarked mourning cloth and plain weathered metal. No embroidery, medallions, symbolic ornaments, sigils, engraved marks, or writing-like details anywhere. Keep the entire head and its covering well within the image with a visible top margin.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-4b6c8b39-5c1f-4118-a207-1dcf9127e235.png",
+   "sha256": "3ba32fdd3f7f53355b47cc8f026a3e8cffc6611da0b05338c378962c34fb9cc2",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": [
+    {
+     "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-74fc15f6-0b9a-4ade-837b-6b17eafdb61b.png",
+     "sha256": "cdfe91d1a99de9c60a1c6c1ff472b3bf076b26dff17a20fb8bcd9233afb6ebad",
+     "reason": "Rune-like engraved ornamentation on medallion and robe decorations; replaced with plain unmarked materials."
+    }
+   ]
+  },
+  {
+   "id": "N06",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N06.png",
+   "codexRun": "run-d",
+   "prompt": "Use case: stylized-concept.\nCreate one opaque square PNG, exactly 1024x1024, for a game UI monster portrait in HELLSCRIPT, a dark gothic fantasy action RPG.\nThe two attached reference images are STYLE REFERENCES ONLY: use their painterly realism, fine material detail, low-key lighting and restrained palette. Never copy their subjects, faces, clothing or scenery.\nSubject: the Bloated Pilgrim, one huge, heavy, round-bodied undead penitent pilgrim with a very wide silhouette. Wrapped in layered, patched grey-brown pilgrim robes that strain around its bulk; a wide-brimmed pilgrim hat casts its face in shadow. A thick rope belt carries small plain wooden relics and a pilgrim's gourd. Heavy hands have intact pale greyish skin. Dull sickly-green eyes glow faintly beneath the hat brim. Menacing and eerie, not comic. Entirely non-graphic: no gore, wounds, stitches or exposed flesh; only intact skin on hands and a shadowed face. Robe patches should have no visible stitching.\nRendering: hand-painted realistic dark-fantasy game illustration with fine material detail.\nFraming: bust / upper-body portrait, centered and turned slightly toward the viewer's left in a 3/4 view. Head in the upper-middle third. Creature fills about 80% of frame height with a very wide silhouette that reads clearly at 48 pixels. Include the hat completely. Keep a small clear margin around all important features: nothing important touches the edges because the UI crops a rounded square.\nBackground: plain dark smoky charcoal olive (#0f120e to #1c2018), soft vignette and faint mist. No scenery, floor, separate props or other creatures. The belt accessories specified above are the only accessories.\nLighting: key light from upper left and subtle sickly-green rim light; overall low values, faint sickly-green eye glow as the sole emissive accent.\nStrict exclusions: no text, letters, numbers, runes, writing-like glyphs, logos, watermarks, UI, drawn border, drawn frame, ring vignette or second creature. Wooden relics are plain and unmarked. Opaque PNG without transparency.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e64a-c9fa-7832-b560-741f20b4d03b/exec-1202a679-3628-4a9b-82b2-0be7e42a0a45.png",
+   "sha256": "21b8e0345a6bbf4ecb16cf369d9ed37f2b2619a252294e33d2c0eb2a279e7dcd",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": [],
+   "blockedAttempt": {
+    "codexRun": "run-b",
+    "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a grotesquely swollen penitent pilgrim with a stitched, distended belly, a wide-brimmed pilgrim hat, a rope belt hung with small relics and sagging pale skin; a wide body that fills the frame while maintaining clear margins. Accent: faint sickly green.",
+    "result": "Image generation blocked at output by safety system: violence, sexual. Request ID 9217a1cb-7352-4750-9b17-fb19ce8c5d50. No output file returned; no retry under visual-defect-only rule.",
+    "note": "The first N06 prompt was refused by the image safety system; run-d asked again with a non-graphic description."
+   }
+  },
+  {
+   "id": "N07",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N07.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a spectral wraith encased in a heavy battered plate-armour carapace, an empty helm with a ghostly face glowing inside, a tattered spectral skirt trailing into mist, floating. Accent: cold spectral blue-white glow from the armour gaps.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-496bf81e-5545-4a62-864d-97b3bb6d72bb.png",
+   "sha256": "a3b717dcd86b9d1ba85a6479c2ccf1701d9874f29ce748c05576cbe115b02fd2",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N08",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N08.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a fanatical flagellant zealot bracing a spiked iron tower shield, a torn religious banner pole strapped to the back, scarred bare arms, crazed eyes under a crude helm. Banner and shield must be plain and unmarked, without any writing or symbols. Accent: dim ember glow on the shield spikes.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-22b98456-4ef7-4721-a3db-420fbf6ce5f9.png",
+   "sha256": "db370ed2f3ae86beaf4a9c405e5e6a4386d28486a8e6290c40b4c3628c03dda9",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N09",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N09.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: a sentry in blackened iron plate armour with a closed visored helm, holding a heavy arbalest across the chest, riveted plates, dark cloth. Accent: dull orange glow in the visor slit.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-0a5fa491-d4b4-46b8-8de2-1a3499693529.png",
+   "sha256": "1b12601a70a5690ce8d92639bfd0fce140ee128ea277cab14bb4df323544049c",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N10",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N10.png",
+   "codexRun": "run-b",
+   "prompt": "Use case: stylized-concept, game UI portrait. Asset type: one opaque square monster portrait, exactly 1024x1024 PNG, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the two user-attached reference images. Use those references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no extraneous props, no other creatures. Only the subject's specified equipment is allowed. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Generate exactly one image. Subject: an ash-skinned hexer sorcerer with smouldering orange irregular ember fissures burning across the skin, glowing coals floating around the raised hands, charred robes. The ember fissures are organic cracks, never sigils, runes, letters, or writing-like glyphs. Accent: ember orange (#ff8a3a).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-3f83-7be1-be04-535be4995ba7/exec-4b0eb865-4f5e-4a15-af06-0f733ab80d4f.png",
+   "sha256": "0b0b2adb710714bc7d93969d1d7be69b642b440da200d76feb4049f6d071b58f",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N11",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N11.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a tall hooded bell ringer carrying a heavy cracked bronze bell hung from a wooden yoke across the shoulders, face hidden in shadow, bell ropes and chains. Accent: faint golden glow in the bell crack.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-d3a67d3f-2f93-45db-a69d-b26127cbd3ce.png",
+   "sha256": "abd800f4bfe02eee6b104b22f81409fdbeae2a6e85a1b1aea1c2b441ab83716f",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N12",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N12.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a fast, jagged creature made of violet crystal shards forming a hollow husk, a glowing violet core visible inside its chest, sharp crystal limbs. Accent: violet (#b06bff).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-6c857162-2e1a-42fd-ad7f-f153e0ef48a0.png",
+   "sha256": "e615bda65e3c8f117f08c4446d844020164563319a88018b08db07abe67a7061",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N13",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N13.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a desert raider wrapped in sun-bleached cloth and leather straps, a bone mask over the face, twin curved blades crossed in front, drifting sand dust. Accent: warm dusty rim light only.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-107f06fc-2f27-46c0-bd9b-7cbdc9dfa317.png",
+   "sha256": "8d3f24de77ca93885da26d4968373d4a6f2ec56463559c16b47df0da147651e1",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N14",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N14.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a segmented sand worm rearing up out of the sand, a ringed circular maw full of inward-pointing teeth facing the viewer, chitin plates on each segment, sand pouring off. Accent: pale warm light inside the maw.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-8789a6d8-8c78-4a69-821c-1d62f5ad58dd.png",
+   "sha256": "2c57e7aa558005aa703b7016e7bd033a35d306dce311bbecd2222cb9144b817a",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N15",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N15.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a pale, eyeless, hunched cave ghoul with wet translucent skin, very long arms and hooked claws raised, gaping mouth. Accent: faint cold wet highlights.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-cd840b29-560c-4466-9ad2-c16f03d0eec3.png",
+   "sha256": "7dc8dacb5c9b1fed153025e8566063fc00fd118f9d99d56de0b5ad202b882346",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N16",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N16.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a bulbous fungal creature, a walking mushroom-like carrier with glowing cyan spore sacs across its swollen body, stubby legs, drifting spores. Accent: cyan (#58ffe0).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-245cd4f8-7410-4cd5-8822-fcf6cebe9288.png",
+   "sha256": "c33e68e6aa4910434afebefc046f7c65448dd800860e75968e3e4dc6745f8342",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N17",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N17.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a massive horned beastman brute in bark and wooden plate armour, curling horns, gripping a crude spiked flail, broad shoulders filling the frame. Accent: mossy green rim light.",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-706eaae1-ae40-4889-8f63-ece21d6274b3.png",
+   "sha256": "5895f3724a628627aee7f691d070240b3b0afb769ca89ae9540bf6a49798fd15",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N18",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N18.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a hunched witch made of twisted roots and thorns, holding a staff topped with a lantern made from a skull. Accent: sickly green lantern glow (#a8ff5a).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-c8c8ac8c-afdb-4551-897d-5d7bfac6baaf.png",
+   "sha256": "1b2fd825808545d5a9f938aa10a0dcb77b0e241f4702faeafc14501273dce210",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N19",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N19.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: an ice-crusted undead soldier with a frozen beard and frost-covered armour, holding an icicle blade, frozen breath. Accent: ice blue (#9fe6ff).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-5239d70a-5556-4567-8c20-a6cd2e5e74f6.png",
+   "sha256": "283140fe7715f7050c4a6e355974a485e6754ddafed2f8f561e037cb04e1c3c4",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  },
+  {
+   "id": "N20",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N20.png",
+   "codexRun": "run-c",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a dark gothic fantasy action RPG. It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: hand-painted realistic dark-fantasy game illustration with fine material detail, the same painterly realism, low-key lighting and palette as the attached reference images. Use the references ONLY for rendering quality, palette and lighting; never copy their subjects, faces, clothing or scenery. Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px. Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: plain dark smoky backdrop in charcoal olive (#0f120e to #1c2018) with a soft vignette and faint mist; no scenery, no floor, no props, no other creatures. Lighting: key light from the upper left and a subtle rim light in the creature's accent colour; overall values stay low with one emissive accent. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette. Opaque PNG without transparency. Subject: a robed frost cultist with a floating crown of ice shards above the hood, hands raised conjuring frost. Accent: pale ice cyan (#a8e8ff).",
+   "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0e641-4c6c-73e1-9b1c-12d8d1c3f801/exec-287cc286-3249-425c-bffc-aa5c45089106.png",
+   "sha256": "10b7c4dc63976f13a8f137034d89057e695199d9150243cd429190ec565a951b",
+   "width": 1254,
+   "height": 1254,
+   "mode": "RGB",
+   "rejected": []
+  }
+ ]
+}

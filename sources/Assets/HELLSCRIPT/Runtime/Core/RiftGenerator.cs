@@ -400,16 +400,10 @@ namespace Hellscript
                             spawn.position=p;placed=true;break;
                         }
                         if(!placed)throw new InvalidOperationException(Loc.F("적 배치 공간 부족 {0}", room.templateId));
-                        if(isElite)
-                        {
-                            var allowed=new List<int>{0,1,3,5};if(members>=4)allowed.Add(4);
-                            spawn.elite=allowed[RandomStream.Range(ref rng,0,allowed.Count)];spawn.traits.Add(spawn.elite);
-                            if(ContentUnlocks.EliteTraits(stage)>1&&RandomStream.Unit(ref rng)<.5f)
-                            {allowed.RemoveAll(t=>t==spawn.elite||t==0&&spawn.elite==1||t==1&&spawn.elite==0);spawn.traits.Add(allowed[RandomStream.Range(ref rng,0,allowed.Count)]);}
-                        }
+                        if(isElite){spawn.traits.AddRange(RollEliteTraits(stage,members,ref rng));spawn.elite=spawn.traits[0];}
                         map.spawns.Add(spawn);group.spawns.Add(spawn.index);
                     }
-                    if(groupElite==2&&RandomStream.Unit(ref rng)<.25f)
+                    if(groupElite==2&&RollElitePair(ref rng))
                     {
                         var pair=group.spawns.Select(i=>map.spawns[i]).Where(s=>s.elite>=0).ToArray();
                         pair[0].elitePartner=pair[1].index;pair[1].elitePartner=pair[0].index;
@@ -418,6 +412,19 @@ namespace Hellscript
                 }
             }
         }
+        // One elite's traits: a first trait (corpse blast joins the options in packs of four or more) and, where the stage
+        // allows two, a 50% chance of a second one that never pairs homing flame with the ice ring. The training ground rolls
+        // its elites through the same rule, so the draws stay in this order.
+        public static List<int> RollEliteTraits(int stage,int members,ref uint rng)
+        {
+            var allowed=new List<int>{0,1,3,5};if(members>=4)allowed.Add(4);
+            var traits=new List<int>{allowed[RandomStream.Range(ref rng,0,allowed.Count)]};int first=traits[0];
+            if(ContentUnlocks.EliteTraits(stage)>1&&RandomStream.Unit(ref rng)<.5f)
+            {allowed.RemoveAll(t=>t==first||t==0&&first==1||t==1&&first==0);traits.Add(allowed[RandomStream.Range(ref rng,0,allowed.Count)]);}
+            return traits;
+        }
+        // Two elites of one group become a life-linked pair a quarter of the time.
+        public static bool RollElitePair(ref uint rng)=>RandomStream.Unit(ref rng)<.25f;
         public static int[] GraphDistances(RiftLayout map,int source)
         {
             var distance=Enumerable.Repeat(999,map.rooms.Count).ToArray();distance[source]=0;var queue=new Queue<int>();queue.Enqueue(source);

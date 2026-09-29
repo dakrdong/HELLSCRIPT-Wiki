@@ -161,7 +161,7 @@ namespace Hellscript
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
             if(combatLogView!=null){combatLogView.Close();combatLogView=null;}
-            CloseRiftVictory();CloseNpcDialogue();CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
+            CloseRiftVictory();CloseTrainingResult();CloseNpcDialogue();CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
             if(PlayInventoryOpen&&page!="bag"&&page!="warehouse")ReleasePlayInventory();
             if(page!="battle")game.ExitIdle();
             CloseHudPanel();ClosePresetDialog();ClearBattleLayout();ClearInventoryLayout();ClearComparisonEquipmentLayout();
@@ -235,7 +235,7 @@ namespace Hellscript
             BigButton(content,"성장과 스킬",ShowGrowth);
             BigButton(content,"룬 성장",ShowRunes);
             BigButton(content,"장비 · 대장간 · 창고",()=>ShowBag());
-            ContentButton(ContentUnlocks.Train,"고정 훈련장",ShowTraining);
+            ContentButton(ContentUnlocks.Train,"훈련장",ShowTraining);
             BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);
             ContentButton(ContentUnlocks.Gem,"보석 장착·교체·합성",ShowGemMenu);
             BigButton(content,"장비 제작",ShowShop);
@@ -248,7 +248,7 @@ namespace Hellscript
         public void ShowBattle()
         {
             if(game.Combat==null){ShowTown();return;}
-            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T("자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):Loc.F("{0} · 처치 게이지를 채워 보스를 소환하세요",GameCatalog.FieldNames[run.layout.Field]),battle:true);
+            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T("자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.TrainingGroundRun?Loc.F("균열 {0}단계 · 모든 적을 처치할 때까지 · 보상 없음",run.stage):game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):Loc.F("{0} · 처치 게이지를 채워 보스를 소환하세요",GameCatalog.FieldNames[run.layout.Field]),battle:true);
             BuildBattleHud(run);
         }
         Image Bar(Transform parent,Vector2 pos,Vector2 size,Color color)
@@ -268,27 +268,13 @@ namespace Hellscript
             meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));
             if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
             fullBattleAction=run.paused?Loc.T("일시정지"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
-            RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));ReflowBattleHud();UpdateBattleBrief();
+            RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));if(game.TrainingGroundRun)RefreshTrainingHud(run);ReflowBattleHud();UpdateBattleBrief();
             if(riftMinimap!=null)riftMinimap.SetVerticesDirty();
             if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);
         }
-        public void ShowTraining()
-        {
-            if(!RequireContent(ContentUnlocks.Train))return;
-            pageRepaint=()=>ShowTraining();Base("training","훈련장","현재 캐릭터로 60전투초 동안 시험합니다");
-            var hero=game.Store.Data.Hero;var stats=new HeroStats(hero,false,game.Store.Data.runes);
-            Note(content,Loc.F("{0} Lv.{1} · 현재 장비와 해금한 스킬\nHP {2:0} · 공격 기준 {3:0.0}", game.catalog.classNames[(int)hero.heroClass], hero.level, stats.hp, stats.damage),22,92,pale);
-            Note(content,"현재 상태의 복사본으로 실행합니다. XP·재화·장비는 바뀌지 않으며, 훈련 설정은 슬롯 저장을 선택할 때만 남습니다.",20,114);
-            BigButton(content,"01  단일 적 · 스킬 순환",()=>game.Begin(0),true);
-            BigButton(content,"02  다수 적 · 밀집과 선회",()=>game.Begin(1));
-            BigButton(content,"03  위험 지대 · 생존과 회피",()=>game.Begin(2));
-            BigButton(content,ClassPracticeLesson.Title(hero.heroClass),ShowClassPractice,true);
-            BigButton(content,"같은 조건으로 A/B 비교",ShowComparisonPicker);
-            Note(content,"단일·다수 표적은 공격하지 않습니다. 위험 훈련은 실제 예고와 피해가 발생하며 사망할 수 있습니다.\n종류마다 배치와 시드가 고정됩니다. 앱을 종료하면 훈련을 새로 시작합니다.",20,150,pale);
-            FooterButton(0,1,"성소로 돌아가기",ShowTown);
-        }
         public void ShowBuild()
         {
+            if(BlockTrainingEdit())return;
             if(game.ComparisonRun){if(game.Active)ShowComparisonConditions();else ShowComparisonEditor();return;}
             comparisonEditing=false;
             buildWasPaused=game.Active&&game.Combat.State.paused;if(game.Active)game.Combat.State.paused=true;
@@ -384,6 +370,7 @@ namespace Hellscript
         public void ShowResult()
         {
             if(game.ComparisonRun){ShowComparisonResult();return;}
+            if(game.TrainingGroundRun){ShowTrainingGroundResult();return;}
             if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;if(r.training<0&&(won||r.phase==RunPhase.Failed)){ShowRiftVictory();return;}ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.training>=0?r.action:Loc.F("균열 {0}단계",r.stage)+" · "+Loc.StoredText(r.action),ShowResult);
             game.RecordGuide(()=>FirstPlayGuide.ReadResult(game.Store.Data,r));
             var next=r.training<0?FirstPlayRecommendation.Choose(game.Store.Data,r):null;
@@ -481,7 +468,7 @@ namespace Hellscript
             RefreshCanvasScale();
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
-            TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();
+            TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();
             PresentationMetrics.HudCalls++;

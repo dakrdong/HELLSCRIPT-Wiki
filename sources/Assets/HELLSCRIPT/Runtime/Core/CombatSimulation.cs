@@ -13,7 +13,7 @@ namespace Hellscript
         public bool OwnedTraining=>State.training>=0&&State.trainingUsesOwnedHero;
         bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero&&!IsTutorial;
         public int EffectiveLevel=>FullSkillTraining?ClassSkills.LevelCap(Hero):Hero.level;
-        public float TimeLimit=>OwnedTraining?60:State.training>=0?300:LiveOpsConfig.For(State).timeLimitSeconds;
+        public float TimeLimit=>State.training<0||IsTrainingGround?LiveOpsConfig.For(State).timeLimitSeconds:OwnedTraining?60:300;
         LiveOpsRiftSettings Tuning=>LiveOpsConfig.For(State);
         readonly AccountSave account;
         readonly GameCatalog catalog;
@@ -33,11 +33,13 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null)
         {
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
             bool owned=restore!=null?restore.training>=0&&restore.trainingUsesOwnedHero:ownedTraining&&training>=0;
-            if(owned&&(restore?.training??training)>2)throw new ArgumentOutOfRangeException(nameof(training));
+            bool ground=(restore?.training??training)==TrainingGround.Training;
+            if(ground?!owned||restore==null&&trainingGround==null:owned&&(restore?.training??training)>2)throw new ArgumentOutOfRangeException(nameof(training));
+            if(restore==null&&ground){string invalid=TrainingGround.Validate(trainingGround,account.Hero);if(invalid!="")throw new InvalidOperationException(invalid);}
             // Owned training and every stocked training session own their account copy. Keep the
             // pre-inventory developer fixture contract until its hero adopts the new inventory.
             bool isTutorial=tutorial||restore?.tutorial==true;
@@ -46,8 +48,10 @@ namespace Hellscript
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null)RiftResult.Begin(this.account,State);
-            if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=1;State.rng=seed??(731010u+(uint)training);}
-            if(restore==null&&training<0)State.liveOps=liveOps==null?LiveOpsConfig.Capture(null,State.stage):CombatJournal.Copy(liveOps);
+            if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=ground?trainingGround.stage:1;State.rng=seed??(ground?TrainingGround.Seed(trainingGround):731010u+(uint)training);}
+            // The training ground fights real rift enemies, so it keeps the rift's live-ops balance for its tier.
+            if(restore==null&&ground)State.trainingGround=new TrainingGroundRunState{setup=trainingGround.Copy(),key=TrainingGround.Key(trainingGround,Hero)};
+            if(restore==null&&(training<0||ground))State.liveOps=liveOps==null?LiveOpsConfig.Capture(null,State.stage):CombatJournal.Copy(liveOps);
             LiveOpsConfig.NormalizeRun(State);
             if(State.liveOps!=null&&State.liveOps.stage!=State.stage)throw new ArgumentException("Live operations snapshot belongs to another stage.");
             uint journalSeed=State.rng;
@@ -57,7 +61,12 @@ namespace Hellscript
             State.growthEvents??=new List<GrowthEvent>();
             BehaviorRules.Normalize(State.build);
             if(ClassSkillLoadout.IsAbsent(State.build.classSkills))State.build.classSkills=null;
-            else State.build.classSkills.ProjectLegacy(State.build,catalog);
+            else
+            {
+                // Unchecked training skills stay equipped with automatic use off, so the edict never picks them.
+                if(restore==null&&ground)State.build.classSkills.automatic=State.build.classSkills.automatic.Where(id=>!trainingGround.excluded.Contains(id)).ToArray();
+                State.build.classSkills.ProjectLegacy(State.build,catalog);
+            }
             if(State.slotLevels==null)State.slotLevels=(int[])(Hero.slotProgress??new SlotProgress()).levels.Clone();
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;statsHero.slotProgress=new SlotProgress{levels=(int[])State.slotLevels.Clone()};
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
@@ -81,6 +90,7 @@ namespace Hellscript
         void SpawnDungeon()
         {
             if(IsTutorial){SpawnTutorial();return;}
+            if(IsTrainingGround){SpawnTrainingGround();return;}
             if(OwnedTraining){SpawnOwnedTraining();return;}
             if(State.training>=0)
             {
@@ -115,26 +125,34 @@ namespace Hellscript
                 enemy.cooldown=State.training==2?2+i*.5f:1000;if(State.training!=2)enemy.attack=0;
             }
         }
+        // Kinds 12-19 are provisional: the field fillers (12,14,16,18) carry N01's exact budget, so
+        // early rifts play alike in every field until their own attacks are tuned.
+        static readonly float[] KindHealth={1,.7f,.7f,.85f,.9f,1.2f,1.4f,.9f,.8f,.8f,1.1f,.65f,1,.8f,1,1.1f,1,.75f,1,.8f};
+        static readonly float[] KindAttack={1,1.1f,.8f,.8f,.3f,.6f,1.1f,1.3f,1,1,.4f,.7f,1,1.1f,1,.6f,1,.85f,1,1};
+        static readonly float[] KindSpeed={2.7f,3.6f,2.4f,2.3f,2.2f,2,2.2f,3.2f,2.2f,2.3f,2,3,2.7f,3,2.7f,2,2.7f,2.3f,2.7f,2.3f};
+        // An enemy's stats at a tier. Every spawn goes through here, and the training ground lobby shows these numbers.
+        // A rift (or the training ground) adds the introductory reduction on introductory layouts and the live-ops balance.
+        public static (float health,float attack,float speed) EnemyStats(int stage,int kind,bool elite,bool boss,int pattern,bool rift,bool introductory,LiveOpsRiftSettings tuning)
+        {
+            float health=70*Mathf.Pow(1.08f,stage-1)*(boss?45:KindHealth[kind])*(elite?3:1);
+            float attack=18*Mathf.Pow(1.055f,stage-1)*(boss?3:KindAttack[kind])*(elite?1.5f:1),speed=boss?2:KindSpeed[kind];
+            if(rift&&introductory){health*=IntroductoryRift.HealthMultiplier(stage,boss);attack*=IntroductoryRift.AttackMultiplier(stage);}
+            if(boss){var profile=BossCombat.ProfileOf(pattern);health*=profile.health;attack*=profile.attack;}
+            if(rift)
+            {
+                health*=boss?tuning.bossHealth:elite?tuning.eliteHealth:tuning.monsterHealth;
+                attack*=boss?tuning.bossAttack:elite?tuning.eliteAttack:tuning.monsterAttack;speed*=boss?tuning.bossSpeed:elite?tuning.eliteSpeed:tuning.monsterSpeed;
+            }
+            return (health,attack,speed);
+        }
         void SpawnEnemy(int room,int kind,Vector2 pos,int elite,bool boss=false,bool add=false,RunState into=null)
         {
-            var spawnRun=into??State;
-            // Kinds 12-19 are provisional: the field fillers (12,14,16,18) carry N01's exact budget, so
-            // early rifts play alike in every field until their own attacks are tuned.
-            float[] hp={1,.7f,.7f,.85f,.9f,1.2f,1.4f,.9f,.8f,.8f,1.1f,.65f,1,.8f,1,1.1f,1,.75f,1,.8f};
-            float[] atk={1,1.1f,.8f,.8f,.3f,.6f,1.1f,1.3f,1,1,.4f,.7f,1,1.1f,1,.6f,1,.85f,1,1};
-            float[] speed={2.7f,3.6f,2.4f,2.3f,2.2f,2,2.2f,3.2f,2.2f,2.3f,2,3,2.7f,3,2.7f,2,2.7f,2.3f,2.7f,2.3f};
-            float health=70*Mathf.Pow(1.08f,spawnRun.stage-1)*(boss?45:hp[kind])*(elite>=0?3:1);
-            var e=new EnemyState{id=spawnRun.nextId++,room=room,kind=kind,position=pos,health=health,maxHealth=health,
-                attack=18*Mathf.Pow(1.055f,spawnRun.stage-1)*(boss?3:atk[kind])*(elite>=0?1.5f:1),speed=boss?2:speed[kind],elite=elite,boss=boss,add=add,cooldown=1+RandomStream.Unit(ref spawnRun.rng)};
-            if(spawnRun.training<0&&spawnRun.layout.introductory)
-            {e.health*=IntroductoryRift.HealthMultiplier(spawnRun.stage,boss);e.maxHealth=e.health;e.attack*=IntroductoryRift.AttackMultiplier(spawnRun.stage);}
-            if(boss){spawnRun.bossId=e.id;e.pattern=spawnRun.layout.legacy?(spawnRun.stage-1)%3:spawnRun.layout.bossKind;var profile=BossCombat.ProfileOf(e.pattern);e.health*=profile.health;e.attack*=profile.attack;e.maxHealth=e.health;}
-            if(spawnRun.training<0)
-            {
-                var tuning=LiveOpsConfig.For(spawnRun);
-                e.health*=boss?tuning.bossHealth:elite>=0?tuning.eliteHealth:tuning.monsterHealth;e.maxHealth=e.health;
-                e.attack*=boss?tuning.bossAttack:elite>=0?tuning.eliteAttack:tuning.monsterAttack;e.speed*=boss?tuning.bossSpeed:elite>=0?tuning.eliteSpeed:tuning.monsterSpeed;
-            }
+            var spawnRun=into??State;bool rift=spawnRun.training<0||spawnRun.training==TrainingGround.Training;
+            int pattern=!boss?0:spawnRun.layout.legacy&&spawnRun.training!=TrainingGround.Training?(spawnRun.stage-1)%3:spawnRun.layout.bossKind;
+            var stats=EnemyStats(spawnRun.stage,kind,elite>=0,boss,pattern,rift,spawnRun.layout.introductory,LiveOpsConfig.For(spawnRun));
+            var e=new EnemyState{id=spawnRun.nextId++,room=room,kind=kind,position=pos,health=stats.health,maxHealth=stats.health,
+                attack=stats.attack,speed=stats.speed,elite=elite,boss=boss,add=add,cooldown=1+RandomStream.Unit(ref spawnRun.rng)};
+            if(boss){spawnRun.bossId=e.id;e.pattern=pattern;}
             InitializeEnemyBrain(e,spawnRun);spawnRun.enemies.Add(e);
         }
         public bool ApplyBuild(BuildConfig build)
@@ -200,7 +218,7 @@ namespace Hellscript
             if(SettleCombatOutcome())return;
             TickChests(dt);TickSeals(dt);TickOfferings();if(!string.IsNullOrEmpty(State.navigationError))return;
             TickShrine(dt);if(!string.IsNullOrEmpty(State.navigationError))return;Loot(dt);
-            if(State.training>=0&&!IsTutorial&&State.enemies.All(e=>e.dead))Finish(true,"훈련 완료",CombatFinish.TargetsDefeated);
+            if(State.training>=0&&!IsTutorial&&!IsTrainingGround&&State.enemies.All(e=>e.dead))Finish(true,"훈련 완료",CombatFinish.TargetsDefeated);
         }
         void Sense()
         {
@@ -423,7 +441,7 @@ namespace Hellscript
         void Deal(EnemyState e,float damage,bool critical)
         {
             if(damage>0&&!e.dead)State.lastOutgoingDamageTime=State.time;
-            if(e.dead)return;State.dealt+=Mathf.Min(e.health,damage);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
+            if(e.dead)return;float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;if(IsTrainingGround)RecordTrainingDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;
             if(e.health>0)return;e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;
         }

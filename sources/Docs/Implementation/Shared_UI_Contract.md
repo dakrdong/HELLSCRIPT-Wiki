@@ -170,3 +170,7 @@
 튜토리얼 연출 층(`TutorialCinematic`)은 전투 HUD 위에 띠·암전·제목 카드·목표 알림·짧은 대사·장비 획득을 그리는 표시 전용 캔버스다. 캔버스는 기존 소유자인 `GameUI.cs`가 정렬 130으로 만들며, 콘텐츠 창(400 이상)보다 아래에 있다. 장비 획득은 `EquipmentSlotView`와 `EquipmentGradePalette`, 장식은 `EquipmentRevealGraphic`을 재사용한다. 계정을 읽거나 바꾸지 않으며 진행은 기존 `GameController` 명령이 소유한다. 전투 대화는 월드 표시를 이어 가도록 `blocksGameplay:false`로 열되 일시정지 임대는 유지한다. [튜토리얼 연출](Tutorial_Staging.md)에 흐름과 검증을 기록한다.
 
 2026-09-29: 전역 설정의 35개 묶음은 기존 좌우 목록 대신 상단 고정 아이콘 탭을 사용합니다. 탭은 좁은 화면에서 줄바꿈하고 선택한 본문만 스크롤합니다. 프리셋·공유는 다섯 고정 행과 입력형 이름·디스크 저장·슬롯별 공유를 사용하며 페이지 스크롤을 만들지 않습니다. 기본 추천 정책 On/Off는 요약 상단에 배치하고 `GameStore.SetRecommendedEdict`를 통해 영웅의 실행 모드만 저장합니다. `HuntEdictDefaults`가 읽기용 정책을 만들며 화면 부품은 원본 설정을 변경하지 않습니다. 자세한 동작은 [프리셋](Hunt_Edict_Quick_Presets.md)과 [요약](Hunt_Edict_Overview.md)을 따릅니다.
+
+## 훈련장
+
+`TrainingGroundWindow`(로비)와 `TrainingGroundResultWindow`(결과)는 신규 창 템플릿의 `ContentWindowView`를 사용한다. 로비는 실제 소유 데이터(`EquipmentViewSource.Owned`)를 읽는다. 가로 화면에서는 사용 스킬과 등장 적을 각각 독립적으로 스크롤하는 두 열로 놓는다. 스킬 체크와 적 구성을 한 화면에서 함께 보기 위한 배치이며, 세로 화면은 공통 본문 스크롤 하나에 쌓는다. 적 추가는 같은 창 관리자가 여는 최대 크기 창(`Catalog`)이다. 세팅 편집본은 로비 제어 코드가 소유하고 `GameStore.SaveTrainingGroundSetup`으로 영웅 저장에 보관한다. 스킬별 칙령 수정은 기존 `HuntEdictWindow`와 `GameStore.CommitHuntEdict`를 그대로 쓴다. 결과는 균열 결과처럼 전투 스냅샷(`BattleSnapshot`) 페이지로 열리며 반복 시계를 막지 않는다. 전투 중 DPS 패널과 일시정지 창은 기존 전투 HUD 캔버스(`GameUI`)의 어댑터이고, 그래프는 텍스처 없는 `TrainingDpsChart` 메시다. 글꼴·색·버튼·스킬 아이콘은 `UiFonts`, `UiTheme`, `ContentWindowView.Button`, `SkillIconView`를 공유한다. [구현과 검증](Training_Ground.md)을 따른다.

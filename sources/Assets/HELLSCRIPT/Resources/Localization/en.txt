@@ -44,9 +44,6 @@
 + OR 묶음 추가	+ Add an OR group
 + 행동 규칙 추가	+ Add a behavior rule
 0.5초 동안 공격 범위에 적 없음	No enemy in range for 0.5 seconds
-01  단일 적 · 스킬 순환	01  Single enemy · Skill rotation
-02  다수 적 · 밀집과 선회	02  Many enemies · Packs and orbiting
-03  위험 지대 · 생존과 회피	03  Danger zone · Survival and dodging
 1. 성소에서 직업과 행동 설정을 고릅니다. 직업별 추천 빌드의 스킬 조합과 행동 조건을 확인하세요.	1. Pick a class and its behavior settings at the sanctuary. Look at the skill combination and the conditions in each class's recommended builds.
 1초 동안 예상되는 HP 손실이 회피 기준 이상입니다.	The HP loss expected over one second is at or above the dodge threshold.
 1초 보행 후 다음 유료 스킬의 비용이 25% 감소합니다. 사용 후 대기시간은 4초입니다.	After walking for 1 second the next skill that costs resource is 25% cheaper. The effect then waits 4 seconds.
@@ -129,7 +126,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 {0} +{1}\n{2} · {3} · I{4} · 요구 Lv.{5}\n{6}{7}	{0} +{1}\n{2} · {3} · I{4} · needs Lv.{5}\n{6}{7}
 {0} / 20초	{0} / 20s
 {0} Lv.{1} · 고정 훈련 {2}\n\n표적 처치 {3} / {4} · 남은 HP {5:0}\n전투 시간 {6:0.0}초 / 실제 {7:0.0}초\n총 피해 {8:N0} · 전투 초당 {9:0.0}	{0} Lv.{1} · Fixed trial {2}\n\nTargets killed {3} / {4} · HP left {5:0}\nCombat time {6:0.0}s / Real {7:0.0}s\nTotal damage {8:N0} · {9:0.0} per combat second
-{0} Lv.{1} · 현재 장비와 해금한 스킬\nHP {2:0} · 공격 기준 {3:0.0}	{0} Lv.{1} · current gear and unlocked skills\nHP {2:0} · Attack {3:0.0}
 {0} Lv.{1} · 현재 장비와 행동을 확인합니다	{0} Lv.{1} · review your gear and behavior
 {0} · Lv.{1} 추천	{0} · recommended for Lv.{1}
 {0} · {1} · {2}\n목표 {3} {4:0.#}m · {5}\n{6} · 설치 {7} · {8} · {9}	{0} · {1} · {2}\nTarget {3} {4:0.#}m · {5}\n{6} · placement {7} · {8} · {9}
@@ -275,7 +271,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 같은 목표 접근 실패 · 다른 관찰 지점 탐색	Could not reach the same target · looking for another vantage point
 같은 부위에 여러 장비가 장착되어 있습니다.	More than one piece is equipped in the same slot.
 같은 적에게 기본공격 3회 적중 후, 5초 안의 다음 유료 스킬 비용 감소 +50%를 준비합니다. 1충전이며 내부 대기시간은 4초입니다.	After three basic attacks land on the same enemy, the next skill that costs resource within 5 seconds is 50% cheaper. One charge, waiting 4 seconds between triggers.
-같은 조건으로 A/B 비교	A/B comparison under identical conditions
 같은 직업의 스킬을 선택하세요.	Choose a skill of the same class.
 개발용 Lv.30 시험 · 보상 없음	Development Lv.30 trial · no rewards
 개발용 로컬 플레이 · 계정 연동과 결제는 연결 전입니다.	Local development play. Accounts and payment are not connected yet.
@@ -320,7 +315,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 고블린 추적 시간	Goblin chase time
 고유 장비 참조 오류: {0}	Unique gear reference error: {0}
 고유 장비는 전설 등급이어야 합니다.	A unique has to be legendary.
-고정 훈련장	Fixed training ground
 곡선 장례길	Curving Funeral Road
 골드 {0:N0}    일반 재료 {1:N0}    가방 {2}/{3}	Gold {0:N0}    Materials {1:N0}    Bag {2}/{3}
 골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준	Gold {0:N0} · Materials {1:N0}\nItems are made at level {2}, based on your best clear
@@ -562,7 +556,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 단일 대상 집중	Focus one target
 단일 집중 사격에는 LA02 장착이 필요합니다.	Focusing the shot on one enemy needs LA02 equipped.
 단일 표적	Single target
-단일·다수 표적은 공격하지 않습니다. 위험 훈련은 실제 예고와 피해가 발생하며 사망할 수 있습니다.\n종류마다 배치와 시드가 고정됩니다. 앱을 종료하면 훈련을 새로 시작합니다.	The single and many target dummies do not attack. The danger trial uses real telegraphs and real damage, so you can die.\nEach kind has a fixed layout and seed. Closing the app restarts the training.
 닫기	Close
 대기	Idle
 대상 HP	Target HP
@@ -1041,7 +1034,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 성소 접근 공간 부족	Not enough room to reach the shrine
 성소까지 허용 이동 거리	Allowed detour to a shrine
 성소로	To the sanctuary
-성소로 돌아가기	Back to the sanctuary
 성소로 이동	Moving to the shrine
 성장과 스킬	Growth and skills
 세트	Set
@@ -1940,7 +1932,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 현재 비교의 훈련 결과가 아닙니다.	That training result does not belong to this comparison.
 현재 빌드는 로컬 개발용입니다. 실제 서버·계정·결제는 연결되지 않았으며, 보석과 일부 특수 효과는 추가 구현 대상입니다.	This build is for local development. No real server, account or payment is connected, and gems and some special effects are still to be implemented.
 현재 사냥 설정과 장비 장착은 바뀌지 않습니다.	Your current hunt settings and equipped gear do not change.
-현재 상태의 복사본으로 실행합니다. XP·재화·장비는 바뀌지 않으며, 훈련 설정은 슬롯 저장을 선택할 때만 남습니다.	Runs on a copy of the current state. XP, currency and gear do not change, and the training setup is kept only if you save it to a slot.
 현재 설정 참조	Referenced by the current setup
 현재 설정·프리셋 참조	Referenced by the current setup or a preset
 현재 설정·프리셋의 장비 참조 해제	Drop this piece from the current setup and presets
@@ -1970,7 +1961,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 현재 캐릭터 · HP {0:0} · 공격 기준 {1:0.0} · 방어도 {2:0}	Current character · HP {0:0} · Attack {1:0.0} · Armor {2:0}
 현재 캐릭터가 완료한 훈련 비교를 성소에서 저장해 주세요.	Save the training comparison this character finished, from the sanctuary.
 현재 캐릭터가 진행 중인 균열의 편집 화면에서 저장하세요.	Save from the editing screen of the rift this character has in progress.
-현재 캐릭터로 60전투초 동안 시험합니다	Runs a 60 combat second trial with the current character
 현재 캐릭터를 확인하세요.	Check the current character.
 현재 캐릭터와 스킬 정보를 확인하세요.	Check the current character and the skill data.
 현재 캐릭터와 스킬 정보를 확인해 주세요.	Check the current character and the skill data.
@@ -2884,6 +2874,105 @@ Google 계정으로 로그인하거나 게스트로 시작하세요.	Sign in wit
 눈보라 검사 순서	Blizzard priority
 눈보라를 공격 순서	move Blizzard
 
+# Training ground: setup rules and records
+훈련장 설정을 읽을 수 없습니다.	The training setup could not be read.
+균열 단계는 1~{0}단계에서 고를 수 있습니다.	Choose a rift tier from 1 to {0}.
+훈련할 적을 한 종류 이상 추가해 주세요.	Add at least one kind of enemy to train against.
+적은 최대 {0}종까지 추가할 수 있습니다.	You can add up to {0} kinds of enemies.
+보스는 한 종류만 추가할 수 있습니다.	Only one boss kind can be added.
+적 구성을 확인해 주세요.	Check the enemy setup.
+같은 몬스터는 한 줄에 모아 주세요.	Keep each monster kind on a single row.
+끝까지 성공한 훈련만 기록합니다.	Only trainings that end in success are recorded.
+간편 설정 · {0}	Quick preset · {0}
+장착 스킬: {0} → {1}	Equipped skills: {0} → {1}
+{0} · 자동 사용: {1} → {2}	{0} · Automatic use: {1} → {2}
+{0} · 세부 옵션 변경	{0} · Detailed options changed
+{0} · 투자 {1} → {2}	{0} · Investment {1} → {2}
+공격 순서: {0} → {1}	Attack order: {0} → {1}
+보스 · HP 50% 이하에서 후반 패턴	Boss · second phase at 50% HP
+정예 특성: {0}	Elite traits: {0}
+사냥 칙령 설정	Hunt Edict settings
+균열 {0}단계 · 적 {1}종 · {2}마리 · 총 HP {3:N0}	Rift tier {0} · {1} kinds · {2} enemies · {3:N0} total HP
+스킬 {0}/{1}개	{0}/{1} skills
+체크한 스킬만 전투에서 사용합니다.	Only checked skills are used in combat.
+장착한 궁극기가 없습니다.	No ultimate is equipped.
+기본 공격과 공격 순서는 사냥 칙령 설정의 공통 공격 설정에서 바꿉니다.	Change basic attacks and the attack order under Attack settings in Hunt Edict settings.
+훈련 제외	Excluded
+자동 사용 꺼짐 · 전투에서 쓰지 않음	Automatic use off · not used in combat
+칙령 수정	Edit edict
+등장 적	Enemies
+적 {0}/{1}종	{0}/{1} kinds
++ 적 추가	+ Add enemy
+적을 추가해 훈련을 구성하세요. 보스와 일반 몬스터를 합쳐 5종까지 넣을 수 있습니다.	Add enemies to build the training. Up to 5 kinds, bosses and normal monsters combined.
+균열 단계	Rift tier
+{0}단계	Tier {0}
+실제 균열과 같은 몬스터 능력치 · 열린 단계 1~{0}	Monster stats of a real rift at this tier · open tiers 1–{0}
+HP {0:N0} · 공격력 {1:N0}	HP {0:N0} · Attack {1:N0}
+마리당 HP {0:N0} · 공격력 {1:N0}	Each: HP {0:N0} · Attack {1:N0}
+실제 전투처럼 능력치는 일반과 같고 등급 효과만 다릅니다.	As in real combat, stats match Normal; only the tier effect differs.
+이 세팅의 기록이 아직 없습니다.	No clear with this setup yet.
+최고 {0} · 직전 {1}	Best {0} · Previous {1}
+같은 세팅은 항상 같은 배치와 시드로 시작합니다.	The same setup always starts with the same placement and seed.
+적 추가	Add enemy
+{0}/{1}종 선택 · 보스는 한 종만 1마리 · 일반 몬스터 1~{2}마리	{0}/{1} kinds · one boss kind, always 1 · normal monsters 1–{2}
+추가됨	Added
+교체	Swap
+5종 모두 선택함	All 5 kinds chosen
+추가	Add
+보스를 {0}(으)로 교체했습니다.	Boss swapped for {0}.
+{0}을(를) 추가했습니다.	{0} added.
+훈련장 세팅 변경	Change training setup
+다시 시작하기	Start again
+균열 {0}단계 · 보스 {1} · 일반 몬스터 {2}마리 · 스킬 {3}/{4}	Rift tier {0} · Boss {1} · {2} normal monsters · Skills {3}/{4}
+훈련 실패	Training failed
+훈련 기록 저장됨	Training record saved
+기록하지 않음	Not recorded
+클리어 시간	Clear time
+{0}에 영웅이 쓰러졌습니다 · 남은 적 {1}/{2}	The hero fell at {0} · {1}/{2} enemies left
+제한 시간 {0}을 넘겼습니다 · 남은 적 {1}/{2}	The {0} time limit ran out · {1}/{2} enemies left
+이 세팅의 첫 기록	First clear with this setup
+직전과 같은 기록	Same time as the previous run
+직전보다 {0:0.0}초 빨라짐 ({1})	{0:0.0} s faster than the previous run ({1})
+직전보다 {0:0.0}초 느려짐 ({1})	{0:0.0} s slower than the previous run ({1})
+직전 기록 {0} · 최고 기록 {1}	Previous {0} · Best {1}
+최고 기록 갱신	New best
+비교 기준: 영웅 레벨·장비, 균열 단계, 적 구성과 사용 스킬이 같은 직전 성공 판	Compared with the previous successful run at the same hero level, equipment, rift tier, enemies and skills
+성공한 판만 클리어 시간을 기록하고 비교합니다.	Only successful runs record and compare a clear time.
+DPS 변화	DPS over time
+평균 DPS {0:N0}	Average DPS {0:N0}
+직전 대비 {0}	{0} vs previous
+최고 DPS {0:N0} · 총 피해 {1:N0}	Peak DPS {0:N0} · Total damage {1:N0}
+이번 판	This run
+직전 판	Previous run
+스킬별 피해	Damage by skill
+이번 훈련에서 사용하지 않음	Not used in this training
+자동 사용이 꺼져 쓰지 않음	Not used: automatic use is off
+사용 {0}회 · {1:N0}	Used {0}× · {1:N0}
+피해 없음 · 사용 {0}회	No damage · used {0}×
+바뀐 사냥 칙령	Hunt Edict changes
+직전 판 이후	Since the previous run
+같은 세팅으로 다시 시작하면 이번 판과 비교합니다.	Start again with the same setup to compare against this run.
+직전 판과 같은 사냥 칙령입니다. 같은 세팅과 같은 칙령은 같은 결과를 냅니다.	The Hunt Edict matches the previous run. The same setup and edict give the same result.
+저장한 칙령 변경 {0}건은 다시 시작할 때 적용됩니다.	{0} saved edict change(s) apply when you start again.
+진행 중인 전투를 먼저 마쳐 주세요.	Finish the current fight first.
+훈련 중에는 사냥 칙령을 바꿀 수 없습니다. 일시정지에서 훈련을 중단하거나 결과 화면에서 수정해 주세요.	The Hunt Edict cannot change during training. Stop the training from the pause menu, or edit it on the result screen.
+남은 적 {0}/{1}	Enemies left {0}/{1}
+실시간 DPS {0:N0}	Live DPS {0:N0}
+비교할 직전 판 없음	No previous run to compare
+직전 판 같은 시점 대비 {0}	{0} vs the previous run at this time
+최근 3초 평균	Last 3 seconds
+평균 {0:N0} · 최고 {1:N0} · 총 피해 {2:N0}	Average {0:N0} · Peak {1:N0} · Total {2:N0}
+전투 시간이 멈춰 있습니다. 멈춘 시간은 클리어 시간에 넣지 않습니다.	Combat time is stopped. Paused time never counts toward the clear time.
+계속하기	Resume
+훈련 중단	Stop training
+훈련을 중단했습니다. 중단한 판은 기록하지 않습니다.	Training stopped. Stopped runs are not recorded.
+이번 판은 기록하지 않고 훈련장으로 돌아갑니다.	This run will not be recorded; you return to the training ground.
+균열 {0}단계 · 모든 적을 처치할 때까지 · 보상 없음	Rift tier {0} · until every enemy falls · no rewards
+마릿수	Count
+기본 추천 세팅	Recommended defaults
+기본 세팅 적용: {0} → {1}	Use default settings: {0} → {1}
+기본 추천 세팅이 적용 중입니다. 스킬별 칙령을 바꾸려면 사냥 칙령 설정에서 기본 세팅 적용을 끄세요.	The recommended defaults are on. To change a skill's edict, turn off Use default settings in Hunt Edict settings.
+
 # Tutorial staging: story dialogue, companion lines, title cards and objectives
 건너뛰기 »	Skip »
 균열지기	Rift keeper
@@ -3355,7 +3444,7 @@ HP는 남은 비율로 비교합니다. 추적 시간은 접근·관측 위치 �
 미확인 장비 상점	Unidentified equipment shop
 소탕	Sweep
 전설 코어 제작	Legendary core crafting
-실패 로그와 설정을 확인하고 같은 조건으로 A/B 비교를 시도하세요.	Review failure logs and settings, then compare A/B runs under identical conditions.
+같은 세팅에서 사냥 칙령만 바꿔 클리어 시간과 DPS를 비교하세요.	Keep the setup, change only the Hunt Edict and compare clear time and DPS.
 강화에는 골드와 재료가 필요합니다. 분해와 장비 보호는 처음부터 이용할 수 있습니다.	Enhancement costs gold and materials. Dismantling and item protection are available from the start.
 활성화 이후의 미실행 시간만 최대 12시간 정산합니다.	Only time after activation earns idle rewards, up to 12 hours.
 희귀 장비를 부위별로 제작합니다. 훈련장과 프리셋으로 변경 전후를 비교하세요.	Craft a rare item for a chosen slot. Compare changes with training and presets.
@@ -5165,7 +5254,7 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 레벨 성장으로 새 액티브 스킬이 열리면 실제 슬롯에 장착하고 저장하세요. 패시브는 장착하지 않아도 적용됩니다.	When leveling unlocks a new active skill, equip it in a real slot and save. Passives apply without occupying a slot.
 수정한 설정으로 재도전	Test and retry
 변경한 칙령을 훈련장에서 시험하고, 같은 설정으로 새 균열에 도전하세요. 훈련은 보상과 피로도를 소비하지 않습니다.	Test your changed edict in training, then enter a new rift with that setup. Training grants no rewards and consumes no fatigue.
-현재 캐릭터의 장비와 스킬로 60전투초 동안 시험하세요. 결과에서 피해·생존·행동 이유를 확인할 수 있습니다.	Test your owned equipment and skills for 60 combat seconds. Review damage, survival and decision reasons in the result.
+균열 단계와 적을 고르고, 스킬별 사냥 칙령을 바꿔 가며 같은 세팅으로 다시 싸워 보세요. 결과에서 직전 판과 클리어 시간·DPS를 비교합니다.	Pick a rift tier and enemies, change a skill's Hunt Edict and fight the same setup again. The result compares clear time and DPS with the previous run.
 소유한 +0 장비를 고르고 비용을 확인한 뒤 +1로 강화하세요. 최초 실습은 이 한 단계의 골드를 지원합니다.	Choose an owned +0 item, review the cost and enhance it to +1. First practice covers gold for this one step.
 실제 균열 기록을 바탕으로 정산된 보급을 확인하세요. 튜토리얼 전투는 보급 기준을 만들지 않습니다.	Review supplies settled from actual rift performance. Tutorial combat never creates an offline reward baseline.
 희귀 장비 제작	Rare equipment crafting

@@ -82,7 +82,7 @@ namespace Hellscript
             BeginRun(training,false,null,true);
 #endif
         }
-        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false)
+        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false,TrainingGroundSetup ground=null)
         {
             if(Active||liveOpsAdmissionPending)return;
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
@@ -107,7 +107,7 @@ namespace Hellscript
             var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
             string fingerprint=Store.Data.Hero.lastRiftFingerprint;int boss=Store.Data.Hero.lastRiftBoss;
             int stage=Mathf.Clamp(SelectedStage,1,Mathf.Min(1000,Store.Data.Hero.highestClear+1));
-            try{Combat=new CombatSimulation(Store.Data,catalog,stage,training,snapshot,seed,ownedTraining:!fullSkillTraining,liveOps:training<0&&snapshot==null?LiveOps?.Capture(stage):null);}
+            try{Combat=new CombatSimulation(Store.Data,catalog,ground?.stage??stage,training,snapshot,seed,ownedTraining:!fullSkillTraining,liveOps:snapshot==null&&(training<0||ground!=null)?LiveOps?.Capture(ground?.stage??stage):null,trainingGround:ground);}
             catch(Exception e){Combat=previous;BlockRepeat(RepeatBlock.Configuration,e.Message);Notify(e.Message);return;}
             if(training<0){Store.Data.suspendedRun=Combat.State;Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRecommendedLoot=(id,policy,rarityOnly)=>Store.CommitRecommendedLoot(Combat.State,id,policy,rarityOnly);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
             if(training<0)
@@ -324,7 +324,7 @@ namespace Hellscript
             if(!DisplayDimmed&&!backgroundPaused)World.Present(run,Mathf.Min(real,.25f));
             if(run.portal&&!portalCleanupTried)TryPortalCleanup();else if(!run.portal)portalCleanupTried=false;
             if(run.portal&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse"&&UI.Page!="gem-menu")UI.ShowBag(true);
-            if(!Active&&!resultShown){resultShown=true;if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();if(!IdleHunting){if(TutorialActive)UI.PresentTutorialStep();else UI.ShowResult();}}
+            if(!Active&&!resultShown){resultShown=true;if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();if(Combat.IsTrainingGround)RecordTrainingGround();if(!IdleHunting){if(TutorialActive)UI.PresentTutorialStep();else UI.ShowResult();}}
             if(!Active&&!wasActive&&!backgroundPaused&&!foregroundResumeRequired&&!UI.BlocksRepeat&&(IdleHunting||UI.Page=="result")&&run.training<0)TickRepeat(repeatReal);
             if(!backgroundPaused){saveClock+=real;if(saveClock>=3){saveClock=0;Save();}}
             UpdateIdlePresentation();

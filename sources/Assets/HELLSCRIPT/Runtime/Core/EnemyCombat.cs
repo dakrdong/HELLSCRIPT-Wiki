@@ -83,6 +83,7 @@ namespace Hellscript
         // Kinds 0-11 keep their old kind%6 meaning; 12-19 are the field-specific additions.
         static readonly int[] Roles={0,1,2,3,4,5,0,1,2,3,4,5,0,1,0,5,0,2,0,3};
         public static int Role(int kind)=>kind>=0&&kind<Roles.Length?Roles[kind]:0;
+        public static readonly string[] RoleNames={"근접","돌진","원거리","장판","지원","폭발"};
         public static bool IsSupport(int kind)=>Role(kind)==4;
         // Hunt edict "RANGED" also covers ground casters, as it always has (kinds 2, 3, 8, 9).
         public static bool IsRangedTarget(int kind)=>Role(kind)==2||Role(kind)==3;
@@ -93,6 +94,8 @@ namespace Hellscript
         static readonly int[][] Rosters={new[]{0,1,2,3,4,5},new[]{6,7,8,9,10,11},new[]{12,13,2,9,10,5},new[]{14,1,2,3,4,15},new[]{16,1,17,9,4,11},new[]{18,7,8,19,10,11}};
         public static int FieldTemplateSet(int field)=>TemplateSets[field];
         public static int RosterKind(int field,int slot)=>Rosters[field][slot];
+        // The first field whose roster holds the kind; kinds shared by several fields name the earliest.
+        public static int FieldOf(int kind)=>Array.FindIndex(Rosters,r=>Array.IndexOf(r,kind)>=0);
         public static EnemyAttackDefinition Attack(int kind)
         {
             switch(kind)

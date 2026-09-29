@@ -138,6 +138,7 @@ namespace Hellscript
                 h.riftProgress??=new RiftEntryProgress();h.riftProgress.best??=new System.Collections.Generic.List<RiftBestTime>();h.riftProgress.claimed??=new System.Collections.Generic.List<int>();
                 h.potions??=new PotionInventory();h.potions.Validate();
                 if(h.trainingComparison!=null&&string.IsNullOrEmpty(h.trainingComparison.id))h.trainingComparison=null;
+                h.trainingGround??=new TrainingGroundProgress();h.trainingGround.setup??=new TrainingGroundSetup();h.trainingGround.records??=new System.Collections.Generic.List<TrainingGroundRecord>();
                 BehaviorRules.Normalize(h.build);
                 HuntEdictV2Storage.Normalize(h);
                 NormalizePresetSlots(h);

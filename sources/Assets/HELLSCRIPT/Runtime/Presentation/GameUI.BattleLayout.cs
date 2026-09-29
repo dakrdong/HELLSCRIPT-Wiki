@@ -36,7 +36,7 @@ namespace Hellscript
             escapeCaption=Label(header,"탈출",13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
-            AddRiftMinimap(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
+            AddRiftMinimap(run);if(game.TrainingGroundRun)BuildTrainingHud();BuildLiveJournal();RefreshHud();ReflowBattleHud();
         }
         void ReflowBattleHud()
         {
@@ -55,7 +55,7 @@ namespace Hellscript
             battleWorld.anchorMin=BattleViewport.min;battleWorld.anchorMax=BattleViewport.max;battleWorld.offsetMin=battleWorld.offsetMax=Vector2.zero;
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
             var mini=riftMinimapPanel;var panel=default(Rect);float map=0;if(mini!=null)panel=ReflowRiftMinimap(mini,narrow,float.MaxValue,out map);
-            var medals=ReflowBattleMedallions(w,panel);
+            var medals=ReflowBattleMedallions(w,panel);PlaceTrainingHud(w,narrow,medals);
             // Header lines that share rows with a landscape map panel or the medallions stop short of them.
             float End(float y,float h)=>Mathf.Min(panel.width>0&&panel.yMin<y+h&&panel.yMax>y?panel.xMin-8:w-18,medals.width>0&&medals.yMin<y+h&&medals.yMax>y?medals.xMin-8:w-18);
             Place(header,0,0,w,narrow?154:116);
@@ -68,7 +68,7 @@ namespace Hellscript
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,w-56,8,44,44);
             var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,w-108,8,44,44);
             // On narrow fields the event button has its own row above the boss status.
-            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=Mathf.Max(w<720?(narrow?218:176):116,medals.height>0?medals.yMax+6:0);
+            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=Mathf.Max(w<720?(narrow?218:176):116,medals.height>0?medals.yMax+6:0,TrainingHudBottom(w));
             // The boss status stays clear of the map panel: beside it when 240 remain right of the left
             // column (the events and adventure guide buttons end at 132), otherwise below it.
             bool below=panel.width>0&&bossX+bossWidth>panel.xMin-8&&bossY<panel.yMax+8;

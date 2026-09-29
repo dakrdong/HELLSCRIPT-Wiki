@@ -61,6 +61,8 @@ namespace Hellscript
             try
             {
                 if(Hero.useRecommendedEdict&&classEdict)recommendedSkills=HuntEdictDefaults.Skills(State.build.classSkills);
+                // The recommended defaults turn every equipped skill on; a training still leaves its unchecked skills out.
+                if(recommendedSkills!=null&&IsTrainingGround)recommendedSkills.automatic=recommendedSkills.automatic.Where(id=>!State.trainingGround.setup.excluded.Contains(id)).ToArray();
                 var document=classEdict?(recommendedSkills??State.build.classSkills).ProjectEdict():HuntEdictV2.Canonical(HuntEdictDefaults.Resolve(Hero,State.build));
                 HuntEdictV2.ValidateReceiver(document,Hero,catalog);
                 if(document.global.Single(o=>o.id=="bag.stillFull").value=="STOP")State.limitedLoot=false;

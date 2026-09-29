@@ -52,6 +52,7 @@ namespace Hellscript
             }
             if(State.layout!=null&&State.layout.version>RiftLayout.CurrentVersion)throw new InvalidOperationException("진행 중인 균열은 더 새로운 지도 버전이 필요합니다.");
             if(State.layout==null||State.layout.rooms==null||State.layout.rooms.Count==0)State.layout=RiftLayout.Legacy(State.theme);
+            if(fresh&&IsTrainingGround)PrepareTrainingArena();
             if(State.rewardRng==0)State.rewardRng=State.rng;
             GameStore.NormalizeRun(State);Map=new RiftNavigation(State.layout);
         }

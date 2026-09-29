@@ -94,7 +94,7 @@ namespace Hellscript
         }
         public static void NormalizeRun(RunState run)
         {
-            if(run.training>=0){run.liveOps=null;return;}
+            if(run.training>=0&&run.training!=TrainingGround.Training){run.liveOps=null;return;}
             // A legacy suspended run keeps the shipped rules, even if a newer release is cached.
             if(run.liveOps==null||run.liveOps.schemaVersion==0)run.liveOps=Capture(null,run.stage);
             Validate(run.liveOps);
