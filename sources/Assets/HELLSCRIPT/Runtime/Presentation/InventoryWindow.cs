@@ -54,7 +54,7 @@ namespace Hellscript
         }
         public void Close(){if(!ready)return;CancelDrag();ready=false;rewardBoxesWindow?.Close();if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
         public void RequestClose(){if(portalResume!=null){if(!portalResume()){string error=portalError();ShowError(error!=""?error:store.Error);}}else Close();}
-        public void Escape(){if(ghost!=null){CancelDrag();return;}if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){DismissReview();return;}if(selecting){ToggleSelection();return;}RequestClose();}
+        public void Escape(){if(ghost!=null){CancelDrag();return;}if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){Dismiss();return;}if(selecting){ToggleSelection();return;}RequestClose();}
         void Reflow()
         {
             string kind=dialogKind,id=detailId,filter=filterKind;RememberScroll();CancelDrag();
@@ -134,15 +134,14 @@ namespace Hellscript
         void DrawBag(float x,float y,float w,float h)
         {
             var panel=Panel(body,"Bag panel","1f221a","181b14");Place(panel,x,y,w,h);var drop=panel.gameObject.AddComponent<InventoryDropTarget>();drop.window=this;drop.slot=-2;
-            Txt(panel,"소지품",14,0,94,30,16,pale);Txt(panel,Loc.F("{0} / {1}",Hero.inventory.Count(i=>!i.equipped),Hero.capacity),w-113,0,99,30,11,gold,TextAnchor.MiddleRight);
+            Txt(panel,"소지품",14,0,94,24,12,pale).name="inventory-bag-title";Txt(panel,Loc.F("{0} / {1}",Hero.inventory.Count(i=>!i.equipped),Hero.capacity),w-113,0,99,24,11,gold,TextAnchor.MiddleRight);
             string[] categories={"전체","무기","방어구","장신구"};float tab=(w-28)/4;
-            for(int n=0;n<4;n++){int c=n;var button=Btn(panel,categories[n],14+n*tab,30,tab-3,26,()=>{category=c;Repaint(true);},false,11);button.name="inventory-category-"+n;UiTheme.Choice(button,category==n);}
+            for(int n=0;n<4;n++){int c=n;var button=Btn(panel,categories[n],14+n*tab,24,tab-3,24,()=>{category=c;Repaint(true);},false,11);button.name="inventory-category-"+n;UiTheme.Choice(button,category==n);}
             float filterWidth=(w-36)/2;
-            FilterButton(panel,grades==31?Loc.T("모든 등급"):Loc.F("등급 · {0}개",GradeNames.Where((g,n)=>(grades&(1<<n))!=0).Count()),14,61,filterWidth,"grade");
-            FilterButton(panel,Loc.F("정렬 · {0}",OrderLabels[Array.IndexOf(Orders,order)]),22+filterWidth,61,filterWidth,"order");
-            status=Txt(panel,"",14,90,w-28,24,9,muted);status.name="inventory-status";status.resizeTextForBestFit=true;status.resizeTextMinSize=8;status.resizeTextMaxSize=status.fontSize;UpdateStatus();
-            float bottom=landscape?96:106,gh=h-114-bottom;
-            bagScroll=Scroll(panel,"Inventory slots",14,114,w-28,gh,out var grid);
+            FilterButton(panel,grades==31?Loc.T("모든 등급"):Loc.F("등급 · {0}개",GradeNames.Where((g,n)=>(grades&(1<<n))!=0).Count()),14,52,filterWidth,"grade");
+            FilterButton(panel,Loc.F("정렬 · {0}",OrderLabels[Array.IndexOf(Orders,order)]),22+filterWidth,52,filterWidth,"order");
+            const float gridTop=84,bottom=42;float gh=h-gridTop-bottom;
+            bagScroll=Scroll(panel,"Inventory slots",14,gridTop,w-28,gh,out var grid);
             int columns=UiTheme.Columns(w-32,landscape);float step=SlotSize+UiTheme.Gap,gridWidth=columns*step-UiTheme.Gap,left=(w-32-gridWidth)/2;
             var items=VisibleItems().ToArray();bool fixedPositions=category==0&&grades==31&&order==InventoryOrder.Equipment;
             int count=fixedPositions?Math.Max(Hero.capacity,items.Select(i=>i.storageSlot+1).DefaultIfEmpty(0).Max()):Math.Max(columns*3,items.Length);
@@ -153,14 +152,20 @@ namespace Hellscript
             }
             grid.sizeDelta=new Vector2(0,Mathf.Ceil(count/(float)columns)*step-6);
             float by=h-bottom;var rail=Panel(panel,"Inventory actions","24251b","1a1c14","5a4c32");Place(rail,14,by,w-28,bottom-5);
-            Txt(rail,selecting?Loc.F("{0}개 선택",selected.Count):"아이템을 캐릭터에게 끌어서 장착",4,0,w-36,20,9,muted);
             float bw=(w-48)/3;
-            Btn(rail,selecting?"분해 취소":"분해",0,23,bw,34,ToggleSelection,false,11).name="inventory-dismantle";
-            Btn(rail,selecting?"자동 선택":"일괄 분해",bw+10,23,bw,34,()=>{if(selecting)AutoSelect();else ShowSalvage(true);},false,11).name="inventory-bulk";
-            var action=Btn(rail,"선택 분해",(bw+10)*2,23,bw,34,()=>ShowSalvage(false),true,11);action.name="inventory-selected";UiTheme.Button(action,destructive:true);action.gameObject.SetActive(selecting&&selected.Count>0);
-            Btn(rail,Loc.F("새 장비 연속 비교 · {0}개",Hero.inventory.Count(i=>!i.equipped&&!i.reviewed&&i.acquiredOrder>0)),0,60,w-28,27,ReviewNewEquipment,false,10).name="inventory-review-new";
+            Btn(rail,selecting?"분해 취소":"분해",0,2,bw,34,ToggleSelection,false,11).name="inventory-dismantle";
+            Btn(rail,selecting?"자동 선택":"일괄 분해",bw+10,2,bw,34,()=>{if(selecting)AutoSelect();else ShowSalvage(true);},false,11).name="inventory-bulk";
+            var action=Btn(rail,Loc.T("선택 분해")+" ("+selected.Count+")",(bw+10)*2,2,bw,34,()=>ShowSalvage(false),true,11);action.name="inventory-selected";UiTheme.Button(action,destructive:true);action.gameObject.SetActive(selecting&&selected.Count>0);
+            var notice=Panel(panel,"Inventory toast","27271bf5","171b13f5","655237");Place(notice,18,h-bottom-34,w-36,30);
+            notice.GetComponent<Image>().raycastTarget=false;
+            status=Txt(notice,"",8,2,w-52,26,10,pale);status.name="inventory-status";WalletFit(status);UpdateStatus();
         }
-        void UpdateStatus(){if(status!=null)status.text=message!=""?Loc.T(message):selecting?Loc.T("아이템을 터치해 선택하거나 해제할 수 있습니다."):Loc.T("잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.");}
+        void UpdateStatus()
+        {
+            if(status==null)return;
+            status.text=message!=""?Loc.T(message):"";
+            status.transform.parent.gameObject.SetActive(message!="");
+        }
         public void Toast(string value){message=value;messageUntil=Time.unscaledTime+3.2f;UpdateStatus();}
         public void AutoSelect()
         {

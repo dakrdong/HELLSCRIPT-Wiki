@@ -413,6 +413,25 @@ def build_resources(databases):
          '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
         IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,
         refs=[source_ref(coin_source),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs')],related=['potion-slots','potion-slots.en']))
+    currency_source='Docs/Art/Currency/generation.json'
+    currency_manifest=json.loads(read(currency_source))
+    currency_qa={r['id']:r for r in json.loads(read('Docs/Art/Currency/alpha-validation.json'))}
+    currency_names=['강화석 / Enhancement stone','무기 코어 / Weapon core','머리 코어 / Head core','몸통 코어 / Chest core',
+                    '손 코어 / Hands core','발 코어 / Feet core','벨트 코어 / Belt core','목걸이 코어 / Amulet core','반지 코어 / Ring core']
+    for a,name in zip(currency_manifest['assets'],currency_names):
+        path=a['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=currency_qa[a['id']]
+        if digest(raw)!=qc['sha256']:raise ValueError('Currency differs from its original generated PNG: '+a['id'])
+        rows.append(record('currency-'+a['id'],name,'이미지 원본',
+            '강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.',
+            {'원본 경로':path,'해상도':' × '.join(map(str,qc['size'])),'색상 모드':qc['mode'],
+             '완전 투명 픽셀':qc['transparentPixels'],'SHA-256':digest(raw),'오라 / Aura':a['aura'],
+             'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '제작 방법':'내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved',
+             '승인 상태':'모델 미확인 시안 / Candidate; exact model not returned',
+             '사용처':'CurrencyIconView → inventory wallet and blacksmith cores'},
+            IMPL+'Potion_Slots.md',status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
+            refs=[source_ref(currency_source),source_ref('Docs/Art/Currency/alpha-validation.json'),
+                  source_ref('Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs')],related=['potion-slots','potion-slots.en','core-crafting']))
     variant_manifest='Docs/Art/EquipmentVariants/manifest.json'
     variant_art={a['id']:a for a in json.loads(read(variant_manifest))['assets']}
     npc_path='Assets/HELLSCRIPT/Resources/NpcProfiles.json'
@@ -989,6 +1008,8 @@ def build():
     (SITE/'media/GlobalHUD').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'GlobalHUD/menu-storage.png',SITE/'media/GlobalHUD/menu-storage.png')
     shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')
+    for file in (ROOT/ART/'GlobalHUD').glob('currency-*.png'):
+        shutil.copyfile(file,SITE/'media/GlobalHUD'/file.name)
     for name in ('menu-power-saving','menu-escape'):shutil.copyfile(ROOT/ART/('GlobalHUD/'+name+'.png'),SITE/'media/GlobalHUD'/(name+'.png'))
     (SITE/'media/Title').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'Title/TitleSanctuary.png',SITE/'media/Title/TitleSanctuary.png')

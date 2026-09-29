@@ -1,6 +1,6 @@
 # HELLSCRIPT 첫 플레이 개선 구현
 
-작성일: 2026-09-27
+갱신일: 2026-09-29
 
 ## 목표와 적용 범위
 
@@ -16,7 +16,7 @@
 | D03 전투 피드백 | 실제 판단 지점의 사용 방해와 중단 사유, 배타적인 주 행동 시간, 실제 보조 효과를 기존 기록에 저장한다. | `CombatFeedback`, `CombatSimulation`, `CombatStatistics`, `GameUI.History` |
 | D04 결과 | 레벨·획득·해금·다음 행동을 먼저 보여 준다. 전체 로그와 반복 조건은 세부 화면에서 확인한다. | `FirstPlayRecommendation`, `GameUI.FirstPlay`, `GameUI.Repeat` |
 | D05 안내·실습 | 진행 중/완료/나중에 보기 탭, 현재 가능한 다음 행동, 직업별 한 조건 A/B 실습, 대장간 후보 목록을 제공한다. | `Tutorials`, `ClassPracticeLesson`, `GameUI.Tutorials`, `GameUI.TutorialPractice`, `GameUI.Comparison` |
-| D06 장비 정리 | 미확인 장비를 획득 순서로 연속 비교하고 잠금·장착·보관한다. 원래 필터와 스크롤을 보존한다. | `InventoryWindow.Review`, `InventoryQuery`, 기존 장비·창고 거래 |
+| D06 장비 정리 | 2026-09-29 요청으로 연속 비교를 제거했다. 개별 장비 상세·비교·잠금·장착을 사용한다. | `InventoryWindow.Dialogs`, 공통 장비 표시와 기존 거래 |
 | D07 보상 | 실제 지급 내역을 거래와 함께 저장하고, 개봉 직후 이름·수량·장비 비교를 유지한다. | `RewardBoxReceipt`, `RewardBoxes`, `GameStore.RewardBoxes`, `RewardBoxesWindow` |
 | D08 전투 표시 | 상세 로그를 기본 접힘으로 바꾸고 현재 행동을 표시한다. 신규 기기의 전체 지도 겹쳐 보기를 기본 해제한다. 가려진 영웅의 실루엣과 크기·형태를 보완한다. | `GameUI.CombatJournal`, `OverlayMapSettings`, `WorldView`, `HeroOcclusion.shader` |
 | D09 입장 | 목표와 물약·스킬 준비를 먼저 보여 주고, 일반 1배속 입장을 주 행동으로 둔다. 피로도 상세와 유료 입장 확인은 유지한다. | `RiftEntryWindow`, `RiftEntryRules` |
@@ -53,7 +53,7 @@
 
 ## 보상·장비 상태와 저장
 
-연속 비교는 시작 시 아이템 ID 목록을 고정하고, 이후 장착·보관된 물품을 건너뛴다. 비교와 이동만으로 장비를 자동 장착하거나 분해하지 않는다. 잠금·장착·보관은 기존 `GameStore` 거래가 재검증한다. 상세와 비교는 `ItemDetailView`, `EquipmentComparisonView`, `ItemComparison.Preview`를 공유한다.
+2026-09-29에 연속 비교 버튼과 전용 이전·다음·보관 흐름을 제거했다. 확보한 공간은 소지품 목록으로 돌렸다. 개별 상세·장착 비교는 `ItemDetailView`, `EquipmentComparisonView`, `ItemComparison.Preview`를 공유하고 잠금·장착은 기존 `GameStore` 거래가 재검증한다. 아래 연속 비교 검사 기록은 제거 전의 이력이다. 현재 검사는 개별 상세·비교·잠금을 사용한다. [현재 인벤토리 배치](Potion_Slots.md)를 따른다.
 
 영수증은 잔액의 전후 차이가 아니라 실제 지급 분기에서 만들어진다. 장비·보석·룬·강화석·제작 재료·골드·심연 주화·부위 코어와 운영 보상에서 지급하는 물약을 기록한다. 마지막 20건을 기존 보상 상태에 보관하며, 재실행 뒤에도 보상 상자의 ‘최근 개봉 내역’에서 다시 확인할 수 있다. 같은 요청의 재시도는 기존 영수증을 반환하며 다시 지급하지 않는다. 저장 실패 시 지급·상자 소비·영수증을 모두 커밋하지 않는다. 보관 한도 밖의 오래된 요청에는 획득 내역을 새로 추정하지 않는다.
 

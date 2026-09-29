@@ -1,6 +1,6 @@
 # Inventory potion slots and account balances
 
-Updated: 2026-09-23
+Updated: 2026-09-29
 
 Three small potion-only slots sit in the corner beside the weapon slots, and actual owned balances appear at the top, directly below the inventory title. Potions belong to each character; currencies and crafting materials belong to the shared account. This is connected to the existing Unity play-scene inventory, not just an HTML prototype.
 
@@ -34,6 +34,16 @@ A fixed strip directly below the title spans the full window width in portrait a
 
 The Abyssal Coin PNG is copied unchanged from the blacksmith prototype. Its [provenance](PotionSlotsEvidence/abyssal-coin-source.json) and [original generation prompt](PotionSlotsEvidence/abyssal-coin-generation-prompt.txt) are preserved. SHA-256 is `6f48ca86c7f47f886c7c009176200a30c0d942b5c6f610a2dc2631f8a7ee9097`; native alpha and 1,254×1,254 dimensions remain intact. Its existing prototype-candidate status and unverified model provenance remain unchanged.
 
+## Currency artwork and inventory space
+
+Since 2026-09-29, each currency name, icon and exact amount share one line. Landscape uses four columns in a fixed 24-unit strip; portrait uses two columns over two rows in 40 units to retain readable English names and large balances. Changing the amount never moves the name or icon.
+
+The Inventory heading decreases from 16 to 12. Permanent protection and drag guidance, continuous new-equipment review, and its dedicated navigation/storage flow are removed. Individual item details, locking and equipment comparison remain. Errors and equip feedback briefly overlay the grid without occupying a layout row. Selection, cancellation and feedback preserve its bounds. The item viewport gains 94 layout units in landscape and 88 in portrait. Slot size, capacity, positions, balances and salvage protection rules remain unchanged.
+
+The enhancement stone is silver ore with golden cracks. Eight cores share a dark crystal and metal reliquary, with crimson weapon, violet head, cobalt chest, orange hands, emerald feet, cyan belt, champagne-gold amulet and rose-pink ring auras. The shared `CurrencyIconView` supplies the inventory wallet and blacksmith core list. Wallet artwork occupies 36 units within the unchanged 42-unit row and fixed scrolling modal.
+
+Each image was generated/edited with the built-in `image_gen` tool. Original 1,254×1,254 PNG bytes and native alpha are retained without recoloring, matting or background removal; imported player textures use the 512 platform budget. [Prompts and provenance](../Art/Currency/generation.json) and [alpha validation](../Art/Currency/alpha-validation.json) are preserved. The tool did not return a model name, so use of `gpt-image-2` cannot be verified. **These are candidates with unverified model provenance, not release-approved art.** One enhancement-stone corner retains its original 1/255 alpha.
+
 ## Shared UI and validation
 
 The existing fixed `InventoryWindow` adapter reuses `EquipmentSlotView`, `UiTheme` and `UiFonts`. `PotionArt` shares bottle rendering between inventory and HUD. `InventoryWindow.Wallet` reads account state and refreshes through `StoreViewBinding` after successful saves. Potion bubbles keep their initial dimensions; selection changes never shift the bag.
@@ -54,3 +64,17 @@ Representative captures: [portrait](PotionSlotsEvidence/header-slots-440x956-ko-
 - [Account balance display](../../Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs)
 - [Exhaustion, persistence and combat tests](../../Assets/HELLSCRIPT/Tests/Editor/PotionLoadoutTests.cs)
 - [Native macOS input and layout acceptance](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.Potions.cs)
+
+## 2026-09-29 artwork and compact-layout validation
+
+Unity Edit Mode passed **72 tests with zero failures or skips**, on source including main's Hunt Edict and attendance-icon changes (`323dca88`). Coverage includes native PNG alpha, nine distinct sprite loads, the 512 texture budget, equipment transactions, salvage protection and localization. [XML](CurrencyInventoryEvidence/editmode.xml)
+
+The macOS development player passed **20 combinations**: 440×956, 956×440, 1440×810, 1440×900 and 1680×720; Korean/English; 100%/150% text. It checks inline labels and exact zero/int.MaxValue balances, eight slot-specific core images, an expanded fixed bag viewport, selection/toast stability, committed balance refresh, retained wallet scrolling and potion interactions. [Runtime result](CurrencyInventoryEvidence/runtime.txt)
+
+In the same build, a test character meeting the core-crafting unlock requirement walked to the blacksmith's actual interaction radius. All eight core images were verified in the crafting list. [Blacksmith](CurrencyInventoryEvidence/blacksmith.png)
+
+The existing landscape/portrait inventory acceptance also passed: individual/ring comparisons, equip and drag, locks, selected/bulk salvage, saved filters and restoration of the battle pause when opening/closing inventory. [Interactions](CurrencyInventoryEvidence/interactions.txt)
+
+Input uses native macOS uGUI raycasts and synthetic pointers with isolated saves. No CoplayDev Editor instance was connected, so validation used Unity batch tests and a standalone macOS build. Physical-phone input and performance remain untested.
+
+Screens: [landscape](CurrencyInventoryEvidence/landscape.png), [portrait](CurrencyInventoryEvidence/portrait.png), [wallet](CurrencyInventoryEvidence/wallet.png), [all cores at enlarged English text](CurrencyInventoryEvidence/cores-en-large.png).

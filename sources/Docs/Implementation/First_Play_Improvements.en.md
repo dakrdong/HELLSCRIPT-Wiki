@@ -1,6 +1,6 @@
 # HELLSCRIPT first-play improvements
 
-Updated: 2026-09-27
+Updated: 2026-09-29
 
 ## Goal and scope
 
@@ -16,7 +16,7 @@ Normal menu/pause fatigue, damage, enemy health, prices, drops and unlock tiers 
 | D03 feedback | Record actual blocked-use and interruption reasons, exclusive primary-action time and observed support effects in existing combat records. | `CombatFeedback`, `CombatSimulation`, `CombatStatistics`, `GameUI.History` |
 | D04 results | Show level, rewards, unlocks and one next action first. Logs and repeat conditions have dedicated detail screens. | `FirstPlayRecommendation`, `GameUI.FirstPlay`, `GameUI.Repeat` |
 | D05 guidance | In-progress/completed/later tabs, one available action, one-condition class A/B practice and an equipment list for forge practice. | `Tutorials`, `ClassPracticeLesson`, `GameUI.Tutorials`, `GameUI.TutorialPractice`, `GameUI.Comparison` |
-| D06 equipment | Review unread equipment continuously in acquisition order, then explicitly protect, equip or store it while retaining filters and scroll. | `InventoryWindow.Review`, `InventoryQuery`, existing equipment/storage transactions |
+| D06 Equipment organization | Continuous review was removed on 2026-09-29. Use individual item details, comparison, locking and equipping. | `InventoryWindow.Dialogs`, shared equipment views and existing transactions |
 | D07 rewards | Persist actual grants with the transaction and retain names, counts and equipment comparison after opening. | `RewardBoxReceipt`, `RewardBoxes`, `GameStore.RewardBoxes`, `RewardBoxesWindow` |
 | D08 visibility | Start the live log collapsed with current action visible. Default the large map overlay off for new devices. Improve hero occlusion silhouette and shapes. | `GameUI.CombatJournal`, `OverlayMapSettings`, `WorldView`, `HeroOcclusion.shader` |
 | D09 entry | Present goals, potions and skills first; normal 1× entry is primary. Keep fatigue details and paid-entry confirmation. | `RiftEntryWindow`, `RiftEntryRules` |
@@ -53,7 +53,7 @@ The corrected lesson was repeated at normal 1x for 60 seconds per attempt with t
 
 ## Equipment and reward persistence
 
-Continuous review freezes an item-ID queue and skips items subsequently equipped or stored. Inspection never automatically equips or dismantles anything. Existing `GameStore` transactions revalidate protection, equipping and storage. Detail/comparison reuse `ItemDetailView`, `EquipmentComparisonView` and `ItemComparison.Preview`.
+Continuous review and its previous/next/storage flow were removed on 2026-09-29 to expand the bag grid. Individual detail, comparison, lock and equip actions retain shared views and GameStore validation. Older continuous-review evidence below records the former behavior; current acceptance uses individual item comparison and locking. See [the current inventory layout](Potion_Slots.en.md).
 
 Receipts originate in the actual grant branches, not wallet differences. They cover equipment, gems, runes, enhancement stones, crafting materials, gold, premium currency, slot cores and operational potion supplies. The existing reward state retains the latest 20 openings, available after restart from Recent openings in the reward-box window. Retrying the same request returns its persisted receipt without granting again. Save failure commits neither rewards, box consumption nor a receipt. Receipts outside the retention limit are not reconstructed through another random roll.
 

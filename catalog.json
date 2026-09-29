@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T11:51:52+09:00",
+  "generatedAt": "2026-09-29T12:00:48+09:00",
   "databases": [
     {
       "id": "resources",
@@ -5043,6 +5043,420 @@
           "related": [
             "potion-slots",
             "potion-slots.en"
+          ]
+        },
+        {
+          "id": "currency-enhancement-stone",
+          "name": "강화석 / Enhancement stone",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-enhancement-stone.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 687522,
+            "SHA-256": "9bd26aed83c295036e199d9d8d2980fc8d0405e5530bfac0a933179ccf35dbde",
+            "오라 / Aura": "ivory-gold",
+            "Unity GUID": "44246e4cfee7940f4b54cb4ee4225275",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-enhancement-stone.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-enhancement-stone.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-weapon",
+          "name": "무기 코어 / Weapon core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-weapon.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1046072,
+            "SHA-256": "d8f24a0b615104e7ad67a5e36936d16aa2cf3efb0deaf75c2302fe812064d866",
+            "오라 / Aura": "crimson",
+            "Unity GUID": "5d73341c97bdb40d5ba88cd58c89c87f",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-weapon.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-weapon.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-head",
+          "name": "머리 코어 / Head core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-head.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1050490,
+            "SHA-256": "8961be064bf46f0830fad97bbea44c63d33769fe87d47f2d7cf24f1c3eaa59d0",
+            "오라 / Aura": "violet",
+            "Unity GUID": "bc4891d9d4c4f4ec083e91406e3ade7a",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-head.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-head.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-chest",
+          "name": "몸통 코어 / Chest core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-chest.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1047240,
+            "SHA-256": "91ef8b49cf192110e658d92c4015850452a5f78fe4674cfe4453fe5cada8f5c1",
+            "오라 / Aura": "cobalt-blue",
+            "Unity GUID": "f5e87ae709ab7461c9250d62d21d4f1b",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-chest.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-chest.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-hands",
+          "name": "손 코어 / Hands core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-hands.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1043615,
+            "SHA-256": "e7aae0b27a866e1e7b8cf7ede371a3d62d8b7399817f72199a04aa37cac5937d",
+            "오라 / Aura": "orange",
+            "Unity GUID": "059755b110bf14a848a4fcfd6fb480d0",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-hands.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-hands.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-feet",
+          "name": "발 코어 / Feet core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-feet.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1045605,
+            "SHA-256": "58efbe1185a5ce3d5bb53328f74053a029ce96018be971a3991e2bf3738f5716",
+            "오라 / Aura": "emerald",
+            "Unity GUID": "62c95e9c78446401d99663ff8b5fe0fe",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-feet.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-feet.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-belt",
+          "name": "벨트 코어 / Belt core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-belt.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1055073,
+            "SHA-256": "93969c5e9040f391076161d3ee96557af24794f3b420c59a3da8be18953d4256",
+            "오라 / Aura": "cyan",
+            "Unity GUID": "f31870a3f04c449b2a5e99099065a0fa",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-belt.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-belt.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-amulet",
+          "name": "목걸이 코어 / Amulet core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-amulet.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1045822,
+            "SHA-256": "985f55722a93bd3ce13a672adaac550df79e05294e20a93b1053a7ad63c6a431",
+            "오라 / Aura": "champagne-gold",
+            "Unity GUID": "6ff78390c2dc94026a768f1454124a46",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-amulet.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-amulet.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
+          ]
+        },
+        {
+          "id": "currency-core-ring",
+          "name": "반지 코어 / Ring core",
+          "category": "이미지 원본",
+          "summary": "강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.",
+          "fields": {
+            "원본 경로": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-ring.png",
+            "해상도": "1254 × 1254",
+            "색상 모드": "RGBA",
+            "완전 투명 픽셀": 1047661,
+            "SHA-256": "c38dad984e42aa0970bf008d8b4febbbdf24663711ab5aa84e1b7b8252a5e6c6",
+            "오라 / Aura": "rose-pink",
+            "Unity GUID": "13acde123f6a34c66812609f60be9795",
+            "제작 방법": "내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved",
+            "승인 상태": "모델 미확인 시안 / Candidate; exact model not returned",
+            "사용처": "CurrencyIconView → inventory wallet and blacksmith cores"
+          },
+          "source": {
+            "path": "Docs/Implementation/Potion_Slots.md",
+            "line": 1
+          },
+          "status": "임시 사용",
+          "image": {
+            "file": "GlobalHUD/currency-core-ring.png"
+          },
+          "assetPath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-core-ring.png",
+          "refs": [
+            {
+              "path": "Docs/Art/Currency/generation.json",
+              "line": 1
+            },
+            {
+              "path": "Docs/Art/Currency/alpha-validation.json",
+              "line": 1
+            },
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "potion-slots",
+            "potion-slots.en",
+            "core-crafting"
           ]
         },
         {

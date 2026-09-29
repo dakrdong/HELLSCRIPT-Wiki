@@ -73,7 +73,7 @@ namespace Hellscript
                 int slot=n,count=store.Data.cores[n];bool selected=coreSlot==n;float rw=w-28;
                 var b=Btn(list,"",0,y,rw,row-5,()=>SelectCore(slot));b.name="core-slot-"+slot;
                 UiTheme.Choice(b,selected,false);
-                Glyph(b.transform,"orb",10,16,34,gold);
+                CurrencyIconView.Create(b.transform,CurrencyIconView.CoreIcon(n),7,12,40);
                 Txt(b.transform,Loc.F("{0} 코어",GameCatalog.Slots[n]),53,8,rw-155,25,12,pale);
                 Txt(b.transform,selected?Loc.F("보유 {0:N0}개",count):"계정 공용",53,36,rw-155,23,10,muted);
                 if(selected)

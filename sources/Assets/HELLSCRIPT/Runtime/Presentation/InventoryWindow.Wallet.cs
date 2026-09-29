@@ -7,7 +7,7 @@ namespace Hellscript
 {
     public sealed partial class InventoryWindow
     {
-        const float WalletSummaryHeight=34;
+        float WalletSummaryHeight=>landscape?24:40;
         // Read account-owned balances only. This view never grants or transfers resources.
         IEnumerable<(string id,string label,int amount,string icon)> WalletRows()
         {
@@ -15,31 +15,33 @@ namespace Hellscript
             yield return ("gold",Loc.T("골드"),a.gold,"coin");
             yield return ("premium",Loc.T("심연 주화"),a.premium,"abyssal-coin");
             yield return ("materials",Loc.T("일반 재료"),a.materials,"vault");
-            yield return ("stones",Loc.T("강화석"),a.enhancementStones,"gem-solid");
-            for(int i=0;i<a.cores.Length;i++)yield return ("core-"+i,Loc.F("{0} 코어",GameCatalog.Slots[i]),a.cores[i],"orb");
+            yield return ("stones",Loc.T("강화석"),a.enhancementStones,"enhancement-stone");
+            for(int i=0;i<a.cores.Length;i++)yield return ("core-"+i,Loc.F("{0} 코어",GameCatalog.Slots[i]),a.cores[i],CurrencyIconView.CoreIcon(i));
         }
         void WalletFit(Text text)
         {
             text.horizontalOverflow=HorizontalWrapMode.Wrap;text.resizeTextForBestFit=true;
             text.resizeTextMinSize=8;text.resizeTextMaxSize=text.fontSize;
         }
-        void DrawWalletSummary(RectTransform footer)
+        void DrawWalletSummary(RectTransform strip)
         {
-            float cell=(footer.rect.width-16)/4;int index=0;
+            int columns=landscape?4:2,index=0;float cell=(strip.rect.width-16)/columns,rowHeight=WalletSummaryHeight/(4/columns);
             foreach(var row in WalletRows().Take(4))
             {
-                float x=8+index++*cell;
-                var label=Txt(footer,row.label,x+4,0,cell-8,14,8,muted);WalletFit(label);label.name="wallet-label-"+row.id;
-                WalletIcon(footer,row.icon,x+3,17,13);
-                var value=Txt(footer,row.amount.ToString("N0"),x+21,14,cell-26,19,11,gold);WalletFit(value);value.name="wallet-value-"+row.id;
+                float x=8+(index%columns)*cell,y=(index/columns)*rowHeight;index++;
+                var label=Txt(strip,row.label,x+3,y,cell*.53f,rowHeight,9,muted);WalletFit(label);label.name="wallet-label-"+row.id;
+                // Reserve for the longest balance; changing an amount never moves its icon or label.
+                float labelWidth=Mathf.Min(label.preferredWidth,cell*.53f);
+                label.rectTransform.sizeDelta=new Vector2(labelWidth,rowHeight);
+                float iconX=x+labelWidth+7;
+                WalletIcon(strip,row.icon,iconX,y+(rowHeight-16)/2,16);
+                var value=Txt(strip,row.amount.ToString("N0"),iconX+20,y,cell-labelWidth-32,rowHeight,11,gold);WalletFit(value);value.name="wallet-value-"+row.id;
             }
         }
         void WalletIcon(Transform parent,string icon,float x,float y,float size)
         {
-            if(icon!="abyssal-coin"){Glyph(parent,icon,x,y,size,icon=="coin"?gold:muted);return;}
-            var rect=Rect("Abyssal Coin",parent);Place(rect,x-2,y-2,size+4,size+4);
-            var art=rect.gameObject.AddComponent<Image>();art.sprite=Resources.Load<Sprite>("Art/GlobalHUD/currency-abyssal-coin");
-            art.preserveAspect=true;art.raycastTarget=false;
+            if(CurrencyIconView.Create(parent,icon,x,y,size)!=null)return;
+            Glyph(parent,icon,x,y,size,icon=="coin"?gold:muted);
         }
         public void ShowWallet()
         {
@@ -49,9 +51,9 @@ namespace Hellscript
             foreach(var row in WalletRows())
             {
                 var cell=Panel(content,"wallet-row-"+row.id,"28291e","1c2016","534a32");Place(cell,4,y,w-38,42);
-                WalletIcon(cell,row.icon,8,13,16);
-                var name=Txt(cell,row.label,32,0,(w-76)*.56f,42,11,pale);WalletFit(name);
-                var value=Txt(cell,row.amount.ToString("N0"),32+(w-76)*.56f,0,(w-76)*.44f,42,12,gold,TextAnchor.MiddleRight);
+                WalletIcon(cell,row.icon,4,3,36);
+                var name=Txt(cell,row.label,44,0,(w-88)*.56f,42,11,pale);WalletFit(name);
+                var value=Txt(cell,row.amount.ToString("N0"),44+(w-88)*.56f,0,(w-88)*.44f,42,12,gold,TextAnchor.MiddleRight);
                 WalletFit(value);value.name="wallet-detail-value-"+row.id;y+=46;
             }
             content.sizeDelta=new Vector2(0,y);

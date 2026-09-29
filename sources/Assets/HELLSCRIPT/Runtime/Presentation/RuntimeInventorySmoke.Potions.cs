@@ -42,6 +42,9 @@ namespace Hellscript
                 var text=texts.Single(t=>t.name=="wallet-value-"+row.Item1);
                 Require(text.text==row.Item2.ToString("N0"),"Wallet does not show the account balance: "+row.Item1);
                 Require(text.cachedTextGenerator.lineCount==1,"Wallet amount wraps or truncates: "+text.text);
+                var label=texts.Single(t=>t.name=="wallet-label-"+row.Item1);
+                Require(Mathf.Abs(Center(label.rectTransform).y-Center(text.rectTransform).y)<1,"Currency name and balance must share a line.");
+                Require(Bounds(label.rectTransform).xMax<Bounds(text.rectTransform).xMin,"Currency text overlaps its balance.");
                 if(details)Require(texts.Single(t=>t.name=="wallet-detail-value-"+row.Item1).text==row.Item2.ToString("N0"),"Detailed balance is stale: "+row.Item1);
             }
             Require(View.GetComponentsInChildren<Image>().Any(i=>i.name=="Abyssal Coin"&&i.sprite!=null&&i.sprite.texture==Resources.Load<Texture2D>("Art/GlobalHUD/currency-abyssal-coin")),"Original Abyssal Coin sprite was not imported.");
@@ -51,9 +54,19 @@ namespace Hellscript
             var summary=Bounds(Named("Wallet summary"));var header=Bounds(Named("Header"));var frame=Bounds(View.FrameRect);
             Require(Mathf.Abs(summary.yMax-header.yMin)<1&&Mathf.Abs(summary.xMin-frame.xMin)<1&&Mathf.Abs(summary.xMax-frame.xMax)<1,"Balances must span the top directly below the title.");
             Require(Bounds(Named("Character equipment")).yMax<=summary.yMin+.5f&&Bounds(Named("Bag panel")).yMax<=summary.yMin+.5f,"Content appears above the balance strip.");
+            Require(View.Find("inventory-review-new")==null,"Continuous comparison entry remains.");
+            Require(!View.GetComponentsInChildren<Text>().Any(t=>t.text==Loc.T("아이템을 캐릭터에게 끌어서 장착")||t.text==Loc.T("잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.")),"Permanent guidance still consumes the bag viewport.");
+            Require(View.BagScroll.viewport.rect.height>=230,"Expanded inventory should fit at least four rows.");
+            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name=="currency-icon-enhancement-stone"&&i.sprite!=null),"Missing enhancement stone art.");
             if(details)
             {
                 for(int i=0;i<a.cores.Length;i++)Require(texts.Single(t=>t.name=="wallet-detail-value-core-"+i).text==a.cores[i].ToString("N0"),"Core balance is stale.");
+                for(int i=0;i<8;i++)
+                {
+                    var art=View.DialogRect.GetComponentsInChildren<Image>().Single(im=>im.name=="currency-icon-"+CurrencyIconView.CoreIcon(i));
+                    Require(art.sprite!=null&&art.sprite.name=="currency-"+CurrencyIconView.CoreIcon(i),"Wrong per-slot core icon.");
+                    Require(art.rectTransform.pivot==new Vector2(.5f,.5f)&&art.preserveAspect&&!art.raycastTarget,"Currency icon is not centred/nonblocking.");
+                }
                 var scroll=View.DialogRect.GetComponentInChildren<ScrollRect>();Require(scroll.content.rect.height>scroll.viewport.rect.height,"Resource list should scroll inside a fixed sheet.");
             }
         }
@@ -61,7 +74,8 @@ namespace Hellscript
         {
             Prepare(HeroClass.Warrior);game.EnterPlaza(true);
             Require(game.Store.Transact(Guid.NewGuid().ToString("N"),"potion-slot-fixture",a=>
-            {a.Hero.potions.Activate();foreach(var def in PotionCatalog.All)a.Hero.potions.Set(def.id,12);a.premium=4321;a.enhancementStones=12345;for(int i=0;i<a.cores.Length;i++)a.cores[i]=i*13;return true;}),game.Store.Error);
+            {a.Hero.potions.Activate();foreach(var def in PotionCatalog.All)a.Hero.potions.Set(def.id,12);a.premium=4321;a.enhancementStones=12345;for(int i=0;i<a.cores.Length;i++)a.cores[i]=i*13;
+                a.Hero.highestClear=ContentUnlocks.Rules.features.Single(f=>f.id==ContentUnlocks.CoreCraft).stage;ContentUnlocks.Reconcile(a);return true;}),game.Store.Error);
             int checks=0;
             foreach(var size in new[]{(440,956),(956,440),(1440,810),(1440,900),(1680,720)})
             foreach(string language in new[]{"ko","en"})
@@ -71,9 +85,16 @@ namespace Hellscript
                 game.InterfaceScale.Apply(percent);game.UI.ApplyInterfaceScale();game.UI.ShowPlayInventory();yield return new WaitForEndOfFrame();yield return new WaitForEndOfFrame();
                 PotionGeometry();WalletGeometry();string suffix=$"{size.Item1}x{size.Item2}-{language}-{percent}";
                 var frame=Bounds(View.FrameRect);var bag=Bounds(View.BagScroll.viewport);var positions=Enumerable.Range(0,3).Select(i=>Bounds(Named("inventory-potion-"+i))).ToArray();
+                Click(View.Find("inventory-dismantle"));yield return new WaitForEndOfFrame();Require(Bounds(View.BagScroll.viewport)==bag,"Selection moved or resized the bag.");
+                Click(View.Find("inventory-dismantle"));yield return new WaitForEndOfFrame();
+                View.Toast("장비를 교체했습니다.");yield return new WaitForEndOfFrame();Require(Bounds(View.BagScroll.viewport)==bag,"Toast moved or resized the bag.");
+                View.Toast("");yield return new WaitForEndOfFrame();
                 if(percent==100)yield return Capture("slots-"+suffix);
-                string accountBefore=JsonUtility.ToJson(game.Store.Data);Click(View.Find("inventory-wallet"));yield return new WaitForEndOfFrame();PotionGeometry();WalletGeometry(true);
+                // Check the actual input callback before yielding to the unrelated periodic save clock.
+                string accountBefore=JsonUtility.ToJson(game.Store.Data);Click(View.Find("inventory-wallet"));
                 Require(accountBefore==JsonUtility.ToJson(game.Store.Data),"Inspecting resources mutated the account.");
+                yield return new WaitForEndOfFrame();PotionGeometry();WalletGeometry(true);
+                if(percent==100)yield return Capture("wallet-art-"+suffix);
                 var walletDialog=View.DialogRect;var walletBounds=Bounds(walletDialog);var balanceScroll=walletDialog.GetComponentInChildren<ScrollRect>();balanceScroll.verticalNormalizedPosition=0;yield return new WaitForEndOfFrame();
                 if(percent==150&&size.Item1==440)yield return Capture("wallet-scrolled-"+suffix);
                 Require(game.Store.Transact(Guid.NewGuid().ToString("N"),"wallet-refresh-fixture",a=>{a.gold=checks%2==0?int.MaxValue:0;a.premium=checks%2==0?int.MaxValue:0;a.materials=checks%2==0?int.MaxValue:0;a.enhancementStones=checks%2==0?int.MaxValue:0;return true;}),game.Store.Error);
@@ -120,8 +141,16 @@ namespace Hellscript
                 var root=game.UI.GlobalHud.transform.Find("HUD safe area/Potion "+i);var image=root.Find("Icon").GetComponent<Image>();var mesh=image.canvasRenderer.GetMesh();
                 Require(mesh.vertexCount>0&&Mathf.Abs(image.transform.TransformPoint(mesh.bounds.center).x-Center((RectTransform)root).x)<1,"HUD bottle is not centred.");
             }
+            // Inspect the same per-slot artwork at its second consumer after entering the NPC's actual radius.
+            game.RequestStation(TownStation.Blacksmith);float forgeUntil=Time.realtimeSinceStartup+15;
+            while(game.Town.Nearby!=TownStation.Blacksmith&&Time.realtimeSinceStartup<forgeUntil)yield return null;
+            Require(game.Town.Nearby==TownStation.Blacksmith,"Unable to reach the blacksmith for currency-art inspection.");
+            game.UI.ShowBlacksmith(3);yield return new WaitForEndOfFrame();yield return new WaitForEndOfFrame();
+            var forge=game.UI.BlacksmithPanel;Require(forge!=null&&forge.Tab==3&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.CoreCraft),"Unlocked core list did not open at the blacksmith.");
+            foreach(int slot in Enumerable.Range(0,8))Require(forge.GetComponentsInChildren<Image>().Any(i=>i.name=="currency-icon-"+CurrencyIconView.CoreIcon(slot)&&i.sprite!=null),"Blacksmith core art missing: "+slot);
+            yield return Capture("blacksmith-core-art");forge.Close();yield return new WaitForEndOfFrame();
             Require(Loc.MissingCount==0,"Missing potion translations: "+string.Join(";",Loc.Missing));
-            File.WriteAllText(Path.Combine(output,"potion-slots-result.txt"),"PASS: 20 resolution/language/text-scale combinations; three compact potion-only slots beside the weapon row, one shared gear, anchored fixed-size speech bubble, four exclusive persisted choices applying to all slots, direct owned-potion selection and clearing, duplicate prevention, equipment-drop rejection, save reload, HUD assignment and rendered bottle centring. Four account balance counters plus eight core balances: exact zero/int.MaxValue values, original Abyssal Coin art, no UI-only grants or spending, committed changes refresh the open sheet without moving it or resetting scroll. Native macOS with synthetic uGUI input and isolated saves; physical mobile not tested.\n");
+            File.WriteAllText(Path.Combine(output,"potion-slots-result.txt"),"PASS: 20 resolution/language/text-scale combinations; three compact potion-only slots beside the weapon row, one shared gear, anchored fixed-size speech bubble, four exclusive persisted choices applying to all slots, direct owned-potion selection and clearing, duplicate prevention, equipment-drop rejection, save reload, HUD assignment and rendered bottle centring. Four account balance counters plus eight core balances: exact zero/int.MaxValue values, one-line names/icons/exact balances, nine native-alpha currency icons, blacksmith core artwork at the actual NPC radius, enlarged fixed bag viewport with no guidance/review rail, selection/toast stability, original Abyssal Coin art, no UI-only grants or spending, committed changes refresh the open sheet without moving it or resetting scroll. Native macOS with synthetic uGUI input and isolated saves; physical mobile not tested.\n");
             Debug.Log("HELLSCRIPT_POTION_SLOTS_RUNTIME_OK");Application.Quit(0);
         }
     }
