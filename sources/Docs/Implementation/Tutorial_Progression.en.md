@@ -1,6 +1,6 @@
 # Tutorial implementation and validation
 
-Updated: 2026-09-28
+Updated: 2026-09-29
 
 The [design](../Design/Tutorial_Flow_Design.en.md) connects 38 guide groups to the existing game loop: dedicated map, real inventory equipment, town, rifts, Hunt Edict, skill changes and content practice.
 
@@ -32,6 +32,10 @@ Save schema 17 preserves released live-operations schema 16 saves and adds tutor
 Training, offline supplies, aspect imprinting and sweeping use existing free operations and limits. Tutorial support does not invent prerequisites, levels, legendary items, aspects or additional sweep attempts.
 
 ## UI and sequencing
+
+2026-09-29: The persistent top-left Adventure guide button was removed from town and battle while tutorial, quest and mission guidance is deferred for future design. The new-guide notification directing players to that button was also removed. Attendance keeps its existing size and position. This change only removes the HUD shortcut; existing first-map progression, saved records and directly opened content journals remain intact.
+
+This HUD change passed a macOS development build and the existing attendance runtime acceptance: 56 layout checks covering five sizes, KO/EN and 100%/150% reading scale, 98 clicks and 22 drags. The [town capture](AdventureGuideRemovalEvidence/plaza-without-guide.png) and [landscape battle capture](AdventureGuideRemovalEvidence/battle-without-guide.png) confirm the guide button is absent and attendance remains. Shared UI checks and all nine validator tests passed. Focused Edit Mode results were 55 passed and one failed; the existing skill/training test failed identically on the unchanged baseline. See the [validation summary](AdventureGuideRemovalEvidence/validation.json) and [baseline comparison](AdventureGuideRemovalEvidence/test-comparison.json). Physical mobile was not tested; Web and APK were not rebuilt.
 
 All new text uses the existing Korean keys and English localization table. Equipment and encounter variants have separate, localized explanations.
 

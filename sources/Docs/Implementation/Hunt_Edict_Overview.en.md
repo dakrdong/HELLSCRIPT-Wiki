@@ -15,7 +15,23 @@ This does not turn automatic combat off. `GameStore.SetRecommendedEdict` persist
 
 On resolves a detached execution policy from default options and the new-hero Balanced style. Skill ranks and equipped skills remain unchanged; use conditions, attack order and global policies use defaults. Combat, loot, exploration and repeat hunting share this resolved document. Sanctuary potion restocking and equipment recommendations read the same defaults. Default equipment recommendations are disabled, even if the stored custom configuration enables them.
 
-Off restores the stored custom policies. Authored skill options, presets and pending edits are preserved. The mode belongs to the hero and is not included in share codes. Saving a custom option or preset while defaults are active does not switch modes; turn defaults off to use those settings. Training/comparison copies cannot change the actual hero's mode.
+Off restores the stored custom policies. Authored skill options, presets and pending edits are preserved. The mode belongs to the hero and is not included in share codes. Training/comparison copies cannot change the actual hero's mode.
+
+### Editing lock while defaults are active
+
+On dims and disables every category tab except Overview, all Overview content, and the Save/Revert footer. Content scrolling and existing inertia stop as well. The Overview tab, **Use default settings** button, and window close/back actions remain available. The status message stays fully visible.
+
+Switching Off restores category navigation, content and scrolling. Save/Revert regain their availability according to the existing dirty state. Switching modes neither saves nor discards the draft. Closing with pending edits keeps the existing confirmation flow. Reopening the window or using a skill/share deep link while defaults are On keeps Overview visible so the mode switch remains reachable.
+
+`HuntEdictWindow` uses `CanvasGroup` and shared `UiButton` availability for both presentation and input. Disabled actions reject pointer and keyboard submission. The previously implemented mode transaction and effective combat policies are unchanged.
+
+On 2026-09-29, the macOS Development build passed 20 combinations: 440×956, 956×440, 1600×900, 1600×1000 and 2100×900; Korean/English; text at 100%/150%. Actual uGUI raycasts, pointer actions and keyboard submit events verified disabled input, retained layout, restoration after Off and preservation of unsaved edits. A fresh process and the share deep link also retained the On lock. Physical mobile devices were not tested. [Interaction results](HuntEdictDefaultLockEvidence/sections-runtime.txt) · [Restart results](HuntEdictDefaultLockEvidence/sections-restart.txt)
+
+All 98 focused Edit Mode cases covering defaults, Overview, skill presets, shared UI and localization passed, along with nine shared UI contract checks. [Edit Mode results](HuntEdictDefaultLockEvidence/editmode.xml)
+
+- [Off: editing restored](HuntEdictDefaultLockEvidence/overview-custom.png) · [Portrait, English 150%](HuntEdictDefaultLockEvidence/locked-440x956-en-150.png) · [Landscape, Korean 150%](HuntEdictDefaultLockEvidence/locked-956x440-ko-150.png)
+
+![Defaults On: other categories and Overview content disabled](HuntEdictDefaultLockEvidence/overview-defaults.png)
 
 Sources: [default resolution](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictDefaults.cs), [save transaction](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.Edict.cs), [combat integration](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictDrive.cs).
 

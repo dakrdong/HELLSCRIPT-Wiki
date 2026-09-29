@@ -111,7 +111,7 @@ The Google sign-in dialog in `TitleScreenView` remains part of the existing full
 
 ## Tutorial guidance
 
-`TutorialJournalWindow` uses the shared content template. Practice selection distinguishes owned equipment from recipe definitions and reuses `ItemDetailView`. Native inventory and `GameStore` own actual equipment mutations. `TutorialAnchorRing` attaches to logical button IDs and owned inventory cells, does not intercept input and never mutates account state. Brief combat guidance and the entry button use the existing HUD adapter. First-map explanations and first-use content guides use the story dialogue below. See [implementation](Tutorial_Progression.en.md).
+`TutorialJournalWindow` uses the shared content template. Practice selection distinguishes owned equipment from recipe definitions and reuses `ItemDetailView`. Native inventory and `GameStore` own actual equipment mutations. `TutorialAnchorRing` attaches to logical button IDs and owned inventory cells, does not intercept input and never mutates account state. Brief combat guidance uses the existing HUD adapter. Since 2026-09-29, the top-left Adventure guide HUD button and notifications directing players to it are no longer displayed. First-map explanations and first-use content guides use the story dialogue below. See [implementation](Tutorial_Progression.en.md).
 
 ## Rift victory adapter
 

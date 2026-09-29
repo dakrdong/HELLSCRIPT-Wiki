@@ -1,0 +1,47 @@
+{
+  "baseCommit": "323dca8836bbdf37f67d1ba382e5317787128461",
+  "unity": "6000.6.0f1",
+  "editorAccess": "CoplayDev MCP reported zero instances; used existing Unity batch and native acceptance workflow",
+  "uiContract": "passed",
+  "uiContractTests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "editMode": {
+    "passed": 55,
+    "failed": 1,
+    "skipped": 0,
+    "baselineReproducedFailure": true,
+    "comparison": "test-comparison.json"
+  },
+  "macOSBuild": "succeeded",
+  "nativeRuntime": {
+    "passed": true,
+    "clicks": 98,
+    "drags": 22,
+    "pageLayoutChecks": 56,
+    "eventIconComparisons": 26,
+    "sizes": [
+      "440x956",
+      "956x440",
+      "1440x810",
+      "1440x900",
+      "1680x720"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "readingScalePercent": [
+      100,
+      150
+    ],
+    "visualInspection": [
+      "town 1440x810: no top-left Adventure guide shortcut",
+      "battle 1440x810, 956x440 and 440x956: no top-left Adventure guide shortcut; attendance remains"
+    ],
+    "runtimeErrors": []
+  },
+  "physicalMobile": "not tested",
+  "webAndApk": "not rebuilt"
+}

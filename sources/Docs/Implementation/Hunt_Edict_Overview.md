@@ -15,7 +15,23 @@
 
 On일 때 `HuntEdictDefaults`는 기본 옵션과 신규 영웅의 균형 전투 방식으로 실행용 복사본을 만듭니다. 스킬 등급·장착은 유지하고, 사용 조건·공격 순서·전역 정책은 기본값을 적용합니다. 전투·전리품·탐색·반복 사냥은 같은 실행 문서를 읽으며, 성소 물약 보충과 추천 장비 착용도 같은 기본 정책을 사용합니다. 기본 추천 착용은 꺼져 있으므로 사용자 설정만 켜 둔 추천 착용은 이 모드에서 실행되지 않습니다.
 
-Off로 바꾸면 보관된 사용자 정책을 다시 읽습니다. 사용자가 작성한 스킬 설정·프리셋·미저장 편집본을 덮어쓰지 않습니다. 모드는 영웅의 실행 설정이며 공유 코드에 포함하지 않습니다. On인 동안 옵션이나 프리셋을 저장해도 모드는 유지되며 Off로 전환해야 그 사용자 설정이 적용됩니다. 훈련·비교의 복사본에서는 실제 영웅의 모드를 변경할 수 없습니다.
+Off로 바꾸면 보관된 사용자 정책을 다시 읽습니다. 사용자가 작성한 스킬 설정·프리셋·미저장 편집본을 덮어쓰지 않습니다. 모드는 영웅의 실행 설정이며 공유 코드에 포함하지 않습니다. 훈련·비교의 복사본에서는 실제 영웅의 모드를 변경할 수 없습니다.
+
+### 기본 세팅 사용 중 편집 잠금
+
+On일 때는 요약을 제외한 분류 탭, 요약의 모든 본문, 하단 저장·되돌리기를 흐리게 표시하고 조작을 막습니다. 본문의 스크롤과 남아 있던 스크롤 관성도 멈춥니다. 요약 탭과 **기본 세팅 적용** 버튼, 창의 닫기·뒤로가기는 유지합니다. 상태 문구는 흐려지지 않아 현재 사용 중인 설정을 읽을 수 있습니다.
+
+기본 세팅을 Off로 바꾸면 분류·본문·스크롤이 다시 활성화되고, 저장·되돌리기는 기존 미저장 여부에 맞게 복원됩니다. 모드 전환으로 편집본을 저장하거나 버리지 않습니다. 닫을 때 미저장 내용이 있으면 기존 확인 창을 사용합니다. 기본 세팅 On 상태로 창을 다시 열거나 스킬·공유 화면으로 바로 진입해도 요약에 머물러 모드 버튼을 찾을 수 있습니다.
+
+표시와 입력 잠금은 `HuntEdictWindow`가 기존 `CanvasGroup`·공통 `UiButton` 동작으로 처리합니다. 비활성 조작은 포인터와 키보드 실행을 거부하며, 기본 세팅의 저장·실행 정책은 앞서 구현한 거래를 그대로 사용합니다.
+
+2026-09-29 macOS 개발 빌드에서 440×956·956×440·1600×900·1600×1000·2100×900, 한국어·영어, 글자 100%·150%의 20개 조합을 확인했습니다. 실제 uGUI 레이캐스트·포인터 조작과 키보드 실행 이벤트로 비활성 입력 차단, 본문 배치 유지, Off 후 복원, 미저장 편집본 보존을 검증했습니다. 별도 프로세스 재실행과 공유 화면 바로가기도 On 상태를 유지합니다. 모바일 실기기 검증은 하지 않았습니다. [조작 결과](HuntEdictDefaultLockEvidence/sections-runtime.txt) · [재실행 결과](HuntEdictDefaultLockEvidence/sections-restart.txt)
+
+기본 정책·요약·스킬 프리셋·공통 UI·번역의 Edit Mode 검사 98개와 공통 UI 계약 검사 9개도 통과했습니다. [Edit Mode 결과](HuntEdictDefaultLockEvidence/editmode.xml)
+
+- [Off: 편집 복원](HuntEdictDefaultLockEvidence/overview-custom.png) · [세로·영어 150%](HuntEdictDefaultLockEvidence/locked-440x956-en-150.png) · [가로·한국어 150%](HuntEdictDefaultLockEvidence/locked-956x440-ko-150.png)
+
+![기본 세팅 On: 다른 탭과 요약 본문 비활성화](HuntEdictDefaultLockEvidence/overview-defaults.png)
 
 원본: [기본 정책 해석](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictDefaults.cs), [저장 거래](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.Edict.cs), [전투 적용](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictDrive.cs).
 
