@@ -1,6 +1,6 @@
 # Class skill abilities and equipment integration
 
-Updated: 2026-09-23 · [한국어](Class_Skill_Runtime.md)
+Updated: 2026-09-29 · [한국어](Class_Skill_Runtime.md)
 
 **Status: native Hunt Edict skill tree integrated with player persistence and combat.**
 
@@ -55,6 +55,8 @@ The final full Edit Mode run recorded 3,273 passed, 2 failed and 0 skipped out o
 ## Runtime data and compatibility layer
 
 `tools/class_skill_runtime.py` compiles the approved design, `runtime_parameters.json` and `use_options.json`. `ClassSkills.json` contains bilingual names, rank-one descriptions, numeric parameters, automatic-use conditions and equipment/set IDs. `ReadClassSkills` returns invested-rank calculations separately; equipment-granted ranks do not consume invested points.
+
+When a skill's player-facing text must differ from the design text, its `runtime_parameters.json` entry carries a bilingual `description`. The same entry names the rift victory result metric (`resultMetric`, `resultSecondaryMetric`). On 2026-09-27 two commits edited `ClassSkills.json` directly: `a62a12cb` dropped the "In the new-ability validation path" qualifier from W02's in-game text, and `1acade60` added result metrics to 17 skills. These values moved into the sources on 2026-09-29, so `build` now reproduces the committed file byte for byte. The Warrior skill design page keeps the qualifier to distinguish the legacy path. Do not edit `ClassSkills.json` by hand; change the sources, then run `python3 tools/class_skill_runtime.py build` and `check`.
 
 The original eighteen `GameCatalog` actives and their `SkillEffects` calculations remain intact. Original full-file fingerprints remain historical provenance. Files extended with save fields or lookup paths are compared against the original constructor arguments in `legacy_definitions.json`, rather than updating hashes to conceal changed legacy values.
 

@@ -1,6 +1,6 @@
 # 스킬 능력과 장비 연동 구현
 
-수정일: 2026-09-23 · [English](Class_Skill_Runtime.en.md)
+갱신일: 2026-09-29 · [English](Class_Skill_Runtime.en.md)
 
 **상태: 사냥 칙령 스킬 트리와 플레이어 저장·전투 연결.**
 
@@ -55,6 +55,8 @@ macOS 개발 빌드는 오류 0건으로 생성됐습니다. 실제 실행 파�
 ## 실행 데이터와 호환 계층
 
 `tools/class_skill_runtime.py`가 확정 기획, `runtime_parameters.json`, `use_options.json`에서 실행 데이터를 생성합니다. `ClassSkills.json`은 한국어·영어 이름, 1등급 설명, 수치, 자동 사용 조건, 장비·세트 ID를 함께 제공합니다. 투자 등급에 따른 계산값은 `ReadClassSkills`에서 별도로 반환하며, 장비가 주는 기존 기술 보너스 등급은 투자 예산을 소비하지 않습니다.
+
+플레이어에게 보이는 설명을 기획 설명과 다르게 두어야 하는 스킬은 `runtime_parameters.json`의 해당 스킬 항목에 한국어·영어 `description`을 적습니다. 균열 승리 결과창이 스킬마다 읽는 표시 역할(`resultMetric`, `resultSecondaryMetric`)도 같은 항목에 적습니다. 2026-09-27에는 두 커밋이 `ClassSkills.json`을 직접 고쳤습니다. `a62a12cb`는 W02 설명에서 "신규 능력 검증 경로에서는"이라는 한정 문구를 뺐고, `1acade60`은 스킬 17개에 표시 역할을 추가했습니다. 2026-09-29에 이 값들을 원본으로 옮겼으므로, 이제 `build`로 생성한 파일은 커밋된 파일과 바이트 단위로 같습니다. 전사 스킬 기획 문서는 기존 경로와 구분하려고 한정 문구를 그대로 둡니다. `ClassSkills.json`은 직접 고치지 않으며, 원본을 수정한 뒤 `python3 tools/class_skill_runtime.py build`와 `check`를 실행합니다.
 
 기존 `GameCatalog`의 액티브 18개와 `SkillEffects`의 기존 계산을 보존합니다. 원본 기획의 파일 지문은 당시 근거로 남겨 두고, 필드·조회 경로가 추가된 파일은 `legacy_definitions.json`의 기존 생성자 인수와 비교합니다. 기존 장비 수치가 바뀌어도 지문을 새 값으로 덮어서 통과시키지 않습니다.
 
