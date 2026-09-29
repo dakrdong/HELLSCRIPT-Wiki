@@ -13,6 +13,12 @@ namespace Hellscript
             mesh.Clear();
             switch(symbol)
             {
+                case "hint-up":
+                    var tip=GetPixelAdjustedRect();
+                    mesh.AddVert(new Vector3(tip.xMin,tip.yMin),color,Vector2.zero);
+                    mesh.AddVert(new Vector3(tip.center.x,tip.yMax),color,Vector2.zero);
+                    mesh.AddVert(new Vector3(tip.xMax,tip.yMin),color,Vector2.zero);
+                    mesh.AddTriangle(0,1,2);break;
                 case "gear":
                     Path(mesh,9,2,15,2,16,5,19,5,22,10,20,12,22,14,19,19,16,19,15,22,9,22,8,19,5,19,2,14,4,12,2,10,5,5,8,5,9,2);
                     Path(mesh,10,8,14,8,16,10,16,14,14,16,10,16,8,14,8,10,10,8);break;

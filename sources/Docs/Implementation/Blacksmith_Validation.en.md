@@ -4,6 +4,27 @@ Validation date: 2026-09-22
 
 [한국어](Blacksmith_Validation.md) · [Implementation, resources and migration](Blacksmith_Unity_Integration.en.md)
 
+## 2026-09-29: Locked services and consistent navigation
+
+Reroll, slot enhancement, equipment enhancement, core crafting and equipment crafting now share `UiButtonRole.Tab` and the common theme. All five controls have the same dimensions in landscape. Portrait uses two rows of three and two equally sized controls. The separate small footer crafting button is removed. Once unlocked, equipment crafting still opens the existing crafting page.
+
+- Access and explanations come directly from `ContentUnlocks.Has` and `ContentUnlocks.Condition`. Unlock thresholds and grandfathered account access remain unchanged. Equipment crafting follows `RareCraft`.
+- Locked services have a dark face and an illustrated brass lock. Pointer clicks and keyboard submission remain available for explanations; navigation and transactions are blocked.
+- A small bubble below the pressed button shows the real requirement for three seconds, stays inside the safe frame and does not intercept input. Repeated activation renews the timer; Esc dismisses the bubble first.
+- Locked activation preserves the current equipment, affix and scroll state. Rotation, language and text-size changes re-anchor an open bubble. Unlocking removes the lock and restores the existing route.
+- A new account with no available service sees a short introduction without selecting a locked tab. Otherwise the first available service is used for the initial page.
+
+The artwork source is the vector mesh in `UiLockGraphic.cs`. Following `UiButtonFace` and `StorageChestGraphic`, it draws the brass face, iron backplate, shackle, rivets and keyhole directly with shared theme colors and no input interception. No raster-generation model, external art or texture importer was used. The existing blacksmith canvas, fonts, safe area, window host and equal-width three-column content remain the owners.
+
+### Locked-navigation validation
+
+- Final focused Edit Mode: **110 passed, zero failed/skipped**, covering buttons, graphics setup, account unlocks and localization. [XML](ForgeNavigationEvidence/editmode.xml)
+- The extended suite including tutorials passed 139 of 140 tests. `EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift` cannot find a level-3 active skill. The same failure was reproduced on base `412be7dc` with every blacksmith source change removed. Skill rules and that test were left untouched. [Extended results](ForgeNavigationEvidence/extended-editmode.xml) · [Baseline comparison](ForgeNavigationEvidence/baseline-skill-failure.xml)
+- macOS development build: zero build errors. Native uGUI raycasts/events verified all five locked services, exact conditions, three-second expiry, keyboard submission, back handling, unchanged currency, R1 access, selected equipment retention, every unlocked service and the existing crafting route. [Runtime](ForgeNavigationEvidence/runtime.txt) · [Build](ForgeNavigationEvidence/build.txt)
+- Verified 440×956, 956×440, 1600×900, 1440×900 and 1680×720 × KO/EN × 100%/150% text: 20 combinations of matching controls, text bounds and re-anchored hints. Only tutorial/attendance presentation was bypassed in the isolated QA account; content progression started at R0. No MCP Editor was connected, so existing batch/native tools were used. Physical mobile devices were not tested. [Scope and screenshot hashes](ForgeNavigationEvidence/verification.json) · [Source hashes](ForgeNavigationEvidence/source-fingerprints.json)
+
+[All locked on PC](ForgeNavigationEvidence/all-locked-pc.png) · [Landscape hint](ForgeNavigationEvidence/locked-956-ko-100.png) · [Portrait](ForgeNavigationEvidence/locked-440-ko-100.png) · [English at 150%](ForgeNavigationEvidence/locked-440-en-150.png) · [Unlocked](ForgeNavigationEvidence/all-unlocked-landscape.png)
+
 ## Environment and evidence
 
 Validation uses Unity 6000.6.0f1 Edit Mode tests and a macOS development player. Branch `codex/blacksmith-runtime` is an isolated checkout of the committed inventory foundation with `main` merged. The original running editor, uncommitted inventory work and existing saves are untouched.

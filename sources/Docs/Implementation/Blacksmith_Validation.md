@@ -4,6 +4,27 @@
 
 [English](Blacksmith_Validation.en.md) · [구현·리소스·이전 명세](Blacksmith_Unity_Integration.md)
 
+## 2026-09-29: 잠긴 기능 안내와 탐색 버튼 통일
+
+대장간의 옵션 변경·장착 슬롯 강화·장비 강화·코어 제작·장비 제작은 같은 `UiButtonRole.Tab`과 공통 테마를 사용한다. 가로에서는 다섯 버튼의 너비와 높이가 같으며, 세로에서는 같은 크기의 버튼을 3개·2개씩 두 줄에 배치한다. 기존 세로 하단의 작은 제작 버튼은 제거했다. 장비 제작은 해금 후 기존 제작 화면으로 이동한다.
+
+- `ContentUnlocks.Has`와 `ContentUnlocks.Condition`을 그대로 사용한다. 해금 단계나 이전 계정의 개방 기록은 바꾸지 않는다. 장비 제작 버튼은 `RareCraft`의 해금 조건을 따른다.
+- 잠긴 버튼은 어두운 면과 황동 자물쇠로 표시한다. 안내를 볼 수 있도록 클릭·키보드 제출은 유지하고, 화면 전환과 거래만 차단한다.
+- 누른 버튼 아래에 실제 해제 조건을 3초간 표시한다. 말풍선은 안전 영역 안으로 이동하고 입력을 가로채지 않는다. 다시 누르면 표시 시간을 갱신하며, Esc는 말풍선을 먼저 닫는다.
+- 현재 장비·옵션 선택과 스크롤은 잠긴 버튼을 눌러도 유지한다. 화면 방향·언어·글자 크기가 바뀌면 말풍선을 새 버튼 위치에 맞춘다. 해금 뒤에는 잠금 표시가 사라지고 기존 기능으로 진입한다.
+- 처음 방문해 모든 기능이 잠겨 있으면 선택된 탭 없이 짧은 안내를 표시한다. 이용 가능한 기능이 있으면 그 기능을 기본 화면으로 사용한다.
+
+자물쇠 원본은 `UiLockGraphic.cs`의 벡터 메시다. 기존 `UiButtonFace`·`StorageChestGraphic`과 같은 방식으로 황동 앞면, 철제 뒷판, 경첩, 리벳과 열쇠구멍을 직접 그렸다. 공통 테마 색을 사용하고 입력을 받지 않는다. 래스터 생성 모델, 외부 원화와 텍스처 임포트는 사용하지 않았다. 대장간 어댑터의 기존 캔버스·폰트·안전 영역·창 관리자와 1:1:1 본문 배치를 유지한다.
+
+### 잠금 탐색 검증 결과
+
+- 최종 관련 Edit Mode **110개 통과, 실패·건너뜀 0개**. 버튼, 그래픽 구성, 계정 해금과 번역을 검사했다. [검사 XML](ForgeNavigationEvidence/editmode.xml)
+- 튜토리얼까지 넓힌 검사는 140개 중 139개 통과·1개 실패다. 실패한 `EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift`는 레벨 3 액티브 스킬을 찾지 못한다. 대장간 변경을 모두 제외한 기반 `412be7dc`에서도 같은 실패를 재현했다. 스킬 규칙과 이 검사는 수정하지 않았다. [확장 검사](ForgeNavigationEvidence/extended-editmode.xml) · [기반 비교](ForgeNavigationEvidence/baseline-skill-failure.xml)
+- macOS 개발 빌드 오류 0개. 다섯 기능의 잠금·정확한 조건·3초 만료·키보드 제출·뒤로가기·재화 무변경, R1 해금과 기존 장비 선택 유지, 전체 기능 해금 후 탐색·기존 제작 화면 이동을 실제 uGUI 레이캐스트와 이벤트로 확인했다. [실행 결과](ForgeNavigationEvidence/runtime.txt) · [빌드](ForgeNavigationEvidence/build.txt)
+- 440×956, 956×440, 1600×900, 1440×900, 1680×720 × 한국어/영어 × 100%/150%의 20조합에서 버튼 크기, 글자 잘림, 말풍선 위치와 갱신을 검사했다. 새 계정의 튜토리얼·출석 안내만 검증 계정에서 생략하고, 콘텐츠 개방 기록은 R0에서 시작했다. 연결된 MCP 에디터가 없어 기존 배치 검사·macOS 실행 도구를 사용했다. 모바일 실기기는 검증하지 않았다. [범위와 캡처 해시](ForgeNavigationEvidence/verification.json) · [소스 해시](ForgeNavigationEvidence/source-fingerprints.json)
+
+[모두 잠긴 PC 화면](ForgeNavigationEvidence/all-locked-pc.png) · [가로 말풍선](ForgeNavigationEvidence/locked-956-ko-100.png) · [세로 화면](ForgeNavigationEvidence/locked-440-ko-100.png) · [영어 150%](ForgeNavigationEvidence/locked-440-en-150.png) · [해금 후](ForgeNavigationEvidence/all-unlocked-landscape.png)
+
 ## 실행 환경과 근거
 
 Unity 6000.6.0f1의 Edit Mode 검사와 macOS 개발 빌드를 사용한다. 구현 브랜치는 `codex/blacksmith-runtime`이며, 커밋된 인벤토리 기반에 `main`을 병합한 별도 작업 디렉터리에서 검증한다. 원래 체크아웃의 실행 중인 에디터, 미커밋 인벤토리 변경과 기존 저장 파일은 수정하지 않는다.
