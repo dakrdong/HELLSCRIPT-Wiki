@@ -4,6 +4,32 @@ Date: 2026-09-23 · [한국어](Rift_Entry.md)
 
 The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. Existing sweep, training and repeat settings remain accessible through rift services.
 
+## 2026-09-29 portal return and re-entry
+
+The battle HUD and observation menu use **Return through portal**. Confirmation saves the unfinished rift and returns to the sanctuary without finalizing it as a failure. Tutorial and training exit behavior is preserved.
+
+When a saved rift exists, the entry window and existing sanctuary/rift-service menus show two actions.
+
+| Action | Result |
+| --- | --- |
+| Enter portal | Continues the same rift ID and progress, preserving entry speed without charging admission again. |
+| Restart rift | Starts a new rift at the selected stage at normal speed. The previous portal is replaced only after the new admission is saved. |
+
+Closing or cancelling entry retains the portal. Admission checks, preparation or save failures retain the prior rift. Restart authorization is bound to the exact owned rift ID so stale requests cannot discard a newer portal. Rift time and participation fatigue do not advance while the hero is in the sanctuary.
+
+`GameStore.SuspendRift` owns return persistence; re-entry reuses `CommitRiftEntry`. Potion preparation receives the same authorized replacement ID. [Skill-preset edits](Hunt_Edict_Quick_Presets.en.md) made while a portal remains also update the policy used when continuing that rift.
+
+
+## Portal and preset-save verification, 2026-09-29
+
+**140 focused Unity Edit Mode tests**, shared UI ownership, **9 UI regression tests**, and a macOS Development build with zero errors passed. See the [validation summary](EdictPortalSaveEvidence/validation.json) and [test results](EdictPortalSaveEvidence/editmode.xml).
+
+The macOS game used isolated saves and uGUI raycasts with synthetic pointer down/up/click events. Checks covered progress/cooldown preservation on portal return, actual preset activation and auto-save in town, closing entry without deleting the portal, and resuming the same rift in a fresh process. An injected admission write failure preserved the previous portal and disk; a successful retry left only the new rift. [Runtime checks](EdictPortalSaveEvidence/portal-runtime.txt) · [Independent-process resume/restart](EdictPortalSaveEvidence/portal-restart.txt).
+
+**20 layout combinations** covered 440×956, 956×440, 1600×900, 1600×1000 and 2100×900, Korean/English and 100%/150% text. Both actions remained visible, enabled and within the frame. [Portrait](EdictPortalSaveEvidence/portal-440-ko-100.png) · [Landscape English 150%](EdictPortalSaveEvidence/portal-956-en-150.png) · [Saved preset](EdictPortalSaveEvidence/portal-preset-saved.png) · [Fresh rift](EdictPortalSaveEvidence/portal-restarted.png).
+
+This is not a full-game suite pass. Four failures in the separately run legacy `CurrentBuildSaveTests` reproduced on unmodified main `b1989282`; see the [baseline evidence](EdictPortalSaveEvidence/baseline-legacy.json). Physical mobile was not tested. The injected save error and existing URP shader warnings remain in the original logs.
+
 ## Shared UI and state ownership
 
 `RiftEntryWindow` starts from the new-content generator and opens `ContentWindowView` with `EquipmentViewSource.Owned`. Shared header, navigation, scrolling body, fixed actions, safe area and window lifecycle are preserved. Portrait stacks the illustration above preparation; landscape fixes it on the left and independently scrolls preparation on the right. Pickers use the same shell's optional maximum size.

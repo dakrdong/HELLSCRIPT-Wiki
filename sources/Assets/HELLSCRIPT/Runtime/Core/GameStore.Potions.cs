@@ -25,12 +25,14 @@ namespace Hellscript
                 if(!Enum.IsDefined(typeof(PotionFallback),fallback))throw new ArgumentException("Invalid potion fallback.");
                 hero.potions.fallback=fallback;hero.potions.fallbackVersion=1;hero.potions.revision++;return true;
             });
-        public bool PreparePotions(string heroId,string visit)
+        public bool PreparePotions(string heroId,string visit,string replaceRunId=null)
         {
             try
             {
                 var hero=Data.heroes.Single(h=>h.id==heroId);
-                if(Data.suspendedRun!=null&&!RepeatHunt.Terminal(Data.suspendedRun))throw new InvalidOperationException("물약 구매는 성소에서만 가능합니다.");
+                bool replacing=heroId==Data.Hero.id&&RiftEntryRules.CanReplace(Data,replaceRunId);
+                if(replaceRunId!=null&&!replacing||Data.suspendedRun!=null&&!RepeatHunt.Terminal(Data.suspendedRun)&&!replacing)
+                    throw new InvalidOperationException("물약 구매는 성소에서만 가능합니다.");
                 var staged=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(Data));var candidate=staged.heroes.Single(h=>h.id==heroId);
                 var policy=PotionPolicy.Resolve(hero);string before=JsonUtility.ToJson(hero.potions);
                 PotionRestock.Apply(staged,candidate,visit,policy);

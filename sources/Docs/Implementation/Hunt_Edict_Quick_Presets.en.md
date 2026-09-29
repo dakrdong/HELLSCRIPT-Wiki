@@ -4,6 +4,19 @@ Updated: 2026-09-29 · [한국어](Hunt_Edict_Quick_Presets.md)
 
 Each item offers named recipes and a final **Custom Settings** tab. Skills, basic attacks and common attack order use tabs with descriptions and combat examples. **Activate preset** applies and immediately saves the previewed recipe; editing active Custom Settings also saves immediately. Global groups retain their existing picker and Save/Revert workflow.
 
+## 2026-09-29 saving with a suspended rift
+
+Fixed skill-preset changes being rejected in town when a saved rift exists. `GameStore.CommitHuntEdict` now atomically saves the hero configuration and the same hero's unfinished checkpoint. It applies the existing edict transition to a detached copy without resuming or initializing the battle.
+
+- Preserves the rift ID, elapsed time, RNG, position, health ratio, resource, cooldowns, enemies, loot and potion state.
+- Changing Leap Slam or Mana Reclaim's use policy cancels only an obsolete positioning intent. Released effects survive, and an unchanged policy preserves its intent. Live and sanctuary edits follow the same rule.
+- A failed write leaves the hero, checkpoint, draft and disk untouched. Pending rank allocations and global options remain uncommitted.
+- Finished results and another hero's checkpoint are not rewritten. Training retains its dedicated save path.
+- The same transaction supports [portal return and restarting a rift](Rift_Entry.en.md).
+
+The original rejection was reproduced before the fix. **140 focused Edit Mode tests** and macOS save/resume checks across independent processes passed. [Verification scope and baseline failures](Rift_Entry.en.md#portal-and-preset-save-verification-2026-09-29) · [Actual preset activation](EdictPortalSaveEvidence/portal-preset-saved.png).
+
+
 ## Global section tabs and preset storage
 
 Updated 2026-09-29: Combat, Survival, Loot, Bag, Exploration, Repeat Hunt and Recommended Equipment use fixed horizontal section tabs. All 35 existing groups remain available, including Combat's existing Action Priority group in addition to the four groups requested.

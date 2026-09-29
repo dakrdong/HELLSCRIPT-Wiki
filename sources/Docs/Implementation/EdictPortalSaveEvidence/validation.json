@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-29",
+  "baseCommit": "8df97ee1ed425c6ea58dbd82832f1bc8ac5125c9",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "total": "140",
+    "passed": "140",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "sharedUi": {
+    "ownership": "passed",
+    "tests": 9
+  },
+  "build": {
+    "target": "macOS Development",
+    "result": "Success",
+    "errors": 0
+  },
+  "native": {
+    "processes": 2,
+    "layoutCombinations": 20,
+    "input": "uGUI raycast and synthetic pointer down/up/click",
+    "isolatedAccount": true,
+    "physicalMobileTested": false
+  },
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.HuntEdictChanges.cs": "e0cd02d30a53dc20f349b4108727553d3cdcef0dee74827438c36b9f6a3f2b9e",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.HuntEdict.cs": "62eeeecfb69f0cbfd2aa5538bae973d5a07043fad684f484e24c9da953a7eed6",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Potions.cs": "642e7b07961df50ed840d91a829bb5c0c3fcafdef3117d2f8b68d707d100f545",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.RiftEntry.cs": "03a9674ea79c04f63d610a24ee0573df80aad133b111b9a0b6591c9fa6920606",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftEntry.cs": "bac58ce63e64f0db58daccf59c3c1b7ca86824ec33b0e5185a1e34d2253e663d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Potions.cs": "ded52ef181e21a69aea9b23910a3e35693338ebbcb3744553d339cd5caae862a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.cs": "3d700a739bde82d65d6f2c84569fc8eb1a692430a7057b285670360392bcd6a6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleEscape.cs": "3c4404ab24bc815938ba63131f0504d88430a82120ef15e0ac6fcffb9f0e07f1",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs": "794f7e358f5e6d4d492492b6a7334c2607e1e7843206cffaa778725908e3f71e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.GlobalHud.cs": "e3f2b0b451a4d9501343c43a7cf8bee5865c7d1aaffd948d59f6af9f38000356",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftKeeper.cs": "8a147e6751ff602f39d841b3f2badc7322e841aba8033fd8b8ea65a45efe7844",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "39e4622ab0186ca5d20909d86ae79b7ca7db621c8167a33c1611480f540a3842",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs": "c395bfd493a911a1d134e595b0dd26870da93d62d72cab840c814af6bab2e3db",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBattleEscapeSmoke.cs": "4d820a3ebf23f85e608dcd2e327a1b650f3f7d78768b8e9e002752cf66046e99",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftEntrySmoke.cs": "390546f993f139379986a57967c83c5920abc2a60d1d62083ed6dd8f93e378cb",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftEntryTests.cs": "ed69b6bc57688761e3e16c23669607df88466199c4ab3964399e0c06c25c3db8",
+    "Assets/HELLSCRIPT/Tests/Editor/HuntEdictSuspendedSaveTests.cs": "2720e09d6e7b59f0ab8fa0ae503cc311bdb8efec6fd2ddef8544d74560113340",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftEntrySmoke.Portal.cs": "68ff61425018743d5402c6a32f29ab141c9b9e0164694270d0396a70e39a43e2"
+  },
+  "knownBaseline": "baseline-legacy.json: four pre-existing CurrentBuildSaveTests failures confirmed on the unmodified primary checkout; not included in the 140 passing focused cases."
+}

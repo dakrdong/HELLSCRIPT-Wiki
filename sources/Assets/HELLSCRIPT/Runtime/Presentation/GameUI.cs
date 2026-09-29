@@ -225,7 +225,7 @@ namespace Hellscript
             ContentButton(ContentUnlocks.Offline,"미접속 보급",ShowOfflineSupplies);
             AddRepeatPreparation();
             if(!game.Running&&a.repeatHunt?.pendingResult!=null)BigButton(content,"저장된 반복 결과 확인",game.ResumeRepeatResult,true);
-            if(a.suspendedRun!=null)BigButton(content,"진행 중인 균열 이어하기",()=>game.Begin(resume:true),true);
+            if(a.suspendedRun!=null)AddSavedPortalActions();
             else BigButton(content,"균열에 진입",()=>game.Begin(),true);
             BigButton(content,"성소 거닐기 · NPC 방문",()=>game.EnterPlaza());
             BigButton(content,"균열 관리자 · 단계·소탕·훈련",ShowRiftKeeper);

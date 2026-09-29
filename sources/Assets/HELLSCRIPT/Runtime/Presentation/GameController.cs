@@ -82,16 +82,17 @@ namespace Hellscript
             BeginRun(training,false,null,true);
 #endif
         }
-        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false,TrainingGroundSetup ground=null)
+        void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false,TrainingGroundSetup ground=null,string replaceRunId=null)
         {
             if(Active||liveOpsAdmissionPending)return;
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
             if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
-            {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed));return;}
+            {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,replaceRunId));return;}
             if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}
             if(!continueRepeat)ExitIdle(false);
             if(training>=0&&!fullSkillTraining&&!ContentUnlocks.Has(Store.Data,ContentUnlocks.Train)){Notify(ContentUnlocks.Condition(ContentUnlocks.Train));return;}
-            if(!resume&&Store.Data.suspendedRun!=null){Notice="진행 중인 균열을 먼저 이어서 완료해 주세요.";UI.ShowTown();return;}
+            if(!resume&&(replaceRunId!=null?!RiftEntryRules.CanReplace(Store.Data,replaceRunId):Store.Data.suspendedRun!=null))
+            {Notice="포탈로 이동하거나 균열로 다시 시작해 주세요.";UI.ShowToast(Notice);return;}
             Comparison=null;
             RunState snapshot=resume?Store.Data.suspendedRun:null;
             if(snapshot!=null){int hero=Store.Data.heroes.FindIndex(h=>h.id==snapshot.heroId);if(hero<0){Notify("저장된 영웅을 찾을 수 없습니다.");return;}Store.Data.selectedHero=hero;}
@@ -100,8 +101,8 @@ namespace Hellscript
                 // A paid confirmation must not become a delayed free launch after changing supplies.
                 if(riftSpeed!=1)CancelPotionDeparture();
                 string visit=PotionVisit();
-                if(!PrepareDeparturePotions(visit,continueRepeat))
-                {if(!continueRepeat&&riftSpeed==1&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;}return;}
+                if(!PrepareDeparturePotions(visit,continueRepeat,replaceRunId))
+                {if(!continueRepeat&&riftSpeed==1&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;waitingReplaceRunId=replaceRunId;}return;}
             }
             CancelPotionDeparture();
             var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
@@ -132,7 +133,7 @@ namespace Hellscript
             if(DisplayDimmed)World.DeferDungeon();else{World.BuildDungeon(Combat.State);UI.ShowBattle();}
             RestoreForegroundClock();resultDelay=0;resultShown=false;Save();Audio?.RunStarted();
         }
-        System.Collections.IEnumerator RefreshLiveOpsAndBegin(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat,float riftSpeed)
+        System.Collections.IEnumerator RefreshLiveOpsAndBegin(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat,float riftSpeed,string replaceRunId)
         {
             long request=liveOpsAdmission.Begin(Store.Data.Hero.id,SelectedStage);
             Notify("균열 설정을 확인하고 있습니다. 취소하면 입장하지 않습니다.");
@@ -141,17 +142,19 @@ namespace Hellscript
                 yield return LiveOps.Refresh();
                 // Consume only this still-authorized request before any potion, fatigue or paid-entry write.
                 if(!liveOpsAdmission.Complete(request,Store.Data.Hero.id,SelectedStage))yield break;
-                if(Active||backgroundPaused||Store.Data.suspendedRun!=null||continueRepeat&&!RepeatHunt.Ready(RepeatSession))yield break;
-                BeginRun(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,true);
+                if(Active||backgroundPaused||(replaceRunId!=null?!RiftEntryRules.CanReplace(Store.Data,replaceRunId):Store.Data.suspendedRun!=null)||continueRepeat&&!RepeatHunt.Ready(RepeatSession))yield break;
+                BeginRun(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,true,replaceRunId:replaceRunId);
             }
             finally{liveOpsAdmission.Cancel(request);}
         }
         public void CancelRiftEntry()
         {
+            CancelPotionDeparture();
             if(!liveOpsAdmission.Cancel())return;
-            CancelPotionDeparture();Notify("입장을 취소했습니다.");
+            Notify("입장을 취소했습니다.");
         }
         public void BeginRiftEntry(bool accelerated)=>BeginRun(-1,false,null,false,false,accelerated?1.5f:1);
+        public void RestartRift(string portalId)=>BeginRun(-1,false,null,false,replaceRunId:portalId);
         public void TogglePause()
         {if(!Active)return;if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
         public void SetSpeed(float speed)
@@ -246,6 +249,17 @@ namespace Hellscript
             if(pointer!=null&&pointer.press.wasPressedThisFrame&&!TownPointerOverUI(pointer.position.ReadValue()))TapPlaza(pointer.position.ReadValue());
             if(input.sqrMagnitude>.01f)Town.Move(input,real);else Town.Tick(real);
             World.PresentTown(Town,real);UI.RefreshPlaza();
+        }
+        public bool ReturnThroughPortal()
+        {
+            if(!Active||TutorialActive||Combat.State.training>=0)return false;
+            SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
+            var run=Combat.State;
+            if(!Store.SuspendRift(run,Guid.NewGuid().ToString("N"))){Notify(Store.Error);return false;}
+            ContentWindowHost.AcceptPauseState(this,run,true);
+            ExitIdle(false);CancelRiftEntry();RestoreForegroundClock();
+            Combat.Visual-=World.Effect;Combat=null;repeatRestored=true;Comparison=null;ComparisonError="";
+            World.ClearDungeon();EnterPlaza(true);Audio?.Play("flow.rift_exit");return true;
         }
         public void ReturnTown()
         {

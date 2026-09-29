@@ -30,10 +30,11 @@ namespace Hellscript
             powerSavingButton=Button(header,"절전 모드",game.RequestIdle,Color.clear);powerSavingButton.targetGraphic=Emblem(powerSavingButton,"menu-power-saving");
             powerSavingButton.name="power-saving-entry";
             powerSavingButton.gameObject.SetActive(run.training<0&&!run.tutorial);
-            escapeButton=Button(header,"탈출",ConfirmEscape,Color.clear);escapeButton.targetGraphic=Emblem(escapeButton,"menu-escape");
+            string escapeLabel=run.training<0&&!run.tutorial?"포탈로 복귀":"탈출";
+            escapeButton=Button(header,escapeLabel,ConfirmEscape,Color.clear);escapeButton.targetGraphic=Emblem(escapeButton,"menu-escape");
             escapeButton.name="battle-escape";escapeButton.gameObject.SetActive(!run.tutorial||run.tutorialReplay);
             powerSavingCaption=Label(header,"절전 모드",13,pale,TextAnchor.UpperCenter);powerSavingCaption.gameObject.SetActive(powerSavingButton.gameObject.activeSelf);
-            escapeCaption=Label(header,"탈출",13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
+            escapeCaption=Label(header,escapeLabel,13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
             AddRiftMinimap(run);if(game.TrainingGroundRun)BuildTrainingHud();BuildLiveJournal();RefreshHud();ReflowBattleHud();

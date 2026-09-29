@@ -1,0 +1,45 @@
+{
+  "baseCommit": "b1989282f0f995a600dc780a3ff6d4b7609d83e9",
+  "scope": "Hellscript.Tests.CurrentBuildSaveTests",
+  "verification": "Unmodified primary checkout, CoplayDev Unity MCP EditMode",
+  "job": {
+    "job_id": "18f13bb459a74d28839e2a9372abfb57",
+    "status": "failed",
+    "mode": "EditMode",
+    "started_unix_ms": 1790658299220,
+    "finished_unix_ms": 1790658306933,
+    "last_update_unix_ms": 1790658306933,
+    "progress": {
+      "completed": 14,
+      "total": 14,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1790658306725,
+      "last_finished_test_full_name": "Hellscript.Tests.CurrentBuildSaveTests.UnchangedSettingsPreserveTheActionAndRestoreTheRequestedPauseState(True)",
+      "last_finished_unix_ms": 1790658306803,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [
+        {
+          "full_name": "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)",
+          "message": "  Expected string length 40481 but was 42110. Strings differ at index 11348.\n  Expected: \"...rnal\":{\"version\":1,\"sequence\":0,\"omittedEvents\":0,\"resumes...\"\n  But was:  \"...rnal\":{\"version\":1,\"sequence\":1,\"omittedEvents\":0,\"resumes...\"\n  --------------------------------------------^\n"
+        },
+        {
+          "full_name": "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)",
+          "message": "  Expected string length 33905 but was 35504. Strings differ at index 11348.\n  Expected: \"...rnal\":{\"version\":1,\"sequence\":0,\"omittedEvents\":0,\"resumes...\"\n  But was:  \"...rnal\":{\"version\":1,\"sequence\":1,\"omittedEvents\":0,\"resumes...\"\n  --------------------------------------------^\n"
+        },
+        {
+          "full_name": "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)",
+          "message": "  Expected string length 32807 but was 34403. Strings differ at index 11295.\n  Expected: \"...rnal\":{\"version\":1,\"sequence\":0,\"omittedEvents\":0,\"resumes...\"\n  But was:  \"...rnal\":{\"version\":1,\"sequence\":1,\"omittedEvents\":0,\"resumes...\"\n  --------------------------------------------^\n"
+        },
+        {
+          "full_name": "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)",
+          "message": "  Expected string length 35517 but was 37129. Strings differ at index 11295.\n  Expected: \"...rnal\":{\"version\":1,\"sequence\":0,\"omittedEvents\":0,\"resumes...\"\n  But was:  \"...rnal\":{\"version\":1,\"sequence\":1,\"omittedEvents\":0,\"resumes...\"\n  --------------------------------------------^\n"
+        }
+      ],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": null
+  }
+}
