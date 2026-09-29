@@ -1,6 +1,6 @@
 # Shared button and tab interaction
 
-Updated: 2026-09-23
+Updated: 2026-09-29
 Korean: [공통 버튼과 탭의 상호작용](Button_UX.md)
 
 Storage selected-tab skins were being repainted as ordinary buttons by `UiTheme.Button`. Screens now provide persistent selection explicitly; shared controls own input feedback and rendering.
@@ -9,7 +9,7 @@ Storage selected-tab skins were being repainted as ordinary buttons by `UiTheme.
 
 The [Diablo II: Resurrected alpha stash](https://interfaceingame.com/screenshots/diablo-ii-resurrected-technical-alpha-stash/), [Diablo III bank](https://interfaceingame.com/screenshots/diablo-iii-bank/) and [Diablo IV stash imagery](https://mythicdrop.com/guide/diablo-4-shared-stash) were inspected in the in-app browser. These are historical visual references, not statements about current game specifications.
 
-The design uses raised upper edges and recessed lower edges inspired by II, clearly separated tabs and decorated actions inspired by III, and strong selected-surface contrast inspired by IV. HELLSCRIPT keeps its olive, brass and ivory palette. Chosen buttons use their highlighted face; the current vault uses its open lid and visible interior. Redundant selection underlines and lozenges are removed from the shared renderer. Selected list rows and options keep a darker face so rarity colours and secondary labels retain contrast. No reference artwork, raster asset or external package was imported; decoration uses resolution-independent Unity meshes.
+The design uses raised upper edges and recessed lower edges inspired by II, clearly separated tabs and decorated actions inspired by III, and strong selected-surface contrast inspired by IV. HELLSCRIPT keeps its olive, brass and ivory palette. Chosen buttons use their highlighted face; the current vault uses its open lid and visible interior. Redundant selection underlines and lozenges are removed from the shared renderer. Selected list rows and options keep a darker face so rarity colours and secondary labels retain contrast. Shared button decoration uses resolution-independent Unity meshes. At the user's request, vault chest illustrations now use separately authored content art while retaining the common button input and selection owners. No reference artwork or external package was imported.
 
 ## State contract
 
@@ -40,11 +40,28 @@ Decoration is non-raycasting and excluded from layout. It never accesses or chan
 Shared UI standardizes input and state. It does not require every control to be a rectangular button. Vault navigation uses the `Icon` role and `StorageChestGraphic` because the chest silhouette directly conveys its purpose and state.
 
 - Only the current vault has an open lid and visible interior. Other chests stay closed. Hover and keyboard focus never open a chest.
-- Front, side, lid, brass bands and shadow give the chest depth. The graphic reads common hover, press and focus states, with no separate input path, rectangular face or full frame.
+- Transparent chest illustrations use dark walnut, aged brass, black iron bands and an ivory gemstone. Closed and open variants share fixed display bounds and a matching baseline. The graphic reads common hover, press and focus states, with no separate input path, rectangular face or full frame.
 - I–V identifies each position. The next purchasable chest shows a plus badge; its hover hint and purchase confirmation show the currency and exact cost. Later chests show a padlock and retain the existing unlock-order explanation when activated.
 - The current vault name replaces the redundant panel title, eliminating a separate caption row. Delayed hover or keyboard focus shows a temporary name/unlock hint. Touch users select a vault to update the heading and retain the rename action. Chests and numbers fit within 36 layout units. Prices no longer reserve a permanent row, and compact category buttons return more space to item slots.
 - `StorageWindow` supplies selected, owned and purchasable state. The graphic never reads an account. Confirmation, prices, persistence, numbering, capacity and drag-hover switching retain their existing owners.
 - Category, grade and sort controls keep text where an icon alone would be ambiguous. This change removes repeated labels where a chest already communicates the action.
+
+### Painted chest artwork (2026-09-29)
+
+The procedural chest silhouette is replaced by dark walnut and aged-brass illustrations. `Art/Storage/chest-closed.png` and `chest-open.png` depict the same closed and open chest. Tab dimensions, numbering and unlock order remain unchanged; unowned chests are dimmed. `StorageChestOverlay` draws only purchase/lock badges and drag progress above the artwork. Neither graphic intercepts input.
+
+- Two 1254×1254 RGBA PNGs were authored with built-in `image_gen` and copied without pixel changes. Native alpha is preserved. Display-only UV windows align their baselines. [Prompts and provenance](../Art/StorageChests/generation.json) · [Alpha validation](../Art/StorageChests/alpha-validation.json)
+- The callable generator does not return an exact model name, so `gpt-image-2` cannot be verified. Both assets are registered as development candidates with `candidate_model_unknown`, not as model-verified final production art.
+- `StorageArtImporter` and `ResourceTextureBudget` retain native alpha, FullRect geometry, no mipmaps and a 256 px icon budget: BC7 on PC, ASTC 4×4 on Android and ETC2 RGBA8 on WebGL.
+- Focused Edit Mode: **100 passed, 0 failed, 0 skipped** against the final chest renderer, covering choice/focus separation, asset loading, fixed geometry, nonblocking graphics, storage transactions and presets. [Test XML](../Art/StorageChests/editmode.xml)
+- The macOS Development player verified purchase cancellation/exact charging, switching, rename, timed drag-hover and an exact-slot transfer. **20 profiles: five ratios × KO/EN × 100%/150% text**, with 35 captures. [Runtime](../Art/StorageChests/runtime.txt) · [Build](../Art/StorageChests/build.txt) · [Source fingerprints](../Art/StorageChests/source-fingerprints.json) · [Capture manifest](../Art/StorageChests/screenshots.json)
+- No live Unity MCP instance was available; the existing Unity batch build and native macOS player were used. This isolated fixture bypasses onboarding and freezes background simulation/autosave while real window updates, uGUI input and store transactions remain live. This prevents capture waits from invalidating button references during automatic repaint. **Physical mobile devices were not tested.**
+
+![New chest art after an exact-slot transfer](../Art/StorageChests/storage-pc.png)
+
+![Portrait storage with painted chest tabs](../Art/StorageChests/portrait-ko.png)
+
+![Landscape storage with English text at 150 percent](../Art/StorageChests/landscape-en-150.png)
 
 ### Chest validation
 

@@ -94,7 +94,7 @@
 상태·역할·입력의 공통 계약은 [공통 버튼과 탭의 상호작용](Button_UX.md)을 따른다. 새 버튼은 `ContentWindowView.Button`을 사용하고, 선택 상태는 `UiTheme.Choice`로 전달한다. 화면마다 버튼 색이나 포인터 전환을 다시 구현하지 않는다.
 
 
-공통화는 모든 조작을 같은 사각 틀에 넣는다는 뜻이 아니다. 보관함은 `UiButtonRole.Icon`과 `StorageChestGraphic`으로 열린 상자·닫힌 상자·구매·잠금을 표현한다. 공통 입력 상태, 테마와 폰트는 유지하고 선택·거래는 `StorageWindow`와 `GameStore`가 소유한다. 아이콘으로 의미가 명확하지 않은 필터는 문구를 유지한다.
+공통화는 모든 조작을 같은 사각 틀에 넣는다는 뜻이 아니다. 보관함은 `UiButtonRole.Icon`과 `StorageChestGraphic`으로 열린 상자·닫힌 상자·구매·잠금을 표현한다. 공통 입력 상태, 테마와 폰트는 유지하고 선택·거래는 `StorageWindow`와 `GameStore`가 소유한다. 아이콘으로 의미가 명확하지 않은 필터는 문구를 유지한다. 상자 원화는 `Art/Storage`의 투명 PNG 두 장을 쓰며, `StorageChestOverlay`가 구매·잠금 표식과 드래그 진행 표시를 그린다. 이는 사용자 요청으로 교체한 콘텐츠 그림이며 공통 버튼 스킨을 바꾸지 않는다. 제작 출처와 고정 크기·입력 검증은 [버튼 검증 기록](Button_UX.md)을 따른다.
 
 ## 마을·전투 HUD 배치
 

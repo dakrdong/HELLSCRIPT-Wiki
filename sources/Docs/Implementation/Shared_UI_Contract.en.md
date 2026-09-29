@@ -70,7 +70,7 @@ See [completed-work integration](Completed_Work_Integration.en.md) for the initi
 Follow the [shared button interaction contract](Button_UX.en.md). Create new buttons with `ContentWindowView.Button` and supply persistent selection with `UiTheme.Choice`. Do not duplicate button palettes or pointer transitions per screen.
 
 
-Shared UI does not require a rectangular frame for every control. Vaults use `UiButtonRole.Icon` and `StorageChestGraphic` for open, closed, purchasable and locked chests. Shared input state, theme and fonts remain authoritative; `StorageWindow` and `GameStore` own selection and transactions. Ambiguous filters retain text labels.
+Shared UI does not require a rectangular frame for every control. Vaults use `UiButtonRole.Icon` and `StorageChestGraphic` for open, closed, purchasable and locked chests. Shared input state, theme and fonts remain authoritative; `StorageWindow` and `GameStore` own selection and transactions. Ambiguous filters retain text labels. Chest content art uses two native-alpha PNGs in `Art/Storage`; `StorageChestOverlay` draws purchase/lock badges and drag progress. This user-requested content illustration does not replace the common button skin. See [button validation](Button_UX.en.md) for provenance, fixed bounds and input evidence.
 
 ## Town and combat HUD placement
 

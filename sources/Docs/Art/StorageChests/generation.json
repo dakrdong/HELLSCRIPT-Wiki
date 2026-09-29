@@ -1,0 +1,39 @@
+{
+  "created": "2026-09-29",
+  "surface": "built-in image_gen",
+  "projectPreferredModel": "gpt-image-2",
+  "verifiedModel": null,
+  "status": "candidate_model_unknown",
+  "transparent_background": true,
+  "toolModelSelection": "Not exposed by the built-in tool",
+  "postprocessing": "None. Original native-alpha PNGs copied byte-for-byte; UV display crops only.",
+  "sourceRoot": "$CODEX_HOME",
+  "assets": [
+    {
+      "id": "chest-closed",
+      "file": "Assets/HELLSCRIPT/Resources/Art/Storage/chest-closed.png",
+      "source": "generated_images/01a09f16-93d8-74f1-916b-f910bb71d938/exec-3cc85676-de5c-4c35-829a-7840569e507c.png",
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: one isolated transparent PNG inventory storage-chest tab icon for HELLSCRIPT, a premium dark gothic fantasy action RPG. Primary request: a beautiful substantial CLOSED storage chest, highly readable at only 35 pixels tall. Dark walnut carved wood, thick aged brass and black iron bands, sculpted angular metal corners, one bold ornate central latch with a small ivory gemstone, restrained medieval gothic engraving, broad compact silhouette. Three-quarter front view showing the front and right side, slightly elevated camera; realistic hand-painted item art, crisp separated materials, warm edge lighting, deep shadows within the object, polished craft quality without noisy microdetail. Entire chest centered on a square transparent canvas. Chest body fills about 82% of canvas width and spans vertical positions 43% to 86%; closed lid and top occupy 27% to 53%, leaving empty headroom for the matching open-lid variant. Base ends at 86% canvas height. This base placement must allow a future open lid without scaling or moving the chest body. No coins outside, no weapons, no text, no numerals, no watermark, no UI border or button frame, no pedestal, floor, cast shadow, scenery, backdrop, checkerboard or ground glow. Exactly one chest. Native RGBA transparent PNG with surrounding and internal empty space fully transparent, opaque chest materials, crisp clean alpha edges without matte or halo.",
+      "displayCropTopLeft": [
+        64,
+        230,
+        1174,
+        974
+      ]
+    },
+    {
+      "id": "chest-open",
+      "file": "Assets/HELLSCRIPT/Resources/Art/Storage/chest-open.png",
+      "source": "generated_images/01a09f16-93d8-74f1-916b-f910bb71d938/exec-b5bc5d76-6f3b-4626-b539-d8164c5fac92.png",
+      "reference": "chest-closed",
+      "prompt": "Edit this exact chest icon into its OPEN-LID selected-tab variant. Preserve the chest body absolutely: identical walnut panels, aged brass and black iron bands, sculpted corner ornaments, ivory gemstone latch, right side perspective, overall body width, horizontal placement and base at the same canvas position. Lift only the hinged lid upward/backward to reveal a dark interior with restrained warm golden light, no treasure spilling out and no smoke or external glow. Use the ample empty headroom above the chest for the opened lid; do not shift the entire chest upward or shrink the chest body. Keep the same hand-painted realistic gothic game-item rendering and lighting. Exactly one open chest, isolated. Preserve native RGBA transparent PNG and the existing alpha transparency everywhere outside the chest including internal gaps; no scenery, solid background, checkerboard, floor, pedestal, shadow, text, numerals or UI frame.",
+      "displayCropTopLeft": [
+        64,
+        201,
+        1174,
+        974
+      ]
+    }
+  ]
+}

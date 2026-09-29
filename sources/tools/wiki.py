@@ -432,6 +432,24 @@ def build_resources(databases):
             IMPL+'Potion_Slots.md',status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
             refs=[source_ref(currency_source),source_ref('Docs/Art/Currency/alpha-validation.json'),
                   source_ref('Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs')],related=['potion-slots','potion-slots.en','core-crafting']))
+    chest_source='Docs/Art/StorageChests/generation.json'
+    chest_manifest=json.loads(read(chest_source))
+    chest_qa={r['id']:r for r in json.loads(read('Docs/Art/StorageChests/alpha-validation.json'))}
+    for a in chest_manifest['assets']:
+        path=a['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=chest_qa[a['id']]
+        if digest(raw)!=qc['sha256']:raise ValueError('Storage chest differs from its native PNG: '+a['id'])
+        opened=a['id']=='chest-open'
+        rows.append(record('storage-'+a['id'],'열린 창고 상자 / Open storage chest' if opened else '닫힌 창고 상자 / Closed storage chest','이미지 원본',
+            '선택한 보관함은 열린 상자, 나머지는 닫힌 상자로 표시합니다. / The selected vault is open; other chests remain closed.',
+            {'원본 경로':path,'해상도':' × '.join(map(str,qc['size'])),'색상 모드':qc['mode'],
+             '완전 투명 픽셀':qc['transparentPixels'],'SHA-256':digest(raw),
+             'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '제작 방법':'내장 image_gen 원본 PNG와 네이티브 알파 유지 / Native PNG and alpha preserved',
+             '승인 상태':'모델 미확인 시안 / Candidate; exact model not returned',
+             '사용처':'StorageWindow → StorageChestGraphic','아이콘 예산':'256 px; BC7 / ASTC 4x4 / ETC2 RGBA8'},
+            IMPL+'Button_UX.md',status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
+            refs=[source_ref(chest_source),source_ref('Docs/Art/StorageChests/alpha-validation.json'),
+                  source_ref('Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs')],related=['button-ux','button-ux.en']))
     variant_manifest='Docs/Art/EquipmentVariants/manifest.json'
     variant_art={a['id']:a for a in json.loads(read(variant_manifest))['assets']}
     npc_path='Assets/HELLSCRIPT/Resources/NpcProfiles.json'
@@ -1010,6 +1028,9 @@ def build():
     shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')
     for file in (ROOT/ART/'GlobalHUD').glob('currency-*.png'):
         shutil.copyfile(file,SITE/'media/GlobalHUD'/file.name)
+    (SITE/'media/Storage').mkdir(parents=True,exist_ok=True)
+    for file in (ROOT/ART/'Storage').glob('chest-*.png'):
+        shutil.copyfile(file,SITE/'media/Storage'/file.name)
     for name in ('menu-power-saving','menu-escape'):shutil.copyfile(ROOT/ART/('GlobalHUD/'+name+'.png'),SITE/'media/GlobalHUD'/(name+'.png'))
     (SITE/'media/Title').mkdir(parents=True,exist_ok=True)
     shutil.copyfile(ROOT/ART/'Title/TitleSanctuary.png',SITE/'media/Title/TitleSanctuary.png')
