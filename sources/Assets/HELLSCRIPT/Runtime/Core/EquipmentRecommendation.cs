@@ -28,7 +28,7 @@ namespace Hellscript
             return result.ToArray();
         }
         public static string Get(HuntEdictV2Document doc,string id)=>doc?.global?.FirstOrDefault(o=>o.id==id)?.value??"";
-        public static bool Enabled(HeroSave hero)=>hero.useEdict&&Get(hero.edict,Prefix+"enabled")=="ON";
+        public static bool Enabled(HeroSave hero)=>hero.useEdict&&Get(HuntEdictDefaults.Resolve(hero),Prefix+"enabled")=="ON";
         public static HuntEdictV2Document Upgrade(HuntEdictV2Document source)
         {
             source=PotionEdict.Upgrade(source);
@@ -59,7 +59,7 @@ namespace Hellscript
         public static EquipmentPlan Plan(HeroSave hero,Item item)
         {
             if(!Enabled(hero)||item==null||item.equipped||item.locked||!hero.inventory.Contains(item))return null;
-            EquipmentPlan best=null;double gain=double.NegativeInfinity;
+            var policy=HuntEdictDefaults.Resolve(hero);EquipmentPlan best=null;double gain=double.NegativeInfinity;
             foreach(int index in EquipmentSlots.Targets(hero,item))
             {
                 var plan=EquipmentSlots.Plan(hero,item,index);if(!plan.Valid)continue;
@@ -68,7 +68,7 @@ namespace Hellscript
                 // A defensive/offensive offhand must not automatically remove the only attacking weapon.
                 if(EquipmentSlots.Offhand(item)&&old.Any(i=>!EquipmentSlots.Offhand(i)))continue;
                 int position=item.slot==7&&index==1?9:item.slot;
-                string mode=Get(hero.edict,item.slot==0?Prefix+"weapon":ModeId(position));
+                string mode=Get(policy,item.slot==0?Prefix+"weapon":ModeId(position));
                 if(mode=="OFF"||mode=="")continue;
                 if(item.slot==0&&mode=="SAME")
                 {
@@ -81,11 +81,11 @@ namespace Hellscript
                 if(mode!="STATS"&&score.after<=score.before)continue;
                 if(item.slot!=0&&(mode=="STATS"||mode=="BOTH"))
                 {
-                    string[] keys=Get(hero.edict,StatsId(position)).Split(',').Where(s=>s!="").ToArray();
+                    string[] keys=Get(policy,StatsId(position)).Split(',').Where(s=>s!="").ToArray();
                     var current=EquipmentSlots.At(hero,item.slot,index);
                     if(keys.Length==0||keys.Any(key=>!Meets(item,current,key,mode=="STATS")))continue;
                 }
-                if(Get(hero.edict,Prefix+"preserveEffects")=="ON"&&old.Length>0)
+                if(Get(policy,Prefix+"preserveEffects")=="ON"&&old.Length>0)
                 {
                     var comparison=ItemComparison.Preview(hero,item,index);
                     if(comparison.lostEffects.Count>0)continue;

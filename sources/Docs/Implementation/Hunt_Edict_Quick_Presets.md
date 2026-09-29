@@ -4,6 +4,20 @@
 
 설정 항목마다 목적이 분명한 프리셋을 제공하고, 마지막에 **직접 설정**을 둡니다. 스킬·기본 공격·공통 공격 순서는 탭에서 설명과 전투 예시를 살펴본 뒤 **프리셋 활성화**로 적용합니다. 활성화와 직접 설정의 옵션 변경은 즉시 저장합니다. 전역 옵션 묶음은 기존 선택 창과 저장·되돌리기를 유지합니다.
 
+## 전역 분류 탭과 프리셋 보관함
+
+2026-09-29 갱신: 전투·생존·전리품·가방 정리·탐색·반복 사냥·장비 추천 착용의 내부 묶음을 상단 가로 탭으로 표시합니다. 총 35개 묶음은 기존 옵션 소유를 유지합니다. 전투에는 요청한 네 묶음 외에 기존 **행동 우선순위**도 남겨 모든 옵션에 접근할 수 있습니다.
+
+- 각 묶음은 목적을 나타내는 선 아이콘과 한국어·영어 설명을 갖습니다. 좁은 화면이나 확대 글자에서는 탭을 여러 줄로 배치하고 선택한 본문만 스크롤합니다.
+- 검색은 모든 분류의 일치 결과를 본문에 표시하며, 결과를 누르면 해당 분류 탭으로 이동합니다. **변경된 항목** 필터와 묶음별 스크롤 위치를 유지합니다.
+- 프리셋·공유 페이지는 스크롤 없이 다섯 슬롯을 표시합니다. 저장된 슬롯은 번호·짧은 이름 입력 영역·디스크 저장 아이콘·공유 코드 보기의 한 줄입니다. 선택한 슬롯은 초록색, 다른 저장 슬롯은 베이지 계열로 구분하고 ‘적용·편집 중’ 문구는 표시하지 않습니다.
+- 이름을 처음 누르면 편집할 프리셋을 선택합니다. 선택된 이름을 다시 누르면 그 자리에서 입력할 수 있으며, 입력을 확정하면 `RenameHuntEdictPreset` 거래로 저장합니다. 긴 이름은 입력 영역 안에서만 표시합니다.
+- 디스크 버튼은 현재 설정을 해당 슬롯에 보관합니다. 기존 슬롯을 덮어쓰려면 확인이 필요합니다. 슬롯의 공유 코드는 그 슬롯의 저장본을 사용합니다. 코드 가져오기의 검증·다섯 목적지·덮어쓰기 확인 절차도 유지합니다.
+- 전체 설정의 적용·되돌리기는 기존 하단 버튼을 사용합니다. 스킬별 프리셋의 즉시 저장 규칙은 아래와 같습니다.
+- **기본 세팅 적용** 버튼은 [요약 탭](Hunt_Edict_Overview.md)에 있습니다. 프리셋·공유 페이지에는 중복해서 표시하지 않습니다.
+
+표시 정의는 [HuntEdictUi.json](../../Assets/HELLSCRIPT/Resources/HuntEdictUi.json), 화면은 `HuntEdictWindow.Summary`, `HuntEdictWindow.Presets`, 선 아이콘은 `HuntEdictWindow.Glyphs`와 공통 `SkillTreeGraphic`이 소유합니다. 신규 래스터 리소스는 없습니다.
+
 ## 스킬 프리셋 탭과 전투 예시
 
 - 프리셋 세 개와 **직접 설정**을 고정 탭으로 표시합니다. 가로에서는 한 줄, 세로에서는 두 줄로 배치하며 탭 자체는 스크롤하지 않습니다. 설명과 세부 설정 본문만 스크롤합니다.
@@ -161,3 +175,26 @@
 ![가로형 회오리 프리셋 선택, 영어 150%](HuntEdictQuickPresetEvidence/whirlwind-choices-956x440-en.png)
 
 ![전역 생존 프리셋](HuntEdictQuickPresetEvidence/global-survival-ko.png)
+
+## 2026-09-29 분류 탭·프리셋 보관함 검증
+
+- Unity 6000.6.0f1 Edit Mode 관련 검사 223개가 통과했습니다. 129개 검사와 기본 모드·장비 추천·훈련 회귀 101개 검사에서 중복 7개를 제외한 수입니다. 실패·건너뜀은 없습니다. 공통 UI 소유 검사와 검사기 회귀 9개도 통과했습니다.
+- macOS 개발 빌드의 오류는 0개입니다. 연결된 Unity MCP 인스턴스가 없어 기존 프로젝트 배치 검사·빌더를 사용했습니다.
+- macOS 실행 화면에서 440×956, 956×440, 1600×900, 1600×1000, 2100×900 × 한국어·영어 × 글자 100%·150%의 20개 조합을 확인했습니다. 모든 35개 탭에 실제 uGUI 포인터 이벤트로 접근했고 아이콘·설명·탭 영역·본문 높이를 검사했습니다. 안전 영역을 적용한 가로 화면도 확인했습니다.
+- 다섯 슬롯을 모두 저장한 상태에서 페이지 스크롤이 없고 각 슬롯이 한 줄임을 검사했습니다. 이름 두 번 선택 후 입력 확정, 디스크 저장, 슬롯별 공유, 가져오기 목적지의 덮어쓰기 확인·취소, 기존 슬롯 덮어쓰기와 새 프로세스의 재로딩을 확인했습니다.
+- 기본 모드 On/Off, 원본 설정 보존, 저장 실패 복구, 전투의 실행용 스킬 정책, 물약·추천 착용 정책 일치를 검사했습니다. 기존 간편 프리셋이 있는 전역 묶음 24개의 직접 설정 옵션 접근과 저장·재실행도 통과했습니다.
+- 모바일 화면 크기는 macOS 창에서 검증했습니다. 물리 모바일 기기 검증은 포함하지 않습니다.
+
+[Edit Mode](HuntEdictSectionEvidence/editmode.xml) · [모드 회귀](HuntEdictSectionEvidence/mode-regression.xml) · [빌드](HuntEdictSectionEvidence/build.txt) · [조작](HuntEdictSectionEvidence/runtime.txt) · [재실행](HuntEdictSectionEvidence/restart.txt) · [간편 프리셋 회귀](HuntEdictSectionEvidence/quick-regression.txt) · [회귀 재실행](HuntEdictSectionEvidence/quick-restart.txt)
+
+![전투 분류 탭과 설명](HuntEdictSectionEvidence/combat-final.png)
+
+![다섯 프리셋을 한 줄씩 배치한 화면](HuntEdictSectionEvidence/presets-final.png)
+
+![요약 탭의 기본 세팅 적용](HuntEdictSectionEvidence/overview-defaults.png)
+
+![영어 150% 세로형 프리셋](HuntEdictSectionEvidence/slots-440x956-en-150.png)
+
+![한국어 150% 가로형 프리셋](HuntEdictSectionEvidence/slots-956x440-ko-150.png)
+
+![장비 부위별 아이콘 탭](HuntEdictSectionEvidence/autoEquip-956x440-en-150.png)

@@ -4,6 +4,21 @@ Updated: 2026-09-28 · [한국어](Hunt_Edict_Overview.md)
 
 This records how the overview tab, combat styles and advice from the last hunt in the [Hunt Edict UX redesign](../Design/Hunt_Edict_UX_Redesign.en.md) were built into the game window. Rationale and rules live in the design document; this page covers owners, behaviour, a performance fix and verification.
 
+## Use default settings
+
+Updated 2026-09-29: The former automatic-decision switch moved from preset storage to the top of Overview. A compact **Use default settings ON/OFF** button sits beside its status text on wide screens and above it on narrow screens, outside the content scroll.
+
+- On: Recommended defaults are active. Your custom settings are not being used.
+- Off: Your custom settings are active.
+
+This does not turn automatic combat off. `GameStore.SetRecommendedEdict` persists the hero's `useRecommendedEdict` flag; the UI and live combat refresh only after a successful write. Failed writes retain the previous mode. Older saves without the new field keep custom-settings mode.
+
+On resolves a detached execution policy from default options and the new-hero Balanced style. Skill ranks and equipped skills remain unchanged; use conditions, attack order and global policies use defaults. Combat, loot, exploration and repeat hunting share this resolved document. Sanctuary potion restocking and equipment recommendations read the same defaults. Default equipment recommendations are disabled, even if the stored custom configuration enables them.
+
+Off restores the stored custom policies. Authored skill options, presets and pending edits are preserved. The mode belongs to the hero and is not included in share codes. Saving a custom option or preset while defaults are active does not switch modes; turn defaults off to use those settings. Training/comparison copies cannot change the actual hero's mode.
+
+Sources: [default resolution](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictDefaults.cs), [save transaction](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.Edict.cs), [combat integration](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictDrive.cs).
+
 ## Owners
 
 | Area | Owner | Responsibility |

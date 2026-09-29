@@ -35,8 +35,8 @@ namespace Hellscript
         public static void Replaced(AccountSave account,Item[] outgoing)
         {
             var hero=account.Hero;
-            var policy=EdictCleanupPolicy.Compile(HuntEdictV2.Canonical(hero.edict).global.ToDictionary(o=>o.id,o=>o.value));
-            string mode=EquipmentRecommendation.Get(hero.edict,Displaced);
+            var policy=EdictCleanupPolicy.Compile(HuntEdictV2.Canonical(HuntEdictDefaults.Resolve(hero)).global.ToDictionary(o=>o.id,o=>o.value));
+            string mode=EquipmentRecommendation.Get(HuntEdictDefaults.Resolve(hero),Displaced);
             var action=mode=="SELL"?EdictCleanupAction.Sell:mode=="SALVAGE"?EdictCleanupAction.Salvage:EdictCleanupAction.Warehouse;
             foreach(var item in outgoing)
             {

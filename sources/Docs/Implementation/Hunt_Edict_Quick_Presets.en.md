@@ -4,6 +4,20 @@ Updated: 2026-09-29 · [한국어](Hunt_Edict_Quick_Presets.md)
 
 Each item offers named recipes and a final **Custom Settings** tab. Skills, basic attacks and common attack order use tabs with descriptions and combat examples. **Activate preset** applies and immediately saves the previewed recipe; editing active Custom Settings also saves immediately. Global groups retain their existing picker and Save/Revert workflow.
 
+## Global section tabs and preset storage
+
+Updated 2026-09-29: Combat, Survival, Loot, Bag, Exploration, Repeat Hunt and Recommended Equipment use fixed horizontal section tabs. All 35 existing groups remain available, including Combat's existing Action Priority group in addition to the four groups requested.
+
+- Each section has a semantic line icon and a bilingual explanation. Tabs wrap on narrow screens or larger text settings; only the selected content scrolls.
+- Search results cover all categories and open the corresponding section. The changed-only filter and per-section scroll positions remain available.
+- All five preset slots fit on one page without scrolling. A saved slot is a single row with its number, short name field, disk save icon and View Share Code action. The selected row is green; other saved rows are beige. The redundant editing-status text is removed.
+- First select a preset name, then select that name again to rename it inline. Confirming the input saves through `RenameHuntEdictPreset`. Long names stay clipped within the field.
+- The disk stores the current settings in that slot. Existing slots require overwrite confirmation. Sharing reads that slot's saved snapshot. Import validation, five destinations and overwrite confirmation remain intact.
+- The existing footer still applies or reverts the overall draft. Skill-specific auto-saving is described below.
+- Use default settings lives in [Overview](Hunt_Edict_Overview.en.md), with no duplicate control in preset storage.
+
+`HuntEdictUi.json` owns section metadata; `HuntEdictWindow.Summary` and `.Presets` own the layout. `.Glyphs` draws the icons with the shared `SkillTreeGraphic` mesh renderer. No new raster assets are used.
+
 ## Skill tabs and combat examples
 
 - Three recipe tabs plus Custom Settings stay fixed. Landscape uses one row and portrait two rows; only the description or detailed controls scroll.
@@ -160,3 +174,26 @@ Every row below also offers Custom Settings as its final entry.
 ![Whirlwind choices in landscape at 150% English text](HuntEdictQuickPresetEvidence/whirlwind-choices-956x440-en.png)
 
 ![Global survival preset](HuntEdictQuickPresetEvidence/global-survival-ko.png)
+
+## 2026-09-29 section and preset-storage validation
+
+- 223 distinct related Unity 6000.6.0f1 Edit Mode tests passed: 129 focused cases plus 101 mode/equipment/training cases, with seven duplicates. No failures or skips. Shared UI ownership checks and nine validator regression cases passed.
+- The macOS Development build reported zero errors. No Unity MCP editor instance was connected, so the existing project batch test runner and builder were used.
+- Native macOS acceptance covered 440×956, 956×440, 1600×900, 1600×1000 and 2100×900, Korean/English, and 100%/150% text: 20 combinations. All 35 section tabs were exercised through real uGUI pointer events and raycasts, with icon, explanation, bounds and content-height checks. Landscape safe-area insets were also checked.
+- With all five slots populated, the page has no ScrollRect and each slot stays on one row. Select-then-rename, disk saves, exact-slot sharing, import overwrite confirmation/cancel, stored-slot overwrite and fresh-process persistence passed.
+- Default/custom mode transitions, source preservation, failed-write rollback, effective combat skill policy, potion/equipment policy consistency passed. The 24 global groups with quick presets retained access to every detailed option, save/reopen and process-restart behavior.
+- Mobile dimensions were simulated in the native macOS player. No physical mobile device was tested.
+
+[Edit Mode](HuntEdictSectionEvidence/editmode.xml) · [Mode regression](HuntEdictSectionEvidence/mode-regression.xml) · [Build](HuntEdictSectionEvidence/build.txt) · [Runtime](HuntEdictSectionEvidence/runtime.txt) · [Restart](HuntEdictSectionEvidence/restart.txt) · [Quick-preset regression](HuntEdictSectionEvidence/quick-regression.txt) · [Regression restart](HuntEdictSectionEvidence/quick-restart.txt)
+
+![Combat section tabs](HuntEdictSectionEvidence/combat-final.png)
+
+![Five single-row preset slots](HuntEdictSectionEvidence/presets-final.png)
+
+![Default mode in Overview](HuntEdictSectionEvidence/overview-defaults.png)
+
+![Portrait, English, 150% text](HuntEdictSectionEvidence/slots-440x956-en-150.png)
+
+![Landscape, Korean, 150% text](HuntEdictSectionEvidence/slots-956x440-ko-150.png)
+
+![Equipment section icons](HuntEdictSectionEvidence/autoEquip-956x440-en-150.png)

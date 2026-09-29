@@ -63,7 +63,7 @@ namespace Hellscript
     {
         public const string RuneLockedMessage="A/B 비교 중에는 룬 배치를 고정합니다. 비교를 마친 뒤 룬을 변경해 주세요.";
         [Serializable] sealed class Conditions
-        {public string heroId;public HeroClass heroClass;public int level,xp;public List<Item> inventory;public bool useEdict;public HuntEdictV2Document edict;}
+        {public string heroId;public HeroClass heroClass;public int level,xp;public List<Item> inventory;public bool useEdict,useRecommendedEdict;public HuntEdictV2Document edict;}
         [Serializable] sealed class EnvironmentSnapshot
         {public int training,stage;public uint rng,rewardRng;public Vector2 position;public RiftLayout layout;public List<EnemyState> enemies;}
         readonly GameCatalog catalog;
@@ -91,7 +91,7 @@ namespace Hellscript
         public TrainingAttempt B=>Copy(resultB);
         static T Copy<T>(T value) where T:class=>value==null?null:JsonUtility.FromJson<T>(JsonUtility.ToJson(value));
         static T Copy<T>(string json) where T:class=>JsonUtility.FromJson<T>(json);
-        static string ConditionKey(HeroSave hero)=>JsonUtility.ToJson(new Conditions{heroId=hero.id,heroClass=hero.heroClass,level=hero.level,xp=hero.xp,inventory=hero.inventory.OrderBy(i=>i.id,StringComparer.Ordinal).ToList(),useEdict=hero.useEdict,edict=hero.edict});
+        static string ConditionKey(HeroSave hero)=>JsonUtility.ToJson(new Conditions{heroId=hero.id,heroClass=hero.heroClass,level=hero.level,xp=hero.xp,inventory=hero.inventory.OrderBy(i=>i.id,StringComparer.Ordinal).ToList(),useEdict=hero.useEdict,useRecommendedEdict=hero.useRecommendedEdict,edict=hero.edict});
         static string EnvironmentKey(RunState r)=>JsonUtility.ToJson(new EnvironmentSnapshot{training=r.training,stage=r.stage,rng=r.rng,rewardRng=r.rewardRng,position=r.position,layout=r.layout,enemies=r.enemies});
         public TrainingComparisonSession(AccountSave account,GameCatalog catalog,int training)
         {

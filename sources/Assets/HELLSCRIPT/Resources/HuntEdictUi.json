@@ -1,0 +1,713 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "tab": "combat",
+      "title": "전투 위치·거리",
+      "ids": [
+        "position.engage",
+        "position.mode",
+        "position.distanceSource",
+        "position.distance",
+        "position.clockwise",
+        "position.ownArea"
+      ],
+      "icon": "position",
+      "description": "적과의 거리와 이동 방식을 정합니다.",
+      "descriptionEn": "Choose your distance from enemies and how you move during combat."
+    },
+    {
+      "tab": "combat",
+      "title": "포위 대응·몰이",
+      "ids": [
+        "position.surrounded",
+        "position.gather",
+        "position.gatherCount",
+        "position.addEnemies",
+        "position.gatherTime"
+      ],
+      "icon": "surround",
+      "description": "포위되었을 때의 대응과 적 무리를 모으는 방식을 정합니다.",
+      "descriptionEn": "Choose how to escape encirclement and gather enemy packs."
+    },
+    {
+      "tab": "combat",
+      "title": "공격 대상 선택",
+      "ids": [
+        "target.default",
+        "target.specialEnabled",
+        "target.specialOrder",
+        "target.interruptCaster",
+        "target.bossFight"
+      ],
+      "icon": "target",
+      "description": "먼저 공격할 적과 우선순위를 정합니다.",
+      "descriptionEn": "Choose which enemies to attack first."
+    },
+    {
+      "tab": "combat",
+      "title": "대상 유지·추적",
+      "ids": [
+        "target.switch",
+        "target.chaseDistance",
+        "target.chaseTime",
+        "target.lostSight",
+        "target.goblin",
+        "target.goblinDistance",
+        "target.goblinTime"
+      ],
+      "icon": "track",
+      "description": "현재 대상을 유지하거나 바꾸는 조건과 추적 범위를 정합니다.",
+      "descriptionEn": "Choose when to keep or switch targets and how far to pursue them."
+    },
+    {
+      "tab": "combat",
+      "title": "행동 우선순위",
+      "ids": [
+        "common.order"
+      ],
+      "icon": "order",
+      "description": "공격·생존·이동 등 행동을 판단하는 순서를 정합니다.",
+      "descriptionEn": "Set the priority of combat, survival and movement decisions."
+    },
+    {
+      "tab": "survival",
+      "title": "긴급 대응·전투 복귀",
+      "ids": [
+        "survival.lowHp",
+        "survival.lowHpPercent",
+        "survival.lethal",
+        "survival.dot",
+        "survival.dotHpPercent",
+        "survival.returnHpPercent"
+      ],
+      "icon": "emergency",
+      "description": "위험할 때 물러나는 조건과 전투에 복귀할 시점을 정합니다.",
+      "descriptionEn": "Choose when to retreat from danger and when to return to combat."
+    },
+    {
+      "tab": "survival",
+      "title": "자동 물약",
+      "ids": [
+        "survival.potion",
+        "survival.potionHpPercent",
+        "potion.resource",
+        "potion.resourcePercent",
+        "potion.utility",
+        "potion.condition",
+        "potion.autoBuy",
+        "potion.hpTarget",
+        "potion.resourceTarget",
+        "potion.utilityTarget",
+        "potion.budget",
+        "potion.reserve",
+        "potion.shortage"
+      ],
+      "icon": "potion",
+      "description": "물약 사용 조건과 성소에서 보충할 수량을 정합니다.",
+      "descriptionEn": "Set potion use conditions and restocking quantities at the sanctuary."
+    },
+    {
+      "tab": "survival",
+      "title": "피해 유형별 회피",
+      "ids": [
+        "dodge.ground.policy",
+        "dodge.ground.hpPercent",
+        "dodge.area.policy",
+        "dodge.area.hpPercent",
+        "dodge.direct.policy",
+        "dodge.direct.hpPercent"
+      ],
+      "icon": "dodge",
+      "description": "바닥·범위·직접 공격을 피하는 조건을 정합니다.",
+      "descriptionEn": "Set how to avoid ground, area and direct attacks."
+    },
+    {
+      "tab": "survival",
+      "title": "특수 위험·회피 방식",
+      "ids": [
+        "dodge.control",
+        "dodge.overlap",
+        "dodge.window",
+        "dodge.totalHpPercent",
+        "dodge.method",
+        "dodge.interrupt"
+      ],
+      "icon": "warning",
+      "description": "제어 효과와 특수 위험에 대응하는 회피 방식을 정합니다.",
+      "descriptionEn": "Choose how to avoid control effects and special hazards."
+    },
+    {
+      "tab": "survival",
+      "title": "생존 수단·보존",
+      "ids": [
+        "survival.defenseSkill",
+        "survival.escapeSkill",
+        "survival.fallbackSkill",
+        "survival.order",
+        "survival.fallback",
+        "survival.reserveSkill",
+        "survival.reserveResource"
+      ],
+      "icon": "protect",
+      "description": "위험에 사용할 생존 수단과 아껴 둘 자원을 정합니다.",
+      "descriptionEn": "Choose survival tools and which resources to keep in reserve."
+    },
+    {
+      "tab": "loot",
+      "title": "등급별 장비 회수",
+      "ids": [
+        "loot.NORMAL",
+        "loot.MAGIC",
+        "loot.RARE",
+        "loot.LEGENDARY",
+        "loot.SET"
+      ],
+      "icon": "rarity",
+      "description": "회수할 장비 등급을 고릅니다.",
+      "descriptionEn": "Choose which equipment rarities to collect."
+    },
+    {
+      "tab": "loot",
+      "title": "장비 필터·예외",
+      "ids": [
+        "loot.class",
+        "loot.slots",
+        "loot.itemLevel",
+        "loot.exceptLegendary",
+        "loot.exceptSet",
+        "loot.exceptEffects"
+      ],
+      "icon": "filter",
+      "description": "장비를 회수할 기준과 예외 조건을 정합니다.",
+      "descriptionEn": "Set equipment collection filters and exceptions."
+    },
+    {
+      "tab": "loot",
+      "title": "금화·재료 회수",
+      "ids": [
+        "loot.gold",
+        "loot.minimumGold",
+        "loot.material",
+        "loot.gem",
+        "loot.core"
+      ],
+      "icon": "coins",
+      "description": "금화와 제작 재료의 회수 여부를 정합니다.",
+      "descriptionEn": "Choose whether to collect gold and crafting materials."
+    },
+    {
+      "tab": "loot",
+      "title": "회수 이동·종료",
+      "ids": [
+        "loot.distance",
+        "loot.danger",
+        "loot.finish"
+      ],
+      "icon": "route",
+      "description": "전리품을 주우러 이동할 거리와 회수를 마칠 조건을 정합니다.",
+      "descriptionEn": "Set collection distance and when to stop looting."
+    },
+    {
+      "tab": "bag",
+      "title": "가방 공간 부족",
+      "ids": [
+        "bag.trigger",
+        "bag.freeSlots",
+        "bag.policy",
+        "bag.replacementRank",
+        "bag.replacementFail"
+      ],
+      "icon": "bag",
+      "description": "가방이 부족하다고 판단할 기준을 정합니다.",
+      "descriptionEn": "Choose when the bag is considered nearly full."
+    },
+    {
+      "tab": "bag",
+      "title": "자동 정리",
+      "ids": [
+        "bag.cleanupAt",
+        "bag.allowLegendaryDisposal",
+        "bag.cleanup.NORMAL",
+        "bag.cleanup.MAGIC",
+        "bag.cleanup.RARE",
+        "bag.cleanup.LEGENDARY",
+        "bag.cleanup.SET"
+      ],
+      "icon": "cleanup",
+      "description": "자동 정리 시점과 판매·분해·보관 순서를 정합니다.",
+      "descriptionEn": "Set when to clean up and the order of selling, salvaging and storing."
+    },
+    {
+      "tab": "bag",
+      "title": "장비 보호",
+      "ids": [
+        "bag.protectEnhanced",
+        "bag.protectSocketed",
+        "bag.protectEffects",
+        "bag.protectSets"
+      ],
+      "icon": "lock",
+      "description": "자동 정리에서 제외할 장비를 정합니다.",
+      "descriptionEn": "Choose which equipment to protect from automatic cleanup."
+    },
+    {
+      "tab": "bag",
+      "title": "공간 부족 대응",
+      "ids": [
+        "bag.warehouseFull",
+        "bag.warehouseAdmission",
+        "bag.stillFull"
+      ],
+      "icon": "warehouse",
+      "description": "창고에 빈칸이 없을 때의 보관·가방·반복 사냥 처리를 정합니다.",
+      "descriptionEn": "Choose storage, bag and repeat-hunt handling when the warehouse is full."
+    },
+    {
+      "tab": "explore",
+      "title": "탐색·균열 진행",
+      "ids": [
+        "explore.mode",
+        "explore.order",
+        "explore.bossUnlocked",
+        "explore.lowTime",
+        "explore.lowTimeSeconds",
+        "explore.lowTimeLoot"
+      ],
+      "icon": "explore",
+      "description": "균열을 탐색하는 경로와 진행 기준을 정합니다.",
+      "descriptionEn": "Choose how to explore and progress through the rift."
+    },
+    {
+      "tab": "explore",
+      "title": "일반·봉인 상자",
+      "ids": [
+        "explore.chests",
+        "explore.normalChest",
+        "explore.sealedChest",
+        "explore.chestDetour",
+        "explore.chestsAfterBoss"
+      ],
+      "icon": "chest",
+      "description": "일반 상자와 봉인 상자를 여는 조건을 정합니다.",
+      "descriptionEn": "Set when to open ordinary and sealed chests."
+    },
+    {
+      "tab": "explore",
+      "title": "저주 상자",
+      "ids": [
+        "explore.cursedChest",
+        "explore.cursedHpPercent",
+        "explore.cursedDefense",
+        "explore.cursedMinimumTime"
+      ],
+      "icon": "cursed",
+      "description": "저주 상자에 도전할 조건과 위험 대응을 정합니다.",
+      "descriptionEn": "Choose when to attempt cursed chests and how to handle their risks."
+    },
+    {
+      "tab": "explore",
+      "title": "성소",
+      "ids": [
+        "explore.shrine",
+        "explore.guideShrine",
+        "explore.resolveShrine",
+        "explore.shrineDetour"
+      ],
+      "icon": "shrine",
+      "description": "성소를 이용하는 시점과 이동 기준을 정합니다.",
+      "descriptionEn": "Choose when to visit shrines and how far to travel to them."
+    },
+    {
+      "tab": "repeat",
+      "title": "반복·다음 단계",
+      "ids": [
+        "repeat.enabled",
+        "repeat.success",
+        "repeat.failure"
+      ],
+      "icon": "repeat",
+      "description": "사냥 반복 여부와 다음 균열 단계를 정합니다.",
+      "descriptionEn": "Choose whether to repeat hunts and which rift stage to enter next."
+    },
+    {
+      "tab": "repeat",
+      "title": "종료 조건·목표",
+      "ids": [
+        "repeat.failures",
+        "repeat.count",
+        "repeat.minutes",
+        "repeat.gold",
+        "repeat.effects",
+        "repeat.sets",
+        "repeat.stage"
+      ],
+      "icon": "goal",
+      "description": "사냥을 끝낼 목표와 중단 조건을 정합니다.",
+      "descriptionEn": "Set hunt goals and stopping conditions."
+    },
+    {
+      "tab": "repeat",
+      "title": "다음 판 준비",
+      "ids": [
+        "repeat.freeSlots",
+        "repeat.resultSeconds"
+      ],
+      "icon": "prepare",
+      "description": "다음 사냥에 들어가기 전 필요한 준비를 정합니다.",
+      "descriptionEn": "Set the checks needed before the next hunt."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "공통 설정",
+      "ids": [
+        "autoEquip.enabled",
+        "autoEquip.preserveEffects",
+        "autoEquip.displaced"
+      ],
+      "icon": "settings",
+      "description": "추천 착용 여부와 교체한 장비의 처리 방식을 정합니다.",
+      "descriptionEn": "Set automatic equipment recommendations and how to handle replaced gear."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "무기",
+      "ids": [
+        "autoEquip.weapon"
+      ],
+      "icon": "weapon",
+      "description": "새 무기의 계열과 양손 구성 점수를 비교할 기준을 정합니다.",
+      "descriptionEn": "Choose how to compare weapon families and the combined weapon score."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "헬멧",
+      "ids": [
+        "autoEquip.1.mode",
+        "autoEquip.1.stats"
+      ],
+      "icon": "helmet",
+      "description": "헬멧을 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing a helmet."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "가슴 방어구",
+      "ids": [
+        "autoEquip.2.mode",
+        "autoEquip.2.stats"
+      ],
+      "icon": "armor",
+      "description": "가슴 방어구를 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing chest armor."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "장갑",
+      "ids": [
+        "autoEquip.3.mode",
+        "autoEquip.3.stats"
+      ],
+      "icon": "gloves",
+      "description": "장갑을 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing gloves."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "신발",
+      "ids": [
+        "autoEquip.4.mode",
+        "autoEquip.4.stats"
+      ],
+      "icon": "boots",
+      "description": "신발을 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing boots."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "허리띠",
+      "ids": [
+        "autoEquip.5.mode",
+        "autoEquip.5.stats"
+      ],
+      "icon": "belt",
+      "description": "허리띠를 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing a belt."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "목걸이",
+      "ids": [
+        "autoEquip.6.mode",
+        "autoEquip.6.stats"
+      ],
+      "icon": "amulet",
+      "description": "목걸이를 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing an amulet."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "왼쪽 반지",
+      "ids": [
+        "autoEquip.7.mode",
+        "autoEquip.7.stats"
+      ],
+      "icon": "ring-left",
+      "description": "왼쪽 반지를 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing the left ring."
+    },
+    {
+      "tab": "autoEquip",
+      "title": "오른쪽 반지",
+      "ids": [
+        "autoEquip.9.mode",
+        "autoEquip.9.stats"
+      ],
+      "icon": "ring-right",
+      "description": "오른쪽 반지를 바꿀 점수와 능력치 기준을 정합니다.",
+      "descriptionEn": "Set score and stat requirements for replacing the right ring."
+    }
+  ],
+  "conditions": [
+    {
+      "id": "survival.lowHpPercent",
+      "parent": "survival.lowHp",
+      "value": "ON"
+    },
+    {
+      "id": "survival.dotHpPercent",
+      "parent": "survival.dot",
+      "value": "ON"
+    },
+    {
+      "id": "survival.potionHpPercent",
+      "parent": "survival.potion",
+      "value": "ON"
+    },
+    {
+      "id": "dodge.window",
+      "parent": "dodge.overlap",
+      "value": "ON"
+    },
+    {
+      "id": "dodge.totalHpPercent",
+      "parent": "dodge.overlap",
+      "value": "ON"
+    },
+    {
+      "id": "position.distance",
+      "parent": "position.distanceSource",
+      "value": "EXPLICIT"
+    },
+    {
+      "id": "position.gatherCount",
+      "parent": "position.gather",
+      "value": "ON"
+    },
+    {
+      "id": "position.gatherTime",
+      "parent": "position.gather",
+      "value": "ON"
+    },
+    {
+      "id": "position.addEnemies",
+      "parent": "position.gather",
+      "value": "ON"
+    },
+    {
+      "id": "target.goblinDistance",
+      "parent": "target.goblin",
+      "value": "ON"
+    },
+    {
+      "id": "target.goblinTime",
+      "parent": "target.goblin",
+      "value": "ON"
+    },
+    {
+      "id": "bag.freeSlots",
+      "parent": "bag.trigger",
+      "value": "FREE_SLOTS"
+    },
+    {
+      "id": "bag.replacementRank",
+      "parent": "bag.policy",
+      "value": "REPLACE"
+    },
+    {
+      "id": "bag.replacementFail",
+      "parent": "bag.policy",
+      "value": "REPLACE"
+    },
+    {
+      "id": "explore.cursedHpPercent",
+      "parent": "explore.cursedChest",
+      "value": "CONDITIONAL"
+    },
+    {
+      "id": "explore.cursedDefense",
+      "parent": "explore.cursedChest",
+      "value": "CONDITIONAL"
+    },
+    {
+      "id": "explore.cursedMinimumTime",
+      "parent": "explore.cursedChest",
+      "value": "CONDITIONAL"
+    },
+    {
+      "id": "explore.lowTimeSeconds",
+      "parent": "explore.lowTime",
+      "value": "ON"
+    },
+    {
+      "id": "explore.lowTimeLoot",
+      "parent": "explore.lowTime",
+      "value": "ON"
+    },
+    {
+      "id": "dodge.ground.hpPercent",
+      "parent": "dodge.ground.policy",
+      "value": "DAMAGE"
+    },
+    {
+      "id": "dodge.area.hpPercent",
+      "parent": "dodge.area.policy",
+      "value": "DAMAGE"
+    },
+    {
+      "id": "dodge.direct.hpPercent",
+      "parent": "dodge.direct.policy",
+      "value": "DAMAGE"
+    },
+    {
+      "id": "potion.resourcePercent",
+      "parent": "potion.resource",
+      "value": "ON"
+    },
+    {
+      "id": "potion.hpTarget",
+      "parent": "potion.autoBuy",
+      "value": "ON"
+    },
+    {
+      "id": "potion.resourceTarget",
+      "parent": "potion.autoBuy",
+      "value": "ON"
+    },
+    {
+      "id": "potion.utilityTarget",
+      "parent": "potion.autoBuy",
+      "value": "ON"
+    },
+    {
+      "id": "potion.budget",
+      "parent": "potion.autoBuy",
+      "value": "ON"
+    },
+    {
+      "id": "potion.reserve",
+      "parent": "potion.autoBuy",
+      "value": "ON"
+    }
+  ],
+  "labels": [
+    {
+      "id": "survival.lowHpPercent",
+      "text": "후퇴를 시작할 HP"
+    },
+    {
+      "id": "survival.returnHpPercent",
+      "text": "전투로 복귀할 HP"
+    },
+    {
+      "id": "survival.dotHpPercent",
+      "text": "부착 피해 대응 기준"
+    },
+    {
+      "id": "survival.potionHpPercent",
+      "text": "물약을 사용할 HP"
+    },
+    {
+      "id": "repeat.count",
+      "text": "완료 횟수 상한"
+    },
+    {
+      "id": "repeat.minutes",
+      "text": "사냥 시간 상한"
+    },
+    {
+      "id": "repeat.gold",
+      "text": "목표 금화"
+    },
+    {
+      "id": "repeat.stage",
+      "text": "목표 단계"
+    }
+  ],
+  "help": [
+    {
+      "id": "survival.lowHp",
+      "text": "체력이 낮아지면 긴급 생존 행동을 시작합니다."
+    },
+    {
+      "id": "survival.lowHpPercent",
+      "text": "현재 HP가 이 비율 이하이면 후퇴합니다."
+    },
+    {
+      "id": "survival.lethal",
+      "text": "감지한 공격으로 사망이 예상될 때 대응합니다."
+    },
+    {
+      "id": "survival.dot",
+      "text": "이미 걸린 중독·출혈 등의 피해에 대응합니다."
+    },
+    {
+      "id": "survival.dotHpPercent",
+      "text": "최대 HP에 대한 초당 예상 피해 비율입니다."
+    },
+    {
+      "id": "survival.returnHpPercent",
+      "text": "체력이 회복되고 위험이 해소되면 전투에 복귀합니다."
+    },
+    {
+      "id": "survival.potion",
+      "text": "공격·이동 중에도 물약을 사용할 수 있습니다."
+    },
+    {
+      "id": "survival.potionHpPercent",
+      "text": "현재 HP가 기준 이하이면 물약을 사용합니다."
+    },
+    {
+      "id": "survival.reserveResource",
+      "text": "공격 후에도 회피기 한 번에 필요한 자원을 남깁니다."
+    },
+    {
+      "id": "bag.allowLegendaryDisposal",
+      "text": "전설·세트 장비의 자동 판매·분해를 별도로 허용합니다."
+    },
+    {
+      "id": "bag.protectEnhanced",
+      "text": "자동 판매·분해·교체 대상에서 제외합니다."
+    },
+    {
+      "id": "target.chaseDistance",
+      "text": "교전을 시작한 위치에서의 거리입니다."
+    },
+    {
+      "id": "loot.minimumGold",
+      "text": "이 금액 이상일 때 금화를 향해 이동합니다."
+    },
+    {
+      "id": "repeat.count",
+      "text": "0으로 설정하면 완료 횟수를 제한하지 않습니다."
+    },
+    {
+      "id": "repeat.minutes",
+      "text": "0으로 설정하면 사냥 시간을 제한하지 않습니다."
+    },
+    {
+      "id": "loot.finish",
+      "text": "균열을 종료하기 전에 남은 전리품을 확인합니다."
+    }
+  ]
+}

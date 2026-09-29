@@ -138,6 +138,8 @@ namespace Hellscript
         public HuntEdictV2Document edict;
         // Opt-in. Off keeps the legacy rule engine in sole control, which is what every existing save expects.
         public bool useEdict;
+        // A runtime policy overlay. The player's authored document and skill investment stay intact.
+        public bool useRecommendedEdict;
         public HeroGuide guide=new HeroGuide();
         public List<BuildConfig> presets=new List<BuildConfig>();
         public int huntEdictVersion;
