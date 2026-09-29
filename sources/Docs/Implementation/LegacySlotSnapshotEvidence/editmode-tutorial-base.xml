@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.5603307">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="4734" result="Failed" site="Child" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.560331" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="6462" name="Hellscript.Tests.dll" fullname="/private/tmp/claude-501/-Users-t8g-2410-pn-005-Documents-MyProject-HELLSCRIPT-HELLSCRIPT--claude-worktrees-musing-sammet-6561e3/5c3bcec7-aff6-4e66-ade2-6fa54dea0660/scratchpad/proj/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="4734" result="Failed" site="Child" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.483628" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="48000" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="6463" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="4734" result="Failed" site="Child" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.409490" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="6464" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="4734" result="Failed" site="Child" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.332095" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="6315" name="TutorialProgressionTests" fullname="Hellscript.Tests.TutorialProgressionTests" classname="Hellscript.Tests.TutorialProgressionTests" runstate="Runnable" testcasecount="30" result="Failed" site="Child" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.269121" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="6337" name="EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift" fullname="Hellscript.Tests.TutorialProgressionTests.EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift" methodname="EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift" classname="Hellscript.Tests.TutorialProgressionTests" runstate="Runnable" seed="1661026363" result="Failed" label="Error" start-time="2026-09-29 06:42:09Z" end-time="2026-09-29 06:42:09Z" duration="0.260749" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.First[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00011] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at Hellscript.Tests.TutorialProgressionTests.EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift () [0x00116] in /private/tmp/claude-501/-Users-t8g-2410-pn-005-Documents-MyProject-HELLSCRIPT-HELLSCRIPT--claude-worktrees-musing-sammet-6561e3/5c3bcec7-aff6-4e66-ade2-6fa54dea0660/scratchpad/proj/Assets/HELLSCRIPT/Tests/Editor/TutorialProgressionTests.cs:96 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

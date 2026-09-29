@@ -1,6 +1,6 @@
 # Hunt Edict UX redesign: overview, combat styles and advice from the last hunt
 
-Updated: 2026-09-28 · [한국어](Hunt_Edict_UX_Redesign.md)
+Updated: 2026-09-29 · [한국어](Hunt_Edict_UX_Redesign.md)
 
 ## Request and goal
 
@@ -89,7 +89,7 @@ The thresholds are starting values chosen from how the recorders count. They nee
 ### Entry points
 
 - Opening the edict from town or a result screen lands on the overview. The rift result's **Edit hunt edict** button now opens the overview instead of the skill policy page, so the advice from the hunt that just ended is right there.
-- Tutorial steps open their area directly: Equip a newly unlocked skill (F06) the Skill tab, Presets and sharing (H10) the presets tab, Repeat hunting and idle display (H11) the repeat tab. The potion practice (F05) still jumps to the survival option.
+- Tutorial steps open their area directly: Equip a new skill (F06) the Skill tab, Presets and sharing (H10) the presets tab, Repeat hunting and idle display (H11) the repeat tab. The potion practice (F05) still jumps to the survival option.
 - Opening a skill policy or a skill subpage switches to the Skill tab from any tab.
 - The defeat analysis shown for older records without review data has a **사냥 칙령 수정하러 가기** (edit the hunt edict) button that opened the legacy action-design page despite its label; it now opens the edict overview.
 

@@ -30,17 +30,6 @@ namespace Hellscript.Tests
             foreach(var rule in recommended.rules.Where(r=>r.action==RuleAction.Skill))Assert.AreEqual(catalog.skills[rule.skill].unlock<=level,rule.enabled);
             Assert.AreEqual(original,JsonUtility.ToJson(GameCatalog.Preset(hero,variant)));Assert.IsTrue(recommended.rules.Any(r=>r.action==RuleAction.Basic&&r.enabled));
         }
-        [TestCase(1,false,false)][TestCase(2,false,true)][TestCase(1,true,true)]
-        public void StarterMageFiresAtRealGroupsOrBossesWithoutAnUnlearnedBlizzard(int count,bool boss,bool expected)
-        {
-            var account=ContentTestAccounts.Training(catalog);account.selectedHero=2;var sim=new CombatSimulation(account,catalog,1,0,ownedTraining:true);
-            sim.State.build.movement=MovementMode.Stand;var first=sim.State.enemies[0];first.position=sim.State.position+Vector2.up*2;first.boss=boss;
-            if(count>1)sim.State.enemies.Add(new EnemyState{id=900,position=first.position+Vector2.right*.5f,health=100000,maxHealth=100000,speed=0,attack=0,cooldown=1000});
-            for(int n=0;n<30;n++)sim.Tick(CombatSimulation.Step);
-            Assert.AreEqual(expected,sim.State.actionEvents.Any(e=>e.kind=="ACTION_START"&&e.skill==12));
-            Assert.IsFalse(sim.State.actionEvents.Any(e=>e.kind=="ACTION_START"&&e.skill==13));
-            if(expected)Assert.IsTrue(sim.State.damageEvents.Any(d=>d.definitionId=="M01"&&d.hpLoss>0));
-        }
         [Test]
         public void DefaultOwnedGroupTrainingSupportsStarterAreaAttack()
         {
@@ -51,10 +40,11 @@ namespace Hellscript.Tests
         [TestCase(0)][TestCase(1)][TestCase(2)]
         public void SeveralLevelsPreserveHealthRatioAndResourceWithOneGrowthRecord(int heroClass)
         {
-            var sim=Fixture(heroClass);sim.Hero.xp=90;float old=sim.Stats.hp;sim.State.health=old*.4f;sim.State.resource=27;sim.State.pendingExperience=300;Flush(sim);
-            Assert.AreEqual(3,sim.Hero.level);Assert.AreEqual(115,sim.Hero.xp);Assert.AreEqual(new HeroStats(sim.Hero).hp,sim.Stats.hp);
+            // The first-row actives open at level 1, so grow to level 10 where the next active unlocks.
+            var sim=Fixture(heroClass);sim.Hero.xp=90;float old=sim.Stats.hp;sim.State.health=old*.4f;sim.State.resource=27;sim.State.pendingExperience=Enumerable.Range(1,9).Sum(Economy.XpRequired)-90+115;Flush(sim);
+            Assert.AreEqual(10,sim.Hero.level);Assert.AreEqual(115,sim.Hero.xp);Assert.AreEqual(new HeroStats(sim.Hero).hp,sim.Stats.hp);
             Assert.AreEqual(sim.Stats.hp*.4f,sim.State.health,.0001f);Assert.AreEqual(27,sim.State.resource);Assert.AreEqual(0,sim.State.pendingExperience);
-            var growth=sim.State.growthEvents.Single();Assert.AreEqual(old,growth.oldMaxHp);Assert.AreEqual(1,growth.fromLevel);Assert.AreEqual(3,growth.toLevel);CollectionAssert.AreEqual(new[]{heroClass*6+1},growth.unlockedSkills);
+            var growth=sim.State.growthEvents.Single();Assert.AreEqual(old,growth.oldMaxHp);Assert.AreEqual(1,growth.fromLevel);Assert.AreEqual(10,growth.toLevel);CollectionAssert.AreEqual(new[]{heroClass*6+3},growth.unlockedSkills);
             Flush(sim);Assert.AreEqual(1,sim.State.growthEvents.Count);Assert.AreEqual(115,sim.Hero.xp);
         }
         [Test]
@@ -106,9 +96,10 @@ namespace Hellscript.Tests
         {
             var account=ContentTestAccounts.Training(catalog);account.selectedHero=2;var temp=new CombatSimulation(account,catalog,1,0,ownedTraining:true);temp.State.training=-1;
             var sim=new CombatSimulation(account,catalog,1,restore:temp.State);string original=JsonUtility.ToJson(sim.State.build);
-            sim.State.pendingExperience=275;Flush(sim);Assert.AreEqual(3,sim.Hero.level);Assert.AreEqual(original,JsonUtility.ToJson(sim.State.build));Assert.AreEqual(original,JsonUtility.ToJson(account.Hero.build));
-            Assert.IsFalse(sim.State.build.rules.Single(r=>r.skill==13).enabled);Assert.IsTrue(sim.State.growthEvents.Single().unlockedSkills.Contains(13));
-            var next=BehaviorPresets.ForLevel(HeroClass.Mage,0,3,catalog);Assert.IsTrue(next.rules.Single(r=>r.skill==13).enabled);Assert.AreEqual(RuleTarget.OwnBlizzard,next.rules.Single(r=>r.skill==12).target);
+            // Teleport (level 10) is the mage's first rule-bearing skill that still unlocks by growth.
+            sim.State.pendingExperience=Enumerable.Range(1,9).Sum(Economy.XpRequired);Flush(sim);Assert.AreEqual(10,sim.Hero.level);Assert.AreEqual(original,JsonUtility.ToJson(sim.State.build));Assert.AreEqual(original,JsonUtility.ToJson(account.Hero.build));
+            Assert.IsFalse(sim.State.build.rules.Single(r=>r.skill==15).enabled);Assert.IsTrue(sim.State.growthEvents.Single().unlockedSkills.Contains(15));
+            var next=BehaviorPresets.ForLevel(HeroClass.Mage,0,10,catalog);Assert.IsTrue(next.rules.Single(r=>r.skill==15).enabled);Assert.AreEqual(RuleTarget.OwnBlizzard,next.rules.Single(r=>r.skill==12).target);
         }
         [Test]
         public void CatalogAppliesStarterRecommendationsOnlyWhenCreatingAnAccount()

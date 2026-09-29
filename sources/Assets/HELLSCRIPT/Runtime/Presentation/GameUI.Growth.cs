@@ -58,10 +58,6 @@ namespace Hellscript
             var preview=RiftLoadoutLocked?BuildEditing.DuringRift(game.Combat.State.build,proposed,true):proposed;
             pageRepaint=()=>ShowRecommendation(variant);Base("recommendation","추천 행동 미리보기",Loc.F("{0} · 불러온 뒤 설정 적용으로 확정합니다", proposed.name));
             Note(content,BehaviorPresets.Concepts[(int)hero.heroClass*2+variant],23,84,gold);
-            if(hero.heroClass==HeroClass.Mage&&variant==0&&level<game.catalog.skills[13].unlock)
-                Note(content,"눈보라를 배우기 전에는 화염구로 예상 명중 2명 이상 또는 보스를 공격합니다. Lv.3부터 장판 연계 추천안을 확인하세요.",20,115,pale);
-            if(hero.heroClass==HeroClass.Warrior&&variant==1&&level<3||hero.heroClass==HeroClass.Mage&&variant==1&&level<6)
-                Note(content,"핵심 공격을 아직 배우지 않아 기본 공격 중심으로 진행합니다. 지금 사용할 공격이 더 많은 다른 추천안도 비교해 보세요.",20,106,gold);
             Note(content,RiftLoadoutLocked?"균열에서는 현재 장착을 유지한 후보입니다. 기존 사용자 설정은 아직 바뀌지 않았습니다.":"현재 작성 중인 편집안과 비교합니다. 실제 장비는 교체하지 않습니다.",20,94,pale);
             string[] targets={"가까운 적","정예·보스 우선","지원형 우선","낮은 HP","밀집 중심"};
             Note(content,Loc.F("행동 {0}행 변경\n목표: {1} → {2}\n이동: {3} {4:0.#}m → {5} {6:0.#}m\n물약 HP: {7:0}% → {8:0}%", BuildEditing.ChangedRows(editing,preview), targets[(int)editing.target], targets[(int)preview.target], BehaviorRules.Movements[(int)editing.movement], editing.distance, BehaviorRules.Movements[(int)preview.movement], preview.distance, editing.potionThreshold, preview.potionThreshold),20,158,pale);

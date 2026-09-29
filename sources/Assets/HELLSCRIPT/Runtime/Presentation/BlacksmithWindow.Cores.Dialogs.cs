@@ -18,7 +18,7 @@ namespace Hellscript
         }
         void RenderCoreDialog()
         {
-            var backdrop=Panel(overlays,"Core dialog backdrop","080b08e8","080b08e8");Stretch(backdrop);
+            var backdrop=Panel(overlays,"Core dialog backdrop",UiTheme.VoidHex+"e8",UiTheme.VoidHex+"e8");Stretch(backdrop);
             var outside=backdrop.gameObject.AddComponent<Button>();outside.targetGraphic=backdrop.GetComponent<Image>();outside.transition=Selectable.Transition.None;outside.onClick.AddListener(CloseCoreDialog);outside.name="core-dialog-outside";
             float w=Mathf.Min(width-32,620),h=Mathf.Min(height-28,820);
             dialog=Panel(backdrop,"Core equipment dialog",UiTheme.ItemTopHex,UiTheme.ItemBottomHex,UiTheme.ItemRuleHex);Place(dialog,(width-w)/2,(height-h)/2,w,h);

@@ -41,7 +41,7 @@ namespace Hellscript
             foreach(var entry in new[]{(SettingsSection.Screen,"화면"),(SettingsSection.Sound,"소리"),(SettingsSection.Language,"언어"),(SettingsSection.Character,"캐릭터 변경")})
             {var tab=entry.Item1;var b=Button(commonTabs,entry.Item2,()=>SelectSettingsTab(tab));b.name="settings-tab-"+tab;b.GetComponentInChildren<Text>().fontSize=18;}
             BuildDisplayPane();BuildSoundPane();BuildLanguagePane();BuildCharacterPane();BuildInformationPanes();
-            commonClose=Button(commonCard,"X",CloseCommonPanel);commonClose.name="settings-close";commonClose.GetComponentInChildren<Text>().fontSize=24;
+            commonClose=Button(commonCard,"×",CloseCommonPanel);commonClose.name="settings-close";((UiButton)commonClose).Configure(UiButtonRole.Quiet);commonClose.GetComponentInChildren<Text>().fontSize=24;
             commonLaidOut=false;SelectSettingsTab(help?SettingsSection.Help:SettingsSection.Screen);ReflowCommonPanel();
         }
         void BuildDisplayPane()

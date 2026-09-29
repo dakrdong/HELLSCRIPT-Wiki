@@ -11,8 +11,8 @@ namespace Hellscript
         void Modal(string kind,string title,float w,float h)
         {
             Dismiss();dialogKind=kind;
-            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("050805ce","050805ce");
-            dialog=Panel(overlays,"Inventory dialog "+kind,"302b1f","1b1e15","a68b59");Place(dialog,(width-w)/2,(height-h)/2,w,h);
+            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint(UiTheme.VoidHex+"ce",UiTheme.VoidHex+"ce");
+            dialog=Panel(overlays,"Inventory dialog "+kind,UiTheme.SelectedHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);Place(dialog,(width-w)/2,(height-h)/2,w,h);
             if(kind=="detail")return; // The shared item popup owns this header and card viewport.
             bool itemWindow=kind=="detail"||kind=="compare";
             Txt(dialog,title,14,0,w-(itemWindow?130:58),39,16,gold);Btn(dialog,"×",w-34,4,27,28,Dismiss,false,19).name="inventory-dialog-close";Rule(dialog,40,w);
@@ -61,7 +61,7 @@ namespace Hellscript
         void ShowError(string value)
         {
             GameAudio.Refuse();Toast(value);
-            if(dialog!=null){ClosePopover();popover=Panel(overlays,"Inventory notice","3d2b1d","292317","ae8256");float w=Mathf.Min(width-32,330);Place(popover,(width-w)/2,height/2-75,w,150);Txt(popover,value,14,12,w-28,84,12,red);Btn(popover,"확인",w-91,106,77,31,ClosePopover,true).name="inventory-notice-close";}
+            if(dialog!=null){ClosePopover();popover=Panel(overlays,"Inventory notice",UiTheme.SelectedHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);float w=Mathf.Min(width-32,330);Place(popover,(width-w)/2,height/2-75,w,150);Txt(popover,value,14,12,w-28,84,12,red);Btn(popover,"확인",w-91,106,77,31,ClosePopover,true).name="inventory-notice-close";}
         }
         public void ShowComparison(string id)
         {
@@ -137,7 +137,7 @@ namespace Hellscript
         public void Inspect(string id)
         {
             var item=FindItem(id);if(item==null)return;ClosePopover();
-            float w=Mathf.Min(width-32,300),h=landscape?258:300;popover=Panel(overlays,"Item quick information","343023","202419","b59660");Place(popover,(width-w)/2,(height-h)/2,w,h);
+            float w=Mathf.Min(width-32,300),h=landscape?258:300;popover=Panel(overlays,"Item quick information",UiTheme.BorderHex,UiTheme.RaisedHex,UiTheme.GoldHex);Place(popover,(width-w)/2,(height-h)/2,w,h);
             Txt(popover,"아이템 정보",12,0,w-118,31,12,gold);Btn(popover,"×",w-31,3,26,25,ClosePopover,false,17).name="salvage-info-close";
             RangeToggle(popover,w-99,2,"inventory-quick-range-toggle");
             Scroll(popover,"Quick information scroll",7,35,w-14,h-42,out var content);float y=7;ItemInfo(content,item,w-20,ref y);content.sizeDelta=new Vector2(0,y+6);

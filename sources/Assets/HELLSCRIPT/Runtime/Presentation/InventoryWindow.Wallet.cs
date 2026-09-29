@@ -50,7 +50,7 @@ namespace Hellscript
             Scroll(dialog,"Account balances",10,86,w-20,h-137,out var content);float y=3;
             foreach(var row in WalletRows())
             {
-                var cell=Panel(content,"wallet-row-"+row.id,"28291e","1c2016","534a32");Place(cell,4,y,w-38,42);
+                var cell=Panel(content,"wallet-row-"+row.id,UiTheme.HoverHex,UiTheme.RaisedHex,UiTheme.EdgeHex);Place(cell,4,y,w-38,42);
                 WalletIcon(cell,row.icon,4,3,36);
                 var name=Txt(cell,row.label,44,0,(w-88)*.56f,42,11,pale);WalletFit(name);
                 var value=Txt(cell,row.amount.ToString("N0"),44+(w-88)*.56f,0,(w-88)*.44f,42,12,gold,TextAnchor.MiddleRight);

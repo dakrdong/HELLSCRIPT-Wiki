@@ -1,0 +1,25 @@
+Scratch Edit Mode probe, 2026-09-29, Unity 6000.6.0f1. Each case runs a stage-1 rift (seed 744) for 1200 ticks (60 s).
+"drained" forces resource to 0 before every tick. "used" lists skill starts; "kills" counts dead enemies.
+Heroes come from a new GameStore account after ActivateSkillTrees; (a) and (c) reset the allocation to zero ranks.
+
+Before the resource-role fix (after the level-1 catalog change):
+class 0 Warrior
+  (a) no skills, drained: used[BASIC=38] kills=19
+  (b) W01 equipped, drained: used[BASIC=42] kills=19
+  (b') W01 equipped, normal: used[W01=10] kills=35
+  (c) no skills, BASIC=RESOURCE, drained: used[] basicCodes[RESOURCE_NOT_NEEDED:46] kills=0
+class 1 Ranger
+  (a) no skills, drained: used[BASIC=43] kills=18
+  (b) A01 equipped, drained: used[BASIC=45] kills=19
+  (b') A01 equipped, normal: used[A01=20,BASIC=11] kills=31
+  (c) no skills, BASIC=RESOURCE, drained: used[] basicCodes[RESOURCE_NOT_NEEDED:17] kills=0
+class 2 Mage
+  (a) no skills, drained: used[BASIC=48] kills=20
+  (b) M01 equipped, drained: used[BASIC=52] kills=20
+  (b') M01 equipped, normal: used[M01=28,BASIC=6] kills=28
+  (c) no skills, BASIC=RESOURCE, drained: used[] basicCodes[RESOURCE_NOT_NEEDED:46] kills=0
+
+After the fix, (a), (b) and (b') are unchanged and (c) attacks:
+  Warrior (c) no skills, BASIC=RESOURCE, drained: used[BASIC=42] kills=19
+  Ranger  (c) no skills, BASIC=RESOURCE, drained: used[BASIC=47] kills=18
+  Mage    (c) no skills, BASIC=RESOURCE, drained: used[BASIC=52] kills=20

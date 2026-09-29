@@ -37,8 +37,8 @@ namespace Hellscript
             var anchor=(RectTransform)Find("inventory-potion-settings").transform;var corners=new Vector3[4];anchor.GetWorldCorners(corners);
             var point=frame.InverseTransformPoint((corners[0]+corners[3])*.5f);float ax=point.x-frame.rect.xMin,ay=frame.rect.yMax-point.y;
             bool below=ay+h+12<=height;float top=below?ay+8:Mathf.Clamp(ay-anchor.rect.height-h-8,8,height-h-8);
-            dialog=Panel(overlays,"Potion settings bubble","302b1f","1b1e15","a68b59");Place(dialog,Mathf.Clamp(ax-w/2,8,width-w-8),top,w,h);
-            var tail=Panel(dialog,"Speech bubble tail","302b1f","302b1f","a68b59");float tx=Mathf.Clamp(ax-dialog.anchoredPosition.x,12,w-12);
+            dialog=Panel(overlays,"Potion settings bubble",UiTheme.SelectedHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);Place(dialog,Mathf.Clamp(ax-w/2,8,width-w-8),top,w,h);
+            var tail=Panel(dialog,"Speech bubble tail",UiTheme.SelectedHex,UiTheme.SelectedHex,UiTheme.GoldDeepHex);float tx=Mathf.Clamp(ax-dialog.anchoredPosition.x,12,w-12);
             Place(tail,tx-4,below?-4:h-4,8,8);tail.localRotation=Quaternion.Euler(0,0,45);tail.SetAsFirstSibling();tail.GetComponent<Image>().raycastTarget=false;
             Txt(dialog,"물약 사용 순서",12,2,w-53,25,12,gold);
             Btn(dialog,"×",w-32,3,26,25,Dismiss,false,17).name="potion-settings-close";
@@ -60,7 +60,7 @@ namespace Hellscript
             {
                 var row=Find("potion-fallback-"+n);bool chosen=n==(int)choice;UiTheme.Choice(row,chosen,false);
                 foreach(var text in row.GetComponentsInChildren<Text>())text.color=chosen?gold:pale;
-                var check=row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?"c4a774":"13180f",chosen?"c4a774":"13180f","c0a475");
+                var check=row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?UiTheme.GoldHex:UiTheme.PanelHex,chosen?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);
                 if(check.childCount==0&&chosen)Glyph(check,"check",1,1,13,ink);else if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);
             }
         }

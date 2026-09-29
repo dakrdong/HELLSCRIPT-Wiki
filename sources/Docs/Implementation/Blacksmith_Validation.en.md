@@ -1,8 +1,33 @@
 # Blacksmith implementation validation
 
-Validation date: 2026-09-22
+Updated: 2026-09-29 · Validation date: 2026-09-22
 
 [한국어](Blacksmith_Validation.md) · [Implementation, resources and migration](Blacksmith_Unity_Integration.en.md)
+
+## 2026-09-29: Suspended runs without a slot snapshot
+
+On 2026-09-29 a macOS development build (`main` `b1989282`) threw `IndexOutOfRangeException` in `HeroStats.ApplySlotGrowth` (`HeroStats.Blacksmith.cs:46`) when the town bag opened, through `GameUI.ShowPlayInventory` → `InventoryWindow.EquipmentStats` → `EquipmentPreviewHero`. The local guest save held a suspended run of hero 0 whose `slotLevels` was an empty array, not null.
+
+A running battle keeps the slot enhancement levels it started with in `RunState.slotLevels`. A run saved before that field existed has no such field, and `JsonUtility` reads a missing array and a null array alike as an empty array. The old code treated only `null` as "no snapshot", so it copied the empty array, and `ApplySlotGrowth`, which reads all ten slots, threw. The same cause broke equipping and unequipping in town (`GameStore.ChangeEquipment`), resuming the run (the `CombatSimulation` constructor) and saving the hunt edict in town (`CombatSimulation.PrepareSuspendedHuntEdictChange`). Character switching and the server verifier's resume go through the same constructor.
+
+- The rule now lives in one place, `BlacksmithCatalog.SlotLevels(run, hero)`. It uses the run's snapshot only when its length equals the number of blacksmith slots (10). A missing, empty or wrong-length array means the hero's current levels apply.
+- All four places that read `slotLevels` and fall back to the hero go through it: the bag preview, town equipment changes, battle construction and resume, and the town edict edit. Everything else reads the `State.slotLevels` that the battle constructor settled, so a running battle still keeps the snapshot it started with.
+- The save format and keys are unchanged, and older saves load as before. Resuming a run without a snapshot stores the hero's levels at that moment as its snapshot.
+- Layout and text are unchanged.
+
+### Missing-snapshot validation
+
+- Reproduction: four new `BlacksmithTests` cases reload a run saved with an empty or a three-entry array, open the real bag and read its max HP, then equip in town, resume the run and save the edict in town. All four failed on the unfixed code, and the bag case stopped at the reported `ApplySlotGrowth` ← `HeroStats` ← `InventoryWindow.EquipmentStats` frames. [Before XML](LegacySlotSnapshotEvidence/editmode-before.xml)
+- Per call site: with the helper kept, each of the four call sites was restored to the old code in turn. Every restored site made the case that passes through it fail. [Results](LegacySlotSnapshotEvidence/mutation.txt)
+- 381 related Edit Mode tests (blacksmith, suspended edict saves, three inventory suites, rift entry, authoritative verifier, settings revisions, restore fidelity, current build saves, repeat hunts, combat journal, stored localization, growth, action continuity): 338 passed and 43 failed after the fix. The same 43 fail by name on the unfixed code, and all of them are in the baseline failures recorded on 2026-09-27. On the unfixed code the four new cases fail as well, 47 in total. [After](LegacySlotSnapshotEvidence/editmode-focused.xml) · [Before](LegacySlotSnapshotEvidence/editmode-focused-base.xml)
+- Full Edit Mode: 4,686 of 4,734 passed and 48 failed, with none skipped (1,853 s). All four new cases passed. 47 of the 48 failures match the baseline failures recorded on 2026-09-27. The remaining `TutorialProgressionTests.EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift` fails with the same message when the runtime files are restored to the old code. [Summary](LegacySlotSnapshotEvidence/editmode-full-summary.json) · [Base check](LegacySlotSnapshotEvidence/editmode-tutorial-base.xml)
+- macOS development build: zero build errors. The new `-hellscriptLegacyRunBagSmoke` uses the save's run when it has no slot snapshot, or builds that state on a fresh account. It opens the town bag at 440×956 Korean, 956×440 English and 1600×900 Korean, and checks that max HP equals the value from the hero's own levels and that every attribute is listed. It then equips one bag item, resumes the run and checks that the battle and the saved file use the hero's levels. [Build](LegacySlotSnapshotEvidence/build.txt)
+  - Copy of the reported save: passed. Max HP 621 was shown, the equip was saved, and the resumed run continued at 38 kills and 273/621 HP. The original save file was not modified. [Runtime](LegacySlotSnapshotEvidence/runtime-user-save.txt)
+  - Fresh account with the chest slot at level 40: passed. Max HP 2,749 reflects level 40, not the default level 1. [Runtime](LegacySlotSnapshotEvidence/runtime-fixture.txt)
+  - A build with only the five runtime files restored to the old code exited with code 1 on the same save copy, with the reported exception as soon as the bag opened. [Runtime](LegacySlotSnapshotEvidence/runtime-before.txt)
+- Text-size changes, PC 16:10 and 21:9 and physical mobile devices were not checked in this work, because the layout did not change. No `mcpforunity://instances` resource was available in this session, so Unity MCP was not used. The checks ran in batch mode on a project clone and in the macOS player.
+
+[Saved-game bag 1600×900](LegacySlotSnapshotEvidence/bag-save-1600x900-ko.png) · [Portrait 440×956](LegacySlotSnapshotEvidence/bag-save-440x956-ko.png) · [English 956×440](LegacySlotSnapshotEvidence/bag-save-956x440-en.png) · [Fresh-account bag](LegacySlotSnapshotEvidence/bag-fixture-1600x900-ko.png) · [Resumed rift](LegacySlotSnapshotEvidence/resumed-save.png)
 
 ## 2026-09-29: Locked services and consistent navigation
 
@@ -70,7 +95,7 @@ All 69 captures are included under `Artifacts/Blacksmith/RuntimeEvidence/` in th
 | Enchanting | First paid slot lock, constant repeated price, actual candidates/ranges, auto match/pause/continue/stop/close | Core and player checks |
 | Workstations | Per-character levels, two account-shared stations, sequential 10/50/250-diamond unlocks, duplicate rejection | `BlacksmithTests` |
 | Time | Destination-level costs/durations, exactly-once offline settlement, 60 seconds costs 1; 59/1 seconds free | Core and player checks |
-| Combat | Frozen run growth, next-run application, 70% elemental resistance cap, effective learned-active/equipped-passive levels | Core, skill and combat regression tests |
+| Combat | Frozen run growth, hero levels for older runs without a snapshot, next-run application, 70% elemental resistance cap, effective learned-active/equipped-passive levels | Core, skill and combat regression tests, `BlacksmithTests`, macOS bag smoke |
 | Salvage | Ordinary legendary 10, unique-effect 15, set 10 in single/bulk/automatic paths; cores and persistence retained | Nine route/reward combinations |
 | Rift/sweep | Stage-based stones, one-time pickup, duplicate sweep rejection | Blacksmith and resource tests |
 | Access/layout | NPC range guard, interaction button and E key, three equal columns, portrait navigation, full-frame dialogs | Player checks |
@@ -84,6 +109,8 @@ HTML: `node --test Prototypes/Blacksmith/*.test.cjs`.
 Unity: use `-batchmode -nographics -runTests -testPlatform EditMode -testResults <xml>`. Add `-testFilter Hellscript.Tests.BlacksmithTests` for the focused suite.
 
 Build the macOS development player through `Hellscript.Editor.ProjectBuilder.BuildMac` with `-hellscriptBuildOutput <app path>`. Run it with `-hellscriptBlacksmithSmoke -hellscriptSavePath <new fixture directory> -hellscriptScreenshots <evidence directory>`. It exits after acceptance; success requires `HELLSCRIPT_BLACKSMITH_SMOKE_OK` and `result.txt`. Omit these arguments for normal gameplay.
+
+The bag check for runs without a slot snapshot runs with `-hellscriptLegacyRunBagSmoke -hellscriptSavePath <save directory> -hellscriptScreenshots <evidence directory>`. A copy of a `hellscript-local-v1.json` that holds such a run is used as is; an empty directory gets the same state on a fresh account. Success requires `HELLSCRIPT_LEGACY_RUN_BAG_SMOKE_OK` and `runtime-legacy-run-bag.txt` in the evidence directory.
 
 `Artifacts/Blacksmith/Play-Blacksmith.command` in the current worktree launches manual play using the separate fixture account, without sharing the original account's save directory.
 

@@ -1,6 +1,6 @@
 # HELLSCRIPT Mage — 37 skills
 
-Updated: 2026-09-23
+Updated: 2026-09-29
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
@@ -124,7 +124,7 @@ Deals blast damage at the point of impact.
 
 ### 02. Blizzard · `M02`
 
-Existing runtime retained · Lv.3 · Cooldown 6s · Resource 30
+Existing runtime retained · Lv.1 · Cooldown 6s · Resource 30
 
 Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once.
 
@@ -136,7 +136,7 @@ Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once.
 
 ### 03. Chain Lightning · `M03`
 
-Existing runtime retained · Lv.6 · Cooldown 2s · Resource 25
+Existing runtime retained · Lv.1 · Cooldown 2s · Resource 25
 
 Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one.
 

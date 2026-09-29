@@ -9,7 +9,7 @@ Use the latest inventory as the equipment presentation baseline. Compose new con
 
 | Element | Owner and contract |
 | --- | --- |
-| Theme | `UiTheme`: dark olive backgrounds, brass selection/actions, ivory text. Preserve semantic danger/gain/loss colors. |
+| Theme | `UiTheme` Obsidian & Gilt ramp: warm obsidian surfaces, one bronze hairline, gold only for choice/primary, ivory text. Screen code must not write surface/edge/gold hex literals. Preserve semantic danger/gain/loss, rarity and element colours. [Style overhaul](Ui_Style_Obsidian_Gilt.en.md) |
 | Fonts | `UiFonts.Body`; `UiFonts.Display` only for title branding. Individual windows must not destroy borrowed fonts. |
 | Type | Title 20, heading 15, body 12, caption 10 before reading scale. Existing HUD/legacy adapters convert their coordinate system. |
 | Equipment slots | Portrait 52, landscape 54, gap 6, common `UiTheme.Scale`. Reduce columns instead of shrinking slots. Preserve persisted slot indices and capacity. |
@@ -67,7 +67,7 @@ See [completed-work integration](Completed_Work_Integration.en.md) for the initi
 
 ## Buttons and tabs
 
-Follow the [shared button interaction contract](Button_UX.en.md). Create new buttons with `ContentWindowView.Button` and supply persistent selection with `UiTheme.Choice`. Do not duplicate button palettes or pointer transitions per screen.
+Follow the [shared button interaction contract](Button_UX.en.md) for behaviour and [Obsidian & Gilt](Ui_Style_Obsidian_Gilt.en.md) for appearance. Create buttons with `ContentWindowView.Button`, navigation tabs with `ContentWindowView.Tab`, and supply persistent selection with `UiTheme.Choice`. Never draw a tab as a primary action; header close controls are a quiet `×`. Adapters with their own header add the shared divider with `UiHeaderRule`. Do not duplicate button palettes or pointer transitions per screen.
 
 
 Shared UI does not require a rectangular frame for every control. Vaults use `UiButtonRole.Icon` and `StorageChestGraphic` for open, closed, purchasable and locked chests. Shared input state, theme and fonts remain authoritative; `StorageWindow` and `GameStore` own selection and transactions. Ambiguous filters retain text labels. Chest content art uses two native-alpha PNGs in `Art/Storage`; `StorageChestOverlay` draws purchase/lock badges and drag progress. This user-requested content illustration does not replace the common button skin. See [button validation](Button_UX.en.md) for provenance, fixed bounds and input evidence.

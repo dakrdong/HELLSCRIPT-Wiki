@@ -1,0 +1,75 @@
+{
+  "date": "2026-09-29",
+  "unity": "6000.6.0f1",
+  "branch": "claude/elated-raman-3af2c9",
+  "mergeCommit": "857556da + GameCatalog.asset sync + blacksmith test fix",
+  "mainCommit": "20169eaf",
+  "editorAccess": "No CoplayDev MCP tools in this session; batch-mode project clones",
+  "changes": [
+    "W02/W03/A02/A03/M02/M03 unlock at level 1 in catalog.json, GameCatalog.cs, legacy_definitions.json, ClassSkills.json and the scene-referenced GameCatalog.asset",
+    "A player's brand-new account starts every hero on a zero-rank version-4 loadout (GameStore.StartNewHeroesWithoutSkills from GameController)",
+    "The basic attack RESOURCE role still attacks when no paid active can run now"
+  ],
+  "generators": {
+    "class_skill_runtime.py": "build reproduces ClassSkills.json byte for byte; check passes",
+    "class_skills.py": "check passes",
+    "class_skill_options.py": "check passes",
+    "class_skill_reports.py": "check passes",
+    "Prototypes/SkillTree/build.cjs": "no diff after rebuild",
+    "engine.test.cjs": "39/39"
+  },
+  "editMode": {
+    "merged": {
+      "total": "4735",
+      "passed": "4687",
+      "failed": "48",
+      "skipped": "0"
+    },
+    "main": {
+      "total": "4733",
+      "passed": "4686",
+      "failed": "47",
+      "skipped": "0"
+    },
+    "newFailures": [
+      "Hellscript.Tests.BlacksmithTests.SkillCapstoneDoesNotUnlockSkillsOrSpendPoints"
+    ],
+    "newFailureFixed": "BlacksmithTests 43/43 after the fix (focused run)",
+    "sharedFailures": 47,
+    "testsOnlyInMerged": 19,
+    "testsOnlyInMain": 17,
+    "interim": "Against main e325e83b before PR #38 and against 20169eaf before the asset sync: 0 new failures"
+  },
+  "uiContract": "passed",
+  "uiContractTests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "nativeRuntime": {
+    "build": "macOS development player from the merge, Build Finished: Success",
+    "passed": [
+      "Tutorial (prologue, both processes)",
+      "SkillTree",
+      "SkillReset",
+      "SkillMenu",
+      "SkillPreset",
+      "EdictSections",
+      "QuickPreset",
+      "ClassSkill",
+      "Attendance"
+    ],
+    "preExistingFailures": [
+      "EdictOverview",
+      "CharacterSelection",
+      "Title",
+      "Preset",
+      "Training",
+      "Growth",
+      "EquipmentArt"
+    ],
+    "details": "runtime-smokes.txt"
+  },
+  "combatProbe": "basic-attack-probe.txt",
+  "fightFingerprints": "early-rift-fingerprints.txt",
+  "physicalMobile": "not tested"
+}

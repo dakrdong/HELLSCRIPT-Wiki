@@ -3,6 +3,8 @@
 Updated: 2026-09-29
 Korean: [공통 버튼과 탭의 상호작용](Button_UX.md)
 
+> 2026-09-29: button and tab appearance moved to [Obsidian & Gilt](Ui_Style_Obsidian_Gilt.en.md). The state contract below (choice, hover, press, focus, disabled, lock) is unchanged; the older captures below show the previous look.
+
 Storage selected-tab skins were being repainted as ordinary buttons by `UiTheme.Button`. Screens now provide persistent selection explicitly; shared controls own input feedback and rendering.
 
 ## Visual direction and references

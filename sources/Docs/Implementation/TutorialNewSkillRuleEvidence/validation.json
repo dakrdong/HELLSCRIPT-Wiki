@@ -1,0 +1,100 @@
+{
+  "baseCommit": "20169eaf",
+  "unity": "6000.6.0f1",
+  "editorAccess": "No CoplayDev MCP tools in this session; used batch-mode project clones (Library cloned from the main checkout)",
+  "rule": "F06 completes when an active the hero has never equipped is equipped and saved after its first skill; available from level 2 while such an unlocked active exists; availability, completion and recommendation all read TutorialProgress.NewSkills",
+  "editMode": {
+    "classes": [
+      "CombatJournalTests",
+      "FirstPlayExperienceTests",
+      "FirstPlayGuideTests",
+      "GrowthTests",
+      "HuntEdictDefaultsTests",
+      "HuntEdictFoundationTests",
+      "HuntEdictOverviewTests",
+      "HuntEdictQuickPresetTests",
+      "HuntEdictSkillPresetTests",
+      "HuntEdictSuspendedSaveTests",
+      "HuntEdictTests",
+      "HuntEdictV2StorageTests",
+      "HuntEdictV2Tests",
+      "IdleHuntJournalTests",
+      "LocalizationTests",
+      "SkillTreeIntegrationTests",
+      "StoredLocalizationTests",
+      "StoryDialogueTests",
+      "TutorialProgressionTests"
+    ],
+    "after": {
+      "passed": 429,
+      "failed": 0,
+      "skipped": 0
+    },
+    "oldRuleMutation": {
+      "note": "new tests run against the previous availability (level>=3), completion (tree level>1) and recommendation (catalog unlock>1); only NewSkills kept so the tests compile",
+      "passed": 39,
+      "failed": 4,
+      "skipped": 0,
+      "failedTests": [
+        "EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift",
+        "NewSkillIsAnActiveNeverEquippedAfterTheFirstSkill(0)",
+        "NewSkillIsAnActiveNeverEquippedAfterTheFirstSkill(1)",
+        "NewSkillIsAnActiveNeverEquippedAfterTheFirstSkill(2)"
+      ],
+      "failedAt": {
+        "NewSkillIsAnActiveNeverEquippedAfterTheFirstSkill": "F06 available at level 2 (line 143)",
+        "EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift": "F06 practiced after equipping W02 at level 2 (line 129)"
+      }
+    },
+    "fullSuite": {
+      "total": 4736,
+      "passed": 4689,
+      "failed": 47,
+      "skipped": 0,
+      "sameAsBaseline": true,
+      "newFailures": 0,
+      "file": "full-suite-comparison.json"
+    }
+  },
+  "uiContract": "passed",
+  "uiContractTests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "macOSBuild": "Development player, Build Finished, Result: Success",
+  "nativeRuntime": {
+    "smoke": "-hellscriptTutorialSmoke, two processes on one disposable save (second with -hellscriptTutorialResume), no live-operations fixture",
+    "phaseOne": "passed",
+    "resume": "passed, HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK",
+    "f06": {
+      "atArrival": "not available at level 1 (first skill holds the level-1 point)",
+      "openedAt": 4,
+      "skillLevelFixture": false,
+      "performed": "Warrior learned, equipped (slot 2) and saved W02 Leap Slam with pointer input",
+      "savedActives": [
+        "W01",
+        "W02"
+      ]
+    },
+    "f06DetailLayout": {
+      "profiles": 20,
+      "sizes": [
+        "440x956",
+        "956x440",
+        "1600x900",
+        "1600x1000",
+        "2100x900"
+      ],
+      "languages": [
+        "ko",
+        "en"
+      ],
+      "readingScalePercent": [
+        100,
+        150
+      ]
+    }
+  },
+  "physicalMobile": "not tested",
+  "webAndApk": "not rebuilt"
+}

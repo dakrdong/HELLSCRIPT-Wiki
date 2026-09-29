@@ -1,6 +1,6 @@
 # HELLSCRIPT skill and equipment matrix
 
-Updated: 2026-09-23
+Updated: 2026-09-29
 
 [Design rules](HELLSCRIPT_Class_Skills.en.md) · [JSON](ClassSkills/catalog.json)
 

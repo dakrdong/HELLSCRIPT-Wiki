@@ -87,6 +87,9 @@ namespace Hellscript
         static ForgeCatalogData data;
         public static IReadOnlyList<ForgeSlot> Slots=>(data??=JsonUtility.FromJson<ForgeCatalogData>(Resources.Load<TextAsset>("BlacksmithSlots").text)).slots;
         public static int Index(string id){for(int n=0;n<Slots.Count;n++)if(Slots[n].id==id)return n;throw new ArgumentException("장착 부위를 확인해 주세요.");}
+        // A run keeps the slot levels it started with. A run saved before that snapshot existed reloads it as an
+        // empty array (JsonUtility never restores null), so any other length means the hero's own levels apply.
+        public static int[] SlotLevels(RunState run,HeroSave hero)=>(int[])(run?.slotLevels?.Length==Slots.Count?run.slotLevels:(hero.slotProgress??new SlotProgress()).levels).Clone();
         public static string StatName(string id)
         {
             switch(id)

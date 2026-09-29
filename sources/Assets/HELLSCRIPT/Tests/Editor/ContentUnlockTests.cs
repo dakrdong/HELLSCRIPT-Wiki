@@ -73,7 +73,7 @@ namespace Hellscript.Tests
         public void U18_PassiveSlotsArePerHero(int level,int slots)
         {
             var a=New();a.Hero.level=level;a.heroes[1].highestClear=50;Assert.AreEqual(slots,ContentUnlocks.PassiveSlots(a.Hero));
-            Assert.AreEqual(0,ContentUnlocks.PassiveSlots(a.heroes[1]));Assert.AreEqual(new[]{1,3,6,10,15,20},catalog.skills.Take(6).Select(s=>s.unlock).ToArray());
+            Assert.AreEqual(0,ContentUnlocks.PassiveSlots(a.heroes[1]));Assert.AreEqual(new[]{1,1,1,10,15,20},catalog.skills.Take(6).Select(s=>s.unlock).ToArray());
         }
         [Test] public void U19_LegacyMigrationPreservesPreviouslyAvailableServicesAndSlots()
         {

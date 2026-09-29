@@ -722,6 +722,8 @@ PAGE_META={
  'aspect-runestone.en':('장비와 빌드','Aspect Runestone and progression','Automatic salvage collection, five levels for 123 aspects, manual upgrades and equipment imprinting.'),
  'aspect-runestone-implementation':('후속 개발 기록','위상 각인석 구현·검증','공통 UI, 마을 기물, 계정 저장·전투 적용과 macOS 검증 근거입니다.'),
  'aspect-runestone-implementation.en':('후속 개발 기록','Aspect Runestone implementation','Shared UI, town monument, persistence, combat integration and native macOS evidence.'),
+ 'ui-style-obsidian-gilt':('후속 개발 기록','공통 UI 양식: 흑요석·금박','팔각 버튼·밑줄 탭·금박 창틀의 새 공통 양식과 화면별 어긋남 개선, 색상 검사와 macOS 캡처 근거입니다.'),
+ 'ui-style-obsidian-gilt.en':('후속 개발 기록','Shared UI style: Obsidian & Gilt','Chamfered buttons, underline tabs and gilt frames, per-screen drift fixes, a colour check and native macOS captures.'),
  'shared-ui-contract':('프로젝트','공통 UI와 신규 콘텐츠 규칙','장비 상세·슬롯·장착 배치·테마·창 관리의 소유자와 신규 콘텐츠 기본 틀·자동 검사입니다.'),
  'shared-ui-contract.en':('프로젝트','Shared UI and new-content contract','Shared equipment, theme and window owners, new-content starter and automated ownership checks.'),
  'shared-ui-validation':('후속 개발 기록','공통 UI 통합 검증','통합된 화면과 사냥 칙령, 저장·입력·장비 회귀 검사 및 macOS 실행 근거입니다.'),

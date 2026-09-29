@@ -98,7 +98,7 @@ namespace Hellscript
             Txt(parent,"제작할 장비 선택",14,top+8,w-28,27,15,pale);
             Txt(parent,Loc.F("{0} 코어 × 10 · Lv.{1}",GameCatalog.Slots[coreSlot],CoreCrafting.Level(Hero)),14,top+36,w-28,24,10,gold);
             float searchWidth=(w-34)*.62f;
-            var inputRoot=Panel(parent,"Core search","11170d","11170d","53563b");Place(inputRoot,12,top+66,searchWidth,34);
+            var inputRoot=Panel(parent,"Core search",UiTheme.BackgroundHex,UiTheme.BackgroundHex,UiTheme.EdgeHex);Place(inputRoot,12,top+66,searchWidth,34);
             var input=inputRoot.gameObject.AddComponent<InputField>();input.name="core-search";input.textComponent=Txt(inputRoot,"",8,0,searchWidth-16,34,11,pale);
             input.placeholder=Txt(inputRoot,"장비 이름 검색",8,0,searchWidth-16,34,10,muted);input.SetTextWithoutNotify(coreQuery);
             var classes=new[]{"모든 직업","전사","궁수","마법사"};
@@ -112,11 +112,11 @@ namespace Hellscript
                 foreach(var recipe in CoreRecipes())
                 {
                     string id=recipe.id;var item=CoreCrafting.Definition(id,CoreCrafting.Level(Hero));float rw=w-28;
-                    var r=Panel(list,"Core recipe "+id,"24271d","191c16","363b2b");
+                    var r=Panel(list,"Core recipe "+id,UiTheme.HoverHex,UiTheme.PanelHex,UiTheme.BorderHex);
                     var icon=EquipmentSlotView.Create(r,item,5,5,size,font);var inspect=icon.gameObject.AddComponent<UiButton>();inspect.targetGraphic=icon.GetComponent<Image>();inspect.Configure(UiButtonRole.Item);
                     inspect.name="core-inspect-"+id;inspect.onClick.AddListener(()=>{coreInspectId=id;OpenDialog("core-preview");});
                     var select=Btn(r,"",size+12,1,rw-size-13,67,()=>SelectCoreRecipe(id));select.name="core-recipe-"+id;
-                    var surface=select.GetComponent<StorageSurface>();surface.Paint("24271d","191c16","00000000");
+                    var surface=select.GetComponent<StorageSurface>();surface.Paint(UiTheme.HoverHex,UiTheme.PanelHex,"00000000");
                     var name=Txt(select.transform,item.DisplayName,5,2,rw-size-33,1000,11,EquipmentGradePalette.For(item));float nameHeight=Mathf.Max(32,name.preferredHeight+4);
                     Place(name.rectTransform,5,2,rw-size-33,nameHeight);float row=Mathf.Max(size+14,nameHeight+42);
                     Place(r,0,y,rw,row-5);Place((RectTransform)select.transform,size+12,1,rw-size-13,row-7);
@@ -189,7 +189,7 @@ namespace Hellscript
         {int previous=coreInvestment;coreInvestment=Math.Clamp(value,0,CoreCrafting.InvestmentLimit(store.Data));coreRequest=null;if(coreInvestment!=previous)GameAudio.Fx("forge.core_invest");coreRefresh?.Invoke();}
         void DrawCoreActions(Transform parent,float y,float w,float h)
         {
-            var rail=Panel(parent,"Core craft actions","292d1e","202419","585337");Place(rail,0,y,w,h);
+            var rail=Panel(parent,"Core craft actions",UiTheme.HoverHex,UiTheme.RaisedHex,UiTheme.EdgeHex);Place(rail,0,y,w,h);
             float x=landscape?w/3:14,bw=landscape?w-x-16:w-28;
             var summary=Txt(rail,"",14,6,landscape?w/3-28:w-28,25,11,gold);
             var error=Txt(rail,"",14,landscape?34:32,landscape?w/3-28:w-28,landscape?38:19,9,muted);

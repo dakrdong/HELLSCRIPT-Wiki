@@ -81,9 +81,9 @@
   ],
   "source": {
     "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
-    "runtimeSha256": "43526be1f9d4310078006f244364d2a0fb575d74f6de29d27bd30171674a953b",
+    "runtimeSha256": "6987748d0a987fa0d1c7117404aeae5557e3f4b3309b1b87cbd17c3ef35063bb",
     "design": "Docs/Design/ClassSkills/catalog.json",
-    "designSha256": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
+    "designSha256": "2779712ac5398de26fd76ee436804b06ef1b8a25ecd2e04f99f0e066813d26f7",
     "gameEnabled": false
   },
   "classes": [
@@ -172,7 +172,7 @@
             "ko": "유효한 위치로 도약해 착지 충격을 줍니다. 실제 도약 거리 2m를 넘는 1m마다 직접 피해 가산 +15%를 얻으며 8m에서 +90%입니다. 거리 확보 선택 시 최대 2초 후퇴를 시도합니다.",
             "en": "Leap to a valid landing and deal impact damage. Each actual meter beyond 2m adds 15% direct damage, capped at +90% at 8m. The spacing policy may retreat for up to 2s first."
           },
-          "sourceUnlock": 3,
+          "sourceUnlock": 1,
           "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W02.png",
           "tags": [
             "Leap"
@@ -217,7 +217,7 @@
             "ko": "전방의 적에게 강한 물리 피해를 줍니다.",
             "en": "Deals heavy physical damage to enemies in front."
           },
-          "sourceUnlock": 6,
+          "sourceUnlock": 1,
           "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W03.png",
           "tags": [
             "Crush"
@@ -1838,7 +1838,7 @@
             "ko": "60도 부채꼴로 화살 3발을 발사합니다.",
             "en": "Fires 3 arrows in a 60 degree arc."
           },
-          "sourceUnlock": 3,
+          "sourceUnlock": 1,
           "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A02.png",
           "tags": [
             "Multi"
@@ -1882,7 +1882,7 @@
             "ko": "5초 독 장판을 설치합니다. 최대 2개.",
             "en": "Places a poison zone for 5 seconds. Up to 2 at once."
           },
-          "sourceUnlock": 6,
+          "sourceUnlock": 1,
           "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A03.png",
           "tags": [
             "Trap"
@@ -3507,7 +3507,7 @@
             "ko": "6초간 냉기 피해와 35% 둔화. 최대 2개.",
             "en": "Deals cold damage and slows by 35% for 6 seconds. Up to 2 at once."
           },
-          "sourceUnlock": 3,
+          "sourceUnlock": 1,
           "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M02.png",
           "tags": [
             "Blizzard"
@@ -3552,7 +3552,7 @@
             "ko": "4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.",
             "en": "Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one."
           },
-          "sourceUnlock": 6,
+          "sourceUnlock": 1,
           "icon": "../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M03.png",
           "tags": [
             "Chain"

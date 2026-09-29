@@ -165,7 +165,7 @@ namespace Hellscript
         }
         Button ActionButton(Transform parent,string id,string text,Action action,bool primary=false,int fontSize=16)
         {
-            var r=Plate(id,parent,primary?Red:Slate);var button=r.gameObject.AddComponent<UiButton>();button.targetGraphic=r.GetComponent<Image>();
+            var r=Plate(id,parent,primary?Red:Slate,false);var button=r.gameObject.AddComponent<UiButton>();button.targetGraphic=r.GetComponent<Image>();
 
             var label=Caption(r,"Caption",text,fontSize,primary?Bone:Muted);Fill(label.rectTransform);label.rectTransform.offsetMin=new Vector2(12,3);label.rectTransform.offsetMax=new Vector2(-12,-3);
             UiTheme.Button(button,primary);button.onClick.AddListener(()=>action());return button;
@@ -173,8 +173,7 @@ namespace Hellscript
         Button GoogleButton(Transform parent,string id,string text,Action action,int fontSize,float read)
         {
             var button=(UiButton)ActionButton(parent,id,text,action,false,fontSize);button.Configure(UiButtonRole.GoogleSignIn);
-            button.transform.Find("Etched frame").gameObject.SetActive(false);
-            var caption=button.GetComponentInChildren<Text>();caption.font=UiFonts.GoogleSignIn;caption.color=StorageSurface.Hex("1f1f1f");
+            var caption=button.GetComponentInChildren<Text>();caption.font=UiFonts.GoogleSignIn;caption.color=StorageSurface.Hex(UiTheme.GoogleTextHex);
             caption.rectTransform.offsetMin=new Vector2(40*read,3);caption.rectTransform.offsetMax=new Vector2(-12*read,-3);
             var icon=Rect("Official Google G",button.transform);icon.anchorMin=icon.anchorMax=new Vector2(0,.5f);icon.pivot=new Vector2(0,.5f);
             var texture=Resources.Load<Texture2D>("Authentication/GoogleG");

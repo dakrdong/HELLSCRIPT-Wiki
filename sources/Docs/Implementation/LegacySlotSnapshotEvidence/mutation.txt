@@ -1,0 +1,15 @@
+Each run keeps BlacksmithCatalog.SlotLevels and restores one call site to 9296ab24, then runs only the two new BlacksmithTests (4 cases).
+Every restored call site makes its own case fail, so each of the four readers is covered.
+
+mutant-InventoryWindow.xml 2 passed 2 failed
+   BagShowsOwnSlotGrowthForACheckpointWithoutASnapshot(0) | System.IndexOutOfRangeException : Index was outside the bounds of the array.
+   BagShowsOwnSlotGrowthForACheckpointWithoutASnapshot(3) | System.IndexOutOfRangeException : Index was outside the bounds of the array.
+mutant-InventoryEquipment.xml 2 passed 2 failed
+   TownActionsAndResumeUseOwnLevelsForACheckpointWithoutASnapshot(0) | 거래를 적용하지 않았습니다: Index was outside the bounds of the array.
+   TownActionsAndResumeUseOwnLevelsForACheckpointWithoutASnapshot(3) | 거래를 적용하지 않았습니다: Index was outside the bounds of the array.
+mutant-CombatSimulation.xml 2 passed 2 failed
+   TownActionsAndResumeUseOwnLevelsForACheckpointWithoutASnapshot(0) | System.IndexOutOfRangeException : Index was outside the bounds of the array.
+   TownActionsAndResumeUseOwnLevelsForACheckpointWithoutASnapshot(3) | System.IndexOutOfRangeException : Index was outside the bounds of the array.
+mutant-CombatSimulation.HuntEdictChanges.xml 2 passed 2 failed
+   TownActionsAndResumeUseOwnLevelsForACheckpointWithoutASnapshot(0) | 사냥 칙령을 저장하지 못했습니다: Index was outside the bounds of the array.
+   TownActionsAndResumeUseOwnLevelsForACheckpointWithoutASnapshot(3) | 사냥 칙령을 저장하지 못했습니다: Index was outside the bounds of the array.

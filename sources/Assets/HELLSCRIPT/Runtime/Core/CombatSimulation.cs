@@ -67,7 +67,7 @@ namespace Hellscript
                 if(restore==null&&ground)State.build.classSkills.automatic=State.build.classSkills.automatic.Where(id=>!trainingGround.excluded.Contains(id)).ToArray();
                 State.build.classSkills.ProjectLegacy(State.build,catalog);
             }
-            if(State.slotLevels==null)State.slotLevels=(int[])(Hero.slotProgress??new SlotProgress()).levels.Clone();
+            State.slotLevels=BlacksmithCatalog.SlotLevels(State,Hero);
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;statsHero.slotProgress=new SlotProgress{levels=(int[])State.slotLevels.Clone()};
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
             PrepareEdict(restore!=null);

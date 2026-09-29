@@ -1,0 +1,53 @@
+macOS development player, Unity 6000.6.0f1, merge 857556da (main 20169eaf + this branch) with the GameCatalog.asset unlock sync. Synthetic EventSystem pointers; no physical mobile claim.
+smoke | process exit codes | success marker | seconds
+SkillTree | p1 exit=0 p2 exit=0  |  | 27s
+SkillReset | p1 exit=0 p2 exit=0  |  | 27s
+SkillMenu | p1 exit=0 p2 exit=0  |  | 34s
+SkillPreset | p1 exit=0 p2 exit=0  |  | 68s
+EdictSections | p1 exit=0 p2 exit=0  |  | 76s
+QuickPreset | p1 exit=0 p2 exit=0  |  | 34s
+ClassSkill | p1 exit=0 p2 exit=0  | marker=yes | 9s
+Attendance | p1 exit=0 p2 exit=0  | marker=yes | 85s
+Tutorial | p1 exit=0 p2 exit=0  | marker=yes | 537s
+
+Tutorial result lines:
+PASS: surrounded intro, 20 intro layout profiles, forced skill lesson through real pointers, pack cleared. Restart required.
+PASS independent process restored the prologue at the cleared pack.
+PASS gatekeeper entrance paused the real fight, framed the boss and resumed it.
+PASS the prologue gate swallows edict-tab-overview while edict-tab-survival is the step.
+PASS forced pointer steps saved Extra survival supplies and Avoid all warnings during the paused boss fight.
+PASS arrival layout in 20 resolution/language/text-size profiles.
+PASS real boss death, 1,000 gold reward once (arrival restock spent 175), town arrival event, no rift rewards or clear records.
+PASS journal layout in 20 resolution/language/text-size profiles.
+PASS actual read/defer/hide/restore buttons remain separate from practice.
+PASS actual asynchronous admission pins the published loopback configuration; no cloud or telemetry claim.
+PASS actual first rift entry, nonblocking combat guidance, real result and return.
+PASS F05 real edict save, F06 pointer skill equip/save, owned training and matching F07 fresh rift. Skill level fixture used=True.
+PASS briefing layout in 20 resolution/language/text-size profiles.
+PASS the blacksmith briefs enhancement in the shared story dialogue with practice, read and later.
+PASS support layout in 20 resolution/language/text-size profiles.
+PASS supported enhancement uses pointer-confirmed atomic domain transaction; late unlock uses explicit fixture.
+PASS the prologue gate swallows edict-tab-overview while edict-tab-skills is the step.
+PASS the prologue gate swallows edict-tab-overview while edict-tab-survival is the step.
+PASS complete level 1 replay leaves actual equipment, economy and progression unchanged.
+macOS synthetic EventSystem pointers. No physical mobile or human comprehension claim.
+
+Heroes in the tutorial save afterwards: Warrior v4 W01 (prologue lesson) + W04 (F06 level-10 fixture) ranked 1; Ranger v4 and Mage v4 with no learned or equipped skill.
+
+Restart checks:
+  SkillTree: PASS: four slots, passive rank, skill policy and tree restored in a fresh player process.
+  SkillReset: PASS: all three level-one heroes retain zero ranks, empty slots and one unspent point in a fresh process.
+  SkillMenu: PASS: removed active slot remains empty; other active slots and ultimate retained after a fresh process.
+  SkillPreset: PASS: a fresh macOS process restored the active Custom tab, the last directly edited option and the dragged common attack order without a manual save.
+  EdictSections: PASS: five presets, inline rename and recommended mode reloaded in a fresh native process; disabled controls persisted and OFF restored custom navigation.
+  QuickPreset: PASS: Whirlwind and survival preset values reloaded in a fresh native process.
+
+Smokes that failed identically on the pre-change build (b1989282 + de233de3) and on the change build before merging main, so not caused by this change:
+  EdictOverview: Skill row did not open the basic attack policy
+  CharacterSelection: PC 16:9 lineup KO: target below 44 validation pixels: characters-back
+  Title: google-ko-100-440x956: touch target below 44 points: title-motion
+  Preset: Resize lost the draft or changed game data.
+  Training: Training replaced the real level or equipment stats.
+  Growth: Growth runtime condition timed out
+  EquipmentArt: failed on both builds in inventory cell input (Artwork blocks cell input / inventory-compare obscured)
+QuickPreset failed on the change build before it got the explicit existing-save fixture (new heroes had no Whirlwind to preset); it passes now.

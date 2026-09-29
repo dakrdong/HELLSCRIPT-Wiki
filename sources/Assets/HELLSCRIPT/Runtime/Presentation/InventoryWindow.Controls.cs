@@ -20,14 +20,14 @@ namespace Hellscript
         }
         Button Btn(Transform parent,string label,float x,float y,float w,float h,Action click,bool primary=false,int size=11)
         {
-            var r=Panel(parent,label,primary?"71352a":"343428",primary?"482219":"25261c",primary?"b18b5a":"786342");Place(r,x,y,w,h);r.GetComponent<StorageSurface>().inset=true;
+            var r=Panel(parent,label,primary?"71352a":UiTheme.BorderHex,primary?"482219":UiTheme.HoverHex,primary?UiTheme.GoldHex:UiTheme.GoldDeepHex);Place(r,x,y,w,h);r.GetComponent<StorageSurface>().inset=true;
             var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=r.GetComponent<Image>();UiTheme.Button(b,primary);
             var t=Txt(r,label,4,0,w-8,h,size,pale,TextAnchor.MiddleCenter);t.resizeTextForBestFit=true;t.resizeTextMinSize=8;t.resizeTextMaxSize=t.fontSize;b.onClick.AddListener(()=>click());return b;
         }
         void Glyph(Transform parent,string symbol,float x,float y,float size,Color color)
         {var r=Rect(symbol,parent);Place(r,x,y,size,size);var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=color;glyph.raycastTarget=false;}
         void Check(Transform parent,float x,float y,float size,bool selected)
-        {var r=Panel(parent,"Selection checkbox",selected?"c4a774":"13180f",selected?"c4a774":"13180f","c0a475");Place(r,x,y,size,size);r.GetComponent<Image>().raycastTarget=false;if(selected)Glyph(r,"check",1,1,size-2,ink);}
+        {var r=Panel(parent,"Selection checkbox",selected?UiTheme.GoldHex:UiTheme.PanelHex,selected?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);Place(r,x,y,size,size);r.GetComponent<Image>().raycastTarget=false;if(selected)Glyph(r,"check",1,1,size-2,ink);}
         void FilterButton(Transform parent,string label,float x,float y,float w,string kind)
         {
             var button=Btn(parent,label,x,y,w,28,()=>ShowFilter(kind),false,10);button.name="inventory-"+kind;
@@ -42,7 +42,7 @@ namespace Hellscript
             float w=anchor.rect.width,h=kind=="grade"?232:200;
             filterMenu=Rect("Inventory filter layer",overlays);Stretch(filterMenu);
             var shade=Btn(filterMenu,"",0,0,width,height,CloseFilter);shade.name="inventory-filter-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
-            var menu=Panel(filterMenu,"Inventory filter list","343023","202419","a68b59");
+            var menu=Panel(filterMenu,"Inventory filter list",UiTheme.BorderHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);
             Place(menu,Mathf.Clamp(bottom.x,8,width-w-8),Mathf.Clamp(frame.rect.yMax-bottom.y+4,8,height-h-8),w,h);
             Txt(menu,kind=="grade"?"등급":"정렬",10,0,w-48,30,12,gold);
             Btn(menu,"×",w-31,3,26,25,CloseFilter,false,17).name="inventory-filter-close";
@@ -67,19 +67,19 @@ namespace Hellscript
             {
                 int bit=1<<n;bool chosen=(grades&bit)!=0;var row=Find("inventory-grade-option-"+n);row.interactable=grades!=bit;
                 UiTheme.Choice(row,chosen,false);
-                var check=(RectTransform)row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?"c4a774":"13180f",chosen?"c4a774":"13180f","c0a475");
+                var check=(RectTransform)row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?UiTheme.GoldHex:UiTheme.PanelHex,chosen?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);
                 if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);else if(chosen)Glyph(check,"check",1,1,13,ink);
             }
         }
         void DrawIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size);
         ScrollRect Scroll(Transform parent,string name,float x,float y,float w,float h,out RectTransform content)
         {
-            var root=Panel(parent,name,"12160f","12160f");Place(root,x,y,w,h);
+            var root=Panel(parent,name,UiTheme.BackgroundHex,UiTheme.BackgroundHex);Place(root,x,y,w,h);
             var viewport=Rect("Viewport",root);Place(viewport,0,0,w-6,h);viewport.gameObject.AddComponent<RectMask2D>();var fill=viewport.gameObject.AddComponent<Image>();fill.color=Color.clear;
             content=Rect("Content",viewport);content.anchorMin=new Vector2(0,1);content.anchorMax=Vector2.one;content.pivot=new Vector2(.5f,1);content.sizeDelta=Vector2.zero;
             var scroll=root.gameObject.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.vertical=true;scroll.viewport=viewport;scroll.content=content;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.scrollSensitivity=26;
-            var track=Panel(root,"Scrollbar track","2b2d20","2b2d20");Place(track,w-4,0,3,h);
-            var thumb=Panel(track,"Scrollbar thumb","907b51","907b51");Stretch(thumb);
+            var track=Panel(root,"Scrollbar track",UiTheme.HoverHex,UiTheme.HoverHex);Place(track,w-4,0,3,h);
+            var thumb=Panel(track,"Scrollbar thumb",UiTheme.GoldDeepHex,UiTheme.GoldDeepHex);Stretch(thumb);
             var bar=track.gameObject.AddComponent<Scrollbar>();bar.handleRect=thumb;bar.targetGraphic=thumb.GetComponent<Image>();bar.direction=Scrollbar.Direction.BottomToTop;
             scroll.verticalScrollbar=bar;scroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;return scroll;
         }
@@ -87,6 +87,6 @@ namespace Hellscript
         {
             var t=Txt(parent,value,x,y,w,1000,size,color);float h=Mathf.Max(size+5,t.preferredHeight+6);Place(t.rectTransform,x,y,w,h);y+=h;return t;
         }
-        void Rule(Transform parent,float y,float w){var line=Panel(parent,"Rule","5c4e33","5c4e33");Place(line,10,y,w-20,1);line.GetComponent<Image>().raycastTarget=false;}
+        void Rule(Transform parent,float y,float w){var line=Panel(parent,"Rule",UiTheme.EdgeHex,UiTheme.EdgeHex);Place(line,10,y,w-20,1);line.GetComponent<Image>().raycastTarget=false;}
     }
 }

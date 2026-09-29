@@ -28,7 +28,7 @@ namespace Hellscript
         {
             var view=root.GetComponent<EquipmentSlotView>();if(view==null)view=root.gameObject.AddComponent<EquipmentSlotView>();view.ItemId=item?.id;
             var frame=root.GetComponent<StorageSurface>();if(frame==null)frame=root.gameObject.AddComponent<StorageSurface>();float size=root.rect.width;
-            frame.Paint(item==null?"151811":selected?"443b26":"27271c",item==null?"191d14":"1d2117",selected?UiTheme.GoldHex:item==null?"414332":EquipmentGradePalette.Hex[Storage.Grade(item)]);frame.inset=true;
+            frame.Paint(item==null?UiTheme.PanelHex:selected?UiTheme.BorderHex:UiTheme.HoverHex,item==null?UiTheme.PanelHex:UiTheme.RaisedHex,selected?UiTheme.GoldHex:item==null?UiTheme.BorderHex:EquipmentGradePalette.Hex[Storage.Grade(item)]);frame.inset=true;
             if(item==null)return frame;
             Icon(root,item,3,3,size-6);
             var level=UiLayout.Text(root,"Equipment level",item.enhancement>0?"+"+item.enhancement+" · "+item.level:"Lv."+item.level,2,equipped?size-26:size-14,size-5,12,8,UiTheme.Text,font);level.alignment=TextAnchor.MiddleRight;
@@ -37,7 +37,7 @@ namespace Hellscript
             if(item.slot==0)UiLayout.Text(root,"Equipment hands",EquipmentSlots.TwoHanded(item)?"2H":EquipmentSlots.Offhand(item)?"OFF":"1H",16,2,24,12,7,UiTheme.Gold,font);
             if(showSelection)
             {
-                var check=UiLayout.Rect("Equipment selection",root);UiLayout.Place(check,size-17,2,15,15);var s=check.gameObject.AddComponent<StorageSurface>();s.Paint("151811","151811",UiTheme.GoldHex);s.raycastTarget=false;
+                var check=UiLayout.Rect("Equipment selection",root);UiLayout.Place(check,size-17,2,15,15);var s=check.gameObject.AddComponent<StorageSurface>();s.Paint(UiTheme.PanelHex,UiTheme.PanelHex,UiTheme.GoldHex);s.raycastTarget=false;
                 if(selected)Glyph(check,"Selected","check",1,1,13,UiTheme.Gold);
             }
             return frame;

@@ -38,7 +38,7 @@
 
 `HuntEdictEditSession`의 편집본을 `GameStore.CommitHuntEdict`로 검증하고 한 번에 저장한다. 등급·액티브 위치·궁극기·자동 사용·스킬별 조건·공격 순서·전역 칙령을 함께 저장한다. 화면 재배치와 언어 변경은 저장을 실행하지 않는다. 스킬 옵션 화면은 `SaveSkillPolicy`가 선택한 스킬의 사용 방침만 기존 거래로 즉시 저장한다. 다른 미저장 포인트·장착·전역 옵션은 함께 확정하지 않는다. 프리셋 탭·활성 표시·예시 그림·직접 설정의 세부 규칙은 [간편 프리셋](Hunt_Edict_Quick_Presets.md)을 따른다.
 
-기존 플레이어 구성은 `ClassSkillLoadout` 버전 3을 사용하며, 명시적으로 배분을 초기화한 구성은 버전 4를 사용한다. 시작 시 실제 소유 캐릭터를 원자적으로 전환하고, 원래 빌드는 보존한다. 새로운 해금 레벨에 미달하는 투자분은 기본 등급으로 되돌려 포인트를 돌려준다. 검증 전용 버전 1·2 구성은 기존 의미를 유지한다. 진행 중인 이전 균열은 저장된 구성을 유지하며, 해당 균열에서 스킬을 편집하면 기존 변경 거래로 전환한다.
+기존 플레이어 구성은 `ClassSkillLoadout` 버전 3을 사용한다. 명시적으로 배분을 초기화한 구성과 2026-09-29 이후 새로 만든 캐릭터는 버전 4를 사용한다. 시작 시 실제 소유 캐릭터를 원자적으로 전환하고, 원래 빌드는 보존한다. 새로운 해금 레벨에 미달하는 투자분은 기본 등급으로 되돌려 포인트를 돌려준다. 검증 전용 버전 1·2 구성은 기존 의미를 유지한다. 진행 중인 이전 균열은 저장된 구성을 유지하며, 해당 균열에서 스킬을 편집하면 기존 변경 거래로 전환한다.
 
 프리셋 공유는 이름과 전체 스킬 구성을 담은 HED5를 사용한다. HED1~HED3 가져오기와 HED4 스킬 구성을 읽는 기존 경로를 유지한다. 불러온 과다 투자분은 보관할 수 있지만 실제 적용은 차단한다.
 
@@ -116,3 +116,21 @@ Unity Edit Mode 관련 검사 99개와 공통 UI 회귀 검사 9개가 통과했
 - [검증 요약](HuntEdictSkillMenuEvidence/validation.json) · [Edit Mode 검사](HuntEdictSkillMenuEvidence/editmode.xml) · [빌드 결과](HuntEdictSkillMenuEvidence/build.txt)
 - [포인터 조작](HuntEdictSkillMenuEvidence/runtime.txt) · [재실행 복원](HuntEdictSkillMenuEvidence/restart.txt)
 - [PC 한국어](HuntEdictSkillMenuEvidence/desktop-ko.png) · [세로 영어 150%](HuntEdictSkillMenuEvidence/portrait-en-150.png) · [가로 한국어](HuntEdictSkillMenuEvidence/landscape-ko.png) · [오른쪽 끝 궁극기·영어 150%](HuntEdictSkillMenuEvidence/ultimate-edge-en.png) · [모의 안전 영역](HuntEdictSkillMenuEvidence/safe-area.png)
+
+## 2026-09-29 첫 줄 액티브 제한 레벨과 스킬 없는 시작
+
+- 세 직업 첫 줄의 두 번째·세 번째 액티브(전사 도약 내려찍기·분쇄 일격, 궁수 다중 사격·맹독 덫, 마법사 눈보라·연쇄 번개)는 스킬 목록에서도 1레벨에 해금된다. 트리는 2026-09-28부터 1레벨이었지만, 성장 화면·훈련 비교·칙령 가져오기·추천 행동과 일부 전투 판정은 스킬 목록의 3·6레벨을 읽어 여전히 잠그거나 그 레벨을 표시했다. 원본 `Docs/Design/ClassSkills/catalog.json`, 기존 정의 `GameCatalog.cs`와 그 보존 기록 `Docs/Implementation/ClassSkills/legacy_definitions.json`, 게임 씬이 실제로 읽는 `Assets/HELLSCRIPT/Resources/GameCatalog.asset`을 함께 바꿨다. 자산은 Unity 편집기에서 저장했고 해당 여섯 값만 달라졌다. 생성기로 직업별 스킬 문서와 HTML 시안 목록을 다시 만들었고, 게임용 `ClassSkills.json`은 생성 결과와 바이트 단위로 같다.
+- 플레이어가 새로 만든 계정의 캐릭터 세 명은 버전 4의 0등급 상태로 시작한다. 배운 스킬과 장착 칸이 없어 기본 공격만 사용하며, 1레벨에 받는 포인트 1개로 첫 줄 액티브 하나를 배운다. 게임은 저장이 없어 계정을 새로 만든 경우에만 `GameStore.StartNewHeroesWithoutSkills`로 전환한다. 기존 저장과 테스트가 직접 만든 계정은 바꾸지 않는다. 프롤로그는 이 상태에서 첫 스킬(전사 회오리·궁수 관통 사격·마법사 화염구)을 배우게 한다.
+- 기본 공격의 사용 방식이 ‘자원 보충’이어도, 지금 쓸 수 있는 유료 액티브가 없으면(스킬 없음·재사용 대기·꺼짐·잠김·사거리 밖) 기본 공격을 사용한다. 이전에는 이런 경우 마나가 0이어도 제자리에 서 있었다. 먼저 쓸 수 있는 유료 액티브가 자원이 부족하면 기본 공격으로 자원을 채우고, 그 액티브를 지금 쓸 수 있으면 기본 공격을 아끼는 규칙은 그대로 둔다. 전사 전투 함성의 자원 회복 판단도 기존 의미를 유지한다.
+- 1레벨 마법사가 눈보라를 배우기 전을 위한 추천 규칙, 그리고 3·6레벨 해금을 전제로 한 성장 화면 안내 두 개와 그 번역을 삭제했다. 잠긴 스킬을 예로 든 검사는 아직 성장으로 열리는 10레벨 액티브를 쓰도록 바꿨다. 1레벨 전사가 이제 도약 내려찍기도 쓰므로 초반 균열 전투 기준값을 다시 만들었다. 스킬 트리·빠른 프리셋 런타임 검사는 기존 저장(버전 3)을 명시적으로 준비해 기존 플레이어 구성을 계속 검사한다.
+
+### 이번 변경의 검증
+
+Unity 6000.6.0f1 Edit Mode 전체 검사를 이 브랜치와 `main`을 병합한 상태(`857556da`)와 같은 시점의 `main`(`20169eaf`)에서 함께 실행했다. 마지막 전체 검사에서 병합 상태는 4,735개 중 4,687개, `main`은 4,733개 중 4,686개가 통과했다. 새로 생긴 실패는 대장간 보너스 검사 1개였다. 이 검사가 잠긴 스킬의 예로 쓴 도약 내려찍기가 1레벨에 열렸기 때문이며, 예시를 10레벨 액티브로 바꾼 뒤 해당 검사 클래스 43개를 다시 확인했다. 나머지 실패 47개는 두 쪽에 공통인 기존 실패다. 스킬 설계·옵션·보고서 생성기 검사와 HTML 시안 엔진 검사 39개, 공통 UI 검사와 검사 도구 테스트 9개도 통과했다. 게임용 `ClassSkills.json`은 `tools/class_skill_runtime.py build`의 결과와 같다.
+
+확인용 임시 검사로 직업별 60초 전투를 실행했다. 스킬이 없는 1레벨 캐릭터는 자원을 0으로 고정해도 기본 공격만으로 18~20마리를 처치했다. 기본 공격을 ‘자원 보충’으로 두었을 때는 수정 전 세 직업 모두 한 마리도 처치하지 못했고, 수정 후에는 18~20마리를 처치했다.
+
+macOS 개발 빌드에서는 튜토리얼(프롤로그 포함, 두 프로세스), 스킬 트리의 다섯 흐름, 빠른 프리셋, 클래스 스킬, 출석 검사가 통과했다. 튜토리얼을 마친 저장에서 전사는 프롤로그에서 배운 회오리와 10레벨 검증용 상태에서 배운 지면 강타를 장착했고, 궁수와 마법사는 스킬 없이 남아 있었다. 칙령 요약·캐릭터 선택·타이틀·프리셋·훈련·성장·장비 그림 검사는 변경 전 빌드에서도 같은 이유로 실패했으므로 이번 변경과 구분했다. 모바일 실기기에서는 확인하지 않았다.
+
+- [검증 요약](FirstRowSkillStartEvidence/validation.json) · [Edit Mode 비교](FirstRowSkillStartEvidence/editmode-comparison.json) · [전투 확인](FirstRowSkillStartEvidence/basic-attack-probe.txt) · [초반 균열 기준값](FirstRowSkillStartEvidence/early-rift-fingerprints.txt)
+- [런타임 검사](FirstRowSkillStartEvidence/runtime-smokes.txt) · [새 계정의 스킬 트리](FirstRowSkillStartEvidence/new-player-skill-tree.png)

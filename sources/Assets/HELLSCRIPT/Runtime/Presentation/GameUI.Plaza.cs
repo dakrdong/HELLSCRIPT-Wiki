@@ -33,7 +33,7 @@ namespace Hellscript
                 var s=TownLayout.Stations[i];var b=Button(plazaGuide,s.name,()=>{plazaGuide.gameObject.SetActive(false);game.RequestStation(s.id);});Place((RectTransform)b.transform,8,8+i*53,284,46);b.name="town-route-"+s.id;
             }
             plazaJoystickRect=Rect("Town joystick",root);plazaJoystickRect.anchorMin=plazaJoystickRect.anchorMax=Vector2.zero;plazaJoystickRect.pivot=new Vector2(0,0);plazaJoystickRect.anchoredPosition=new Vector2(28,38);plazaJoystickRect.sizeDelta=new Vector2(168,168);
-            var pad=plazaJoystickRect.gameObject.AddComponent<TownCircleGraphic>();pad.color=new Color(.035f,.047f,.04f,1);
+            var pad=plazaJoystickRect.gameObject.AddComponent<TownCircleGraphic>();pad.color=UiTheme.Tint(UiTheme.InsetHex);
             var rim=Rect("Joystick rim",plazaJoystickRect);Stretch(rim);var rimGraphic=rim.gameObject.AddComponent<TownCircleGraphic>();rimGraphic.InnerRatio=.96f;rimGraphic.color=new Color(.67f,.6f,.43f,1);rimGraphic.raycastTarget=false;
             var knob=Rect("Joystick knob",plazaJoystickRect);knob.anchorMin=knob.anchorMax=knob.pivot=new Vector2(.5f,.5f);knob.sizeDelta=new Vector2(64,64);
             var knobGraphic=knob.gameObject.AddComponent<TownCircleGraphic>();knobGraphic.color=new Color(.57f,.52f,.4f,1);knobGraphic.raycastTarget=false;
@@ -42,7 +42,7 @@ namespace Hellscript
                 plazaBubbles[s.id]=CreateTownBubble("NPC bubble "+s.id,s.name,s.npcName);
             foreach(var resident in TownLayout.Residents)
                 plazaResidentBubbles[resident.id]=CreateTownBubble("Resident bubble "+resident.id,"",resident.name);
-            plazaAction=Box("Town interaction card",root,new Color(.045f,.053f,.042f,.97f));plazaAction.anchorMin=plazaAction.anchorMax=new Vector2(1,.35f);plazaAction.pivot=new Vector2(1,.5f);plazaAction.anchoredPosition=new Vector2(-22,0);plazaAction.sizeDelta=new Vector2(250,232);
+            plazaAction=Box("Town interaction card",root,UiTheme.Tint(UiTheme.InsetHex,.97f));plazaAction.anchorMin=plazaAction.anchorMax=new Vector2(1,.35f);plazaAction.pivot=new Vector2(1,.5f);plazaAction.anchoredPosition=new Vector2(-22,0);plazaAction.sizeDelta=new Vector2(250,232);
             var edge=Box("Interaction gold edge",plazaAction,gold);Place(edge,0,0,3,232);
             plazaServiceName=Label(plazaAction,"",22,gold);Place(plazaServiceName.rectTransform,15,10,222,28);
             plazaNpcName=Label(plazaAction,"",14,pale);plazaNpcName.name="NPC name";Place(plazaNpcName.rectTransform,15,39,222,20);
@@ -100,7 +100,7 @@ namespace Hellscript
         }
         static void OutlinePlazaText(Text label)
         {
-            var outline=label.gameObject.AddComponent<Outline>();outline.effectColor=new Color(.015f,.02f,.015f,1);
+            var outline=label.gameObject.AddComponent<Outline>();outline.effectColor=UiTheme.Tint(UiTheme.VoidHex);
             outline.effectDistance=new Vector2(1,-1);outline.useGraphicAlpha=true;
         }
         void ToggleTownGuide(){plazaGuide.gameObject.SetActive(!plazaGuide.gameObject.activeSelf);ResetTownInput();game.Town.Cancel();}

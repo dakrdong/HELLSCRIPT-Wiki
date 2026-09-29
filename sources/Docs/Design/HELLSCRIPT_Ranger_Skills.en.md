@@ -1,6 +1,6 @@
 # HELLSCRIPT Ranger — 37 skills
 
-Updated: 2026-09-23
+Updated: 2026-09-29
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
@@ -124,7 +124,7 @@ Pierces up to 5 enemies in a straight line.
 
 ### 02. Multishot · `A02`
 
-Existing runtime retained · Lv.3 · Cooldown 3s · Resource 30
+Existing runtime retained · Lv.1 · Cooldown 3s · Resource 30
 
 Fires 3 arrows in a 60 degree arc.
 
@@ -136,7 +136,7 @@ Fires 3 arrows in a 60 degree arc.
 
 ### 03. Venom Trap · `A03`
 
-Existing runtime retained · Lv.6 · Cooldown 8s · Resource 20
+Existing runtime retained · Lv.1 · Cooldown 8s · Resource 20
 
 Places a poison zone for 5 seconds. Up to 2 at once.
 

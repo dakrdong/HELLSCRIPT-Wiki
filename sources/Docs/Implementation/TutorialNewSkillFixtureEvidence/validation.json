@@ -1,0 +1,24 @@
+{
+  "baseCommit": "b1989282",
+  "unity": "6000.6.0f1",
+  "editorAccess": "No CoplayDev MCP tools in this session; used batch-mode project clones",
+  "change": "TutorialProgressionTests and RuntimeTutorialSmoke pick the lowest-level active node above tree level 1 (F06 rule) and raise the hero to that level",
+  "selectedNodes": {"Warrior": "W04", "Ranger": "A04", "Mage": "M04", "level": 10},
+  "editMode": {
+    "filter": "Hellscript.Tests.TutorialProgressionTests",
+    "before": {"passed": 29, "failed": 1, "skipped": 0, "failure": "EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift: System.InvalidOperationException : Sequence contains no matching element"},
+    "after": {"passed": 30, "failed": 0, "skipped": 0}
+  },
+  "uiContract": "passed",
+  "uiContractTests": {"passed": 9, "failed": 0},
+  "macOSBuild": "Development player, Build Finished, Result: Success",
+  "nativeRuntime": {
+    "smoke": "-hellscriptTutorialSmoke with loopback live operations fixture",
+    "phaseOne": "passed",
+    "resume": "passed, HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK",
+    "firstRiftLevels": "1 -> 4",
+    "skillLevelFixture": "used, hero level set to 10",
+    "f06": "Warrior equipped W04 with pointer input and saved; F05, F06 and F07 practiced"
+  },
+  "physicalMobile": "not tested"
+}

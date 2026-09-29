@@ -6,6 +6,21 @@ namespace Hellscript
 {
     public sealed partial class GameStore
     {
+        // True only while this store holds an account it created because no save existed.
+        public bool CreatedAccount{get;private set;}
+        // A player's brand-new account starts its heroes without learned skills: they fight with basic attacks and
+        // the level-1 point buys the first skill. Existing saves, and accounts built directly by tests, are untouched.
+        public bool StartNewHeroesWithoutSkills()
+        {
+            if(!CreatedAccount)return true;
+            try
+            {
+                foreach(var hero in Data.heroes)
+                {var skills=ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(hero));ApplyHuntEdict(hero,new HuntEdictLoadout{version=2,classSkills=skills,edict=skills.ProjectEdict()});}
+                CreatedAccount=false;return Save();
+            }
+            catch(Exception e){Error=Loc.F("사냥 칙령을 저장하지 못했습니다: {0}",e.Message);return false;}
+        }
         // Production entrypoint: atomically migrate owned heroes. A legacy suspended run keeps its
         // snapshot until it returns, or the player explicitly edits it through the unified transaction.
         public bool ActivateSkillTrees(GameCatalog catalog)

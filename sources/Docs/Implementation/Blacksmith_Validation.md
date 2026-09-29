@@ -1,8 +1,33 @@
 # 대장간 구현 검증 기록
 
-작성일: 2026-09-22
+갱신일: 2026-09-29 · 작성일: 2026-09-22
 
 [English](Blacksmith_Validation.en.md) · [구현·리소스·이전 명세](Blacksmith_Unity_Integration.md)
+
+## 2026-09-29: 슬롯 스냅샷이 없는 이전 균열
+
+2026-09-29에 macOS 개발 빌드(`main` `b1989282`)에서 마을 가방을 열자 `HeroStats.ApplySlotGrowth`(`HeroStats.Blacksmith.cs:46`)가 `IndexOutOfRangeException`을 던졌다. 호출 경로는 `GameUI.ShowPlayInventory` → `InventoryWindow.EquipmentStats` → `EquipmentPreviewHero`였다. 해당 로컬 게스트 저장본에는 영웅 0의 중단된 균열이 있었고, 이 균열의 `slotLevels`는 `null`이 아니라 빈 배열이었다.
+
+진행 중인 균열은 시작할 때의 장착 슬롯 강화 단계를 `RunState.slotLevels`에 스냅샷으로 저장한다. 이 필드가 생기기 전에 저장된 균열에는 필드 자체가 없는데, `JsonUtility`는 없는 배열과 `null` 배열을 모두 빈 배열로 읽는다. 기존 코드는 `null`만 스냅샷이 없는 상태로 처리했다. 그래서 빈 배열을 그대로 복사했고, 10개 부위를 모두 읽는 `ApplySlotGrowth`에서 예외가 발생했다. 같은 원인으로 마을에서 장비를 장착·해제하는 거래(`GameStore.ChangeEquipment`), 균열 재개(`CombatSimulation` 생성자), 마을에서 사냥 칙령을 저장하는 작업(`CombatSimulation.PrepareSuspendedHuntEdictChange`)도 실패했다. 캐릭터 전환과 서버 판정기의 전투 재개도 같은 생성자를 거친다.
+
+- 판정 기준을 `BlacksmithCatalog.SlotLevels(run, hero)` 한 곳에 두었다. 균열에 저장된 배열의 길이가 대장간 부위 수(10)와 같을 때만 그 스냅샷을 사용한다. 배열이 없거나 비었거나 길이가 다르면 캐릭터가 현재 가진 강화 단계를 사용한다.
+- `slotLevels`를 읽고 없으면 캐릭터의 값으로 대신하던 네 곳이 모두 이 함수를 거친다. 가방 미리보기, 마을 장비 교체, 전투 생성·재개, 마을 칙령 편집이다. 나머지 코드는 전투 생성자가 확정한 `State.slotLevels`만 읽으므로, 진행 중인 전투가 시작 시점의 스냅샷을 유지하는 기존 규칙은 그대로다.
+- 저장 형식과 키는 바꾸지 않았고, 이전 저장본도 그대로 불러온다. 스냅샷이 없는 균열을 재개하면 그 시점에 캐릭터가 가진 강화 단계를 스냅샷으로 저장한다.
+- 화면 배치와 문구는 바꾸지 않았다.
+
+### 스냅샷 누락 검증 결과
+
+- 재현: `BlacksmithTests`에 검사 4개를 추가했다. 빈 배열과 길이 3 배열로 저장한 균열을 다시 불러온 뒤 가방을 실제로 열어 최대 HP를 확인하고, 마을 장비 장착·균열 재개·마을 칙령 저장을 확인한다. 수정 전 코드에서는 4개가 모두 실패했고, 가방 검사는 보고와 같은 `ApplySlotGrowth` ← `HeroStats` ← `InventoryWindow.EquipmentStats` 경로에서 멈췄다. [수정 전 XML](LegacySlotSnapshotEvidence/editmode-before.xml)
+- 호출 지점별 보호: 판정 함수는 남기고 네 호출 지점을 하나씩 수정 전 코드로 되돌렸다. 어느 지점을 되돌려도 그 지점을 지나는 검사가 실패했다. [결과](LegacySlotSnapshotEvidence/mutation.txt)
+- 관련 Edit Mode 검사 381개(대장간, 중단된 균열의 칙령 저장, 인벤토리 3종, 균열 입장, 서버 판정, 설정 개정, 복원, 현재 빌드 저장, 반복 사냥, 전투 기록, 저장 문구 번역, 성장, 행동 연속성): 수정 후 338개가 통과하고 43개가 실패했다. 실패한 43개는 수정 전 코드에서도 같은 이름으로 실패하며, 2026-09-27에 기록된 기준 실패 목록에도 모두 들어 있다. 수정 전 코드에서는 여기에 새 검사 4개가 더해져 47개가 실패했다. [수정 후](LegacySlotSnapshotEvidence/editmode-focused.xml) · [수정 전](LegacySlotSnapshotEvidence/editmode-focused-base.xml)
+- 전체 Edit Mode: 4,734개 중 4,686개가 통과하고 48개가 실패했으며, 건너뛴 검사는 없었다(1,853초). 새 검사 4개는 모두 통과했다. 실패한 48개 중 47개는 2026-09-27에 기록된 기준 실패 목록과 같다. 나머지 1개인 `TutorialProgressionTests.EdictAndNewSkillRequireCommittedChangeThenMatchingTrainingAndFreshRift`는 런타임 파일을 수정 전으로 되돌린 상태에서도 같은 메시지로 실패한다. [요약](LegacySlotSnapshotEvidence/editmode-full-summary.json) · [기준 코드 검사](LegacySlotSnapshotEvidence/editmode-tutorial-base.xml)
+- macOS 개발 빌드 오류 0개. 새 스모크 `-hellscriptLegacyRunBagSmoke`는 저장본에 스냅샷이 없는 균열이 있으면 그 균열을 그대로 쓰고, 없으면 새 계정에 같은 상태를 만든다. 마을 가방을 440×956 한국어, 956×440 영어, 1600×900 한국어로 열고, 최대 HP가 캐릭터 자신의 강화 단계로 계산한 값과 같은지와 전체 능력치가 모두 표시되는지 확인한다. 이어서 가방에서 장비 하나를 장착하고 균열을 재개한 뒤, 전투와 저장 파일이 캐릭터의 강화 단계를 사용하는지 확인한다. [빌드](LegacySlotSnapshotEvidence/build.txt)
+  - 보고된 저장본의 복사본: 통과했다. 최대 HP 621을 표시했고 장착을 저장했으며, 재개한 균열은 처치 38·HP 273/621 상태로 이어졌다. 원본 저장 파일은 수정하지 않았다. [실행 결과](LegacySlotSnapshotEvidence/runtime-user-save.txt)
+  - 가슴 부위를 40단계로 만든 새 계정: 통과했다. 최대 HP 2,749는 기본값인 1단계가 아니라 40단계를 반영한 값이다. [실행 결과](LegacySlotSnapshotEvidence/runtime-fixture.txt)
+  - 런타임 파일 5개만 수정 전으로 되돌린 빌드에 같은 복사본을 넣으면, 가방을 여는 순간 보고와 같은 예외가 발생해 종료 코드 1로 끝났다. [실행 결과](LegacySlotSnapshotEvidence/runtime-before.txt)
+- 화면 배치를 바꾸지 않았기 때문에 글자 크기 변경, PC 16:10·21:9와 모바일 실기기는 이번 작업에서 확인하지 않았다. 이 세션에서는 `mcpforunity://instances` 리소스가 보이지 않아 Unity MCP를 사용하지 못했다. 검사는 프로젝트 복제본의 배치 모드와 macOS 실행본에서 수행했다.
+
+[저장본 가방 1600×900](LegacySlotSnapshotEvidence/bag-save-1600x900-ko.png) · [세로 440×956](LegacySlotSnapshotEvidence/bag-save-440x956-ko.png) · [영어 956×440](LegacySlotSnapshotEvidence/bag-save-956x440-en.png) · [새 계정 가방](LegacySlotSnapshotEvidence/bag-fixture-1600x900-ko.png) · [재개한 균열](LegacySlotSnapshotEvidence/resumed-save.png)
 
 ## 2026-09-29: 잠긴 기능 안내와 탐색 버튼 통일
 
@@ -70,7 +95,7 @@ macOS 실행 검사는 별도 저장 경로에 만든 검증용 계정을 사용
 | 옵션 변경 | 최초 결제 후 위치 고정, 반복 비용 유지, 실제 후보·범위, 자동 목표 대기·계속·중단·창 닫기 | 코어 검사와 macOS 실행 검사 |
 | 작업 칸 | 캐릭터별 성장, 계정 공용 두 칸, 10·50·250다이아 순차 개방, 중복 작업 차단 | `BlacksmithTests` |
 | 시간 | 도달 레벨별 비용·시간, 종료 후 한 번 정산, 60초 1다이아·59초/1초 무료 | `BlacksmithTests`, macOS 실행 검사 |
-| 전투 | 진행 중 슬롯 스냅샷 유지, 다음 전투 반영, 원소 저항 70% 상한, 배운 액티브·장착 패시브의 유효 레벨 | 코어·스킬·전투 회귀 검사 |
+| 전투 | 진행 중 슬롯 스냅샷 유지, 스냅샷이 없는 이전 균열의 캐릭터 강화 단계 사용, 다음 전투 반영, 원소 저항 70% 상한, 배운 액티브·장착 패시브의 유효 레벨 | 코어·스킬·전투 회귀 검사, `BlacksmithTests`, macOS 가방 스모크 |
 | 분해 | 전설 10·고유 효과 15·세트 10을 단건/일괄/자동 경로 각각 검사, 코어와 저장 보존 | 9개 경로 조합 검사 |
 | 균열·소탕 | 보상 단계별 강화석, 한 번만 획득, 소탕 반복 요청 차단 | `BlacksmithTests`와 자원 검사 |
 | 접근·화면 | NPC 범위 밖 차단, 대장간 이용·E키, 같은 폭의 세 열, 목록 왕복, 전체 화면 팝업 | macOS 실행 검사 |
@@ -84,6 +109,8 @@ HTML: `node --test Prototypes/Blacksmith/*.test.cjs`.
 Unity: `-batchmode -nographics -runTests -testPlatform EditMode -testResults <xml>`로 검사한다. 대장간 범위만 실행할 때는 `-testFilter Hellscript.Tests.BlacksmithTests`를 추가한다.
 
 macOS 개발 빌드: 기존 `Hellscript.Editor.ProjectBuilder.BuildMac`을 실행하고 `-hellscriptBuildOutput <app 경로>`를 전달한다. 실행본에 `-hellscriptBlacksmithSmoke -hellscriptSavePath <새 검증 저장 폴더> -hellscriptScreenshots <증거 폴더>`를 전달하면 자동 검증 후 종료한다. 성공 표식은 `HELLSCRIPT_BLACKSMITH_SMOKE_OK`와 증거 폴더의 `result.txt`다. 일반 게임 실행에는 해당 인자를 넣지 않는다.
+
+스냅샷이 없는 균열의 가방 검사는 `-hellscriptLegacyRunBagSmoke -hellscriptSavePath <저장 폴더> -hellscriptScreenshots <증거 폴더>`로 실행한다. 저장 폴더에 그런 균열이 든 `hellscript-local-v1.json`의 복사본을 넣으면 그 저장본을 사용하고, 빈 폴더를 주면 같은 상태를 새 계정에 만든다. 성공 표식은 `HELLSCRIPT_LEGACY_RUN_BAG_SMOKE_OK`와 증거 폴더의 `runtime-legacy-run-bag.txt`다.
 
 현재 작업 폴더의 `Artifacts/Blacksmith/Play-Blacksmith.command`는 별도 검증 계정으로 수동 플레이를 시작한다. 원래 계정과 저장 경로를 공유하지 않는다.
 

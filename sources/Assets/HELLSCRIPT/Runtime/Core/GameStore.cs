@@ -34,7 +34,7 @@ namespace Hellscript
             Data=Read(path);
             if(Data==null){source=path+".bak";Data=Read(source);}
             if(Data==null&&(File.Exists(path)||File.Exists(path+".bak")))throw new InvalidDataException(Loc.F("저장 파일과 백업을 복구할 수 없습니다. 원본은 그대로 보존했습니다.\n{0}", path));
-            if(Data==null){Data=NewAccount(catalog);Data.lastSeenUtc=this.offlineClock();}
+            if(Data==null){Data=NewAccount(catalog);Data.lastSeenUtc=this.offlineClock();CreatedAccount=true;}
             else if(Data.schema==1)
             {
                 File.Copy(source,path+".schema1-"+DateTime.UtcNow.Ticks+".json",false);

@@ -1,6 +1,6 @@
 # HELLSCRIPT Warrior — 37 skills
 
-Updated: 2026-09-23
+Updated: 2026-09-29
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
@@ -124,7 +124,7 @@ Damages nearby enemies every 0.25 seconds. Can be held while moving.
 
 ### 02. Leap Slam · `W02`
 
-Existing runtime retained · Lv.3 · Cooldown 8s · Resource 0
+Existing runtime retained · Lv.1 · Cooldown 8s · Resource 0
 
 Leap to a valid landing and deal impact damage. In the new-ability validation path, each actual meter beyond 2m adds 15% direct damage, capped at +90% at 8m. The spacing policy may retreat for up to 2s first.
 
@@ -136,7 +136,7 @@ Leap to a valid landing and deal impact damage. In the new-ability validation pa
 
 ### 03. Crushing Blow · `W03`
 
-Existing runtime retained · Lv.6 · Cooldown 0s · Resource 25
+Existing runtime retained · Lv.1 · Cooldown 0s · Resource 25
 
 Deals heavy physical damage to enemies in front.
 

@@ -114,7 +114,7 @@ namespace Hellscript
             float viewH=Mathf.Max(1,h-top-50);
             // The body's layout group sizes the line to the viewport, so place the viewport before measuring the line.
             UiLayout.Place(view.Scroll.viewport,left,top,right-left,viewH);
-            var text=UiLayout.Text(view.Body,lineName,Loc.T(line.textKo),0,0,right-left,48,Mathf.RoundToInt(UiTheme.Heading*reading),profile!=null?StorageSurface.Hex("f1ead8"):UiTheme.Gold);
+            var text=UiLayout.Text(view.Body,lineName,Loc.T(line.textKo),0,0,right-left,48,Mathf.RoundToInt(UiTheme.Heading*reading),profile!=null?StorageSurface.Hex(UiTheme.TextHex):UiTheme.Gold);
             text.alignment=TextAnchor.UpperCenter;text.lineSpacing=1.12f;text.supportRichText=false;
             Canvas.ForceUpdateCanvases();
             // A line that does not fit between the two figures takes the listener's place; the speaker always stays.
@@ -128,7 +128,7 @@ namespace Hellscript
             {
                 int nameSize=Mathf.RoundToInt(UiTheme.Heading*reading),roleSize=Mathf.RoundToInt(UiTheme.Caption*reading);float ph=28*reading;
                 var plate=UiLayout.Rect("Speaker plate",view.Frame);plate.gameObject.AddComponent<CartoucheGraphic>().raycastTarget=false;
-                var name=UiLayout.Text(plate,"Speaker name",Loc.T(profile.name),0,0,400,ph,nameSize,StorageSurface.Hex("efe3c6"));name.alignment=TextAnchor.MiddleLeft;
+                var name=UiLayout.Text(plate,"Speaker name",Loc.T(profile.name),0,0,400,ph,nameSize,StorageSurface.Hex(UiTheme.TextHex));name.alignment=TextAnchor.MiddleLeft;
                 name.supportRichText=false;name.horizontalOverflow=HorizontalWrapMode.Overflow;float nameW=name.preferredWidth;
                 var role=UiLayout.Text(plate,"Speaker role",Loc.T(heading!=""?heading:profile.Role),0,0,300,ph,roleSize,UiTheme.Gold);role.alignment=TextAnchor.MiddleLeft;
                 role.supportRichText=false;role.horizontalOverflow=HorizontalWrapMode.Overflow;float roleW=role.preferredWidth;
@@ -261,7 +261,7 @@ namespace Hellscript
         public float fade=40;
         protected override void OnPopulateMesh(VertexHelper vh)
         {
-            vh.Clear();var r=rectTransform.rect;var ink=new Color(.035f,.03f,.025f,1);var gold=UiTheme.Gold;
+            vh.Clear();var r=rectTransform.rect;var ink=UiTheme.Tint(UiTheme.VoidHex);var gold=UiTheme.Gold;
             Color A(Color c,float a){c.a=a;return c;}
             float rule=r.yMax-fade;
             Quad(vh,new Rect(r.xMin,rule,r.width,fade),A(ink,.8f),A(ink,0),A(ink,.8f),A(ink,0));

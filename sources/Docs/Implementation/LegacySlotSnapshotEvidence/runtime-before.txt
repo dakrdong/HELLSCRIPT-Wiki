@@ -1,0 +1,14 @@
+Build with the five runtime files at 9296ab24 and the same smoke, on the same save copy: exit=1, no marker, no result file.
+The smoke quits with code 1 on the first logged exception. It is thrown while the town bag draws, through the same frames as the 2026-09-29 report:
+
+IndexOutOfRangeException: Index was outside the bounds of the array.
+  at Hellscript.HeroStats.ApplySlotGrowth (Hellscript.HeroSave hero) [0x00034] in Assets/HELLSCRIPT/Runtime/Core/HeroStats.Blacksmith.cs:46 
+  at Hellscript.HeroStats..ctor (Hellscript.HeroSave hero, System.Boolean training, Hellscript.RuneGrowthState runes, Hellscript.PotionDefinition elixir) [0x000f0] in Assets/HELLSCRIPT/Runtime/Core/Economy.cs:126 
+  at Hellscript.InventoryWindow.EquipmentStats (Hellscript.HeroSave hero) [0x00000] in Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs:41 
+  at Hellscript.InventoryWindow.DrawCharacter (System.Single x, System.Single y, System.Single w, System.Single h) [0x001b8] in Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs:117 
+  at Hellscript.InventoryWindow.Draw () [0x00187] in Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs:90 
+  at Hellscript.InventoryWindow.Reflow () [0x00232] in Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs:69 
+  at Hellscript.InventoryWindow.Open (UnityEngine.Transform parent, Hellscript.GameStore store, Hellscript.GameCatalog catalog, UnityEngine.Font font, System.Func`1[TResult] readingScale, System.Action closed, System.Action equipmentChanged) [0x000fd] in Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs:47 
+  at Hellscript.GameUI.OpenNativeInventory (System.Boolean portal) [0x00061] in Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PlayInventory.cs:22 
+  at Hellscript.GameUI.ShowPlayInventory () [0x0003a] in Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PlayInventory.cs:15 
+  at Hellscript.RuntimeInventorySmoke+<LegacyRunBagAcceptance>d__15.MoveNext () [0x0035d] in Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.LegacyRun.cs:37 

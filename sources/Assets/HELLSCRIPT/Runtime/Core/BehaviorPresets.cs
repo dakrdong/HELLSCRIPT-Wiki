@@ -11,12 +11,6 @@ namespace Hellscript
         public static BuildConfig ForLevel(HeroClass hero,int variant,int level,GameCatalog catalog)
         {
             level=Mathf.Clamp(level,1,30);var build=Create(hero,variant);
-            if(hero==HeroClass.Mage&&variant==0&&level<catalog.skills[13].unlock)
-            {
-                var original=build.rules.Single(r=>r.skill==12);
-                var fire=Or(Make(12,C("SC06",Comparison.AtLeast,2,predicted:true)),C("SC12",Comparison.Equal,0,2));fire.id=original.id;fire.target=RuleTarget.Dense;
-                build.rules[build.rules.IndexOf(original)]=fire;
-            }
             foreach(var rule in build.rules)if(rule.action==RuleAction.Skill&&catalog.skills[rule.skill].unlock>level)rule.enabled=false;
             build.passives=build.passives.Take(ContentUnlocks.Rules.passiveLevels.Count(p=>level>=p)).ToArray();
             build.name=Loc.Source("{0} · Lv.{1} 추천", build.name, level);build.version=$"growth-1-{(int)hero}-{variant}-{level}";return build;

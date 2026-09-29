@@ -1,6 +1,6 @@
 # Class skill trees and progression
 
-Updated: 2026-09-23 · [한국어](Class_Skill_Trees.md)
+Updated: 2026-09-29 · [한국어](Class_Skill_Trees.md)
 
 Each class now has **16 normal actives, 19 passives and two ultimates: 37 skills**. We reviewed direct effect dependencies across the original 108 skills and split each dual-ultimate support passive into two dedicated passives. One addition per class brings the total to 111.
 
@@ -10,6 +10,8 @@ Each class now has **16 normal actives, 19 passives and two ultimates: 37 skills
 **Native integration:** [Hunt Edict](../Implementation/Hunt_Edict_Skill_Tree.en.md) uses four normal active slots plus a separate ultimate slot, with all unlocked passives always active. The original HTML slot model below is historical prototype context, not the current game rule.
 
 Native update, 2026-09-28: the first three actives of every class unlock at level 1. Zero-rank allocation and the starting-point refund after an explicit reset follow the [runtime integration record](../Implementation/Hunt_Edict_Skill_Tree.en.md). The free-base-rank description below documents older builds and the HTML prototype.
+
+Native update, 2026-09-29: the skill catalog now also unlocks all three first-row actives at level 1. A new character starts with no learned skill and uses only basic attacks; the one point it has at level 1 learns one first-row active. Existing characters keep their allocation.
 
 ## Dedicated ultimate support
 
