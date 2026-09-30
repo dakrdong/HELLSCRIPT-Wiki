@@ -4,6 +4,8 @@ Updated: 2026-09-23
 
 [한국어](Equipment_Art_Integration.md)
 
+The September 30 follow-up supplies and connects all 24 legacy set pieces and six emblems that were missing below. See [Item artwork coverage](Item_Art_Coverage.en.md) for the current result. The tables and validation records below describe the September 23 state.
+
 The 105 equipment images and 24 emblems from the [set artwork task](https://chatgpt.com/s/cx_6ab3635913b88191a19efd3dc7f17785) are connected to shared equipment presentation. Their original commit `7417c9f` was already included in baseline main `4768bb5`, so its images were reused unchanged. The 141 delivered legendary images use the same lookup path. This change generates no images and does not copy another set's artwork to fill gaps.
 
 ## Ownership and behavior

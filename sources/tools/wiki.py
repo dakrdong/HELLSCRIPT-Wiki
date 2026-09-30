@@ -203,7 +203,7 @@ def build_databases():
     for a,line in constructors(item_path,'ItemBaseDefinition'):
         a=a+([0,0,'',-1,0,-1,0][len(a)-6:] if len(a)<13 else []); c=CLASSES[a[4]] if a[4]>=0 else '공용'
         kind=weapon_kinds.get(a[0])
-        icon=({'image':{'file':'EquipmentVariants/'+('B32' if a[0]=='B28' else a[0])+'.png'}} if a[0]=='B28' or a[2]>=30
+        icon=({'image':{'file':'EquipmentVariants/'+('B32' if a[0]=='B28' else a[0])+'.png'}} if a[2]>=24
               else {'image':{'file':'EquipmentAtlas.png','cell':a[2]}} if a[2]<24 else {'vector':kind.lower()})
         fixed=[{'statId':a[n],'baseValue':a[n+1],'scalesWithLevel':a[n] in (0,2,30)} for n in (9,11) if a[n]>=0]
         fixed_text=[f"{base_stats[x['statId']][0]} {x['baseValue']}{'%' if base_stats[x['statId']][1]=='Pct' else '/초' if base_stats[x['statId']][1]=='Sec' else ''} ({'레벨 비례' if x['scalesWithLevel'] else '고정'})" for x in fixed]
@@ -266,11 +266,14 @@ def build_databases():
     sets=[]; pieces=[]
     for a,line in constructors(item_path,'SetDefinition'):
         c=CLASSES[['HeroClass.Warrior','HeroClass.Ranger','HeroClass.Mage'].index(a[2])]
-        sets.append(record(a[0],a[1],c,a[3]+' '+a[4],{'직업':c,'2세트':a[3],'4세트':a[4],'장착 부위':'머리 · 몸통 · 손 · 발'},item_path,line,related=['itemization-detail','charge-expansion']))
+        sets.append(record(a[0],a[1],c,a[3]+' '+a[4],{'직업':c,'2세트':a[3],'4세트':a[4],'장착 부위':'머리 · 몸통 · 손 · 발'},item_path,line,
+            image={'file':'ClassSetIcons/'+a[0]+'.png'},resource='item-art-'+a[0],related=['itemization-detail','charge-expansion','item-art-coverage']))
         for s in range(1,5):
             pieces.append(record(a[0]+str(s),a[1]+'의 '+['','관','갑옷','손아귀','걸음'][s],c,f'{SLOTS[s]} · {a[1]}',
                 {'직업':c,'부위':SLOTS[s],'세트 ID':a[0],'상대 가중치':100,'2세트':a[3],'4세트':a[4],
-                 '생성 규칙':'현재 BuildUniques의 세트별 1–4부위 생성식을 재현합니다. 해당 부위의 전설과 동시에 장착할 수 없습니다.'},item_path,145,refs=[source_ref(item_path,line)],related=['itemization-detail']))
+                 '생성 규칙':'현재 BuildUniques의 세트별 1–4부위 생성식을 재현합니다. 해당 부위의 전설과 동시에 장착할 수 없습니다.'},item_path,145,
+                 image={'file':'ClassSetIcons/'+a[0]+str(s)+'.png'},resource='item-art-'+a[0]+str(s),
+                 refs=[source_ref(item_path,line)],related=['itemization-detail','item-art-coverage']))
     data.append(db('sets','세트 효과','현재 6세트입니다. 초기 카탈로그의 3세트 기록은 당시 범위로 보존합니다.',sets))
     data.append(db('set-items','세트 장비','6세트 × 머리·몸통·손·발의 24종입니다. 세트 정의 자체는 아이템 수에 추가하지 않습니다.',pieces))
     for key,name,prefix,count,name_index,code,related in [
@@ -452,6 +455,21 @@ def build_resources(databases):
                   source_ref('Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs')],related=['button-ux','button-ux.en']))
     variant_manifest='Docs/Art/EquipmentVariants/manifest.json'
     variant_art={a['id']:a for a in json.loads(read(variant_manifest))['assets']}
+    item_art_manifest='Docs/Art/ItemIcons/manifest.json'
+    item_art={a['id']:a for a in json.loads(read(item_art_manifest))['assets']}
+    variant_art.update({key:asset for key,asset in item_art.items() if key.startswith('B')})
+    for asset in item_art.values():
+        if asset['id'].startswith('B'):continue
+        path=asset['path'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        if digest(raw)!=asset['sha256']:raise ValueError('Item art native source mismatch: '+path)
+        rows.append(record('item-art-'+asset['id'],asset['name'],'아이템 이미지',
+            '보상과 공통 아이템 표시에 연결된 투명 이미지입니다. / Transparent artwork used by shared collectible views.',
+            {'원본 경로':path,'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+             '생성 모델':'확인 불가 / Unverified','제작 방법':'내장 imagegen 원본 PNG와 알파 보존 / Original native PNG and alpha',
+             '승인 상태':asset['status']},
+            IMPL+'Item_Art_Coverage.md',status='개발용 사용 · 모델 미확인',
+            image={'file':path.removeprefix(ART)},assetPath=path,
+            refs=[source_ref(item_art_manifest)],related=['item-art-coverage','item-art-coverage.en']))
     npc_path='Assets/HELLSCRIPT/Resources/NpcProfiles.json'
     npc_art='Docs/Art/NpcPortraits/'
     npc_provenance=json.loads(read(npc_art+'generation-results.json'))
@@ -528,8 +546,8 @@ def build_resources(databases):
                             'SHA-256':digest(raw),'생성 모델':provenance['model'],'승인 상태':provenance['status'],
                             '등록 방식':'독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다.'}
                 rows.append(record(item['resource'],item['name']+' 아이콘','장비 아이콘',item['id']+' · 독립 PNG',fields,
-                    IMPL+'Equipment_Variants.md',status='개발용 사용 · 모델 미확인',image=image,assetPath=path,
-                    content={'db':group,'id':item['id']},refs=[source_ref(variant_manifest)],related=['equipment-variants','equipment-variants.en']))
+                    IMPL+('Item_Art_Coverage.md' if item['id'] in item_art else 'Equipment_Variants.md'),status='개발용 사용 · 모델 미확인',image=image,assetPath=path,
+                    content={'db':group,'id':item['id']},refs=[source_ref(item_art_manifest if item['id'] in item_art else variant_manifest)],related=['equipment-variants','equipment-variants.en','item-art-coverage']))
                 continue
             cell=image['cell'];width,height=sizes[image['file']]
             rows.append(record('icon-'+item['id'],item['name']+' 아이콘','장비 아이콘' if group=='items' else '스킬·직업 아이콘',
@@ -1053,9 +1071,10 @@ def build():
         resource=icon.get('resourceId',icon['id'])
         if resource!=icon['id']:
             shutil.copyfile(ROOT/ART/'RewardBoxes'/(resource+'.png'),SITE/'media/RewardBoxes'/(icon['id']+'.png'))
-    (SITE/'media/EquipmentVariants').mkdir(parents=True,exist_ok=True)
-    for file in (ROOT/ART/'EquipmentVariants').glob('*.png'):
-        shutil.copyfile(file,SITE/'media/EquipmentVariants'/file.name)
+    for folder in ('EquipmentVariants','ItemIcons','ClassSetIcons'):
+        (SITE/'media'/folder).mkdir(parents=True,exist_ok=True)
+        for file in (ROOT/ART/folder).glob('*.png'):
+            shutil.copyfile(file,SITE/'media'/folder/file.name)
     (SITE/'media/NpcPortraits').mkdir(parents=True,exist_ok=True)
     for file in (ROOT/ART/'NpcPortraits').glob('*.png'):
         shutil.copyfile(file,SITE/'media/NpcPortraits'/file.name)
@@ -1096,7 +1115,7 @@ def validate(dataset):
                 if content['id'] not in {r['id'] for d in dataset['databases'] if d['id']==content['db'] for r in d['rows']}:raise ValueError('Missing content relation')
             image=row.get('image')
             if image:
-                if not (SITE/'media'/image['file']).is_file():raise ValueError('Missing image')
+                if not (SITE/'media'/image['file']).is_file():raise ValueError('Missing image: '+image['file'])
                 if digest((SITE/'media'/image['file']).read_bytes())!=dataset['inputManifest'][ART+image['file']]:raise ValueError('Image bytes changed in wiki copy')
                 if 'cell' in image and not 0<=image['cell']<24:raise ValueError('Invalid atlas cell')
                 images+=1

@@ -177,7 +177,7 @@ namespace Hellscript
             {
                 var piece=p;int turns=runeStorageRotations.TryGetValue(piece.InstanceId,out var pose)?pose:RuneV13Art.StorageRotation(piece.Shape.Id);
                 var b=RuneButton(runeStorage,"rune-card-"+p.InstanceId,"",()=>{if(runeViewing){ShowToast("룬 편집은 편집 모드에서 가능합니다.");return;}runeSelected=piece.InstanceId;runeRotation=turns;runeCanvas.piece=piece;runeCanvas.rotation=turns;UpdateRuneContents();RenderRuneDetail();},0,0,slot,slot,runeSelected==p.InstanceId);
-                var graphic=MakeRuneGraphic((RectTransform)b.transform,"Rune block");graphic.icon=true;graphic.piece=piece;graphic.rotation=turns;graphic.raycastTarget=false;
+                var graphic=MakeRuneGraphic((RectTransform)b.transform,"Rune block");graphic.icon=true;graphic.piece=piece;graphic.rotation=turns;graphic.raycastTarget=false;RuneItemArt.AddTypeBadge(graphic);
                 RuneTextAt(b.transform,p.Shape.Size.ToString(),slot-14*runeUnit,slot-15*runeUnit,12*runeUnit,13*runeUnit,9,TextAnchor.MiddleCenter);
                 var drag=b.gameObject.AddComponent<RuneStorageDrag>();drag.board=runeCanvas;drag.piece=piece;drag.rotation=turns;
             }
@@ -209,7 +209,7 @@ namespace Hellscript
                 float tile=Mathf.Min(128*s,h-75*s),textX=tile+22*s;
                 var pickup=RuneButton(runeDetails,"rune-detail-pickup","",()=>{},9*s,31*s,tile,tile,true);pickup.interactable=!runeViewing;
                 pickup.GetComponent<Image>().color=RuneV13Art.Color("#343b2b");
-                var icon=Rect("Selected rune",pickup.transform);Place(icon,5*s,2*s,tile-10*s,tile-26*s);var g=MakeRuneGraphic(icon,"Selected shape");g.icon=true;g.piece=selected;g.rotation=runeRotation;g.raycastTarget=false;
+                var icon=Rect("Selected rune",pickup.transform);Place(icon,5*s,2*s,tile-10*s,tile-26*s);var g=MakeRuneGraphic(icon,"Selected shape");g.icon=true;g.piece=selected;g.rotation=runeRotation;g.raycastTarget=false;RuneItemArt.AddTypeBadge(g);
                 var drag=pickup.gameObject.AddComponent<RuneStorageDrag>();drag.board=runeCanvas;drag.piece=selected;drag.rotation=runeRotation;
                 RuneTextAt(pickup.transform,"끌어서 배치",2*s,tile-24*s,tile-4*s,20*s,10,TextAnchor.MiddleCenter);
                 RuneTextAt(runeDetails,RuneV13Catalog.TypeName(selected.Type)+" · G"+selected.Grade+" · "+Loc.F("{0}칸",selected.Shape.Size),textX,32*s,w-textX-9*s,27*s,15);
@@ -307,7 +307,7 @@ namespace Hellscript
                 var shapes=Rect("Fusion shapes",content);var grid=shapes.gameObject.AddComponent<GridLayoutGroup>();grid.cellSize=new Vector2(142,112);grid.spacing=new Vector2(8,8);grid.constraint=GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=4;shapes.gameObject.AddComponent<RuneAdaptiveGrid>();shapes.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
                 foreach(var group in owned.GroupBy(r=>new{r.shapeId,r.type}))
                 {
-                    var same=group.ToArray();var b=Button(shapes,Loc.F("모양 {0} ×{1}",RuneMasteryCatalog.ShapeById(group.Key.shapeId).ShapeNumber,group.Count()),()=>{var pick=same.FirstOrDefault(r=>!runeFusionSelection.Contains(r.id));if(pick!=null&&runeFusionSelection.Count<200)runeFusionSelection.Add(pick.id);else foreach(var r in same)runeFusionSelection.Remove(r.id);ShowRuneFusion();});var shapeRect=Rect("Fusion shape",b.transform);Span(shapeRect,4,4,4,68);var graphic=shapeRect.gameObject.AddComponent<RuneBoardGraphic>();graphic.icon=true;graphic.piece=new RunePiece(group.Key.shapeId,runeFusionGrade,RuneMasteryCatalog.ShapeById(group.Key.shapeId),group.Key.type);graphic.raycastTarget=false;var label=b.GetComponentInChildren<Text>();label.fontSize=16;Span(label.rectTransform,3,74,3,34);
+                    var same=group.ToArray();var b=Button(shapes,Loc.F("모양 {0} ×{1}",RuneMasteryCatalog.ShapeById(group.Key.shapeId).ShapeNumber,group.Count()),()=>{var pick=same.FirstOrDefault(r=>!runeFusionSelection.Contains(r.id));if(pick!=null&&runeFusionSelection.Count<200)runeFusionSelection.Add(pick.id);else foreach(var r in same)runeFusionSelection.Remove(r.id);ShowRuneFusion();});var shapeRect=Rect("Fusion shape",b.transform);Span(shapeRect,4,4,4,68);var graphic=shapeRect.gameObject.AddComponent<RuneBoardGraphic>();graphic.icon=true;graphic.piece=new RunePiece(group.Key.shapeId,runeFusionGrade,RuneMasteryCatalog.ShapeById(group.Key.shapeId),group.Key.type);graphic.raycastTarget=false;RuneItemArt.AddTypeBadge(graphic);var label=b.GetComponentInChildren<Text>();label.fontSize=16;Span(label.rectTransform,3,74,3,34);
                 }
                 if(pending.Length>0)
                 {
@@ -351,7 +351,7 @@ namespace Hellscript
             var pieces=Row(content,112);int i=0;foreach(var p in runePractice.Pieces)
             {
                 var piece=p;var b=Button(pieces,"",()=>{runePractice.Select(piece.InstanceId);ShowRunePractice();});b.name="practice-piece-"+i;Across(b,i++,runePractice.Pieces.Count,2,108);
-                var graphic=MakeRuneGraphic((RectTransform)b.transform,"Practice shape");graphic.icon=true;graphic.piece=piece;graphic.rotation=runePractice.RotationOf(piece.InstanceId);graphic.raycastTarget=false;
+                var graphic=MakeRuneGraphic((RectTransform)b.transform,"Practice shape");graphic.icon=true;graphic.piece=piece;graphic.rotation=runePractice.RotationOf(piece.InstanceId);graphic.raycastTarget=false;RuneItemArt.AddTypeBadge(graphic);
                 var drag=b.gameObject.AddComponent<RuneStorageDrag>();drag.board=board;drag.piece=piece;drag.rotation=graphic.rotation;
             }
             if(runePractice.CanRotate)BigButton(content,"선택한 룬 회전",()=>{runePractice.RotateSelected();ShowRunePractice();});

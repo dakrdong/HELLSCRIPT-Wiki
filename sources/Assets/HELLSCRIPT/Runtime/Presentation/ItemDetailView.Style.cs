@@ -40,13 +40,14 @@ namespace Hellscript
             Color rarity=StorageSurface.Hex(name?.color??UiTheme.GoldHex);
             var wash=UiLayout.Rect("Rarity wash",body);UiLayout.Place(wash,2,2,width-4,110);
             var gradient=wash.gameObject.AddComponent<StorageSurface>();gradient.top=new Color(rarity.r*.20f,rarity.g*.20f,rarity.b*.20f,.8f);gradient.bottom=Color.clear;gradient.raycastTarget=false;
-            float art=icon&&Item!=null?(narrow?44:68):0;
+            float art=icon&&(Item!=null||definitionArtwork!=null)?(narrow?44:68):0;
             if(art>0)
             {
                 float artX=narrow?(width-art)/2:width-pad-art;
                 var mount=UiLayout.Rect("Relic mount",body);UiLayout.Place(mount,artX,y,art,art);
                 var backing=mount.gameObject.AddComponent<StorageSurface>();backing.Paint(UiTheme.ItemInsetHex,UiTheme.ItemBottomHex,UiTheme.ItemRuleHex);backing.raycastTarget=false;
-                EquipmentSlotView.Icon(mount,Item,1,1,art-2);
+                if(Item!=null)EquipmentSlotView.Icon(mount,Item,1,1,art-2);
+                else definitionArtwork?.Invoke(mount,art);
                 if(narrow)y+=art+9;
             }
             float titleY=y,titleWidth=!narrow&&art>0?inner-art-10:inner;
