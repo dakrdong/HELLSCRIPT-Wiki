@@ -55,7 +55,10 @@ def main():
     checks = []
 
     def request(origin, path, method='GET', raw=None, token='', expected=200):
-        headers = {'Content-Type': 'application/json'}
+        # Sites' edge rejects urllib's default generic agent (Cloudflare 1010).
+        # Identify this verifier explicitly; game authorization is unchanged.
+        headers = {'Content-Type': 'application/json',
+                   'User-Agent': 'HELLSCRIPT-Telemetry-Verification/1.0'}
         if token:
             headers['Authorization'] = 'Bearer ' + token
         if bypass and origin == args.site_url:

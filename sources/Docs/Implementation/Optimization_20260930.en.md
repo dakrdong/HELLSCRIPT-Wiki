@@ -2,7 +2,7 @@
 
 Updated on: 2026-10-01
 
-Game changes and optimizations are integrated into actual main. Full EditMode, native and both builds completed after the last game-code change; no new regression was found, while47 known failures remain explicitly reported. Public access for the Sites collector still awaits direct user approval.
+Game changes and optimizations are integrated into actual main. Full EditMode, native and both builds completed after the last game-code change; no new regression was found, while47 known failures remain explicitly reported. Following separate user approval on 2026-10-01, Sites public API access and actual QA game uploads were verified.
 
 The initial local baseline was `4bd93ff3`. Separate worktrees preserved user and other owners' changes. Completed Claude forge `c92a7022` was integrated after explicit user confirmation. Existing main `94075e05` and Sites `3c33af8b` were identified by ancestry and included once. No reset/clean, forced checkout/push, branch or worktree deletion was used.
 
@@ -44,7 +44,7 @@ Pre-daily native9/10smokes,11/12launches passed. BattleLayout's old fixture sele
 
 Server validation passed82/82 in an isolated Python3.12 environment with the existing declared requirements, Sites worker10/10 and operations web15/15. The initial systemPython3.9 run lacked CacheControl and skipped gunicorn; that environment failure is separate from code regressions. Global Python and dependency definitions were unchanged.
 
-The existing owner-published Sites v7 deployment/source`40439a3b` was observed successful. Its custom audience remains one allowed user/no external visitors; Bearer/private datastore and Railway auth/ops/database boundaries are preserved. No new credentials, deployment or access change was made here. **Public game access and direct synthetic upload await the user's approval requested by the parent.** Historic private synthetic tests, fresh local/CI tests and public ingress verification are separate scopes.
+The optimization verification observed the successful owner-private Sites v7/source`40439a3b` deployment. Following approval on 2026-10-01, separate Sites work enabled public API access and verified ten API checks without a site access token, actual macOS QA uploads, duplicate handling and retained local history. This verification is separate from the twelve optimization smokes above and reused the final development build with unchanged game sources. Bearer authorization, private log storage and Railway auth/ops/databases remain intact. See [current Sites status and evidence](Sites_Player_Logs.en.md).
 
 Deferred scopes include unmeasured mass texture downscaling/compression, forge JobSignature/CoreQualityGauge redesign, uncapped/mobile/battery testing, real Google login and real-user log transmission. Independent branches/worktrees and old measurements are preserved. Revert optimizations through reviewed inverse commits; move legacy assets back with their GUID/meta rather than deleting them. Schema20 daily saves must remain compatible on rollback; do not drop claimed state or downgrade their schema. Full logs/XML/raw profiles/player/source hashes and restore copies remain in the local final report's evidence paths. Builds use ProjectBuilder.BuildMac/BuildMacRelease; native flags always specify isolated saves/evidence. Synthetic data is not inserted into real player saves or production log records.
 

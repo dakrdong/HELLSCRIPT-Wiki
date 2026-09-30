@@ -2,7 +2,7 @@
 
 갱신일: 2026-10-01
 
-게임 기능과 최적화를 실제 main에 통합했고 마지막 코드 변경 후 전체 EditMode·native·개발/출시 빌드 검증을 끝냈다. 새 회귀는 없으며 기존47개 실패는 아래에 명시한다. 서버 수집 사이트의 공개 전환은 별도 승인 대기다.
+게임 기능과 최적화를 실제 main에 통합했고 마지막 코드 변경 후 전체 EditMode·native·개발/출시 빌드 검증을 끝냈다. 새 회귀는 없으며 기존47개 실패는 아래에 명시한다. 서버 수집 사이트는 2026-10-01 별도 승인 후 공개 API 전환과 실제 QA 게임 업로드 검증을 완료했다.
 
 ## 보존과 변경 범위
 
@@ -74,7 +74,7 @@ Unity Recorder에서 양수 할당을 만들고 카운터 동작을 확인한 **
 
 ## Sites와 보류
 
-`hellscript-player-logs.hoosung.chatgpt.site` v7은 기존 소유자 작업의 배포 성공과 source `40439a3b`를 읽기 확인했다. custom audience 사용자1명/외부 방문자0 유지, Bearer/데이터 저장소 경계와 Railway 인증·운영·DB는 유지한다. 루트 작업은 새 자격증명이나 배포/공개 변경을 하지 않았다. **게임에서 외부 접속 가능한 공개 전환과 직접 합성 업로드는 부모가 요청한 사용자 승인 대기**이며 아직 실행/완료로 보고하지 않는다. 비공개 경로의 이전 합성 업로드 근거와 신선한 로컬/CI 검사를 구분한다.
+최적화 검증 당시 `hellscript-player-logs.hoosung.chatgpt.site` v7/source `40439a3b`의 배포 성공과 소유자 전용 범위를 읽기 확인했다. 이후 2026-10-01 사용자 승인에 따라 별도 Sites 작업에서 공개 API로 전환하고, 사이트 접근 토큰 없이 API 10개 및 실제 macOS QA 게임 업로드·중복 처리·로컬 기록 보존을 검증했다. 이 검증은 위의 최적화 12개 스모크와 별도로 수행했으며 동일 게임 소스의 최종 개발 빌드를 재사용했다. Bearer/비공개 로그 저장소와 Railway 인증·운영·DB는 유지한다. [현재 Sites 상태와 근거](Sites_Player_Logs.md)를 따른다.
 
 원본 main의 게임 코드 기준은 `ebea961a937c4c5ed59791f46c73683a7d33d62b`다. 여섯 로컬 브랜치와 세 실제 원격 브랜치의 변경은 모두 main의 조상이며 source175경로의 사전/사후 hash와 6PNG/meta/GUID를 확인했다. 원본과 독립 검사 worktree의 Assets/Packages/ProjectSettings5244개 파일이 일치하며 기능/최적화가 worktree에만 남은 것은 없다. [게임 적용 경로](OptimizationEvidence20260930/main-source-applied-paths.txt). 문서·위키 커밋은 이 게임 기준 위에 쌓이며 게임 소스를 바꾸지 않는다. 마지막 원격 main SHA/CI/Pages·비로그인 브라우저 반영 증거는 로컬 `evidence/FINAL-REPORT.md`에 기록한다. 서버tree는 기존 원격94075와 같아 서버 경로 필터 CI의 새 run을 만들어 통과했다고 세지 않는다. 미측정 대규모 텍스처 일괄 압축/해상도 하향, 대장간 JobSignature/CoreQualityGauge 재설계, 무제한 FPS·모바일 배터리 검증, 실제 Google로그인/실사용 로그 전송은 하지 않았다. 품질·밸런스·저장 호환성을 바꿀 근거가 부족하거나 공개 승인을 기다리는 범위다.
 

@@ -1,9 +1,9 @@
 {
-  "status": "private_collector_verified_public_connection_pending",
-  "runtime_source_sha": "0cb92c69899366c2ded435bf5e0c8f3dccf7878e",
-  "sites_source_sha": "40439a3bec69a30b00640c92b69217032a7fce97",
+  "status": "public_collector_and_native_uploader_verified",
+  "runtime_source_sha": "ebea961a937c4c5ed59791f46c73683a7d33d62b",
+  "sites_source_sha": "fecac08b49c91285b967dcf122338a132c589a8e",
   "site_url": "https://hellscript-player-logs.hoosung.chatgpt.site",
-  "access": "owner_private",
+  "access": "public_api",
   "worker_tests": {
     "passed": 10,
     "failed": 0
@@ -12,7 +12,6 @@
     "checks": 10,
     "synthetic": true
   },
-  "stored_runs": 1,
   "focused_editmode": {
     "result": "Passed",
     "total": "41",
@@ -27,11 +26,24 @@
   "mac_development_build": {
     "result": "Succeeded",
     "errors": 0,
-    "bytes": 567679657,
-    "runtime_source_sha": "0cb92c69899366c2ded435bf5e0c8f3dccf7878e"
+    "bytes": 567685593,
+    "runtime_source_sha": "ebea961a937c4c5ed59791f46c73683a7d33d62b",
+    "reused_existing_final_build": true
   },
   "broad_editmode": "terminated after narrowing scope; no completed result claimed",
-  "native_sites_uploader": "not run; awaits explicit public API approval",
+  "native_sites_uploader": {
+    "passed": true,
+    "synthetic": true,
+    "realNativeUploader": true,
+    "duplicateAcknowledged": true,
+    "outboxRemoved": true,
+    "runId": "99e810ad8d3a4d11bd11297f3a1d1f7c",
+    "payloadHash": "4eb7727286c98bf03f75baf628b7c33f97310ada88b76ebbb19e054c493f00e4",
+    "serverConnection": "qa_connected",
+    "uploaderStatus": "delivered",
+    "pending": 0,
+    "localHistoryRecords": 1
+  },
   "physical_mobile": "not run",
   "site_status_page": {
     "live_status": "healthy",
@@ -41,8 +53,10 @@
     ],
     "manual_retry": "healthy",
     "placeholder_replaced": true,
-    "deployment_id": "appgdep_6abd32a8ba0c81918c05cf28481791e7",
-    "deployment_status": "succeeded"
+    "deployment_id": "appgdep_6abd7a1d06c081919dd52aaf0d33c878",
+    "deployment_status": "succeeded",
+    "access": "Public API",
+    "game_connection": "Game authentication required"
   },
   "account_binding_editmode": {
     "result": "Passed",
@@ -57,5 +71,30 @@
     "endpoint_bound_liveops_cache": 1,
     "total": 31,
     "reason": "Code, dependencies and settings unchanged."
+  },
+  "live_public_api": {
+    "checks": 10,
+    "synthetic": true,
+    "private_dispatch": false,
+    "verification_agent": "HELLSCRIPT-Telemetry-Verification/1.0"
+  },
+  "verified_public_stored_runs": 2,
+  "native_build_proof": {
+    "sourceCommit": "ebea961a937c4c5ed59791f46c73683a7d33d62b",
+    "sourceUnchangedToMain": "3d41c1b6c1204e614fdebf4af80b6a573eeb300c",
+    "executableSHA256": "afdb05649738382aefc5e4fd4ea449bd77d88b19477e1af98498b997bb676d90",
+    "reusedExistingBuild": true
+  },
+  "real_google_account_upload": "not exercised; native verification used a dedicated QA account",
+  "local_development_qa_collector_updated": true,
+  "initial_private_stored_runs": 1,
+  "wiki_tests_reused": {
+    "python_tests": 11,
+    "python_result": "OK",
+    "ui_result": "passed",
+    "page_routes": 456,
+    "database_routes": 32,
+    "record_details": 4305,
+    "reason": "Existing final results for unchanged wiki generator, UI and test code; document/evidence changes checked by fresh wiki build/check."
   }
 }
