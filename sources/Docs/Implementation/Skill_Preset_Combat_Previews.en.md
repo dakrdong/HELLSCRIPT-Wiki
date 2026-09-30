@@ -57,6 +57,8 @@ The macOS Development build has zero compilation errors. The player exercised re
 - [Complete native acceptance](SkillPresetCombatPreviewEvidence/combat-preview-runtime.txt) · [Final scoped layout/input acceptance](SkillPresetCombatPreviewEvidence/combat-preview-frames.txt) · [Build and scope](SkillPresetCombatPreviewEvidence/build.txt) · [Verified source hashes](SkillPresetCombatPreviewEvidence/sources.json)
 - [Landscape Venom Trap](SkillPresetCombatPreviewEvidence/combat-preview-A03.png) · [Mana Reclaim](SkillPresetCombatPreviewEvidence/combat-preview-M13.png) · [Portrait English / 150%](SkillPresetCombatPreviewEvidence/combat-preview-440x956-en-150.png) · [Short landscape](SkillPresetCombatPreviewEvidence/combat-preview-956x440-ko-100.png)
 
+The authoritative use-policy source now matches runtime data (55 groups / 166 choices). Data, policy-document and comparison-report generation checks, tree-path validation and 39 planner regressions passed. Report interpretations are derived from current observations rather than imposing an earlier ranking. This repair changes no preview runtime code/data; existing execution evidence is reused.
+
 Physical mobile touch input and performance remain unverified. macOS synthetic pointer input and responsive frame sizes are not physical-device acceptance.
 
 ## All 122 presets and starting conditions

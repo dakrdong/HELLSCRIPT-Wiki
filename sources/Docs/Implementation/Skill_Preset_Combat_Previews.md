@@ -57,6 +57,8 @@ macOS Development 빌드는 컴파일 오류 0개입니다. 실제 플레이어�
 - [전체 macOS 조작 기록](SkillPresetCombatPreviewEvidence/combat-preview-runtime.txt) · [최종 배치·조작 재검사](SkillPresetCombatPreviewEvidence/combat-preview-frames.txt) · [빌드와 검증 범위](SkillPresetCombatPreviewEvidence/build.txt) · [확인한 원본 해시](SkillPresetCombatPreviewEvidence/sources.json)
 - [가로 맹독 덫](SkillPresetCombatPreviewEvidence/combat-preview-A03.png) · [가로 마력 회수](SkillPresetCombatPreviewEvidence/combat-preview-M13.png) · [세로 영어·150%](SkillPresetCombatPreviewEvidence/combat-preview-440x956-en-150.png) · [짧은 가로 화면](SkillPresetCombatPreviewEvidence/combat-preview-956x440-ko-100.png)
 
+원본 사용 조건 생성표도 게임 데이터와 일치합니다(55개 묶음·166개 선택지). 데이터·옵션 문서·비교 보고서 생성 검사와 스킬 트리 경로 검사, 계획기 회귀 39개가 통과했습니다. 비교 보고서의 해석은 이전 결과를 고정하지 않고 현재 기록의 수치에서 생성합니다. 이 보완 과정에서 게임의 예시 코드·데이터는 바뀌지 않았으며 기존 실행 검증을 재사용했습니다.
+
 모바일 실기기의 터치 조작·성능은 검증하지 않았습니다. macOS에서 합성한 포인터 입력과 화면 크기 확인을 모바일 실기기 결과로 취급하지 않습니다.
 
 ## 122개 프리셋과 시작 상황

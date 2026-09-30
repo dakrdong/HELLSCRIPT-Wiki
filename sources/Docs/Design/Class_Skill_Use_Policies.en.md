@@ -4,7 +4,7 @@
 
 The fun of combat configuration comes from choosing conditional behavior, observing its result, and revising it. Good choices should depend on enemies and equipment. These options change timing, targets, positions and waiting; they grant no free stats merely for being selected.
 
-There is one use-policy group for each of the 54 active/ultimate skills, plus a separate Mana Reclaim recovery goal: 55 groups and 164 choices. The 57 passives compete for three passive slots rather than automatic-cast conditions. Existing detailed edict values are preserved; legacy choices below project their selected value onto the existing edict. Defaults keep the original conditions.
+There is one use-policy group for each of the 54 active/ultimate skills, plus a separate Mana Reclaim recovery goal: 55 groups and 166 choices. The 57 passives compete for three passive slots rather than automatic-cast conditions. Existing detailed edict values are preserved; legacy choices below project their selected value onto the existing edict. Defaults keep the original conditions.
 
 ## Two reference cases
 
@@ -165,6 +165,7 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Default edict | Use on an elite, boss or 4-enemy cluster while Battle Shout is active or resource is at least 80%. | Opportunities that fail these conditions are left to other actions. |
 | Wait for several targets | Aims the large hit at four or more clustered targets. | Holds the long cooldown against isolated targets. |
 | Align with the shout | Times Judgment during the shout buff. | Delays the ultimate without a timely shout. |
+| Judge strong enemies | Cast when a qualifying target is in the actual attack area. | Take other actions while the condition is not met. |
 
 ## Ranger
 
@@ -456,6 +457,7 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Default edict | If the loadout can generate an elemental-cycle buff, wait for it. Otherwise do not wait for an unavailable buff. In both cases, target an elite, boss, or at least four enemies. | Opportunities that fail these conditions are left to other actions. |
 | Use against elites and bosses | Uses Collapse promptly on an elite or boss. | Can cast before elemental empowerment is ready. |
 | Wait for elemental empowerment | Waits until elemental empowerment is active. | Does not cast without an empowerment source. |
+| Collapse a group of four | Cast when a qualifying target is in the actual attack area. | Take other actions while the condition is not met. |
 
 ### M18 · Sage Incarnate use policy
 
