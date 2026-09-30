@@ -2993,6 +2993,142 @@ HP 보호	HP shield
 예	Yes
 아니요	No
 
+슬롯 강화	Slots
+변경할 장비 선택	Choose equipment
+옵션을 변경할 수 있는 장비만 표시합니다.	Only equipment with enchantable affixes is shown.
+이 옵션 위치를 고정할까요?	Lock this affix line?
+첫 실행에 골드가 사용되며, 선택한 줄이 이 아이템의 영구적인 변경 위치가 됩니다.	Your first paid roll spends gold and makes the selected line this item's permanent reroll slot.
+아이템 Lv.{0} · {1}	Item Lv.{0} · {1}
+변경할 위치	Reroll slot
+{0}번 옵션	Affix {0}
+현재 옵션	Current affix
+1회 변경 비용	Cost per roll
+결과는 즉시 적용됩니다. 같은 옵션이나 낮은 수치로 바뀔 수 있습니다.	The result applies instantly. The same affix or a lower value can come up.
+위치 고정 후 변경	Lock line and reroll
+멈출 옵션을 하나 이상 선택하세요.	Select at least one affix to stop on.
+원하는 옵션이 나올 때까지	Until the affix you want
+체크한 옵션 중 하나가 나오면 즉시 멈추고 결과를 보여 줍니다. 목표를 체크해도 출현 확률은 달라지지 않습니다.	Stops at once and shows the result when a checked affix comes up. Checking a target does not change its chance.
+최대 실행 횟수	Maximum rolls
+{0:N0}회 MAX	{0:N0} rolls MAX
+최대	Max
+1회부터 보유 골드로 가능한 {0:N0}회까지	From 1 up to the {0:N0} rolls your gold allows
+최대 사용 골드	Maximum gold spent
+모두 실행 후 잔액	Balance after all rolls
+처음 변경하면 선택한 위치가 영구 고정됩니다. 이후 이 아이템은 해당 줄만 변경할 수 있습니다.	Your first paid roll permanently locks this line. Only this line can ever be rerolled on this item.
+목표 옵션	Target affixes
+목표 옵션이 나왔습니다	A target affix came up
+결과를 확인하고 다음 행동을 선택하세요.	Review the result and choose what to do next.
+실행 횟수	Rolls used
+{0:N0}회 / {1:N0}	{0:N0} / {1:N0}
+사용한 골드	Gold spent
+남은 횟수	Rolls left
+{0:N0}회	{0:N0} rolls
+멈추면 현재 결과를 유지합니다. 계속 돌리면 이 결과가 다음 옵션으로 바뀝니다.	Stopping keeps the current result. Rolling on replaces it with the next affix.
+옵션 변경 안내	Affix reroll guide
+슬롯 강화 안내	Slot enhancement guide
+장비 강화 안내	Equipment enhancement guide
+코어 제작 안내	Core crafting guide
+옵션 변경 규칙	Reroll rules
+장비를 고르고 바꿀 옵션 한 줄을 선택하세요. 첫 유료 변경이 해당 위치를 영구 고정합니다. 아이템을 바꾸거나 창을 다시 열어도 고정은 유지됩니다.	Pick equipment and choose one affix line to reroll. The first paid roll locks that line for good. Switching items or reopening the window keeps the lock.
+자동 변경은 설정한 횟수 안에서 반복합니다. 체크한 종류 중 하나가 나오면 수치와 관계없이 멈춥니다. 결과 창에서는 골드가 더 사용되지 않습니다.	Auto reroll repeats within the count you set. It stops when any checked affix comes up, whatever its value. No more gold is spent while the result window is open.
+아이템 레벨에 따른 고정 비용	Fixed price by item level
+기존 공식 500 × L + 50 × L × (L − 1)을 사용합니다. L은 아이템 레벨이며, 변경 횟수는 비용에 영향을 주지 않습니다.	The existing formula 500 × L + 50 × L × (L − 1) applies, where L is the item level. The number of rerolls does not change the price.
+성장 규칙	Growth rules
+장비와 무관	Independent of equipment
+장비를 빼거나 교체해도 유지됩니다. 보조손이 비어 있는 양손 무기 상태에도 적용되는 패시브입니다.	Bonuses remain after equipment removal or replacement, including an empty off hand with a two-handed weapon.
+작업 칸	Workstations
+기본 작업 칸은 2개입니다. 3·4·5번째 칸은 심연 주화 10·50·250개로 차례로 엽니다. 모든 칸을 여는 데 총 310개가 필요합니다.	Two stations are free. Unlock stations 3, 4 and 5 in order for 10, 50 and 250 Abyssal Coins: 310 in total.
+지금 완료	Finish now
+남은 시간 1분당 심연 주화 1개를 사용합니다. 분 미만은 버려 계산하며, 59초 이하는 0개입니다.	Finish now costs 1 Abyssal Coin per remaining full minute. Partial minutes are discarded; 59 seconds or less costs 0.
++0에서 시작해 +100까지 골드로 즉시 강화합니다. 강화는 확정 성공하며, 아이템 레벨과 강화 단계는 별개입니다.	Enhance instantly from +0 to +100 with gold. Every enhancement succeeds. Item level and enhancement level are separate.
+증가량	Gain per level
+증가량은 장비 종류별로 고정됩니다. 확률·속도·저항은 %p로 더합니다.	Gains are fixed for each equipment type. Chance, speed and resistance add percentage points.
++10과 최대 강화	Enhance +10 and max
+10레벨 강화는 최대 +100까지 한 번에 올립니다. 필요한 총 골드가 부족하면 사용할 수 없습니다. 최대 강화는 보유 골드로 가능한 단계까지 올립니다.	Enhance +10 adds ten levels, capped at +100, and requires the full displayed cost. Enhance max reaches the highest affordable level.
+강화 비용	Enhancement cost
+기본 비용 = 100 × 아이템 레벨 + 10 × 아이템 레벨². 도달 강화 단계가 N이면 기본 비용 × [1 + 0.05 × (N−1) + 0.0025 × (N−1)²]이며, 1골드 단위로 올림합니다.	Base cost = 100 × item level + 10 × item level². Target enhancement N costs base × [1 + 0.05 × (N−1) + 0.0025 × (N−1)²], rounded up to a whole gold.
+인벤토리와 창고에 보유한 같은 부위 코어를 합쳐 사용합니다. 코어 10개당 장비 1개를 제작하며, 인벤토리 코어부터 차감합니다. 반지 코어는 양쪽 반지에 공통으로 사용합니다.	Matching cores from inventory and storage are combined. Each craft costs 10 cores, consuming inventory cores first. Both ring positions use the same core type.
+심연 주화 0개는 0~100%, 1개는 0.01~100%, 8,000개는 80~100%에서 옵션마다 별도로 추첨합니다. 고유 효과와 세트 효과는 바뀌지 않습니다.	With 0 Abyssal Coins each affix rolls in 0–100%; with 1, in 0.01–100%; with 8,000, in 80–100%. Legendary powers and set bonuses stay unchanged.
+출현 확률 {0}%	Chance {0}%
+장비 바꾸기	Change
+변경할 옵션	Select an affix
+이 장비에는 변경할 랜덤 옵션이 없습니다.	This equipment has no random affixes to reroll.
+다시 변경 가능	Can reroll
+변경 불가	Fixed
+접두 옵션	Prefix
+접미 옵션	Suffix
+{0}번 옵션이 변경 위치로 고정되었습니다. 다른 줄은 유지되며, 이 줄은 계속 변경할 수 있습니다.	Affix {0} is now the permanent reroll slot. Other lines stay fixed; this line can be rerolled again.
+고유 효과 · 변경 불가	Unique effect · Fixed
+나올 수 있는 옵션	Possible affixes
+{0}종	{0} types
+자동 변경 진행 중	Auto reroll in progress
+{0:N0} / {1:N0}회 · 남은 횟수 {2:N0}	{0:N0} / {1:N0} rolls · {2:N0} left
+아이템 레벨 기준 · 반복해도 비용은 같습니다.	Based on item level · Cost never increases with rolls.
+강화할 장비	Equipment to enhance
+성장 미리보기	Growth preview
+강화 +{0}	Enhancement +{0}
+현재 능력	Current power
+다음 강화	Next enhancement
+최대 강화 달성	Maximum enhancement
+강화 전	Original
+누적 강화 보너스	Enhancement bonus
+매 강화마다 {0} +{1}	Each enhancement: {0} +{1}
+매 강화마다 {0} +{1}%p	Each enhancement: {0} +{1} pp
+착용 시 적용 · 강화는 개별 장비에 귀속됩니다.	Applies while equipped · Enhancement belongs to this item.
++1 기본 비용	Base cost to +1
++0 → +100 총 골드	Total gold from +0 to +100
+능력은 일정하게, 비용은 단계에 따라 증가	Constant stat gains, increasing gold costs
+초반은 가볍게, 후반은 골드를 모아 도전	Start affordably; save gold for later levels
+표시할 장비가 없습니다.	No equipment to display.
+강화할 장비 선택	Choose equipment to enhance
+착용 중·인벤토리의 모든 장비	All equipped and inventory items
+{0} · Lv.{1} · 강화 +{2}	{0} · Lv.{1} · Enhancement +{2}
+골드 부족	Not enough gold
+{0} +{1} → +{2} 강화 완료 · {3:N0} G 사용	Enhanced {0} +{1} → +{2} · Spent {3:N0} G
+강화 작업 칸을 추가할까요?	Unlock another workstation?
+심연 주화 {0}개를 한 번 사용하면 동시에 {1}개 부위를 강화할 수 있습니다. 열린 작업 칸은 계속 유지됩니다.	Spend {0} Abyssal Coins once to enhance {1} slots at a time. The workstation stays unlocked.
+사용 후 잔액	Balance after purchase
+{0}개로 열기	Unlock for {0}
+{0}번째 강화 작업 칸을 열었습니다.	Workstation {0} is now open.
+해금 레벨에 첫 증가분을 받고, 이후 매 레벨 누적됩니다. 이전에 열린 능력도 계속 성장합니다.	Receive the first increment at the unlock level, then accumulate it every level. Earlier passives continue to grow.
+Lv.{0} 누적값	Value at Lv.{0}
+{0} / {1}칸 작업 중	{0} / {1} stations busy
+성장 계획과 계산	Growth plan & calculations
+{0} 남음	{0} remaining
+부위를 선택하고 강화를 시작하세요.	Select a slot, then start an upgrade.
+{0}번째 작업 칸 열기	Unlock station {0}
+앞선 작업 칸을 먼저 여세요.	Unlock the preceding station first.
+{0} Lv.{1} 강화 완료 · 심연 주화 {2}개 사용	{0} reached Lv.{1} · Spent {2} Abyssal Coins
+강화석이 부족합니다.	Not enough stones.
+완료 예정 {0}	Finishes at {0}
+이 부위의 다섯 패시브가 모두 적용되고 있습니다.	All five passives for this slot are active.
+{0} Lv.{1} 강화 시작 · 강화석 {2}개 사용	Started {0} Lv.{1} · Spent {2} stones
+아이템 없이도 적용 · 두 반지와 보조손도 독립 성장	Active even with empty slots · Both rings and off hand grow separately
+강화 완료 시 능력치 적용 · 장착 아이템과 무관	Passives apply on completion · Independent of equipped items
+현재	Current
+새 능력치	New passive
+현재 → 다음 강화	Current → Next enhancement
+각 옵션 수치는 제작할 때 따로 결정됩니다.	Each affix value is rolled independently on crafting.
+제작한 장비가 제작 기록에 저장되었습니다.	Your equipment was saved to crafting history.
+코어 10개 · 심연 주화 {0:N0}개 사용	Used 10 cores · {0:N0} abyssal coins
+모든 옵션이 표시된 구간에서 각각 추첨됩니다.	Every affix rolls separately within this interval.
+확정된 옵션	Rolled affixes
+최소 – 최대	Min – Max
+최소 보장	Floor
+범위 {0} ~ {1}	Range {0} – {1}
+품질 설정	Set quality
+품질은 각 옵션의 최소~최대 범위 안에서 차지하는 위치입니다.	Quality is the position between each affix’s minimum and maximum.
+심연 주화 없이도 제작할 수 있습니다.	Crafting without abyssal coins is available.
+장비를 선택하면 옵션 범위와 최소 보장 품질을 확인할 수 있습니다.	Choose equipment to see its affix ranges and guaranteed minimum quality.
+소모 코어	Core cost
+소모 심연 주화	Abyssal coin cost
+제작 후 심연 주화	Abyssal Coins remaining
+최대 {0:N0}개 · {1:0.##}%까지 조절	Up to {0:N0} abyssal coins · {1:0.##}%
+코어 목록으로	Back to cores
+제작 기록 ({0})	Crafting history ({0})
+코어 선택	Select a core
+부위 코어 10개로 원하는 전설·세트 장비를 제작합니다.	Use 10 matching cores to craft a legendary or set item of your choice.
+어떤 전설을 벼릴까요?	Which legend will you forge?
 # --- composed at runtime; no source literal holds these ---
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
@@ -4462,8 +4598,8 @@ M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 
 {0:N0} 골드	{0:N0} gold
 갬블 상인 찾아가기	Visit the gambler
 # Blacksmith runtime
-+10레벨 강화	Upgrade +10
-+1레벨 강화	Upgrade +1
++10레벨 강화	Enhance +10
++1레벨 강화	Enhance +1
 /초	/s
 100레벨 성장 계획	Growth plan to Lv.100
 1레벨부터 기본 능력이 적용됩니다. 25·50·75레벨에서 새 능력이 열리고, 열린 레벨부터 매 레벨 누적됩니다. 100레벨 보상은 한 번 적용됩니다.	Base bonuses apply from Lv.1. New bonuses unlock at Lv.25, 50 and 75 and grow each level thereafter. The Lv.100 reward applies once.
@@ -4473,11 +4609,8 @@ Lv.{0}부터 매 레벨 {1}	{1} per level from Lv.{0}
 {0}분 {1}초	{0}m {1}s
 {0}시간 {1}분	{0}h {1}m
 {0}일 {1}시간 {2}분	{0}d {1}h {2}m
-‹ 다른 장비 선택	‹ Choose equipment
 가능 범위 {0}	Possible range: {0}
 가능 옵션과 수치 범위	Possible affixes & ranges
-강화 +{0} 완료 · {1:N0} 골드 사용	Enhanced to +{0} · Spent {1:N0} gold
-강화 성장 미리보기	Enhancement preview
 강화 작업	Upgrade jobs
 강화 작업  {0} / {1}칸 작업 중	Upgrade jobs  {0} / {1} busy
 강화 작업 기록을 확인해 주세요.	Check the upgrade job record.
@@ -4500,7 +4633,6 @@ Lv.{0}부터 매 레벨 {1}	{1} per level from Lv.{0}
 대장간 성장 기록을 확인해 주세요.	Check the blacksmith growth record.
 대장장이 근처에서 대장간을 이용해 주세요.	Approach the blacksmith to use the forge.
 더 새로운 대장간 저장 버전이 필요합니다.	This blacksmith save requires a newer version.
-매 단계 {0}	{0} per enhancement
 매 레벨 {0}	{0} per level
 멈추기	Stop
 모든 스킬 레벨	All skill levels
@@ -4521,7 +4653,6 @@ Lv.{0}부터 매 레벨 {1}	{1} per level from Lv.{0}
 슬롯 강화가 완료되었습니다.	Slot upgrade completed.
 아이템 Lv.{0} · 강화 +{1}	Item Lv.{0} · Enhancement +{1}
 아이템 없이도 적용되는 상시 패시브	Permanent bonuses, even without equipment
-아이템을 착용하면 적용됩니다.	Applies while the item is equipped.
 옵션 변경	Affix reroll
 옵션 변경 비용  {0:N0} G	Reroll cost  {0:N0} G
 옵션을 변경했습니다.	Affix rerolled.
@@ -4547,11 +4678,10 @@ Lv.{0}부터 매 레벨 {1}	{1} per level from Lv.{0}
 재료 {0:N0} · 코어 {1} · 강화석 {2:N0}	Materials {0:N0} · Cores {1} · Stones {2:N0}
 제작	Craft
 지금 완료 · ◇ {0:N0}	Finish now · ◇ {0:N0}
-최대 강화	Upgrade max
+최대 강화	Enhance max
 최대 레벨 달성	Maximum level reached
 최초 변경 시 이 위치가 영구 고정됩니다.	The first paid roll permanently locks this slot.
 항상 적용되는 패시브	Permanent passive bonuses
-현재 → 다음 강화	Current → Next enhancement
 현재 강화 +{0} / 100	Enhancement +{0} / 100
 모든 원소 저항 증가	All elemental resistance bonus
 강화석 {0:N0}개 획득	Obtained {0:N0} enhancement stones
@@ -4965,18 +5095,11 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 의 물약	 Elixir
 
 해골 보석 구매 · {0:N0} 골드	Buy chipped skull · {0:N0} gold
-01 / 코어 선택	01 / CORE SELECTION
 1개당 +0.01% · 최대 8,000개 (80%)	+0.01% per coin · Up to 8,000 (80%)
-{0} 코어 × 10 · Lv.{1}	{0} cores × 10 · Lv.{1}
 {0}개 더 필요	Need {0} more
-‹ 장비 목록으로	‹ Equipment list
-‹ 코어 목록으로	‹ Core list
 가방에 장비를 받을 공간이 필요합니다.	Make room in your bag for the crafted item.
-각 옵션의 수치는 개별 추첨됩니다.	Each affix rolls independently.
 고유 효과	Legendary power
 균열을 완료하고 대장간에서 제작해 주세요.	Finish the rift before crafting at the forge.
-보유 코어	Owned cores
-보유 한도 {0:N0}개 · 최대 {1:0.##}%	Wallet limit {0:N0} · Up to {1:0.##}%
 세트 효과	Set bonuses
 심연 주화는 0~8,000개까지 사용할 수 있습니다.	Use between 0 and 8,000 Abyssal Coins.
 아직 제작한 장비가 없습니다.	No equipment crafted yet.
@@ -4992,18 +5115,14 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 제작 옵션 범위	Affix ranges
 제작 완료	Craft complete
 제작 정보가 바뀌었습니다. 다시 선택해 주세요.	Crafting details changed. Select the equipment again.
-제작 후 심연 주화 {0:N0}개	Abyssal Coins after crafting: {0:N0}
 제작할 장비 선택	Choose equipment to craft
 제작할 장비를 선택해 주세요.	Select equipment to craft.
 조건에 맞는 장비가 없습니다.	No matching equipment.
 최소 보장 품질	Minimum quality
-최소 품질 {0:0.##}% · 심연 주화 {1:N0}개	Minimum {0:0.##}% · {1:N0} Abyssal Coins
-코어 10개 · 심연 주화 {0:N0}개	10 cores · {0:N0} Abyssal Coins
 투입 심연 주화	Invest Abyssal Coins
 해당 부위의 코어가 10개 필요합니다.	You need 10 cores for this equipment slot.
 대장간 코어 제작	Core crafting at the forge
 코어 제작	Core crafting
-최소 보장 {0}	Guaranteed min. {0}
 
 해골 보석을 같은 단계와 수량의 금강석으로 바꿨습니다. 원본 저장 파일은 보존했습니다.	Skull gems were converted to Diamonds of the same tier and quantity. The original save file was preserved.
 
@@ -5054,7 +5173,7 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 보석상에서 보석 1개를 같은 색상과 단계의 물약 1개로 바꿉니다. 기본 회복 물약은 처음부터 이용할 수 있습니다.	At the jeweler, turn one gem into one potion of the same color and tier. Basic recovery potions are available from the start.
 걸작 강화	Masterworking
 강화 +5 이상인 보유 장비를 재료와 골드로 추가 강화합니다. 현재 계정의 걸작 상한과 장비별 조건을 함께 확인하세요.	Spend materials and gold to improve owned gear with enhancement +5 or higher. Check the account masterwork cap and each item requirement.
-같은 부위 코어 10개로 전설·세트 장비를 선택 제작합니다. 코어를 먼저 모아도 이 기능은 120단계 클리어 후에 열립니다.	Spend ten same-slot cores to craft a chosen legendary or set item. Collecting cores early does not unlock crafting before clearing Rift 120.
+같은 부위 코어 10개로 전설·세트 장비를 선택 제작합니다. 코어를 먼저 모아도 이 기능은 50단계 클리어 후에 열립니다.	Spend ten same-slot cores to craft a chosen legendary or set item. Collecting cores early does not unlock crafting before clearing Rift 50.
 이 단계에서 열리는 콘텐츠	Content unlocked at this tier
 콘텐츠는 클리어 기록이 확정되면 계정 전체에 자동으로 개방됩니다. 상자 수령 여부와는 관계없습니다.	Content unlocks automatically for the account when the clear record is confirmed. Claiming reward boxes is not required.
 클리어 후 개방	Unlocks after clearing
@@ -5898,3 +6017,25 @@ HP가 낮은 적 마무리	Finish low-HP enemies
 재사용 {0:0.0}초	Cooldown {0:0.0}s
 
 활성화	Activate
+일일 퀘스트	Daily Quests
+장비 판매	Sell Equipment
+상점 골드 사용	Spend Gold in Shops
+물약 사용	Use Potions
+실제로 판매한 장비 수량입니다. 자동 판매와 창고 판매도 포함합니다.	Counts equipment actually sold, including automatic and warehouse sales.
+전리품 정리까지 끝낸 균열 승리입니다. 훈련·튜토리얼·중도 귀환은 제외합니다.	Counts rift victories after loot cleanup. Training, tutorials and early returns do not count.
+실제로 완료한 장비 강화 단계입니다. +10 강화는 완료된 10단계로 계산합니다.	Counts completed equipment enhancement steps. A completed +10 enhancement counts as ten steps.
+상점에서 실제 지불한 골드입니다. 무료 보급과 강화·재련 비용은 제외합니다.	Counts gold actually paid in shops. Free supplies, enhancement and reroll costs do not count.
+실제로 소비한 물약 수량입니다. 훈련·튜토리얼·취소·사용 실패는 제외합니다.	Counts potions actually consumed. Training, tutorials, cancellations and failed uses do not count.
+날짜가 이전 일일 퀘스트보다 이릅니다. 기기의 시간을 확인해 주세요.	The date precedes your last daily quests. Please check your device clock.
+일일 퀘스트 날짜가 바뀌었습니다. 목록을 다시 확인해 주세요.	The daily quest date has changed. Please refresh the list.
+오늘 수령한 심연 주화 {0} / {1}개	Abyssal Coins claimed today: {0} / {1}
+활동별 보상을 직접 받으세요. 모든 목표를 완료하면 하루 총 100개입니다. 추가 전체 완료 보상은 없습니다.	Claim each activity's reward. Completing all goals awards 100 coins per day, with no extra completion bonus.
+오늘의 일일 퀘스트를 준비하지 못했습니다. 저장 상태와 기기 시간을 확인한 뒤 새로고침해 주세요.	Today's daily quests could not be prepared. Check your save and device clock, then refresh.
+목표는 오늘 처음 준비할 때 고정됩니다. 균열 목표는 진행 단계·배속·최근 실제 클리어 시간을 반영합니다.	Goals are fixed when first prepared today. Rift goals reflect progress, game speed and recent real clear times.
+강화는 기존 해금 조건을 따릅니다. 같은 캐릭터의 저단계 장비도 사용할 수 있습니다.	Enhancement follows existing unlocks. You can use low-level equipment belonging to the same character.
+새로고침	Refresh
+진행 {0:N0} / {1:N0}	Progress {0:N0} / {1:N0}
+심연 주화 {0}개	{0} Abyssal Coins
+보상 수령	Claim Reward
+보상을 받았습니다.	Reward claimed.
+00:00 KST · 초기화까지 {0}	00:00 KST · Resets in {0}

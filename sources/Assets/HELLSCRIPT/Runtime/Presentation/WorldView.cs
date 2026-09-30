@@ -12,6 +12,8 @@ namespace Hellscript
         GameObject world,hero;
         readonly Dictionary<int,GameObject> actors=new Dictionary<int,GameObject>();
         readonly Dictionary<int,GameObject> hazards=new Dictionary<int,GameObject>();
+        readonly HashSet<int> activeHazards=new HashSet<int>();
+        readonly List<int> staleHazards=new List<int>();
         readonly Dictionary<int,GameObject> drops=new Dictionary<int,GameObject>();
         readonly Dictionary<string,Material> materials=new Dictionary<string,Material>();
         readonly List<VisualFx> effects=new List<VisualFx>();
@@ -66,6 +68,7 @@ namespace Hellscript
             // Destroy is deferred to the end of the frame, so forget the old root's effects library now: a world rebuilt in the
             // same frame must not borrow it (its materials die with the old root and its effects would render magenta).
             if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
+            activeProjectiles.Clear();activeTraps.Clear();staleActions.Clear();activeHazards.Clear();staleHazards.Clear();
             roomGeometry.Clear();passageGeometry.Clear();terrainProps.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
@@ -198,10 +201,10 @@ namespace Hellscript
             }
             PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
             PresentCombatFeedback(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
-            var active=new HashSet<int>();
+            activeHazards.Clear();
             foreach(var fx in run.effects)
             {
-                active.Add(fx.id);
+                activeHazards.Add(fx.id);
                 if(fx.hostile&&!CanDisplayEnemyMarker(run,fx.position,fx.radius))
                 {if(hazards.TryGetValue(fx.id,out var hidden))hidden.SetActive(false);continue;}
                 if(!hazards.TryGetValue(fx.id,out var v)){v=Ring(world.transform,Position(fx.position)+Vector3.up*.09f,fx.radius,fx.hostile?red:fx.kind==8?green:blue,.13f);hazards[fx.id]=v;DecorateGround(v,fx);}
@@ -210,7 +213,8 @@ namespace Hellscript
                 var snow=v.transform.Find("Snow swirl");if(snow!=null)snow.localRotation=Quaternion.Euler(0,elapsed*80,0);
             }
             PresentPreviewEnvironment();
-            foreach(var id in new List<int>(hazards.Keys))if(!active.Contains(id)){Destroy(hazards[id]);hazards.Remove(id);}
+            staleHazards.Clear();foreach(var id in hazards.Keys)if(!activeHazards.Contains(id))staleHazards.Add(id);
+            foreach(var id in staleHazards){Destroy(hazards[id]);hazards.Remove(id);}
             for(int i=effects.Count-1;i>=0;i--)
             {var fx=effects[i];float step=frozen?0:dt*PresentationSpeed;fx.life-=step;if(fx.life<=0){Destroy(fx.go);effects.RemoveAt(i);}else{fx.go.transform.localScale=fx.scale*(1+(1-fx.life/fx.total)*fx.growth);fx.go.transform.position+=fx.velocity*step;fx.go.transform.Rotate(0,fx.spin*step,0);}}
         }

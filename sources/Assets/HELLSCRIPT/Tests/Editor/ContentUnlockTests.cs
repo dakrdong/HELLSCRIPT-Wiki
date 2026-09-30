@@ -28,7 +28,7 @@ namespace Hellscript.Tests
         [TestCase(ContentUnlocks.Enhance,1)] [TestCase(ContentUnlocks.Offline,1)]
         [TestCase(ContentUnlocks.RareCraft,3)] [TestCase(ContentUnlocks.Gem,10)]
         [TestCase(ContentUnlocks.Reroll,35)] [TestCase(ContentUnlocks.Shop,25)]
-        [TestCase(ContentUnlocks.Sweep,60)] [TestCase(ContentUnlocks.CoreCraft,120)]
+        [TestCase(ContentUnlocks.Sweep,60)] [TestCase(ContentUnlocks.CoreCraft,50)]
         [TestCase(ContentUnlocks.SlotEnhance,5)] [TestCase(ContentUnlocks.Rune,15)]
         [TestCase(ContentUnlocks.Aspect,40)] [TestCase(ContentUnlocks.Elixir,60)] [TestCase(ContentUnlocks.Masterwork,80)]
         public void U03To15_ThresholdsUseGreaterOrEqualAndPersist(string id,int threshold)
@@ -60,7 +60,7 @@ namespace Hellscript.Tests
         [Test] public void U12To14_CoreRequiresSameSlotAndConsumptionKeepsPrivilege()
         {
             var a=New();a.cores[0]=5;a.cores[1]=5;Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));
-            a.cores[0]=10;Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));a.Hero.highestClear=120;Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));Assert.AreEqual(10,a.cores[0]);
+            a.cores[0]=10;Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));a.Hero.highestClear=50;Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));Assert.AreEqual(10,a.cores[0]);
             uint rng=82;Assert.IsTrue(ContentServices.Purchase(a,0,2,ref rng,out var item));Assert.AreEqual(3,item.rarity);Assert.AreEqual(0,a.cores[0]);
             Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.CoreCraft));Assert.IsFalse(ContentServices.Purchase(a,0,2,ref rng,out _));
         }

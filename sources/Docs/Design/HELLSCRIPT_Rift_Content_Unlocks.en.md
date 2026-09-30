@@ -17,9 +17,9 @@ The first-clear reward list now shows which gameplay services unlock at each rif
 | 25 | Unidentified equipment purchase | Add targeted random purchases; the basic equipment shop remains available from the start. |
 | 35 | Affix rerolling | Improve useful affixes after the initial gear churn, retaining one-line locking and gold costs. |
 | 40 | Aspect upgrades and imprinting | Apply collected legendary powers to equipped gear; salvage collection works earlier. |
+| 50 | Targeted legendary/set core crafting | Spend ten same-slot cores to fill build gaps. |
 | 60 | Sweep and gem-potion crafting | Add repeat rewards and consumables. Sweeps still require the selected hero's clear record and daily allowance; potions consume matching gems. |
 | 80 | Masterworking | Requires enhancement +5, materials, gold and the account masterwork cap. |
-| 120 | Targeted legendary/set core crafting | Spend ten same-slot cores to fill build gaps. |
 
 The catalog contains 14 permanent service entitlements. R100 awakened boxes, R200 set boxes, R300/500/650 rune boxes and R750/1000 gem boxes are item milestones, not new menu gates. Natural awakening and rune drop curves, masterwork caps and combat stats remain outside this change.
 
@@ -33,7 +33,7 @@ The existing combat owner records `highestClear` at boss reward settlement. Trai
 
 ## Persistence and execution
 
-New accounts cannot bypass R10 gems or R120 core crafting by acquiring stock early. Stock is retained. Runes and aspects can be collected early; rune editing and mastery XP begin at R15, aspect upgrades and imprinting at R40. Access is shared across heroes, while sweep eligibility and reward tier remain hero-specific.
+New accounts cannot bypass R10 gems or R50 core crafting by acquiring stock early. Stock is retained. Runes and aspects can be collected early; rune editing and mastery XP begin at R15, aspect upgrades and imprinting at R40. Access is shared across heroes, while sweep eligibility and reward tier remain hero-specific.
 
 Unlock v1 migrates once to v2, preserving released stage privileges, early gem/core entitlements, initially available rune/aspect services, slot/masterwork access formerly coupled to enhancement, and potion crafting formerly coupled to gems. No equipment, currency, rune, aspect or preset is removed. The original save is archived with `.before-content-unlocks-v2.json`; schema 13 rejects missing or unsupported current unlock versions without overwriting the source. Guide acknowledgments remain separate from access.
 

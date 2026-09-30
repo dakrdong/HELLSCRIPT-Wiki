@@ -6,6 +6,23 @@ Date: 2026-09-22
 
 2026-09-23 addition: the fourth [core crafting](Core_Crafting.en.md) tab selects legendary/set recipes and uses Abyssal Coins to set minimum affix quality. The legacy core-crafting entry now routes here; rare crafting retains its previous screen. Rules and historical verification of the three original tabs below remain preserved.
 
+## 2026-09-30 Recomposed to the HTML prototype layout
+
+The forge window was rebuilt in the composition of the approved [HTML prototype](../../Prototypes/Blacksmith/README.md). Rules, costs, transactions and saves for affix reroll, equipment enhancement, slot growth and core crafting are unchanged. What changed is layout and the size unit, the lock hint, two confirmation dialogs and the core crafting unlock stage (rift 120 → **50**). Screens are in the [evidence folder](BlacksmithLayoutEvidence/); run results are in the [validation record](Blacksmith_Validation.en.md).
+
+| Item | Rule |
+| --- | --- |
+| Frame | Title bar (back · HELLSCRIPT · Forge · wallets · guide · close) → five service tabs → body → docked action bar. Wallet chips vary by tab: gold for reroll, gear enhancement and equipment crafting; enhancement stones plus Abyssal Coins for slots; Abyssal Coins for core crafting. Prototype-only notes (autosave, demo text) are not shown. |
+| Size unit | Every length and font size is a multiple of one window-fitted unit `U` (the prototype's em). Landscape `U = min(width/75.8, height/35.7)`, portrait `U = min(width/31.7, height/64.5)` in canvas units, clamped to 8–17. Landscape is one composition from a 956×440 phone to PC 16:9, 16:10 and 21:9. |
+| Landscape | Three columns. Reroll: equipment list / selected equipment with its affix lines / possible affixes (about 0.85 : 1.2 : 0.95). Slots: equipment slots / selected slot / enhancement work. Gear: equipment list / selected item / growth preview. Cores: cores / equipment / quality. A docked action bar sits below. |
+| Portrait | One column with a docked action bar. Equipment is picked from a bottom sheet opened by the bar at the top (reroll, gear), slot workstations are a one-line strip plus a sheet, and core crafting is three pages (cores → equipment → quality) with a horizontal slide. |
+| Scrolling | Only long lists (equipment, candidates, recipes) and dialog bodies scroll. |
+| Locks | A locked tab shows a padlock and dim text; tapping it shows the "To unlock" bubble under the tab for **2 seconds** (previously 3). The text comes from `ContentUnlocks.Condition`. An account with nothing unlocked sees the sealed forge. Stages: reroll 35, slots 5, gear enhancement 1, core crafting **50**, equipment crafting 3 (routes to the existing crafting screen). |
+| Reroll | The first paid roll asks to lock the line first. The auto dialog has count, slider, quick picks, cost summary and the target list; the result dialog (Stop / Keep rolling) is unchanged. The prototype's roll history is omitted because no history is stored. The game's Equipment details and Masterwork buttons stay as small buttons in the panel header. |
+| Slots | Unlocking a workstation goes through an Abyssal Coin confirmation. The growth plan is full-screen. |
+| Cores | A 2×4 core tile grid, the catalogue (search, class drop-down, type tabs), the chosen equipment's affix ranges and the minimum-quality gauge follow the prototype. Craft results and history are full-screen. |
+| Guide | The title bar's guide button opens a per-service rules dialog. |
+
 ## 2026-09-30 forge access with an unfinished rift
 
 Players can return to town through a portal and use the blacksmith before completing the rift. A saved rift no longer blocks NPC dialogue, forge access, equipment enhancement, affix reroll, slot upgrades, workstation expansion, instant job completion, masterwork/reset, rare crafting or core crafting. Players return to town and approach the NPC rather than opening the forge directly from combat/training. Forge access still checks the actual town position and NPC distance and reuses the existing Korean and English proximity message.
@@ -24,7 +41,7 @@ Integration starts from the committed native inventory and two-weapon-slot work 
 
 ## Resources and responsive UI
 
-Reference sizes are portrait 440×956, landscape 956×440, and PC 16:9, 16:10 and 21:9. Landscape has three exactly equal columns. Portrait list/detail navigation slides horizontally for 0.2 seconds. Dialogs fill the safe-area frame at a constant size with internally scrolling content. Landscape growth details put five milestone rows on the left, and level input, slider and vertical milestone buttons on the right. Milestone buttons show a three-second unlock tooltip. Busy workstation indicators pulse over a 1.5-second cycle.
+Reference sizes are portrait 440×956, landscape 956×440, and PC 16:9, 16:10 and 21:9. Landscape has three columns whose ratios differ per screen (see the 2026-09-30 recomposition). Portrait uses one column with a docked action bar, bottom sheets and, for core crafting, three sliding pages. Dialogs are centred cards (bottom sheets in portrait); the growth plan, craft result and history cover the safe-area frame. Only long lists scroll. Landscape growth details put five milestone rows on the left, and level input, slider and vertical milestone buttons on the right. Milestone buttons show a three-second unlock tooltip. Busy workstation indicators pulse over a 1.5-second cycle.
 
 Both item tabs share the inventory's grade palette for lists, details and dialogs. Unique effects do not create a separate grade. Korean and English use the existing language and reading-scale settings.
 

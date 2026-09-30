@@ -617,6 +617,7 @@ namespace Hellscript
             OfflineSupplies.RecordClear(account,State,RepeatPolicy.resultSeconds);
             ContentUnlocks.RecordRunEnd(account);
             if(account.records.Any(r=>r.id==State.id))return;
+            if(won&&completion!=CombatFinish.Abandoned&&!IsTutorial)DailyQuests.Record(account,DailyQuestActivity.ClearRift,1);
             account.records.Insert(0,new RunRecord{id=State.id,hero=catalog.classNames[(int)Hero.heroClass],result=reason,stage=State.stage,kills=State.kills,loot=State.lootCount,chestsOpened=State.layout.chests.Count(c=>c.phase==ChestPhase.Opened),chestsTotal=State.layout.chests.Count,mapFingerprint=State.layout.fingerprint,objective=State.training<0?RiftObjectives.Capture(State):null,simulationSeconds=State.time,realSeconds=State.realTime,damageDealt=State.dealt,logs=new List<string>(State.logs)});
             while(account.records.Count>CombatHistory.RecordLimit)
             {

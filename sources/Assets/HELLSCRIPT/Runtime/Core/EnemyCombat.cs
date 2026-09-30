@@ -155,16 +155,29 @@ namespace Hellscript
         }
         public static IEnumerable<Vector2[]> Outlines(EnemyThreat t)
         {
+            int count=t.shape==AttackShape.Line?35:t.shape==AttackShape.Sector?27:49;
+            for(int index=0;index<(t.shape==AttackShape.Ring?2:1);index++)
+            {var points=new Vector2[count];CopyOutline(t,index,points);yield return points;}
+        }
+        // Presentation reuses its own scratch buffer. The public iterator still returns
+        // independent arrays of the original lengths to callers that retain the geometry.
+        public static int CopyOutline(EnemyThreat t,int index,Vector2[] points)
+        {
+            if(index<0||index>=(t.shape==AttackShape.Ring?2:1))throw new ArgumentOutOfRangeException(nameof(index));
+            int count=t.shape==AttackShape.Line?35:t.shape==AttackShape.Sector?27:49;
+            if(points==null)throw new ArgumentNullException(nameof(points));
+            if(points.Length<count)throw new ArgumentException("The outline buffer is too small.",nameof(points));
             if(t.shape==AttackShape.Line)
             {
-                var d=(t.end-t.origin).normalized;if(d==Vector2.zero)d=Vector2.up;var points=new List<Vector2>();
-                for(int i=0;i<=16;i++)points.Add(t.end+Rotate(d,-90+i*180f/16)*t.radius);
-                for(int i=0;i<=16;i++)points.Add(t.origin+Rotate(d,90+i*180f/16)*t.radius);points.Add(points[0]);yield return points.ToArray();yield break;
+                var d=(t.end-t.origin).normalized;if(d==Vector2.zero)d=Vector2.up;
+                for(int i=0;i<=16;i++)points[i]=t.end+Rotate(d,-90+i*180f/16)*t.radius;
+                for(int i=0;i<=16;i++)points[17+i]=t.origin+Rotate(d,90+i*180f/16)*t.radius;points[34]=points[0];
             }
-            if(t.shape==AttackShape.Sector)
-            {var points=new List<Vector2>{t.origin};for(int i=0;i<=24;i++)points.Add(t.origin+Rotate(t.direction,-t.angle*.5f+i*t.angle/24)*t.radius);points.Add(t.origin);yield return points.ToArray();yield break;}
-            foreach(float radius in t.shape==AttackShape.Ring?new[]{t.radius,t.innerRadius}:new[]{t.radius})
-            {var points=new Vector2[49];for(int i=0;i<49;i++)points[i]=t.origin+Rotate(Vector2.up,i*360f/48)*radius;yield return points;}
+            else if(t.shape==AttackShape.Sector)
+            {points[0]=t.origin;for(int i=0;i<=24;i++)points[i+1]=t.origin+Rotate(t.direction,-t.angle*.5f+i*t.angle/24)*t.radius;points[26]=t.origin;}
+            else
+            {float radius=index==0?t.radius:t.innerRadius;for(int i=0;i<49;i++)points[i]=t.origin+Rotate(Vector2.up,i*360f/48)*radius;}
+            return count;
         }
         public static EnemyThreat HazardThreat(EnemyHazard h)=>new EnemyThreat("hazard-"+h.id,h.definitionId,h.shape,h.position,h.end,h.direction,h.radius,h.innerRadius,h.angle,h.delay);
         static Vector2 ArrowEnd(RiftNavigation navigation,Vector2 origin,Vector2 direction,float range)

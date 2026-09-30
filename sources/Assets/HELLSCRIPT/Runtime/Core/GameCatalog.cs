@@ -156,6 +156,8 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public DailyQuestState dailyQuests;
+        [NonSerialized] internal Func<long> dailyQuestClock;
         public string telemetryAccountId;
         public long combatSequence,combatTelemetryLossCount;
         public AttendanceState attendance;

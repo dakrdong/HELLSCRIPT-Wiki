@@ -19,7 +19,7 @@ Use the latest inventory as the equipment presentation baseline. Compose new con
 | Paperdoll | `CharacterEquipmentView` owns ten placements. Inventory/storage presets show actual items; slot growth shows translucent body-part emblems. |
 | Slot states | `EquipmentSlotView` owns grade border, level, lock, worn and selected markers. Forge work uses `ForgeWorkingPulse`. |
 
-Element/class/rune colors, HP/mana, danger telegraphs and map symbols retain their meaning. Forge keeps equal three-column landscape geometry, storage keeps two inventories, and rune boards keep hex cells.
+Element/class/rune colors, HP/mana, danger telegraphs and map symbols retain their meaning. The forge keeps the approved HTML composition (three columns in landscape; one column with a docked action bar in portrait; every length a multiple of one window-fitted unit `U`), storage keeps two inventories, and rune boards keep hex cells.
 
 ## Domain ownership
 

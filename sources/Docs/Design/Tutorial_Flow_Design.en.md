@@ -112,7 +112,7 @@ The current new-account unlock schedule is below. Migrated accounts retain previ
 | UL08_SWEEP | Sweep | Stage 60 |
 | UL13_ELIXIR | Gem potion crafting | Stage 60 |
 | UL14_MASTERWORK | Masterworking | Stage 80 |
-| UL09_CORE_CRAFT | Legendary core crafting | Stage 120 |
+| UL09_CORE_CRAFT | Legendary core crafting | Stage 50 |
 
 Unlock stages come directly from `Resources/ContentUnlocks.json`; tutorial code does not duplicate stage thresholds. `H14` independently tracks legendary, set and awakened equipment. `H15` independently tracks seals, carriers, offerings, chests, shrines, goblins, elites and bosses.
 

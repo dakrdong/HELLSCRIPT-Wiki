@@ -16,7 +16,7 @@ The fourth forge tab selects a core category and a specific legendary/set recipe
 
 ## Shared presentation
 
-The existing `BlacksmithWindow` adapter gains a tab without a new canvas/window owner. Landscape/PC retains three equal columns: cores, equipment catalogue/details and quality. Portrait uses three pages with opposite slide directions.
+The existing `BlacksmithWindow` adapter gains a tab without a new canvas/window owner. Landscape/PC uses three columns: cores, equipment catalogue/details and quality (the 2026-09-30 HTML composition, see the [integration record](Blacksmith_Unity_Integration.en.md)). Portrait uses three pages with opposite slide directions. Core crafting opens after clearing rift 50.
 
 The selected core row displays Refine with owned/10 below. There is no separate refine footer. Equipment and affix ranges appear side by side. A tap/drag gauge and −500/−100/−50/+50/+100/+500 buttons replace numeric input. Investment cannot exceed the wallet or 8,000. The track remains 0–100% and fills the possible interval from the selected minimum to 100%.
 

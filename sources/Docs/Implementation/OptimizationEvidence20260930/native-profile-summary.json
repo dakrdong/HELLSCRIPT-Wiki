@@ -1,0 +1,652 @@
+{
+  "scope": "Controlled core optimization 4bd93ff3 vs69b37249, before later forge/Sites/daily content integration",
+  "method": "Three sequential native Development captures per side on one Mac; normal 1x, seeded stage-30 Mage, seed 93171, gear RNG 9132026, 1280x720, three-second warm-up followed by 20-second sampling. Same input save and normal asynchronous admission. Compare marker timings and allocations; frame pacing alone does not establish an FPS gain.",
+  "limitations": [
+    "Desktop evidence; physical mobile, battery and thermal behavior were not measured.",
+    "Profiler markers are optional on this player; missing markers are reported.",
+    "RSS is sampled process-resident memory, distinct from Unity allocations.",
+    "The fixture is deterministic and is not natural progression."
+  ],
+  "comparable": {
+    "unity": "6000.6.0f1",
+    "device": "Mac15,7",
+    "processor": "Apple M3 Pro",
+    "graphics": "Apple M3 Pro",
+    "backend": "Mono",
+    "mode": "normal",
+    "quality": "PC",
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "inputSaveSHA256": "3b503c145125eab5f8de8764d0865b751d3d090c767f8997ce82c59730fd0d31",
+    "liveOpsHash": "f47285789d2f990942e8ad2937a9eee0c3cd2769120cd83908764d6f9423b4f5",
+    "liveOpsVersion": 0,
+    "mapFingerprint": "cb352198"
+  },
+  "medians": {
+    "baseline": {
+      "frameP50Ms": 16.733062500000173,
+      "frameP95Ms": 21.577832999998492,
+      "frameP99Ms": 26.36104199999778,
+      "frameMaxMs": 51.66329200000064,
+      "peakRssMiB": 621.15625,
+      "metrics": {
+        "Batches Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p50": 0.0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "Draw Calls Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p50": 0.0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "GC Allocated In Frame": {
+          "unit": "Bytes",
+          "mean": 193151.53287788216,
+          "p50": 17637,
+          "p95": 465698,
+          "p99": 544969,
+          "max": 6842802
+        },
+        "Gfx.WaitForPresentOnGfxThread": {
+          "unit": "TimeNanoseconds",
+          "mean": 296.11101694915254,
+          "p50": 291.0,
+          "p95": 666,
+          "p99": 1209,
+          "max": 2375
+        },
+        "HELLSCRIPT.Combat.Tick": {
+          "unit": "TimeNanoseconds",
+          "mean": 848540.3868488471,
+          "p50": 0.0,
+          "p95": 4223250,
+          "p99": 6347875,
+          "max": 9946334
+        },
+        "HELLSCRIPT.UI.Update": {
+          "unit": "TimeNanoseconds",
+          "mean": 98632.64047822374,
+          "p50": 10625,
+          "p95": 778083,
+          "p99": 1663041,
+          "max": 3375375
+        },
+        "HELLSCRIPT.World.Effect": {
+          "unit": "TimeNanoseconds",
+          "mean": 4357.8915456874465,
+          "p50": 0.0,
+          "p95": 0,
+          "p99": 131625,
+          "max": 1668751
+        },
+        "HELLSCRIPT.World.Present": {
+          "unit": "TimeNanoseconds",
+          "mean": 465678.2544833476,
+          "p50": 412375,
+          "p95": 819917,
+          "p99": 1217500,
+          "max": 3796000
+        },
+        "Main Thread": {
+          "unit": "TimeNanoseconds",
+          "mean": 17062460.615713067,
+          "p50": 16665729.5,
+          "p95": 16993792,
+          "p99": 32796792,
+          "max": 49961000
+        },
+        "SetPass Calls Count": {
+          "unit": "Count",
+          "mean": 128.35508474576272,
+          "p50": 126.0,
+          "p95": 278,
+          "p99": 329,
+          "max": 379
+        },
+        "Triangles Count": {
+          "unit": "Count",
+          "mean": 270762.46456020494,
+          "p50": 286106.0,
+          "p95": 612618,
+          "p99": 686496,
+          "max": 692458
+        }
+      }
+    },
+    "optimized": {
+      "frameP50Ms": 16.702583500000756,
+      "frameP95Ms": 21.33320899999802,
+      "frameP99Ms": 25.455209000000423,
+      "frameMaxMs": 46.3277080000033,
+      "peakRssMiB": 630.5625,
+      "metrics": {
+        "Batches Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p50": 0.0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "Draw Calls Count": {
+          "unit": "Count",
+          "mean": 0,
+          "p50": 0.0,
+          "p95": 0,
+          "p99": 0,
+          "max": 0
+        },
+        "GC Allocated In Frame": {
+          "unit": "Bytes",
+          "mean": 189537.32653061225,
+          "p50": 16925.5,
+          "p95": 464095,
+          "p99": 535755,
+          "max": 7089520
+        },
+        "Gfx.WaitForPresentOnGfxThread": {
+          "unit": "TimeNanoseconds",
+          "mean": 294.04311073541845,
+          "p50": 250.0,
+          "p95": 542,
+          "p99": 875,
+          "max": 1750
+        },
+        "HELLSCRIPT.Combat.Tick": {
+          "unit": "TimeNanoseconds",
+          "mean": 752190.2916666666,
+          "p50": 0.0,
+          "p95": 3934625,
+          "p99": 5403417,
+          "max": 9055958
+        },
+        "HELLSCRIPT.UI.Update": {
+          "unit": "TimeNanoseconds",
+          "mean": 94648.36139455783,
+          "p50": 10834.0,
+          "p95": 703667,
+          "p99": 1453792,
+          "max": 2601417
+        },
+        "HELLSCRIPT.World.Effect": {
+          "unit": "TimeNanoseconds",
+          "mean": 4032.276360544218,
+          "p50": 0.0,
+          "p95": 0,
+          "p99": 133375,
+          "max": 1150122
+        },
+        "HELLSCRIPT.World.Present": {
+          "unit": "TimeNanoseconds",
+          "mean": 434400.01955782314,
+          "p50": 404771.0,
+          "p95": 726375,
+          "p99": 961708,
+          "max": 2921583
+        },
+        "Main Thread": {
+          "unit": "TimeNanoseconds",
+          "mean": 16975283.846938774,
+          "p50": 16665333.5,
+          "p95": 17019917,
+          "p99": 28977417,
+          "max": 49930792
+        },
+        "SetPass Calls Count": {
+          "unit": "Count",
+          "mean": 128.24489795918367,
+          "p50": 127,
+          "p95": 286,
+          "p99": 337,
+          "max": 394
+        },
+        "Triangles Count": {
+          "unit": "Count",
+          "mean": 270705.73203719355,
+          "p50": 286131,
+          "p95": 635288,
+          "p99": 686324,
+          "max": 692544
+        }
+      }
+    }
+  },
+  "delta": {
+    "frameP50Ms": {
+      "before": 16.733062500000173,
+      "after": 16.702583500000756,
+      "delta": -0.030478999999417056,
+      "changePercent": -0.1821483664416923
+    },
+    "frameP95Ms": {
+      "before": 21.577832999998492,
+      "after": 21.33320899999802,
+      "delta": -0.2446240000004707,
+      "changePercent": -1.1336819596318493
+    },
+    "frameP99Ms": {
+      "before": 26.36104199999778,
+      "after": 25.455209000000423,
+      "delta": -0.905832999997358,
+      "changePercent": -3.436256427183093
+    },
+    "frameMaxMs": {
+      "before": 51.66329200000064,
+      "after": 46.3277080000033,
+      "delta": -5.33558399999734,
+      "changePercent": -10.327611333782748
+    },
+    "peakRssMiB": {
+      "before": 621.15625,
+      "after": 630.5625,
+      "delta": 9.40625,
+      "changePercent": 1.5143130251043857
+    },
+    "metrics": {
+      "Batches Count": {
+        "unit": "Count",
+        "mean": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "p50": {
+          "before": 0.0,
+          "after": 0.0,
+          "delta": 0.0,
+          "changePercent": null
+        },
+        "p95": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "p99": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "max": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        }
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "p50": {
+          "before": 0.0,
+          "after": 0.0,
+          "delta": 0.0,
+          "changePercent": null
+        },
+        "p95": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "p99": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "max": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        }
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": {
+          "before": 193151.53287788216,
+          "after": 189537.32653061225,
+          "delta": -3614.2063472699083,
+          "changePercent": -1.871176631849436
+        },
+        "p50": {
+          "before": 17637,
+          "after": 16925.5,
+          "delta": -711.5,
+          "changePercent": -4.034132789023081
+        },
+        "p95": {
+          "before": 465698,
+          "after": 464095,
+          "delta": -1603,
+          "changePercent": -0.34421449093618994
+        },
+        "p99": {
+          "before": 544969,
+          "after": 535755,
+          "delta": -9214,
+          "changePercent": -1.6907383722743807
+        },
+        "max": {
+          "before": 6842802,
+          "after": 7089520,
+          "delta": 246718,
+          "changePercent": 3.605511309548337
+        }
+      },
+      "Gfx.WaitForPresentOnGfxThread": {
+        "unit": "TimeNanoseconds",
+        "mean": {
+          "before": 296.11101694915254,
+          "after": 294.04311073541845,
+          "delta": -2.0679062137340907,
+          "changePercent": -0.6983550409707218
+        },
+        "p50": {
+          "before": 291.0,
+          "after": 250.0,
+          "delta": -41.0,
+          "changePercent": -14.089347079037806
+        },
+        "p95": {
+          "before": 666,
+          "after": 542,
+          "delta": -124,
+          "changePercent": -18.61861861861862
+        },
+        "p99": {
+          "before": 1209,
+          "after": 875,
+          "delta": -334,
+          "changePercent": -27.626137303556664
+        },
+        "max": {
+          "before": 2375,
+          "after": 1750,
+          "delta": -625,
+          "changePercent": -26.315789473684216
+        }
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": {
+          "before": 848540.3868488471,
+          "after": 752190.2916666666,
+          "delta": -96350.09518218052,
+          "changePercent": -11.354803692961246
+        },
+        "p50": {
+          "before": 0.0,
+          "after": 0.0,
+          "delta": 0.0,
+          "changePercent": null
+        },
+        "p95": {
+          "before": 4223250,
+          "after": 3934625,
+          "delta": -288625,
+          "changePercent": -6.834191677025991
+        },
+        "p99": {
+          "before": 6347875,
+          "after": 5403417,
+          "delta": -944458,
+          "changePercent": -14.878333300513946
+        },
+        "max": {
+          "before": 9946334,
+          "after": 9055958,
+          "delta": -890376,
+          "changePercent": -8.951800733818105
+        }
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": {
+          "before": 98632.64047822374,
+          "after": 94648.36139455783,
+          "delta": -3984.2790836659115,
+          "changePercent": -4.039513759692525
+        },
+        "p50": {
+          "before": 10625,
+          "after": 10834.0,
+          "delta": 209.0,
+          "changePercent": 1.9670588235294106
+        },
+        "p95": {
+          "before": 778083,
+          "after": 703667,
+          "delta": -74416,
+          "changePercent": -9.564018234558525
+        },
+        "p99": {
+          "before": 1663041,
+          "after": 1453792,
+          "delta": -209249,
+          "changePercent": -12.58231156056886
+        },
+        "max": {
+          "before": 3375375,
+          "after": 2601417,
+          "delta": -773958,
+          "changePercent": -22.929541162093102
+        }
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": {
+          "before": 4357.8915456874465,
+          "after": 4032.276360544218,
+          "delta": -325.6151851432287,
+          "changePercent": -7.471851507306471
+        },
+        "p50": {
+          "before": 0.0,
+          "after": 0.0,
+          "delta": 0.0,
+          "changePercent": null
+        },
+        "p95": {
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "changePercent": null
+        },
+        "p99": {
+          "before": 131625,
+          "after": 133375,
+          "delta": 1750,
+          "changePercent": 1.3295346628680038
+        },
+        "max": {
+          "before": 1668751,
+          "after": 1150122,
+          "delta": -518629,
+          "changePercent": -31.078872761724185
+        }
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": {
+          "before": 465678.2544833476,
+          "after": 434400.01955782314,
+          "delta": -31278.234925524448,
+          "changePercent": -6.716705069302941
+        },
+        "p50": {
+          "before": 412375,
+          "after": 404771.0,
+          "delta": -7604.0,
+          "changePercent": -1.8439527129433197
+        },
+        "p95": {
+          "before": 819917,
+          "after": 726375,
+          "delta": -93542,
+          "changePercent": -11.408715760253784
+        },
+        "p99": {
+          "before": 1217500,
+          "after": 961708,
+          "delta": -255792,
+          "changePercent": -21.009609856262834
+        },
+        "max": {
+          "before": 3796000,
+          "after": 2921583,
+          "delta": -874417,
+          "changePercent": -23.035221285563757
+        }
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": {
+          "before": 17062460.615713067,
+          "after": 16975283.846938774,
+          "delta": -87176.76877429336,
+          "changePercent": -0.5109272966995815
+        },
+        "p50": {
+          "before": 16665729.5,
+          "after": 16665333.5,
+          "delta": -396.0,
+          "changePercent": -0.002376133609993669
+        },
+        "p95": {
+          "before": 16993792,
+          "after": 17019917,
+          "delta": 26125,
+          "changePercent": 0.15373261012021633
+        },
+        "p99": {
+          "before": 32796792,
+          "after": 28977417,
+          "delta": -3819375,
+          "changePercent": -11.645574969649475
+        },
+        "max": {
+          "before": 49961000,
+          "after": 49930792,
+          "delta": -30208,
+          "changePercent": -0.0604631612657891
+        }
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": {
+          "before": 128.35508474576272,
+          "after": 128.24489795918367,
+          "delta": -0.11018678657904957,
+          "changePercent": -0.08584528364988797
+        },
+        "p50": {
+          "before": 126.0,
+          "after": 127,
+          "delta": 1.0,
+          "changePercent": 0.7936507936507908
+        },
+        "p95": {
+          "before": 278,
+          "after": 286,
+          "delta": 8,
+          "changePercent": 2.877697841726623
+        },
+        "p99": {
+          "before": 329,
+          "after": 337,
+          "delta": 8,
+          "changePercent": 2.4316109422492405
+        },
+        "max": {
+          "before": 379,
+          "after": 394,
+          "delta": 15,
+          "changePercent": 3.95778364116095
+        }
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": {
+          "before": 270762.46456020494,
+          "after": 270705.73203719355,
+          "delta": -56.732523011392914,
+          "changePercent": -0.020952875836588447
+        },
+        "p50": {
+          "before": 286106.0,
+          "after": 286131,
+          "delta": 25.0,
+          "changePercent": 0.008738020174337002
+        },
+        "p95": {
+          "before": 612618,
+          "after": 635288,
+          "delta": 22670,
+          "changePercent": 3.7005115749129125
+        },
+        "p99": {
+          "before": 686496,
+          "after": 686324,
+          "delta": -172,
+          "changePercent": -0.02505477089451702
+        },
+        "max": {
+          "before": 692458,
+          "after": 692544,
+          "delta": 86,
+          "changePercent": 0.012419525805174025
+        }
+      }
+    }
+  },
+  "sourceSHA256": {
+    "baseline-1/launch.json": "3824e0fd0c9dcd791fcc6f10b086ffc15d19770cb062eb7a63843a54cb629855",
+    "baseline-1/profile.json": "3b1795f5c6d03661502cb2df7451088fe26bae7777ef5265350b766b8f05d13e",
+    "baseline-1/final-run.json": "32b621b1767bc7ef725fb1507a981537c0b157623ab0cc814136c9d3dff0fbae",
+    "baseline-1/resident-memory.json": "cbe52da0e0b9c7712a980bb108d1f7ebd4a7aee9793b8800d9fdecfdebdfcc82",
+    "baseline-1/passed.txt": "b1f07e1238ca122b38dbf7ffbbe28f9fdb78bb2bca4d6d522496d444e851c77c",
+    "baseline-2/launch.json": "a18e9f4e98945c45e102df6376f7d50ec24e7b33b75bd9122046bd0e4700b40a",
+    "baseline-2/profile.json": "9eb5aacc218ebabf581439f1376c0c189c71f9090f1f3e0772bb8bd1aadd8538",
+    "baseline-2/final-run.json": "9a87dbaa334e5ec81e1d880b1bcf9ae4159151ada392ea2082d21f971cfc7bcf",
+    "baseline-2/resident-memory.json": "544b01e48fb6e422d318693e87b56bf7834494088d5bb117104bb8979f17dfa2",
+    "baseline-2/passed.txt": "b1f07e1238ca122b38dbf7ffbbe28f9fdb78bb2bca4d6d522496d444e851c77c",
+    "baseline-3/launch.json": "e4dc9ef94857ddcf7a3f815a3b38e6522370e22e52106bf761e1b44a5f4b48ff",
+    "baseline-3/profile.json": "f344127081873771534c85b8473d5e7f08b2989c6a748a02827448980e2ef904",
+    "baseline-3/final-run.json": "1eda9fb7b3c7577cdfdf638febb14a7cfa91d0c8e9278f119acd1392243d173e",
+    "baseline-3/resident-memory.json": "3306667334771936aa86014e5496c7eb6877b9cfd34adf634f0ec1635b7769e0",
+    "baseline-3/passed.txt": "b1f07e1238ca122b38dbf7ffbbe28f9fdb78bb2bca4d6d522496d444e851c77c",
+    "optimized-1/launch.json": "82a4ffc7d1a6aeb990c224224476e4587f86c185d6bd7ef82994b2ba1df46fa8",
+    "optimized-1/profile.json": "1cf26c2c53947486b4b1619c315b19024d428df6601c2a783e30fed91f4a26fb",
+    "optimized-1/final-run.json": "4c32a1e56beca1f806c24c1e171dadae003fcc1a2e1f3960b1cadf442b68ac8c",
+    "optimized-1/resident-memory.json": "e771378cb9418484b4ca72d7f76bbf751dd71d71d02ddd49c7e440e611cbd8ec",
+    "optimized-1/passed.txt": "b1f07e1238ca122b38dbf7ffbbe28f9fdb78bb2bca4d6d522496d444e851c77c",
+    "optimized-2/launch.json": "d5c7f710d33b5d05d538a50f827fbe3b3aa71d222e0dad9f333dcf95849efeb3",
+    "optimized-2/profile.json": "b5da64ca299dfca0d804e6e24e74952f706b3403057535f646306fedbf8c32c1",
+    "optimized-2/final-run.json": "4e6546ab9c22f33e8ac277213a435b2b923cd340b3c2a343ae39395f4b8a4e6e",
+    "optimized-2/resident-memory.json": "954f25d348c25c4b8720e422d5e300f590e6fe86725d34eee3fff0a1bfca667f",
+    "optimized-2/passed.txt": "b1f07e1238ca122b38dbf7ffbbe28f9fdb78bb2bca4d6d522496d444e851c77c",
+    "optimized-3/launch.json": "c185e1ef286b4ca919b77a5519469fa4be27a4c1d01023cc2be36b78eeb684a1",
+    "optimized-3/profile.json": "e7213c3d1f4d865aa459467af842e4f04da17ed5547bc313a32802d39e3c6826",
+    "optimized-3/final-run.json": "3550e988763412046aea497a6a1c396b37652ab810fdd3e87bb352bd092c7db1",
+    "optimized-3/resident-memory.json": "c6588c08cf7ea4af32572ac3e47a10479e886ed4ea7731182157ba146395a342",
+    "optimized-3/passed.txt": "b1f07e1238ca122b38dbf7ffbbe28f9fdb78bb2bca4d6d522496d444e851c77c"
+  }
+}

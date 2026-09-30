@@ -1,8 +1,28 @@
 # Blacksmith implementation validation
 
-Updated: 2026-09-29 · Validation date: 2026-09-22
+Updated: 2026-09-30 · Validation date: 2026-09-22
 
 [한국어](Blacksmith_Validation.md) · [Implementation, resources and migration](Blacksmith_Unity_Integration.en.md)
+
+## 2026-09-30: HTML prototype layout
+
+The frame, tabs, locks and five service screens in the [integration record](Blacksmith_Unity_Integration.en.md) were operated in a macOS development player. The results below were produced once, after the last code change.
+
+| Check | Result |
+| --- | --- |
+| Full forge smoke `-hellscriptBlacksmithSmoke` | Pass: gear +10 and max, affix reroll (first-roll confirmation, auto pause/continue/stop), two slot jobs, confirmed workstation unlock, free 59-second finish, settlement and tooltip, NPC range, dialogue and E key, portrait 440×956 / landscape 956×440 / PC 16:9·16:10·21:9 in Korean and English, and saved state after a restart |
+| Navigation smoke `-hellscriptForgeNavigationSmoke` | Pass: exact condition text for all five locked services, no page switch or transaction, the bubble gone after **2 seconds**, uniform button size/role, five window sizes × two languages |
+| Core crafting smoke `-hellscriptCoreCraftingSmoke` | Pass: seven window shapes × two languages, filters, detail, +/- buttons, 80% cap, craft, confirmation, history and the pending result after a restart |
+| Access smoke `-hellscriptBlacksmithAccessSmoke` | Pass: fresh character, use during a saved rift, and a real enhancement transaction on equipment chosen through the portrait sheet, persisted |
+| Focused Edit Mode | Localization · Blacksmith · CoreCrafting · ContentUnlock · StoredLocalization: 165 of 165 passed |
+| Full Edit Mode | 4,830 of 4,878 passed, 48 failed. 47 of the failures are exactly the pre-existing 2026-09-26 baseline list (unrelated to this change); the other one was a single `RiftContentUnlockTests` case still expecting core crafting at the old rift 120, so the test was updated to 50 and that class plus `ContentUnlockTests` then passed 62 of 62. The rest was not rerun |
+| Text and contract checks | English missing/orphan entries 0 (the `l10n_check` emulation and the Unity tests); `check_ui_contract.py` passes; `test_ui_contract.py` 11 tests pass |
+
+On `main` (4bd93ff3) the full forge smoke failed at once at the town fixture (tutorial map), and the NPC dialogue and rift unlock smokes fail the same way. The forge smoke's fixture (tutorial completion, hidden attendance popups, entry through the dialogue) was fixed and now passes end to end. The NPC dialogue (`-hellscriptNpcDialogueSmoke`) and rift unlock (`-hellscriptRiftUnlockSmoke`) smokes still fail at the same place as on `main` and are outside this change. The shared UI smoke (`-hellscriptSharedUiSmoke`) stopped at an earlier screen (`RuntimeSharedUiSmoke.cs` line 85) before reaching the forge, so its forge part (slot size, column width) was adapted to the new layout but not run.
+
+Evidence screens: [landscape reroll](BlacksmithLayoutEvidence/landscape-ko-tab0.png) · [slots](BlacksmithLayoutEvidence/landscape-ko-tab1.png) · [gear](BlacksmithLayoutEvidence/landscape-ko-tab2.png) · [cores](BlacksmithLayoutEvidence/landscape-ko-tab3.png) · [portrait reroll](BlacksmithLayoutEvidence/portrait-ko-tab0.png) · [slots](BlacksmithLayoutEvidence/portrait-ko-tab1.png) · [gear](BlacksmithLayoutEvidence/portrait-ko-tab2.png) · [cores](BlacksmithLayoutEvidence/portrait-ko-tab3.png) · [PC reroll](BlacksmithLayoutEvidence/pc-ko-tab0.png) · [slots](BlacksmithLayoutEvidence/pc-ko-tab1.png) · [gear](BlacksmithLayoutEvidence/pc-ko-tab2.png) · [cores](BlacksmithLayoutEvidence/pc-ko-tab3.png) · [English landscape](BlacksmithLayoutEvidence/landscape-en-tab0.png) · [English portrait](BlacksmithLayoutEvidence/portrait-en-tab0.png). Locks: [landscape bubble](BlacksmithLayoutEvidence/locked-landscape-hint.png) · [portrait bubble](BlacksmithLayoutEvidence/locked-portrait-hint.png) · [all locked, PC](BlacksmithLayoutEvidence/locked-all-pc.png). Dialogs: [equipment sheet](BlacksmithLayoutEvidence/portrait-ko-sheet.png) · [lock confirmation](BlacksmithLayoutEvidence/landscape-ko-confirm.png) · [auto reroll](BlacksmithLayoutEvidence/landscape-ko-auto.png) · [workstation sheet](BlacksmithLayoutEvidence/portrait-ko-slots-jobs.png) · [growth plan](BlacksmithLayoutEvidence/landscape-ko-slots-plan.png) · [core quality](BlacksmithLayoutEvidence/portrait-ko-cores-chosen-coins.png) · [craft result](BlacksmithLayoutEvidence/landscape-ko-cores-result.png). Run records: [full smoke](BlacksmithLayoutEvidence/runtime-smoke.txt) · [navigation](BlacksmithLayoutEvidence/runtime-nav.txt) · [core crafting](BlacksmithLayoutEvidence/runtime-core.txt) · [access](BlacksmithLayoutEvidence/runtime-access.txt).
+
+Real phone touch, rotation and performance, and Android/iOS builds were not checked. The results are a macOS player with synthetic input.
 
 ## 2026-09-29: Suspended runs without a slot snapshot
 

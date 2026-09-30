@@ -16,7 +16,8 @@ namespace Hellscript
         readonly List<TelegraphGauge.Footprint> completedWarnings=new List<TelegraphGauge.Footprint>();
         readonly HashSet<string> activeThreats=new HashSet<string>(),activeFills=new HashSet<string>();
         readonly List<string> staleThreats=new List<string>();
-        void EnemyOutline(string key,Vector2[] points,Material material,float width,HashSet<string> active,bool tiled=false)
+        readonly Vector2[] threatOutline=new Vector2[49],guardOutline=new Vector2[17];
+        void EnemyOutline(string key,Vector2[] points,int count,Material material,float width,HashSet<string> active,bool tiled=false)
         {
             active.Add(key);
             if(!enemyThreatViews.TryGetValue(key,out var go))
@@ -24,9 +25,16 @@ namespace Hellscript
                 go=new GameObject(key);go.transform.SetParent(world.transform,false);var line=go.AddComponent<LineRenderer>();line.useWorldSpace=true;
                 line.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;line.receiveShadows=false;enemyThreatViews[key]=go;
             }
-            var renderer=go.GetComponent<LineRenderer>();renderer.sharedMaterial=RiftMaterial(material);renderer.widthMultiplier=width;renderer.positionCount=points.Length;
+            var renderer=go.GetComponent<LineRenderer>();renderer.sharedMaterial=RiftMaterial(material);renderer.widthMultiplier=width;renderer.positionCount=count;
             renderer.textureMode=tiled?LineTextureMode.Tile:LineTextureMode.Stretch;
-            for(int i=0;i<points.Length;i++)renderer.SetPosition(i,Position(points[i])+Vector3.up*.19f);
+            for(int i=0;i<count;i++)renderer.SetPosition(i,Position(points[i])+Vector3.up*.19f);
+        }
+        void EnemyOutline(string key,Vector2[] points,Material material,float width,HashSet<string> active,bool tiled=false)
+            =>EnemyOutline(key,points,points.Length,material,width,active,tiled);
+        void EnemyOutline(string key,EnemyThreat threat,Material material,float width,HashSet<string> active,bool indexed)
+        {
+            for(int index=0;index<(threat.shape==AttackShape.Ring?2:1);index++)
+            {int count=EnemyCombat.CopyOutline(threat,index,threatOutline);EnemyOutline(indexed?key+"-"+index:key,threatOutline,count,material,width,active);}
         }
         // A lingering zone that already landed (poison pool, fire patch, beam, whirl) changes from the danger gauge to its
         // element's colour at lower strength; warnings that have not landed keep the red gauge.
@@ -56,9 +64,9 @@ namespace Hellscript
             {
                 if(!CanDisplayEnemyMarker(run,threat.origin,threat.radius))continue;
                 bool boss=threat.key.StartsWith("boss-",StringComparison.Ordinal);float progress=gauge.Observe(run,threat,boss);
-                int index=0;float width=threat.delay>0?.06f+progress*.08f:.18f;if(boss)width*=1.35f;
+                float width=threat.delay>0?.06f+progress*.08f:.18f;if(boss)width*=1.35f;
                 var edge=library==null?red:boss?library.BossTelegraphEdge:library.TelegraphEdge;
-                foreach(var line in EnemyCombat.Outlines(threat))EnemyOutline(threat.key+"-"+index++,line,edge,width,activeThreats);
+                EnemyOutline(threat.key,threat,edge,width,activeThreats,true);
                 // The footprint fills like a gauge and is full on the step the attack lands (CHK-P04: shape and fill, not colour alone).
                 if(library!=null)library.ShowFill(ThreatView(library,threat.key,WorldFx.TelegraphKind.Fill),threat.shape,threat.origin,threat.end,threat.direction,
                     threat.radius,threat.innerRadius,threat.angle,progress,boss,0,LandedZoneTint(run,threat));
@@ -68,14 +76,12 @@ namespace Hellscript
                 if(e.boss)foreach(var refuge in e.brain.boss.refuges)
                 {
                     string key="refuge-"+e.id+"-"+e.brain.boss.refuges.IndexOf(refuge);
-                    foreach(var line in EnemyCombat.Outlines(new EnemyThreat("","REFUGE",AttackShape.Circle,refuge.position,refuge.position,Vector2.up,refuge.radius)))
-                        EnemyOutline(key,line,library==null?blue:library.RefugeEdge,.14f,activeThreats);
+                    EnemyOutline(key,new EnemyThreat("","REFUGE",AttackShape.Circle,refuge.position,refuge.position,Vector2.up,refuge.radius),library==null?blue:library.RefugeEdge,.14f,activeThreats,false);
                     if(library!=null)library.ShowRefuge(ThreatView(library,key,WorldFx.TelegraphKind.Refuge),refuge.position,refuge.radius);
                 }
                 if(!e.boss&&e.kind==10)
                 {
-                    foreach(var line in EnemyCombat.Outlines(new EnemyThreat("","N11",AttackShape.Circle,e.position,e.position,e.brain.facing,4)))
-                        EnemyOutline("aura-"+e.id,line,library==null?purple:library.AuraEdge,.04f,activeThreats);
+                    EnemyOutline("aura-"+e.id,new EnemyThreat("","N11",AttackShape.Circle,e.position,e.position,e.brain.facing,4),library==null?purple:library.AuraEdge,.04f,activeThreats,false);
                     if(library!=null)library.ShowAura(ThreatView(library,"aura-"+e.id,WorldFx.TelegraphKind.Aura),e.position,4);
                 }
                 if(EnemyCombat.Trait(e,2))
@@ -85,9 +91,9 @@ namespace Hellscript
                 }
                 if(EnemyCombat.Trait(e,3)||e.brain.rearWindow>0)
                 {
-                    bool rear=e.brain.rearWindow>0;var direction=rear?-e.brain.facing:e.brain.facing;var points=new Vector2[17];
-                    for(int i=0;i<17;i++)points[i]=e.position+EnemyCombat.Rotate(direction,-60+i*120f/16)*1.15f;
-                    EnemyOutline("guard-"+e.id,points,library==null?rear?ember:blue:rear?library.RearEdge:library.GuardEdge,.12f,activeThreats);
+                    bool rear=e.brain.rearWindow>0;var direction=rear?-e.brain.facing:e.brain.facing;
+                    for(int i=0;i<17;i++)guardOutline[i]=e.position+EnemyCombat.Rotate(direction,-60+i*120f/16)*1.15f;
+                    EnemyOutline("guard-"+e.id,guardOutline,library==null?rear?ember:blue:rear?library.RearEdge:library.GuardEdge,.12f,activeThreats);
                 }
             }
             staleThreats.Clear();foreach(var key in enemyThreatViews.Keys)if(!activeThreats.Contains(key))staleThreats.Add(key);

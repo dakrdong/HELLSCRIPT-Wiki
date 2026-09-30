@@ -24,7 +24,7 @@
 
   잠긴 탭은 자물쇠 아이콘과 흐린 글자로 보이고, 누르면 탭 아래에 "해제 조건 · 계정 내 영웅으로 균열 N단계 클리어 시 개방" 말풍선이 **2초** 동안 뜬 뒤 사라집니다. 다른 곳을 누르면 바로 닫히며, 화면은 바뀌지 않습니다. 하나도 열리지 않은 상태(0단계)에서는 봉인 화면을 보여 줍니다. 아래쪽 미리보기 바의 **클리어 시연**에서 0·1·3·4·5·34·35·49·50단계로 바꿔 볼 수 있으며 기본은 4단계입니다. 선택은 이 브라우저에만 저장합니다.
 - **장비 제작 탭:** 시안에 제작 화면이 아직 없어 탭과 잠금 규칙만 있고, 열리면 안내 문구를 보여 줍니다. 게임에서는 기존 제작 화면이 열립니다.
-- **검증:** `node Prototypes/Blacksmith/browser.test.cjs`가 실제 마우스 입력으로 해금 단계별 잠금, 말풍선 2초 수명, 서비스 5개 × 화면 5종 × 한국어·영어·큰 글자의 넘침 검사를 실행하고 [evidence](evidence/)에 화면과 `browser-validation.json`을 남깁니다. Unity 대장간은 아직 이 배치로 옮기지 않았습니다.
+- **검증:** `node Prototypes/Blacksmith/browser.test.cjs`가 실제 마우스 입력으로 해금 단계별 잠금, 말풍선 2초 수명, 서비스 5개 × 화면 5종 × 한국어·영어·큰 글자의 넘침 검사를 실행하고 [evidence](evidence/)에 화면과 `browser-validation.json`을 남깁니다. 이 배치는 Unity 대장간에도 적용했습니다. 게임에서 다른 점(변경 기록 없음, 코어 제작 해금 50단계 등)과 검증은 [적용 기록](../../Docs/Implementation/Blacksmith_Unity_Integration.md)을 확인하세요.
 
 2026-09-30: **Layout rework.** Like the rift entry, rift result and training-ground prototypes, the forge now uses the game's real window frame and `UiTheme` colours. Rules and engines are unchanged; only layout and access conditions changed.
 
@@ -32,7 +32,7 @@
 - **Layouts:** portrait 440×956, landscape 956×440 and PC 16:9 / 16:10 / 21:9 show everything without scrolling. PC and landscape use three columns, portrait one column with the equipment picker as a bottom sheet. Only long lists (equipment, candidates, recipes) and dialog bodies scroll. Korean, English and large text were all checked; in landscape with large text only the middle column of Enchant scrolls.
 - **Rift-stage locks:** each service opens with the account's highest cleared rift stage, (Enchant 35, Slot enhancement 5, Gear enhancement 1, Core crafting 50, Equipment crafting 3). These match the game's `ContentUnlocks.json` except core crafting: the prototype uses 50, while the game's `UL09_CORE_CRAFT` is still 120 and will be aligned in the native port. A locked tab shows a padlock and dim text; tapping it shows the bubble "To unlock · Opens after any account hero clears Rift N" under the tab for **2 seconds** without changing the screen, and tapping elsewhere dismisses it. With nothing unlocked (stage 0) a sealed screen is shown. Change the stage with **Rift progress** in the preview bar (0, 1, 3, 4, 5, 34, 35, 49, 50; default 4, kept in this browser only).
 - **Equipment crafting tab:** the prototype has no crafting screen yet, so the tab only demonstrates the tab and its lock; when open it explains that the game opens its existing crafting screen.
-- **Checks:** `node Prototypes/Blacksmith/browser.test.cjs` uses real mouse input to verify the locks per stage, the 2-second bubble, and an overflow sweep of 5 services × 5 shapes × Korean / English / large text, and writes screenshots plus `browser-validation.json` to [evidence](evidence/). The Unity forge has not been moved to this layout yet.
+- **Checks:** `node Prototypes/Blacksmith/browser.test.cjs` uses real mouse input to verify the locks per stage, the 2-second bubble, and an overflow sweep of 5 services × 5 shapes × Korean / English / large text, and writes screenshots plus `browser-validation.json` to [evidence](evidence/). The Unity forge now uses this layout too; the differences (no roll history, core crafting at stage 50, …) and the checks are in the [integration record](../../Docs/Implementation/Blacksmith_Unity_Integration.en.md).
 
 ## 한국어
 

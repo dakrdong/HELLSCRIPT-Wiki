@@ -252,6 +252,31 @@ namespace Hellscript
             foreach (float reduction in reductions) remaining *= 1 - Mathf.Clamp(reduction, 0, 1);
             return 1 - remaining;
         }
+        // The combat hot paths pass two or ten sources. Preserve the array API and
+        // the exact clamp/multiply order while avoiding a temporary params array.
+        public static float Combine(float first, float second)
+        {
+            float remaining = 1;
+            remaining *= 1 - Mathf.Clamp(first, 0, 1);
+            remaining *= 1 - Mathf.Clamp(second, 0, 1);
+            return 1 - remaining;
+        }
+        public static float Combine(float first, float second, float third, float fourth,
+            float fifth, float sixth, float seventh, float eighth, float ninth, float tenth)
+        {
+            float remaining = 1;
+            remaining *= 1 - Mathf.Clamp(first, 0, 1);
+            remaining *= 1 - Mathf.Clamp(second, 0, 1);
+            remaining *= 1 - Mathf.Clamp(third, 0, 1);
+            remaining *= 1 - Mathf.Clamp(fourth, 0, 1);
+            remaining *= 1 - Mathf.Clamp(fifth, 0, 1);
+            remaining *= 1 - Mathf.Clamp(sixth, 0, 1);
+            remaining *= 1 - Mathf.Clamp(seventh, 0, 1);
+            remaining *= 1 - Mathf.Clamp(eighth, 0, 1);
+            remaining *= 1 - Mathf.Clamp(ninth, 0, 1);
+            remaining *= 1 - Mathf.Clamp(tenth, 0, 1);
+            return 1 - remaining;
+        }
         // Armor and resistance both read off the same curve in Diablo IV: the rating is measured
         // against a value that grows with the attacker's level, so a rating that was strong at a
         // low level is ordinary later.

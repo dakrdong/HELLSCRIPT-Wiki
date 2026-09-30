@@ -1,0 +1,61 @@
+{
+  "scope": "Verified Editor hot-loop allocation events; no native frame-rate claim",
+  "ringMeshesExactByteMatch": 3,
+  "independentMilestoneBaselineCount": 101,
+  "measurements": {
+    "ring": {
+      "before": {
+        "mode": "ring-before",
+        "calls": 1000,
+        "allocationEvents": 48000,
+        "allocationCounterVerified": true,
+        "elapsedMs": 31.502100000000002,
+        "cases": []
+      },
+      "after": {
+        "mode": "ring-after",
+        "calls": 1000,
+        "allocationEvents": 0,
+        "allocationCounterVerified": true,
+        "elapsedMs": 32.717800000000004,
+        "cases": []
+      }
+    },
+    "tickers": {
+      "before": {
+        "mode": "tickers-before",
+        "calls": 10000,
+        "allocationEvents": 10000,
+        "allocationCounterVerified": true,
+        "elapsedMs": 3.2377000000000002,
+        "cases": []
+      },
+      "after": {
+        "mode": "tickers-after",
+        "calls": 10000,
+        "allocationEvents": 0,
+        "allocationCounterVerified": true,
+        "elapsedMs": 3.0395000000000003,
+        "cases": []
+      }
+    },
+    "milestones": {
+      "before": {
+        "mode": "milestones-before",
+        "calls": 100000,
+        "allocationEvents": 100000,
+        "allocationCounterVerified": true,
+        "elapsedMs": 8.0396,
+        "cases": []
+      },
+      "after": {
+        "mode": "milestones-after",
+        "calls": 100000,
+        "allocationEvents": 0,
+        "allocationCounterVerified": true,
+        "elapsedMs": 0.6553,
+        "cases": []
+      }
+    }
+  }
+}

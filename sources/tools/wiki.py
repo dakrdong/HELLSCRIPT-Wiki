@@ -702,7 +702,7 @@ def build_class_abilities():
 
 def build_evidence():
     rows=[]
-    paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'ClassSkillEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'CompletedMergeEvidence').glob('*editmode*.xml')))
+    paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'ClassSkillEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'CompletedMergeEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'OptimizationEvidence20260930').glob('*editmode*.xml')))
     for path in paths:
         relative=str(path.relative_to(ROOT));raw=read(relative);root=ET.fromstring(raw)
         tokens=path.stem.split('-');cut=next((i for i,t in enumerate(tokens) if t in ('editmode','final')),len(tokens))
@@ -710,12 +710,16 @@ def build_evidence():
         rows.append(record(('class-skills-' if 'ClassSkillEvidence' in relative else '')+path.stem,path.name,'Unity Edit Mode',f'{root.get("passed")} / {root.get("total")} 통과 · {root.get("result")} · {stage}',
             {'검사 단계':stage,'보고서 구분':variant,'보고된 결과':root.get('result'),'전체 검사':root.get('total'),'통과':root.get('passed'),'실패':root.get('failed'),
              '건너뜀':root.get('skipped'),'검사 종료 (UTC)':root.get('end-time'),'소요 시간 (초)':root.get('duration'),
-             '해석':('완료 작업 통합본에서 실행한 검사 원본입니다. 전체 3,568개 검사와 이후 추가한 저장 호환성 검사 1개는 별도 실행이며 합산하지 않습니다. macOS 실행 증거와 이미지 후보 상태는 통합 기록에서 확인합니다.' if 'CompletedMergeEvidence' in relative else '스킬 능력 확장의 검사 원본입니다. 최종 결과와 macOS 실행 증거는 구현 기록에서 확인합니다. 과거 실패 및 부분 검사와 전체 검사 수를 합산하지 않습니다.' if 'ClassSkillEvidence' in relative else '전설 확장 작업에서 실행한 Unity 검사 원본입니다. 집중 검사와 전체 검사의 수는 합산하지 않습니다. macOS 앱과 화면 검증은 연결된 구현 기록에서 확인합니다.' if 'LegendaryExpansionEvidence' in relative else '저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다.')},relative,
-            status='당시 통과' if root.get('result')=='Passed' else '당시 실패',related=['completed-work-merge'] if 'CompletedMergeEvidence' in relative else ['class-skill-runtime'] if 'ClassSkillEvidence' in relative else ['legendary-powers-implementation'] if 'LegendaryExpansionEvidence' in relative else ['current-status'],endTime=root.get('end-time')))
+             '해석':('2026-09-30 최적화·대장간·일일 퀘스트 작업의 원본 검사입니다. 기준47개 재현, 일일 이전, 수정 전48개 실패, 최종 집중과 최종 전체는 별도 실행이며 합산하지 않습니다. 기존47개와 신규 회귀의 구분은 연결된 통합 기록에서 확인합니다.' if 'OptimizationEvidence20260930' in relative else '완료 작업 통합본에서 실행한 검사 원본입니다. 전체 3,568개 검사와 이후 추가한 저장 호환성 검사 1개는 별도 실행이며 합산하지 않습니다. macOS 실행 증거와 이미지 후보 상태는 통합 기록에서 확인합니다.' if 'CompletedMergeEvidence' in relative else '스킬 능력 확장의 검사 원본입니다. 최종 결과와 macOS 실행 증거는 구현 기록에서 확인합니다. 과거 실패 및 부분 검사와 전체 검사 수를 합산하지 않습니다.' if 'ClassSkillEvidence' in relative else '전설 확장 작업에서 실행한 Unity 검사 원본입니다. 집중 검사와 전체 검사의 수는 합산하지 않습니다. macOS 앱과 화면 검증은 연결된 구현 기록에서 확인합니다.' if 'LegendaryExpansionEvidence' in relative else '저장된 보고서를 읽었습니다. 이번 위키 정리에서 Unity 검사를 새로 실행하지 않았습니다. 같은 단계의 여러 보고서는 수정 전후의 기록이며 서로 합산하지 않습니다.')},relative,
+            status='당시 통과' if root.get('result')=='Passed' else '당시 실패',related=['optimization-20260930','optimization-20260930.en'] if 'OptimizationEvidence20260930' in relative else ['completed-work-merge'] if 'CompletedMergeEvidence' in relative else ['class-skill-runtime'] if 'ClassSkillEvidence' in relative else ['legendary-powers-implementation'] if 'LegendaryExpansionEvidence' in relative else ['current-status'],endTime=root.get('end-time')))
     rows.sort(key=lambda r:r['endTime'],reverse=True)
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'daily-quests':('전투와 성장','일일 퀘스트 · 하루 심연 주화 100개','다섯 활동, 진행별 목표, 병행 플레이 시간 근거와 출석 자정·거래·저장 규칙입니다.'),
+ 'daily-quests.en':('전투와 성장','Daily quests · 100 daily Abyssal Coins','Five activities, progression targets, concurrent timing evidence and attendance midnight/persistence rules.'),
+ 'optimization-20260930':('리소스와 운영','전체 최적화·대장간·일일 퀘스트 통합','실측 용량·native 성능·할당·메모리 증가, 저장/품질 동등성과 최종 통합 검증 범위입니다.'),
+ 'optimization-20260930.en':('리소스와 운영','Optimization, forge and daily-quest integration','Measured builds, native performance, allocations, increased RSS, compatibility and final integration evidence.'),
  'build-optimization-20260928':('리소스와 운영','빌드 리소스와 시작 메모리 최적화','출시 앱·APK의 실제 크기, 중복 이미지 정리, 텍스처 예산, 효과음 지연 로딩과 검증 범위입니다.'),
  'build-optimization-20260928.en':('리소스와 운영','Build resources and startup memory optimization','Measured release sizes, shared images, texture budgets, lazy audio and native validation.'),
  'feature-integration-20260927':('후속 개발 기록','균열 결과창·장비·오디오 개발 통합','완료된 5개 개발 브랜치의 통합, 3D 개편 제외, 저장 호환성과 실행 검증을 기록합니다.'),

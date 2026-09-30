@@ -8,7 +8,7 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=19;
+        public const int MaximumSchemaVersion=20;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -26,6 +26,7 @@ namespace Hellscript
         readonly string path;
         public GameStore(string directory,GameCatalog catalog=null,Func<long> forgeClock=null,Func<long> offlineClock=null)
         {
+            dailyQuestTime=()=>AttendanceClock();
             this.offlineClock=offlineClock??(()=>DateTimeOffset.UtcNow.ToUnixTimeSeconds());
             if(forgeClock!=null)ForgeClock=forgeClock;
             CombatArchive=new CombatJournalArchive(directory);
@@ -41,6 +42,8 @@ namespace Hellscript
                 Migrate(Data);
             }
             ContentUnlocks.Normalize(Data);
+            DailyQuests.Normalize(Data);
+            Data.dailyQuestClock=dailyQuestTime;
             EquipmentShop.Normalize(Data);
             SettleLocalIdle();
             BlacksmithCatalog.Normalize(Data);SettleForgeJobs();
@@ -112,7 +115,7 @@ namespace Hellscript
             a.records??=new System.Collections.Generic.List<RunRecord>();
             a.records=a.records.Where(r=>r!=null).OrderByDescending(r=>r.journal?.attempt??0).Take(CombatHistory.RecordLimit).ToList();
             RewardBoxes.Normalize(a);
-            Attendance.Normalize(a);OfflineSupplies.Normalize(a);
+            Attendance.Normalize(a);DailyQuests.Normalize(a);OfflineSupplies.Normalize(a);
             try{GemInventory.Normalize(a);}catch(Exception error){throw new NotSupportedException(Loc.T("보석 보관함을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
             AspectStone.Normalize(a);
@@ -230,7 +233,7 @@ namespace Hellscript
         {
             RewardBoxes.Validate(a);
             EquipmentShop.Validate(a);
-            CoreCrafting.Validate(a);Attendance.Validate(a.attendance);OfflineSupplies.Validate(a);
+            CoreCrafting.Validate(a);Attendance.Validate(a.attendance);DailyQuests.Validate(a.dailyQuests);OfflineSupplies.Validate(a);
             BlacksmithCatalog.Validate(a);
             foreach(var h in a.heroes)h.potions.Validate();
             if(a.gold<0||a.materials<0||a.cores.Any(c=>c<0))throw new InvalidDataException("재화 값이 음수입니다.");
@@ -308,6 +311,7 @@ namespace Hellscript
             if(receipt!=null){Error=receipt.operation==operation?"":"같은 거래 요청에 다른 내용이 들어왔습니다.";return receipt.operation==operation;}
             var staged=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(Data));
             Normalize(staged);
+            staged.dailyQuestClock=dailyQuestTime;
             try
             {
                 if(!mutation(staged)){Error="소유권·보호 상태·재화·가방 공간을 확인해 주세요.";return Refuse(operation);}
@@ -327,6 +331,7 @@ namespace Hellscript
                 target.equipmentShop=source.equipmentShop;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
+            Data.dailyQuests=staged.dailyQuests;
             Data.guide=staged.guide;Data.offlineSupplies=staged.offlineSupplies;Data.attendance=staged.attendance;Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;

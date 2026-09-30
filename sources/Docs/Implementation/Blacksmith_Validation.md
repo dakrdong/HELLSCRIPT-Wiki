@@ -1,8 +1,28 @@
 # 대장간 구현 검증 기록
 
-갱신일: 2026-09-29 · 작성일: 2026-09-22
+갱신일: 2026-09-30 · 작성일: 2026-09-22
 
 [English](Blacksmith_Validation.en.md) · [구현·리소스·이전 명세](Blacksmith_Unity_Integration.md)
+
+## 2026-09-30: HTML 시안 배치 적용
+
+[적용 기록](Blacksmith_Unity_Integration.md#2026-09-30-html-시안-배치로-재구성)의 창틀·탭·잠금·다섯 서비스 화면을 macOS 개발 플레이어에서 조작해 확인했다. 아래는 마지막 코드 변경 뒤 한 번 실행한 결과다.
+
+| 검사 | 결과 |
+| --- | --- |
+| 전체 대장간 스모크 `-hellscriptBlacksmithSmoke` | 통과. 장비 강화 +10·최대, 옵션 변경(첫 변경 확인 창, 자동 변경 일시정지·계속·멈춤), 슬롯 강화 두 작업·확인 창을 거친 작업 칸 개방·59초 무료 완료·정산·툴팁, NPC 반경·대화·E키, 세로 440×956 / 가로 956×440 / PC 16:9·16:10·21:9의 한국어·영어, 재시작 뒤 저장 상태 |
+| 탐색 스모크 `-hellscriptForgeNavigationSmoke` | 통과. 잠긴 5개 서비스의 정확한 조건 문구, 화면 전환·거래 없음, **2초** 뒤 말풍선 소멸, 같은 버튼 크기·역할, 5개 화면 크기 × 두 언어 |
+| 코어 제작 스모크 `-hellscriptCoreCraftingSmoke` | 통과. 7개 창 모양 × 두 언어, 필터·상세·+/- 버튼·80% 한도·제작·확인·기록, 재시작 뒤 보류 결과 |
+| 접근 스모크 `-hellscriptBlacksmithAccessSmoke` | 통과. 신규 캐릭터, 저장된 균열 중 이용, 세로 장비 시트로 고른 장비의 실제 강화 거래와 저장 |
+| 집중 Edit Mode | Localization · Blacksmith · CoreCrafting · ContentUnlock · StoredLocalization 165개 중 165개 통과 |
+| 전체 Edit Mode | 4,878개 중 4,830개 통과, 48개 실패. 실패 47개는 2026-09-26 기준선 목록과 정확히 같은 기존 실패(이번 변경과 무관)이고, 나머지 1개는 코어 제작 개방을 50단계로 바꾸며 기대값이 옛 120이던 `RiftContentUnlockTests` 한 건이라 테스트를 50 기준으로 고친 뒤 그 클래스와 `ContentUnlockTests` 62개 중 62개가 통과했다. 나머지는 다시 돌리지 않았다 |
+| 문구·계약 검사 | 영어 누락·고아 항목 0(`l10n_check` 재현과 Unity 검사), `check_ui_contract.py` 통과, `test_ui_contract.py` 11개 통과 |
+
+`main`(4bd93ff3)에서 같은 스모크를 돌리면 대장간 전체 스모크는 마을 준비 단계에서 바로 실패했고(튜토리얼 지도), NPC 대화·균열 개방 스모크도 같은 이유로 실패한다. 이번에 전체 대장간 스모크의 고정 조건(튜토리얼 완료, 출석 팝업 숨김, 대화창 경유 진입)을 고쳐 끝까지 통과시켰다. NPC 대화(`-hellscriptNpcDialogueSmoke`)와 균열 개방(`-hellscriptRiftUnlockSmoke`) 스모크는 `main`과 같은 위치에서 여전히 실패하며 이번 변경 범위가 아니다. 공통 UI 스모크(`-hellscriptSharedUiSmoke`)는 대장간에 이르기 전 초반 화면(`RuntimeSharedUiSmoke.cs` 85행)에서 멈춰 대장간 검사를 실행하지 못했다. 이 스모크의 대장간 부분(칸 크기·열 너비)은 새 배치에 맞게 고쳤지만 실행으로 확인하지 못했다.
+
+근거 화면: [가로 옵션 변경](BlacksmithLayoutEvidence/landscape-ko-tab0.png) · [슬롯 강화](BlacksmithLayoutEvidence/landscape-ko-tab1.png) · [장비 강화](BlacksmithLayoutEvidence/landscape-ko-tab2.png) · [코어 제작](BlacksmithLayoutEvidence/landscape-ko-tab3.png) · [세로 옵션 변경](BlacksmithLayoutEvidence/portrait-ko-tab0.png) · [세로 슬롯 강화](BlacksmithLayoutEvidence/portrait-ko-tab1.png) · [세로 장비 강화](BlacksmithLayoutEvidence/portrait-ko-tab2.png) · [세로 코어 제작](BlacksmithLayoutEvidence/portrait-ko-tab3.png) · [PC 옵션 변경](BlacksmithLayoutEvidence/pc-ko-tab0.png) · [PC 슬롯 강화](BlacksmithLayoutEvidence/pc-ko-tab1.png) · [PC 장비 강화](BlacksmithLayoutEvidence/pc-ko-tab2.png) · [PC 코어 제작](BlacksmithLayoutEvidence/pc-ko-tab3.png) · [영어 가로](BlacksmithLayoutEvidence/landscape-en-tab0.png) · [영어 세로](BlacksmithLayoutEvidence/portrait-en-tab0.png). 잠금: [가로 말풍선](BlacksmithLayoutEvidence/locked-landscape-hint.png) · [세로 말풍선](BlacksmithLayoutEvidence/locked-portrait-hint.png) · [전부 잠긴 PC](BlacksmithLayoutEvidence/locked-all-pc.png). 팝업: [장비 시트](BlacksmithLayoutEvidence/portrait-ko-sheet.png) · [위치 고정 확인](BlacksmithLayoutEvidence/landscape-ko-confirm.png) · [자동 변경](BlacksmithLayoutEvidence/landscape-ko-auto.png) · [작업 칸 시트](BlacksmithLayoutEvidence/portrait-ko-slots-jobs.png) · [성장 계획](BlacksmithLayoutEvidence/landscape-ko-slots-plan.png) · [코어 품질 설정](BlacksmithLayoutEvidence/portrait-ko-cores-chosen-coins.png) · [제작 결과](BlacksmithLayoutEvidence/landscape-ko-cores-result.png). 실행 기록: [전체 스모크](BlacksmithLayoutEvidence/runtime-smoke.txt) · [탐색](BlacksmithLayoutEvidence/runtime-nav.txt) · [코어 제작](BlacksmithLayoutEvidence/runtime-core.txt) · [접근](BlacksmithLayoutEvidence/runtime-access.txt).
+
+모바일 실기기의 터치·회전·성능, Android/iOS 빌드는 확인하지 못했다. 위 결과는 macOS 플레이어와 합성 입력이다.
 
 ## 2026-09-29: 슬롯 스냅샷이 없는 이전 균열
 

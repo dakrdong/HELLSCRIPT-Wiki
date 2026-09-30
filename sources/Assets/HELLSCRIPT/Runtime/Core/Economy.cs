@@ -290,7 +290,8 @@ namespace Hellscript
         {
             if(!aOwns(a,h,item)||(Protected(h,item)||a.heroes.Any(owner=>Referenced(owner,item))))return false;
             if((long)a.gold+item.Price>int.MaxValue)return false;
-            a.gold+=item.Price;h.inventory.Remove(item);RiftResult.Disposed(a,item.id,RiftLootOutcome.Sold);return true;
+            a.gold+=item.Price;h.inventory.Remove(item);RiftResult.Disposed(a,item.id,RiftLootOutcome.Sold);
+            DailyQuests.Record(a,DailyQuestActivity.SellEquipment,1);return true;
         }
         public static bool CanSellStored(AccountSave account,Item item)=>item!=null&&account.warehouse.Contains(item)&&
             !item.equipped&&!item.locked&&!GemCatalog.HasGem(item)&&!account.heroes.Any(h=>Referenced(h,item))&&
@@ -298,7 +299,8 @@ namespace Hellscript
         public static bool SellStored(AccountSave account,Item item)
         {
             if(!CanSellStored(account,item))return false;
-            account.gold+=item.Price;account.warehouse.Remove(item);RiftResult.Disposed(account,item.id,RiftLootOutcome.Sold);Storage.SettleAll(account);return true;
+            account.gold+=item.Price;account.warehouse.Remove(item);RiftResult.Disposed(account,item.id,RiftLootOutcome.Sold);Storage.SettleAll(account);
+            DailyQuests.Record(account,DailyQuestActivity.SellEquipment,1);return true;
         }
         public static int EnhancementMaterials(Item item)=>0;
         public static long EnhancementGold(Item item)=>item.enhancement>=GearEnhancement.Maximum?0:GearEnhancement.Cost(item.level,item.enhancement+1);

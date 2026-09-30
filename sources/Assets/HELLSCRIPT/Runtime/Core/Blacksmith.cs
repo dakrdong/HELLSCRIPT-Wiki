@@ -50,7 +50,8 @@ namespace Hellscript
             if(item==null||q==null||!ContentUnlocks.Has(a,ContentUnlocks.Enhance)||!a.Hero.inventory.Contains(item)||JsonUtility.ToJson(item)!=q.fingerprint)return false;
             var current=Quote(item,a.gold,q.amount);
             if(current.to!=q.to||current.gold!=q.gold||!current.Affordable(a.gold))return false;
-            a.gold-=(int)q.gold;item.enhancement=q.to;return true;
+            a.gold-=(int)q.gold;item.enhancement=q.to;
+            DailyQuests.Record(a,DailyQuestActivity.EnhanceEquipment,current.to-current.from);return true;
         }
     }
     [Serializable] public sealed class SlotProgress
