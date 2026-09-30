@@ -1,0 +1,18 @@
+✔ original UTF-8 bytes have a durable receipt across Worker restart (16.364375ms)
+✔ concurrent equal and conflicting payloads preserve exactly one accepted run (1.729834ms)
+✔ R2/D1 failures never acknowledge missing data and retries repair interrupted writes (2.04475ms)
+✔ revoked, anonymous and unknown credentials cannot parse or persist player data (0.368ms)
+✔ authenticated server account owns the row independently of client identity (0.617583ms)
+✔ size, provenance, event sequence and idempotency boundaries reject unsafe payloads (1.07525ms)
+✔ health and public routes expose no player record or reward mutation (0.453625ms)
+✔ per-account rate budget recovers next minute (21.372291ms)
+✔ global fetch preserves its receiver and rechecks authentication on every request (0.746208ms)
+✔ authentication redirects never forward credentials to another origin (0.2495ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 235.87175

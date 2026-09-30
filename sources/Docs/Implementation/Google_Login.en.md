@@ -1,12 +1,14 @@
 # Google sign-in and device-local account saves
 
-Updated: 2026-09-26
+Updated: 2026-09-30
 
 [한국어](Google_Login.md) · [Server operations](Live_Operations.en.md)
 
 Google sign-in replaces the title screen's mock username/password form. Guest entry remains available. After server verification, the player selects a character; new accounts follow the existing first-game tutorial.
 
 **This implementation provides identity verification and separate saves on the current device.** It does not upload guest progress, synchronize cloud saves or restore another device's progress. A Google player session grants neither operations-tool access nor QA telemetry permissions.
+
+From 2026-09-30, a Google player session can upload its own combat observations to the separate [Sites log collector](Sites_Player_Logs.en.md). Railway remains the authentication and local account-binding origin; collection has its own address. The existing authentication server checks every upload, and sign-out or expiry stops new transmissions.
 
 ## Player flow
 

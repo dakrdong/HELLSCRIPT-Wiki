@@ -1,0 +1,73 @@
+{
+  "site_url": "https://hellscript-player-logs.hoosung.chatgpt.site",
+  "private_dispatch": true,
+  "synthetic": true,
+  "receipt": {
+    "accepted": true,
+    "runId": "689470f9bdcc4f2dba0889eacf728024",
+    "payloadHash": "bb35c88cd0dd9ec58f1b76bc4cacb9ddf74ce1d60f03786bf752001a85f058fe"
+  },
+  "authenticated_kind": "qa",
+  "checks": [
+    {
+      "path": "/v1/telemetry/session",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/healthz",
+      "method": "GET",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "POST",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "POST",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "POST",
+      "status": 409,
+      "expected": 409
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "POST",
+      "status": 422,
+      "expected": 422
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "POST",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "POST",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "path": "/v1/combat-runs",
+      "method": "GET",
+      "status": 405,
+      "expected": 405
+    },
+    {
+      "path": "/v1/combat-runs/689470f9bdcc4f2dba0889eacf728024",
+      "method": "GET",
+      "status": 404,
+      "expected": 404
+    }
+  ]
+}

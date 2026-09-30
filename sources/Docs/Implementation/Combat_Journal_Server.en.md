@@ -1,8 +1,10 @@
 # Rift combat journal and server analytics
 
-Updated: 2026-09-27
+Updated: 2026-09-30
 
 Korean: [균열 전투 기록과 서버 분석 수집](Combat_Journal_Server.md) · [Live operations and configuration releases](Live_Operations.en.md)
+
+The separate collector follows [Sites player log collection](Sites_Player_Logs.en.md), including Google-authenticated uploads, QA target binding, D1 summaries/R2 originals and preserved Railway records. The Python/SQLite receiver below remains the legacy Railway route and reference implementation.
 
 ## Player experience
 

@@ -1,6 +1,6 @@
 # Live operations and server configuration releases
 
-Updated: 2026-09-26
+Updated: 2026-09-30
 
 [한국어](Live_Operations.md) · [Open operations tool](https://hellscript-production.up.railway.app/ops) · [Combat journals and server ingestion](Combat_Journal_Server.en.md)
 
@@ -46,7 +46,7 @@ Client-reported references remain observations. Hashes identify documents and de
 
 ## Deployment and QA connection
 
-The table defines the integrated host configuration. Actual deployment, uploads and game adoption are recorded separately in [Verification](#verification-record).
+The table defines the Railway authentication and operations host. The new collector and its 2026-09-30 verification are documented in [Sites player logs](Sites_Player_Logs.en.md). Existing Railway records and databases remain intact. The [verification record](#verification-record) below describes the earlier integrated host.
 
 | Item | Configuration |
 | --- | --- |
@@ -57,10 +57,13 @@ The table defines the integrated host configuration. Actual deployment, uploads 
 | Health | `GET /healthz`; telemetry, operations and the enabled Google account database must remain readable. |
 | Player reads | `GET /v1/liveops/current` and `/v1/liveops/releases/{version}` expose published configuration only. |
 | Operators | `/ops`; separate `HELLSCRIPT_OPS_TOKENS` and exact `HELLSCRIPT_OPS_ORIGIN` |
-| Combat uploads | `POST /v1/combat-runs`; per-QA-account keys from `HELLSCRIPT_TELEMETRY_TOKENS` |
+| Legacy QA uploads | `POST /v1/combat-runs`; per-QA-account keys from `HELLSCRIPT_TELEMETRY_TOKENS` |
+| Sites identity checks | `GET /v1/telemetry/session`; returns only the collection identity for QA or a valid Google game session |
 | Persistence | Atomic SQLite publication, immutable releases/audit, revision comparison |
 
 `Resources/Data/ServerConnection.json` contains only the public origin and automatically connects configuration reads. Development builds and the Editor connect combat uploads using an operator-issued `qa-session.json` in the save directory, or a path passed with `-hellscriptQaSessionFile`. The file's server and upload purpose are validated. QA upload tokens are separate from web operator keys, and the server enforces their different permissions. Ordinary release builds exclude this development-file connection path. This provides pseudonymous QA-account attribution separately from Google player authentication. Real session contents and private paths are not published.
+
+Version 2 uses `baseUrl` for the Railway authentication/operations origin and `telemetryBaseUrl` for Sites collection. QA files must match the collector. Ordinary Google players upload to Sites with their in-memory game session instead of a QA file. Published game settings and combat reward ownership retain their existing implementations.
 
 Credentials and QA session files are excluded from Git and the public wiki. Operators use HttpOnly/Secure/SameSite cookies, exact Origin checks and CSRF tokens. Anonymous pages cannot mutate configuration. Missing operator credentials keep the operator API closed. Requests, timeouts and login attempts have explicit limits.
 

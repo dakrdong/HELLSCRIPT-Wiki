@@ -1,6 +1,6 @@
 # 게임 운영툴과 서버 설정 게시
 
-갱신일: 2026-09-26
+갱신일: 2026-09-30
 
 [English](Live_Operations.en.md) · [운영툴 열기](https://hellscript-production.up.railway.app/ops) · [전투 기록과 서버 수집](Combat_Journal_Server.md)
 
@@ -46,7 +46,7 @@
 
 ## 서버와 QA 연결
 
-아래 표는 통합 서버의 구성 기준이다. 실제 배포·업로드·게임 적용 여부는 이 문서의 [검증 기록](#검증-기록)에서 각각 확인한다.
+아래 표는 Railway 인증·운영 서버의 구성 기준이다. 2026-09-30의 신규 로그 수집 주소와 검증은 [Sites 플레이 로그](Sites_Player_Logs.md)를 따른다. 이전 Railway 기록과 DB는 보존한다. 아래 [검증 기록](#검증-기록)은 당시 통합 서버를 대상으로 한다.
 
 | 항목 | 구성 |
 | --- | --- |
@@ -57,10 +57,13 @@
 | 상태 확인 | `GET /healthz`; 전투·운영 DB와 활성화된 Google 계정 DB를 읽을 수 있어야 정상이다. |
 | 게임 설정 조회 | `GET /v1/liveops/current`, `GET /v1/liveops/releases/{version}`; 게시된 설정만 읽는다. |
 | 운영자 | `/ops`; 별도 `HELLSCRIPT_OPS_TOKENS`, 정확한 `HELLSCRIPT_OPS_ORIGIN` |
-| 전투 업로드 | `POST /v1/combat-runs`; `HELLSCRIPT_TELEMETRY_TOKENS`의 QA 계정별 키 |
+| 기존 QA 전투 업로드 | `POST /v1/combat-runs`; `HELLSCRIPT_TELEMETRY_TOKENS`의 QA 계정별 키 |
+| Sites 수집 인증 | `GET /v1/telemetry/session`; QA 또는 유효한 Google 게임 세션의 수집 계정 ID만 반환 |
 | 게시·감사 | SQLite 트랜잭션, 변경 불가능한 게시본·감사 기록, 초안과 기준 버전 비교 |
 
 게임의 `Resources/Data/ServerConnection.json`에는 공개 서버 주소만 들어간다. 운영 설정 조회는 자동으로 연결된다. 개발 빌드와 Editor의 전투 업로드는 운영자가 발급한 별도 QA 세션 파일을 기기의 저장 폴더에 `qa-session.json`으로 두거나 `-hellscriptQaSessionFile`로 경로를 전달하면 연결된다. 파일의 대상 서버와 업로드 용도를 검사하며 웹 운영자 키와 별도의 QA 토큰을 사용한다. 서버가 두 자격 증명의 권한을 구분한다. 일반 배포 빌드에는 이 개발용 세션 파일 연결 경로를 포함하지 않는다. Google 플레이어 인증과 별도로 QA 계정별 식별에 사용하는 연결이며, 세션 파일의 실제 값이나 개인 경로는 공개하지 않는다.
+
+버전 2 연결 설정의 `baseUrl`은 위 Railway 인증·운영 주소이고 `telemetryBaseUrl`은 Sites 수집 주소다. QA 파일은 수집 주소와 일치해야 한다. 일반 Google 플레이어의 Sites 업로드는 메모리의 게임 세션을 사용하며 QA 파일을 사용하지 않는다. 공개 설정 게시와 전투 보상 소유권은 기존 구현을 유지한다.
 
 서버 환경 변수·운영자 키·QA 세션 파일은 Git과 공개 위키에 포함하지 않는다. 로그인한 운영 화면은 HttpOnly/Secure/SameSite 쿠키와 Origin·CSRF 검사를 사용하며, 공개 페이지에서 인증 없이 운영 데이터를 변경할 수 없다. 운영 키가 없으면 운영 API는 닫힌 상태로 시작한다. 요청 크기·시간과 로그인 시도 횟수를 제한한다.
 

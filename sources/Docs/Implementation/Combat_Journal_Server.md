@@ -1,8 +1,10 @@
 # 균열 전투 기록과 서버 분석 수집
 
-갱신일: 2026-09-27
+갱신일: 2026-09-30
 
 영어판: [Combat journal and server analytics](Combat_Journal_Server.en.md) · [게임 운영툴과 설정 게시](Live_Operations.md)
+
+로그 수집 주소를 분리하는 연결은 [Sites 플레이 로그 수집](Sites_Player_Logs.md)을 따른다. Google 인증 후 수집, QA 파일의 대상, D1 요약·R2 원문과 기존 Railway 기록 보존을 구분한다. 아래의 Python·SQLite 수신기는 기존 Railway 경로와 기준 구현이다.
 
 ## 플레이어가 보는 기록
 
