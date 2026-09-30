@@ -15,7 +15,7 @@ namespace Hellscript
         public RiftFogView RiftFog => riftFog;
         Material RiftMaterial(Material source) => riftFog != null ? riftFog.Resolve(source) : source;
         internal bool CanDisplayEnemyMarker(RunState run, Vector2 position, float radius = 0)
-            => Vector2.Distance(run.position, position) <= 14 + radius && game.Combat.Map.LineClear(run.position, position);
+            => Vector2.Distance(run.position, position) <= 14 + radius && Combat.Map.LineClear(run.position, position);
         Transform RoomGeometry(int index, bool visited)
         {
             var room = new GameObject("Discovered room " + index); room.transform.SetParent(world.transform, false);
@@ -24,7 +24,7 @@ namespace Hellscript
         void InitializeRiftVisibility(RunState run)
         {
             if (run.layout.legacy) return;
-            riftFog = world.AddComponent<RiftFogView>(); riftFog.Initialize(RiftVisibility.Get(run, game.Combat.Map));
+            riftFog = world.AddComponent<RiftFogView>(); riftFog.Initialize(RiftVisibility.Get(run, Combat.Map));
             riftBackground = viewCamera.backgroundColor; viewCamera.backgroundColor = Color.black;
         }
         void BindRiftTerrain()

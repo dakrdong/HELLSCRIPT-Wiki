@@ -1,6 +1,6 @@
 # Hunt Edict quick presets
 
-Updated: 2026-09-29 · [한국어](Hunt_Edict_Quick_Presets.md)
+Updated: 2026-09-30 · [한국어](Hunt_Edict_Quick_Presets.md)
 
 Each item offers named recipes and a final **Custom Settings** tab. Skills, basic attacks and common attack order use tabs with descriptions and combat examples. **Activate preset** applies and immediately saves the previewed recipe; editing active Custom Settings also saves immediately. Global groups retain their existing picker and Save/Revert workflow.
 
@@ -33,11 +33,11 @@ Updated 2026-09-29: Combat, Survival, Loot, Bag, Exploration, Repeat Hunt and Re
 
 ## Skill tabs and combat examples
 
-- Three recipe tabs plus Custom Settings stay fixed. Landscape uses one row and portrait two rows; only the description or detailed controls scroll.
+- Two or three authored recipe tabs plus Custom Settings stay fixed. Landscape uses one row and portrait two rows; only the description or detailed controls scroll.
 - The gold tab is the page being viewed; the green check marks the actually saved, active preset. Browsing tabs never changes or saves values.
 - The activation action stays in the same position on every tab. The applied tab says **Active**. A failed write keeps the previous active marker and values and reports the error.
-- All 54 active/ultimate skills have three examples each: 162 skill examples. Nine class-specific basic-attack examples and three common-order examples bring the total to 174. Circles represent the hero, diamonds enemies, and arrows movement/attacks. Scenes explain packs, elites, marks/control, shields, resource/HP conditions, movement, retreat, charging and attack order.
-- The game draws examples using existing skill icons and `SkillTreeGraphic` lines, rings and shapes. No raster generation model or new bitmap assets are used. Conditions and thresholds read the existing recipe/policy definitions; illustrative placement does not simulate or predict a battle outcome.
+- All 54 active/ultimate skills now have **122 equipment-independent recipes** (Warrior 41, Ranger 40, Mage 41). They use independently simulated battles with real character/enemy assets, animation, effects and the production combat policies. Basic attacks and common order retain their diagrams.
+- Live previews have **no duration limit or automatic restart**. Restart, Pause/Play and 0.5×/1×/2× control the example. A finished battle retains its outcome until manually restarted. Browsing does not save; activation and direct changes retain the existing transaction. See [combat preview ownership, scenarios and validation](Skill_Preset_Combat_Previews.en.md).
 - **Custom Settings has no example picture.** Detailed controls are visible before activation, and become editable after activation. Each selected option, confirmed number, or completed common-order drag is then saved immediately.
 - The skill-policy page has no Save/Revert footer. Equipped skills form a right-hand rail in landscape and remain in a bottom dock in portrait. Skill-tree investment/equipment and other categories retain their existing explicit-save workflow.
 
@@ -56,7 +56,7 @@ Updated 2026-09-29: Combat, Survival, Loot, Bag, Exploration, Repeat Hunt and Re
 
 `HuntEdictQuickPresets` and `Resources/HuntEdictQuickPresets.json` own recipes. Expanded skills reuse bilingual choices in `Resources/Data/ClassSkills.json`; Mana Recovery binds both use policy and recovery goal. `HuntEdictSkillPresets` validates active tabs and copies one policy. `HuntEdictEditSession.SaveSkillPolicy` invokes the existing atomic save callback and preserves owner/draft on failure.
 
-The page remains an adapter within `HuntEdictWindow`, reusing shared buttons, theme, fonts and scrolling. `SkillPresetExampleView` receives recipe/loadout inputs and draws a read-only diagram without account access. HED4/HED5 preserve explicit tabs while continuing to read old codes and reject unknown fields.
+The page remains an adapter within `HuntEdictWindow`, reusing shared buttons, theme, fonts and scrolling. `SkillCombatPreviewPresenter` owns the independent battle and rendering resources; basic attacks and common order retain `SkillPresetExampleView` diagrams. Presentation components do not access account persistence. HED4/HED5 preserve explicit tabs while continuing to read old codes and reject unknown fields.
 
 Sources: [recipes](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [scope/application](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [activation/policy copy](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictSkillPresets.cs), [preset page](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.SkillPresets.cs), [examples](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillPresetExampleView.cs), [Whirlwind movement](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
 
@@ -116,64 +116,60 @@ Every row below also offers Custom Settings as its final entry.
 | Repeat & next stage (3) | One run at a time · Repeat the same stage · Climb stages |
 | Stop conditions & goals (7) | A short five-run session · A 30-minute session · No time or run limit |
 | Next-run preparation (2) | Standard preparation · Require bag space · Quick next run |
-| Whirlwind | Quick center entry · Survival-first combat · Stationary spin |
-| Leap Slam | Land in the pack · Reserve for escape · Attack and escape |
-| Crushing Blow | Crush the pack · Focus elite targets · Crush with a charge |
-| Ground Slam | Control packs · Interrupt dangerous casts · Cover a retreat |
-| Iron Wall | Prevent damage · Extend protection · Emergency protection |
-| Battle Shout | Resource and damage support · Focus on resource recovery · Prepare for the boss |
-| Piercing Shot | Pierce without waiting · Pierce multiple enemies · Pierce priority enemies |
-| Multishot | Clear packs · Focus one target · Fire from range |
-| Venom Trap | Trap the pack · Refresh trap positions · Trap pursuing enemies |
-| Retreat Leap | Restore a safe distance · Lure onto your trap · Reserve for survival |
-| Hunter's Mark | Maintain a priority mark · Mark each new target · Mark high-health targets |
-| Shadow Arrow | Empower everyday shots · Empower elite piercing · Spread poison with volleys |
-| Fireball | Steady fire · Maximize explosions · Focus on elites |
-| Blizzard | Cover new ground · Maintain Blizzard on target · Cover approach paths |
-| Chain Lightning | Attack isolated enemies · Focus linked packs · Conserve charges |
-| Teleport | Reserve for survival · Also adjust distance · Escape to Open Space |
-| Elemental Shield | Prevent damage · Chain shields · Emergency protection |
-| Frost Nova | Freeze in place · Approach and freeze · Set up chain charges |
-| Brand of Challenge | Default edict · Below 50% resource · React to a windup |
-| Impaling Hook | Default edict · Use when available · Use against distant enemies |
-| Raking Wound | Default edict · Spread to new targets · Use against elites and bosses |
-| Blood Reclamation | Default edict · Cash bleed out early · Time bleed expiry or healing |
-| Resolute Advance | Default edict · Use when available · Use against distant enemies |
-| Iron Stance | Default edict · React to a windup · Use at low health |
-| Battlefield Ring | Default edict · Use when available · Wait for several targets |
-| Tremor Wave | Default edict · Use when available · Wait for several targets |
-| Breath Before Battle | Default edict · Below 30% resource · Below 75% resource |
-| Guardian's Vow | Default edict · When no shield remains · Reserve for cleansing slow |
-| War of the Ancestors | Default edict · Use against elites and bosses · Use at low health |
-| Titan's Judgment | Default edict · Wait for several targets · Align with the shout |
-| Successive Shots | Default edict · Use when available · Leave 40% resource after casting |
-| Patient Shot | Default edict · Use when available · Require a mark and distance |
-| Briar Trap | Default edict · Use when available · Prefer new control |
-| Frost Snare | Default edict · Use when available · Freeze after poison |
-| Decoy Projection | Default edict · React to nearby enemies · Wait for several targets |
-| Smoke Cover | Default edict · React to nearby enemies · Use at low health |
-| Venom Arrow | Default edict · Spread to new targets · Focus the marked target |
-| Forking Arrow | Default edict · Use when available · Wait for several targets |
-| Watch Ballista | Default edict · Use when available · Use against elites and bosses |
-| Hunt Preparation | Default edict · Below 30% resource · Before a paid skill |
-| Killing Rain | Default edict · Use against elites and bosses · Wait for a controlled group |
-| Shadow Pursuit | Default edict · Use when available · Leave 70% resource after casting |
-| Ember Lance | Default edict · Use when available · Wait for several targets |
-| Firewall | Default edict · Use when available · Wait for control |
-| Glacial Lance | Default edict · Use when available · Freeze after a slow |
-| Frost Globe | Default edict · Use when available · Wait for control |
-| Capacitor Orb | Default edict · Use when available · After Chain Lightning is ready |
-| Storm Spear | Default edict · Use when available · After Chain Lightning hits |
-| Mana Reclaim | Standard recovery · Quick recovery in place · Retreat and recharge |
-| Rift Ward | Default edict · When no shield remains · Use at low health |
-| Elemental Compass | Default edict · Below 30% resource · Use with three elements |
-| Magnetic Vortex | Default edict · Use when available · Wait for several targets |
-| Triune Collapse | Default edict · Use against elites and bosses · Wait for elemental empowerment |
-| Sage Incarnate | Default edict · Use against elites and bosses · Prepare a three-element cycle |
-| Warrior basic attack | Fill between skills · Recover resources · Finish weak enemies |
-| Ranger basic attack | Fill between skills · Recover resources · Finish weak enemies |
-| Mage basic attack | Fill between skills · Recover resources · Finish weak enemies |
-| Common attack order | Equipment slot order · Ultimate first · Basic attack first |
+| Whirlwind | Quick central entry / Survival first / Stationary spin |
+| Leap Slam | Quick pack entry / Leap after spacing / Reserve for escape |
+| Crushing Blow | Crush a pack / Strike strong enemies |
+| Ground Slam | Control a pack / Interrupt a threat / Cover a retreat |
+| Iron Wall | Prepare for damage / Chain shields / Reserve for survival |
+| Battle Shout | Restore resources / Empower strong-enemy fights |
+| Piercing Shot | Quick single-target pierce / Pierce two or more / Prioritise strong targets |
+| Multishot | Clear a pack / Long-range fire |
+| Venom Trap | Place in the pack / Place under the target / Place along the approach |
+| Retreat Leap | Restore safe distance / Retreat toward an existing trap / Reserve for escape |
+| Hunter's Mark | Maintain a strong-target mark / Mark the current target / Mark a high-health target |
+| Shadow Arrow | Empower regular shots / Elite piercing combination |
+| Fireball | Steady fire / Prioritise blast coverage / Prioritise strong targets |
+| Blizzard | Cover a new area / Recast at the target / Cover the approach |
+| Chain Lightning | Attack isolated enemies / Wait for linked enemies |
+| Teleport | Reserve for emergencies / Restore combat distance / Escape to a sparse area |
+| Elemental Shield | Prepare for incoming damage / Chain shields / Reserve for survival |
+| Frost Nova | Control danger in place / Approach and freeze a pack |
+| Brand of Challenge | Maintain the brand / Brand when resources are low |
+| Impaling Hook | Pull even nearby enemies / Pull distant enemies |
+| Raking Wound | Bleed packs or strong targets / Bleed a single enemy |
+| Blood Reclamation | Reap bleeding immediately / Reap near expiry or in danger |
+| Resolute Advance | Advance even at close range / Approach distant enemies |
+| Iron Stance | Defend against a windup / Defend at half health |
+| Battlefield Ring | Gather even one enemy / Gather three or more |
+| Tremor Wave | Fire a wave immediately / Wait to pierce three |
+| Breath Before Battle | Recover low resources / Top up resources early |
+| Guardian's Vow | Use without a shield / Reserve to remove slowing |
+| War of the Ancestors | Support strong-enemy fights / Support in a health crisis |
+| Titan's Judgment | Judge a strong target / Judge a group of four / Judge after a shout |
+| Successive Shots | Prioritise repeated shots / Keep 40% resources |
+| Patient Shot | Aim when an opportunity appears / Aim at a distant marked target |
+| Briar Trap | Restrict movement immediately / Prioritise uncontrolled enemies |
+| Frost Snare | Slow enemies first / Freeze after poisoning |
+| Decoy Projection | Divert nearby threats / Divert a threatening pack |
+| Smoke Cover | Escape nearby threats / Respond to a health crisis |
+| Venom Arrow | Poison a new target / Poison the marked target |
+| Forking Arrow | Fire at even one enemy / Split when three gather |
+| Watch Ballista | Deploy in any fight / Reserve for strong targets |
+| Hunt Preparation | Restore low resources / Prepare before a paid shot |
+| Killing Rain | Suppress a strong target / Suppress a controlled pack |
+| Shadow Pursuit | Empower pursuit immediately / Empower with ample resources |
+| Ember Lance | Pierce immediately / Wait to pierce three |
+| Firewall | Create a fire area immediately / Overlap controlled enemies |
+| Glacial Lance | Slow enemies first / Freeze slowed enemies |
+| Frost Globe | Launch immediately / Launch at a controlled target |
+| Capacitor Orb | Deploy for lasting damage / Deploy with chain lightning ready |
+| Storm Spear | Pierce immediately / Follow chain lightning |
+| Mana Reclaim | Recover briefly in safety / Recover while accepting damage / Gain distance and recover fully |
+| Rift Ward | Deploy without a shield / Deploy in a health crisis |
+| Elemental Compass | Restore low resources / Prepare three elemental discounts |
+| Magnetic Vortex | Gather even one enemy / Gather three or more |
+| Triune Collapse | Collapse a strong target / Collapse a group of four |
+| Sage Incarnate | Empower immediately against strong targets / Empower when three elements are ready |
 
 ## Validation
 

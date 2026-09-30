@@ -160,6 +160,19 @@ namespace Hellscript.Tests
             var sim=Fixture();sim.State.health=100;var d=Configure(sim,"M04");Set(d,"survival.lowHp","OFF");Set(d,"survival.escapeSkill","M04");Set(d,"dodge.area.policy","ALWAYS");Set(d,"dodge.method",method);Danger(sim,20,delay);
             var p=sim.PlanEdictSurvival(d);Assert.AreEqual(role,p.selected.role);if(method=="SKILL_IF_NEEDED")Assert.AreEqual(delay==1,p.attempts.First().timely);
         }
+        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M05")]
+        public void SkillFirstCanUseADesignatedPreventiveShieldWhileWalkFirstStillWalks(HeroClass hero,string id)
+        {
+            var sim=Fixture(hero);sim.State.health=100;var d=Configure(sim,id);
+            Set(d,"survival.lowHp","OFF");Set(d,"survival.defenseSkill",id);Set(d,"dodge.area.policy","ALWAYS");Danger(sim);
+            d=HuntEdictV2.WithOption(d,id,2,"PREVENT");
+            if(id=="M05")d=HuntEdictV2.WithOption(d,id,4,"ALL");
+            Set(d,"dodge.method","WALK_FIRST");Assert.AreEqual("WALK",sim.PlanEdictSurvival(d).selected.role);
+            Set(d,"dodge.method","SKILL_FIRST");var plan=sim.PlanEdictSurvival(d);
+            Assert.AreEqual("DEFENSE",plan.selected.role);Assert.AreEqual(id,plan.selected.skillId);
+            Assert.IsTrue(sim.ExecuteEdictSurvival(d).mainActionStarted);Advance(sim,.25f);
+            Assert.IsTrue(sim.State.shields.Any(s=>s.definitionId==id&&s.amount>0));
+        }
         [TestCase("GLOBAL",true)][TestCase("NO_DAMAGE",false)]
         public void TeleportNoDamagePolicyRejectsEvenAnOtherwiseAllowedSmallHit(string option,bool allowed)
         {

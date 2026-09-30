@@ -52,7 +52,7 @@ namespace Hellscript
         {
             StepFx(Position(run.position));
             var library=Fx;activeThreats.Clear();activeFills.Clear();gauge.BeginFrame(completedWarnings);
-            foreach(var threat in EnemyCombat.Threats(run,game.Combat.Map))
+            foreach(var threat in EnemyCombat.Threats(run,Combat.Map))
             {
                 if(!CanDisplayEnemyMarker(run,threat.origin,threat.radius))continue;
                 bool boss=threat.key.StartsWith("boss-",StringComparison.Ordinal);float progress=gauge.Observe(run,threat,boss);
@@ -63,7 +63,7 @@ namespace Hellscript
                 if(library!=null)library.ShowFill(ThreatView(library,threat.key,WorldFx.TelegraphKind.Fill),threat.shape,threat.origin,threat.end,threat.direction,
                     threat.radius,threat.innerRadius,threat.angle,progress,boss,0,LandedZoneTint(run,threat));
             }
-            foreach(var e in run.enemies.Where(e=>!e.dead&&Vector2.Distance(run.position,e.position)<=12&&game.Combat.Map.LineClear(run.position,e.position)))
+            foreach(var e in run.enemies.Where(e=>!e.dead&&Vector2.Distance(run.position,e.position)<=12&&Combat.Map.LineClear(run.position,e.position)))
             {
                 if(e.boss)foreach(var refuge in e.brain.boss.refuges)
                 {
@@ -80,7 +80,7 @@ namespace Hellscript
                 }
                 if(EnemyCombat.Trait(e,2))
                 {
-                    var other=run.enemies.Find(x=>x.id==e.elitePartner&&!x.dead&&x.elite>=0&&Vector2.Distance(x.position,e.position)<=5&&Vector2.Distance(run.position,x.position)<=12&&game.Combat.Map.LineClear(run.position,x.position));
+                    var other=run.enemies.Find(x=>x.id==e.elitePartner&&!x.dead&&x.elite>=0&&Vector2.Distance(x.position,e.position)<=5&&Vector2.Distance(run.position,x.position)<=12&&Combat.Map.LineClear(run.position,x.position));
                     if(other!=null)EnemyOutline("link-"+e.id,new[]{e.position,other.position},library==null?purple:library.Tether,library==null?.1f:.22f,activeThreats,library!=null);
                 }
                 if(EnemyCombat.Trait(e,3)||e.brain.rearWindow>0)

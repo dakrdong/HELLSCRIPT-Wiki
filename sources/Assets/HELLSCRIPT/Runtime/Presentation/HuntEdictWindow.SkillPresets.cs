@@ -53,15 +53,15 @@ namespace Hellscript
         {
             string scope=SkillPolicyScope,shown=VisibleSkillPreset,active=ActiveSkillPreset;
             bool custom=shown==HuntEdictQuickPresets.Custom,usingShown=shown==active&&HuntEdictSkillPresets.SamePolicy(Session.Draft,OwnedSkillPolicy,scope);
-            float heading=31*Grow;
-            Button(parent,"스킬 트리로",x,y,101*Grow,heading,()=>SelectSkillPage(true),"button-idle",11).name="edict-policy-back";
+            float heading=31*Grow,backWidth=Mathf.Min(101*Grow,w*.31f),actionWidth=Mathf.Min(92*Grow,w*.26f);
+            Button(parent,"스킬 트리로",x,y,backWidth,heading,()=>SelectSkillPage(true),"button-idle",11).name="edict-policy-back";
             if(policySkill=="BASIC")
             {
-                float rest=w-106*Grow;
-                Button(parent,"기본 공격",x+106*Grow,y,rest*.47f,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",10).name="edict-policy-basic";
-                Button(parent,"공통 공격 순서",x+106*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
+                float rest=w-backWidth-actionWidth-12*Grow;
+                Button(parent,"기본 공격",x+backWidth+6*Grow,y,rest*.47f,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",10).name="edict-policy-basic";
+                Button(parent,"공통 공격 순서",x+backWidth+6*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
             }
-            else Text(parent,SkillName(policySkill),x+110*Grow,y,w-110*Grow,heading,13,gold);
+            else Text(parent,SkillName(policySkill),x+backWidth+8*Grow,y,w-backWidth-actionWidth-16*Grow,heading,12,gold);
             var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+6,w,100);
             var presets=HuntEdictQuickPresets.For(scope);
             var ids=presets.Select(p=>p.id).Concat(new[]{HuntEdictQuickPresets.Custom}).ToArray();
@@ -84,14 +84,14 @@ namespace Hellscript
             float tabTotal=rows*(tabHeight+2);Place(tabs,x,y+heading+6,w,tabTotal);
             float plateY=y+heading+6+tabTotal,plateH=h-(plateY-y);
             var plate=Panel(parent,"Skill preset panel","skill-inspector");Place(plate,x,plateY,w,plateH);
-            float actionWidth=Mathf.Min(w*.55f,150*Grow),actions=38*Grow;
-            Text(plate,usingShown?"변경 즉시 저장":"미리보기",8,0,w-actionWidth-20,actions,10,usingShown?UiTheme.Success:muted);
-            var use=Button(plate,usingShown?"활성 중":custom?"직접 설정 활성화":"프리셋 활성화",w-actionWidth-6,4,actionWidth,actions-8,ActivateSkillPreset,usingShown?"chip-on":"button-primary",11);
+            float actions=0;
+            var use=Button(parent,usingShown?"활성 중":"활성화",x+w-actionWidth,y+3*Grow,actionWidth,heading-6*Grow,ActivateSkillPreset,usingShown?"chip-on":"button-primary",10);
             use.name="edict-preset-activate";use.interactable=!usingShown;
             if(usingShown)use.GetComponentInChildren<Text>().color=UiTheme.Success;
             mainScroll=Scroll(plate,"Skill preset content",6,actions,w-12,Mathf.Max(24,plateH-actions-6),out var list);float inner=w-26;
             if(custom)
             {
+                ReleaseCombatPreview();
                 if(!usingShown)
                 {
                     Paragraph(list,"직접 설정을 활성화하면 세부 옵션을 조정할 수 있습니다.",inner,12,muted);
@@ -106,24 +106,44 @@ namespace Hellscript
             {
                 var preset=presets.Single(p=>p.id==shown);
                 bool sideBySide=landscape||inner>=430*Grow;
-                float descriptionWidth=sideBySide?inner*.36f:inner;
+                float descriptionWidth=sideBySide?inner*(scope.StartsWith("skill/",StringComparison.Ordinal)?.28f:.36f):inner;
                 var row=Row(list,"Preset explanation",100);
                 var description=Text(row,preset.Description,5,5,descriptionWidth-10,1000,12,textColor,TextAnchor.UpperLeft);
                 float descriptionHeight=description.preferredHeight+12;
                 Place(description.rectTransform,5,5,descriptionWidth-10,descriptionHeight);
                 float artX=sideBySide?descriptionWidth+8:0,artY=sideBySide?0:descriptionHeight+4,artW=sideBySide?inner-descriptionWidth-8:inner;
                 float artH=artW*.68f;
-                if(landscape)
+                bool live=scope.StartsWith("skill/",StringComparison.Ordinal);
+                if(landscape&&!live)
                 {
                     // Keep the whole tactical scene visible even in short landscape windows with
                     // enlarged text. Description/legend can still scroll when they need extra lines.
                     artH=Mathf.Min(artH,Mathf.Max(104,plateH-actions-Lines(10,2)-18));
                     float fitted=artH/.68f;artX+=(artW-fitted)/2;artW=fitted;
                 }
-                SkillPresetExampleView.Create(row,scope,shown,Session.Draft,font,artX,artY,artW,artH,lastScale);
+                if(live)
+                {
+                    Destroy(description.gameObject);description.gameObject.SetActive(false);
+                    var information=Rect("Preset information",row);Place(information,5,5,descriptionWidth-10,1);
+                    var layout=information.gameObject.AddComponent<VerticalLayoutGroup>();layout.spacing=4;
+                    layout.childControlWidth=true;layout.childForceExpandWidth=true;layout.childControlHeight=true;layout.childForceExpandHeight=false;
+                    Paragraph(information,usingShown?"변경 즉시 저장":"미리보기",descriptionWidth-10,10,usingShown?UiTheme.Success:muted);
+                    Paragraph(information,preset.Description,descriptionWidth-10,12,textColor);
+                    DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth-10);
+                    artH=sideBySide?Mathf.Max(150*Grow,plateH-actions-12):Mathf.Max(150*Grow,artW*.70f);
+                    DrawCombatPreview(row,information,descriptionWidth-10,policySkill,shown,artX,artY,artW,artH);
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(information);descriptionHeight=LayoutUtility.GetPreferredHeight(information)+10;
+                    Place(information,5,5,descriptionWidth-10,descriptionHeight);
+                    if(!sideBySide)
+                    {
+                        artY=0;Place(row.Find("Actual skill combat preview") as RectTransform,artX,artY,artW,artH);
+                        Place(information,5,artH+8,descriptionWidth-10,descriptionHeight);descriptionHeight+=artH+8;
+                    }
+                }
+                else {ReleaseCombatPreview();SkillPresetExampleView.Create(row,scope,shown,Session.Draft,font,artX,artY,artW,artH,lastScale);}
                 float total=Mathf.Max(descriptionHeight,artY+artH);
                 row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=total;
-                Paragraph(list,"원은 내 캐릭터 · 마름모는 적 · 화살표는 이동과 공격 방향입니다.",inner,10,muted);
+                if(!live)Paragraph(list,"원은 내 캐릭터 · 마름모는 적 · 화살표는 이동과 공격 방향입니다.",inner,10,muted);
             }
             EndList(list,6);
         }
@@ -136,8 +156,6 @@ namespace Hellscript
                 DrawOrder(list,w,Skills.order,SkillName,(id,target)=>apply(d=>d.classSkills.order=HuntEdictReorder.MoveVisible(d.classSkills.order,d.classSkills.order,id,target)));return;
             }
             if(policySkill=="BASIC"){DrawActiveOptions(list,w,"BASIC",apply);return;}
-            bool automatic=Skills.automatic.Contains(policySkill);var row=Row(list,"Automatic use",36*Grow);
-            Button(row,automatic?"자동 사용 켜짐":"자동 사용 꺼짐",0,0,w,32*Grow,()=>apply(d=>d.classSkills.automatic=automatic?d.classSkills.automatic.Where(id=>id!=policySkill).ToArray():d.classSkills.automatic.Concat(new[]{policySkill}).ToArray()),automatic?"chip-on":"button-idle",11).name="edict-skill-automatic";
             foreach(var option in ClassSkillOptions.For(hero.heroClass).Where(o=>o.skillId==policySkill))
             {
                 var selected=ClassSkillOptions.Selected(Skills,option.id);

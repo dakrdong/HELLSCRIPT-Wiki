@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T15:30:09+09:00",
+  "generatedAt": "2026-09-30T16:23:47+09:00",
   "databases": [
     {
       "id": "resources",
@@ -168929,6 +168929,41 @@
           ]
         },
         {
+          "id": "W18:elite",
+          "name": "거인의 심판 사용 방식 · 강적 집중 심판",
+          "category": "스킬 사용 규칙",
+          "summary": "조건을 만족한 대상이 실제 공격 범위에 포함될 때 사용합니다.",
+          "fields": {
+            "스킬 ID": "W18",
+            "옵션 ID": "W18",
+            "선택 값": "elite",
+            "영어 이름": "Judge strong enemies",
+            "얻는 이득": "조건을 만족한 대상이 실제 공격 범위에 포함될 때 사용합니다.",
+            "Gain": "Cast when a qualifying target is in the actual attack area.",
+            "감수할 손해": "조건을 만족하지 않으면 다른 행동을 먼저 합니다.",
+            "Cost": "Take other actions while the condition is not met.",
+            "관찰 지표": [
+              "casts",
+              "waitSeconds",
+              "damage",
+              "incomingDamage",
+              "resourceStarvedSeconds",
+              "movementMeters"
+            ],
+            "기본 선택": false,
+            "일반 플레이 활성화": false
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
+            "line": 1
+          },
+          "status": "능력 구현 · UI 공개 대기",
+          "related": [
+            "class-skill-use-policies",
+            "class-skill-runtime"
+          ]
+        },
+        {
           "id": "A07:native",
           "name": "잇단 사격 사용 방식 · 기본 칙령",
           "category": "스킬 사용 규칙",
@@ -171388,6 +171423,41 @@
             "Gain": "Waits until elemental empowerment is active.",
             "감수할 손해": "강화 공급이 없으면 사용하지 않습니다.",
             "Cost": "Does not cast without an empowerment source.",
+            "관찰 지표": [
+              "casts",
+              "waitSeconds",
+              "damage",
+              "incomingDamage",
+              "resourceStarvedSeconds",
+              "movementMeters"
+            ],
+            "기본 선택": false,
+            "일반 플레이 활성화": false
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
+            "line": 1
+          },
+          "status": "능력 구현 · UI 공개 대기",
+          "related": [
+            "class-skill-use-policies",
+            "class-skill-runtime"
+          ]
+        },
+        {
+          "id": "M17:group",
+          "name": "삼원소 붕괴 사용 방식 · 네 명 이상 광역 붕괴",
+          "category": "스킬 사용 규칙",
+          "summary": "조건을 만족한 대상이 실제 공격 범위에 포함될 때 사용합니다.",
+          "fields": {
+            "스킬 ID": "M17",
+            "옵션 ID": "M17",
+            "선택 값": "group",
+            "영어 이름": "Collapse a group of four",
+            "얻는 이득": "조건을 만족한 대상이 실제 공격 범위에 포함될 때 사용합니다.",
+            "Gain": "Cast when a qualifying target is in the actual attack area.",
+            "감수할 손해": "조건을 만족하지 않으면 다른 행동을 먼저 합니다.",
+            "Cost": "Take other actions while the condition is not met.",
             "관찰 지표": [
               "casts",
               "waitSeconds",

@@ -1,0 +1,6944 @@
+{
+  "version": 1,
+  "scenarios": [
+    {
+      "skill": "A01",
+      "preset": "steady",
+      "seed": 42000,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2,
+            "y": 3
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 한 명만 보여도 관통 사격을 사용합니다.",
+      "conditionsEn": "Fire a piercing shot even at a single enemy.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A01",
+      "preset": "pack",
+      "seed": 42001,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2,
+            "y": 3
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "실제 사선에 적 두 명 이상이 들어오면 발사합니다.",
+      "conditionsEn": "Fire once at least two enemies are on the actual line of fire.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A01",
+      "preset": "elite",
+      "seed": 42002,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2,
+            "y": 3
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스 방향을 우선하여 관통 사격을 사용합니다.",
+      "conditionsEn": "Prioritise an elite or boss when aiming the piercing shot.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A02",
+      "preset": "pack",
+      "seed": 42003,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "부채꼴 범위에 여러 적이 들어오는 방향으로 사격합니다.",
+      "conditionsEn": "Fire toward several enemies within the fan-shaped attack area.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A02",
+      "preset": "safe",
+      "seed": 42004,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적과 거리를 벌리며 다중 사격을 사용합니다.",
+      "conditionsEn": "Gain distance while using multi-shot.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A03",
+      "preset": "pack",
+      "seed": 42005,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 무리가 모인 중심에 맹독 덫을 설치합니다.",
+      "conditionsEn": "Place a poison trap in the centre of a group.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A03",
+      "preset": "renew",
+      "seed": 42006,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "현재 대상의 위치에 고정 덫을 설치합니다. 덫은 대상을 따라가지 않습니다.",
+      "conditionsEn": "Place a stationary trap at the target position. The trap does not follow its target.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A03",
+      "preset": "defend",
+      "seed": 42007,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "관찰한 적의 접근 경로에 덫을 설치합니다.",
+      "conditionsEn": "Place a trap along the observed enemy approach path.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A04",
+      "preset": "safe",
+      "seed": 42008,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "접근한 적에게서 안전한 방향으로 후퇴합니다.",
+      "conditionsEn": "Retreat in a safe direction from approaching enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "position.distance",
+          "value": "8"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "OFF"
+        }
+      ],
+      "globalConditions": "예시 공통 설정: 희망 거리 8m, 제자리 전투. 회피기를 긴급용으로 보존하지 않습니다.",
+      "globalConditionsEn": "Example globals: desired distance 8 m, stationary combat, no emergency-only escape reservation."
+    },
+    {
+      "skill": "A04",
+      "preset": "trap-retreat",
+      "seed": 42009,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A03"
+      ],
+      "preparation": [
+        {
+          "skill": "A03",
+          "aim": "behind"
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "이미 설치한 맹독 덫 방향으로 후퇴합니다. 전용 장비는 필요하지 않습니다.",
+      "conditionsEn": "Retreat toward an already placed poison trap. No special equipment is required.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "position.distance",
+          "value": "8"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "OFF"
+        }
+      ],
+      "globalConditions": "예시 공통 설정: 희망 거리 8m, 제자리 전투. 회피기를 긴급용으로 보존하지 않습니다.",
+      "globalConditionsEn": "Example globals: desired distance 8 m, stationary combat, no emergency-only escape reservation."
+    },
+    {
+      "skill": "A04",
+      "preset": "escape",
+      "seed": 42010,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "평소에는 보존하고 전역 생존 조건을 만족할 때 이탈합니다.",
+      "conditionsEn": "Reserve it until the global survival condition calls for an escape.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A05",
+      "preset": "elite",
+      "seed": 42011,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 5000
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스에게 표식을 유지합니다. 재부여에는 실제 쿨타임이 적용됩니다.",
+      "conditionsEn": "Maintain a mark on an elite or boss. Reapplication respects the actual cooldown.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A05",
+      "preset": "switch",
+      "seed": 42012,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 5000
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "현재 공격 대상에게 표식을 부여합니다. 대상 변경 시에도 쿨타임을 기다립니다.",
+      "conditionsEn": "Mark the current attack target. A target switch still respects the cooldown.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A05",
+      "preset": "health",
+      "seed": 42013,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 5000
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "남은 체력이 많은 적에게 표식을 부여합니다.",
+      "conditionsEn": "Mark an enemy with high remaining health.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A06",
+      "preset": "steady",
+      "seed": 42014,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        }
+      ],
+      "companions": [
+        "A01"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "기본 사격을 그림자 추가 공격으로 강화합니다.",
+      "conditionsEn": "Empower basic shots with shadow follow-up attacks.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A06",
+      "preset": "elite",
+      "seed": 42015,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        }
+      ],
+      "companions": [
+        "A01"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "A01",
+          "seconds": 3
+        }
+      ],
+      "conditions": "정예를 향한 관통 사격이 준비됐을 때 사격을 강화합니다.",
+      "conditionsEn": "Empower shots when piercing fire at an elite is ready.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A07",
+      "preset": "opportunity",
+      "seed": 42016,
+      "health": 1.0,
+      "resource": 0.45,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "준비되면 바로 연속 사격합니다.",
+      "conditionsEn": "Fire repeated shots whenever ready.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A07",
+      "preset": "setup",
+      "seed": 42017,
+      "health": 1.0,
+      "resource": 0.45,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "사용 후에도 자원 40%가 남을 때만 사용합니다.",
+      "conditionsEn": "Use it only when at least 40% resources will remain afterward.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A08",
+      "preset": "opportunity",
+      "seed": 42018,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 4,
+            "y": -2
+          },
+          "kind": 2,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A05"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "준비되면 바로 조준합니다.",
+      "conditionsEn": "Aim as soon as the skill is ready.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A08",
+      "preset": "setup",
+      "seed": 42019,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 4,
+            "y": -2
+          },
+          "kind": 2,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A05"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "표식 대상과 7m 이상 거리이며 가까운 위협이 없을 때 조준합니다.",
+      "conditionsEn": "Aim at a marked target at least 7m away when there is no nearby threat.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [
+        {
+          "skill": "A05",
+          "preset": "switch"
+        }
+      ],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A09",
+      "preset": "opportunity",
+      "seed": 42020,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -0.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0.6000000000000001,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A10"
+      ],
+      "preparation": [
+        {
+          "skill": "A10",
+          "aim": "target",
+          "settleSeconds": 0.5
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "준비되면 바로 가시 덫을 설치합니다.",
+      "conditionsEn": "Place a thorn trap whenever ready.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A09",
+      "preset": "setup",
+      "seed": 42021,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -0.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0.6000000000000001,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A10"
+      ],
+      "preparation": [
+        {
+          "skill": "A10",
+          "aim": "target",
+          "settleSeconds": 0.5
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "둔화·속박·기절·빙결이 없는 대상에게 먼저 설치합니다.",
+      "conditionsEn": "Prioritise targets without slow, root, stun or freeze.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A10",
+      "preset": "opportunity",
+      "seed": 42022,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A13"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "A13",
+          "seconds": 1
+        }
+      ],
+      "conditions": "바로 덫을 사용하여 둔화를 부여합니다.",
+      "conditionsEn": "Use the trap immediately to slow enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A10",
+      "preset": "setup",
+      "seed": 42023,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A13"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "A13",
+          "seconds": 1
+        }
+      ],
+      "conditions": "중독된 적에게 덫을 사용하여 추가 빙결을 일으킵니다.",
+      "conditionsEn": "Use the trap against poisoned enemies to also freeze them.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A11",
+      "preset": "opportunity",
+      "seed": 42024,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "3m 안으로 접근한 일반 적의 시선을 미끼로 돌립니다.",
+      "conditionsEn": "Divert nearby normal enemies within 3m toward the decoy.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A11",
+      "preset": "setup",
+      "seed": 42025,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 2,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "영웅 주변 3m 안에 일반 적 세 명 이상이 있을 때 사용합니다.",
+      "conditionsEn": "Use it when at least three normal enemies threaten the hero within 3m.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A12",
+      "preset": "opportunity",
+      "seed": 42026,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적이 3m 안으로 접근하면 피해 감소와 이동 속도 증가를 얻습니다.",
+      "conditionsEn": "Gain damage reduction and movement speed when enemies approach within 3m.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A12",
+      "preset": "setup",
+      "seed": 42027,
+      "health": 0.35,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "체력이 40% 이하일 때 사용합니다. 은신이나 무적은 아닙니다.",
+      "conditionsEn": "Use it at 40% health or below. It does not grant invisibility or invulnerability.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A13",
+      "preset": "opportunity",
+      "seed": 42028,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A05"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자신의 독화살 중독이 없는 적에게 사용합니다.",
+      "conditionsEn": "Use it on an enemy without your poison-arrow damage over time.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A13",
+      "preset": "setup",
+      "seed": 42029,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A05"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "사냥꾼의 표식이 붙은 적을 기다렸다 사용합니다.",
+      "conditionsEn": "Wait for a hunter-marked enemy before firing.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [
+        {
+          "skill": "A05",
+          "preset": "switch"
+        }
+      ],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A14",
+      "preset": "opportunity",
+      "seed": 42030,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 한 명에게도 바로 발사합니다.",
+      "conditionsEn": "Fire immediately even at a single enemy.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A14",
+      "preset": "setup",
+      "seed": 42031,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "대상 주변 3m 안에 추가 적 두 명이 모이면 발사합니다.",
+      "conditionsEn": "Fire when two additional enemies are within 3m of the target.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A15",
+      "preset": "opportunity",
+      "seed": 42032,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3,
+            "y": 2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "일반 적과의 교전에서도 바로 쇠뇌를 설치합니다.",
+      "conditionsEn": "Deploy the ballista even in fights against normal enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A15",
+      "preset": "setup",
+      "seed": 42033,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3,
+            "y": 2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스가 등장할 때까지 보존합니다.",
+      "conditionsEn": "Reserve deployment until an elite or boss appears.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A16",
+      "preset": "opportunity",
+      "seed": 42034,
+      "health": 1.0,
+      "resource": 0.25,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원 30% 이하에서 보충하고 다음 유료 스킬 비용을 줄입니다.",
+      "conditionsEn": "Restore resources at 30% or below and discount the next paid skill.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A16",
+      "preset": "setup",
+      "seed": 42035,
+      "health": 1.0,
+      "resource": 0.65,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "유료 스킬이 준비됐을 때 먼저 사용합니다.",
+      "conditionsEn": "Prepare when a paid skill is ready.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A17",
+      "preset": "opportunity",
+      "seed": 42036,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A10"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스가 포함된 고정 영역을 여러 번 타격합니다.",
+      "conditionsEn": "Strike a fixed area containing an elite or boss repeatedly.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A17",
+      "preset": "setup",
+      "seed": 42037,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "A10"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "제어된 적 세 명 이상이 포함된 고정 영역을 여러 번 타격합니다.",
+      "conditionsEn": "Strike a fixed area containing at least three controlled enemies repeatedly.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A18",
+      "preset": "opportunity",
+      "seed": 42038,
+      "health": 1.0,
+      "resource": 0.5,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "즉시 이동 속도와 그림자 추가 공격을 얻습니다.",
+      "conditionsEn": "Immediately gain movement speed and shadow follow-up attacks.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "A18",
+      "preset": "setup",
+      "seed": 42039,
+      "health": 1.0,
+      "resource": 0.5,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원 70% 이상을 기다린 뒤 사격을 강화합니다.",
+      "conditionsEn": "Wait for at least 70% resources before empowering shots.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M01",
+      "preset": "steady",
+      "seed": 42040,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "kind": 2,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 1,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "일반 적 한 명과 떨어진 정예로 시작하며, 3초 뒤 일반 적 무리가 합류합니다.",
+      "conditionsEn": "Start with one regular enemy and a separated elite. More regular enemies arrive after 3 seconds.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M01",
+      "preset": "pack",
+      "seed": 42041,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "kind": 2,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 1,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "일반 적 한 명과 떨어진 정예로 시작하며, 3초 뒤 일반 적 무리가 합류합니다.",
+      "conditionsEn": "Start with one regular enemy and a separated elite. More regular enemies arrive after 3 seconds.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M01",
+      "preset": "elite",
+      "seed": 42042,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 4,
+            "y": 3
+          },
+          "kind": 2,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 1,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "일반 적 한 명과 떨어진 정예로 시작하며, 3초 뒤 일반 적 무리가 합류합니다.",
+      "conditionsEn": "Start with one regular enemy and a separated elite. More regular enemies arrive after 3 seconds.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M02",
+      "preset": "area",
+      "seed": 42043,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 3.4,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 4,
+            "y": 4
+          },
+          "kind": 2,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [
+        {
+          "skill": "M02",
+          "aim": "target",
+          "settleSeconds": 0.3
+        }
+      ],
+      "cooldowns": [
+        {
+          "skill": "M02",
+          "seconds": 0
+        }
+      ],
+      "conditions": "기존 눈보라 안의 적과 밖의 적을 함께 배치해, 새 영역과 대상 위치 재설치를 비교합니다.",
+      "conditionsEn": "Place enemies inside and outside an existing blizzard to compare new coverage and recasting at the target.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M02",
+      "preset": "target-zone",
+      "seed": 42044,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 3.4,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 4,
+            "y": 4
+          },
+          "kind": 2,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [
+        {
+          "skill": "M02",
+          "aim": "target",
+          "settleSeconds": 0.3
+        }
+      ],
+      "cooldowns": [
+        {
+          "skill": "M02",
+          "seconds": 0
+        }
+      ],
+      "conditions": "기존 눈보라 안의 적과 밖의 적을 함께 배치해, 새 영역과 대상 위치 재설치를 비교합니다.",
+      "conditionsEn": "Place enemies inside and outside an existing blizzard to compare new coverage and recasting at the target.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M02",
+      "preset": "defend",
+      "seed": 42045,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적이 접근하는 경로에 고정 눈보라를 설치합니다.",
+      "conditionsEn": "Place a stationary blizzard on the enemy approach path.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M03",
+      "preset": "steady",
+      "seed": 42046,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "고립된 적 한 명에게도 연쇄 번개를 사용합니다.",
+      "conditionsEn": "Use chain lightning even on a single isolated enemy.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M03",
+      "preset": "linked",
+      "seed": 42047,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적들이 실제 연결 거리 안으로 모이면 공격합니다.",
+      "conditionsEn": "Attack when enemies gather within the actual chaining distance.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M04",
+      "preset": "survival",
+      "seed": 42048,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "전역 생존 조건을 만족할 때 안전한 곳으로 순간이동합니다.",
+      "conditionsEn": "Teleport to safety when the global survival condition is met.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M04",
+      "preset": "distance",
+      "seed": 42049,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "평상시에도 적과 교전 거리를 조절합니다.",
+      "conditionsEn": "Adjust combat distance even outside an emergency.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "position.distance",
+          "value": "8"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "survival.reserveSkill",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.reserveResource",
+          "value": "OFF"
+        }
+      ],
+      "globalConditions": "예시 공통 설정: 희망 거리 8m, 제자리 전투. 회피기를 긴급용으로 보존하지 않습니다.",
+      "globalConditionsEn": "Example globals: desired distance 8 m, stationary combat, no emergency-only escape reservation."
+    },
+    {
+      "skill": "M04",
+      "preset": "sparse",
+      "seed": 42050,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "피해 위험이 없는 후보 중 적이 적은 곳을 선택합니다.",
+      "conditionsEn": "Choose a low-density destination among candidates without predicted damage.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M05",
+      "preset": "prevent",
+      "seed": 42051,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "공격 예고에 맞춰 보호막을 먼저 사용합니다.",
+      "conditionsEn": "Use the shield in anticipation of an attack.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "M05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "dodge.method",
+          "value": "SKILL_FIRST"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable."
+    },
+    {
+      "skill": "M05",
+      "preset": "chain",
+      "seed": 42052,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M14"
+      ],
+      "preparation": [
+        {
+          "skill": "M14",
+          "aim": "self"
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "다른 보호막이 끝난 뒤 필요한 시점에 사용합니다.",
+      "conditionsEn": "Use it when needed after the other shield ends.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "M05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "dodge.method",
+          "value": "SKILL_FIRST"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable."
+    },
+    {
+      "skill": "M05",
+      "preset": "emergency",
+      "seed": 42053,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "체력이 낮아진 긴급 상황까지 보존합니다.",
+      "conditionsEn": "Reserve it for a low-health emergency.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "M05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot."
+    },
+    {
+      "skill": "M06",
+      "preset": "here",
+      "seed": 42054,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "현재 위치에서 가까운 위험 시전을 제어합니다.",
+      "conditionsEn": "Control a nearby dangerous cast from the current position.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M06",
+      "preset": "approach",
+      "seed": 42055,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "안전하게 접근할 수 있는 적 두 명 이상을 범위에 넣고 빙결합니다.",
+      "conditionsEn": "Approach safely and freeze at least two enemies within range.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M07",
+      "preset": "opportunity",
+      "seed": 42056,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.0,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0.19999999999999996,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 1.4,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 한 명에게도 발사하고 관통 후 화상을 남깁니다.",
+      "conditionsEn": "Fire even at one target, leaving burns after piercing.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M07",
+      "preset": "setup",
+      "seed": 42057,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.0,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0.19999999999999996,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 1.4,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "실제 사선에 적 세 명이 들어오면 발사합니다.",
+      "conditionsEn": "Fire when three enemies enter the actual line of fire.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M08",
+      "preset": "opportunity",
+      "seed": 42058,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "바로 장벽을 설치합니다. 영역 안에 머문 시간만큼 피해를 줍니다.",
+      "conditionsEn": "Place the wall immediately. Damage depends on time actually spent in its area.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M08",
+      "preset": "setup",
+      "seed": 42059,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "제어된 적이 실제 장벽 영역에 포함되게 설치합니다.",
+      "conditionsEn": "Place the wall so a controlled target is inside its actual area.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M09",
+      "preset": "opportunity",
+      "seed": 42060,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "빙하창 자체로 적에게 둔화를 부여합니다.",
+      "conditionsEn": "Apply slowing with the ice spear itself.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M09",
+      "preset": "setup",
+      "seed": 42061,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "이미 둔화된 적에게 사용하여 빙결합니다.",
+      "conditionsEn": "Use it on an already slowed enemy to freeze it.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M10",
+      "preset": "opportunity",
+      "seed": 42062,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "바로 구체를 발사합니다. 구체가 이동한 뒤 폭발합니다.",
+      "conditionsEn": "Launch the orb immediately; it explodes after travelling.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M10",
+      "preset": "setup",
+      "seed": 42063,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M02"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "제어된 대상 방향으로 발사합니다. 추적 기능은 없습니다.",
+      "conditionsEn": "Launch toward a controlled target. The orb does not home.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M11",
+      "preset": "opportunity",
+      "seed": 42064,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M03"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "M03",
+          "seconds": 2
+        }
+      ],
+      "conditions": "구체의 지속 피해와 종료 폭발을 사용합니다.",
+      "conditionsEn": "Use the orb for periodic damage and an expiry blast.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M11",
+      "preset": "setup",
+      "seed": 42065,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M03"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "M03",
+          "seconds": 2
+        }
+      ],
+      "conditions": "연쇄 번개의 쿨타임과 자원을 확보한 뒤 설치하고 실제 사용으로 충전합니다.",
+      "conditionsEn": "Deploy once chain lightning is ready and affordable, then charge it with actual casts.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M12",
+      "preset": "opportunity",
+      "seed": 42066,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M03"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "M03",
+          "seconds": 2
+        }
+      ],
+      "conditions": "준비되면 바로 관통 공격을 사용합니다.",
+      "conditionsEn": "Use the piercing attack whenever ready.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M12",
+      "preset": "setup",
+      "seed": 42067,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M03"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "M03",
+          "seconds": 2
+        }
+      ],
+      "conditions": "최근 3초 안에 자신의 연쇄 번개에 맞은 대상에게 사용하고 자원을 환급받습니다.",
+      "conditionsEn": "Hit a target struck by your chain lightning within the last three seconds to recover resources.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M13",
+      "preset": "native",
+      "seed": 42068,
+      "health": 1.0,
+      "resource": 0.25,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -2
+          },
+          "kind": 2,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원 35% 이하에서 주변이 안전할 때 50%까지 회복합니다.",
+      "conditionsEn": "Recover to 50% from at most 35% resources when the surroundings are safe.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M13",
+      "preset": "hold",
+      "seed": 42069,
+      "health": 1.0,
+      "resource": 0.25,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 0,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "피격 중에도 제자리에서 50%까지 회복합니다. 전역 긴급 대응은 충전을 중단할 수 있습니다.",
+      "conditionsEn": "Recover in place to 50% even while taking damage. Global emergency responses can interrupt charging.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M13",
+      "preset": "retreat",
+      "seed": 42070,
+      "health": 1.0,
+      "resource": 0.25,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 0,
+            "y": -2
+          },
+          "kind": 2,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "5m 거리 확보를 최대 2초 시도한 뒤 90%까지 회복합니다. 위험이 다시 가까워지면 중단합니다.",
+      "conditionsEn": "Try for up to two seconds to gain 5m of space, then recover to 90%. Stop if danger approaches again.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M14",
+      "preset": "opportunity",
+      "seed": 42071,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "보호막이 없는 교전에서 결계를 설치합니다.",
+      "conditionsEn": "Deploy the ward in combat when no shield remains.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M14",
+      "preset": "setup",
+      "seed": 42072,
+      "health": 0.45,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 3,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "체력 50% 이하에서 결계를 설치합니다. 결계 안에서 피해 감소와 보호막을 얻습니다.",
+      "conditionsEn": "Deploy at 50% health or below for a shield and damage reduction inside the ward.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M15",
+      "preset": "opportunity",
+      "seed": 42073,
+      "health": 1.0,
+      "resource": 0.2,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M07",
+        "M09",
+        "M12"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원 30% 이하에서 보충합니다.",
+      "conditionsEn": "Restore resources at 30% or below.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M15",
+      "preset": "setup",
+      "seed": 42074,
+      "health": 1.0,
+      "resource": 1,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M07",
+        "M09",
+        "M12"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "화염·냉기·번개의 유료 일반 스킬을 갖추면 사용합니다. 각 원소의 첫 사용에 할인이 소비됩니다.",
+      "conditionsEn": "Use it with paid fire, cold and lightning skills equipped. Each element consumes its discount on its first use.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M16",
+      "preset": "opportunity",
+      "seed": 42075,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "한 명에게도 사용하여 최초 끌어당김과 지속 피해를 줍니다.",
+      "conditionsEn": "Use it even on one enemy for an initial pull and lasting damage.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "PULL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M16",
+      "preset": "setup",
+      "seed": 42076,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "실제 영역에 적 세 명 이상이 모이면 사용합니다.",
+      "conditionsEn": "Use it when three or more enemies gather inside the actual area.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "PULL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M17",
+      "preset": "opportunity",
+      "seed": 42077,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 3.3,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예를 포함한 적 무리와 싸웁니다.",
+      "conditionsEn": "Fight a group containing an elite.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M17",
+      "preset": "group",
+      "seed": 42078,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 3.3,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 한 명과 먼저 싸우며, 3초 뒤 추가 적 세 명이 합류합니다.",
+      "conditionsEn": "Fight one enemy first. Three more arrive after 3 seconds.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M18",
+      "preset": "opportunity",
+      "seed": 42079,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M07",
+        "M09",
+        "M12"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "M07",
+          "seconds": 3
+        },
+        {
+          "skill": "M09",
+          "seconds": 3
+        },
+        {
+          "skill": "M12",
+          "seconds": 3
+        }
+      ],
+      "conditions": "강적 앞에서 즉시 보호막·공격 강화·비용 감소를 얻습니다.",
+      "conditionsEn": "Immediately gain a shield, attack power and reduced costs against a strong target.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "M18",
+      "preset": "setup",
+      "seed": 42080,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2.5,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 3.6,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 2.5,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "M07",
+        "M09",
+        "M12"
+      ],
+      "preparation": [],
+      "cooldowns": [
+        {
+          "skill": "M07",
+          "seconds": 3
+        },
+        {
+          "skill": "M09",
+          "seconds": 3
+        },
+        {
+          "skill": "M12",
+          "seconds": 3
+        }
+      ],
+      "conditions": "세 원소 스킬의 쿨타임과 필요한 자원을 확보한 뒤 강화하고 원소 순환 폭발을 일으킵니다.",
+      "conditionsEn": "Empower once all three elemental skills are ready and affordable, then trigger elemental-cycle bursts.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W01",
+      "preset": "center",
+      "seed": 42081,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 무리의 중심으로 이동하며 회전합니다.",
+      "conditionsEn": "Move into the centre of the pack while spinning.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W01",
+      "preset": "edge",
+      "seed": 42082,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 무리의 가장자리를 유지하며 회전합니다.",
+      "conditionsEn": "Spin while staying at the edge of the pack.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W01",
+      "preset": "stand",
+      "seed": 42083,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "현재 자리에서 3초씩 끊어 회전합니다.",
+      "conditionsEn": "Spin in place in three-second bursts.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W02",
+      "preset": "advance",
+      "seed": 42084,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "가까운 적 두 명 이상을 향해 바로 도약합니다.",
+      "conditionsEn": "Leap directly into a nearby pack of at least two enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W02",
+      "preset": "space",
+      "seed": 42085,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "6m 거리를 최대 2초 동안 확보한 뒤 도약합니다. 확보하지 못해도 현재 거리에서 공격합니다.",
+      "conditionsEn": "Try to gain 6m of space for up to two seconds before leaping. Attack from the current distance if spacing fails.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W02",
+      "preset": "escape",
+      "seed": 42086,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "평소에는 보존하고 전역 생존 조건에 따라 안전한 곳으로 이탈합니다.",
+      "conditionsEn": "Reserve it for escaping to safety when the global survival condition is met.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W03",
+      "preset": "group",
+      "seed": 42087,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0,
+            "y": 2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "여러 적을 포함하는 방향으로 분쇄 일격을 사용합니다.",
+      "conditionsEn": "Aim the crushing strike through several enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W03",
+      "preset": "elite",
+      "seed": 42088,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0,
+            "y": 2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스를 우선하여 공격 방향을 정합니다.",
+      "conditionsEn": "Prioritise an elite or boss when choosing the strike direction.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W04",
+      "preset": "group",
+      "seed": 42089,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "가까운 적 두 명 이상을 기절시킵니다.",
+      "conditionsEn": "Stun at least two nearby enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W04",
+      "preset": "interrupt",
+      "seed": 42090,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "범위 안에서 실제 위험 시전을 준비하는 적을 방해합니다.",
+      "conditionsEn": "Interrupt an enemy preparing a dangerous cast within range.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W04",
+      "preset": "retreat",
+      "seed": 42091,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "위기 상황에서 추격자를 제어하고 거리를 벌립니다.",
+      "conditionsEn": "Control pursuers and gain distance in an emergency.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "W04"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot."
+    },
+    {
+      "skill": "W05",
+      "preset": "prevent",
+      "seed": 42092,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "피격 예고에 맞춰 미리 보호막을 사용합니다.",
+      "conditionsEn": "Use a shield in anticipation of incoming damage.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "W05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "dodge.method",
+          "value": "SKILL_FIRST"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable."
+    },
+    {
+      "skill": "W05",
+      "preset": "chain",
+      "seed": 42093,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "W16"
+      ],
+      "preparation": [
+        {
+          "skill": "W16",
+          "aim": "self"
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "다른 보호막과 도약 방어 효과가 끝난 뒤 필요한 시점에 사용합니다.",
+      "conditionsEn": "Wait for the other shield and leap defence to end before using it when needed.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "W05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        },
+        {
+          "id": "position.mode",
+          "value": "STAND"
+        },
+        {
+          "id": "position.engage",
+          "value": "STAND"
+        },
+        {
+          "id": "dodge.method",
+          "value": "SKILL_FIRST"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable."
+    },
+    {
+      "skill": "W05",
+      "preset": "emergency",
+      "seed": 42094,
+      "health": 0.25,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "체력이 낮아진 긴급 상황에서 사용합니다.",
+      "conditionsEn": "Use it in a low-health emergency.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [
+        {
+          "id": "survival.defenseSkill",
+          "value": "W05"
+        },
+        {
+          "id": "survival.order",
+          "value": "DEFENSE,WALK,ESCAPE"
+        },
+        {
+          "id": "dodge.ground.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "ALWAYS"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "ON"
+        },
+        {
+          "id": "survival.lowHpPercent",
+          "value": "30"
+        }
+      ],
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot."
+    },
+    {
+      "skill": "W06",
+      "preset": "resource",
+      "seed": 42095,
+      "health": 1.0,
+      "resource": 0.05,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "W03"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "공격할 자원이 부족할 때 함성으로 자원을 보충합니다.",
+      "conditionsEn": "Restore resources with a shout when paid attacks cannot be afforded.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [
+        {
+          "skill": "W03",
+          "preset": "elite"
+        }
+      ],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W06",
+      "preset": "strong",
+      "seed": 42096,
+      "health": 1.0,
+      "resource": 1,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "W03"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스가 공격 범위에 들어오면 함성으로 공격을 강화합니다.",
+      "conditionsEn": "Empower attacks once an elite or boss enters attack range.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W07",
+      "preset": "native",
+      "seed": 42097,
+      "health": 1.0,
+      "resource": 1,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "같은 적의 낙인이 끝나갈 때 갱신합니다.",
+      "conditionsEn": "Refresh the brand as it expires on the same target.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W07",
+      "preset": "opportunity",
+      "seed": 42098,
+      "health": 1.0,
+      "resource": 0.4,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원이 50% 이하일 때 낙인을 사용합니다.",
+      "conditionsEn": "Apply the brand when resources are at 50% or below.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W08",
+      "preset": "opportunity",
+      "seed": 42099,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -2.2,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "거리가 가까워도 준비되면 적을 끌어옵니다.",
+      "conditionsEn": "Pull the enemy when ready, even at close range.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "PULL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W08",
+      "preset": "setup",
+      "seed": 42100,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "4m 이상 떨어진 적을 기다렸다 끌어옵니다.",
+      "conditionsEn": "Wait for an enemy at least 4m away before pulling.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "PULL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W09",
+      "preset": "native",
+      "seed": 42101,
+      "health": 1.0,
+      "resource": 0.85,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "강적 또는 가까운 적 세 명 이상에게 출혈을 부여합니다.",
+      "conditionsEn": "Apply bleeding to a strong target or at least three nearby enemies.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W09",
+      "preset": "opportunity",
+      "seed": 42102,
+      "health": 1.0,
+      "resource": 0.85,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자신의 출혈이 없는 적 한 명에게도 사용합니다.",
+      "conditionsEn": "Use it even on one target without your bleeding effect.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W10",
+      "preset": "opportunity",
+      "seed": 42103,
+      "health": 0.7,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "W09"
+      ],
+      "preparation": [
+        {
+          "skill": "W09",
+          "aim": "target"
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "자신이 만든 출혈을 바로 회수해 추가 피해와 회복을 얻습니다.",
+      "conditionsEn": "Immediately reap your bleeding for extra damage and healing.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "CASHOUT",
+        "HEAL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W10",
+      "preset": "setup",
+      "seed": 42104,
+      "health": 0.7,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "W09"
+      ],
+      "preparation": [
+        {
+          "skill": "W09",
+          "aim": "target"
+        }
+      ],
+      "cooldowns": [],
+      "conditions": "출혈이 1초 이하로 남거나 체력이 40% 이하일 때 회수합니다.",
+      "conditionsEn": "Reap when bleeding has at most one second left or health is at 40% or below.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "CASHOUT",
+        "HEAL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W11",
+      "preset": "opportunity",
+      "seed": 42105,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -2.2,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "가까운 적을 관통하며 공격과 방어 효과를 얻습니다.",
+      "conditionsEn": "Pass through nearby enemies to attack and gain defence.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W11",
+      "preset": "setup",
+      "seed": 42106,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": 2,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "3m 이상 떨어진 적에게 접근할 때 사용합니다.",
+      "conditionsEn": "Use it to approach enemies at least 3m away.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W12",
+      "preset": "opportunity",
+      "seed": 42107,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 1,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "준비 동작을 보이는 적 앞에서 자세를 취합니다. 반격은 실제 막기 성공 시 발생합니다.",
+      "conditionsEn": "Take the stance against an enemy winding up. A counter requires an actual successful block.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W12",
+      "preset": "setup",
+      "seed": 42108,
+      "health": 0.45,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 1,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "체력이 50% 이하일 때 사용합니다. 반격은 실제 막기 성공 시 발생합니다.",
+      "conditionsEn": "Use it at 50% health or below. A counter requires a successful block.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W13",
+      "preset": "opportunity",
+      "seed": 42109,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "근처 적 한 명에게도 고리를 사용합니다.",
+      "conditionsEn": "Use the ring even on a single nearby enemy.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "PULL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W13",
+      "preset": "setup",
+      "seed": 42110,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "실제 공격 범위에 적 세 명 이상이 모이면 사용합니다.",
+      "conditionsEn": "Use it when at least three enemies are within the actual area.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "PULL"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W14",
+      "preset": "opportunity",
+      "seed": 42111,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.0,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0.19999999999999996,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 1.4,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "먼저 보이는 적에게 파동을 발사합니다.",
+      "conditionsEn": "Fire the wave at the first available enemy.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W14",
+      "preset": "setup",
+      "seed": 42112,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.0,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 0.19999999999999996,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": 1.4,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "실제 직선 공격 범위에 적 세 명이 들어오면 발사합니다.",
+      "conditionsEn": "Fire when three enemies are in the actual line attack.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W15",
+      "preset": "opportunity",
+      "seed": 42113,
+      "health": 1.0,
+      "resource": 0.2,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원이 30% 이하일 때 지속 회복을 시작합니다.",
+      "conditionsEn": "Start restoring resources when they are at 30% or below.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W15",
+      "preset": "setup",
+      "seed": 42114,
+      "health": 1.0,
+      "resource": 0.65,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "자원이 75% 이하일 때 미리 지속 회복을 시작합니다.",
+      "conditionsEn": "Start restoring resources early, at 75% or below.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE",
+        "RESOURCE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W16",
+      "preset": "opportunity",
+      "seed": 42115,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 3,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "보호막이 없는 교전에서 사용합니다.",
+      "conditionsEn": "Use it in combat when no shield remains.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W16",
+      "preset": "setup",
+      "seed": 42116,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 19,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적에게 둔화를 받은 뒤 보호막을 만들고 둔화를 해제합니다.",
+      "conditionsEn": "After being slowed by an enemy, create a shield and remove the slowing.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W17",
+      "preset": "opportunity",
+      "seed": 42117,
+      "health": 1,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예 또는 보스 앞에서 선조의 지속 공격과 피해 감소를 받습니다. 선조는 적의 공격을 대신 받지 않습니다.",
+      "conditionsEn": "Gain ancestral attacks and damage reduction against an elite or boss. Ancestors do not absorb enemy attacks.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W17",
+      "preset": "setup",
+      "seed": 42118,
+      "health": 0.45,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "체력이 50% 이하일 때 선조를 불러 공격과 생존을 보완합니다.",
+      "conditionsEn": "Summon ancestors at 50% health or below to support attacks and survival.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W18",
+      "preset": "elite",
+      "seed": 42119,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1.0,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "정예를 포함한 적 무리와 싸웁니다.",
+      "conditionsEn": "Fight a group containing an elite.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W18",
+      "preset": "opportunity",
+      "seed": 42120,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1.0,
+            "y": 0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 1
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 3,
+          "health": 3500
+        }
+      ],
+      "companions": [],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "적 한 명과 먼저 싸우며, 3초 뒤 추가 적 세 명이 합류합니다.",
+      "conditionsEn": "Fight one enemy first. Three more arrive after 3 seconds.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    },
+    {
+      "skill": "W18",
+      "preset": "setup",
+      "seed": 42121,
+      "health": 1.0,
+      "resource": 1.0,
+      "hero": {
+        "x": -4.0,
+        "y": -2.0
+      },
+      "enemies": [
+        {
+          "position": {
+            "x": -1.8,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": -1.0
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -0.7,
+            "y": 0.10000000000000009
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        },
+        {
+          "position": {
+            "x": -1.8,
+            "y": 1.2000000000000002
+          },
+          "kind": 0,
+          "elite": -1,
+          "spawnAt": 0.0,
+          "health": 3500.0
+        }
+      ],
+      "companions": [
+        "W06",
+        "W03",
+        "W04"
+      ],
+      "preparation": [],
+      "cooldowns": [],
+      "conditions": "전투 함성 후 심판을 사용하고 분쇄 일격·지면 강타의 강화 효과를 보여 줍니다.",
+      "conditionsEn": "Shout before judgement, then show its empowerment of Crushing Strike and Ground Slam.",
+      "observations": [
+        "CAST_START",
+        "ACTION_RELEASE"
+      ],
+      "companionPresets": [
+        {
+          "skill": "W06",
+          "preset": "strong"
+        }
+      ],
+      "globals": [],
+      "globalConditions": "",
+      "globalConditionsEn": ""
+    }
+  ]
+}

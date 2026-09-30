@@ -25,6 +25,7 @@ namespace Hellscript
         // List.Sort(IComparer) allocates on every call (measured in the Editor, whose corlib matches the player's).
         static readonly Comparison<(float d,Emitter e)> ByDistance=(a,b)=>a.d.CompareTo(b.d);
         readonly Camera camera;
+        readonly bool isolated;readonly Vector3 offset;readonly int layer;
         readonly GameObject root;
         readonly VolumeProfile profile;
         readonly float baseBloom;
@@ -48,13 +49,14 @@ namespace Hellscript
         public bool ShakeHeld;
         bool CanShake=>ShakeEnabled&&PlayerPrefs.GetInt(ReduceMotionKey,0)==0;
 
-        public WorldLighting(Camera camera,bool mobile)
+        public WorldLighting(Camera camera,bool mobile,bool isolated=false,Vector3 offset=default,int layer=0)
         {
-            this.camera=camera;root=new GameObject("World lighting");
-            foreach(var light in Object.FindObjectsByType<Light>())if(light.type==LightType.Directional){Moonlight=light;break;}
+            this.isolated=isolated;this.offset=offset;this.layer=layer;this.camera=camera;root=new GameObject("World lighting");
+            if(!isolated)foreach(var light in Object.FindObjectsByType<Light>())if(light.type==LightType.Directional){Moonlight=light;break;}
             if(Moonlight==null){Moonlight=new GameObject("Moonlight").AddComponent<Light>();Moonlight.type=LightType.Directional;}
             // The shadows-off main light variant is stripped from builds, so the key light always casts shadows.
-            Moonlight.shadows=LightShadows.Soft;
+            if(isolated){Moonlight.transform.SetParent(root.transform,false);Moonlight.type=LightType.Point;Moonlight.range=50;Moonlight.cullingMask=1<<layer;Moonlight.shadows=LightShadows.None;}
+            else Moonlight.shadows=LightShadows.Soft;
             HeroLight=PointLight("Hero light");
             for(int i=0;i<(mobile?MobilePool:PcPool);i++)pool.Add(PointLight("Emitter light "+i));
             var data=camera.GetUniversalAdditionalCameraData();data.renderPostProcessing=true;data.dithering=true;
@@ -63,13 +65,14 @@ namespace Hellscript
             profile=ScriptableObject.CreateInstance<VolumeProfile>();profile.name="World post (runtime)";
             if(source!=null)foreach(var component in source.components){var copy=Object.Instantiate(component);copy.name=component.name;profile.components.Add(copy);}
             if(profile.TryGet<Bloom>(out var bloom))baseBloom=bloom.intensity.value;
-            Volume=new GameObject("World post").AddComponent<Volume>();Volume.transform.SetParent(root.transform,false);Volume.isGlobal=true;Volume.priority=1;Volume.sharedProfile=profile;
+            if(isolated)data.volumeLayerMask=1<<layer;
+            Volume=new GameObject("World post").AddComponent<Volume>();Volume.transform.SetParent(root.transform,false);Volume.isGlobal=true;Volume.priority=1;Volume.sharedProfile=profile;if(isolated)Volume.gameObject.layer=layer;
             RenderPipelineManager.beginCameraRendering+=BeginCamera;RenderPipelineManager.endCameraRendering+=EndCamera;
         }
         Light PointLight(string name)
         {
             var light=new GameObject(name).AddComponent<Light>();light.transform.SetParent(root.transform,false);
-            light.type=LightType.Point;light.shadows=LightShadows.None;light.enabled=false;return light;
+            light.type=LightType.Point;light.shadows=LightShadows.None;light.enabled=false;if(isolated)light.cullingMask=1<<layer;return light;
         }
         public void Apply(int field)=>Apply(FieldLook.Field(field));
         public void ApplyTown()=>Apply(FieldLook.Town);
@@ -77,9 +80,10 @@ namespace Hellscript
         public void Apply(FieldLook look)
         {
             Look=look;
-            RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=look.sky;RenderSettings.ambientEquatorColor=look.equator;RenderSettings.ambientGroundColor=look.ground;
-            RenderSettings.fog=true;RenderSettings.fogMode=FogMode.Linear;RenderSettings.fogColor=look.fog;RenderSettings.fogStartDistance=look.fogStart;RenderSettings.fogEndDistance=look.fogEnd;
+            if(!isolated){RenderSettings.ambientMode=AmbientMode.Trilight;RenderSettings.ambientSkyColor=look.sky;RenderSettings.ambientEquatorColor=look.equator;RenderSettings.ambientGroundColor=look.ground;
+            RenderSettings.fog=true;RenderSettings.fogMode=FogMode.Linear;RenderSettings.fogColor=look.fog;RenderSettings.fogStartDistance=look.fogStart;RenderSettings.fogEndDistance=look.fogEnd;}
             Moonlight.color=look.moon;Moonlight.intensity=look.moonIntensity;Moonlight.transform.rotation=Quaternion.Euler(look.moonPitch,look.moonYaw,0);
+            if(isolated){Moonlight.transform.position=offset+new Vector3(0,8,-2);Moonlight.intensity=5;}
             camera.backgroundColor=look.background;
             HeroLight.color=look.hero;HeroLight.intensity=look.heroIntensity;HeroLight.range=look.heroRange;
             if(profile.TryGet<ColorAdjustments>(out var grade)){grade.saturation.value=look.saturation;grade.contrast.value=look.contrast;grade.postExposure.value=look.exposure;grade.colorFilter.value=look.filter;}
@@ -91,7 +95,7 @@ namespace Hellscript
         public void RegisterEmitter(Transform t,Color color,float range,float intensity)
         {if(t!=null)emitters.Add(new Emitter{t=t,color=color,range=range,intensity=intensity,seed=emitters.Count*7.31f+.5f});}
         // Drops every emitter and hides the hero light until the next Tick (the stage that owned them is gone).
-        public void UnregisterAll(){emitters.Clear();HeroLight.enabled=false;foreach(var light in pool)light.enabled=false;}
+        public void UnregisterAll(){emitters.Clear();if(HeroLight!=null)HeroLight.enabled=false;foreach(var light in pool)if(light!=null)light.enabled=false;}
         public void Tick(Vector3 heroPosition,float dt)
         {
             clock+=dt;shakeLeft-=dt;
@@ -137,7 +141,7 @@ namespace Hellscript
         public void Dispose()
         {
             RenderPipelineManager.beginCameraRendering-=BeginCamera;RenderPipelineManager.endCameraRendering-=EndCamera;
-            foreach(var component in profile.components)Release(component);Release(profile);Release(root);
+            if(profile!=null)foreach(var component in profile.components)Release(component);Release(profile);Release(root);
         }
         static void Release(Object value){if(value==null)return;if(Application.isPlaying)Object.Destroy(value);else Object.DestroyImmediate(value);}
     }

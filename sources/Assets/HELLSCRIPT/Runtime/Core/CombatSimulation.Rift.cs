@@ -43,6 +43,12 @@ namespace Hellscript
         void InitializeRift(bool fresh,RiftObjectiveKind? forcedObjective=null)
         {
             State.exploration??=new RiftExplorationState();State.exploration.enemies??=new System.Collections.Generic.List<EnemyObservation>();
+            if(fresh&&IsSkillPreview)
+            {
+                State.layout=new RiftLayout{start=previewScenario.hero,fingerprint="SKILL_PREVIEW_V1",gateOpen=true};
+                State.layout.rooms.Add(new RiftRoom{index=0,position=Vector2.zero,size=new Vector2(16,16),role=RiftRoomRole.Entrance});
+                State.position=previewScenario.hero;
+            }
             if(fresh&&IsTutorial){State.layout=TutorialMap();State.position=State.layout.start;}
             if(fresh&&State.training<0)
             {

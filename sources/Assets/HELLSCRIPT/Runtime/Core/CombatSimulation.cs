@@ -11,9 +11,9 @@ namespace Hellscript
         public readonly RunState State;
         public readonly HeroSave Hero;
         public bool OwnedTraining=>State.training>=0&&State.trainingUsesOwnedHero;
-        bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero&&!IsTutorial;
+        bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero&&!IsTutorial&&!IsSkillPreview;
         public int EffectiveLevel=>FullSkillTraining?ClassSkills.LevelCap(Hero):Hero.level;
-        public float TimeLimit=>State.training<0||IsTrainingGround?LiveOpsConfig.For(State).timeLimitSeconds:OwnedTraining?60:300;
+        public float TimeLimit=>IsSkillPreview?float.PositiveInfinity:State.training<0||IsTrainingGround?LiveOpsConfig.For(State).timeLimitSeconds:OwnedTraining?60:300;
         LiveOpsRiftSettings Tuning=>LiveOpsConfig.For(State);
         readonly AccountSave account;
         readonly GameCatalog catalog;
@@ -33,8 +33,9 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null,SkillPresetScenario combatPreview=null)
         {
+            previewScenario=combatPreview;
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
             bool owned=restore!=null?restore.training>=0&&restore.trainingUsesOwnedHero:ownedTraining&&training>=0;
             bool ground=(restore?.training??training)==TrainingGround.Training;
@@ -89,6 +90,7 @@ namespace Hellscript
         }
         void SpawnDungeon()
         {
+            if(IsSkillPreview){SpawnPreviewEnemies();return;}
             if(IsTutorial){SpawnTutorial();return;}
             if(IsTrainingGround){SpawnTrainingGround();return;}
             if(OwnedTraining){SpawnOwnedTraining();return;}
@@ -186,7 +188,7 @@ namespace Hellscript
         }
         void TickCombat(float dt)
         {
-            ResolveCombatDeaths();if(SettleCombatOutcome())return;
+            TickPreviewSpawns();ResolveCombatDeaths();if(SettleCombatOutcome())return;
             State.guideShrineTime=Mathf.Max(0,State.guideShrineTime-dt);State.resolveShrineTime=Mathf.Max(0,State.resolveShrineTime-dt);
             State.time+=dt;State.statistics.ticks++;State.potionCd=Mathf.Max(0,State.potionCd-dt);State.actionCd=Mathf.Max(0,State.actionCd-dt);
             TickPotionTimers(dt);
@@ -218,7 +220,7 @@ namespace Hellscript
             if(SettleCombatOutcome())return;
             TickChests(dt);TickSeals(dt);TickOfferings();if(!string.IsNullOrEmpty(State.navigationError))return;
             TickShrine(dt);if(!string.IsNullOrEmpty(State.navigationError))return;Loot(dt);
-            if(State.training>=0&&!IsTutorial&&!IsTrainingGround&&State.enemies.All(e=>e.dead))Finish(true,"훈련 완료",CombatFinish.TargetsDefeated);
+            if(State.training>=0&&!IsTutorial&&!IsTrainingGround&&!IsSkillPreview&&State.enemies.All(e=>e.dead))Finish(true,"훈련 완료",CombatFinish.TargetsDefeated);
         }
         void Sense()
         {

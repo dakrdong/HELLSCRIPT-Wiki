@@ -9528,6 +9528,20 @@
           "cost": "함성이 없거나 늦으면 궁극기도 늦어집니다.",
           "costEn": "Delays the ultimate without a timely shout.",
           "patches": []
+        },
+        {
+          "id": "elite",
+          "name": "강적 집중 심판",
+          "nameEn": "Judge strong enemies",
+          "rule": "ELITE",
+          "value": 0,
+          "target": "",
+          "placement": "",
+          "benefit": "조건을 만족한 대상이 실제 공격 범위에 포함될 때 사용합니다.",
+          "benefitEn": "Cast when a qualifying target is in the actual attack area.",
+          "cost": "조건을 만족하지 않으면 다른 행동을 먼저 합니다.",
+          "costEn": "Take other actions while the condition is not met.",
+          "patches": []
         }
       ],
       "metrics": [
@@ -10927,6 +10941,20 @@
           "benefitEn": "Waits until elemental empowerment is active.",
           "cost": "강화 공급이 없으면 사용하지 않습니다.",
           "costEn": "Does not cast without an empowerment source.",
+          "patches": []
+        },
+        {
+          "id": "group",
+          "name": "네 명 이상 광역 붕괴",
+          "nameEn": "Collapse a group of four",
+          "rule": "GROUP",
+          "value": 4,
+          "target": "",
+          "placement": "",
+          "benefit": "조건을 만족한 대상이 실제 공격 범위에 포함될 때 사용합니다.",
+          "benefitEn": "Cast when a qualifying target is in the actual attack area.",
+          "cost": "조건을 만족하지 않으면 다른 행동을 먼저 합니다.",
+          "costEn": "Take other actions while the condition is not met.",
           "patches": []
         }
       ],

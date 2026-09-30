@@ -27,6 +27,8 @@ namespace Hellscript
             foreach(var p in load.presetSelections)
             {
                 Skill(p.scope,load.heroClass);
+                // Preserve every executable option. A retired label becomes an explicit Custom tab.
+                if(HuntEdictQuickPresets.Retired(p.scope,p.preset))p.preset=HuntEdictQuickPresets.Custom;
                 if(p.preset!=HuntEdictQuickPresets.Custom&&!HuntEdictQuickPresets.For(p.scope).Any(q=>q.id==p.preset))throw new ArgumentException("Unknown skill preset.");
             }
             load.presetSelections=load.presetSelections.OrderBy(p=>p.scope,StringComparer.Ordinal).ToList();

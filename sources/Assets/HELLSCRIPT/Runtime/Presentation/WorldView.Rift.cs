@@ -198,7 +198,7 @@ namespace Hellscript
         {
             foreach(var c in run.layout.chests)
             {
-                if(!chestViews.TryGetValue(c.id,out var v))continue;v.root.SetActive(c.discovered&&RiftVisibility.Get(run,game.Combat.Map).Visible(c.position));
+                if(!chestViews.TryGetValue(c.id,out var v))continue;v.root.SetActive(c.discovered&&RiftVisibility.Get(run,Combat.Map).Visible(c.position));
                 float angle=c.phase==ChestPhase.Opened?-105:c.phase==ChestPhase.Opening?-8*Mathf.Sin(c.progress*20):0;
                 if(v.model)
                 {
@@ -210,7 +210,7 @@ namespace Hellscript
             }
             foreach(var s in run.layout.shrines)
             {
-                if(!shrineViews.TryGetValue(s.id,out var root))continue;root.SetActive(s.discovered&&RiftVisibility.Get(run,game.Combat.Map).Visible(s.position));
+                if(!shrineViews.TryGetValue(s.id,out var root))continue;root.SetActive(s.discovered&&RiftVisibility.Get(run,Combat.Map).Visible(s.position));
                 root.transform.Find("Blessing light").gameObject.SetActive(s.phase!=ShrinePhase.Used&&s.phase!=ShrinePhase.Exhausted);
             }
         }

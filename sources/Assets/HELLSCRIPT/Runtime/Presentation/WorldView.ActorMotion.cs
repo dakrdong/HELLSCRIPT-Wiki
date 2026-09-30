@@ -151,7 +151,7 @@ namespace Hellscript
         // New damage since the last frame: enemy hits flash and throw debris, hero hits flash and shake the camera.
         void PresentCombatFeedback(RunState run)
         {
-            var library=Fx;float maxHealth=Mathf.Max(1,game.Combat.Stats.hp);float strongest=0;
+            var library=Fx;float maxHealth=Mathf.Max(1,Combat.Stats.hp);float strongest=0;
             GameAudio.ReadNew(run.damageEvents,ref lastDamageSeen,d=>
             {
                 if(d.time<run.time-.5f)return;

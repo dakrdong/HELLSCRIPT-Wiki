@@ -29,11 +29,16 @@ namespace Hellscript
             game=controller;
             viewCamera=Camera.main;
             if(viewCamera==null){var obj=new GameObject("Hellscript Camera");viewCamera=obj.AddComponent<Camera>();obj.tag="MainCamera";obj.AddComponent<AudioListener>();}
+            Initialize(new CombatPresentationContext(()=>controller.Combat,viewCamera,()=>controller.EffectiveSpeed,()=>controller.Store.Data.Hero));
+        }
+        public void Initialize(CombatPresentationContext presentation)
+        {
+            context=presentation;viewCamera=context.Camera;
             viewCamera.orthographic=true;viewCamera.orthographicSize=12.5f;viewCamera.nearClipPlane=.1f;viewCamera.farClipPlane=180;
             viewCamera.clearFlags=CameraClearFlags.SolidColor;
-            viewCamera.transform.rotation=Quaternion.LookRotation(new Vector3(-12,-25,18));
+            viewCamera.transform.rotation=Quaternion.LookRotation(Isolated?new Vector3(0,-22,15):new Vector3(-12,-25,18));
             // Background, ambient, fog, the key light and post-processing come from FieldLook presets.
-            lighting=new WorldLighting(viewCamera,WorldLighting.MobileQuality);lighting.ApplyLegacy(0);
+            lighting=new WorldLighting(viewCamera,WorldLighting.MobileQuality,Isolated,context.Offset,context.Layer);lighting.ApplyLegacy(0);
             stone=Mat("Basalt",new Color(.17f,.21f,.25f));darkStone=Mat("Obsidian",new Color(.07f,.1f,.14f));trim=Mat("Aged Brass",new Color(.51f,.34f,.17f));
             ember=Mat("Amber",new Color(1,.46f,.1f),true);blue=Mat("Frost",new Color(.2f,.7f,1),true);red=Mat("Danger",new Color(.9f,.1f,.14f),true);
             green=Mat("Poison",new Color(.3f,.9f,.38f),true);purple=Mat("Arcane",new Color(.6f,.3f,1),true);
@@ -65,6 +70,7 @@ namespace Hellscript
         }
         public void BuildDungeon(RunState run)
         {
+            if(Isolated){BuildPreviewArena(run);return;}
             ClearDungeon();presentedRunId=run.id;world=new GameObject("Rift Runtime");
             // Field = theme until RiftLayout.Field lands; apply before the fog view forces its black background.
             if(run.layout.legacy)lighting.ApplyLegacy(run.theme);else lighting.Apply(run.layout.Field);
@@ -97,7 +103,7 @@ namespace Hellscript
             BindRiftTerrain();
             // Camera-following field particles; they live on the world root's effects library and end with it.
             Fx?.Ambience(run.layout.legacy?FieldLook.LegacyTheme(run.theme).particles:FieldLook.Field(run.layout.Field).particles);
-            hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false,HeroBodyArt((int)game.Store.Data.Hero.heroClass));
+            hero=CreateBody("Hero",(int)context.Hero.heroClass,false,false,HeroBodyArt((int)context.Hero.heroClass));
             hero.transform.position=Position(run.position);viewCamera.transform.position=CameraPosition(run.position);FigureOf(hero);
             SeedCombatFeedback(run);SeedClassSkillFx(run);
         }
@@ -145,29 +151,29 @@ namespace Hellscript
             var line=go.AddComponent<LineRenderer>();line.sharedMaterial=RiftMaterial(mat);line.useWorldSpace=false;line.positionCount=49;line.loop=false;line.widthMultiplier=width;
             for(int i=0;i<49;i++){float a=i*Mathf.PI/24;line.SetPosition(i,new Vector3(Mathf.Cos(a)*radius,0,Mathf.Sin(a)*radius));}return go;
         }
-        static Vector3 Position(Vector2 p) => new Vector3(p.x,0,p.y);
-        Vector3 CameraPosition(Vector2 p) => Position(p)+new Vector3(12,25,-18);
+        Vector3 Position(Vector2 p) => new Vector3(p.x,0,p.y)+(context?.Offset??Vector3.zero);
+        Vector3 CameraPosition(Vector2 p) => Position(p)+(Isolated?new Vector3(0,22,-15):new Vector3(12,25,-18));
         public void Present(RunState run,float dt)
         {
             if(presentationSuspended||world==null)return;
             using var sample=PresentationMetrics.World.Auto();
             PresentationMetrics.WorldCalls++;
-            if(world==null)return;bool frozen=run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError);elapsed+=frozen?0:dt*game.EffectiveSpeed;motionStep=frozen?0:dt*game.EffectiveSpeed;
+            if(world==null)return;bool frozen=run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError);elapsed+=frozen?0:dt*PresentationSpeed;motionStep=frozen?0:dt*PresentationSpeed;
             PresentExploredGeometry(run);
-            Vector3 hp=Position(run.position)+Vector3.up*game.Combat.HeroAirHeight;Vector3 movement=hp-hero.transform.position;movement.y=0;
+            Vector3 hp=Position(run.position)+Vector3.up*Combat.HeroAirHeight;Vector3 movement=hp-hero.transform.position;movement.y=0;
             hero.transform.position=snapPresentation?hp:Vector3.Lerp(hero.transform.position,hp,Mathf.Min(1,dt*22));
             var currentFacing=CurrentHeroFacing(run);
             if(snapPresentation&&currentFacing.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.LookRotation(currentFacing);
             else if(movement.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(movement),dt*14);
             // The primitive figure bobs as it walks; a model body walks with its rig.
             if(!HasModelBody(hero)){var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(movement.sqrMagnitude>.001f?Mathf.Sin(elapsed*13)*.08f:0),0);}
-            var anchor=stagedFocus??run.position;
+            var anchor=Isolated?Vector2.zero:stagedFocus??run.position;
             viewCamera.transform.position=snapPresentation?CameraPosition(anchor):Vector3.Lerp(viewCamera.transform.position,CameraPosition(anchor),dt*(stagedFocus.HasValue?2.4f:5));
             ApplyBattleViewport();
             foreach(var enemy in run.enemies)
             {
                 if(enemy.dead){if(actors.TryGetValue(enemy.id,out var dead)){StartDying(dead,enemy,run);actors.Remove(enemy.id);}continue;}
-                if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!game.Combat.Map.LineClear(run.position,enemy.position))
+                if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!Combat.Map.LineClear(run.position,enemy.position))
                 {if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);continue;}
                 if(!actors.TryGetValue(enemy.id,out var actor))
                 {string art=EnemyBodyArt(enemy);actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss,art);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
@@ -178,7 +184,7 @@ namespace Hellscript
                 if(enemy.boss&&actor.transform.Find("Stagger")==null){var ring=Ring(actor.transform,Vector3.up*.12f,1.1f,blue,.09f);ring.name="Stagger";}
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
                 actor.SetActive(true);actor.transform.position=snapPresentation?Position(enemy.position):Vector3.Lerp(actor.transform.position,Position(enemy.position),Mathf.Min(1,dt*20));
-                Vector3 facing=Position(enemy.brain.facing);facing.y=0;if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
+                Vector3 facing=new Vector3(enemy.brain.facing.x,0,enemy.brain.facing.y);if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
                 PoseEnemy(actor,enemy,run);AttackMotes(Fx,actor,enemy,run);
                 var bar=actor.transform.Find("Health");bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);
             }
@@ -203,9 +209,10 @@ namespace Hellscript
                 v.transform.position=Position(fx.position)+Vector3.up*.1f;v.transform.localScale=Vector3.one*(fx.delay>0?.85f+Mathf.Sin(elapsed*8)*.08f:1);
                 var snow=v.transform.Find("Snow swirl");if(snow!=null)snow.localRotation=Quaternion.Euler(0,elapsed*80,0);
             }
+            PresentPreviewEnvironment();
             foreach(var id in new List<int>(hazards.Keys))if(!active.Contains(id)){Destroy(hazards[id]);hazards.Remove(id);}
             for(int i=effects.Count-1;i>=0;i--)
-            {var fx=effects[i];float step=frozen?0:dt*game.EffectiveSpeed;fx.life-=step;if(fx.life<=0){Destroy(fx.go);effects.RemoveAt(i);}else{fx.go.transform.localScale=fx.scale*(1+(1-fx.life/fx.total)*fx.growth);fx.go.transform.position+=fx.velocity*step;fx.go.transform.Rotate(0,fx.spin*step,0);}}
+            {var fx=effects[i];float step=frozen?0:dt*PresentationSpeed;fx.life-=step;if(fx.life<=0){Destroy(fx.go);effects.RemoveAt(i);}else{fx.go.transform.localScale=fx.scale*(1+(1-fx.life/fx.total)*fx.growth);fx.go.transform.position+=fx.velocity*step;fx.go.transform.Rotate(0,fx.spin*step,0);}}
         }
         public void Effect(Vector2 origin,Vector2 target,int kind,float amount)
         {
@@ -213,7 +220,7 @@ namespace Hellscript
             using var sample=PresentationMetrics.Effect.Auto();
             PresentationMetrics.EffectCalls++;
             if(world==null)return;
-            var run=game.Combat.State;
+            var run=Combat.State;
             if(kind==30||kind==31||kind==32){if(!CanDisplayEnemyMarker(run,origin))return;}
             else if(kind==6||kind==14||kind==18||kind==25)
             {if(!CanDisplayEnemyMarker(run,origin)||!CanDisplayEnemyMarker(run,target))return;}
@@ -228,16 +235,17 @@ namespace Hellscript
             else go=Ring(world.transform,Position(kind==0||kind==4||kind==16||kind==20?origin:target)+Vector3.up*.15f,kind==24?2:Mathf.Clamp(amount,.8f,4),mat,kind==0?.16f:.09f);
             float life=kind==24?amount:kind==0?.22f:.45f;effects.Add(new VisualFx{go=go,life=life,total=life,scale=go.transform.localScale});
         }
-        void LateUpdate(){zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
+        void LateUpdate(){if(Isolated)return;zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
         void ApplyBattleViewport()
         {
             if(viewCamera==null||presentationSuspended)return;
+            if(Isolated){viewCamera.rect=new Rect(0,0,1,1);viewCamera.orthographicSize=Mathf.Max(8.5f,8.5f/Mathf.Max(.3f,viewCamera.aspect));return;}
             // The shake offset is added only while the camera renders (WorldLighting.BeginCamera), so every gameplay read of
             // the camera stays exact; it is held while the settings world frames the hero and dropped on a snap.
             lighting.ShakeHeld=settingsWorldOpen;if(snapPresentation)lighting.StopShake();
             if(settingsWorldOpen&&HasPresentedPlayer){ApplySettingsWorld();return;}
             var viewport=GameplayViewport;viewCamera.rect=viewport;viewCamera.ResetAspect();viewCamera.orthographicSize=GameplayHalfHeight(viewport)*zoomNow;
         }
-        void OnDestroy(){ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);if(lighting!=null)lighting.Dispose();DisposeArt();}
+        void OnDestroy(){ClearDungeon();ClearTownPresentation();foreach(var mat in materials.Values)if(mat!=null)Destroy(mat);if(lighting!=null)lighting.Dispose();DisposeArt();}
     }
 }

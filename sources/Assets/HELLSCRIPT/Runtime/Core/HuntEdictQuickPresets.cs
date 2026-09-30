@@ -24,7 +24,7 @@ namespace Hellscript
         public IEnumerable<EdictStylePick> For(string heroClass)=>picks.Where(p=>string.IsNullOrEmpty(p.classes)||p.classes.Split(',').Contains(heroClass));
     }
     [Serializable] public sealed class EdictQuickPresetCatalog
-    { public int version; public EdictQuickPreset[] presets; public EdictStyle[] styles; }
+    { public int version; public EdictQuickPreset[] presets; public EdictStyle[] styles; public SkillPresetSelection[] retired=Array.Empty<SkillPresetSelection>(); }
 
     // Quick presets are recipes for existing option values, never a second combat/save format.
     // Each recipe fully defines its own scope and is applied to a detached draft atomically.
@@ -61,6 +61,8 @@ namespace Hellscript
                 throw new InvalidOperationException("Invalid combat-style catalog.");
         }
         public static IReadOnlyList<EdictStyle> Styles=>Catalog.styles;
+        // Only published, explicitly retired IDs migrate. Never accept arbitrary unknown metadata.
+        public static bool Retired(string scope,string id)=>Catalog.retired.Any(p=>p.scope==scope&&p.preset==id);
         public static EdictStyle Style(string id)=>Catalog.styles.SingleOrDefault(s=>s.id==id)??throw new ArgumentException("Unknown combat style: "+id);
         // The groups a style decides for this class, in catalog order.
         public static string[] StyleScopes(string heroClass)=>Catalog.styles[0].For(heroClass).Select(p=>p.scope).ToArray();
