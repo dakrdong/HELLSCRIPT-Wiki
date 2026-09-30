@@ -4,6 +4,33 @@
 
 마을의 균열 상호작용에서 출전 준비 화면을 연다. 승인된 HTML 시안의 단계 선택·피로도·물약·활성 스킬·궁극기를 실제 캐릭터와 저장 거래에 연결했다. 소탕·훈련·반복 설정은 기존 균열 관리 메뉴로 이어진다.
 
+## 2026-09-30 스크롤 없는 새 배치
+
+새 [HTML 시안](../../Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html)의 배치를 그대로 옮겼다. 가로·세로 어느 화면에서도 본문이 스크롤되지 않고 모든 정보와 조작이 한 화면에 보인다.
+
+| 방향 | 배치 |
+| --- | --- |
+| 가로 | 세 열. ① 원화·제목·최초 보상 상자·단계 선택·규칙 문구 ② 피로도·장착 물약 세 칸(세로로 쌓음) ③ 사용 스킬 네 칸·궁극기 막대·소탕/훈련/반복 설정·전투 기록 |
+| 세로 | 한 열. 원화 띠(제목 · 단계 선택 · 상자, 아래에 규칙 문구) → 피로도 → 물약 세 칸 → 스킬 네 칸과 궁극기(다섯 번째 칸) → 서비스 버튼 |
+
+- **화면 안에 맞추는 방식:** 공통 창의 본문에 화면 높이와 같은 한 칸만 두고 그 안을 직접 배치한다. 내용이 높이보다 크면 글자·아이콘·간격을 하나의 배율로 함께 줄여 다시 그려 스크롤을 만들지 않는다. 남는 높이는 구역 사이 간격으로 나눈다. 글자 크기가 115%를 넘거나 세로 폭이 좁으면 원화 띠의 제목·상자와 단계 카드를 두 줄로 나눈다. 한 줄 문구는 칸에 맞춰 글자 크기를 줄인다.
+- **공통 창 유지:** `ContentWindowView`의 제목줄·탐색 영역·고정 행동 영역을 그대로 쓴다. 시안과 다른 위치는 아래 세 가지뿐이며 이유를 남긴다.
+  - 입장 버튼 두 개(일반 · 1.5x)는 시안의 오른쪽 열 하단이 아니라 공통 고정 행동 영역(창 하단 전체 폭)에 둔다. 설정 확인 중·포탈로 이동·균열로 다시 시작 같은 기존 상태 버튼을 같은 자리에서 유지하기 위해서다. 각 버튼은 이름과 부제 두 줄이다.
+  - 준비 상태 문구(출전 준비 완료 · 피로도 회복 안내)와 가방 정리 필요 버튼은 탐색 영역, 심연 주화 잔액은 제목줄에 둔다.
+  - 소탕·훈련·반복 설정과 전투 기록은 시안에 없는 기존 기능이라 스킬 열 아래(세로에서는 스킬 아래 한 줄)에 유지한다. 저장된 포탈 안내와 다음 콘텐츠 목표도 원화 아래 규칙 문구 옆에 유지한다.
+- **제거한 것:** “출전 준비” 제목, “성소 › 균열의 문” 경로 표시, “일반 입장 1배속 · 일시정지 중에도 피로도 차감” 줄(도움말 팝업에 같은 내용이 있다). 캐릭터·1인 탐험 표기는 균열 제목 아래로 옮겼다.
+- **피로도 칸:** 남은 시간, 오늘 회복 횟수, 일일·유료 게이지와 범례, 초기화 시각과 남은 시간, 이월 안내를 시안과 같은 순서로 그린다. 유료 회복분은 보라색이다. 피로도가 0이면 게이지 자리에 회복 버튼이 나온다.
+- **문구:** 새 문구 13개를 `en.txt`에 영어와 함께 추가하고, 더 이상 쓰지 않는 5개를 지웠다.
+- **거래와 저장:** 바뀐 것은 배치뿐이다. 물약·스킬 교체, 회복, 1.5배속 입장, 포탈 복귀·재시작은 기존 `GameStore` 거래를 그대로 쓰며 버튼 이름(`rift-enter-normal`, `rift-enter-fast`, `rift-potion-*`, `rift-skill-*` 등)도 유지했다.
+
+### 검증, 2026-09-30
+
+- Unity Edit Mode 중 바꾼 부분과 관련된 8개 묶음 **169개**가 통과했다(`RiftEntryTests` 20 · `LocalizationTests` 33 · `StoredLocalizationTests` 19 · `CombatJournalTests` 18 · `SharedUiTests` 23 · `UiButtonTests` 17 · `RiftContentUnlockTests` 20 · `RewardBoxTests` 19). 전체 Edit Mode 검사는 다시 돌리지 않았다. `python3 tools/check_ui_contract.py`와 `python3 tools/test_ui_contract.py`(11개)도 통과했다.
+- macOS 개발 빌드(컴파일 오류 0)에서 440×956 · 956×440 · 1600×900 · 1600×1000 · 2100×900, 한국어·영어, 글자 100%·150%의 **20개 조합**을 확인했다. 조합마다 본문이 스크롤을 요구하지 않는지, 모든 버튼이 본문 안에 있고 서로 겹치지 않는지, 글자가 칸을 넘지 않는지(글자 크기를 자동으로 줄이는 칸은 제외) 검사했다(모두 통과). [조작 결과](RiftEntryLayoutEvidence/runtime.txt) · [포탈 결과](RiftEntryLayoutEvidence/portal-runtime.txt) · [별도 프로세스 재실행](RiftEntryLayoutEvidence/portal-restart.txt) · [검증 요약](RiftEntryLayoutEvidence/validation.json) · [Edit Mode 결과](RiftEntryLayoutEvidence/editmode.xml).
+- 같은 빌드에서 1000단계 목록, 물약·스킬 교체, 취소·유료 입장·피로도 회복, 저장된 포탈로 이동·다시 시작(20개 조합의 버튼 표시 포함)의 실제 조작이 통과했다.
+- 화면: [세로 · 한국어 100%](RiftEntryLayoutEvidence/entry-440x956-ko-100.png) · [세로 · 영어 150%](RiftEntryLayoutEvidence/entry-440x956-en-150.png) · [가로 · 한국어 100%](RiftEntryLayoutEvidence/entry-956x440-ko-100.png) · [가로 · 영어 150%](RiftEntryLayoutEvidence/entry-956x440-en-150.png) · [1600×900](RiftEntryLayoutEvidence/entry-1600x900-ko-100.png) · [2100×900](RiftEntryLayoutEvidence/entry-2100x900-ko-100.png) · [포탈 세로](RiftEntryLayoutEvidence/portal-440-ko-100.png) · [포탈 가로 영어 150%](RiftEntryLayoutEvidence/portal-956-en-150.png).
+- **하지 않았거나 일부만 한 것:** 모바일 실기기 검증은 하지 않았다. 마을에서 걸어가 균열 지기 앞에 서는 것까지는 통과했지만, 이번 스모크 픽스처에서는 마을의 상호작용 버튼이 활성화되어 있지 않아 실제 포인터 클릭 대신 같은 진입 호출로 창을 열었다. 포탈이 있는 상태의 스킬 프리셋 활성화 확인은 프리셋 탭에 접근할 수 없어 건너뛰었다. 오래된 스모크 전제(튜토리얼 완료 표시, 스킬 트리, 비동기 입장 대기, 1000단계 스크롤 거리)는 이번에 고쳤다. 스크롤 유지 확인은 스크롤이 없어졌으므로 “스크롤 없이 맞음” 확인으로 바꿨다. 전체 Edit Mode 검사와 런타임 스모크 묶음은 마지막 병합 뒤 한 번만 돌린다.
+
 ## 2026-09-29 포탈 복귀와 재입장
 
 전투 화면과 관찰 메뉴의 귀환 동작은 **포탈로 복귀**입니다. 확인하면 현재 균열을 실패로 종료하지 않고, 진행 상황을 저장한 뒤 성소로 돌아옵니다. 튜토리얼과 훈련의 기존 종료 방식은 유지합니다.
@@ -32,7 +59,7 @@
 
 ## 화면과 데이터 소유
 
-`RiftEntryWindow`는 신규 콘텐츠 생성기로 만든 진입점이다. `ContentWindowView`의 제목·닫기·탐색·스크롤 본문·고정 입장 행동·안전 영역을 사용하고, 데이터 출처는 `EquipmentViewSource.Owned`다. 세로는 원화와 준비 항목을 위아래로 배치하며, 가로는 원화를 왼쪽에 고정하고 준비 항목을 오른쪽에서 독립적으로 스크롤한다. 선택 팝업도 같은 공통 창의 크기 제한 옵션을 사용한다.
+`RiftEntryWindow`는 신규 콘텐츠 생성기로 만든 진입점이다. `ContentWindowView`의 제목·닫기·탐색·스크롤 본문·고정 입장 행동·안전 영역을 사용하고, 데이터 출처는 `EquipmentViewSource.Owned`다. 배치는 위의 [2026-09-30 새 배치](#2026-09-30-스크롤-없는-새-배치)를 따르며 본문은 스크롤하지 않는다. 선택 팝업도 같은 공통 창의 크기 제한 옵션을 사용한다.
 
 `UiTheme`, `UiFonts`, `SkillIconView`, `PotionArt`를 공유한다. 심연 주화와 성소 원화는 기존 리소스다. 물약 36종은 보석상에 등록된 원본 PNG를 공유한다. [물약 출처와 해시](RiftEntryEvidence/potion-provenance.json)를 보존하며 새 이미지 생성이나 원본의 검토 상태 변경은 하지 않았다. 상자는 황동·올리브 테마의 코드 기반 도형이다.
 
@@ -84,7 +111,7 @@ Unity Edit Mode 통합 검사 232개와 저장 호환성 후속 검사 147개가
 
 [검증 요약](RiftEntryEvidence/validation.json), [조작 결과](RiftEntryEvidence/runtime.txt), [별도 프로세스 저장 복원](RiftEntryEvidence/restart.txt)을 따른다. macOS 개발 플레이어에서 실제 마을 이동과 uGUI 레이캐스트·포인터 입력으로 입장·교체·취소·차감·회복을 확인했다. 세로 440×956, 가로 956×440, PC 1600×900·1600×1000·2100×900에서 한국어·영어와 글자 100·150%의 20개 조합을 검사했다.
 
-- [세로 준비 화면](RiftEntryEvidence/entry-440-ko-100.png) · [가로·영어·150%](RiftEntryEvidence/entry-956-en-150.png)
+- [세로 준비 화면](RiftEntryLayoutEvidence/entry-440x956-ko-100.png) · [가로·영어·150%](RiftEntryLayoutEvidence/entry-956x440-en-150.png)
 - [1000단계 보상 목록](RiftEntryEvidence/rewards-tier-1000.png) · [수호의 물약](RiftEntryEvidence/diamond-potion.png)
 - [스킬 상세](RiftEntryEvidence/skill-detail.png) · [유료 피로도](RiftEntryEvidence/paid-fatigue.png) · [열린 상자](RiftEntryEvidence/claimed-chest.png)
 

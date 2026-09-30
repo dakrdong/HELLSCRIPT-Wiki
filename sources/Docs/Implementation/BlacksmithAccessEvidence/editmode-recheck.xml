@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="3" result="Passed" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="2.0367321">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="4751" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="2.036732" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="6484" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/blacksmith-access-fix/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="4751" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="2.001501" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="84669" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="6485" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="4751" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="1.973127" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="6486" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="4751" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="1.949383" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1346" name="BlacksmithTests" fullname="Hellscript.Tests.BlacksmithTests" classname="Hellscript.Tests.BlacksmithTests" runstate="Runnable" testcasecount="50" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="1.357549" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="1353" name="ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot" fullname="Hellscript.Tests.BlacksmithTests.ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot" classname="Hellscript.Tests.BlacksmithTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:23Z" duration="1.352186" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1351" name="ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot(False)" fullname="Hellscript.Tests.BlacksmithTests.ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot(False)" methodname="ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot" classname="Hellscript.Tests.BlacksmithTests" runstate="Runnable" seed="144384606" result="Passed" start-time="2026-09-30 07:56:21Z" end-time="2026-09-30 07:56:22Z" duration="0.793475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1352" name="ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot(True)" fullname="Hellscript.Tests.BlacksmithTests.ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot(True)" methodname="ForgeTransactionsPreserveAnUnfinishedRiftAndItsSlotSnapshot" classname="Hellscript.Tests.BlacksmithTests" runstate="Runnable" seed="1880490868" result="Passed" start-time="2026-09-30 07:56:22Z" end-time="2026-09-30 07:56:23Z" duration="0.550741" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="2182" name="ContentUnlockTests" fullname="Hellscript.Tests.ContentUnlockTests" classname="Hellscript.Tests.ContentUnlockTests" runstate="Runnable" testcasecount="42" result="Passed" start-time="2026-09-30 07:56:23Z" end-time="2026-09-30 07:56:23Z" duration="0.421301" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2220" name="U25_ExecutionGuardsKeepUnlocksAndAllowForgingWithASavedRift" fullname="Hellscript.Tests.ContentUnlockTests.U25_ExecutionGuardsKeepUnlocksAndAllowForgingWithASavedRift" methodname="U25_ExecutionGuardsKeepUnlocksAndAllowForgingWithASavedRift" classname="Hellscript.Tests.ContentUnlockTests" runstate="Runnable" seed="2143179469" result="Passed" start-time="2026-09-30 07:56:23Z" end-time="2026-09-30 07:56:23Z" duration="0.414214" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

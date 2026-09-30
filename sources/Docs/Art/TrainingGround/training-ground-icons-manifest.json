@@ -1,0 +1,104 @@
+{
+ "surface": "built-in image_gen via Codex CLI (imagegen skill), codex exec -m gpt-6-astra",
+ "requestedBy": "user request 2026-09-30: new 2D image resources for the training ground screens must be drawn by Codex, not hand-made in code",
+ "verifiedModel": null,
+ "provenance": "candidate_model_unknown",
+ "productionApproved": false,
+ "alpha": "native PNG alpha; no chroma key, background removal, recolouring or resizing",
+ "references": [
+  "icon-hourglass.png and icon-repeat-runs.png from the rift result (style only: bold, solid, rounded, no outline)"
+ ],
+ "review": "Accepted 2026-09-30 by Claude: four solid off-white silhouettes with transparent surroundings (edge alpha at most 1), readable tinted at 12, 16 and 24 px. The game tints them at runtime: the pencil beside each skill, the rule book on the Hunt Edict button, the remove mark on an enemy portrait and the boss crown. The crown has rounded finials instead of the pointed peaks the prompt asked for; it reads as a crown and was kept.",
+ "note": "Codex returned 1254x1254 files with a 253 white fill instead of the requested 1024 and pure white; both are kept unchanged. Unity imports them at 128 px (TrainingGroundArtImporter, ResourceTextureBudget).",
+ "promptFile": "Docs/Art/TrainingGround/training-ground-icons-prompt.txt",
+ "assets": [
+  {
+   "id": "icon-edit",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Icons/icon-edit.png",
+   "sha256": "cb504b3bd4a4d009f33b387caed69a701fa80ada75fab0617d9027d9916bc15d",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\nStyle reference: the supplied hourglass and repeat-runs pictograms use bold, solid white silhouettes with rounded ends and no outline. Match their weight and style exactly, keeping the new symbol clean and simple.\nReturn a transparent PNG with preserved native alpha: one isolated symbol, fully transparent surrounding and internal empty space, no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow.\nAsset: icon-edit\nSubject: A pencil lying on a 45 degree diagonal, the sharpened tip at the lower left and the flat end at the upper right. Show a thin transparent gap between the flat end cap and the pencil body so the two parts read separately. It marks an \"edit\" button.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f11a-4ef3-7713-907a-32fe167fc840/exec-8412a6a5-72bb-46c1-8f9c-8a2c21142689.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.7944,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    0,
+    117,
+    1150,
+    1217
+   ],
+   "model": "unknown",
+   "status": "in use"
+  },
+  {
+   "id": "icon-book",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Icons/icon-book.png",
+   "sha256": "0ac99231d548fab3f40a00c3854cf7748deb6282c25996f538bcd6b52bdbddef",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\nStyle reference: the supplied hourglass and repeat-runs pictograms use bold, solid white silhouettes with rounded ends and no outline. Match their weight and style exactly, keeping the new symbol clean and simple.\nReturn a transparent PNG with preserved native alpha: one isolated symbol, fully transparent surrounding and internal empty space, no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow.\nAsset: icon-book\nSubject: An open book seen from the front: two facing pages that curve slightly upward from a narrow transparent gap at the spine in the middle, each page a solid area with a gently rounded outer corner. It marks the Hunt Edict (rule book) button.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f11a-4ef3-7713-907a-32fe167fc840/exec-348e268d-55c6-499a-b569-d77b97287499.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.5732,
+   "maxAlphaWithin40pxOfEdge": 0,
+   "visibleBounds": [
+    57,
+    182,
+    1193,
+    1044
+   ],
+   "model": "unknown",
+   "status": "in use"
+  },
+  {
+   "id": "icon-close",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Icons/icon-close.png",
+   "sha256": "122403aa24ba5b2b35d47bdf075f063d9fb3e901726911a55132b698943639d0",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\nStyle reference: the supplied hourglass and repeat-runs pictograms use bold, solid white silhouettes with rounded ends and no outline. Match their weight and style exactly, keeping the new symbol clean and simple.\nReturn a transparent PNG with preserved native alpha: one isolated symbol, fully transparent surrounding and internal empty space, no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow.\nAsset: icon-close\nSubject: A bold X made of two crossing straight strokes of equal length with rounded ends, centred. It is drawn over painted artwork to remove an item, so keep the strokes thick.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f11a-4ef3-7713-907a-32fe167fc840/exec-0db2ee12-27d2-4017-a3ff-a8c46d3d926a.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.7418,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    35,
+    51,
+    1235,
+    1151
+   ],
+   "model": "unknown",
+   "status": "in use"
+  },
+  {
+   "id": "icon-crown",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Icons/icon-crown.png",
+   "sha256": "60558e0e16bb3e8e065469733b8e4a5c34114ece407cb78a7e15c27e45f3336c",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\nStyle reference: the supplied hourglass and repeat-runs pictograms use bold, solid white silhouettes with rounded ends and no outline. Match their weight and style exactly, keeping the new symbol clean and simple.\nReturn a transparent PNG with preserved native alpha: one isolated symbol, fully transparent surrounding and internal empty space, no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow.\nAsset: icon-crown\nSubject: A royal crown with three pointed peaks (the middle peak the tallest) and a flat band along the bottom, one solid shape with a thin transparent gap between the peaks’ base and the band. It marks a boss.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f11a-4ef3-7713-907a-32fe167fc840/exec-6883ed02-eb6d-428a-968f-5fd06c3ff0df.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.7094,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    25,
+    51,
+    1215,
+    1213
+   ],
+   "model": "unknown",
+   "status": "in use"
+  }
+ ]
+}

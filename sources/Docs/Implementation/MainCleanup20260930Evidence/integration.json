@@ -1,0 +1,106 @@
+{
+  "baseMain": "47091ff34f78e8e7dabcfa79138d3428bd1fcc3d",
+  "integratedHead": "d70084cf2f9cd6271e05edf9f2ac0aa3882a2d75",
+  "branchHeads": {
+    "claude/blacksmith-html-layout": "f63ece168d878672a84d570af94640fea9705547",
+    "claude/rift-entry-html-layout": "534fe5a6145480f1817f5ed6a6b77ba9ef6105b0",
+    "claude/rift-victory-native": "e0c059871139e9d79cb15296779c2b5c1840ffb5",
+    "claude/training-ground-compact": "c867dce1778db53ab92afe37f0b7baae3542e4ab",
+    "codex/blacksmith-access-fix": "15304f85851c398fe102b8570ab9e9b05091ea1f",
+    "codex/edict-combat-previews": "3b2a298f5ecb47cdc80b82ed04002355cd1a2a3d",
+    "codex/item-art-coverage": "9a22067ef9f67a5e6383b75b6b972aaee6535fcc"
+  },
+  "allHeadsAreAncestorsOfMain": true,
+  "backupPath": "/Users/t8g-2410-pn-005/.codex/backups/hellscript-20260930-175608-main-cleanup",
+  "backupVerifiedFiles": 15787,
+  "backupBytes": 6941132947,
+  "initialWorktrees": 7,
+  "initialLocalBranches": 8,
+  "initialRemoteBranches": 7,
+  "resolutions": [
+    "Retain player text-size option removal and default-size-only acceptance",
+    "Combine RiftSkillShareView result metrics and optional training edit button",
+    "Preserve training icon and rift-result texture size limits",
+    "Preserve newer rift-victory repeat icons and section title styling",
+    "Union divergent shared UI history revisions"
+  ],
+  "validation": {
+    "uiContract": "PASS",
+    "uiContractTests": 11,
+    "editMode": {
+      "total": 4878,
+      "passed": 4830,
+      "initialFailed": 48,
+      "skipped": 0,
+      "fullRuns": 1,
+      "initialIntegrationRegressionFixed": 1,
+      "focusedLocalizationPassed": 1,
+      "preExistingFailuresReproducedOnBaseMain": 47,
+      "completeNUnitReport": true,
+      "cliWrapperExit": "TEST_TIMED_OUT after complete NUnit report",
+      "report": "editmode.xml",
+      "baselineReport": "failure-classification.json"
+    },
+    "native": {
+      "uniquePassedChecks": 8,
+      "initialFailedChecks": 1,
+      "failedChecksRecheckedAndPassed": 1,
+      "blacksmith": {
+        "accessCases": 32,
+        "raycastClicks": 96,
+        "persistedEnhancementsDuringSavedRift": 10
+      },
+      "textSize": "default only",
+      "physicalMobileTested": false,
+      "failedHelperCorrection": "Check persisted rewardBoxes claim state instead of obsolete hero.riftProgress chest field"
+    },
+    "wiki": "Final build/check and Python/Node verification follows this validation record",
+    "nativeBuild": {
+      "result": "Succeeded",
+      "buildErrors": 0,
+      "sourceFilesMatched": 646,
+      "projectIsTemporarySourceCopy": true,
+      "recheckBuildResult": "Succeeded with zero build errors; failed helper only"
+    }
+  },
+  "physicalMobileTested": false,
+  "localCleanup": {
+    "worktrees": 1,
+    "localBranches": [
+      "main"
+    ],
+    "managedBlacksmithWorktree": "archived with recoverable app snapshot",
+    "remoteCleanup": "pending main push"
+  },
+  "finalValidationScope": {
+    "editMode": "full suite once after all production merges",
+    "native": [
+      "blacksmith fresh/saved-rift transaction and portal return",
+      "rift entry layout, edits and independent restart",
+      "rift portal checkpoint and independent restart",
+      "training setup, dropdowns, combat, charts, pause, result and edict persistence",
+      "rift result, shared contribution cards, real loot actions and independent restart"
+    ],
+    "viewportSizes": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textSize": "default only",
+    "unchangedPrototypeEvidence": "reuse branch browser-validation results; no duplicate browser smoke",
+    "static": [
+      "UI ownership",
+      "11 UI contract tests",
+      "wiki build/check",
+      "Python wiki tests",
+      "Node wiki UI test",
+      "mandatory main CI"
+    ]
+  }
+}

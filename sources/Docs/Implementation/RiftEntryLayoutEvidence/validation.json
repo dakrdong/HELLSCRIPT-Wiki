@@ -1,0 +1,83 @@
+{
+  "date": "2026-09-30",
+  "editMode": {
+    "total": 169,
+    "passed": 169,
+    "failed": 0,
+    "fixtures": {
+      "Hellscript.Tests.CombatJournalTests": {
+        "total": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "Hellscript.Tests.LocalizationTests": {
+        "total": 33,
+        "passed": 33,
+        "failed": 0
+      },
+      "Hellscript.Tests.RewardBoxTests": {
+        "total": 19,
+        "passed": 19,
+        "failed": 0
+      },
+      "Hellscript.Tests.RiftContentUnlockTests": {
+        "total": 20,
+        "passed": 20,
+        "failed": 0
+      },
+      "Hellscript.Tests.RiftEntryTests": {
+        "total": 20,
+        "passed": 20,
+        "failed": 0
+      },
+      "Hellscript.Tests.SharedUiTests": {
+        "total": 23,
+        "passed": 23,
+        "failed": 0
+      },
+      "Hellscript.Tests.StoredLocalizationTests": {
+        "total": 19,
+        "passed": 19,
+        "failed": 0
+      },
+      "Hellscript.Tests.UiButtonTests": {
+        "total": 17,
+        "passed": 17,
+        "failed": 0
+      }
+    },
+    "note": "Focused run on a disposable clone of the project; not the full suite."
+  },
+  "macOSDevelopmentBuild": {
+    "errors": 0,
+    "entrySmoke": "runtime.txt",
+    "portalSmoke": "portal-runtime.txt",
+    "portalRestart": "portal-restart.txt",
+    "layoutCombinations": 20,
+    "sizes": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textScale": [
+      100,
+      150
+    ]
+  },
+  "sharedUiChecks": {
+    "check_ui_contract.py": "pass",
+    "test_ui_contract.py": "11 tests pass"
+  },
+  "notRun": [
+    "physical mobile device",
+    "full Edit Mode suite and full smoke batch (run once after the last merge of main)",
+    "town pointer interaction (the town button was not active in the smoke fixture)",
+    "skill-preset activation during a portal (the preset tab was not reachable in the fixture)"
+  ]
+}

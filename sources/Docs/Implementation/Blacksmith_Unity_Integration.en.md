@@ -6,6 +6,16 @@ Date: 2026-09-22
 
 2026-09-23 addition: the fourth [core crafting](Core_Crafting.en.md) tab selects legendary/set recipes and uses Abyssal Coins to set minimum affix quality. The legacy core-crafting entry now routes here; rare crafting retains its previous screen. Rules and historical verification of the three original tabs below remain preserved.
 
+## 2026-09-30 forge access with an unfinished rift
+
+Players can return to town through a portal and use the blacksmith before completing the rift. A saved rift no longer blocks NPC dialogue, forge access, equipment enhancement, affix reroll, slot upgrades, workstation expansion, instant job completion, masterwork/reset, rare crafting or core crafting. Players return to town and approach the NPC rather than opening the forge directly from combat/training. Forge access still checks the actual town position and NPC distance and reuses the existing Korean and English proximity message.
+
+Feature unlocks, item ownership, current quotes, balances, bag space and atomic save-failure rejection remain enforced. Forging preserves the saved rift's identity, progress and slot-growth snapshot without deleting or completing it. Players can resume the same rift after updating owned equipment and currency. Existing restrictions for other services, such as shop purchases, remain outside this change.
+
+`-hellscriptBlacksmithAccessSmoke` uses a fresh isolated guest save to verify Lv.1 NPC/forge access, saved-rift dialogue, actual enhancement buttons and persisted quote costs, rift resumption and forge access after a controller portal return. Coverage includes portrait/landscape, PC 16:9/16:10/21:9, Korean/English and text sizes 100%/150%. `-hellscriptBlacksmithPortalSmoke` can rerun the failed portal segment separately.
+
+The [validation summary](BlacksmithAccessEvidence/validation.json) and [access record](BlacksmithAccessEvidence/blacksmith-access.txt) distinguish initial checks from necessary retries. Of 200 Edit Mode checks, 197 initially passed; after updating the old blocking-policy assertion and an invalid test input, all [three repeated checks](BlacksmithAccessEvidence/editmode-recheck.xml) passed. The [initial report](BlacksmithAccessEvidence/editmode.xml) is retained. Native macOS development-player evidence is distinct from physical-mobile validation.
+
 ## Scope and ownership
 
 The existing town blacksmith opens the native uGUI forge through the interaction button or PC E key inside the existing 2.8 m range. Affix reroll, slot upgrades and equipment enhancement use actual `GameStore` equipment, character progression and account currency. Crafting retains its existing screen. Awakening, masterworking, sockets and invested-material ledgers remain intact. Persistence uses the project's existing local development adapter.

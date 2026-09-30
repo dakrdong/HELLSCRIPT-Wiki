@@ -210,11 +210,13 @@ namespace Hellscript.Tests
             Assert.IsFalse(ItemQuality.Advance(account,item,ref rng));Assert.AreEqual(before,Json(account));
         }
         [Test]
-        public void AnActiveRiftBlocksBothMasterworkAndResetEvenThroughTheCoreService()
+        public void MasterworkAndResetPreserveAnUnfinishedRift()
         {
             var item=Gear();Enhanced(item);Assert.IsTrue(ItemQuality.Advance(account,item,ref rng));
-            var sim=new CombatSimulation(account,catalog,1,seed:99171);account.suspendedRun=sim.State;
-            string before=Json(account);Assert.IsFalse(ItemQuality.Advance(account,item,ref rng));Assert.IsFalse(ItemQuality.Reset(account,item));Assert.AreEqual(before,Json(account));
+            var sim=new CombatSimulation(account,catalog,1,seed:99171);sim.State.portal=true;sim.State.paused=true;account.suspendedRun=sim.State;
+            string checkpoint=Json(sim.State);Assert.IsTrue(ItemQuality.Advance(account,item,ref rng));Assert.AreEqual(2,item.masterwork);
+            Assert.IsTrue(ItemQuality.Reset(account,item));Assert.AreEqual(0,item.masterwork);Assert.AreEqual(5,item.enhancement);
+            Assert.AreSame(sim.State,account.suspendedRun);Assert.AreEqual(checkpoint,Json(account.suspendedRun));
         }
         [Test]
         public void MaterialOverflowRejectsResetWithoutDestroyingTheInvestment()

@@ -4,6 +4,33 @@ Date: 2026-09-23 · [한국어](Rift_Entry.md)
 
 The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. Existing sweep, training and repeat settings remain accessible through rift services.
 
+## 2026-09-30 New no-scroll layout
+
+The window now follows the layout of the new [HTML prototype](../../Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html). In landscape and portrait the body never scrolls and all information and controls are visible on one screen.
+
+| Orientation | Layout |
+| --- | --- |
+| Landscape | Three columns: (1) art, title, first-clear chest, tier selection and rule text; (2) fatigue and the three equipped potions, stacked; (3) four active skills, the ultimate bar, the sweep/training/repeat settings and combat records |
+| Portrait | One column: art strip (title · tier selection · chest, rule text below) → fatigue → three potions → four skills plus the ultimate as a fifth cell → service buttons |
+
+- **How it fits:** the shared window's body holds a single cell exactly as tall as the viewport, and the page is laid out inside it. If the content is taller, text, icons and gaps shrink together by one scale and the page is drawn again, so it never scrolls. Spare height becomes gaps between sections. When text is above 115% or the portrait width is narrow, the art strip puts the title and chest on one row and the tier card on the next. Single-line labels shrink to fit their cell.
+- **Shared window kept:** the title bar, navigation area and fixed action area of `ContentWindowView` are used unchanged. Only three placements differ from the prototype:
+  - The two entry buttons (normal and 1.5×) sit in the shared fixed action area across the bottom, not at the bottom of the right column, so the existing state buttons (checking settings, enter portal, restart rift) keep the same place. Each button has a name and a sub-line.
+  - The readiness line (ready to enter / restore fatigue) and the bag-cleanup button are in the navigation area; the Abyssal Coin balance is in the title bar.
+  - Sweep/training/repeat settings and combat records are existing features that the prototype does not show; they stay under the skills (one row below the skills in portrait). The saved-portal notice and the next-content goal stay with the rule text under the art.
+- **Removed:** the “Prepare for the Rift” heading, the “Sanctuary › Rift Gate” breadcrumb, and the “normal entry 1× · fatigue also counts while paused” line (the help popup holds the same rule). The character and solo labels moved under the rift title.
+- **Fatigue box:** remaining time, restores today, daily and paid gauge with legend, reset time and countdown, and the carry-over note appear in the prototype's order. Paid reserve is purple. At zero fatigue the restore button replaces the gauge.
+- **Text:** 13 new lines were added to `en.txt` with their English, and 5 unused lines were removed.
+- **Transactions and saves:** only the layout changed. Potion and skill changes, recovery, 1.5× entry and portal return/restart use the same `GameStore` transactions, and the button names (`rift-enter-normal`, `rift-enter-fast`, `rift-potion-*`, `rift-skill-*` and so on) are unchanged.
+
+### Validation, 2026-09-30
+
+- Unity Edit Mode, the eight suites the change touches: **169 tests passed** (`RiftEntryTests` 20, `LocalizationTests` 33, `StoredLocalizationTests` 19, `CombatJournalTests` 18, `SharedUiTests` 23, `UiButtonTests` 17, `RiftContentUnlockTests` 20, `RewardBoxTests` 19). The full Edit Mode suite was not re-run. `python3 tools/check_ui_contract.py` and `python3 tools/test_ui_contract.py` (11 tests) also pass.
+- On a macOS development build (zero compile errors), **20 combinations** of 440×956, 956×440, 1600×900, 1600×1000 and 2100×900, Korean/English and 100%/150% text were checked. Each combination verified that the body needs no scrolling, every button lies inside the body without overlapping another, and no text spills its box, except cells whose text shrinks automatically (all passed). [Interactions](RiftEntryLayoutEvidence/runtime.txt) · [Portal](RiftEntryLayoutEvidence/portal-runtime.txt) · [Independent-process reload](RiftEntryLayoutEvidence/portal-restart.txt) · [Summary](RiftEntryLayoutEvidence/validation.json) · [Edit Mode result](RiftEntryLayoutEvidence/editmode.xml).
+- The same build passed real interactions for the 1000-tier list, potion and skill changes, cancel/paid entry/fatigue recovery, and going to or restarting a saved portal (including button visibility in the 20 combinations).
+- Screens: [portrait, Korean 100%](RiftEntryLayoutEvidence/entry-440x956-ko-100.png) · [portrait, English 150%](RiftEntryLayoutEvidence/entry-440x956-en-150.png) · [landscape, Korean 100%](RiftEntryLayoutEvidence/entry-956x440-ko-100.png) · [landscape, English 150%](RiftEntryLayoutEvidence/entry-956x440-en-150.png) · [1600×900](RiftEntryLayoutEvidence/entry-1600x900-ko-100.png) · [2100×900](RiftEntryLayoutEvidence/entry-2100x900-ko-100.png) · [portal, portrait](RiftEntryLayoutEvidence/portal-440-ko-100.png) · [portal, landscape English 150%](RiftEntryLayoutEvidence/portal-956-en-150.png).
+- **Not done or only partly done:** no physical mobile device was used. Walking through town to the rift keeper passed, but the town interaction button was not active in this smoke fixture, so the window was opened through the same entry call instead of a real pointer click. Activating a skill preset while a portal exists was skipped because the preset tab was not reachable. Stale smoke assumptions (tutorial completion flag, skill trees, asynchronous admission wait, 1000-tier scroll distance) were fixed in this change. The scroll-retention check became a “fits without scrolling” check because the page no longer scrolls. The full Edit Mode suite and the runtime smoke batch run once after the last merge.
+
 ## 2026-09-29 portal return and re-entry
 
 The battle HUD and observation menu use **Return through portal**. Confirmation saves the unfinished rift and returns to the sanctuary without finalizing it as a failure. Tutorial and training exit behavior is preserved.
@@ -32,7 +59,7 @@ This is not a full-game suite pass. Four failures in the separately run legacy `
 
 ## Shared UI and state ownership
 
-`RiftEntryWindow` starts from the new-content generator and opens `ContentWindowView` with `EquipmentViewSource.Owned`. Shared header, navigation, scrolling body, fixed actions, safe area and window lifecycle are preserved. Portrait stacks the illustration above preparation; landscape fixes it on the left and independently scrolls preparation on the right. Pickers use the same shell's optional maximum size.
+`RiftEntryWindow` starts from the new-content generator and opens `ContentWindowView` with `EquipmentViewSource.Owned`. Shared header, navigation, scrolling body, fixed actions, safe area and window lifecycle are preserved. The layout follows the [2026-09-30 new layout](#2026-09-30-new-no-scroll-layout), and the body does not scroll. Pickers use the same shell's optional maximum size.
 
 `UiTheme`, `UiFonts`, `SkillIconView` and `PotionArt` remain the presentation owners. Sanctuary and Abyssal Coin images are existing assets. The 36 potion PNGs share the original assets registered by the jeweler; [provenance and hashes](RiftEntryEvidence/potion-provenance.json) preserve their review status. No new raster art was generated. The chest is drawn in code with the shared palette.
 
@@ -71,6 +98,6 @@ Unity Edit Mode passed 232 integration tests and 147 follow-up save-compatibilit
 
 See the [validation report](RiftEntryEvidence/validation.json), [native interactions](RiftEntryEvidence/runtime.txt) and [independent-process reload](RiftEntryEvidence/restart.txt). Native macOS acceptance uses real town movement and uGUI raycasts with pointer down/up/click. Twenty layouts cover 440×956, 956×440, 1600×900, 1600×1000 and 2100×900, Korean/English and 100/150-percent text.
 
-[Portrait](RiftEntryEvidence/entry-440-ko-100.png) · [Landscape, English, 150%](RiftEntryEvidence/entry-956-en-150.png) · [Tier 1000](RiftEntryEvidence/rewards-tier-1000.png) · [Warding](RiftEntryEvidence/diamond-potion.png) · [Skill detail](RiftEntryEvidence/skill-detail.png) · [Paid fatigue](RiftEntryEvidence/paid-fatigue.png) · [Open chest](RiftEntryEvidence/claimed-chest.png).
+[Portrait](RiftEntryLayoutEvidence/entry-440x956-ko-100.png) · [Landscape, English, 150%](RiftEntryLayoutEvidence/entry-956x440-en-150.png) · [Tier 1000](RiftEntryEvidence/rewards-tier-1000.png) · [Warding](RiftEntryEvidence/diamond-potion.png) · [Skill detail](RiftEntryEvidence/skill-detail.png) · [Paid fatigue](RiftEntryEvidence/paid-fatigue.png) · [Open chest](RiftEntryEvidence/claimed-chest.png).
 
 Checks use an isolated worktree and save, not the user's main Editor or account. Physical mobile validation was not performed. URP post-processing shader warnings in the player log are recorded separately from successful UI interaction.

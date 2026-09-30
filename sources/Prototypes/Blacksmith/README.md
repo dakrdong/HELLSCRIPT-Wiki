@@ -8,6 +8,32 @@
 
 2026-09-23: **코어 제작** 탭을 추가했습니다. [코어 제작 시연 명세](CORE-CRAFTING.md)를 확인하세요. 코어 제작은 아직 HTML 전용이며 위 Unity 구현 범위에 포함되지 않습니다. / Added **Core crafting**; see the [bilingual prototype specification](CORE-CRAFTING.md). This new tab is HTML-only and is not part of the native integration described above.
 
+2026-09-30: **화면 재구성.** 균열 입장·균열 결과·훈련장 시안과 같은 방식으로 대장간 시안을 게임의 실제 창틀과 `UiTheme` 색상으로 다시 구성했습니다. 기능 규칙과 엔진은 그대로이고 화면 배치와 접근 조건만 바뀌었습니다.
+
+- **창틀:** 뒤로 · HELLSCRIPT · 대장간 · 재화 칩 · 안내 · 닫기의 제목줄, 서비스 탭 5개, 본문, 아래에 고정한 행동줄로 모든 서비스가 같은 틀을 씁니다. "자동 저장", "시연 데이터" 같은 시안 전용 문구는 화면 밖 미리보기 바로 옮겼습니다.
+- **배치:** 세로 440×956, 가로 956×440, PC 16:9·16:10·21:9에서 스크롤 없이 모두 보입니다. PC·가로는 세 열, 세로는 한 열이며 세로의 장비 선택은 아래에서 올라오는 시트입니다. 스크롤은 장비·후보·레시피 같은 긴 목록과 팝업 본문에만 남습니다. 한국어·영어·큰 글자를 모두 확인했습니다. 가로에서 큰 글자를 켜면 옵션 변경의 가운데 열만 예외적으로 스크롤됩니다.
+- **균열 단계 잠금:** 각 서비스는 계정의 최고 균열 클리어 단계로 열립니다. 코어 제작을 제외한 값은 게임의 `ContentUnlocks.json`과 같고, 코어 제작은 시안에서 50단계로 바꿨습니다(게임의 `UL09_CORE_CRAFT`는 아직 120단계이며 Unity 이식 때 맞춥니다).
+
+| 탭 | 해금 조건 |
+| --- | --- |
+| 옵션 변경 | 균열 35단계 클리어 |
+| 장착 슬롯 강화 | 균열 5단계 클리어 |
+| 장비 강화 | 균열 1단계 클리어 |
+| 코어 제작 | 균열 50단계 클리어 |
+| 장비 제작 | 균열 3단계 클리어 |
+
+  잠긴 탭은 자물쇠 아이콘과 흐린 글자로 보이고, 누르면 탭 아래에 "해제 조건 · 계정 내 영웅으로 균열 N단계 클리어 시 개방" 말풍선이 **2초** 동안 뜬 뒤 사라집니다. 다른 곳을 누르면 바로 닫히며, 화면은 바뀌지 않습니다. 하나도 열리지 않은 상태(0단계)에서는 봉인 화면을 보여 줍니다. 아래쪽 미리보기 바의 **클리어 시연**에서 0·1·3·4·5·34·35·49·50단계로 바꿔 볼 수 있으며 기본은 4단계입니다. 선택은 이 브라우저에만 저장합니다.
+- **장비 제작 탭:** 시안에 제작 화면이 아직 없어 탭과 잠금 규칙만 있고, 열리면 안내 문구를 보여 줍니다. 게임에서는 기존 제작 화면이 열립니다.
+- **검증:** `node Prototypes/Blacksmith/browser.test.cjs`가 실제 마우스 입력으로 해금 단계별 잠금, 말풍선 2초 수명, 서비스 5개 × 화면 5종 × 한국어·영어·큰 글자의 넘침 검사를 실행하고 [evidence](evidence/)에 화면과 `browser-validation.json`을 남깁니다. Unity 대장간은 아직 이 배치로 옮기지 않았습니다.
+
+2026-09-30: **Layout rework.** Like the rift entry, rift result and training-ground prototypes, the forge now uses the game's real window frame and `UiTheme` colours. Rules and engines are unchanged; only layout and access conditions changed.
+
+- **Frame:** one title bar (back · HELLSCRIPT · Forge · wallet chips · guide · close), five service tabs, the body and a docked action bar, shared by every service. Prototype-only notes ("saved locally", "demo data") moved to the preview bar outside the window.
+- **Layouts:** portrait 440×956, landscape 956×440 and PC 16:9 / 16:10 / 21:9 show everything without scrolling. PC and landscape use three columns, portrait one column with the equipment picker as a bottom sheet. Only long lists (equipment, candidates, recipes) and dialog bodies scroll. Korean, English and large text were all checked; in landscape with large text only the middle column of Enchant scrolls.
+- **Rift-stage locks:** each service opens with the account's highest cleared rift stage, (Enchant 35, Slot enhancement 5, Gear enhancement 1, Core crafting 50, Equipment crafting 3). These match the game's `ContentUnlocks.json` except core crafting: the prototype uses 50, while the game's `UL09_CORE_CRAFT` is still 120 and will be aligned in the native port. A locked tab shows a padlock and dim text; tapping it shows the bubble "To unlock · Opens after any account hero clears Rift N" under the tab for **2 seconds** without changing the screen, and tapping elsewhere dismisses it. With nothing unlocked (stage 0) a sealed screen is shown. Change the stage with **Rift progress** in the preview bar (0, 1, 3, 4, 5, 34, 35, 49, 50; default 4, kept in this browser only).
+- **Equipment crafting tab:** the prototype has no crafting screen yet, so the tab only demonstrates the tab and its lock; when open it explains that the game opens its existing crafting screen.
+- **Checks:** `node Prototypes/Blacksmith/browser.test.cjs` uses real mouse input to verify the locks per stage, the 2-second bubble, and an overflow sweep of 5 services × 5 shapes × Korean / English / large text, and writes screenshots plus `browser-validation.json` to [evidence](evidence/). The Unity forge has not been moved to this layout yet.
+
 ## 한국어
 
 착용 장비와 인벤토리의 시연 장비 10개를 선택할 수 있습니다. 변경할 옵션 줄을 고르면 해당 장비 부위·접두/접미·다른 줄의 중복 그룹을 반영한 후보와 수치 범위, 출현 확률을 표시합니다. 첫 유료 실행에서 선택한 슬롯 ID를 고정합니다. 이후 장비 전환이나 새로고침으로 다른 줄을 선택할 수 없으며, 같은 종류나 더 낮은 수치가 다시 나올 수도 있습니다.
@@ -123,6 +149,7 @@ Bulk-enhancement validation: **80/80 tests passed**, covering equivalence with i
 ```sh
 node Prototypes/Blacksmith/build.cjs
 node --test Prototypes/Blacksmith/*engine.test.cjs
+node Prototypes/Blacksmith/browser.test.cjs   # headless Chrome, writes evidence/
 python3 -m http.server 4186 --bind 127.0.0.1 --directory Prototypes/Blacksmith
 ```
 

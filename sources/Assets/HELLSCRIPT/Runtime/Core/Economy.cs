@@ -314,7 +314,7 @@ namespace Hellscript
             =>item!=null&&index>=0&&index<item.rolls.Count&&Reroll(a,item,item.rolls[index].slotId,ref rng);
         public static bool Reroll(AccountSave a,Item item,string slotId,ref uint rng)
         {
-            if(!ContentUnlocks.Has(a,ContentUnlocks.Reroll)||!Owned(a,item)||!TownService(a)||!string.IsNullOrEmpty(item.rerollSlotId)&&item.rerollSlotId!=slotId)return false;
+            if(!ContentUnlocks.Has(a,ContentUnlocks.Reroll)||!Owned(a,item)||!string.IsNullOrEmpty(item.rerollSlotId)&&item.rerollSlotId!=slotId)return false;
             int index=item.rolls.FindIndex(r=>r.slotId==slotId);if(index<0||ItemGenerator.RerollPool(item,slotId).Count==0)return false;
             long cost=RerollGold(item);if(a.gold<cost)return false;
             uint next=rng;var roll=ItemGenerator.Reroll(item,slotId,ref next);

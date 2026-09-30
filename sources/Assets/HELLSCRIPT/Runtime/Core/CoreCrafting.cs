@@ -72,7 +72,6 @@ namespace Hellscript
         static string Error(AccountSave a,Item definition,int investment)
         {
             if(definition==null)return "제작할 장비를 선택해 주세요.";
-            if(a.suspendedRun!=null)return "균열을 완료하고 대장간에서 제작해 주세요.";
             if(!ContentUnlocks.Has(a,ContentUnlocks.CoreCraft))return ContentUnlocks.Condition(ContentUnlocks.CoreCraft);
             if(!string.IsNullOrEmpty(a.coreCraft?.pendingId))return "이전 제작 결과를 먼저 확인해 주세요.";
             if(investment<0||investment>MaximumInvestment)return "심연 주화는 0~8,000개까지 사용할 수 있습니다.";

@@ -21,6 +21,18 @@ namespace Hellscript.Tests
         }
         [TearDown] public void Cleanup(){UnityEngine.Object.DestroyImmediate(catalog);if(Directory.Exists(directory))Directory.Delete(directory,true);}
         CoreCraftQuote Quote(int investment=0)=>CoreCrafting.Quote(A,Recipe,investment);
+        [Test] public void CoreCraftingAndResultConfirmationPreserveAnUnfinishedRiftAcrossReload()
+        {
+            var run=new CombatSimulation(A,catalog,1,seed:19).State;run.portal=true;run.paused=true;run.time=12.5f;A.suspendedRun=run;
+            Assert.IsTrue(store.Save(),store.Error);string checkpoint=JsonUtility.ToJson(run);int count=H.inventory.Count;
+            Assert.IsTrue(store.CraftCoreEquipment("rift-core",Quote(500),17),store.Error);
+            Assert.AreEqual(11500,A.premium);Assert.AreEqual(10,A.cores[0]);Assert.AreEqual(count+1,H.inventory.Count);
+            Assert.AreSame(run,A.suspendedRun);Assert.AreEqual(checkpoint,JsonUtility.ToJson(A.suspendedRun));
+            store=new GameStore(directory,catalog);Assert.AreEqual(checkpoint,JsonUtility.ToJson(A.suspendedRun));Assert.AreEqual("rift-core",A.coreCraft.pendingId);
+            Assert.IsTrue(store.AcknowledgeCoreCraft("rift-core"),store.Error);Assert.AreEqual(checkpoint,JsonUtility.ToJson(A.suspendedRun));
+            var resumed=new CombatSimulation(A,catalog,run.stage,restore:A.suspendedRun,recordResume:false);
+            Assert.AreEqual(run.id,resumed.State.id);Assert.AreEqual(12.5f,resumed.State.time);
+        }
         [Test] public void IntegratedSaveKeepsCraftingFatigueAndRetiredGemMigrationTogether()
         {
             Assert.IsTrue(store.CraftCoreEquipment("integrated-craft",Quote(8000),19),store.Error);

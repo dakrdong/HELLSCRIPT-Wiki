@@ -11,7 +11,7 @@ namespace Hellscript
         public static bool Purchase(AccountSave a,int slot,int mode,ref uint rng,out Item item)
         {
             item=null;
-            if(mode<0||mode>2||slot<0||slot>=a.cores.Length||a.suspendedRun!=null||!ContentUnlocks.Has(a,PurchaseFeature(mode)))return false;
+            if(mode<0||mode>2||slot<0||slot>=a.cores.Length||(mode==0&&a.suspendedRun!=null)||!ContentUnlocks.Has(a,PurchaseFeature(mode)))return false;
             int level=Math.Max(1,a.Hero.highestClear);
             long gold=PurchaseGold(a.Hero,mode);
             int materials=PurchaseMaterials(mode);

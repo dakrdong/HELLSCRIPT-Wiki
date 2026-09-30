@@ -1,0 +1,99 @@
+{
+  "date": "2026-09-30",
+  "base_commit": "9a22067ef9f67a5e6383b75b6b972aaee6535fcc",
+  "unity": "6000.6.0f1",
+  "runtime_domain_policy": "unfinished rifts permit town forge services; saved checkpoint and existing unlock/payment/ownership guards retained",
+  "edit_mode": {
+    "scope": [
+      "BlacksmithTests",
+      "ContentUnlockTests",
+      "CoreCraftingTests",
+      "ItemQualityTests",
+      "NpcDialogueTests",
+      "TownWalkTests"
+    ],
+    "runs": [
+      {
+        "file": "editmode.xml",
+        "result": "Failed(Child)",
+        "total": 200,
+        "passed": 197,
+        "failed": 3,
+        "skipped": 0
+      },
+      {
+        "file": "editmode-recheck.xml",
+        "result": "Passed",
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "final_unique_checks_passed": 200,
+    "notes": "Only the 3 failed checks were repeated after correcting test expectations/input. Runtime policy code was unchanged."
+  },
+  "native": {
+    "matrix_completed": 20,
+    "unique_access_cases": 62,
+    "enhancements_persisted": 20,
+    "fresh_character_level": 1,
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "text_percent": [
+      100,
+      150
+    ],
+    "first_run_exit": 1,
+    "first_run_failure": "test harness attempted to locate hidden battle toast after matrix and rift resumption had passed",
+    "retry_scope": "portal segment only",
+    "retry_exit": 0,
+    "portal_marker": "HELLSCRIPT_BLACKSMITH_PORTAL_SMOKE_OK",
+    "physical_mobile_tested": false
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 0,
+    "note": "Unity licensing entitlement lookup noise and URP GaussianDepthOfField stripped-shader warnings were logged. These are not forge failures; no zero-Console-error claim is made."
+  },
+  "source_sha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/Blacksmith.cs": "50b33a0049de70454aa7b76009e660fa04cc53d6d2c93827d6be9e7ba99c3801",
+    "Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs": "d47dc1dc1b91e6ff032b384904a6c877faf00b0f089632220c108d49f2d5197a",
+    "Assets/HELLSCRIPT/Runtime/Core/Economy.ContentServices.cs": "6730975792e04a5d5ca1f1b198e839d855ba677e8cd37e8f4f3a649636155e5a",
+    "Assets/HELLSCRIPT/Runtime/Core/Economy.cs": "8b3b3c32a27d02a53e9b856090e31813c92a795e94c98c3ec9cacc53e84c4c0d",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Blacksmith.cs": "c5f160f549c0cf59615ea56754d8210d10db3384b6b94f69a1a3d9994e046a5d",
+    "Assets/HELLSCRIPT/Runtime/Core/ItemQuality.cs": "b80da800f82b21a2cb9f4e9a43cf51b6a20ac89ea7921205ff1ac2f4344e42bc",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.NpcDialogue.cs": "5dcde1f69e3a916e55f480e2f2a477ff1ecb2cb0d6477c13f9e312bf5fd75e3a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Blacksmith.cs": "d4bfd05b5f42e3307e7aa2581f6b43fd07b6d8e253a25e22b2f7c587385aec39",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeNpcDialogueSmoke.cs": "64e2ae2c9648538d4a2f40f82aa5e8c29d50df56dcfd5a7bfd400ed32c35fc74",
+    "Assets/HELLSCRIPT/Tests/Editor/BlacksmithTests.cs": "31dad98d40cf6990b1d0266a27962099329d103533f78521514ebec9860f7620",
+    "Assets/HELLSCRIPT/Tests/Editor/ContentUnlockTests.cs": "2a6d3211f511d5959d6f4f252cef375d23bd171b817851bd3d2a785cf02a459d",
+    "Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs": "d1b3a63f0476751a5b579bc47ca70f56521858bdcaba5af9bc3003d74f211aee",
+    "Assets/HELLSCRIPT/Tests/Editor/ItemQualityTests.cs": "bb83aa65c1c72bbc59112ae5d33e6fb75946c27b171f58926feac4f223ac4b28"
+  },
+  "validation_reuse": "Production forge availability Boolean conditions are unchanged from native checks. The unused active-combat finish-rift message was removed and the existing proximity message restored. Final source was compiled; focused domain and native results were reused. Wiki generator, schema, page titles and route IDs are unchanged after the final prose edit; successful Python/Node wiki tests were reused with a final build/check."
+}

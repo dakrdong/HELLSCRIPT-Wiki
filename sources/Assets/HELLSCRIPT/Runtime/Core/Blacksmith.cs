@@ -47,7 +47,7 @@ namespace Hellscript
         public static string Format(Item item,float value)=>BlacksmithCatalog.Format(Stat(item),value);
         public static bool Apply(AccountSave a,Item item,GearUpgradeQuote q)
         {
-            if(item==null||q==null||a.suspendedRun!=null||!ContentUnlocks.Has(a,ContentUnlocks.Enhance)||!a.Hero.inventory.Contains(item)||JsonUtility.ToJson(item)!=q.fingerprint)return false;
+            if(item==null||q==null||!ContentUnlocks.Has(a,ContentUnlocks.Enhance)||!a.Hero.inventory.Contains(item)||JsonUtility.ToJson(item)!=q.fingerprint)return false;
             var current=Quote(item,a.gold,q.amount);
             if(current.to!=q.to||current.gold!=q.gold||!current.Affordable(a.gold))return false;
             a.gold-=(int)q.gold;item.enhancement=q.to;return true;
@@ -77,7 +77,7 @@ namespace Hellscript
     {
         public static bool Start(AccountSave a,string request,string hero,string slot,int expectedLevel,long now)
         {
-                if(a.Hero.id!=hero||a.suspendedRun!=null||!ContentUnlocks.Has(a,ContentUnlocks.SlotEnhance))return false;
+                if(a.Hero.id!=hero||!ContentUnlocks.Has(a,ContentUnlocks.SlotEnhance))return false;
                 BlacksmithCatalog.Settle(a,now);int index=BlacksmithCatalog.Index(slot),level=a.Hero.slotProgress.levels[index];
                 if(level!=expectedLevel||level>=100||a.forge.jobs.Count>=a.forge.stations||a.forge.jobs.Any(j=>j.heroId==hero&&j.slot==slot))return false;
                 int cost=BlacksmithCatalog.Stones(level+1);if(a.enhancementStones<cost)return false;

@@ -37,7 +37,6 @@ namespace Hellscript
         public static string MasterworkError(AccountSave account,Item item)
         {
             if(item==null||!account.heroes.Any(h=>h.inventory.Contains(item)))return "보유한 장비만 걸작을 진행할 수 있습니다.";
-            if(account.suspendedRun!=null)return "균열을 완료하고 성소에서 걸작을 진행해 주세요.";
             if(!ContentUnlocks.Has(account,ContentUnlocks.Masterwork))return ContentUnlocks.Condition(ContentUnlocks.Masterwork);
             if(item.enhancement<5)return "강화 +5 이상 장비만 걸작을 진행할 수 있습니다.";
             if(item.masterwork<0||item.masterwork>MaximumMasterwork)return "장비 품질 기록을 확인해 주세요.";
@@ -50,7 +49,6 @@ namespace Hellscript
         public static string ResetError(AccountSave account,Item item)
         {
             if(item==null||!account.heroes.Any(h=>h.inventory.Contains(item)))return "보유한 장비만 걸작을 초기화할 수 있습니다.";
-            if(account.suspendedRun!=null)return "균열을 완료하고 성소에서 걸작을 진행해 주세요.";
             if(item.masterwork==0&&item.masterworkInvestedMaterials==0)return "초기화할 걸작 기록이 없습니다.";
             if(item.masterworkInvestedMaterials<0||item.masterworkInvestedMaterials>item.investedMaterials)return "장비 품질 기록을 확인해 주세요.";
             if(account.gold<ResetGold(item))return "걸작 초기화에 필요한 골드가 부족합니다.";

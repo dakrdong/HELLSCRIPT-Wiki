@@ -101,13 +101,15 @@ namespace Hellscript.Tests
             Assert.AreEqual(before,JsonUtility.ToJson(b));Assert.IsTrue(ContentUnlocks.Has(b,ContentUnlocks.Gem));Assert.Contains(ContentUnlocks.Gem,b.contentUnlocks.guidesCompleted);
             Assert.AreEqual(0,b.Hero.highestClear);Assert.AreEqual(0,b.gold);
         }
-        [Test] public void U25_ExecutionGuardsRejectLockedServicesAndPortal()
+        [Test] public void U25_ExecutionGuardsKeepUnlocksAndAllowForgingWithASavedRift()
         {
             var a=New();a.gold=100000;a.materials=1000;uint rng=21;var item=a.Hero.inventory[0];
             Assert.IsFalse(Economy.Enhance(a,item));Assert.IsFalse(ContentServices.Purchase(a,0,0,ref rng,out _));
             Assert.DoesNotThrow(()=>new CombatSimulation(a,catalog,1,0,ownedTraining:true));
             a.Hero.highestClear=50;var sim=new CombatSimulation(a,catalog,1,seed:82);a.suspendedRun=sim.State;sim.State.portal=true;
-            int gold=a.gold;Assert.IsFalse(Economy.Enhance(a,item));Assert.IsFalse(ContentServices.Purchase(a,0,2,ref rng,out _));Assert.IsFalse(Economy.Sweep(a,"portal",ref rng));Assert.AreEqual(gold,a.gold);
+            int gold=a.gold;long cost=Economy.EnhancementGold(item);string checkpoint=JsonUtility.ToJson(sim.State);
+            Assert.IsTrue(Economy.Enhance(a,item));Assert.AreEqual(gold-cost,a.gold);Assert.AreEqual(checkpoint,JsonUtility.ToJson(a.suspendedRun));
+            string before=JsonUtility.ToJson(a);Assert.IsFalse(ContentServices.Purchase(a,0,0,ref rng,out _));Assert.IsFalse(ContentServices.Purchase(a,0,2,ref rng,out _));Assert.IsFalse(Economy.Sweep(a,"portal",ref rng));Assert.AreEqual(before,JsonUtility.ToJson(a));
         }
         [Test] public void U24_SaveLoadPreservesUnlockAndGuide()
         {

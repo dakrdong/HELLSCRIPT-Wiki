@@ -1,6 +1,6 @@
 # HELLSCRIPT 훈련장 개편 HTML 시안
 
-갱신일: 2026-09-28 · 최초 작성 2026-09-28 · [English](#english)
+갱신일: 2026-09-30 · 최초 작성 2026-09-28 · [English](#english)
 
 [시안 열기](HELLSCRIPT-TrainingGround.html) · [브라우저 검증 기록](evidence/browser-validation.json) · [이미지 출처](../../Docs/Art/TrainingGround/art-manifest.json) · [원본 파일 해시](source-manifest.json)
 
@@ -10,17 +10,19 @@
 
 **훈련장 세팅(로비)**
 
-- 현재 장착한 일반 액티브 4개와 궁극기 1개를 보여 준다. 스킬마다 체크박스가 있으며, 체크한 스킬만 전투에서 사용한다. 각 행에는 현재 칙령 요약(간편 설정 이름 또는 직접 설정의 사용 방식)과 **칙령 수정** 버튼이 있다.
-- 머리글의 **사냥 칙령 설정** 버튼은 게임에서 사냥 칙령 창의 스킬 탭을 연다. 스킬 교체·투자와 공통 공격 설정은 그 창에서 바꾼다.
-- **균열 단계**를 버튼과 슬라이더로 고른다. 몬스터는 실제 균열의 같은 단계와 같은 HP·공격력을 가지며, 행마다 마리당 HP와 공격력을 보여 준다. 열린 단계(최고 돌파 단계 + 1)까지만 고를 수 있다.
+- 현재 장착한 일반 액티브 4개와 궁극기 1개를 보여 준다. 스킬마다 체크박스가 있으며, 체크한 스킬만 전투에서 사용한다. 각 행에는 현재 칙령 요약(간편 설정 이름 또는 직접 설정의 사용 방식)과 연필 아이콘 버튼(칙령 수정)이 있다. 같은 글씨가 줄마다 반복되지 않도록 글자 없이 테두리 있는 아이콘 버튼만 둔다.
+- **사냥 칙령 설정** 버튼은 사용 스킬 열 아래에 넓게 고정한다(세로 화면에서는 제목 바로 아래). 게임에서 사냥 칙령 창의 스킬 탭을 열며, 스킬 교체·투자와 공통 공격 설정은 그 창에서 바꾼다. 가로 화면에서는 스킬 5개가 스크롤 없이 한 화면에 들어온다.
+- **균열 단계**는 한 줄에서 −/+ 버튼과 슬라이더로 고르고 오른쪽에 단계를 보여 준다. 몬스터는 실제 균열의 같은 단계와 같은 HP·공격력을 가지며, 행마다 마리당 HP와 공격력을 보여 준다. 열린 단계(최고 돌파 단계 + 1)까지만 고를 수 있다.
 - **적 추가**는 보스 5종과 일반 몬스터 20종의 목록 상자를 연다. 전체·보스·일반 몬스터 탭이 있고, 행마다 초상화, 역할, 처음 등장하는 지역을 표시한다. 보스와 일반 몬스터를 합쳐 5종까지 넣는다.
-- 보스는 한 종류만 1마리 넣는다. 보스가 이미 있으면 다른 보스 행에 **교체**가 표시되고, 누르면 같은 자리에서 바뀐다. 일반 몬스터는 1~20마리와 일반·매직·희귀·전설 등급을 고른다. 등급 색은 게임의 몬스터 등급 효과 색(`WorldFx.TierColor`)과 같다.
+- 적 행은 낮게 만든다. 초상화 오른쪽 위 모서리에 테두리 없는 ×가 있고, 이름·역할·능력치가 두 줄에 들어가며, 일반 몬스터는 오른쪽에 **등급 목록 상자**(일반·매직·희귀·전설)와 **마릿수 목록 상자**(1~20)가 나란히 놓인다. 목록 상자의 등급 색은 게임의 몬스터 등급 효과 색(`WorldFx.TierColor`)과 같다.
+- 보스는 한 종류만 1마리 넣는다. 보스 행에는 등급·마릿수 대신 `1마리 고정`이 표시된다. 보스가 이미 있으면 다른 보스 행에 **교체**가 표시되고, 누르면 같은 자리에서 바뀐다.
 - 이 세팅의 최고 기록과 직전 기록을 보여 준다. 하단에는 균열 단계·적 종류·마릿수·총 HP 요약과 **전투 시작**을 고정한다.
 
 **전투 중**
 
 - 최근 3초 평균으로 계산한 실시간 DPS와, 직전 판의 같은 시점과 비교한 증감률을 보여 준다.
-- 이번 판(실선)과 직전 판(점선)의 초당 피해 그래프를 같은 눈금에 그린다. 평균·최고 DPS와 총 피해를 함께 표시한다.
+- 이번 판(실선)과 직전 판(점선)의 초당 피해 그래프를 같은 눈금에 그린다. 평균·최고 DPS와 총 피해를 함께 표시한다. 재사용 대기시간이 3초 이상인 스킬(궁극기는 항상)을 쓴 시점마다 선 위에 그 스킬 아이콘을 얹는다. 쿨타임이 없어 계속 쓰는 스킬(회오리·분쇄 일격)은 그래프를 가리므로 아이콘을 얹지 않는다.
+- **그래프 접기** 버튼(화살표)으로 DPS 패널을 실시간 DPS 한 줄로 접을 수 있다. 캐릭터가 싸우는 배경을 보고 싶을 때 쓰며, 다시 누르면 펼쳐진다.
 - 남은 적, 적 종류별 남은 마릿수, 보스 HP, 영웅 HP를 보여 준다. 체크를 끈 스킬과 자동 사용이 꺼진 스킬은 스킬 칸에 따로 표시한다.
 - **일시정지**(또는 Esc)를 누르면 전투 시간이 멈추고 **계속하기**와 **훈련 중단**이 열린다. 멈춘 시간은 클리어 시간에 넣지 않으며, 중단한 판은 기록하지 않는다.
 - 시안은 전투를 배속으로 재생하고 화면에 `시연 N배속`을 표시한다.
@@ -29,8 +31,8 @@
 
 - 성공하면 클리어 시간과 직전 판 대비 증감(초와 %)을 가장 크게 보여 준다. 첫 기록, 빨라짐, 느려짐, 같은 기록을 서로 다른 색과 기호로 구분하며 최고 기록 갱신도 표시한다.
 - 영웅이 쓰러지면 **훈련 실패**로 끝난다. 클리어 시간은 `기록 없음`으로 표시하고, 쓰러진 시점과 남은 적을 알려 준다. 실패한 판은 기록하지 않으며 비교하지 않는다.
-- 평균 DPS와 직전 대비 증감률, 최고 DPS, 총 피해, 두 판의 DPS 그래프를 보여 준다. 그래프에 포인터를 올리거나 방향키를 누르면 그 시점의 두 값을 함께 읽을 수 있다.
-- 스킬별 피해 비중·사용 횟수·현재 칙령 요약과 스킬마다 **칙령 수정** 버튼을 둔다. 결과 화면에서 저장한 칙령은 다시 시작할 때 적용된다고 안내한다.
+- 평균 DPS와 직전 대비 증감률, 최고 DPS, 총 피해, 두 판의 DPS 그래프를 보여 준다. 그래프에 포인터를 올리거나 터치하거나 방향키를 누르면 그 시점의 두 값과 함께 **그 초에 쓴 스킬 이름**을 읽을 수 있다(아이콘이 없는 회오리·분쇄 일격도 이름은 나온다).
+- 스킬별 피해는 균열 결과의 스킬 카드와 같은 양식이다. 일반 스킬 4개는 2×2로, 궁극기는 전체 너비로 놓고, 카드마다 큰 아이콘, 스킬 이름, 사용 횟수, 일반 몬스터·보스 각각에 준 피해 비중 게이지와 연필 아이콘 버튼(칙령 수정)을 둔다. 기본 공격 행은 두지 않는다. 결과 화면에서 저장한 칙령은 다시 시작할 때 적용된다고 안내한다.
 - 직전 판 이후 바뀐 사냥 칙령을 `회오리 · 간편 설정: 생존 우선 전투 → 빠른 중앙 침투`처럼 나열한다.
 - 하단에는 **훈련장 세팅 변경**(로비로 돌아가기)과 **다시 시작하기**(지금 세팅 그대로)를 고정한다.
 
@@ -80,10 +82,10 @@ python3 tools/test_ui_contract.py
 
 `HELLSCRIPT-TrainingGround.html` 파일 하나로 실행하며 크기는 약 1.1 MiB다. 외부 폰트·라이브러리·이미지 서버가 필요 없다. 상단 도구에서 화면 크기(세로 440×956, 가로 956×440, PC 16:9·16:10·21:9), 화면 상태(세팅, 전투 중, 결과의 빨라짐·느려짐·첫 기록·실패), 안전 영역, 글자 크기 120%, 한국어·영어를 바꾼다. 캡처용으로 `?embed=1&device=portrait&scene=failed&lang=en&modal=edict:W03` 같은 주소 옵션도 받는다.
 
-2026-09-28 결과:
+2026-09-28 결과(2026-09-30에 시안을 고친 뒤 다시 돌린 결과는 아래 항목에 덧붙였다):
 
 - 규칙 검사 **7개 통과**: 5종·보스 한 종·일반 1~20마리 제한과 보스 교체, 균열 단계를 포함한 세팅 기준, 게임 공식과 일치하는 단계별 HP·공격력(1~5단계 입문 보정, 희귀 = 정예 배율, 매직·전설 = 일반 포함), 정예 특성 규칙과 게임과 같은 특성 추첨(게임 테스트와 같은 고정 사례 7개), 간편 설정 왕복, 같은 칙령의 같은 결과와 칙령에 따른 빨라짐, 영웅이 쓰러지는 실패와 철벽의 생존 효과.
-- 헤드리스 Chrome에서 DevTools 프로토콜로 실제 마우스·키 입력을 넣어 **191개 검사 통과**. 스킬 체크, 적 추가·보스 교체·등급·마릿수·삭제, 균열 단계 버튼·슬라이더 키보드 조작, 칙령 수정·취소·저장, 전투의 일시정지·계속·Esc, 결과 비교, 결과에서 칙령 수정 후 다시 시작, 최고 단계에서 철벽을 끈 실패와 미기록을 이어서 확인했다. 다섯 화면 크기 × 두 언어 × 두 글자 크기 × 로비·성공 결과·실패 결과의 60개 조합에서 가로 넘침이 없고 하단 행동 버튼이 화면 안에 있으며, 영어 화면에 한국어가 남지 않았다. 콘솔 오류·경고는 없었다.
+- 헤드리스 Chrome에서 DevTools 프로토콜로 실제 마우스·키 입력을 넣어 **183개 검사 통과**(2026-09-28에는 191개; 등급·마릿수 버튼 검사가 목록 상자 검사로, 그래프 접기·사용 스킬 이름 툴팁 검사가 더해졌다). 스킬 체크, 적 추가·보스 교체·등급·마릿수·삭제, 균열 단계 버튼·슬라이더 키보드 조작, 칙령 수정·취소·저장, 전투의 일시정지·계속·Esc, 결과 비교, 결과에서 칙령 수정 후 다시 시작, 최고 단계에서 철벽을 끈 실패와 미기록을 이어서 확인했다. 다섯 화면 크기 × 두 언어 × 두 글자 크기 × 로비·성공 결과·실패 결과의 60개 조합에서 가로 넘침이 없고 하단 행동 버튼이 화면 안에 있으며, 영어 화면에 한국어가 남지 않았다. 콘솔 오류·경고는 없었다.
 - 공통 UI 소유 검사가 통과했고, 공통 UI 검사 9개가 통과했다. HTML 시안의 결과이므로 Unity 화면이 공통 부품에 연결되었다는 뜻은 아니다.
 - 내장 브라우저는 빌드로 생성한 로컬 파일을 열지 못해 Chrome 헤드리스로 확인했다. Unity 실행, 실제 계정·저장, 모바일 실기기와 터치 입력, 성능은 확인하지 않았다.
 
@@ -97,11 +99,11 @@ python3 tools/test_ui_contract.py
 
 An interactive HTML mockup of a reworked Training Ground: keep the setup fixed, change only the Hunt Edict, and see how DPS and clear time move. It covers the setup lobby, the in-battle HUD, the success and failure results, and two dialogs (enemy list box and per-skill edict editor) in portrait and landscape. It has no Unity account, save or combat connection. Enemy HP and attack follow the game's rift formula; hero, records, hero DPS, survival and times are demo data.
 
-**Lobby.** Shows the four equipped actives and the ultimate. Each has a checkbox (only checked skills fight), a summary of its current edict and an **Edit edict** button. **Hunt Edict settings** opens the edict window's Skills tab in the game. A **Rift tier** control (buttons and slider) sets monster HP and attack to those of a real rift at that tier, shown per monster; only open tiers (highest clear + 1) are allowed. **Add enemy** opens a list box of 5 bosses and 20 normal monsters with All/Bosses/Normal tabs, portraits, roles and first field. Up to 5 kinds; only one boss kind, always a single enemy, and another boss offers **Swap**; a normal monster takes 1–20 and a Normal/Magic/Rare/Legendary tier coloured like the in-game tier effects. Best and previous clear for the current setup are shown with a fixed **Start training** bar.
+**Lobby.** Shows the four equipped actives and the ultimate. Each has a checkbox (only checked skills fight), a summary of its current edict and a bordered pencil icon button (edit edict) with no repeated words. The wide **Hunt Edict settings** button is docked under the skill column (right under the heading in portrait) and opens the edict window's Skills tab in the game; on landscape screens all five skills fit without scrolling. The **Rift tier** sits on one line with −/+ buttons, a slider and the tier value, and sets monster HP and attack to those of a real rift at that tier, shown per monster; only open tiers (highest clear + 1) are allowed. **Add enemy** opens a list box of 5 bosses and 20 normal monsters with All/Bosses/Normal tabs, portraits, roles and first field. Up to 5 kinds. Enemy rows are low: a borderless × on the portrait's top-right corner, name, role and stats on two lines, and for a normal monster a **tier drop-down** (Normal/Magic/Rare/Legendary, coloured like the in-game tier effects) beside a **count drop-down** (1–20). A boss row says `Always 1` instead; only one boss kind is allowed and another boss offers **Swap**. Best and previous clear for the current setup are shown with a fixed **Start training** bar.
 
-**Battle.** Live DPS over the last 3 seconds and its change against the previous run at the same second, a same-scale chart of this run (solid) and the previous run (dashed), average/peak DPS, total damage, enemies left, per-kind counts, boss HP and hero HP. **Pause** (or Esc) stops combat time and offers **Resume** and **Stop training**; paused time never counts, and a stopped run is not recorded. The mockup replays the fight at a labelled demo speed.
+**Battle.** Live DPS over the last 3 seconds and its change against the previous run at the same second, a same-scale chart of this run (solid) and the previous run (dashed) with the skill's icon on the line at each cast of a skill on a cooldown of 3 seconds or more (ultimates always; cooldown-free rotation skills such as Whirlwind would bury the line, so they get no icon), average/peak DPS, total damage, enemies left, per-kind counts, boss HP and hero HP. An arrow button folds the DPS panel to one live-DPS line so the fight behind it can be watched; pressing it again unfolds it. **Pause** (or Esc) stops combat time and offers **Resume** and **Stop training**; paused time never counts, and a stopped run is not recorded. The mockup replays the fight at a labelled demo speed.
 
-**Result.** A clear shows its time and difference from the previous run in seconds and percent (first clear, faster, slower and same are distinct), a new-best badge, average DPS change, the two-run DPS chart with a crosshair tooltip (pointer or arrow keys), damage share, casts and edict summary per skill with an **Edit edict** button, and the edict changes since the previous run. If the hero falls, the run ends as **Training failed** with no clear time, the moment of death and enemies left; it is neither recorded nor compared. **Change training setup** returns to the lobby and **Start again** reruns the same setup. Edicts saved on this screen apply from the next run.
+**Result.** A clear shows its time and difference from the previous run in seconds and percent (first clear, faster, slower and same are distinct), a new-best badge, average DPS change, the two-run DPS chart with a crosshair tooltip (pointer, touch or arrow keys) that also names every skill cast in that second (Whirlwind and Crushing Strike too, although they carry no icon), damage by skill in the same card as the rift result (four skills in two columns, the ultimate across; big icon, name, casts, and gauges for the share of damage done to normal monsters and to bosses, plus a pencil icon button that edits the edict; no basic-attack row), and the edict changes since the previous run. If the hero falls, the run ends as **Training failed** with no clear time, the moment of death and enemies left; it is neither recorded nor compared. **Change training setup** returns to the lobby and **Start again** reruns the same setup. Edicts saved on this screen apply from the next run.
 
 **Edict editor** follows the in-game per-skill editor: three quick presets and Custom last; Custom shows automatic use, the use policy with its gain and trade-off, and the detailed options. Saving updates the current Hunt Edict used by training and every hunt. On portrait both dialogs open as bottom sheets.
 
@@ -111,4 +113,4 @@ An interactive HTML mockup of a reworked Training Ground: keep the setup fixed, 
 
 **Art.** At the user's request, Codex generated the training-yard key art, 5 boss portraits and 20 monster portraits with its built-in `image_gen` (one request per asset; model not reported, recorded as `candidate_model_unknown`). Monster looks follow the 3D overhaul brief. Originals live byte for byte in the game resources `Assets/HELLSCRIPT/Resources/Art/TrainingGround/`; the HTML embeds `sips`-downscaled copies. The first Bloated Pilgrim (N06) request was blocked by the image safety filter and was regenerated from a non-graphic description. Prompts, sources, hashes and the blocked attempt are in [the art manifest](../../Docs/Art/TrainingGround/art-manifest.json). `TrainingGroundArtImporter` and `ResourceTextureBudget` cap them for the game (portraits 256, backdrop 1024 on Android and 2048 on PC).
 
-**Verification (2026-09-28).** 7 rule tests passed, including tier stats against the game formula, Rare as a real elite with its trait rule and the game's own trait draws (seven cases pinned in both the mockup and the Unity tests), Magic/Legendary at normal stats, one boss kind with swapping, and failure when the hero falls. 191 browser checks passed in headless Chrome driven over the DevTools protocol with real mouse and key input: the whole flow (skill checkbox, enemy add/swap/tier/count/remove, rift tier buttons and keyboard slider, edict edit/cancel/save, pause/resume/Esc, comparison, edit from the result and restart, a failed top-tier run without Iron Wall that is not recorded) and 60 layouts (5 screen sizes × 2 languages × 2 text sizes × lobby/success/failure) with no sideways overflow, bottom actions on screen, no Korean left in English, and no console errors or warnings. The shared-UI ownership check passed and its 9 regression tests passed; for an HTML mockup this does not mean a Unity window is wired to the shared owners. The in-app browser could not open generated local files, so Chrome headless was used. Unity runtime, real saves, physical mobile devices, touch input and performance were not verified.
+**Verification (2026-09-28, browser run repeated 2026-09-30).** 7 rule tests passed, including tier stats against the game formula, Rare as a real elite with its trait rule and the game's own trait draws (seven cases pinned in both the mockup and the Unity tests), Magic/Legendary at normal stats, one boss kind with swapping, and failure when the hero falls. 183 browser checks passed in headless Chrome (191 on 2026-09-28; the tier and count button checks became drop-down checks and checks for folding the live graph and the skill-naming tooltip were added) driven over the DevTools protocol with real mouse and key input: the whole flow (skill checkbox, enemy add/swap/tier/count/remove, rift tier buttons and keyboard slider, edict edit/cancel/save, pause/resume/Esc, comparison, edit from the result and restart, a failed top-tier run without Iron Wall that is not recorded) and 60 layouts (5 screen sizes × 2 languages × 2 text sizes × lobby/success/failure) with no sideways overflow, bottom actions on screen, no Korean left in English, and no console errors or warnings. The shared-UI ownership check passed and its 9 regression tests passed; for an HTML mockup this does not mean a Unity window is wired to the shared owners. The in-app browser could not open generated local files, so Chrome headless was used. Unity runtime, real saves, physical mobile devices, touch input and performance were not verified.

@@ -1,0 +1,66 @@
+{
+  "initialAttempts": [
+    {
+      "name": "blacksmith",
+      "exitCode": 0,
+      "seconds": 20.27
+    },
+    {
+      "name": "entry",
+      "exitCode": 0,
+      "seconds": 15.43
+    },
+    {
+      "name": "entry-restart",
+      "exitCode": 1,
+      "seconds": 3.56,
+      "failure": "Claimed presentation reload: obsolete hero.riftProgress owner was checked instead of account.rewardBoxes"
+    }
+  ],
+  "continuation": [
+    {
+      "name": "portal",
+      "exitCode": 0,
+      "seconds": 11.47,
+      "log": "Artifacts/MainCleanup20260930/portal.log",
+      "evidence": "Docs/Implementation/MainCleanup20260930Evidence/portal"
+    },
+    {
+      "name": "portal-restart",
+      "exitCode": 0,
+      "seconds": 7.04,
+      "log": "Artifacts/MainCleanup20260930/portal-restart.log",
+      "evidence": "Docs/Implementation/MainCleanup20260930Evidence/portal"
+    },
+    {
+      "name": "training",
+      "exitCode": 0,
+      "seconds": 36.77,
+      "log": "Artifacts/MainCleanup20260930/training.log",
+      "evidence": "Docs/Implementation/MainCleanup20260930Evidence/training"
+    },
+    {
+      "name": "result",
+      "exitCode": 0,
+      "seconds": 24.91,
+      "log": "Artifacts/MainCleanup20260930/result.log",
+      "evidence": "Docs/Implementation/MainCleanup20260930Evidence/result"
+    },
+    {
+      "name": "result-restart",
+      "exitCode": 0,
+      "seconds": 5.0,
+      "log": "Artifacts/MainCleanup20260930/result-restart.log",
+      "evidence": "Docs/Implementation/MainCleanup20260930Evidence/result"
+    }
+  ],
+  "failedCheckRecheck": {
+    "name": "entry-restart",
+    "exitCode": 0,
+    "evidence": "Docs/Implementation/MainCleanup20260930Evidence/entry-restart-recheck",
+    "scope": "Only the failed independent restart check rerun after replacing the obsolete claim-state owner in its development helper."
+  },
+  "uniquePassedChecks": 8,
+  "productionCodeChangedAfterNativeRun": false,
+  "physicalMobileTested": false
+}
