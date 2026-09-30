@@ -1,6 +1,6 @@
 # Sites player log collection
 
-Updated: 2026-09-30
+Updated: 2026-10-01
 
 [한국어](Sites_Player_Logs.md) · [Combat records](Combat_Journal_Server.en.md) · [Live operations](Live_Operations.en.md)
 
@@ -14,7 +14,7 @@ Existing Railway telemetry, operations and account databases remain intact. Earl
 
 Version 2 of Resources/Data/ServerConnection.json uses **baseUrl** for authentication/live operations and **telemetryBaseUrl** for collection. Both must be HTTPS origins without credentials, paths or queries. Version 1 retains the single-origin behavior.
 
-After Google sign-in opens the correct account store, the uploader reads the session token only from memory. Expiry, sign-out and account switching prevent sending another account's outbox. Ordinary guests and the web guest edition retain local history without automatic server collection.
+After Google sign-in opens the correct account store, the uploader binds to that account ID and reads only a matching session token from memory. A new login session for another account cannot upload the previous store's outbox before the store switches. Expiry and sign-out also stop new transmissions. Ordinary guests and the web guest edition retain local history without automatic server collection.
 
 Editor/development builds may use a separate QA file whose **baseUrl** matches Sites and whose **kind** is hellscript-qa-telemetry. Operator keys, QA keys and the owner's private dispatch token never belong in game resources, saves, Git or the public wiki.
 
@@ -36,6 +36,7 @@ There are no public log reads, reward grants or save mutation endpoints. Site au
 - server/sites/publish.py exports only this service, verifies the pushed full SHA, and packages the Worker as dist/index.js. Unity sources and local credentials are excluded.
 - Saving and deploying are separate; every deployment URL is production. Preserve project identity/audience and await terminal success.
 - /healthz checks origin configuration, D1 schema reads and R2 access. Real authorization/uploads require separate verification.
+- The homepage shows the live /healthz result in Korean and English, with a manual retry button. It replaces the placeholder that remained after sign-in and shows owner-only access separately from pending public API approval for game connections.
 
 [Sites documentation](https://learn.chatgpt.com/docs/sites) specifies a 10 GB D1 limit per Site and no fixed R2 storage limit. Account-level usage limits also apply.
 
@@ -49,10 +50,11 @@ RuntimeTelemetrySitesSmoke completes a real rift in an isolated native save, use
 
 ## Source and current verification state
 
-[Collector](../../server/sites/_worker.js) · [Node tests](../../server/sites/test_worker.mjs) · [Publisher](../../server/sites/publish.py) · [API verification](../../server/sites/verify_cloud.py) · [Game connection](../../Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs) · [Native uploader verification](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTelemetrySitesSmoke.cs)
+[Collector](../../server/sites/_worker.js) · [Status page code](../../server/sites/public/status.js) · [Node tests](../../server/sites/test_worker.mjs) · [Publisher](../../server/sites/publish.py) · [API verification](../../server/sites/verify_cloud.py) · [Game connection](../../Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs) · [Native uploader verification](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTelemetrySitesSmoke.cs)
 
 - Node 10/10 passed: original bytes, duplicates, conflicts, interrupted storage, revocation, request limits and rejected redirects. [Result](../../Artifacts/Validation/sites-player-logs-20260930/worker-tests.txt)
 - Ten API checks passed on the owner-private deployment: matching first/duplicate receipts, changed payload 409, invalid provenance 422, anonymous/invalid credentials 401, listing 405 and individual read 404. D1 contains one synthetic run with its matching SHA-256. [Result](../../Artifacts/Validation/sites-player-logs-20260930/private-api.json)
 - Public access and direct native uploads await the owner's explicit approval for a public API. Private API verification does not establish ordinary player connectivity.
-- Focused Unity Edit Mode checks passed 41/41: account storage 12, journals 18, server connection 10 and endpoint-bound configuration cache 1. The macOS development build succeeded with zero errors. The broad Edit Mode attempt was terminated while narrowing scope, so no full-suite pass is claimed. Direct upload runtime and physical-mobile checks were not run. [Verification summary](../../Artifacts/Validation/sites-player-logs-20260930/validation-summary.json)
+- Focused Unity Edit Mode checks first passed 41/41, followed by stronger account-token binding. The affected connection checks then passed 11/11; unchanged account storage 12, journals 18 and endpoint-bound configuration cache 1 retain their earlier successful results. The macOS development build was rebuilt with this change and completed with zero errors. The broad Edit Mode attempt was terminated while narrowing scope, so no full-suite pass is claimed. Direct upload runtime and physical-mobile checks were not run. [Verification summary](../../Artifacts/Validation/sites-player-logs-20260930/validation-summary.json)
+- The deployed status page was verified in Korean and English, including manual retry and a real healthy response. Healthy describes the collector/storage response and does not establish direct ordinary game uploads.
 - Authentication, operations and Sites [CI](https://github.com/dakrdong/HELLSCRIPT/actions/runs/36729003860) passed on main commit 3c33af8b. [D1 evidence](../../Artifacts/Validation/sites-player-logs-20260930/storage-proof.json) exposes only synthetic run IDs and hashes, excluding account IDs and tokens.

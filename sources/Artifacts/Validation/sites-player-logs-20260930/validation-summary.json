@@ -1,7 +1,7 @@
 {
   "status": "private_collector_verified_public_connection_pending",
-  "runtime_source_sha": "3c33af8bd322c1cf8663017c420eae5e1dbaf920",
-  "sites_source_sha": "a470e395d7f2b3a96c1745915eaae18c9b68e836",
+  "runtime_source_sha": "0cb92c69899366c2ded435bf5e0c8f3dccf7878e",
+  "sites_source_sha": "40439a3bec69a30b00640c92b69217032a7fce97",
   "site_url": "https://hellscript-player-logs.hoosung.chatgpt.site",
   "access": "owner_private",
   "worker_tests": {
@@ -27,9 +27,35 @@
   "mac_development_build": {
     "result": "Succeeded",
     "errors": 0,
-    "bytes": 567679646
+    "bytes": 567679657,
+    "runtime_source_sha": "0cb92c69899366c2ded435bf5e0c8f3dccf7878e"
   },
   "broad_editmode": "terminated after narrowing scope; no completed result claimed",
   "native_sites_uploader": "not run; awaits explicit public API approval",
-  "physical_mobile": "not run"
+  "physical_mobile": "not run",
+  "site_status_page": {
+    "live_status": "healthy",
+    "languages_verified": [
+      "ko",
+      "en"
+    ],
+    "manual_retry": "healthy",
+    "placeholder_replaced": true,
+    "deployment_id": "appgdep_6abd32a8ba0c81918c05cf28481791e7",
+    "deployment_status": "succeeded"
+  },
+  "account_binding_editmode": {
+    "result": "Passed",
+    "total": "11",
+    "passed": "11",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "reused_editmode_coverage": {
+    "account_storage": 12,
+    "combat_journal": 18,
+    "endpoint_bound_liveops_cache": 1,
+    "total": 31,
+    "reason": "Code, dependencies and settings unchanged."
+  }
 }

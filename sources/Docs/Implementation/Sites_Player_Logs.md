@@ -1,6 +1,6 @@
 # Sites 플레이 로그 수집
 
-갱신일: 2026-09-30
+갱신일: 2026-10-01
 
 [English](Sites_Player_Logs.en.md) · [전투 기록](Combat_Journal_Server.md) · [운영 설정](Live_Operations.md)
 
@@ -14,7 +14,7 @@
 
 Resources/Data/ServerConnection.json 버전 2는 **baseUrl**을 인증·운영 설정에, **telemetryBaseUrl**을 로그 수집에 사용한다. 두 주소 모두 자격 증명·경로·쿼리가 없는 HTTPS 원점이어야 한다. 버전 1은 기존 단일 서버 방식으로 읽는다.
 
-Google 로그인이 완료되어 올바른 계정 저장을 연 뒤 업로더를 연결한다. 토큰은 로그인 세션의 메모리에서만 읽는다. 만료·로그아웃·계정 전환 시 다른 계정의 대기 기록을 보내지 않는다. 일반 게스트와 웹 게스트판은 로컬 기록을 유지하며 자동 서버 수집을 연결하지 않는다.
+Google 로그인이 완료되어 올바른 계정 저장을 연 뒤 업로더를 연결한다. 업로더는 당시 계정 ID에 고정하며 토큰은 같은 계정의 로그인 세션 메모리에서만 읽는다. 다른 계정의 새 세션이 저장 전환 전에 준비되어도 이전 계정의 대기 기록을 보내지 않는다. 만료·로그아웃에서도 새 전송을 멈춘다. 일반 게스트와 웹 게스트판은 로컬 기록을 유지하며 자동 서버 수집을 연결하지 않는다.
 
 Editor·개발 빌드는 별도 QA 파일을 사용할 수 있다. 파일의 **baseUrl**은 Sites 수집 주소와 일치하고 **kind**는 hellscript-qa-telemetry여야 한다. 운영자 키, QA 키, Sites 소유자의 테스트용 접근 토큰을 게임 리소스·계정 저장·Git·공개 위키에 넣지 않는다.
 
@@ -36,6 +36,7 @@ Sites는 Bearer 토큰을 기존 서버의 **GET /v1/telemetry/session**에서 �
 - server/sites/publish.py가 이 서비스만 Sites Git에 내보내고 푸시한 전체 SHA를 확인한 뒤 Worker를 dist/index.js로 패키징한다. Unity 프로젝트와 로컬 QA 파일은 배포 압축 파일에 포함하지 않는다.
 - 버전 저장과 배포는 별도이며 모든 배포 주소는 운영 주소다. 프로젝트 ID·접근 범위를 보존하고 배포 성공 상태를 확인한다.
 - /healthz는 인증 원점 설정·D1 스키마 조회·R2 접근을 검사한다. 실제 인증·업로드 성공은 별도 API 검사로 확인한다.
+- 첫 화면은 /healthz의 실제 결과를 한국어·영어로 표시하고 다시 확인 버튼을 제공한다. 로그인 뒤에도 남아 있던 초기 안내 문구를 교체했다. 소유자 전용 접근과 일반 게임 연결의 공개 API 승인 대기를 각각 표시한다.
 
 [공식 Sites 문서](https://learn.chatgpt.com/docs/sites)는 D1을 사이트당 10 GB로 안내하며 R2에는 고정 저장 한도를 두지 않는다. 계정 전체의 사용 제한은 별도로 적용된다.
 
@@ -49,10 +50,11 @@ RuntimeTelemetrySitesSmoke는 격리 저장의 실제 균열을 완료해 기본
 
 ## 구현 근거와 현재 검증 상태
 
-[수집 서버](../../server/sites/_worker.js) · [Node 검사](../../server/sites/test_worker.mjs) · [배포 도구](../../server/sites/publish.py) · [API 검사](../../server/sites/verify_cloud.py) · [게임 연결](../../Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs) · [실제 업로더 검사](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTelemetrySitesSmoke.cs)
+[수집 서버](../../server/sites/_worker.js) · [상태 화면 코드](../../server/sites/public/status.js) · [Node 검사](../../server/sites/test_worker.mjs) · [배포 도구](../../server/sites/publish.py) · [API 검사](../../server/sites/verify_cloud.py) · [게임 연결](../../Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs) · [실제 업로더 검사](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTelemetrySitesSmoke.cs)
 
 - Node 10/10 통과: 원문·중복·충돌·저장 실패·인증 철회·요청 한도·리다이렉트 거절. [결과](../../Artifacts/Validation/sites-player-logs-20260930/worker-tests.txt)
 - 소유자 비공개 배포의 API 10개 확인: 최초/중복 ACK 일치, 변경된 원문 409, 잘못된 관측 422, 익명/잘못된 토큰 401, 목록 405, 개별 조회 404. D1에는 합성 전투 한 행과 일치하는 SHA-256이 남았다. [결과](../../Artifacts/Validation/sites-player-logs-20260930/private-api.json)
 - 공개 범위 전환과 직접 게임 업로드 검증은 소유자의 공개 API 승인을 기다린다. 비공개 API 검증을 일반 플레이어 연결 완료로 해석하지 않는다.
-- Unity Edit Mode 관련 검사 41/41 통과: 계정 저장 12, 전투 기록 18, 서버 연결 10, 서버별 운영 캐시 1. macOS 개발 빌드는 오류 0으로 성공했다. 전체 Edit Mode 실행은 범위를 좁히며 종료했으므로 전체 통과 결과로 보고하지 않는다. 직접 업로드 런타임 검사와 모바일 실기기 검사는 실행하지 않았다. [검증 요약](../../Artifacts/Validation/sites-player-logs-20260930/validation-summary.json)
+- Unity Edit Mode 관련 검사 41/41 통과 뒤 계정 토큰 전환 보호를 보강했다. 변경된 서버 연결 검사 11/11을 다시 통과했고, 바뀌지 않은 계정 저장 12·전투 기록 18·서버별 운영 캐시 1의 성공 결과를 재사용한다. 변경된 코드로 macOS 개발 빌드도 다시 생성했으며 오류 0으로 완료했다. 전체 Edit Mode 실행은 범위를 좁히며 종료했으므로 전체 통과 결과로 보고하지 않는다. 직접 업로드 런타임 검사와 모바일 실기기 검사는 실행하지 않았다. [검증 요약](../../Artifacts/Validation/sites-player-logs-20260930/validation-summary.json)
+- 배포된 상태 화면에서 한국어·영어 전환, 다시 확인 버튼과 실제 정상 응답을 확인했다. 화면의 정상 표시는 수집 서비스·저장소의 응답이며 일반 게임 업로드 완료를 뜻하지 않는다.
 - 인증·운영 서버와 Sites 검사의 [CI](https://github.com/dakrdong/HELLSCRIPT/actions/runs/36729003860)가 main의 3c33af8b에서 통과했다. [D1 저장 근거](../../Artifacts/Validation/sites-player-logs-20260930/storage-proof.json)는 합성 runId·원문 해시만 제공하며 계정 ID·토큰은 제외한다.

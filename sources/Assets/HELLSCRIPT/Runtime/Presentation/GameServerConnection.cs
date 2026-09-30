@@ -20,13 +20,14 @@ namespace Hellscript
         public sealed class PlayerTelemetrySession:ICombatTelemetrySession
         {
             readonly Func<GooglePlayerSession> read;
+            readonly string accountId;
             public Uri Endpoint {get;}
             public string AccessToken
             {
-                get{var value=read();return value!=null&&value.Valid(DateTimeOffset.UtcNow.ToUnixTimeSeconds())?value.accessToken:null;}
+                get{var value=read();return value!=null&&value.accountId==accountId&&value.Valid(DateTimeOffset.UtcNow.ToUnixTimeSeconds())?value.accessToken:null;}
             }
             public PlayerTelemetrySession(Uri endpoint,Func<GooglePlayerSession> read)
-            {Endpoint=endpoint;this.read=read??throw new ArgumentNullException(nameof(read));}
+            {Endpoint=endpoint;this.read=read??throw new ArgumentNullException(nameof(read));accountId=read()?.accountId;}
         }
         public static string Status {get;private set;}="not_configured";
 

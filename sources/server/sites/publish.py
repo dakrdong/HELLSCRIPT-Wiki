@@ -65,7 +65,7 @@ def main():
             shutil.rmtree(path)
         else:
             path.unlink()
-    paths = ['.openai/hosting.json', '_worker.js', 'public/index.html', 'publish.py', 'test_worker.mjs', 'verify_cloud.py']
+    paths = ['.openai/hosting.json', '_worker.js', 'public/index.html', 'public/status.js', 'public/status.css', 'publish.py', 'test_worker.mjs', 'verify_cloud.py']
     for relative in paths:
         target = args.mirror / relative
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -87,6 +87,8 @@ def main():
                 ('.openai/hosting.json', '.openai/hosting.json'),
                 ('_worker.js', 'dist/index.js'),
                 ('public/index.html', 'dist/client/index.html'),
+                ('public/status.js', 'dist/client/status.js'),
+                ('public/status.css', 'dist/client/status.css'),
             ):
                 archive.add(args.mirror / relative, arcname=output, recursive=False)
         os.replace(temporary, args.archive)
