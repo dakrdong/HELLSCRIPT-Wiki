@@ -1,6 +1,6 @@
 # Shared UI and new-content contract
 
-Updated: 2026-09-28
+Updated: 2026-09-30
 Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
 
 [Korean version](Shared_UI_Contract.md)
@@ -115,7 +115,7 @@ The Google sign-in dialog in `TitleScreenView` remains part of the existing full
 
 ## Rift victory adapter
 
-`RiftVictoryWindow` uses the shared `RewardSnapshot` entry point. Three fixed result regions keep the whole summary visible, while source-grouped loot scrolls independently. Four regular skills and one ultimate read the combat snapshot. Slots, details, icons, safe area and button ownership remain shared, with no private canvas. Decorative numerals reuse `UiFonts.Display` at fixed size. The result page retains the host's input/Back stack while permitting the repeat clock; nested windows retain normal blocking. See [ownership and validation](Rift_Victory.en.md).
+`RiftVictoryWindow` uses the shared `RewardSnapshot` entry point. A fixed layout keeps the whole summary visible, while only the source-grouped loot list scrolls. Portrait stacks the record, battle review and growth above docked actions; landscape and PC place record | growth + review | loot columns beside a vertical action rail. Section dividers reuse `UiHeaderRule`. Four regular skills and one ultimate read the combat snapshot and are drawn by `RiftSkillShareView`. At the user's request the two repeat-readout pictograms (hourglass, repeat count) are white content art drawn by Codex (`Art/RiftResult`); a dedicated importer and `ResourceTextureBudget` size them, and a vector glyph covers a missing texture. Slots, details, icons, safe area and button ownership remain shared, with no private canvas. Decorative numerals reuse `UiFonts.Display` at fixed size. The result page retains the host's input/Back stack while permitting the repeat clock; nested windows retain normal blocking. See [ownership and validation](Rift_Victory.en.md).
 
 Inventory and Rift reward inspection share `ItemDetailPopup` for the item-information header, range controls, fixed action boundary and card viewport. The popup receives explicit snapshots and callbacks; it has no live account access.
 
@@ -125,7 +125,7 @@ When closing a nested detail window, `ContentWindowHost` restores both the prior
 
 Text logs use the `CombatLogWindow` shared `ContentWindowView`/`BattleSnapshot` modal, preserving the underlying result with a Close-only footer. Skill contributions read shared `CombatStatistics` and catalog display roles; presentation must not replay combat events to calculate values.
 
-`IncomingDamageWindow` uses the same `ContentWindowView` / `BattleSnapshot` adapter. `CombatStatistics.TopIncoming` owns cumulative source rankings and their top-only denominators; the view does not duplicate aggregation or mutate saves.
+The Details window, `RiftReviewDetailWindow`, starts from the new-window template as a `ContentWindowView` / `BattleSnapshot` window. Portrait uses objective, skill-share and damage-taken tabs; landscape and PC show the objective step times beside the incoming rankings without tabs. `IncomingDamageRanking` draws the rankings. `CombatStatistics.TopIncoming` owns cumulative source rankings and their top-only denominators, and `RiftObjectives.RecordStep` records the step times; the view does not duplicate aggregation or mutate saves.
 ## Proportional scaling and one bottom HUD
 
 Follow [window shrinking and a unified bottom HUD](Responsive_Hud_20260928.en.md). The complete bottom HUD retains one landscape composition and one scale. Do not independently resize or rearrange potions, skills, seal, XP, HP or MP by aspect ratio. Ultimate and ordinary skills always share one row. Ordinary controls and text also shrink together. Landscape power saving uses equal-width columns and a centered vertical divider.

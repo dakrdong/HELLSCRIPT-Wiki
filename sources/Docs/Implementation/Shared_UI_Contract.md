@@ -1,6 +1,6 @@
 # 공통 UI와 신규 콘텐츠 개발 규칙
 
-갱신일: 2026-09-29
+갱신일: 2026-09-30
 최신 인벤토리를 장비 표시의 기준으로 삼는다. 신규 콘텐츠는 아래 공통 부품을 조합해 만든다. 화면별로 같은 규칙을 다시 구현하지 않는다. 특수한 배치와 콘텐츠의 게임 규칙은 유지한다.
 
 영어판: [Shared UI contract](Shared_UI_Contract.en.md)
@@ -145,7 +145,7 @@
 
 ## 균열 승리 결과 어댑터
 
-`RiftVictoryWindow`는 공통 창의 `RewardSnapshot` 진입점을 사용한다. 결과 전체를 한 화면에서 확인하도록 본문을 고정된 세 영역으로 배치하고 전리품만 독립 스크롤한다. 네 일반 스킬과 궁극기는 전투 스냅샷을 읽는다. 공통 슬롯·상세·아이콘·안전 영역과 버튼을 유지하며 별도 캔버스를 만들지 않는다. 큰 장식 수치에는 공유 `UiFonts.Display`를 쓰고 고정 크기를 유지한다. 완료 결과 페이지는 `ContentWindowHost`의 입력·뒤로가기를 유지하면서 반복 시계 차단만 해제한다. 중첩 창은 기본 차단을 사용한다. [소유 경계와 검증](Rift_Victory.md)을 따른다.
+`RiftVictoryWindow`는 공통 창의 `RewardSnapshot` 진입점을 사용한다. 결과 전체를 한 화면에서 확인하도록 본문을 고정 배치하고 획득 아이템 목록만 독립 스크롤한다. 세로는 정복 기록·전투 돌아보기·성장과 전리품을 위아래로 쌓고 행동을 하단에 고정한다. 가로와 PC는 정복 기록 | 성장과 전리품+전투 돌아보기 | 획득 아이템의 세 열 옆에 세로 행동 레일을 둔다. 영역 구분선은 공통 `UiHeaderRule`을 쓴다. 네 일반 스킬과 궁극기는 전투 스냅샷을 읽고 `RiftSkillShareView`가 그린다. 반복 표시의 두 그림(모래시계, 반복 횟수)은 사용자 요청으로 Codex가 그린 흰 단색 콘텐츠 그림(`Art/RiftResult`)이며, 전용 임포터와 `ResourceTextureBudget`이 크기를 정하고 텍스처가 없으면 벡터 기호로 대신한다. 공통 슬롯·상세·아이콘·안전 영역과 버튼을 유지하며 별도 캔버스를 만들지 않는다. 큰 장식 수치에는 공유 `UiFonts.Display`를 쓰고 고정 크기를 유지한다. 완료 결과 페이지는 `ContentWindowHost`의 입력·뒤로가기를 유지하면서 반복 시계 차단만 해제한다. 중첩 창은 기본 차단을 사용한다. [소유 경계와 검증](Rift_Victory.md)을 따른다.
 
 균열과 인벤토리의 아이템 상세 하단은 `ItemDetailPopup.SetFooter`가 문맥·안내·행동 수에 맞춰 계산한다. 콘텐츠에서 하단 높이·버튼 좌표를 별도로 만들지 않는다. 균열 실패는 같은 결과 어댑터와 공통 `UiTheme` 실패 색을 사용하며, 스킬 피해 카드는 대상별 집계를 읽는 비대화형 표시다.
 
@@ -153,7 +153,7 @@
 
 문자 로그는 `CombatLogWindow`의 `ContentWindowView`/`BattleSnapshot` 모달로 연다. 원래 결과 페이지를 유지하고 하단은 닫기만 제공한다. 스킬 기여도는 공통 `CombatStatistics`와 스킬 정의의 표시 역할을 읽으며 화면에서 전투 이벤트를 재계산하지 않는다.
 
-받은 피해 상세의 `IncomingDamageWindow`도 같은 `ContentWindowView`·`BattleSnapshot` 어댑터다. 출처별 누계와 Top 목록 비중은 `CombatStatistics.TopIncoming`이 계산하며 화면은 정렬·집계나 저장 변경을 복제하지 않는다.
+‘상세 보기’의 `RiftReviewDetailWindow`는 신규 창 템플릿에서 시작한 `ContentWindowView`·`BattleSnapshot` 창이다. 세로는 목표·스킬 피해 비중·받은 피해 탭을, 가로와 PC는 탭 없이 목표 단계 시간과 받은 피해 순위를 나란히 보여 준다. 순위 그리기는 `IncomingDamageRanking`이 맡는다. 출처별 누계와 Top 목록 비중은 `CombatStatistics.TopIncoming`이, 목표 단계 시간은 `RiftObjectives.RecordStep`이 기록한다. 화면은 정렬·집계나 저장 변경을 복제하지 않는다.
 ## 자동 사냥 절전 HUD
 
 `GameUI.Idle`의 기존 캔버스는 실제 사냥을 계속하는 절전 HUD 어댑터다. 배경에는 일시정지를 걸지 않고, 창고·인벤토리·새 `IdleEquipmentDetailWindow`만 공통 창 관리자의 중첩 일시정지를 사용한다. 장비 칸은 `EquipmentSlotView`, 과거 상세는 `ItemDetailView`와 `RewardSnapshot`, 검은 배경 위의 글꼴·색·배율은 `UiFonts`·`UiTheme`을 사용한다. 독립 스크롤은 전체 기록을 보관하면서 보이는 행만 생성한다. 표시가 거래를 실행하거나 과거 장비를 현재 소유품으로 다시 조회하지 않는다. [절전 모드](Idle_Display.md)에 실행과 검증 범위를 기록한다.

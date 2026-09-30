@@ -1,0 +1,114 @@
+{
+ "surface": "built-in image_gen via Codex CLI (imagegen skill), codex exec -m gpt-6-astra",
+ "requestedBy": "user request 2026-09-30: replace the rift result repeat text with icons; the runner and repeat icons drawn by Codex (the hourglass was drawn in the same call)",
+ "verifiedModel": null,
+ "provenance": "candidate_model_unknown",
+ "productionApproved": false,
+ "alpha": "native PNG alpha; no chroma key, background removal, recolouring or resizing",
+ "references": [
+  "user-supplied runner and circular-arrow pictograms (style only)",
+  "screenshot of the result action rail (context)"
+ ],
+ "review": "Accepted 2026-09-30 by Claude: solid white silhouettes with transparent surroundings (edge alpha at most 1/255), readable tinted gold and green at 24 px. The game tints them at runtime. Follow-up 2026-09-30: the user asked for one merged repeat-count icon instead of the runner and cycle pair; variant a (runner inside two chasing arrows) is used and stays readable tinted at 20 px.",
+ "note": "Codex reported the outputs as 1254x1254 instead of the requested 1024 and flagged the fill as off-white (253); both are kept unchanged. Unity imports them at 128 px.",
+ "assets": [
+  {
+   "id": "icon-runner",
+   "file": "Assets/HELLSCRIPT/Resources/Art/RiftResult/icon-runner.png",
+   "sha256": "367b24ed0cd214994c592fe246871b197dd6ed2a9bc74adcec9fb8b71de0ed65",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\n\nSubject: A person running to the right in mid-stride, matching the bold, solid, rounded pictogram style of ref-runner.png: a round head at the top right, the torso leaning forward, one arm swinging forward and one arm back, the front leg bent with its foot down, the back leg kicked out behind.\n\nDeliver one isolated white symbol as a transparent PNG with preserved native alpha. All surrounding and internal empty space must be fully transparent. No scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. This is an individual runtime-tinted UI icon for the HELLSCRIPT rift result screen, not a screenshot or icon sheet.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f06d-570a-70f0-b85a-094f55e95298/exec-4a2616ab-497f-400d-a045-30ae2d0e1bf5.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.7334,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    99,
+    120,
+    1139,
+    1155
+   ],
+   "model": "unknown",
+   "status": "replaced 2026-09-30 by icon-repeat-runs at the user request (one merged repeat-count icon); removed from Resources"
+  },
+  {
+   "id": "icon-repeat",
+   "file": "Assets/HELLSCRIPT/Resources/Art/RiftResult/icon-repeat.png",
+   "sha256": "44cd16efa87ad3a0590742d7e674efa5960ee79f69fb9c3edb959187f6e15e40",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\n\nSubject: Two thick curved arrows chasing each other around a circle clockwise, each ending in a bold triangular arrowhead, matching the bold, solid, rounded pictogram style of ref-repeat.png.\n\nDeliver one isolated white symbol as a transparent PNG with preserved native alpha. All surrounding and internal empty space must be fully transparent. No scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. This is an individual runtime-tinted UI icon for the HELLSCRIPT rift result screen, not a screenshot or icon sheet.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f06d-570a-70f0-b85a-094f55e95298/exec-341ba056-a3b0-406d-9e26-6933aba9aacd.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.7565,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    158,
+    169,
+    1096,
+    1092
+   ],
+   "model": "unknown",
+   "status": "replaced 2026-09-30 by icon-repeat-runs at the user request (one merged repeat-count icon); removed from Resources"
+  },
+  {
+   "id": "icon-hourglass",
+   "file": "Assets/HELLSCRIPT/Resources/Art/RiftResult/icon-hourglass.png",
+   "sha256": "81a7a386075dae69126bff990486be28f764aefdae7dc374ee5f23010e00d961",
+   "prompt": "Create ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is a single solid pure white (#FFFFFF) filled shape, bold and simple like a solid Material or Font Awesome icon, rounded stroke ends, even stroke weight, centred with about 10% padding on every side, crisp anti-aliased edges. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. It must stay readable at 16 pixels.\n\nSubject: An hourglass (sand timer) in the same bold, solid, rounded pictogram style as ref-runner.png and ref-repeat.png: flat cap bars at the top and bottom, two glass bulbs meeting at a narrow waist, the sand drawn as solid areas in the upper and lower bulbs.\n\nDeliver one isolated white symbol as a transparent PNG with preserved native alpha. All surrounding and internal empty space must be fully transparent. No scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. This is an individual runtime-tinted UI icon for the HELLSCRIPT rift result screen, not a screenshot or icon sheet.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f06d-570a-70f0-b85a-094f55e95298/exec-a37eede8-d646-4bae-9bf1-c611e3031514.png",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.6723,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    224,
+    142,
+    1030,
+    1112
+   ],
+   "model": "unknown"
+  },
+  {
+   "id": "icon-repeat-runs",
+   "file": "Assets/HELLSCRIPT/Resources/Art/RiftResult/icon-repeat-runs.png",
+   "sha256": "8c4dd4a7681d97931de8222b3a265531472d7c9004af037851e277d794fa43cb",
+   "prompt": "Use case: logo-brand.\nAsset type: HELLSCRIPT rift result screen repeat-run-count UI pictogram, displayed at 16–24 pixels before a count such as ×3 (do not render the count). The supplied ref-runner.png and ref-repeat.png are subject references only; ref-hourglass-current.png is a weight/style reference only. Match the hourglass's bold white silhouette weight and rounded simplicity, without copying its texture or artifacts. Generate a new icon, not an edit of a reference.\nCreate ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is solid pure white (#FFFFFF) filled shapes, bold and simple like a solid Material or Font Awesome icon, rounded ends, even stroke weight, centred with about 8% padding on every side, crisp anti-aliased edges. Leave clear transparent gaps between the figure and the arrows so the two parts stay separate at 16 pixels. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. One isolated combined symbol, with fully transparent surrounding and internal empty space; no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. Preserve native transparency in the PNG.\nVariant icon-repeat-runs-a: Two thick curved arrows chasing each other clockwise around a circle (as in ref-repeat.png), with a small solid running figure (as in ref-runner.png, running to the right) inside the empty centre of the circle. Exactly two arrows, each with a clear bold arrowhead. Keep the runner clearly separated from both arrows by transparent gaps.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f0a5-e6d2-7212-80d5-c0b59b973a35/exec-d08aa2f8-a848-4baf-80ef-d9e5d8d97555.png",
+   "generatedAs": "icon-repeat-runs-a",
+   "model": "unknown",
+   "size": [
+    1254,
+    1254
+   ],
+   "alpha": true,
+   "transparentFraction": 0.6902,
+   "maxAlphaWithin40pxOfEdge": 1,
+   "visibleBounds": [
+    116,
+    138,
+    1137,
+    1116
+   ]
+  }
+ ],
+ "alternatives": [
+  {
+   "id": "icon-repeat-runs-b",
+   "status": "not chosen",
+   "reason": "a single looping arrow reads less like the repeat symbol the user supplied than two chasing arrows",
+   "sha256": "10d3a41dbac2dbbc8d64c60b054859ac54fa20cc9d63e4f00a83452143465243",
+   "prompt": "Use case: logo-brand.\nAsset type: HELLSCRIPT rift result screen repeat-run-count UI pictogram, displayed at 16–24 pixels before a count such as ×3 (do not render the count). The supplied ref-runner.png and ref-repeat.png are subject references only; ref-hourglass-current.png is a weight/style reference only. Match the hourglass's bold white silhouette weight and rounded simplicity, without copying its texture or artifacts. Generate a new icon, not an edit of a reference.\nCreate ONE flat 2D UI pictogram icon. Square 1:1 PNG, 1024x1024, with a native transparent background (a real alpha channel, fully transparent everywhere outside the symbol). The symbol is solid pure white (#FFFFFF) filled shapes, bold and simple like a solid Material or Font Awesome icon, rounded ends, even stroke weight, centred with about 8% padding on every side, crisp anti-aliased edges. Leave clear transparent gaps between the figure and the arrows so the two parts stay separate at 16 pixels. No gradients, no shading, no texture, no glow, no drop shadow, no outline, no border, no background shape, no text, no letters, no numbers. One isolated combined symbol, with fully transparent surrounding and internal empty space; no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. Preserve native transparency in the PNG.\nVariant icon-repeat-runs-b: A running figure (as in ref-runner.png, running to the right) with ONE thick circular arrow looping around it clockwise, nearly a full circle, ending in a bold triangular arrowhead at the top right. Exactly one circular arrow and one arrowhead. Keep the runner clearly separated from the circular arrow by transparent gaps.",
+   "codexSource": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0f0a5-e6d2-7212-80d5-c0b59b973a35/exec-b44b99d8-397c-44bb-8389-60cb55245ee0.png",
+   "model": "unknown"
+  }
+ ]
+}

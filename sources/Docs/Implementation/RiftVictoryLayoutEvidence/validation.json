@@ -1,0 +1,230 @@
+{
+ "date": "2026-09-30",
+ "commit": "e3c4731c",
+ "unity": "6000.6.0f1 batch mode on a clone of the worktree; macOS development build",
+ "savedData": "isolated -hellscriptSavePath per smoke; the user's save was not read or written",
+ "editModeFull": {
+  "commit": "47a68801",
+  "total": 4752,
+  "passed": 4705,
+  "failed": 47,
+  "skipped": 0,
+  "failures": 47,
+  "notInBaseline": [],
+  "baselineFailuresNowPassing": [],
+  "note": "full suite ran on commit 47a68801 (main 9a22067e merged); not re-run after the second main merge",
+  "baseline": "~/HellscriptOverhaulWork/work/baseline-failures.txt (47 failures on main a6612e09 and earlier)"
+ },
+ "editModeFocused": {
+  "total": 190,
+  "passed": 190,
+  "failed": 0,
+  "skipped": 0,
+  "commit": "47a54f24",
+  "filter": "Localization, CombatJournal, StoredLocalization, BuildResource, CurrencyArt, EquipmentArt, UiButton, ObjectiveProgress, SealObjective, RiftResult, GatePassage, ObjectiveChain, IdleHuntStatus"
+ },
+ "uiContract": "tools/check_ui_contract.py PASS; tools/test_ui_contract.py 11 tests OK",
+ "smokes": {
+  "RiftVictorySmoke": {
+   "passed": true,
+   "launches": [
+    [
+     "victory",
+     0
+    ],
+    [
+     "restart",
+     0
+    ]
+   ]
+  },
+  "RiftVictoryUtility": {
+   "passed": true,
+   "launches": [
+    [
+     "utility",
+     0
+    ]
+   ]
+  },
+  "RiftVictoryDefeat": {
+   "passed": true,
+   "launches": [
+    [
+     "defeat",
+     0
+    ]
+   ]
+  },
+  "ObjectiveSmoke": {
+   "passed": false,
+   "launches": [
+    [
+     "initial",
+     1
+    ]
+   ]
+  },
+  "ChainSmoke": {
+   "passed": false,
+   "launches": [
+    [
+     "carrier-main",
+     1
+    ]
+   ]
+  },
+  "ChainSmoke-offering-main": {
+   "passed": false,
+   "launches": [
+    [
+     "offering-main",
+     1
+    ]
+   ]
+  },
+  "GateSmoke": {
+   "passed": false,
+   "launches": [
+    [
+     "closed-checkpoint",
+     1
+    ]
+   ]
+  }
+ },
+ "smokesOnUnchangedMain": {
+  "ObjectiveSmoke": {
+   "passed": false,
+   "launches": [
+    [
+     "initial",
+     1
+    ]
+   ]
+  },
+  "ChainSmoke": {
+   "passed": false,
+   "launches": [
+    [
+     "carrier-main",
+     1
+    ]
+   ]
+  },
+  "ChainSmoke-offering-main": {
+   "passed": false,
+   "launches": [
+    [
+     "offering-main",
+     1
+    ]
+   ]
+  },
+  "GateSmoke": {
+   "passed": false,
+   "launches": [
+    [
+     "closed-checkpoint",
+     1
+    ]
+   ]
+  }
+ },
+ "smokeNote": "Objective, Chain (carrier and offering) and Gate smokes fail with identical exceptions on unchanged main a6612e09: their fresh-save fixtures start the mandatory tutorial map before any objective code runs.",
+ "notVerified": [
+  "physical iOS/Android devices",
+  "pointer input on a real window (synthetic uGUI events only)",
+  "natural rift play reaching the result (fixture runs)"
+ ],
+ "followUp": {
+  "commit": "9ada7d88",
+  "change": "bold bright-gold section titles in every layout; one merged repeat-count icon replaces the runner and cycle pair",
+  "editMode": "focused only at 9ada7d88 (74 passed); the full suite was run later on 47a68801, see editModeFull",
+  "smokes": "RiftVictory victory+restart, utility and failure re-run on the new build: pass; the screenshots in this folder were retaken from the final commit build"
+ },
+ "editModeFinalTree": {
+  "commit": "e3c4731c",
+  "total": 1234,
+  "passed": 1227,
+  "failed": 7,
+  "skipped": 0,
+  "failures": 7,
+  "notInBaseline": [],
+  "filter": [
+   "Localization",
+   "CombatJournal",
+   "StoredLocalization",
+   "BuildResource",
+   "CurrencyArt",
+   "EquipmentArt",
+   "ItemArtCoverage",
+   "UiButton",
+   "SharedUi",
+   "ObjectiveProgress",
+   "SealObjective",
+   "ObjectiveChain",
+   "GatePassage",
+   "RiftResult",
+   "IdleHuntStatus",
+   "Rift",
+   "RiftEntry",
+   "RiftCirculation",
+   "RiftAdmission",
+   "RiftContentUnlock",
+   "AuthoritativeRift",
+   "CompactRift",
+   "OrganicRift",
+   "IntroductoryRift",
+   "RepeatHunt",
+   "CombatStatistics",
+   "CombatHistory",
+   "DefeatAnalysis",
+   "IncomingDamageBreakdown",
+   "TrainingGround",
+   "SkillPresetCombatPreview",
+   "HuntEdictSkillPreset",
+   "HuntEdictQuickPreset",
+   "HuntEdict",
+   "HuntEdictV2",
+   "HuntEdictOverview",
+   "EdictResponse",
+   "ClassSkillPolicy",
+   "ClassSkillRuntime",
+   "ClassSkillCompatibility",
+   "ClassSkillBoundary",
+   "WorldFx",
+   "WorldLighting",
+   "CurrentBuildSave",
+   "RestoreFidelity"
+  ]
+ },
+ "mainMerges": [
+  {
+   "commit": "47a68801",
+   "main": "9a22067e",
+   "brought": "item art coverage (#41)",
+   "conflict": "RuntimeRiftVictorySmoke.cs: both sides added the equipped-skill rank fix (main kept); capture tour kept beside the ItemArt branch"
+  },
+  {
+   "commit": "e3c4731c",
+   "main": "ee9f9055",
+   "brought": "skill preset combat previews (5 commits)",
+   "conflict": "none (en.txt and StorageGlyph.cs auto-merged; no duplicate keys or cases)"
+  }
+ ],
+ "smokesFinalTree": {
+  "passed": [
+   "RiftVictorySmoke (victory+restart)",
+   "RiftVictoryDefeat",
+   "ItemArtSmoke",
+   "SkillCombatPreview"
+  ],
+  "utility": {
+   "batch": "failed once: Clipped text: Button text:상세 보기 21.17046>20 at 440x956 ko 120%",
+   "reruns": "5 of 5 passed on the same build (2 idle, 3 under artificial CPU load)",
+   "reproduced": false,
+   "cause": "not found"
+  }
+ }
+}

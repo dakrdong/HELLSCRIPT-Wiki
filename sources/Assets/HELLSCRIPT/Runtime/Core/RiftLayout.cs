@@ -130,6 +130,8 @@ namespace Hellscript
         public List<RiftOffering> offerings=new List<RiftOffering>();
         public RiftOfferingAltar altar;
         public RiftObjectiveRecord objectiveRecord;
+        // Combat seconds per completed objective step, filled by RiftObjectives.RecordStep.
+        public List<float> objectiveSteps=new List<float>();
         public bool gateOpen,gateOpenedByMeter;
         public const int CurrentVersion=8;
         public int contentStage;
