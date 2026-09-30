@@ -73,7 +73,7 @@ namespace Hellscript
                 File.WriteAllText(Path.Combine(directory,"item-id.txt"),itemId);
                 game.ApplyLanguage("ko");game.UI.ShowItemDetail(itemId);yield return Capture("quality-detail-ko",1920,1080,"각성");
                 OpenMasterwork();yield return Capture("masterwork-ko",1280,720);
-                game.ApplyLanguage("en");game.ApplyInterfaceScale(140);OpenMasterwork();yield return Capture("masterwork-en-portrait",720,1280,"Blacksmith");
+                game.ApplyLanguage("en");OpenMasterwork();yield return Capture("masterwork-en-portrait",720,1280,"Blacksmith");
                 yield return Capture("masterwork-en-short-landscape",640,360,"Masterwork 4");
                 QuoteNext();yield return Capture("milestone-confirm-en",720,1280);
                 var commit=Button("확인").onClick;int gold=account.gold,materials=account.materials;
@@ -107,7 +107,7 @@ namespace Hellscript
                 yield return Capture("greater-reroll-warning-en",720,1280);gold=account.gold;
                 Require(Texts.Contains("removes"),"The greater loss warning is missing from confirmation");Click("확인");yield return null;
                 Require(!Item.rolls[0].greater&&Item.rolls[0].rollBasisPoints>=4000&&Item.masterwork==4&&account.gold==gold-Economy.RerollGold(Item),"Reroll lost the awakened floor or masterwork");
-                game.ApplyInterfaceScale(100);game.UI.ShowItemDetail(candidate.id);
+                game.UI.ShowItemDetail(candidate.id);
                 yield return new WaitForSecondsRealtime(4.1f);
                 yield return Capture("quality-comparison-en",1920,1080,"Gem effect removed");
                 Click("필터");Click("각성 장비만 · 꺼짐");Click("목록 보기");Click("목록");yield return null;
@@ -116,7 +116,7 @@ namespace Hellscript
                 yield return Capture("awakened-filter-en",720,1280);
                 int previousClear=hero.highestClear;hero.highestClear=100;game.UI.ShowShop();yield return null;
                 Require(Texts.Contains(Loc.F("골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준",account.gold,account.materials,60)),"Shop advertised a level above the generation cap");
-                yield return Capture("shop-level-cap-en",1280,720);hero.highestClear=previousClear;game.ApplyInterfaceScale(140);game.Save();
+                yield return Capture("shop-level-cap-en",1280,720);hero.highestClear=previousClear;game.Save();
                 File.WriteAllText(Path.Combine(directory,"expected-items.json"),Json(new Equipment{items=hero.inventory}));
             }
             else

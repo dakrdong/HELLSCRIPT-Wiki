@@ -40,7 +40,6 @@ namespace Hellscript
             InitializeLanguage(saveDirectory);
             ItemRangeDisplay.Initialize(saveDirectory);
             InitializeDisplaySettings(saveDirectory);
-            InitializeInterfaceScale(saveDirectory);
             InitializeIdle(saveDirectory);
             try{Profiles=new AccountProfiles(saveDirectory);activeProfileDirectory=Profiles.GuestDirectory;Store=new GameStore(activeProfileDirectory,catalog);if(!Store.StartNewHeroesWithoutSkills()||!Store.ActivateSkillTrees(catalog))throw new InvalidOperationException(Store.Error);}
             catch(Exception e){Notice=e.Message;UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);enabled=false;return;}

@@ -76,7 +76,7 @@ namespace Hellscript
             game.Store.Data.guide.legacyExempt=true;
             game.AttendancePopups.SetHidden(AttendanceKind.Weekly,true,game.Store.AttendanceClock());
             game.AttendancePopups.SetHidden(AttendanceKind.Monthly,true,game.Store.AttendanceClock());game.UI.CloseAttendance();
-            game.EnterPlaza(true);UiSafeArea.AspectRatio=0;game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();
+            game.EnterPlaza(true);UiSafeArea.AspectRatio=0;game.UI.RefreshCanvasLayout();
             game.RequestStation(TownStation.Merchant);for(int n=0;n<1000&&game.Town.Walking;n++)game.Town.Tick(.05f);
             foreach(string language in new[]{"ko","en"})
             {
@@ -95,11 +95,7 @@ namespace Hellscript
                     if(size.x==800||size.x==450||size.x==1600)yield return Capture(language+"-"+size.x+"x"+size.y);
                 }
             }
-            foreach(int percent in new[]{50,150})
-            {
-                game.InterfaceScale.Apply(percent);game.UI.ApplyInterfaceScale();yield return new WaitForSecondsRealtime(.5f);game.UI.RefreshPlaza();Check("preference-"+percent);
-            }
-            game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();Screen.SetResolution(800,450,FullScreenMode.Windowed);yield return new WaitForSecondsRealtime(.6f);
+            game.UI.RefreshCanvasLayout();Screen.SetResolution(800,450,FullScreenMode.Windowed);yield return new WaitForSecondsRealtime(.6f);
             foreach(var npc in TownLayout.Stations.Where(s=>!string.IsNullOrEmpty(s.npcName)).Select(s=>(id:"NPC bubble "+s.id,name:s.npcName,position:s.position))
                 .Concat(TownLayout.Residents.Select(r=>(id:"Resident bubble "+r.id,name:r.name,position:r.position))))
             {
@@ -111,7 +107,7 @@ namespace Hellscript
                 var bounds=Pixels(bubble);Require(UiSafeArea.Current.Contains(bounds.min)&&UiSafeArea.Current.Contains(bounds.max),"NPC name escaped the safe area.");
                 File.AppendAllText(Path.Combine(output,"geometry.txt"),"VISIBLE English NPC: "+name.text+" PASS\n");
             }
-            File.WriteAllText(Path.Combine(output,"runtime.txt"),"PASS: "+samples+" actual HUD/nameplate/card samples, Korean and English, shrink/restore/portrait transitions, unchanged fonts after 1.5s of periodic refresh, 50/150% preference, all eight English NPCs visited with visible names inside the safe area. macOS development player; no physical mobile proof.\n");
+            File.WriteAllText(Path.Combine(output,"runtime.txt"),"PASS: "+samples+" actual HUD/nameplate/card samples, Korean and English, shrink/restore/portrait transitions, unchanged fonts after 1.5s of periodic refresh, all eight English NPCs visited with visible names inside the safe area. macOS development player; no physical mobile proof.\n");
             Debug.Log("HELLSCRIPT_HUD_SCALE_SMOKE_OK");Application.Quit(0);
         }
     }

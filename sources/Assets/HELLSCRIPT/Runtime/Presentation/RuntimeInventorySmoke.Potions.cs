@@ -79,24 +79,24 @@ namespace Hellscript
             int checks=0;
             foreach(var size in new[]{(440,956),(956,440),(1440,810),(1440,900),(1680,720)})
             foreach(string language in new[]{"ko","en"})
-            foreach(int percent in new[]{100,150})
-            {
+
+            { const int percent=100;
                 game.UI.ClosePlayInventory();yield return PolishResize(size.Item1,size.Item2);game.ApplyLanguage(language);
-                game.InterfaceScale.Apply(percent);game.UI.ApplyInterfaceScale();game.UI.ShowPlayInventory();yield return new WaitForEndOfFrame();yield return new WaitForEndOfFrame();
+                game.UI.RefreshCanvasLayout();game.UI.ShowPlayInventory();yield return new WaitForEndOfFrame();yield return new WaitForEndOfFrame();
                 PotionGeometry();WalletGeometry();string suffix=$"{size.Item1}x{size.Item2}-{language}-{percent}";
                 var frame=Bounds(View.FrameRect);var bag=Bounds(View.BagScroll.viewport);var positions=Enumerable.Range(0,3).Select(i=>Bounds(Named("inventory-potion-"+i))).ToArray();
                 Click(View.Find("inventory-dismantle"));yield return new WaitForEndOfFrame();Require(Bounds(View.BagScroll.viewport)==bag,"Selection moved or resized the bag.");
                 Click(View.Find("inventory-dismantle"));yield return new WaitForEndOfFrame();
                 View.Toast("장비를 교체했습니다.");yield return new WaitForEndOfFrame();Require(Bounds(View.BagScroll.viewport)==bag,"Toast moved or resized the bag.");
                 View.Toast("");yield return new WaitForEndOfFrame();
-                if(percent==100)yield return Capture("slots-"+suffix);
+                yield return Capture("slots-"+suffix);
                 // Check the actual input callback before yielding to the unrelated periodic save clock.
                 string accountBefore=JsonUtility.ToJson(game.Store.Data);Click(View.Find("inventory-wallet"));
                 Require(accountBefore==JsonUtility.ToJson(game.Store.Data),"Inspecting resources mutated the account.");
                 yield return new WaitForEndOfFrame();PotionGeometry();WalletGeometry(true);
-                if(percent==100)yield return Capture("wallet-art-"+suffix);
+                yield return Capture("wallet-art-"+suffix);
                 var walletDialog=View.DialogRect;var walletBounds=Bounds(walletDialog);var balanceScroll=walletDialog.GetComponentInChildren<ScrollRect>();balanceScroll.verticalNormalizedPosition=0;yield return new WaitForEndOfFrame();
-                if(percent==150&&size.Item1==440)yield return Capture("wallet-scrolled-"+suffix);
+                if(size.Item1==440)yield return Capture("wallet-scrolled-"+suffix);
                 Require(game.Store.Transact(Guid.NewGuid().ToString("N"),"wallet-refresh-fixture",a=>{a.gold=checks%2==0?int.MaxValue:0;a.premium=checks%2==0?int.MaxValue:0;a.materials=checks%2==0?int.MaxValue:0;a.enhancementStones=checks%2==0?int.MaxValue:0;return true;}),game.Store.Error);
                 yield return new WaitForEndOfFrame();yield return new WaitForEndOfFrame();WalletGeometry(true);
                 Require(walletDialog==View.DialogRect&&walletBounds==Bounds(View.DialogRect)&&balanceScroll.verticalNormalizedPosition<.01f,"Balance refresh moved the sheet or reset scrolling.");
@@ -118,10 +118,10 @@ namespace Hellscript
                 }
                 Click(View.Find("inventory-potion-2"));yield return new WaitForEndOfFrame();PotionGeometry();
                 Require(!View.Find("potion-pick-PH01").interactable&&!View.Find("potion-pick-PM01").interactable,"Another slot's potion can be assigned twice.");
-                if(percent==150&&size.Item1==440)yield return Capture("picker-"+suffix);
+                if(size.Item1==440)yield return Capture("picker-"+suffix);
                 Click(View.Find("potion-picker-back"));yield return new WaitForEndOfFrame();View.Dismiss();yield return new WaitForEndOfFrame();checks++;
             }
-            game.UI.ClosePlayInventory();game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();game.ApplyLanguage("ko");yield return PolishResize(440,956);game.UI.ShowPlayInventory();yield return new WaitForEndOfFrame();
+            game.UI.ClosePlayInventory();game.UI.RefreshCanvasLayout();game.ApplyLanguage("ko");yield return PolishResize(440,956);game.UI.ShowPlayInventory();yield return new WaitForEndOfFrame();
             Click(View.Find("inventory-potion-2"));yield return new WaitForEndOfFrame();Click(View.Find("potion-clear"));yield return new WaitForEndOfFrame();
             Require(Hero.potions.slots[2].id=="","Potion slot was not cleared.");
             Click(View.Find("potion-pick-PU01"));yield return new WaitForEndOfFrame();
@@ -150,7 +150,7 @@ namespace Hellscript
             foreach(int slot in Enumerable.Range(0,8))Require(forge.GetComponentsInChildren<Image>().Any(i=>i.name=="currency-icon-"+CurrencyIconView.CoreIcon(slot)&&i.sprite!=null),"Blacksmith core art missing: "+slot);
             yield return Capture("blacksmith-core-art");forge.Close();yield return new WaitForEndOfFrame();
             Require(Loc.MissingCount==0,"Missing potion translations: "+string.Join(";",Loc.Missing));
-            File.WriteAllText(Path.Combine(output,"potion-slots-result.txt"),"PASS: 20 resolution/language/text-scale combinations; three compact potion-only slots beside the weapon row, one shared gear, anchored fixed-size speech bubble, four exclusive persisted choices applying to all slots, direct owned-potion selection and clearing, duplicate prevention, equipment-drop rejection, save reload, HUD assignment and rendered bottle centring. Four account balance counters plus eight core balances: exact zero/int.MaxValue values, one-line names/icons/exact balances, nine native-alpha currency icons, blacksmith core artwork at the actual NPC radius, enlarged fixed bag viewport with no guidance/review rail, selection/toast stability, original Abyssal Coin art, no UI-only grants or spending, committed changes refresh the open sheet without moving it or resetting scroll. Native macOS with synthetic uGUI input and isolated saves; physical mobile not tested.\n");
+            File.WriteAllText(Path.Combine(output,"potion-slots-result.txt"),"PASS: 10 resolution/language combinations; three compact potion-only slots beside the weapon row, one shared gear, anchored fixed-size speech bubble, four exclusive persisted choices applying to all slots, direct owned-potion selection and clearing, duplicate prevention, equipment-drop rejection, save reload, HUD assignment and rendered bottle centring. Four account balance counters plus eight core balances: exact zero/int.MaxValue values, one-line names/icons/exact balances, nine native-alpha currency icons, blacksmith core artwork at the actual NPC radius, enlarged fixed bag viewport with no guidance/review rail, selection/toast stability, original Abyssal Coin art, no UI-only grants or spending, committed changes refresh the open sheet without moving it or resetting scroll. Native macOS with synthetic uGUI input and isolated saves; physical mobile not tested.\n");
             Debug.Log("HELLSCRIPT_POTION_SLOTS_RUNTIME_OK");Application.Quit(0);
         }
     }

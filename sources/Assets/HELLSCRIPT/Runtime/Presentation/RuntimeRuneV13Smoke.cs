@@ -121,8 +121,7 @@ namespace Hellscript
         {
             output=Arg("-hellscriptScreenshots");Arg("-hellscriptSavePath");Directory.CreateDirectory(output);
             Application.logMessageReceived+=(m,s,t)=>{if(t==LogType.Exception){File.WriteAllText(Path.Combine(output,"failure.txt"),m+"\n"+s);Application.Quit(1);}};
-            yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Store unavailable");game.enabled=false;game.ApplyLanguage("ko");game.ApplyInterfaceScale(100);
-            if(Environment.GetCommandLineArgs().Contains("-hellscriptRuneClaritySmoke")){yield return VerifyClarity();yield break;}
+            yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Store unavailable");game.enabled=false;game.ApplyLanguage("ko");if(Environment.GetCommandLineArgs().Contains("-hellscriptRuneClaritySmoke")){yield return VerifyClarity();yield break;}
             if(Environment.GetCommandLineArgs().Contains("-hellscriptRuneDragSmoke")){yield return VerifyDragging();yield break;}
             game.UI.ShowRunes();yield return Capture("fresh-portrait-ko",720,1280);
             Click("rune-weapon-sword");yield return null;
@@ -151,8 +150,7 @@ namespace Hellscript
             Click("rune-region-lock-1");yield return Capture("region-dialog-ko",1280,720);Click("rune-dialog-close");
             Click("rune-region-0");Click("rune-overview");yield return Capture("full-map-ko",1280,720);
             Click("rune-fit");game.ApplyLanguage("en");yield return Capture("reference-landscape-en",1280,720);yield return Capture("reference-portrait-en",720,1280);
-            game.ApplyLanguage("ko");game.ApplyInterfaceScale(140);yield return Capture("large-type-portrait-ko",720,1280);game.ApplyInterfaceScale(100);
-            yield return Resize(1280,720);Click("rune-effects-type-0");yield return Capture("attack-effects-ko",1280,720);Click("rune-dialog-close");
+            game.ApplyLanguage("ko");yield return Capture("portrait-ko",720,1280);yield return Resize(1280,720);Click("rune-effects-type-0");yield return Capture("attack-effects-ko",1280,720);Click("rune-dialog-close");
             Click("rune-codex");Click("rune-codex-weapons");Click("지팡이");
             var search=game.UI.GetComponentsInChildren<InputField>().Single();search.text="연쇄";yield return Capture("codex-search-ko",1280,720);
             Click("rune-codex-regions");Click("기교");yield return Capture("codex-region-ko",1280,720);Click("rune-dialog-close");

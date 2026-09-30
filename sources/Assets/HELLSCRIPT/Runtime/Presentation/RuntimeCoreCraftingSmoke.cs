@@ -83,7 +83,7 @@ namespace Hellscript
         IEnumerator Start()
         {
             var args=Environment.GetCommandLineArgs();int shots=Array.IndexOf(args,"-hellscriptScreenshots"),save=Array.IndexOf(args,"-hellscriptSavePath");Require(shots>=0&&save>=0,"Isolated paths required");output=args[shots+1];savePath=args[save+1];Directory.CreateDirectory(output);
-            yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Game not initialized");game.ApplyInterfaceScale(100);game.ApplyLanguage("ko");
+            yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Game not initialized");game.ApplyLanguage("ko");
             if(args.Contains("-hellscriptCoreCraftingVerify"))
             {
                 Require(A.coreCraft.history.Count==2&&A.premium==4000&&A.cores.Sum()==96-20&&A.coreCraft.pendingId!="","Restart lost crafted items or costs");
@@ -131,12 +131,10 @@ namespace Hellscript
                 }
             }
             checks.Add("Five aspect ratios, KO/EN, equal wide columns, inline catalogue, fixed scrolling popup and persistent draft");
-            game.ApplyInterfaceScale(150);yield return new WaitForSecondsRealtime(.3f);Geometry();yield return Capture("large-text-pc");
-            yield return Resize(956,440);Geometry();yield return Capture("large-text-landscape");yield return Resize(440,956);Geometry();yield return Capture("large-text-portrait");
-            game.ApplyInterfaceScale(100);game.ApplyLanguage("ko");yield return new WaitForSecondsRealtime(.3f);
+            game.ApplyLanguage("ko");yield return new WaitForSecondsRealtime(.3f);
             View.SetCoreInvestment(0);yield return Click("core-craft");Require(A.premium==4000&&A.cores[1]==2&&A.coreCraft.history.Count==2,"Zero-coin set crafting mismatch");yield return Capture("set-result");
             var reloaded=new GameStore(savePath,game.catalog);Require(reloaded.Data.coreCraft.history.Count==2&&reloaded.Data.coreCraft.pendingId!=""&&reloaded.Data.Hero.inventory.Any(i=>i.id==A.coreCraft.history.Last().item.id),"Save reload lost result");
-            checks.Add("Zero-coin set craft, wallet limit, large text and saved inventory/result state");
+            checks.Add("Zero-coin set craft, wallet limit and saved inventory/result state");
             File.WriteAllText(Path.Combine(output,"result.txt"),"PASS\n"+string.Join("\n",checks)+"\nNative macOS player / synthetic Unity input; no physical mobile validation.\n");Debug.Log("HELLSCRIPT_CORE_CRAFTING_SMOKE_OK");Application.Quit(0);
         }
     }

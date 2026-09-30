@@ -115,7 +115,7 @@ namespace Hellscript
                 Require(GemStacks.Count(migrated.Data.gems,"G06",6)==9&&File.ReadAllText(migrated.GemRecoveryArchive)==original,"Native migration lost gems or original bytes");
                 Require(migrated.Save(),"Native migration save failed");var restarted=new GameStore(migrationDirectory,game.catalog);
                 Require(restarted.GemRecoveryArchive==""&&GemStacks.Count(restarted.Data.gems,"G06",6)==9,"Native migration repeated after restart");
-                game.ApplyInterfaceScale(100);yield return SixGemMenu("ko",440,956);yield return SixGemMenu("en",1920,1080);
+                yield return SixGemMenu("ko",440,956);yield return SixGemMenu("en",1920,1080);
                 File.WriteAllText(Path.Combine(directory,"six-gems-evidence.txt"),"PASS: 6 types x 6 tiers; native 5:1 fusion with no gold cost; G07 rejected; 10000 rolls without Skull; legacy G07 to G06 retains tier/count, exact-byte archive and restart idempotence; actual Korean portrait and English landscape gem menus. Generated icon candidates are not installed.\n");
             }
             else if(stage=="initial")
@@ -125,7 +125,7 @@ namespace Hellscript
                 foreach(var item in hero.inventory)item.equipped=true;
                 var candidate=Add(1);game.Save();File.WriteAllText(Path.Combine(directory,"candidate-id.txt"),candidate.id);File.WriteAllText(Path.Combine(directory,"gemmed-id.txt"),head.id);
                 game.ApplyLanguage("ko");game.UI.ShowItemDetail(head.id);yield return Capture("socket-ko",1920,1080,"소켓 ·");
-                game.ApplyLanguage("en");game.ApplyInterfaceScale(140);game.UI.ShowItemDetail(head.id);yield return Capture("socket-en-portrait",720,1280,"Socket ·");
+                game.ApplyLanguage("en");game.UI.ShowItemDetail(head.id);yield return Capture("socket-en-portrait",720,1280,"Socket ·");
                 yield return Capture("socket-en-short-landscape",640,360,"Socket ·");
                 game.UI.ShowItemDetail(candidate.id);yield return Capture("comparison-en",1920,1080,"Gem effect removed",true);
                 // The equipment UI performs the real swap. The removed gem stays in its item.
@@ -134,8 +134,8 @@ namespace Hellscript
                 Require(game.UI.GetComponentsInChildren<Button>().Where(b=>b.name.StartsWith("판매 ·",StringComparison.Ordinal)||b.name.StartsWith("분해 ·",StringComparison.Ordinal)).All(b=>!b.IsInteractable()),"Gemmed item can be disposed");
                 Click("공유 창고로 이동");yield return null;Require(account.warehouse.Single().sockets.Single().gemId=="G02","Warehouse lost gem");
                 Click("창고");yield return null;Click("Inventory item "+head.id);yield return null;Click("현재 캐릭터의 가방으로 이동");yield return null;game.UI.ShowItemDetail(head.id);Click("장착");yield return null;
-                game.ApplyInterfaceScale(100);game.ApplyLanguage("ko");game.UI.ShowAttributes();yield return Capture("attributes-ko",1280,720);
-                game.ApplyLanguage("en");game.ApplyInterfaceScale(140);game.UI.ShowAttributes();yield return Capture("attributes-en",720,1280);
+                game.ApplyLanguage("ko");game.UI.ShowAttributes();yield return Capture("attributes-ko",1280,720);
+                game.ApplyLanguage("en");game.UI.ShowAttributes();yield return Capture("attributes-en",720,1280);
                 CompareRuns();game.Save();File.WriteAllText(Path.Combine(directory,"expected-items.json"),Json(new Items{items=hero.inventory}));
             }
             else if(stage=="restart")

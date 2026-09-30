@@ -1,5 +1,8 @@
 # Rift victory result window
 
+2026-09-30: After [text-size preference removal](Text_Size_Option_Removal.en.md), future result-screen validation uses the default size with viewport and Korean/English coverage. The 100%/120% outcomes and captures below are historical evidence from before removal, not a future test matrix.
+
+
 Integration update, 2026-09-28: game implementation and refinements are included in the [all-worktree integration](All_Work_Integration_20260928.en.md). Branch-only and documentation-only publication statements below are historical scope records; this update and the integration record describe the current state.
 
 Updated: 2026-09-30 · first written 2026-09-27 · [한국어](Rift_Victory.md)

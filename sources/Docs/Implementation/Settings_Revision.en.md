@@ -16,7 +16,6 @@ The initial separate character, preview camera and render texture have been remo
 |---|---|
 | Screen | Fit display; landscape 16:9, 16:10, 4:3, 20:9, 21:9; portrait 9:16, 10:16, 3:4, 9:20, 9:21 |
 | View distance | At the top of Screen, 50–150% in 5% steps using a slider, wheel or − / + buttons. 50% is closer, 100% is the default, and 150% is wider. |
-| Reading size | Within Screen, 50–150% in 5% steps using a slider, mouse wheel or − / + buttons. |
 | Sound | Master, music and effects volume; mute all; effects preview; defaults |
 | Language | English / 한국어, immediately repainting the current screen |
 | Character | Warrior → Mage → Ranger; the selected character cannot be selected again |
@@ -25,7 +24,7 @@ Ratios apply immediately. Desktop windows resize to fit the monitor; mobile requ
 
 View distance scales the orthographic camera’s field of view while preserving its angle, player position, movement speed and UI size. It applies immediately to the actual town or hunt in landscape settings; in portrait, the result is visible after closing. The independent `hellscript-view-distance-v1.json` device file preserves invalid original data and falls back to 100%. Failed saves still apply the selected view immediately and offer retry.
 
-Reading size retains the existing proportional scaling of text and controls. While the slider is held, the settings canvas keeps its size; releasing applies the chosen scale, keeping the track stable under the pointer. Reading position is preserved. Ratio, reading size, language and audio use device preference files separate from the account. Invalid preferences preserve their original file and use defaults; failed saves provide feedback and a retry path.
+The player text-size preference was removed on 2026-09-30. Existing device ratios are ignored and left untouched; the default text size is used. Ratio, language and audio retain independent device files. Future validation excludes text-size matrices. See [removal](Text_Size_Option_Removal.en.md).
 
 ## Character transitions and state
 

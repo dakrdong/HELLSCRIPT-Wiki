@@ -21,10 +21,9 @@ namespace Hellscript.Tests
             try
             {
                 foreach(var size in new[]{new Vector2Int(360,640),new Vector2Int(640,360),new Vector2Int(900,360),new Vector2Int(540,960),new Vector2Int(720,1280),new Vector2Int(1280,720),new Vector2Int(1600,900),new Vector2Int(900,1600),new Vector2Int(3440,1440)})
-                foreach(int percent in new[]{50,85,100,140,150})
                 {
-                    var p=new GlobalHudLayout(size.x,size.y,InterfaceScaleOptions.Factor(percent),style);
-                    string where=" at "+size.x+"x"+size.y+" @"+percent+"%";
+                    var p=new GlobalHudLayout(size.x,size.y,1f,style);
+                    string where=" at "+size.x+"x"+size.y;
                     foreach(var row in new[]{("Level",p.level,style.levelFont,style.minimumLevelFont),("HP",p.hp,style.valueFont,style.minimumValueFont),
                         ("Resource",p.resource,style.valueFont,style.minimumValueFont),("Shield",p.shield,style.shieldFont,style.minimumFont),("XP",p.xpText,style.captionFont,style.minimumFont)})
                     {
@@ -58,10 +57,10 @@ namespace Hellscript.Tests
                 for(int refresh=0;refresh<30;refresh++)Assert.That(new GlobalHudLayout(800,450).FontSize(font,10),Is.EqualTo(expected));
             }
         }
-        [TestCase(800,450,.5f)] [TestCase(450,800,.5f)] [TestCase(640,360,1f)]
-        public void SmallerWindowsKeepShrinkingBelowTheOldMinimum(int width,int height,float reading)
+        [TestCase(800,450)] [TestCase(450,800)] [TestCase(640,360)]
+        public void SmallerWindowsKeepShrinkingBelowTheOldMinimum(int width,int height)
         {
-            var large=new GlobalHudLayout(width,height,reading);var small=new GlobalHudLayout(width/2f,height/2f,reading);
+            var large=new GlobalHudLayout(width,height);var small=new GlobalHudLayout(width/2f,height/2f);
             Assert.That(small.scale,Is.EqualTo(large.scale*.5f).Within(.0001));
             Assert.That(small.Pixels(small.seal).width,Is.EqualTo(large.Pixels(large.seal).width*.5f).Within(.001));
             Assert.That(UiTheme.Scale(new Rect(0,0,width/2f,height/2f)),Is.EqualTo(UiTheme.Scale(new Rect(0,0,width,height))*.5f).Within(.0001));
@@ -79,8 +78,7 @@ namespace Hellscript.Tests
             var reference=new GlobalHudLayout(1600,900);
             Rect[] Parts(GlobalHudLayout p)=>new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.xp,p.xpText,p.status,p.potionBounds,p.ultimate}.Concat(p.actives).Concat(p.potions).ToArray();
             var original=Parts(reference);
-            foreach(float reading in new[]{.5f,1f,1.5f})
-            {
+            { const float reading=1f;
                 var current=new GlobalHudLayout(w,h,reading);var parts=Parts(current);
                 for(int i=0;i<parts.Length;i++)
                 {
@@ -90,11 +88,11 @@ namespace Hellscript.Tests
                 Assert.That(current.occupiedHeight,Is.EqualTo(reference.occupiedHeight));
             }
         }
-        [TestCase(640,360,.5f)] [TestCase(640,360,1.5f)] [TestCase(360,640,1.5f)] [TestCase(1200,900,1.5f)] [TestCase(2000,900,1)]
-        public void AllFiveSkillsAndThreePotionsStayInside(int w,int h,float scale)
+        [TestCase(640,360)] [TestCase(360,640)] [TestCase(1200,900)] [TestCase(2000,900)]
+        public void AllFiveSkillsAndThreePotionsStayInside(int w,int h)
         {
-            var p=new GlobalHudLayout(w,h,scale);
-            Assert.IsFalse(p.wrapped,"Skill wrapping is forbidden at every size and reading preference.");
+            var p=new GlobalHudLayout(w,h);
+            Assert.IsFalse(p.wrapped,"Skill wrapping is forbidden at every screen size.");
             Assert.That(p.actives.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
             foreach(var r in p.actives.Append(p.ultimate).Concat(p.potions))
             {Assert.That(r.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.yMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.xMax,Is.LessThanOrEqualTo(p.width+.01f));Assert.That(r.yMax,Is.LessThanOrEqualTo(p.height+.01f));}
@@ -115,8 +113,7 @@ namespace Hellscript.Tests
         public void BottomAnchoredActionsAndPotionsDoNotOverlapVitals(int width,int height)
         {
             var style=GlobalHudStyle.Load();
-            foreach(float factor in new[]{.5f,1,1.5f})
-            {
+            { const float factor=1f;
                 var p=new GlobalHudLayout(width,height,factor,style);
                 float baseline=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
                 Assert.That(p.actives[0].yMin,Is.EqualTo(baseline),"The bottom row must not float upward in portrait.");

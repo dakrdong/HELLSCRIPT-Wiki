@@ -1,0 +1,48 @@
+{
+  "scope": "Player text-size preference removal; default UI geometry, localization, view distance and focused settings acceptance",
+  "unityVersion": "6000.6.0f1",
+  "projectPath": "/tmp/hellscript-edict-preview-build",
+  "tests": {
+    "initial": {
+      "total": 81,
+      "passed": 80,
+      "failed": 1
+    },
+    "repair": "Removed one orphaned English translation left by preference deletion",
+    "rerun": {
+      "scope": "LocalizationTests.NoEntryIsLeftBehindByARewordedLine",
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "successfulResultsReused": 80
+  },
+  "native": {
+    "result": "passed",
+    "viewportLanguageProfiles": 10,
+    "additionalCategoryCaptures": 3,
+    "textSizeProfiles": "default only",
+    "input": "synthetic uGUI callbacks and raycast checks",
+    "legacyFilePreserved": true
+  },
+  "build": "macOS development player compiled successfully",
+  "contract": "check_ui_contract.py passed; test_ui_contract.py 11 passed",
+  "notRun": [
+    "full Edit Mode suite",
+    "122-preset combat gallery",
+    "other unrelated runtime smokes",
+    "physical mobile"
+  ],
+  "sources": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "619dd90454e0afea5991a68a31fd31beddc68dfd1fb81cdeface9db924f4004a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs": "71b552a3540edf2eab8eb7f80a9d7705a8efe71811620ed0eebdd87402a6095e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Display.cs": "30fc6877edbb85a8f2ca25646c2363748da83c7bb4e5bb55aea1c4382034c3fc",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeScreenSettingsSmoke.cs": "58382135c6f0f35e42f8969733aade6c0bfbec791a55e1a06d5f6e374ac7ae81"
+  },
+  "integration": {
+    "upstreamMain": "1bfb7e4d",
+    "mergedCompilation": "passed",
+    "settingsProductionSources": "unchanged; focused native evidence reused",
+    "additionalChecks": "shared UI ownership; wiki mirror and history; no repeated full suite or smoke"
+  }
+}

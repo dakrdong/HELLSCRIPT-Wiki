@@ -47,9 +47,9 @@ namespace Hellscript
         IEnumerator ClosePopup()=>Tap(Top().GetComponentsInChildren<Button>().Single(b=>b.name=="content-close"));
         IEnumerator Capture(string name)
         {Canvas.ForceUpdateCanvases();yield return new WaitForEndOfFrame();var texture=ScreenCapture.CaptureScreenshotAsTexture();File.WriteAllBytes(Path.Combine(output,name+".png"),texture.EncodeToPNG());Destroy(texture);}
-        IEnumerator Resize(int w,int h,string language,int scale)
+        IEnumerator Resize(int w,int h,string language)
         {
-            game.ApplyLanguage(language);game.InterfaceScale.Apply(scale);game.UI.ApplyInterfaceScale();Screen.SetResolution(w,h,FullScreenMode.Windowed);float until=Time.realtimeSinceStartup+8;
+            game.ApplyLanguage(language);game.UI.RefreshCanvasLayout();Screen.SetResolution(w,h,FullScreenMode.Windowed);float until=Time.realtimeSinceStartup+8;
             while((Screen.width!=w||Screen.height!=h)&&Time.realtimeSinceStartup<until)yield return null;Require(Screen.width==w&&Screen.height==h,"Resolution mismatch");yield return new WaitForSecondsRealtime(.3f);
         }
         IEnumerator Start()
@@ -87,18 +87,18 @@ namespace Hellscript
             game.EnterPlaza(true);game.UI.ShowPlayInventory();yield return null;yield return null;yield return Tap("inventory-reward-boxes");
             checks.Add("PASS inventory footer opens the reward box inventory through the common window host.");
             foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{2100,900}})
-            foreach(string language in new[]{"ko","en"})foreach(int scale in new[]{100,150})
-            {
-                yield return Resize(size[0],size[1],language,scale);var v=Top();Canvas.ForceUpdateCanvases();var frame=Bounds(v.Frame);
+            foreach(string language in new[]{"ko","en"})
+            { const int scale=100;
+                yield return Resize(size[0],size[1],language);var v=Top();Canvas.ForceUpdateCanvases();var frame=Bounds(v.Frame);
                 foreach(string name in new[]{"reward-box-open-one","reward-box-open-batch","reward-box-filter-0","reward-box-filter-4"})
                 {var b=Find(name);Require(b!=null,name);var r=Bounds((RectTransform)b.transform);Require(frame.Contains(r.min+Vector2.one)&&frame.Contains(r.max-Vector2.one),"Outside safe frame: "+name);}
                 foreach(var t in v.GetComponentsInChildren<Text>().Where(t=>t.name=="Reward box text"||t.name=="Button text"))
                     Require(t.resizeTextForBestFit||t.preferredHeight<=t.rectTransform.rect.height+2,"Truncated reward text: "+t.text+" at "+size[0]+" "+language+" "+scale);
                 foreach(var icon in v.GetComponentsInChildren<Image>().Where(i=>i.name.StartsWith("Reward box icon")))Require(icon.sprite!=null,"Missing sprite");
                 checks.Add($"PASS layout {size[0]}x{size[1]} {language} {scale}%");
-                if(language=="ko"&&scale==100&&size[0]==440||language=="en"&&scale==150&&size[0]==956)yield return Capture($"boxes-{size[0]}-{language}-{scale}");
+                if(language=="ko"&&size[0]==440||language=="en"&&size[0]==956)yield return Capture($"boxes-{size[0]}-{language}-{scale}");
             }
-            yield return ClosePopup();game.UI.ClosePlayInventory();yield return Resize(440,956,"ko",100);game.SelectedStage=1000;game.UI.ShowRiftKeeper();yield return null;yield return Tap("rift-first-rewards");
+            yield return ClosePopup();game.UI.ClosePlayInventory();yield return Resize(440,956,"ko");game.SelectedStage=1000;game.UI.ShowRiftKeeper();yield return null;yield return Tap("rift-first-rewards");
             list=FindAnyObjectByType<RiftRewardList>();Require(list.LastVisible==1000&&list.RowPoolCount<30,"Cannot reach tier 1000");yield return Tap("rift-reward-tier-1000");yield return Capture("first-clear-1000");yield return Tap("reward-box-claim-1000");
             Require(a.rewardBoxes.owned.Any(b=>b.boxId=="gem-choice-t6"&&b.count==2),"T6 packs missing");Require(a.rewardBoxes.owned.Any(b=>b.boxId=="awakened-weapon"&&b.minimumQuality==9000),"Completion weapon missing");
             var loaded=new GameStore(args[save+1],game.catalog);Require(JsonUtility.ToJson(a.rewardBoxes)==JsonUtility.ToJson(loaded.Data.rewardBoxes),"Boxes did not survive reload");

@@ -51,7 +51,7 @@ namespace Hellscript
         }
         public void ShowLogin()
         {
-            float read=game.InterfaceScale.Factor;
+            const float read=1f;
             if(Session.SignedIn&&!Session.Guest)
             {
                 OpenDialog("account","Google 계정",150*read);
@@ -92,7 +92,7 @@ namespace Hellscript
         }
         void ShowGoogleProfileChoice()
         {
-            float read=game.InterfaceScale.Factor;
+            const float read=1f;
             OpenDialog("google-profile","진행 상황 선택",390*read);
             var name=Caption(dialogBody,"google-account",game.GoogleLogin.Session.displayName,Mathf.RoundToInt(15*read),Bone,TextAnchor.MiddleLeft);
             BodyRect(name.rectTransform,0,75*read);

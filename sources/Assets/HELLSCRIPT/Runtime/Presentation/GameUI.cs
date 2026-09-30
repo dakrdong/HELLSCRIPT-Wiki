@@ -67,27 +67,25 @@ namespace Hellscript
             if(headerApron!=null){headerApron.anchorMin=new Vector2(0,s.yMax/h);headerApron.anchorMax=Vector2.one;headerApron.offsetMin=headerApron.offsetMax=Vector2.zero;}
             if(footerApron!=null){footerApron.anchorMin=Vector2.zero;footerApron.anchorMax=new Vector2(1,s.y/h);footerApron.offsetMin=footerApron.offsetMax=Vector2.zero;}
         }
-        public float InterfaceFactor=>game!=null&&game.InterfaceScale!=null?game.InterfaceScale.Factor:1f;
+        // Shared adapters retain their layout callback; the player reading-size preference is retired.
+        public float InterfaceFactor=>1f;
         Vector2 canvasScreenSize;
         Rect canvasSafeArea;
         // Legacy page coordinates are twice the shared content coordinates. Use the same fit
         // ratio so controls and text shrink together, including on desktop window resizes.
-        // Every canvas takes the same reading size. Enlarging the reference layout keeps each fixed
-        // box in proportion with its text, so a larger choice never truncates a label.
         void ApplyScaler(CanvasScaler scaler,bool constantPixels)
         {
             float factor=InterfaceFactor;
             if(constantPixels){scaler.uiScaleMode=CanvasScaler.ScaleMode.ConstantPixelSize;scaler.scaleFactor=UiTheme.Scale(UiSafeArea.Current)*.5f*factor;}
             else{scaler.uiScaleMode=CanvasScaler.ScaleMode.ScaleWithScreenSize;scaler.referenceResolution=new Vector2(720,1280)/factor;scaler.matchWidthOrHeight=.5f;}
         }
-        // Clearing the cached screen size rather than the laid-out flag keeps the reading anchor, so the
-        // paragraph in front of the reader stays in place while every box changes size.
-        public void ApplyInterfaceScale()
+        // Preserve the reading anchor when screen bounds or orientation change.
+        public void RefreshCanvasLayout()
         {
             if(root==null)return;
             var pageScaler=root.parent.GetComponent<CanvasScaler>();
             ApplyScaler(pageScaler,pageScaler.uiScaleMode==CanvasScaler.ScaleMode.ConstantPixelSize);
-            if(commonModal!=null&&!(scaleSlider?.Dragging??false)){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
+            if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
             if(presetModal!=null){ApplyScaler(presetModal.GetComponent<CanvasScaler>(),true);presetScreenSize=Vector2.zero;ReflowPresetDialog();}
             Canvas.ForceUpdateCanvases();
         }
@@ -96,7 +94,7 @@ namespace Hellscript
             var size=new Vector2(Screen.width,Screen.height);var safe=UiSafeArea.Current;
             if(canvasScreenSize==size&&canvasSafeArea==safe)return;
             canvasScreenSize=size;canvasSafeArea=safe;
-            ApplyInterfaceScale();
+            RefreshCanvasLayout();
         }
         // Every line is written when its screen is drawn, so a new language reaches the player by
         // drawing the page that is in front of them again. The settings window is rebuilt on the same

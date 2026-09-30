@@ -13,7 +13,7 @@ For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `A
 이 프로젝트의 모든 개발 결과물은 한국어와 영어를 기본으로 갖춘다. 한쪽만 있는 상태를 완성으로 보지 않는다.
 
 - **게임 화면의 모든 문구**는 한국어와 영어를 함께 가진다. 코드에 문자열을 직접 적지 않고 문구 표에 키로 넣은 뒤 두 언어의 값을 채운다. 새 화면이나 새 문구를 추가할 때 두 언어를 같이 추가한다.
-- **언어 설정**을 두어 사용자가 언제든 바꿀 수 있게 한다. 선택한 언어는 기기에만 저장하며 계정 저장과 섞지 않는다. 화면 방향 설정과 글자 크기 설정이 이미 같은 방식을 쓰고 있으므로 그 구조를 따른다.
+- **언어 설정**을 두어 사용자가 언제든 바꿀 수 있게 한다. 선택한 언어는 기기에만 저장하며 계정 저장과 섞지 않는다. 기존 화면 방향 설정의 기기 저장 구조를 따른다.
 - **기존 한국어 문구에도 영어를 채워 넣는다.** 이미 만들어진 화면의 문구가 한국어만 가진 상태로 남아 있지 않게 한다.
 - **빠진 번역은 한국어로 대신 보여 주고 그 사실을 기록한다.** 빈 문자열이나 키 이름을 화면에 내보내지 않는다. 어떤 키가 비어 있는지 검사로 확인할 수 있게 한다.
 - **개발 기록과 위키 문서**도 두 언어를 갖추는 것을 목표로 한다. 한국어 문서를 먼저 쓰고 영어판을 함께 유지한다.
@@ -33,3 +33,9 @@ For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `A
 검증은 Unity Edit Mode 검사와 macOS 개발 빌드의 런타임 스모크를 함께 쓴다. 화면을 바꾸면 해당 스모크를 마지막 검증에 포함한다. 배치모드 실행이 `ProjectSettings/ProjectSettings.asset`과 `ProjectSettings/UnityConnectSettings.asset`을 건드리므로 커밋 전에 되돌린다.
 
 확인하지 않은 것을 확인했다고 적지 않는다. 실기기에서 보지 않았다면 그렇게 적는다.
+
+## UI 검증 범위
+
+2026-09-30 사용자 결정에 따라 글자 크기 비율 조정 기능을 제거했다. 이후 UI 검증은 기본 글자 크기에서 해상도·안전 영역·한국어·영어를 확인하며, 50~150% 등 글자 크기별 반복 검사와 전용 스모크를 실행하거나 다시 추가하지 않는다. 화면 크기에 맞춘 반응형 배치와 기본 크기에서의 잘림·조작 검사는 유지한다. 과거 검증 기록은 당시 결과로 보존한다.
+
+The player text-size preference is retired. Future UI validation uses the default text size and retains viewport, safe-area, Korean/English, clipping and input checks. Do not add or run text-size matrices or enlarged-text-only smoke checks. Preserve historical evidence as historical.

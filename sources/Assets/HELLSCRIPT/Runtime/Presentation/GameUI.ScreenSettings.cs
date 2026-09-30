@@ -12,9 +12,8 @@ namespace Hellscript
         enum SettingsSection { Screen,Sound,Language,Character,Help,Combat }
         SettingsSection commonTab;
         RectTransform commonModal,commonSafe,commonCard,commonTabs,commonWorld;Button commonClose,commonBackdrop;
-        RectTransform screenPane,languagePane,characterPane,helpPane,combatPane,scaleChoiceRow;
-        Text commonHeading,scaleValue,scaleMessage,aspectMessage,languageMessage,characterMessage;
-        SettingsStepSlider scaleSlider;Button scaleRetry;
+        RectTransform screenPane,languagePane,characterPane,helpPane,combatPane;
+        Text commonHeading,aspectMessage,languageMessage,characterMessage;
         Vector2 commonScreenSize;Rect commonSafeArea;float commonKeyboardTop;bool commonLaidOut;
         readonly List<(CanvasGroup group,float alpha)> commonBackgrounds=new List<(CanvasGroup,float)>();
         readonly List<(string id,Button button)> aspectButtons=new List<(string,Button)>();
@@ -55,22 +54,8 @@ namespace Hellscript
                 foreach(string id in side==0?DisplayAspect.Landscape:DisplayAspect.Portrait)
                 {var b=Button(choices,id,()=>game.ApplyAspect(id));b.name="settings-aspect-"+id;b.GetComponentInChildren<Text>().fontSize=18;aspectButtons.Add((id,b));}
             }
-            aspectMessage=CommonNote(body,"",18,muted);CommonNote(body,"글자 크기",24,gold);
-            CommonNote(body,"50~150% 범위에서 5%씩 조절합니다. 슬라이더를 움직이거나 스크롤하고, − / + 버튼으로 한 단계씩 바꿀 수 있습니다.",19);
-            scaleChoiceRow=Rect("Text size choices",body);scaleChoiceRow.gameObject.AddComponent<LayoutElement>().preferredHeight=124;
-            scaleValue=Label(scaleChoiceRow,"",24,gold,TextAnchor.MiddleCenter);Span(scaleValue.rectTransform,60,0,60,36);
-            var minus=Button(scaleChoiceRow,"−",()=>SetReadingStep(-1));Place((RectTransform)minus.transform,0,0,48,44);minus.name="settings-scale-down";
-            var plus=Button(scaleChoiceRow,"+",()=>SetReadingStep(1));Right((RectTransform)plus.transform,0,0,48,44);plus.name="settings-scale-up";
-            var area=Box("settings-scale-slider",scaleChoiceRow,Color.clear);Span(area,0,48,0,68);scaleSlider=area.gameObject.AddComponent<SettingsStepSlider>();scaleSlider.minValue=0;scaleSlider.maxValue=20;scaleSlider.wholeNumbers=true;
-            var track=Box("Track",area,new Color(.09f,.12f,.15f));track.anchorMin=new Vector2(0,.5f);track.anchorMax=new Vector2(1,.5f);track.sizeDelta=new Vector2(-36,8);
-            var fill=Box("Fill",track,gold);Stretch(fill);fill.GetComponent<Image>().raycastTarget=false;scaleSlider.fillRect=fill;
-            var travel=Rect("Handle area",area);travel.anchorMin=new Vector2(0,.5f);travel.anchorMax=new Vector2(1,.5f);travel.sizeDelta=new Vector2(-36,0);
-            var handle=Box("Handle",travel,pale);handle.anchorMin=handle.anchorMax=new Vector2(0,.5f);handle.sizeDelta=new Vector2(32,44);scaleSlider.handleRect=handle;scaleSlider.targetGraphic=handle.GetComponent<Image>();
-            scaleSlider.onValueChanged.AddListener(step=>{game.ApplyInterfaceScale(50+Mathf.RoundToInt(step)*5);RefreshScreenSettings();});
-            scaleSlider.Released=()=>{ApplyInterfaceScale();Canvas.ForceUpdateCanvases();DialogReadingAnchor.Show(scaleChoiceRow);};
-            scaleMessage=CommonNote(body,"",18,muted);scaleRetry=BigButton(body,"저장 재시도",()=>{game.InterfaceScale.RetrySave();RefreshScreenSettings();});CommonNote(body,"화면·글자 크기 설정은 이 기기에 저장됩니다.",18,muted);
+            aspectMessage=CommonNote(body,"",18,muted);CommonNote(body,"화면 설정은 이 기기에 저장됩니다.",18,muted);
         }
-        void SetReadingStep(int delta){game.ApplyInterfaceScale(game.InterfaceScale.Percent+delta*5);RefreshScreenSettings();Canvas.ForceUpdateCanvases();DialogReadingAnchor.Show(scaleChoiceRow);}
         void BuildLanguagePane()
         {
             languagePane=CommonScroll("언어 설정 본문",out var body);CommonNote(body,"언어",24,gold);CommonNote(body,"사용할 언어를 선택하세요. 선택한 언어는 이 기기에 저장됩니다.",20);languageButtons.Clear();
@@ -115,7 +100,7 @@ namespace Hellscript
             if(commonModal==null)return;
             foreach(var choice in aspectButtons)UiTheme.Choice(choice.button,choice.id==game.Aspect,false);
             aspectMessage.text=Loc.T(string.IsNullOrEmpty(game.AspectMessage)?Loc.F("현재 비율 · {0}",game.Aspect=="auto"?Loc.T("화면에 맞춤"):game.Aspect):game.AspectMessage);
-            RefreshMapDisplayControl();RefreshViewDistanceControl();var scale=game.InterfaceScale;scaleSlider.SetValueWithoutNotify((scale.Percent-50)/5);scaleValue.text=scale.Percent+"%";scaleMessage.text=string.IsNullOrEmpty(scale.Message)?Loc.T(game.InterfaceScaleLoadNotice):scale.Message;scaleRetry.gameObject.SetActive(scale.CanRetrySave);
+            RefreshMapDisplayControl();RefreshViewDistanceControl();
             foreach(var choice in languageButtons)UiTheme.Choice(choice.button,choice.code==game.Language.Language,false);
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
         }

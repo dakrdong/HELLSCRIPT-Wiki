@@ -146,12 +146,12 @@ namespace Hellscript
             Require(save>=0&&shots>=0,"Use isolated save and evidence directories.");output=args[shots+1];Directory.CreateDirectory(output);
             yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Game failed to initialize.");
             game.EnterPlaza(true);UiSafeArea.AspectRatio=0;game.ApplyLanguage("ko");
-            game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();yield return VisitNamedNpcs();
+            game.UI.RefreshCanvasLayout();yield return VisitNamedNpcs();
             foreach(string language in new[]{"ko","en"})
             foreach(var size in new[]{new Vector2Int(1600,900),new Vector2Int(1600,1000),new Vector2Int(2100,900),new Vector2Int(900,1600),new Vector2Int(956,440),new Vector2Int(440,956),new Vector2Int(640,360),new Vector2Int(360,640)})
-            foreach(int percent in new[]{50,100,150})
-            {
-                game.ApplyLanguage(language);Screen.SetResolution(size.x,size.y,FullScreenMode.Windowed);game.InterfaceScale.Apply(percent);game.UI.ApplyInterfaceScale();
+
+            { const int percent=100;
+                game.ApplyLanguage(language);Screen.SetResolution(size.x,size.y,FullScreenMode.Windowed);game.UI.RefreshCanvasLayout();
                 yield return new WaitForSecondsRealtime(.5f);game.UI.RefreshHud();yield return null;
                 Require(Screen.width==size.x&&Screen.height==size.y,"Resolution request did not apply.");
                 string name=size.x+"x"+size.y+"-"+percent+"-"+language;yield return CheckLayout(name);
@@ -164,14 +164,14 @@ namespace Hellscript
                 ExecuteEvents.Execute(stick.gameObject,pointer,ExecuteEvents.dragHandler);var before=game.Town.Position;
                 yield return new WaitForSecondsRealtime(.2f);Require(game.Town.Position.x>before.x,"Joystick did not move the real player.");
                 stick.OnPointerUp(new PointerEventData(EventSystem.current){pointerId=8});Require(visibility.alpha==1&&stick.Value.x>0,"Second pointer stole movement.");
-                if(percent==100&&size.x==1600)yield return Capture("landscape-held");
+                if(size.x==1600)yield return Capture("landscape-held");
                 ExecuteEvents.Execute(stick.gameObject,pointer,ExecuteEvents.pointerUpHandler);before=game.Town.Position;
                 yield return new WaitForSecondsRealtime(.15f);
                 Require(stick.Value==Vector2.zero&&stick.Knob.anchoredPosition==Vector2.zero&&Mathf.Abs(visibility.alpha-.3f)<.001f,"Release did not reset input and opacity.");
                 Require(game.Town.Position==before,"Player continued moving after release.");
-                if(percent==100||percent==150&&size.x==440)yield return Capture(name);
+                if(size.x==440)yield return Capture(name);
             }
-            Screen.SetResolution(1600,900,FullScreenMode.Windowed);game.InterfaceScale.Apply(100);game.UI.ApplyInterfaceScale();
+            Screen.SetResolution(1600,900,FullScreenMode.Windowed);game.UI.RefreshCanvasLayout();
             UiSafeArea.Simulate(90,30,12,24);yield return new WaitForSecondsRealtime(.6f);game.UI.RefreshHud();yield return null;yield return CheckLayout("safe-area");yield return Capture("safe-area");
             UiSafeArea.StopSimulating();Screen.SetResolution(440,956,FullScreenMode.Windowed);UiSafeArea.Simulate(0,34,0,44);
             yield return new WaitForSecondsRealtime(.6f);game.UI.RefreshHud();yield return null;yield return CheckLayout("portrait-safe-area");yield return Capture("portrait-safe-area");

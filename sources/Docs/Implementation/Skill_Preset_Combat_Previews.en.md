@@ -189,3 +189,5 @@ Every skill also offers a final Custom Settings tab. Rows without companions use
 | Triune Collapse | Collapse a group of four | Fight one enemy first. Three more arrive after 3 seconds. |  |
 | Sage Incarnate | Empower immediately against strong targets | Immediately gain a shield, attack power and reduced costs against a strong target. | Ember Lance, Glacial Lance, Storm Spear |
 | Sage Incarnate | Empower when three elements are ready | Empower once all three elemental skills are ready and affordable, then trigger elemental-cycle bursts. | Ember Lance, Glacial Lance, Storm Spear |
+
+Follow-up on 2026-09-30: the text-size preference and its test dimension were retired. The prior 20-layout result remains historical evidence; future runs use the same five viewports and Korean/English, totaling 10 profiles. See [removal](Text_Size_Option_Removal.en.md).

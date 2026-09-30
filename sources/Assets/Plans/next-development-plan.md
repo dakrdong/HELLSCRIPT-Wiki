@@ -122,7 +122,7 @@ Based on the development history and verification logs, the development tasks ar
 ### Priority 4 (P4) - Mobile & Responsive UI Optimization
 - **Objective**: Enhance ergonomics and visual polish on touch/mobile displays.
 - **Key Deliverables**:
-  1. Dynamic text scaling support (100% to 140%).
+  1. Responsive layout at the fixed default text size. The optional 100%–140% text multiplier was retired on 2026-09-30; do not implement or test it again.
   2. Safe Area compliance with notch/home bar insets.
   3. Touch-friendly hitboxes and virtual input optimizations.
 

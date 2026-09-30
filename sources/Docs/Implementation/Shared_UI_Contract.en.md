@@ -11,7 +11,7 @@ Use the latest inventory as the equipment presentation baseline. Compose new con
 | --- | --- |
 | Theme | `UiTheme` Obsidian & Gilt ramp: warm obsidian surfaces, one bronze hairline, gold only for choice/primary, ivory text. Screen code must not write surface/edge/gold hex literals. Preserve semantic danger/gain/loss, rarity and element colours. [Style overhaul](Ui_Style_Obsidian_Gilt.en.md) |
 | Fonts | `UiFonts.Body`; `UiFonts.Display` only for title branding. Individual windows must not destroy borrowed fonts. |
-| Type | Title 20, heading 15, body 12, caption 10 before reading scale. Existing HUD/legacy adapters convert their coordinate system. |
+| Type | Title 20, heading 15, body 12, caption 10 at the default size. No player text-size multiplier. Existing HUD/legacy adapters convert their coordinate system. |
 | Equipment slots | Portrait 52, landscape 54, gap 6, common `UiTheme.Scale`. Reduce columns instead of shrinking slots. Preserve persisted slot indices and capacity. |
 | Windows | Header/close, navigation, scroll body, fixed actions. `ContentWindowHost` owns stacking, background input, back and nested pause leases. |
 | Details | `ItemTooltip` and `ItemDetailView` share order, values, ranges, effects, sockets, upgrades and protection. Fixed outer bounds, scrolling body. |
@@ -29,7 +29,7 @@ Use `HeroStats`, `StatCatalog` and `ItemComparison` for numeric meaning; `Equipm
 
 `GameStore.Committed` fires only after a successful persisted adoption. Duplicate receipts do not publish again. `StoreViewBinding` defers repaint while a modal is being edited. Presentation callbacks cannot turn a completed purchase into a failed purchase. Existing edit models distinguish applied, draft and saved state.
 
-`TownWalk` and `ContentUnlocks` own access. `UiTime` formats durations but never chooses a clock: UTC work and pausable battle time remain separate. `GlobalHudSnapshot`, `SkillIconView` and saved combat/training snapshots preserve consistent labels/icons without recomputing history from live gear. `UiSafeArea`, `Loc` and existing device display/text/audio preferences remain shared.
+`TownWalk` and `ContentUnlocks` own access. `UiTime` formats durations but never chooses a clock: UTC work and pausable battle time remain separate. `GlobalHudSnapshot`, `SkillIconView` and saved combat/training snapshots preserve consistent labels/icons without recomputing history from live gear. `UiSafeArea`, `Loc` and existing device display/language/audio preferences remain shared.
 
 Pass `EquipmentViewSource.Owned`, `Draft`, `BattleSnapshot`, `Catalog` or `RewardSnapshot`. Detail/comparison views copy their input and never mutate the account. Catalog definitions have no acquired roll; never fabricate one for display. Craft results and reward history use `RewardSnapshot` to preserve committed values. Controllers supply domain commands and drafts.
 
@@ -44,7 +44,7 @@ Opening the window lands on the **Overview** tab: three combat styles, advice fr
 ## New content workflow
 
 1. Start in a checkout containing the latest merged `main`, then run `python3 tools/new_content_ui.py FeatureName`. Keep unfinished changes in an older checkout intact and use a separate current checkout. Existing files are never overwritten.
-2. Supply bilingual title, explicit source, reading scale and render callback. Keep the draft in the controller, outside repaint callbacks.
+2. Supply bilingual title, explicit source, default scale and render callback. Keep the draft in the controller, outside repaint callbacks.
 3. Compose common views under `Navigation`, `Body` and `Actions`; call established transactions for mutations.
 4. Document any specialized layout adapter and its shared owners. Do not duplicate font creation, formulas, equipment cards or canvas ownership.
 5. Run `python3 tools/check_ui_contract.py`, `python3 tools/test_ui_contract.py`, related Unity tests and native macOS acceptance. Record images plus actual before/after state and persistence.
@@ -53,7 +53,7 @@ GitHub Actions runs the ownership checker and its fault-injection tests. The che
 
 ## Acceptance
 
-Check identical equipment data, two rings/two hands/offhand/presets, unchanged saved slot indices, fixed actions and scrolling at 440×956, 956×440, 16:9, 16:10 and 21:9. Check Korean, English, larger text, all edict options and preserved drafts across search/navigation/rotation/language. Test failed saves, duplicate/stale requests, insufficient resources and nested pause/input restoration. Distinguish synthetic macOS pointer acceptance from physical-mobile validation.
+Check identical equipment data, two rings/two hands/offhand/presets, unchanged saved slot indices, fixed actions and scrolling at 440×956, 956×440, 16:9, 16:10 and 21:9. Check Korean and English at the default text size, all edict options and preserved drafts across search/navigation/rotation/language. Test failed saves, duplicate/stale requests, insufficient resources and nested pause/input restoration. Distinguish synthetic macOS pointer acceptance from physical-mobile validation.
 
 See [completed-work integration](Completed_Work_Integration.en.md) for the initial merge and excluded skill work, and [shared UI validation](Shared_UI_Validation.en.md) for implementation evidence.
 
@@ -74,7 +74,7 @@ Shared UI does not require a rectangular frame for every control. Vaults use `Ui
 
 ## Town and combat HUD placement
 
-`GlobalHudLayout` owns the persistent vitals, skills and potions; `GameUI.Plaza` and `TownJoystick` own the town heading, shortcuts and movement input. This HUD is an adapter using its existing canvas and proportional screen layout, rather than a content window. Exactly three potion slots reuse the existing bottle artwork and square frames, without a separate tray. Equipped legacy passives remain inspectable in the status-effect strip. Title backings reuse `StorageSurface` and `UiTheme` colors without new raster artwork. Presentation does not save accounts or consume potions. See [town HUD validation](Town_Hud_Responsive.en.md) for the portrait bottom baseline, centered movement pad and enlarged-text layout.
+`GlobalHudLayout` owns the persistent vitals, skills and potions; `GameUI.Plaza` and `TownJoystick` own the town heading, shortcuts and movement input. This HUD is an adapter using its existing canvas and proportional screen layout, rather than a content window. Exactly three potion slots reuse the existing bottle artwork and square frames, without a separate tray. Equipped legacy passives remain inspectable in the status-effect strip. Title backings reuse `StorageSurface` and `UiTheme` colors without new raster artwork. Presentation does not save accounts or consume potions. See [town HUD validation](Town_Hud_Responsive.en.md) for the portrait bottom baseline, centered movement pad and responsive layout.
 
 ## Native skill tree adapter
 
@@ -99,7 +99,7 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 
 ## Attendance events
 
-`AttendanceWindow` starts from the new-content template and uses `ContentWindowView`. Day tiles describe reward definitions; account attendance and claim state are supplied by the controller. Landscape places the altar panel with the selected reward beside the day grid; portrait stacks them. At 100% text every day is visible without scrolling; larger text enlarges the tiles and the shared body scrolls. Fixed actions hold the suppression checkbox and the claim button. The altar art and claimed seal come from `AttendanceArt`, compact tile amounts reuse the jeweler's `JewelerSession.Compact`, the pulse reuses `ForgeWorkingPulse` and the round glow reuses `TownCircleGraphic`. `AttendanceSwipe` routes horizontal gestures to pages and vertical gestures to the shared body scroll. `ContentWindowHost` owns combat pause, `GameStore` owns account transactions, and `StoreViewBinding` refreshes after committed saves. See [attendance events](Attendance_Events.en.md) for calendar, reward and verification rules.
+`AttendanceWindow` starts from the new-content template and uses `ContentWindowView`. Day tiles describe reward definitions; account attendance and claim state are supplied by the controller. Landscape places the altar panel with the selected reward beside the day grid; portrait stacks them. Every day is visible at the default size; the shared body scrolls when space is insufficient. Fixed actions hold the suppression checkbox and the claim button. The altar art and claimed seal come from `AttendanceArt`, compact tile amounts reuse the jeweler's `JewelerSession.Compact`, the pulse reuses `ForgeWorkingPulse` and the round glow reuses `TownCircleGraphic`. `AttendanceSwipe` routes horizontal gestures to pages and vertical gestures to the shared body scroll. `ContentWindowHost` owns combat pause, `GameStore` owns account transactions, and `StoreViewBinding` refreshes after committed saves. See [attendance events](Attendance_Events.en.md) for calendar, reward and verification rules.
 
 ## Combat records
 
@@ -152,3 +152,7 @@ The tutorial staging layer (`TutorialCinematic`) is a display-only canvas above 
 ## Training ground
 
 `TrainingGroundWindow` (the lobby) and `TrainingGroundResultWindow` (the result) use the new-content template's `ContentWindowView`. The lobby reads owned data (`EquipmentViewSource.Owned`). In landscape it places the skills and the enemies in two independently scrolling columns, so the skill checks and the enemy setup are visible together; portrait stacks them in the shared body scroll. The enemy picker is a maximum-size window (`Catalog`) from the same window host. The lobby controller owns the setup draft and keeps it in the hero save through `GameStore.SaveTrainingGroundSetup`; per-skill edict edits reuse `HuntEdictWindow` and `GameStore.CommitHuntEdict` unchanged. The result opens as a battle-snapshot (`BattleSnapshot`) page like the rift result and never blocks the repeat clock. The live DPS panel and the pause dialog are adapters on the existing battle HUD canvas (`GameUI`), and the chart is the texture-free `TrainingDpsChart` mesh. Fonts, colours, buttons and skill icons come from `UiFonts`, `UiTheme`, `ContentWindowView.Button` and `SkillIconView`. See [implementation and verification](Training_Ground.en.md).
+
+## Retired text-size preference
+
+The user removed the text-size multiplier on 2026-09-30. Do not run or add text-size matrices or enlarged-text-only acceptance. Retain viewport/safe-area layouts, default-size clipping checks and actual input coverage. See [removal scope](Text_Size_Option_Removal.en.md).
