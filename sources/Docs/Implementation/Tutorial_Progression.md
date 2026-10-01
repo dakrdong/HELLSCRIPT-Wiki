@@ -163,3 +163,5 @@ macOS 개발 빌드의 튜토리얼 스모크는 두 프로세스 모두 통과�
 추가 장면:
 
 [갑옷 지급 지점](../../Artifacts/Validation/tutorial-progression/screenshots/armor-checkpoint.png) · [보스 처치](../../Artifacts/Validation/tutorial-progression/screenshots/real-boss-cleared.png) · [첫 균열 준비](../../Artifacts/Validation/tutorial-progression/screenshots/first-rift-preparation.png) · [칙령 저장](../../Artifacts/Validation/tutorial-progression/screenshots/edict-saved.png) · [새 스킬 장착](../../Artifacts/Validation/tutorial-progression/screenshots/new-skill-equipped.png) · [실습 지원 검토](../../Artifacts/Validation/tutorial-progression/screenshots/support-review.png) · [보상 없는 다시보기](../../Artifacts/Validation/tutorial-progression/screenshots/rewardless-replay.png)
+
+2026-10-01: 룬 보드의 첫 해방은 일반적인 선택 안내와 별도로, 균열 15단계 결과창에서 인젤 미르가 진행하는 필수 보상 수령과 기존 5단계 플레이어블 가이드으로 연결했다. [룬 보드 해방 튜토리얼](Rune_Board_Unlock_Tutorial.md)을 따른다.

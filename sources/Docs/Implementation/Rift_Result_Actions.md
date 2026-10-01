@@ -30,3 +30,5 @@ macOS 개발 플레이어에서 기본 글자 크기와 한국어·영어로 **4
 ![훈련장과 공유하는 DPS 그래프와 스킬 시점 조사](RiftResultActionsEvidence/graph-wide-ko.png)
 
 [세로 결과](RiftResultActionsEvidence/result-portrait-ko.png) · [영문 결과와 반복 안내](RiftResultActionsEvidence/result-wide-en.png) · [세로 영문 장비 상세](RiftResultActionsEvidence/loot-detail-portrait-en.png) · [가로 영문 장비 비교](RiftResultActionsEvidence/loot-comparison-landscape-en.png) · [장착 완료](RiftResultActionsEvidence/loot-equipped-ko.png) · [세로 영문 보상](RiftResultActionsEvidence/reward-portrait-en.png) · [세로 영문 재도전](RiftResultActionsEvidence/retry-portrait-en.png) · [재도전 4와 취소](RiftResultActionsEvidence/retry-four.png) · [세로 영문 그래프](RiftResultActionsEvidence/graph-portrait-en.png).
+
+균열 15단계의 신규 룬 해방 튜토리얼에서는 인젤 미르가 보상 수령을 강제로 안내하고 **룬 블럭 세트**만 같은 거래에서 개봉한다. 저장 후 인장이 콘텐츠 메뉴로 날아가고 NPC가 매 단계 설명하는 기존 5단계 플레이어블 가이드로 이어진다. 다른 결과의 보상 수령 규칙은 위와 같다. [룬 보드 해방 튜토리얼](Rune_Board_Unlock_Tutorial.md)을 참고한다.

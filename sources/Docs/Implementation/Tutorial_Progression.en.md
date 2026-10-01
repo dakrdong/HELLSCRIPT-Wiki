@@ -140,3 +140,5 @@ The final runtime fetched and pinned an HTTP [loopback release of shipped defaul
 Additional scenes:
 
 [Armor checkpoint](../../Artifacts/Validation/tutorial-progression/screenshots/armor-checkpoint.png) · [Boss cleared](../../Artifacts/Validation/tutorial-progression/screenshots/real-boss-cleared.png) · [First-rift preparation](../../Artifacts/Validation/tutorial-progression/screenshots/first-rift-preparation.png) · [Edict saved](../../Artifacts/Validation/tutorial-progression/screenshots/edict-saved.png) · [New skill equipped](../../Artifacts/Validation/tutorial-progression/screenshots/new-skill-equipped.png) · [Support review](../../Artifacts/Validation/tutorial-progression/screenshots/support-review.png) · [Rewardless replay](../../Artifacts/Validation/tutorial-progression/screenshots/rewardless-replay.png)
+
+2026-10-01: The first Rune Board unlock uses a mandatory reward claim and the existing five-step playable guide led by Injel Mir on the Rift 15 result, in addition to the ordinary optional journal guides. Follow the [Rune Board unlock tutorial](Rune_Board_Unlock_Tutorial.en.md).

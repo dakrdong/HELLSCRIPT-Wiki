@@ -8,7 +8,7 @@ namespace Hellscript
     {
         bool contentDockOpen;
         ContentDockView contentDock;
-        Button contentDockEdict;
+        Button contentDockEdict,contentDockRune;
         // Content shortcuts fold out beneath the settings gear on the play screens (plaza and battle).
         // Character opens the owned-equipment screen and remembers the play screen it came from.
         void AddContentDock(float top,float size)
@@ -29,7 +29,16 @@ namespace Hellscript
             bool prologue=game.TutorialActive;
             if(!prologue)Add("캐릭터","menu-character",ShowPlayInventory);
             contentDockEdict=Add("사냥 칙령","menu-hunt-edict",ShowEdictEditor);
-            if(!prologue){Add("룬 보드","menu-rune-board",ShowRunes);Add("창고","menu-storage",ShowStorage);}
+            contentDockRune=null;
+            if(!prologue)
+            {
+                if(RuneBoardTutorial.IconVisible(game.Store.Data)||game.Store.Data.guide.runeBoard.step==RuneBoardLesson.Emblem)
+                {
+                    contentDockRune=Add("룬 보드","menu-rune-board",ShowRunes);
+                    if(!RuneBoardTutorial.IconVisible(game.Store.Data))contentDockRune.gameObject.AddComponent<CanvasGroup>().alpha=0;
+                }
+                Add("창고","menu-storage",ShowStorage);
+            }
             var toggle=Button(dock,"콘텐츠 메뉴",()=>{view.Set(!view.Open);contentDockOpen=view.Open;},Color.clear);toggle.targetGraphic=Emblem(toggle,"menu-toggle");
             view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap));view.Snap(contentDockOpen||prologue);
             // Before the scroll arrives the dock is laid out but unseen, so the emblem has a place to fly to.

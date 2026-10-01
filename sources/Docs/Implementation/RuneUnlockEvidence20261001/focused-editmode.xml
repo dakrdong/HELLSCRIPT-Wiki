@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Passed" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-01 10:52:00Z" end-time="2026-10-01 10:52:02Z" duration="1.8271407">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5001" result="Passed" start-time="2026-10-01 10:52:00Z" end-time="2026-10-01 10:52:02Z" duration="1.827141" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="6756" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/rune-unlock-native/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5001" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:02Z" duration="1.749450" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="58171" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="6757" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5001" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:02Z" duration="1.686115" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="6758" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="5001" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:02Z" duration="1.620854" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="5054" name="LocalizationTests" fullname="Hellscript.Tests.LocalizationTests" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" testcasecount="33" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:01Z" duration="0.335549" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="5086" name="EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders" fullname="Hellscript.Tests.LocalizationTests.EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders" methodname="EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1679090043" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:01Z" duration="0.029970" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5089" name="EveryKoreanLiteralInTheRuntimeHasAnEntry" fullname="Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry" methodname="EveryKoreanLiteralInTheRuntimeHasAnEntry" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1283056908" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:01Z" duration="0.186079" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5088" name="NoEntryIsLeftBehindByARewordedLine" fullname="Hellscript.Tests.LocalizationTests.NoEntryIsLeftBehindByARewordedLine" methodname="NoEntryIsLeftBehindByARewordedLine" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="1929899515" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:01Z" duration="0.097770" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="5085" name="TheEnglishTableParsesWithoutDamagedOrRepeatedLines" fullname="Hellscript.Tests.LocalizationTests.TheEnglishTableParsesWithoutDamagedOrRepeatedLines" methodname="TheEnglishTableParsesWithoutDamagedOrRepeatedLines" classname="Hellscript.Tests.LocalizationTests" runstate="Runnable" seed="566031300" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:01Z" duration="0.005941" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="5629" name="RewardBoxTests" fullname="Hellscript.Tests.RewardBoxTests" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" testcasecount="24" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:02Z" duration="0.939696" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="5652" name="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts" fullname="Hellscript.Tests.RewardBoxTests.RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:02Z" duration="0.283168" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="5649" name="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(False)" fullname="Hellscript.Tests.RewardBoxTests.RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(False)" methodname="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" seed="1783036010" result="Passed" start-time="2026-10-01 10:52:01Z" end-time="2026-10-01 10:52:02Z" duration="0.163918" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5650" name="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(True)" fullname="Hellscript.Tests.RewardBoxTests.RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(True)" methodname="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" seed="1809931688" result="Passed" start-time="2026-10-01 10:52:02Z" end-time="2026-10-01 10:52:02Z" duration="0.057310" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="5651" name="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(True,True)" fullname="Hellscript.Tests.RewardBoxTests.RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(True,True)" methodname="RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" seed="958502165" result="Passed" start-time="2026-10-01 10:52:02Z" end-time="2026-10-01 10:52:02Z" duration="0.061318" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="5648" name="RuneIntroductionPaysOnceAndRequiresEveryPlayableGuideStep" fullname="Hellscript.Tests.RewardBoxTests.RuneIntroductionPaysOnceAndRequiresEveryPlayableGuideStep" methodname="RuneIntroductionPaysOnceAndRequiresEveryPlayableGuideStep" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" seed="137839093" result="Passed" start-time="2026-10-01 10:52:02Z" end-time="2026-10-01 10:52:02Z" duration="0.594924" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-reward-boxes-e081838c-424d-447a-afb2-f1bf9998a1e0/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+            </test-case>
+            <test-case id="5653" name="RuneIntroductionRejectsUnversionedProgressWithoutRewritingTheSave" fullname="Hellscript.Tests.RewardBoxTests.RuneIntroductionRejectsUnversionedProgressWithoutRewritingTheSave" methodname="RuneIntroductionRejectsUnversionedProgressWithoutRewritingTheSave" classname="Hellscript.Tests.RewardBoxTests" runstate="Runnable" seed="423399933" result="Passed" start-time="2026-10-01 10:52:02Z" end-time="2026-10-01 10:52:02Z" duration="0.051613" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

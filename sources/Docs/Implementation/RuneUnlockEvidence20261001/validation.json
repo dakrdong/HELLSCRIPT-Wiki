@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "editMode": {
+    "total": "9",
+    "passed": "9",
+    "failed": "0",
+    "skipped": "0"
+  },
+  "nativeMacOS": {
+    "cases": 10,
+    "viewports": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "input": "InputSystem synthetic mouse through EventSystem raycasts",
+    "physicalMobile": false,
+    "scope": "R15 reward, emblem, five required playable-guide pages and NPC explanations, free weapon selection, save reload",
+    "npcTextFollowup": {
+      "cases": 2,
+      "reason": "Removed the standalone page-title dialogue line so the NPC begins directly with the instructions; rechecked narration bounds and input in KO portrait and EN landscape."
+    }
+  },
+  "uiContract": {
+    "ownership": "passed",
+    "tests": 11
+  },
+  "fullSuite": "Not run to completion here; duplicate run was stopped and separate integration thread owns the full suite.",
+  "build": {
+    "target": "StandaloneOSX development",
+    "unity": "6000.6.0f1",
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "sourceManifest": "source-manifest.json",
+  "wiki": {
+    "build": "passed",
+    "check": "passed",
+    "pythonTests": 11,
+    "javascript": {
+      "result": "passed",
+      "pages": 474,
+      "databases": 32,
+      "recordDetails": 4311,
+      "publicMirror": true,
+      "dateOnly": true
+    },
+    "publicDeployment": "Pending main integration; never published from this feature branch."
+  }
+}

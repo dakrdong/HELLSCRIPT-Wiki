@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Hellscript.Runes;
 
 namespace Hellscript.Tests
 {
@@ -131,6 +132,68 @@ namespace Hellscript.Tests
             Cleared(10);A.Hero.firstClears.Add(9);A.schema=11;A.rewardBoxes=null;File.WriteAllText(path,Json(A));
             var loaded=new GameStore(directory,catalog);Assert.AreEqual(GameStore.MaximumSchemaVersion,loaded.Data.schema);Assert.IsTrue(loaded.ClaimRiftFirstRewards("legacy",10));Assert.IsFalse(loaded.ClaimRiftFirstRewards("legacy-skip",9));
             var again=new GameStore(directory,catalog);Assert.AreEqual(Json(loaded.Data.rewardBoxes),Json(again.Data.rewardBoxes));Assert.IsFalse(again.ClaimRiftFirstRewards("legacy-again",10));
+        }
+        [Test] public void RuneIntroductionPaysOnceAndRequiresEveryPlayableGuideStep()
+        {
+            Assert.IsFalse(RuneBoardTutorial.IconVisible(A));Assert.IsFalse(store.ClaimRuneBoardTutorial());
+            var operational=Add("rune-starter",stage:15);
+            A.Hero.highestClear=15;ContentUnlocks.Reconcile(A);
+            RewardBoxes.CaptureClear(A,new RunState{stage=15,training=-1,phase=RunPhase.Cleared});
+            Assert.AreEqual(RuneBoardLesson.Waiting,A.guide.runeBoard.step,"Highest stage alone is not an exact clear");
+            Cleared(15);RewardBoxes.CaptureClear(A,new RunState{stage=15,training=-1,phase=RunPhase.Cleared});Assert.IsTrue(store.Save());
+            Assert.AreEqual(RuneBoardLesson.Reward,A.guide.runeBoard.step);Assert.IsFalse(RuneBoardTutorial.IconVisible(A));
+            Assert.IsFalse(store.LandRuneBoardEmblem());Assert.IsFalse(store.FinishRuneBoardLesson());
+            string before=Json(A),disk=File.ReadAllText(path),mastery=Json(A.runes.mastery);int runes=A.runes.owned.Count;
+            Directory.CreateDirectory(path+".tmp");LogAssert.Expect(LogType.Error,new Regex("저장하지 못했습니다:"));Assert.IsFalse(store.ClaimRuneBoardTutorial());
+            Assert.AreEqual(before,Json(A));Assert.AreEqual(disk,File.ReadAllText(path));Directory.Delete(path+".tmp");
+            Assert.IsTrue(store.ClaimRuneBoardTutorial(),store.Error);Assert.IsTrue(store.ClaimRuneBoardTutorial());
+            Assert.IsTrue(A.rewardBoxes.owned.Any(b=>b.id==operational.id),"An unrelated grant must stay unopened");
+            Assert.AreEqual(runes+5,A.runes.owned.Count);Assert.AreEqual(mastery,Json(A.runes.mastery));
+            Assert.AreEqual(5,A.guide.runeBoard.rewards.Count);Assert.AreEqual(5,A.runes.owned.Where(r=>A.guide.runeBoard.rewards.Contains(r.id)).Select(r=>r.type).Distinct().Count());
+            Assert.AreEqual(RuneBoardLesson.Emblem,A.guide.runeBoard.step);Assert.IsFalse(RuneBoardTutorial.IconVisible(A));
+            store=new GameStore(directory,catalog);Assert.AreEqual(RuneBoardLesson.Emblem,A.guide.runeBoard.step);
+            Assert.IsTrue(store.LandRuneBoardEmblem(),store.Error);Assert.IsTrue(RuneBoardTutorial.IconVisible(A));
+            Assert.IsTrue(store.BeginRuneBoardLesson(),store.Error);Assert.IsFalse(store.FinishRuneBoardLesson());
+            string ownership=Json(A.runes);
+            Assert.IsFalse(store.AdvanceRuneBoardPractice(new RunePracticeModel(4)),"Cannot jump ahead");
+            for(int page=0;page<5;page++)
+            {
+                var model=new RunePracticeModel(page);Assert.IsFalse(store.AdvanceRuneBoardPractice(model),"An unfinished puzzle cannot advance");
+                bool Solve(int index)
+                {
+                    if(index==model.Pieces.Count)return model.LessonComplete;
+                    var piece=model.Pieces[index];model.Select(piece.InstanceId);
+                    for(int r=0;r<(model.CanRotate?6:1);r++)
+                    {
+                        foreach(var c in model.BoardCells)if(model.TryPlace(piece.InstanceId,c)&&Solve(index+1))return true;
+                        model.Select(piece.InstanceId);model.RecallSelected();model.RotateSelected();
+                    }
+                    return false;
+                }
+                Assert.IsTrue(Solve(0));Assert.IsTrue(store.AdvanceRuneBoardPractice(model),store.Error);
+                Assert.IsTrue(store.AdvanceRuneBoardPractice(model),"Retries do not advance twice");
+                store=new GameStore(directory,catalog);Assert.AreEqual(page+1,A.guide.runeBoard.practicePage);
+                if(page<4)Assert.IsFalse(store.FinishRuneBoardLesson());
+            }
+            Assert.AreEqual(ownership,Json(A.runes),"Practice must not change actual owned runes or layouts");
+            Assert.IsTrue(store.FinishRuneBoardLesson(),store.Error);
+            store=new GameStore(directory,catalog);Assert.AreEqual(RuneBoardLesson.Complete,A.guide.runeBoard.step);Assert.IsFalse(RuneBoardTutorial.Active(A));
+            Assert.IsTrue(Tutorials.Record(A,ContentUnlocks.Rune).practiced);Assert.AreEqual(runes+5,A.runes.owned.Count);
+        }
+        [TestCase(false)] [TestCase(true)] [TestCase(true,true)] public void RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(bool unlocked,bool previousPolicy=false)
+        {
+            A.Hero.highestClear=unlocked?15:14;ContentUnlocks.Reconcile(A);
+            if(previousPolicy){A.schema=12;A.Hero.highestClear=0;A.contentUnlocks.version=1;A.contentUnlocks.unlocked.Clear();}
+            // Read a real older JSON document with the newly added field absent, not a normalized write.
+            File.WriteAllText(path,Regex.Replace(Json(A),"\\\"runeBoard\\\":(?:null|\\{[^{}]*\\}),?",""));
+            store=new GameStore(directory,catalog);Assert.AreEqual(unlocked?RuneBoardLesson.Complete:RuneBoardLesson.Waiting,A.guide.runeBoard.step);
+            Assert.AreEqual(unlocked,RuneBoardTutorial.IconVisible(A));Assert.IsFalse(RuneBoardTutorial.Active(A));
+        }
+        [Test] public void RuneIntroductionRejectsUnversionedProgressWithoutRewritingTheSave()
+        {
+            A.guide.runeBoard.version=0;A.guide.runeBoard.step=RuneBoardLesson.Emblem;
+            string json=Json(A);File.WriteAllText(path,json);
+            Assert.Throws<NotSupportedException>(()=>new GameStore(directory,catalog));Assert.AreEqual(json,File.ReadAllText(path));
         }
         [TestCase("version")] [TestCase("missing")] [TestCase("unknown")] public void UnsupportedBoxStateStopsLoadWithoutFallingBackToBackup(string kind)
         {

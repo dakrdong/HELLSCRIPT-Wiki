@@ -250,7 +250,7 @@ namespace Hellscript
         }
         public static AccountSave NewAccount(GameCatalog catalog=null)
         {
-            var a=new AccountSave{telemetryAccountId=Guid.NewGuid().ToString("N"),guide=new AccountGuide{tutorialVersion=Tutorials.Version},contentUnlocks=new ContentUnlockState{version=ContentUnlocks.Version},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
+            var a=new AccountSave{telemetryAccountId=Guid.NewGuid().ToString("N"),guide=new AccountGuide{tutorialVersion=Tutorials.Version,runeBoard=new RuneBoardTutorialState{version=1}},contentUnlocks=new ContentUnlockState{version=ContentUnlocks.Version},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
             uint rng=112358;
             for(int i=0;i<3;i++)
             {
