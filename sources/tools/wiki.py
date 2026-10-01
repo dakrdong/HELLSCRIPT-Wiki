@@ -342,10 +342,21 @@ def build_resources(databases):
     for icon in box_art['icons']:
         path=ART+'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png';raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
         rows.append(record('asset-reward-box-'+icon['id'],icon['id'],'보상 상자 아이콘','보상 상자의 등급·내용물·보석 단계를 표시합니다.',
-            {'해상도':'256 × 256','색상 모드':'RGBA','완전 투명 픽셀':icon['transparentPixels'],'SHA-256':digest(raw),
-             '제작 방식':box_art['provenance'],'SVG 원본':'Docs/Art/RewardBoxes/'+icon['id']+'.svg'},
-            'Docs/Art/RewardBoxes/'+icon['id']+'.svg',status='현재 등록',image={'file':'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png'},assetPath=path,
-            content={'db':'reward-boxes','id':icon['id']},related=['reward-boxes','reward-boxes.en']))
+            {'해상도':f'{icon["width"]} × {icon["height"]}','색상 모드':icon['mode'],'완전 투명 픽셀':icon['transparentPixels'],'SHA-256':digest(raw),
+             '제작 방식':box_art['provenance'],'모델':box_art['model'],'제작 요청':icon['requestId'],
+             '이전 벡터 기록':'Docs/Art/RewardBoxes/'+icon['id']+'.svg'},
+            box_art['requestManifest'],status='개발 적용 · 모델 출처 미확인',image={'file':'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png'},assetPath=path,
+            content={'db':'reward-boxes','id':icon['id']},related=['reward-boxes','reward-boxes.en','generated-game-art']))
+    generated_art_path='Docs/Art/GeneratedGameArt/requests.json'
+    for icon in json.loads(read(generated_art_path))['requests']:
+        if icon['category']!='reused-native-aspect':continue
+        path=icon['master'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+        ident=Path(path).stem
+        rows.append(record('asset-aspect-'+ident,ident,'위상 원화','출시 위상 ID의 생성 원화를 위상 도감과 상세에 표시합니다.',
+            {'해상도':f'{icon["width"]} × {icon["height"]}','색상 모드':icon['mode'],'SHA-256':digest(raw),
+             '모델':'unknown','소유 표시':'AspectRuneGraphic','제작 요청':icon['id'],'네이티브 알파':True},
+            generated_art_path,status='개발 적용 · 모델 출처 미확인',image={'file':'ClassAspectIcons/'+ident+'.png'},assetPath=path,
+            related=['aspect-runestone','generated-game-art']))
     title_path=ART+'Title/TitleSanctuary.png'
     title_raw=(ROOT/title_path).read_bytes();INPUTS[title_path]=digest(title_raw)
     title_meta=read(title_path+'.meta')
@@ -730,8 +741,8 @@ PAGE_META={
  'npc-dialogue-portraits.en':('리소스와 운영','NPC portraits and food-inspired dialogue','Twelve authored identities, individual portraits and greetings, the training instructor and validated dialogue/service access.'),
  'rift-content-unlocks':('전투와 성장','균열 단계별 콘텐츠 개방','신규 계정의 14개 콘텐츠 개방 단계, 최초 보상 팝업, 실행 권한과 기존 계정 이관 규칙입니다.'),
  'rift-content-unlocks.en':('전투와 성장','Rift-based content unlocks','Fourteen account service gates, first-clear guidance, execution guards and preserved legacy entitlements.'),
- 'reward-boxes':('장비와 빌드','지급용 보상 상자와 최초 보상','96종 상자, 계정 최초 보상, 저장·개봉 거래, 투명 아이콘의 구현과 검증 범위입니다.'),
- 'reward-boxes.en':('장비와 빌드','Consumable reward boxes and first clears','96 box definitions, account first clears, atomic opening and transparent vector artwork.'),
+ 'reward-boxes':('장비와 빌드','지급용 보상 상자와 최초 보상','148종 상자, 계정 최초 보상, 저장·개봉 거래, 생성 PNG 그림의 구현과 검증 범위입니다.'),
+ 'reward-boxes.en':('장비와 빌드','Consumable reward boxes and first clears','148 box definitions, account first clears, atomic opening and generated PNG artwork.'),
  'rift-rewards-1000':('전투와 성장','균열별 드랍·재료·최초 클리어 보상','1~1000단계 장비 등급·보석·룬·재료 수급, 보스와 완료 보상, 첫 보상 및 분해 예산의 기획 검토안입니다.'),
  'rift-rewards-1000.en':('전투와 성장','Rift drops and first-clear rewards','Proposed per-stage equipment rarity, gems, runes, currencies, boss/completion splits and first-clear gifts.'),
  'rift-reward-tables':('전투와 성장','균열 보상 계산표','등급별 확률과 판당·일일 획득량, 보스·반복·첫 보상 계산표입니다. 게임 미반영입니다.'),
@@ -1077,7 +1088,7 @@ def build():
         resource=icon.get('resourceId',icon['id'])
         if resource!=icon['id']:
             shutil.copyfile(ROOT/ART/'RewardBoxes'/(resource+'.png'),SITE/'media/RewardBoxes'/(icon['id']+'.png'))
-    for folder in ('EquipmentVariants','ItemIcons','ClassSetIcons'):
+    for folder in ('EquipmentVariants','ItemIcons','ClassSetIcons','ClassAspectIcons'):
         (SITE/'media'/folder).mkdir(parents=True,exist_ok=True)
         for file in (ROOT/ART/folder).glob('*.png'):
             shutil.copyfile(file,SITE/'media'/folder/file.name)

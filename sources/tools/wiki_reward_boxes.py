@@ -8,6 +8,7 @@ def amount(box,stage):
 
 def build(api):
     path='Assets/HELLSCRIPT/Resources/Data/RewardBoxes.json';data=json.loads(api.read(path));definitions={b['id']:b for b in data['boxes']}
+    art=json.loads(api.read('Docs/Art/RewardBoxes/manifest.json'))
     unlock_path='Assets/HELLSCRIPT/Resources/ContentUnlocks.json';unlocks=json.loads(api.read(unlock_path))['features']
     rows=[]
     for b in data['boxes']:
@@ -15,7 +16,8 @@ def build(api):
                 '장비 등급':b['rarity'],'부위':b['slot'],'보석 단계':b['tier'],'보석 종류':b['gemId'] or '선택 / Choice' if b['kind']=='gem' else '',
                 '각성':b.get('awakened',False),'직업 세트 한정':b.get('setOnly',False),'부위 선택':b.get('chooseSlot',False),'물약 ID':b.get('potionId',''),'룬 등급':b['grade'],'룬 크기':b['size'],
                 '소유자':'계정 / Account','개봉':'GameStore.OpenRewardBox; 최대 10개 / Up to 10',
-                '아이콘 원본':'Docs/Art/RewardBoxes/'+b['icon']+'.svg','이미지 제작':'코드로 작성한 벡터 원본 / Code-authored vectors'}
+                '아이콘 원본':'Assets/HELLSCRIPT/Resources/Art/RewardBoxes/'+b['icon']+'.png','이미지 제작':art['provenance'],
+                '이미지 모델':art['model'],'원화 기록':art['requestManifest']}
         rows.append(api.record(b['id'],b['nameKo'],b['kind'],'균열 최초 보상 등에 쓰는 소비형 지급 상자 / Consumable grant item',fields,path,
                               status='개발 브랜치 구현',image={'file':'RewardBoxes/'+b['icon']+'.png'},related=['reward-boxes','reward-boxes.en'],
                               refs=[api.source_ref('Assets/HELLSCRIPT/Runtime/Core/RewardBoxes.cs'),api.source_ref('Assets/HELLSCRIPT/Runtime/Core/GameStore.RewardBoxes.cs')]))
