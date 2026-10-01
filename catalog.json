@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T10:15:33+09:00",
+  "generatedAt": "2026-10-01T10:25:34+09:00",
   "databases": [
     {
       "id": "resources",
@@ -171591,6 +171591,90 @@
       "name": "검증 기록",
       "description": "보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.",
       "rows": [
+        {
+          "id": "fixed-daily-20261001-final-editmode",
+          "name": "fixed-daily-20261001-final-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "4890 / 4937 통과 · Failed(Child) · fixed-daily-20261001",
+          "fields": {
+            "검사 단계": "fixed-daily-20261001",
+            "보고서 구분": "final",
+            "보고된 결과": "Failed(Child)",
+            "전체 검사": "4937",
+            "통과": "4890",
+            "실패": "47",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-10-01 01:15:05Z",
+            "소요 시간 (초)": "1965.9327625",
+            "해석": "2026-10-01 고정 일일 퀘스트의 집중·번역·최종 전체 검사입니다. 이전 기준47개 실패와 비교한 신규 회귀, 실제 macOS 수령·재시작 근거는 연결된 일일 퀘스트 문서에 기록합니다. 각 실행을 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/DailyQuestFixedEvidence20261001/fixed-daily-20261001-final-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 실패",
+          "related": [
+            "daily-quests",
+            "daily-quests.en"
+          ],
+          "endTime": "2026-10-01 01:15:05Z"
+        },
+        {
+          "id": "fixed-daily-20261001-localization-editmode",
+          "name": "fixed-daily-20261001-localization-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "33 / 33 통과 · Passed · fixed-daily-20261001-localization",
+          "fields": {
+            "검사 단계": "fixed-daily-20261001-localization",
+            "보고서 구분": "단일 보고서",
+            "보고된 결과": "Passed",
+            "전체 검사": "33",
+            "통과": "33",
+            "실패": "0",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-09-30 22:56:17Z",
+            "소요 시간 (초)": "0.5285853",
+            "해석": "2026-10-01 고정 일일 퀘스트의 집중·번역·최종 전체 검사입니다. 이전 기준47개 실패와 비교한 신규 회귀, 실제 macOS 수령·재시작 근거는 연결된 일일 퀘스트 문서에 기록합니다. 각 실행을 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/DailyQuestFixedEvidence20261001/fixed-daily-20261001-localization-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 통과",
+          "related": [
+            "daily-quests",
+            "daily-quests.en"
+          ],
+          "endTime": "2026-09-30 22:56:17Z"
+        },
+        {
+          "id": "fixed-daily-20261001-focused-editmode",
+          "name": "fixed-daily-20261001-focused-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "33 / 33 통과 · Passed · fixed-daily-20261001-focused",
+          "fields": {
+            "검사 단계": "fixed-daily-20261001-focused",
+            "보고서 구분": "단일 보고서",
+            "보고된 결과": "Passed",
+            "전체 검사": "33",
+            "통과": "33",
+            "실패": "0",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-09-30 22:20:05Z",
+            "소요 시간 (초)": "4.6511595",
+            "해석": "2026-10-01 고정 일일 퀘스트의 집중·번역·최종 전체 검사입니다. 이전 기준47개 실패와 비교한 신규 회귀, 실제 macOS 수령·재시작 근거는 연결된 일일 퀘스트 문서에 기록합니다. 각 실행을 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/DailyQuestFixedEvidence20261001/fixed-daily-20261001-focused-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 통과",
+          "related": [
+            "daily-quests",
+            "daily-quests.en"
+          ],
+          "endTime": "2026-09-30 22:20:05Z"
+        },
         {
           "id": "optimization-20260930-final-editmode",
           "name": "optimization-20260930-final-editmode.xml",

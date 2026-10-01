@@ -1,5 +1,7 @@
 # 일일 퀘스트
 
+작성일: 2026-10-01
+
 2026-10-01 사용자 결정에 따라 모든 계정에 같은 다섯 미션과 같은 목표를 매일 제공한다. 출석 이벤트 창의 일일 퀘스트 탭에서 확인하고 보상을 직접 받는다.
 
 | 활동 | 매일 고정 목표 | 심연재화 |
@@ -46,3 +48,13 @@
 `DailyQuestTests`는 데이터 합계·모든 진행 구간과 배속·기록에서 같은 고정 목표·기존 당일 목표 전환과 달성/수령 보존·정확한 성공 이벤트·판매/강화/구매 실패·저장 실패 재시도·동일 날짜 반복·자정·오프라인·시계 역행·캐릭터 변경·미래 상태 보존을 검사한다. 개발 전용 `RuntimeDailyQuestSmoke`는 독립 저장에서 실제 거래 경로, 수령/초기화, KO/EN 세로·가로·작은 화면의 잘림/고정 행동/레이캐스트 버튼/목록 드래그와 새 프로세스 재시작을 검사한다. 합성 입력은 물리 모바일 터치를 증명하지 않으며 합성 전투 fixture는 사람의 30분 플레이 검증이 아니다. 최종 실행 결과는 [최적화·통합 검증](Optimization_20260930.md)에 남긴다.
 
 고정 목표 수정 이전의 실행 검증(2026-09-30): 집중170/170(일일27개 포함), UI contract11/11, 최종 개발 앱의 일일 native 초기28.7초·새 프로세스4.8초 통과. 12개의 KO/EN 화면 조합, 실제 레이캐스트/드래그, 자정(두 자동 출석 팝업 보존 포함)·수령·저장 실패 빈 상태와 재시작100개 유지가 확인됐다. [세로 화면](OptimizationEvidence20260930/daily-portrait-ko.png), [가로 영어](OptimizationEvidence20260930/daily-landscape-en.png), [작은 화면](OptimizationEvidence20260930/daily-small-en.png), [수령 완료](OptimizationEvidence20260930/daily-claimed.png), [저장 실패 빈 상태](OptimizationEvidence20260930/daily-empty.png).
+
+## 고정 목표 최종 검증 — 2026-10-01
+
+마지막 게임 코드와 실제 `main` 반영 커밋은 `a1edd320`이다. 그 소스로 macOS 개발 빌드를 생성했고 빌드 오류는 0개였다. [일퀘 집중 33/33](DailyQuestFixedEvidence20261001/fixed-daily-20261001-focused-editmode.xml), [번역 33/33](DailyQuestFixedEvidence20261001/fixed-daily-20261001-localization-editmode.xml)이 통과했다.
+
+최종 전체 EditMode는 **4,937개 / 4,890개 통과 / 기존 47개 실패 / 0개 건너뜀**이다. 9월 30일의 신선한 기준 47개 실패와 이름이 정확히 같으며 새 실패는 0개다. 종료 UTC 시각과 개별 실패는 [검증 요약](DailyQuestFixedEvidence20261001/validation.json) 및 [원본 XML](DailyQuestFixedEvidence20261001/fixed-daily-20261001-final-editmode.xml)에 보존했다. 연결 중단 때 종료 XML을 남기지 못한 실행은 완료로 집계하지 않고 다시 완료했다.
+
+같은 최종 앱의 **12종 스모크 / 16회 실행**이 모두 통과했다. 일퀘 초기 31.9초·새 프로세스 7.4초, 출석 초기 59.7초·새 프로세스 7.4초를 포함한다. 중단 후 아직 완료되지 않은 출석만 따로 마쳤다. 독립 저장을 다시 읽어 버전 2, 목표 `30/20/2/500/10`, 보상 `20/40/15/15/10`, 다섯 수령 완료와 지갑 100개를 확인했다. 재호출은 보상을 더하지 않았다. 실제 거래·레이캐스트·목록 드래그·자정·시계 역행·저장 실패, 기본 글자 크기의 12개 KO/EN 화면 규격과 추가 상태를 검사했다. [전체 실행 결과](DailyQuestFixedEvidence20261001/native-results.json).
+
+[한국어 세로](DailyQuestFixedEvidence20261001/daily-portrait-ko.png) · [영어 가로](DailyQuestFixedEvidence20261001/daily-landscape-en.png) · [영어 작은 화면](DailyQuestFixedEvidence20261001/daily-small-en.png) · [수령 완료](DailyQuestFixedEvidence20261001/daily-claimed.png). 화면의 설명도 매일 같은 고정 목표로 수정했다. macOS 합성 입력 검증이며 모바일 실기기나 자연 플레이 시간 측정은 수행하지 않았다. 이후 문서·위키 변경은 이 게임 소스를 바꾸지 않는다. 동시 진행 중인 별도 대장간 미커밋 수정은 이 실행의 검증 대상이 아니다.

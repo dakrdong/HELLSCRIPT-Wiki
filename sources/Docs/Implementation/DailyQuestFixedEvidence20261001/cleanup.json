@@ -1,0 +1,65 @@
+{
+  "mainGameCommit": "a1edd32027f9f70c5bcdcdcbd59e3bf377dc96e3",
+  "removedOlderWorktrees": [
+    {
+      "name": "HELLSCRIPT-daily",
+      "branch": "codex/daily-quests",
+      "head": "946c3eaaee2a05ec504af337de575365c3f0c771",
+      "mergedIntoMain": true,
+      "removed": true,
+      "ignoredEvidenceArchived": true
+    },
+    {
+      "name": "HELLSCRIPT-integrated",
+      "branch": "codex/hellscript-final-integration",
+      "head": "3d41c1b6c1204e614fdebf4af80b6a573eeb300c",
+      "mergedIntoMain": true,
+      "removed": true,
+      "ignoredEvidenceArchived": true
+    },
+    {
+      "name": "HELLSCRIPT-opt",
+      "branch": "codex/hellscript-optimization",
+      "head": "69b37249bd69e032b0e4dc5cd0aad60b2de022a4",
+      "mergedIntoMain": true,
+      "removed": true,
+      "ignoredEvidenceArchived": true
+    },
+    {
+      "name": "HELLSCRIPT-sites-final",
+      "branch": "codex/sites-public-validation",
+      "head": "3d41c1b6c1204e614fdebf4af80b6a573eeb300c",
+      "mergedIntoMain": true,
+      "removed": true,
+      "ignoredEvidenceArchived": true
+    },
+    {
+      "name": "blacksmith-native",
+      "branch": "claude/blacksmith-native",
+      "head": "c92a7022abefeede76780f504ee42c8c5c8458f4",
+      "mergedIntoMain": true,
+      "removed": true,
+      "ignoredEvidenceArchived": true
+    }
+  ],
+  "deletedLocalBranches": [
+    "codex/daily-quests",
+    "codex/hellscript-final-integration",
+    "codex/hellscript-optimization",
+    "codex/sites-public-validation",
+    "claude/blacksmith-native",
+    "codex/sites-player-telemetry"
+  ],
+  "deletedRemoteBranches": {
+    "claude/blacksmith-native": "c92a7022abefeede76780f504ee42c8c5c8458f4",
+    "codex/sites-player-telemetry": "3c33af8bd322c1cf8663017c420eae5e1dbaf920"
+  },
+  "preservation": "Logs, UserSettings, Artifacts and Builds retained in a local archive outside removed worktrees; all commits reachable from main",
+  "finalValidationWorktree": "Remove after final result preservation and public publication",
+  "concurrentWork": "Original checkout has new uncommitted blacksmith changes, and a new edict skill-actions worktree appeared; preserved separately from the validated daily-quest snapshot",
+  "preservedNewBranches": [
+    "codex/blacksmith-interaction-fixes",
+    "codex/edict-simple-skill-actions"
+  ],
+  "concurrentForgeCommit": "41f77e38"
+}

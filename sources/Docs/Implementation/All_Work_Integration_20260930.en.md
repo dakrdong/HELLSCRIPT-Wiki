@@ -1,6 +1,6 @@
 # All worktree and branch integration and cleanup — 2026-09-30
 
-Updated: 2026-09-30 · [한국어](All_Work_Integration_20260930.md)
+Updated: 2026-10-01 · [한국어](All_Work_Integration_20260930.md)
 
 The user asked to merge every worktree and branch into `main`, commit and push, and then delete the remaining worktrees and branches. The [2026-09-28 integration](All_Work_Integration_20260928.en.md) kept its worktrees and branches. This time they were all deleted after the merge.
 
@@ -40,3 +40,13 @@ The user asked to merge every worktree and branch into `main`, commit and push, 
 - 9 worktrees were removed, including 2 Codex worktrees. 12 local branches, including the integration branch, and 10 remote branches were deleted. Each was checked to be in `main` right before it was deleted. Only the main checkout and `main` remain. Pull requests #34, #36 and #39 became merged with the push to `main`. The worktree of the session that wrote this record is removed last, after the public wiki is published.
 
 [Integration inventory](AllWorkIntegration20260930Evidence/inventory.json) · [Smoke results](AllWorkIntegration20260930Evidence/smokes.json) · [Full Edit Mode comparison](AllWorkIntegration20260930Evidence/full-editmode.json) · [Cleanup result](AllWorkIntegration20260930Evidence/cleanup.json)
+
+## Remaining branches and worktrees — 2026-10-01
+
+The optimization, forge, Sites and daily-quest worktrees created after the September 30 integration were inventoried again. The fixed daily goals were in main game commit `a1edd320` at the start. Every one of the seven remaining work branches was an ancestor of that main commit, with no unmerged source changes.
+
+Five older worktrees, six local branches and two actual remote branches were removed. Their `Artifacts`, `Builds`, `Logs` and `UserSettings` were moved or cloned into a local archive outside the removed worktrees. All commits remain reachable from main. The final daily-validation branch/worktree is removed last, after preserving its results and corrected documents and publishing the wiki. [Inventory and completed cleanup](DailyQuestFixedEvidence20261001/cleanup.json).
+
+A new uncommitted forge edit began in the original checkout during cleanup, and a new `codex/edict-simple-skill-actions` worktree appeared. Those files and both new work branches are preserved. The [fixed daily-goal validation](Daily_Quests.en.md) uses the isolated, committed `a1edd320` snapshot; it does not claim to validate the concurrent changes.
+
+The concurrent forge change was committed separately as `41f77e38`. These validation documents are integrated into main alongside it; the final full daily-quest run remains scoped to the documented `a1edd320` source. Uncommitted changes in the new skill-actions worktree remain preserved.

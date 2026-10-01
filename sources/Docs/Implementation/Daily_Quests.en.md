@@ -1,5 +1,7 @@
 # Daily quests
 
+Updated on: 2026-10-01
+
 Following the user's 2026-10-01 decision, every account receives the same five missions with the same goals every day. Open the daily quest tab in the attendance/event window and manually claim each completed reward.
 
 | Activity | Fixed daily goal | Abyssal Coins |
@@ -38,3 +40,13 @@ Save schema20 adds an empty daily state to older saves without changing their wa
 `DailyQuests` and `GameStore.DailyQuests` own state and transactions. The generated `DailyQuestWindow` uses the shared `ContentWindowView`, theme, fonts, tabs/buttons, window host and independent scroll body. Korean and English are shipped together. `DailyQuestTests` covers catalog, identical goals across progression/speed/history, legacy-day conversion and preservation of completion/claims, success-only hooks, failures/retry, calendar, offline, persistence and duplicate protection. Development-only `RuntimeDailyQuestSmoke` checks actual domain transactions, claims/reset, KO/EN portrait/landscape/small screens, clipping, fixed controls, raycast clicks, drag and fresh-process persistence. Synthetic input is not physical mobile proof, and synthetic combat is not a human timing study. Final execution evidence is recorded in [optimization and integration validation](Optimization_20260930.en.md).
 
 Acceptance before the fixed-goal correction (2026-09-30): focused170/170 (including27 daily cases), UI contract11/11, daily native initial28.7s and fresh restart4.8s passed. Twelve KO/EN viewport combinations, real raycast/drag, midnight (including preservation of both automatic attendance popup tracks), claims, empty write-failure state and persisted100 coins were verified. [Portrait KO](OptimizationEvidence20260930/daily-portrait-ko.png), [landscape EN](OptimizationEvidence20260930/daily-landscape-en.png), [small](OptimizationEvidence20260930/daily-small-en.png), [claimed](OptimizationEvidence20260930/daily-claimed.png), [empty state](OptimizationEvidence20260930/daily-empty.png).
+
+## Final fixed-goal validation — 2026-10-01
+
+Final game code and actual main integration are `a1edd320`. Its macOS development build succeeded with zero errors. [Daily focused 33/33](DailyQuestFixedEvidence20261001/fixed-daily-20261001-focused-editmode.xml) and [localization 33/33](DailyQuestFixedEvidence20261001/fixed-daily-20261001-localization-editmode.xml) passed.
+
+The final full EditMode run completed **4,937 total / 4,890 passed / 47 existing failures / 0 skipped**. Failure names exactly match September 30's fresh 47-failure baseline, with zero new failures. UTC end time and individual failures are preserved in the [summary](DailyQuestFixedEvidence20261001/validation.json) and [raw XML](DailyQuestFixedEvidence20261001/fixed-daily-20261001-final-editmode.xml). The host-interrupted run left no result XML and was not counted as complete; a new run completed it.
+
+All **12 smokes / 16 launches** passed on the same final player. Daily initial/restart took 31.9s/7.4s; attendance took 59.7s/7.4s. Only the unfinished attendance stage was resumed separately. Reading the isolated save after restart confirmed catalog 2, targets `30/20/2/500/10`, rewards `20/40/15/15/10`, all five claims and wallet 100; replay added zero coins. Coverage includes actual transactions, raycast input, body drag, midnight, rollback, write failure, twelve default-text KO/EN viewports and additional states. [Full native results](DailyQuestFixedEvidence20261001/native-results.json).
+
+[Portrait KO](DailyQuestFixedEvidence20261001/daily-portrait-ko.png) · [landscape EN](DailyQuestFixedEvidence20261001/daily-landscape-en.png) · [small EN](DailyQuestFixedEvidence20261001/daily-small-en.png) · [claimed](DailyQuestFixedEvidence20261001/daily-claimed.png). The footer also describes identical daily goals. This is macOS synthetic-input validation, without physical-mobile or natural-play timing measurements. Later documentation/wiki changes leave this game source unchanged. Concurrent uncommitted forge edits in the original checkout are outside this run's scope.
