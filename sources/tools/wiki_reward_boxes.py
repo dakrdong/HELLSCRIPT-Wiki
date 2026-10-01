@@ -25,9 +25,9 @@ def build(api):
         names=[definitions[g['boxId']]['nameKo']+' × '+str(g['count']) for g in grants]
         features=[f for f in unlocks if f['stage']==stage]
         fields={'균열 단계':stage,'콘텐츠 개방':' · '.join(f['name'] for f in features) or '추가 개방 없음 / No new service',
-                '개방 조건':'계정 클리어 기록 확정 시 자동 개방; 상자 수령 불필요 / Automatic on confirmed account clear; box claim not required','상자':' / '.join(names),'상자 수':sum(g['count'] for g in grants),'수령 조건':'해당 단계의 정상 클리어 최단 기록 / Exact normal-clear record',
+                '개방 조건':('정상 클리어 → 룬 블럭 세트 수령 → 인장 착지·아이콘 등록 → 필수 가이드 완료 후 자유 사용. 기존 해방 계정은 이용 유지 / Normal clear → claim Rune Block Set → emblem lands and icon appears → complete the required guide for free use. Existing unlocked accounts retain access' if stage==15 else '계정 클리어 기록 확정 시 자동 개방; 상자 수령 불필요 / Automatic on confirmed account clear; box claim not required'),'상자':' / '.join(names),'상자 수':sum(g['count'] for g in grants),'수령 조건':'해당 단계의 정상 클리어 최단 기록 / Exact normal-clear record',
                 '중복 방지':'계정당 단계별 1회 / Once per account per stage','기존 보상':'자동 골드·재료는 재지급하지 않음 / No duplicate automatic currency',
                 '지급 데이터':grants,'상자별 내용물 수':[amount(definitions[g['boxId']],stage) for g in grants]}
-        stages.append(api.record('rift-first-'+str(stage),'균열 '+str(stage)+'단계','최초 보상',' / '.join(names),fields,path,status='개발 브랜치 구현',related=['reward-boxes','rift-rewards-1000','rift-content-unlocks'],refs=[api.source_ref(unlock_path)]))
+        stages.append(api.record('rift-first-'+str(stage),'균열 '+str(stage)+'단계','최초 보상',' / '.join(names),fields,path,status='개발 브랜치 구현',related=['reward-boxes','rift-rewards-1000','rift-content-unlocks']+(['rune-board-unlock-tutorial','rune-board-unlock-tutorial.en'] if stage==15 else []),refs=[api.source_ref(unlock_path)]))
     return [api.db('reward-boxes','지급용 보상 상자 / Reward boxes',f'실제 소비형 상자 {len(rows)}종의 정의 / Runtime definitions of {len(rows)} consumable boxes.',rows),
             api.db('rift-first-boxes','균열 최초 지급 상자 / First-clear boxes','1~1000단계 계정 최초 보상의 실제 상자 묶음 / Account-once runtime packages for tiers 1–1000.',stages)]
