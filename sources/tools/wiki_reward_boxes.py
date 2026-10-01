@@ -17,10 +17,10 @@ def build(api):
                 '각성':b.get('awakened',False),'직업 세트 한정':b.get('setOnly',False),'부위 선택':b.get('chooseSlot',False),'물약 ID':b.get('potionId',''),'룬 등급':b['grade'],'룬 크기':b['size'],
                 '소유자':'계정 / Account','개봉':'GameStore.OpenRewardBox; 최대 10개 / Up to 10',
                 '아이콘 원본':'Assets/HELLSCRIPT/Resources/Art/RewardBoxes/'+b['icon']+'.png','이미지 제작':art['provenance'],
-                '이미지 모델':art['model'],'원화 기록':art['requestManifest']}
+                '이미지 모델':art['model'],'원화 기록':art['requestManifest'],'이전 벡터 기록':'Docs/Art/RewardBoxes/'+b['id']+'.svg'}
         rows.append(api.record(b['id'],b['nameKo'],b['kind'],'균열 최초 보상 등에 쓰는 소비형 지급 상자 / Consumable grant item',fields,path,
                               status='개발 브랜치 구현',image={'file':'RewardBoxes/'+b['icon']+'.png'},related=['reward-boxes','reward-boxes.en'],
-                              refs=[api.source_ref('Assets/HELLSCRIPT/Runtime/Core/RewardBoxes.cs'),api.source_ref('Assets/HELLSCRIPT/Runtime/Core/GameStore.RewardBoxes.cs')]))
+                              refs=[api.source_ref('Assets/HELLSCRIPT/Runtime/Core/RewardBoxes.cs'),api.source_ref('Assets/HELLSCRIPT/Runtime/Core/GameStore.RewardBoxes.cs'),api.source_ref('Docs/Art/RewardBoxes/'+b['id']+'.svg')]))
     stages=[]
     for stage in range(1,1001):
         grants=[r['grant'] for r in data['firstClearRules'] if stage%r['every']==0]+next((m['grants'] for m in data['milestones'] if m['stage']==stage),[])

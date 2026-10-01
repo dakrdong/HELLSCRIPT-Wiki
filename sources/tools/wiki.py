@@ -341,11 +341,12 @@ def build_resources(databases):
     box_art=json.loads(read('Docs/Art/RewardBoxes/manifest.json'))
     for icon in box_art['icons']:
         path=ART+'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png';raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
-        rows.append(record('asset-reward-box-'+icon['id'],icon['id'],'보상 상자 아이콘','보상 상자의 등급·내용물·보석 단계를 표시합니다.',
+        rows.append(record('asset-reward-box-'+icon['id'],icon['id'],'보상 상자 아이콘','상자의 등급·내용물을 표현하며 단계·수량은 공통 UI 텍스트로 표시합니다.',
             {'해상도':f'{icon["width"]} × {icon["height"]}','색상 모드':icon['mode'],'완전 투명 픽셀':icon['transparentPixels'],'SHA-256':digest(raw),
              '제작 방식':box_art['provenance'],'모델':box_art['model'],'제작 요청':icon['requestId'],
              '이전 벡터 기록':'Docs/Art/RewardBoxes/'+icon['id']+'.svg'},
             box_art['requestManifest'],status='개발 적용 · 모델 출처 미확인',image={'file':'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png'},assetPath=path,
+            refs=[source_ref('Docs/Art/RewardBoxes/'+icon['id']+'.svg')],
             content={'db':'reward-boxes','id':icon['id']},related=['reward-boxes','reward-boxes.en','generated-game-art']))
     generated_art_path='Docs/Art/GeneratedGameArt/requests.json'
     for icon in json.loads(read(generated_art_path))['requests']:
