@@ -40,8 +40,8 @@ def main():
     if (session.get('kind') != 'hellscript-qa-telemetry' or session.get('version') != 1
             or not re.fullmatch(r'[A-Za-z0-9_-]{32,256}', session.get('accessToken', ''))):
         parser.error('A dedicated QA session file is required.')
-    auth_origin = 'https://hellscript-production.up.railway.app'
-    if session.get('baseUrl', '').rstrip('/') not in (auth_origin, args.site_url):
+    auth_origin = args.site_url
+    if session.get('baseUrl', '').rstrip('/') != auth_origin:
         parser.error('QA credential belongs to another issuer/collector.')
     bypass = ''
     if args.private:

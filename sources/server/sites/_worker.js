@@ -1,12 +1,12 @@
-// Sites Worker: durable observations, never an authority for rewards or saves.
+// One Site owns player authentication, operations and durable observations.
+import {Rejected,object,integer,reply,sha256,bodyBytes,parseJson,database,trustedOrigin} from './common.js';
+import {createAuth,telemetryIdentity} from './auth.js';
+import {createLiveOps} from './liveops.js';
+import {createMigration} from './migration.js';
+import {OPS_ASSETS} from './ops.generated.js';
 const MAX_BODY = 16 * 1024 * 1024;
 const ID = /^[0-9a-f]{32}$/;
-const object = v => v !== null && typeof v === 'object' && !Array.isArray(v);
-const integer = (v, min, max) => Number.isSafeInteger(v) && v >= min && v <= max;
 const text = (v, max) => typeof v === 'string' && Array.from(v).length <= max;
-class Rejected extends Error {
-  constructor(status, code) { super(code); this.status = status; this.code = code; }
-}
 const require = (condition, code) => { if (!condition) throw new Rejected(422, code); };
 function tree(v, depth = 0) {
   require(depth <= 64, 'nesting');
@@ -68,109 +68,22 @@ export function validate(record) {
   if (j.priorUnexportedLossCount) signals.push('LOCAL_EXPORT_LOSS');
   return signals;
 }
-const SCHEMA = [
-  'CREATE TABLE IF NOT EXISTS schema_state (id INTEGER PRIMARY KEY CHECK(id=1),version INTEGER NOT NULL)',
-  'INSERT OR IGNORE INTO schema_state VALUES(1,1)',
-  'CREATE TABLE IF NOT EXISTS runs (' +
-    'account_id TEXT NOT NULL,run_id TEXT NOT NULL,payload_hash TEXT NOT NULL,identity_kind TEXT NOT NULL,' +
-    'received_utc_ms INTEGER NOT NULL,local_account_id TEXT NOT NULL,hero_id TEXT NOT NULL,stage INTEGER NOT NULL,' +
-    'outcome TEXT NOT NULL,finish TEXT,started_utc_ms INTEGER NOT NULL,completed_utc_ms INTEGER NOT NULL,' +
-    'simulation_seconds REAL NOT NULL,attendance_seconds REAL NOT NULL,earned_gold INTEGER NOT NULL,kills INTEGER NOT NULL,' +
-    'boss_defeated INTEGER NOT NULL,equipment_collected INTEGER NOT NULL,liveops_version INTEGER,liveops_config_hash TEXT,' +
-    'signals_json TEXT NOT NULL,object_key TEXT NOT NULL,payload_bytes INTEGER NOT NULL,PRIMARY KEY(account_id,run_id))',
-  'CREATE INDEX IF NOT EXISTS runs_account_time ON runs(account_id,received_utc_ms)',
-  'CREATE INDEX IF NOT EXISTS runs_stage_outcome ON runs(stage,outcome)',
-  'CREATE TABLE IF NOT EXISTS audit (received_utc_ms INTEGER NOT NULL,account_id TEXT NOT NULL,run_id TEXT NOT NULL,code TEXT NOT NULL,payload_hash TEXT NOT NULL)',
-  'CREATE TABLE IF NOT EXISTS upload_rates (account_id TEXT NOT NULL,window INTEGER NOT NULL,count INTEGER NOT NULL,bytes INTEGER NOT NULL,PRIMARY KEY(account_id,window))',
-  'CREATE INDEX IF NOT EXISTS upload_rates_window ON upload_rates(window)'
-];
-function reply(body, status = 200, extra = {}) {
-  return Response.json(body, {status, headers: {
-    'Cache-Control': 'no-store','X-Content-Type-Options': 'nosniff','Referrer-Policy': 'no-referrer',...extra
-  }});
-}
-function origin(env) {
-  try {
-    const url = new URL(env.HELLSCRIPT_AUTH_ORIGIN);
-    if (url.protocol === 'https:' && url.origin === env.HELLSCRIPT_AUTH_ORIGIN) return url.origin;
-  } catch {}
-  throw new Rejected(503, 'authentication_service_unavailable');
-}
-async function boundedBody(request) {
-  if ((request.headers.get('Content-Type') || '').split(';')[0].trim().toLowerCase() !== 'application/json') throw new Rejected(415, 'content_type');
-  const length = request.headers.get('Content-Length');
-  if (length !== null && (!/^[0-9]{1,10}$/.test(length) || Number(length) > MAX_BODY)) throw new Rejected(Number(length) > MAX_BODY ? 413 : 400, 'body_budget');
-  if (!request.body) throw new Rejected(400, 'json');
-  const reader = request.body.getReader(), chunks = [];
-  let total = 0;
-  try {
-    while (true) {
-      const {value, done} = await reader.read();
-      if (done) break;
-      total += value.byteLength;
-      if (total > MAX_BODY) { await reader.cancel(); throw new Rejected(413, 'body_budget'); }
-      chunks.push(value);
-    }
-  } finally { reader.releaseLock(); }
-  if (!total || (length !== null && Number(length) !== total)) throw new Rejected(400, 'incomplete_body');
-  const bytes = new Uint8Array(total);
-  let offset = 0;
-  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-  return bytes;
-}
-async function sha256(bytes) {
-  const hash = await crypto.subtle.digest('SHA-256', bytes);
-  return Array.from(new Uint8Array(hash), b => b.toString(16).padStart(2, '0')).join('');
-}
-export function createHandler({authFetch = (url, init) => globalThis.fetch(url, init), now = Date.now} = {}) {
-  const initialized = new WeakMap();
+export function createHandler({fetcher,now=Date.now,authenticate:overrideIdentity}={}) {
+  const auth=createAuth({fetcher,now}),liveops=createLiveOps({now}),migration=createMigration({now});
   async function initialize(env) {
-    if (!env.DB || !env.LOGS) throw new Rejected(503, 'storage_unavailable');
-    if (!initialized.has(env.DB)) {
-      const pending = env.DB.batch(SCHEMA.map(sql => env.DB.prepare(sql))).then(async () => {
-        const state = await env.DB.prepare('SELECT version FROM schema_state WHERE id=1').first();
-        if (state?.version !== 1) throw new Rejected(503, 'storage_schema');
-      });
-      initialized.set(env.DB, pending);
-      pending.catch(() => initialized.delete(env.DB));
-    }
-    await initialized.get(env.DB);
+    if(!env.DB||!env.LOGS)throw new Rejected(503,'storage_unavailable');
+    const db=database(env);
+    const version=await db.prepare('SELECT version FROM schema_state WHERE id=1').first();
+    if(version?.version!==1)throw new Rejected(503,'storage_schema');
+    const state=await db.prepare('SELECT import_id FROM backend_state WHERE id=1').first();
+    if(!state)throw new Rejected(503,'backend_initializing');
+    return db;
   }
-  async function authenticate(request, env) {
-    const authorization = request.headers.get('Authorization') || '';
-    if (!/^Bearer [A-Za-z0-9_-]{32,256}$/.test(authorization)) throw new Rejected(401, 'authentication');
-    const controller = new AbortController(), timeout = setTimeout(() => controller.abort(), 8000);
-    try {
-      const upstream = await authFetch(origin(env) + '/v1/telemetry/session', {
-        headers: {Authorization: authorization,Accept: 'application/json'},redirect: 'manual',signal: controller.signal
-      });
-      if ([401,403].includes(upstream.status)) throw new Rejected(401, 'authentication');
-      if (upstream.status === 429) throw new Rejected(429, 'rate_limited');
-      if (!upstream.ok) throw new Rejected(503, 'authentication_service_unavailable');
-      const raw = await upstream.text();
-      if (raw.length > 4096) throw new Rejected(503, 'authentication_service_unavailable');
-      const identity = JSON.parse(raw);
-      if (!object(identity) || !['qa','google'].includes(identity.kind) || typeof identity.accountId !== 'string' ||
-          !/^[A-Za-z0-9_.:-]{1,132}$/.test(identity.accountId) || !identity.accountId.startsWith(identity.kind + ':')) {
-        throw new Rejected(503, 'authentication_service_unavailable');
-      }
-      return identity;
-    } catch (error) {
-      if (error instanceof Rejected) throw error;
-      const kind = String(error?.message).startsWith('Illegal invocation') ? 'illegal_invocation' :
-        error?.name === 'AbortError' ? 'timeout' :
-        /different request|cross.request|I\/O/.test(String(error?.message)) ? 'request_context' :
-        /network|Network|disallow|allow|fetch|Fetch|URL/.test(String(error?.message)) ? 'network' : 'transport';
-      const errorType = ['TypeError','ReferenceError','SyntaxError','Error'].includes(error?.name) ? error.name : 'unknown';
-      const line = String(error?.stack).split('\n').slice(1).join('\n').match(/(?:index|_worker)\.js:\d+:\d+/)?.[0] || '';
-      console.error('telemetry_auth_failed', kind, errorType, line);
-      throw new Rejected(503, 'authentication_service_unavailable');
-    } finally { clearTimeout(timeout); }
-  }
+  const authenticate=(request,env)=>overrideIdentity?overrideIdentity(request,env):telemetryIdentity(request,env,now());
   async function ingest(request, env) {
-    const identity = await authenticate(request, env), bytes = await boundedBody(request);
+    const identity = await authenticate(request, env), bytes = await bodyBytes(request,MAX_BODY);
     let record;
-    try { record = JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes)); }
+    try { record = parseJson(bytes); }
     catch { throw new Rejected(400, 'json'); }
     const signals = validate(record), j = record.journal;
     const key = request.headers.get('Idempotency-Key');
@@ -216,18 +129,33 @@ export function createHandler({authFetch = (url, init) => globalThis.fetch(url, 
       try {
         const path = new URL(request.url).pathname;
         if (path === '/healthz' && ['GET','HEAD'].includes(request.method)) {
-          origin(env); await initialize(env);
+          trustedOrigin(env); await initialize(env);
           await env.DB.prepare('SELECT run_id FROM runs LIMIT 1').first();
           await env.LOGS.head('__healthcheck__');
-          const response = reply({status:'ok',service:'hellscript-player-logs',schemaVersion:1});
+          await env.DB.prepare('SELECT id FROM auth_accounts LIMIT 1').first();
+          const active=await env.DB.prepare('SELECT version FROM liveops_active WHERE singleton=1').first();
+          if(!active)throw new Rejected(503,'operations_unavailable');
+          const response = reply({status:'ok',service:'hellscript-player-logs',schemaVersion:1,backend:'sites',authentication:'local',operations:true});
           return request.method === 'HEAD' ? new Response(null,response) : response;
+        }
+        if(path.startsWith('/internal/migration/'))return await migration(request,env);
+        if(path.startsWith('/v1/')||path.startsWith('/auth/')||path.startsWith('/ops/api/'))await initialize(env);
+        if(path.startsWith('/v1/auth/')||path.startsWith('/auth/google/'))return await auth(request,env);
+        if(path==='/v1/telemetry/session')return request.method==='GET'?reply(await authenticate(request,env)):reply({error:'method'},405,{Allow:'GET'});
+        if(path.startsWith('/v1/liveops/')||path.startsWith('/ops/api/'))return await liveops(request,env);
+        if(path==='/ops'||path==='/ops/'||Object.hasOwn(OPS_ASSETS,path)){
+          if(!['GET','HEAD'].includes(request.method))return reply({error:'method'},405,{Allow:'GET, HEAD'});
+          const name=path==='/ops'||path==='/ops/'?'/ops/index.html':path;
+          const asset=OPS_ASSETS[name];if(!asset)throw new Rejected(404,'route');
+          return new Response(request.method==='HEAD'?null:asset.body,{headers:{'Content-Type':asset.type,'Cache-Control':'no-store',
+            'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'"}});
         }
         if (path === '/v1/combat-runs') return request.method === 'POST' ? await ingest(request,env) : reply({error:'method'},405,{Allow:'POST'});
         if (path === '/' && ['GET','HEAD'].includes(request.method)) {
           const html = '<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
             '<title>HELLSCRIPT 플레이 로그</title><style>body{background:#10151e;color:#e7edf5;font:17px/1.7 system-ui;max-width:700px;margin:12vh auto;padding:24px}a{color:#8ac6ff}h1{font-size:30px}</style>' +
             '<main><h1>HELLSCRIPT 플레이 로그</h1><p>인증된 전투 기록을 보관하는 서버입니다.<br>Authenticated combat log receiver.</p>' +
-            '<p><a href="/healthz">서버 상태 확인 · Server health</a></p><p>플레이 기록은 공개 조회할 수 없습니다.<br>Player records are private.</p></main></html>';
+            '<p><a href="/ops">운영 도구 · Operations</a></p><p><a href="/healthz">서버 상태 확인 · Server health</a></p><p>플레이 기록은 공개 조회할 수 없습니다.<br>Player records are private.</p></main></html>';
           return new Response(request.method === 'HEAD' ? null : html,{headers:{
             'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store',
             'Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'",
@@ -237,7 +165,7 @@ export function createHandler({authFetch = (url, init) => globalThis.fetch(url, 
         return reply({error:'route'},404);
       } catch (error) {
         // Fixed diagnostic codes only: no token, request body or identity logs.
-        return reply({error:error instanceof Rejected?error.code:'storage_unavailable'},error instanceof Rejected?error.status:503);
+        return reply({error:error instanceof Rejected?error.code:'storage_unavailable',...(error instanceof Rejected&&error.details?{details:error.details}:{})},error instanceof Rejected?error.status:503);
       }
     }
   };

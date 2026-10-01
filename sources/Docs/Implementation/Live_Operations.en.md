@@ -2,9 +2,9 @@
 
 Updated: 2026-09-30
 
-[한국어](Live_Operations.md) · [Open operations tool](https://hellscript-production.up.railway.app/ops) · [Combat journals and server ingestion](Combat_Journal_Server.en.md)
+[한국어](Live_Operations.md) · [Open operations tool](https://hellscript-player-logs.hoosung.chatgpt.site/ops) · [Combat journals and server ingestion](Combat_Journal_Server.en.md)
 
-The public wiki links to the operations tool. Editing requires a separate operator login on Railway; the public wiki remains a read-only document and database mirror. Operator credentials do not belong in the wiki, game builds or account saves.
+The public wiki links to the operations tool. Editing requires a separate operator login on the same Site; the public wiki remains a read-only document and database mirror. Operator credentials do not belong in the wiki, game builds or account saves.
 
 ## Operator workflow
 
@@ -46,30 +46,22 @@ Client-reported references remain observations. Hashes identify documents and de
 
 ## Deployment and QA connection
 
-The table defines the Railway authentication and operations host. The new collector and its 2026-09-30 verification are documented in [Sites player logs](Sites_Player_Logs.en.md). Existing Railway records and databases remain intact. The [verification record](#verification-record) below describes the earlier integrated host.
+From 2026-10-01, Google sign-in, operations and combat ingestion use one Site. See [backend migration](Sites_Player_Logs.en.md) for cutover and final evidence. The historical verification below describes the earlier host.
 
 | Item | Configuration |
 | --- | --- |
-| Service | Railway `dazzling-love / production / HELLSCRIPT`, one replica |
-| Origin | `https://hellscript-production.up.railway.app` |
-| Storage | 500 MB volume; `/data/hellscript/telemetry.sqlite`, `liveops.sqlite` and `accounts.sqlite` |
-| Automatic deployment | Changes on GitHub `main` to `server/**`, `Dockerfile`, `.dockerignore` or the original `RewardBoxes.json` trigger deployment. Documentation-only changes do not restart the server. |
-| Health | `GET /healthz`; telemetry, operations and the enabled Google account database must remain readable. |
-| Player reads | `GET /v1/liveops/current` and `/v1/liveops/releases/{version}` expose published configuration only. |
-| Operators | `/ops`; separate `HELLSCRIPT_OPS_TOKENS` and exact `HELLSCRIPT_OPS_ORIGIN` |
-| Legacy QA uploads | `POST /v1/combat-runs`; per-QA-account keys from `HELLSCRIPT_TELEMETRY_TOKENS` |
-| Sites identity checks | `GET /v1/telemetry/session`; returns only the collection identity for QA or a valid Google game session |
-| Persistence | Atomic SQLite publication, immutable releases/audit, revision comparison |
+| Origin and operations | https://hellscript-player-logs.hoosung.chatgpt.site · `/ops` |
+| Storage | Site D1 `DB` and private R2 `LOGS` |
+| Health | `GET /healthz` checks completed migration and account/settings/log storage. |
+| Published reads | `GET /v1/liveops/current`, `/v1/liveops/releases/{version}` |
+| Operator authentication | Existing operator key, HttpOnly/Secure/SameSite cookie, Origin and CSRF checks |
+| Player and QA ingestion | `POST /v1/combat-runs`; local session verification and separate QA keys |
+| Persistence | Atomic D1 batch, immutable release/audit, revision comparison |
+| Deployment | Open the existing Site and publish its verified source. No external container or authentication host. |
 
-`Resources/Data/ServerConnection.json` contains only the public origin and automatically connects configuration reads. Development builds and the Editor connect combat uploads using an operator-issued `qa-session.json` in the save directory, or a path passed with `-hellscriptQaSessionFile`. The file's server and upload purpose are validated. QA upload tokens are separate from web operator keys, and the server enforces their different permissions. Ordinary release builds exclude this development-file connection path. This provides pseudonymous QA-account attribution separately from Google player authentication. Real session contents and private paths are not published.
+Both `baseUrl` and `telemetryBaseUrl` use this Site. QA files must match that origin and upload purpose. Operator and QA keys remain separate and absent from game builds, Git and wiki. Ordinary Google players use in-memory game sessions. Stable account IDs, exact release JSON/hash, drafts and earlier combat data are retained.
 
-Version 2 uses `baseUrl` for the Railway authentication/operations origin and `telemetryBaseUrl` for Sites collection. QA files must match the collector. Ordinary Google players upload to Sites with their in-memory game session instead of a QA file. Published game settings and combat reward ownership retain their existing implementations.
-
-Credentials and QA session files are excluded from Git and the public wiki. Operators use HttpOnly/Secure/SameSite cookies, exact Origin checks and CSRF tokens. Anonymous pages cannot mutate configuration. Missing operator credentials keep the operator API closed. Requests, timeouts and login attempts have explicit limits.
-
-During setup, this Railway trial account's Backups screen required Pro. The plan was not upgraded, and neither platform nor scheduled backups were configured. Both databases received a one-time backup through SQLite's online backup API into private local storage. Independent copies returned `ok` from `quick_check`; the production databases were not restored. Persistent-volume retention, a one-time backup and copy checks are distinct from automatic backups or a production restore test. See the [storage and backup evidence](../../Artifacts/Validation/live-operations-20260925/cloud-storage-backup.json). Check available backup methods, schedules and restoration procedures in the [Railway backup documentation](https://docs.railway.com/volumes/backups) and configure them separately. Backing up running SQLite databases requires each database's backup API, not a database-file copy that omits the WAL.
-
-Stable Google account IDs and sessions use a separate `accounts.sqlite`. [Google sign-in](Google_Login.en.md) grants neither operator nor QA-upload permissions. The one-time backup evidence above predates Google sign-in and covers only the telemetry and operations databases, not backup or restoration of the new account database.
+All three source SQLite databases are frozen for cutover and copied with their online backup API to private local storage and R2. Accounts/settings use their real D1 owners; combat payloads use R2 and D1 summaries. Legacy events, drops, authority evidence and audit remain in `legacy_telemetry_rows` and the original backups. Public evidence contains only counts/hashes. A one-time migration backup is separate from automated backups and scheduled restore checks.
 
 ## Verification record
 

@@ -1,10 +1,10 @@
 # 게임 운영툴과 서버 설정 게시
 
-갱신일: 2026-09-30
+갱신일: 2026-10-01
 
-[English](Live_Operations.en.md) · [운영툴 열기](https://hellscript-production.up.railway.app/ops) · [전투 기록과 서버 수집](Combat_Journal_Server.md)
+[English](Live_Operations.en.md) · [운영툴 열기](https://hellscript-player-logs.hoosung.chatgpt.site/ops) · [전투 기록과 서버 수집](Combat_Journal_Server.md)
 
-공개 위키에서 운영툴 접속 안내를 열 수 있다. 수정 화면은 Railway의 별도 운영자 로그인 뒤에 있으며, 공개 위키는 문서·DB를 조회하는 읽기 전용 상태를 유지한다. 운영자 키는 위키, 게임 빌드, 계정 저장 파일에 넣지 않는다.
+공개 위키에서 운영툴 접속 안내를 열 수 있다. 수정 화면은 같은 Sites 서버의 별도 운영자 로그인 뒤에 있으며, 공개 위키는 문서·DB를 조회하는 읽기 전용 상태를 유지한다. 운영자 키는 위키, 게임 빌드, 계정 저장 파일에 넣지 않는다.
 
 ## 사용하는 순서
 
@@ -46,30 +46,22 @@
 
 ## 서버와 QA 연결
 
-아래 표는 Railway 인증·운영 서버의 구성 기준이다. 2026-09-30의 신규 로그 수집 주소와 검증은 [Sites 플레이 로그](Sites_Player_Logs.md)를 따른다. 이전 Railway 기록과 DB는 보존한다. 아래 [검증 기록](#검증-기록)은 당시 통합 서버를 대상으로 한다.
+2026-10-01부터 Google 로그인, 운영 설정, 전투 수집은 같은 Sites 서버에서 처리한다. 실제 이전과 최종 검증은 [통합 서버 이전](Sites_Player_Logs.md)을 따른다. 아래 과거 검증 기록은 당시 서버를 대상으로 한다.
 
 | 항목 | 구성 |
 | --- | --- |
-| 서비스 | Railway `dazzling-love / production / HELLSCRIPT`, 단일 인스턴스 |
-| 접속 | `https://hellscript-production.up.railway.app` |
-| 저장소 | 500 MB 볼륨의 `/data/hellscript/telemetry.sqlite`, `liveops.sqlite`, `accounts.sqlite` |
-| 자동 배포 | GitHub `main`의 `server/**`, `Dockerfile`, `.dockerignore`, 원본 `RewardBoxes.json` 변경을 감지한다. 문서만 바꾸면 서버를 재시작하지 않는다. |
-| 상태 확인 | `GET /healthz`; 전투·운영 DB와 활성화된 Google 계정 DB를 읽을 수 있어야 정상이다. |
-| 게임 설정 조회 | `GET /v1/liveops/current`, `GET /v1/liveops/releases/{version}`; 게시된 설정만 읽는다. |
-| 운영자 | `/ops`; 별도 `HELLSCRIPT_OPS_TOKENS`, 정확한 `HELLSCRIPT_OPS_ORIGIN` |
-| 기존 QA 전투 업로드 | `POST /v1/combat-runs`; `HELLSCRIPT_TELEMETRY_TOKENS`의 QA 계정별 키 |
-| Sites 수집 인증 | `GET /v1/telemetry/session`; QA 또는 유효한 Google 게임 세션의 수집 계정 ID만 반환 |
-| 게시·감사 | SQLite 트랜잭션, 변경 불가능한 게시본·감사 기록, 초안과 기준 버전 비교 |
+| 접속·운영 화면 | https://hellscript-player-logs.hoosung.chatgpt.site · `/ops` |
+| 저장소 | Sites의 D1 `DB`와 비공개 R2 `LOGS` |
+| 상태 | `GET /healthz`; 데이터 이전 완료와 계정·설정·로그 저장소를 확인한다. |
+| 게임 설정 조회 | `GET /v1/liveops/current`, `GET /v1/liveops/releases/{version}` |
+| 운영 인증 | 기존 운영자 키, HttpOnly/Secure/SameSite 쿠키와 Origin·CSRF 검사 |
+| 플레이어·QA 수집 | `POST /v1/combat-runs`; 같은 서버의 세션·별도 QA 키를 내부에서 확인한다. |
+| 게시·감사 | D1 원자적 batch, 변경 불가능한 게시본·감사, 버전 비교 |
+| 배포 | 기존 Sites 소스를 열고 검증한 같은 소스를 저장·게시한다. 별도 컨테이너나 외부 인증 서버를 사용하지 않는다. |
 
-게임의 `Resources/Data/ServerConnection.json`에는 공개 서버 주소만 들어간다. 운영 설정 조회는 자동으로 연결된다. 개발 빌드와 Editor의 전투 업로드는 운영자가 발급한 별도 QA 세션 파일을 기기의 저장 폴더에 `qa-session.json`으로 두거나 `-hellscriptQaSessionFile`로 경로를 전달하면 연결된다. 파일의 대상 서버와 업로드 용도를 검사하며 웹 운영자 키와 별도의 QA 토큰을 사용한다. 서버가 두 자격 증명의 권한을 구분한다. 일반 배포 빌드에는 이 개발용 세션 파일 연결 경로를 포함하지 않는다. Google 플레이어 인증과 별도로 QA 계정별 식별에 사용하는 연결이며, 세션 파일의 실제 값이나 개인 경로는 공개하지 않는다.
+게임 설정의 `baseUrl`과 `telemetryBaseUrl`은 모두 이 Sites 주소다. QA 파일도 같은 주소와 업로드 용도를 검사한다. 운영자 키와 QA 키는 분리하며 게임·Git·위키에는 넣지 않는다. 일반 Google 플레이어는 메모리의 게임 세션을 사용한다. 기존 계정 ID, 게시 설정 원문·해시·초안과 이전 전투 원문·이벤트·감사를 보존한다.
 
-버전 2 연결 설정의 `baseUrl`은 위 Railway 인증·운영 주소이고 `telemetryBaseUrl`은 Sites 수집 주소다. QA 파일은 수집 주소와 일치해야 한다. 일반 Google 플레이어의 Sites 업로드는 메모리의 게임 세션을 사용하며 QA 파일을 사용하지 않는다. 공개 설정 게시와 전투 보상 소유권은 기존 구현을 유지한다.
-
-서버 환경 변수·운영자 키·QA 세션 파일은 Git과 공개 위키에 포함하지 않는다. 로그인한 운영 화면은 HttpOnly/Secure/SameSite 쿠키와 Origin·CSRF 검사를 사용하며, 공개 페이지에서 인증 없이 운영 데이터를 변경할 수 없다. 운영 키가 없으면 운영 API는 닫힌 상태로 시작한다. 요청 크기·시간과 로그인 시도 횟수를 제한한다.
-
-설정 당시 Railway 체험 계정의 Backups 화면은 Pro 플랜을 요구했다. 요금제를 변경하지 않았으며 플랫폼 자동 백업과 예약 백업은 설정하지 않았다. 두 DB는 SQLite online backup API로 한 번 백업해 비공개 로컬 저장소에 보관했고, 독립 복사본의 `quick_check`가 모두 `ok`임을 확인했다. 운영 DB 복원은 실행하지 않았다. 영구 볼륨의 데이터 보존, 1회 백업과 복사본 검사는 자동 백업·운영 복원 검증과 구분한다. [저장소·백업 확인 기록](../../Artifacts/Validation/live-operations-20260925/cloud-storage-backup.json)을 참고하고, 사용 가능한 백업 방식·주기와 복원 절차는 [Railway 백업 문서](https://docs.railway.com/volumes/backups)를 확인해 별도로 설정한다. 실행 중인 SQLite DB를 백업할 때는 각 DB의 backup API를 사용하며, WAL을 제외한 DB 파일 복사로 대체하지 않는다.
-
-Google 계정의 고정 ID와 세션은 별도의 `accounts.sqlite`에 저장한다. [Google 로그인](Google_Login.md)은 운영자 권한이나 QA 업로드 권한을 부여하지 않는다. 위의 1회 백업 기록은 Google 로그인 추가 전의 전투·운영 DB 두 개만 대상으로 하며, 새 계정 DB의 백업·복원 검증을 포함하지 않는다.
+원본 SQLite 3개는 쓰기를 막은 뒤 online backup API로 일관된 복사본을 만들고 비공개 로컬 저장소와 R2에 보관한다. 계정과 운영 설정은 D1의 실제 소유 테이블로, 전투 원문은 R2와 D1 요약으로 옮긴다. 분석용 이전 이벤트·보상·권한 근거·감사는 `legacy_telemetry_rows`와 원본 백업에 보존한다. 공개 위키에는 건수와 해시만 남긴다. 1회 이전 백업은 자동 백업이나 정기 복원 검사와 구분한다.
 
 ## 검증 기록
 

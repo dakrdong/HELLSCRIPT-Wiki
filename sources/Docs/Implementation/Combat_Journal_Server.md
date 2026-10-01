@@ -1,10 +1,10 @@
 # 균열 전투 기록과 서버 분석 수집
 
-갱신일: 2026-09-30
+갱신일: 2026-10-01
 
 영어판: [Combat journal and server analytics](Combat_Journal_Server.en.md) · [게임 운영툴과 설정 게시](Live_Operations.md)
 
-로그 수집 주소를 분리하는 연결은 [Sites 플레이 로그 수집](Sites_Player_Logs.md)을 따른다. Google 인증 후 수집, QA 파일의 대상, D1 요약·R2 원문과 기존 Railway 기록 보존을 구분한다. 아래의 Python·SQLite 수신기는 기존 Railway 경로와 기준 구현이다.
+로그인·운영 설정·기존 기록까지 옮기는 현재 서버는 [Sites 통합 서버](Sites_Player_Logs.md)를 따른다. 아래 Python·SQLite 코드는 로컬 기준 구현과 과거 기록의 형식이며, 운영 배포는 `server/sites`만 사용한다.
 
 ## 플레이어가 보는 기록
 
@@ -59,53 +59,13 @@
 
 ## 게임과 서버의 연결
 
-공개 서버 주소는 `https://hellscript-production.up.railway.app`이며, 게임의 `Resources/Data/ServerConnection.json`에는 이 주소만 둔다. `GameServerConnection`이 게시된 운영 설정 조회를 연결한다. 개발 빌드와 Editor의 전투 업로드는 운영자가 별도로 발급한 QA 세션 파일을 기기의 저장 폴더에 `qa-session.json`으로 두거나 `-hellscriptQaSessionFile` 인자로 전달해야 활성화된다. 세션 파일은 버전·업로드 용도·대상 서버·테스터별 토큰을 검사하고, `GameController.Telemetry.Configure`에 `ICombatTelemetrySession`으로 전달한다. 파일의 실제 값이나 개인 경로는 저장소와 공개 위키에 넣지 않는다.
+현재 게임의 인증·운영·수집 주소는 모두 https://hellscript-player-logs.hoosung.chatgpt.site 이다. `Resources/Data/ServerConnection.json`은 공개 주소만 포함한다. QA 세션은 별도 비공개 파일을 `-hellscriptQaSessionFile`로 전달하며 같은 Sites 주소와 업로드 목적을 확인한다. 일반 Google 플레이어는 메모리 세션으로 연결된다. 자세한 저장·인증·이전·배포 절차는 [Sites 통합 서버](Sites_Player_Logs.md)를 따른다.
 
-QA 업로드 토큰과 웹 운영자 키는 서로 다른 자격 증명이다. QA 파일은 정식 사용자 로그인이나 단기 토큰 발급 체계를 대신하지 않으며, 일반 배포 빌드에는 이 개발용 파일 연결 경로를 포함하지 않는다. 자격 증명을 계정 저장이나 게임 에셋에 포함하지 않고, 업로드 세션이 없으면 전투 파일은 로컬 대기열에 남는다. loopback HTTP는 개발 환경에서만 허용한다.
+`CombatTelemetryUploader`는 `accepted`, `runId`, 원본 바이트의 `payloadHash`가 모두 일치할 때만 대기 파일을 삭제한다. 시간 초과·인증 오류·일시적 서버 오류에는 최대 300초의 지수 대기로 재시도하며 리디렉션을 따라가지 않는다. 새 Sites 수신기는 R2 원문 보관과 D1 요약의 저장을 확인한 뒤 ACK한다.
 
-`CombatTelemetryUploader`는 POST 후 `accepted`, `runId`, 원본 바이트의 `payloadHash`가 모두 일치할 때만 파일을 삭제한다. 시간 초과·인증 오류·일시적 서버 오류에는 최대 300초의 지수 대기로 재시도한다. 리디렉션은 따라가지 않는다.
+## 과거 수신기 참고
 
-`server/combat_telemetry.py`는 SQLite 검증·저장의 공통 소유자이며, 실제 호스트는 `server/telemetry_wsgi.py`를 Gunicorn으로 실행한다. `/v1/combat-runs`에서 인증·크기·스키마·순서·시각·합계 구조를 검사하고, 전투·이벤트·드롭을 한 트랜잭션으로 저장한 뒤 ACK한다. `server/combat_analytics.sql`은 사용자/캐릭터/단계별 승률·시간·골드, 스킬별 피해, 획득 항목과 서버 검증 근거를 조회하며, 운영 설정의 버전별 결과도 비교한다.
-
-같은 호스트의 `/v1/liveops/current`는 게시된 설정만 읽기 전용으로 제공하고, `/ops`는 별도 로그인한 운영자의 초안·게시·복원 경로를 제공한다. 새 설정은 다음 균열 입장 때 전투 스냅샷에 고정한다. 진행 중인 전투를 바꾸거나 이미 수령한 최초 보상을 다시 지급하지 않는다. 첫 정상 클리어에 확정한 미수령 보상은 나중에 수령해도 유지된다. 설정 항목과 사용 순서는 [운영툴 문서](Live_Operations.md)를 따른다.
-
-이 연결은 QA 자료 수집과 운영 수치 배포의 경로다. 정식 계정 인증, 서버 소유 입장·시드·보상 저장소와 재연산 워커는 별도 통합 대상이다. 실제 배포 상태와 로컬 검증 결과는 [운영툴 검증 기록](Live_Operations.md#검증-기록)에서 구분한다.
-
-## 소규모 QA용 Railway 배포
-
-저장소 루트의 `Dockerfile`은 Python 3.12와 Gunicorn 26.2.0으로 전투 기록 수신 API, 운영 설정 API와 운영 화면을 실행한다. Unity 게임은 별도 클라이언트다. `.dockerignore`는 필요한 서버 코드·운영 화면과 검증에 사용하는 `RewardBoxes.json`만 허용하며, 나머지 게임 에셋·계정 저장·개발 위키·로컬 자격 증명은 이미지에 포함하지 않는다. 일반 접근 로그에는 전투 본문이나 인증 헤더를 출력하지 않는다.
-
-Railway에서 GitHub 저장소의 `main`을 연결한 서비스에 다음 값을 설정한다. 이 표는 통합 서버의 구성 기준이며, 새 버전의 배포 성공 여부는 배포 후 별도로 확인한다.
-
-| 설정 | 값과 이유 |
-| --- | --- |
-| Root Directory / Dockerfile | 저장소 루트 / `Dockerfile`. Unity 빌드 명령을 지정하지 않는다. |
-| 시작 명령 | 비워 두고 이미지의 Gunicorn 명령을 사용한다. `0.0.0.0:$PORT`에 수신하며 기본 포트는 8080이다. |
-| Volume | `/data`에 영구 볼륨을 연결한다. `/data/hellscript/telemetry.sqlite`와 `liveops.sqlite`, 각 DB의 WAL을 함께 보존한다. |
-| Healthcheck | `/healthz`, GET. 인증 정보를 노출하지 않고 두 DB의 조회 가능 여부를 확인한다. |
-| Replicas | 1. SQLite 영구 볼륨을 여러 복제본에 공유하지 않는다. |
-| 재시작 | 실패 시 재시작, 최대 5회. 잘못된 설정은 자동 복구로 숨기지 않는다. |
-| 자동 배포 대상 | `main`. Watch Paths를 지정한다면 `server/**`, `Assets/HELLSCRIPT/Resources/Data/RewardBoxes.json`, `Dockerfile`, `.dockerignore`를 포함한다. |
-| 업로드 인증 | `HELLSCRIPT_TELEMETRY_TOKENS`에 강한 토큰과 QA 계정 ID의 JSON 대응표를 비밀 변수로 넣는다. |
-| 운영자 인증 | `HELLSCRIPT_OPS_TOKENS`에 별도 키와 운영자 ID의 대응표를 넣고, `HELLSCRIPT_OPS_ORIGIN`을 정확한 HTTPS 원본 주소로 설정한다. 업로드 토큰을 운영자 키로 재사용할 수 없다. |
-
-토큰은 `secrets.token_urlsafe(32)` 등으로 발급한 테스터별 값으로 준비한다. 토큰 키는 영문·숫자·밑줄·하이픈 32~256자, QA 계정 ID는 해당 문자와 점·콜론으로 이루어진 1~128자이며 실명·이메일을 사용하지 않는다. 공통 토큰을 게임에 넣거나 저장소·공개 위키에 실제 값을 기록하지 않는다. 같은 계정에 새 토큰을 추가한 뒤 이전 토큰을 제거하면 순차 교체할 수 있다. 이 QA 대응표는 정식 로그인·단기 토큰 발급 시스템을 대신하지 않는다.
-
-Railway가 주입한 `RAILWAY_VOLUME_MOUNT_PATH`를 사용한다. Railway 환경에서 볼륨 변수가 없거나 DB 경로가 볼륨 밖이면 시작을 거부한다. 로컬 실행에는 절대 경로의 `HELLSCRIPT_TELEMETRY_DATA_DIR`를 별도로 지정한다. 업로드 인증표가 비었거나 잘못되어도 시작을 거부한다. 운영자 키를 설정하지 않은 경우에는 운영 API를 닫아 둔다. 전투 요청은 인증 후 JSON 형식·16 MiB 제한과 기존 스키마를 검사하고, DB 커밋 이후 ACK한다. 전투 본문 조회나 플레이어 보상 지급 API는 공개하지 않는다. 익명 설정 조회와 인증된 운영 변경은 별도 경로이며, 공개 위키에는 편집 API나 관리자 자격 증명을 넣지 않는다.
-
-처음 배포할 때 HTTPS 도메인과 `/healthz`를 확인하고, 별도로 표시한 합성 QA 자료로 인증 거절·저장·동일 본문 재전송을 검사한다. 재배포 후에도 같은 ACK와 DB 행이 유지되는지 확인한 뒤 테스터 업로드를 연결한다. 클라이언트의 `ICombatTelemetrySession` 설정 전에는 실제 게임 자료가 전송되지 않는다. SQLite 볼륨을 사용하는 재배포에는 짧은 중단이 생길 수 있으며 클라이언트 대기열이 재시도한다.
-
-설정 당시 Railway 체험 계정의 Backups 화면은 Pro 플랜을 요구했으므로 플랫폼 자동 백업은 활성화하지 않았고 요금제도 변경하지 않았다. 영구 볼륨과 재시작 후 보존은 자동 백업 완료를 뜻하지 않는다. 운영자는 사용할 수 있는 백업 방식과 복원 경로를 별도로 마련해야 한다. 실행 중인 SQLite를 파일로 백업할 때는 각 DB의 SQLite backup API를 사용해야 하며 DB 파일만 복사하고 WAL을 빠뜨리면 안 된다. 서버 수집본은 플레이어의 최근 100회 제한과 별개로 보관한다. 볼륨 사용량과 과금 알림을 확인하고, 장기 보관·삭제 기간은 QA 운영 정책으로 정한다. 자동 제재나 보상 확정에는 여전히 서버 소유 입장 자료와 재연산이 필요하다.
-
-`.github/workflows/telemetry.yml`은 수신·배포 어댑터·운영 API의 Python 검사, 웹 편집 모델의 Node 검사와 Docker 이미지 빌드를 수행한다. 검사는 인증 분리, 커밋 후 ACK, 중복 전송, 저장·게시 충돌과 프로세스 재시작 후 보존을 확인한다. 최종 검사 수와 실제 Railway·게임·공개 위키 전달 결과는 [운영툴 검증 기록](Live_Operations.md#검증-기록)에 남긴다. 이미지 빌드 성공만으로 실제 서버 배포나 테스터 업로드까지 완료되었다고 해석하지 않는다.
-
-참고: [Railway 볼륨](https://docs.railway.com/volumes/reference), [Infrastructure as Code](https://docs.railway.com/infrastructure-as-code). 기존 `railway.toml`/`railway.json` 방식은 폐기 예정이며 신규 서비스에서 사용할 수 없으므로 이번 배포에는 추가하지 않는다. 필요하면 실제 프로젝트를 가져와 최신 IaC 방식으로 관리한다.
-
-## 검증과 전달 범위
-
-검사 결과와 macOS 화면 증거는 `CombatJournalEvidence/`에 기록한다. 원래 작업 폴더의 사용자 변경과 실행 중인 Editor를 보존하고, 최신 `main`에서 만든 별도 작업 폴더에서 Unity 배치 검사와 개발 빌드를 수행한다. macOS 포인터 합성 검사는 모바일 실기기 검사와 구분한다.
-
-브랜치의 문서는 병합할 때 공개 위키에 함께 반영한다. 공개 배포는 검증한 `main`에서만 수행한다.
+Python 수신기와 테스트는 이전 데이터·권한 계약의 로컬 기준 구현으로 보존한다. 새로운 운영 서비스로 배포하지 않는다. 기존 컨테이너 배포 파일을 제거했으며 CI는 Python 계약 검사와 웹 모델 검사, Sites 빌드·Node 검사를 사용한다. 과거 플랫폼 배포·볼륨·백업 근거는 [2026-09-25 운영 검증 기록](Live_Operations.md#검증-기록)에 남긴다. 현재 저장소와 관리 화면은 Sites 한 곳이다.
 
 ### 전투 기록 최초 도입 당시 확인한 결과
 

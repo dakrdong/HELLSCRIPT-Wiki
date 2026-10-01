@@ -1,6 +1,6 @@
 # Google 로그인과 기기별 계정 저장
 
-갱신일: 2026-09-30
+갱신일: 2026-10-01
 
 [English](Google_Login.en.md) · [서버 운영](Live_Operations.md)
 
@@ -8,7 +8,7 @@
 
 **현재 범위는 실제 계정 인증과 기기 안의 저장 분리다.** 진행 상황은 현재 기기에 저장된다. 다른 기기의 진행 상황 내려받기, 클라우드 저장, 게스트 데이터의 서버 업로드는 포함하지 않는다. Google 로그인으로 운영툴 권한이나 QA 전투 수집 권한을 부여하지 않는다.
 
-2026-09-30부터 Google 플레이어 세션은 별도 [Sites 플레이 로그 수집](Sites_Player_Logs.md)에 자신의 전투 관측 기록을 업로드하는 데 사용한다. 인증·계정 저장의 서버 기준은 Railway를 유지하고, 수집 주소만 분리한다. 세션은 매 업로드마다 기존 인증 서버가 확인하며 로그아웃·만료 시 새 전송을 멈춘다.
+2026-10-01부터 [Sites 통합 서버](Sites_Player_Logs.md)가 Google 로그인과 운영 설정, 플레이 로그를 모두 소유한다. 매 요청마다 같은 D1의 세션 해시와 만료를 확인한다. 기존 계정 ID를 이전하며, 서버 주소 변경 시 기기의 기존 저장 폴더 연결을 원자적으로 새 키로 바꾼다. 이전 주소는 로컬 키 계산에만 사용하고 접속하지 않는다.
 
 ## 플레이어 동작
 
@@ -36,17 +36,17 @@
 
 ## 인증과 서버 설정
 
-Google OAuth 클라이언트는 **웹 애플리케이션**이며 승인된 리디렉션 URI는 `https://hellscript-production.up.railway.app/auth/google/callback`이다. 클라이언트 비밀키는 서버에만 둔다. 요청 권한은 `openid`와 `https://www.googleapis.com/auth/userinfo.email`이다. 이메일 권한의 정식 이름을 사용하며 `email`과 같은 범위다. Google Console의 게시 상태는 테스트 중이지만, 이 기본 인증 권한만 요청하는 앱은 테스트 사용자 목록·7일 승인 만료 제한의 예외다. [Google 공식 사용자 범위 안내](https://support.google.com/cloud/answer/15549945)를 따른다. 이름·로고의 브랜드 검증과 모바일 배포는 별도 절차다.
+Google OAuth 클라이언트는 **웹 애플리케이션**이며 승인된 리디렉션 URI는 `https://hellscript-player-logs.hoosung.chatgpt.site/auth/google/callback`이다. 클라이언트 비밀키는 서버에만 둔다. 요청 권한은 `openid`와 `https://www.googleapis.com/auth/userinfo.email`이다. 이메일 권한의 정식 이름을 사용하며 `email`과 같은 범위다. Google Console의 게시 상태는 테스트 중이지만, 이 기본 인증 권한만 요청하는 앱은 테스트 사용자 목록·7일 승인 만료 제한의 예외다. [Google 공식 사용자 범위 안내](https://support.google.com/cloud/answer/15549945)를 따른다. 이름·로고의 브랜드 검증과 모바일 배포는 별도 절차다.
 
 | 서버 환경 변수 | 값의 의미 |
 | --- | --- |
 | `HELLSCRIPT_GOOGLE_CLIENT_ID` | Google Cloud가 발급한 클라이언트 ID |
 | `HELLSCRIPT_GOOGLE_CLIENT_SECRET` | 같은 클라이언트의 비밀키. Git·게임·문서에 기록하지 않는다. |
-| `HELLSCRIPT_AUTH_ORIGIN` | `https://hellscript-production.up.railway.app` |
+| `HELLSCRIPT_AUTH_ORIGIN` | `https://hellscript-player-logs.hoosung.chatgpt.site` |
 
-세 값이 모두 없으면 Google 로그인을 비활성화하고 게스트를 유지한다. 일부만 있거나 형식이 잘못되면 서버 시작을 거부한다. 계정 DB는 기존 영구 볼륨의 `accounts.sqlite`이며 운영 설정·전투 수집 DB와 분리한다. 계정 ID 연결은 이 DB를 복구해야 유지되므로 기존 서버 백업 절차의 대상에 포함해야 한다.
+인증정보가 없으면 Google 로그인을 비활성화하고 게스트를 유지한다. 계정·시도·세션·요청 제한은 같은 Sites D1의 전용 인증 테이블에 저장한다. 데이터 이전 완료 전에는 인증·운영·수집 요청을 열지 않는다. 이전 계정 DB의 online backup과 불투명한 계정 ID를 보존한다.
 
-게임은 PKCE 검증값을 메모리에 보관하고 서버에서 브라우저 진입 주소를 받는다. 서버는 브라우저 쿠키와 상태값을 묶고 별도의 PKCE·nonce로 Google에 요청한다. Google 콜백에서는 공식 `google-auth`로 서명·발급자·대상 앱·만료를 검사하고 nonce를 확인한다. 이메일 대신 Google의 안정적인 `sub`를 계정 기준으로 사용한다.
+게임은 PKCE 검증값을 메모리에 보관하고 서버에서 브라우저 진입 주소를 받는다. 서버는 브라우저 쿠키와 상태값을 묶고 별도의 PKCE·nonce로 Google에 요청한다. Google 콜백에서는 Google의 공식 JWKS와 Worker Web Crypto로 RS256 서명·발급자·대상 앱·만료·nonce를 검사한다. 이메일 대신 Google의 안정적인 `sub`를 계정 기준으로 사용한다.
 
 브라우저가 게임에 전달하는 코드는 60초 동안 한 번만 사용할 수 있다. 게임의 원래 PKCE 검증값과 상태값이 있어야 세션으로 교환된다. Google의 액세스·갱신 토큰은 게임에 전달하거나 저장하지 않는다. 서버는 게임 세션 토큰의 해시만 저장하고 로그아웃 시 폐기한다. 인증 응답은 캐시하지 않으며 기존 서버의 접근 로그 비활성화를 유지한다.
 
@@ -60,7 +60,7 @@ PC는 임의 포트의 `127.0.0.1` 콜백을 사용한다. Android·iOS는 `hell
 
 - 서버 단위 검사: 정상 인증 교환, 취소·만료·재사용·잘못된 PKCE·쿠키 차단, 공식 토큰 검증기의 서명·대상·발급자·만료·nonce 거부를 확인한다. Google 응답과 인증서는 테스트 자료이며 실제 계정 로그인의 증거가 아니다.
 - Unity Edit Mode: 저장 소유권 이전과 재시작, 실제 `GameStore` 데이터 분리, 콜백 주소와 상태값, 타이틀 진입, 번역, 모바일 매니페스트 보존·중복 방지를 확인한다.
-- `RuntimeTitleSmoke`: macOS 게임에서 세로 440×956·가로 956×440·PC 16:9·16:10·21:9, 한국어·영어, 글자 크기 100%·140%의 로그인 화면과 포인터 조작을 확인한다.
+- `RuntimeTitleSmoke`: macOS 게임에서 세로 440×956·가로 956×440·PC 16:9·16:10·21:9, 한국어·영어, 기본 글자 크기의 로그인 화면과 포인터 조작을 확인한다.
 - `RuntimeGoogleLoginSmoke`: 실제 Google 로그인을 두 번 수행해 게스트 연결, 로그아웃, 새 게스트 분리, 원래 계정 복원과 실제 게임 진입을 확인한다. 인증 우회나 테스트 계정 주입 경로는 없다. `-hellscriptAuthBrowserHandoff`는 개발 빌드에서 브라우저 주소만 별도 파일로 전달한다.
 
 [PR #12](https://github.com/dakrdong/HELLSCRIPT/pull/12)를 `main`에 병합했고, 2026-09-26에 Google 인증정보를 기존 Railway 서버에 등록했다. 이메일 권한 별칭을 Google 응답의 정식 이름과 일치시킨 `64a9a18a`를 배포했으며, 배포 `8b2ba0b3-0815-43a6-9da9-1ef3dc9bced7`의 성공을 확인했다. 실제 Google 계정으로 macOS 게임에 두 번 로그인해 게스트 연결, 로그아웃, 새 게스트 분리, 기존 진행 복원과 Mage의 게임 진입을 검증했다. [실제 인증 검증 기록](../../Artifacts/Validation/GoogleLogin/real-google/acceptance.json) · [게임 실행 결과](../../Artifacts/Validation/GoogleLogin/real-google/validation.txt)
@@ -82,3 +82,7 @@ PC는 임의 포트의 `127.0.0.1` 콜백을 사용한다. Android·iOS는 `hell
 ![영어 140% Google 로그인 화면](../../Artifacts/Validation/GoogleLogin/title-ui-final/google-en-140-440x956.png)
 
 ![한국어 140% Google 로그인 화면](../../Artifacts/Validation/GoogleLogin/title-ui-final/google-ko-140-440x956.png)
+
+## 2026-10-01 Sites 이전 확인
+
+새 Sites 반환 주소를 Google Console에 저장했다. 실제 Google 로그인 두 번과 macOS 게임 진입에서 기존 계정 ID, 게스트 분리와 진행 복원을 확인했다. [현재 이전 결과](Sites_Player_Logs.md#2026-10-01-이전-완료와-검증)를 따른다. 위의 2026-09-26 결과는 당시 Railway 검증이다.

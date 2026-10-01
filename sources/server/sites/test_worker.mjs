@@ -1,63 +1,24 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
-import {DatabaseSync} from 'node:sqlite';
-import {spawnSync} from 'node:child_process';
+import {D1,R2} from './test_support.mjs';
+import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {createHandler,validate} from './_worker.js';
 
 // Use the existing Python receiver's fixture, including its Korean event text.
-const generated=spawnSync('python3',['-c','import json;from test_combat_telemetry import fixture;print(json.dumps(fixture(),ensure_ascii=False))'],
-  {cwd:fileURLToPath(new URL('../',import.meta.url)),encoding:'utf8'});
-assert.equal(generated.status,0,generated.stderr);
-const fixture=()=>JSON.parse(generated.stdout);
+const generated=readFileSync(new URL('./fixtures/combat.json',import.meta.url),'utf8');
+const fixture=()=>JSON.parse(generated);
 const TOKEN='t'.repeat(43);
-class D1 {
-  constructor(){this.database=new DatabaseSync(':memory:');this.failInsert=false;}
-  prepare(sql){
-    const owner=this;
-    return {
-      sql,parameters:[],
-      bind(...parameters){return {...this,parameters};},
-      async first(){return owner.database.prepare(this.sql).get(...this.parameters)??null;},
-      async run(){
-        if(owner.failInsert&&this.sql.startsWith('INSERT INTO runs'))throw new Error('simulated D1 failure');
-        return owner.database.prepare(this.sql).run(...this.parameters);
-      }
-    };
-  }
-  withSession(){return this;}
-  async batch(statements){
-    this.database.exec('BEGIN');
-    try{
-      const result=statements.map(s=>this.database.prepare(s.sql).run(...s.parameters));
-      this.database.exec('COMMIT');return result;
-    }catch(error){this.database.exec('ROLLBACK');throw error;}
-  }
-  rows(){return this.database.prepare('SELECT * FROM runs').all();}
-}
-class R2 {
-  objects=new Map();failPut=false;failHead=false;
-  async put(key,bytes,metadata){
-    if(this.failPut)throw new Error('simulated R2 failure');
-    this.objects.set(key,{bytes:Buffer.from(bytes),...metadata});
-  }
-  async head(key){
-    if(this.failHead)throw new Error('simulated R2 outage');
-    const value=this.objects.get(key);
-    return value?{size:value.bytes.length,customMetadata:value.customMetadata}:null;
-  }
-  async delete(key){this.objects.delete(key);}
-}
 function setup(identity='google:'+'d'.repeat(32)){
-  const env={DB:new D1(),LOGS:new R2(),HELLSCRIPT_AUTH_ORIGIN:'https://auth.example.com'};
+  const env={DB:new D1(),LOGS:new R2(),HELLSCRIPT_AUTH_ORIGIN:'https://logs.example.com'};
   let valid=true,at=1700000000000;
   const dependencies={
-    authFetch:async(url,options)=>{
-      assert.equal(url,'https://auth.example.com/v1/telemetry/session');
-      assert.equal(options.redirect,'manual');
-      return valid&&options.headers.Authorization==='Bearer '+TOKEN?
-        Response.json({accountId:identity,kind:identity.split(':')[0]}):Response.json({error:'authentication'},{status:401});
+    authenticate:async(request)=>{
+      if(!valid||request.headers.get('Authorization')!=='Bearer '+TOKEN){
+        const {Rejected}=await import('./common.js');throw new Rejected(401,'authentication');
+      }
+      return {accountId:identity,kind:identity.split(':')[0]};
     },now:()=>at
   };
   const handler=createHandler(dependencies);
@@ -70,7 +31,7 @@ function setup(identity='google:'+'d'.repeat(32)){
   return {env,handler,dependencies,send,revoke:()=>{valid=false;},advance:()=>{at+=60000;}};
 }
 test('original UTF-8 bytes have a durable receipt across Worker restart',async()=>{
-  const s=setup(),raw='\n'+generated.stdout.trim()+'\n';
+  const s=setup(),raw='\n'+generated.trim()+'\n';
   const first=await s.send(null,{raw}),receipt=await first.json();
   assert.equal(first.status,200);
   assert.deepEqual(receipt,{accepted:true,runId:fixture().id,payloadHash:createHash('sha256').update(raw).digest('hex')});
@@ -136,7 +97,7 @@ test('health and public routes expose no player record or reward mutation',async
   const get=path=>s.handler.fetch(new Request('https://logs.example.com'+path),s.env);
   assert.equal((await get('/healthz')).status,200);
   assert.equal((await get('/v1/combat-runs')).status,405);
-  for(const path of ['/v1/combat-runs/example','/admin','/authority','/ops/api/runs'])assert.equal((await get(path)).status,404);
+  for(const path of ['/v1/combat-runs/example','/admin','/authority'])assert.equal((await get(path)).status,404);
   assert.equal((await (await get('/')).text()).includes('Player records are private.'),true);
 });
 test('per-account rate budget recovers next minute',async()=>{
@@ -145,27 +106,24 @@ test('per-account rate budget recovers next minute',async()=>{
   assert.equal((await s.send()).status,429);
   s.advance();assert.equal((await s.send()).status,200);
 });
-test('global fetch preserves its receiver and rechecks authentication on every request',async()=>{
+test('default handler validates QA credentials locally with no upstream server',async()=>{
   const s=setup(),original=globalThis.fetch;
-  let valid=true;
+  s.env.HELLSCRIPT_TELEMETRY_TOKENS=JSON.stringify({[TOKEN]:'local-qa'});
   try{
-    globalThis.fetch=function(){
-      assert.equal(this,globalThis);
-      return Promise.resolve(valid?Response.json({kind:'qa',accountId:'qa:test'}):Response.json({error:'authentication'},{status:401}));
-    };
+    globalThis.fetch=()=>{throw new Error('No upstream request is allowed');};
     const handler=createHandler();
     const send=()=>handler.fetch(new Request('https://logs.example.com/v1/combat-runs',{
       method:'POST',headers:{Authorization:'Bearer '+TOKEN,'Content-Type':'application/json'},body:JSON.stringify(fixture())}),s.env);
-    assert.equal((await send()).status,200);valid=false;assert.equal((await send()).status,401);
+    assert.equal((await send()).status,200);
+    s.env.HELLSCRIPT_TELEMETRY_TOKENS='{}';assert.equal((await send()).status,401);
   }finally{globalThis.fetch=original;}
 });
-test('authentication redirects never forward credentials to another origin',async()=>{
-  const s=setup();let calls=0;
-  const handler=createHandler({authFetch:async(url,options)=>{
-    calls++;assert.equal(url,'https://auth.example.com/v1/telemetry/session');assert.equal(options.redirect,'manual');
-    return new Response(null,{status:302,headers:{Location:'https://other.example.com/'}});
-  }});
-  const response=await handler.fetch(new Request('https://logs.example.com/v1/combat-runs',{
+test('ordinary game sessions are validated locally on every upload and revoke immediately',async()=>{
+  const s=setup(),hash=createHash('sha256').update(TOKEN).digest('hex');
+  s.env.DB.database.prepare('INSERT INTO auth_sessions VALUES(?,?,?)').run(hash,'e'.repeat(32),1700000040);
+  const handler=createHandler({now:()=>1700000000000});
+  const send=()=>handler.fetch(new Request('https://logs.example.com/v1/combat-runs',{
     method:'POST',headers:{Authorization:'Bearer '+TOKEN,'Content-Type':'application/json'},body:JSON.stringify(fixture())}),s.env);
-  assert.equal(response.status,503);assert.equal(calls,1);assert.equal(s.env.LOGS.objects.size,0);
+  assert.equal((await send()).status,200);assert.equal(s.env.DB.rows()[0].account_id,'google:'+'e'.repeat(32));
+  s.env.DB.database.prepare('DELETE FROM auth_sessions').run();assert.equal((await send()).status,401);
 });

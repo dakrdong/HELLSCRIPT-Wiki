@@ -1,6 +1,6 @@
 # Google sign-in and device-local account saves
 
-Updated: 2026-09-30
+Updated: 2026-10-01
 
 [한국어](Google_Login.md) · [Server operations](Live_Operations.en.md)
 
@@ -8,7 +8,7 @@ Google sign-in replaces the title screen's mock username/password form. Guest en
 
 **This implementation provides identity verification and separate saves on the current device.** It does not upload guest progress, synchronize cloud saves or restore another device's progress. A Google player session grants neither operations-tool access nor QA telemetry permissions.
 
-From 2026-09-30, a Google player session can upload its own combat observations to the separate [Sites log collector](Sites_Player_Logs.en.md). Railway remains the authentication and local account-binding origin; collection has its own address. The existing authentication server checks every upload, and sign-out or expiry stops new transmissions.
+From 2026-10-01, the [single Sites backend](Sites_Player_Logs.en.md) owns Google sign-in, operations and player logs. Every request checks the local D1 session hash and expiry. Stable account IDs migrate unchanged. The device atomically rekeys the existing save-directory reference; the old origin is used only for an offline key hash and is never contacted.
 
 ## Player flow
 
@@ -36,17 +36,17 @@ The registry rejects duplicate accounts/directories, path traversal, missing fie
 
 ## Authentication and configuration
 
-The Google OAuth client type is **Web application**. Its authorized redirect URI is `https://hellscript-production.up.railway.app/auth/google/callback`. Keep its secret exclusively on the server. Requested scopes are `openid` and `https://www.googleapis.com/auth/userinfo.email`. The latter is the canonical name for the same permission as `email`. The Google Console publishing status remains Testing, but requests limited to these basic identity scopes are exempt from the test-user list and seven-day authorization expiry, as documented in [Google’s audience guidance](https://support.google.com/cloud/answer/15549945). Brand verification for the app name/logo and mobile distribution are separate steps.
+The Google OAuth client type is **Web application**. Its authorized redirect URI is `https://hellscript-player-logs.hoosung.chatgpt.site/auth/google/callback`. Keep its secret exclusively on the server. Requested scopes are `openid` and `https://www.googleapis.com/auth/userinfo.email`. The latter is the canonical name for the same permission as `email`. The Google Console publishing status remains Testing, but requests limited to these basic identity scopes are exempt from the test-user list and seven-day authorization expiry, as documented in [Google’s audience guidance](https://support.google.com/cloud/answer/15549945). Brand verification for the app name/logo and mobile distribution are separate steps.
 
 | Server variable | Meaning |
 | --- | --- |
 | `HELLSCRIPT_GOOGLE_CLIENT_ID` | Client ID issued by Google Cloud |
 | `HELLSCRIPT_GOOGLE_CLIENT_SECRET` | Matching server secret; never store it in Git, game builds or documentation |
-| `HELLSCRIPT_AUTH_ORIGIN` | `https://hellscript-production.up.railway.app` |
+| `HELLSCRIPT_AUTH_ORIGIN` | `https://hellscript-player-logs.hoosung.chatgpt.site` |
 
-With all three values absent, Google sign-in is disabled and guest entry remains available. Partial or malformed configuration prevents server startup. `accounts.sqlite` sits on the existing persistent volume, separate from operations and telemetry databases. Include it in server backups: preserving account IDs requires restoring this database.
+Without credentials, Google sign-in stays disabled and guest access remains available. Dedicated authentication tables in the same Site D1 hold accounts, attempts, sessions and request budgets. Authentication/operations/ingestion remain closed until migration completes. The original account database backup and opaque account IDs are retained.
 
-The game keeps a PKCE verifier in memory and obtains a browser entry URL from the server. The server binds its state to an HttpOnly browser cookie and uses separate PKCE and nonce values with Google. Google's callback is verified with official `google-auth`, including signature, issuer, audience, expiry and an explicit nonce check. Stable Google `sub` identifies the account; email does not.
+The game keeps a PKCE verifier in memory and obtains a browser entry URL from the server. The server binds its state to an HttpOnly browser cookie and uses separate PKCE and nonce values with Google. Google's callback is verified with Google’s official JWKS and Worker Web Crypto RS256, including signature, issuer, audience, expiry and nonce. Stable Google `sub` identifies the account; email does not.
 
 The code returned to the game expires after 60 seconds and can be exchanged once, with the original PKCE verifier and application state. Google access/refresh tokens are never persisted or sent to the game. The server stores hashed game session tokens and revokes them on sign-out. Authentication responses are not cached, and existing disabled access logging is retained.
 
@@ -80,3 +80,7 @@ The existing title adapter owns the full screen before gameplay. Its login modal
 ![English Google sign-in at 140% text size](../../Artifacts/Validation/GoogleLogin/title-ui-final/google-en-140-440x956.png)
 
 ![Korean Google sign-in at 140% text size](../../Artifacts/Validation/GoogleLogin/title-ui-final/google-ko-140-440x956.png)
+
+## Site migration verified on 2026-10-01
+
+The Site callback was saved in Google Console. Two real Google logins and macOS gameplay entry verified the original account ID, guest isolation and progress restoration. See [current migration results](Sites_Player_Logs.en.md#migration-completed-on-2026-10-01). The 2026-09-26 evidence above belongs to the former Railway backend.

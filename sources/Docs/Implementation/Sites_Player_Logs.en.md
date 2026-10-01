@@ -1,62 +1,60 @@
-# Sites player log collection
+# Sites single backend and player logs
 
 Updated: 2026-10-01
 
-[한국어](Sites_Player_Logs.md) · [Combat records](Combat_Journal_Server.en.md) · [Live operations](Live_Operations.en.md)
+[한국어](Sites_Player_Logs.md) · [Google sign-in](Google_Login.en.md) · [Live operations](Live_Operations.en.md) · [Combat records](Combat_Journal_Server.en.md)
 
-## Responsibilities
+## One management destination
 
-The collector is https://hellscript-player-logs.hoosung.chatgpt.site. A Sites Worker validates requests, stores original combat payloads in R2, and stores searchable summaries/conflict audits in D1. Google authentication and live operations continue on Railway. The authentication origin used to bind local account saves stays stable.
+The server is https://hellscript-player-logs.hoosung.chatgpt.site with operations at `/ops`. One Worker owns Google identity/game sessions, operator sessions/drafts/publication/rollback, and QA/ordinary-player combat ingestion. Dedicated account/settings/log tables use D1 `DB`; raw payloads/private migration backups use R2 `LOGS`. No external authentication server or Railway fallback is used.
 
-Existing Railway telemetry, operations and account databases remain intact. Earlier records remain there; records received by the new collector belong to Sites. This moves collection while retaining authentication and operations separately.
+Both version-2 `baseUrl` and `telemetryBaseUrl` in the game use this exact HTTPS Site origin without credentials, paths or query strings. Ordinary Google players use in-memory game sessions, checked against local D1 hashes, expiry and revocation on every request. QA files must use their separate upload key and this same origin. Operators, QA identities and Google players retain independent permissions.
 
-## Game connection
+## Preserve ownership and data
 
-Version 2 of Resources/Data/ServerConnection.json uses **baseUrl** for authentication/live operations and **telemetryBaseUrl** for collection. Both must be HTTPS origins without credentials, paths or queries. Version 1 retains the single-origin behavior.
+Existing opaque account IDs migrate unchanged. On the device, an atomic index update changes the old origin-derived key to the new key while retaining the same save-directory reference. Save/combat bytes are never copied, merged or deleted. The old origin is used only for an offline hash; no network request is made. Conflicting pre-existing old/new profiles fail closed with both originals preserved.
 
-After Google sign-in opens the correct account store, the uploader binds to that account ID and reads only a matching session token from memory. A new login session for another account cannot upload the previous store's outbox before the store switches. Expiry and sign-out also stop new transmissions. Ordinary guests and the web guest edition retain local history without automatic server collection.
+Published configuration versions, exact JSON bytes/SHA-256, active markers, drafts and audit migrate intact. D1 atomic batches and revision comparison protect publication/rollback. SQL triggers prevent release/audit mutation. Configuration applies to new rifts; existing combat snapshots stay fixed. Ingestion stores client observations and cannot grant rewards or change saves.
 
-Editor/development builds may use a separate QA file whose **baseUrl** matches Sites and whose **kind** is hellscript-qa-telemetry. Operator keys, QA keys and the owner's private dispatch token never belong in game resources, saves, Git or the public wiki.
+All three legacy SQLite databases are write-frozen for cutover and copied with their online backup API into private local storage and R2. Legacy combat originals use R2; matching hash/summary rows use D1. Events, drops, authority evidence, audit and configuration snapshots remain in `legacy_telemetry_rows` and the original backups. Existing Site runs remain intact. Public evidence contains aggregate counts/hashes rather than account identities, secrets or database files.
 
-## Authentication and receipts
+The importer requires a temporary secret and exact part hashes, counts and backups. All totals must match before completion. Completed migration routes return 404 even with the original key; remove that temporary runtime secret afterwards. A one-time migration backup is distinct from automatic backup or scheduled restore testing.
 
-Sites introspects the Bearer token at the existing server's **GET /v1/telemetry/session**. Verified google: or qa: identities own records, independently of the client-claimed localAccountId. Email and display name are not collector identities. Authentication failures, timeouts and redirects fail closed.
+## Operations and publishing
 
-**POST /v1/combat-runs** hashes the original bytes with SHA-256. Equal account/run ID/bytes returns the same receipt. Changed bytes return 409 without replacing the original. R2 storage, committed D1 metadata and an R2 storage check precede accepted/runId/payloadHash. The game deletes only the acknowledged outbox file; its recent 100-run player history is separate.
+The root page shows real `/healthz` responses in Korean/English and links to `/ops`, which uses the existing operator key. Google player sign-in never grants operator access. Site access is public; account access, uploads and operator mutations are separately authenticated. Public combat-list/payload-query routes are absent.
 
-Limits are 16 MiB per payload, 20,000 events/drops per list, JSON depth 64, and the exact integer maximum 2^53−1. Per-account budgets are 120 requests and 64 MiB per minute; excess returns 429. Interrupted writes and retries never receive an early acknowledgment.
+Manage secrets in this Site’s Settings: the existing Google client ID/secret, separate operator/QA keys, and `HELLSCRIPT_AUTH_ORIGIN`/`HELLSCRIPT_OPS_ORIGIN` set to this exact origin. Google’s approved callback is this Site’s `/auth/google/callback`. Credentials never belong in game builds, Git or wiki.
 
-There are no public log reads, reward grants or save mutation endpoints. Site audience and game-token authorization are separate. Direct external game uploads require an internet-accessible Site while upload authorization and private log storage remain enforced.
+Open the existing Site source with the installed Sites workflow. `server/sites/publish.py` exports only curated service files. Build, push and package that same source, then save/deploy its version. Exclude the Unity project and private files. Drizzle SQL migrations own schema changes; runtime routes never create tables. Applied migrations are immutable. Container deployment files and the Railway GitHub source connection are removed.
 
-## Deployment and operations
+## Validation status
 
-- server/sites/_worker.js implements the Worker.
-- Reuse .openai/hosting.json's project ID and DB/LOGS bindings. Keep environment values and secrets out of that file.
-- Set HELLSCRIPT_AUTH_ORIGIN through Sites runtime configuration and redeploy after changes.
-- server/sites/publish.py exports only this service, verifies the pushed full SHA, and packages the Worker as dist/index.js. Unity sources and local credentials are excluded.
-- Saving and deploying are separate; every deployment URL is production. Preserve project identity/audience and await terminal success.
-- /healthz checks origin configuration, D1 schema reads and R2 access. Real authorization/uploads require separate verification.
-- The homepage shows the live /healthz result in Korean and English, with a manual retry button. It replaces the placeholder that remained after sign-in and distinguishes public API access from required game authentication for uploads.
+- All 18 server tests passed: RSA/issuer/audience/expiry/nonce, stable account IDs, cookie/PKCE/replay prevention, immediate revocation, separate operator/QA permissions, Origin/CSRF, concurrent draft/publication/rollback, immutable history, sealed migration, original payloads/duplicates/conflicts/storage failures/retries/request budgets.
+- Unit tests with synthetic Google responses and real account evidence are distinguished below.
+- Physical mobile and Windows behavior are outside this macOS acceptance scope. Use the default text size.
 
-[Sites documentation](https://learn.chatgpt.com/docs/sites) specifies a 10 GB D1 limit per Site and no fixed R2 storage limit. Account-level usage limits also apply.
+[Worker](../../server/sites/_worker.js) · [Authentication](../../server/sites/auth.js) · [Operations](../../server/sites/liveops.js) · [Migration](../../server/sites/migrate.py) · [Tests](../../server/sites/test_backend.mjs) · [Local ownership](../../Assets/HELLSCRIPT/Runtime/Core/AccountProfiles.cs)
 
-## Verification
+## Migration completed on 2026-10-01
 
-Node tests use real SQLite queries for duplicates/conflicts, original bytes, interrupted storage, retries, revocation, validation boundaries and rejected redirects. Authentication-server tests cover QA/Google identity separation and revocation without granting legacy QA/operator authority.
+Version **11**, source `060989e60771dc9af5768453333d78aa6a7a8cf9`, deployed successfully to the existing Site. Environment revision 3 removes the temporary migration credential. The Google approved callback was saved to this Site before two real Google logins from the macOS game. Both retained the original Railway account ID. Three native checks passed guest linking, sign-out, fresh guest isolation, returning progress and Mage gameplay entry.
 
-verify_cloud.py uses synthetic payloads and a separately issued QA file to verify real Sites receipts and rejected conflicts, anonymous requests, invalid records and read routes. A private dispatch token stays only in process memory.
+One existing account/session and one release/active marker/draft were preserved. Two old runs joined four existing Site runs, giving 6 `runs` rows at migration completion. The 21 `legacy_telemetry_rows` and original backups retain old events, configuration and audit data. All three SQLite backups passed `quick_check`; downloaded and R2-stored copies matched hashes and sizes. Synthetic verification runs created later are separate from these cutover totals.
 
-RuntimeTelemetrySitesSmoke completes a real rift in an isolated native save, uses the standard uploader, restarts it and resends identical bytes. It verifies outbox removal and retained player history. This is development evidence, distinct from physical-mobile testing.
+| Scope | Actual result |
+| --- | --- |
+| Server and CI | Sites Node 18/18, legacy Python contracts 82/82, operator web model and Site build passed. All three required CI workflows succeeded for this `main`. |
+| Unity | Focused account/server Edit Mode 26/26 and shared UI contract 11/11. macOS development build: 0 errors, 176 warnings. The whole Unity suite was not run. |
+| Public APIs and operations | 10 collector and 11 live-operations HTTPS checks passed. Original release 0 JSON/hash remained exact; live balance was unchanged. |
+| Real Google | Two real logins through the new backend preserved the old account ID and passed guest isolation, progress restoration and gameplay entry. |
+| Native macOS uploader | An isolated QA save and fixed simulation generated a synthetic battle sent by the real game uploader. Original and duplicate ACKs matched runId/hash; D1 contained one row, the outbox zero and local history one record. This is separate from ordinary Google-player battle upload or physical input validation. |
+| Cutover | Railway GitHub source disconnected; zero running deployments. After stopping it, Site `/healthz` returned HTTP 200 and Korean/English status screens were healthy. Migration routes were sealed; temporary SSH and local keys were retired. |
 
-## Source and current verification state
+Daily backend management uses this Site and `/ops`. The Railway account and stopped service's original volume remain as recovery material without a runtime dependency. Neither permanent deletion nor a plan change was performed. Retained-volume billing can be separate from compute shutdown. Private backups also exist in Site R2 and local storage. Scheduled backups/restore tests, Windows and physical mobile are unverified.
 
-[Collector](../../server/sites/_worker.js) · [Status page code](../../server/sites/public/status.js) · [Node tests](../../server/sites/test_worker.mjs) · [Publisher](../../server/sites/publish.py) · [API verification](../../server/sites/verify_cloud.py) · [Game connection](../../Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs) · [Native uploader verification](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTelemetrySitesSmoke.cs)
+[Summary](../../Artifacts/Validation/sites-backend-migration-20261001/validation-summary.json) · [Migration counts/hashes](../../Artifacts/Validation/sites-backend-migration-20261001/migration.json) · [Backups](../../Artifacts/Validation/sites-backend-migration-20261001/source-backups.json) · [Deployment](../../Artifacts/Validation/sites-backend-migration-20261001/deployment.json) · [Real Google](../../Artifacts/Validation/sites-backend-migration-20261001/google-runtime.json) · [Native upload](../../Artifacts/Validation/sites-backend-migration-20261001/native-uploader.json) · [Stored row](../../Artifacts/Validation/sites-backend-migration-20261001/native-storage.json) · [Railway shutdown](../../Artifacts/Validation/sites-backend-migration-20261001/cutover.json) · [CI](https://github.com/dakrdong/HELLSCRIPT/actions/runs/36807731836)
 
-- Node 10/10 passed: original bytes, duplicates, conflicts, interrupted storage, revocation, request limits and rejected redirects. [Result](../../Artifacts/Validation/sites-player-logs-20260930/worker-tests.txt)
-- Ten API checks passed on the owner-private deployment: matching first/duplicate receipts, changed payload 409, invalid provenance 422, anonymous/invalid credentials 401, listing 405 and individual read 404. D1 contains one synthetic run with its matching SHA-256. [Result](../../Artifacts/Validation/sites-player-logs-20260930/private-api.json)
-- Public API access was enabled following the owner's explicit approval on 2026-10-01. Ten public API checks passed without a site access token or login cookies. Anonymous/invalid game credentials return 401, changed bytes return 409 and invalid provenance returns 422. [Public API result](../../Artifacts/Validation/sites-player-logs-20260930/public-api.json)
-- An actual macOS development player used an isolated save and dedicated QA account, won rift stage 1 and uploaded 1,157,436 original bytes. Restarting the uploader and resending identical bytes produced the same acknowledgment, with no pending files and one retained local record. D1 contains exactly one matching run ID and SHA-256. [Native uploader result](../../Artifacts/Validation/sites-player-logs-20260930/public-native/native-uploader.json) · [D1 evidence](../../Artifacts/Validation/sites-player-logs-20260930/public-storage-proof.json)
-- Account-token binding was verified by the earlier 41/41 focused checks and the affected connection checks at 11/11. Public access required no game-code changes, so the existing final development build, including optimization and daily content, was reused. Its executable SHA matched the build evidence, and Assets/Packages/ProjectSettings were unchanged since source ebea961a. Passing checks and builds were not repeated. Real Google-account uploads and physical mobile devices were not used in this verification. [Verification summary](../../Artifacts/Validation/sites-player-logs-20260930/validation-summary.json)
-- The deployed status page was verified in Korean and English, including manual retry and a real healthy response. Healthy describes the collector/storage response and does not establish direct ordinary game uploads.
-- The API verifier explicitly identifies itself as HELLSCRIPT-Telemetry-Verification/1.0. Sites rejected urllib's generic agent with Cloudflare 1010; actual Unity requests were accepted. Game authorization and hosting security settings were retained. The existing local development QA file retained its credential and a private backup while its collector origin changed to Sites.
-- Authentication, operations and Sites [CI](https://github.com/dakrdong/HELLSCRIPT/actions/runs/36729003860) passed on main commit 3c33af8b. [D1 evidence](../../Artifacts/Validation/sites-player-logs-20260930/storage-proof.json) exposes only synthetic run IDs and hashes, excluding account IDs and tokens.
+![English healthy screen](../../Artifacts/Validation/sites-backend-migration-20261001/site-en.jpg)
+
+[Korean healthy screen](../../Artifacts/Validation/sites-backend-migration-20261001/site-ko.jpg) · [Operator sign-in](../../Artifacts/Validation/sites-backend-migration-20261001/ops-login.jpg)
