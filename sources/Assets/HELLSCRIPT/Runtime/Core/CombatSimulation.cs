@@ -49,6 +49,7 @@ namespace Hellscript
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null)RiftResult.Begin(this.account,State);
+            if(restore==null&&training<0)State.dps=new CombatDpsTimeline();
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=ground?trainingGround.stage:1;State.rng=seed??(ground?TrainingGround.Seed(trainingGround):731010u+(uint)training);}
             // The training ground fights real rift enemies, so it keeps the rift's live-ops balance for its tier.
             if(restore==null&&ground)State.trainingGround=new TrainingGroundRunState{setup=trainingGround.Copy(),key=TrainingGround.Key(trainingGround,Hero)};
@@ -184,7 +185,7 @@ namespace Hellscript
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
             float observedTime=State.time,observedHealth=State.health;var observedPosition=State.position;
             tickingClassEvents=true;
-            try{TickCombat(dt);}finally{JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);RecordFeedbackTick(State.time-observedTime,observedPosition);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
+            try{TickCombat(dt);}finally{RecordGraphCasts();JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);RecordFeedbackTick(State.time-observedTime,observedPosition);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
         }
         void TickCombat(float dt)
         {
@@ -443,7 +444,7 @@ namespace Hellscript
         void Deal(EnemyState e,float damage,bool critical)
         {
             if(damage>0&&!e.dead)State.lastOutgoingDamageTime=State.time;
-            if(e.dead)return;float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;if(IsTrainingGround)RecordTrainingDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
+            if(e.dead)return;float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;
             if(e.health>0)return;e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;
         }
@@ -609,6 +610,7 @@ namespace Hellscript
             CommitExperience();
             InterruptHeroAction(reason);
             CombatTelemetry.Finish(State.statistics,completion);
+            RecordGraphCasts();
             CloseUnopenedChests();State.phase=won?RunPhase.Cleared:RunPhase.Failed;State.action=reason;Log("RUN_END",reason);
             if(State.training>=0)return;
             RiftResult.Complete(Hero,State,completion);

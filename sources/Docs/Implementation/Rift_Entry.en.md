@@ -76,9 +76,13 @@ Account fatigue and restoration count belong to `RiftFatigue`. The saved run own
 
 ## In-place loadout changes
 
-Each potion slot opens six family tabs and six grades per family, with original icons, effects and owned quantities. An owned grade equips immediately without consuming stock. Families used by another slot disable the entire tab at every grade, and the domain transaction enforces the restriction. The inventory picker follows the same family rule. Older saves with different grades of the same family keep the first slot and clear later duplicates without losing owned stock.
+Changed 2026-10-01: each potion slot opens a scrolling list of owned legacy and crafted potions with icons, effects and quantities. Equipped potions remain selectable and show a check plus **Equipped · Slot number**. Selecting the current slot's potion clears it; selecting another slot's potion swaps the positions; an unequipped potion fills the chosen slot. A different grade of a family already assigned elsewhere exchanges that slot too, preserving family uniqueness. Selection spends neither stock nor gold.
 
-Active skill candidates are actually unlocked skills, excluding other equipped actives. Selecting a candidate shows details; **Replace** commits through Hunt Edict. A separate ultimate slot only offers ultimate candidates. Unlocked passives apply automatically and are omitted. Changes are blocked while a saved rift is in progress.
+`PotionLoadout.Select` and `GameStore.SelectPotionSlot` atomically persist the hero's actual three-slot loadout. A failed write preserves memory, disk and stock and shows an error in the popup. Existing explicit `SetPotionSlot` assignment semantics remain unchanged. A saved portal no longer blocks preparation in the sanctuary: the transaction verifies the expected portal ID and suspended state. Relaunch and portal resume use the saved slots while retaining run progress and potion cooldowns.
+
+Equipped skills retain their existing replacement popup. Empty regular and unlocked ultimate slots show **+**, opening the shared Hunt Edict **skill tree**. The entry window stays in the common window stack, so Close/Back returns to the same stage and displays saved skill changes. Recommended mode allows point allocation and skill equipment without disabling recommended mode or unlocking custom combat policies. Existing `CommitHuntEdict` also updates the saved portal's skill loadout.
+
+The three-second autosave notification no longer rebuilds an unchanged entry screen. Only changed presentation state triggers a repaint, deferred until child windows close. Fatigue/countdown labels update in place, keeping idle button and focus instances stable.
 
 ## Shared jeweler inventory and effects
 
@@ -101,3 +105,11 @@ See the [validation report](RiftEntryEvidence/validation.json), [native interact
 [Portrait](RiftEntryLayoutEvidence/entry-440x956-ko-100.png) · [Landscape, English, 150%](RiftEntryLayoutEvidence/entry-956x440-en-150.png) · [Tier 1000](RiftEntryEvidence/rewards-tier-1000.png) · [Warding](RiftEntryEvidence/diamond-potion.png) · [Skill detail](RiftEntryEvidence/skill-detail.png) · [Paid fatigue](RiftEntryEvidence/paid-fatigue.png) · [Open chest](RiftEntryEvidence/claimed-chest.png).
 
 Checks use an isolated worktree and save, not the user's main Editor or account. Physical mobile validation was not performed. URP post-processing shader warnings in the player log are recorded separately from successful UI interaction.
+
+## Entry-control verification, 2026-10-01
+
+**138/138 targeted Edit Mode tests**, shared UI ownership plus 11 validator tests, and a macOS development build with zero build errors passed. Native raycast-checked synthetic pointer input covered Korean/English at 440×956, 956×440 and PC 16:9/16:10/21:9, empty-slot navigation/return and the owned/equipped potion list. Button instances stayed stable across two autosaves. Potion selection/clear/swap disk state, recommended-mode skill saving, an independent process restart and actual portal resume were verified. Physical mobile devices were not tested.
+
+After macOS adjusted the 21:9 English window, the remaining case continued at 1680×720. The recommended-mode skill footer gate was corrected and only the affected save/return flow was repeated. Unchanged successful coverage was reused. The [validation record](RiftEntryControlsEvidence/validation.json), [138-test results](RiftEntryControlsEvidence/editmode.xml) and [restart result](RiftEntryControlsEvidence/restart.txt) retain exact scope and intermediate failures.
+
+[PC entry](RiftEntryControlsEvidence/entry-pc-ko.png) · [Portrait potion list](RiftEntryControlsEvidence/potions-portrait-ko.png) · [English landscape list](RiftEntryControlsEvidence/potions-landscape-en.png) · [Return after saving skills](RiftEntryControlsEvidence/saved-entry-portrait-ko.png)

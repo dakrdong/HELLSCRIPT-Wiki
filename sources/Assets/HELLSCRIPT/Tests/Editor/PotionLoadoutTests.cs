@@ -52,6 +52,56 @@ namespace Hellscript.Tests
             Assert.IsFalse(store.SetPotionFallback("fail",Hero.id,PotionFallback.Oldest));
             Assert.AreEqual(before,JsonUtility.ToJson(Hero.potions));Assert.AreEqual(disk,File.ReadAllText(path));
         }
+        [Test] public void PickerClearsSwapsAndPersistsWithoutConsumingStock()
+        {
+            Hero.potions.Set("PH01",20);Hero.potions.Set("PM01",19);Hero.potions.Set("PU04",8);
+            Hero.potions.slots=PotionLoadout.Defaults();string stock=string.Join(";",Hero.potions.stacks.Select(s=>s.id+":"+s.count));int gold=store.Data.gold;
+            Assert.IsTrue(store.SelectPotionSlot("swap",Hero.id,0,"PM01"),store.Error);
+            CollectionAssert.AreEqual(new[]{"PM01","PH01","PU04"},Hero.potions.slots.Select(s=>s.id));
+            Assert.IsTrue(store.SelectPotionSlot("swap",Hero.id,0,"PM01"),"Retried selection must not toggle again");
+            Assert.IsTrue(store.SelectPotionSlot("clear",Hero.id,0,"PM01"));
+            Assert.IsEmpty(Hero.potions.slots[0].id);
+            Assert.IsTrue(store.SelectPotionSlot("move",Hero.id,0,"PH01"));
+            CollectionAssert.AreEqual(new[]{"PH01","","PU04"},Hero.potions.slots.Select(s=>s.id));
+            Assert.IsTrue(store.SelectPotionSlot("equip",Hero.id,1,"PU01"));
+            var loaded=new GameStore(directory).Data;
+            CollectionAssert.AreEqual(new[]{"PH01","PU01","PU04"},loaded.Hero.potions.slots.Select(s=>s.id));
+            Assert.AreEqual(gold,loaded.gold);Assert.AreEqual(stock,string.Join(";",loaded.Hero.potions.stacks.Select(s=>s.id+":"+s.count)));
+        }
+        [Test] public void PickerCanClearExhaustedEquipmentAndRetainsFamilyUniqueness()
+        {
+            Hero.potions.slots=PotionLoadout.Defaults();Hero.potions.Set("PH01",0);Hero.potions.Set("PE-G03-2",4);
+            Assert.IsTrue(store.SelectPotionSlot("clear-empty",Hero.id,0,"PH01"),store.Error);
+            Assert.IsEmpty(new GameStore(directory).Data.Hero.potions.slots[0].id);
+            Assert.IsTrue(store.SelectPotionSlot("grade",Hero.id,1,"PE-G03-2"),store.Error);
+            Assert.IsTrue(store.SelectPotionSlot("grade-move",Hero.id,0,"PE-G03-2"),store.Error);
+            CollectionAssert.AreEqual(new[]{"PE-G03-2","","PU04"},Hero.potions.slots.Select(s=>s.id));
+            Assert.IsFalse(store.SelectPotionSlot("unowned-picker",Hero.id,1,"PH01"));
+            PotionLoadout.Validate(Hero.potions.slots);
+        }
+        [Test] public void PickerCheckpointRequiresMatchingPausedPortalAndPreservesCombatTimers()
+        {
+            Hero.potions.Set("PH01",20);Hero.potions.Set("PM01",19);Hero.potions.slots=PotionLoadout.Defaults();
+            var sim=new CombatSimulation(store.Data,catalog,1,seed:9451);store.Data.suspendedRun=sim.State;
+            Assert.IsFalse(store.SelectPotionSlot("active",Hero.id,0,"PM01",sim.State.id));
+            sim.State.paused=true;sim.State.time=17;sim.State.potions.resourceCooldown=4;
+            string before=JsonUtility.ToJson(sim.State);
+            Assert.IsFalse(store.SelectPotionSlot("no-portal",Hero.id,0,"PM01"));
+            Assert.IsFalse(store.SelectPotionSlot("stale-portal",Hero.id,0,"PM01","stale"));
+            Assert.IsTrue(store.SelectPotionSlot("at-portal",Hero.id,0,"PM01",sim.State.id),store.Error);
+            Assert.AreSame(sim.State,store.Data.suspendedRun);Assert.AreEqual(before,JsonUtility.ToJson(sim.State));
+            var reloaded=new GameStore(directory,catalog);var resumed=new CombatSimulation(reloaded.Data,catalog,1,restore:reloaded.Data.suspendedRun);
+            CollectionAssert.AreEqual(new[]{"PM01","PH01","PU04"},resumed.ActivePotionSlots.Select(s=>s.id));
+            Assert.AreEqual(4,resumed.State.potions.resourceCooldown);Assert.AreEqual(17,resumed.State.time);
+        }
+        [Test] public void FailedPickerSavePreservesSlotsStockAndDisk()
+        {
+            Hero.potions.Set("PH01",20);Hero.potions.Set("PM01",19);Hero.potions.slots=PotionLoadout.Defaults();Assert.IsTrue(store.Save());
+            string before=JsonUtility.ToJson(Hero.potions),path=Path.Combine(directory,"hellscript-local-v1.json"),disk=File.ReadAllText(path);
+            Directory.CreateDirectory(path+".tmp");LogAssert.Expect(LogType.Error,new Regex("저장하지 못했습니다:"));
+            Assert.IsFalse(store.SelectPotionSlot("fail-picker",Hero.id,0,"PM01"));
+            Assert.AreEqual(before,JsonUtility.ToJson(Hero.potions));Assert.AreEqual(disk,File.ReadAllText(path));
+        }
         PotionDefinition[] TierFixture()
         {
             // Catalog-shaped fixtures exercise future grades without adding unapproved live potion effects.

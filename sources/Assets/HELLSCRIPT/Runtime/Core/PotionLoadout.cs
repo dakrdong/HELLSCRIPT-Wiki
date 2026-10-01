@@ -21,6 +21,22 @@ namespace Hellscript
         public static readonly string[] FallbackLabels={"높은 등급 물약 사용","낮은 등급 물약 사용","가장 최근에 얻은 물약 순서로 사용","가장 오래된 물약 순서로 사용"};
         public static PotionSlot[] Defaults(string utility="PU04")=>new[]{new PotionSlot{id="PH01"},new PotionSlot{id="PM01"},new PotionSlot{id=utility}};
         public static PotionSlot[] Copy(PotionSlot[] slots)=>slots.Select(s=>new PotionSlot{id=s.id,fallback=s.fallback}).ToArray();
+        // Picker intent: choose again to clear; choose another slot's family to exchange positions.
+        // Explicit SetPotionSlot remains an assignment for other callers and save migrations.
+        public static PotionSlot[] Select(PotionSlot[] source,int index,string id)
+        {
+            Validate(source);
+            if(source==null||source.Length!=SlotCount||index<0||index>=SlotCount)throw new ArgumentException("잘못된 물약 슬롯입니다.");
+            var slots=Copy(source);id??="";
+            if(id==slots[index].id){slots[index].id="";return slots;}
+            if(id!="")
+            {
+                string family=PotionCatalog.Family(id);
+                int other=Array.FindIndex(slots,s=>!string.IsNullOrEmpty(s.id)&&PotionCatalog.Family(s.id)==family);
+                if(other>=0&&other!=index)slots[other].id=slots[index].id;
+            }
+            slots[index].id=id;Validate(slots);return slots;
+        }
         public static void Validate(PotionSlot[] slots)
         {
             if(slots==null||slots.Length==0)return; // Saves made before configurable slots retain their edict selection.

@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-01",
+  "baseCommit": "7a3f9d3d813c2e47d33602cfffa33efa1032fe33",
+  "unity": "6000.6.0f1",
+  "editorRoute": "CoplayDev MCP verified the primary checkout and current scene; no mutations there. Isolated worktree compiled/tested with Unity batch and a separate macOS development Player.",
+  "editMode": {
+    "passed": 138,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "PotionLoadoutTests",
+      "PotionTests",
+      "RiftEntryTests",
+      "HuntEdictSuspendedSaveTests",
+      "HuntEdictDefaultsTests",
+      "LocalizationTests",
+      "StoredLocalizationTests"
+    ]
+  },
+  "sharedUI": {
+    "ownership": "passed",
+    "validatorTests": 11
+  },
+  "macBuild": "succeeded, errors=0",
+  "viewports": {
+    "ko": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "en": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "1680x720"
+    ]
+  },
+  "nativeChecks": [
+    "Seven idle seconds crossed two actual autosaves without replacing any button instances.",
+    "Empty regular slot shows plus; pointer opens the common Hunt Edict skill tree; Close restores the same entry instance and stage.",
+    "All owned legacy/crafted potions including the three equipped potions are selectable and show equipped-slot indicators.",
+    "Pointer equip/clear/swap, moving to an empty slot, stock/gold preservation and unchanged portal progress/cooldown passed before the skill-save gate failure. Disk readback confirms the persistent selected slots.",
+    "Recommended-mode footer gate fixed; reran only skill equip/save/return and independent-process restart. Saved hero/checkpoint skill and refreshed entry agree.",
+    "A separate process restored the empty slot, selected potions and skill; actual portal button resumed the same saved run with that loadout."
+  ],
+  "potionPointerSaveReadback": {
+    "slots": [
+      "PE-G06-2",
+      "",
+      "PH01"
+    ],
+    "quantities": {
+      "PH01": 20,
+      "PM01": 19,
+      "PU04": 8,
+      "PE-G06-2": 3
+    },
+    "checkpointTime": 17.0
+  },
+  "validationRepairs": [
+    "Initial compile rejected obsolete GetInstanceID in new harness; replaced with reference identity, then ran the selected Edit Mode tests.",
+    "macOS adjusted the second 2100x900 window; resumed only the remaining 21:9 English case at 1680x720.",
+    "The newly accessible recommended skill tree retained a locked footer. Fixed that UI gate and repeated only skill save/return and process restart. Earlier unchanged potion/layout/idle checks were retained."
+  ],
+  "input": "Native macOS development Player with raycast-checked synthetic Unity EventSystem pointer input; live native diagnostic screenshot via CUA.",
+  "physicalMobile": false,
+  "fullEditModeSuite": "not run; targeted 138 tests only",
+  "mainMerged": false,
+  "publicWiki": "branch documentation only; publish from main on merge",
+  "sha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/PotionLoadout.cs": "ef0512256a12703686e11d3868cb9ed3e4a8cb53503ee43a471d6d1d7894d9a1",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.Potions.cs": "49a23ddcf81d68e441dd46b9ec862eea99e5f441495a95e3feb7b2486df325b5",
+    "Assets/HELLSCRIPT/Runtime/Core/GameStore.RiftEntry.cs": "3168d82a38f67fcbf850459394cf39ae057442a64e41ebd52975cdf1e131df81",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs": "e1c5c763471eca092a39c79c20cf7feaaec3a1c643d723379f9f7ae61c9928b2",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs": "628554a81e54cf49173a5464a759c6870b93d303527574af6cab0c0810c7e4f1",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Potions.cs": "6f9791ea6b2bf4393a89a016b07f9761cf8280c3b2c887402a4c755fea6e4e49",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs": "97158401f279d0e3bde0534716635f3a3e262dd4a3ca7056408ab928a17fa927",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.cs": "39b9ba867e1e7492d0f638a02c61420e3233e421d3370b2c258f917793cee381",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Skills.cs": "2a99c7a6591cbc828a65c222d72f3611b87411b06d8c8fac6be336988e8b748a"
+  }
+}

@@ -166,3 +166,9 @@ The user removed the text-size multiplier on 2026-09-30. Do not run or add text-
 2026-10-01: equipped active/ultimate seals use emerald-edge PNG variants generated from their original frame references. The tree, sockets and inspector header share the original centered registration and measured opening. No equipment numbers or procedural equipped circles are used. Passive, unequipped and empty seals retain the original art. [Artwork and registration](Hunt_Edict_Equipped_Seals.en.md).
 
 2026-10-01: Regular active seals now use green, blue, amber and violet by equipment slot; the tree, sockets, inspector and policy rail match. Empty slots never compact colors. [Slot colors](Hunt_Edict_Slot_Seals.en.md).
+
+2026-10-01: Rift reward reveals keep shared window input and safe-area ownership while displaying only a black dim and the committed receipt. Result equipment actions resolve current ownership and use existing transactions; the DPS popup shares the training chart and inspection components. [Behavior and validation](Rift_Result_Actions.en.md).
+
+### Rift preparation and recommended skill management (2026-10-01)
+
+Recommended mode permits skill-tree point allocation and equipment while keeping custom combat policies locked and preserving the mode switch. An empty rift-entry skill slot opens the same Hunt Edict tree in the common window stack; closing restores the entry window and chosen stage. Potion selection uses the shared loadout transaction, with immediate persistent equip, clear and swap semantics. See [Rift entry](Rift_Entry.en.md).

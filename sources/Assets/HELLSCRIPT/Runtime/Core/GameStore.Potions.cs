@@ -7,14 +7,23 @@ namespace Hellscript
     public sealed partial class GameStore
     {
         public bool SetPotionSlot(string request,string heroId,int index,string potionId)
-            =>Transact(request,"potion-slot:"+heroId+":"+index+":"+potionId,a=>
+            =>ChangePotionSlot(request,heroId,index,potionId,false,null);
+        public bool SelectPotionSlot(string request,string heroId,int index,string potionId,string portalId=null)
+            =>ChangePotionSlot(request,heroId,index,potionId,true,portalId);
+        bool ChangePotionSlot(string request,string heroId,int index,string potionId,bool select,string portalId)
+            =>Transact(request,(select?"potion-select:":"potion-slot:")+heroId+":"+index+":"+potionId,a=>
             {
                 var hero=a.heroes.Single(h=>h.id==heroId);
                 if(a.Hero.id!=heroId||index<0||index>=PotionLoadout.SlotCount)throw new ArgumentException("잘못된 물약 슬롯입니다.");
-                if(a.suspendedRun?.heroId==heroId&&!RepeatHunt.Terminal(a.suspendedRun))throw new ArgumentException("물약 배치는 마을에서 변경할 수 있습니다.");
+                var run=a.suspendedRun;
+                bool checkpoint=select&&portalId!=null&&run?.id==portalId&&run.heroId==heroId&&run.paused&&run.training<0&&!RepeatHunt.Terminal(run);
+                if(portalId!=null&&!checkpoint||run?.heroId==heroId&&!RepeatHunt.Terminal(run)&&!checkpoint)throw new ArgumentException("물약 배치는 마을에서 변경할 수 있습니다.");
                 potionId??="";
-                if(potionId!=""){PotionCatalog.Get(potionId);if(hero.potions.Count(potionId)<=0)throw new ArgumentException("보유한 물약만 지정할 수 있습니다.");}
-                var slots=PotionPolicy.Resolve(hero).Slots;slots[index].id=potionId;PotionLoadout.Validate(slots);
+                var slots=PotionPolicy.Resolve(hero).Slots;
+                if(potionId!="")
+                {PotionCatalog.Get(potionId);if(hero.potions.Count(potionId)<=0&&!(select&&slots.Any(s=>s.id==potionId)))throw new ArgumentException("보유한 물약만 지정할 수 있습니다.");}
+                if(select)slots=PotionLoadout.Select(slots,index,potionId);
+                else {slots[index].id=potionId;PotionLoadout.Validate(slots);}
                 hero.potions.slots=slots;hero.potions.revision++;return true;
             });
         public bool SetPotionFallback(string request,string heroId,PotionFallback fallback)

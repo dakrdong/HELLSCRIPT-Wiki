@@ -374,6 +374,8 @@ namespace Hellscript
         public int stage, theme, training=-1, kills, meter, lootCount, nextId=1, bossId=-1;
         public bool trainingUsesOwnedHero;
         public TrainingGroundRunState trainingGround=new TrainingGroundRunState();
+        // Null in pre-graph saves: never invent a full battle timeline from aggregate damage.
+        public CombatDpsTimeline dps;
         public RunPhase phase;
         public float time, realTime, health, resource=100, shield, shieldTime, potionCd, actionCd, channelTime, channelTick,
             shoutTime, shadowTime, dealt, moveDistance, decisionTime, saveTime, portalCast;
