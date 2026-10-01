@@ -11,11 +11,21 @@ namespace Hellscript
         readonly IdleDisplaySession idle = new IdleDisplaySession();
         IdlePreferenceStore idlePreferences;
         public IdleHuntJournal IdleJournal { get; } = new IdleHuntJournal();
-        double unlockStarted = -1, idleInteractiveUntil;
-        public bool IdleUnlocking => unlockStarted >= 0;
-        public float IdleUnlockProgress => IdleUnlocking ? Mathf.Clamp01((float)((Time.realtimeSinceStartupAsDouble - unlockStarted) / 3)) : 0;
+        double idleInteractiveUntil;
+        public bool IdleUnlocking => idle.UnlockActive;
+        public bool IdleUnlockHeld => idle.UnlockHeld;
+        public float IdleUnlockProgress => idle.UnlockProgress;
         public void BeginIdleUnlock()
-        { if (DisplayDimmed && !UI.CommonPanelOpen && !IdleUnlocking) { unlockStarted = Time.realtimeSinceStartupAsDouble; ForceIdleFrame(); } }
+        { if (DisplayDimmed && !UI.CommonPanelOpen) { idle.SetUnlockHeld(true, Time.realtimeSinceStartupAsDouble); ForceIdleFrame(); } }
+        public void EndIdleUnlock()
+        {
+            if (!DisplayDimmed) return;
+            if (UI.CommonPanelOpen) { CancelIdleUnlock(); return; }
+            if (idle.SetUnlockHeld(false, Time.realtimeSinceStartupAsDouble)) KeepWatching();
+            else ForceIdleFrame();
+        }
+        public void CancelIdleUnlock()
+        { idle.CancelUnlock(); if (IdleHunting) ForceIdleFrame(); }
         public void WakeIdleInteraction()
         { idleInteractiveUntil = Time.realtimeSinceStartupAsDouble + .7; ForceIdleFrame(); }
         void ObserveIdleCommit(StoreChange change)
@@ -52,7 +62,7 @@ namespace Hellscript
             savedRenderInterval = OnDemandRendering.renderFrameInterval; savedSleepTimeout = Screen.sleepTimeout;
             IdleJournal.Begin(Store.Data, Combat.State, Time.realtimeSinceStartupAsDouble, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
             Store.Committed += ObserveIdleCommit;
-            unlockStarted = -1; idleInteractiveUntil = 0;
+            idleInteractiveUntil = 0;
             idle.Enter(RepeatSession?.completed ?? 0); SetDimPresentation();
         }
         void SetDimPresentation()
@@ -75,7 +85,7 @@ namespace Hellscript
         {
             if (!IdleHunting) return;
             Store.Committed -= ObserveIdleCommit;
-            idle.Exit(); peekRequested = false; unlockStarted = -1; Audio?.SetPowerSaving(false);
+            idle.Exit(); peekRequested = false; Audio?.SetPowerSaving(false);
             Application.targetFrameRate = savedFrameRate; QualitySettings.vSyncCount = savedVSync;
             OnDemandRendering.renderFrameInterval = savedRenderInterval; Screen.sleepTimeout = savedSleepTimeout;
             UI.HideIdleOverlay();
@@ -88,8 +98,8 @@ namespace Hellscript
         {
             if (!IdleHunting) return;
             double now = Time.realtimeSinceStartupAsDouble;
-            if (IdleUnlocking && UI.CommonPanelOpen) unlockStarted = -1;
-            if (IdleUnlocking && now - unlockStarted >= 3) { KeepWatching(); return; }
+            if (UI.CommonPanelOpen) idle.CancelUnlock();
+            if (idle.UpdateUnlock(now)) { KeepWatching(); return; }
             if (DisplayDimmed && UI.CommonPanelOpen)
             { Application.targetFrameRate = 30; OnDemandRendering.renderFrameInterval = 1; return; }
             if (DisplayDimmed)

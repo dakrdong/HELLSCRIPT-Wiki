@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="31" result="Passed" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-01 05:56:23Z" end-time="2026-10-01 05:56:37Z" duration="13.8909964">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="4953" result="Passed" start-time="2026-10-01 05:56:23Z" end-time="2026-10-01 05:56:37Z" duration="13.890996" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="6703" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/idle-hold-unlock/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="4953" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:37Z" duration="13.786885" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="68868" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="6704" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="4953" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:37Z" duration="13.698405" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="6705" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="4953" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:37Z" duration="13.616805" total="31" passed="31" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="3719" name="ForegroundCombatClockTests" fullname="Hellscript.Tests.ForegroundCombatClockTests" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" testcasecount="25" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:37Z" duration="13.277282" total="25" passed="25" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="3743" name="ABackwardClockSampleDoesNotCountTheSamePeriodTwice" fullname="Hellscript.Tests.ForegroundCombatClockTests.ABackwardClockSampleDoesNotCountTheSamePeriodTwice" methodname="ABackwardClockSampleDoesNotCountTheSamePeriodTwice" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="1835067976" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:24Z" duration="0.007913" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3742" name="ApplicationSuspensionNeverBecomesCombatCatchUp" fullname="Hellscript.Tests.ForegroundCombatClockTests.ApplicationSuspensionNeverBecomesCombatCatchUp" methodname="ApplicationSuspensionNeverBecomesCombatCatchUp" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="887098667" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:24Z" duration="0.000898" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3739" name="ATemporaryLongFrameIsCaughtUpWithoutTruncation" fullname="Hellscript.Tests.ForegroundCombatClockTests.ATemporaryLongFrameIsCaughtUpWithoutTruncation" methodname="ATemporaryLongFrameIsCaughtUpWithoutTruncation" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="1847291147" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:24Z" duration="0.001056" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="3738" name="AThousandDisplayTransitionsKeepRealCombatEquivalent" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" testcasecount="18" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:37Z" duration="13.252061" total="18" passed="18" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3720" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,0,1.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,0,1.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="2112053599" result="Passed" start-time="2026-10-01 05:56:24Z" end-time="2026-10-01 05:56:26Z" duration="1.480158" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3721" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,0,1.5d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,0,1.5d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="1762091574" result="Passed" start-time="2026-10-01 05:56:26Z" end-time="2026-10-01 05:56:27Z" duration="1.780279" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3722" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,0,2.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,0,2.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="104648975" result="Passed" start-time="2026-10-01 05:56:27Z" end-time="2026-10-01 05:56:29Z" duration="2.066715" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3723" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,1,1.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,1,1.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="431021988" result="Passed" start-time="2026-10-01 05:56:29Z" end-time="2026-10-01 05:56:31Z" duration="1.143297" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3724" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,1,1.5d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,1,1.5d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="756920452" result="Passed" start-time="2026-10-01 05:56:31Z" end-time="2026-10-01 05:56:32Z" duration="1.593938" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3725" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,1,2.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Warrior,1,2.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="868967367" result="Passed" start-time="2026-10-01 05:56:32Z" end-time="2026-10-01 05:56:34Z" duration="1.754539" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3726" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,0,1.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,0,1.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="1823866471" result="Passed" start-time="2026-10-01 05:56:34Z" end-time="2026-10-01 05:56:34Z" duration="0.408626" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3727" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,0,1.5d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,0,1.5d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="204346008" result="Passed" start-time="2026-10-01 05:56:34Z" end-time="2026-10-01 05:56:35Z" duration="0.377637" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3728" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,0,2.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,0,2.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="789944163" result="Passed" start-time="2026-10-01 05:56:35Z" end-time="2026-10-01 05:56:35Z" duration="0.403061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3729" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,1,1.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,1,1.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="225552757" result="Passed" start-time="2026-10-01 05:56:35Z" end-time="2026-10-01 05:56:35Z" duration="0.205150" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3730" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,1,1.5d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,1,1.5d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="938561771" result="Passed" start-time="2026-10-01 05:56:35Z" end-time="2026-10-01 05:56:35Z" duration="0.213498" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3731" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,1,2.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Ranger,1,2.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="1118617374" result="Passed" start-time="2026-10-01 05:56:35Z" end-time="2026-10-01 05:56:36Z" duration="0.199960" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3732" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,0,1.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,0,1.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="2097670086" result="Passed" start-time="2026-10-01 05:56:36Z" end-time="2026-10-01 05:56:36Z" duration="0.180618" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3733" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,0,1.5d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,0,1.5d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="793218922" result="Passed" start-time="2026-10-01 05:56:36Z" end-time="2026-10-01 05:56:36Z" duration="0.192556" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3734" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,0,2.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,0,2.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="851022713" result="Passed" start-time="2026-10-01 05:56:36Z" end-time="2026-10-01 05:56:36Z" duration="0.186516" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3735" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,1,1.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,1,1.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="569565524" result="Passed" start-time="2026-10-01 05:56:36Z" end-time="2026-10-01 05:56:37Z" duration="0.353574" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3736" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,1,1.5d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,1,1.5d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="1373400368" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.365671" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3737" name="AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,1,2.0d)" fullname="Hellscript.Tests.ForegroundCombatClockTests.AThousandDisplayTransitionsKeepRealCombatEquivalent(Mage,1,2.0d)" methodname="AThousandDisplayTransitionsKeepRealCombatEquivalent" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="223174971" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.340627" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="3745" name="KeepingTheScreenOrOpeningAMenuCancelsAutomaticDimming" fullname="Hellscript.Tests.ForegroundCombatClockTests.KeepingTheScreenOrOpeningAMenuCancelsAutomaticDimming" methodname="KeepingTheScreenOrOpeningAMenuCancelsAutomaticDimming" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="535457122" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000982" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3741" name="PausingKeepsTheFractionButNotADeferredCatchUp" fullname="Hellscript.Tests.ForegroundCombatClockTests.PausingKeepsTheFractionButNotADeferredCatchUp" methodname="PausingKeepsTheFractionButNotADeferredCatchUp" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="2017047022" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000318" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3744" name="PeekExpiresTenSecondsAfterTheLastInput" fullname="Hellscript.Tests.ForegroundCombatClockTests.PeekExpiresTenSecondsAfterTheLastInput" methodname="PeekExpiresTenSecondsAfterTheLastInput" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="131703129" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000139" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="3740" name="PersistentBacklogStopsAtTheLastCompletedTick" fullname="Hellscript.Tests.ForegroundCombatClockTests.PersistentBacklogStopsAtTheLastCompletedTick" methodname="PersistentBacklogStopsAtTheLastCompletedTick" classname="Hellscript.Tests.ForegroundCombatClockTests" runstate="Runnable" seed="726824645" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000156" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="4352" name="IdleUnlockTests" fullname="Hellscript.Tests.IdleUnlockTests" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.010062" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="4353" name="AShortTapNeverBecomesADelayedUnlock" fullname="Hellscript.Tests.IdleUnlockTests.AShortTapNeverBecomesADelayedUnlock" methodname="AShortTapNeverBecomesADelayedUnlock" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" seed="1992971042" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.002041" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4358" name="CancellationAndDisplayTransitionsClearPointerAndGauge" fullname="Hellscript.Tests.IdleUnlockTests.CancellationAndDisplayTransitionsClearPointerAndGauge" methodname="CancellationAndDisplayTransitionsClearPointerAndGauge" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" seed="1848439335" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000255" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4357" name="DuplicateAndBackwardSamplesCannotAddProgress" fullname="Hellscript.Tests.IdleUnlockTests.DuplicateAndBackwardSamplesCannotAddProgress" methodname="DuplicateAndBackwardSamplesCannotAddProgress" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" seed="1547215411" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000084" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4356" name="PointerUpSamplesTheLastHeldFrameBeforeReleasing" fullname="Hellscript.Tests.IdleUnlockTests.PointerUpSamplesTheLastHeldFrameBeforeReleasing" methodname="PointerUpSamplesTheLastHeldFrameBeforeReleasing" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" seed="390362114" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000070" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4354" name="ReleaseDrainsAndAnotherHoldContinuesFromTheRemainingGauge" fullname="Hellscript.Tests.IdleUnlockTests.ReleaseDrainsAndAnotherHoldContinuesFromTheRemainingGauge" methodname="ReleaseDrainsAndAnotherHoldContinuesFromTheRemainingGauge" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" seed="1356572732" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000118" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4355" name="UnlockRequiresThreeSecondsOfHeldProgress" fullname="Hellscript.Tests.IdleUnlockTests.UnlockRequiresThreeSecondsOfHeldProgress" methodname="UnlockRequiresThreeSecondsOfHeldProgress" classname="Hellscript.Tests.IdleUnlockTests" runstate="Runnable" seed="299283323" result="Passed" start-time="2026-10-01 05:56:37Z" end-time="2026-10-01 05:56:37Z" duration="0.000083" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,18 @@
+Normal 2s: world=118 hud=118 ticks=43
+Idle 2.217s: world=0 hud=0 ticks=44, simulation=2.200s; battle camera off, empty black display camera on, voices=0, update target 20, render interval 20
+Live level/XP -> combat level-up -> capped XP bar; shared class portrait and current location/status PASS
+Warehouse/inventory pause simulation, fatigue, repeat delay; committed auto-equip pickup counts and historical detail pointer PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 440x956 ko 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 440x956 en 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 956x440 ko 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 956x440 en 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 1600x900 ko 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 1600x900 en 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 1600x1000 ko 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 1600x1000 en 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 2100x900 ko 100% PASS
+Layout, scroll, safe controls, status variants, growth/unlock separation, translation 2100x900 en 100% PASS
+Actual failure/result-save/repeat/new-rift boundary retains the session and attempt log PASS
+Tap alone cannot unlock; partial hold fills, release/exit drains, re-press continues; second pointer ignored; focus loss, reflow and inspection cancel PASS
+Three seconds of held gauge unlocks; frame rate/vsync/render/battle-camera/audio restore and black camera disabled PASS
+Inspection cancels countdown; failed save preserves disk and pauses; compact error stays readable; successful explicit retry resumes PASS

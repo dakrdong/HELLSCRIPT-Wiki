@@ -1,6 +1,6 @@
 # Power-saving auto hunt
 
-Updated: 2026-09-27
+Updated: 2026-10-01
 Korean: [자동 사냥 절전 모드](Idle_Display.md)
 
 ## Display and interaction
@@ -20,7 +20,7 @@ A fixed bottom row shows the current character's face seal, level and XP bar. It
 
 Equipment and attempt logs scroll independently. Portrait stacks sections; landscape uses equal-width columns with warehouse and equipment changes on the left, acquired equipment and attempts on the right. A centered vertical divider separates only the body, leaving the shared timer/status and growth/unlock footer clear. Every session entry is retained; only visible rows create UI objects. The bottom exit control remains outside the scroll areas.
 
-One tap on `Tap here to exit power saving` shows a shaking lock and a gauge directly above it. Normal presentation resumes after three monotonic seconds. Other blank areas do not unlock. The lock reuses the existing procedural `StorageGlyph`; no raster asset is generated.
+Since 2026-10-01, `Hold to exit power saving` charges only while pressed. Filling an empty gauge takes three seconds. Releasing or leaving the button drains it at the same rate; pressing again continues from the remaining progress. The lock shakes while held, and both lock and gauge hide when empty. A short tap followed by waiting never unlocks. A second pointer cannot steal the hold. Opening details, rebuilding the layout or losing focus clears the hold and progress. `IdleUnlockHold` forwards pointer lifecycle events; `IdleDisplaySession` owns the monotonic gauge. The lock reuses `StorageGlyph`.
 
 ## Combat, persistence and pause ownership
 
@@ -28,7 +28,7 @@ The existing `ForegroundCombatClock` drives the same `CombatSimulation` at its 0
 
 `IdleHuntJournal` captures an entry baseline and observes equipment, claimed drops and outcomes only after `GameStore.Committed`. Failed saves and repeated notifications do not create successful records. This is a foreground session journal, reset on re-entry; it has no separate permanent archive. Actual equipment and run checkpoints retain their existing persistence.
 
-Storage, inventory and historical detail use `ContentWindowHost` nested pause leases. Combat, fatigue consumption, automated cleanup and next-rift delay stop during inspection. Closing the last detail restores the previous pause state without clearing unrelated manual/error blockers. Opening a detail during the unlock countdown cancels that countdown.
+Storage, inventory and historical detail use `ContentWindowHost` nested pause leases. Combat, fatigue consumption, automated cleanup and next-rift delay stop during inspection. Closing the last detail restores the previous pause state without clearing unrelated manual/error blockers. Opening a detail clears the held pointer and unlock progress.
 
 Application suspension preserves the checkpoint and exits power saving. Returning does not automatically resume combat or convert suspended time into combat catch-up. Existing offline-supply settlement remains independent.
 
@@ -36,11 +36,24 @@ Application suspension preserves the checkpoint and exits power saving. Returnin
 
 Density update, 2026-09-28: change time and equipment position share one line. Shared item slots use 40 units with a 6-unit gap, reducing 100% row height from 78 to 46. Both historical item-detail actions remain. See the [current UI rules](Responsive_Hud_20260928.en.md).
 
-The mode disables world objects, the battle camera, transient effects and normal HUD updates, in addition to showing a black background. Repeated-rift presentation objects are deferred until reveal. Audio playback, queued effects and combat audio observation stop; exit seeds the observer at current events instead of replaying old effects.
+The mode disables world objects, the battle camera, transient effects and normal HUD updates, in addition to showing a black background. One empty display camera clears black so the Editor does not overlay `Display 1 / No cameras rendering`. It renders no world layers and disables shadows, post-processing, HDR, MSAA and depth/color texture requests. Exit disables it; re-entry reuses it. Repeated-rift presentation objects are deferred until reveal. Audio playback, queued effects and combat audio observation stop; exit seeds the observer at current events instead of replaying old effects.
 
-At rest, the update target is 20 Hz and rendering interval is 20 frames, approximately one presentation per second. Summary text refreshes once per second. Scrolling, inspection and the unlock countdown temporarily request 30 Hz presentation. Exit restores the previous frame target, v-sync, rendering interval and sleep policy. Screen sleep stays disabled to preserve real foreground combat. Global device brightness is unchanged.
+At rest, the update target is 20 Hz and rendering interval is 20 frames, approximately one presentation per second. Summary text refreshes once per second. Scrolling, inspection and charging or draining the unlock gauge temporarily request 30 Hz presentation. Exit restores the previous frame target, v-sync, rendering interval and sleep policy. Screen sleep stays disabled to preserve real foreground combat. Global device brightness is unchanged.
 
 The existing `GameUI.Idle` canvas owns this HUD adapter. Its background does not acquire a content-window pause lease because combat must continue. Shared theme, fonts, safe area and equipment slots remain authoritative. The new `IdleEquipmentDetailWindow` entry was generated with `tools/new_content_ui.py`, opens `ContentWindowView` and explicitly passes `RewardSnapshot` data.
+
+## Hold-to-exit and black-background validation (2026-10-01)
+
+**31/31 focused Edit Mode tests** passed (six new gauge tests and 25 existing combat-clock tests), along with the shared UI validator and **11/11 validator tests**. After integrating the code into `main`, the final runtime check ran once using the same source in a Unity 6000.6.0f1 macOS player. Ten combinations cover Korean/English at the default text size in 440×956, 956×440, 1600×900, 1600×1000 and 2100×900 viewports.
+
+Live EventSystem raycasts and pointer events verified tap-and-wait, partial charge, release drain, resume from remaining charge, pointer exit, ignoring a second pointer, and cancellation on focus loss, layout rebuild or inspection. Only a three-second completed hold exited; previous frame/render policy, battle camera and audio were restored. Re-entry retained exactly one empty display camera with no world layers, shadows, post-processing, HDR, MSAA or depth/color texture requests. Over about 2.217 seconds in power saving, combat advanced 2.200 seconds with zero world/normal-HUD updates. These counters do not measure battery savings.
+
+CoplayDev MCP verified the current project path, compilation after importing the new script, and the loaded `IdleUnlockHold` type. Console retained unrelated Unity AI generation-service `NoSubscription` errors; no compile errors from this change remained. The Editor Game View overlay was not directly recaptured; the native player verified the active empty display camera and black screen. Physical-mobile input/battery testing and new WebGL/APK builds were outside this validation scope.
+
+- [Summary](IdleHoldUnlockEvidence/validation.json), [Edit Mode report](IdleHoldUnlockEvidence/editmode.xml), [runtime](IdleHoldUnlockEvidence/runtime.txt), [source hashes](IdleHoldUnlockEvidence/source-hashes.json).
+- [Holding](IdleHoldUnlockEvidence/unlock-holding-ko.png), [released/draining](IdleHoldUnlockEvidence/unlock-released-ko.png), [portrait](IdleHoldUnlockEvidence/idle-440x956-ko.png), [English landscape](IdleHoldUnlockEvidence/idle-956x440-en.png).
+
+The sections below retain historical validation of earlier implementations, including the former text-size matrix.
 
 ## Location and growth validation
 

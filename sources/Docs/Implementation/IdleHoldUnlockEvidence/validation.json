@@ -1,0 +1,59 @@
+{
+  "codeCommit": "6066c13a0ed06243c97dd307d479677904d05225",
+  "unity": "6000.6.0f1",
+  "editMode": {
+    "passed": 31,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "IdleUnlockTests",
+      "ForegroundCombatClockTests"
+    ]
+  },
+  "uiContract": "passed",
+  "uiContractTests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "macOSBuild": "succeeded, errors=0",
+  "nativeRuntime": {
+    "passed": true,
+    "finalRuns": 1,
+    "sizes": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textSize": "default only",
+    "input": "native EventSystem raycast and synthetic pointer lifecycle",
+    "checks": [
+      "short tap never exits",
+      "held progress fills in 3 seconds",
+      "release and pointer exit drain",
+      "re-press resumes remaining progress",
+      "second pointer ignored",
+      "focus, reflow and inspection clear hold",
+      "world camera and audio restore on exit",
+      "empty display camera has culling mask 0 and no optional rendering effects",
+      "re-entry reuses one empty camera",
+      "combat continues, world and HUD updates remain suspended"
+    ]
+  },
+  "editor": {
+    "pathVerified": true,
+    "compileSucceeded": true,
+    "newTypeLoaded": "Hellscript.IdleUnlockHold",
+    "remainingConsoleErrors": [
+      "unrelated Unity AI generation NoSubscription"
+    ],
+    "gameViewOverlayCapture": "not performed"
+  },
+  "physicalMobile": "not tested",
+  "webAndApk": "not rebuilt"
+}
