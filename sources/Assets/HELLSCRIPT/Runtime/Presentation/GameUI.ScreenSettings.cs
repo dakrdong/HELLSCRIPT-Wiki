@@ -18,7 +18,7 @@ namespace Hellscript
         readonly List<(CanvasGroup group,float alpha)> commonBackgrounds=new List<(CanvasGroup,float)>();
         readonly List<(string id,Button button)> aspectButtons=new List<(string,Button)>();
         readonly List<(string code,Button button)> languageButtons=new List<(string,Button)>();
-        public bool CommonPanelOpen=>windowHost!=null&&windowHost.BlocksGameplay||commonModal!=null||hudPanel!=null||idleIntroductionOpen||PlayInventoryOpen||EquipmentShopOpen||BlacksmithOpen||RuneMasterOpen;
+        public bool CommonPanelOpen=>windowHost!=null&&windowHost.BlocksGameplay||commonModal!=null||hudPanel!=null||idleIntroductionOpen||PlayInventoryOpen||EquipmentShopOpen||BlacksmithOpen||RuneMasterOpen||GearRecommendationDetails!=null;
         public bool BlocksRepeat=>RiftVictory?.RetryCounting==true||runeSession||CommonPanelOpen||presetModal!=null||root!=null&&root.Find("Confirm")!=null;
         public void ShowScreenSettings()=>ShowCommonPanel(false);
         public void ShowCombatOverview(){ShowCommonPanel(false);SelectCombatTab();}

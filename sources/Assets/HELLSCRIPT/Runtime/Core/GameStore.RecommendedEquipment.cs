@@ -23,6 +23,7 @@ namespace Hellscript
                 var rewardSnapshot=CombatJournal.Copy(candidate.item);
                 if(!Economy.AddItem(a.Hero,candidate.item,policy,a,rarityOnly))return false;
                 eligible=true;candidate.claimed=true;candidate.outcome=RiftLootOutcome.Kept;staged.lootCount++;
+                candidate.gearRecommended=RiftGearRecommendations.CanOffer(a.Hero,candidate.item);
                 if(candidate.item.equipped)
                 {
                     var hero=RuneGrowth.Copy(a.Hero);hero.build=staged.build;

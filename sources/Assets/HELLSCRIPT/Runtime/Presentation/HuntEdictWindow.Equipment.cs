@@ -13,27 +13,23 @@ namespace Hellscript
             string id=group.ids[0];
             if(id=="autoEquip.enabled")
             {
-                Paragraph(list,"새로 획득한 장비가 부위별 기준을 만족하면 바로 착용하고, 교체한 장비는 아래 설정에 따라 처리합니다.",w,12);
                 bool enabled=EquipmentRecommendation.Get(Session.Draft.edict,id)=="ON";
-                EquipmentChoice(list,w,enabled?"✓ 추천 착용 켜짐":"추천 착용 꺼짐","edict-auto-enable",()=>SetGlobal(id,enabled?"OFF":"ON"),enabled);
-                EquipmentChoice(list,w,"추천 설정 사용","edict-auto-recommended",()=>Change(d=>
-                {
-                    foreach(var definition in EquipmentRecommendation.Options())
-                        d.edict.global.Single(o=>o.id==definition.id).value=definition.id=="autoEquip.enabled"?"ON":definition.initial;
-                }));
+                DrawEquipmentToggle(list,w,enabled,()=>SetGlobal(id,enabled?"OFF":"ON"));
+                list=EquipmentSettings(list,enabled);
+                Paragraph(list,"새로 획득한 장비가 부위별 기준을 만족하면 바로 착용하고, 교체한 장비는 아래 설정에 따라 처리합니다.",w,12);
                 Paragraph(list,"추천 설정: 같은 계열의 더 높은 점수 무기와 더 높은 점수의 방어구·장신구를 착용합니다.",w,11,muted);
                 Paragraph(list,"교체한 장비 처리",w,14,gold);
-                DrawEquipmentActions(list,w,EquipmentAutomation.Displaced,"edict-auto-displaced-");
+                DrawDisplacedEquipmentDropdown(list,w);
                 Paragraph(list,"판매·분해에도 가방·자동 정리의 보호 설정을 적용합니다. 보호된 장비나 처리하지 못한 장비는 가방에 남깁니다.",w,11,muted);
-                EquipmentChoice(list,w,"창고가 가득 찼을 때 설정 ›","edict-auto-storage-settings",()=>FocusGlobalOption("bag.warehouseFull"));
-                bool preserve=EquipmentRecommendation.Get(Session.Draft.edict,"autoEquip.preserveEffects")=="ON";
-                EquipmentChoice(list,w,(preserve?"✓ ":"")+Loc.T("전설·세트 효과 유지"),"edict-auto-protect",()=>SetGlobal("autoEquip.preserveEffects",preserve?"OFF":"ON"),preserve);
-                Paragraph(list,"켜면 현재 발동 중인 전설·세트 효과가 사라지는 교체는 하지 않습니다. 잠근 장비는 항상 자동 교체하지 않습니다.",w,11,muted);
-                Paragraph(list,"저장한 뒤 새로 얻는 장비부터 적용합니다. 가방·창고의 기존 장비는 다시 검사하지 않습니다.",w,11,muted);
+                if(EquipmentRecommendation.Get(Session.Draft.edict,EquipmentAutomation.Displaced)=="WAREHOUSE")
+                    EquipmentChoice(list,w,"창고가 가득 찼을 때 설정 ›","edict-auto-storage-settings",()=>FocusGlobalOption("bag.warehouseFull"));
+                Paragraph(list,"추천 착용 예외",w,14,gold);
+                Paragraph(list,"체크한 부위는 추천 장비가 있어도 자동으로 교체하지 않습니다.",w,11,muted);
+                DrawEquipmentExclusions(list,w);
                 if(!hero.useEdict)Paragraph(list,"사냥 칙령이 꺼져 있습니다. 사냥 칙령을 켜야 추천 착용이 작동합니다.",w,11,gold);
-                EquipmentChoice(list,w,"장비 점수란?","edict-auto-score-help",()=>ShowOptionHelp("장비 점수",Loc.T("기본 수치·공격 속도·고정 특성과 추가 옵션의 실제 수치를 합친 성장 참고값입니다. 강화·각성·상위 옵션·걸작을 반영합니다. 전설·세트 효과와 보석, 직업별 빌드 시너지는 점수에 넣지 않습니다. 무기는 교체 전후의 양손 구성을 함께 비교합니다. 같은 점수면 바꾸지 않습니다.")));
                 return;
             }
+            list=EquipmentSettings(list,EquipmentRecommendation.Get(Session.Draft.edict,"autoEquip.enabled")=="ON");
             bool weapon=id=="autoEquip.weapon";int position=weapon?0:int.Parse(id.Split('.')[1]);
             var current=EquipmentSlots.At(hero,EquipmentSlots.Slot(position),EquipmentSlots.Index(position));
             Paragraph(list,current==null?Loc.T("장착 장비 없음"):Loc.F("현재 착용: {0} · 점수 {1:0.0}",current.DisplayName,EquipmentScore.Value(current)),w,11,muted);
@@ -68,6 +64,70 @@ namespace Hellscript
                 string stat=key;
                 EquipmentChoice(list,w,EquipmentRecommendation.StatName(position,key),"edict-auto-add-"+key,()=>{selected.Add(stat);addingEquipmentOption=false;SetGlobal(statsId,string.Join(",",selected));});
             }
+        }
+        RectTransform EquipmentSettings(RectTransform parent,bool enabled)
+        {
+            var body=new GameObject("edict-auto-settings",typeof(RectTransform),typeof(VerticalLayoutGroup),typeof(CanvasGroup)).GetComponent<RectTransform>();
+            body.SetParent(parent,false);
+            var layout=body.GetComponent<VerticalLayoutGroup>();layout.spacing=4;layout.childControlWidth=layout.childControlHeight=true;
+            layout.childForceExpandWidth=true;layout.childForceExpandHeight=false;
+            var availability=body.GetComponent<CanvasGroup>();availability.alpha=enabled?1:.4f;
+            availability.interactable=enabled;availability.blocksRaycasts=enabled;
+            return body;
+        }
+        void DrawEquipmentExclusions(RectTransform list,float w)
+        {
+            int[] positions={0,8,1,2,3,4,5,6,7,9};int columns=w>=320?2:1;float cell=(w-12*(columns-1))/columns;
+            for(int first=0;first<positions.Length;first+=columns)
+            {
+                var row=Row(list,"Equipment exclusion positions",32);float height=32;
+                for(int column=0;column<columns&&first+column<positions.Length;column++)
+                {
+                    int position=positions[first+column];bool selected=EquipmentRecommendation.Excluded(Session.Draft.edict,position);
+                    var area=Panel(row,"edict-auto-exclude-"+position,null);Place(area,column*(cell+12),0,cell,32);
+                    var background=area.GetComponent<Image>();background.color=Color.clear;
+                    var toggle=area.gameObject.AddComponent<Toggle>();toggle.targetGraphic=background;toggle.transition=Selectable.Transition.None;
+                    var label=Text(area,EquipmentRecommendation.PositionName(position),0,0,cell-30,32,12);height=Mathf.Max(height,label.preferredHeight+6);
+                    var box=Panel(area,"Checkbox",selected?"preset-radio-on":"preset-radio-off");Place(box,cell-23,5,22,22);box.GetComponent<Image>().raycastTarget=false;
+                    var check=Text(box,"✓",0,0,22,22,14,UiTheme.Success);check.alignment=TextAnchor.MiddleCenter;
+                    toggle.graphic=check;toggle.SetIsOnWithoutNotify(selected);
+                    toggle.onValueChanged.AddListener(on=>{
+                        var chosen=EquipmentRecommendation.Get(Session.Draft.edict,EquipmentRecommendation.ExcludedSlots).Split(',').Where(v=>v!="").ToHashSet();
+                        if(on)chosen.Add(position.ToString());else chosen.Remove(position.ToString());
+                        SetGlobal(EquipmentRecommendation.ExcludedSlots,string.Join(",",chosen));
+                    });
+                }
+                row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=height;
+                foreach(Transform child in row)
+                {
+                    var rect=(RectTransform)child;Place(rect,rect.anchoredPosition.x,0,cell,height);
+                    var label=child.GetComponentInChildren<Text>();Place(label.rectTransform,0,0,cell-30,height);
+                }
+            }
+        }
+        void DrawEquipmentToggle(RectTransform list,float w,bool enabled,Action changed)
+        {
+            const float switchWidth=72,switchHeight=30;
+            var row=Row(list,"Recommended equipment switch",38);
+            var label=Text(row,"추천 장비 자동 장착",0,0,w-switchWidth-12,38,12);label.name="edict-auto-enable-label";
+            float h=Mathf.Max(38,label.preferredHeight+6);row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h;
+            Place(label.rectTransform,0,0,w-switchWidth-12,h);
+            var button=Button(row,enabled?"ON":"OFF",w-switchWidth,(h-switchHeight)/2,switchWidth,switchHeight,changed,enabled?"switch-on":"switch-off",11);
+            button.name="edict-auto-enable";((UiButton)button).Configure(UiButtonRole.Icon,enabled);
+            button.targetGraphic.canvasRenderer.SetAlpha(1);
+            var caption=button.GetComponentInChildren<Text>();caption.color=enabled?UiTheme.Text:muted;
+            Place(caption.rectTransform,enabled?3:31,0,38,switchHeight);
+            var thumb=Panel(button.transform,"Switch thumb","switch-thumb");Place(thumb,enabled?switchWidth-28:2,2,26,26);thumb.GetComponent<Image>().raycastTarget=false;
+        }
+        void DrawDisplacedEquipmentDropdown(RectTransform list,float w)
+        {
+            var definition=EdictOptions.Global.Single(d=>d.id==EquipmentAutomation.Displaced);
+            string selected=EquipmentRecommendation.Get(Session.Draft.edict,definition.id);
+            var row=Row(list,"Replaced equipment choice",34);
+            var dropdown=UiDropdown.Create(row,"edict-auto-displaced",0,0,Mathf.Min(w,280),34,1,
+                definition.choices.Select(code=>Loc.T(EdictOptionLabels.Item(definition,code))).ToArray(),Array.IndexOf(definition.choices,selected),
+                index=>SetGlobal(definition.id,definition.choices[index]),visibleItems:3);
+            dropdown.captionText.fontSize=12;
         }
         void DrawEquipmentActions(RectTransform list,float w,string id,string prefix)
         {

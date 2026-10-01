@@ -17,4 +17,16 @@
 
 ## 검증
 
-공통 UI 계약 검사와 11개 계약 검사는 통과했다. 최종 통합본의 Unity 검사·macOS 입력·저장 재확인 결과는 검증 후 이 문서에 기록한다. 모바일 실기기는 이 작업의 검증 대상이 아니다.
+공통 UI 계약 검사와 11개 계약 검사, `RiftResultTests`·`TrainingGroundTests`·`TrainingGroundUiTests`의 **64/64** 검사가 통과했다. 최신 `main`의 장비 추천 거래 연결 뒤 직접 영향을 받는 결과창 장착 **2/2**만 다시 확인했다. 나머지 통과 결과는 관련 코드와 동작이 유지되어 재사용했다.
+
+macOS 개발 플레이어에서 기본 글자 크기와 한국어·영어로 **440×956, 956×440, 1600×900, 1600×1000, 2100×900**을 확인했다. 모바일 안전 영역은 macOS에서 모의했다. 실제 UI 레이캐스트 뒤 합성 포인터로 그래프 조사·비교·장착·보상 수령·닫기·취소를 조작했고, 격리된 저장 파일에서 장착 상태와 최초 보상 상자 1개를 다시 읽었다. 결과 화면의 그래프 검사용 수치는 대표 픽스처이며, 별도 훈련장 검사는 실제 전투 시뮬레이션을 진행하고 그래프·스킬 시점·다시 시작·칙령 변경을 확인했다. 재도전은 실제 포커스 상태에서 **5→4→3→2→1**, 중간 취소와 기존 온라인 설정 확인 후 새 전투 진입까지 통과했다. 빌드 오류는 0개다. 모바일 실기기는 검증하지 않았다.
+
+전체 Edit Mode 검사는 한 번 실행되어 4,960개가 종료됐지만 **전체 통과는 아니다**. MCP에서 확인할 수 있는 실패 25개는 모두 기존 실패 목록에 포함된다. 최종 결과 객체가 반환되지 않고 도메인 재시작에서 상세 집계가 사라져 전체 통과·실패·건너뜀 수는 확정하지 않았다. 전체 검사를 반복하지 않고 이 작업과 직접 관련된 64개 검사 결과를 XML로 확보했다.
+
+[검증 범위와 소스 해시](RiftResultActionsEvidence/validation.json), [관련 검사 XML](RiftResultActionsEvidence/related-editmode.xml), [최신 통합 장착 검사](RiftResultActionsEvidence/integrated-equipment.xml), [화면 검사 진행](RiftResultActionsEvidence/layout-progress.txt), [재도전 입력 결과](RiftResultActionsEvidence/runtime-actions.txt), [5→1과 입장 기록](RiftResultActionsEvidence/retry-diagnostic.txt), [훈련장 회귀 결과](RiftResultActionsEvidence/training-runtime.txt), [저장 파일 재확인](RiftResultActionsEvidence/save-readback.json), [전체 검사 원본 상태](RiftResultActionsEvidence/full-editmode-job.json), [기존 실패 목록](RiftResultActionsEvidence/baseline-failures.json).
+
+![검은 딤 위 실제 보상 수령 내역](RiftResultActionsEvidence/reward-wide-ko.png)
+
+![훈련장과 공유하는 DPS 그래프와 스킬 시점 조사](RiftResultActionsEvidence/graph-wide-ko.png)
+
+[세로 결과](RiftResultActionsEvidence/result-portrait-ko.png) · [영문 결과와 반복 안내](RiftResultActionsEvidence/result-wide-en.png) · [세로 영문 장비 상세](RiftResultActionsEvidence/loot-detail-portrait-en.png) · [가로 영문 장비 비교](RiftResultActionsEvidence/loot-comparison-landscape-en.png) · [장착 완료](RiftResultActionsEvidence/loot-equipped-ko.png) · [세로 영문 보상](RiftResultActionsEvidence/reward-portrait-en.png) · [세로 영문 재도전](RiftResultActionsEvidence/retry-portrait-en.png) · [재도전 4와 취소](RiftResultActionsEvidence/retry-four.png) · [세로 영문 그래프](RiftResultActionsEvidence/graph-portrait-en.png).

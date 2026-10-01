@@ -8,6 +8,7 @@ namespace Hellscript
     public static class EquipmentRecommendation
     {
         public const string Prefix="autoEquip.";
+        public const string ExcludedSlots=Prefix+"excludedSlots";
         public static readonly int[] ArmorPositions={1,2,3,4,5,6,7,9};
         public static string ModeId(int position)=>Prefix+position+".mode";
         public static string StatsId(int position)=>Prefix+position+".stats";
@@ -18,6 +19,7 @@ namespace Hellscript
             var result=new List<EdictOptionDefinition>{
                 new EdictOptionDefinition(Prefix+"enabled","autoEquip","장비 추천 착용 사용",EdictOptionKind.Toggle,"OFF"),
                 new EdictOptionDefinition(EquipmentAutomation.Displaced,"autoEquip","교체한 장비 처리",EdictOptionKind.Choice,"WAREHOUSE",new[]{"WAREHOUSE","SALVAGE","SELL"}),
+                // Retained only for older save/share envelopes; slot exclusions replace this rule.
                 new EdictOptionDefinition(Prefix+"preserveEffects","autoEquip","전설·세트 효과 유지",EdictOptionKind.Toggle,"ON"),
                 new EdictOptionDefinition(Prefix+"weapon","autoEquip","무기 교체 기준",EdictOptionKind.Choice,"SAME",new[]{"SAME","SCORE","OFF"})};
             foreach(int position in ArmorPositions)
@@ -25,6 +27,7 @@ namespace Hellscript
                 result.Add(new EdictOptionDefinition(ModeId(position),"autoEquip",PositionName(position),EdictOptionKind.Choice,"SCORE",new[]{"SCORE","STATS","BOTH","OFF"}));
                 result.Add(new EdictOptionDefinition(StatsId(position),"autoEquip","비교할 옵션",EdictOptionKind.Set,"",ShopAutoSelect.StatKeys(Type(position)).ToArray()));
             }
+            result.Add(new EdictOptionDefinition(ExcludedSlots,"autoEquip","추천 착용 예외",EdictOptionKind.Set,"",new[]{"0","1","2","3","4","5","6","7","8","9"}));
             return result.ToArray();
         }
         public static string Get(HuntEdictV2Document doc,string id)=>doc?.global?.FirstOrDefault(o=>o.id==id)?.value??"";
@@ -32,17 +35,30 @@ namespace Hellscript
         public static HuntEdictV2Document Upgrade(HuntEdictV2Document source)
         {
             source=PotionEdict.Upgrade(source);
-            if(source==null||source.globalVersion<2||source.globalVersion>3)return source;
+            if(source==null||source.globalVersion<2||source.globalVersion>4)return source;
             var copy=source.Copy();
             if(copy.globalVersion==2)
             {
                 copy.global=EdictOptions.Canonical(EdictOptions.PotionGlobal,copy.global,copy.heroClass)
-                    .Concat(EdictOptions.Defaults(Options().Where(d=>!EquipmentAutomation.NewOption(d.id)))).ToList();
+                    .Concat(EdictOptions.Defaults(Options().Where(d=>!EquipmentAutomation.NewOption(d.id)&&d.id!=ExcludedSlots))).ToList();
                 copy.globalVersion=3;
             }
-            copy.global=EdictOptions.Canonical(EdictOptions.RecommendationGlobal,copy.global,copy.heroClass)
-                .Concat(EdictOptions.Defaults(EdictOptions.Global.Where(d=>EquipmentAutomation.NewOption(d.id)))).ToList();
-            copy.globalVersion=4;return copy;
+            if(copy.globalVersion==3)
+            {
+                copy.global=EdictOptions.Canonical(EdictOptions.RecommendationGlobal,copy.global,copy.heroClass)
+                    .Concat(EdictOptions.Defaults(EdictOptions.Global.Where(d=>EquipmentAutomation.NewOption(d.id)))).ToList();
+                copy.globalVersion=4;
+            }
+            copy.global=EdictOptions.Canonical(EdictOptions.WarehouseGlobal,copy.global,copy.heroClass)
+                .Concat(EdictOptions.Defaults(EdictOptions.Global.Where(d=>d.id==ExcludedSlots))).ToList();
+            copy.globalVersion=5;return copy;
+        }
+        public static bool Excluded(HuntEdictV2Document policy,int position)=>Get(policy,ExcludedSlots).Split(',').Contains(position.ToString(CultureInfo.InvariantCulture));
+        static bool TouchesExcludedSlot(HuntEdictV2Document policy,Item candidate,int index,Item[] outgoing)
+        {
+            int target=candidate.slot==0&&index==1?8:candidate.slot==7&&index==1?9:candidate.slot;
+            if(Excluded(policy,target)||EquipmentSlots.TwoHanded(candidate)&&(Excluded(policy,0)||Excluded(policy,8)))return true;
+            return outgoing.Any(item=>Excluded(policy,EquipmentSlots.Position(item))||EquipmentSlots.TwoHanded(item)&&(Excluded(policy,0)||Excluded(policy,8)));
         }
         public static string ModeName(string mode,bool weapon=false)
         {
@@ -64,7 +80,7 @@ namespace Hellscript
             {
                 var plan=EquipmentSlots.Plan(hero,item,index);if(!plan.Valid)continue;
                 var old=hero.inventory.Where(i=>plan.outgoing.Contains(i.id)).ToArray();
-                if(old.Any(i=>i.locked))continue;
+                if(old.Any(i=>i.locked)||TouchesExcludedSlot(policy,item,index,old))continue;
                 // A defensive/offensive offhand must not automatically remove the only attacking weapon.
                 if(EquipmentSlots.Offhand(item)&&old.Any(i=>!EquipmentSlots.Offhand(i)))continue;
                 int position=item.slot==7&&index==1?9:item.slot;
@@ -84,11 +100,6 @@ namespace Hellscript
                     string[] keys=Get(policy,StatsId(position)).Split(',').Where(s=>s!="").ToArray();
                     var current=EquipmentSlots.At(hero,item.slot,index);
                     if(keys.Length==0||keys.Any(key=>!Meets(item,current,key,mode=="STATS")))continue;
-                }
-                if(Get(policy,Prefix+"preserveEffects")=="ON"&&old.Length>0)
-                {
-                    var comparison=ItemComparison.Preview(hero,item,index);
-                    if(comparison.lostEffects.Count>0)continue;
                 }
                 double difference=score.after-score.before;
                 if(best==null||difference>gain){best=plan;gain=difference;}

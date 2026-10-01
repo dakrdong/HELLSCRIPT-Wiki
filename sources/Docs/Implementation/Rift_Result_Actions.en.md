@@ -17,4 +17,16 @@ Rift result actions now connect reward claims, acquired equipment changes, graph
 
 ## Validation
 
-The shared UI contract and its 11 tests passed. Final integrated Unity checks, macOS input and save verification will be recorded here after validation. Physical mobile devices are outside this run's verified scope.
+The shared UI contract and its 11 tests passed. **64/64** tests from `RiftResultTests`, `TrainingGroundTests` and `TrainingGroundUiTests` passed. After latest main added an equipment recommendation hook, only the directly affected result equipment transactions were rechecked: **2/2** passed. Unchanged coverage was reused.
+
+The native macOS development player verified default text size and KO/EN at **440×956, 956×440, 1600×900, 1600×1000 and 2100×900**, with mobile safe areas simulated on macOS. Actual UI raycast checks precede synthetic pointer input for graph inspection, comparison, equipping, claim, dismissal and cancellation. An isolated save readback confirmed equipment and one first-clear box. Result chart layout samples are a representative fixture; the separate training regression advances live combat and checks graphs, release timing, restart and edict changes. The focused native retry observed **5→4→3→2→1**, cancellation and a new battle after the existing online admission finished. The build had zero errors. No physical mobile device was verified.
+
+The full Edit Mode suite ran once and completed 4,960 tests, but **did not pass overall**. All 25 capped failures returned by MCP match the pre-existing failure list. No final result object was returned, and domain reload discarded the detailed totals; full passed/failed/skipped counts are unavailable. The full suite was not repeated. The 64 directly related tests have complete XML results.
+
+[Scope and source hashes](RiftResultActionsEvidence/validation.json), [related test XML](RiftResultActionsEvidence/related-editmode.xml), [integrated equipment checks](RiftResultActionsEvidence/integrated-equipment.xml), [layout progress](RiftResultActionsEvidence/layout-progress.txt), [retry input report](RiftResultActionsEvidence/runtime-actions.txt), [5-to-1 and entry trace](RiftResultActionsEvidence/retry-diagnostic.txt), [training regression](RiftResultActionsEvidence/training-runtime.txt), [save readback](RiftResultActionsEvidence/save-readback.json), [full suite job](RiftResultActionsEvidence/full-editmode-job.json), [baseline failures](RiftResultActionsEvidence/baseline-failures.json).
+
+![Committed reward receipt over the black dim](RiftResultActionsEvidence/reward-wide-ko.png)
+
+![Shared training DPS chart and cast inspection](RiftResultActionsEvidence/graph-wide-ko.png)
+
+[Portrait result](RiftResultActionsEvidence/result-portrait-ko.png) · [English result](RiftResultActionsEvidence/result-wide-en.png) · [Portrait equipment detail](RiftResultActionsEvidence/loot-detail-portrait-en.png) · [Landscape comparison](RiftResultActionsEvidence/loot-comparison-landscape-en.png) · [Equipped receipt](RiftResultActionsEvidence/loot-equipped-ko.png) · [Portrait reward](RiftResultActionsEvidence/reward-portrait-en.png) · [Portrait retry](RiftResultActionsEvidence/retry-portrait-en.png) · [Four and cancel](RiftResultActionsEvidence/retry-four.png) · [Portrait graph](RiftResultActionsEvidence/graph-portrait-en.png).

@@ -104,7 +104,7 @@ namespace Hellscript
             if(root==null)return;
             bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
-            if(npcDialogue!=null)npcDialogue.Repaint();else if(AttendancePanel!=null)AttendancePanel.Repaint();else if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else pageRepaint?.Invoke();
+            if(npcDialogue!=null)npcDialogue.Repaint();else if(AttendancePanel!=null)AttendancePanel.Repaint();else if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else if(gearRecommendationDetails!=null)gearRecommendationDetails.Repaint();else pageRepaint?.Invoke();
             if(!panelOpen)return;
             ShowCommonPanel(false);SelectSettingsTab(tab);
             Canvas.ForceUpdateCanvases();
@@ -267,7 +267,7 @@ namespace Hellscript
             RefreshGlobalHud();
             RefreshLiveJournal();
             if(game.DisplayDimmed||Page!="battle"||game.Combat==null||timerText==null)return;
-            var run=game.Combat.State;RefreshGrowthHud();
+            var run=game.Combat.State;RefreshGrowthHud();RefreshGearRecommendations();
             if(powerSavingButton!=null)powerSavingButton.interactable=game.CanEnterIdle;
             int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-run.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
             meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));

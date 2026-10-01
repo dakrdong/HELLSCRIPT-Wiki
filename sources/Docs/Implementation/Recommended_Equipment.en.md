@@ -1,14 +1,14 @@
 # Gear score and automatic equipment
 
-Updated: 2026-09-27
+Updated: 2026-10-01
 
 [한국어](Recommended_Equipment.md)
 
-Newly acquired equipment is immediately equipped when it meets the player's rules. Displaced gear is stored, salvaged or sold according to the common setting. Open **Hunt Edict → Auto Equip → Common settings**, choose **Use recommended settings**, and **Save**. The feature starts disabled for both new and existing accounts. Turning Hunt Edict itself off also disables automatic equipment.
+Newly acquired equipment is immediately equipped when it meets the player's rules. Displaced gear is stored, salvaged or sold according to the common setting. Open **Hunt Edict → Auto Equip → Common settings**, turn **Auto-equip recommended gear** ON, and **Save**. The feature starts disabled for both new and existing accounts. Turning Hunt Edict itself off also disables automatic equipment.
 
 ## Player settings
 
-Recommended settings choose higher-score weapons of the same type, higher-score armor and accessories, preserve legendary/set effects, and store replaced gear in the warehouse. Head, chest, hands, feet, belt, necklace, left ring and right ring have independent settings.
+Recommended settings choose higher-score weapons of the same type, higher-score armor and accessories, and store replaced gear in the warehouse. Head, chest, hands, feet, belt, necklace, left ring and right ring have independent settings.
 
 | Equipment | Selection | Replacement rule |
 | --- | --- | --- |
@@ -73,9 +73,11 @@ The score is an intrinsic growth indicator, not a build-specific DPS prediction.
 
 Weapon replacement compares the whole hand configuration. Dual-wield attack damage and base speed are averaged as in `HeroStats`; offensive off-hand attack is added. Shields use an armor reference of 24. Affixes and fixed resistance count once per equipped item; a two-handed weapon counts once. Therefore the **weapon loadout score** can differ from the sum of individual item scores.
 
+When the master switch is OFF, all settings below it are dimmed and unavailable without losing their values. Replaced equipment uses an anchored three-entry list. The full-warehouse shortcut appears only for warehouse storage. The old equipment-score help control has been removed; shared item details still show the score.
+
 ## Protection and acquisition
 
-- **Preserve legendary/set effects** starts enabled. The shared comparison's `lostEffects` protects lost legendary effects, lower effect levels and broken active set bonuses. Players can disable this protection.
+- **Auto-equip exclusions** lists all ten physical positions with checkboxes. A checked position cannot be automatically replaced, filled or indirectly evicted by a two-handed weapon or incompatible off-hand change. Manual equipment is unaffected. Legendary/set-effect preservation is no longer a separate automatic replacement condition.
 - Locked candidates and locked equipped items never auto replace. `EquipmentSlots.Plan` remains authoritative for class, level, hand compatibility, two-handed occupancy and bag capacity. Gems remain on displaced equipment.
 - Natural loot, reward boxes, gambling/crafting and other `Economy.AddItem` acquisitions participate, along with new shop purchases. Evaluation occurs after ownership is established and equipment changes use `EquipmentSlots.Equip`.
 - Real hunt pickups use `GameStore.CommitRecommendedLoot` to save acquisition, equipment, claimed flag and transaction receipt atomically. A save failure leaves ownership/equipment unchanged and pauses hunting for retry.
@@ -95,7 +97,7 @@ HELLSCRIPT adapts the idea of a readable growth indicator alongside detailed opt
 
 Automatic storage and replacement disposal reuse [EquipmentAutomation.cs](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentAutomation.cs), `EdictCleanupPolicy`, `Economy` and `Storage` transactions. `Item.warehouseOrder` and `AccountSave.warehouseSequence` persist deposit order; `Item.pendingAutoStorage` persists deferred storage.
 
-Global edict version 4 contains 151 settings, including 20 recommendation settings and one new warehouse-admission setting. Versions 1, 2 and 3 are validated and upgraded with safe new defaults while preserving previous choices. Old HED2/HED3/HED4/HED5 codes retain their original canonical-form and hash validation; unknown JSON fields are rejected. Scores are derived rather than duplicated in saved items.
+Global edict version 5 contains 152 settings, adding physical-slot exclusions. The deprecated effect-preservation field remains known only for save/share compatibility. Versions 1, 2, 3 and 4 are validated and upgraded with safe new defaults while preserving previous choices. Old HED2/HED3/HED4/HED5 codes retain their original canonical-form and hash validation; unknown JSON fields are rejected. Scores are derived rather than duplicated in saved items.
 
 ## Initial recommendation validation
 
@@ -122,3 +124,7 @@ Native acceptance used isolated account fixtures and synthetic pointer input. Th
 - CoplayDev MCP reported no connected Editor, so validation used batch Unity in the isolated worktree and the existing macOS player workflow. Physical mobile input and device performance were not tested. Public wiki deployment remains a merged-main step.
 
 Captures: [portrait disposal](RecommendedStorageEvidence/displaced-440x956-ko.png), [landscape disposal](RecommendedStorageEvidence/displaced-956x440-en.png), [portrait admission](RecommendedStorageEvidence/warehouse-admission-440x956-ko.png), [landscape admission](RecommendedStorageEvidence/warehouse-admission-956x440-en.png), [PC repeat settings](RecommendedStorageEvidence/warehouse-1600x1000-en.png).
+
+## Rift recommendation offers and tab activation
+
+See [Hunt Edict control refinement](Hunt_Edict_Control_Refinement.en.md) for per-part loot offers, saved acknowledgement, shared details/comparison and per-tab single-choice activation. Earlier evidence below retains its original historical scope; text-size variants are no longer part of acceptance.

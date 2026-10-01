@@ -299,7 +299,7 @@ namespace Hellscript
         public int chainCharges;
     }
     [Serializable]
-    public sealed class DropState { public RiftLootSource source;public RiftLootOutcome outcome; public int id; public Vector2 position; public Item item; public bool ignored, claimed, discovered; }
+    public sealed class DropState { public RiftLootSource source;public RiftLootOutcome outcome; public int id; public Vector2 position; public Item item; public bool ignored, claimed, discovered; public bool gearRecommended,gearHandled; }
     [Serializable]
     public sealed class RunState
     {

@@ -132,6 +132,7 @@ namespace Hellscript
         }
         void ClearBattleLayout()
         {
+            ClearGearRecommendations();
             if(battleWorld!=null){battleWorld.gameObject.SetActive(false);Destroy(battleWorld.gameObject);}
             battleWorld=null;battleSize=Vector2.zero;BattleViewport=UiSafeArea.FrameNormalized;
         }

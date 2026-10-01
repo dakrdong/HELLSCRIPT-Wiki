@@ -53,15 +53,15 @@ namespace Hellscript
         {
             string scope=SkillPolicyScope,shown=VisibleSkillPreset,active=ActiveSkillPreset;
             bool custom=shown==HuntEdictQuickPresets.Custom,usingShown=shown==active&&HuntEdictSkillPresets.SamePolicy(Session.Draft,OwnedSkillPolicy,scope);
-            float heading=31*Grow,backWidth=Mathf.Min(101*Grow,w*.31f),actionWidth=Mathf.Min(92*Grow,w*.26f);
+            float heading=31*Grow,backWidth=Mathf.Min(101*Grow,w*.31f);
             Button(parent,"스킬 트리로",x,y,backWidth,heading,()=>SelectSkillPage(true),"button-idle",11).name="edict-policy-back";
             if(policySkill=="BASIC")
             {
-                float rest=w-backWidth-actionWidth-12*Grow;
+                float rest=w-backWidth-12*Grow;
                 Button(parent,"기본 공격",x+backWidth+6*Grow,y,rest*.47f,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",10).name="edict-policy-basic";
                 Button(parent,"공통 공격 순서",x+backWidth+6*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
             }
-            else Text(parent,SkillName(policySkill),x+backWidth+8*Grow,y,w-backWidth-actionWidth-16*Grow,heading,12,gold);
+            else Text(parent,SkillName(policySkill),x+backWidth+8*Grow,y,w-backWidth-16*Grow,heading,12,gold);
             var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+6,w,100);
             var presets=HuntEdictQuickPresets.For(scope);
             var ids=presets.Select(p=>p.id).Concat(new[]{HuntEdictQuickPresets.Custom}).ToArray();
@@ -72,22 +72,26 @@ namespace Hellscript
             {
                 string id=ids[i],name=id==HuntEdictQuickPresets.Custom?Loc.T("직접 설정"):presets.Single(p=>p.id==id).Name;
                 var b=Button(tabs,name,(i%columns)*cell,(i/columns)*tabHeight,cell-3,tabHeight,()=>PreviewSkillPreset(id),shown==id?"tab-current":"tab-idle",11);
-                b.name="edict-preset-tab-"+id;var t=b.GetComponentInChildren<Text>();Place(t.rectTransform,6,0,cell-28,1000);t.alignment=TextAnchor.MiddleLeft;
+                b.name="edict-preset-tab-"+id;var t=b.GetComponentInChildren<Text>();Place(t.rectTransform,6,0,cell-43*Grow,1000);t.alignment=TextAnchor.MiddleLeft;
                 tabHeight=Mathf.Max(tabHeight,t.preferredHeight+12);buttons.Add(b);
             }
             for(int i=0;i<buttons.Count;i++)
             {
                 var b=buttons[i];Place((RectTransform)b.transform,(i%columns)*cell,(i/columns)*(tabHeight+2),cell-3,tabHeight);
-                Place(b.GetComponentInChildren<Text>().rectTransform,6,0,cell-28,tabHeight);
-                if(ids[i]==active){Glyph(b.transform,"confirm",cell-23,(tabHeight-13)/2,13,13,UiTheme.Success);b.transform.GetChild(b.transform.childCount-1).name="Active preset mark";}
+                Place(b.GetComponentInChildren<Text>().rectTransform,6,0,cell-43*Grow,tabHeight);
+                string id=ids[i];bool selected=id==active;
+                float box=24*Grow;
+                var radio=Button(b.transform,selected?"✓":"",cell-box-8*Grow,(tabHeight-box)/2,box,box,()=>
+                {previewSkillPresets[scope]=id;offsets[ScrollKey]=0;ActivateSkillPreset();},selected?"preset-radio-on":"preset-radio-off",14);
+                radio.name=id==shown?"edict-preset-activate":"edict-preset-radio-"+id;
+                ((UiButton)radio).Configure(UiButtonRole.Icon,selected);radio.targetGraphic.canvasRenderer.SetAlpha(1);
+                radio.interactable=!(selected&&HuntEdictSkillPresets.SamePolicy(Session.Draft,OwnedSkillPolicy,scope));
+                if(selected){radio.GetComponentInChildren<Text>().color=UiTheme.Success;radio.GetComponentInChildren<Text>().name="Active preset mark";}
             }
             float tabTotal=rows*(tabHeight+2);Place(tabs,x,y+heading+6,w,tabTotal);
             float plateY=y+heading+6+tabTotal,plateH=h-(plateY-y);
             var plate=Panel(parent,"Skill preset panel","skill-inspector");Place(plate,x,plateY,w,plateH);
             float actions=0;
-            var use=Button(parent,usingShown?"활성 중":"활성화",x+w-actionWidth,y+3*Grow,actionWidth,heading-6*Grow,ActivateSkillPreset,usingShown?"chip-on":"button-primary",10);
-            use.name="edict-preset-activate";use.interactable=!usingShown;
-            if(usingShown)use.GetComponentInChildren<Text>().color=UiTheme.Success;
             mainScroll=Scroll(plate,"Skill preset content",6,actions,w-12,Mathf.Max(24,plateH-actions-6),out var list);float inner=w-26;
             if(custom)
             {

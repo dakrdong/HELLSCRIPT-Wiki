@@ -337,6 +337,7 @@ namespace Hellscript
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             RiftResult.SyncDisposals(Data.suspendedRun,staged.suspendedRun);
+            RiftGearRecommendations.Sync(Data.suspendedRun,staged.suspendedRun);
             var liveResult=Data.repeatHunt?.pendingResult;RiftResult.SyncDisposals(liveResult,staged.repeatHunt?.pendingResult);
             if(liveResult!=null&&staged.repeatHunt?.pendingResult?.id==liveResult.id)staged.repeatHunt.pendingResult=liveResult;
             Data.repeatHunt=staged.repeatHunt;Data.records=staged.records;
