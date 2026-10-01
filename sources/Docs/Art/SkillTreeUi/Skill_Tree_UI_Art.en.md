@@ -37,3 +37,5 @@ Default import caps frames and the gem at 512 px and the backdrop at 1024 px, co
 ## Status
 
 In use by the skill tree screen. The generator model cannot be verified, so the art is not marked release-approved.
+
+2026-10-01: two emerald equipped-state variants were generated using the original active and ultimate frames as image references. Both states share their registration; the procedural equipped circle is removed. [Artwork, registration and validation](../../Implementation/Hunt_Edict_Equipped_Seals.en.md) · [Prompts and provenance](equipped-frame-provenance.json).

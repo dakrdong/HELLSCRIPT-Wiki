@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "created": "2026-10-01",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in reference-image edit",
+  "model": null,
+  "provenanceStatus": "candidate_model_unknown",
+  "modelNote": "The callable built-in surface returns no verifiable model name. Do not claim a specific image model or final art approval.",
+  "nativeAlpha": true,
+  "postProcessing": "None. Native generated PNGs copied byte-for-byte; no drawing, cropping, recoloring or background removal.",
+  "registration": "Equipped variants replace the bronze frame in the same centered RectTransform with the same original ActiveHole/UltimateHole scale. No independently positioned overlay or procedural equipped outline.",
+  "assets": [
+    {
+      "file": "Assets/HELLSCRIPT/Resources/Art/SkillTree/node-frame-active-equipped.png",
+      "reference": "Assets/HELLSCRIPT/Resources/Art/SkillTree/node-frame-active.png",
+      "sourceSha256": "2db1443a762141c643ad2e40627a526cb14f5e25fe803212abbf96a169955c34",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "transparentPixels": 1022465,
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opening": 0.652,
+      "referenceOpening": 0.657,
+      "clearInteriorMaxAlpha": 1,
+      "prompt": "Edit the supplied HELLSCRIPT skill seal frame image into an EQUIPPED variant for an actual Unity game UI sprite. Preserve the reference frame EXACTLY: same circle, same eight pointed ornaments, same iron/brass filigree, same centered position, same relative scale, same inner opening, and same square canvas registration. Do not redesign, simplify, rotate, move, add or remove any ornament. Keep the dark metal and antique gold body recognizable. Only add a refined emerald-green luminous edge running precisely along the existing inner and outer metal borders and the ornament contours, with a very narrow soft green bloom. A bright pale green hairline at the metal edge, richer emerald glow immediately beside it. The equipped state must read clearly at a 72px icon size, but there must be no green disk, wide halo, solid badge, new ring, disconnected circle, number, letter or decoration. Match the original silhouette instead of drawing a geometric circle around it. The output must be a true RGBA transparent PNG with native alpha preserved. The central circular opening and all surrounding empty areas, including all four corners and gaps between ornaments, must remain fully transparent (alpha 0). No background, scenery, checkerboard, floor, frame outside the reference, shadow plate, matte or text. Keep any glow tightly confined to the metal edges with a little transparent outer margin; no clipping. Return only this one isolated equipped skill frame, front-facing and centered. This is an edit of the reference asset, not a mockup."
+    },
+    {
+      "file": "Assets/HELLSCRIPT/Resources/Art/SkillTree/node-frame-ultimate-equipped.png",
+      "reference": "Assets/HELLSCRIPT/Resources/Art/SkillTree/node-frame-ultimate.png",
+      "sourceSha256": "4912d48a4a8655735218c7d9cb9ac5f5d47ab47d76827b8ed54dd850707f8cae",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "transparentPixels": 1180976,
+      "cornersAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opening": 0.573,
+      "referenceOpening": 0.579,
+      "clearInteriorMaxAlpha": 1,
+      "prompt": "Edit the supplied HELLSCRIPT ULTIMATE skill seal frame image into an EQUIPPED variant for an actual Unity game UI sprite. Preserve the reference EXACTLY: the same centered circular opening, same four long diamond-crest points, same forged iron and antique brass filigree, same internal proportions, same registration and relative scale on the square canvas. Do not redesign, round off the diamond tips, change the opening, rotate, shift, add or remove any ornament. Keep the bronze/dark-iron frame body. Only add an elegant emerald-green luminous hairline precisely following existing inner and outer metal borders and the contours of the four pointed crest ornaments. Thin pale-green edge with narrowly contained emerald bloom, readable at an 80px game icon size. Recolor the four tiny red inset gems to softly glowing emerald, while retaining the original gem outlines. Keep this restrained, clear and premium. No broad halo, green disk, filled opening, new free-floating geometric ring, extra badge, number, text, signature or new decoration. Native RGBA PNG transparency MUST be preserved: the center and entire empty circular aperture, all gaps between ornaments, and all surrounding empty pixels including the four corners fully transparent alpha 0. No backdrop, scenery, checkerboard, floor, solid plate, unwanted shadow or matte. Align glow to the actual existing metal silhouette; do not draw a simple circle around the crest. Leave just enough transparent margin for a tightly confined rim glow, no clipping. Output one isolated front-facing equipped ultimate frame only, using the supplied reference as the geometry."
+    }
+  ],
+  "alphaNote": "The clear aperture contains only alpha 0 and sub-visible 1/255 residue, consistent with the original generated frames. Center and four corners are alpha 0. Native alpha was preserved unchanged."
+}

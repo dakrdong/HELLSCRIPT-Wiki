@@ -37,3 +37,5 @@ python3 Docs/Art/SkillTreeUi/measure.py
 ## 상태
 
 스킬 트리 화면에서 사용 중입니다. 생성 모델을 확인할 수 없으므로 출시 승인 자산으로 표시하지 않습니다.
+
+2026-10-01: 기존 액티브·궁극기 원화를 참조한 초록빛 장착 인장 두 장을 추가했습니다. 일반·장착 인장은 같은 배치를 쓰며, 코드로 그리던 장착 원은 제거했습니다. [그림·배치·검증](../../Implementation/Hunt_Edict_Equipped_Seals.md) · [프롬프트와 출처](equipped-frame-provenance.json).
