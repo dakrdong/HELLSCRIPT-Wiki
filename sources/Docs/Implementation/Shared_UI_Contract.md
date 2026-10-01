@@ -180,3 +180,5 @@
 전투 중 DPS 패널과 일시정지 창은 기존 전투 HUD 캔버스(`GameUI`)의 어댑터이고, 그래프는 텍스처 없는 `TrainingDpsChart` 메시를 `TrainingChartView`가 감싼다. `TrainingChartView`는 스킬 사용 시점 아이콘(`SkillIconView`)과 결과 화면의 조사 툴팁(마우스 올림·터치, 세로로 문지르면 페이지 스크롤로 넘김)을 더한다. 글자 없는 버튼(연필·접기·삭제)은 `UiIconButton`, 목록 상자(등급·마릿수)는 `UiDropdown`, 슬라이더는 기존 `SettingsStepSlider`, 스킬별 피해 카드는 균열 결과와 공유하는 `RiftSkillShareView`를 쓴다. 아이콘 그림은 Codex가 그린 흰색 픽토그램(`Resources/Art/TrainingGround/Icons`)에 색을 입혀 쓰며, 새 선 아이콘을 `StorageGlyph`에 더하지 않았다. 글꼴·색·버튼·스킬 아이콘은 `UiFonts`, `UiTheme`, `ContentWindowView.Button`, `SkillIconView`를 공유한다. [구현과 검증](Training_Ground.md)을 따른다.
 
 2026-10-01: 스킬 트리의 장착 표시는 숫자 없이 얇은 인장 둘레선으로 구분한다. 트리에서는 노드 옆 작은 말풍선(+ 또는 −·두루마리/붓 편집)을 쓰고, 세부 프리셋의 장착 스킬은 팝업 없이 바로 탐색한다. 기존 편집·저장 소유권과 아이콘의 액티브 원형·패시브 정사각형 규칙은 유지한다. [최신 변경](Hunt_Edict_Simple_Skill_Actions.md).
+
+2026-10-01: 사냥 칙령은 공통 `UiButtonChrome.Minimal` 양식(무광 바탕·한 줄 테두리·작은 둥근 모서리)을 선택합니다. 스킬 편집은 내장 이미지 생성기로 만든 두루마리·붓 PNG를 표시합니다. 입력·선택·저장 소유권은 기존 공통 부품과 모델을 유지합니다. [그림 출처와 버튼 표시](Hunt_Edict_Polished_Actions.md).

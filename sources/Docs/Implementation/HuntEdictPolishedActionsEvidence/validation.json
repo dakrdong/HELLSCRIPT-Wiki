@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-01",
+  "codeCommit": "f9d028c6",
+  "baselineCommit": "eacc8ad2",
+  "unity": "6000.6.0f1",
+  "sharedUiContract": "PASS",
+  "sharedUiContractTests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "editMode": {
+    "scope": [
+      "Hellscript.Tests.UiButtonTests",
+      "Hellscript.Tests.HuntEdictOverviewTests"
+    ],
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 7.5244028
+  },
+  "nativeMacBuild": {
+    "result": "PASS",
+    "errors": 0
+  },
+  "nativeUi": {
+    "result": "PASS",
+    "profiles": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textScale": "default only",
+    "input": "synthetic uGUI pointer events with real raycast and transactions in native macOS Player",
+    "captures": 38,
+    "restartPersistence": "PASS",
+    "physicalMobile": "not run"
+  },
+  "primaryEditor": {
+    "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT",
+    "ready": true,
+    "newCompilationErrors": 0,
+    "existingConsoleExceptions": "5 Unity AI NoSubscription exceptions; unrelated to this change and not cleared"
+  },
+  "asset": {
+    "model": null,
+    "provenance": "candidate_model_unknown",
+    "sha256": "f9ecdd80c65862ac0b73ed1fc051798fc470d951f08f578547fbcec87bfe64f9"
+  },
+  "cadence": "One final combined native smoke with a separate fresh-process persistence leg. No unrelated full suite or text-scale tests."
+}

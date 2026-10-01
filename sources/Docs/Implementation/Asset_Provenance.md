@@ -4,6 +4,8 @@
 
 ## 내장 이미지 생성
 
+- 2026-10-01 사냥 칙령의 두루마리·붓 편집 그림은 내장 `image_gen`의 투명 PNG 생성으로 제작했다. 원본 RGBA와 알파를 변경 없이 보존했으며 코드로 그린 이전 그림을 교체했다. 호출에 모델명이 없어 `candidate_model_unknown`으로 기록한다. [실제 게임 연결과 검증](Hunt_Edict_Polished_Actions.md), [정확한 생성 문구·해시](../../Assets/HELLSCRIPT/Art/HuntEdict/action-icon-provenance.json).
+
 - `Assets/HELLSCRIPT/Resources/Art/Sanctuary.png`: 성소·결과 화면 배경, 1024×1536.
 - `Assets/HELLSCRIPT/Resources/Art/SkillAtlas.png`: 18개 액티브, 3개 직업, 3개 장비 표시용 아틀라스, 1536×1024. Unity의 UV 영역으로 사용하며 원본 PNG를 다시 편집하지 않았다.
 - 생성 경로: Codex 내장 `image_gen`, 직접 API·CLI 미사용.

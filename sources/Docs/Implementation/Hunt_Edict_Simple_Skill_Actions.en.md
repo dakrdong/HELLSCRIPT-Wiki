@@ -6,7 +6,7 @@ Updated: 2026-10-01 · [한국어](Hunt_Edict_Simple_Skill_Actions.md)
 
 - The Overview body contains only Aggressive, Balanced and Careful cards and their descriptions. It does not list equipment, use policies, combat judgments, automation or last-hunt advice. The default-policy On/Off switch stays above it.
 - Equipped actives and ultimates use one thin seal outline without slot-number badges. Actual rank/max rank stays below the seal. Empty equipment sockets have no numerals either.
-- A tree active or ultimate opens an adjacent bubble: + if unequipped; − and an edit pictogram if equipped. The edit pictogram is a rolled parchment with a writing brush, using the existing vector renderer and shared colors; no raster asset or new canvas is added.
+- A tree active or ultimate opens an adjacent bubble: + if unequipped; − and an edit pictogram if equipped. The edit pictogram uses a native-alpha parchment and brush PNG from the built-in image generator. The former code drawing is removed. See [latest appearance and provenance](Hunt_Edict_Polished_Actions.en.md).
 - Passives always apply by their allocated rank and have no equipment action. An unlearned active has a disabled + and retains unlock information in the inspector.
 - Another equipped skill on the detailed preset page navigates directly to its policy without an equipment popup.
 
@@ -31,3 +31,5 @@ One combined native acceptance batch covered default text size at portrait 440×
 ![Landscape English Overview](HuntEdictSimpleActionsEvidence/overview-956x440-en.png)
 
 Input evidence uses uGUI raycasts and synthetic pointer events in the macOS native Player, not physical mobile devices. No text-size matrix or full combat-example gallery was run. Existing URP postprocessing shader warnings were observed without a C# or interaction failure in this UI. Successful coverage is reused after merges/document updates when the relevant code and configuration are unchanged.
+
+2026-10-01: The code-drawn parchment glyph has been replaced by a native-alpha PNG from the built-in image-generation tool. Hunt Edict uses the optional shared minimal button appearance. [Latest appearance and provenance](Hunt_Edict_Polished_Actions.en.md).

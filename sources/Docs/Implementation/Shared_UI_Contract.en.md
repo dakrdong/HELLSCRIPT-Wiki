@@ -160,3 +160,5 @@ The live DPS panel and the pause dialog are adapters on the existing battle HUD 
 The user removed the text-size multiplier on 2026-09-30. Do not run or add text-size matrices or enlarged-text-only acceptance. Retain viewport/safe-area layouts, default-size clipping checks and actual input coverage. See [removal scope](Text_Size_Option_Removal.en.md).
 
 2026-10-01: equipped tree nodes use a thin seal outline without slot-number badges. Tree actions are compact adjacent bubbles (+ or − and parchment/brush editing); the preset-page skill rail navigates directly without a popup. Draft/save ownership and active-circle/passive-square icons remain shared. [Latest change](Hunt_Edict_Simple_Skill_Actions.en.md).
+
+2026-10-01: Hunt Edict opts into shared `UiButtonChrome.Minimal`: matte faces, one outline and small rounded corners. Skill editing uses the built-in-generated parchment and brush PNG. Shared input/choice state and existing transaction ownership remain unchanged. [Artwork and button appearance](Hunt_Edict_Polished_Actions.en.md).
