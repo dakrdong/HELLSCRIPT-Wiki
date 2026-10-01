@@ -1,0 +1,54 @@
+[
+  {
+    "name": "daily",
+    "flags": [
+      "-hellscriptDailyQuestSmoke"
+    ],
+    "save": "daily-retry-save",
+    "exitCode": 0,
+    "successMarker": "HELLSCRIPT_DAILY_QUEST_RUNTIME_OK",
+    "resultFile": "daily-runtime.txt",
+    "matrixLayouts": 120,
+    "geometryChecks": 124,
+    "raycastClicks": 14,
+    "immobileBodyDrags": 120
+  },
+  {
+    "name": "daily-restart",
+    "flags": [
+      "-hellscriptDailyQuestSmoke",
+      "-hellscriptDailyQuestResume"
+    ],
+    "save": "daily-retry-save",
+    "startedUtc": "2026-10-01T08:54:21.226150+00:00",
+    "durationSeconds": 6.22,
+    "exitCode": 0,
+    "resultFile": "daily-restart.txt",
+    "successMarker": "HELLSCRIPT_DAILY_QUEST_RESTART_OK"
+  },
+  {
+    "name": "attendance",
+    "flags": [
+      "-hellscriptAttendanceSmoke"
+    ],
+    "save": "attendance-save",
+    "startedUtc": "2026-10-01T08:54:27.449003+00:00",
+    "durationSeconds": 60.23,
+    "exitCode": 0,
+    "resultFile": "attendance-runtime.txt",
+    "successMarker": "HELLSCRIPT_ATTENDANCE_RUNTIME_OK"
+  },
+  {
+    "name": "attendance-restart",
+    "flags": [
+      "-hellscriptAttendanceSmoke",
+      "-hellscriptAttendanceResume"
+    ],
+    "save": "attendance-save",
+    "startedUtc": "2026-10-01T08:55:27.684686+00:00",
+    "durationSeconds": 6.5,
+    "exitCode": 0,
+    "resultFile": "attendance-restart.txt",
+    "successMarker": "HELLSCRIPT_ATTENDANCE_RESUME_OK"
+  }
+]

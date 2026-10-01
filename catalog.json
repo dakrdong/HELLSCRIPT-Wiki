@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T17:55:26+09:00",
+  "generatedAt": "2026-10-01T19:55:28+09:00",
   "databases": [
     {
       "id": "resources",
@@ -171591,6 +171591,90 @@
       "name": "검증 기록",
       "description": "보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.",
       "rows": [
+        {
+          "id": "prechange-daily-ui-parameters-editmode",
+          "name": "prechange-daily-ui-parameters-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "0 / 70 통과 · Failed(Child) · prechange-daily-ui-parameters",
+          "fields": {
+            "검사 단계": "prechange-daily-ui-parameters",
+            "보고서 구분": "단일 보고서",
+            "보고된 결과": "Failed(Child)",
+            "전체 검사": "70",
+            "통과": "0",
+            "실패": "70",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-10-01 09:27:59Z",
+            "소요 시간 (초)": "16.211631",
+            "해석": "2026-10-01 스크롤 없는 일일 퀘스트의 전체 검사와 변경 전 소스의 실패 재현 기록입니다. 실패 비교, 간격 보정 뒤 집중 검사와 macOS 조작·저장·재시작 결과는 연결된 문서에 기록합니다. 각 실행을 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/DailyQuestResponsiveEvidence20261001/prechange-daily-ui-parameters-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 실패",
+          "related": [
+            "daily-quests",
+            "daily-quests.en"
+          ],
+          "endTime": "2026-10-01 09:27:59Z"
+        },
+        {
+          "id": "prechange-daily-ui-failed-only-editmode",
+          "name": "prechange-daily-ui-failed-only-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "0 / 11 통과 · Failed(Child) · prechange-daily-ui-failed-only",
+          "fields": {
+            "검사 단계": "prechange-daily-ui-failed-only",
+            "보고서 구분": "단일 보고서",
+            "보고된 결과": "Failed(Child)",
+            "전체 검사": "11",
+            "통과": "0",
+            "실패": "11",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-10-01 09:26:03Z",
+            "소요 시간 (초)": "18.1075248",
+            "해석": "2026-10-01 스크롤 없는 일일 퀘스트의 전체 검사와 변경 전 소스의 실패 재현 기록입니다. 실패 비교, 간격 보정 뒤 집중 검사와 macOS 조작·저장·재시작 결과는 연결된 문서에 기록합니다. 각 실행을 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/DailyQuestResponsiveEvidence20261001/prechange-daily-ui-failed-only-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 실패",
+          "related": [
+            "daily-quests",
+            "daily-quests.en"
+          ],
+          "endTime": "2026-10-01 09:26:03Z"
+        },
+        {
+          "id": "responsive-daily-20261001-final-editmode",
+          "name": "responsive-daily-20261001-final-editmode.xml",
+          "category": "Unity Edit Mode",
+          "summary": "4868 / 4996 통과 · Failed(Child) · responsive-daily-20261001",
+          "fields": {
+            "검사 단계": "responsive-daily-20261001",
+            "보고서 구분": "final",
+            "보고된 결과": "Failed(Child)",
+            "전체 검사": "4996",
+            "통과": "4868",
+            "실패": "128",
+            "건너뜀": "0",
+            "검사 종료 (UTC)": "2026-10-01 09:19:10Z",
+            "소요 시간 (초)": "1867.8071088",
+            "해석": "2026-10-01 스크롤 없는 일일 퀘스트의 전체 검사와 변경 전 소스의 실패 재현 기록입니다. 실패 비교, 간격 보정 뒤 집중 검사와 macOS 조작·저장·재시작 결과는 연결된 문서에 기록합니다. 각 실행을 합산하지 않습니다."
+          },
+          "source": {
+            "path": "Docs/Implementation/DailyQuestResponsiveEvidence20261001/responsive-daily-20261001-final-editmode.xml",
+            "line": 1
+          },
+          "status": "당시 실패",
+          "related": [
+            "daily-quests",
+            "daily-quests.en"
+          ],
+          "endTime": "2026-10-01 09:19:10Z"
+        },
         {
           "id": "fixed-daily-20261001-final-editmode",
           "name": "fixed-daily-20261001-final-editmode.xml",

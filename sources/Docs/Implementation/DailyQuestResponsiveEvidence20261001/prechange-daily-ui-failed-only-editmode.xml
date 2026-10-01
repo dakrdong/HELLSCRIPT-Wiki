@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="11" result="Failed(Child)" total="11" passed="0" failed="11" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-01 09:25:45Z" end-time="2026-10-01 09:26:03Z" duration="18.1075248">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:25:45Z" end-time="2026-10-01 09:26:03Z" duration="18.107525" total="11" passed="0" failed="11" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="6750" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:25:48Z" end-time="2026-10-01 09:26:03Z" duration="14.651686" total="11" passed="0" failed="11" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="50776" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="6751" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:25:52Z" end-time="2026-10-01 09:26:03Z" duration="11.071210" total="11" passed="0" failed="11" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="6752" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:25:55Z" end-time="2026-10-01 09:26:03Z" duration="7.616905" total="11" passed="0" failed="11" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1522" name="BossTests" fullname="Hellscript.Tests.BossTests" classname="Hellscript.Tests.BossTests" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-10-01 09:26:01Z" end-time="2026-10-01 09:26:01Z" duration="0.331241" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1561" name="AHookAlreadyInFlightRestoresItsPullAndCastIdentityExactlyOnce" fullname="Hellscript.Tests.BossTests.AHookAlreadyInFlightRestoresItsPullAndCastIdentityExactlyOnce" methodname="AHookAlreadyInFlightRestoresItsPullAndCastIdentityExactlyOnce" classname="Hellscript.Tests.BossTests" runstate="Runnable" seed="1113940113" result="Failed" start-time="2026-10-01 09:26:01Z" end-time="2026-10-01 09:26:01Z" duration="0.191148" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  tick 0
+  Expected string length 33269 but was 33276. Strings differ at index 27928.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.BossTests.AHookAlreadyInFlightRestoresItsPullAndCastIdentityExactlyOnce () [0x0006e] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossTests.cs:170
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1623" name="ChargeTests" fullname="Hellscript.Tests.ChargeTests" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" testcasecount="23" result="Failed" site="Child" start-time="2026-10-01 09:26:01Z" end-time="2026-10-01 09:26:01Z" duration="0.202613" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1645" name="PendingCostBonusesAndInternalCooldownsRestoreAndFreezeWithTheRun" fullname="Hellscript.Tests.ChargeTests.PendingCostBonusesAndInternalCooldownsRestoreAndFreezeWithTheRun" methodname="PendingCostBonusesAndInternalCooldownsRestoreAndFreezeWithTheRun" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" seed="344390162" result="Failed" start-time="2026-10-01 09:26:01Z" end-time="2026-10-01 09:26:01Z" duration="0.041276" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected string length 31604 but was 31611. Strings differ at index 26079.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.ChargeTests.PendingCostBonusesAndInternalCooldownsRestoreAndFreezeWithTheRun () [0x00084] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ChargeTests.cs:154
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1637" name="RetreatLegendCreatesItsTrapAtDepartureAndNeverCreatesItAgainAtLanding" fullname="Hellscript.Tests.ChargeTests.RetreatLegendCreatesItsTrapAtDepartureAndNeverCreatesItAgainAtLanding" methodname="RetreatLegendCreatesItsTrapAtDepartureAndNeverCreatesItAgainAtLanding" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" seed="1071443047" result="Failed" start-time="2026-10-01 09:26:01Z" end-time="2026-10-01 09:26:01Z" duration="0.051295" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected string length 35166 but was 35204. Strings differ at index 29009.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[{"id":"A04","t..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.ChargeTests.RetreatLegendCreatesItsTrapAtDepartureAndNeverCreatesItAgainAtLanding () [0x000f0] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ChargeTests.cs:97
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2434" name="EdictChainTests" fullname="Hellscript.Tests.EdictChainTests" classname="Hellscript.Tests.EdictChainTests" runstate="Runnable" testcasecount="50" result="Failed" site="Child" start-time="2026-10-01 09:26:01Z" end-time="2026-10-01 09:26:02Z" duration="0.228707" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2482" name="PaidCastKeepsItsFirstTargetAndReservedBonusAcrossEditingAndRestart" fullname="Hellscript.Tests.EdictChainTests.PaidCastKeepsItsFirstTargetAndReservedBonusAcrossEditingAndRestart" methodname="PaidCastKeepsItsFirstTargetAndReservedBonusAcrossEditingAndRestart" classname="Hellscript.Tests.EdictChainTests" runstate="Runnable" seed="950196077" result="Failed" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.071782" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  replay tick 0
+  Expected string length 40178 but was 40181. Strings differ at index 28510.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EdictChainTests.PaidCastKeepsItsFirstTargetAndReservedBonusAcrossEditingAndRestart () [0x0010c] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictChainTests.cs:169
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2547" name="EdictFireballTests" fullname="Hellscript.Tests.EdictFireballTests" classname="Hellscript.Tests.EdictFireballTests" runstate="Runnable" testcasecount="39" result="Failed" site="Child" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.201098" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2584" name="ACompiledCastRetainsItsAimAndPolicyThroughSaveRestoration" fullname="Hellscript.Tests.EdictFireballTests.ACompiledCastRetainsItsAimAndPolicyThroughSaveRestoration" methodname="ACompiledCastRetainsItsAimAndPolicyThroughSaveRestoration" classname="Hellscript.Tests.EdictFireballTests" runstate="Runnable" seed="1480629635" result="Failed" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.047110" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  replay tick 0
+  Expected string length 32439 but was 32442. Strings differ at index 27545.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EdictFireballTests.ACompiledCastRetainsItsAimAndPolicyThroughSaveRestoration () [0x0010d] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictFireballTests.cs:174
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2956" name="EdictShieldTests" fullname="Hellscript.Tests.EdictShieldTests" classname="Hellscript.Tests.EdictShieldTests" runstate="Runnable" testcasecount="48" result="Failed" site="Child" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.237256" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3004" name="PreparationAndConsumedOpeningSurviveEditsAndIndependentRestore" fullname="Hellscript.Tests.EdictShieldTests.PreparationAndConsumedOpeningSurviveEditsAndIndependentRestore" methodname="PreparationAndConsumedOpeningSurviveEditsAndIndependentRestore" classname="Hellscript.Tests.EdictShieldTests" runstate="Runnable" seed="1774906450" result="Failed" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.088699" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected string length 33767 but was 33806. Strings differ at index 28318.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[{"id":"M05","t..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EdictShieldTests.PreparationAndConsumedOpeningSurviveEditsAndIndependentRestore () [0x00175] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictShieldTests.cs:127
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3084" name="EdictTargetIntegrationTests" fullname="Hellscript.Tests.EdictTargetIntegrationTests" classname="Hellscript.Tests.EdictTargetIntegrationTests" runstate="Runnable" testcasecount="34" result="Failed" site="Child" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.191580" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3111" name="ACheckpointKeepsThePursuitClockAndFutureDecisions" fullname="Hellscript.Tests.EdictTargetIntegrationTests.ACheckpointKeepsThePursuitClockAndFutureDecisions" methodname="ACheckpointKeepsThePursuitClockAndFutureDecisions" classname="Hellscript.Tests.EdictTargetIntegrationTests" runstate="Runnable" seed="407501960" result="Failed" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.065184" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected string length 33635 but was 33638. Strings differ at index 28098.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EdictTargetIntegrationTests.ACheckpointKeepsThePursuitClockAndFutureDecisions () [0x00199] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictTargetIntegrationTests.cs:143
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3124" name="EdictTeleportTests" fullname="Hellscript.Tests.EdictTeleportTests" classname="Hellscript.Tests.EdictTeleportTests" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.179470" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3155" name="PaidDestinationSurvivesOptionEditsTargetLossAndIndependentRestoration" fullname="Hellscript.Tests.EdictTeleportTests.PaidDestinationSurvivesOptionEditsTargetLossAndIndependentRestoration" methodname="PaidDestinationSurvivesOptionEditsTargetLossAndIndependentRestoration" classname="Hellscript.Tests.EdictTeleportTests" runstate="Runnable" seed="1277478668" result="Failed" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:02Z" duration="0.068855" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  tick 0
+  Expected string length 32569 but was 32572. Strings differ at index 27543.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EdictTeleportTests.PaidDestinationSurvivesOptionEditsTargetLossAndIndependentRestoration () [0x000c1] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictTeleportTests.cs:108
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3368" name="EditorNullPatternTests" fullname="Hellscript.Tests.EditorNullPatternTests" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:03Z" duration="0.195328" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3374" name="NoGetComponentResultIsCombinedWithCSharpNullOperators" fullname="Hellscript.Tests.EditorNullPatternTests.NoGetComponentResultIsCombinedWithCSharpNullOperators" methodname="NoGetComponentResultIsCombinedWithCSharpNullOperators" classname="Hellscript.Tests.EditorNullPatternTests" runstate="Runnable" seed="1030277358" result="Failed" start-time="2026-10-01 09:26:02Z" end-time="2026-10-01 09:26:03Z" duration="0.184017" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Use TryGetComponent or a Unity == null check instead of ?? / ?. on GetComponent results:
+RiftVictoryWindow.cs:466  var group=repeatSettingsButton.GetComponent<CanvasGroup>()??repeatSettingsButton.gameObject.AddComponent<CanvasGroup>();group.alpha=shownConfigured?1:.35f;
+  Expected: <empty>
+  But was:  < "RiftVictoryWindow.cs:466  var group=repeatSettingsButton.GetComponent<CanvasGroup>()??repeatSettingsButton.gameObject.AddComponent<CanvasGroup>();group.alpha=shownConfigured?1:.35f;" >
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EditorNullPatternTests.NoGetComponentResultIsCombinedWithCSharpNullOperators () [0x000a2] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EditorNullPatternTests.cs:48
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3375" name="EffectTests" fullname="Hellscript.Tests.EffectTests" classname="Hellscript.Tests.EffectTests" runstate="Runnable" testcasecount="37" result="Failed" site="Child" start-time="2026-10-01 09:26:03Z" end-time="2026-10-01 09:26:03Z" duration="0.167975" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3409" name="SourceEffectsCooldownsAndDamageReceiptsRestoreExactlyAndFreeze" fullname="Hellscript.Tests.EffectTests.SourceEffectsCooldownsAndDamageReceiptsRestoreExactlyAndFreeze" methodname="SourceEffectsCooldownsAndDamageReceiptsRestoreExactlyAndFreeze" classname="Hellscript.Tests.EffectTests" runstate="Runnable" seed="1639606997" result="Failed" start-time="2026-10-01 09:26:03Z" end-time="2026-10-01 09:26:03Z" duration="0.042753" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  tick 0
+  Expected string length 33320 but was 33323. Strings differ at index 28279.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EffectTests.SourceEffectsCooldownsAndDamageReceiptsRestoreExactlyAndFreeze () [0x0016f] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EffectTests.cs:164
+]]></stack-trace>
+              </failure>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="3434" name="EnemyTests" fullname="Hellscript.Tests.EnemyTests" classname="Hellscript.Tests.EnemyTests" runstate="Runnable" testcasecount="55" result="Failed" site="Child" start-time="2026-10-01 09:26:03Z" end-time="2026-10-01 09:26:03Z" duration="0.186631" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="3497" name="PreparationChargeFollowupAndHazardsResumeWithIdenticalFutureState" fullname="Hellscript.Tests.EnemyTests.PreparationChargeFollowupAndHazardsResumeWithIdenticalFutureState" methodname="PreparationChargeFollowupAndHazardsResumeWithIdenticalFutureState" classname="Hellscript.Tests.EnemyTests" runstate="Runnable" seed="557636552" result="Failed" start-time="2026-10-01 09:26:03Z" end-time="2026-10-01 09:26:03Z" duration="0.039389" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  tick 0
+  Expected string length 32125 but was 32132. Strings differ at index 26814.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.EnemyTests.PreparationChargeFollowupAndHazardsResumeWithIdenticalFutureState () [0x000c3] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EnemyTests.cs:190
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

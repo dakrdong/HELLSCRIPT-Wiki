@@ -71,4 +71,20 @@
 
 `RuntimeDailyQuestSmoke`에서 클릭 전 자동 스크롤과 목록 스크롤 성공 검사를 제거했다. 모든 카드·문구·버튼의 프레임/본문 내 노출, 레이캐스트 적중, 카드·문구 겹침, 드래그 뒤 위치 유지, 실제 상태 요약을 검사한다. 기본 글자 크기에서 6개 화면(440×956, 956×440, 1440×810, 1440×900, 1680×720, 640×360) × KO/EN × 안전 영역 유무 × 시작/혼합/모두 달성/모두 수령/빈 상태를 검사한다. 표시 fixture는 독립 저장의 시각 검사만을 위한 것이며 실제 지급 검사는 별도로 성공한 활동 거래·개별 수령·저장 실패 후 재시도·자정·시계 역행·7일/28일 탭 왕복·닫기/뒤로가기·새 프로세스 복원으로 검증한다.
 
-최종 검증은 마지막 코드와 `main` 통합 뒤 전체 Edit Mode와 필요한 macOS 일퀘/출석 스모크를 한 번으로 묶는다. 실패하면 실패 항목과 직접 영향 범위만 다시 확인한다. 모바일 실기기와 WebGL 재배포는 별도 범위다. 실제 완료 결과와 캡처는 최종 검증 후 아래 기록에 추가한다.
+최종 검증은 전체 Edit Mode와 필요한 macOS 일퀘/출석 스모크를 한 번으로 묶는다. 실패하면 실패 항목과 직접 영향 범위만 다시 확인한다. 모바일 실기기와 WebGL 재배포는 별도 범위다.
+
+### 고정 배치의 실제 검증
+
+실제 소유 코드와 데이터는 [창 배치](../../Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs), [벡터 표식](../../Assets/HELLSCRIPT/Runtime/Presentation/StorageGlyph.cs), [네이티브 검사](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeDailyQuestSmoke.cs), [기존 저장·수령 거래](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.DailyQuests.cs), [고정 목표 데이터](../../Assets/HELLSCRIPT/Resources/Data/DailyQuests.json)에서 확인한다.
+
+게임 적용은 `fc5995e9`, 보상 문구와 버튼 사이 간격 보정은 `744be568`, 보정 후 `main` 통합은 `427ac49d`다. [macOS 개발 빌드](DailyQuestResponsiveEvidence20261001/build.json)는 오류 0개로 성공했다. 최종 앱의 [소스 해시 기록](DailyQuestResponsiveEvidence20261001/source-manifest.json)과 이후 문서 통합 소스는 같다. 컴파일 오류는 0개이며 기존 Unity AI 구독 오류는 이번 변경과 분리했다.
+
+최종 단계의 전체 Edit Mode는 **4,996개 / 4,868개 통과 / 128개 실패 / 0개 건너뜀**으로 종료했다. 통과한 전체 검사로 보고하지 않는다. 47개는 이전 전체 기준과 같고, 나머지 81개도 이번 작업 시작 전 `main`인 `e3b83c94`의 실패 항목 집중 검사에서 모두 재현됐다. 전투 복원의 DPS 직렬화 비교 80개와 기존 균열 창의 Unity null 연산자 검사 1개이며 이번 일퀘 UI의 새 실패는 0개다. [전체 원본](DailyQuestResponsiveEvidence20261001/responsive-daily-20261001-final-editmode.xml), [기준 비교](DailyQuestResponsiveEvidence20261001/baseline-comparison.json), [변경 전 11개](DailyQuestResponsiveEvidence20261001/prechange-daily-ui-failed-only-editmode.xml), [변경 전 나머지 70개](DailyQuestResponsiveEvidence20261001/prechange-daily-ui-parameters-editmode.xml), [검증 요약](DailyQuestResponsiveEvidence20261001/validation.json)에 보존했다. 최초 CLI 필터가 매개변수 없는 11개만 선택해 나머지 70개는 해당 메서드 필터로 따로 확인했다.
+
+전체 실행은 `733b5ca3` 통합 상태에서 시작했다. 실행 중 네이티브 검사가 찾은 간격 결함을 보정한 뒤 아래 집중 검사와 해당 스모크만 재실행했고 전체 검사는 반복하지 않았다. 전체 실행에서 일퀘 도메인 33개와 공통 UI·버튼·번역 94개도 모두 통과했다. 변경 전 실패 재현은 전수 재검사가 아니다.
+
+[공통 UI·번역 집중 검사 94/94](DailyQuestResponsiveEvidence20261001/focused-ui.json), 공통 UI 계약 검사와 계약 테스트 11/11이 통과했다. [일퀘 네이티브 검사](DailyQuestResponsiveEvidence20261001/daily-runtime.txt)는 **120개 화면·언어·안전 영역·상태 조합**, 총 124회 배치 검사, 14회 레이캐스트 클릭과 120회 드래그 후 본문 위치 유지를 통과했다. 첫 검사가 찾은 보상/버튼 문구 영역 접촉을 수정한 뒤 영향을 받은 일퀘 검사만 다시 실행했다. [최종 120개 조합](DailyQuestResponsiveEvidence20261001/layouts-final.txt)과 [수정 전 실패 로그](DailyQuestResponsiveEvidence20261001/daily-overlap-failed.log)를 함께 보존했다.
+
+실제 성공한 활동 거래와 개별 수령 합계 100개, 저장 실패 후 상태 보존·재시도, 자정·시계 역행, 출석 탭 왕복·뒤로가기·닫기를 확인했다. [새 프로세스 일퀘 복원](DailyQuestResponsiveEvidence20261001/daily-restart.txt) 후 다섯 수령과 주화 100개를 유지했고 재호출은 0개를 지급했다. [저장 읽기 결과](DailyQuestResponsiveEvidence20261001/save-readback.json)도 고정 목표·보상·수령을 확인한다. [출석 검사](DailyQuestResponsiveEvidence20261001/attendance-runtime.txt)와 [출석 재시작](DailyQuestResponsiveEvidence20261001/attendance-restart.txt)도 통과했다. [네이티브 실행 기록](DailyQuestResponsiveEvidence20261001/native-results.json)을 따른다.
+
+[한국어 세로](DailyQuestResponsiveEvidence20261001/portrait-ko.png) · [영어 세로](DailyQuestResponsiveEvidence20261001/portrait-en.png) · [한국어 가로](DailyQuestResponsiveEvidence20261001/landscape-ko.png) · [영어 가로](DailyQuestResponsiveEvidence20261001/landscape-en.png) · [640×360 영어](DailyQuestResponsiveEvidence20261001/small-en.png) · [모두 수령](DailyQuestResponsiveEvidence20261001/claimed-all.png) · [준비 실패](DailyQuestResponsiveEvidence20261001/empty-save-failure.png) · [수령 저장 실패](DailyQuestResponsiveEvidence20261001/claim-save-failure.png). macOS 합성 입력 결과이며 모바일 실기기 검증과 WebGL 플레이어 재배포는 수행하지 않았다.

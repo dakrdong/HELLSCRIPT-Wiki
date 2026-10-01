@@ -1,0 +1,1287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="70" result="Failed(Child)" total="70" passed="0" failed="70" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:59Z" duration="16.211631">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:59Z" duration="16.211631" total="70" passed="0" failed="70" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="6750" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:59Z" duration="16.191691" total="70" passed="0" failed="70" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="52371" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="6751" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:59Z" duration="16.167955" total="70" passed="0" failed="70" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="6752" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="4996" result="Failed" site="Child" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:59Z" duration="16.151418" total="70" passed="0" failed="70" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1061" name="ActionTests" fullname="Hellscript.Tests.ActionTests" classname="Hellscript.Tests.ActionTests" runstate="Runnable" testcasecount="30" result="Failed" site="Child" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:44Z" duration="0.642015" total="12" passed="0" failed="12" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1075" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" testcasecount="12" result="Failed" site="Child" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:44Z" duration="0.626703" total="12" passed="0" failed="12" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1063" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(1)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(1)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="355776394" result="Failed" start-time="2026-10-01 09:27:43Z" end-time="2026-10-01 09:27:44Z" duration="0.175148" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32673 but was 32676. Strings differ at index 27397.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1064" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(2)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(2)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="1441826102" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039902" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32276 but was 32279. Strings differ at index 27059.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1065" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(6)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(6)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="972927493" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039908" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32403 but was 32406. Strings differ at index 27185.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1066" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(7)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(7)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="1910028129" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039909" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32418 but was 32421. Strings differ at index 27185.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1067" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(8)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(8)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="1654258901" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039710" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32415 but was 32418. Strings differ at index 27185.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1068" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(9)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(9)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="85298340" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.042570" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32682 but was 32685. Strings differ at index 27342.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1069" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(12)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(12)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="1567391651" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039395" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32384 but was 32387. Strings differ at index 27170.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1070" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(13)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(13)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="179893087" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039675" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32398 but was 32401. Strings differ at index 27171.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1071" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(14)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(14)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="1687154460" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.040898" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 34986 but was 34989. Strings differ at index 27500.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1072" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(15)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(15)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="171803911" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039161" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32430 but was 32433. Strings differ at index 27200.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1073" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(16)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(16)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="247107384" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.039287" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32393 but was 32396. Strings differ at index 27158.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1074" name="PreparationOrFlightRestoresExactlyAndAllClocksFreeze(17)" fullname="Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze(17)" methodname="PreparationOrFlightRestoresExactlyAndAllClocksFreeze" classname="Hellscript.Tests.ActionTests" runstate="Runnable" seed="1754053746" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.042642" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32241 but was 32244. Strings differ at index 27009.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ActionTests.PreparationOrFlightRestoresExactlyAndAllClocksFreeze (System.Int32 skill) [0x00132] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ActionTests.cs:51
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1112" name="AreaTests" fullname="Hellscript.Tests.AreaTests" classname="Hellscript.Tests.AreaTests" runstate="Runnable" testcasecount="36" result="Failed" site="Child" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.226652" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1151" name="PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents" fullname="Hellscript.Tests.AreaTests.PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents" classname="Hellscript.Tests.AreaTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.113400" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1149" name="PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents(Mage,&quot;SM&quot;,&quot;LM01&quot;)" fullname="Hellscript.Tests.AreaTests.PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents(Mage,&quot;SM&quot;,&quot;LM01&quot;)" methodname="PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents" classname="Hellscript.Tests.AreaTests" runstate="Runnable" seed="745133306" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.054446" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 34118 but was 34125. Strings differ at index 27893.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.AreaTests.PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents (Hellscript.HeroClass hero, System.String set, System.String legendary) [0x000f5] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AreaTests.cs:246
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1150" name="PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents(Ranger,&quot;SA&quot;,null)" fullname="Hellscript.Tests.AreaTests.PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents(Ranger,&quot;SA&quot;,null)" methodname="PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents" classname="Hellscript.Tests.AreaTests" runstate="Runnable" seed="1065415202" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.058308" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 31541 but was 31544. Strings differ at index 26353.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.AreaTests.PendingAreaStatePausesAndRestoresWithIdenticalSubsequentEvents (Hellscript.HeroClass hero, System.String set, System.String legendary) [0x000f5] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AreaTests.cs:246
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1121" name="PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave" fullname="Hellscript.Tests.AreaTests.PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave" classname="Hellscript.Tests.AreaTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.093075" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1119" name="PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave(Fixed,False)" fullname="Hellscript.Tests.AreaTests.PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave(Fixed,False)" methodname="PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave" classname="Hellscript.Tests.AreaTests" runstate="Runnable" seed="522284001" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.049393" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 34826 but was 34865. Strings differ at index 27706.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[{"id":"M02","t..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.AreaTests.PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave (Hellscript.BlizzardMode mode, System.Boolean follows) [0x0006f] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AreaTests.cs:85
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1120" name="PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave(Follow,True)" fullname="Hellscript.Tests.AreaTests.PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave(Follow,True)" methodname="PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave" classname="Hellscript.Tests.AreaTests" runstate="Runnable" seed="1114732809" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:44Z" duration="0.042821" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 34855 but was 34894. Strings differ at index 27706.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[{"id":"M02","t..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.AreaTests.PreparationAndCreatedFieldRetainTheSelectedModeAcrossSave (Hellscript.BlizzardMode mode, System.Boolean follows) [0x0006f] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AreaTests.cs:85
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1423" name="BossPhaseTests" fullname="Hellscript.Tests.BossPhaseTests" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:58Z" duration="13.967374" total="40" passed="0" failed="40" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1511" name="IdenticalBossFightsReplayIdentically" fullname="Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:57Z" duration="12.443599" total="5" passed="0" failed="5" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1506" name="IdenticalBossFightsReplayIdentically(0)" fullname="Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically(0)" methodname="IdenticalBossFightsReplayIdentically" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1965418750" result="Failed" start-time="2026-10-01 09:27:44Z" end-time="2026-10-01 09:27:47Z" duration="2.482166" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 356805 but was 360096. Strings differ at index 338647.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[75.27058410644531,73.6342620..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically (System.Int32 pattern) [0x00195] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:185
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1507" name="IdenticalBossFightsReplayIdentically(1)" fullname="Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically(1)" methodname="IdenticalBossFightsReplayIdentically" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="458133737" result="Failed" start-time="2026-10-01 09:27:47Z" end-time="2026-10-01 09:27:49Z" duration="2.507475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 480823 but was 484116. Strings differ at index 399535.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[75.27058410644531,103.087974..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically (System.Int32 pattern) [0x00195] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:185
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1508" name="IdenticalBossFightsReplayIdentically(2)" fullname="Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically(2)" methodname="IdenticalBossFightsReplayIdentically" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="917544233" result="Failed" start-time="2026-10-01 09:27:49Z" end-time="2026-10-01 09:27:52Z" duration="2.454854" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 335229 but was 338287. Strings differ at index 316889.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[75.27058410644531,73.6342620..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically (System.Int32 pattern) [0x00195] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:185
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1509" name="IdenticalBossFightsReplayIdentically(3)" fullname="Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically(3)" methodname="IdenticalBossFightsReplayIdentically" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="811734585" result="Failed" start-time="2026-10-01 09:27:52Z" end-time="2026-10-01 09:27:54Z" duration="2.539884" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 385156 but was 388219. Strings differ at index 358154.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[75.27058410644531,73.6342620..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically (System.Int32 pattern) [0x00195] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:185
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1510" name="IdenticalBossFightsReplayIdentically(4)" fullname="Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically(4)" methodname="IdenticalBossFightsReplayIdentically" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="282920258" result="Failed" start-time="2026-10-01 09:27:54Z" end-time="2026-10-01 09:27:57Z" duration="2.457538" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected string length 353559 but was 356895. Strings differ at index 326287.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[75.27058410644531,73.6342620..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.IdenticalBossFightsReplayIdentically (System.Int32 pattern) [0x00195] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:185
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1498" name="MidPatternSaveAndRestoreKeepTheSameFuture" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" testcasecount="30" result="Failed" site="Child" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:58Z" duration="1.292773" total="30" passed="0" failed="30" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1468" name="MidPatternSaveAndRestoreKeepTheSameFuture(0,1)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(0,1)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1421784745" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.043680" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31541 but was 31544. Strings differ at index 26367.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1469" name="MidPatternSaveAndRestoreKeepTheSameFuture(0,2)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(0,2)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="2105279033" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.040846" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31525 but was 31528. Strings differ at index 26359.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1470" name="MidPatternSaveAndRestoreKeepTheSameFuture(0,3)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(0,3)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1351387755" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.042263" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31532 but was 31535. Strings differ at index 26363.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1471" name="MidPatternSaveAndRestoreKeepTheSameFuture(0,4)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(0,4)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1696854862" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.046788" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31569 but was 31572. Strings differ at index 26382.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1472" name="MidPatternSaveAndRestoreKeepTheSameFuture(0,5)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(0,5)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="6112613" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.047222" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31532 but was 31535. Strings differ at index 26363.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1473" name="MidPatternSaveAndRestoreKeepTheSameFuture(0,6)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(0,6)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="970400948" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.048294" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31610 but was 31613. Strings differ at index 26369.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1474" name="MidPatternSaveAndRestoreKeepTheSameFuture(1,1)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(1,1)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1231823008" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.045689" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31602 but was 31605. Strings differ at index 26370.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1475" name="MidPatternSaveAndRestoreKeepTheSameFuture(1,2)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(1,2)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="27143416" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.044178" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31535 but was 31538. Strings differ at index 26361.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1476" name="MidPatternSaveAndRestoreKeepTheSameFuture(1,3)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(1,3)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1363005431" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.041963" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31574 but was 31577. Strings differ at index 26384.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1477" name="MidPatternSaveAndRestoreKeepTheSameFuture(1,4)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(1,4)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1045963211" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.053979" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31631 but was 31634. Strings differ at index 26371.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1478" name="MidPatternSaveAndRestoreKeepTheSameFuture(1,5)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(1,5)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1362370338" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.041273" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31736 but was 31739. Strings differ at index 26369.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1479" name="MidPatternSaveAndRestoreKeepTheSameFuture(1,6)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(1,6)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="855037728" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.040331" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31842 but was 31845. Strings differ at index 26397.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1480" name="MidPatternSaveAndRestoreKeepTheSameFuture(2,1)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(2,1)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="475160317" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.040506" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31525 but was 31528. Strings differ at index 26360.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1481" name="MidPatternSaveAndRestoreKeepTheSameFuture(2,2)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(2,2)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1038456155" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.040225" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31882 but was 31885. Strings differ at index 26369.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1482" name="MidPatternSaveAndRestoreKeepTheSameFuture(2,3)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(2,3)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="484789691" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:57Z" duration="0.041855" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31465 but was 31468. Strings differ at index 26381.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1483" name="MidPatternSaveAndRestoreKeepTheSameFuture(2,4)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(2,4)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="745185878" result="Failed" start-time="2026-10-01 09:27:57Z" end-time="2026-10-01 09:27:58Z" duration="0.042276" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31543 but was 31546. Strings differ at index 26368.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1484" name="MidPatternSaveAndRestoreKeepTheSameFuture(2,5)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(2,5)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="998945508" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.044738" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31759 but was 31762. Strings differ at index 26363.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1485" name="MidPatternSaveAndRestoreKeepTheSameFuture(2,6)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(2,6)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1016153762" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.043983" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31535 but was 31538. Strings differ at index 26364.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1486" name="MidPatternSaveAndRestoreKeepTheSameFuture(3,1)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(3,1)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="523075285" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.042909" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31543 but was 31546. Strings differ at index 26368.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1487" name="MidPatternSaveAndRestoreKeepTheSameFuture(3,2)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(3,2)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="25533131" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.044788" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31695 but was 31698. Strings differ at index 26362.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1488" name="MidPatternSaveAndRestoreKeepTheSameFuture(3,3)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(3,3)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1863051694" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.039004" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31581 but was 31584. Strings differ at index 26384.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1489" name="MidPatternSaveAndRestoreKeepTheSameFuture(3,4)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(3,4)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="833292791" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.039354" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31552 but was 31555. Strings differ at index 26375.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1490" name="MidPatternSaveAndRestoreKeepTheSameFuture(3,5)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(3,5)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="2122549800" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041574" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31623 but was 31626. Strings differ at index 26369.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1491" name="MidPatternSaveAndRestoreKeepTheSameFuture(3,6)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(3,6)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1183422261" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041549" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31626 but was 31629. Strings differ at index 26372.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1492" name="MidPatternSaveAndRestoreKeepTheSameFuture(4,1)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(4,1)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="104248641" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041165" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31556 but was 31559. Strings differ at index 26382.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1493" name="MidPatternSaveAndRestoreKeepTheSameFuture(4,2)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(4,2)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="240736806" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041112" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31549 but was 31552. Strings differ at index 26368.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1494" name="MidPatternSaveAndRestoreKeepTheSameFuture(4,3)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(4,3)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1423317545" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.040528" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31610 but was 31613. Strings differ at index 26370.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1495" name="MidPatternSaveAndRestoreKeepTheSameFuture(4,4)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(4,4)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="165970974" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041418" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31692 but was 31695. Strings differ at index 26373.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1496" name="MidPatternSaveAndRestoreKeepTheSameFuture(4,5)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(4,5)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1871121588" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041627" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31633 but was 31636. Strings differ at index 26376.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1497" name="MidPatternSaveAndRestoreKeepTheSameFuture(4,6)" fullname="Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture(4,6)" methodname="MidPatternSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1113351396" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.037521" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  preparing tick 0
+  Expected string length 31753 but was 31756. Strings differ at index 26371.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidPatternSaveAndRestoreKeepTheSameFuture (System.Int32 pattern, System.Int32 slot) [0x0005b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:155
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1504" name="MidRoarSaveAndRestoreKeepTheSameFuture" fullname="Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" testcasecount="5" result="Failed" site="Child" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.220261" total="5" passed="0" failed="5" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1499" name="MidRoarSaveAndRestoreKeepTheSameFuture(0)" fullname="Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture(0)" methodname="MidRoarSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="838547406" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.039294" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  roar tick 0
+  Expected string length 31662 but was 31665. Strings differ at index 26513.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture (System.Int32 pattern) [0x0005d] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:162
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1500" name="MidRoarSaveAndRestoreKeepTheSameFuture(1)" fullname="Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture(1)" methodname="MidRoarSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="730453045" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.051024" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  roar tick 0
+  Expected string length 31662 but was 31665. Strings differ at index 26513.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture (System.Int32 pattern) [0x0005d] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:162
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1501" name="MidRoarSaveAndRestoreKeepTheSameFuture(2)" fullname="Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture(2)" methodname="MidRoarSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="856978932" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.042238" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  roar tick 0
+  Expected string length 31662 but was 31665. Strings differ at index 26513.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture (System.Int32 pattern) [0x0005d] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:162
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1502" name="MidRoarSaveAndRestoreKeepTheSameFuture(3)" fullname="Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture(3)" methodname="MidRoarSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="640670045" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041045" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  roar tick 0
+  Expected string length 31662 but was 31665. Strings differ at index 26513.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture (System.Int32 pattern) [0x0005d] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:162
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1503" name="MidRoarSaveAndRestoreKeepTheSameFuture(4)" fullname="Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture(4)" methodname="MidRoarSaveAndRestoreKeepTheSameFuture" classname="Hellscript.Tests.BossPhaseTests" runstate="Runnable" seed="1821285444" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.040342" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  roar tick 0
+  Expected string length 31662 but was 31665. Strings differ at index 26513.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossPhaseTests.AssertSameFuture (Hellscript.CombatSimulation sim, System.Int32 ticks, System.String label) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:48
+at Hellscript.Tests.BossPhaseTests.MidRoarSaveAndRestoreKeepTheSameFuture (System.Int32 pattern) [0x0005d] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossPhaseTests.cs:162
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1522" name="BossTests" fullname="Hellscript.Tests.BossTests" classname="Hellscript.Tests.BossTests" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:59Z" duration="0.188131" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1559" name="MidPatternPauseAndRestoreKeepTheSameFutureState" fullname="Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState" classname="Hellscript.Tests.BossTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:59Z" duration="0.171559" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1555" name="MidPatternPauseAndRestoreKeepTheSameFutureState(Slam)" fullname="Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState(Slam)" methodname="MidPatternPauseAndRestoreKeepTheSameFutureState" classname="Hellscript.Tests.BossTests" runstate="Runnable" seed="1331990750" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.043345" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 33168 but was 33175. Strings differ at index 27699.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState (Hellscript.BossAttack attack) [0x000eb] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossTests.cs:157
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1556" name="MidPatternPauseAndRestoreKeepTheSameFutureState(Beam)" fullname="Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState(Beam)" methodname="MidPatternPauseAndRestoreKeepTheSameFutureState" classname="Hellscript.Tests.BossTests" runstate="Runnable" seed="901339589" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.043953" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 32665 but was 32672. Strings differ at index 27307.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState (Hellscript.BossAttack attack) [0x000eb] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossTests.cs:157
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1557" name="MidPatternPauseAndRestoreKeepTheSameFutureState(Charge)" fullname="Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState(Charge)" methodname="MidPatternPauseAndRestoreKeepTheSameFutureState" classname="Hellscript.Tests.BossTests" runstate="Runnable" seed="1544248694" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:58Z" duration="0.041341" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 32170 but was 32177. Strings differ at index 26828.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState (Hellscript.BossAttack attack) [0x000eb] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossTests.cs:157
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1558" name="MidPatternPauseAndRestoreKeepTheSameFutureState(Blasts)" fullname="Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState(Blasts)" methodname="MidPatternPauseAndRestoreKeepTheSameFutureState" classname="Hellscript.Tests.BossTests" runstate="Runnable" seed="671576701" result="Failed" start-time="2026-10-01 09:27:58Z" end-time="2026-10-01 09:27:59Z" duration="0.041167" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 34707 but was 34714. Strings differ at index 28867.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.BossTests.MidPatternPauseAndRestoreKeepTheSameFutureState (Hellscript.BossAttack attack) [0x000eb] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/BossTests.cs:157
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="1623" name="ChargeTests" fullname="Hellscript.Tests.ChargeTests" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" testcasecount="23" result="Failed" site="Child" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.129281" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="1631" name="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly" fullname="Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.113784" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="1628" name="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly(2,&quot;SWB&quot;,&quot;SWB4&quot;)" fullname="Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly(2,&quot;SWB&quot;,&quot;SWB4&quot;)" methodname="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" seed="1192422204" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.040946" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 31766 but was 31769. Strings differ at index 26717.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly (System.Int32 skill, System.String set, System.String definition) [0x0018f] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ChargeTests.cs:75
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1629" name="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly(6,&quot;SAB&quot;,&quot;SAB4&quot;)" fullname="Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly(6,&quot;SAB&quot;,&quot;SAB4&quot;)" methodname="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" seed="1796128132" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.034304" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 31730 but was 31733. Strings differ at index 26680.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly (System.Int32 skill, System.String set, System.String definition) [0x0018f] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ChargeTests.cs:75
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="1630" name="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly(14,&quot;SMB&quot;,&quot;M03&quot;)" fullname="Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly(14,&quot;SMB&quot;,&quot;M03&quot;)" methodname="CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly" classname="Hellscript.Tests.ChargeTests" runstate="Runnable" seed="1858680824" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.036951" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 43244 but was 43247. Strings differ at index 27505.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ChargeTests.CastBonusesAreReservedBeforePreparationExpiresAndRestoreExactly (System.Int32 skill, System.String set, System.String definition) [0x0018f] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/ChargeTests.cs:75
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="2371" name="EdictBlizzardTests" fullname="Hellscript.Tests.EdictBlizzardTests" classname="Hellscript.Tests.EdictBlizzardTests" runstate="Runnable" testcasecount="52" result="Failed" site="Child" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.225963" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="2431" name="ModeAndPaidPreparationSurviveEditsAndSaveRestoration" fullname="Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration" classname="Hellscript.Tests.EdictBlizzardTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.205887" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="2427" name="ModeAndPaidPreparationSurviveEditsAndSaveRestoration(False,&quot;FIXED&quot;,False)" fullname="Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(False,&quot;FIXED&quot;,False)" methodname="ModeAndPaidPreparationSurviveEditsAndSaveRestoration" classname="Hellscript.Tests.EdictBlizzardTests" runstate="Runnable" seed="2050941932" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.052720" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32688 but was 32691. Strings differ at index 27376.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration (System.Boolean legendary, System.String mode, System.Boolean follows) [0x0011b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictBlizzardTests.cs:228
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2428" name="ModeAndPaidPreparationSurviveEditsAndSaveRestoration(True,&quot;FIXED&quot;,False)" fullname="Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(True,&quot;FIXED&quot;,False)" methodname="ModeAndPaidPreparationSurviveEditsAndSaveRestoration" classname="Hellscript.Tests.EdictBlizzardTests" runstate="Runnable" seed="707992792" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.056317" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32688 but was 32691. Strings differ at index 27376.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration (System.Boolean legendary, System.String mode, System.Boolean follows) [0x0011b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictBlizzardTests.cs:228
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2429" name="ModeAndPaidPreparationSurviveEditsAndSaveRestoration(False,&quot;FOLLOW&quot;,False)" fullname="Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(False,&quot;FOLLOW&quot;,False)" methodname="ModeAndPaidPreparationSurviveEditsAndSaveRestoration" classname="Hellscript.Tests.EdictBlizzardTests" runstate="Runnable" seed="1211503172" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.046997" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32692 but was 32695. Strings differ at index 27380.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration (System.Boolean legendary, System.String mode, System.Boolean follows) [0x0011b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictBlizzardTests.cs:228
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2430" name="ModeAndPaidPreparationSurviveEditsAndSaveRestoration(True,&quot;FOLLOW&quot;,True)" fullname="Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(True,&quot;FOLLOW&quot;,True)" methodname="ModeAndPaidPreparationSurviveEditsAndSaveRestoration" classname="Hellscript.Tests.EdictBlizzardTests" runstate="Runnable" seed="1022289910" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.047855" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  replay tick 0
+  Expected string length 32688 but was 32691. Strings differ at index 27376.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration (System.Boolean legendary, System.String mode, System.Boolean follows) [0x0011b] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/EdictBlizzardTests.cs:228
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="5272" name="PassiveTests" fullname="Hellscript.Tests.PassiveTests" classname="Hellscript.Tests.PassiveTests" runstate="Runnable" testcasecount="43" result="Failed" site="Child" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.151614" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="5322" name="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore" fullname="Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore" classname="Hellscript.Tests.PassiveTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.140861" total="3" passed="0" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="5319" name="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore(Warrior,2,1)" fullname="Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore(Warrior,2,1)" methodname="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore" classname="Hellscript.Tests.PassiveTests" runstate="Runnable" seed="1417031831" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.042257" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 31529 but was 31532. Strings differ at index 26258.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore (Hellscript.HeroClass hero, System.Int32 passive, System.Int32 skill) [0x000b7] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/PassiveTests.cs:193
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="5320" name="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore(Ranger,1,9)" fullname="Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore(Ranger,1,9)" methodname="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore" classname="Hellscript.Tests.PassiveTests" runstate="Runnable" seed="140288246" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.040778" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 31494 but was 31497. Strings differ at index 26221.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0],"casts":[]},"phase":0,"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore (Hellscript.HeroClass hero, System.Int32 passive, System.Int32 skill) [0x000b7] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/PassiveTests.cs:193
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="5321" name="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore(Mage,5,12)" fullname="Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore(Mage,5,12)" methodname="PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore" classname="Hellscript.Tests.PassiveTests" runstate="Runnable" seed="725498105" result="Failed" start-time="2026-10-01 09:27:59Z" end-time="2026-10-01 09:27:59Z" duration="0.053161" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  tick 0
+  Expected string length 33004 but was 33011. Strings differ at index 27714.
+  Expected: "...]},"key":""},"dps":{"damage":[],"casts":[]},"phase":0,"tim..."
+  But was:  "...]},"key":""},"dps":{"damage":[0.0,0.0],"casts":[]},"phase"..."
+  --------------------------------------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.PassiveTests.PassiveTimersAndElementJournalHaveIdenticalFutureAfterJsonRestore (Hellscript.HeroClass hero, System.Int32 passive, System.Int32 skill) [0x000b7] in /Users/t8g-2410-pn-005/.codex/worktrees/daily-quest-html/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/PassiveTests.cs:193
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

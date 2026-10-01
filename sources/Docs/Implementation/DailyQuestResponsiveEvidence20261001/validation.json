@@ -1,0 +1,85 @@
+{
+  "feature": "Daily Quest responsive fixed layout",
+  "gameImplementationCommit": "fc5995e9",
+  "spacingRepairCommit": "744be568",
+  "finalGameIntegrationCommit": "427ac49d",
+  "sourceManifest": "source-manifest.json",
+  "dependencies": "dependency-manifest.json",
+  "unityVersion": "6000.6.0f1",
+  "fullEditMode": {
+    "sourceAtRunStart": "733b5ca3",
+    "summary": {
+      "total": "4996",
+      "passed": "4868",
+      "failed": "128",
+      "skipped": "0",
+      "duration": "1867.8071088",
+      "start-time": "2026-10-01 08:48:02Z",
+      "end-time": "2026-10-01 09:19:10Z",
+      "result": "Failed(Child)"
+    },
+    "historicalMatchedFailures": 47,
+    "taskStartReproducedAdditionalFailures": 81,
+    "newDailyUiFailures": 0,
+    "report": "responsive-daily-20261001-final-editmode.xml",
+    "comparison": "baseline-comparison.json",
+    "exitCode": 2,
+    "allPassed": false
+  },
+  "validationCadence": "One full run at the final stage. The spacing defect found during native validation was repaired and checked with the affected daily smoke and focused UI/localization tests; the full run was not repeated. The failing comparison cases alone were exercised on task-start main. Later documentation/wiki changes do not alter game code.",
+  "focusedFinalUi": {
+    "summary": {
+      "total": 94,
+      "passed": 94,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 3.783563,
+      "resultState": "Passed"
+    },
+    "report": "focused-ui.json"
+  },
+  "sharedUiContract": {
+    "check": "Passed",
+    "testsPassed": 11,
+    "testsFailed": 0,
+    "successfulResultReused": true
+  },
+  "macOSBuild": {
+    "result": "Succeeded",
+    "errors": 0,
+    "warnings": 285,
+    "report": "build.json"
+  },
+  "native": {
+    "result": "Passed",
+    "launches": 4,
+    "records": "native-results.json",
+    "matrixLayouts": 120,
+    "geometryChecks": 124,
+    "raycastClicks": 14,
+    "immobileBodyDrags": 120,
+    "activityHooks": true,
+    "manualClaimedCoins": 100,
+    "saveFailureRollbackAndRetry": true,
+    "midnightReset": true,
+    "clockRollback": true,
+    "attendanceRoundTripsAndBack": true,
+    "freshProcessRestoredFiveClaimsAnd100Coins": true,
+    "replayAddedCoins": 0,
+    "saveReadback": "save-readback.json",
+    "input": "synthetic uGUI raycast/drag in isolated macOS development player"
+  },
+  "originalDirtyWork": {
+    "files": 35,
+    "sha256Unchanged": true,
+    "generatedSettingsBackedUpAndRestored": true
+  },
+  "console": {
+    "compileErrors": 0,
+    "existingUnrelatedErrors": "Unity AI NoSubscription"
+  },
+  "separateScope": [
+    "physical mobile device verification",
+    "WebGL player rebuild/redeployment"
+  ]
+}

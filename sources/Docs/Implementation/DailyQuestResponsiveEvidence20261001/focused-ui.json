@@ -1,0 +1,881 @@
+{
+  "job_id": "7de977ddcbd449b594956dc9a625535d",
+  "status": "succeeded",
+  "mode": "EditMode",
+  "started_unix_ms": 1790845130997,
+  "finished_unix_ms": 1790845140587,
+  "last_update_unix_ms": 1790845140587,
+  "progress": {
+    "completed": 94,
+    "total": 94,
+    "current_test_full_name": null,
+    "current_test_started_unix_ms": 1790845140364,
+    "last_finished_test_full_name": "Hellscript.Tests.UiButtonTests.UnownedChestRemainsClosedEvenWithAnInvalidSelectedValue",
+    "last_finished_unix_ms": 1790845140364,
+    "stuck_suspected": false,
+    "editor_is_focused": false,
+    "blocked_reason": null,
+    "failures_so_far": [],
+    "failures_capped": false
+  },
+  "error": null,
+  "result": {
+    "mode": "EditMode",
+    "summary": {
+      "total": 94,
+      "passed": 94,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 3.783563,
+      "resultState": "Passed"
+    },
+    "results": [
+      {
+        "name": "AChosenLanguageSurvivesANewStoreAndLeavesTheOtherSettingsAlone",
+        "fullName": "Hellscript.Tests.LocalizationTests.AChosenLanguageSurvivesANewStoreAndLeavesTheOtherSettingsAlone",
+        "state": "Passed",
+        "durationSeconds": 0.0206075,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AFailedSaveKeepsTheChoiceOnScreenAndAllowsOneRetry",
+        "fullName": "Hellscript.Tests.LocalizationTests.AFailedSaveKeepsTheChoiceOnScreenAndAllowsOneRetry",
+        "state": "Passed",
+        "durationSeconds": 0.0008376,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ALanguageWhoseTableIsMissingStillAppliesAndSaysSo",
+        "fullName": "Hellscript.Tests.LocalizationTests.ALanguageWhoseTableIsMissingStillAppliesAndSaysSo",
+        "state": "Passed",
+        "durationSeconds": 0.000394,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ALoaderThatThrowsDoesNotStopTheLanguageFromApplying",
+        "fullName": "Hellscript.Tests.LocalizationTests.ALoaderThatThrowsDoesNotStopTheLanguageFromApplying",
+        "state": "Passed",
+        "durationSeconds": 0.000135,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AMissingEntryKeepsTheSourceAndIsRecordedOnce",
+        "fullName": "Hellscript.Tests.LocalizationTests.AMissingEntryKeepsTheSourceAndIsRecordedOnce",
+        "state": "Passed",
+        "durationSeconds": 0.0007203,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AnUnknownCodeBecomesTheDefault(null)",
+        "fullName": "Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(null)",
+        "state": "Passed",
+        "durationSeconds": 0.0004879,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AnUnknownCodeBecomesTheDefault(\"\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(\"\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001171,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AnUnknownCodeBecomesTheDefault(\"jp\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(\"jp\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001071,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AnUnknownCodeBecomesTheDefault(\"KO\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(\"KO\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001042,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AnUnknownCodeBecomesTheDefault(\"en-GB\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.AnUnknownCodeBecomesTheDefault(\"en-GB\")",
+        "state": "Passed",
+        "durationSeconds": 0.0001059,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ATranslationThatLostAPlaceholderFallsBackToTheSourceLine",
+        "fullName": "Hellscript.Tests.LocalizationTests.ATranslationThatLostAPlaceholderFallsBackToTheSourceLine",
+        "state": "Passed",
+        "durationSeconds": 0.0004978,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EscapesSurviveAWriteAndReadOfTheSameLine",
+        "fullName": "Hellscript.Tests.LocalizationTests.EscapesSurviveAWriteAndReadOfTheSameLine",
+        "state": "Passed",
+        "durationSeconds": 0.0011892,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders",
+        "fullName": "Hellscript.Tests.LocalizationTests.EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders",
+        "state": "Passed",
+        "durationSeconds": 0.0263362,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryKoreanLiteralInTheRuntimeHasAnEntry",
+        "fullName": "Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry",
+        "state": "Passed",
+        "durationSeconds": 0.0933249,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryLanguageThatNeedsATableShipsOne",
+        "fullName": "Hellscript.Tests.LocalizationTests.EveryLanguageThatNeedsATableShipsOne",
+        "state": "Passed",
+        "durationSeconds": 0.0003141,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "FormatSpecifiersAndEscapedBracesSurviveTranslation",
+        "fullName": "Hellscript.Tests.LocalizationTests.FormatSpecifiersAndEscapedBracesSurviveTranslation",
+        "state": "Passed",
+        "durationSeconds": 0.000107,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{}\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{}\")",
+        "state": "Passed",
+        "durationSeconds": 0.0012955,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{\\\"version\\\":2,\\\"language\\\":\\\"en\\\"}\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{\\\"version\\\":2,\\\"language\\\":\\\"en\\\"}\")",
+        "state": "Passed",
+        "durationSeconds": 0.0008843,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{\\\"version\\\":1,\\\"language\\\":\\\"jp\\\"}\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{\\\"version\\\":1,\\\"language\\\":\\\"jp\\\"}\")",
+        "state": "Passed",
+        "durationSeconds": 0.0008704,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{\\\"version\\\":1,\\\"language\\\":\\\"\\\"}\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"{\\\"version\\\":1,\\\"language\\\":\\\"\\\"}\")",
+        "state": "Passed",
+        "durationSeconds": 0.00081,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"malformed\")",
+        "fullName": "Hellscript.Tests.LocalizationTests.InvalidPreferenceUsesTheDefaultWithoutOverwritingTheOriginal(\"malformed\")",
+        "state": "Passed",
+        "durationSeconds": 0.0008826,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "KnownLinesFromEveryCornerOfTheGameAreTranslated",
+        "fullName": "Hellscript.Tests.LocalizationTests.KnownLinesFromEveryCornerOfTheGameAreTranslated",
+        "state": "Passed",
+        "durationSeconds": 0.0037042,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MissingPreferenceStartsAtTheDefaultWithoutCreatingFiles",
+        "fullName": "Hellscript.Tests.LocalizationTests.MissingPreferenceStartsAtTheDefaultWithoutCreatingFiles",
+        "state": "Passed",
+        "durationSeconds": 0.0001802,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NoEntryIsLeftBehindByARewordedLine",
+        "fullName": "Hellscript.Tests.LocalizationTests.NoEntryIsLeftBehindByARewordedLine",
+        "state": "Passed",
+        "durationSeconds": 0.0921124,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NotesBlankLinesAndDamagedLinesAreCountedAndSkipped",
+        "fullName": "Hellscript.Tests.LocalizationTests.NotesBlankLinesAndDamagedLinesAreCountedAndSkipped",
+        "state": "Passed",
+        "durationSeconds": 0.000208,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "OversizedPreferenceIsPreserved",
+        "fullName": "Hellscript.Tests.LocalizationTests.OversizedPreferenceIsPreserved",
+        "state": "Passed",
+        "durationSeconds": 0.0013231,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadingAStringWithoutATableReturnsTheSource",
+        "fullName": "Hellscript.Tests.LocalizationTests.ReadingAStringWithoutATableReturnsTheSource",
+        "state": "Passed",
+        "durationSeconds": 0.0001952,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SelectingALanguageAndReturningToTheSourceIsRepeatable",
+        "fullName": "Hellscript.Tests.LocalizationTests.SelectingALanguageAndReturningToTheSourceIsRepeatable",
+        "state": "Passed",
+        "durationSeconds": 0.0001337,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "StringArgumentsAreTranslatedSoAComposedLineIsNotHalfKorean",
+        "fullName": "Hellscript.Tests.LocalizationTests.StringArgumentsAreTranslatedSoAComposedLineIsNotHalfKorean",
+        "state": "Passed",
+        "durationSeconds": 0.0000862,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TheEnglishTableParsesWithoutDamagedOrRepeatedLines",
+        "fullName": "Hellscript.Tests.LocalizationTests.TheEnglishTableParsesWithoutDamagedOrRepeatedLines",
+        "state": "Passed",
+        "durationSeconds": 0.0039867,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TheSessionLoadsTheSavedLanguageWhenItIsCreated",
+        "fullName": "Hellscript.Tests.LocalizationTests.TheSessionLoadsTheSavedLanguageWhenItIsCreated",
+        "state": "Passed",
+        "durationSeconds": 0.0015294,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TheSourceLanguageIsListedFirstAndNeedsNoTable",
+        "fullName": "Hellscript.Tests.LocalizationTests.TheSourceLanguageIsListedFirstAndNeedsNoTable",
+        "state": "Passed",
+        "durationSeconds": 0.0009522,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "WritingAnUnsupportedLanguageIsRefusedBeforeTouchingTheFile",
+        "fullName": "Hellscript.Tests.LocalizationTests.WritingAnUnsupportedLanguageIsRefusedBeforeTouchingTheFile",
+        "state": "Passed",
+        "durationSeconds": 0.0007844,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "BrokenPresentationListenerCannotTurnACommittedTransactionIntoFailure",
+        "fullName": "Hellscript.Tests.SharedUiTests.BrokenPresentationListenerCannotTurnACommittedTransactionIntoFailure",
+        "state": "Passed",
+        "durationSeconds": 0.1917427,
+        "message": null,
+        "stackTrace": null,
+        "output": "Committed-state listener failed: view destroyed\n"
+      },
+      {
+        "name": "ChangedGroupsUseAnImmutableSavedBaselineAndRevertRestoresAllOptions",
+        "fullName": "Hellscript.Tests.SharedUiTests.ChangedGroupsUseAnImmutableSavedBaselineAndRevertRestoresAllOptions",
+        "state": "Passed",
+        "durationSeconds": 0.0270239,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ClosingTheParentOutOfOrderDoesNotResumeTheRemainingWindow",
+        "fullName": "Hellscript.Tests.SharedUiTests.ClosingTheParentOutOfOrderDoesNotResumeTheRemainingWindow",
+        "state": "Passed",
+        "durationSeconds": 0.0564011,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "CommitNotificationObservesSavedStateAndDuplicateReceiptsDoNotRepeatIt",
+        "fullName": "Hellscript.Tests.SharedUiTests.CommitNotificationObservesSavedStateAndDuplicateReceiptsDoNotRepeatIt",
+        "state": "Passed",
+        "durationSeconds": 0.0772125,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EveryGlobalEdictOptionIsReachableThroughSummaryAndSearchWithoutChangingItsDraft",
+        "fullName": "Hellscript.Tests.SharedUiTests.EveryGlobalEdictOptionIsReachableThroughSummaryAndSearchWithoutChangingItsDraft",
+        "state": "Passed",
+        "durationSeconds": 0.1544201,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NestedWindowsRestoreOriginalPauseAndInput(False)",
+        "fullName": "Hellscript.Tests.SharedUiTests.NestedWindowsRestoreOriginalPauseAndInput(False)",
+        "state": "Passed",
+        "durationSeconds": 0.0213493,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NestedWindowsRestoreOriginalPauseAndInput(True)",
+        "fullName": "Hellscript.Tests.SharedUiTests.NestedWindowsRestoreOriginalPauseAndInput(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0323096,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PaperdollHasTenDistinctNonOverlappingSlots(405,520,False)",
+        "fullName": "Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(405,520,False)",
+        "state": "Passed",
+        "durationSeconds": 0.0227885,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PaperdollHasTenDistinctNonOverlappingSlots(400,326,True)",
+        "fullName": "Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(400,326,True)",
+        "state": "Passed",
+        "durationSeconds": 0.0198023,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PaperdollHasTenDistinctNonOverlappingSlots(390,262,True)",
+        "fullName": "Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(390,262,True)",
+        "state": "Passed",
+        "durationSeconds": 0.0328891,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PaperdollHasTenDistinctNonOverlappingSlots(405,326,False)",
+        "fullName": "Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(405,326,False)",
+        "state": "Passed",
+        "durationSeconds": 0.0200984,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadingPagesReserveEveryHudControlBelowTheirActions(440,956)",
+        "fullName": "Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(440,956)",
+        "state": "Passed",
+        "durationSeconds": 0.0528323,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadingPagesReserveEveryHudControlBelowTheirActions(956,440)",
+        "fullName": "Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(956,440)",
+        "state": "Passed",
+        "durationSeconds": 0.0205709,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadingPagesReserveEveryHudControlBelowTheirActions(1440,810)",
+        "fullName": "Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(1440,810)",
+        "state": "Passed",
+        "durationSeconds": 0.0196515,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadingPagesReserveEveryHudControlBelowTheirActions(1440,900)",
+        "fullName": "Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(1440,900)",
+        "state": "Passed",
+        "durationSeconds": 0.0322899,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReadingPagesReserveEveryHudControlBelowTheirActions(1680,720)",
+        "fullName": "Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(1680,720)",
+        "state": "Passed",
+        "durationSeconds": 0.0197961,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "RejectedAndFailedWritesNeitherPublishNorAdoptState",
+        "fullName": "Hellscript.Tests.SharedUiTests.RejectedAndFailedWritesNeitherPublishNorAdoptState",
+        "state": "Passed",
+        "durationSeconds": 0.0727377,
+        "message": null,
+        "stackTrace": null,
+        "output": "저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/shared-ui-52fa28435d844e008c59176f417d4820/hellscript-local-v1.json.tmp' is denied.\n"
+      },
+      {
+        "name": "RunNotificationIsDeferredUntilTheLiveRunHasAdoptedTheSave",
+        "fullName": "Hellscript.Tests.SharedUiTests.RunNotificationIsDeferredUntilTheLiveRunHasAdoptedTheSave",
+        "state": "Passed",
+        "durationSeconds": 0.4918574,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SlotColumnsKeepTheirSizeInsteadOfShrinking(440,956)",
+        "fullName": "Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(440,956)",
+        "state": "Passed",
+        "durationSeconds": 0.0338215,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SlotColumnsKeepTheirSizeInsteadOfShrinking(956,440)",
+        "fullName": "Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(956,440)",
+        "state": "Passed",
+        "durationSeconds": 0.0205609,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1080)",
+        "fullName": "Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1080)",
+        "state": "Passed",
+        "durationSeconds": 0.0205933,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1200)",
+        "fullName": "Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1200)",
+        "state": "Passed",
+        "durationSeconds": 0.0348567,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SlotColumnsKeepTheirSizeInsteadOfShrinking(2520,1080)",
+        "fullName": "Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(2520,1080)",
+        "state": "Passed",
+        "durationSeconds": 0.0204356,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ACommittedActionCanChangeDisplayLanguageWithoutChangingTheRun(\"연쇄 번개 · 준비\",\"Chain Lightning · preparing\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ACommittedActionCanChangeDisplayLanguageWithoutChangingTheRun(\"연쇄 번개 · 준비\",\"Chain Lightning · preparing\")",
+        "state": "Passed",
+        "durationSeconds": 0.0394583,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ACommittedActionCanChangeDisplayLanguageWithoutChangingTheRun(\"서리 폭발 · 준비 0.35초\",\"Frost Nova · preparing 0.35s\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ACommittedActionCanChangeDisplayLanguageWithoutChangingTheRun(\"서리 폭발 · 준비 0.35초\",\"Frost Nova · preparing 0.35s\")",
+        "state": "Passed",
+        "durationSeconds": 0.0387111,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "AllLogsFromANaturalCompletedRiftTranslateAfterReload",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.AllLogsFromANaturalCompletedRiftTranslateAfterReload",
+        "state": "Passed",
+        "durationSeconds": 0.0917018,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ArchivedConditionValuesRemainReadableInEnglish(\"인지한 적 없음  0초 이상 → 현재 0.6 / 충족\",\"No enemy detected for at least 0s → Current 0.6 / met\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ArchivedConditionValuesRemainReadableInEnglish(\"인지한 적 없음  0초 이상 → 현재 0.6 / 충족\",\"No enemy detected for at least 0s → Current 0.6 / met\")",
+        "state": "Passed",
+        "durationSeconds": 0.0388316,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ArchivedConditionValuesRemainReadableInEnglish(\"인지한 적 없음  1초 이상 → 유효한 대상·참조 없음\",\"No enemy detected for at least 1s → No valid target or reference\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ArchivedConditionValuesRemainReadableInEnglish(\"인지한 적 없음  1초 이상 → 유효한 대상·참조 없음\",\"No enemy detected for at least 1s → No valid target or reference\")",
+        "state": "Passed",
+        "durationSeconds": 0.0396108,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS_BASIC\",\"근접 공격\",\"Melee attack\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS_BASIC\",\"근접 공격\",\"Melee attack\")",
+        "state": "Passed",
+        "durationSeconds": 0.0406108,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS01_SLAM\",\"내려찍기\",\"Slam\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS01_SLAM\",\"내려찍기\",\"Slam\")",
+        "state": "Passed",
+        "durationSeconds": 0.0608263,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS01_HOOK\",\"갈고리\",\"Hook\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS01_HOOK\",\"갈고리\",\"Hook\")",
+        "state": "Passed",
+        "durationSeconds": 0.037473,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DamageSourceFormattingPreservesCustomUnknownAndAlreadyReadableNames",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.DamageSourceFormattingPreservesCustomUnknownAndAlreadyReadableNames",
+        "state": "Passed",
+        "durationSeconds": 0.000399,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "EscapedBracesAndRepeatedArgumentsRemainLiteral",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.EscapedBracesAndRepeatedArgumentsRemainLiteral",
+        "state": "Passed",
+        "durationSeconds": 0.0004858,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ExactEntriesAndSpecificTemplatesWinOverGeneralTemplates",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ExactEntriesAndSpecificTemplatesWinOverGeneralTemplates",
+        "state": "Passed",
+        "durationSeconds": 0.0001268,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "FormattedValuesKeepPrecisionWhenTheTranslationReordersArguments",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.FormattedValuesKeepPrecisionWhenTheTranslationReordersArguments",
+        "state": "Passed",
+        "durationSeconds": 0.0000935,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "GenericJoinsTranslateKnownPartsWithoutChangingTheOriginalSave",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.GenericJoinsTranslateKnownPartsWithoutChangingTheOriginalSave",
+        "state": "Passed",
+        "durationSeconds": 0.0386421,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReapplyingTheLanguageClearsCachedTemplatesAndTranslations",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ReapplyingTheLanguageClearsCachedTemplatesAndTranslations",
+        "state": "Passed",
+        "durationSeconds": 0.0002294,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SavedMessagesKeepTheirTimestampAndEventIdentifier(\"000.0s [RUN_START] 균열 10단계 진입\",\"000.0s [RUN_START] Entered rift stage 10\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.SavedMessagesKeepTheirTimestampAndEventIdentifier(\"000.0s [RUN_START] 균열 10단계 진입\",\"000.0s [RUN_START] Entered rift stage 10\")",
+        "state": "Passed",
+        "durationSeconds": 0.0384686,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SavedMessagesKeepTheirTimestampAndEventIdentifier(\"000.0s [RUN_END] 마을로 귀환\",\"000.0s [RUN_END] Returning to town\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.SavedMessagesKeepTheirTimestampAndEventIdentifier(\"000.0s [RUN_END] 마을로 귀환\",\"000.0s [RUN_END] Returning to town\")",
+        "state": "Passed",
+        "durationSeconds": 0.0036966,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "SavedMessagesKeepTheirTimestampAndEventIdentifier(\"300,0s [RUN_END] 제한시간 초과\",\"300,0s [RUN_END] Out of time\")",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.SavedMessagesKeepTheirTimestampAndEventIdentifier(\"300,0s [RUN_END] 제한시간 초과\",\"300,0s [RUN_END] Out of time\")",
+        "state": "Passed",
+        "durationSeconds": 0.0035342,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ShippedDeathMessageTranslatesNestedNamesAndKeepsTheSavedNumber",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.ShippedDeathMessageTranslatesNestedNamesAndKeepsTheSavedNumber",
+        "state": "Passed",
+        "durationSeconds": 0.0625174,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "UnknownAndDamagedMessagesRemainReadableAndAreReported",
+        "fullName": "Hellscript.Tests.StoredLocalizationTests.UnknownAndDamagedMessagesRemainReadableAndAreReported",
+        "state": "Passed",
+        "durationSeconds": 0.0006422,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ChestArtImportsNativeAlphaWithinTheSmallIconBudget(\"chest-closed\")",
+        "fullName": "Hellscript.Tests.UiButtonTests.ChestArtImportsNativeAlphaWithinTheSmallIconBudget(\"chest-closed\")",
+        "state": "Passed",
+        "durationSeconds": 0.0189553,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ChestArtImportsNativeAlphaWithinTheSmallIconBudget(\"chest-open\")",
+        "fullName": "Hellscript.Tests.UiButtonTests.ChestArtImportsNativeAlphaWithinTheSmallIconBudget(\"chest-open\")",
+        "state": "Passed",
+        "durationSeconds": 0.0008704,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ChestArtworkChangesWithoutResizingOrAddingInputTargets",
+        "fullName": "Hellscript.Tests.UiButtonTests.ChestArtworkChangesWithoutResizingOrAddingInputTargets",
+        "state": "Passed",
+        "durationSeconds": 0.0022827,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ChestOpensOnlyForPersistentChoiceAndNeverForHoverOrKeyboardFocus",
+        "fullName": "Hellscript.Tests.UiButtonTests.ChestOpensOnlyForPersistentChoiceAndNeverForHoverOrKeyboardFocus",
+        "state": "Passed",
+        "durationSeconds": 0.001822,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ChosenTabSurvivesHoverExitAndFocusMovingElsewhere",
+        "fullName": "Hellscript.Tests.UiButtonTests.ChosenTabSurvivesHoverExitAndFocusMovingElsewhere",
+        "state": "Passed",
+        "durationSeconds": 0.0003362,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "DisabledControlDoesNotHoverPressOrInvokeItsTransaction",
+        "fullName": "Hellscript.Tests.UiButtonTests.DisabledControlDoesNotHoverPressOrInvokeItsTransaction",
+        "state": "Passed",
+        "durationSeconds": 0.0007266,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HoverAndKeyboardFocusNeverChooseATab",
+        "fullName": "Hellscript.Tests.UiButtonTests.HoverAndKeyboardFocusNeverChooseATab",
+        "state": "Passed",
+        "durationSeconds": 0.0002843,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "HuntEdictEditArtUsesNativeAlphaAndTheActionIconTextureBudget",
+        "fullName": "Hellscript.Tests.UiButtonTests.HuntEdictEditArtUsesNativeAlphaAndTheActionIconTextureBudget",
+        "state": "Passed",
+        "durationSeconds": 0.0008948,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ItemFeedbackLeavesTheRaritySurfaceUntouched",
+        "fullName": "Hellscript.Tests.UiButtonTests.ItemFeedbackLeavesTheRaritySurfaceUntouched",
+        "state": "Passed",
+        "durationSeconds": 0.0003813,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "MinimalChromeSurvivesChoiceReconfigurationAndDisabledInput",
+        "fullName": "Hellscript.Tests.UiButtonTests.MinimalChromeSurvivesChoiceReconfigurationAndDisabledInput",
+        "state": "Passed",
+        "durationSeconds": 0.0007602,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NestedWindowRestoresTheOriginalFocusModality(False)",
+        "fullName": "Hellscript.Tests.UiButtonTests.NestedWindowRestoresTheOriginalFocusModality(False)",
+        "state": "Passed",
+        "durationSeconds": 0.0014866,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "NestedWindowRestoresTheOriginalFocusModality(True)",
+        "fullName": "Hellscript.Tests.UiButtonTests.NestedWindowRestoresTheOriginalFocusModality(True)",
+        "state": "Passed",
+        "durationSeconds": 0.0004245,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ParentCanvasGroupDisablesTheVisualAndTheActionTogether",
+        "fullName": "Hellscript.Tests.UiButtonTests.ParentCanvasGroupDisablesTheVisualAndTheActionTogether",
+        "state": "Passed",
+        "durationSeconds": 0.0009057,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PoolingClearsAPressedOrHoveredState",
+        "fullName": "Hellscript.Tests.UiButtonTests.PoolingClearsAPressedOrHoveredState",
+        "state": "Passed",
+        "durationSeconds": 0.0012269,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "PressCancelsOnPointerExitAndNeverMutatesTheLayout",
+        "fullName": "Hellscript.Tests.UiButtonTests.PressCancelsOnPointerExitAndNeverMutatesTheLayout",
+        "state": "Passed",
+        "durationSeconds": 0.0005257,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "ReconfigurationReusesOneDecorativeNonBlockingFace",
+        "fullName": "Hellscript.Tests.UiButtonTests.ReconfigurationReusesOneDecorativeNonBlockingFace",
+        "state": "Passed",
+        "durationSeconds": 0.0009467,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "StorageCurrentSkinCannotBeOverwrittenByGenericIdleSkin",
+        "fullName": "Hellscript.Tests.UiButtonTests.StorageCurrentSkinCannotBeOverwrittenByGenericIdleSkin",
+        "state": "Passed",
+        "durationSeconds": 0.0009749,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "TransparentBackdropHasNoChromeOrKeyboardStop",
+        "fullName": "Hellscript.Tests.UiButtonTests.TransparentBackdropHasNoChromeOrKeyboardStop",
+        "state": "Passed",
+        "durationSeconds": 0.0008397,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      },
+      {
+        "name": "UnownedChestRemainsClosedEvenWithAnInvalidSelectedValue",
+        "fullName": "Hellscript.Tests.UiButtonTests.UnownedChestRemainsClosedEvenWithAnInvalidSelectedValue",
+        "state": "Passed",
+        "durationSeconds": 0.0004559,
+        "message": null,
+        "stackTrace": null,
+        "output": ""
+      }
+    ]
+  }
+}
