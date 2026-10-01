@@ -172,3 +172,9 @@ The user removed the text-size multiplier on 2026-09-30. Do not run or add text-
 ### Rift preparation and recommended skill management (2026-10-01)
 
 Recommended mode permits skill-tree point allocation and equipment while keeping custom combat policies locked and preserving the mode switch. An empty rift-entry skill slot opens the same Hunt Edict tree in the common window stack; closing restores the entry window and chosen stage. Potion selection uses the shared loadout transaction, with immediate persistent equip, clear and swap semantics. See [Rift entry](Rift_Entry.en.md).
+
+## Native rune board adapter
+
+`RuneBoardWindow` uses the generated `ContentWindowView` entry point with `EquipmentViewSource.Draft`. It retains shared safe-area, pause, back and input ownership plus `UiTheme`, `UiFonts`, `UiButton` and `UiIconButton`. Hex occupancy, connectivity and partial activation require the dedicated `RuneGemView`/`RuneGemMesh` renderer. The independent board camera and storage scroll, fixed portrait inspector/two storage rows, and 1.55:1 landscape ratio preserve the approved HTML layout. A drag layer outside the board mask remains visible over storage.
+
+`RuneBoardSession` owns all-weapon drafts, undo and presets. Persistence uses `GameStore.CommitRuneBoardState` with revision and whole-layout validation. `StoreViewBinding` ignores autosaves with the same rune revision so it does not recreate pressed controls. Practice has no account owner. Optional folder/UV parameters on `UiIconButton` retain all existing defaults. Only semantic rune colours and art are content-specific; equipment details and transactions are not duplicated. See [implementation and evidence](Rune_Board_Native.en.md).

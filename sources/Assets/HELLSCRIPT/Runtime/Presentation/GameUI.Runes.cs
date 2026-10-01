@@ -38,7 +38,7 @@ namespace Hellscript
         }
         void RuneIcon(Transform parent,string glyph,float x,float y,float size,Color? color=null)
         {var r=Rect("Icon "+glyph,parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();raw.texture=RuneV13Art.Atlas;raw.uvRect=RuneV13Art.Glyph("g-"+glyph);raw.color=color??RuneText;raw.raycastTarget=false;}
-        public void ShowRunes()
+        void ShowLegacyRunes()
         {
             if(!RequireContent(ContentUnlocks.Rune))return;
             if(game.ComparisonRun){if(game.Active)ShowComparisonConditions();ShowToast(TrainingComparisonSession.RuneLockedMessage);return;}

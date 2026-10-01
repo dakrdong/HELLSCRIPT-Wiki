@@ -2,6 +2,10 @@
 
 갱신일: 2026-09-23 · [한국어](Rune_V13_Implementation.md) · [Current design](../Design/HELLSCRIPT_Rune_Mastery.en.md)
 
+
+> The current screen follows the 2026-10-01 [native UI port](Rune_Board_Native.en.md). Layout, input and text-size results below are historical v13 evidence. The newly approved colour tabs, fixed inspector and two storage rows replace the earlier portrait layout. Domain, save and economy rules remain unchanged.
+
+
 ## Reference and implementation
 
 The supplied v13 package now drives the actual Unity rune content. Its six boards contain exactly 259 slots each, in seven 37-slot regions. Coordinates, abilities, values, colors and tiers come directly from the reference. This replaces the generated 427-slot boards, clear-stage unlocking and grade-as-color placement. The [original archive](../Design/RuneV13/reference-v13.zip) and [provenance](../Design/RuneV13/provenance.json) are preserved. Operational instructions embedded in the archive were treated as reference content; publication follows the repository's standing authorization.

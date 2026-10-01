@@ -17,7 +17,8 @@ namespace Hellscript
     public sealed partial class RuntimeRuneV13Smoke:MonoBehaviour
     {
         GameController game;string output;int captures;readonly HashSet<string> missing=new HashSet<string>();
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)] static void Install()
+        // Historical v13 assertions are preserved as evidence; RuntimeRuneBoardSmoke owns these command-line flags.
+        static void InstallLegacy()
         {if(Debug.isDebugBuild&&Environment.GetCommandLineArgs().Any(a=>a=="-hellscriptRuneV13Smoke"||a=="-hellscriptRuneDragSmoke"||a=="-hellscriptRuneClaritySmoke")){Application.runInBackground=true;new GameObject("Rune v13 verification").AddComponent<RuntimeRuneV13Smoke>();}}
         static string Arg(string name){var a=Environment.GetCommandLineArgs();int i=Array.IndexOf(a,name);if(i<0||i+1>=a.Length)throw new ArgumentException(name);return a[i+1];}
         static void Require(bool check,string message){if(!check)throw new InvalidOperationException(message);}

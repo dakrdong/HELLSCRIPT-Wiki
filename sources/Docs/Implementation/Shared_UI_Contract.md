@@ -189,3 +189,9 @@
 2026-10-01: 일반 액티브 인장은 장착 칸에 따라 초록·파랑·호박색·보라로 표시하고 트리·장착 칸·설명 머리글·세부 칙령 레일이 같은 색을 사용합니다. 빈칸이 생겨도 뒤 칸의 색을 당기지 않습니다. [칸별 색과 검증](Hunt_Edict_Slot_Seals.md).
 
 2026-10-01: 균열 결과의 수령 연출은 공통 창 관리자의 입력·안전 영역을 유지하고 검은 딤과 실제 지급 내역만 표시합니다. 결과의 장착은 현재 소유 장비 ID와 기존 저장 거래에 연결하며, DPS 팝업은 훈련장의 기존 그래프·조사 부품을 공유합니다. [동작과 검증](Rift_Result_Actions.md).
+
+## 룬 보드 네이티브 어댑터
+
+`RuneBoardWindow`는 신규 창 템플릿의 `ContentWindowView`를 `EquipmentViewSource.Draft`로 연다. 공통 창 관리자의 안전 영역·일시정지·뒤로가기·입력 소유권과 `UiTheme`, `UiFonts`, `UiButton`, `UiIconButton`을 재사용한다. 육각 점유·연결·부분 활성 규칙 때문에 `RuneGemView`/`RuneGemMesh`가 전용 보드, 견본, 드래그 그림을 그린다. 카메라와 보관함의 독립 스크롤, 세로 고정 정보 카드·두 줄 보관함, 가로 1.55:1 비율은 승인된 HTML 배치를 보존하기 위한 어댑터다. 드래그 그림은 보드 마스크 바깥에 두어 보관함 위에서도 보인다.
+
+`RuneBoardSession`이 전체 무기 편집본·실행 취소·프리셋을 소유하고, 저장은 기존 `GameStore.CommitRuneBoardState`의 revision·전체 배치 검사를 통과해야 한다. `StoreViewBinding`은 같은 룬 revision의 정기 저장 때문에 눌린 버튼을 재생성하지 않는다. 연습은 계정과 분리된 모델만 사용한다. `UiIconButton`의 선택적 폴더·UV 인자는 기존 호출부의 기본값을 바꾸지 않는다. 룬 의미 색과 원화만 콘텐츠 전용이며, 장비 상세·거래를 복제하지 않는다. [이식·검증 기록](Rune_Board_Native.md)을 따른다.

@@ -1,0 +1,246 @@
+{
+  "date": "2026-10-01",
+  "baselineMain": "7a3f9d3d",
+  "prototype": "18807bea",
+  "integration": "4afc706e",
+  "build": {
+    "status": "passed",
+    "target": "macOS Development",
+    "errors": 0,
+    "unity": "6000.6.0f1",
+    "evidence": "build.txt"
+  },
+  "native": {
+    "status": "passed",
+    "retainedScreenshots": 76,
+    "locales": [
+      "ko",
+      "en"
+    ],
+    "viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1440,
+        810
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1890,
+        810
+      ]
+    ],
+    "inputs": [
+      "InputSystem mouse: drag, rotation, recall, five practice steps in portrait/landscape",
+      "synthetic InputSystem Touchscreen: scroll, hold/drag/drop, two-finger pinch",
+      "synthetic keyboard: R and Ctrl+Z",
+      "uGUI callbacks: dialogs, saves, presets, service navigation"
+    ],
+    "dataChecks": [
+      "five all-weapon presets after disk reload",
+      "draft isolation",
+      "cross-weapon physical rune ownership",
+      "slot unlock undo",
+      "unsaved close and revert",
+      "fusion/drop service return retains selected weapon",
+      "common gameplay pause and resume lease"
+    ],
+    "sections": {
+      "gallery": "gallery/pixel-legibility.json",
+      "mouseAndDialogs": "native-initial/passed-sections.txt",
+      "layoutsPortraitPracticeAndSave": "native-final/result.json",
+      "landscapePractice": "practice-landscape/result.json",
+      "syntheticTouch": "touch/passed-sections.txt"
+    },
+    "repairs": [
+      "touch scroll harness needed movement events after drag initialization",
+      "return from fusion/drop services selected equipped weapon rather than remembered board",
+      "neutral start-stone rendering and English minimap wrapping",
+      "landscape practice field height"
+    ],
+    "reuse": "The full native batch ran once. Passing sections were retained; only failed or affected sections were repeated after repairs.",
+    "physicalMobile": false,
+    "screenReader": false,
+    "colourVisionTools": false,
+    "textSizes": [
+      "default"
+    ]
+  },
+  "art": {
+    "evidence": "art-validation.json",
+    "originals": 27,
+    "derivedDimFaces": 7,
+    "generatedNewImages": false,
+    "model": "unknown",
+    "productionApproved": false
+  },
+  "parity": {
+    "cases": 468,
+    "fixture": "Assets/HELLSCRIPT/Tests/Fixtures/RuneNativeParity.json",
+    "initialTestsPassed": 8,
+    "initialTestsFailed": 0,
+    "evidence": "editmode-focused.xml"
+  },
+  "pixelTolerance": {
+    "tolerance": 0.00392156862745098,
+    "rawEvidence": "gallery/pixel-legibility.json",
+    "notes": "One 8-bit code value tolerance is explicit; the sRGB derivation and rendering colours are unchanged."
+  },
+  "prototypeReadOnly": "prototype-read-only.json",
+  "prototypeDifferences": [
+    "game glossary (29 label keys; translation-differences.json)",
+    "34 game shapes and grade-aware stacks",
+    "native shared fonts/rasterization/mesh shadows",
+    "no exact CSS breathing/placement animation",
+    "shared modal frame for anchored popovers",
+    "actual game economy, mastery cap, numerical units and two-decimal formatting",
+    "demo tools/localStorage/JSON/device frames/language toggle excluded"
+  ],
+  "delivery": {
+    "mainMerged": false,
+    "publicWikiPublished": false,
+    "reason": "Feature branch delivery. Publish only after user-approved main integration."
+  },
+  "finalFocused": {
+    "total": 108,
+    "passed": 108,
+    "failed": 0,
+    "skipped": 0,
+    "scope": [
+      "RuneBoardNativeTests",
+      "RuneMasteryTests",
+      "RuneV13Tests",
+      "LocalizationTests",
+      "StoredLocalizationTests",
+      "BuildResourceTests"
+    ],
+    "firstRun": {
+      "passed": 107,
+      "failed": 1,
+      "evidence": "editmode-final-focused-initial.xml"
+    },
+    "retry": {
+      "passed": 1,
+      "failed": 0,
+      "evidence": "editmode-final-focused-catalog.xml",
+      "reason": "The isolated repair clone initially lacked the unchanged Docs/Implementation/Rune_Mastery_Catalog.json fixture. Copied that file and reran only the failed catalog check."
+    },
+    "checkout": "/tmp/rune-native-repair-1001",
+    "reuse": "Final code is copied back with source equivalence verification; no redundant rerun."
+  },
+  "wikiBaselineAttachments": {
+    "restoredFiles": 283,
+    "restoredDirectory": "Artifacts/Validation/AttributeIntegration",
+    "reason": "The fresh worktree lacks ignored baseline evidence referenced by existing current/history pages. Read-only copies were restored from the primary checkout solely for wiki generation; they are not new rune-test evidence and are not committed."
+  },
+  "fullEditMode": {
+    "suite": "Full Edit Mode once on integrated rune-board branch before six final presentation repairs",
+    "total": 4958,
+    "passed": 4911,
+    "failed": 47,
+    "skipped": 0,
+    "durationSeconds": 2024.3468377,
+    "baseline": "Docs/Implementation/AllWorkIntegration20260930Evidence/full-editmode.json",
+    "newFailures": [],
+    "baselineNowPassing": [],
+    "failures": [
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Mage)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Ranger)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(-1,Warrior)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(1)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(10)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(11)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(12)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(13)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(14)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(15)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(16)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(17)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(2)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(3)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(4)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(5)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(6)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(7)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(8)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedBuildKeepsStartedActionAndReplaysOneOriginalRelease(9)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,0)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(0,2)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,0)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(1,2)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,0)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(2,2)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,0)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(3,2)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,0)",
+      "Hellscript.Tests.ActionContinuityTests.ChangedChannelStopsAtTheNextExistingBoundaryWithoutExtraCostOrDamage(4,2)",
+      "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(-1,10)",
+      "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(1,5)",
+      "Hellscript.Tests.ActionContinuityTests.EditsDuringTravelAndRecoveryDoNotRestartTimersOrDoubleRelease(9,4)",
+      "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(0)",
+      "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(1)",
+      "Hellscript.Tests.ActionContinuityTests.VersionThreeActionMigrationPreservesTimingCostAndReleaseState(12)",
+      "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(0,1)",
+      "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(1,5)",
+      "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,1)",
+      "Hellscript.Tests.CurrentBuildSaveTests.RiftFailurePreservesInFlightStateThenDiskMatchesTheExactSuccessfulTransition(12,15)",
+      "Hellscript.Tests.EdictTargetIntegrationTests.ANewerActionTargetPolicyIsNotSilentlyDowngraded",
+      "Hellscript.Tests.EnemyTests.DeathPayloadRestoresIndependentlyAndNeverRepeatsItsReward(11,0.9f)",
+      "Hellscript.Tests.EnemyTests.DeathPayloadRestoresIndependentlyAndNeverRepeatsItsReward(5,1.0f)",
+      "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(1)",
+      "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(12)",
+      "Hellscript.Tests.RestoreFidelityTests.ARestoredRiftKeepsFightingTheSameFight(5)",
+      "Hellscript.Tests.RuleTests.LegacyRunDoesNotInventUnobservedNoEnemyHistory"
+    ],
+    "repairsValidatedSeparately": "Final 108 focused Edit Mode checks, native affected sections and 909-file source equivalence; full suite not repeated."
+  },
+  "sourceEquivalence": {
+    "files": 909,
+    "evidence": "source-equivalence.json",
+    "status": "identical"
+  },
+  "mainRefresh": {
+    "incomingMain": "c4e03b09",
+    "previousRuneCommit": "de6643c7",
+    "conflicts": [
+      "Docs/Implementation/Shared_UI_Contract.md",
+      "Docs/Implementation/Shared_UI_Contract.en.md",
+      "Wiki/history/shared-ui-contract.json",
+      "Wiki/history/shared-ui-contract.en.json"
+    ],
+    "resolution": "Preserved incoming main text/history and appended the native rune adapter/history. Rune implementation files unchanged. All previous English translations preserved.",
+    "focused": {
+      "total": 126,
+      "passed": 126,
+      "failed": 0,
+      "skipped": 0,
+      "firstRun": "editmode-integration-focused.xml",
+      "retry": "editmode-integration-locale.xml",
+      "repair": "Incoming RiftCombatGraphWindow lacked the English title for 균열 {0}단계 · {1}. Added that single missing glossary entry and reran only the failed literal coverage check."
+    },
+    "fullSuiteRepeated": false,
+    "reason": "The rune UI/domain files are unchanged. Reused their prior full-matrix evidence and recorded idle/rift-entry evidence from main; reran compile, locale/rune/rift-result checks and affected native save/lifecycle only. Unrelated incoming feature acceptance remains scoped to its owner.",
+    "build": {
+      "status": "passed",
+      "errors": 0,
+      "output": "/tmp/rune-board-native-integrated/HELLSCRIPT.app",
+      "sourceHashes": "integration-source-hashes.json"
+    },
+    "native": {
+      "status": "passed",
+      "scope": "save: five presets, disk reload, transfer, unlock undo, close/revert, fusion/drop return and gameplay pause/resume",
+      "evidence": "integration-native/result.json",
+      "newCaptures": 2,
+      "missingTranslations": 0
+    }
+  }
+}

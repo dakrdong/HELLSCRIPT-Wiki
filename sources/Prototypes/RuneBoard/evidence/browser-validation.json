@@ -1,0 +1,2251 @@
+{
+  "generated": "2026-10-01",
+  "browser": "headless Chrome (CDP, real mouse and key input)",
+  "passed": 305,
+  "failed": 0,
+  "pageErrors": [],
+  "checks": [
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 913.0859375,
+        "y": 189.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "picking a stack selects its first block",
+      "ok": true
+    },
+    {
+      "name": "hovering a free slot previews the landing",
+      "ok": true
+    },
+    {
+      "name": "the preview says how many cells switch on",
+      "ok": true,
+      "detail": "배치 가능 · 1/2칸 켜짐"
+    },
+    {
+      "name": "tapping the slot places the block",
+      "ok": true
+    },
+    {
+      "name": "a finished centre offers a ready padlock",
+      "ok": true
+    },
+    {
+      "name": "clickable: .region-lock.ready",
+      "ok": true,
+      "detail": {
+        "x": 80.78125,
+        "y": 235.453125,
+        "covered": false
+      }
+    },
+    {
+      "name": "tapping the padlock opens the region menu",
+      "ok": true
+    },
+    {
+      "name": "the menu previews the elite centre ability",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"choose-region\"]",
+      "ok": true,
+      "detail": {
+        "x": 226,
+        "y": 318.9921875,
+        "covered": false
+      }
+    },
+    {
+      "name": "opening the region records it and gives the free elite slot",
+      "ok": true,
+      "detail": {
+        "order": [
+          "assault"
+        ],
+        "n": 38,
+        "name": "맹공"
+      }
+    },
+    {
+      "name": "the dock now shows unsaved changes",
+      "ok": true
+    },
+    {
+      "name": "some slot can be opened with a point",
+      "ok": true,
+      "detail": "-5,3"
+    },
+    {
+      "name": "tapping a closed slot opens its menu",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"unlock\"]",
+      "ok": true,
+      "detail": {
+        "x": 252.15625,
+        "y": 294.9453125,
+        "covered": false
+      }
+    },
+    {
+      "name": "opening a slot spends a point and opens exactly that slot",
+      "ok": true
+    },
+    {
+      "name": "the menu closes after opening",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"state-guide\"]",
+      "ok": true,
+      "detail": {
+        "x": 551.71875,
+        "y": 366.5625,
+        "covered": false
+      }
+    },
+    {
+      "name": "guide opens (landscape-ko)",
+      "ok": true,
+      "detail": "블럭과 칸의 상태"
+    },
+    {
+      "name": "guide landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "guide closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"help\"]",
+      "ok": true,
+      "detail": {
+        "x": 862.421875,
+        "y": 17.96875,
+        "covered": false
+      }
+    },
+    {
+      "name": "help opens (landscape-ko)",
+      "ok": true,
+      "detail": "룬 보드 이용 안내"
+    },
+    {
+      "name": "help landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "help closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"effects\"]",
+      "ok": true,
+      "detail": {
+        "x": 386.5078125,
+        "y": 93.375,
+        "covered": false
+      }
+    },
+    {
+      "name": "effects opens (landscape-ko)",
+      "ok": true,
+      "detail": "활성 효과 비교"
+    },
+    {
+      "name": "effects landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "effects closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"presets\"]",
+      "ok": true,
+      "detail": {
+        "x": 625.859375,
+        "y": 419.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "presets opens (landscape-ko)",
+      "ok": true,
+      "detail": "전체 배치 프리셋 · 5칸"
+    },
+    {
+      "name": "presets landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "presets closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"catalog\"]",
+      "ok": true,
+      "detail": {
+        "x": 829.171875,
+        "y": 17.96875,
+        "covered": false
+      }
+    },
+    {
+      "name": "catalog opens (landscape-ko)",
+      "ok": true,
+      "detail": "능력 도감"
+    },
+    {
+      "name": "catalog landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "catalog closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"lab\"]",
+      "ok": true,
+      "detail": {
+        "x": 895.671875,
+        "y": 17.96875,
+        "covered": false
+      }
+    },
+    {
+      "name": "lab opens (landscape-ko)",
+      "ok": true,
+      "detail": "시연 도구"
+    },
+    {
+      "name": "lab landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "lab closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"regions\"]",
+      "ok": true,
+      "detail": {
+        "x": 63.5234375,
+        "y": 139.390625,
+        "covered": false
+      }
+    },
+    {
+      "name": "regions opens (landscape-ko)",
+      "ok": true,
+      "detail": "영역 개방"
+    },
+    {
+      "name": "regions landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "regions closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: .eff",
+      "ok": true,
+      "detail": {
+        "x": 386.5078125,
+        "y": 93.375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"dialog-close\"]",
+      "ok": true,
+      "detail": {
+        "x": 807.171875,
+        "y": 42.875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: .region-chip",
+      "ok": true,
+      "detail": {
+        "x": 63.5234375,
+        "y": 139.390625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-region=\"assault\"][data-action=\"region-info\"]",
+      "ok": true,
+      "detail": {
+        "x": 195,
+        "y": 293.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "region info landscape-ko fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"state-guide\"]",
+      "ok": true,
+      "detail": {
+        "x": 398.34375,
+        "y": 472.3515625,
+        "covered": false
+      }
+    },
+    {
+      "name": "guide opens (portrait-en)",
+      "ok": true,
+      "detail": "Block and slot states"
+    },
+    {
+      "name": "guide portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "guide closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"help\"]",
+      "ok": true,
+      "detail": {
+        "x": 334.71875,
+        "y": 23.046875,
+        "covered": false
+      }
+    },
+    {
+      "name": "help opens (portrait-en)",
+      "ok": true,
+      "detail": "How the rune board works"
+    },
+    {
+      "name": "help portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "help closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"effects\"]",
+      "ok": true,
+      "detail": {
+        "x": 231.7421875,
+        "y": 144.8671875,
+        "covered": false
+      }
+    },
+    {
+      "name": "effects opens (portrait-en)",
+      "ok": true,
+      "detail": "Active effects"
+    },
+    {
+      "name": "effects portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "effects closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"presets\"]",
+      "ok": true,
+      "detail": {
+        "x": 53.1015625,
+        "y": 928.9921875,
+        "covered": false
+      }
+    },
+    {
+      "name": "presets opens (portrait-en)",
+      "ok": true,
+      "detail": "Layout presets · 5 slots"
+    },
+    {
+      "name": "presets portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "presets closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"catalog\"]",
+      "ok": true,
+      "detail": {
+        "x": 297.3125,
+        "y": 23.046875,
+        "covered": false
+      }
+    },
+    {
+      "name": "catalog opens (portrait-en)",
+      "ok": true,
+      "detail": "Ability codex"
+    },
+    {
+      "name": "catalog portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "catalog closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"lab\"]",
+      "ok": true,
+      "detail": {
+        "x": 372.125,
+        "y": 23.046875,
+        "covered": false
+      }
+    },
+    {
+      "name": "lab opens (portrait-en)",
+      "ok": true,
+      "detail": "Demo tools"
+    },
+    {
+      "name": "lab portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "lab closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"regions\"]",
+      "ok": true,
+      "detail": {
+        "x": 73.0625,
+        "y": 197.0625,
+        "covered": false
+      }
+    },
+    {
+      "name": "regions opens (portrait-en)",
+      "ok": true,
+      "detail": "Open a region"
+    },
+    {
+      "name": "regions portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "regions closes with Escape",
+      "ok": true
+    },
+    {
+      "name": "clickable: .eff",
+      "ok": true,
+      "detail": {
+        "x": 231.7421875,
+        "y": 144.8671875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"dialog-close\"]",
+      "ok": true,
+      "detail": {
+        "x": 409.515625,
+        "y": 239,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: .region-chip",
+      "ok": true,
+      "detail": {
+        "x": 73.0625,
+        "y": 197.0625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-region=\"assault\"][data-action=\"region-info\"]",
+      "ok": true,
+      "detail": {
+        "x": 121.96875,
+        "y": 371.546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "region info portrait-en fits the screen",
+      "ok": true,
+      "detail": {
+        "sideways": false,
+        "insideScreen": true,
+        "buttonsVisible": true,
+        "close": true
+      }
+    },
+    {
+      "name": "the tutorial opens on page 1 of 5",
+      "ok": true
+    },
+    {
+      "name": "every practice page has a solution under the rules",
+      "ok": true,
+      "detail": [
+        1,
+        1,
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"c-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 253.125,
+        "y": 221.9140625,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 1: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 781.0078125,
+        "y": 402.1328125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 2",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"diamond-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 253.125,
+        "y": 221.9140625,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 2: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 781.0078125,
+        "y": 402.1328125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 3",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"pair-g1\"]",
+      "ok": true,
+      "detail": {
+        "x": 253.125,
+        "y": 221.9140625,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 3: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 781.0078125,
+        "y": 402.1328125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 4",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"pair-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 253.125,
+        "y": 221.9140625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 196.984375,
+        "y": 280.7421875,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 4: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "page 4: the goal is reached",
+      "ok": true
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 781.0078125,
+        "y": 402.1328125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 5",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"pair-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 253.125,
+        "y": 221.9140625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 196.984375,
+        "y": 295.8203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"c-g1\"]",
+      "ok": true,
+      "detail": {
+        "x": 253.125,
+        "y": 211.1171875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 196.984375,
+        "y": 269.9453125,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 196.984375,
+        "y": 269.9453125,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 196.984375,
+        "y": 269.9453125,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 5: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 2,
+        "expected": 2
+      }
+    },
+    {
+      "name": "page 5: the goal is reached",
+      "ok": true
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 781.0078125,
+        "y": 402.1328125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Finish closes the dialog",
+      "ok": true
+    },
+    {
+      "name": "the tutorial opens on page 1 of 5",
+      "ok": true
+    },
+    {
+      "name": "every practice page has a solution under the rules",
+      "ok": true,
+      "detail": [
+        1,
+        1,
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"c-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 220,
+        "y": 333.546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 1: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 380.078125,
+        "y": 929.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 2",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"diamond-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 220,
+        "y": 333.546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 2: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 380.078125,
+        "y": 929.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 3",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"pair-g1\"]",
+      "ok": true,
+      "detail": {
+        "x": 220,
+        "y": 350.75,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 3: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 380.078125,
+        "y": 929.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 4",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"pair-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 220,
+        "y": 333.546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 120.6953125,
+        "y": 407.28125,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 4: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "page 4: the goal is reached",
+      "ok": true
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 380.078125,
+        "y": 929.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Next goes to page 5",
+      "ok": true
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"pair-g0\"]",
+      "ok": true,
+      "detail": {
+        "x": 120.6953125,
+        "y": 350.75,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 120.6953125,
+        "y": 424.484375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: .tut-card[data-tpiece=\"c-g1\"]",
+      "ok": true,
+      "detail": {
+        "x": 319.3046875,
+        "y": 350.75,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 120.6953125,
+        "y": 424.484375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 120.6953125,
+        "y": 424.484375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-tut-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 120.6953125,
+        "y": 424.484375,
+        "covered": false
+      }
+    },
+    {
+      "name": "page 5: every practice block is placed by dragging",
+      "ok": true,
+      "detail": {
+        "placed": 2,
+        "expected": 2
+      }
+    },
+    {
+      "name": "page 5: the goal is reached",
+      "ok": true
+    },
+    {
+      "name": "clickable: #tut-next",
+      "ok": true,
+      "detail": {
+        "x": 380.078125,
+        "y": 929.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Finish closes the dialog",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 913.0859375,
+        "y": 189.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "a pair is placed next to the centre",
+      "ok": true,
+      "detail": [
+        {
+          "id": "attack-pair-1",
+          "q": 1,
+          "r": 0,
+          "rot": 0
+        }
+      ]
+    },
+    {
+      "name": "clickable: [data-action=\"rotate\"]",
+      "ok": true,
+      "detail": {
+        "x": 676.4453125,
+        "y": 370.2890625,
+        "covered": false
+      }
+    },
+    {
+      "name": "rotating a placed block turns it by 60 degrees",
+      "ok": true
+    },
+    {
+      "name": "R rotates too",
+      "ok": true
+    },
+    {
+      "name": "each turn can be undone",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|seed\"]",
+      "ok": true,
+      "detail": {
+        "x": 617.0859375,
+        "y": 189.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "touching a block of the same colour is refused with a reason",
+      "ok": true,
+      "detail": "같은 색의 다른 블럭끼리는 변을 맞댈 수 없습니다."
+    },
+    {
+      "name": "a refused tap places nothing",
+      "ok": true
+    },
+    {
+      "name": "tapping a placed block selects it and shows its cells",
+      "ok": true,
+      "detail": "03\n선택 정보\n선택 해제\n공격 · 쌍각\n\n2칸 · 120° · 켜짐 1칸 · 꺼짐 1칸\n\n어둡게 가라앉은 칸은 색이 달라 능력이 켜지지 않고 연결 통로로만 쓰입니다.\n0.1초 눌렀다가 끌면 옮길 수 있습니다.\n\n60° 회전\n회수"
+    },
+    {
+      "name": "clickable: [data-action=\"retrieve\"]",
+      "ok": true,
+      "detail": {
+        "x": 855.5859375,
+        "y": 370.2890625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Recall returns the block to storage",
+      "ok": true
+    },
+    {
+      "name": "nothing is saved at the start",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-stack=\"magic|seed\"]",
+      "ok": true,
+      "detail": {
+        "x": 676.28125,
+        "y": 189.234375,
+        "covered": false
+      }
+    },
+    {
+      "name": "placing marks unsaved changes and enables Save",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"undo\"]",
+      "ok": true,
+      "detail": {
+        "x": 708.6875,
+        "y": 419.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Undo removes the block",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-stack=\"magic|seed\"]",
+      "ok": true,
+      "detail": {
+        "x": 676.28125,
+        "y": 189.234375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"revert\"]",
+      "ok": true,
+      "detail": {
+        "x": 796.96875,
+        "y": 419.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Revert asks first",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"revert-confirm\"]",
+      "ok": true,
+      "detail": {
+        "x": 591.5703125,
+        "y": 272.0546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "Revert returns to the last save",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-stack=\"magic|seed\"]",
+      "ok": true,
+      "detail": {
+        "x": 676.28125,
+        "y": 189.234375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"save\"]",
+      "ok": true,
+      "detail": {
+        "x": 897.8984375,
+        "y": 419.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Save keeps the layout and clears the unsaved mark",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-stack=\"support|seed\"]",
+      "ok": true,
+      "detail": {
+        "x": 735.484375,
+        "y": 189.234375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"close\"]",
+      "ok": true,
+      "detail": {
+        "x": 931.375,
+        "y": 17.96875,
+        "covered": false
+      }
+    },
+    {
+      "name": "closing with unsaved edits asks what to do",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"dialog-close\"]",
+      "ok": true,
+      "detail": {
+        "x": 671.65625,
+        "y": 169.78125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Keep editing returns to the board",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"close\"]",
+      "ok": true,
+      "detail": {
+        "x": 931.375,
+        "y": 17.96875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"discard-close\"]",
+      "ok": true,
+      "detail": {
+        "x": 459.7578125,
+        "y": 272.0546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "Discard and close shows the closed state",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"reopen-frame\"]",
+      "ok": true,
+      "detail": {
+        "x": 478,
+        "y": 295.265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "Reopen brings the board back with the discarded edit gone",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"mode-view\"]",
+      "ok": true,
+      "detail": {
+        "x": 541.828125,
+        "y": 135.5546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "View mode is on and tiles hint at editing",
+      "ok": true
+    },
+    {
+      "name": "tapping a slot shows its ability even under a block",
+      "ok": true,
+      "detail": "모든 능력치 +0.75"
+    },
+    {
+      "name": "picking a block in view mode switches to edit mode",
+      "ok": true
+    },
+    {
+      "name": "view mode never moved a block",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-weapon=\"bow\"]",
+      "ok": true,
+      "detail": {
+        "x": 557.65625,
+        "y": 54.1953125,
+        "covered": false
+      }
+    },
+    {
+      "name": "the weapon tab changes the board being edited",
+      "ok": true
+    },
+    {
+      "name": "blocks placed on another weapon are not in storage",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-weapon=\"sword\"]",
+      "ok": true,
+      "detail": {
+        "x": 79.6640625,
+        "y": 54.1953125,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"presets\"]",
+      "ok": true,
+      "detail": {
+        "x": 625.859375,
+        "y": 419.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"preset-store\"][data-index=\"0\"]",
+      "ok": true,
+      "detail": {
+        "x": 589.109375,
+        "y": 145.171875,
+        "covered": false
+      }
+    },
+    {
+      "name": "the store dialog proposes a name",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"preset-store-confirm\"]",
+      "ok": true,
+      "detail": {
+        "x": 591.5703125,
+        "y": 288.9140625,
+        "covered": false
+      }
+    },
+    {
+      "name": "the preset is stored and the list shows it",
+      "ok": true,
+      "detail": "1\n각인 배치 1\n블럭 5개 · 6무기 전체\n등록\n불러오기"
+    },
+    {
+      "name": "clickable: [data-action=\"retrieve\"]",
+      "ok": true,
+      "detail": {
+        "x": 855.5859375,
+        "y": 370.2890625,
+        "covered": false
+      }
+    },
+    {
+      "name": "a block was recalled after storing the preset",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"presets\"]",
+      "ok": true,
+      "detail": {
+        "x": 625.859375,
+        "y": 419.0703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"preset-load\"][data-index=\"0\"]",
+      "ok": true,
+      "detail": {
+        "x": 646.1171875,
+        "y": 145.171875,
+        "covered": false
+      }
+    },
+    {
+      "name": "loading the preset restores the stored layout",
+      "ok": true,
+      "detail": {
+        "w": 5
+      }
+    },
+    {
+      "name": "the preview toolbar offers a language button",
+      "ok": true
+    },
+    {
+      "name": "clickable: #language",
+      "ok": true,
+      "detail": {
+        "x": 829.2421875,
+        "y": 27.5,
+        "covered": false
+      }
+    },
+    {
+      "name": "the language switch changes the screen text",
+      "ok": true,
+      "detail": "Rune Board"
+    },
+    {
+      "name": "clickable: [data-action=\"catalog\"]",
+      "ok": true,
+      "detail": {
+        "x": 843.8828125,
+        "y": 79.3515625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"help\"]",
+      "ok": true,
+      "detail": {
+        "x": 868.8203125,
+        "y": 79.3515625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"state-guide\"]",
+      "ok": true,
+      "detail": {
+        "x": 573.34375,
+        "y": 340.171875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"effects\"]",
+      "ok": true,
+      "detail": {
+        "x": 452.7265625,
+        "y": 136.2734375,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"presets\"]",
+      "ok": true,
+      "detail": {
+        "x": 666.53125,
+        "y": 380.296875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"lab\"]",
+      "ok": true,
+      "detail": {
+        "x": 893.7578125,
+        "y": 79.3515625,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"regions\"]",
+      "ok": true,
+      "detail": {
+        "x": 66.328125,
+        "y": 171.25,
+        "covered": false
+      }
+    },
+    {
+      "name": "English has no missing translation keys",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: #language",
+      "ok": true,
+      "detail": {
+        "x": 821.1953125,
+        "y": 27.5,
+        "covered": false
+      }
+    },
+    {
+      "name": "and switches back to Korean",
+      "ok": true
+    },
+    {
+      "name": "portrait ko (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 389.625,
+        "y": 767.125,
+        "covered": false
+      }
+    },
+    {
+      "name": "portrait ko (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "portrait ko (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "narrow ko (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 318.6484375,
+        "y": 625.0546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "narrow ko (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "narrow ko (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "landscape ko (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 913.0859375,
+        "y": 189.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "landscape ko (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "landscape ko (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc169 ko (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 1380.203125,
+        "y": 267.203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "pc169 ko (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc169 ko (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc1610 ko (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 1380.203125,
+        "y": 267.203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "pc1610 ko (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc1610 ko (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc219 ko (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 1830.203125,
+        "y": 267.203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "pc219 ko (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc219 ko (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "portrait en (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 389.625,
+        "y": 767.125,
+        "covered": false
+      }
+    },
+    {
+      "name": "portrait en (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "portrait en (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "narrow en (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 318.6484375,
+        "y": 625.0546875,
+        "covered": false
+      }
+    },
+    {
+      "name": "narrow en (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "narrow en (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "landscape en (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 913.0859375,
+        "y": 189.2265625,
+        "covered": false
+      }
+    },
+    {
+      "name": "landscape en (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "landscape en (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc169 en (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 1380.203125,
+        "y": 267.203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "pc169 en (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc169 en (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc1610 en (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 1380.203125,
+        "y": 267.203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "pc1610 en (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc1610 en (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc219 en (nothing selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "clickable: [data-stack=\"attack|pair\"]",
+      "ok": true,
+      "detail": {
+        "x": 1830.203125,
+        "y": 267.203125,
+        "covered": false
+      }
+    },
+    {
+      "name": "pc219 en (stored block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "pc219 en (placed block selected) has no clipped, overlapping or off-screen parts",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "dragging empty board space pans the camera",
+      "ok": true,
+      "detail": {
+        "cam0": {
+          "x": 0,
+          "y": 0,
+          "scale": 0.8348124279624344
+        },
+        "cam1": {
+          "x": -83.85118969735676,
+          "y": -23.957477548357698,
+          "scale": 0.8348124279624344
+        }
+      }
+    },
+    {
+      "name": "panning never moves a block",
+      "ok": true
+    },
+    {
+      "name": "the mouse wheel zooms in",
+      "ok": true,
+      "detail": {
+        "x": -83.85118969735676,
+        "y": -23.957477548357698,
+        "scale": 0.9182936707586778
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"fit\"]",
+      "ok": true,
+      "detail": {
+        "x": 485.7890625,
+        "y": 366.5703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Fit returns to the region view",
+      "ok": true,
+      "detail": {
+        "fitted": {
+          "x": 0,
+          "y": 0,
+          "scale": 0.8348124279624344
+        },
+        "cam0": {
+          "x": 0,
+          "y": 0,
+          "scale": 0.8348124279624344
+        }
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"overview\"]",
+      "ok": true,
+      "detail": {
+        "x": 518.3046875,
+        "y": 366.5703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "Overview shows all seven regions",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"fit\"]",
+      "ok": true,
+      "detail": {
+        "x": 485.7890625,
+        "y": 366.5703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "a quick drag that starts on a block pans the board",
+      "ok": true
+    },
+    {
+      "name": "clickable: [data-action=\"fit\"]",
+      "ok": true,
+      "detail": {
+        "x": 485.7890625,
+        "y": 366.5703125,
+        "covered": false
+      }
+    },
+    {
+      "name": "holding a block for 0.1 s lifts it",
+      "ok": true
+    },
+    {
+      "name": "Escape cancels the lift and keeps the layout",
+      "ok": true
+    },
+    {
+      "name": "the preview is scaled down",
+      "ok": true,
+      "detail": 0.8263599048961293
+    },
+    {
+      "name": "a drag in the scaled preview lands on the intended slot",
+      "ok": true,
+      "detail": [
+        {
+          "id": "support-pair-1",
+          "q": 1,
+          "r": 0,
+          "rot": 0
+        }
+      ]
+    },
+    {
+      "name": "clickable: [data-weapon=\"staff\"]",
+      "ok": true,
+      "detail": {
+        "x": 791.4949951171875,
+        "y": 134.89129638671875,
+        "covered": false
+      }
+    },
+    {
+      "name": "clickable: [data-stack=\"skill|seed\"]",
+      "ok": true,
+      "detail": {
+        "x": 723.7528686523438,
+        "y": 699.914794921875,
+        "covered": false
+      }
+    },
+    {
+      "name": "a tap in the scaled preview places on the tapped slot",
+      "ok": true
+    },
+    {
+      "name": "a swipe on storage tiles scrolls the list instead of dragging",
+      "ok": true
+    },
+    {
+      "name": "a 0.3 s hold lets a storage block be dragged",
+      "ok": true
+    },
+    {
+      "name": "releasing places the block on the lifted preview",
+      "ok": true,
+      "detail": [
+        {
+          "id": "magic-seed-1",
+          "q": 0,
+          "r": -1,
+          "rot": 0
+        }
+      ]
+    },
+    {
+      "name": "a short tap selects the stack",
+      "ok": true
+    },
+    {
+      "name": "tapping a slot places the selected block",
+      "ok": true
+    },
+    {
+      "name": "pinching with two fingers zooms the board in",
+      "ok": true,
+      "detail": {
+        "scale0": 1.0017749135549212,
+        "now": 2.804969757953779
+      }
+    },
+    {
+      "name": "unlit cells carry no hatch over their glyph",
+      "ok": true
+    },
+    {
+      "name": "an empty socket is dark (the baseline)",
+      "ok": true,
+      "detail": {
+        "lum": 0.11064171913278513,
+        "white": 0,
+        "black": 0.9000473228772309,
+        "dark": 0.9082950243374798,
+        "sat": 0.3547003039471982
+      }
+    },
+    {
+      "name": "magic:dim: an unlit block cell is not mostly black like an empty socket",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.2796623415412513,
+          "white": 0,
+          "black": 0.11965927528393726,
+          "dark": 0.46859789075175773,
+          "sat": 0.5703618078290905
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "magic:dim: an unlit block cell keeps its colour and brightness",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.2796623415412513,
+          "white": 0,
+          "black": 0.11965927528393726,
+          "dark": 0.46859789075175773,
+          "sat": 0.5703618078290905
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "attack:dim: an unlit block cell is not mostly black like an empty socket",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.1944711189938493,
+          "white": 0,
+          "black": 0.21846268253109788,
+          "dark": 0.6586668469442942,
+          "sat": 0.609800257963738
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "attack:dim: an unlit block cell keeps its colour and brightness",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.1944711189938493,
+          "white": 0,
+          "black": 0.21846268253109788,
+          "dark": 0.6586668469442942,
+          "sat": 0.609800257963738
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "critical:dim: an unlit block cell is not mostly black like an empty socket",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.23807532587831035,
+          "white": 0,
+          "black": 0.10580043266630611,
+          "dark": 0.5837614926987561,
+          "sat": 0.46878389845133717
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "critical:dim: an unlit block cell keeps its colour and brightness",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.23807532587831035,
+          "white": 0,
+          "black": 0.10580043266630611,
+          "dark": 0.5837614926987561,
+          "sat": 0.46878389845133717
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "skill:dim: an unlit block cell is not mostly black like an empty socket",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.3794467304796455,
+          "white": 0,
+          "black": 0.004664683612763656,
+          "dark": 0.2609518658734451,
+          "sat": 0.43160222027850575
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "skill:dim: an unlit block cell keeps its colour and brightness",
+      "ok": true,
+      "detail": {
+        "cell": {
+          "lum": 0.3794467304796455,
+          "white": 0,
+          "black": 0.004664683612763656,
+          "dark": 0.2609518658734451,
+          "sat": 0.43160222027850575
+        },
+        "empty": {
+          "lum": 0.11064171913278513,
+          "white": 0,
+          "black": 0.9000473228772309,
+          "dark": 0.9082950243374798,
+          "sat": 0.3547003039471982
+        }
+      }
+    },
+    {
+      "name": "support:lit: the glyph on a bright face has both white strokes and a dark outline",
+      "ok": true,
+      "detail": {
+        "lum": 0.6940345460716262,
+        "white": 0.27170091941590047,
+        "black": 0,
+        "dark": 0.18445781503515413,
+        "sat": 0.4906444157506058
+      }
+    },
+    {
+      "name": "skill:lit: the glyph on a bright face has both white strokes and a dark outline",
+      "ok": true,
+      "detail": {
+        "lum": 0.6344224991781486,
+        "white": 0.20494186046511628,
+        "black": 0.021430502974580854,
+        "dark": 0.18844645754461872,
+        "sat": 0.4904015786165627
+      }
+    },
+    {
+      "name": "attack:lit: the glyph on a dark face stays white",
+      "ok": true,
+      "detail": {
+        "lum": 0.5368806295135787,
+        "white": 0.1741819902650081,
+        "black": 0,
+        "dark": 0.0347823147647377,
+        "sat": 0.5167024015876336
+      }
+    },
+    {
+      "name": "magic:lit: the glyph on a dark face stays white",
+      "ok": true,
+      "detail": {
+        "lum": 0.6793071056692497,
+        "white": 0.2890413737155219,
+        "black": 0,
+        "dark": 0.013148999459167117,
+        "sat": 0.43384109961888123
+      }
+    },
+    {
+      "name": "critical:lit: the glyph on a dark face stays white",
+      "ok": true,
+      "detail": {
+        "lum": 0.617886462263684,
+        "white": 0.22471606273661437,
+        "black": 0,
+        "dark": 0.02149810708491076,
+        "sat": 0.3965920847057059
+      }
+    },
+    {
+      "name": "the sword board has an attack-power slot to inspect",
+      "ok": true,
+      "detail": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "the slot card shows \"name +value\" on one line",
+      "ok": true,
+      "detail": "공격력 +0.8"
+    },
+    {
+      "name": "the slot card has no tag row",
+      "ok": true
+    },
+    {
+      "name": "the slot card has no requirement, origin or \"ability on\" text",
+      "ok": true,
+      "detail": "공격력 +0.8\n\n중앙 · 3등급\n\n영역 정보"
+    },
+    {
+      "name": "the card keeps one height whatever is selected, so the board does not jump",
+      "ok": true,
+      "detail": {
+        "card0": 91.71875,
+        "card1": 91.71875,
+        "board0": 290.546875,
+        "board1": 290.546875
+      }
+    },
+    {
+      "name": "the card is compact (7em at most) and the board gets the room",
+      "ok": true,
+      "detail": {
+        "card1": 91.71875,
+        "board1": 290.546875
+      }
+    },
+    {
+      "name": "clickable: [data-action=\"clear\"]",
+      "ok": true,
+      "detail": {
+        "x": 394.4453125,
+        "y": 470.8828125,
+        "covered": false
+      }
+    },
+    {
+      "name": "the cross clears the slot card",
+      "ok": true
+    },
+    {
+      "name": "a block floats while dragging",
+      "ok": true
+    }
+  ]
+}
