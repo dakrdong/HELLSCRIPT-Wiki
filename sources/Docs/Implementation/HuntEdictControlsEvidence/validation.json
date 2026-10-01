@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-01",
+  "sourceMain": "76e893de1c2a419f996062c2c9a196ffa31a94b3",
+  "nativeBuildSource": "54a5705a",
+  "nativeControlMatrixSource": "c454f22b",
+  "relevantNativeSourceSha256": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.GearRecommendations.cs": "f2dffabf918bb0c76a110e6ae28d04309bc3f994607a836ec369dbeb51011c81",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.CombatJournal.cs": "b1a871245ccc15c06432973c4b5ebc91aea16afb673aae794a9f6b9ebf2cdd5c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.cs": "6958ba2a4342f9015fb1a30a7e19e8611c14a54ae557db78addf4506fb6e65ce",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Equipment.cs": "8f2f9168598fbd98fe9c1f7dde350c2ef21459acaaa14fcb6f2cd72bba59d612",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.SkillPresets.cs": "454233cee4bfbc3be0819117f34f8262772f10558f6bef58938b7e20dd58be3f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictSurface.cs": "e951b1c52d9e7968308ef60a78429e88895946a78c6fdacb3bd6e2d0048fb103",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftRecommendationWindow.cs": "f071fe5c52f3d98253932e8ad0c5c982acfd9216377319c057f163f632c27a79",
+    "Assets/HELLSCRIPT/Runtime/Core/RiftGearRecommendations.cs": "dc02d3da30ab1e8172bb9d04f832d8df53ea8ccd11d77ed9a5091d7745d00396",
+    "Assets/HELLSCRIPT/Runtime/Core/EquipmentRecommendation.cs": "14c91478f8b22c67cb9129ebdc88ef319575fe788a699d3ab94e980672f1b37f"
+  },
+  "sharedUi": {
+    "ownershipCheck": "passed",
+    "tests": 11,
+    "passed": 11
+  },
+  "relatedEditMode": {
+    "uniqueTests": 261,
+    "passedAfterFocusedRepair": 261,
+    "skipped": 0,
+    "initial": {
+      "passed": 258,
+      "failed": 3
+    },
+    "repair": {
+      "tests": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "scope": [
+      "Hellscript.Tests.EquipmentStorageTests",
+      "Hellscript.Tests.HuntEdictFoundationTests",
+      "Hellscript.Tests.HuntEdictQuickPresetTests",
+      "Hellscript.Tests.HuntEdictSkillPresetTests",
+      "Hellscript.Tests.HuntEdictSuspendedSaveTests",
+      "Hellscript.Tests.HuntEdictV2StorageTests",
+      "Hellscript.Tests.HuntEdictV2Tests",
+      "Hellscript.Tests.LocalizationTests",
+      "Hellscript.Tests.RecommendedEquipmentTests"
+    ],
+    "files": [
+      "related-editmode-initial.xml",
+      "related-editmode-repair.xml"
+    ]
+  },
+  "fullEditModeReused": {
+    "sourceMain": "062e208a799444387edb73420e2080cf5afcdbf2",
+    "runs": 1,
+    "completed": 4960,
+    "status": "failed",
+    "reportedFailuresMatchingExistingBaseline": 25,
+    "failureListCapped": true,
+    "finalPassFailSkipTotals": null,
+    "evidence": "../RiftResultActionsEvidence/full-editmode-job.json",
+    "baseline": "../RiftResultActionsEvidence/baseline-failures.json",
+    "notRerun": "Only test harness and the independently verified Rift result/Daily Quest code changed after this run; recommendation/policy domain sources did not change. Final tile placement was checked with the affected native layout coverage."
+  },
+  "native": {
+    "platform": "macOS Standalone Development Player, Unity 6000.6.0f1",
+    "input": "Real EventSystem raycast and pointer event dispatch after rendered-frame registration",
+    "defaultFontOnly": true,
+    "textScalingTestsRun": false,
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "controlMatrix": "10 cases passed",
+    "gearLayoutMatrix": "10 cases passed, each with both journal states",
+    "sharedDetailMatrix": "10 cases passed",
+    "restart": "passed in a fresh native process",
+    "files": [
+      "controls-runtime.txt",
+      "gear-layout-runtime.txt",
+      "restart.txt"
+    ],
+    "reusedInitialChecks": {
+      "source": "759fd81c",
+      "completedBeforeTheInitialUnequippedSkillFixtureFailure": [
+        "master ON/OFF and retained values",
+        "all ten slot exclusion toggles",
+        "three dropdown choices and conditional warehouse shortcut",
+        "save with draft isolation",
+        "outside dialog dismissal without underlying input or draft mutation"
+      ]
+    },
+    "focusedRepairs": [
+      "Prepare an equipped skill in clean fixtures",
+      "Wait for rendered graphics before raycast input",
+      "Move mini offers above the shared persistent HUD reservation"
+    ]
+  },
+  "physicalMobile": "not tested; resized macOS windows are not device evidence",
+  "realPlayerSave": "not used; isolated test save under /tmp"
+}

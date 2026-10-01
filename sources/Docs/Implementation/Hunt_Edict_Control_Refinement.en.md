@@ -18,7 +18,7 @@ Outside taps close every Hunt Edict dialog and skill bubble exactly like X. The 
 
 The existing acquisition transaction checks whether an equippable new item increases the currently equipped configuration's score. Weapons use the shared whole-hand `EquipmentScore.Replacement` calculation. Auto-equipped, incompatible and lower-score drops do not enter the manual offer queue. Training and tutorial runs do not show these offers.
 
-Small equipment tiles show one highest-item-score unseen candidate per equipment part. All weapon/hand families share one group and both rings share another. Different parts appear together. Opening a tile uses shared details, read-only comparison, equip and close actions; equipped items stay left and the candidate right.
+Small equipment tiles show one highest-item-score unseen candidate per equipment part. The existing `BattleHudTopOnPage` reservation keeps them above the persistent character/skill HUD and reflows them when the combat journal expands or collapses. All weapon/hand families share one group and both rings share another. Different parts appear together. Opening a tile uses shared details, read-only comparison, equip and close actions; equipped items stay left and the candidate right.
 
 Successful equip or user close acknowledges the item and advances to the next unseen candidate. Acquisition eligibility is retained, so after equipping the highest score, the player can still inspect each already queued candidate once. Closing because of page cleanup or reflow does not acknowledge an offer.
 
@@ -35,3 +35,15 @@ The separate activation action is replaced by a single-choice box at the right o
 `RiftRecommendationWindow` uses the generated common content entry point and reuses `ContentWindowView`, `EquipmentSlotView`, `ItemDetailView`, `EquipmentComparisonView`, `UiTheme` and `UiFonts`. Display components do not directly mutate saves.
 
 Final integrated validation is recorded below as one stage. Only default font size is tested; macOS synthetic pointers are separate from physical mobile verification.
+
+### Validation on 2026-10-01
+
+- [Evidence](HuntEdictControlsEvidence/validation.json): 261 related Edit Mode cases initially yielded 258 passes and three failures. Only the three failed cases were repaired and rerun; all 261 unique cases now pass. Shared UI ownership and its 11 validator tests also pass.
+- The macOS development Player used actual EventSystem raycasts and pointer event dispatch. ON/OFF, the anchored list, per-tab selection, preview/save isolation and shared detail actions were checked at 440×956, 956×440, 1600×900, 1600×1000 and 2100×900 in Korean and English.
+- After correcting the tile/HUD overlap, only the affected gear layout and queue coverage was rerun. All ten combinations retain the tiles above the HUD and inside the safe area with the journal expanded or collapsed. A fresh native process also confirmed saved exclusions, active preset, acknowledged items and the next pending offer.
+- The existing full Edit Mode job completed 4,960 cases and was reused. Its 25 returned failures match the known ActionContinuity baseline; the failure list was capped and final pass/fail/skip totals were unavailable. This is not an overall pass, and the full suite was not rerun.
+- Validation used an isolated save. No text-size matrix was run. Physical mobile devices remain untested.
+
+![Per-tab single-choice activation](HuntEdictControlsEvidence/preset-radio-1600x900-ko.png)
+
+![Equipment offers above the persistent HUD](HuntEdictControlsEvidence/rift-recommendations.png)

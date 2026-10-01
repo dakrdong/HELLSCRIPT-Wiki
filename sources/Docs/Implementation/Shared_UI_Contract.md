@@ -195,3 +195,7 @@
 `RuneBoardWindow`는 신규 창 템플릿의 `ContentWindowView`를 `EquipmentViewSource.Draft`로 연다. 공통 창 관리자의 안전 영역·일시정지·뒤로가기·입력 소유권과 `UiTheme`, `UiFonts`, `UiButton`, `UiIconButton`을 재사용한다. 육각 점유·연결·부분 활성 규칙 때문에 `RuneGemView`/`RuneGemMesh`가 전용 보드, 견본, 드래그 그림을 그린다. 카메라와 보관함의 독립 스크롤, 세로 고정 정보 카드·두 줄 보관함, 가로 1.55:1 비율은 승인된 HTML 배치를 보존하기 위한 어댑터다. 드래그 그림은 보드 마스크 바깥에 두어 보관함 위에서도 보인다.
 
 `RuneBoardSession`이 전체 무기 편집본·실행 취소·프리셋을 소유하고, 저장은 기존 `GameStore.CommitRuneBoardState`의 revision·전체 배치 검사를 통과해야 한다. `StoreViewBinding`은 같은 룬 revision의 정기 저장 때문에 눌린 버튼을 재생성하지 않는다. 연습은 계정과 분리된 모델만 사용한다. `UiIconButton`의 선택적 폴더·UV 인자는 기존 호출부의 기본값을 바꾸지 않는다. 룬 의미 색과 원화만 콘텐츠 전용이며, 장비 상세·거래를 복제하지 않는다. [이식·검증 기록](Rune_Board_Native.md)을 따른다.
+
+## 일일 퀘스트 고정 본문 어댑터
+
+`DailyQuestWindow`는 기존 `ContentWindowView`/`ContentWindowHost` 진입점과 공통 제목·탭·닫기·하단 행동·안전 영역을 유지한다. 다섯 목표의 상태와 개별 수령을 한 화면에서 확인해야 하므로 해당 본문만 자동 목록 배치·스크롤을 끄고 전체 내용을 비례 배치한다. 세로 한 열, 가로 3×2 배치는 [일일 퀘스트 구현](Daily_Quests.md)을 따른다. `UiTheme`/`UiFonts`, 공통 버튼, `CurrencyIconView` 및 `StorageGlyph`를 재사용하며 거래·저장은 기존 도메인이 소유한다. 검사는 모든 카드·수령 버튼의 노출·레이캐스트·잘림·드래그 후 위치 유지·저장 실패와 7일/28일 탐색을 포함한다. 공통 창의 스크롤 정책과 UI 검사 소유자 목록은 변경하지 않는다.
