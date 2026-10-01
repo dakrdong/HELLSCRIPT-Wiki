@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-01",
+  "engine": "Unity 6000.6.0f1",
+  "baseCommit": "a1edd32027f9f70c5bcdcdcbd59e3bf377dc96e3",
+  "sourceHashes": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Skills.cs": "01ae46eae61c64c0f5017eec9229cde3e38dddd0f98f1a268f6636c21c9cdfc6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Overview.cs": "d9b0ee762a28af9cb53766d77bde8a6dc242f74a2e1b40dc43d76418517f7592",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Glyphs.cs": "54786bf8c24cd73fe8106bc0b86798245ac29fb165a08b7f536d4a3e88ddf5be",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeSkillTreeSmoke.cs": "42f985a824fae9a844aadd7b26c92719babf12c3dbb000bbec52bae547d95a85",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeEdictOverviewSmoke.cs": "6e7db31d7fedcba4b647c98df3ba322c95c4a8e915b6e93a2ac071e3c849deac",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "6740bc6577f4f71fa3c7aa3458791d92feed7aa3529f69478b907ca45ec571fb"
+  },
+  "contract": {
+    "ownership": "PASS",
+    "testsPassed": 11
+  },
+  "editMode": {
+    "filter": [
+      "HuntEdictOverviewTests",
+      "HuntEdictSkillPresetTests",
+      "EdictEditingTests",
+      "LocalizationTests"
+    ],
+    "passed": 83,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 15.3254692
+  },
+  "macOSBuild": {
+    "result": "PASS",
+    "errors": 0,
+    "isolatedProject": "/tmp/hellscript-edict-simple-validation-20261001"
+  },
+  "nativeSmoke": {
+    "result": "PASS",
+    "profiles": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textSizes": [
+      "default"
+    ],
+    "input": "uGUI raycast + pointer down/up/click, synthetic macOS native Player",
+    "freshProcessSaveRestore": "PASS",
+    "totalCaptures": 24
+  },
+  "limits": [
+    "No physical mobile-device validation",
+    "No full combat-example gallery; combat engine and preview runner unchanged",
+    "Existing URP stripped/unsupported postprocessing shader warnings observed; no C# or UI smoke exception"
+  ],
+  "evidenceFiles": {
+    "menu-restart.png": "2dad322c66e26f0e6405611cd5f2aa1365e1f3631b21d7db6a642a13989bc588",
+    "menu-restart.txt": "3c70094f2ce5b3aa0bcd9a71b48d9b990144369615391574a0580128aa188b4f",
+    "menu-runtime.txt": "38dd11d090a42a7e871cfc078845d6bcba7545dcf2d7d830f7e7b45abecf296a",
+    "overview-440x956-ko.png": "06900ecfcd148a250759d96340b1d56f4aa045f1209ce1d76be5a2ad40286d02",
+    "overview-956x440-en.png": "e7e18b856676233011a3c81a6f09cee8901e54f87af84fe70e2bdf9ad23f8dc8",
+    "overview-defaults-on.png": "fe62087f6c44c52016e1d5815e8645861299bc2f9c074cdcef9bc2ae000afe53",
+    "tree-bubble-1600x900-ko.png": "140fbaeb0238d12434975bf2e0c91b52f2015f617fbcc4eaac90620b3e42f7f6",
+    "tree-bubble-440x956-ko.png": "66a1eb08d8c87e29666f1a47d03b94db78ae9fac29c94b728f26728f181f3b4a",
+    "unequipped-bubble.png": "49bd6f1860b8b47a5360bae7965e7685703d1c9b0374d01b522f3bb0aab9b2a6"
+  },
+  "integration": {
+    "mainBase": "1aef7861",
+    "runtimeSourceUnchanged": true,
+    "unrelatedMergedChanges": [
+      "Blacksmith UI and its completed validation",
+      "Fixed daily-quest documentation, evidence and wiki metadata"
+    ],
+    "localization": "Four unrelated blacksmith entries appended on main; Hunt Edict removals preserved",
+    "coverageReused": "Successful Hunt Edict native and focused coverage reused; no repeated full suite or smoke"
+  }
+}

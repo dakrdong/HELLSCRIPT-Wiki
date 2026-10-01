@@ -2,6 +2,14 @@
 
 Updated: 2026-09-28 · [한국어](Hunt_Edict_Overview.md)
 
+## 2026-10-01: an Overview with combat styles only
+
+The body contains only **Aggressive, Balanced and Careful** cards and their descriptions. Equipped skills/use modes, combat judgment groups, automation summaries, last-hunt advice and extra warnings are removed. Their settings remain reachable in the original category tabs. Wide layouts place the three cards side by side; narrow layouts stack them.
+
+The fixed **Use default settings ON/OFF** control and existing Save/Revert stay. Recommended-mode dimming, edit locking and draft preservation remain unchanged. Actual style recipes and descriptions reuse `HuntEdictQuickPresets.Styles`.
+
+[Current behavior and verification](Hunt_Edict_Simple_Skill_Actions.en.md). Detailed lists, advice, old captures and text-size validation below are historical implementation evidence, not the current UI. Future validation uses the default text size only.
+
 This records how the overview tab, combat styles and advice from the last hunt in the [Hunt Edict UX redesign](../Design/Hunt_Edict_UX_Redesign.en.md) were built into the game window. Rationale and rules live in the design document; this page covers owners, behaviour, a performance fix and verification.
 
 ## Use default settings

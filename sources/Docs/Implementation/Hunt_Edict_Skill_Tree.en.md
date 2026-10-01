@@ -1,6 +1,16 @@
 # Hunt edict skill tree integration
 
-Updated: 2026-09-29 · [한국어](Hunt_Edict_Skill_Tree.md)
+Updated: 2026-10-01 · [한국어](Hunt_Edict_Skill_Tree.md)
+
+## 2026-10-01: clear equipment marks and compact skill actions
+
+Equipped actives and ultimates have one extra thin outline around the seal, with no slot-number badge. The rank/max-rank label stays below it. Empty equipment sockets no longer show numbers either.
+
+Clicking an active or ultimate in the tree shows its inspector and a small bubble beside the icon: **+** when unequipped, **−** and a **parchment-and-brush edit pictogram** when equipped. The + is disabled for an unlearned skill. Passives apply by their allocated rank and have no equipment action. Outside click and Back dismiss the bubble. Rotation and language changes resolve the rebuilt node again.
+
+The equipped-skill rail on the detailed preset page is navigation: another skill opens its presets directly, without an action popup. Browsing changes neither the draft nor its saved owner. Tree equipment changes retain manual Save/Revert; policy activation retains immediate scoped saving.
+
+[Scope and final verification](Hunt_Edict_Simple_Skill_Actions.en.md)
 
 ## Screen and interaction
 
@@ -8,7 +18,7 @@ The Hunt Edict **Skills** tab shows all 37 skills of the current class, arranged
 
 There are four equipped normal active slots and one separate ultimate slot. At most one ultimate can be selected. Every unlocked passive with an assigned rank applies automatically, so there is no passive equipment area. Existing version 3 free base ranks count as assigned ranks. The combat HUD reads the same four normal slots, separate ultimate slot and actual cooldowns.
 
-Selecting an equipped active opens **Remove skill** and **Edit hunt edict**. Editing opens that skill's preset tabs and combat examples. Custom Settings has detailed controls without an example image; edits save immediately after activation. Returning to the tree preserves the saved policy. The separate skill-edict subtab is removed. Basic attack and attack priority remain available under **Attack settings**.
+Selecting an equipped active in the tree opens icon-only **−** and **Edit hunt edict** actions. Editing opens that skill's preset tabs and combat examples. Custom Settings has detailed controls without an example image; edits save immediately after activation. Returning to the tree preserves the saved policy. The separate skill-edict subtab is removed. Basic attack and attack priority remain available under **Attack settings**.
 
 Landscape puts the tree on the left, the inspector at the top of the right column and the skill bar beneath it. Portrait puts the tree on top, fixes the skill bar at the bottom and opens the inspector between them when a skill is selected. Equipped slots, main navigation and skill-tree save controls stay fixed. The tree, details and policy content scroll separately. The per-skill policy page removes the manual-save footer and moves its skill bar to a right-hand vertical rail in landscape, retaining the bottom dock in portrait. Korean, English and larger text are supported.
 

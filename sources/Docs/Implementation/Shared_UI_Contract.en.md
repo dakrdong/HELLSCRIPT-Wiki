@@ -39,7 +39,7 @@ Keep the original 25 groups and 130 global option IDs, values and ranges. Auto E
 
 Show current choices, numbers, sets and priorities compactly; open controls on demand. Disabled conditions remain explained inline. Skill rows show icon/name/rank/equipped state while commands belong to selected details. New skill design remains excluded. Keep dirty state, revert and save in a fixed footer except on the skill-policy page, which uses a fixed activation action and scoped immediate saves through the existing transaction. Pending ranks, equipment and global settings stay detached. Navigation preserves drafts; close/preset replacement asks about unsaved edits.
 
-Opening the window lands on the **Overview** tab: three combat styles, advice from the last hunt, equipped skills with their use policies, the seven combat-judgment groups and the automation status. A style is a bundle of existing quick presets and advice reads only stored combat records; both edit the draft and go through the existing Save/Revert. See [Hunt Edict overview](Hunt_Edict_Overview.en.md).
+Opening the window lands on the **Overview** tab: only three combat styles and their descriptions, below the existing default-policy switch. A style is a bundle of existing quick presets; it edits the draft and goes through the existing Save/Revert. See [Hunt Edict overview](Hunt_Edict_Overview.en.md).
 
 ## New content workflow
 
@@ -78,7 +78,7 @@ Shared UI does not require a rectangular frame for every control. Vaults use `Ui
 
 ## Native skill tree adapter
 
-The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives with assigned ranks always apply; a slot menu opens that skill’s edict settings. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).
+The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives with assigned ranks always apply; a compact tree bubble opens that skill’s edict settings, while the preset-page rail navigates directly. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).
 
 Since the 2026-09-27 redesign, the tree is a dedicated layout that draws three branch trunks, level-stage gates and prerequisite links. Trunks, links and glows are a texture-free `SkillTreeGraphic` mesh; node positions come from the presentation-only `SkillTreeLayout`. `ClassSkillTree` still owns unlock, rank and equipment rules. Nodes and skill-bar sockets use the `UiButton` `Icon` role like the storage chests, and their ornament graphic reads the common button's hover, press and focus state. Selection is shown with light rather than an outline. `SkillIconView` draws the icons; the ornate frames, backdrop and point gem are content art generated with GPT at the user's request. This is separate from the rule that common button decoration uses no raster art, and icons are fitted to each frame's measured transparent opening. Production records and checks are in the [skill tree screen art record](../Art/SkillTreeUi/Skill_Tree_UI_Art.en.md).
 
@@ -158,3 +158,5 @@ The live DPS panel and the pause dialog are adapters on the existing battle HUD 
 ## Retired text-size preference
 
 The user removed the text-size multiplier on 2026-09-30. Do not run or add text-size matrices or enlarged-text-only acceptance. Retain viewport/safe-area layouts, default-size clipping checks and actual input coverage. See [removal scope](Text_Size_Option_Removal.en.md).
+
+2026-10-01: equipped tree nodes use a thin seal outline without slot-number badges. Tree actions are compact adjacent bubbles (+ or − and parchment/brush editing); the preset-page skill rail navigates directly without a popup. Draft/save ownership and active-circle/passive-square icons remain shared. [Latest change](Hunt_Edict_Simple_Skill_Actions.en.md).
