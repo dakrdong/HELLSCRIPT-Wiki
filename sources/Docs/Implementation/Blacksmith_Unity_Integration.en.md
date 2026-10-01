@@ -12,12 +12,12 @@ The forge window was rebuilt in the composition of the approved [HTML prototype]
 
 | Item | Rule |
 | --- | --- |
-| Frame | Title bar (back · HELLSCRIPT · Forge · wallets · guide · close) → five service tabs → body → docked action bar. Wallet chips vary by tab: gold for reroll, gear enhancement and equipment crafting; enhancement stones plus Abyssal Coins for slots; Abyssal Coins for core crafting. Prototype-only notes (autosave, demo text) are not shown. |
+| Frame | Title bar (back · HELLSCRIPT · Forge · wallets · guide · close) → four service tabs → body → docked action bar. Wallet chips vary by tab: gold for reroll and gear enhancement; enhancement stones plus Abyssal Coins for slots; Abyssal Coins for core crafting. Prototype-only notes (autosave, demo text) are not shown. |
 | Size unit | Every length and font size is a multiple of one window-fitted unit `U` (the prototype's em). Landscape `U = min(width/75.8, height/35.7)`, portrait `U = min(width/31.7, height/64.5)` in canvas units, clamped to 8–17. Landscape is one composition from a 956×440 phone to PC 16:9, 16:10 and 21:9. |
 | Landscape | Three columns. Reroll: equipment list / selected equipment with its affix lines / possible affixes (about 0.85 : 1.2 : 0.95). Slots: equipment slots / selected slot / enhancement work. Gear: equipment list / selected item / growth preview. Cores: cores / equipment / quality. A docked action bar sits below. |
 | Portrait | One column with a docked action bar. Equipment is picked from a bottom sheet opened by the bar at the top (reroll, gear), slot workstations are a one-line strip plus a sheet, and core crafting is three pages (cores → equipment → quality) with a horizontal slide. |
 | Scrolling | Only long lists (equipment, candidates, recipes) and dialog bodies scroll. |
-| Locks | A locked tab shows a padlock and dim text; tapping it shows the "To unlock" bubble under the tab for **2 seconds** (previously 3). The text comes from `ContentUnlocks.Condition`. An account with nothing unlocked sees the sealed forge. Stages: reroll 35, slots 5, gear enhancement 1, core crafting **50**, equipment crafting 3 (routes to the existing crafting screen). |
+| Locks | A locked tab shows a padlock and dim text; tapping it shows the "To unlock" bubble under the tab for **2 seconds** (previously 3). The text comes from `ContentUnlocks.Condition`. An account with nothing unlocked sees the sealed forge. Stages: reroll 35, slots 5, gear enhancement 1, core crafting **50**. |
 | Reroll | The first paid roll asks to lock the line first. The auto dialog has count, slider, quick picks, cost summary and the target list; the result dialog (Stop / Keep rolling) is unchanged. The prototype's roll history is omitted because no history is stored. The game's Equipment details and Masterwork buttons stay as small buttons in the panel header. |
 | Slots | Unlocking a workstation goes through an Abyssal Coin confirmation. The growth plan is full-screen. |
 | Cores | A 2×4 core tile grid, the catalogue (search, class drop-down, type tabs), the chosen equipment's affix ranges and the minimum-quality gauge follow the prototype. Craft results and history are full-screen. |
@@ -111,3 +111,11 @@ Follow the inventory's [shared equipment comparison contract](../Design/Equipmen
 See [validation record](Blacksmith_Validation.en.md) for executed checks and limitations. HTML checks, Edit Mode tests and native macOS development-player input/save/screenshots are separate evidence. Desktop windows at mobile ratios and synthetic Unity inputs are not physical-mobile touch verification.
 
 Publish the wiki only after this branch is merged to `main`. The merging task performs generation, checks, public deployment and logged-out verification; never publish from this feature branch.
+
+## 2026-10-01 Button and layout corrections
+
+The forge has four service tabs: affix reroll, slot enhancement, equipment enhancement and core crafting. The equipment-crafting guide entry was removed. Unchanged autosaves no longer rebuild the controls, and newly drawn buttons begin with their final availability/lock colours. Real hover and press feedback still uses the shared button behaviour.
+
+Auto-reroll setup opens even when gold is insufficient; its paid start remains disabled and states cost, balance and shortage. A single reroll click explains the same shortage without changing equipment or spending gold. Slot actions display the required and owned stones and, when short, the missing amount. The equipment current/next comparison fits its labels and values instead of expanding to fill the panel. Costs, progression, the intentional running-job pulse and all GameStore transactions are preserved.
+
+Validation: [2026-10-01 acceptance record](Blacksmith_Validation.en.md#2026-10-01-button-and-layout-corrections).

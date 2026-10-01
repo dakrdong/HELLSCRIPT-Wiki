@@ -1,8 +1,26 @@
 # 대장간 구현 검증 기록
 
-갱신일: 2026-09-30 · 작성일: 2026-09-22
+갱신일: 2026-10-01 · 작성일: 2026-09-22
 
 [English](Blacksmith_Validation.en.md) · [구현·리소스·이전 명세](Blacksmith_Unity_Integration.md)
+
+## 2026-10-01 버튼과 배치 수정
+
+자동 저장은 3초마다 저장 성공 알림을 보냈고, 대장간은 표시 상태가 같아도 버튼을 다시 만들었다. 새 버튼이 활성 색에서 비활성 색으로 전환하면서 깜빡였으며, 누르는 중 버튼이 교체될 수도 있었다. 표시 상태가 바뀐 저장만 다시 그리도록 하고 새 버튼에는 첫 프레임부터 최종 활성·잠금 색을 적용했다.
+
+첨부 화면의 45 G는 Lv.1 옵션 변경 비용 500 G보다 적었다. 골드 부족으로 두 버튼이 설명 없이 비활성화되어 있었다. 이제 옵션 변경은 부족 금액을 안내하고, 자동 변경은 설정을 열어 필요·보유·부족 금액을 표시한다. 부족할 때 유료 실행은 차단한다. 슬롯 강화 버튼에도 강화석 비용·보유·부족 수량을 표시했다. 장비 강화 비교 상자는 수치에 맞는 높이로 줄였고, 장비 제작 안내 탭을 삭제해 서비스는 네 개다.
+
+| 검사 | 결과 |
+| --- | --- |
+| 집중 Edit Mode | `BlacksmithTests`, `ForgePresentationAllocationTests`, `UiButtonTests`, `LocalizationTests`: **107개 통과, 실패·건너뜀 0개**, 9.29초. [종료 결과와 개별 검사](BlacksmithFix20261001Evidence/editmode.json) |
+| 전체 대장간 실행 검사 | 한 번 통과. +10·최대 강화의 실제 견적·차감·저장, 옵션 고정·자동 중단/계속/멈춤, 슬롯 작업·개방·무료 완료·정산, NPC 버튼·E키, KO/EN 다섯 비율, 재시작 복구. [결과](BlacksmithFix20261001Evidence/runtime.txt) |
+| 부족 안내 추가 확인 | 이전 알림과 자동 설정 안내가 겹치는 부분을 정리한 뒤 해당 범위만 확인. 45 G 계정에서 무차감, 자동 설정 열림·유료 시작 차단, 강화석 견적, 초기 비활성 색, 자동 저장과 누름 중 같은 버튼 유지. KO/EN 다섯 비율에서 문구 잘림·중복 안내 없음. [결과](BlacksmithFix20261001Evidence/feedback.txt) |
+| 네 탭 탐색 | 최종 실행본에서 한 번 통과. 네 잠금 조건·2초 안내·키보드/포인터·뒤로·선택 보존, 네 해금 탭 이동, 삭제 탭 부재, KO/EN 다섯 비율. [결과](BlacksmithFix20261001Evidence/navigation.txt) |
+| 계약·컴파일·빌드 | UI 계약 통과, 계약 검사 11개 통과. 최종 macOS 개발 빌드 성공: 오류 0개, 경고 176개. [빌드 결과](BlacksmithFix20261001Evidence/build.json) |
+
+기본 글자 크기에서 440×956, 956×440, 1600×900(16:9), 1440×900(16:10), 1680×720(21:9)을 확인했다. [축소한 장비 비교](BlacksmithFix20261001Evidence/gear-pc-ko.png) · [세로 장비 강화](BlacksmithFix20261001Evidence/gear-portrait-ko.png) · [자동 변경 부족 안내](BlacksmithFix20261001Evidence/auto-pc-ko.png) · [영어 세로 안내](BlacksmithFix20261001Evidence/auto-portrait-en.png) · [슬롯 비용](BlacksmithFix20261001Evidence/slot-pc-ko.png) · [가로 슬롯 비용](BlacksmithFix20261001Evidence/slot-landscape-ko.png) · [네 탭](BlacksmithFix20261001Evidence/four-tabs-ko.png). [근거·소스 해시](BlacksmithFix20261001Evidence/manifest.json).
+
+추가 확인용 증분 빌드 한 번은 URP 셰이더 리소스 누락으로 UI 초기화 전에 실패했다. 전체 에셋 새로고침 후 새 출력 경로에 클린 빌드하여 부족 안내와 탐색 검사를 통과시켰다. 통과한 거래·저장 검사와 107개 검사는 그대로 활용했으며 전체 게임 회귀 검사, 다른 콘텐츠의 스모크, 확대 글자 검사는 다시 실행하지 않았다. 기존 후처리 셰이더 제외 로그와 Editor AI 구독 오류는 이번 UI 수정의 검증 범위가 아니다. 위 결과는 격리 저장 경로의 macOS 개발 플레이어와 합성 Unity 입력이며 모바일 실기기 검증은 하지 않았다.
 
 ## 2026-09-30: HTML 시안 배치 적용
 

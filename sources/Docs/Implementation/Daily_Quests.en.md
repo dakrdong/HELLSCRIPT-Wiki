@@ -1,31 +1,23 @@
 # Daily quests
 
-Updated on: 2026-10-01
+Following the user's 2026-10-01 decision, every account receives the same five missions with the same goals every day. Open the daily quest tab in the attendance/event window and manually claim each completed reward.
 
-Account-wide daily quests are available in **Events → Daily Quests**, alongside the existing 7-day and 28-day attendance pages. Automatic attendance popups retain their two original tracks.
+| Activity | Fixed daily goal | Abyssal Coins |
+|---|---:|---:|
+| Sell equipment | 30 items | 20 |
+| Clear rifts | 20 victories | 40 |
+| Enhance equipment | 2 completed steps | 15 |
+| Spend gold at shops | 500G | 15 |
+| Consume potions | 10 items | 10 |
+| **Daily quest reward total** | | **100** |
 
-| Activity | R0–5 | R6–24 | R25+ | Abyssal Coins |
-|---|---:|---:|---:|---:|
-| Sell equipment | 30 items | 40 items | 40 items | 20 |
-| Clear rifts | Base 20 | Base 12 | Base 12 | 40 |
-| Enhance equipment | 2 steps | 2 steps | 1 step | 15 |
-| Pay gold in shops | 500G | 2,000G | 2,000G | 15 |
-| Consume potions | 10 | 15 | 15 | 10 |
-| **Daily quest total** | | | | **100** |
+Progression, hero switching, speed and recent victory counts/durations do not change these goals. Tier selection and duration-based adjustments were removed. Claims remain manual with no extra all-complete bonus. Attendance and first-clear rewards remain separate. The page shows progress, claimed state, today's claimed total and the time until 00:00 KST.
 
-There is one goal per activity, manual claims, and no additional all-complete reward. Existing attendance and first-clear rewards remain separate. The page shows progress, claimed state, today's claimed total and time until 00:00 KST.
+`Assets/HELLSCRIPT/Resources/Data/DailyQuests.json` version 2 contains one positive `target` and `reward` for each of five distinct activities, with rewards totaling exactly 100. Any future data tuning applies equally to every account.
 
-`Resources/Data/DailyQuests.json` owns goals, rewards, tiers, timing parameters and caps. It validates five distinct activities, positive goals and a reward sum of exactly 100. Goals and rewards are frozen on the first preparation each day using the highest normal clear across all account heroes. Switching heroes, advancing a tier or editing the catalog does not reset today's claims.
+A previously prepared version-1 day is converted to the fixed goals through the existing save transaction. The date, wallet, reward amounts and claims are preserved. Partial progress is retained up to the new target; already completed or claimed activities stay complete. The preparation transaction ID includes the catalog version so an old receipt cannot skip conversion. Opening the page, committing a real activity or claiming a reward applies the conversion. Write failures preserve the original state and permit retry. Conversion never grants currency.
 
-Rift goals start at `ceil(base clears × max(1, current speed))`, The current `CombatSpeedAccess` permits only 1× and normalizes other requests before transactions. If the existing speed policy later permits 1.5×, the formula gives 30/18 clears; this feature does not unlock that speed. With at least three valid recent victories among the last ten, goals can rise to `ceil(1800 / median real clear seconds)`, capped at 120. Valid duration samples are 15 seconds through two hours. This determines a count; it adds no waiting timer and does not change an already prepared day.
-
-The preserved production-simulation onboarding evidence observed five R1–5 victories in 481.35s for Warrior, 516.85s for Ranger and 545.50s for Mage, and five Warrior R6–10 victories in 822.50s. Arithmetic extrapolation at the same per-run duration gives about 32.09–36.37 minutes for 20 early clears and 32.90 minutes for 12 middle clears. Increasing counts for speed targets similar durations. These are calculations from the [early-rift evidence](../Design/HELLSCRIPT_Early_Rift_Balance.en.md), not new human play-time measurements.
-
-Sales, gold income and potion use overlap with rift play; their durations are not added again. Strong gear, lower-stage repetition or same-day speed changes can finish faster. Recent durations cannot guarantee later performance. Tutorial, failures and town actions can take longer. **Thirty minutes of actual play is a design target, not a guarantee.** Later progression and physical mobile timing remain unmeasured.
-
-Existing rift fatigue grants 120 free minutes per day (`RiftEntryRules.DailyMinutes`). The ordinary 32–36-minute design target fits this budget without requiring paid recovery/admission or a new waiting condition. If other play has consumed the allowance, or failures/long fights dominate, full completion that day is not guaranteed. Existing fatigue rules are unchanged.
-
-Existing first-five-rift records collected 32–33 items and consumed 28–41 potions. Selling 30/40 and consuming 10/15 therefore uses part of normal play. Early gold spending is 500G. Enhancement follows existing unlocks, which can be reached while working on rift goals. First two enhancement steps cost 226G on level-one equipment but 12,315G at level20 and 86,205G at level60; later tiers require one step. Low-level spare equipment belonging to the current hero can be used. If every item is at its enhancement cap, new equipment is required. Existing prices, drops and purchase policies are preserved.
+Every day uses the same 30/20/2/500/10 goals. Play time, speed, equipment and history add neither a goal adjustment nor a waiting condition. Existing fatigue, sale/enhancement/shop prices, supply/potion consumption and unlock rules remain in use.
 
 Successful events count at their domain completion:
 
@@ -43,6 +35,6 @@ The next actual event, login or open-page refresh prepares the new day. Offline 
 
 Save schema20 adds an empty daily state to older saves without changing their wallet or equipment. Unsupported future or malformed states stop loading while preserving the source. Older clients reject schema20, preventing a downgrade from silently discarding claims and re-granting rewards. Reverting code alone does not downgrade new saves.
 
-`DailyQuests` and `GameStore.DailyQuests` own state and transactions. The generated `DailyQuestWindow` uses the shared `ContentWindowView`, theme, fonts, tabs/buttons, window host and independent scroll body. Korean and English are shipped together. `DailyQuestTests` covers catalog, tiers, speed/history, success-only hooks, failures/retry, calendar, offline, persistence and duplicate protection. Development-only `RuntimeDailyQuestSmoke` checks actual domain transactions, claims/reset, KO/EN portrait/landscape/small screens, clipping, fixed controls, raycast clicks, drag and fresh-process persistence. Synthetic input is not physical mobile proof, and synthetic combat is not a human timing study. Final execution evidence is recorded in [optimization and integration validation](Optimization_20260930.en.md).
+`DailyQuests` and `GameStore.DailyQuests` own state and transactions. The generated `DailyQuestWindow` uses the shared `ContentWindowView`, theme, fonts, tabs/buttons, window host and independent scroll body. Korean and English are shipped together. `DailyQuestTests` covers catalog, identical goals across progression/speed/history, legacy-day conversion and preservation of completion/claims, success-only hooks, failures/retry, calendar, offline, persistence and duplicate protection. Development-only `RuntimeDailyQuestSmoke` checks actual domain transactions, claims/reset, KO/EN portrait/landscape/small screens, clipping, fixed controls, raycast clicks, drag and fresh-process persistence. Synthetic input is not physical mobile proof, and synthetic combat is not a human timing study. Final execution evidence is recorded in [optimization and integration validation](Optimization_20260930.en.md).
 
-Executed acceptance: focused170/170 (including27 daily cases), UI contract11/11, daily native initial28.7s and fresh restart4.8s passed. Twelve KO/EN viewport combinations, real raycast/drag, midnight (including preservation of both automatic attendance popup tracks), claims, empty write-failure state and persisted100 coins were verified. [Portrait KO](OptimizationEvidence20260930/daily-portrait-ko.png), [landscape EN](OptimizationEvidence20260930/daily-landscape-en.png), [small](OptimizationEvidence20260930/daily-small-en.png), [claimed](OptimizationEvidence20260930/daily-claimed.png), [empty state](OptimizationEvidence20260930/daily-empty.png).
+Acceptance before the fixed-goal correction (2026-09-30): focused170/170 (including27 daily cases), UI contract11/11, daily native initial28.7s and fresh restart4.8s passed. Twelve KO/EN viewport combinations, real raycast/drag, midnight (including preservation of both automatic attendance popup tracks), claims, empty write-failure state and persisted100 coins were verified. [Portrait KO](OptimizationEvidence20260930/daily-portrait-ko.png), [landscape EN](OptimizationEvidence20260930/daily-landscape-en.png), [small](OptimizationEvidence20260930/daily-small-en.png), [claimed](OptimizationEvidence20260930/daily-claimed.png), [empty state](OptimizationEvidence20260930/daily-empty.png).

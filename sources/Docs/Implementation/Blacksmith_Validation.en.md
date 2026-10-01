@@ -1,8 +1,26 @@
 # Blacksmith implementation validation
 
-Updated: 2026-09-30 · Validation date: 2026-09-22
+Updated: 2026-10-01 · Validation date: 2026-09-22
 
 [한국어](Blacksmith_Validation.md) · [Implementation, resources and migration](Blacksmith_Unity_Integration.en.md)
+
+## 2026-10-01 Button and layout corrections
+
+Autosave emitted a successful-save notification every three seconds, and the forge recreated controls even when its displayed state was unchanged. New buttons faded from their initial enabled colour to the disabled colour, causing flashes; a control could also be replaced during a press. Only saves that change displayed state now redraw the forge, and new controls receive their final availability and lock colours before the first rendered frame.
+
+The supplied screen's 45 G was below the 500 G cost of a Lv.1 reroll, so both buttons had been disabled without an explanation. Reroll now explains the shortage, and auto reroll opens settings with cost, owned gold and missing gold. Paid execution remains blocked when unaffordable. Slot actions show stone cost, owned stones and the shortage. The equipment stat comparison fits its text instead of stretching vertically, and removing the equipment-crafting guide leaves four service tabs.
+
+| Check | Result |
+| --- | --- |
+| Focused Edit Mode | `BlacksmithTests`, `ForgePresentationAllocationTests`, `UiButtonTests`, `LocalizationTests`: **107 passed, 0 failed/skipped**, 9.29 s. [Completed job and individual cases](BlacksmithFix20261001Evidence/editmode.json) |
+| Full forge runtime check | Passed once: quoted +10/max upgrades, actual spending and save, affix lock and auto pause/continue/stop, slot jobs/unlock/free completion/settlement, NPC button and E key, five shapes in KO/EN, and reload. [Result](BlacksmithFix20261001Evidence/runtime.txt) |
+| Additional shortage check | After clearing a stale notice that overlapped auto settings, only the affected coverage was checked again: no spending with 45 G, settings open with paid start blocked, stone quote, settled initial disabled colour, and unchanged controls across autosave and a held press. No clipped shortage text or duplicate notice in five KO/EN shapes. [Result](BlacksmithFix20261001Evidence/feedback.txt) |
+| Four-tab navigation | Passed once in the final player: four exact lock conditions, 2-second hints, keyboard/pointer/back handling and preserved selection, all four unlocked tabs, removed tab absent, five KO/EN shapes. [Result](BlacksmithFix20261001Evidence/navigation.txt) |
+| Contract, compilation and build | UI contract passed; 11 contract tests passed. Final macOS development build succeeded with 0 errors and 176 warnings. [Build result](BlacksmithFix20261001Evidence/build.json) |
+
+Default text size was checked at 440×956, 956×440, 1600×900 (16:9), 1440×900 (16:10), and 1680×720 (21:9). [Compact equipment comparison](BlacksmithFix20261001Evidence/gear-pc-ko.png) · [Portrait gear](BlacksmithFix20261001Evidence/gear-portrait-ko.png) · [Auto shortage](BlacksmithFix20261001Evidence/auto-pc-ko.png) · [English portrait](BlacksmithFix20261001Evidence/auto-portrait-en.png) · [Slot cost](BlacksmithFix20261001Evidence/slot-pc-ko.png) · [Landscape slot cost](BlacksmithFix20261001Evidence/slot-landscape-ko.png) · [Four tabs](BlacksmithFix20261001Evidence/four-tabs-ko.png). [Evidence and source hashes](BlacksmithFix20261001Evidence/manifest.json).
+
+One incremental player for the additional check failed before UI initialization because URP shader resources were missing. A full asset refresh and clean build to a new output path recovered startup, and the shortage and navigation checks passed. Successful transaction/save and 107-test coverage was reused; the full game suite, other content smokes and enlarged-text checks were not rerun. Existing stripped post-processing shader logs and Editor AI subscription errors are outside this UI fix. Evidence uses an isolated save in a native macOS development player with synthetic Unity input; physical mobile devices were not tested.
 
 ## 2026-09-30: HTML prototype layout
 

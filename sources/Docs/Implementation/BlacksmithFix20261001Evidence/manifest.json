@@ -1,0 +1,45 @@
+{
+  "dateKST": "2026-10-01",
+  "baseCommit": "a1edd32027f9f70c5bcdcdcbd59e3bf377dc96e3",
+  "validation": "Focused EditMode 107/107; native blacksmith once; affected feedback and navigation in final clean player. Default text size; synthetic Unity input; no physical mobile.",
+  "runtimeMarkers": {
+    "native-player.log": "HELLSCRIPT_BLACKSMITH_SMOKE_OK",
+    "feedback-final-player.log": "HELLSCRIPT_BLACKSMITH_FEEDBACK_OK",
+    "navigation-player.log": "HELLSCRIPT_FORGE_NAVIGATION_OK"
+  },
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "772866081296a747404020a380c2d636a8559f5b5cd645570f658462956c13f3",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Chrome.cs": "67fa52f792dd2af74b965ea46751bab199ef1e09bdbd5294202916faef781e05",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Dialogs.cs": "7d86a2b603d1211c7923f515284a5ee93a8253d18c7f84f2a2251269146cb5b3",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Enchant.cs": "940cebbb631a7602b58dce5da9e51b87acd07c19b00b476aa086a497f970f9e6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Gear.Panels.cs": "2ed38264cedb2713b6413e9e3615226d96ac5a9a666dd21fcbb328206be263b9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs": "2f2ede24bfe27970f78da39ef6a20b71a2fc30009945cf9d52fb97a907546bd7",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.cs": "ce28a2cc693e9cc65418062bc15c392787b1d27729ffdb672b5550113bb46e74",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Blacksmith.cs": "ba381023bdd0814364dd41e980b7a06f81422ee598a25ad6bfbd3905eabe67e4",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBlacksmithSmoke.Gear.cs": "c60692f613830da7860cced1013cc76f0f71cc046a83364f1fae75eb23054252",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBlacksmithSmoke.cs": "d4760b5717c6ab36d0cb45cd05ad39b78c9bb3b1a81347d1ce1c13e3ec6d1897",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeButtonUxSmoke.cs": "a2a72301318cdeba72a32cab27930ee37e7247efa2199cbcd7a74dd10c6fb1a5",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeForgeNavigationSmoke.cs": "3ec831db14c4f045d61af0c4f32793471caa581dd8b62120009f1e3f2def153e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeSharedUiSmoke.cs": "267e7782169b4cf90c1d40f9d09f2f29dc5cd4968271617ea1ddfa3b62443158",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeUiStyleSmoke.cs": "74b5c8a0370ee6e94ceb357c37360922b8297be3efb40ab228672ec1cfc68f59"
+  },
+  "evidenceSha256": {
+    "editmode.json": "7822176c7c5d526212d965b16af6217d63beed7bffb8563c696c3d2c2b41e564",
+    "build.json": "7ac8bbb84ed9bb780d8174b64d63b1e14c5754b5bf80d66603f1156a78bd1405",
+    "runtime.txt": "492a3495e356027f4f16c671af60e6e91e982e5edb5e0a7ead5c67923d6eec35",
+    "feedback.txt": "c015a351e135fecf248cc23a4e7c5e141390aafedeb6b77fdfc2f419d8773fe1",
+    "navigation.txt": "1cb81e0f7eadcd53a4295592b9b80f60e71dc0c5e5194b41d52180c27da8e05f",
+    "gear-pc-ko.png": "af30b7e43fbf59b3591e42c6252030523f27bebf2f9b162a1aaf5c09943a38be",
+    "gear-portrait-ko.png": "b98598319a6873e55fa422a78e031bd5b07b54060e20e8cf2297a5ae7ae0c748",
+    "auto-pc-ko.png": "c06604ae353513ffa82f77720612a41f8e17bf54f33847e1c8eaabc49cb06fc4",
+    "auto-portrait-en.png": "9f507be339ee54ad64709ed48e5c9e03439a673e922b59f4a9a7570fbc977b3d",
+    "slot-pc-ko.png": "8e0f4b6a2101253f7fbc67432011a90c15ab9d836cf29af73f943e85d637c00d",
+    "slot-landscape-ko.png": "223b17cdaab9ffcca272e24a06127b253ad41847ad73e2266700ef3749f105c3",
+    "four-tabs-ko.png": "0825e2886c73fab37128fdf019d258fd0a8e744cb1e402c7b0dcfd9f49fb9694"
+  },
+  "failedIncrementalAttempt": {
+    "log": "Artifacts/Validation/BlacksmithFix20261001/feedback-player.log",
+    "reason": "URP LocalKeyword / Blitter.Initialize NullReferenceException before UI startup",
+    "recovery": "Full asset refresh and clean build to a new output; final feedback and navigation passed."
+  }
+}
