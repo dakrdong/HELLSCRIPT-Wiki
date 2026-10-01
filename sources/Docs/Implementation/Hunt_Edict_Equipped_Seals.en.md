@@ -42,3 +42,5 @@ Actual game views: [all original captures](HuntEdictEquippedSealsEvidence/native
 ![Portrait equipped emerald seals](HuntEdictEquippedSealsEvidence/tree-bubble-440x956-ko.png)
 
 Additional views: [landscape English](HuntEdictEquippedSealsEvidence/tree-bubble-956x440-en.png) · [bronze after removal](HuntEdictEquippedSealsEvidence/equipped-after-remove.png) · [fresh process](HuntEdictEquippedSealsEvidence/menu-restart.png).
+
+2026-10-01: Regular active seals now use green, blue, amber and violet by equipment slot; the tree, sockets, inspector and policy rail match. Empty slots never compact colors. [Slot colors](Hunt_Edict_Slot_Seals.en.md).

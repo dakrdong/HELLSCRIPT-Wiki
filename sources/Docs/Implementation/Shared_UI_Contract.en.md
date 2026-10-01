@@ -164,3 +164,5 @@ The user removed the text-size multiplier on 2026-09-30. Do not run or add text-
 2026-10-01: Hunt Edict opts into shared `UiButtonChrome.Minimal`: matte faces, one outline and small rounded corners. Skill editing uses the built-in-generated parchment and brush PNG. Shared input/choice state and existing transaction ownership remain unchanged. [Artwork and button appearance](Hunt_Edict_Polished_Actions.en.md).
 
 2026-10-01: equipped active/ultimate seals use emerald-edge PNG variants generated from their original frame references. The tree, sockets and inspector header share the original centered registration and measured opening. No equipment numbers or procedural equipped circles are used. Passive, unequipped and empty seals retain the original art. [Artwork and registration](Hunt_Edict_Equipped_Seals.en.md).
+
+2026-10-01: Regular active seals now use green, blue, amber and violet by equipment slot; the tree, sockets, inspector and policy rail match. Empty slots never compact colors. [Slot colors](Hunt_Edict_Slot_Seals.en.md).

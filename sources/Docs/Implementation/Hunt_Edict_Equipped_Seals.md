@@ -42,3 +42,5 @@
 ![세로 초록 장착 인장](HuntEdictEquippedSealsEvidence/tree-bubble-440x956-ko.png)
 
 추가 화면: [가로 영어](HuntEdictEquippedSealsEvidence/tree-bubble-956x440-en.png) · [해제 후 기존 인장 복원](HuntEdictEquippedSealsEvidence/equipped-after-remove.png) · [새 프로세스](HuntEdictEquippedSealsEvidence/menu-restart.png).
+
+2026-10-01: 일반 액티브 인장은 장착 칸에 따라 초록·파랑·호박색·보라로 표시하고 트리·장착 칸·설명 머리글·세부 칙령 레일이 같은 색을 사용합니다. 빈칸이 생겨도 뒤 칸의 색을 당기지 않습니다. [칸별 색과 검증](Hunt_Edict_Slot_Seals.md).

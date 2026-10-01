@@ -1,0 +1,86 @@
+{
+  "sourceCommit": "743d6c872dc2ce35126367b5483140e7defd886f",
+  "date": "2026-10-01",
+  "unity": "6000.6.0f1",
+  "sharedUiContract": "PASS",
+  "sharedUiContractTests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "editMode": {
+    "filter": "Hellscript.Tests.HuntEdictFoundationTests.EquippedSealsPreserveTheReferenceCanvasAndNativeAlpha",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0
+  },
+  "nativeBuild": {
+    "target": "StandaloneOSX",
+    "configuration": "Development",
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "nativeBatch": {
+    "flags": [
+      "-hellscriptSkillMenuSmoke",
+      "-hellscriptSkillTreeResume"
+    ],
+    "result": "PASS",
+    "viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "textSize": "default",
+    "captures": 40,
+    "input": "synthetic uGUI pointer events with real native player raycasts",
+    "freshProcessRecovery": "PASS",
+    "physicalMobile": false,
+    "osMouse": false
+  },
+  "observed": {
+    "slotFramesMatchTreeSocketsInspectorAndPolicyRail": true,
+    "emptyPositionsKeepTheirIndices": true,
+    "blueSkillReequippedInFirstSlotBecomesGreen": true,
+    "replacementAndRevert": "PASS",
+    "savedStateReload": "PASS"
+  },
+  "liveEditor": {
+    "projectPath": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT",
+    "scene": "Assets/HELLSCRIPT/Scenes/Hellscript.unity",
+    "ready": true,
+    "assetsImported": true,
+    "cSharpErrors": 0,
+    "consoleNotes": "Five Unity AI NoSubscription entries, not C# compile failures; Console preserved."
+  },
+  "evidence": {
+    "tree-bubble-1600x900-ko.png": "2e5dbd208ad37d5db666f7a3898e54d05f9d9ad2eaa1ac7903d938d154e0094b",
+    "tree-bubble-440x956-ko.png": "8170099b00dbb4a1493ccb3c872e0592049f553697455dabd809b769e3cf3727",
+    "tree-bubble-956x440-en.png": "65046df7f70ee595577b78f6b1650128851ce98aac20c6dac812fe409cc3daab",
+    "policy-buttons-1600x900-ko.png": "8b469e12c98c69fb36b58ecd2f1e7dda051d64e5ba1effd64b852f31faa8b05a",
+    "slot-color-moved.png": "9047f96d7af9d50f6eccc780f7d3a776a10ae2f29f37a6923c221011c1f5d739",
+    "menu-restart.png": "c4f972b292435d49c4f8b6f8bfcf17387440b0043787c4e8775e9b0c6d9fd057"
+  },
+  "fullSuiteRun": false,
+  "scopeReason": "Artwork variants and one shared sprite selector; resource checks and the existing native menu acceptance batch cover the changed behavior. No combat, enlarged-text or unrelated suites were run."
+}
