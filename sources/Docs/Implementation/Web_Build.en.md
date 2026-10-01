@@ -1,6 +1,6 @@
 # HELLSCRIPT Web player
 
-Updated: 2026-09-28 · [한국어](Web_Build.md)
+Updated: 2026-10-01 · [한국어](Web_Build.md)
 
 The Web player is a separate deployment of the Unity game. Only executable build artifacts are published to `dakrdong/HELLSCRIPT-Web`; private profiles and the development project are not copied. Game source remains in the existing repository and the public wiki keeps its separate deployment.
 
@@ -45,7 +45,17 @@ Unity -batchmode -nographics -buildTarget Android -projectPath <checkout> \
 
 Successful packaging, package/signature checks and installation/play on a physical Android device are separate validation claims.
 
-## Verification record
+## Daily Quest public Web deployment — 2026-10-01
+
+The scroll-free Daily Quest player was built in release WebGL mode from merged `main` revision `74a2477d6b454875020cc788982a218a9c7847fb`, frozen at build start. Existing `WebPlayerBuild.BuildGitHubPages` and packaging tools preserved the original checkout and saves. Later independent artwork/wiki changes merged during the build are outside this deployment source.
+
+The [build result](DailyQuestWebEvidence20261001/build.json) records zero errors and exit code 0. All seven public files, totaling 176,376,654 bytes, were reconstructed from chunks and matched the original SHA-256 hashes. [Packaging check](DailyQuestWebEvidence20261001/package-validation.json). Public commit `17035f7d14723b933b6cc43c776d151772358500` completed [Pages run 36858217920](https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/36858217920); the loaded public root HTML also matched the local build hash. Direct navigation to `build-info.json` was blocked by the in-app browser, so live inspection of that endpoint is not counted.
+
+The existing guest entered the real public game. Daily Quests covered twelve Korean/English viewports at default text size: 440×956 portrait, 956×440 landscape, PC 16:9/16:10/21:9 and 640×360 small landscape. All five cards and fixed actions remained visible without scrolling, and dragging left the body in place. Attendance round trips, close, Back and refresh were checked. Saving English, reloading the page and re-entering the guest restored language, town, character and daily state; Korean was saved again afterward. [Daily details and captures](Daily_Quests.en.md) · [Validation summary](DailyQuestWebEvidence20261001/validation.json).
+
+There were zero browser runtime errors and two existing URP FSR shader warnings. Daily owners, transactions and data match the native validation, so the previous individual 100-coin claims, save failure, midnight, safe-area/additional-state checks and full Edit Mode result are reused. No completed reward was newly claimed in the public guest, and full game tests/native smokes were not repeated. No Android device was connected and the iOS inspection tool was unavailable, so physical-mobile validation remains unrun; no new APK was generated. This record covers macOS in-app-browser input.
+
+## Historical verification — 2026-09-28
 
 Built from the integrated `main` with Unity 6000.6.0f1 on 2026-09-28. The [validation summary](WebBuildEvidence/validation.json) includes the results and APK hash.
 

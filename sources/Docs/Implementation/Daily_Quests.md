@@ -87,4 +87,27 @@
 
 실제 성공한 활동 거래와 개별 수령 합계 100개, 저장 실패 후 상태 보존·재시도, 자정·시계 역행, 출석 탭 왕복·뒤로가기·닫기를 확인했다. [새 프로세스 일퀘 복원](DailyQuestResponsiveEvidence20261001/daily-restart.txt) 후 다섯 수령과 주화 100개를 유지했고 재호출은 0개를 지급했다. [저장 읽기 결과](DailyQuestResponsiveEvidence20261001/save-readback.json)도 고정 목표·보상·수령을 확인한다. [출석 검사](DailyQuestResponsiveEvidence20261001/attendance-runtime.txt)와 [출석 재시작](DailyQuestResponsiveEvidence20261001/attendance-restart.txt)도 통과했다. [네이티브 실행 기록](DailyQuestResponsiveEvidence20261001/native-results.json)을 따른다.
 
-[한국어 세로](DailyQuestResponsiveEvidence20261001/portrait-ko.png) · [영어 세로](DailyQuestResponsiveEvidence20261001/portrait-en.png) · [한국어 가로](DailyQuestResponsiveEvidence20261001/landscape-ko.png) · [영어 가로](DailyQuestResponsiveEvidence20261001/landscape-en.png) · [640×360 영어](DailyQuestResponsiveEvidence20261001/small-en.png) · [모두 수령](DailyQuestResponsiveEvidence20261001/claimed-all.png) · [준비 실패](DailyQuestResponsiveEvidence20261001/empty-save-failure.png) · [수령 저장 실패](DailyQuestResponsiveEvidence20261001/claim-save-failure.png). macOS 합성 입력 결과이며 모바일 실기기 검증과 WebGL 플레이어 재배포는 수행하지 않았다.
+[한국어 세로](DailyQuestResponsiveEvidence20261001/portrait-ko.png) · [영어 세로](DailyQuestResponsiveEvidence20261001/portrait-en.png) · [한국어 가로](DailyQuestResponsiveEvidence20261001/landscape-ko.png) · [영어 가로](DailyQuestResponsiveEvidence20261001/landscape-en.png) · [640×360 영어](DailyQuestResponsiveEvidence20261001/small-en.png) · [모두 수령](DailyQuestResponsiveEvidence20261001/claimed-all.png) · [준비 실패](DailyQuestResponsiveEvidence20261001/empty-save-failure.png) · [수령 저장 실패](DailyQuestResponsiveEvidence20261001/claim-save-failure.png). macOS 합성 입력 결과다. 이 네이티브 검증 단계에서는 모바일 실기기 검증과 WebGL 재배포를 수행하지 않았으며, 웹 후속 결과는 아래에 기록한다.
+
+### 공개 WebGL 후속 검증
+
+빌드 시작 시 병합된 `main`의 `74a2477d6b454875020cc788982a218a9c7847fb`를 별도 빌드 사본에서 출시 WebGL로 생성했다. 오류 0개, 종료 코드 0이며 일퀘 배치·벡터·거래·데이터는 [네이티브 검증 소스와 해시가 같다](DailyQuestWebEvidence20261001/daily-ui-source.json). 빌드 중 별도 작업이 반영한 이후 아트·위키 변경은 이 플레이어에 포함하지 않았다. 공개 플레이어 커밋은 `17035f7d14723b933b6cc43c776d151772358500`이고 [Pages 실행](https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/36858217920)이 성공했다. [게임 실행](https://dakrdong.github.io/HELLSCRIPT-Web/) · [검증 요약](DailyQuestWebEvidence20261001/validation.json) · [웹 빌드 기록](Web_Build.md).
+
+macOS 내장 브라우저의 실제 공개 게임에서 기존 게스트 저장을 유지하고 기본 글자 크기로 한국어·영어 각각 440×956, 956×440, 1440×810, 1440×900, 1680×720, 640×360을 확인했다. [12개 화면 기록](DailyQuestWebEvidence20261001/browser-matrix.json)의 카드·설명·진행·보상·버튼·규칙·초기화 시간·새로고침이 스크롤 없이 보이며 페이지 크기와 캔버스도 화면에 맞았다. 세로 한국어와 작은 가로 영어에서 드래그 뒤 본문 위치가 유지됐다. 실제 미완료 버튼과 새로고침 조작은 진행도·주화를 더하지 않았다. 7일·28일 출석 왕복과 닫기·뒤로가기도 확인했다.
+
+영어로 변경한 뒤 새로고침·게스트 재진입해 영어 설정, 전사 1레벨과 마을, 기존 물약 재고, 일퀘 진행 0·수령 0/100을 복원했다. 출석은 7일 2/7, 28일 1/28이었다. 검증 후 원래 한국어 설정을 다시 저장했다. 공개 게임에서는 달성 보상을 수령하지 않았으며, 개별 수령 100개·저장 실패·자정·혼합/달성/수령/실패 상태·안전 영역은 위 네이티브 검증 결과를 재사용한다. 브라우저 오류는 0개이고 기존 URP FSR 셰이더 경고 2건을 [보존했다](DailyQuestWebEvidence20261001/browser-console.json). 전체 Edit Mode와 네이티브 스모크는 반복하지 않았다.
+
+[연결 기기 확인](DailyQuestWebEvidence20261001/mobile-availability.json)에서 Android 기기가 없고 iOS `xctrace` 도구를 사용할 수 없어 모바일 실기기 검증은 미실시다. 이번 후속 작업에서 APK도 새로 생성하지 않았다. 브라우저 안전 영역은 0이며 물리 노치·터치·실기기 성능 검증과 구분한다.
+
+| 화면 | 한국어 | 영어 |
+| --- | --- | --- |
+| 세로 440×956 | [KO](DailyQuestWebEvidence20261001/ko-440x956.png) | [EN](DailyQuestWebEvidence20261001/en-440x956.png) |
+| 가로 956×440 | [KO](DailyQuestWebEvidence20261001/ko-956x440.png) | [EN](DailyQuestWebEvidence20261001/en-956x440.png) |
+| PC 16:9 1440×810 | [KO](DailyQuestWebEvidence20261001/ko-1440x810.png) | [EN](DailyQuestWebEvidence20261001/en-1440x810.png) |
+| PC 16:10 1440×900 | [KO](DailyQuestWebEvidence20261001/ko-1440x900.png) | [EN](DailyQuestWebEvidence20261001/en-1440x900.png) |
+| PC 21:9 1680×720 | [KO](DailyQuestWebEvidence20261001/ko-1680x720.png) | [EN](DailyQuestWebEvidence20261001/en-1680x720.png) |
+| 작은 가로 640×360 | [KO](DailyQuestWebEvidence20261001/ko-640x360.png) | [EN](DailyQuestWebEvidence20261001/en-640x360.png) |
+
+[세로 드래그 후](DailyQuestWebEvidence20261001/ko-portrait-after-drag.png) · [작은 가로 드래그 후](DailyQuestWebEvidence20261001/en-small-after-drag.png) · [영어 설정 저장](DailyQuestWebEvidence20261001/language-saved-en.png) · [재시작 영어 타이틀](DailyQuestWebEvidence20261001/restart-title-en.png) · [재시작 일퀘](DailyQuestWebEvidence20261001/restart-daily-en.png) · [7일 출석](DailyQuestWebEvidence20261001/attendance-weekly-en.png) · [28일 출석](DailyQuestWebEvidence20261001/attendance-monthly-en.png) · [한국어 복원](DailyQuestWebEvidence20261001/language-restored-ko.png).
+
+[빌드 종료 기록](DailyQuestWebEvidence20261001/build-receipt.txt) · [Pages 원본](DailyQuestWebEvidence20261001/pages.json) · [검증 파일 SHA-256](DailyQuestWebEvidence20261001/hashes.json).

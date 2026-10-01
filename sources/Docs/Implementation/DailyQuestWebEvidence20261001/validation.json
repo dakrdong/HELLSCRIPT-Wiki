@@ -1,0 +1,139 @@
+{
+  "scope": "Daily Quest public WebGL follow-up; existing guest storage preserved",
+  "recordedAtUtc": "2026-10-01T12:47:27.314042+00:00",
+  "sourceRevision": "74a2477d6b454875020cc788982a218a9c7847fb",
+  "sourceBoundary": "Frozen merged main at build start; later independent artwork/wiki changes are not included in this player",
+  "publicPlayerCommit": "17035f7d14723b933b6cc43c776d151772358500",
+  "publicUrl": "https://dakrdong.github.io/HELLSCRIPT-Web/",
+  "pages": {
+    "run": 36858217920,
+    "result": "success",
+    "receipt": "pages.json"
+  },
+  "build": {
+    "target": "WebGL",
+    "mode": "Release",
+    "unity": "6000.6.0f1",
+    "errors": 0,
+    "exitCode": 0,
+    "entryPoint": "Hellscript.Editor.WebPlayerBuild.BuildGitHubPages",
+    "receipt": "build.json"
+  },
+  "package": {
+    "files": 7,
+    "bytes": 176376654,
+    "allReassembledHashesMatch": true,
+    "receipt": "package-validation.json"
+  },
+  "publicHtml": {
+    "localAndReceivedSha256": "a1049b6103f92af1220021d00629fd4f461bbef1a4a626be25b25a50d3596b85",
+    "method": "IAB CDP Page.getResourceContent for the loaded public root document",
+    "loader": "Build/a1eb995945143e5b9ba886e2f6b6d7f1.loader.js",
+    "buildInfoEndpoint": "Direct navigation was blocked by the in-app browser; live build-info.json was not inspected"
+  },
+  "browser": {
+    "surface": "Codex In-app Browser (iab), macOS",
+    "method": "Real rendered public release player, CDP pointer input and canvas Escape key; DOM readback only for viewport/canvas geometry",
+    "textSize": "Default",
+    "cases": 12,
+    "matrix": "browser-matrix.json",
+    "visibleWithoutScrolling": [
+      "summary",
+      "five quest descriptions",
+      "progress and targets",
+      "rewards and buttons",
+      "common rules",
+      "reset time",
+      "refresh"
+    ],
+    "visualResult": "All twelve KO/EN captures inspected; no clipping or overlap observed",
+    "safeArea": "Browser insets zero; physical notches not exercised",
+    "drag": {
+      "cases": 2,
+      "bodyStayedInPlace": true,
+      "screenshots": [
+        "ko-portrait-after-drag.png",
+        "en-small-after-drag.png"
+      ]
+    },
+    "initialDaily": {
+      "claimedCoins": 0,
+      "completedGoals": 0,
+      "readyRewardTotal": 0,
+      "progress": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "targets": [
+        30,
+        20,
+        2,
+        500,
+        10
+      ],
+      "rewards": [
+        20,
+        40,
+        15,
+        15,
+        10
+      ]
+    },
+    "interaction": {
+      "guestContinueAndTown": true,
+      "incompleteClaimDisabled": true,
+      "refreshPreservesZeroProgressAndCoins": true,
+      "weeklyDailyRoundTrip": true,
+      "monthlyDailyRoundTrip": true,
+      "escapeBackAndClose": true
+    },
+    "reload": {
+      "englishPreferenceRestored": true,
+      "guestAndWarriorLevel1Restored": true,
+      "townRestored": true,
+      "potionStocks": [
+        30,
+        30,
+        15
+      ],
+      "dailyStateUnchanged": true,
+      "weeklyAttendance": "2/7",
+      "monthlyAttendance": "1/28",
+      "screenshots": [
+        "language-saved-en.png",
+        "restart-title-en.png",
+        "restart-daily-en.png",
+        "attendance-weekly-en.png",
+        "attendance-monthly-en.png"
+      ]
+    },
+    "originalKoreanPreferenceRestored": true,
+    "consoleErrors": 0,
+    "existingUrpFsrWarnings": 2,
+    "consoleReceipt": "browser-console.json"
+  },
+  "reusedNativeEvidence": {
+    "sourceHashReceipt": "daily-ui-source.json",
+    "summary": "../DailyQuestResponsiveEvidence20261001/validation.json",
+    "coverage": [
+      "120 viewport/language/safe-area/state cases",
+      "mixed/all-ready/all-claimed/preparation-failure layouts",
+      "100 individually claimed coins",
+      "save failure and retry",
+      "midnight and clock rollback",
+      "fresh-process claim persistence and zero replay grant"
+    ],
+    "publicWebBoundary": "No completed reward was claimed in the public guest during this follow-up; native transaction/save-failure evidence is reused",
+    "fullEditModeAndNativeSmokesRerun": false
+  },
+  "physicalMobile": {
+    "result": "Not run",
+    "android": "adb devices returned no connected device",
+    "ios": "xctrace unavailable",
+    "receipt": "mobile-availability.json",
+    "apkBuilt": false
+  }
+}
