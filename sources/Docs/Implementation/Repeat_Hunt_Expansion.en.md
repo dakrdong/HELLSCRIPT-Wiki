@@ -4,6 +4,16 @@ Date: 2026-09-13 · [한국어](Repeat_Hunt_Expansion.md)
 
 Status: **local repeat limits, transactional cleanup and saved result recovery passed all 2,198 final Editor tests and four native macOS launches/restarts.**
 
+## Repeat settings unlock — 2026-10-03
+
+The Rift entry control and Hunt Edict repeat tab are both named **Repeat settings**. They are disabled until any hero in the account has cleared Rift tier 15. Selecting tier 15 or reaching character level 15 does not unlock them. A different hero's clear shares access across the account.
+
+Pressing a locked control shows **“Repeat settings unlock at Rift level 15.”** in a compact notice for two seconds. The notice remains above the open editor and expires while the window is open. Pointer presses, keyboard submission and direct tab navigation share the gate without changing the saved policy. Once unlocked, closing the editor restores the original Rift entry and selected tier.
+
+Both entry points use the read-only `RepeatHunt.SettingsUnlocked` predicate and the shared `UiButton` unavailable-input notification and `GameUI.ShowToast`. This gates access to settings; it does not rewrite existing policies or repeat sessions.
+
+Validation: **185 related Edit Mode cases** and **11 UI contract tests** passed. Only the failing obsolete-translation check was repeated after removing the old tab label. Default-size KO/EN at portrait 440×956, landscape 956×440 and PC 16:9/16:10/21:9 covered **10 cases**, both unavailable controls, actual raycasts, compact two-second expiration, unchanged policy, entry restoration and the 14/15 clear boundary. The final title-regression fixture initially clicked before its canvas rendered; the harness now yields/captures that canvas, and only this failed action was rerun. Successful checks with unchanged production owners were reused. [Evidence](RepeatSettingsEvidence20261003/validation.json) · [Entry](RepeatSettingsEvidence20261003/pc-ko.png) · [Hunt Edict](RepeatSettingsEvidence20261003/edict-ko.png). This is macOS synthetic input; physical mobile and actual Google OAuth were not tested.
+
 ## Player flow
 
 The sanctuary and rift keeper show the actual repeat owner, victory/defeat behavior, loss streak, attempt/time/target limits, required bag space and result delay. An enabled core edict owns these settings; otherwise the base behavior configuration does. The result screen reads the same policy. Stopping after a victory does not disable an independently configured retry after defeat.

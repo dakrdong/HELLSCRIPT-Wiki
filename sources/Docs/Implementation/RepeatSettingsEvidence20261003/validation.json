@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-03",
+  "unity": "6000.6.0f1",
+  "integrationBase": "a7aa03984f9d97786c35c515f11851381180bb66",
+  "rules": {
+    "unlock": "account-wide highestClear >= 15",
+    "message": "반복 설정은 균열 15레벨 부터 가능합니다",
+    "seconds": 2,
+    "textScale": "default"
+  },
+  "editMode": {
+    "scope": "RepeatHuntTests, UiButtonTests, SharedUiTests, HuntEdictOverviewTests, HuntEdictDefaultsTests, LocalizationTests, StoredLocalizationTests, RiftEntryTests",
+    "uniqueCases": 185,
+    "firstPassed": 184,
+    "firstFailed": 1,
+    "failedCase": "obsolete localization entry 반복 사냥",
+    "failedCaseRetestPassed": 1,
+    "postMainLocalizationCheckPassed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "completeGameSuite": "not run"
+  },
+  "contract": {
+    "ownership": "passed",
+    "testsPassed": 11
+  },
+  "native": {
+    "matrix": [
+      {
+        "width": 440,
+        "height": 956,
+        "language": "ko",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 440,
+        "height": 956,
+        "language": "en",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 956,
+        "height": 440,
+        "language": "ko",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 956,
+        "height": 440,
+        "language": "en",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 1600,
+        "height": 900,
+        "language": "ko",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 1600,
+        "height": 900,
+        "language": "en",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 1600,
+        "height": 1000,
+        "language": "ko",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 1600,
+        "height": 1000,
+        "language": "en",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 2100,
+        "height": 900,
+        "language": "ko",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      },
+      {
+        "width": 2100,
+        "height": 900,
+        "language": "en",
+        "controls": [
+          "rift-services",
+          "edict-tab-repeat"
+        ],
+        "visibleNoticeAndExpiry": "asserted before the later title-only fixture failure"
+      }
+    ],
+    "boundary": [
+      "14 stays locked, selected tier 15 and hero level 40 do not bypass it",
+      "a different hero clearing tier 15 unlocks both controls",
+      "saved policy unchanged, original entry restored",
+      "pointer raycasts and keyboard refusal"
+    ],
+    "initialRun": {
+      "exit": 1,
+      "failure": "final title regression fixture sent input before the newly created settings canvas rendered",
+      "completedBeforeFailure": "all 10 repeat UI cases, two-second expiration and unlock/direct-call checks",
+      "record": "native-initial-failure.txt"
+    },
+    "failedFlowRetest": {
+      "scope": "title action only, after yielding/capturing the new canvas",
+      "exit": 0,
+      "marker": "HELLSCRIPT_REPEAT_TITLE_RUNTIME_OK",
+      "record": "title-runtime.txt"
+    },
+    "reused": "six changed production owner hashes match the matrix build; later main changed unrelated owners and shortened the shared English notice; localization retested after integration",
+    "visualReview": [
+      "pc-ko.png",
+      "edict-ko.png",
+      "portrait-ko.png",
+      "landscape-en.png",
+      "unlocked-15-ko.png",
+      "title-return-ko.png"
+    ],
+    "input": "macOS uGUI raycasts and synthetic EventSystem pointer events",
+    "physicalMobile": "not tested",
+    "actualGoogleOAuth": "not tested"
+  },
+  "productionHashes": {
+    "Assets/HELLSCRIPT/Runtime/Core/RepeatHunt.cs": "426a9e9323781994e275de894e3ef792700a7bc4b84e3494667f5fa8ef24c20b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "47d64b29b9ea0e97111e2acb5579df16888f6243a16d95042ea0c9839ca89ba2",
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiButton.cs": "aae99de3d6194a94340d624010671a032bed97b47cdfde31b4db8026ed02016d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs": "8e5d8e2831caf1b24d0faca6267c25ddd2de5f464236c186a9634ef52e6dfbf1",
+    "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.cs": "924460caf0d091f1efb628a8121dd62579cca8714ea410dec3c70537bbff6f41",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs": "c498c143c22ccf71244f5338513996038ff73176cd63dd6ff46aa363ccad6426",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "7aa5510a745b11a076500a3ee5f1308c0299e1c0adbbc214071b7033c8aaa364"
+  }
+}

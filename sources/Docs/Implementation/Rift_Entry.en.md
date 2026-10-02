@@ -2,8 +2,9 @@
 
 Updated: 2026-10-02 · [한국어](Rift_Entry.md)
 
-The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. The services shortcut opens the shared Hunt Edict Repeat Hunt tab and restores the entry window when closed.
+The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. The Repeat settings shortcut opens the shared Hunt Edict Repeat settings tab and restores the entry window when closed.
 
+Repeat settings are locked in both Rift entry and Hunt Edict until the account clears Rift tier 15. Pressing either locked control shows the same compact two-second notice. See the [shared unlock rules](Repeat_Hunt_Expansion.en.md).
 
 ## 2026-10-02 compact replacement popups
 
@@ -35,7 +36,7 @@ The reference is `Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html` and its `style
 3. Entry actions are **stacked at the lower right in landscape**, and **side by side across the bottom in portrait**. Readiness/errors/bag cleanup share that fixed area. Portal resume/restart and pending/cancel states use the same positions.
 4. Portrait stacks the art strip, fatigue, three potions, four normal skills plus ultimate, auxiliary actions, and entry actions. Page scrolling is disabled; spare height is distributed between sections. Exhausted fatigue and locked ultimate states retain essential controls.
 5. The entry opts into the shared `SkillIconView` square frame, preserving skill identity, artwork and passive semantics. Other callers retain their circular active seals. Empty learned slots still open the skill tree; owned potion equip/clear/swap still persists through existing transactions.
-6. Existing services and battle history, absent from the mockup, remain as a compact auxiliary row below skills. Services open the **shared Hunt Edict Repeat Hunt tab**. Recommended mode exposes that tab and its existing explicit mode switch without silently changing the mode or applying locked custom policies.
+6. Repeat settings and battle history, absent from the mockup, remain as a compact auxiliary row below skills. Repeat settings opens the **shared Hunt Edict Repeat settings tab**. Recommended mode exposes that tab and its existing explicit mode switch without silently changing the mode or applying locked custom policies.
 7. History rows use measured text height plus 12 units of vertical padding, with 4-unit gaps. Selecting a record opens the **shared combat text log directly**. Closing returns through log → original filtered/scrolled record list → original selected Rift stage. The obsolete full-screen record summary and its dedicated routes were removed; archived combat data was retained.
 
 This adapter keeps `ContentWindowView`/`ContentWindowHost` canvas, safe area, stacked input and Back handling, changing only this window's header/action geometry. It reuses `UiTheme`, `UiFonts`, Minimal `UiButton` chrome, `PotionArt` and `SkillIconView`. No new raster art, independent theme/font or save system was added. Current shared game artwork and actual account/unlock state replace the prototype's fixture data.
@@ -62,14 +63,14 @@ The window now follows the layout of the new [HTML prototype](../../Prototypes/R
 
 | Orientation | Layout |
 | --- | --- |
-| Landscape | Three columns: (1) art, title, first-clear chest, tier selection and rule text; (2) fatigue and the three equipped potions, stacked; (3) four active skills, the ultimate bar, the sweep/training/repeat settings and combat records |
+| Landscape | Three columns: (1) art, title, first-clear chest, tier selection and rule text; (2) fatigue and the three equipped potions, stacked; (3) four active skills, the ultimate bar, repeat settings and combat records |
 | Portrait | One column: art strip (title · tier selection · chest, rule text below) → fatigue → three potions → four skills plus the ultimate as a fifth cell → service buttons |
 
 - **How it fits:** the shared window's body holds a single cell exactly as tall as the viewport, and the page is laid out inside it. If the content is taller, text, icons and gaps shrink together by one scale and the page is drawn again, so it never scrolls. Spare height becomes gaps between sections. When text is above 115% or the portrait width is narrow, the art strip puts the title and chest on one row and the tier card on the next. Single-line labels shrink to fit their cell.
 - **Shared window kept:** the title bar, navigation area and fixed action area of `ContentWindowView` are used unchanged. Only three placements differ from the prototype:
   - The two entry buttons (normal and 1.5×) sit in the shared fixed action area across the bottom, not at the bottom of the right column, so the existing state buttons (checking settings, enter portal, restart rift) keep the same place. Each button has a name and a sub-line.
   - The readiness line (ready to enter / restore fatigue) and the bag-cleanup button are in the navigation area; the Abyssal Coin balance is in the title bar.
-  - Sweep/training/repeat settings and combat records are existing features that the prototype does not show; they stay under the skills (one row below the skills in portrait). The saved-portal notice and the next-content goal stay with the rule text under the art.
+  - Repeat settings and combat records are existing features that the prototype does not show; they stay under the skills (one row below the skills in portrait). The saved-portal notice and the next-content goal stay with the rule text under the art.
 - **Removed:** the “Prepare for the Rift” heading, the “Sanctuary › Rift Gate” breadcrumb, and the “normal entry 1× · fatigue also counts while paused” line (the help popup holds the same rule). The character and solo labels moved under the rift title.
 - **Fatigue box:** remaining time, restores today, daily and paid gauge with legend, reset time and countdown, and the carry-over note appear in the prototype's order. Paid reserve is purple. At zero fatigue the restore button replaces the gauge.
 - **Text:** 13 new lines were added to `en.txt` with their English, and 5 unused lines were removed.

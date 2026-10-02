@@ -193,6 +193,7 @@ namespace Hellscript
             headerApron.GetComponent<Image>().raycastTarget=footerApron.GetComponent<Image>().raycastTarget=false;
             RefreshGlobalHud();ApplySafeArea();
             overlay=Rect("Overlay",root);Stretch(overlay);
+            var noticeCanvas=overlay.gameObject.AddComponent<Canvas>();noticeCanvas.overrideSorting=true;noticeCanvas.sortingOrder=3000;
             toastFrame=Box("Notice",overlay,ink);toastFrame.GetComponent<Image>().raycastTarget=false;
             toastFrame.anchorMin=new Vector2(.05f,0);toastFrame.anchorMax=new Vector2(.95f,0);toastFrame.pivot=new Vector2(.5f,0);toastFrame.anchoredPosition=new Vector2(0,battle?325:112);toastFrame.sizeDelta=new Vector2(0,battle?80:62);
             toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);Inset(toast.rectTransform,16,16,8,8);toastTime=0;toastFrame.gameObject.SetActive(false);
@@ -459,16 +460,21 @@ namespace Hellscript
             var cancel=Button(card,"취소",Close);var ok=Button(card,"확인",()=>{Close();action();},new Color(.45f,.28f,.12f));
             foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
         }
-        public void ShowToast(string text)
+        public void ShowToast(string text)=>ShowToast(text,5);
+        public void ShowToast(string text,float seconds)
         {
             if(game.DisplayDimmed){RefreshIdleSummary(true);return;}
-            if(toast==null)return;toast.text=Loc.T(text);toastTime=5;toastFrame.gameObject.SetActive(!string.IsNullOrEmpty(text));overlay.SetAsLastSibling();
-            if(Page=="battle"){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
+            if(toast==null)return;toast.text=Loc.T(text);toastTime=seconds;toastFrame.gameObject.SetActive(!string.IsNullOrEmpty(text));overlay.SetAsLastSibling();
+            bool compact=seconds<=2;
+            toastFrame.anchorMin=new Vector2(compact?.5f:.05f,0);toastFrame.anchorMax=new Vector2(compact?.5f:.95f,0);
+            toastFrame.sizeDelta=new Vector2(compact?Mathf.Min(root.rect.width*.9f,toast.preferredWidth+32):0,62);
+            if(Page=="battle"&&!compact){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
             Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
         }
         void Update()
         {
             RefreshCanvasScale();
+            if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){RefreshIdleSummary();return;}
             TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();
@@ -491,7 +497,6 @@ namespace Hellscript
             if(commonWasOpen||CommonPanelOpen)return;
             hudClock+=Time.unscaledDeltaTime;if(hudClock>.15f){hudClock=0;RefreshHud();}
             RefreshGuideHint();
-            if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
         }
     }
 }
