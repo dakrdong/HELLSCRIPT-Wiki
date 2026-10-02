@@ -17,7 +17,7 @@
 
 - 최근 3초 DPS, 평균·최고·총 피해, 시간별 그래프와 쿨타임 스킬·궁극기 사용 아이콘을 같은 규칙으로 표시한다. 데이터는 현재 균열의 `RunState.dps`다. 전투 일시정지 동안 시료와 시간은 진행하지 않는다.
 - 비교선과 증감은 같은 영웅·같은 단계의 가장 최근 성공 기록 중 실제 DPS 시료가 남은 기록을 읽는다. 현재 판·다른 캐릭터·다른 단계·실패·시료 없는 과거 기록은 섞지 않는다. 비교 기록이 없으면 기존 ‘비교할 직전 판 없음’을 표시한다.
-- 화살표로 실시간 DPS 한 줄만 남기거나 그래프를 펼친다. 접기 상태는 훈련과 균열이 공유하는 세션 상태이며 화면 재구성 후에도 유지한다. 넓은 화면에서는 미니맵 옆에, 좁은 띠 배치에서는 지도·머리글 아래에 둔다. 보스 상태는 패널과 겹치지 않는다.
+- 화살표로 실시간 DPS 한 줄만 남기거나 그래프를 펼친다. 접기 상태는 훈련과 균열이 공유하는 세션 상태이며 화면 재구성 후에도 유지한다. 넓은 화면에서는 미니맵 옆에, 좁은 띠 배치에서는 지도·머리글 아래에 둔다. 기본 배치는 보스 상태와 겹치지 않는다. 사용자가 직접 옮긴 위치는 자동 배치보다 우선한다.
 - 과거 중단 저장에 시료 자체가 없으면 DPS는 `—`, 안내는 ‘기록 없음’으로 표시한다. 현재 장비로 과거 피해를 재계산하지 않는다. 마을·결과·필수 튜토리얼에는 실시간 패널을 남기지 않는다. 훈련 전용 중단·일시정지 창은 기존 훈련 경로를 유지하며, 균열 일시정지는 기존 관찰 메뉴를 사용한다.
 
 검증: 관련 Edit Mode 66/66, 공통 UI 소유 검사 및 계약 테스트 11/11, macOS 개발 빌드와 실행 검증을 통과했다. 한국어·영어 × 세로 440×956·가로 956×440·PC 1600×900·1600×1000·1680×720 × 미니맵 3개 모드의 30가지 조합에서 안전 영역, 보스·지도·로그와의 분리, 포인터 접기·펼치기, 화면 재구성 후 상태 유지와 데이터 일치를 확인했다. 기존 훈련장의 그래프와 일시정지·재개도 확인했다. 모바일 안전 영역과 포인터 입력은 macOS에서 모사했으며 실제 iOS·Android 검증은 아니다. 첫 실행은 비동기 입장 완료를 기다리지 않은 검증 코드 때문에 중단되어, 대기를 수정한 뒤 중단된 실행 검증만 다시 수행했다. 전체 게임 테스트는 반복하지 않았다. URP 후처리 셰이더 경고 4건은 기록에 남겼으며 관리 코드 예외는 없었다.
@@ -25,6 +25,24 @@
 [검증 요약](RiftResultActionsEvidence/live-dps-validation.json) · [Edit Mode](RiftResultActionsEvidence/live-dps-editmode.xml) · [공통 UI](RiftResultActionsEvidence/live-dps-ui-contract.txt) · [실행 기록](RiftResultActionsEvidence/live-dps-runtime.txt)
 
 [PC 한국어](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-ko.png) · [PC 영어](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-en.png) · [세로 한국어](RiftResultActionsEvidence/live-dps-rift-dps-440x956-ko.png) · [세로 영어](RiftResultActionsEvidence/live-dps-rift-dps-440x956-en.png) · [가로 한국어](RiftResultActionsEvidence/live-dps-rift-dps-956x440-ko.png) · [가로 영어](RiftResultActionsEvidence/live-dps-rift-dps-956x440-en.png) · [접은 상태](RiftResultActionsEvidence/live-dps-rift-dps-folded-1600x900-ko.png) · [공통 훈련장 패널](RiftResultActionsEvidence/live-dps-training-shared-dps-1600x900-ko.png)
+
+## DPS 위치와 전투 상단, 2026-10-02
+
+- 실시간 DPS 제목 영역을 마우스나 터치로 끌어 이동한다. 접기 화살표는 이동 손잡이와 분리되어 기존 동작을 유지한다.
+- 놓은 위치는 `DpsHudPosition`이 기기의 `hellscript-dps-position-v1.json`에 원자적으로 저장한다. 균열·훈련장이 같은 위치를 쓰며 화면 재구성·게임 재실행 후 복원한다. 계정·캐릭터·전투 저장은 변경하지 않는다. 저장 실패는 안내하고 다음 드래그로 재시도한다.
+- 안전 영역을 기준으로 좌상단 위치의 비율을 보관한다. 해상도·방향 변경 및 접기·펼치기는 화면 밖으로 나간 부분과 하단 스킬·물약·전투 로그에 겹친 부분만 보정하고 원래 저장 위치를 덮지 않는다.
+- 보스 이름·행동·체력바는 상단 중앙에 고정한다. 좁은 화면에서는 머리글 바로 아래의 중앙 줄을 사용한다. 그래프를 옮겨도 보스 체력바가 밀리지 않는다.
+- 절전 모드와 포탈 복귀는 설정 버튼 왼쪽에 나란히 두고 관찰 메뉴는 그 왼쪽에 둔다. 지도는 버튼 설명 아래에서 시작한다.
+
+검증: 관련 Edit Mode **13/13**과 공통 UI 계약 **11/11**이 통과했다. 하단 스킬바 뒤에 손잡이가 가려지는 첫 실행 실패를 수정한 뒤 직접 영향을 받는 드래그 회귀 **1/1**과 macOS 실행 검증을 다시 수행했다. 최종 빌드 오류와 실행 예외는 0개다. 한국어·영어 × 5개 비율 × 3개 지도 방식 30개 조합에서 드래그·접기·화면 재구성·상단 정렬을 확인했고, 별도 새 프로세스로 위치 복원을 확인했다. 입장 도움말은 10개 화면 조합에서 실제 다음 해금 단계로 이동하고 선택 단계 4를 보존했다. 테스트 계정의 다음 해금은 5단계였으며, 실 계정에서는 같은 조회가 실제 다음 단계(예: 10)를 전달한다. 전체 게임 검사와 모바일 실기기 검증은 수행하지 않았다.
+
+번역 표 구문·현재 런타임 문구 누락 검사는 **2/2** 통과했다. 별도 사용하지 않는 번역 키 검사는 이전 기준 커밋에도 존재하는 `{0}단계 · {1}`, `기록 목록` 2개 때문에 실패했으며 이번 변경과 구분해 기록했다.
+
+[범위·소스 해시](RiftResultActionsEvidence/dps-drag-validation.json) · [실행 기록](RiftResultActionsEvidence/dps-drag-runtime.txt) · [새 프로세스 복원](RiftResultActionsEvidence/dps-drag-relaunch.txt) · [번역 기준 비교](RiftResultActionsEvidence/dps-drag-localization-baseline.json)
+
+![상단 중앙 보스와 오른쪽 바로가기](RiftResultActionsEvidence/dps-hud-default-1600x900-ko.png)
+
+[이동한 그래프](RiftResultActionsEvidence/dps-drag-1600x900-en.png) · [세로](RiftResultActionsEvidence/dps-drag-440x956-en.png) · [가로](RiftResultActionsEvidence/dps-drag-956x440-ko.png) · [재실행](RiftResultActionsEvidence/dps-drag-relaunch-1600x900-ko.png)
 
 ## 공통 UI 어댑터
 

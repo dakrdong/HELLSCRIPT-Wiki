@@ -17,7 +17,7 @@ Rift battles use the existing training DPS HUD. Creation, layout and refresh in 
 
 - The same rules show the three-second DPS window, average/peak/total damage, time series and cooldown-skill/ultimate cast icons. The source is the current Rift's `RunState.dps`. Pausing combat stops samples and combat time.
 - The comparison line and delta read the latest retained successful run with real samples for the same hero and tier. They exclude the current run, other characters/tiers, failures and legacy records without samples. No eligible record displays the existing no-previous-run message.
-- The arrow folds to one live-DPS line and expands again. Training and Rifts share the session-only fold choice, including HUD rebuilds. Wide layouts place it beside the minimap; compact strips sit below the header/map. Boss status stays clear of the panel.
+- The arrow folds to one live-DPS line and expands again. Training and Rifts share the session-only fold choice, including HUD rebuilds. Wide layouts place it beside the minimap; compact strips sit below the header/map. The default position stays clear of boss status; a deliberate user position takes precedence.
 - Resumed legacy saves without samples show `—` and the unavailable-record message, without recalculating historical damage from current equipment. Town, results and mandatory tutorials retain no live panel. Training-specific pause/stop dialogs remain on the training path; Rifts retain their existing observation-menu pause.
 
 Validation passed: 66/66 related Edit Mode tests, shared UI ownership and 11/11 contract tests, macOS development build and native runtime acceptance. Korean/English × 440×956 portrait, 956×440 landscape, and 1600×900, 1600×1000, 1680×720 PC × three minimap modes cover 30 combinations. Checks include safe bounds, boss/map/log separation, pointer folding/unfolding, retention after HUD rebuild and recorded-data agreement. The original training graph and pause/resume also passed. Mobile safe areas and pointer input were simulated on macOS, not physical iOS/Android. The first runtime attempt stopped because the harness did not await asynchronous Rift admission; after correcting the wait, only the failed runtime check was repeated with the required rebuild. The full game test suite was not repeated. Four URP post-processing shader warnings are retained in the evidence; there were no managed exceptions.
@@ -25,6 +25,24 @@ Validation passed: 66/66 related Edit Mode tests, shared UI ownership and 11/11 
 [Validation summary](RiftResultActionsEvidence/live-dps-validation.json) · [Edit Mode](RiftResultActionsEvidence/live-dps-editmode.xml) · [Shared UI](RiftResultActionsEvidence/live-dps-ui-contract.txt) · [Runtime record](RiftResultActionsEvidence/live-dps-runtime.txt)
 
 [PC Korean](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-ko.png) · [PC English](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-en.png) · [Portrait Korean](RiftResultActionsEvidence/live-dps-rift-dps-440x956-ko.png) · [Portrait English](RiftResultActionsEvidence/live-dps-rift-dps-440x956-en.png) · [Landscape Korean](RiftResultActionsEvidence/live-dps-rift-dps-956x440-ko.png) · [Landscape English](RiftResultActionsEvidence/live-dps-rift-dps-956x440-en.png) · [Folded](RiftResultActionsEvidence/live-dps-rift-dps-folded-1600x900-ko.png) · [Shared training panel](RiftResultActionsEvidence/live-dps-training-shared-dps-1600x900-ko.png)
+
+## DPS position and battle header, 2026-10-02
+
+- Drag the live DPS title with a mouse or touch. The fold arrow remains a separate control.
+- `DpsHudPosition` atomically saves the drop location in the device-only `hellscript-dps-position-v1.json`. Rifts and training share it and restore it after HUD rebuilds and game restarts. Account, character and battle saves remain separate. A failed save shows a message; another drag retries it.
+- The top-left anchor is normalized to the safe area. Resizing, rotation and folding clamp the visible panel into safe bounds above the skill/potion/log controls without overwriting the stored anchor.
+- Boss name, action and health stay at the top centre; narrow screens use the central row immediately below the header. Moving the graph cannot push boss status downward.
+- Power Saving and Return to Portal sit side by side to the left of Settings, with the observation menu to their left. The minimap begins below the shortcut captions.
+
+Validation passed **13/13** related Edit Mode tests and **11/11** shared UI contract tests. The first native attempt exposed a drag handle hidden behind the bottom HUD. After limiting the usable bottom bound, the affected drag regression passed **1/1** and the affected native acceptance was rerun. The final build had zero errors and the final player had no managed exceptions. KO/EN x five viewports x three map modes covered 30 drag/fold/rebuild/top-alignment cases, and a fresh process restored the position. Ten entry layouts verified the help popup's actual next unlock tier without changing selected tier 4. The fixture's next unlock was tier 5; real accounts pass their actual next tier, such as 10. No full game suite or physical-mobile run was performed.
+
+English-table parsing and runtime translation coverage passed **2/2**. The orphan-key check failed on two entries already present at the baseline commit (`{0}단계 · {1}` and `기록 목록`); these are recorded separately from the change.
+
+[Scope and source hashes](RiftResultActionsEvidence/dps-drag-validation.json) · [Runtime](RiftResultActionsEvidence/dps-drag-runtime.txt) · [Fresh process](RiftResultActionsEvidence/dps-drag-relaunch.txt) · [Localization baseline](RiftResultActionsEvidence/dps-drag-localization-baseline.json)
+
+![Top-centred boss and right-side shortcuts](RiftResultActionsEvidence/dps-hud-default-1600x900-ko.png)
+
+[Moved graph](RiftResultActionsEvidence/dps-drag-1600x900-en.png) · [Portrait](RiftResultActionsEvidence/dps-drag-440x956-en.png) · [Landscape](RiftResultActionsEvidence/dps-drag-956x440-ko.png) · [Restart](RiftResultActionsEvidence/dps-drag-relaunch-1600x900-ko.png)
 
 ## Shared UI adapters
 

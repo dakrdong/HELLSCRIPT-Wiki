@@ -159,3 +159,11 @@ Unity Edit Mode 통합 검사 232개와 저장 호환성 후속 검사 147개가
 macOS가 조정한 21:9 영어 창은 1680×720으로 이어서 확인했다. 기본 세팅 모드의 스킬 저장 영역 잠금은 수정 후 해당 흐름만 다시 검사했다. 변경되지 않은 기존 성공 결과는 재사용했다. 전체 검사·실행 범위와 중간 실패는 [검증 기록](RiftEntryControlsEvidence/validation.json), [138개 검사 결과](RiftEntryControlsEvidence/editmode.xml), [재실행 결과](RiftEntryControlsEvidence/restart.txt)에 남겼다.
 
 [PC 입장창](RiftEntryControlsEvidence/entry-pc-ko.png) · [세로 물약 목록](RiftEntryControlsEvidence/potions-portrait-ko.png) · [영어 가로 물약 목록](RiftEntryControlsEvidence/potions-landscape-en.png) · [스킬 저장 후 복귀](RiftEntryControlsEvidence/saved-entry-portrait-ko.png)
+
+## 다음 컨텐츠 안내, 2026-10-02
+
+입장 화면 그림 하단의 긴 설명·포탈 안내 문구를 제거하고 **다음 컨텐츠 / 균열 단계 / 해금 기능 이름**으로 정리한다. 다음 단계와 이름은 `ContentUnlocks.NextLocked`의 실제 계정 진행 상태를 그대로 읽는다. 원형 물음표는 공통 `UiIconButton`과 기존 룬 보드 도움말 그림을 재사용한다.
+
+물음표를 누르면 기존 **최초 보상** 팝업의 `RiftRewardList`에 해당 해금 단계를 전달한다. 목록은 그 단계가 보이는 위치로 스크롤하고 강조한다. 도전 단계나 저장 데이터는 변경하지 않으며 닫으면 원래 입장 화면으로 돌아온다. 모든 콘텐츠가 열렸을 때는 완료 안내만 표시한다.
+
+한국어·영어 × 5개 비율에서 표시·잘림·실제 포인터 입력과 해당 단계의 완전한 노출을 확인했다. 닫은 뒤 도전 단계가 유지됐다. [통합 검증](Rift_Result_Actions.md) · [PC 화면](RiftResultActionsEvidence/dps-next-content-1600x900-ko.png) · [세로 영어](RiftResultActionsEvidence/dps-next-content-440x956-en.png) · [이동한 최초 보상 목록](RiftResultActionsEvidence/dps-next-content-rewards-ko.png).

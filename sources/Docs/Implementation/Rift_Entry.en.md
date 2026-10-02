@@ -144,3 +144,11 @@ Checks use an isolated worktree and save, not the user's main Editor or account.
 After macOS adjusted the 21:9 English window, the remaining case continued at 1680×720. The recommended-mode skill footer gate was corrected and only the affected save/return flow was repeated. Unchanged successful coverage was reused. The [validation record](RiftEntryControlsEvidence/validation.json), [138-test results](RiftEntryControlsEvidence/editmode.xml) and [restart result](RiftEntryControlsEvidence/restart.txt) retain exact scope and intermediate failures.
 
 [PC entry](RiftEntryControlsEvidence/entry-pc-ko.png) · [Portrait potion list](RiftEntryControlsEvidence/potions-portrait-ko.png) · [English landscape list](RiftEntryControlsEvidence/potions-landscape-en.png) · [Return after saving skills](RiftEntryControlsEvidence/saved-entry-portrait-ko.png)
+
+## Next content hint, 2026-10-02
+
+The art panel's long instructions and portal note are replaced by **Next Content / Rift tier / feature name**. `ContentUnlocks.NextLocked` supplies the actual account progression. The circular question button reuses `UiIconButton` and the existing Rune Board help artwork.
+
+Pressing it opens the existing **First-clear Rewards** popup and passes that unlock tier to `RiftRewardList`, which scrolls to and highlights the tier. It does not change the selected challenge tier or saved data; closing returns to the entry screen. Once every feature is unlocked, only the completion hint is shown.
+
+KO/EN across five viewports verified display, clipping, actual pointer input and full visibility of the target tier. Closing preserved the selected challenge tier. [Combined validation](Rift_Result_Actions.en.md) · [PC](RiftResultActionsEvidence/dps-next-content-1600x900-ko.png) · [Portrait English](RiftResultActionsEvidence/dps-next-content-440x956-en.png) · [Scrolled reward list](RiftResultActionsEvidence/dps-next-content-rewards-ko.png).

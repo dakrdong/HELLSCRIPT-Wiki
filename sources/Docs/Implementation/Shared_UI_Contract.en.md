@@ -173,7 +173,7 @@ The user removed the text-size multiplier on 2026-09-30. Do not run or add text-
 
 Recommended mode permits skill-tree point allocation and equipment while keeping custom combat policies locked and preserving the mode switch. An empty rift-entry skill slot opens the same Hunt Edict tree in the common window stack; closing restores the entry window and chosen stage. Potion selection uses the shared loadout transaction, with immediate persistent equip, clear and swap semantics. See [Rift entry](Rift_Entry.en.md).
 
-2026-10-02: Rift battles share the training ground's existing live DPS HUD adapter. They supply `RunState.dps` and a retained successful record for the same hero/tier without duplicating aggregation, graph rendering, skill markers or folding. Only minimap clearance and boss-status collision handling extend the existing battle HUD layout. See [scope and validation](Rift_Result_Actions.en.md).
+2026-10-02: Rift battles share the training ground's existing live DPS HUD adapter. They supply `RunState.dps` and a retained successful record for the same hero/tier without duplicating aggregation, graph rendering, skill markers or folding. The default graph sits beside the minimap. `DpsHudDrag` owns header input and `DpsHudPosition` owns the device-only last position, retaining safe bounds and the uGUI pointer lifecycle. Boss status stays at the top centre independently of graph movement. See [scope and validation](Rift_Result_Actions.en.md).
 
 ## Native rune board adapter
 

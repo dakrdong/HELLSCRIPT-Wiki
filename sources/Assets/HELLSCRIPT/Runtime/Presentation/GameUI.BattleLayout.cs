@@ -56,7 +56,7 @@ namespace Hellscript
             battleWorld.anchorMin=BattleViewport.min;battleWorld.anchorMax=BattleViewport.max;battleWorld.offsetMin=battleWorld.offsetMax=Vector2.zero;
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
             var mini=riftMinimapPanel;var panel=default(Rect);float map=0;if(mini!=null)panel=ReflowRiftMinimap(mini,narrow,float.MaxValue,out map);
-            var medals=ReflowBattleMedallions(w,panel);PlaceTrainingHud(w,narrow,medals,game.TrainingGroundRun?default:panel);
+            var medals=ReflowBattleMedallions(w,panel);
             // Header lines that share rows with a landscape map panel or the medallions stop short of them.
             float End(float y,float h)=>Mathf.Min(panel.width>0&&panel.yMin<y+h&&panel.yMax>y?panel.xMin-8:w-18,medals.width>0&&medals.yMin<y+h&&medals.yMax>y?medals.xMin-8:w-18);
             Place(header,0,0,w,narrow?154:116);
@@ -67,55 +67,34 @@ namespace Hellscript
             Place(meterText.rectTransform,narrow?18:112,narrow?87:63,narrow?w-36:Mathf.Max(100,Mathf.Min(w-240,End(63,24)-112)),24);meterText.fontSize=narrow?13:15;
             Place(actionText.rectTransform,18,narrow?112:88,Mathf.Min(w-36,End(narrow?112:88,22)-18),22);
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,w-56,8,44,44);
-            var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,w-108,8,44,44);
-            // On narrow fields the event button has its own row above the boss status.
-            float bossWidth=Mathf.Min(430,narrow?w-36:w*.46f),bossX=(w-bossWidth)*.5f,bossY=Mathf.Max(w<720?(narrow?218:176):116,medals.height>0?medals.yMax+6:0,TrainingHudBottom(bossX,bossWidth));
-            // The boss status stays clear of the map panel: beside it when 240 remain right of the left
-            // column (the events and adventure guide buttons end at 132), otherwise below it.
-            bool below=panel.width>0&&bossX+bossWidth>panel.xMin-8&&bossY<panel.yMax+8;
-            if(below&&panel.xMin-148>=240){bossWidth=Mathf.Min(bossWidth,panel.xMin-148);bossX=Mathf.Max(140,panel.xMin-8-bossWidth);below=false;}
-            Place(bossHud,bossX,bossY,bossWidth,66);
-            Place(bossTitle.rectTransform,0,0,bossWidth,25);Place(bossActionLabel.rectTransform,0,27,bossWidth,30);
-            Place((RectTransform)bossHealthFill.transform.parent,0,62,bossWidth,4);ReflowBossText();
-            // In a boss fight a map of 40 or more that ends the panel above the status's own row keeps the
-            // status in place (landscape below 600 wide).
-            float fit=map-(panel.yMax+8-bossY);
-            if(below&&boss&&fit>=40)panel=ReflowRiftMinimap(mini,narrow,fit,out map);
-            else if(below)
-            {
-                // Otherwise the status goes below the panel and stays clear above the hero, so the map shrinks
-                // to fit; only when less than 40 would remain does the panel leave it out until the fight ends.
-                float over=panel.yMax+8+Mathf.Max(bossHud.rect.height,battleBossHeight)-(HeroOnPage().y-HeroClearance);
-                if(boss&&over>0&&map>0)panel=ReflowRiftMinimap(mini,narrow,map-over,out map);
-                bossY=Mathf.Max(bossY,panel.yMax+8);bossHud.anchoredPosition=new Vector2(bossX,-bossY);
-            }
+            var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,medals.width>0?medals.xMin-52:w-108,8,44,44);
+            // Boss status owns the top centre. On phones it gets the first clear row under the header,
+            // with symmetric width beside the map; neither the map nor a moved graph may push it downward.
+            float bossY=w>=1200?8:narrow?158:120,bossWidth=Mathf.Min(430,w-36);
+            if(panel.width>0&&panel.yMin<bossY+Mathf.Max(66,battleBossHeight)&&panel.yMax>bossY)
+                bossWidth=Mathf.Min(bossWidth,Mathf.Max(180,2*(panel.xMin-8-w*.5f)));
+            Place(bossHud,(w-bossWidth)*.5f,bossY,bossWidth,66);
+            bossTitle.alignment=TextAnchor.UpperCenter;bossActionLabel.alignment=TextAnchor.UpperCenter;ReflowBossText();
+            PlaceTrainingHud(w,narrow,medals,game.TrainingGroundRun?default:panel);
             UpdateBattleBrief();
         }
-        // The power saving and escape medallions, side by side with a caption under each. A wide field has them
-        // at the top centre, the band ending above the timer and kill row at 63. A narrow one has them in the row
-        // under the header, between the left column (the events and adventure guide buttons end at 132) and the
-        // map panel, where the gap closes and captions wrap to fit.
+        // Keep the captioned shortcuts immediately left of Settings, with the observation menu to their left.
         Rect ReflowBattleMedallions(float w,Rect panel)
         {
             if(powerSavingButton==null)return default;
             powerSavingButton.interactable=game.CanEnterIdle;
             var pair=new[]{(powerSavingButton,powerSavingCaption),(escapeButton,escapeCaption)}.Where(p=>p.Item1.gameObject.activeSelf).ToArray();
             if(pair.Length==0)return default;
-            foreach(var p in pair)p.Item2.fontSize=12;
-            float natural=pair.Max(p=>Mathf.Ceil(TextWidth(p.Item2,p.Item2.text))+4),line=pair.Max(p=>Mathf.Ceil(TextHeight(p.Item2,p.Item2.text,natural))+2);
-            bool row=w<720;float top=row?118:4,left=row?140:0,side=row?52:Mathf.Clamp(63-top-line,32,44);
-            float right=!row?w:panel.width>0&&panel.yMin<top+side+48&&panel.yMax>top?panel.xMin-8:w-68;
-            // Each caption spans its medallion and half of each neighbouring gap, less 2 on either side.
-            float gap=Mathf.Max(30,natural-side+4);if(row)gap=Mathf.Clamp((right-left+4)/pair.Length-side,12,gap);
-            float x=(left+right-pair.Length*side-(pair.Length-1)*gap)*.5f,cw=side+gap-4,bottom=top+side;
-            var area=UnityEngine.Rect.MinMaxRect(x-(gap-4)*.5f,top,x+pair.Length*(side+gap)-gap+(gap-4)*.5f,top+side);
-            foreach(var (button,label) in pair)
+            const float side=40,cell=84,top=8;
+            float left=w-64-pair.Length*cell,bottom=top+side;
+            for(int i=0;i<pair.Length;i++)
             {
-                Place((RectTransform)button.transform,x,top,side,side);
-                float ch=Mathf.Ceil(TextHeight(label,label.text,cw))+2;Place(label.rectTransform,x-(gap-4)*.5f,top+side,cw,ch);
-                bottom=Mathf.Max(bottom,top+side+ch);x+=side+gap;
+                var (button,label)=pair[i];label.fontSize=12;float x=left+i*cell;
+                Place((RectTransform)button.transform,x+(cell-side)*.5f,top,side,side);
+                float height=Mathf.Ceil(TextHeight(label,label.text,cell-4))+2;
+                Place(label.rectTransform,x+2,top+side,cell-4,height);bottom=Mathf.Max(bottom,top+side+height);
             }
-            area.yMax=bottom;return area;
+            return new Rect(left,top,pair.Length*cell,bottom-top);
         }
         // The hero stands at the centre of the camera frame; in page units from the top-left of the safe area.
         Vector2 HeroOnPage()

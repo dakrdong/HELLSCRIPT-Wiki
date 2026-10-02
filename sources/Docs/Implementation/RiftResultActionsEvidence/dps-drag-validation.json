@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-02",
+  "baseline": "e427a5be0621e3a49b3aa03848ee6bade5b33fc0",
+  "scope": [
+    "Shared DPS header drag and device persistence",
+    "Fixed top-centre boss and top-right controls",
+    "Next content hint and existing first-clear list navigation"
+  ],
+  "editMode": {
+    "related": {
+      "passed": 13,
+      "failed": 0
+    },
+    "afterBottomClamp": {
+      "passed": 1,
+      "failed": 0,
+      "scope": "Changed drag regression only; remaining unchanged tests reused"
+    },
+    "localization": {
+      "passed": 2,
+      "failed": 1,
+      "failure": "Two pre-existing orphan translation keys; see baseline evidence"
+    }
+  },
+  "uiContract": {
+    "ownership": "passed",
+    "testsPassed": 11
+  },
+  "native": {
+    "buildErrors": 0,
+    "firstAttempt": "Stopped when a bottom drop put the drag handle behind the Global HUD. Fixed the usable bottom bound and reran affected drag/layout acceptance.",
+    "finalExit": 0,
+    "relaunchExit": 0,
+    "matrix": "5 viewport sizes x KO/EN x 3 map styles = 30; next-content popup 10 cases",
+    "inputs": "Native macOS player; real uGUI raycast plus synthetic pointer begin/drag/end and clicks",
+    "persistedAnchor": {
+      "x": 0.20000000298023224,
+      "y": 0.37999996542930603
+    },
+    "physicalMobileTested": false,
+    "managedExceptionsFinal": 0
+  },
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "f18e7430a6ab905c61225b7519521b4fa4065763897e5d1b614b8a54dccd8982",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Display.cs": "cdd3e2af7de89687b1994bf6b7f074bff1ab6ea9f59e5949327061ae9a8c3897",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs": "0a6be6c0760fc48b1017811d7ddfc2008a826e2a9dd6a5ec2558aaf036efd700",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Rift.cs": "af0adaf71e6b03a83e7047e8b99637eb0de9ff6f1eafe29f02027ee193695365",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TrainingGround.cs": "6ebe926a40ea9879092212fa714ce4e9c0defacd825d2904b110ae0a048990e5",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs": "6b378709f37b0c2287ffaa7b15662c1ead3dd60dfaa246d87ee04ee19770bd64",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs": "f2bb9a557dc43c8bb143fbc6e540f06275266c78251c70ffb5e92546c992838b",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.RiftDps.cs": "425233cc80fa2e292952fd0eb1ff58e8dce710eef9bd784436d1b34be3e5dfaf",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.cs": "697ea1693356b8abacb7b4d03d37bcc5adbde7540d78746bd8c547c9ef7af947",
+    "Assets/HELLSCRIPT/Runtime/Core/DpsHudPosition.cs": "833d1f26dbd043d8f2973da90a400ccbeccf0ed8ae731beea547cf5e74fb323e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/DpsHudDrag.cs": "2f00dd9d89e522bb0d050e44e397d62d4296a1e30af00d0d5cdc801b1e323568",
+    "Assets/HELLSCRIPT/Tests/Editor/DpsHudTests.cs": "b982d81f9bd9ef256ae2da37d75f390c441097e73a002d280d300f7d1ef7e86f"
+  }
+}
