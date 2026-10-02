@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-02",
+  "baselineRevision": "94e1101930be6a0780779e6fced75c1aae557a55",
+  "unityVersion": "6000.6.0f1",
+  "platform": "macOS native Development player",
+  "editMode": {
+    "editmode.xml": {
+      "result": "Failed(Child)",
+      "total": "139",
+      "passed": "138",
+      "failed": "1",
+      "skipped": "0"
+    },
+    "localization-retry.xml": {
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "skipped": "0"
+    },
+    "shared-ui-retry.xml": {
+      "result": "Passed",
+      "total": "23",
+      "passed": "23",
+      "failed": "0",
+      "skipped": "0"
+    }
+  },
+  "uniqueScopedTestsCovered": 139,
+  "fullGameSuiteRun": false,
+  "buildErrors": 0,
+  "uiContractTests": {
+    "passed": 11,
+    "failed": 0
+  },
+  "runtime": {
+    "passed": true,
+    "viewportCases": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "defaultTextOnly": true,
+    "matrixCases": 10,
+    "skillSelections": 550,
+    "classes": 3,
+    "activeCandidatesPerClass": 16,
+    "ultimateCandidatesPerClass": 2,
+    "singleCandidateTested": true,
+    "potionRows": 5,
+    "input": "EventSystem raycast and pointer down/up/click; wheel",
+    "saveReadback": true,
+    "stockUnchanged": true
+  },
+  "physicalMobileTested": false,
+  "publicWebAcceptanceIncluded": false
+}

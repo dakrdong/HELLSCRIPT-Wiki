@@ -5,6 +5,25 @@
 마을의 균열 상호작용에서 출전 준비 화면을 연다. 승인된 HTML 시안의 단계 선택·피로도·물약·활성 스킬·궁극기를 실제 캐릭터와 저장 거래에 연결했다. 반복 설정은 사냥 칙령의 반복 사냥 탭으로 이어진다.
 
 
+## 2026-10-02 교체 팝업 간격 정리
+
+- 물약 교체는 150 높이의 두 열 카드 대신 **56 높이의 한 열 목록**이다. 공통 `PotionArt` 아이콘 옆에 이름·보유 수량·효과·장착 슬롯과 선택 동작을 표시한다. 긴 목록은 공통 본문만 스크롤하고, 짧은 목록은 내용 높이에 맞춰 창을 줄인다. 장착 중인 물약 선택은 해제, 다른 슬롯 선택은 교환이며 기존 저장 거래와 수량 불변 조건을 유지한다.
+- 남은 피로도의 안내 버튼과 그 전용 안내 팝업을 제거했다. 피로도·회복 횟수·지급분·초기화와 실제 회복 거래는 유지한다.
+- 사용 스킬·궁극기 교체는 후보 수에 맞춘 격자 바로 옆(가로) 또는 아래(세로)에 전체 설명을 표시한다. 고정 190 높이와 중첩 스크롤을 제거했다. 공통 창의 내용 높이 맞춤을 사용하고 이 선택창의 스크롤만 끈다. 모든 활성화된 후보, 현재 등급·효과·사용 조건, 닫기와 저장 교체를 유지한다.
+
+공통 `ContentWindowView`·`ContentWindowHost`·`UiButton`·`SkillIconView`가 창·안전 영역·입력·폰트·표시를 소유한다. 화면별 저장 데이터나 테마를 추가하지 않는다. `-hellscriptRiftPickerSmoke`는 별도 저장 경로에서 기본 글자 크기의 한국어·영어 5개 비율과 세 직업의 일반 스킬 16개·궁극기 2개를 선택하고, 목록 높이·설명 범위·스크롤 불변·거래 후 디스크 저장을 확인한다.
+
+처음 열린 창에서 설명 높이가 작게 계산되던 원인은 `CanvasScaler`가 배율을 다음 프레임에 적용하는 순서였다. 공통 창은 본문을 만들기 전에 같은 배율을 `Canvas`에도 적용한다. 별도의 여백이나 화면별 재계산 없이 첫 표시부터 내용 높이를 측정한다.
+
+### 교체 팝업 검증
+
+- Unity 6000.6.0f1에서 관련 Edit Mode **139개**를 확인했다. 최초 실행은 138개 통과·1개 실패였으며, 기존 번역의 미사용 두 줄을 제거한 뒤 영향받는 번역 검사 2개를 재실행해 모두 통과했다. 공통 배율 수정 후 공유 UI 검사 **23개**도 통과했다. 전체 게임 검사 묶음은 실행하지 않았다. [최초 결과](RiftPickerEvidence/editmode.xml) · [번역 재검사](RiftPickerEvidence/localization-retry.xml) · [공유 UI 재검사](RiftPickerEvidence/shared-ui-retry.xml) · [기존 번역 비교](RiftPickerEvidence/baseline-localization.json).
+- UI 소유자 검사와 계약 회귀 검사 **11/11**, macOS Development 빌드 오류 0개를 확인했다. 원본 Editor를 방해하지 않도록 별도 복사본과 격리 저장 경로를 사용했다.
+- 기본 글자 크기에서 **440×956, 956×440, 1600×900, 1600×1000, 1680×720 × 한국어/영어** 10개 조합을 통과했다. 세 직업의 일반 스킬 16개·궁극기 2개와 후보 하나인 경우를 포함해 **550회 포인터 선택**, 설명 범위·스크롤 불변을 확인했다. 물약 교환·해제·같은 계열 교체, 수량 불변, 일반/궁극기 교체 후 디스크 저장을 확인했다. [실행 기록](RiftPickerEvidence/picker-runtime.txt) · [검증 요약](RiftPickerEvidence/validation.json) · [검증한 소스 해시](RiftPickerEvidence/source-sha256.json).
+- EventSystem 포인터와 휠 입력을 사용한 macOS 검증이다. 모바일 실기기는 확인하지 않았다. 이 기록은 공개 웹 플레이어 검증과 구분한다.
+
+[물약 목록 PC](RiftPickerEvidence/potions-1600x900-ko.png) · [물약 목록 세로](RiftPickerEvidence/potions-440x956-en.png) · [스킬 하나 PC](RiftPickerEvidence/single-skill-1600x900-ko.png) · [스킬 전체 세로](RiftPickerEvidence/skills-440x956-ko.png) · [스킬 전체 가로](RiftPickerEvidence/skills-956x440-en.png) · [21:9 스킬 전체](RiftPickerEvidence/skills-1680x720-en.png).
+
 ## 2026-10-02 HTML 시안 배치 일치
 
 구현 기준은 `Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html`과 그 원본 `styles.css`·`ui.js`다. 아래 규칙이 9월 30일 기록의 배치 예외를 대체한다.

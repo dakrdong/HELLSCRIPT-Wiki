@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="23" result="Passed" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:57Z" duration="1.7042637">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5041" result="Passed" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:57Z" duration="1.704264" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="6802" name="Hellscript.Tests.dll" fullname="/private/tmp/hellscript-picker-validation-20261002/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5041" result="Passed" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:57Z" duration="1.624301" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="75894" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="6803" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5041" result="Passed" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:57Z" duration="1.554259" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="6804" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="5041" result="Passed" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:57Z" duration="1.482870" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="6066" name="SharedUiTests" fullname="Hellscript.Tests.SharedUiTests" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" testcasecount="23" result="Passed" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:57Z" duration="1.425631" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="6075" name="BrokenPresentationListenerCannotTurnACommittedTransactionIntoFailure" fullname="Hellscript.Tests.SharedUiTests.BrokenPresentationListenerCannotTurnACommittedTransactionIntoFailure" methodname="BrokenPresentationListenerCannotTurnACommittedTransactionIntoFailure" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1531543609" result="Passed" start-time="2026-10-02 14:10:55Z" end-time="2026-10-02 14:10:56Z" duration="0.166127" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Committed-state listener failed: view destroyed
+]]></output>
+            </test-case>
+            <test-case id="6093" name="ChangedGroupsUseAnImmutableSavedBaselineAndRevertRestoresAllOptions" fullname="Hellscript.Tests.SharedUiTests.ChangedGroupsUseAnImmutableSavedBaselineAndRevertRestoresAllOptions" methodname="ChangedGroupsUseAnImmutableSavedBaselineAndRevertRestoresAllOptions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="152053349" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.036832" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6080" name="ClosingTheParentOutOfOrderDoesNotResumeTheRemainingWindow" fullname="Hellscript.Tests.SharedUiTests.ClosingTheParentOutOfOrderDoesNotResumeTheRemainingWindow" methodname="ClosingTheParentOutOfOrderDoesNotResumeTheRemainingWindow" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1707111279" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.028007" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6073" name="CommitNotificationObservesSavedStateAndDuplicateReceiptsDoNotRepeatIt" fullname="Hellscript.Tests.SharedUiTests.CommitNotificationObservesSavedStateAndDuplicateReceiptsDoNotRepeatIt" methodname="CommitNotificationObservesSavedStateAndDuplicateReceiptsDoNotRepeatIt" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1806262925" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.075301" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6092" name="EveryGlobalEdictOptionIsReachableThroughSummaryAndSearchWithoutChangingItsDraft" fullname="Hellscript.Tests.SharedUiTests.EveryGlobalEdictOptionIsReachableThroughSummaryAndSearchWithoutChangingItsDraft" methodname="EveryGlobalEdictOptionIsReachableThroughSummaryAndSearchWithoutChangingItsDraft" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="2057440527" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.164834" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="6079" name="NestedWindowsRestoreOriginalPauseAndInput" fullname="Hellscript.Tests.SharedUiTests.NestedWindowsRestoreOriginalPauseAndInput" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.059969" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="6077" name="NestedWindowsRestoreOriginalPauseAndInput(False)" fullname="Hellscript.Tests.SharedUiTests.NestedWindowsRestoreOriginalPauseAndInput(False)" methodname="NestedWindowsRestoreOriginalPauseAndInput" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="2030188863" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.032311" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6078" name="NestedWindowsRestoreOriginalPauseAndInput(True)" fullname="Hellscript.Tests.SharedUiTests.NestedWindowsRestoreOriginalPauseAndInput(True)" methodname="NestedWindowsRestoreOriginalPauseAndInput" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="394122802" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.025588" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="6085" name="PaperdollHasTenDistinctNonOverlappingSlots" fullname="Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.119055" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="6081" name="PaperdollHasTenDistinctNonOverlappingSlots(405,520,False)" fullname="Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(405,520,False)" methodname="PaperdollHasTenDistinctNonOverlappingSlots" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1810929666" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.032596" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6082" name="PaperdollHasTenDistinctNonOverlappingSlots(400,326,True)" fullname="Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(400,326,True)" methodname="PaperdollHasTenDistinctNonOverlappingSlots" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1656752972" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.031249" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6083" name="PaperdollHasTenDistinctNonOverlappingSlots(390,262,True)" fullname="Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(390,262,True)" methodname="PaperdollHasTenDistinctNonOverlappingSlots" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="530317175" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.022970" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6084" name="PaperdollHasTenDistinctNonOverlappingSlots(405,326,False)" fullname="Hellscript.Tests.SharedUiTests.PaperdollHasTenDistinctNonOverlappingSlots(405,326,False)" methodname="PaperdollHasTenDistinctNonOverlappingSlots" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="632399634" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.031216" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="6072" name="ReadingPagesReserveEveryHudControlBelowTheirActions" fullname="Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.135627" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="6067" name="ReadingPagesReserveEveryHudControlBelowTheirActions(440,956)" fullname="Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(440,956)" methodname="ReadingPagesReserveEveryHudControlBelowTheirActions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="2077137948" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.024774" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6068" name="ReadingPagesReserveEveryHudControlBelowTheirActions(956,440)" fullname="Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(956,440)" methodname="ReadingPagesReserveEveryHudControlBelowTheirActions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1072788215" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.031791" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6069" name="ReadingPagesReserveEveryHudControlBelowTheirActions(1440,810)" fullname="Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(1440,810)" methodname="ReadingPagesReserveEveryHudControlBelowTheirActions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1211179260" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.025193" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6070" name="ReadingPagesReserveEveryHudControlBelowTheirActions(1440,900)" fullname="Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(1440,900)" methodname="ReadingPagesReserveEveryHudControlBelowTheirActions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="1118867421" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.028050" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6071" name="ReadingPagesReserveEveryHudControlBelowTheirActions(1680,720)" fullname="Hellscript.Tests.SharedUiTests.ReadingPagesReserveEveryHudControlBelowTheirActions(1680,720)" methodname="ReadingPagesReserveEveryHudControlBelowTheirActions" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="957987545" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.024632" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="6074" name="RejectedAndFailedWritesNeitherPublishNorAdoptState" fullname="Hellscript.Tests.SharedUiTests.RejectedAndFailedWritesNeitherPublishNorAdoptState" methodname="RejectedAndFailedWritesNeitherPublishNorAdoptState" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="458794366" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:56Z" duration="0.052491" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/shared-ui-6953ce9a1bfc4a23afae0d7e2c49b4ec/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+            </test-case>
+            <test-case id="6076" name="RunNotificationIsDeferredUntilTheLiveRunHasAdoptedTheSave" fullname="Hellscript.Tests.SharedUiTests.RunNotificationIsDeferredUntilTheLiveRunHasAdoptedTheSave" methodname="RunNotificationIsDeferredUntilTheLiveRunHasAdoptedTheSave" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="2094862628" result="Passed" start-time="2026-10-02 14:10:56Z" end-time="2026-10-02 14:10:57Z" duration="0.438270" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="6091" name="SlotColumnsKeepTheirSizeInsteadOfShrinking" fullname="Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-02 14:10:57Z" end-time="2026-10-02 14:10:57Z" duration="0.139132" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="6086" name="SlotColumnsKeepTheirSizeInsteadOfShrinking(440,956)" fullname="Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(440,956)" methodname="SlotColumnsKeepTheirSizeInsteadOfShrinking" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="681270015" result="Passed" start-time="2026-10-02 14:10:57Z" end-time="2026-10-02 14:10:57Z" duration="0.031106" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6087" name="SlotColumnsKeepTheirSizeInsteadOfShrinking(956,440)" fullname="Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(956,440)" methodname="SlotColumnsKeepTheirSizeInsteadOfShrinking" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="35068643" result="Passed" start-time="2026-10-02 14:10:57Z" end-time="2026-10-02 14:10:57Z" duration="0.022594" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6088" name="SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1080)" fullname="Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1080)" methodname="SlotColumnsKeepTheirSizeInsteadOfShrinking" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="202335557" result="Passed" start-time="2026-10-02 14:10:57Z" end-time="2026-10-02 14:10:57Z" duration="0.031127" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6089" name="SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1200)" fullname="Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(1920,1200)" methodname="SlotColumnsKeepTheirSizeInsteadOfShrinking" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="177542786" result="Passed" start-time="2026-10-02 14:10:57Z" end-time="2026-10-02 14:10:57Z" duration="0.022502" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6090" name="SlotColumnsKeepTheirSizeInsteadOfShrinking(2520,1080)" fullname="Hellscript.Tests.SharedUiTests.SlotColumnsKeepTheirSizeInsteadOfShrinking(2520,1080)" methodname="SlotColumnsKeepTheirSizeInsteadOfShrinking" classname="Hellscript.Tests.SharedUiTests" runstate="Runnable" seed="125636556" result="Passed" start-time="2026-10-02 14:10:57Z" end-time="2026-10-02 14:10:57Z" duration="0.030303" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

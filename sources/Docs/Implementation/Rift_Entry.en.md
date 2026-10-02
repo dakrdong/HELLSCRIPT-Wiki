@@ -5,6 +5,27 @@ Updated: 2026-10-02 · [한국어](Rift_Entry.md)
 The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. The services shortcut opens the shared Hunt Edict Repeat Hunt tab and restores the entry window when closed.
 
 
+## 2026-10-02 compact replacement popups
+
+Potion replacement uses a **single-column list of 56-high rows**, replacing 150-high two-column cards. Shared potion art sits next to the name, owned count, effects, equipped slot and selection action. The shared body scrolls for long lists; short lists fit their content height. Selecting the same equipped potion removes it; selecting another slot's family swaps slots. Existing saved transactions and unchanged stock remain authoritative.
+
+The remaining-fatigue help button and its dedicated guide popup were removed. Fatigue, restore count, daily/paid allowances, reset display and recovery transactions remain.
+
+Active-skill and ultimate replacement put descriptions beside the candidate grid in landscape and directly below it in portrait. Candidate count determines grid height. The fixed 190-high list and nested scroll were removed. These selectors use shared content-height fitting and disable scrolling while keeping every learned candidate, rank/effect/activation descriptions and saved replacement actions. Shared `ContentWindowView`, `ContentWindowHost`, `UiButton`, `SkillIconView` and existing domain transactions retain ownership.
+
+`-hellscriptRiftPickerSmoke` uses an isolated save and default text size to exercise KO/EN at five aspect ratios, selecting all 16 active skills and two ultimates for each of the three classes. It verifies compact rows, description bounds, unchanged scroll position, saved transactions and disk readback.
+
+First-open descriptions were measured before `CanvasScaler` applied the screen scale on its next update. The shared window now applies that same scale to its `Canvas` before rendering content. This fixes the measurement order without extra padding or a per-screen repaint.
+
+### Replacement popup verification
+
+- Unity 6000.6.0f1 covered **139 relevant Edit Mode tests**. The first run passed 138 and failed one for two pre-existing unused translations. After removing those entries, both directly affected localization checks passed. Following the shared scale fix, all **23 shared UI tests** passed. The full-game suite was not run. [Initial result](RiftPickerEvidence/editmode.xml) · [Localization retry](RiftPickerEvidence/localization-retry.xml) · [Shared UI retry](RiftPickerEvidence/shared-ui-retry.xml) · [Baseline translation comparison](RiftPickerEvidence/baseline-localization.json).
+- Shared UI ownership and **11/11** contract regression tests passed; the macOS Development build reported zero build errors. A protected project copy and isolated save avoided disturbing the original Editor.
+- **Ten combinations** passed at default text size: KO/EN at 440×956, 956×440, 1600×900, 1600×1000 and 1680×720. **550 pointer selections** covered each class's 16 active skills, two ultimates and a single learned candidate. Bounds and wheel-input invariance passed. Potion swap/unequip/family replacement, unchanged stock, active/ultimate replacement and disk readback passed. [Runtime record](RiftPickerEvidence/picker-runtime.txt) · [Summary](RiftPickerEvidence/validation.json) · [Tested source hashes](RiftPickerEvidence/source-sha256.json).
+- This is macOS validation with EventSystem pointer and wheel input. Physical mobile was not tested, and these results do not establish public Web player acceptance.
+
+[PC potion list](RiftPickerEvidence/potions-1600x900-ko.png) · [Portrait potion list](RiftPickerEvidence/potions-440x956-en.png) · [Single skill, PC](RiftPickerEvidence/single-skill-1600x900-ko.png) · [All skills, portrait](RiftPickerEvidence/skills-440x956-ko.png) · [All skills, landscape](RiftPickerEvidence/skills-956x440-en.png) · [All skills, 21:9](RiftPickerEvidence/skills-1680x720-en.png).
+
 ## 2026-10-02 HTML composition parity
 
 The reference is `Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html` and its `styles.css`/`ui.js` sources. These rules replace the layout exceptions documented on September 30.
