@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-02",
+  "baseline_commit": "e427a5be0621e3a49b3aa03848ee6bade5b33fc0",
+  "edit_mode": {
+    "RiftResultTests": {
+      "passed": 27,
+      "failed": 0,
+      "skipped": 0
+    },
+    "LocalizationTests": {
+      "passed": 32,
+      "failed": 1,
+      "skipped": 0,
+      "preexisting_failure": "NoEntryIsLeftBehindByARewordedLine"
+    }
+  },
+  "shared_ui_contract": {
+    "ownership": "passed",
+    "tests_passed": 11,
+    "final_integrated_check": "Rechecked after latest main changed shared equipment detail dependencies; both passed."
+  },
+  "layout": {
+    "initial_combinations": 10,
+    "final_wide_centering_combinations": 8,
+    "portrait_combinations_reused": 2,
+    "center_tolerance_pixels": 1.5,
+    "default_text_size": true,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ]
+  },
+  "runtime": {
+    "exit_code": 0,
+    "success_marker": "HELLSCRIPT_RIFT_RESULT_ACTIONS_OK",
+    "managed_exceptions": 0,
+    "urp_shader_warnings": 4,
+    "completed_stage": 24,
+    "highest_clear": 30,
+    "entered_stage": 25,
+    "manual_retry_takeover": true,
+    "failed_result_disabled": true,
+    "repeat_configuration_preserved": true,
+    "saved_checkpoint_verified": true,
+    "input": "macOS uGUI raycast and synthetic pointer",
+    "physical_mobile_tested": false,
+    "full_suite_rerun": false
+  },
+  "source_sha256": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs": "acf748815aca498a0085aa3341aa12e093e24ff9da42109b1262d85aa8d66b6a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.Actions.cs": "b70d5318533ac75bb680b5a1e169d1df550a45ade5bf991b396444db08ce9427",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.cs": "c517003d0dcdc300a385530ceec7d48acaae3230e28f2bb5fd6a19684fc54c5d",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftResultTests.cs": "5d09d0d9ad4d40b182f4bcd02cfbf9f82428a94cf25ded59624dd653ed025871",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "3e07582e46c69b2786fd3e82f9f9e01fad591afde9b6e15b173c273d624e4d92"
+  },
+  "screenshots_sha256": {
+    "next-level-centered-result-956x440-en.png": "090897784c0a186a173536cd08d1861d7502f38e749c251ef133beac2600b037",
+    "next-level-centered-result-2100x900-ko.png": "524cbdae107f129356fac2dec4591c85c17ce4142fbb858f30c68a81cf109be7",
+    "next-level-centered-result-1600x900-ko.png": "20c28e4d98689b64923cb1db25ad36fdd04509f774b29ced75c775ac6b041ff2",
+    "next-level-result-440x956-ko.png": "7dbc811d25f7cd07009078415c638e2611c4bcfb2d95bdc32a8389d011935494",
+    "next-level-ready.png": "ac826408f0381356ef853774a29fbeb249878ed49b016ea53990fb50812876dc",
+    "next-level-centered-result-1600x1000-ko.png": "0f1f84b1999e4d5e67c6629d1d702bddca605023d5bf0c78e487af115a8c9794",
+    "next-level-centered-result-1600x1000-en.png": "c062543ce988882a4397887ffa6f45c9ba51e6ea42b9a7442aef97582919a51e",
+    "next-level-centered-result-2100x900-en.png": "409d140ac22703aad854134e6238c8eb1c57d97914d58642f245aa161883a170",
+    "next-level-battle.png": "1635e6e9055dff12c2b780f11500df03f7792363240d8ce8510ba4dbc91cdc5d",
+    "next-level-centered-result-956x440-ko.png": "0f26f16ee18e8876053959af83facc9f580e41d0734c0f28fda870dbc8da5db3",
+    "next-level-centered-result-1600x900-en.png": "c3bd149c58dbde23655ad449277ac618322939caa2b2e7130fce9b1805c8011f",
+    "next-level-result-440x956-en.png": "e8ae642e6f73d74975febc062610eda85a4dca7bba3bdffc914d31ac4aa96936"
+  },
+  "final_integrated_main": "ce0fb2be79dddc45609790c8cf36125efd0f2fc5"
+}

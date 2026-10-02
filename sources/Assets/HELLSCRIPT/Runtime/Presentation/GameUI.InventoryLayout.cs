@@ -179,7 +179,7 @@ namespace Hellscript
             var hero=frozenHero??game.Store.Data.Hero;var basis=ItemCatalog.Base(item);var unique=ItemCatalog.Unique(AspectStone.PowerId(item));
             InventoryNote(parent,heading,22,gold);
             float bodyWidth=Mathf.Max(260,((RectTransform)parent).rect.width-16);
-            ItemDetailView.Append(parent,item,bodyWidth,font,1.5f,frozenHero==null?EquipmentViewSource.Owned:comparisonEditing?EquipmentViewSource.Draft:EquipmentViewSource.BattleSnapshot);
+            ItemDetailView.Append(parent,item,bodyWidth,font,1.5f,frozenHero==null?EquipmentViewSource.Owned:comparisonEditing?EquipmentViewSource.Draft:EquipmentViewSource.BattleSnapshot,hero:hero);
             InventoryNote(parent,frozenHero==null?Protection(item):"훈련에 사용한 복사본 · 실제 장비는 유지됩니다",18,muted);
             if(frozenHero==null&&!game.Active&&GemCatalog.AllowsSocket(item)&&game.Store.Data.Hero.inventory.Any(i=>i.id==item.id)&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Gem))BigButton(parent,"소켓과 보석 관리",()=>ShowGemSocket(item.id));
             if(unique!=null)

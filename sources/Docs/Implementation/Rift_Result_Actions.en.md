@@ -9,6 +9,8 @@ Rift result actions now connect reward claims, acquired equipment changes, graph
 - **Acquired equipment** retains its acquisition snapshot while **Compare with equipped** and **Equip** resolve current ownership by ID. `EquipmentComparisonView` and `ItemComparison` provide the common ring/dual-wield target selector. Existing `EquipmentSlots` and `GameStore` transactions commit equipment changes. Automatically stored equipment is retrieved through `Storage.Move` and equipped in one transaction. Disposed or missing equipment is never recreated.
 - **View Graph** replaces the previous-record text comparison with this battle's graph. It shares the training ground's existing `TrainingDpsPanel`, `TrainingChartView`, `TrainingDpsChart`, three-second DPS window and cast inspection. Damage uses actual HP loss, as in training; cooldown icons and all-cast tooltips keep the same rules. Rift checkpoints and completed reviews own their per-second samples and release times. Old saves without samples show an explicit unavailable-record message.
 - **Repeat settings** appear dim when repetition for this result is off. A press shows a two-second **Repeat hunting has not been configured** bubble. The configured result's information page has no header settings shortcut.
+- **Next level** sits between claim and retry and enters the completed Rift tier plus one. Completing tier 24 enters tier 25 even when the hero's highest clear is tier 30. It requires a saved victory, an unlocked successor and a target within the 1,000-tier cap. Existing `PrepareResultRetry`, `ReturnTown` and `Begin` cancel the current repeat reservation/manual retry and retain normal admission, fatigue, potion and save checks. Wide layouts stack claim→next level→retry→return; portrait uses claim/next level followed by retry/return in two rows.
+- **Centered action content** groups each wide-layout button's icon with the measured text height, including wrapped lines, and centers the group vertically. Removing unused space below the label fixes the upward bias through the shared Korean/English button path.
 - **Retry** keeps the result open and displays 5, 4, 3, 2, 1 with **Tap to cancel** on the button. Another press cancels entry. Manual retry takes over the automatic reservation for this result while preserving the hero's repeat configuration for the next battle. Nested windows and lost app focus pause the timer. Save failures or closing the result prevent entry.
 
 ## Live battle DPS, 2026-10-02
@@ -49,6 +51,22 @@ English-table parsing and runtime translation coverage passed **2/2**. The orpha
 `RiftRewardRevealWindow` and `RiftCombatGraphWindow` started with `tools/new_content_ui.py` and use `ContentWindowView` for safe areas, input and pause leases. The reward reveal intentionally hides the standard chrome and shows only the black dim and centered receipt. It has no separate canvas, equipment calculation or save owner. Its committed `RewardSnapshot` is presentation-only; tapping only dismisses it.
 
 ## Validation
+
+### 2026-10-02: Next-level entry and centered action content
+
+**27/27** `RiftResultTests` and shared UI ownership plus **11/11** contract tests passed. Localization passed **32/33**; the one failure checks two orphan keys already present in the baseline commit (`{0}단계 · {1}` and `기록 목록`). The new wording has no missing translation. C# compilation and the final macOS development build had zero errors. Editor Unity AI subscription errors and four existing player URP post-processing shader warnings are recorded separately.
+
+Ten Korean/English combinations at 440×956 portrait, 956×440 landscape, and 1600×900, 1600×1000 and 2100×900 PC verified order, safe bounds and label fit. After the centering change, only the eight affected wide combinations were measured again; each icon/text group's centre differs from its button by less than 1.5 pixels. The unchanged two portrait results and successful reward/equip/graph interactions were reused.
+
+With highest clear 30, an actual tier-24 run was completed, manual retry was started and **Next level** was pressed. Normal admission cancelled the countdown and created a new tier-25 battle and saved checkpoint without changing repeat configuration. An actual failed result disabled the button. The final process emitted `HELLSCRIPT_RIFT_RESULT_ACTIONS_OK`, exited zero and had no managed exceptions. This is macOS uGUI raycast/synthetic-pointer acceptance, not a physical-mobile run.
+
+Early existing-retry checks stopped on focus/automatic-delay issues; a focused attempt subsequently recorded 5→4→3→2→1 and entry. A cached-build URP startup failure was resolved with an asset refresh and a clean separate output. A fixture that expected repeat configuration to always be enabled was corrected to compare the real pre-entry setting. Final acceptance targeted the changed button layout and next-level flow. The full game suite was not repeated.
+
+[Scope and source hashes](RiftResultActionsEvidence/next-level-validation.json) · [Related XML](RiftResultActionsEvidence/next-level-editmode.xml) · [Localization baseline](RiftResultActionsEvidence/next-level-localization-baseline.json) · [Build](RiftResultActionsEvidence/next-level-build.json) · [Runtime](RiftResultActionsEvidence/next-level-runtime.txt) · [Save readback](RiftResultActionsEvidence/next-level-save-readback.json)
+
+![Centered action content and Next level](RiftResultActionsEvidence/next-level-centered-result-1600x900-ko.png)
+
+[PC English](RiftResultActionsEvidence/next-level-centered-result-1600x900-en.png) · [Landscape English](RiftResultActionsEvidence/next-level-centered-result-956x440-en.png) · [Portrait Korean](RiftResultActionsEvidence/next-level-result-440x956-ko.png) · [Portrait English](RiftResultActionsEvidence/next-level-result-440x956-en.png) · [Actual tier-25 entry](RiftResultActionsEvidence/next-level-battle.png)
 
 ### 2026-10-02: Editor result initialization failure after killing the boss
 

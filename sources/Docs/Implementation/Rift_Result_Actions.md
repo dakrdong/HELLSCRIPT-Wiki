@@ -9,6 +9,8 @@
 - **획득 장비**: 획득 당시 상세 스냅샷을 유지하고, 현재 같은 ID로 소유한 장비에 **착용 아이템과 비교**·**장착**을 제공한다. 비교는 `EquipmentComparisonView`/`ItemComparison`을 재사용하며, 장착은 기존 `EquipmentSlots`와 `GameStore` 거래로 확정한다. 두 반지·쌍수의 교체 기준은 공통 비교창에서 선택한다. 자동 창고 입고 장비는 기존 `Storage.Move`와 장착을 한 거래로 처리한다. 분해·판매·버림·소유권 상실 장비를 복구하거나 장착하지 않는다.
 - **그래프 확인**: 이전 기록 텍스트 비교를 이번 전투의 그래프로 교체했다. 훈련장의 기존 `TrainingDpsPanel`, `TrainingChartView`, `TrainingDpsChart`, 3초 이동 DPS와 스킬 사용 시점 조사 기능을 그대로 공유한다. 피해는 기존 훈련장과 같은 실제 HP 감소 기준이며, 스킬 아이콘 표시와 툴팁의 모든 사용 스킬 표기도 같은 규칙이다. 균열 체크포인트와 완료 기록에 초별 피해·사용 시점을 저장하고 과거 전투를 현재 장비로 재계산하지 않는다. 기록이 없는 과거 저장은 새 전투부터 기록한다는 안내만 표시한다.
 - **반복 사냥 설정**: 현재 결과의 반복이 꺼져 있으면 흐리게 표시한다. 눌렀을 때 **반복 사냥 설정이 되어있지 않습니다** 말풍선을 2초 표시한다. 설정된 결과의 안내 페이지에서는 머리글의 설정 버튼을 숨긴다.
+- **다음 레벨**: 보상과 재도전 사이에서 완료한 균열의 다음 단계로 진입한다. 예를 들어 최고 클리어가 30단계여도 24단계 결과에서는 25단계로 이동한다. 저장된 성공 결과에서 다음 단계가 개방되고 1,000단계를 넘지 않을 때 활성화한다. 기존 `PrepareResultRetry`·`ReturnTown`·`Begin` 경로로 현재 반복 예약과 수동 재도전 카운트를 취소하고 정상 입장·피로도·물약·저장 검증을 사용한다. 넓은 화면은 보상→다음 레벨→재도전→귀환 순서의 레일이며, 세로 화면은 보상·다음 레벨 / 재도전·귀환 두 줄로 표시한다.
+- **행동 버튼 중앙 정렬**: 넓은 화면의 네 버튼은 아이콘과 실제 줄바꿈을 반영한 글자 높이를 합쳐 세로 중앙에 배치한다. 기존 글자 영역의 불필요한 아래 여백을 제거하고, 한국어·영어 모두 같은 공통 버튼 생성 경로를 사용한다.
 - **다시 도전**: 결과 창을 유지한 채 버튼에 5·4·3·2·1과 **눌러서 취소**를 표시한다. 다시 누르면 진입을 취소한다. 수동 도전은 현재 결과의 자동 반복 예약을 취소하고, 영웅의 반복 설정은 새 전투에 보존한다. 중첩 창과 앱 포커스 해제 동안 수동 카운트를 멈추고, 저장 실패나 창 닫기 후 진입하지 않는다.
 
 ## 전투 중 실시간 DPS, 2026-10-02
@@ -49,6 +51,22 @@
 `RiftRewardRevealWindow`와 `RiftCombatGraphWindow`는 `tools/new_content_ui.py`에서 시작했다. 두 창 모두 `ContentWindowView`와 창 관리자의 안전 영역·입력·일시정지 임대를 사용한다. 수령 연출은 사용자 요청에 따라 표준 창틀·제목줄·행동줄을 숨기고 검은 딤과 중앙 수령 내역만 표시하는 어댑터다. 별도 캔버스·장비 계산·저장 소유자를 만들지 않는다. 표시 데이터는 이미 저장된 `RewardSnapshot`이며 클릭은 닫기만 수행한다.
 
 ## 검증
+
+### 2026-10-02: 다음 레벨 진입과 행동 버튼 중앙 정렬
+
+`RiftResultTests` **27/27**과 공통 UI 소유 검사·계약 **11/11**이 통과했다. 번역 검사는 **32/33**이며, 실패 1개는 기준 커밋에도 남아 있는 미사용 번역 키 `{0}단계 · {1}`, `기록 목록` 검사다. 신규 문구 누락은 없고 C# 컴파일과 최종 macOS 개발 빌드 오류는 0개다. 에디터의 Unity AI 구독 오류와 플레이어의 기존 URP 후처리 셰이더 경고 4건은 별도로 기록했다.
+
+한국어·영어와 세로 440×956, 가로 956×440, PC 1600×900·1600×1000·2100×900의 10개 화면 조합에서 버튼 순서·안전 영역·문구 잘림을 확인했다. 중앙 정렬 수정 후 직접 영향을 받는 가로·PC 8개 조합만 다시 측정했으며 아이콘·글자 묶음과 버튼 중심의 차이는 1.5픽셀 이내다. 바뀌지 않은 세로 2개 조합과 결과창 보상·장착·그래프 조작의 성공 결과를 재사용했다.
+
+최고 클리어 30단계에서 실제 24단계 전투를 완료한 뒤 재도전 카운트를 시작하고 **다음 레벨**을 눌렀다. 기존 입장 경로가 카운트를 취소하고 새로운 25단계 전투·저장 체크포인트를 만들었으며 반복 설정은 보존됐다. 실패 결과에서 버튼이 비활성화되는 것도 실제 결과창으로 확인했다. 최종 실행은 `HELLSCRIPT_RIFT_RESULT_ACTIONS_OK`와 종료 코드 0으로 완료됐고 관리 코드 예외는 없었다. macOS의 uGUI 레이캐스트·합성 포인터 검증이며 모바일 실기기 검증은 아니다.
+
+초기 실행의 기존 재도전 검증은 포커스·자동 반복 대기 문제로 중단됐으며, 이후 포커스를 확보한 실행에서 5→4→3→2→1과 진입을 확인했다. 중간 빌드의 URP 초기화 오류는 에셋 새로고침·별도 출력의 클린 빌드로 해결했다. 다음 단계 진입 후 반복 설정을 무조건 켜짐으로 기대하던 픽스처도 실제 진입 전 설정과 비교하도록 바로잡았다. 최종에는 바뀐 버튼 배치와 다음 단계 진입만 확인하는 범위를 사용했다. 전체 게임 검사는 반복하지 않았다.
+
+[검증 범위와 소스 해시](RiftResultActionsEvidence/next-level-validation.json) · [관련 검사 XML](RiftResultActionsEvidence/next-level-editmode.xml) · [번역 기준 비교](RiftResultActionsEvidence/next-level-localization-baseline.json) · [개발 빌드](RiftResultActionsEvidence/next-level-build.json) · [실행 기록](RiftResultActionsEvidence/next-level-runtime.txt) · [저장 재확인](RiftResultActionsEvidence/next-level-save-readback.json)
+
+![중앙 정렬된 행동 버튼과 다음 레벨](RiftResultActionsEvidence/next-level-centered-result-1600x900-ko.png)
+
+[PC 영어](RiftResultActionsEvidence/next-level-centered-result-1600x900-en.png) · [가로 영어](RiftResultActionsEvidence/next-level-centered-result-956x440-en.png) · [세로 한국어](RiftResultActionsEvidence/next-level-result-440x956-ko.png) · [세로 영어](RiftResultActionsEvidence/next-level-result-440x956-en.png) · [25단계 실제 진입](RiftResultActionsEvidence/next-level-battle.png)
 
 ### 2026-10-02: 에디터에서 보스 처치 후 결과 창 생성 오류
 

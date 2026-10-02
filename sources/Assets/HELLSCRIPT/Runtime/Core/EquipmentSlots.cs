@@ -37,6 +37,12 @@ namespace Hellscript
         public static Item At(HeroSave hero,int slot,int index=0)=>hero.inventory.FirstOrDefault(i=>Occupies(i,slot,index));
         public static int[] Targets(HeroSave hero,Item item)
             =>item.slot==7||item.slot==0&&hero.heroClass==HeroClass.Warrior&&Kind(item)==WeaponKind.Melee?new[]{0,1}:new[]{Offhand(item)?1:0};
+        public static int ComparisonTarget(HeroSave hero,Item item,int index=-1)
+        {
+            var targets=Targets(hero,item);
+            if(targets.Contains(index))return index;
+            return targets.Where(n=>At(hero,item.slot,n)!=null).DefaultIfEmpty(targets[0]).First();
+        }
         public static bool Compatible(Item main,Item off,HeroClass heroClass)
         {
             if(off==null)return true;

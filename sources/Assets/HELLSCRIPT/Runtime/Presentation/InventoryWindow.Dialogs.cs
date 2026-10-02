@@ -20,7 +20,7 @@ namespace Hellscript
         }
         void ItemInfo(Transform parent,Item item,float w,ref float y,bool concise=false,bool stackedHeader=false)
         {
-            var shared=ItemDetailView.Append(parent,item,w-12,font,textScale,EquipmentViewSource.Owned,icon:!concise);float h=shared.sizeDelta.y;UiLayout.Place(shared,6,y,w-12,h);y+=h+4;
+            var shared=ItemDetailView.Append(parent,item,w-12,font,textScale,EquipmentViewSource.Owned,icon:!concise,hero:Hero);float h=shared.sizeDelta.y;UiLayout.Place(shared,6,y,w-12,h);y+=h+4;
             if(!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item))Paragraph(parent,"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.",12,ref y,w-24,UiTheme.Caption,muted);
         }
         public void ShowDetail(string id)
@@ -39,7 +39,7 @@ namespace Hellscript
             if(!item.equipped)actions.Add(new ItemDetailPopup.FooterAction("inventory-compare","장착 비교",()=>ShowComparison(id)));
             actions.Add(new ItemDetailPopup.FooterAction("inventory-detail-close","닫기",Dismiss));
             detail.SetFooter(null,!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item)?"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.":null,actions.ToArray());
-            ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,font,textScale);
+            ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,font,textScale,hero:Hero);
         }
         void RequestEquip(string id)
         {
