@@ -8,7 +8,7 @@ namespace Hellscript
     public enum CombatActivity { Movement, Attack, Evasion, Farming }
     public sealed class CombatActivitySample
     {
-        public int second;
+        public float time;
         public readonly float[] seconds=new float[4];
     }
     [Serializable] public sealed class CombatReasonCount { public string code; public int count; }
@@ -27,13 +27,15 @@ namespace Hellscript
     [Serializable] public sealed class CombatFeedback
     {
         public const int Version=2;
-        public const int ActivityHistoryLimit=31;
+        public const int ActivityHistoryLimit=257;
         public int version;
         public float observedFrom;
         public float attackSeconds,evasionSeconds,movementSeconds,lootSeconds,waitingSeconds;
         public bool truncated;
         public List<SkillFeedback> skills=new List<SkillFeedback>();
         [NonSerialized] public List<CombatActivitySample> activityHistory=new List<CombatActivitySample>();
+        [NonSerialized] float activityHistoryInterval=1;
+        [NonSerialized] CombatActivity? historyActivity;
         public double ObservedSeconds=>attackSeconds+evasionSeconds+movementSeconds+lootSeconds+waitingSeconds;
         public double ActivitySeconds=>movementSeconds+(double)attackSeconds+evasionSeconds+lootSeconds;
         public float[] ActivityDurations()=>new[]{movementSeconds,attackSeconds,evasionSeconds,lootSeconds};
@@ -51,6 +53,14 @@ namespace Hellscript
         public void RecordActivity(CombatActivity? activity,float seconds,float endTime)
         {
             if(!float.IsFinite(seconds)||!float.IsFinite(endTime)||seconds<=0||endTime<seconds)return;
+            activityHistory??=new List<CombatActivitySample>();
+            if(activityHistory.Count==0)
+            {
+                activityHistoryInterval=1;
+                var start=new CombatActivitySample{time=endTime-seconds};
+                start.seconds[0]=movementSeconds;start.seconds[1]=attackSeconds;start.seconds[2]=evasionSeconds;start.seconds[3]=lootSeconds;
+                activityHistory.Add(start);
+            }
             switch(activity)
             {
                 case CombatActivity.Movement:movementSeconds+=seconds;break;
@@ -59,16 +69,23 @@ namespace Hellscript
                 case CombatActivity.Farming:lootSeconds+=seconds;break;
                 default:waitingSeconds+=seconds;break;
             }
-            activityHistory??=new List<CombatActivitySample>();
-            // Split boundary ticks between their actual seconds; waiting leaves an empty graph interval.
+            // Cumulative endpoints keep inactive periods flat, including sub-second activity changes.
             for(float cursor=Mathf.Max(0,endTime-seconds);cursor<endTime;)
             {
-                int second=Mathf.FloorToInt(cursor);float next=Mathf.Min(endTime,second+1f),part=next-cursor;
-                if(part<=0)break;
+                float next=Mathf.Min(endTime,(Mathf.Floor(cursor/activityHistoryInterval)+1)*activityHistoryInterval);
+                if(next<=cursor)break;
                 var row=activityHistory.LastOrDefault();
-                if(row==null||row.second!=second)
-                {row=new CombatActivitySample{second=second};activityHistory.Add(row);if(activityHistory.Count>ActivityHistoryLimit)activityHistory.RemoveAt(0);}
-                if(activity.HasValue)row.seconds[(int)activity.Value]=Mathf.Min(1,row.seconds[(int)activity.Value]+part);
+                if(activityHistory.Count==1||activityHistoryInterval==1&&historyActivity!=activity||cursor%activityHistoryInterval==0)
+                {row=new CombatActivitySample();activityHistory.Add(row);}
+                row.time=next;row.seconds[0]=movementSeconds;row.seconds[1]=attackSeconds;row.seconds[2]=evasionSeconds;row.seconds[3]=lootSeconds;
+                if(activity.HasValue)row.seconds[(int)activity.Value]-=endTime-next;
+                if(activityHistory.Count>ActivityHistoryLimit)
+                {
+                    // ponytail: coarsen long-run plot samples; totals and the first/latest endpoints stay exact.
+                    for(int i=activityHistory.Count-2;i>0;i-=2)activityHistory.RemoveAt(i);
+                    activityHistoryInterval*=2;
+                }
+                historyActivity=activity;
                 cursor=next;
             }
         }

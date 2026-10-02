@@ -2,7 +2,7 @@
 
 Updated: 2026-10-02 · [한국어](Rift_Activity_Time.md)
 
-Rift battles show **Movement, Attack, Evasion and Farming** in real time. An independent HUD places one stacked 100% bar above four cumulative time/share labels and graphs of the last 30 seconds. Each graph measures seconds spent on that activity per one-second interval (0–1s). The current interval updates while it is in progress.
+Rift battles show **Movement, Attack, Evasion and Farming** in real time. An independent HUD places one stacked 100% bar above four cumulative time/share labels and cumulative graphs. The horizontal axis is elapsed Rift time; the vertical axis is total seconds spent on that activity by that moment. Farming for 0.4 seconds, doing something else, then farming for another 0.4 seconds produces a flat stretch at 0.4 seconds followed by a rise to 0.8 seconds. The graph spans this play session's observation start through the current moment, rather than only the last 30 seconds. The hint above the graphs states the displayed start/end times.
 
 | Activity | Recorded purpose |
 | --- | --- |
@@ -15,13 +15,31 @@ Each simulation interval belongs to at most one activity. Within an interval, tr
 
 Drag the heading to move the panel and press its left arrow to fold/unfold. **Position and folding are independent of DPS**. HUD rebuilds, orientation and language changes retain both. Position is device-only in `hellscript-activity-position-v1.json`; a new launch restores the position and starts expanded. Safe-area bounds and the lower log/controls constrain placement. Graphs and the share bar do not intercept gameplay input.
 
-The existing `CombatFeedback` owns actual-purpose timing. Cumulative totals persist in `RunState.statistics.feedback` and completed records; only 31 per-second samples remain in memory. Resuming retains totals while new graph samples begin at resumption. Older timing lacks purpose evidence, so migration preserves skill evidence and starts a new timing observation at the resume time, which is shown on screen.
+The existing `CombatFeedback` owns actual-purpose timing. Cumulative totals persist in `RunState.statistics.feedback` and completed records; graph samples store cumulative values with their actual times in memory only. Activity transitions and second boundaries are sampled. Long sessions coarsen intermediate samples to stay within 257 points while retaining the observation start, current endpoint and exact totals. The chart respects actual time spacing. Resuming starts the graph at the saved cumulative totals and does not infer the earlier detailed curve. Older timing lacks purpose evidence, so migration preserves skill evidence and starts a new timing observation at resumption.
 
 `GameUI.RiftActivity` is a read-only adapter on the existing battle canvas. It reuses `TrainingDpsChart`, `DpsHudDrag`, `DpsHudPosition`, `UiTheme`, `UiFonts` and `Loc`, retaining the original DPS position file. No new content window, canvas or chart engine is introduced. Display interactions do not mutate account or combat evidence.
 
 Sources: [Timing](../../Assets/HELLSCRIPT/Runtime/Core/CombatFeedback.cs), [HUD](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftActivity.cs), [Focused checks](../../Assets/HELLSCRIPT/Tests/Editor/CombatActivityTests.cs), [macOS interaction checks](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.Activity.cs).
 
-## Validation
+## Cumulative graph validation
+
+The cumulative update was checked across **61 scoped Edit Mode cases**: two 0.4-second farming intervals totaling 0.8 seconds with a flat gap, boundary interpolation, bounded long-run samples retaining the origin, actual elapsed-time spacing, resumption from saved totals, uniform DPS spacing and unchanged combat outcomes. Sixty cases passed initially. An ambiguous Reflection overload in the new coordinate check was fixed in the test helper only, and that single failed check passed on rerun. The other successful checks were retained. This update used scoped validation; the full Edit Mode suite was not rerun. The full-suite results below describe the initial implementation.
+
+The macOS development build succeeded with 0 errors and 225 warnings. In a real seeded Rift, graph endpoints matched cumulative totals and both timestamps and cumulative values were monotonic. One native acceptance run covered 30 conditions: Korean/English × portrait 440×956, landscape 956×440 and PC 16:9/16:10/21:9 × three map modes. It verified the exact 100% bar, fold/drag, independent persisted position, rebuild retention, safe areas and text bounds. Display interactions left combat totals unchanged and the training DPS adapter remained present. Input used synthetic macOS uGUI events and simulated safe areas; physical mobile devices were not tested.
+
+[Scoped checks](RiftActivityCumulativeEvidence20261002/focused-tests.json) · [Build](RiftActivityCumulativeEvidence20261002/native-build.json) · [Interaction record](RiftActivityCumulativeEvidence20261002/runtime.txt)
+
+| Viewport | Korean | English |
+| --- | --- | --- |
+| Portrait 440×956 | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-440x956-ko.png) | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-440x956-en.png) |
+| Landscape 956×440 | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-956x440-ko.png) | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-956x440-en.png) |
+| PC 16:9 | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-1600x900-ko.png) | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-1600x900-en.png) |
+| PC 16:10 | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-1600x1000-ko.png) | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-1600x1000-en.png) |
+| PC 21:9 | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-1680x720-ko.png) | [Cumulative view](RiftActivityCumulativeEvidence20261002/activity-1680x720-en.png) |
+
+![Chronological cumulative graphs in a real Rift](RiftActivityCumulativeEvidence20261002/activity-natural-1600x900-ko.png)
+
+## Initial implementation validation
 
 The **46/46** focused Edit Mode checks, **11/11** shared UI checks and final ownership validator passed: actual tick purposes, farming approach attribution, paused/portal exclusions, exact 100% rounding, interval boundaries and bounded history, save/resume migration, unchanged simulation outcomes and independent device positions.
 

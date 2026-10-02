@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -36,7 +37,16 @@ namespace Hellscript
                 var segment=(RectTransform)ActivityBody.Find("Activity share 100%/Activity share "+i);
                 Require(Mathf.Abs(segment.anchorMin.x-end/100)<.00001f,"Wrong segment start");end+=shares[i];
                 Require(Mathf.Abs(segment.anchorMax.x-end/100)<.00001f&&segment.gameObject.activeSelf==(shares[i]>0),"Wrong segment share");
-                Require(ActivityBody.Find("Activity chart "+i).GetComponent<TrainingDpsChart>().Top==1,"Activity graph scale is not seconds per second");
+                var chart=ActivityBody.Find("Activity chart "+i).GetComponent<TrainingDpsChart>();
+                var series=(IReadOnlyList<float>)typeof(TrainingDpsChart).GetField("current",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(chart);
+                var times=(IReadOnlyList<float>)typeof(TrainingDpsChart).GetField("times",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(chart);
+                Require(chart.Top>=f.ActivityDurations()[i]&&series.Count==f.activityHistory.Count,"Cumulative activity graph has the wrong scale or samples");
+                Require(series.Count>0&&Mathf.Abs(series[series.Count-1]-f.ActivityDurations()[i])<.00001f,"Graph endpoint differs from cumulative total");
+                for(int j=0;j<series.Count;j++)
+                {
+                    Require(series[j]==f.activityHistory[j].seconds[i]&&times[j]==f.activityHistory[j].time,"Graph does not plot cumulative samples in elapsed-time order");
+                    if(j>0)Require(series[j]>=series[j-1]&&times[j]>times[j-1],"Cumulative graph decreased or time order changed");
+                }
                 var label=ActivityBody.Find("Activity label "+i).GetComponent<Text>();
                 Require(label.text.Contains(shares[i]+"%"),"Missing exact activity share label");
             }
@@ -68,7 +78,7 @@ namespace Hellscript
             game.TogglePause();game.enabled=true;yield return new WaitForSecondsRealtime(.5f);game.enabled=false;game.TogglePause();
             Require(run.time>paused&&f.ObservedSeconds>total,"Real-time play does not update activity");
             game.UI.RefreshHud();yield return null;CheckActivity("natural",true);yield return Capture("activity-natural-1600x900-ko");
-            proof.Add("PASS natural seeded Rift: exclusive purpose intervals, live updates and pause/resume; no damage/result/time totals injected");
+            proof.Add("PASS natural seeded Rift: cumulative graph endpoints equal real totals, monotonic time/value samples, exclusive purpose intervals, live updates and pause/resume; no damage/result/time totals injected");
             string recorded=JsonUtility.ToJson(f);
             foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{1680,720}})
             foreach(string language in new[]{"ko","en"})

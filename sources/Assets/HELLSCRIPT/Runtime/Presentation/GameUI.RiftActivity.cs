@@ -15,6 +15,7 @@ namespace Hellscript
         readonly RectTransform[] activitySegments=new RectTransform[4];
         readonly TrainingDpsChart[] activityCharts=new TrainingDpsChart[4];
         readonly List<float>[] activitySeries={new List<float>(),new List<float>(),new List<float>(),new List<float>()};
+        readonly List<float> activityTimes=new List<float>();
         readonly string[] activityNames={"이동","공격","회피","파밍"};
         bool activityFolded;
         float activityShownTime=-1;
@@ -31,7 +32,7 @@ namespace Hellscript
             activityFold=UiIconButton.CreateGlyph(activityHud,"rift-activity-fold","chevron",0,0,30,30,ToggleActivityFold,flip:!activityFolded);
             activityBody=Rect("Activity graphs",activityHud);
             activityBar=Box("Activity share 100%",activityBody,UiTheme.Inset);activityBar.GetComponent<Image>().raycastTarget=false;
-            activityHint=Label(activityBody,"활동 비중 · 최근 30초 · 대기 제외",10,muted);
+            activityHint=Label(activityBody,"활동 기록 대기 · 대기 시간 제외",10,muted);
             for(int i=0;i<4;i++)
             {
                 activitySegments[i]=Box("Activity share "+i,activityBar,ActivityColor(i));activitySegments[i].GetComponent<Image>().raycastTarget=false;
@@ -73,6 +74,8 @@ namespace Hellscript
             if(activityHud==null||activityFolded||activityShownTime>=0&&run.time-activityShownTime<.15f)return;
             activityShownTime=run.time;var feedback=run.statistics?.feedback;
             var durations=feedback?.ActivityDurations()??new float[4];var shares=feedback?.ActivityPercentages()??new int[4];
+            activityTimes.Clear();
+            if(feedback?.activityHistory!=null)foreach(var sample in feedback.activityHistory)activityTimes.Add(sample.time);
             float x=0;
             for(int i=0;i<4;i++)
             {
@@ -83,9 +86,9 @@ namespace Hellscript
                 var series=activitySeries[i];series.Clear();
                 if(feedback?.activityHistory!=null)
                     foreach(var sample in feedback.activityHistory)series.Add(sample.seconds[i]);
-                activityCharts[i].Set(series,null,CombatFeedback.ActivityHistoryLimit);
+                activityCharts[i].Set(series,null,series.Count,activityTimes);
             }
-            activityHint.text=feedback?.observedFrom>0?Loc.F("{0:0.0}초부터 기록 · 최근 30초",feedback.observedFrom):feedback?.ActivitySeconds>0?Loc.T("활동 비중 · 최근 30초 · 대기 제외"):Loc.T("활동 기록 대기 · 대기 시간 제외");
+            activityHint.text=activityTimes.Count>0?Loc.F("누적 시간 · {0:0.0}~{1:0.0}초",activityTimes[0],activityTimes[activityTimes.Count-1]):Loc.T("활동 기록 대기 · 대기 시간 제외");
         }
     }
 }

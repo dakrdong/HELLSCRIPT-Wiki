@@ -47,15 +47,49 @@ namespace Hellscript.Tests
             var equal=new CombatFeedback{movementSeconds=1,attackSeconds=1,evasionSeconds=1};
             CollectionAssert.AreEqual(new[]{34,33,33,0},equal.ActivityPercentages());
         }
-        [Test] public void GraphSplitsBoundaryTicksIsBoundedAndIsNotWrittenToSaves()
+        [Test] public void GraphIsCumulativeAcrossBoundariesBoundedAndIsNotWrittenToSaves()
         {
             var f=new CombatFeedback();f.RecordActivity(CombatActivity.Farming,.1f,1.05f);
-            Assert.That(f.activityHistory[0].seconds[3],Is.EqualTo(.05).Within(.00001));
+            Assert.AreEqual(0,f.activityHistory[0].seconds[3]);
             Assert.That(f.activityHistory[1].seconds[3],Is.EqualTo(.05).Within(.00001));
-            f.RecordActivity(null,70,71.05f);Assert.AreEqual(CombatFeedback.ActivityHistoryLimit,f.activityHistory.Count);
+            Assert.That(f.activityHistory[2].seconds[3],Is.EqualTo(.1).Within(.00001));
+            f.RecordActivity(null,2000,2001.05f);Assert.LessOrEqual(f.activityHistory.Count,CombatFeedback.ActivityHistoryLimit);
+            Assert.That(f.activityHistory[0].time,Is.EqualTo(.95).Within(.00001));
+            Assert.That(f.activityHistory.Last().time,Is.EqualTo(2001.05f));
+            Assert.That(f.activityHistory.Where(s=>s.time>=1.05f).All(s=>Mathf.Abs(s.seconds[3]-.1f)<.00001),Is.True);
             var restored=JsonUtility.FromJson<CombatFeedback>(JsonUtility.ToJson(f));
             Assert.AreEqual(f.lootSeconds,restored.lootSeconds);Assert.IsEmpty(restored.activityHistory);
             Assert.IsFalse(JsonUtility.ToJson(f).Contains("activityHistory"));
+        }
+        [Test] public void TwoShortFarmingIntervalsAccumulateWithAFlatGap()
+        {
+            var f=new CombatFeedback();f.RecordActivity(CombatActivity.Farming,.4f,.4f);
+            f.RecordActivity(null,60,60.4f);f.RecordActivity(CombatActivity.Farming,.4f,60.8f);
+            Assert.That(f.lootSeconds,Is.EqualTo(.8f));
+            Assert.That(f.activityHistory.First(s=>s.time>=.4f).seconds[3],Is.EqualTo(.4f));
+            Assert.That(f.activityHistory.Where(s=>s.time>=.4f&&s.time<=60.4f).All(s=>s.seconds[3]==.4f),Is.True);
+            Assert.That(f.activityHistory.Last().seconds[3],Is.EqualTo(.8f));
+            for(int i=1;i<f.activityHistory.Count;i++)
+            {Assert.Greater(f.activityHistory[i].time,f.activityHistory[i-1].time);Assert.GreaterOrEqual(f.activityHistory[i].seconds[3],f.activityHistory[i-1].seconds[3]);}
+        }
+        [Test] public void ResumeStartsTheGraphAtSavedCumulativeTotals()
+        {
+            var f=JsonUtility.FromJson<CombatFeedback>(JsonUtility.ToJson(new CombatFeedback{lootSeconds=.4f}));
+            f.RecordActivity(null,1,51);f.RecordActivity(CombatActivity.Farming,.4f,51.4f);
+            Assert.AreEqual(50,f.activityHistory[0].time);Assert.AreEqual(.4f,f.activityHistory[0].seconds[3]);
+            Assert.AreEqual(.8f,f.activityHistory.Last().seconds[3]);
+        }
+        [Test] public void LongRunCoarseningKeepsOriginExactTotalsAndMonotonicSamples()
+        {
+            var f=new CombatFeedback();float time=0;
+            for(int i=0;i<20000;i++){time+=.05f;f.RecordActivity((CombatActivity)(i%4),.05f,time);}
+            Assert.AreEqual(0,f.activityHistory[0].time);Assert.LessOrEqual(f.activityHistory.Count,CombatFeedback.ActivityHistoryLimit);
+            CollectionAssert.AreEqual(f.ActivityDurations(),f.activityHistory.Last().seconds);Assert.AreEqual(time,f.activityHistory.Last().time);
+            for(int i=1;i<f.activityHistory.Count;i++)
+            {
+                Assert.Greater(f.activityHistory[i].time,f.activityHistory[i-1].time);
+                for(int j=0;j<4;j++)Assert.GreaterOrEqual(f.activityHistory[i].seconds[j],f.activityHistory[i-1].seconds[j]);
+            }
         }
         [Test] public void OldTimingStartsANewObservationWithoutDiscardingSkillEvidence()
         {

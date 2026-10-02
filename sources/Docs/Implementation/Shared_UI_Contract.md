@@ -206,4 +206,4 @@
 
 균열 15단계 해방 안내는 같은 룬 어댑터에 `StoryDialogueWindow`, 기존 `PrologueGate`와 `TutorialAnchorRing`을 연결한다. `AccountGuide.runeBoard`의 진행·지급 룬 ID·완료한 실습 페이지는 `GameStore` 거래로 저장한다. 기존 5단계 `RunePracticeModel`의 완료 판정으로 다음을 열며 각 단계의 NPC 설명은 공통 대화창을 사용한다. 연습은 실제 룬 상태를 변경하지 않는다. 해방 전에는 바로가기를 숨기고 인장 착지 성공 후 등록한다. 전용 창 프레임이나 별도 배치·장비 계산을 추가하지 않는다. [해방 튜토리얼과 검증](Rune_Board_Unlock_Tutorial.md)을 따른다.
 
-2026-10-02: 균열 활동 시간은 기존 전투 캔버스의 독립 HUD 어댑터다. `CombatFeedback`의 실제 행동 구간만 읽고 `TrainingDpsChart`, `DpsHudDrag`와 `DpsHudPosition`을 재사용한다. DPS와 별도의 접기·기기 위치를 유지한다. 일반 이동·전투 이동·회피·파밍 분류와 100% 막대의 근거 및 검증은 [균열 활동 시간](Rift_Activity_Time.md)을 따른다.
+2026-10-02: 균열 활동 시간은 기존 전투 캔버스의 독립 HUD 어댑터다. `CombatFeedback`의 실제 행동 구간만 읽고 `TrainingDpsChart`, `DpsHudDrag`와 `DpsHudPosition`을 재사용한다. 그래프는 실제 경과 시간에 따른 누적 초를 표시하며 DPS와 별도의 접기·기기 위치를 유지한다. 일반 이동·전투 이동·회피·파밍 분류와 100% 막대의 근거 및 검증은 [균열 활동 시간](Rift_Activity_Time.md)을 따른다.
