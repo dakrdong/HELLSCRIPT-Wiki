@@ -1,6 +1,6 @@
 # Shared equipment comparison and salvage selection
 
-Date: 2026-09-22 · [한국어](Equipment_Comparison.md) · [Display contract](../Design/Equipment_Comparison_Rules.en.md)
+Updated: 2026-10-02 · First written: 2026-09-22 · [한국어](Equipment_Comparison.md) · [Display contract](../Design/Equipment_Comparison_Rules.en.md)
 
 Inventory, storage and merchant comparisons previously used separate ordering and calculation paths. A shared model and renderer now put equipped gear left and the candidate right, append candidate deltas, and list missing outgoing properties in red. Repository instructions require the same contract for future content.
 
@@ -74,3 +74,22 @@ Executed counts and scope are recorded in [validation](EquipmentComparisonEviden
 ![Shared auto-selection settings](EquipmentComparisonEvidence/auto-settings-portrait-en.png)
 
 [Storage comparison](EquipmentComparisonEvidence/storage-portrait-en.png) · [Shop comparison](EquipmentComparisonEvidence/shop-landscape-ko.png) · [Right-ring baseline](EquipmentComparisonEvidence/right-ring-baseline-portrait-en.png) · [Reward comparison](EquipmentComparisonEvidence/reward-comparison-portrait-en.png)
+
+## Scores in every single-item detail (2026-10-02)
+
+Shared `ItemTooltip.Score` owns score text and color. Inventory, salvage, storage, merchants, forge, gems, aspects, tutorials, reward boxes, rift results, recommendations, idle history and training details only supply the comparison hero. No content-specific score calculation or color policy is added. Existing Korean/English score wording and semantic colors are reused.
+
+Equipped identity is checked by item ID in the supplied hero, so a historical snapshot's equipped flag cannot suppress a required comparison. Empty slots show `0.0 → candidate score`; gains are green, losses red, ties neutral. Property deltas and resulting character attributes remain in the explicit comparison view.
+
+### Final validation
+
+- Related Edit Mode: 142/142 passed (comparison 30, recommendations/scores 73, display settings 14, merchant 25). [Raw results](EquipmentScoreEvidence/related-editmode.xml)
+- Shared UI ownership and all 11 validator regression tests passed. The native macOS development build succeeded with zero errors.
+- Forty standalone higher/lower/empty/equipped cases passed in Korean/English at 440×956, 956×440, 1440×810, 1440×900 and 1680×720. Shared cards, scrolling, close input, clipping, inventory, salvage, storage, merchant, forge and paired rings passed. [Native record](EquipmentScoreEvidence/native-runtime.txt) · [Validation and source hashes](EquipmentScoreEvidence/validation.json)
+- Concurrent town/rift main integration was preserved. Common gear sources and score localization remained identical, so successful tests and smoke were reused. The attempted full Edit Mode run was stopped before completion because unrelated long combat simulations exceeded this change's necessary validation scope; no full-suite pass is claimed. Physical mobile was not tested.
+
+![Higher score in green](EquipmentScoreEvidence/score-higher-440x956-ko.png)
+![Lower score in red](EquipmentScoreEvidence/score-lower-440x956-ko.png)
+![Empty position starts at zero](EquipmentScoreEvidence/worn-B11-440x956-ko.png)
+![Equipped item shows its own score](EquipmentScoreEvidence/worn-B17-440x956-ko.png)
+![English landscape ring comparison](EquipmentScoreEvidence/comparison-956x440-en.png)

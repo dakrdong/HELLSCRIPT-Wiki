@@ -1,0 +1,187 @@
+{
+  "date": "2026-10-02",
+  "unity": "6000.6.0f1",
+  "tested_code_commit": "ce0fb2be",
+  "integrated_base_commit": "5ecfadef25b8bb428ca70985f09058f9ac87b90f",
+  "editmode": {
+    "passed": 142,
+    "failed": 0,
+    "skipped": 0,
+    "classes": [
+      "ItemComparisonTests",
+      "RecommendedEquipmentTests",
+      "ItemTooltipSettingsTests",
+      "EquipmentShopTests"
+    ]
+  },
+  "ui_contract": {
+    "ownership": "Passed",
+    "tests_passed": 11
+  },
+  "native_build": {
+    "result": "Succeeded",
+    "errors": 0
+  },
+  "native_score_cases": 40,
+  "native_matrix": [
+    {
+      "width": 440,
+      "height": 956,
+      "language": "ko",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 440,
+      "height": 956,
+      "language": "en",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 956,
+      "height": 440,
+      "language": "ko",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 956,
+      "height": 440,
+      "language": "en",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 1440,
+      "height": 810,
+      "language": "ko",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 1440,
+      "height": 810,
+      "language": "en",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "language": "ko",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "language": "en",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 1680,
+      "height": 720,
+      "language": "ko",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    },
+    {
+      "width": 1680,
+      "height": 720,
+      "language": "en",
+      "cases": [
+        "higher-green",
+        "lower-red",
+        "empty-zero",
+        "equipped-no-arrow"
+      ],
+      "result": "Passed"
+    }
+  ],
+  "other_shared_paths": [
+    "inventory",
+    "salvage",
+    "storage",
+    "shop",
+    "forge",
+    "paired-ring-comparison"
+  ],
+  "source_sha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs": "326e78d28f6ff20a70a0c766079305294adec17aade525287ca2c079962e9038",
+    "Assets/HELLSCRIPT/Runtime/Presentation/AspectStoneWindow.cs": "dbc9bde6d5617eb1b56c01465eb3c671ab3e0ada05b609df4be2ce5ae87b96d0",
+    "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Dialogs.cs": "e449762ce3ed0cdd35825d568c2438b9ebbca67713958eff3b76c4138c182c0d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentComparisonView.cs": "9322c3eccccf78d786c9aca6dd58d8f7df9c94109de96e4368feec7b825091b9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.Detail.cs": "63aafaefd6b2da72b1b131f50e8edf89b5a4143e653ee243a34c5a745b531bad",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Gems.cs": "d680760f9eef87fca7e79cfe2fa9aeb919f13c915a5bdfc0ae7920fb775ef2a6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.IdleDashboard.cs": "d2e46aae9ac7832104d565a77a1ae0dea7b8abd4c8784f8df02d76a7baea5dc8",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.InventoryLayout.cs": "a884b80aca7a12a28ccae23cc7bcf0b8f928ecda662b05bef57d8f3a08064d6f",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialPractice.cs": "d7e4b991fea909d08ea31949b93bdab44f87b4c06a61754cc452e18da1a62792",
+    "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Dialogs.cs": "4fee2f17b21b108723665760b4a8dc4f3df22e02e4d1ade30108de37a3b7a17a",
+    "Assets/HELLSCRIPT/Runtime/Presentation/ItemDetailView.cs": "7f7aa81e017f602faef4c0584620b11f62bb38a95e5aa379b373f0cc1115f125",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs": "926b4616e811f6f9d4069a7ce3080b44a3a04312ff24744e07259768562b74e0",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftRecommendationWindow.cs": "9c23e96c711f97c78bef46a7cc8ea3a0178b2ccdbcce920947e876d37d373dd9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.Loot.cs": "7641cc3e92f9e97e6c220592ef2ff4806a116a1170177466ed46b0713b412e5e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.ItemPolish.cs": "c5caea6e7ca38f15f1e8a4a6c9513c8ed5e52c31790e396a64fd10f0174d0129",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRecommendedEquipmentSmoke.cs": "b52bbd7359ec4b9081db142d7ceb4f782422917c696d74705ca7ea587d903d87",
+    "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.Dialogs.cs": "3b27b268b04312d70f06747915fd90ec73f58d64d95b479ba3fe992914221c75",
+    "Assets/HELLSCRIPT/Tests/Editor/ItemComparisonTests.cs": "a5c802ca6c71eb9ba065167f655d8c254f8802f080ff1dc657a75b096e1f6b24",
+    "Assets/HELLSCRIPT/Tests/Editor/RecommendedEquipmentTests.cs": "bf968007396e642d965c7f96b501decb2350583242c5e391f1983418a6ba7add",
+    "Assets/HELLSCRIPT/Runtime/Core/EquipmentScore.cs": "3d146a58137bfe152c68a3895ba527de331ac57ca4c6cd515ff0416d4729a304",
+    "Assets/HELLSCRIPT/Runtime/Core/ItemComparison.cs": "d0e07536ed27c5cc6d972b80880f39c2e7ace2d786e2b2aa0cfd2c02918b47d1",
+    "Assets/HELLSCRIPT/Runtime/Presentation/ItemDetailView.Style.cs": "a336f3012ceb6c481692eb7568e87aad3c228335eddaccfd89c180151f53616e",
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiTheme.cs": "a9428c2b05d3d60c2d58d3f93166cb04652b23e33c59de9d89d6b6e1222a5cad"
+  },
+  "result_reuse": "Common gear code and score localization were byte-identical after incorporating concurrent main work; no duplicate suite or smoke was run.",
+  "limitations": [
+    "Full Edit Mode run stopped before completion; no full-suite pass claimed.",
+    "macOS native development player and synthetic uGUI input; physical mobile not tested.",
+    "Unity AI subscription errors in the live Editor are unrelated to gear code; no C# compiler errors."
+  ]
+}

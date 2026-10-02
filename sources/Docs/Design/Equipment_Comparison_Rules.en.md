@@ -1,6 +1,6 @@
 # Shared equipment comparison rules
 
-Date: 2026-09-22 · Contract: `equipment-comparison-v1` · [한국어](Equipment_Comparison_Rules.md)
+Updated: 2026-10-02 · First written: 2026-09-22 · Contract: `equipment-comparison-v1` · [한국어](Equipment_Comparison_Rules.md)
 
 This is the display contract for **all equipment comparisons**, including inventory, storage, merchants, acquired rewards and training. New content must use `ItemComparison.Preview`, `ItemTooltip` and `EquipmentComparisonView`. Existing services retain ownership of generation, transactions and equipping.
 
@@ -81,3 +81,11 @@ Use `EquipmentScore.Value` for intrinsic scores and `ItemComparison.Preview.scor
 Dragging bag equipment illuminates eligible character-slot borders in gold, with a stronger border on hover. `EquipmentSlots.PlanDrop` uses the actual ownership, level, class, pairing and bag-capacity checks. Test both ring positions independently. Two-handed items indicate both slots and can land on either while storing one main-hand instance. Clear highlights on drop, cancellation, Esc, focus loss, window closing and reflow. Guidance never equips, saves or changes slot geometry.
 
 Current rarities are Normal, Magic, Rare, Legendary and Set. `UniqueItemDefinition` defines legendary powers, not a separate Unique rarity. Remove the disabled Unique option without renumbering saved masks: bit 4 remains reserved and Set stays at bit 5. The separate inventory-footer auto-selection settings entry is removed; the bulk-salvage entry remains.
+
+## Gear score in single-item details (2026-10-02)
+
+Every actual equipment detail shows `Gear score equipped → candidate` without pressing Compare. An empty position starts at zero. Higher candidate scores are green, lower scores red, and equal scores neutral. Details for the currently equipped item show its own score without comparing it to itself.
+
+`ItemTooltip.Score` reuses `EquipmentScore.Value` and `EquipmentSlots.ComparisonTarget`. Rings and dual wield default to the same first occupied position as the shared comparison view; an explicit comparison target takes precedence. The weapon score row compares individual items at that position, while the existing weapon-loadout score row retains the actual combined loadout comparison. Unmet equip conditions do not hide individual score comparisons.
+
+Content controllers pass `hero` to `ItemDetailView.Create`/`Append`. The shared display copies the item and comparison hero without reading account storage. Training and battle details use their supplied draft or snapshot; reward and change-history details use the original hero's current equipped state. Undefined catalogue ranges do not receive invented scores.

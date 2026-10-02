@@ -1,6 +1,6 @@
 # 공통 장비 비교와 분해 자동 선택 연결
 
-작성일: 2026-09-22 · [English](Equipment_Comparison.en.md) · [공통 표시 규칙](../Design/Equipment_Comparison_Rules.md)
+갱신일: 2026-10-02 · 최초 작성: 2026-09-22 · [English](Equipment_Comparison.en.md) · [공통 표시 규칙](../Design/Equipment_Comparison_Rules.md)
 
 인벤토리·창고·상점에서 같은 아이템을 비교했을 때 좌우 순서와 계산 결과가 달랐던 문제를 공통 계산·표시 코드로 정리했다. 착용품은 왼쪽, 후보는 오른쪽에 표시하고 후보의 각 수치에 증감을 붙인다. 후보에 없는 기존 속성은 별도 붉은 목록으로 표시한다. 향후 콘텐츠도 같은 코드를 사용하도록 저장소 작업 규칙에 명시했다.
 
@@ -74,3 +74,22 @@ PC에서 왼쪽·오른쪽 Ctrl을 누르고 있는 동안은 임시로 범위�
 ![공유 자동 선택 설정](EquipmentComparisonEvidence/auto-settings-portrait-en.png)
 
 [창고 비교](EquipmentComparisonEvidence/storage-portrait-en.png) · [상점 비교](EquipmentComparisonEvidence/shop-landscape-ko.png) · [오른쪽 반지 기준](EquipmentComparisonEvidence/right-ring-baseline-portrait-en.png) · [갬블 보상 비교](EquipmentComparisonEvidence/reward-comparison-portrait-en.png)
+
+## 모든 단일 상세의 점수 비교 (2026-10-02)
+
+장비 점수 행의 계산·문구·색을 공통 `ItemTooltip.Score`로 모았다. 인벤토리·분해·창고·상점·대장간·보석·위상·튜토리얼·보상 상자·균열 결과·추천 장비·절전 기록과 훈련 상세는 비교 캐릭터만 전달한다. 화면마다 점수식이나 색 판정을 만들지 않는다. 기존 한국어·영어 점수 문구와 의미 색을 재사용한다.
+
+장착 여부는 전달된 캐릭터의 현재 아이템 ID로 확인하므로, 과거 복사본의 장착 플래그가 남아 있어도 자기 비교를 잘못 생략하지 않는다. 슬롯이 비면 `0.0 → 후보 점수`, 상승·하락은 초록·빨강, 동점은 중립색이다. 옵션 증감과 전체 능력치 예측은 기존 비교창에서만 표시한다.
+
+### 최종 검증
+
+- 관련 Edit Mode 142/142 통과: 장비 비교 30, 추천·점수 73, 표시 설정 14, 상점 25. [원본 결과](EquipmentScoreEvidence/related-editmode.xml)
+- 공통 UI 소유 검사와 검사기 회귀 11개 통과. macOS 개발 빌드는 오류 0개로 성공했다.
+- 단독 상세의 상승·하락·빈 부위·착용품 자체 40개 경우를 세로 440×956, 가로 956×440, PC 1440×810·1440×900·1680×720의 한국어·영어에서 확인했다. 공통 카드·스크롤·닫기·잘림과 인벤토리·분해·창고·상점·대장간, 두 반지 비교도 통과했다. [실행 기록](EquipmentScoreEvidence/native-runtime.txt) · [검증과 소스 해시](EquipmentScoreEvidence/validation.json)
+- 검사 도중 병합된 별도 마을·균열 작업은 보존했다. 이번 장비 공통 코드와 점수 번역이 동일한 것을 해시로 확인하고 성공한 검사·스모크를 반복하지 않았다. 전체 Edit Mode 시도는 관련 없는 장시간 전투 시뮬레이션 때문에 완료 전에 중단했으며 전체 통과로 보고하지 않는다. 모바일 실기기는 검사하지 않았다.
+
+![점수 상승: 초록색](EquipmentScoreEvidence/score-higher-440x956-ko.png)
+![점수 하락: 빨간색](EquipmentScoreEvidence/score-lower-440x956-ko.png)
+![빈 부위: 0부터 비교](EquipmentScoreEvidence/worn-B11-440x956-ko.png)
+![착용품 자체: 단일 점수](EquipmentScoreEvidence/worn-B17-440x956-ko.png)
+![영어·가로 반지 비교](EquipmentScoreEvidence/comparison-956x440-en.png)
