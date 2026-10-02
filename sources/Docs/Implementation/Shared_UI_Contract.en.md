@@ -76,6 +76,8 @@ Shared UI does not require a rectangular frame for every control. Vaults use `Ui
 
 `GlobalHudLayout` owns the persistent vitals, skills and potions; `GameUI.Plaza` and `TownJoystick` own the town heading, shortcuts and movement input. This HUD is an adapter using its existing canvas and proportional screen layout, rather than a content window. Exactly three potion slots reuse the existing bottle artwork and square frames, without a separate tray. Equipped legacy passives remain inspectable in the status-effect strip. Title backings reuse `StorageSurface` and `UiTheme` colors without new raster artwork. Presentation does not save accounts or consume potions. See [town HUD validation](Town_Hud_Responsive.en.md) for the portrait bottom baseline, centered movement pad and responsive layout.
 
+The town return portal reuses this HUD adapter's interaction card, button and labels. `GameController` and `TownLayout` own availability and proximity; existing `CommitRiftEntry` owns resumption and persistence. Its return button keeps a minimum height of 44 screen pixels and its world label a minimum 14-pixel font. See the town return-portal record in [rift entry](Rift_Entry.en.md) for the reason to retain the HUD adapter and its validation.
+
 ## Native skill tree adapter
 
 The Skills tab presents the approved 37-skill class tree, four normal active slots and a separate ultimate slot. Unlocked passives with assigned ranks always apply; a compact tree bubble opens that skill’s edict settings, while the preset-page rail navigates directly. The existing HuntEdictWindow retains draft ownership, shared theme/icons/window host, fixed controls and independent scrolling. See [integration](Hunt_Edict_Skill_Tree.en.md).

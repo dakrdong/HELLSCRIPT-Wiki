@@ -8,7 +8,7 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         Text plazaStatus,plazaActionText,plazaServiceName,plazaServiceDetail,plazaNpcName;
-        RectTransform plazaAction,plazaJoystickRect,plazaGuide,plazaTitlePlate;
+        RectTransform plazaAction,plazaJoystickRect,plazaGuide,plazaTitlePlate,plazaPortalBubble;
         Button plazaSettings;
         TownJoystick plazaJoystick;
         Button plazaInteract,plazaBuy,plazaSell,plazaTalk;
@@ -42,6 +42,7 @@ namespace Hellscript
                 plazaBubbles[s.id]=CreateTownBubble("NPC bubble "+s.id,s.name,s.npcName);
             foreach(var resident in TownLayout.Residents)
                 plazaResidentBubbles[resident.id]=CreateTownBubble("Resident bubble "+resident.id,"",resident.name);
+            plazaPortalBubble=CreateTownBubble("Return portal label","복귀 포탈","");
             plazaAction=Box("Town interaction card",root,UiTheme.Tint(UiTheme.InsetHex,.97f));plazaAction.anchorMin=plazaAction.anchorMax=new Vector2(1,.35f);plazaAction.pivot=new Vector2(1,.5f);plazaAction.anchoredPosition=new Vector2(-22,0);plazaAction.sizeDelta=new Vector2(250,232);
             var edge=Box("Interaction gold edge",plazaAction,gold);Place(edge,0,0,3,232);
             plazaServiceName=Label(plazaAction,"",22,gold);Place(plazaServiceName.rectTransform,15,10,222,28);
@@ -75,6 +76,7 @@ namespace Hellscript
         {
             var safe=UiSafeArea.Current;float canvasScale=root.parent.GetComponent<Canvas>().scaleFactor;
             float scale=globalHud?.Layout?.scale??canvasScale;
+            if(bubble==plazaPortalBubble)scale=Mathf.Max(scale,14f/22);
             // World labels follow the HUD's screen ratio, even though the page canvas uses pixels.
             // Scale the entire bubble so text, line spacing, outlines and bounds stay in proportion.
             bubble.localScale=Vector3.one*(scale/Mathf.Max(.001f,canvasScale));
@@ -108,7 +110,8 @@ namespace Hellscript
         {
             if(Page!="plaza"||plazaStatus==null||game.Town==null)return;
             var walk=game.Town;var near=walk.Nearby;var npc=NpcProfiles.Nearby(walk.Position);
-            float cardHeight=npc!=null&&!npc.Station.HasValue?168:232;
+            bool portal=game.NearTownPortal;
+            float cardHeight=portal||npc!=null&&!npc.Station.HasValue?168:232;
             plazaAction.sizeDelta=new Vector2(250,cardHeight);
             ((RectTransform)plazaAction.Find("Interaction gold edge")).sizeDelta=new Vector2(3,cardHeight);
             if(globalHud?.Layout!=null&&plazaJoystickRect!=null)
@@ -129,6 +132,8 @@ namespace Hellscript
                 float titleWidth=Mathf.Min(fullTitleWidth+24,root.rect.width-iconSize-3*edge);
                 headerTitle.fontSize=Mathf.Clamp(Mathf.FloorToInt(18*(titleWidth-24)/Mathf.Max(1,fullTitleWidth)),10,18);
                 Place(plazaTitlePlate,8,4,titleWidth,32);Place(headerTitle.rectTransform,20,4,titleWidth-24,32);
+                // Keep the return action readable and at least 44 screen pixels tall in narrow views.
+                if(portal)cardScale=Mathf.Max(cardScale,1/Mathf.Max(.001f,scale));
                 plazaAction.localScale=Vector3.one*cardScale;
                 float hudTop=layout.potions.Concat(layout.actives).Max(r=>r.yMax)*layout.scale/scale;
                 float halfHeight=plazaAction.rect.height*cardScale/2;
@@ -137,21 +142,31 @@ namespace Hellscript
                 plazaAction.anchoredPosition=new Vector2(-cardRight,center-root.rect.height*.35f);
             }
             plazaStatus.text=walk.Destination.HasValue?Loc.F("{0}으로 이동 중 · {1:0.0}m",TownLayout.Station(walk.Destination.Value).name,walk.Remaining):Loc.F("{0} Lv.{1} · 중앙 길 횡단 약 20초",game.catalog.classNames[(int)game.Store.Data.Hero.heroClass],game.Store.Data.Hero.level);
-            plazaAction.gameObject.SetActive((near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen);
-            plazaTalk.gameObject.SetActive(npc!=null);
+            plazaAction.gameObject.SetActive((portal||near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen);
+            plazaTalk.gameObject.SetActive(!portal&&npc!=null);
             plazaInteract.gameObject.SetActive(false);plazaBuy.gameObject.SetActive(false);plazaSell.gameObject.SetActive(false);
-            if(near.HasValue)
+            plazaInteract.name=portal?"town-portal-resume":"town-interact";
+            Place((RectTransform)plazaInteract.transform,12,portal?112:168,226,portal?44:52);
+            if(portal)
+            {
+                plazaServiceName.text=Loc.T("복귀 포탈");plazaNpcName.text="";
+                plazaServiceDetail.text=Loc.F("균열 {0:00}단계 · 이전 전투를 이어갑니다.",game.Store.Data.suspendedRun.stage);
+                plazaActionText.text=Loc.T("균열로 복귀");plazaInteract.gameObject.SetActive(true);
+            }
+            else if(near.HasValue)
             {
                 var s=TownLayout.Station(near.Value);plazaServiceName.text=Loc.T(s.name);plazaNpcName.text=Loc.T(s.npcName);plazaServiceDetail.text=Loc.T(s.service);plazaActionText.text=Loc.T(s.action);
                 bool merchant=near.Value==TownStation.Merchant||near.Value==TownStation.Gambler;plazaInteract.gameObject.SetActive(!merchant);plazaBuy.gameObject.SetActive(merchant);plazaSell.gameObject.SetActive(merchant);
             }
-            if(npc!=null&&!npc.Station.HasValue)
+            if(!portal&&npc!=null&&!npc.Station.HasValue)
             {plazaServiceName.text=Loc.T(npc.Role);plazaNpcName.text=Loc.T(npc.name);plazaServiceDetail.text="";}
             // Preserve the right inset while lifting interactions above actual HUD controls.
             foreach(var pair in plazaBubbles)
                 PositionTownBubble(pair.Value,game.World.TownStationScreen(pair.Key));
             foreach(var resident in TownLayout.Residents)
                 PositionTownBubble(plazaResidentBubbles[resident.id],game.World.TownNpcScreen(resident.position));
+            if(game.TownPortalAvailable)PositionTownBubble(plazaPortalBubble,game.World.TownReturnPortalScreen());
+            else plazaPortalBubble.gameObject.SetActive(false);
             if(CommonPanelOpen)ResetTownInput();
         }
         public void OpenStation(TownStation station)

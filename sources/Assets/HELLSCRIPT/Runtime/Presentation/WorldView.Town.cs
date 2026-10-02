@@ -10,7 +10,8 @@ namespace Hellscript
         readonly Dictionary<TownStation,GameObject> stationMarks=new Dictionary<TownStation,GameObject>();
         readonly List<Mesh> townMeshes=new List<Mesh>();
         readonly List<TownBuildingFade> townBuildings=new List<TownBuildingFade>();
-        Transform townPortal;
+        Transform townReturnPortal;
+        readonly List<Transform> townPortalRunes=new List<Transform>();
         readonly List<Transform> portalSparks=new List<Transform>();
         public int FadedTownBuildings=>townBuildings.Count(b=>b.Alpha<.95f);
         public static Vector3 TownPoint(Vector2 point,float height=0){var p=TownLayout.ToWorld(point);return new Vector3(p.x,height,p.y);}
@@ -28,6 +29,7 @@ namespace Hellscript
                 if(s.id==TownStation.RiftKeeper)BuildTownPortal(layout,s.position);
                 var attendant=CreateTownAttendant(s);attendant.transform.SetParent(world.transform,false);attendant.transform.position=TownPoint(s.NpcPosition);attendant.transform.rotation=TownRotation;
             }
+            if(game.TownPortalAvailable)townReturnPortal=BuildTownPortal(layout,TownLayout.ReturnPortalPosition,true);
             for(int i=0;i<TownLayout.Residents.Length;i++)
             {
                 var resident=TownLayout.Residents[i];
@@ -45,7 +47,7 @@ namespace Hellscript
         }
         void ClearTownPresentation()
         {
-            foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();portalSparks.Clear();townPortal=null;ClearRigs();
+            foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();portalSparks.Clear();townPortalRunes.Clear();townReturnPortal=null;ClearRigs();
             foreach(var m in townMeshes)if(m!=null)Destroy(m);townMeshes.Clear();
         }
         public bool TryPickTownGround(Vector2 screen,out Vector2 point)
@@ -81,6 +83,13 @@ namespace Hellscript
             return TownPick.Nearest(projected,screen,Mathf.Max(32,Screen.height*.045f),out station);
         }
         public Vector3 TownNpcScreen(Vector2 position)=>viewCamera.WorldToScreenPoint(TownPoint(position,2.9f));
+        public Vector3 TownReturnPortalScreen(float height=5.7f)=>viewCamera.WorldToScreenPoint(TownPoint(TownLayout.ReturnPortalPosition,height));
+        public bool TryPickTownPortal(Vector2 screen)
+        {
+            if(!game.TownPortalAvailable||townReturnPortal==null||viewCamera==null)return false;
+            var p=viewCamera.WorldToScreenPoint(TownPoint(TownLayout.ReturnPortalPosition,2.7f));
+            return p.z>0&&UiSafeArea.Frame.Contains(p)&&Vector2.Distance(screen,p)<=Mathf.Max(32,Screen.height*.045f);
+        }
         public Vector3 TownStationScreen(TownStation station)=>station==TownStation.AspectStone?viewCamera.WorldToScreenPoint(TownPoint(TownLayout.Station(station).building.center,7.5f)):TownNpcScreen(TownLayout.Station(station).NpcPosition);
         public void PresentTown(TownWalk walk,float dt)
         {
@@ -93,9 +102,10 @@ namespace Hellscript
             foreach(var pair in stationMarks)pair.Value.SetActive(walk.Nearby==pair.Key||walk.Destination==pair.Key);
             ApplyBattleViewport();
             foreach(var b in townBuildings)b.Update(viewCamera,hero.transform.position,dt);
-            if(townPortal!=null)
+            if(townReturnPortal!=null)townReturnPortal.gameObject.SetActive(game.TownPortalAvailable);
+            foreach(var portal in townPortalRunes)portal.localRotation=Quaternion.Euler(0,0,elapsed*16);
+            if(townPortalRunes.Count>0)
             {
-                townPortal.localRotation=Quaternion.Euler(0,0,elapsed*16);
                 for(int i=0;i<portalSparks.Count;i++)
                 {
                     float a=elapsed*(.6f+i%3*.12f)+i*2.39996f;float r=2.6f+(i%4)*.13f;
@@ -331,12 +341,14 @@ namespace Hellscript
             for(int n=0;n<10;n++){float x=29+n*2.3f;Block(p,"Training fence",new Vector3(x,1,33),new Vector3(.2f,2,.2f),wood);Block(p,"Training rail",new Vector3(x,1.3f,33),new Vector3(2.3f,.15f,.15f),wood);}
             TownLantern(p,new Vector3(29,0,12));TownLantern(p,new Vector3(49,0,12));
         }
-        void BuildTownPortal(Transform p,Vector2 at)
+        Transform BuildTownPortal(Transform p,Vector2 at,bool returning=false)
         {
-            var root=new GameObject("Golden Rift Portal").transform;root.SetParent(p,false);root.localPosition=new Vector3(at.x,0,at.y);
+            var root=new GameObject(returning?"Rift Return Portal":"Golden Rift Portal").transform;root.SetParent(p,false);root.localPosition=new Vector3(at.x,0,at.y);
+            if(returning)root.localScale=Vector3.one*.65f;
             Shape("Portal dais",PrimitiveType.Cylinder,root,new Vector3(0,.12f,0),new Vector3(7,.12f,5),darkStone);
-            var goldLight=PortalMat("Portal gold",new Color(1,.73f,.19f));var orange=PortalMat("Portal orange",new Color(1,.3f,.045f));
-            townPortal=new GameObject("Turning golden runes").transform;townPortal.SetParent(root,false);townPortal.localPosition=Vector3.up*4.2f;
+            var glow=returning?new Color(.15f,.7f,1):new Color(1,.45f,.08f);
+            var goldLight=PortalMat(returning?"Return portal light":"Portal gold",returning?new Color(.45f,.9f,1):new Color(1,.73f,.19f));var orange=PortalMat(returning?"Return portal edge":"Portal orange",returning?new Color(.08f,.35f,1):new Color(1,.3f,.045f));
+            var runes=new GameObject("Turning portal runes").transform;runes.SetParent(root,false);runes.localPosition=Vector3.up*4.2f;townPortalRunes.Add(runes);
             for(int n=0;n<3;n++)
             {
                 var ring=Ring(root,new Vector3(0,4.2f,-n*.06f),2.35f+n*.17f,n==1?goldLight:orange,n==1?.13f:.08f);
@@ -344,13 +356,15 @@ namespace Hellscript
             }
             for(int n=0;n<18;n++)
             {
-                float a=n*Mathf.PI*2/18;var rune=Block(townPortal,"Orbiting sigil",new Vector3(Mathf.Cos(a)*2.77f,Mathf.Sin(a)*2.77f*1.6f,0),new Vector3(.09f,.28f,.09f),goldLight);rune.transform.localRotation=Quaternion.Euler(0,0,a*Mathf.Rad2Deg);
+                float a=n*Mathf.PI*2/18;var rune=Block(runes,"Orbiting sigil",new Vector3(Mathf.Cos(a)*2.77f,Mathf.Sin(a)*2.77f*1.6f,0),new Vector3(.09f,.28f,.09f),goldLight);rune.transform.localRotation=Quaternion.Euler(0,0,a*Mathf.Rad2Deg);
                 var spark=Shape("Rift ember",PrimitiveType.Sphere,root,Vector3.zero,Vector3.one*(.06f+n%3*.025f),n%2==0?goldLight:orange);portalSparks.Add(spark.transform);
             }
             // Translucent elliptical membranes leave the destination visible through the opening.
-            var fadeShader=Resources.Load<Shader>("TownFade");if(!materials.TryGetValue("Portal membrane",out var veil)){veil=new Material(fadeShader){name="HELLSCRIPT Portal membrane"};veil.SetColor("_BaseColor",new Color(1,.37f,.04f,.22f));materials["Portal membrane"]=veil;}
+            string membraneKey=returning?"Return portal membrane":"Portal membrane";
+            var fadeShader=Resources.Load<Shader>("TownFade");if(!materials.TryGetValue(membraneKey,out var veil)){veil=new Material(fadeShader){name="HELLSCRIPT "+membraneKey};veil.SetColor("_BaseColor",returning?new Color(.1f,.6f,1,.22f):new Color(1,.37f,.04f,.22f));materials[membraneKey]=veil;}
             var membrane=Shape("Portal membrane",PrimitiveType.Sphere,root,new Vector3(0,4.2f,.1f),new Vector3(4.5f,7.3f,.12f),veil);
-            var light=new GameObject("Portal glow").AddComponent<Light>();light.transform.SetParent(root,false);light.transform.localPosition=new Vector3(0,2,-1);light.type=LightType.Point;light.color=new Color(1,.45f,.08f);light.intensity=3;light.range=12;light.shadows=LightShadows.None;
+            var light=new GameObject("Portal glow").AddComponent<Light>();light.transform.SetParent(root,false);light.transform.localPosition=new Vector3(0,2,-1);light.type=LightType.Point;light.color=glow;light.intensity=3;light.range=returning?8:12;light.shadows=LightShadows.None;
+            return root;
         }
     }
 }

@@ -1,0 +1,75 @@
+{
+  "date_kst": "2026-10-02",
+  "unity": "6000.6.0f1",
+  "build": {
+    "platform": "macOS",
+    "development": true,
+    "result": "Succeeded",
+    "errors": 0,
+    "log": "Artifacts/Validation/TownPortal20261002/build-touch-target.log"
+  },
+  "edit_mode": {
+    "total": "89",
+    "passed": "88",
+    "failed": "1",
+    "skipped": "0"
+  },
+  "edit_mode_baseline_failure": "LocalizationTests.NoEntryIsLeftBehindByARewordedLine; two unused baseline translation keys",
+  "ui_contract": {
+    "ownership": "passed",
+    "tests": 11,
+    "passed": 11
+  },
+  "native": {
+    "isolated_save": true,
+    "pointer": "EventSystem raycast plus down/up/click",
+    "town_movement": "real frame updates",
+    "default_text_size_only": true,
+    "viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "matrix_combinations": 10,
+    "minimum_button_height_pixels": 44,
+    "resume_preserves": [
+      "run_id",
+      "simulation_time",
+      "health",
+      "resource",
+      "position",
+      "rng",
+      "cooldowns",
+      "enemies",
+      "speed"
+    ],
+    "no_repeat_admission_charge": true,
+    "save_failure_preserves_checkpoint_and_disk": true,
+    "independent_process_reload": "passed",
+    "repeated_return": "passed",
+    "physical_mobile_tested": false,
+    "full_edit_mode_suite_run": false
+  },
+  "known_warnings": "Four URP postprocess shader warnings in each native process; same pre-existing build setup."
+}

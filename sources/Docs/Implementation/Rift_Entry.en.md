@@ -77,6 +77,26 @@ Closing or cancelling entry retains the portal. Admission checks, preparation or
 
 `GameStore.SuspendRift` owns return persistence; re-entry reuses `CommitRiftEntry`. Potion preparation receives the same authorized replacement ID. [Skill-preset edits](Hunt_Edict_Quick_Presets.en.md) made while a portal remains also update the policy used when continuing that rift.
 
+## 2026-10-02 return portal in town
+
+Returning through a portal during a rift battle creates a smaller blue **Return portal**, 7m to the right of the town's golden rift. Selecting it makes the hero walk there; arrival alone does not resume combat. Within 2.8m, the existing town interaction card shows **Resume rift**. The button continues the saved battle directly, without opening the admission window.
+
+The same run ID, simulation time, health, resource, position, enemies, cooldowns and entry speed are retained, with no second admission charge. Combat and fatigue usage stop in town. Only the selected hero's unfinished rift provides a portal; training, tutorials and terminal runs do not. Activation rechecks distance, town state and open windows. A failed admission save preserves the original checkpoint and portal for retry. Relaunching the game recreates the portal for the saved battle.
+
+`TownLayout` owns position and reach, `GameController` and existing `CommitRiftEntry` own resumption, `WorldView.Town` owns the visuals, and existing `GameUI.Plaza` owns text and input. The implementation reuses the golden rift's meshes, shaders and animation, plus the shared theme, fonts, buttons and safe area. It adds no window, canvas or save schema.
+
+
+The return card keeps its button at least 44 screen pixels tall on small screens and its world label at least 14 screen pixels high. This size floor stays within the town HUD adapter while retaining other residents' layouts.
+
+### Town return portal verification, 2026-10-02
+
+- Unity 6000.6.0f1: **88 of 89** directly affected Edit Mode tests passed. All town walking, Rift entry, portal recovery and NPC dialogue tests passed. One localization check failed because two unused translation lines already existed at baseline `e427a5be`. [Baseline comparison](RiftTownPortalEvidence/baseline-localization.json) and [test XML](RiftTownPortalEvidence/editmode.xml) preserve this result. The full Edit Mode suite was not run.
+- Shared UI ownership and **11/11** contract tests passed; the macOS development build had zero errors. An isolated save exercised **10 combinations**: KO/EN at 440×956, 956×440, 1600×900, 1600×1000 and 1680×720, at default text size. Button height of at least 44 pixels, safe bounds and text clipping were checked, and captures inspected.
+- Real frame-based movement and EventSystem raycasts/pointer input verified battle → portal return → town walking → resume button → the same battle → another return. Town waiting preserved time/fatigue; actions disappeared outside range; inventory blocked activation; other heroes, training, tutorials and terminal runs had no usable portal.
+- Injected admission-save failure preserved the original checkpoint, disk and portal; retry succeeded. A separate process loaded and resumed the same battle with no second admission charge and the original 1.5× speed. [Initial process](RiftTownPortalEvidence/town-portal-runtime.txt) · [Reload](RiftTownPortalEvidence/town-portal-reload.txt) · [Summary](RiftTownPortalEvidence/validation.json) · [Source hashes](RiftTownPortalEvidence/source-sha256.json).
+- Validation used a separate worktree's Unity batch process and macOS player to avoid disturbing other work in the original Editor. Physical mobile was not tested. Four existing URP postprocess shader warnings remain.
+
+[PC Korean](RiftTownPortalEvidence/town-portal-1600x900-ko.png) · [Portrait Korean](RiftTownPortalEvidence/town-portal-440x956-ko.png) · [Landscape English](RiftTownPortalEvidence/town-portal-956x440-en.png) · [Resumed battle](RiftTownPortalEvidence/town-portal-resumed-battle.png).
 
 ## Portal and preset-save verification, 2026-09-29
 

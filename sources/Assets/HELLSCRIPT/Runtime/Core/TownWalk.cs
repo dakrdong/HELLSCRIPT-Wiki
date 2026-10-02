@@ -56,6 +56,7 @@ namespace Hellscript
             new TownResidentDefinition("Darc",new Vector2(23,4)),
         };
         public static TownStationDefinition Station(TownStation id)=>Stations.Single(s=>s.id==(id==TownStation.Reroller?TownStation.Blacksmith:id));
+        public static Vector2 ReturnPortalPosition=>Station(TownStation.RiftKeeper).position+new Vector2(7,0);
         public static Vector2 Clamp(Vector2 p)=>new Vector2(Mathf.Clamp(p.x,-HalfWidth,HalfWidth),Mathf.Clamp(p.y,-HalfHeight,HalfHeight));
         public static Rect Clearance(Rect r)=>new Rect(r.xMin-HeroRadius,r.yMin-HeroRadius,r.width+HeroRadius*2,r.height+HeroRadius*2);
         public static bool Walkable(Vector2 p)=>p==Clamp(p)&&!Stations.Any(s=>s.building.width>0&&Clearance(s.building).Contains(p));

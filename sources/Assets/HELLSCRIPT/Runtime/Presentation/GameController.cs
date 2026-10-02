@@ -21,6 +21,8 @@ namespace Hellscript
         public bool RiftEntryPending=>liveOpsAdmission.Pending;
         // Session-only plaza walk; nothing here is saved or affects a run.
         public TownWalk Town {get;private set;}
+        public bool TownPortalAvailable=>!Active&&Store?.Data.suspendedRun is RunState run&&RiftEntryRules.CanReplace(Store.Data,run.id)&&!run.tutorial&&!RepeatHunt.Terminal(run);
+        public bool NearTownPortal=>TownPortalAvailable&&Town!=null&&Vector2.Distance(Town.Position,TownLayout.ReturnPortalPosition)<=TownLayout.InteractionRadius;
         public GameUI UI {get;private set;}
         public WorldView World {get;private set;}
         public string Notice {get;private set;}="";
@@ -93,7 +95,8 @@ namespace Hellscript
             if(!resume&&(replaceRunId!=null?!RiftEntryRules.CanReplace(Store.Data,replaceRunId):Store.Data.suspendedRun!=null))
             {Notice="포탈로 이동하거나 균열로 다시 시작해 주세요.";UI.ShowToast(Notice);return;}
             Comparison=null;
-            RunState snapshot=resume?Store.Data.suspendedRun:null;
+            // Restore a candidate copy so a failed admission cannot alter the town checkpoint.
+            RunState snapshot=resume&&Store.Data.suspendedRun!=null?CombatJournal.Copy(Store.Data.suspendedRun):null;
             if(snapshot!=null){int hero=Store.Data.heroes.FindIndex(h=>h.id==snapshot.heroId);if(hero<0){Notify("저장된 영웅을 찾을 수 없습니다.");return;}Store.Data.selectedHero=hero;}
             if(training<0&&snapshot==null)
             {
@@ -213,6 +216,7 @@ namespace Hellscript
         public void InteractTown()
         {
             if(Town==null||Active||UI.Page!="plaza"||UI.CommonPanelOpen||UI.TownNavigationOpen)return;
+            if(NearTownPortal){UI.ResetTownInput();Town.Cancel();Begin(resume:true);return;}
             if(Town.Nearby.HasValue)UI.OpenStation(Town.Nearby.Value);
         }
         public void InteractEquipmentMerchant(EquipmentShopTab tab)
@@ -223,7 +227,8 @@ namespace Hellscript
         public void TapPlaza(Vector2 screen)
         {
             if(Town==null||UI==null||UI.Page!="plaza"||Active||UI.CommonPanelOpen||UI.TownNavigationOpen||!UiSafeArea.Frame.Contains(screen))return;
-            if(World.TryPickNpc(screen,out var npc))RequestNpc(npc.id);
+            if(World.TryPickTownPortal(screen))Town.RequestPoint(TownLayout.ReturnPortalPosition);
+            else if(World.TryPickNpc(screen,out var npc))RequestNpc(npc.id);
             else if(World.TryPickStation(screen,out var station))RequestStation(station);
             else if(World.TryPickTownGround(screen,out var point))Town.RequestPoint(point);
         }
