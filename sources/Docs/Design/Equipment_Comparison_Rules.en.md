@@ -1,6 +1,6 @@
 # Shared equipment comparison rules
 
-Updated: 2026-10-02 · First written: 2026-09-22 · Contract: `equipment-comparison-v1` · [한국어](Equipment_Comparison_Rules.md)
+Updated: 2026-10-03 · First written: 2026-09-22 · Contract: `equipment-comparison-v1` · [한국어](Equipment_Comparison_Rules.md)
 
 This is the display contract for **all equipment comparisons**, including inventory, storage, merchants, acquired rewards and training. New content must use `ItemComparison.Preview`, `ItemTooltip` and `EquipmentComparisonView`. Existing services retain ownership of generation, transactions and equipping.
 
@@ -67,7 +67,7 @@ If equip conditions fail, show the condition in red and omit the resulting-chara
 
 ## Shared item-card presentation
 
-Every equipment detail uses `ItemDetailView`: a dark surface, rarity-tinted corner metalwork and a thin double border, identity followed by a prominent gear score, then level and the primary value. Engraved dividers separate base properties, additional options, special powers and sockets/progression. Affixes use small diamond markers; special powers use an inset panel. Narrow comparison cards stack the icon above the identity and wrap text. Decorations never intercept input.
+Every equipment detail uses `ItemDetailView`: a dark surface, rarity-tinted corner metalwork and a thin double border, identity followed by a prominent gear score, then level and the primary value. Engraved dividers separate base properties, additional options, special powers and sockets/progression. Affixes use small diamond markers; special powers use an inset panel. Comparisons use the shared compact presentation: small artwork beside identity, artwork omitted below 160 units in three-card layouts, and primary values/deltas in the same row. Duplicate outer frames, comparison titles and single-target selectors are omitted. Decorations never intercept input.
 
 Use `EquipmentScore.Value` for intrinsic scores and `ItemComparison.Preview.scoreBefore` / `scoreAfter` for replacement scores. Weapons compare the whole hand configuration. Details, comparisons and automatic equipment share this calculation. Unrolled catalog ranges do not show a fabricated score. See [Gear score and automatic equipment](../Implementation/Recommended_Equipment.en.md) for the formula and scope.
 

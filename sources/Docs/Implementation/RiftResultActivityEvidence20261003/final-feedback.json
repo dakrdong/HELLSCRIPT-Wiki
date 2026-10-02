@@ -1,0 +1,267 @@
+{
+    "version": 2,
+    "observedFrom": 0.0,
+    "attackSeconds": 48.95122528076172,
+    "evasionSeconds": 0.0,
+    "movementSeconds": 31.399703979492188,
+    "lootSeconds": 8.199874877929688,
+    "waitingSeconds": 0.0,
+    "truncated": false,
+    "skills": [
+        {
+            "id": "W01",
+            "channelTicks": 98,
+            "lastChannelRoot": 245,
+            "activeSeconds": 0.0,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [
+                {
+                    "code": "RANGE",
+                    "count": 39
+                },
+                {
+                    "code": "BUSY",
+                    "count": 182
+                },
+                {
+                    "code": "NO_TARGET",
+                    "count": 194
+                },
+                {
+                    "code": "SELECTED",
+                    "count": 18
+                },
+                {
+                    "code": "RESOURCE",
+                    "count": 10
+                }
+            ],
+            "interruptions": [
+                {
+                    "code": "0.5초 동안 공격 범위에 적 없음",
+                    "count": 4
+                },
+                {
+                    "code": "갈고리에 끌림",
+                    "count": 1
+                },
+                {
+                    "code": "회오리 자원 부족",
+                    "count": 12
+                },
+                {
+                    "code": "보스 처치 후 전리품 정리",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "id": "W02",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 0.0,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [
+                {
+                    "code": "SELECTED",
+                    "count": 6
+                },
+                {
+                    "code": "BUSY",
+                    "count": 182
+                },
+                {
+                    "code": "COOLDOWN",
+                    "count": 114
+                },
+                {
+                    "code": "MIN_DISTANCE",
+                    "count": 11
+                },
+                {
+                    "code": "NO_TARGET",
+                    "count": 110
+                },
+                {
+                    "code": "HIGHER_PRIORITY",
+                    "count": 18
+                },
+                {
+                    "code": "LANDING",
+                    "count": 2
+                }
+            ],
+            "interruptions": []
+        },
+        {
+            "id": "W03",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 0.0,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [
+                {
+                    "code": "HIGHER_PRIORITY",
+                    "count": 24
+                },
+                {
+                    "code": "BUSY",
+                    "count": 182
+                },
+                {
+                    "code": "EDICT_AIM",
+                    "count": 194
+                },
+                {
+                    "code": "RANGE",
+                    "count": 27
+                },
+                {
+                    "code": "SELECTED",
+                    "count": 6
+                },
+                {
+                    "code": "RESOURCE",
+                    "count": 10
+                }
+            ],
+            "interruptions": []
+        },
+        {
+            "id": "W04",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 0.0,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [
+                {
+                    "code": "HIGHER_PRIORITY",
+                    "count": 30
+                },
+                {
+                    "code": "BUSY",
+                    "count": 182
+                },
+                {
+                    "code": "PURPOSE",
+                    "count": 221
+                },
+                {
+                    "code": "SELECTED",
+                    "count": 2
+                },
+                {
+                    "code": "COOLDOWN",
+                    "count": 8
+                }
+            ],
+            "interruptions": []
+        },
+        {
+            "id": "W17",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 0.0,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [
+                {
+                    "code": "HIGHER_PRIORITY",
+                    "count": 32
+                },
+                {
+                    "code": "BUSY",
+                    "count": 182
+                },
+                {
+                    "code": "AUTO_CONDITION",
+                    "count": 216
+                },
+                {
+                    "code": "RANGE_OR_WALL",
+                    "count": 13
+                }
+            ],
+            "interruptions": []
+        },
+        {
+            "id": "BASIC",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 0.0,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [
+                {
+                    "code": "HIGHER_PRIORITY",
+                    "count": 32
+                },
+                {
+                    "code": "BUSY",
+                    "count": 182
+                },
+                {
+                    "code": "AUTO_CONDITION",
+                    "count": 194
+                },
+                {
+                    "code": "RANGE",
+                    "count": 31
+                },
+                {
+                    "code": "SELECTED",
+                    "count": 4
+                }
+            ],
+            "interruptions": []
+        },
+        {
+            "id": "WP04",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 0.0,
+            "healing": 42.852294921875,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [],
+            "interruptions": []
+        },
+        {
+            "id": "WP11",
+            "channelTicks": 0,
+            "lastChannelRoot": -1,
+            "activeSeconds": 15.549905776977539,
+            "healing": 0.0,
+            "shieldAbsorbed": 0.0,
+            "resourceRestored": 0.0,
+            "targetsTruncated": false,
+            "targets": [],
+            "checks": [],
+            "interruptions": []
+        }
+    ]
+}

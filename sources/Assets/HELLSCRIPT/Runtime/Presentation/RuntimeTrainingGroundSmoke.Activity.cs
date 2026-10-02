@@ -80,6 +80,7 @@ namespace Hellscript
             game.UI.RefreshHud();yield return null;CheckActivity("natural",true);yield return Capture("activity-natural-1600x900-ko");
             proof.Add("PASS natural seeded Rift: cumulative graph endpoints equal real totals, monotonic time/value samples, exclusive purpose intervals, live updates and pause/resume; no damage/result/time totals injected");
             string recorded=JsonUtility.ToJson(f);
+            if(!System.Environment.GetCommandLineArgs().Contains("-hellscriptResultActivityFocused"))
             foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{1680,720}})
             foreach(string language in new[]{"ko","en"})
             {
@@ -103,11 +104,80 @@ namespace Hellscript
                 proof.Add("PASS "+tag+": safe area, localized 4 graphs, exact 100% bar, 3 map modes, independent pointer drag/fold, rebuild retention and bounds clamp");
             }
             Require(JsonUtility.ToJson(f)==recorded,"Reading/dragging/folding changed combat evidence");
+            yield return ResultActivityFlow();
             UiSafeArea.StopSimulating();game.ReturnTown();yield return null;yield return null;Require(Activity==null,"Activity panel leaked into town");
             yield return Resize(1600,900,"ko");game.BeginTrainingGround(TrainingGround.Default(game.Store.Data.Hero));yield return null;yield return null;
             Require(game.TrainingGroundRun&&Activity==null&&LiveDps!=null,"Training DPS adapter regressed");
             proof.Add("PASS cumulative evidence unchanged by UI; activity absent in town/training, existing training DPS retained. Synthetic macOS uGUI input; no physical mobile test.");
             File.WriteAllLines(Path.Combine(output,"runtime.txt"),proof);Debug.Log("HELLSCRIPT_RIFT_ACTIVITY_SMOKE_OK");Application.Quit(0);
+        }
+        IEnumerator ResultActivityFlow()
+        {
+            var run=game.Combat.State;run.paused=false;
+            for(int i=0;i<14000&&game.Active;i++){game.Combat.Tick(CombatSimulation.Step);if(i%400==0)yield return null;}
+            Require(!game.Active,"Natural Rift did not finish");
+            typeof(GameController).GetMethod("CompleteHuntResult",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(game,null);
+            Require(game.PrepareResultRetry(),game.Store.Error);game.UI.ShowResult();yield return null;yield return null;
+            var result=game.UI.RiftVictory;Require(result!=null,"Natural Rift result did not open");
+            var review=game.Store.Data.records.Single(r=>r.id==run.id).review;var feedback=review.totals.feedback;
+            Require(review.activityHistory.Count>0&&review.activityHistory.Last().time==run.time,"Final activity sample missing");
+            Require(game.Store.Save(),game.Store.Error);
+            var restored=new GameStore(save,game.catalog).Data.records.Single(r=>r.id==run.id).review;
+            Require(JsonUtility.ToJson(review)==JsonUtility.ToJson(restored),"Completed activity did not survive file reload");
+            File.WriteAllText(Path.Combine(output,"final-feedback.json"),JsonUtility.ToJson(feedback,true));
+            File.WriteAllText(Path.Combine(output,"final-activity-samples.json"),"["+string.Join(",",review.activityHistory.Select(s=>JsonUtility.ToJson(s)))+"]");
+            foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{2100,900}})
+            foreach(string language in new[]{"ko","en"})
+            {
+                UiSafeArea.StopSimulating();if(size[0]==440)UiSafeArea.Simulate(0,34,0,54);if(size[0]==956)UiSafeArea.Simulate(54,21,54,0);
+                yield return Resize(size[0],size[1],language);string tag=$"{size[0]}x{size[1]}-{language}";
+                string before=JsonUtility.ToJson(game.Store.Data);yield return Tap("victory-compare");
+                var graph=game.UI.GetComponentsInChildren<ContentWindowView>().Single(v=>v.Source==EquipmentViewSource.BattleSnapshot);
+                Require(graph.GetComponentInChildren<TrainingChartView>()!=null,"Existing DPS inspection disappeared");
+                var panel=graph.GetComponentInChildren<RiftActivityPanel>();Require(panel!=null,"Final activity panel missing");
+                yield return Reveal((RectTransform)panel.transform);yield return null;
+                foreach(var text in graph.GetComponentsInChildren<Text>().Where(t=>t.text.Length>0&&t.name.StartsWith("Activity")))
+                {
+                    Require(text.preferredHeight<=text.rectTransform.rect.height+2,"Clipped result activity: "+text.text);
+                    if(language=="en")Require(!text.text.Any(c=>c>=0xAC00&&c<=0xD7A3),"Untranslated result activity: "+text.text);
+                }
+                var shares=feedback.ActivityPercentages();
+                for(int i=0;i<4;i++)
+                {
+                    var chart=panel.transform.Find("Activity chart "+i).GetComponent<TrainingDpsChart>();
+                    var values=(IReadOnlyList<float>)typeof(TrainingDpsChart).GetField("current",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(chart);
+                    var times=(IReadOnlyList<float>)typeof(TrainingDpsChart).GetField("times",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(chart);
+                    Require(values.Count==review.activityHistory.Count&&times.Count==values.Count,"Wrong final activity sample count");
+                    for(int j=0;j<values.Count;j++)Require(values[j]==review.activityHistory[j].seconds[i]&&times[j]==review.activityHistory[j].time,"Result plots the wrong battle evidence");
+                    Require(panel.transform.Find("Activity label "+i).GetComponent<Text>().text.Contains(shares[i]+"%"),"Final share missing");
+                }
+                yield return Capture("result-activity-"+tag);yield return Tap("rift-graph-close");
+                Require(result==game.UI.RiftVictory&&before==JsonUtility.ToJson(game.Store.Data),"Result graph changed owned evidence");
+                int battleStage=run.stage;run.stage=14;game.RepeatSession.policy.enabled=true;game.RepeatSession.cancelled=false;result.View.Repaint();yield return null;
+                yield return Tap("victory-repeat-settings");
+                Require(Find("victory-repeat-settings").GetComponent<CanvasGroup>().alpha<.5f&&Find("victory-repeat-configure")==null&&!game.UI.CommonPanelOpen,"Locked repeat exposed settings or configured guide");
+                var locked=result.View.GetComponentsInChildren<Text>().Single(t=>t.name=="Repeat hint");
+                Require(locked.text==Loc.T("반복 설정은 균열 15레벨 부터 가능합니다")&&locked.preferredHeight<=locked.rectTransform.rect.height+2,"Locked repeat hint missing or clipped");
+                yield return Capture("repeat-locked-"+tag);yield return new WaitForSecondsRealtime(2.1f);
+                Require(!result.View.GetComponentsInChildren<Text>().Any(t=>t.name=="Repeat hint"),"Locked repeat hint did not expire after two seconds");
+                // Only the UI gate uses stage fixtures; the actual completed battle and activity record remain stage 1.
+                foreach(int stage in new[]{15,16})
+                {run.stage=stage;result.View.Repaint();yield return null;Require(Find("victory-repeat-settings").GetComponent<CanvasGroup>().alpha==1,"Unlocked configured repeat stayed dim");}
+                run.stage=15;game.RepeatSession.policy.enabled=false;game.RepeatSession.cancelled=true;result.View.Repaint();yield return null;
+                yield return Tap("victory-repeat-settings");var configure=Find("victory-repeat-configure");Require(configure!=null,"Repeat hint shortcut missing");
+                var label=configure.GetComponentInChildren<Text>();var rect=(RectTransform)configure.transform;
+                Require(rect.rect.width<=label.preferredWidth+18&&label.preferredHeight<=rect.rect.height+1,"Repeat shortcut is not compact or text clips");
+                var safe=UiSafeArea.Current;var bubble=Bounds((RectTransform)configure.transform.parent);
+                Require(safe.Contains(bubble.min+Vector2.one)&&safe.Contains(bubble.max-Vector2.one),"Repeat hint outside safe area");
+                yield return Capture("repeat-shortcut-"+tag);yield return Tap("victory-repeat-configure");
+                Require(Edict!=null&&Edict.SelectedTab=="repeat"&&game.UI.BlocksRepeat&&result==game.UI.RiftVictory,"Repeat shortcut lost result or selected wrong tab");
+                yield return Capture("repeat-tab-"+tag);yield return Tap("edict-close");
+                Require(Edict==null&&!game.UI.CommonPanelOpen&&result==game.UI.RiftVictory&&result.Run.id==run.id&&game.UI.Page=="result","Closing repeat settings did not restore the same result");
+                run.stage=battleStage;result.View.Repaint();yield return null;
+                Require(Loc.MissingCount==0,"Missing translations: "+string.Join(";",Loc.Missing));
+                proof.Add("PASS final activity and repeat shortcut "+tag+": saved battle curves/totals/shares, shared DPS, read-only graph, stage-14 configured lock and two-second expiry, stage-15/16 configured availability, compact stage-15 unconfigured pointer action and same-result return");
+            }
+            proof.Add("PASS naturally completed Rift: final activity snapshot includes final tick and survives an actual saved-file reload; no combat totals/timestamps injected");
         }
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine;
 namespace Hellscript
 {
     public enum CombatActivity { Movement, Attack, Evasion, Farming }
-    public sealed class CombatActivitySample
+    [Serializable] public sealed class CombatActivitySample
     {
         public float time;
-        public readonly float[] seconds=new float[4];
+        public float[] seconds=new float[4];
     }
     [Serializable] public sealed class CombatReasonCount { public string code; public int count; }
     [Serializable] public sealed class SkillFeedback

@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-03",
+  "base_commit": "33e9fe9696f2da6d451042eafd61825a0078615b",
+  "checks": {
+    "ui_contract": "passed after the final stage-gate change",
+    "ui_contract_tests": {
+      "passed": 11,
+      "failed": 0,
+      "note": "11 passing checks repeated for merged common UI; no UI contract implementation changes after that result."
+    },
+    "compilation": "no new C# errors",
+    "related_editmode": {
+      "mode": "EditMode",
+      "completed": 107,
+      "total": 107,
+      "initial_reported_failures": 5,
+      "failures_capped": false,
+      "summary_available": false,
+      "final_failed_case_retest": {
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      },
+      "note": "Initial failures only came from new tests calling runtime Destroy in Edit Mode; removed those redundant cleanup calls. Existing DestroyImmediate teardown owns cleanup. Only the failed cases were repeated; exact full scope passed/skipped totals are unavailable because MCP returned result:null."
+    },
+    "stage_gate_and_localization": {
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "note": "Only 14/15/16 CanvasGroup/configuration boundary cases and the changed English table were retested after the additional stage-gate request."
+    }
+  },
+  "native_acceptance": {
+    "platform": "macOS development player",
+    "exit_code": 0,
+    "success_marker": "HELLSCRIPT_RIFT_ACTIVITY_SMOKE_OK",
+    "managed_exceptions": 0,
+    "hud_conditions": 30,
+    "result_activity_and_repeat_conditions": 10,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "safe_area": "simulated",
+    "input": "synthetic uGUI pointer after actual raycasts",
+    "battle": "naturally cleared seeded level-40 fixture, stage 1",
+    "final_time": 88.5508041381836,
+    "activity_samples": 114,
+    "actual_final_seconds": [
+      31.399703979492188,
+      48.95122528076172,
+      0.0,
+      8.199874877929688
+    ],
+    "readback": "GameStore.Save followed by independent GameStore file load; complete review equality passed",
+    "hud_conditions_note": "Initial 30-condition pass reused because shared HUD presentation is unchanged; the final run used -hellscriptResultActivityFocused and rechecked only the 10 affected result cases plus town/training adapters.",
+    "repeat_gate": "UI stage fixtures 14/15/16; configured stage 14 remains dim, shows only the localized message and expires after two seconds. Stages 15/16 configured alpha is 1. Unconfigured stage 15 opens the repeat tab and restores the same result. Actual combat/activity totals, cast times and completed record remain from naturally cleared stage 1."
+  },
+  "real_save_preservation": {
+    "files_hashed": 41,
+    "game_and_preferences_files_unchanged": 28,
+    "changed_game_files": [],
+    "excluded": [
+      "Unity analytics cache files under Unity/; 3 cache files changed during native player run",
+      "TestResults.xml is shared Editor test output, later rewritten by another Editor test run"
+    ],
+    "note": "Gameplay and preferences were not restored or overwritten."
+  },
+  "not_run": [
+    "full game Edit Mode suite",
+    "physical mobile device",
+    "WebGL build/player"
+  ],
+  "capture_note": "Final captures show committed-save status. The initial harness called a legacy edict write through StopAutoRepeat for an ID-based loadout; the final harness instead reserves result control through existing PrepareResultRetry and leaves the hero edict intact. This is a QA setup change; production edict transactions were not changed.",
+  "initial_source_sha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/CombatFeedback.cs": "f99a9a116d8ec78ed6ba122e1f1660ea29db238035708b8b52e0fc7f7b9d9043",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatHistory.cs": "34b2dcf128adae308a7e8c8b42db308c6cc0556c3d79e3ccec0741ab549d2033",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftActivity.cs": "db4ef7cb4e351c0437b57ef57f166408a9db3b9f5272c1acea18bcae4399c269",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftActivityPanel.cs": "2bc2d2f759852d4623d6329cc0e524047326463c50c40012921842462eb9b6be",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftCombatGraphWindow.cs": "7089f9d4651d9d9e25820f3f089a5c202bff76eb6ec0b9142ba458cd52806fc2",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs": "c20652baf7d1e08f20f94df53e479d22f5d894003ccc7c31228fc856af401f22",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.Activity.cs": "fa15430e09c4aa7ef362f7f08d0ad3b1e89e2d414000ec89a5eacb1171e5c350",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "e996728201ea70db675394723bf00574a6995384181d73770946716a10054c06",
+    "Assets/HELLSCRIPT/Tests/Editor/CombatHistoryTests.cs": "caaa8b11a858064128ca0688aad79f7c973e65a2226e720bf52c5c5dbf7e2242",
+    "Assets/HELLSCRIPT/Tests/Editor/TrainingGroundUiTests.cs": "21cce1aac311f2805e89dd1ec91b2822b9ed103ebb533ad9ceeee47cdc14fac1"
+  },
+  "source_sha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/CombatFeedback.cs": "f99a9a116d8ec78ed6ba122e1f1660ea29db238035708b8b52e0fc7f7b9d9043",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatHistory.cs": "34b2dcf128adae308a7e8c8b42db308c6cc0556c3d79e3ccec0741ab549d2033",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftActivity.cs": "db4ef7cb4e351c0437b57ef57f166408a9db3b9f5272c1acea18bcae4399c269",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftActivityPanel.cs": "2bc2d2f759852d4623d6329cc0e524047326463c50c40012921842462eb9b6be",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftCombatGraphWindow.cs": "7089f9d4651d9d9e25820f3f089a5c202bff76eb6ec0b9142ba458cd52806fc2",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs": "e041db4bbebf11006519289377bf4175743d9069edac8974138ecf02e479045d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.Activity.cs": "2fb79ab4aa0324cb24e0186d75c15f5eba1f4e9836ec72a21b173a78136b3927",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "b358c209760df99fcae0f6d83cd58aec72b21168ee188ddefeeb9f6a545cb25c",
+    "Assets/HELLSCRIPT/Tests/Editor/CombatHistoryTests.cs": "caaa8b11a858064128ca0688aad79f7c973e65a2226e720bf52c5c5dbf7e2242",
+    "Assets/HELLSCRIPT/Tests/Editor/TrainingGroundUiTests.cs": "21cce1aac311f2805e89dd1ec91b2822b9ed103ebb533ad9ceeee47cdc14fac1",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftResultTests.cs": "3902c7e30fb2703437b85c54fd79e3920dba4414ca45785c8353ec80263c38a9"
+  },
+  "integrated_main": "8b0424bfa23964caf4ed8dfd3664d3addf6fd9a6"
+}

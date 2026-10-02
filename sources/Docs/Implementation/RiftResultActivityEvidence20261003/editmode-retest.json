@@ -1,0 +1,86 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "b6e5f091040f43e88f8480c421f1b3de",
+    "status": "succeeded",
+    "mode": "EditMode",
+    "started_unix_ms": 1790979602645,
+    "finished_unix_ms": 1790979609797,
+    "last_update_unix_ms": 1790979609797,
+    "progress": {
+      "completed": 5,
+      "total": 5,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1790979609643,
+      "last_finished_test_full_name": "Hellscript.Tests.TrainingGroundUiTests.ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"en\",False)",
+      "last_finished_unix_ms": 1790979609655,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 0.6551673,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "OlderActivityTimingIsUnavailableRatherThanRelabeled",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.OlderActivityTimingIsUnavailableRatherThanRelabeled",
+          "state": "Passed",
+          "durationSeconds": 0.0712071,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"ko\",True)",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"ko\",True)",
+          "state": "Passed",
+          "durationSeconds": 0.0439972,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"en\",True)",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"en\",True)",
+          "state": "Passed",
+          "durationSeconds": 0.012432,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"ko\",False)",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"ko\",False)",
+          "state": "Passed",
+          "durationSeconds": 0.015886,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"en\",False)",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ResultActivityUsesFrozenFinalDataAndNeverInventsMissingCurves(\"en\",False)",
+          "state": "Passed",
+          "durationSeconds": 0.0114493,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}
