@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-02",
+  "unity": "6000.6.0f1",
+  "baseCommit": "f4a332c64a6440f1bb11eaa0e9444f6b96b7e7d9",
+  "reference": "Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html (styles.css and ui.js source)",
+  "referenceInspection": "CSS/JS and available local images; current HTML could not be rendered because the in-app browser rejected file navigation. No alternate browser or transport was used.",
+  "editMode": {
+    "total": "105",
+    "passed": "105",
+    "failed": "0",
+    "skipped": "0",
+    "result": "Passed"
+  },
+  "editModeScope": [
+    "RiftEntryTests",
+    "CombatJournalTests",
+    "HuntEdictFoundationTests",
+    "HuntEdictDefaultsTests",
+    "HuntEdictSuspendedSaveTests",
+    "UiButtonTests"
+  ],
+  "sharedUiContract": {
+    "check": "passed",
+    "tests": 11,
+    "failed": 0
+  },
+  "build": {
+    "method": "Hellscript.EditorTools.ClassSkillValidationBuilder.BuildMac",
+    "result": "Success",
+    "exitCode": 0
+  },
+  "runtime": {
+    "platform": "macOS standalone development player",
+    "flag": "-hellscriptRiftEntryParitySmoke",
+    "isolatedSave": true,
+    "exitCode": 0,
+    "marker": "HELLSCRIPT_RIFT_ENTRY_PARITY_OK",
+    "sizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "fontSize": "default only",
+    "checksFile": "runtime.txt",
+    "fitProblems": 0,
+    "interaction": "EventSystem raycast and pointer down/up/click; state assertions after input",
+    "editorConnection": "CoplayDev instances returned 0; installed Unity batch and standalone player used"
+  },
+  "limitations": [
+    "No physical mobile test.",
+    "No full Edit Mode suite; the six directly affected suites passed.",
+    "No exhaustive unrelated combat/server smoke.",
+    "Development-player log contains four stripped/unsupported URP postprocess shader warnings (GaussianDepthOfField twice, BokehDepthOfField and PaniniProjection); no managed exceptions.",
+    "Current shared fonts/art/buttons and real account state remain authoritative; pixel-identical HTML rendering is not claimed."
+  ],
+  "screenshots": [
+    "entry-1600x1000-en.png",
+    "entry-1600x1000-ko.png",
+    "entry-1600x900-en.png",
+    "entry-1600x900-ko.png",
+    "entry-1680x720-en.png",
+    "entry-1680x720-ko.png",
+    "entry-440x956-en.png",
+    "entry-440x956-ko.png",
+    "entry-956x440-en.png",
+    "entry-956x440-ko.png",
+    "records-1600x900-ko.png",
+    "records-440x956-ko.png",
+    "repeat-1600x900-ko.png",
+    "log-956x440-en.png",
+    "empty-440x956.png",
+    "empty-956x440.png"
+  ],
+  "commands": {
+    "tests": "Unity -batchmode -nographics -projectPath PROJECT -runTests -testPlatform EditMode -testFilter \"Hellscript.Tests.RiftEntryTests;Hellscript.Tests.CombatJournalTests;Hellscript.Tests.HuntEdictFoundationTests;Hellscript.Tests.HuntEdictDefaultsTests;Hellscript.Tests.HuntEdictSuspendedSaveTests;Hellscript.Tests.UiButtonTests\" -testResults OUTPUT/editmode.xml -logFile OUTPUT/editmode.log",
+    "runtime": "HELLSCRIPT -hellscriptSavePath ISOLATED_SAVE -hellscriptEvidencePath EVIDENCE -hellscriptRiftEntryParitySmoke -logFile PLAYER_LOG"
+  }
+}

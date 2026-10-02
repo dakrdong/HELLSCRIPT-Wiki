@@ -115,7 +115,7 @@
 
 ## 균열 입장 어댑터
 
-`RiftEntryWindow`는 `ContentWindowView`의 실제 소유 데이터 진입점을 사용한다. 가로 화면에서는 성소 원화·단계 선택을 고정하고 준비 항목만 독립적으로 스크롤한다. 이는 입장 조건과 단계 선택을 동시에 확인하기 위한 배치다. 선택 팝업은 공통 창의 선택적 최대 크기를 사용하며 별도 캔버스나 창 수명 주기를 만들지 않는다. `UiTheme`의 유료 피로도 의미 색, `PotionArt`, `SkillIconView`, 기존 `GameStore` 거래를 공유한다. 최초 보상은 `RewardBoxCatalog`의 상자 지급과 `ContentUnlocks`의 개방 단계를 같은 재사용 목록에서 표시한다. 상세 팝업에서 기능 개방 상태와 상자 수령 상태를 분리하고, 실제 지급은 `GameStore` 거래로 실행한다. [구현과 검증](Rift_Entry.md)을 따른다.
+`RiftEntryWindow`는 `ContentWindowView`의 실제 소유 데이터 진입점을 사용한다. 승인된 HTML 배치를 따르는 어댑터로, 본문 스크롤 없이 가로에서는 원화·피로도/물약·스킬/입장을 0.95 : 1 : 1.05 비율로 나누고 입장 행동을 오른쪽 아래에 고정한다. 세로에서는 항목을 쌓고 입장 행동을 하단에 나란히 둔다. 이 창의 제목·행동 영역 좌표만 조정하며 안전 영역·캔버스·입력 차단·뒤로가기는 공통 창이 소유한다. 선택 팝업은 공통 창의 선택적 최대 크기를 사용한다. `UiTheme`, `UiFonts`, `PotionArt`, 사각 프레임을 선택한 공통 `SkillIconView`, 기존 `GameStore` 거래를 공유한다. 최초 보상은 `RewardBoxCatalog`의 상자 지급과 `ContentUnlocks`의 개방 단계를 같은 재사용 목록에서 표시한다. 상세 팝업에서 기능 개방 상태와 상자 수령 상태를 분리하고, 실제 지급은 `GameStore` 거래로 실행한다. [구현과 검증](Rift_Entry.md)을 따른다.
 ## 인벤토리 물약 배치
 
 사용자 지정에 따라 물약 칸만 세로 32·가로 28의 작은 크기로 표시한다. 장비 칸의 세로 52·가로 54 기준은 유지한다. `EquipmentSlotView`를 작은 표시 어댑터로 재사용하고, `CharacterEquipmentView`의 무기 줄 옆에 배치해 별도 줄을 늘리지 않는다. 슬롯별 선택과 공통 사용 순서 설정을 구분하며 톱니바퀴는 그룹 옆에 하나만 둔다. [물약 슬롯 검증](Potion_Slots.md)에 화면·입력·저장 결과를 기록한다.
@@ -136,7 +136,7 @@
 
 ## 전투 기록
 
-`CombatRecordsWindow`는 신규 창 템플릿의 `ContentWindowView`와 `EquipmentViewSource.BattleSnapshot`을 사용한다. Unity의 공통 `Dropdown`으로 승패를 고르고, 목록 본문만 스크롤한다. 선택·필터는 창이, 기록 파일과 거래 후 내보내기는 `GameStore`가 소유한다. 기존 상세 분석 화면을 재사용하며 하단 실시간 로그는 전투 HUD 어댑터로 배치한다. [전투 기록과 서버 수집](Combat_Journal_Server.md)에 보관·신뢰·검증 범위를 기록한다.
+`CombatRecordsWindow`는 신규 창 템플릿의 `ContentWindowView`와 `EquipmentViewSource.BattleSnapshot`을 사용한다. Unity의 공통 `Dropdown`으로 승패를 고르고, 실제 문장 높이에 맞춘 짧은 행으로 목록 본문만 스크롤한다. 선택·필터는 창이, 기록 파일과 거래 후 내보내기는 `GameStore`가 소유한다. 기록을 누르면 공통 전투 문자 로그가 바로 열리고, 닫으면 원래 필터·스크롤의 목록, 목록을 닫으면 원래 균열 단계로 돌아간다. 사용하지 않는 전체화면 기록 요약과 전용 경로는 제거했으며 저장된 분석 자료는 보존한다. 하단 실시간 로그는 전투 HUD 어댑터로 배치한다. [전투 기록과 서버 수집](Combat_Journal_Server.md)에 보관·신뢰·검증 범위를 기록한다.
 
 ## 로그인 전 타이틀 어댑터
 

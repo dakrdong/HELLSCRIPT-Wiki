@@ -370,8 +370,6 @@ namespace Hellscript
         void ShowWarehouse(bool portal)=>RenderWarehouse(portal);
         public void ShowShop()=>RenderItemShop();
         public void ShowRecords(){game.CancelRiftEntry();OpenCombatRecords();}
-        void ShowLog(RunRecord record)
-        {ShowRunReview(record);}
         public void ShowResult()
         {
             if(game.ComparisonRun){ShowComparisonResult();return;}
@@ -391,7 +389,7 @@ namespace Hellscript
             if(r.training<0&&r.phase==RunPhase.Failed&&r.health<=0)BigButton(content,"사망 원인 분석 (최근 5초 기록)",ShowDefeatAnalysis,true);
             var completed=game.Store.Data.records.FirstOrDefault(record=>record.id==r.id);
             if(r.training<0&&HasReview(completed))
-            {BigButton(content,"스킬 사용과 미사용 원인",()=>ShowReviewSkills(completed,true),true);BigButton(content,"전투 상세 기록",()=>ShowRunReview(completed,true));}
+            {BigButton(content,"스킬 사용과 미사용 원인",()=>ShowReviewSkills(completed,true),true);}
             if(game.Combat.OwnedTraining)BigButton(content,"시험한 설정을 슬롯에 저장",ShowTrainingPresetSave);
             if(r.training<0)Note(content,"성공·실패와 관계없이 이미 얻은 XP·장비·재화는 유지됩니다. 다음 해금과 변경할 행동을 확인한 뒤 다시 도전하세요.",20,104,pale);
             BigButton(content,"첫 플레이 안내 · 다음 할 일",ShowOnboarding);

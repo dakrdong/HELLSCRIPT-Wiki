@@ -1,6 +1,6 @@
 # Rift combat journal and server analytics
 
-Updated: 2026-10-01
+Updated: 2026-10-02
 
 Korean: [균열 전투 기록과 서버 분석 수집](Combat_Journal_Server.md) · [Live operations and configuration releases](Live_Operations.en.md)
 
@@ -12,7 +12,7 @@ The rift entry screen exposes **Battle records**, a newest-first account-wide li
 
 Defeats include death, timeout and returning before defeating the boss, distinguished by their termination reasons. Leaving loot after defeating the boss remains a victory. Training creates neither owned rift history nor analytics deliveries.
 
-During battle a live text panel sits above the persistent bottom HUD. Narrow screens retain as many complete recent messages as fit and abbreviate the preview when necessary. Completed text logs are chronological and paged in blocks of 100 entries. Existing summaries, final-five-second damage/blocked-action analysis and historical equipment/configuration remain available.
+During battle a live text panel sits above the persistent bottom HUD. Narrow screens retain as many complete recent messages as fit and abbreviate the preview when necessary. Selecting a completed record opens the **shared combat text log directly**, chronological and paged in blocks of 100 entries. Rows use measured text height plus 12 units of vertical padding and 4-unit gaps. Closing restores the original list/filter/scroll, then the selected Rift entry stage. The obsolete full-screen record summary and its dedicated routes were removed. Stored summaries, final-five-second analysis, historical equipment/configuration and the separate death-analysis feature remain intact. See [screen verification](Rift_Entry.en.md).
 
 The compact panel fills the rows above the current action with recent events. The expanded panel derives its row count from the actual font and available height, replacing the fixed three-event limit. Entries run chronologically from top to bottom; long messages are abbreviated only in their single-line previews. Panel dimensions, the expand/collapse control and stored events are preserved.
 

@@ -1,8 +1,39 @@
 # Town rift entry and first-clear rewards
 
-Date: 2026-09-23 · [한국어](Rift_Entry.md)
+Updated: 2026-10-02 · [한국어](Rift_Entry.md)
 
-The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. Existing sweep, training and repeat settings remain accessible through rift services.
+The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. The services shortcut opens the shared Hunt Edict Repeat Hunt tab and restores the entry window when closed.
+
+
+## 2026-10-02 HTML composition parity
+
+The reference is `Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html` and its `styles.css`/`ui.js` sources. These rules replace the layout exceptions documented on September 30.
+
+1. Landscape uses **0.95 : 1 : 1.05** columns for art/stage, fatigue/potions, and skills/entry. Fatigue sits at the top of the middle column and potions at its bottom. Skills are centred in the remaining right-column body.
+2. The whole page follows the reference's `--b` calculation. Its `3.7b` masthead contains the small HELLSCRIPT brand, entry title, and vertically centred coin artwork/amount. Artwork crop, shading, spacing and the shared display font for numbers follow the reference.
+3. Entry actions are **stacked at the lower right in landscape**, and **side by side across the bottom in portrait**. Readiness/errors/bag cleanup share that fixed area. Portal resume/restart and pending/cancel states use the same positions.
+4. Portrait stacks the art strip, fatigue, three potions, four normal skills plus ultimate, auxiliary actions, and entry actions. Page scrolling is disabled; spare height is distributed between sections. Exhausted fatigue and locked ultimate states retain essential controls.
+5. The entry opts into the shared `SkillIconView` square frame, preserving skill identity, artwork and passive semantics. Other callers retain their circular active seals. Empty learned slots still open the skill tree; owned potion equip/clear/swap still persists through existing transactions.
+6. Existing services and battle history, absent from the mockup, remain as a compact auxiliary row below skills. Services open the **shared Hunt Edict Repeat Hunt tab**. Recommended mode exposes that tab and its existing explicit mode switch without silently changing the mode or applying locked custom policies.
+7. History rows use measured text height plus 12 units of vertical padding, with 4-unit gaps. Selecting a record opens the **shared combat text log directly**. Closing returns through log → original filtered/scrolled record list → original selected Rift stage. The obsolete full-screen record summary and its dedicated routes were removed; archived combat data was retained.
+
+This adapter keeps `ContentWindowView`/`ContentWindowHost` canvas, safe area, stacked input and Back handling, changing only this window's header/action geometry. It reuses `UiTheme`, `UiFonts`, Minimal `UiButton` chrome, `PotionArt` and `SkillIconView`. No new raster art, independent theme/font or save system was added. Current shared game artwork and actual account/unlock state replace the prototype's fixture data.
+
+### Final verification, 2026-10-02
+
+- Unity 6000.6.0f1: **105/105** tests passed across six directly affected Edit Mode suites. Shared UI ownership check and **11/11** contract tests passed. The full Edit Mode suite was not run.
+- macOS development build succeeded. An isolated save exercised **10 combinations**: KO/EN at portrait 440×956, landscape 956×440, and PC 1600×900, 1600×1000 and 1680×720. Default text size only. No page-scroll, overlapping-control or text-overflow checks failed.
+- EventSystem raycasts and pointer input verified repeat → entry and list → text log → list → entry, preserving the selected stage. Of 20 sample records, 5–6 complete rows fit in landscape and 13 in portrait. Controls survived seven idle seconds and two autosaves without being rebuilt. Empty-skill navigation, potion swap/clear/equip with unchanged inventory counts, exhausted fatigue and locked ultimate states also passed.
+- CoplayDev reported no connected Editor, so validation used installed Unity batch and the macOS player. Physical mobile was not tested. The player logged four stripped/unsupported URP postprocess shader warnings and no managed exceptions.
+
+| Screen | Capture |
+| --- | --- |
+| PC 16:9 | [Korean](RiftEntryParityEvidence/entry-1600x900-ko.png) · [English](RiftEntryParityEvidence/entry-1600x900-en.png) |
+| PC 16:10 / 21:9 | [16:10](RiftEntryParityEvidence/entry-1600x1000-ko.png) · [21:9](RiftEntryParityEvidence/entry-1680x720-en.png) |
+| Phone portrait / landscape | [Portrait](RiftEntryParityEvidence/entry-440x956-ko.png) · [Landscape](RiftEntryParityEvidence/entry-956x440-en.png) |
+| Linked windows | [Repeat Hunt](RiftEntryParityEvidence/repeat-1600x900-ko.png) · [Records](RiftEntryParityEvidence/records-1600x900-ko.png) · [Text log](RiftEntryParityEvidence/log-956x440-en.png) |
+
+Evidence: [verification summary](RiftEntryParityEvidence/validation.json), [runtime checks](RiftEntryParityEvidence/runtime.txt), [Edit Mode XML](RiftEntryParityEvidence/editmode.xml), [source hashes](RiftEntryParityEvidence/source-sha256.json). The in-app browser rejected local-file navigation, so the current HTML was not rendered again in a browser. CSS/JS and available local images supplied the reference. Shared artwork/fonts/buttons and actual account state remain authoritative; pixel-identical HTML rendering is not claimed.
 
 ## 2026-09-30 New no-scroll layout
 

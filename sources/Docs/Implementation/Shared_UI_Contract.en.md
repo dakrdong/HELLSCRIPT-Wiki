@@ -88,7 +88,7 @@ Global-group quick presets retain the existing draft and selection dialog. Skill
 
 ## Rift entry adapter
 
-`RiftEntryWindow` uses the shared `ContentWindowView` owned-data entry point. Landscape fixes the sanctuary illustration and tier selection beside independently scrolling preparation, keeping the tier and entry conditions visible together. Pickers use the shared optional maximum size without a new canvas or lifecycle. It reuses `UiTheme` paid-fatigue colors, `PotionArt`, `SkillIconView` and existing `GameStore` transactions. First-clear rows combine `RewardBoxCatalog` grants and `ContentUnlocks` milestones. The shared detail popup separates automatic service access from box claim state; `GameStore` transactions own the actual grants. See [implementation and validation](Rift_Entry.en.md).
+`RiftEntryWindow` uses the shared `ContentWindowView` owned-data entry point. Its approved HTML adapter fits without page scrolling: landscape divides art, fatigue/potions and skills/entry into 0.95 : 1 : 1.05 columns with fixed lower-right entry actions; portrait stacks the sections with side-by-side bottom actions. Only this window's header/action geometry changes; the shared window retains safe areas, canvas, input blocking and Back handling. Pickers use the shared optional maximum size. It reuses `UiTheme`, `UiFonts`, `PotionArt`, the common `SkillIconView` with its square-frame option, and existing `GameStore` transactions. First-clear rows combine `RewardBoxCatalog` grants and `ContentUnlocks` milestones. The shared detail popup separates automatic service access from box claim state; `GameStore` transactions own the actual grants. See [implementation and validation](Rift_Entry.en.md).
 ## Inventory potion placement
 
 At the user's request, potion cells use smaller dimensions of 32 in portrait and 28 in landscape. Equipment retains its 52/54 baseline. The adapter reuses `EquipmentSlotView` and sits beside the weapon row owned by `CharacterEquipmentView`, without adding a row. Per-cell assignment is separate from the shared use-order setting, with one gear beside the group. [Potion slot validation](Potion_Slots.en.md) records geometry, input and persistence evidence.
@@ -103,7 +103,7 @@ At the user's request, potion cells use smaller dimensions of 32 in portrait and
 
 ## Combat records
 
-`CombatRecordsWindow` uses the new-content starter, `ContentWindowView` and `EquipmentViewSource.BattleSnapshot`. A standard Unity `Dropdown` selects the outcome; the record body scrolls independently. The window owns selection/filter state, while `GameStore` owns post-commit file export. Existing review pages remain shared; live text uses the battle HUD adapter. See [combat journal and server collection](Combat_Journal_Server.en.md).
+`CombatRecordsWindow` uses the new-content starter, `ContentWindowView` and `EquipmentViewSource.BattleSnapshot`. A standard Unity `Dropdown` selects the outcome; compact rows sized to their text scroll independently. The window owns selection/filter state, while `GameStore` owns post-commit file export. Selecting a record opens the shared combat text log directly. Closing restores the original list/filter/scroll, then the selected Rift stage. The obsolete full-screen record summary and its dedicated routes were removed; stored analysis data remains intact. Live text uses the battle HUD adapter. See [combat journal and server collection](Combat_Journal_Server.en.md).
 
 ## Title adapter before sign-in
 
