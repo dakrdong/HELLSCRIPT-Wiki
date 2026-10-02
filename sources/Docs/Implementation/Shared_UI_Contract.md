@@ -205,3 +205,5 @@
 `DailyQuestWindow`는 기존 `ContentWindowView`/`ContentWindowHost` 진입점과 공통 제목·탭·닫기·하단 행동·안전 영역을 유지한다. 다섯 목표의 상태와 개별 수령을 한 화면에서 확인해야 하므로 해당 본문만 자동 목록 배치·스크롤을 끄고 전체 내용을 비례 배치한다. 세로 한 열, 가로 3×2 배치는 [일일 퀘스트 구현](Daily_Quests.md)을 따른다. `UiTheme`/`UiFonts`, 공통 버튼, `CurrencyIconView` 및 `StorageGlyph`를 재사용하며 거래·저장은 기존 도메인이 소유한다. 검사는 모든 카드·수령 버튼의 노출·레이캐스트·잘림·드래그 후 위치 유지·저장 실패와 7일/28일 탐색을 포함한다. 공통 창의 스크롤 정책과 UI 검사 소유자 목록은 변경하지 않는다.
 
 균열 15단계 해방 안내는 같은 룬 어댑터에 `StoryDialogueWindow`, 기존 `PrologueGate`와 `TutorialAnchorRing`을 연결한다. `AccountGuide.runeBoard`의 진행·지급 룬 ID·완료한 실습 페이지는 `GameStore` 거래로 저장한다. 기존 5단계 `RunePracticeModel`의 완료 판정으로 다음을 열며 각 단계의 NPC 설명은 공통 대화창을 사용한다. 연습은 실제 룬 상태를 변경하지 않는다. 해방 전에는 바로가기를 숨기고 인장 착지 성공 후 등록한다. 전용 창 프레임이나 별도 배치·장비 계산을 추가하지 않는다. [해방 튜토리얼과 검증](Rune_Board_Unlock_Tutorial.md)을 따른다.
+
+2026-10-02: 균열 활동 시간은 기존 전투 캔버스의 독립 HUD 어댑터다. `CombatFeedback`의 실제 행동 구간만 읽고 `TrainingDpsChart`, `DpsHudDrag`와 `DpsHudPosition`을 재사용한다. DPS와 별도의 접기·기기 위치를 유지한다. 일반 이동·전투 이동·회피·파밍 분류와 100% 막대의 근거 및 검증은 [균열 활동 시간](Rift_Activity_Time.md)을 따른다.

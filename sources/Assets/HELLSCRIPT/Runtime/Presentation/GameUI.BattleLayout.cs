@@ -37,7 +37,7 @@ namespace Hellscript
             escapeCaption=Label(header,escapeLabel,13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
-            AddRiftMinimap(run);if(game.TrainingGroundRun||run.training<0&&!run.tutorial)BuildTrainingHud(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
+            AddRiftMinimap(run);if(game.TrainingGroundRun||run.training<0&&!run.tutorial)BuildTrainingHud(run);BuildRiftActivityHud(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
         }
         void ReflowBattleHud()
         {
@@ -76,6 +76,7 @@ namespace Hellscript
             Place(bossHud,(w-bossWidth)*.5f,bossY,bossWidth,66);
             bossTitle.alignment=TextAnchor.UpperCenter;bossActionLabel.alignment=TextAnchor.UpperCenter;ReflowBossText();
             PlaceTrainingHud(w,narrow,medals,game.TrainingGroundRun?default:panel);
+            PlaceRiftActivityHud(w);
             UpdateBattleBrief();
         }
         // Keep the captioned shortcuts immediately left of Settings, with the observation menu to their left.
@@ -113,6 +114,7 @@ namespace Hellscript
         {
             ClearGearRecommendations();
             trainingHud=null;
+            activityHud=null;
             if(battleWorld!=null){battleWorld.gameObject.SetActive(false);Destroy(battleWorld.gameObject);}
             battleWorld=null;battleSize=Vector2.zero;BattleViewport=UiSafeArea.FrameNormalized;
         }

@@ -183,9 +183,10 @@ namespace Hellscript
             if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
-            float observedTime=State.time,observedHealth=State.health;var observedPosition=State.position;
+            float observedTime=State.time,observedHealth=State.health;
+            BeginActivityTick();
             tickingClassEvents=true;
-            try{TickCombat(dt);}finally{RecordGraphCasts();JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);RecordFeedbackTick(State.time-observedTime,observedPosition);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
+            try{TickCombat(dt);}finally{RecordGraphCasts();JournalMovement();RecordTickTelemetry(State.time-observedTime,observedHealth);RecordFeedbackTick(State.time-observedTime);CaptureCompletedReview();RiftVisibility.Get(State,Map)?.Update();tickingClassEvents=false;FlushClassSkillEvents();}
         }
         void TickCombat(float dt)
         {
@@ -317,27 +318,28 @@ namespace Hellscript
         {
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
-            if(MoveEdictResponse(dt)){journalMovementTrigger="SURVIVAL_RESPONSE";return;}
-            if(MoveClassSkillIntent(dt)){journalMovementTrigger="SKILL_POSITIONING";return;}
-            if(MoveEdictGather(dt)){journalMovementTrigger="GATHER";return;}
-            if(MoveEdictRanger(dt)){journalMovementTrigger="RANGER_POLICY";return;}
-            if(MoveEdictNova(dt)){journalMovementTrigger="NOVA_POLICY";return;}
-            if(MoveEdictWhirlwind(dt)){journalMovementTrigger="WHIRLWIND_POLICY";return;}
+            if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
+            if(MoveClassSkillIntent(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="SKILL_POSITIONING";return;}
+            if(MoveEdictGather(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="GATHER";return;}
+            if(MoveEdictRanger(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="RANGER_POLICY";return;}
+            if(MoveEdictNova(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="NOVA_POLICY";return;}
+            if(MoveEdictWhirlwind(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="WHIRLWIND_POLICY";return;}
             var policy=HeroActionBusy?State.heroAction.policy:null;
             var movementRule=State.movementRule>=0&&State.movementRule<State.build.rules.Count?State.build.rules[State.movementRule]:null;
             if(edictSource!=null&&State.movementRule>=0&&(State.movementAction==RuleAction.Skill||State.movementAction==RuleAction.Basic)&&
                 edictMovementRules.TryGetValue(State.targetRuleId??"",out var compiledMovement))movementRule=compiledMovement;
             bool searching=EdictLastSeenGoal(out var lastSeenGoal);
             if(movementRule==null&&!HeroActionBusy&&!searching)return;
-            var target=Target;Vector2 goal=State.position;bool recovering=false;
+            var target=Target;Vector2 goal=State.position;bool recovering=false,farming=false;
             if(TargetPolicy!=null&&target!=null&&!EdictTargetEligible(target))target=null;
             if(!HeroActionBusy&&State.movementAction!=RuleAction.Skill&&State.movementAction!=RuleAction.Basic)target=null;
             if(State.portalCast>0&&target==null){State.exploration.probeTime=State.time;return;}
             if((ChestBusy||ShrineBusy||ObjectiveBusy)&&target==null&&!InDanger){State.exploration.probeTime=State.time;return;}
             if(!AdvanceEdictPursuit(dt,searching,target,movementRule))return;
-            if(searching&&!DiscoveryBeforeEnemies(ref goal,ref recovering)){goal=lastSeenGoal;State.action="마지막으로 발견한 적의 위치 확인";}
+            if(searching&&!DiscoveryBeforeEnemies(ref goal,ref recovering)){goal=lastSeenGoal;ObserveActivity(CombatActivity.Attack);State.action="마지막으로 발견한 적의 위치 확인";}
             else if(target!=null)
             {
+                ObserveActivity(CombatActivity.Attack);
                 Vector2 delta=State.position-target.position;float d=delta.magnitude;float range=policy?.distance??(movementRule!=null&&movementRule.overrideMovement?movementRule.distance:Policy.distance);
                 var movement=policy?.movement??(movementRule!=null&&movementRule.overrideMovement?movementRule.movement:Policy.movement);
                 journalMovementReason=Loc.Source("대상과 거리 {0:0.0}m · 이동 정책 {1}",d,new[]{"접근","선회","거리 유지","제자리 유지","후퇴"}[(int)movement]);
@@ -371,12 +373,13 @@ namespace Hellscript
                     }
                 }
                 var loot=State.movementAction==RuleAction.Loot?FindRuleLoot():null;
-                if(loot!=null){goal=loot.position;recovering=true;State.action="전리품 회수";}
+                if(loot!=null){goal=loot.position;recovering=farming=true;State.action="전리품 회수";}
                 else
                 {
                     if(State.movementAction==RuleAction.Chest)ChooseChestGoal(ref goal);
                     else if(State.movementAction==RuleAction.Explore)ChooseShrineGoal(ref goal);
                     recovering=ActiveChest!=null;
+                    farming=recovering;
                     // The objective takes the goal only when no chest or shrine wants it. Both are
                     // finite, so waiting for them cannot stall the run.
                     if(ActiveChest==null&&ActiveShrine==null&&ChooseObjectiveGoal(ref goal))recovering=true;
@@ -386,6 +389,8 @@ namespace Hellscript
             float speed=MovementSpeed(recovering)*(State.enemySlowTime>0?.65f:1);
             Vector2 p=Map.Move(State.position,goal,speed*dt,0,State.time);if(!EdictPursuitStepAllowed(p,searching,target,movementRule))return;
             float moved=Vector2.Distance(p,State.position);State.moveDistance+=moved;
+            if(farming)ObserveActivity(CombatActivity.Farming);
+            else if(moved>.0001f)ObserveActivity(CombatActivity.Movement);
             State.position=p;State.destination=goal;
             if(!State.layout.legacy&&!RiftExploration.TrackMovement(State,Map,goal,State.activeSkill>=0||State.actionCd>0))
             {CancelChest("경로 재탐색");CancelShrine("경로 재탐색");CancelSeal("경로 재탐색");CancelOffering("경로 재탐색");Log("PATH_RETRY","같은 목표 접근 실패 · 다른 관찰 지점 탐색");}

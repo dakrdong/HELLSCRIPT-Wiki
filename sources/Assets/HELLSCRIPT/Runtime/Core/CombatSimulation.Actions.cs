@@ -48,6 +48,7 @@ namespace Hellscript
         }
         void StartHeroAction(int index,EnemyState target,Vector2 destination,float cost,int rule,bool escape=false,Rule explicitRule=null,Vector2? aim=null)
         {
+            ObserveActivity(escape?CombatActivity.Evasion:CombatActivity.Attack);
             StopEdictWalk();
             if(HeroActionBusy)InterruptHeroAction("상위 생존 행동으로 전환");CancelChest("스킬 실행");CancelShrine("스킬 실행");
             var timing=CombatActions.Timing(index,Hero.heroClass,Mathf.Min(1.5f,Stats.attackSpeed+ClassAttackSpeedBonus+LegendaryBuff(LegendaryEffect.Haste)));
