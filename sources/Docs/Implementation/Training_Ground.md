@@ -1,6 +1,6 @@
 # 훈련장 구현
 
-갱신일: 2026-09-30 · 최초 작성 2026-09-29 · [English](Training_Ground.en.md)
+갱신일: 2026-10-02 · 최초 작성 2026-09-29 · [English](Training_Ground.en.md)
 
 [훈련장 개편 상세안](../Design/HELLSCRIPT_Training_Ground_Rework.md)을 실제 게임에 구현한 기록입니다. 규칙과 배경은 상세안을, 화면 구성은 [HTML 시안](../../Prototypes/TrainingGround/README.md)을 따릅니다. 이 문서에는 소유 코드, 동작, 바뀐 기존 기능, 검증 결과를 적습니다.
 
@@ -43,6 +43,19 @@
 - `RuntimeTrainingSmoke`: 없어진 고정 훈련 화면을 검사하던 스모크라 삭제했습니다.
 
 ## 검증
+
+### 2026-10-02 균열 결과 오류 수정 후 전체 훈련 흐름 확인
+
+균열 결과 버튼의 `CanvasGroup` 초기화 오류를 고친 뒤, 사용자가 요청한 훈련장 시작부터 결과 화면까지의 흐름을 현재 `main`에서 확인했습니다. 게임 코드·패키지·프로젝트 설정이 빌드 이후 바뀌지 않아 같은 macOS 개발 빌드(게임 소스 `008a49da`)를 재사용했습니다. 실제 계정과 분리한 새 저장 폴더에서 기존 `RuntimeTrainingGroundSmoke`를 한 번 실행했습니다. [검증 범위와 해시](TrainingGroundEvidence/2026-10-02-validation.json) · [조작 결과](TrainingGroundEvidence/2026-10-02-runtime.txt)
+
+- **관련 Edit Mode 검사 46/46 통과:** `TrainingGroundTests`, `TrainingGroundUiTests`. 성공·사망·제한 시간·중단의 기록 조건, 훈련 보상 차단, 피해와 스킬 사용 시각, 그래프와 공통 화면 부품을 확인했습니다. [검사 결과](TrainingGroundEvidence/2026-10-02-editmode.json)
+- **시작 → 전투 → 결과 통과:** 로비의 스킬 체크·적 구성·단계 조작 후 전투 시작, 실시간 DPS 접기·펼치기, 일시정지 중 시간 정지와 계속하기, 보스 처치 후 결과 창 생성과 성공 기록 저장이 정상입니다. 첫 판은 27.75초에 끝났고, 같은 세팅·칙령으로 다시 시작한 판은 같은 시간을 기록했습니다. 그래프의 스킬 표시 4개와 선택한 초의 스킬 이름 툴팁도 확인했습니다.
+- **결과 조작과 돌아가기 통과:** 결과에서 저장한 칙령이 다음 시작에 적용되고 변경 목록에 나타납니다. 세팅 변경은 로비로 돌아가며, 일시정지에서 중단하면 기록을 추가하지 않습니다.
+- **화면과 실행 오류:** 로비·결과 각각 10개 조합(440×956, 956×440, 1600×900, 1600×1000, 2100×900 × 한국어·영어, 기본 글자 크기)의 배치·포인터·문구 검사가 통과했습니다. 화면을 직접 확인했고, 예외 없이 `HELLSCRIPT_TRAINING_GROUND_SMOKE_OK`, 종료 코드 0으로 끝났습니다. 게임 코드를 추가로 바꾸지 않았습니다.
+
+화면: [시작 로비](TrainingGroundEvidence/2026-10-02-lobby-1600x900-ko-100.png) · [전투](TrainingGroundEvidence/2026-10-02-battle-1600x900-ko-100.png) · [결과](TrainingGroundEvidence/2026-10-02-result-first-1600x900-ko-100.png) · [그래프 툴팁](TrainingGroundEvidence/2026-10-02-result-tooltip-1600x900-ko-100.png) · [세로 영어 결과](TrainingGroundEvidence/2026-10-02-result-440x956-en-100.png)
+
+macOS 플레이어의 uGUI 레이캐스트와 합성 포인터 입력으로 확인했습니다. 전투 틱을 직접 진행해 검사 시간을 줄였으며, 실제 시간으로 전투 전체를 기다리는 검사와 모바일 실기기 검사는 하지 않았습니다. 전체 게임 검사와 이미 통과한 균열 스모크도 반복하지 않았습니다.
 
 ### 2026-09-30 시안 반영
 

@@ -1,6 +1,6 @@
 # Training Ground Implementation
 
-Updated: 2026-09-30 · Written 2026-09-29 · [한국어](Training_Ground.md)
+Updated: 2026-10-02 · Written 2026-09-29 · [한국어](Training_Ground.md)
 
 This records how the [training ground rework](../Design/HELLSCRIPT_Training_Ground_Rework.en.md) was built into the game. The rules come from the design document and the screens from the [HTML mockup](../../Prototypes/TrainingGround/README.md); this page covers the owning code, the behaviour, the existing features that changed, and the verification.
 
@@ -43,6 +43,19 @@ The shared window (`ContentWindowView`), fonts and colours (`UiFonts`, `UiTheme`
 - `RuntimeTrainingSmoke`: removed; it tested the fixed-training page that no longer exists.
 
 ## Verification
+
+### 2026-10-02 complete training flow after the rift result fix
+
+After fixing the rift result button's `CanvasGroup` initialization error, the requested training flow from start to result was checked on current `main`. The game code, packages and project settings had not changed since the build, so the same macOS development build (game source `008a49da`) was reused. The existing `RuntimeTrainingGroundSmoke` ran once with a fresh save directory separate from the real account. [Scope and hashes](TrainingGroundEvidence/2026-10-02-validation.json) · [Interaction report](TrainingGroundEvidence/2026-10-02-runtime.txt)
+
+- **46/46 related Edit Mode tests passed:** `TrainingGroundTests` and `TrainingGroundUiTests` cover record conditions for success, death, timeout and abort, training reward exclusion, damage and skill timestamps, the chart and shared screen parts. [Test results](TrainingGroundEvidence/2026-10-02-editmode.json)
+- **Start → battle → result passed:** Skill checkboxes, enemy setup and tier controls work before starting; live DPS folding, pause with frozen combat time and resume work during battle. Defeating the boss opens the result and saves the successful record. The first run cleared in 27.75 seconds and the same setup and edict repeated that time. Four skill marks and the tooltip naming skills at the selected second were verified.
+- **Result actions and return passed:** An edict saved from the result applies on the next start and appears in the change list. Changing the setup returns to the lobby; stopping from the pause dialog adds no record.
+- **Layout and execution errors:** The lobby and result each passed 10 layout, pointer and text combinations (440×956, 956×440, 1600×900, 1600×1000 and 2100×900 × Korean/English, default text size). Captures were visually inspected. The process completed without exceptions, logged `HELLSCRIPT_TRAINING_GROUND_SMOKE_OK` and exited with code 0. No further game code changes were needed.
+
+Screens: [Starting lobby](TrainingGroundEvidence/2026-10-02-lobby-1600x900-ko-100.png) · [Battle](TrainingGroundEvidence/2026-10-02-battle-1600x900-ko-100.png) · [Result](TrainingGroundEvidence/2026-10-02-result-first-1600x900-ko-100.png) · [Chart tooltip](TrainingGroundEvidence/2026-10-02-result-tooltip-1600x900-ko-100.png) · [English portrait result](TrainingGroundEvidence/2026-10-02-result-440x956-en-100.png)
+
+Validation used macOS Player uGUI raycasts and synthetic pointer input. Combat ticks were advanced directly to shorten the test; waiting through the entire fight in real time and physical-mobile testing were not performed. The full game suite and already-passing rift smoke were not repeated.
 
 ### 2026-09-30 mockup port
 

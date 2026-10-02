@@ -1,0 +1,455 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "98ad34a6cdaa4b81907c662e5e51a175",
+    "status": "succeeded",
+    "mode": "EditMode",
+    "started_unix_ms": 1790904043539,
+    "finished_unix_ms": 1790904059081,
+    "last_update_unix_ms": 1790904059081,
+    "progress": {
+      "completed": 46,
+      "total": 46,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1790904058859,
+      "last_finished_test_full_name": "Hellscript.Tests.TrainingGroundUiTests.UnassignedSkillHasOnlyItsTextAndNoIcon(True)",
+      "last_finished_unix_ms": 1790904058860,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 46,
+        "passed": 46,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 7.1796229,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "CastsBelongToTheWholeSecondTheyHappenedIn",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.CastsBelongToTheWholeSecondTheyHappenedIn",
+          "state": "Passed",
+          "durationSeconds": 0.011632,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DamagePerSecondAddsUpToTheDamageDealt",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.DamagePerSecondAddsUpToTheDamageDealt",
+          "state": "Passed",
+          "durationSeconds": 0.2729506,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "DeathAndTheRiftTimerFailAndAreNeverRecorded",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.DeathAndTheRiftTimerFailAndAreNeverRecorded",
+          "state": "Passed",
+          "durationSeconds": 0.0991823,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EdictChangesSinceThePreviousRunAreListed",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.EdictChangesSinceThePreviousRunAreListed",
+          "state": "Passed",
+          "durationSeconds": 0.3589933,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EliteRowsDrawTraitsByTheRiftRuleAndOtherRowsNeverRerollThem",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.EliteRowsDrawTraitsByTheRiftRuleAndOtherRowsNeverRerollThem",
+          "state": "Passed",
+          "durationSeconds": 1.3598322,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "EverySkillReleaseIsDatedAndAgreesWithTheStatistics",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.EverySkillReleaseIsDatedAndAgreesWithTheStatistics",
+          "state": "Passed",
+          "durationSeconds": 0.1261745,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "InvalidSetupsAreRefusedBeforeAnyFight",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.InvalidSetupsAreRefusedBeforeAnyFight",
+          "state": "Passed",
+          "durationSeconds": 0.3187651,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LinkedPairsPointAtEachOther",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.LinkedPairsPointAtEachOther",
+          "state": "Passed",
+          "durationSeconds": 0.0337119,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LiveOpsBalanceAppliesAsItDoesInTheRift",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.LiveOpsBalanceAppliesAsItDoesInTheRift",
+          "state": "Passed",
+          "durationSeconds": 0.0443761,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MonstersHaveTheStatsOfTheSameRiftTier(1)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.MonstersHaveTheStatsOfTheSameRiftTier(1)",
+          "state": "Passed",
+          "durationSeconds": 0.3986655,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MonstersHaveTheStatsOfTheSameRiftTier(4)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.MonstersHaveTheStatsOfTheSameRiftTier(4)",
+          "state": "Passed",
+          "durationSeconds": 0.383954,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MonstersHaveTheStatsOfTheSameRiftTier(10)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.MonstersHaveTheStatsOfTheSameRiftTier(10)",
+          "state": "Passed",
+          "durationSeconds": 0.4828006,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MonstersHaveTheStatsOfTheSameRiftTier(37)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.MonstersHaveTheStatsOfTheSameRiftTier(37)",
+          "state": "Passed",
+          "durationSeconds": 0.4976846,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OnlySkillsOnARealCooldownGetAnIconOnTheGraph",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.OnlySkillsOnARealCooldownGetAnIconOnTheGraph",
+          "state": "Passed",
+          "durationSeconds": 0.0002767,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RecordsKeepThePreviousAndTheBestRunOfEachSetup",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.RecordsKeepThePreviousAndTheBestRunOfEachSetup",
+          "state": "Passed",
+          "durationSeconds": 0.0219313,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "SwitchingTheRecommendedDefaultsLeadsTheChangeList",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.SwitchingTheRecommendedDefaultsLeadsTheChangeList",
+          "state": "Passed",
+          "durationSeconds": 0.4271733,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TheArenaDependsOnTheSetOfRowsAndRepeatsExactly",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TheArenaDependsOnTheSetOfRowsAndRepeatsExactly",
+          "state": "Passed",
+          "durationSeconds": 0.2574581,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TheBossArrivesAfterThePacksAndItsDeathClearsTheTraining",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TheBossArrivesAfterThePacksAndItsDeathClearsTheTraining",
+          "state": "Passed",
+          "durationSeconds": 0.0292749,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TheLiveMeterAveragesTheLastThreeWholeSeconds",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TheLiveMeterAveragesTheLastThreeWholeSeconds",
+          "state": "Passed",
+          "durationSeconds": 0.0003001,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TheSetupKeyLeavesTheEdictOutAndEverythingElseIn",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TheSetupKeyLeavesTheEdictOutAndEverythingElseIn",
+          "state": "Passed",
+          "durationSeconds": 0.0552514,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TrainingGrantsNothingAndLeavesRiftProgressAlone",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TrainingGrantsNothingAndLeavesRiftProgressAlone",
+          "state": "Passed",
+          "durationSeconds": 0.1729713,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(10,8,4,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(10,8,4,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0009308,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(25,1,6,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(25,1,6,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0001203,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(21,13,2,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(21,13,2,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0000986,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(33,20,20,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(33,20,20,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0000979,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(1,5,3,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(1,5,3,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0000813,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(40,11,5,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(40,11,5,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0000838,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TraitDrawsMatchTheHtmlMockup(9,6,2,System.Int32[])",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.TraitDrawsMatchTheHtmlMockup(9,6,2,System.Int32[])",
+          "state": "Passed",
+          "durationSeconds": 0.0000795,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncheckedSkillsStayEquippedButAreNeverCast(0,False)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.UncheckedSkillsStayEquippedButAreNeverCast(0,False)",
+          "state": "Passed",
+          "durationSeconds": 0.1127648,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncheckedSkillsStayEquippedButAreNeverCast(1,False)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.UncheckedSkillsStayEquippedButAreNeverCast(1,False)",
+          "state": "Passed",
+          "durationSeconds": 0.1391846,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncheckedSkillsStayEquippedButAreNeverCast(2,False)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.UncheckedSkillsStayEquippedButAreNeverCast(2,False)",
+          "state": "Passed",
+          "durationSeconds": 0.1204582,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncheckedSkillsStayEquippedButAreNeverCast(0,True)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.UncheckedSkillsStayEquippedButAreNeverCast(0,True)",
+          "state": "Passed",
+          "durationSeconds": 0.1261939,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncheckedSkillsStayEquippedButAreNeverCast(1,True)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.UncheckedSkillsStayEquippedButAreNeverCast(1,True)",
+          "state": "Passed",
+          "durationSeconds": 0.1321737,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UncheckedSkillsStayEquippedButAreNeverCast(2,True)",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.UncheckedSkillsStayEquippedButAreNeverCast(2,True)",
+          "state": "Passed",
+          "durationSeconds": 0.1155029,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "WithoutABossEveryMonsterDownIsASuccess",
+          "fullName": "Hellscript.Tests.TrainingGroundTests.WithoutABossEveryMonsterDownIsASuccess",
+          "state": "Passed",
+          "durationSeconds": 0.0345816,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ACardWithAPencilNeedsMoreHeightThanOneWithout",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ACardWithAPencilNeedsMoreHeightThanOneWithout",
+          "state": "Passed",
+          "durationSeconds": 0.0007657,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ADropDownShowsItsChoiceAndReportsAnotherOne",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ADropDownShowsItsChoiceAndReportsAnotherOne",
+          "state": "Passed",
+          "durationSeconds": 0.0234284,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ALongFightKeepsOnlyTheLatestMarks",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.ALongFightKeepsOnlyTheLatestMarks",
+          "state": "Passed",
+          "durationSeconds": 0.0184538,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnEmptyGraphNeitherMarksNorInspects",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.AnEmptyGraphNeitherMarksNorInspects",
+          "state": "Passed",
+          "durationSeconds": 0.0048923,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "AnIconButtonClicksAndACardPencilOnlyExistsOnAnEquippedSkill",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.AnIconButtonClicksAndACardPencilOnlyExistsOnAnEquippedSkill",
+          "state": "Passed",
+          "durationSeconds": 0.0083894,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "MarksStayInsideTheChartAndSitAboveTheLine",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.MarksStayInsideTheChartAndSitAboveTheLine",
+          "state": "Passed",
+          "durationSeconds": 0.0020087,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "OnlyCooldownSkillsGetAMarkAndOnlyRecordedSecondsCount",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.OnlyCooldownSkillsGetAMarkAndOnlyRecordedSecondsCount",
+          "state": "Passed",
+          "durationSeconds": 0.0021006,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TheTooltipNamesEverySkillOfTheSecondAndBothRunsValues",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.TheTooltipNamesEverySkillOfTheSecondAndBothRunsValues",
+          "state": "Passed",
+          "durationSeconds": 0.0039433,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "TheTooltipStaysInsideTheChartAtBothEnds",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.TheTooltipStaysInsideTheChartAtBothEnds",
+          "state": "Passed",
+          "durationSeconds": 0.002475,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnassignedSkillHasOnlyItsTextAndNoIcon(False)",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.UnassignedSkillHasOnlyItsTextAndNoIcon(False)",
+          "state": "Passed",
+          "durationSeconds": 0.0006592,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "UnassignedSkillHasOnlyItsTextAndNoIcon(True)",
+          "fullName": "Hellscript.Tests.TrainingGroundUiTests.UnassignedSkillHasOnlyItsTextAndNoIcon(True)",
+          "state": "Passed",
+          "durationSeconds": 0.0002352,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}
