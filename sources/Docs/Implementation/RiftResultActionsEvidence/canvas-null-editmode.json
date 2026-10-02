@@ -1,0 +1,212 @@
+{
+  "success": true,
+  "message": "Test job status retrieved.",
+  "error": null,
+  "data": {
+    "job_id": "b41dcf48892f47ceb3475cca5b828a70",
+    "status": "succeeded",
+    "mode": "EditMode",
+    "started_unix_ms": 1790903068042,
+    "finished_unix_ms": 1790903082083,
+    "last_update_unix_ms": 1790903082083,
+    "progress": {
+      "completed": 19,
+      "total": 19,
+      "current_test_full_name": null,
+      "current_test_started_unix_ms": 1790903081491,
+      "last_finished_test_full_name": "Hellscript.Tests.RiftResultTests.SuccessfulSalvageUpdatesLiveAndArchivedSnapshotButNeverEarlierRuns",
+      "last_finished_unix_ms": 1790903081837,
+      "stuck_suspected": false,
+      "editor_is_focused": false,
+      "blocked_reason": null,
+      "failures_so_far": [],
+      "failures_capped": false
+    },
+    "error": null,
+    "result": {
+      "mode": "EditMode",
+      "summary": {
+        "total": 19,
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0,
+        "durationSeconds": 8.1321093,
+        "resultState": "Passed"
+      },
+      "results": [
+        {
+          "name": "AbsentLegacySourceAndOutcomeAreNeverFabricated",
+          "fullName": "Hellscript.Tests.RiftResultTests.AbsentLegacySourceAndOutcomeAreNeverFabricated",
+          "state": "Passed",
+          "durationSeconds": 0.5284371,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "CompletedGraphIsAnIndependentSavedBattleSnapshot",
+          "fullName": "Hellscript.Tests.RiftResultTests.CompletedGraphIsAnIndependentSavedBattleSnapshot",
+          "state": "Passed",
+          "durationSeconds": 0.3768369,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FailedOrAbandonedRunDoesNotSetBest(Failed,HeroDeath)",
+          "fullName": "Hellscript.Tests.RiftResultTests.FailedOrAbandonedRunDoesNotSetBest(Failed,HeroDeath)",
+          "state": "Passed",
+          "durationSeconds": 0.3323719,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FailedOrAbandonedRunDoesNotSetBest(Cleared,Abandoned)",
+          "fullName": "Hellscript.Tests.RiftResultTests.FailedOrAbandonedRunDoesNotSetBest(Cleared,Abandoned)",
+          "state": "Passed",
+          "durationSeconds": 0.3198733,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FailedStoredEquipRollsBackRetrievalAndEquipment",
+          "fullName": "Hellscript.Tests.RiftResultTests.FailedStoredEquipRollsBackRetrievalAndEquipment",
+          "state": "Passed",
+          "durationSeconds": 0.0433414,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FirstImprovedAndHeldCombatRecordsUseRoundedSimulationTimeAndPersist",
+          "fullName": "Hellscript.Tests.RiftResultTests.FirstImprovedAndHeldCombatRecordsUseRoundedSimulationTimeAndPersist",
+          "state": "Passed",
+          "durationSeconds": 1.2228832,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "FullBagReplacementRecordsTheDiscardedOriginal",
+          "fullName": "Hellscript.Tests.RiftResultTests.FullBagReplacementRecordsTheDiscardedOriginal",
+          "state": "Passed",
+          "durationSeconds": 0.3646954,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "IgnoredDropsRemainAtTheirSourceAndOrder",
+          "fullName": "Hellscript.Tests.RiftResultTests.IgnoredDropsRemainAtTheirSourceAndOrder",
+          "state": "Passed",
+          "durationSeconds": 0.3321812,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyRecordsAreScopedToCharacterVictoryAndStageAndUnknownIsNotFirst",
+          "fullName": "Hellscript.Tests.RiftResultTests.LegacyRecordsAreScopedToCharacterVictoryAndStageAndUnknownIsNotFirst",
+          "state": "Passed",
+          "durationSeconds": 0.8854413,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "LegacyRiftWithNoTimelineDoesNotInventOneWhenResumed",
+          "fullName": "Hellscript.Tests.RiftResultTests.LegacyRiftWithNoTimelineDoesNotInventOneWhenResumed",
+          "state": "Passed",
+          "durationSeconds": 0.3866119,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "PickupKeepsRewardSnapshotSeparateFromMutableInventory",
+          "fullName": "Hellscript.Tests.RiftResultTests.PickupKeepsRewardSnapshotSeparateFromMutableInventory",
+          "state": "Passed",
+          "durationSeconds": 0.3764479,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RejectedDisposalDoesNotChangeOutcome",
+          "fullName": "Hellscript.Tests.RiftResultTests.RejectedDisposalDoesNotChangeOutcome",
+          "state": "Passed",
+          "durationSeconds": 0.3427514,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RepeatSettingsCreatesAndReusesCanvasGroupAcrossConfigurationChanges",
+          "fullName": "Hellscript.Tests.RiftResultTests.RepeatSettingsCreatesAndReusesCanvasGroupAcrossConfigurationChanges",
+          "state": "Passed",
+          "durationSeconds": 0.0389062,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResultEquipsOwnedAndStoredItemsWithoutChangingRewardSnapshots",
+          "fullName": "Hellscript.Tests.RiftResultTests.ResultEquipsOwnedAndStoredItemsWithoutChangingRewardSnapshots",
+          "state": "Passed",
+          "durationSeconds": 0.3960356,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "ResultPagePermitsRepeatButNestedContentBlocksUntilClosed",
+          "fullName": "Hellscript.Tests.RiftResultTests.ResultPagePermitsRepeatButNestedContentBlocksUntilClosed",
+          "state": "Passed",
+          "durationSeconds": 0.0459078,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RiftRecordsActualDamageQuietSecondsAndSkillReleaseTimesAcrossResume",
+          "fullName": "Hellscript.Tests.RiftResultTests.RiftRecordsActualDamageQuietSecondsAndSkillReleaseTimesAcrossResume",
+          "state": "Passed",
+          "durationSeconds": 0.4556865,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "RuneReceiptCapturesActualGrantedRunesOnce",
+          "fullName": "Hellscript.Tests.RiftResultTests.RuneReceiptCapturesActualGrantedRunesOnce",
+          "state": "Passed",
+          "durationSeconds": 0.3624118,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        },
+        {
+          "name": "StagedCleanupPreservesIdentityAndReloadAndRollsBackFailedWrites",
+          "fullName": "Hellscript.Tests.RiftResultTests.StagedCleanupPreservesIdentityAndReloadAndRollsBackFailedWrites",
+          "state": "Passed",
+          "durationSeconds": 0.4232574,
+          "message": null,
+          "stackTrace": null,
+          "output": "저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/rift-result-8dc79e698b824bbdb449b9f1ff75df04/hellscript-local-v1.json.tmp' is denied.\n"
+        },
+        {
+          "name": "SuccessfulSalvageUpdatesLiveAndArchivedSnapshotButNeverEarlierRuns",
+          "fullName": "Hellscript.Tests.RiftResultTests.SuccessfulSalvageUpdatesLiveAndArchivedSnapshotButNeverEarlierRuns",
+          "state": "Passed",
+          "durationSeconds": 0.3462228,
+          "message": null,
+          "stackTrace": null,
+          "output": ""
+        }
+      ]
+    }
+  },
+  "hint": null
+}

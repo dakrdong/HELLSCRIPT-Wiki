@@ -1,6 +1,6 @@
 # 균열 결과 행동과 전투 그래프
 
-갱신일: 2026-10-01 · [English](Rift_Result_Actions.en.md)
+갱신일: 2026-10-02 · [English](Rift_Result_Actions.en.md)
 
 균열 결과의 보상 수령, 획득 장비 교체, 그래프 조회와 다시 도전을 실제 저장 거래에 연결했다.
 
@@ -16,6 +16,16 @@
 `RiftRewardRevealWindow`와 `RiftCombatGraphWindow`는 `tools/new_content_ui.py`에서 시작했다. 두 창 모두 `ContentWindowView`와 창 관리자의 안전 영역·입력·일시정지 임대를 사용한다. 수령 연출은 사용자 요청에 따라 표준 창틀·제목줄·행동줄을 숨기고 검은 딤과 중앙 수령 내역만 표시하는 어댑터다. 별도 캔버스·장비 계산·저장 소유자를 만들지 않는다. 표시 데이터는 이미 저장된 `RewardSnapshot`이며 클릭은 닫기만 수행한다.
 
 ## 검증
+
+### 2026-10-02: 에디터에서 보스 처치 후 결과 창 생성 오류
+
+반복 사냥 설정 버튼에 `CanvasGroup`이 없을 때 `GetComponent<CanvasGroup>() ?? AddComponent<CanvasGroup>()`가 Unity 에디터의 null 객체를 올바르게 판별하지 못했다. `StyleRepeatSettings`의 투명도 지정에서 `MissingComponentException`이 먼저 발생해 `ContentWindowView.Open`이 반환되지 않았고, 이후 `Update` 47행에서 비어 있는 결과 창 참조를 갱신하며 `NullReferenceException`이 반복됐다.
+
+공통 창 관리자의 기존 방식과 같은 `TryGetComponent` 검사로 바꿨다. 세로 행동줄과 가로 행동 레일이 공유하는 한 곳에서 없으면 추가하고 기존 컴포넌트는 재사용한다. 반복 미설정의 흐린 표시·말풍선 입력과 설정된 반복의 정상 표시는 유지한다.
+
+누락된 컴포넌트의 첫 생성, 설정 활성화, 취소 후 비활성 표시, 단일 컴포넌트 재사용과 흐린 버튼의 클릭 가능 상태를 실제 Unity 에디터 회귀 검사에 추가했다. `RiftResultTests` **19/19**와 공통 UI 계약·11개 계약 검사가 통과했고 새 C# 컴파일 오류는 없었다. [이번 에디터 검사 원본](RiftResultActionsEvidence/canvas-null-editmode.json).
+
+병합된 `main`의 macOS 개발 빌드는 오류 0개로 완료됐다. 격리된 저장에서 보스 처치·결과 표시 이후 한국어·영어 10개 화면 조합, 반복 미설정 말풍선, 보상 수령·장착·그래프·수동 재도전을 한 번의 기존 결과 행동 스모크로 확인했다. 성공 표식 `HELLSCRIPT_RIFT_RESULT_ACTIONS_OK`, 종료 코드 0, 해당 예외 0개와 5→4→3→2→1 이후 새 전투 진입을 확인했다. 전체 게임 검사·모바일 실기기 검사는 반복하지 않았다. [이번 검증 범위와 소스 해시](RiftResultActionsEvidence/canvas-null-validation.json) · [개발 빌드 결과](RiftResultActionsEvidence/canvas-null-build.json) · [런타임 조작 결과](RiftResultActionsEvidence/canvas-null-runtime.txt) · [재도전 입력 기록](RiftResultActionsEvidence/canvas-null-retry.txt) · [가로 한국어 결과와 반복 말풍선](RiftResultActionsEvidence/canvas-null-result-wide-ko.png) · [세로 영어 결과](RiftResultActionsEvidence/canvas-null-result-portrait-en.png).
 
 공통 UI 계약 검사와 11개 계약 검사, `RiftResultTests`·`TrainingGroundTests`·`TrainingGroundUiTests`의 **64/64** 검사가 통과했다. 최신 `main`의 장비 추천 거래 연결 뒤 직접 영향을 받는 결과창 장착 **2/2**만 다시 확인했다. 나머지 통과 결과는 관련 코드와 동작이 유지되어 재사용했다.
 

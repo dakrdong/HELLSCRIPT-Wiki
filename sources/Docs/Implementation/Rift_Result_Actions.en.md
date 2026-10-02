@@ -1,6 +1,6 @@
 # Rift result actions and battle graph
 
-Updated: 2026-10-01 · [한국어](Rift_Result_Actions.md)
+Updated: 2026-10-02 · [한국어](Rift_Result_Actions.md)
 
 Rift result actions now connect reward claims, acquired equipment changes, graph inspection and retry to the actual saved state.
 
@@ -16,6 +16,16 @@ Rift result actions now connect reward claims, acquired equipment changes, graph
 `RiftRewardRevealWindow` and `RiftCombatGraphWindow` started with `tools/new_content_ui.py` and use `ContentWindowView` for safe areas, input and pause leases. The reward reveal intentionally hides the standard chrome and shows only the black dim and centered receipt. It has no separate canvas, equipment calculation or save owner. Its committed `RewardSnapshot` is presentation-only; tapping only dismisses it.
 
 ## Validation
+
+### 2026-10-02: Editor result initialization failure after killing the boss
+
+When the repeat-settings button had no `CanvasGroup`, `GetComponent<CanvasGroup>() ?? AddComponent<CanvasGroup>()` did not recognize Unity Editor's null object. Assigning alpha in `StyleRepeatSettings` first threw `MissingComponentException`, preventing `ContentWindowView.Open` from returning. `Update` line 47 subsequently repeated `NullReferenceException` because the result view had never been assigned.
+
+The shared styling path now uses `TryGetComponent`, matching the existing window host. Both portrait and landscape add the component only when absent and reuse it otherwise. Dimming, the clickable unconfigured hint and configured-state styling remain unchanged.
+
+An actual Unity Editor regression covers first creation without the component, enabled settings, cancellation, reuse of one component and clickability while dimmed. **19/19** `RiftResultTests`, the shared UI contract and its 11 tests passed, with no new C# compilation errors. [Current Editor test evidence](RiftResultActionsEvidence/canvas-null-editmode.json).
+
+The merged-main macOS development build completed with zero errors. One existing result-actions smoke used an isolated save to verify boss completion and the result, ten KO/EN viewport combinations, the unconfigured repeat hint, claims, equipment, graphs and manual retry. The player emitted `HELLSCRIPT_RIFT_RESULT_ACTIONS_OK`, exited zero, had none of the reported exceptions and entered a new battle after 5→4→3→2→1. The full game suite and physical-mobile checks were not repeated. [Current scope and source hashes](RiftResultActionsEvidence/canvas-null-validation.json) · [Build result](RiftResultActionsEvidence/canvas-null-build.json) · [Runtime actions](RiftResultActionsEvidence/canvas-null-runtime.txt) · [Retry input trace](RiftResultActionsEvidence/canvas-null-retry.txt) · [Landscape Korean result and repeat hint](RiftResultActionsEvidence/canvas-null-result-wide-ko.png) · [Portrait English result](RiftResultActionsEvidence/canvas-null-result-portrait-en.png).
 
 The shared UI contract and its 11 tests passed. **64/64** tests from `RiftResultTests`, `TrainingGroundTests` and `TrainingGroundUiTests` passed. After latest main added an equipment recommendation hook, only the directly affected result equipment transactions were rechecked: **2/2** passed. Unchanged coverage was reused.
 
