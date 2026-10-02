@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Failed(Child)" total="6" passed="2" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:12Z" duration="2.7606479">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="2097" result="Failed" site="Child" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:12Z" duration="2.760648" total="6" passed="2" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="3483" name="Hellscript.Tests.dll" fullname="/private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="2097" result="Failed" site="Child" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:12Z" duration="2.705200" total="6" passed="2" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="62225" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="3484" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="2097" result="Failed" site="Child" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:12Z" duration="2.657438" total="6" passed="2" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="3485" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="2097" result="Failed" site="Child" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:12Z" duration="2.596186" total="6" passed="2" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="3394" name="ShrineApproachRangeTests" fullname="Hellscript.Tests.ShrineApproachRangeTests" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:12Z" duration="2.561059" total="6" passed="2" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="3400" name="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" fullname="Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:10Z" duration="1.005673" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="3398" name="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH01&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH01&quot;)" methodname="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="909618313" result="Failed" start-time="2026-09-13 00:40:09Z" end-time="2026-09-13 00:40:10Z" duration="0.342560" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Approaching
+  But was:  Available
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce (System.String definition) [0x00049] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ShrineApproachRangeTests.cs:52
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="3399" name="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH02&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce(&quot;SH02&quot;)" methodname="AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1839536902" result="Failed" start-time="2026-09-13 00:40:10Z" end-time="2026-09-13 00:40:10Z" duration="0.653453" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Approaching
+  But was:  Available
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ShrineApproachRangeTests.AStoredApproachOutsideTheUseRadiusResumesAndUsesTheShrineOnce (System.String definition) [0x00049] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ShrineApproachRangeTests.cs:52
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="3403" name="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" fullname="Hellscript.Tests.ShrineApproachRangeTests.LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-09-13 00:40:10Z" end-time="2026-09-13 00:40:11Z" duration="0.822418" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="3401" name="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH01&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH01&quot;)" methodname="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="1759803307" result="Passed" start-time="2026-09-13 00:40:10Z" end-time="2026-09-13 00:40:10Z" duration="0.200457" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="3402" name="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH02&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward(&quot;SH02&quot;)" methodname="LeavingTheUseRadiusDuringInvocationStillCancelsWithoutReward" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="960159869" result="Passed" start-time="2026-09-13 00:40:10Z" end-time="2026-09-13 00:40:11Z" duration="0.620415" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="3397" name="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" fullname="Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-09-13 00:40:11Z" end-time="2026-09-13 00:40:12Z" duration="0.728382" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="3395" name="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH01&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH01&quot;)" methodname="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="753337411" result="Failed" start-time="2026-09-13 00:40:11Z" end-time="2026-09-13 00:40:11Z" duration="0.163572" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Approaching
+  But was:  Available
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius (System.String definition) [0x0002d] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ShrineApproachRangeTests.cs:40
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="3396" name="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH02&quot;)" fullname="Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius(&quot;SH02&quot;)" methodname="NearTheOpeningPointStillApproachesUntilInsideTheUseRadius" classname="Hellscript.Tests.ShrineApproachRangeTests" runstate="Runnable" seed="2007845495" result="Failed" start-time="2026-09-13 00:40:11Z" end-time="2026-09-13 00:40:12Z" duration="0.563590" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: Approaching
+  But was:  Available
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ShrineApproachRangeTests.NearTheOpeningPointStillApproachesUntilInsideTheUseRadius (System.String definition) [0x0002d] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ShrineApproachRangeTests.cs:40
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

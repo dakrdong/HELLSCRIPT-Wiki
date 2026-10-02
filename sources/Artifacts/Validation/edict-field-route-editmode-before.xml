@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Failed(Child)" total="10" passed="3" failed="7" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.2178377">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="2091" result="Failed" site="Child" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.217838" total="10" passed="3" failed="7" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="3473" name="Hellscript.Tests.dll" fullname="/private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="2091" result="Failed" site="Child" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.158873" total="10" passed="3" failed="7" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="50868" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="3474" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="2091" result="Failed" site="Child" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.120400" total="10" passed="3" failed="7" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="3475" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="2091" result="Failed" site="Child" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.078658" total="10" passed="3" failed="7" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="2592" name="ExplorationRouteTests" fullname="Hellscript.Tests.ExplorationRouteTests" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" testcasecount="10" result="Failed" site="Child" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.055530" total="10" passed="3" failed="7" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="2603" name="ACommittedValidRouteSurvivesReloadAndCrossingAnotherJunction" fullname="Hellscript.Tests.ExplorationRouteTests.ACommittedValidRouteSurvivesReloadAndCrossingAnotherJunction" methodname="ACommittedValidRouteSurvivesReloadAndCrossingAnotherJunction" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="61298399" result="Passed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.024807" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2599" name="DeferredPreferredExitFallsBackToTheOtherLocalExit" fullname="Hellscript.Tests.ExplorationRouteTests.DeferredPreferredExitFallsBackToTheOtherLocalExit" methodname="DeferredPreferredExitFallsBackToTheOtherLocalExit" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="1161407690" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.004575" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:1"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.DeferredPreferredExitFallsBackToTheOtherLocalExit () [0x00036] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:43
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2602" name="LockedBossEntranceIsNotAValidWallFollowingExit" fullname="Hellscript.Tests.ExplorationRouteTests.LockedBossEntranceIsNotAValidWallFollowingExit" methodname="LockedBossEntranceIsNotAValidWallFollowingExit" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="1887652901" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.005014" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:1"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.LockedBossEntranceIsNotAValidWallFollowingExit () [0x0002f] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:58
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2598" name="NearestPolicyStillChoosesAShorterRemoteFrontier" fullname="Hellscript.Tests.ExplorationRouteTests.NearestPolicyStillChoosesAShorterRemoteFrontier" methodname="NearestPolicyStillChoosesAShorterRemoteFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="1686628477" result="Passed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.001313" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2600" name="UnreachablePreferredExitFallsBackToTheOtherLocalExit" fullname="Hellscript.Tests.ExplorationRouteTests.UnreachablePreferredExitFallsBackToTheOtherLocalExit" methodname="UnreachablePreferredExitFallsBackToTheOtherLocalExit" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="2032480982" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.003761" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:1"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.UnreachablePreferredExitFallsBackToTheOtherLocalExit () [0x0004a] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:48
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="2601" name="VisitedLocalBranchesReturnToTheNearestRemainingFrontier" fullname="Hellscript.Tests.ExplorationRouteTests.VisitedLocalBranchesReturnToTheNearestRemainingFrontier" methodname="VisitedLocalBranchesReturnToTheNearestRemainingFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="282199449" result="Passed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.000856" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2597" name="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier" fullname="Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.006240" total="4" passed="0" failed="4" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="2593" name="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(RightWall,20,&quot;exit:0&quot;)" fullname="Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(RightWall,20,&quot;exit:0&quot;)" methodname="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="1384839757" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.000997" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:0"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier (Hellscript.ExplorationPolicy policy, System.Single localSpan, System.String expected) [0x00000] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:35
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2594" name="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(LeftWall,20,&quot;exit:1&quot;)" fullname="Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(LeftWall,20,&quot;exit:1&quot;)" methodname="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="779066906" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.000941" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:1"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier (Hellscript.ExplorationPolicy policy, System.Single localSpan, System.String expected) [0x00000] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:35
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2595" name="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(RightWall,80,&quot;exit:0&quot;)" fullname="Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(RightWall,80,&quot;exit:0&quot;)" methodname="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="396004569" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.001213" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:0"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier (Hellscript.ExplorationPolicy policy, System.Single localSpan, System.String expected) [0x00000] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:35
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="2596" name="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(LeftWall,80,&quot;exit:1&quot;)" fullname="Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier(LeftWall,80,&quot;exit:1&quot;)" methodname="WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier" classname="Hellscript.Tests.ExplorationRouteTests" runstate="Runnable" seed="266330074" result="Failed" start-time="2026-09-12 23:58:23Z" end-time="2026-09-12 23:58:23Z" duration="0.001197" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  String lengths are both 6. Strings differ at index 5.
+  Expected: "exit:1"
+  But was:  "exit:3"
+  ----------------^
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.ExplorationRouteTests.WallFollowingChoosesTheCurrentJunctionBeforeARemoteFrontier (Hellscript.ExplorationPolicy policy, System.Single localSpan, System.String expected) [0x00000] in /private/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-edict-field-cw5ul5wy/native-build/Assets/HELLSCRIPT/Tests/Editor/ExplorationRouteTests.cs:35
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
