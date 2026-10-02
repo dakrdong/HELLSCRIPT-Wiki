@@ -1,6 +1,6 @@
 # HELLSCRIPT 웹 플레이어
 
-갱신일: 2026-10-01 · [English](Web_Build.en.md)
+갱신일: 2026-10-02 · [English](Web_Build.en.md)
 
 웹 플레이어는 Unity 게임을 브라우저에서 실행하는 별도 배포본이다. 개인 계정이나 개발 프로젝트를 배포 폴더에 복사하지 않는다. 게임 소스는 기존 저장소에서 관리하고, 실행 파일만 `dakrdong/HELLSCRIPT-Web`에 게시한다. 기존 공개 위키는 별도 저장소를 유지한다.
 
@@ -29,7 +29,7 @@ python3 tools/package_web_build.py package <output>/Web <deployment-checkout> --
 
 브라우저는 운영체제 글꼴에 접근할 수 없어 `UiFonts`가 웹 빌드에 미리 로드된 Nanum Gothic을 사용한다. Google Fonts의 나눔고딕 원본과 SIL Open Font License 1.1을 `Assets/HELLSCRIPT/ThirdParty/Fonts/`에 보관한다. 글꼴은 `Resources` 밖에 두어 기존 네이티브 빌드의 용량을 늘리지 않는다. 공개 배포에는 `ThirdPartyNotices.txt`를 함께 제공한다.
 
-`Assets/WebGLTemplates/HELLSCRIPT/`가 반응형 로딩 화면과 브라우저 수명 주기를 담당한다. 게임 내부의 캔버스·안전 영역·글자 배율·전투 로직은 기존 소유자를 그대로 사용한다. 창 비율 선택은 브라우저 창의 해상도를 강제 변경하지 않고 기존 안전 영역에 적용한다.
+`Assets/WebGLTemplates/HELLSCRIPT/`가 반응형 로딩 화면과 브라우저 수명 주기를 담당한다. 게임 내부의 캔버스·안전 영역·전투 로직은 기존 소유자를 그대로 사용한다. 현재 UI는 기본 글자 크기를 사용한다. 창 비율 선택은 브라우저 창의 해상도를 강제 변경하지 않고 기존 안전 영역에 적용한다.
 
 배포 체크아웃의 `assemble_web.py`는 `tools/package_web_build.py`와 같아야 한다. 워크플로는 `tools/web_pages_workflow.yml`을 `.github/workflows/pages.yml`로 복사한다. GitHub Pages의 배포 방식은 GitHub Actions다. 큰 실행 파일은 48 MiB 이하의 조각으로 Git에 저장하고, Actions에서 크기와 SHA-256을 확인한 뒤 원래 파일로 복원한다. 플레이어가 브라우저에서 실행할 때는 정상적인 Unity 빌드 파일을 받는다.
 
@@ -44,6 +44,20 @@ Unity -batchmode -nographics -buildTarget Android -projectPath <checkout> \
 ```
 
 APK 생성 성공, 패키지·서명 검사와 실제 안드로이드 기기의 설치·플레이 검증은 구분한다.
+
+## 통합 메인 공개 웹 배포 — 2026-10-02
+
+병합된 `main`의 `fc2ac18157e96765199fcb7437b60e1c6af14631`을 빌드 시작 시 고정하고 별도 복사본에서 출시 WebGL을 생성했다. 기존 `WebPlayerBuild.BuildGitHubPages`와 패키징 도구를 재사용했으며 원본 체크아웃·저장·패키지 설정을 보존했다. [빌드 결과](WebBuildEvidence20261002/build.json)는 오류 0개·종료 코드 0·296.18초이다. 공개 파일 7개, 총 180,815,739바이트를 48 MiB 이하의 조각 10개에서 복원해 원본 SHA-256과 전부 일치함을 확인했다. [패키지 검증](WebBuildEvidence20261002/package-validation.json).
+
+웹 패키지 검사 5개와 로더 검사 5개가 통과했다. 공개 배포 커밋 `04416f6be197dee63a207a59e22855d845d92528`의 [Pages 실행 36967964914](https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/36967964914)이 성공했다. 실제 공개 페이지가 이번 빌드의 로더 파일을 불러오는 것도 확인했다.
+
+macOS 내장 브라우저에서 게스트·전사·마을 진입과 균열 입장 화면을 실제 조작했다. 한국어·영어 각각 세로 440×956, 가로 956×440, PC 1280×720·1440×900·1680×720에서 기본 글자 크기의 배치를 확인했다. 영어 저장 후 새로고침과 재진입에서 언어·전사·마을·물약·사용 스킬이 복원됐으며 검증 후 한국어로 되돌렸다. 실행 오류는 0개이다. 기존 URP FSR 미지원 셰이더 경고가 게임 시작마다 한 번씩, 두 번의 실행에서 총 2건 남아 있다. [검증 요약](WebBuildEvidence20261002/validation.json).
+
+이번 검증 범위는 출시 웹 빌드·패키지·공개 실행·균열 입장 표시와 기존 저장 복원이다. 게임 코드 변경 없이 동일 소스를 빌드했으므로 전체 Edit Mode·네이티브 스모크를 반복하지 않았다. 전체 전투 거래·보상·성능과 Android·iOS 실기기는 이번에 검증하지 않았으며 APK도 생성하지 않았다.
+
+![공개 웹 균열 입장 한국어 PC](WebBuildEvidence20261002/rift-entry-ko-pc.jpg)
+
+![공개 웹 균열 입장 영어 세로](WebBuildEvidence20261002/rift-entry-en-portrait.jpg)
 
 ## 일일 퀘스트 공개 웹 배포 — 2026-10-01
 

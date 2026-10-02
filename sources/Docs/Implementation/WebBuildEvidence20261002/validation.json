@@ -1,0 +1,95 @@
+{
+  "date": "2026-10-02",
+  "sourceRevision": "fc2ac18157e96765199fcb7437b60e1c6af14631",
+  "playerCommit": "04416f6be197dee63a207a59e22855d845d92528",
+  "url": "https://dakrdong.github.io/HELLSCRIPT-Web/",
+  "pages": {
+    "runId": 36967964914,
+    "url": "https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/36967964914",
+    "conclusion": "success"
+  },
+  "tests": {
+    "webPackage": {
+      "passed": 5,
+      "failed": 0
+    },
+    "webLoader": {
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "browser": {
+    "platform": "macOS",
+    "surface": "Codex In-app Browser",
+    "type": "iab",
+    "realInput": true,
+    "guestEntry": true,
+    "warriorSelection": true,
+    "townEntry": true,
+    "riftEntryOpenClose": true,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "viewports": [
+      {
+        "width": 440,
+        "height": 956
+      },
+      {
+        "width": 956,
+        "height": 440
+      },
+      {
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 1680,
+        "height": 720
+      }
+    ],
+    "observedLayoutCount": 10,
+    "textSize": "default",
+    "englishSaveReloadReentry": true,
+    "restored": [
+      "language",
+      "warrior",
+      "town",
+      "potion counts 30/30/15",
+      "equipped Whirlwind"
+    ],
+    "languageRestored": "ko",
+    "viewportOverrideReset": true,
+    "runtimeErrors": 0,
+    "warnings": {
+      "total": 2,
+      "unique": 1,
+      "message": "Shader 'Hidden/Universal Render Pipeline/Edge Adaptive Spatial Upsampling' is not supported or has been stripped from the build (in 'Blit FSR Upscaling'). PostProcessing render passes will not execute.",
+      "occurrence": "once per game start across two launches"
+    },
+    "loadedLoaderMatchesPackage": true,
+    "loadedLoader": "Build/2205873068042588a11d6d382e67222c.loader.js"
+  },
+  "scope": {
+    "fullEditMode": "not repeated for unchanged game code",
+    "nativeSmoke": "not repeated for unchanged game code",
+    "fullCombatRewardsAndPerformance": "not tested in this task",
+    "physicalAndroidIos": "not tested in this task",
+    "apk": "not generated"
+  },
+  "captures": [
+    {
+      "file": "rift-entry-en-portrait.jpg",
+      "sha256": "07a85e8bdbc56575d3caf6bd7b50989bf8abce7a9b44b716f8221dfdcbd53eb6"
+    },
+    {
+      "file": "rift-entry-ko-pc.jpg",
+      "sha256": "fe0377a1d5d116d8687369dac755d8a61d9828d31dbde9033d4eac6f70163d2b"
+    }
+  ]
+}

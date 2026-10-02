@@ -1,6 +1,6 @@
 # HELLSCRIPT Web player
 
-Updated: 2026-10-01 · [한국어](Web_Build.md)
+Updated: 2026-10-02 · [한국어](Web_Build.md)
 
 The Web player is a separate deployment of the Unity game. Only executable build artifacts are published to `dakrdong/HELLSCRIPT-Web`; private profiles and the development project are not copied. Game source remains in the existing repository and the public wiki keeps its separate deployment.
 
@@ -29,7 +29,7 @@ python3 tools/package_web_build.py package <output>/Web <deployment-checkout> --
 
 Browsers cannot read operating-system fonts. `UiFonts` uses a preloaded Nanum Gothic font on Web. The unchanged Google Fonts release and SIL Open Font License 1.1 are stored in `Assets/HELLSCRIPT/ThirdParty/Fonts/`. The font stays outside `Resources` and is preloaded only by the Web build so native player size does not increase. Public deployments include `ThirdPartyNotices.txt`.
 
-`Assets/WebGLTemplates/HELLSCRIPT/` owns the responsive loader and browser lifecycle. Existing owners still control the game canvas, safe area, reading scale and combat. Aspect selection fits the game area without forcing the browser window's resolution.
+`Assets/WebGLTemplates/HELLSCRIPT/` owns the responsive loader and browser lifecycle. Existing owners still control the game canvas, safe area and combat. The current UI uses default text size. Aspect selection fits the game area without forcing the browser window's resolution.
 
 Copy `tools/package_web_build.py` to `assemble_web.py` in the deployment repository and `tools/web_pages_workflow.yml` to `.github/workflows/pages.yml`. Set Pages to GitHub Actions. Files larger than a Git-friendly size are stored as chunks of at most 48 MiB. The workflow verifies size and SHA-256 and reconstructs the original files before uploading the Pages artifact. Browsers receive ordinary Unity build files.
 
@@ -44,6 +44,20 @@ Unity -batchmode -nographics -buildTarget Android -projectPath <checkout> \
 ```
 
 Successful packaging, package/signature checks and installation/play on a physical Android device are separate validation claims.
+
+## Integrated main public Web deployment — 2026-10-02
+
+Merged `main` revision `fc2ac18157e96765199fcb7437b60e1c6af14631` was frozen at build start and built in release WebGL mode from a separate copy. Existing `WebPlayerBuild.BuildGitHubPages` and packaging tools preserved the original checkout, saves and package configuration. The [build result](WebBuildEvidence20261002/build.json) records zero errors, exit code 0 and 296.18 seconds. All seven public files, totaling 180,815,739 bytes, were reconstructed from ten chunks of at most 48 MiB and matched the original SHA-256 hashes. [Package validation](WebBuildEvidence20261002/package-validation.json).
+
+Five package tests and five loader tests passed. Public commit `04416f6be197dee63a207a59e22855d845d92528` completed [Pages run 36967964914](https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/36967964914). The actual public page loaded this build's loader file.
+
+Real input in the macOS in-app browser covered guest entry, Warrior selection, town entry and the Rift entry screen. Korean and English each covered 440×956 portrait, 956×440 landscape and PC 1280×720/1440×900/1680×720 at default text size. After saving English, reload and re-entry restored language, Warrior, town, potions and equipped skills; Korean was restored afterward. Runtime errors were zero. The existing unsupported URP FSR shader warning occurred once per game start, totaling two across the two launches. [Validation summary](WebBuildEvidence20261002/validation.json).
+
+This validation covers the release Web build, package, public execution, Rift entry layout and existing-save restoration. With no game code changes and identical build inputs, full Edit Mode/native smoke checks were not repeated. Full combat transactions, rewards, performance and physical Android/iOS devices were not tested here; no APK was generated.
+
+![Public Web Rift entry in Korean on PC](WebBuildEvidence20261002/rift-entry-ko-pc.jpg)
+
+![Public Web Rift entry in English portrait](WebBuildEvidence20261002/rift-entry-en-portrait.jpg)
 
 ## Daily Quest public Web deployment — 2026-10-01
 
