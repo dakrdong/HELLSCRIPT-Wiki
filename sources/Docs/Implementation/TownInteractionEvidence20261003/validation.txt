@@ -1,0 +1,6 @@
+PASS: 19 unchanged shared UiButton tests plus 1 new fixed-arrow test; 11 UI validator tests and current ownership check.
+PASS: 120 NPC layout/conversation cases across 5 viewports and KO/EN; all active town options use Action and are unchosen.
+PASS: 20 town open/closed dock states in the initial run and 20 battle-HUD states in the targeted continuation: fixed centre throughout animation, down/up directions, shortcut bounds and raycast visibility.
+PASS: 11 NPC service dispatches in the continuation, including Buy/Sell; training uses the current TrainingLobby owner.
+The initial run stopped after the layout/town-dock phase because the old NPC acceptance expected Page=training. Only the failed service phase and remaining battle-HUD coverage were repeated after correcting the test; completed matrices and Edit Mode checks were reused.
+Both macOS development builds succeeded with 0 build errors. Battle HUD was exercised through the existing training battle fixture. Synthetic macOS EventSystem input; physical iOS/Android were not tested. This is scoped acceptance, not a full-project regression run or public WebGL game deployment.

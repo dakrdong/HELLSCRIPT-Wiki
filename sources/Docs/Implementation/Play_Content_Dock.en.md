@@ -5,12 +5,12 @@ The follow-up on 2026-09-21 ports the HTML inventory design and paired weapon sl
 
 From September 20, 2026, the fourth shortcut uses the attached warehouse icon. The town uses a 44-unit header, a 20-unit gear and a dock starting at 48 units from the top. Earlier measurements below are historical; see [Town HUD improvements](Town_Hud_Responsive.en.md).
 
-Date: 2026-09-15
+Date: 2026-09-15 · Updated: 2026-10-03
 작성일: 2026-09-15
 
 ## Goal
 
-A folding group of content shortcuts sits beneath the settings gear in the upper right of the play screens. Folded, only a down-arrow button shows under the gear. Pressing it slides the arrow downward, uncovering the shortcut buttons above it as it travels; when the arrow reaches the bottom it turns 180° into an up arrow. Pressing the up arrow reverses the two steps: the arrow turns back first, then slides up and hides the shortcuts again.
+A folding group of content shortcuts sits beneath the settings gear in the upper right of the play screens. Since October 3, 2026, the arrow stays in the same position when opened or closed. Shortcuts unfold below it; the arrow points down when closed and up when open. Town and battle use the same `ContentDockView`. Older captures and movement checks below remain historical records.
 
 | Order | Button | Connection |
 |---|---|---|
@@ -50,9 +50,12 @@ List-style screens such as the sanctuary menu, equipment or settings do not get 
 
 ## Animation
 
-One `ContentDockView` holds two values. `slide` is the arrow's travel fraction and `turn` its rotation fraction. Opening moves `slide` from 0 to 1 first, then `turn` from 0 to 1 for the 180° rotation. Folding moves `turn` back from 1 to 0 first, then `slide` from 1 to 0. Each step takes 0.22 s of real time and continues while combat is paused.
+In `ContentDockView`, `slide` controls shortcut reveal and `turn` controls arrow rotation. Opening reveals the shortcuts, then rotates the arrow 180°. Folding rotates the arrow back, then hides the shortcuts. Each step takes 0.22 s of real time and continues while combat is paused. Neither value changes the arrow's position.
 
-The shortcut buttons live inside a `RectMask2D` region whose height is `slide × total travel`. The region grows only as far as the arrow has come down, so the buttons appear behind the arrow. Hidden parts are neither drawn nor clickable. There is no separate up-arrow image; the down-arrow image is rotated 180°. The four ornaments on the frame are symmetric, so the rotated frame looks identical.
+The shortcuts live in a `RectMask2D` region one button row below the fixed arrow. Its height is `slide × total reveal height`; hidden parts are neither drawn nor clickable. The original down-arrow image rotates 180° to point up, and its symmetric frame retains the same appearance.
+
+
+See the October 3 [Town HUD validation](Town_Hud_Responsive.en.md) for the fixed-arrow tests and town/battle-HUD runtime evidence.
 
 ## Resources
 

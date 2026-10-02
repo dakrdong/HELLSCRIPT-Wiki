@@ -48,7 +48,7 @@ namespace Hellscript
             plazaServiceName=Label(plazaAction,"",22,gold);Place(plazaServiceName.rectTransform,15,10,222,28);
             plazaNpcName=Label(plazaAction,"",14,pale);plazaNpcName.name="NPC name";Place(plazaNpcName.rectTransform,15,39,222,20);
             plazaServiceDetail=Label(plazaAction,"",15,muted);Place(plazaServiceDetail.rectTransform,15,64,222,42);
-            plazaTalk=Button(plazaAction,"대화하기",game.TalkTown,UiTheme.Primary);plazaTalk.name="town-talk";Place((RectTransform)plazaTalk.transform,12,112,226,44);
+            plazaTalk=Button(plazaAction,"대화하기",game.TalkTown);plazaTalk.name="town-talk";Place((RectTransform)plazaTalk.transform,12,112,226,44);
             var interact=Button(plazaAction,"대화하기",game.InteractTown,new Color(.4f,.27f,.12f));interact.name="town-interact";Place((RectTransform)interact.transform,12,168,226,52);plazaActionText=interact.GetComponentInChildren<Text>();
             plazaInteract=interact;
             plazaBuy=Button(plazaAction,"구매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Buy),new Color(.4f,.27f,.12f));plazaBuy.name="town-merchant-buy";Place((RectTransform)plazaBuy.transform,12,168,110,52);

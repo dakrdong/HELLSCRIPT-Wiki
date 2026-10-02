@@ -9,7 +9,7 @@ Approaching the equipment merchant reveals **Buy** and **Sell** choices. Each op
 The native uGUI `EquipmentShopWindow` reads the real `GameStore`, hero inventory and `ItemCatalog`. It reuses warehouse `StorageSurface`, `StorageGlyph` and `EquipmentAtlas` assets. No HTML fixture account or sample gold is imported.
 
 - Buy shows stock and equipped comparison, deducts real gold and places the purchased item in a free bag slot. Purchased offers remain sold until restock.
-- Sell shows the actual bag in eight columns, with item details, individual sale, manual selection and reviewed bulk sale.
+- Sell shows the actual bag in slot order, using shared slot sizes and available width to choose columns, with item details, individual sale, manual selection and reviewed bulk sale.
 - Buyback uses one item per row and restores the original ID, affixes, quality, enhancement, masterwork and reroll data at the original sale price. Only the last 12 items remain; sales exceeding that limit require confirmation of permanent oldest-entry eviction.
 
 All transactions validate a staged account and commit only after a successful disk write. Repeated requests cannot duplicate ownership or charges. Bulk sale revalidates the quoted item fingerprints and ownership/protection and rejects the entire operation if anything changed. Equipped, locked, preset-referenced and gemmed equipment is protected. Insufficient gold, full bags and ongoing rifts also block transactions.
@@ -18,9 +18,11 @@ All transactions validate a staged account and commit only after a successful di
 
 Since 2026-09-22, every equipment comparison uses the [shared comparison contract](../Design/Equipment_Comparison_Rules.en.md): equipped items left, candidate right, with the same ring/paired-weapon plan. Gambling reward details open the shared view through Compare. Auto-selection settings share the same per-character save object with inventory salvage. Saving settings is separate from selecting or transacting items.
 
-The comparison area is empty until selection. The selected item and currently equipped item appear side by side, with a parenthesized delta after each base attribute and affix. Lost affixes, special powers, fixed resistance and socket effects appear below. There is no enhancement forecast or best-owned comparison; existing upgrade records are displayed as stored.
+Before selection, the wide comparison area explains how to choose an item. The selected item and currently equipped item appear side by side, with a parenthesized delta after each base attribute and affix. Lost affixes, special powers, fixed resistance and socket effects appear below. There is no enhancement forecast or best-owned comparison; existing upgrade records are displayed as stored.
 
-Landscape places the item list on the left and comparison on the right. Portrait purchase places approximately 6.5 item rows above the comparison. Lists and both detail bodies scroll independently; the transaction action stays fixed. Layout reads `UiSafeArea.Current` and responds to orientation, safe-area and text-size changes.
+2026-10-03 redesign: landscape assigns about 34% of the width to the list and the remainder to comparison. Portrait gives the full body to stock, then switches to comparison after selection. **Back to the gear list** and Esc clear inspection while retaining list scrolling and bulk-sale selection. Each list/card scrolls independently; the transaction action stays fixed below. Gold moves to the header and an empty status footer is omitted. The adapter reuses `UiSafeArea.Current`, `UiTheme`, `UiFonts`, shared Minimal buttons and dividers, with default-size Korean/English validation.
+
+`EquipmentComparisonView` selects the shared compact `ItemDetailView` presentation. Duplicate gilt frames and comparison titles are removed; small artwork, titles, scores, single-row primary stats and short dividers give options more room. Very narrow three-card layouts omit card artwork. Single-target selectors are omitted; ring and one-hand target choices remain. Equipped identity comes from the supplied hero's actual equipped IDs, so stale snapshot flags cannot suppress comparison. Shared values, ranges, lost properties, character forecasts and transaction ownership remain.
 
 ## Automatic selection
 

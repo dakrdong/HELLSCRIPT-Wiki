@@ -54,7 +54,7 @@ namespace Hellscript
             image.sprite=sprite;image.preserveAspect=true;return image;
         }
     }
-    // Opening: the arrow slides down uncovering the shortcuts, then turns over to point up.
+    // Opening: shortcuts unfold below the fixed arrow, which turns over to point up.
     // Folding runs the same two steps in reverse. Real time, so a paused battle still animates.
     public sealed class ContentDockView:MonoBehaviour
     {
@@ -90,7 +90,8 @@ namespace Hellscript
         void Apply()
         {
             items.sizeDelta=new Vector2(size,slide*reach);
-            toggle.anchoredPosition=new Vector2(size*.5f,-(slide*reach+size*.5f));
+            items.anchoredPosition=new Vector2(0,-reach/Mathf.Max(1,items.childCount));
+            toggle.anchoredPosition=new Vector2(size*.5f,-size*.5f);
             toggle.localRotation=Quaternion.Euler(0,0,180*turn);
         }
     }

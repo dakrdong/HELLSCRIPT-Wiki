@@ -6,6 +6,7 @@ namespace Hellscript
 {
     public sealed partial class ItemDetailView
     {
+        bool compact;
         int TypeSize(int value)=>Mathf.RoundToInt(value*Mathf.Clamp(textScale,.5f,2.5f));
         float Line(Transform parent,ItemTooltipLine line,ItemTooltipLine expanded,float x,float y,float width,int pointSize,string prefix="")
         {
@@ -24,23 +25,23 @@ namespace Hellscript
         }
         void Divider(Transform parent,float width,ref float y)
         {
-            y+=8;var r=UiLayout.Rect("Engraved divider",parent);UiLayout.Place(r,12,y,width-24,9);
-            var trim=r.gameObject.AddComponent<ItemCardTrim>();trim.divider=true;trim.color=StorageSurface.Hex(UiTheme.ItemRuleHex);y+=15;
+            y+=compact?3:8;var r=UiLayout.Rect("Engraved divider",parent);UiLayout.Place(r,12,y,width-24,compact?3:9);
+            var trim=r.gameObject.AddComponent<ItemCardTrim>();trim.divider=true;trim.color=StorageSurface.Hex(UiTheme.ItemRuleHex);y+=compact?6:15;
         }
         void Section(Transform parent,string label,float width,ref float y)
         {
             Divider(parent,width,ref y);
             var line=new ItemTooltipLine("section-"+label,Loc.T(label),UiTheme.GoldHex);
-            y+=Line(parent,line,line,12,y,width-24,UiTheme.Caption)+5;
+            y+=Line(parent,line,line,12,y,width-24,UiTheme.Caption)+(compact?1:5);
         }
         float DrawCard(RectTransform body,float width,ItemTooltipLine[] hidden,ItemTooltipLine[] shown)
         {
-            float pad=12,y=14,inner=Mathf.Max(24,width-pad*2);bool narrow=width<230;
+            float pad=12,y=compact?8:14,inner=Mathf.Max(24,width-pad*2);bool narrow=!compact&&width<230;
             var name=hidden.FirstOrDefault(l=>l.key=="name");
             Color rarity=StorageSurface.Hex(name?.color??UiTheme.GoldHex);
             var wash=UiLayout.Rect("Rarity wash",body);UiLayout.Place(wash,2,2,width-4,110);
             var gradient=wash.gameObject.AddComponent<StorageSurface>();gradient.top=new Color(rarity.r*.20f,rarity.g*.20f,rarity.b*.20f,.8f);gradient.bottom=Color.clear;gradient.raycastTarget=false;
-            float art=icon&&(Item!=null||definitionArtwork!=null)?(narrow?44:68):0;
+            float art=icon&&(Item!=null||definitionArtwork!=null)?(compact?(width<160?0:28):narrow?44:68):0;
             if(art>0)
             {
                 float artX=narrow?(width-art)/2:width-pad-art;
@@ -51,14 +52,14 @@ namespace Hellscript
                 if(narrow)y+=art+9;
             }
             float titleY=y,titleWidth=!narrow&&art>0?inner-art-10:inner;
-            if(name!=null)y+=Line(body,name,name,pad,y,titleWidth,narrow?UiTheme.Heading:UiTheme.ItemName)+2;
+            if(name!=null)y+=Line(body,name,name,pad,y,titleWidth,compact?UiTheme.Body:narrow?UiTheme.Heading:UiTheme.ItemName)+2;
             var type=hidden.FirstOrDefault(l=>l.key=="type");
             if(type!=null)y+=Line(body,type,type,pad,y,titleWidth,UiTheme.Caption);
             if(!narrow&&art>0)y=Mathf.Max(y,titleY+art);
             foreach(var score in hidden.Where(l=>l.key.StartsWith("equipment-score")))
-                y+=Line(body,score,score,pad,y+5,inner,score.key=="equipment-score"?UiTheme.Heading:UiTheme.Caption)+5;
+                y+=Line(body,score,score,pad,y+(compact?2:5),inner,score.key=="equipment-score"?(compact?UiTheme.Body:UiTheme.Heading):UiTheme.Caption)+(compact?2:5);
             foreach(var metadata in hidden.Where(l=>l.key=="level"||l.key=="hands"||l.key=="material"))
-                y+=Line(body,metadata,metadata,pad,y+3,inner,UiTheme.Caption)+3;
+                y+=Line(body,metadata,metadata,pad,y+(compact?1:3),inner,UiTheme.Caption)+(compact?1:3);
             Divider(body,width,ref y);
             string previous="identity";
             for(int n=0;n<hidden.Length;n++)
@@ -77,7 +78,7 @@ namespace Hellscript
                     else if(group=="lost"||group=="sheet")Divider(body,width,ref y);
                     previous=group;
                 }
-                if(key.StartsWith("main:")&&!string.IsNullOrEmpty(line.value))
+                if(!compact&&key.StartsWith("main:")&&!string.IsNullOrEmpty(line.value))
                 {
                     var label=new ItemTooltipLine(key+"-label",line.label,UiTheme.MutedHex);
                     y+=Line(body,label,label,pad,y,inner,UiTheme.Caption);

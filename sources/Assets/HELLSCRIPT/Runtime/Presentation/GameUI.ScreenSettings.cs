@@ -13,11 +13,12 @@ namespace Hellscript
         SettingsSection commonTab;
         RectTransform commonModal,commonSafe,commonCard,commonTabs,commonWorld;Button commonClose,commonBackdrop;
         RectTransform screenPane,languagePane,characterPane,helpPane,combatPane;
-        Text commonHeading,aspectMessage,languageMessage,characterMessage;
+        Text commonHeading,aspectMessage,languageMessage,characterMessage,characterNotice;
         Vector2 commonScreenSize;Rect commonSafeArea;float commonKeyboardTop;bool commonLaidOut;
         readonly List<(CanvasGroup group,float alpha)> commonBackgrounds=new List<(CanvasGroup,float)>();
         readonly List<(string id,Button button)> aspectButtons=new List<(string,Button)>();
         readonly List<(string code,Button button)> languageButtons=new List<(string,Button)>();
+        readonly List<(int index,Button button)> characterButtons=new List<(int,Button)>();
         public bool CommonPanelOpen=>windowHost!=null&&windowHost.BlocksGameplay||commonModal!=null||hudPanel!=null||idleIntroductionOpen||PlayInventoryOpen||EquipmentShopOpen||BlacksmithOpen||RuneMasterOpen||GearRecommendationDetails!=null;
         public bool BlocksRepeat=>RiftVictory?.RetryCounting==true||runeSession||CommonPanelOpen||presetModal!=null||root!=null&&root.Find("Confirm")!=null;
         public void ShowScreenSettings()=>ShowCommonPanel(false);
@@ -65,12 +66,14 @@ namespace Hellscript
         void BuildCharacterPane()
         {
             characterPane=CommonScroll("캐릭터 변경 본문",out var body);CommonNote(body,"캐릭터 변경",24,gold);
-            CommonNote(body,"캐릭터를 변경하면 마을로 돌아갑니다. 진행 중인 사냥과 반복 사냥은 종료되며, 이미 획득한 장비와 보상은 보존됩니다.",20);
+            var title=BigButton(body,"타이틀로 이동",()=>{if(!game.ReturnToTitle())characterMessage.text=Loc.T(string.IsNullOrEmpty(game.Store.Error)?game.Notice:game.Store.Error);});title.name="settings-title";
+            CommonNote(body,"현재 진행을 저장하고 로그아웃합니다. 타이틀에서 다른 계정으로 로그인할 수 있습니다.",19,muted);
+            characterNotice=CommonNote(body,"",20);characterButtons.Clear();
             foreach(int index in new[]{0,2,1})
             {
                 var hero=game.Store.Data.heroes[index];bool selected=game.Store.Data.selectedHero==index;
-                var b=BigButton(body,Loc.F("{0} · Lv.{1}",game.catalog.classNames[(int)hero.heroClass],hero.level),()=>{if(!game.ChangeCharacterFromSettings(index)&&characterMessage!=null)characterMessage.text=Loc.T(game.Store.Error);},selected);
-                b.name="settings-character-"+index;b.interactable=!selected;
+                var b=BigButton(body,Loc.F("{0} · Lv.{1}",game.catalog.classNames[(int)hero.heroClass],hero.level),()=>{if(!game.ChangeCharacterFromSettings(index)&&characterMessage!=null)characterMessage.text=Loc.T(string.IsNullOrEmpty(game.Store.Error)?game.Notice:game.Store.Error);},selected);
+                b.name="settings-character-"+index;characterButtons.Add((index,b));
             }
             characterMessage=CommonNote(body,"",19,gold);
         }
@@ -103,6 +106,8 @@ namespace Hellscript
             RefreshMapDisplayControl();RefreshViewDistanceControl();
             foreach(var choice in languageButtons)UiTheme.Choice(choice.button,choice.code==game.Language.Language,false);
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
+            foreach(var choice in characterButtons)choice.button.interactable=game.CanChangeCharacterFromSettings&&choice.index!=game.Store.Data.selectedHero;
+            characterNotice.text=Loc.T(game.TutorialActive?"성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다.":game.CanChangeCharacterFromSettings?"캐릭터를 변경하면 마을로 돌아갑니다. 진행 중인 사냥과 반복 사냥은 종료되며, 이미 획득한 장비와 보상은 보존됩니다.":"균열 사냥 중에는 캐릭터를 변경할 수 없습니다.");
         }
         void ReflowCommonPanel()
         {

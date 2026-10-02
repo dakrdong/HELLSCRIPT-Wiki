@@ -29,6 +29,7 @@ namespace Hellscript
         public int SelectedStage=1;
         public bool Running => Combat!=null;
         public bool Active => Combat!=null&&Combat.State.phase!=RunPhase.Cleared&&Combat.State.phase!=RunPhase.Failed;
+        public bool CanChangeCharacterFromSettings=>!TutorialActive&&!(Active&&Combat.State.training<0);
         public float EffectiveSpeed => Combat?.State.training<0&&Combat.State.riftAttendance?.version==1?Combat.State.riftAttendance.speed:1f;
         float saveClock,resultDelay;
         bool resultShown,backgroundPaused;
@@ -63,6 +64,7 @@ namespace Hellscript
         public bool ChangeCharacterFromSettings(int index)
         {
             if(TutorialActive){Notify(Loc.T("성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다."));return false;}
+            if(!CanChangeCharacterFromSettings){Notify(Loc.T("균열 사냥 중에는 캐릭터를 변경할 수 없습니다."));return false;}
             if(UI.Page=="title"||UI.Page=="characters")
             {
                 if(!SaveEntryCharacter(index))return false;
@@ -304,12 +306,13 @@ namespace Hellscript
 
         public void RecordGuide(Func<bool> change){if(change())Save();}
         public void Notify(string message){Notice=message;UI.ShowToast(message);}
-        public void Save()
+        public bool Save()
         {
-            if(TutorialActive){if(Combat.State.tutorialReplay)return;Store.Data.guide.tutorialRun=Combat.State;if(!Store.Save())Notify(Store.Error);return;}
+            if(TutorialActive){if(Combat.State.tutorialReplay)return true;Store.Data.guide.tutorialRun=Combat.State;bool saved=Store.Save();if(!saved)Notify(Store.Error);return saved;}
             if(Combat!=null)Store.Data.suspendedRun=Combat.State.training<0&&Active?Combat.State:null;
             if(Combat!=null&&!Active&&Store.Data.repeatHunt?.runId==Combat.State.id)Store.Data.repeatHunt.pendingResult=Combat.State;
-            if(!Store.Save()){Notice=Store.Error;BlockRepeat(RepeatBlock.Save,Store.Error);PreserveIdleSaveFailure();}
+            if(Store.Save())return true;
+            Notice=Store.Error;BlockRepeat(RepeatBlock.Save,Store.Error);PreserveIdleSaveFailure();return false;
         }
         float forgeSettlementTick;
         void Update()

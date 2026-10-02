@@ -1,6 +1,6 @@
 # Town HUD sizing, opacity and visibility
 
-Created: 2026-09-20 · Updated: 2026-09-23
+Created: 2026-09-20 · Updated: 2026-10-03
 
 [한국어](Town_Hud_Responsive.md)
 
@@ -21,6 +21,17 @@ The existing town UI and global HUD implement the September 20 requests and the 
 | Bottom baseline | Portrait active skills remain 32 logical units above the safe-area bottom, replacing the offsets of 148/340. Landscape reserves only the spacing needed between skill captions and the XP line. Enlarged portrait vitals stack above the class seal instead of pushing actions upward. |
 
 ## Ownership and image provenance
+
+October 3, 2026: Removed primary-action emphasis from “Talk” in the NPC interaction card. Talk, services, Buy and Sell all use the normal shared `UiButtonRole.Action` appearance. The shared button still handles actual hover, presses, keyboard focus and clicks.
+
+The shared town/battle `ContentDockView` now keeps its folding arrow in the same position below settings. Shortcuts unfold beneath it; the arrow points down when closed and up when open. Its centre and hit area remain fixed throughout the animation.
+
+
+October 3 validation: **20 focused Unity checks** and **11 UI validator tests** passed; macOS development builds finished with zero build errors. Default-size KO/EN checks cover 440×956, 956×440, PC 16:9, 16:10 and 21:9. Acceptance covered 120 NPC dialogue layouts and normal roles for all town options, plus 40 town/battle-HUD open/closed states with fixed animation centres, direction and raycast checks. Battle HUD used the existing training battle fixture. The initial run stopped at the obsolete training-page assertion; after correcting it to the current window owner, only the failed service phase and remaining battle HUD coverage continued. Passed matrices were reused. [Scope](TownInteractionEvidence20261003/validation.txt) · [Sources and results](TownInteractionEvidence20261003/validation.json). macOS synthetic input; physical mobile was not tested.
+
+![NPC options in the normal state](TownInteractionEvidence20261003/town-options-Merchant-1440x810-en.png)
+
+[Arrow open](TownInteractionEvidence20261003/town-dock-440x956-ko-open.png) · [Closed in the same position](TownInteractionEvidence20261003/town-dock-440x956-ko-closed.png)
 
 Existing `GameUI.Plaza` owns town presentation, `TownJoystick` owns pointer input and opacity, and `GlobalHudLayout` owns potion placement. Pixel geometry is converted to page-canvas units once. Save formats, packages, scenes and prefabs are unchanged.
 

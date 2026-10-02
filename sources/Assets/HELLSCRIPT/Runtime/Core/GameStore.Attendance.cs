@@ -16,18 +16,37 @@ namespace Hellscript
         public bool ClaimAttendance(AttendanceKind kind,long period,int day)
         {
             if(!Attendance.Valid(kind)||day<1||day>Attendance.Length(kind))return false;
+            return ClaimAttendanceRewards(kind,period,day);
+        }
+        public bool ClaimAllAttendance(AttendanceKind kind,long period)
+        {
+            if(!Attendance.Valid(kind))return false;
+            return ClaimAttendanceRewards(kind,period,0);
+        }
+        bool ClaimAttendanceRewards(AttendanceKind kind,long period,int day)
+        {
             long today=Attendance.Day(AttendanceClock());
             if(today<Data.attendance.lastDay||period!=Attendance.Period(kind,today))
             {Error=Loc.T("출석 기간이 바뀌었습니다. 보상 목록을 다시 확인해 주세요.");return false;}
-            string request="attendance-claim:"+kind+":"+period+":"+day;
+            bool all=day==0;
+            string request=all?"attendance-claim:"+kind+":"+period+":all:"+today+":"+Attendance.Track(Data.attendance,kind).claimed:
+                "attendance-claim:"+kind+":"+period+":"+day;
             string reason="";
             bool result=Transact(request,request,a=>
             {
                 if(!Attendance.Visit(a,today))return false;
                 var track=Attendance.Track(a.attendance,kind);
-                if(track.period!=period||day>track.earned||track.Claimed(day))return false;
-                if(!Attendance.Grant(a,kind,day,request)){reason="보석 보관함의 공간을 확보한 뒤 다시 받아 주세요.";return false;}
-                track.claimed|=1<<(day-1);return true;
+                if(track.period!=period||(!all&&(day>track.earned||track.Claimed(day))))return false;
+                bool granted=false;
+                for(int d=all?1:day;d<=(all?track.earned:day);d++)
+                {
+                    if(track.Claimed(d))continue;
+                    // Keep the same random rewards and chest IDs as individual collection.
+                    string grant="attendance-claim:"+kind+":"+period+":"+d;
+                    if(!Attendance.Grant(a,kind,d,grant)){reason="보석 보관함의 공간을 확보한 뒤 다시 받아 주세요.";return false;}
+                    track.claimed|=1<<(d-1);granted=true;
+                }
+                return granted;
             });
             if(!result&&reason!="")Error=Loc.T(reason);return result;
         }

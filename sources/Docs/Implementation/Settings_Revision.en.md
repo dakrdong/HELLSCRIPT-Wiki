@@ -1,6 +1,6 @@
 # Settings menu revision
 
-Date: 2026-09-14 · [한국어](Settings_Revision.md)
+Date: 2026-09-14 · Updated: 2026-10-03 · [한국어](Settings_Revision.md)
 
 ## Layout and controls
 
@@ -18,7 +18,7 @@ The initial separate character, preview camera and render texture have been remo
 | View distance | At the top of Screen, 50–150% in 5% steps using a slider, wheel or − / + buttons. 50% is closer, 100% is the default, and 150% is wider. |
 | Sound | Master, music and effects volume; mute all; effects preview; defaults |
 | Language | English / 한국어, immediately repainting the current screen |
-| Character | Warrior → Mage → Ranger; the selected character cannot be selected again |
+| Character | Warrior → Mage → Ranger; the selected character cannot be selected again; all hero buttons are disabled during a rift hunt. Return to title is available in the same tab |
 
 Ratios apply immediately. Desktop windows resize to fit the monitor; mobile requests the corresponding orientation and fits the game into the selected ratio. Unused space is black. Fit display uses the current window or device screen.
 
@@ -30,15 +30,17 @@ The player text-size preference was removed on 2026-09-30. Existing device ratio
 
 Combat, training and repeat-hunt countdowns stop while settings are open. Closing with X or the background resumes the previous state; an already paused run stays paused.
 
-Changing characters ends the current rift and repeat hunt, then arrives at the town spawn with the new character. Already earned currency, equipment, experience and combat records follow the existing run-completion rules. Unopened chests and other unearned rewards are not granted. Ending training does not create rewards or a real rift record.
+During an active rift hunt, hero buttons are disabled and the controller rejects character changes, including paused and portal-cleanup states. Town and training keep their existing transitions. Ending training does not create rewards or a real rift record.
 
-The transition finishes the run and changes the selected hero in an account copy, then switches the live account and screen only after saving succeeds. A failed save preserves the old character, run and file, leaving the menu open with an error. Retrying does not duplicate records or rewards.
+The transition changes the selected hero in an account copy, then switches the live account and screen only after saving succeeds. A failed save preserves the old character, run and file, leaving the menu open with an error. Retrying does not duplicate records or rewards.
+
+**Return to title** remains enabled for logged-in players, guests and combat. It saves the current account’s rift and repeat checkpoint before clearing combat execution and admission requests, signing out the existing Google and title sessions, and binding only the guest save to the logged-out title. Another account uses its own save; returning to the original account can resume its checkpoint. Failed saves or failure to open the guest profile retain the current account and run for retry. Prologue exits clear its staging. The static web edition keeps its existing guest-only policy; Google re-login uses the existing supported-platform login flow.
 
 ## Ownership and verification
 
-`GameUI.ScreenSettings.cs` owns the menu, `WorldView.Settings.cs` frames the actual world, `GameUI.ViewDistance.cs` and `ViewDistance.cs` own view-distance controls and persistence, `DisplayAspect.cs` owns ratio preferences and `GameStore.CharacterSwitch.cs` owns the saved character transition. No scenes or prefabs are replaced. Existing entry points for help and combat information remain available.
+`GameUI.ScreenSettings.cs` owns the menu, `WorldView.Settings.cs` frames the actual world, `GameUI.ViewDistance.cs` and `ViewDistance.cs` own view-distance controls and persistence, `DisplayAspect.cs` owns ratio preferences and `GameStore.CharacterSwitch.cs` owns the saved character transition. `GameController.cs` guards active rift switches, and `GameController.Accounts.cs` owns title exit, session release and account switching; no new authentication system or save format is added. No scenes or prefabs are replaced. Existing entry points for help and combat information remain available.
 
-All 174 relevant Edit Mode tests passed in Unity 6000.6.0f1. Coverage includes preference preservation/retry, successful and failed character saves, record deduplication, ratio-grid reflow after width changes, localization and existing layout checks. View-distance tests cover the default, all 21 saved steps, bounds, malformed-file preservation, failed saves and retry. Validation uses an isolated checkout of `297018b` plus this actual-world and view-distance revision, separating the concurrent rift-terrain work.
+The following evidence is from 2026-09-14 and describes the behavior at that time. All 174 relevant Edit Mode tests passed in Unity 6000.6.0f1. Coverage includes preference preservation/retry, successful and failed character saves, record deduplication, ratio-grid reflow after width changes, localization and existing layout checks. View-distance tests cover the default, all 21 saved steps, bounds, malformed-file preservation, failed saves and retry. Validation uses an isolated checkout of `297018b` plus this actual-world and view-distance revision, separating the concurrent rift-terrain work.
 
 The native macOS development player verifies gears on title/town/battle, four categories, all ten ratios and 21 reading sizes, wheel and stable dragging, pointer hit testing for background and X, landscape half-screen/portrait full-screen placement, actual town/rift player identity, position and pose, unchanged camera angle and apparent scale, all 21 live view distances and restored camera/UI after closing, training pause/resume and preservation of an existing pause, plus real-rift earned experience, one completion record and town arrival. A separate launch verifies restored ratio, size, view distance, language and selected character. All runs use an isolated save directory. Orientation changes and touch on physical iOS/Android devices remain separate verification work.
 
@@ -52,3 +54,13 @@ The native macOS development player verifies gears on title/town/battle, four ca
 - [Settings over the actual hunting area](SettingsWorldEvidence/rift-100.png)
 - [Portrait: full-screen menu](SettingsWorldEvidence/portrait.png)
 - [125% view distance restored after restart](SettingsWorldEvidence/restart.png)
+
+## 2026-10-03 rift character lock and title-exit verification
+
+All 130 related Edit Mode tests and 11 shared UI contract tests passed. The macOS development player checked ten default-text-size KO/EN cases across 440×956, 956×440, 1600×900, 1600×1000 and 2100×900, with simulated phone insets. Coverage includes disabled rift controls and direct-call rejection, raycast title exit, persisted rift restore, save/profile-open failure retries, separate account A/B saves and A resume, town/training switches, and unfinished prologue preservation with staging cleanup. The successful viewport coverage was reused after correcting account-fixture input timing; only unfinished flows were rerun. The original Editor and user save were untouched. Isolated account/session fixtures do not prove real Google OAuth or physical iOS/Android behavior.
+
+[Summary](RiftTitleLogoutEvidence20261003/validation.json) · [Edit Mode](RiftTitleLogoutEvidence20261003/editmode.xml) · [Native coverage](RiftTitleLogoutEvidence20261003/runtime.txt)
+
+![Rift character lock and title exit](RiftTitleLogoutEvidence20261003/pc-ko.png)
+
+[Portrait](RiftTitleLogoutEvidence20261003/portrait-ko.png) · [English landscape](RiftTitleLogoutEvidence20261003/landscape-en.png) · [Save retry](RiftTitleLogoutEvidence20261003/save-retry.png) · [Signed-out title](RiftTitleLogoutEvidence20261003/signed-out-title.png)

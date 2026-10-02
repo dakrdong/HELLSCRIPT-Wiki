@@ -1,6 +1,6 @@
 # Weekly and monthly attendance events
 
-Updated: 2026-09-29
+Updated: 2026-10-03
 Korean: [7일·28일 출석 이벤트](Attendance_Events.md)
 
 Attendance uses **00:00 Korea Standard Time (UTC+9)**. Weekly attendance resets every Monday; monthly attendance resets on the first day of each calendar month. Both tracks grant independently and share account progress across characters.
@@ -105,6 +105,14 @@ The prompts requested `gpt-image-2`, but the callable interface and returned met
 ## Green claimable rewards — 2026-09-28
 
 All claimable uncollected rewards have a green light and persistent border, independently of selection. Claimed and locked tiles have no green highlight. The vector UI resource `AttendanceClaimGlow` and `UiTheme.Claimable` own this display. It uses no per-frame animation and preserves existing reward/altar artwork and account transactions. This replaces the earlier claimable pulse described above. See [window shrinking and a unified bottom HUD](Responsive_Hud_20260928.en.md).
+
+## Per-day collection and claim all — 2026-10-03
+
+Eligible, unclaimed days on both attendance tracks show **Collect** inside their tile. Tapping the tile outside this button still previews that reward on the altar. Claimed and future days have no Collect button; claimed days retain their seal.
+
+**Claim all rewards** stays at the bottom right and collects only the currently displayed track's earned, unclaimed days. It is disabled when none remain, independently of the selected preview day. In portrait, the suppression checkbox sits above the fixed bottom button. The 28-day calendar keeps its existing tile dimensions and places reward art and compact amount together above Collect.
+
+Individual collection uses `GameStore.ClaimAttendance`; bulk collection uses `GameStore.ClaimAllAttendance`. Both share date, period and entitlement validation and the existing atomic save transaction. A bulk failure, including full gem storage or a failed disk write, retains the entire group's resources and claim eligibility. Random grants and chest IDs use the same individual day keys; bulk collection neither rerolls nor changes rewards. Later check-ins can be collected again in the same period. The existing attendance tutorial transaction prefix is retained. No save-schema, new art or automatic reward grants are introduced.
 
 ## Persistence and verification
 

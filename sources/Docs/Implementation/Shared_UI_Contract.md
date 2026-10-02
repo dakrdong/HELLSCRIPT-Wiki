@@ -136,7 +136,7 @@
 
 2026-09-28 갱신: 수령 가능한 미수령 보상은 `AttendanceClaimGlow`의 초록빛과 `UiTheme.Claimable`의 고정 초록색 테두리를 사용한다. 이는 선택과 구분되는 수령 상태 표시이며 수령 완료·미도달 보상에는 나타나지 않는다. 기존 금빛 보상의 `TownCircleGraphic`은 유지하되, 아래 초기 맥동 방식은 초록 강조에 사용하지 않는다.
 
-`AttendanceWindow`는 신규 창 템플릿의 `ContentWindowView`를 사용한다. 일차별 보상 칸은 실제 소유 장비가 아닌 보상 정의이며, 출석·수령 상태는 계정에서 전달한다. 가로 화면은 선택한 보상을 올린 제단 패널과 보상 칸을 나란히, 세로 화면은 위아래로 배치한다. 기본 크기에서 모든 일차를 보여 주며, 공간이 부족하면 공통 본문을 스크롤한다. 하단에는 숨김 체크박스와 수령 버튼을 고정한다. 제단 원화와 수령 도장은 `AttendanceArt`, 칸의 약식 수량은 보석상의 `JewelerSession.Compact`, 맥동 표시는 `ForgeWorkingPulse`, 원형 빛은 `TownCircleGraphic`을 재사용한다. `AttendanceSwipe`는 가로 입력을 페이지 이동에, 세로 입력을 기존 본문 스크롤에 전달한다. 전투 일시정지는 `ContentWindowHost`, 계정 쓰기는 `GameStore`, 저장 후 표시 갱신은 `StoreViewBinding`이 소유한다. [출석 이벤트](Attendance_Events.md)에 날짜·보상·검증 규칙을 기록한다.
+`AttendanceWindow`는 신규 창 템플릿의 `ContentWindowView`를 사용한다. 일차별 보상 칸은 실제 소유 장비가 아닌 보상 정의이며, 출석·수령 상태는 계정에서 전달한다. 가로 화면은 선택한 보상을 올린 제단 패널과 보상 칸을 나란히, 세로 화면은 위아래로 배치한다. 기본 크기에서 모든 일차를 보여 주며, 공간이 부족하면 공통 본문을 스크롤한다. 수령 가능한 날짜 칸에 공통 `UiButton`의 **수집** 버튼을 둔다. 하단에는 숨김 체크박스와 현재 트랙의 **모든 보상 받기**를 고정한다. 개별·일괄 수령은 `GameStore.ClaimAttendance`/`ClaimAllAttendance`의 저장 거래를 공유하며, 일괄 실패 시 전체 수령 자격을 보존한다. 제단 원화와 수령 도장은 `AttendanceArt`, 칸의 약식 수량은 보석상의 `JewelerSession.Compact`, 맥동 표시는 `ForgeWorkingPulse`, 원형 빛은 `TownCircleGraphic`을 재사용한다. `AttendanceSwipe`는 가로 입력을 페이지 이동에, 세로 입력을 기존 본문 스크롤에 전달한다. 전투 일시정지는 `ContentWindowHost`, 계정 쓰기는 `GameStore`, 저장 후 표시 갱신은 `StoreViewBinding`이 소유한다. [출석 이벤트](Attendance_Events.md)에 날짜·보상·검증 규칙을 기록한다.
 
 ## 전투 기록
 
@@ -195,6 +195,10 @@
 2026-10-01: 균열 결과의 수령 연출은 공통 창 관리자의 입력·안전 영역을 유지하고 검은 딤과 실제 지급 내역만 표시합니다. 결과의 장착은 현재 소유 장비 ID와 기존 저장 거래에 연결하며, DPS 팝업은 훈련장의 기존 그래프·조사 부품을 공유합니다. [동작과 검증](Rift_Result_Actions.md).
 
 2026-10-02: 균열 전투는 훈련장의 기존 실시간 DPS HUD 어댑터를 공유한다. `RunState.dps`와 같은 영웅·단계의 저장된 성공 기록만 공급하며 집계·그래프·스킬 표시·접기를 복제하지 않는다. 기본 그래프는 미니맵 옆에 놓으며 제목 드래그는 `DpsHudDrag`, 기기별 마지막 위치는 `DpsHudPosition`이 소유한다. 기존 안전 영역과 uGUI 포인터 수명 주기를 유지한다. 보스 상태는 상단 중앙에 고정되어 그래프 이동에 따라 밀리지 않는다. [범위와 검증](Rift_Result_Actions.md)을 따른다.
+
+## 장비 상인 어댑터
+
+장비 상인은 기존 `EquipmentShopWindow`의 안전 영역·창 관리자·거래 연결을 유지한다. 가로에서는 약 34% 목록과 나머지 비교 폭, 세로에서는 목록/비교 단계 전환을 사용한다. `EquipmentComparisonView`가 `ItemDetailView`의 조밀한 비교 표시를 선택하며, 단일 교체 위치의 불필요한 기준 버튼·중첩 창틀을 제거한다. 반지 두 위치와 양손 교체, 카드별 스크롤·공통 범위 설정·실제 장착 ID·고정 행동은 유지한다. 저장·가격·보호 판정을 화면에 복제하지 않는다. [장비 상인](Equipment_Shop.md)을 따른다.
 
 ## 룬 보드 네이티브 어댑터
 
