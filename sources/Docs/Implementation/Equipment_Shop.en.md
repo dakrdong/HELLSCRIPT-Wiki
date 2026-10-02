@@ -1,6 +1,6 @@
 # Equipment merchant integration
 
-Date: 2026-09-21 · [한국어](Equipment_Shop.md) · [Approved shop design](../Design/HELLSCRIPT_Equipment_Shop_Proposal.en.md)
+Updated: 2026-10-03 · First written: 2026-09-21 · [한국어](Equipment_Shop.md) · [Approved shop design](../Design/HELLSCRIPT_Equipment_Shop_Proposal.en.md)
 
 Approaching the equipment merchant reveals **Buy** and **Sell** choices. Each opens its corresponding tab; proximity alone never opens the window. Closing returns to the same merchant, and town movement is blocked while the shop is open. The separate [gambling merchant](Gamble_Shop.en.md) also offers Buy and Sell; other residents retain their existing interaction button.
 
@@ -22,7 +22,17 @@ Before selection, the wide comparison area explains how to choose an item. The s
 
 2026-10-03 redesign: landscape assigns about 34% of the width to the list and the remainder to comparison. Portrait gives the full body to stock, then switches to comparison after selection. **Back to the gear list** and Esc clear inspection while retaining list scrolling and bulk-sale selection. Each list/card scrolls independently; the transaction action stays fixed below. Gold moves to the header and an empty status footer is omitted. The adapter reuses `UiSafeArea.Current`, `UiTheme`, `UiFonts`, shared Minimal buttons and dividers, with default-size Korean/English validation.
 
-`EquipmentComparisonView` selects the shared compact `ItemDetailView` presentation. Duplicate gilt frames and comparison titles are removed; small artwork, titles, scores, single-row primary stats and short dividers give options more room. Very narrow three-card layouts omit card artwork. Single-target selectors are omitted; ring and one-hand target choices remain. Equipped identity comes from the supplied hero's actual equipped IDs, so stale snapshot flags cannot suppress comparison. Shared values, ranges, lost properties, character forecasts and transaction ownership remain.
+`EquipmentComparisonView` selects the shared compact `ItemDetailView` presentation. Duplicate gilt frames and comparison titles are removed; small artwork, titles, scores, single-row primary stats and short dividers give options more room. Cards narrower than 160 units omit artwork. Single-target selectors are omitted; ring and one-hand target choices remain. Equipped identity comes from the supplied hero's actual equipped IDs, so stale snapshot flags cannot suppress comparison. Shared values, ranges, lost properties, character forecasts and transaction ownership remain.
+
+The shared card remeasures row heights when rotation changes the actual canvas scale. Long English headings remain unclipped in portrait three-ring-card comparisons. Range display changes preserve card bounds and scrolling.
+
+### 2026-10-03 runtime validation
+
+Shared UI ownership and 11 contract checks passed, followed by 152 focused Edit Mode checks. After the canvas-scale correction, 32 directly affected comparison checks and the new scale regression were verified. A macOS development player passed ten Korean/English combinations at 440×956, 956×440, 1440×810, 1440×900 and 1680×720 plus a simulated safe area. Its 31 raycast-verified synthetic pointer clicks covered purchase/disk reload, ring baseline switching, replacement of both hands, empty slots, option scrolling/range changes, auto-selection/reviewed sale/locked protection and buyback/disk reload. The full Edit Mode suite and physical-mobile checks were not run.
+
+[Validation record](EquipmentShopLayoutEvidence20261003/validation.json) · [Runtime result](EquipmentShopLayoutEvidence20261003/runtime.txt) · [Portrait](EquipmentShopLayoutEvidence20261003/01-compact-comparison-440x956-ko.png) · [Three ring cards](EquipmentShopLayoutEvidence20261003/13-compact-two-rings-portrait-en.png) · [Both hands](EquipmentShopLayoutEvidence20261003/14-compact-two-hands-en.png)
+
+![Merchant comparison with room for options](EquipmentShopLayoutEvidence20261003/05-compact-comparison-1440x810-ko.png)
 
 ## Automatic selection
 

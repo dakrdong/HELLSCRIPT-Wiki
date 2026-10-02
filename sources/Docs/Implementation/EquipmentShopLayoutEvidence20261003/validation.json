@@ -1,0 +1,94 @@
+{
+  "dateKst": "2026-10-03",
+  "sourceCommit": "5545abc4ed6db1d067a4a81308ec6befebdc239d",
+  "unity": "6000.6.0f1",
+  "platform": "native macOS development player",
+  "build": {
+    "result": "Succeeded",
+    "buildBytes": 584113567,
+    "errors": 0,
+    "runtimeAssemblySha256": "826c8ffe0c8542681d8e2cfd445d45ef4f568d2a7e145f7bdd1420f2ab870dcb"
+  },
+  "validation": {
+    "sharedUiOwnership": "passed",
+    "sharedUiContractTests": 11,
+    "initialFocusedEditMode": {
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0
+    },
+    "afterCanvasScaleChange": "ItemComparisonTests completed 33; 32 passed, one Edit Mode SendMessage fixture assertion; changed the fixture invocation and reran only the failed scale regression, which passed.",
+    "finalNativeRuntime": "passed, exit 0, 31 raycast-verified synthetic pointer clicks",
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1440,
+        810
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "simulatedSafeArea": [
+      32,
+      14,
+      32,
+      14
+    ],
+    "fullEditModeSuite": "not run",
+    "physicalMobile": "not run"
+  },
+  "screenshots": {
+    "01-compact-comparison-440x956-ko.png": "825e86e75e44e1b10c3f5f74c95da8d3ef2bc7a817cd765c5fbc8db198963098",
+    "02-compact-comparison-440x956-en.png": "710ca4c0cd6700369e85a06b52523e191fbd3f77fe9fc128d8172f67eb5603b1",
+    "03-compact-comparison-956x440-ko.png": "5edb94c104e984ea1a902c6da51aacb54c7777da703c6eb0d25f2ccd0d0028b3",
+    "04-compact-comparison-956x440-en.png": "94a45afcaa2b4d913ed7e99c33cbb846ebce22dbcd35f91a535e655bc2e9b8d8",
+    "05-compact-comparison-1440x810-ko.png": "ec82dcbf9419a8f28b6e827b202f4ed0c8a0838d15ad71ca811eb4ad00c5df17",
+    "06-compact-comparison-1440x810-en.png": "2f57ac4739e3bfb75b4a54eac9b80af437a75ddc545c6e500806d4fc350c6ed7",
+    "07-compact-comparison-1440x900-ko.png": "31cfbb24538e4bc2fd0ae1b2a5b735ec161c70f7b865c24344d63aa2547b9699",
+    "08-compact-comparison-1440x900-en.png": "0b94fc0c00f396b2283c2f1cd465ba98ed753786003da2e79869c7dca9016710",
+    "09-compact-comparison-1680x720-ko.png": "5be5000b600f689ffa8ae5f9f1364d68e53c0b2d9fa7b63d21e2e477d0a97ecb",
+    "10-compact-comparison-1680x720-en.png": "0bf71fb61ece4ad6faeba853b759f27aa6d94b2c0d22308e7a75eabbd325041c",
+    "11-compact-safe-area-en.png": "8434cf5aae94209d921db548503dca4c437d8667cb02d996ba123bef8acff493",
+    "12-compact-two-rings-en.png": "fe272ed0c47f6bd7cae9ec6f696ffadfdebe02797d9d752b51e288b8de74fdfa",
+    "13-compact-two-rings-portrait-en.png": "d54dcef60d1c38d1f5335c8a3ad580e466502a83fd93079b1f793ade1b0168cb",
+    "14-compact-two-hands-en.png": "a8f0a66766668a98860b2a0ff00917ec7a3e7afa1f00357203c4424f4dd6ba21"
+  },
+  "notes": [
+    "The canvas-scale correction changed text measurement, so the full native viewport and transaction scope was rerun. Other unchanged passing focused checks were reused.",
+    "Native player logs contain existing stripped Bokeh/Panini postprocessing warnings; they are not a visual approval or physical-mobile performance result."
+  ],
+  "mainIntegration": {
+    "sourceCommit": "f0e7db5ec9fed682c5293825cd55656041acee73",
+    "result": "passed, native exit 0, 17 raycast-verified synthetic pointer clicks",
+    "coverage": "Only directly affected comparisons and transactions rerun after merging shared button/notice changes. Ten unchanged KO/EN viewport checks and safe-area proof reused.",
+    "buildResult": "Succeeded",
+    "buildBytes": 584126215,
+    "errors": 0,
+    "merchantOwnerSha256": {
+      "EquipmentShopWindow.cs": "a5bbf8cd5e409c51c8260d4c4100d3ecc3ff9cd143d9cfdd07033590ab7de12a",
+      "EquipmentShopWindow.Controls.cs": "fe7fc008173a3a362c6a86a8d89e625f853cc72488c6c072a030cab3d9af9aff",
+      "EquipmentShopWindow.Detail.cs": "f34ece368d29b7ba4153a01578cf4ebcb159619625f6950615181409185cc741",
+      "EquipmentComparisonView.cs": "9118430986709e3433128a3cd3c1ce67104e17b4b74f97826c25f56ff37ed9ec",
+      "ItemDetailView.cs": "dfd56d94ee39ad3953e46c513067737b05fe7bfa8dec5212013560c5cae7167c",
+      "ItemDetailView.Style.cs": "07181bab212bfcbaef8e8e87952f482e34b2b418b5499d5f6233d7fd762d2f73"
+    },
+    "runtimeAssemblySha256": "1fef66248828250a49e95f8023bbc33d091d7d6cfed6e0fdac7489582ce5dcd1"
+  }
+}
