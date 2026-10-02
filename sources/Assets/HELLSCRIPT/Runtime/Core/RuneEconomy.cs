@@ -27,6 +27,7 @@ namespace Hellscript
     public static class RuneEconomy
     {
         public const int FusionMaterials=2,MaximumFusionPairs=100;
+        public static int MinimumDropStage=>ContentUnlocks.Rules.features.Single(f=>f.id==ContentUnlocks.Rune).stage;
         public static readonly IReadOnlyList<RuneDropBand> Bands=Array.AsReadOnly(new[]{
             new RuneDropBand(0,1,4,100,0,0,0,0),
             new RuneDropBand(1,5,9,80,20,0,0,0),

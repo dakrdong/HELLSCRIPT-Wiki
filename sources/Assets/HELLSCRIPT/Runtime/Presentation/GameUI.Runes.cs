@@ -329,7 +329,7 @@ namespace Hellscript
             {
                 string range=band.MaximumStage==int.MaxValue?Loc.F("{0}단계 이상",band.MinimumStage):Loc.F("{0}~{1}단계",band.MinimumStage,band.MaximumStage);
                 Note(content,Loc.F("{0} · G{1}",range,band.Grade),24,65,gold);
-                Note(content,string.Join(" · ",Enumerable.Range(1,5).Select(s=>Loc.F("{0}칸 {1}%",s,band.SizePercent[s-1]))),20,90,pale);
+                Note(content,band.MaximumStage<RuneEconomy.MinimumDropStage?Loc.T("룬 블럭 드롭 없음"):string.Join(" · ",Enumerable.Range(1,5).Select(s=>Loc.F("{0}칸 {1}%",s,band.SizePercent[s-1]))),20,90,pale);
             }
             Note(content,"모양은 선택된 크기 안에서 동일한 확률로 결정됩니다. 합성은 같은 등급·크기 두 개로 진행하며, 배치 중인 룬은 먼저 회수해야 합니다.",21,125,pale);
             FooterButton(0,2,"룬 합성",ShowRuneFusion);FooterButton(1,2,"룬 보드로",ShowRunes);

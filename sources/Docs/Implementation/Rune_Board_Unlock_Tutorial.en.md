@@ -1,8 +1,10 @@
 # Rune Board Unlock and Playable Guide
 
-Updated: 2026-10-01 · [한국어](Rune_Board_Unlock_Tutorial.md)
+Updated: 2026-10-03 · [한국어](Rune_Board_Unlock_Tutorial.md)
 
 After a normal Rift 15 clear, **Injel Mir, the Rune Master**, begins the lesson on the result window. Claiming the first-clear reward sends the Rune Board emblem to the upper-right content menu. NPC explanations alternate with actual play in the existing five-step guide, followed by free use of the actual weapon boards.
+
+Rift stages 1–14 grant no rune block drops from normal enemies, elites or bosses. `RuneEconomy.MinimumDropStage` reads the Rune Board unlock stage (15) from `ContentUnlocks`; `RuneGrowth` gates rewards by the actual run stage, including lower-stage repeats on already-unlocked accounts. Existing ownership, mastery XP and duplicate-reward receipts are preserved.
 
 ## Player flow
 
@@ -34,6 +36,10 @@ The UI connects the existing `StoryDialogueWindow`, `PrologueGate`, `TutorialAnc
 Restart resumes the saved checkpoint. Closing after claim but before landing repeats the emblem flight; closing during practice restarts the unfinished page's NPC explanation and puzzle. Completed pages do not repeat. Existing accounts without this state keep their access if Rune content is already unlocked or their highest clear is at least 15; they do not repeat the mandatory lesson. Earlier locked accounts wait for the new introduction.
 
 ## Validation
+
+2026-10-03 drop-stage update: **53 focused Edit Mode cases passed**, covering normal/elite/boss rewards at stages 1–14 and 15–16, already-unlocked accounts, guaranteed operational rates, persistence, duplicate protection and the first-clear set. macOS Unity Editor checks covered the changed labels in Korean/English at five viewport sizes and native Rune Board → Info → Drop Rates button callbacks. The full game suite, a separate development build and physical-mobile validation were not run for this small rule change.
+
+[Test results](RuneDropGateEvidence20261003/focused-editmode.xml) · [UI scope](RuneDropGateEvidence20261003/ui-validation.json) · [Korean portrait](RuneDropGateEvidence20261003/ko-game-view.png) · [English portrait](RuneDropGateEvidence20261003/en-440x956.png)
 
 Nine focused Edit Mode cases passed for actual rewards, failed-write rollback, idempotency, rejected page jumps and unfinished puzzles, per-page reload, unchanged actual ownership, older-save migration and translations. Native macOS input passed in Korean and English at 440×956, 956×440, 1600×900, 1600×1000 and 2100×900 (10 cases). NPC narration changed to begin directly with instructions, followed by two focused checks in Korean portrait and English landscape. The development build succeeded with zero errors; shared UI ownership and all 11 contract checks passed. The full suite belongs to separate integration validation. Physical mobile was not tested.
 
