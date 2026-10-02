@@ -2,14 +2,15 @@
 
 Updated: 2026-10-02 · [한국어](Web_Build.md)
 
-The Web player is a separate deployment of the Unity game. Only executable build artifacts are published to `dakrdong/HELLSCRIPT-Web`; private profiles and the development project are not copied. Game source remains in the existing repository and the public wiki keeps its separate deployment.
+The Web player is a separate deployment of the Unity game. Only executable build artifacts are published to `hellscript-game/hellscript-game.github.io`; private profiles and the development project are not copied. `dakrdong/HELLSCRIPT-Web` remains available for existing saves. Game source remains in the existing repository and the public wiki keeps its separate deployment.
 
-Public player: [HELLSCRIPT Web](https://dakrdong.github.io/HELLSCRIPT-Web/). Deployment status is available through the deployment runs linked below.
+Public player: [HELLSCRIPT Web](https://hellscript-game.github.io/). Deployment status is available through the deployment runs linked below.
 
 ## Playing and saving
 
 - The Web edition starts as a guest. Native Google sign-in uses operating-system callbacks and is not offered by the Web UI. This release does not provide account linking or cross-device save synchronization.
 - Progress and display/language preferences live in this browser's site storage. Unity's `autoSyncPersistentDataPath` preserves the existing file-based save transactions and backups. Clearing browser data deletes the Web save.
+- Each address has separate site storage. Saves do not transfer automatically to the new address. Use the [previous play address](https://dakrdong.github.io/HELLSCRIPT-Web/) to continue existing progress. The old site is not forcibly redirected, and its saves are not cleared.
 - Leaving the tab invokes the existing pause, save and resume flow. Time spent suspended by the browser is not treated as real-time combat. The existing in-game power-saving screen remains available while the game tab is visible.
 - This edition uses the game rules bundled with the build. It does not connect to native authentication or the operator server's same-origin APIs. Server security and authentication are not changed.
 - Browsers supporting Web Locks allow one game tab at the same address to reduce save conflicts. The loader presents storage and loading failures in Korean and English.
@@ -44,6 +45,18 @@ Unity -batchmode -nographics -buildTarget Android -projectPath <checkout> \
 ```
 
 Successful packaging, package/signature checks and installation/play on a physical Android device are separate validation claims.
+
+## Public address without the personal account name — 2026-10-02
+
+The GitHub Free organization deployment `hellscript-game/hellscript-game.github.io` publishes [https://hellscript-game.github.io/](https://hellscript-game.github.io/). Commit `7e5405fe05e97950d473b97b9df0f677bbb1be20` completed [Pages run 36974912647](https://github.com/hellscript-game/hellscript-game.github.io/actions/runs/36974912647) successfully, with HTTPS enabled.
+
+The existing `fc2ac18157e96765199fcb7437b60e1c6af14631` build, chunks, manifest and publishing tools are unchanged. Only the deployment README address and previous-save guidance changed. Actions verified SHA-256 and assembled seven files totaling 180,815,739 bytes before publishing. Existing package, loader and responsive-layout results apply to the identical build. The Unity build, full Edit Mode suite and native smoke were not repeated.
+
+Real input in the macOS in-app browser confirmed load completion, game start, guest entry, Warrior selection and the actual opening scene at the new address. English preferences restored after reload; Korean was restored afterward. Runtime errors were zero, with three instances of the existing URP FSR shader warning. The previous address remains available without a forced redirect. Cross-address save transfer and physical-device validation were not part of this task. [Address validation](WebAddressEvidence20261002/validation.json).
+
+![Actual game opening scene at the new public address](WebAddressEvidence20261002/public-game-ko.jpg)
+
+![English preferences restored at the new address](WebAddressEvidence20261002/language-restored-en.jpg)
 
 ## Integrated main public Web deployment — 2026-10-02
 
@@ -87,7 +100,7 @@ Built from the integrated `main` with Unity 6000.6.0f1 on 2026-09-28. The [valid
 
 No browser runtime errors were observed. Unity URP still reports an unsupported FSR upscaling shader; the listed screens and interactions were checked in the rendered player. The first Web build hit Unity Bee's six-pass graph regeneration limit; an incremental retry succeeded with no source changes.
 
-Public deployment commits and status are available in [deployment runs](https://github.com/dakrdong/HELLSCRIPT-Web/actions) and the public site's `build-info.json`. Browser evidence is from the macOS in-app browser. Installation, gameplay and performance on physical Android/iOS devices were not tested in this task.
+Public deployment commits and status are available in [deployment runs](https://github.com/hellscript-game/hellscript-game.github.io/actions) and the public site's `build-info.json`. Browser evidence is from the macOS in-app browser. Installation, gameplay and performance on physical Android/iOS devices were not tested in this task.
 
 ![Korean Web title](WebBuildEvidence/web-title.png)
 

@@ -2,14 +2,15 @@
 
 갱신일: 2026-10-02 · [English](Web_Build.en.md)
 
-웹 플레이어는 Unity 게임을 브라우저에서 실행하는 별도 배포본이다. 개인 계정이나 개발 프로젝트를 배포 폴더에 복사하지 않는다. 게임 소스는 기존 저장소에서 관리하고, 실행 파일만 `dakrdong/HELLSCRIPT-Web`에 게시한다. 기존 공개 위키는 별도 저장소를 유지한다.
+웹 플레이어는 Unity 게임을 브라우저에서 실행하는 별도 배포본이다. 개인 계정이나 개발 프로젝트를 배포 폴더에 복사하지 않는다. 게임 소스는 기존 저장소에서 관리하고, 실행 파일만 `hellscript-game/hellscript-game.github.io`에 게시한다. 이전 플레이 저장을 위해 `dakrdong/HELLSCRIPT-Web`도 유지한다. 기존 공개 위키는 별도 저장소를 유지한다.
 
-공개 플레이 주소: [HELLSCRIPT Web](https://dakrdong.github.io/HELLSCRIPT-Web/). 배포 성공 여부는 아래 배포 실행 기록에서 확인한다.
+공개 플레이 주소: [HELLSCRIPT Web](https://hellscript-game.github.io/). 배포 성공 여부는 아래 배포 실행 기록에서 확인한다.
 
 ## 플레이와 저장
 
 - 웹 버전은 게스트로 시작한다. 기존 앱의 Google 로그인은 운영체제의 콜백을 사용하므로 웹 화면에서는 제공하지 않는다. Google 계정 연결이나 기기 간 저장 동기화를 제공한다고 표시하지 않는다.
 - 게임 진행과 화면·언어 설정은 이 브라우저의 사이트 저장 공간에 보관한다. Unity의 `autoSyncPersistentDataPath`를 사용하므로 기존 파일 저장 거래와 백업 규칙을 그대로 거친다. 브라우저 데이터를 삭제하면 웹 저장도 삭제된다.
+- 주소별 저장 공간은 분리된다. 이전 주소의 저장은 새 주소로 자동 이전되지 않으므로 기존 진행을 이어가려면 [이전 플레이 주소](https://dakrdong.github.io/HELLSCRIPT-Web/)를 이용한다. 이전 사이트를 새 주소로 강제 이동시키거나 기존 저장을 삭제하지 않는다.
 - 다른 탭이나 앱으로 이동할 때는 기존 전투 보존·재개 처리를 호출한다. 브라우저가 숨겨진 페이지를 멈춘 시간을 실시간 사냥으로 계산하지 않는다. 게임 안의 절전 화면을 켜고 현재 탭에 머무르는 흐름은 기존 구현을 사용한다.
 - 웹 버전은 빌드에 포함된 게임 규칙을 사용한다. 앱 전용 인증과 동일 출처를 요구하는 운영 서버 API에는 연결하지 않는다. 운영 서버 보안을 변경하거나 임시 인증을 추가하지 않는다.
 - Web Locks를 지원하는 브라우저에서는 같은 주소의 게임을 두 탭에서 동시에 열지 못하게 해 저장 충돌을 줄인다. 시작 화면은 저장 공간 오류와 로딩 실패를 한국어·영어로 안내한다.
@@ -44,6 +45,18 @@ Unity -batchmode -nographics -buildTarget Android -projectPath <checkout> \
 ```
 
 APK 생성 성공, 패키지·서명 검사와 실제 안드로이드 기기의 설치·플레이 검증은 구분한다.
+
+## 계정명 없는 공개 주소 — 2026-10-02
+
+GitHub Free 조직의 `hellscript-game/hellscript-game.github.io`에서 [https://hellscript-game.github.io/](https://hellscript-game.github.io/)를 게시했다. 배포 커밋 `7e5405fe05e97950d473b97b9df0f677bbb1be20`의 [Pages 실행 36974912647](https://github.com/hellscript-game/hellscript-game.github.io/actions/runs/36974912647)이 성공했으며 HTTPS를 사용한다.
+
+이전 배포의 `fc2ac18157e96765199fcb7437b60e1c6af14631` 빌드와 조각·매니페스트·배포 도구를 그대로 사용했다. 새 배포 저장소의 변경은 README 주소와 이전 저장 안내뿐이다. Actions에서 7개 파일·180,815,739바이트를 SHA-256 검증 후 복원해 게시했으며, 같은 빌드의 패키지·로더 검사와 화면 비율 검증은 재사용했다. Unity 빌드·전체 Edit Mode·네이티브 스모크를 반복하지 않았다.
+
+macOS 내장 브라우저에서 새 주소의 로딩 완료·게임 시작·게스트 진입·전사 선택·실제 도입 장면을 확인했다. 영어 설정이 새로고침 후 게임에 복원되는 것을 확인하고 한국어로 되돌렸다. 실행 오류 0개, 기존 URP FSR 셰이더 경고 3건이다. 이전 주소는 강제 이동 없이 유지하며, 새 주소로 저장을 옮기는 기능이나 실기기 검증은 이번 범위에 포함하지 않는다. [주소 검증 기록](WebAddressEvidence20261002/validation.json).
+
+![새 공개 주소의 실제 게임 도입 장면](WebAddressEvidence20261002/public-game-ko.jpg)
+
+![새 주소의 영어 설정 복원](WebAddressEvidence20261002/language-restored-en.jpg)
 
 ## 통합 메인 공개 웹 배포 — 2026-10-02
 
@@ -87,7 +100,7 @@ macOS 내장 브라우저에서 게스트·전사·마을 진입과 균열 입�
 
 웹 콘솔의 실행 오류는 없었다. Unity URP의 FSR 업스케일링 셰이더 미지원 경고는 남아 있으며, 위 화면과 조작은 실제 렌더링으로 확인했다. 첫 웹 빌드는 Unity Bee의 내부 그래프 갱신 횟수 제한으로 종료됐고, 생성된 캐시를 사용한 재실행은 소스 수정 없이 성공했다.
 
-공개 웹 배포 커밋과 성공 여부는 [배포 실행 기록](https://github.com/dakrdong/HELLSCRIPT-Web/actions) 및 공개 사이트의 `build-info.json`으로 확인한다. 브라우저 검증은 macOS 내장 브라우저 결과다. Android·iOS 실기기 설치·플레이·성능은 이번에 검증하지 않았다.
+공개 웹 배포 커밋과 성공 여부는 [배포 실행 기록](https://github.com/hellscript-game/hellscript-game.github.io/actions) 및 공개 사이트의 `build-info.json`으로 확인한다. 브라우저 검증은 macOS 내장 브라우저 결과다. Android·iOS 실기기 설치·플레이·성능은 이번에 검증하지 않았다.
 
 ![웹 한국어 타이틀](WebBuildEvidence/web-title.png)
 
