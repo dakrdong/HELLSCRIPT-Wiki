@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-02",
+  "feature": "Rift live DPS reuses the training ground HUD",
+  "mainBase": "e21aecfe6323ebf5182c0463a9b1d1f3d9c24856",
+  "unity": "6000.6.0f1",
+  "platform": "macOS development player, Metal",
+  "sourceSha256": {
+    "Assets/HELLSCRIPT/Runtime/Core/RiftResult.cs": "25fbfc4ff8eaf4ef922422d579ce4c27fe9b43bfac111190f12db527a9ea317d",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs": "33fc393ba64d0cde7e30bd17e0c408a279850fbccb71c59d0ae7383a65172d74",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TrainingGround.cs": "fc832a6b653696d2e6f75f24380a13646cac4cd60149dc5624cd0d002c5846ff",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "23fc7387d540e29b991b67350068877601511b4c81922246af3aae51a12d1188",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.cs": "ae737419d1a4fd7f35cb3c20432fe53625423e2367af8d1bb3f810c66d5e18ba",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.RiftDps.cs": "4dabc5f00f8d30db1718e788a05d43f7ec895dfc5cf2c526097dce7c42fe949c",
+    "Assets/HELLSCRIPT/Tests/Editor/RiftResultTests.cs": "a8897bceef9e5c6608968b3631cf67cd013909e1afc70f81511b07f1376f4d33"
+  },
+  "editMode": {
+    "scope": [
+      "Hellscript.Tests.RiftResultTests",
+      "Hellscript.Tests.TrainingGroundTests",
+      "Hellscript.Tests.TrainingGroundUiTests"
+    ],
+    "result": "Passed",
+    "total": "66",
+    "passed": "66",
+    "failed": "0",
+    "skipped": "0",
+    "duration": "13.6817678",
+    "evidence": "live-dps-editmode.xml"
+  },
+  "uiContract": {
+    "ownership": "PASS",
+    "testsPassed": 11,
+    "evidence": "live-dps-ui-contract.txt"
+  },
+  "build": {
+    "entryPoint": "Hellscript.EditorTools.ClassSkillValidationBuilder.BuildMac",
+    "exitCode": 0,
+    "errors": 0
+  },
+  "runtime": {
+    "flag": "-hellscriptRiftDpsSmoke",
+    "exitCode": 0,
+    "successMarker": "HELLSCRIPT_RIFT_DPS_SMOKE_OK",
+    "evidence": "live-dps-runtime.txt",
+    "checks": 13,
+    "viewportSizes": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "mapModes": [
+      "Corner",
+      "Overlay",
+      "Hidden"
+    ],
+    "combinations": 30,
+    "interaction": "EventSystem raycast plus synthetic pointer down/up/click; actual state and rendered bounds asserted",
+    "sampleSource": "Actual Rift combat ticks; retained previous-success comparison fixture is a half-damage copy of the recorded timeline",
+    "safeArea": "Simulated insets for portrait and landscape",
+    "managedExceptions": 0,
+    "renderPipelineWarnings": [
+      "Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'GaussianDepthOfField'). PostProcessing render passes will not execute.",
+      "Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'GaussianDepthOfField'). PostProcessing render passes will not execute.",
+      "Shader 'Hidden/Universal Render Pipeline/BokehDepthOfField' is not supported or has been stripped from the build (in 'BokehDepthOfField'). PostProcessing render passes will not execute.",
+      "Shader 'Hidden/Universal Render Pipeline/PaniniProjection' is not supported or has been stripped from the build (in 'PaniniProjection'). PostProcessing render passes will not execute."
+    ]
+  },
+  "validationNotes": [
+    "First runtime attempt stopped because the harness checked before asynchronous Rift admission completed. The harness now waits for admission; only the failed native check and required rebuild were repeated.",
+    "Final source was based on main e21aecfe; its additional training verification commit changed documentation and evidence only. Passed focused Edit Mode and contract results were reused.",
+    "Full game Edit Mode suite was not rerun. Physical iOS/Android devices were not tested.",
+    "Unity-generated cloud and render-pipeline settings changes were restored before committing."
+  ],
+  "screenshots": [
+    "live-dps-rift-dps-1600x900-ko.png",
+    "live-dps-rift-dps-1600x900-en.png",
+    "live-dps-rift-dps-440x956-ko.png",
+    "live-dps-rift-dps-440x956-en.png",
+    "live-dps-rift-dps-956x440-ko.png",
+    "live-dps-rift-dps-956x440-en.png",
+    "live-dps-rift-dps-folded-1600x900-ko.png",
+    "live-dps-training-shared-dps-1600x900-ko.png"
+  ]
+}

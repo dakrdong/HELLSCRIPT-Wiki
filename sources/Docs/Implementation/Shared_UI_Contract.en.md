@@ -1,6 +1,6 @@
 # Shared UI and new-content contract
 
-Updated: 2026-09-30
+Updated: 2026-10-02
 Use the latest inventory as the equipment presentation baseline. Compose new content from shared owners rather than copying rendering or gameplay formulas. Keep specialized layouts and each domain's rules.
 
 [Korean version](Shared_UI_Contract.md)
@@ -172,6 +172,8 @@ The user removed the text-size multiplier on 2026-09-30. Do not run or add text-
 ### Rift preparation and recommended skill management (2026-10-01)
 
 Recommended mode permits skill-tree point allocation and equipment while keeping custom combat policies locked and preserving the mode switch. An empty rift-entry skill slot opens the same Hunt Edict tree in the common window stack; closing restores the entry window and chosen stage. Potion selection uses the shared loadout transaction, with immediate persistent equip, clear and swap semantics. See [Rift entry](Rift_Entry.en.md).
+
+2026-10-02: Rift battles share the training ground's existing live DPS HUD adapter. They supply `RunState.dps` and a retained successful record for the same hero/tier without duplicating aggregation, graph rendering, skill markers or folding. Only minimap clearance and boss-status collision handling extend the existing battle HUD layout. See [scope and validation](Rift_Result_Actions.en.md).
 
 ## Native rune board adapter
 

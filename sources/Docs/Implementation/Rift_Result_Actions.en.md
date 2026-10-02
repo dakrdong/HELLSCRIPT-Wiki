@@ -11,6 +11,21 @@ Rift result actions now connect reward claims, acquired equipment changes, graph
 - **Repeat settings** appear dim when repetition for this result is off. A press shows a two-second **Repeat hunting has not been configured** bubble. The configured result's information page has no header settings shortcut.
 - **Retry** keeps the result open and displays 5, 4, 3, 2, 1 with **Tap to cancel** on the button. Another press cancels entry. Manual retry takes over the automatic reservation for this result while preserving the hero's repeat configuration for the next battle. Nested windows and lost app focus pause the timer. Save failures or closing the result prevent entry.
 
+## Live battle DPS, 2026-10-02
+
+Rift battles use the existing training DPS HUD. Creation, layout and refresh in `GameUI.TrainingGround`, `TrainingChartView` and `TrainingDpsChart` are shared; no separate graph or damage collector is added.
+
+- The same rules show the three-second DPS window, average/peak/total damage, time series and cooldown-skill/ultimate cast icons. The source is the current Rift's `RunState.dps`. Pausing combat stops samples and combat time.
+- The comparison line and delta read the latest retained successful run with real samples for the same hero and tier. They exclude the current run, other characters/tiers, failures and legacy records without samples. No eligible record displays the existing no-previous-run message.
+- The arrow folds to one live-DPS line and expands again. Training and Rifts share the session-only fold choice, including HUD rebuilds. Wide layouts place it beside the minimap; compact strips sit below the header/map. Boss status stays clear of the panel.
+- Resumed legacy saves without samples show `—` and the unavailable-record message, without recalculating historical damage from current equipment. Town, results and mandatory tutorials retain no live panel. Training-specific pause/stop dialogs remain on the training path; Rifts retain their existing observation-menu pause.
+
+Validation passed: 66/66 related Edit Mode tests, shared UI ownership and 11/11 contract tests, macOS development build and native runtime acceptance. Korean/English × 440×956 portrait, 956×440 landscape, and 1600×900, 1600×1000, 1680×720 PC × three minimap modes cover 30 combinations. Checks include safe bounds, boss/map/log separation, pointer folding/unfolding, retention after HUD rebuild and recorded-data agreement. The original training graph and pause/resume also passed. Mobile safe areas and pointer input were simulated on macOS, not physical iOS/Android. The first runtime attempt stopped because the harness did not await asynchronous Rift admission; after correcting the wait, only the failed runtime check was repeated with the required rebuild. The full game test suite was not repeated. Four URP post-processing shader warnings are retained in the evidence; there were no managed exceptions.
+
+[Validation summary](RiftResultActionsEvidence/live-dps-validation.json) · [Edit Mode](RiftResultActionsEvidence/live-dps-editmode.xml) · [Shared UI](RiftResultActionsEvidence/live-dps-ui-contract.txt) · [Runtime record](RiftResultActionsEvidence/live-dps-runtime.txt)
+
+[PC Korean](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-ko.png) · [PC English](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-en.png) · [Portrait Korean](RiftResultActionsEvidence/live-dps-rift-dps-440x956-ko.png) · [Portrait English](RiftResultActionsEvidence/live-dps-rift-dps-440x956-en.png) · [Landscape Korean](RiftResultActionsEvidence/live-dps-rift-dps-956x440-ko.png) · [Landscape English](RiftResultActionsEvidence/live-dps-rift-dps-956x440-en.png) · [Folded](RiftResultActionsEvidence/live-dps-rift-dps-folded-1600x900-ko.png) · [Shared training panel](RiftResultActionsEvidence/live-dps-training-shared-dps-1600x900-ko.png)
+
 ## Shared UI adapters
 
 `RiftRewardRevealWindow` and `RiftCombatGraphWindow` started with `tools/new_content_ui.py` and use `ContentWindowView` for safe areas, input and pause leases. The reward reveal intentionally hides the standard chrome and shows only the black dim and centered receipt. It has no separate canvas, equipment calculation or save owner. Its committed `RewardSnapshot` is presentation-only; tapping only dismisses it.

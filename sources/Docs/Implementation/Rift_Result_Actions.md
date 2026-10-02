@@ -11,6 +11,21 @@
 - **반복 사냥 설정**: 현재 결과의 반복이 꺼져 있으면 흐리게 표시한다. 눌렀을 때 **반복 사냥 설정이 되어있지 않습니다** 말풍선을 2초 표시한다. 설정된 결과의 안내 페이지에서는 머리글의 설정 버튼을 숨긴다.
 - **다시 도전**: 결과 창을 유지한 채 버튼에 5·4·3·2·1과 **눌러서 취소**를 표시한다. 다시 누르면 진입을 취소한다. 수동 도전은 현재 결과의 자동 반복 예약을 취소하고, 영웅의 반복 설정은 새 전투에 보존한다. 중첩 창과 앱 포커스 해제 동안 수동 카운트를 멈추고, 저장 실패나 창 닫기 후 진입하지 않는다.
 
+## 전투 중 실시간 DPS, 2026-10-02
+
+균열 전투에서도 훈련장의 기존 DPS 패널을 사용한다. `GameUI.TrainingGround`의 같은 생성·배치·갱신 경로와 `TrainingChartView`/`TrainingDpsChart`를 공유하며, 별도 그래프나 피해 집계를 만들지 않는다.
+
+- 최근 3초 DPS, 평균·최고·총 피해, 시간별 그래프와 쿨타임 스킬·궁극기 사용 아이콘을 같은 규칙으로 표시한다. 데이터는 현재 균열의 `RunState.dps`다. 전투 일시정지 동안 시료와 시간은 진행하지 않는다.
+- 비교선과 증감은 같은 영웅·같은 단계의 가장 최근 성공 기록 중 실제 DPS 시료가 남은 기록을 읽는다. 현재 판·다른 캐릭터·다른 단계·실패·시료 없는 과거 기록은 섞지 않는다. 비교 기록이 없으면 기존 ‘비교할 직전 판 없음’을 표시한다.
+- 화살표로 실시간 DPS 한 줄만 남기거나 그래프를 펼친다. 접기 상태는 훈련과 균열이 공유하는 세션 상태이며 화면 재구성 후에도 유지한다. 넓은 화면에서는 미니맵 옆에, 좁은 띠 배치에서는 지도·머리글 아래에 둔다. 보스 상태는 패널과 겹치지 않는다.
+- 과거 중단 저장에 시료 자체가 없으면 DPS는 `—`, 안내는 ‘기록 없음’으로 표시한다. 현재 장비로 과거 피해를 재계산하지 않는다. 마을·결과·필수 튜토리얼에는 실시간 패널을 남기지 않는다. 훈련 전용 중단·일시정지 창은 기존 훈련 경로를 유지하며, 균열 일시정지는 기존 관찰 메뉴를 사용한다.
+
+검증: 관련 Edit Mode 66/66, 공통 UI 소유 검사 및 계약 테스트 11/11, macOS 개발 빌드와 실행 검증을 통과했다. 한국어·영어 × 세로 440×956·가로 956×440·PC 1600×900·1600×1000·1680×720 × 미니맵 3개 모드의 30가지 조합에서 안전 영역, 보스·지도·로그와의 분리, 포인터 접기·펼치기, 화면 재구성 후 상태 유지와 데이터 일치를 확인했다. 기존 훈련장의 그래프와 일시정지·재개도 확인했다. 모바일 안전 영역과 포인터 입력은 macOS에서 모사했으며 실제 iOS·Android 검증은 아니다. 첫 실행은 비동기 입장 완료를 기다리지 않은 검증 코드 때문에 중단되어, 대기를 수정한 뒤 중단된 실행 검증만 다시 수행했다. 전체 게임 테스트는 반복하지 않았다. URP 후처리 셰이더 경고 4건은 기록에 남겼으며 관리 코드 예외는 없었다.
+
+[검증 요약](RiftResultActionsEvidence/live-dps-validation.json) · [Edit Mode](RiftResultActionsEvidence/live-dps-editmode.xml) · [공통 UI](RiftResultActionsEvidence/live-dps-ui-contract.txt) · [실행 기록](RiftResultActionsEvidence/live-dps-runtime.txt)
+
+[PC 한국어](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-ko.png) · [PC 영어](RiftResultActionsEvidence/live-dps-rift-dps-1600x900-en.png) · [세로 한국어](RiftResultActionsEvidence/live-dps-rift-dps-440x956-ko.png) · [세로 영어](RiftResultActionsEvidence/live-dps-rift-dps-440x956-en.png) · [가로 한국어](RiftResultActionsEvidence/live-dps-rift-dps-956x440-ko.png) · [가로 영어](RiftResultActionsEvidence/live-dps-rift-dps-956x440-en.png) · [접은 상태](RiftResultActionsEvidence/live-dps-rift-dps-folded-1600x900-ko.png) · [공통 훈련장 패널](RiftResultActionsEvidence/live-dps-training-shared-dps-1600x900-ko.png)
+
 ## 공통 UI 어댑터
 
 `RiftRewardRevealWindow`와 `RiftCombatGraphWindow`는 `tools/new_content_ui.py`에서 시작했다. 두 창 모두 `ContentWindowView`와 창 관리자의 안전 영역·입력·일시정지 임대를 사용한다. 수령 연출은 사용자 요청에 따라 표준 창틀·제목줄·행동줄을 숨기고 검은 딤과 중앙 수령 내역만 표시하는 어댑터다. 별도 캔버스·장비 계산·저장 소유자를 만들지 않는다. 표시 데이터는 이미 저장된 `RewardSnapshot`이며 클릭은 닫기만 수행한다.
