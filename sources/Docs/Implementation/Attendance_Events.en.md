@@ -39,7 +39,7 @@ Chests survive period resets. Each stores its reward seed, the claiming characte
 
 Entering the game opens weekly attendance first, then monthly attendance as separate popups. Visiting the monthly page from the first popup prevents a duplicate automatic monthly popup during that visit. Each page has an independent **Do not show again today** preference, persisted on the device until the next KST midnight. Unchecking re-enables it for the next entry.
 
-The **Events** button near the upper left of town and rift fields always opens weekly attendance, even when automatic popups are hidden. The top tabs or horizontal swipes switch to monthly attendance. A red dot marks a tab and a green exclamation badge marks the Events icon while rewards remain to be claimed. Vertical drags scroll only the body. The tutorial's **Adventure journal** button sits under the Events button; when narrow battle layouts move the Events button down to clear the boss status, the guide button moves with it.
+The **Events** button near the upper left of town and rift fields always opens weekly attendance, even when automatic popups are hidden. The top tabs or horizontal swipes switch to monthly attendance. A green dot marks a tab and a green exclamation badge marks the Events icon while rewards remain to be claimed. Vertical drags scroll only the body. The tutorial's **Adventure journal** button sits under the Events button; when narrow battle layouts move the Events button down to clear the boss status, the guide button moves with it.
 
 Landscape and portrait use different arrangements. On wide screens such as 21:9 the popup stays at most 900 units wide.
 
@@ -48,18 +48,18 @@ Landscape and portrait use different arrangements. On wide screens such as 21:9 
 | Landscape (956×440, PC 16:9, 16:10 and 21:9) | Altar panel on the left | 3×2 grid on the right with a tall day-7 card | 7×4 calendar on the right |
 | Portrait (440×956) | Altar panel on top | 3×2 grid with a wide day-7 card | 7×4 calendar |
 
-At 100% text every day is visible without scrolling. Larger text enlarges the tiles and the body scrolls. The altar panel places the selected day's reward on the altar and shows its name, amount, state, check-in progress and reset date. Tapping a tile selects that day. The window opens on the earliest claimable day, or on the next day when nothing is claimable.
+At the default text size every day is visible without scrolling. The player text-size preference was removed on 2026-09-30. The altar panel places the selected day's reward on the altar and shows its name, amount, state, check-in progress and reset date. Tapping a tile selects that day. The window opens on the earliest claimable day, or on the next day when nothing is claimable.
 
-| State | Tile | Altar panel text | Claim button |
+| State | Tile | Altar panel text | Per-day button |
 | --- | --- | --- | --- |
-| Claimable | Green light behind the item, persistent green border and dot | Ready to claim | **Claim Reward** |
-| Claimed | Darkened, crimson wax seal | Claimed | Claimed (disabled) |
-| Later day | Plain tile | Check-ins needed: N | Not Yet Available (disabled) |
-| Out of reach this period | Plain tile | Out of reach before the reset | Not Yet Available (disabled) |
+| Claimable | Green light behind the item, persistent green border and dot | Ready to claim | **Collect** |
+| Claimed | Darkened, crimson wax seal | Claimed | None |
+| Later day | Plain tile | Check-ins needed: N | None |
+| Out of reach this period | Plain tile | Out of reach before the reset | None |
 
 "Out of reach" means the day cannot be earned even by checking in on every remaining day before the reset. For example, with three check-ins on a Sunday, days 4 to 7 are out of reach. Legendary-chest days (7, 14, 21 and 28) have a gold top rule and a warmer background. Tiles show compact amounts (10,000 → 10K); the altar panel shows the exact amount. Stored legendary chests appear under the reward grid and open there.
 
-The fixed action area holds the claim button and **Do not show again today**, on one row in landscape and two rows in portrait. The left/right arrow buttons were removed because tabs and swipes cover the same paging.
+The fixed action area holds **Claim all rewards** for the current track and **Do not show again today**, on one row in landscape and two rows in portrait. The left/right arrow buttons were removed because tabs and swipes cover the same paging.
 
 The shared `ContentWindowView` provides safe area, title, navigation, scrolling body and fixed actions. Reward tiles describe attendance days, not owned equipment. Existing theme, fonts and coin/gem art are reused; `AttendanceArt` loads the gold, core, legendary-chest, altar and seal images. Compact amounts reuse the jeweler's `JewelerSession.Compact`, the pulse reuses `ForgeWorkingPulse` and the round glow reuses `TownCircleGraphic`. `ContentWindowHost` pauses combat and restores its previous state when closed.
 
@@ -114,13 +114,31 @@ Eligible, unclaimed days on both attendance tracks show **Collect** inside their
 
 Individual collection uses `GameStore.ClaimAttendance`; bulk collection uses `GameStore.ClaimAllAttendance`. Both share date, period and entitlement validation and the existing atomic save transaction. A bulk failure, including full gem storage or a failed disk write, retains the entire group's resources and claim eligibility. Random grants and chest IDs use the same individual day keys; bulk collection neither rerolls nor changes rewards. Later check-ins can be collected again in the same period. The existing attendance tutorial transaction prefix is retained. No save-schema, new art or automatic reward grants are introduced.
 
+## Collection button verification — 2026-10-03
+
+Implementation used an independent working folder while preserving the original uncommitted work. The full Edit Mode suite ran once after main integration: **4,922 passed and 127 failed out of 5,049**. All 127 failures match the previous full report; no new failure names appeared. All 22 attendance transaction tests passed. Later shared-button and HUD changes from main were checked only within their direct impact: **123 attendance, button, shared UI, localization and Editor null tests passed**. The shared UI contract and its 11 checker tests also passed. The full suite was not repeated and results from different runs are not added together.
+
+An isolated macOS Development Player checked the default text size at portrait 440×956, landscape 956×440, PC 1440×810, 1440×900 and 1680×720, and small landscape 640×360, in Korean and English with plain and inset safe areas. The executed matrix covered 48 mixed weekly/monthly pages and 24 fully earned monthly pages, checking Collect bounds, raycast targets and label widths. Claimed and future days have no Collect button, and the bulk button is disabled when no rewards remain. After the latest shared-button integration, 12 portrait/landscape/640×360 safe-area cases and individual/bulk collection on both tracks passed with 18 raycast-verified clicks. The driver does not automatically scroll day tiles or Collect buttons into view.
+
+Individual claims, bulk claims that skip collected days, failed-save retry, midnight refresh, tabs, popup suppression and a fresh-process restart were verified. The isolated account retained all 28 monthly claims, accumulated 990 abyss coins, 110,000 gold, 110 gems and 55 cores, five unopened chests and the opened weekly legendary item. A failed bulk save preserved 100 coins and the previously claimed days 1 and 28; retry granted only the remainder. Edit Mode transaction tests covered gem-capacity rollback, newly earned days in the same period, identical random results/chest IDs, stale periods and backward dates.
+
+This is not reported as one uninterrupted successful smoke. After removing artificial day-tile scrolling that caused a culled raycast failure, only the failed collection phase resumed. Once collection finished, the existing movable activity HUD covered the field Events shortcut. Folding and dragging its real header enabled attendance access and battle pause restoration. The existing checkpoint resume path handled the suspended field left by failure. The first integrated fixture had only one weekly reward just after Monday reset, so disabling Claim all after collecting it was correct; that scope was retried after real subsequent check-ins. Default HUD placement was not changed. All failure and retry records are preserved. Physical mobile testing and a new WebGL player deployment were not performed.
+
+[Validation scope and results](AttendanceCollectEvidence20261003/validation.json) · [Full result and baseline comparison](AttendanceCollectEvidence20261003/baseline-comparison.json) · [Full Edit Mode report](../../Artifacts/Validation/attendance-collect-20261003-final-editmode.xml) · [Integrated focused report](../../Artifacts/Validation/attendance-collect-20261003-integrated-editmode.xml) · [Shared UI checks](AttendanceCollectEvidence20261003/final-ui-contract.txt) · [Final source hashes](AttendanceCollectEvidence20261003/final-source-hashes.json)
+
+[Initial failure](AttendanceCollectEvidence20261003/native-initial-failed.log) · [Continued collection and HUD overlap](AttendanceCollectEvidence20261003/native-collection.log) · [Restart result](AttendanceCollectEvidence20261003/resume.txt) · [Saved values](AttendanceCollectEvidence20261003/save-readback.json) · [Integrated UI input result](AttendanceCollectEvidence20261003/integrated-ui.txt) · [Integrated field access](AttendanceCollectEvidence20261003/integrated-field-field.txt) · [Existing HUD repositioning](AttendanceCollectEvidence20261003/field-overlap.txt) · [Final build log](AttendanceCollectEvidence20261003/native-build.log) · [85 captures](AttendanceCollectEvidence20261003/screenshots.zip)
+
+![Weekly portrait Collect buttons](AttendanceCollectEvidence20261003/pending-weekly-440x956-ko.png)
+
+![Monthly landscape Collect and Claim all rewards](AttendanceCollectEvidence20261003/pending-monthly-28-956x440-ko.png)
+
 ## Persistence and verification
 
 The original functional verification below refers to commit `9f98daa6`, before the artwork replacement. Artwork acceptance is recorded separately in the final section.
 
 `AccountSave.attendance` owns progress, claims and unopened chests. GameStore transactions atomically commit rewards and entitlement, then notify views. Gem capacity or disk failures cannot grant partial rewards. Account/period/day seeds keep random results stable on retry. Popup preferences use a separate device file.
 
-Save schema 12 migrates old saves to empty attendance. Future versions and invalid state preserve the original and stop loading. Stale-period claims and dates before the last recorded attendance are rejected. This remains the existing local development save/device-clock adapter; authoritative server time and account authentication are separate product boundaries.
+Attendance was introduced at save schema 12, migrating older saves to empty attendance. This collection UI does not change the current save schema. Future versions and invalid state preserve the original and stop loading. Stale-period claims and dates before the last recorded attendance are rejected. This remains the existing local development save/device-clock adapter; authoritative server time and account authentication are separate product boundaries.
 
 The [official Black Desert Mobile weekly login event](https://www.world.blackdesertm.com/Ocean/News/Detail?boardNo=4064) informed event access, daily rewards, manual claiming and midnight refresh. HELLSCRIPT uses its own shared theme and account-wide weekly/monthly rules.
 

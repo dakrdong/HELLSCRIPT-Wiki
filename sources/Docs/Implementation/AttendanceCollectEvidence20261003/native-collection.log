@@ -1,0 +1,195 @@
+Mono path[0] = '/Users/t8g-2410-pn-005/.codex/worktrees/attendance-collect/HELLSCRIPT/Builds/AttendanceCollect20261003/HELLSCRIPT.app/Contents/Resources/Data/Managed'
+Mono config path = '/Users/t8g-2410-pn-005/.codex/worktrees/attendance-collect/HELLSCRIPT/Builds/AttendanceCollect20261003/HELLSCRIPT.app/Contents/MonoBleedingEdge/etc'
+CodeReloadManager initialized
+Found 1 interfaces on host : 0) 192.168.0.14
+Player connection [8319295872]  Target information:
+
+Player connection [8319295872]  * "[IP] 192.168.0.14 [Port] 55001 [Flags] 2 [Guid] 3407346436 [EditorId] 1871118267 [Version] 1048832 [Id] OSXPlayer(1,T8G-2410-PN-005ui-MacBookPro.local) [Debug] 0 [PackageName] OSXPlayer [ProjectName] HELLSCRIPT" 
+
+Player connection [8319295872] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+ preferred device: Apple M3 Pro (high power)
+Metal devices available: 1
+0: Apple M3 Pro (high power)
+Using device Apple M3 Pro (high power)
+Initialize engine version: 6000.6.0f1 (f7f8ed4d1e24)
+[EntityIdStore] init: VM path (explicit commit), pageSize=16384, blockCount=262144, entitiesPerBlock=1024, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path /Users/t8g-2410-pn-005/.codex/worktrees/attendance-collect/HELLSCRIPT/Builds/AttendanceCollect20261003/HELLSCRIPT.app/Contents/Resources/Data/UnitySubsystems
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Initializing Metal device caps: Apple M3 Pro
+Mac GPU Family: 2
+Apple GPU Family: 9
+MSL Version: 3.0
+Has Float MSAA: 1
+Has Float Filtering: 1
+ReadWrite Texture Tier: 2
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+- Finished resetting the current domain, in  0.007 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x810
+UnloadTime: 0.908000 ms
+Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'GaussianDepthOfField'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.DepthOfFieldGaussianPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/DepthOfFieldGaussianPostProcessPass.cs:24)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:56)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Shader 'Hidden/Universal Render Pipeline/GaussianDepthOfField' is not supported or has been stripped from the build (in 'GaussianDepthOfField'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.DepthOfFieldGaussianPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/DepthOfFieldGaussianPostProcessPass.cs:25)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:56)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Shader 'Hidden/Universal Render Pipeline/BokehDepthOfField' is not supported or has been stripped from the build (in 'BokehDepthOfField'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.DepthOfFieldBokehPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/DepthOfFieldBokehProcessPass.cs:26)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:57)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Shader 'Hidden/Universal Render Pipeline/PaniniProjection' is not supported or has been stripped from the build (in 'PaniniProjection'). PostProcessing render passes will not execute.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Rendering.Universal.PostProcessUtils:LoadShader (UnityEngine.Shader,string,UnityEngine.LogType) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs:28)
+UnityEngine.Rendering.Universal.PaniniProjectionPostProcessPass:.ctor (UnityEngine.Shader) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Passes/PostProcess/PaniniProjectionPostProcessPass.cs:19)
+UnityEngine.Rendering.Universal.PostProcess:.ctor (UnityEngine.Rendering.Universal.PostProcessData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcess.cs:64)
+UnityEngine.Rendering.Universal.UniversalRenderer:.ctor (UnityEngine.Rendering.Universal.UniversalRendererData) (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRenderer.cs:427)
+UnityEngine.Rendering.Universal.UniversalRendererData:Create () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/UniversalRendererData.cs:166)
+UnityEngine.Rendering.Universal.ScriptableRendererData:InternalCreateRenderer () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/ScriptableRendererData.cs:67)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreateRenderers () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:862)
+UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset:CreatePipeline () (at ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/Data/UniversalRenderPipelineAsset.cs:809)
+UnityEngine.Rendering.RenderPipelineAsset:InternalCreatePipeline () (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineAsset.cs:15)
+UnityEngine.Rendering.RenderPipelineManager:TryPrepareRenderPipeline (UnityEngine.Rendering.RenderPipelineAsset) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:172)
+UnityEngine.Rendering.RenderPipelineManager:DoRenderLoop_Internal (UnityEngine.Rendering.RenderPipelineAsset,intptr,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/RenderPipeline/RenderPipelineManager.cs:146)
+
+(Filename: ./Library/PackageCache/com.unity.render-pipelines.universal@8457e85b8184/Runtime/PostProcessUtils.cs Line: 28)
+
+Metal RecreateSurface[0x10fb4a490]: surface size 440x956
+Metal RecreateSurface[0x10fb4a490]: surface size 956x440
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x810
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x900
+Metal RecreateSurface[0x10fb4a490]: surface size 1680x720
+Metal RecreateSurface[0x10fb4a490]: surface size 640x360
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x810
+Metal RecreateSurface[0x10fb4a490]: surface size 440x956
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x810
+Metal RecreateSurface[0x10fb4a490]: surface size 440x956
+Metal RecreateSurface[0x10fb4a490]: surface size 956x440
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x810
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x900
+Metal RecreateSurface[0x10fb4a490]: surface size 1680x720
+Metal RecreateSurface[0x10fb4a490]: surface size 640x360
+Metal RecreateSurface[0x10fb4a490]: surface size 1440x810
+저장하지 못했습니다: Access to the path '/Users/t8g-2410-pn-005/.codex/worktrees/attendance-collect/HELLSCRIPT/Builds/AttendanceCollect20261003/save/hellscript-local-v1.json.tmp' is denied.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace () (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:23)
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[]) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/DebugLogHandler.cs:9)
+UnityEngine.Logger:Log (UnityEngine.LogType,object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Logging/Logger.cs:60)
+UnityEngine.Debug:LogError (object) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs:158)
+Hellscript.GameStore:Write (Hellscript.AccountSave) (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Core/GameStore.cs:398)
+Hellscript.GameStore:Transact (string,string,System.Func`2<Hellscript.AccountSave, bool>) (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Core/GameStore.cs:323)
+Hellscript.GameStore:ClaimAttendanceRewards (Hellscript.AttendanceKind,long,int) (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Core/GameStore.Attendance.cs:35)
+Hellscript.GameStore:ClaimAllAttendance (Hellscript.AttendanceKind,long) (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Core/GameStore.Attendance.cs:24)
+Hellscript.AttendanceSession/<>c__DisplayClass32_0:<DrawActions>b__2 () (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs:232)
+Hellscript.AttendanceSession:Claim (System.Func`1<bool>) (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs:237)
+Hellscript.AttendanceSession/<>c__DisplayClass32_0:<DrawActions>b__1 () (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs:232)
+Hellscript.ContentWindowView/<>c__DisplayClass44_0:<Button>b__0 () (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/ContentWindowView.cs:67)
+UnityEngine.Events.InvokableCall:Invoke () (at /Users/bokken/build/output/unity/unity/Runtime/Export/UnityEvent/UnityEvent.cs:181)
+UnityEngine.Events.UnityEvent:Invoke () (at /Users/bokken/build/output/unity/unity/artifacts/generated/UnityEvent/UnityEvent_0.cs:59)
+UnityEngine.UI.Button:Press () (at ./Library/PackageCache/com.unity.ugui@23caec89ae27/Runtime/UGUI/UI/Core/Button.cs:71)
+UnityEngine.UI.Button:OnPointerClick (UnityEngine.EventSystems.PointerEventData) (at ./Library/PackageCache/com.unity.ugui@23caec89ae27/Runtime/UGUI/UI/Core/Button.cs:115)
+Hellscript.UiButton:OnPointerClick (UnityEngine.EventSystems.PointerEventData) (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/UiButton.cs:83)
+UnityEngine.EventSystems.ExecuteEvents:Execute (UnityEngine.EventSystems.IPointerClickHandler,UnityEngine.EventSystems.BaseEventData) (at ./Library/PackageCache/com.unity.ugui@23caec89ae27/Runtime/UGUI/EventSystem/ExecuteEvents.cs:57)
+UnityEngine.EventSystems.ExecuteEvents:Execute<UnityEngine.EventSystems.IPointerClickHandler> (UnityEngine.GameObject,UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents/EventFunction`1<UnityEngine.EventSystems.IPointerClickHandler>) (at ./Library/PackageCache/com.unity.ugui@23caec89ae27/Runtime/UGUI/EventSystem/ExecuteEvents.cs:272)
+Hellscript.RuntimeAttendanceSmoke/<Click>d__19:MoveNext () (at /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAttendanceSmoke.cs:36)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+(Filename: /Users/bokken/build/output/unity/unity/Runtime/Export/Debug/Debug.bindings.cs Line: 158)
+
+InvalidOperationException: Obscured field-events: rift-activity-fold,Emblem,field-events
+  at Hellscript.RuntimeAttendanceSmoke+<Click>d__19.MoveNext () [0x00340] in /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAttendanceSmoke.cs:37 
+  at UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) [0x0001d] in /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17 
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/StackTrace.cs:50)
+
+(Filename: /private/tmp/hellscript-attendance-player-20261003/Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAttendanceSmoke.cs Line: 37)
+
+Thread 0x1717b3000 may have been prematurely finalized
+Thread 0x17164f000 may have been prematurely finalized
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+Thread 0x17032b000 may have been prematurely finalized
+Thread 0x170443000 may have been prematurely finalized
+Thread 0x170817000 may have been prematurely finalized
+Thread 0x170673000 may have been prematurely finalized
+Thread 0x1708a3000 may have been prematurely finalized
+Thread 0x1706ff000 may have been prematurely finalized
+Thread 0x17078b000 may have been prematurely finalized
+Thread 0x1704cf000 may have been prematurely finalized
+Thread 0x17055b000 may have been prematurely finalized
+Thread 0x1705e7000 may have been prematurely finalized
+Thread 0x1703b7000 may have been prematurely finalized
+CodeReloadManager destroyed
+PlayerConnection::CleanupInternal: There are remaining Allocations on the JobTempAlloc. This is a leak, and will impact performance
+To Debug, run app with -diag-job-temp-memory-leak-validation cmd line argument. This will output the callstacks of the leaked allocations.
+Internal: There are remaining Allocations on the JobTempAlloc. This is a leak, and will impact performance
+To Debug, run app with -diag-job-temp-memory-leak-validation cmd line argument. This will output the callstacks of the leaked allocations.
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1790982332913,"processId":73841,"allocatedMemory":2704463,"memoryLabels":[{"Default":56079},{"Permanent":1472},{"NewDelete":1315955},{"Thread":8240},{"Manager":539702},{"VertexData":8},{"Geometry":408},{"Texture":16},{"Shader":78020},{"Material":24},{"GfxDevice":38632},{"GfxThread":320},{"Animation":880},{"FreeType":8},{"FontEngine":736},{"Physics":2000},{"Physics2D":16},{"Serialization":32776},{"Input":43216},{"JobScheduler":448},{"TextLib":280},{"Mono":56},{"ScriptingNativeRuntime":128},{"BaseObject":59080},{"Resource":520},{"Renderer":2448},{"Transform":6485},{"File":4600},{"WebCam":32},{"Culling":32},{"Terrain":11298},{"Wind":24},{"String":4257},{"Utility":316568},{"PoolAlloc":1632},{"AI":40},{"TypeTree":5512},{"ScriptManager":5688},{"CodeReload":440},{"RuntimeInitializeOnLoadManager":64},{"Sprites":78},{"SpriteAtlas":120},{"GI":7200},{"Director":8248},{"CloudService":288},{"WebRequest":9725},{"VR":49402},{"SceneManager":408},{"Video":2080},{"LazyScriptCache":32},{"NativeArray":648},{"Camera":1169},{"Secure":10185},{"CrashReporter":616},{"SerializationCache":3608},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57496},{"Baselib":16},{"Analytics":80},{"Hierarchy":1452},{"UIElements":40},{"CoreStats":14536},{"Identifiers":7152},{"Gui":40},{"CoreBusinessMetrics":128},{"AssetReference":32}]}
+Internal: There are remaining Allocations on the JobTempAlloc. This is a leak, and will impact performance
+To Debug, run app with -diag-job-temp-memory-leak-validation cmd line argument. This will output the callstacks of the leaked allocations.
