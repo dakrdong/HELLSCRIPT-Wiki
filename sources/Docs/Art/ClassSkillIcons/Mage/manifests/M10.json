@@ -2,71 +2,30 @@
   "id": "M10",
   "heroClass": "Mage",
   "name": {
-    "ko": "서리 구체",
-    "en": "Frost Globe"
+    "ko": "귀환 서리",
+    "en": "Returning Frost"
   },
   "kind": "active",
   "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M10.png",
   "effectSummary": {
-    "ko": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
-    "en": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage."
+    "ko": "서리 구체가 최대 8m를 초속 5m로 날아가 지정 지점이나 첫 벽에서 시전 위치로 돌아옵니다. 왕복 각각 최대 5명에게 한 번씩 D90% 냉기 피해와 3초간 35% 둔화를 줍니다. 돌아올 때 이미 둔화된 적은 0.75초 빙결됩니다. 구체 도착 순간 시전 위치 0.7m 안에 있으면 마나 12를 한 번 회수합니다. 벽이 귀환을 막으면 회수에 실패합니다.",
+    "en": "Send a frost globe up to 8m at 5m/s, then return from its aim point or first wall to the cast location. Each leg hits up to 5 enemies once for D90% cold damage and a 35% slow for 3s. Returning hits freeze already slowed enemies for 0.75s. Restore 12 mana once if within 0.7m of the cast location when it arrives. A blocked return misses recovery."
   },
-  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, M10 Frost Globe / 서리 구체, active.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A heavy traveling frost globe formed by a dark spherical ice shell cracked open at one side, with a bright frozen core and three large crescent-like crystal plates separating at detonation. A short thick curling frost wake indicates travel ending in an icy explosion. No orbiting satellites.\nEffect context: Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage.\nRelevant equipment linkage: DES_LM42, LM14. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for M10 (Mage). Main subject: one luminous blue-white frost sphere flying on a bold curved returning ice trail shaped like a boomerang toward a small cyan rune anchor, unmistakable return path with one outward and one inward arc. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
   "status": "generated",
   "approval": "candidate",
   "model": "unknown",
   "modelEvidence": null,
   "provenance": {
     "surface": "built-in image_gen",
-    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-82f5-7482-8998-cb6c69a160fb/exec-3d7eaa2b-5b57-4677-b37a-3e0aee480992.png",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-21389119-b702-40c5-8bdf-a12687156df9.png",
     "nativeTransparencyRequired": true
   },
   "qa": {
     "alpha": "pass",
-    "readability64": {
-      "status": "pass",
-      "ko": "갈라진 얼음 껍질과 둥근 핵이 폭발하는 서리 구체를 드러냅니다.",
-      "en": "A broken spherical ice shell and bright core identify the detonating frost globe."
-    },
-    "edges": {
-      "status": "pass",
-      "ko": "원본과 밝은·어두운 바탕의 256px 검수에서 불투명 매트, 배경 무늬, 잘린 주형태를 발견하지 못했습니다. 가장자리의 매우 낮은 알파 픽셀은 자동 경고로 남깁니다.",
-      "en": "Native output and 256px light/dark inspection showed no opaque matte, backdrop pattern or clipped main form. Very low-alpha border pixels remain recorded warnings."
-    },
-    "distinctness": {
-      "status": "pass",
-      "comparedWith": [
-        "M01",
-        "M02",
-        "M03",
-        "M04",
-        "M05",
-        "M06",
-        "M07",
-        "M08",
-        "M09",
-        "M10",
-        "M11",
-        "M12",
-        "M13",
-        "M14",
-        "M15",
-        "M16",
-        "M17",
-        "M18",
-        "MP01",
-        "MP02",
-        "MP03",
-        "MP04",
-        "MP05",
-        "MP06",
-        "MP07",
-        "MP08",
-        "MP09"
-      ],
-      "ko": "64px 비교판에서 큰 형태와 주효과로 다른 담당 항목과 구별됩니다.",
-      "en": "The major silhouette and effect remain distinct among this production group in the actual64px contact sheets."
-    },
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
     "nativeAlpha": true,
     "dimensions": "pass",
     "rawMetrics": {
@@ -79,100 +38,38 @@
         0,
         255
       ],
-      "transparentPixels": 913024,
+      "transparentPixels": 1026374,
       "alphaBBox": [
         0,
-        25,
+        19,
         1240,
         1254
       ],
       "coreBBox": [
-        84,
-        141,
-        1197,
-        1122
+        80,
+        91,
+        1201,
+        1136
       ]
     },
-    "acceptedMasterSpecification": "1024 or1254 square native RGBA, handoff revision2",
-    "measurements": {
-      "format": "PNG",
-      "mode": "RGBA",
-      "width": 1254,
-      "height": 1254,
-      "pngBitDepth": 8,
-      "pngColorType": 6,
-      "transparentPixels": 913024,
-      "nontransparentPixels": 659492,
-      "opaquePixels": 422,
-      "semitransparentPixels": 659070,
-      "transparentFraction": 0.580613,
-      "corePixels": 557115,
-      "coreFraction": 0.354283,
-      "alphaExtrema": [
-        0,
-        255
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
       ],
-      "outerBorderMaxAlpha": 1,
-      "bboxAlphaAbove0": [
-        0,
-        25,
-        1240,
-        1254
-      ],
-      "bboxAlphaAbove8": [
-        82,
-        140,
-        1200,
-        1124
-      ],
-      "bboxAlphaAbove127": [
-        84,
-        141,
-        1197,
-        1122
-      ],
-      "central76BoundsExclusive": [
-        151,
-        151,
-        1103,
-        1103
-      ],
-      "faintInsideCentral76": false,
-      "coreInsideCentral76": false,
-      "at64px": {
-        "bboxAlphaAbove127": [
-          4,
-          7,
-          61,
-          57
-        ],
-        "corePixels": 1451
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+        "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
       }
-    },
-    "reviewEvidence": {
-      "contactSheets64": [
-        "qa/Mage-64px-dark.png",
-        "qa/Mage-64px-light.png"
-      ],
-      "edgeSheets256": [
-        "qa/Mage-edges-1-dark.jpg",
-        "qa/Mage-edges-1-light.jpg",
-        "qa/Mage-edges-2-dark.jpg",
-        "qa/Mage-edges-2-light.jpg",
-        "qa/Mage-edges-3-dark.jpg",
-        "qa/Mage-edges-3-light.jpg"
-      ],
-      "reviewedAtUtc": "2026-09-22T07:42:49.490161+00:00"
-    },
-    "central76": "warning_guideline_exceeded_no_visible_clipping",
-    "gameRuntime": "not_tested_art_only_handoff",
-    "physicalDevice": "not_tested"
+    }
   },
   "reuse": false,
   "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
   "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/M10.png",
-  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-82f5-7482-8998-cb6c69a160fb/exec-3d7eaa2b-5b57-4677-b37a-3e0aee480992.png",
-  "sourceSha256": "b392fa2ac4450895f7f0919321a4e111fa97b87f58d9482107510bc4be07217e",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-21389119-b702-40c5-8bdf-a12687156df9.png",
+  "sourceSha256": "3c6d4cea25cbbdd98bec72115864f0dae0a862b496ae224d159201282a427613",
   "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M10.png",
   "attempts": [
     {
@@ -185,7 +82,20 @@
         "output_hint"
       ],
       "model": "unknown"
+    },
+    {
+      "timestamp": "2026-10-03T20:20:52.264953+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-21389119-b702-40c5-8bdf-a12687156df9.png",
+      "sourceSha256": "3c6d4cea25cbbdd98bec72115864f0dae0a862b496ae224d159201282a427613",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown",
+      "purpose": "skill identity revision"
     }
   ],
-  "unchangedNativeBytes": true
+  "unchangedNativeBytes": true,
+  "visualConcept": "one luminous blue-white frost sphere flying on a bold curved returning ice trail shaped like a boomerang toward a small cyan rune anchor, unmistakable return path with one outward and one inward arc"
 }

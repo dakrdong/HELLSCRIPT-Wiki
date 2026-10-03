@@ -302,13 +302,15 @@ namespace Hellscript
                     // or outside the actual initial range, and do not transfer it to a new target.
                     if(!ChainFirstTargetValid(origin,target))
                     {ActionEvent(action,"ACTION_MISS","첫 대상이 사라졌거나 사거리·시야를 벗어나 연쇄 번개가 빗나갔습니다.");break;}
-                    var visits=new Dictionary<int,int>();var current=target;Vector2 last=origin;
+                    var visits=new Dictionary<int,int>();var current=target;Vector2 last=origin;bool usedConduit=false;
                     int hops=ChainHitLimit(action.chainBonus);
                     for(int i=0;i<hops&&current!=null;i++)
                     {
                         int previous=current.id;visits[previous]=visits.TryGetValue(previous,out int count)?count+1:1;
                         Hit(current,1.1f*Mathf.Pow(.8f,i)*(visits[previous]>1?AspectGrowth.SnapshotValue(action.snapshot,"LM04",.5f):1),3,true,0,action.snapshot,definition:"M03",root:action.id);Visual?.Invoke(last,current.position,14,1);last=current.position;
-                        current=NextChainTarget(last,previous,visits,State.enemies.Where(Perceived));
+                        if(i+1>=hops)break;
+                        current=ChainRouteTarget(last,previous,visits,State.enemies.Where(Perceived),ref usedConduit,out bool relayed);
+                        if(relayed){if(++i+1>=hops)break;ConduitRelay(action.id);Visual?.Invoke(last,Fx("M12").position,14,1);last=Fx("M12").position;}
                     }
                     break;
             }
@@ -325,6 +327,7 @@ namespace Hellscript
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
             if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
+            if(MoveReturningGlobe(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="FROST_PICKUP";return;}
             if(MoveClassSkillIntent(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="SKILL_POSITIONING";return;}
             if(MoveEdictGather(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="GATHER";return;}
             if(MoveEdictRanger(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="RANGER_POLICY";return;}

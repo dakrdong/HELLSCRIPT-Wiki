@@ -1,6 +1,6 @@
 # HELLSCRIPT Warrior — 37 skills
 
-Updated: 2026-09-29
+Updated: 2026-10-04
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
@@ -24,7 +24,7 @@ Brand, pull, then hit with the wave; Guardian's Vow provides a short defensive w
 
 ### Ironwall Oath · `REF_SW02`
 
-Normal actives: Iron Wall (`W05`), Resolute Advance (`W11`), Iron Stance (`W12`), Crushing Blow (`W03`).
+Normal actives: Iron Wall (`W05`), Front Break (`W11`), Iron Stance (`W12`), Crushing Blow (`W03`).
 
 Passives: Hardened Will (`WP05`), Counter Rhythm (`WP09`), Stone Landing (`WP11`). Selected ultimate: Titan's Judgment (`W18`).
 
@@ -34,13 +34,13 @@ Advance behind Iron Wall, gain resource from successful blocks and spend it on C
 
 ### Vanguard March · `REF_SW03`
 
-Normal actives: Leap Slam (`W02`), Whirlwind (`W01`), Battlefield Ring (`W13`), Breath Before Battle (`W15`).
+Normal actives: Leap Slam (`W02`), Whirlwind (`W01`), Battlefield Ring (`W13`), Battle Loan (`W15`).
 
 Passives: Endless Spin (`WP02`), Landing Stance (`WP03`), Ragged Breathing (`WP13`). Selected ultimate: War of the Ancestors (`W17`).
 
 Compatible legendaries: Ancestral King's Crown (`DES_LW46`), Fang of the Maelstrom (`LW01`).
 
-Group enemies, leap and channel Whirlwind; Breath Before Battle refuels the next pack.
+Group enemies, leap and channel Whirlwind. Battle Loan advances resource; close hits and blocks repay it. Natural regeneration repays outstanding debt first.
 
 ### Trifold Armament · `REF_SW04`
 
@@ -84,7 +84,7 @@ After Shout, the first Leap or Crush hit releases the set echo; the ultimate anc
 
 ### Colossal Fury · `REF_SW08`
 
-Normal actives: Crushing Blow (`W03`), Ground Slam (`W04`), Battle Shout (`W06`), Breath Before Battle (`W15`).
+Normal actives: Crushing Blow (`W03`), Ground Slam (`W04`), Battle Shout (`W06`), Battle Loan (`W15`).
 
 Passives: Battle Reserve (`WP17`), Lingering Shout (`WP10`), Titan's Bulwark (`WP19`). Selected ultimate: Titan's Judgment (`W18`).
 
@@ -238,13 +238,13 @@ Deal D80% physical damage to up to 5 enemies within 4m and cash out 100% of only
 
 **Mechanic reference:** D3 Bloodthirst / Rend.
 
-### 11. Resolute Advance · `W11`
+### 11. Front Break · `W11`
 
 New proposal · Lv.30 · Cooldown 9s · Resource 0
 
-Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit.
+Advance up to 4m, dealing D90% physical damage to up to 5 enemies in the path and pushing them up to 1.8m sideways to open a lane. Bosses gain stagger instead. Gain 15% damage reduction for 3s and restore 15 resource once on a hit. Walls and bodies block displacement.
 
-**Suggested automatic use:** Approach an enemy only when the destination is no more dangerous than the current position.
+**Suggested automatic use:** Break through two aligned enemies or a target beyond 3m when landing is safe.
 
 **Equipment links:** Moving Rampart (`DES_LW43`).
 
@@ -294,13 +294,13 @@ Send a 7m-long, 1m-wide wave through up to 5 enemies for D150% physical damage a
 
 **Mechanic reference:** D3 Seismic Slam.
 
-### 15. Breath Before Battle · `W15`
+### 15. Battle Loan · `W15`
 
 New proposal · Lv.38 · Cooldown 18s · Resource 0
 
-Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout.
+Borrow 60 resource immediately. Only the amount actually credited becomes debt; subsequent natural regeneration pays debt first. A direct hit within 3m or a successful block repays 4, once per attack cast or once per second for blocks. Cannot borrow again until paid; saving, restoring and unequipping retain debt.
 
-**Suggested automatic use:** Use at 60% resource or less while preparing the next attack.
+**Suggested automatic use:** Borrow at 60% resource or less with no outstanding debt, then repay with close hits.
 
 **Equipment links:** Unspent Resolve (`DES_LW45`), Rising Ire (`LW06`).
 
@@ -436,11 +436,11 @@ After casting Battle Shout, heal 1% maximum HP each second for 3s. Refresh witho
 
 New proposal · Lv.26
 
-After completing Leap or Resolute Advance, gain a 5% maximum-HP barrier for 3s. Both skills share a 3s interval.
+After completing Leap Slam or Front Break, gain a 5% maximum-HP barrier for 3s. Both skills share a 3s interval.
 
 **Equipment links:** Stride of the Falling Star (`LW02`), Final Order (`LW04`), Scorched Landing (`LW11`), Returning Leap (`LW12`), Execution Foretold (`LW13`) and 5 more.
 
-**Companion skills:** Leap Slam (`W02`), Resolute Advance (`W11`).
+**Companion skills:** Leap Slam (`W02`), Front Break (`W11`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
@@ -464,7 +464,7 @@ Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply 
 
 **Equipment links:** Fang of the Maelstrom (`LW01`), Turning Rack (`LW05`), Rising Ire (`LW06`), Flesh-Cutting Wind (`LW07`), Red Rampart (`LW08`) and 4 more.
 
-**Companion skills:** Whirlwind (`W01`), Breath Before Battle (`W15`).
+**Companion skills:** Whirlwind (`W01`), Battle Loan (`W15`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
@@ -512,7 +512,7 @@ Crush and Slam gain +10% additive direct damage when pre-cast resource is at lea
 
 **Equipment links:** Solitary Execution (`LW03`), Execution Foretold (`LW13`), Crushed Crown (`LW17`), Skull Echo (`LW18`), Deep-Carved Scar (`LW19`) and 11 more.
 
-**Companion skills:** Crushing Blow (`W03`), Ground Slam (`W04`), Breath Before Battle (`W15`).
+**Companion skills:** Crushing Blow (`W03`), Ground Slam (`W04`), Battle Loan (`W15`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 

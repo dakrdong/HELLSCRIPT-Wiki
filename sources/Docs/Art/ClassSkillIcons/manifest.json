@@ -3,7 +3,8 @@
   "collection": "HELLSCRIPT Class Skill Icons",
   "specRevision": "handoff/Class_Skill_Icons_Spec_Revision_2.md",
   "snapshot": "handoff/snapshot.json",
-  "verifiedAtUtc": "2026-09-23T03:16:26.356952+00:00",
+  "verifiedAtUtc": "2026-10-03T20:55:43.899485+00:00",
+  "identityRevision": "identity-rework.json",
   "counts": {
     "expected": 111,
     "generated": 111,
@@ -41,7 +42,7 @@
       "MP19"
     ],
     "unityImportEvidence": "../../../Prototypes/SkillTree/evidence/ultimate-split-editmode.xml",
-    "ordinaryGameUi": "not released",
+    "ordinaryGameUi": "Existing ClassSkillArt renderer; current native evidence is recorded in Docs/Implementation/Skill_Identity_Rework.md",
     "physicalMobile": "not performed"
   },
   "validationReport": "qa/validation.json",
@@ -1147,15 +1148,15 @@
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M05.png",
       "resourceKey": "Art/ClassSkillIcons/Mage/M05",
       "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/M05.png",
-      "sourceSha256": "46e2e16055ce6fe9891b2a649c425c90712e5c341fbc6787e083237b62b41889",
+      "sourceSha256": "465119b8b8040097f064195b0b24f1c16ccee7dafc5496aaee0eb8a11ff658b3",
       "guid": "b2610cf1148041899b9ac44a3ce83da5",
       "effectSummary": {
-        "ko": "최대 HP 35% 보호막을 4초 유지합니다.",
-        "en": "Holds a shield worth 35% of max HP for 4 seconds."
+        "ko": "최대 HP 35% 보호막을 4초 유지하며 마지막으로 시전한 화염·냉기·번개 속성을 기억합니다. 이 보호막의 첫 실제 흡수에만 반응합니다. 화염은 3m 안 최대 5명에게 3초간 총 D60% 화상, 냉기는 1초 속박, 번개는 마나 8 회복을 줍니다. 기억한 속성이 없으면 추가 반응이 없습니다.",
+        "en": "Hold a 35% maximum-HP shield for 4s and remember the last cast fire, cold or lightning element. React only on this shield's first actual absorption: fire burns up to 5 enemies within 3m for D60% over 3s, cold roots them for 1s, and lightning restores 8 mana. No remembered element grants no extra reaction."
       },
       "sourceDescription": {
-        "ko": "최대 HP 35% 보호막을 4초 유지합니다.",
-        "en": "Holds a shield worth 35% of max HP for 4 seconds."
+        "ko": "최대 HP 35% 보호막을 4초 유지하며 마지막으로 시전한 화염·냉기·번개 속성을 기억합니다. 이 보호막의 첫 실제 흡수에만 반응합니다. 화염은 3m 안 최대 5명에게 3초간 총 D60% 화상, 냉기는 1초 속박, 번개는 마나 8 회복을 줍니다. 기억한 속성이 없으면 추가 반응이 없습니다.",
+        "en": "Hold a 35% maximum-HP shield for 4s and remember the last cast fire, cold or lightning element. React only on this shield's first actual absorption: fire burns up to 5 enemies within 3m for D60% over 3s, cold roots them for 1s, and lightning restores 8 mana. No remembered element grants no extra reaction."
       },
       "visualConcept": null,
       "tags": [
@@ -1171,7 +1172,7 @@
       "setIds": [
         "REF_SM01"
       ],
-      "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, M05 Elemental Shield / 원소 보호막, active.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A broad floating shield-shaped elemental membrane with a sharp pale-blue upper rim and three subtle integrated elemental facets, ember orange, glacial cyan and lightning white. The protective curved surface holds firm around one dark faceted core. It is a magical barrier, no metal buckler and no UI frame.\nEffect context: Holds a shield worth 35% of max HP for 4 seconds.\nRelevant equipment linkage: LM03, LM30, LM31, LM33, LM32. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+      "prompt": "Edit this HELLSCRIPT Elemental Shield skill icon. Preserve the same painterly dark fantasy iron structure and three red fire, icy blue and violet-gold lightning facets. Fix the clipped lightning entering at the upper right: show the ENTIRE lightning stroke and every tip within the image. Shrink and recompose the complete shield and lightning to fit within the central 76% of the square, with generous clean transparent margins on ALL FOUR sides. No cut off shapes, no border, no text. Keep the three facets bold and readable at 64x64. Deliver a transparent PNG with preserved native RGBA alpha, fully transparent surrounding and internal empty space, no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. Preserve transparency; do not paint a background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -1188,35 +1189,35 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 883817,
-          "nontransparentPixels": 688699,
-          "opaquePixels": 7,
-          "semitransparentPixels": 688692,
-          "transparentFraction": 0.56204,
-          "corePixels": 639575,
-          "coreFraction": 0.406721,
+          "transparentPixels": 989803,
+          "nontransparentPixels": 582713,
+          "opaquePixels": 206,
+          "semitransparentPixels": 582507,
+          "transparentFraction": 0.629439,
+          "corePixels": 531167,
+          "coreFraction": 0.337782,
           "alphaExtrema": [
             0,
             255
           ],
           "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
-            0,
-            9,
-            1224,
-            1238
+            49,
+            47,
+            1220,
+            1254
           ],
           "bboxAlphaAbove8": [
-            127,
-            48,
-            1124,
-            1158
+            155,
+            90,
+            1213,
+            1143
           ],
           "bboxAlphaAbove127": [
-            128,
-            50,
-            1123,
-            1156
+            156,
+            97,
+            1206,
+            1141
           ],
           "central76BoundsExclusive": [
             151,
@@ -1228,60 +1229,19 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
+              8,
               7,
-              4,
-              57,
-              59
+              59,
+              57
             ],
-            "corePixels": 1661
+            "corePixels": 1373
           }
         },
         "visualReview": {
           "alpha": "pass",
-          "readability64": {
-            "status": "pass",
-            "ko": "넓은 원소 막과 중앙 핵이 원소 보호막을 드러냅니다.",
-            "en": "A broad elemental membrane around a central core identifies the elemental barrier."
-          },
-          "edges": {
-            "status": "pass",
-            "ko": "원본과 밝은·어두운 바탕의 256px 검수에서 불투명 매트, 배경 무늬, 잘린 주형태를 발견하지 못했습니다. 가장자리의 매우 낮은 알파 픽셀은 자동 경고로 남깁니다.",
-            "en": "Native output and 256px light/dark inspection showed no opaque matte, backdrop pattern or clipped main form. Very low-alpha border pixels remain recorded warnings."
-          },
-          "distinctness": {
-            "status": "pass",
-            "comparedWith": [
-              "M01",
-              "M02",
-              "M03",
-              "M04",
-              "M05",
-              "M06",
-              "M07",
-              "M08",
-              "M09",
-              "M10",
-              "M11",
-              "M12",
-              "M13",
-              "M14",
-              "M15",
-              "M16",
-              "M17",
-              "M18",
-              "MP01",
-              "MP02",
-              "MP03",
-              "MP04",
-              "MP05",
-              "MP06",
-              "MP07",
-              "MP08",
-              "MP09"
-            ],
-            "ko": "64px 비교판에서 큰 형태와 주효과로 다른 담당 항목과 구별됩니다.",
-            "en": "The major silhouette and effect remain distinct among this production group in the actual64px contact sheets."
-          },
+          "readability64": "pass",
+          "edges": "pass",
+          "distinctness": "pass",
           "nativeAlpha": true,
           "dimensions": "pass",
           "rawMetrics": {
@@ -1294,94 +1254,32 @@
               0,
               255
             ],
-            "transparentPixels": 883817,
+            "transparentPixels": 989803,
             "alphaBBox": [
-              0,
-              9,
-              1224,
-              1238
+              49,
+              47,
+              1220,
+              1254
             ],
             "coreBBox": [
-              128,
-              50,
-              1123,
-              1156
+              156,
+              101,
+              1204,
+              1141
             ]
           },
-          "acceptedMasterSpecification": "1024 or1254 square native RGBA, handoff revision2",
-          "measurements": {
-            "format": "PNG",
-            "mode": "RGBA",
-            "width": 1254,
-            "height": 1254,
-            "pngBitDepth": 8,
-            "pngColorType": 6,
-            "transparentPixels": 883817,
-            "nontransparentPixels": 688699,
-            "opaquePixels": 7,
-            "semitransparentPixels": 688692,
-            "transparentFraction": 0.56204,
-            "corePixels": 639575,
-            "coreFraction": 0.406721,
-            "alphaExtrema": [
-              0,
-              255
+          "visualReview": {
+            "reviewed": true,
+            "backgrounds": [
+              "dark",
+              "light"
             ],
-            "outerBorderMaxAlpha": 1,
-            "bboxAlphaAbove0": [
-              0,
-              9,
-              1224,
-              1238
-            ],
-            "bboxAlphaAbove8": [
-              127,
-              48,
-              1124,
-              1158
-            ],
-            "bboxAlphaAbove127": [
-              128,
-              50,
-              1123,
-              1156
-            ],
-            "central76BoundsExclusive": [
-              151,
-              151,
-              1103,
-              1103
-            ],
-            "faintInsideCentral76": false,
-            "coreInsideCentral76": false,
-            "at64px": {
-              "bboxAlphaAbove127": [
-                7,
-                4,
-                57,
-                59
-              ],
-              "corePixels": 1661
+            "thumbnailPixels": 64,
+            "notes": {
+              "ko": "세 속성이 구분되고 번개의 끝까지 화면 안에 들어옵니다. 수정 원본의 투명 여백과 축소 실루엣을 확인했습니다.",
+              "en": "Three distinct facets and the complete lightning tip fit within the image. Reviewed transparent margins and the reduced silhouette of the edited original."
             }
-          },
-          "reviewEvidence": {
-            "contactSheets64": [
-              "qa/Mage-64px-dark.png",
-              "qa/Mage-64px-light.png"
-            ],
-            "edgeSheets256": [
-              "qa/Mage-edges-1-dark.jpg",
-              "qa/Mage-edges-1-light.jpg",
-              "qa/Mage-edges-2-dark.jpg",
-              "qa/Mage-edges-2-light.jpg",
-              "qa/Mage-edges-3-dark.jpg",
-              "qa/Mage-edges-3-light.jpg"
-            ],
-            "reviewedAtUtc": "2026-09-22T07:42:49.490161+00:00"
-          },
-          "central76": "warning_guideline_exceeded_no_visible_clipping",
-          "gameRuntime": "not_tested_art_only_handoff",
-          "physicalDevice": "not_tested"
+          }
         },
         "warnings": [
           {
@@ -2461,21 +2359,21 @@
       "heroClass": "Mage",
       "kind": "active",
       "name": {
-        "ko": "서리 구체",
-        "en": "Frost Globe"
+        "ko": "귀환 서리",
+        "en": "Returning Frost"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M10.png",
       "resourceKey": "Art/ClassSkillIcons/Mage/M10",
       "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/M10.png",
-      "sourceSha256": "b392fa2ac4450895f7f0919321a4e111fa97b87f58d9482107510bc4be07217e",
+      "sourceSha256": "3c6d4cea25cbbdd98bec72115864f0dae0a862b496ae224d159201282a427613",
       "guid": "15ebbf9f21ac4e83a85fd1b493c53b2c",
       "effectSummary": {
-        "ko": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
-        "en": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage."
+        "ko": "서리 구체가 최대 8m를 초속 5m로 날아가 지정 지점이나 첫 벽에서 시전 위치로 돌아옵니다. 왕복 각각 최대 5명에게 한 번씩 D90% 냉기 피해와 3초간 35% 둔화를 줍니다. 돌아올 때 이미 둔화된 적은 0.75초 빙결됩니다. 구체 도착 순간 시전 위치 0.7m 안에 있으면 마나 12를 한 번 회수합니다. 벽이 귀환을 막으면 회수에 실패합니다.",
+        "en": "Send a frost globe up to 8m at 5m/s, then return from its aim point or first wall to the cast location. Each leg hits up to 5 enemies once for D90% cold damage and a 35% slow for 3s. Returning hits freeze already slowed enemies for 0.75s. Restore 12 mana once if within 0.7m of the cast location when it arrives. A blocked return misses recovery."
       },
       "sourceDescription": {
-        "ko": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
-        "en": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage."
+        "ko": "서리 구체가 최대 8m를 초속 5m로 날아가 지정 지점이나 첫 벽에서 시전 위치로 돌아옵니다. 왕복 각각 최대 5명에게 한 번씩 D90% 냉기 피해와 3초간 35% 둔화를 줍니다. 돌아올 때 이미 둔화된 적은 0.75초 빙결됩니다. 구체 도착 순간 시전 위치 0.7m 안에 있으면 마나 12를 한 번 회수합니다. 벽이 귀환을 막으면 회수에 실패합니다.",
+        "en": "Send a frost globe up to 8m at 5m/s, then return from its aim point or first wall to the cast location. Each leg hits up to 5 enemies once for D90% cold damage and a 35% slow for 3s. Returning hits freeze already slowed enemies for 0.75s. Restore 12 mana once if within 0.7m of the cast location when it arrives. A blocked return misses recovery."
       },
       "visualConcept": null,
       "tags": [
@@ -2487,7 +2385,7 @@
         "LM14"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, M10 Frost Globe / 서리 구체, active.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A heavy traveling frost globe formed by a dark spherical ice shell cracked open at one side, with a bright frozen core and three large crescent-like crystal plates separating at detonation. A short thick curling frost wake indicates travel ending in an icy explosion. No orbiting satellites.\nEffect context: Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage.\nRelevant equipment linkage: DES_LM42, LM14. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for M10 (Mage). Main subject: one luminous blue-white frost sphere flying on a bold curved returning ice trail shaped like a boomerang toward a small cyan rune anchor, unmistakable return path with one outward and one inward arc. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -2504,13 +2402,13 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 913024,
-          "nontransparentPixels": 659492,
-          "opaquePixels": 422,
-          "semitransparentPixels": 659070,
-          "transparentFraction": 0.580613,
-          "corePixels": 557115,
-          "coreFraction": 0.354283,
+          "transparentPixels": 1026374,
+          "nontransparentPixels": 546142,
+          "opaquePixels": 123,
+          "semitransparentPixels": 546019,
+          "transparentFraction": 0.652695,
+          "corePixels": 453657,
+          "coreFraction": 0.288491,
           "alphaExtrema": [
             0,
             255
@@ -2518,21 +2416,21 @@
           "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
             0,
-            25,
+            19,
             1240,
             1254
           ],
           "bboxAlphaAbove8": [
-            82,
-            140,
-            1200,
-            1124
+            78,
+            79,
+            1204,
+            1138
           ],
           "bboxAlphaAbove127": [
-            84,
-            141,
-            1197,
-            1122
+            80,
+            86,
+            1202,
+            1137
           ],
           "central76BoundsExclusive": [
             151,
@@ -2544,60 +2442,19 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              4,
+              5,
               7,
               61,
-              57
+              58
             ],
-            "corePixels": 1451
+            "corePixels": 1174
           }
         },
         "visualReview": {
           "alpha": "pass",
-          "readability64": {
-            "status": "pass",
-            "ko": "갈라진 얼음 껍질과 둥근 핵이 폭발하는 서리 구체를 드러냅니다.",
-            "en": "A broken spherical ice shell and bright core identify the detonating frost globe."
-          },
-          "edges": {
-            "status": "pass",
-            "ko": "원본과 밝은·어두운 바탕의 256px 검수에서 불투명 매트, 배경 무늬, 잘린 주형태를 발견하지 못했습니다. 가장자리의 매우 낮은 알파 픽셀은 자동 경고로 남깁니다.",
-            "en": "Native output and 256px light/dark inspection showed no opaque matte, backdrop pattern or clipped main form. Very low-alpha border pixels remain recorded warnings."
-          },
-          "distinctness": {
-            "status": "pass",
-            "comparedWith": [
-              "M01",
-              "M02",
-              "M03",
-              "M04",
-              "M05",
-              "M06",
-              "M07",
-              "M08",
-              "M09",
-              "M10",
-              "M11",
-              "M12",
-              "M13",
-              "M14",
-              "M15",
-              "M16",
-              "M17",
-              "M18",
-              "MP01",
-              "MP02",
-              "MP03",
-              "MP04",
-              "MP05",
-              "MP06",
-              "MP07",
-              "MP08",
-              "MP09"
-            ],
-            "ko": "64px 비교판에서 큰 형태와 주효과로 다른 담당 항목과 구별됩니다.",
-            "en": "The major silhouette and effect remain distinct among this production group in the actual64px contact sheets."
-          },
+          "readability64": "pass",
+          "edges": "pass",
+          "distinctness": "pass",
           "nativeAlpha": true,
           "dimensions": "pass",
           "rawMetrics": {
@@ -2610,94 +2467,32 @@
               0,
               255
             ],
-            "transparentPixels": 913024,
+            "transparentPixels": 1026374,
             "alphaBBox": [
               0,
-              25,
+              19,
               1240,
               1254
             ],
             "coreBBox": [
-              84,
-              141,
-              1197,
-              1122
+              80,
+              91,
+              1201,
+              1136
             ]
           },
-          "acceptedMasterSpecification": "1024 or1254 square native RGBA, handoff revision2",
-          "measurements": {
-            "format": "PNG",
-            "mode": "RGBA",
-            "width": 1254,
-            "height": 1254,
-            "pngBitDepth": 8,
-            "pngColorType": 6,
-            "transparentPixels": 913024,
-            "nontransparentPixels": 659492,
-            "opaquePixels": 422,
-            "semitransparentPixels": 659070,
-            "transparentFraction": 0.580613,
-            "corePixels": 557115,
-            "coreFraction": 0.354283,
-            "alphaExtrema": [
-              0,
-              255
+          "visualReview": {
+            "reviewed": true,
+            "backgrounds": [
+              "dark",
+              "light"
             ],
-            "outerBorderMaxAlpha": 1,
-            "bboxAlphaAbove0": [
-              0,
-              25,
-              1240,
-              1254
-            ],
-            "bboxAlphaAbove8": [
-              82,
-              140,
-              1200,
-              1124
-            ],
-            "bboxAlphaAbove127": [
-              84,
-              141,
-              1197,
-              1122
-            ],
-            "central76BoundsExclusive": [
-              151,
-              151,
-              1103,
-              1103
-            ],
-            "faintInsideCentral76": false,
-            "coreInsideCentral76": false,
-            "at64px": {
-              "bboxAlphaAbove127": [
-                4,
-                7,
-                61,
-                57
-              ],
-              "corePixels": 1451
+            "thumbnailPixels": 64,
+            "notes": {
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
             }
-          },
-          "reviewEvidence": {
-            "contactSheets64": [
-              "qa/Mage-64px-dark.png",
-              "qa/Mage-64px-light.png"
-            ],
-            "edgeSheets256": [
-              "qa/Mage-edges-1-dark.jpg",
-              "qa/Mage-edges-1-light.jpg",
-              "qa/Mage-edges-2-dark.jpg",
-              "qa/Mage-edges-2-light.jpg",
-              "qa/Mage-edges-3-dark.jpg",
-              "qa/Mage-edges-3-light.jpg"
-            ],
-            "reviewedAtUtc": "2026-09-22T07:42:49.490161+00:00"
-          },
-          "central76": "warning_guideline_exceeded_no_visible_clipping",
-          "gameRuntime": "not_tested_art_only_handoff",
-          "physicalDevice": "not_tested"
+          }
         },
         "warnings": [
           {
@@ -2986,21 +2781,21 @@
       "heroClass": "Mage",
       "kind": "active",
       "name": {
-        "ko": "번개 창",
-        "en": "Storm Spear"
+        "ko": "접지창",
+        "en": "Grounding Spear"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M12.png",
       "resourceKey": "Art/ClassSkillIcons/Mage/M12",
       "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/M12.png",
-      "sourceSha256": "3658484971ef6e4447a1a6c4305154a660f831b763b05d2ba9759be059c3d8c6",
+      "sourceSha256": "2ad6b07f260f05f45b984611a6bcd062a139ca792d4a97cca4528e101dd59898",
       "guid": "06ce5fdb66f442a69ac51f450fcff7f8",
       "effectSummary": {
-        "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
-        "en": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s."
+        "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D90% 번개 피해를 주고 지정 지점에 접지창 하나를 6초간 남깁니다. M03이 4m 안의 다음 적을 찾지 못하면 접지창까지 4m, 창에서 다음 적까지 4m를 잇습니다. 벽·감지 규칙을 지키며 창도 연쇄 횟수 하나를 소비합니다. 한 연쇄당 중계 한 번, 마나 4 회복 한 번입니다. 최근 M03 적중 대상을 창으로 직접 맞혀도 같은 회복을 시전당 한 번 얻습니다.",
+        "en": "Pierce up to 5 enemies along a 12m, 0.8m-wide line for D90% lightning damage and leave one grounding spear at the aim point for 6s. When M03 finds no next enemy within 4m, bridge through the spear with up to 4m on each leg. Obey walls and perception; the spear consumes one chain hop. One relay and one 4-mana refund per chain. Direct spear hits on a recent M03 target also refund once per spear cast."
       },
       "sourceDescription": {
-        "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
-        "en": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s."
+        "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D90% 번개 피해를 주고 지정 지점에 접지창 하나를 6초간 남깁니다. M03이 4m 안의 다음 적을 찾지 못하면 접지창까지 4m, 창에서 다음 적까지 4m를 잇습니다. 벽·감지 규칙을 지키며 창도 연쇄 횟수 하나를 소비합니다. 한 연쇄당 중계 한 번, 마나 4 회복 한 번입니다. 최근 M03 적중 대상을 창으로 직접 맞혀도 같은 회복을 시전당 한 번 얻습니다.",
+        "en": "Pierce up to 5 enemies along a 12m, 0.8m-wide line for D90% lightning damage and leave one grounding spear at the aim point for 6s. When M03 finds no next enemy within 4m, bridge through the spear with up to 4m on each leg. Obey walls and perception; the spear consumes one chain hop. One relay and one 4-mana refund per chain. Direct spear hits on a recent M03 target also refund once per spear cast."
       },
       "visualConcept": null,
       "tags": [
@@ -3011,7 +2806,7 @@
         "DES_LM43"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, M12 Storm Spear / 번개 창, active.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. One storm spear composed of a long thick angular white-blue lightning shaft, a forked spearhead and a swept electrical barb near the rear. Dynamic linear piercing motion with a small hooked return spark curling inward, hinting at reclaimed mana. Distinct from the branching chain-lightning shape.\nEffect context: Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s.\nRelevant equipment linkage: DES_LM43. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for M12 (Mage). Main subject: one tall dark metal spear planted into a compact arcane grounding rune, two thick branching violet-white lightning bolts bridging to separate small charged stones on either side, spear is a relay node. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -3028,35 +2823,35 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 1284597,
-          "nontransparentPixels": 287919,
-          "opaquePixels": 12,
-          "semitransparentPixels": 287907,
-          "transparentFraction": 0.816906,
-          "corePixels": 183378,
-          "coreFraction": 0.116614,
+          "transparentPixels": 1201178,
+          "nontransparentPixels": 371338,
+          "opaquePixels": 224,
+          "semitransparentPixels": 371114,
+          "transparentFraction": 0.763857,
+          "corePixels": 248162,
+          "coreFraction": 0.157812,
           "alphaExtrema": [
             0,
             255
           ],
-          "outerBorderMaxAlpha": 0,
+          "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
-            31,
-            23,
-            1200,
-            1222
+            0,
+            1,
+            1236,
+            1254
           ],
           "bboxAlphaAbove8": [
-            115,
-            74,
-            1189,
-            1181
+            165,
+            5,
+            1104,
+            1241
           ],
           "bboxAlphaAbove127": [
-            121,
-            78,
-            1185,
-            1178
+            168,
+            6,
+            1103,
+            1240
           ],
           "central76BoundsExclusive": [
             151,
@@ -3068,60 +2863,19 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              7,
-              5,
-              59,
-              60
+              8,
+              1,
+              56,
+              62
             ],
-            "corePixels": 478
+            "corePixels": 645
           }
         },
         "visualReview": {
           "alpha": "pass",
-          "readability64": {
-            "status": "pass",
-            "ko": "긴 번개 창날과 되돌아오는 갈고리형 전류가 직선 관통을 드러냅니다.",
-            "en": "A long lightning spear with a hooked return current identifies linear piercing."
-          },
-          "edges": {
-            "status": "pass",
-            "ko": "원본과 밝은·어두운 바탕의 256px 검수에서 불투명 매트, 배경 무늬, 잘린 주형태를 발견하지 못했습니다. 가장자리의 매우 낮은 알파 픽셀은 자동 경고로 남깁니다.",
-            "en": "Native output and 256px light/dark inspection showed no opaque matte, backdrop pattern or clipped main form. Very low-alpha border pixels remain recorded warnings."
-          },
-          "distinctness": {
-            "status": "pass",
-            "comparedWith": [
-              "M01",
-              "M02",
-              "M03",
-              "M04",
-              "M05",
-              "M06",
-              "M07",
-              "M08",
-              "M09",
-              "M10",
-              "M11",
-              "M12",
-              "M13",
-              "M14",
-              "M15",
-              "M16",
-              "M17",
-              "M18",
-              "MP01",
-              "MP02",
-              "MP03",
-              "MP04",
-              "MP05",
-              "MP06",
-              "MP07",
-              "MP08",
-              "MP09"
-            ],
-            "ko": "64px 비교판에서 큰 형태와 주효과로 다른 담당 항목과 구별됩니다.",
-            "en": "The major silhouette and effect remain distinct among this production group in the actual64px contact sheets."
-          },
+          "readability64": "pass",
+          "edges": "pass",
+          "distinctness": "pass",
           "nativeAlpha": true,
           "dimensions": "pass",
           "rawMetrics": {
@@ -3134,99 +2888,41 @@
               0,
               255
             ],
-            "transparentPixels": 1284597,
+            "transparentPixels": 1201178,
             "alphaBBox": [
-              31,
-              23,
-              1200,
-              1222
+              0,
+              1,
+              1236,
+              1254
             ],
             "coreBBox": [
-              121,
-              78,
-              1185,
-              1178
+              168,
+              6,
+              1103,
+              1239
             ]
           },
-          "acceptedMasterSpecification": "1024 or1254 square native RGBA, handoff revision2",
-          "measurements": {
-            "format": "PNG",
-            "mode": "RGBA",
-            "width": 1254,
-            "height": 1254,
-            "pngBitDepth": 8,
-            "pngColorType": 6,
-            "transparentPixels": 1284597,
-            "nontransparentPixels": 287919,
-            "opaquePixels": 12,
-            "semitransparentPixels": 287907,
-            "transparentFraction": 0.816906,
-            "corePixels": 183378,
-            "coreFraction": 0.116614,
-            "alphaExtrema": [
-              0,
-              255
+          "visualReview": {
+            "reviewed": true,
+            "backgrounds": [
+              "dark",
+              "light"
             ],
-            "outerBorderMaxAlpha": 0,
-            "bboxAlphaAbove0": [
-              31,
-              23,
-              1200,
-              1222
-            ],
-            "bboxAlphaAbove8": [
-              115,
-              74,
-              1189,
-              1181
-            ],
-            "bboxAlphaAbove127": [
-              121,
-              78,
-              1185,
-              1178
-            ],
-            "central76BoundsExclusive": [
-              151,
-              151,
-              1103,
-              1103
-            ],
-            "faintInsideCentral76": false,
-            "coreInsideCentral76": false,
-            "at64px": {
-              "bboxAlphaAbove127": [
-                7,
-                5,
-                59,
-                60
-              ],
-              "corePixels": 478
+            "thumbnailPixels": 64,
+            "notes": {
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
             }
-          },
-          "reviewEvidence": {
-            "contactSheets64": [
-              "qa/Mage-64px-dark.png",
-              "qa/Mage-64px-light.png"
-            ],
-            "edgeSheets256": [
-              "qa/Mage-edges-1-dark.jpg",
-              "qa/Mage-edges-1-light.jpg",
-              "qa/Mage-edges-2-dark.jpg",
-              "qa/Mage-edges-2-light.jpg",
-              "qa/Mage-edges-3-dark.jpg",
-              "qa/Mage-edges-3-light.jpg"
-            ],
-            "reviewedAtUtc": "2026-09-22T07:42:49.490161+00:00"
-          },
-          "central76": "warning_guideline_exceeded_no_visible_clipping",
-          "gameRuntime": "not_tested_art_only_handoff",
-          "physicalDevice": "not_tested"
+          }
         },
         "warnings": [
           {
             "code": "model_unknown",
             "detail": "The generating model is not independently verified; this remains candidate art."
+          },
+          {
+            "code": "faint_border",
+            "detail": "Low-alpha edge pixels are present; visually inspect for a clipped form or unwanted halo."
           },
           {
             "code": "core_padding",
@@ -11367,21 +11063,21 @@
       "heroClass": "Ranger",
       "kind": "active",
       "name": {
-        "ko": "경계 쇠뇌",
-        "en": "Watch Ballista"
+        "ko": "교차 쇠뇌",
+        "en": "Crossfire Ballista"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png",
       "resourceKey": "Art/ClassSkillIcons/Ranger/A15",
       "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A15.png",
-      "sourceSha256": "b1a97c74633a1ae43afb40bb49f0dbaddcf4fbf306743b36091eb14309fef32c",
+      "sourceSha256": "bbf43163ffba99909abb6bddd80c03a29dcbb0f9558977bb1d14da72c0a98f0f",
       "guid": "5e96706364ee4d3ba9065b01dbbe287e",
       "effectSummary": {
-        "ko": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
-        "en": "Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01."
+        "ko": "6m 안에 쇠뇌 하나를 6초간 설치하고 1초마다 9m 안의 감지한 적에게 D35% 물리 추가 피해를 줍니다. 최근 2초 안에 본체 사격이 맞힌 적을 서로 60도 이상 다른 사선에서 쏘면 D45%를 더합니다. 교차 사선과 표식 대상을 우선하며 최대 6회 사격합니다. 추가 사격은 발동을 재생산하지 않습니다.",
+        "en": "Place one ballista within 6m for 6s. Each second, fire at a perceived enemy within 9m for D35% secondary physical damage. Add D45% when firing at an enemy hit by the hero within 2s from a firing angle at least 60 degrees apart. Prefer crossfire, then marked targets, up to 6 shots. Secondary shots trigger no further procs."
       },
       "sourceDescription": {
-        "ko": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
-        "en": "Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01."
+        "ko": "6m 안에 쇠뇌 하나를 6초간 설치하고 1초마다 9m 안의 감지한 적에게 D35% 물리 추가 피해를 줍니다. 최근 2초 안에 본체 사격이 맞힌 적을 서로 60도 이상 다른 사선에서 쏘면 D45%를 더합니다. 교차 사선과 표식 대상을 우선하며 최대 6회 사격합니다. 추가 사격은 발동을 재생산하지 않습니다.",
+        "en": "Place one ballista within 6m for 6s. Each second, fire at a perceived enemy within 9m for D35% secondary physical damage. Add D45% when firing at an enemy hit by the hero within 2s from a firing angle at least 60 degrees apart. Prefer crossfire, then marked targets, up to 6 shots. Secondary shots trigger no further procs."
       },
       "visualConcept": null,
       "tags": [
@@ -11392,7 +11088,7 @@
         "DES_LA45"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): A15 Watch Ballista. Skill type: active. Effect: Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01. Tags: Physical, Normal. Linked equipment IDs for identity context only: DES_LA45. Subject and composition: A compact gothic portable ballista made from dark wood and worn iron is firing one broad silver bolt. Three-quarter view, two hefty bow arms and a short stable tripod contained within the silhouette, no floor or scenery. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for A15 (Ranger). Main subject: a compact medieval ballista in three-quarter view, two bold green-gold arrows entering one small target from clearly different angles, unmistakable crossed firing lines. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -11409,35 +11105,35 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 1237818,
-          "nontransparentPixels": 334698,
-          "opaquePixels": 483,
-          "semitransparentPixels": 334215,
-          "transparentFraction": 0.787158,
-          "corePixels": 279277,
-          "coreFraction": 0.177599,
+          "transparentPixels": 1062258,
+          "nontransparentPixels": 510258,
+          "opaquePixels": 553,
+          "semitransparentPixels": 509705,
+          "transparentFraction": 0.675515,
+          "corePixels": 443221,
+          "coreFraction": 0.281855,
           "alphaExtrema": [
             0,
             255
           ],
-          "outerBorderMaxAlpha": 0,
+          "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
-            41,
-            21,
-            1234,
-            1228
+            33,
+            47,
+            1254,
+            1254
           ],
           "bboxAlphaAbove8": [
-            160,
-            251,
-            1109,
-            1027
+            37,
+            170,
+            1242,
+            1101
           ],
           "bboxAlphaAbove127": [
-            161,
-            252,
-            1108,
-            1026
+            38,
+            172,
+            1241,
+            1100
           ],
           "central76BoundsExclusive": [
             151,
@@ -11449,17 +11145,19 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              8,
-              14,
-              56,
-              52
+              2,
+              9,
+              63,
+              56
             ],
-            "corePixels": 726
+            "corePixels": 1151
           }
         },
         "visualReview": {
-          "status": "pass",
           "alpha": "pass",
+          "readability64": "pass",
+          "edges": "pass",
+          "distinctness": "pass",
           "nativeAlpha": true,
           "dimensions": "pass",
           "rawMetrics": {
@@ -11472,58 +11170,41 @@
               0,
               255
             ],
-            "transparentPixels": 1237818,
+            "transparentPixels": 1062258,
             "alphaBBox": [
-              41,
-              21,
-              1234,
-              1228
+              33,
+              47,
+              1254,
+              1254
             ],
             "coreBBox": [
-              161,
-              252,
-              1108,
-              1026
+              38,
+              172,
+              1240,
+              1099
             ]
           },
-          "edges": "pass",
-          "readability64": "pass",
-          "distinctness": "pass",
-          "mode": "RGBA",
-          "rawSize": [
-            1254,
-            1254
-          ],
-          "dimensionPass": true,
-          "fullyTransparentPixels": 1237818,
-          "alphaExtrema": [
-            0,
-            255
-          ],
-          "alphaBounds": [
-            41,
-            21,
-            1234,
-            1228
-          ],
-          "bboxAlphaGreaterThan16": [
-            160,
-            251,
-            1109,
-            1027
-          ],
-          "central76PercentPass": false,
-          "marginGuideline": "warning",
-          "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/A15-64.png",
-          "visual64": "reviewed_pass",
-          "visual64Note": "At64px, the ballista arms, supported mechanism and outgoing bolt are recognizable. Slight guideline overflow is not canvas clipping.",
-          "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
-          "reviewedBy": "ranger_icons agent"
+          "visualReview": {
+            "reviewed": true,
+            "backgrounds": [
+              "dark",
+              "light"
+            ],
+            "thumbnailPixels": 64,
+            "notes": {
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
+            }
+          }
         },
         "warnings": [
           {
             "code": "model_unknown",
             "detail": "The generating model is not independently verified; this remains candidate art."
+          },
+          {
+            "code": "faint_border",
+            "detail": "Low-alpha edge pixels are present; visually inspect for a clipped form or unwanted halo."
           },
           {
             "code": "core_padding",
@@ -11874,21 +11555,21 @@
       "heroClass": "Ranger",
       "kind": "ultimate",
       "name": {
-        "ko": "그림자 추격",
-        "en": "Shadow Pursuit"
+        "ko": "잔상 행군",
+        "en": "Afterimage March"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png",
       "resourceKey": "Art/ClassSkillIcons/Ranger/A18",
       "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A18.png",
-      "sourceSha256": "1cff4af9369ace5cde3bd791d55578bcfc0fa36d4c0f06ef5e866d5f4d1c10c0",
+      "sourceSha256": "8f044ebcc5d2dc199d2aedafdcb108183439b3e3a9bd4b80ff1a50f5c0984294",
       "guid": "d76702ea84c642d6a1d0bd4d52f69301",
       "effectSummary": {
-        "ko": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
-        "en": "Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs."
+        "ko": "8초간 이동속도가 20% 증가합니다. 이전 흔적에서 1.5m 이동할 때 그 자리에 잔상을 남깁니다. 동시 2개, 총 8개까지입니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14 직접 적중 시 시야·사거리 10m가 유효한 잔상 하나가 그 자리에서 D60% 암흑 화살을 쏩니다. 시전당·초당 한 번이며 제자리에서는 새 잔상이 생기지 않습니다.",
+        "en": "Gain 20% movement speed for 8s. Moving 1.5m from the previous trail anchor leaves an afterimage there, up to 2 at once and 8 total. On a direct hit of BASIC, A01, A02, A07, A08, A13 or A14, consume one afterimage with a clear shot within 10m to fire a D60% secondary shadow arrow from that location. Once per cast and second; standing still creates no new images."
       },
       "sourceDescription": {
-        "ko": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
-        "en": "Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs."
+        "ko": "8초간 이동속도가 20% 증가합니다. 이전 흔적에서 1.5m 이동할 때 그 자리에 잔상을 남깁니다. 동시 2개, 총 8개까지입니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14 직접 적중 시 시야·사거리 10m가 유효한 잔상 하나가 그 자리에서 D60% 암흑 화살을 쏩니다. 시전당·초당 한 번이며 제자리에서는 새 잔상이 생기지 않습니다.",
+        "en": "Gain 20% movement speed for 8s. Moving 1.5m from the previous trail anchor leaves an afterimage there, up to 2 at once and 8 total. On a direct hit of BASIC, A01, A02, A07, A08, A13 or A14, consume one afterimage with a clear shot within 10m to fire a D60% secondary shadow arrow from that location. Once per cast and second; standing still creates no new images."
       },
       "visualConcept": null,
       "tags": [
@@ -11899,7 +11580,7 @@
         "DES_LA46"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): A18 Shadow Pursuit. Skill type: ultimate. Effect: Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs. Tags: Shadow, Ultimate. Linked equipment IDs for identity context only: DES_LA46. Subject and composition: ULTIMATE: a dominant shadowy hooded ranger draws a spectral bow while a single imposing violet-black winglike echo sweeps forward behind the shoulders. One bright dark-violet arrow and its trailing shadow double aim at the same direction. Dense heroic central silhouette conveys mobile pursuit and echo damage, no scenery. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for A18 (Ranger). Main subject: one dark hooded archer stepping sideways with two translucent violet archer silhouettes left behind, one bright violet arrow fired from a previous silhouette, movement leaves shooting afterimages. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -11916,35 +11597,35 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 1114867,
-          "nontransparentPixels": 457649,
-          "opaquePixels": 568,
-          "semitransparentPixels": 457081,
-          "transparentFraction": 0.70897,
-          "corePixels": 369986,
-          "coreFraction": 0.235283,
+          "transparentPixels": 997372,
+          "nontransparentPixels": 575144,
+          "opaquePixels": 171,
+          "semitransparentPixels": 574973,
+          "transparentFraction": 0.634252,
+          "corePixels": 461220,
+          "coreFraction": 0.293301,
           "alphaExtrema": [
             0,
             255
           ],
-          "outerBorderMaxAlpha": 0,
+          "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
-            41,
-            39,
-            1230,
-            1214
+            0,
+            21,
+            1239,
+            1254
           ],
           "bboxAlphaAbove8": [
-            175,
-            224,
-            1135,
-            1065
+            14,
+            139,
+            1236,
+            1139
           ],
           "bboxAlphaAbove127": [
-            176,
-            224,
-            1124,
-            1062
+            18,
+            141,
+            1235,
+            1138
           ],
           "central76BoundsExclusive": [
             151,
@@ -11956,17 +11637,19 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              11,
-              11,
-              56,
-              53
+              2,
+              7,
+              63,
+              58
             ],
-            "corePixels": 945
+            "corePixels": 1203
           }
         },
         "visualReview": {
-          "status": "pass",
           "alpha": "pass",
+          "readability64": "pass",
+          "edges": "pass",
+          "distinctness": "pass",
           "nativeAlpha": true,
           "dimensions": "pass",
           "rawMetrics": {
@@ -11979,58 +11662,41 @@
               0,
               255
             ],
-            "transparentPixels": 1114867,
+            "transparentPixels": 997372,
             "alphaBBox": [
-              41,
-              39,
-              1230,
-              1214
+              0,
+              21,
+              1239,
+              1254
             ],
             "coreBBox": [
-              176,
-              224,
-              1124,
-              1062
+              19,
+              142,
+              1234,
+              1137
             ]
           },
-          "edges": "pass",
-          "readability64": "pass",
-          "distinctness": "pass",
-          "mode": "RGBA",
-          "rawSize": [
-            1254,
-            1254
-          ],
-          "dimensionPass": true,
-          "fullyTransparentPixels": 1114867,
-          "alphaExtrema": [
-            0,
-            255
-          ],
-          "alphaBounds": [
-            41,
-            39,
-            1230,
-            1214
-          ],
-          "bboxAlphaGreaterThan16": [
-            175,
-            224,
-            1134,
-            1065
-          ],
-          "central76PercentPass": false,
-          "marginGuideline": "warning",
-          "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/A18-64.png",
-          "visual64": "reviewed_pass",
-          "visual64Note": "At64px, hooded bow figure and large violet echo read as shadow pursuit; the original shows one following spectral double aimed in the same direction. No canvas clipping.",
-          "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
-          "reviewedBy": "ranger_icons agent"
+          "visualReview": {
+            "reviewed": true,
+            "backgrounds": [
+              "dark",
+              "light"
+            ],
+            "thumbnailPixels": 64,
+            "notes": {
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
+            }
+          }
         },
         "warnings": [
           {
             "code": "model_unknown",
             "detail": "The generating model is not independently verified; this remains candidate art."
+          },
+          {
+            "code": "faint_border",
+            "detail": "Low-alpha edge pixels are present; visually inspect for a clipped form or unwanted halo."
           },
           {
             "code": "core_padding",
@@ -14737,21 +14403,21 @@
       "heroClass": "Ranger",
       "kind": "passive",
       "name": {
-        "ko": "길잡이",
-        "en": "Pathfinder"
+        "ko": "관통 사선",
+        "en": "Piercing Crossfire"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP17.png",
       "resourceKey": "Art/ClassSkillIcons/Ranger/AP17",
       "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/AP17.png",
-      "sourceSha256": "5bde9b2d362fea972397b19da9ddee76249b01e4117328dc978316681983c12e",
+      "sourceSha256": "f8fa6141d377927e3f12bcfcbe99db8f33b97bec9569d28035c6d6011b599ddc",
       "guid": "d3215d5251ee420bad37c75588a4373f",
       "effectSummary": {
-        "ko": "자신과 경계 쇠뇌 사이의 거리가 5m 이상이면 그 쇠뇌의 피해가 가산 10% 증가합니다. 각 쇠뇌 사격 생성 시 거리를 확인합니다.",
-        "en": "Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created."
+        "ko": "교차 쇠뇌의 교차 사격이 첫 적을 관통하여 같은 사선의 적 한 명을 사격 피해의 50%로 더 맞힙니다. 최대 2명, 실제 사거리·벽 충돌을 유지하며 추가 발동을 재생산하지 않습니다.",
+        "en": "Crossfire Ballista crossfire shots pierce the first enemy to hit one additional enemy on the same firing line at 50% shot damage, up to 2. Preserve actual range and wall collision; secondary shots trigger no further procs."
       },
       "sourceDescription": {
-        "ko": "자신과 경계 쇠뇌 사이의 거리가 5m 이상이면 그 쇠뇌의 피해가 가산 10% 증가합니다. 각 쇠뇌 사격 생성 시 거리를 확인합니다.",
-        "en": "Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created."
+        "ko": "교차 쇠뇌의 교차 사격이 첫 적을 관통하여 같은 사선의 적 한 명을 사격 피해의 50%로 더 맞힙니다. 최대 2명, 실제 사거리·벽 충돌을 유지하며 추가 발동을 재생산하지 않습니다.",
+        "en": "Crossfire Ballista crossfire shots pierce the first enemy to hit one additional enemy on the same firing line at 50% shot damage, up to 2. Preserve actual range and wall collision; secondary shots trigger no further procs."
       },
       "visualConcept": null,
       "tags": [
@@ -14769,7 +14435,7 @@
         "DES_LA45"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): AP17 Pathfinder. Skill type: passive. Effect: Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created. Tags: Passive. Linked equipment IDs for identity context only: LA03, LA10, LA23, LA24, LA25, LA26, LA27, LA28, DES_LA45. Subject and composition: An enduring distance-support emblem: a miniature stout iron ballista head and a weathered leather boot separated by one broad pale trail wedge. The two substantial forms remain within a compact diagonal composition, symbolizing strength from maintaining distance, no floor. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for AP17 (Ranger). Main subject: one powerful green-gold ballista bolt piercing two small iron target plates aligned in a diagonal firing line, a bold secondary crossing ray indicates crossfire, clearly two punctured targets. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -14786,35 +14452,35 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 1234216,
-          "nontransparentPixels": 338300,
-          "opaquePixels": 402,
-          "semitransparentPixels": 337898,
-          "transparentFraction": 0.784867,
-          "corePixels": 278621,
-          "coreFraction": 0.177182,
+          "transparentPixels": 1073598,
+          "nontransparentPixels": 498918,
+          "opaquePixels": 283,
+          "semitransparentPixels": 498635,
+          "transparentFraction": 0.682726,
+          "corePixels": 422386,
+          "coreFraction": 0.268605,
           "alphaExtrema": [
             0,
             255
           ],
-          "outerBorderMaxAlpha": 0,
+          "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
-            25,
-            21,
-            1230,
-            1226
+            0,
+            0,
+            1236,
+            1254
           ],
           "bboxAlphaAbove8": [
-            198,
-            249,
-            1042,
-            1001
+            27,
+            109,
+            1228,
+            1061
           ],
           "bboxAlphaAbove127": [
-            199,
-            251,
-            1041,
-            1000
+            28,
+            115,
+            1226,
+            1060
           ],
           "central76BoundsExclusive": [
             151,
@@ -14822,21 +14488,23 @@
             1103,
             1103
           ],
-          "faintInsideCentral76": true,
-          "coreInsideCentral76": true,
+          "faintInsideCentral76": false,
+          "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              10,
-              13,
-              53,
-              51
+              2,
+              7,
+              62,
+              54
             ],
-            "corePixels": 719
+            "corePixels": 1095
           }
         },
         "visualReview": {
-          "status": "pending",
           "alpha": "pass",
+          "readability64": "pass",
+          "edges": "pass",
+          "distinctness": "pass",
           "nativeAlpha": true,
           "dimensions": "pass",
           "rawMetrics": {
@@ -14849,42 +14517,49 @@
               0,
               255
             ],
-            "transparentPixels": 1234216,
+            "transparentPixels": 1073598,
             "alphaBBox": [
-              25,
-              21,
-              1230,
-              1226
+              0,
+              0,
+              1236,
+              1254
             ],
             "coreBBox": [
-              199,
-              251,
-              1041,
-              1000
+              29,
+              120,
+              1225,
+              1059
             ]
           },
-          "edges": "pass",
-          "readability64": "pass",
-          "distinctness": "pass",
-          "preview64": "Docs/Art/ClassSkillIcons/qa/late-passives-03.png",
           "visualReview": {
-            "ko": "떨어진 쇠뇌와 장화, 그 사이의 밝은 연결이 64px에서 거리 유지 상징으로 읽힙니다.",
-            "en": "The separated ballista and boot, linked by a pale trail, read as a distance-maintenance symbol at 64px."
-          },
-          "edgeReview": {
-            "ko": "네이티브 원본과 실제 64px의 밝은 배경·어두운 배경 합성본에서 실제 잘림, 불투명 배경, 눈에 띄는 매트나 테두리 번짐을 발견하지 못했습니다. 원본 픽셀은 수정하지 않았습니다.",
-            "en": "No actual clipping, opaque background, visible matte or edge halo was found in the native image and actual 64px light/dark composites. Original pixels were not edited."
-          },
-          "reviewedAtUtc": "2026-09-22T07:55:54.349608+00:00",
-          "comparisonPreview64": [
-            "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-dark.png",
-            "Docs/Art/ClassSkillIcons/qa/late-passives-all-64-light.png"
-          ]
+            "reviewed": true,
+            "backgrounds": [
+              "dark",
+              "light"
+            ],
+            "thumbnailPixels": 64,
+            "notes": {
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
+            }
+          }
         },
         "warnings": [
           {
             "code": "model_unknown",
             "detail": "The generating model is not independently verified; this remains candidate art."
+          },
+          {
+            "code": "faint_border",
+            "detail": "Low-alpha edge pixels are present; visually inspect for a clipped form or unwanted halo."
+          },
+          {
+            "code": "core_padding",
+            "detail": "The alpha > 127 core extends beyond the central 76% guideline; review readability and clipping."
+          },
+          {
+            "code": "faint_padding",
+            "detail": "Alpha > 8 pixels extend beyond the central 76%; inspect faint wisps and edge quality."
           }
         ]
       }
@@ -15043,8 +14718,8 @@
       "heroClass": "Ranger",
       "kind": "passive",
       "name": {
-        "ko": "끝없는 추격",
-        "en": "Relentless Pursuit"
+        "ko": "끝없는 행군",
+        "en": "Relentless March"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP19.png",
       "resourceKey": "Art/ClassSkillIcons/Ranger/AP19",
@@ -15052,12 +14727,12 @@
       "sourceSha256": "5fcc94d13c66ffcb50943db1664dd5791bf70b7d147721afec9a6f7b75bb49c9",
       "guid": "2901238379ab48aaa4758fde911e0cad",
       "effectSummary": {
-        "ko": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
-        "en": "Shadow Pursuit lasts 2s longer and allows 2 additional total procs."
+        "ko": "잔상 행군의 지속시간이 2초, 생성 가능한 총 잔상이 2개 늘어납니다. 동시 잔상 상한 2개는 유지합니다.",
+        "en": "Afterimage March lasts 2s longer and can create 2 additional total afterimages. The simultaneous cap remains 2."
       },
       "sourceDescription": {
-        "ko": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
-        "en": "Shadow Pursuit lasts 2s longer and allows 2 additional total procs."
+        "ko": "잔상 행군의 지속시간이 2초, 생성 가능한 총 잔상이 2개 늘어납니다. 동시 잔상 상한 2개는 유지합니다.",
+        "en": "Afterimage March lasts 2s longer and can create 2 additional total afterimages. The simultaneous cap remains 2."
       },
       "visualConcept": null,
       "tags": [
@@ -16842,21 +16517,21 @@
       "heroClass": "Warrior",
       "kind": "active",
       "name": {
-        "ko": "결연한 전진",
-        "en": "Resolute Advance"
+        "ko": "전선 돌파",
+        "en": "Front Break"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W11.png",
       "resourceKey": "Art/ClassSkillIcons/Warrior/W11",
       "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W11.png",
-      "sourceSha256": "60bb02a85709ad4819cecb5ff167e0f3f8ff725c2e79242289730a489f68c93c",
+      "sourceSha256": "6879d45daeca5ce40a018747a2ead6c0b8f86d1d15e62e29f10e4b81d772561f",
       "guid": "5c2b2c3a998645f5bfe8c33a4d940144",
       "effectSummary": {
-        "ko": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
-        "en": "Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit."
+        "ko": "최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 주고 양옆으로 최대 1.8m 밀어 전선을 엽니다. 보스는 대신 제압됩니다. 도착 후 3초간 받는 피해가 15% 감소하고 적중 시 자원 15를 한 번 회복합니다. 벽과 몸체를 통과해 밀지 않습니다.",
+        "en": "Advance up to 4m, dealing D90% physical damage to up to 5 enemies in the path and pushing them up to 1.8m sideways to open a lane. Bosses gain stagger instead. Gain 15% damage reduction for 3s and restore 15 resource once on a hit. Walls and bodies block displacement."
       },
       "sourceDescription": {
-        "ko": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
-        "en": "Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit."
+        "ko": "최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 주고 양옆으로 최대 1.8m 밀어 전선을 엽니다. 보스는 대신 제압됩니다. 도착 후 3초간 받는 피해가 15% 감소하고 적중 시 자원 15를 한 번 회복합니다. 벽과 몸체를 통과해 밀지 않습니다.",
+        "en": "Advance up to 4m, dealing D90% physical damage to up to 5 enemies in the path and pushing them up to 1.8m sideways to open a lane. Bosses gain stagger instead. Gain 15% damage reduction for 3s and restore 15 resource once on a hit. Walls and bodies block displacement."
       },
       "visualConcept": null,
       "tags": [
@@ -16867,7 +16542,7 @@
         "DES_LW43"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W11 Resolute Advance (active). Gameplay meaning: Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit.\nSubject and composition: An armored shoulder and forward-pointing shield surging horizontally through a short wedge of warm steel motion strokes. Low resolute charge with a trailing cloak fragment and a firm protected silhouette. No jumping arc.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for W11 (Warrior). Main subject: a massive iron shield smashing forward between two displaced cracked armor silhouettes, a single clear wedge of pale gold momentum opening a lane, readable directional breakthrough. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -16884,13 +16559,13 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 880511,
-          "nontransparentPixels": 692005,
-          "opaquePixels": 288,
-          "semitransparentPixels": 691717,
-          "transparentFraction": 0.559938,
-          "corePixels": 591339,
-          "coreFraction": 0.376046,
+          "transparentPixels": 742512,
+          "nontransparentPixels": 830004,
+          "opaquePixels": 268,
+          "semitransparentPixels": 829736,
+          "transparentFraction": 0.472181,
+          "corePixels": 731477,
+          "coreFraction": 0.465163,
           "alphaExtrema": [
             0,
             255
@@ -16899,20 +16574,20 @@
           "bboxAlphaAbove0": [
             0,
             19,
-            1222,
+            1246,
             1254
           ],
           "bboxAlphaAbove8": [
-            75,
-            195,
-            1212,
-            1119
+            23,
+            66,
+            1236,
+            1169
           ],
           "bboxAlphaAbove127": [
-            78,
-            196,
-            1211,
-            1114
+            24,
+            80,
+            1235,
+            1144
           ],
           "central76BoundsExclusive": [
             151,
@@ -16924,12 +16599,12 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              6,
-              10,
-              62,
-              56
+              1,
+              5,
+              63,
+              58
             ],
-            "corePixels": 1540
+            "corePixels": 1909
           }
         },
         "visualReview": {
@@ -16949,18 +16624,18 @@
               0,
               255
             ],
-            "transparentPixels": 880511,
+            "transparentPixels": 742512,
             "alphaBBox": [
               0,
               19,
-              1222,
+              1246,
               1254
             ],
             "coreBBox": [
-              78,
-              196,
-              1211,
-              1114
+              25,
+              84,
+              1234,
+              1141
             ]
           },
           "visualReview": {
@@ -16971,8 +16646,8 @@
             ],
             "thumbnailPixels": 64,
             "notes": {
-              "ko": "원본과 두 배경의 64px 미리보기에서 낙인, 갈고리, 출혈 베기, 피의 회수, 돌진, 방어 자세를 구별했습니다. 잘림이나 배경 잔여물이 보이지 않습니다.",
-              "en": "Originals and 64px previews on both backgrounds distinguish the brand, hook, bleeding slash, blood reclamation, charge and blocking posture. No visible clipping or backdrop residue."
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
             }
           }
         },
@@ -17480,21 +17155,21 @@
       "heroClass": "Warrior",
       "kind": "active",
       "name": {
-        "ko": "결전의 호흡",
-        "en": "Breath Before Battle"
+        "ko": "투쟁의 빚",
+        "en": "Battle Loan"
       },
       "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W15.png",
       "resourceKey": "Art/ClassSkillIcons/Warrior/W15",
       "rawFile": "Docs/Art/ClassSkillIcons/Warrior/raw/W15.png",
-      "sourceSha256": "0f83c1f8402930d255e0728879ddf547040aaef0b3a37df5eea17488f0bd8a4d",
+      "sourceSha256": "69d86832cf5cbc53775e90bf75a9f1de3aa367d80efe1708726091b771226ef9",
       "guid": "1ee567ce52514936b537b756c7b65907",
       "effectSummary": {
-        "ko": "4초간 1초마다 자원 8을 회복합니다. 회복은 최대 자원을 넘지 않습니다. 공격이나 이동을 막지 않으며 함성으로 분류하지 않습니다.",
-        "en": "Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout."
+        "ko": "자원 60를 즉시 빌립니다. 실제 받은 양만큼 빚이 남아 이후 자연 자원 회복을 먼저 상환에 씁니다. 3m 안의 직접 공격 적중 또는 방어 성공은 빚 4를 갚습니다. 공격 시전당 한 번, 방어는 1초 간격입니다. 상환 전에는 다시 빌릴 수 없으며 저장 복원·재장착으로 빚이 사라지지 않습니다.",
+        "en": "Borrow 60 resource immediately. Only the amount actually credited becomes debt; subsequent natural regeneration pays debt first. A direct hit within 3m or a successful block repays 4, once per attack cast or once per second for blocks. Cannot borrow again until paid; saving, restoring and unequipping retain debt."
       },
       "sourceDescription": {
-        "ko": "4초간 1초마다 자원 8을 회복합니다. 회복은 최대 자원을 넘지 않습니다. 공격이나 이동을 막지 않으며 함성으로 분류하지 않습니다.",
-        "en": "Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout."
+        "ko": "자원 60를 즉시 빌립니다. 실제 받은 양만큼 빚이 남아 이후 자연 자원 회복을 먼저 상환에 씁니다. 3m 안의 직접 공격 적중 또는 방어 성공은 빚 4를 갚습니다. 공격 시전당 한 번, 방어는 1초 간격입니다. 상환 전에는 다시 빌릴 수 없으며 저장 복원·재장착으로 빚이 사라지지 않습니다.",
+        "en": "Borrow 60 resource immediately. Only the amount actually credited becomes debt; subsequent natural regeneration pays debt first. A direct hit within 3m or a successful block repays 4, once per attack cast or once per second for blocks. Cannot borrow again until paid; saving, restoring and unequipping retain debt."
       },
       "visualConcept": null,
       "tags": [
@@ -17506,7 +17181,7 @@
         "LW06"
       ],
       "setIds": [],
-      "prompt": "Use case: stylized-concept. Asset type: original HELLSCRIPT dark gothic skill icon, a single isolated coherent symbolic subject. Output MUST be a square 1024x1024 PNG with NATIVE fully transparent RGBA alpha; preserve alpha. All surrounding space and internal empty gaps fully transparent. No scenery, opaque or gradient backdrop, checkerboard pattern, floor, plinth, UI panel, frame, border, lettering, numbers, logos, watermark or cast shadow. Main subject AND all effect wisps entirely within x=130..894,y=130..894 (central 76%), generous clean transparent margin on all four sides. Large bold shapes readable at 64x64, restrained details, crisp silhouette, painterly hand-painted dark fantasy materials: worn iron, aged leather, coarse brush texture, deep charcoal shading, sharp ivory and muted gold edge highlights. Match equipment-art chiaroscuro; avoid flat vector lines, glossy cartoon finish and photographic background. Original composition, do not copy any existing game icon. \nSkill: W15 Breath Before Battle (active). Gameplay meaning: Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout.\nSubject and composition: An armored chest taking one controlled deep breath, a broad ember-gold stream curling inward beneath the breastplate and becoming a warm glowing core. Relaxed but ready shoulders, a symbol of recovering fighting resource without shouting.",
+      "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for W15 (Warrior). Main subject: a clenched plated gauntlet gripping a short red-gold chain that loops back into a glowing sealed iron debt token, borrowed battle power with an unmistakable binding chain and restrained fiery energy. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
       "model": "unknown",
       "modelEvidence": null,
       "generationSurface": "built-in image_gen",
@@ -17523,13 +17198,13 @@
           "height": 1254,
           "pngBitDepth": 8,
           "pngColorType": 6,
-          "transparentPixels": 720247,
-          "nontransparentPixels": 852269,
-          "opaquePixels": 536,
-          "semitransparentPixels": 851733,
-          "transparentFraction": 0.458022,
-          "corePixels": 779068,
-          "coreFraction": 0.495428,
+          "transparentPixels": 899533,
+          "nontransparentPixels": 672983,
+          "opaquePixels": 299,
+          "semitransparentPixels": 672684,
+          "transparentFraction": 0.572034,
+          "corePixels": 625429,
+          "coreFraction": 0.397725,
           "alphaExtrema": [
             0,
             255
@@ -17537,21 +17212,21 @@
           "outerBorderMaxAlpha": 1,
           "bboxAlphaAbove0": [
             0,
-            8,
-            1209,
+            9,
+            1236,
             1254
           ],
           "bboxAlphaAbove8": [
-            50,
-            117,
-            1206,
-            1205
+            105,
+            13,
+            1162,
+            1187
           ],
           "bboxAlphaAbove127": [
-            51,
-            118,
-            1206,
-            1204
+            106,
+            15,
+            1153,
+            1186
           ],
           "central76BoundsExclusive": [
             151,
@@ -17563,12 +17238,12 @@
           "coreInsideCentral76": false,
           "at64px": {
             "bboxAlphaAbove127": [
-              3,
               6,
-              61,
-              60
+              1,
+              59,
+              61
             ],
-            "corePixels": 2027
+            "corePixels": 1617
           }
         },
         "visualReview": {
@@ -17588,18 +17263,18 @@
               0,
               255
             ],
-            "transparentPixels": 720247,
+            "transparentPixels": 899533,
             "alphaBBox": [
               0,
-              8,
-              1209,
+              9,
+              1236,
               1254
             ],
             "coreBBox": [
-              51,
-              118,
-              1206,
-              1204
+              106,
+              15,
+              1150,
+              1186
             ]
           },
           "visualReview": {
@@ -17610,8 +17285,8 @@
             ],
             "thumbnailPixels": 64,
             "notes": {
-              "ko": "갑옷 가슴으로 모이는 황금빛 호흡이 보이며 외부로 소리치는 W06과 구별됩니다. 원본과 두 배경에서 잘림·불투명 바탕·눈에 띄는 헤일로가 없음을 확인했습니다.",
-              "en": "Golden breath converges on the armored chest, distinct from the outward shout in W06. Original and both backgrounds show no visible clipping, opaque backdrop or halo."
+              "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+              "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
             }
           }
         },

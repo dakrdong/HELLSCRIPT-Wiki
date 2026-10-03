@@ -1,9 +1,12 @@
+import {scryptSync} from 'node:crypto';
 import {Rejected,fields,integer,sha256,challenge,randomToken,equal,reply,database,jsonBody} from './common.js';
 
 export const SESSION_SECONDS=43200;
 export const TOKEN=/^[A-Za-z0-9_-]{43}(?![\s\S])/;
 export const ID=/^[a-f0-9]{32}(?![\s\S])/;
 export const PASSWORD_ITERATIONS=600000;
+export const PASSWORD_KDF='scrypt-n16384-r8-p5-v1';
+export const SCRYPT_OPTIONS=Object.freeze({N:16384,r:8,p:5,maxmem:24*1024*1024});
 
 export function username(value) {
   if(typeof value!=='string'||!/^[A-Za-z0-9_]{3,24}(?![\s\S])/.test(value))throw new Rejected(400,'credential_format');
@@ -14,13 +17,18 @@ export function validPassword(value) {
     new TextEncoder().encode(value).length<=512&&!/[\u0000-\u001f\u007f-\u009f]/.test(value)&&
     !Array.from(value).some(c=>/^[\uD800-\uDFFF]$/.test(c));
 }
-export async function passwordHash(password,salt) {
+export async function passwordHash(password,salt,kdf=PASSWORD_KDF) {
   if(!TOKEN.test(salt))throw new Rejected(503,'password_configuration');
   try {
-    const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
     const raw=Uint8Array.from(atob(salt.replaceAll('-','+').replaceAll('_','/')+'='),c=>c.charCodeAt(0));
-    const result=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:raw,iterations:PASSWORD_ITERATIONS},key,256);
-    return Array.from(new Uint8Array(result),b=>b.toString(16).padStart(2,'0')).join('');
+    let result;
+    if(kdf===PASSWORD_KDF){
+      result=scryptSync(new TextEncoder().encode(password),raw,32,SCRYPT_OPTIONS);
+    }else if(kdf==='pbkdf2-sha256-600000'){
+      const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+      result=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:raw,iterations:PASSWORD_ITERATIONS},key,256));
+    }else throw new Error('Unsupported password KDF descriptor');
+    return Array.from(result,b=>b.toString(16).padStart(2,'0')).join('');
   }catch{throw new Rejected(503,'password_kdf_unavailable');} // Never lower the work factor to fit a host.
 }
 export async function authRate(db,bucket,at,limit) {
@@ -76,13 +84,13 @@ export async function localAccountRoute(request,env,at) {
   }
   const prior=await replay();if(prior)return prior;
   const existing=await db.prepare('SELECT * FROM auth_credentials WHERE username_key=?').bind(name).first();
-  const salt=existing?.salt||randomToken(),hash=await passwordHash(v.password,salt);
+  const salt=existing?.salt||randomToken(),hash=await passwordHash(v.password,salt,existing?.kdf||PASSWORD_KDF);
   const register=path.endsWith('/register');
-  if((register&&existing)||(!register&&(!existing||existing.kdf!=='pbkdf2-sha256-600000'||!equal(hash,existing.password_hash))))throw new Rejected(401,'credentials_rejected');
+  if((register&&existing)||(!register&&(!existing||![PASSWORD_KDF,'pbkdf2-sha256-600000'].includes(existing.kdf)||!equal(hash,existing.password_hash))))throw new Rejected(401,'credentials_rejected');
   const accountId=register?crypto.randomUUID().replaceAll('-',''):existing.account_id,expires=at+SESSION_SECONDS;
   const inserts=register?[
     db.prepare('INSERT INTO auth_accounts(id,identity_hash,created) VALUES(?,?,?)').bind(accountId,'local:'+accountId,at),
-    db.prepare('INSERT INTO auth_credentials(account_id,username_key,salt,password_hash,kdf) VALUES(?,?,?,?,?)').bind(accountId,name,salt,hash,'pbkdf2-sha256-600000')
+    db.prepare('INSERT INTO auth_credentials(account_id,username_key,salt,password_hash,kdf) VALUES(?,?,?,?,?)').bind(accountId,name,salt,hash,PASSWORD_KDF)
   ]:[];
   try {
     await db.batch([

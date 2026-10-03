@@ -1,9 +1,9 @@
 {
   "source": {
     "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
-    "runtimeSha256": "db5e524ad78b7016adc29612441d25b5f647a042e54839549c6efcb7bbb2f11e",
+    "runtimeSha256": "213afc75554dd0fc838cd9c1c22b900f8a11b9bb04814180474315db33e8458d",
     "design": "Docs/Design/ClassSkills/catalog.json",
-    "designSha256": "2779712ac5398de26fd76ee436804b06ef1b8a25ecd2e04f99f0e066813d26f7",
+    "designSha256": "fc02d95c29dc78bfba0121b12dc21450eea92479c10d4201193b4440dfc8e25a",
     "gameEnabled": false
   },
   "result": "pass",
@@ -228,8 +228,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "최대 HP 35% 보호막을 4초 유지합니다.",
-      "sourceSha256": "63bfbbbff74953386c2cafbf778f8bf24d1f8c98ed7db0ccac7c61165dd249c7"
+      "sourceDescription": "최대 HP 35% 보호막을 4초 유지하며 마지막으로 시전한 화염·냉기·번개 속성을 기억합니다. 이 보호막의 첫 실제 흡수에만 반응합니다. 화염은 3m 안 최대 5명에게 3초간 총 D60% 화상, 냉기는 1초 속박, 번개는 마나 8 회복을 줍니다. 기억한 속성이 없으면 추가 반응이 없습니다.",
+      "sourceSha256": "bea755fa83a12e7dece47ce3028ae7d279552c9ed0bb77adb3cdba955a0b912e"
     },
     {
       "id": "M06",
@@ -634,8 +634,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
-      "sourceSha256": "18f23f0b791f79e611b6143208c04a2ebd4f40293aed954408884ddbc7e45d1b"
+      "sourceDescription": "최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 주고 양옆으로 최대 1.8m 밀어 전선을 엽니다. 보스는 대신 제압됩니다. 도착 후 3초간 받는 피해가 15% 감소하고 적중 시 자원 15를 한 번 회복합니다. 벽과 몸체를 통과해 밀지 않습니다.",
+      "sourceSha256": "87b65c26b858a873c0627665a2b7b29dd65cd0ca84628d71041b9b9218ac31e8"
     },
     {
       "id": "W12",
@@ -686,8 +686,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "4초간 1초마다 자원 8을 회복합니다. 회복은 최대 자원을 넘지 않습니다. 공격이나 이동을 막지 않으며 함성으로 분류하지 않습니다.",
-      "sourceSha256": "feea9fefd8b6f86ccbb60675aa93c3f8a15a2ff3c34b4c20e0a8743c0f8e7c11"
+      "sourceDescription": "자원 60를 즉시 빌립니다. 실제 받은 양만큼 빚이 남아 이후 자연 자원 회복을 먼저 상환에 씁니다. 3m 안의 직접 공격 적중 또는 방어 성공은 빚 4를 갚습니다. 공격 시전당 한 번, 방어는 1초 간격입니다. 상환 전에는 다시 빌릴 수 없으며 저장 복원·재장착으로 빚이 사라지지 않습니다.",
+      "sourceSha256": "2bc09607ce40cb39c7e30a1250f7b956515f777291b2b56a0218db4de8ca863f"
     },
     {
       "id": "W16",
@@ -858,19 +858,12 @@
       "classification": "level_only",
       "required": [],
       "oneDirectSource": [],
-      "sourceReferences": [
-        "A01"
-      ],
+      "sourceReferences": [],
       "directEffectReferences": [],
-      "exclusions": [
-        {
-          "id": "A01",
-          "reason": "Explicitly excluded by the effect description; not a prerequisite."
-        }
-      ],
+      "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
-      "sourceSha256": "d15c65cd5cab2224c05dda3d9e39ed3f531621154eccc1ded4ecbbea22eb9d68"
+      "sourceDescription": "6m 안에 쇠뇌 하나를 6초간 설치하고 1초마다 9m 안의 감지한 적에게 D35% 물리 추가 피해를 줍니다. 최근 2초 안에 본체 사격이 맞힌 적을 서로 60도 이상 다른 사선에서 쏘면 D45%를 더합니다. 교차 사선과 표식 대상을 우선하며 최대 6회 사격합니다. 추가 사격은 발동을 재생산하지 않습니다.",
+      "sourceSha256": "617d78f9cc32ce32d44543d8f2a735223776665e411214d292cd2d5e830e7bd7"
     },
     {
       "id": "A16",
@@ -934,8 +927,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
-      "sourceSha256": "b8f69782b828795a58e06f72d795b9425cf0260f2bdf41a0325ead6878e172da"
+      "sourceDescription": "8초간 이동속도가 20% 증가합니다. 이전 흔적에서 1.5m 이동할 때 그 자리에 잔상을 남깁니다. 동시 2개, 총 8개까지입니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14 직접 적중 시 시야·사거리 10m가 유효한 잔상 하나가 그 자리에서 D60% 암흑 화살을 쏩니다. 시전당·초당 한 번이며 제자리에서는 새 잔상이 생기지 않습니다.",
+      "sourceSha256": "a1ff43f0931197bf07ad07384c15b839be74d47d84edc31fea5e1693e8eecba1"
     },
     {
       "id": "M07",
@@ -986,8 +979,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
-      "sourceSha256": "48576cfca7b0786a87fb6941b31c6b110f4e05835bc1859c6d39d6c59eecfbde"
+      "sourceDescription": "서리 구체가 최대 8m를 초속 5m로 날아가 지정 지점이나 첫 벽에서 시전 위치로 돌아옵니다. 왕복 각각 최대 5명에게 한 번씩 D90% 냉기 피해와 3초간 35% 둔화를 줍니다. 돌아올 때 이미 둔화된 적은 0.75초 빙결됩니다. 구체 도착 순간 시전 위치 0.7m 안에 있으면 마나 12를 한 번 회수합니다. 벽이 귀환을 막으면 회수에 실패합니다.",
+      "sourceSha256": "833422507fe003b895ba4ce8ee5b99164babef17b1aac5bee64324f6f8d6723f"
     },
     {
       "id": "M11",
@@ -1030,8 +1023,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
-      "sourceSha256": "7905f5d0513effdae5f361d32849cb03097894f8eb65da9eb92349f30b5247c1"
+      "sourceDescription": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D90% 번개 피해를 주고 지정 지점에 접지창 하나를 6초간 남깁니다. M03이 4m 안의 다음 적을 찾지 못하면 접지창까지 4m, 창에서 다음 적까지 4m를 잇습니다. 벽·감지 규칙을 지키며 창도 연쇄 횟수 하나를 소비합니다. 한 연쇄당 중계 한 번, 마나 4 회복 한 번입니다. 최근 M03 적중 대상을 창으로 직접 맞혀도 같은 회복을 시전당 한 번 얻습니다.",
+      "sourceSha256": "05f641d3c2b65de02d5ee23e905c70fe88d57402da3c0ded8d218554142d39e7"
     },
     {
       "id": "M13",
@@ -1169,7 +1162,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 106,
+          "line": 107,
           "cue": "HasDot(\"W09\",enemy)||HasDot(\"REF_SW05_B2\",enemy)"
         }
       ],
@@ -1238,12 +1231,12 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 59,
+          "line": 60,
           "cue": "id==\"W02\"||id==\"W11\""
         }
       ],
-      "sourceDescription": "도약 내려찍기 또는 결연한 전진을 마치면 최대 HP 5% 보호막을 3초간 얻습니다. 두 기술은 3초 재발동 간격을 공유합니다.",
-      "sourceSha256": "add59dba78954a469f59db3918274a2c6fc5f44f2788413e9914e915019a9eb2"
+      "sourceDescription": "도약 내려찍기 또는 전선 돌파를 마치면 최대 HP 5% 보호막을 3초간 얻습니다. 두 기술은 3초 재발동 간격을 공유합니다.",
+      "sourceSha256": "63a804b1f561f0b67e1c0b96865668377f45e7eb53029f26d3e2db8a85764386"
     },
     {
       "id": "WP12",
@@ -1478,7 +1471,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 69,
+          "line": 70,
           "cue": "ClassTrapArmed"
         }
       ],
@@ -1525,7 +1518,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 52,
+          "line": 53,
           "cue": "Passive(\"AP12\")"
         }
       ],
@@ -1585,7 +1578,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 109,
+          "line": 110,
           "cue": "Passive(\"AP14\")"
         }
       ],
@@ -1632,7 +1625,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 51,
+          "line": 52,
           "cue": "Passive(\"AP16\")"
         }
       ],
@@ -1658,8 +1651,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "자신과 경계 쇠뇌 사이의 거리가 5m 이상이면 그 쇠뇌의 피해가 가산 10% 증가합니다. 각 쇠뇌 사격 생성 시 거리를 확인합니다.",
-      "sourceSha256": "ceb432ce5947dc13eed7e6ffdea1409403154ed8d4d02734843e588fb15cd066"
+      "sourceDescription": "교차 쇠뇌의 교차 사격이 첫 적을 관통하여 같은 사선의 적 한 명을 사격 피해의 50%로 더 맞힙니다. 최대 2명, 실제 사거리·벽 충돌을 유지하며 추가 발동을 재생산하지 않습니다.",
+      "sourceSha256": "6d024801c7faf18494e9d1f658d727834906438021a67cf767060a73c0da37b8"
     },
     {
       "id": "AP18",
@@ -1707,12 +1700,12 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 96,
+          "line": 97,
           "cue": "HasDot(\"M07\",enemy)||InFirewall(enemy.position)"
         },
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 128,
+          "line": 129,
           "cue": "Passive(\"MP07\")"
         }
       ],
@@ -1746,7 +1739,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 185,
+          "line": 182,
           "cue": "Passive(\"MP08\")"
         }
       ],
@@ -1800,7 +1793,7 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 73,
+          "line": 74,
           "cue": "id!=\"M06\"&&id!=\"M09\""
         }
       ],
@@ -1998,8 +1991,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
-      "sourceSha256": "2b5c3f2a71ab7c0e52390f19ad1c28460a2f70ee1c01232e23f336877195922f"
+      "sourceDescription": "잔상 행군의 지속시간이 2초, 생성 가능한 총 잔상이 2개 늘어납니다. 동시 잔상 상한 2개는 유지합니다.",
+      "sourceSha256": "54f5f21853bca24dde45181270e946b7a9883896bcc851312dbbf2f39105cbce"
     },
     {
       "id": "MP19",

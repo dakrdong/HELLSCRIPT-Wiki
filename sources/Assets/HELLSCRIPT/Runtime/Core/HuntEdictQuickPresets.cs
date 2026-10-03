@@ -107,7 +107,13 @@ namespace Hellscript
             {
                 if(!next.UsesTree)throw new ArgumentException("Attack-order presets require the current skill tree.");
                 var skills=next.classSkills;var ordinary=skills.actives.Where(id=>id!="");var ultimate=skills.ultimate==""?Array.Empty<string>():new[]{skills.ultimate};
-                skills.order=preset.id=="basic-first"?new[]{"BASIC"}.Concat(ordinary).Concat(ultimate).ToArray():
+                if(preset.id=="identity")
+                {
+                    var setup=new[]{"W15","W07","W11","W12","A18","A15","A05","M15","M12","M11"};
+                    var equipped=ordinary.Concat(ultimate).ToArray();
+                    skills.order=setup.Where(equipped.Contains).Concat(equipped.Where(id=>!setup.Contains(id))).Concat(new[]{"BASIC"}).ToArray();
+                }
+                else skills.order=preset.id=="basic-first"?new[]{"BASIC"}.Concat(ordinary).Concat(ultimate).ToArray():
                     preset.id=="ultimate-first"?ultimate.Concat(ordinary).Concat(new[]{"BASIC"}).ToArray():ordinary.Concat(ultimate).Concat(new[]{"BASIC"}).ToArray();
             }
             else

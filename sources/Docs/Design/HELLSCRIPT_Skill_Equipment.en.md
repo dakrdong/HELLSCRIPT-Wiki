@@ -1,6 +1,6 @@
 # HELLSCRIPT skill and equipment matrix
 
-Updated: 2026-09-29
+Updated: 2026-10-04
 
 [Design rules](HELLSCRIPT_Class_Skills.en.md) · [JSON](ClassSkills/catalog.json)
 
@@ -16,9 +16,9 @@ Six items per class link new skill pairs. These are not registered for drops, sa
 |---|---|---|---|---|
 | DES_LW41 | Pursuer's Chain | Amulet | W07, W08 | Directly hooking your branded target extends the brand by 2s and restores 8 extra resource. Never extend beyond 8s from initial application; 4s interval. |
 | DES_LW42 | Wound Reaper's Grasp | Hands | W09, W10 | Increase new Raking Wound bleed totals by 20%. Blood Reclamation stuns each enemy whose remaining bleed it actually cashes out for 1s, up to 5 per cast; bosses receive stagger credit. |
-| DES_LW43 | Moving Rampart | Body | W11, W12 | After Resolute Advance, the next Iron Stance within 5s grants an 8% maximum-HP barrier for 4s. Once per completed advance, not refreshed by stance recasts alone. |
+| DES_LW43 | Moving Rampart | Body | W11, W12 | After Front Break, the next Iron Stance within 5s grants an 8% maximum-HP barrier for 4s. Once per completed break, not refreshed by stance recasts alone. |
 | DES_LW44 | Mountain Tremor | Waist | W13, W14 | An actual Battlefield Ring hit empowers the next Tremor Wave within 5s: width increases from 1m to 1.5m and direct damage gains +25% in the legendary pool. |
-| DES_LW45 | Unspent Resolve | Ring | W15, W16 | Using Guardian's Vow during Breath Before Battle immediately grants and consumes its remaining fixed restoration. Add 0.25% maximum HP to Vow's barrier per resource actually restored, capped at 8%; 8s interval. |
+| DES_LW45 | Unspent Resolve | Ring | W15, W16 | Using Guardian's Vow with Battle Loan debt spends up to 8 current resource to repay that amount. Add 1% maximum HP to Vow's barrier per resource actually repaid, capped at 8%; 8s interval. |
 | DES_LW46 | Ancestral King's Crown | Head | W17, W18 | With War of the Ancestors selected, the first ancestor hit grants +20% legendary-pool Whirlwind damage for 4s. With Titan's Judgment selected, restore 20 resource once on an actual hit, regardless of target count. Never unlock or cast the other ultimate. |
 
 ### Ranger
@@ -29,16 +29,16 @@ Six items per class link new skill pairs. These are not registered for drops, sa
 | DES_LA42 | Winterthorn Grasp | Hands | A09, A10 | If Frost Snare actually hits an enemy rooted by Briar Trap, apply D90% secondary poison damage over 3s. Root or cold alone cannot retrigger it; 4s per target. |
 | DES_LA43 | Decoy Mantle | Body | A11, A12 | Using Smoke Cover while your decoy lives refreshes its normal-enemy lure to 2s from now. Once per decoy; no elite or boss taunt and no extra explosion. |
 | DES_LA44 | Forked Fang | Amulet | A13, A14 | If Forking Arrow's first target has your Venom Arrow poison, increase its secondary target count from 2 to 3. Secondary arrows remain D50% and copy no poison, mark or shadow charge. |
-| DES_LA45 | Prepared Outpost | Waist | A15, A16 | The next Watch Ballista placed within 6s of Hunt Preparation gains 2s duration and 2 allowed shots. It cannot extend an existing ballista; one enhanced ballista per preparation. |
-| DES_LA46 | Oath of Two Hunts | Ring | A17, A18 | With Killing Rain selected, its first pulse slows a marked target it actually hits by 30% for 2s. With Shadow Pursuit selected, the first valid echo grants a 12% maximum-HP barrier for 4s. Once per ultimate cast. |
+| DES_LA45 | Prepared Outpost | Waist | A15, A16 | The next Crossfire Ballista placed within 6s of Hunt Preparation gains 2s duration and 2 allowed shots. It cannot extend an existing ballista; one enhanced ballista per preparation. |
+| DES_LA46 | Oath of Two Hunts | Ring | A17, A18 | With Killing Rain selected, its first pulse slows a marked target it actually hits by 30% for 2s. With Afterimage March selected, the first valid echo grants a 12% maximum-HP barrier for 4s. Once per ultimate cast. |
 
 ### Mage
 
 | ID | Name | Slot | Skills | Unique power |
 |---|---|---|---|---|
 | DES_LM41 | Kindling Grasp | Hands | M07, M08 | Ember Lance gains +30% burn total against a direct target inside your Firewall. Firewall ticks cannot retrigger this effect. |
-| DES_LM42 | Glassglacier Staff | Weapon | M09, M10 | If Frost Globe hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze. |
-| DES_LM43 | Thunder Collector | Amulet | M11, M12 | A direct Storm Spear hit inside Capacitor Orb adds 1 charge to that orb, once per cast, sharing its cap of 3. The expiry blast is never reclassified as Storm Spear. |
+| DES_LM42 | Glassglacier Staff | Weapon | M09, M10 | If Returning Frost hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze. |
+| DES_LM43 | Thunder Collector | Amulet | M11, M12 | A direct Grounding Spear hit inside Capacitor Orb adds 1 charge to that orb, once per cast, sharing its cap of 3. The expiry blast is never reclassified as Grounding Spear. A grounding spear relaying M03 within 3m of the orb also adds one charge per chain. |
 | DES_LM44 | Quiet Rift | Waist | M13, M14 | After channeling Mana Reclaim uninterrupted for at least 1.5s inside your own Rift Ward, gain a 10% maximum-health shield for 4s. Internal cooldown: 6s; restarting the channel does not reset it. |
 | DES_LM45 | Compass Center | Body | M15, M16 | Spending Elemental Compass's lightning charge on Magnetic Vortex increases its initial pull search radius from 3m to 4m. Damage radius, pull distance and target cap are unchanged. |
 | DES_LM46 | Threefold Crownstone | Ring | M17, M18 | With Triune Collapse selected, its third stage's first hit restores 15 resource once without consuming elemental charges. With Sage Incarnate selected, three-element completion bursts grow from 2.5m to 3m. Never cast the other ultimate. |

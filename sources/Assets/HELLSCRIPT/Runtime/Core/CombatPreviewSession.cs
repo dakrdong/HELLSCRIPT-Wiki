@@ -61,7 +61,10 @@ namespace Hellscript
             }
         }
         static string EventLabel(string kind)=>kind switch
-        {"CAST_START"=>"사용 시작","DAMAGE"=>"피해 적용","RESOURCE"=>"자원 회복","HEAL"=>"체력 회복","PULL"=>"끌어당김","DOT_CREATED"=>"지속 피해 적용","CASHOUT"=>"출혈 회수",_=>"스킬 효과 진행"};
+        {"CAST_START"=>"사용 시작","DAMAGE"=>"피해 적용","RESOURCE"=>"자원 회복","HEAL"=>"체력 회복","PULL"=>"끌어당김","DOT_CREATED"=>"지속 피해 적용","CASHOUT"=>"출혈 회수",
+            "PUSH"=>"전선 밀기","BORROW"=>"자원 차입","REPAY"=>"빚 상환","CROSSFIRE"=>"교차 사격",
+            "AFTERIMAGE"=>"이동 잔상 생성","ELEMENT_REACTION"=>"속성 흡수 반응","RETURN"=>"서리 귀환",
+            "MISSED_PICKUP"=>"서리 회수 실패","RELAY"=>"접지 연쇄 중계",_=>"스킬 효과 진행"};
         public void Dispose()
         {if(disposed)return;disposed=true;Combat.ClassSkillChanged-=Observe;Reset=null;observed.Clear();}
     }

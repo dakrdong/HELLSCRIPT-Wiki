@@ -2187,10 +2187,10 @@
     {
       "scope": "skill/A15",
       "id": "opportunity",
-      "name": "교전마다 설치",
-      "nameEn": "Deploy in any fight",
-      "description": "일반 적과의 교전에서도 바로 쇠뇌를 설치합니다.",
-      "descriptionEn": "Deploy the ballista even in fights against normal enemies.",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available",
+      "description": "적이 보이면 쇠뇌를 빠르게 설치합니다. 짧은 교전은 남은 사격을 낭비합니다.",
+      "descriptionEn": "Places the ballista as soon as a target appears. Short fights waste remaining shots.",
       "values": [],
       "choices": [
         {
@@ -2202,10 +2202,10 @@
     {
       "scope": "skill/A15",
       "id": "setup",
-      "name": "강적전용 설치",
-      "nameEn": "Reserve for strong targets",
-      "description": "정예 또는 보스가 등장할 때까지 보존합니다.",
-      "descriptionEn": "Reserve deployment until an elite or boss appears.",
+      "name": "정예·보스에게 사용",
+      "nameEn": "Use against elites and bosses",
+      "description": "오래 싸울 정예·보스에게 설치합니다. 일반 적을 정리할 추가 사격이 줄어듭니다.",
+      "descriptionEn": "Deploys for longer elite or boss fights. Loses extra shots during ordinary clearing.",
       "values": [],
       "choices": [
         {
@@ -2277,10 +2277,10 @@
     {
       "scope": "skill/A18",
       "id": "opportunity",
-      "name": "즉시 추격 강화",
-      "nameEn": "Empower pursuit immediately",
-      "description": "즉시 이동 속도와 그림자 추가 공격을 얻습니다.",
-      "descriptionEn": "Immediately gain movement speed and shadow follow-up attacks.",
+      "name": "이동 사격",
+      "nameEn": "Mobile shots",
+      "description": "대상이 보이면 시작합니다. 선회 이동으로 잔상을 만들고 다음 직접 사격에 씁니다. 제자리에 서 있으면 추가 화살이 생기지 않습니다.",
+      "descriptionEn": "Activate on a visible target; orbit to leave images and use them on the next direct shot. Standing still produces no extra arrows.",
       "values": [],
       "choices": [
         {
@@ -2292,10 +2292,10 @@
     {
       "scope": "skill/A18",
       "id": "setup",
-      "name": "자원 충분할 때 강화",
-      "nameEn": "Empower with ample resources",
-      "description": "자원 70% 이상을 기다린 뒤 사격을 강화합니다.",
-      "descriptionEn": "Wait for at least 70% resources before empowering shots.",
+      "name": "사용 후 자원 70% 보존",
+      "nameEn": "Leave 70% resource after casting",
+      "description": "자원이 70% 이상일 때 추격을 시작합니다. 자원 회복을 기다리며 공격 창을 놓칩니다.",
+      "descriptionEn": "Starts pursuit with at least 70% resource. Misses damage windows while waiting for resource.",
       "values": [],
       "choices": [
         {
@@ -2483,19 +2483,23 @@
       "id": "prevent",
       "name": "피격 미리 대비",
       "nameEn": "Prepare for incoming damage",
-      "description": "공격 예고에 맞춰 보호막을 먼저 사용합니다.",
-      "descriptionEn": "Use the shield in anticipation of an attack.",
+      "description": "공격 예고에 맞춰 보호막을 먼저 사용합니다. 마지막 속성에 따른 첫 흡수 반응을 함께 사용합니다.",
+      "descriptionEn": "Use the shield in anticipation of an attack. The first absorption also reacts to the remembered element.",
       "values": [],
       "choices": []
     },
     {
       "scope": "skill/M05",
       "id": "chain",
-      "name": "보호막 이어 쓰기",
-      "nameEn": "Chain shields",
-      "description": "다른 보호막이 끝난 뒤 필요한 시점에 사용합니다.",
-      "descriptionEn": "Use it when needed after the other shield ends.",
+      "name": "속성 흡수 대비",
+      "nameEn": "Prepare elemental absorption",
+      "description": "다른 보호막이 없을 때 새 교전에 보호막을 준비합니다. 이전 속성 공격의 첫 흡수 반응을 활용하며 공격을 받아 버티는 위치 설정과 연계합니다.",
+      "descriptionEn": "Prepare a shield for a new encounter when no other shield remains. Use the preceding element on its first absorption with a position policy that accepts shielded hits.",
       "values": [
+        {
+          "id": "2",
+          "value": "ENGAGE"
+        },
         {
           "id": "3",
           "value": "AFTER"
@@ -2508,8 +2512,8 @@
       "id": "emergency",
       "name": "긴급 생존용 보존",
       "nameEn": "Reserve for survival",
-      "description": "체력이 낮아진 긴급 상황까지 보존합니다.",
-      "descriptionEn": "Reserve it for a low-health emergency.",
+      "description": "체력이 낮아진 긴급 상황까지 보존합니다. 마지막 속성에 따른 첫 흡수 반응을 함께 사용합니다.",
+      "descriptionEn": "Reserve it for a low-health emergency. The first absorption also reacts to the remembered element.",
       "values": [
         {
           "id": "2",
@@ -2645,10 +2649,10 @@
     {
       "scope": "skill/M10",
       "id": "opportunity",
-      "name": "바로 구체 발사",
-      "nameEn": "Launch immediately",
-      "description": "바로 구체를 발사합니다. 구체가 이동한 뒤 폭발합니다.",
-      "descriptionEn": "Launch the orb immediately; it explodes after travelling.",
+      "name": "귀환 회수",
+      "nameEn": "Recover the return",
+      "description": "대상이 보이면 왕복 경로를 쏘고 안전한 시전 위치에서 마나 회수를 노립니다. 회수 위치가 위험하거나 3m보다 멀면 회수를 포기합니다.",
+      "descriptionEn": "Fire on sight and seek the safe cast location to recover mana on return. Give up recovery if the location is dangerous or farther than 3m.",
       "values": [],
       "choices": [
         {
@@ -2660,10 +2664,10 @@
     {
       "scope": "skill/M10",
       "id": "setup",
-      "name": "제어된 적에게 발사",
-      "nameEn": "Launch at a controlled target",
-      "description": "제어된 대상 방향으로 발사합니다. 추적 기능은 없습니다.",
-      "descriptionEn": "Launch toward a controlled target. The orb does not home.",
+      "name": "제어 사격",
+      "nameEn": "Control shots",
+      "description": "제어된 대상만 쏩니다. 회수 이동을 생략하고 현재 전투 위치를 유지합니다. 시전 위치를 벗어나면 회수 마나를 잃을 수 있습니다.",
+      "descriptionEn": "Shoot controlled targets only and hold combat position instead of moving for pickup. Moving away from the cast location can lose the mana refund.",
       "values": [],
       "choices": [
         {
@@ -2705,10 +2709,10 @@
     {
       "scope": "skill/M12",
       "id": "opportunity",
-      "name": "즉시 관통 공격",
-      "nameEn": "Pierce immediately",
-      "description": "준비되면 바로 관통 공격을 사용합니다.",
-      "descriptionEn": "Use the piercing attack whenever ready.",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available",
+      "description": "사선이 열리면 바로 공격합니다. 연쇄 적중 후 자원 회수 기회를 놓칠 수 있습니다.",
+      "descriptionEn": "Attacks whenever a firing line is open. Can miss the resource refund after Chain Lightning.",
       "values": [],
       "choices": [
         {
@@ -2720,10 +2724,10 @@
     {
       "scope": "skill/M12",
       "id": "setup",
-      "name": "연쇄 번개 후 연계",
-      "nameEn": "Follow chain lightning",
-      "description": "최근 3초 안에 자신의 연쇄 번개에 맞은 대상에게 사용하고 자원을 환급받습니다.",
-      "descriptionEn": "Hit a target struck by your chain lightning within the last three seconds to recover resources.",
+      "name": "연쇄 전에 접지",
+      "nameEn": "Ground before chaining",
+      "description": "M03이 준비되고 두 기술의 마나가 있을 때 먼저 중계창을 설치합니다. 창 설치에 먼저 행동과 마나를 씁니다.",
+      "descriptionEn": "Place the relay first when M03 is ready and mana covers both skills. Spends an action and mana on setup first.",
       "values": [],
       "choices": [
         {
@@ -3373,10 +3377,10 @@
     {
       "scope": "skill/W11",
       "id": "opportunity",
-      "name": "근거리에서도 돌파",
-      "nameEn": "Advance even at close range",
-      "description": "가까운 적을 관통하며 공격과 방어 효과를 얻습니다.",
-      "descriptionEn": "Pass through nearby enemies to attack and gain defence.",
+      "name": "가능하면 바로 사용",
+      "nameEn": "Use when available",
+      "description": "짧은 거리도 전진해 피해 감소를 확보합니다. 이동기를 일찍 소비하고 위치가 바뀝니다.",
+      "descriptionEn": "Uses even a short advance for mitigation. Spends mobility early and changes position.",
       "values": [],
       "choices": [
         {
@@ -3388,10 +3392,10 @@
     {
       "scope": "skill/W11",
       "id": "setup",
-      "name": "먼 적에게 접근",
-      "nameEn": "Approach distant enemies",
-      "description": "3m 이상 떨어진 적에게 접근할 때 사용합니다.",
-      "descriptionEn": "Use it to approach enemies at least 3m away.",
+      "name": "먼 적에게 사용",
+      "nameEn": "Use against distant enemies",
+      "description": "멀어진 적에게 접근할 때만 전진합니다. 붙어 있는 동안 방어·자원 회복 기회가 줄어듭니다.",
+      "descriptionEn": "Advances only to close a gap. Loses mitigation and resource opportunities while close.",
       "values": [],
       "choices": [
         {
@@ -3493,10 +3497,10 @@
     {
       "scope": "skill/W15",
       "id": "opportunity",
-      "name": "자원 부족할 때 회복",
-      "nameEn": "Recover low resources",
-      "description": "자원이 30% 이하일 때 지속 회복을 시작합니다.",
-      "descriptionEn": "Start restoring resources when they are at 30% or below.",
+      "name": "자원 30% 이하에서",
+      "nameEn": "Below 30% resource",
+      "description": "자원이 충분히 빈 뒤 회복해 넘침을 줄입니다. 회복이 시작되기 전 공격이 끊길 수 있습니다.",
+      "descriptionEn": "Waits for low resource to reduce overflow. Attacks can stop before recovery starts.",
       "values": [],
       "choices": [
         {
@@ -3508,10 +3512,10 @@
     {
       "scope": "skill/W15",
       "id": "setup",
-      "name": "자원 미리 보충",
-      "nameEn": "Top up resources early",
-      "description": "자원이 75% 이하일 때 미리 지속 회복을 시작합니다.",
-      "descriptionEn": "Start restoring resources early, at 75% or below.",
+      "name": "자원 75% 이하에서",
+      "nameEn": "Below 75% resource",
+      "description": "자원이 75% 이하부터 회복을 미리 시작합니다. 전투가 끊기면 남은 회복을 낭비합니다.",
+      "descriptionEn": "Starts recovery early below 75% resource. Wastes recovery if combat stops.",
       "values": [],
       "choices": [
         {
@@ -3624,6 +3628,43 @@
           "choice": "setup"
         }
       ]
+    },
+    {
+      "scope": "order",
+      "id": "identity",
+      "name": "설치·이동·회수 연계",
+      "nameEn": "Set up skill identities",
+      "description": "선지급·설치·잔상 준비를 먼저 하고 공격합니다. 접지창은 연쇄 번개보다 먼저 시전하며 장착한 스킬만 순서에 넣습니다.",
+      "descriptionEn": "Borrow and set up placements or afterimages before attacks. Place Grounding Spear before Chain Lightning; consider equipped skills only.",
+      "values": [],
+      "choices": []
+    },
+    {
+      "scope": "global/position.engage",
+      "id": "mobile-crossfire",
+      "name": "사선 선회",
+      "nameEn": "Orbit for crossfire",
+      "description": "대상과 4m 거리를 두고 선회하여 쇠뇌의 교차각과 잔상 이동을 만듭니다. 잔상 행군·교차 쇠뇌에 권장합니다.",
+      "descriptionEn": "Orbit at 4m to create ballista crossfire angles and afterimage movement. Recommended for Afterimage March and Crossfire Ballista.",
+      "values": [
+        {
+          "id": "position.engage",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "4"
+        }
+      ],
+      "choices": []
     }
   ],
   "styles": [

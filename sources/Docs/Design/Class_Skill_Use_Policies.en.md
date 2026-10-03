@@ -102,11 +102,11 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Cash bleed out early | Cashes its own bleed early for damage and healing. | Removes bleed-dependent opportunities for other attacks. |
 | Time bleed expiry or healing | Cashes out near bleed expiry or below 40% health. | Delays healing and burst damage. |
 
-### W11 · Resolute Advance use policy
+### W11 · Front Break use policy
 
 | Choice | Gain | Cost |
 | --- | --- | --- |
-| Default edict | Approach an enemy only when the destination is no more dangerous than the current position. | Opportunities that fail these conditions are left to other actions. |
+| Favor identity | Break through two aligned enemies or a target beyond 3m when landing is safe. | Waits for a valid setup opportunity. |
 | Use when available | Uses even a short advance for mitigation. | Spends mobility early and changes position. |
 | Use against distant enemies | Advances only to close a gap. | Loses mitigation and resource opportunities while close. |
 
@@ -134,11 +134,11 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Use when available | Attacks one enemy at range with the wave. | May hit few enemies per cast. |
 | Wait for several targets | Casts when the wave can reach at least three. | Delays casts against unaligned enemies. |
 
-### W15 · Breath Before Battle use policy
+### W15 · Battle Loan use policy
 
 | Choice | Gain | Cost |
 | --- | --- | --- |
-| Default edict | Use at 60% resource or less while preparing the next attack. | Opportunities that fail these conditions are left to other actions. |
+| Favor identity | Borrow at 60% resource or less with no outstanding debt, then repay with close hits. | Waits for a valid setup opportunity. |
 | Below 30% resource | Waits for low resource to reduce overflow. | Attacks can stop before recovery starts. |
 | Below 75% resource | Starts recovery early below 75% resource. | Wastes recovery if combat stops. |
 
@@ -281,11 +281,11 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Use when available | Uses the first arrow even against a lone enemy. | Can waste the split arrows. |
 | Wait for several targets | Waits for the first target and two split targets. | Casts less when enemies spread out. |
 
-### A15 · Watch Ballista use policy
+### A15 · Crossfire Ballista use policy
 
 | Choice | Gain | Cost |
 | --- | --- | --- |
-| Default edict | Place outside hazards for sustained elite combat. | Opportunities that fail these conditions are left to other actions. |
+| Favor identity | Against an elite, place on a safe firing angle apart from the hero, then follow direct shots with crossfire. | Waits for a valid setup opportunity. |
 | Use when available | Places the ballista as soon as a target appears. | Short fights waste remaining shots. |
 | Use against elites and bosses | Deploys for longer elite or boss fights. | Loses extra shots during ordinary clearing. |
 
@@ -305,12 +305,12 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Use against elites and bosses | Starts arrow rain promptly against an elite or boss. | A moving target can leave the fixed area. |
 | Wait for a controlled group | Waits for at least three controlled enemies. | Holds the ultimate without a controlled group. |
 
-### A18 · Shadow Pursuit use policy
+### A18 · Afterimage March use policy
 
 | Choice | Gain | Cost |
 | --- | --- | --- |
-| Default edict | Use in mobile elite or boss combat with enough resource to fire. | Opportunities that fail these conditions are left to other actions. |
-| Use when available | Starts repeating echoes early in the engagement. | Leaves charges unused if resource or targets disappear. |
+| Favor identity | Activate against an elite. Orbit or disengage for 1.5m before shooting to make afterimages fire. | Waits for a valid setup opportunity. |
+| Mobile shots | Activate on a visible target; orbit to leave images and use them on the next direct shot. | Standing still produces no extra arrows. |
 | Leave 70% resource after casting | Starts pursuit with at least 70% resource. | Misses damage windows while waiting for resource. |
 
 ## Mage
@@ -387,13 +387,13 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Use when available | Uses the spear to apply its own initial slow. | Can start with slow instead of freeze. |
 | Freeze after a slow | Hits an already slowed enemy for a freeze. | Waits for a source of slow. |
 
-### M10 · Frost Globe use policy
+### M10 · Returning Frost use policy
 
 | Choice | Gain | Cost |
 | --- | --- | --- |
-| Default edict | Aim at the observed center of an approaching group. | Opportunities that fail these conditions are left to other actions. |
-| Use when available | Sends the globe even at one enemy. | Can miss during travel time. |
-| Wait for control | Targets a controlled enemy for a reliable explosion. | Can lose the opportunity as control expires. |
+| Favor identity | Fire down a two-enemy corridor or at a controlled target; seek a safe cast location within 3m for return recovery. | Waits for a valid setup opportunity. |
+| Recover the return | Fire on sight and seek the safe cast location to recover mana on return. | Give up recovery if the location is dangerous or farther than 3m. |
+| Control shots | Shoot controlled targets only and hold combat position instead of moving for pickup. | Moving away from the cast location can lose the mana refund. |
 
 ### M11 · Capacitor Orb use policy
 
@@ -403,13 +403,13 @@ Repeat against stationary enemies, pursuing groups and bosses with movement or t
 | Use when available | Places the orb even without Chain Lightning. | Gives up full charged-explosion power. |
 | After Chain Lightning is ready | Waits for an available Chain Lightning and its cost. | Loses standalone orb damage and deployments. |
 
-### M12 · Storm Spear use policy
+### M12 · Grounding Spear use policy
 
 | Choice | Gain | Cost |
 | --- | --- | --- |
-| Default edict | Use against a recently chained elite or aligned enemies. | Opportunities that fail these conditions are left to other actions. |
+| Favor identity | Set up before a ready M03. Choose a relay point between perceived groups separated by 4–8m. | Waits for a valid setup opportunity. |
 | Use when available | Attacks whenever a firing line is open. | Can miss the resource refund after Chain Lightning. |
-| After Chain Lightning hits | Targets an enemy recently hit by its Chain Lightning. | Waits for Chain Lightning to land. |
+| Ground before chaining | Place the relay first when M03 is ready and mana covers both skills. | Spends an action and mana on setup first. |
 
 ### M13 · Mana Reclaim use policy
 

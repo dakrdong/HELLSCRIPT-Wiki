@@ -730,6 +730,8 @@ def build_evidence():
     return db('validation','검증 기록','보존된 Edit Mode 보고서 전체입니다. 각 항목에 검사 단계와 종료 시각을 표시하며, 실패를 수정하기 전의 보고서도 그대로 남깁니다. 검사 수를 합산하지 않고 현재 게임 전체의 검증 완료로 해석하지 않습니다.',rows)
 
 PAGE_META={
+ 'skill-identity-rework':('전투와 성장','스킬 개성·자동 전투 개편','일곱 스킬의 위치·상환·원소 기억·회수·연쇄 판단, 연계 패시브·장비와 사냥칙령 프리셋의 구현·검증입니다.'),
+ 'skill-identity-rework.en':('전투와 성장','Skill identities and automatic combat','Seven distinct movement, debt, elemental memory, retrieval and relay mechanics, linked passives/equipment and Hunt Edict presets.'),
  'daily-quests':('전투와 성장','일일 퀘스트 · 하루 심연 주화 100개','매일 같은 다섯 활동과 고정 목표, 기존 진행·수령 보존과 출석 자정·거래·저장 규칙입니다.'),
  'daily-quests.en':('전투와 성장','Daily quests · 100 daily Abyssal Coins','The same five fixed goals every day, preserved progress/claims and attendance midnight/persistence rules.'),
  'optimization-20260930':('리소스와 운영','전체 최적화·대장간·일일 퀘스트 통합','실측 용량·native 성능·할당·메모리 증가, 저장/품질 동등성과 최종 통합 검증 범위입니다.'),

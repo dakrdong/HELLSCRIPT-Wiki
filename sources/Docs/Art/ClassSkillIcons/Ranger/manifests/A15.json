@@ -2,14 +2,14 @@
   "id": "A15",
   "heroClass": "Ranger",
   "name": {
-    "ko": "경계 쇠뇌",
-    "en": "Watch Ballista"
+    "ko": "교차 쇠뇌",
+    "en": "Crossfire Ballista"
   },
   "kind": "active",
   "assetPath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png",
   "effectSummary": {
-    "ko": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
-    "en": "Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01."
+    "ko": "6m 안에 쇠뇌 하나를 6초간 설치하고 1초마다 9m 안의 감지한 적에게 D35% 물리 추가 피해를 줍니다. 최근 2초 안에 본체 사격이 맞힌 적을 서로 60도 이상 다른 사선에서 쏘면 D45%를 더합니다. 교차 사선과 표식 대상을 우선하며 최대 6회 사격합니다. 추가 사격은 발동을 재생산하지 않습니다.",
+    "en": "Place one ballista within 6m for 6s. Each second, fire at a perceived enemy within 9m for D35% secondary physical damage. Add D45% when firing at an enemy hit by the hero within 2s from a firing angle at least 60 degrees apart. Prefer crossfire, then marked targets, up to 6 shots. Secondary shots trigger no further procs."
   },
   "tags": [
     "Physical",
@@ -20,14 +20,14 @@
   ],
   "visualConceptFromHandoff": null,
   "productionConcept": "A compact gothic portable ballista made from dark wood and worn iron is firing one broad silver bolt. Three-quarter view, two hefty bow arms and a short stable tripod contained within the silhouette, no floor or scenery.",
-  "prompt": "Use case: stylized-concept. Asset type: standalone HELLSCRIPT Ranger skill icon. Create one original square 1024 x 1024 PNG with genuine native transparent alpha. Surrounding and internal empty space must be fully transparent. Style: painterly dark gothic fantasy, worn iron, aged leather, bone and muted bronze, sculptural chiaroscuro, crisp broad highlights, dark solid midtones, restrained brush texture. Large readable forms, limited detail, strong shape distinction at 64px. Entire subject including glow and particles must fit inside central 76% of canvas, leaving at least 12% fully transparent margin on all four sides. No lettering, numbers, watermark, border, icon frame, medallion rim, UI panel, floor, cast shadow, scenery, solid backdrop, checkerboard or matte. Do not bake any background; preserve native alpha. Use restrained cohesive effects rather than clouds of tiny particles.  Internal identity (do not render text): A15 Watch Ballista. Skill type: active. Effect: Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01. Tags: Physical, Normal. Linked equipment IDs for identity context only: DES_LA45. Subject and composition: A compact gothic portable ballista made from dark wood and worn iron is firing one broad silver bolt. Three-quarter view, two hefty bow arms and a short stable tripod contained within the silhouette, no floor or scenery. FINAL FRAMING REQUIREMENT: a small isolated icon floating in extensive fully transparent empty space. Fit ALL visible content inside a centered square occupying only 60% of total canvas width and height; leave 20% absolutely empty transparent margins. Output resolution must be exactly 1024 by 1024 pixels.",
+  "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for A15 (Ranger). Main subject: a compact medieval ballista in three-quarter view, two bold green-gold arrows entering one small target from clearly different angles, unmistakable crossed firing lines. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
   "status": "generated",
   "approval": "candidate",
   "model": "unknown",
   "modelEvidence": null,
   "provenance": {
     "surface": "built-in image_gen",
-    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-8e9cca38-e8b1-4f10-85d2-9ee88231248e.png",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-e61122c0-8e4e-48d6-a4a3-1315076c165c.png",
     "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A15.png",
     "sourceSha256": "b1a97c74633a1ae43afb40bb49f0dbaddcf4fbf306743b36091eb14309fef32c",
     "modelEvidence": "Tool returned only image_url and output_hint; model not exposed."
@@ -37,8 +37,10 @@
     "reason": "No suitable per-ID native-alpha 1024px source found; existing shared SkillAtlas is not a per-ID master."
   },
   "qa": {
-    "status": "pass",
     "alpha": "pass",
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
     "nativeAlpha": true,
     "dimensions": "pass",
     "rawMetrics": {
@@ -51,57 +53,36 @@
         0,
         255
       ],
-      "transparentPixels": 1237818,
+      "transparentPixels": 1062258,
       "alphaBBox": [
-        41,
-        21,
-        1234,
-        1228
+        33,
+        47,
+        1254,
+        1254
       ],
       "coreBBox": [
-        161,
-        252,
-        1108,
-        1026
+        38,
+        172,
+        1240,
+        1099
       ]
     },
-    "edges": "pass",
-    "readability64": "pass",
-    "distinctness": "pass",
-    "mode": "RGBA",
-    "rawSize": [
-      1254,
-      1254
-    ],
-    "dimensionPass": true,
-    "fullyTransparentPixels": 1237818,
-    "alphaExtrema": [
-      0,
-      255
-    ],
-    "alphaBounds": [
-      41,
-      21,
-      1234,
-      1228
-    ],
-    "bboxAlphaGreaterThan16": [
-      160,
-      251,
-      1109,
-      1027
-    ],
-    "central76PercentPass": false,
-    "marginGuideline": "warning",
-    "preview64": "Docs/Art/ClassSkillIcons/Ranger/qa/A15-64.png",
-    "visual64": "reviewed_pass",
-    "visual64Note": "At64px, the ballista arms, supported mechanism and outgoing bolt are recognizable. Slight guideline overflow is not canvas clipping.",
-    "edgeVisualReview": "Original and actual64px previews on dark and light backgrounds inspected; no opaque matte, visible edge halo, baked backdrop or frame. Native alpha unchanged.",
-    "reviewedBy": "ranger_icons agent"
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
+      ],
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+        "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
+      }
+    }
   },
   "rawFile": "Docs/Art/ClassSkillIcons/Ranger/raw/A15.png",
-  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-32d4-78f1-a31b-3d45c8302b44/exec-8e9cca38-e8b1-4f10-85d2-9ee88231248e.png",
-  "sourceSha256": "b1a97c74633a1ae43afb40bb49f0dbaddcf4fbf306743b36091eb14309fef32c",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-e61122c0-8e4e-48d6-a4a3-1315076c165c.png",
+  "sourceSha256": "bbf43163ffba99909abb6bddd80c03a29dcbb0f9558977bb1d14da72c0a98f0f",
   "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png",
   "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png",
   "attempts": [
@@ -115,6 +96,19 @@
         "output_hint"
       ],
       "model": "unknown"
+    },
+    {
+      "timestamp": "2026-10-03T20:20:52.216728+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-e61122c0-8e4e-48d6-a4a3-1315076c165c.png",
+      "sourceSha256": "bbf43163ffba99909abb6bddd80c03a29dcbb0f9558977bb1d14da72c0a98f0f",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown",
+      "purpose": "skill identity revision"
     }
-  ]
+  ],
+  "visualConcept": "a compact medieval ballista in three-quarter view, two bold green-gold arrows entering one small target from clearly different angles, unmistakable crossed firing lines"
 }

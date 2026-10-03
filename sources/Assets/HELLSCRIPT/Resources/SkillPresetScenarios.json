@@ -1802,16 +1802,33 @@
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "일반 적과의 교전에서도 바로 쇠뇌를 설치합니다.",
-      "conditionsEn": "Deploy the ballista even in fights against normal enemies.",
+      "conditions": "적이 보이면 쇠뇌를 빠르게 설치합니다. 짧은 교전은 남은 사격을 낭비합니다.",
+      "conditionsEn": "Places the ballista as soon as a target appears. Short fights waste remaining shots.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "CROSSFIRE",
+        "DAMAGE"
       ],
       "companionPresets": [],
-      "globals": [],
-      "globalConditions": "",
-      "globalConditionsEn": ""
+      "globals": [
+        {
+          "id": "position.engage",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "4"
+        }
+      ],
+      "globalConditions": "대상과 4m를 두고 선회합니다. 다른 사선·이동 흔적이 생긴 뒤 공격합니다.",
+      "globalConditionsEn": "Orbit at 4m. Attack after creating different firing angles or movement trails."
     },
     {
       "skill": "A15",
@@ -1848,16 +1865,33 @@
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "정예 또는 보스가 등장할 때까지 보존합니다.",
-      "conditionsEn": "Reserve deployment until an elite or boss appears.",
+      "conditions": "오래 싸울 정예·보스에게 설치합니다. 일반 적을 정리할 추가 사격이 줄어듭니다.",
+      "conditionsEn": "Deploys for longer elite or boss fights. Loses extra shots during ordinary clearing.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "CROSSFIRE",
+        "DAMAGE"
       ],
       "companionPresets": [],
-      "globals": [],
-      "globalConditions": "",
-      "globalConditionsEn": ""
+      "globals": [
+        {
+          "id": "position.engage",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "4"
+        }
+      ],
+      "globalConditions": "대상과 4m를 두고 선회합니다. 다른 사선·이동 흔적이 생긴 뒤 공격합니다.",
+      "globalConditionsEn": "Orbit at 4m. Attack after creating different firing angles or movement trails."
     },
     {
       "skill": "A16",
@@ -2135,19 +2169,39 @@
           "health": 3500.0
         }
       ],
-      "companions": [],
+      "companions": [
+        "A01",
+        "A15"
+      ],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "즉시 이동 속도와 그림자 추가 공격을 얻습니다.",
-      "conditionsEn": "Immediately gain movement speed and shadow follow-up attacks.",
+      "conditions": "대상이 보이면 시작합니다. 선회 이동으로 잔상을 만들고 다음 직접 사격에 씁니다. 제자리에 서 있으면 추가 화살이 생기지 않습니다.",
+      "conditionsEn": "Activate on a visible target; orbit to leave images and use them on the next direct shot. Standing still produces no extra arrows.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "AFTERIMAGE",
+        "DAMAGE"
       ],
       "companionPresets": [],
-      "globals": [],
-      "globalConditions": "",
-      "globalConditionsEn": ""
+      "globals": [
+        {
+          "id": "position.engage",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "4"
+        }
+      ],
+      "globalConditions": "대상과 4m를 두고 선회합니다. 다른 사선·이동 흔적이 생긴 뒤 공격합니다.",
+      "globalConditionsEn": "Orbit at 4m. Attack after creating different firing angles or movement trails."
     },
     {
       "skill": "A18",
@@ -2174,16 +2228,33 @@
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "자원 70% 이상을 기다린 뒤 사격을 강화합니다.",
-      "conditionsEn": "Wait for at least 70% resources before empowering shots.",
+      "conditions": "자원이 70% 이상이 될 때까지 기본 사격으로 회복한 뒤 잔상 행군을 시작합니다. 선회 이동으로 만든 잔상을 다음 사격에 씁니다.",
+      "conditionsEn": "Recover with basic shots until resource reaches 70%, then begin Afterimage March. The next shot uses images left by orbiting.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "AFTERIMAGE",
+        "DAMAGE"
       ],
       "companionPresets": [],
-      "globals": [],
-      "globalConditions": "",
-      "globalConditionsEn": ""
+      "globals": [
+        {
+          "id": "position.engage",
+          "value": "DISTANCE"
+        },
+        {
+          "id": "position.mode",
+          "value": "ORBIT"
+        },
+        {
+          "id": "position.distanceSource",
+          "value": "EXPLICIT"
+        },
+        {
+          "id": "position.distance",
+          "value": "4"
+        }
+      ],
+      "globalConditions": "대상과 4m를 두고 선회합니다. 다른 사선·이동 흔적이 생긴 뒤 공격합니다.",
+      "globalConditionsEn": "Orbit at 4m. Attack after creating different firing angles or movement trails."
     },
     {
       "skill": "M01",
@@ -2950,14 +3021,22 @@
           "health": 3500.0
         }
       ],
-      "companions": [],
-      "preparation": [],
+      "companions": [
+        "M03"
+      ],
+      "preparation": [
+        {
+          "skill": "M03",
+          "aim": "target",
+          "settleSeconds": 0
+        }
+      ],
       "cooldowns": [],
-      "conditions": "공격 예고에 맞춰 보호막을 먼저 사용합니다.",
-      "conditionsEn": "Use the shield in anticipation of an attack.",
+      "conditions": "공격 예고에 맞춰 보호막을 먼저 사용합니다. 마지막 속성에 따른 첫 흡수 반응을 함께 사용합니다.",
+      "conditionsEn": "Use the shield in anticipation of an attack. The first absorption also reacts to the remembered element.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "ABSORB",
+        "ELEMENT_REACTION"
       ],
       "companionPresets": [],
       "globals": [
@@ -3012,67 +3091,56 @@
       "health": 1.0,
       "resource": 1.0,
       "hero": {
-        "x": -4.0,
-        "y": -2.0
+        "x": -4,
+        "y": -2
       },
       "enemies": [
         {
           "position": {
-            "x": 3,
-            "y": -1
+            "x": -2,
+            "y": -2
           },
-          "kind": 3,
+          "kind": 0,
           "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
+          "spawnAt": 0,
+          "health": 1
+        },
+        {
+          "position": {
+            "x": -2.5,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0.1,
+          "health": 3500
         }
       ],
       "companions": [
-        "M14"
+        "M14",
+        "M03"
       ],
       "preparation": [
         {
-          "skill": "M14",
-          "aim": "self"
+          "skill": "M03",
+          "aim": "target",
+          "settleSeconds": 4
         }
       ],
-      "cooldowns": [],
-      "conditions": "다른 보호막이 끝난 뒤 필요한 시점에 사용합니다.",
-      "conditionsEn": "Use it when needed after the other shield ends.",
+      "cooldowns": [
+        {
+          "skill": "M14",
+          "seconds": 10
+        }
+      ],
+      "conditions": "이전 교전의 연쇄 번개 속성을 기억하고 새 교전에 보호막을 준비합니다. 제자리에서 실제 흡수에 반응합니다.",
+      "conditionsEn": "Remember lightning from the previous encounter, then shield a new encounter and react to actual absorption while holding ground.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "ABSORB",
+        "ELEMENT_REACTION"
       ],
       "companionPresets": [],
       "globals": [
-        {
-          "id": "survival.defenseSkill",
-          "value": "M05"
-        },
-        {
-          "id": "survival.order",
-          "value": "DEFENSE,WALK,ESCAPE"
-        },
-        {
-          "id": "dodge.ground.policy",
-          "value": "ALWAYS"
-        },
-        {
-          "id": "dodge.area.policy",
-          "value": "ALWAYS"
-        },
-        {
-          "id": "dodge.direct.policy",
-          "value": "ALWAYS"
-        },
-        {
-          "id": "survival.lowHp",
-          "value": "ON"
-        },
-        {
-          "id": "survival.lowHpPercent",
-          "value": "30"
-        },
         {
           "id": "position.mode",
           "value": "STAND"
@@ -3082,12 +3150,24 @@
           "value": "STAND"
         },
         {
-          "id": "dodge.method",
-          "value": "SKILL_FIRST"
+          "id": "dodge.ground.policy",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.area.policy",
+          "value": "OFF"
+        },
+        {
+          "id": "dodge.direct.policy",
+          "value": "OFF"
+        },
+        {
+          "id": "survival.lowHp",
+          "value": "OFF"
         }
       ],
-      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다.",
-      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable."
+      "globalConditions": "예고 회피를 끄고 제자리를 유지합니다. 이 예시는 피격을 보호막으로 받는 조건이며 일반 회피보다 안전하다는 뜻은 아닙니다.",
+      "globalConditionsEn": "Disable telegraph dodging and hold position. This example accepts hits through the shield; it does not claim to be safer than ordinary evasion."
     },
     {
       "skill": "M05",
@@ -3111,14 +3191,22 @@
           "health": 3500.0
         }
       ],
-      "companions": [],
-      "preparation": [],
+      "companions": [
+        "M03"
+      ],
+      "preparation": [
+        {
+          "skill": "M03",
+          "aim": "target",
+          "settleSeconds": 0
+        }
+      ],
       "cooldowns": [],
-      "conditions": "체력이 낮아진 긴급 상황까지 보존합니다.",
-      "conditionsEn": "Reserve it for a low-health emergency.",
+      "conditions": "체력이 낮아진 긴급 상황까지 보존합니다. 마지막 속성에 따른 첫 흡수 반응을 함께 사용합니다.",
+      "conditionsEn": "Reserve it for a low-health emergency. The first absorption also reacts to the remembered element.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "ABSORB",
+        "ELEMENT_REACTION"
       ],
       "companionPresets": [],
       "globals": [
@@ -3657,11 +3745,12 @@
       ],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "바로 구체를 발사합니다. 구체가 이동한 뒤 폭발합니다.",
-      "conditionsEn": "Launch the orb immediately; it explodes after travelling.",
+      "conditions": "대상이 보이면 왕복 경로를 쏘고 안전한 시전 위치에서 마나 회수를 노립니다. 회수 위치가 위험하거나 3m보다 멀면 회수를 포기합니다.",
+      "conditionsEn": "Fire on sight and seek the safe cast location to recover mana on return. Give up recovery if the location is dangerous or farther than 3m.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "RETURN",
+        "RESOURCE",
+        "MISSED_PICKUP"
       ],
       "companionPresets": [],
       "globals": [],
@@ -3715,11 +3804,12 @@
       ],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "제어된 대상 방향으로 발사합니다. 추적 기능은 없습니다.",
-      "conditionsEn": "Launch toward a controlled target. The orb does not home.",
+      "conditions": "제어된 대상만 쏩니다. 회수 이동을 생략하고 현재 전투 위치를 유지합니다. 시전 위치를 벗어나면 회수 마나를 잃을 수 있습니다.",
+      "conditionsEn": "Shoot controlled targets only and hold combat position instead of moving for pickup. Moving away from the cast location can lose the mana refund.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "RETURN",
+        "RESOURCE",
+        "MISSED_PICKUP"
       ],
       "companionPresets": [],
       "globals": [],
@@ -3859,39 +3949,29 @@
       "health": 1.0,
       "resource": 1.0,
       "hero": {
-        "x": -4.0,
-        "y": -2.0
+        "x": -4,
+        "y": -2
       },
       "enemies": [
         {
           "position": {
-            "x": 2.5,
-            "y": -1.0
+            "x": -2,
+            "y": -2
           },
-          "kind": 0,
+          "kind": 2,
           "elite": -1,
           "spawnAt": 0,
-          "health": 3500.0
+          "health": 3500
         },
         {
           "position": {
-            "x": 3.6,
-            "y": -1.0
+            "x": 4,
+            "y": -2
           },
-          "kind": 0,
-          "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
-        },
-        {
-          "position": {
-            "x": 2.5,
-            "y": 0.10000000000000009
-          },
-          "kind": 0,
-          "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
+          "kind": 2,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
         }
       ],
       "companions": [
@@ -3904,11 +3984,11 @@
           "seconds": 2
         }
       ],
-      "conditions": "준비되면 바로 관통 공격을 사용합니다.",
-      "conditionsEn": "Use the piercing attack whenever ready.",
+      "conditions": "사선이 열리면 바로 공격합니다. 연쇄 적중 후 자원 회수 기회를 놓칠 수 있습니다.",
+      "conditionsEn": "Attacks whenever a firing line is open. Can miss the resource refund after Chain Lightning.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "CAST_RELEASE",
+        "RELAY"
       ],
       "companionPresets": [],
       "globals": [],
@@ -3922,39 +4002,29 @@
       "health": 1.0,
       "resource": 1.0,
       "hero": {
-        "x": -4.0,
-        "y": -2.0
+        "x": -4,
+        "y": -2
       },
       "enemies": [
         {
           "position": {
-            "x": 2.5,
-            "y": -1.0
+            "x": -2,
+            "y": -2
           },
-          "kind": 0,
+          "kind": 2,
           "elite": -1,
           "spawnAt": 0,
-          "health": 3500.0
+          "health": 3500
         },
         {
           "position": {
-            "x": 3.6,
-            "y": -1.0
+            "x": 4,
+            "y": -2
           },
-          "kind": 0,
-          "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
-        },
-        {
-          "position": {
-            "x": 2.5,
-            "y": 0.10000000000000009
-          },
-          "kind": 0,
-          "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
+          "kind": 2,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
         }
       ],
       "companions": [
@@ -3967,11 +4037,11 @@
           "seconds": 2
         }
       ],
-      "conditions": "최근 3초 안에 자신의 연쇄 번개에 맞은 대상에게 사용하고 자원을 환급받습니다.",
-      "conditionsEn": "Hit a target struck by your chain lightning within the last three seconds to recover resources.",
+      "conditions": "M03이 준비되고 두 기술의 마나가 있을 때 먼저 중계창을 설치합니다. 창 설치에 먼저 행동과 마나를 씁니다.",
+      "conditionsEn": "Place the relay first when M03 is ready and mana covers both skills. Spends an action and mana on setup first.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE"
+        "CAST_RELEASE",
+        "RELAY"
       ],
       "companionPresets": [],
       "globals": [],
@@ -6102,26 +6172,36 @@
       "health": 1.0,
       "resource": 1.0,
       "hero": {
-        "x": -4.0,
-        "y": -2.0
+        "x": -4,
+        "y": -2
       },
       "enemies": [
         {
           "position": {
-            "x": -2.2,
-            "y": -1
+            "x": -2,
+            "y": -2
           },
           "kind": 0,
           "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
         }
       ],
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "가까운 적을 관통하며 공격과 방어 효과를 얻습니다.",
-      "conditionsEn": "Pass through nearby enemies to attack and gain defence.",
+      "conditions": "짧은 거리도 전진해 피해 감소를 확보합니다. 이동기를 일찍 소비하고 위치가 바뀝니다.",
+      "conditionsEn": "Uses even a short advance for mitigation. Spends mobility early and changes position.",
       "observations": [
         "CAST_START",
         "ACTION_RELEASE"
@@ -6138,26 +6218,36 @@
       "health": 1.0,
       "resource": 1.0,
       "hero": {
-        "x": -4.0,
-        "y": -2.0
+        "x": -4,
+        "y": -2
       },
       "enemies": [
         {
           "position": {
-            "x": 2,
-            "y": -1
+            "x": -2,
+            "y": -2
           },
           "kind": 0,
           "elite": -1,
-          "spawnAt": 0.0,
-          "health": 3500.0
+          "spawnAt": 0,
+          "health": 3500
+        },
+        {
+          "position": {
+            "x": -1,
+            "y": -2
+          },
+          "kind": 0,
+          "elite": 0,
+          "spawnAt": 0,
+          "health": 3500
         }
       ],
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "3m 이상 떨어진 적에게 접근할 때 사용합니다.",
-      "conditionsEn": "Use it to approach enemies at least 3m away.",
+      "conditions": "멀어진 적에게 접근할 때만 전진합니다. 붙어 있는 동안 방어·자원 회복 기회가 줄어듭니다.",
+      "conditionsEn": "Advances only to close a gap. Loses mitigation and resource opportunities while close.",
       "observations": [
         "CAST_START",
         "ACTION_RELEASE"
@@ -6490,12 +6580,11 @@
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "자원이 30% 이하일 때 지속 회복을 시작합니다.",
-      "conditionsEn": "Start restoring resources when they are at 30% or below.",
+      "conditions": "자원이 충분히 빈 뒤 회복해 넘침을 줄입니다. 회복이 시작되기 전 공격이 끊길 수 있습니다.",
+      "conditionsEn": "Waits for low resource to reduce overflow. Attacks can stop before recovery starts.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE",
-        "RESOURCE"
+        "BORROW",
+        "REPAY"
       ],
       "companionPresets": [],
       "globals": [],
@@ -6507,7 +6596,7 @@
       "preset": "setup",
       "seed": 42114,
       "health": 1.0,
-      "resource": 0.65,
+      "resource": 0.2,
       "hero": {
         "x": -4.0,
         "y": -2.0
@@ -6527,12 +6616,11 @@
       "companions": [],
       "preparation": [],
       "cooldowns": [],
-      "conditions": "자원이 75% 이하일 때 미리 지속 회복을 시작합니다.",
-      "conditionsEn": "Start restoring resources early, at 75% or below.",
+      "conditions": "자원이 75% 이하부터 회복을 미리 시작합니다. 전투가 끊기면 남은 회복을 낭비합니다.",
+      "conditionsEn": "Starts recovery early below 75% resource. Wastes recovery if combat stops.",
       "observations": [
-        "CAST_START",
-        "ACTION_RELEASE",
-        "RESOURCE"
+        "BORROW",
+        "REPAY"
       ],
       "companionPresets": [],
       "globals": [],

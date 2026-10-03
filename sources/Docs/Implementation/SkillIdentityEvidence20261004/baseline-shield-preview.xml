@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-03 21:11:07Z" end-time="2026-10-03 21:11:08Z" duration="1.0666659">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5089" result="Failed" site="Child" start-time="2026-10-03 21:11:07Z" end-time="2026-10-03 21:11:08Z" duration="1.066666" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="6859" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/distinct-class-skills/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5089" result="Failed" site="Child" start-time="2026-10-03 21:11:07Z" end-time="2026-10-03 21:11:08Z" duration="1.004125" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="92099" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="6860" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5089" result="Failed" site="Child" start-time="2026-10-03 21:11:08Z" end-time="2026-10-03 21:11:08Z" duration="0.944463" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="6861" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="5089" result="Failed" site="Child" start-time="2026-10-03 21:11:08Z" end-time="2026-10-03 21:11:08Z" duration="0.885392" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="6138" name="SkillPresetCombatPreviewTests" fullname="Hellscript.Tests.SkillPresetCombatPreviewTests" classname="Hellscript.Tests.SkillPresetCombatPreviewTests" runstate="Runnable" testcasecount="135" result="Failed" site="Child" start-time="2026-10-03 21:11:08Z" end-time="2026-10-03 21:11:08Z" duration="0.841561" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="6275" name="ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt" fullname="Hellscript.Tests.SkillPresetCombatPreviewTests.ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt" classname="Hellscript.Tests.SkillPresetCombatPreviewTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-03 21:11:08Z" end-time="2026-10-03 21:11:08Z" duration="0.838648" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="6273" name="ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt(&quot;W05&quot;,&quot;chain&quot;,&quot;W16&quot;)" fullname="Hellscript.Tests.SkillPresetCombatPreviewTests.ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt(&quot;W05&quot;,&quot;chain&quot;,&quot;W16&quot;)" methodname="ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt" classname="Hellscript.Tests.SkillPresetCombatPreviewTests" runstate="Runnable" seed="1533514510" result="Failed" start-time="2026-10-03 21:11:08Z" end-time="2026-10-03 21:11:08Z" duration="0.613126" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: greater than 0
+  But was:  0
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.SkillPresetCombatPreviewTests.ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt (System.String skill, System.String preset, System.String previous) [0x000c5] in /Users/t8g-2410-pn-005/.codex/worktrees/distinct-class-skills/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/SkillPresetCombatPreviewTests.cs:101
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="6274" name="ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt(&quot;M05&quot;,&quot;chain&quot;,&quot;M14&quot;)" fullname="Hellscript.Tests.SkillPresetCombatPreviewTests.ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt(&quot;M05&quot;,&quot;chain&quot;,&quot;M14&quot;)" methodname="ChainedDefenseWaitsForTheActualPreparedShieldInsteadOfRecastingOverIt" classname="Hellscript.Tests.SkillPresetCombatPreviewTests" runstate="Runnable" seed="1385599347" result="Passed" start-time="2026-10-03 21:11:08Z" end-time="2026-10-03 21:11:08Z" duration="0.219677" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

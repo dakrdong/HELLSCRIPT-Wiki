@@ -72,6 +72,7 @@ namespace Hellscript
                 EffectEvent(shield.definitionId,"ABSORB",shield.id,shield.rootCastId,value:absorbed);
                 // The final absorption can earn the reward before this instance is depleted.
                 TryShieldMana(shield);
+                ReactShield(shield,absorbed);
                 if(shield.amount<=.00001f){State.shields.Remove(shield);EffectEvent(shield.definitionId,"DEPLETED",shield.id,shield.rootCastId);}
             }
             MirrorShields();return damage-remaining;

@@ -14,9 +14,9 @@ const dependencies = {
   AP02: dependency('A04', '후퇴 도약 착지 후', '후퇴 도약의 착지 후 이동속도를 강화합니다.', 'Improves movement speed after Retreat Leap lands.'),
   AP03: dependency('A01', '관통 사격의 최대 대상', '관통 사격의 최대 적중 대상 수를 늘립니다.', 'Increases the target limit of Piercing Shot.'),
   AP14: dependency('A11', '자신의 살아 있는 미끼', '미끼 투영이 만든 살아 있는 미끼를 기준으로 피해가 증가합니다.', 'The damage bonus depends on the living decoy created by Decoy Projection.'),
-  AP17: dependency('A15', '자신과 경계 쇠뇌 사이', '설치한 경계 쇠뇌의 피해를 직접 강화합니다.', 'Directly improves the damage of the deployed Watch Ballista.'),
+  AP17: dependency('A15', '교차 쇠뇌의 교차 사격', '교차 쇠뇌의 교차 사격이 같은 사선의 두 번째 적을 관통하게 합니다.', 'Makes Crossfire Ballista crossfire pierce a second enemy on the same firing line.'),
   M11: dependency('M03', 'M03을 유효 시전할 때마다', '연쇄 번개를 시전해 축전 구체의 추가 폭발을 충전합니다.', 'Chain Lightning casts charge the additional explosion of Capacitor Orb.'),
-  M12: dependency('M03', '자신의 M03에 맞은 적', '자신의 연쇄 번개에 맞은 적에게 적중하면 자원을 회복합니다.', 'Recovers resources when it hits an enemy recently struck by your Chain Lightning.'),
+  M12: dependency('M03', 'M03이 4m', '접지창으로 연쇄 번개의 경로를 중계하고 자원을 회수합니다. 최근 연쇄 번개 적중 대상을 직접 맞혀도 회수합니다.', 'Grounding Spear relays Chain Lightning paths and recovers resource. It also recovers resource on a direct hit against a recent Chain Lightning target.'),
   MP01: dependency('M01', '화염구 폭발', '화염구의 직접 폭발 피해를 강화합니다.', 'Improves the direct explosion damage of Fireball.'),
   MP02: dependency('M02', '눈보라의 둔화', '눈보라가 주는 둔화의 강도를 높입니다.', 'Increases the strength of the slow applied by Blizzard.'),
   MP03: dependency('M03', '연쇄 번개의 총 타격', '연쇄 번개의 총 타격 수를 늘립니다.', 'Increases the total number of Chain Lightning hits.'),
@@ -25,7 +25,7 @@ const dependencies = {
 const alternatives = (ids, cue, ko, en, required = []) => ({ ids, required, sourceCue: cue, reason: label(ko,en) });
 Object.assign(dependencies, {
   WP08: dependency('W09','W09','찢어낸 상처의 출혈에 직접 반응합니다. 장비로 생기는 추가 출혈은 별도 효과이며, 트리는 기본 스킬 관계를 표시합니다.','Directly reads Raking Wound bleeding. Additional equipment bleeding is separate; the tree shows the base skill relationship.'),
-  WP11: alternatives(['W02','W11'],'도약 내려찍기','도약 내려찍기 또는 결연한 전진의 착지에 보호막을 더합니다. 직접 발동시키는 두 스킬 중 하나가 필요합니다.','Adds a barrier on landing Leap Slam or Resolute Advance. Unlock either direct trigger.'),
+  WP11: alternatives(['W02','W11'],'도약 내려찍기','도약 내려찍기 또는 전선 돌파의 착지에 보호막을 더합니다. 직접 발동시키는 두 스킬 중 하나가 필요합니다.','Adds a barrier on landing Leap Slam or Front Break. Unlock either direct trigger.'),
   WP17: alternatives(['W03','W04'],'분쇄 일격','분쇄 일격과 지면 강타의 피해를 강화합니다. 강화 대상 중 하나를 먼저 활성화합니다.','Improves Crushing Blow and Ground Slam. Unlock one of these targets first.'),
   WP18: dependency('W17','선조의 전쟁','선조의 전쟁 전용 패시브입니다. 선조의 실제 적중으로 자원을 회복합니다.','Dedicated to War of the Ancestors; actual ancestor hits restore resources.'),
   WP19: dependency('W18','거인의 심판','거인의 심판 전용 패시브입니다. 직접 맞힌 적 수에 따라 보호막을 얻습니다.',"Dedicated to Titan's Judgment; direct targets grant a barrier."),
@@ -35,11 +35,11 @@ Object.assign(dependencies, {
   AP13: alternatives(['A01','A08'],'관통 사격','관통 사격과 응시 사격의 피해를 강화합니다. 강화 대상 중 하나를 먼저 활성화합니다.','Improves Piercing Shot and Patient Shot. Unlock one of these targets first.'),
   AP16: alternatives(['A12','A16'],'연막 엄폐','연막 엄폐 또는 사냥 준비가 다음 유료 스킬의 비용 감소를 준비합니다. 발동 스킬 중 하나가 필요합니다.','Smoke Cover or Hunt Preparation prepares the next paid skill cost reduction. Unlock one trigger.'),
   AP18: dependency('A17','일제 소탕','일제 소탕 전용 패시브입니다. 첫 파동의 표식 대상에게 추가 피해를 줍니다.','Dedicated to Killing Rain; the first wave deals extra damage to a marked target.'),
-  AP19: dependency('A18','그림자 추격','그림자 추격 전용 패시브입니다. 지속시간과 총 발동 횟수를 늘립니다.','Dedicated to Shadow Pursuit; extends duration and total proc count.'),
+  AP19: dependency('A18','잔상 행군의 지속시간','잔상 행군 전용 패시브입니다. 지속시간과 생성 가능한 총 잔상 수를 늘립니다.','Dedicated to Afterimage March; extends duration and the total number of movement afterimages.'),
   MP07: alternatives(['M07','M08'],'연소','잿불창의 연소와 화염 장벽 안의 적에게 직접 반응합니다. 실제 효과가 참조하는 두 스킬 중 하나가 필요합니다.','Directly checks Ember Lance burning or an enemy inside Firewall. Unlock one of the two sources used by the effect.'),
   MP08: alternatives(['M07','M08'],'M07','잿불창의 연소 또는 화염 장벽 안에 있는 적에게 받는 피해를 줄입니다.','Reduces damage from enemies burning from Ember Lance or standing in Firewall.'),
   MP10: alternatives(['M06','M09'],'M06','서리 폭발 또는 빙하창의 빙결·보스 제압 성공에 반응합니다.','Triggers on a successful freeze or boss control from Frost Nova or Glacial Lance.'),
-  MP11: alternatives(['M03','M12'],'다음 M03·M12의 직접 피해','연쇄 번개와 번개 창의 다음 직접 피해를 강화합니다. 두 강화 대상을 모두 표시합니다.','Improves the next direct damage from Chain Lightning or Storm Spear. Both direct targets are listed.'),
+  MP11: alternatives(['M03','M12'],'다음 M03·M12의 직접 피해','연쇄 번개와 접지창의 다음 직접 피해를 강화합니다. 두 강화 대상을 모두 표시합니다.','Improves the next direct damage from Chain Lightning or Grounding Spear. Both direct targets are listed.'),
   MP18: dependency('M17','삼원소 붕괴','삼원소 붕괴 전용 패시브입니다. 세 번째 단계의 실제 적중으로 자원을 회복합니다.','Dedicated to Triune Collapse; a hit in the third stage restores resources.'),
   MP19: dependency('M18','현자의 화신','현자의 화신 전용 패시브입니다. 해당 궁극기의 보호막 생성량을 늘립니다.','Dedicated to Sage Incarnate; increases the barrier it creates.')
 });

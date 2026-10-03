@@ -1,6 +1,6 @@
 # HELLSCRIPT Ranger — 37 skills
 
-Updated: 2026-09-29
+Updated: 2026-10-04
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
@@ -16,7 +16,7 @@ Each example wears the full named set. Listed legendaries occupy different slots
 
 Normal actives: Successive Shots (`A07`), Patient Shot (`A08`), Hunter's Mark (`A05`), Hunt Preparation (`A16`).
 
-Passives: Marked Opening (`AP07`), Drawing Again (`AP09`), Focused Aim (`AP13`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Marked Opening (`AP07`), Drawing Again (`AP09`), Focused Aim (`AP13`). Selected ultimate: Afterimage March (`A18`).
 
 Compatible legendaries: Patient Hunter's Bow (`DES_LA41`), Oath of Two Hunts (`DES_LA46`).
 
@@ -26,7 +26,7 @@ Reposition for a clear line, focus successive and aimed shots on the mark, and r
 
 Normal actives: Retreat Leap (`A04`), Decoy Projection (`A11`), Smoke Cover (`A12`), Forking Arrow (`A14`).
 
-Passives: Escaping Step (`AP02`), Decoy Tactics (`AP14`), Seamless Reload (`AP16`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Escaping Step (`AP02`), Decoy Tactics (`AP14`), Seamless Reload (`AP16`). Selected ultimate: Afterimage March (`A18`).
 
 Compatible legendaries: Venomcloud Landing (`LA23`), Nimble Reload (`LA24`).
 
@@ -54,9 +54,9 @@ Build three Pierce/Multishot casts on the same marked elite. Patient Shot and th
 
 ### Vengeful Sight · `REF_SA05`
 
-Normal actives: Piercing Shot (`A01`), Multishot (`A02`), Watch Ballista (`A15`), Hunt Preparation (`A16`).
+Normal actives: Piercing Shot (`A01`), Multishot (`A02`), Crossfire Ballista (`A15`), Hunt Preparation (`A16`).
 
-Passives: Drawing Again (`AP09`), Focused Aim (`AP13`), Pathfinder (`AP17`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Drawing Again (`AP09`), Focused Aim (`AP13`), Piercing Crossfire (`AP17`). Selected ultimate: Afterimage March (`A18`).
 
 Compatible legendaries: Prepared Outpost (`DES_LA45`), Oath of the Far Hunt (`LA06`).
 
@@ -76,7 +76,7 @@ Layer root and frost traps inside poison. New traps do not replace the set's Poi
 
 Normal actives: Shadow Arrow (`A06`), Piercing Shot (`A01`), Multishot (`A02`), Venom Arrow (`A13`).
 
-Passives: Quarry Tracks (`AP08`), Venom Cycle (`AP10`), Venom and Frost (`AP15`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Quarry Tracks (`AP08`), Venom Cycle (`AP10`), Venom and Frost (`AP15`). Selected ultimate: Afterimage March (`A18`).
 
 Compatible legendaries: Narrowed Line (`LA02`), Black Contagion (`LA04`).
 
@@ -86,7 +86,7 @@ Pre-poison with Venom Arrow, prepare Shadow Arrow, then consume charges with Pie
 
 Normal actives: Retreat Leap (`A04`), Piercing Shot (`A01`), Multishot (`A02`), Smoke Cover (`A12`).
 
-Passives: Escaping Step (`AP02`), Saved focus (`AP05`), Relentless Pursuit (`AP19`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Escaping Step (`AP02`), Saved focus (`AP05`), Relentless March (`AP19`). Selected ultimate: Afterimage March (`A18`).
 
 Compatible legendaries: Oath of Two Hunts (`DES_LA46`), Unquenched Heart (`LC03`).
 
@@ -104,7 +104,7 @@ Keep the original two/four-piece skill triggers. The new ultimate uses a separat
 
 Normal actives: Retreat Leap (`A04`), Piercing Shot (`A01`), Hunter's Mark (`A05`), Shadow Arrow (`A06`).
 
-Passives: Long Reach (`AP01`), Escaping Step (`AP02`), Marked Opening (`AP07`). Selected ultimate: Shadow Pursuit (`A18`).
+Passives: Long Reach (`AP01`), Escaping Step (`AP02`), Marked Opening (`AP07`). Selected ultimate: Afterimage March (`A18`).
 
 Keep the original two/four-piece skill triggers. The new ultimate uses a separate slot and does not impersonate a set-bound skill.
 
@@ -294,13 +294,13 @@ Deal D100% direct physical damage to a first target within 10m, then send D50% s
 
 **Mechanic reference:** D2 Multiple Shot; D3 Hungering Arrow.
 
-### 15. Watch Ballista · `A15`
+### 15. Crossfire Ballista · `A15`
 
 New proposal · Lv.38 · Cooldown 12s · Resource 25
 
-Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01.
+Place one ballista within 6m for 6s. Each second, fire at a perceived enemy within 9m for D35% secondary physical damage. Add D45% when firing at an enemy hit by the hero within 2s from a firing angle at least 60 degrees apart. Prefer crossfire, then marked targets, up to 6 shots. Secondary shots trigger no further procs.
 
-**Suggested automatic use:** Place outside hazards for sustained elite combat.
+**Suggested automatic use:** Against an elite, place on a safe firing angle apart from the hero, then follow direct shots with crossfire.
 
 **Equipment links:** Prepared Outpost (`DES_LA45`).
 
@@ -504,15 +504,15 @@ Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
-### 33. Pathfinder · `AP17`
+### 33. Piercing Crossfire · `AP17`
 
 New proposal · Lv.34
 
-Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created.
+Crossfire Ballista crossfire shots pierce the first enemy to hit one additional enemy on the same firing line at 50% shot damage, up to 2. Preserve actual range and wall collision; secondary shots trigger no further procs.
 
 **Equipment links:** Viper's Molt (`LA03`), Escape-Opening Arrow (`LA10`), Venomcloud Landing (`LA23`), Nimble Reload (`LA24`), Fading Wound (`LA25`) and 4 more.
 
-**Companion skills:** Watch Ballista (`A15`), Retreat Leap (`A04`).
+**Companion skills:** Crossfire Ballista (`A15`), Retreat Leap (`A04`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
@@ -528,15 +528,15 @@ If Killing Rain's first pulse hits a marked target, deal D100% extra physical da
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
-### 35. Relentless Pursuit · `AP19`
+### 35. Relentless March · `AP19`
 
 New proposal · Lv.40
 
-Shadow Pursuit lasts 2s longer and allows 2 additional total procs.
+Afterimage March lasts 2s longer and can create 2 additional total afterimages. The simultaneous cap remains 2.
 
 **Equipment links:** Oath of Two Hunts (`DES_LA46`).
 
-**Companion skills:** Shadow Pursuit (`A18`).
+**Companion skills:** Afterimage March (`A18`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 
@@ -556,13 +556,13 @@ Rain arrows at a fixed point within 10m, in a 4m radius. Six pulses 0.5s apart d
 
 **Mechanic reference:** D3 Rain of Vengeance.
 
-### 37. Shadow Pursuit · `A18`
+### 37. Afterimage March · `A18`
 
 New proposal · Lv.40 · Cooldown 60s · Resource 0
 
-Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs.
+Gain 20% movement speed for 8s. Moving 1.5m from the previous trail anchor leaves an afterimage there, up to 2 at once and 8 total. On a direct hit of BASIC, A01, A02, A07, A08, A13 or A14, consume one afterimage with a clear shot within 10m to fire a D60% secondary shadow arrow from that location. Once per cast and second; standing still creates no new images.
 
-**Suggested automatic use:** Use in mobile elite or boss combat with enough resource to fire.
+**Suggested automatic use:** Activate against an elite. Orbit or disengage for 1.5m before shooting to make afterimages fire.
 
 **Equipment links:** Oath of Two Hunts (`DES_LA46`).
 

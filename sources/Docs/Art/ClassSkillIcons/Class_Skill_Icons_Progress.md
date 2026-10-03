@@ -1,10 +1,10 @@
 # 스킬 아이콘 제작 목록 / Skill icon production checklist
 
-작성일: 2026-09-23
+갱신일: 2026-10-04. 이름과 설명의 개성 개편은 `identity-rework.json`을 따릅니다.
 
 111개 ID를 모두 개별 생성하고 파일 및 시각 검수를 마쳤습니다. 모델은 `unknown`이며 모든 항목은 제작 후보입니다. 이 목록은 게임 UI 통합이나 최종 모델 확인을 뜻하지 않습니다.
 
-All 111 IDs were individually generated and reviewed. The actual model remains `unknown`, and every item is candidate art. This checklist does not claim game UI integration or verified model identity.
+All 111 IDs were individually generated and reviewed. Updated 2026-10-04; current identity names and descriptions follow `identity-rework.json`. The actual model remains `unknown`, and every item is candidate art. Native UI integration evidence is recorded separately in `Docs/Implementation/Skill_Identity_Rework.en.md`.
 
 | 직업 / Class | ID | 이름 / Name | 종류 / Kind | 제작 / Production | QA | 원본 / Master |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -17,9 +17,9 @@ All 111 IDs were individually generated and reviewed. The actual model remains `
 | Mage | [M07](Mage/manifests/M07.json) | 잿불창 / Ember Lance | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M07.png) |
 | Mage | [M08](Mage/manifests/M08.json) | 화염 장벽 / Firewall | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M08.png) |
 | Mage | [M09](Mage/manifests/M09.json) | 빙하창 / Glacial Lance | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M09.png) |
-| Mage | [M10](Mage/manifests/M10.json) | 서리 구체 / Frost Globe | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M10.png) |
+| Mage | [M10](Mage/manifests/M10.json) | 귀환 서리 / Returning Frost | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M10.png) |
 | Mage | [M11](Mage/manifests/M11.json) | 축전 구체 / Capacitor Orb | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M11.png) |
-| Mage | [M12](Mage/manifests/M12.json) | 번개 창 / Storm Spear | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M12.png) |
+| Mage | [M12](Mage/manifests/M12.json) | 접지창 / Grounding Spear | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M12.png) |
 | Mage | [M13](Mage/manifests/M13.json) | 마력 회수 / Mana Reclaim | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M13.png) |
 | Mage | [M14](Mage/manifests/M14.json) | 균열 결계 / Rift Ward | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M14.png) |
 | Mage | [M15](Mage/manifests/M15.json) | 원소 나침반 / Elemental Compass | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M15.png) |
@@ -59,10 +59,10 @@ All 111 IDs were individually generated and reviewed. The actual model remains `
 | Ranger | [A12](Ranger/manifests/A12.json) | 연막 엄폐 / Smoke Cover | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A12.png) |
 | Ranger | [A13](Ranger/manifests/A13.json) | 독화살 / Venom Arrow | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A13.png) |
 | Ranger | [A14](Ranger/manifests/A14.json) | 갈라지는 화살 / Forking Arrow | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A14.png) |
-| Ranger | [A15](Ranger/manifests/A15.json) | 경계 쇠뇌 / Watch Ballista | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png) |
+| Ranger | [A15](Ranger/manifests/A15.json) | 교차 쇠뇌 / Crossfire Ballista | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A15.png) |
 | Ranger | [A16](Ranger/manifests/A16.json) | 사냥 준비 / Hunt Preparation | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A16.png) |
 | Ranger | [A17](Ranger/manifests/A17.json) | 일제 소탕 / Killing Rain | ultimate | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A17.png) |
-| Ranger | [A18](Ranger/manifests/A18.json) | 그림자 추격 / Shadow Pursuit | ultimate | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png) |
+| Ranger | [A18](Ranger/manifests/A18.json) | 잔상 행군 / Afterimage March | ultimate | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/A18.png) |
 | Ranger | [AP01](Ranger/manifests/AP01.json) | 긴 사거리 / Long Reach | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP01.png) |
 | Ranger | [AP02](Ranger/manifests/AP02.json) | 탈출의 발걸음 / Escaping Step | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP02.png) |
 | Ranger | [AP03](Ranger/manifests/AP03.json) | 꿰뚫는 시선 / Piercing Gaze | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP03.png) |
@@ -79,9 +79,9 @@ All 111 IDs were individually generated and reviewed. The actual model remains `
 | Ranger | [AP14](Ranger/manifests/AP14.json) | 유인 전술 / Decoy Tactics | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP14.png) |
 | Ranger | [AP15](Ranger/manifests/AP15.json) | 독과 서리 / Venom and Frost | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP15.png) |
 | Ranger | [AP16](Ranger/manifests/AP16.json) | 빈틈 없는 재장전 / Seamless Reload | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP16.png) |
-| Ranger | [AP17](Ranger/manifests/AP17.json) | 길잡이 / Pathfinder | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP17.png) |
+| Ranger | [AP17](Ranger/manifests/AP17.json) | 관통 사선 / Piercing Crossfire | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP17.png) |
 | Ranger | [AP18](Ranger/manifests/AP18.json) | 무음의 살수 / Silent Execution | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP18.png) |
-| Ranger | [AP19](Ranger/manifests/AP19.json) | 끝없는 추격 / Relentless Pursuit | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP19.png) |
+| Ranger | [AP19](Ranger/manifests/AP19.json) | 끝없는 행군 / Relentless March | passive | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Ranger/AP19.png) |
 | Warrior | [W01](Warrior/manifests/W01.json) | 회오리 / Whirlwind | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W01.png) |
 | Warrior | [W02](Warrior/manifests/W02.json) | 도약 내려찍기 / Leap Slam | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W02.png) |
 | Warrior | [W03](Warrior/manifests/W03.json) | 분쇄 일격 / Crushing Blow | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W03.png) |
@@ -92,11 +92,11 @@ All 111 IDs were individually generated and reviewed. The actual model remains `
 | Warrior | [W08](Warrior/manifests/W08.json) | 꿰뚫는 갈고리 / Impaling Hook | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W08.png) |
 | Warrior | [W09](Warrior/manifests/W09.json) | 찢어낸 상처 / Raking Wound | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W09.png) |
 | Warrior | [W10](Warrior/manifests/W10.json) | 피의 회수 / Blood Reclamation | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W10.png) |
-| Warrior | [W11](Warrior/manifests/W11.json) | 결연한 전진 / Resolute Advance | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W11.png) |
+| Warrior | [W11](Warrior/manifests/W11.json) | 전선 돌파 / Front Break | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W11.png) |
 | Warrior | [W12](Warrior/manifests/W12.json) | 무쇠 자세 / Iron Stance | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W12.png) |
 | Warrior | [W13](Warrior/manifests/W13.json) | 전장의 고리 / Battlefield Ring | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W13.png) |
 | Warrior | [W14](Warrior/manifests/W14.json) | 전율의 파동 / Tremor Wave | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W14.png) |
-| Warrior | [W15](Warrior/manifests/W15.json) | 결전의 호흡 / Breath Before Battle | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W15.png) |
+| Warrior | [W15](Warrior/manifests/W15.json) | 투쟁의 빚 / Battle Loan | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W15.png) |
 | Warrior | [W16](Warrior/manifests/W16.json) | 수호의 맹약 / Guardian's Vow | active | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W16.png) |
 | Warrior | [W17](Warrior/manifests/W17.json) | 선조의 전쟁 / War of the Ancestors | ultimate | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W17.png) |
 | Warrior | [W18](Warrior/manifests/W18.json) | 거인의 심판 / Titan's Judgment | ultimate | 생성 후보 / generated candidate | 통과 / pass | [PNG](../../../Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Warrior/W18.png) |

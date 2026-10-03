@@ -2,71 +2,30 @@
   "id": "M12",
   "heroClass": "Mage",
   "name": {
-    "ko": "번개 창",
-    "en": "Storm Spear"
+    "ko": "접지창",
+    "en": "Grounding Spear"
   },
   "kind": "active",
   "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M12.png",
   "effectSummary": {
-    "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
-    "en": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s."
+    "ko": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D90% 번개 피해를 주고 지정 지점에 접지창 하나를 6초간 남깁니다. M03이 4m 안의 다음 적을 찾지 못하면 접지창까지 4m, 창에서 다음 적까지 4m를 잇습니다. 벽·감지 규칙을 지키며 창도 연쇄 횟수 하나를 소비합니다. 한 연쇄당 중계 한 번, 마나 4 회복 한 번입니다. 최근 M03 적중 대상을 창으로 직접 맞혀도 같은 회복을 시전당 한 번 얻습니다.",
+    "en": "Pierce up to 5 enemies along a 12m, 0.8m-wide line for D90% lightning damage and leave one grounding spear at the aim point for 6s. When M03 finds no next enemy within 4m, bridge through the spear with up to 4m on each leg. Obey walls and perception; the spear consumes one chain hop. One relay and one 4-mana refund per chain. Direct spear hits on a recent M03 target also refund once per spear cast."
   },
-  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, M12 Storm Spear / 번개 창, active.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. One storm spear composed of a long thick angular white-blue lightning shaft, a forked spearhead and a swept electrical barb near the rear. Dynamic linear piercing motion with a small hooked return spark curling inward, hinting at reclaimed mana. Distinct from the branching chain-lightning shape.\nEffect context: Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s.\nRelevant equipment linkage: DES_LM43. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "prompt": "Create one square HELLSCRIPT dark fantasy RPG skill icon for M12 (Mage). Main subject: one tall dark metal spear planted into a compact arcane grounding rune, two thick branching violet-white lightning bolts bridging to separate small charged stones on either side, spear is a relay node. Painterly premium game ability icon, strong sculpted silhouette, weathered iron and focused luminous magical accent, restrained dark desaturated colors, dramatic readable highlights. Composition must remain unmistakable at 64 by 64 pixels. One isolated centered icon subject fills about 85 percent of the square; no decorative circular medallion, no border, no text, no letters, no numbers, no UI, no additional unrelated weapons. Deliver a transparent PNG with preserved native alpha. All surrounding space and internal empty spaces fully transparent; no scenery, no solid backdrop, no checkerboard, no floor, no frame, no unwanted shadow. Keep wispy effects minimal and clean at small size. Do not add an opaque background.",
   "status": "generated",
   "approval": "candidate",
   "model": "unknown",
   "modelEvidence": null,
   "provenance": {
     "surface": "built-in image_gen",
-    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-82f5-7482-8998-cb6c69a160fb/exec-9a48d9ed-44cf-4b3f-af9a-2b5e353ddfc0.png",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-5556436e-c81f-4e7a-8ad6-fde854e2fd11.png",
     "nativeTransparencyRequired": true
   },
   "qa": {
     "alpha": "pass",
-    "readability64": {
-      "status": "pass",
-      "ko": "긴 번개 창날과 되돌아오는 갈고리형 전류가 직선 관통을 드러냅니다.",
-      "en": "A long lightning spear with a hooked return current identifies linear piercing."
-    },
-    "edges": {
-      "status": "pass",
-      "ko": "원본과 밝은·어두운 바탕의 256px 검수에서 불투명 매트, 배경 무늬, 잘린 주형태를 발견하지 못했습니다. 가장자리의 매우 낮은 알파 픽셀은 자동 경고로 남깁니다.",
-      "en": "Native output and 256px light/dark inspection showed no opaque matte, backdrop pattern or clipped main form. Very low-alpha border pixels remain recorded warnings."
-    },
-    "distinctness": {
-      "status": "pass",
-      "comparedWith": [
-        "M01",
-        "M02",
-        "M03",
-        "M04",
-        "M05",
-        "M06",
-        "M07",
-        "M08",
-        "M09",
-        "M10",
-        "M11",
-        "M12",
-        "M13",
-        "M14",
-        "M15",
-        "M16",
-        "M17",
-        "M18",
-        "MP01",
-        "MP02",
-        "MP03",
-        "MP04",
-        "MP05",
-        "MP06",
-        "MP07",
-        "MP08",
-        "MP09"
-      ],
-      "ko": "64px 비교판에서 큰 형태와 주효과로 다른 담당 항목과 구별됩니다.",
-      "en": "The major silhouette and effect remain distinct among this production group in the actual64px contact sheets."
-    },
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
     "nativeAlpha": true,
     "dimensions": "pass",
     "rawMetrics": {
@@ -79,100 +38,38 @@
         0,
         255
       ],
-      "transparentPixels": 1284597,
+      "transparentPixels": 1201178,
       "alphaBBox": [
-        31,
-        23,
-        1200,
-        1222
+        0,
+        1,
+        1236,
+        1254
       ],
       "coreBBox": [
-        121,
-        78,
-        1185,
-        1178
+        168,
+        6,
+        1103,
+        1239
       ]
     },
-    "acceptedMasterSpecification": "1024 or1254 square native RGBA, handoff revision2",
-    "measurements": {
-      "format": "PNG",
-      "mode": "RGBA",
-      "width": 1254,
-      "height": 1254,
-      "pngBitDepth": 8,
-      "pngColorType": 6,
-      "transparentPixels": 1284597,
-      "nontransparentPixels": 287919,
-      "opaquePixels": 12,
-      "semitransparentPixels": 287907,
-      "transparentFraction": 0.816906,
-      "corePixels": 183378,
-      "coreFraction": 0.116614,
-      "alphaExtrema": [
-        0,
-        255
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
       ],
-      "outerBorderMaxAlpha": 0,
-      "bboxAlphaAbove0": [
-        31,
-        23,
-        1200,
-        1222
-      ],
-      "bboxAlphaAbove8": [
-        115,
-        74,
-        1189,
-        1181
-      ],
-      "bboxAlphaAbove127": [
-        121,
-        78,
-        1185,
-        1178
-      ],
-      "central76BoundsExclusive": [
-        151,
-        151,
-        1103,
-        1103
-      ],
-      "faintInsideCentral76": false,
-      "coreInsideCentral76": false,
-      "at64px": {
-        "bboxAlphaAbove127": [
-          7,
-          5,
-          59,
-          60
-        ],
-        "corePixels": 478
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "새 전투 컨셉의 주체와 방향이 64px에서도 구별됩니다. 밝은·어두운 배경에서 투명 여백과 내부 빈 공간, 주요 실루엣을 확인했습니다.",
+        "en": "The new mechanic silhouette and direction remain distinct at 64px. Reviewed transparent margins, internal gaps and primary shapes on light and dark backgrounds."
       }
-    },
-    "reviewEvidence": {
-      "contactSheets64": [
-        "qa/Mage-64px-dark.png",
-        "qa/Mage-64px-light.png"
-      ],
-      "edgeSheets256": [
-        "qa/Mage-edges-1-dark.jpg",
-        "qa/Mage-edges-1-light.jpg",
-        "qa/Mage-edges-2-dark.jpg",
-        "qa/Mage-edges-2-light.jpg",
-        "qa/Mage-edges-3-dark.jpg",
-        "qa/Mage-edges-3-light.jpg"
-      ],
-      "reviewedAtUtc": "2026-09-22T07:42:49.490161+00:00"
-    },
-    "central76": "warning_guideline_exceeded_no_visible_clipping",
-    "gameRuntime": "not_tested_art_only_handoff",
-    "physicalDevice": "not_tested"
+    }
   },
   "reuse": false,
   "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
   "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/M12.png",
-  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-82f5-7482-8998-cb6c69a160fb/exec-9a48d9ed-44cf-4b3f-af9a-2b5e353ddfc0.png",
-  "sourceSha256": "3658484971ef6e4447a1a6c4305154a660f831b763b05d2ba9759be059c3d8c6",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-5556436e-c81f-4e7a-8ad6-fde854e2fd11.png",
+  "sourceSha256": "2ad6b07f260f05f45b984611a6bcd062a139ca792d4a97cca4528e101dd59898",
   "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M12.png",
   "attempts": [
     {
@@ -185,7 +82,20 @@
         "output_hint"
       ],
       "model": "unknown"
+    },
+    {
+      "timestamp": "2026-10-03T20:20:52.283220+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-5556436e-c81f-4e7a-8ad6-fde854e2fd11.png",
+      "sourceSha256": "2ad6b07f260f05f45b984611a6bcd062a139ca792d4a97cca4528e101dd59898",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown",
+      "purpose": "skill identity revision"
     }
   ],
-  "unchangedNativeBytes": true
+  "unchangedNativeBytes": true,
+  "visualConcept": "one tall dark metal spear planted into a compact arcane grounding rune, two thick branching violet-white lightning bolts bridging to separate small charged stones on either side, spear is a relay node"
 }

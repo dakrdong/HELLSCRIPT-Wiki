@@ -1,6 +1,6 @@
 # HELLSCRIPT Mage — 37 skills
 
-Updated: 2026-09-29
+Updated: 2026-10-04
 
 Status: approved design. Ability and equipment implementation status is tracked in [the implementation record](../Implementation/Class_Skill_Runtime.en.md). General release and UI integration are pending. Values below are for rank one.
 
@@ -34,7 +34,7 @@ Equip all four rank-boosted skills. Cold control and the ultimate barrier cover 
 
 ### Rift Pilgrimage · `REF_SM03`
 
-Normal actives: Teleport (`M04`), Frost Globe (`M10`), Magnetic Vortex (`M16`), Fireball (`M01`).
+Normal actives: Teleport (`M04`), Returning Frost (`M10`), Magnetic Vortex (`M16`), Fireball (`M01`).
 
 Passives: Dense Burn (`MP01`), Mana Thrift (`MP14`), Overflowing Mana (`MP17`). Selected ultimate: Triune Collapse (`M17`).
 
@@ -64,7 +64,7 @@ Maintain Burning with Firewall/Ember Lance and build Heat with repeated Fireball
 
 ### Frozen Deep · `REF_SM06`
 
-Normal actives: Blizzard (`M02`), Frost Nova (`M06`), Glacial Lance (`M09`), Frost Globe (`M10`).
+Normal actives: Blizzard (`M02`), Frost Nova (`M06`), Glacial Lance (`M09`), Returning Frost (`M10`).
 
 Passives: Deep Chill (`MP02`), Opening in the Cold (`MP09`), Ice Reverberation (`MP10`). Selected ultimate: Triune Collapse (`M17`).
 
@@ -74,13 +74,13 @@ Frost Nova cashes out set Frostbite built by Blizzard. Lance and Globe supply co
 
 ### Wild Thunder · `REF_SM07`
 
-Normal actives: Chain Lightning (`M03`), Capacitor Orb (`M11`), Storm Spear (`M12`), Elemental Shield (`M05`).
+Normal actives: Chain Lightning (`M03`), Capacitor Orb (`M11`), Grounding Spear (`M12`), Elemental Shield (`M05`).
 
 Passives: Chain of Lightning (`MP03`), Overcharge (`MP11`), Reclaim Charge (`MP12`). Selected ultimate: Triune Collapse (`M17`).
 
 Compatible legendaries: Thunder Collector (`DES_LM43`), Clinging Lightning (`LM21`).
 
-Roll the set with Chain Lightning and charge Capacitor Orb. Storm Spear provides linear damage and its dedicated orb-item interaction.
+Place Grounding Spear first to bridge Chain Lightning gaps and recover resource. Chain Lightning rolls the set and charges Capacitor Orb; conduit relays also trigger the orb-item interaction.
 
 ### Threefold Cycle · `REF_SM08`
 
@@ -162,7 +162,7 @@ Moves to a valid spot with less danger.
 
 Existing runtime retained · Lv.15 · Cooldown 14s · Resource 0
 
-Holds a shield worth 35% of max HP for 4 seconds.
+Hold a 35% maximum-HP shield for 4s and remember the last cast fire, cold or lightning element. React only on this shield's first actual absorption: fire burns up to 5 enemies within 3m for D60% over 3s, cold roots them for 1s, and lightning restores 8 mana. No remembered element grants no extra reaction.
 
 **Suggested automatic use:** Keep the existing Hunt Edict conditions, placement and target settings.
 
@@ -224,13 +224,13 @@ Hit up to 3 enemies with a 9m-long, 0.7m-wide lance for D130% cold damage. Freez
 
 **Mechanic reference:** D2 Glacial Spike.
 
-### 10. Frost Globe · `M10`
+### 10. Returning Frost · `M10`
 
 New proposal · Lv.26 · Cooldown 6s · Resource 25
 
-Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage.
+Send a frost globe up to 8m at 5m/s, then return from its aim point or first wall to the cast location. Each leg hits up to 5 enemies once for D90% cold damage and a 35% slow for 3s. Returning hits freeze already slowed enemies for 0.75s. Restore 12 mana once if within 0.7m of the cast location when it arrives. A blocked return misses recovery.
 
-**Suggested automatic use:** Aim at the observed center of an approaching group.
+**Suggested automatic use:** Fire down a two-enemy corridor or at a controlled target; seek a safe cast location within 3m for return recovery.
 
 **Equipment links:** Glassglacier Staff (`DES_LM42`), Cold Circulation (`LM14`).
 
@@ -252,13 +252,13 @@ Place one orb within 8m for 6s. Each second, deal D30% lightning damage to up to
 
 **Mechanic reference:** D2 Thunder Storm; D3 Storm Armor.
 
-### 12. Storm Spear · `M12`
+### 12. Grounding Spear · `M12`
 
 New proposal · Lv.30 · Cooldown 5s · Resource 22
 
-Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s.
+Pierce up to 5 enemies along a 12m, 0.8m-wide line for D90% lightning damage and leave one grounding spear at the aim point for 6s. When M03 finds no next enemy within 4m, bridge through the spear with up to 4m on each leg. Obey walls and perception; the spear consumes one chain hop. One relay and one 4-mana refund per chain. Direct spear hits on a recent M03 target also refund once per spear cast.
 
-**Suggested automatic use:** Use against a recently chained elite or aligned enemies.
+**Suggested automatic use:** Set up before a ready M03. Choose a relay point between perceived groups separated by 4–8m.
 
 **Equipment links:** Thunder Collector (`DES_LM43`).
 
@@ -440,7 +440,7 @@ Three normal lightning casts within 5s prepare +15% direct damage for the next M
 
 **Equipment links:** Circuit of the End (`LM04`), Overflowing Charge (`LM17`), Close-Quarters Judgment (`LM18`), Storm Continuum (`LM19`), Reclaimed Current (`LM20`) and 4 more.
 
-**Companion skills:** Chain Lightning (`M03`), Capacitor Orb (`M11`), Storm Spear (`M12`).
+**Companion skills:** Chain Lightning (`M03`), Capacitor Orb (`M11`), Grounding Spear (`M12`).
 
 **Mechanic reference:** D3 conditional passive structure; HELLSCRIPT equipment requirements.
 

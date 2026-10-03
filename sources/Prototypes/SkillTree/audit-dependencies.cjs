@@ -1,6 +1,6 @@
 /* Independent coverage check: inspect source descriptions, not the chosen tree map. */
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
-const exclusions={W16:['W05'],A12:['A04'],A15:['A01'],A17:['A02','A06'],M14:['M05'],M17:['M01','M02','M03'],MP09:['M02'],MP13:['M13']};
+const exclusions={W16:['W05'],A12:['A04'],A17:['A02','A06'],M14:['M05'],M17:['M01','M02','M03'],MP09:['M02'],MP13:['M13']};
 // Aliases and runtime-only dependencies verified in the effect owners below.
 const implicit={WP03:['W02'],AP04:['A03'],AP14:['A11'],MP07:['M07','M08']};
 const core='Assets/HELLSCRIPT/Runtime/Core/';

@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-04",
+  "sourceCommit": "7c6f2724",
+  "buildManifest": "build-manifest.json",
+  "fullEditMode": {
+    "sourceCommit": "d5f90571",
+    "runs": 1,
+    "total": 5114,
+    "passed": 4978,
+    "failed": 136,
+    "skipped": 0,
+    "durationSeconds": 1771.9827462,
+    "report": "full-editmode.xml"
+  },
+  "failureReview": {
+    "samePriorAssertions": 127,
+    "allPriorAssertionsMatch": true,
+    "additionalFailureReproducedAtBaseline": "4c9e7b7e/W05 chain preview",
+    "taskRelatedFailuresRepaired": 8,
+    "confirmedPreExistingFailures": 128,
+    "comparison": "full-baseline-comparison.json",
+    "shieldBaseline": "shield-preview-baseline.json"
+  },
+  "relatedRerun": {
+    "total": 81,
+    "passed": 81,
+    "failed": 0,
+    "report": "failed-related-recheck.xml"
+  },
+  "focusedReports": [
+    "mechanics-final-focused.xml",
+    "loan-guard-recheck.xml",
+    "localization-recheck.xml",
+    "failed-related-recheck.xml",
+    "baseline-shield-preview.xml"
+  ],
+  "native": {
+    "operatingSystem": "macOS 26.6.2",
+    "player": "Unity 6000.6.0f1 development macOS",
+    "checkpointAndFreshProcessRestartCases": 12,
+    "allReceiptPairsEqual": true,
+    "ultimateSupportPairs": 6,
+    "automaticScenarios": {
+      "W11": {
+        "preset": "opportunity",
+        "event": "PUSH",
+        "firstEventTime": 0.4500000476837158,
+        "completedSimulationSeconds": 0.6000000834465027,
+        "actualExtraHpLossHits": 0,
+        "passed": true
+      },
+      "W15": {
+        "preset": "opportunity",
+        "event": "BORROW",
+        "firstEventTime": 0.25,
+        "completedSimulationSeconds": 0.25,
+        "actualExtraHpLossHits": 0,
+        "passed": true
+      },
+      "A15": {
+        "preset": "opportunity",
+        "event": "CROSSFIRE",
+        "firstEventTime": 1.3499997854232788,
+        "completedSimulationSeconds": 1.4999996423721313,
+        "actualExtraHpLossHits": 1,
+        "passed": true
+      },
+      "A18": {
+        "preset": "opportunity",
+        "event": "AFTERIMAGE",
+        "firstEventTime": 2.5499987602233887,
+        "completedSimulationSeconds": 2.699998617172241,
+        "actualExtraHpLossHits": 1,
+        "passed": true
+      },
+      "M05": {
+        "preset": "chain",
+        "event": "ELEMENT_REACTION",
+        "firstEventTime": 7.000008583068848,
+        "completedSimulationSeconds": 7.000008583068848,
+        "actualExtraHpLossHits": 0,
+        "passed": true
+      },
+      "M10": {
+        "preset": "opportunity",
+        "event": "RETURN",
+        "firstEventTime": 2.099999189376831,
+        "completedSimulationSeconds": 3.6499977111816406,
+        "actualExtraHpLossHits": 0,
+        "passed": true
+      },
+      "M12": {
+        "preset": "setup",
+        "event": "RELAY",
+        "firstEventTime": 3.499997854232788,
+        "completedSimulationSeconds": 3.499997854232788,
+        "actualExtraHpLossHits": 0,
+        "passed": true
+      }
+    },
+    "screenshots": 91,
+    "viewports": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "safeArea": "Simulated in landscape; 32/24/40/28 pixels",
+    "input": "Actual uGUI raycasts and synthetic pointer down/up/click through production callbacks, with GameStore save and disk reload",
+    "presetControls": [
+      "identity order",
+      "mobile-crossfire position"
+    ],
+    "status": "native-ui/identity-runtime.txt",
+    "physicalMobileTested": false
+  },
+  "art": {
+    "newIcons": 8,
+    "linkedPassiveNamesUpdated": 2,
+    "assetQaPassed": 111,
+    "model": "unknown",
+    "approval": "candidate",
+    "nativeAlphaPreserved": true
+  },
+  "reuse": "Full suite run once. Failed and directly affected checks rerun after repairs; unrelated passing coverage reused. Later old preset-harness count change from 134 to 135 does not change mechanics or data. Documentation does not invalidate runtime evidence.",
+  "postRuntimeMetadataRepair": {
+    "scope": [
+      "WP11 and Front Break item reference names",
+      "Battle Loan and Grounding Spear build descriptions",
+      "Prototype direct-dependency evidence",
+      "Generated combat comparison tables"
+    ],
+    "runtimeCodeUnchangedFromNativeBuild": true,
+    "allNonDescriptionRuntimeFieldsUnchanged": true,
+    "prototypeChecksPassed": 39,
+    "sourceSkillsAudited": 111,
+    "runtimeEvidenceReused": "Only description text and documentation/tool metadata changed; combat, icon assets, skill IDs, ranks, stats, prerequisites and save fields are unchanged."
+  }
+}

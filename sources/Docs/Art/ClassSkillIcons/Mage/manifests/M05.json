@@ -8,65 +8,24 @@
   "kind": "active",
   "filePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M05.png",
   "effectSummary": {
-    "ko": "최대 HP 35% 보호막을 4초 유지합니다.",
-    "en": "Holds a shield worth 35% of max HP for 4 seconds."
+    "ko": "최대 HP 35% 보호막을 4초 유지하며 마지막으로 시전한 화염·냉기·번개 속성을 기억합니다. 이 보호막의 첫 실제 흡수에만 반응합니다. 화염은 3m 안 최대 5명에게 3초간 총 D60% 화상, 냉기는 1초 속박, 번개는 마나 8 회복을 줍니다. 기억한 속성이 없으면 추가 반응이 없습니다.",
+    "en": "Hold a 35% maximum-HP shield for 4s and remember the last cast fire, cold or lightning element. React only on this shield's first actual absorption: fire burns up to 5 enemies within 3m for D60% over 3s, cold roots them for 1s, and lightning restores 8 mana. No remembered element grants no extra reaction."
   },
-  "prompt": "Use case: stylized-concept\nAsset type: HELLSCRIPT Mage skill icon, M05 Elemental Shield / 원소 보호막, active.\nPrimary request: Create ONE original independent 1024x1024 PNG icon with REAL NATIVE TRANSPARENT ALPHA. A broad floating shield-shaped elemental membrane with a sharp pale-blue upper rim and three subtle integrated elemental facets, ember orange, glacial cyan and lightning white. The protective curved surface holds firm around one dark faceted core. It is a magical barrier, no metal buckler and no UI frame.\nEffect context: Holds a shield worth 35% of max HP for 4 seconds.\nRelevant equipment linkage: LM03, LM30, LM31, LM33, LM32. Match the effect rather than copying existing item art.\nStyle: dark gothic painterly fantasy game art, sculptural large shapes, restrained tactile brush texture, somber charcoal shadows, weathered materials where relevant, pale high-contrast edges, selective saturated magic. Two or three major forms, minimal tiny particles. Legible and individually recognizable at 64px.\nComposition: centered cohesive isolated subject, every visible shape and glow fully inside the central 76 percent of the square canvas; at least 12 percent completely transparent padding on all four sides. Only the depicted skill, no surrounding scene.\nOutput: exactly 1024x1024 PNG with native RGBA alpha. All surrounding and internal empty space truly transparent. Preserve clean antialiased alpha edges, no opaque matte or halo.\nAvoid: any background or solid backdrop, checkerboard picture, floor, ground, cast shadow, stand, UI panel, frame, border, lettering, written runes, digits, ID labels, logo or watermark. Do not copy or recolor an existing icon.",
+  "prompt": "Edit this HELLSCRIPT Elemental Shield skill icon. Preserve the same painterly dark fantasy iron structure and three red fire, icy blue and violet-gold lightning facets. Fix the clipped lightning entering at the upper right: show the ENTIRE lightning stroke and every tip within the image. Shrink and recompose the complete shield and lightning to fit within the central 76% of the square, with generous clean transparent margins on ALL FOUR sides. No cut off shapes, no border, no text. Keep the three facets bold and readable at 64x64. Deliver a transparent PNG with preserved native RGBA alpha, fully transparent surrounding and internal empty space, no scenery, solid backdrop, checkerboard, floor, frame, or unwanted shadow. Preserve transparency; do not paint a background.",
   "status": "generated",
   "approval": "candidate",
   "model": "unknown",
   "modelEvidence": null,
   "provenance": {
     "surface": "built-in image_gen",
-    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-82f5-7482-8998-cb6c69a160fb/exec-260ced15-28d7-48f9-b0b7-caa90bb79cf7.png",
+    "sourcePath": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-bc007ab8-e60f-4ba6-b0d1-4272432de032.png",
     "nativeTransparencyRequired": true
   },
   "qa": {
     "alpha": "pass",
-    "readability64": {
-      "status": "pass",
-      "ko": "넓은 원소 막과 중앙 핵이 원소 보호막을 드러냅니다.",
-      "en": "A broad elemental membrane around a central core identifies the elemental barrier."
-    },
-    "edges": {
-      "status": "pass",
-      "ko": "원본과 밝은·어두운 바탕의 256px 검수에서 불투명 매트, 배경 무늬, 잘린 주형태를 발견하지 못했습니다. 가장자리의 매우 낮은 알파 픽셀은 자동 경고로 남깁니다.",
-      "en": "Native output and 256px light/dark inspection showed no opaque matte, backdrop pattern or clipped main form. Very low-alpha border pixels remain recorded warnings."
-    },
-    "distinctness": {
-      "status": "pass",
-      "comparedWith": [
-        "M01",
-        "M02",
-        "M03",
-        "M04",
-        "M05",
-        "M06",
-        "M07",
-        "M08",
-        "M09",
-        "M10",
-        "M11",
-        "M12",
-        "M13",
-        "M14",
-        "M15",
-        "M16",
-        "M17",
-        "M18",
-        "MP01",
-        "MP02",
-        "MP03",
-        "MP04",
-        "MP05",
-        "MP06",
-        "MP07",
-        "MP08",
-        "MP09"
-      ],
-      "ko": "64px 비교판에서 큰 형태와 주효과로 다른 담당 항목과 구별됩니다.",
-      "en": "The major silhouette and effect remain distinct among this production group in the actual64px contact sheets."
-    },
+    "readability64": "pass",
+    "edges": "pass",
+    "distinctness": "pass",
     "nativeAlpha": true,
     "dimensions": "pass",
     "rawMetrics": {
@@ -79,100 +38,38 @@
         0,
         255
       ],
-      "transparentPixels": 883817,
+      "transparentPixels": 989803,
       "alphaBBox": [
-        0,
-        9,
-        1224,
-        1238
+        49,
+        47,
+        1220,
+        1254
       ],
       "coreBBox": [
-        128,
-        50,
-        1123,
-        1156
+        156,
+        101,
+        1204,
+        1141
       ]
     },
-    "acceptedMasterSpecification": "1024 or1254 square native RGBA, handoff revision2",
-    "measurements": {
-      "format": "PNG",
-      "mode": "RGBA",
-      "width": 1254,
-      "height": 1254,
-      "pngBitDepth": 8,
-      "pngColorType": 6,
-      "transparentPixels": 883817,
-      "nontransparentPixels": 688699,
-      "opaquePixels": 7,
-      "semitransparentPixels": 688692,
-      "transparentFraction": 0.56204,
-      "corePixels": 639575,
-      "coreFraction": 0.406721,
-      "alphaExtrema": [
-        0,
-        255
+    "visualReview": {
+      "reviewed": true,
+      "backgrounds": [
+        "dark",
+        "light"
       ],
-      "outerBorderMaxAlpha": 1,
-      "bboxAlphaAbove0": [
-        0,
-        9,
-        1224,
-        1238
-      ],
-      "bboxAlphaAbove8": [
-        127,
-        48,
-        1124,
-        1158
-      ],
-      "bboxAlphaAbove127": [
-        128,
-        50,
-        1123,
-        1156
-      ],
-      "central76BoundsExclusive": [
-        151,
-        151,
-        1103,
-        1103
-      ],
-      "faintInsideCentral76": false,
-      "coreInsideCentral76": false,
-      "at64px": {
-        "bboxAlphaAbove127": [
-          7,
-          4,
-          57,
-          59
-        ],
-        "corePixels": 1661
+      "thumbnailPixels": 64,
+      "notes": {
+        "ko": "세 속성이 구분되고 번개의 끝까지 화면 안에 들어옵니다. 수정 원본의 투명 여백과 축소 실루엣을 확인했습니다.",
+        "en": "Three distinct facets and the complete lightning tip fit within the image. Reviewed transparent margins and the reduced silhouette of the edited original."
       }
-    },
-    "reviewEvidence": {
-      "contactSheets64": [
-        "qa/Mage-64px-dark.png",
-        "qa/Mage-64px-light.png"
-      ],
-      "edgeSheets256": [
-        "qa/Mage-edges-1-dark.jpg",
-        "qa/Mage-edges-1-light.jpg",
-        "qa/Mage-edges-2-dark.jpg",
-        "qa/Mage-edges-2-light.jpg",
-        "qa/Mage-edges-3-dark.jpg",
-        "qa/Mage-edges-3-light.jpg"
-      ],
-      "reviewedAtUtc": "2026-09-22T07:42:49.490161+00:00"
-    },
-    "central76": "warning_guideline_exceeded_no_visible_clipping",
-    "gameRuntime": "not_tested_art_only_handoff",
-    "physicalDevice": "not_tested"
+    }
   },
   "reuse": false,
   "reuseReason": "Existing GlobalHUD icons are 256px line symbols with UI plates, unsuitable as these 1024px painterly masters.",
   "rawFile": "Docs/Art/ClassSkillIcons/Mage/raw/M05.png",
-  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a0c7e9-82f5-7482-8998-cb6c69a160fb/exec-260ced15-28d7-48f9-b0b7-caa90bb79cf7.png",
-  "sourceSha256": "46e2e16055ce6fe9891b2a649c425c90712e5c341fbc6787e083237b62b41889",
+  "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-bc007ab8-e60f-4ba6-b0d1-4272432de032.png",
+  "sourceSha256": "465119b8b8040097f064195b0b24f1c16ccee7dafc5496aaee0eb8a11ff658b3",
   "intendedFilePath": "Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/Mage/M05.png",
   "attempts": [
     {
@@ -185,7 +82,20 @@
         "output_hint"
       ],
       "model": "unknown"
+    },
+    {
+      "timestamp": "2026-10-03T20:26:02.444528+00:00",
+      "surface": "built-in image_gen",
+      "sourceFile": "/Users/t8g-2410-pn-005/.codex/generated_images/01a10289-797b-78b1-8d5f-879df5144200/exec-bc007ab8-e60f-4ba6-b0d1-4272432de032.png",
+      "sourceSha256": "465119b8b8040097f064195b0b24f1c16ccee7dafc5496aaee0eb8a11ff658b3",
+      "returnedKeys": [
+        "image_url",
+        "output_hint"
+      ],
+      "model": "unknown",
+      "purpose": "Identity revision; repaired clipped lightning with native transparent edit"
     }
   ],
-  "unchangedNativeBytes": true
+  "unchangedNativeBytes": true,
+  "visualConcept": "Three remembered elemental facets reacting to one shield absorption"
 }

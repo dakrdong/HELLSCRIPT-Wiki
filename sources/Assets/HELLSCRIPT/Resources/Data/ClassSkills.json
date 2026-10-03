@@ -773,8 +773,8 @@
       "legacy": true,
       "name": "원소 보호막",
       "nameEn": "Elemental Shield",
-      "description": "최대 HP 35% 보호막을 4초 유지합니다.",
-      "descriptionEn": "Holds a shield worth 35% of max HP for 4 seconds.",
+      "description": "최대 HP 35% 보호막을 4초 유지하며 마지막으로 시전한 화염·냉기·번개 속성을 기억합니다. 이 보호막의 첫 실제 흡수에만 반응합니다. 화염은 3m 안 최대 5명에게 3초간 총 D60% 화상, 냉기는 1초 속박, 번개는 마나 8 회복을 줍니다. 기억한 속성이 없으면 추가 반응이 없습니다.",
+      "descriptionEn": "Hold a 35% maximum-HP shield for 4s and remember the last cast fire, cold or lightning element. React only on this shield's first actual absorption: fire burns up to 5 enemies within 3m for D60% over 3s, cold roots them for 1s, and lightning restores 8 mana. No remembered element grants no extra reaction.",
       "automatic": "기존 사냥 칙령의 사용 조건·위치·대상 설정을 유지합니다.",
       "automaticEn": "Keep the existing Hunt Edict conditions, placement and target settings.",
       "element": "Physical",
@@ -802,6 +802,22 @@
         {
           "key": "durationSeconds",
           "value": 4
+        },
+        {
+          "key": "reactionRadius",
+          "value": 3
+        },
+        {
+          "key": "reactionBurn",
+          "value": 0.6
+        },
+        {
+          "key": "reactionRoot",
+          "value": 1
+        },
+        {
+          "key": "reactionResource",
+          "value": 8
         }
       ],
       "resultMetric": "Protection"
@@ -1437,12 +1453,12 @@
       "unlock": 30,
       "maxRank": 5,
       "legacy": false,
-      "name": "결연한 전진",
-      "nameEn": "Resolute Advance",
-      "description": "유효한 지점으로 최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 줍니다. 도착 후 3초간 받는 피해가 15% 감소합니다. 적중 시 자원 15을 한 번 회복합니다.",
-      "descriptionEn": "Advance up to 4m to a valid point, hitting up to 5 enemies along the path for D90% physical damage. Gain 15% damage reduction for 3s after arrival. Restore 15 resource once if a target is hit.",
-      "automatic": "적에게 접근하되 도착 지점의 위험도가 현재보다 높으면 보류합니다.",
-      "automaticEn": "Approach an enemy only when the destination is no more dangerous than the current position.",
+      "name": "전선 돌파",
+      "nameEn": "Front Break",
+      "description": "최대 4m 전진하며 경로의 최대 5명에게 D90% 물리 피해를 주고 양옆으로 최대 1.8m 밀어 전선을 엽니다. 보스는 대신 제압됩니다. 도착 후 3초간 받는 피해가 15% 감소하고 적중 시 자원 15를 한 번 회복합니다. 벽과 몸체를 통과해 밀지 않습니다.",
+      "descriptionEn": "Advance up to 4m, dealing D90% physical damage to up to 5 enemies in the path and pushing them up to 1.8m sideways to open a lane. Bosses gain stagger instead. Gain 15% damage reduction for 3s and restore 15 resource once on a hit. Walls and bodies block displacement.",
+      "automatic": "경로에 적 둘 이상 또는 3m 밖의 적이 있고 착지가 안전하면 돌파합니다.",
+      "automaticEn": "Break through two aligned enemies or a target beyond 3m when landing is safe.",
       "element": "Physical",
       "parameters": [
         {
@@ -1496,6 +1512,10 @@
         {
           "key": "guardFraction",
           "value": 0.15
+        },
+        {
+          "key": "pushMeters",
+          "value": 1.8
         }
       ]
     },
@@ -1710,12 +1730,12 @@
       "unlock": 38,
       "maxRank": 5,
       "legacy": false,
-      "name": "결전의 호흡",
-      "nameEn": "Breath Before Battle",
-      "description": "4초간 1초마다 자원 8을 회복합니다. 회복은 최대 자원을 넘지 않습니다. 공격이나 이동을 막지 않으며 함성으로 분류하지 않습니다.",
-      "descriptionEn": "Restore 8 resource each second for 4s, up to the resource cap. Attacks and movement remain available. This is not a Shout.",
-      "automatic": "자원이 60% 이하이고 다음 공격을 준비할 때 사용합니다.",
-      "automaticEn": "Use at 60% resource or less while preparing the next attack.",
+      "name": "투쟁의 빚",
+      "nameEn": "Battle Loan",
+      "description": "자원 60를 즉시 빌립니다. 실제 받은 양만큼 빚이 남아 이후 자연 자원 회복을 먼저 상환에 씁니다. 3m 안의 직접 공격 적중 또는 방어 성공은 빚 4를 갚습니다. 공격 시전당 한 번, 방어는 1초 간격입니다. 상환 전에는 다시 빌릴 수 없으며 저장 복원·재장착으로 빚이 사라지지 않습니다.",
+      "descriptionEn": "Borrow 60 resource immediately. Only the amount actually credited becomes debt; subsequent natural regeneration pays debt first. A direct hit within 3m or a successful block repays 4, once per attack cast or once per second for blocks. Cannot borrow again until paid; saving, restoring and unequipping retain debt.",
+      "automatic": "자원 60% 이하이며 빚이 없을 때 선지급하고 근접 공격으로 상환합니다.",
+      "automaticEn": "Borrow at 60% resource or less with no outstanding debt, then repay with close hits.",
       "element": "Physical",
       "parameters": [
         {
@@ -1740,11 +1760,11 @@
         },
         {
           "key": "duration",
-          "value": 4
+          "value": 0
         },
         {
           "key": "period",
-          "value": 1
+          "value": 0
         },
         {
           "key": "targets",
@@ -1764,10 +1784,10 @@
         },
         {
           "key": "resourceGain",
-          "value": 8
+          "value": 60
         },
         {
-          "key": "ticks",
+          "key": "hitRepayment",
           "value": 4
         }
       ],
@@ -2545,12 +2565,12 @@
       "unlock": 38,
       "maxRank": 5,
       "legacy": false,
-      "name": "경계 쇠뇌",
-      "nameEn": "Watch Ballista",
-      "description": "6m 안에 쇠뇌 하나를 6초간 설치합니다. 1초마다 사거리 9m의 적 하나에게 D35% 물리 추가 피해를 주며 최대 6회 공격합니다. 시야 안의 표식 대상을 우선합니다. 사격은 기본 공격이나 A01로 세지 않습니다.",
-      "descriptionEn": "Place one ballista within 6m for 6s. Fire at one enemy within 9m each second for D35% secondary physical damage, up to 6 shots. Prefer a visible marked target. Shots are neither basic attacks nor A01.",
-      "automatic": "정예 전투가 이어질 때 위험 장판 밖에 설치합니다.",
-      "automaticEn": "Place outside hazards for sustained elite combat.",
+      "name": "교차 쇠뇌",
+      "nameEn": "Crossfire Ballista",
+      "description": "6m 안에 쇠뇌 하나를 6초간 설치하고 1초마다 9m 안의 감지한 적에게 D35% 물리 추가 피해를 줍니다. 최근 2초 안에 본체 사격이 맞힌 적을 서로 60도 이상 다른 사선에서 쏘면 D45%를 더합니다. 교차 사선과 표식 대상을 우선하며 최대 6회 사격합니다. 추가 사격은 발동을 재생산하지 않습니다.",
+      "descriptionEn": "Place one ballista within 6m for 6s. Each second, fire at a perceived enemy within 9m for D35% secondary physical damage. Add D45% when firing at an enemy hit by the hero within 2s from a firing angle at least 60 degrees apart. Prefer crossfire, then marked targets, up to 6 shots. Secondary shots trigger no further procs.",
+      "automatic": "정예가 보이면 안전한 후보 중 본체와 다른 사선에 설치합니다. 직접 사격 뒤 교차 화력을 기다립니다.",
+      "automaticEn": "Against an elite, place on a safe firing angle apart from the hero, then follow direct shots with crossfire.",
       "element": "Physical",
       "parameters": [
         {
@@ -2600,6 +2620,18 @@
         {
           "key": "ticks",
           "value": 6
+        },
+        {
+          "key": "crossfireAngle",
+          "value": 60
+        },
+        {
+          "key": "crossfireCoefficient",
+          "value": 0.45
+        },
+        {
+          "key": "shotWindow",
+          "value": 2
         }
       ]
     },
@@ -2748,12 +2780,12 @@
       "unlock": 40,
       "maxRank": 1,
       "legacy": false,
-      "name": "그림자 추격",
-      "nameEn": "Shadow Pursuit",
-      "description": "8초간 이동속도가 20% 증가합니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14의 첫 직접 적중 뒤 같은 대상에게 D60% 암흑 추가 피해를 줍니다. 시전당 1회, 초당 1회, 총 8회까지이며 추가 피해는 충전을 쓰거나 발동을 재생산하지 않습니다.",
-      "descriptionEn": "Gain 20% movement speed for 8s. After the first direct hit of BASIC, A01, A02, A07, A08, A13 or A14, deal D60% secondary shadow damage to that target. Limit once per cast, once per second and 8 procs total; echoes consume no charges and trigger no further procs.",
-      "automatic": "이동이 필요한 정예·보스 전투에서 사격할 자원이 있을 때 사용합니다.",
-      "automaticEn": "Use in mobile elite or boss combat with enough resource to fire.",
+      "name": "잔상 행군",
+      "nameEn": "Afterimage March",
+      "description": "8초간 이동속도가 20% 증가합니다. 이전 흔적에서 1.5m 이동할 때 그 자리에 잔상을 남깁니다. 동시 2개, 총 8개까지입니다. 기본 공격 또는 A01·A02·A07·A08·A13·A14 직접 적중 시 시야·사거리 10m가 유효한 잔상 하나가 그 자리에서 D60% 암흑 화살을 쏩니다. 시전당·초당 한 번이며 제자리에서는 새 잔상이 생기지 않습니다.",
+      "descriptionEn": "Gain 20% movement speed for 8s. Moving 1.5m from the previous trail anchor leaves an afterimage there, up to 2 at once and 8 total. On a direct hit of BASIC, A01, A02, A07, A08, A13 or A14, consume one afterimage with a clear shot within 10m to fire a D60% secondary shadow arrow from that location. Once per cast and second; standing still creates no new images.",
+      "automatic": "정예가 보이면 시작합니다. 선회·이탈로 1.5m 이동한 뒤 사격해야 잔상이 공격합니다.",
+      "automaticEn": "Activate against an elite. Orbit or disengage for 1.5m before shooting to make afterimages fire.",
       "element": "Shadow",
       "parameters": [
         {
@@ -2807,6 +2839,10 @@
         {
           "key": "procLimit",
           "value": 8
+        },
+        {
+          "key": "trailMeters",
+          "value": 1.5
         }
       ]
     },
@@ -3020,12 +3056,12 @@
       "unlock": 26,
       "maxRank": 5,
       "legacy": false,
-      "name": "서리 구체",
-      "nameEn": "Frost Globe",
-      "description": "최대 8m를 초속 4m로 이동하는 구체를 보냅니다. 지정 지점 또는 첫 벽에 닿으면 반경 3m의 최대 5명에게 D180% 냉기 피해와 3초간 35% 둔화를 줍니다. 이동 중에는 피해를 주지 않습니다.",
-      "descriptionEn": "Send a globe up to 8m at 4m/s. At its destination or first wall, explode for D180% cold damage and a 35% slow for 3s to up to 5 enemies within 3m. Travel itself deals no damage.",
-      "automatic": "적의 이동을 관측해 무리 중심을 겨냥합니다.",
-      "automaticEn": "Aim at the observed center of an approaching group.",
+      "name": "귀환 서리",
+      "nameEn": "Returning Frost",
+      "description": "서리 구체가 최대 8m를 초속 5m로 날아가 지정 지점이나 첫 벽에서 시전 위치로 돌아옵니다. 왕복 각각 최대 5명에게 한 번씩 D90% 냉기 피해와 3초간 35% 둔화를 줍니다. 돌아올 때 이미 둔화된 적은 0.75초 빙결됩니다. 구체 도착 순간 시전 위치 0.7m 안에 있으면 마나 12를 한 번 회수합니다. 벽이 귀환을 막으면 회수에 실패합니다.",
+      "descriptionEn": "Send a frost globe up to 8m at 5m/s, then return from its aim point or first wall to the cast location. Each leg hits up to 5 enemies once for D90% cold damage and a 35% slow for 3s. Returning hits freeze already slowed enemies for 0.75s. Restore 12 mana once if within 0.7m of the cast location when it arrives. A blocked return misses recovery.",
+      "automatic": "경로에 적 둘 이상 또는 제어된 대상이 있으면 발사하고 위험하지 않은 3m 이내 시전 위치로 귀환 회수를 시도합니다.",
+      "automaticEn": "Fire down a two-enemy corridor or at a controlled target; seek a safe cast location within 3m for return recovery.",
       "element": "Cold",
       "parameters": [
         {
@@ -3042,11 +3078,11 @@
         },
         {
           "key": "radius",
-          "value": 3
+          "value": 0
         },
         {
           "key": "coefficient",
-          "value": 1.8
+          "value": 0.9
         },
         {
           "key": "duration",
@@ -3066,7 +3102,7 @@
         },
         {
           "key": "width",
-          "value": 0
+          "value": 1.2
         },
         {
           "key": "secondary",
@@ -3074,11 +3110,11 @@
         },
         {
           "key": "speed",
-          "value": 4
+          "value": 5
         },
         {
           "key": "flightSeconds",
-          "value": 2
+          "value": 3.5
         },
         {
           "key": "slowSeconds",
@@ -3087,6 +3123,18 @@
         {
           "key": "slowFraction",
           "value": 0.35
+        },
+        {
+          "key": "freezeSeconds",
+          "value": 0.75
+        },
+        {
+          "key": "pickupRadius",
+          "value": 0.7
+        },
+        {
+          "key": "resourceGain",
+          "value": 12
         }
       ]
     },
@@ -3172,12 +3220,12 @@
       "unlock": 30,
       "maxRank": 5,
       "legacy": false,
-      "name": "번개 창",
-      "nameEn": "Storm Spear",
-      "description": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D170% 번개 피해를 줍니다. 최근 3초 안에 자신의 M03에 맞은 적을 직접 맞히면 자원 4를 시전당 한 번 회복합니다.",
-      "descriptionEn": "Pierce up to 5 enemies with a 12m-long, 0.8m-wide spear for D170% lightning damage. Restore 4 resource once per cast if a direct target was hit by your M03 within 3s.",
-      "automatic": "연쇄 번개에 맞은 정예 또는 일직선의 적에게 사용합니다.",
-      "automaticEn": "Use against a recently chained elite or aligned enemies.",
+      "name": "접지창",
+      "nameEn": "Grounding Spear",
+      "description": "길이 12m·폭 0.8m의 창으로 최대 5명에게 D90% 번개 피해를 주고 지정 지점에 접지창 하나를 6초간 남깁니다. M03이 4m 안의 다음 적을 찾지 못하면 접지창까지 4m, 창에서 다음 적까지 4m를 잇습니다. 벽·감지 규칙을 지키며 창도 연쇄 횟수 하나를 소비합니다. 한 연쇄당 중계 한 번, 마나 4 회복 한 번입니다. 최근 M03 적중 대상을 창으로 직접 맞혀도 같은 회복을 시전당 한 번 얻습니다.",
+      "descriptionEn": "Pierce up to 5 enemies along a 12m, 0.8m-wide line for D90% lightning damage and leave one grounding spear at the aim point for 6s. When M03 finds no next enemy within 4m, bridge through the spear with up to 4m on each leg. Obey walls and perception; the spear consumes one chain hop. One relay and one 4-mana refund per chain. Direct spear hits on a recent M03 target also refund once per spear cast.",
+      "automatic": "M03이 준비되어 있으면 먼저 설치합니다. 4~8m 떨어진 감지한 두 무리 사이에 중계 지점을 고릅니다.",
+      "automaticEn": "Set up before a ready M03. Choose a relay point between perceived groups separated by 4–8m.",
       "element": "Lightning",
       "parameters": [
         {
@@ -3198,11 +3246,11 @@
         },
         {
           "key": "coefficient",
-          "value": 1.7
+          "value": 0.9
         },
         {
           "key": "duration",
-          "value": 0
+          "value": 6
         },
         {
           "key": "period",
@@ -3768,8 +3816,8 @@
       "legacy": false,
       "name": "바위 같은 착지",
       "nameEn": "Stone Landing",
-      "description": "도약 내려찍기 또는 결연한 전진을 마치면 최대 HP 5% 보호막을 3초간 얻습니다. 두 기술은 3초 재발동 간격을 공유합니다.",
-      "descriptionEn": "After completing Leap or Resolute Advance, gain a 5% maximum-HP barrier for 3s. Both skills share a 3s interval.",
+      "description": "도약 내려찍기 또는 전선 돌파를 마치면 최대 HP 5% 보호막을 3초간 얻습니다. 두 기술은 3초 재발동 간격을 공유합니다.",
+      "descriptionEn": "After completing Leap Slam or Front Break, gain a 5% maximum-HP barrier for 3s. Both skills share a 3s interval.",
       "automatic": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
       "automaticEn": "Applies while equipped when the stated condition is satisfied.",
       "element": "Physical",
@@ -4162,17 +4210,17 @@
       "unlock": 34,
       "maxRank": 5,
       "legacy": false,
-      "name": "길잡이",
-      "nameEn": "Pathfinder",
-      "description": "자신과 경계 쇠뇌 사이의 거리가 5m 이상이면 그 쇠뇌의 피해가 가산 10% 증가합니다. 각 쇠뇌 사격 생성 시 거리를 확인합니다.",
-      "descriptionEn": "Watch Ballista gains +10% additive damage while the hero is at least 5m away. Check distance when each shot is created.",
+      "name": "관통 사선",
+      "nameEn": "Piercing Crossfire",
+      "description": "교차 쇠뇌의 교차 사격이 첫 적을 관통하여 같은 사선의 적 한 명을 사격 피해의 50%로 더 맞힙니다. 최대 2명, 실제 사거리·벽 충돌을 유지하며 추가 발동을 재생산하지 않습니다.",
+      "descriptionEn": "Crossfire Ballista crossfire shots pierce the first enemy to hit one additional enemy on the same firing line at 50% shot damage, up to 2. Preserve actual range and wall collision; secondary shots trigger no further procs.",
       "automatic": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
       "automaticEn": "Applies while equipped when the stated condition is satisfied.",
       "element": "Physical",
       "parameters": [
         {
           "key": "value",
-          "value": 0.1
+          "value": 0.5
         }
       ]
     },
@@ -4492,10 +4540,10 @@
       "unlock": 40,
       "maxRank": 5,
       "legacy": false,
-      "name": "끝없는 추격",
-      "nameEn": "Relentless Pursuit",
-      "description": "그림자 추격의 지속시간이 2초, 총 발동 상한이 2회 늘어납니다.",
-      "descriptionEn": "Shadow Pursuit lasts 2s longer and allows 2 additional total procs.",
+      "name": "끝없는 행군",
+      "nameEn": "Relentless March",
+      "description": "잔상 행군의 지속시간이 2초, 생성 가능한 총 잔상이 2개 늘어납니다. 동시 잔상 상한 2개는 유지합니다.",
+      "descriptionEn": "Afterimage March lasts 2s longer and can create 2 additional total afterimages. The simultaneous cap remains 2.",
       "automatic": "장착한 동안 명시한 조건을 충족하면 적용합니다.",
       "automaticEn": "Applies while equipped when the stated condition is satisfied.",
       "element": "Physical",
@@ -4557,8 +4605,8 @@
       "setId": "",
       "name": "움직이는 성벽",
       "nameEn": "Moving Rampart",
-      "description": "결연한 전진을 마치면 다음 무쇠 자세를 5초 안에 사용할 때 최대 HP 8% 보호막을 4초간 얻습니다. 한 번의 전진당 1회이며 자세 재시전만으로 갱신하지 않습니다.",
-      "descriptionEn": "After Resolute Advance, the next Iron Stance within 5s grants an 8% maximum-HP barrier for 4s. Once per completed advance, not refreshed by stance recasts alone."
+      "description": "전선 돌파를 마치면 다음 무쇠 자세를 5초 안에 사용할 때 최대 HP 8% 보호막을 4초간 얻습니다. 한 번의 돌파당 1회이며 자세 재시전만으로 갱신하지 않습니다.",
+      "descriptionEn": "After Front Break, the next Iron Stance within 5s grants an 8% maximum-HP barrier for 4s. Once per completed break, not refreshed by stance recasts alone."
     },
     {
       "id": "DES_LW44",
@@ -4577,8 +4625,8 @@
       "setId": "",
       "name": "마르지 않는 결의",
       "nameEn": "Unspent Resolve",
-      "description": "결전의 호흡이 활성화된 동안 수호의 맹약을 사용하면 호흡의 남은 고정 회복량을 즉시 받고 호흡을 종료합니다. 실제 회복 자원 1당 최대 HP 0.25%, 최대 8%를 맹약 보호막에 더합니다. 8초 간격입니다.",
-      "descriptionEn": "Using Guardian's Vow during Breath Before Battle immediately grants and consumes its remaining fixed restoration. Add 0.25% maximum HP to Vow's barrier per resource actually restored, capped at 8%; 8s interval."
+      "description": "투쟁의 빚이 남은 동안 수호의 맹약을 사용하면 현재 자원 최대 8을 써서 같은 양의 빚을 갚습니다. 실제 상환 자원 1당 최대 HP 1%, 최대 8%를 맹약 보호막에 더합니다. 8초 간격입니다.",
+      "descriptionEn": "Using Guardian's Vow with Battle Loan debt spends up to 8 current resource to repay that amount. Add 1% maximum HP to Vow's barrier per resource actually repaid, capped at 8%; 8s interval."
     },
     {
       "id": "DES_LW46",
@@ -4637,8 +4685,8 @@
       "setId": "",
       "name": "준비된 초소",
       "nameEn": "Prepared Outpost",
-      "description": "사냥 준비 직후 6초 안에 설치한 경계 쇠뇌 한 대는 지속시간이 2초, 최대 사격 수가 2회 늘어납니다. 기존 쇠뇌를 연장하지 않으며 한 번의 준비당 1대만 강화합니다.",
-      "descriptionEn": "The next Watch Ballista placed within 6s of Hunt Preparation gains 2s duration and 2 allowed shots. It cannot extend an existing ballista; one enhanced ballista per preparation."
+      "description": "사냥 준비 직후 6초 안에 설치한 교차 쇠뇌 한 대는 지속시간이 2초, 최대 사격 수가 2회 늘어납니다. 기존 쇠뇌를 연장하지 않으며 한 번의 준비당 1대만 강화합니다.",
+      "descriptionEn": "The next Crossfire Ballista placed within 6s of Hunt Preparation gains 2s duration and 2 allowed shots. It cannot extend an existing ballista; one enhanced ballista per preparation."
     },
     {
       "id": "DES_LA46",
@@ -4647,8 +4695,8 @@
       "setId": "",
       "name": "이중 사냥의 맹세",
       "nameEn": "Oath of Two Hunts",
-      "description": "일제 소탕을 선택하면 첫 파동이 표식 대상을 맞혔을 때 그 대상만 2초간 30% 둔화시킵니다. 그림자 추격을 선택하면 첫 유효 그림자 적중 후 최대 HP 12% 보호막을 4초간 얻습니다. 한 궁극기 시전당 한 번입니다.",
-      "descriptionEn": "With Killing Rain selected, its first pulse slows a marked target it actually hits by 30% for 2s. With Shadow Pursuit selected, the first valid echo grants a 12% maximum-HP barrier for 4s. Once per ultimate cast."
+      "description": "일제 소탕을 선택하면 첫 파동이 표식 대상을 맞혔을 때 그 대상만 2초간 30% 둔화시킵니다. 잔상 행군을 선택하면 첫 유효 그림자 적중 후 최대 HP 12% 보호막을 4초간 얻습니다. 한 궁극기 시전당 한 번입니다.",
+      "descriptionEn": "With Killing Rain selected, its first pulse slows a marked target it actually hits by 30% for 2s. With Afterimage March selected, the first valid echo grants a 12% maximum-HP barrier for 4s. Once per ultimate cast."
     },
     {
       "id": "DES_LM41",
@@ -4667,8 +4715,8 @@
       "setId": "",
       "name": "유리빙하 지팡이",
       "nameEn": "Glassglacier Staff",
-      "description": "빙하창이 직접 빙결시킨 적을 서리 구체가 맞히면 D60% 냉기 추가 폭발을 반경 2m·최대 5명에게 줍니다. 같은 구체는 한 번만 폭발하며 3초 간격입니다. 보스 제압만으로 빙결 조건을 충족하지 않습니다.",
-      "descriptionEn": "If Frost Globe hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze."
+      "description": "빙하창이 직접 빙결시킨 적을 귀환 서리가 맞히면 D60% 냉기 추가 폭발을 반경 2m·최대 5명에게 줍니다. 같은 구체는 한 번만 폭발하며 3초 간격입니다. 보스 제압만으로 빙결 조건을 충족하지 않습니다.",
+      "descriptionEn": "If Returning Frost hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze."
     },
     {
       "id": "DES_LM43",
@@ -4677,8 +4725,8 @@
       "setId": "",
       "name": "벼락 수집기",
       "nameEn": "Thunder Collector",
-      "description": "번개 창이 축전 구체 범위 안의 적을 직접 맞히면 해당 구체에 1충전을 더합니다. 시전당 1회이며 구체의 총 3충전 상한을 공유합니다. 만료 폭발이 번개 창으로 재분류되지 않습니다.",
-      "descriptionEn": "A direct Storm Spear hit inside Capacitor Orb adds 1 charge to that orb, once per cast, sharing its cap of 3. The expiry blast is never reclassified as Storm Spear."
+      "description": "접지창이 축전 구체 범위 안의 적을 직접 맞히면 해당 구체에 1충전을 더합니다. 시전당 1회이며 구체의 총 3충전 상한을 공유합니다. 만료 폭발이 접지창으로 재분류되지 않습니다. 접지창이 구체 3m 안에서 M03을 중계해도 한 연쇄당 1충전을 얻습니다.",
+      "descriptionEn": "A direct Grounding Spear hit inside Capacitor Orb adds 1 charge to that orb, once per cast, sharing its cap of 3. The expiry blast is never reclassified as Grounding Spear. A grounding spear relaying M03 within 3m of the orb also adds one charge per chain."
     },
     {
       "id": "DES_LM44",
@@ -9070,22 +9118,22 @@
     {
       "id": "W11",
       "skillId": "W11",
-      "name": "결연한 전진 사용 방식",
-      "nameEn": "Resolute Advance use policy",
+      "name": "전선 돌파 사용 방식",
+      "nameEn": "Front Break use policy",
       "initial": "native",
       "choices": [
         {
           "id": "native",
-          "name": "기본 칙령",
-          "nameEn": "Default edict",
+          "name": "연계 우선",
+          "nameEn": "Favor identity",
           "rule": "NATIVE",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "적에게 접근하되 도착 지점의 위험도가 현재보다 높으면 보류합니다.",
-          "benefitEn": "Approach an enemy only when the destination is no more dangerous than the current position.",
-          "cost": "조건을 만족하지 않는 기회는 다른 행동에 넘깁니다.",
-          "costEn": "Opportunities that fail these conditions are left to other actions.",
+          "benefit": "경로에 적 둘 이상 또는 3m 밖의 적이 있고 착지가 안전하면 돌파합니다.",
+          "benefitEn": "Break through two aligned enemies or a target beyond 3m when landing is safe.",
+          "cost": "유효한 연계 기회를 기다립니다.",
+          "costEn": "Waits for a valid setup opportunity.",
           "patches": []
         },
         {
@@ -9306,22 +9354,22 @@
     {
       "id": "W15",
       "skillId": "W15",
-      "name": "결전의 호흡 사용 방식",
-      "nameEn": "Breath Before Battle use policy",
+      "name": "투쟁의 빚 사용 방식",
+      "nameEn": "Battle Loan use policy",
       "initial": "native",
       "choices": [
         {
           "id": "native",
-          "name": "기본 칙령",
-          "nameEn": "Default edict",
+          "name": "연계 우선",
+          "nameEn": "Favor identity",
           "rule": "NATIVE",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "자원이 60% 이하이고 다음 공격을 준비할 때 사용합니다.",
-          "benefitEn": "Use at 60% resource or less while preparing the next attack.",
-          "cost": "조건을 만족하지 않는 기회는 다른 행동에 넘깁니다.",
-          "costEn": "Opportunities that fail these conditions are left to other actions.",
+          "benefit": "자원 60% 이하이며 빚이 없을 때 선지급하고 근접 공격으로 상환합니다.",
+          "benefitEn": "Borrow at 60% resource or less with no outstanding debt, then repay with close hits.",
+          "cost": "유효한 연계 기회를 기다립니다.",
+          "costEn": "Waits for a valid setup opportunity.",
           "patches": []
         },
         {
@@ -10028,22 +10076,22 @@
     {
       "id": "A15",
       "skillId": "A15",
-      "name": "경계 쇠뇌 사용 방식",
-      "nameEn": "Watch Ballista use policy",
+      "name": "교차 쇠뇌 사용 방식",
+      "nameEn": "Crossfire Ballista use policy",
       "initial": "native",
       "choices": [
         {
           "id": "native",
-          "name": "기본 칙령",
-          "nameEn": "Default edict",
+          "name": "연계 우선",
+          "nameEn": "Favor identity",
           "rule": "NATIVE",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "정예 전투가 이어질 때 위험 장판 밖에 설치합니다.",
-          "benefitEn": "Place outside hazards for sustained elite combat.",
-          "cost": "조건을 만족하지 않는 기회는 다른 행동에 넘깁니다.",
-          "costEn": "Opportunities that fail these conditions are left to other actions.",
+          "benefit": "정예가 보이면 안전한 후보 중 본체와 다른 사선에 설치합니다. 직접 사격 뒤 교차 화력을 기다립니다.",
+          "benefitEn": "Against an elite, place on a safe firing angle apart from the hero, then follow direct shots with crossfire.",
+          "cost": "유효한 연계 기회를 기다립니다.",
+          "costEn": "Waits for a valid setup opportunity.",
           "patches": []
         },
         {
@@ -10205,36 +10253,36 @@
     {
       "id": "A18",
       "skillId": "A18",
-      "name": "그림자 추격 사용 방식",
-      "nameEn": "Shadow Pursuit use policy",
+      "name": "잔상 행군 사용 방식",
+      "nameEn": "Afterimage March use policy",
       "initial": "native",
       "choices": [
         {
           "id": "native",
-          "name": "기본 칙령",
-          "nameEn": "Default edict",
+          "name": "연계 우선",
+          "nameEn": "Favor identity",
           "rule": "NATIVE",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "이동이 필요한 정예·보스 전투에서 사격할 자원이 있을 때 사용합니다.",
-          "benefitEn": "Use in mobile elite or boss combat with enough resource to fire.",
-          "cost": "조건을 만족하지 않는 기회는 다른 행동에 넘깁니다.",
-          "costEn": "Opportunities that fail these conditions are left to other actions.",
+          "benefit": "정예가 보이면 시작합니다. 선회·이탈로 1.5m 이동한 뒤 사격해야 잔상이 공격합니다.",
+          "benefitEn": "Activate against an elite. Orbit or disengage for 1.5m before shooting to make afterimages fire.",
+          "cost": "유효한 연계 기회를 기다립니다.",
+          "costEn": "Waits for a valid setup opportunity.",
           "patches": []
         },
         {
           "id": "opportunity",
-          "name": "가능하면 바로 사용",
-          "nameEn": "Use when available",
+          "name": "이동 사격",
+          "nameEn": "Mobile shots",
           "rule": "ANY",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "교전 시작부터 잔영 공격을 반복합니다.",
-          "benefitEn": "Starts repeating echoes early in the engagement.",
-          "cost": "자원이 없거나 적이 사라지면 충전을 남깁니다.",
-          "costEn": "Leaves charges unused if resource or targets disappear.",
+          "benefit": "대상이 보이면 시작합니다. 선회 이동으로 잔상을 만들고 다음 직접 사격에 씁니다.",
+          "benefitEn": "Activate on a visible target; orbit to leave images and use them on the next direct shot.",
+          "cost": "제자리에 서 있으면 추가 화살이 생기지 않습니다.",
+          "costEn": "Standing still produces no extra arrows.",
           "patches": []
         },
         {
@@ -10441,50 +10489,50 @@
     {
       "id": "M10",
       "skillId": "M10",
-      "name": "서리 구체 사용 방식",
-      "nameEn": "Frost Globe use policy",
+      "name": "귀환 서리 사용 방식",
+      "nameEn": "Returning Frost use policy",
       "initial": "native",
       "choices": [
         {
           "id": "native",
-          "name": "기본 칙령",
-          "nameEn": "Default edict",
+          "name": "연계 우선",
+          "nameEn": "Favor identity",
           "rule": "NATIVE",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "적의 이동을 관측해 무리 중심을 겨냥합니다.",
-          "benefitEn": "Aim at the observed center of an approaching group.",
-          "cost": "조건을 만족하지 않는 기회는 다른 행동에 넘깁니다.",
-          "costEn": "Opportunities that fail these conditions are left to other actions.",
+          "benefit": "경로에 적 둘 이상 또는 제어된 대상이 있으면 발사하고 위험하지 않은 3m 이내 시전 위치로 귀환 회수를 시도합니다.",
+          "benefitEn": "Fire down a two-enemy corridor or at a controlled target; seek a safe cast location within 3m for return recovery.",
+          "cost": "유효한 연계 기회를 기다립니다.",
+          "costEn": "Waits for a valid setup opportunity.",
           "patches": []
         },
         {
           "id": "opportunity",
-          "name": "가능하면 바로 사용",
-          "nameEn": "Use when available",
+          "name": "귀환 회수",
+          "nameEn": "Recover the return",
           "rule": "ANY",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "단일 적에게도 구체를 보냅니다.",
-          "benefitEn": "Sends the globe even at one enemy.",
-          "cost": "이동 시간 동안 빗나갈 수 있습니다.",
-          "costEn": "Can miss during travel time.",
+          "benefit": "대상이 보이면 왕복 경로를 쏘고 안전한 시전 위치에서 마나 회수를 노립니다.",
+          "benefitEn": "Fire on sight and seek the safe cast location to recover mana on return.",
+          "cost": "회수 위치가 위험하거나 3m보다 멀면 회수를 포기합니다.",
+          "costEn": "Give up recovery if the location is dangerous or farther than 3m.",
           "patches": []
         },
         {
           "id": "setup",
-          "name": "제어된 적 기다리기",
-          "nameEn": "Wait for control",
+          "name": "제어 사격",
+          "nameEn": "Control shots",
           "rule": "CONTROLLED",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "멈춘 적을 노려 폭발 명중을 높입니다.",
-          "benefitEn": "Targets a controlled enemy for a reliable explosion.",
-          "cost": "제어가 끝나면 기회를 놓칠 수 있습니다.",
-          "costEn": "Can lose the opportunity as control expires.",
+          "benefit": "제어된 대상만 쏩니다. 회수 이동을 생략하고 현재 전투 위치를 유지합니다.",
+          "benefitEn": "Shoot controlled targets only and hold combat position instead of moving for pickup.",
+          "cost": "시전 위치를 벗어나면 회수 마나를 잃을 수 있습니다.",
+          "costEn": "Moving away from the cast location can lose the mana refund.",
           "patches": []
         }
       ],
@@ -10559,22 +10607,22 @@
     {
       "id": "M12",
       "skillId": "M12",
-      "name": "번개 창 사용 방식",
-      "nameEn": "Storm Spear use policy",
+      "name": "접지창 사용 방식",
+      "nameEn": "Grounding Spear use policy",
       "initial": "native",
       "choices": [
         {
           "id": "native",
-          "name": "기본 칙령",
-          "nameEn": "Default edict",
+          "name": "연계 우선",
+          "nameEn": "Favor identity",
           "rule": "NATIVE",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "연쇄 번개에 맞은 정예 또는 일직선의 적에게 사용합니다.",
-          "benefitEn": "Use against a recently chained elite or aligned enemies.",
-          "cost": "조건을 만족하지 않는 기회는 다른 행동에 넘깁니다.",
-          "costEn": "Opportunities that fail these conditions are left to other actions.",
+          "benefit": "M03이 준비되어 있으면 먼저 설치합니다. 4~8m 떨어진 감지한 두 무리 사이에 중계 지점을 고릅니다.",
+          "benefitEn": "Set up before a ready M03. Choose a relay point between perceived groups separated by 4–8m.",
+          "cost": "유효한 연계 기회를 기다립니다.",
+          "costEn": "Waits for a valid setup opportunity.",
           "patches": []
         },
         {
@@ -10593,16 +10641,16 @@
         },
         {
           "id": "setup",
-          "name": "연쇄 번개 적중 후",
-          "nameEn": "After Chain Lightning hits",
-          "rule": "CHAIN_HIT",
+          "name": "연쇄 전에 접지",
+          "nameEn": "Ground before chaining",
+          "rule": "CHAIN_READY",
           "value": 0,
           "target": "",
           "placement": "",
-          "benefit": "최근 자신의 연쇄 번개에 맞은 적을 노립니다.",
-          "benefitEn": "Targets an enemy recently hit by its Chain Lightning.",
-          "cost": "연쇄 번개의 적중을 기다립니다.",
-          "costEn": "Waits for Chain Lightning to land.",
+          "benefit": "M03이 준비되고 두 기술의 마나가 있을 때 먼저 중계창을 설치합니다.",
+          "benefitEn": "Place the relay first when M03 is ready and mana covers both skills.",
+          "cost": "창 설치에 먼저 행동과 마나를 씁니다.",
+          "costEn": "Spends an action and mana on setup first.",
           "patches": []
         }
       ],
