@@ -44,7 +44,17 @@ namespace Hellscript
             ItemRangeDisplay.Initialize(saveDirectory);
             InitializeDisplaySettings(saveDirectory);
             InitializeIdle(saveDirectory);
-            try{Profiles=new AccountProfiles(saveDirectory);activeProfileDirectory=Profiles.GuestDirectory;Store=new GameStore(activeProfileDirectory,catalog);if(!Store.StartNewHeroesWithoutSkills()||!Store.ActivateSkillTrees(catalog))throw new InvalidOperationException(Store.Error);}
+            try
+            {
+                Profiles=new AccountProfiles(saveDirectory);activeProfileDirectory=Profiles.GuestDirectory;
+                Func<long> fixtureClock=null;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+                fixtureClock=RuntimePresentationProfile.PrepareFixture(activeProfileDirectory,catalog,args);
+#endif
+                Store=new GameStore(activeProfileDirectory,catalog,offlineClock:fixtureClock);
+                if(fixtureClock!=null)Store.AttendanceClock=()=>fixtureClock()*1000;
+                if(!Store.StartNewHeroesWithoutSkills()||!Store.ActivateSkillTrees(catalog))throw new InvalidOperationException(Store.Error);
+            }
             catch(Exception e){Notice=e.Message;UI=gameObject.AddComponent<GameUI>();UI.Initialize(this);enabled=false;return;}
             SelectedStage=Mathf.Max(1,Store.Data.Hero.highestClear+1);Notice=Store.OfflineMessage;
             if(Store.GemRecoveryMessage!="")Notice+=(Notice!=""?"\n":"")+Store.GemRecoveryMessage;
@@ -52,6 +62,8 @@ namespace Hellscript
             Telemetry=gameObject.AddComponent<CombatTelemetryUploader>();Telemetry.Initialize(Store.CombatArchive);
             LiveOps=gameObject.AddComponent<LiveOpsClient>();LiveOps.Initialize(saveDirectory);Store.LiveOpsPreview=LiveOps.Capture;Store.LiveOpsPreviewVersion=()=>LiveOps.Version;
             GoogleLogin=gameObject.AddComponent<GoogleLoginClient>();deviceSaveDirectory=saveDirectory;
+            PlayerEvents=gameObject.AddComponent<PlayerEventUploader>();PlayerEvents.Initialize(this);
+            GoogleLogin.SessionChanged+=()=>{if(GoogleLogin.LinkCompleted)CompleteGoogleLink();};
             GameServerConnection.Configure(this,saveDirectory);
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
             Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);Audio.Watch(Store);
@@ -254,7 +266,7 @@ namespace Hellscript
             var pointer=Pointer.current;
             if(pointer!=null&&pointer.press.wasPressedThisFrame&&!TownPointerOverUI(pointer.position.ReadValue()))TapPlaza(pointer.position.ReadValue());
             if(input.sqrMagnitude>.01f)Town.Move(input,real);else Town.Tick(real);
-            World.PresentTown(Town,real);UI.RefreshPlaza();
+            World.PresentTown(Town,real);
         }
         public bool ReturnThroughPortal()
         {

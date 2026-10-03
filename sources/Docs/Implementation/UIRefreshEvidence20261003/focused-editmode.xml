@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="12" result="Passed" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.8039406">
+  <test-suite type="TestSuite" id="1000" name="validation" fullname="validation" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.803941" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1015" name="Focused.Tests.dll" fullname="/Users/t8g-2410-pn-005/Documents/Codex/2026-10-03/task-3/validation/Library/ScriptAssemblies/Focused.Tests.dll" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.800021" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="4127" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1016" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.799806" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1017" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.799684" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="StoreViewBindingTests" fullname="Hellscript.Tests.StoreViewBindingTests" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.799338" total="12" passed="12" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1008" name="ChildWindowKeepsItsFocusAndAppliesThePendingStateAfterClosing" fullname="Hellscript.Tests.StoreViewBindingTests.ChildWindowKeepsItsFocusAndAppliesThePendingStateAfterClosing" methodname="ChildWindowKeepsItsFocusAndAppliesThePendingStateAfterClosing" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="1602489052" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:16Z" duration="0.190343" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1004" name="CommitDuringPressWaitsForReleaseWithoutCancellingTheClick" fullname="Hellscript.Tests.StoreViewBindingTests.CommitDuringPressWaitsForReleaseWithoutCancellingTheClick" methodname="CommitDuringPressWaitsForReleaseWithoutCancellingTheClick" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="565933281" result="Passed" start-time="2026-10-03 00:50:16Z" end-time="2026-10-03 00:50:17Z" duration="0.042620" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1013" name="EquipmentKeyCapturesListsProtectionAndFrozenSlotInputsButIgnoresSaveMetadata" fullname="Hellscript.Tests.StoreViewBindingTests.EquipmentKeyCapturesListsProtectionAndFrozenSlotInputsButIgnoresSaveMetadata" methodname="EquipmentKeyCapturesListsProtectionAndFrozenSlotInputsButIgnoresSaveMetadata" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="13092799" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.044621" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1012" name="FailedSaveAndDuplicateTransactionNeitherReplaceControlsNorGrantAgain" fullname="Hellscript.Tests.StoreViewBindingTests.FailedSaveAndDuplicateTransactionNeitherReplaceControlsNorGrantAgain" methodname="FailedSaveAndDuplicateTransactionNeitherReplaceControlsNorGrantAgain" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="172523472" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.102207" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/ui-refresh-c0acca60438a491f8513527ab23cb74b/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+            </test-case>
+            <test-case id="1011" name="FocusedTextDraftSurvivesACommitUntilEditingEnds" fullname="Hellscript.Tests.StoreViewBindingTests.FocusedTextDraftSurvivesACommitUntilEditingEnds" methodname="FocusedTextDraftSurvivesACommitUntilEditingEnds" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="1073088903" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.049098" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="ManualActionRepaintConsumesItsAlreadyDisplayedCommit" fullname="Hellscript.Tests.StoreViewBindingTests.ManualActionRepaintConsumesItsAlreadyDisplayedCommit" methodname="ManualActionRepaintConsumesItsAlreadyDisplayedCommit" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="2008581638" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.044587" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1007" name="MeaningfulRefreshRestoresTheSameNamedFocusAndModality" fullname="Hellscript.Tests.StoreViewBindingTests.MeaningfulRefreshRestoresTheSameNamedFocusAndModality" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.085867" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1005" name="MeaningfulRefreshRestoresTheSameNamedFocusAndModality(False)" fullname="Hellscript.Tests.StoreViewBindingTests.MeaningfulRefreshRestoresTheSameNamedFocusAndModality(False)" methodname="MeaningfulRefreshRestoresTheSameNamedFocusAndModality" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="186431524" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.042721" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="MeaningfulRefreshRestoresTheSameNamedFocusAndModality(True)" fullname="Hellscript.Tests.StoreViewBindingTests.MeaningfulRefreshRestoresTheSameNamedFocusAndModality(True)" methodname="MeaningfulRefreshRestoresTheSameNamedFocusAndModality" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="2023378342" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.039983" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1010" name="OwnerReadinessCoalescesAllPendingCommitsUntilReady" fullname="Hellscript.Tests.StoreViewBindingTests.OwnerReadinessCoalescesAllPendingCommitsUntilReady" methodname="OwnerReadinessCoalescesAllPendingCommitsUntilReady" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="1185431885" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.055824" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1002" name="PlainSaveIsNotFilteredWhenTheDisplayedBalanceReallyChanges" fullname="Hellscript.Tests.StoreViewBindingTests.PlainSaveIsNotFilteredWhenTheDisplayedBalanceReallyChanges" methodname="PlainSaveIsNotFilteredWhenTheDisplayedBalanceReallyChanges" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="2051404904" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.081858" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1014" name="RepeatingButtonConfigurationDoesNotRestartAnExistingTransition" fullname="Hellscript.Tests.StoreViewBindingTests.RepeatingButtonConfigurationDoesNotRestartAnExistingTransition" methodname="RepeatingButtonConfigurationDoesNotRestartAnExistingTransition" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="1369592848" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.039971" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1003" name="UnrelatedTransactionsKeepButtonsFocusAndTheirClickListener" fullname="Hellscript.Tests.StoreViewBindingTests.UnrelatedTransactionsKeepButtonsFocusAndTheirClickListener" methodname="UnrelatedTransactionsKeepButtonsFocusAndTheirClickListener" classname="Hellscript.Tests.StoreViewBindingTests" runstate="Runnable" seed="1099102682" result="Passed" start-time="2026-10-03 00:50:17Z" end-time="2026-10-03 00:50:17Z" duration="0.054767" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/validation/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

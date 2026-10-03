@@ -1,0 +1,76 @@
+# Account UID and player-event analytics
+
+Updated: 2026-10-03
+
+[한국어](Player_Accounts_Analytics.md) · [Google sign-in](Google_Login.en.md) · [Sites backend](Sites_Player_Logs.en.md) · [Combat logs](Combat_Journal_Server.en.md)
+
+This describes a **local implementation and deployment candidate**. Production migrations, Worker deployment, registration enablement and the final public web build require separate approval and the receipt checks below. Local success is not production activation.
+
+## Accounts and saves
+
+Ordinary guests create an account with a username and password. No email or extra nickname is required. Usernames are 3–24 ASCII letters, digits or underscores and are case-insensitive. Passwords contain 15–128 Unicode characters, at most 512 UTF-8 bytes, with no controls or unpaired surrogates. Each password uses a random 32-byte salt and PBKDF2-SHA256 with 600,000 iterations. Plaintext is neither stored nor logged. An unsupported host fails closed; the work factor is never reduced.
+
+The server-created 32-character UID owns the account. The title account dialog and Account settings show a copyable `HS-` support reference. A UID cannot authenticate, reset a password or prove ownership. Email recovery, UID-only recovery, password reset and cloud-save synchronization are not provided. Registration explains these limits and the fields sent to the server.
+
+First registration atomically binds the **existing directory reference** in `AccountProfiles`. Guest characters, currencies, progress and pending combat bytes stay in the same directory. A fresh guest receives another directory. Other accounts cannot be merged or overwritten. An already bound account opens its existing save. A first login on another device offers guest adoption or a new device save. Corrupt ownership metadata or a failed save stops entry while preserving the originals.
+
+Sessions live only in memory for 12 hours. Restart requires sign-in, and a new login revokes the previous server session. Passwords, bearer tokens and Google email addresses are not saved to PlayerPrefs, save JSON, ownership metadata, browser localStorage or IndexedDB. On the web, character selection and uploads begin only after `FS.syncfs` confirms the ownership registry and save. Failure preserves the original files and permits a retry with the same account.
+
+Google linking requires the current session plus PKCE/state. The server verifies Google's signature, issuer, audience, nonce and expiry before binding its identity to the **current UID**. An identity owned by another UID returns 409 and preserves both accounts, saves and the existing session. Lost exchange replies replay the same result. Legacy v1 Google exchange cannot consume a v2 linking attempt. New responses display the username or `Google`, without returning an email address.
+
+## Collection and metric definitions
+
+`player_events` contains no full save, password, email, typed message, IP address or advertising identifier. The server derives ownership from authentication and stores random event/session IDs, kind, client UTC/server receive time, seconds, stage, tutorial phase, spend amount/currency/source and an integrity hash. Existing Google records keep `google:`; local accounts use `player:` even after linking Google. Server-controlled QA credentials use `qa:`. Aggregates include ordinary `player`/`google` records and normalize the UID internally.
+
+| Metric | Implementation and limits |
+| --- | --- |
+| DAU | Distinct authenticated accounts with actual `activity` on a date. Accounts that only registered or signed in are counted separately. Page visits are a different metric. |
+| Returning/retention | Returning accounts with activity in the preceding seven days. `analytics_retention.sql` separately calculates UTC calendar D1/D7 for accounts created after collection begins, excluding immature denominators. This is not an install cohort or the first visit of a pre-existing guest. |
+| Play time | Actual foreground time outside the title, including character selection, gameplay and settings. Source buckets are saved approximately every 60 seconds. Hidden tabs/lost focus are excluded. A crash can lose roughly the last unsaved minute. |
+| Session length | Sum of activity seconds per random play-session ID. The daily export averages slices split at UTC midnight. It is not sign-in-to-sign-out wall time or a closed-session-only average. End events are best effort. |
+| Combat action time | Foreground seconds classified by the existing simulation as attack/evasion. It does not count every movement or nearby enemy. Rift simulation and attendance seconds remain separate; accelerated simulation time is not play time. |
+| Rift entries/clears | `rift_enter` follows a committed normal-rift transition. Clears require a completed record with victory and a defeated boss. Abandoned entries may lack completion. These are client observations, not authoritative anti-cheat evidence. |
+| Tutorial dropout | Committed prologue phases 0–6 and completion 100. Only cohorts observed from phase 0 enter the 24-hour funnel. Existing completed/midway saves are baselines, not dropouts. Other content guides/rune-board lessons need additional events. |
+| Currency spending | Committed debits from shop purchase/buyback, potion purchases, blacksmith jobs/enhancements and rift recovery. Rewards and arbitrary wallet changes are not spending. Gold, Abyssal Coins, enhancement stones and materials are separate. Core crafting, rune ascension/reshape and other spending owners still need explicit hooks. |
+
+Only `session_start/end`, `progress_snapshot`, `activity`, `tutorial_step`, `rift_enter`, `currency_spent` and `collection_gap` are accepted. Failed saves and duplicate transactions emit no new committed spend/progress events. Up to 2,048 events are persisted with the account. At capacity, existing pending records are preserved and dropped-event counts are reported when space becomes available. Switching ownership stops requests and opens only the selected account's queue.
+
+Batches contain at most 64 events/64 KiB. A queue entry is removed through an atomic save only after the original byte hash and ordered ID list match the ACK. Reusing an ID for another payload rejects the entire batch. Lost responses, authentication expiry, network faults and ACK-save failures preserve the originals with backoff up to 300 seconds. The separate combat path retains R2 originals, D1 summaries and runId/hash receipts. A `.rejected` combat record is preserved and must not count as delivered.
+
+## Free analytics connection and size
+
+The existing Site owns a D1 SQLite-family account/summary DB and R2 combat originals. `/ops` retains its operator access; this change adds no analytics dashboard. Cloudflare Web Analytics measures the game page, not these server events. The old Railway volume is a migration backup, not the active analysis DB.
+
+`analytics_daily.sql`, `analytics_tutorial.sql` and `analytics_retention.sql` are **SELECT-only**. Bind UTC range, query cutoff and actual collection activation time. Outputs contain dates, counts, seconds and currency totals, never UIDs, usernames, emails, tokens, saves or R2 bodies. Client clocks over 30 days older than receipt or more than five minutes ahead use receive time, with daily fallback counts. Late arrivals can revise historical totals. Approved production-validation identities must be identified/excluded as QA before ordinary-user analysis.
+
+Start by reviewing the small anonymous result as a private CSV. After approval, upload it to personal Google Sheets and connect the free Google Data Studio/Looker Studio chart tool. This requires a Google account and is not a direct D1 SQL connection. Metabase OSS is another candidate, but its SQLite driver expects a local database file; connecting D1/R2 would require an aggregate replica and separate hosting/operation. A fixed-query dashboard within the existing Site would avoid another analytics account, but is not implemented here. Do not provide BI tools with D1/R2 credentials or operator bearers. See [Google pricing](https://cloud.google.com/data-studio), [Sheets connector](https://docs.cloud.google.com/data-studio/connect-to-google-sheets) and [Metabase SQLite](https://www.metabase.com/docs/latest/databases/connections/sqlite); the D1 replica requirement is an inference from the supported connection model.
+
+Initially, around 20 daily values plus a few tutorial/cohort rows suffice. No continuous transfer of frame data or full combat bodies is needed. Approve a daily replace/idempotent upload only when real-time operational decisions or manual exports justify it. One play hour creates at least roughly 60 activity events, plus source splits, transactions and progress. With no verified ordinary-player sample, row sizes, usage frequency and combat sizes cannot establish actual costs. Check the account's Sites/D1/R2 storage, request and CPU quotas and BI policies; free charts do not make server storage free.
+
+The 2026-10-02 production inspection verified **15 QA combat rows: 14 victories and one defeat, with zero ordinary Google combat rows**. Production receipt of the new player events is not yet verified. Local Node/workerd/native fixtures are synthetic, not ordinary users. Collection code does not prove real production participation or complete coverage.
+
+This change introduces no server deletion/TTL and preserves existing originals. Decide event retention, backup/recovery and long-term anonymous totals before activation. Deletion requires separate approval. Client queue capacity is not server retention.
+
+## Production approval and gates
+
+1. Verify the current version/backup of the same existing Site and apply `0001_narrow_sue_storm.sql` plus `0002_colorful_warstar.sql`. They add three tables, auth-attempt fields and currency; existing rows are neither modified nor deleted.
+2. Deploy only the final commit's `server/sites` source to that Worker. Keep the Google callback, scopes, secrets and existing operator/QA credentials. Player CORS allows only `https://hellscript-game.github.io`; operator APIs retain same-origin/CSRF protection.
+3. With registration disabled, preflight **KDF/CPU on that same host** through three `/v1/accounts/login` requests using nonexistent random synthetic usernames. Valid synthetic passwords, request IDs and proofs exist only in memory; no account, session or event is created. Temporary `auth_rates` rows are written. `401 credentials_rejected` proves completion of the 600,000-iteration derivation; `503 password_kdf_unavailable` or a host CPU error stops activation. Record only HTTP outcomes and aggregate CPU/wall times. Registration activation with `HELLSCRIPT_LOCAL_ACCOUNTS_ENABLED=true` and validation account creation then require separate approval. Any paid plan, new Site/DB or credential requires approval of its exact change and cost.
+4. With approved validation identities, test repeated registration/login on the real host, session expiry/revocation, browser storage across restart, real Google callback/link/conflict, and web player/combat receipt counts and namespaces. Keep tokens, UIDs and save bodies out of reports/external services. Separate validation fixtures from ordinary users.
+5. After these gates and other work's main integration, build the final web player and confirm public receipt. A successful web build alone is not server activation.
+
+Local workerd 2026-10-02 accepted 600,000 iterations in three registrations, three logins and an event receipt, with 46–60ms authentication wall times. **Open-source workerd enforces neither production CPU nor PBKDF iteration limits, so this is not proof of Sites compatibility.** Distinguish the [PBKDF implementation](https://github.com/cloudflare/workerd/blob/main/src/workerd/api/crypto/pbkdf2.c%2B%2B), [host limit hook](https://github.com/cloudflare/workerd/blob/main/src/workerd/api/crypto/impl.c%2B%2B) and [local unlimited enforcer](https://github.com/cloudflare/workerd/blob/main/src/workerd/server/server.c%2B%2B). Do not bypass limits or weaken the work factor. If unsupported, approve an authentication execution location/method that satisfies both password security and host limits.
+
+Rollback pauses registration by setting the flag to `false`, **keeping compatible login/session/event APIs for newly created accounts**. Once new accounts exist, restoring an old DB/client/Worker can lose ownership or lock users out. Do not delete added tables, ownership registries or queues. Existing clients retain Google v1 and their original combat namespace.
+
+## Reproduction and UI ownership
+
+Local server tests passed 34/34, focused Unity account/authentication/title/localization tests 64/64, and the shared UI checks and checker tests 11/11. The native synthetic server received two accounts, 26 player events and one combat run/one R2 object through the actual client. These are synthetic fixtures rather than production users. Acceptance covered registration, lost replies, offline preservation, Google association/conflict and signing in from a separate process. Title input acceptance passed 21 checks, and support UID/copy and all five settings tabs/close passed in Korean/English at five viewport shapes. The integration owner performs the full EditMode/native/WebGL gates after the final main integration.
+
+The isolated worktree cannot build the complete wiki because existing documents reference Git-excluded `Artifacts/Validation` evidence absent from this checkout. The account documents, English parity and their history are preserved; historical links are neither removed nor replaced with invented reports. Build/check and the complete wiki tests must run in the integration checkout with the original evidence available. No public wiki publishing has occurred.
+
+Run `cd server/sites && npm test`, then `npm run build`. `node test_workerd.mjs /absolute/path/to/workerd` uses an existing official local binary without installation or deployment. `account_fixture_server.mjs` uses localhost-only in-memory SQLite/R2, explicitly signed synthetic Google identities and rejects every external fetch. `RuntimePlayerAccountSmoke` requires an isolated save/evidence path and a loopback `-hellscriptServerBase`; it rejects a non-local server and checks that passwords/tokens are not saved. Unauthenticated offline entry exists only with explicit development `-hellscriptOfflineQa`, for established regression smokes.
+
+The UI adapts the existing title-auth modal and shared settings window rather than introducing a new content window. It reuses title Plate/Caption/Google branding and shared `UiTheme`/`UiFonts`/settings scrolling. `GameController` and `GameStore` own mutations. Use default text size only. Validate KO/EN credentials, UID/copy/link and scrolling at 440×956, 956×440, 1280×720, 1440×900 and 1720×720. Native macOS viewport/inset simulation does not prove physical mobile or actual browser Google flow.
+
+[Account API](../../server/sites/accounts.js) · [Google linking](../../server/sites/auth.js) · [Events](../../server/sites/player_events.js) · [Daily aggregates](../../server/sites/analytics_daily.sql) · [Tutorial cohorts](../../server/sites/analytics_tutorial.sql) · [D1/D7](../../server/sites/analytics_retention.sql)

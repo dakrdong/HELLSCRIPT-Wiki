@@ -159,6 +159,7 @@ namespace Hellscript
         public DailyQuestState dailyQuests;
         [NonSerialized] internal Func<long> dailyQuestClock;
         public string telemetryAccountId;
+        public PlayerObservations playerObservations;
         public long combatSequence,combatTelemetryLossCount;
         public AttendanceState attendance;
         public OfflineSupplyState offlineSupplies;

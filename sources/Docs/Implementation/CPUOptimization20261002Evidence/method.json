@@ -1,0 +1,102 @@
+{
+  "macOS": "26.6.2",
+  "hardware": {
+    "hw.model": "Mac15,7",
+    "hw.physicalcpu": "12",
+    "hw.logicalcpu": "12",
+    "hw.memsize": "38654705664"
+  },
+  "unity": "6000.6.0f1",
+  "originalBaseline": "94e11019",
+  "instrumentationCommit": "3fc1033a",
+  "skill": {
+    "name": "Ponytail",
+    "version": "4.10.0",
+    "sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+    "mode": "lite instructions only; no installer, hooks, or global instruction edits",
+    "upstream": "https://github.com/DietrichGebert/ponytail",
+    "source": "/Users/t8g-2410-pn-005/.codex/plugins/cache/ponytail/ponytail/4.10.0/skills/ponytail/SKILL.md"
+  },
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "durationSeconds": 20,
+    "warmupSeconds": 3,
+    "fixedFixtureUtc": 1790899200,
+    "encounterSeed": 93171,
+    "gearSeed": 9132026,
+    "autoRepeat": false,
+    "edict": false,
+    "qualityByTarget": {
+      "native": "PC",
+      "web": "Mobile"
+    }
+  },
+  "excludedCaptures": [
+    "native-before (30935f37, attendance popup obscures three modes)",
+    "web-baseline-valid (second navigation did not start engine)",
+    "web-explore-current (truncated JSON)",
+    "web-before-current (failed JSON transport)",
+    "web-probe-transport-v2 (transport probe, not repeat baseline)",
+    "web-timing-before, web-timing-window-before, web-timing-fixed-probe, web-timing-diagnostic (scheduler diagnostics during final EditMode suite; excluded from CPU improvement evidence)",
+    "web-controlled (only one valid pair; subsequent GUI pages hidden; incomplete series)",
+    "web-controlled-visible (Chromium occlusion-test flag did not yield a full report)",
+    "web-controlled-visible, web-controlled-metal, web-controlled-owned-page (baseline output was replaced at22:14; missing profiling HTML/JS, no report; no performance credit)"
+  ],
+  "webFramePacing": "Uncontrolled same-config60/vSync0 samples measured60\u2013120FPS. Diagnosis observed screenAnimationFrameRate60->120 and Emscripten rAF timingValue1->2 within20s while targetFrameRate remained60. Thus cap/display-rate calibration was not stable during warmup; uncontrolled percentage drops are not logic improvement evidence.",
+  "editorNoise": "Original editor PID55085 kept running. Actual sampled CPU ranges recorded per capture; no assumption of constant170\u2013190%.",
+  "optimizationCommit": "91aceb5f",
+  "baselineEditMode": {
+    "total": 5041,
+    "passed": 4913,
+    "failed": 128
+  },
+  "nativeBeforeSamples": 12,
+  "webBeforeSamples": 12,
+  "nativeAfterSamples": 12,
+  "nativeConclusion": "Menu CPU/frame median -22.4% with similar actual FPS; town allocations -10.4% and GC53->47, CPU delta within noise; inventory/combat no credited gain; menu/combat GC medians increased and remain disclosed.",
+  "webAfterSamples": 12,
+  "controlledWebMethod": "Final comparison uses exact3fc1033a development source rebuilt to a unique path, unchanged91aceb5f after binary frozen with COW copy, sameChrome154.0.8037.93 headless, realAppleM3Pro ANGLE Metal GPU, hardwareGPU compositing/WebGL enabled, software rasterizer disabled; virtualscreen800x600, renderedcanvas1280x720/DPR1, visible/focused document, no visibility/focus emulation. Both development-only generated wrappers hold Emscripten timer mode0/16.6667ms before warmup. Same policy on both builds receives no optimization credit. Exact actual FPS, visibility/focus events, loop mode/value, viewport/DPR recorded; three repeats per mode, interleaved before/after with repeat2 reversed. Original userEditor retained; no simultaneous own build/tests. This controlled GPU/backend comparison is not a foreground shipping-browser performance guarantee.",
+  "limitations": [
+    "Original user Editor runs concurrently; per-sample CPU noise recorded.",
+    "Development-player CPU measurements; no release CPU/Safari/Firefox/physical-mobile battery validation.",
+    "No callable Unity MCP or CUA in selected environment; direct matching installed Editor and own native/CDP players used."
+  ],
+  "baselineOutputReplacement": {
+    "observedLocalMtime": "2026-10-02 22:14 +0900",
+    "originalManifest": "build-binaries.json",
+    "changed": [
+      "web-current-before/index.html",
+      "web-current-before/Build/web-current-before.wasm",
+      "web-current-before/Build/web-current-before.data",
+      "web-current-before/Build/web-current-before.framework.js"
+    ],
+    "unchanged": [
+      "native before/after runtime DLL",
+      "web-current-after wasm/data/framework"
+    ],
+    "recovery": "Rebuild exact3fc1033a development baseline into unique cpu-validation-91aceb5f/web-before-rebuilt; preserve the replaced output and current after binary. No attribution to another worker without evidence."
+  },
+  "baselineRecoveryBuild": {
+    "source": "3fc1033a",
+    "directory": "cpu-validation-91aceb5f/web-before-rebuilt",
+    "outcome": "Succeeded errors=0 exit0",
+    "log": "cpu-web-before-rebuild.log",
+    "afterDirectory": "cpu-validation-91aceb5f/web-after-frozen",
+    "binaryManifest": "controlled-build-binaries.json",
+    "finalSourceRestored": "91aceb5f; no gameplay diff from already-tested final code"
+  },
+  "controlledWebSamples": 24,
+  "webConclusion": "Controlled development headless Metal: menuRenderer CPU/frame median-20.8% with nonoverlapping ranges; same viewport/fixed timer, measuredFPS ranges disclosed. Town/inventory/combat CPU ranges overlap: no CPU gain credited. TownGC/frame-7.9%. Not a foreground shipping/release claim.",
+  "finalEditMode": {
+    "total": 5041,
+    "passed": 4913,
+    "failed": 128,
+    "newFailures": 0,
+    "resolvedExisting": 0,
+    "skipped": 0
+  },
+  "validCaptureCount": 72
+}

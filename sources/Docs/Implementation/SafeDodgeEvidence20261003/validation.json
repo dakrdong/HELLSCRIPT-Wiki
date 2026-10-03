@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-04",
+  "executed_date": "2026-10-03",
+  "status": "requested behavior verified; related regression run retains 10 baseline failures",
+  "production_commit": "4682fd67",
+  "native_fixture_commit": "bca59784d12b8283b5c3e55f50db23ab810903bd",
+  "unity_version": "6000.6.0f1",
+  "editor_path": "CoplayDev reported no live Editor; used the installed matching Unity batch runner and native macOS development player",
+  "focused_diagnostics": {
+    "total": 56,
+    "passed": 56,
+    "failed": 0,
+    "artifact": "focused-editmode.xml"
+  },
+  "final_related_editmode": {
+    "total": 1289,
+    "passed": 1279,
+    "failed": 10,
+    "skipped": 0,
+    "duration_seconds": 192.5359614,
+    "new_failures": [],
+    "preexisting_failures": [
+      "Hellscript.Tests.EdictShieldTests.PreparationAndConsumedOpeningSurviveEditsAndIndependentRestore",
+      "Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(False,\"FOLLOW\",False)",
+      "Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(True,\"FOLLOW\",True)",
+      "Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(False,\"FIXED\",False)",
+      "Hellscript.Tests.EdictTeleportTests.PaidDestinationSurvivesOptionEditsTargetLossAndIndependentRestoration",
+      "Hellscript.Tests.EdictTargetIntegrationTests.ACheckpointKeepsThePursuitClockAndFutureDecisions",
+      "Hellscript.Tests.EdictBlizzardTests.ModeAndPaidPreparationSurviveEditsAndSaveRestoration(True,\"FIXED\",False)",
+      "Hellscript.Tests.EdictChainTests.PaidCastKeepsItsFirstTargetAndReservedBonusAcrossEditingAndRestart",
+      "Hellscript.Tests.EdictFireballTests.ACompiledCastRetainsItsAimAndPolicyThroughSaveRestoration",
+      "Hellscript.Tests.EdictTargetIntegrationTests.ANewerActionTargetPolicyIsNotSilentlyDowngraded"
+    ],
+    "artifact": "related-editmode.xml",
+    "baseline_comparison": "baseline-comparison.json",
+    "baseline_artifact": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-03/task-2/evidence/final-integrated-editmode/results.xml",
+    "comparison": "All 10 failure names and assertions match after ignoring serialized string length/index shifts from the three new empty lists.",
+    "filter": [
+      "Hellscript.Tests.Edict",
+      "Hellscript.Tests.ClassSkillRuntimeTests",
+      "Hellscript.Tests.ClassSkillPolicyTests",
+      "Hellscript.Tests.CombatActivityTests",
+      "Hellscript.Tests.HuntEdictSuspendedSaveTests",
+      "Hellscript.Tests.HuntEdictV2StorageTests"
+    ]
+  },
+  "native_macos": {
+    "result": "passed",
+    "exit_code": 0,
+    "build_errors": 0,
+    "build_artifact": "/tmp/hellscript-safe-dodge-20261003/native-v3/HELLSCRIPT.app",
+    "build_log": "/tmp/hellscript-safe-dodge-20261003/build-v3.log",
+    "runtime_log": "native-runtime.log",
+    "acceptance": "runtime.txt",
+    "feedback": "feedback.json",
+    "captures": [
+      "safe-waiting-1600x900-ko.png",
+      "safe-attack-1600x900-ko.png",
+      "safe-attack-1600x900-en.png"
+    ],
+    "conditions": "1600x900; KO/EN; actual Rift, class skills, WorldView and activity HUD; isolated save, 20Hz fixed ticks",
+    "observations": [
+      "nearest reachable circle boundary",
+      "two seconds of stationary wait accumulated as evasion",
+      "W11 cannot leave the held position",
+      "actual W14 and basic attacks on another in-range enemy while current target is distant",
+      "no hero movement or damage during the held attack",
+      "release after originating damage zone ends",
+      "cumulative curve endpoints and exact 100 percent share bar"
+    ],
+    "retries": "Only native acceptance was repeated: first to fix a legacy-room-coordinate fixture outside the actual generated floor, then to refresh WorldView explicitly during fixed-step captures. No production combat changes followed the final Edit Mode run.",
+    "initial_failure": "initial-native-fixture-failure.txt",
+    "physical_pointer_input": false
+  },
+  "shared_ui_contract": {
+    "ownership_check": "passed",
+    "tool_tests": {
+      "total": 11,
+      "passed": 11
+    },
+    "reused_after": "documentation, evidence and development-only native fixture changes"
+  },
+  "scope": "Related combat/save EditMode checks and native macOS acceptance at final validation. No full-project suite or text-size matrix; UI layout unchanged.",
+  "performance_claim": false,
+  "physical_mobile": false,
+  "full_project_suite_run": false
+}

@@ -56,6 +56,10 @@ namespace Hellscript
             {throw new InvalidDataException("Account profile ownership could not be read. Original files are preserved.",error);}
         }
         public string GuestDirectory=>Full(Read().guest);
+        // Account UID is independent of the authentication provider. Existing paths remain valid.
+        public string AccountDirectory(Uri server,string account)=>GoogleDirectory(server,account);
+        public string NewAccountDirectory(Uri server,string account)=>NewGoogleDirectory(server,account);
+        public string BindAccount(Uri server,string account,bool adoptGuest,string expectedGuestDirectory)=>BindGoogle(server,account,adoptGuest,expectedGuestDirectory);
         public string GoogleDirectory(Uri server,string account)
         {var key=Key(server,account);var entry=Find(Read(),key,PreviousKey(server,account));return entry==null?null:Full(entry.directory);}
         public string NewGoogleDirectory(Uri server,string account)=>Full("accounts/google-"+Key(server,account));

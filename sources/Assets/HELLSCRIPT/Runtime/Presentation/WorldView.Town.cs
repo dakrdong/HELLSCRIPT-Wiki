@@ -18,7 +18,7 @@ namespace Hellscript
         static readonly Quaternion TownRotation=Quaternion.LookRotation(TownPoint(Vector2.up));
         public void BuildTown(TownWalk walk)
         {
-            ClearDungeon();world=new GameObject("Ashwood Settlement");lighting.ApplyTown();
+            ResumeCamera();ClearDungeon();world=new GameObject("Ashwood Settlement");lighting.ApplyTown();
             var layout=new GameObject("Village ground").transform;layout.SetParent(world.transform,false);layout.rotation=TownRotation;
             BuildForestGround(layout);
             foreach(var s in TownLayout.Stations)

@@ -9,7 +9,7 @@ namespace Hellscript
 {
     public sealed partial class GameUI
     {
-        enum SettingsSection { Screen,Sound,Language,Character,Help,Combat }
+        enum SettingsSection { Screen,Sound,Language,Character,Account,Help,Combat }
         SettingsSection commonTab;
         RectTransform commonModal,commonSafe,commonCard,commonTabs,commonWorld;Button commonClose,commonBackdrop;
         RectTransform screenPane,languagePane,characterPane,helpPane,combatPane;
@@ -38,9 +38,9 @@ namespace Hellscript
             var hint=Label(commonWorld,"배경을 누르면 닫힙니다.",17,pale,TextAnchor.MiddleCenter);hint.rectTransform.anchorMin=new Vector2(0,0);hint.rectTransform.anchorMax=new Vector2(1,0);hint.rectTransform.sizeDelta=new Vector2(-24,40);hint.rectTransform.anchoredPosition=new Vector2(0,28);
             commonCard=Box("Common dialog",commonSafe,ink);commonCard.anchorMin=commonCard.anchorMax=commonCard.pivot=new Vector2(.5f,.5f);
             commonHeading=Label(commonCard,"설정",26,gold);Span(commonHeading.rectTransform,18,8,18,40);commonTabs=Rect("Common categories",commonCard);
-            foreach(var entry in new[]{(SettingsSection.Screen,"화면"),(SettingsSection.Sound,"소리"),(SettingsSection.Language,"언어"),(SettingsSection.Character,"캐릭터 변경")})
+            foreach(var entry in new[]{(SettingsSection.Screen,"화면"),(SettingsSection.Sound,"소리"),(SettingsSection.Language,"언어"),(SettingsSection.Character,"캐릭터 변경"),(SettingsSection.Account,"계정")})
             {var tab=entry.Item1;var b=Button(commonTabs,entry.Item2,()=>SelectSettingsTab(tab));b.name="settings-tab-"+tab;b.GetComponentInChildren<Text>().fontSize=18;}
-            BuildDisplayPane();BuildSoundPane();BuildLanguagePane();BuildCharacterPane();BuildInformationPanes();
+            BuildDisplayPane();BuildSoundPane();BuildLanguagePane();BuildCharacterPane();BuildAccountPane();BuildInformationPanes();
             commonClose=Button(commonCard,"×",CloseCommonPanel);commonClose.name="settings-close";((UiButton)commonClose).Configure(UiButtonRole.Quiet);commonClose.GetComponentInChildren<Text>().fontSize=24;
             commonLaidOut=false;SelectSettingsTab(help?SettingsSection.Help:SettingsSection.Screen);ReflowCommonPanel();
         }
@@ -89,7 +89,7 @@ namespace Hellscript
         }
         Text CommonNote(Transform parent,string text,int size=22,Color? color=null)
         {var label=Label(parent,text,size,color??pale);label.alignment=TextAnchor.UpperLeft;label.gameObject.AddComponent<LayoutElement>().minHeight=28;return label;}
-        RectTransform[] SettingsPanes=>new[]{screenPane,soundPane,languagePane,characterPane,helpPane,combatPane};
+        RectTransform[] SettingsPanes=>new[]{screenPane,soundPane,languagePane,characterPane,accountPane,helpPane,combatPane};
         void SelectCombatTab()=>SelectSettingsTab(SettingsSection.Combat);
         void SelectSettingsTab(SettingsSection section)
         {
@@ -108,6 +108,7 @@ namespace Hellscript
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
             foreach(var choice in characterButtons)choice.button.interactable=game.CanChangeCharacterFromSettings&&choice.index!=game.Store.Data.selectedHero;
             characterNotice.text=Loc.T(game.TutorialActive?"성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다.":game.CanChangeCharacterFromSettings?"캐릭터를 변경하면 마을로 돌아갑니다. 진행 중인 사냥과 반복 사냥은 종료되며, 이미 획득한 장비와 보상은 보존됩니다.":"균열 사냥 중에는 캐릭터를 변경할 수 없습니다.");
+            RefreshAccountPane();
         }
         void ReflowCommonPanel()
         {
@@ -123,9 +124,9 @@ namespace Hellscript
             foreach(var gate in commonBackgrounds)if(gate.group!=null&&gate.group.transform!=aspectMask)gate.group.alpha=showWorld?0:gate.alpha;
             if(showWorld)game.World.ShowSettingsWorld(new Rect(commonSafe.anchorMin.x,commonSafe.anchorMin.y,(commonSafe.anchorMax.x-commonSafe.anchorMin.x)*.5f,commonSafe.anchorMax.y-commonSafe.anchorMin.y));
             else game.World?.RestoreSettingsWorld();
-            bool shortWindow=h<400;float heading=56,tabHeight=shortWindow?40:48;int columns=w<620?2:4,rows=Mathf.CeilToInt(4f/columns);float top=heading+rows*tabHeight+8;
+            bool shortWindow=h<400;float heading=56,tabHeight=shortWindow?40:48;int columns=w<620?2:4;
+            var tabs=commonTabs.GetComponentsInChildren<Button>();int rows=Mathf.CeilToInt((float)tabs.Length/columns);float top=heading+rows*tabHeight+8;
             Span(commonHeading.rectTransform,18,8,74,40);commonHeading.fontSize=shortWindow?22:26;Right((RectTransform)commonClose.transform,8,6,44,44);Place(commonTabs,12,heading,w-24,rows*tabHeight);
-            var tabs=commonTabs.GetComponentsInChildren<Button>();
             for(int i=0;i<tabs.Length;i++){float cell=(w-24)/columns;Place((RectTransform)tabs[i].transform,(i%columns)*cell+3,(i/columns)*tabHeight,cell-6,tabHeight-6);tabs[i].GetComponentInChildren<Text>().fontSize=shortWindow?16:18;}
             foreach(var pane in SettingsPanes)if(pane!=null)Place(pane,12,top,w-24,Mathf.Max(1,h-top-12));Canvas.ForceUpdateCanvases();
             Canvas.ForceUpdateCanvases();if(commonLaidOut)reading?.Restore();

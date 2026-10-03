@@ -28,6 +28,8 @@ namespace Hellscript
             Guest=false;signedIn=true;return true;
         }
         public void SignInAsGuest(){if(Entering)return;AccountId=AccountName="";expiresAt=0;Guest=true;signedIn=true;}
+        public bool RefreshAccount(GooglePlayerSession session)
+        {if(session==null||session.accountId!=AccountId||!session.Valid(DateTimeOffset.UtcNow.ToUnixTimeSeconds()))return false;expiresAt=session.expiresAt;AccountName=session.displayName;return true;}
         public void SignOut(){if(Entering)return;AccountId=AccountName="";expiresAt=0;Guest=false;signedIn=false;}
         public bool BeginEntry(){if(!SignedIn||Entering)return false;Entering=true;return true;}
         public void CancelEntry()=>Entering=false;

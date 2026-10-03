@@ -471,6 +471,12 @@ namespace Hellscript
             if(Page=="battle"&&!compact){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
             Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
         }
+        void LateUpdate()
+        {
+            if(game.DisplayDimmed||Page!="plaza")return;
+            using var sample=PresentationMetrics.UI.Auto();
+            RefreshPlaza();
+        }
         void Update()
         {
             RefreshCanvasScale();
@@ -490,7 +496,6 @@ namespace Hellscript
             ReflowBattleHud();
             ReflowEdictRows();
             ReflowRunes();
-            RefreshPlaza();
             ReflowResultRows();
             ReflowHistory();
             RefreshRepeatStatus();

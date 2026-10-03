@@ -111,6 +111,7 @@ namespace Hellscript
         }
         static void Normalize(AccountSave a)
         {
+            PlayerObservations.Normalize(a);
             if(string.IsNullOrEmpty(a.telemetryAccountId))a.telemetryAccountId=Guid.NewGuid().ToString("N");
             a.records??=new System.Collections.Generic.List<RunRecord>();
             a.records=a.records.Where(r=>r!=null).OrderByDescending(r=>r.journal?.attempt??0).Take(CombatHistory.RecordLimit).ToList();
@@ -316,6 +317,7 @@ namespace Hellscript
             {
                 if(!mutation(staged)){Error="소유권·보호 상태·재화·가방 공간을 확인해 주세요.";return Refuse(operation);}
                 Tutorials.ObserveTransaction(staged,operation);
+                ObservePlayerTransaction(Data,staged,operation);
                 staged.transactions.Add(new EconomyReceipt{requestId=requestId,operation=operation,committedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()});
                 ContentUnlocks.Reconcile(staged);ValidateItems(staged);staged.lastSeenUtc=settlingLocalIdle?Math.Max(staged.lastSeenUtc,pendingLocalIdleThrough.Value):SeenNow();
             }
@@ -342,6 +344,7 @@ namespace Hellscript
             if(liveResult!=null&&staged.repeatHunt?.pendingResult?.id==liveResult.id)staged.repeatHunt.pendingResult=liveResult;
             Data.repeatHunt=staged.repeatHunt;Data.records=staged.records;
             Data.telemetryAccountId=staged.telemetryAccountId;Data.combatSequence=staged.combatSequence;Data.combatTelemetryLossCount=staged.combatTelemetryLossCount;
+            Data.playerObservations=staged.playerObservations;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
             Data.rewardBoxes=staged.rewardBoxes;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Data.warehouseSequence=staged.warehouseSequence;Error="";NotifyCommitted(operation);return true;
@@ -365,6 +368,8 @@ namespace Hellscript
             // Direct build/preset/character writers must not bypass a failed offline interval.
             if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle)
             {Error=Loc.T("미접속 보급 정산을 먼저 완료해 주세요.");return false;}
+            PlayerObservations.Normalize(data);
+            var previousObservations=UnityEngine.JsonUtility.FromJson<PlayerObservations>(UnityEngine.JsonUtility.ToJson(data.playerObservations));
             try
             {
                 Tutorials.Normalize(data);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
@@ -387,6 +392,7 @@ namespace Hellscript
                 }
                 if(PersistedItems(data).Any(ItemQuality.HasQuality)||RecordedItems(data).Any(i=>i.contentVersion>=ItemQuality.ItemVersion))
                     data.schema=Math.Max(data.schema,MaximumSchemaVersion);
+                ObservePlayerProgress(data);
                 File.WriteAllText(path+".tmp",JsonUtility.ToJson(data,true));
                 if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
                 CombatArchive.Synchronize(data);
@@ -394,6 +400,7 @@ namespace Hellscript
             }
             catch(Exception e)
             {
+                data.playerObservations=previousObservations;
                 Error=Loc.T("저장하지 못했습니다. 저장 공간과 파일 접근 권한을 확인한 뒤 다시 시도해 주세요.");
                 Debug.LogError(Loc.F("저장하지 못했습니다: {0}",e.Message));return false;
             }

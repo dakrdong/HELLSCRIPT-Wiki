@@ -4,6 +4,8 @@ import {createAuth,telemetryIdentity} from './auth.js';
 import {createLiveOps} from './liveops.js';
 import {createMigration} from './migration.js';
 import {OPS_ASSETS} from './ops.generated.js';
+import {playerCors} from './player_web.js';
+import {ingestPlayerEvents} from './player_events.js';
 const MAX_BODY = 16 * 1024 * 1024;
 const ID = /^[0-9a-f]{32}$/;
 const text = (v, max) => typeof v === 'string' && Array.from(v).length <= max;
@@ -126,8 +128,12 @@ export function createHandler({fetcher,now=Date.now,authenticate:overrideIdentit
   }
   return {
     async fetch(request, env) {
+      let cors=null;
+      const response=await (async()=>{
       try {
         const path = new URL(request.url).pathname;
+        cors=playerCors(request,env);
+        if(request.method==='OPTIONS'&&cors)return new Response(null,{status:204,headers:{...cors,'Access-Control-Allow-Methods':'GET, POST, DELETE, OPTIONS','Access-Control-Allow-Headers':'Authorization, Content-Type, Idempotency-Key','Access-Control-Max-Age':'600'}});
         if (path === '/healthz' && ['GET','HEAD'].includes(request.method)) {
           trustedOrigin(env); await initialize(env);
           await env.DB.prepare('SELECT run_id FROM runs LIMIT 1').first();
@@ -140,7 +146,7 @@ export function createHandler({fetcher,now=Date.now,authenticate:overrideIdentit
         }
         if(path.startsWith('/internal/migration/'))return await migration(request,env);
         if(path.startsWith('/v1/')||path.startsWith('/auth/')||path.startsWith('/ops/api/'))await initialize(env);
-        if(path.startsWith('/v1/auth/')||path.startsWith('/auth/google/'))return await auth(request,env);
+        if(path.startsWith('/v1/auth/')||path.startsWith('/v1/accounts/')||path.startsWith('/auth/google/'))return await auth(request,env);
         if(path==='/v1/telemetry/session')return request.method==='GET'?reply(await authenticate(request,env)):reply({error:'method'},405,{Allow:'GET'});
         if(path.startsWith('/v1/liveops/')||path.startsWith('/ops/api/'))return await liveops(request,env);
         if(path==='/ops'||path==='/ops/'||Object.hasOwn(OPS_ASSETS,path)){
@@ -151,6 +157,7 @@ export function createHandler({fetcher,now=Date.now,authenticate:overrideIdentit
             'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'"}});
         }
         if (path === '/v1/combat-runs') return request.method === 'POST' ? await ingest(request,env) : reply({error:'method'},405,{Allow:'POST'});
+        if(path==='/v1/player-events')return request.method==='POST'?await ingestPlayerEvents(request,env,await authenticate(request,env),now()):reply({error:'method'},405,{Allow:'POST'});
         if (path === '/' && ['GET','HEAD'].includes(request.method)) {
           const html = '<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
             '<title>HELLSCRIPT 플레이 로그</title><style>body{background:#10151e;color:#e7edf5;font:17px/1.7 system-ui;max-width:700px;margin:12vh auto;padding:24px}a{color:#8ac6ff}h1{font-size:30px}</style>' +
@@ -167,6 +174,9 @@ export function createHandler({fetcher,now=Date.now,authenticate:overrideIdentit
         // Fixed diagnostic codes only: no token, request body or identity logs.
         return reply({error:error instanceof Rejected?error.code:'storage_unavailable',...(error instanceof Rejected&&error.details?{details:error.details}:{})},error instanceof Rejected?error.status:503);
       }
+      })();
+      if(cors)for(const [key,value] of Object.entries(cors))response.headers.set(key,value);
+      return response;
     }
   };
 }

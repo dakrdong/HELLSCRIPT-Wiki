@@ -316,6 +316,12 @@ namespace Hellscript
         }
         void MoveHero(float dt)
         {
+            if(EdictDodgeHolding)
+            {
+                if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
+                if(!HeroActionBusy){ObserveActivity(CombatActivity.Evasion);State.action=Loc.T("공격이 끝날 때까지 안전 위치에서 대기");}
+                return;
+            }
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
             if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}

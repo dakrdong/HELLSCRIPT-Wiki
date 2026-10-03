@@ -1,0 +1,2798 @@
+[
+  {
+    "mode": "inventory",
+    "page": "bag",
+    "frames": 1185,
+    "elapsed": 20.01,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 12,
+    "managedBytes": 18477056,
+    "allocatedBytes": 95796737,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-inventory-1/inventory-1/profile.json",
+    "actualFps": 59.22038980509745,
+    "frameMs": {
+      "mean": 16.88766891891892,
+      "p95": 18.000000000000682
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.85097046413502,
+        "p95": 17.7
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.2665822784810127,
+        "p95": 0.9
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.855105485232066,
+        "p95": 17.7
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.021181434599156116,
+        "p95": 0.2
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.14869198312236287,
+        "p95": 0.4
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 14.264810126582278,
+        "p95": 15.4
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0012658227848101266,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 36491.32827004219,
+        "p95": 80877.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 316361.8025316456,
+        "p95": 316629.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 41.96455696202532,
+        "p95": 42.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.016877637130801686,
+        "p95": 0.1
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 4369.046,
+    "cpuPercent": 21.833217363806483,
+    "cpuMsPerFrame": 3.68695864978903,
+    "jsHeapUsed": 9522700,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 70139,
+        "cpuTime": 2.39314,
+        "deltaMs": 606.3179999999999
+      },
+      {
+        "type": "renderer",
+        "id": 70211,
+        "cpuTime": 0.063948,
+        "deltaMs": 0.9330000000000033
+      },
+      {
+        "type": "renderer",
+        "id": 70209,
+        "cpuTime": 0.054947,
+        "deltaMs": 0.9499999999999995
+      },
+      {
+        "type": "renderer",
+        "id": 70154,
+        "cpuTime": 0.07475,
+        "deltaMs": 0.7599999999999968
+      },
+      {
+        "type": "renderer",
+        "id": 70151,
+        "cpuTime": 7.924482,
+        "deltaMs": 4369.5560000000005
+      },
+      {
+        "type": "renderer",
+        "id": 70148,
+        "cpuTime": 0.248156,
+        "deltaMs": 32.87299999999998
+      },
+      {
+        "type": "GPU",
+        "id": 70144,
+        "cpuTime": 3.635493,
+        "deltaMs": 2502.6019999999994
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 70145,
+        "cpuTime": 0.944715,
+        "deltaMs": 308.48599999999993
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 70146,
+        "cpuTime": 0.044159,
+        "deltaMs": 2.3379999999999996
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 70164,
+        "cpuTime": 0.074468,
+        "deltaMs": 0.04300000000000137
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 70165,
+        "cpuTime": 0.10512,
+        "deltaMs": 0.7250000000000034
+      }
+    ],
+    "rendererRssMiBRange": [
+      1444.78125,
+      1458.296875
+    ],
+    "originalEditorCpuRange": [
+      166.2,
+      184.6
+    ]
+  },
+  {
+    "mode": "inventory",
+    "page": "bag",
+    "frames": 1178,
+    "elapsed": 20.005,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 13,
+    "managedBytes": 18567168,
+    "allocatedBytes": 95796282,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-inventory-2/inventory-2/profile.json",
+    "actualFps": 58.88527868032992,
+    "frameMs": {
+      "mean": 16.982158028887,
+      "p95": 18.000000000000682
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.94592529286927,
+        "p95": 17.8
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.2810696112054329,
+        "p95": 1.0
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.950764004244483,
+        "p95": 17.800001
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.023259755517826827,
+        "p95": 0.2
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.15500847028862477,
+        "p95": 0.4
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 14.218336184210527,
+        "p95": 15.400001
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0014431239388794568,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 36568.42275042445,
+        "p95": 80877.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 316360.214770798,
+        "p95": 316629.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 41.964346349745334,
+        "p95": 42.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.017402385398981327,
+        "p95": 0.1
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 4610.598000000001,
+    "cpuPercent": 23.04723395331675,
+    "cpuMsPerFrame": 3.9139202037351453,
+    "jsHeapUsed": 10097824,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 70580,
+        "cpuTime": 2.498848,
+        "deltaMs": 675.2740000000001
+      },
+      {
+        "type": "renderer",
+        "id": 70652,
+        "cpuTime": 0.066258,
+        "deltaMs": 1.0970000000000009
+      },
+      {
+        "type": "renderer",
+        "id": 70591,
+        "cpuTime": 8.302486,
+        "deltaMs": 4610.9439999999995
+      },
+      {
+        "type": "renderer",
+        "id": 70650,
+        "cpuTime": 0.055793,
+        "deltaMs": 0.8560000000000025
+      },
+      {
+        "type": "renderer",
+        "id": 70593,
+        "cpuTime": 0.070944,
+        "deltaMs": 1.0059999999999931
+      },
+      {
+        "type": "renderer",
+        "id": 70588,
+        "cpuTime": 0.24263,
+        "deltaMs": 25.751000000000023
+      },
+      {
+        "type": "GPU",
+        "id": 70584,
+        "cpuTime": 3.876305,
+        "deltaMs": 2669.705
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 70585,
+        "cpuTime": 0.969604,
+        "deltaMs": 334.399
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 70586,
+        "cpuTime": 0.049985,
+        "deltaMs": 2.5210000000000026
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 70604,
+        "cpuTime": 0.072118,
+        "deltaMs": 0.05099999999999549
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 70605,
+        "cpuTime": 0.103662,
+        "deltaMs": 0.8640000000000037
+      }
+    ],
+    "rendererRssMiBRange": [
+      1443.96875,
+      1456.390625
+    ],
+    "originalEditorCpuRange": [
+      126.4,
+      177.8
+    ]
+  },
+  {
+    "mode": "inventory",
+    "page": "bag",
+    "frames": 1178,
+    "elapsed": 20.002,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 12,
+    "managedBytes": 18468864,
+    "allocatedBytes": 95796714,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-inventory-3/inventory-3/profile.json",
+    "actualFps": 58.89411058894111,
+    "frameMs": {
+      "mean": 16.97960917587086,
+      "p95": 18.000000000000682
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.942275036502547,
+        "p95": 17.800001
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.2691850407470288,
+        "p95": 0.900001
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.946434636672326,
+        "p95": 17.800001
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.022156193548387097,
+        "p95": 0.199999
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.15458402631578946,
+        "p95": 0.4
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 14.288030516129032,
+        "p95": 15.5
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0006791196943972835,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 36568.374363327675,
+        "p95": 80877.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 316360.214770798,
+        "p95": 316629.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 41.964346349745334,
+        "p95": 42.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.01816638455008489,
+        "p95": 0.1
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 4503.134,
+    "cpuPercent": 22.513199176389335,
+    "cpuMsPerFrame": 3.822694397283531,
+    "jsHeapUsed": 9493336,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 71905,
+        "cpuTime": 2.413788,
+        "deltaMs": 623.6169999999998
+      },
+      {
+        "type": "renderer",
+        "id": 71978,
+        "cpuTime": 0.066371,
+        "deltaMs": 0.8360000000000034
+      },
+      {
+        "type": "renderer",
+        "id": 71974,
+        "cpuTime": 0.059928,
+        "deltaMs": 0.7730000000000028
+      },
+      {
+        "type": "renderer",
+        "id": 71919,
+        "cpuTime": 0.074006,
+        "deltaMs": 0.7469999999999977
+      },
+      {
+        "type": "renderer",
+        "id": 71916,
+        "cpuTime": 8.034816,
+        "deltaMs": 4503.174
+      },
+      {
+        "type": "renderer",
+        "id": 71913,
+        "cpuTime": 0.252755,
+        "deltaMs": 30.616000000000003
+      },
+      {
+        "type": "GPU",
+        "id": 71909,
+        "cpuTime": 3.721909,
+        "deltaMs": 2586.7890000000007
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 71910,
+        "cpuTime": 0.92922,
+        "deltaMs": 296.308
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 71911,
+        "cpuTime": 0.047777,
+        "deltaMs": 3.1119999999999965
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 71929,
+        "cpuTime": 0.07201,
+        "deltaMs": 0.04700000000000537
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 71930,
+        "cpuTime": 0.113503,
+        "deltaMs": 0.905000000000003
+      }
+    ],
+    "rendererRssMiBRange": [
+      1441.609375,
+      1454.59375
+    ],
+    "originalEditorCpuRange": [
+      164.5,
+      178.8
+    ]
+  },
+  {
+    "mode": "menu",
+    "page": "title",
+    "frames": 1174,
+    "elapsed": 20.013,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 7,
+    "managedBytes": 10977280,
+    "allocatedBytes": 67684673,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-menu-1/menu-1/profile.json",
+    "actualFps": 58.66186978463998,
+    "frameMs": {
+      "mean": 17.047740835464623,
+      "p95": 18.000000000000682
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.01005111158433,
+        "p95": 18.0
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.13398636201022146,
+        "p95": 0.2
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.015247016183988,
+        "p95": 18.0
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.019846666950596253,
+        "p95": 0.1
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 15.545911420783646,
+        "p95": 16.7
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0011925042589437818,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 11539.207836456559,
+        "p95": 267.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 908.225724020443,
+        "p95": 909.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 4.9957410562180575,
+        "p95": 5.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.01797274701873935,
+        "p95": 0.1
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 2933.9429999999998,
+    "cpuPercent": 14.659326668154257,
+    "cpuMsPerFrame": 2.4990996592844974,
+    "jsHeapUsed": 8880072,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 64418,
+        "cpuTime": 3.008554,
+        "deltaMs": 697.1410000000002
+      },
+      {
+        "type": "renderer",
+        "id": 64489,
+        "cpuTime": 0.069197,
+        "deltaMs": 1.0659999999999976
+      },
+      {
+        "type": "renderer",
+        "id": 64487,
+        "cpuTime": 0.059755,
+        "deltaMs": 0.8090000000000042
+      },
+      {
+        "type": "renderer",
+        "id": 64433,
+        "cpuTime": 0.096062,
+        "deltaMs": 0.8809999999999929
+      },
+      {
+        "type": "renderer",
+        "id": 64430,
+        "cpuTime": 5.921496,
+        "deltaMs": 2933.4880000000003
+      },
+      {
+        "type": "renderer",
+        "id": 64427,
+        "cpuTime": 0.335151,
+        "deltaMs": 29.223
+      },
+      {
+        "type": "GPU",
+        "id": 64422,
+        "cpuTime": 2.697624,
+        "deltaMs": 1725.196
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 64423,
+        "cpuTime": 1.211628,
+        "deltaMs": 362.33399999999995
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 64424,
+        "cpuTime": 0.066464,
+        "deltaMs": 2.821999999999991
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 64447,
+        "cpuTime": 0.078988,
+        "deltaMs": 0.04900000000000737
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 64448,
+        "cpuTime": 0.121242,
+        "deltaMs": 0.7560000000000067
+      }
+    ],
+    "rendererRssMiBRange": [
+      1285.84375,
+      1295.3125
+    ],
+    "originalEditorCpuRange": [
+      154.3,
+      172.4
+    ]
+  },
+  {
+    "mode": "menu",
+    "page": "title",
+    "frames": 1173,
+    "elapsed": 20.01,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 7,
+    "managedBytes": 10977280,
+    "allocatedBytes": 67684673,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-menu-2/menu-2/profile.json",
+    "actualFps": 58.620689655172406,
+    "frameMs": {
+      "mean": 17.05887372013652,
+      "p95": 18.000000000000682
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.01918159079284,
+        "p95": 18.099999
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.1378516606990622,
+        "p95": 0.2
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.02574595481671,
+        "p95": 18.1
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.019011088661551576,
+        "p95": 0.1
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 15.602728071611253,
+        "p95": 16.8
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.000937768115942029,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 11548.879795396419,
+        "p95": 267.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 908.225063938619,
+        "p95": 909.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 4.995737425404944,
+        "p95": 5.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.01824381841432225,
+        "p95": 0.1
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 2844.807,
+    "cpuPercent": 14.216888170317853,
+    "cpuMsPerFrame": 2.425240409207161,
+    "jsHeapUsed": 9075120,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 64857,
+        "cpuTime": 2.994632,
+        "deltaMs": 782.956
+      },
+      {
+        "type": "renderer",
+        "id": 64972,
+        "cpuTime": 0.07778,
+        "deltaMs": 1.6639999999999988
+      },
+      {
+        "type": "renderer",
+        "id": 64940,
+        "cpuTime": 0.068268,
+        "deltaMs": 1.0599999999999916
+      },
+      {
+        "type": "renderer",
+        "id": 64871,
+        "cpuTime": 0.079273,
+        "deltaMs": 1.0550000000000004
+      },
+      {
+        "type": "renderer",
+        "id": 64868,
+        "cpuTime": 5.868985,
+        "deltaMs": 2845.6730000000002
+      },
+      {
+        "type": "renderer",
+        "id": 64865,
+        "cpuTime": 0.271694,
+        "deltaMs": 31.25
+      },
+      {
+        "type": "GPU",
+        "id": 64861,
+        "cpuTime": 2.603967,
+        "deltaMs": 1665.158
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 64862,
+        "cpuTime": 1.142014,
+        "deltaMs": 391.3750000000001
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 64863,
+        "cpuTime": 0.05817,
+        "deltaMs": 4.2159999999999975
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 64881,
+        "cpuTime": 0.086355,
+        "deltaMs": 0.3530000000000061
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 64882,
+        "cpuTime": 0.118843,
+        "deltaMs": 1.1940000000000006
+      }
+    ],
+    "rendererRssMiBRange": [
+      942.046875,
+      1294.25
+    ],
+    "originalEditorCpuRange": [
+      10.6,
+      168.1
+    ]
+  },
+  {
+    "mode": "menu",
+    "page": "title",
+    "frames": 1194,
+    "elapsed": 20.01,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 7,
+    "managedBytes": 10977280,
+    "allocatedBytes": 67684673,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-menu-3/menu-3/profile.json",
+    "actualFps": 59.67016491754122,
+    "frameMs": {
+      "mean": 16.75943000838223,
+      "p95": 18.000000000000682
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.723450586264658,
+        "p95": 17.6
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.13190954355108878,
+        "p95": 0.2
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.727889450586265,
+        "p95": 17.6
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.018257956448911223,
+        "p95": 0.1
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 15.281155815745393,
+        "p95": 16.3
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.001340032663316583,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 11349.254606365159,
+        "p95": 267.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 908.2386934673367,
+        "p95": 909.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 4.9958123953098825,
+        "p95": 5.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.020351755443886097,
+        "p95": 0.1
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 2823.573000000001,
+    "cpuPercent": 14.110594516173128,
+    "cpuMsPerFrame": 2.364801507537689,
+    "jsHeapUsed": 8460044,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 66322,
+        "cpuTime": 2.632642,
+        "deltaMs": 692.2160000000001
+      },
+      {
+        "type": "renderer",
+        "id": 66414,
+        "cpuTime": 0.06846,
+        "deltaMs": 1.1009999999999909
+      },
+      {
+        "type": "renderer",
+        "id": 66410,
+        "cpuTime": 0.058074,
+        "deltaMs": 0.7160000000000013
+      },
+      {
+        "type": "renderer",
+        "id": 66336,
+        "cpuTime": 0.077282,
+        "deltaMs": 0.7400000000000045
+      },
+      {
+        "type": "renderer",
+        "id": 66333,
+        "cpuTime": 5.642293,
+        "deltaMs": 2823.5359999999996
+      },
+      {
+        "type": "renderer",
+        "id": 66330,
+        "cpuTime": 0.269297,
+        "deltaMs": 30.069000000000013
+      },
+      {
+        "type": "GPU",
+        "id": 66326,
+        "cpuTime": 2.401702,
+        "deltaMs": 1484.4419999999998
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 66327,
+        "cpuTime": 1.096235,
+        "deltaMs": 357.9420000000001
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 66328,
+        "cpuTime": 0.049306,
+        "deltaMs": 2.479000000000002
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 66346,
+        "cpuTime": 0.084806,
+        "deltaMs": 0.04100000000001325
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 66347,
+        "cpuTime": 0.121085,
+        "deltaMs": 0.8659999999999918
+      }
+    ],
+    "rendererRssMiBRange": [
+      1289.78125,
+      1299.15625
+    ],
+    "originalEditorCpuRange": [
+      137.4,
+      178.9
+    ]
+  },
+  {
+    "mode": "normal",
+    "page": "battle",
+    "frames": 1155,
+    "elapsed": 20.015,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "cb352198",
+    "combatTicks": 400,
+    "collections": 31,
+    "managedBytes": 30773248,
+    "allocatedBytes": 93441462,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-normal-1/normal-1/profile.json",
+    "actualFps": 57.70671996002998,
+    "frameMs": {
+      "mean": 17.330155979202775,
+      "p95": 21.000000000000796
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.293333333333333,
+        "p95": 19.0
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 1.7433766233766232,
+        "p95": 5.0
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.298181818181817,
+        "p95": 19.0
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.189004329004329,
+        "p95": 0.9
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 1.0607792207792208,
+        "p95": 6.2
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 11.954199134199134,
+        "p95": 15.1
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.001038961038961039,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 123325.71341991342,
+        "p95": 274427.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 130804.96536796537,
+        "p95": 157520.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 85.81385281385282,
+        "p95": 108.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.49194805194805197,
+        "p95": 0.7
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.004935064935064935,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.12623376623376623,
+        "p95": 1.0
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.874978354978355,
+        "p95": 3.0
+      }
+    },
+    "cpuMs": 7794.662,
+    "cpuPercent": 38.94285668607577,
+    "cpuMsPerFrame": 6.7486251082251085,
+    "jsHeapUsed": 9344064,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 72829,
+        "cpuTime": 2.780366,
+        "deltaMs": 602.3169999999998
+      },
+      {
+        "type": "renderer",
+        "id": 72921,
+        "cpuTime": 0.067677,
+        "deltaMs": 1.6290000000000053
+      },
+      {
+        "type": "renderer",
+        "id": 72897,
+        "cpuTime": 0.059968,
+        "deltaMs": 1.015000000000002
+      },
+      {
+        "type": "renderer",
+        "id": 72844,
+        "cpuTime": 0.077026,
+        "deltaMs": 1.369999999999996
+      },
+      {
+        "type": "renderer",
+        "id": 72841,
+        "cpuTime": 13.178882,
+        "deltaMs": 7796.272
+      },
+      {
+        "type": "renderer",
+        "id": 72838,
+        "cpuTime": 0.267592,
+        "deltaMs": 30.916
+      },
+      {
+        "type": "GPU",
+        "id": 72834,
+        "cpuTime": 4.003966,
+        "deltaMs": 2836.666
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 72835,
+        "cpuTime": 1.004513,
+        "deltaMs": 303.971
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 72836,
+        "cpuTime": 0.051611,
+        "deltaMs": 2.596999999999995
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 72854,
+        "cpuTime": 0.07815,
+        "deltaMs": 0.6280000000000036
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 72855,
+        "cpuTime": 0.118595,
+        "deltaMs": 1.371000000000011
+      }
+    ],
+    "rendererRssMiBRange": [
+      1016.765625,
+      1102.03125
+    ],
+    "originalEditorCpuRange": [
+      151.0,
+      177.6
+    ]
+  },
+  {
+    "mode": "normal",
+    "page": "battle",
+    "frames": 1162,
+    "elapsed": 20.016000000000002,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "cb352198",
+    "combatTicks": 400,
+    "collections": 31,
+    "managedBytes": 30765056,
+    "allocatedBytes": 93436093,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-normal-2/normal-2/profile.json",
+    "actualFps": 58.053557154276575,
+    "frameMs": {
+      "mean": 17.22480620155039,
+      "p95": 21.000000000000796
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.18674698881239,
+        "p95": 18.899999
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 1.7327022332185886,
+        "p95": 4.800001
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.191566267641996,
+        "p95": 18.899999
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.18657484165232358,
+        "p95": 0.9
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 1.0379517857142857,
+        "p95": 6.199999
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 11.908261626506025,
+        "p95": 14.799999
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.001721170395869191,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 122588.64371772806,
+        "p95": 273345.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 130857.66092943201,
+        "p95": 157524.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 85.89759036144578,
+        "p95": 109.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.487693569707401,
+        "p95": 0.7
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.005077448364888124,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.12934595008605854,
+        "p95": 1.0
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.8648881858864027,
+        "p95": 3.1
+      }
+    },
+    "cpuMs": 7717.713000000001,
+    "cpuPercent": 38.55808868669482,
+    "cpuMsPerFrame": 6.641749569707401,
+    "jsHeapUsed": 9785684,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 73508,
+        "cpuTime": 2.471867,
+        "deltaMs": 579.3589999999999
+      },
+      {
+        "type": "renderer",
+        "id": 73580,
+        "cpuTime": 0.063107,
+        "deltaMs": 0.8559999999999957
+      },
+      {
+        "type": "renderer",
+        "id": 73578,
+        "cpuTime": 0.054271,
+        "deltaMs": 0.793000000000002
+      },
+      {
+        "type": "renderer",
+        "id": 73526,
+        "cpuTime": 0.077056,
+        "deltaMs": 0.8809999999999929
+      },
+      {
+        "type": "renderer",
+        "id": 73521,
+        "cpuTime": 12.851824,
+        "deltaMs": 7717.427000000001
+      },
+      {
+        "type": "renderer",
+        "id": 73518,
+        "cpuTime": 0.263668,
+        "deltaMs": 31.874000000000013
+      },
+      {
+        "type": "GPU",
+        "id": 73514,
+        "cpuTime": 3.890225,
+        "deltaMs": 2769.987
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 73515,
+        "cpuTime": 0.9576,
+        "deltaMs": 312.30800000000005
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 73516,
+        "cpuTime": 0.050856,
+        "deltaMs": 2.600999999999999
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 73536,
+        "cpuTime": 0.082851,
+        "deltaMs": 0.03599999999999437
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 73537,
+        "cpuTime": 0.109084,
+        "deltaMs": 0.6970000000000032
+      }
+    ],
+    "rendererRssMiBRange": [
+      1507.21875,
+      1591.734375
+    ],
+    "originalEditorCpuRange": [
+      153.8,
+      179.7
+    ]
+  },
+  {
+    "mode": "normal",
+    "page": "battle",
+    "frames": 1163,
+    "elapsed": 20.004,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "cb352198",
+    "combatTicks": 400,
+    "collections": 31,
+    "managedBytes": 30527488,
+    "allocatedBytes": 93432806,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-normal-3/normal-3/profile.json",
+    "actualFps": 58.13837232553489,
+    "frameMs": {
+      "mean": 17.200516351118758,
+      "p95": 21.000000000000796
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.16552020550301,
+        "p95": 18.300001
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 1.7028374952708514,
+        "p95": 4.799999
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.168959588134136,
+        "p95": 18.300001
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.1922613955288048,
+        "p95": 0.900001
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 1.0519346483233016,
+        "p95": 6.200001
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 11.92158209372313,
+        "p95": 14.7
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0011177970765262253,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 122486.60705073086,
+        "p95": 273691.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 130841.38177128117,
+        "p95": 157518.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 85.93035253654342,
+        "p95": 109.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.47394669303525366,
+        "p95": 0.7
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.005245049871023216,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.12889080051590712,
+        "p95": 1.0
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.8558899552880481,
+        "p95": 3.1
+      }
+    },
+    "cpuMs": 7679.502,
+    "cpuPercent": 38.38882644746467,
+    "cpuMsPerFrame": 6.603183147033534,
+    "jsHeapUsed": 9684624,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 74928,
+        "cpuTime": 2.393657,
+        "deltaMs": 587.2980000000001
+      },
+      {
+        "type": "renderer",
+        "id": 75004,
+        "cpuTime": 0.063938,
+        "deltaMs": 1.117999999999994
+      },
+      {
+        "type": "renderer",
+        "id": 75002,
+        "cpuTime": 0.054091,
+        "deltaMs": 0.8719999999999978
+      },
+      {
+        "type": "renderer",
+        "id": 74942,
+        "cpuTime": 0.070578,
+        "deltaMs": 0.8130000000000082
+      },
+      {
+        "type": "renderer",
+        "id": 74939,
+        "cpuTime": 12.807807,
+        "deltaMs": 7679.659
+      },
+      {
+        "type": "renderer",
+        "id": 74936,
+        "cpuTime": 0.236581,
+        "deltaMs": 27.90400000000001
+      },
+      {
+        "type": "GPU",
+        "id": 74932,
+        "cpuTime": 3.793989,
+        "deltaMs": 2731.312
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 74933,
+        "cpuTime": 0.914899,
+        "deltaMs": 293.49
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 74934,
+        "cpuTime": 0.047661,
+        "deltaMs": 2.5170000000000052
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 74952,
+        "cpuTime": 0.07066,
+        "deltaMs": 0.04900000000000737
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 74953,
+        "cpuTime": 0.102684,
+        "deltaMs": 0.7729999999999959
+      }
+    ],
+    "rendererRssMiBRange": [
+      1508.625,
+      1591.875
+    ],
+    "originalEditorCpuRange": [
+      166.9,
+      185.7
+    ]
+  },
+  {
+    "mode": "town",
+    "page": "plaza",
+    "frames": 1160,
+    "elapsed": 20.005,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 20,
+    "managedBytes": 13832192,
+    "allocatedBytes": 94227205,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-town-1/town-1/profile.json",
+    "actualFps": 57.98550362409398,
+    "frameMs": {
+      "mean": 17.246764452113894,
+      "p95": 19.000000000000128
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.206810349137932,
+        "p95": 18.7
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.41086204396551723,
+        "p95": 1.2
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 17.21258620689655,
+        "p95": 18.7
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.028965514655172414,
+        "p95": 0.2
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0858620577586207,
+        "p95": 0.3
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 14.43922416724138,
+        "p95": 16.200001
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0009482741379310345,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 39092.206896551725,
+        "p95": 86013.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 339272.2715517241,
+        "p95": 339565.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 39.49655172413793,
+        "p95": 41.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.21525859827586208,
+        "p95": 0.800001
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 4582.564,
+    "cpuPercent": 22.906828718945327,
+    "cpuMsPerFrame": 3.950486206896552,
+    "jsHeapUsed": 10027844,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 67211,
+        "cpuTime": 2.45352,
+        "deltaMs": 598.1960000000001
+      },
+      {
+        "type": "renderer",
+        "id": 67283,
+        "cpuTime": 0.063651,
+        "deltaMs": 0.8709999999999968
+      },
+      {
+        "type": "renderer",
+        "id": 67280,
+        "cpuTime": 0.05607,
+        "deltaMs": 0.8039999999999992
+      },
+      {
+        "type": "renderer",
+        "id": 67225,
+        "cpuTime": 0.071729,
+        "deltaMs": 0.8279999999999954
+      },
+      {
+        "type": "renderer",
+        "id": 67222,
+        "cpuTime": 8.319382,
+        "deltaMs": 4582.9439999999995
+      },
+      {
+        "type": "renderer",
+        "id": 67219,
+        "cpuTime": 0.230666,
+        "deltaMs": 24.57300000000001
+      },
+      {
+        "type": "GPU",
+        "id": 67215,
+        "cpuTime": 3.741362,
+        "deltaMs": 2661.548
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 67216,
+        "cpuTime": 0.917603,
+        "deltaMs": 284.30699999999996
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 67217,
+        "cpuTime": 0.045702,
+        "deltaMs": 2.485000000000001
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 67235,
+        "cpuTime": 0.070467,
+        "deltaMs": 0.04600000000000437
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 67236,
+        "cpuTime": 0.105542,
+        "deltaMs": 0.7559999999999928
+      }
+    ],
+    "rendererRssMiBRange": [
+      1440.40625,
+      1448.671875
+    ],
+    "originalEditorCpuRange": [
+      124.6,
+      172.9
+    ]
+  },
+  {
+    "mode": "town",
+    "page": "plaza",
+    "frames": 1183,
+    "elapsed": 20.011,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 20,
+    "managedBytes": 13905920,
+    "allocatedBytes": 94227357,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-town-2/town-2/profile.json",
+    "actualFps": 59.11748538303933,
+    "frameMs": {
+      "mean": 16.914551607445006,
+      "p95": 18.99999999999835
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.87903635249366,
+        "p95": 18.2
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.44251901437024516,
+        "p95": 1.199999
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.88385461115807,
+        "p95": 18.2
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.03161454353338969,
+        "p95": 0.2
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0989010989010989,
+        "p95": 0.300001
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 13.771766714285715,
+        "p95": 15.6
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0013524919695688928,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 38134.88588334742,
+        "p95": 84565.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 339277.96280642436,
+        "p95": 339565.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 39.50464919695689,
+        "p95": 41.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.24547761200338125,
+        "p95": 0.900001
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 5139.184,
+    "cpuPercent": 25.68218388395238,
+    "cpuMsPerFrame": 4.344196111580727,
+    "jsHeapUsed": 9797852,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 67821,
+        "cpuTime": 3.154566,
+        "deltaMs": 656.7810000000001
+      },
+      {
+        "type": "renderer",
+        "id": 67939,
+        "cpuTime": 0.082726,
+        "deltaMs": 1.3209999999999888
+      },
+      {
+        "type": "renderer",
+        "id": 67937,
+        "cpuTime": 0.071018,
+        "deltaMs": 1.1449999999999934
+      },
+      {
+        "type": "renderer",
+        "id": 67837,
+        "cpuTime": 0.083468,
+        "deltaMs": 1.3869999999999993
+      },
+      {
+        "type": "renderer",
+        "id": 67834,
+        "cpuTime": 9.52616,
+        "deltaMs": 5138.603000000001
+      },
+      {
+        "type": "renderer",
+        "id": 67830,
+        "cpuTime": 0.290623,
+        "deltaMs": 34.51100000000002
+      },
+      {
+        "type": "GPU",
+        "id": 67825,
+        "cpuTime": 4.200503,
+        "deltaMs": 2878.248
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 67826,
+        "cpuTime": 1.00782,
+        "deltaMs": 339.33299999999986
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 67827,
+        "cpuTime": 0.059002,
+        "deltaMs": 2.8709999999999987
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 67851,
+        "cpuTime": 0.067853,
+        "deltaMs": 0.6189999999999946
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 67852,
+        "cpuTime": 0.106861,
+        "deltaMs": 1.353999999999994
+      }
+    ],
+    "rendererRssMiBRange": [
+      1057.9375,
+      1071.25
+    ],
+    "originalEditorCpuRange": [
+      146.1,
+      168.6
+    ]
+  },
+  {
+    "mode": "town",
+    "page": "plaza",
+    "frames": 1179,
+    "elapsed": 20.012999999999998,
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "quality": "Mobile",
+    "backend": "IL2CPP",
+    "fixtureHash": "81dd0abc25c1d46416523dae026233e3beba1aedd2e977d95dc46dc5983dfad5",
+    "workloadHash": "5381209ced8858655d03efff3a77444db0d3fed9097947d8ec258ede007239f5",
+    "mapFingerprint": "",
+    "combatTicks": 0,
+    "collections": 20,
+    "managedBytes": 13684736,
+    "allocatedBytes": 94227213,
+    "residentBytes": 0,
+    "source": "web-controlled-final/after/browser-town-3/town-3/profile.json",
+    "actualFps": 58.911707390196376,
+    "frameMs": {
+      "mean": 16.97453310696095,
+      "p95": 18.99999999999835
+    },
+    "metrics": {
+      "PlayerLoop": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.937404580152673,
+        "p95": 18.5
+      },
+      "GC.Collect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "BehaviourUpdate": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.40110262934690416,
+        "p95": 1.0
+      },
+      "Main Thread": {
+        "unit": "TimeNanoseconds",
+        "mean": 16.942239185750637,
+        "p95": 18.5
+      },
+      "Canvas.BuildBatch": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.02883799830364716,
+        "p95": 0.2
+      },
+      "UGUI.Rendering.UpdateBatches": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.08651399491094147,
+        "p95": 0.3
+      },
+      "WaitForTargetFPS": {
+        "unit": "TimeNanoseconds",
+        "mean": 14.25453774385072,
+        "p95": 16.0
+      },
+      "Camera.Render": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0007633587786259542,
+        "p95": 0.0
+      },
+      "GC Allocated In Frame": {
+        "unit": "Bytes",
+        "mean": 38388.199321458866,
+        "p95": 84565.0
+      },
+      "Batches Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Draw Calls Count": {
+        "unit": "Count",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "Triangles Count": {
+        "unit": "Count",
+        "mean": 339276.98897370655,
+        "p95": 339565.0
+      },
+      "SetPass Calls Count": {
+        "unit": "Count",
+        "mean": 39.500424088210345,
+        "p95": 41.0
+      },
+      "HELLSCRIPT.World.Present": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.World.Effect": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      },
+      "HELLSCRIPT.UI.Update": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.21416454622561493,
+        "p95": 0.9
+      },
+      "HELLSCRIPT.Combat.Tick": {
+        "unit": "TimeNanoseconds",
+        "mean": 0.0,
+        "p95": 0.0
+      }
+    },
+    "cpuMs": 4443.889999999999,
+    "cpuPercent": 22.20509551599915,
+    "cpuMsPerFrame": 3.7692027141645457,
+    "jsHeapUsed": 10032500,
+    "browserTiming": [
+      {
+        "event": "HELLSCRIPT_PROFILE_BEGIN",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      },
+      {
+        "event": "HELLSCRIPT_PROFILE_END",
+        "screenAnimationFrameRate": 60,
+        "timingMode": 0,
+        "timingValue": 16.666666666666668,
+        "hidden": false,
+        "visibility": "visible",
+        "focused": true,
+        "devicePixelRatio": 1,
+        "viewport": [
+          1280,
+          720
+        ],
+        "screen": [
+          800,
+          600
+        ],
+        "fixedFps": "60"
+      }
+    ],
+    "processCpuMs": [
+      {
+        "type": "browser",
+        "id": 69248,
+        "cpuTime": 2.372407,
+        "deltaMs": 552.314
+      },
+      {
+        "type": "renderer",
+        "id": 69315,
+        "cpuTime": 0.06523,
+        "deltaMs": 0.9659999999999946
+      },
+      {
+        "type": "renderer",
+        "id": 69313,
+        "cpuTime": 0.055534,
+        "deltaMs": 0.690000000000003
+      },
+      {
+        "type": "renderer",
+        "id": 69262,
+        "cpuTime": 0.072013,
+        "deltaMs": 0.7499999999999868
+      },
+      {
+        "type": "renderer",
+        "id": 69259,
+        "cpuTime": 8.106215,
+        "deltaMs": 4444.268000000001
+      },
+      {
+        "type": "renderer",
+        "id": 69256,
+        "cpuTime": 0.245633,
+        "deltaMs": 25.334999999999997
+      },
+      {
+        "type": "GPU",
+        "id": 69252,
+        "cpuTime": 3.678398,
+        "deltaMs": 2522.792
+      },
+      {
+        "type": "network.mojom.NetworkService",
+        "id": 69253,
+        "cpuTime": 0.920699,
+        "deltaMs": 301.482
+      },
+      {
+        "type": "storage.mojom.StorageService",
+        "id": 69254,
+        "cpuTime": 0.047737,
+        "deltaMs": 2.341000000000003
+      },
+      {
+        "type": "audio.mojom.AudioService",
+        "id": 69272,
+        "cpuTime": 0.070566,
+        "deltaMs": 0.03500000000000725
+      },
+      {
+        "type": "video_capture.mojom.VideoCaptureService",
+        "id": 69273,
+        "cpuTime": 0.107761,
+        "deltaMs": 0.9989999999999999
+      }
+    ],
+    "rendererRssMiBRange": [
+      1443.15625,
+      1451.53125
+    ],
+    "originalEditorCpuRange": [
+      159.5,
+      175.8
+    ]
+  }
+]

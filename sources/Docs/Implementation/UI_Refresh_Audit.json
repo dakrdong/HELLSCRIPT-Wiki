@@ -1,0 +1,3811 @@
+{
+  "scope": "Source candidates including compatibility routes; reachability and visual runtime coverage are reported separately.",
+  "bindings": [
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/AspectStoneWindow.cs",
+      "line": 15,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs",
+      "line": 17,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.cs",
+      "line": 33,
+      "guard": "existing forge signature"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs",
+      "line": 16,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.cs",
+      "line": 36,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs",
+      "line": 47,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs",
+      "line": 13,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs",
+      "line": 15,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs",
+      "line": 86,
+      "guard": "visibleState"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.cs",
+      "line": 28,
+      "guard": "existing rune revision and dirty draft guard"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.cs",
+      "line": 67,
+      "guard": "visibleState"
+    }
+  ],
+  "files": [
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/AspectStoneWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 14,
+          "arguments": [
+            "parent",
+            "\"위상 각인석\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 14,
+          "arguments": [
+            "parent",
+            "\"출석 이벤트\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Chrome.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 127,
+          "arguments": [
+            "\"help\""
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 141,
+          "arguments": [
+            "index"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Controls.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Dialogs.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 30,
+          "arguments": [
+            "\"CORE CRAFTING / EQUIPMENT\"",
+            "\"장비 상세\"",
+            "coreLook==CoreLook.Compact?48:46"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Parts.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Quality.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 107,
+          "arguments": [
+            "\"core-history\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 262,
+          "arguments": [
+            "\"core-preview\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Dialogs.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 13,
+          "arguments": [
+            "string kind"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 39,
+          "arguments": [
+            "string eyebrow",
+            "string title",
+            "float em"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 75,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"변경할 장비 선택\"",
+            "34"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 91,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"이 옵션 위치를 고정할까요?\"",
+            "30"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 115,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"원하는 옵션이 나올 때까지\"",
+            "landscape?52:34"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 150,
+          "arguments": [
+            "\"confirm-lock\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 159,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"목표 옵션이 나왔습니다\"",
+            "30"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 180,
+          "arguments": [
+            "\"THE FORGE\"",
+            "tab==0?\"옵션 변경 안내\":tab==1?\"슬롯 강화 안내\":tab==2?\"장비 강화 안내\":\"코어 제작 안내\"",
+            "34"
+          ]
+        }
+      ],
+      "dialogStates": [
+        "items",
+        "confirm-lock",
+        "auto",
+        "auto-result",
+        "help",
+        "item-detail",
+        "quality",
+        "quality-reset"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Enchant.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 81,
+          "arguments": [
+            "\"items\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 111,
+          "arguments": [
+            "kind"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 170,
+          "arguments": [
+            "\"auto\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 194,
+          "arguments": [
+            "\"confirm-lock\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Gear.Panels.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 18,
+          "arguments": [
+            "item"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 24,
+          "arguments": [
+            "kind"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Gear.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 64,
+          "arguments": [
+            "\"gear-items\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 75,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"강화할 장비 선택\"",
+            "34"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 127,
+          "arguments": [
+            "\"item-detail\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 23,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"강화 작업\"",
+            "34"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 40,
+          "arguments": [
+            "\"THE FORGE\"",
+            "\"강화 작업 칸을 추가할까요?\"",
+            "30"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "UpdateSlotPlan"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 118,
+          "arguments": [
+            "\"jobs\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 76,
+          "arguments": [
+            "int value"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow",
+        "RefreshCommitted"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/CombatLogWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 47,
+          "arguments": [
+            "parent",
+            "\"전투 문자 로그\"",
+            "EquipmentViewSource.BattleSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/CombatRecordsWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 40,
+          "arguments": [
+            "parent",
+            "\"전투 기록\"",
+            "EquipmentViewSource.BattleSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/ContentWindowHost.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/ContentWindowView.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 71,
+          "arguments": [
+            "Transform parent",
+            "string label",
+            "float x"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 14,
+          "arguments": [
+            "parent",
+            "\"일일 퀘스트\"",
+            "EquipmentViewSource.Owned"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 57,
+          "arguments": [
+            "view.Navigation",
+            "title",
+            "i*(tab+6)"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.Controls.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 70,
+          "arguments": [
+            "string title",
+            "float preferredHeight",
+            "out RectTransform body"
+          ]
+        }
+      ],
+      "dialogStates": [
+        "header",
+        "button",
+        "active",
+        "primary",
+        "slot",
+        "empty",
+        "dialog",
+        "quiet"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.Detail.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 41,
+          "arguments": [
+            "\"장착 비교\"",
+            "height-16",
+            "out var body"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.Gamble.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.Settings.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 29,
+          "arguments": [
+            "\"자동 선택 설정\"",
+            "height-16",
+            "out var body"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowSettingsOnly"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentShopWindow.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 187,
+          "arguments": [
+            "\"장비 판매 확인\"",
+            "460",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 80,
+          "arguments": [
+            "EquipmentShopTab tab"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 90,
+          "arguments": [
+            "tab"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Accounts.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.AspectStone.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Attendance.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowEventButton"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Attributes.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 43,
+          "arguments": [
+            "\"attributes\"",
+            "\"능력치\"",
+            "Loc.F(\"{0} Lv.{1} · 장비와 능력치가 만든 값입니다\", game.catalog.classNames[(int)hero.heroClass], level)"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Audio.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleEscape.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 18,
+          "arguments": [
+            "transform",
+            "portalReturn?\"포탈로 복귀\":\"탈출\"",
+            "EquipmentViewSource.BattleSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowBattleHud",
+        "UpdateBattleBrief"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Blacksmith.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 19,
+          "arguments": [
+            "tab"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.CharacterSelection.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 19,
+          "arguments": [
+            "\"characters\"",
+            "\"HELLSCRIPT\"",
+            "\"캐릭터 선택하기\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.CombatJournal.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Comparison.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 26,
+          "arguments": [
+            "\"comparison-picker\"",
+            "\"훈련 A/B 비교\"",
+            "\"같은 캐릭터로 행동·소유 장비의 차이를 확인합니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 36,
+          "arguments": [
+            "\"comparison-conditions\"",
+            "\"비교 중인 설정\"",
+            "Loc.F(\"{0} · {1} · 조건을 고정해 시험합니다\", (game.Comparison.IsB?\"B\":\"A\"), TrainingNames[run.training])"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 69,
+          "arguments": [
+            "\"comparison-result\"",
+            "\"훈련 A/B 결과\"",
+            "Loc.F(\"{0} · {1}\", TrainingNames[pair.Training], (a==null?\"A 결과 확인\":\"A 완료 · B 설정을 바꿔 보세요\"))"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 81,
+          "arguments": [
+            "\"comparison-result\"",
+            "\"저장한 훈련 비교\"",
+            "\"이 결과는 현재 버전에서 비교할 수 없습니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 83,
+          "arguments": [
+            "\"comparison-result\"",
+            "\"훈련 A/B 결과\"",
+            "Loc.F(\"{0} Lv.{1} · {2} · {3}\", game.catalog.classNames[(int)hero.heroClass], hero.level, TrainingNames[frozen.training],frozen.EquipmentChanged?\"장비 변경 비교\":\"같은 기준 장비\")"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 183,
+          "arguments": [
+            "\"comparison-changes\"",
+            "\"A와 B의 변경 조건\"",
+            "\"캐릭터·레벨·시드·시작 배치는 같습니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 195,
+          "arguments": [
+            "\"comparison-choice\"",
+            "Loc.F(\"{0} 설정 활용\", (useB?\"B\":\"A\"))",
+            "\"현재 장비는 유지됩니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowComparisonPages"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Reflow",
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentUnlocks.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 20,
+          "arguments": [
+            "\"content-unlocks\"",
+            "\"콘텐츠 해금 · 안내\"",
+            "\"균열 클리어 단계에 따라 계정 전체에 개방됩니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictEditor.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 32,
+          "arguments": [
+            "\"edict\"",
+            "\"사냥 칙령 v0.2\"",
+            "\"\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 45,
+          "arguments": [
+            "\"edict\"",
+            "ComparisonEdictEditing?\"B 사냥 칙령\":\"사냥 칙령 v0.2\"",
+            "ComparisonEdictEditing?\"B 훈련에만 사용합니다 · 실제 설정은 유지됩니다\":changes==0?\"저장된 설정과 같습니다\":Loc.F(\"저장하지 않은 변경 {0}개 · 저장 및 적용을 눌러야 반영됩니다\", changes)"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowEdictRows"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictShare.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 16,
+          "arguments": [
+            "\"edict-share\"",
+            "\"사냥 칙령 공유\"",
+            "\"현재 원본을 코드로 내보내고, 받은 코드를 확인한 뒤 적용합니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Effects.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 31,
+          "arguments": [
+            "\"effects\"",
+            "\"전투 효과\"",
+            "\"확인하는 동안 전투 시간이 멈춥니다.\""
+          ]
+        }
+      ],
+      "dialogStates": [
+        "BASIC",
+        "SW4",
+        "SA4",
+        "SM4",
+        "SWB4",
+        "SAB4",
+        "LEGACY_SHIELD"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Enemies.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 41,
+          "arguments": [
+            "\"enemy-combat\"",
+            "\"적의 행동과 위험\"",
+            "\"확인하는 동안 전투 시간이 멈춥니다.\""
+          ]
+        }
+      ],
+      "dialogStates": [
+        "PREPARE",
+        "RELEASE",
+        "ACTION_END",
+        "FOLLOWUP_PREPARE",
+        "HAZARD_CREATED",
+        "CORPSE_CONSUMED",
+        "RAGE",
+        "HEAL",
+        "AURA_APPLIED",
+        "AURA_REMOVED",
+        "ENRAGED",
+        "SUMMONED",
+        "PLAN_DEFERRED"
+      ],
+      "refreshMethods": [
+        "ReflowBossText"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EquipmentShop.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 11,
+          "arguments": [
+            "tab"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.FirstPlay.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 48,
+          "arguments": [
+            "\"class-practice\"",
+            "ClassPracticeLesson.Title(account.Hero.heroClass)",
+            "\"60초 A/B 실습 · 실제 계정은 유지됩니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 60,
+          "arguments": [
+            "\"class-practice-b\"",
+            "\"B에서 바꿀 조건\"",
+            "\"아직 실제 설정에는 적용하지 않았습니다\""
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 21,
+          "arguments": [
+            "\"skills\""
+          ]
+        }
+      ],
+      "dialogStates": [
+        "inventory",
+        "reward",
+        "training",
+        "survival"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.GearRecommendations.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Gems.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 16,
+          "arguments": [
+            "\"gem-menu\"",
+            "title",
+            "Loc.F(\"공용 보관함 {0}/{1}칸 · 골드 {2:N0}\", game.Store.Data.gems.Count, game.Store.Data.gemCapacity, game.Store.Data.gold)"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.GlobalHud.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowHudPanel"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Growth.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 34,
+          "arguments": [
+            "\"growth\"",
+            "\"성장과 스킬\"",
+            "Loc.F(\"{0} Lv.{1} · 현재 장비와 행동을 확인합니다\", game.catalog.classNames[(int)hero.heroClass], level)"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 59,
+          "arguments": [
+            "\"recommendation\"",
+            "\"추천 행동 미리보기\"",
+            "Loc.F(\"{0} · 불러온 뒤 설정 적용으로 확정합니다\", proposed.name)"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Guide.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.History.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 20,
+          "arguments": [
+            "string page",
+            "string title",
+            "string subtitle"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 22,
+          "arguments": [
+            "page",
+            "title",
+            "subtitle"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 81,
+          "arguments": [
+            "\"run-skills\"",
+            "\"스킬·효과별 기록\"",
+            "\"해당 균열에서 관측한 전체 합계\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 106,
+          "arguments": [
+            "deathView?\"defeat-analysis\":\"run-window\"",
+            "deathView?\"사망 원인 분석\":\"마지막 전투 구간\"",
+            "\"기록한 시점의 피격과 스킬 불발\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 130,
+          "arguments": [
+            "\"run-tick\"",
+            "Loc.F(\"{0:0.00}초의 전투\",tick.time)",
+            "\"당시 관측값과 실제 판단 근거\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 146,
+          "arguments": [
+            "\"run-rule\"",
+            "\"당시 규칙\"",
+            "\"저장된 근거를 읽습니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 157,
+          "arguments": [
+            "\"run-edict\"",
+            "\"보관된 사냥 칙령\"",
+            "\"당시 설정의 읽기 전용 복사본\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowHistory"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 53,
+          "arguments": [
+            "\"presets\""
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 60,
+          "arguments": [
+            "\"repeat\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Idle.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 21,
+          "arguments": [
+            "\"idle-introduction\"",
+            "\"절전 방치\"",
+            "\"실제 사냥 유지\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowIdleIntroduction"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.IdleDashboard.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.InventoryLayout.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 37,
+          "arguments": [
+            "warehouse?\"warehouse\":\"bag\"",
+            "warehouse?\"공유 창고\":portal?\"포탈 가방 정리\":\"장비와 가방\"",
+            "\"\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 179,
+          "arguments": [
+            "item"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowInventory"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ItemQuality.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 20,
+          "arguments": [
+            "item"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Items.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 55,
+          "arguments": [
+            "\"shop\"",
+            "\"장비 제작\"",
+            "\"모든 제작 경로에서 전설·세트를 발견할 수 있습니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 82,
+          "arguments": [
+            "\"collection\"",
+            "\"전설·세트 도감\"",
+            "Loc.F(\"{0} 전용 장비와 공용 장비\", game.catalog.classNames[(int)h.heroClass])"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Jeweler.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.NpcDialogue.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Objectives.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.OfflineSupplies.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.OverlayMap.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PlayInventory.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Plaza.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 22,
+          "arguments": [
+            "\"plaza\"",
+            "\"잿빛 숲 · 정착민 마을\"",
+            "\"조이스틱으로 이동 · 주민에게 가까이 가서 대화하세요\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Presets.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Changed",
+        "ReflowPresetDialog",
+        "UpdatePresetDialog"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Repeat.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 99,
+          "arguments": [
+            "\"repeat-details\"",
+            "\"반복 사냥 안내\"",
+            "\"현재 결과와 사냥 설정을 확인합니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowResultRows"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Rift.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 75,
+          "arguments": [
+            "\"rift-map\"",
+            "\"균열 지도\"",
+            "\"발견한 지역 · 전투 일시정지\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftActivity.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftKeeper.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 22,
+          "arguments": [
+            "\"rift-keeper\"",
+            "\"균열 관리자\"",
+            "\"단계 선택 · 소탕 · 훈련은 성소 메뉴와 같은 조건으로 열립니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftRewards.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 13,
+          "arguments": [
+            "\"rift-rewards\"",
+            "\"단계별 등급 확률\"",
+            "active?\"진행 중인 균열 단계에 적용되는 보상입니다.\":\"선택한 균열 단계에 적용되는 보상입니다.\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RiftVictory.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 15,
+          "arguments": [
+            "\"result\"",
+            "game.Combat.State.phase==RunPhase.Failed?\"균열 실패\":\"균열 정복\"",
+            "\"\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Rules.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 42,
+          "arguments": [
+            "\"rule-picker\"",
+            "\"행동 추가\"",
+            "\"장착 상태와 행동 규칙은 따로 관리합니다.\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 103,
+          "arguments": [
+            "\"condition-picker\"",
+            "\"조건 선택\"",
+            "\"22종 · 조건 판정과 CD·자원·사거리 검사는 별도로 처리합니다.\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 143,
+          "arguments": [
+            "\"decisions\"",
+            "\"행동 판단 기록\"",
+            "\"최근 80건 · 같은 사유는 묶어 표시합니다.\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RuneBoard.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RuneBoardTutorial.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RuneMaster.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.RunePanels.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 39,
+          "arguments": [
+            "string title",
+            "float preferredWidth=650",
+            "float preferredHeight=560"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 101,
+          "arguments": [
+            "RuneV13Catalog.RegionName(region)",
+            "340",
+            "400"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 111,
+          "arguments": [
+            "RuneMasteryCatalog.AbilityName(cell.Ability.Meaning)"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 130,
+          "arguments": [
+            "Loc.F(\"{0} · 활성 효과\",RuneMasteryCatalog.Name(runeWeapon))"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 147,
+          "arguments": [
+            "\"무기 선택\"",
+            "360",
+            "400"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 152,
+          "arguments": [
+            "\"영역 선택\"",
+            "360",
+            "450"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 157,
+          "arguments": [
+            "\"능력 도감\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 184,
+          "arguments": [
+            "\"이용 안내\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 196,
+          "arguments": [
+            "\"룬 배치 가이드\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "UpdateRuneFilterLabels",
+        "LateUpdate"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Runes.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 48,
+          "arguments": [
+            "\"runes\"",
+            "\"룬 보드\"",
+            "\"\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 292,
+          "arguments": [
+            "\"rune-fusion\"",
+            "\"룬 합성\"",
+            "\"같은 색·등급·크기 두 개로 성장 · 실패와 수수료 없음\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 324,
+          "arguments": [
+            "\"rune-drop-rates\"",
+            "\"룬 드롭 확률\"",
+            "\"균열 단계가 높을수록 큰 룬이 등장합니다.\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 345,
+          "arguments": [
+            "\"rune-practice\"",
+            "\"룬 배치 연습\"",
+            "Loc.F(\"{0} / 5 · 실제 룬과 저장에는 영향을 주지 않습니다.\",runePractice.Page+1)"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 262,
+          "arguments": [
+            "\"전체 배치 프리셋 · 5칸\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 277,
+          "arguments": [
+            "\"전체 배치 등록\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowRunes",
+        "UpdateRuneContents"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ScreenSettings.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowCommonPanel",
+        "UpdateCommonPanel"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.SettingsFrame.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "UpdateAspectMask"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.SettingsInformation.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Storage.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Title.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 12,
+          "arguments": [
+            "\"title\"",
+            "\"HELLSCRIPT\"",
+            "\"잿빛 숲 너머, 당신의 이야기가 시작됩니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TownServices.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 8,
+          "arguments": [
+            "string page",
+            "string title",
+            "string subtitle"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 11,
+          "arguments": [
+            "page",
+            "title",
+            "subtitle"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 33,
+          "arguments": [
+            "\"town-runes\"",
+            "\"룬 상인\"",
+            "\"룬 블록 구매 · 룬 배치\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TrainingEquipment.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 85,
+          "arguments": [
+            "\"comparison-equipment\"",
+            "\"B 장비 선택\"",
+            "\"비교 시작 때 보유한 장비의 복사본으로 시험합니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 171,
+          "arguments": [
+            "\"comparison-equipment-record\"",
+            "second?\"B 장비 원본\":\"A 장비 원본\"",
+            "\"훈련에 사용한 복사본 · 실제 장비는 유지됩니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowComparisonEquipment"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TrainingGround.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 33,
+          "arguments": [
+            "\"result\"",
+            "\"훈련 결과\"",
+            "\"\""
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 41,
+          "arguments": [
+            "\"skills\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "UpdateTrainingKeys"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialPractice.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 14,
+          "arguments": [
+            "transform",
+            "\"최초 실습 지원\"",
+            "EquipmentViewSource.Owned"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 73,
+          "arguments": [
+            "transform",
+            "\"실습 완료\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialStaging.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Tutorials.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 46,
+          "arguments": [
+            "view.Navigation",
+            "tabs[i]",
+            "i*(tabWidth+4)"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 99,
+          "arguments": [
+            "d.target==\"skills\"?\"skills\":d.id==\"H10\"?\"presets\":d.id==\"H11\"?\"repeat\":\"overview\""
+          ]
+        }
+      ],
+      "dialogStates": [
+        "inventory",
+        "skills",
+        "edict",
+        "offline",
+        "attendance",
+        "class-practice",
+        "battle"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ViewDistance.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 54,
+          "arguments": [
+            "\"recovery\"",
+            "\"저장 복구가 필요합니다\"",
+            "\"진행 기록을 덮어쓰지 않고 게임을 멈췄습니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 166,
+          "arguments": [
+            "string page",
+            "string title",
+            "string subtitle"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 220,
+          "arguments": [
+            "\"town\"",
+            "\"HELLSCRIPT\"",
+            "\"행동을 설계하고, 균열을 지배하라\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 257,
+          "arguments": [
+            "\"battle\"",
+            "BattleHeading(run)",
+            "run.tutorial?Loc.T(\"자동 전투 · 실제 장비 획득과 장착\"):run.training>=0?(game.TrainingGroundRun?Loc.F(\"균열 {0}단계 · 모든 적을 처치할 때까지 · 보상 없음\",run.stage):game.Combat.OwnedTraining?Loc.F(\"현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음\", game.Combat.EffectiveLevel):\"개발용 Lv.30 "
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 298,
+          "arguments": [
+            "\"build\"",
+            "comparisonEditing?\"B 행동 설정\":\"행동 설계\"",
+            "comparisonEditing?\"B 훈련에만 사용합니다 · 실제 설정은 유지됩니다\":\"위에서부터 검사합니다 · 실행할 수 있는 행동 하나를 선택합니다\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 378,
+          "arguments": [
+            "\"result\"",
+            "r.training>=0?\"훈련 결과\":won?\"균열 정복\":\"다시 설계할 시간\"",
+            "r.training>=0?r.action:Loc.F(\"균열 {0}단계\",r.stage)+\" · \"+Loc.StoredText(r.action)"
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 413,
+          "arguments": [
+            "\"defeat-analysis\"",
+            "\"사망 원인 분석\"",
+            "\"사망 직전 5초간의 피해 집중 및 스킬 불발 내역\""
+          ]
+        },
+        {
+          "kind": "page",
+          "line": 448,
+          "arguments": [
+            "\"training-save\"",
+            "\"훈련 설정 저장\"",
+            "\"실제 캐릭터의 장비와 현재 행동은 유지됩니다\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "UpdateSlot",
+        "Reflow"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.CombatPreview.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Equipment.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Glyphs.cs",
+      "entries": [],
+      "dialogStates": [
+        "save",
+        "position",
+        "surround",
+        "target",
+        "track",
+        "order",
+        "emergency",
+        "potion",
+        "dodge",
+        "warning",
+        "protect",
+        "rarity",
+        "filter",
+        "coins",
+        "route",
+        "bag",
+        "cleanup",
+        "lock",
+        "warehouse",
+        "explore",
+        "chest",
+        "cursed",
+        "shrine",
+        "repeat",
+        "goal",
+        "prepare",
+        "settings",
+        "weapon",
+        "helmet",
+        "armor",
+        "gloves",
+        "boots",
+        "belt",
+        "amulet",
+        "ring-left",
+        "ring-right"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Options.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 59,
+          "arguments": [
+            "title",
+            "p=> { var scroll=Scroll(p,\"Choices\",10,48,DialogWidth-20,h-57,out var list); foreach(string value in choices) {string choice=value;var row=Row(list,\"Choice\",34);Button(row,label(choice),0,0,DialogWidth-32,34,()=>{DismissDialog();set(choice)",
+            "h"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 74,
+          "arguments": [
+            "title",
+            "p=> { var input=Input(p,value,12,48,DialogWidth-24,34);input.contentType=InputField.ContentType.DecimalNumber; Button(p,\"확인\",DialogWidth-96,90,84,32,()=>{string entered=input.text;DismissDialog();set(entered);},\"button-primary\");input.Activ",
+            "135"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Overview.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Presets.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 114,
+          "arguments": [
+            "title",
+            "p=> { var input=Input(p,initial,12,48,DialogWidth-24,35);input.characterLimit=40; Button(p,\"확인\",DialogWidth-96,91,84,32,()=> { string name;try{name=PresetNames.Validate(input.text);}catch(Exception e){Error(e.Message);return;} DismissDialog",
+            "136"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 128,
+          "arguments": [
+            "Loc.F(\"{0} · 공유 코드\",preset.name)",
+            "p=> { var input=Input(p,code,12,50,DialogWidth-24,100,true);input.readOnly=true; Button(p,\"코드 복사\",DialogWidth-116,157,104,33,()=>{GUIUtility.systemCopyBuffer=code;DismissDialog();},\"button-primary\"); }",
+            "205"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 136,
+          "arguments": [
+            "\"코드 가져오기\"",
+            "p=> { var input=Input(p,\"\",12,48,DialogWidth-24,90,true); Button(p,\"붙여넣기\",12,145,90,32,()=>input.text=GUIUtility.systemCopyBuffer,\"button-idle\",11); Button(p,\"확인\",DialogWidth-96,145,84,32,()=> { HuntEdictPresetPreview preview;try{preview=Hu",
+            "192"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 149,
+          "arguments": [
+            "\"가져온 프리셋 확인\"",
+            "p=> { var scroll=Scroll(p,\"Import details\",12,49,DialogWidth-24,h-96,out var list); Paragraph(list,preview.Draft.name,DialogWidth-37,13,gold); Paragraph(list,Loc.F(\"사용 포인트 {0} P\",preview.Draft.loadout.Spent),DialogWidth-37,12); foreach(stri",
+            "h"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 163,
+          "arguments": [
+            "\"저장할 프리셋을 선택하세요\"",
+            "p=> { var scroll=Scroll(p,\"Preset destinations\",12,48,DialogWidth-24,h-58,out var list); for(int i=0;i<5;i++) { int slot=i;var old=hero.edictPresets[i];bool exists=HuntEdictPreset.HasValue(old); var row=Row(list,\"Import destination \"+i,39);",
+            "h"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.QuickPresets.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 66,
+          "arguments": [
+            "\"간편 프리셋\"",
+            "p=> { float h=Mathf.Min(height-16,470); Scroll(p,\"Quick preset choices\",12,51,DialogWidth-24,h-61,out var list); string selected=QuickPresetSelection(scope);float w=DialogWidth-38; foreach(var preset in HuntEdictQuickPresets.For(scope)) Qui",
+            "470"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.SkillPresets.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Skills.cs",
+      "entries": [],
+      "dialogStates": [
+        "Fire",
+        "Cold",
+        "Lightning",
+        "Physical",
+        "Poison",
+        "Shadow",
+        "TriElement"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Summary.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 112,
+          "arguments": [
+            "title",
+            "p=> {var scroll=Scroll(p,\"Option help\",12,50,DialogWidth-24,Mathf.Min(height-80,330),out var list);Paragraph(list,help,DialogWidth-38,12,textColor);EndList(list,8);}",
+            "Mathf.Min(height-16,400)"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 117,
+          "arguments": [
+            "HuntEdictUiCatalog.Label(d)",
+            "p=> { Scroll(p,\"Multiple choices\",12,50,DialogWidth-24,h-108,out var list); foreach(string id in d.choices) { string choice=id;var row=Row(list,\"Choice \"+id,38);Button b=null; b=Button(row,(selected.Contains(id)?\"✓ \":\" \")+Loc.T(EdictOptionL",
+            "h"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 132,
+          "arguments": [
+            "HuntEdictUiCatalog.Label(d)",
+            "p=> { var scroll=Scroll(p,\"Priority choices\",12,50,DialogWidth-24,h-108,out var list); DrawOrder(list,DialogWidth-40,order,id=>Loc.T(EdictOptionLabels.Item(d,id)),(id,target)=>OrderDialog(d,string.Join(\",\",HuntEdictReorder.MoveVisible(order",
+            "h"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 139,
+          "arguments": [
+            "HuntEdictUiCatalog.Label(d)",
+            "p=> { var input=Input(p,value,58,53,DialogWidth-116,38);input.contentType=InputField.ContentType.DecimalNumber;input.gameObject.name=\"edict-number-input\"; var error=Text(p,\"\",12,125,DialogWidth-24,42,11,UiTheme.Danger); void Step(int direct",
+            "230"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 156,
+          "arguments": [
+            "\"변경된 내용이 있는데 저장하시겠어요?\"",
+            "p=> { Button(p,\"이전 상태로 되돌리기\",12,52,DialogWidth-24,36,()=>{Session.Revert();DismissDialog();next();}); Button(p,\"저장하고 나가기\",12,92,DialogWidth-24,36,()=>{if(Save()){DismissDialog();next();}},\"button-primary\"); }",
+            "142"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 191,
+          "arguments": [
+            "string title",
+            "Action<RectTransform> fill",
+            "float dialogHeight=200"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 193,
+          "arguments": [
+            "title",
+            "fill",
+            "dialogHeight"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 213,
+          "arguments": [
+            "\"확인\"",
+            "p=> { var s=Scroll(p,\"Message\",12,48,DialogWidth-24,102,out var list);Paragraph(list,message,DialogWidth-38,12,textColor);EndList(list,2); Button(p,\"확인\",DialogWidth-94,155,82,32,DismissDialog,\"button-primary\"); }",
+            "200"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 219,
+          "arguments": [
+            "question",
+            "p=> { Button(p,\"취소\",12,86,(DialogWidth-30)/2,34,DismissDialog); Button(p,\"확인\",18+(DialogWidth-30)/2,86,(DialogWidth-30)/2,34,()=>{DismissDialog();yes();},\"button-primary\"); }",
+            "134"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 101,
+          "arguments": [
+            "id"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 106,
+          "arguments": [
+            "id"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 137,
+          "arguments": [
+            "string tab"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/IdleEquipmentDetailWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 13,
+          "arguments": [
+            "parent",
+            "localizedTitle",
+            "source"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Controls.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Dialogs.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Drag.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Portal.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Ranges.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "RefreshCommittedView"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow",
+        "UpdateStatus"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 12,
+          "arguments": [
+            "parent",
+            "\"보석상\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/NpcDialogueWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 23,
+          "arguments": [
+            "parent",
+            "profile.name",
+            "EquipmentViewSource.Catalog"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/OfflineSuppliesWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 14,
+          "arguments": [
+            "parent",
+            "\"미접속 보급\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RewardBoxesWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 14,
+          "arguments": [
+            "parent",
+            "\"보상 상자\"",
+            "EquipmentViewSource.Owned"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 52,
+          "arguments": [
+            "parent",
+            "\"균열 최초 보상\"",
+            "EquipmentViewSource.Catalog"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 99,
+          "arguments": [
+            "parent",
+            "\"획득 내역\"",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 111,
+          "arguments": [
+            "parent",
+            "\"장착 비교\"",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 121,
+          "arguments": [
+            "parent",
+            "\"최근 개봉 내역\"",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 142,
+          "arguments": [
+            "v.Navigation",
+            "categories[i]",
+            "i*(cw+4)"
+          ]
+        }
+      ],
+      "dialogStates": [
+        "equipment",
+        "gem",
+        "cores",
+        "rune",
+        "potion"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftCombatGraphWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 19,
+          "arguments": [
+            "parent",
+            "\"그래프 확인\"",
+            "EquipmentViewSource.BattleSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 13,
+          "arguments": [
+            "transform",
+            "title",
+            "EquipmentViewSource.Owned"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 10,
+          "arguments": [
+            "string title",
+            "Action<ContentWindowView> render",
+            "Action onClose=null"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 21,
+          "arguments": [
+            "\"1.5배속으로 입장\"",
+            "v=> { Message(v,Loc.T(\"게임에 입장할 때 심연 주화 200개를 소비합니다. 취소하면 소비하지 않으며, 입장 후 귀환·사망 시에는 반환되지 않습니다.\")); var row=Row(v,\"Entry price\",40);Wallet(row,RiftEntryRules.SpeedCost,0,0,120); Message(v,Loc.F(\"보유 심연 주화 {0}개\",Store.Data.premium));PopupError(v",
+            "game.CancelRiftEntry"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 33,
+          "arguments": [
+            "\"피로도 회복\"",
+            "v=> { Message(v,Loc.T(\"심연 주화 500개로 피로도 20분을 회복합니다. 사용하지 않은 회복분은 다음 날에도 유지됩니다.\")); var row=Row(v,\"Recovery price\",40);Wallet(row,RiftEntryRules.RecoveryCost,0,0,120); Message(v,Loc.F(\"오늘 회복 {0} / 3회\",Store.Data.riftFatigue.recoveries));Popup"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 45,
+          "arguments": [
+            "\"물약 교체\"",
+            "RenderPotions",
+            "fitContentHeight:true"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 78,
+          "arguments": [
+            "slot==4?\"궁극기 교체\":\"사용 스킬 교체\"",
+            "RenderSkills",
+            "maximumSize:new Vector2(900,730)"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 122,
+          "arguments": [
+            "\"최초 보상\"",
+            "v=> { Text(v.Navigation,\"Reward notice\",Loc.T(\"콘텐츠 개방과 최초 보상 · 단계를 눌러 상세 확인\"),0,0,v.Width-24,34,UiTheme.Caption,UiTheme.Muted); var list=v.Body.gameObject.AddComponent<RiftRewardList>();list.Initialize(v,reading,selectedStage,Store,stage=>R"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 26,
+          "arguments": [
+            "host",
+            "\"균열 입장\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Changed",
+        "Update"
+      ],
+      "saveSubscriber": true,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRecommendationWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 16,
+          "arguments": [
+            "parent",
+            "\"추천 장비\"",
+            "EquipmentViewSource.Owned"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 31,
+          "arguments": [
+            "v.Navigation",
+            "\"장착 비교\"",
+            "0"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftReviewDetailWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 20,
+          "arguments": [
+            "parent",
+            "\"전투 상세\"",
+            "EquipmentViewSource.BattleSnapshot"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 38,
+          "arguments": [
+            "v.Navigation",
+            "TabName(id,objective)",
+            "i*tw"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardRevealWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 15,
+          "arguments": [
+            "parent",
+            "\"보상 수령\"",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.Loot.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 94,
+          "arguments": [
+            "transform",
+            "\"아이템 정보\"",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 140,
+          "arguments": [
+            "transform",
+            "\"착용 아이템과 비교\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 40,
+          "arguments": [
+            "root",
+            "\"균열 결과\"",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        },
+        {
+          "kind": "shell/popup",
+          "line": 450,
+          "arguments": [
+            "transform",
+            "title",
+            "EquipmentViewSource.RewardSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Changed",
+        "Update",
+        "UpdateStatus",
+        "UpdateRetry"
+      ],
+      "saveSubscriber": true,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.Board.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 19,
+          "arguments": [
+            "\"region-lock\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 25,
+          "arguments": [
+            "\"regions\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 38,
+          "arguments": [
+            "\"legend\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "UpdateCameraOverlays"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.Chrome.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 13,
+          "arguments": [
+            "\"info\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 14,
+          "arguments": [
+            "\"help\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 15,
+          "arguments": [
+            "\"catalog\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 45,
+          "arguments": [
+            "\"effects\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 55,
+          "arguments": [
+            "\"presets\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 57,
+          "arguments": [
+            "\"revert\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.Dialogs.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 13,
+          "arguments": [
+            "string kind"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 94,
+          "arguments": [
+            "\"tutorial\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 120,
+          "arguments": [
+            "\"tutorial\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 131,
+          "arguments": [
+            "\"preset-store\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 138,
+          "arguments": [
+            "\"presets\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 138,
+          "arguments": [
+            "\"presets\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 149,
+          "arguments": [
+            "\"region-info\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 171,
+          "arguments": [
+            "\"region-info\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 177,
+          "arguments": [
+            "\"region-info\""
+          ]
+        }
+      ],
+      "dialogStates": [
+        "help",
+        "info",
+        "legend",
+        "presets",
+        "preset-store",
+        "regions",
+        "region-info",
+        "region-lock",
+        "slot",
+        "effects",
+        "catalog",
+        "tutorial",
+        "close",
+        "revert"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.Panels.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 80,
+          "arguments": [
+            "\"region-info\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 82,
+          "arguments": [
+            "\"regions\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 93,
+          "arguments": [
+            "\"tutorial\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 93,
+          "arguments": [
+            "\"legend\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.Practice.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 22,
+          "arguments": [
+            "\"tutorial\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 26,
+          "arguments": [
+            "parent",
+            "\"룬 보드\"",
+            "EquipmentViewSource.Draft"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 57,
+          "arguments": [
+            "\"close\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 59,
+          "arguments": [
+            "\"close\""
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 116,
+          "arguments": [
+            "\"slot\""
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "RefreshCommitted",
+        "LateUpdate",
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneMasterWindow.Controls.cs",
+      "entries": [],
+      "dialogStates": [
+        "header",
+        "button",
+        "active",
+        "primary",
+        "slot",
+        "empty",
+        "dialog",
+        "quiet"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneMasterWindow.Drag.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneMasterWindow.Upgrade.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneMasterWindow.cs",
+      "entries": [
+        {
+          "kind": "tab candidate",
+          "line": 77,
+          "arguments": [
+            "RuneMasterTab tab"
+          ]
+        },
+        {
+          "kind": "tab candidate",
+          "line": 86,
+          "arguments": [
+            "tab"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/SettingsControls.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.Dialogs.cs",
+      "entries": [
+        {
+          "kind": "page",
+          "line": 48,
+          "arguments": [
+            "item"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 17,
+          "arguments": [
+            "string title",
+            "float dialogHeight",
+            "out RectTransform list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 49,
+          "arguments": [
+            "\"아이템 상세 정보\"",
+            "height-12",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 80,
+          "arguments": [
+            "\"장착 비교\"",
+            "h",
+            "out var unused"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 91,
+          "arguments": [
+            "\"일반 재료\"",
+            "200",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 97,
+          "arguments": [
+            "GemInventory.Name(id,tier)",
+            "260",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 105,
+          "arguments": [
+            "Loc.F(\"{0} 룬 블럭 · G{1}\",Loc.T(RuneColors.KoreanName(rune.grade)),rune.grade)",
+            "300",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 116,
+          "arguments": [
+            "\"창고 탭 개방\"",
+            "330",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 140,
+          "arguments": [
+            "\"보관 칸 확장\"",
+            "300",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 163,
+          "arguments": [
+            "\"장비 프리셋\"",
+            "Mathf.Min(height-12,490)",
+            "out var list"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.Drag.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.Style.cs",
+      "entries": [],
+      "dialogStates": [
+        "panel-base",
+        "header",
+        "footer",
+        "storage-panel",
+        "transfer-rail",
+        "dialog-panel",
+        "slot-empty",
+        "input-well",
+        "button-primary",
+        "button-idle",
+        "tab-current",
+        "category-current",
+        "tab-idle",
+        "quiet",
+        "option-card",
+        "notice-error"
+      ],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.Tools.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 19,
+          "arguments": [
+            "\"보관함 이름 변경\"",
+            "178",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 34,
+          "arguments": [
+            "\"창고 이용 안내\"",
+            "350",
+            "out var list"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 47,
+          "arguments": [
+            "\"창고 기록\"",
+            "350",
+            "out var list"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow",
+        "UpdateTabHint"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StoreViewBinding.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Changed",
+        "LateUpdate"
+      ],
+      "saveSubscriber": true,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/StoryDialogueWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 63,
+          "arguments": [
+            "parent",
+            "localizedTitle",
+            "source"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Update",
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleScreenView.Dialogs.cs",
+      "entries": [
+        {
+          "kind": "dialog candidate",
+          "line": 11,
+          "arguments": [
+            "string kind",
+            "string heading",
+            "float contentHeight"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 57,
+          "arguments": [
+            "\"account\"",
+            "\"Google 계정\"",
+            "150*read"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 63,
+          "arguments": [
+            "\"login\"",
+            "\"계정 로그인\"",
+            "260*read"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 96,
+          "arguments": [
+            "\"google-profile\"",
+            "\"진행 상황 선택\"",
+            "390*read"
+          ]
+        },
+        {
+          "kind": "dialog candidate",
+          "line": 111,
+          "arguments": [
+            "\"servers\"",
+            "\"서버 선택\"",
+            "310"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "ReflowDialog"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleScreenView.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update",
+        "Reflow"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": true,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TrainingGroundResultWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 24,
+          "arguments": [
+            "host",
+            "\"훈련 결과\"",
+            "EquipmentViewSource.BattleSnapshot"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Changed",
+        "Update"
+      ],
+      "saveSubscriber": true,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TrainingGroundWindow.Enemies.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TrainingGroundWindow.Hero.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TrainingGroundWindow.Picker.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 15,
+          "arguments": [
+            "transform",
+            "\"적 추가\"",
+            "EquipmentViewSource.Catalog"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TrainingGroundWindow.Skills.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TrainingGroundWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 31,
+          "arguments": [
+            "host",
+            "\"훈련장\"",
+            "EquipmentViewSource.Owned"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Changed",
+        "Update"
+      ],
+      "saveSubscriber": true,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/TutorialJournalWindow.cs",
+      "entries": [
+        {
+          "kind": "shell/popup",
+          "line": 13,
+          "arguments": [
+            "parent",
+            "localizedTitle",
+            "source"
+          ]
+        }
+      ],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/UiButton.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": false,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/UiButtonFace.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [
+        "Update"
+      ],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/UiWindowFrame.cs",
+      "entries": [],
+      "dialogStates": [],
+      "refreshMethods": [],
+      "saveSubscriber": false,
+      "destroysControls": true,
+      "togglesActive": false,
+      "setsInteractable": false
+    }
+  ]
+}

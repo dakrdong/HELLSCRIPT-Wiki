@@ -8,6 +8,10 @@ Unity Editor 연동에는 `AGENTS.md`의 **CoplayDev Unity MCP 활용 기준**�
 
 For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `AGENTS.md` as the single source for tool selection, project targeting, verification, and connection recovery.
 
+CPU 비용과 프레임 갱신 관련 변경은 `AGENTS.md`의 **CPU 비용 재발 방지와 성능 리뷰 — 필수** 및 [성능 리뷰 규칙](Docs/Implementation/Performance_Review_Rules.md)을 따른다. 카메라·HUD 갱신 소유권, 상태 변경 시 UI 반영, 동일 조건 실측과 산출물 보존 기준은 그 문서에서 유지한다.
+
+For CPU and frame-update changes, follow the mandatory performance section in `AGENTS.md` and [the performance review rules](Docs/Implementation/Performance_Review_Rules.en.md), which own the camera/HUD lifecycle, UI invalidation, measurement and build-evidence requirements.
+
 ## 언어: 한국어와 영어를 함께 제공한다
 
 이 프로젝트의 모든 개발 결과물은 한국어와 영어를 기본으로 갖춘다. 한쪽만 있는 상태를 완성으로 보지 않는다.
@@ -39,3 +43,9 @@ For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `A
 2026-09-30 사용자 결정에 따라 글자 크기 비율 조정 기능을 제거했다. 이후 UI 검증은 기본 글자 크기에서 해상도·안전 영역·한국어·영어를 확인하며, 50~150% 등 글자 크기별 반복 검사와 전용 스모크를 실행하거나 다시 추가하지 않는다. 화면 크기에 맞춘 반응형 배치와 기본 크기에서의 잘림·조작 검사는 유지한다. 과거 검증 기록은 당시 결과로 보존한다.
 
 The player text-size preference is retired. Future UI validation uses the default text size and retains viewport, safe-area, Korean/English, clipping and input checks. Do not add or run text-size matrices or enlarged-text-only smoke checks. Preserve historical evidence as historical.
+
+## 저장 후 UI 갱신과 버튼 깜빡임
+
+필수 규칙은 [UI 갱신 재발 방지](Docs/Implementation/UI_Refresh_Stability_Rules.md), [영문 규칙](Docs/Implementation/UI_Refresh_Stability_Rules.en.md), 루트 `AGENTS.md`의 **저장 후 UI 갱신과 버튼 깜빡임 — 필수**를 따른다. 저장 성공 알림을 표시 의존 키로 거르고 동일 버튼 상태의 전환을 재시작하지 않는다. 실제 값 변경은 반영하며 입력·중첩 창 동안 갱신을 합쳐 보류하고 focus·스크롤을 복원한다. `check_ui_refresh.py`와 `StoreViewBindingTests`, 실제 자동저장·입력·재진입 검사를 포함한다. 성능은 동일 조건의 실제 이전/이후 binary 각각 최소 3회 원자료로 확인하고 정적 조사·합성 비교·동기 구간과 전체 frame·웹·실기기를 구분한다.
+
+English: The linked UI refresh rules and the root AGENTS section are mandatory for future save subscribers, repeated button configuration, input/modal refresh deferral and matched actual before/after validation.

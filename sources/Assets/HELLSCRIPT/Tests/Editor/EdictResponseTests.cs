@@ -34,6 +34,68 @@ namespace Hellscript.Tests
             sim.State.heroAction=new HeroActionState{id=700,skill=channel?0:-1,phase=phase,prepare=.5f,travel=.5f,recovery=.5f,origin=sim.State.position,destination=sim.State.position+Vector2.right*2,policy=new HeroActionPolicy{rule=new Rule(channel?0:-1){id="old-attack"},movement=MovementMode.Stand},startedAt=-1};
             sim.State.activeSkill=channel?0:-1;sim.State.channelTick=.1f;sim.State.targetId=900;
         }
+        HuntEdictV2Document DodgeDocument(CombatSimulation sim,bool attack=false)
+        {
+            var d=Configure(sim);Set(d,"survival.lowHp","OFF");Set(d,"survival.lethal","OFF");Set(d,"dodge.overlap","OFF");
+            Set(d,"dodge.area.policy","ALWAYS");Set(d,"dodge.ground.policy","ALWAYS");Set(d,"dodge.method","WALK_FIRST");
+            d=HuntEdictV2.WithOption(d,"BASIC",1,attack?"ON":"OFF");d=HuntEdictV2.WithOption(d,"BASIC",3,"CURRENT");sim.Hero.edict=d;sim.Hero.useEdict=true;sim.RefreshEdict();sim.State.health=100;return d;
+        }
+        [TestCase(AttackShape.Circle)][TestCase(AttackShape.Ring)][TestCase(AttackShape.Line)][TestCase(AttackShape.Sector)]
+        public void DodgeChoosesTheNearbyActualShapeBoundary(AttackShape shape)
+        {
+            var sim=Fixture();var d=DodgeDocument(sim);var h=Danger(sim);h.shape=shape;
+            if(shape==AttackShape.Ring){h.position-=Vector2.right*1.6f;h.innerRadius=1.5f;h.radius=3;}
+            if(shape==AttackShape.Line){h.position-=Vector2.up*2;h.end=sim.State.position+Vector2.up*2;h.radius=.7f;}
+            if(shape==AttackShape.Sector){h.position-=Vector2.up;h.direction=Vector2.up;h.angle=90;h.radius=3;}
+            var p=sim.PlanEdictSurvival(d);Assert.AreEqual("WALK",p.selected.role);Assert.IsFalse(EnemyCombat.Contains(EnemyCombat.HazardThreat(h),p.selected.destination));
+            float maximum=shape==AttackShape.Circle?2.09f:shape==AttackShape.Ring?.19f:shape==AttackShape.Line?.79f:.79f;
+            Assert.LessOrEqual(Vector2.Distance(sim.State.position,p.selected.destination),maximum,"Do not retreat to the old 1 m radial grid or a distant low-damage point.");
+        }
+        [Test]
+        public void SafePositionStaysFixedThroughWarningAndZoneAndWaitingIsEvasionInTheGraph()
+        {
+            var sim=Fixture();DodgeDocument(sim);var h=Danger(sim);h.duration=3;h.interval=h.tick=.5f;
+            Advance(sim,.1f);var destination=sim.State.edictResponse.destination;
+            Advance(sim,.85f);Assert.IsTrue(sim.EdictDodgeHolding);Assert.Less(Vector2.Distance(sim.State.position,destination),.05f);
+            var safe=sim.State.position;float before=sim.State.statistics.feedback.evasionSeconds;
+            Advance(sim,2.8f);Assert.AreEqual(safe,sim.State.position);Assert.AreEqual(100,sim.State.health);Assert.IsTrue(sim.EdictDodgeHolding);
+            Assert.AreEqual(2.8f,sim.State.statistics.feedback.evasionSeconds-before,.0001f);
+            Assert.AreEqual(sim.State.statistics.feedback.evasionSeconds,sim.State.statistics.feedback.activityHistory.Last().seconds[(int)CombatActivity.Evasion],.0001f);
+            Assert.AreEqual(0,sim.State.statistics.feedback.attackSeconds);Advance(sim,.4f);Assert.IsFalse(sim.EdictDodgeHolding);
+        }
+        [Test]
+        public void StationaryDodgeAttacksAnotherReachableEnemyAndDoesNotChaseTheOldTarget()
+        {
+            var sim=Fixture(HeroClass.Warrior);DodgeDocument(sim,true);var h=Danger(sim);h.duration=4;h.interval=h.tick=.5f;
+            sim.State.enemies[0].position+=Vector2.up*4;
+            Advance(sim,.9f);var safe=sim.State.position;sim.State.targetId=900;
+            var reachable=new EnemyState{id=901,position=safe+Vector2.right*1.2f,health=100000,maxHealth=100000,speed=0,attack=0,cooldown=1000,brain=new EnemyBrain{initialized=true}};sim.State.enemies.Add(reachable);
+            Advance(sim,2);Assert.IsTrue(sim.EdictDodgeHolding);Assert.AreEqual(safe,sim.State.position);Assert.Less(reachable.health,reachable.maxHealth);
+            Assert.IsTrue(sim.State.actionEvents.Any(a=>a.kind=="ACTION_START"&&a.targetId==901));Assert.Greater(sim.State.statistics.feedback.attackSeconds,0);
+            Assert.Greater(sim.State.statistics.feedback.evasionSeconds,0);Assert.AreEqual(100,sim.State.statistics.feedback.ActivityPercentages().Sum());
+        }
+        [Test]
+        public void DodgeHoldsTheActionThroughItsReleasedZoneAndSaveButReleasesOnCancellation()
+        {
+            var sim=Fixture();DodgeDocument(sim);var enemy=sim.State.enemies[0];enemy.kind=3;enemy.position+=Vector2.up*3;
+            enemy.brain.action=new EnemyActionState{id=800,kind=3,phase=EnemyActionPhase.Preparing,origin=enemy.position,aim=sim.State.position,direction=Vector2.down,preparation=1,remaining=1};enemy.windup=1;
+            Advance(sim,.8f);var safe=sim.State.position;Assert.IsTrue(sim.EdictDodgeHolding);
+            var restored=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(restored);
+            account.Hero.edict=sim.Hero.edict.Copy();account.Hero.useEdict=true;account.Hero.build=sim.State.build.Copy();
+            var resumed=new CombatSimulation(account,catalog,1,restore:restored);
+            Assert.IsTrue(resumed.EdictDodgeHolding);Advance(resumed,.4f);
+            Assert.IsTrue(resumed.State.enemyHazards.Any(z=>z.actionId==800));Assert.IsTrue(resumed.EdictDodgeHolding);Assert.AreEqual(safe,resumed.State.position);
+            resumed.State.enemyHazards.Clear();Assert.IsFalse(resumed.EdictDodgeHolding);
+            enemy.brain.action=new EnemyActionState();Assert.IsFalse(sim.EdictDodgeHolding);
+        }
+        [Test]
+        public void ANewWarningAtTheHeldPositionRequiresAnotherSafePosition()
+        {
+            var sim=Fixture();DodgeDocument(sim);var old=Danger(sim);old.duration=4;old.interval=old.tick=.5f;Advance(sim,.9f);var safe=sim.State.position;
+            var added=Danger(sim,20,.4f);added.id=added.actionId=801;added.radius=.3f;
+            Advance(sim,.3f);Assert.Greater(Vector2.Distance(safe,sim.State.position),.25f);Assert.IsFalse(EnemyCombat.Contains(EnemyCombat.HazardThreat(old),sim.State.position));
+            Advance(sim,.4f);Assert.IsTrue(sim.EdictDodgeHolding);Assert.AreEqual(100,sim.State.health);
+        }
         [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M05")]
         public void EmergencyShieldRunsTheRealPreparationAndCostsOnlyOnce(HeroClass hero,string id)
         {

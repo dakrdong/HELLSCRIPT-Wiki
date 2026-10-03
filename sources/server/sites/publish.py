@@ -20,8 +20,12 @@ def main():
         parser.error('Use the opened source checkout for this same Site.')
     subprocess.run(['python3',str(source/'build.py'),'--generate-only'],check=True)
     paths=['.openai/hosting.json','.gitignore','package.json','package-lock.json','drizzle.config.ts',
-           '_worker.js','common.js','auth.js','liveops.js','migration.js','schema.generated.js','ops.generated.js','build.py',
-           'test_worker.mjs','test_backend.mjs','test_support.mjs','verify_cloud.py','publish.py','migrate.py','README.md']
+           '_worker.js','common.js','auth.js','accounts.js','player_events.js','player_web.js',
+           'liveops.js','migration.js','schema.generated.js','ops.generated.js','build.py',
+           'analytics_daily.sql','analytics_tutorial.sql','analytics_retention.sql',
+           'test_worker.mjs','test_backend.mjs','test_accounts.mjs','test_player_web_bridge.mjs',
+           'test_analytics.mjs','test_publish.mjs','test_workerd.mjs','test_support.mjs',
+           'account_fixture_server.mjs','verify_cloud.py','publish.py','migrate.py','README.md']
     paths += [str(p.relative_to(source)) for folder in ['public','db','drizzle','fixtures'] for p in (source/folder).rglob('*') if p.is_file()]
     for relative in paths:
         target=destination/relative;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source/relative,target)

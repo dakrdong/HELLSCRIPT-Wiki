@@ -144,19 +144,20 @@ namespace Hellscript
             plazaStatus.text=walk.Destination.HasValue?Loc.F("{0}으로 이동 중 · {1:0.0}m",TownLayout.Station(walk.Destination.Value).name,walk.Remaining):Loc.F("{0} Lv.{1} · 중앙 길 횡단 약 20초",game.catalog.classNames[(int)game.Store.Data.Hero.heroClass],game.Store.Data.Hero.level);
             plazaAction.gameObject.SetActive((portal||near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen);
             plazaTalk.gameObject.SetActive(!portal&&npc!=null);
-            plazaInteract.gameObject.SetActive(false);plazaBuy.gameObject.SetActive(false);plazaSell.gameObject.SetActive(false);
+            bool merchant=!portal&&(near==TownStation.Merchant||near==TownStation.Gambler);
+            plazaInteract.gameObject.SetActive(portal||near.HasValue&&!merchant);
+            plazaBuy.gameObject.SetActive(merchant);plazaSell.gameObject.SetActive(merchant);
             plazaInteract.name=portal?"town-portal-resume":"town-interact";
             Place((RectTransform)plazaInteract.transform,12,portal?112:168,226,portal?44:52);
             if(portal)
             {
                 plazaServiceName.text=Loc.T("복귀 포탈");plazaNpcName.text="";
                 plazaServiceDetail.text=Loc.F("균열 {0:00}단계 · 이전 전투를 이어갑니다.",game.Store.Data.suspendedRun.stage);
-                plazaActionText.text=Loc.T("균열로 복귀");plazaInteract.gameObject.SetActive(true);
+                plazaActionText.text=Loc.T("균열로 복귀");
             }
             else if(near.HasValue)
             {
                 var s=TownLayout.Station(near.Value);plazaServiceName.text=Loc.T(s.name);plazaNpcName.text=Loc.T(s.npcName);plazaServiceDetail.text=Loc.T(s.service);plazaActionText.text=Loc.T(s.action);
-                bool merchant=near.Value==TownStation.Merchant||near.Value==TownStation.Gambler;plazaInteract.gameObject.SetActive(!merchant);plazaBuy.gameObject.SetActive(merchant);plazaSell.gameObject.SetActive(merchant);
             }
             if(!portal&&npc!=null&&!npc.Station.HasValue)
             {plazaServiceName.text=Loc.T(npc.Role);plazaNpcName.text=Loc.T(npc.name);plazaServiceDetail.text="";}

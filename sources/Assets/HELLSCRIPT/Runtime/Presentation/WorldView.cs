@@ -74,7 +74,7 @@ namespace Hellscript
         public void BuildDungeon(RunState run)
         {
             if(Isolated){BuildPreviewArena(run);return;}
-            ClearDungeon();presentedRunId=run.id;world=new GameObject("Rift Runtime");
+            ResumeCamera();ClearDungeon();presentedRunId=run.id;world=new GameObject("Rift Runtime");
             // Field = theme until RiftLayout.Field lands; apply before the fog view forces its black background.
             if(run.layout.legacy)lighting.ApplyLegacy(run.theme);else lighting.Apply(run.layout.Field);
             InitializeRiftVisibility(run);

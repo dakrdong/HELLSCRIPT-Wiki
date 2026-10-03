@@ -15,8 +15,6 @@
 이제 원하는 무기를 골라 자유롭게 룬을 배치해 보세요. 다른 무기로 바꾸며 편집해도 마지막에는 저장을 눌러 주세요.	Now choose any weapon and arrange your runes freely. You can edit several weapons; remember to press Save when you finish.
 자유롭게 배치하기	Arrange Runes Freely
 먼저 룬 마스터의 안내에 따라 룬 블럭 세트를 받으세요.	Follow the Rune Master's instructions to claim your Rune Block Set first.
-게스트로 시작하고 이 브라우저에서 이어서 플레이하세요.	Start as a guest and continue in this browser.
-웹 게스트 · 이 브라우저에 저장됩니다.	Web guest · Saved in this browser.
 # HELLSCRIPT English text. One entry per line: the Korean source string, a tab, the
 # translation. Escapes: \n newline, \t tab, \\ backslash. Lines starting with # are notes.
 # Generated for the language setting; a new language is another file beside this one.
@@ -350,6 +348,9 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 공격 예고 시작	Attack telegraph started
 공격 위치 확보	Securing an attack position
 공격 위치로 이동	Moving to the attack position
+공격이 끝날 때까지 안전 위치에서 대기	Holding a safe position until the attack ends
+회피한 공격이 끝날 때까지 안전 위치를 유지합니다.	Hold the safe position until the avoided attack ends.
+기존 안전 위치로 이동을 마칩니다.	Complete the move to the chosen safe position.
 공격 준비	Attack incoming
 공격 중 회피	Dodging mid attack
 공격 진입|생존 이탈|둘 다	Enter to attack|Escape to survive|Both
@@ -1937,7 +1938,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 현재 보행 속도로 이동할 수 없습니다.	It cannot move at the current walking speed.
 현재 보호막 {0:0} · 최대 HP {1:0}	Shield {0:0} · Max HP {1:0}
 현재 비교의 훈련 결과가 아닙니다.	That training result does not belong to this comparison.
-현재 빌드는 로컬 개발용입니다. 실제 서버·계정·결제는 연결되지 않았으며, 보석과 일부 특수 효과는 추가 구현 대상입니다.	This build is for local development. No real server, account or payment is connected, and gems and some special effects are still to be implemented.
 현재 사냥 설정과 장비 장착은 바뀌지 않습니다.	Your current hunt settings and equipped gear do not change.
 현재 설정 참조	Referenced by the current setup
 현재 설정·프리셋 참조	Referenced by the current setup or a preset
@@ -2621,7 +2621,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 금지된 기록이 깨어난다	THE FORBIDDEN SCRIPT AWAKENS
 재가 된 성소에서, 다시 깨어나라.	Awaken once more in a sanctuary of ash.
 계정 로그인	Account login
-게스트로 계속	Continue as guest
 서버 선택	Select server
 로그인하거나 게스트로 시작하세요.	Sign in or continue as a guest.
 로그아웃	Sign out
@@ -2766,22 +2765,16 @@ CC 지속시간 -{0:0.##}%	CC duration -{0:0.##}%
 {0} · {1} 예고: {2:0.0}초 후 · 목표 위치 ({3:0.0}, {4:0.0})	{0} telegraphs {1}: in {2:0.0}s · aim ({3:0.0}, {4:0.0})
 {0} 격노: 강화된 공격에 주의하세요.	{0} enrages: watch for empowered attacks.
 {0} 공격 중단: {1}	{0} attack interrupted: {1}
-Google 계정	Google account
 Google로 계속	Continue with Google
 진행 상황은 현재 기기에 저장됩니다.	Progress is saved on this device.
 진행 상황 선택	Choose your progress
-이 기기의 게스트 진행 상황을 Google 계정에 연결하거나 새 게임을 시작할 수 있습니다. 진행 상황은 현재 기기에 저장됩니다.	Link this device’s guest progress to your Google account, or start a new game. Progress is saved on this device.
-게스트 진행 상황 연결	Link guest progress
 새 게임으로 시작	Start a new game
 계정 저장을 열지 못했습니다. 기존 저장은 보존했습니다. 다시 시도해 주세요.	Could not open the account save. Your existing save is preserved. Please try again.
 Google 로그인 준비 중…	Preparing Google sign-in…
 브라우저에서 Google 로그인을 완료한 뒤 게임으로 돌아오세요.	Complete Google sign-in in your browser, then return to the game.
 계정을 확인하고 있습니다…	Verifying your account…
-Google 로그인 설정을 준비하고 있습니다. 게스트로 시작할 수 있습니다.	Google sign-in is not available yet. You can continue as a guest.
 Google 로그인을 취소했습니다.	Google sign-in was cancelled.
 로그인 시간이 지났습니다. 다시 시도해 주세요.	Sign-in has expired. Please try again.
-Google 로그인에 실패했습니다. 연결을 확인하고 다시 시도해 주세요.	Google sign-in failed. Check your connection and try again.
-Google 계정으로 로그인하거나 게스트로 시작하세요.	Sign in with Google or continue as a guest.
 
 사냥 대기 중	Waiting to hunt
 귀환 포털	Return portal
@@ -3471,6 +3464,45 @@ v3 저장 형식이 아닙니다.	Not a v3 save format.
 이곳의 플레이어블 가이드는 연습용 보드예요. 받은 룬과 실제 무기의 배치는 바뀌지 않아요.	This playable guide uses a practice board. It will not change your reward runes or your actual weapon layouts.
 이번 단계 연습하기	Practice This Step
 이번 단계의 완료를 저장하지 못했어요. 다음을 다시 눌러 주세요.	This step could not be saved. Please press Next again.
+# Account authentication and play observations
+Google 로그인 설정을 준비하고 있습니다. 아이디로 로그인할 수 있습니다.	Google sign-in is being configured. You can sign in with your username.
+Google 연동	Link Google
+Google 연동 완료 · 같은 계정과 캐릭터를 사용합니다.	Google linked. Your account and characters are unchanged.
+Google 연동은 같은 계정 UID를 유지합니다. 다른 계정에 연결된 Google 계정은 합치거나 덮어쓰지 않습니다.	Linking Google keeps your account UID. A Google identity owned by another account cannot be merged or overwritten.
+UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 아닙니다. 캐릭터 진행은 현재 기기에 저장됩니다.	The UID is a support reference. It cannot sign you in or reset your password. Character progress is saved on this device.
+가입하고 이어 하기	Create account and continue
+게스트도 계정을 만듭니다. 가입하면 이 기기의 기존 게스트 캐릭터·진행·대기 로그를 그대로 이어갑니다.	Guests also create an account. Registration keeps this device’s guest characters, progress and pending logs.
+게스트도 아이디·비밀번호로 계정을 만든 뒤 시작합니다. 기존 저장은 가입할 때 이어집니다.	Guests create an account with a username and password before playing. Registration keeps the existing save.
+계정	Account
+계정 UID와 플레이 시간·진행·재화 소비·전투 기록을 게임 서버에 보냅니다. 외부 차트에는 익명 집계만 사용합니다. 이메일 복구는 없으니 아이디·비밀번호를 보관하거나 가입 후 Google을 연동하세요.	Your account UID, play time, progress, currency spending and combat logs are sent to the game server. External charts use anonymous totals. There is no email recovery. Keep your credentials or link Google after registration.
+계정 만들기	Create account
+계정 서버 준비 중입니다. 저장은 보존되며 나중에 다시 시도할 수 있습니다.	The account service is not ready. Your save is preserved; please try again later.
+계정 설정 본문	Account settings content
+계정 인증과 플레이 기록은 게임 서버에 연결됩니다. 캐릭터 진행은 현재 기기에 저장됩니다. 기기 저장을 지우면 계정 UID만으로 진행을 복구할 수 없습니다.	The game server handles authentication and play logs. Character progress stays on this device. An account UID alone cannot restore progress after device storage is cleared.
+계정을 만들고 있습니다…	Creating your account…
+기존 게스트 진행 이어 하기	Continue existing guest progress
+로그인	Sign in
+로그인에 실패했습니다. 연결을 확인하고 다시 시도해 주세요.	Sign-in failed. Check your connection and try again.
+로그인하면 문의 UID가 표시됩니다.	Sign in to see your support UID.
+먼저 계정에 다시 로그인해 주세요. 현재 저장은 보존됩니다.	Please sign in again first. Your current save is preserved.
+문의 UID 복사	Copy support UID
+브라우저의 팝업을 허용한 뒤 다시 시도해 주세요.	Allow browser popups and try again.
+비밀번호	Password
+수집 대기 · 플레이 이벤트 {0}개 / 전투 기록 {1}개	Pending uploads: {0} play events / {1} combat logs
+시도가 많습니다. 잠시 후 다시 시도해 주세요.	Too many attempts. Please wait and try again.
+아이디	Username
+아이디·비밀번호로 로그인하세요. 세션은 12시간이며 게임을 다시 열면 로그인합니다.	Sign in with your username and password. Sessions last 12 hours. Sign in again when reopening the game.
+아이디·비밀번호를 확인해 주세요. 가입 결과가 불확실하면 같은 정보로 로그인을 시도해 주세요.	Check your username and password. If registration was interrupted, try signing in with the same credentials.
+아이디는 영문·숫자·밑줄 3~24자, 비밀번호는 15~128자로 입력하세요.	Use 3–24 letters, numbers or underscores for your username, and 15–128 characters for your password.
+아이디로 로그인하거나 계정을 만드세요.	Sign in with your username or create an account.
+이 Google 계정은 다른 게임 계정에 연결되어 있습니다. 두 계정과 캐릭터를 보존했습니다. 다른 Google 계정을 선택하세요.	This Google identity belongs to another game account. Both accounts and their characters are preserved. Choose another Google account.
+이 기기의 기존 게스트 진행을 계정에 연결하거나 이 계정의 새 기기 저장으로 시작할 수 있습니다. 다른 계정의 저장은 합치거나 덮어쓰지 않습니다. 진행은 현재 기기에 저장됩니다.	You can connect this device’s guest progress or start a new device save for this account. Saves owned by another account cannot be merged or overwritten. Progress stays on this device.
+이미 계정이 있어요 · 로그인	Already have an account? Sign in
+처음이에요 · 계정 만들기	New here? Create an account
+플레이 시간은 화면이 보이는 동안의 시간입니다. 전투 상황 시간과 균열 시뮬레이션 시간은 별도로 기록합니다.	Play time counts time while the game is visible. Combat action time and rift simulation time are recorded separately.
+브라우저에 계정 저장을 확인하고 있습니다…	Confirming the account save in your browser…
+브라우저 저장을 확인하지 못했습니다. 기존 저장은 보존되며 같은 계정으로 다시 시도할 수 있습니다.	Browser storage could not be confirmed. Your existing save is preserved. Try again with the same account.
+
 # --- composed at runtime; no source literal holds these ---
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
@@ -6421,3 +6453,15 @@ HP가 낮은 적 마무리	Finish low-HP enemies
 설정하러 가기	Go to settings
 반복 설정은 균열 15레벨 부터 가능합니다	Repeat settings unlock at Rift level 15.
 반복 설정	Repeat settings
+
+# Historical wording retained for older stored messages
+게스트로 시작하고 이 브라우저에서 이어서 플레이하세요.	Start as a guest and continue in this browser.
+웹 게스트 · 이 브라우저에 저장됩니다.	Web guest · Saved in this browser.
+현재 빌드는 로컬 개발용입니다. 실제 서버·계정·결제는 연결되지 않았으며, 보석과 일부 특수 효과는 추가 구현 대상입니다.	This build is for local development. No real server, account or payment is connected, and gems and some special effects are still to be implemented.
+게스트로 계속	Continue as guest
+Google 계정	Google account
+이 기기의 게스트 진행 상황을 Google 계정에 연결하거나 새 게임을 시작할 수 있습니다. 진행 상황은 현재 기기에 저장됩니다.	Link this device’s guest progress to your Google account, or start a new game. Progress is saved on this device.
+게스트 진행 상황 연결	Link guest progress
+Google 로그인 설정을 준비하고 있습니다. 게스트로 시작할 수 있습니다.	Google sign-in is not available yet. You can continue as a guest.
+Google 로그인에 실패했습니다. 연결을 확인하고 다시 시도해 주세요.	Google sign-in failed. Check your connection and try again.
+Google 계정으로 로그인하거나 게스트로 시작하세요.	Sign in with Google or continue as a guest.

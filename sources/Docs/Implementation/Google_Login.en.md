@@ -1,10 +1,10 @@
 # Google sign-in and device-local account saves
 
-Updated: 2026-10-01
+Updated: 2026-10-03
 
 [한국어](Google_Login.md) · [Server operations](Live_Operations.en.md)
 
-Google sign-in replaces the title screen's mock username/password form. Guest entry remains available. After server verification, the player selects a character; new accounts follow the existing first-game tutorial.
+This documents existing Google authentication and production evidence through 2026-10-01. See [Account UID and player-event analytics](Player_Accounts_Analytics.en.md) for the local username/password registration, guest-save ownership, Google linking, web collection and approval gates. New ordinary builds also require guests to create accounts; this extension is not yet reported as activated in production.
 
 **This implementation provides identity verification and separate saves on the current device.** It does not upload guest progress, synchronize cloud saves or restore another device's progress. A Google player session grants neither operations-tool access nor QA telemetry permissions.
 
@@ -32,7 +32,7 @@ Each game launch starts at the sign-in screen. Game sessions stay in memory for 
 | Returning account | Open the existing binding; never overwrite it with another guest. |
 | Invalid index or failed save | Stop entry and preserve originals. Do not silently fall back to a guest after losing account ownership information. |
 
-The registry rejects duplicate accounts/directories, path traversal, missing fields and unsupported versions. Writes use an exclusive lock, temporary file, atomic replacement and backup. Language, text size, audio and display settings remain device preferences. Account changes reset tutorial, attendance and offline-supply view caches and switch the combat archive target.
+The registry rejects duplicate accounts/directories, path traversal, missing fields and unsupported versions. Writes use an exclusive lock, temporary file, atomic replacement and backup. Language, audio and display settings remain device preferences; adjustable text size is retired. Account changes reset tutorial, attendance and offline-supply view caches and switch the combat archive target.
 
 ## Authentication and configuration
 
@@ -58,12 +58,12 @@ The existing title adapter owns the full screen before gameplay. Its login modal
 
 - Server unit tests cover exchange, cancellation, expiry, replay, incorrect PKCE/cookies, and official verification rejection for invalid signatures, audiences, issuers, expiry and nonce. Test Google responses/certificates are fixtures, not evidence of a real account login.
 - Unity Edit Mode checks directory ownership, restart, actual `GameStore` separation, exact callback/state checks, title entry, translations, and idempotent mobile manifest registration.
-- `RuntimeTitleSmoke` checks actual macOS rendering and pointer interaction at 440×956, 956×440, PC 16:9, 16:10 and 21:9 in Korean/English at 100%/140% text size.
+- `RuntimeTitleSmoke` checks actual macOS rendering and pointer interaction at 440×956, 956×440, PC 16:9, 16:10 and 21:9 in Korean/English at default text size only. The 140% captures below are historical evidence from the retired text-size feature.
 - `RuntimeGoogleLoginSmoke` performs two real Google logins to verify guest linking, sign-out, fresh guest isolation, returning-account progress and actual gameplay entry. There is no identity injection or authentication bypass. Development-only `-hellscriptAuthBrowserHandoff` writes the browser launch URL to a separate file for controlled browser testing.
 
 [PR #12](https://github.com/dakrdong/HELLSCRIPT/pull/12) was merged into `main`, and the Google credentials were registered with the existing Railway service on 2026-09-26. Commit `64a9a18a` aligns the email scope with the canonical name returned by Google; deployment `8b2ba0b3-0815-43a6-9da9-1ef3dc9bced7` succeeded. Two real Google logins from the macOS game verified guest linking, sign-out, fresh guest isolation, returning-account progress and Mage gameplay entry. [Live authentication evidence](../../Artifacts/Validation/GoogleLogin/real-google/acceptance.json) · [Native runtime result](../../Artifacts/Validation/GoogleLogin/real-google/validation.txt)
 
-## Verification for this change
+## Historical verification for the 2026-09-26 build
 
 | Check | Result |
 | --- | --- |

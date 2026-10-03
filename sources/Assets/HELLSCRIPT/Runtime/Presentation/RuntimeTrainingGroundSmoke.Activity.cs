@@ -126,6 +126,10 @@ namespace Hellscript
             Require(JsonUtility.ToJson(review)==JsonUtility.ToJson(restored),"Completed activity did not survive file reload");
             File.WriteAllText(Path.Combine(output,"final-feedback.json"),JsonUtility.ToJson(feedback,true));
             File.WriteAllText(Path.Combine(output,"final-activity-samples.json"),"["+string.Join(",",review.activityHistory.Select(s=>JsonUtility.ToJson(s)))+"]");
+            // The synthetic stage-15 result gate must also satisfy the real account-level repeat-tab gate.
+            var originalClears=game.Store.Data.heroes.Select(hero=>hero.highestClear).ToArray();
+            game.Store.Data.Hero.highestClear=System.Math.Max(game.Store.Data.Hero.highestClear,RepeatHunt.SettingsUnlockStage);
+            Require(RepeatHunt.SettingsUnlocked(game.Store.Data),"Repeat shortcut fixture has not unlocked the account repeat tab.");
             foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{2100,900}})
             foreach(string language in new[]{"ko","en"})
             {
@@ -177,6 +181,8 @@ namespace Hellscript
                 Require(Loc.MissingCount==0,"Missing translations: "+string.Join(";",Loc.Missing));
                 proof.Add("PASS final activity and repeat shortcut "+tag+": saved battle curves/totals/shares, shared DPS, read-only graph, stage-14 configured lock and two-second expiry, stage-15/16 configured availability, compact stage-15 unconfigured pointer action and same-result return");
             }
+            for(int i=0;i<originalClears.Length;i++)game.Store.Data.heroes[i].highestClear=originalClears[i];
+            proof.Add("PASS synthetic result-stage gate with a repeat-unlocked account; original account clear levels restored, actual stage-1 review unchanged");
             proof.Add("PASS naturally completed Rift: final activity snapshot includes final tick and survives an actual saved-file reload; no combat totals/timestamps injected");
         }
     }

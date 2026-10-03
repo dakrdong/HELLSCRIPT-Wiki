@@ -5,7 +5,7 @@ namespace Hellscript
         // Keep the title flow separate from the in-game switch that deliberately abandons a run.
         public bool CommitEntryCharacter(int index)
         {
-            if(Running||UI.Page!="characters"||!UI.EntrySession.SignedIn)return false;
+            if(Running||UI.Page!="characters"||!UI.EntrySession.SignedIn||!AccountStorageReady)return false;
             return SaveEntryCharacter(index);
         }
         bool SaveEntryCharacter(int index)

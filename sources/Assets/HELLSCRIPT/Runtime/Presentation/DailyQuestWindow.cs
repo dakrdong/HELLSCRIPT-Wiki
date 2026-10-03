@@ -13,7 +13,7 @@ namespace Hellscript
             var session=new DailyQuestSession(store,readingScale,attendance);
             var view=ContentWindowView.Open(parent,"일일 퀘스트",EquipmentViewSource.Owned,readingScale,session.Render,closed,new Vector2(1200,1600));
             session.Countdown=view.gameObject.AddComponent<DailyQuestCountdown>();session.BindCountdown();
-            StoreViewBinding.Attach(view,store,view.Repaint);return view;
+            StoreViewBinding.Attach(view,store,view.Repaint,visibleState:()=>StoreViewBinding.Key(store.Data.dailyQuests));return view;
         }
     }
     sealed class DailyQuestSession

@@ -44,7 +44,7 @@ namespace Hellscript
             var go=new GameObject("Inventory",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
             go.transform.SetParent(parent,false);var canvas=go.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=310;
             var view=go.AddComponent<InventoryWindow>();view.store=store;view.catalog=catalog;view.font=font;view.readingScale=readingScale;view.closed=closed;view.equipmentChanged=equipmentChanged;
-            view.canvasRoot=(RectTransform)go.transform;view.atlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");view.ready=true;view.Reflow();ContentWindowHost.Attach(view,view.Escape);StoreViewBinding.Attach(view,store,view.RefreshCommittedView,()=>view.dialog==null||view.dialogKind=="wallet");return view;
+            view.canvasRoot=(RectTransform)go.transform;view.atlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");view.ready=true;view.Reflow();ContentWindowHost.Attach(view,view.Escape);StoreViewBinding.Attach(view,store,view.RefreshCommittedView,()=>view.ghost==null&&(view.dialog==null||view.dialogKind=="wallet"),view.DisplayKey);return view;
         }
         void Update()
         {
@@ -72,10 +72,13 @@ namespace Hellscript
             else if(kind=="potion")ShowPotionSettings();else if(kind=="potion-picker")ShowPotionPicker(potionSlotIndex);
             else if(kind=="wallet")ShowWallet();
             else if(filter!=null)ShowFilter(filter);
+            StoreViewBinding.Rendered(this);
         }
         void RememberScroll(){if(bagScroll!=null)bagOffset=bagScroll.content.anchoredPosition.y;}
         public void Repaint(){Repaint(false);}
-        void Repaint(bool resetScroll){CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Draw();}
+        void Repaint(bool resetScroll){CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Draw();StoreViewBinding.Rendered(this);}
+        string DisplayKey()=>string.Join("|",StoreViewBinding.EquipmentKey(store.Data),store.Data.gold,store.Data.premium,
+            store.Data.materials,store.Data.enhancementStones,StoreViewBinding.Key(store.Data.cores));
         void Draw()
         {
             var header=Panel(body,"Header",UiTheme.RaisedHex,UiTheme.PanelHex,UiTheme.BorderHex);Place(header,0,0,width,34);UiHeaderRule.Attach(header);

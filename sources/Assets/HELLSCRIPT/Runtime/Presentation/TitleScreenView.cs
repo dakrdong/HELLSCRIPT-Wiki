@@ -40,8 +40,8 @@ namespace Hellscript
             var seal=Rect("Sanctuary sigil",logoGroup);var ornament=seal.gameObject.AddComponent<TitleOrnament>();ornament.color=Gold;ornament.raycastTarget=false;
             tagline=Caption(logoGroup,"tagline","재가 된 성소에서, 다시 깨어나라.",15,Bone);
             home=Rect("Title entry controls",root);homeGroup=home.gameObject.AddComponent<CanvasGroup>();
-            login=GoogleButton(home,"title-login","Google로 계속",ShowLogin,14,1);
-            guest=ActionButton(home,"title-guest","게스트로 계속",GuestAction,false,15);
+            login=ActionButton(home,"title-login","로그인",ShowLogin,false,15);
+            guest=ActionButton(home,"title-guest","계정 만들기",GuestAction,false,15);
             server=ActionButton(home,"title-server","서버 선택",ShowServers,false,16);
             enter=ActionButton(home,"title-enter","캐릭터 선택하기",Enter,true,22);
             entryHint=Caption(home,"entry-hint","로그인하거나 게스트로 시작하세요.",12,Muted);
@@ -53,19 +53,13 @@ namespace Hellscript
         }
         void Refresh()
         {
-            SetCaption(login,Loc.T(Session.SignedIn&&!Session.Guest?"Google 계정":"Google로 계속"));
-            SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("게스트로 계속"));
+            SetCaption(login,Loc.T(Session.SignedIn&&!Session.Guest?"계정":"로그인"));
+            SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("계정 만들기"));
             guest.onClick.RemoveAllListeners();guest.onClick.AddListener(GuestAction);
             SetCaption(server,Loc.F("{0}   ·   {1}   ›",TitleSession.ServerNames[Session.Server],TitleSession.ServerStates[Session.Server]));
             SetCaption(motion,Loc.T(Session.MotionEnabled?"연출 켜짐":"연출 멈춤"));
             SetCaption(enter,Loc.T("캐릭터 선택하기"));
             entryHint.text=Loc.T("로그인 후 캐릭터를 선택합니다.");
-            if(Application.platform==RuntimePlatform.WebGLPlayer)
-            {
-                login.gameObject.SetActive(false);
-                entryHint.text=Loc.T("게스트로 시작하고 이 브라우저에서 이어서 플레이하세요.");
-                footnote.text=Loc.T("웹 게스트 · 이 브라우저에 저장됩니다.");
-            }
         }
         public Button Find(string id)
         {
@@ -80,11 +74,14 @@ namespace Hellscript
         void GuestAction()
         {
             if(Session.SignedIn){if(!game.SignOutAccount())game.UI.ShowToast(game.Notice);Refresh();return;}
-            if(!game.EnterAsGuest())game.UI.ShowToast(game.Notice);else game.Audio?.Play("flow.title_start");
+            if(game.OfflineQaEnabled){if(!game.EnterAsGuest())game.UI.ShowToast(game.Notice);return;}
+            ShowCredentials(true);
         }
         void Enter()
         {
-            if(!Session.SignedIn){if(Application.platform==RuntimePlatform.WebGLPlayer)GuestAction();else ShowLogin();return;}
+            if(game.AccountOwnershipBusy)return;
+            if(!Session.SignedIn){ShowLogin();return;}
+            if(!game.AccountStorageReady){game.UI.ShowToast(game.Notice);return;}
             game.Audio?.Play("flow.title_start");game.UI.OpenCharacterSelection();
         }
         void Update()
@@ -106,7 +103,10 @@ namespace Hellscript
         {
             var size=root.rect.size;if(!force&&size==lastSize)return;lastSize=size;
             bool portrait=size.y>size.x;
-            scale=Mathf.Clamp(Mathf.Min(size.x/(portrait?480:1180),size.y/(portrait?980:780)),1,1.65f);
+            // The parent canvas may shrink in a phone viewport. Preserve the title's existing
+            // 44-point targets in actual pixels, including credential and support-UID controls.
+            float minimum=1/Mathf.Max(.01f,root.GetComponentInParent<Canvas>().scaleFactor);
+            scale=Mathf.Max(minimum,Mathf.Clamp(Mathf.Min(size.x/(portrait?480:1180),size.y/(portrait?980:780)),1,1.65f));
             float w=size.x/scale,h=size.y/scale;
             // Use a bounded central column on PC; keep the same fixed controls in the lower portrait safe area.
             bool compact=!portrait&&h<570;
@@ -114,7 +114,6 @@ namespace Hellscript
             Fit(home,(w-column)/2,homeY,column,compact?182:214);home.localScale=Vector3.one*scale;
             float half=(column-10)/2;
             Put((RectTransform)login.transform,0,0,half,46);Put((RectTransform)guest.transform,half+10,0,half,46);
-            if(Application.platform==RuntimePlatform.WebGLPlayer)Put((RectTransform)guest.transform,0,0,column,46);
             Put((RectTransform)server.transform,0,56,column,54);
             Put((RectTransform)enter.transform,0,120,column,62);Put(entryHint.rectTransform,0,192,column,22);
             entryHint.gameObject.SetActive(!compact);

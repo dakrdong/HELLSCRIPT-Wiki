@@ -15,7 +15,7 @@ namespace Hellscript
         public void ShowCharacterSelection()
         {
             if(!titleSession.SignedIn){ShowTitle();return;}
-            game.Town?.Cancel();game.World.ClearDungeon();titleSession.CancelEntry();
+            game.Town?.Cancel();game.World.ClearDungeon();game.World.SuspendPresentation();titleSession.CancelEntry();
             pageRepaint=ShowCharacterSelection;Base("characters","HELLSCRIPT","캐릭터 선택하기",responsive:true);
             header.gameObject.SetActive(false);footer.gameObject.SetActive(false);
             headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);content.parent.gameObject.SetActive(false);

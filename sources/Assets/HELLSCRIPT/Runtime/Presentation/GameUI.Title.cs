@@ -8,7 +8,7 @@ namespace Hellscript
         public TitleScreenView TitleScreen {get;private set;}
         public void ShowTitle()
         {
-            game.Town?.Cancel();game.World.ClearDungeon();pageRepaint=ShowTitle;
+            game.Town?.Cancel();game.World.ClearDungeon();game.World.SuspendPresentation();pageRepaint=ShowTitle;
             Base("title","HELLSCRIPT","잿빛 숲 너머, 당신의 이야기가 시작됩니다",responsive:true);
             header.gameObject.SetActive(false);footer.gameObject.SetActive(false);
             headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);

@@ -49,6 +49,11 @@ namespace Hellscript
         }
         static Settings ReadSettings()
         {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            var args=Environment.GetCommandLineArgs();int index=Array.IndexOf(args,"-hellscriptServerBase");
+            if(Debug.isDebugBuild&&index>=0&&index+1<args.Length)
+                return new Settings{version=2,baseUrl=args[index+1],telemetryBaseUrl=args[index+1]};
+#endif
             var asset=Resources.Load<TextAsset>("Data/ServerConnection");
             if(asset==null)return null;
             try{return JsonUtility.FromJson<Settings>(asset.text);}
@@ -60,6 +65,7 @@ namespace Hellscript
             if(game.GoogleLogin?.Ready!=true||settings?.version!=2||
                 !TryServers(settings,Debug.isDebugBuild,out _,out var telemetry))return;
             game.Telemetry.Configure(new PlayerTelemetrySession(new Uri(telemetry,"v1/combat-runs"),()=>game.GoogleLogin.Session));
+            game.PlayerEvents.Configure(new Uri(telemetry,"v1/player-events"),game.GoogleLogin.Session.accountId);
             Status="player_telemetry_connected";
         }
         public static bool ValidateQaSession(QaSession session,Uri expectedBase,bool development)
@@ -71,12 +77,6 @@ namespace Hellscript
 
         public static void Configure(GameController game,string saveDirectory)
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            // This static-hosted guest edition uses the bundled game rules. Native OAuth
-            // callbacks and the operator server's same-origin API are not browser endpoints.
-            Status="web_local_guest";
-            return;
-#else
             Status="not_configured";
             var settings=ReadSettings();
             if(!TryServers(settings,Debug.isDebugBuild,out var server,out var telemetry))
@@ -100,7 +100,6 @@ namespace Hellscript
             }
             catch(Exception error) when(error is IOException||error is UnauthorizedAccessException||error is ArgumentException)
             {Status="qa_session_unavailable";}
-#endif
 #endif
         }
     }

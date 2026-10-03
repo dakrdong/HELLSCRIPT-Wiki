@@ -1,0 +1,33 @@
+{
+  "knownBaselineFailures": [
+    {
+      "name": "general",
+      "exception": "InvalidOperationException: Town build button missing"
+    },
+    {
+      "name": "characters",
+      "exception": "InvalidOperationException: PC 16:9 lineup KO: target below 44 validation pixels: characters-back"
+    },
+    {
+      "name": "npc-dialogue",
+      "exception": "InvalidOperationException: Wrong service turk-garbi page=plaza"
+    }
+  ],
+  "runnerSetupFailures": [
+    "Initial portal invocation omitted -hellscriptEvidencePath.",
+    "Initial reload evidence folder lacked the preceding town-checkpoint.json."
+  ],
+  "passed": [
+    "Idle runtime",
+    "Idle independent restart",
+    "Town portal with10 KO/EN viewport checks, save-failure retry and original-run resume",
+    "Town portal independent process restart"
+  ],
+  "pending": [],
+  "finalEditMode": {
+    "total": 5041,
+    "passed": 4913,
+    "existingFailures": 128,
+    "newFailures": 0
+  }
+}
