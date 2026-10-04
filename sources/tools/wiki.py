@@ -722,7 +722,8 @@ def build_edict_disclosures():
         for identifier in rule['ids']:
             condition=rule.get('condition','')
             summary='계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.' if condition!='retired' else '호환용 저장 값이며 게임 화면과 실습에서 공개하지 않습니다.'
-            rows.append(record(identifier,labels.get(identifier,identifier),'호환 보존' if condition=='retired' else rule.get('title','최초 안내'),summary,
+            category='호환 보존' if condition=='retired' else rule.get('title','반복 사냥' if condition=='rune-complete' else '최초 안내')
+            rows.append(record(identifier,labels.get(identifier,identifier),category,summary,
                 {'균열 단계':rule['stage'],'추가 조건':condition or '없음','안내 ID':rule.get('guide',''),'공개 규칙 버전':1},path,
                 refs=[source_ref(CORE+'HuntEdictProgression.cs')],related=['hunt-edict-progression','hunt-edict-progression.en']))
     if len(rows)!=152 or len({r['id'] for r in rows})!=152:raise ValueError('Disclosure census must contain 152 unique global options')

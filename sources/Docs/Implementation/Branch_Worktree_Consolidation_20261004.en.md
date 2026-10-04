@@ -1,5 +1,7 @@
 # 2026-10-04 branch and worktree consolidation
 
+Updated: 2026-10-04
+
 [Korean](Branch_Worktree_Consolidation_20261004.md)
 
 At the user's request, the uncommitted Hunt Edict progression and starter comparison tutorial were preserved in `93d59959`, fast-forwarded into the primary `main` and pushed. The remaining skill and remote branch commits were already in `main`; ancestry was verified before deletion.
