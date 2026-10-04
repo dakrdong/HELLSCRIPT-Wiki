@@ -83,6 +83,7 @@ namespace Hellscript
             var def=State.potions.version==0?PotionCatalog.Get("PH01"):ReadyPotion("hp");
             float before=State.health;State.health=Mathf.Min(Stats.hp,State.health+Stats.hp*def.magnitude*Stats.healing*Stats.potionHealing);
             if(State.health<=before)return false;
+            if(IsTutorial&&State.tutorialFlowVersion==3&&State.tutorialPhase==ProloguePhase.Showdown&&threshold==60){State.tutorialLessonStep=5;State.potions.uses++;}
             CombatTelemetry.Support(State.statistics,def.id,SkillResultMetric.Healing,State.health-before);
             State.potionCd=State.potions.hpTotal=RunePotionCooldown(def.cooldown);
             if(State.potions.version>0)ConsumePotion(def);

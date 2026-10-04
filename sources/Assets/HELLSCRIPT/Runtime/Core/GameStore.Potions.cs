@@ -34,7 +34,7 @@ namespace Hellscript
                 if(!Enum.IsDefined(typeof(PotionFallback),fallback))throw new ArgumentException("Invalid potion fallback.");
                 hero.potions.fallback=fallback;hero.potions.fallbackVersion=1;hero.potions.revision++;return true;
             });
-        public bool PreparePotions(string heroId,string visit,string replaceRunId=null)
+        public bool PreparePotions(string heroId,string visit,string replaceRunId=null,bool manual=false)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Hellscript
                 if(replaceRunId!=null&&!replacing||Data.suspendedRun!=null&&!RepeatHunt.Terminal(Data.suspendedRun)&&!replacing)
                     throw new InvalidOperationException("물약 구매는 성소에서만 가능합니다.");
                 var staged=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(Data));var candidate=staged.heroes.Single(h=>h.id==heroId);
-                var policy=PotionPolicy.Resolve(hero);string before=JsonUtility.ToJson(hero.potions);
+                var policy=PotionPolicy.Resolve(hero);if(manual)policy.autoBuy=true;string before=JsonUtility.ToJson(hero.potions);
                 PotionRestock.Apply(staged,candidate,visit,policy);
                 if(staged.gold==Data.gold&&before==JsonUtility.ToJson(candidate.potions)){Error="";return true;}
                 return Transact("potions:"+Guid.NewGuid().ToString("N"),"potions:"+heroId+":"+visit,a=>

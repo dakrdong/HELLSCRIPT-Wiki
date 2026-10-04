@@ -279,7 +279,7 @@ namespace Hellscript.Tests
         [Test]
         public void SavedUnclaimedBossItemsStayFixedAfterRecordChangesRestoreAndRepeatedCollection()
         {
-            var store = new GameStore(directory, catalog);
+            var store = new GameStore(directory, catalog);ContentTestAccounts.ReleasedAccess(store.Data);
             var sim = Fixture(10, out _, store.Data);
             sim.Hero.highestClear = 50;
             sim.State.rewardRng = DistinguishingSeed(RiftRewardSource.Boss);

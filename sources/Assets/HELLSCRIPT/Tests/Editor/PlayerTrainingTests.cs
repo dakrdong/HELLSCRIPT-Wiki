@@ -108,7 +108,7 @@ namespace Hellscript.Tests
             string directory=Path.Combine(Path.GetTempPath(),"hellscript-training-"+Guid.NewGuid().ToString("N"));
             try
             {
-                var store=new GameStore(directory);var expected=store.Data.Hero.build.Copy();expected.distance=5.5f;
+                var store=new GameStore(directory);ContentTestAccounts.ReleasedAccess(store.Data);var expected=store.Data.Hero.build.Copy();expected.distance=5.5f;
                 while(store.Data.Hero.presets.Count<=slot)store.Data.Hero.presets.Add(null);store.Data.Hero.presets[slot]=expected;
                 Assert.IsTrue(store.Save());var restored=new GameStore(directory);
                 for(int n=0;n<slot;n++){Assert.IsTrue(restored.Data.Hero.presets[n].emptySlot);Assert.IsFalse(BuildEditing.HasPreset(restored.Data.Hero.presets[n]),"Empty slot "+n);}
@@ -123,7 +123,7 @@ namespace Hellscript.Tests
             string directory=Path.Combine(Path.GetTempPath(),"hellscript-training-"+Guid.NewGuid().ToString("N"));
             try
             {
-                var store=new GameStore(directory);var build=new BuildConfig{ruleSchema=legacy?0:BehaviorRules.Version,name="명시한 설정"};
+                var store=new GameStore(directory);ContentTestAccounts.ReleasedAccess(store.Data);var build=new BuildConfig{ruleSchema=legacy?0:BehaviorRules.Version,name="명시한 설정"};
                 if(legacy)build.rules.Add(new Rule(0));store.Data.Hero.presets[0]=build;Assert.IsTrue(store.Save());
                 var loaded=new GameStore(directory).Data.Hero.presets[0];Assert.IsNotNull(loaded);Assert.AreEqual("명시한 설정",loaded.name);
                 Assert.AreEqual(BehaviorRules.Version,loaded.ruleSchema);if(legacy)Assert.IsTrue(loaded.rules.Any(r=>r.skill==0));else Assert.IsEmpty(loaded.rules);

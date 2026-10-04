@@ -21,6 +21,7 @@ namespace Hellscript
         {Note(content,text,size,Mathf.Max(82,text.Split('\n').Sum(s=>Mathf.Max(1,Mathf.CeilToInt(s.Length/28f)))*(size+7)+30),color??pale);}
         public void ShowComparisonPicker()
         {
+            if(!HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Details))return;
             classPractice=false;
             if(!RequireContent(ContentUnlocks.Train))return;
             pageRepaint=()=>ShowComparisonPicker();Base("comparison-picker","훈련 A/B 비교","같은 캐릭터로 행동·소유 장비의 차이를 확인합니다");

@@ -49,7 +49,9 @@ namespace Hellscript
                 State.layout.rooms.Add(new RiftRoom{index=0,position=Vector2.zero,size=new Vector2(16,16),role=RiftRoomRole.Entrance});
                 State.position=previewScenario.hero;
             }
-            if(fresh&&IsTutorial){State.layout=TutorialMap();State.position=State.layout.start;}
+            if(fresh&&IsTutorial)
+            {State.layout=TutorialMap();State.position=State.layout.start;
+                if(!HuntEdictProgression.Legacy(account)){State.tutorialFlowVersion=3;State.layout.fingerprint=ProloguePhase.ProgressiveFingerprint;}}
             if(fresh&&State.training<0)
             {
                 State.layout=RiftGenerator.Generate(State.rng,State.id,State.stage,Hero.heroClass,Hero.lastRiftFingerprint,Hero.lastRiftBoss,forcedObjective:forcedObjective,tuning:Tuning);

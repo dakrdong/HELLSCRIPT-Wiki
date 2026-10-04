@@ -1,0 +1,105 @@
+{
+  "sourceBase": "49a02d60",
+  "status": "source-integration-with-explicit-native-gaps",
+  "updatedUtc": "2026-10-04T12:06:26.001274+00:00",
+  "editMode": {
+    "final-editmode": {
+      "total": 5147,
+      "passed": 5065,
+      "failed": 82,
+      "skipped": 0,
+      "durationSeconds": 2341.9609918,
+      "startedUtc": "2026-10-04 05:19:54Z",
+      "finishedUtc": "2026-10-04 05:58:56Z",
+      "report": "final-editmode.xml"
+    },
+    "repair-editmode": {
+      "total": 158,
+      "passed": 156,
+      "failed": 2,
+      "skipped": 0,
+      "durationSeconds": 92.8686131,
+      "startedUtc": "2026-10-04 06:08:22Z",
+      "finishedUtc": "2026-10-04 06:09:54Z",
+      "report": "repair-editmode.xml"
+    },
+    "policy-repair": {
+      "total": 32,
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 25.4248181,
+      "startedUtc": "2026-10-04 06:13:23Z",
+      "finishedUtc": "2026-10-04 06:13:49Z",
+      "report": "policy-repair.xml"
+    },
+    "remainingOriginalFailures": [],
+    "originalFailuresResolved": 82,
+    "rank-boundary-editmode": {
+      "total": 31,
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 25.256451,
+      "report": "rank-boundary-editmode.xml"
+    },
+    "hero-level-boundary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 0.9933732,
+      "report": "hero-level-boundary.xml"
+    }
+  },
+  "static": {
+    "sharedUiContract": "pass",
+    "sharedUiContractTests": "11 passed",
+    "refreshStability": "pass; 12 guarded bindings, 156 inventoried UI sources",
+    "runtimeCompilation": {
+      "result": "pass",
+      "exitCode": 0,
+      "sourceFiles": 711,
+      "method": "Unity 6000.6 bundled Roslyn and installed dependency response file; no Editor or player startup"
+    }
+  },
+  "native": {
+    "status": "QA ended; no new game tests started for consolidation",
+    "measuredSamePlatformPlayerBytes": [
+      567685593,
+      584198794,
+      584297862
+    ],
+    "actualPointerAndRenderedLayouts": "Warrior starter lesson: actual synthetic input and five KO/EN viewport pairs verified; town and entry paths incomplete",
+    "build": "Previous development player succeeded with 0 compiler/build errors; retained binary predates arrival-order source repair",
+    "verifiedSoFar": [
+      "Learned and equipped the actual first skill, A/B actions and saved B checkpoint",
+      "Restored B in another process; saved final A and applied it to actual combat",
+      "KO/EN five resolution profiles, live gate translation and playback not covered by narration",
+      "Actual HP 40 to 60 numeric-field save",
+      "Actual automatic HP potion use followed by boss defeat and the existing 1000-gold completion transaction; mapComplete saved"
+    ],
+    "remaining": "Native rerun of town-arrival popup ordering after the source repair; town/entry/manual-restock/refresh interaction and Ranger/Mage native cases. User requested no new game tests during consolidation.",
+    "arrivalFailure": {
+      "evidence": "native-arrival-failure.txt",
+      "cause": "Attendance auto-popup opened during ToTown and prevented arrival dialogue",
+      "sourceRepair": "Keep the existing cinematic active through town handoff; shared automatic-popup suppression checks cinematic Busy",
+      "repairVerification": "Runtime C# compilation only; not executed in a new player"
+    }
+  },
+  "wiki": {
+    "sourceDocs": "KO and EN integrated in main",
+    "verificationOwner": "Final branch/worktree consolidation; terminal build/Pages/browser results are retained in the consolidation deployment evidence",
+    "publicUrl": "https://dakrdong.github.io/HELLSCRIPT-Wiki/#/tree"
+  },
+  "unverified": [
+    "physical mobile",
+    "new-player comprehension and disclosure cadence",
+    "matched before/after performance"
+  ],
+  "cleanup": {
+    "legacySummary": "Test apps 193 and generated support directories 184 removed; observed free-space increase 56.1 GB, with APFS and concurrent-write caveat.",
+    "reports": "Original Artifacts/Validation/EdictProgression/BuildCleanup20261004",
+    "currentPlayer": "Retained failure reproduction player: 584283049 bytes, owner tutorial task, review 2026-10-11. Managed worktree archived; source and task evidence preserved in primary project."
+  }
+}

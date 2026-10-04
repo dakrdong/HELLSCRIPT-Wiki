@@ -27,6 +27,7 @@ namespace Hellscript
         }
         public void PreviewSkillPreset(string id)
         {
+            if(id==HuntEdictQuickPresets.Custom?ProgressivePrologue||!HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details):!SkillChoiceDisclosed(SkillPolicyScope,id))return;
             if(id!=HuntEdictQuickPresets.Custom&&!HuntEdictQuickPresets.For(SkillPolicyScope).Any(p=>p.id==id))throw new ArgumentException("Unknown preview preset.");
             previewSkillPresets[SkillPolicyScope]=id;offsets[ScrollKey]=0;mainScroll=null;Repaint();
         }
@@ -63,8 +64,8 @@ namespace Hellscript
             }
             else Text(parent,SkillName(policySkill),x+backWidth+8*Grow,y,w-backWidth-16*Grow,heading,12,gold);
             var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+6,w,100);
-            var presets=HuntEdictQuickPresets.For(scope);
-            var ids=presets.Select(p=>p.id).Concat(new[]{HuntEdictQuickPresets.Custom}).ToArray();
+            var presets=HuntEdictQuickPresets.For(scope).Where(p=>SkillChoiceDisclosed(scope,p.id)).ToArray();
+            var ids=presets.Select(p=>p.id).Concat(!ProgressivePrologue&&HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details)?new[]{HuntEdictQuickPresets.Custom}:Array.Empty<string>()).ToArray();
             int columns=landscape?ids.Length:2,rows=(ids.Length+columns-1)/columns;
             float cell=w/columns,tabHeight=34*Grow;
             var buttons=new List<Button>();
@@ -133,9 +134,11 @@ namespace Hellscript
                     layout.childControlWidth=true;layout.childForceExpandWidth=true;layout.childControlHeight=true;layout.childForceExpandHeight=false;
                     Paragraph(information,usingShown?"변경 즉시 저장":"미리보기",descriptionWidth-10,10,usingShown?UiTheme.Success:muted);
                     Paragraph(information,preset.Description,descriptionWidth-10,12,textColor);
-                    DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth-10);
+                    if(!ProgressivePrologue)DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth-10);
+                    else Paragraph(information,"실제 초반 영웅의 복사본 · 동일한 시작 조건 · 1배속 10초 · 연습 결과는 저장되지 않습니다.",descriptionWidth-10,10,muted);
                     artH=sideBySide?Mathf.Max(150*Grow,plateH-actions-12):Mathf.Max(150*Grow,artW*.70f);
                     DrawCombatPreview(row,information,descriptionWidth-10,policySkill,shown,artX,artY,artW,artH);
+                    DrawStarterControls(information,descriptionWidth-10);
                     LayoutRebuilder.ForceRebuildLayoutImmediate(information);descriptionHeight=LayoutUtility.GetPreferredHeight(information)+10;
                     Place(information,5,5,descriptionWidth-10,descriptionHeight);
                     if(!sideBySide)

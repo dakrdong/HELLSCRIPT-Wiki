@@ -15,7 +15,7 @@ namespace Hellscript.Tests
         HeroSave Hero=>store.Data.Hero;
         [SetUp] public void Setup()
         {
-            directory=Path.Combine(Path.GetTempPath(),"potion-loadout-"+Guid.NewGuid().ToString("N"));store=new GameStore(directory);
+            directory=Path.Combine(Path.GetTempPath(),"potion-loadout-"+Guid.NewGuid().ToString("N"));store=new GameStore(directory);ContentTestAccounts.ReleasedAccess(store.Data);
             catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();Hero.potions.Activate();
             Hero.potions.Set("PU01",3);Hero.potions.Set("PU02",3);Hero.potions.Set("PU05",3);
         }

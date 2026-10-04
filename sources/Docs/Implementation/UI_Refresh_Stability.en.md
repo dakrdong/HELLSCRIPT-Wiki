@@ -87,3 +87,8 @@ Branch `codex/ui-refresh-stability` starts at **14735105**. Integrate with CPU b
 The whole-tree 14735105..ff300129 comparison also differs in AttendanceWindow, ContentWindowView, EquipmentShopWindow and UiButton because other main UI work arrived after common ancestor **94e11019**. Do not overwrite current files with the older branch's layouts/attendance/unavailable-click policy. Combine account **86e4dd87** and other active attendance work in final main. This branch performs no main merge, push or public deployment.
 
 Only newly found causes are added to [UI refresh recurrence rules](UI_Refresh_Stability_Rules.en.md); existing CPU guidance is not duplicated.
+
+
+## Hunt Edict progression, 2026-10-04
+
+HuntEdictWindow uses StoreViewBinding with hero, level, disclosed IDs, potion revision, edict/skills/presets and tutorial step keys. Dialogs and order dragging defer refresh; explicit repaint records the new baseline. Draft/focus/scroll follow the existing owners. The optional disclosure card uses StoryDialogueWindow. See [implementation and focused runtime coverage](Hunt_Edict_Progression.en.md). This row covers the changed editor and guidance paths, not all historical UI candidates.

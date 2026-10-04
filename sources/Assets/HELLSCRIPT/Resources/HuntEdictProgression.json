@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "stage": 0,
+      "condition": "",
+      "ids": [
+        "survival.potionHpPercent"
+      ]
+    },
+    {
+      "stage": 0,
+      "condition": "first-result",
+      "ids": [
+        "survival.potion"
+      ]
+    },
+    {
+      "stage": 3,
+      "condition": "",
+      "ids": [
+        "position.engage",
+        "position.mode",
+        "position.distanceSource",
+        "position.distance",
+        "position.clockwise",
+        "position.ownArea",
+        "position.surrounded",
+        "position.gather",
+        "position.gatherCount",
+        "position.addEnemies",
+        "position.gatherTime"
+      ],
+      "guide": "E03",
+      "title": "전투 거리와 포위 대응",
+      "body": "전투 위치 간편 설정을 하나 고르고 저장하세요. 다음 사냥에서 적과 유지하는 거리를 관찰하세요.",
+      "focus": "position.engage"
+    },
+    {
+      "stage": 4,
+      "condition": "",
+      "ids": [
+        "target.default",
+        "target.specialEnabled",
+        "target.specialOrder",
+        "target.interruptCaster",
+        "target.bossFight",
+        "target.switch"
+      ],
+      "guide": "E04",
+      "title": "공격 대상과 전환",
+      "body": "공격 대상 간편 설정을 하나 고르고 저장하세요. 다음 사냥에서 어떤 적을 먼저 공격하는지 관찰하세요.",
+      "focus": "target.default"
+    },
+    {
+      "stage": 5,
+      "condition": "",
+      "ids": [
+        "survival.lowHp",
+        "survival.lowHpPercent",
+        "survival.returnHpPercent",
+        "survival.defenseSkill",
+        "survival.escapeSkill"
+      ],
+      "guide": "E05",
+      "title": "낮은 HP 대응",
+      "body": "낮은 HP 대응을 고르고 저장하세요. 체력이 줄었을 때 후퇴와 복귀를 관찰하세요.",
+      "focus": "survival.lowHp"
+    },
+    {
+      "stage": 7,
+      "condition": "",
+      "ids": [
+        "loot.NORMAL",
+        "loot.MAGIC",
+        "loot.RARE",
+        "loot.LEGENDARY",
+        "loot.SET",
+        "loot.gold",
+        "loot.material",
+        "loot.gem",
+        "loot.core",
+        "loot.distance",
+        "loot.danger",
+        "loot.finish"
+      ],
+      "guide": "E07",
+      "title": "전리품 회수",
+      "body": "회수할 장비 등급을 고르고 저장하세요. 다음 사냥에서 남겨지는 장비와 회수되는 장비를 관찰하세요.",
+      "focus": "loot.NORMAL"
+    },
+    {
+      "stage": 8,
+      "condition": "",
+      "ids": [
+        "explore.mode",
+        "explore.bossUnlocked",
+        "explore.chests",
+        "explore.normalChest",
+        "explore.sealedChest",
+        "explore.shrine",
+        "explore.guideShrine",
+        "explore.resolveShrine",
+        "explore.cursedChest"
+      ],
+      "guide": "E08",
+      "title": "탐색과 특수 조우",
+      "body": "탐색 방식을 고르고 저장하세요. 다음 사냥에서 보스와 상자로 이동하는 순서를 관찰하세요.",
+      "focus": "explore.mode"
+    },
+    {
+      "stage": 9,
+      "condition": "",
+      "ids": [
+        "bag.trigger",
+        "bag.freeSlots",
+        "bag.policy",
+        "bag.replacementFail",
+        "bag.cleanupAt",
+        "bag.cleanup.NORMAL",
+        "bag.cleanup.MAGIC",
+        "bag.cleanup.RARE",
+        "bag.protectEnhanced",
+        "bag.protectSocketed",
+        "bag.warehouseFull",
+        "bag.stillFull"
+      ],
+      "guide": "E09",
+      "title": "가방 공간과 보호",
+      "body": "가방 부족 대응을 고르고 저장하세요. 강화와 보석 보호 상태를 확인하고 공간이 부족할 때의 행동을 관찰하세요.",
+      "focus": "bag.trigger"
+    },
+    {
+      "stage": 12,
+      "condition": "",
+      "ids": [
+        "autoEquip.enabled",
+        "autoEquip.displaced",
+        "autoEquip.weapon"
+      ],
+      "guide": "E12",
+      "title": "자동 장착 시작",
+      "body": "자동 장착은 직접 켜야 실행합니다. 교체품 처리와 무기 기준을 확인하고 저장하세요.",
+      "focus": "autoEquip.enabled"
+    },
+    {
+      "stage": 14,
+      "condition": "",
+      "ids": [
+        "potion.resource",
+        "potion.resourcePercent",
+        "potion.utility",
+        "potion.condition",
+        "potion.autoBuy",
+        "potion.hpTarget",
+        "potion.resourceTarget",
+        "potion.utilityTarget",
+        "potion.budget",
+        "potion.reserve",
+        "potion.shortage"
+      ],
+      "guide": "E14",
+      "title": "물약 보급",
+      "body": "보유한 물약의 사용과 구매 예산을 정하세요. 자동 구매는 직접 켜야 실행합니다.",
+      "focus": "potion.autoBuy"
+    },
+    {
+      "stage": 15,
+      "condition": "rune-complete",
+      "ids": [
+        "repeat.enabled",
+        "repeat.success",
+        "repeat.failure",
+        "repeat.failures",
+        "repeat.count",
+        "repeat.minutes",
+        "repeat.freeSlots",
+        "repeat.resultSeconds"
+      ]
+    },
+    {
+      "stage": 18,
+      "condition": "",
+      "ids": [
+        "dodge.ground.policy",
+        "dodge.ground.hpPercent",
+        "dodge.area.policy",
+        "dodge.area.hpPercent",
+        "dodge.direct.policy",
+        "dodge.direct.hpPercent",
+        "dodge.control",
+        "dodge.overlap",
+        "dodge.window",
+        "dodge.totalHpPercent",
+        "dodge.method",
+        "dodge.interrupt",
+        "target.chaseDistance",
+        "target.chaseTime",
+        "target.lostSight",
+        "target.goblin",
+        "target.goblinDistance",
+        "target.goblinTime",
+        "survival.lethal",
+        "survival.dot",
+        "survival.dotHpPercent",
+        "survival.fallbackSkill",
+        "survival.order",
+        "survival.fallback",
+        "survival.reserveSkill",
+        "survival.reserveResource",
+        "loot.class",
+        "loot.slots",
+        "loot.itemLevel",
+        "loot.exceptLegendary",
+        "loot.exceptSet",
+        "loot.exceptEffects",
+        "loot.minimumGold",
+        "bag.replacementRank",
+        "bag.allowLegendaryDisposal",
+        "bag.cleanup.LEGENDARY",
+        "bag.cleanup.SET",
+        "bag.protectEffects",
+        "bag.protectSets",
+        "bag.warehouseAdmission"
+      ],
+      "guide": "E18",
+      "title": "세밀한 사냥 조건",
+      "body": "필요한 세부 조건 하나를 바꾸고 저장하세요. 다음 사냥의 판단 기록에서 조건이 적용되는지 확인하세요.",
+      "focus": "target.chaseDistance"
+    },
+    {
+      "stage": 20,
+      "condition": "",
+      "ids": [
+        "common.order",
+        "explore.order",
+        "explore.lowTime",
+        "explore.lowTimeSeconds",
+        "explore.lowTimeLoot",
+        "explore.chestDetour",
+        "explore.chestsAfterBoss",
+        "explore.cursedHpPercent",
+        "explore.cursedDefense",
+        "explore.cursedMinimumTime",
+        "explore.shrineDetour",
+        "repeat.gold",
+        "repeat.effects",
+        "repeat.sets",
+        "repeat.stage"
+      ],
+      "guide": "E20",
+      "title": "행동 순서와 설정 공유",
+      "body": "행동 순서와 탐색의 세부 조건을 확인하세요. 공유 설정은 공개 권한과 실제 소유 상태를 검사하며 추천 모드는 별도로 선택합니다.",
+      "focus": "common.order"
+    },
+    {
+      "stage": 12,
+      "condition": "special-equipment",
+      "ids": [
+        "autoEquip.1.mode",
+        "autoEquip.1.stats",
+        "autoEquip.2.mode",
+        "autoEquip.2.stats",
+        "autoEquip.3.mode",
+        "autoEquip.3.stats",
+        "autoEquip.4.mode",
+        "autoEquip.4.stats",
+        "autoEquip.5.mode",
+        "autoEquip.5.stats",
+        "autoEquip.6.mode",
+        "autoEquip.6.stats",
+        "autoEquip.7.mode",
+        "autoEquip.7.stats",
+        "autoEquip.9.mode",
+        "autoEquip.9.stats",
+        "autoEquip.excludedSlots"
+      ],
+      "guide": "E12S",
+      "title": "전설과 세트 비교",
+      "body": "보유 장비를 공통 비교 화면에서 확인하고 부위별 비교 기준을 정하세요. 제외 부위는 자동 장착하지 않습니다.",
+      "focus": "autoEquip.1.mode"
+    },
+    {
+      "stage": -1,
+      "condition": "retired",
+      "ids": [
+        "autoEquip.preserveEffects"
+      ]
+    }
+  ]
+}

@@ -85,3 +85,8 @@ JSON 비용은 **동기 Save + binding flush + Canvas update 구간의 wall time
 14735105와 ff300129 전체 tree 비교에서는 `AttendanceWindow`, `ContentWindowView`, `EquipmentShopWindow`, `UiButton` 파일이 다르다. 이는 공통 조상 `94e11019` 이후 main에 반영된 다른 UI 작업도 포함한 차이다. CPU branch의 파일을 통째로 덮어써서 과거 레이아웃/출석/가용 클릭 정책으로 되돌리지 않는다. account 86e4dd87 및 활성 출석 등 다른 작업도 최종 main에서 합쳐 검사한다. 이 브랜치에서는 main 반영·push·공개 배포를 하지 않는다.
 
 새 원인에 대한 지침은 [UI 갱신 재발 방지](UI_Refresh_Stability_Rules.md)에 있다. 기존 CPU 규칙을 중복 추가하지 않는다.
+
+
+## 사냥 칙령 단계 공개, 2026-10-04
+
+HuntEdictWindow는 영웅·레벨·공개 ID·물약 revision·칙령/스킬/프리셋·안내 단계를 표시 키로 사용하는 StoreViewBinding을 붙인다. 대화상자와 순서 드래그 동안 갱신을 보류하고 명시적 repaint 후 기준을 기록한다. 편집본·포커스·스크롤은 기존 소유자를 따른다. 선택형 공개 카드는 StoryDialogueWindow를 재사용한다. [구현과 해당 runtime 검증 범위](Hunt_Edict_Progression.md)를 참고한다. 이 행은 이번에 바뀐 편집기와 안내 경로의 범위이며 기존 전체 UI 후보의 시각 합격표가 아니다.

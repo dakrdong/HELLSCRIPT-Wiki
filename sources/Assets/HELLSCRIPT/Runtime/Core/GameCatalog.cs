@@ -307,6 +307,7 @@ namespace Hellscript
         public LiveOpsRunSnapshot liveOps;
         public bool tutorial,tutorialReplay;
         public int tutorialPhase;
+        public int tutorialFlowVersion,tutorialLessonStep;
         public string guideSetup="";
         public CombatJournalData journal;
         public RiftCombatRecord combatRecord;

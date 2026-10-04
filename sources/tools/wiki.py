@@ -713,6 +713,21 @@ def build_class_abilities():
             db('class-set-bonuses','신규 세트 효과 60단계','실제 장착 수에 따라 적용하는 신규 세트 24종의 효과입니다.',bonuses),
             db('class-skill-options','스킬 사용 선택지 164개','사용 시점·대상·위치·대기의 이득과 손해를 비교하는 55개 옵션 묶음입니다.',options)]
 
+def build_edict_disclosures():
+    path='Assets/HELLSCRIPT/Resources/HuntEdictProgression.json'
+    rules=json.loads(read(path))['rules']
+    labels={r['id']:r['text'] for r in json.loads(read('Assets/HELLSCRIPT/Resources/HuntEdictUi.json'))['labels']}
+    rows=[]
+    for rule in rules:
+        for identifier in rule['ids']:
+            condition=rule.get('condition','')
+            summary='계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.' if condition!='retired' else '호환용 저장 값이며 게임 화면과 실습에서 공개하지 않습니다.'
+            rows.append(record(identifier,labels.get(identifier,identifier),'호환 보존' if condition=='retired' else rule.get('title','최초 안내'),summary,
+                {'균열 단계':rule['stage'],'추가 조건':condition or '없음','안내 ID':rule.get('guide',''),'공개 규칙 버전':1},path,
+                refs=[source_ref(CORE+'HuntEdictProgression.cs')],related=['hunt-edict-progression','hunt-edict-progression.en']))
+    if len(rows)!=152 or len({r['id'] for r in rows})!=152:raise ValueError('Disclosure census must contain 152 unique global options')
+    return db('edict-disclosure','사냥 칙령 단계 공개','152개 전역 옵션의 실제 공개 규칙입니다. 스킬과 편집 권한은 연결된 구현 문서를 함께 확인하세요.',rows)
+
 def build_evidence():
     rows=[]
     paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'ClassSkillEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'CompletedMergeEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'OptimizationEvidence20260930').glob('*editmode*.xml')))
@@ -1056,7 +1071,7 @@ def build_public(dataset):
 
 def build():
     INPUTS.clear();pages=build_pages();databases=build_databases();resources=build_resources(databases)
-    databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_evidence())
+    databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_edict_disclosures());databases.append(build_evidence())
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
     for path in ['tools/wiki.py','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,

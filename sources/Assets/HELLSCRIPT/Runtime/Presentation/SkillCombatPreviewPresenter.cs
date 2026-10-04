@@ -22,10 +22,10 @@ namespace Hellscript
         bool background;
         const int Layer=31;
         static readonly Vector3 Origin=new Vector3(10000,0,10000);
-        public void Show(GameCatalog catalog,SkillPresetScenario scenario)
+        public void Show(GameCatalog catalog,SkillPresetScenario scenario,AccountSave starter=null)
         {
-            if(Session?.Scenario.Key==scenario.Key)return;
-            Clear();Session=new CombatPreviewSession(catalog,scenario);
+            if(Session?.Scenario.Key==scenario.Key&&(starter==null?!Session.IsStarter:Session.SourceSignature==TutorialProgress.Signature(starter.Hero)))return;
+            Clear();Session=starter==null?new CombatPreviewSession(catalog,scenario):new CombatPreviewSession(catalog,starter,scenario.preset);
             root=new GameObject("Skill combat preview presentation");
             cameraView=new GameObject("Skill combat preview camera").AddComponent<Camera>();cameraView.transform.SetParent(root.transform,false);
             cameraView.cullingMask=1<<Layer;cameraView.enabled=false;cameraView.depth=-100;cameraView.rect=new Rect(0,0,1,1);

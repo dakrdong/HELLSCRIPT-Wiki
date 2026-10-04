@@ -45,7 +45,7 @@ namespace Hellscript
         public static void Stamp(AccountSave account,Item item)
         {
             if(account==null||item.acquiredOrder>0)return;
-            ContentUnlocks.RecordEquipment(account,item);
+            ContentUnlocks.RecordEquipment(account,item);HuntEdictProgression.RecordEquipmentAcquisition(account,item);
             account.itemSequence=checked(account.itemSequence+1);item.acquiredOrder=account.itemSequence;item.reviewed=false;
         }
         // Unknown legacy acquisition dates stay unknown. Moving or reviewing an item never re-stamps it.

@@ -32,6 +32,7 @@ namespace Hellscript
                 if(!ClassSkillLoadout.IsAbsent(owner.build.classSkills))throw new ArgumentException("Use the ID-based skill loadout.");
                 var canonical=HuntEdictV2.Canonical(source);
                 ValidateUtilityChange(owner,canonical);
+                var gated=HuntEdictLoadout.FromHero(owner);gated.edict=canonical;HuntEdictProgression.ValidateChange(Data,owner,gated);
                 HuntEdictV2.ValidateReceiver(canonical,owner,catalog);
                 // Unlock levels are not re-checked here. The loadout itself keeps not-yet-unlocked
                 // skills and only disables their rules, so requiring more of the document than of

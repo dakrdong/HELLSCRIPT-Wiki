@@ -13,6 +13,17 @@ namespace Hellscript
         float previewStartTime;
         bool previewRunning;
         public bool IsSkillPreview=>previewScenario!=null;
+        public static CombatSimulation CreateStarterPreview(GameCatalog catalog,AccountSave source,SkillPresetScenario scenario)
+        {
+            var fixture=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(source));var hero=fixture.Hero;
+            var original=HuntEdictLoadout.FromHero(hero);
+            if(!original.UsesTree||original.classSkills.actives[0]!=scenario.skill)throw new ArgumentException("Learn and equip the first skill before comparing.");
+            var configured=HuntEdictSkillPresets.Select(original,"skill/"+scenario.skill,scenario.preset);
+            hero.build=configured.ToBuild(hero.build);hero.edict=configured.edict.Copy();hero.useEdict=true;hero.useRecommendedEdict=false;
+            var sim=new CombatSimulation(fixture,catalog,1,0,seed:scenario.seed,recordResume:false,combatPreview:scenario);
+            sim.State.health=sim.Stats.hp*scenario.health;sim.State.resource=sim.Stats.maxResource*scenario.resource;
+            sim.previewStartTime=sim.State.time;sim.previewRunning=true;sim.State.decisionTime=0;return sim;
+        }
         public static CombatSimulation CreateSkillPreview(GameCatalog catalog,SkillPresetScenario scenario)
         {
             var definition=ClassSkills.Find(scenario.skill);
@@ -83,6 +94,7 @@ namespace Hellscript
                 if(!Map.CanLand(entry.position)||!Map.LineClear(previewScenario.hero,entry.position))throw new InvalidOperationException("Invalid preview placement: "+previewScenario.Key);
                 SpawnEnemy(0,entry.kind,entry.position,entry.elite);
                 var enemy=State.enemies.Last();enemy.health=enemy.maxHealth=entry.health;previewSpawned.Add(i);
+                if(previewScenario.attackLimit>0)enemy.attack=Mathf.Min(enemy.attack,previewScenario.attackLimit);
             }
         }
         bool PreviewOutcome()

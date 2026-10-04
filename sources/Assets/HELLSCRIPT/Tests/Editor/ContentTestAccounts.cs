@@ -9,9 +9,23 @@ namespace Hellscript.Tests
     // tests on GameStore.NewAccount.
     static class ContentTestAccounts
     {
+        // Domain-contract fixtures with existing full access retain their pre-disclosure automation defaults.
+        // Fresh progression and permission tests deliberately do not call this helper.
+        public static void ReleasedAccess(AccountSave account)
+        {
+            account.guide.edictLegacyAccess=true;HuntEdictProgression.Reconcile(account);
+            foreach(var hero in account.heroes)
+            {
+                var defaults=HuntEdictV2.Create(hero.heroClass);
+                foreach(string id in new[]{"potion.autoBuy","autoEquip.enabled","repeat.enabled","bag.cleanupAt"})
+                    hero.edict=HuntEdictV2Editing.WithGlobal(hero.edict,id,HuntEdictSummary.Value(defaults,id));
+                if(!ClassSkillLoadout.IsAbsent(hero.build.classSkills))hero.build.classSkills.legacyEdict=hero.edict.Copy();
+            }
+        }
         public static AccountSave Legacy(GameCatalog catalog=null)
         {
             var account=GameStore.NewAccount(catalog);
+            account.guide.edictLegacyAccess=true;HuntEdictProgression.Reconcile(account);
             foreach(var hero in account.heroes)
             {
                 hero.build=catalog!=null?BehaviorPresets.ForLevel(hero.heroClass,0,hero.level,catalog):GameCatalog.Preset(hero.heroClass,0);

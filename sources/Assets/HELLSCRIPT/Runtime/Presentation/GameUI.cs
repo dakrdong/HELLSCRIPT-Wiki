@@ -102,6 +102,7 @@ namespace Hellscript
         public void ApplyLanguage()
         {
             if(root==null)return;
+            gate?.RefreshLanguage();
             bool panelOpen=commonModal!=null;var tab=commonTab;
             if(panelOpen)CloseCommonPanel();
             if(npcDialogue!=null)npcDialogue.Repaint();else if(AttendancePanel!=null)AttendancePanel.Repaint();else if(jewelerWindow!=null)jewelerWindow.Repaint();else if(aspectStoneWindow!=null)aspectStoneWindow.Repaint();else if(blacksmith!=null)blacksmith.Repaint();else if(gearRecommendationDetails!=null)gearRecommendationDetails.Repaint();else pageRepaint?.Invoke();
@@ -237,7 +238,7 @@ namespace Hellscript
             BigButton(content,"균열 관리자 · 단계·소탕·훈련",ShowRiftKeeper);
             BigButton(content,"자동 행동 설계",()=>ShowBuild());
             BigButton(content,"사냥 칙령 v0.2 편집",ShowEdictEditor);
-            BigButton(content,"사냥 칙령 공유 · v0.2 사용",()=>{ClearEdictShare();ShowEdictShare();});
+            if(HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Presets))BigButton(content,HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Sharing)?"사냥 칙령 공유 · v0.2 사용":"로컬 프리셋",()=>{ClearEdictShare();ShowEdictShare();});
             BigButton(content,"성장과 스킬",ShowGrowth);
             BigButton(content,"룬 성장",ShowRunes);
             BigButton(content,"장비 · 대장간 · 창고",()=>ShowBag());
@@ -373,6 +374,7 @@ namespace Hellscript
         public void ShowRecords(){game.CancelRiftEntry();OpenCombatRecords();}
         public void ShowResult()
         {
+            EdictResultSettled();
             if(game.ComparisonRun){ShowComparisonResult();return;}
             if(game.TrainingGroundRun){ShowTrainingGroundResult();return;}
             if(game.Combat==null)return;if(game.TutorialActive){ShowTutorialPrompt();return;}var r=game.Combat.State;bool won=r.phase==RunPhase.Cleared;if(r.training<0&&(won||r.phase==RunPhase.Failed)){ShowRiftVictory();return;}ReviewBase("result",r.training>=0?"훈련 결과":won?"균열 정복":"다시 설계할 시간",r.training>=0?r.action:Loc.F("균열 {0}단계",r.stage)+" · "+Loc.StoredText(r.action),ShowResult);

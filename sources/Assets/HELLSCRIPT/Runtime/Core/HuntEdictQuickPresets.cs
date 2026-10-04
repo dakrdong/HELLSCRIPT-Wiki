@@ -66,15 +66,15 @@ namespace Hellscript
         public static EdictStyle Style(string id)=>Catalog.styles.SingleOrDefault(s=>s.id==id)??throw new ArgumentException("Unknown combat style: "+id);
         // The groups a style decides for this class, in catalog order.
         public static string[] StyleScopes(string heroClass)=>Catalog.styles[0].For(heroClass).Select(p=>p.scope).ToArray();
-        public static HuntEdictLoadout ApplyStyle(HuntEdictLoadout source,string id)
+        public static HuntEdictLoadout ApplyStyle(HuntEdictLoadout source,string id,Func<string,bool> include=null)
         {
             var next=source;
-            foreach(var pick in Style(id).For(source.edict.heroClass))next=Apply(next,pick.scope,pick.preset);
+            foreach(var pick in Style(id).For(source.edict.heroClass).Where(p=>include==null||include(p.scope)))next=Apply(next,pick.scope,pick.preset);
             return next;
         }
         // Null when the current values differ from every style in at least one of its groups.
-        public static string MatchStyle(HuntEdictLoadout source)=>
-            Catalog.styles.FirstOrDefault(s=>s.For(source.edict.heroClass).All(p=>Matches(source,p.scope,p.preset)))?.id;
+        public static string MatchStyle(HuntEdictLoadout source,Func<string,bool> include=null)=>
+            Catalog.styles.FirstOrDefault(s=>s.For(source.edict.heroClass).Where(p=>include==null||include(p.scope)).All(p=>Matches(source,p.scope,p.preset)))?.id;
         public static IReadOnlyList<EdictQuickPreset> For(string scope)
         {
             var authored=Catalog.presets.Where(p=>p.scope==scope).ToArray();
