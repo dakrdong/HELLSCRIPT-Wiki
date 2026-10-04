@@ -126,6 +126,8 @@ namespace Hellscript
                 if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(initial)))return;
             }
             var original=new HuntEdictEditSession(hero);if(candidate.UsesTree)original.UseSkillTree(hero);
+            // No permission delta in an identical document. GameStore.Write still validates owned skills and commits the save.
+            if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(original.Draft))return;
             var expected=original.Draft;
             foreach(var recipe in recipes??Array.Empty<SkillPresetSelection>())
             {
@@ -191,8 +193,13 @@ namespace Hellscript
             {
                 var old=before.heroes.FirstOrDefault(h=>h.id==hero.id)??before.heroes.FirstOrDefault(h=>h.heroClass==hero.heroClass);if(old==null)continue;
                 if(!Has(before,Sharing)&&(old.useRecommendedEdict!=hero.useRecommendedEdict||old.useEdict&&!hero.useEdict))throw new ArgumentException(Loc.T("추천 모드 전환은 균열 20단계부터 공개됩니다."));
-                var candidate=HuntEdictLoadout.FromHero(hero);
-                ValidateChange(before,old,candidate,session?.HeroId==hero.id?session.Recipes:null);
+                // Compare the committed snapshot before projecting unchanged policies. Mode, presets and domain checks remain independent.
+                if(JsonUtility.ToJson(old.build)!=JsonUtility.ToJson(hero.build)||JsonUtility.ToJson(old.edict)!=JsonUtility.ToJson(hero.edict)||
+                    !(old.edictPassiveSlots??Array.Empty<string>()).SequenceEqual(hero.edictPassiveSlots??Array.Empty<string>()))
+                {
+                    var candidate=HuntEdictLoadout.FromHero(hero);
+                    ValidateChange(before,old,candidate,session?.HeroId==hero.id?session.Recipes:null);
+                }
                 if(!Has(before,Presets)&&(PresetKey(old.edictPresets)!=PresetKey(hero.edictPresets)||BuildPresetKey(old.presets)!=BuildPresetKey(hero.presets)))throw new ArgumentException(Loc.T("프리셋 관리는 균열 6단계부터 공개됩니다."));
                 for(int slot=0;slot<hero.edictPresets.Count;slot++)
                 {
