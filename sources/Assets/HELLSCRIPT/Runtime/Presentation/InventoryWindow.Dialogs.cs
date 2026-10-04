@@ -25,7 +25,9 @@ namespace Hellscript
         }
         public void ShowDetail(string id)
         {
-            var item=FindItem(id);if(item==null)return;if(!store.ReviewInventoryItem(id))Toast(store.Error);float w=landscape?360:width-16,h=height-16;
+            var item=FindItem(id);if(item==null)return;if(!store.ReviewInventoryItem(id))Toast(store.Error);// Landscape opens an unequipped item beside what it would replace, like Diablo IV's hover comparison.
+            bool compare=landscape&&!item.equipped&&Hero.inventory.Any(i=>i.equipped&&i.slot==item.slot);
+            float w=landscape?(compare?width-16:Mathf.Min(width-16,640)):width-16,h=height-16;
             Modal("detail","아이템 정보",w,h);detailId=id;Place(dialog,width-w-8,8,w,h);
             var detail=ItemDetailPopup.Create(dialog,w,h,textScale,Dismiss,"inventory-dialog-close",font,RangeToggle);
             var actions=new System.Collections.Generic.List<ItemDetailPopup.FooterAction>
@@ -39,7 +41,8 @@ namespace Hellscript
             if(!item.equipped)actions.Add(new ItemDetailPopup.FooterAction("inventory-compare","장착 비교",()=>ShowComparison(id)));
             actions.Add(new ItemDetailPopup.FooterAction("inventory-detail-close","닫기",Dismiss));
             detail.SetFooter(null,!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item)?"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.":null,actions.ToArray());
-            ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,font,textScale,hero:Hero);
+            if(compare)EquipmentComparisonView.Create(detail.Body,EquipmentPreviewHero(Hero),item,store.Data.runes,font,atlas,textScale);
+            else ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,font,textScale,hero:Hero);
         }
         void RequestEquip(string id)
         {

@@ -89,3 +89,18 @@ Every actual equipment detail shows `Gear score equipped → candidate` without 
 `ItemTooltip.Score` reuses `EquipmentScore.Value` and `EquipmentSlots.ComparisonTarget`. Rings and dual wield default to the same first occupied position as the shared comparison view; an explicit comparison target takes precedence. The weapon score row compares individual items at that position, while the existing weapon-loadout score row retains the actual combined loadout comparison. Unmet equip conditions do not hide individual score comparisons.
 
 Content controllers pass `hero` to `ItemDetailView.Create`/`Append`. The shared display copies the item and comparison hero without reading account storage. Training and battle details use their supplied draft or snapshot; reward and change-history details use the original hero's current equipped state. Undefined catalogue ranges do not receive invented scores.
+
+## Diablo IV card rebuild (2026-10-04)
+
+The information hierarchy of the user-provided Diablo IV screens was re-ported for both landscape and portrait. Calculation, transaction and save ownership are unchanged; only the presentation in `ItemDetailView`, `ItemDetailPopup` and `EquipmentComparisonView` changed.
+
+- **Primary value on one line**: a large value, its name and the delta share a row, e.g. `1,435 damage per second (+236)`. When space runs out the name drops to the next line and the value shrinks rather than wrapping.
+- **Implicit branch lines**: implicit properties such as base attack speed or fixed resistance hang under the primary value with vector `├`/`└` branches.
+- **Greater-affix emphasis**: greater affixes use bright gold text and a larger diamond marker. The existing `◆` glyph is kept.
+- **Socket row**: sockets show an empty or gem-filled ring mark with the socket text.
+- **Requirement footer**: on wide cards item level / required level, hands, material and equipped/locked state are right-aligned at the bottom. Dense cards (< 300 wide) keep them under the title.
+- **Two-column card (landscape)**: at 520+ width with affixes, powers, lost properties or after-replacement stats, the left column holds identity, primary value, sockets and requirements and the right column holds affixes, powers and comparison sections so the card fits one screen. Portrait and narrow cards stay single column.
+- **Scroll-down cue**: while the card is taller than the window and not at the end, `Scroll down` appears at the bottom. It never intercepts input.
+- **Landscape detail window**: inventory detail widens to at most 640 in landscape; footer actions use up to four per row at 480+ so the card keeps its height.
+- **Portrait comparison (< 460 wide)**: instead of squeezing two cards into 200 units, `Selected gear / Equipped · position` tabs show one full-width card at a time, defaulting to the selected gear. Ring baseline tabs stay on top and tab switching never changes saved data. At 460+ the existing side-by-side comparison (equipped left, selected right) is kept.
+- **Landscape default comparison**: in landscape, tapping an unequipped inventory item whose slot has equipped gear opens the detail window directly as a side-by-side comparison (`Equipped` left, `Selected gear` right). The window is full width and keeps Equip, Lock, Compare equipment and Close (`Compare equipment` opens the dedicated window with per-ring equip buttons). Equipped items, empty slots and portrait keep the single detail.
