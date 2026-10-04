@@ -50,14 +50,15 @@ export async function accountSession(request,env,at) {
 export async function sessionReply(db,accountId,token,expires) {
   const row=await db.prepare('SELECT a.identity_hash,c.username_key FROM auth_accounts a LEFT JOIN auth_credentials c ON c.account_id=a.id WHERE a.id=?').bind(accountId).first();
   if(!row)throw new Rejected(401,'authentication');
-  return reply({accountId,displayName:row.username_key||'Google',accessToken:token,expiresAt:expires,
-    googleLinked:row.identity_hash.startsWith('local:')?0:1});
+  const guest=row.identity_hash.startsWith('guest:');
+  return reply({accountId,displayName:row.username_key||(guest?'Guest':'Google'),accessToken:token,expiresAt:expires,
+    googleLinked:guest||row.identity_hash.startsWith('local:')?0:1});
 }
 
 // An existing application owns its auth. No recovery by UID, email collection or cloud-save writes.
 export async function localAccountRoute(request,env,at) {
   const path=new URL(request.url).pathname,db=database(env);
-  if(path==='/v1/accounts/config'&&request.method==='GET')return reply({localEnabled:env.HELLSCRIPT_LOCAL_ACCOUNTS_ENABLED==='true',passwordMinimum:15,sessionSeconds:SESSION_SECONDS});
+  if(path==='/v1/accounts/config'&&request.method==='GET')return reply({localEnabled:env.HELLSCRIPT_LOCAL_ACCOUNTS_ENABLED==='true',guestEnabled:env.HELLSCRIPT_GUEST_ACCOUNTS_ENABLED==='true',passwordMinimum:15,sessionSeconds:SESSION_SECONDS});
   if(path==='/v1/accounts/session'&&['GET','DELETE'].includes(request.method)) {
     const session=await accountSession(request,env,at);
     if(request.method==='DELETE'){

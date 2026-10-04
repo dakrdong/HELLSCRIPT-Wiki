@@ -135,6 +135,7 @@ namespace Hellscript
             if(a.suspendedRun!=null)NormalizeRun(a.suspendedRun);
             if(a.records!=null)foreach(var record in a.records)
                 {if(record?.review!=null&&record.review.version==0)record.review=null;
+                 if(record?.review!=null)record.review.dps=CombatDpsTimeline.Normalize(record.review.dps);
                  if(record?.journal!=null&&record.journal.version==0)record.journal=null;}
             a.transactions??=new System.Collections.Generic.List<EconomyReceipt>();
             foreach(var h in a.heroes)
@@ -183,6 +184,9 @@ namespace Hellscript
         public static void NormalizeRun(RunState run)
         {
             LiveOpsConfig.NormalizeRun(run);
+            run.dps=CombatDpsTimeline.Normalize(run.dps);
+            if(run.journal?.version==0)run.journal=null;
+            run.navigationRoutes??=new System.Collections.Generic.List<RiftNavigationRoute>();
             run.potions??=new PotionRuntimeState();run.potions.Validate();
             if(run.cooldownTotals==null||run.cooldownTotals.Length!=18)run.cooldownTotals=new float[18];
             try{RiftResources.Normalize(run);}catch(Exception error){throw new NotSupportedException(Loc.T("균열의 재화·보석 기록을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}

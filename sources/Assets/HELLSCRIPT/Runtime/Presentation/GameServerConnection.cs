@@ -83,6 +83,7 @@ namespace Hellscript
             {Status="invalid_server_configuration";return;}
             game.LiveOps.Configure(new Uri(server,"v1/liveops/current"));
             game.GoogleLogin?.Configure(server);
+            game.GoogleLogin?.ConfigureGuestStorage(saveDirectory);
             Status="liveops_connected";
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             // A tester receives a dedicated file from the operator; it is never shared in a game build.

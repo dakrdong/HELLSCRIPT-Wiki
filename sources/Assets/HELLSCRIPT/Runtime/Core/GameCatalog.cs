@@ -364,6 +364,7 @@ namespace Hellscript
         // dodge, block, overpower and lucky hit do not move the sequence saved runs replay from.
         public uint sheetRng;
         public RiftLayout layout;
+        public List<RiftNavigationRoute> navigationRoutes=new List<RiftNavigationRoute>();
         public RiftDiscovery discovery;
         [NonSerialized] public RiftVisibility visibility;
         public RiftExplorationState exploration=new RiftExplorationState();

@@ -13,7 +13,9 @@ namespace Hellscript
             account=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(source.account));catalog=source.catalog;
             Hero=account.heroes.Single(h=>h.id==source.Hero.id);
             State=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(source.State));
-            Stats=source.baseStats;Map=new RiftNavigation(State.layout);
+            if(source.State.journal==null)State.journal=null;
+            if(source.State.dps==null)State.dps=null;
+            Stats=source.baseStats;Map=new RiftNavigation(State.layout,savedRoutes:State.navigationRoutes);
         }
         BuildConfig ValidateBuildChange(BuildConfig requested)
         {

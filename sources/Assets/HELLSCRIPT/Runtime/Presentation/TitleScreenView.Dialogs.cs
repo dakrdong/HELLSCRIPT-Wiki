@@ -37,8 +37,7 @@ namespace Hellscript
         public void CloseDialog()=>CloseDialog(true);
         void CloseDialog(bool cancelLogin)
         {
-            if(cancelLogin){game.GoogleLogin.Cancel();if(!Session.SignedIn&&(DialogKind=="login"||DialogKind=="signup"||DialogKind=="google-profile"))game.GoogleLogin.SignOut();}
-            accountUsername=accountPassword=null;
+            if(cancelLogin){game.GoogleLogin.Cancel();if(!Session.SignedIn&&(DialogKind=="login"||DialogKind=="guest"||DialogKind=="google-profile"))game.GoogleLogin.SignOut();}
             googleContinue=null;loginError=null;
             if(dialog!=null){dialog.gameObject.SetActive(false);Destroy(dialog.gameObject);}
             dialog=null;DialogKind="";
@@ -60,50 +59,52 @@ namespace Hellscript
                 var copy=ActionButton(dialogBody,"title-copy-uid","문의 UID 복사",()=>WebPlayerAuthentication.CopyUid(game.SupportUid));BodyRect((RectTransform)copy.transform,106,48);
                 var local=Caption(dialogBody,"account-storage-note","UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 아닙니다. 캐릭터 진행은 현재 기기에 저장됩니다.",13,Muted,TextAnchor.MiddleLeft);BodyRect(local.rectTransform,165,118);return;
             }
-            ShowCredentials(false);
+            ShowGoogleAuthentication(false);
         }
-        public void ShowCredentials(bool register)
+        void ShowGuestProgress()
         {
-            OpenDialog(register?"signup":"login",register?"계정 만들기":"계정 로그인",668);
+            OpenDialog("guest","게스트로 시작",330);
             googleAccountOpenAttempted=false;
-            var note=Caption(dialogBody,"account-entry-note",register?"게스트도 계정을 만듭니다. 가입하면 이 기기의 기존 게스트 캐릭터·진행·대기 로그를 그대로 이어갑니다.":"아이디·비밀번호로 로그인하세요. 세션은 12시간이며 게임을 다시 열면 로그인합니다.",14,Muted,TextAnchor.MiddleLeft);BodyRect(note.rectTransform,0,84);
-            var user=Caption(dialogBody,"username-label","아이디",14,Bone,TextAnchor.MiddleLeft);BodyRect(user.rectTransform,92,24);
-            accountUsername=AccountInput("account-username",false);BodyRect((RectTransform)accountUsername.transform,120,52);
-            var pass=Caption(dialogBody,"password-label","비밀번호",14,Bone,TextAnchor.MiddleLeft);BodyRect(pass.rectTransform,180,24);
-            accountPassword=AccountInput("account-password",true);BodyRect((RectTransform)accountPassword.transform,208,52);
-            var limits=Caption(dialogBody,"credential-format","아이디는 영문·숫자·밑줄 3~24자, 비밀번호는 15~128자로 입력하세요.",12,Muted,TextAnchor.MiddleLeft);BodyRect(limits.rectTransform,267,48);
-            var privacy=Caption(dialogBody,"account-privacy","계정 UID와 플레이 시간·진행·재화 소비·전투 기록을 게임 서버에 보냅니다. 외부 차트에는 익명 집계만 사용합니다. 이메일 복구는 없으니 아이디·비밀번호를 보관하거나 가입 후 Google을 연동하세요.",12,Muted,TextAnchor.MiddleLeft);BodyRect(privacy.rectTransform,322,108);
-            loginError=Caption(dialogBody,"google-login-status",game.GoogleLogin.Message,13,Bone,TextAnchor.MiddleLeft);BodyRect(loginError.rectTransform,436,64);
-            accountSubmit=ActionButton(dialogBody,"title-account-submit",register?"가입하고 이어 하기":"로그인",()=>{
-                if(game.GoogleLogin.Ready){googleAccountOpenAttempted=false;return;}
-                game.GoogleLogin.BeginCredentials(accountUsername.text,accountPassword.text,register);
-            },true,16);BodyRect((RectTransform)accountSubmit.transform,505,50);
-            var toggle=ActionButton(dialogBody,"title-account-toggle",register?"이미 계정이 있어요 · 로그인":"처음이에요 · 계정 만들기",()=>{if(!game.GoogleLogin.Busy)ShowCredentials(!register);},false,13);BodyRect((RectTransform)toggle.transform,562,48);
+            var note=Caption(dialogBody,"guest-recovery-note","이 브라우저에서 같은 게스트 UID로 이어갑니다. 브라우저 데이터를 지우면 게스트 접근과 기기 저장을 잃을 수 있습니다. Google 연동으로 계정 UID를 보호하세요.",14,Muted,TextAnchor.MiddleLeft);BodyRect(note.rectTransform,0,122);
+            var privacy=Caption(dialogBody,"account-privacy",GuestPrivacy,12,Muted,TextAnchor.MiddleLeft);BodyRect(privacy.rectTransform,130,88);
+            loginError=Caption(dialogBody,"google-login-status",game.GoogleLogin.Message,13,Bone,TextAnchor.MiddleLeft);BodyRect(loginError.rectTransform,222,62);
+            googleContinue=ActionButton(dialogBody,"title-guest-retry","다시 시도",()=>{googleAccountOpenAttempted=false;game.GoogleLogin.BeginGuest();});BodyRect((RectTransform)googleContinue.transform,290,44);
+        }
+        const string GuestPrivacy="계정 UID와 플레이 시간·진행·재화 소비·전투 기록을 게임 서버에 보냅니다. 외부 차트에는 익명 집계만 사용합니다. 캐릭터 진행은 현재 기기에 저장됩니다.";
+        void ShowGoogleAuthentication(bool link)
+        {
+            OpenDialog(link?"link":"login","Google 연동",300);googleAccountOpenAttempted=false;
+            var note=Caption(dialogBody,"account-entry-note",link?"Google 연동은 같은 계정 UID를 유지합니다. 다른 계정에 연결된 Google 계정은 합치거나 덮어쓰지 않습니다.":"Google 계정으로 로그인하거나 게스트로 시작하세요.",14,Muted,TextAnchor.MiddleLeft);BodyRect(note.rectTransform,0,84);
+            var privacy=Caption(dialogBody,"account-privacy",GuestPrivacy,12,Muted,TextAnchor.MiddleLeft);BodyRect(privacy.rectTransform,92,86);
+            loginError=Caption(dialogBody,"google-login-status",game.GoogleLogin.Message,13,Bone,TextAnchor.MiddleLeft);BodyRect(loginError.rectTransform,180,62);
             googleContinue=GoogleButton(dialogBody,"title-google-login","Google로 계속",()=>
-            {if(game.GoogleLogin.Ready)googleAccountOpenAttempted=false;else game.GoogleLogin.Begin();},14,1);BodyRect((RectTransform)googleContinue.transform,618,48);
-            RefreshGoogleLogin();
+            {if(link)game.PrepareGoogleLink();else game.GoogleLogin.Begin();},14,1);BodyRect((RectTransform)googleContinue.transform,250,48);
         }
         void RefreshGoogleLogin()
         {
-            if(DialogKind!="login"&&DialogKind!="signup")return;
-            if(game.AccountOwnershipBusy){if(loginError!=null)loginError.text=game.Notice;if(accountSubmit!=null)accountSubmit.interactable=false;return;}
+            if(DialogKind!="login"&&DialogKind!="guest"&&DialogKind!="link")return;
+            if(game.AccountOwnershipBusy){if(loginError!=null)loginError.text=game.Notice;return;}
             var auth=game.GoogleLogin;
+            if(DialogKind=="link")
+            {
+                if(loginError!=null)loginError.text=auth.GoogleLinked?Loc.T("Google 연동 완료 · 같은 계정과 캐릭터를 사용합니다."):auth.Message;
+                if(googleContinue!=null)googleContinue.interactable=!auth.Busy&&!auth.GoogleLinked&&auth.Ready;
+                if(auth.GoogleLinked)Refresh();return;
+            }
             if(auth.Ready)
             {
-                if(accountSubmit!=null)accountSubmit.interactable=true;
                 if(googleAccountOpenAttempted){if(loginError!=null&&!Session.SignedIn)loginError.text=game.Notice;return;}googleAccountOpenAttempted=true;
                 if(googleContinue!=null)googleContinue.interactable=true;
                 try
                 {
                     if(game.GoogleProfileExists){if(!game.CompleteAccountLogin(false))loginError.text=game.Notice;return;}
-                    if(DialogKind=="signup"){if(!game.CompleteAccountLogin(true))loginError.text=game.Notice;return;}
+                    if(auth.GuestSession){if(!game.CompleteAccountLogin(game.CanLinkGuest))loginError.text=game.Notice;return;}
                     ShowGoogleProfileChoice();return;
                 }
                 catch(System.Exception){loginError.text=Loc.T("계정 저장을 열지 못했습니다. 기존 저장은 보존했습니다. 다시 시도해 주세요.");return;}
             }
             if(loginError!=null)loginError.text=auth.Message;
             if(googleContinue!=null)googleContinue.interactable=!auth.Busy;
-            if(accountSubmit!=null)accountSubmit.interactable=!auth.Busy;
         }
         void ShowGoogleProfileChoice()
         {

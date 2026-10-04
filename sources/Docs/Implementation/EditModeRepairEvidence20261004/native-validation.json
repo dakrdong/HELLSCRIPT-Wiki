@@ -1,0 +1,77 @@
+{
+  "phaseOneExitCode": 0,
+  "restartExitCode": 0,
+  "riftComparisons": [
+    {
+      "stage": 1,
+      "matched": true,
+      "sha256": "cb0cbca4b2937d15c6192419d6a79f7b09bec3d4fb4081dd0a4e5f5af72cd430",
+      "bytes": 435242
+    },
+    {
+      "stage": 5,
+      "matched": true,
+      "sha256": "e0940b2a46a58433fdb76bc6abc281b0ca620214988fa5c3a4d48149cb793b96",
+      "bytes": 465277
+    },
+    {
+      "stage": 12,
+      "matched": true,
+      "sha256": "325cf835548ce7259a6d5565f11a4b2efa1968a73e5a87ab2d6241e8e2cb2f9a",
+      "bytes": 739333
+    }
+  ],
+  "viewportChecks": 11,
+  "sizes": [
+    [
+      440,
+      956
+    ],
+    [
+      956,
+      440
+    ],
+    [
+      1600,
+      900
+    ],
+    [
+      1600,
+      1000
+    ],
+    [
+      2100,
+      900
+    ]
+  ],
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "safeArea": "simulated only; not physical mobile",
+  "scope": "macOS development player; synthetic uGUI pointer; three native process save/restart comparisons",
+  "commandLine": [
+    "-hellscriptOfflineQa",
+    "-hellscriptRegressionRepairSmoke",
+    "-hellscriptSavePath",
+    "<task>/native-save",
+    "-hellscriptEvidence",
+    "<task>/native-ui"
+  ],
+  "restartAddedFlag": "-hellscriptRegressionRepairResume",
+  "fixturePreflight": "Before each checkpoint comparison launch, set isolated native-save/hellscript-language-v1.json to {\"version\":1,\"language\":\"ko\"}. Layout tests persist EN; control journal was generated in KO.",
+  "firstRestartAttempt": "Retained native-restart-first-attempt.json/log/failure.txt; fixture language mismatch; only failed resume scope rerun.",
+  "mandatoryStaticChecks": {
+    "check_ui_contract.py": "PASS",
+    "test_ui_contract.py": {
+      "tests": 11,
+      "passed": 11,
+      "failed": 0
+    },
+    "check_ui_refresh.py": {
+      "result": "PASS",
+      "guardedBindings": 11,
+      "uiSources": 153
+    }
+  }
+}

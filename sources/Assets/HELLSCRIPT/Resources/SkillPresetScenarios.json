@@ -5560,10 +5560,10 @@
       "enemies": [
         {
           "position": {
-            "x": -1.8,
-            "y": -1
+            "x": -4.0,
+            "y": -0.5
           },
-          "kind": 3,
+          "kind": 0,
           "elite": -1,
           "spawnAt": 0.0,
           "health": 3500.0
@@ -5626,10 +5626,14 @@
         {
           "id": "dodge.method",
           "value": "SKILL_FIRST"
+        },
+        {
+          "id": "dodge.interrupt",
+          "value": "CANCEL_ALLOWED"
         }
       ],
-      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다.",
-      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable."
+      "globalConditions": "예시 생존 설정: 감지한 공격에 대응, HP 30% 이하 긴급 대응. 선택한 스킬로 먼저 방어한 뒤 보행으로 후퇴합니다. 이 예시에서는 제자리에서 방어 시점을 확인합니다. 피격 위험에는 스킬 대응을 우선하고, 사용할 수 없으면 걷기로 회피합니다. 피격 예고가 오면 공격 준비를 중단하고 방어로 전환할 수 있습니다.",
+      "globalConditionsEn": "Example survival: respond to observed attacks and HP at or below 30%; defend with this skill first, then retreat on foot. This example holds position to show defense timing. Prefer skill responses to an incoming hit; walk away if the skill is unavailable. An incoming warning may interrupt attack preparation to switch to defense."
     },
     {
       "skill": "W05",

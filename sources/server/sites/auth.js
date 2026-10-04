@@ -1,5 +1,6 @@
 import {Rejected,fields,integer,sha256,challenge,randomToken,base64url,equal,reply,database,trustedOrigin,jsonBody,cookie,changed,tokenMap,parseJson} from './common.js';
 import {localAccountRoute,accountSession,sessionReply} from './accounts.js';
+import {guestAccountRoute} from './guest_accounts.js';
 import {webReturn,googleCompletion,gameOrigins} from './player_web.js';
 const TOKEN=/^[A-Za-z0-9_-]{43}(?![\s\S])/;
 const COOKIE='__Host-hellscript_login';
@@ -27,10 +28,10 @@ export async function telemetryIdentity(request,env,at=Date.now()) {
   const supplied=value.slice(7),qa=tokenMap(env.HELLSCRIPT_TELEMETRY_TOKENS);
   for(const [token,account] of Object.entries(qa))if(equal(token,supplied))return {accountId:'qa:'+account,kind:'qa'};
   if(!TOKEN.test(supplied))throw new Rejected(401,'authentication');
-  const row=await database(env).prepare('SELECT s.account_id,s.expires,EXISTS(SELECT 1 FROM auth_credentials c WHERE c.account_id=s.account_id) AS local_account FROM auth_sessions s WHERE s.token_hash=? AND s.expires>?').bind(await sha256(supplied),Math.floor(at/1000)).first();
+  const row=await database(env).prepare('SELECT s.account_id,s.expires,(EXISTS(SELECT 1 FROM auth_credentials c WHERE c.account_id=s.account_id) OR EXISTS(SELECT 1 FROM auth_guest_credentials g WHERE g.account_id=s.account_id)) AS local_account FROM auth_sessions s WHERE s.token_hash=? AND s.expires>?').bind(await sha256(supplied),Math.floor(at/1000)).first();
   if(!row)throw new Rejected(401,'authentication');
   // Existing Google combat retries keep their original namespace. Credentials persist after
-  // linking, so a local account keeps its player namespace even when it links Google.
+  // linking; guest origin markers also persist so both retain their player namespace.
   const kind=row.local_account?'player':'google';
   return {accountId:kind+':'+row.account_id,kind};
 }
@@ -91,6 +92,7 @@ export function createAuth({fetcher=(url,init)=>globalThis.fetch(url,init),now=D
   return async function auth(request,env) {
     const url=new URL(request.url),path=url.pathname,method=request.method,at=Math.floor(now()/1000),db=database(env);
     if(path==='/v1/auth/config'&&method==='GET')return reply({googleEnabled:configured(env)});
+    if(path==='/v1/accounts/guest'||path==='/v1/accounts/guest/resume')return guestAccountRoute(request,env,at);
     if(path.startsWith('/v1/accounts/')&&!path.startsWith('/v1/accounts/google/'))return localAccountRoute(request,env,at);
     if(!configured(env))throw new Rejected(503,'google_not_configured');
     await rate(db,'all',at,600);
@@ -168,9 +170,10 @@ export function createAuth({fetcher=(url,init)=>globalThis.fetch(url,init),now=D
         if(!owner)throw new Rejected(401,'link_ownership');
         const other=await db.prepare('SELECT id FROM auth_accounts WHERE identity_hash=? AND id<>?').bind(attempt.verified_identity,attempt.target_account_id).first();
         if(other)throw new Rejected(409,'google_account_conflict');
-        statements.push(db.prepare("UPDATE auth_accounts SET identity_hash=? WHERE id=? AND (identity_hash LIKE 'local:%' OR identity_hash=?) AND NOT EXISTS(SELECT 1 FROM auth_accounts WHERE identity_hash=? AND id<>?) AND EXISTS(SELECT 1 FROM auth_attempts WHERE handoff_hash=? AND status=3 AND expires>?) AND EXISTS(SELECT 1 FROM auth_sessions WHERE token_hash=? AND account_id=? AND expires>?)").bind(attempt.verified_identity,attempt.target_account_id,attempt.verified_identity,attempt.verified_identity,attempt.target_account_id,hash,at,attempt.owner_session_hash,attempt.target_account_id,at));
+        statements.push(db.prepare("UPDATE auth_accounts SET identity_hash=? WHERE id=? AND (identity_hash LIKE 'local:%' OR identity_hash LIKE 'guest:%' OR identity_hash=?) AND NOT EXISTS(SELECT 1 FROM auth_accounts WHERE identity_hash=? AND id<>?) AND EXISTS(SELECT 1 FROM auth_attempts WHERE handoff_hash=? AND status=3 AND expires>?) AND EXISTS(SELECT 1 FROM auth_sessions WHERE token_hash=? AND account_id=? AND expires>?)").bind(attempt.verified_identity,attempt.target_account_id,attempt.verified_identity,attempt.verified_identity,attempt.target_account_id,hash,at,attempt.owner_session_hash,attempt.target_account_id,at));
       }
       statements.push(db.prepare('UPDATE auth_attempts SET status=4,session_hash=?,exchange_claim=? WHERE handoff_hash=? AND status=3 AND expires>? AND (target_account_id IS NULL OR EXISTS(SELECT 1 FROM auth_accounts WHERE id=target_account_id AND identity_hash=verified_identity))').bind(tokenHash,claim,hash,at));
+      statements.push(db.prepare('UPDATE auth_guest_credentials SET revoked=1 WHERE account_id IN (SELECT target_account_id FROM auth_attempts WHERE handoff_hash=? AND status=4 AND exchange_claim=?)').bind(hash,claim));
       statements.push(db.prepare('DELETE FROM auth_sessions WHERE account_id IN (SELECT account_id FROM auth_attempts WHERE handoff_hash=? AND status=4 AND exchange_claim=?)').bind(hash,claim));
       statements.push(db.prepare('INSERT INTO auth_sessions SELECT ?,account_id,? FROM auth_attempts WHERE handoff_hash=? AND status=4 AND exchange_claim=?').bind(tokenHash,expires,hash,claim));
       try{await db.batch(statements);}catch(error){

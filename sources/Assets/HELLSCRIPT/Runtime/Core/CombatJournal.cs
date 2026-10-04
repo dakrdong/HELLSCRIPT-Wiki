@@ -17,6 +17,8 @@ namespace Hellscript
         public BuildConfig[] builds=Array.Empty<BuildConfig>();
         public HuntEdictV2Document[] edicts=Array.Empty<HuntEdictV2Document>();
     }
+    [Serializable] public sealed class CombatJournalDecisionTime
+    {public string key;public float seconds;}
     [Serializable] public sealed class CombatJournalData
     {
         public int version=1, sequence, omittedEvents, resumes;
@@ -42,6 +44,9 @@ namespace Hellscript
         public List<DropState> equipmentDrops=new List<DropState>();
         public List<RiftResourceDrop> resourceDrops=new List<RiftResourceDrop>();
         public List<CombatJournalEvent> events=new List<CombatJournalEvent>();
+        public List<CombatJournalDecisionTime> decisionTimes=new List<CombatJournalDecisionTime>();
+        public string movementKey="";
+        public float movementAt=-10;
         public List<string> integritySignals=new List<string>();
         public List<string> openedContent=new List<string>();
     }
@@ -50,7 +55,7 @@ namespace Hellscript
     {
         // Detailed events are bounded independently of the exact aggregate counters. Any gap is explicit.
         public const int EventLimit=20000;
-        public static T Copy<T>(T value) => JsonUtility.FromJson<T>(JsonUtility.ToJson(value));
+        public static T Copy<T>(T value) => value==null?default:JsonUtility.FromJson<T>(JsonUtility.ToJson(value));
         public static string Outcome(RunRecord record)=>record.journal?.outcome??
             (record.review?.phase==RunPhase.Cleared?"victory":record.review?.phase==RunPhase.Failed?"defeat":"unknown");
         public static IEnumerable<RunRecord> Query(IEnumerable<RunRecord> records,CombatRecordFilter filter)
@@ -59,7 +64,7 @@ namespace Hellscript
                 .OrderByDescending(r=>r.journal?.completedUtcMs??0).ThenByDescending(r=>r.journal?.attempt??0);
         public static void Append(RunState run,string kind,string message,string source="",string trigger="",int target=-1,int actionId=0,DamageEvent damage=null)
         {
-            var journal=run.journal;if(journal==null||run.training>=0||journal.archived)return;
+            var journal=run.journal;if(journal==null||journal.version!=1||run.training>=0||journal.archived)return;
             journal.events.Add(new CombatJournalEvent{sequence=++journal.sequence,seconds=run.time,kind=kind,message=message,
                 source=source,trigger=trigger,target=target,actionId=actionId,hp=run.health,resource=run.resource,
                 position=run.position,destination=run.destination,damageEvents=damage==null?Array.Empty<DamageEvent>():new[]{Copy(damage)},
@@ -120,10 +125,10 @@ namespace Hellscript
 
     public sealed partial class CombatSimulation
     {
-        readonly Dictionary<string,float> journalDecisionTimes=new Dictionary<string,float>();
-        string journalMovementKey="";
+        readonly Dictionary<string,CombatJournalDecisionTime> journalDecisionTimes=new Dictionary<string,CombatJournalDecisionTime>();
+        string journalMovementKey {get=>State.journal?.movementKey??"";set{if(State.journal!=null)State.journal.movementKey=value;}}
         string journalMovementReason,journalMovementTrigger;
-        float journalMovementAt=-10;
+        float journalMovementAt {get=>State.journal?.movementAt??-10;set{if(State.journal!=null)State.journal.movementAt=value;}}
         Vector2 journalPosition;
         void InitializeJournal(bool restoring,uint seed,bool recordResume)
         {
@@ -145,6 +150,8 @@ namespace Hellscript
                 State.journal.integritySignals??=new List<string>();
                 if(!State.journal.integritySignals.Contains("BALANCE_REFERENCE_ADDED_ON_RESUME"))State.journal.integritySignals.Add("BALANCE_REFERENCE_ADDED_ON_RESUME");
             }
+            State.journal.decisionTimes??=new List<CombatJournalDecisionTime>();
+            foreach(var row in State.journal.decisionTimes)journalDecisionTimes[row.key]=row;
             journalPosition=State.position;
             if(restoring&&recordResume)
             {
@@ -161,8 +168,10 @@ namespace Hellscript
         {
             if(State.training>=0||State.journal==null||code!="SELECTED"&&code!="RESOURCE"&&code!="COOLDOWN"&&code!="RANGE"&&code!="NO_TARGET")return;
             string key=(rule.id??"")+":"+code+":"+(target?.id??-1);
-            if(journalDecisionTimes.TryGetValue(key,out float last)&&State.time-last<4)return;
-            if(journalDecisionTimes.Count>512)journalDecisionTimes.Clear();journalDecisionTimes[key]=State.time;
+            if(journalDecisionTimes.TryGetValue(key,out var last)&&State.time-last.seconds<4)return;
+            if(journalDecisionTimes.Count>512){journalDecisionTimes.Clear();State.journal.decisionTimes.Clear();last=null;}
+            if(last==null){last=new CombatJournalDecisionTime{key=key};journalDecisionTimes[key]=last;State.journal.decisionTimes.Add(last);}
+            last.seconds=State.time;
             string action=rule.action==RuleAction.Basic?"기본 공격":rule.action==RuleAction.Skill?catalog.skills[rule.skill].name:
                 rule.action==RuleAction.Loot?"전리품 회수":rule.action==RuleAction.Chest?"상자 개봉":"탐색·성소";
             CombatJournal.Append(State,"DECISION",Loc.Source(code=="SELECTED"?"{0} 선택: {1} · {2}":"{0} 대기: {1} · {2}",action,detail,target==null?"대상 없음":JournalTarget(target.id)),

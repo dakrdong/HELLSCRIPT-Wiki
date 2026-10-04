@@ -66,6 +66,16 @@ namespace Hellscript
         }
     }
 
+    [Serializable] public sealed class RiftNavigationRoute
+    {
+        public int agent,next;
+        public Vector2 target;
+        public List<Vector2> points;
+        public float retryAt,radius;
+        public bool gatesClosed;
+        public bool HasPath=>points!=null&&points.Count>0;
+    }
+
     public sealed class RiftNavigation
     {
         public readonly RiftLayout Layout;
@@ -73,26 +83,36 @@ namespace Hellscript
         readonly List<Rect> floors=new List<Rect>();
         public readonly RiftSurface Surface;
         readonly HashSet<Vector2Int> cells=new HashSet<Vector2Int>();
-        readonly Dictionary<int,Route> routes=new Dictionary<int,Route>();
+        readonly Dictionary<int,RiftNavigationRoute> routes=new Dictionary<int,RiftNavigationRoute>();
+        readonly List<RiftNavigationRoute> savedRoutes;
         readonly HashSet<Vector2Int> reachable=new HashSet<Vector2Int>();
         readonly bool forceGatesOpen;
         bool gridBuilt,gatesClosed;
         static readonly Vector2[] footprint={new Vector2(1,0),new Vector2(-1,0),new Vector2(0,1),new Vector2(0,-1),new Vector2(1,1),new Vector2(1,-1),new Vector2(-1,1),new Vector2(-1,-1)};
-        sealed class Route {public Vector2 target;public List<Vector2> points;public int next;public float retryAt;}
-        public bool HeroPathFailed {get{RefreshGates();return routes.TryGetValue(0,out var path)&&path.points==null;}}
+        public bool HeroPathFailed {get{RefreshGates();return routes.TryGetValue(0,out var path)&&!path.HasPath;}}
         public int WalkableCellCount {get{RefreshGates();return cells.Count;}}
-        public RiftNavigation(RiftLayout layout,bool gatesOpen=false)
+        public RiftNavigation(RiftLayout layout,bool gatesOpen=false,List<RiftNavigationRoute> savedRoutes=null)
         {
             Layout=layout??throw new ArgumentNullException(nameof(layout));Rooms=layout.rooms.Select(r=>r.position).ToArray();forceGatesOpen=gatesOpen;
             Surface=new RiftSurface(layout);foreach(var patch in Surface.patches)floors.Add(patch.bounds);
             RefreshGates();
+            this.savedRoutes=savedRoutes;
+            if(savedRoutes!=null&&savedRoutes.Any(route=>route!=null&&route.gatesClosed!=gatesClosed))savedRoutes.Clear();
+            if(savedRoutes!=null)foreach(var route in savedRoutes)
+            {
+                if(route==null||route.agent<0||route.next<0||route.HasPath&&route.next>route.points.Count||
+                    !float.IsFinite(route.target.x)||!float.IsFinite(route.target.y)||!float.IsFinite(route.retryAt)||
+                    !float.IsFinite(route.radius)||route.radius<=0||route.points!=null&&route.points.Any(p=>!float.IsFinite(p.x)||!float.IsFinite(p.y))||routes.ContainsKey(route.agent))
+                    throw new ArgumentException("Invalid saved navigation route.");
+                routes.Add(route.agent,route);
+            }
         }
         public void RefreshGates()
         {
             if(Layout.legacy)return;
             bool closed=!forceGatesOpen&&!Layout.gateOpen&&(Layout.gates?.Count??0)>0;
             if(gridBuilt&&closed==gatesClosed)return;
-            gridBuilt=true;gatesClosed=closed;cells.Clear();reachable.Clear();routes.Clear();
+            gridBuilt=true;gatesClosed=closed;cells.Clear();reachable.Clear();routes.Clear();savedRoutes?.Clear();
             var candidates=new HashSet<Vector2Int>();
             foreach(var floor in floors)for(int x=Mathf.CeilToInt(floor.xMin);x<=Mathf.FloorToInt(floor.xMax);x++)for(int y=Mathf.CeilToInt(floor.yMin);y<=Mathf.FloorToInt(floor.yMax);y++)candidates.Add(new Vector2Int(x,y));
             foreach(var p in candidates)if(Walkable(p))cells.Add(p);
@@ -197,14 +217,17 @@ namespace Hellscript
         public Vector2 Move(Vector2 from,Vector2 to,float distance,int agent=0,float time=0,float radius=.45f)
         {
             if(Layout.legacy)return RiftMap.Move(from,to,distance);
-            if(TravelClear(from,to,radius)){routes.Remove(agent);return MoveDirect(from,to,distance,radius);}
-            if(!routes.TryGetValue(agent,out var route)||Vector2.Distance(route.target,to)>1.5f||route.points==null&&time>=route.retryAt||route.points!=null&&Vector2.Distance(from,route.target)<.2f)
-            {route=new Route{target=to,points=FindPath(from,to,radius),retryAt=time+.5f,next=1};routes[agent]=route;}
-            if(route.points==null||route.next>=route.points.Count)return from;
+            if(TravelClear(from,to,radius)){Repath(agent);return MoveDirect(from,to,distance,radius);}
+            if(!routes.TryGetValue(agent,out var route)||route.radius!=radius||Vector2.Distance(route.target,to)>1.5f||!route.HasPath&&time>=route.retryAt||route.HasPath&&Vector2.Distance(from,route.target)<.2f)
+            {
+                Repath(agent);route=new RiftNavigationRoute{agent=agent,target=to,points=FindPath(from,to,radius),retryAt=time+.5f,next=1,radius=radius,gatesClosed=gatesClosed};
+                routes[agent]=route;savedRoutes?.Add(route);
+            }
+            if(!route.HasPath||route.next>=route.points.Count)return from;
             // A nearby corner is still necessary when skipping it would cut through the wall.
             // Otherwise a point less than .2m away is skipped, rejected, and recreated forever.
             while(route.next<route.points.Count-1&&Vector2.Distance(from,route.points[route.next])<.2f&&TravelClear(from,route.points[route.next+1],radius))route.next++;
-            if(!TravelClear(from,route.points[route.next],radius)){routes.Remove(agent);return from;}
+            if(!TravelClear(from,route.points[route.next],radius)){Repath(agent);return from;}
             return MoveDirect(from,route.points[route.next],distance,radius);
         }
         public Vector2 MoveDirect(Vector2 from,Vector2 to,float distance,float radius=.45f)
@@ -213,7 +236,8 @@ namespace Hellscript
             float low=0,high=distance;for(int n=0;n<9;n++){float mid=(low+high)*.5f;var point=Vector2.MoveTowards(from,to,mid);if(Walkable(point,radius)&&TravelClear(from,point,radius))low=mid;else high=mid;}
             return Vector2.MoveTowards(from,to,low);
         }
-        public void Repath(int agent=0)=>routes.Remove(agent);
+        public void Repath(int agent=0)
+        {if(routes.Remove(agent))savedRoutes?.RemoveAll(route=>route.agent==agent);}
         public int ClosestRoom(Vector2 p)
         {int result=0;float best=float.MaxValue;for(int n=0;n<Rooms.Length;n++){float d=(p-Rooms[n]).sqrMagnitude;if(d<best){best=d;result=n;}}return result;}
         public int RoomAt(Vector2 p)

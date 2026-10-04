@@ -1,0 +1,36 @@
+[
+  {
+    "source": "native-build.log",
+    "lines": [
+      "2026-10-04T12:52:01.594+0900\tERROR\tUnable to upload symbols to Unity Cloud Diagnostics\t{\"error\": \"Unity Cloud Diagnostics credentials unavailable. Please provide an auth token with USYM_UPLOAD_AUTH_TOKEN environment variable\"}",
+      "HELLSCRIPT_BUILD_SIZE bytes=584313411 assets=3726",
+      "HELLSCRIPT_BUILD Succeeded errors=0 output=/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Artifacts/Validation/EditModeRepair20261004/HELLSCRIPT-repair-0d6e8748.app"
+    ]
+  },
+  {
+    "source": "native-checkpoint.log",
+    "lines": [
+      "Metal RecreateSurface[0x11404ac70]: surface size 440x956",
+      "Metal RecreateSurface[0x11404ac70]: surface size 1600x900",
+      "Metal RecreateSurface[0x11404ac70]: surface size 440x956",
+      "Metal RecreateSurface[0x11404ac70]: surface size 956x440",
+      "Metal RecreateSurface[0x11404ac70]: surface size 1600x900",
+      "Metal RecreateSurface[0x11404ac70]: surface size 1600x1000",
+      "Metal RecreateSurface[0x11404ac70]: surface size 2100x900",
+      "Metal RecreateSurface[0x11404ac70]: surface size 956x440"
+    ]
+  },
+  {
+    "source": "native-restart-first-attempt.log",
+    "lines": [
+      "Metal RecreateSurface[0x113c8ac70]: surface size 956x440",
+      "InvalidOperationException: Fresh process diverged after 100 ticks: rift 1"
+    ]
+  },
+  {
+    "source": "native-restart.log",
+    "lines": [
+      "Metal RecreateSurface[0x11354ac70]: surface size 956x440"
+    ]
+  }
+]

@@ -11,6 +11,7 @@ import json
 import re
 import shutil
 import struct
+import subprocess
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
@@ -1016,6 +1017,15 @@ def public_dataset(dataset):
     return {**dataset, 'audience':'public', 'readOnly':True}
 
 
+def copy_public_file(source, destination):
+    # Staging is on the same APFS volume. Independent clone files avoid duplicating
+    # several GB while the previous, verified public tree remains available.
+    if sys.platform == 'darwin':
+        subprocess.run(['/bin/cp', '-c', str(source), str(destination)], check=True)
+        return str(destination)
+    return shutil.copyfile(source, destination)
+
+
 def build_public(dataset):
     public=public_dataset(dataset)
     target=SITE/'public'
@@ -1027,16 +1037,16 @@ def build_public(dataset):
         shell=(SITE/'index.html').read_text().replace('HELLSCRIPT 개발 위키','HELLSCRIPT 공개 위키').replace('DEVELOPMENT WIKI','PUBLIC WIKI').replace('HELLSCRIPT 기획, 개발 기록과 리소스 데이터베이스','HELLSCRIPT 전체 문서와 데이터베이스 · 읽기 전용')
         shell=shell.replace('src="data.js"','src="data.js?v='+digest(json.dumps(public,ensure_ascii=False).encode())[:16]+'"')
         (stage/'index.html').write_text(shell)
-        for name in ['app.js','app.css']:shutil.copyfile(SITE/name,stage/name)
-        shutil.copytree(SITE/'icons',stage/'icons')
-        shutil.copytree(SITE/'media',stage/'media')
+        for name in ['app.js','app.css']:copy_public_file(SITE/name,stage/name)
+        shutil.copytree(SITE/'icons',stage/'icons',copy_function=copy_public_file)
+        shutil.copytree(SITE/'media',stage/'media',copy_function=copy_public_file)
         # Copy only current collected source snapshots, not stale files from prior builds.
         for source in dataset['inputManifest']:
             original=SITE/'sources'/source
             if original.is_file():
                 destination=stage/'sources'/source
                 destination.parent.mkdir(parents=True,exist_ok=True)
-                shutil.copyfile(original,destination)
+                copy_public_file(original,destination)
         save(stage/'catalog.json',{'generatedAt':dataset['generatedAt'],'databases':dataset['databases']})
         save(stage/'data.json',public)
         (stage/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(public,ensure_ascii=False).replace('</','<\\/')+';\n')

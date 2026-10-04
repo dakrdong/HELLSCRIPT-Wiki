@@ -8,6 +8,10 @@ Unity Editor 연동에는 `AGENTS.md`의 **CoplayDev Unity MCP 활용 기준**�
 
 For Unity Editor integration, follow **CoplayDev Unity MCP 활용 기준** in `AGENTS.md` as the single source for tool selection, project targeting, verification, and connection recovery.
 
+빌드·백업·임시 산출물은 `AGENTS.md`의 **빌드·백업·임시 산출물 정리 — 필수 (2026-10-04)**를 따른다. 생성 경로·소유자·실측 크기·보존기한을 기록하고, 검증 뒤 승인된 정리를 완료 조건에 포함한다. 원본·대화·인증·사용자 변경·활성 작업과 필요한 근거를 보호하며 복구 가능한 보관과 영구 삭제의 승인을 구분한다.
+
+Builds, backups and temporary outputs follow the mandatory artifact cleanup section in `AGENTS.md`: record ownership, exact paths, measured sizes and retention; finish authorized cleanup after validation; protect original data, user changes, active jobs and required evidence; distinguish recoverable archival from approval for permanent deletion.
+
 CPU 비용과 프레임 갱신 관련 변경은 `AGENTS.md`의 **CPU 비용 재발 방지와 성능 리뷰 — 필수** 및 [성능 리뷰 규칙](Docs/Implementation/Performance_Review_Rules.md)을 따른다. 카메라·HUD 갱신 소유권, 상태 변경 시 UI 반영, 동일 조건 실측과 산출물 보존 기준은 그 문서에서 유지한다.
 
 For CPU and frame-update changes, follow the mandatory performance section in `AGENTS.md` and [the performance review rules](Docs/Implementation/Performance_Review_Rules.en.md), which own the camera/HUD lifecycle, UI invalidation, measurement and build-evidence requirements.

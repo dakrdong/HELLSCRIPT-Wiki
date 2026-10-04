@@ -18,7 +18,7 @@ namespace Hellscript.Tests
         static string Saved(RunState run)=>Json(JsonUtility.FromJson<RunState>(Json(run)));
         static CombatSimulation Copy(AccountSave account,CombatSimulation source,GameCatalog catalog)
             =>new CombatSimulation(JsonUtility.FromJson<AccountSave>(Json(account)),catalog,source.State.stage,
-                restore:JsonUtility.FromJson<RunState>(Json(source.State)));
+                restore:JsonUtility.FromJson<RunState>(Json(source.State)),recordResume:false);
         static void Advance(CombatSimulation sim,int ticks){for(int i=0;i<ticks;i++)sim.Tick(CombatSimulation.Step);}
 
         [TestCase(1)][TestCase(5)][TestCase(12)]

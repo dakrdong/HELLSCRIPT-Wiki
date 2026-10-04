@@ -1,0 +1,37 @@
+diff --git a/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset b/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+index 37c13441..bbccfea7 100644
+--- a/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
++++ b/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset
+@@ -85,6 +85,7 @@ MonoBehaviour:
+       - rid: 5747374308340793347
+       - rid: 5747374308340793348
+       - rid: 6588237625532874753
++      - rid: 6588237625532874755
+       - rid: 6588237625532874756
+       - rid: 6588237625532874757
+       - rid: 6588237625532874759
+diff --git a/ProjectSettings/ProjectSettings.asset b/ProjectSettings/ProjectSettings.asset
+index d4312e09..61773c1b 100644
+--- a/ProjectSettings/ProjectSettings.asset
++++ b/ProjectSettings/ProjectSettings.asset
+@@ -843,6 +843,7 @@ PlayerSettings:
+   il2cppStacktraceInformation: {}
+   managedStrippingLevel:
+     Android: 1
++    Standalone: 0
+   incrementalIl2cppBuild: {}
+   suppressCommonWarnings: 1
+   allowUnsafeCode: 0
+diff --git a/ProjectSettings/UnityConnectSettings.asset b/ProjectSettings/UnityConnectSettings.asset
+index 63f7a842..dfe1ebdc 100644
+--- a/ProjectSettings/UnityConnectSettings.asset
++++ b/ProjectSettings/UnityConnectSettings.asset
+@@ -4,7 +4,7 @@
+ UnityConnectSettings:
+   m_ObjectHideFlags: 0
+   serializedVersion: 1
+-  m_Enabled: 0
++  m_Enabled: 1
+   m_TestMode: 0
+   m_EventOldUrl: https://api.uca.cloud.unity3d.com/v1/events
+   m_EventUrl: https://cdp.cloud.unity3d.com/v1/events

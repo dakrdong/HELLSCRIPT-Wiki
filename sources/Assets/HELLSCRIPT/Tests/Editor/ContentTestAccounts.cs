@@ -25,5 +25,14 @@ namespace Hellscript.Tests
             ContentUnlocks.RecordRunEnd(account);
             return account;
         }
+        // A reward-bearing legacy arena is still a real rift checkpoint. Changing a
+        // training flag after construction skips its balance/journal/save initialization.
+        public static CombatSimulation LegacyRift(AccountSave account,GameCatalog catalog,uint seed)
+        {
+            var state=new RunState{id=Guid.NewGuid().ToString("N"),heroId=account.Hero.id,stage=1,training=-1,
+                rng=seed,layout=RiftLayout.Legacy(0),position=RiftMap.Rooms[0],build=account.Hero.build.Copy()};
+            var sim=new CombatSimulation(account,catalog,1,restore:state,recordResume:false);
+            state.health=sim.Stats.hp;state.visited.Add(0);return sim;
+        }
     }
 }

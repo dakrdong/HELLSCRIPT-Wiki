@@ -60,7 +60,7 @@ namespace Hellscript
             if(State.layout==null||State.layout.rooms==null||State.layout.rooms.Count==0)State.layout=RiftLayout.Legacy(State.theme);
             if(fresh&&IsTrainingGround)PrepareTrainingArena();
             if(State.rewardRng==0)State.rewardRng=State.rng;
-            GameStore.NormalizeRun(State);Map=new RiftNavigation(State.layout);
+            GameStore.NormalizeRun(State);Map=new RiftNavigation(State.layout,savedRoutes:State.navigationRoutes);
         }
         void TrySpawnBoss(float dt)
         {

@@ -40,8 +40,8 @@ namespace Hellscript
             var seal=Rect("Sanctuary sigil",logoGroup);var ornament=seal.gameObject.AddComponent<TitleOrnament>();ornament.color=Gold;ornament.raycastTarget=false;
             tagline=Caption(logoGroup,"tagline","재가 된 성소에서, 다시 깨어나라.",15,Bone);
             home=Rect("Title entry controls",root);homeGroup=home.gameObject.AddComponent<CanvasGroup>();
-            login=ActionButton(home,"title-login","로그인",ShowLogin,false,15);
-            guest=ActionButton(home,"title-guest","계정 만들기",GuestAction,false,15);
+            login=GoogleButton(home,"title-login","Google 연동",GoogleAction,15,1);
+            guest=ActionButton(home,"title-guest","게스트로 시작",GuestAction,false,15);
             server=ActionButton(home,"title-server","서버 선택",ShowServers,false,16);
             enter=ActionButton(home,"title-enter","캐릭터 선택하기",Enter,true,22);
             entryHint=Caption(home,"entry-hint","로그인하거나 게스트로 시작하세요.",12,Muted);
@@ -53,13 +53,13 @@ namespace Hellscript
         }
         void Refresh()
         {
-            SetCaption(login,Loc.T(Session.SignedIn&&!Session.Guest?"계정":"로그인"));
-            SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("계정 만들기"));
+            SetCaption(login,Loc.T(game.GoogleLogin.GoogleLinked?"계정":"Google 연동"));
+            SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("게스트로 시작"));
             guest.onClick.RemoveAllListeners();guest.onClick.AddListener(GuestAction);
             SetCaption(server,Loc.F("{0}   ·   {1}   ›",TitleSession.ServerNames[Session.Server],TitleSession.ServerStates[Session.Server]));
             SetCaption(motion,Loc.T(Session.MotionEnabled?"연출 켜짐":"연출 멈춤"));
             SetCaption(enter,Loc.T("캐릭터 선택하기"));
-            entryHint.text=Loc.T("로그인 후 캐릭터를 선택합니다.");
+            entryHint.text=Loc.T("게스트로 시작하거나 Google을 연동하세요.");
         }
         public Button Find(string id)
         {
@@ -75,8 +75,10 @@ namespace Hellscript
         {
             if(Session.SignedIn){if(!game.SignOutAccount())game.UI.ShowToast(game.Notice);Refresh();return;}
             if(game.OfflineQaEnabled){if(!game.EnterAsGuest())game.UI.ShowToast(game.Notice);return;}
-            ShowCredentials(true);
+            ShowGuestProgress();game.GoogleLogin.BeginGuest();
         }
+        void GoogleAction()
+        {if(Session.SignedIn&&game.GoogleLogin.Ready&&game.GoogleLogin.GoogleLinked)ShowLogin();else ShowGoogleAuthentication(Session.SignedIn&&game.GoogleLogin.Ready);}
         void Enter()
         {
             if(game.AccountOwnershipBusy)return;
@@ -104,7 +106,7 @@ namespace Hellscript
             var size=root.rect.size;if(!force&&size==lastSize)return;lastSize=size;
             bool portrait=size.y>size.x;
             // The parent canvas may shrink in a phone viewport. Preserve the title's existing
-            // 44-point targets in actual pixels, including credential and support-UID controls.
+            // 44-point targets in actual pixels, including entry and support-UID controls.
             float minimum=1/Mathf.Max(.01f,root.GetComponentInParent<Canvas>().scaleFactor);
             scale=Mathf.Max(minimum,Mathf.Clamp(Mathf.Min(size.x/(portrait?480:1180),size.y/(portrait?980:780)),1,1.65f));
             float w=size.x/scale,h=size.y/scale;

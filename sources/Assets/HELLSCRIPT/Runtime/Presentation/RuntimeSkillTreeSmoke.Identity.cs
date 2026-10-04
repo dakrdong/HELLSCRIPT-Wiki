@@ -9,6 +9,70 @@ namespace Hellscript
 {
     public sealed partial class RuntimeSkillTreeSmoke
     {
+        static string SavedRun(RunState state)=>Json(JsonUtility.FromJson<RunState>(Json(state)));
+        IEnumerator RegressionRepairFlow(bool resume)
+        {
+            // Fixed local clocks prevent offline settlement from changing a comparison fixture.
+            const long clock=1791068400;
+            foreach(int stage in new[]{1,5,12})
+            {
+                string directory=Path.Combine(output,"rift-save-"+stage),expected=Path.Combine(output,"rift-expected-"+stage+".json");
+                if(!resume)Require(!Directory.Exists(directory),"Use a fresh repair evidence directory.");
+                var store=new GameStore(directory,game.catalog,forgeClock:()=>clock,offlineClock:()=>clock);
+                if(!resume){store.Data.Hero.level=30;store.Data.Hero.capacity=100;}
+                var checkpoint=store.Data.suspendedRun;
+                if(resume)Require(checkpoint!=null&&checkpoint.stage==stage,"Missing saved rift "+stage);
+                string auditAccount=resume?Json(store.Data):"";
+                var sim=new CombatSimulation(store.Data,game.catalog,stage,restore:resume?checkpoint:null,
+                    seed:(uint)(4242+stage),recordResume:false);
+                if(resume)
+                {
+                    Require(File.ReadAllText(Path.Combine(output,"rift-checkpoint-"+stage+".json"))==SavedRun(sim.State),"Reload changed the checkpoint "+stage);
+                }
+                for(int tick=0;tick<(resume?100:200);tick++)sim.Tick(CombatSimulation.Step);
+                if(!resume)
+                {
+                    store.Data.suspendedRun=sim.State;Require(store.Save(),store.Error);
+                    File.WriteAllText(Path.Combine(output,"rift-checkpoint-"+stage+".json"),SavedRun(sim.State));
+                    for(int tick=0;tick<100;tick++)sim.Tick(CombatSimulation.Step);
+                    File.WriteAllText(expected,SavedRun(sim.State));
+                }
+                else
+                {
+                    string actual=SavedRun(sim.State);Require(File.ReadAllText(expected)==actual,"Fresh process diverged after 100 ticks: rift "+stage);
+                    File.WriteAllText(Path.Combine(output,"rift-actual-"+stage+".json"),actual);
+                    var savedAccount=JsonUtility.FromJson<AccountSave>(auditAccount);var before=savedAccount.suspendedRun;
+                    int resumes=before.journal.resumes,events=before.journal.events.Count(e=>e.kind=="RESUME");
+                    string action=Json(before.heroAction);var playerResume=new CombatSimulation(savedAccount,game.catalog,stage,restore:before);
+                    Require(playerResume.State.journal.resumes==resumes+1&&playerResume.State.journal.events.Count(e=>e.kind=="RESUME")==events+1,"Player resume did not append exactly one audit event");
+                    Require(action==Json(playerResume.State.heroAction),"Player resume changed an in-flight action");
+                }
+            }
+            if(resume)
+            {
+                File.WriteAllText(Path.Combine(output,"repair-restart.txt"),"PASS: three fresh-process rifts match their uninterrupted 100-tick controls as complete saved JSON, including positions, navigation waypoints, RNG, health, cooldowns, DPS and journal throttles. Real player resume adds exactly one audit event without changing the in-flight action.\n");
+                Application.Quit(0);yield break;
+            }
+            ExistingTrees(game);foreach(var hero in game.Store.Data.heroes)hero.level=40;
+            game.Store.Data.guide.hintsHidden=true;game.Store.Data.guide.mapComplete=true;
+            Require(game.Store.ActivateSkillTrees(game.catalog),game.Store.Error);
+            yield return Resize(1600,900);yield return PresetFixture(0,"W05");yield return PickPreset("chain");
+            var session=Window.PreviewCombat;Require(session!=null,"Missing live chained-shield preview");
+            Require(session.Combat.State.shields.Any(s=>s.definitionId=="W16"&&s.amount>0),"Prepared shield is absent");
+            session.SetSpeed(2);float timeout=Time.realtimeSinceStartup+15;
+            while(!session.Ended&&!session.Combat.State.shields.Any(s=>s.definitionId=="W05"&&s.amount>0)&&Time.realtimeSinceStartup<timeout)yield return null;
+            Require(session.Combat.State.shields.Any(s=>s.definitionId=="W05"&&s.amount>0),"Chained defense never produced its shield");
+            Require(!session.Combat.State.shields.Any(s=>s.definitionId=="W16"&&s.amount>0&&s.remaining>0),"Chained defense overlapped the previous shield");
+            session.SetPaused(true);File.WriteAllText(Path.Combine(output,"W05-combat.json"),JsonUtility.ToJson(session.Combat.State,true));
+            foreach(var size in new[]{new Vector2Int(440,956),new Vector2Int(956,440),new Vector2Int(1600,900),new Vector2Int(1600,1000),new Vector2Int(2100,900)})
+            foreach(string language in new[]{"ko","en"})
+            {yield return Resize(size.x,size.y,language);CheckPresetFrame();yield return Capture("W05-chain-"+size.x+"x"+size.y+"-"+language);}
+            UiSafeArea.Simulate(32,24,40,28);yield return Resize(956,440,"en");CheckPresetFrame();yield return Capture("W05-chain-safe-area");UiSafeArea.StopSimulating();
+            Window.RequestClose();yield return null;
+            var saved=new GameStore(game.Profiles.GuestDirectory,game.catalog);Require(HuntEdictQuickPresets.Matches(HuntEdictLoadout.FromHero(saved.Data.Hero),"skill/W05","chain"),"Activated shield policy did not persist");
+            File.WriteAllText(Path.Combine(output,"repair-checkpoint.txt"),"PASS: three real rifts saved at 10 seconds with uninterrupted 15-second controls; actual chained shields, production preset pointer/save, five viewports in KO/EN and simulated safe area.\n");
+            Application.Quit(0);
+        }
         IEnumerator IdentityFlow()
         {
             ExistingTrees(game);foreach(var hero in game.Store.Data.heroes)hero.level=40;

@@ -2,6 +2,8 @@
 
 [한국어](Skill_Identity_Rework.md)
 
+2026-10-04 follow-up: all 128 retained failures are repaired. The final full Edit Mode run passed **all 5,122 tests with zero failures or skips**, alongside real macOS save/restart acceptance. [Causes and final evidence](EditMode_Regression_Repair_20261004.en.md).
+
 As of: 2026-10-04. Seven existing skills now change distinct combat decisions while preserving skill IDs, the prerequisite graph, four active slots, one ultimate, shared codes and equipment owners. New fields are optional within combat state V1. Previously saved resource-over-time effects and old frost globes finish with their original behavior.
 
 | Skill | Previous role | Implemented decision | Connections |
@@ -32,7 +34,7 @@ Unequipping and save restoration retain debt; outstanding debt blocks manual and
 
 Eight icons are generated individually with original RGBA bytes and Unity GUIDs preserved. The original handoff remains immutable; `Docs/Art/ClassSkillIcons/identity-rework.json` explicitly supersedes revised names and concepts. The generation surface returns no model identity, so records retain `model=unknown` and `approval=candidate`. Check alpha, light/dark backgrounds, 64px distinction and clipping.
 
-Twenty-six focused mechanic checks cover saved debt, return paths, elemental reactions, crossfire piercing, actual movement, automatic presets, sharing and state preservation when no debt exists. The full Edit Mode suite ran once at final integration: 4,978 of 5,114 checks passed and 136 failed. Eight failures introduced by this change were repaired; all 81 related checks then passed. The remaining 128 failures predate the change: 127 have the same assertions as the previous report, and one shield example also fails at baseline `4c9e7b7e`. This is not a passing full-suite result.
+Twenty-six focused mechanic checks cover saved debt, return paths, elemental reactions, crossfire piercing, actual movement, automatic presets, sharing and state preservation when no debt exists. These are historical results from the initial rework. Its full Edit Mode suite ran once at final integration: 4,978 of 5,114 checks passed and 136 failed. Eight failures introduced by this change were repaired; all 81 related checks then passed. The 128 failures then retained predate that change: 127 have the same assertions as the previous report, and one shield example also fails at baseline `4c9e7b7e`. That initial run was not a passing full-suite result. The follow-up above resolves the retained failures.
 
 The macOS development player built from `7c6f2724` with zero build errors. Seven actual automatic encounters demonstrate pushing, borrowing, damaging crossfire, damaging afterimages, elemental absorption, completed frost return and conduit relaying. The new attack-order and orbit presets were selected through real controls, saved and read back from disk. Ninety-one captures cover KO/EN at 440×956, 956×440, 1600×900, 1600×1000 and 2100×900, plus simulated landscape safe area. Inputs use actual uGUI raycasts and synthetic pointer down/up/click events, not physical mouse or touch.
 

@@ -63,7 +63,11 @@ namespace Hellscript
             LiveOps=gameObject.AddComponent<LiveOpsClient>();LiveOps.Initialize(saveDirectory);Store.LiveOpsPreview=LiveOps.Capture;Store.LiveOpsPreviewVersion=()=>LiveOps.Version;
             GoogleLogin=gameObject.AddComponent<GoogleLoginClient>();deviceSaveDirectory=saveDirectory;
             PlayerEvents=gameObject.AddComponent<PlayerEventUploader>();PlayerEvents.Initialize(this);
-            GoogleLogin.SessionChanged+=()=>{if(GoogleLogin.LinkCompleted)CompleteGoogleLink();};
+            GoogleLogin.SessionChanged+=()=>{
+                if(GoogleLogin.LinkCompleted)CompleteGoogleLink();
+                else if(GoogleLogin.GuestSession&&UI?.EntrySession.AccountId==GoogleLogin.Session.accountId)
+                {UI.EntrySession.RefreshAccount(GoogleLogin.Session);GameServerConnection.ConfigurePlayerTelemetry(this);}
+            };
             GameServerConnection.Configure(this,saveDirectory);
             World=gameObject.AddComponent<WorldView>();World.Initialize(this);
             Audio=gameObject.AddComponent<GameAudio>();Audio.Initialize(saveDirectory);Audio.Watch(Store);

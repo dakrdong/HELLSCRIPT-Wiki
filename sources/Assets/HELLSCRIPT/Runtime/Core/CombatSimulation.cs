@@ -49,7 +49,7 @@ namespace Hellscript
             State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null)RiftResult.Begin(this.account,State);
-            if(restore==null&&training<0)State.dps=new CombatDpsTimeline();
+            if(restore==null&&training<0)State.dps=new CombatDpsTimeline{version=CombatDpsTimeline.Version};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=ground?trainingGround.stage:1;State.rng=seed??(ground?TrainingGround.Seed(trainingGround):731010u+(uint)training);}
             // The training ground fights real rift enemies, so it keeps the rift's live-ops balance for its tier.
             if(restore==null&&ground)State.trainingGround=new TrainingGroundRunState{setup=trainingGround.Copy(),key=TrainingGround.Key(trainingGround,Hero)};

@@ -94,7 +94,10 @@ namespace Hellscript
         void Reflow()
         {
             var size=root.rect.size;if(size==lastSize)return;lastSize=size;
-            bool portrait=size.y>size.x;scale=Mathf.Clamp(Mathf.Min(size.x/(portrait?440:1280),size.y/(portrait?860:760)),1,1.65f);
+            bool portrait=size.y>size.x;
+            // Match the title's native 44-point targets when the parent canvas shrinks.
+            float minimum=1/Mathf.Max(.01f,root.GetComponentInParent<Canvas>().scaleFactor);
+            scale=Mathf.Max(minimum,Mathf.Clamp(Mathf.Min(size.x/(portrait?440:1280),size.y/(portrait?860:760)),1,1.65f));
             float w=size.x/scale,h=size.y/scale;bool compact=!portrait&&h<570;
             Fit(tools,16,10,w-32,44);Put((RectTransform)back.transform,0,0,100,44);
             Put((RectTransform)motion.transform,w-32-204,0,100,44);Put((RectTransform)language.transform,w-32-96,0,96,44);
