@@ -1,6 +1,6 @@
 # Shared equipment comparison rules
 
-Updated: 2026-10-03 · First written: 2026-09-22 · Contract: `equipment-comparison-v1` · [한국어](Equipment_Comparison_Rules.md)
+Updated: 2026-10-05 · First written: 2026-09-22 · Contract: `equipment-comparison-v1` · [한국어](Equipment_Comparison_Rules.md)
 
 This is the display contract for **all equipment comparisons**, including inventory, storage, merchants, acquired rewards and training. New content must use `ItemComparison.Preview`, `ItemTooltip` and `EquipmentComparisonView`. Existing services retain ownership of generation, transactions and equipping.
 
@@ -104,3 +104,19 @@ The information hierarchy of the user-provided Diablo IV screens was re-ported f
 - **Landscape detail window**: inventory detail widens to at most 640 in landscape; footer actions use up to four per row at 480+ so the card keeps its height.
 - **Portrait comparison (< 460 wide)**: instead of squeezing two cards into 200 units, `Selected gear / Equipped · position` tabs show one full-width card at a time, defaulting to the selected gear. Ring baseline tabs stay on top and tab switching never changes saved data. At 460+ the existing side-by-side comparison (equipped left, selected right) is kept.
 - **Landscape default comparison**: in landscape, tapping an unequipped inventory item whose slot has equipped gear opens the detail window directly as a side-by-side comparison (`Equipped` left, `Selected gear` right). The window is full width and keeps Equip, Lock, Compare equipment and Close (`Compare equipment` opens the dedicated window with per-ring equip buttons). Equipped items, empty slots and portrait keep the single detail.
+
+## Ornament art and motion (2026-10-05)
+
+Following the user's request to make the UI design as polished and juicy as possible, the card's ornament and motion were raised one more step. Only presentation changed; calculation, transaction and save ownership are untouched. `ItemCardArt` loads the Codex images documented in [Item detail card ornament art](../Art/ItemCard/Item_Card_Art.en.md).
+
+- **Rarity frame**: wide cards (300+) get four corner ornaments (one image mirrored) and a rarity-coloured top edge. Dense cards keep the vector corners.
+- **Score plaque**: the gear score (`equipment-score`) sits on a plaque that stretches to the text. A green ▲ or red ▼ beside it marks a gain or loss. The text node and name are unchanged, so existing checks read the same values.
+- **Major dividers**: ornamental dividers under the header and before `Additional options` / `Special power`; thin vector rules elsewhere. Cards shorter than 420 (such as landscape comparisons) use vector rules and a shorter plaque (52) to save height; below 300 the halo and plaque are dropped and the score is plain text.
+- **Rarity halo**: a rarity-coloured halo sits behind the equipment art and the art frame border takes the rarity colour. Legendary and set gear glow brighter.
+- **Greater-affix star**: the diamond before a greater affix becomes a four-point star with a rising flame, with bright gold text.
+- **Socket ring**: an empty socket is a grey ring; a socketed gem's art sits inside a gold ring.
+- **Comparison emphasis**: option rows that gain or lose value get a soft green/red wash and the primary delta gets a triangle arrow, so colour is never the only cue.
+- **Special-power frame**: the inset panel border uses the rarity colour.
+- **Scroll cue**: a down arrow above `Scroll down`, over an opaque strip so lines behind never show through the label.
+- **Entrance**: the card fades in over 0.2 s while settling from 96.5% to 100%, and legendary/set headers catch one tilted streak of light. The component removes itself when done, so there is no per-frame cost afterwards. Native smokes disable it by default for stable captures; `-hellscriptUiMotion` captures slowed frames.
+- **Window title flourish**: the item detail window's title rule carries a centred ornamental divider.

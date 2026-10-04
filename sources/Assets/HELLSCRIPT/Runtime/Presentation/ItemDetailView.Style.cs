@@ -6,7 +6,8 @@ namespace Hellscript
 {
     public sealed partial class ItemDetailView
     {
-        bool compact;
+        bool compact,tight,veryTight;Color accent=UiTheme.Gold;string rarityHex=UiTheme.GoldHex;int grade;
+        static Color Faded(Color c,float a){c.a=a;return c;}
         int TypeSize(int value)=>Mathf.RoundToInt(value*Mathf.Clamp(textScale,.5f,2.5f));
         sealed class Row{public ItemTooltipLine line,expanded;public string group;}
         static string Group(string key,bool compact)
@@ -39,14 +40,24 @@ namespace Hellscript
         }
         float Line(Transform parent,ItemTooltipLine line,ItemTooltipLine expanded,float x,float y,float width,int pointSize,string prefix="",TextAnchor align=TextAnchor.UpperLeft)
         {Line(parent,line,expanded,x,y,width,pointSize,out float h,prefix,align);return h;}
-        void Divider(Transform parent,float x,float width,ref float y)
+        void Divider(Transform parent,float x,float width,ref float y,bool major=false)
         {
+            var art=major&&!compact&&!tight?ItemCardArt.Divider:null;
+            if(art!=null)
+            {
+                // Engraved flourish over a faint full-width rule; the PNG tapers to points so the two read as one line.
+                float w=Mathf.Min(width,240),h=w/ItemCardArt.Aspect(ItemCardArt.DividerUv,art);y+=4;
+                var line=UiLayout.Rect("Engraved divider rule",parent);UiLayout.Place(line,x,y+h/2,width,1);
+                var rule=line.gameObject.AddComponent<Image>();rule.color=Faded(accent,.3f);rule.raycastTarget=false;
+                ItemCardArt.Place(parent,"Engraved divider",art,ItemCardArt.DividerUv,x+(width-w)/2,y,w,h,Faded(accent,.95f));
+                y+=h+5;return;
+            }
             y+=compact?3:8;var r=UiLayout.Rect("Engraved divider",parent);UiLayout.Place(r,x,y,width,compact?3:9);
             var trim=r.gameObject.AddComponent<ItemCardTrim>();trim.divider=true;trim.color=StorageSurface.Hex(UiTheme.ItemRuleHex);y+=compact?6:15;
         }
         void Section(Transform parent,string label,float x,float width,ref float y,bool rule)
         {
-            if(rule)Divider(parent,x,width,ref y);
+            if(rule)Divider(parent,x,width,ref y,label=="추가 옵션"||label=="특수 효과");
             var line=new ItemTooltipLine("section-"+label,Loc.T(label),UiTheme.GoldHex);
             y+=Line(parent,line,line,x,y,width,UiTheme.Caption)+(compact?1:5);
         }
@@ -70,32 +81,86 @@ namespace Hellscript
             {
                 var diff=UiLayout.Text(parent,"difference:"+line.key,line.difference,x,y,w,ls+8,ls,StorageSurface.Hex(line.color),font);
                 diff.horizontalOverflow=HorizontalWrapMode.Overflow;float dw=Mathf.Ceil(diff.preferredWidth)+2,dh=Mathf.Ceil(diff.preferredHeight)+2;
-                if(rowEnd>0&&rowEnd+gap+dw<=w)UiLayout.Place(diff.rectTransform,x+rowEnd+gap,y+vh-dh-3,dw,dh);
-                else{UiLayout.Place(diff.rectTransform,x,y+h,w,dh);h+=dh;}
+                const float arrow=16;
+                if(rowEnd>0&&rowEnd+gap+arrow+dw<=w){Arrow(parent,x+rowEnd+gap,y+vh-dh/2-9,line.difference.Contains("\u2212"));UiLayout.Place(diff.rectTransform,x+rowEnd+gap+arrow,y+vh-dh-3,dw,dh);}
+                else{Arrow(parent,x,y+h+dh/2-5,line.difference.Contains("\u2212"));UiLayout.Place(diff.rectTransform,x+arrow,y+h,w-arrow,dh);h+=dh;}
             }
             return h+4;
+        }
+        // Gain/loss marker: a filled triangle, up in green or down in red, so a delta never relies on colour alone.
+        void Arrow(Transform parent,float x,float y,bool down)
+        {
+            var r=UiLayout.Rect(down?"Loss arrow":"Gain arrow",parent);UiLayout.Place(r,x,y,12,9);
+            r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=new Vector2(x+6,-(y+4.5f)); // rotate about the centre, not the corner
+            var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol="hint-up";glyph.color=StorageSurface.Hex(down?ItemTooltip.Loss:ItemTooltip.Gain);glyph.raycastTarget=false;
+            if(down)r.localRotation=Quaternion.Euler(0,0,180);
+        }
+        // The item power sits on a plaque of the same filigree that stretches between its wing caps to hug the text.
+        float ScorePlaque(RectTransform body,ItemTooltipLine score,float x,float y,float inner,float height,int points)
+        {
+            var sprite=ItemCardArt.Plaque;int fs=TypeSize(points);const float arrow=22;
+            var t=UiLayout.Text(body,score.key,score.text,x,y,inner,height,fs,StorageSurface.Hex(score.color),font);
+            t.horizontalOverflow=HorizontalWrapMode.Overflow;t.alignment=TextAnchor.MiddleCenter;
+            float cap=sprite.border.x*height/sprite.rect.height,tw=Mathf.Ceil(t.preferredWidth)+2,pw=tw+cap*1.6f+10;
+            bool delta=score.color==ItemTooltip.Gain||score.color==ItemTooltip.Loss;
+            if(pw+(delta?arrow:0)>inner){t.horizontalOverflow=HorizontalWrapMode.Wrap;pw=inner-(delta?arrow:0);}
+            var plate=UiLayout.Rect("Score plaque",body);UiLayout.Place(plate,x,y,pw,height);
+            var image=plate.gameObject.AddComponent<Image>();image.sprite=sprite;image.type=Image.Type.Sliced;image.color=Faded(accent,.92f);image.raycastTarget=false;
+            image.pixelsPerUnitMultiplier=sprite.rect.height/height;plate.SetSiblingIndex(t.transform.GetSiblingIndex());
+            UiLayout.Place(t.rectTransform,x+cap*.8f,y,pw-cap*1.6f,height);
+            if(delta)Arrow(body,x+pw+8,y+height/2-5,score.color==ItemTooltip.Loss);
+            return height;
         }
         float Head(RectTransform body,Row[] rows,float cardWidth,float colW,float pad)
         {
             float y=compact?8:14,inner=colW;bool narrow=!compact&&cardWidth<230;
             var name=rows.FirstOrDefault(r=>r.line.key=="name")?.line;
-            float art=icon&&(Item!=null||definitionArtwork!=null)?(compact?(cardWidth<160?0:28):narrow?44:68):0;
+            float art=icon&&(Item!=null||definitionArtwork!=null)?(compact?(cardWidth<160?0:28):narrow?44:veryTight?56:tight?68:76):0;
             if(art>0)
             {
                 float artX=narrow?(cardWidth-art)/2:cardWidth-pad-art;
+                if(!compact&&!veryTight)
+                {
+                    // A rarity-coloured halo lifts the relic off the card; legendary and set gear glow harder.
+                    // Scrolling cards clip to their viewport; fixed cards keep the glow inside their own bounds.
+                    float hs=art*1.75f,hx=artX+art/2-hs/2,hy=y+art/2-hs/2;
+                    if(!scrolling){hx=Mathf.Clamp(hx,2,Mathf.Max(2,cardWidth-2-hs));hy=Mathf.Max(2,hy);}
+                    ItemCardArt.Place(body,"Rarity halo",ItemCardArt.Glow,new Rect(0,0,1,1),hx,hy,hs,hs,Faded(accent,grade>=3?.62f:.36f));
+                }
                 var mount=UiLayout.Rect("Relic mount",body);UiLayout.Place(mount,artX,y,art,art);
-                var backing=mount.gameObject.AddComponent<StorageSurface>();backing.Paint(UiTheme.ItemInsetHex,UiTheme.ItemBottomHex,UiTheme.ItemRuleHex);backing.raycastTarget=false;
+                var backing=mount.gameObject.AddComponent<StorageSurface>();backing.Paint(UiTheme.ItemInsetHex,UiTheme.ItemBottomHex,compact?UiTheme.ItemRuleHex:rarityHex);backing.raycastTarget=false;
                 if(Item!=null)EquipmentSlotView.Icon(mount,Item,1,1,art-2);
                 else definitionArtwork?.Invoke(mount,art);
                 if(narrow)y+=art+9;
             }
             float titleY=y,titleWidth=!narrow&&art>0?inner-art-10:inner;
-            if(name!=null)y+=Line(body,name,name,pad,y,titleWidth,compact?UiTheme.Body:narrow?UiTheme.Heading:UiTheme.ItemName)+2;
+            if(name!=null)
+            {
+                var title=Line(body,name,name,pad,y,titleWidth,compact?UiTheme.Body:narrow?UiTheme.Heading:UiTheme.ItemName,out float nameHeight);
+                var shadow=title.gameObject.AddComponent<Shadow>();shadow.effectColor=Faded(StorageSurface.Hex(UiTheme.VoidHex),.85f);shadow.effectDistance=new Vector2(1,-1.5f);
+                y+=nameHeight+2;
+            }
             var type=rows.FirstOrDefault(r=>r.line.key=="type")?.line;
             if(type!=null)y+=Line(body,type,type,pad,y,titleWidth,UiTheme.Caption);
             if(!narrow&&art>0)y=Mathf.Max(y,titleY+art);
             foreach(var score in rows.Where(r=>r.line.key.StartsWith("equipment-score")).Select(r=>r.line))
-                y+=Line(body,score,score,pad,y+(compact?2:5),inner,score.key=="equipment-score"?(compact?UiTheme.Body:UiTheme.Heading+2):UiTheme.Caption)+(compact?2:5);
+            {
+                bool primary=score.key=="equipment-score";
+                if(primary&&!compact&&!narrow&&!veryTight&&ItemCardArt.Plaque!=null)
+                {
+                    // The plaque's clear interior is ~39% of its height, so the text size follows the plate height.
+                    float plate=tight?52:64;y+=tight?3:6;
+                    // Legendary and set plaques sit in a soft pool of rarity light.
+                    if(!tight)ItemCardArt.Place(body,"Score glow",ItemCardArt.Glow,new Rect(0,0,1,1),pad-24,y-18,Mathf.Min(inner,300)+48,plate+36,Faded(accent,grade>=3?.3f:.14f));y+=ScorePlaque(body,score,pad,y,inner,plate,tight?13:UiTheme.Heading+1)+(tight?3:5);continue;
+                }
+                var text=Line(body,score,score,pad,y+(compact?2:5),inner,primary?(compact||veryTight?UiTheme.Body:UiTheme.Heading+2):UiTheme.Caption,out float scoreHeight);
+                if(primary&&(score.color==ItemTooltip.Gain||score.color==ItemTooltip.Loss))
+                {
+                    text.horizontalOverflow=HorizontalWrapMode.Overflow;float tw=Mathf.Ceil(text.preferredWidth)+2;text.horizontalOverflow=HorizontalWrapMode.Wrap;
+                    if(tw+18<inner)Arrow(body,pad+tw+6,y+(compact?2:5)+scoreHeight/2-5,score.color==ItemTooltip.Loss);
+                }
+                y+=scoreHeight+(compact?4:7);
+            }
             if(compact)foreach(var meta in rows.Where(r=>r.group=="meta").Select(r=>r.line))
                 y+=Line(body,meta,meta,pad,y+1,inner,UiTheme.Caption)+1;
             return y;
@@ -133,14 +198,24 @@ namespace Hellscript
                 }
                 bool bullet=group=="affix"||group=="implicit";
                 float start=y;bool power=key=="special";
-                if(bullet)
+                // In a comparison, rows that gain or lose value get a soft green/red wash so the changes pop at a glance.
+                RectTransform deltaRow=null;
+                if(bullet&&!compact&&(line.text.Contains("<color=#"+ItemTooltip.Gain)||line.text.Contains("<color=#"+ItemTooltip.Loss)))
+                {
+                    var tint=StorageSurface.Hex(line.text.Contains("<color=#"+ItemTooltip.Gain)?ItemTooltip.Gain:ItemTooltip.Loss);
+                    deltaRow=ItemCardArt.Place(body,"Delta row",ItemCardArt.Fade,new Rect(0,0,1,1),0,0,1,1,Faded(tint,.24f)).rectTransform;
+                }
+                var star=bullet&&line.greater?ItemCardArt.Star:null;
+                if(star!=null)
+                    ItemCardArt.Place(body,"Greater affix star",star,ItemCardArt.StarUv,x-3,y+TypeSize(UiTheme.Body)*.5f-8,16,16,UiTheme.GoldBright);
+                else if(bullet)
                 {
                     float d=line.greater?8:5;var mark=UiLayout.Rect("Affix diamond",body);UiLayout.Place(mark,x+(8-d)/2,y+TypeSize(UiTheme.Body)*.4f-(d-5)/2,d,d);
                     var dot=mark.gameObject.AddComponent<Image>();dot.color=line.greater?UiTheme.GoldBright:group=="affix"?UiTheme.Gold:UiTheme.Muted;dot.raycastTarget=false;mark.localRotation=Quaternion.Euler(0,0,45);
                 }
                 var block=power?UiLayout.Rect("Power inset",body):null;
-                if(block!=null){var fill=block.gameObject.AddComponent<StorageSurface>();fill.Paint(UiTheme.ItemTopHex,UiTheme.ItemInsetHex,UiTheme.ItemRuleHex);fill.raycastTarget=false;y+=8;}
-                float inset=bullet||power?12:0;
+                if(block!=null){var fill=block.gameObject.AddComponent<StorageSurface>();fill.Paint(UiTheme.ItemTopHex,UiTheme.ItemInsetHex,compact?UiTheme.ItemRuleHex:rarityHex);fill.raycastTarget=false;y+=8;}
+                float inset=star!=null?16:bullet||power?12:0;
                 var emblem=power?EquipmentArt.SetEmblem(Item):null;float powerY=y;
                 bool ring=key=="sockets"&&Item?.sockets?.Count>0;
                 if(emblem!=null)
@@ -150,15 +225,37 @@ namespace Hellscript
                 }
                 if(ring)
                 {
-                    var socket=UiLayout.Rect("Socket mark",body);UiLayout.Place(socket,x,y+1,16,16);
-                    var mark=socket.gameObject.AddComponent<ItemCardTrim>();mark.socket=Item.sockets[0].gemId==""||Item.sockets[0].gemId==null?1:2;mark.color=mark.socket==2?UiTheme.GoldBright:UiTheme.Muted;inset=22;
+                    var state=Item.sockets[0];bool filled=!string.IsNullOrEmpty(state.gemId);var ringArt=ItemCardArt.Socket;
+                    if(ringArt!=null)
+                    {
+                        const float size=24;ItemCardArt.Place(body,"Socket ring",ringArt,ItemCardArt.SocketUv,x-2,y-1,size,size,filled?UiTheme.GoldBright:UiTheme.Muted);
+                        var gem=filled?JewelerArt.ForGem(state.gemId,state.tier):null;
+                        if(gem!=null){var image=JewelerArt.Gem(body,state.gemId,state.tier,x-2+size*.2f,y-1+size*.2f,size*.6f);image.raycastTarget=false;}
+                        else if(filled){var core=UiLayout.Rect("Socket gem",body);UiLayout.Place(core,x-2,y-1,size,size);var mark=core.gameObject.AddComponent<ItemCardTrim>();mark.socket=3;mark.color=UiTheme.GoldBright;}
+                        inset=28;
+                    }
+                    else
+                    {
+                        var socket=UiLayout.Rect("Socket mark",body);UiLayout.Place(socket,x,y+1,16,16);
+                        var mark=socket.gameObject.AddComponent<ItemCardTrim>();mark.socket=filled?2:1;mark.color=filled?UiTheme.GoldBright:UiTheme.Muted;inset=22;
+                    }
                 }
                 y+=Line(body,line,row.expanded,x+inset,y,w-inset-(power?8:0),key.EndsWith("heading")?UiTheme.Body:ring?UiTheme.Caption+1:group=="details"?UiTheme.Caption:UiTheme.Body);
                 if(emblem!=null)y=Mathf.Max(y,powerY+28);
                 if(block!=null){y+=8;UiLayout.Place(block,x,start,w,y-start);}
+                if(deltaRow!=null)UiLayout.Place(deltaRow,x-4,start-1,w+8,y-start+2);
                 y+=group=="affix"?5:2;
             }
             return y;
+        }
+        // Rarity-tinted filigree corners; one PNG mirrored four ways. They sit on the viewport so the frame stays put while content scrolls.
+        void Corners(RectTransform r)
+        {
+            var art=ItemCardArt.Corner;float s=Mathf.Clamp(Mathf.Min(size.x,size.y)*.13f,34,46),m=1;var tint=Faded(accent,.95f);var uv=ItemCardArt.CornerUv;
+            ItemCardArt.Place(r,"Card corner",art,uv,m,m,s,s,tint);
+            ItemCardArt.Place(r,"Card corner",art,ItemCardArt.Flip(uv,true,false),size.x-m-s,m,s,s,tint);
+            ItemCardArt.Place(r,"Card corner",art,ItemCardArt.Flip(uv,false,true),m,size.y-m-s,s,s,tint);
+            ItemCardArt.Place(r,"Card corner",art,ItemCardArt.Flip(uv,true,true),size.x-m-s,size.y-m-s,s,s,tint);
         }
         float DrawCard(RectTransform body,float width,ItemTooltipLine[] hidden,ItemTooltipLine[] shown)
         {
@@ -167,10 +264,27 @@ namespace Hellscript
             bool wide=!compact&&width>=520&&rows.Any(r=>r.group=="affix"||r.group=="power"||r.group=="lost"||r.group=="sheet");
             float colW=wide?(width-pad*2-gutter)/2:width-pad*2,cardWidth=colW+pad*2;
             var name=rows.FirstOrDefault(r=>r.line.key=="name")?.line;
-            Color rarity=StorageSurface.Hex(name?.color??UiTheme.GoldHex);
-            var wash=UiLayout.Rect("Rarity wash",body);UiLayout.Place(wash,2,2,width-4,110);
-            var gradient=wash.gameObject.AddComponent<StorageSurface>();gradient.top=new Color(rarity.r*.20f,rarity.g*.20f,rarity.b*.20f,.8f);gradient.bottom=Color.clear;gradient.raycastTarget=false;
-            float y=Head(body,rows,cardWidth,colW,pad);Divider(body,pad,colW,ref y);
+            rarityHex=name?.color??UiTheme.GoldHex;Color rarity=StorageSurface.Hex(rarityHex);accent=Color.Lerp(rarity,Color.white,.12f);
+            grade=Mathf.Max(0,System.Array.IndexOf(EquipmentGradePalette.Hex,rarityHex));// Heights are canvas units (about 440 on a landscape phone): short windows trade ornament for rows of information.
+            tight=scrolling&&size.y<420;veryTight=scrolling&&size.y<300;
+            float lift=grade>=3?.32f:.22f;
+            var wash=UiLayout.Rect("Rarity wash",body);UiLayout.Place(wash,2,2,width-4,compact?110:150);
+            var gradient=wash.gameObject.AddComponent<StorageSurface>();gradient.top=new Color(rarity.r*lift,rarity.g*lift,rarity.b*lift,.9f);gradient.bottom=Color.clear;gradient.raycastTarget=false;
+            if(!compact)
+            {
+                // A lit top edge in the rarity colour, like the coloured header bar on Diablo IV tooltips.
+                var edge=UiLayout.Rect("Rarity edge",body);UiLayout.Place(edge,3,2,width-6,2);
+                var bar=edge.gameObject.AddComponent<Image>();bar.color=Faded(accent,.9f);bar.raycastTarget=false;
+                var intro=GetComponent<ItemCardIntro>();
+                if(intro!=null&&scrolling&&grade>=3)
+                {
+                    // A tilted soft streak, centred on its own pivot so the slant does not shift it.
+                    var shine=ItemCardArt.Place(body,"Rarity shine",ItemCardArt.Sweep,new Rect(0,0,1,1),0,0,96,210,Faded(Color.Lerp(accent,Color.white,.55f),.22f)).rectTransform;
+                    shine.pivot=new Vector2(.5f,.5f);shine.anchoredPosition=new Vector2(-96,-70);shine.localRotation=Quaternion.Euler(0,0,12);
+                    intro.Shine=shine;intro.ShineSpan=width;
+                }
+            }
+            float y=Head(body,rows,cardWidth,colW,pad);Divider(body,pad,colW,ref y,true);
             if(!wide)
             {
                 y=Column(body,rows,pad,colW,y,false,"main","implicit","affix","power","details","lost","sheet");
@@ -189,7 +303,7 @@ namespace Hellscript
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class ItemCardTrim:MaskableGraphic
     {
-        public bool divider;public int branch,socket;
+        public bool divider,bare;public int branch,socket;
         protected override void Awake(){base.Awake();raycastTarget=false;}
         protected override void OnPopulateMesh(VertexHelper mesh)
         {
@@ -206,6 +320,12 @@ namespace Hellscript
                 float bx=r.xMin+3,mid=r.center.y;
                 Quad(bx,branch==1?r.yMin:mid,1,branch==1?r.height:r.yMax-mid,color);Quad(bx,mid,r.xMax-bx-4,1,color);
                 int t=mesh.currentVertCount;mesh.AddVert(new Vector3(r.xMax-5,mid+3),color,Vector2.zero);mesh.AddVert(new Vector3(r.xMax-1,mid+.5f),color,Vector2.zero);mesh.AddVert(new Vector3(r.xMax-5,mid-2),color,Vector2.zero);mesh.AddTriangle(t,t+1,t+2);return;
+            }
+            if(socket==3)
+            {
+                var c=r.center;float h=Mathf.Min(r.width,r.height)*.2f;int v=mesh.currentVertCount;
+                mesh.AddVert(c+new Vector2(-h,0),color,Vector2.zero);mesh.AddVert(c+new Vector2(0,h),color,Vector2.zero);mesh.AddVert(c+new Vector2(h,0),color,Vector2.zero);mesh.AddVert(c+new Vector2(0,-h),color,Vector2.zero);
+                mesh.AddTriangle(v,v+1,v+2);mesh.AddTriangle(v,v+2,v+3);return;
             }
             if(socket>0)
             {
@@ -235,6 +355,7 @@ namespace Hellscript
             var faint=color;faint.a=.30f;
             Quad(r.xMin+3,r.yMin+3,r.width-6,1,faint);Quad(r.xMin+3,r.yMax-4,r.width-6,1,faint);
             Quad(r.xMin+3,r.yMin+3,1,r.height-6,faint);Quad(r.xMax-4,r.yMin+3,1,r.height-6,faint);
+            if(bare)return; // Art corners replace the vector brackets.
             foreach(float x in new[]{r.xMin+1,r.xMax-14})foreach(float y in new[]{r.yMin+1,r.yMax-3})Quad(x,y,13,2,color);
             foreach(float x in new[]{r.xMin+1,r.xMax-3})foreach(float y in new[]{r.yMin+1,r.yMax-14})Quad(x,y,2,13,color);
         }
