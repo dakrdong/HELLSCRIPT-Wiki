@@ -176,16 +176,6 @@ namespace Hellscript
         }
         static string PresetKey(IEnumerable<HuntEdictPreset> values)=>string.Join(";",values.Select(v=>JsonUtility.ToJson(v)));
         static string BuildPresetKey(IEnumerable<BuildConfig> values)=>string.Join(";",values.Select(v=>JsonUtility.ToJson(v)));
-        public static string Next(AccountSave a)
-        {
-            if(Legacy(a))return "";
-            if(!Has(a,Dodge))return Loc.T("다음 기능: 첫 일반 균열 종료 후 물약 자동 사용과 기본 회피.");
-            if(!Has(a,Styles))return Loc.T("다음 기능: 균열 2단계에서 전투 성향.");
-            if(ContentUnlocks.AccountClear(a)>=5&&!Has(a,Details))return Loc.T("다음 기능: 균열 6단계에서 직접 설정과 훈련 비교.");
-            var next=Rules.rules.Where(r=>r.stage>0&&r.condition!="special-equipment"&&r.ids.Any(id=>!Has(a,id))).OrderBy(r=>r.stage).FirstOrDefault();
-            if(next?.condition=="rune-complete"&&ContentUnlocks.AccountClear(a)>=15)return Loc.T("다음 기능: 룬 필수 안내 완료 후 반복 사냥.");
-            return next==null?"":Loc.F("다음 기능: 균열 {0}단계 · {1}",next.stage,Loc.T(next.title??HuntEdictUiCatalog.Data.groups.First(g=>g.ids.Contains(next.ids[0])).title));
-        }
         internal static void ValidateTransaction(AccountSave before,AccountSave after,HuntEdictEditSession session)
         {
             if(before==null||ReferenceEquals(before,after)||Legacy(before))return;

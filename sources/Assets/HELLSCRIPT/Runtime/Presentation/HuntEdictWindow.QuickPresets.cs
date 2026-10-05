@@ -88,12 +88,19 @@ namespace Hellscript
             row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h+3;
             Place((RectTransform)button.transform,0,0,w,h);
         }
-        string QuickGroupSummary(HuntEdictUiGroup group)
+        // The selector exists for groups whose settings come in authored presets (not the potion toggle or auto equip).
+        bool QuickAllowed(HuntEdictUiGroup group)
         {
-            if(group.ids.Any(id=>!Disclosed(id)))return VisibleSummary(group);
-            if(group.tab=="autoEquip"||group.ids.Contains("bag.warehouseFull"))return VisibleSummary(group);
+            if(group.ids[0]=="survival.potion"||group.tab=="autoEquip")return false;
+            string scope=HuntEdictQuickPresets.GlobalScope(group);
+            return HuntEdictQuickPresets.For(scope).Any(p=>HuntEdictProgression.Quick(store.Data,scope,p.id,hero));
+        }
+        // The current answer shown under a group chip: the matching preset's name, or "Custom".
+        string QuickSubtitle(HuntEdictUiGroup group)
+        {
+            if(group.ids.Any(id=>!Disclosed(id))||group.ids.Contains("bag.warehouseFull")||!QuickAllowed(group))return "";
             string scope=HuntEdictQuickPresets.GlobalScope(group),selected=QuickPresetSelection(scope);
-            return selected==HuntEdictQuickPresets.Custom?Loc.T("직접 설정")+" · "+VisibleSummary(group):HuntEdictQuickPresets.For(scope).Single(p=>p.id==selected).Name;
+            return selected==HuntEdictQuickPresets.Custom?Loc.T("직접 설정"):HuntEdictQuickPresets.For(scope).FirstOrDefault(p=>p.id==selected)?.Name??"";
         }
     }
 }

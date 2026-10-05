@@ -143,8 +143,9 @@ namespace Hellscript
                     Place(information,5,5,descriptionWidth-10,descriptionHeight);
                     if(!sideBySide)
                     {
-                        artY=0;Place(row.Find("Actual skill combat preview") as RectTransform,artX,artY,artW,artH);
-                        Place(information,5,artH+8,descriptionWidth-10,descriptionHeight);descriptionHeight+=artH+8;
+                        // Narrow screens read top to bottom: what to do and the progress button, then the example it refers to.
+                        artY=descriptionHeight+4;Place(row.Find("Actual skill combat preview") as RectTransform,artX,artY,artW,artH);
+                        Place(information,5,5,descriptionWidth-10,descriptionHeight);descriptionHeight+=artH+8;
                     }
                 }
                 else {ReleaseCombatPreview();SkillPresetExampleView.Create(row,scope,shown,Session.Draft,font,artX,artY,artW,artH,lastScale);}
