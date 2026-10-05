@@ -328,7 +328,7 @@ Create a 3m vortex within 8m for 4s. On creation, pull up to 5 enemies 1.5m towa
 
 Existing runtime retained
 
-Adds +15% damage to the Fireball blast itself when it catches three or more enemies.
+Adds +30% damage to the Fireball blast itself when it catches three or more enemies.
 
 **Equipment links:** Echoing Ember (`LM02`), Lingering Ember (`LM05`), Unblemished Furnace (`LM06`), Ember Succession (`LM07`), Flameroot (`LM08`) and 4 more.
 
@@ -358,7 +358,7 @@ Chain Lightning strikes 5 times instead of 4.
 
 Existing runtime retained
 
-Adds +20%p to shield strength, stacking with the bonus from Willpower.
+Adds +40%p to shield strength, stacking with the bonus from Willpower.
 
 **Equipment links:** Knot of Feedback (`LM03`), Mending Crystal Veil (`LM30`), Charged Shell (`LM31`), Chill-Wrapped Knot (`LM33`).
 
@@ -388,7 +388,7 @@ Dealing damage with two different elements within 4 seconds grants +10% damage f
 
 New proposal · Lv.22
 
-The first direct hit of a normal fire skill on a burning enemy restores 3 resource, with a 2s interval. Burn ticks cannot retrigger it.
+The first direct hit of a normal fire skill on a burning enemy restores 12 resource, with a 2s interval. Burn ticks cannot retrigger it.
 
 **Equipment links:** Echoing Ember (`LM02`), Lingering Ember (`LM05`), Unblemished Furnace (`LM06`), Ember Succession (`LM07`), Flameroot (`LM08`) and 5 more.
 
@@ -400,7 +400,7 @@ The first direct hit of a normal fire skill on a burning enemy restores 3 resour
 
 New proposal · Lv.22
 
-Take 8% less damage from an attacker with your M07 burn or currently inside your M08.
+Take 15% less damage from an attacker with your M07 burn or currently inside your M08.
 
 **Equipment links:** Knot of Feedback (`LM03`), Mending Crystal Veil (`LM30`), Charged Shell (`LM31`), Chill-Wrapped Knot (`LM33`), Kindling Grasp (`DES_LM41`).
 
@@ -412,7 +412,7 @@ Take 8% less damage from an attacker with your M07 burn or currently inside your
 
 New proposal · Lv.22
 
-The first direct hit of a normal cold skill on a controlled target restores 3 resource, with a 2s interval. Blizzard ticks are excluded.
+The first direct hit of a normal cold skill on a controlled target restores 12 resource, with a 2s interval. Blizzard ticks are excluded.
 
 **Equipment links:** Winter's Trail (`LM01`), Splintered Snowflake (`LM11`), Judgment of Distant Winter (`LM12`), Frost Husk (`LM13`), Cold Circulation (`LM14`) and 7 more.
 
@@ -436,7 +436,7 @@ Successfully applying direct freeze with M06 or M09 grants a 5% maximum-HP barri
 
 New proposal · Lv.26
 
-Three normal lightning casts within 5s prepare +15% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast.
+Three normal lightning casts within 5s prepare +30% direct damage for the next M03 or M12 within 4s. One charge, not applied retroactively to the completing third cast.
 
 **Equipment links:** Circuit of the End (`LM04`), Overflowing Charge (`LM17`), Close-Quarters Judgment (`LM18`), Storm Continuum (`LM19`), Reclaimed Current (`LM20`) and 4 more.
 
@@ -448,7 +448,7 @@ Three normal lightning casts within 5s prepare +15% direct damage for the next M
 
 New proposal · Lv.26
 
-Natural expiry of Capacitor Orb restores 10 resource. Replacement, scene exit or equipment-removal cleanup grants none.
+Natural expiry of Capacitor Orb restores 30 resource. Replacement, scene exit or equipment-removal cleanup grants none.
 
 **Equipment links:** Circuit of the End (`LM04`), Overflowing Charge (`LM17`), Close-Quarters Judgment (`LM18`), Storm Continuum (`LM19`), Reclaimed Current (`LM20`) and 4 more.
 
@@ -460,7 +460,7 @@ Natural expiry of Capacitor Orb restores 10 resource. Replacement, scene exit or
 
 New proposal · Lv.30
 
-While a barrier remains, increase per-second resource regeneration by 15%. Do not multiply Mana Reclaim's fixed restoration.
+While a barrier remains, increase per-second resource regeneration by 30%. Do not multiply Mana Reclaim's fixed restoration.
 
 **Equipment links:** Knot of Feedback (`LM03`), Mending Crystal Veil (`LM30`), Charged Shell (`LM31`), Chill-Wrapped Knot (`LM33`), Quiet Rift (`DES_LM44`).
 
@@ -472,7 +472,7 @@ While a barrier remains, increase per-second resource regeneration by 15%. Do no
 
 New proposal · Lv.30
 
-Two direct basic hits prepare +15 percentage points of cost reduction for the next paid normal active within 4s. One charge; pause counting for 3s after triggering.
+Two direct basic hits prepare +30 percentage points of cost reduction for the next paid normal active within 4s. One charge; pause counting for 3s after triggering.
 
 **Equipment links:** Winter's Trail (`LM01`), Echoing Ember (`LM02`), Circuit of the End (`LM04`), Lingering Ember (`LM05`), Unblemished Furnace (`LM06`) and 20 more.
 
@@ -484,7 +484,7 @@ Two direct basic hits prepare +15 percentage points of cost reduction for the ne
 
 New proposal · Lv.30
 
-After standing still for 1s, take 8% less damage while preparing or channeling a normal active. End on movement or completion.
+After standing still for 0.5s, take 15% less damage while preparing or channeling a normal active. End on movement or completion.
 
 **Equipment links:** Echoing Ember (`LM02`), Lingering Ember (`LM05`), Unblemished Furnace (`LM06`), Ember Succession (`LM07`), Flameroot (`LM08`) and 6 more.
 
@@ -508,7 +508,7 @@ Cast one normal fire, cold and lightning active within 6s to gain an 8% maximum-
 
 New proposal · Lv.34
 
-At 80% pre-cast resource or more, a normal active's first direct hit gains +10% additive damage. Exclude field ticks and secondary damage.
+At 60% pre-cast resource or more, a normal active's first direct hit gains +20% additive damage. Exclude field ticks and secondary damage.
 
 **Equipment links:** Echoing Ember (`LM02`), Circuit of the End (`LM04`), Lingering Ember (`LM05`), Unblemished Furnace (`LM06`), Ember Succession (`LM07`) and 13 more.
 
@@ -520,7 +520,7 @@ At 80% pre-cast resource or more, a normal active's first direct hit gains +10% 
 
 New proposal · Lv.34
 
-If Triune Collapse's third stage actually hits, restore 15 resource once.
+If Triune Collapse's third stage actually hits, restore 50 resource once.
 
 **Equipment links:** Threefold Crownstone (`DES_LM46`).
 
@@ -532,7 +532,7 @@ If Triune Collapse's third stage actually hits, restore 15 resource once.
 
 New proposal · Lv.40
 
-Add 10% maximum HP to the barrier created by Sage Incarnate.
+Add 20% maximum HP to the barrier created by Sage Incarnate.
 
 **Equipment links:** Threefold Crownstone (`DES_LM46`).
 

@@ -5,9 +5,18 @@
   "cyclicEdges": 0,
   "unreachableNodes": 0,
   "directSourceGroups": 10,
-  "drawnEdges": 26,
+  "effectEdges": 26,
   "detailOnlyEdges": 22,
-  "levelOnlyNodes": 70,
+  "lineageEdges": 75,
+  "drawnLinks": 93,
+  "rootNodes": 12,
+  "layout": {
+    "crossingLinks": 0,
+    "upwardLinks": 0,
+    "unplacedNodes": 0,
+    "sharedSockets": 0,
+    "note": "tree-layout.cjs rejects any grid that breaks these rules."
+  },
   "extraPrerequisiteRanks": 0,
   "ultimateGate": {
     "level": 40,
@@ -25,9 +34,9 @@
   },
   "source": {
     "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
-    "runtimeSha256": "213afc75554dd0fc838cd9c1c22b900f8a11b9bb04814180474315db33e8458d",
+    "runtimeSha256": "46385baef98fdde5fd0f9d1c1603103fbeae3481ee5fb46708f17188e9cb8a54",
     "design": "Docs/Design/ClassSkills/catalog.json",
-    "designSha256": "fc02d95c29dc78bfba0121b12dc21450eea92479c10d4201193b4440dfc8e25a",
+    "designSha256": "4fa6d9889a703c43aa09271668450d842b9c2830ac2cec303094bb43bb757fc2",
     "gameEnabled": false
   },
   "paths": [
@@ -140,6 +149,12 @@
       "budget": 26
     },
     {
+      "id": "WP12",
+      "level": 28,
+      "requiredPoints": 0,
+      "budget": 27
+    },
+    {
       "id": "W11",
       "level": 30,
       "requiredPoints": 0,
@@ -153,12 +168,6 @@
     },
     {
       "id": "W10",
-      "level": 28,
-      "requiredPoints": 0,
-      "budget": 27
-    },
-    {
-      "id": "WP12",
       "level": 28,
       "requiredPoints": 0,
       "budget": 27

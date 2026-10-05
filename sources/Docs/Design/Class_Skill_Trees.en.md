@@ -1,6 +1,6 @@
 # Class skill trees and progression
 
-Updated: 2026-09-29 · [한국어](Class_Skill_Trees.md)
+Updated: 2026-10-05 · [한국어](Class_Skill_Trees.md)
 
 Each class now has **16 normal actives, 19 passives and two ultimates: 37 skills**. We reviewed direct effect dependencies across the original 108 skills and split each dual-ultimate support passive into two dedicated passives. One addition per class brings the total to 111.
 
@@ -12,6 +12,25 @@ Each class now has **16 normal actives, 19 passives and two ultimates: 37 skills
 Native update, 2026-09-28: the first three actives of every class unlock at level 1. Zero-rank allocation and the starting-point refund after an explicit reset follow the [runtime integration record](../Implementation/Hunt_Edict_Skill_Tree.en.md). The free-base-rank description below documents older builds and the HTML prototype.
 
 Native update, 2026-09-29: the skill catalog now also unlocks all three first-row actives at level 1. A new character starts with no learned skill and uses only basic attacks; the one point it has at level 1 learns one first-row active. Existing characters keep their allocation.
+
+## 2026-10-05: branch parents and a clean link layout
+
+The user asked for the links in the skill tree to stop looking arbitrary and to read like the Diablo 2, 3 and 4 trees, with a clear before-and-after order. Until now 70 independent skills (about 23 per class) opened on level alone and hung from the branch trunk, while links existed only for the few skills whose effects read each other. This request replaces the earlier rule below that shared branch membership is not a dependency: **branches now have parent skills**.
+
+- **One parent per skill.** Every skill except the ultimates has one parent (`lineage`) in its own branch. Each class has four starting skills (Warrior W01, W02, W03, W05; Ranger A01, A02, A03, A04; Mage M01, M02, M03, M04). The result is a tree that only forks and never merges: each of the 93 skills that has a parent draws exactly one link.
+- **No unlock level changes.** A parent never opens later than its child, so the level table is untouched and the only new rule is that the parent must be open. It does not require spending points on the parent first (the same open-or-not test the effect prerequisites already use).
+- **Effect prerequisites are audited as before.** The 35 direct relations (`all` and `oneOf`) are still compared with the source text by the independent validator. The structural parent is a separate field and never counts as effect evidence; when an effect prerequisite already is the parent it is not recorded twice. An effect prerequisite that is an ancestor of the parent is not drawn again (transitive reduction), so Hold Formation WP16 hangs from its nearby parent instead of a distant Whirlwind W01.
+- **Hand-set layout, tool-checked.** The socket grid in `tree-design.cjs` (branch × stage × row, two columns per row) sets positions, and `tree-layout.cjs` refuses to build when a link would cross a skill, run upward, leave its branch or share a socket. The HTML planner and the game (`row`, `col`, `links` and `via` in `ClassSkillTree.json`) use the same layout.
+- **Ultimates keep the shared gate.** They have no branch link, only "level 40 plus one preceding-stage skill". Only each ultimate's dedicated passive hangs directly below it.
+- **Effect targets in another branch are not linked.** A direct target in a different branch, such as the trap requirement of Prepared Escape AP12, is listed in the detail panel only.
+
+| Class | Count |
+| --- | --- |
+| Starting skills (no parent) | 12 |
+| Effect prerequisite only (the effect target is the parent) | 18 |
+| Structural parent only | 58 |
+| Effect prerequisite and structural parent | 17 |
+| Ultimates (shared gate) | 6 |
 
 ## Dedicated ultimate support
 
@@ -30,9 +49,9 @@ All six passives require **level 40 and unlocked base rank 1 of their own ultima
 
 Levels 1–9 establish foundations, 10–19 survival and resource management, 20–29 status and placed-effect combinations, 30–39 advanced builds, and 40 ultimates and their dedicated passives.
 
-**70 independent skills use level only**, **35 use level plus direct effect targets/triggers**, and **six ultimates use the shared stage gate**. General mark, barrier, health, or BASIC conditions do not force an arbitrary source skill. Equipment-only additions do not become base skill prerequisites.
+**35 skills use level plus direct effect targets/triggers** and **six ultimates use the shared stage gate**. The other 70 independent skills now also need their branch parent to be open, except the 12 starting skills (section above). General mark, barrier, health, or BASIC conditions do not force an arbitrary source skill. Equipment-only additions do not become base skill prerequisites.
 
-General passives with multiple actual targets accept one unlocked target. Prepared Escape AP12 additionally requires Retreat Leap A04, whose cooldown it reduces, and one triggering trap. The default view draws 26 mandatory links; 22 direct alternative links appear only when tracing a related skill. Details list every actual target. Shared branch membership and progression order are not dependencies.
+General passives with multiple actual targets accept one unlocked target. Prepared Escape AP12 additionally requires Retreat Leap A04, whose cooldown it reduces, and one triggering trap. The default view draws the 93 branch links from the section above, and a selected skill additionally lights its effect prerequisites and followers. Details list every actual target and keep the structural parent apart from effect prerequisites, which are never mixed.
 
 Ultimates retain **level 40 plus any unlocked skill from the same class's preceding level 30–39 stage**. Any active, passive or branch qualifies without equipping it. No individual candidate wires are drawn for this shared gate.
 

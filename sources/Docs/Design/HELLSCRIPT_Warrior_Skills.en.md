@@ -328,7 +328,7 @@ Gain a 12% maximum-HP barrier for 5s and remove current slow and root effects. B
 
 Existing runtime retained
 
-Adds +15% damage while three or more living enemies stand within 3m.
+Adds +25% damage while three or more living enemies stand within 3m.
 
 **Equipment links:** Fang of the Maelstrom (`LW01`), Turning Rack (`LW05`), Rising Ire (`LW06`), Flesh-Cutting Wind (`LW07`), Red Rampart (`LW08`) and 7 more.
 
@@ -338,7 +338,7 @@ Adds +15% damage while three or more living enemies stand within 3m.
 
 Existing runtime retained
 
-Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it clears the bonus.
+Holding Whirlwind for 2 seconds applies a 35% cost reduction. Interrupting it clears the bonus.
 
 **Equipment links:** Fang of the Maelstrom (`LW01`), Turning Rack (`LW05`), Rising Ire (`LW06`), Flesh-Cutting Wind (`LW07`), Red Rampart (`LW08`) and 3 more.
 
@@ -348,7 +348,7 @@ Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it cl
 
 Existing runtime retained
 
-Reduces incoming damage by 15% for 2 seconds after a leap lands.
+Reduces incoming damage by 30% for 2 seconds after a leap lands.
 
 **Equipment links:** Stride of the Falling Star (`LW02`), Final Order (`LW04`), Scorched Landing (`LW11`), Returning Leap (`LW12`), Execution Foretold (`LW13`) and 4 more.
 
@@ -368,7 +368,7 @@ Restores 2% of max HP on a kill, then waits 1 second before it can trigger again
 
 Existing runtime retained
 
-Adds +20%p to shield strength, stacking with the bonus from Willpower.
+Adds +40%p to shield strength, stacking with the bonus from Willpower.
 
 **Equipment links:** Ironwall Shards (`LW29`), Mending Ironcore (`LW30`), Unbending Vow (`LW32`).
 
@@ -378,7 +378,7 @@ Adds +20%p to shield strength, stacking with the bonus from Willpower.
 
 Existing runtime retained
 
-Adds +20% damage against enemies at or below 30% HP.
+Adds +35% damage against enemies at or below 30% HP.
 
 **Equipment links:** Solitary Execution (`LW03`), Execution Foretold (`LW13`), Crushed Crown (`LW17`), Skull Echo (`LW18`), Deep-Carved Scar (`LW19`) and 10 more.
 
@@ -388,7 +388,7 @@ Adds +20% damage against enemies at or below 30% HP.
 
 New proposal · Lv.22
 
-The first direct normal-active hit against a marked target restores 2 resource. Once per cast, with a 1s interval.
+The first direct normal-active hit against a marked target restores 8 resource. Once per cast, with a 1s interval.
 
 **Equipment links:** Solitary Execution (`LW03`), Execution Foretold (`LW13`), Crushed Crown (`LW17`), Skull Echo (`LW18`), Deep-Carved Scar (`LW19`) and 6 more.
 
@@ -400,7 +400,7 @@ The first direct normal-active hit against a marked target restores 2 resource. 
 
 New proposal · Lv.22
 
-Gain +10% additive normal-active direct damage against enemies with your W09 or Red Scars set bleed. Other physical damage over time is not automatically classified as bleed.
+Gain +20% additive normal-active direct damage against enemies with your W09 or Red Scars set bleed. Other physical damage over time is not automatically classified as bleed.
 
 **Equipment links:** Solitary Execution (`LW03`), Execution Foretold (`LW13`), Crushed Crown (`LW17`), Skull Echo (`LW18`), Deep-Carved Scar (`LW19`) and 11 more.
 
@@ -412,7 +412,7 @@ Gain +10% additive normal-active direct damage against enemies with your W09 or 
 
 New proposal · Lv.22
 
-Restore 4 resource after surviving a successful block. A 1s interval applies; counter damage cannot trigger it.
+Restore 18 resource after surviving a successful block. A 1s interval applies; counter damage cannot trigger it.
 
 **Equipment links:** Ironwall Shards (`LW29`), Mending Ironcore (`LW30`), Unbending Vow (`LW32`), Moving Rampart (`DES_LW43`).
 
@@ -448,7 +448,7 @@ After completing Leap Slam or Front Break, gain a 5% maximum-HP barrier for 3s. 
 
 New proposal · Lv.26
 
-Three basic hits on one enemy prepare +15 percentage points of cost reduction for the next Crush within 4s. One charge; counting pauses for 3s after triggering.
+Two basic hits on one enemy prepare +30 percentage points of cost reduction for the next Crush within 4s. One charge; counting pauses for 3s after triggering.
 
 **Equipment links:** Solitary Execution (`LW03`), Execution Foretold (`LW13`), Crushed Crown (`LW17`), Skull Echo (`LW18`), Deep-Carved Scar (`LW19`) and 5 more.
 
@@ -460,7 +460,7 @@ Three basic hits on one enemy prepare +15 percentage points of cost reduction fo
 
 New proposal · Lv.30
 
-Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply instant on-hit or shout restoration.
+Below 70% HP, increase per-second resource regeneration by 40%. Do not multiply instant on-hit or shout restoration.
 
 **Equipment links:** Fang of the Maelstrom (`LW01`), Turning Rack (`LW05`), Rising Ire (`LW06`), Flesh-Cutting Wind (`LW07`), Red Rampart (`LW08`) and 4 more.
 
@@ -472,7 +472,7 @@ Below 50% HP, increase per-second resource regeneration by 20%. Do not multiply 
 
 New proposal · Lv.30
 
-The first direct normal-active hit on a controlled enemy reduces equipped Slam's remaining cooldown by 0.5s. A 2s interval applies; never reduce below zero.
+The first direct normal-active hit on a controlled enemy reduces equipped Slam's remaining cooldown by 2.5s. A 2s interval applies; never reduce below zero.
 
 **Equipment links:** Twice-Ringing Earth (`LW23`), Binder's Cord (`LW24`), Stormgate (`LW25`), Bastion of Remains (`LW26`), Ankle-Binding Rift (`LW27`) and 1 more.
 
@@ -484,7 +484,7 @@ The first direct normal-active hit on a controlled enemy reduces equipped Slam's
 
 New proposal · Lv.30
 
-Casting a different normal offensive skill from the one used within the previous 4s grants that cast +10% additive direct damage. BASIC, ultimates and secondary damage do not update the record.
+Casting a different normal offensive skill from the one used within the previous 4s grants that cast +20% additive direct damage. BASIC, ultimates and secondary damage do not update the record.
 
 **Equipment links:** Fang of the Maelstrom (`LW01`), Stride of the Falling Star (`LW02`), Solitary Execution (`LW03`), Final Order (`LW04`), Turning Rack (`LW05`) and 23 more.
 
@@ -496,7 +496,7 @@ Casting a different normal offensive skill from the one used within the previous
 
 New proposal · Lv.34
 
-Take 8% less damage while channeling Whirlwind with an active barrier. End immediately when channeling or the barrier ends.
+Take 8% less damage while channeling Whirlwind, or 12% less while a barrier also remains. Ends immediately when the channel ends.
 
 **Equipment links:** Fang of the Maelstrom (`LW01`), Turning Rack (`LW05`), Rising Ire (`LW06`), Flesh-Cutting Wind (`LW07`), Red Rampart (`LW08`) and 7 more.
 
@@ -508,7 +508,7 @@ Take 8% less damage while channeling Whirlwind with an active barrier. End immed
 
 New proposal · Lv.34
 
-Crush and Slam gain +10% additive direct damage when pre-cast resource is at least 80%. Check before paying the cost.
+Crush and Slam gain +15% additive direct damage when pre-cast resource is at least 60%. Check before paying the cost.
 
 **Equipment links:** Solitary Execution (`LW03`), Execution Foretold (`LW13`), Crushed Crown (`LW17`), Skull Echo (`LW18`), Deep-Carved Scar (`LW19`) and 11 more.
 
@@ -520,7 +520,7 @@ Crush and Slam gain +10% additive direct damage when pre-cast resource is at lea
 
 New proposal · Lv.34
 
-During War of the Ancestors, an actual ancestor hit restores 1 resource per second, up to 8 per cast.
+During War of the Ancestors, an actual ancestor hit restores 3 resource per second, up to 24 per cast.
 
 **Equipment links:** Ancestral King's Crown (`DES_LW46`).
 

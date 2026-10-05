@@ -1,0 +1,163 @@
+{
+ "date": "2026-10-05",
+ "project": "copy of the working folder (the open Unity Editor and account saves were not used)",
+ "note": "Edit Mode, run in classes-per-run batches on one commit; every one of the 5,163 tests ran, nine failed on first run (hard-coded old passive numbers) and passed after the fixes.",
+ "runs": [
+  {
+   "run": "focusA",
+   "scope": "Skill/passive/localization/tree/edict-preset/tutorial classes (first run)",
+   "total": 666,
+   "passed": 663,
+   "failed": 3,
+   "skipped": 0,
+   "durationSeconds": 256,
+   "endedUtc": "2026-10-05 02:55:19Z"
+  },
+  {
+   "run": "focusA2",
+   "scope": "Same classes after the first three test fixes",
+   "total": 666,
+   "passed": 666,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 246,
+   "endedUtc": "2026-10-05 03:03:47Z"
+  },
+  {
+   "run": "focusB",
+   "scope": "60 more classes that read passives or hero stats",
+   "total": 2698,
+   "passed": 2693,
+   "failed": 5,
+   "skipped": 0,
+   "durationSeconds": 707,
+   "endedUtc": "2026-10-05 03:18:11Z"
+  },
+  {
+   "run": "focusD0",
+   "scope": "Re-run of the four classes that failed in the previous run",
+   "total": 334,
+   "passed": 334,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 37,
+   "endedUtc": "2026-10-05 03:23:20Z"
+  },
+  {
+   "run": "focusD1",
+   "scope": "Combat-simulating classes, part 1",
+   "total": 445,
+   "passed": 444,
+   "failed": 1,
+   "skipped": 0,
+   "durationSeconds": 344,
+   "endedUtc": "2026-10-05 03:29:51Z"
+  },
+  {
+   "run": "focusE",
+   "scope": "Re-run of FieldContentTests after the fix",
+   "total": 14,
+   "passed": 14,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 115,
+   "endedUtc": "2026-10-05 03:34:19Z"
+  },
+  {
+   "run": "focusD2",
+   "scope": "Combat-simulating classes, part 2",
+   "total": 409,
+   "passed": 409,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 232,
+   "endedUtc": "2026-10-05 03:27:53Z"
+  },
+  {
+   "run": "focusD3",
+   "scope": "Combat-simulating classes, part 3",
+   "total": 390,
+   "passed": 390,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 600,
+   "endedUtc": "2026-10-05 03:34:01Z"
+  },
+  {
+   "run": "focusF0",
+   "scope": "Remaining classes, part 1",
+   "total": 336,
+   "passed": 336,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 164,
+   "endedUtc": "2026-10-05 03:36:32Z"
+  },
+  {
+   "run": "focusF1",
+   "scope": "Remaining classes, part 2",
+   "total": 305,
+   "passed": 305,
+   "failed": 0,
+   "skipped": 0,
+   "durationSeconds": 79,
+   "endedUtc": "2026-10-05 03:35:04Z"
+  }
+ ],
+ "firstRunFailures": [
+  {
+   "run": "focusA",
+   "test": "Hellscript.Tests.ClassSkillRuntimeTests.OnHitPassivesExcludePeriodicAndSecondaryDamageAndDeduplicateOneCast",
+   "message": "Expected: 52 But was: 58.0f",
+   "fix": "expected resource 52 = 50 + the old WP07 value 2; now reads ClassSkills.Find(\"WP07\").Number(\"value\")"
+  },
+  {
+   "run": "focusA",
+   "test": "Hellscript.Tests.PassiveTests.LegalRetreatTrapAndTwoPieceSetKeepPassiveRootSeparateFromTrapDuration(True,1.875f)",
+   "message": "Expected: 1.875d +/- 9.9999997473787516E-05d But was: 2.25d",
+   "fix": "expected root 1.875 = 1.5 x 1.25 (old AP04); now 1.5 x (1 + PassiveBase[9]/100); the test case no longer carries the number"
+  },
+  {
+   "run": "focusA",
+   "test": "Hellscript.Tests.PassiveTests.WhirlwindDiscountStartsOnTheTwoSecondPaidTickAndResetsAfterInterrupt",
+   "message": "Expected: 4.8000000715255737d +/- 9.9999997473787516E-05d But was: 3.9000015258789063d",
+   "fix": "expected cost x 0.8 (old WP02 +20%); now 1 - PassiveBase[1]/100"
+  },
+  {
+   "run": "focusB",
+   "test": "Hellscript.Tests.EdictShieldTests.ActualWillpowerAndMp04ScaleTheNewShieldButHealingDoesNot",
+   "message": "Expected: 1.2395000495598651d +/- 0.0001d But was: 1.4394999742507935d",
+   "fix": "expected 1.2 = 1 + old MP04 20 points; now 1 + PassiveBase[15]/100"
+  },
+  {
+   "run": "focusB",
+   "test": "Hellscript.Tests.EdictWarriorAttackTests.RealSetAndLongChannelPassiveApplyAtTheirOwnTicks",
+   "message": "Expected: 60.400001525878906d +/- 0.001d But was: 61.300010681152344d",
+   "fix": "expected tick cost 3.9 (set 15% + old WP02 20%); now capped at 50% total: 6 x (1 - min(.5, .15 + PassiveBase[1]/100))"
+  },
+  {
+   "run": "focusB",
+   "test": "Hellscript.Tests.EffectTests.ShieldScalingUsesWillAndShieldPassiveButNotReceivedHealing",
+   "message": "Expected: 1.2395000495598651d +/- 9.9999997473787516E-05d But was: 1.4394999742507935d",
+   "fix": "expected 1.2 = 1 + old MP04 20 points; now 1 + PassiveBase[15]/100"
+  },
+  {
+   "run": "focusB",
+   "test": "Hellscript.Tests.EffectTests.TrapPassiveExtendsRootByTwentyFivePercentAndStatusKeepsItsSource",
+   "message": "Expected: 1.875d +/- 9.9999997473787516E-05d But was: 2.25d",
+   "fix": "expected root 1.875 (old AP04); now 1.5 x (1 + PassiveBase[9]/100); test renamed TrapPassiveExtendsRootByItsPercentAndStatusKeepsItsSource"
+  },
+  {
+   "run": "focusB",
+   "test": "Hellscript.Tests.GemSocketTests.BlueGemReductionRemainsAfterTimedBuffsExpireInForecastAndActualHits",
+   "message": "Expected: 0.37999999523162842d +/- 9.9999997473787516E-05d But was: 0.5d",
+   "fix": "expected buff reduction .38 = .13 gem + .1 shrine + old WP03 .15; now min(.5, .13 + .1 + PassiveBase[2]/100)"
+  },
+  {
+   "run": "focusD1",
+   "test": "Hellscript.Tests.FieldContentTests.MovementBonusesUseOneCapAndCombatRemovesConditionalBenefits",
+   "message": "Expected: 0.25d +/- 0.001d But was: 0.40000000596046448d",
+   "fix": "expected .25 = .1 shrine + old WP03 .15; now min(.5, .1 + PassiveBase[2]/100)"
+  }
+ ]
+}

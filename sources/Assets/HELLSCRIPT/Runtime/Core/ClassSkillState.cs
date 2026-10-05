@@ -30,7 +30,7 @@ namespace Hellscript
         public string id;
         public int root,target=-1,element;
         public float started,releaseAt,finishAt,cost,resourceRatio,additive,setAdditive,setRoll,legendary,area=1,rankScale=1;
-        public bool released,automatic,highResource,stationary,combo,lightningCharge,ancestralCharge,setElementCharge,elementCharge,compassLightning,vengeance,overheat,firstHit;
+        public bool released,automatic,highResource,reserve,stationary,combo,lightningCharge,ancestralCharge,setElementCharge,elementCharge,compassLightning,vengeance,overheat,firstHit;
         public Vector2 origin,aim,destination;
         public DamageSnapshot snapshot;
         public List<string> receipts=new List<string>();

@@ -1,6 +1,27 @@
 # Hunt edict skill tree integration
 
-Updated: 2026-10-01 · [한국어](Hunt_Edict_Skill_Tree.md)
+Updated: 2026-10-05 · [한국어](Hunt_Edict_Skill_Tree.md)
+
+## 2026-10-05: branch parents and a clean link layout
+
+The skill tree's links looked arbitrary, so connections and placement were rebuilt to read like the Diablo 2, 3 and 4 trees, where the before-and-after order is clear at a glance. The rules and reasons are in [Class skill trees and progression](../Design/Class_Skill_Trees.en.md); this section records only what the game applies.
+
+- **Data.** `ClassSkillTree.json` gains `lineage` (the parent skill), `row` and `col` (the socket), `links` (the drawn links) and `via` (where a link bends). `tools/build_skill_tree.cjs` generates them from the hand-set grid in `tree-design.cjs`, checked by `tree-layout.cjs`, so the HTML planner and the game share one layout.
+- **Unlocking.** `ClassSkillTree.Available` also requires the parent skill to be open. A parent never opens later than its child, so unlock levels are unchanged, and it does not mean spending points on the parent first. Effect prerequisites (`all`, `oneOf`) are as before.
+- **Placement.** `SkillTreeLayout.Place` no longer computes sockets; it reads them from the data. Each branch has two columns and the ultimate stage stacks on the branch centre.
+- **Links.** Every skill has exactly one link (the 93 that have a parent). Within a column it drops straight down; across columns it branches sideways in the gap just above the lower skill (`SkillTreeGraphic.Link`, replacing `Elbow`). The centre trunk remains only for starting skills and the ultimate stage, and still glows brass up to the hero's level. Selecting a skill lights its parent, its followers and its effect prerequisites. Effect targets in another branch appear in the detail panel instead of as a line.
+- **Scope.** The graph tree is still shown only to `edictLegacyAccess` accounts. The "available skills" card list for new accounts is unchanged. No skill name, effect or icon changed and no skill was added, so no artwork request was needed.
+
+### 2026-10-05 verification
+
+Checks ran in a cloned project; the open Unity Editor and the account save were not used.
+
+- Node: `engine.test.cjs` passes 42 tests (three new: the parent rule, parent unlocking and path planning, and links that never cross a skill). `build.cjs` confirms all 111 skills are reachable at their levels, the `check` commands of `class_skills`, `class_skill_runtime`, `class_skill_options` and `class_skill_reports` pass, and so does `build_skill_tree.cjs --check`. The design `catalog.json` did not change.
+- Unity Edit Mode (related tests): 114 ran across tree integration, hunt edict progression, first-play skills and tutorial progression, and 111 passed. The three failures were a mistake in the test I had just added: it applied "a parent never opens later" to direct alternatives (`oneOf`) as well. After fixing it I reran `SkillTreeIntegrationTests`, and all 39 pass. The new tests check, per class, that no socket is shared, links only run downward, no link crosses another skill and there are four starting skills.
+- macOS development build: a temporary capture flow, added to the clone only and not committed, scrolled the graph tree of all three classes at portrait 440×956 and landscape 1600×900 and captured a selected skill. It finished with no exception.
+- Merge verification (2026-10-05): on `origin/main` (17dc75e9) plus this branch, 5,235 of 5,236 Edit Mode tests passed; the last one is an existing timeout that fails the same way on `origin/main` before the merge. The same eight macOS development-build smokes ran on the merged tree and on `origin/main` with identical outcomes: the skill tree (37 nodes, four slots, fixed control positions), skill reset, skill preset and class skill smokes passed, while the skill menu, edict sections, quick preset and tutorial smokes fail on `origin/main` for the same reasons. The tree-family smokes had been broken since staged disclosure stopped treating their account as a legacy account, so `ExistingTrees` now switches legacy access on. Record: [merge-validation.json](ClassPassiveMeasurementEvidence20261005/merge-validation.json)
+- Evidence: the full planner trees for [Warrior](HuntEdictSkillTreeLineageEvidence20261005/planner-warrior-lv40.png), [Ranger](HuntEdictSkillTreeLineageEvidence20261005/planner-ranger-lv40.png) and [Mage](HuntEdictSkillTreeLineageEvidence20261005/planner-mage-lv40.png), and game screens in [portrait (top)](HuntEdictSkillTreeLineageEvidence20261005/native-warrior-portrait-top.png), [portrait (middle)](HuntEdictSkillTreeLineageEvidence20261005/native-warrior-portrait-middle.png), [landscape Mage](HuntEdictSkillTreeLineageEvidence20261005/native-mage-landscape-middle.png) and [landscape with a selection](HuntEdictSkillTreeLineageEvidence20261005/native-warrior-landscape-selected-WP16.png). The folder holds seven PNGs, 5.2 MB.
+- Not done: `browser.test.cjs` was updated for the new structure but not rerun because Playwright is not installed, so the older browser captures under `evidence/` record the previous layout. Instead, headless Chrome confirmed the three classes' trees and the parent display in the detail panel. The full Edit Mode suite and the runtime smokes ran at merge time; the result is in the merge verification below. No physical mobile device was used.
 
 ## 2026-10-01: clear equipment marks and compact skill actions
 
@@ -30,7 +51,7 @@ The user found the old tree cheap: it listed each skill in a box, and the icons 
 - **From Diablo III**: round, ornately framed skill sockets and stage titles with ornamental rules.
 - **From mobile games**: a bottom-opening inspector in portrait, the skill bar fixed at the bottom, unlock levels on locked skills and large touch areas.
 
-Each of the three branches is a vertical trunk. Level-only skills hang from the trunk; a skill whose prerequisite is in the same stage hangs directly below it with a link. Trunks and links glow brass up to the hero's level. Stages not yet reached are shaded and each skill there shows its unlock level, such as `Lv.26`. Ultimates sit at the end of their trunk in the last stage. Selecting a skill draws bright links to its prerequisites and to the skills it opens, including ones in other stages or branches.
+Each of the three branches is a vertical trunk. Starting skills hang from the trunk and every other skill hangs below its parent with a link (since 2026-10-05, see the section above). Trunks and links glow brass up to the hero's level. Stages not yet reached are shaded and each skill there shows its unlock level, such as `Lv.26`. Ultimates sit at the end of their trunk in the last stage. Selecting a skill draws bright links to its prerequisites and to the skills it opens, including ones in other stages or branches.
 
 Actives use a round frame, passives a square frame and ultimates a four-pointed crest. The frames, tree backdrop and point gem were generated with GPT at the user's request. Icons are centered in each frame's measured transparent opening, so frame and icon no longer drift apart. Upgraded and equipped skills glow softly, the selected skill glows brightly, and equipped skills carry their slot number (a diamond for the ultimate). An outline around the selection made the node look like a box again, so state is shown with light only. See the [skill tree screen art record](../Art/SkillTreeUi/Skill_Tree_UI_Art.en.md).
 

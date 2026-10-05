@@ -61,14 +61,14 @@
 0.5초 동안 공격 범위에 적 없음	No enemy in range for 0.5 seconds
 1. 성소에서 직업과 행동 설정을 고릅니다. 직업별 추천 빌드의 스킬 조합과 행동 조건을 확인하세요.	1. Pick a class and its behavior settings at the sanctuary. Look at the skill combination and the conditions in each class's recommended builds.
 1초 동안 예상되는 HP 손실이 회피 기준 이상입니다.	The HP loss expected over one second is at or above the dodge threshold.
-1초 보행 후 다음 유료 스킬의 비용이 25% 감소합니다. 사용 후 대기시간은 4초입니다.	After walking for 1 second the next skill that costs resource is 25% cheaper. The effect then waits 4 seconds.
+1초 보행 후 다음 유료 스킬의 비용이 40% 감소합니다. 사용 후 대기시간은 4초입니다.	After walking for 1 second the next skill that costs resource is 40% cheaper. The effect then waits 4 seconds.
 2. 균열에 진입하면 탐색·전투·획득이 자동으로 진행됩니다. 처치 게이지 100을 채우면 보스가 등장합니다.	2. Once you enter a rift, exploring, fighting and collecting all run by themselves. Filling the kill gauge to 100 brings out the boss.
 22종 · 조건 판정과 CD·자원·사거리 검사는 별도로 처리합니다.	22 kinds · the condition check is handled separately from cooldown, resource and range.
 2세트 · {0}\n4세트 · {1}	2 set · {0}\n4 set · {1}
 2세트: 	2 set: 
 2세트: {0}\n4세트: {1}	2 set: {0}\n4 set: {1}
 3. 실패해도 이미 얻은 장비·경험치·재화는 유지됩니다. 개봉하지 않은 상자의 보상은 지급하지 않습니다.	3. Even if you lose, the gear, XP and currency you already earned stay. Rewards inside unopened chests are not paid.
-3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +15%를 적용합니다.	Adds +15% damage while three or more living enemies stand within 3m.
+3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +25%를 적용합니다.	Adds +25% damage while three or more living enemies stand within 3m.
 4. 행동 설계에서는 실행 조건을 수정할 수 있습니다. 편집 중에는 전투가 멈추며, 설정 적용을 눌러야 변경한 내용이 반영됩니다.	4. Behavior design is where you edit the conditions that decide what runs. Combat stops while you edit, and nothing takes effect until you press apply.
 4명에게 번개를 연결합니다. 다음 타격마다 ×0.8.	Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one.
 5. 현재는 1배속을 사용하며 1.5배속과 2배속은 잠겨 있습니다. 일시정지하면 전투 시간이 흐르지 않습니다.	5. Only 1× speed is available for now; 1.5× and 2× are locked. While paused, combat time does not advance.
@@ -104,8 +104,8 @@ CD 대기	On cooldown
 HP 20% 이하에서 물약 사용 시 최대 HP 25% 보호막을 3초 얻습니다. 20초 간격.	Drinking a potion at 20% HP or below grants a shield worth 25% of max HP for 3 seconds, once every 20 seconds.
 HP {0:0} / {1:0} · 보호막 {2:0}\n자원 {3:0} / {4:0} · {5:0.#}배\n{6}	HP {0:0} / {1:0} · Shield {2:0}\nResource {3:0} / {4:0} · {5:0.#}×\n{6}
 HP 손실	HP lost
-HP가 30% 이하인 적에게 가산 피해 +20%를 적용합니다.	Adds +20% damage against enemies at or below 30% HP.
-HP가 30% 이하인 적에게 치명 확률 +10%p를 적용합니다. 최종 상한은 75%입니다.	Adds +10%p critical chance against enemies at or below 30% HP, capped at 75%.
+HP가 30% 이하인 적에게 가산 피해 +35%를 적용합니다.	Adds +35% damage against enemies at or below 30% HP.
+HP가 30% 이하인 적에게 치명 확률 +20%p를 적용합니다. 최종 상한은 75%입니다.	Adds +20%p critical chance against enemies at or below 30% HP, capped at 75%.
 LM01이 없어 새 눈보라는 위치 고정으로 판단합니다.	Without LM01 a new blizzard is judged as staying in place.
 LM04가 없어 고유 대상 수로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
 LM04가 없어 고유 대상 수를 기준으로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
@@ -611,7 +611,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 도약 세트 추가타	Leap set extra hit
 도약 역할	Role of the leap
 도약 적중 후 4초 안에 다음 분쇄 일격에 D160% 물리 추가 피해.	The next Crushing Blow within 4 seconds of a leap hit adds D160% physical damage.
-도약 착지 후 2초 동안 받는 피해가 15% 감소합니다.	Reduces incoming damage by 15% for 2 seconds after a leap lands.
+도약 착지 후 2초 동안 받는 피해가 30% 감소합니다.	Reduces incoming damage by 30% for 2 seconds after a leap lands.
 도약 착지에 반경 4m, D90% 물리 충격파를 추가합니다.	Adds a 4m radius D90% physical shockwave to a leap landing.
 도약 쿨타임 감소 +15% (합산 상한 40%).	Leap cooldown reduced by 15% (40% combined cap).
 도약으로 진입하고 분쇄로 마무리합니다.	Opens with a leap and finishes with a crush.
@@ -815,7 +815,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 보호막 / 최대 HP	Shield / max HP
 보호막 사용 시점	When to raise the shield
 보호막 생성량	Barrier Generation
-보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.	Adds +20%p to shield strength, stacking with the bonus from Willpower.
+보호막 생성량 증가에 +40%p를 더합니다. 의지의 증가량과 합산합니다.	Adds +40%p to shield strength, stacking with the bonus from Willpower.
 보호막 흡수	Shield absorbed
 보호막 흡수 {0:0.##} · HP 감소 {1:0.##}	Shield absorbed {0:0.##} · HP lost {1:0.##}
 보호막을 한 번씩만 사용한 합산 HP 손실이 기준 이상입니다.	Counting each shield only once, the combined HP loss is at or above the threshold.
@@ -1466,7 +1466,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 적이 있으면|무리 상대|정예·보스 상대	Any enemy|Against a pack|Against an elite or boss
 적이 있으면|정예·보스 교전|독 전염 교전	Any enemy|An elite or boss fight|A fight where poison spreads
 적이 적은 위치	Where enemies are sparse
-적중할 때 대상과 7m 이상 떨어져 있으면 가산 피해 +15%를 적용합니다.	Adds +15% damage when the target is 7m or further away on hit.
+적중할 때 대상과 6m 이상 떨어져 있으면 가산 피해 +30%를 적용합니다.	Adds +30% damage when the target is 6m or further away on hit.
 전리품	Loot
 전리품 정리 종료	Loot collecting finished
 전리품 회수	Looting
@@ -1665,7 +1665,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 직업	Class
 직업 · {0}	Class · {0}
 직업·전역·스킬 항목이 누락되거나 추가되었습니다.	The class, global or skill entries are missing or were added to.
-직접 설치한 덫과 후퇴 덫의 속박 시간이 25% 늘어납니다.	Extends the root from placed traps and retreat traps by 25%.
+직접 설치한 덫과 후퇴 덫의 속박 시간이 50% 늘어납니다.	Extends the root from placed traps and retreat traps by 50%.
 직접 지정	Set it yourself
 직접 타격·투사체	Direct hits and projectiles
 진압 성공	Suppressed
@@ -1998,7 +1998,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 화염 피해	Fire Damage
 화염구	Fireball
 화염구 착탄 0.4초 뒤 반경 3.5m에 D70% 추가 화염 폭발.	0.4 seconds after a Fireball lands, a second D70% fire blast covers a 3.5m radius.
-화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +15%를 적용합니다.	Adds +15% damage to the Fireball blast itself when it catches three or more enemies.
+화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +30%를 적용합니다.	Adds +30% damage to the Fireball blast itself when it catches three or more enemies.
 확인	Confirm
 확인하는 동안 전투 시간이 멈춥니다.	Combat time stops while you read this.
 확인한 코드	Reviewed code
@@ -2026,7 +2026,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 회오리 충격 · {0:0.0}초\n다음 도약의 이동 시작에 예약합니다.	Whirlwind Impact · {0:0.0}s\nQueued for the start of the next leap's travel.
 회오리 충격 · 현재 도약에 예약됨	Whirlwind Impact · queued on the current leap
 회오리 충전	Whirlwind charge
-회오리를 2초 유지하면 비용 감소 +20%를 적용합니다. 중단하면 해제됩니다.	Holding Whirlwind for 2 seconds applies a 20% cost reduction. Interrupting it clears the bonus.
+회오리를 2초 유지하면 비용 감소 +35%를 적용합니다. 중단하면 해제됩니다.	Holding Whirlwind for 2 seconds applies a 35% cost reduction. Interrupting it clears the bonus.
 회오리를 유지하며 자원을 관리합니다.	Holds Whirlwind and manages the resource.
 회오리에 끌림	Pulled in by Whirlwind
 회전 종료 방식	How the spin ends
@@ -2062,7 +2062,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 후퇴	Retreat
 후퇴 경로를 진행할 수 없어 다시 판단합니다.	The retreat path cannot be followed, so it is judged again.
 후퇴 도약	Retreat Leap
-후퇴 도약 착지 후 2초 동안 이동속도 증가에 +20%p를 더합니다.	Adds +20%p movement speed for 2 seconds after Retreat Leap lands.
+후퇴 도약 착지 후 2초 동안 이동속도 증가에 +35%p를 더합니다.	Adds +35%p movement speed for 2 seconds after Retreat Leap lands.
 후퇴 도약 출발점에 덫을 남깁니다. 0.5초 무장, 최대 8초 대기, 발동 후 3초 피해. 맹독 덫 장착이 필요하며 직접 덫과 합쳐 최대 2개입니다.	Retreat Leap leaves a trap where it started. It arms in 0.5 seconds, waits up to 8 seconds and deals damage for 3 seconds once triggered. Venom Trap has to be equipped, and placed traps and these count together toward the limit of 2.
 후퇴 도약의 기준이 될 감지 대상이 없습니다.	There is no detected enemy to measure the retreat leap against.
 후퇴 도약의 일반 사용을 끈 상태이므로 긴급 대응에서만 사용합니다.	Ordinary use of the retreat leap is off, so it only runs as an emergency response.

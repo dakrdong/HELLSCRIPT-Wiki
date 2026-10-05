@@ -12,6 +12,9 @@ def preserved_source_bytes(path, raw):
     if path=='Assets/HELLSCRIPT/Runtime/Core/SkillEffects.cs':
         raw=raw.replace(b'Mathf.Clamp(ranks[index],1,SkillProgression.MaximumEffectiveRank)',
                         b'Mathf.Clamp(ranks[index],1,SkillProgression.MaximumRank)')
+        # The first-row passive percentages are balance data, retuned from measurements (Class_Passive_Measurement.md).
+        # The fingerprint keeps the original numbers; every other edit of the file still fails the check.
+        raw=re.sub(rb'PassiveBase=\{[^}]*\}',b'PassiveBase={15,20,15,2,20,20,15,20,0,25,25,10,15,20,0,20,20,10}',raw)
     elif path=='Assets/HELLSCRIPT/Runtime/Core/SkillProgression.cs':
         raw=raw.replace(b'MaximumRank=5, MaximumEffectiveRank=6;',b'MaximumRank=5;')
         raw=raw.replace(b'Math.Clamp(rank,1,MaximumEffectiveRank)',b'Math.Clamp(rank,1,MaximumRank)')

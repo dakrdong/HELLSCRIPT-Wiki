@@ -1,9 +1,9 @@
 {
   "source": {
     "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
-    "runtimeSha256": "213afc75554dd0fc838cd9c1c22b900f8a11b9bb04814180474315db33e8458d",
+    "runtimeSha256": "46385baef98fdde5fd0f9d1c1603103fbeae3481ee5fb46708f17188e9cb8a54",
     "design": "Docs/Design/ClassSkills/catalog.json",
-    "designSha256": "fc02d95c29dc78bfba0121b12dc21450eea92479c10d4201193b4440dfc8e25a",
+    "designSha256": "4fa6d9889a703c43aa09271668450d842b9c2830ac2cec303094bb43bb757fc2",
     "gameEnabled": false
   },
   "result": "pass",
@@ -254,8 +254,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +15%를 적용합니다.",
-      "sourceSha256": "48646644d3e7b65ddd5f642f0353dd992e0fe09dc4cdda838b938dbc456fe1e2"
+      "sourceDescription": "3m 안에 살아 있는 적이 3명 이상이면 가산 피해 +25%를 적용합니다.",
+      "sourceSha256": "76220f5aa0d071c7bdc063e21ada0a0547a2a0d3983d271dde4be0da9534db70"
     },
     {
       "id": "WP02",
@@ -276,8 +276,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "회오리를 2초 유지하면 비용 감소 +20%를 적용합니다. 중단하면 해제됩니다.",
-      "sourceSha256": "73d495e1241fa630b20d975f5d0a4f3f43e6d32c6bd723a45c358688d3505b35"
+      "sourceDescription": "회오리를 2초 유지하면 비용 감소 +35%를 적용합니다. 중단하면 해제됩니다.",
+      "sourceSha256": "382f686dc9f334728ae75308790b9ad36ddbfa70701fe4978f3438c0ef8ff000"
     },
     {
       "id": "WP03",
@@ -302,8 +302,8 @@
           "cue": "action.skill==1"
         }
       ],
-      "sourceDescription": "도약 착지 후 2초 동안 받는 피해가 15% 감소합니다.",
-      "sourceSha256": "6e1713516e4ae4bd3e695ed69737a0eacdb247ab553ee6990cc25624fafefe1c"
+      "sourceDescription": "도약 착지 후 2초 동안 받는 피해가 30% 감소합니다.",
+      "sourceSha256": "126813d55e38de1f4f24c345558979d8cccebeee9a196dfac9f88ee8e4cf5e1d"
     },
     {
       "id": "WP04",
@@ -328,8 +328,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
-      "sourceSha256": "f3c8fd3f4cba3edf50599c080d573514ca58dac09d69e3fb4b712e74f22a24f8"
+      "sourceDescription": "보호막 생성량 증가에 +40%p를 더합니다. 의지의 증가량과 합산합니다.",
+      "sourceSha256": "09b8017a5d5788d9e17856eaa66ecab21b8214ab822c3762e074cefdba997298"
     },
     {
       "id": "WP06",
@@ -341,8 +341,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "HP가 30% 이하인 적에게 가산 피해 +20%를 적용합니다.",
-      "sourceSha256": "31935c6741ba6328d16662c5e93391f44cf2cd4860f34691fe86b5d6f8b28ba2"
+      "sourceDescription": "HP가 30% 이하인 적에게 가산 피해 +35%를 적용합니다.",
+      "sourceSha256": "fcadf0072b8edf6616c450b2adaebff93c6caf7d755a2d51943f695f79a7aa86"
     },
     {
       "id": "AP01",
@@ -354,8 +354,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "적중할 때 대상과 7m 이상 떨어져 있으면 가산 피해 +15%를 적용합니다.",
-      "sourceSha256": "da8812c8da08adf182be9c22fe4f086c1dd9c82a9b1b4dd77d9f3617851e2d35"
+      "sourceDescription": "적중할 때 대상과 6m 이상 떨어져 있으면 가산 피해 +30%를 적용합니다.",
+      "sourceSha256": "213831b0ce831ad0816688538dad84658d82ddcab7c8bf10bbb5a5682b5a2620"
     },
     {
       "id": "AP02",
@@ -376,8 +376,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "후퇴 도약 착지 후 2초 동안 이동속도 증가에 +20%p를 더합니다.",
-      "sourceSha256": "2d4343767f6ef01d43599fb24941bc2713a6fae78226964475954d5dbd907515"
+      "sourceDescription": "후퇴 도약 착지 후 2초 동안 이동속도 증가에 +35%p를 더합니다.",
+      "sourceSha256": "76c05abe67dc07a2f42bca135def4d54f615354bc7b423d58b16ca38724f6e4b"
     },
     {
       "id": "AP03",
@@ -429,8 +429,8 @@
           "cue": "definitionId=action.skill==9?\"LA03\":\"A03\""
         }
       ],
-      "sourceDescription": "직접 설치한 덫과 후퇴 덫의 속박 시간이 25% 늘어납니다.",
-      "sourceSha256": "50ac79d1ab31a2f754fc7675216bb161431125d1b08e20d4bc2c45e2aa6045f6"
+      "sourceDescription": "직접 설치한 덫과 후퇴 덫의 속박 시간이 50% 늘어납니다.",
+      "sourceSha256": "c37768559d7adf68e221e2c1f55532cd58580f4c77423c041b5c79128b13db62"
     },
     {
       "id": "AP05",
@@ -442,8 +442,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "1초 보행 후 다음 유료 스킬의 비용이 25% 감소합니다. 사용 후 대기시간은 4초입니다.",
-      "sourceSha256": "088a3e28ae0fc60cacc0064082d3e68ceabce93ed6dab5bc7e5054b71e2e2dbb"
+      "sourceDescription": "1초 보행 후 다음 유료 스킬의 비용이 40% 감소합니다. 사용 후 대기시간은 4초입니다.",
+      "sourceSha256": "2bf232310d10d8d244c4aaf38349b2a8695e52f277cb371a5f4776c3817d36fe"
     },
     {
       "id": "AP06",
@@ -455,8 +455,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "HP가 30% 이하인 적에게 치명 확률 +10%p를 적용합니다. 최종 상한은 75%입니다.",
-      "sourceSha256": "e1e65f0ebb9f83c182ada0296fea32d7ef7c66e35b05393565e7b434636c11ef"
+      "sourceDescription": "HP가 30% 이하인 적에게 치명 확률 +20%p를 적용합니다. 최종 상한은 75%입니다.",
+      "sourceSha256": "78be76c7014af7c4d7648804a34d0dde599d4b7e2a98b7679cb65b34dfe1eddf"
     },
     {
       "id": "MP01",
@@ -477,8 +477,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +15%를 적용합니다.",
-      "sourceSha256": "60214e43771c0ce84aa7e77b3a956a94b75a4ee0bea049990397020781f25a7f"
+      "sourceDescription": "화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +30%를 적용합니다.",
+      "sourceSha256": "f0649590ac39478e225f812662b100d85fa59d102516739349cba25775c2dc37"
     },
     {
       "id": "MP02",
@@ -534,8 +534,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "보호막 생성량 증가에 +20%p를 더합니다. 의지의 증가량과 합산합니다.",
-      "sourceSha256": "f3c8fd3f4cba3edf50599c080d573514ca58dac09d69e3fb4b712e74f22a24f8"
+      "sourceDescription": "보호막 생성량 증가에 +40%p를 더합니다. 의지의 증가량과 합산합니다.",
+      "sourceSha256": "09b8017a5d5788d9e17856eaa66ecab21b8214ab822c3762e074cefdba997298"
     },
     {
       "id": "MP05",
@@ -1138,8 +1138,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "표식 대상에게 일반 액티브가 처음 직접 적중하면 자원 2를 회복합니다. 시전당 1회, 1초 간격입니다.",
-      "sourceSha256": "1950f0d895a5b9fa16949184350e2eb24cef52ff3de60bdea8a008f600ef8734"
+      "sourceDescription": "표식 대상에게 일반 액티브가 처음 직접 적중하면 자원 8을 회복합니다. 시전당 1회, 1초 간격입니다.",
+      "sourceSha256": "a77a3d95df648969547c3516dcff71a3bc635e69840cf13ed7e874ba9a393727"
     },
     {
       "id": "WP08",
@@ -1166,8 +1166,8 @@
           "cue": "HasDot(\"W09\",enemy)||HasDot(\"REF_SW05_B2\",enemy)"
         }
       ],
-      "sourceDescription": "자신의 W09 또는 붉은 상흔 세트 출혈이 남은 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 다른 물리 지속 피해를 임의로 출혈로 간주하지 않습니다.",
-      "sourceSha256": "422005ff11f4f9dc2164fc5911da9147913842a7b44a64bc012ae71446dc451c"
+      "sourceDescription": "자신의 W09 또는 붉은 상흔 세트 출혈이 남은 적에게 일반 액티브 직접 피해가 가산 20% 증가합니다. 다른 물리 지속 피해를 임의로 출혈로 간주하지 않습니다.",
+      "sourceSha256": "79739c61a224de4d2251bc5d9057c88b4695ab56567d9eee19569d87f97156fd"
     },
     {
       "id": "WP09",
@@ -1179,8 +1179,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "적의 공격을 방어하고 생존하면 자원 4를 회복합니다. 1초 간격이며 반격 자체로는 발동하지 않습니다.",
-      "sourceSha256": "487f0027fb7e0c39829a87555f6077e6afaaea437bf1a2e62a7e52b7d91f2d52"
+      "sourceDescription": "적의 공격을 방어하고 생존하면 자원 18을 회복합니다. 1초 간격이며 반격 자체로는 발동하지 않습니다.",
+      "sourceSha256": "10054c34283cc50f019495be63cfb412c56321fc448ec361fb276c29f32170d9"
     },
     {
       "id": "WP10",
@@ -1257,8 +1257,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "같은 적에게 기본 공격 3회 적중 후 다음 분쇄 일격의 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
-      "sourceSha256": "93ddfbf6e6216bfddd4ee555c74d1e30c4d4c95ed5138ae54103adb5eedee208"
+      "sourceDescription": "같은 적에게 기본 공격 2회 적중 후 다음 분쇄 일격의 비용 감소 +30%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+      "sourceSha256": "3673f13aa13a771ccc8ed1b309025eaaee0a97a997e1d43e55b98ee92f991b50"
     },
     {
       "id": "WP13",
@@ -1270,8 +1270,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "HP가 50% 이하인 동안 초당 자원 회복이 20% 증가합니다. 적중·함성의 즉시 회복에는 곱하지 않습니다.",
-      "sourceSha256": "80303bda35c0c2815e64f3ddffa2786836d77eb8ea980b5e328e472336f339d6"
+      "sourceDescription": "HP가 70% 이하인 동안 초당 자원 회복이 40% 증가합니다. 적중·함성의 즉시 회복에는 곱하지 않습니다.",
+      "sourceSha256": "2af53dbedebf2e795da3afbcd663ba9d2aa64ee7eee2e698a52bba9012651be4"
     },
     {
       "id": "WP14",
@@ -1292,8 +1292,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "제어 상태인 적에게 일반 액티브가 처음 직접 적중하면 장착한 지면 강타의 남은 쿨타임을 0.5초 줄입니다. 2초 간격이며 0 아래로 줄이지 않습니다.",
-      "sourceSha256": "a0a44a1aee52baaeecd648bf6e308e753f2a164568d827b4f6e7433b268af78c"
+      "sourceDescription": "제어 상태인 적에게 일반 액티브가 처음 직접 적중하면 장착한 지면 강타의 남은 쿨타임을 2.5초 줄입니다. 2초 간격이며 0 아래로 줄이지 않습니다.",
+      "sourceSha256": "c4693f44d689ff65ecc2297ec612af121e005630e5051d68104ce063be248841"
     },
     {
       "id": "WP15",
@@ -1305,8 +1305,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "직전 4초 안에 시전한 것과 다른 일반 공격 스킬을 시전하면 그 시전의 직접 피해가 가산 10% 증가합니다. 기본 공격·궁극기·추가 피해는 기록을 바꾸지 않습니다.",
-      "sourceSha256": "620b61af7231a875aa314b0f17b972ea0109e91b3ac246f6b028e94d497a662c"
+      "sourceDescription": "직전 4초 안에 시전한 것과 다른 일반 공격 스킬을 시전하면 그 시전의 직접 피해가 가산 20% 증가합니다. 기본 공격·궁극기·추가 피해는 기록을 바꾸지 않습니다.",
+      "sourceSha256": "4c023efbcb8f04679ee7425ac15c47b5b3a0e157c984c85df69188d3b24c721b"
     },
     {
       "id": "WP16",
@@ -1327,8 +1327,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "보호막이 남아 있는 동안 회오리를 유지하면 받는 피해가 8% 감소합니다. 회오리 중단 또는 보호막 소진 시 즉시 해제합니다.",
-      "sourceSha256": "996c4be7ce0fbb3946b049a73a60e903f8e5d0093b4da2a6cb473a53aca9e032"
+      "sourceDescription": "회오리를 유지하면 받는 피해가 8% 감소하고, 보호막이 남아 있으면 12% 감소합니다. 회오리가 끝나면 즉시 해제합니다.",
+      "sourceSha256": "b33393539cd48ab21b53ca13215ee8f2de223999fcf55a4ae82af5b66774b924"
     },
     {
       "id": "WP17",
@@ -1361,8 +1361,8 @@
           "cue": "Passive(\"WP17\")"
         }
       ],
-      "sourceDescription": "시전 전 자원이 80% 이상이면 분쇄 일격·지면 강타의 직접 피해가 가산 10% 증가합니다. 자원은 비용 차감 전에 확인합니다.",
-      "sourceSha256": "b5c5712ce3b791ba40a9d59bf1f7a9ba74e891bf4c24f1f14385bcee774d5559"
+      "sourceDescription": "시전 전 자원이 60% 이상이면 분쇄 일격·지면 강타의 직접 피해가 가산 15% 증가합니다. 자원은 비용 차감 전에 확인합니다.",
+      "sourceSha256": "5e5903100dab831baa275bb5a60533cc21d01100018cc8c7aebad36c92ae3e8b"
     },
     {
       "id": "WP18",
@@ -1383,8 +1383,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "선조의 전쟁 중 실제 선조 적중이 있으면 초당 자원 1, 시전 전체 최대 8을 회복합니다.",
-      "sourceSha256": "954891e53f3671a4ee856e0f0eb49181d3db423c16b8dc16984fe3ca44630b28"
+      "sourceDescription": "선조의 전쟁 중 실제 선조 적중이 있으면 초당 자원 3, 시전 전체 최대 24를 회복합니다.",
+      "sourceSha256": "45fd3b0105b84ec85d0258ef49c847b68c55bb85d5c19a347ea8bf902f55a643"
     },
     {
       "id": "AP07",
@@ -1396,8 +1396,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "표식 대상에 대한 일반 액티브의 직접 치명 확률이 5%p 증가합니다. 전체 75% 상한을 공유합니다.",
-      "sourceSha256": "f37e66115fcac27894ae68457a062bc64d9f95b1b68039bea7e062a3e0881da6"
+      "sourceDescription": "표식 대상에 대한 일반 액티브의 직접 치명 확률이 15%p 증가합니다. 전체 75% 상한을 공유합니다.",
+      "sourceSha256": "4bec72562107d6d56513ae9572df80e531ae0c94d874bc848761a941186514e1"
     },
     {
       "id": "AP08",
@@ -1409,8 +1409,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "관측한 중독 적이 10m 안에 있으면 이동속도가 10% 증가합니다. 시야 밖의 적 위치를 알아내는 기능은 제공하지 않습니다.",
-      "sourceSha256": "899d1d77a7be4de52ee6f2efc219716049764b629ad995f1bde8f3259eaaddd6"
+      "sourceDescription": "관측한 중독 적이 10m 안에 있으면 이동속도가 20% 증가합니다. 시야 밖의 적 위치를 알아내는 기능은 제공하지 않습니다.",
+      "sourceSha256": "0dd0339d0c54e6600da80421e1a96ab8a6fda13e380f84213f84c26639fb2ea0"
     },
     {
       "id": "AP09",
@@ -1422,8 +1422,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "기본 공격 직접 적중 시 자원 2를 회복합니다. 0.5초 간격이며 분열·쇠뇌·그림자 추가 피해는 기본 공격으로 세지 않습니다.",
-      "sourceSha256": "a4f65e4b5c51560250a699e93b02132a40d1c1c3347cd78c0eb2c07e301436c8"
+      "sourceDescription": "기본 공격 직접 적중 시 자원 4를 회복합니다. 0.5초 간격이며 분열·쇠뇌·그림자 추가 피해는 기본 공격으로 세지 않습니다.",
+      "sourceSha256": "0d4b928e58eb8f0f28cd282ccf0c6ed8db815a497521857df7f348fa3bff9542"
     },
     {
       "id": "AP10",
@@ -1435,8 +1435,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "중독된 적을 직접 공격으로 처치하면 자원 6을 회복합니다. 2초 간격이며 독 틱·장비 추가 피해 처치는 제외합니다.",
-      "sourceSha256": "4f8f0ebc2d17e8431b660943fe059e17097eebf3bf04dc7f8eb25b7434f94e49"
+      "sourceDescription": "중독된 적을 직접 공격으로 처치하면 자원 12를 회복합니다. 2초 간격이며 독 틱·장비 추가 피해 처치는 제외합니다.",
+      "sourceSha256": "5c03b23b4daa88ba460492007434f401256b68cc7ec488affe3ddc24a83b9b52"
     },
     {
       "id": "AP11",
@@ -1522,8 +1522,8 @@
           "cue": "Passive(\"AP12\")"
         }
       ],
-      "sourceDescription": "맹독 덫·가시 덫·서리 올가미를 직접 설치하면 장착한 후퇴 도약의 남은 쿨타임을 1초 줄입니다. 4초 간격입니다.",
-      "sourceSha256": "9f913097a4c04ac133404acf98b8c449f7d48be9aa7d1fd161ba6cbf9a53b960"
+      "sourceDescription": "맹독 덫·가시 덫·서리 올가미를 직접 설치하면 장착한 후퇴 도약의 남은 쿨타임을 3초 줄입니다. 4초 간격입니다.",
+      "sourceSha256": "216796f4b2c29726b78acbef6b7eace7b8413473611f19c61e1afaf9448644a4"
     },
     {
       "id": "AP13",
@@ -1556,8 +1556,8 @@
           "cue": "Passive(\"AP13\")"
         }
       ],
-      "sourceDescription": "시전 시작 전 0.8초 이상 제자리에 있었다면 관통 사격·응시 사격의 직접 피해가 가산 15% 증가합니다. 이동하면 대기 시간을 다시 셉니다.",
-      "sourceSha256": "d06c89aa88daad1738c8466fb7cec55642b87f3e20ba8a28d6c6244e8168978c"
+      "sourceDescription": "시전 시작 전 0.5초 이상 제자리에 있었다면 관통 사격·응시 사격의 직접 피해가 가산 30% 증가합니다. 이동하면 대기 시간을 다시 셉니다.",
+      "sourceSha256": "e3b7f92287ce5e028d8c696a94fc4a4fb95920a412b2932c8c1c668aa63b1678"
     },
     {
       "id": "AP14",
@@ -1582,8 +1582,8 @@
           "cue": "Passive(\"AP14\")"
         }
       ],
-      "sourceDescription": "자신의 살아 있는 미끼 3m 안의 적에게 일반 액티브 직접 피해가 가산 10% 증가합니다. 미끼의 폭발 피해에는 적용하지 않습니다.",
-      "sourceSha256": "0af5436ccc9997f92ae7c4c579e769b47e42c70ec3a0f1a02d84209b246d6d0e"
+      "sourceDescription": "자신의 살아 있는 미끼 3m 안의 적에게 일반 액티브 직접 피해가 가산 20% 증가합니다. 미끼의 폭발 피해에는 적용하지 않습니다.",
+      "sourceSha256": "5eb79e72c179556504cf1c2d46626081b7ad8b8ed552d9090499dabcb268d4b6"
     },
     {
       "id": "AP15",
@@ -1595,8 +1595,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "중독과 둔화가 동시에 걸린 적에게 일반 액티브 직접 피해가 가산 12% 증가합니다. 빙결만으로 둔화가 있다고 간주하지 않습니다.",
-      "sourceSha256": "7a729313df1b9313fff9f0d1a4ea3a9c23a0acfb589b1285e2ccff6785f0379f"
+      "sourceDescription": "중독과 둔화가 동시에 걸린 적에게 일반 액티브 직접 피해가 가산 25% 증가합니다. 빙결만으로 둔화가 있다고 간주하지 않습니다.",
+      "sourceSha256": "418171f217a8c54c2d736a921fffc7ff5104ae6e8b4d9fdea591d560866ec8cc"
     },
     {
       "id": "AP16",
@@ -1629,8 +1629,8 @@
           "cue": "Passive(\"AP16\")"
         }
       ],
-      "sourceDescription": "연막 엄폐·사냥 준비를 사용하면 6초 안의 다음 유료 일반 액티브 비용 감소 +15%p를 준비합니다. 1충전이며 두 기술은 6초 재발동 간격을 공유합니다.",
-      "sourceSha256": "c9502ed77f2f0d2e751be13ee9041ea6cd6f49acd7000c42dd3b3bb3afd8083e"
+      "sourceDescription": "연막 엄폐·사냥 준비를 사용하면 6초 안의 다음 유료 일반 액티브 비용 감소 +30%p를 준비합니다. 1충전이며 두 기술은 6초 재발동 간격을 공유합니다.",
+      "sourceSha256": "df4ff8a5a0dcfafc81dc53a59d384bdee114b0100f24a0fe1eaf50373ca3c93e"
     },
     {
       "id": "AP17",
@@ -1651,8 +1651,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "교차 쇠뇌의 교차 사격이 첫 적을 관통하여 같은 사선의 적 한 명을 사격 피해의 50%로 더 맞힙니다. 최대 2명, 실제 사거리·벽 충돌을 유지하며 추가 발동을 재생산하지 않습니다.",
-      "sourceSha256": "6d024801c7faf18494e9d1f658d727834906438021a67cf767060a73c0da37b8"
+      "sourceDescription": "교차 쇠뇌의 교차 사격이 첫 적을 관통하여 같은 사선의 적 한 명을 사격 피해의 80%로 더 맞힙니다. 최대 2명, 실제 사거리·벽 충돌을 유지하며 추가 발동을 재생산하지 않습니다.",
+      "sourceSha256": "dbc813f1cd35b2fc7d508b25fc9f71d242dee7c3b0bf421d7d2643712215c049"
     },
     {
       "id": "AP18",
@@ -1673,8 +1673,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "일제 소탕의 첫 파동이 표식 대상을 맞히면 그 대상에게 D100% 물리 추가 피해를 한 번 줍니다.",
-      "sourceSha256": "f7279c7f0a6dd0543db39d1f7568b803f8301e2f3e407c44bc00d16aead0256f"
+      "sourceDescription": "일제 소탕의 첫 파동이 표식 대상을 맞히면 그 대상에게 D200% 물리 추가 피해를 한 번 줍니다.",
+      "sourceSha256": "9d71e5586eeb5c8028f1166243d1295bcb523fa468f333915946e2950f342dae"
     },
     {
       "id": "MP07",
@@ -1709,8 +1709,8 @@
           "cue": "Passive(\"MP07\")"
         }
       ],
-      "sourceDescription": "연소한 적에게 일반 화염 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 연소 틱으로 재발동하지 않습니다.",
-      "sourceSha256": "c23e2f5add9e7bb50f7afdba74555bf1f62db8f334ede96cc4a1db16ca215d11"
+      "sourceDescription": "연소한 적에게 일반 화염 기술이 처음 직접 적중하면 자원 12를 회복합니다. 2초 간격이며 연소 틱으로 재발동하지 않습니다.",
+      "sourceSha256": "ce9b176575780953c5a13da92641d4b9ab4065f24f9a901c614136e6a8f87127"
     },
     {
       "id": "MP08",
@@ -1739,12 +1739,12 @@
       "runtimeEvidence": [
         {
           "file": "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillPassives.cs",
-          "line": 182,
+          "line": 183,
           "cue": "Passive(\"MP08\")"
         }
       ],
-      "sourceDescription": "자신의 M07 연소가 남아 있거나 M08 안에 있는 공격자에게 받는 피해가 8% 감소합니다.",
-      "sourceSha256": "5319a77804fc1c21809d9cffbad81b4eda480d489e462f206bb73d26d8b1d33c"
+      "sourceDescription": "자신의 M07 연소가 남아 있거나 M08 안에 있는 공격자에게 받는 피해가 15% 감소합니다.",
+      "sourceSha256": "12b35a627e30eef524a0548983965da7696929848ae8a8acc5b2d3f2ea0eebc7"
     },
     {
       "id": "MP09",
@@ -1763,8 +1763,8 @@
         }
       ],
       "runtimeEvidence": [],
-      "sourceDescription": "제어된 적에게 일반 냉기 기술이 처음 직접 적중하면 자원 3을 회복합니다. 2초 간격이며 눈보라 지속 틱은 제외합니다.",
-      "sourceSha256": "df5cdf68deeb702b63dd920807e5ace43ab25f9cafd70f521cd3e3597028cbbf"
+      "sourceDescription": "제어된 적에게 일반 냉기 기술이 처음 직접 적중하면 자원 12를 회복합니다. 2초 간격이며 눈보라 지속 틱은 제외합니다.",
+      "sourceSha256": "efb6c855e00b290b43dc4fa160c4a6ea539564bc2d86d034e7ac838201c75f9a"
     },
     {
       "id": "MP10",
@@ -1831,8 +1831,8 @@
           "cue": "a.id==\"M03\"||a.id==\"M12\""
         }
       ],
-      "sourceDescription": "5초 안에 일반 번개 기술을 3회 시전하면 다음 M03·M12의 직접 피해 +15%를 4초간 준비합니다. 완성한 세 번째 시전에 소급하지 않으며 1충전입니다.",
-      "sourceSha256": "0d7aa2958facb30347c63b4eb0fb0bd66b563d3f31532ebb8a81f9faa6806f4d"
+      "sourceDescription": "5초 안에 일반 번개 기술을 3회 시전하면 다음 M03·M12의 직접 피해 +30%를 4초간 준비합니다. 완성한 세 번째 시전에 소급하지 않으며 1충전입니다.",
+      "sourceSha256": "6974984b55952a12e269aa87686e267263bc52151f1bda7428bd1a2b717680fd"
     },
     {
       "id": "MP12",
@@ -1853,8 +1853,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "축전 구체가 자연 만료하면 자원 10을 회복합니다. 교체·장면 종료·장비 해제로 사라진 구체는 회복하지 않습니다.",
-      "sourceSha256": "ab5a8ca55ccb2d774b4e58a5672a73df50c31d23e05f36cfe6526978dc1cc60f"
+      "sourceDescription": "축전 구체가 자연 만료하면 자원 30을 회복합니다. 교체·장면 종료·장비 해제로 사라진 구체는 회복하지 않습니다.",
+      "sourceSha256": "8eaf093a7463c66239dd492dee0cf046b6a2fef440f17fbcd8488a22510b7aac"
     },
     {
       "id": "MP13",
@@ -1873,8 +1873,8 @@
         }
       ],
       "runtimeEvidence": [],
-      "sourceDescription": "보호막이 남아 있는 동안 초당 자원 회복이 15% 증가합니다. 마력 회수의 고정 회복량에는 곱하지 않습니다.",
-      "sourceSha256": "f74bf742046a4314e0a0ae7d09dc113e583c4bc847204f7c846952cf48d9e491"
+      "sourceDescription": "보호막이 남아 있는 동안 초당 자원 회복이 30% 증가합니다. 마력 회수의 고정 회복량에는 곱하지 않습니다.",
+      "sourceSha256": "8560719ac8a06d1b2e4c6530eae0836c6e5909f548345e6ed2ae4abdf0d269ca"
     },
     {
       "id": "MP14",
@@ -1886,8 +1886,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "기본 공격이 2회 직접 적중하면 다음 유료 일반 액티브 비용 감소 +15%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
-      "sourceSha256": "19d4a9fddc7936fa65d2f4c46dabcce63ac59674e002e6b6e78e39bf8215297c"
+      "sourceDescription": "기본 공격이 2회 직접 적중하면 다음 유료 일반 액티브 비용 감소 +30%p를 4초간 준비합니다. 1충전이며 발동 후 3초 동안 집계하지 않습니다.",
+      "sourceSha256": "32ae6ccda8f1f3b721007e9c980e9805909fbbb7338e6cb193aad5f29ce22393"
     },
     {
       "id": "MP15",
@@ -1899,8 +1899,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "1초 이상 제자리에 있은 뒤 일반 액티브를 준비·집중하는 동안 받는 피해가 8% 감소합니다. 이동하거나 시전이 끝나면 해제됩니다.",
-      "sourceSha256": "07698e46fea6b0806b470e00badfac7f2e412d109595d9bfc51b3ccbf845a7b8"
+      "sourceDescription": "0.5초 이상 제자리에 있은 뒤 일반 액티브를 준비·집중하는 동안 받는 피해가 15% 감소합니다. 이동하거나 시전이 끝나면 해제됩니다.",
+      "sourceSha256": "72105510ead4f5d8208faa3b99a4d3104fa68b6d28f70a90165463882c9e997a"
     },
     {
       "id": "MP16",
@@ -1925,8 +1925,8 @@
       "directEffectReferences": [],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "시전 전 자원이 80% 이상이면 일반 액티브의 첫 직접 적중 피해가 가산 10% 증가합니다. 장판 틱·추가 피해에는 적용하지 않습니다.",
-      "sourceSha256": "8f2194c52ce12e54fe85f0490983eb8121fa5f8592ef77b6c5a44529b2654e96"
+      "sourceDescription": "시전 전 자원이 60% 이상이면 일반 액티브의 첫 직접 적중 피해가 가산 20% 증가합니다. 장판 틱·추가 피해에는 적용하지 않습니다.",
+      "sourceSha256": "c93c2a6087a9b29a76e210596cac69f42223fb6387197f3ea20476bafbb5b375"
     },
     {
       "id": "MP18",
@@ -1947,8 +1947,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "삼원소 붕괴의 세 번째 단계가 실제 적중하면 자원 15를 한 번 회복합니다.",
-      "sourceSha256": "bfb094c8abf03b3f5c6502bf3d06d7b68133e38f50ff6d5d2ff8a2cd393b553b"
+      "sourceDescription": "삼원소 붕괴의 세 번째 단계가 실제 적중하면 자원 50을 한 번 회복합니다.",
+      "sourceSha256": "df684b47d16b23a468aeeda4d268d9224dac4977c950d1296aca39c4300a66aa"
     },
     {
       "id": "WP19",
@@ -2013,8 +2013,8 @@
       ],
       "exclusions": [],
       "runtimeEvidence": [],
-      "sourceDescription": "현자의 화신이 생성하는 보호막에 최대 HP 10%를 더합니다.",
-      "sourceSha256": "6cf2c6c4f7afc8fdca3785fa251568ac3b071efa71541a70bf94febe5838ba32"
+      "sourceDescription": "현자의 화신이 생성하는 보호막에 최대 HP 20%를 더합니다.",
+      "sourceSha256": "3f1ab094d22a73298d9b070d4b77473267d3d35a46e72c62cc7d8f9828bc7759"
     }
   ]
 }

@@ -328,7 +328,7 @@ Restore 25 resource and grant +20 percentage points of cost reduction to the nex
 
 Existing runtime retained
 
-Adds +15% damage when the target is 7m or further away on hit.
+Adds +30% damage when the target is 6m or further away on hit.
 
 **Equipment links:** Endless Trajectory (`LA01`), Trailing Arrowhead (`LA05`), Oath of the Far Hunt (`LA06`), Brand-Reading Eye (`LA07`), Shadow Rupture (`LA08`) and 5 more.
 
@@ -338,7 +338,7 @@ Adds +15% damage when the target is 7m or further away on hit.
 
 Existing runtime retained
 
-Adds +20%p movement speed for 2 seconds after Retreat Leap lands.
+Adds +35%p movement speed for 2 seconds after Retreat Leap lands.
 
 **Equipment links:** Viper's Molt (`LA03`), Escape-Opening Arrow (`LA10`), Venomcloud Landing (`LA23`), Nimble Reload (`LA24`), Fading Wound (`LA25`) and 3 more.
 
@@ -358,7 +358,7 @@ Piercing Shot hits up to 7 targets instead of 5.
 
 Existing runtime retained
 
-Extends the root from placed traps and retreat traps by 25%.
+Extends the root from placed traps and retreat traps by 50%.
 
 **Equipment links:** Viper's Molt (`LA03`), Escape-Opening Arrow (`LA10`), Trapper's Aim (`LA17`), Venom-Harvesting Knot (`LA18`), Trap-Leaving Step (`LA19`) and 9 more.
 
@@ -368,7 +368,7 @@ Extends the root from placed traps and retreat traps by 25%.
 
 Existing runtime retained
 
-After walking for 1 second the next skill that costs resource is 25% cheaper. The effect then waits 4 seconds.
+After walking for 1 second the next skill that costs resource is 40% cheaper. The effect then waits 4 seconds.
 
 **Equipment links:** Endless Trajectory (`LA01`), Narrowed Line (`LA02`), Trailing Arrowhead (`LA05`), Oath of the Far Hunt (`LA06`), Brand-Reading Eye (`LA07`) and 13 more.
 
@@ -378,7 +378,7 @@ After walking for 1 second the next skill that costs resource is 25% cheaper. Th
 
 Existing runtime retained
 
-Adds +10%p critical chance against enemies at or below 30% HP, capped at 75%.
+Adds +20%p critical chance against enemies at or below 30% HP, capped at 75%.
 
 **Equipment links:** Endless Trajectory (`LA01`), Narrowed Line (`LA02`), Trailing Arrowhead (`LA05`), Oath of the Far Hunt (`LA06`), Brand-Reading Eye (`LA07`) and 13 more.
 
@@ -388,7 +388,7 @@ Adds +10%p critical chance against enemies at or below 30% HP, capped at 75%.
 
 New proposal · Lv.22
 
-Gain +5 percentage points of normal-active direct critical chance against marked enemies, sharing the 75% global cap.
+Gain +15 percentage points of normal-active direct critical chance against marked enemies, sharing the 75% global cap.
 
 **Equipment links:** Endless Trajectory (`LA01`), Trailing Arrowhead (`LA05`), Oath of the Far Hunt (`LA06`), Brand-Reading Eye (`LA07`), Shadow Rupture (`LA08`) and 9 more.
 
@@ -400,7 +400,7 @@ Gain +5 percentage points of normal-active direct critical chance against marked
 
 New proposal · Lv.22
 
-Gain 10% movement speed while an observed poisoned enemy is within 10m. This does not reveal enemies outside observation.
+Gain 20% movement speed while an observed poisoned enemy is within 10m. This does not reveal enemies outside observation.
 
 **Equipment links:** Viper's Molt (`LA03`), Trapper's Aim (`LA17`), Venom-Harvesting Knot (`LA18`), Trap-Leaving Step (`LA19`), Black Root (`LA20`) and 4 more.
 
@@ -412,7 +412,7 @@ Gain 10% movement speed while an observed poisoned enemy is within 10m. This doe
 
 New proposal · Lv.22
 
-A direct basic hit restores 2 resource, with a 0.5s interval. Splits, ballista shots and shadow echoes are not basic attacks.
+A direct basic hit restores 4 resource, with a 0.5s interval. Splits, ballista shots and shadow echoes are not basic attacks.
 
 **Equipment links:** Endless Trajectory (`LA01`), Narrowed Line (`LA02`), Trailing Arrowhead (`LA05`), Oath of the Far Hunt (`LA06`), Brand-Reading Eye (`LA07`) and 13 more.
 
@@ -424,7 +424,7 @@ A direct basic hit restores 2 resource, with a 0.5s interval. Splits, ballista s
 
 New proposal · Lv.26
 
-A direct attack killing a poisoned enemy restores 6 resource, with a 2s interval. Poison ticks and item secondary kills are excluded.
+A direct attack killing a poisoned enemy restores 12 resource, with a 2s interval. Poison ticks and item secondary kills are excluded.
 
 **Equipment links:** Viper's Molt (`LA03`), Trapper's Aim (`LA17`), Venom-Harvesting Knot (`LA18`), Trap-Leaving Step (`LA19`), Black Root (`LA20`) and 4 more.
 
@@ -448,7 +448,7 @@ When a directly placed Poison Trap, Briar Trap or Frost Snare arms, gain 8% dama
 
 New proposal · Lv.26
 
-Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat's remaining cooldown by 1s, with a 4s interval.
+Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat's remaining cooldown by 3s, with a 4s interval.
 
 **Equipment links:** Viper's Molt (`LA03`), Escape-Opening Arrow (`LA10`), Trapper's Aim (`LA17`), Venom-Harvesting Knot (`LA18`), Trap-Leaving Step (`LA19`) and 10 more.
 
@@ -460,7 +460,7 @@ Directly placing Poison Trap, Briar Trap or Frost Snare reduces equipped Retreat
 
 New proposal · Lv.30
 
-Pierce and Patient Shot gain +15% additive direct damage if stationary for at least 0.8s before cast start. Movement resets the timer.
+Pierce and Patient Shot gain +30% additive direct damage if stationary for at least 0.5s before cast start. Movement resets the timer.
 
 **Equipment links:** Endless Trajectory (`LA01`), Trailing Arrowhead (`LA05`), Oath of the Far Hunt (`LA06`), Brand-Reading Eye (`LA07`), Shadow Rupture (`LA08`) and 6 more.
 
@@ -472,7 +472,7 @@ Pierce and Patient Shot gain +15% additive direct damage if stationary for at le
 
 New proposal · Lv.30
 
-Gain +10% additive normal-active direct damage against enemies within 3m of your living decoy. Does not amplify the decoy's explosion.
+Gain +20% additive normal-active direct damage against enemies within 3m of your living decoy. Does not amplify the decoy's explosion.
 
 **Equipment links:** Decoy Mantle (`DES_LA43`), Forked Fang (`DES_LA44`).
 
@@ -484,7 +484,7 @@ Gain +10% additive normal-active direct damage against enemies within 3m of your
 
 New proposal · Lv.30
 
-Gain +12% additive normal-active direct damage against enemies that are both poisoned and slowed. Freeze alone does not imply Slow.
+Gain +25% additive normal-active direct damage against enemies that are both poisoned and slowed. Freeze alone does not imply Slow.
 
 **Equipment links:** Viper's Molt (`LA03`), Trapper's Aim (`LA17`), Venom-Harvesting Knot (`LA18`), Trap-Leaving Step (`LA19`), Black Root (`LA20`) and 5 more.
 
@@ -496,7 +496,7 @@ Gain +12% additive normal-active direct damage against enemies that are both poi
 
 New proposal · Lv.34
 
-Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction for the next paid normal active within 6s. One charge; both share a 6s interval.
+Smoke Cover or Hunt Preparation prepares +30 percentage points of cost reduction for the next paid normal active within 6s. One charge; both share a 6s interval.
 
 **Equipment links:** Decoy Mantle (`DES_LA43`), Prepared Outpost (`DES_LA45`).
 
@@ -508,7 +508,7 @@ Smoke Cover or Hunt Preparation prepares +15 percentage points of cost reduction
 
 New proposal · Lv.34
 
-Crossfire Ballista crossfire shots pierce the first enemy to hit one additional enemy on the same firing line at 50% shot damage, up to 2. Preserve actual range and wall collision; secondary shots trigger no further procs.
+Crossfire Ballista crossfire shots pierce the first enemy to hit one additional enemy on the same firing line at 80% shot damage, up to 2. Preserve actual range and wall collision; secondary shots trigger no further procs.
 
 **Equipment links:** Viper's Molt (`LA03`), Escape-Opening Arrow (`LA10`), Venomcloud Landing (`LA23`), Nimble Reload (`LA24`), Fading Wound (`LA25`) and 4 more.
 
@@ -520,7 +520,7 @@ Crossfire Ballista crossfire shots pierce the first enemy to hit one additional 
 
 New proposal · Lv.34
 
-If Killing Rain's first pulse hits a marked target, deal D100% extra physical damage once to that target.
+If Killing Rain's first pulse hits a marked target, deal D200% extra physical damage once to that target.
 
 **Equipment links:** Oath of Two Hunts (`DES_LA46`).
 

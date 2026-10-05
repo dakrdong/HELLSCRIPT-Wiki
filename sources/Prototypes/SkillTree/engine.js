@@ -24,7 +24,8 @@
       const all = node.all.every(r => (ranks[r.id] || 0) >= r.rank);
       const directSource = !node.oneOf?.length || node.oneOf.some(r => (ranks[r.id] || 0) >= r.rank);
       const gate = node.kind !== 'ultimate' || ctx.ultimateCandidates.some(n => (ranks[n.id] || 0) >= 1);
-      available[node.id] = state.level >= node.level && all && directSource && gate;
+      const lineage = !node.lineage || (ranks[node.lineage] || 0) >= 1;
+      available[node.id] = state.level >= node.level && all && directSource && lineage && gate;
       ranks[node.id] = available[node.id] ? 1 + (invested[node.id] || 0) : 0;
     }
     return { ...ctx, ranks, available, ultimateReady: ctx.ultimateCandidates.some(n => ranks[n.id] >= 1), spent: state.stack.length,
@@ -82,6 +83,7 @@
       if ((evaluate(data, state).ranks[wanted] || 0) >= rank) return state;
       const nextVisiting = new Set([...visiting, wanted]);
       let next = clone(state);
+      if (node.lineage) next = ensure(next, node.lineage, 1, nextVisiting);
       for (const requirement of node.all) next = ensure(next, requirement.id, requirement.rank, nextVisiting);
       if (node.oneOf?.length && !node.oneOf.some(r => evaluate(data,next).ranks[r.id] >= r.rank)) {
         const choices = [], failures = [];
@@ -123,7 +125,7 @@
   }
   function ancestors(data, classId, id) {
     const { byId } = context(data, classId), found = new Set();
-    function walk(key) { for (const r of [...byId[key].all,...(byId[key].oneOf||[])]) if (!found.has(r.id)) { found.add(r.id); walk(r.id); } }
+    function walk(key) { for (const id of [byId[key].lineage, ...byId[key].all.map(r => r.id), ...(byId[key].oneOf||[]).map(r => r.id)]) if (id && !found.has(id)) { found.add(id); walk(id); } }
     if (byId[id]) walk(id); return found;
   }
   function serialize(data, input) { return JSON.stringify(normalize(data, input), null, 2); }

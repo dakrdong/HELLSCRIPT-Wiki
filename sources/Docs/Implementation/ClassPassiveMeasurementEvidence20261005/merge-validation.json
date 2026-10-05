@@ -1,0 +1,332 @@
+{
+ "date": "2026-10-05",
+ "trees": {
+  "originMain": "17dc75e9",
+  "mergedBranchBase": "e259e864",
+  "mergeCommit": "5289340f",
+  "note": "mergedTree = origin/main plus claude/skill-tree-lineage and claude/passive-tuning"
+ },
+ "editModeMergedTree": {
+  "batches": [
+   {
+    "batch": 0,
+    "total": 677,
+    "passed": 676,
+    "failed": 1,
+    "skipped": 0,
+    "durationSeconds": 593
+   },
+   {
+    "batch": 1,
+    "total": 1079,
+    "passed": 1079,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 599
+   },
+   {
+    "batch": 2,
+    "total": 822,
+    "passed": 822,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 516
+   },
+   {
+    "batch": 3,
+    "total": 1260,
+    "passed": 1260,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 671
+   },
+   {
+    "batch": 4,
+    "total": 813,
+    "passed": 813,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 620
+   },
+   {
+    "batch": 5,
+    "total": 585,
+    "passed": 585,
+    "failed": 0,
+    "skipped": 0,
+    "durationSeconds": 562
+   }
+  ],
+  "total": 5236,
+  "passed": 5235,
+  "failed": 1,
+  "failedTests": [
+   {
+    "test": "ObjectiveProgressTests.ExplorationWalksToEveryKnownOfferingAndDeliversWithoutTeleporting",
+    "reason": "default 180 s test timeout exceeded",
+    "secondsMergedTreeBatch": 226.4,
+    "secondsMergedTreeAlone": [
+     181.5,
+     198.6,
+     189.9
+    ],
+    "secondsOriginMainAlone": 190.0,
+    "secondsBranchBeforeMerge": 176.4,
+    "verdict": "fails the same way on origin/main (190.0 s vs 189.9 s on the merged tree); borderline timeout, unrelated to this work"
+   }
+  ]
+ },
+ "smokes": {
+  "buildDescription": "macOS development build of each tree (BuildMac); same plan and fixture on both trees, each launch in its own save folder",
+  "fixtureNote": "RuntimeSkillTreeSmoke.ExistingTrees now marks the account as legacy (edictLegacyAccess) because staged disclosure (93d59959) hid slots, styles and presets from every flow that uses it; the same two-line fix was applied to the origin/main build for the comparison",
+  "results": {
+   "mergedTree": {
+    "SkillTreeSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 0,
+       "seconds": 25.9
+      },
+      {
+       "label": "resume",
+       "exit": 0,
+       "seconds": 6.1
+      }
+     ],
+     "failure": []
+    },
+    "SkillResetSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 0,
+       "seconds": 22.0
+      },
+      {
+       "label": "resume",
+       "exit": 0,
+       "seconds": 5.3
+      }
+     ],
+     "failure": []
+    },
+    "SkillMenuSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 1,
+       "seconds": 33.6
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+     ]
+    },
+    "SkillPresetSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 0,
+       "seconds": 111.7
+      },
+      {
+       "label": "resume",
+       "exit": 0,
+       "seconds": 6.0
+      }
+     ],
+     "failure": []
+    },
+    "EdictSectionsSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 1,
+       "seconds": 7.6
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+     ]
+    },
+    "QuickPresetSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 1,
+       "seconds": 19.9
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: First visit expanded advanced options: global/survival.potion"
+     ]
+    },
+    "ClassSkillSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "checkpoint",
+       "exit": 0,
+       "seconds": 6.9
+      },
+      {
+       "label": "restart",
+       "exit": 0,
+       "seconds": 5.6
+      }
+     ],
+     "failure": []
+    },
+    "TutorialSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "phase-one",
+       "exit": 0,
+       "seconds": 46.7
+      },
+      {
+       "label": "resume",
+       "exit": 1,
+       "seconds": 166.6
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: Timed out following the prologue gate: survival lesson target="
+     ]
+    }
+   },
+   "originMain": {
+    "SkillTreeSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 0,
+       "seconds": 26.6
+      },
+      {
+       "label": "resume",
+       "exit": 0,
+       "seconds": 8.0
+      }
+     ],
+     "failure": []
+    },
+    "SkillResetSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 0,
+       "seconds": 26.0
+      },
+      {
+       "label": "resume",
+       "exit": 0,
+       "seconds": 7.2
+      }
+     ],
+     "failure": []
+    },
+    "SkillMenuSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 1,
+       "seconds": 36.1
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+     ]
+    },
+    "SkillPresetSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 0,
+       "seconds": 124.8
+      },
+      {
+       "label": "resume",
+       "exit": 0,
+       "seconds": 6.3
+      }
+     ],
+     "failure": []
+    },
+    "EdictSectionsSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 1,
+       "seconds": 8.0
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+     ]
+    },
+    "QuickPresetSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "initial",
+       "exit": 1,
+       "seconds": 20.8
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: First visit expanded advanced options: global/survival.potion"
+     ]
+    },
+    "ClassSkillSmoke": {
+     "passed": true,
+     "launches": [
+      {
+       "label": "checkpoint",
+       "exit": 0,
+       "seconds": 6.5
+      },
+      {
+       "label": "restart",
+       "exit": 0,
+       "seconds": 5.5
+      }
+     ],
+     "failure": []
+    },
+    "TutorialSmoke": {
+     "passed": false,
+     "launches": [
+      {
+       "label": "phase-one",
+       "exit": 0,
+       "seconds": 51.3
+      },
+      {
+       "label": "resume",
+       "exit": 1,
+       "seconds": 167.7
+      }
+     ],
+     "failure": [
+      "InvalidOperationException: Timed out following the prologue gate: survival lesson target="
+     ]
+    }
+   }
+  }
+ },
+ "identicalOutcomes": true
+}

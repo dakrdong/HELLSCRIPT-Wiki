@@ -140,8 +140,8 @@ namespace Hellscript.Tests
             var head=Gear(1);var body=Gear(2);Install(head,"G02");Install(body,"G02");var sim=Simulation();
             sim.Stats.armor=sim.Stats.resistance=sim.Stats.damageReduction=sim.Stats.physicalReduction=sim.Stats.lifeRegen=0;sim.State.itemEffects.leapDefense=.4f;sim.State.resolveShrineTime=.5f;
             foreach(float delay in new[]{.1f,.75f})sim.State.enemyHazards.Add(new EnemyHazard{id=sim.State.nextId++,enemyId=900,definitionId="BLUE_TEST",position=sim.State.position,shape=AttackShape.Circle,radius=2,createdAt=-1,damage=10,delay=delay});
-            Assert.AreEqual(.38f,sim.BuffDamageReduction,.0001f);var forecast=sim.ForecastIncoming(1);for(int n=0;n<20;n++)sim.Tick(CombatSimulation.Step);
-            var hits=sim.State.damageEvents.Where(e=>e.incoming).ToArray();Assert.AreEqual(6.2f,hits[0].finalDamage,.0001f);Assert.AreEqual(8.7f,hits[1].finalDamage,.0001f);Assert.AreEqual(forecast.HpLoss,hits.Sum(e=>e.hpLoss),.001f);
+            float buffed=Mathf.Min(.5f,.13f+.1f+SkillEffects.PassiveBase[2]/100f);Assert.AreEqual(buffed,sim.BuffDamageReduction,.0001f);var forecast=sim.ForecastIncoming(1);for(int n=0;n<20;n++)sim.Tick(CombatSimulation.Step);
+            var hits=sim.State.damageEvents.Where(e=>e.incoming).ToArray();Assert.AreEqual(10*(1-buffed),hits[0].finalDamage,.0001f);Assert.AreEqual(8.7f,hits[1].finalDamage,.0001f);Assert.AreEqual(forecast.HpLoss,hits.Sum(e=>e.hpLoss),.001f);
         }
         static GemStack Stack(string id="G01",int tier=1,int count=1)=>new GemStack{gemId=id,tier=tier,count=count};
         [Test]

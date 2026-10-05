@@ -1,0 +1,714 @@
+{
+ "date": "2026-10-05",
+ "conditions": "Level 40, skill rank 1, item level 30 gear without set or legendary items, default Hunt Edict, 150 s of the real rift of that stage.",
+ "shieldKitsAtDeeperRifts": [
+  {
+   "kit": "KIT_MP04",
+   "scenario": "rift20",
+   "seeds": 2,
+   "lowestHpFraction": 0.13,
+   "survived": 1.0,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 15907,
+    "hpLost": 3000,
+    "protected": 4672
+   },
+   "withoutPassive": {
+    "damage": 15907,
+    "hpLost": 3000,
+    "protected": 4672
+   }
+  },
+  {
+   "kit": "KIT_MP04",
+   "scenario": "rift25",
+   "seeds": 2,
+   "lowestHpFraction": 0.0,
+   "survived": 0.0,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 14767,
+    "hpLost": 3612,
+    "protected": 5163
+   },
+   "withoutPassive": {
+    "damage": 14767,
+    "hpLost": 3612,
+    "protected": 5163
+   }
+  },
+  {
+   "kit": "KIT_MP04",
+   "scenario": "rift30",
+   "seeds": 2,
+   "lowestHpFraction": 0.0,
+   "survived": 0.0,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 14969,
+    "hpLost": 4566,
+    "protected": 6539
+   },
+   "withoutPassive": {
+    "damage": 14969,
+    "hpLost": 4566,
+    "protected": 6539
+   }
+  },
+  {
+   "kit": "KIT_MP19",
+   "scenario": "rift20",
+   "seeds": 2,
+   "lowestHpFraction": 0.35,
+   "survived": 1.0,
+   "skillCasts": 3,
+   "withPassive": {
+    "damage": 15908,
+    "hpLost": 2209,
+    "protected": 5426
+   },
+   "withoutPassive": {
+    "damage": 15908,
+    "hpLost": 2280,
+    "protected": 5355
+   }
+  },
+  {
+   "kit": "KIT_MP19",
+   "scenario": "rift25",
+   "seeds": 2,
+   "lowestHpFraction": 0.0,
+   "survived": 0.0,
+   "skillCasts": 2,
+   "withPassive": {
+    "damage": 15966,
+    "hpLost": 4248,
+    "protected": 7714
+   },
+   "withoutPassive": {
+    "damage": 15724,
+    "hpLost": 4248,
+    "protected": 7472
+   }
+  },
+  {
+   "kit": "KIT_MP19",
+   "scenario": "rift30",
+   "seeds": 2,
+   "lowestHpFraction": 0.0,
+   "survived": 0.0,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 8928,
+    "hpLost": 3612,
+    "protected": 5171
+   },
+   "withoutPassive": {
+    "damage": 8928,
+    "hpLost": 3612,
+    "protected": 5171
+   }
+  },
+  {
+   "kit": "KIT_WP05",
+   "scenario": "rift20",
+   "seeds": 2,
+   "lowestHpFraction": 0.38,
+   "survived": 1.0,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 31749,
+    "hpLost": 2605,
+    "protected": 5556
+   },
+   "withoutPassive": {
+    "damage": 31153,
+    "hpLost": 2631,
+    "protected": 5449
+   }
+  },
+  {
+   "kit": "KIT_WP05",
+   "scenario": "rift25",
+   "seeds": 2,
+   "lowestHpFraction": 0.17,
+   "survived": 0.5,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 35676,
+    "hpLost": 4469,
+    "protected": 7880
+   },
+   "withoutPassive": {
+    "damage": 33490,
+    "hpLost": 4619,
+    "protected": 7574
+   }
+  },
+  {
+   "kit": "KIT_WP05",
+   "scenario": "rift30",
+   "seeds": 2,
+   "lowestHpFraction": 0.0,
+   "survived": 0.0,
+   "skillCasts": 0,
+   "withPassive": {
+    "damage": 20080,
+    "hpLost": 3402,
+    "protected": 5586
+   },
+   "withoutPassive": {
+    "damage": 21559,
+    "hpLost": 3807,
+    "protected": 6097
+   }
+  }
+ ],
+ "oversizedValueProbes": {
+  "AP12": {
+   "value": "cooldown cut 10 s (was 3 s)",
+   "damagePerSecondChange": 0.06,
+   "noise": 1.72,
+   "triggersPerMinute": 5.9
+  },
+  "WP14": {
+   "value": "cooldown cut 10 s (was 2.5 s)",
+   "damagePerSecondChange": 1.63,
+   "noise": 1.13,
+   "triggersPerMinute": 2.5
+  },
+  "MP17": {
+   "value": "added damage +100% (was +20%)",
+   "damagePerSecondChange": 2.34,
+   "noise": 4.35,
+   "triggersPerMinute": 0.0
+  }
+ },
+ "castsPerMinuteUnderDefaultEdict": [
+  {
+   "id": "W05",
+   "name": {
+    "ko": "철벽",
+    "en": "Iron Wall"
+   },
+   "builds": 5,
+   "castsPerMinute": 0.0
+  },
+  {
+   "id": "A14",
+   "name": {
+    "ko": "갈라지는 화살",
+    "en": "Forking Arrow"
+   },
+   "builds": 1,
+   "castsPerMinute": 0.0
+  },
+  {
+   "id": "M05",
+   "name": {
+    "ko": "원소 보호막",
+    "en": "Elemental Shield"
+   },
+   "builds": 4,
+   "castsPerMinute": 0.0
+  },
+  {
+   "id": "M04",
+   "name": {
+    "ko": "순간이동",
+    "en": "Teleport"
+   },
+   "builds": 2,
+   "castsPerMinute": 0.0
+  },
+  {
+   "id": "M08",
+   "name": {
+    "ko": "화염 장벽",
+    "en": "Firewall"
+   },
+   "builds": 1,
+   "castsPerMinute": 0.0
+  },
+  {
+   "id": "A08",
+   "name": {
+    "ko": "응시 사격",
+    "en": "Patient Shot"
+   },
+   "builds": 2,
+   "castsPerMinute": 0.08
+  },
+  {
+   "id": "W17",
+   "name": {
+    "ko": "선조의 전쟁",
+    "en": "War of the Ancestors"
+   },
+   "builds": 4,
+   "castsPerMinute": 0.31
+  },
+  {
+   "id": "W13",
+   "name": {
+    "ko": "전장의 고리",
+    "en": "Battlefield Ring"
+   },
+   "builds": 1,
+   "castsPerMinute": 0.36
+  },
+  {
+   "id": "W18",
+   "name": {
+    "ko": "거인의 심판",
+    "en": "Titan's Judgment"
+   },
+   "builds": 6,
+   "castsPerMinute": 0.54
+  },
+  {
+   "id": "A18",
+   "name": {
+    "ko": "잔상 행군",
+    "en": "Afterimage March"
+   },
+   "builds": 6,
+   "castsPerMinute": 0.72
+  },
+  {
+   "id": "W10",
+   "name": {
+    "ko": "피의 회수",
+    "en": "Blood Reclamation"
+   },
+   "builds": 1,
+   "castsPerMinute": 0.76
+  },
+  {
+   "id": "M18",
+   "name": {
+    "ko": "현자의 화신",
+    "en": "Sage Incarnate"
+   },
+   "builds": 3,
+   "castsPerMinute": 0.77
+  },
+  {
+   "id": "A15",
+   "name": {
+    "ko": "교차 쇠뇌",
+    "en": "Crossfire Ballista"
+   },
+   "builds": 1,
+   "castsPerMinute": 0.8
+  },
+  {
+   "id": "A17",
+   "name": {
+    "ko": "일제 소탕",
+    "en": "Killing Rain"
+   },
+   "builds": 4,
+   "castsPerMinute": 0.83
+  },
+  {
+   "id": "M17",
+   "name": {
+    "ko": "삼원소 붕괴",
+    "en": "Triune Collapse"
+   },
+   "builds": 7,
+   "castsPerMinute": 0.99
+  },
+  {
+   "id": "A02",
+   "name": {
+    "ko": "다중 사격",
+    "en": "Multishot"
+   },
+   "builds": 5,
+   "castsPerMinute": 1.02
+  },
+  {
+   "id": "W09",
+   "name": {
+    "ko": "찢어낸 상처",
+    "en": "Raking Wound"
+   },
+   "builds": 1,
+   "castsPerMinute": 1.12
+  },
+  {
+   "id": "W16",
+   "name": {
+    "ko": "수호의 맹약",
+    "en": "Guardian's Vow"
+   },
+   "builds": 2,
+   "castsPerMinute": 1.22
+  },
+  {
+   "id": "W04",
+   "name": {
+    "ko": "지면 강타",
+    "en": "Ground Slam"
+   },
+   "builds": 2,
+   "castsPerMinute": 1.7
+  },
+  {
+   "id": "A05",
+   "name": {
+    "ko": "사냥꾼의 표식",
+    "en": "Hunter's Mark"
+   },
+   "builds": 5,
+   "castsPerMinute": 1.72
+  },
+  {
+   "id": "M06",
+   "name": {
+    "ko": "서리 폭발",
+    "en": "Frost Nova"
+   },
+   "builds": 4,
+   "castsPerMinute": 1.78
+  },
+  {
+   "id": "M13",
+   "name": {
+    "ko": "마력 회수",
+    "en": "Mana Reclaim"
+   },
+   "builds": 3,
+   "castsPerMinute": 1.89
+  },
+  {
+   "id": "W06",
+   "name": {
+    "ko": "전투 함성",
+    "en": "Battle Shout"
+   },
+   "builds": 3,
+   "castsPerMinute": 1.9
+  },
+  {
+   "id": "A13",
+   "name": {
+    "ko": "독화살",
+    "en": "Venom Arrow"
+   },
+   "builds": 2,
+   "castsPerMinute": 1.94
+  },
+  {
+   "id": "W15",
+   "name": {
+    "ko": "투쟁의 빚",
+    "en": "Battle Loan"
+   },
+   "builds": 2,
+   "castsPerMinute": 2.07
+  },
+  {
+   "id": "M11",
+   "name": {
+    "ko": "축전 구체",
+    "en": "Capacitor Orb"
+   },
+   "builds": 1,
+   "castsPerMinute": 2.08
+  },
+  {
+   "id": "M16",
+   "name": {
+    "ko": "자력 소용돌이",
+    "en": "Magnetic Vortex"
+   },
+   "builds": 1,
+   "castsPerMinute": 2.32
+  },
+  {
+   "id": "A16",
+   "name": {
+    "ko": "사냥 준비",
+    "en": "Hunt Preparation"
+   },
+   "builds": 2,
+   "castsPerMinute": 2.58
+  },
+  {
+   "id": "A12",
+   "name": {
+    "ko": "연막 엄폐",
+    "en": "Smoke Cover"
+   },
+   "builds": 2,
+   "castsPerMinute": 2.8
+  },
+  {
+   "id": "M14",
+   "name": {
+    "ko": "균열 결계",
+    "en": "Rift Ward"
+   },
+   "builds": 1,
+   "castsPerMinute": 3.0
+  },
+  {
+   "id": "M15",
+   "name": {
+    "ko": "원소 나침반",
+    "en": "Elemental Compass"
+   },
+   "builds": 2,
+   "castsPerMinute": 3.06
+  },
+  {
+   "id": "A04",
+   "name": {
+    "ko": "후퇴 도약",
+    "en": "Retreat Leap"
+   },
+   "builds": 5,
+   "castsPerMinute": 3.31
+  },
+  {
+   "id": "W12",
+   "name": {
+    "ko": "무쇠 자세",
+    "en": "Iron Stance"
+   },
+   "builds": 1,
+   "castsPerMinute": 3.5
+  },
+  {
+   "id": "W02",
+   "name": {
+    "ko": "도약 내려찍기",
+    "en": "Leap Slam"
+   },
+   "builds": 5,
+   "castsPerMinute": 3.51
+  },
+  {
+   "id": "W11",
+   "name": {
+    "ko": "전선 돌파",
+    "en": "Front Break"
+   },
+   "builds": 1,
+   "castsPerMinute": 3.8
+  },
+  {
+   "id": "A11",
+   "name": {
+    "ko": "미끼 투영",
+    "en": "Decoy Projection"
+   },
+   "builds": 1,
+   "castsPerMinute": 3.88
+  },
+  {
+   "id": "A06",
+   "name": {
+    "ko": "그림자 화살",
+    "en": "Shadow Arrow"
+   },
+   "builds": 2,
+   "castsPerMinute": 3.94
+  },
+  {
+   "id": "A10",
+   "name": {
+    "ko": "서리 올가미",
+    "en": "Frost Snare"
+   },
+   "builds": 1,
+   "castsPerMinute": 4.0
+  },
+  {
+   "id": "M12",
+   "name": {
+    "ko": "접지창",
+    "en": "Grounding Spear"
+   },
+   "builds": 1,
+   "castsPerMinute": 4.2
+  },
+  {
+   "id": "W07",
+   "name": {
+    "ko": "도발의 낙인",
+    "en": "Brand of Challenge"
+   },
+   "builds": 3,
+   "castsPerMinute": 4.25
+  },
+  {
+   "id": "W08",
+   "name": {
+    "ko": "꿰뚫는 갈고리",
+    "en": "Impaling Hook"
+   },
+   "builds": 1,
+   "castsPerMinute": 4.37
+  },
+  {
+   "id": "W14",
+   "name": {
+    "ko": "전율의 파동",
+    "en": "Tremor Wave"
+   },
+   "builds": 1,
+   "castsPerMinute": 4.97
+  },
+  {
+   "id": "M02",
+   "name": {
+    "ko": "눈보라",
+    "en": "Blizzard"
+   },
+   "builds": 4,
+   "castsPerMinute": 5.01
+  },
+  {
+   "id": "A03",
+   "name": {
+    "ko": "맹독 덫",
+    "en": "Venom Trap"
+   },
+   "builds": 2,
+   "castsPerMinute": 5.38
+  },
+  {
+   "id": "M10",
+   "name": {
+    "ko": "귀환 서리",
+    "en": "Returning Frost"
+   },
+   "builds": 2,
+   "castsPerMinute": 5.54
+  },
+  {
+   "id": "M07",
+   "name": {
+    "ko": "잿불창",
+    "en": "Ember Lance"
+   },
+   "builds": 2,
+   "castsPerMinute": 5.82
+  },
+  {
+   "id": "A09",
+   "name": {
+    "ko": "가시 덫",
+    "en": "Briar Trap"
+   },
+   "builds": 1,
+   "castsPerMinute": 6.12
+  },
+  {
+   "id": "M03",
+   "name": {
+    "ko": "연쇄 번개",
+    "en": "Chain Lightning"
+   },
+   "builds": 5,
+   "castsPerMinute": 9.41
+  },
+  {
+   "id": "M09",
+   "name": {
+    "ko": "빙하창",
+    "en": "Glacial Lance"
+   },
+   "builds": 1,
+   "castsPerMinute": 9.44
+  },
+  {
+   "id": "W01",
+   "name": {
+    "ko": "회오리",
+    "en": "Whirlwind"
+   },
+   "builds": 4,
+   "castsPerMinute": 10.41
+  },
+  {
+   "id": "W03",
+   "name": {
+    "ko": "분쇄 일격",
+    "en": "Crushing Blow"
+   },
+   "builds": 7,
+   "castsPerMinute": 16.9
+  },
+  {
+   "id": "A01",
+   "name": {
+    "ko": "관통 사격",
+    "en": "Piercing Shot"
+   },
+   "builds": 7,
+   "castsPerMinute": 27.9
+  },
+  {
+   "id": "M01",
+   "name": {
+    "ko": "화염구",
+    "en": "Fireball"
+   },
+   "builds": 6,
+   "castsPerMinute": 29.83
+  },
+  {
+   "id": "A07",
+   "name": {
+    "ko": "잇단 사격",
+    "en": "Successive Shots"
+   },
+   "builds": 1,
+   "castsPerMinute": 69.95
+  }
+ ],
+ "heroPressure": {
+  "design:rift10": {
+   "fights": 162,
+   "lowestHpFractionMean": 0.66,
+   "shareBelowHalf": 0.17,
+   "died": 0
+  },
+  "design:rift15": {
+   "fights": 162,
+   "lowestHpFractionMean": 0.45,
+   "shareBelowHalf": 0.76,
+   "died": 2
+  },
+  "kit:rift10": {
+   "fights": 228,
+   "lowestHpFractionMean": 0.67,
+   "shareBelowHalf": 0.05,
+   "died": 0
+  },
+  "kit:rift15": {
+   "fights": 228,
+   "lowestHpFractionMean": 0.44,
+   "shareBelowHalf": 0.78,
+   "died": 0
+  },
+  "afterFirstPass:rift10": {
+   "fights": 132,
+   "lowestHpFractionMean": 0.67,
+   "shareBelowHalf": 0.08,
+   "died": 0
+  },
+  "afterFirstPass:rift15": {
+   "fights": 132,
+   "lowestHpFractionMean": 0.43,
+   "shareBelowHalf": 0.85,
+   "died": 0
+  }
+ }
+}

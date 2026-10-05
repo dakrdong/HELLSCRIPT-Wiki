@@ -1,6 +1,8 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const data=require('./catalog.json'),E=require('./engine.js');
 const source=require('../../Assets/HELLSCRIPT/Resources/Data/ClassSkills.json');
+// Effect-dependency fixtures isolate a skill from the structural lineage chain, which has its own tests below.
+const effectOnly=fixture=>{for(const n of fixture.classes.flatMap(c=>c.nodes))n.lineage=null;return fixture;};
 function openAll(classId,level=40){let state=E.empty(data,classId,level);for(const n of E.context(data,classId).nodes)if(n.level<=level)state=E.applyPath(data,state,n.id);return state;}
 for(const hero of data.classes){
   test(hero.id+': all 37 skills are individually affordable at their unlock level',()=>{
@@ -32,7 +34,7 @@ for(const hero of data.classes){
     assert.equal(new Set(candidates.map(n=>n.branch)).size,3);
     // Isolate each possible witness: base ranks normally unlock several peers together.
     for(const witness of [null,...candidates]){
-      const fixture=E.clone(data),root=hero.nodes[0].id;
+      const fixture=effectOnly(E.clone(data)),root=hero.nodes[0].id;
       for(const n of fixture.classes.find(c=>c.id===hero.id).nodes)if(candidates.some(c=>c.id===n.id)){n.all=n.id===witness?.id?[]:[{id:root,rank:5}];if(n.id===witness?.id)n.oneOf=[];}
       const state=E.empty(fixture,hero.id,40),v=E.evaluate(fixture,state);
       assert.equal(candidates.filter(n=>v.available[n.id]).length,witness?1:0);
@@ -121,7 +123,7 @@ test('each split passive stays locked when only the other ultimate is active',()
 test('direct alternatives accept each actual source and reject an unrelated unlocked skill',()=>{
  for(const hero of data.classes)for(const node of hero.nodes.filter(n=>n.oneOf.length)){
   for(const witness of [null,...node.oneOf]){
-   const fixture=E.clone(data),nodes=fixture.classes.find(c=>c.id===hero.id).nodes;
+   const fixture=effectOnly(E.clone(data)),nodes=fixture.classes.find(c=>c.id===hero.id).nodes;
    for(const r of node.oneOf)if(r.id!==witness?.id)nodes.find(n=>n.id===r.id).level=41;
    // Isolate the source from its own prerequisites so every alternative is exercised.
    if(witness){const n=nodes.find(n=>n.id===witness.id);n.all=[];n.oneOf=[];}
@@ -136,5 +138,35 @@ test('old planner exports move ultimate support ranks to the selected branch onc
   const migrated=E.parse(data,JSON.stringify(legacy));
   assert.deepEqual(migrated.stack,[prefix+'P19',prefix+'P19']);assert.deepEqual(migrated.equipped,[prefix+'18',prefix+'P19']);
   assert.deepEqual(E.parse(data,E.serialize(data,migrated)),migrated);
+ }
+});
+
+test('lineage is a parent chain: every non-root skill has one parent in its lane that never opens later',()=>{
+ for(const hero of data.classes){
+  const by=Object.fromEntries(hero.nodes.map(n=>[n.id,n]));
+  for(const n of hero.nodes){
+   const parents=[...(n.lineage?[n.lineage]:[]),...n.all.map(r=>r.id)];
+   if(n.kind==='ultimate'){assert.equal(n.lineage,null,n.id);continue;}
+   assert.ok(n.lineage||n.all.length||n.oneOf.length||n.level<=20,n.id+' must hang from a parent unless it opens a lane');
+   for(const id of parents){assert.ok(by[id].level<=n.level,id+' opens after '+n.id);assert.equal(by[id].branch,n.branch,id+' -> '+n.id+' crosses lanes');}
+   if(n.lineage)assert.ok(!n.all.some(r=>r.id===n.lineage),n.id+' repeats an effect parent as lineage');
+  }
+ }
+});
+test('a skill needs its lineage parent, and the path planner opens the whole chain at no point cost',()=>{
+ const fixture=E.clone(data);fixture.classes.find(c=>c.id==='Mage').nodes.find(n=>n.id==='MP03').level=9;
+ assert.equal(E.evaluate(fixture,E.empty(fixture,'Mage',8)).available.M11,false);
+ const plan=E.pathPlan(data,E.empty(data,'Mage',30),'M11');assert.equal(plan.ok,true);assert.equal(plan.cost,0);
+ assert.ok(E.ancestors(data,'Mage','M10').has('MP10')&&E.ancestors(data,'Mage','M10').has('M06')&&E.ancestors(data,'Mage','M10').has('M02'));
+});
+test('drawn links never cross a skill, run upward or leave their lane',()=>{
+ for(const hero of data.classes){
+  const by=Object.fromEntries(hero.nodes.map(n=>[n.id,n])),bandOf=l=>[1,10,20,30,40].reduce((b,s,i)=>l>=s?i:b,0);
+  const seen=new Set(hero.nodes.map(n=>`${n.branch}:${bandOf(n.level)}:${n.row}:${n.col}`));assert.equal(seen.size,37,hero.id+' shares a socket');
+  for(const n of hero.nodes)for(const id of n.links){
+   const p=by[id];assert.equal(p.branch,n.branch);assert.ok(p.phase<n.phase||p.phase===n.phase&&p.row<n.row,id+' -> '+n.id);
+   assert.ok(n.col===p.col||n.via[n.links.indexOf(id)]===0||n.via[n.links.indexOf(id)]===1);
+  }
+  for(const n of hero.nodes.filter(n=>n.kind!=='ultimate'))assert.ok(n.links.length>0||!(n.all.length||n.lineage),n.id+' needs a drawn link');
  }
 });

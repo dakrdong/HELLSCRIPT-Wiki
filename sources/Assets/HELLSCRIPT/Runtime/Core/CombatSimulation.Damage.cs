@@ -29,7 +29,7 @@ namespace Hellscript
             // Round the threshold to stored HP precision; Mono can otherwise retain extra intermediate precision.
             if(Hero.heroClass==HeroClass.Warrior)
             {if(snap.passives[0]&&(snap.crowdCaptured?snap.crowdQualified:CountNear(State.position,3)>=3))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,0);if(snap.passives[5]&&enemy.health<=(float)(enemy.maxHealth*.3f))bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Warrior,5);}
-            if(Hero.heroClass==HeroClass.Ranger&&snap.passives[0]&&Vector2.Distance(State.position,enemy.position)>=7)bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Ranger,0);
+            if(Hero.heroClass==HeroClass.Ranger&&snap.passives[0]&&Vector2.Distance(State.position,enemy.position)>=6)bonus+=SkillEffects.Passive(snap.ranks,HeroClass.Ranger,0);
             return bonus;
         }
         DamageEvent ApplyOutgoing(EnemyState enemy,float baseAttack,float additive,float independent,float critMultiplier,bool critical,int element,DamageSnapshot snapshot,string definition,int root,int instance,DamageKind kind,int triggerTarget=-1,bool projectile=false,Vector2? origin=null,bool attackResolved=false)
