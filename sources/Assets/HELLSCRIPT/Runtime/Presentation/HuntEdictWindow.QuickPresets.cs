@@ -88,10 +88,12 @@ namespace Hellscript
             row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h+3;
             Place((RectTransform)button.transform,0,0,w,h);
         }
-        // The selector exists for groups whose settings come in authored presets (not the potion toggle or auto equip).
+        // The selector exists for groups whose settings come in authored presets (not auto equip). Quick() owns which pickers exist: new accounts
+        // never get the potion one, legacy accounts keep every picker (the v2 survival lesson points at it). The v3 prologue lists direct options
+        // only, even in the replay of a legacy account, because its HP lesson points at the option itself.
         bool QuickAllowed(HuntEdictUiGroup group)
         {
-            if(group.ids[0]=="survival.potion"||group.tab=="autoEquip")return false;
+            if(ProgressivePrologue||group.tab=="autoEquip")return false;
             string scope=HuntEdictQuickPresets.GlobalScope(group);
             return HuntEdictQuickPresets.For(scope).Any(p=>HuntEdictProgression.Quick(store.Data,scope,p.id,hero));
         }
