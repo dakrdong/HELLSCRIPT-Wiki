@@ -2,6 +2,8 @@
 
 Updated: 2026-09-29
 
+> 2026-10-04: See [Tutorial_Chapters.en.md](Tutorial_Chapters.en.md) for the chapter-based redesign and the code/document differences.
+
 This design implements the approved flow: the *Voice of the Edict* prologue on a dedicated map → learn and equip the first skill and choose its preset through the Hunt Edict sent from the sky → change the automatic potion and avoidance settings while fighting the gatekeeper → 1,000 gold for defeating it → town → rifts → Hunt Edict editing → new skill equipment → guidance at each content unlock.
 
 ## Fixed decisions

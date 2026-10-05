@@ -16,12 +16,12 @@ New players first learn that changing a policy changes a hunt. Account-best clea
 | First regular Rift result, win or loss | HP potion toggle, balanced/all dodge, last danger review | 1 |
 | Hero level 2 and new points | Currently learnable skills and quick policies | Per skill |
 | Rift 2 | Combat styles | Official recipes |
-| Rift 3 / 4 / 5 | Position / target selection / low-HP response | 11 / 6 / 5 |
+| Rift 3 / 4 / 5 | Low-HP response / target selection / position | 5 / 6 / 11 |
 | Rift 6 | Direct editing of disclosed groups, detailed learned-skill policies, basic attacks and order, local presets and training comparison | Capabilities |
 | Rift 7 / 8 / 9 | Loot / exploration and interactions / basic bag handling | 12 / 9 / 12 |
 | Rift 12 / 14 | Basic automatic equipment / potion supplies | 3 / 11 |
 | Rift 15 and mandatory Rune lesson complete | Repeated hunts and limits | 8 |
-| Rift 18 | Detailed pursuit, survival/dodging, loot filters, bag protection/admission | 40 |
+| Rift 18 | Detailed dodge/survival, pursuit/loot filters, bag cleanup/protection/admission (guides E18, E18B, E18C, announced one group at a time in town) | 20 / 13 / 7 |
 | Rift 20 | Full action order, detailed exploration, repeat acquisition goals, sharing/import and recommended mode | 15 |
 | Legendary or set acquired after Rift 12 | Eight equipment-position criteria and excluded positions | 17 |
 | Hero level 40 | Actual ultimate learning, equipment and policy | Per skill |
@@ -64,3 +64,5 @@ macOS synthetic pointer/input evidence is distinct from browser, physical-mobile
 Current verification: full EditMode ran once (5,147 tests: 5,065 passed, 82 failed). Targeted repair ran 158 tests (156 passed, 2 failed), followed by 32 passing directly affected checks. All 82 original failures are resolved; the later 31 disclosure-boundary and one hero-level check also passed. Warrior native input proved actual A/B observations, checkpoint restart, final policy save/execution, five KO/EN viewport pairs, HP 40→60 save, automatic healing, boss defeat and the existing 1,000-gold completion transaction. Attendance could open before the town arrival dialogue; the shared cinematic handoff now defers automatic popups, and runtime C# compilation passed. No game tests were restarted for the user-requested consolidation. The repaired town arrival, town/entry/restock/refresh interactions and Ranger/Mage native acceptance remain unverified; this is not a complete runtime acceptance claim.
 
 Manual potion restocking remains available from Rift entry before disclosure. It respects the selected supplies, budget and gold reserve, and leaves automatic buying OFF. A new skill can be equipped with its existing policy without falsely treating equipment changes as advanced policy edits.
+
+2026-10-04: The two stages were swapped so low-HP response, the most important for survival, opens before position and distance ([chapter design](../Design/Tutorial_Chapters.en.md)). Access already granted is never revoked.

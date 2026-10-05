@@ -46,7 +46,7 @@ namespace Hellscript
     }
     // Shared game dialogue in the manner of a story scene: large transparent character art standing out of a dark band
     // across the bottom, a cartouche name plate on the band's gold rule and a centred line written out a glyph at a
-    // time. The speaker stands on the left; a silent listener may stand dimmed on the right. It is a ContentWindowView,
+    // time. The speaker stands on the left; a silent listener may stand dimmed on the right, and each looks toward the other. It is a ContentWindowView,
     // so the host still owns input, back and pause leases, and the display never reads or writes an account. Every
     // text is passed as its Korean source (the heading too) so a language change redraws it translated.
     public static class StoryDialogueWindow
@@ -82,8 +82,10 @@ namespace Hellscript
             var line=state.Current;var profile=NpcProfiles.Find(line.speaker);
             var safe=UiSafeArea.Current.size/UiTheme.Scale(UiSafeArea.Current);float w=view.Width,h=view.Frame.rect.height;bool narrow=w<600;
             // A narrow screen has room for the speaker only; two figures side by side would hide the whole field.
-            var speakerArt=profile!=null?Resources.Load<Texture2D>(profile.portrait):null;// A line the listener speaks shows that figure once, as the speaker.
-            var listenerArt=!narrow&&listenerPath!=""&&profile?.portrait!=listenerPath?Resources.Load<Texture2D>(listenerPath):null;
+            // The speaker on the left looks right and the listener on the right looks left, so the two face each other.
+            var speakerArt=profile!=null?Resources.Load<Texture2D>(profile.PortraitFor(true)):null;// A line the listener speaks shows that figure once, as the speaker.
+            var listenerProfile=NpcProfiles.FindByPortrait(listenerPath);
+            var listenerArt=!narrow&&listenerPath!=""&&profile?.portrait!=listenerPath?Resources.Load<Texture2D>(listenerProfile!=null?listenerProfile.PortraitFor(false):listenerPath):null;
             view.Frame.GetComponent<Image>().color=Color.clear;view.Title.gameObject.SetActive(false);view.Navigation.gameObject.SetActive(false);
             var close=view.Frame.Find("content-close");
             // Landscape figures stand from the bottom of the safe area and rise far above the band, in front of it; on a narrow

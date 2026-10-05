@@ -1,0 +1,222 @@
+{
+  "date": "2026-10-05",
+  "purpose": "Closing verification of the chapter 0-5 dialogue script and of the mirrored dialogue portraits",
+  "sourceCommit": "58226b11 (this pass changed only documents and evidence)",
+  "isolation": "Every run used its own disposable save and evidence directory in the session scratchpad. No real account save was read or written. Player arguments were passed as arrays.",
+  "environment": {
+    "unity": "6000.6.0f1",
+    "target": "StandaloneOSX development",
+    "compileErrors": 0,
+    "note": "Another session ran seven parallel Unity batches on the same machine during these runs, so durations are not benchmarks."
+  },
+  "editMode": {
+    "filter": [
+      "NpcPortraitFacingTests",
+      "NpcDialogueTests",
+      "StoryDialogueTests",
+      "TutorialChapterTests",
+      "TutorialProgressionTests",
+      "LocalizationTests",
+      "HuntEdictProgressionTests",
+      "FirstPlayExperienceTests"
+    ],
+    "total": 134,
+    "passed": 134,
+    "failed": 0,
+    "seconds": 105,
+    "fullSuite": "not run (planned once at the end)"
+  },
+  "npcDialogueSmoke": {
+    "flag": "-hellscriptNpcDialogueSmoke",
+    "result": "PASS",
+    "exit": 0,
+    "seconds": 146,
+    "claim": "12 NPCs, 122 portrait/layout/language checks, 308 raycast-verified synthetic clicks, 11 existing service dispatches"
+  },
+  "npcDialogueSmokeCaptureAll": {
+    "flag": "-hellscriptNpcDialogueSmoke -hellscriptNpcCaptureAll",
+    "result": "PASS",
+    "exit": 0,
+    "note": "The -hellscriptNpcCaptureAll switch exists only in a throwaway clone of the project to save every NPC at every size; it is not in the repository. The same smoke passed with the same claim.",
+    "captures": 120,
+    "matrix": "12 NPCs x 5 viewports (440x956, 956x440, 1440x810, 1440x900, 1680x720) x ko/en"
+  },
+  "facingMeasurement": {
+    "tool": "macOS Vision face landmarks, nose offset = (nose centroid x - face-contour centre x) / contour half-width",
+    "speakerLeftSlot": {
+      "captures": 120,
+      "facingRight": 120,
+      "facingLeft": 0,
+      "noseOffsetRange": [
+        0.159,
+        0.481
+      ],
+      "formerlyLeftFacing": {
+        "injel-mir": 0.274,
+        "jean-jorin": 0.186,
+        "mishu-karu": 0.298
+      },
+      "weakest": {
+        "jean-jorin": 0.186,
+        "pyonya-nermwen": 0.232
+      }
+    },
+    "listenerRightSlot": {
+      "captures": 96,
+      "facingLeft": 96,
+      "facingRight": 0,
+      "noseOffsetRange": [
+        -0.52,
+        -0.458
+      ],
+      "note": "the listener is drawn at 40 percent brightness, so the crop was brightened 2.4x for detection"
+    },
+    "narrowViewports": {
+      "captures": 24,
+      "note": "440x956 draws the speaker only, by design"
+    },
+    "viewedByEye": [
+      "24 portrait captures (12 NPCs x ko/en)",
+      "12 English 1440x810 captures",
+      "Injel, Jean, Mishu, Anton and Turk in landscape"
+    ]
+  },
+  "runeBoardUnlockSmoke": {
+    "flag": "-hellscriptRuneUnlockSmoke",
+    "matrix": "5 viewports x ko/en",
+    "passed": 10,
+    "failed": 0,
+    "runs": [
+      {
+        "language": "ko",
+        "viewport": "440x956",
+        "exit": 0,
+        "seconds": 26,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "en",
+        "viewport": "440x956",
+        "exit": 0,
+        "seconds": 25,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "ko",
+        "viewport": "956x440",
+        "exit": 0,
+        "seconds": 25,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "en",
+        "viewport": "956x440",
+        "exit": 0,
+        "seconds": 24,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "ko",
+        "viewport": "1600x900",
+        "exit": 0,
+        "seconds": 27,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "en",
+        "viewport": "1600x900",
+        "exit": 0,
+        "seconds": 28,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "ko",
+        "viewport": "1600x1000",
+        "exit": 0,
+        "seconds": 29,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "en",
+        "viewport": "1600x1000",
+        "exit": 0,
+        "seconds": 32,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "ko",
+        "viewport": "2100x900",
+        "exit": 0,
+        "seconds": 31,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      },
+      {
+        "language": "en",
+        "viewport": "2100x900",
+        "exit": 0,
+        "seconds": 31,
+        "marker": "HELLSCRIPT_RUNE_UNLOCK_OK",
+        "markerSeen": true,
+        "failureFile": false
+      }
+    ],
+    "note": "Includes the changed assertion that the Rune Master's left-slot portrait is PortraitFor(true) of injel-mir."
+  },
+  "tutorialSmoke": {
+    "runner": "Artifacts/Validation/MergeAll20260930/run_smokes.py --only TutorialSmoke",
+    "branch": {
+      "phaseOne": {
+        "exit": 0,
+        "seconds": 50.9
+      },
+      "resume": {
+        "exit": 1,
+        "seconds": 174.1,
+        "error": "InvalidOperationException: Timed out following the prologue gate: survival lesson target="
+      }
+    },
+    "baselineMainEe5a949c": {
+      "phaseOne": {
+        "exit": 0,
+        "seconds": 58.5
+      },
+      "resume": {
+        "exit": 1,
+        "seconds": 168.5,
+        "error": "InvalidOperationException: Timed out following the prologue gate: survival lesson target="
+      }
+    },
+    "conclusion": "Pre-existing failure, not caused by the branch: the build of main at ee5a949c (before the tutorial-chronicle commits) fails at the same step with the same exception and the same three captures. The branch did not touch GameUI.TutorialStaging.cs, RuntimeTutorialSmoke.cs, HuntEdictWindow.QuickPresets.cs or HuntEdictProgression.cs. An earlier record (2026-09-30) shows the smoke passing; the code was last changed by 93d59959. Not fixed here (out of scope); handed off as a separate task.",
+    "heroLeftSpeakerEvidence": "Phase-one captures: intro dialogue at 5 viewports x ko/en (10 files) and 440x956 prologue-02-despair, prologue-04-voice, prologue-11-pack-cleared. The Warrior stands on the left in the mirrored art and looks right."
+  },
+  "notVerified": [
+    "Hero lines after the boss-fight intervention ('크윽…', '…당신의 명을 따르겠습니다') and the tutorial smoke's town-arrival section: the smoke stops at the pre-existing failure before them (the same code path was checked on the earlier hero lines, and Anton with the hero listener on the NPC smoke)",
+    "The Voice speaking with the hero listening on the right in landscape (the Voice art itself is the original and unchanged)",
+    "Physical mobile devices",
+    "APK size and the ASTC result of the 16 added portraits",
+    "The full Edit Mode suite and the full smoke bundle (planned once at the end)"
+  ],
+  "pendingApprovals": [
+    "merge into main",
+    "publishing the public wiki",
+    "permanent deletion of temporary outputs"
+  ]
+}

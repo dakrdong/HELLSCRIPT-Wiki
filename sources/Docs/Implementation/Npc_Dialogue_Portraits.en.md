@@ -75,3 +75,57 @@ The native macOS development build completed with zero build errors. The actual 
 The existing town HUD regression also passed 48 resolution/scale/language combinations, safe areas, joystick input and expanded shortcuts. All nine services and three residents passed the existing nameplate/placement path in Korean landscape and English portrait. [HUD runtime](NpcDialogueEvidence/town-hud-runtime.txt) · [NPC placement](NpcDialogueEvidence/town-hud-npc-runtime.txt)
 
 No MCP Editor instance was connected, so validation used the existing Unity batch tooling and native macOS development player. Phone dimensions are simulated desktop windows; physical mobile touch and performance remain unverified. These are branch validation results, not evidence of a main merge or public wiki deployment.
+
+## Facing each other (2026-10-05)
+
+In a dialogue scene the speaker stands on the left and the listener on the right. The existing art faces a different way for each character, so a figure on the left sometimes looked off-screen. Every character now has art that faces the other way, and the left slot uses art that looks right while the right slot uses art that looks left, so the two figures face each other.
+
+- **Rule:** left slot = art that looks right, right slot = art that looks left. `NpcProfile.PortraitFor(onLeft)` chooses. If the original already looks that way it is used, otherwise `<id>-mirror.png` is used.
+- **Data:** `portraitFacing` (the way the original looks) and `portraitMirror` (path of the opposite-facing art) in `NpcProfiles.json`. The three heroes and the Voice from Above carry the same fields in `Speakers` in `NpcProfiles.cs`. The dialogue window asks `PortraitFor(true)` for the speaker and `PortraitFor(false)` for the listener (the `listener` path). Face-crop cards and barks keep the original.
+- **Mirror art:** 16 PNGs (about 43 MB in total) that are exact left-right flips of the originals. No generation model or other postprocessing was used, and flipping each one back reproduced every pixel of the original, alpha included. Record: [mirror-manifest.json](../Art/NpcPortraits/mirror-manifest.json). Import settings and platform budgets follow the existing rules of the `NpcPortraits` folder (`NpcPortraitImporter`, `ResourceTextureBudget`).
+- **Measuring the direction:** from the macOS Vision face landmarks, by whether the nose centre sits to the right (+) or left (-) of the face-contour centre. The mirrored images gave the opposite sign. The faceless Voice from Above was set by its reaching hand (right). Pyonya (+0.233) and Jean (-0.209) have small values, are close to frontal and are the least certain; what was measured is head direction, and torso direction was only checked by eye.
+
+| Character | Original looks | Nose offset | Left slot art | Right slot art |
+| --- | --- | --- | --- | --- |
+| Anton Jindark | right | +0.465 | original | mirror |
+| Chador Samaf | right | +0.444 | original | mirror |
+| Darc Alvi | right | +0.344 | original | mirror |
+| Guzel Pan | right | +0.328 | original | mirror |
+| Jacques Chei | right | +0.358 | original | mirror |
+| Jake Bokun | right | +0.414 | original | mirror |
+| Marc Kus | right | +0.307 | original | mirror |
+| Pyonya Nermwen | right | +0.233 | original | mirror |
+| Turk Garbi | right | +0.306 | original | mirror |
+| Voice from Above | right | reaching hand | original | mirror |
+| Injel Mir | left | -0.267 | mirror | original |
+| Jean Jorin | left | -0.209 | mirror | original |
+| Mishu Karu | left | -0.307 | mirror | original |
+| Hero Mage | left | -0.521 | mirror | original |
+| Hero Ranger | left | -0.516 | mirror | original |
+| Hero Warrior | left | -0.499 | mirror | original |
+| Ish, Scribe of Ash (not in town yet) | right | +0.328 | original | mirror |
+
+![Left-slot and right-slot art](NpcDialogueFacingEvidence/slots-sheet.png)
+![Injel, Jean, Mishu and Anton looking right from the left, with the warrior looking left from the right](NpcDialogueFacingEvidence/pair-mock.png)
+
+**Validation (2026-10-05).** Checked in two passes. Every run used a disposable save and evidence folder, and no real account save was touched. The record is [verification-20261005.json](NpcDialogueFacingEvidence/verification-20261005.json).
+
+- **Edit Mode:** 134 related tests passed (including the 4 `NpcPortraitFacingTests` and the dialogue, chapter engine, tutorial progression, edict disclosure and localization checks; 0 compile errors).
+- **NPC dialogue smoke:** passed in the macOS development build: 12 NPCs, 122 portrait/layout/language checks, 308 synthetic clicks and 11 service entries. The existing smoke's portrait assertion was changed to expect the left-slot art (`PortraitFor(true)`). The summary is in [runtime-claim.txt](NpcDialogueFacingEvidence/runtime-claim.txt).
+- **Direction measurement (portrait and English included):** a throwaway clone build (not in the repository) that only widened the smoke's capture condition saved all 120 captures (12 NPCs x 5 viewports x Korean and English), and face detection measured the direction. The speaker looks right in all 120 (nose offset +0.159 to +0.481). Injel (+0.274), Jean (+0.186) and Mishu (+0.298), who originally looked left, now look right. The listener (the hero) looks left in all 96 landscape captures (-0.520 to -0.458). The 24 portrait 440x956 captures draw the speaker only, by design. The portrait and English screens were also checked by eye.
+- **Rune board tutorial smoke:** all 10 runs (5 viewports x Korean and English) passed, including the changed Injel assertion. By eye, Injel looks right in portrait, landscape and English, and in landscape the hero faces her.
+- **When the hero is the left speaker in the prologue:** checked by eye in the captures of tutorial smoke phase one (passed): 10 intro captures (5 viewports x two languages) and, on the portrait screen, "the way is shut", the Voice's arrival and "I did it…". The Warrior stands on the left in the mirrored art and looks right, toward the field. The empty right slot there is existing behavior: when the hero speaks, the other party (the Voice) is not drawn.
+
+![Portrait 440x956, 12 NPCs, Korean (top) and English (bottom)](NpcDialogueFacingEvidence/portrait-440x956-all-12-ko-en.png)
+![English 1440x810, 12 NPCs](NpcDialogueFacingEvidence/english-12-npcs-1440x810.png)
+![Turk at five viewports, Korean and English](NpcDialogueFacingEvidence/turk-five-sizes-ko-en.png)
+![Rune Master Injel in portrait, landscape and English](NpcDialogueFacingEvidence/rune-master-injel-portrait-landscape-ko-en.png)
+![Prologue opening, the hero as the left speaker](NpcDialogueFacingEvidence/prologue-hero-left-speaker-sizes-ko-en.png)
+![Prologue opening, the other four viewports](NpcDialogueFacingEvidence/prologue-hero-left-speaker-sizes-ko-en-2.png)
+![Prologue portrait screen, the hero and the Voice](NpcDialogueFacingEvidence/prologue-440x956-hero-and-voice.png)
+
+**Existing failure, unrelated to this work.** The resume phase of the tutorial smoke fails in the survival lesson after the boss-fight intervention with "timed out for 120 s because the designated control was not found". A build of the code before this work (`main` at `ee5a949c`) fails at the same step with the same exception, so it is not caused by this work (phase one passes, resume fails, the same three captures). The record from 2026-09-30 shows the smoke passing, and the code was last changed by `93d59959`. It is outside the scope of this work, so it was not fixed and was left as a separate task request.
+
+Not checked: the hero lines after the boss-fight intervention ("Ugh… like this…!", "…I will follow your command.") and the tutorial smoke's town-arrival section (not run because of the existing failure above; the earlier hero lines, and Anton with the hero listening in the NPC dialogue, were checked), the landscape screen where the Voice speaks and the hero listens on the right (the Voice art is the unchanged original), real mobile devices, the APK size and ASTC result of the 16 added images, and the full Edit Mode and smoke suite (planned once at the end).
+
+**Known limits.** Because they are mirrors, asymmetric details flip (which hand holds an item, the hair parting, Jake's left-eyebrow scar landing on the other eyebrow). The light direction flips too. For any character that does not look right, the opposite-facing art can be redrawn with Codex and saved under the same file name; no code needs to change.

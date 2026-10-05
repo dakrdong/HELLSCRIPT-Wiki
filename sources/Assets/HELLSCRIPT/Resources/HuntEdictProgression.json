@@ -16,7 +16,7 @@
       ]
     },
     {
-      "stage": 3,
+      "stage": 5,
       "condition": "",
       "ids": [
         "position.engage",
@@ -53,7 +53,7 @@
       "focus": "target.default"
     },
     {
-      "stage": 5,
+      "stage": 3,
       "condition": "",
       "ids": [
         "survival.lowHp",
@@ -194,12 +194,6 @@
         "dodge.totalHpPercent",
         "dodge.method",
         "dodge.interrupt",
-        "target.chaseDistance",
-        "target.chaseTime",
-        "target.lostSight",
-        "target.goblin",
-        "target.goblinDistance",
-        "target.goblinTime",
         "survival.lethal",
         "survival.dot",
         "survival.dotHpPercent",
@@ -207,14 +201,40 @@
         "survival.order",
         "survival.fallback",
         "survival.reserveSkill",
-        "survival.reserveResource",
+        "survival.reserveResource"
+      ],
+      "guide": "E18",
+      "title": "회피와 생존 세부 조건",
+      "body": "회피와 생존의 세부 조건 하나를 바꾸고 저장하세요. 다음 사냥의 판단 기록에서 조건이 적용되는지 확인하세요.",
+      "focus": "dodge.interrupt"
+    },
+    {
+      "stage": 18,
+      "condition": "",
+      "ids": [
+        "target.chaseDistance",
+        "target.chaseTime",
+        "target.lostSight",
+        "target.goblin",
+        "target.goblinDistance",
+        "target.goblinTime",
         "loot.class",
         "loot.slots",
         "loot.itemLevel",
         "loot.exceptLegendary",
         "loot.exceptSet",
         "loot.exceptEffects",
-        "loot.minimumGold",
+        "loot.minimumGold"
+      ],
+      "guide": "E18B",
+      "title": "추적과 전리품 세부 조건",
+      "body": "추적 거리나 전리품 걸러내기 조건 하나를 바꾸고 저장하세요. 다음 사냥의 판단 기록에서 조건이 적용되는지 확인하세요.",
+      "focus": "target.chaseDistance"
+    },
+    {
+      "stage": 18,
+      "condition": "",
+      "ids": [
         "bag.replacementRank",
         "bag.allowLegendaryDisposal",
         "bag.cleanup.LEGENDARY",
@@ -223,10 +243,10 @@
         "bag.protectSets",
         "bag.warehouseAdmission"
       ],
-      "guide": "E18",
-      "title": "세밀한 사냥 조건",
-      "body": "필요한 세부 조건 하나를 바꾸고 저장하세요. 다음 사냥의 판단 기록에서 조건이 적용되는지 확인하세요.",
-      "focus": "target.chaseDistance"
+      "guide": "E18C",
+      "title": "가방 정리 세부 조건",
+      "body": "가방이 가득 찼을 때의 교체·정리·보호 조건 하나를 바꾸고 저장하세요. 다음 사냥의 판단 기록에서 조건이 적용되는지 확인하세요.",
+      "focus": "bag.replacementRank"
     },
     {
       "stage": 20,
