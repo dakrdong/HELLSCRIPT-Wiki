@@ -119,7 +119,7 @@ Reference images are in `HuntEdictOverhaulEvidence/` with SHA-256 in [SHA256SUMS
 
 ## 7. What remains on the tutorial side (Phase 4)
 
-The window provides the following and nothing calls it yet. It maps onto requests T1-T7 of design chapter 10.
+The window provides the following; nothing called it when this record was written. It maps onto requests T1-T7 of design chapter 10. **Follow-up:** the tutorial-side work in the table below is done in the [tutorial wiring record](Hunt_Edict_Tutorial_Wiring.en.md).
 
 | Request | Window side | Tutorial side |
 | --- | --- | --- |
