@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="6" result="Failed(Child)" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-06 07:06:15Z" end-time="2026-10-06 07:07:18Z" duration="62.2796255">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5211" result="Failed" site="Child" start-time="2026-10-06 07:06:15Z" end-time="2026-10-06 07:07:18Z" duration="62.279626" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="7002" name="Hellscript.Tests.dll" fullname="/private/tmp/claude-501/-Users-t8g-2410-pn-005-Documents-MyProject-HELLSCRIPT-HELLSCRIPT--claude-worktrees-objective-herschel-cbfd95/73b2b6d6-df7d-4962-9418-095e89d851aa/scratchpad/proj/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5211" result="Failed" site="Child" start-time="2026-10-06 07:06:15Z" end-time="2026-10-06 07:07:18Z" duration="62.166159" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="97816" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="7003" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5211" result="Failed" site="Child" start-time="2026-10-06 07:06:16Z" end-time="2026-10-06 07:07:18Z" duration="62.059536" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="7004" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="5211" result="Failed" site="Child" start-time="2026-10-06 07:06:16Z" end-time="2026-10-06 07:07:18Z" duration="61.983106" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="6839" name="TutorialPitTests" fullname="Hellscript.Tests.TutorialPitTests" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" testcasecount="6" result="Failed" site="Child" start-time="2026-10-06 07:06:16Z" end-time="2026-10-06 07:07:18Z" duration="61.908028" total="6" passed="5" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="6845" name="ACheckpointInTheMovementLessonSurvivesARestartAndAnOldPrologueStartsOver" fullname="Hellscript.Tests.TutorialPitTests.ACheckpointInTheMovementLessonSurvivesARestartAndAnOldPrologueStartsOver" methodname="ACheckpointInTheMovementLessonSurvivesARestartAndAnOldPrologueStartsOver" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" seed="161183987" result="Passed" start-time="2026-10-06 07:06:16Z" end-time="2026-10-06 07:06:19Z" duration="3.403762" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[PIT Ranger stage one cleared at 5.8s hp 265/270
+PIT Ranger fell rooted at 23.8s, charger 30/60
+]]></output>
+            </test-case>
+            <test-case id="6846" name="AReplayOpensTheMovementLessonWithoutGrantingTheRealAccountAnything" fullname="Hellscript.Tests.TutorialPitTests.AReplayOpensTheMovementLessonWithoutGrantingTheRealAccountAnything" methodname="AReplayOpensTheMovementLessonWithoutGrantingTheRealAccountAnything" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" seed="959647478" result="Failed" start-time="2026-10-06 07:06:19Z" end-time="2026-10-06 07:06:25Z" duration="5.711981" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  The replay's lesson must be able to open the movement option.
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.TutorialPitTests.AReplayOpensTheMovementLessonWithoutGrantingTheRealAccountAnything () [0x0012a] in /private/tmp/claude-501/-Users-t8g-2410-pn-005-Documents-MyProject-HELLSCRIPT-HELLSCRIPT--claude-worktrees-objective-herschel-cbfd95/73b2b6d6-df7d-4962-9418-095e89d851aa/scratchpad/proj/Assets/HELLSCRIPT/Tests/Editor/TutorialPitTests.cs:101
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[PIT Warrior stage one cleared at 6.3s hp 323/330
+PIT Warrior fell rooted at 29.5s, charger 30/60
+]]></output>
+            </test-case>
+            <test-case id="6844" name="MovementIsRefusedUntilTheLessonOpensItAndRewardIsPaidOnce" fullname="Hellscript.Tests.TutorialPitTests.MovementIsRefusedUntilTheLessonOpensItAndRewardIsPaidOnce" methodname="MovementIsRefusedUntilTheLessonOpensItAndRewardIsPaidOnce" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" seed="2071201319" result="Passed" start-time="2026-10-06 07:06:25Z" end-time="2026-10-06 07:06:30Z" duration="5.230080" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[PIT Warrior stage one cleared at 6.3s hp 323/330
+PIT Warrior fell rooted at 29.5s, charger 30/60
+]]></output>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="6843" name="StandingStillLosesStageTwoButAnyMovementWinsIt" fullname="Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-06 07:06:30Z" end-time="2026-10-06 07:07:18Z" duration="47.550576" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="6840" name="StandingStillLosesStageTwoButAnyMovementWinsIt(0)" fullname="Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt(0)" methodname="StandingStillLosesStageTwoButAnyMovementWinsIt" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" seed="528726937" result="Passed" start-time="2026-10-06 07:06:30Z" end-time="2026-10-06 07:06:50Z" duration="19.451820" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[PIT Warrior stage one cleared at 6.3s hp 323/330
+PIT Warrior fell rooted at 29.5s, charger 30/60
+PIT Warrior ORBIT won at 39.7s hp 274/330
+PIT Warrior stage one cleared at 6.3s hp 323/330
+PIT Warrior fell rooted at 29.5s, charger 30/60
+PIT Warrior DISTANCE won at 52.3s hp 218/330
+PIT Warrior stage one cleared at 6.3s hp 323/330
+PIT Warrior fell rooted at 29.5s, charger 30/60
+PIT Warrior CENTER won at 38.9s hp 285/330
+PIT Warrior stage one cleared at 6.3s hp 323/330
+PIT Warrior fell rooted at 29.5s, charger 30/60
+PIT Warrior EDGE won at 39.7s hp 274/330
+]]></output>
+              </test-case>
+              <test-case id="6841" name="StandingStillLosesStageTwoButAnyMovementWinsIt(1)" fullname="Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt(1)" methodname="StandingStillLosesStageTwoButAnyMovementWinsIt" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" seed="823911539" result="Passed" start-time="2026-10-06 07:06:50Z" end-time="2026-10-06 07:07:04Z" duration="14.157543" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[PIT Ranger stage one cleared at 5.8s hp 265/270
+PIT Ranger fell rooted at 23.8s, charger 30/60
+PIT Ranger ORBIT won at 30.4s hp 241/270
+PIT Ranger stage one cleared at 5.8s hp 265/270
+PIT Ranger fell rooted at 23.8s, charger 30/60
+PIT Ranger DISTANCE won at 30.3s hp 241/270
+PIT Ranger stage one cleared at 5.8s hp 265/270
+PIT Ranger fell rooted at 23.8s, charger 30/60
+PIT Ranger CENTER won at 30.4s hp 241/270
+PIT Ranger stage one cleared at 5.8s hp 265/270
+PIT Ranger fell rooted at 23.8s, charger 30/60
+PIT Ranger EDGE won at 30.4s hp 241/270
+]]></output>
+              </test-case>
+              <test-case id="6842" name="StandingStillLosesStageTwoButAnyMovementWinsIt(2)" fullname="Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt(2)" methodname="StandingStillLosesStageTwoButAnyMovementWinsIt" classname="Hellscript.Tests.TutorialPitTests" runstate="Runnable" seed="1995026120" result="Passed" start-time="2026-10-06 07:07:04Z" end-time="2026-10-06 07:07:18Z" duration="13.939060" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[PIT Mage stage one cleared at 5.3s hp 240/240
+PIT Mage fell rooted at 23.0s, charger 30/60
+PIT Mage ORBIT won at 26.8s hp 197/240
+PIT Mage stage one cleared at 5.3s hp 240/240
+PIT Mage fell rooted at 23.0s, charger 30/60
+PIT Mage DISTANCE won at 26.8s hp 197/240
+PIT Mage stage one cleared at 5.3s hp 240/240
+PIT Mage fell rooted at 23.0s, charger 30/60
+PIT Mage CENTER won at 26.8s hp 197/240
+PIT Mage stage one cleared at 5.3s hp 240/240
+PIT Mage fell rooted at 23.0s, charger 30/60
+PIT Mage EDGE won at 26.8s hp 197/240
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

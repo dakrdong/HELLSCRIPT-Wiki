@@ -1,5 +1,5 @@
 {
- "base": "runs 1-3: f99c254f (origin/main at the start) in a worktree. Run 4: the merge 328213b3 of those changes with origin/main 17dc75e9 (chronicle PR #52). Project cloned with cp -Rc into the task scratchpad, Library cloned from the main checkout. Run 5 and the replay-only runs: the same merge plus commits ed79f12f and b4832e19 (branch tip before the record update),  Run 6: the merge a694f19f of those commits with origin/main a94bb636 (passive tuning PR #55). Run 7: the merge 3129e6c6 of the branch with origin/main 92407a06 (Hunt Edict native port PR #53); the only conflict was HuntEdictWindow.Summary.cs, resolved by moving this branch's picker conditions into QuickAllowed.",
+ "base": "runs 1-3: f99c254f (origin/main at the start) in a worktree. Run 4: the merge 328213b3 of those changes with origin/main 17dc75e9 (chronicle PR #52). Project cloned with cp -Rc into the task scratchpad, Library cloned from the main checkout. Run 5 and the replay-only runs: the same merge plus commits ed79f12f and b4832e19 (branch tip before the record update),  Run 6: the merge a694f19f of those commits with origin/main a94bb636 (passive tuning PR #55). Run 7: the merge 3129e6c6 of the branch with origin/main 92407a06 (Hunt Edict native port PR #53); the only conflict was HuntEdictWindow.Summary.cs, resolved by moving this branch's picker conditions into QuickAllowed. Runs 8 to 13: the merge 09ab6a0e of the branch with origin/main b1970567 (tutorial wiring PR #56); runs 11 to 13 add commit 10c86b6c. Runs 14 and 15 (follow-up PR after PR #54 was merged): origin/main 4fc52dba (town Hunyuan models PR #57) plus the Tap patch (c41be9a1 before the rebase onto 945fa46f, b12fe73d in this pull request), the same patch as 10c86b6c cherry-picked onto it; the project was cloned the same way (cp -Rc of the worktree, Library from the main checkout). Runs 16 and 17: origin/main 945fa46f (pit trial tutorial PR #58) plus the Tap commit b12fe73d. Runs 18 and 19: the same plus 5c72a30d and 4316af77. The clone for these runs was the earlier warm clone, synced with rsync from the worktree; Library from the main checkout.",
  "buildCommand": "Unity 6000.6.0f1 -batchmode -projectPath <clone> -executeMethod Hellscript.Editor.ProjectBuilder.BuildMac -hellscriptBuildOutput <app> -quit (BuildOptions.Development)",
  "runCommand": "python3 run_smokes.py --plan plan-merge.json --exe <app>/Contents/MacOS/HELLSCRIPT --out <dir> --only TutorialSmoke (plan and runner from Artifacts/Validation/MergeAll20260930, unchanged copies; screen 440x956; disposable -hellscriptSavePath and -hellscriptEvidencePath)",
  "reportedBaseline": "requester: resume launch failed after about 170 s at the survival lesson (FollowGate, target=) on origin/main ee5a949c and on claude/tutorial-chronicle; not re-run here",
@@ -151,6 +151,253 @@
    "passed": true,
    "missingMarkers": [],
    "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception; the same 17 PASS sentences as run 6 (numbers masked)"
+  },
+  "run8": {
+   "code": "merge 09ab6a0e",
+   "build": "buildI",
+   "executableSha256": "d7d7540bca7eab581860ce9e63a42da55b02a529639454bc56bb1571b72aa589",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 45.6
+    },
+    {
+     "label": "resume",
+     "exit": 1,
+     "seconds": 367.8
+    }
+   ],
+   "passed": false,
+   "missingMarkers": [
+    "HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK"
+   ],
+   "failure": "Until timed out on the plaza with the daily attendance window open, F07 step (run8-timeout-attendance-after-midnight.png). The run started 23:53 and failed at 00:00 KST; the window reads attendance day 2 of 7 and SetHidden only lasts until midnight, so the daily rollover reopened the popup (inferred from the screen, the clock and the code; not reproduced separately). The same build passed this step after midnight."
+  },
+  "run9": {
+   "code": "merge 09ab6a0e",
+   "build": "buildI (same executable as run 8, re-run after midnight)",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 41.8
+    },
+    {
+     "label": "resume",
+     "exit": 1,
+     "seconds": 402.8
+    }
+   ],
+   "passed": false,
+   "missingMarkers": [
+    "HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK"
+   ],
+   "failure": "Pointer blocked at the F05 step: edict-option-survival.potionHpPercent at (349.28, 374.77) hits=Hunt Edict window, Backdrop (run9-failure-pointer-blocked.txt). The same step passed in run 8 and run 10 on this code. No screenshot existed, so the cause (the guide caption band rebuilding the window within 0.25 s) is inferred from RefreshTutorialAnchor/SyncGuideCaption."
+  },
+  "run10": {
+   "code": "merge 09ab6a0e + pointer-blocked diagnostic in Tap (no behaviour change)",
+   "build": "buildJ",
+   "executableSha256": "80b64f0e3ea90ddc17fdd2a704a268a2985f4714b13969d359747556b9da7339",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 45.0
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 507.1
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS (no pointer-blocked files)"
+  },
+  "run11": {
+   "code": "merge 09ab6a0e + 10c86b6c (Tap settles a missed pointer for up to 0.6 s)",
+   "build": "buildK",
+   "executableSha256": "85047c744ef0969886d646bb1522af18b949983050f4b5b8ad3333e4852f98d5",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 44.8
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 446.8
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, 17 PASS sentences; only the hero level in the F06 sentence (3 or 4, natural leveling of the first rift) varies between runs"
+  },
+  "run12": {
+   "code": "merge 09ab6a0e + 10c86b6c (Tap settles a missed pointer for up to 0.6 s)",
+   "build": "buildK",
+   "executableSha256": "85047c744ef0969886d646bb1522af18b949983050f4b5b8ad3333e4852f98d5",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 41.4
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 539.1
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, 17 PASS sentences; only the hero level in the F06 sentence (3 or 4, natural leveling of the first rift) varies between runs"
+  },
+  "run13": {
+   "code": "merge 09ab6a0e + 10c86b6c (Tap settles a missed pointer for up to 0.6 s)",
+   "build": "buildK",
+   "executableSha256": "85047c744ef0969886d646bb1522af18b949983050f4b5b8ad3333e4852f98d5",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 41.2
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 538.5
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, 17 PASS sentences; only the hero level in the F06 sentence (3 or 4, natural leveling of the first rift) varies between runs"
+  },
+  "run14": {
+   "code": "origin/main 4fc52dba (town Hunyuan models, PR #57) + the Tap patch (c41be9a1 before the rebase onto 945fa46f, b12fe73d in this pull request; the patch of 10c86b6c cherry-picked)",
+   "build": "buildL",
+   "executableSha256": "f0b51a9be9b27912ba71c28f18c78f03ebcfe191ef6dc79717aafbf269403c7a",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 45.8
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 465.7
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, no pointer-blocked files, 17 PASS sentences; the F06 hero level is 4 (run14-runtime-tutorial-smoke.txt, identical in run 15)"
+  },
+  "run15": {
+   "code": "origin/main 4fc52dba (town Hunyuan models, PR #57) + the Tap patch (c41be9a1 before the rebase onto 945fa46f, b12fe73d in this pull request; the patch of 10c86b6c cherry-picked)",
+   "build": "buildL",
+   "executableSha256": "f0b51a9be9b27912ba71c28f18c78f03ebcfe191ef6dc79717aafbf269403c7a",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 40.3
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 444.3
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, no pointer-blocked files, 17 PASS sentences; the sentences are identical to run 14"
+  },
+  "run16": {
+   "code": "origin/main 945fa46f (pit trial tutorial, PR #58) + b12fe73d (Tap settles a missed pointer for up to 0.6 s)",
+   "build": "buildM",
+   "executableSha256": "1a58cf5183104541b3ef75ab9e9d3c55f0cbf6ee9caa96a1ba9ad21657433384",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 59.2
+    },
+    {
+     "label": "resume",
+     "exit": 1,
+     "seconds": 366.9
+    }
+   ],
+   "passed": false,
+   "missingMarkers": [
+    "HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK"
+   ],
+   "failure": "Timed out following the prologue gate: replay movement lesson target= (run16-failure-replay-movement-lesson.txt). The failing run left no screen; the replay-only runs below show the run paused in the Fallen phase at 0 HP with no dialogue and no gate target (replay-fallen-stuck.png)."
+  },
+  "run17": {
+   "code": "origin/main 945fa46f (pit trial tutorial, PR #58) + b12fe73d (Tap settles a missed pointer for up to 0.6 s)",
+   "build": "buildM (same executable as run 16)",
+   "executableSha256": "1a58cf5183104541b3ef75ab9e9d3c55f0cbf6ee9caa96a1ba9ad21657433384",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 54.3
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 342.4
+    }
+   ],
+   "passed": false,
+   "missingMarkers": [
+    "HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK"
+   ],
+   "failure": "The second launch ended with a clean shutdown (exit code 0, no exception, no OK marker, no result file) during the first rift, 5 minutes after it was entered; the same rift took about 2 minutes in the other runs. Unexplained: an external termination is suspected but was not shown. Not seen again in runs 18 and 19."
+  },
+  "run18": {
+   "code": "origin/main 945fa46f + b12fe73d (Tap settling) + 5c72a30d (a replay opens the pit trial's movement lesson, with its test) + 4316af77 (FollowGate leaves a screen and the open windows when it times out)",
+   "build": "buildN",
+   "executableSha256": "b148e709866497d32ede2c4a03ba8103df79d26aa183ff329e1cb0e0fa2a9fb3",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 61.4
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 263.2
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, no timeout or pointer-blocked files, 19 PASS sentences (run18-runtime-tutorial-smoke.txt)"
+  },
+  "run19": {
+   "code": "origin/main 945fa46f + b12fe73d (Tap settling) + 5c72a30d (a replay opens the pit trial's movement lesson, with its test) + 4316af77 (FollowGate leaves a screen and the open windows when it times out)",
+   "build": "buildN",
+   "executableSha256": "b148e709866497d32ede2c4a03ba8103df79d26aa183ff329e1cb0e0fa2a9fb3",
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 55.0
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 243.4
+    }
+   ],
+   "passed": true,
+   "missingMarkers": [],
+   "result": "PASS: HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK, no exception, no timeout or pointer-blocked files, 19 PASS sentences; the sentences match run 18 apart from the F06 hero level"
   }
  },
  "editMode": {
@@ -162,19 +409,39 @@
    "result": "editmode-premerge.xml"
   },
   "final": {
-   "filter": "HuntEdictProgressionTests;HuntEdictQuickPresetTests;TutorialProgressionTests;TutorialChapterTests;HuntEdictSentenceTests",
-   "total": 93,
-   "passed": 93,
+   "filter": "HuntEdictProgressionTests;HuntEdictQuickPresetTests;TutorialProgressionTests;TutorialChapterTests;HuntEdictSentenceTests;EdictGuidanceTests;PrologueGateTests",
+   "total": 110,
+   "passed": 110,
    "failed": 0,
-   "result": "editmode-final.xml (run 7 code)",
-   "code": "merge 3129e6c6; the first four classes also passed 87/87 on the code of runs 5 and 6"
+   "result": "editmode-final.xml (merge 09ab6a0e)",
+   "code": "the first four classes also passed 87/87 on the code of runs 5 and 6; the first five 93/93 on merge 3129e6c6"
+  },
+  "followUpTree": "origin/main 945fa46f + the commits above: only the classes the replay fix touches were run (TutorialPitTests, TutorialProgressionTests: 36 passed). The other EditMode classes of this record and the full suite were not run on this tree; the 110 results above are from the d1d762fb tree. Static checks on the final tree: check_ui_contract.py PASS, test_ui_contract.py 11 tests OK, check_ui_refresh.py PASS (12 bindings guarded; 161 UI source files inventoried).",
+  "replayFix": {
+   "before": {
+    "filter": "TutorialPitTests",
+    "total": 6,
+    "passed": 5,
+    "failed": 1,
+    "failedTest": "AReplayOpensTheMovementLessonWithoutGrantingTheRealAccountAnything: The replay's lesson must be able to open the movement option. Expected: True But was: False",
+    "result": "editmode-replay-fix-before.xml (the new test added, GameStore.Tutorials.cs not yet changed)"
+   },
+   "after": {
+    "filter": "TutorialPitTests;TutorialProgressionTests",
+    "total": 36,
+    "passed": 36,
+    "failed": 0,
+    "result": "editmode-replay-fix-after.xml"
+   }
   }
  },
  "replayOnlyRuns": {
   "note": "Development iterations of the replay segment alone on a clone-only shortcut (a fresh account marked complete, then ReplayAcceptance; the shortcut is not in the repository).",
   "r1": "stalled in the HP lesson: the gate held no target for 60 s (no diagnostics yet)",
   "r2": "same stall with timeout diagnostics: the window showed the potion quick-preset picker instead of the HP option because the replay's window reads the legacy account (replay-r2-picker-hides-hp-option.png). Fixed by ed79f12f.",
-  "r3": "passed in 1 min 43 s after the fix"
+  "r3": "passed in 1 min 43 s after the fix",
+  "r4": "on the #58 tree before the replay fix (clone-only shortcut: a fresh account marked complete, then PitReplay): FollowGate timed out after 120 s, 184.4 s in all; the evidence it left shows the run paused in the Fallen phase at 0 HP, no dialogue, no gate target (replay-fallen-stuck.png).",
+  "r5": "after the replay fix: passed in 73.4 s: skill lesson, stage one, fall, movement lesson through real pointers, retry won, back in town without a reward, real account's equipment, economy and progression unchanged."
  },
  "v3Acceptance": {
   "smoke": "-hellscriptEdictProgressionSmoke, two launches (second with -hellscriptTutorialResume), new account, warrior, 440x956, via run_smokes.py with a one-entry plan",
@@ -189,12 +456,28 @@
    "phaseOne": "pass 30.9 s",
    "resume": "fail after 95.4 s at the same check with the same evidence (v3-acceptance-failure-baseline.txt)"
   },
-  "conclusion": "before the native port both builds failed at the same stale check; on the merged tree it stops later at the attendance window; neither stop is caused by this change",
+  "conclusion": "before the native port both builds failed at the same stale check; after the port it stopped at the attendance window; after the tutorial wiring (PR #56 hides the popup) it passes end to end. None of these stops was caused by this change.",
   "afterNativePort": {
    "build": "buildH (merge 3129e6c6)",
    "phaseOne": "pass 26.9 s",
    "resume": "fail after 104.2 s: Until timed out on the plaza with the daily attendance window open (v3-acceptance-attendance-window-after-port.png, v3-acceptance-failure-after-port.txt)",
    "note": "PR #53 fixed the earlier check (highestClear=3 became 4 after the chronicle changed the rift ladder), so the smoke now gets past it. Before the stop it passed the comparison lesson, the HP lesson, the boss, the arrival and all 10 town-edict layout profiles. The smoke never hides the attendance popup; which Until timed out was not labelled."
-  }
- }
+  },
+  "afterTutorialWiring": {
+   "build": "buildI (merge 09ab6a0e)",
+   "phaseOne": "pass 27.3 s",
+   "resume": "pass 103.2 s",
+   "result": "PASS: all check lines in v3-acceptance-result.txt",
+   "note": "PR #56 added the attendance hide to this smoke; it now runs end to end"
+  },
+  "afterFollowUpBase": {
+   "build": "buildL (origin/main 4fc52dba + the Tap patch, c41be9a1 before the rebase and b12fe73d in this pull request; the executable of runs 14 and 15)",
+   "phaseOne": "pass 25.6 s",
+   "resume": "pass 101.4 s",
+   "result": "PASS: the 10 check lines are byte-identical to v3-acceptance-result.txt (the 09ab6a0e tree)",
+   "note": "run through the same one-entry plan; shows the follow-up PR's tree (town models merged, Tap settling added) still passes this smoke end to end"
+  },
+  "afterPitTrial": "PR #58 removed the -hellscriptEdictProgressionSmoke entry point and ProgressiveAcceptance with RuntimeTutorialSmoke.Progression.cs, so this check can no longer be run on main; the results above are historical."
+ },
+ "midnightNote": "The attendance hide lasts until midnight KST (AttendancePopupSettings.SetHidden). A smoke run that crosses 00:00 reopens the popup and stalls at the next town step; re-run it after midnight (run 8 vs run 10)."
 }
