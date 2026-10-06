@@ -88,3 +88,9 @@ English: effects use the verified `eleven_text_to_sound_v2` model and music uses
 
 - `Assets/HELLSCRIPT/Resources/World/Fx/*.png` 34장과 `manifest_fx.json`: `tools/generate_fx_textures.py`가 이름마다 고정한 시드(`hellscript-fx-v1|<이름>`의 sha256)로 numpy·PIL 연산만 써서 만든다. 값 노이즈, 메타볼, 무작위 걸음 균열, 기하학 문양으로 구성했고 사진·스캔·내려받은 이미지·이미지 생성 AI·다른 게임의 이펙트를 쓰지 않았다. `--check`로 설치된 파일을 다시 만들어 비교할 수 있다.
 - Android 텍스처 예산의 `World/Fx/` 규칙(최대 1024, ASTC 6×6)이 적용된다. 개발용 후보 자산이며 출시 승인을 뜻하지 않는다. 사용처: [적·보스 공격 예고 게이지](Attack_Telegraph_Gauge.md).
+
+## 훈위안 생성 마을 3D 모델 (2026-10-06)
+
+- `Assets/HELLSCRIPT/Resources/World/Town/`의 FBX 20개, PNG 40장과 `manifest_town_hunyuan.json`: 텐센트 훈위안3D 웹(`hy3d.tencent.ai`, 텍스트→3D, PBR 켬, 모델 HY3D-V3.1, 목표 5만 면, 유료 기능 미사용)이 2026-10-06에 만든 GLB 20개(NPC 12 + 마을 오브젝트 8)를 Blender 5.2로 줄이고 다시 구운 것이다. 원본 GLB, 생성 설정, 모델별 프롬프트와 SHA-256은 저장소 밖 납품 폴더 `AssetDeliverables/Hunyuan/2026-10-06/`의 `artifact-lifecycle.json`에 있고, 경량화·검사 기록은 같은 폴더의 `optimized/`에 있다. 매니페스트는 모델마다 경량화한 GLB(`bakedGlb`)의 이름과 SHA-256을 적는다.
+- 변환 도구는 `tools/hunyuan_town_export.py`, `tools/import_hunyuan_town.py`다. 도구는 면 수·UV·텍스처 해상도만 바꾸며 형태와 색은 생성물 그대로다. 생성물이 기존 저작물과 닮았는지는 확인하지 않았다.
+- 이용 조건(라이선스)을 검토하지 않았다. 매니페스트는 `productionApproved: false`이며 개발용 후보다. 출시 전에 상업 이용·저작권 귀속·표시 의무를 확인해야 한다. 구성과 검증: [마을 3D 모델 적용](Town_Hunyuan_Models.md).

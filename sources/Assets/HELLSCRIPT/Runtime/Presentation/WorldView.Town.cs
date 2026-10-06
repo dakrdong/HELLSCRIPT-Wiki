@@ -28,13 +28,15 @@ namespace Hellscript
                 if(s.id==TownStation.Training)BuildTrainingYard(layout,s);
                 if(s.id==TownStation.RiftKeeper)BuildTownPortal(layout,s.position);
                 var attendant=CreateTownAttendant(s);attendant.transform.SetParent(world.transform,false);attendant.transform.position=TownPoint(s.NpcPosition);attendant.transform.rotation=TownRotation;
+                // The rune master works beside an altar. It stands level with the NPC, in front of the porch awning (behind that line the awning covers its top).
+                if(s.id==TownStation.RuneMaster)SpawnTownModel(TownArt+"Prop_RuneAltar",layout,new Vector3(s.position.x-4.5f,0,s.position.y-.4f));
             }
             if(game.TownPortalAvailable)townReturnPortal=BuildTownPortal(layout,TownLayout.ReturnPortalPosition,true);
             for(int i=0;i<TownLayout.Residents.Length;i++)
             {
                 var resident=TownLayout.Residents[i];
                 var cloth=i==0?TownMat("Resident blue",.2f,.29f,.4f):i==1?TownMat("Resident burgundy",.4f,.19f,.23f):TownMat("Resident green",.24f,.36f,.29f);
-                var figure=CreateTownFigure("Resident "+resident.id,cloth);
+                var figure=CreateTownModelFigure("Resident "+resident.id,NpcProfiles.ForResident(resident.id))??CreateTownFigure("Resident "+resident.id,cloth);
                 figure.transform.SetParent(world.transform,false);figure.transform.position=TownPoint(resident.position);figure.transform.rotation=TownRotation*Quaternion.Euler(0,i==0?-25:i==1?20:-15,0);
             }
             foreach(var s in TownLayout.Stations)
@@ -123,14 +125,20 @@ namespace Hellscript
             return material;
         }
         GameObject Block(Transform p,string n,Vector3 at,Vector3 size,Material mat)=>Shape(n,PrimitiveType.Cube,p,at,size,mat);
+        // Height of the amber glass on the Prop_TownLantern model (a 4 m post with a hooked lamp), measured from its albedo (2.62 m).
+        const float TownLanternGlass=2.65f;
         void TownLantern(Transform p,Vector3 at)
         {
-            var iron=TownMat("Iron",.15f,.17f,.16f);var glow=TownMat("Lantern light",1,.56f,.17f,true);
-            Shape("Lantern post",PrimitiveType.Cylinder,p,at+Vector3.up*1.65f,new Vector3(.17f,1.65f,.17f),iron);
-            Block(p,"Lantern",at+Vector3.up*3.2f,new Vector3(.45f,.65f,.45f),glow);
-            Block(p,"Lantern cap",at+Vector3.up*3.58f,new Vector3(.67f,.12f,.67f),iron);
+            var model=SpawnTownModel(TownArt+"Prop_TownLantern",p,at);
+            if(model==null)
+            {
+                var iron=TownMat("Iron",.15f,.17f,.16f);var glow=TownMat("Lantern light",1,.56f,.17f,true);
+                Shape("Lantern post",PrimitiveType.Cylinder,p,at+Vector3.up*1.65f,new Vector3(.17f,1.65f,.17f),iron);
+                Block(p,"Lantern",at+Vector3.up*3.2f,new Vector3(.45f,.65f,.45f),glow);
+                Block(p,"Lantern cap",at+Vector3.up*3.58f,new Vector3(.67f,.12f,.67f),iron);
+            }
             // The lantern meshes are merged into static batches, so the light follows its own anchor.
-            var source=new GameObject("Lantern light source").transform;source.SetParent(world.transform,false);source.position=p.TransformPoint(at+Vector3.up*3.2f);
+            var source=new GameObject("Lantern light source").transform;source.SetParent(world.transform,false);source.position=p.TransformPoint(at+Vector3.up*(model!=null?TownLanternGlass:3.2f));
             lighting.RegisterEmitter(source,new Color(1,.62f,.3f),8,6);
         }
         Mesh ConeMesh(float radius,float height,int sides=9)
@@ -151,7 +159,8 @@ namespace Hellscript
         }
         void BatchTownGeometry(Transform parent)
         {
-            var filters=parent.GetComponentsInChildren<MeshFilter>();
+            // Imported town models are not CPU readable (WorldArtImporter), so only primitives and runtime meshes are merged.
+            var filters=parent.GetComponentsInChildren<MeshFilter>().Where(f=>f.sharedMesh!=null&&f.sharedMesh.isReadable).ToArray();
             foreach(var group in filters.GroupBy(f=>f.GetComponent<Renderer>().sharedMaterial))
             {
                 var combines=group.Select(f=>new CombineInstance{mesh=f.sharedMesh,transform=parent.worldToLocalMatrix*f.transform.localToWorldMatrix}).ToArray();
@@ -212,15 +221,25 @@ namespace Hellscript
             }
             for(int n=0;n<8;n++)TownLantern(layout,new Vector3(-49+n*14,0,n%2==0?5:-5));
             // A low stone well and supply cart leave the 110 m main road unobstructed.
-            Shape("Well rim",PrimitiveType.Cylinder,layout,new Vector3(-7,.6f,7),new Vector3(3.3f,.6f,3.3f),stone);
-            Shape("Well water",PrimitiveType.Cylinder,layout,new Vector3(-7,1.21f,7),new Vector3(2.5f,.01f,2.5f),TownMat("Well water",.08f,.18f,.2f));
-            for(int side=-1;side<=1;side+=2)Block(layout,"Well upright",new Vector3(-7+side*1.5f,2.2f,7),new Vector3(.25f,3.2f,.25f),wood);
-            Block(layout,"Well crossbeam",new Vector3(-7,3.65f,7),new Vector3(3.6f,.3f,.3f),wood);
+            if(SpawnTownModel(TownArt+"Prop_StoneWell",layout,new Vector3(-7,0,7))==null)
+            {
+                Shape("Well rim",PrimitiveType.Cylinder,layout,new Vector3(-7,.6f,7),new Vector3(3.3f,.6f,3.3f),stone);
+                Shape("Well water",PrimitiveType.Cylinder,layout,new Vector3(-7,1.21f,7),new Vector3(2.5f,.01f,2.5f),TownMat("Well water",.08f,.18f,.2f));
+                for(int side=-1;side<=1;side+=2)Block(layout,"Well upright",new Vector3(-7+side*1.5f,2.2f,7),new Vector3(.25f,3.2f,.25f),wood);
+                Block(layout,"Well crossbeam",new Vector3(-7,3.65f,7),new Vector3(3.6f,.3f,.3f),wood);
+            }
             BatchTownGeometry(layout);
         }
         void BuildTownHouse(Transform layout,TownStationDefinition s)
         {
             var house=new GameObject("Building "+s.id).transform;house.SetParent(layout,false);house.localPosition=new Vector3(s.building.center.x,0,s.building.center.y);
+            if(SpawnTownModel(TownBuildingArt(s.id),house,Vector3.zero)!=null)
+            {
+                // The model brings its own doorway, forge, crates and awning; only the lantern post at the porch corner and the fade remain.
+                TownLantern(house,new Vector3(s.building.width/2-1,0,-s.building.height/2-1.2f));
+                townBuildings.Add(new TownBuildingFade(house.GetComponentsInChildren<Renderer>(),Resources.Load<Shader>("TownFade")));
+                return;
+            }
             float w=s.building.width,d=s.building.height;var timber=TownMat("Timber",.23f,.16f,.1f);var plaster=TownMat("Old plaster",.43f,.4f,.31f);
             var roof=TownMat("Slate",.2f,.25f,.25f);var frame=TownMat("Dark beams",.12f,.105f,.075f);var lit=TownMat("Window amber",.9f,.53f,.2f,true);
             Block(house,"Stone footing",new Vector3(0,.38f,0),new Vector3(w,.76f,d),stone);
@@ -302,6 +321,7 @@ namespace Hellscript
         }
         GameObject CreateTownAttendant(TownStationDefinition s)
         {
+            var person=CreateTownModelFigure("NPC "+s.id,NpcProfiles.ForStation(s.id));if(person!=null)return person;
             var cloth=s.id==TownStation.Blacksmith?TownMat("Smith apron",.32f,.19f,.1f):s.id==TownStation.Gambler?TownMat("Gambler coat",.29f,.15f,.33f):s.id==TownStation.GemMerchant?TownMat("Jewel coat",.17f,.37f,.34f):(s.id==TownStation.RuneMerchant||s.id==TownStation.RuneMaster)?TownMat("Rune robe",.35f,.22f,.42f):TownMat("Settler coat",.34f,.36f,.24f);
             return CreateTownFigure("NPC "+s.id,cloth,s.id);
         }
@@ -332,7 +352,8 @@ namespace Hellscript
             Block(p,"Training sand",new Vector3(39,-.025f,22),new Vector3(20,.1f,20),TownMat("Sand",.4f,.36f,.26f));
             for(int n=0;n<4;n++)
             {
-                float x=32+n*4.4f;Shape("Dummy post",PrimitiveType.Cylinder,p,new Vector3(x,1.2f,23),new Vector3(.25f,1.2f,.25f),wood);
+                float x=32+n*4.4f;if(SpawnTownModel(TownArt+"Prop_TrainingDummy",p,new Vector3(x,0,23))!=null)continue;
+                Shape("Dummy post",PrimitiveType.Cylinder,p,new Vector3(x,1.2f,23),new Vector3(.25f,1.2f,.25f),wood);
                 Shape("Training dummy",PrimitiveType.Capsule,p,new Vector3(x,2,23),new Vector3(1.1f,.7f,.7f),straw);
                 Shape("Dummy head",PrimitiveType.Sphere,p,new Vector3(x,3,23),Vector3.one*.7f,straw);
                 Block(p,"Dummy arms",new Vector3(x,2.3f,23),new Vector3(2.8f,.2f,.2f),wood);
@@ -345,25 +366,29 @@ namespace Hellscript
         {
             var root=new GameObject(returning?"Rift Return Portal":"Golden Rift Portal").transform;root.SetParent(p,false);root.localPosition=new Vector3(at.x,0,at.y);
             if(returning)root.localScale=Vector3.one*.65f;
-            Shape("Portal dais",PrimitiveType.Cylinder,root,new Vector3(0,.12f,0),new Vector3(7,.12f,5),darkStone);
+            // The stone arch (Portal_RiftGateway) frames the effect: the model's curtains leave a gap about 3 m wide and 6 m tall, so the
+            // rings, sigils, embers and membrane shrink into it and sit just behind the curtain plane. Without the model the dais stays.
+            Transform fx=root;
+            if(!returning&&SpawnTownModel(TownArt+"Portal_RiftGateway",root,Vector3.zero)!=null){fx=new GameObject("Portal effect").transform;fx.SetParent(root,false);fx.localPosition=new Vector3(0,1,.45f);fx.localScale=Vector3.one*.55f;}
+            else Shape("Portal dais",PrimitiveType.Cylinder,root,new Vector3(0,.12f,0),new Vector3(7,.12f,5),darkStone);
             var glow=returning?new Color(.15f,.7f,1):new Color(1,.45f,.08f);
             var goldLight=PortalMat(returning?"Return portal light":"Portal gold",returning?new Color(.45f,.9f,1):new Color(1,.73f,.19f));var orange=PortalMat(returning?"Return portal edge":"Portal orange",returning?new Color(.08f,.35f,1):new Color(1,.3f,.045f));
-            var runes=new GameObject("Turning portal runes").transform;runes.SetParent(root,false);runes.localPosition=Vector3.up*4.2f;townPortalRunes.Add(runes);
+            var runes=new GameObject("Turning portal runes").transform;runes.SetParent(fx,false);runes.localPosition=Vector3.up*4.2f;townPortalRunes.Add(runes);
             for(int n=0;n<3;n++)
             {
-                var ring=Ring(root,new Vector3(0,4.2f,-n*.06f),2.35f+n*.17f,n==1?goldLight:orange,n==1?.13f:.08f);
+                var ring=Ring(fx,new Vector3(0,4.2f,-n*.06f),2.35f+n*.17f,n==1?goldLight:orange,n==1?.13f:.08f);
                 ring.transform.localRotation=Quaternion.Euler(90,0,0);ring.transform.localScale=new Vector3(1,1,1.65f);
             }
             for(int n=0;n<18;n++)
             {
                 float a=n*Mathf.PI*2/18;var rune=Block(runes,"Orbiting sigil",new Vector3(Mathf.Cos(a)*2.77f,Mathf.Sin(a)*2.77f*1.6f,0),new Vector3(.09f,.28f,.09f),goldLight);rune.transform.localRotation=Quaternion.Euler(0,0,a*Mathf.Rad2Deg);
-                var spark=Shape("Rift ember",PrimitiveType.Sphere,root,Vector3.zero,Vector3.one*(.06f+n%3*.025f),n%2==0?goldLight:orange);portalSparks.Add(spark.transform);
+                var spark=Shape("Rift ember",PrimitiveType.Sphere,fx,Vector3.zero,Vector3.one*(.06f+n%3*.025f),n%2==0?goldLight:orange);portalSparks.Add(spark.transform);
             }
             // Translucent elliptical membranes leave the destination visible through the opening.
             string membraneKey=returning?"Return portal membrane":"Portal membrane";
             var fadeShader=Resources.Load<Shader>("TownFade");if(!materials.TryGetValue(membraneKey,out var veil)){veil=new Material(fadeShader){name="HELLSCRIPT "+membraneKey};veil.SetColor("_BaseColor",returning?new Color(.1f,.6f,1,.22f):new Color(1,.37f,.04f,.22f));materials[membraneKey]=veil;}
-            var membrane=Shape("Portal membrane",PrimitiveType.Sphere,root,new Vector3(0,4.2f,.1f),new Vector3(4.5f,7.3f,.12f),veil);
-            var light=new GameObject("Portal glow").AddComponent<Light>();light.transform.SetParent(root,false);light.transform.localPosition=new Vector3(0,2,-1);light.type=LightType.Point;light.color=glow;light.intensity=3;light.range=returning?8:12;light.shadows=LightShadows.None;
+            var membrane=Shape("Portal membrane",PrimitiveType.Sphere,fx,new Vector3(0,4.2f,.1f),new Vector3(4.5f,7.3f,.12f),veil);
+            var light=new GameObject("Portal glow").AddComponent<Light>();light.transform.SetParent(fx,false);light.transform.localPosition=new Vector3(0,2,-1);light.type=LightType.Point;light.color=glow;light.intensity=3;light.range=returning?8:12;light.shadows=LightShadows.None;
             return root;
         }
     }

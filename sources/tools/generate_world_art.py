@@ -46,6 +46,8 @@ CODE = ROOT / "Assets/HELLSCRIPT/Runtime"
 BLENDER = "/opt/homebrew/bin/blender"
 REVISION = "hellscript-art3d-v1"
 PROVENANCE = "Procedurally authored in Blender from tools/art3d recipes; no external assets or generators"
+# Manifests written by importers of externally generated models (tools/import_hunyuan_town.py) carry their own revision and provenance.
+IMPORT_REVISIONS = ("hellscript-hunyuan-town-v1",)
 FAMILY = re.compile(r"^(Characters|Bosses|Props|Town|Fx|Fields/F\d+)$")
 ASSET_ID = re.compile(r"^[A-Z][A-Za-z0-9_]*$")
 # PLAN.md §4 hard limits: budget class -> (max triangles, max texture edge).
@@ -139,7 +141,7 @@ def manifest_path(folder, group):
     return Path(folder) / f"manifest_{group}.json"
 
 
-def merge_manifest(folder, group, family, results, replace=False):
+def merge_manifest(folder, group, family, results, replace=False, revision=REVISION, generator="tools/generate_world_art.py", provenance=PROVENANCE):
     """Merge {id: entry} into <folder>/manifest_<group>.json; replace drops (and deletes the files of) ids not rebuilt."""
     path = manifest_path(folder, group)
     old = json.loads(path.read_text()).get("models", {}) if path.exists() else {}
@@ -154,8 +156,8 @@ def merge_manifest(folder, group, family, results, replace=False):
                 if name not in kept:
                     for p in (Path(folder) / name, Path(folder) / (name + ".meta")):
                         p.unlink(missing_ok=True)
-    data = {"revision": REVISION, "group": group, "family": family, "generator": "tools/generate_world_art.py",
-            "productionApproved": False, "provenance": PROVENANCE, "models": dict(sorted(models.items()))}
+    data = {"revision": revision, "group": group, "family": family, "generator": generator,
+            "productionApproved": False, "provenance": provenance, "models": dict(sorted(models.items()))}
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     return data
@@ -209,7 +211,7 @@ def check(out, installed=False, code=CODE):
         owner[path] = path.name
         if data.get("productionApproved") is not False:
             problems.append(f"{family}/{path.name}: manifest must say productionApproved false")
-        if data.get("revision") != REVISION:
+        if data.get("revision") not in (REVISION, *IMPORT_REVISIONS):
             problems.append(f"{family}/{path.name}: revision is not {REVISION}")
         for aid, e in data.get("models", {}).items():
             where, cls = f"{family}/{aid}", budget_class(family, aid, e)

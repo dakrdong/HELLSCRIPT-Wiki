@@ -107,7 +107,8 @@ namespace Hellscript.Editor
             bool tiled=fx||rel.StartsWith("Fields/",StringComparison.Ordinal);
             t.wrapMode=tiled?TextureWrapMode.Repeat:TextureWrapMode.Clamp;
             t.textureCompression=TextureImporterCompression.CompressedHQ;
-            t.maxTextureSize=tiled||rel.StartsWith("Bosses/",StringComparison.Ordinal)?1024:512;
+            // Town buildings are authored at 1024; its NPC and prop files are 512, which a larger cap never enlarges.
+            t.maxTextureSize=tiled||rel.StartsWith("Bosses/",StringComparison.Ordinal)||rel.StartsWith("Town/",StringComparison.Ordinal)?1024:512;
         }
     }
 }

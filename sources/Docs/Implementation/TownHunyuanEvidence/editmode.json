@@ -1,0 +1,28 @@
+{
+  "unity": "6000.6.0f1",
+  "platform": "EditMode",
+  "filter": "all tests, one run after the last code change",
+  "date": "2026-10-06",
+  "sourceCommit": "c9460dd9",
+  "project": "APFS clone of the worktree: Assets identical except UniversalRenderPipelineGlobalSettings.asset (rewritten by Unity), plus Docs, Wiki, server, tools, Prototypes, Artifacts, AudioSources, .github, AGENTS.md, CLAUDE.md copies",
+  "total": 5211,
+  "passed": 5210,
+  "failed": 0,
+  "skipped": 1,
+  "inconclusive": 0,
+  "durationSeconds": 1885.54,
+  "relatedFixtures": {
+    "LocalizationTests": "33/33",
+    "StoredLocalizationTests": "19/19",
+    "TownModelTests": "6/6",
+    "TownWalkTests": "20/20",
+    "WorldArtTests": "39/39"
+  },
+  "notPassed": [
+    {
+      "test": "Hellscript.Tests.ClassSkillPassiveMeasurement.MeasureEveryDesignBuild",
+      "result": "Skipped",
+      "message": "Measurement tool: writes passive contribution data to HELLSCRIPT_MEASURE_OUT"
+    }
+  ]
+}

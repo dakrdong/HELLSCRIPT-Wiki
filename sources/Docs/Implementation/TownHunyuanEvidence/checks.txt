@@ -1,0 +1,17 @@
+Town Hunyuan models: tool checks, 2026-10-06 (macOS, system Python 3, worktree on origin/main d1d762fb + this change)
+
+$ python3 tools/generate_world_art.py --check
+checked Assets/HELLSCRIPT/Resources/World: 139 assets, 0 problems
+
+$ python3 tools/test_world_art.py
+Ran 26 tests - OK
+
+Shipped-size estimate (static; not measured in a Unity build)
+  meshes: 52 B per vertex + 2 B per index (the importer's stream layout), 20 models, 142,986 vertices, 106,000 triangles -> 7.7 MiB
+  textures: ASTC 6x6 + mipmaps, 40 PNGs (A and N per model) -> 9.5 MiB (NPC 3.6, buildings + arch 4.7, props 1.2)
+  total before APK compression: 17.2 MiB
+  WebGL: ResourceTextureBudget overrides World/ textures to ETC2 RGBA8 (8 bits per pixel, + mips): 8 textures at 1024 x 1.333 MiB + 32 at 512 x 0.333 MiB = 21.3 MiB; with meshes about 29.0 MiB
+
+Repository footprint of Resources/World/Town (excluding .meta): FBX 10.89 MiB (20 files) + PNG 21.03 MiB (40 files) = about 32 MiB
+Instance triangle count of the whole town scene (duplicates included, before culling): 12 NPCs x 6,000 + 3 buildings x 6,000 + arch 6,000
+  + 17 lanterns x 2,500 + 4 dummies x 2,500 + well 2,500 + altar 2,500 = 153,500

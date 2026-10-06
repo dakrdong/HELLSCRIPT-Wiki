@@ -1,0 +1,21 @@
+Town Hunyuan models: runtime smoke, 2026-10-06
+Player: macOS development build (ProjectBuilder.BuildMac) of a project clone holding this change plus temporary fixture patches to the old Plaza and TownHud smokes (not in the repository; they do not touch the town models smoke), Unity 6000.6.0f1. Input is synthesized (button handlers, town movement requests); no physical device.
+Arguments: -hellscriptTownModelsSmoke -hellscriptOfflineQa -hellscriptSavePath <disposable directory> -hellscriptScreenshots <directory> -screen-fullscreen 0 -screen-width W -screen-height H
+
+Run 1  W=1600 H=900   player exit code 0 after 23 s   HELLSCRIPT_TOWN_MODELS_SMOKE_OK
+Run 2  W=900  H=1600  player exit code 0 after 23 s   HELLSCRIPT_TOWN_MODELS_SMOKE_OK
+
+Result file written by the smoke (both runs):
+PASS: guest entry to the town; every attendant, resident, the three station buildings and the rift gateway are World/Town models; ten services reached; well, training dummies and road lanterns captured; the merchant stall still fades behind the hero.
+
+What the smoke requires before it writes that line
+- the guest reaches the town (page "plaza") after the tutorial and attendance fixtures
+- each of the ten stations' attendant, the three residents, Building Blacksmith/Warehouse/Merchant and "Golden Rift Portal" hold a mesh named after its World/Town model
+- every station is reached (Town.Nearby == the station)
+- no building is faded in front of the weapon stall's doorway, and a building does fade when the hero stands behind the stall
+
+Fixtures used by the smoke only: guide.legacyExempt/mapComplete/hintsHidden = true, weekly and monthly attendance popups hidden.
+
+Not covered: physical iOS/Android touch, frame time, draw calls, Android/iOS build size.
+
+The existing Plaza and TownHud smokes were also tried in a temporary clone with the same fixtures. Plaza stopped at "Interaction right inset drifted." and TownHud at "Named NPC opened the wrong service: Training"; both are UI and training-ground checks this change does not touch (see Town_Hunyuan_Models.md).

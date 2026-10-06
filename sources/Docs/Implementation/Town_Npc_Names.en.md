@@ -1,6 +1,6 @@
 # Town NPC names and service labels
 
-Updated on: 2026-09-27
+Updated on: 2026-10-06
 작성일: 2026-09-22
 
 [한국어](Town_Npc_Names.md)
@@ -63,3 +63,7 @@ The tested player included pre-existing changes in the active checkout. Input wa
 ## Portrait dialogue expansion · 2026-09-27
 
 The existing eight names remain unchanged. Previously unnamed gambling, training, jewelry and rune attendants are assigned Jacques Chei, Turk Garbi, Guzel Pan and Mishu Karu from the original candidate list. All twelve NPCs receive distinct upper-body portraits and greetings. Residents gain conversation only, without services. See [NPC portraits and dialogue](Npc_Dialogue_Portraits.en.md) for identities, behavior and validation; the September 22 results above describe the earlier implementation.
+
+## 3D model replacement · 2026-10-06
+
+All twelve NPCs, the blacksmith, warehouse and weapon-stall buildings, the rift arch, the well, lanterns, training dummies and rune altar are now Hunyuan-generated 3D models. Names, positions, services and dialogue are unchanged; the "simple village meshes" wording and the September 22 captures above describe the implementation before this replacement. See [Town 3D models](Town_Hunyuan_Models.en.md) for the setup, sizes and validation.
