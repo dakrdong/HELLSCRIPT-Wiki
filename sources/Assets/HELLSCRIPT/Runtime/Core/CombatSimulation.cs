@@ -318,6 +318,7 @@ namespace Hellscript
         }
         void MoveHero(float dt)
         {
+            if(PitRooted){PitWalkToCenter(dt);return;}
             if(EdictDodgeHolding)
             {
                 if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
@@ -459,6 +460,8 @@ namespace Hellscript
         {
             if(damage>0&&!e.dead)State.lastOutgoingDamageTime=State.time;
             if(e.dead)return;float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
+            // Rooted at stage two the charger bends but never breaks, so the defeat does not depend on a class's damage.
+            if(PitUnbeaten)e.health=Mathf.Max(e.health,e.maxHealth*.5f);
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;
             if(e.health>0)return;e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;
         }

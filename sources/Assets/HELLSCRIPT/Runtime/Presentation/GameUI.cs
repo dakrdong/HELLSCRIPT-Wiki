@@ -251,11 +251,11 @@ namespace Hellscript
             FooterButton(0,2,"전투 기록",ShowRecords);FooterButton(1,2,"게임 안내",ShowHelp);
             if(!string.IsNullOrEmpty(game.Notice))ShowToast(game.Notice);
         }
-        string BattleHeading(RunState run)=>run.tutorial?Loc.T("칙령의 목소리"):run.training>=0?(game.ComparisonRun?"TRAINING / "+(game.Comparison.IsB?"B":"A"):"TRAINING"):"RIFT / "+run.stage.ToString("00");
+        string BattleHeading(RunState run)=>run.tutorial?Loc.T(run.tutorialFlowVersion==ProloguePhase.PitFlow?"최종 시험":"칙령의 목소리"):run.training>=0?(game.ComparisonRun?"TRAINING / "+(game.Comparison.IsB?"B":"A"):"TRAINING"):"RIFT / "+run.stage.ToString("00");
         public void ShowBattle()
         {
             if(game.Combat==null){ShowTown();return;}
-            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T("자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.TrainingGroundRun?Loc.F("균열 {0}단계 · 모든 적을 처치할 때까지 · 보상 없음",run.stage):game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):Loc.F("{0} · 처치 게이지를 채워 보스를 소환하세요",GameCatalog.FieldNames[run.layout.Field]),battle:true);
+            var run=game.Combat.State;pageRepaint=()=>ShowBattle();Base("battle",BattleHeading(run),run.tutorial?Loc.T(run.tutorialFlowVersion==ProloguePhase.PitFlow?"수습전사의 마지막 관문":"자동 전투 · 실제 장비 획득과 장착"):run.training>=0?(game.TrainingGroundRun?Loc.F("균열 {0}단계 · 모든 적을 처치할 때까지 · 보상 없음",run.stage):game.Combat.OwnedTraining?Loc.F("현재 캐릭터 Lv.{0} · 60초 훈련 · 보상 없음", game.Combat.EffectiveLevel):"개발용 Lv.30 시험 · 보상 없음"):Loc.F("{0} · 처치 게이지를 채워 보스를 소환하세요",GameCatalog.FieldNames[run.layout.Field]),battle:true);
             BuildBattleHud(run);
         }
         Image Bar(Transform parent,Vector2 pos,Vector2 size,Color color)

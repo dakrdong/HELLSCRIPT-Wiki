@@ -69,7 +69,7 @@ namespace Hellscript
             if(id.StartsWith("potion.resource",StringComparison.Ordinal))return Has(a,"seen-resource");
             return true;
         }
-        public static bool Direct(AccountSave a,HeroSave hero,string id)=>Visible(a,hero,id)&&(Legacy(a)||Has(a,Details)||id=="survival.potionHpPercent"||id=="survival.potion"||id=="survival.defenseSkill"||id=="survival.escapeSkill");
+        public static bool Direct(AccountSave a,HeroSave hero,string id)=>Visible(a,hero,id)&&(Legacy(a)||Has(a,Details)||id=="survival.potionHpPercent"||id=="position.mode"||id=="survival.potion"||id=="survival.defenseSkill"||id=="survival.escapeSkill");
         public static string Condition(string id)
         {
             var r=Rules.rules.FirstOrDefault(x=>x.ids.Contains(id));

@@ -137,6 +137,8 @@ namespace Hellscript
             if(d.kind==EdictOptionKind.Order){OrderDialog(d,value,Set);return;}
             if(d.kind==EdictOptionKind.Number){NumericDialog(d,value,Set);return;}
             var choices=d.kind==EdictOptionKind.Toggle?new[]{"ON","OFF"}:d.kind==EdictOptionKind.SkillReference?new[]{""}.Concat(Session.Draft.edict.slots.Where(id=>id!=""&&(d.choices.Length==0||d.choices.Contains(id)))).ToArray():d.choices;
+            // Standing still is what the lesson is about leaving behind.
+            if(PitLesson&&d.id=="position.mode")choices=choices.Where(c=>c!="STAND").ToArray();
             ChooseValue(title,choices,value,v=>HuntEdictSummary.Display(d,v,SkillName),Set);
         }
         void ShowOptionHelp(string title,string help)=>Dialog(title,p=>

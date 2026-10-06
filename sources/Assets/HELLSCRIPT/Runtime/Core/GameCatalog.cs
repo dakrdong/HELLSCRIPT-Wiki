@@ -308,6 +308,7 @@ namespace Hellscript
         public bool tutorial,tutorialReplay;
         public int tutorialPhase;
         public int tutorialFlowVersion,tutorialLessonStep;
+        public float pitStageTime;
         public string guideSetup="";
         public CombatJournalData journal;
         public RiftCombatRecord combatRecord;

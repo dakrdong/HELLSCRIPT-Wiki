@@ -16,6 +16,8 @@ namespace Hellscript
     public sealed class RiftVisibility
     {
         public const float CellSize = .35f, Radius = 12f;
+        // The walled pit of the tutorial is lit end to end, so both fighters are in view from the first frame.
+        float Sight => Run.tutorial ? 40f : Radius;
         public readonly RiftNavigation Navigation;
         public readonly RunState Run;
         public readonly Vector2 Origin;
@@ -100,7 +102,7 @@ namespace Hellscript
         public bool Explored(Vector2 p)
         { int x = X(p.x), y = Y(p.y); return Inside(x, y) && Pixels[y * Width + x].r != 0; }
         public bool Visible(Vector2 p, float extraRadius = 0)
-            => (p - Run.position).sqrMagnitude <= (Radius + extraRadius) * (Radius + extraRadius) && Navigation.LineClear(Run.position, p);
+            => (p - Run.position).sqrMagnitude <= (Sight + extraRadius) * (Sight + extraRadius) && Navigation.LineClear(Run.position, p);
         void CollectOccluders()
         {
             nearbyOccluders.Clear();
@@ -109,9 +111,9 @@ namespace Hellscript
                 if (!obstacle.blocksSight) return;
                 var delta = Run.position - obstacle.position;
                 if (obstacle.radius > 0)
-                { if (delta.sqrMagnitude <= (Radius + obstacle.radius) * (Radius + obstacle.radius)) nearbyOccluders.Add(obstacle); }
+                { if (delta.sqrMagnitude <= (Sight + obstacle.radius) * (Sight + obstacle.radius)) nearbyOccluders.Add(obstacle); }
                 else
-                { var closest = new Vector2(Mathf.Max(0, Mathf.Abs(delta.x) - obstacle.halfSize.x), Mathf.Max(0, Mathf.Abs(delta.y) - obstacle.halfSize.y)); if (closest.sqrMagnitude <= Radius * Radius) nearbyOccluders.Add(obstacle); }
+                { var closest = new Vector2(Mathf.Max(0, Mathf.Abs(delta.x) - obstacle.halfSize.x), Mathf.Max(0, Mathf.Abs(delta.y) - obstacle.halfSize.y)); if (closest.sqrMagnitude <= Sight * Sight) nearbyOccluders.Add(obstacle); }
             }
             foreach (var obstacle in Run.layout.obstacles) Add(obstacle);
             if (!Run.layout.gateOpen) foreach (var gate in Run.layout.gates) Add(gate.barrier);
@@ -119,7 +121,7 @@ namespace Hellscript
         bool SampleVisible(Vector2 p)
         {
             var a = Run.position; var delta = p - a;
-            if (delta.sqrMagnitude > Radius * Radius || !Navigation.Surface.SegmentOnFloor(a, p)) return false;
+            if (delta.sqrMagnitude > Sight * Sight || !Navigation.Surface.SegmentOnFloor(a, p)) return false;
             // Same exact floor clipping and obstacle intersections as navigation. Only the broad
             // phase is cached per update, so distant props cannot multiply thousands of LOS tests.
             foreach (var obstacle in nearbyOccluders)
@@ -165,8 +167,8 @@ namespace Hellscript
             foreach (int i in visible) Pixels[i].g = 0; visible.Clear();
             CollectOccluders();
             lastPosition = Run.position; lastGateOpen = Run.layout.gateOpen; lastObstacleCount = Run.layout.obstacles.Count; initialized = true;
-            int x0 = Mathf.Max(0, X(Run.position.x - Radius)), x1 = Mathf.Min(Width - 1, X(Run.position.x + Radius));
-            int y0 = Mathf.Max(0, Y(Run.position.y - Radius)), y1 = Mathf.Min(Height - 1, Y(Run.position.y + Radius));
+            int x0 = Mathf.Max(0, X(Run.position.x - Sight)), x1 = Mathf.Min(Width - 1, X(Run.position.x + Sight));
+            int y0 = Mathf.Max(0, Y(Run.position.y - Sight)), y1 = Mathf.Min(Height - 1, Y(Run.position.y + Sight));
             for (int y = y0; y <= y1; y++) for (int x = x0; x <= x1; x++)
                 if (floor[y * Width + x] && SampleVisible(Position(x, y))) Reveal(x, y, true);
             Revision++; return true;
