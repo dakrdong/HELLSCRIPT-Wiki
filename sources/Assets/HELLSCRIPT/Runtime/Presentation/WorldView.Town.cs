@@ -21,6 +21,7 @@ namespace Hellscript
             ResumeCamera();ClearDungeon();world=new GameObject("Ashwood Settlement");lighting.ApplyTown();
             var layout=new GameObject("Village ground").transform;layout.SetParent(world.transform,false);layout.rotation=TownRotation;
             BuildForestGround(layout);
+            BuildTownEnvironment(layout);
             foreach(var s in TownLayout.Stations)
             {
                 if(s.id==TownStation.AspectStone){BuildAspectStone(layout,s);continue;}
@@ -176,7 +177,8 @@ namespace Hellscript
             BuildTownGroundMesh(layout);
             var random=new System.Random(74219);float R(float a,float b)=>Mathf.Lerp(a,b,(float)random.NextDouble());
             var pine=ConeMesh(1,1,13);
-            for(int n=0;n<115;n++)
+            // The model forest (BuildTownTrees) replaces these cones once its art is installed.
+            for(int n=0;n<(WorldArt.Has(PineArt)?0:115);n++)
             {
                 bool horizontal=n%2==0;float x=horizontal?R(-73,73):(n%4==1?-1:1)*R(59,76);
                 float z=horizontal?(n%4==0?-1:1)*R(40,57):R(-51,51);float h=R(8,14),r=R(2,3.5f);
@@ -187,19 +189,7 @@ namespace Hellscript
                     branch.transform.localScale=new Vector3(r*(1-layer*.22f),h*.55f,r*(1-layer*.22f));branch.transform.localRotation=Quaternion.Euler(R(-4,4),R(0,360),R(-4,4));
                 }
             }
-            for(int n=0;n<110;n++)
-            {
-                float x=R(-55,55),z=R(-35,35);if(Mathf.Abs(z)<5||Mathf.Abs(x)<4)continue;
-                if(TownLayout.Stations.Any(s=>Vector2.Distance(s.position,new Vector2(x,z))<5||s.building.Contains(new Vector2(x,z)))||TownLayout.Residents.Any(r=>Vector2.Distance(r.position,new Vector2(x,z))<2))continue;
-                Shape("Mossy stone",PrimitiveType.Sphere,layout,new Vector3(x,-.05f,z),new Vector3(R(.4f,1.3f),R(.12f,.6f),R(.4f,1.2f)),n%3==0?stone:moss);
-            }
-            for(int n=0;n<180;n++)
-            {
-                float x=R(-54,54),z=R(-34,34);var point=new Vector2(x,z);
-                if(Mathf.Abs(z)<5||Mathf.Abs(x)<5||TownLayout.Stations.Any(s=>Vector2.Distance(s.position,point)<5||s.building.Contains(point))||TownLayout.Residents.Any(r=>Vector2.Distance(r.position,point)<2))continue;
-                var bush=MeshPart(layout,"Low forest scrub",pine,new Vector3(x,0,z),n%2==0?moss:needlesLight);
-                bush.transform.localScale=new Vector3(R(.6f,1.5f),R(.4f,1.2f),R(.6f,1.5f));bush.transform.localRotation=Quaternion.Euler(0,R(0,360),0);
-            }
+            // Rocks and scrub: placed by BuildTownEnvironment (WorldView.TownEnvironment.cs).
             // A small communal fire and split logs make the center a lived-in gathering place.
             for(int n=0;n<9;n++)
             {
@@ -210,7 +200,7 @@ namespace Hellscript
                 var log=Shape("Split firewood",PrimitiveType.Cylinder,layout,new Vector3(-9,.3f,-7),new Vector3(.3f,1.1f,.3f),wood);log.transform.localRotation=Quaternion.Euler(90,n*45,0);
                 var flame=MeshPart(layout,"Hearth flame",pine,new Vector3(-9+R(-.4f,.4f),.35f,-7+R(-.4f,.4f)),ember);flame.transform.localScale=new Vector3(.3f,R(.5f,1.1f),.3f);
             }
-            for(int n=0;n<44;n++)
+            for(int n=0;n<(WorldArt.Has(WallArt)?0:44);n++)
             {
                 float x=-54+n*2.5f;
                 for(int side=-1;side<=1;side+=2)
@@ -349,7 +339,8 @@ namespace Hellscript
         void BuildTrainingYard(Transform p,TownStationDefinition s)
         {
             var wood=TownMat("Timber",.23f,.16f,.1f);var straw=TownMat("Straw",.58f,.47f,.26f);
-            Block(p,"Training sand",new Vector3(39,-.025f,22),new Vector3(20,.1f,20),TownMat("Sand",.4f,.36f,.26f));
+            // The yard floor is trampled earth in the ground mask now; the old sand slab is kept just under the ground.
+            Block(p,"Training sand",new Vector3(39,-.25f,22),new Vector3(20,.1f,20),TownMat("Sand",.4f,.36f,.26f));
             for(int n=0;n<4;n++)
             {
                 float x=32+n*4.4f;if(SpawnTownModel(TownArt+"Prop_TrainingDummy",p,new Vector3(x,0,23))!=null)continue;

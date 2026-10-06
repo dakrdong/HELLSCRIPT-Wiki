@@ -35,19 +35,19 @@ namespace Hellscript
         public static Vector2 ToWorld(Vector2 p)=>Right*p.x+Back*p.y;
         public static Vector2 FromWorld(Vector2 p)=>new Vector2(Vector2.Dot(p,Right),Vector2.Dot(p,Back));
         static Rect House(float x,float y,float w=12,float h=9)=>new Rect(x-w/2,y-h/2,w,h);
-        // The warehouse, merchant stall and blacksmith footprints follow their World/Town models (manifest footprint, front edge unchanged for the
-        // warehouse and blacksmith); the other houses are still primitives sized by their rectangles.
+        // Every building footprint follows its World/Town model (manifest footprint). The warehouse and blacksmith keep their front edge; the four
+        // south-row shops keep theirs at y -20.5, 3.5 m behind the attendant. A missing model falls back to a primitive house of the same rectangle.
         public static readonly TownStationDefinition[] Stations=
         {
             new TownStationDefinition(TownStation.AspectStone,"위상 각인석","위상 수집 · 레벨업 · 각인","각인석 열기",new Vector2(-34,1),House(-34,4,5,2)),
             new TownStationDefinition(TownStation.Warehouse,"창고","계정 창고 · 장비 보관","창고 열기",new Vector2(-37,13),House(-37,20.8f,11.2f,9.6f)),
             new TownStationDefinition(TownStation.Merchant,"무기 상인","장비 구매 · 판매","상점 열기",new Vector2(-14,16),House(-14,20.05f,6.2f,4.5f)),
-            new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-6,-24),House(-6,-16,11,9)),
+            new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-6,-24),House(-6,-17.4f,8.3f,6.2f)),
             new TownStationDefinition(TownStation.Blacksmith,"대장간","장비 재련 · 강화 · 제작","대장간 이용",new Vector2(14,17),House(14,24.7f,8.2f,8.4f)),
             new TownStationDefinition(TownStation.Training,"훈련 교관","자유 훈련 · 설정 비교","훈련하기",new Vector2(37,9)),
-            new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 변환 · 물약 제조 · 소켓 관리","보석상 열기",new Vector2(-32,-24),House(-32,-16,11,9)),
-            new TownStationDefinition(TownStation.RuneMerchant,"룬 상인","룬 블록 구매 · 룬 배치","룬 상점 열기",new Vector2(21,-24),House(21,-16,12,9)),
-            new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(43,-24),House(43,-16,11,9)),
+            new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 변환 · 물약 제조 · 소켓 관리","보석상 열기",new Vector2(-32,-24),House(-32,-16.2f,5.3f,8.6f)),
+            new TownStationDefinition(TownStation.RuneMerchant,"룬 상인","룬 블록 구매 · 룬 배치","룬 상점 열기",new Vector2(21,-24),House(21,-16.05f,6.6f,8.9f)),
+            new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(43,-24),House(43,-17.15f,9.3f,6.7f)),
             new TownStationDefinition(TownStation.RiftKeeper,"균열","단계 선택 · 균열 입장","균열 열기",new Vector2(8,0)),
         };
         // Residents can converse, but never own a service ID or dispatch a shop.

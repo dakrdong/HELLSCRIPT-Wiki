@@ -14,7 +14,13 @@ namespace Hellscript.Editor
     public sealed class WorldArtImporter:AssetPostprocessor
     {
         public const string Root="Assets/HELLSCRIPT/Resources/World/",Fixtures="Assets/HELLSCRIPT/Tests/Editor/Fixtures/WorldArt/";
-        public override uint GetVersion()=>3;
+        public override uint GetVersion()=>4;
+        // Tiling field sets, boss atlases and the town models keep 1024 (World/Town buildings are authored at 1024; its NPC and prop files are 512,
+        // which a larger cap never enlarges); the town ground layers are capped at 512 (tile = 2.6-4 m, so 512 texels still give about
+        // 1 texel per pixel or better on a 1080p screen at the closest zoom); everything else 512.
+        public static int MaxTextureSize(string rel)=>rel.StartsWith("Fields/Town/",StringComparison.Ordinal)?512:
+            rel.StartsWith("Fx/",StringComparison.Ordinal)||rel.StartsWith("Fields/",StringComparison.Ordinal)||rel.StartsWith("Bosses/",StringComparison.Ordinal)||
+            rel.StartsWith("Town/",StringComparison.Ordinal)?1024:512;
         static string Relative(string path)=>path.StartsWith(Root,StringComparison.Ordinal)?path.Substring(Root.Length):path.StartsWith(Fixtures,StringComparison.Ordinal)?path.Substring(Fixtures.Length):null;
         static bool Keep(Transform t)=>t.name.StartsWith("Pivot_",StringComparison.Ordinal)||t.name.StartsWith("Socket_",StringComparison.Ordinal);
         void OnPreprocessModel()
@@ -107,8 +113,7 @@ namespace Hellscript.Editor
             bool tiled=fx||rel.StartsWith("Fields/",StringComparison.Ordinal);
             t.wrapMode=tiled?TextureWrapMode.Repeat:TextureWrapMode.Clamp;
             t.textureCompression=TextureImporterCompression.CompressedHQ;
-            // Town buildings are authored at 1024; its NPC and prop files are 512, which a larger cap never enlarges.
-            t.maxTextureSize=tiled||rel.StartsWith("Bosses/",StringComparison.Ordinal)||rel.StartsWith("Town/",StringComparison.Ordinal)?1024:512;
+            t.maxTextureSize=MaxTextureSize(rel);
         }
     }
 }
