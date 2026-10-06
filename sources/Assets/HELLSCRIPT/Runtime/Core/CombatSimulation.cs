@@ -13,7 +13,11 @@ namespace Hellscript
         public bool OwnedTraining=>State.training>=0&&State.trainingUsesOwnedHero;
         bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero&&!IsTutorial&&!IsSkillPreview;
         public int EffectiveLevel=>FullSkillTraining?ClassSkills.LevelCap(Hero):Hero.level;
-        public float TimeLimit=>IsSkillPreview?float.PositiveInfinity:State.training<0||IsTrainingGround?LiveOpsConfig.For(State).timeLimitSeconds:OwnedTraining?60:300;
+        public float TimeLimit=>
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            RuntimePresentationProfile.CombatDuration>0?RuntimePresentationProfile.CombatDuration:
+#endif
+            IsSkillPreview?float.PositiveInfinity:State.training<0||IsTrainingGround?LiveOpsConfig.For(State).timeLimitSeconds:OwnedTraining?60:300;
         LiveOpsRiftSettings Tuning=>LiveOpsConfig.For(State);
         readonly AccountSave account;
         readonly GameCatalog catalog;
@@ -46,7 +50,13 @@ namespace Hellscript
             bool isTutorial=tutorial||restore?.tutorial==true;
             bool copyAccount=!isTutorial&&(owned||(restore?.training??training)>=0&&account.Hero.potions?.version>0);
             this.account=copyAccount?JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(account)):account;this.catalog=catalog;Hero=this.account.Hero;
-            State=restore??new RunState{id=Guid.NewGuid().ToString("N"),heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
+            State=restore??new RunState{
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+                id=RuntimePresentationProfile.NewRunIdentity(),
+#else
+                id=Guid.NewGuid().ToString("N"),
+#endif
+                heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null)RiftResult.Begin(this.account,State);
             if(restore==null&&training<0)State.dps=new CombatDpsTimeline{version=CombatDpsTimeline.Version};
@@ -106,6 +116,16 @@ namespace Hellscript
             {
                 foreach(var spawn in State.layout.spawns)
                 {SpawnEnemy(spawn.room,spawn.kind,spawn.position,spawn.elite);var e=State.enemies[State.enemies.Count-1];e.group=spawn.group;e.eliteTraits=new List<int>(spawn.traits);}
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+                // Approved measurement stress: preserve validated topology, live-ops and source spawns.
+                for(int copy=1;copy<RuntimePresentationProfile.Density;copy++)
+                    foreach(var spawn in State.layout.spawns)
+                    {
+                        if(spawn.elite>=0||State.layout.carriers.Any(c=>c.spawn==spawn.index))continue;
+                        SpawnEnemy(spawn.room,spawn.kind,spawn.position,spawn.elite);
+                        var e=State.enemies[State.enemies.Count-1];e.group=spawn.group;e.eliteTraits=new List<int>(spawn.traits);
+                    }
+#endif
                 foreach(var spawn in State.layout.spawns)if(spawn.elitePartner>=0)State.enemies[spawn.index].elitePartner=State.enemies[spawn.elitePartner].id;
                 foreach(var carrier in State.layout.carriers)carrier.enemyId=State.enemies[carrier.spawn].id;
                 SpawnGoldenGoblin();return;
@@ -208,6 +228,7 @@ namespace Hellscript
             State.decisionTime-=dt;
             if(State.decisionTime<=.00001f)
             {
+                using var sample=PresentationMetrics.Decision.Auto();PresentationMetrics.DecisionCalls++;
                 Sense();
                 if(!TryClassPolicySurvival()&&!TryAutomaticClassSkill()&&(!(ChestBusy||ShrineBusy||ObjectiveBusy)||Target!=null||InDanger))DecideRules();
                 State.decisionTime=.2f;

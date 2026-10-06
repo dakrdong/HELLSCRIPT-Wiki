@@ -37,6 +37,14 @@ namespace Hellscript
         float EnemyAttackValue(EnemyState enemy)=>enemy.attack*(1+.1f*enemy.brain.rageStacks+(AuraSource(enemy)!=null?.2f:0));
         void RefreshEnemyAuras()
         {
+            bool hasSource=false;
+            foreach(var e in State.enemies)if(!e.dead&&!e.boss&&e.kind==10){hasSource=true;break;}
+            if(!hasSource)
+            {
+                foreach(var e in State.enemies)
+                {if(e.dead||e.brain.auraSource==-1)continue;e.brain.auraSource=-1;EnemyEvent(e,"AURA_REMOVED","N11",value:-1);}
+                return;
+            }
             foreach(var e in State.enemies.Where(e=>!e.dead))
             {int source=AuraSource(e)?.id??-1;if(e.brain.auraSource==source)continue;e.brain.auraSource=source;EnemyEvent(e,source<0?"AURA_REMOVED":"AURA_APPLIED","N11",value:source);}
         }
@@ -160,6 +168,7 @@ namespace Hellscript
         }
         void TickEnemies(float dt)
         {
+            using var sample=PresentationMetrics.Enemies.Auto();PresentationMetrics.EnemyTicks++;
             RefreshEnemyAuras();
             foreach(var e in State.enemies.ToArray())
             {

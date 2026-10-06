@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,39 @@ namespace Hellscript
         Material ownedMaterial;
         public void Configure(RunState state,RiftFogView view)
         {run=state;fog=view;if(fog!=null){ownedMaterial=RiftAutomap.CreateMapMaterial(fog);material=ownedMaterial;}SetVerticesDirty();}
+        readonly List<(int type,int state,Vector2 position,Vector2 direction)> markers=new List<(int,int,Vector2,Vector2)>();
+        RiftLayout markerLayout;
+        int markerCursor;
+        bool markersChanged;
+        void RecordMarker(int type,int state,Vector2 position,Vector2 direction=default)
+        {
+            var marker=(type,state,position,direction);
+            if(markerCursor==markers.Count){markers.Add(marker);markersChanged=true;}
+            else if(!markers[markerCursor].Equals(marker)){markers[markerCursor]=marker;markersChanged=true;}
+            markerCursor++;
+        }
+        // The HUD cadence also observes changes while the hero and fog remain stationary.
+        public bool RefreshMarkers()
+        {
+            if(run?.layout==null)return false;
+            markerCursor=0;markersChanged=!ReferenceEquals(markerLayout,run.layout);markerLayout=run.layout;
+            RecordMarker(0,expanded?1:0,Vector2.zero);
+            foreach(var c in run.layout.chests)if(c.discovered)
+                RecordMarker(1,((int)c.phase<<2)|(c.abandoned?1:0)|(c.definitionId=="CH03"?2:0),c.position);
+            foreach(var e in run.exploration.enemies)if(e.elite>=0&&!e.investigated&&run.time-e.seenAt<=.3f&&(fog==null||fog.Visibility.Visible(e.position)))
+                RecordMarker(2,0,e.position);
+            foreach(var s in run.layout.shrines)if(s.discovered)RecordMarker(3,((int)s.phase<<1)|(s.definitionId=="SH01"?1:0),s.position);
+            foreach(var s in run.layout.seals)if(s.discovered&&run.visited.Contains(s.room))RecordMarker(4,(int)s.phase,s.position);
+            foreach(var c in run.layout.carriers)if(c.discovered)RecordMarker(5,c.completed?1:0,c.position);
+            foreach(var o in run.layout.offerings)if(o.discovered)RecordMarker(6,o.collected?2:o.available?1:0,o.position);
+            var altar=run.layout.altar;if(altar!=null&&altar.discovered)RecordMarker(7,(int)altar.phase,altar.position);
+            foreach(var g in run.layout.gates)if(g.discovered)RecordMarker(8,run.layout.gateOpen?1:0,g.barrier.position,g.outward);
+            if(run.phase==RunPhase.Boss)
+                foreach(var e in run.enemies)if(e.id==run.bossId)
+                {if(fog==null||fog.Visibility.Visible(e.position))RecordMarker(9,0,e.position);break;}
+            if(markerCursor<markers.Count){markers.RemoveRange(markerCursor,markers.Count-markerCursor);markersChanged=true;}
+            if(markersChanged)SetVerticesDirty();return markersChanged;
+        }
         Vector2 lastPosition;
         int lastRevision=-1;
         void LateUpdate()
@@ -36,6 +70,7 @@ namespace Hellscript
         }
         protected override void OnPopulateMesh(VertexHelper v)
         {
+            using var sample=PresentationMetrics.Minimap.Auto();PresentationMetrics.MinimapCalls++;
             v.Clear();if(run?.layout==null)return;var r=rectTransform.rect;center=expanded?Vector2.zero:run.position;
             scale=Mathf.Min(r.width,r.height)/(expanded?155:55);
             if(!ReferenceEquals(surfaceLayout,run.layout)){surfaceLayout=run.layout;surface=new RiftSurface(run.layout);}

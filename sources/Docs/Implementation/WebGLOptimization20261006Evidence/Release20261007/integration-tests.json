@@ -1,0 +1,236 @@
+{
+  "createdUtc": "2026-10-06T19:01:09.278327+00:00",
+  "mode": "EditMode",
+  "sourceRuntimeTree": "cf823575e480d1d410daabb65860093f32457085",
+  "laterMetadataOnlyCommit": "e5f8d4244c20c7346fb0a5fe33437c9a8fec0545",
+  "summary": {
+    "id": "2",
+    "testcasecount": "52",
+    "result": "Passed",
+    "total": "52",
+    "passed": "52",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-06 18:59:32Z",
+    "end-time": "2026-10-06 19:00:31Z",
+    "duration": "58.947699"
+  },
+  "xmlSha256": "5a51fa48174b990f1fca7cf160037de422616f134748cad027ed07300ec568d4",
+  "testCases": [
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.BossLookupKeepsEnumOrderAndNamesWithoutPerCallEnumAllocation",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyAuraSourcesPreserveRemovalOrderAndDeadEnemies",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyEffectsAndStableAurasDoNotAllocateAfterWarmup",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyEffectsMatchTheUnchangedNonemptyPath(\"TickTraps\",0.05f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyEffectsMatchTheUnchangedNonemptyPath(\"TickTraps\",0.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyEffectsMatchTheUnchangedNonemptyPath(\"TickBlizzards\",0.05f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyEffectsMatchTheUnchangedNonemptyPath(\"TickBlizzards\",0.0f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.EmptyEffectsMatchTheUnchangedNonemptyPath(\"TickBlizzards\",-0.05f)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.MinimapTracksStationaryMarkersExpiryAndBossMovementWithoutStableAllocations",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.OptimizationStage1Tests.PreviewKeyIgnoresHiddenEventsButIncludesEvictedVisibleRows",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ACommittedActionCanChangeDisplayLanguageWithoutChangingTheRun(\"\uc5f0\uc1c4 \ubc88\uac1c \u00b7 \uc900\ube44\",\"Chain Lightning \u00b7 preparing\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ACommittedActionCanChangeDisplayLanguageWithoutChangingTheRun(\"\uc11c\ub9ac \ud3ed\ubc1c \u00b7 \uc900\ube44 0.35\ucd08\",\"Frost Nova \u00b7 preparing 0.35s\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ACompleteSkillMessageWinsOverItsTrailingTargetIdentity(-1)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ACompleteSkillMessageWinsOverItsTrailingTargetIdentity(0)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ACompleteSkillMessageWinsOverItsTrailingTargetIdentity(53)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.AllLogsFromANaturalCompletedRiftTranslateAfterReload",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ArchivedConditionValuesRemainReadableInEnglish(\"\uc778\uc9c0\ud55c \uc801 \uc5c6\uc74c  0\ucd08 \uc774\uc0c1 \u2192 \ud604\uc7ac 0.6 / \ucda9\uc871\",\"No enemy detected for at least 0s \u2192 Current 0.6 / met\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ArchivedConditionValuesRemainReadableInEnglish(\"\uc778\uc9c0\ud55c \uc801 \uc5c6\uc74c  1\ucd08 \uc774\uc0c1 \u2192 \uc720\ud6a8\ud55c \ub300\uc0c1\u00b7\ucc38\uc870 \uc5c6\uc74c\",\"No enemy detected for at least 1s \u2192 No valid target or reference\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS_BASIC\",\"\uadfc\uc811 \uacf5\uaca9\",\"Melee attack\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS01_SLAM\",\"\ub0b4\ub824\ucc0d\uae30\",\"Slam\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ArchivedDamageSourcesUseTheSharedAttackNameWithoutMutatingTheRecord(\"BOSS01_HOOK\",\"\uac08\uace0\ub9ac\",\"Hook\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.DamageSourceFormattingPreservesCustomUnknownAndAlreadyReadableNames",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.EscapedBracesAndRepeatedArgumentsRemainLiteral",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ExactEntriesAndSpecificTemplatesWinOverGeneralTemplates",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.FormattedValuesKeepPrecisionWhenTheTranslationReordersArguments",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.GenericJoinsTranslateKnownPartsWithoutChangingTheOriginalSave",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ReapplyingTheLanguageClearsCachedTemplatesAndTranslations",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.SavedMessagesKeepTheirTimestampAndEventIdentifier(\"000.0s [RUN_START] \uade0\uc5f4 10\ub2e8\uacc4 \uc9c4\uc785\",\"000.0s [RUN_START] Entered rift stage 10\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.SavedMessagesKeepTheirTimestampAndEventIdentifier(\"000.0s [RUN_END] \ub9c8\uc744\ub85c \uadc0\ud658\",\"000.0s [RUN_END] Returning to town\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.SavedMessagesKeepTheirTimestampAndEventIdentifier(\"300,0s [RUN_END] \uc81c\ud55c\uc2dc\uac04 \ucd08\uacfc\",\"300,0s [RUN_END] Out of time\")",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.ShippedDeathMessageTranslatesNestedNamesAndKeepsTheSavedNumber",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.StoredLocalizationTests.UnknownAndDamagedMessagesRemainReadableAndAreReported",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownEnvironmentTests.BraziersStandClearOfBuildingsAndTheStreetCentre",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownEnvironmentTests.DressingStaysClearOfServicesResidentsAndTheMainStreet",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownEnvironmentTests.PlazaBraziersRingThePortal",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownEnvironmentTests.TowersAndGatesStandOutsideTheWalkableBoundsAndTheGatesSitOnTheMainStreet",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownEnvironmentTests.TreeSpotsAreDeterministic",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownEnvironmentTests.TreesStayOutsideThePerimeterAndLeaveTheGateRoadsOpen",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.BuiltTextureMatchesTheAnalyticMask",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.EveryServiceStandsOnPaving",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.GroundDarkensAtTheFootOfBuildings",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.PlazaIsSlabAndTheMainStreetIsCobble",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.RoadContinuesBeyondTheGates",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.StreetsFadeIntoMudAndThenForest",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.TownGroundMaterialLoadsEveryLayerTexture",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TownGroundMaskTests.WeightsAreAValidSplat",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TutorialPitTests.ACheckpointInTheMovementLessonSurvivesARestartAndAnOldPrologueStartsOver",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TutorialPitTests.AReplayOpensTheMovementLessonWithoutGrantingTheRealAccountAnything",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TutorialPitTests.MovementIsRefusedUntilTheLessonOpensItAndRewardIsPaidOnce",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt(0)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt(1)",
+      "result": "Passed"
+    },
+    {
+      "name": "Hellscript.Tests.TutorialPitTests.StandingStillLosesStageTwoButAnyMovementWinsIt(2)",
+      "result": "Passed"
+    }
+  ],
+  "compileErrors": 0,
+  "fullSuiteRepeated": false,
+  "mcpEditor": "No connected instances; existing verified-project batch tooling used"
+}

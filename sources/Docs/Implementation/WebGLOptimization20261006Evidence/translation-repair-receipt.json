@@ -1,0 +1,37 @@
+{
+  "baselineSmokeFailure": "Same BASIC / skill execution / value / target missing-localization assertion reproduced in the immutable before player",
+  "rootCause": "Trailing identity splitting consumed a joined complete event message before its localization template",
+  "fix": "Skip the identity shortcut for joined messages while keeping exact standalone entity-name translation",
+  "attempts": [
+    {
+      "name": "translation-repair",
+      "result": "Failed(Child)",
+      "counts": {
+        "total": 73,
+        "passed": 72,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failedNames": [
+        "Hellscript.Tests.CombatJournalTests.NaturalRunIncludesMovementThreatsAndTranslatesEveryJournalLine"
+      ],
+      "duration": 22.1478924
+    },
+    {
+      "name": "translation-refined",
+      "result": "Passed",
+      "counts": {
+        "total": 25,
+        "passed": 25,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failedNames": [],
+      "duration": 13.799266
+    }
+  ],
+  "fullSuiteReexecuted": false,
+  "reusedFullSuiteReceipt": "final-editmode-receipt.json",
+  "scope": "Remaining passed LocalizationTests/archive assertions are unchanged; reran the affected stored-text fixture and three complete-journal translation tests after refinement",
+  "savedEventBytes": "Regression cases assert unchanged serialized event; target -1/0/53 and ordinary/named boss identities included"
+}

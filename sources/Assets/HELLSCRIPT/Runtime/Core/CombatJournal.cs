@@ -64,6 +64,7 @@ namespace Hellscript
                 .OrderByDescending(r=>r.journal?.completedUtcMs??0).ThenByDescending(r=>r.journal?.attempt??0);
         public static void Append(RunState run,string kind,string message,string source="",string trigger="",int target=-1,int actionId=0,DamageEvent damage=null)
         {
+            using var sample=PresentationMetrics.Journal.Auto();PresentationMetrics.JournalCalls++;
             var journal=run.journal;if(journal==null||journal.version!=1||run.training>=0||journal.archived)return;
             journal.events.Add(new CombatJournalEvent{sequence=++journal.sequence,seconds=run.time,kind=kind,message=message,
                 source=source,trigger=trigger,target=target,actionId=actionId,hp=run.health,resource=run.resource,
@@ -71,10 +72,19 @@ namespace Hellscript
                 builds=kind=="BUILD_CHANGED"||kind=="HUNT_EDICT_CHANGED"?new[]{run.build.Copy()}:Array.Empty<BuildConfig>()});
             if(journal.events.Count>EventLimit){journal.events.RemoveAt(1);journal.omittedEvents++;}
         }
+        public static bool ShowsInPreview(CombatJournalEvent e)=>e.kind!="HIT_DEALT"&&e.kind!="ACTION_COMPLETE"&&e.kind!="ACTION_RELEASE";
+        public static (int last,int first,int count) PreviewKey(CombatJournalData journal,int rows)
+        {
+            var key=(last:0,first:0,count:0);if(journal==null||rows<=0)return key;
+            // ponytail: reverse scan is bounded by EventLimit; index only if this scan is measured as a bottleneck.
+            for(int i=journal.events.Count-1;i>=0&&key.count<rows;i--)
+            {var e=journal.events[i];if(!ShowsInPreview(e))continue;if(key.count==0)key.last=e.sequence;key.first=e.sequence;key.count++;}
+            return key;
+        }
         public static string AttackName(string id)
         {
             string name=ClassSkills.Find(id)?.name;if(name!=null)return name;
-            foreach(BossAttack attack in Enum.GetValues(typeof(BossAttack)))if(BossCombat.Definition((int)attack)==id)return BossCombat.Name((int)attack);
+            name=BossCombat.NameForDefinition(id);if(name!=null)return name;
             if(id?.Length==3&&int.TryParse(id.Substring(1),out int index))
             {
                 if(id[0]=='N'&&index>=1&&index<=GameCatalog.EnemyNames.Length)return Loc.Source("{0} 공격",GameCatalog.EnemyNames[index-1]);

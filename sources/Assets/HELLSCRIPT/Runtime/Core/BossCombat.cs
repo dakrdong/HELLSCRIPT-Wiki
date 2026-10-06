@@ -64,6 +64,16 @@ namespace Hellscript
     }
     public static class BossCombat
     {
+        static readonly Dictionary<string,int> attacksByDefinition=IndexAttacks();
+        static Dictionary<string,int> IndexAttacks()
+        {
+            var result=new Dictionary<string,int>(StringComparer.Ordinal);
+            foreach(BossAttack attack in Enum.GetValues(typeof(BossAttack)))
+            {string id=Definition((int)attack);if(!result.ContainsKey(id))result.Add(id,(int)attack);}
+            return result;
+        }
+        // Cache identifiers, not localized display strings.
+        public static string NameForDefinition(string id)=>id!=null&&attacksByDefinition.TryGetValue(id,out int attack)?Name(attack):null;
         public const int Slots=7;
         // Phase 1 uses entries 0-2 (slots 1-3), phase 2 adds entries 3-5 (slots 4-6).
         public static readonly BossAttack[][] Kit=

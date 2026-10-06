@@ -163,6 +163,7 @@ namespace Hellscript
         }
         public bool Update(bool force = false)
         {
+            using var sample=PresentationMetrics.Visibility.Auto();PresentationMetrics.VisibilityCalls++;
             if (!force && initialized && (Run.position - lastPosition).sqrMagnitude < .000001f && lastGateOpen == Run.layout.gateOpen && lastObstacleCount == Run.layout.obstacles.Count) return false;
             foreach (int i in visible) Pixels[i].g = 0; visible.Clear();
             CollectOccluders();

@@ -118,6 +118,8 @@ namespace Hellscript
         }
         void TickTraps(float dt)
         {
+            if(State.traps.Count==0)
+            {foreach(var enemy in State.enemies)if(!enemy.dead)enemy.trapTick=.5f;return;}
             foreach(var trap in State.traps.ToArray())
             {
                 if(trap.createdAt>=State.time-.00001f)continue;

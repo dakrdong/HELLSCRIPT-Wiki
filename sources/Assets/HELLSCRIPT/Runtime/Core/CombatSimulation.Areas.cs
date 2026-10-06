@@ -112,6 +112,22 @@ namespace Hellscript
         }
         void TickBlizzards(float dt)
         {
+            bool hasBlizzard=false;
+            foreach(var fx in State.effects)if(!fx.hostile&&fx.kind==13){hasBlizzard=true;break;}
+            if(!hasBlizzard)
+            {
+                foreach(var enemy in State.enemies)
+                {
+                    if(enemy.dead)continue;if(dt>0)enemy.blizzardTick=.5f;
+                    for(int i=enemy.statuses.Count-1;i>=0;i--)
+                    {var s=enemy.statuses[i];if(s.areaId>0&&s.casterId==State.heroId&&s.definitionId=="M02")enemy.statuses.RemoveAt(i);}
+                }
+                return;
+            }
+            TickActiveBlizzards(dt);
+        }
+        void TickActiveBlizzards(float dt)
+        {
             var windows=State.effects.Where(OwnBlizzard).Select(f=>BlizzardWindow(f,dt)).Where(w=>w.end>w.start).ToArray();
             foreach(var window in windows)
             {

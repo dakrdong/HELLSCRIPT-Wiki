@@ -1,0 +1,4370 @@
+[
+  {
+    "condition": [
+      "normal",
+      "Mage",
+      false,
+      1,
+      1.0,
+      "fixed",
+      300.0,
+      6.0,
+      1.0,
+      false,
+      "en",
+      1280,
+      720,
+      "PC",
+      "Mono",
+      60,
+      0
+    ],
+    "samples": {
+      "before": 3,
+      "after": 3
+    },
+    "metrics": {
+      "fps": {
+        "accepted": true,
+        "beforeRange": [
+          55.143582947075004,
+          55.797548115225936
+        ],
+        "afterRange": [
+          56.56171483049761,
+          58.434192143235684
+        ],
+        "reason": "Disjoint increase",
+        "beforeMedian": 55.39780413448661,
+        "afterMedian": 57.205574217580754
+      },
+      "cpuMsPerFrame": {
+        "accepted": false,
+        "beforeRange": [
+          9.519126126126128,
+          9.899044776119402
+        ],
+        "afterRange": [
+          7.901976744186046,
+          8.724482058823531
+        ],
+        "reason": "Actual pacing ranges do not overlap",
+        "beforeMedian": 9.804054380664654,
+        "afterMedian": 8.376823646723645
+      },
+      "saveBytesPerCall": {
+        "accepted": true,
+        "beforeRange": [
+          2082083.0,
+          2084312.0
+        ],
+        "afterRange": [
+          675395.5,
+          677909.5
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 2084311.0,
+        "afterMedian": 676056.0
+      },
+      "saveMsPerCall": {
+        "accepted": true,
+        "beforeRange": [
+          19.488900000000015,
+          21.30055
+        ],
+        "afterRange": [
+          9.610599999999998,
+          15.1603
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 19.8943,
+        "afterMedian": 10.216499999999996
+      },
+      "frameP95Ms": {
+        "accepted": false,
+        "beforeRange": [
+          25.629916999999836,
+          26.56566699999985
+        ],
+        "afterRange": [
+          22.874124999999523,
+          25.698166999999827
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 25.880374999999844,
+        "afterMedian": 23.027208000000243
+      },
+      "frameP99Ms": {
+        "accepted": false,
+        "beforeRange": [
+          29.146874999998573,
+          30.450625000000286
+        ],
+        "afterRange": [
+          26.455374999999393,
+          29.361042000001447
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 29.553583000000216,
+        "afterMedian": 27.409459000001135
+      },
+      "frameMaxMs": {
+        "accepted": false,
+        "beforeRange": [
+          54.2491250000019,
+          56.3976249999989
+        ],
+        "afterRange": [
+          50.25737500000105,
+          80.5472500000004
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 54.407624999999626,
+        "afterMedian": 54.288582999999946
+      },
+      "framesOver33ms": {
+        "accepted": false,
+        "beforeRange": [
+          3,
+          4
+        ],
+        "afterRange": [
+          2,
+          4
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3,
+        "afterMedian": 4
+      },
+      "framesOver50ms": {
+        "accepted": false,
+        "beforeRange": [
+          1,
+          1
+        ],
+        "afterRange": [
+          1,
+          2
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 1,
+        "afterMedian": 1
+      },
+      "minimapCalls": {
+        "accepted": true,
+        "beforeRange": [
+          72,
+          77
+        ],
+        "afterRange": [
+          34,
+          41
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 75,
+        "afterMedian": 40
+      },
+      "Batches Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          0,
+          0
+        ],
+        "afterRange": [
+          0,
+          0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0,
+        "afterMedian": 0
+      },
+      "BehaviourUpdate.mean": {
+        "accepted": true,
+        "beforeRange": [
+          2.2342735165165166,
+          2.5935462114803625
+        ],
+        "afterRange": [
+          1.755682534883721,
+          2.0423332029411765
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 2.4420509014925376,
+        "afterMedian": 1.7862899800569803
+      },
+      "BehaviourUpdate.p95": {
+        "accepted": true,
+        "beforeRange": [
+          7.79025,
+          9.45325
+        ],
+        "afterRange": [
+          6.22575,
+          7.049
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 8.458709,
+        "afterMedian": 6.416416
+      },
+      "BehaviourUpdate.p99": {
+        "accepted": false,
+        "beforeRange": [
+          11.178458,
+          12.402458
+        ],
+        "afterRange": [
+          9.3115,
+          12.3515
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 11.898833,
+        "afterMedian": 9.653167
+      },
+      "BehaviourUpdate.max": {
+        "accepted": false,
+        "beforeRange": [
+          37.015875,
+          39.741208
+        ],
+        "afterRange": [
+          33.649583,
+          68.360708
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 38.393375,
+        "afterMedian": 38.764
+      },
+      "BehaviourUpdate.total": {
+        "accepted": true,
+        "beforeRange": [
+          744.013081,
+          858.463796
+        ],
+        "afterRange": [
+          603.954792,
+          694.393289
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 818.087052,
+        "afterMedian": 626.987783
+      },
+      "BehaviourUpdate.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          329,
+          333
+        ],
+        "afterRange": [
+          338,
+          349
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 331,
+        "afterMedian": 342
+      },
+      "Camera.Render.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0013905255255255255,
+          0.0014887703927492447
+        ],
+        "afterRange": [
+          0.0013999825581395347,
+          0.0016487293447293447
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.001395,
+        "afterMedian": 0.0015372676470588236
+      },
+      "Camera.Render.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.001792,
+          0.002041
+        ],
+        "afterRange": [
+          0.001875,
+          0.002208
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.001833,
+        "afterMedian": 0.001959
+      },
+      "Camera.Render.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.002166,
+          0.002375
+        ],
+        "afterRange": [
+          0.002375,
+          0.003167
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.002251,
+        "afterMedian": 0.003084
+      },
+      "Camera.Render.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.003708,
+          0.007458
+        ],
+        "afterRange": [
+          0.007458,
+          0.014291
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.005666,
+        "afterMedian": 0.010541
+      },
+      "Camera.Render.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.463045,
+          0.492783
+        ],
+        "afterRange": [
+          0.481594,
+          0.578704
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.467325,
+        "afterMedian": 0.522671
+      },
+      "Camera.Render.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          330,
+          334
+        ],
+        "afterRange": [
+          339,
+          350
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 332,
+        "afterMedian": 343
+      },
+      "Canvas.BuildBatch.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.006710969788519637,
+          0.007179558558558559
+        ],
+        "afterRange": [
+          0.005830773255813953,
+          0.006125723646723647
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.006749023880597014,
+        "afterMedian": 0.005982952941176471
+      },
+      "Canvas.BuildBatch.p95": {
+        "accepted": true,
+        "beforeRange": [
+          0.028667,
+          0.031417
+        ],
+        "afterRange": [
+          0.023541,
+          0.02625
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.030083,
+        "afterMedian": 0.02475
+      },
+      "Canvas.BuildBatch.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.043625,
+          0.066917
+        ],
+        "afterRange": [
+          0.035125,
+          0.08775
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.05125,
+        "afterMedian": 0.06225
+      },
+      "Canvas.BuildBatch.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.055542,
+          0.112792
+        ],
+        "afterRange": [
+          0.083666,
+          0.211917
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.109874,
+        "afterMedian": 0.115292
+      },
+      "Canvas.BuildBatch.total": {
+        "accepted": true,
+        "beforeRange": [
+          2.221331,
+          2.390793
+        ],
+        "afterRange": [
+          2.005786,
+          2.150129
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 2.260923,
+        "afterMedian": 2.034204
+      },
+      "Canvas.BuildBatch.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          133,
+          140
+        ],
+        "afterRange": [
+          136,
+          144
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 134,
+        "afterMedian": 141
+      },
+      "Draw Calls Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          0,
+          0
+        ],
+        "afterRange": [
+          0,
+          0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0,
+        "afterMedian": 0
+      },
+      "GC Allocated In Frame.mean": {
+        "accepted": true,
+        "beforeRange": [
+          205393.82388059702,
+          208237.19335347431
+        ],
+        "afterRange": [
+          62533.70655270655,
+          67218.54941860466
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 207786.74174174175,
+        "afterMedian": 64769.632352941175
+      },
+      "GC Allocated In Frame.p95": {
+        "accepted": true,
+        "beforeRange": [
+          477565.0,
+          487011.0
+        ],
+        "afterRange": [
+          131703.0,
+          135217.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 486699.0,
+        "afterMedian": 132843.0
+      },
+      "GC Allocated In Frame.p99": {
+        "accepted": true,
+        "beforeRange": [
+          632198.0,
+          676873.0
+        ],
+        "afterRange": [
+          261427.0,
+          318199.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 666337.0,
+        "afterMedian": 276017.0
+      },
+      "GC Allocated In Frame.max": {
+        "accepted": true,
+        "beforeRange": [
+          5382525.0,
+          5509836.0
+        ],
+        "afterRange": [
+          2470254.0,
+          3410986.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 5387409.0,
+        "afterMedian": 2479514.0
+      },
+      "GC Allocated In Frame.total": {
+        "accepted": true,
+        "beforeRange": [
+          68806931.0,
+          69192985.0
+        ],
+        "afterRange": [
+          21949331.0,
+          23123181.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 68926511.0,
+        "afterMedian": 22021675.0
+      },
+      "GC Allocated In Frame.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          330,
+          334
+        ],
+        "afterRange": [
+          339,
+          350
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 332,
+        "afterMedian": 343
+      },
+      "GC.Collect.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.11347372672672673,
+          0.1320538537313433
+        ],
+        "afterRange": [
+          0.040158183139534884,
+          0.041551594117647056
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.12415369788519638,
+        "afterMedian": 0.04056802279202279
+      },
+      "GC.Collect.p95": {
+        "accepted": true,
+        "beforeRange": [
+          1.237458,
+          1.278917
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.278458,
+        "afterMedian": 0.0
+      },
+      "GC.Collect.p99": {
+        "accepted": true,
+        "beforeRange": [
+          1.580625,
+          2.061
+        ],
+        "afterRange": [
+          1.322375,
+          1.466958
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.989625,
+        "afterMedian": 1.44225
+      },
+      "GC.Collect.max": {
+        "accepted": false,
+        "beforeRange": [
+          3.063667,
+          3.284291
+        ],
+        "afterRange": [
+          2.595,
+          3.383668
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3.176875,
+        "afterMedian": 2.94825
+      },
+      "GC.Collect.total": {
+        "accepted": true,
+        "beforeRange": [
+          37.786751,
+          44.238041
+        ],
+        "afterRange": [
+          13.814415,
+          14.239376
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 41.094874,
+        "afterMedian": 14.127542
+      },
+      "GC.Collect.nonzeroCount": {
+        "accepted": true,
+        "beforeRange": [
+          27,
+          28
+        ],
+        "afterRange": [
+          8,
+          12
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 28,
+        "afterMedian": 9
+      },
+      "Gfx.WaitForPresentOnGfxThread.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0003718519637462236,
+          0.00048443880597014925
+        ],
+        "afterRange": [
+          0.00029057848837209303,
+          0.0005005811965811966
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0003765165165165165,
+        "afterMedian": 0.00039917058823529415
+      },
+      "Gfx.WaitForPresentOnGfxThread.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.000625,
+          0.00075
+        ],
+        "afterRange": [
+          0.0005,
+          0.000709
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.000666,
+        "afterMedian": 0.000667
+      },
+      "Gfx.WaitForPresentOnGfxThread.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.000834,
+          0.001084
+        ],
+        "afterRange": [
+          0.000666,
+          0.001
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.000916,
+        "afterMedian": 0.000875
+      },
+      "Gfx.WaitForPresentOnGfxThread.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.001084,
+          0.034417
+        ],
+        "afterRange": [
+          0.00175,
+          0.042958
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.004334,
+        "afterMedian": 0.00525
+      },
+      "Gfx.WaitForPresentOnGfxThread.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.123083,
+          0.162287
+        ],
+        "afterRange": [
+          0.099959,
+          0.175704
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.12538,
+        "afterMedian": 0.135718
+      },
+      "Gfx.WaitForPresentOnGfxThread.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          330,
+          334
+        ],
+        "afterRange": [
+          339,
+          350
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 332,
+        "afterMedian": 343
+      },
+      "HELLSCRIPT.Combat.Tick.mean": {
+        "accepted": true,
+        "beforeRange": [
+          1.3897378648648648,
+          1.5751909486404834
+        ],
+        "afterRange": [
+          0.9727401396011396,
+          1.0751394647058823
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.530763047761194,
+        "afterMedian": 0.9972806279069767
+      },
+      "HELLSCRIPT.Combat.Tick.p95": {
+        "accepted": true,
+        "beforeRange": [
+          6.79225,
+          7.231166
+        ],
+        "afterRange": [
+          5.351167,
+          6.131667
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 6.937958,
+        "afterMedian": 5.458708
+      },
+      "HELLSCRIPT.Combat.Tick.p99": {
+        "accepted": true,
+        "beforeRange": [
+          8.563666,
+          9.402458
+        ],
+        "afterRange": [
+          6.630292,
+          7.467875
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 8.970209,
+        "afterMedian": 7.453292
+      },
+      "HELLSCRIPT.Combat.Tick.max": {
+        "accepted": false,
+        "beforeRange": [
+          32.860667,
+          36.104792
+        ],
+        "afterRange": [
+          30.178833,
+          47.566416
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 34.5075,
+        "afterMedian": 34.595917
+      },
+      "HELLSCRIPT.Combat.Tick.total": {
+        "accepted": true,
+        "beforeRange": [
+          462.782709,
+          521.388204
+        ],
+        "afterRange": [
+          341.431789,
+          365.547418
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 512.805621,
+        "afterMedian": 343.064536
+      },
+      "HELLSCRIPT.Combat.Tick.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          119,
+          120
+        ],
+        "afterRange": [
+          119,
+          120
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 119,
+        "afterMedian": 119
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.28761034834834837,
+          0.3215346132930514
+        ],
+        "afterRange": [
+          0.19554213105413104,
+          0.23529925294117646
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.3053708835820896,
+        "afterMedian": 0.21381820058139536
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.856875,
+          1.149666
+        ],
+        "afterRange": [
+          0.580084,
+          0.87125
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.955625,
+        "afterMedian": 0.655583
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.p99": {
+        "accepted": false,
+        "beforeRange": [
+          2.033625,
+          2.211292
+        ],
+        "afterRange": [
+          1.493791,
+          2.090959
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2.172,
+        "afterMedian": 1.954625
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.max": {
+        "accepted": false,
+        "beforeRange": [
+          4.383833,
+          6.678167
+        ],
+        "afterRange": [
+          4.618333,
+          5.435625
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 6.248917,
+        "afterMedian": 4.840125
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.total": {
+        "accepted": true,
+        "beforeRange": [
+          95.774246,
+          106.427957
+        ],
+        "afterRange": [
+          68.635288,
+          80.001746
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 102.299246,
+        "afterMedian": 73.553461
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          119,
+          120
+        ],
+        "afterRange": [
+          119,
+          120
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 119,
+        "afterMedian": 119
+      },
+      "HELLSCRIPT.Edict.Decision.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.08206243543543543,
+          0.08792924477611941
+        ],
+        "afterRange": [
+          0.06955733048433048,
+          0.08407204705882353
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.08394524773413897,
+        "afterMedian": 0.08310428197674419
+      },
+      "HELLSCRIPT.Edict.Decision.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.479792,
+          0.555875
+        ],
+        "afterRange": [
+          0.476333,
+          0.507292
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.528541,
+        "afterMedian": 0.492625
+      },
+      "HELLSCRIPT.Edict.Decision.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.850375,
+          1.24525
+        ],
+        "afterRange": [
+          0.856708,
+          1.192916
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 1.092167,
+        "afterMedian": 1.106417
+      },
+      "HELLSCRIPT.Edict.Decision.max": {
+        "accepted": false,
+        "beforeRange": [
+          6.709625,
+          8.772875
+        ],
+        "afterRange": [
+          6.736666,
+          9.446958
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 8.53325,
+        "afterMedian": 6.827959
+      },
+      "HELLSCRIPT.Edict.Decision.total": {
+        "accepted": false,
+        "beforeRange": [
+          27.326791,
+          29.456297
+        ],
+        "afterRange": [
+          24.414623,
+          28.587873
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 27.785877,
+        "afterMedian": 28.584496
+      },
+      "HELLSCRIPT.Edict.Decision.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          30,
+          30
+        ],
+        "afterRange": [
+          30,
+          31
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 30,
+        "afterMedian": 30
+      },
+      "HELLSCRIPT.Journal.Append.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0015296546546546546,
+          0.002188691842900302
+        ],
+        "afterRange": [
+          0.001512210826210826,
+          0.0018621831395348838
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0018147910447761195,
+        "afterMedian": 0.0016622558823529412
+      },
+      "HELLSCRIPT.Journal.Append.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.001916,
+          0.002333
+        ],
+        "afterRange": [
+          0.002126,
+          0.002458
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.002041,
+        "afterMedian": 0.002167
+      },
+      "HELLSCRIPT.Journal.Append.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0395,
+          0.049083
+        ],
+        "afterRange": [
+          0.040167,
+          0.061792
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.042958,
+        "afterMedian": 0.04225
+      },
+      "HELLSCRIPT.Journal.Append.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.124041,
+          0.190251
+        ],
+        "afterRange": [
+          0.109208,
+          0.162208
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.179874,
+        "afterMedian": 0.11871
+      },
+      "HELLSCRIPT.Journal.Append.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.509375,
+          0.724457
+        ],
+        "afterRange": [
+          0.530786,
+          0.640591
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.607955,
+        "afterMedian": 0.565167
+      },
+      "HELLSCRIPT.Journal.Append.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          35,
+          35
+        ],
+        "afterRange": [
+          35,
+          40
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 35,
+        "afterMedian": 35
+      },
+      "HELLSCRIPT.Minimap.Rebuild.mean": {
+        "accepted": true,
+        "beforeRange": [
+          1.2520006193353472,
+          1.3032860686567165
+        ],
+        "afterRange": [
+          0.533507148255814,
+          0.6846168029411764
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.2910102612612613,
+        "afterMedian": 0.5964807635327636
+      },
+      "HELLSCRIPT.Minimap.Rebuild.p95": {
+        "accepted": true,
+        "beforeRange": [
+          5.950167,
+          6.137917
+        ],
+        "afterRange": [
+          5.127334,
+          5.464459
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 6.067958,
+        "afterMedian": 5.150333
+      },
+      "HELLSCRIPT.Minimap.Rebuild.p99": {
+        "accepted": false,
+        "beforeRange": [
+          6.672917,
+          6.849083
+        ],
+        "afterRange": [
+          5.219541,
+          7.267959
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 6.841834,
+        "afterMedian": 6.079667
+      },
+      "HELLSCRIPT.Minimap.Rebuild.max": {
+        "accepted": false,
+        "beforeRange": [
+          7.104417,
+          8.87125
+        ],
+        "afterRange": [
+          5.510333,
+          8.106208
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 7.993041,
+        "afterMedian": 6.519334
+      },
+      "HELLSCRIPT.Minimap.Rebuild.total": {
+        "accepted": true,
+        "beforeRange": [
+          414.412205,
+          436.600833
+        ],
+        "afterRange": [
+          183.526459,
+          232.769713
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 429.906417,
+        "afterMedian": 209.364748
+      },
+      "HELLSCRIPT.Minimap.Rebuild.nonzeroCount": {
+        "accepted": true,
+        "beforeRange": [
+          72,
+          77
+        ],
+        "afterRange": [
+          34,
+          41
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 75,
+        "afterMedian": 40
+      },
+      "HELLSCRIPT.Save.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.14353694029850744,
+          0.16084340181268883
+        ],
+        "afterRange": [
+          0.08976816239316239,
+          0.12261470294117646
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.14825275375375377,
+        "afterMedian": 0.09653706395348836
+      },
+      "HELLSCRIPT.Save.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "HELLSCRIPT.Save.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "HELLSCRIPT.Save.max": {
+        "accepted": true,
+        "beforeRange": [
+          24.520291,
+          27.315416
+        ],
+        "afterRange": [
+          16.497,
+          21.962333
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 24.7,
+        "afterMedian": 17.223083
+      },
+      "HELLSCRIPT.Save.total": {
+        "accepted": true,
+        "beforeRange": [
+          48.084875,
+          53.239166
+        ],
+        "afterRange": [
+          31.508625,
+          41.688999
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 49.368167,
+        "afterMedian": 33.20875
+      },
+      "HELLSCRIPT.Save.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          2,
+          2
+        ],
+        "afterRange": [
+          2,
+          2
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2,
+        "afterMedian": 2
+      },
+      "HELLSCRIPT.UI.Update.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.13617811782477343,
+          0.14496083582089553
+        ],
+        "afterRange": [
+          0.10936436046511627,
+          0.13597793529411764
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.14458994294294292,
+        "afterMedian": 0.12779345014245014
+      },
+      "HELLSCRIPT.UI.Update.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.858375,
+          0.979916
+        ],
+        "afterRange": [
+          0.7485,
+          0.993
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.918958,
+        "afterMedian": 0.861167
+      },
+      "HELLSCRIPT.UI.Update.p99": {
+        "accepted": false,
+        "beforeRange": [
+          1.914375,
+          2.573375
+        ],
+        "afterRange": [
+          1.651083,
+          2.792875
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2.259166,
+        "afterMedian": 2.040917
+      },
+      "HELLSCRIPT.UI.Update.max": {
+        "accepted": true,
+        "beforeRange": [
+          4.221791,
+          5.302417
+        ],
+        "afterRange": [
+          2.788667,
+          4.028167
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 4.686917,
+        "afterMedian": 3.511833
+      },
+      "HELLSCRIPT.UI.Update.total": {
+        "accepted": false,
+        "beforeRange": [
+          45.074957,
+          48.56188
+        ],
+        "afterRange": [
+          37.62134,
+          46.232498
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 48.148451,
+        "afterMedian": 44.855501
+      },
+      "HELLSCRIPT.UI.Update.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          329,
+          333
+        ],
+        "afterRange": [
+          338,
+          349
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 331,
+        "afterMedian": 342
+      },
+      "HELLSCRIPT.Visibility.Update.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.4252347447447447,
+          0.46357149546827797
+        ],
+        "afterRange": [
+          0.4052577264957265,
+          0.43218276453488375
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.4441468746268657,
+        "afterMedian": 0.430767
+      },
+      "HELLSCRIPT.Visibility.Update.p95": {
+        "accepted": false,
+        "beforeRange": [
+          3.537792,
+          3.961541
+        ],
+        "afterRange": [
+          3.255749,
+          3.6365
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3.774168,
+        "afterMedian": 3.568125
+      },
+      "HELLSCRIPT.Visibility.Update.p99": {
+        "accepted": false,
+        "beforeRange": [
+          3.912167,
+          4.618916
+        ],
+        "afterRange": [
+          3.939167,
+          4.11275
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 4.447667,
+        "afterMedian": 4.105417
+      },
+      "HELLSCRIPT.Visibility.Update.max": {
+        "accepted": false,
+        "beforeRange": [
+          4.061917,
+          6.111583
+        ],
+        "afterRange": [
+          4.557875,
+          36.864332
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5.830666,
+        "afterMedian": 5.578541
+      },
+      "HELLSCRIPT.Visibility.Update.total": {
+        "accepted": false,
+        "beforeRange": [
+          141.60317,
+          153.442165
+        ],
+        "afterRange": [
+          142.245462,
+          148.670871
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 148.789203,
+        "afterMedian": 146.46078
+      },
+      "HELLSCRIPT.Visibility.Update.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          326,
+          332
+        ],
+        "afterRange": [
+          334,
+          343
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 330,
+        "afterMedian": 338
+      },
+      "HELLSCRIPT.World.Effect.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.030432807807807806,
+          0.037110695522388056
+        ],
+        "afterRange": [
+          0.028569287790697676,
+          0.033264711764705884
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.034795561933534745,
+        "afterMedian": 0.0321635754985755
+      },
+      "HELLSCRIPT.World.Effect.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "HELLSCRIPT.World.Effect.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.004958,
+          0.0115
+        ],
+        "afterRange": [
+          0.007833,
+          0.016208
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.009541,
+        "afterMedian": 0.011791
+      },
+      "HELLSCRIPT.World.Effect.max": {
+        "accepted": false,
+        "beforeRange": [
+          8.986584,
+          10.572125
+        ],
+        "afterRange": [
+          7.851082,
+          10.103541
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 9.115333,
+        "afterMedian": 8.981625
+      },
+      "HELLSCRIPT.World.Effect.total": {
+        "accepted": false,
+        "beforeRange": [
+          10.134125,
+          12.432083
+        ],
+        "afterRange": [
+          9.827835,
+          11.310002
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 11.517331,
+        "afterMedian": 11.289415
+      },
+      "HELLSCRIPT.World.Effect.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          8,
+          8
+        ],
+        "afterRange": [
+          8,
+          9
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 8,
+        "afterMedian": 8
+      },
+      "HELLSCRIPT.World.Present.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.4529713273273273,
+          0.553323253776435
+        ],
+        "afterRange": [
+          0.4555647965116279,
+          0.5620667882352942
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.5115314507462687,
+        "afterMedian": 0.4838677663817664
+      },
+      "HELLSCRIPT.World.Present.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.707541,
+          0.926917
+        ],
+        "afterRange": [
+          0.827375,
+          1.158125
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.892,
+        "afterMedian": 0.840708
+      },
+      "HELLSCRIPT.World.Present.p99": {
+        "accepted": false,
+        "beforeRange": [
+          2.347583,
+          2.702458
+        ],
+        "afterRange": [
+          2.332541,
+          3.140292
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2.482541,
+        "afterMedian": 3.087667
+      },
+      "HELLSCRIPT.World.Present.max": {
+        "accepted": false,
+        "beforeRange": [
+          5.049583,
+          5.986417
+        ],
+        "afterRange": [
+          4.37975,
+          5.688166
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5.933125,
+        "afterMedian": 4.592958
+      },
+      "HELLSCRIPT.World.Present.total": {
+        "accepted": false,
+        "beforeRange": [
+          150.839452,
+          183.149997
+        ],
+        "afterRange": [
+          156.71429,
+          191.102708
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 171.363036,
+        "afterMedian": 169.837586
+      },
+      "HELLSCRIPT.World.Present.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          329,
+          333
+        ],
+        "afterRange": [
+          338,
+          349
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 331,
+        "afterMedian": 342
+      },
+      "Main Thread.mean": {
+        "accepted": true,
+        "beforeRange": [
+          17.804112047761194,
+          18.019509205438066
+        ],
+        "afterRange": [
+          16.992491712250715,
+          17.587119867647058
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 17.91345353753754,
+        "afterMedian": 17.39031031395349
+      },
+      "Main Thread.p95": {
+        "accepted": true,
+        "beforeRange": [
+          33.212375,
+          33.280709
+        ],
+        "afterRange": [
+          17.084625,
+          32.957458
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 33.267167,
+        "afterMedian": 17.203958
+      },
+      "Main Thread.p99": {
+        "accepted": true,
+        "beforeRange": [
+          33.372708,
+          33.746667
+        ],
+        "afterRange": [
+          33.270709,
+          33.342125
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 33.451333,
+        "afterMedian": 33.290042
+      },
+      "Main Thread.max": {
+        "accepted": false,
+        "beforeRange": [
+          49.938583,
+          49.985166
+        ],
+        "afterRange": [
+          48.359166,
+          83.851833
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 49.96525,
+        "afterMedian": 49.875125
+      },
+      "Main Thread.total": {
+        "accepted": false,
+        "beforeRange": [
+          5964.377536,
+          5965.180028
+        ],
+        "afterRange": [
+          5964.364591,
+          5982.266748
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5964.457547,
+        "afterMedian": 5979.620755
+      },
+      "Main Thread.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          329,
+          333
+        ],
+        "afterRange": [
+          338,
+          349
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 331,
+        "afterMedian": 342
+      },
+      "PlayerLoop.mean": {
+        "accepted": true,
+        "beforeRange": [
+          17.801339567164177,
+          18.0172736918429
+        ],
+        "afterRange": [
+          16.989899541310542,
+          17.5841848
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 17.91127266066066,
+        "afterMedian": 17.388223110465116
+      },
+      "PlayerLoop.p95": {
+        "accepted": true,
+        "beforeRange": [
+          33.204834,
+          33.2785
+        ],
+        "afterRange": [
+          17.082584,
+          32.954916
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 33.264792,
+        "afterMedian": 17.201792
+      },
+      "PlayerLoop.p99": {
+        "accepted": true,
+        "beforeRange": [
+          33.370208,
+          33.743833
+        ],
+        "afterRange": [
+          33.268334,
+          33.340125
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 33.449125,
+        "afterMedian": 33.288
+      },
+      "PlayerLoop.max": {
+        "accepted": false,
+        "beforeRange": [
+          49.936625,
+          49.9825
+        ],
+        "afterRange": [
+          48.356959,
+          83.850917
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 49.952667,
+        "afterMedian": 49.873083
+      },
+      "PlayerLoop.total": {
+        "accepted": false,
+        "beforeRange": [
+          5963.448755,
+          5964.453796
+        ],
+        "afterRange": [
+          5963.454739,
+          5981.54875
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5963.717592,
+        "afterMedian": 5978.622832
+      },
+      "PlayerLoop.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          329,
+          333
+        ],
+        "afterRange": [
+          338,
+          349
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 331,
+        "afterMedian": 342
+      },
+      "SetPass Calls Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          126.1134328358209,
+          127.1510574018127
+        ],
+        "afterRange": [
+          125.01994301994301,
+          130.84011627906978
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 126.14714714714715,
+        "afterMedian": 125.91764705882353
+      },
+      "SetPass Calls Count.p95": {
+        "accepted": true,
+        "beforeRange": [
+          270.0,
+          284.0
+        ],
+        "afterRange": [
+          262.0,
+          269.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 282.0,
+        "afterMedian": 266.0
+      },
+      "SetPass Calls Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          330.0,
+          355.0
+        ],
+        "afterRange": [
+          316.0,
+          332.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 332.0,
+        "afterMedian": 325.0
+      },
+      "SetPass Calls Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          368.0,
+          376.0
+        ],
+        "afterRange": [
+          326.0,
+          371.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 376.0,
+        "afterMedian": 367.0
+      },
+      "SetPass Calls Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          42007.0,
+          42248.0
+        ],
+        "afterRange": [
+          42812.0,
+          45009.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 42087.0,
+        "afterMedian": 43882.0
+      },
+      "SetPass Calls Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          261,
+          273
+        ],
+        "afterRange": [
+          274,
+          309
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 270,
+        "afterMedian": 292
+      },
+      "Triangles Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          265579.7701492537,
+          269071.1087613293
+        ],
+        "afterRange": [
+          260697.56125356126,
+          276394.2180232558
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 266834.4414414414,
+        "afterMedian": 264774.62941176473
+      },
+      "Triangles Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          614022.0,
+          642808.0
+        ],
+        "afterRange": [
+          598494.0,
+          633816.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 623852.0,
+        "afterMedian": 628812.0
+      },
+      "Triangles Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          661060.0,
+          674196.0
+        ],
+        "afterRange": [
+          668124.0,
+          685376.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 668096.0,
+        "afterMedian": 668540.0
+      },
+      "Triangles Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          684651.0,
+          686096.0
+        ],
+        "afterRange": [
+          674160.0,
+          687578.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 685678.0,
+        "afterMedian": 684681.0
+      },
+      "Triangles Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          88855869.0,
+          89062537.0
+        ],
+        "afterRange": [
+          90023374.0,
+          95079611.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 88969223.0,
+        "afterMedian": 91504844.0
+      },
+      "Triangles Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          263,
+          274
+        ],
+        "afterRange": [
+          274,
+          309
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 271,
+        "afterMedian": 293
+      },
+      "UGUI.Rendering.UpdateBatches.mean": {
+        "accepted": true,
+        "beforeRange": [
+          1.5597229486404833,
+          1.6203272298507463
+        ],
+        "afterRange": [
+          0.7498103197674418,
+          0.9250542676470588
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.611757021021021,
+        "afterMedian": 0.810872378917379
+      },
+      "UGUI.Rendering.UpdateBatches.p95": {
+        "accepted": true,
+        "beforeRange": [
+          7.021,
+          7.220666
+        ],
+        "afterRange": [
+          5.78725,
+          6.337917
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 7.131459,
+        "afterMedian": 5.924042
+      },
+      "UGUI.Rendering.UpdateBatches.p99": {
+        "accepted": true,
+        "beforeRange": [
+          8.046125,
+          8.237666
+        ],
+        "afterRange": [
+          5.977916,
+          7.96125
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 8.066833,
+        "afterMedian": 7.408083
+      },
+      "UGUI.Rendering.UpdateBatches.max": {
+        "accepted": false,
+        "beforeRange": [
+          9.097209,
+          10.028958
+        ],
+        "afterRange": [
+          6.209625,
+          9.64425
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 9.67075,
+        "afterMedian": 8.535708
+      },
+      "UGUI.Rendering.UpdateBatches.total": {
+        "accepted": true,
+        "beforeRange": [
+          516.268296,
+          542.809622
+        ],
+        "afterRange": [
+          257.93475,
+          314.518451
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 536.715088,
+        "afterMedian": 284.616205
+      },
+      "UGUI.Rendering.UpdateBatches.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          330,
+          334
+        ],
+        "afterRange": [
+          339,
+          350
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 332,
+        "afterMedian": 343
+      },
+      "WaitForTargetFPS.mean": {
+        "accepted": false,
+        "beforeRange": [
+          11.860893785074627,
+          12.482020531531532
+        ],
+        "afterRange": [
+          12.505681888888889,
+          13.286607662790697
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 12.050515870090633,
+        "afterMedian": 12.759046076470588
+      },
+      "WaitForTargetFPS.p95": {
+        "accepted": false,
+        "beforeRange": [
+          14.908916,
+          15.417791
+        ],
+        "afterRange": [
+          14.804292,
+          15.151042
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 15.013875,
+        "afterMedian": 14.924709
+      },
+      "WaitForTargetFPS.p99": {
+        "accepted": true,
+        "beforeRange": [
+          16.513042,
+          17.3785
+        ],
+        "afterRange": [
+          15.585042,
+          16.477875
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 16.960168,
+        "afterMedian": 15.949834
+      },
+      "WaitForTargetFPS.max": {
+        "accepted": true,
+        "beforeRange": [
+          17.469916,
+          17.877667
+        ],
+        "afterRange": [
+          17.091709,
+          17.394751
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 17.626999,
+        "afterMedian": 17.226875
+      },
+      "WaitForTargetFPS.total": {
+        "accepted": false,
+        "beforeRange": [
+          3973.399418,
+          4156.512837
+        ],
+        "afterRange": [
+          4338.075666,
+          4570.593036
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3988.720753,
+        "afterMedian": 4389.494343
+      },
+      "WaitForTargetFPS.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          330,
+          334
+        ],
+        "afterRange": [
+          339,
+          350
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 332,
+        "afterMedian": 343
+      }
+    },
+    "actualFpsRangesOverlap": false
+  },
+  {
+    "condition": [
+      "normal",
+      "Mage",
+      true,
+      4,
+      1.0,
+      "fixed",
+      300.0,
+      6.0,
+      1.0,
+      false,
+      "en",
+      1280,
+      720,
+      "PC",
+      "Mono",
+      60,
+      0
+    ],
+    "samples": {
+      "before": 3,
+      "after": 3
+    },
+    "metrics": {
+      "fps": {
+        "accepted": true,
+        "beforeRange": [
+          44.7683829957954,
+          47.78447839976886
+        ],
+        "afterRange": [
+          54.32099013892153,
+          55.436641693194865
+        ],
+        "reason": "Disjoint increase",
+        "beforeMedian": 46.7231821309976,
+        "afterMedian": 54.95542737269803
+      },
+      "cpuMsPerFrame": {
+        "accepted": false,
+        "beforeRange": [
+          15.523815302491103,
+          15.948141111111111
+        ],
+        "afterRange": [
+          10.454623795180725,
+          11.188326524390241
+        ],
+        "reason": "Actual pacing ranges do not overlap",
+        "beforeMedian": 15.571652083333333,
+        "afterMedian": 10.48235135135135
+      },
+      "saveBytesPerCall": {
+        "accepted": true,
+        "beforeRange": [
+          4128168.5,
+          4414903.5
+        ],
+        "afterRange": [
+          1456700.5,
+          1567737.5
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 4128169.0,
+        "afterMedian": 1558073.5
+      },
+      "saveMsPerCall": {
+        "accepted": true,
+        "beforeRange": [
+          40.35065,
+          44.589
+        ],
+        "afterRange": [
+          20.833750000000002,
+          27.123000000000005
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 41.697050000000004,
+        "afterMedian": 23.72905
+      },
+      "frameP95Ms": {
+        "accepted": true,
+        "beforeRange": [
+          34.98549999999945,
+          39.146915999999976
+        ],
+        "afterRange": [
+          26.97400000000094,
+          28.1865830000001
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 37.86008400000007,
+        "afterMedian": 27.35683300000069
+      },
+      "frameP99Ms": {
+        "accepted": true,
+        "beforeRange": [
+          58.7525419999988,
+          60.07979100000149
+        ],
+        "afterRange": [
+          37.49787499999968,
+          39.39083300000057
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 60.07487499999975,
+        "afterMedian": 37.876875000000254
+      },
+      "frameMaxMs": {
+        "accepted": true,
+        "beforeRange": [
+          63.56837499999912,
+          71.65649999999957
+        ],
+        "afterRange": [
+          50.91162499999946,
+          55.950541999999714
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 71.61858399999943,
+        "afterMedian": 52.82841699999885
+      },
+      "framesOver33ms": {
+        "accepted": true,
+        "beforeRange": [
+          25,
+          36
+        ],
+        "afterRange": [
+          5,
+          7
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 25,
+        "afterMedian": 5
+      },
+      "framesOver50ms": {
+        "accepted": true,
+        "beforeRange": [
+          4,
+          7
+        ],
+        "afterRange": [
+          1,
+          3
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 6,
+        "afterMedian": 1
+      },
+      "minimapCalls": {
+        "accepted": true,
+        "beforeRange": [
+          54,
+          60
+        ],
+        "afterRange": [
+          24,
+          26
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 55,
+        "afterMedian": 26
+      },
+      "Batches Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Batches Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          0,
+          0
+        ],
+        "afterRange": [
+          0,
+          0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0,
+        "afterMedian": 0
+      },
+      "BehaviourUpdate.mean": {
+        "accepted": true,
+        "beforeRange": [
+          7.414113559027778,
+          7.948433937037037
+        ],
+        "afterRange": [
+          3.5541621626506026,
+          3.8586788658536584
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 7.847943935943061,
+        "afterMedian": 3.569973114114114
+      },
+      "BehaviourUpdate.p95": {
+        "accepted": true,
+        "beforeRange": [
+          18.857625,
+          22.0585
+        ],
+        "afterRange": [
+          10.489042,
+          12.570625
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 20.456833,
+        "afterMedian": 11.303875
+      },
+      "BehaviourUpdate.p99": {
+        "accepted": true,
+        "beforeRange": [
+          42.920792,
+          44.901209
+        ],
+        "afterRange": [
+          21.877208,
+          24.654542
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 43.906459,
+        "afterMedian": 22.836041
+      },
+      "BehaviourUpdate.max": {
+        "accepted": true,
+        "beforeRange": [
+          48.33925,
+          56.429417
+        ],
+        "afterRange": [
+          36.82975,
+          42.941916
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 55.146708,
+        "afterMedian": 40.771125
+      },
+      "BehaviourUpdate.total": {
+        "accepted": true,
+        "beforeRange": [
+          2135.264705,
+          2205.272246
+        ],
+        "afterRange": [
+          1179.981838,
+          1265.646668
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 2146.077163,
+        "afterMedian": 1188.801047
+      },
+      "BehaviourUpdate.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          268,
+          286
+        ],
+        "afterRange": [
+          326,
+          331
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 279,
+        "afterMedian": 330
+      },
+      "Camera.Render.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0013832953736654804,
+          0.001422548148148148
+        ],
+        "afterRange": [
+          0.001250030487804878,
+          0.0015281566265060243
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0014216979166666668,
+        "afterMedian": 0.0012998378378378378
+      },
+      "Camera.Render.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.00175,
+          0.001958
+        ],
+        "afterRange": [
+          0.001667,
+          0.002042
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.001958,
+        "afterMedian": 0.001708
+      },
+      "Camera.Render.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.002083,
+          0.00275
+        ],
+        "afterRange": [
+          0.001958,
+          0.003334
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.002541,
+        "afterMedian": 0.002708
+      },
+      "Camera.Render.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.002708,
+          0.013166
+        ],
+        "afterRange": [
+          0.00275,
+          0.032375
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.004207,
+        "afterMedian": 0.003833
+      },
+      "Camera.Render.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.384088,
+          0.409449
+        ],
+        "afterRange": [
+          0.41001,
+          0.507348
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.388706,
+        "afterMedian": 0.432846
+      },
+      "Camera.Render.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          269,
+          287
+        ],
+        "afterRange": [
+          327,
+          332
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 280,
+        "afterMedian": 331
+      },
+      "Canvas.BuildBatch.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.006985579861111112,
+          0.007611505338078292
+        ],
+        "afterRange": [
+          0.004592840361445783,
+          0.005946189189189189
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.007292881481481482,
+        "afterMedian": 0.0058743658536585365
+      },
+      "Canvas.BuildBatch.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.027167,
+          0.034167
+        ],
+        "afterRange": [
+          0.024083,
+          0.030042
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.03225,
+        "afterMedian": 0.027583
+      },
+      "Canvas.BuildBatch.p99": {
+        "accepted": true,
+        "beforeRange": [
+          0.048417,
+          0.083833
+        ],
+        "afterRange": [
+          0.035875,
+          0.038917
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.066375,
+        "afterMedian": 0.038667
+      },
+      "Canvas.BuildBatch.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.124291,
+          0.186541
+        ],
+        "afterRange": [
+          0.076834,
+          0.175125
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.13275,
+        "afterMedian": 0.08025
+      },
+      "Canvas.BuildBatch.total": {
+        "accepted": false,
+        "beforeRange": [
+          1.969078,
+          2.138833
+        ],
+        "afterRange": [
+          1.524823,
+          1.980081
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2.011847,
+        "afterMedian": 1.926792
+      },
+      "Canvas.BuildBatch.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          111,
+          120
+        ],
+        "afterRange": [
+          125,
+          129
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 112,
+        "afterMedian": 126
+      },
+      "Draw Calls Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "Draw Calls Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          0,
+          0
+        ],
+        "afterRange": [
+          0,
+          0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0,
+        "afterMedian": 0
+      },
+      "GC Allocated In Frame.mean": {
+        "accepted": true,
+        "beforeRange": [
+          843285.2604166666,
+          899858.0814814814
+        ],
+        "afterRange": [
+          226246.4894894895,
+          229168.65853658537
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 855886.7153024911,
+        "afterMedian": 226906.2108433735
+      },
+      "GC Allocated In Frame.p95": {
+        "accepted": true,
+        "beforeRange": [
+          2409861.0,
+          2416203.0
+        ],
+        "afterRange": [
+          1077089.0,
+          1088465.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 2416203.0,
+        "afterMedian": 1079789.0
+      },
+      "GC Allocated In Frame.p99": {
+        "accepted": true,
+        "beforeRange": [
+          3119127.0,
+          3961738.0
+        ],
+        "afterRange": [
+          1589624.0,
+          1663949.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 3958722.0,
+        "afterMedian": 1589624.0
+      },
+      "GC Allocated In Frame.max": {
+        "accepted": true,
+        "beforeRange": [
+          9776560.0,
+          10430738.0
+        ],
+        "afterRange": [
+          4239533.0,
+          4507704.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 9853922.0,
+        "afterMedian": 4466738.0
+      },
+      "GC Allocated In Frame.total": {
+        "accepted": true,
+        "beforeRange": [
+          240504167.0,
+          242961682.0
+        ],
+        "afterRange": [
+          75167320.0,
+          75340081.0
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 242866155.0,
+        "afterMedian": 75332862.0
+      },
+      "GC Allocated In Frame.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          269,
+          287
+        ],
+        "afterRange": [
+          327,
+          332
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 280,
+        "afterMedian": 331
+      },
+      "GC.Collect.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.4059341736111111,
+          0.5221691259259259
+        ],
+        "afterRange": [
+          0.12055556756756758,
+          0.1427327286585366
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.45665998576512457,
+        "afterMedian": 0.1288431234939759
+      },
+      "GC.Collect.p95": {
+        "accepted": true,
+        "beforeRange": [
+          1.571958,
+          2.175625
+        ],
+        "afterRange": [
+          1.244417,
+          1.42
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.92575,
+        "afterMedian": 1.321875
+      },
+      "GC.Collect.p99": {
+        "accepted": true,
+        "beforeRange": [
+          2.982251,
+          3.260124
+        ],
+        "afterRange": [
+          1.79975,
+          2.0605
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 3.022166,
+        "afterMedian": 1.802209
+      },
+      "GC.Collect.max": {
+        "accepted": false,
+        "beforeRange": [
+          3.658875,
+          3.857
+        ],
+        "afterRange": [
+          3.102917,
+          3.768292
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3.707083,
+        "afterMedian": 3.357416
+      },
+      "GC.Collect.total": {
+        "accepted": true,
+        "beforeRange": [
+          116.909042,
+          140.985664
+        ],
+        "afterRange": [
+          40.145004,
+          46.816335
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 128.321456,
+        "afterMedian": 42.775917
+      },
+      "GC.Collect.nonzeroCount": {
+        "accepted": true,
+        "beforeRange": [
+          80,
+          87
+        ],
+        "afterRange": [
+          26,
+          29
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 81,
+        "afterMedian": 28
+      },
+      "Gfx.WaitForPresentOnGfxThread.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.00034056227758007116,
+          0.00048035069444444443
+        ],
+        "afterRange": [
+          0.00037199099099099103,
+          0.00041310975609756096
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.00038869259259259256,
+        "afterMedian": 0.0003825572289156627
+      },
+      "Gfx.WaitForPresentOnGfxThread.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.000583,
+          0.000833
+        ],
+        "afterRange": [
+          0.000541,
+          0.000625
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.000625,
+        "afterMedian": 0.000625
+      },
+      "Gfx.WaitForPresentOnGfxThread.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.00075,
+          0.001375
+        ],
+        "afterRange": [
+          0.000708,
+          0.001167
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.000791,
+        "afterMedian": 0.000916
+      },
+      "Gfx.WaitForPresentOnGfxThread.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.001125,
+          0.021792
+        ],
+        "afterRange": [
+          0.00525,
+          0.018292
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.012334,
+        "afterMedian": 0.012625
+      },
+      "Gfx.WaitForPresentOnGfxThread.total": {
+        "accepted": false,
+        "beforeRange": [
+          0.095698,
+          0.138341
+        ],
+        "afterRange": [
+          0.123873,
+          0.1355
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.104947,
+        "afterMedian": 0.127009
+      },
+      "Gfx.WaitForPresentOnGfxThread.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          269,
+          285
+        ],
+        "afterRange": [
+          327,
+          332
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 280,
+        "afterMedian": 330
+      },
+      "HELLSCRIPT.Combat.Tick.mean": {
+        "accepted": true,
+        "beforeRange": [
+          5.574426631944444,
+          6.129079648148148
+        ],
+        "afterRange": [
+          1.8827019156626508,
+          2.0688513719512196
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 5.800808889679715,
+        "afterMedian": 1.8952895465465465
+      },
+      "HELLSCRIPT.Combat.Tick.p95": {
+        "accepted": true,
+        "beforeRange": [
+          16.98625,
+          17.409792
+        ],
+        "afterRange": [
+          8.236875,
+          9.386708
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 17.328625,
+        "afterMedian": 8.607
+      },
+      "HELLSCRIPT.Combat.Tick.p99": {
+        "accepted": true,
+        "beforeRange": [
+          24.823583,
+          33.993084
+        ],
+        "afterRange": [
+          12.249375,
+          13.150959
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 32.869459,
+        "afterMedian": 12.486833
+      },
+      "HELLSCRIPT.Combat.Tick.max": {
+        "accepted": false,
+        "beforeRange": [
+          41.72875,
+          50.34125
+        ],
+        "afterRange": [
+          35.514542,
+          41.797084
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 43.2745,
+        "afterMedian": 38.773625
+      },
+      "HELLSCRIPT.Combat.Tick.total": {
+        "accepted": true,
+        "beforeRange": [
+          1605.43487,
+          1654.851505
+        ],
+        "afterRange": [
+          625.057036,
+          678.58325
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1630.027298,
+        "afterMedian": 631.131419
+      },
+      "HELLSCRIPT.Combat.Tick.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          117,
+          119
+        ],
+        "afterRange": [
+          119,
+          120
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 118,
+        "afterMedian": 120
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.mean": {
+        "accepted": true,
+        "beforeRange": [
+          1.6033204128113878,
+          1.7776121962962963
+        ],
+        "afterRange": [
+          0.5672061741741742,
+          0.6487610579268294
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.638510857638889,
+        "afterMedian": 0.5881454578313253
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.p95": {
+        "accepted": true,
+        "beforeRange": [
+          4.902792,
+          5.404541
+        ],
+        "afterRange": [
+          2.178541,
+          2.562
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 5.131958,
+        "afterMedian": 2.321292
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.p99": {
+        "accepted": true,
+        "beforeRange": [
+          5.826208,
+          8.099458
+        ],
+        "afterRange": [
+          3.290083,
+          3.618542
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 6.679458,
+        "afterMedian": 3.349417
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.max": {
+        "accepted": true,
+        "beforeRange": [
+          7.183666,
+          11.308958
+        ],
+        "afterRange": [
+          3.775917,
+          4.707292
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 8.366666,
+        "afterMedian": 4.515667
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.total": {
+        "accepted": true,
+        "beforeRange": [
+          450.533036,
+          479.955293
+        ],
+        "afterRange": [
+          188.879656,
+          212.793627
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 471.891127,
+        "afterMedian": 195.264292
+      },
+      "HELLSCRIPT.Combat.Tick.Enemies.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          117,
+          119
+        ],
+        "afterRange": [
+          119,
+          120
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 118,
+        "afterMedian": 120
+      },
+      "HELLSCRIPT.Edict.Decision.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.8166112666666667,
+          0.8512492847222223
+        ],
+        "afterRange": [
+          0.6525764246987952,
+          0.7086936936936937
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.8248861138790036,
+        "afterMedian": 0.7055243902439025
+      },
+      "HELLSCRIPT.Edict.Decision.p95": {
+        "accepted": false,
+        "beforeRange": [
+          5.465875,
+          6.234375
+        ],
+        "afterRange": [
+          5.363375,
+          5.577791
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5.80375,
+        "afterMedian": 5.54975
+      },
+      "HELLSCRIPT.Edict.Decision.p99": {
+        "accepted": true,
+        "beforeRange": [
+          10.158208,
+          11.675333
+        ],
+        "afterRange": [
+          7.926375,
+          9.635708
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 10.365334,
+        "afterMedian": 8.4465
+      },
+      "HELLSCRIPT.Edict.Decision.max": {
+        "accepted": false,
+        "beforeRange": [
+          31.511875,
+          33.718416
+        ],
+        "afterRange": [
+          33.135583,
+          39.773541
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 33.413125,
+        "afterMedian": 36.728125
+      },
+      "HELLSCRIPT.Edict.Decision.total": {
+        "accepted": false,
+        "beforeRange": [
+          220.485042,
+          245.159794
+        ],
+        "afterRange": [
+          216.655373,
+          235.995
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 231.792998,
+        "afterMedian": 231.412
+      },
+      "HELLSCRIPT.Edict.Decision.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          29,
+          30
+        ],
+        "afterRange": [
+          30,
+          30
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 30,
+        "afterMedian": 30
+      },
+      "HELLSCRIPT.Journal.Append.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.005513014234875446,
+          0.006951544444444444
+        ],
+        "afterRange": [
+          0.0040952831325301205,
+          0.005319460365853659
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.005648010416666667,
+        "afterMedian": 0.004703579579579579
+      },
+      "HELLSCRIPT.Journal.Append.p95": {
+        "accepted": true,
+        "beforeRange": [
+          0.007834,
+          0.027958
+        ],
+        "afterRange": [
+          0.00375,
+          0.006
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.007876,
+        "afterMedian": 0.003959
+      },
+      "HELLSCRIPT.Journal.Append.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.119706,
+          0.163498
+        ],
+        "afterRange": [
+          0.109418,
+          0.142084
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.131333,
+        "afterMedian": 0.116666
+      },
+      "HELLSCRIPT.Journal.Append.max": {
+        "accepted": false,
+        "beforeRange": [
+          0.25325,
+          0.432
+        ],
+        "afterRange": [
+          0.257579,
+          0.337253
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.321001,
+        "afterMedian": 0.281416
+      },
+      "HELLSCRIPT.Journal.Append.total": {
+        "accepted": false,
+        "beforeRange": [
+          1.549157,
+          1.876917
+        ],
+        "afterRange": [
+          1.359634,
+          1.744783
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 1.626627,
+        "afterMedian": 1.566292
+      },
+      "HELLSCRIPT.Journal.Append.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          46,
+          49
+        ],
+        "afterRange": [
+          46,
+          48
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 49,
+        "afterMedian": 46
+      },
+      "HELLSCRIPT.Minimap.Rebuild.mean": {
+        "accepted": true,
+        "beforeRange": [
+          1.0325915868055555,
+          1.2177310222222224
+        ],
+        "afterRange": [
+          0.4067077057057057,
+          0.4529796656626506
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.0697176832740214,
+        "afterMedian": 0.4401171219512195
+      },
+      "HELLSCRIPT.Minimap.Rebuild.p95": {
+        "accepted": true,
+        "beforeRange": [
+          5.641,
+          5.798917
+        ],
+        "afterRange": [
+          5.092333,
+          5.479041
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 5.736209,
+        "afterMedian": 5.285708
+      },
+      "HELLSCRIPT.Minimap.Rebuild.p99": {
+        "accepted": false,
+        "beforeRange": [
+          6.189875,
+          6.49275
+        ],
+        "afterRange": [
+          5.754542,
+          6.606125
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 6.335583,
+        "afterMedian": 6.36075
+      },
+      "HELLSCRIPT.Minimap.Rebuild.max": {
+        "accepted": false,
+        "beforeRange": [
+          6.451333,
+          8.75325
+        ],
+        "afterRange": [
+          6.780375,
+          7.41375
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 8.146917,
+        "afterMedian": 7.146083
+      },
+      "HELLSCRIPT.Minimap.Rebuild.total": {
+        "accepted": true,
+        "beforeRange": [
+          297.386377,
+          328.787376
+        ],
+        "afterRange": [
+          135.433666,
+          150.389249
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 300.590669,
+        "afterMedian": 144.358416
+      },
+      "HELLSCRIPT.Minimap.Rebuild.nonzeroCount": {
+        "accepted": true,
+        "beforeRange": [
+          54,
+          60
+        ],
+        "afterRange": [
+          24,
+          26
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 55,
+        "afterMedian": 26
+      },
+      "HELLSCRIPT.Save.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.31654817361111115,
+          0.3534598149466192
+        ],
+        "afterRange": [
+          0.15391616516516518,
+          0.19839214939024388
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.3422436703703704,
+        "afterMedian": 0.17090863554216865
+      },
+      "HELLSCRIPT.Save.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "HELLSCRIPT.Save.p99": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "HELLSCRIPT.Save.max": {
+        "accepted": true,
+        "beforeRange": [
+          46.791416,
+          52.434583
+        ],
+        "afterRange": [
+          27.119,
+          35.439667
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 49.691416,
+        "afterMedian": 31.259
+      },
+      "HELLSCRIPT.Save.total": {
+        "accepted": true,
+        "beforeRange": [
+          91.165874,
+          99.322208
+        ],
+        "afterRange": [
+          51.254083,
+          65.072625
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 92.405791,
+        "afterMedian": 56.741667
+      },
+      "HELLSCRIPT.Save.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          2,
+          2
+        ],
+        "afterRange": [
+          2,
+          2
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2,
+        "afterMedian": 2
+      },
+      "HELLSCRIPT.UI.Update.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.14151023487544484,
+          0.16652244444444445
+        ],
+        "afterRange": [
+          0.12879568373493974,
+          0.14264558841463415
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.1518314851851852,
+        "afterMedian": 0.13196244744744745
+      },
+      "HELLSCRIPT.UI.Update.p95": {
+        "accepted": true,
+        "beforeRange": [
+          1.072833,
+          1.171125
+        ],
+        "afterRange": [
+          0.730291,
+          0.959916
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.115542,
+        "afterMedian": 0.929041
+      },
+      "HELLSCRIPT.UI.Update.p99": {
+        "accepted": false,
+        "beforeRange": [
+          1.746875,
+          2.80875
+        ],
+        "afterRange": [
+          1.914209,
+          2.226583
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2.078791,
+        "afterMedian": 2.062417
+      },
+      "HELLSCRIPT.UI.Update.max": {
+        "accepted": false,
+        "beforeRange": [
+          2.700041,
+          4.045958
+        ],
+        "afterRange": [
+          2.6215,
+          6.277666
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3.261459,
+        "afterMedian": 3.20125
+      },
+      "HELLSCRIPT.UI.Update.total": {
+        "accepted": false,
+        "beforeRange": [
+          39.764376,
+          47.958464
+        ],
+        "afterRange": [
+          42.760167,
+          46.787753
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 40.994501,
+        "afterMedian": 43.943495
+      },
+      "HELLSCRIPT.UI.Update.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          268,
+          286
+        ],
+        "afterRange": [
+          326,
+          331
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 279,
+        "afterMedian": 330
+      },
+      "HELLSCRIPT.Visibility.Update.mean": {
+        "accepted": false,
+        "beforeRange": [
+          0.3001734791666667,
+          0.38576081111111116
+        ],
+        "afterRange": [
+          0.28147746246246247,
+          0.3596989146341463
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.30400180071174376,
+        "afterMedian": 0.3078633373493976
+      },
+      "HELLSCRIPT.Visibility.Update.p95": {
+        "accepted": false,
+        "beforeRange": [
+          3.803625,
+          3.930418
+        ],
+        "afterRange": [
+          3.671542,
+          4.224292
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 3.85,
+        "afterMedian": 3.71225
+      },
+      "HELLSCRIPT.Visibility.Update.p99": {
+        "accepted": false,
+        "beforeRange": [
+          4.120082,
+          4.552166
+        ],
+        "afterRange": [
+          4.30925,
+          5.175083
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 4.310375,
+        "afterMedian": 4.475042
+      },
+      "HELLSCRIPT.Visibility.Update.max": {
+        "accepted": false,
+        "beforeRange": [
+          4.945209,
+          7.45075
+        ],
+        "afterRange": [
+          4.542833,
+          6.551917
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 7.386375,
+        "afterMedian": 5.254083
+      },
+      "HELLSCRIPT.Visibility.Update.total": {
+        "accepted": false,
+        "beforeRange": [
+          85.424506,
+          104.155419
+        ],
+        "afterRange": [
+          93.731995,
+          117.981244
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 86.449962,
+        "afterMedian": 102.210628
+      },
+      "HELLSCRIPT.Visibility.Update.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          267,
+          286
+        ],
+        "afterRange": [
+          325,
+          328
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 275,
+        "afterMedian": 325
+      },
+      "HELLSCRIPT.World.Effect.mean": {
+        "accepted": true,
+        "beforeRange": [
+          0.042989291666666665,
+          0.055579644444444444
+        ],
+        "afterRange": [
+          0.03153267267267267,
+          0.03692647289156626
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.04812365480427046,
+        "afterMedian": 0.033581317073170726
+      },
+      "HELLSCRIPT.World.Effect.p95": {
+        "accepted": false,
+        "beforeRange": [
+          0.0,
+          0.0
+        ],
+        "afterRange": [
+          0.0,
+          0.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 0.0,
+        "afterMedian": 0.0
+      },
+      "HELLSCRIPT.World.Effect.p99": {
+        "accepted": true,
+        "beforeRange": [
+          0.041876,
+          0.061876
+        ],
+        "afterRange": [
+          0.031918,
+          0.03504
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 0.052665,
+        "afterMedian": 0.034001
+      },
+      "HELLSCRIPT.World.Effect.max": {
+        "accepted": true,
+        "beforeRange": [
+          9.398956,
+          10.366501
+        ],
+        "afterRange": [
+          8.618,
+          9.316833
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 10.029542,
+        "afterMedian": 9.14521
+      },
+      "HELLSCRIPT.World.Effect.total": {
+        "accepted": true,
+        "beforeRange": [
+          12.380916,
+          15.006504
+        ],
+        "afterRange": [
+          10.50038,
+          12.259589
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 13.522747,
+        "afterMedian": 11.014672
+      },
+      "HELLSCRIPT.World.Effect.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          14,
+          14
+        ],
+        "afterRange": [
+          14,
+          14
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 14,
+        "afterMedian": 14
+      },
+      "HELLSCRIPT.World.Present.mean": {
+        "accepted": false,
+        "beforeRange": [
+          1.2128154222222223,
+          1.4252777473309608
+        ],
+        "afterRange": [
+          1.2610701837349396,
+          1.333085743902439
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 1.2463611354166668,
+        "afterMedian": 1.2767432252252253
+      },
+      "HELLSCRIPT.World.Present.p95": {
+        "accepted": false,
+        "beforeRange": [
+          1.916875,
+          2.346292
+        ],
+        "afterRange": [
+          2.135833,
+          2.377375
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2.08275,
+        "afterMedian": 2.183041
+      },
+      "HELLSCRIPT.World.Present.p99": {
+        "accepted": true,
+        "beforeRange": [
+          4.49325,
+          5.063375
+        ],
+        "afterRange": [
+          4.152,
+          4.465
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 4.73725,
+        "afterMedian": 4.326583
+      },
+      "HELLSCRIPT.World.Present.max": {
+        "accepted": false,
+        "beforeRange": [
+          6.243667,
+          7.422083
+        ],
+        "afterRange": [
+          6.174292,
+          6.574375
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 6.524291,
+        "afterMedian": 6.563542
+      },
+      "HELLSCRIPT.World.Present.total": {
+        "accepted": false,
+        "beforeRange": [
+          327.460164,
+          400.503047
+        ],
+        "afterRange": [
+          418.675301,
+          437.252124
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 358.952007,
+        "afterMedian": 425.155494
+      },
+      "HELLSCRIPT.World.Present.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          268,
+          286
+        ],
+        "afterRange": [
+          326,
+          331
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 279,
+        "afterMedian": 330
+      },
+      "Main Thread.mean": {
+        "accepted": true,
+        "beforeRange": [
+          20.771630076388888,
+          22.09407697037037
+        ],
+        "afterRange": [
+          17.912179042042045,
+          18.232342359756096
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 21.229222544483985,
+        "afterMedian": 18.014762039156626
+      },
+      "Main Thread.p95": {
+        "accepted": true,
+        "beforeRange": [
+          33.331459,
+          33.471417
+        ],
+        "afterRange": [
+          32.850708,
+          33.045167
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 33.439417,
+        "afterMedian": 32.8745
+      },
+      "Main Thread.p99": {
+        "accepted": true,
+        "beforeRange": [
+          49.990125,
+          65.484958
+        ],
+        "afterRange": [
+          33.37775,
+          34.348458
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 51.426084,
+        "afterMedian": 33.731584
+      },
+      "Main Thread.max": {
+        "accepted": true,
+        "beforeRange": [
+          67.172666,
+          67.700625
+        ],
+        "afterRange": [
+          49.98425,
+          50.002875
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 67.649125,
+        "afterMedian": 49.985167
+      },
+      "Main Thread.total": {
+        "accepted": false,
+        "beforeRange": [
+          5965.400782,
+          5982.229462
+        ],
+        "afterRange": [
+          5964.755621,
+          5980.900997
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5965.411535,
+        "afterMedian": 5980.208294
+      },
+      "Main Thread.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          268,
+          286
+        ],
+        "afterRange": [
+          326,
+          331
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 279,
+        "afterMedian": 330
+      },
+      "PlayerLoop.mean": {
+        "accepted": true,
+        "beforeRange": [
+          20.769824361111112,
+          22.0920008
+        ],
+        "afterRange": [
+          17.9096922012012,
+          18.23004711280488
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 21.227163391459072,
+        "afterMedian": 18.012547177710843
+      },
+      "PlayerLoop.p95": {
+        "accepted": true,
+        "beforeRange": [
+          33.329833,
+          33.469208
+        ],
+        "afterRange": [
+          32.848542,
+          33.0425
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 33.437375,
+        "afterMedian": 32.872625
+      },
+      "PlayerLoop.p99": {
+        "accepted": true,
+        "beforeRange": [
+          49.988458,
+          65.481166
+        ],
+        "afterRange": [
+          33.375833,
+          34.346083
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 51.422292,
+        "afterMedian": 33.729792
+      },
+      "PlayerLoop.max": {
+        "accepted": true,
+        "beforeRange": [
+          67.170375,
+          67.699
+        ],
+        "afterRange": [
+          49.981,
+          50.000583
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 67.646833,
+        "afterMedian": 49.983167
+      },
+      "PlayerLoop.total": {
+        "accepted": false,
+        "beforeRange": [
+          5964.832913,
+          5981.709416
+        ],
+        "afterRange": [
+          5963.927503,
+          5980.165663
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 5964.840216,
+        "afterMedian": 5979.455453
+      },
+      "PlayerLoop.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          268,
+          286
+        ],
+        "afterRange": [
+          326,
+          331
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 279,
+        "afterMedian": 330
+      },
+      "SetPass Calls Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          145.8074074074074,
+          151.82291666666666
+        ],
+        "afterRange": [
+          146.67469879518072,
+          148.00900900900902
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 150.84341637010675,
+        "afterMedian": 146.7469512195122
+      },
+      "SetPass Calls Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          326.0,
+          358.0
+        ],
+        "afterRange": [
+          331.0,
+          352.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 358.0,
+        "afterMedian": 334.0
+      },
+      "SetPass Calls Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          396.0,
+          421.0
+        ],
+        "afterRange": [
+          396.0,
+          411.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 403.0,
+        "afterMedian": 396.0
+      },
+      "SetPass Calls Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          432.0,
+          453.0
+        ],
+        "afterRange": [
+          443.0,
+          448.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 434.0,
+        "afterMedian": 446.0
+      },
+      "SetPass Calls Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          39368.0,
+          43725.0
+        ],
+        "afterRange": [
+          48133.0,
+          49287.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 42387.0,
+        "afterMedian": 48696.0
+      },
+      "SetPass Calls Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          227,
+          251
+        ],
+        "afterRange": [
+          254,
+          281
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 227,
+        "afterMedian": 268
+      },
+      "Triangles Count.mean": {
+        "accepted": false,
+        "beforeRange": [
+          880143.9444444445,
+          922605.6493055555
+        ],
+        "afterRange": [
+          875841.7103658536,
+          896370.3243243244
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 921555.9822064057,
+        "afterMedian": 879219.4879518072
+      },
+      "Triangles Count.p95": {
+        "accepted": false,
+        "beforeRange": [
+          1956978.0,
+          2118070.0
+        ],
+        "afterRange": [
+          2038948.0,
+          2118714.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2118040.0,
+        "afterMedian": 2118490.0
+      },
+      "Triangles Count.p99": {
+        "accepted": false,
+        "beforeRange": [
+          2121514.0,
+          2121924.0
+        ],
+        "afterRange": [
+          2120040.0,
+          2122274.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2121554.0,
+        "afterMedian": 2121296.0
+      },
+      "Triangles Count.max": {
+        "accepted": false,
+        "beforeRange": [
+          2123686.0,
+          2125078.0
+        ],
+        "afterRange": [
+          2123744.0,
+          2125064.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2125062.0,
+        "afterMedian": 2124594.0
+      },
+      "Triangles Count.total": {
+        "accepted": false,
+        "beforeRange": [
+          237638865.0,
+          265710427.0
+        ],
+        "afterRange": [
+          287276081.0,
+          298491318.0
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 258957231.0,
+        "afterMedian": 291900870.0
+      },
+      "Triangles Count.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          226,
+          248
+        ],
+        "afterRange": [
+          254,
+          281
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 227,
+        "afterMedian": 269
+      },
+      "UGUI.Rendering.UpdateBatches.mean": {
+        "accepted": true,
+        "beforeRange": [
+          1.3361972118055554,
+          1.515650177777778
+        ],
+        "afterRange": [
+          0.5948831381381381,
+          0.6412773554216867
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 1.3680830533807828,
+        "afterMedian": 0.631751225609756
+      },
+      "UGUI.Rendering.UpdateBatches.p95": {
+        "accepted": true,
+        "beforeRange": [
+          6.839375,
+          6.901291
+        ],
+        "afterRange": [
+          5.730958,
+          6.24475
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 6.871583,
+        "afterMedian": 6.122125
+      },
+      "UGUI.Rendering.UpdateBatches.p99": {
+        "accepted": false,
+        "beforeRange": [
+          7.176667,
+          7.830375
+        ],
+        "afterRange": [
+          6.436834,
+          7.341459
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 7.481792,
+        "afterMedian": 6.9685
+      },
+      "UGUI.Rendering.UpdateBatches.max": {
+        "accepted": false,
+        "beforeRange": [
+          7.923292,
+          10.161375
+        ],
+        "afterRange": [
+          7.80025,
+          8.141
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 9.208291,
+        "afterMedian": 7.997584
+      },
+      "UGUI.Rendering.UpdateBatches.total": {
+        "accepted": true,
+        "beforeRange": [
+          384.431338,
+          409.225548
+        ],
+        "afterRange": [
+          198.096085,
+          212.904082
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 384.824797,
+        "afterMedian": 207.214402
+      },
+      "UGUI.Rendering.UpdateBatches.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          269,
+          287
+        ],
+        "afterRange": [
+          327,
+          332
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 280,
+        "afterMedian": 331
+      },
+      "WaitForTargetFPS.mean": {
+        "accepted": false,
+        "beforeRange": [
+          9.729661368055556,
+          10.916979633333332
+        ],
+        "afterRange": [
+          11.78766168292683,
+          12.041676909638554
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 10.28454334163701,
+        "afterMedian": 11.965925033033034
+      },
+      "WaitForTargetFPS.p95": {
+        "accepted": false,
+        "beforeRange": [
+          14.626708,
+          15.585584
+        ],
+        "afterRange": [
+          14.998459,
+          15.120542
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 15.399791,
+        "afterMedian": 15.0585
+      },
+      "WaitForTargetFPS.p99": {
+        "accepted": true,
+        "beforeRange": [
+          16.553001,
+          17.064792
+        ],
+        "afterRange": [
+          15.694542,
+          16.550667
+        ],
+        "reason": "Disjoint reduction",
+        "beforeMedian": 17.049999,
+        "afterMedian": 15.863875
+      },
+      "WaitForTargetFPS.max": {
+        "accepted": false,
+        "beforeRange": [
+          16.946208,
+          17.414917
+        ],
+        "afterRange": [
+          16.913458,
+          17.555916
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 17.371375,
+        "afterMedian": 17.316292
+      },
+      "WaitForTargetFPS.total": {
+        "accepted": false,
+        "beforeRange": [
+          2802.142474,
+          2947.584501
+        ],
+        "afterRange": [
+          3866.353032,
+          3997.836734
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 2889.956679,
+        "afterMedian": 3984.653036
+      },
+      "WaitForTargetFPS.nonzeroCount": {
+        "accepted": false,
+        "beforeRange": [
+          269,
+          287
+        ],
+        "afterRange": [
+          327,
+          332
+        ],
+        "reason": "Ranges overlap or no reduction",
+        "beforeMedian": 280,
+        "afterMedian": 331
+      }
+    },
+    "actualFpsRangesOverlap": false
+  }
+]

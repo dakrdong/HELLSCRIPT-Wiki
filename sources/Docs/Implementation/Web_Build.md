@@ -1,10 +1,19 @@
 # HELLSCRIPT 웹 플레이어
 
-갱신일: 2026-10-02 · [English](Web_Build.en.md)
+갱신일: 2026-10-07 · [English](Web_Build.en.md)
 
 웹 플레이어는 Unity 게임을 브라우저에서 실행하는 별도 배포본이다. 개인 계정이나 개발 프로젝트를 배포 폴더에 복사하지 않는다. 게임 소스는 기존 저장소에서 관리하고, 실행 파일만 `hellscript-game/hellscript-game.github.io`에 게시한다. 이전 플레이 저장을 위해 `dakrdong/HELLSCRIPT-Web`도 유지한다. 기존 공개 위키는 별도 저장소를 유지한다.
 
 공개 플레이 주소: [HELLSCRIPT Web](https://hellscript-game.github.io/). 배포 성공 여부는 아래 배포 실행 기록에서 확인한다.
+
+## 최적화 단계 0·1 공개 출시 — 2026-10-07
+
+[PR #65](https://github.com/dakrdong/HELLSCRIPT/pull/65)를 병합한 main `1147406775f39406c99223042b46fdb6c71803a1`의 출시 WebGL을 게시했다. 측정용 개발 빌드가 아닌 일반 플레이어이며, 저장·전투 기록·미니맵의 단계 1 최적화와 최신 마을·튜토리얼 변경을 포함한다. Unity 6000.6.0f1 오류 0, 공개 7파일·259,348,573바이트, 11조각 복원 해시 전부 일치, 로더 5개·패키지 5개 검사 통과다.
+
+[주 주소의 Pages](https://github.com/hellscript-game/hellscript-game.github.io/actions/runs/37519716373)와 [기존 주소의 Pages](https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/37519746846)가 모두 성공했다. 로그인 없는 내장 브라우저에서 주 주소의 실제 시작·게스트·전사·마을 한국어/영어 표시와 한국어 복원을 확인했다. 기존 주소도 새 소스 manifest·로딩·게임 시작·실제 타이틀을 확인했다. Console 오류 0이며 주 주소에 기존 셰이더 경고 1건과 Content-Length 경고 8건이 남아 있다.
+
+통합 영향 EditMode 52개와 main CI는 통과했다. 기존 전체 검사와 통과한 스모크는 변경되지 않은 범위에서 재사용했다. 이번 동작 확인을 출시 성능 개선율·모바일·전체 전투/보상/저장 검증으로 확대하지 않는다. 별도 APK는 만들지 않았다. 상세 구현·측정·배포 근거와 남은 단계는 [최적화 결과](WebGL_Optimization_20261006.md#메인-병합과-공개-출시--2026-10-07)에 모았다.
+
 
 ## 플레이와 저장
 

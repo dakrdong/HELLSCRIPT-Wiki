@@ -377,6 +377,7 @@ namespace Hellscript
         }
         bool Write(AccountSave data,HuntEdictEditSession edictSession=null)
         {
+            using var sample=PresentationMetrics.Save.Auto();
             // Direct build/preset/character writers must not bypass a failed offline interval.
             if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle)
             {Error=Loc.T("미접속 보급 정산을 먼저 완료해 주세요.");return false;}
@@ -410,9 +411,13 @@ namespace Hellscript
                 if(PersistedItems(data).Any(ItemQuality.HasQuality)||RecordedItems(data).Any(i=>i.contentVersion>=ItemQuality.ItemVersion))
                     data.schema=Math.Max(data.schema,MaximumSchemaVersion);
                 ObservePlayerProgress(data);
-                File.WriteAllText(path+".tmp",JsonUtility.ToJson(data,true));
+                var saveStarted=System.Diagnostics.Stopwatch.GetTimestamp();
+                string saveJson=JsonUtility.ToJson(data,false);
+                File.WriteAllText(path+".tmp",saveJson);
                 if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
                 CombatArchive.Synchronize(data);
+                PresentationMetrics.SaveCalls++;PresentationMetrics.SaveBytes+=System.Text.Encoding.UTF8.GetByteCount(saveJson);
+                PresentationMetrics.SaveMilliseconds+=(System.Diagnostics.Stopwatch.GetTimestamp()-saveStarted)*1000d/System.Diagnostics.Stopwatch.Frequency;
                 CaptureEdictBoundary(data);Data.guide=data.guide;Error="";return true;
             }
             catch(Exception e)

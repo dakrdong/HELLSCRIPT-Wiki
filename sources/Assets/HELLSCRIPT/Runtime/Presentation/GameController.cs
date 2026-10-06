@@ -30,7 +30,11 @@ namespace Hellscript
         public bool Running => Combat!=null;
         public bool Active => Combat!=null&&Combat.State.phase!=RunPhase.Cleared&&Combat.State.phase!=RunPhase.Failed;
         public bool CanChangeCharacterFromSettings=>!TutorialActive&&!(Active&&Combat.State.training<0);
-        public float EffectiveSpeed => Combat?.State.training<0&&Combat.State.riftAttendance?.version==1?Combat.State.riftAttendance.speed:1f;
+        public float EffectiveSpeed =>
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            RuntimePresentationProfile.Speed*
+#endif
+            (Combat?.State.training<0&&Combat.State.riftAttendance?.version==1?Combat.State.riftAttendance.speed:1f);
         float saveClock,resultDelay;
         bool resultShown,backgroundPaused;
         void Awake()
@@ -39,6 +43,10 @@ namespace Hellscript
             if(catalog==null){catalog=ScriptableObject.CreateInstance<GameCatalog>();catalog.Populate();}
             string saveDirectory=Application.persistentDataPath;
             string[] args=Environment.GetCommandLineArgs();for(int i=0;i<args.Length-1;i++)if(args[i]=="-hellscriptSavePath")saveDirectory=args[i+1];
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if(Debug.isDebugBuild&&args.Contains("-hellscriptPresentationProfile")&&saveDirectory.StartsWith("persistent:",StringComparison.Ordinal))
+                saveDirectory=System.IO.Path.Combine(Application.persistentDataPath,saveDirectory.Substring("persistent:".Length));
+#endif
             AttendancePopups=new AttendancePopupSettings(saveDirectory);
             InitializeLanguage(saveDirectory);
             ItemRangeDisplay.Initialize(saveDirectory);

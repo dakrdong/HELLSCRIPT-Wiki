@@ -1,10 +1,19 @@
 # HELLSCRIPT Web player
 
-Updated: 2026-10-02 · [한국어](Web_Build.md)
+Updated: 2026-10-07 · [한국어](Web_Build.md)
 
 The Web player is a separate deployment of the Unity game. Only executable build artifacts are published to `hellscript-game/hellscript-game.github.io`; private profiles and the development project are not copied. `dakrdong/HELLSCRIPT-Web` remains available for existing saves. Game source remains in the existing repository and the public wiki keeps its separate deployment.
 
 Public player: [HELLSCRIPT Web](https://hellscript-game.github.io/). Deployment status is available through the deployment runs linked below.
+
+## Public optimization stages 0–1 release — 2026-10-07
+
+Published the ordinary WebGL player from merged main `1147406775f39406c99223042b46fdb6c71803a1`, [PR #65](https://github.com/dakrdong/HELLSCRIPT/pull/65). It includes Stage 1 save/journal/minimap optimization and latest town/tutorial changes, without development measurement arguments. Unity 6000.6.0f1, zero errors, 7 files / 259,348,573 bytes, all hashes identical after reconstruction from 11 chunks; loader tests 5/5, package tests 5/5.
+
+[Primary Pages](https://github.com/hellscript-game/hellscript-game.github.io/actions/runs/37519716373) and [previous-address Pages](https://github.com/dakrdong/HELLSCRIPT-Web/actions/runs/37519746846) both succeeded. Logged-out in-app browser confirmed primary Start, Guest, Warrior, KO/EN town and KO restoration. Previous address also served the exact new source manifest, completed loading and rendered the Unity title after Start. Zero console errors; primary retains one known shader warning and eight Content-Length warnings.
+
+Affected integration EditMode tests 52/52 and main CI passed. Reuse previous full tests and successful smokes for unchanged coverage. This functional check does not establish release performance gains, physical mobile or complete combat/reward/save validation. No APK was built. See the [consolidated optimization report](WebGL_Optimization_20261006.en.md#main-integration-and-public-release--2026-10-07) for implementation, historical measurements, release evidence and remaining stages.
+
 
 ## Playing and saving
 

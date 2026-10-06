@@ -261,6 +261,7 @@ CHK-A02의 A03·M02 조준과 LM01 이동 선택, CHK-C02의 장판 겹침·세�
 | CHK-P05 | 독립 음향 목록과 믹서 규격이 없다. | 시험 제작 목록은 UI 선택/확정/거절/보상/잠금/정리, 근접·활·마법의 준비/공격/적중, 이동기/보호막/물약/장판, 일반 적·정예·보스의 예고/피격/사망, 상자 개봉·전설 획득, 성소·균열 환경음과 음악이다. 동일 소리가 겹칠 때 우선순위·동시 재생 상한을 둔다. | 모든 소리를 꺼도 전투 정보를 잃지 않는다. 배속에 따라 음악·UI 소리의 높이가 변하지 않고 전투 사건 소리만 빈도가 따라간다. | B | 소리 사건 ID·권리 확인 |
 | CHK-P06 | macOS 개발 빌드 검증 기록이 있다. | Android 세로 실기기, 작은 화면·긴 화면, 안전 영역, 글꼴·터치·백그라운드·복귀·알림 중단·저전력 상태를 검사한다. 신규 시험 목표는 주요 터치 영역 최소 48dp 상당, 글자 확대 100/120/140%, 30/60fps 옵션이다. | 확대에서 핵심 문구·가격·조건·확인 버튼이 잘리지 않는다. 홈 전환·전화 중단 후 균열·보상이 복원된다. | C | 대표 기기·Android 모듈 |
 | CHK-P07 | 프레임 목표값은 있으나 Android 측정이 없다. | 대표 2개 기기에서 1/1.5/2배, 보스+부하+장판, 30분 반복의 프레임 시간·메모리·발열·배터리를 기록한다. 신규 시험 목표는 30fps 모드에서 95백분위 프레임 33.3ms 이하다. | 실측 기록과 병목을 남긴다. 목표 미달 시 효과·해상도·동시 표현 수를 조정해도 전투 계산·보상은 바꾸지 않는다. | C | 완성 콘텐츠·기기 측정 |
+| CHK-P07-WEB60 | PC부터 측정한다. Android·iPhone 실기기는 현재 확보하지 못했다(2026-10-06). | PC 브라우저·Android Chrome·iOS Safari의 실제 60FPS, 프레임 p95 16.7ms 이하를 목표로 한다. 칙령 ON/OFF·세 직업·기본 밀도와 2/4배 개발 스트레스·30분 반복·실제 영속 저장을 같은 조건으로 측정하고 p99·최대·33/50ms 초과 프레임·GC·메모리도 기록한다. | 전투 20Hz·판단 0.2초·저장 3초·로그 표시 약 0.15초와 결과·보상을 보존한다. 개발 전용 2배속은 배포 접근 정책을 바꾸지 않는다. 기기별 미측정과 미달을 명시한다. | C | 고정 해시의 개발 플레이어·반복 측정·모바일 실기기 |
 | CHK-P08 | 기본 도움말이 있다. | 효과 용어 사전, 툴팁, 색 구분 보조, 효과음·음악·진동·화면 흔들림 개별 설정을 제공한다. 소리·진동은 대체 수단이며 유일한 경고로 쓰지 않는다. | 사용자 설정을 저장·복원하고 재접속·기기 인계에서 적용한다. 단어가 다른 화면에서 다른 뜻으로 쓰이지 않는다. | C | 설정 저장·한글 UI |
 
 음원은 사용 권리가 확인되는 자체 제작 또는 허용된 자산으로 구성한다. 이미지 생성기를 음원이나 움직이는 3D 모델 제작 도구로 취급하지 않는다. 정적 생성 이미지는 장비·스킬 정의 ID와 연결하고, 실제 수치·글자는 이미지에 구워 넣지 않는다.
@@ -303,3 +304,6 @@ CHK-A02의 A03·M02 조준과 LM01 이동 선택, CHK-C02의 장판 겹침·세�
 장비·세트 수량이나 무작위 균열·상자 정책에서 기존 범위를 바꾸는 제품 선택이 생기면 각 담당 명세가 그 차이를 정리한다. 이 체크리스트에 같은 질문을 중복 추가하지 않는다.
 
 English update (2026-09-13): owned-equipment and active-edict A/B training, frozen rune boards and version-2 evidence are validated in the [implementation record](../Implementation/Training_Equipment_Expansion.en.md). Physical mobile checks, broader evasion analysis and farming-efficiency measurements remain distinct tasks.
+
+
+English (CHK-P07-WEB60): Target actual 60 FPS and p95 frame time at or below 16.7 ms on PC browsers, Android Chrome and iOS Safari. Compare matched hashes, class/edict/density/log conditions and real persistent saves, including p99/max, long frames, GC and memory. Preserve 20 Hz combat, 0.2-second decisions, 3-second saves and approximately 0.15-second display refresh. Physical Android/iPhone devices are unavailable as of 2026-10-06; mobile performance remains unverified.

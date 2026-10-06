@@ -276,7 +276,7 @@ namespace Hellscript
             if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
             fullBattleAction=run.paused?Loc.T("일시정지"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
             RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));RefreshTrainingHud(run);RefreshRiftActivityHud(run);ReflowBattleHud();UpdateBattleBrief();
-            if(riftMinimap!=null)riftMinimap.SetVerticesDirty();
+            if(riftMinimap!=null)riftMinimap.RefreshMarkers();
             if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);
         }
         public void ShowBuild()

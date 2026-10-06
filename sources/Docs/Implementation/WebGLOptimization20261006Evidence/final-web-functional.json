@@ -1,0 +1,80 @@
+{
+  "createdUtc": "2026-10-06T14:38:53.921551+00:00",
+  "browser": "Codex In-app Browser (iab), verified ID 5",
+  "buildVariant": "final/Web after prepare_web_cpu_profile.py; no deployed/public player",
+  "scope": "Warrior OFF density 1, expanded live log KO/EN; actual combat, isolated IDBFS sync, final journal dump and visual readback",
+  "runs": [
+    {
+      "language": "en",
+      "passedFunctionalScope": true,
+      "renderedResolution": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ],
+      "devicePixelRatio": 2,
+      "phase": "Exploring",
+      "page": "battle",
+      "frames": 356,
+      "combatTicks": 120,
+      "saveCalls": 2,
+      "storageSyncCallbacks": 9,
+      "storageSyncErrors": 0,
+      "runtimeExceptions": 0,
+      "consoleErrors": 0,
+      "finalRunPost": "HELLSCRIPT_RUN_SAVED 204",
+      "savedJournalEvents": 150,
+      "performanceComparisonAccepted": false,
+      "strictComparisonRejectionReasons": [
+        "Visibility, resolution or focus mismatch",
+        "Insufficient workload"
+      ],
+      "rawEvidence": "/Users/t8g-2410-pn-005/.codex/worktrees/webgl-optimization-stage0-1/HELLSCRIPT/Builds/Optimization20261006/validation/final-web-runtime/after/Warrior-off-1-en-expanded-r1/window-000",
+      "screenshotSha256": "eab65b233a711c7474e49229076bcba3091024c46085108cfa925ee27ec93372"
+    },
+    {
+      "language": "ko",
+      "passedFunctionalScope": true,
+      "renderedResolution": [
+        1920,
+        1080
+      ],
+      "viewport": [
+        1280,
+        720
+      ],
+      "devicePixelRatio": 2,
+      "phase": "Exploring",
+      "page": "battle",
+      "frames": 714,
+      "combatTicks": 120,
+      "saveCalls": 2,
+      "storageSyncCallbacks": 9,
+      "storageSyncErrors": 0,
+      "runtimeExceptions": 0,
+      "consoleErrors": 0,
+      "finalRunPost": "HELLSCRIPT_RUN_SAVED 204",
+      "savedJournalEvents": 150,
+      "performanceComparisonAccepted": false,
+      "strictComparisonRejectionReasons": [
+        "Visibility, resolution or focus mismatch",
+        "Insufficient workload"
+      ],
+      "rawEvidence": "/Users/t8g-2410-pn-005/.codex/worktrees/webgl-optimization-stage0-1/HELLSCRIPT/Builds/Optimization20261006/validation/final-web-runtime/after/Warrior-off-1-ko-expanded-r1/window-000",
+      "screenshotSha256": "4582ac46628b96463e199337bfa6a859c06bb430e4913f89b8602c325077de0b"
+    }
+  ],
+  "matchedPerformanceSamplesAdded": 0,
+  "existing114PerformanceSamplesUnchanged": true,
+  "criteriaLoosened": false,
+  "taskTabsClosed": true,
+  "viewportOverrideReset": true,
+  "taskServerStopped": {
+    "pid": 23435,
+    "port": 57710
+  },
+  "limitations": "Local functional proof only; actual DPR/resolution and KO pacing differ from frozen performance conditions. Full mobile, long run and production browser coverage remain unverified."
+}
