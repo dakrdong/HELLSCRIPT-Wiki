@@ -2,7 +2,8 @@
 const label = (ko, en) => ({ ko, en });
 const dependency = (id, sourceCue, ko, en) => ({ id, sourceCue, reason: label(ko, en) });
 // Only actual effect targets/triggers are prerequisites. Shared combat states
-// alone do not bind a skill. Alternatives are limited to direct effect sources.
+// alone do not bind a skill. A skill never offers "this or that" prerequisites: when an effect reads
+// several sources, one is required (the one already on its branch) and the others are listed in `optional`.
 const dependencies = {
   W10: dependency('W09', '자신의 W09 잔여 출혈만', '찢어낸 상처가 남긴 출혈을 직접 정산하므로 해당 스킬의 활성화가 필요합니다.', 'Consumes the remaining bleed from Raking Wound, so that skill must be unlocked.'),
   WP02: dependency('W01', '회오리를 2초 유지하면', '회오리의 유지 비용을 줄이는 전용 강화입니다.', 'Specifically reduces the sustained cost of Whirlwind.'),
@@ -22,29 +23,28 @@ const dependencies = {
   MP03: dependency('M03', '연쇄 번개의 총 타격', '연쇄 번개의 총 타격 수를 늘립니다.', 'Increases the total number of Chain Lightning hits.'),
   MP12: dependency('M11', '축전 구체가 자연 만료하면', '축전 구체가 자연 만료될 때만 자원을 회복합니다.', 'Recovers resources specifically when Capacitor Orb expires naturally.')
 };
-const alternatives = (ids, cue, ko, en, required = []) => ({ ids, required, sourceCue: cue, reason: label(ko,en) });
 Object.assign(dependencies, {
   WP08: dependency('W09','W09','찢어낸 상처의 출혈에 직접 반응합니다. 장비로 생기는 추가 출혈은 별도 효과이며, 트리는 기본 스킬 관계를 표시합니다.','Directly reads Raking Wound bleeding. Additional equipment bleeding is separate; the tree shows the base skill relationship.'),
-  WP11: alternatives(['W02','W11'],'도약 내려찍기','도약 내려찍기 또는 전선 돌파의 착지에 보호막을 더합니다. 직접 발동시키는 두 스킬 중 하나가 필요합니다.','Adds a barrier on landing Leap Slam or Front Break. Unlock either direct trigger.'),
-  WP17: alternatives(['W03','W04'],'분쇄 일격','분쇄 일격과 지면 강타의 피해를 강화합니다. 강화 대상 중 하나를 먼저 활성화합니다.','Improves Crushing Blow and Ground Slam. Unlock one of these targets first.'),
+  WP11: dependency('W02','도약 내려찍기','도약 내려찍기의 착지에 보호막을 더합니다. 전선 돌파의 착지에도 적용되지만 해금에는 도약 내려찍기만 필요합니다.','Adds a barrier on landing Leap Slam. It also applies to Front Break landings, but only Leap Slam is needed to unlock it.'),
+  WP17: dependency('W03','분쇄 일격','분쇄 일격과 지면 강타의 피해를 강화합니다. 해금에는 분쇄 일격만 필요합니다.','Improves Crushing Blow and Ground Slam. Only Crushing Blow is needed to unlock it.'),
   WP18: dependency('W17','선조의 전쟁','선조의 전쟁 전용 패시브입니다. 선조의 실제 적중으로 자원을 회복합니다.','Dedicated to War of the Ancestors; actual ancestor hits restore resources.'),
   WP19: dependency('W18','거인의 심판','거인의 심판 전용 패시브입니다. 직접 맞힌 적 수에 따라 보호막을 얻습니다.',"Dedicated to Titan's Judgment; direct targets grant a barrier."),
   AP04: dependency('A03','직접 설치한 덫','맹독 덫의 속박 시간을 늘립니다. 후퇴 덫은 장비가 만드는 추가 효과이며 가시 덫의 속박에는 적용되지 않습니다.','Extends Venom Trap roots. Retreat traps require equipment; Briar Trap roots do not use this passive.'),
-  AP11: alternatives(['A03','A09','A10'],'맹독 덫','직접 설치한 세 종류의 덫이 준비되면 발동합니다. 해당 덫 중 하나가 필요합니다.','Triggers when one of the three directly placed traps arms. Unlock one of these traps.'),
-  AP12: alternatives(['A03','A09','A10'],'후퇴 도약','후퇴 도약과 덫 하나가 필요합니다. 덫을 설치하면 후퇴 도약의 남은 쿨타임을 줄입니다.','Requires Retreat Leap and one trap. Placing the trap reduces Retreat Leap cooldown.',['A04']),
-  AP13: alternatives(['A01','A08'],'관통 사격','관통 사격과 응시 사격의 피해를 강화합니다. 강화 대상 중 하나를 먼저 활성화합니다.','Improves Piercing Shot and Patient Shot. Unlock one of these targets first.'),
-  AP16: alternatives(['A12','A16'],'연막 엄폐','연막 엄폐 또는 사냥 준비가 다음 유료 스킬의 비용 감소를 준비합니다. 발동 스킬 중 하나가 필요합니다.','Smoke Cover or Hunt Preparation prepares the next paid skill cost reduction. Unlock one trigger.'),
+  AP11: dependency('A03','맹독 덫','직접 설치한 세 종류의 덫이 준비되면 발동합니다. 해금에는 맹독 덫만 필요합니다.','Triggers when any of the three directly placed traps arms. Only Venom Trap is needed to unlock it.'),
+  AP12: dependency('A04','후퇴 도약','후퇴 도약의 남은 쿨타임을 줄입니다. 쿨타임을 줄이는 계기가 되는 덫은 어떤 종류든 상관없어 해금에는 후퇴 도약만 필요합니다.','Reduces Retreat Leap cooldown when any trap is placed. The trap can be of any kind, so only Retreat Leap is needed to unlock it.'),
+  AP13: dependency('A08','관통 사격','관통 사격과 응시 사격의 피해를 강화합니다. 해금에는 응시 사격만 필요합니다.','Improves Piercing Shot and Patient Shot. Only Patient Shot is needed to unlock it.'),
+  AP16: dependency('A12','연막 엄폐','연막 엄폐 또는 사냥 준비가 다음 유료 스킬의 비용 감소를 준비합니다. 해금에는 연막 엄폐만 필요합니다.','Smoke Cover or Hunt Preparation prepares the next paid skill cost reduction. Only Smoke Cover is needed to unlock it.'),
   AP18: dependency('A17','일제 소탕','일제 소탕 전용 패시브입니다. 첫 파동의 표식 대상에게 추가 피해를 줍니다.','Dedicated to Killing Rain; the first wave deals extra damage to a marked target.'),
   AP19: dependency('A18','잔상 행군의 지속시간','잔상 행군 전용 패시브입니다. 지속시간과 생성 가능한 총 잔상 수를 늘립니다.','Dedicated to Afterimage March; extends duration and the total number of movement afterimages.'),
-  MP07: alternatives(['M07','M08'],'연소','잿불창의 연소와 화염 장벽 안의 적에게 직접 반응합니다. 실제 효과가 참조하는 두 스킬 중 하나가 필요합니다.','Directly checks Ember Lance burning or an enemy inside Firewall. Unlock one of the two sources used by the effect.'),
-  MP08: alternatives(['M07','M08'],'M07','잿불창의 연소 또는 화염 장벽 안에 있는 적에게 받는 피해를 줄입니다.','Reduces damage from enemies burning from Ember Lance or standing in Firewall.'),
-  MP10: alternatives(['M06','M09'],'M06','서리 폭발 또는 빙하창의 빙결·보스 제압 성공에 반응합니다.','Triggers on a successful freeze or boss control from Frost Nova or Glacial Lance.'),
-  MP11: alternatives(['M03','M12'],'다음 M03·M12의 직접 피해','연쇄 번개와 접지창의 다음 직접 피해를 강화합니다. 두 강화 대상을 모두 표시합니다.','Improves the next direct damage from Chain Lightning or Grounding Spear. Both direct targets are listed.'),
+  MP07: dependency('M07','연소','잿불창의 연소와 화염 장벽 안의 적에게 직접 반응합니다. 해금에는 잿불창만 필요합니다.','Directly checks Ember Lance burning or an enemy inside Firewall. Only Ember Lance is needed to unlock it.'),
+  MP08: dependency('M08','M07','잿불창의 연소 또는 화염 장벽 안에 있는 적에게 받는 피해를 줄입니다. 해금에는 화염 장벽만 필요합니다.','Reduces damage from enemies burning from Ember Lance or standing in Firewall. Only Firewall is needed to unlock it.'),
+  MP10: dependency('M09','M06','서리 폭발 또는 빙하창의 빙결·보스 제압 성공에 반응합니다. 해금에는 빙하창만 필요합니다.','Triggers on a successful freeze or boss control from Frost Nova or Glacial Lance. Only Glacial Lance is needed to unlock it.'),
+  MP11: dependency('M12','다음 M03·M12의 직접 피해','연쇄 번개와 접지창의 다음 직접 피해를 강화합니다. 해금에는 접지창만 필요합니다.','Improves the next direct damage from Chain Lightning or Grounding Spear. Only Grounding Spear is needed to unlock it.'),
   MP18: dependency('M17','삼원소 붕괴','삼원소 붕괴 전용 패시브입니다. 세 번째 단계의 실제 적중으로 자원을 회복합니다.','Dedicated to Triune Collapse; a hit in the third stage restores resources.'),
   MP19: dependency('M18','현자의 화신','현자의 화신 전용 패시브입니다. 해당 궁극기의 보호막 생성량을 늘립니다.','Dedicated to Sage Incarnate; increases the barrier it creates.')
 });
 // Lineage: the one skill that precedes each skill in the tree, so every branch reads top to bottom like a
-// Diablo skill tree. It is structural, not an effect source: `all`/`oneOf` above remain the audited
+// Diablo skill tree. It is structural, not an effect source: `all` above remains the audited
 // requirements, and a lineage parent never opens later than its child, so unlock levels are unchanged.
 // A skill whose effect dependency is already its parent needs no entry.
 const lineage = {
@@ -62,10 +62,10 @@ const lineage = {
   MP05:'M04', M05:'M04', MP04:'M05', MP13:'MP04', MP14:'MP05', M13:'MP14', M14:'MP13', MP15:'M13', MP17:'MP15'
 };
 const node = (id, level, branch) => {
-  const effect = (dependencies[id]?.id ? [dependencies[id].id] : dependencies[id]?.required || []);
+  const effect = dependencies[id]?.id ? [dependencies[id].id] : [];
   return { id, level, branch,
     all: effect.map(id=>({id,rank:1})),
-    oneOf: (dependencies[id]?.ids || []).map(id=>({id,rank:1})),
+    oneOf: [],
     lineage: lineage[id] && !effect.includes(lineage[id]) ? lineage[id] : null };
 };
 // Socket grids: grid[lane][band] is a list of rows; a row names the skill in its left and right column

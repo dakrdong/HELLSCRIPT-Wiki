@@ -1,6 +1,12 @@
 # Hunt edict skill tree integration
 
-Updated: 2026-10-05 · [한국어](Hunt_Edict_Skill_Tree.md)
+Updated: 2026-10-07 · [한국어](Hunt_Edict_Skill_Tree.md)
+
+## 2026-10-07: no choice prerequisites, one-tap selection, prerequisite-only highlight
+
+- **No choice prerequisites.** The ten skills that required "A or B" now require one skill (`oneOf` is an empty array everywhere in `ClassSkillTree.json`). The detail panel no longer shows the "unlock one of the linked skills" line. Reasons and the skill list are in [Class skill trees](../Design/Class_Skill_Trees.en.md).
+- **One tap.** While the equip bubble (+/−) was open, tapping another skill only closed the bubble and needed a second tap to select. The outside-tap backdrop now closes the bubble and passes the same tap to a skill icon or equipment socket, so one tap selects. Other controls (tabs and so on) still do not receive the tap. The smoke gained a "tap another skill with the bubble open" check.
+- **Prerequisite-only highlight.** Selecting a skill lights only the links above it, back to the branch start, in one colour. Links down to followers and the diagonal lines across branches are no longer drawn. The overlapping translucent halo is gone, so corners and shared stretches no longer blotch.
 
 ## 2026-10-05: branch parents and a clean link layout
 

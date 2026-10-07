@@ -80,10 +80,12 @@ test('planner export round trips and rejects runtime formats, unknown IDs, overs
 test('every source reference is classified independently of the configured tree links',()=>{
  const audit=require('./audit-dependencies.cjs').audit,root=require('node:path').resolve(__dirname,'../..');
  assert.equal(audit(source,data.classes,root).auditedSkills,111);
- for(const [child,parent] of [['WP18','W17'],['WP19','W18'],['AP18','A17'],['AP19','A18'],['MP18','M17'],['MP19','M18'],['WP11','W11'],['MP07','M08'],['AP12','A10']]){
+ for(const [child,parent] of [['WP18','W17'],['WP19','W18'],['AP18','A17'],['AP19','A18'],['MP18','M17'],['MP19','M18'],['WP11','W02'],['MP07','M07'],['AP12','A04']]){
   const broken=E.clone(data);for(const n of broken.classes.flatMap(c=>c.nodes))if(n.id===child){n.all=n.all.filter(r=>r.id!==parent);n.oneOf=n.oneOf.filter(r=>r.id!==parent);}
   assert.throws(()=>audit(source,broken.classes,root),/Unaccounted effect dependency/,child+' must detect omitted '+parent);
  }
+ const either=E.clone(data);either.classes[0].nodes.find(n=>n.id==='WP11').oneOf=[{id:'W11',rank:1}];
+ assert.throws(()=>audit(source,either.classes,root),/Alternative prerequisites are not allowed/);
  const extra=E.clone(data);extra.classes[0].nodes.find(n=>n.id==='WP09').all=[{id:'W12',rank:1}];
  assert.throws(()=>audit(source,extra.classes,root),/Unaccounted effect dependency/);
 });

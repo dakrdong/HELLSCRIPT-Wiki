@@ -1,6 +1,6 @@
 # Class skill trees and progression
 
-Updated: 2026-10-05 · [한국어](Class_Skill_Trees.md)
+Updated: 2026-10-07 · [한국어](Class_Skill_Trees.md)
 
 Each class now has **16 normal actives, 19 passives and two ultimates: 37 skills**. We reviewed direct effect dependencies across the original 108 skills and split each dual-ultimate support passive into two dedicated passives. One addition per class brings the total to 111.
 
@@ -13,13 +13,21 @@ Native update, 2026-09-28: the first three actives of every class unlock at leve
 
 Native update, 2026-09-29: the skill catalog now also unlocks all three first-row actives at level 1. A new character starts with no learned skill and uses only basic attacks; the one point it has at level 1 learns one first-row active. Existing characters keep their allocation.
 
+## 2026-10-07: no more "this or that" prerequisites
+
+The user pointed out that choice prerequisites ("unlock skill A or skill B") make the skill tree messier. The ten skills that had one (`oneOf`: Warrior WP11, WP17; Ranger AP11, AP12, AP13, AP16; Mage MP07, MP08, MP10, MP11) now require **one skill**. When an effect reads several skills, the one already on the same branch is required and the others stay as optional targets mentioned only in the effect text.
+
+- Nine of them already had the chosen skill in their parent chain, so who can unlock what, and when, is unchanged. Only Ranger AP12 lost its trap condition (only Retreat Leap A04 is needed). Traps sit in another branch and could not be linked; without a trap the effect simply never triggers.
+- The `optional` table in `audit-dependencies.cjs` adds the required skill and the optional targets and compares the total with the direct targets in the source text; the build refuses any new choice prerequisite.
+- The ultimate gate ("one skill from the preceding stage") has no branch link and is a design rule, so it is unchanged.
+
 ## 2026-10-05: branch parents and a clean link layout
 
 The user asked for the links in the skill tree to stop looking arbitrary and to read like the Diablo 2, 3 and 4 trees, with a clear before-and-after order. Until now 70 independent skills (about 23 per class) opened on level alone and hung from the branch trunk, while links existed only for the few skills whose effects read each other. This request replaces the earlier rule below that shared branch membership is not a dependency: **branches now have parent skills**.
 
 - **One parent per skill.** Every skill except the ultimates has one parent (`lineage`) in its own branch. Each class has four starting skills (Warrior W01, W02, W03, W05; Ranger A01, A02, A03, A04; Mage M01, M02, M03, M04). The result is a tree that only forks and never merges: each of the 93 skills that has a parent draws exactly one link.
 - **No unlock level changes.** A parent never opens later than its child, so the level table is untouched and the only new rule is that the parent must be open. It does not require spending points on the parent first (the same open-or-not test the effect prerequisites already use).
-- **Effect prerequisites are audited as before.** The 35 direct relations (`all` and `oneOf`) are still compared with the source text by the independent validator. The structural parent is a separate field and never counts as effect evidence; when an effect prerequisite already is the parent it is not recorded twice. An effect prerequisite that is an ancestor of the parent is not drawn again (transitive reduction), so Hold Formation WP16 hangs from its nearby parent instead of a distant Whirlwind W01.
+- **Effect prerequisites are audited as before.** The direct relations (`all`; no `oneOf` since 2026-10-07) are still compared with the source text by the independent validator. The structural parent is a separate field and never counts as effect evidence; when an effect prerequisite already is the parent it is not recorded twice. An effect prerequisite that is an ancestor of the parent is not drawn again (transitive reduction), so Hold Formation WP16 hangs from its nearby parent instead of a distant Whirlwind W01.
 - **Hand-set layout, tool-checked.** The socket grid in `tree-design.cjs` (branch × stage × row, two columns per row) sets positions, and `tree-layout.cjs` refuses to build when a link would cross a skill, run upward, leave its branch or share a socket. The HTML planner and the game (`row`, `col`, `links` and `via` in `ClassSkillTree.json`) use the same layout.
 - **Ultimates keep the shared gate.** They have no branch link, only "level 40 plus one preceding-stage skill". Only each ultimate's dedicated passive hangs directly below it.
 - **Effect targets in another branch are not linked.** A direct target in a different branch, such as the trap requirement of Prepared Escape AP12, is listed in the detail panel only.
