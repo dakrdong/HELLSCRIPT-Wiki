@@ -36,7 +36,7 @@
 | 접근 | `TownWalk`, `ContentUnlocks` | 실제 NPC 거리와 해금 사유를 사용한다. 표시와 실행 경로 모두 검증한다. |
 | 시간 | `UiTime`과 각 기능의 시계 | 표기만 공유한다. UTC 작업 완료 시간과 일시정지 가능한 전투 시간을 섞지 않는다. |
 | HUD·기록 | `GlobalHudSnapshot`, `SkillIconView`, 저장된 전투·훈련 스냅샷 | 이름·아이콘 조회를 공유한다. 과거 기록을 현재 장비로 재계산하지 않는다. |
-| 설정·안전 영역 | `UiSafeArea`, `Loc`, 기존 화면·언어·오디오 설정 | 기기 설정과 계정 저장을 분리한다. 언어와 방향을 바꿔도 편집본을 유지한다. |
+| 설정·안전 영역 | `UiSafeArea`, `Loc`, 기존 화면·언어·오디오 설정 | 기기 설정과 계정 저장을 분리한다. 언어와 방향을 바꿔도 편집본을 유지한다. 고정 탐색을 가진 호스트(퍼즐 대기실)는 `UiSafeArea.Reserve`로 자기 띠를 예약하고, 그 위에서 열리는 창은 `UiSafeArea.Current`, 즉 남은 영역에 배치된다. 호스트 자신은 `ContentWindowView`의 `fullArea`로 전체 영역을 쓴다. |
 
 `EquipmentViewSource`는 `Owned`, `Draft`, `BattleSnapshot`, `Catalog`, `RewardSnapshot` 중 하나로 표시 데이터의 출처를 명시한다. 상세와 비교는 입력된 아이템을 복사한다. 도감 정의에는 실제 획득 수치가 없으므로 임의의 아이템을 굴려 소유 장비처럼 보여 주지 않는다. 제작 결과와 획득 기록은 `RewardSnapshot`으로 당시 확정된 수치를 표시한다.
 
