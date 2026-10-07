@@ -1,0 +1,234 @@
+{
+ "date": "2026-10-05",
+ "base": "a94bb636 (main after PR #55)",
+ "branch": "claude/fix-stale-smokes",
+ "build": "macOS development build (BuildMac) of the branch tree; each launch in its own save folder; the plans of merge-validation.json. The eight smokes of that plan ran on one build; the progression smoke (a ninth, run with -hellscriptEdictProgressionSmoke) ran on a later build of the same tree that differs only in RuntimeTutorialSmoke.Progression.cs, which only that smoke executes.",
+ "before": {
+  "SkillMenuSmoke": {
+   "passed": false,
+   "failure": [
+    "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+   ]
+  },
+  "EdictSectionsSmoke": {
+   "passed": false,
+   "failure": [
+    "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+   ]
+  },
+  "QuickPresetSmoke": {
+   "passed": false,
+   "failure": [
+    "InvalidOperationException: First visit expanded advanced options: global/survival.potion"
+   ]
+  },
+  "TutorialSmoke": {
+   "passed": false,
+   "failure": [
+    "InvalidOperationException: Timed out following the prologue gate: survival lesson target="
+   ]
+  },
+  "EdictProgressionSmoke": {
+   "passed": false,
+   "failure": [
+    "InvalidOperationException: A committed progression change did not reveal its tab."
+   ]
+  }
+ },
+ "repairs": {
+  "SkillMenuSmoke": {
+   "wasFailing": [
+    "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+   ],
+   "cause": "The repeat-hunt tab opens only after the stage 15 clear (RepeatHunt.SettingsUnlocked), but the smoke account never cleared it and the check expected every tab to be interactive.",
+   "fix": "The recovery check accepts a still-locked repeat tab; the default-mode check allows the repeat tab once it is unlocked.",
+   "kind": "stale smoke"
+  },
+  "EdictSectionsSmoke": {
+   "wasFailing": [
+    "InvalidOperationException: Custom control did not recover: edict-tab-repeat"
+   ],
+   "cause": "Same locked repeat tab, plus two expectations from before staged disclosure: the group explanation text and the repeat tab in default mode.",
+   "fix": "The fixture clears stage 15 so the section walk reaches the repeat tab; the explanation check expects the generic line while a group still hides a setting; default mode keeps the unlocked repeat tab usable.",
+   "kind": "stale smoke"
+  },
+  "QuickPresetSmoke": {
+   "wasFailing": [
+    "InvalidOperationException: First visit expanded advanced options: global/survival.potion"
+   ],
+   "cause": "The automatic potion group (93d59959) draws its own on/off and threshold controls and has no quick preset picker, but the smoke looped over it like the other groups.",
+   "fix": "The loop skips the potion group and a new assertion pins that it shows its own controls and no picker.",
+   "kind": "stale smoke"
+  },
+  "TutorialSmoke": {
+   "wasFailing": [
+    "InvalidOperationException: Timed out following the prologue gate: survival lesson target="
+   ],
+   "cause": "Product bug: the v2 survival lesson (accounts that started the prologue before staged disclosure) sent the player to a potion quick preset picker that no longer exists, so the gate never found its target. The smoke also predated the progressive flow: replay is always v3, the attendance popup and the F07/H10 town notices cover the town walk, and the numeric field needs real typing.",
+   "fix": "GameUI.TutorialStaging.cs now guides the v2 lesson through the Potion HP threshold field (open the option, type 60, apply) like the progressive lesson, with three new ko/en lines. The smoke follows both gate styles, types into the field, hides today's attendance popups, hides the town hints after the first rift result and follows the single-dialogue replay with its resume loop.",
+   "kind": "product bug (legacy accounts mid-prologue) and stale smoke"
+  },
+  "EdictProgressionSmoke": {
+   "wasFailing": [
+    "InvalidOperationException: A committed progression change did not reveal its tab."
+   ],
+   "cause": "Found while checking the progressive flow, not in the original list of four. Three expectations predate 3362d0b0 (the low-HP response moved to stage 3 and position to stage 5): stage 3 no longer reveals the combat tab, the low-HP group now heads the survival tab so the potion controls were not on screen, and the attendance popup opened over the town and hid the optional notice. It fails the same way on the origin/main build before the merge (17dc75e9) and on a94bb636.",
+   "fix": "The progression change uses stage 4 (the target group opens the combat tab), the potion group is opened by name and today's attendance popups are hidden after arrival.",
+   "kind": "stale smoke"
+  }
+ },
+ "after": {
+  "SkillTreeSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "initial",
+     "exit": 0,
+     "seconds": 19.1
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 6.4
+    }
+   ]
+  },
+  "SkillResetSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "initial",
+     "exit": 0,
+     "seconds": 20.3
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 5.0
+    }
+   ]
+  },
+  "SkillMenuSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "initial",
+     "exit": 0,
+     "seconds": 31.1
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 5.8
+    }
+   ]
+  },
+  "SkillPresetSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "initial",
+     "exit": 0,
+     "seconds": 104.5
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 5.8
+    }
+   ]
+  },
+  "EdictSectionsSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "initial",
+     "exit": 0,
+     "seconds": 43.2
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 5.6
+    }
+   ]
+  },
+  "QuickPresetSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "initial",
+     "exit": 0,
+     "seconds": 27.8
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 5.1
+    }
+   ]
+  },
+  "ClassSkillSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "checkpoint",
+     "exit": 0,
+     "seconds": 6.2
+    },
+    {
+     "label": "restart",
+     "exit": 0,
+     "seconds": 5.2
+    }
+   ]
+  },
+  "TutorialSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "phase-one",
+     "exit": 0,
+     "seconds": 44.6
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 535.7
+    }
+   ]
+  },
+  "EdictProgressionSmoke": {
+   "passed": true,
+   "launches": [
+    {
+     "label": "first-half",
+     "exit": 0,
+     "seconds": 29.3
+    },
+    {
+     "label": "resume",
+     "exit": 0,
+     "seconds": 102.9
+    }
+   ]
+  }
+ },
+ "editModeFocused": {
+  "filters": [
+   "LocalizationTests",
+   "StoredLocalizationTests",
+   "TutorialProgressionTests",
+   "TutorialChapterTests",
+   "HuntEdictQuickPresetTests",
+   "TutorialAccountResetTests",
+   "HuntEdictProgressionTests",
+   "HuntEdictOverviewTests"
+  ],
+  "total": 160,
+  "passed": 160,
+  "failed": 0,
+  "seconds": 66
+ },
+ "notRun": "The full Edit Mode suite and the runtime smokes outside these eight were not rerun for this repair."
+}

@@ -165,7 +165,7 @@ namespace Hellscript
             float intel=(c==2?30+2*(level-1):10+level-1)+bonuses[12]+bonuses[14];
             float will=10+level-1+bonuses[13]+bonuses[14];
             strength=str;dexterity=dex;intelligence=intel;willpower=will;
-            float flatHp=bonuses[0]; armor=str*2+bonuses[2];resistance=intel+bonuses[3];
+            float flatHp=bonuses[0]; armor=str*2+bonuses[2]+(c==0?60+4*(level-1):0);resistance=intel+bonuses[3];
             float weapon=20, weaponSpeed=0;
             var weapons=equipped.Where(i=>i.slot==0&&!EquipmentSlots.Offhand(i)).ToArray();
             if(weapons.Length>0){weapon=weapons.Average(ItemCatalog.MainValue);weaponSpeed=weapons.Average(i=>ItemCatalog.Base(i).attackSpeed);}
@@ -177,7 +177,7 @@ namespace Hellscript
                 resistance+=basis.resistance*(1+.08f*(item.level-1));
             }
             armor*=1+gemArmorPercent;
-            hp=(new[]{300,240,210}[c]+new[]{35,28,25}[c]*(level-1)+flatHp)*(1+bonuses[1]/100);
+            hp=(new[]{450,240,210}[c]+new[]{50,28,25}[c]*(level-1)+flatHp)*(1+bonuses[1]/100);
             damage=(weapon+runeAttack+slotAttack)*(1+.002f*primary);attackPower=damage;
             regen=new[]{8,10,12}[c]+bonuses[20]; if(c==2&&passives[4])regen*=1+SkillEffects.Passive(hero.build.skillRanks,HeroClass.Mage,4);
             baseSpeed=new[]{4f,4.4f,4f}[c];speed=SpeedWithBonus(0);
@@ -259,12 +259,13 @@ namespace Hellscript
             return EquipmentSlots.Plan(hero,item).error;
         }
         // rarityOnly compares grades alone; a tie keeps the equipment already in the bag.
-        public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false)
+        public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false,int? availableSlots=null,IEnumerable<string> replacementIds=null)
         {
             if(item==null||hero.inventory.Any(i=>i.id==item.id))return false;
-            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;}
+            if((availableSlots??FreeSlots(hero))>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;}
             if(policy!=BagPolicy.Replace)return false;
-            var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
+            var protection=account!=null&&hero.useEdict?EdictCleanupPolicy.Compile(HuntEdictV2.Canonical(HuntEdictDefaults.Resolve(hero)).global.ToDictionary(o=>o.id,o=>o.value)):null;
+            var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3&&(protection==null||!protection.Protects(account,x,EdictCleanupAction.Keep))&&(replacementIds==null||replacementIds.Contains(x.id))).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
             if(worst==null||(rarityOnly?item.rarity.CompareTo(worst.rarity):Compare(item,worst))<=0)return false;
             RiftResult.Disposed(account,worst.id,RiftLootOutcome.Discarded);ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;
         }

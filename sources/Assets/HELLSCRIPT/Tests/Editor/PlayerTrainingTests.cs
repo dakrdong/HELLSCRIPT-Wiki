@@ -28,7 +28,7 @@ namespace Hellscript.Tests
         }
         [Test]
         public void EveryUnlockBoundaryUsesTheSameLevelForRulesAndCooldownConditions(
-            [Values(0,1,2)]int heroClass,[Values(1,3,6,10,15,20,30)]int level)
+            [Values(0,1,2)]int heroClass,[Values(1,3,4,5,6,10,15,20,30)]int level)
         {
             for(int n=0;n<6;n++)
             {

@@ -188,7 +188,7 @@ namespace Hellscript
             }
             while(hero.presets.Count<HuntEdict.PresetSlots)hero.presets.Add(new BuildConfig{emptySlot=true,name="",version=""});
         }
-        public static void NormalizeRun(RunState run)
+        public static void NormalizeRun(RunState run,bool fresh=false)
         {
             LiveOpsConfig.NormalizeRun(run);
             run.dps=CombatDpsTimeline.Normalize(run.dps);
@@ -211,7 +211,9 @@ namespace Hellscript
             run.layout.shrines??=new System.Collections.Generic.List<RiftShrine>();run.layout.events??=new System.Collections.Generic.List<RiftEvent>();
             run.layout.gates??=new System.Collections.Generic.List<RiftGate>();
             run.layout.carriers??=new System.Collections.Generic.List<RiftEssenceCarrier>();
+            if(!fresh)PuzzleTutorial.NormalizeOperation(run);
             run.layout.offerings??=new System.Collections.Generic.List<RiftOffering>();
+            if(run.layout.objective!=RiftObjectiveKind.Offerings&&run.layout.altar!=null&&string.IsNullOrEmpty(run.layout.altar.id))run.layout.altar=null;
             foreach(var chest in run.layout.chests)if(chest.reward!=null&&string.IsNullOrEmpty(chest.reward.id))chest.reward=null;
         }
         public bool SaveTrainingComparison(TrainingComparisonRecord record)
@@ -224,13 +226,13 @@ namespace Hellscript
         }
         public bool CommitRunMutation(RunState run,string requestId,string operation,Func<RunState,bool> mutation)
         {
-            if(Data.suspendedRun!=run){Error="진행 중인 균열이 아닙니다.";return false;}
+            if(!OwnedRun(run)){Error="진행 중인 균열이 아닙니다.";return false;}
             using var notifications=DeferNotifications();
             RunState committed=null;
-            bool success=Transact(requestId,operation,staged=>{committed=staged.suspendedRun;return mutation(committed);});
+            bool success=Transact(requestId,operation,staged=>{committed=StagedRun(staged,run);return mutation(committed);});
             if(!success||committed==null)return success;
             // Keep the root RunState object used by the controller and UI; adopt the committed snapshot.
-            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(committed),run);NormalizeRun(run);return true;
+            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(committed),run);NormalizeRun(run);AdoptPuzzleRun(run);return true;
         }
         static System.Collections.Generic.IEnumerable<Item> RecordedItems(AccountSave a)
             =>a.records?.Where(r=>r?.review?.equipment!=null).SelectMany(r=>r.review.equipment).Where(i=>i!=null)??Enumerable.Empty<Item>();
@@ -363,17 +365,17 @@ namespace Hellscript
         }
         public bool CommitChest(RunState run,RiftChest chest)
         {
-            if(Data.suspendedRun!=run||run.layout==null||!run.layout.chests.Contains(chest)){Error="진행 중인 균열의 상자가 아닙니다.";return false;}
+            if(!OwnedRun(run)||run.layout==null||!run.layout.chests.Contains(chest)){Error="진행 중인 균열의 상자가 아닙니다.";return false;}
             if(chest.phase==ChestPhase.Opened)return true;
             using var notifications=DeferNotifications();
             RunState committed=null;
             bool success=Transact(chest.requestId,"chest:"+run.id+":"+chest.id,staged=>
-            {committed=staged.suspendedRun;return ChestRewards.Apply(staged,committed,chest.id,false);});
+            {committed=StagedRun(staged,run);return ChestRewards.Apply(staged,committed,chest.id,false);});
             if(!success)return false;
             if(committed==null){Error="상자 지급 기록과 진행 상태가 다릅니다. 저장된 균열을 다시 불러와 주세요.";return false;}
             var result=committed.layout.chests.Single(c=>c.id==chest.id);
             chest.phase=result.phase;chest.progress=result.progress;chest.dropId=result.dropId;
-            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;run.journal=committed.journal;return true;
+            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;run.journal=committed.journal;AdoptPuzzleRun(run);return true;
         }
         bool Write(AccountSave data,HuntEdictEditSession edictSession=null)
         {
@@ -413,9 +415,12 @@ namespace Hellscript
                 ObservePlayerProgress(data);
                 var saveStarted=System.Diagnostics.Stopwatch.GetTimestamp();
                 string saveJson=JsonUtility.ToJson(data,false);
-                File.WriteAllText(path+".tmp",saveJson);
-                if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
-                CombatArchive.Synchronize(data);
+                if(path!=null)
+                {
+                    File.WriteAllText(path+".tmp",saveJson);
+                    if(File.Exists(path))File.Replace(path+".tmp",path,path+".bak");else File.Move(path+".tmp",path);
+                    CombatArchive.Synchronize(data);
+                }
                 PresentationMetrics.SaveCalls++;PresentationMetrics.SaveBytes+=System.Text.Encoding.UTF8.GetByteCount(saveJson);
                 PresentationMetrics.SaveMilliseconds+=(System.Diagnostics.Stopwatch.GetTimestamp()-saveStarted)*1000d/System.Diagnostics.Stopwatch.Frequency;
                 CaptureEdictBoundary(data);Data.guide=data.guide;Error="";return true;

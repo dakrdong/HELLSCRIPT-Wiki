@@ -9,7 +9,7 @@ namespace Hellscript
     // distance along a line, UV.y = angle 0..1 around (or across a sector) or 0..1 across a line.
     public sealed partial class WorldFx
     {
-        public enum TelegraphKind{Fill,Refuge,Aura}
+        public enum TelegraphKind{Fill,Refuge,Aura,Gravity}
         public sealed class TelegraphView{public TelegraphKind Kind{get;internal set;}public GameObject go;internal Effect fx;internal MeshFilter filter;internal MeshRenderer renderer;}
         public const float FillHeight=.12f;
         static readonly int ProgressId=Shader.PropertyToID("_Progress"),EdgesId=Shader.PropertyToID("_Edges"),FlashId=Shader.PropertyToID("_Flash");
@@ -22,8 +22,8 @@ namespace Hellscript
         // Kept low in G and B: brighter values leave ACES's red shoulder and bleach to salmon with post-processing on.
         public static readonly Color EnemyTelegraph=new Color(1,.2f,.13f,.95f),BossTelegraph=new Color(1.15f,.3f,.12f,1);
         readonly List<TelegraphView> freeViews=new List<TelegraphView>();
-        Material telegraph,edge,bossEdge,refugeEdge,auraEdge,guardEdge,rearEdge,tether;
-        Mesh disc,band;
+        Material telegraph,edge,bossEdge,refugeEdge,auraEdge,guardEdge,rearEdge,tether,gravityEdge;
+        Mesh disc,band,gravityArrows;
         readonly Dictionary<int,Mesh> rings=new Dictionary<int,Mesh>(),sectors=new Dictionary<int,Mesh>();
 
         // Outline materials for the kept LineRenderer outlines: unlit, fog-aware, readable with post-processing on.
@@ -33,6 +33,7 @@ namespace Hellscript
         public Material AuraEdge=>auraEdge!=null?auraEdge:auraEdge=Tint("Aura edge",Blend.Alpha,new Color(.72f,.42f,1.1f,.55f));
         public Material GuardEdge=>guardEdge!=null?guardEdge:guardEdge=Tint("Guard edge",Blend.Alpha,new Color(.45f,.75f,1.15f,.85f));
         public Material RearEdge=>rearEdge!=null?rearEdge:rearEdge=Tint("Rear window edge",Blend.Alpha,new Color(1.25f,.62f,.2f,.9f));
+        public Material GravityEdge=>gravityEdge!=null?gravityEdge:gravityEdge=Tint("Gravity arrows",Blend.Add,new Color(.95f,.6f,1.2f,.95f));
         // The elite life link: a violet lightning strip the Tick scrolls along the line (LineTextureMode.Tile).
         public Material Tether=>tether!=null?tether:tether=Tint("Life link",Blend.Add,new Color(.85f,.5f,1.25f,1),"lightning_strip");
         Material Tint(string name,Blend blend,Color tint,string texture=null)
@@ -73,12 +74,18 @@ namespace Hellscript
         TelegraphView CreateView(TelegraphKind kind)
         {
             var view=new TelegraphView{Kind=kind};
-            if(kind==TelegraphKind.Fill)
+            if(kind==TelegraphKind.Fill||kind==TelegraphKind.Gravity)
             {
                 view.go=new GameObject("Telegraph fill");view.go.transform.SetParent(transform,false);
                 view.filter=view.go.AddComponent<MeshFilter>();view.renderer=view.go.AddComponent<MeshRenderer>();view.renderer.sharedMaterial=TelegraphMaterial();
                 view.renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;view.renderer.receiveShadows=false;
                 view.renderer.lightProbeUsage=UnityEngine.Rendering.LightProbeUsage.Off;view.renderer.reflectionProbeUsage=UnityEngine.Rendering.ReflectionProbeUsage.Off;
+                if(kind==TelegraphKind.Gravity)
+                {
+                    view.go.name="Gravity telegraph";var arrows=new GameObject("Inward arrows");arrows.transform.SetParent(view.go.transform,false);arrows.transform.localPosition=Vector3.up*.025f;
+                    arrows.AddComponent<MeshFilter>().sharedMesh=GravityArrows();var renderer=arrows.AddComponent<MeshRenderer>();renderer.sharedMaterial=GravityEdge;
+                    renderer.shadowCastingMode=UnityEngine.Rendering.ShadowCastingMode.Off;renderer.receiveShadows=false;
+                }
                 return view;
             }
             if(kind==TelegraphKind.Refuge)
@@ -156,6 +163,18 @@ namespace Hellscript
 
         // ------------------------------------------------------------ fill meshes (shared, unit size)
         const int Around=64;
+        Mesh GravityArrows()
+        {
+            if(gravityArrows!=null)return gravityArrows;
+            var v=new List<Vector3>();var uv=new List<Vector2>();var tris=new List<int>();
+            for(int i=0;i<12;i++)
+            {
+                float a=i*Mathf.PI/6;var d=new Vector3(Mathf.Sin(a),0,Mathf.Cos(a));var side=new Vector3(d.z,0,-d.x);int b=v.Count;
+                v.Add(d*.68f);v.Add(d*.94f+side*.1f);v.Add(d*.84f);v.Add(d*.94f-side*.1f);
+                for(int n=0;n<4;n++)uv.Add(Vector2.zero);tris.Add(b);tris.Add(b+1);tris.Add(b+2);tris.Add(b);tris.Add(b+2);tris.Add(b+3);
+            }
+            return gravityArrows=Build("gravity arrows",v,uv,tris);
+        }
         Mesh Disc()
         {
             if(disc!=null)return disc;
@@ -219,8 +238,8 @@ namespace Hellscript
         }
         void ClearTelegraphCaches()
         {
-            freeViews.Clear();flashes.Clear();rings.Clear();sectors.Clear();arcs.Clear();disc=band=null;
-            telegraph=edge=bossEdge=refugeEdge=auraEdge=guardEdge=rearEdge=tether=null;
+            freeViews.Clear();flashes.Clear();rings.Clear();sectors.Clear();arcs.Clear();disc=band=gravityArrows=null;
+            telegraph=edge=bossEdge=refugeEdge=auraEdge=guardEdge=rearEdge=tether=gravityEdge=null;
         }
     }
 }

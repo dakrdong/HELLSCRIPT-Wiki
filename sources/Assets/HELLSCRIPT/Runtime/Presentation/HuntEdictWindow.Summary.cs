@@ -22,14 +22,14 @@ namespace Hellscript
             if(DefaultSettingsLocked||!Disclosed(id))return false;
             var group=HuntEdictUiCatalog.Data.groups.FirstOrDefault(g=>g.ids.Contains(id));if(group==null)return false;
             string scope=HuntEdictQuickPresets.GlobalScope(group);
-            if(HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details))customQuickScopes.Add(scope);SelectGroup(HuntEdictSummary.Key(group));
+            if(HasFeature(HuntEdictProgression.Details))customQuickScopes.Add(scope);SelectGroup(HuntEdictSummary.Key(group));
             return EnsureVisible("edict-option-"+id)||EnsureVisible("edict-quick-picker-"+scope);
         }
         public void SelectGroup(string key)
         {
             if(DefaultSettingsLocked)return;
             var group=HuntEdictUiCatalog.Data.groups.FirstOrDefault(g=>HuntEdictSummary.Key(g)==key);if(group==null||!GroupDisclosed(group))return;
-            if(searchQuery.Length>0&&HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details))customQuickScopes.Add(HuntEdictQuickPresets.GlobalScope(group));
+            if(searchQuery.Length>0&&HasFeature(HuntEdictProgression.Details))customQuickScopes.Add(HuntEdictQuickPresets.GlobalScope(group));
             RememberScroll();addingEquipmentOption=false;selectedGroup=key;groupMemory[group.tab]=key;openedGroups.Add(OpenedKey(key));afterSave=null;groupDetails=true;SelectedTab=group.tab;searchQuery="";mainScroll=editorScroll=null;Repaint();
         }
         public void BackToGroups(){groupDetails=false;RequestClose();}
@@ -37,7 +37,7 @@ namespace Hellscript
         {
             float w=bodyWidth-16,chipTop=6;
             // Search and the changed-only filter serve people with many settings; the prologue shows exactly one.
-            if(!ProgressivePrologue)
+            if(!ProgressivePrologue&&(!PuzzleLesson||HasFeature(HuntEdictProgression.Details)))
             {
                 var query=Input(body,searchQuery,8,6,w-126,30);query.gameObject.name="edict-search";
                 var hint=Text(query.transform,"옵션 이름·설명 검색",7,0,w-142,30,11,muted);query.placeholder=hint;hint.gameObject.SetActive(searchQuery.Length==0);
@@ -93,7 +93,7 @@ namespace Hellscript
         }
         void DrawSelectedGroup(RectTransform list,float w,HuntEdictUiGroup group)
         {
-            if(HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details)&&group.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed))
+            if(HasFeature(HuntEdictProgression.Details)&&group.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed))
             {
                 if(group.ids.Contains("bag.warehouseFull")){DrawWarehouseHandling(list,w);return;}
                 if(group.tab=="autoEquip"){DrawRecommendedEquipment(list,w,group);return;}
@@ -104,7 +104,7 @@ namespace Hellscript
             {
                 if(id=="survival.potion")GroupSection(list,"사용 조건",w);
                 if(id=="potion.autoBuy")GroupSection(list,"자동 구매",w);
-                var d=EdictOptions.Global.Single(o=>o.id==id);bool available=HuntEdictUiCatalog.Visible(Session.Draft.edict,id)&&HuntEdictProgression.Direct(store.Data,hero,id);
+                var d=EdictOptions.Global.Single(o=>o.id==id);bool available=HuntEdictUiCatalog.Visible(Session.Draft.edict,id)&&DirectDisclosed(id);
                 DrawCompactOption(list,w,d,HuntEdictSummary.Value(Session.Draft.edict,id),available,HuntEdictSummary.Changed(Session.Draft.edict,baseline,id));
                 if(!available)
                 {
@@ -131,7 +131,7 @@ namespace Hellscript
         }
         void EditGlobal(EdictOptionDefinition d,string value)
         {
-            if(!HuntEdictProgression.Direct(store.Data,hero,d.id))return;
+            if(!DirectDisclosed(d.id))return;
             string title=HuntEdictUiCatalog.Label(d);void Set(string v)=>SetGlobal(d.id,v);
             if(d.kind==EdictOptionKind.Set){SetDialog(d,value,Set);return;}
             if(d.kind==EdictOptionKind.Order){OrderDialog(d,value,Set);return;}
@@ -139,6 +139,7 @@ namespace Hellscript
             var choices=d.kind==EdictOptionKind.Toggle?new[]{"ON","OFF"}:d.kind==EdictOptionKind.SkillReference?new[]{""}.Concat(Session.Draft.edict.slots.Where(id=>id!=""&&(d.choices.Length==0||d.choices.Contains(id)))).ToArray():d.choices;
             // Standing still is what the lesson is about leaving behind.
             if(PitLesson&&d.id=="position.mode")choices=choices.Where(c=>c!="STAND").ToArray();
+            if(PuzzleLesson)choices=choices.Where(c=>!PuzzleTutorial.RemovedChoice(PuzzleLevel,hero.heroClass,PuzzleHint,d.id,c)).ToArray();
             ChooseValue(title,choices,value,v=>HuntEdictSummary.Display(d,v,SkillName),Set);
         }
         void ShowOptionHelp(string title,string help)=>Dialog(title,p=>

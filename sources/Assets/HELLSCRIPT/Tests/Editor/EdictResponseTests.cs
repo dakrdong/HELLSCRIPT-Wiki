@@ -168,6 +168,19 @@ namespace Hellscript.Tests
             var e=sim.ExecuteEdictSurvival(d);Assert.IsTrue(e.potionUsed);Assert.IsFalse(e.mainActionStarted);Assert.AreEqual(55,sim.State.health,.001f);Assert.AreEqual(20,sim.State.potionCd);Assert.AreSame(action,sim.State.heroAction);Assert.IsFalse(e.plan.assessment.emergency);
             Assert.IsFalse(sim.ExecuteEdictSurvival(d).potionUsed);Assert.AreEqual(1,sim.State.logs.Count(l=>l.Contains("[POTION]")));
         }
+        [TestCase("OWN",true)][TestCase("INACTIVE",false)][TestCase("OTHER_RUN",false)][TestCase("OTHER_HERO",false)][TestCase("OFF",false)][TestCase("COOLDOWN",false)]
+        public void RetreatRecoveryUsesTheReturnThresholdOnlyForOwnedActiveMemory(string cause,bool expected)
+        {
+            var sim=Fixture();var d=Configure(sim);Set(d,"survival.potion","ON");Set(d,"survival.potionHpPercent","40");Set(d,"survival.lowHpPercent","45");Set(d,"survival.returnHpPercent","75");sim.State.health=60;sim.Stats.healing=1;
+            var memory=new EdictSurvivalState{heroId=sim.State.heroId,runId=sim.State.id,active=true};
+            if(cause=="INACTIVE")memory.active=false;if(cause=="OTHER_RUN")memory.runId="other";if(cause=="OTHER_HERO")memory.heroId="other";
+            if(cause=="OFF")Set(d,"survival.potion","OFF");if(cause=="COOLDOWN")sim.State.potionCd=1;
+            sim.State.edictResponse=new EdictResponseState{memory=memory};string before=JsonUtility.ToJson(sim.State);
+            Assert.AreEqual(expected,sim.AssessEdictSurvival(d,memory).potionRequested);Assert.AreEqual(before,JsonUtility.ToJson(sim.State));
+            var result=sim.ExecuteEdictSurvival(d);Assert.AreEqual(expected,result.potionUsed);
+            if(expected){Assert.AreEqual(95,sim.State.health,.001f);Assert.IsFalse(result.plan.assessment.emergency);Assert.IsFalse(sim.State.edictResponse.memory.active);Assert.IsFalse(sim.ExecuteEdictSurvival(d).potionUsed);}
+            else Assert.AreEqual(60,sim.State.health);
+        }
         [TestCase("PAUSED")][TestCase("PORTAL")][TestCase("FAILED")][TestCase("DEAD")][TestCase("UNAPPLIED")]
         public void StoppedRunsAndUnappliedSkillDraftsCannotExecuteOrConsumePotion(string cause)
         {

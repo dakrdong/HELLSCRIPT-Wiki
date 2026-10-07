@@ -1,0 +1,169 @@
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Hellscript
+{
+    public sealed partial class RuntimeTutorialSmoke
+    {
+        IEnumerator FollowProgressiveSkillLesson(bool checkpoint=false)
+        {
+            var run=game.Combat.State;var hero=game.Combat.Hero;var (skill,start,_)=Tutorials.StarterComparison(hero.heroClass);
+            float deadline=Time.realtimeSinceStartup+180;bool layouts=false,playback=false;
+            while(run.tutorialPhase==ProloguePhase.EdictLesson&&Find("tutorial-continue")==null&&Find("dialogue-skip")==null)
+            {
+                Require(Time.realtimeSinceStartup<deadline,"Comparison pointer lesson timed out: step="+run.tutorialLessonStep+" target="+game.UI.Gate?.Target?.name);
+                var gate=game.UI.Gate;if(gate?.Target==null){yield return null;continue;}
+                var window=FindAnyObjectByType<HuntEdictWindow>();
+                if(window!=null)
+                {
+                    Require(window.GetComponentsInChildren<Button>().Where(b=>b.name.StartsWith("edict-tab-")).All(b=>b.name=="edict-tab-skills"),"The first lesson disclosed future tabs.");
+                    Require(window.GetComponentsInChildren<Button>().Count(b=>b.name.StartsWith("edict-skill-")&&ClassSkills.Find(b.name.Substring("edict-skill-".Length))!=null)<=1,"The first lesson disclosed other skills.");
+                }
+                if(window?.PreviewCombat!=null&&(run.tutorialLessonStep==0||run.tutorialLessonStep==2)&&gate.Target.name=="Preset explanation")
+                {
+                    if(!playback)
+                    {
+                        yield return Tap("edict-preview-pause");float paused=window.PreviewCombat.Seconds;yield return new WaitForSecondsRealtime(.3f);
+                        Require(Mathf.Abs(paused-window.PreviewCombat.Seconds)<.001f,"Paused preview advanced.");
+                        yield return Tap("edict-preview-restart");Require(window.PreviewCombat.Seconds<.3f,"Restart did not restore the initial comparison.");playback=true;
+                    }
+                    if(!layouts&&game.Store.Data.selectedHero==0){yield return LayoutProfiles("starter-comparison");layouts=true;}
+                    yield return Until(()=>window.PreviewCombat?.StarterObservationComplete==true,15);
+                    yield return Capture("comparison-"+run.tutorialLessonStep);yield return Tap("edict-starter-next");
+                }
+                else if(window!=null&&run.tutorialLessonStep==3&&gate.Target.name=="Option area")
+                {
+                    yield return Tap("edict-preset-tab-"+start);yield return Tap("edict-preset-activate");
+                    yield return Tap("edict-starter-next");
+                    Require(HuntEdictQuickPresets.Matches(HuntEdictLoadout.FromHero(hero),"skill/"+skill,start),"The final A selection was not saved.");
+                    checks.Add("PASS actual pointer learning, first-slot equipment, A/B behavior, pause/restart and final A policy save.");
+                }
+                else yield return Tap(gate.Target);
+                yield return new WaitForSecondsRealtime(.15f);
+                if(checkpoint&&run.tutorialLessonStep==2)
+                {
+                    game.Save();Require(game.Store.Error=="",game.Store.Error);
+                    File.WriteAllText(Path.Combine(output,"comparison-checkpoint.txt"),"PASS saved B checkpoint with actual point, slot and policy. Resume in a new process.\n");
+                    yield return Capture("comparison-checkpoint");Application.Quit(0);yield break;
+                }
+            }
+            Require(run.tutorialLessonStep==4,"The final choice was not confirmed.");
+            Require(HuntEdictQuickPresets.Matches(HuntEdictLoadout.FromHero(hero),"skill/"+skill,start),"Saved policy differs from the executing hero.");
+        }
+        IEnumerator FollowProgressiveSurvivalLesson()
+        {
+            float deadline=Time.realtimeSinceStartup+60;
+            while(Find("tutorial-continue")==null&&Find("dialogue-skip")==null)
+            {
+                if(Time.realtimeSinceStartup>=deadline)
+                {
+                    yield return Capture("hp-lesson-timeout");
+                    File.WriteAllText(Path.Combine(output,"hp-lesson-controls.txt"),string.Join("\n",game.UI.GetComponentsInChildren<Button>().Where(b=>b.gameObject.activeInHierarchy).Select(b=>b.name)));
+                }
+                Require(Time.realtimeSinceStartup<deadline,"HP threshold pointer lesson timed out: replay="+game.Combat.State.tutorialReplay+" legacy="+HuntEdictProgression.Legacy(game.Store.Data)+" target="+game.UI.Gate?.Target?.name);
+                var gate=game.UI.Gate;
+                if(gate?.Target==null)
+                {
+                    // A legacy store hides the v3 numeric target behind Custom. Record that app defect and use the released, real UI.
+                    if(gate!=null&&game.Combat.State.tutorialReplay&&HuntEdictProgression.Legacy(game.Store.Data)&&Find("edict-quick-picker-global/survival.potion")!=null&&Find("edict-option-survival.potionHpPercent")==null)
+                    {
+                        yield return Capture("replay-hp-hidden");
+                        File.WriteAllText(Path.Combine(output,"replay-hp-hidden-controls.txt"),string.Join("\n",game.UI.GetComponentsInChildren<Button>().Where(b=>b.gameObject.activeInHierarchy).Select(b=>b.name)));
+                        string saved=JsonUtility.ToJson(HuntEdictLoadout.FromHero(game.Combat.Hero));
+                        yield return Until(()=>!gate.GetComponentsInChildren<Image>().Single(i=>i.name=="Input blocker").raycastTarget,5);
+                        yield return Tap("edict-quick-picker-global/survival.potion");yield return Tap("edict-quick-choice-custom");
+                        Require(JsonUtility.ToJson(HuntEdictLoadout.FromHero(game.Combat.Hero))==saved,"Opening Custom changed the executing loadout.");
+                        checks.Add("PASS legacy replay manually revealed the numeric option through Custom without changing the executing loadout; missing v3 guidance target is an application issue.");
+                    }
+                    else yield return null;
+                    continue;
+                }
+                var input=gate.Target.GetComponent<InputField>();
+                if(input!=null){yield return Tap(input);Require(input.isFocused,"Potion number field did not accept pointer focus.");input.text="60";input.DeactivateInputField();}
+                else yield return Tap(gate.Target);
+                yield return new WaitForSecondsRealtime(.2f);
+            }
+        }
+        IEnumerator ProgressiveAcceptance(string[] args)
+        {
+            var a=game.Store.Data;int classArg=Array.IndexOf(args,"-hellscriptEdictClass");
+            if(classArg>=0)a.selectedHero=int.Parse(args[classArg+1]);
+            bool resumed=args.Contains("-hellscriptTutorialResume");
+            Require(!HuntEdictProgression.Legacy(a),"Progression acceptance must use a fresh account.");
+            game.EnterPlaza(true);yield return Until(()=>game.TutorialActive,10);
+            var run=game.Combat.State;var (skill,start,_)=Tutorials.StarterComparison(a.Hero.heroClass);
+            Require(run.tutorialFlowVersion==3,"The fresh tutorial is not v3.");
+            if(args.Contains("-hellscriptEdictSurvivalResume"))
+            {
+                Require(run.tutorialPhase==ProloguePhase.SurvivalLesson&&run.tutorialLessonStep==4,"The failed survival check did not retain its actual checkpoint.");
+                Require(HuntEdictQuickPresets.Matches(HuntEdictLoadout.FromHero(game.Combat.Hero),"skill/"+skill,start),"The actual final A policy did not survive restart.");
+                checks.Add("PASS resumed the actual saved HP lesson after the closing-dialogue acceptance fix; retained point, slot and final A execution policy.");
+                goto ContinueSurvival;
+            }
+            if(resumed)
+            {Require(run.tutorialLessonStep==2,"The comparison did not restore its saved B checkpoint.");checks.Add("PASS independent process restored the B observation checkpoint.");}
+            else yield return Choose("tutorial-continue");
+            yield return Until(()=>run.tutorialPhase==ProloguePhase.EdictLesson,10);
+            yield return FollowProgressiveSkillLesson(!resumed);if(!resumed)yield break;
+            yield return Choose("tutorial-continue");
+            yield return Until(()=>run.tutorialPhase==ProloguePhase.Gatekeeper,180);yield return Choose("tutorial-continue");
+            yield return Until(()=>run.tutorialPhase==ProloguePhase.SurvivalLesson,240);yield return Choose("tutorial-continue");
+            yield return FollowProgressiveSurvivalLesson();
+            ContinueSurvival:
+            Require(HuntEdictSummary.Value(a.Hero.edict,"survival.potionHpPercent")=="60","Actual HP threshold was not saved.");
+            float survivalEnd=Time.realtimeSinceStartup+40;
+            while(run.tutorialPhase==ProloguePhase.SurvivalLesson)
+            {Require(Time.realtimeSinceStartup<survivalEnd,"Saved survival lesson did not resume.");yield return Choose("tutorial-continue");yield return null;}
+            yield return Until(()=>run.tutorialLessonStep==5,90);
+            checks.Add("PASS HP 40 to 60 saved through the numeric field and an actual automatic potion was used.");
+            yield return Until(()=>run.tutorialPhase==ProloguePhase.Cleared,240);yield return Choose("tutorial-continue");
+            yield return Until(()=>game.UI.Page=="plaza",15);yield return Until(()=>Find("tutorial-arrival-close")!=null||Find("dialogue-skip")!=null,15);
+            if(Find("tutorial-arrival-close")==null)yield return Tap("dialogue-skip");yield return Tap("tutorial-arrival-close");
+            // Keep daily attendance popups from masking the optional edict notice, as in the legacy acceptance.
+            foreach(var kind in new[]{AttendanceKind.Weekly,AttendanceKind.Monthly})Require(game.AttendancePopups.SetHidden(kind,true,game.Store.AttendanceClock()),"Popup settings write failed");
+            game.UI.CloseAttendance();
+            Require(a.guide.mapComplete&&a.gold==Tutorials.PrologueGold&&a.records.Count==0&&a.Hero.highestClear==0,"Tutorial economy or completion wrong.");
+            Require(a.transactions.Count(t=>t.operation.StartsWith("tutorial-map-complete-v2"))==1,"Duplicate tutorial reward.");
+            Require(!Tutorials.Record(a,"F05").practiced&&!Tutorials.Record(a,"H09").practiced,"The mandatory lesson fabricated later practice.");
+            checks.Add("PASS reward once, no regular Rift records, and F05/H09 practice remains unearned.");
+            game.UI.ShowEdictEditor();yield return null;var edict=FindAnyObjectByType<HuntEdictWindow>();
+            Require(edict.GetComponentsInChildren<Button>().Where(b=>b.name.StartsWith("edict-tab-")).Select(b=>b.name).OrderBy(x=>x).SequenceEqual(new[]{"edict-tab-overview","edict-tab-skills","edict-tab-survival"}),"Town disclosed future tabs.");
+            yield return LayoutProfiles("town-edict");
+            var existingSave=Find("edict-save");Require(game.Store.Save(),game.Store.Error);yield return null;yield return null;
+            Require(Find("edict-save")==existingSave,"Unchanged autosave rebuilt the editor.");
+            edict.SelectTab("survival");yield return null;yield return Tap("edict-option-survival.potionHpPercent");
+            var focused=edict.GetComponentsInChildren<InputField>().Single(f=>f.name=="edict-number-input");yield return Tap(focused);
+            // Rift 4 first discloses the combat target group; Rift 3 only adds survival options.
+            a.Hero.highestClear=4;Require(game.Store.Save(),game.Store.Error);yield return null;yield return null;
+            Require(focused!=null&&focused.isFocused,"Save replaced the focused numeric editor.");
+            focused.DeactivateInputField();yield return Tap("edict-number-apply");yield return null;yield return null;
+            Require(Find("edict-tab-combat")!=null,"A committed progression change did not reveal its tab.");
+            checks.Add("PASS unchanged Save retains controls; progression Save defers during a focused child and reveals its tab afterward.");
+            yield return Tap("edict-close");
+            // A result fixture checks disclosure and nonblocking deferral, without claiming natural progression.
+            ContentUnlocks.RecordRunEnd(a);Require(game.Store.Save(),game.Store.Error);game.UI.EdictResultSettled();yield return null;yield return null;
+            yield return Until(()=>Find("edict-notice-later")!=null||Find("dialogue-skip")!=null,8);
+            if(Find("edict-notice-later")==null)yield return Tap("dialogue-skip");yield return Tap("edict-notice-later");
+            Require(!game.Active&&game.UI.Page=="plaza","Optional guidance blocked town use.");
+            game.UI.ShowEdictEditor();yield return null;edict=FindAnyObjectByType<HuntEdictWindow>();edict.SelectTab("survival");
+            yield return null;yield return Tap("edict-group-survival.potion");Require(Find("edict-option-survival.potion")!=null,"The first result did not reveal automatic HP potions.");
+            yield return Tap("edict-close");checks.Add("PASS first-result fixture revealed HP toggle/basic dodge and Later left town usable.");
+            a.Hero.potions.Activate();a.Hero.potions.Set("PH01",0);Require(game.Store.Save(),game.Store.Error);
+            game.UI.ShowRiftKeeper();yield return null;yield return null;
+            Require(Find("rift-skill-4")==null&&Find("rift-services")==null,"Entry disclosed the ultimate or repeat shortcut early.");
+            if(a.selectedHero==0)yield return LayoutProfiles("entry-manual-restock");
+            yield return Tap("rift-potion-restock");yield return null;yield return null;
+            Require(a.Hero.potions.Count("PH01")==20&&HuntEdictSummary.Value(a.Hero.edict,"potion.autoBuy")=="OFF","Manual restock failed or enabled automatic buying.");
+            game.UI.CloseRiftEntry();checks.Add("PASS actual manual restock pointer entry before disclosure, with automatic buying still OFF and future shortcuts hidden.");
+            File.WriteAllText(Path.Combine(output,"progression-result.txt"),string.Join("\n",checks)+"\n");
+            File.WriteAllText(Path.Combine(output,"final-guide.json"),JsonUtility.ToJson(a.guide,true));
+            Application.Quit(0);
+        }
+    }
+}
+#endif

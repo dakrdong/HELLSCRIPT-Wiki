@@ -1,10 +1,18 @@
 # Tutorial implementation and validation
 
-Updated: 2026-09-30
+## 2026-10-07 puzzle core
+
+New mandatory entry now runs v5 levels 1–2. `AccountGuide.puzzle` owns the hero, current level, attempts, clears, hints and fixed starting kit. `GameStore.Puzzle.cs` validates first-clear XP and retry ownership. Edict disclosure and skill tracks use level permissions ahead of ordinary rift progression. `tutorial-v5` and the saved wave cursor prevent duplicate spawns on restore. Earlier prologue tables and counts below are historical. [Current core](Puzzle_Tutorial_Core.en.md).
+
+Updated: 2026-10-06
 
 The [design](../Design/Tutorial_Flow_Design.en.md) connects 38 guide groups to the existing game loop: dedicated map, real inventory equipment, town, rifts, Hunt Edict, skill changes and content practice.
 
 > 2026-09-29: the mandatory map is now the "Voice of the Edict" prologue. The armor award and equip step are gone; the current flow is [Prologue — the Voice of the Edict](Prologue_Edict_Voice.en.md).
+
+## 2026-10-06 escape guidance
+
+A04/M04 now unlock at level 5; Warrior W04 remains at level 10. F06 lists actives never equipped after the first skill. At level 5 it appends A04/M04 without changing the A02/M02 recommendation order. Puzzle escape training will be a separate lesson; this change alone does not complete that tutorial. The level-10 checks dated 2026-09-29 below describe their historical state. [Implementation](Escape_Skill_Unlock_Level.en.md).
 
 ## Ownership
 

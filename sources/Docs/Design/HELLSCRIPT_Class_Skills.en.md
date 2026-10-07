@@ -52,7 +52,7 @@ The design includes all 24 new set concepts and 60 bonus tiers, plus six existin
 ## Loadouts, unlocks and exclusive ultimates
 
 1. Retain up to four normal actives and three passives. BASIC remains a separate fallback when resources run out. Propose one dedicated ultimate slot; the slot and HUD expansion are not implemented yet.
-2. Preserve existing unlock levels and spent points. New normal actives unlock in pairs at levels 22/26/30/34/38. New passives unlock in groups of three at 22/26/30/34. Both ultimates appear at level 40 in the same final tier. Level 40 is enabled only for development validation profiles.
+2. A04 and M04 unlock at level 5 from 2026-10-06; W02 remains at level 1. Preserve other existing unlock levels and spent points. New normal actives unlock in pairs at levels 22/26/30/34/38. New passives unlock in groups of three at 22/26/30/34. Both ultimates appear at level 40 in the same final tier. Level 40 is enabled only for development validation profiles.
 3. The complete view orders normal actives 01–16, passives 17–35, then ultimates 36–37. In an active-only view, ultimates are entries 17 and 18 and remain last even when other sorting is applied.
 4. Before level 40, neither ultimate can be selected. Afterwards, select exactly one, and only that ability can be learned, equipped or cast. An unselected eligible hero is prompted before departure; loading a save itself must remain possible.
 5. Reject presets containing both ultimates, a foreign-class ultimate or an ultimate in a normal slot at UI, save-application, share-code import, run-start and cast boundaries. Equipment, passives and automatic procs cannot cast the unselected ability.

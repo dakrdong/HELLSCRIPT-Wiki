@@ -3513,6 +3513,14 @@ UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 
 '{0}'에서 한 가지만 바꿉니다	Change just one thing in '{0}'.
 훈련장에서 확인	Check in training
 다음 사냥에서 관찰	Watch the next hunt
+인력 붕괴	Gravity Collapse
+인력술사	Gravity Caster
+끌어당김 안에서는 걸어서 벗어날 수 없습니다.	Walking cannot escape the pull.
+폭발까지 {0}초 · 이동기로 원 밖으로 벗어나세요.	Explosion in {0}s · Use a movement skill to leave the circle.
+지름 5m 원 안에서 중심으로 끌어당긴 뒤 5초 후 폭발합니다. 이동기로 원 밖을 벗어나세요.	Pulls you toward the centre of a 5m circle and explodes after 5s. Use a movement skill to leave the circle.
+장판 폭발	Ground explosion
+
+대기실로	RETURN TO WAITING ROOM
 # --- composed at runtime; no source literal holds these ---
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
@@ -4609,7 +4617,7 @@ Lv.{0} 해금	Unlocks at Lv.{0}
 최대 HP에 대한 초당 예상 피해 비율입니다.	Expected damage per second as a percentage of maximum HP.
 체력이 회복되고 위험이 해소되면 전투에 복귀합니다.	Re-engage after health recovers and danger clears.
 공격·이동 중에도 물약을 사용할 수 있습니다.	Potions can be used while attacking or moving.
-현재 HP가 기준 이하이면 물약을 사용합니다.	Use a potion when current HP reaches the threshold.
+현재 HP가 기준 이하이면 물약을 사용합니다. 후퇴 중에는 전투 복귀 HP까지 회복합니다.	Use a potion at the HP threshold. While retreating, keep healing until re-engagement HP is reached.
 공격 후에도 회피기 한 번에 필요한 자원을 남깁니다.	Reserve enough resource for one escape skill after attacking.
 전설·세트 장비의 자동 판매·분해를 별도로 허용합니다.	Separately permit automatic sale or salvage of legendary and set equipment.
 자동 판매·분해·교체 대상에서 제외합니다.	Exclude from automatic sale, salvage and replacement.
@@ -6277,8 +6285,9 @@ HP가 낮은 적 마무리	Finish low-HP enemies
 되었다. 칙령을 닫으라. 시간이 다시 흐르리라.	It is done. Close the edict, and time shall flow again.
 '생존'을 열라. 살아남는 법이 거기 적혀 있다.	Open 'Survival'. The way to live is written there.
 '자동 물약'을 열라. 언제 물약을 마실지 정하는 곳이다.	Open 'Automatic potion'. There you decide when to drink.
-지금은 '균형 보급'이다. 눌러서 바꾸라.	It is set to 'Balanced supplies'. Press it to change.
-'넉넉한 생존 보급'을 택하라. 체력이 60%만 남아도 물약을 마시리라.	Choose 'Extra survival supplies'. You shall drink when only 60% of your life remains.
+'물약 HP 기준'을 눌러 40을 60으로 바꾸라. 체력이 60%만 남아도 물약을 마시리라.	Press 'Potion HP threshold' and change 40 to 60. You shall drink when only 60% of your life remains.
+물약 HP 기준에 60을 입력하라.	Enter 60 for the potion HP threshold.
+60%를 적용하라.	Apply 60%.
 이제 '피해 유형별 회피'를 열라. 붉은 예고를 피하는 법이다.	Now open 'Avoidance by damage type'. It is the way to escape the red warnings.
 눌러서 회피 방식을 고르라.	Press it to choose how to evade.
 '모든 예고 회피'를 택하라. 어떤 공격의 예고도 흘려보내지 말라.	Choose 'Avoid all warnings'. Let no warning of any attack pass unheeded.
@@ -6629,3 +6638,195 @@ HP 60% 이하에서 물약을 사용하도록 저장했습니다. 창을 닫고 
 형님, 보고 계십니까. …감사합니다, 사령관님.	Brother, are you watching? ...Thank you, Commander.
 숲이 아직 저를 기억하겠지요. …감사합니다, 사령관님.	The forest must still remember me. ...Thank you, Commander.
 스승님께 이 소식을 전하고 싶군요. …감사합니다, 사령관님.	I wish I could tell my master this news. ...Thank you, Commander.
+# Puzzle tutorial v5: core lessons and saved progress.
+첫 번째 힘	Your First Power
+한 방, 쾅	One Crushing Blow
+사냥 칙령에서 첫 스킬을 배우고 첫 칸에 장착하세요. 네 마리의 사냥개가 기다립니다.	Learn your first skill in Hunt Edict and equip it in the first slot. Four grave hounds await.
+실제 장착한 스킬로 마물을 처치했습니다.	Your equipped skill defeated the monsters.
+스킬은 포인트를 사용해 배웁니다.	Spend skill points to learn skills.
+배운 액티브는 칸에 장착해야 합니다.	Equip a learned active skill in a slot.
+전사 W01, 궁수 A01, 마법사 M01이 첫 스킬입니다.	Your first skill is W01 for Warrior, A01 for Ranger, or M01 for Mage.
+사냥 칙령 → 스킬 → 첫 스킬 배우기 → 1번 칸 장착 → 저장.	Hunt Edict → Skills → Learn the first skill → Equip in slot 1 → Save.
+사냥개 뒤의 모래굴 벌레가 발밑에 솟구칩니다. 첫 도전에서 공격 예고를 관찰하세요.	The sand burrow worm behind the hounds erupts beneath you. Watch its attack warnings on your first attempt.
+벌레가 남긴 순간 범위 예고를 보고 이동과 회피 방침을 정하세요.	Use the worm’s burst-area warning to choose your movement and dodge policy.
+영웅의 위치에 원형 예고가 생깁니다.	A circular warning appears at the hero’s position.
+한 번의 큰 피해는 물약보다 먼저 들어옵니다.	One large hit can land before a potion helps.
+이 레벨에서 아직 열리지 않은 설정입니다.	This setting has not opened in this level yet.
+이 레벨의 스킬 트랙을 따라 배우고 장착하세요.	Learn and equip the skills on this level’s skill track.
+스킬 사용 방식은 다음 레벨에서 열립니다.	Skill use policies open in a later level.
+쓰러졌습니다. 설정을 바꾸고 다시 도전하세요.	You fell. Change your settings and try again.
+레벨 {0} 클리어	Level {0} cleared
+레벨 {0} · {1}	Level {0} · {1}
+복습 완료 · 보상 없음	Replay complete · no rewards
+첫 클리어 +{0} XP · 영웅 Lv.{1} · 스킬 포인트 {2}	First clear +{0} XP · Hero Lv.{1} · {2} skill points
+도전하기	Play
+이 레벨의 스킬을 먼저 배우고 장착하세요.	Learn and equip this level’s skills first.
+칙령 퍼즐	Edict Puzzles
+15개의 퍼즐에서 스킬, 생존, 장비와 사냥 운용을 하나씩 배웁니다. 정찰하고 설정을 저장한 뒤 도전하세요. 패배는 복기와 힌트로 다시 풀고, 첫 클리어 경험치로 성장합니다. 모든 퍼즐을 풀면 마을로 향합니다.	Learn skills, survival, equipment, and hunt management through 15 puzzles. Scout, save your settings, and play. Review losses and use hints to try again. First-clear XP grows your hero. Complete every puzzle to reach town.
+순간 범위 회피 또는 치명적 피해 대응이 필요합니다.	Enable burst-area dodge or a lethal-damage survival policy.
+모든 예고 회피를 선택하세요. 전사는 균형 생존도 함께 사용하거나 외곽에 서세요.	Choose All Warnings in Hunt Edict and save. Warriors can also use balanced survival or stand at the edge.
+복습 설정은 원래 계정을 변경하지 않습니다.	Replay settings do not change the original account.
+물약의 때	A Time for Potions
+광신 돌격병은 두 번 돌진하고 사구 약탈자는 두 번 벱니다. 0·11·22초에 세 무리가 옵니다. 회복 물약의 재사용은 20초입니다.	Fanatic chargers rush twice, and dune raiders slash twice. Three pairs arrive at 0, 11 and 22 seconds. HP potions have a 20-second cooldown.
+첫 파에서 물약을 일찍 마시면 마지막 파 전에 다시 사용할 수 있습니다.	Drink early after the first burst so the potion is ready again before the last wave.
+물약은 마신 순간부터 재사용 시간이 흐릅니다.	The potion cooldown starts when you drink.
+체력이 너무 낮아진 뒤 마시면 다음 폭딜 때 물약이 없습니다.	If you wait until HP is too low, the potion will be unavailable for the next burst.
+넉넉한 생존 보급은 HP 60%에서 회복을 시작합니다.	Extra survival supplies start healing at 60% HP.
+자동 물약을 넉넉한 생존 보급으로 저장하세요.	Save Extra survival supplies for automatic potions.
+역병 시종 둘과 잿불 사술사 둘이 웅덩이를 만듭니다. 이 파를 정리하면 잠시 멈추고, 쇠사슬 시체 열둘을 제한시간 안에 처치해야 합니다.	Two plague servants and two ember hexers create pools. After clearing them, combat pauses. Then defeat twelve chain corpses within 90 seconds.
+웅덩이는 신중하게 피하고, 두 번째 파는 공격적으로 정리하세요. 웨이브 사이에 성향을 바꿀 수 있습니다.	Avoid the pools carefully, then clear the second wave aggressively. You can change temperament between waves.
+서로 다른 두 무리가 순서대로 등장합니다.	Two different groups appear in sequence.
+웅덩이는 오래 밟을수록 피해가 쌓입니다.	The longer you stand in a pool, the more damage accumulates.
+첫 파는 신중, 두 번째 파는 공격적 성향이 어울립니다.	Careful suits the first wave; Aggressive suits the second.
+첫 파에 신중을 저장하고, 중간 정비에서 공격적으로 바꾸세요.	Save Careful for the first wave, then switch to Aggressive during intermission.
+물러설 때	Time to Fall Back
+철갑 망령 네 마리가 천천히 다가옵니다. 한 번 맞으면 체력의 약 25%를 잃습니다. 영웅의 보행이 더 빠르므로 물약이 돌아올 때까지 물러날 수 있습니다.	Four iron revenants approach slowly. A hit removes about 25% of your HP. Your hero walks faster, so you can retreat while waiting for the potion.
+HP 45%에서 물러나고 75%까지 회복한 뒤 복귀하면 실제 보행 후퇴가 반복됩니다.	Retreat at 45% HP and return at 75% to repeat real walking retreats.
+맞은 뒤에도 그 자리에서 싸우면 다음 공격을 받습니다.	If you keep fighting in place after a hit, the next attack will reach you.
+물약은 20초마다 돌아옵니다.	Potions become ready every 20 seconds.
+생존 우선은 HP 45% 후퇴와 75% 복귀를 사용합니다.	Survival first retreats at 45% HP and returns at 75%.
+체력 위기 대응을 생존 우선으로, 방어 수단을 보행 후퇴로 저장하세요.	Save Survival first for low HP and Walking retreat for the defensive method.
+위험한 적부터	Danger First
+장송 사제가 3m 안의 아군을 6초마다 최대 체력의 15%만큼 회복합니다. 시체 여섯과 궁병 둘이 사제를 지킵니다.	A funeral priest heals allies within 3 m for 15% of maximum HP every 6 seconds. Distinguish its three corpse guards from the three corpses accompanying two archers.
+지원형 마물을 먼저 끊으면 무리를 회복시키는 적이 사라집니다.	Defeat support enemies first to stop them from healing the group.
+마물의 체력이 다시 차는 이유를 찾아보세요.	Find out why the enemies regain HP.
+지원형은 주변 아군을 회복합니다.	Support enemies heal nearby allies.
+위험한 적 우선은 지원형을 먼저 고릅니다.	Danger first targets support enemies first.
+공격 대상에 위험한 적 우선을 저장하세요.	Save Danger first for attack targets.
+끌려가는 자리	Pulled Under
+인력술사가 발밑에 지름 5m의 인력 붕괴를 만듭니다. 5초 동안 끌어당긴 뒤 폭발하고, 10초마다 반복합니다. 두 무리의 시체도 다가옵니다.	The gravity caster creates a 5 m wide Gravity collapse under your feet. It pulls inward for 5 seconds, then explodes, repeating every 10 seconds. Two corpse groups also approach.
+끌리는 동안 걷기로는 원을 벗어나지 못합니다. 지정한 이동기는 끌림을 무시하고 원 밖으로 착지합니다.	Walking cannot escape the pull. Your assigned movement skill ignores the pull and lands outside the circle.
+인력 붕괴 안에서는 걸어도 중심으로 끌려갑니다.	Inside Gravity collapse, walking still pulls you toward its center.
+이탈기 재사용은 인력 붕괴 주기보다 짧습니다.	The escape cooldown is shorter than the Gravity collapse cycle.
+전사 W02, 궁수 A04, 마법사 M04를 이탈기로 지정하세요.	Assign W02 for Warrior, A04 for Ranger or M04 for Mage as your escape skill.
+회피기에 직업 이동기를 지정하세요. 전사 W02는 이탈 역할로 저장하고 비상용 보존을 유지하세요.	Assign your class movement skill as Escape. Save W02 in its Escape role for Warrior and keep it reserved for emergencies.
+칙령 직접 쓰기	Write the Edict
+엘리트 철갑 망령 한 마리와 시체 둘이 있습니다. 시체가 쓰러진 뒤에는 적 하나만 남습니다. 같은 조건에서 두 스킬 사용 방식을 비교해 보세요.	One elite iron revenant and two corpses await. Once the corpses die, only one enemy remains. Compare two skill policies under the same conditions.
+무리를 기다리는 사용 조건은 적 하나만 남으면 발동하지 않습니다. 단일 또는 강적용 사용 방식으로 바꾸세요.	A policy that waits for a pack does not activate against a lone enemy. Choose a single-target or elite policy.
+스킬을 배웠어도 사용 조건을 만족해야 시전합니다.	Learning a skill is not enough: its use conditions must also be met.
+두 마리 이상을 기다리는 조건을 살펴보세요.	Inspect the condition that waits for at least two enemies.
+전사 W03 강적, 궁수 A03 갱신, 마법사 M03 기본 사용이 단일 적에도 발동합니다.	Warrior W03 Elite, Ranger A03 Renew and Mage M03 Steady also activate against one enemy.
+스킬 사용 방식을 단일 또는 강적용으로 저장하고 같은 조건의 A/B 훈련 결과를 확인하세요.	Save a single-target or elite skill policy and compare A/B results under the same conditions.
+{0} 사용 · 튜토리얼 보급	Used {0} · Tutorial supplies
+첫 파를 정리했습니다. 칙령을 바꾸고 두 번째 파를 시작하세요.	First wave cleared. Change your edict and start the second wave.
+쓰러졌습니다 · 마지막 5초 복기	Defeated · Review of the last 5 seconds
+제한시간을 넘겼습니다 · 마지막 5초 복기	Time limit exceeded · Review of the last 5 seconds
+{0} · {1}회 · 최대 HP의 {2:0.0}%	{0} · {1} hits · {2:0.0}% of maximum HP
+마지막 5초에는 받은 피해가 없습니다. 공격 조건과 제한시간을 확인하세요.	No damage received in the last 5 seconds. Check your attack conditions and the time limit.
+힌트 {0}/4 · {1}	Hint {0}/4 · {1}
+교관의 설정으로 준비	Prepare with the instructor
+힌트 보기	Show hint
+끌어당김 후 순간 범위 공격 · 원	Pull, then instant area attack · Circle
+땅속에서 순간 범위 공격 · 원	Burrow, then instant area attack · Circle
+두 번 돌진 · 직선	Two charges · Line
+두 번 베기 · 부채꼴	Two slashes · Sector
+돌진 · 직선	Charge · Line
+직접 타격·투사체 · 직선	Direct hit or projectile · Line
+지속 장판 · 원	Persistent ground hazard · Circle
+지원형 · 주변 아군 회복	Support · Heals nearby allies
+근접 공격 · 부채꼴	Melee attack · Sector
+전투 성향은 해당 레벨에서 열립니다.	Combat temperament opens in its tutorial level.
+누적 피해 {0:0} · 초당 피해 {1:0.0}	Total damage {0:0} · Damage per second {1:0.0}
+A/B 비교 · 실제 영웅의 복사본 · 레벨 8의 같은 적·장비·시드 · 선택한 스킬 사용 방식만 변경 · 보상 없음	A/B comparison · Copy of your hero · Same enemies, gear and seed as level 8 · Changes only the selected skill policy · No rewards
+전사 W03 강적, 궁수 A01 기본 사용, 마법사 M03 기본 사용이 단일 적에도 발동합니다.	Warrior W03 Elite, Ranger A01 Steady and Mage M03 Steady also activate against one enemy.
+공통 공격 순서는 졸업 시험에서 열립니다.	The common attack order opens in the graduation trial.
+장송 사제가 3m 안의 아군을 6초마다 최대 체력의 15%만큼 회복합니다. 사제를 지키는 시체 셋과, 궁병 둘과 함께 있는 시체 셋을 구분하세요.	A funeral priest heals allies within 3 m for 15% of maximum HP every 6 seconds. Distinguish its three corpse guards from the three corpses accompanying two archers.
+새 기술 · {0}	New skills · {0}
+대기실	Waiting room
+현재 레벨을 먼저 클리어하세요.	Clear the current level first.
+첫 레벨입니다.	This is the first level.
+이 메뉴는 현재 사용할 수 없습니다.	This menu is unavailable right now.
+✔ 클리어	Cleared
+전리품 거르기	Sift the Loot
+가방이 가득	A Full Bag
+자동 장비	Auto Equip
+위험 분류	Sorting the Dangers
+졸업 시험	The Graduation Trial
+마을로	To town
+시작	Play
+바닥에 장비 12개가 있습니다. 시험 가방은 3칸이고 가까운 희귀 장비는 3개입니다. 먼 전설 장비 주변은 위험합니다. 20초 뒤 가까운 안전 구역 안에서 희귀 장비 3개를 가져오세요.	Twelve items lie on the floor. Your trial bag has three slots, and three rare items are nearby. The distant legendary item is in danger. Bring back three rare items and remain inside the nearby safe zone after 20 seconds.
+가방 칸과 회수 경로를 함께 골라야 합니다. 빠뜨린 희귀 장비와 안전 구역 복귀를 확인하세요.	Choose your bag contents and recovery route together. Check the missing rare items and your return to safety.
+아무 장비나 담으면 필요한 장비를 놓칩니다.	Collecting everything can crowd out the items you need.
+가까운 희귀 장비는 세 개입니다.	There are three rare items nearby.
+희귀 이상과 가까운 것만 회수를 함께 고르세요.	Combine Rare or Better with Nearby Only.
+장비 거르기 희귀 이상과 회수 거리 가까운 것만을 저장하세요.	Save Rare or Better and Nearby Only.
+HP 50%로 저주 상자 앞에 섰습니다. 물약은 20초 뒤 돌아옵니다. 상자를 열면 적 4기를 12초 안에 전멸시켜야 합니다. HP와 남은 시간을 확인하고 도전하세요.	You face a cursed chest at 50% HP. Your potion returns in 20 seconds. Opening it starts a battle against four enemies that must be defeated within 12 seconds. Check your HP and remaining time before attempting it.
+상자의 실제 잔향 진압 결과를 확인하세요. 위험한 상태에서 열거나 상자를 지나치면 목표를 놓칩니다.	Review the actual echo suppression result. Opening the chest too soon or skipping it misses the goal.
+저주 상자는 열 때의 상태가 중요합니다.	Your condition when opening a cursed chest matters.
+물약이 돌아오면 실제 체력을 회복할 수 있습니다.	The potion can restore real HP when its cooldown ends.
+여유 있을 때는 HP 85%와 남은 시간 120초를 확인합니다.	Well Prepared checks for 85% HP and 120 seconds remaining.
+저주 상자 여유 있을 때를 저장하고 물약이 돌아온 뒤 도전하세요.	Save Well Prepared and attempt the chest after your potion returns.
+시험 가방 3칸에 일반·마법 장비와 강화한 장비가 있습니다. 잠시 뒤 전설 장비 하나가 떨어집니다. 투자 장비를 지키며 전설을 담고, 종료 정리로 금화 80과 빈칸 1개를 확보하세요.	Your three trial slots hold a normal item, a magic item, and enhanced equipment. A legendary item will drop shortly. Keep your investment, collect the legendary item, and obtain 80 gold plus one free slot through end-of-run cleanup.
+교체·종료 정리·투자 보호는 서로 다른 역할입니다. 시험 장비와 판매 금화는 종료 때 정리되며 원래 장비와 금화는 보존합니다.	Replacement, cleanup, and investment protection have separate jobs. Trial items and sale proceeds are settled at the end; your original items and gold are preserved.
+돌아가거나 두고 오면 전설을 담지 못합니다.	Returning or leaving loot behind misses the legendary item.
+가치 교체만으로는 판매 목표를 채우지 못합니다.	Value replacement alone does not meet the sale goal.
+일반·마법 판매와 투자 장비 보호도 함께 고르세요.	Also choose Sell Normal and Magic and Protect Investments.
+가치 높은 장비로 교체, 일반·마법 판매, 투자 장비 보호를 저장하세요.	Save Replace by Value, Sell Normal and Magic, and Protect Investments.
+직업에 맞지 않는 무기, 낮은 무기, 지금보다 강한 같은 계열 무기가 떨어집니다. 3초 뒤 철갑 망령이 다가옵니다. 실제 추천 착용으로 무기를 바꾸고 45초 안에 처치하세요.	An off-class weapon, a weaker weapon, and an upgrade in your current weapon family drop. An armored wraith approaches after three seconds. Use actual recommended equipment to defeat it within 45 seconds.
+추천 착용은 실제 장착 거래입니다. 꺼 두거나 무기 교체를 막으면 전투 중 화력이 오르지 않습니다.	Recommended equipment performs a real equipment transaction. Turning it off or blocking weapon replacement prevents your combat damage from improving.
+바닥 장비를 담는 것과 착용하는 것은 다릅니다.	Collecting equipment and wearing it are different actions.
+장비 추천 착용 사용을 켜세요.	Enable Recommended Equipment.
+같은 무기 계열의 높은 점수 장비를 고르면 됩니다.	Choose Higher Score in the Same Weapon Family.
+추천 착용 켬과 무기 교체 같은 무기 계열을 저장하세요.	Save Recommended Equipment On and Same Weapon Family.
+90초 안에 실제 시험 금화 200을 얻으세요. 1단계 보상은 10, 2단계는 100입니다. 3단계는 지금 화력으로 15초 안에 끝내기 어렵습니다. 각 판의 성공·실패 뒤 다음 행동을 고르세요.	Earn 200 actual trial gold within 90 seconds. Stage 1 awards 10; stage 2 awards 100. Stage 3 is difficult to finish within its 15-second battle limit at your current damage. Choose what happens after success and failure.
+완료된 전투의 보상만 목표 금화에 셉니다. 실제 실패 뒤 한 단계 낮춰 다시 이기면 목표를 채울 수 있습니다. 시험 금화는 결과 기록 때 정리합니다.	Only rewards from completed battles count. Returning one stage after an actual failure lets you win again. Trial gold is settled when the lesson result is recorded.
+같은 단계만 돌면 낮은 보상에 머뭅니다.	Repeating one stage keeps its small reward.
+성장 단계 도전은 승리 뒤 다음 단계로 갑니다.	Climb moves to the next stage after a victory.
+감당하지 못한 단계를 계속 도전하면 목표 시간을 놓칩니다.	Repeatedly attempting a stage you cannot beat wastes the goal time.
+성공 뒤 다음 단계, 실패 뒤 한 단계 하락, 목표 금화 200을 저장하세요.	Save Next Stage after Success, One Stage Lower after Failure, and a 200 Gold Goal.
+정비 퍼즐 · 장비 비교	Maintenance Puzzle · Equipment Comparison
+정비 퍼즐 · 한 칸의 값	Maintenance Puzzle · The Value of One Upgrade
+저항 장비	Resistance Equipment
+불과 독 웅덩이의 피해를 각각 10% 이상 줄이세요. 장착품은 왼쪽, 선택한 후보는 오른쪽입니다.	Reduce both fire and poison pool damage by at least 10%. Equipped items appear on the left and your selected candidate on the right.
+시험 금화 {0} · 한 번만 강화해 실제 공격 피해를 올리세요.	Trial gold {0} · Upgrade once to increase your actual attack damage.
+불 피해 {0:0.0} → {1:0.0} · 독 피해 {2:0.0} → {3:0.0}	Fire damage {0:0.0} → {1:0.0} · Poison damage {2:0.0} → {3:0.0}
+공격 피해 {0:0.0} → {1:0.0}	Attack damage {0:0.0} → {1:0.0}
+물리 방어는 불과 독 피해를 줄이지 않습니다.	Physical armor does not reduce fire or poison damage.
+장착 비교에서 모든 저항 수치를 확인하세요.	Check All Resistance in the equipment comparison.
+저항 장비를 선택해 착용하세요.	Choose and equip the resistance item.
+저항 장비를 착용하고 목표 확인을 누르세요.	Equip the resistance item and press Check Goal.
+방어구를 강화해도 공격 피해는 늘지 않습니다.	Upgrading armor does not increase attack damage.
+시험 금화를 되돌리고 무기 수치를 비교하세요.	Return the trial gold and compare the weapon stats.
+무기 +1은 기본 공격 수치를 올립니다.	Weapon +1 increases its base attack stat.
+시험 재도전 후 무기를 선택해 강화하세요.	Retry the trial, choose the weapon, and upgrade it.
+착용	Equip
+목표 확인	Check Goal
+목표에 부족합니다. 장착 비교를 보고 다시 골라 주세요.	The goal is not met. Check the equipment comparison and choose again.
+시험 재도전	Retry Trial
+강화	Upgrade
+화력이 늘지 않았습니다. 시험 재도전으로 이번 강화만 되돌릴 수 있습니다.	Attack damage did not increase. Retry Trial can reverse this trial upgrade.
+원래 금화와 장비는 보존합니다. 시험 재도전은 이번 시험의 강화와 지출만 되돌립니다.	Your original gold and equipment are preserved. Retry Trial reverses only this trial upgrade and its expense.
+반복 사냥 목표 달성	Repeat Hunt Goal Reached
+반복 사냥 목표 금화를 놓쳤습니다.	The repeat hunt gold goal was missed.
+반복 시험 결과를 저장하지 못했습니다.	The repeat trial result could not be saved.
+반복 시험 한 판 클리어	Repeat Trial Battle Cleared
+반복 시험 한 판 실패	Repeat Trial Battle Failed
+운영 목표를 놓쳤습니다. 가방과 이동 기록을 확인하세요.	The operating goal was missed. Review your bag and route.
+시험 가방 정리를 저장하지 못했습니다.	The trial bag cleanup could not be saved.
+대기실에서 정비 퍼즐을 먼저 풀어 주세요.	Complete the maintenance puzzle in the waiting room first.
+운영 목표를 놓쳤습니다 · 회수와 거래 기록	Operating goal missed · Recovery and transaction record
+반복 시험 · {0}판 · 목표 금화 {1}/200 · {2:0.0}/90초	Repeat trial · {0} battles · Goal gold {1}/200 · {2:0.0}/90s
+정리 판매 {0}/80 · 판매 장비 {1}개	Cleanup sales {0}/80 · Items sold {1}
+위험의 세 얼굴	Three Faces of Danger
+지속 장판, 순간 범위, 직접 타격이 차례로 나옵니다. 같은 회피 규칙을 세 분류에 각각 적용하고 공격 취소와 회피 수단을 고르세요.	Persistent ground zones, instant areas, and direct strikes arrive in turn. Set each danger category, attack cancellation, and an escape method.
+마지막 피해 기록에서 놓친 위험 분류를 읽으세요. 장판의 첫 1초가 작아도 계속 머물면 위험합니다.	Read the last damage record to find the missed danger category. The first second of a ground zone may look small, but staying inside is dangerous.
+회피 분류 하나를 꺼 두면 그 공격을 놓칩니다.	Leaving one dodge category off misses its attacks.
+장판·범위·직접 공격을 각각 항상 회피로 바꾸세요.	Always dodge ground zones, areas, and direct strikes.
+공격 취소를 허용하면 준비 중에도 위험에서 벗어납니다.	Allow attack cancellation to escape during preparation.
+세 분류 항상 회피, 공격 취소 허용, 필요하면 이동기를 저장하세요.	Always dodge all three categories, allow cancellation, and save a movement skill when needed.
+묘지의 집행자와 장송 사제, 해골 궁병 세 파를 상대하세요. 앞선 시험에서 배운 회피·생존·목표·보급·이동기를 함께 적용하세요.	Face the Graveyard Executioner, Funeral Priest, and three waves of Skeleton Archers. Combine the dodge, survival, targeting, supplies, and movement skills you learned.
+살아남고 모든 적을 쓰러뜨리면 지금의 칙령이 졸업 칙령으로 남습니다. 실패하면 실제 피해와 남은 적을 확인하고 한 설정씩 고치세요.	Survive and defeat every enemy to keep this edict after graduation. If you fail, review actual damage and remaining enemies, then change one setting at a time.
+모든 예고를 피하고 위험한 적을 먼저 보세요.	Dodge every warning and prioritize dangerous enemies.
+균형 생존과 넉넉한 물약은 긴 전투를 준비합니다.	Balanced survival and ample potions prepare you for a long fight.
+이동기를 생존 이탈로 지정하고 공격 취소를 허용하세요.	Designate your movement skill for escape and allow attack cancellation.
+모든 예고 회피, 균형 생존, 위험 우선, 넉넉한 보급, 직업 이동기를 저장하세요.	Dodge all warnings, balance survival, prioritize danger, carry ample supplies, and save your class movement skill.
+시험 두루마리 {0}/{1}쪽	Trial Scroll: {0}/{1} pages
+레벨 {0}: {1} · 복습	Level {0}: {1} · Review
+전사는 작은 타격을 버티고 장판·큰 피해를 피하세요. 궁수와 마법사는 모든 예고를 피하세요.	Warriors sustain attacks through small hits and evade ground hazards and heavy damage. Rangers and Mages evade all warnings.
+전사는 공격 유지 우선, 다른 직업은 모든 예고 회피를 선택하세요. 균형 생존, 위험 우선, 넉넉한 보급, 직업 이동기를 함께 저장하세요.	Choose Maintain attacks for Warriors, or Avoid all warnings for other classes. Save balanced survival, dangerous targets first, plentiful supplies and your escape skill.
+전사는 작은 타격을 버티며 공격을 유지합니다. 공격 취소 기록과 회피 기준을 확인하고, 큰 피해와 치명적 예고는 피하세요.	Warriors sustain attacks through small hits. Check attack cancellations and evasion thresholds, and evade heavy damage and lethal warnings.
+회피 설정	Dodge settings
+
+스킬 메뉴를 열어 첫 번째 힘을 익혀라.	Open Skills and learn your first power.
+역병 시종 둘과 잿불 사술사 둘이 웅덩이를 만들고, 흑철 석궁병 한 마리가 직격 공격을 합니다. 이 파를 정리하면 잠시 멈추고, 쇠사슬 시체 열둘을 제한시간 안에 처치해야 합니다.	Two plague attendants and two ember sorcerers create pools while a black-iron crossbowman strikes directly. Clear this wave, pause to prepare, then defeat twelve chained corpses within the time limit.
+웅덩이와 잦은 직격 공격을 피한 뒤, 두 번째 무리를 빠르게 정리해야 합니다.	Evade the pools and frequent direct strikes, then clear the second pack quickly.

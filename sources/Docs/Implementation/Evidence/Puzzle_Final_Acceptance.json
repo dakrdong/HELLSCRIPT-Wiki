@@ -1,0 +1,798 @@
+{
+  "updatedAt": "2026-10-07",
+  "status": "Implementation and final local gameplay acceptance complete; delivery is PR-only, without merge or public deployment.",
+  "mainIntegrated": "47f98fbb",
+  "mainMergeCommit": "09d54317",
+  "l4AuthoringRows": [
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Warrior",
+      "policy": "baseline",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "439.79",
+      "maxHealth": "580.00",
+      "firstWaveTime": "36.25"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Warrior",
+      "policy": "aggressive",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "299.88",
+      "maxHealth": "580.00",
+      "firstWaveTime": "59.00"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Warrior",
+      "policy": "balanced",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "439.79",
+      "maxHealth": "580.00",
+      "firstWaveTime": "36.25"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Warrior",
+      "policy": "careful",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "580.00",
+      "maxHealth": "580.00",
+      "firstWaveTime": "28.55"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Warrior",
+      "policy": "answer",
+      "phase": "Cleared",
+      "time": "83.80",
+      "health": "458.65",
+      "maxHealth": "580.00",
+      "firstWaveTime": "28.55"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Mage",
+      "policy": "baseline",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "126.73",
+      "maxHealth": "290.00",
+      "firstWaveTime": "69.90"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Mage",
+      "policy": "aggressive",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "141.51",
+      "maxHealth": "290.00",
+      "firstWaveTime": "34.00"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Mage",
+      "policy": "balanced",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "126.73",
+      "maxHealth": "290.00",
+      "firstWaveTime": "69.90"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Mage",
+      "policy": "careful",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "234.03",
+      "maxHealth": "290.00",
+      "firstWaveTime": "33.35"
+    },
+    {
+      "artifact": "l4-tuning-11",
+      "hero": "Mage",
+      "policy": "answer",
+      "phase": "Cleared",
+      "time": "88.65",
+      "health": "131.88",
+      "maxHealth": "290.00",
+      "firstWaveTime": "33.35"
+    },
+    {
+      "artifact": "l4-tuning-14-ranger",
+      "hero": "Ranger",
+      "policy": "baseline",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "124.94",
+      "maxHealth": "326.00",
+      "firstWaveTime": "28.05"
+    },
+    {
+      "artifact": "l4-tuning-14-ranger",
+      "hero": "Ranger",
+      "policy": "aggressive",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "92.66",
+      "maxHealth": "326.00",
+      "firstWaveTime": "0.00"
+    },
+    {
+      "artifact": "l4-tuning-14-ranger",
+      "hero": "Ranger",
+      "policy": "balanced",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "124.94",
+      "maxHealth": "326.00",
+      "firstWaveTime": "28.05"
+    },
+    {
+      "artifact": "l4-tuning-14-ranger",
+      "hero": "Ranger",
+      "policy": "careful",
+      "phase": "Failed",
+      "time": "90.00",
+      "health": "208.31",
+      "maxHealth": "326.00",
+      "firstWaveTime": "31.90"
+    },
+    {
+      "artifact": "l4-tuning-14-ranger",
+      "hero": "Ranger",
+      "policy": "answer",
+      "phase": "Cleared",
+      "time": "87.75",
+      "health": "155.62",
+      "maxHealth": "326.00",
+      "firstWaveTime": "31.90"
+    }
+  ],
+  "l4EvidenceScope": "Historical authoring data before the owner allowed alternative clears. Preserved as history, superseded by l4FinalRelaxedRows.",
+  "validation": {
+    "uiContract": "pass",
+    "uiContractTests": {
+      "passed": 15,
+      "failed": 0,
+      "seconds": 22.615,
+      "receipt": "../../../Artifacts/PuzzleTutorial/20261006/stage9-final-ui-contract-receipt.json"
+    },
+    "uiRefresh": "pass: 14 bindings, 165 inventoried UI sources",
+    "skillTreePrototype": {
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0
+    },
+    "fullEditMode": {
+      "passed": 5604,
+      "failed": 8,
+      "skipped": 2,
+      "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-final-editmode.xml",
+      "failedChecksRepairStatus": "All 8 original failures resolved by focused verification; full suite was not repeated.",
+      "fullRerun": false
+    },
+    "nativeSmoke": {
+      "status": "passed",
+      "journeys": 12,
+      "realLevelVictories": 180,
+      "hubLayouts": 30,
+      "safeAreaSimulations": 12,
+      "audit": "../../../Artifacts/PuzzleTutorial/20261006/stage9-final-verification-audit.json",
+      "reuse": "Successful spans retained; only failed or incomplete spans rerun. Explicit per-case provenance is in the audit.",
+      "input": "Synthetic EventSystem and keyboard input; accelerated fixed combat ticks; five ordinary seconds of normal Rift combat."
+    },
+    "physicalMobile": "not tested",
+    "publicWiki": "Not deployed; plan requests PR only",
+    "focusedRepairs": [
+      {
+        "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-focused-repairs-3.xml",
+        "passed": 164,
+        "failed": 1,
+        "skipped": 0,
+        "note": "Remaining failure was the old deterministic Warrior HP golden; then updated only that HP column."
+      },
+      {
+        "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-final-field-evidence-check.xml",
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "note": "Strict deterministic field golden and refusal to overwrite existing evidence."
+      },
+      {
+        "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-caption-layout-check.xml",
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0,
+        "note": "8 PrologueGate and 13 StoreViewBinding tests; actual PuzzleHubTests unchanged and passed in the full suite."
+      },
+      {
+        "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-hint-owner-check.xml",
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "note": "L2 actual retry and instructor ownership after hint writes; later loss retains opened hints."
+      },
+      {
+        "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-puzzle-promotion-check.xml",
+        "passed": 4,
+        "failed": 1,
+        "skipped": 0,
+        "note": "Five migration/intermission checks; one genuine fixture boot-owner projection was repaired."
+      },
+      {
+        "xml": "../../../Artifacts/PuzzleTutorial/20261006/stage9-puzzle-promotion-repair.xml",
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "note": "Failed-only rerun resolves the genuine after-L8 Mage owner projection; all five unique checks resolved."
+      }
+    ],
+    "nativeGraduationCurves": {
+      "passed": 3,
+      "failed": 0,
+      "riftVictories": 15,
+      "allEndLevel": 10,
+      "summary": "../../../Artifacts/PuzzleTutorial/20261006/stage9-native-grade-curves-summary.json",
+      "scope": "Three unchanged captured native graduation accounts, existing deterministic combat simulator and actual domain transactions. Not native-player Rift 1-5 completion."
+    },
+    "effectsComparison": {
+      "passedLaunches": 6,
+      "sourceCommit": "9b7a8e4cccd61d9aaf7e87ef47cece0df1fcc009",
+      "matchedInputs": {
+        "unity": "6000.6.0f1",
+        "device": "Mac15,7",
+        "processor": "Apple M3 Pro",
+        "graphics": "Apple M3 Pro",
+        "backend": "Mono",
+        "quality": "PC",
+        "width": 1280,
+        "height": 720,
+        "targetFrameRate": 60,
+        "vSyncCount": 0,
+        "systemReducedMotion": false,
+        "seed": 93171,
+        "gearSeed": 9132026,
+        "fixtureHash": "1af82e2b9d0fe4584ece5ccbe5ad67e729d471357492b704eb1ef39a54ee901a",
+        "workloadHash": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15",
+        "projectedWorkloadHash": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15",
+        "mapFingerprint": "tutorial-v5",
+        "layoutFingerprint": "tutorial-v5"
+      },
+      "groups": {
+        "off": {
+          "launches": 3,
+          "metrics": {
+            "cpuMsPerFrame": {
+              "median": 5.639885483870967,
+              "range": [
+                5.560713106382979,
+                5.810832088285229
+              ]
+            },
+            "cpuPercent": {
+              "median": 33.210059244433204,
+              "range": [
+                32.659722329942035,
+                34.204275108961355
+              ]
+            },
+            "actualFps": {
+              "median": 58.86295557897458,
+              "range": [
+                58.73297489930365,
+                58.88427936951531
+              ]
+            },
+            "frameMeanMs": {
+              "median": 16.98220174851317,
+              "range": [
+                16.977248689889553,
+                17.02536190374787
+              ]
+            },
+            "frameP95Ms": {
+              "median": 20.404292000002044,
+              "range": [
+                19.897959000001464,
+                20.493708000003608
+              ]
+            },
+            "frameP99Ms": {
+              "median": 22.742707999999112,
+              "range": [
+                22.630624999997906,
+                22.819375000000974
+              ]
+            },
+            "frameMaxMs": {
+              "median": 54.40312500000033,
+              "range": [
+                52.95225000000059,
+                78.14862499999897
+              ]
+            },
+            "gcBytesPerFrame": {
+              "median": 87226.59337860781,
+              "range": [
+                87097.77758913413,
+                87799.29361702128
+              ]
+            },
+            "gcCollectMsPerFrame": {
+              "median": 0.07111690152801357,
+              "range": [
+                0.06976329531914893,
+                0.0755083115449915
+              ]
+            },
+            "mainThreadMsPerFrame": {
+              "median": 16.95721984550085,
+              "range": [
+                16.942850095076402,
+                16.998771065531912
+              ]
+            },
+            "waitForTargetFpsMsPerFrame": {
+              "median": 14.614564678268252,
+              "range": [
+                14.570839505093378,
+                14.71052132680851
+              ]
+            },
+            "residentMiB": {
+              "median": 613.8125,
+              "range": [
+                610.65625,
+                615.390625
+              ]
+            },
+            "managedMiB": {
+              "median": 20.7109375,
+              "range": [
+                20.46875,
+                26.46875
+              ]
+            },
+            "collections": {
+              "median": 41,
+              "range": [
+                40,
+                42
+              ]
+            }
+          },
+          "cpuRuns": [
+            5.560713106382979,
+            5.639885483870967,
+            5.810832088285229
+          ],
+          "playerRssMiBRange": [
+            536.578125,
+            616.53125
+          ]
+        },
+        "on": {
+          "launches": 3,
+          "metrics": {
+            "cpuMsPerFrame": {
+              "median": 5.597509406779661,
+              "range": [
+                5.552646909398815,
+                6.408927867459643
+              ]
+            },
+            "cpuPercent": {
+              "median": 33.015096613094165,
+              "range": [
+                32.778364639518955,
+                37.70494976278699
+              ]
+            },
+            "actualFps": {
+              "median": 58.98176173336401,
+              "range": [
+                58.831914701721225,
+                59.03196290770066
+              ]
+            },
+            "frameMeanMs": {
+              "median": 16.95713973706531,
+              "range": [
+                16.939100459322034,
+                16.995677260204083
+              ]
+            },
+            "frameP95Ms": {
+              "median": 19.256458000000976,
+              "range": [
+                19.109249999999633,
+                20.512790999998032
+              ]
+            },
+            "frameP99Ms": {
+              "median": 22.08137499999907,
+              "range": [
+                21.796541000000502,
+                23.650124999999633
+              ]
+            },
+            "frameMaxMs": {
+              "median": 51.72358300000113,
+              "range": [
+                50.83804199999875,
+                52.67362500000061
+              ]
+            },
+            "gcBytesPerFrame": {
+              "median": 87000.98221845893,
+              "range": [
+                86952.25,
+                87789.21835174171
+              ]
+            },
+            "gcCollectMsPerFrame": {
+              "median": 0.06911374256584538,
+              "range": [
+                0.06806901016088061,
+                0.07115656271186441
+              ]
+            },
+            "mainThreadMsPerFrame": {
+              "median": 16.927894802542372,
+              "range": [
+                16.914376702794243,
+                16.971286143585388
+              ]
+            },
+            "waitForTargetFpsMsPerFrame": {
+              "median": 14.678661350847458,
+              "range": [
+                14.346268728971962,
+                14.686595795088907
+              ]
+            },
+            "residentMiB": {
+              "median": 581.78125,
+              "range": [
+                545.75,
+                604.1875
+              ]
+            },
+            "managedMiB": {
+              "median": 26.3828125,
+              "range": [
+                26.16796875,
+                26.39453125
+              ]
+            },
+            "collections": {
+              "median": 40,
+              "range": [
+                40,
+                40
+              ]
+            }
+          },
+          "cpuRuns": [
+            5.597509406779661,
+            5.552646909398815,
+            6.408927867459643
+          ],
+          "playerRssMiBRange": [
+            542.328125,
+            607.109375
+          ]
+        }
+      },
+      "summary": "../../../Artifacts/PuzzleTutorial/20261006/stage9-effects-comparison.json",
+      "binaryManifest": "../../../Artifacts/PuzzleTutorial/20261006/stage9-final-native-binaries.json",
+      "conclusion": "CPU ranges overlap (OFF 5.56-5.81, ON 5.55-6.41 ms/frame); ON third launch is slower. These six short captures do not establish a consistent effect cost or performance improvement. GC, frame spikes and memory remain raw process-level observations, not attributed solely to hub effects. No browser, mobile, release-build or thermal claim."
+    },
+    "productionSkillTreeReadback": {
+      "playerEnabled": false,
+      "nativeGraduationHeroesClassSkillValidation": false,
+      "nativeGraduationHeroesTreeVersion": 4,
+      "enabledBy": "ClassSkills.Enabled uses ClassSkillTree.Uses independently of ValidationBuild; production new-hero and tutorial transactions create the tree."
+    },
+    "localWiki": {
+      "commands": [
+        "python3 tools/wiki.py build",
+        "python3 tools/wiki.py check",
+        "python3 tools/test_wiki.py",
+        "/opt/homebrew/bin/node tools/test_wiki_ui.cjs"
+      ],
+      "reason": "The explicit task-plan section 2.4 and user-provided instructions require one final local set; results are retained in the task artifact directory and final PR. No public deployment."
+    }
+  },
+  "artifactRoot": "Artifacts/PuzzleTutorial/20261006",
+  "retentionReview": "2026-10-13",
+  "permanentDeletion": "Not approved",
+  "l4AuthoringArtifacts": {
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/before-L4-Warrior.json": {
+      "bytes": 421292,
+      "sha256": "9c309596cac468e92f17b689def2ce42b3f343c26f49dc5e02882383dbd397df"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Warrior-careful.json": {
+      "bytes": 535158,
+      "sha256": "f79234e3c1c69227bc9d14f03baa7cb4697e4b104bafbcd4cf206b9759501b5b"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/before-L4-Mage.json": {
+      "bytes": 420978,
+      "sha256": "dca1c59aadfa7374aff04df46db3ff0e5f5c9374ca1bdeb7464956da87e13e56"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/before-L4-Ranger.json": {
+      "bytes": 421468,
+      "sha256": "445856a5d75848565fd2ba69447057f6cfa9274073faf84aee5dfb4cc4ff8a5a"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Mage-answer.json": {
+      "bytes": 760840,
+      "sha256": "93822c508c8278445e5b7822fbd7c4e653777bbe5099c57f772a0ef1a9aab0f2"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Ranger-balanced.json": {
+      "bytes": 558665,
+      "sha256": "2ec2e260817df8e7f2a1e30328851be2a9d6afb5d25c89455e0287ab08450268"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Ranger-careful.json": {
+      "bytes": 574763,
+      "sha256": "bda38fab7795f0183bc64d9f733efc66fdb6a2fc0cf72d5c07a9e33a50323cd6"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Warrior-answer.json": {
+      "bytes": 1414478,
+      "sha256": "2348457afb0817da5722344224733026f75ef2e09e31784f62a07174398e7316"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Mage-aggressive.json": {
+      "bytes": 644089,
+      "sha256": "f1b05cc15ef9f16870ff44afb18b0958a8e8f254b8bb1ee9b04aed40911ed00b"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Mage-balanced.json": {
+      "bytes": 626765,
+      "sha256": "1693b8b92ceabb454df040fdb2131ff4ae964cb5e27c6e1bcd8dd17f43340196"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/matrix.csv": {
+      "bytes": 724,
+      "sha256": "9087c8570e307292658e3dfd2fba94e3a4eae3ad12c5b5f70a3679942c4b5aaa"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Ranger-baseline.json": {
+      "bytes": 558665,
+      "sha256": "e0b8d91f39b5655132ed1e225749574c082c2a3d876a965b356cd4b2c11d46dd"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Mage-baseline.json": {
+      "bytes": 626765,
+      "sha256": "ba29e4f32daebaa1bb4a1a408228227b443677fed47f86817c7c6ab991bc9385"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Ranger-aggressive.json": {
+      "bytes": 289721,
+      "sha256": "6bde05e9fe204d2284bff1809ee9668e726c2496eb05be3d39430468e94cdf72"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Warrior-baseline.json": {
+      "bytes": 1440712,
+      "sha256": "a8dc6aaefc481931b0a8d6c4ae896da0400954365f6e6758807a190d0b12de81"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Mage-careful.json": {
+      "bytes": 551919,
+      "sha256": "cd362ed550914d5741b9b3a4ca6d2aa3cfe796c73bc688c9fd8a849a18100224"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Warrior-balanced.json": {
+      "bytes": 1440712,
+      "sha256": "3f6a69eb955d984382dd38e1e1ba439c078079ecde49407aeab6f413f4a4f4b7"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Ranger-answer.json": {
+      "bytes": 622864,
+      "sha256": "47ae5d13545f03c7d02f041071dec85ff2b18c44552d7325a6bb6581e9e2f36d"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-11/Warrior-aggressive.json": {
+      "bytes": 1043261,
+      "sha256": "16bd8eb2294502a467bd052ec7190239a2d15b2235f638a567bc8042a92b3e3a"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/before-L4-Ranger.json": {
+      "bytes": 421468,
+      "sha256": "445856a5d75848565fd2ba69447057f6cfa9274073faf84aee5dfb4cc4ff8a5a"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/Ranger-balanced.json": {
+      "bytes": 583449,
+      "sha256": "6c46e660f6d48bb3a2c480e1fcddca5b1f649c9fd060ddddd7fc581e98965705"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/Ranger-careful.json": {
+      "bytes": 574767,
+      "sha256": "6ca6288d4147b79e2345e5ca653184f479a242916cd2537442d35d99c8b6bada"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/matrix.csv": {
+      "bytes": 243,
+      "sha256": "95bb81835dfb3fca2f4684b1287c257a39c0c0efd539646ec76605b591d22b33"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/Ranger-baseline.json": {
+      "bytes": 583449,
+      "sha256": "3b9d50145ccb22cdde7d578548c95af1303289514c5c4c57a8d40cba878b2741"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/Ranger-aggressive.json": {
+      "bytes": 289721,
+      "sha256": "cb03994647ae1107080fed3b7f358d095afd5a0a887bbc97fd85dc107c24a3ac"
+    },
+    "Artifacts/PuzzleTutorial/20261006/l4-tuning-14-ranger/Ranger-answer.json": {
+      "bytes": 594790,
+      "sha256": "930007c0b924b9978d8b401e8388e96056f430001d50a0f82ead341c910c32f9"
+    }
+  },
+  "l4FinalRunObservedRows": [
+    "PUZZLE L4 Warrior baseline: Failed hp=439.79/580.00 time=90.00 potions=4",
+    "PUZZLE L4 Warrior aggressive: Failed hp=299.88/580.00 time=90.00 potions=5",
+    "PUZZLE L4 Warrior balanced: Failed hp=439.79/580.00 time=90.00 potions=4",
+    "PUZZLE L4 Warrior careful: Failed hp=580.00/580.00 time=90.00 potions=0",
+    "PUZZLE L4 Warrior answer: Cleared hp=458.65/580.00 time=83.80 potions=2",
+    "PUZZLE L4 Ranger baseline: Failed hp=124.94/326.00 time=90.00 potions=4",
+    "PUZZLE L4 Ranger aggressive: Failed hp=92.66/326.00 time=90.00 potions=5",
+    "PUZZLE L4 Ranger balanced: Failed hp=124.94/326.00 time=90.00 potions=4",
+    "PUZZLE L4 Ranger careful: Failed hp=208.31/326.00 time=90.00 potions=1",
+    "PUZZLE L4 Ranger answer: Cleared hp=155.62/326.00 time=87.75 potions=3",
+    "PUZZLE L4 Mage baseline: Failed hp=126.73/290.00 time=90.00 potions=5",
+    "PUZZLE L4 Mage aggressive: Failed hp=141.51/290.00 time=90.00 potions=5",
+    "PUZZLE L4 Mage balanced: Failed hp=126.73/290.00 time=90.00 potions=5",
+    "PUZZLE L4 Mage careful: Failed hp=234.03/290.00 time=90.00 potions=0",
+    "PUZZLE L4 Mage answer: Cleared hp=131.88/290.00 time=88.65 potions=3"
+  ],
+  "l4FinalRunObservedScope": "Historical pre-relaxation observations from the completed full suite. Superseded for final L4 tuning by l4FinalRelaxedRows.",
+  "latestOwnerDecision": "Accept all actual lawful clears. The instructor path is a recommended efficient counter, not the only valid answer; no new score schema is introduced from the 100-point example.",
+  "l4FinalRelaxedRows": [
+    {
+      "hero": "Warrior",
+      "policy": "baseline",
+      "phase": "Cleared",
+      "hp": 498.51,
+      "maxHp": 580.0,
+      "seconds": 64.8,
+      "potions": 3
+    },
+    {
+      "hero": "Warrior",
+      "policy": "aggressive",
+      "phase": "Cleared",
+      "hp": 155.53,
+      "maxHp": 580.0,
+      "seconds": 85.4,
+      "potions": 4
+    },
+    {
+      "hero": "Warrior",
+      "policy": "balanced",
+      "phase": "Cleared",
+      "hp": 498.51,
+      "maxHp": 580.0,
+      "seconds": 64.8,
+      "potions": 3
+    },
+    {
+      "hero": "Warrior",
+      "policy": "careful",
+      "phase": "Failed",
+      "hp": 580.0,
+      "maxHp": 580.0,
+      "seconds": 90.0,
+      "potions": 0
+    },
+    {
+      "hero": "Warrior",
+      "policy": "answer",
+      "phase": "Cleared",
+      "hp": 527.79,
+      "maxHp": 580.0,
+      "seconds": 56.3,
+      "potions": 1
+    },
+    {
+      "hero": "Ranger",
+      "policy": "baseline",
+      "phase": "Cleared",
+      "hp": 122.13,
+      "maxHp": 326.0,
+      "seconds": 69.35,
+      "potions": 3
+    },
+    {
+      "hero": "Ranger",
+      "policy": "aggressive",
+      "phase": "Failed",
+      "hp": 92.66,
+      "maxHp": 326.0,
+      "seconds": 90.0,
+      "potions": 5
+    },
+    {
+      "hero": "Ranger",
+      "policy": "balanced",
+      "phase": "Cleared",
+      "hp": 122.13,
+      "maxHp": 326.0,
+      "seconds": 69.35,
+      "potions": 3
+    },
+    {
+      "hero": "Ranger",
+      "policy": "careful",
+      "phase": "Failed",
+      "hp": 239.41,
+      "maxHp": 326.0,
+      "seconds": 90.0,
+      "potions": 1
+    },
+    {
+      "hero": "Ranger",
+      "policy": "answer",
+      "phase": "Cleared",
+      "hp": 164.47,
+      "maxHp": 326.0,
+      "seconds": 65.75,
+      "potions": 2
+    },
+    {
+      "hero": "Mage",
+      "policy": "baseline",
+      "phase": "Failed",
+      "hp": 126.73,
+      "maxHp": 290.0,
+      "seconds": 90.0,
+      "potions": 5
+    },
+    {
+      "hero": "Mage",
+      "policy": "aggressive",
+      "phase": "Cleared",
+      "hp": 148.35,
+      "maxHp": 290.0,
+      "seconds": 71.6,
+      "potions": 4
+    },
+    {
+      "hero": "Mage",
+      "policy": "balanced",
+      "phase": "Failed",
+      "hp": 126.73,
+      "maxHp": 290.0,
+      "seconds": 90.0,
+      "potions": 5
+    },
+    {
+      "hero": "Mage",
+      "policy": "careful",
+      "phase": "Failed",
+      "hp": 234.03,
+      "maxHp": 290.0,
+      "seconds": 90.0,
+      "potions": 0
+    },
+    {
+      "hero": "Mage",
+      "policy": "answer",
+      "phase": "Cleared",
+      "hp": 91.92,
+      "maxHp": 290.0,
+      "seconds": 56.25,
+      "potions": 1
+    }
+  ],
+  "l4FinalRelaxedScope": "Passed focused final content tests using fresh genuine preceding-level journeys. Every actual L4 victory receives the same XP and progression; representative alternatives may win.",
+  "evidenceSupersession": {
+    "overwrittenPreviousRawFiles": 41,
+    "previousRawRecovered": false,
+    "previousXmlLogsMetricsPreserved": true,
+    "mapping": "../../../Artifacts/PuzzleTutorial/20261006/stage9-evidence-supersession.json"
+  },
+  "nativeRepairs": {
+    "caption": "Gate masks run after final layout; captured and verified L1 input.",
+    "navigation": "Fixed navigation updates in the slide-completion frame; unchanged Warrior hub profiles passed.",
+    "instructor": "Hint transactions retain the live run before their same-callback instructor commit; six focused checks passed.",
+    "intermission": "puzzleWaveReady now distinguishes scouting and intermission in both presentation keys; actual Warrior KO portrait/landscape L4 rechecks passed.",
+    "legacyPromotion": "Five focused checks resolved: exact existing owner promotion only, genuine after-L8 Mage ownership preserved, unauthorized edits rejected.",
+    "firstGreeting": "Reuse existing ToTown cinematic, preserving first greeting before growth guides.",
+    "reviewExit": "Reuse common content-close in the existing guarded fixed navigation layer.",
+    "pendingGraduationEntry": "Initialize existing battle Base when reopening the hub from entry without a live run.",
+    "singleLineDialogue": "Acceptance pointers reveal a single spoken line using the real next control; no speed/outcome changes."
+  },
+  "mainIntegrationScope": "57bfd1ac runtime skill-tree improvements plus 47f98fbb workflow-only updates; no game/package/asset change in the latter merge."
+}

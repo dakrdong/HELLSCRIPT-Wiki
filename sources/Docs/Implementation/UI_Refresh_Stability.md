@@ -53,6 +53,7 @@
 | A/B 훈련 비교 조건·B 장비/원본·결과/기록·변경 조건·설정 활용·프리셋 저장 | `GameUI.Comparison`, `.TrainingEquipment`, `.Presets` | 비교 snapshot/draft; 화면 크기별 reflow guard; 거래 코드 변경 없음 |
 | 성장·능력치·추천 행동·최초 실습 A/B·튜토리얼 일지/지원/완료 | `GameUI.Growth`, `.Attributes`, `.FirstPlay`, `.TutorialPractice`, `TutorialJournalWindow`, `RiftRecommendationWindow` | explicit action/snapshot/실습 진행; cue 연출 정상 |
 | 설정 화면·사운드·전투·게임 안내; 비율/언어/캐릭터·음량·표시 옵션 | `GameUI.ScreenSettings`, `.Audio`, `.SettingsFrame`, `SettingsControls` | **공통 버튼 수정**: 같은 Configure/Show는 전환 재시작 안 함; 설정 수치 refresh와 safe-area reflow는 유지 |
+| 퍼즐 허브·정비 P1/P2·정찰/복기/힌트 | `PuzzleHubWindow`, `PuzzleMaintenanceWindow`, `GameUI.PuzzleHub`, `.Puzzle` | 실제 영웅/진행/장비/예산 표시 키와 공통 입력 보류; 정찰·복기는 고정 run snapshot. [9단계](Puzzle_Tutorial_Final_Acceptance.md)에서 3직업 KO/EN·세로/가로 12여정, 실제 저장 실패·재시도·누름 중 저장·재진입 통과; 물리 기기 미검증 |
 | 남은 호환 Base 페이지: 행동 설계·행동/조건 picker·판단 기록·장비 제작/도감·보석 메뉴/상세/소켓·legacy bag/warehouse·룬 합성/확률/연습·칙령 공유 | `GameUI.cs`, `.Rules`, `.Items`, `.Gems`, `.InventoryLayout`, `.Runes`, `.EdictEditor`, `.EdictShare` | 자동 생성 index에 유지; 현재 wrapper가 새 창으로 우회하는 경로와 구분. 이벤트 없는 명시적 repaint; 실제 reachability는 runtime에서 추가 확인 |
 
 ## 완료한 검증

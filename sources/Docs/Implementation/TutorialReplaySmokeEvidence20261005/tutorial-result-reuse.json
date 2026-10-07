@@ -1,0 +1,10 @@
+{
+  "passedBuildSourceManifest": "tutorial-pass-source-manifest.json",
+  "finalBuildSourceManifest": "final-source-manifest.json",
+  "onlyChangeAfterTutorialPass": {
+    "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTutorialSmoke.Progression.cs",
+    "method": "ProgressiveAcceptance",
+    "addedSource": "            // Keep daily attendance popups from masking the optional edict notice, as in the legacy acceptance.\n            foreach(var kind in new[]{AttendanceKind.Weekly,AttendanceKind.Monthly})Require(game.AttendancePopups.SetHidden(kind,true,game.Store.AttendanceClock()),\"Popup settings write failed\");\n            game.UI.CloseAttendance();\n"
+  },
+  "tutorialEntrypointAndSharedHelperCodeUnchanged": true
+}

@@ -1,0 +1,676 @@
+{
+  "sourceCommit": "9b7a8e4cccd61d9aaf7e87ef47cece0df1fcc009",
+  "recordedAt": "2026-10-07T16:14:57.244347+09:00",
+  "scope": "Three separate process launches per actual macOS development binary. Genuine after-L8 Mage, EN, hub idle, 1280x720, PC quality, Mono/Metal, target 60 FPS, VSync 0, 3 s warmup, 20 s sampled per launch.",
+  "binaryManifest": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage9-final-native-binaries.json",
+  "offPatch": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage9-effects-off.patch",
+  "groups": {
+    "off": {
+      "launches": 3,
+      "metrics": {
+        "cpuMsPerFrame": {
+          "median": 5.639885483870967,
+          "range": [
+            5.560713106382979,
+            5.810832088285229
+          ]
+        },
+        "cpuPercent": {
+          "median": 33.210059244433204,
+          "range": [
+            32.659722329942035,
+            34.204275108961355
+          ]
+        },
+        "actualFps": {
+          "median": 58.86295557897458,
+          "range": [
+            58.73297489930365,
+            58.88427936951531
+          ]
+        },
+        "frameMeanMs": {
+          "median": 16.98220174851317,
+          "range": [
+            16.977248689889553,
+            17.02536190374787
+          ]
+        },
+        "frameP95Ms": {
+          "median": 20.404292000002044,
+          "range": [
+            19.897959000001464,
+            20.493708000003608
+          ]
+        },
+        "frameP99Ms": {
+          "median": 22.742707999999112,
+          "range": [
+            22.630624999997906,
+            22.819375000000974
+          ]
+        },
+        "frameMaxMs": {
+          "median": 54.40312500000033,
+          "range": [
+            52.95225000000059,
+            78.14862499999897
+          ]
+        },
+        "gcBytesPerFrame": {
+          "median": 87226.59337860781,
+          "range": [
+            87097.77758913413,
+            87799.29361702128
+          ]
+        },
+        "gcCollectMsPerFrame": {
+          "median": 0.07111690152801357,
+          "range": [
+            0.06976329531914893,
+            0.0755083115449915
+          ]
+        },
+        "mainThreadMsPerFrame": {
+          "median": 16.95721984550085,
+          "range": [
+            16.942850095076402,
+            16.998771065531912
+          ]
+        },
+        "waitForTargetFpsMsPerFrame": {
+          "median": 14.614564678268252,
+          "range": [
+            14.570839505093378,
+            14.71052132680851
+          ]
+        },
+        "residentMiB": {
+          "median": 613.8125,
+          "range": [
+            610.65625,
+            615.390625
+          ]
+        },
+        "managedMiB": {
+          "median": 20.7109375,
+          "range": [
+            20.46875,
+            26.46875
+          ]
+        },
+        "collections": {
+          "median": 41,
+          "range": [
+            40,
+            42
+          ]
+        }
+      },
+      "cpuRuns": [
+        5.560713106382979,
+        5.639885483870967,
+        5.810832088285229
+      ],
+      "playerRssMiBRange": [
+        536.578125,
+        616.53125
+      ]
+    },
+    "on": {
+      "launches": 3,
+      "metrics": {
+        "cpuMsPerFrame": {
+          "median": 5.597509406779661,
+          "range": [
+            5.552646909398815,
+            6.408927867459643
+          ]
+        },
+        "cpuPercent": {
+          "median": 33.015096613094165,
+          "range": [
+            32.778364639518955,
+            37.70494976278699
+          ]
+        },
+        "actualFps": {
+          "median": 58.98176173336401,
+          "range": [
+            58.831914701721225,
+            59.03196290770066
+          ]
+        },
+        "frameMeanMs": {
+          "median": 16.95713973706531,
+          "range": [
+            16.939100459322034,
+            16.995677260204083
+          ]
+        },
+        "frameP95Ms": {
+          "median": 19.256458000000976,
+          "range": [
+            19.109249999999633,
+            20.512790999998032
+          ]
+        },
+        "frameP99Ms": {
+          "median": 22.08137499999907,
+          "range": [
+            21.796541000000502,
+            23.650124999999633
+          ]
+        },
+        "frameMaxMs": {
+          "median": 51.72358300000113,
+          "range": [
+            50.83804199999875,
+            52.67362500000061
+          ]
+        },
+        "gcBytesPerFrame": {
+          "median": 87000.98221845893,
+          "range": [
+            86952.25,
+            87789.21835174171
+          ]
+        },
+        "gcCollectMsPerFrame": {
+          "median": 0.06911374256584538,
+          "range": [
+            0.06806901016088061,
+            0.07115656271186441
+          ]
+        },
+        "mainThreadMsPerFrame": {
+          "median": 16.927894802542372,
+          "range": [
+            16.914376702794243,
+            16.971286143585388
+          ]
+        },
+        "waitForTargetFpsMsPerFrame": {
+          "median": 14.678661350847458,
+          "range": [
+            14.346268728971962,
+            14.686595795088907
+          ]
+        },
+        "residentMiB": {
+          "median": 581.78125,
+          "range": [
+            545.75,
+            604.1875
+          ]
+        },
+        "managedMiB": {
+          "median": 26.3828125,
+          "range": [
+            26.16796875,
+            26.39453125
+          ]
+        },
+        "collections": {
+          "median": 40,
+          "range": [
+            40,
+            40
+          ]
+        }
+      },
+      "cpuRuns": [
+        5.597509406779661,
+        5.552646909398815,
+        6.408927867459643
+      ],
+      "playerRssMiBRange": [
+        542.328125,
+        607.109375
+      ]
+    }
+  },
+  "rawFiles": [
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/initial-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/passed.txt",
+      "bytes": 78,
+      "sha256": "4cbd1b09b725d5740a1de5ffbc9471a7cbee21c21c946f22d07465b553e8502f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/player.log",
+      "bytes": 20111,
+      "sha256": "ea65fa4c1fefe365bb851303b682d94eee225223f665697ae6d752bb11387614"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/process.json",
+      "bytes": 4680,
+      "sha256": "c455b097b50c6d97daf6f2316b60d3eabf3620aa16579874e3abb9c02d5eb41c"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/profile.json",
+      "bytes": 642698,
+      "sha256": "57be3d72fe2a40fe1fd884924f3df69ee93ec3107fffbe0cb194dc162224112a"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/profile.png",
+      "bytes": 1594561,
+      "sha256": "b628d94b4265cc314dfffda695845c266050786121aa49078fbd3fb05abb1952"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/projected-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/save/hellscript-attendance-display-v1.json",
+      "bytes": 70,
+      "sha256": "d606f307322509166eb63d5b32502d7af2a4cd4f4e59a35adfb1059030f5b9b5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/save/hellscript-language-v1.json",
+      "bytes": 29,
+      "sha256": "65d96957cf10b5c86a9986af6f0bfb82e85eebe7483a2fdc8ff99890188f21aa"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/save/hellscript-local-v1.json",
+      "bytes": 917725,
+      "sha256": "c4a430868516aae2f04499f67130a4ebd77494064e6829f145ae639a61c5f0e5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/save/hellscript-local-v1.json.bak",
+      "bytes": 917725,
+      "sha256": "c4a430868516aae2f04499f67130a4ebd77494064e6829f145ae639a61c5f0e5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/save/liveops-9d377abefd9b2fac092752a2c4dda8a600a30bf708e69bb4436ef088a63ad594.json",
+      "bytes": 2486,
+      "sha256": "f342f2c5abebad82cfc7e956f4840323ef2fad957774021b57185dea427a1dde"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/stdout.log",
+      "bytes": 1853,
+      "sha256": "9d82fc59cc2c195c9dfe973c037469a51222684f5d1b07101c64176e5564a625"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-1/unavailable-markers.txt",
+      "bytes": 122,
+      "sha256": "174e35036cd75eb689a236436b51ce4c6e5e4231d603b18d93a74158e5fd31f4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/initial-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/passed.txt",
+      "bytes": 78,
+      "sha256": "4cbd1b09b725d5740a1de5ffbc9471a7cbee21c21c946f22d07465b553e8502f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/player.log",
+      "bytes": 20112,
+      "sha256": "f6953b8a63c7107b8873baa7515d805b1e89b12f9a92747b648cf50269ab1a2c"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/process.json",
+      "bytes": 4442,
+      "sha256": "20bb82eebf296aa84775f39a967826b5ea3c1e461d34570360ba24ded230422e"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/profile.json",
+      "bytes": 644443,
+      "sha256": "fa7cf57d6b851050849c6b0d6677d0c5cfc40d3c54cc49e4453b167361b10cf3"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/profile.png",
+      "bytes": 1594561,
+      "sha256": "b628d94b4265cc314dfffda695845c266050786121aa49078fbd3fb05abb1952"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/projected-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/save/hellscript-attendance-display-v1.json",
+      "bytes": 70,
+      "sha256": "d606f307322509166eb63d5b32502d7af2a4cd4f4e59a35adfb1059030f5b9b5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/save/hellscript-language-v1.json",
+      "bytes": 29,
+      "sha256": "65d96957cf10b5c86a9986af6f0bfb82e85eebe7483a2fdc8ff99890188f21aa"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/save/hellscript-local-v1.json",
+      "bytes": 917725,
+      "sha256": "606ae80ac57b54046e297a5e8a7a5272670df8ad7de173f8311fa931cf60b81a"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/save/hellscript-local-v1.json.bak",
+      "bytes": 917725,
+      "sha256": "606ae80ac57b54046e297a5e8a7a5272670df8ad7de173f8311fa931cf60b81a"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/save/liveops-9d377abefd9b2fac092752a2c4dda8a600a30bf708e69bb4436ef088a63ad594.json",
+      "bytes": 2486,
+      "sha256": "f342f2c5abebad82cfc7e956f4840323ef2fad957774021b57185dea427a1dde"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/stdout.log",
+      "bytes": 1853,
+      "sha256": "9d82fc59cc2c195c9dfe973c037469a51222684f5d1b07101c64176e5564a625"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-2/unavailable-markers.txt",
+      "bytes": 122,
+      "sha256": "174e35036cd75eb689a236436b51ce4c6e5e4231d603b18d93a74158e5fd31f4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/initial-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/passed.txt",
+      "bytes": 78,
+      "sha256": "4cbd1b09b725d5740a1de5ffbc9471a7cbee21c21c946f22d07465b553e8502f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/player.log",
+      "bytes": 20112,
+      "sha256": "ab9c99929acc70fbd3e832286e70294a8f527e27ff297cd37ddce32b63cbf5a4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/process.json",
+      "bytes": 4463,
+      "sha256": "21eeffe3a4b8374a2f41be6096f7eb1d41ceec872514b8f377bcd1f1ddf07a9e"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/profile.json",
+      "bytes": 642051,
+      "sha256": "a644bf8277ec1ad707ed96eef4bab3a392e27c7d0cba061f9fa1afc350bee1f2"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/profile.png",
+      "bytes": 1594561,
+      "sha256": "b628d94b4265cc314dfffda695845c266050786121aa49078fbd3fb05abb1952"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/projected-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/save/hellscript-attendance-display-v1.json",
+      "bytes": 70,
+      "sha256": "d606f307322509166eb63d5b32502d7af2a4cd4f4e59a35adfb1059030f5b9b5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/save/hellscript-language-v1.json",
+      "bytes": 29,
+      "sha256": "65d96957cf10b5c86a9986af6f0bfb82e85eebe7483a2fdc8ff99890188f21aa"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/save/hellscript-local-v1.json",
+      "bytes": 917725,
+      "sha256": "046a3c073e4547cb8dd3efd22e139f7b3c6e1d2eb2267cc574ac9b036c07dbff"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/save/hellscript-local-v1.json.bak",
+      "bytes": 917725,
+      "sha256": "046a3c073e4547cb8dd3efd22e139f7b3c6e1d2eb2267cc574ac9b036c07dbff"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/save/liveops-9d377abefd9b2fac092752a2c4dda8a600a30bf708e69bb4436ef088a63ad594.json",
+      "bytes": 2486,
+      "sha256": "f342f2c5abebad82cfc7e956f4840323ef2fad957774021b57185dea427a1dde"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/stdout.log",
+      "bytes": 1853,
+      "sha256": "9d82fc59cc2c195c9dfe973c037469a51222684f5d1b07101c64176e5564a625"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/off/hub-3/unavailable-markers.txt",
+      "bytes": 122,
+      "sha256": "174e35036cd75eb689a236436b51ce4c6e5e4231d603b18d93a74158e5fd31f4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/initial-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/passed.txt",
+      "bytes": 78,
+      "sha256": "4cbd1b09b725d5740a1de5ffbc9471a7cbee21c21c946f22d07465b553e8502f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/player.log",
+      "bytes": 20048,
+      "sha256": "6e1e31beb295a20e32ca2bfbae35109af0f57eba1be1596daeea73087cbe12cc"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/process.json",
+      "bytes": 4334,
+      "sha256": "1057e10c4326b28c4d5c7cd6b7087690c7f3d5117796723ac8511d99d3d46e7f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/profile.json",
+      "bytes": 647979,
+      "sha256": "32bc02c194dfc6a88456db17ade1148c19ef7bee6977bdcf657969622d9920d0"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/profile.png",
+      "bytes": 1541840,
+      "sha256": "f9d564420dd3ab504f3ad712851e972b258152e30ca167fbbe334bad9173ed19"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/projected-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/save/hellscript-attendance-display-v1.json",
+      "bytes": 70,
+      "sha256": "d606f307322509166eb63d5b32502d7af2a4cd4f4e59a35adfb1059030f5b9b5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/save/hellscript-language-v1.json",
+      "bytes": 29,
+      "sha256": "65d96957cf10b5c86a9986af6f0bfb82e85eebe7483a2fdc8ff99890188f21aa"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/save/hellscript-local-v1.json",
+      "bytes": 917725,
+      "sha256": "4afde038731c88b406a6a3761ef6707e7e09d3a678e460af24af3003b6c31e14"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/save/hellscript-local-v1.json.bak",
+      "bytes": 917725,
+      "sha256": "4afde038731c88b406a6a3761ef6707e7e09d3a678e460af24af3003b6c31e14"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/save/liveops-9d377abefd9b2fac092752a2c4dda8a600a30bf708e69bb4436ef088a63ad594.json",
+      "bytes": 2486,
+      "sha256": "f342f2c5abebad82cfc7e956f4840323ef2fad957774021b57185dea427a1dde"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/stdout.log",
+      "bytes": 1853,
+      "sha256": "9d82fc59cc2c195c9dfe973c037469a51222684f5d1b07101c64176e5564a625"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-1/unavailable-markers.txt",
+      "bytes": 122,
+      "sha256": "174e35036cd75eb689a236436b51ce4c6e5e4231d603b18d93a74158e5fd31f4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/initial-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/passed.txt",
+      "bytes": 78,
+      "sha256": "4cbd1b09b725d5740a1de5ffbc9471a7cbee21c21c946f22d07465b553e8502f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/player.log",
+      "bytes": 20103,
+      "sha256": "28d03025251f290d9dfca4a016461c5810e0f14520ebf34d2c47262d7af88724"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/process.json",
+      "bytes": 4419,
+      "sha256": "353b8e48ef47408fea9c36050283569725becc6c0d97da44b82b32118b508253"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/profile.json",
+      "bytes": 651256,
+      "sha256": "b003179a08617457cf21d42c691b7308c45e3c73b8e5deca8ff465de0ef321eb"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/profile.png",
+      "bytes": 1541784,
+      "sha256": "4195d0c6fc6800e9b7e2b3d77714a0ab89ffcc0e7b05a33f8f190bc605e1904e"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/projected-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/save/hellscript-attendance-display-v1.json",
+      "bytes": 70,
+      "sha256": "d606f307322509166eb63d5b32502d7af2a4cd4f4e59a35adfb1059030f5b9b5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/save/hellscript-language-v1.json",
+      "bytes": 29,
+      "sha256": "65d96957cf10b5c86a9986af6f0bfb82e85eebe7483a2fdc8ff99890188f21aa"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/save/hellscript-local-v1.json",
+      "bytes": 917725,
+      "sha256": "f3adb43dea03cf78091f64bc3581bae4d96b357aa53b819c347467db071f1644"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/save/hellscript-local-v1.json.bak",
+      "bytes": 917725,
+      "sha256": "f3adb43dea03cf78091f64bc3581bae4d96b357aa53b819c347467db071f1644"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/save/liveops-9d377abefd9b2fac092752a2c4dda8a600a30bf708e69bb4436ef088a63ad594.json",
+      "bytes": 2486,
+      "sha256": "f342f2c5abebad82cfc7e956f4840323ef2fad957774021b57185dea427a1dde"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/stdout.log",
+      "bytes": 1853,
+      "sha256": "9d82fc59cc2c195c9dfe973c037469a51222684f5d1b07101c64176e5564a625"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-2/unavailable-markers.txt",
+      "bytes": 122,
+      "sha256": "174e35036cd75eb689a236436b51ce4c6e5e4231d603b18d93a74158e5fd31f4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/initial-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/passed.txt",
+      "bytes": 78,
+      "sha256": "4cbd1b09b725d5740a1de5ffbc9471a7cbee21c21c946f22d07465b553e8502f"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/player.log",
+      "bytes": 20103,
+      "sha256": "0599292462d7d7cb0dd6c7f081b8093afa414045a187a636387dd8ee5058fcda"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/process.json",
+      "bytes": 4444,
+      "sha256": "5b9f1ca8027f1b37ab790568f5e7d29d16f41d1e83609435a70b17ff13aed223"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/profile.json",
+      "bytes": 646649,
+      "sha256": "4755cf7a862b3ec32928fbe931ec9af95531032ba3ea40e4d132ff9073a7f765"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/profile.png",
+      "bytes": 1541801,
+      "sha256": "d60b95171fbd3a9891b7e6d626987ea77e551e01e7f1179ce035ff5eb3627e58"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/projected-account.json",
+      "bytes": 3597356,
+      "sha256": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/save/hellscript-attendance-display-v1.json",
+      "bytes": 70,
+      "sha256": "d606f307322509166eb63d5b32502d7af2a4cd4f4e59a35adfb1059030f5b9b5"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/save/hellscript-language-v1.json",
+      "bytes": 29,
+      "sha256": "65d96957cf10b5c86a9986af6f0bfb82e85eebe7483a2fdc8ff99890188f21aa"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/save/hellscript-local-v1.json",
+      "bytes": 917725,
+      "sha256": "8395ea9293c02e8e2f713b325b0035845dade5e90b9f2b9b7b896b528d7d0e77"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/save/hellscript-local-v1.json.bak",
+      "bytes": 917725,
+      "sha256": "8395ea9293c02e8e2f713b325b0035845dade5e90b9f2b9b7b896b528d7d0e77"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/save/liveops-9d377abefd9b2fac092752a2c4dda8a600a30bf708e69bb4436ef088a63ad594.json",
+      "bytes": 2486,
+      "sha256": "f342f2c5abebad82cfc7e956f4840323ef2fad957774021b57185dea427a1dde"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/stdout.log",
+      "bytes": 1853,
+      "sha256": "9d82fc59cc2c195c9dfe973c037469a51222684f5d1b07101c64176e5564a625"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/effects-profile/on/hub-3/unavailable-markers.txt",
+      "bytes": 122,
+      "sha256": "174e35036cd75eb689a236436b51ce4c6e5e4231d603b18d93a74158e5fd31f4"
+    }
+  ],
+  "matchedInputs": {
+    "unity": "6000.6.0f1",
+    "device": "Mac15,7",
+    "processor": "Apple M3 Pro",
+    "graphics": "Apple M3 Pro",
+    "backend": "Mono",
+    "quality": "PC",
+    "width": 1280,
+    "height": 720,
+    "targetFrameRate": 60,
+    "vSyncCount": 0,
+    "systemReducedMotion": false,
+    "seed": 93171,
+    "gearSeed": 9132026,
+    "fixtureHash": "1af82e2b9d0fe4584ece5ccbe5ad67e729d471357492b704eb1ef39a54ee901a",
+    "workloadHash": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15",
+    "projectedWorkloadHash": "57b46c997879afc5f456ecfa437bce945cc4ab76a55be23f42ec6a0947d1ed15",
+    "mapFingerprint": "tutorial-v5",
+    "layoutFingerprint": "tutorial-v5"
+  },
+  "performanceConclusion": "CPU ranges overlap (OFF 5.56-5.81, ON 5.55-6.41 ms/frame); ON third launch is slower. These six short captures do not establish a consistent effect cost or performance improvement. GC, frame spikes and memory remain raw process-level observations, not attributed solely to hub effects. No browser, mobile, release-build or thermal claim."
+}

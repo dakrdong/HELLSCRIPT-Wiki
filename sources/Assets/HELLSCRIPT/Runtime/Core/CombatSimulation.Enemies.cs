@@ -18,7 +18,7 @@ namespace Hellscript
         {
             if(e.brain.initialized)return;var b=e.brain;b.initialized=true;b.bornAt=run.time;
             var facing=run.position-e.position;if(facing.sqrMagnitude>.00001f)b.facing=facing.normalized;
-            for(int n=0;n<6;n++)b.traitCooldowns[n]=Mathf.Max(e.cooldown,n==0?5:n==1?8:6);
+            for(int n=0;n<b.traitCooldowns.Length;n++)b.traitCooldowns[n]=n==6?4:Mathf.Max(e.cooldown,n==0?5:n==1?8:6);
         }
         void TickEnemyTimers(float dt)
         {
@@ -27,7 +27,7 @@ namespace Hellscript
             {
                 InitializeEnemyBrain(e,State);e.brain.rearWindow=Mathf.Max(0,e.brain.rearWindow-dt);
                 if(e.boss)TickBossTimers(e,dt);else e.cooldown=Mathf.Max(0,e.cooldown-dt);
-                for(int n=0;n<6;n++)e.brain.traitCooldowns[n]=Mathf.Max(0,e.brain.traitCooldowns[n]-dt);
+                for(int n=0;n<e.brain.traitCooldowns.Length;n++)e.brain.traitCooldowns[n]=Mathf.Max(0,e.brain.traitCooldowns[n]-dt);
                 int rage=EnemyCombat.Trait(e,5)?Mathf.Min(5,Mathf.FloorToInt((State.time-e.brain.bornAt+.00001f)/10)):0;
                 if(rage!=e.brain.rageStacks){e.brain.rageStacks=rage;EnemyEvent(e,"RAGE","E06",value:rage);}
             }
@@ -57,8 +57,9 @@ namespace Hellscript
         }
         void BeginEnemyAction(EnemyState enemy,float? remaining=null,int variant=0)
         {
+            var puzzle=PuzzleEnemy(enemy);
             var b=enemy.brain;var def=variant==1&&enemy.kind==14?EnemyCombat.GhoulLeap:EnemyCombat.Attack(enemy.kind);var a=new EnemyActionState{id=State.nextId++,kind=enemy.kind,phase=EnemyActionPhase.Preparing,origin=enemy.position,aim=remaining.HasValue?enemy.aim:State.position,
-                preparation=remaining??def.preparation,remaining=remaining??def.preparation,remainingCharges=enemy.kind==7||enemy.kind==12?2:enemy.kind==1?1:0,variant=variant};
+                preparation=remaining??(puzzle?.preparation>0?puzzle.preparation:def.preparation),remaining=remaining??(puzzle?.preparation>0?puzzle.preparation:def.preparation),remainingCharges=enemy.kind==7||enemy.kind==12?2:enemy.kind==1?1:0,variant=variant};
             if(enemy.kind==9&&!remaining.HasValue)a.aim=EnemyPredictedAim(enemy);
             a.direction=(a.aim-a.origin).normalized;if(a.direction.sqrMagnitude<.00001f)a.direction=b.facing;
             if(enemy.kind==1||enemy.kind==7)a.aim=Map.MoveDirect(a.origin,a.origin+a.direction*8,8,.4f);
@@ -70,6 +71,7 @@ namespace Hellscript
             // escapes by stepping into the ring's middle or out past it.
             if(enemy.kind==19&&!remaining.HasValue){var toward=a.origin-State.position;a.aim=State.position+(toward.sqrMagnitude>1e-6f?toward.normalized:Vector2.up)*2.6f;}
             b.action=a;b.facing=a.direction;enemy.aim=a.aim;enemy.windup=a.remaining;enemy.cooldown=Mathf.Max(enemy.cooldown,def.cooldown);
+            if(puzzle?.repeatCooldown>0)enemy.cooldown=puzzle.repeatCooldown;
             EnemyMode(enemy,"공격 준비");EnemyEvent(enemy,"PREPARE",action:a.id,value:a.remaining,aim:a.aim);
         }
         void InterruptEnemyAction(EnemyState enemy,string reason)
@@ -86,10 +88,10 @@ namespace Hellscript
                 State.projectiles.Add(new CombatProjectile{id=State.nextId++,actionId=action,hostile=true,casterId=e.id.ToString(),definitionId=definition,origin=origin,position=origin,direction=EnemyCombat.Rotate(direction,angle),
                     remaining=distance,speed=speed,radius=radius,damage=damage,element=element,createdAt=State.time});
         }
-        void CreateEnemyHazard(EnemyState enemy,string definition,Vector2 position,float delay,float duration,float damage,int element,float radius=2.5f,float inner=0,int action=0,float slow=0,bool shards=false)
+        void CreateEnemyHazard(EnemyState enemy,string definition,Vector2 position,float delay,float duration,float damage,int element,float radius=2.5f,float inner=0,int action=0,float slow=0,bool shards=false,float pull=0)
         {
             State.enemyHazards.Add(new EnemyHazard{id=State.nextId++,actionId=action==0?State.nextId++:action,enemyId=enemy.id,definitionId=definition,position=position,end=position,direction=enemy.brain.facing,
-                shape=inner>0?AttackShape.Ring:AttackShape.Circle,createdAt=State.time,delay=delay,duration=duration,interval=duration>0?.5f:0,tick=.5f,damage=damage,element=element,radius=radius,innerRadius=inner,heroSlow=slow,shardBurst=shards});
+                shape=inner>0?AttackShape.Ring:AttackShape.Circle,createdAt=State.time,delay=delay,duration=duration,interval=duration>0?.5f:0,tick=.5f,damage=damage,element=element,radius=radius,innerRadius=inner,heroSlow=slow,shardBurst=shards,pull=pull});
             EnemyEvent(enemy,"HAZARD_CREATED",definition,State.enemyHazards.Last().actionId,delay,position);
         }
         void ReleaseEnemyAction(EnemyState e)
@@ -160,6 +162,8 @@ namespace Hellscript
             {CreateEnemyHazard(e,"E01",State.position,1,3,EnemyAttackValue(e)*.25f,1,2);b.traitCooldowns[0]=5;}
             if(EnemyCombat.Trait(e,1)&&b.traitCooldowns[1]<=.00001f)
             {CreateEnemyHazard(e,"E02",State.position,1.5f,0,EnemyAttackValue(e)*1.5f,2,4,2,slow:.35f);b.traitCooldowns[1]=8;}
+            if(EnemyCombat.Trait(e,6)&&b.traitCooldowns[6]<=.00001f)
+            {CreateEnemyHazard(e,"E07",State.position,5,0,EnemyAttackValue(e)*20,5,pull:8);b.traitCooldowns[6]=10;}
             if(EnemyCombat.Trait(e,4)&&b.traitCooldowns[4]<=.00001f)
             {
                 var corpse=State.enemyCorpses.Where(c=>c.consumedBy<0&&Vector2.Distance(e.position,c.position)<=6&&Map.LineClear(e.position,c.position)).OrderBy(c=>(c.position-e.position).sqrMagnitude).ThenBy(c=>c.id).FirstOrDefault();
@@ -232,6 +236,7 @@ namespace Hellscript
                 // A whirl rides with its boss: this tick's move is already done (TickEnemies runs first).
                 if(h.followsCaster){var caster=State.enemies.Find(x=>x.id==h.enemyId&&!x.dead);if(caster!=null)h.position=h.end=caster.position;}
                 if(h.createdAt>=State.time-.00001f)continue;
+                if(!HeroTravelling&&EnemyCombat.Pulls(h,State.position))State.position=Map.MoveDirect(State.position,h.position,h.pull*Mathf.Min(dt,h.delay));
                 float active=Mathf.Max(0,dt-h.delay);h.delay=Mathf.Max(0,h.delay-dt);if(h.delay>.00001f)continue;
                 if(h.shardBurst)
                 {
@@ -239,7 +244,10 @@ namespace Hellscript
                     State.enemyHazards.Remove(h);continue;
                 }
                 if(h.interval<=0)
-                {ApplyEnemyHazard(h);State.enemyHazards.Remove(h);continue;}
+                {
+                    if(h.pull>0){var caster=State.enemies.Find(e=>e.id==h.enemyId);if(caster!=null)EnemyEvent(caster,"HAZARD_RELEASE",h.definitionId,h.actionId,aim:h.position);}
+                    ApplyEnemyHazard(h);State.enemyHazards.Remove(h);continue;
+                }
                 float applied=Mathf.Min(active,h.duration);h.duration=Mathf.Max(0,h.duration-applied);h.tick-=applied;
                 while(h.tick<=.00001f){h.tick+=h.interval;ApplyEnemyHazard(h);}
                 if(h.duration<=.00001f)State.enemyHazards.Remove(h);

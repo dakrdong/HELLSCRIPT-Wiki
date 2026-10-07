@@ -151,7 +151,7 @@ namespace Hellscript
                 if(record.code=="EDICT_AIM")code="사냥 칙령 사용 조건 대기";
                 else if(record.code=="EDICT_OFF")code="사냥 칙령 자동 사용 꺼짐";
                 else if(record.code=="RESOURCE_NOT_NEEDED")code="자원 보충 불필요";
-                var enemy=run.enemies.Find(e=>e.id==record.targetId);string target=enemy==null?"대상 없음":enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind];
+                var enemy=run.enemies.Find(e=>e.id==record.targetId);string target=enemy==null?"대상 없음":EnemyCombat.Name(enemy);
                 string heading=EdictRuleOrder.IsCompiledRule(record.ruleId)
                     ?Loc.F("{0} 사냥 칙령 · {1} ×{2}\n{3:0.0}–{4:0.0}초 / {5}",EdictRuleOrder.CompiledSkill(record.ruleId)<0?"기본 공격":game.catalog.skills[EdictRuleOrder.CompiledSkill(record.ruleId)].name,code,record.count,record.firstTime,record.lastTime,target)
                     :Loc.F("{0:00}번 · {1} ×{2}\n{3:0.0}–{4:0.0}초 / {5}",record.row+1,code,record.count,record.firstTime,record.lastTime,target);

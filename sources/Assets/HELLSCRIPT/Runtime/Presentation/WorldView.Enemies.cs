@@ -68,7 +68,7 @@ namespace Hellscript
                 var edge=library==null?red:boss?library.BossTelegraphEdge:library.TelegraphEdge;
                 EnemyOutline(threat.key,threat,edge,width,activeThreats,true);
                 // The footprint fills like a gauge and is full on the step the attack lands (CHK-P04: shape and fill, not colour alone).
-                if(library!=null)library.ShowFill(ThreatView(library,threat.key,WorldFx.TelegraphKind.Fill),threat.shape,threat.origin,threat.end,threat.direction,
+                if(library!=null)library.ShowFill(ThreatView(library,threat.key,threat.definition=="E07"?WorldFx.TelegraphKind.Gravity:WorldFx.TelegraphKind.Fill),threat.shape,threat.origin,threat.end,threat.direction,
                     threat.radius,threat.innerRadius,threat.angle,progress,boss,0,LandedZoneTint(run,threat));
             }
             foreach(var e in run.enemies.Where(e=>!e.dead&&Vector2.Distance(run.position,e.position)<=12&&Combat.Map.LineClear(run.position,e.position)))

@@ -14,10 +14,11 @@ namespace Hellscript
         readonly List<ClassSkillEvent> observed=new List<ClassSkillEvent>();
         float pending,startTime;
         bool disposed;
-        readonly bool starter;
+        readonly bool starter,puzzle;
         bool waited,moved;
         public string SourceSignature {get;}="";
         public bool IsStarter=>starter;
+        public bool IsPuzzle=>puzzle;
         public bool StarterObservationComplete=>starter&&Seconds>=10-.001f&&observed.Any(e=>e.skillId==Scenario.skill&&e.kind=="CAST_START")&&
             (Scenario.preset!="pack"||waited)&&(Scenario.preset!="edge"||moved);
 
@@ -46,6 +47,16 @@ namespace Hellscript
             var prepared=CombatSimulation.CreateStarterPreview(catalog,source,Scenario);
             (initialAccount,initialRun)=prepared.PreviewSnapshot();Restart();
         }
+        public CombatPreviewSession(GameCatalog catalog,AccountSave source,SkillPresetScenario scenario,int puzzleLevel)
+        {
+            this.catalog=catalog;puzzle=true;Scenario=scenario;SourceSignature=JsonUtility.ToJson(source.Hero);
+            var copy=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(source));
+            if(!copy.Hero.build.classSkills.Equipped(scenario.skill))throw new ArgumentException("Equip this skill before comparing.");
+            GameStore.ApplyHuntEdict(copy.Hero,HuntEdictQuickPresets.Apply(HuntEdictLoadout.FromHero(copy.Hero),"skill/"+scenario.skill,scenario.preset));
+            var prepared=new CombatSimulation(copy,catalog,1,3,seed:PuzzleTutorial.Seed,recordResume:false,tutorial:true,puzzleLevel:puzzleLevel);
+            prepared.State.tutorialReplay=true;if(!prepared.ContinueTutorial())throw new ArgumentException("Learn the level's skills before comparing.");
+            (initialAccount,initialRun)=prepared.PreviewSnapshot();Restart();
+        }
         public void SetSpeed(float value)
         {if(value!=.5f&&value!=1&&value!=2)throw new ArgumentOutOfRangeException(nameof(value));Speed=starter?1:value;}
         public void SetPaused(bool value)=>Paused=value;
@@ -53,7 +64,7 @@ namespace Hellscript
         {
             if(disposed)throw new ObjectDisposedException(nameof(CombatPreviewSession));
             if(Combat!=null)Combat.ClassSkillChanged-=Observe;
-            Combat=CombatSimulation.RestoreSkillPreview(catalog,Scenario,initialAccount,initialRun);startTime=Combat.State.time;
+            Combat=puzzle?new CombatSimulation(JsonUtility.FromJson<AccountSave>(initialAccount),catalog,1,3,JsonUtility.FromJson<RunState>(initialRun),recordResume:false,tutorial:true):CombatSimulation.RestoreSkillPreview(catalog,Scenario,initialAccount,initialRun);startTime=Combat.State.time;
             Combat.ClassSkillChanged+=Observe;pending=0;observed.Clear();waited=moved=false;Paused=false;Reset?.Invoke();
         }
         void Observe(ClassSkillEvent e){observed.Add(e);if(observed.Count>160)observed.RemoveAt(0);}

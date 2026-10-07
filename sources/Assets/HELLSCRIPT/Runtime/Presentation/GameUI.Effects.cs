@@ -15,7 +15,7 @@ namespace Hellscript
             foreach(BossAttack kind in System.Enum.GetValues(typeof(BossAttack)))if(BossCombat.Definition((int)kind)==id)return BossCombat.Name((int)kind);
             if(id!=null&&id.Length==6&&id.StartsWith("BOSS0")&&int.TryParse(id.Substring(5),out int boss)&&boss>=1&&boss<=GameCatalog.BossNames.Length)return GameCatalog.BossNames[boss-1];
             if(id!=null&&id.StartsWith("N")&&id.Length>=3&&int.TryParse(id.Substring(1,2),out int number)&&number>=1&&number<=GameCatalog.EnemyNames.Length)return Loc.F("{0}{1}", GameCatalog.EnemyNames[number-1], (id.EndsWith("DEATH")?" · 사망 효과":" · 공격"));
-            if(id!=null&&id.StartsWith("E")&&id.Length==3&&int.TryParse(id.Substring(1),out int trait)&&trait>=1&&trait<=6)return EnemyCombat.TraitNames[trait-1];
+            if(id!=null&&id.StartsWith("E")&&id.Length==3&&int.TryParse(id.Substring(1),out int trait)&&trait>=1&&trait<=EnemyCombat.TraitNames.Length)return EnemyCombat.TraitNames[trait-1];
             switch(id)
             {
                 case "BASIC":return "기본 공격";case "SW4":return "소용돌이 세트 추가타";case "SA4":return "맹독 세트 추가 독";case "SM4":return "서리 세트 추가타";
@@ -49,7 +49,7 @@ namespace Hellscript
                 Note(content,Loc.F("눈보라 · {0} · {1:0.0}초\n{2}", (field.followsTarget?"목표 추적":"위치 고정"), field.duration, (field.followsTarget?Loc.F("이동 {0:0.0} / 4.0m", field.moved):"생성 위치를 유지합니다.")),20,88,gold);
             foreach(var enemy in run.enemies.Where(e=>!e.dead&&(e.exposure>0||e.frostMarkTime>0||e.frostCooldown>0||e.setPoisonTime>0)).OrderBy(e=>e.id))
             {
-                string name=enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind];
+                string name=EnemyCombat.Name(enemy);
                 string frost=enemy.frostMarkTime>0?Loc.F("서리 노출 · {0:0.0}초 남음", enemy.frostMarkTime):enemy.frostCooldown>0?Loc.F("서리 노출 · 재생성 대기 {0:0.0}초", enemy.frostCooldown):enemy.exposure>0?Loc.F("서리 노출 누적 · {0:0.0} / 2.0초", enemy.exposure):"";
                 string poison=enemy.setPoisonTime>0?Loc.F("세트 맹독 · {0:0.0}초 / 다음 피해 {1:0.0}초", enemy.setPoisonTime, enemy.setPoisonTick):"";
                 Note(content,Loc.T(name)+"\n"+frost+(frost!=""&&poison!=""?"\n":"")+poison,20,poison!=""&&frost!=""?112:88,pale);

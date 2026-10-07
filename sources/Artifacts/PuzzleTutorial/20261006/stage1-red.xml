@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="5" result="Failed(Child)" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-06 14:16:06Z" end-time="2026-10-06 14:16:07Z" duration="0.6082658">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5235" result="Failed" site="Child" start-time="2026-10-06 14:16:06Z" end-time="2026-10-06 14:16:07Z" duration="0.608266" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="7030" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5235" result="Failed" site="Child" start-time="2026-10-06 14:16:06Z" end-time="2026-10-06 14:16:07Z" duration="0.530014" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="12481" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="7031" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5235" result="Failed" site="Child" start-time="2026-10-06 14:16:06Z" end-time="2026-10-06 14:16:07Z" duration="0.455830" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="7032" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="5235" result="Failed" site="Child" start-time="2026-10-06 14:16:06Z" end-time="2026-10-06 14:16:07Z" duration="0.359966" total="5" passed="1" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="6406" name="SkillTreeIntegrationTests" fullname="Hellscript.Tests.SkillTreeIntegrationTests" classname="Hellscript.Tests.SkillTreeIntegrationTests" runstate="Runnable" testcasecount="42" result="Failed" site="Child" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.026823" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="6414" name="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog" fullname="Hellscript.Tests.SkillTreeIntegrationTests.EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog" classname="Hellscript.Tests.SkillTreeIntegrationTests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.022843" total="3" passed="1" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="6411" name="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog(0,&quot;W02&quot;,1)" fullname="Hellscript.Tests.SkillTreeIntegrationTests.EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog(0,&quot;W02&quot;,1)" methodname="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog" classname="Hellscript.Tests.SkillTreeIntegrationTests" runstate="Runnable" seed="1040452650" result="Passed" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.012423" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6412" name="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog(1,&quot;A04&quot;,5)" fullname="Hellscript.Tests.SkillTreeIntegrationTests.EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog(1,&quot;A04&quot;,5)" methodname="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog" classname="Hellscript.Tests.SkillTreeIntegrationTests" runstate="Runnable" seed="1133360217" result="Failed" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.002063" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.SkillTreeIntegrationTests.EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog (System.Int32 heroClass, System.String id, System.Int32 level) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/SkillTreeIntegrationTests.cs:35
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="6413" name="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog(2,&quot;M04&quot;,5)" fullname="Hellscript.Tests.SkillTreeIntegrationTests.EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog(2,&quot;M04&quot;,5)" methodname="EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog" classname="Hellscript.Tests.SkillTreeIntegrationTests" runstate="Runnable" seed="319095060" result="Failed" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.000264" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected: True
+  But was:  False
+]]></message>
+                  <stack-trace><![CDATA[at Hellscript.Tests.SkillTreeIntegrationTests.EscapeSkillsUseTheSameUnlockBoundaryInEveryCatalog (System.Int32 heroClass, System.String id, System.Int32 level) [0x00022] in /Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/SkillTreeIntegrationTests.cs:35
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="6871" name="TutorialProgressionTests" fullname="Hellscript.Tests.TutorialProgressionTests" classname="Hellscript.Tests.TutorialProgressionTests" runstate="Runnable" testcasecount="32" result="Failed" site="Child" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.189058" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="ParameterizedMethod" id="6896" name="NewSkillCandidatesAppendTheEscapeAtLevelFive" fullname="Hellscript.Tests.TutorialProgressionTests.NewSkillCandidatesAppendTheEscapeAtLevelFive" classname="Hellscript.Tests.TutorialProgressionTests" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.186695" total="2" passed="0" failed="2" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-case id="6894" name="NewSkillCandidatesAppendTheEscapeAtLevelFive(1,&quot;A04&quot;)" fullname="Hellscript.Tests.TutorialProgressionTests.NewSkillCandidatesAppendTheEscapeAtLevelFive(1,&quot;A04&quot;)" methodname="NewSkillCandidatesAppendTheEscapeAtLevelFive" classname="Hellscript.Tests.TutorialProgressionTests" runstate="Runnable" seed="2064502623" result="Failed" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.142747" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected is <System.Linq.Enumerable+Concat2Iterator`1[System.String]>, actual is <System.Linq.Enumerable+WhereSelectEnumerableIterator`2[Hellscript.ClassSkillDefinition,System.String]>
+  Values differ at index [2]
+]]></message>
+                  <stack-trace><![CDATA[at NUnit.Framework.CollectionAssert.AreEqual (System.Collections.IEnumerable expected, System.Collections.IEnumerable actual, System.String message, System.Object[] args) [0x00008] in <8b63e8ac0a4746599ed207982825ae6c>:0
+at NUnit.Framework.CollectionAssert.AreEqual (System.Collections.IEnumerable expected, System.Collections.IEnumerable actual) [0x00001] in <8b63e8ac0a4746599ed207982825ae6c>:0
+at Hellscript.Tests.TutorialProgressionTests.NewSkillCandidatesAppendTheEscapeAtLevelFive (System.Int32 heroClass, System.String escape) [0x00064] in /Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/TutorialProgressionTests.cs:122
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case id="6895" name="NewSkillCandidatesAppendTheEscapeAtLevelFive(2,&quot;M04&quot;)" fullname="Hellscript.Tests.TutorialProgressionTests.NewSkillCandidatesAppendTheEscapeAtLevelFive(2,&quot;M04&quot;)" methodname="NewSkillCandidatesAppendTheEscapeAtLevelFive" classname="Hellscript.Tests.TutorialProgressionTests" runstate="Runnable" seed="1015881182" result="Failed" start-time="2026-10-06 14:16:07Z" end-time="2026-10-06 14:16:07Z" duration="0.043283" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <failure>
+                  <message><![CDATA[  Expected is <System.Linq.Enumerable+Concat2Iterator`1[System.String]>, actual is <System.Linq.Enumerable+WhereSelectEnumerableIterator`2[Hellscript.ClassSkillDefinition,System.String]>
+  Values differ at index [2]
+]]></message>
+                  <stack-trace><![CDATA[at NUnit.Framework.CollectionAssert.AreEqual (System.Collections.IEnumerable expected, System.Collections.IEnumerable actual, System.String message, System.Object[] args) [0x00008] in <8b63e8ac0a4746599ed207982825ae6c>:0
+at NUnit.Framework.CollectionAssert.AreEqual (System.Collections.IEnumerable expected, System.Collections.IEnumerable actual) [0x00001] in <8b63e8ac0a4746599ed207982825ae6c>:0
+at Hellscript.Tests.TutorialProgressionTests.NewSkillCandidatesAppendTheEscapeAtLevelFive (System.Int32 heroClass, System.String escape) [0x00064] in /Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/TutorialProgressionTests.cs:122
+]]></stack-trace>
+                </failure>
+                <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

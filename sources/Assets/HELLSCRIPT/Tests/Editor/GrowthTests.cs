@@ -23,7 +23,7 @@ namespace Hellscript.Tests
         }
         [Test]
         public void AllSixRecommendationsRespectEveryUnlockBoundary(
-            [Values(0,1,2)]int heroClass,[Values(0,1)]int variant,[Values(1,3,6,10,15,20,30)]int level)
+            [Values(0,1,2)]int heroClass,[Values(0,1)]int variant,[Values(1,3,4,5,6,10,15,20,30)]int level)
         {
             var hero=(HeroClass)heroClass;string original=JsonUtility.ToJson(GameCatalog.Preset(hero,variant));
             var recommended=BehaviorPresets.ForLevel(hero,variant,level,catalog);Assert.IsEmpty(Validate(recommended,hero));Assert.AreEqual(4,recommended.activeSkills.Count);Assert.AreEqual(ContentUnlocks.Rules.passiveLevels.Count(p=>level>=p),recommended.passives.Length);
@@ -96,10 +96,10 @@ namespace Hellscript.Tests
         {
             var account=ContentTestAccounts.Training(catalog);account.selectedHero=2;var temp=new CombatSimulation(account,catalog,1,0,ownedTraining:true);temp.State.training=-1;
             var sim=new CombatSimulation(account,catalog,1,restore:temp.State);string original=JsonUtility.ToJson(sim.State.build);
-            // Teleport (level 10) is the mage's first rule-bearing skill that still unlocks by growth.
-            sim.State.pendingExperience=Enumerable.Range(1,9).Sum(Economy.XpRequired);Flush(sim);Assert.AreEqual(10,sim.Hero.level);Assert.AreEqual(original,JsonUtility.ToJson(sim.State.build));Assert.AreEqual(original,JsonUtility.ToJson(account.Hero.build));
+            // Teleport (level 5) is the mage's first rule-bearing skill that still unlocks by growth.
+            sim.State.pendingExperience=Enumerable.Range(1,4).Sum(Economy.XpRequired);Flush(sim);Assert.AreEqual(5,sim.Hero.level);Assert.AreEqual(original,JsonUtility.ToJson(sim.State.build));Assert.AreEqual(original,JsonUtility.ToJson(account.Hero.build));
             Assert.IsFalse(sim.State.build.rules.Single(r=>r.skill==15).enabled);Assert.IsTrue(sim.State.growthEvents.Single().unlockedSkills.Contains(15));
-            var next=BehaviorPresets.ForLevel(HeroClass.Mage,0,10,catalog);Assert.IsTrue(next.rules.Single(r=>r.skill==15).enabled);Assert.AreEqual(RuleTarget.OwnBlizzard,next.rules.Single(r=>r.skill==12).target);
+            var next=BehaviorPresets.ForLevel(HeroClass.Mage,0,5,catalog);Assert.IsTrue(next.rules.Single(r=>r.skill==15).enabled);Assert.AreEqual(RuleTarget.OwnBlizzard,next.rules.Single(r=>r.skill==12).target);
         }
         [Test]
         public void CatalogAppliesStarterRecommendationsOnlyWhenCreatingAnAccount()

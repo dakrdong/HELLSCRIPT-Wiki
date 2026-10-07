@@ -54,11 +54,21 @@ namespace Hellscript
             if(g.edictLegacyAccess||best>=20)Grant(g,Sharing);
             if(g.edictLegacyAccess||a.contentUnlocks?.firstRunEnded==true)Grant(g,Dodge);
             if(a.suspendedRun?.layout?.chests?.Any(c=>c.discovered&&c.definitionId=="CH03")==true)Grant(g,Curse);
+            if(g.puzzle==null)return;
+            foreach(var record in g.puzzle.levels)
+            {
+                if(!record.cleared)continue;var level=PuzzleTutorial.Find(record.level);if(level==null)continue;
+                foreach(string id in level.opens)Grant(g,id);
+                if(level.styles)Grant(g,Styles);if(level.details)Grant(g,Details);
+                if(level.level==2)Grant(g,Dodge);if(level.level==10)Grant(g,Curse);
+                if(level.level==PuzzleTutorial.Count){Grant(g,Presets);Grant(g,Sharing);}
+            }
         }
-        public static bool Has(AccountSave a,string id)=>id!="autoEquip.preserveEffects"&&a?.guide?.edictUnlocks?.Contains(id)==true;
+        public static bool Has(AccountSave a,string id)=>PuzzleTutorial.Active(a)?id==Styles||id==Details||id==Presets||id==Sharing?PuzzleTutorial.Feature(a,id):id==Dodge&&PuzzleTutorial.Option(a,"dodge.ground.policy"):id!="autoEquip.preserveEffects"&&a?.guide?.edictUnlocks?.Contains(id)==true;
         public static bool Legacy(AccountSave a)=>a?.guide?.edictLegacyAccess==true;
         public static bool Visible(AccountSave a,HeroSave hero,string id)
         {
+            if(PuzzleTutorial.Active(a))return PuzzleTutorial.Option(a,id);
             if(!Has(a,id))return false;
             if(Legacy(a))return true;
             if(id.StartsWith("explore.cursed",StringComparison.Ordinal)&&!Has(a,Curse))return false;
@@ -81,6 +91,7 @@ namespace Hellscript
             (tab=="presets"?Has(a,Presets):HuntEdictUiCatalog.Data.groups.Any(g=>g.tab==tab&&g.ids.Any(id=>Visible(a,hero,id))));
         public static bool Quick(AccountSave a,string scope,string preset,HeroSave hero=null)
         {
+            if(PuzzleTutorial.Active(a))return PuzzleTutorial.Quick(a,hero??a.Hero,scope,preset);
             if(Legacy(a))return true;
             if(scope=="global/dodge.ground.policy")return Has(a,Dodge)&&(preset=="balanced"||preset=="all"||Has(a,Details)&&Has(a,"dodge.ground.policy"));
             if(scope.StartsWith("global/",StringComparison.Ordinal))return Has(a,scope.Substring(7))&&scope!="global/survival.potion";
@@ -116,6 +127,7 @@ namespace Hellscript
         }
         public static void ValidateChange(AccountSave a,HeroSave hero,HuntEdictLoadout candidate,IEnumerable<SkillPresetSelection> recipes=null)
         {
+            if(PuzzleTutorial.Active(a)){PuzzleTutorial.ValidateChange(a,hero,candidate,recipes:recipes);return;}
             if(Legacy(a))return;
             if(Tutorials.Mandatory(a)&&a.guide.mapHero=="")
             {
@@ -188,7 +200,7 @@ namespace Hellscript
                     !(old.edictPassiveSlots??Array.Empty<string>()).SequenceEqual(hero.edictPassiveSlots??Array.Empty<string>()))
                 {
                     var candidate=HuntEdictLoadout.FromHero(hero);
-                    ValidateChange(before,old,candidate,session?.HeroId==hero.id?session.Recipes:null);
+                    if(!PuzzleTutorial.Initializing(before,after,hero))ValidateChange(before,old,candidate,session?.HeroId==hero.id?session.Recipes:null);
                 }
                 if(!Has(before,Presets)&&(PresetKey(old.edictPresets)!=PresetKey(hero.edictPresets)||BuildPresetKey(old.presets)!=BuildPresetKey(hero.presets)))throw new ArgumentException(Loc.T("프리셋 관리는 균열 6단계부터 공개됩니다."));
                 for(int slot=0;slot<hero.edictPresets.Count;slot++)

@@ -148,7 +148,7 @@ Links lightning across 4 enemies, each hit dealing ×0.8 of the previous one.
 
 ### 04. Teleport · `M04`
 
-Existing runtime retained · Lv.10 · Cooldown 9s · Resource 0
+Existing runtime retained · Lv.5 · Cooldown 9s · Resource 0
 
 Moves to a valid spot with less danger.
 

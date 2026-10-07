@@ -8,6 +8,10 @@
 - **한 번 누르기.** 장착 말풍선(+/−)이 열려 있을 때 다른 스킬을 누르면 첫 번째 누름은 말풍선만 닫고 두 번째에서야 선택되었습니다. 바깥 누름 소비 배경이 이제 말풍선을 닫은 뒤 같은 누름을 스킬 아이콘·장착 칸에 넘기므로 한 번에 선택됩니다. 다른 컨트롤(탭 등)은 여전히 누름을 받지 않습니다. 스모크에 ‘말풍선 열린 채 다른 스킬 한 번 누르기’ 검사를 추가했습니다.
 - **선행 경로만 강조.** 스킬을 고르면 그 스킬 위쪽의 연결선만 줄기 시작까지 한 색으로 밝힙니다. 후속 스킬로 내려가는 선과 계열을 가로지르던 사선은 그리지 않습니다. 반투명 후광을 겹쳐 그리던 방식을 없애 모서리와 겹치는 구간이 흐려지거나 진해지지 않습니다.
 
+## 2026-10-06 이동기 Lv5
+
+궁수 A04와 마법사 M04의 트리·구형 카탈로그 해금을 5로 맞춘다. 전사 W02는 1을 유지하며 저장된 등급·장착·칙령은 변경하지 않는다. 아래의 10레벨 예시와 검사 결과는 당시 기록이다. [구현 기록](Escape_Skill_Unlock_Level.md).
+
 ## 2026-10-05: 줄기별 선행 스킬과 정리된 연결선
 
 스킬 트리의 선이 제멋대로 이어져 있다는 지적에 따라, 디아블로 2·3·4처럼 앞뒤 관계가 한눈에 보이도록 연결과 배치를 다시 만들었습니다. 규칙과 이유는 [직업별 스킬 트리와 성장 순서](../Design/Class_Skill_Trees.md)에 있고, 여기에는 게임에 적용한 내용만 적습니다.
@@ -25,7 +29,7 @@
 - Node: `engine.test.cjs` 42개 통과(새 3개: 앞 스킬 규칙, 앞 스킬의 해금·경로 계획, 선이 스킬을 가로지르지 않음), `build.cjs`는 111개 모두 레벨에 도달 가능함을 확인했고, `class_skills`·`class_skill_runtime`·`class_skill_options`·`class_skill_reports`의 `check`와 `build_skill_tree.cjs --check`가 통과했습니다. 설계 `catalog.json`은 바뀌지 않았습니다.
 - Unity Edit Mode(관련 검사): 트리 통합·사냥 칙령 진행·첫 플레이 스킬·튜토리얼 진행 114개를 실행해 111개가 통과했습니다. 실패 3개는 제가 새로 추가한 검사가 선택지형 대안(`oneOf`)까지 ‘부모는 늦게 열리지 않는다’에 넣은 오류였고, 검사를 고친 뒤 `SkillTreeIntegrationTests` 39개를 다시 돌려 모두 통과했습니다. 새 검사는 직업별로 칸 중복 없음, 선이 아래로만 향함, 선이 다른 스킬을 가로지르지 않음, 시작 스킬 네 개를 확인합니다.
 - macOS 개발 빌드: 복제본에만 임시 캡처 흐름을 넣어(저장소에 넣지 않음) 세 직업의 그래프 트리를 세로 440×956과 가로 1600×900에서 위아래로 넘기며 캡처했고, 스킬을 고른 상태도 확인했습니다. 예외 없이 끝났습니다.
-- 병합 검증(2026-10-05): `origin/main`(17dc75e9)에 이 브랜치를 합친 트리에서 Edit Mode 5,236개 중 5,235개가 통과했고, 1개는 병합 전 `origin/main`에서도 같게 시간 초과로 실패하는 기존 문제입니다. 같은 macOS 개발 빌드 스모크 8개를 병합한 트리와 `origin/main`에 돌려 결과가 같았습니다. 스킬 트리 스모크(노드 37개·슬롯 4개·고정 컨트롤 위치)·스킬 초기화·스킬 프리셋·클래스 스킬은 통과했고, 스킬 메뉴·칙령 구역·빠른 프리셋·튜토리얼 스모크는 `origin/main`에서도 같은 이유로 실패합니다. 트리 계열 스모크는 단계별 공개 이후 계정이 기존 사용자로 취급되지 않아 깨져 있었기에 `ExistingTrees`에서 기존 사용자 접근을 켜도록 고쳤습니다. 자세한 기록: [merge-validation.json](ClassPassiveMeasurementEvidence20261005/merge-validation.json)
+- 병합 검증(2026-10-05): `origin/main`(17dc75e9)에 이 브랜치를 합친 트리에서 Edit Mode 5,236개 중 5,235개가 통과했고, 1개는 병합 전 `origin/main`에서도 같게 시간 초과로 실패하는 기존 문제입니다. 같은 macOS 개발 빌드 스모크 8개를 병합한 트리와 `origin/main`에 돌려 결과가 같았습니다. 스킬 트리 스모크(노드 37개·슬롯 4개·고정 컨트롤 위치)·스킬 초기화·스킬 프리셋·클래스 스킬은 통과했고, 스킬 메뉴·칙령 구역·빠른 프리셋·튜토리얼 스모크는 `origin/main`에서도 같은 이유로 실패합니다. 트리 계열 스모크는 단계별 공개 이후 계정이 기존 사용자로 취급되지 않아 깨져 있었기에 `ExistingTrees`에서 기존 사용자 접근을 켜도록 고쳤습니다. 자세한 기록: [merge-validation.json](ClassPassiveMeasurementEvidence20261005/merge-validation.json) 같은 날(2026-10-05) 이 4개와, 확인 중에 같은 이유로 실패하는 것을 발견한 단계별 공개 진행 스모크(`-hellscriptEdictProgressionSmoke`)까지 5개를 고쳐 스모크 9개가 모두 통과합니다. 반복 사냥 탭은 15단계 정리 뒤에만 열리고, 자동 물약 그룹은 선택 목록 없이 직접 조작 칸을 그리며, 낮은 HP 대응이 3단계로 옮겨 가는 등 단계별 공개 이후 바뀐 규칙에 스모크의 기대값을 맞췄습니다. 튜토리얼은 기존 사용자 계정의 생존 안내가 사라진 물약 선택 목록을 가리키던 실제 오류가 있어 숫자 입력 안내로 고쳤습니다(진행 중이던 기존 사용자 프롤로그에만 해당). 기록: [smoke-repair.json](ClassPassiveMeasurementEvidence20261005/smoke-repair.json)
 - 증거: [HTML 플래너 전체 트리](HuntEdictSkillTreeLineageEvidence20261005/planner-warrior-lv40.png) · [궁수](HuntEdictSkillTreeLineageEvidence20261005/planner-ranger-lv40.png) · [마법사](HuntEdictSkillTreeLineageEvidence20261005/planner-mage-lv40.png), 게임 화면 [세로 위쪽](HuntEdictSkillTreeLineageEvidence20261005/native-warrior-portrait-top.png) · [세로 중간](HuntEdictSkillTreeLineageEvidence20261005/native-warrior-portrait-middle.png) · [가로 마법사](HuntEdictSkillTreeLineageEvidence20261005/native-mage-landscape-middle.png) · [가로 선택 상태](HuntEdictSkillTreeLineageEvidence20261005/native-warrior-landscape-selected-WP16.png). 폴더는 5.2 MB이며 PNG 7개입니다.
 - 하지 않은 것: `browser.test.cjs`는 새 구조에 맞게 고쳤지만 Playwright가 설치되어 있지 않아 다시 돌리지 않았습니다(`evidence/`의 이전 브라우저 캡처는 이전 배치의 기록입니다). 대신 헤드리스 Chrome으로 세 직업의 트리와 상세 패널의 앞 스킬 표시를 확인했습니다. 전체 Edit Mode 검사와 런타임 스모크는 병합 때 실행했고 결과는 아래 병합 검증에 있습니다. 모바일 실기기는 확인하지 않았습니다.
 

@@ -148,7 +148,7 @@ Places a poison zone for 5 seconds. Up to 2 at once.
 
 ### 04. Retreat Leap · `A04`
 
-Existing runtime retained · Lv.10 · Cooldown 8s · Resource 0
+Existing runtime retained · Lv.5 · Cooldown 8s · Resource 0
 
 Leaps to a spot that opens distance from enemies.
 

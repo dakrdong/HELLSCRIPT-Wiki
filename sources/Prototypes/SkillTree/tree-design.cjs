@@ -80,12 +80,12 @@ const grids = {
   Ranger: [
     [['A01 A02','AP01 AP06','AP03 .'], ['. A05','. AP07'], ['AP09 A08','A07 AP13'], ['A14 .'], ['A17','AP18']],
     [['A03 .','AP08 .'], [], ['AP10 A09','AP04 A10','AP11 AP15'], ['. A13','. A15','. AP17'], []],
-    [[], ['A04 .','AP02 AP05'], ['. A06','AP12 .'], ['. A11','AP14 A12','A16 AP16'], ['A18','AP19']]
+    [['A04 .'], ['AP02 AP05'], ['. A06','AP12 .'], ['. A11','AP14 A12','A16 AP16'], ['A18','AP19']]
   ],
   Mage: [
     [['M01 .','MP01 .'], ['MP06 .'], ['M07 .','M08 MP07','MP08 .'], ['MP16 .','M15 .'], ['M17','MP18']],
     [['M02 M03','MP02 MP03'], [], ['M06 .','MP09 .','M09 .','MP10 .','M10 .'], ['. M11','MP12 M12','M16 MP11'], []],
-    [[], ['M04 .','MP05 M05','. MP04','. MP13'], ['MP14 .'], ['M13 M14','MP15 .','MP17 .'], ['M18','MP19']]
+    [['M04 .'], ['MP05 M05','. MP04','. MP13'], ['MP14 .'], ['M13 M14','MP15 .','MP17 .'], ['M18','MP19']]
   ]
 };
 module.exports = {
@@ -127,7 +127,7 @@ module.exports = {
       branches: [label('정밀 사격', 'Precision'), label('덫과 맹독', 'Traps & venom'), label('기동과 그림자', 'Mobility & shadow')],
       nodes: [
         node('A01',1,0), node('A02',1,0), node('A03',1,1),
-        node('A04',10,2), node('A05',15,0), node('A06',20,2),
+        node('A04',5,2), node('A05',15,0), node('A06',20,2),
         node('A07',22,0), node('A08',22,0), node('A09',26,1),
         node('A10',28,1), node('A11',30,2), node('A12',32,2),
         node('A13',34,1), node('A14',34,0), node('A15',38,1),
@@ -148,7 +148,7 @@ module.exports = {
       branches: [label('화염과 원소 순환', 'Flame & convergence'), label('냉기와 번개', 'Frost & lightning'), label('비전과 결계', 'Arcane & wards')],
       nodes: [
         node('M01',1,0), node('M02',1,1), node('M03',1,1),
-        node('M04',10,2), node('M05',15,2), node('M06',20,1),
+        node('M04',5,2), node('M05',15,2), node('M06',20,1),
         node('M07',22,0), node('M08',24,0), node('M09',26,1),
         node('M10',28,1), node('M11',30,1), node('M12',32,1),
         node('M13',34,2), node('M14',34,2), node('M15',38,0),

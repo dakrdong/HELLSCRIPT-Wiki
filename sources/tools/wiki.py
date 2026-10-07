@@ -279,7 +279,7 @@ def build_databases():
     data.append(db('set-items','세트 장비','6세트 × 머리·몸통·손·발의 24종입니다. 세트 정의 자체는 아이템 수에 추가하지 않습니다.',pieces))
     for key,name,prefix,count,name_index,code,related in [
         ('enemies','일반 몬스터','N',20,1,'EnemyCombat.cs','enemy-expansion'),
-        ('elites','정예 특성','E',6,1,'CombatSimulation.Enemies.cs','enemy-expansion'),
+        ('elites','정예 특성','E',7,1,'CombatSimulation.Enemies.cs','enemy-expansion'),
         ('bosses','보스','BOSS',5,1,'BossCombat.cs','boss-expansion')]:
         rows=[]
         for i in range(1,count+1):
@@ -299,7 +299,7 @@ def build_databases():
             ' · '.join(t['cells'][1:]),t['fields'],DESIGN+'HELLSCRIPT_Rift_Exploration_Detail.md',t['line'],status='기획·구현 기록',
             refs=[source_ref(CORE+'RiftFieldContent.cs')],related=['field-expansion','rift-exploration-detail'],resource='procedural-interactions'))
     data.append(db('field','상자·성소','CH01–CH03과 SH01–SH02입니다. 초기 기획의 구현 순서와 현재 적용 여부는 개발 기록을 함께 봅니다.',rows))
-    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':60,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':20,'elites':6,'bosses':5,'rooms':12,'field':5}
+    expected={'content-unlocks':14,'skills':18,'passives':18,'heroes':3,'conditions':22,'builds':6,'items':60,'attributes':58,'affixes':54,'legendaries':123,'sets':6,'set-items':24,'enemies':20,'elites':7,'bosses':5,'rooms':12,'field':5}
     for table in data:
         if len(table['rows']) != expected[table['id']]: raise ValueError('Review changed catalog count: '+table['id'])
     import wiki_runes
@@ -923,6 +923,9 @@ def link_target(target, source, page_paths):
         dest=str(candidate.resolve().relative_to(ROOT))
     # Local build directories are not portable wiki attachments, even on a clean checkout.
     if dest.startswith('Builds/') and dest.endswith('.app'): return None
+    # Retain the retired v3 runner for immutable history links without putting it back in the game.
+    if dest=='Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTutorialSmoke.Progression.cs' and not (ROOT/dest).exists():
+        dest='Docs/Implementation/TutorialReplaySmokeEvidence20261005/RuntimeTutorialSmoke.Progression.cs.txt'
     if dest in page_paths:
         return '#/page/'+page_paths[dest]+('?section='+quote(fragment) if fragment else '')
     if (ROOT/dest).is_dir(): return None

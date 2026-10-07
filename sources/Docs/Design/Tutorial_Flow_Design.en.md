@@ -1,5 +1,11 @@
 # Tutorial progression and content guidance
 
+## Current mandatory flow: puzzle v5
+
+Starting at level 1: scout → save real skills and Hunt Edict → automatic combat → review → a fresh retry or the next level. First-clear XP is granted once to the owned hero. Completed-level replays use a detached copy of that level’s starting kit without rewards. Levels 1–2 are connected; later content and the hub follow in subsequent stages. Entering the new runner migrates unfinished v4 checkpoints to level 1 while preserving equipment and XP. Completed accounts remain exempt. [Core implementation and checks](../Implementation/Puzzle_Tutorial_Core.en.md).
+
+The earlier prologue phases and numbers below are historical, rather than the new-account entry flow.
+
 Updated: 2026-09-29
 
 > 2026-10-04: See [Tutorial_Chapters.en.md](Tutorial_Chapters.en.md) for the chapter-based redesign and the code/document differences.

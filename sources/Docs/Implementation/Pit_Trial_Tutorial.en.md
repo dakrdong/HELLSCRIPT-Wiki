@@ -1,5 +1,9 @@
 # The Final Trial — the Pit Tutorial
 
+## 2026-10-07 puzzle tutorial v5
+
+New mandatory entry uses `PuzzleTutorial.json` and `GameStore.StartPuzzleLevel`. The v4 forced-loss health floor, rooted movement and time-based attack escalation have been removed. The v4 description and evidence below are historical. Current ownership and migration follow [Puzzle core](Puzzle_Tutorial_Core.en.md).
+
 Updated: 2026-10-06
 
 [한국어](Pit_Trial_Tutorial.md)

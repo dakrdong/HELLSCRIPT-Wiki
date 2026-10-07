@@ -1,0 +1,304 @@
+{
+  "originalLocalBranches": 32,
+  "originalWorktrees": 10,
+  "integration": "All original local and origin refs are ancestors of the integration candidate.",
+  "models": {
+    "status": "passed_with_camera_limit",
+    "utc": "2026-10-07T07:55:27.8398830Z",
+    "project": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT",
+    "unity": "6000.6.0f1",
+    "scope": "Native Editor, actual source WorldView.ModelBody/EnemyBodyArt/TickEnemyRig/BodyTop, existing ActorRig and RiftTerrain, controlled fixture, all three LODs, default and nearest gameplay camera dimensions",
+    "limitations": "Controlled native Editor presentation fixture; camera renders are not a full Game View interaction or player build. No player FPS, mobile device, combat balance, account save, or complete gameplay run claim.",
+    "models": [
+      {
+        "id": "N13",
+        "gameArt": "Characters/N13",
+        "resourceArt": "Characters/N13",
+        "archetype": "Biped",
+        "shader": "HELLSCRIPT/Rift Terrain Visibility",
+        "bones": 20,
+        "rigOwners": 1,
+        "animators": 0,
+        "textureSize": 512,
+        "triangles": [
+          6000,
+          3000,
+          1500
+        ],
+        "sharedSkeleton": true,
+        "axes": true,
+        "materials": true,
+        "defaultFraming": true,
+        "nearestFraming": true,
+        "cameraLimit": "",
+        "height": 1.944000005722046,
+        "walkDelta": 0.6356837749481201,
+        "attackDelta": 1.9728357791900635,
+        "maxMotionExtension": 0.2782561480998993,
+        "lodMotionExtensions": [
+          0.24501532316207886,
+          0.2782561480998993,
+          0.2429191768169403
+        ],
+        "captures": [
+          "N13_LOD0_attack_nearest.png",
+          "N13_LOD1_attack_nearest.png",
+          "N13_LOD2_attack_nearest.png",
+          "N13_default.png",
+          "N13_nearest.png"
+        ]
+      },
+      {
+        "id": "N02",
+        "gameArt": "Characters/N02",
+        "resourceArt": "Characters/N02",
+        "archetype": "Quadruped",
+        "shader": "HELLSCRIPT/Rift Terrain Visibility",
+        "bones": 17,
+        "rigOwners": 1,
+        "animators": 0,
+        "textureSize": 512,
+        "triangles": [
+          6000,
+          3000,
+          1500
+        ],
+        "sharedSkeleton": true,
+        "axes": true,
+        "materials": true,
+        "defaultFraming": true,
+        "nearestFraming": true,
+        "cameraLimit": "",
+        "height": 1.0399999618530273,
+        "walkDelta": 0.5275114178657532,
+        "attackDelta": 0.5044296383857727,
+        "maxMotionExtension": 0.28088241815567017,
+        "lodMotionExtensions": [
+          0.1785374879837036,
+          0.28088241815567017,
+          0.1854747235774994
+        ],
+        "captures": [
+          "N02_LOD0_attack_nearest.png",
+          "N02_LOD1_attack_nearest.png",
+          "N02_LOD2_attack_nearest.png",
+          "N02_default.png",
+          "N02_nearest.png"
+        ]
+      },
+      {
+        "id": "N12",
+        "gameArt": "Characters/N12",
+        "resourceArt": "Enemies/N12",
+        "archetype": "Hover",
+        "shader": "HELLSCRIPT/Rift Terrain Visibility",
+        "bones": 15,
+        "rigOwners": 1,
+        "animators": 0,
+        "textureSize": 512,
+        "triangles": [
+          6000,
+          3000,
+          1500
+        ],
+        "sharedSkeleton": true,
+        "axes": true,
+        "materials": true,
+        "defaultFraming": true,
+        "nearestFraming": true,
+        "cameraLimit": "",
+        "height": 1.9980000257492065,
+        "walkDelta": 1.3271738290786743,
+        "attackDelta": 1.3673094511032104,
+        "maxMotionExtension": 0.17356577515602112,
+        "lodMotionExtensions": [
+          0.17356577515602112,
+          0.16892628371715546,
+          0.16476953029632568
+        ],
+        "captures": [
+          "N12_LOD0_attack_nearest.png",
+          "N12_LOD1_attack_nearest.png",
+          "N12_LOD2_attack_nearest.png",
+          "N12_default.png",
+          "N12_nearest.png"
+        ]
+      },
+      {
+        "id": "BOSS03",
+        "gameArt": "Bosses/B03",
+        "resourceArt": "Bosses/BOSS03",
+        "archetype": "Quadruped",
+        "shader": "HELLSCRIPT/Rift Terrain Visibility",
+        "bones": 17,
+        "rigOwners": 1,
+        "animators": 0,
+        "textureSize": 1024,
+        "triangles": [
+          23762,
+          11830,
+          5906
+        ],
+        "sharedSkeleton": true,
+        "axes": true,
+        "materials": true,
+        "defaultFraming": true,
+        "nearestFraming": false,
+        "cameraLimit": "At the existing minimum 50% camera distance, parts of this boss extend beyond the viewport; the camera and delivered model scale are preserved.",
+        "height": 4.300000190734863,
+        "walkDelta": 1.3310747146606445,
+        "attackDelta": 2.4052281379699707,
+        "maxMotionExtension": 0.2322818487882614,
+        "lodMotionExtensions": [
+          0.2124287188053131,
+          0.2322818487882614,
+          0.22431690990924835
+        ],
+        "captures": [
+          "BOSS03_LOD0_attack_nearest.png",
+          "BOSS03_LOD1_attack_nearest.png",
+          "BOSS03_LOD2_attack_nearest.png",
+          "BOSS03_default.png",
+          "BOSS03_nearest.png"
+        ]
+      }
+    ]
+  },
+  "uiContract": "15 passed",
+  "uiRefresh": "PASS: 14 bindings guarded; 165 UI source files inventoried",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "5616",
+    "result": "Passed",
+    "total": "5616",
+    "passed": "5614",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "2",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-07 07:57:35Z",
+    "end-time": "2026-10-07 09:24:21Z",
+    "duration": "3081.2272857",
+    "failures": [],
+    "skippedTests": [
+      {
+        "name": "Hellscript.Tests.ClassSkillPassiveMeasurement.MeasureEveryDesignBuild",
+        "label": "Explicit",
+        "reason": "Measurement tool: writes passive contribution data to HELLSCRIPT_MEASURE_OUT"
+      },
+      {
+        "name": "Hellscript.Tests.WebGlOptimizationMeasurement.Capture",
+        "label": "Explicit",
+        "reason": "Writes simulation measurements to HELLSCRIPT_MEASURE_OUT"
+      }
+    ]
+  },
+  "nativePlayer": {
+    "status": "passed",
+    "tutorialCases": [
+      "Warrior ko 440x956",
+      "Mage en 956x440"
+    ],
+    "tutorialLevelVictories": 30,
+    "replayVictories": 2,
+    "checkpointRestarts": 2,
+    "graduations": 2,
+    "hubLayouts": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1600,
+        1000
+      ],
+      [
+        2100,
+        900
+      ]
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "legacySmokes": [
+      {
+        "case": "quick-presets",
+        "phase": 1,
+        "exit": 0,
+        "elapsed": 28.890047875,
+        "proof": true
+      },
+      {
+        "case": "quick-presets",
+        "phase": 2,
+        "exit": 0,
+        "elapsed": 4.728559958000002,
+        "proof": true
+      },
+      {
+        "case": "sections",
+        "phase": 1,
+        "exit": 0,
+        "elapsed": 38.991683833,
+        "proof": true
+      },
+      {
+        "case": "sections",
+        "phase": 2,
+        "exit": 0,
+        "elapsed": 5.627964374999991,
+        "proof": true
+      }
+    ],
+    "scope": "macOS Development player, synthetic EventSystem pointers and accelerated actual fixed combat ticks; ordinary-speed normal-rift entry for five seconds only",
+    "limits": [
+      "No physical mobile test",
+      "No human comprehension test",
+      "No complete ordinary-speed normal-rift run",
+      "No performance improvement claim"
+    ]
+  },
+  "nativeBuild": {
+    "result": "Succeeded",
+    "errors": 0,
+    "source": "c0181d7bc44534393d51f82e2147a9aea20bf900",
+    "appBytes": 763144367,
+    "scope": "macOS Development, Unity 6000.6.0f1"
+  },
+  "gameSource": "c0181d7bc44534393d51f82e2147a9aea20bf900",
+  "smokeSource": "d0af2bf289a4d0c6b9bd75c8e1b12c732f2c1fa4",
+  "smokeRepair": {
+    "initialSource": "c0181d7bc44534393d51f82e2147a9aea20bf900",
+    "failure": "Legacy-account smoke incorrectly expected current-account potion controls without a preset picker",
+    "contractEvidence": [
+      "HuntEdictProgression.Quick keeps legacy potion presets",
+      "OnlyLegacyAccountsGetTheSurvivalPotionQuickPicker passed in the full Edit Mode suite",
+      "DrawSelectedGroup omits retired autoEquip.preserveEffects when deciding section description"
+    ],
+    "repair": "Keep legacy preset/custom coverage, explicitly check direct controls with legacy access off, and ignore the retired field in section description expectations",
+    "productionChanges": false,
+    "reuse": "Full Edit Mode 5614 passed plus 30 tutorial victories, checkpoint/restart/graduation/replay are unchanged; rerun only quick-preset and section native acceptance after rebuilding the changed development harness",
+    "fixedSource": "d0af2bf289a4d0c6b9bd75c8e1b12c732f2c1fa4",
+    "changedSinceFullSuite": [
+      "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeEdictQuickPresetSmoke.cs",
+      "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeSkillTreeSmoke.Sections.cs"
+    ],
+    "newAppBytes": 763144415
+  },
+  "retention": {
+    "sourceRecovery": "Primary checkout Artifacts/RepositoryIntegration/20261007",
+    "existingStashes": 8,
+    "cleanupPolicy": "Only merged, inactive worktree copies; preserve source, review Markdown and required evidence; exact cleanup outcome is recorded locally after execution."
+  }
+}

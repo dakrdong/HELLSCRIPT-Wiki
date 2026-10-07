@@ -52,7 +52,25 @@ namespace Hellscript
     public static class StoryDialogueWindow
     {
         public const float GlyphsPerSecond=38;
-        public static bool ReduceMotion=>PlayerPrefs.GetInt(WorldLighting.ReduceMotionKey,0)!=0;
+        public static bool ReduceMotion=>PlayerPrefs.GetInt(WorldLighting.ReduceMotionKey,0)!=0||SystemReduceMotion;
+#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+        [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.A.dylib")]static extern IntPtr objc_getClass(string name);
+        [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.A.dylib")]static extern IntPtr sel_registerName(string name);
+        [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.A.dylib",EntryPoint="objc_msgSend")]static extern IntPtr SendObject(IntPtr receiver,IntPtr selector);
+        [System.Runtime.InteropServices.DllImport("/usr/lib/libobjc.A.dylib",EntryPoint="objc_msgSend")]static extern byte SendBool(IntPtr receiver,IntPtr selector);
+        static IntPtr workspace,motionSelector;static float motionChecked=-2;static bool systemMotion;
+        public static bool SystemReduceMotion
+        {
+            get
+            {
+                if(Time.unscaledTime-motionChecked<1)return systemMotion;motionChecked=Time.unscaledTime;
+                if(workspace==IntPtr.Zero){var type=objc_getClass("NSWorkspace");if(type==IntPtr.Zero)return false;workspace=SendObject(type,sel_registerName("sharedWorkspace"));motionSelector=sel_registerName("accessibilityDisplayShouldReduceMotion");}
+                systemMotion=workspace!=IntPtr.Zero&&SendBool(workspace,motionSelector)!=0;return systemMotion;
+            }
+        }
+#else
+        public static bool SystemReduceMotion=>false;
+#endif
         public static readonly Vector2 Size=new Vector2(4000,210);
         public static ContentWindowView Open(Transform parent,string localizedTitle,EquipmentViewSource source,Func<float> readingScale,
             StoryDialogueState state,Func<IReadOnlyList<StoryChoice>> choices,Action closed=null,string heading="",bool blocksGameplay=true,Action back=null,

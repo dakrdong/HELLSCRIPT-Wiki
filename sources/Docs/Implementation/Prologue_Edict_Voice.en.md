@@ -1,6 +1,6 @@
 # Prologue — the Voice of the Edict
 
-Updated: 2026-09-29
+Updated: 2026-10-05
 
 [한국어](Prologue_Edict_Voice.md)
 
@@ -15,7 +15,7 @@ At the user's request, the first mandatory map, "Road to the sanctuary" (an armo
 | 3 | `EdictLesson` (paused) | Forced steps: Hunt Edict menu → Skill tab → first skill → `+` (the one skill point) → Equip → Save → slot 1 → Edit hunt edict → the four preset tabs explained in turn → the chosen preset → Activate preset → Close. |
 | 4 | `Encircled` | A real fight against the ring. |
 | 5 | `Gatekeeper` | A short dialogue, the walk to the boss room and the gatekeeper's entrance. |
-| 6 | `SurvivalLesson` (paused) | When the hero drops below 50% HP, time stops and the voice intervenes. Forced steps: Hunt Edict → Survival → Automatic potion → quick preset → Extra survival supplies → Avoidance by damage type → quick preset → Avoid all warnings → Save → Close. |
+| 6 | `SurvivalLesson` (paused) | When the hero drops below 50% HP, time stops and the voice intervenes. Forced steps: Hunt Edict → Survival → Automatic potion → Potion HP threshold → type 60 → Apply → Avoidance by damage type → quick preset → Avoid all warnings → Save → Close. The potion quick presets are gone from the screen, so since 2026-10-05 this step guides a typed number. |
 | 7 | `Showdown` | The fight continues with the new settings. |
 | 8 | `Cleared` | Victory staging and a **1,000 gold** reward. "Take the reward and go to the village" stores the reward and the finished tutorial in one transaction. |
 | 9 | Town | The arrival card, then Anton Jindark's first conversation (the start of the village event). He welcomes the stranger and says a revelation from the god sent him out to meet them. Demons poured out of the rifts and brought the world into peril, and a prophecy says one who receives the god's revelation shall strike down the demons of the rifts. Many warriors who received it fight here together; their settlement grew into a village of their own, so merchants for warriors came to stay. He ends with how to walk and the first rift. |

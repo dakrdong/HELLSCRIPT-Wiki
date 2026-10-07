@@ -25,7 +25,7 @@ Survival use requires **assigning M04 as the global escape or fallback skill and
 
 ## Preparation and landing
 
-Unlock level 10, 0.2-second preparation, 9-second cooldown and zero resource cost are unchanged. Landing requires an actual distance of 2–8 m, valid terrain, sight from the origin and no overlap with perceived enemy bodies. Zero-cost M04 does not consume an LC02 discount charge. Preparation grants no invulnerability and the skill deals no intrinsic damage.
+Unlock level is 5 from 2026-10-06. The 0.2-second preparation, 9-second cooldown and zero resource cost are unchanged. Landing requires an actual distance of 2–8 m, valid terrain, sight from the origin and no overlap with perceived enemy bodies. Zero-cost M04 does not consume an LC02 discount charge. Preparation grants no invulnerability and the skill deals no intrinsic damage.
 
 Immediately before release, the committed destination is revalidated for distance, sight, terrain and enemy bodies. An invalid destination records `ACTION_INTERRUPTED`, does not move the hero and does not refund cooldown. Options cannot retarget that cast. Valid committed landings execute exactly once after OFF/purpose/preference edits and save restoration.
 

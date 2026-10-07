@@ -19,7 +19,7 @@ namespace Hellscript
             switch(definition)
             {
                 case null:case "":return 0;
-                case "N04":case "N16_DEATH":return 4;case "N10":case "E01":return 1;case "E02":case "N19":case "N20":return 2;case "E05":case "N12_DEATH":return 5;
+                case "N04":case "N16_DEATH":return 4;case "N10":case "E01":return 1;case "E02":case "N19":case "N20":return 2;case "E05":case "E07":case "N12_DEATH":return 5;
             }
             if(bossAttackKinds==null)
             {bossAttackKinds=new Dictionary<string,int>(StringComparer.Ordinal);foreach(BossAttack k in Enum.GetValues(typeof(BossAttack)))bossAttackKinds[BossCombat.Definition((int)k)]=(int)k;}

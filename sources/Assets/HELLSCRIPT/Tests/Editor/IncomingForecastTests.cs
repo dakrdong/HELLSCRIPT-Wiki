@@ -31,6 +31,14 @@ namespace Hellscript.Tests
         static float Absorbed(CombatSimulation sim)=>sim.State.damageEvents.Where(e=>e.incoming).Sum(e=>e.absorbed);
 
         [Test]
+        public void GravityIsOneAreaHitWithPullAndForecastMatchesItsExplosion()
+        {
+            var sim=Fixture();var h=Hazard(sim,20,.4f);h.pull=8;h.definitionId="E07";h.element=5;
+            string before=JsonUtility.ToJson(sim.State);var f=sim.ForecastIncoming(1);
+            Assert.AreEqual(IncomingCategory.Area,f.sources.Single().category);Assert.AreEqual(IncomingControl.Pull,f.sources.Single().control);Assert.AreEqual(1,f.hits.Count);
+            Assert.AreEqual(before,JsonUtility.ToJson(sim.State));Advance(sim,1);Assert.AreEqual(f.HpLoss,IncomingHp(sim),.0001f);
+        }
+        [Test]
         public void OverlappingAttacksSpendEachShieldOnlyOnceInTheActualAbsorptionOrder()
         {
             var sim=Fixture();Shield(sim,25,2,20);Shield(sim,15,1,10);Hazard(sim,30,.2f);Hazard(sim,30,.4f);

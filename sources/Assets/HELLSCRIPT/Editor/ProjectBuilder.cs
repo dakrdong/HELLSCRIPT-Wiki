@@ -13,6 +13,14 @@ namespace Hellscript.Editor
     {
         public const string ScenePath="Assets/HELLSCRIPT/Scenes/Hellscript.unity";
         const string CatalogPath="Assets/HELLSCRIPT/Resources/GameCatalog.asset";
+        public static void SyncSkillUnlocks()
+        {
+            var catalog=AssetDatabase.LoadAssetAtPath<GameCatalog>(CatalogPath);if(catalog==null)throw new InvalidOperationException("Missing game catalog.");
+            var source=ScriptableObject.CreateInstance<GameCatalog>();source.Populate();
+            foreach(var skill in catalog.skills)skill.unlock=source.skills.Single(s=>s.id==skill.id).unlock;
+            UnityEngine.Object.DestroyImmediate(source);EditorUtility.SetDirty(catalog);AssetDatabase.SaveAssetIfDirty(catalog);
+            Debug.Log("HELLSCRIPT_SKILL_UNLOCKS_SYNCED");
+        }
         [MenuItem("HELLSCRIPT/프로젝트 구성")]
         public static void Setup()
         {

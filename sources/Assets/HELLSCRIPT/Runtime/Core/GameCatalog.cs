@@ -308,6 +308,9 @@ namespace Hellscript
         public bool tutorial,tutorialReplay;
         public int tutorialPhase;
         public int tutorialFlowVersion,tutorialLessonStep;
+        public int puzzleLevel,puzzleWave;
+        public PuzzleOperationState puzzleOperation;
+        public bool puzzleWaveReady,puzzleHuntRound;
         public float pitStageTime;
         public string guideSetup="";
         public CombatJournalData journal;
@@ -444,13 +447,13 @@ namespace Hellscript
                 new SkillDefinition("A01","관통 사격",HeroClass.Ranger,SkillKind.Pierce,1,0,20,1.8f,10,.6f,.65f,6,"일직선으로 최대 5명을 관통합니다."),
                 new SkillDefinition("A02","다중 사격",HeroClass.Ranger,SkillKind.Multi,1,3,30,.8f,8,8,.65f,7,"60도 부채꼴로 화살 3발을 발사합니다."),
                 new SkillDefinition("A03","맹독 덫",HeroClass.Ranger,SkillKind.Trap,1,8,20,.6f,6,3,5,8,"5초 독 장판을 설치합니다. 최대 2개."),
-                new SkillDefinition("A04","후퇴 도약",HeroClass.Ranger,SkillKind.Retreat,10,8,0,0,6,0,.5f,9,"적과 거리를 벌리는 위치로 도약합니다."),
+                new SkillDefinition("A04","후퇴 도약",HeroClass.Ranger,SkillKind.Retreat,5,8,0,0,6,0,.5f,9,"적과 거리를 벌리는 위치로 도약합니다."),
                 new SkillDefinition("A05","사냥꾼의 표식",HeroClass.Ranger,SkillKind.Mark,15,10,0,0,10,0,10,10,"표식 대상에게 주는 피해 +25%."),
                 new SkillDefinition("A06","그림자 화살",HeroClass.Ranger,SkillKind.Shadow,20,12,10,.25f,0,0,8,11,"다음 사격 3회에 암흑 추가 피해."),
                 new SkillDefinition("M01","화염구",HeroClass.Mage,SkillKind.Fireball,1,0,25,2.1f,10,2.5f,.7f,12,"착탄 지점에 폭발 피해를 줍니다."),
                 new SkillDefinition("M02","눈보라",HeroClass.Mage,SkillKind.Blizzard,1,6,30,.65f,10,3,6,13,"6초간 냉기 피해와 35% 둔화. 최대 2개."),
                 new SkillDefinition("M03","연쇄 번개",HeroClass.Mage,SkillKind.Chain,1,2,25,1.1f,10,4,.45f,14,"4명에게 번개를 연결합니다. 다음 타격마다 ×0.8."),
-                new SkillDefinition("M04","순간이동",HeroClass.Mage,SkillKind.Teleport,10,9,0,0,8,0,.2f,15,"위험이 낮은 유효한 지점으로 이동합니다."),
+                new SkillDefinition("M04","순간이동",HeroClass.Mage,SkillKind.Teleport,5,9,0,0,8,0,.2f,15,"위험이 낮은 유효한 지점으로 이동합니다."),
                 new SkillDefinition("M05","원소 보호막",HeroClass.Mage,SkillKind.Shield,15,14,0,0,0,0,4,16,"최대 HP 35% 보호막을 4초 유지합니다."),
                 new SkillDefinition("M06","서리 폭발",HeroClass.Mage,SkillKind.Nova,20,10,20,1,3,3,.35f,17,"주변 적에게 냉기 피해와 1.5초 빙결."),
             };

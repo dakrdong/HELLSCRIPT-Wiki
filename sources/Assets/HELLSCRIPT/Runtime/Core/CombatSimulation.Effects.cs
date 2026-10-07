@@ -86,7 +86,7 @@ namespace Hellscript
             if(IsTutorial&&State.tutorialFlowVersion==3&&State.tutorialPhase==ProloguePhase.Showdown&&threshold==60){State.tutorialLessonStep=5;State.potions.uses++;}
             CombatTelemetry.Support(State.statistics,def.id,SkillResultMetric.Healing,State.health-before);
             State.potionCd=State.potions.hpTotal=RunePotionCooldown(def.cooldown);
-            if(State.potions.version>0)ConsumePotion(def);
+            if(State.potions.version>0)ConsumePotion(def);else if(IsPuzzle)State.potions.uses++;
             if(before<=Stats.hp*.2f&&Stats.specials.Contains("LC03")&&ItemEffects.lc03Cooldown<=.00001f)
             {AddShield("LC03",Stats.hp*Stats.AspectValue("LC03",.25f),3,0);ItemEffects.lc03Cooldown=20;}
             TriggerLegendary(LegendaryTrigger.Potion,"*",null,0);

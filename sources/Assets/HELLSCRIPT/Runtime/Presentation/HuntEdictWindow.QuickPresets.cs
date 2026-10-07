@@ -25,7 +25,7 @@ namespace Hellscript
             {
                 // Validate the scope even when selecting the presentation-only Custom entry.
                 HuntEdictQuickPresets.For(scope);
-                if(id==HuntEdictQuickPresets.Custom?!HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details):!HuntEdictProgression.Quick(store.Data,scope,id,hero))return;
+                if(id==HuntEdictQuickPresets.Custom?!HasFeature(HuntEdictProgression.Details):!QuickDisclosed(scope,id))return;
                 if(id==HuntEdictQuickPresets.Custom)
                 {
                     // Custom from the overview means "show me the details": open the group where they live.
@@ -59,7 +59,7 @@ namespace Hellscript
             row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h;
             Place((RectTransform)button.transform,0,0,w,h);Place(label.rectTransform,8,0,w-16,h);
             Paragraph(list,preset?.Description??Loc.T(expanded?"현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다.":"프리셋을 고르거나 직접 설정을 선택해 세부 옵션을 조정하세요."),w,11,muted);
-            return expanded&&HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details);
+            return expanded&&HasFeature(HuntEdictProgression.Details);
         }
         void QuickPresetDialog(string scope)
         {
@@ -68,10 +68,10 @@ namespace Hellscript
                 float h=Mathf.Min(height-16,470);
                 Scroll(p,"Quick preset choices",12,51,DialogWidth-24,h-61,out var list);
                 string selected=QuickPresetSelection(scope);float w=DialogWidth-38;
-                foreach(var preset in HuntEdictQuickPresets.For(scope).Where(p=>HuntEdictProgression.Quick(store.Data,scope,p.id,hero)))
+                foreach(var preset in HuntEdictQuickPresets.For(scope).Where(p=>QuickDisclosed(scope,p.id)))
                     QuickPresetChoice(list,w,scope,preset.id,preset.Name,preset.Description,selected==preset.id);
                 // Keep this last even when the number of authored presets changes.
-                if(HuntEdictProgression.Has(store.Data,HuntEdictProgression.Details))QuickPresetChoice(list,w,scope,HuntEdictQuickPresets.Custom,Loc.T("직접 설정"),Loc.T("현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다."),selected==HuntEdictQuickPresets.Custom);
+                if(HasFeature(HuntEdictProgression.Details))QuickPresetChoice(list,w,scope,HuntEdictQuickPresets.Custom,Loc.T("직접 설정"),Loc.T("현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다."),selected==HuntEdictQuickPresets.Custom);
                 EndList(list,4);
             },470);
         }
@@ -95,12 +95,12 @@ namespace Hellscript
         {
             if(ProgressivePrologue||group.tab=="autoEquip")return false;
             string scope=HuntEdictQuickPresets.GlobalScope(group);
-            return HuntEdictQuickPresets.For(scope).Any(p=>HuntEdictProgression.Quick(store.Data,scope,p.id,hero));
+            return HuntEdictQuickPresets.For(scope).Any(p=>QuickDisclosed(scope,p.id));
         }
         // The current answer shown under a group chip: the matching preset's name, or "Custom".
         string QuickSubtitle(HuntEdictUiGroup group)
         {
-            if(group.ids.Any(id=>!Disclosed(id))||group.ids.Contains("bag.warehouseFull")||!QuickAllowed(group))return "";
+            if(!PuzzleLesson&&group.ids.Any(id=>!Disclosed(id))||group.ids.Contains("bag.warehouseFull")||!QuickAllowed(group))return "";
             string scope=HuntEdictQuickPresets.GlobalScope(group),selected=QuickPresetSelection(scope);
             return selected==HuntEdictQuickPresets.Custom?Loc.T("직접 설정"):HuntEdictQuickPresets.For(scope).FirstOrDefault(p=>p.id==selected)?.Name??"";
         }

@@ -172,7 +172,7 @@ namespace Hellscript
         string JournalTarget(int id)
         {
             var e=State.enemies.FirstOrDefault(x=>x.id==id);
-            return e==null?Loc.Source("대상 #{0}",id):Loc.Source("{0} #{1}",e.goblin?GoldenGoblin.Name:e.boss?GameCatalog.BossNames[e.pattern]:GameCatalog.EnemyNames[e.kind],id);
+            return e==null?Loc.Source("대상 #{0}",id):Loc.Source("{0} #{1}",e.goblin?GoldenGoblin.Name:EnemyCombat.Name(e),id);
         }
         void JournalDecision(Rule rule,string code,string detail,EnemyState target)
         {

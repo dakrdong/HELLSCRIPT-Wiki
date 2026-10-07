@@ -31,7 +31,7 @@ namespace Hellscript
         public float bornAt,rearWindow;
         public int auraSource=-1,rageStacks;
         public string state="대기";
-        public float[] traitCooldowns=new float[6];
+        public float[] traitCooldowns=new float[7];
         public EnemyActionState action=new EnemyActionState();
         public BossPatternState boss=new BossPatternState();
         public List<MotionObservation> observations=new List<MotionObservation>();
@@ -55,7 +55,7 @@ namespace Hellscript
         public string definitionId;
         public AttackShape shape;
         public Vector2 position,end,direction;
-        public float createdAt,delay,duration,interval,tick,damage,radius,innerRadius,angle,heroSlow;
+        public float createdAt,delay,duration,interval,tick,damage,radius,innerRadius,angle,heroSlow,pull;
         public bool shardBurst;
         // Follows its caster (enemyId) every tick: a boss's whirl that chases the hero.
         public bool followsCaster;
@@ -76,8 +76,9 @@ namespace Hellscript
     }
     public static class EnemyCombat
     {
-        public static readonly string[] TraitNames={"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적"};
+        public static readonly string[] TraitNames={"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적","인력 붕괴"};
         public static bool Trait(EnemyState enemy,int id)=>!enemy.boss&&(enemy.elite==id||enemy.eliteTraits!=null&&enemy.eliteTraits.Contains(id));
+        public static string Name(EnemyState enemy)=>enemy.boss?GameCatalog.BossNames[enemy.pattern]:enemy.kind==9&&Trait(enemy,6)?"인력술사":GameCatalog.EnemyNames[enemy.kind];
         public static string Id(int kind)=>kind>=100?BossCombat.Definition(kind):"N"+(kind+1).ToString("00");
         // Pack role per kind: 0 melee, 1 charger, 2 ranged, 3 area, 4 support, 5 exploder.
         // Kinds 0-11 keep their old kind%6 meaning; 12-19 are the field-specific additions.
@@ -180,6 +181,7 @@ namespace Hellscript
             return count;
         }
         public static EnemyThreat HazardThreat(EnemyHazard h)=>new EnemyThreat("hazard-"+h.id,h.definitionId,h.shape,h.position,h.end,h.direction,h.radius,h.innerRadius,h.angle,h.delay);
+        public static bool Pulls(EnemyHazard h,Vector2 position)=>h.pull>0&&h.delay>.00001f&&Contains(new EnemyThreat(null,h.definitionId,h.shape,h.position,h.end,h.direction,h.radius,h.innerRadius,h.angle),position);
         static Vector2 ArrowEnd(RiftNavigation navigation,Vector2 origin,Vector2 direction,float range)
             =>navigation==null?origin+direction*range:navigation.ProjectileEnd(origin,origin+direction*range,.2f,out _);
         public static IEnumerable<EnemyThreat> Threats(RunState run,RiftNavigation navigation=null)
@@ -216,7 +218,8 @@ namespace Hellscript
             run.enemies??=new List<EnemyState>();foreach(var e in run.enemies)
             {
                 e.brain??=new EnemyBrain();e.brain.action??=new EnemyActionState();e.brain.action.points??=new List<Vector2>();e.brain.observations??=new List<MotionObservation>();
-                if(e.brain.traitCooldowns==null||e.brain.traitCooldowns.Length!=6)e.brain.traitCooldowns=new float[6];
+                if(e.brain.traitCooldowns==null){e.brain.traitCooldowns=new float[7];if(e.brain.initialized)e.brain.traitCooldowns[6]=4;}
+                else if(e.brain.traitCooldowns.Length!=7){int length=e.brain.traitCooldowns.Length;Array.Resize(ref e.brain.traitCooldowns,7);if(length<7&&e.brain.initialized)e.brain.traitCooldowns[6]=4;}
                 e.brain.boss??=new BossPatternState();e.brain.boss.refuges??=new List<BossRefuge>();BossCombat.EnsureSlots(e.brain.boss);
             }
         }

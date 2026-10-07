@@ -21,6 +21,10 @@ The user pointed out that choice prerequisites ("unlock skill A or skill B") mak
 - The `optional` table in `audit-dependencies.cjs` adds the required skill and the optional targets and compares the total with the direct targets in the source text; the build refuses any new choice prerequisite.
 - The ultimate gate ("one skill from the preceding stage") has no branch link and is a design rule, so it is unchanged.
 
+## 2026-10-06 escape unlocks
+
+Ranger Retreat Leap (A04) and Mage Teleport (M04) open at hero **level 5**. Warrior Leap Slam (W02) remains at level 1. The two movement roots move into their first bands while descendant levels and prerequisites remain unchanged. [Implementation](../Implementation/Escape_Skill_Unlock_Level.en.md).
+
 ## 2026-10-05: branch parents and a clean link layout
 
 The user asked for the links in the skill tree to stop looking arbitrary and to read like the Diablo 2, 3 and 4 trees, with a clear before-and-after order. Until now 70 independent skills (about 23 per class) opened on level alone and hung from the branch trunk, while links existed only for the few skills whose effects read each other. This request replaces the earlier rule below that shared branch membership is not a dependency: **branches now have parent skills**.

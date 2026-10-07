@@ -9,16 +9,32 @@ namespace Hellscript
         RectTransform bossHud;
         Image bossHealthFill;
         Text bossTitle,bossActionLabel;
+        int gravityHudId=-1,gravityHudSeconds=-1;string gravityHudLanguage;
         void AddBossHud(RectTransform parent)
         {
             bossHud=Box("Boss status",parent,new Color(.025f,.035f,.05f,.94f));Place(bossHud,24,148,648,64);
             bossTitle=Label(bossHud,"",19,gold);Place(bossTitle.rectTransform,8,2,632,27);
             bossActionLabel=Label(bossHud,"",17,pale);Place(bossActionLabel.rectTransform,8,29,632,24);
             bossHealthFill=Bar(bossHud,new Vector2(8,56),new Vector2(632,5),new Color(.7f,.16f,.16f));
+            gravityHudId=-1;
         }
         void RefreshBossHud(EnemyState boss)
         {
-            if(bossHud==null)return;bossHud.gameObject.SetActive(boss!=null);if(boss==null)return;
+            if(bossHud==null)return;
+            if(boss==null)
+            {
+                EnemyHazard gravity=null;var run=game.Combat.State;
+                foreach(var h in run.enemyHazards)if(h.pull>0&&h.delay>0&&Vector2.Distance(run.position,h.position)<=14+h.radius&&game.Combat.Map.LineClear(run.position,h.position)&&(gravity==null||h.delay<gravity.delay))gravity=h;
+                bool show=gravity!=null;if(bossHud.gameObject.activeSelf!=show)bossHud.gameObject.SetActive(show);
+                if(!show){gravityHudId=-1;return;}int seconds=Mathf.CeilToInt(gravity.delay);
+                if(gravityHudId!=gravity.id||gravityHudSeconds!=seconds||gravityHudLanguage!=Loc.Language)
+                {
+                    gravityHudId=gravity.id;gravityHudSeconds=seconds;gravityHudLanguage=Loc.Language;
+                    bossTitle.text=Loc.T("인력 붕괴");bossActionLabel.text=Loc.F("폭발까지 {0}초 · 이동기로 원 밖으로 벗어나세요.",seconds);bossHealthFill.gameObject.SetActive(false);ReflowBossText();
+                }
+                return;
+            }
+            gravityHudId=-1;bossHud.gameObject.SetActive(true);
             bool visible=Vector2.Distance(game.Combat.State.position,boss.position)<=12&&game.Combat.Map.LineClear(game.Combat.State.position,boss.position);
             bossTitle.text=visible?Loc.F("{0} · HP {1:0.#}% · {2}", GameCatalog.BossNames[boss.pattern], 100*boss.health/boss.maxHealth, (boss.brain.boss.enraged?"후반":"전반")):Loc.F("{0} · 위치 확인 중", GameCatalog.BossNames[boss.pattern]);
             var a=boss.brain.action;bossActionLabel.text=Loc.T(!visible?"표시된 방향으로 접근하세요.":boss.bossControl.staggered>0?"제압되어 행동을 멈췄습니다.":Loc.T(boss.brain.state)+(a.phase==EnemyActionPhase.Preparing?Loc.F(" · {0:0.00}초 뒤 실행", a.remaining):""));
@@ -42,7 +58,7 @@ namespace Hellscript
             if(run.enemySlowTime>0)Note(content,Loc.F("얼음 고리 감속 · 이동속도 -35%\n{0:0.0}초 남음", run.enemySlowTime),21,90,pale);
             foreach(var e in run.enemies.Where(e=>!e.dead&&Vector2.Distance(run.position,e.position)<=12&&game.Combat.Map.LineClear(run.position,e.position)).OrderBy(e=>(e.position-run.position).sqrMagnitude).Take(12))
             {
-                var b=e.brain;var a=b.action;string name=e.boss?GameCatalog.BossNames[e.pattern]:GameCatalog.EnemyNames[e.kind];
+                var b=e.brain;var a=b.action;string name=EnemyCombat.Name(e);
                 Note(content,Loc.F("{0}\n{1} · HP {2:0} / {3:0}", name, (e.boss&&e.bossControl.staggered>0?"제압됨":b.state), e.health, e.maxHealth),22,94,gold);
                 if(a.phase!=EnemyActionPhase.Idle)Note(content,Loc.F("{0}\n조준 방향 고정{1}", (a.phase==EnemyActionPhase.Preparing?Loc.F("예고 {0:0.00}초", a.remaining):a.phase==EnemyActionPhase.Charging?"돌진 중":Loc.F("효과 진행 {0:0.00}초", a.remaining)), (a.kind==7||a.kind==(int)BossAttack.Charge?Loc.F(" · 남은 돌진 {0}회", a.remainingCharges):a.kind==(int)BossAttack.Slam?Loc.F(" · 남은 타격 {0}회", a.remainingCharges):a.kind==(int)BossAttack.DevouringPull&&a.remainingCharges>1?" · 끌어당긴 뒤 물기":"")),19,88,pale);
                 if(e.boss)
@@ -53,8 +69,9 @@ namespace Hellscript
                     else if(adds>0)Note(content,Loc.F("살아 있는 소환 부하 {0}/8", adds),19,64,pale);
                     if(b.boss.refuges.Count>0)Note(content,a.kind==(int)BossAttack.HymnOfSilence?Loc.F("찬가를 피할 지점 {0}곳\n파란 윤곽 안에서는 침묵의 찬가 피해를 받지 않습니다.", b.boss.refuges.Count):Loc.F("폭발을 피할 지점 {0}곳\n파란 윤곽은 이번 연속 폭발의 범위 밖입니다.", b.boss.refuges.Count),19,88,pale);
                 }
-                string traits=string.Join(" / ",Enumerable.Range(0,6).Where(i=>EnemyCombat.Trait(e,i)).Select(i=>EnemyCombat.TraitNames[i]));
+                string traits=string.Join(" / ",Enumerable.Range(0,EnemyCombat.TraitNames.Length).Where(i=>EnemyCombat.Trait(e,i)).Select(i=>Loc.T(EnemyCombat.TraitNames[i])));
                 if(traits!="")Note(content,traits,19,64,pale);
+                if(EnemyCombat.Trait(e,6))Note(content,"지름 5m 원 안에서 중심으로 끌어당긴 뒤 5초 후 폭발합니다. 이동기로 원 밖을 벗어나세요.",19,88,pale);
                 if(b.auraSource>=0)Note(content,"종지기 오라 · 공격 +20%",19,56,gold);
                 if(b.rageStacks>0)Note(content,Loc.F("분노 {0}/5 · 공격 +{1}%", b.rageStacks, b.rageStacks*10),19,56,gold);
                 if(b.rearWindow>0)Note(content,Loc.F("후방 취약 · {0:0.00}초", b.rearWindow),19,56,gold);
@@ -66,7 +83,7 @@ namespace Hellscript
         static string EnemyEventName(string kind)
         {
             if(kind.StartsWith("STATE:"))return kind.Substring(6);if(kind.StartsWith("INTERRUPTED:"))return Loc.F("중단 · {0}", kind.Substring(12));
-            switch(kind){case "PREPARE":return "공격 예고 시작";case "RELEASE":return "공격 실행";case "ACTION_END":return "동작 완료";case "FOLLOWUP_PREPARE":return "후속 공격 예고";case "HAZARD_CREATED":return "장판·사망 효과 생성";case "CORPSE_CONSUMED":return "사체 사용 확정";case "RAGE":return "분노 누적";case "HEAL":return "아군 회복";case "AURA_APPLIED":return "공격 강화 적용";case "AURA_REMOVED":return "공격 강화 해제";case "ENRAGED":return "후반 패턴으로 전환";case "SUMMONED":return "부하 소환 완료";case "PLAN_DEFERRED":return "안전한 폭발 배치 재검토";default:return kind;}
+            switch(kind){case "PREPARE":return "공격 예고 시작";case "RELEASE":return "공격 실행";case "ACTION_END":return "동작 완료";case "FOLLOWUP_PREPARE":return "후속 공격 예고";case "HAZARD_CREATED":return "장판·사망 효과 생성";case "HAZARD_RELEASE":return "장판 폭발";case "CORPSE_CONSUMED":return "사체 사용 확정";case "RAGE":return "분노 누적";case "HEAL":return "아군 회복";case "AURA_APPLIED":return "공격 강화 적용";case "AURA_REMOVED":return "공격 강화 해제";case "ENRAGED":return "후반 패턴으로 전환";case "SUMMONED":return "부하 소환 완료";case "PLAN_DEFERRED":return "안전한 폭발 배치 재검토";default:return kind;}
         }
     }
 }

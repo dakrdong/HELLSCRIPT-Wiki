@@ -1,0 +1,324 @@
+{
+  "updatedAt": "2026-10-06T19:44:22.653827+00:00",
+  "approvedScope": "stages 1-9, unmerged PRs",
+  "policy": "owned active retreat can use real potions to return HP; stock and cooldown preserved",
+  "styleCorrection": "new-account ApplyStyle uses CombatStyleScope; preserve prior potion 60 percent",
+  "completedChecks": [
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-adjusted.xml",
+      "fixture": {
+        "hp": [
+          1100,
+          650,
+          900
+        ],
+        "attack": [
+          0.65,
+          0.4,
+          0.4
+        ],
+        "warning": 0.65,
+        "initialSpacing": 0.6
+      },
+      "counts": {
+        "total": 18,
+        "passed": 4,
+        "failed": 14,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"baseline\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"emergency\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"baseline-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"emergency-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"baseline\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"emergency\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"baseline-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"emergency-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"baseline\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"emergency\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"baseline-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"emergency-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-warning.xml",
+      "fixture": {
+        "hp": [
+          600,
+          800,
+          1200
+        ],
+        "attack": [
+          0.43,
+          0.326,
+          0.326
+        ],
+        "warning": 0.2,
+        "initialSpacing": 0.6
+      },
+      "counts": {
+        "total": 18,
+        "passed": 12,
+        "failed": 6,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-staggered.xml",
+      "fixture": {
+        "hp": [
+          450,
+          800,
+          1100
+        ],
+        "attack": [
+          0.396,
+          0.3,
+          0.3
+        ],
+        "warning": 0.2,
+        "initialCooldown": 2,
+        "initialSpacing": 1
+      },
+      "counts": {
+        "total": 18,
+        "passed": 14,
+        "failed": 4,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-cadence.xml",
+      "fixture": {
+        "hp": [
+          800,
+          800,
+          1100
+        ],
+        "attack": [
+          0.396,
+          0.3,
+          0.3
+        ],
+        "warning": 0.2,
+        "cooldown": 6.4,
+        "initialCooldown": 2,
+        "initialSpacing": 1.6
+      },
+      "counts": {
+        "total": 18,
+        "passed": 14,
+        "failed": 4,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"baseline\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"emergency\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-return-window.xml",
+      "fixture": {
+        "hp": [
+          800,
+          800,
+          1500
+        ],
+        "attack": [
+          0.37,
+          0.28,
+          0.28
+        ],
+        "warning": 0.2,
+        "cooldown": 6.4,
+        "initialCooldown": 2,
+        "initialSpacing": 1.6
+      },
+      "counts": {
+        "total": 21,
+        "passed": 12,
+        "failed": 9,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"baseline-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"emergency-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"balanced-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"baseline-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"emergency-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-quarter-burst.xml",
+      "fixture": {
+        "hp": [
+          500,
+          450,
+          1000
+        ],
+        "attack": [
+          0.43,
+          0.326,
+          0.326
+        ],
+        "warning": 0.2,
+        "cooldown": 1.5,
+        "initialCooldown": 2
+      },
+      "counts": {
+        "total": 21,
+        "passed": 15,
+        "failed": 6,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful-after-aggressive\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,2,\"win-careful-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-l5-health-margin.xml",
+      "fixture": {
+        "hp": [
+          250,
+          250,
+          500
+        ],
+        "attack": [
+          0.43,
+          0.326,
+          0.326
+        ],
+        "warning": 0.2,
+        "cooldown": 1.5,
+        "initialCooldown": 2
+      },
+      "counts": {
+        "total": 21,
+        "passed": 19,
+        "failed": 2,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,0,\"win-careful\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(5,1,\"win-careful-after-aggressive\")"
+      ]
+    },
+    {
+      "report": "/Users/t8g-2410-pn-005/.codex/worktrees/puzzle-tutorial/HELLSCRIPT/Artifacts/PuzzleTutorial/20261006/stage3-margin-l7-aux.xml",
+      "fixture": {
+        "hp": [
+          234,
+          215,
+          500
+        ],
+        "attack": [
+          0.43,
+          0.326,
+          0.326
+        ],
+        "warning": 0.2,
+        "cooldown": 1.5,
+        "initialCooldown": 2,
+        "L7Extras": "four sides and distance; invalid EDGE enum in distance"
+      },
+      "counts": {
+        "total": 20,
+        "passed": 15,
+        "failed": 5,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,0,\"win-escape-distance\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,0,\"win-escape-four-sides\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,1,\"win-escape-distance\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,1,\"win-escape-four-sides\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,2,\"win-escape-distance\")"
+      ]
+    },
+    {
+      "report": "stage3-owned-kit-matrix.xml",
+      "counts": {
+        "total": 79,
+        "passed": 76,
+        "failed": 3,
+        "skipped": 0
+      },
+      "failedCases": [
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,0,\"win-escape-distance\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,0,\"win-escape-four-sides\")",
+        "TheActualSavedPolicyDeterminesThePuzzleOutcome(7,1,\"win-escape-distance\")"
+      ]
+    },
+    {
+      "report": "stage3-l7-reserved-kit.xml",
+      "counts": {
+        "total": 16,
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failedCases": []
+    },
+    {
+      "report": "stage3-potion-help-localization.xml",
+      "counts": {
+        "total": 52,
+        "passed": 52,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failedCases": []
+    }
+  ],
+  "nextFixture": null,
+  "gate": "PASSED: 79 puzzle cases and 188 reused shared-policy checks; unchanged L2/L5 results reused",
+  "finalFixture": {
+    "l5hp": [
+      234,
+      215,
+      500
+    ],
+    "l5attack": [
+      0.43,
+      0.326,
+      0.326
+    ],
+    "guardWarning": 0.2,
+    "guardCooldown": 1.5,
+    "l7hp": [
+      900,
+      1750,
+      1750
+    ],
+    "l7reserveSkill": "ON",
+    "starterWeapon": "owned attack20 retained"
+  }
+}

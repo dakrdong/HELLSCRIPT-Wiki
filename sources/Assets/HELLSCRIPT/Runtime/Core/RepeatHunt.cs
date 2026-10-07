@@ -58,11 +58,11 @@ namespace Hellscript
     {
         public const int SettingsUnlockStage=15;
         public const string SettingsLockedMessage="반복 설정은 균열 15레벨 부터 가능합니다";
-        public static bool SettingsUnlocked(AccountSave account)=>account!=null&&ContentUnlocks.AccountClear(account)>=SettingsUnlockStage&&(HuntEdictProgression.Legacy(account)||account.guide?.runeBoard?.step==RuneBoardLesson.Complete);
+        public static bool SettingsUnlocked(AccountSave account)=>account!=null&&(PuzzleTutorial.Active(account)&&PuzzleTutorial.Option(account,"repeat.enabled")||PuzzleTutorial.Progress(account.guide?.puzzle,13)?.cleared==true||ContentUnlocks.AccountClear(account)>=SettingsUnlockStage&&(HuntEdictProgression.Legacy(account)||account.guide?.runeBoard?.step==RuneBoardLesson.Complete));
         public static bool Terminal(RunState run)=>run!=null&&(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed);
         public static RepeatHuntSession Start(RunState run,RepeatHuntPolicy policy,RepeatHuntSession previous=null)
         {
-            if(run==null||run.training>=0)return null;
+            if(run==null||run.training>=0&&!PuzzleTutorial.HuntRound(run))return null;
             var s=previous??new RepeatHuntSession{id=Guid.NewGuid().ToString("N"),heroId=run.heroId};
             if(s.heroId!=run.heroId)throw new InvalidOperationException("반복 사냥의 캐릭터가 일치하지 않습니다.");
             s.runId=run.id;s.policy=policy;s.pendingResult=null;s.delayElapsed=0;s.stop=RepeatStop.None;s.blocked=RepeatBlock.None;
@@ -77,7 +77,7 @@ namespace Hellscript
         }
         public static bool Complete(RepeatHuntSession s,RunState run,RepeatHuntPolicy policy,int highestClear)
         {
-            if(s==null||!Terminal(run)||run.training>=0||s.heroId!=run.heroId||s.runId!=run.id||s.completedRunId==run.id)return false;
+            if(s==null||!Terminal(run)||run.training>=0&&!PuzzleTutorial.HuntRound(run)||s.heroId!=run.heroId||s.runId!=run.id||s.completedRunId==run.id)return false;
             s.policy=policy;s.pendingResult=run;s.completedRunId=run.id;s.completed++;
             s.gold+=Math.Max(0,run.earnedGold);bool won=run.phase==RunPhase.Cleared;
             s.consecutiveFailures=won?0:s.consecutiveFailures+1;
@@ -134,7 +134,7 @@ namespace Hellscript
         // must not cancel or complete a hunting goal. Chests use the same staged receipt as their reward.
         public static void GrantGold(AccountSave account,RunState run,int amount)
         {
-            if(amount<=0||run.training>=0)return;
+            if(amount<=0||run.training>=0&&!PuzzleTutorial.HuntRound(run))return;
             int awarded=(int)Math.Min(amount,(long)int.MaxValue-account.gold);
             account.gold+=awarded;run.earnedGold+=awarded;
             CombatJournal.Append(run,"GOLD_GRANTED",Loc.Source("골드 {0} 획득 · 이번 균열 누적 {1}",awarded,run.earnedGold),trigger:"RIFT_REWARD");

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="184.1462439">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5178" result="Failed" site="Child" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="184.146244" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="6962" name="Hellscript.Tests.dll" fullname="/private/tmp/hellscript-tutorial-replay-v3-20261005-6hihv708/project/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5178" result="Failed" site="Child" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="183.983524" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="84000" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="6963" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5178" result="Failed" site="Child" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="183.852099" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="6964" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="5178" result="Failed" site="Child" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="183.658023" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="5333" name="ObjectiveProgressTests" fullname="Hellscript.Tests.ObjectiveProgressTests" classname="Hellscript.Tests.ObjectiveProgressTests" runstate="Runnable" testcasecount="19" result="Failed" site="Child" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="183.460242" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="5340" name="ExplorationWalksToEveryKnownOfferingAndDeliversWithoutTeleporting" fullname="Hellscript.Tests.ObjectiveProgressTests.ExplorationWalksToEveryKnownOfferingAndDeliversWithoutTeleporting" methodname="ExplorationWalksToEveryKnownOfferingAndDeliversWithoutTeleporting" classname="Hellscript.Tests.ObjectiveProgressTests" runstate="Runnable" seed="1702449376" result="Failed" start-time="2026-10-05 08:24:47Z" end-time="2026-10-05 08:27:51Z" duration="183.432217" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[Timeout value of 180000 ms was exceeded. If this is intended, increase the timeout value using a TimeoutAttribute.]]></message>
+                <stack-trace><![CDATA[]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

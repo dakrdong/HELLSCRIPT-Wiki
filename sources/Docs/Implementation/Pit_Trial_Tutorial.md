@@ -1,5 +1,9 @@
 # 최종 시험 — 구덩이 튜토리얼
 
+## 2026-10-07 퍼즐 튜토리얼 v5
+
+신규 필수 진입은 레벨 데이터 `PuzzleTutorial.json`과 `GameStore.StartPuzzleLevel`을 사용한다. v4의 강제 패배 체력 하한, 제자리 이동 고정, 시간에 따른 공격 보정은 제거했다. 아래 구덩이 v4 설명과 검증은 과거 구현 기록이다. 현재 코어와 이전 정책은 [퍼즐 코어 기록](Puzzle_Tutorial_Core.md)을 따른다.
+
 갱신일: 2026-10-06
 
 [English](Pit_Trial_Tutorial.en.md)
