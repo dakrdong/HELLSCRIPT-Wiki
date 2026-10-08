@@ -185,7 +185,10 @@ namespace Hellscript
         public void BeginRiftEntry(bool accelerated)=>BeginRun(-1,false,null,false,false,accelerated?1.5f:1);
         public void RestartRift(string portalId)=>BeginRun(-1,false,null,false,replaceRunId:portalId);
         public void TogglePause()
-        {if(!Active)return;if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
+        {if(!Active)return;
+            // A tutorial run that is waiting is resumed by its card (which checks the level's skills), not by the pause button.
+            if(TutorialActive&&Combat.TutorialWaiting){UI.ShowTutorialPrompt();return;}
+            if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
         public void SetSpeed(float speed)
         {
             if(!CombatSpeedAccess.CanSelect(speed)){Notify(CombatSpeedAccess.LockedMessage);return;}
@@ -369,7 +372,7 @@ namespace Hellscript
             else combatClock.Pause();
             if(!DisplayDimmed&&!backgroundPaused)World.Present(run,Mathf.Min(real,.25f));
             if(run.portal&&!portalCleanupTried)TryPortalCleanup();else if(!run.portal)portalCleanupTried=false;
-            if(run.portal&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse"&&UI.Page!="gem-menu")UI.ShowBag(true);
+            if(run.portal&&Active&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse"&&UI.Page!="gem-menu")UI.ShowBag(true);
             if(!Active&&!resultShown)
             {
                 resultShown=!Combat.IsPuzzle||run.tutorialReplay||Store.RecordPuzzleAttempt(run);

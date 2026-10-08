@@ -470,7 +470,8 @@ namespace Hellscript
             bool compact=seconds<=2;
             toastFrame.anchorMin=new Vector2(compact?.5f:.05f,0);toastFrame.anchorMax=new Vector2(compact?.5f:.95f,0);
             toastFrame.sizeDelta=new Vector2(compact?Mathf.Min(root.rect.width*.9f,toast.preferredWidth+32):0,62);
-            if(Page=="battle"&&!compact){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
+            // The battle HUD shows a long toast in its brief line only; a tutorial run keeps the toast, since its refusals and errors are the only word the player gets.
+            if(Page=="battle"&&!compact&&!game.TutorialActive){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
             Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
         }
         void LateUpdate()
