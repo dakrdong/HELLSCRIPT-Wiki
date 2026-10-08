@@ -30,7 +30,9 @@ namespace Hellscript
         void LateUpdate()
         {
             if (game == null || fog == null || game.DisplayDimmed) return;
-            var size = ((RectTransform)transform.parent).rect.size; var camera = Camera.main;
+            var camera = Camera.main;
+            if (camera == null) return; // the gameplay camera is disabled behind full-screen overlays, so Camera.main is null
+            var size = ((RectTransform)transform.parent).rect.size;
             Vector2 x = new Vector2(camera.transform.right.x, camera.transform.right.z), y = new Vector2(camera.transform.up.x, camera.transform.up.z);
             if (size != lastSize || x != axisX || y != axisY)
             {
