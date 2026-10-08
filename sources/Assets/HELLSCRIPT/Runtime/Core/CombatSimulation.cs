@@ -82,7 +82,8 @@ namespace Hellscript
                 if(restore==null&&ground)State.build.classSkills.automatic=State.build.classSkills.automatic.Where(id=>!trainingGround.excluded.Contains(id)).ToArray();
                 State.build.classSkills.ProjectLegacy(State.build,catalog);
             }
-            State.slotLevels=BlacksmithCatalog.SlotLevels(State,Hero);
+            // A puzzle level is tuned for the hero the tutorial hands out, so the slot levels its forge buys wait for graduation.
+            State.slotLevels=IsPuzzle?new SlotProgress().levels:BlacksmithCatalog.SlotLevels(State,Hero);
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;statsHero.slotProgress=new SlotProgress{levels=(int[])State.slotLevels.Clone()};
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
             if(IsPuzzle)Stats.dodge=0;

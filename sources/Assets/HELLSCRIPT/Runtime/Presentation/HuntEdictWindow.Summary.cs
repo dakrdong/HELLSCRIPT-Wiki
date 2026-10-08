@@ -85,6 +85,8 @@ namespace Hellscript
             else
             {
                 var selected=groups.Single(g=>HuntEdictSummary.Key(g)==selectedGroup);
+                // The puzzle tutorial has no summary tab, so its combat styles lead the combat tab, above the first group's settings.
+                if(PuzzleLesson&&SelectedTab=="combat"&&selected==groups[0]&&HasFeature(HuntEdictProgression.Styles)){DrawStyles(editor,w-14);Heading(editor,selected.title,w-14);}
                 Paragraph(editor,selected.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed)?selected.Description:"현재 공개된 설정으로 사냥 규칙을 정하세요.",w-14,12,muted);
                 if(changedOnly&&!selected.ids.Where(Disclosed).Any(id=>HuntEdictSummary.Changed(Session.Draft.edict,Session.Baseline.edict,id)))Paragraph(editor,"조건에 맞는 설정이 없습니다.",w-14,12,muted);
                 else DrawSelectedGroup(editor,w-14,selected);

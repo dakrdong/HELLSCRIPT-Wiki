@@ -16,8 +16,8 @@ The status area is a fixed overlay (sorting order 600), so when another menu sli
 
 The hub's bottom menu is now `Inventory · Hunt Edict · Waiting room · Blacksmith · Settings`. The button names `hub-menu-0…4` are unchanged; number 3 changed from skills to the blacksmith.
 
-- **Blacksmith**: opens the existing `BlacksmithWindow` as is (on `PuzzleStore`, so a review uses its throwaway account). The four services follow the same rift unlock conditions as in town. A tutorial account has none, so the sealed screen with its unlock conditions shows for now. Deciding with `ContentUnlocks` which service a tutorial level opens is enough for the window to show it. The icon is the new picture `Resources/Art/PuzzleHub/ui/icon-blacksmith.png`; its prompt and provenance are in `Docs/Art/PuzzleHub/ui-kit-4-*`.
-- **Hunt Edict tabs**: in the tutorial the `Summary` tab shows only from the level where the combat style cards open (L4), and before that only `Skills · Combat · Survival` (plus loot, bag, exploration and so on as they open). The tab selected when the window first opens is `Skills` until the level's skills are learned, then the first rules tab. The summary was not removed entirely because the L4 "Combat style" answer (aggressive/balanced/careful cards) lives on it and existing smokes tap those cards.
+- **Blacksmith**: opens the existing `BlacksmithWindow` as is (on `PuzzleStore`, so a review uses its throwaway account). The four services follow the same rift unlock conditions as in town; which service the tutorial opens, and in what order, is in [Tutorial forge](Tutorial_Forge_20261008.en.md) (at the time of this PR they were all sealed). The icon is the new picture `Resources/Art/PuzzleHub/ui/icon-blacksmith.png`; its prompt and provenance are in `Docs/Art/PuzzleHub/ui-kit-4-*`.
+- **Hunt Edict tabs**: the tutorial has no `Summary` tab (this PR kept it from L4 on; a follow-up removed it, see [Tutorial forge](Tutorial_Forge_20261008.en.md)). The tabs are `Skills · Combat · Survival` (plus loot, bag, exploration and so on as they open). The tab selected when the window first opens is `Skills` until the level's skills are learned, then the first rules tab. The L4 "Combat style" answer (aggressive/balanced/careful cards, `edict-style-*`) sits at the top of the `Combat` tab.
 - **First-skill lesson (L1)**: the highlighted button moved from `hub-menu-3` to `hub-menu-1` (Hunt Edict). The line now reads "Open the Hunt Edict and learn your first power on its Skills tab." (`GameUI.TutorialPit.cs`). `PuzzleHubWindow.SkillButton` was generalised into `MenuButton(int)`.
 
 ## 4. The battle gear, content shortcuts and event icon take the skill icon size
@@ -57,7 +57,7 @@ The account's five tutorial fields (`mapComplete`, `mapHero`, `armorId`, `tutori
 Button positions and names moved, which affects guide lines and the pointer ring.
 
 1. Hub bottom menu number 3 changed from Skills to Blacksmith (`hub-menu-3`). Skills are learned in `hub-menu-1` Hunt Edict, tab `edict-tab-skills`.
-2. The Hunt Edict window's tabs are `Skills · Combat · Survival`. `Summary` (`edict-tab-overview`) shows only after the combat style cards open (L4 on). At L1 there is a single `Skills` tab.
+2. The Hunt Edict window's tabs are `Skills · Combat · Survival`. There is no `Summary` (`edict-tab-overview`). The combat style cards (`edict-style-*`) sit at the top of the `Combat` tab (`edict-tab-combat`) from L4 on. At L1 there is a single `Skills` tab.
 3. The hub has no level left/right buttons (`hub-left`, `hub-right`).
 4. The HP, resource and experience area moves with the page when menus slide.
 5. Battle screen, top right: the settings gear, the dock beneath it (`콘텐츠 메뉴`, `사냥 칙령` …) and the event icon on the left (`field-events`) all grew to the skill icon size. Their positions moved down.
