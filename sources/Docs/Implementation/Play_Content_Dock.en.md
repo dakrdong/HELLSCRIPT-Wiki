@@ -123,3 +123,7 @@ The fix declares `[RequireComponent(typeof(CanvasRenderer))]` on all six custom 
 ## Remaining
 
 When the Character screen exists, replace its notice with a real entry point. The Rune Board was replaced on 2026-09-17. In a very small landscape town window (around 360 high) the bottom of the open dock can overlap the NPC interaction card on the right; folding clears it, and the card can be moved if needed.
+
+## Battle size — 2026-10-08
+
+The battle screen's settings gear, content shortcuts and event icon now take the skill icons' size with the town's formula (`GlobalHudLayout.ShortcutIcon`: the skill icon's size on screen × 1.15, at least 44 screen pixels in town and 44 page units in battle). On 16:9 landscape that is 88.3 page units at any resolution. The map panel, observation menu, power saving and escape step back by the width of that column. See [Tutorial hub follow-up and per-hero tutorials](Tutorial_Hub_Followup_20261008.en.md).

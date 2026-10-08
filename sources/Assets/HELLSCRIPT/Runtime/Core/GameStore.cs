@@ -391,7 +391,7 @@ namespace Hellscript
                 edictBoundary.guide=Data.guide;edictBoundary.contentUnlocks=Data.contentUnlocks;edictBoundary.selectedHero=Data.selectedHero;
                 foreach(var h in edictBoundary.heroes){var current=Data.heroes.FirstOrDefault(v=>v.id==h.id)??Data.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass);if(current!=null)h.level=current.level;}
                 HuntEdictProgression.ValidateTransaction(edictBoundary,data,edictSession);
-                Tutorials.Normalize(data);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
+                Tutorials.Normalize(data,false);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
                 ContentUnlocks.Reconcile(data);
                 HuntEdictProgression.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);

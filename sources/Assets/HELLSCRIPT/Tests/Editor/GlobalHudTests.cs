@@ -37,6 +37,26 @@ namespace Hellscript.Tests
             }
             finally{Object.DestroyImmediate(host);if(created&&font!=null)Object.DestroyImmediate(font);}
         }
+        // The gear and the content shortcuts are the skill icons' size (plus the emblem margin) on a landscape screen at any resolution, never under
+        // their minimum, and six of them always fit above the HUD.
+        [Test] public void ShortcutsMatchTheSkillIconsAndKeepTheirMinimum()
+        {
+            var style=GlobalHudStyle.Load();
+            foreach(var size in new[]{new Vector2Int(854,450),new Vector2Int(956,440),new Vector2Int(1600,900),new Vector2Int(1600,1000),new Vector2Int(2100,900),new Vector2Int(440,956),new Vector2Int(360,780)})
+            {
+                var hud=new GlobalHudLayout(size.x,size.y,1f,style);float canvas=UiTheme.Scale(new Rect(0,0,size.x,size.y))*.5f;
+                float hudTop=(size.y-hud.potionBounds.yMax*hud.scale)/canvas,skillWidth=hud.actives[0].width,skill=skillWidth*hud.scale;string where=" at "+size.x+"x"+size.y;
+                float town=GlobalHudLayout.ShortcutIcon(skillWidth,hud.scale,canvas,hudTop,44/canvas),battle=GlobalHudLayout.ShortcutIcon(skillWidth,hud.scale,canvas,hudTop,44);
+                Assert.That(town*canvas,Is.GreaterThanOrEqualTo(Mathf.Min(44f,skill)-.01f),"Town shortcut smaller than its pointer target or a skill icon"+where);
+                Assert.That(battle,Is.GreaterThanOrEqualTo(44f-.01f),"Battle shortcuts shrank below the 44 page units they always had"+where);
+                Assert.That(6*town,Is.LessThanOrEqualTo(hudTop),"Six town shortcuts do not fit above the HUD"+where);Assert.That(6*battle,Is.LessThanOrEqualTo(hudTop),"Six battle shortcuts do not fit above the HUD"+where);
+                if(size.x>size.y&&size.x<=1600&&size.y<=900&&battle*canvas>44.01f)Assert.That(battle*canvas,Is.EqualTo(skill*1.15f).Within(.01f),"A landscape battle shortcut is not the skill icon's size"+where);
+            }
+            Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,1,1,731,44),Is.EqualTo(88.32f).Within(.01f));
+            Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,.5f,.5f,731,44),Is.EqualTo(88.32f).Within(.01f),"The size must not depend on the window size in landscape");
+            Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,1,1,200,44),Is.LessThan(88.32f),"Six shortcuts must fit even in a short window");
+            Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,.275f,.543f,1705,44),Is.EqualTo(44.7f).Within(.1f),"A small portrait window keeps the shortcuts at about the 44 page units they always had in battle");
+        }
         [Test] public void LandscapeLocksApprovedGeometry()
         {
             var p=new GlobalHudLayout(1600,900);

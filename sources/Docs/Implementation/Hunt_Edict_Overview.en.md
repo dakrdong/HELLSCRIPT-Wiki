@@ -169,3 +169,7 @@ The macOS development build with new heroes on Balanced succeeded with no errors
 - No Android or iOS build was made.
 - Whether new players actually understand faster was not tested with people.
 - The advice thresholds were not tuned against real play records.
+
+## The summary tab in the puzzle tutorial — 2026-10-08
+
+On a puzzle-tutorial account the `Summary` tab shows from the level where the combat style cards open (L4), and before that only `Skills · Combat · Survival` show. Skills left the hub's bottom menu, so this window's `Skills` tab carries them. The tab selected on opening is `Skills` until the level's skills are learned, then the first rules tab. An ordinary account's window is unchanged. See [Tutorial hub follow-up and per-hero tutorials](Tutorial_Hub_Followup_20261008.en.md).

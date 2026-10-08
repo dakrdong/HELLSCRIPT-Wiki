@@ -21,6 +21,8 @@ namespace Hellscript
         readonly List<(int index,Button button)> characterButtons=new List<(int,Button)>();
         public bool CommonPanelOpen=>windowHost!=null&&windowHost.BlocksGameplay||commonModal!=null||hudPanel!=null||idleIntroductionOpen||PlayInventoryOpen||EquipmentShopOpen||BlacksmithOpen||RuneMasterOpen||GearRecommendationDetails!=null;
         public bool BlocksRepeat=>RiftVictory?.RetryCounting==true||runeSession||CommonPanelOpen||presetModal!=null||root!=null&&root.Find("Confirm")!=null;
+        // The title and the character screen, where the hero is chosen before the game begins.
+        public bool EntryPage=>Page=="title"||Page=="characters";
         public void ShowScreenSettings()=>ShowCommonPanel(false);
         public void ShowCombatOverview(){ShowCommonPanel(false);SelectCombatTab();}
         void ShowHelp()=>ShowCommonPanel(true);
@@ -38,9 +40,14 @@ namespace Hellscript
             var hint=Label(commonWorld,"배경을 누르면 닫힙니다.",17,pale,TextAnchor.MiddleCenter);hint.rectTransform.anchorMin=new Vector2(0,0);hint.rectTransform.anchorMax=new Vector2(1,0);hint.rectTransform.sizeDelta=new Vector2(-24,40);hint.rectTransform.anchoredPosition=new Vector2(0,28);
             commonCard=Box("Common dialog",commonSafe,ink);commonCard.anchorMin=commonCard.anchorMax=commonCard.pivot=new Vector2(.5f,.5f);
             commonHeading=Label(commonCard,"설정",26,gold);Span(commonHeading.rectTransform,18,8,18,40);commonTabs=Rect("Common categories",commonCard);
+            // The tutorial keeps its hero, so the character tab is gone while it runs; signing out, the way to another hero, moves to the account tab.
+            bool heroLocked=!EntryPage&&Tutorials.Mandatory(game.Store.Data);characterButtons.Clear();characterPane=null;characterNotice=characterMessage=null;
             foreach(var entry in new[]{(SettingsSection.Screen,"화면"),(SettingsSection.Sound,"소리"),(SettingsSection.Language,"언어"),(SettingsSection.Character,"캐릭터 변경"),(SettingsSection.Account,"계정")})
-            {var tab=entry.Item1;var b=Button(commonTabs,entry.Item2,()=>SelectSettingsTab(tab));b.name="settings-tab-"+tab;b.GetComponentInChildren<Text>().fontSize=18;}
-            BuildDisplayPane();BuildSoundPane();BuildLanguagePane();BuildCharacterPane();BuildAccountPane();BuildInformationPanes();
+            {
+                if(heroLocked&&entry.Item1==SettingsSection.Character)continue;
+                var tab=entry.Item1;var b=Button(commonTabs,entry.Item2,()=>SelectSettingsTab(tab));b.name="settings-tab-"+tab;b.GetComponentInChildren<Text>().fontSize=18;
+            }
+            BuildDisplayPane();BuildSoundPane();BuildLanguagePane();if(!heroLocked)BuildCharacterPane();BuildAccountPane(heroLocked);BuildInformationPanes();
             commonClose=Button(commonCard,"×",CloseCommonPanel);commonClose.name="settings-close";((UiButton)commonClose).Configure(UiButtonRole.Quiet);commonClose.GetComponentInChildren<Text>().fontSize=24;
             commonLaidOut=false;SelectSettingsTab(help?SettingsSection.Help:SettingsSection.Screen);ReflowCommonPanel();
         }
@@ -107,7 +114,7 @@ namespace Hellscript
             foreach(var choice in languageButtons)UiTheme.Choice(choice.button,choice.code==game.Language.Language,false);
             languageMessage.text=Loc.T(string.IsNullOrEmpty(game.Language.Message)?game.LanguageLoadNotice:game.Language.Message);
             foreach(var choice in characterButtons)choice.button.interactable=game.CanChangeCharacterFromSettings&&choice.index!=game.Store.Data.selectedHero;
-            characterNotice.text=Loc.T(game.TutorialActive?"성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다.":game.CanChangeCharacterFromSettings?"캐릭터를 변경하면 마을로 돌아갑니다. 진행 중인 사냥과 반복 사냥은 종료되며, 이미 획득한 장비와 보상은 보존됩니다.":"균열 사냥 중에는 캐릭터를 변경할 수 없습니다.");
+            if(characterNotice!=null)characterNotice.text=Loc.T(game.TutorialActive?"성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다.":game.CanChangeCharacterFromSettings?"캐릭터를 변경하면 마을로 돌아갑니다. 진행 중인 사냥과 반복 사냥은 종료되며, 이미 획득한 장비와 보상은 보존됩니다.":"균열 사냥 중에는 캐릭터를 변경할 수 없습니다.");
             RefreshAccountPane();
         }
         void ReflowCommonPanel()

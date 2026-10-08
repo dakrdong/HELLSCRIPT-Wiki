@@ -121,11 +121,8 @@ namespace Hellscript
                 plazaJoystick.Reflow(TownJoystick.Bounds(safe.width,safe.height,layout),scale);
                 float cardScale=layout.scale/Mathf.Max(.001f,scale);
                 float gap=UiTheme.Gap*cardScale,edge=12*cardScale;
-                float iconSize=Mathf.Max(44/scale,layout.actives[0].width*1.15f*cardScale);
-                float available=(safe.height-layout.potionBounds.yMax*layout.scale)/scale-3*edge;
-                iconSize=Mathf.Min(iconSize,(available-5*gap)/6);
-                Right((RectTransform)plazaSettings.transform,edge,edge,iconSize,iconSize);
-                var gear=(RectTransform)plazaSettings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(iconSize*.2f);gear.offsetMax=-gear.offsetMin;
+                float iconSize=DockIconSize((safe.height-layout.potionBounds.yMax*layout.scale)/scale,true);
+                Right((RectTransform)plazaSettings.transform,edge,edge,iconSize,iconSize);CompactGear(plazaSettings,iconSize);
                 Right((RectTransform)contentDock.transform,edge,edge+iconSize+gap,iconSize,iconSize);contentDock.Reflow(iconSize,gap);
                 ReflowEventButton();
                 headerTitle.fontSize=18;float fullTitleWidth=headerTitle.preferredWidth;

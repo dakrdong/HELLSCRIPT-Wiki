@@ -10,6 +10,8 @@ namespace Hellscript
         Button powerSavingButton,escapeButton;Text powerSavingCaption,escapeCaption;
         Vector2 battleSize;
         Rect battleSafe;
+        // Width of the gear and the content shortcuts, in page units; the map panel and the header lines keep clear of that column.
+        float dockIcon=44;
         float battleJournalTop,battleBossHeight;
         string battleFault="";
         bool battleBoss;
@@ -55,6 +57,8 @@ namespace Hellscript
             BattleViewport=UiSafeArea.FrameNormalized;
             battleWorld.anchorMin=BattleViewport.min;battleWorld.anchorMax=BattleViewport.max;battleWorld.offsetMin=battleWorld.offsetMax=Vector2.zero;
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
+            var hud=globalHud?.Layout;
+            dockIcon=hud==null?44:DockIconSize(root.rect.height-(LiveJournalHudInset+hud.potionBounds.yMax*hud.scale)/BattleCanvasScale,false);
             var mini=riftMinimapPanel;var panel=default(Rect);float map=0;if(mini!=null)panel=ReflowRiftMinimap(mini,narrow,float.MaxValue,out map);
             var medals=ReflowBattleMedallions(w,panel);
             // Header lines that share rows with a landscape map panel or the medallions stop short of them.
@@ -66,8 +70,10 @@ namespace Hellscript
             Place(timerText.rectTransform,18,63,narrow?w-36:90,22);
             Place(meterText.rectTransform,narrow?18:112,narrow?87:63,narrow?w-36:Mathf.Max(100,Mathf.Min(w-240,End(63,24)-112)),24);meterText.fontSize=narrow?13:15;
             Place(actionText.rectTransform,18,narrow?112:88,Mathf.Min(w-36,End(narrow?112:88,22)-18),22);
-            var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Place((RectTransform)settings.transform,w-56,8,44,44);
-            var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,medals.width>0?medals.xMin-52:w-108,8,44,44);
+            // Gear and content dock fold out beneath each other in one column, the size of the skill icons.
+            var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Right((RectTransform)settings.transform,12,8,dockIcon,dockIcon);CompactGear(settings,dockIcon);
+            Right((RectTransform)contentDock.transform,12,14+dockIcon,dockIcon,dockIcon);contentDock.Reflow(dockIcon,6);ReflowEventButton();
+            var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,medals.width>0?medals.xMin-52:w-64-dockIcon,8,44,44);
             // Boss status owns the top centre. On phones it gets the first clear row under the header,
             // with symmetric width beside the map; neither the map nor a moved graph may push it downward.
             float bossY=w>=1200?8:narrow?158:120,bossWidth=Mathf.Min(430,w-36);
@@ -87,7 +93,7 @@ namespace Hellscript
             var pair=new[]{(powerSavingButton,powerSavingCaption),(escapeButton,escapeCaption)}.Where(p=>p.Item1.gameObject.activeSelf).ToArray();
             if(pair.Length==0)return default;
             const float side=40,cell=84,top=8;
-            float left=w-64-pair.Length*cell,bottom=top+side;
+            float left=w-20-dockIcon-pair.Length*cell,bottom=top+side;
             for(int i=0;i<pair.Length;i++)
             {
                 var (button,label)=pair[i];label.fontSize=12;float x=left+i*cell;
@@ -116,7 +122,7 @@ namespace Hellscript
             trainingHud=null;
             activityHud=null;
             if(battleWorld!=null){battleWorld.gameObject.SetActive(false);Destroy(battleWorld.gameObject);}
-            battleWorld=null;battleSize=Vector2.zero;BattleViewport=UiSafeArea.FrameNormalized;
+            battleWorld=null;battleSize=Vector2.zero;dockIcon=44;BattleViewport=UiSafeArea.FrameNormalized;
         }
     }
 }

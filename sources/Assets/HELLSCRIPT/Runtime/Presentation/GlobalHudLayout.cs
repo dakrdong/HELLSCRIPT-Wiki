@@ -124,6 +124,15 @@ namespace Hellscript
             xpText=new Rect(m,style.landscapeXpTextY,200,Row(style.xpTextHeight,style.captionFont));
             occupiedHeight=Mathf.Max(status.yMax,potionBounds.yMax)+16;
         }
+        // Page units of a content shortcut (and the settings gear): a skill icon's size on screen (skill logical units at the HUD scale, in page units
+        // at the canvas scale) plus 15% for the clear margin the emblem art keeps inside its square, not under minimum page units, and small enough
+        // that six of them fit between the top edge and hudTop (the page height where the HUD starts). The town asks for 44 screen pixels as its
+        // minimum, the battle for the 44 page units its shortcuts always had.
+        public static float ShortcutIcon(float skill,float hudScale,float canvasScale,float hudTop,float minimum)
+        {
+            float card=hudScale/Mathf.Max(.001f,canvasScale);
+            return Mathf.Min(Mathf.Max(minimum,skill*1.15f*card),(hudTop-3*12*card-5*UiTheme.Gap*card)/6);
+        }
         public Rect Pixels(Rect r)=>new Rect(r.x*scale,r.y*scale,r.width*scale,r.height*scale);
         public int FontSize(float basis,int minimum)=>Mathf.Max(1,Mathf.RoundToInt(Mathf.Max(basis,minimum)*scale));
         public static float ContentWidth(int count,float icon=44,float gap=8)=>Mathf.Max(0,count)*icon+Mathf.Max(0,count-1)*gap;

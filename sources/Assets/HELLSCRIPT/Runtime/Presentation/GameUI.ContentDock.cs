@@ -44,6 +44,19 @@ namespace Hellscript
             // Before the scroll arrives the dock is laid out but unseen, so the emblem has a place to fly to.
             if(prologue&&game.Combat.State.tutorialPhase==ProloguePhase.Surrounded){var hidden=dock.gameObject.AddComponent<CanvasGroup>();hidden.alpha=0;hidden.blocksRaycasts=false;}
         }
+        // The gear and the shortcuts are as large as the skill icons (see GlobalHudLayout.ShortcutIcon).
+        float DockIconSize(float hudTop,bool minimumInPixels)
+        {
+            var layout=globalHud.Layout;float scale=root.parent.GetComponent<Canvas>().scaleFactor;
+            return GlobalHudLayout.ShortcutIcon(layout.actives[0].width,layout.scale,scale,hudTop,minimumInPixels?44/scale:44);
+        }
+        // The settings gear beside the shortcuts: no plate, its glyph inset in the square.
+        void CompactGear(Button settings,float size)
+        {
+            settings.GetComponent<Image>().color=Color.clear;
+            var border=settings.GetComponent<UIRectBorder>();if(border!=null)border.enabled=false;
+            var gear=(RectTransform)settings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(size*.2f);gear.offsetMax=-gear.offsetMin;
+        }
         Image Emblem(Button button,string sprite)
             =>Emblem(button,Resources.Load<Sprite>("Art/GlobalHUD/"+sprite));
         Image Emblem(Button button,Sprite sprite)

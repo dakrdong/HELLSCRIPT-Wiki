@@ -29,7 +29,8 @@ namespace Hellscript
         public int SelectedStage=1;
         public bool Running => Combat!=null;
         public bool Active => Combat!=null&&Combat.State.phase!=RunPhase.Cleared&&Combat.State.phase!=RunPhase.Failed;
-        public bool CanChangeCharacterFromSettings=>!TutorialActive&&!(Active&&Combat.State.training<0);
+        // The tutorial keeps its hero: to play another hero, sign out and choose them on the character screen (which continues that hero's own tutorial).
+        public bool CanChangeCharacterFromSettings=>!TutorialActive&&!(Active&&Combat.State.training<0)&&(UI.EntryPage||!Tutorials.Mandatory(Store.Data));
         public float EffectiveSpeed =>
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             RuntimePresentationProfile.Speed*
@@ -83,13 +84,13 @@ namespace Hellscript
         }
         public void SelectHero(int index)
         {
-            if(Running)return;CancelRiftEntry();CancelPotionDeparture();Store.Data.selectedHero=Mathf.Clamp(index,0,2);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
+            if(Running)return;CancelRiftEntry();CancelPotionDeparture();Tutorials.Switch(Store.Data,Store.Data.selectedHero,Mathf.Clamp(index,0,2));SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
         public bool ChangeCharacterFromSettings(int index)
         {
             if(TutorialActive){Notify(Loc.T("성소에 도착한 뒤 캐릭터를 바꿀 수 있습니다."));return false;}
             if(!CanChangeCharacterFromSettings){Notify(Loc.T("균열 사냥 중에는 캐릭터를 변경할 수 없습니다."));return false;}
-            if(UI.Page=="title"||UI.Page=="characters")
+            if(UI.EntryPage)
             {
                 if(!SaveEntryCharacter(index))return false;
                 UI.CloseCommonPanel();if(UI.EntrySession.SignedIn)UI.OpenCharacterSelection();else UI.ShowTitle();return true;
