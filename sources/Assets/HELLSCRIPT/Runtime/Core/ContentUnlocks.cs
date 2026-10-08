@@ -106,7 +106,7 @@ namespace Hellscript
             return string.IsNullOrEmpty(f.early)?text:text+" · "+Loc.T(f.early);
         }
         // Inside the tutorial a service the tutorial opens names its level instead of the rift stage that opens it afterwards.
-        public static string Condition(AccountSave a,string id)=>PuzzleTutorial.Active(a)&&PuzzleTutorial.ForgeLevel(id)>0?Loc.F("튜토리얼 {0}레벨을 클리어하면 개방됩니다",PuzzleTutorial.ForgeLevel(id)):Condition(id);
+        public static string Condition(AccountSave a,string id)=>!PuzzleTutorial.Active(a)||PuzzleTutorial.ForgeLevel(id)==0?Condition(id):id==Enhance?Loc.F("튜토리얼 {0}레벨에서 개방됩니다",PuzzleTutorial.ForgeUnlockLevel(id)):Loc.F("튜토리얼 {0}레벨을 클리어하면 개방됩니다",PuzzleTutorial.ForgeLevel(id));
         public static void RecordRunEnd(AccountSave a){a.contentUnlocks.firstRunEnded=true;Reconcile(a);}
         // Call only after the real gem acquisition transaction succeeds; no gem grants are invented here.
         public static void RecordGemAcquisition(AccountSave a){a.contentUnlocks.gemAcquired=true;Reconcile(a);}

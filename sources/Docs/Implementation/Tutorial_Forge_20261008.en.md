@@ -1,5 +1,7 @@
 # Tutorial forge and the removed summary tab
 
+> 2026-10-08 (PR #77): Maintenance puzzle P2 (the +1 enhancement with 110 trial gold) is replaced by the equipment-enhancement level L14 and gone; gear enhancement also opens after the first loss at L14, through the same `ForgeOpen` gate. Three faces of danger and graduation became L15 and L16. "L15" in the table below means the last level (`PuzzleTutorial.Count`). See [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
+
 Updated: 2026-10-08 · [한국어](Tutorial_Forge_20261008.md)
 
 One PR answers three requests. (1) Remove the `Summary` tab from the Hunt Edict window in the tutorial and fix what was connected to it. (2) Decide the order in which the blacksmith's services appear in the tutorial, simplest first. (3) Hand out the materials for enhancement as tutorial rewards. The earlier record is [Tutorial hub follow-up and per-hero tutorials](Tutorial_Hub_Followup_20261008.en.md).

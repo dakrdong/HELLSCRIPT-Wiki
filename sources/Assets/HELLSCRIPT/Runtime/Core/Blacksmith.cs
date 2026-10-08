@@ -47,14 +47,12 @@ namespace Hellscript
         public static string Format(Item item,float value)=>BlacksmithCatalog.Format(Stat(item),value);
         public static bool Apply(AccountSave a,Item item,GearUpgradeQuote q)
         {
-            bool lesson=PuzzleTutorial.MaintenanceUpgrade(a,item,q);
-            if(item==null||q==null||!ContentUnlocks.Has(a,ContentUnlocks.Enhance)&&!lesson||!a.Hero.inventory.Contains(item)||JsonUtility.ToJson(item)!=q.fingerprint)return false;
+            if(item==null||q==null||!ContentUnlocks.Has(a,ContentUnlocks.Enhance)||!a.Hero.inventory.Contains(item)||JsonUtility.ToJson(item)!=q.fingerprint)return false;
             var current=Quote(item,a.gold,q.amount);
             if(current.to!=q.to||current.gold!=q.gold||!current.Affordable(a.gold))return false;
-            if(lesson)a.guide.puzzle.maintenance.undo=RuneGrowth.Copy(item);
             a.gold-=(int)q.gold;item.enhancement=q.to;
-            if(lesson){var m=a.guide.puzzle.maintenance;m.spent=(int)q.gold;m.budget-=m.spent;m.upgradeFingerprint=JsonUtility.ToJson(item);}
-            if(!lesson)DailyQuests.Record(a,DailyQuestActivity.EnhanceEquipment,current.to-current.from);return true;
+            // The forge lesson's trial gold is not a daily-quest action.
+            if(!PuzzleTutorial.ForgeLessonOpen(a))DailyQuests.Record(a,DailyQuestActivity.EnhanceEquipment,current.to-current.from);return true;
         }
     }
     [Serializable] public sealed class SlotProgress

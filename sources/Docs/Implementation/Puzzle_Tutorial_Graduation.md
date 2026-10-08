@@ -1,5 +1,7 @@
 # 퍼즐 튜토리얼 졸업 — 8단계
 
+> 2026-10-08: 이 문서의 레벨 수치·예고·쿨타임 설명은 몬스터 패턴을 조정하던 이전 구현의 기록이다. 현재 구성은 [몬스터 고유 패턴 원칙](Puzzle_Tutorial_Native_Patterns.md)을 따른다.
+
 작성 2026-10-07. [English](Puzzle_Tutorial_Graduation.en.md) · [운영 퍼즐](Puzzle_Tutorial_Operations.md) · [검증 수치와 해시](Evidence/Puzzle_Graduation_Matrix.json)
 
 L14·L15를 실제 전투로 구현하고, 15개 레벨의 저장된 첫 클리어 기록을 졸업에 연결했다. 승인된 L4 N09 추가 구현과 9단계 네이티브·최종 검증이 남아 있으므로 전체 튜토리얼 수락 완료로 보고하지 않는다.

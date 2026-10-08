@@ -1,5 +1,7 @@
 # Puzzle tutorial graduation — stage 8
 
+> 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
+
 Written 2026-10-07. [한국어](Puzzle_Tutorial_Graduation.md) · [Operating puzzles](Puzzle_Tutorial_Operations.en.md) · [Values and hashes](Evidence/Puzzle_Graduation_Matrix.json)
 
 L14/L15 use real combat and graduation uses the saved first clears of all fifteen lessons. Implementation of the approved L4 N09 addition and stage 9 native/final acceptance remain. This is not complete tutorial acceptance.

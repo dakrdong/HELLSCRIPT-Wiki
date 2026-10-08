@@ -1,5 +1,7 @@
 # Operating and maintenance puzzles — stage 7
 
+> 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
+
 Written 2026-10-07. Connects L9–L13 and noncombat P1/P2 to actual loot, equipment, chest, cleanup, enhancement and repeat-hunt owners. This is not final tutorial acceptance. L4 ownership approval and stages 8–9 remain. No new images, packages or project copies are introduced.
 
 ## Transactions and outcomes

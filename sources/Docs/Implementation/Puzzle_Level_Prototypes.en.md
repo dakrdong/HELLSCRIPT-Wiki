@@ -1,5 +1,7 @@
 # Puzzle tutorial L2/L5/L7 simulation prototypes
 
+> 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
+
 Created: 2026-10-07 · [한국어](Puzzle_Level_Prototypes.md)
 
 **Stage3 gate passed: 79 passed, 0 failed, 0 skipped.** Apply the approved Warrior L2 edge answer and shared retreat healing policy; stages4–9 follow. This PR contains test-only arenas and shared potion policy. The runner, hub, XP and graduation are subsequent stages. No PR merge or public wiki deployment.

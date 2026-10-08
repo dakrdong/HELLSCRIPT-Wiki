@@ -1,5 +1,7 @@
 # Puzzle tutorial content — stage 5
 
+> 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
+
 Written 2026-10-07. Implements mandatory tutorial v5 L3–L8, disclosure restrictions, scouting, actual damage reviews, the hint ladder and A/B comparisons using copies of the real hero. **The final L4 configuration and acceptance criteria are updated in the [stage 9 record](Puzzle_Tutorial_Final_Acceptance.en.md).** This is not a completed-tutorial report.
 
 Only disclosed options may be displayed or committed. The track permits rank-one learning/equipment; skill policy editing starts at L8 and common attack order at L15. The instructor commits a real edit session. Reviews separate real deaths from duration failures and include only actual HP lost during the final five seconds. Saved hints survive restart and level four allows the instructor to apply settings.

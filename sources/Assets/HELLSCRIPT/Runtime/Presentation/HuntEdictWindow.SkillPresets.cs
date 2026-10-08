@@ -61,7 +61,7 @@ namespace Hellscript
             {
                 float rest=w-backWidth-12*Grow;
                 Button(parent,"기본 공격",x+backWidth+6*Grow,y,rest*.47f,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",10).name="edict-policy-basic";
-                if(!PuzzleLesson||PuzzleLevel>=15)Button(parent,"공통 공격 순서",x+backWidth+6*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
+                if(!PuzzleLesson||PuzzleLevel>=PuzzleTutorial.Count)Button(parent,"공통 공격 순서",x+backWidth+6*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
             }
             else Text(parent,SkillName(policySkill),x+backWidth+8*Grow,y,w-backWidth-16*Grow,heading,12,gold);
             var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+6,w,100);

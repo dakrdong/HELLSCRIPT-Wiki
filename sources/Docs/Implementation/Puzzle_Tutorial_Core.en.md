@@ -42,3 +42,12 @@ A v5 checkpoint must match `tutorial-v5`, its owner/current level/wave cursor an
 - The full EditMode suite and macOS development-player smoke/interaction validation are consolidated at final stage9. This evidence does not claim player, browser, physical-mobile or performance acceptance.
 
 Evidence: `Artifacts/PuzzleTutorial/20261006/stage4-validation.json`, `stage4-core-ui.xml`, `stage4-checkpoint-objectives.xml`, `stage4-domain-ui.xml`. Failed reports and synthetic saves stay in the task directory; permanent deletion has not been authorized. PRs remain unmerged. The merger publishes the public wiki from integrated main.
+
+## Commander voice rules (2026-10-08)
+
+- The Commander is a taciturn career officer: short, dry lines, sparing with praise, a single word when she approves. She treats the player as an apprentice and speaks in one register only (plain imperative Korean, never mixing polite and casual forms).
+- Dialogue is dialogue. She does not recite monster rosters, numbers, level layout or system explanations (the `PuzzleScout` roster line was removed). Facts such as rewards, new skills and the damage review sit in a separate speakerless narration line.
+- Every level has its own `scout` (start), `review` (loss or timeout) and `clear` (win). Hints run: ① what is going wrong, ② what must change, ③ which edict tab and option (using the on-screen names in quotes), ④ the setting the Commander wrote for you, by name. Asking once more after hint 3 makes `PuzzleInstructor` save the answer, so hint 4 says "I wrote it for you; open it and read" (the forge level, L14, has no edict to write, so its hints end at the blacksmith).
+- **Anticipation:** the last thing said after a win is a single line (`hook`) in which the Commander looks past the pit. Level 1 opens with "the door opens only for those who finish the trial", level 15's opening says "get past this and the door opens", and the level 15 win carries the biggest beat as the door opens. The clues build from the door, to a greater darkness, to the rift, to the smith in the village beyond, to why the edict came to you, to the Commander's own curiosity. Anton's arrival adds "only the shallowest part of the rift is open". Replays stay silent.
+- Anton Jindark's arrival lines use one register and leave the controls to the movement guide (F01).
+- Out of scope: legacy pit v4 and prologue v2/v3 lines, guide bodies in `Tutorials.cs`, Rune Master and shop resident briefings.

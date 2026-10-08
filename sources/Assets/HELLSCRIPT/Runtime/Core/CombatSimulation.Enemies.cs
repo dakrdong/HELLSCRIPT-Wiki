@@ -57,9 +57,8 @@ namespace Hellscript
         }
         void BeginEnemyAction(EnemyState enemy,float? remaining=null,int variant=0)
         {
-            var puzzle=PuzzleEnemy(enemy);
             var b=enemy.brain;var def=variant==1&&enemy.kind==14?EnemyCombat.GhoulLeap:EnemyCombat.Attack(enemy.kind);var a=new EnemyActionState{id=State.nextId++,kind=enemy.kind,phase=EnemyActionPhase.Preparing,origin=enemy.position,aim=remaining.HasValue?enemy.aim:State.position,
-                preparation=remaining??(puzzle?.preparation>0?puzzle.preparation:def.preparation),remaining=remaining??(puzzle?.preparation>0?puzzle.preparation:def.preparation),remainingCharges=enemy.kind==7||enemy.kind==12?2:enemy.kind==1?1:0,variant=variant};
+                preparation=remaining??def.preparation,remaining=remaining??def.preparation,remainingCharges=enemy.kind==7||enemy.kind==12?2:enemy.kind==1?1:0,variant=variant};
             if(enemy.kind==9&&!remaining.HasValue)a.aim=EnemyPredictedAim(enemy);
             a.direction=(a.aim-a.origin).normalized;if(a.direction.sqrMagnitude<.00001f)a.direction=b.facing;
             if(enemy.kind==1||enemy.kind==7)a.aim=Map.MoveDirect(a.origin,a.origin+a.direction*8,8,.4f);
@@ -71,7 +70,6 @@ namespace Hellscript
             // escapes by stepping into the ring's middle or out past it.
             if(enemy.kind==19&&!remaining.HasValue){var toward=a.origin-State.position;a.aim=State.position+(toward.sqrMagnitude>1e-6f?toward.normalized:Vector2.up)*2.6f;}
             b.action=a;b.facing=a.direction;enemy.aim=a.aim;enemy.windup=a.remaining;enemy.cooldown=Mathf.Max(enemy.cooldown,def.cooldown);
-            if(puzzle?.repeatCooldown>0)enemy.cooldown=puzzle.repeatCooldown;
             EnemyMode(enemy,"공격 준비");EnemyEvent(enemy,"PREPARE",action:a.id,value:a.remaining,aim:a.aim);
         }
         void InterruptEnemyAction(EnemyState enemy,string reason)
