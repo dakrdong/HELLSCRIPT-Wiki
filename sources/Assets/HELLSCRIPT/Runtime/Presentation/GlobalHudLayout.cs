@@ -9,7 +9,7 @@ namespace Hellscript
         public float landscapeSkill=76.8f,portraitSkill=64,landscapePotion=45,portraitPotion=60,skillGap=12,groupGap=24;
         public float statusIcon=44,statusGap=8,fade=22,collapsed=230,expanded=408,expandSeconds=.18f;
         public float xpThickness=3,xpBottom=16;
-        public float minimumScale=.4f,sealX=24,sealY=60,landscapeSeal=112,portraitSeal=96,levelY=42,levelWidth=88,levelHeight=24;
+        public float minimumScale=.4f,sealX=24,sealY=60,landscapeSeal=112,portraitSeal=96,levelY=42,levelWidth=88,levelHeight=24,edictGap=10;
         public float landscapeVitalsX=152,portraitVitalsX=136,landscapeVitalWidth=300,portraitVitalWidth=260,minimumVitalWidth=120;
         public float landscapeVitalHeight=20,portraitVitalHeight=18,vitalGap=8,landscapeVitalY=86,portraitVitalY=96;
         public float centerClearance=160,portraitWrapWidth=760,skillBottom=32,rowGap=28;
@@ -68,7 +68,7 @@ namespace Hellscript
     {
         public readonly float scale,width,height,statusIcon,statusGap,buttonHit,maximumStatusWidth;
         public readonly bool landscape,wrapped;
-        public readonly Rect seal,level,hp,resource,shield,shieldLine,status,xp,xpText,potionBounds,ultimate;
+        public readonly Rect seal,edict,potionSettings,level,hp,resource,shield,shieldLine,status,xp,xpText,potionBounds,ultimate;
         public readonly Rect[] actives=new Rect[4],potions=new Rect[3];
         public readonly float occupiedHeight;
         // Reading pages reserve at most 42% for the persistent HUD. Fit the entire HUD into that
@@ -105,9 +105,13 @@ namespace Hellscript
             // never for an unscaled pixel floor that would enlarge text after the next HUD refresh.
             float Row(float height,float font)=>Mathf.Max(height,font);
             seal=new Rect(origin+style.sealX,style.sealY,sealSize,sealSize);
+            // The Hunt Edict button rides on the seal, a skill icon in size, so the combat settings are one tap from the hero.
+            edict=new Rect(seal.center.x-s*.5f,seal.yMax+style.edictGap,s,s);
             level=new Rect(seal.center.x-style.levelWidth*.5f,style.levelY,style.levelWidth,Row(style.levelHeight,style.levelFont));
             resource=new Rect(left,baseY,barWidth,vitalHeight);
             hp=new Rect(left,baseY+vitalHeight+style.vitalGap,barWidth,vitalHeight);
+            // Right of the two bars, as tall as both: the potion thresholds are one tap from the vitals they guard.
+            potionSettings=new Rect(left+barWidth+style.edictGap,resource.y,hp.yMax-resource.y,hp.yMax-resource.y);
             shieldLine=new Rect(left,hp.yMax+1,barWidth,2);
             shield=new Rect(left,hp.yMax+3,barWidth,Row(style.shieldHeight,style.shieldFont));
             float activeY=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);

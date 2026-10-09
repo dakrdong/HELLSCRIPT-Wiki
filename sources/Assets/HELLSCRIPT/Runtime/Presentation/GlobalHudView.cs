@@ -13,11 +13,14 @@ namespace Hellscript
         public Action<HudEffectState> EffectSelected;
         public Action<HudSlotState> SlotSelected;
         public Action AllEffectsSelected;
+        public Action EdictSelected,PotionSettingsSelected;
+        public Action<int> SkillTapped,SkillHeld,PotionTapped,PotionHeld;
         readonly Dictionary<string,Sprite> sprites=new Dictionary<string,Sprite>();
         readonly Dictionary<int,Sprite> atlasSprites=new Dictionary<int,Sprite>();
         readonly List<Sprite> owned=new List<Sprite>();
         readonly List<Slot> slots=new List<Slot>();
-        RectTransform safe,seal,level,hp,resource,xp;
+        RectTransform safe,seal,level,hp,resource,xp,edict,potionSettings;
+        Image edictEmblem;
         Image face,hpFill,resourceFill,xpFill,sealFrame,shieldLine;
         Text levelLabel,hpLabel,resourceLabel,shieldLabel,xpLabel;
         readonly List<RectTransform> ticks=new List<RectTransform>();
@@ -35,6 +38,14 @@ namespace Hellscript
             gameObject.AddComponent<GraphicRaycaster>();
             safe=Rect("HUD safe area",transform);
             seal=CreateSeal(safe,"Class seal",out face,out sealFrame);
+            edict=Rect("Hunt edict",safe);edictEmblem=Picture("Emblem",edict,"menu-hunt-edict");Stretch(edictEmblem.rectTransform);edictEmblem.preserveAspect=true;
+            var edictHit=edict.gameObject.AddComponent<Image>();edictHit.color=Color.clear;var edictButton=edict.gameObject.AddComponent<Button>();edictButton.targetGraphic=edictHit;edictButton.transition=Selectable.Transition.None;
+            edictButton.onClick.AddListener(()=>EdictSelected?.Invoke());edict.gameObject.SetActive(false);
+            potionSettings=Rect("Threshold potion button",safe);var settingsPlate=Picture("Plate",potionSettings,"mask-square");Stretch(settingsPlate.rectTransform);settingsPlate.color=style.slotPlate;
+            var settingsIcon=Picture("Icon",potionSettings,"potion-hp");Stretch(settingsIcon.rectTransform);settingsIcon.preserveAspect=true;
+            var settingsFrame=Picture("Frame",potionSettings,"frame-active");Stretch(settingsFrame.rectTransform);
+            var settingsHit=potionSettings.gameObject.AddComponent<Image>();settingsHit.color=Color.clear;var settingsButton=potionSettings.gameObject.AddComponent<Button>();settingsButton.targetGraphic=settingsHit;settingsButton.transition=Selectable.Transition.None;
+            settingsButton.onClick.AddListener(()=>PotionSettingsSelected?.Invoke());potionSettings.gameObject.SetActive(false);
             level=Rect("Level",safe);Stretch(Picture("Level badge",level,"badge-level").rectTransform);levelLabel=Text("Level text",level,20);Stretch(levelLabel.rectTransform);
             hp=Vital("HP",style.hpColor,out hpFill,out hpLabel);
             resource=Vital("Resource",style.resourceColor,out resourceFill,out resourceLabel);
@@ -44,9 +55,9 @@ namespace Hellscript
             xpFill=Picture("Progress",xp,"fill-white");Stretch(xpFill.rectTransform);xpFill.color=style.xpColor;xpFill.type=Image.Type.Filled;xpFill.fillMethod=Image.FillMethod.Horizontal;
             for(int i=1;i<10;i++){var t=Picture("XP "+i*10+"%",xp,i==5?"xp-tick-major":"xp-tick");ticks.Add(t.rectTransform);}
             xpLabel=Text("XP text",safe,16);xpLabel.alignment=TextAnchor.MiddleLeft;xpLabel.color=Gold;
-            for(int i=0;i<3;i++)slots.Add(CreateSlot("Potion "+i,true));
-            for(int i=0;i<4;i++)slots.Add(CreateSlot("Active "+i,false));
-            slots.Add(CreateSlot("Ultimate",false));
+            for(int i=0;i<3;i++)slots.Add(CreateSlot("Potion "+i,true,i));
+            for(int i=0;i<4;i++)slots.Add(CreateSlot("Active "+i,false,i));
+            slots.Add(CreateSlot("Ultimate",false,4));
             var strip=Rect("Status strip",safe);StatusStrip=strip.gameObject.AddComponent<StatusStripView>();
             StatusStrip.Initialize(this,font,e=>EffectSelected?.Invoke(e),()=>AllEffectsSelected?.Invoke());ready=true;
         }
@@ -57,7 +68,7 @@ namespace Hellscript
             var border=Picture("Border",r,"frame-vital");Stretch(border.rectTransform);border.type=Image.Type.Sliced;
             label=Text(name+" value",r,16);Stretch(label.rectTransform);label.alignment=TextAnchor.MiddleLeft;return r;
         }
-        Slot CreateSlot(string name,bool potion)
+        Slot CreateSlot(string name,bool potion,int index=-1)
         {
             var slot=new Slot{root=Rect(name,safe),potion=potion};
             if(!potion)
@@ -78,8 +89,13 @@ namespace Hellscript
             slot.glyph=Picture("Potion kind",slot.root,"");slot.glyph.enabled=potion;
             slot.number=Text("Cooldown time",slot.root,25);Stretch(slot.number.rectTransform);
             slot.caption=Text("Caption",slot.root,16);
-            var b=slot.root.gameObject.AddComponent<Button>();var target=slot.root.gameObject.AddComponent<Image>();target.color=Color.clear;b.targetGraphic=target;b.transition=Selectable.Transition.None;
-            b.onClick.AddListener(()=>{if(slot.data!=null)SlotSelected?.Invoke(slot.data);});return slot;
+            var target=slot.root.gameObject.AddComponent<Image>();target.color=Color.clear;
+            // A slot is a tap (swap list) or a hold (details); the gauge rings the icon while the hold fills.
+            var gauge=Picture("Hold gauge",slot.root,"mask-circle");Stretch(gauge.rectTransform);gauge.color=new Color(style.gold.r,style.gold.g,style.gold.b,.6f);
+            gauge.type=Image.Type.Filled;gauge.fillMethod=Image.FillMethod.Radial360;gauge.fillOrigin=2;gauge.fillClockwise=true;gauge.fillAmount=0;gauge.enabled=false;
+            var hold=slot.root.gameObject.AddComponent<HoldPress>();hold.gauge=gauge;
+            hold.Tap=()=>{if(slot.data!=null)(potion?PotionTapped:SkillTapped)?.Invoke(index);};hold.Hold=()=>{if(slot.data!=null)(potion?PotionHeld:SkillHeld)?.Invoke(index);};
+            return slot;
         }
         public void SetSnapshot(GlobalHudSnapshot data,float interfaceFactor,bool fitContent=false,float bottomInset=0)
         {
@@ -106,6 +122,17 @@ namespace Hellscript
             for(int i=0;i<slots.Count;i++)UpdateSlot(slots[i],i<3?data.potions[i]:i<7?data.actives[i-3]:data.ultimate);
             StatusStrip.SetEffects(data.ObservationEffects());
         }
+        public RectTransform EdictButton=>edict;
+        public void SetEdictButton(bool visible){if(edict.gameObject.activeSelf!=visible)edict.gameObject.SetActive(visible);}
+        // Slot 0-3 are the four actives, 4 the ultimate.
+        public RectTransform SkillSlot(int index)=>slots[3+index].root;
+        public HudSlotState SkillState(int index)=>slots[3+index].data;
+        public RectTransform PotionSlot(int index)=>slots[index].root;
+        public HudSlotState PotionState(int index)=>slots[index].data;
+        public RectTransform PotionButton=>potionSettings;
+        public void SetPotionButton(bool visible){if(potionSettings.gameObject.activeSelf!=visible)potionSettings.gameObject.SetActive(visible);}
+        // The button dims while its settings are fanned out, so it reads as the thing being edited.
+        public void SetEdictOpen(bool open)=>edictEmblem.color=open?style.gold:Color.white;
         static float Ratio(float value,float maximum)=>maximum>0?Mathf.Clamp01(value/maximum):0;
         void UpdateSlot(Slot slot,HudSlotState data)
         {
@@ -123,7 +150,7 @@ namespace Hellscript
         void Reflow()
         {
             void Place(RectTransform t,Rect r)=>SetRect(t,Layout.Pixels(r));
-            Place(seal,Layout.seal);Place(level,Layout.level);Place(hp,Layout.hp);Place(resource,Layout.resource);Place(xp,Layout.xp);Place(xpLabel.rectTransform,Layout.xpText);
+            Place(seal,Layout.seal);Place(edict,Layout.edict);Place(potionSettings,Layout.potionSettings);Place(level,Layout.level);Place(hp,Layout.hp);Place(resource,Layout.resource);Place(xp,Layout.xp);Place(xpLabel.rectTransform,Layout.xpText);
             Place(shieldLabel.rectTransform,Layout.shield);Place(shieldLine.rectTransform,Layout.shieldLine);
             for(int i=0;i<slots.Count;i++)
             {

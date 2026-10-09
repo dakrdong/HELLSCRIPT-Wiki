@@ -43,7 +43,7 @@ namespace Hellscript
             // The puzzle tutorial shows the live DPS graph and the damage taken per monster kind from level 2.
             if(game.TrainingGroundRun||run.training<0&&!run.tutorial||PuzzleGraphs(run))BuildTrainingHud(run);
             if(PuzzleGraphs(run))BuildIncomingHud();
-            BuildRiftActivityHud(run);BuildLiveJournal();RefreshHud();ReflowBattleHud();
+            BuildRiftActivityHud(run);RefreshHud();ReflowBattleHud();
         }
         void ReflowBattleHud()
         {
