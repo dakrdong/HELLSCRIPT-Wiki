@@ -89,12 +89,16 @@ namespace Hellscript
             float s=style.landscapeSkill,g=style.skillGap;
             float row5=5*s+4*g,row3=3*s+2*g,row8=row5+row3+style.groupGap;
             float requested=Mathf.Sqrt(Mathf.Max(1,pixelsWide*pixelsHigh)/(style.referenceLong*style.referenceShort))*interfaceFactor;
-            // One immutable landscape composition, fitted as a group at every aspect ratio.
-            // Portrait must not enlarge potions, shorten XP or split ultimate/active skills.
-            float fit=Mathf.Min(pixelsWide/style.referenceLong,pixelsHigh/style.referenceShort);
+            // One landscape composition, fitted as a group at every aspect ratio, never split or rewrapped.
+            // A portrait screen has no use for the empty middle of the landscape composition: the potion group closes up to the
+            // vitals (and the potion settings button beside them), so the whole HUD is as large as the screen's width allows.
+            float settingsSide=2*Mathf.Max(style.landscapeVitalHeight,style.valueFont+2)+style.vitalGap;
+            float compactLong=style.landscapeVitalsX+style.landscapeVitalWidth+style.edictGap+settingsSide+style.edictGap+row8+style.margin;
+            float composition=landscape?style.referenceLong:Mathf.Min(style.referenceLong,compactLong);
+            float fit=Mathf.Min(pixelsWide/composition,pixelsHigh/style.referenceShort);
             scale=Mathf.Max(.01f,Mathf.Min(requested,fit));
             width=pixelsWide/scale;height=pixelsHigh/scale;
-            float origin=(width-style.referenceLong)*.5f,m=style.margin+origin;
+            float origin=(width-composition)*.5f,m=style.margin+origin;
             float left=style.landscapeVitalsX+origin,barWidth=style.landscapeVitalWidth;
             wrapped=false;
             float rightStart=width-m-row8;
@@ -124,7 +128,7 @@ namespace Hellscript
             float sy=Mathf.Max(style.landscapeStatusY,shield.yMax+1);
             status=new Rect(left,sy,style.collapsed,statusIcon+style.statusTextHeight);
             maximumStatusWidth=Mathf.Max(style.collapsed,Mathf.Min(style.expanded,potions[0].x-status.x-buttonHit-20));
-            xp=new Rect(m,style.xpBottom,style.referenceLong-2*style.margin,style.xpThickness);
+            xp=new Rect(m,style.xpBottom,composition-2*style.margin,style.xpThickness);
             xpText=new Rect(m,style.landscapeXpTextY,200,Row(style.xpTextHeight,style.captionFont));
             occupiedHeight=Mathf.Max(status.yMax,potionBounds.yMax)+16;
         }

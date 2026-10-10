@@ -90,7 +90,8 @@ namespace Hellscript.Tests
             var p=new GlobalHudLayout(900,1600);var wide=new GlobalHudLayout(1600,900);
             Assert.That(p.potions.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
             Assert.That(p.potions.All(r=>r.xMax<p.ultimate.xMin),Is.True);
-            Assert.That(p.actives[0].width,Is.EqualTo(wide.actives[0].width));Assert.That(p.potions[0].width,Is.EqualTo(wide.potions[0].width));Assert.That(p.xp.width,Is.EqualTo(wide.xp.width));
+            Assert.That(p.actives[0].width,Is.EqualTo(wide.actives[0].width));Assert.That(p.potions[0].width,Is.EqualTo(wide.potions[0].width));
+            Assert.That(p.xp.width,Is.LessThanOrEqualTo(wide.xp.width),"A portrait experience line spans the compact composition.");
         }
         [TestCase(440,956)] [TestCase(956,440)] [TestCase(1600,1000)] [TestCase(2100,900)]
         public void EveryHudPartPreservesItsSizeAndRelativePositionAsOneSet(int w,int h)
@@ -100,12 +101,20 @@ namespace Hellscript.Tests
             var original=Parts(reference);
             { const float reading=1f;
                 var current=new GlobalHudLayout(w,h,reading);var parts=Parts(current);
+                // Portrait closes the empty middle: the potion and skill group moves left as one block, nothing else moves or resizes.
+                float closeUp=current.landscape?0:(current.potions[0].x-current.seal.x)-(reference.potions[0].x-reference.seal.x);
                 for(int i=0;i<parts.Length;i++)
                 {
-                    Assert.That(parts[i].size,Is.EqualTo(original[i].size),"HUD parts must not resize independently");
-                    Assert.That((parts[i].position-current.seal.position-original[i].position+reference.seal.position).magnitude,Is.LessThan(.001f),"HUD parts must not rearrange on rotation");
+                    if(!(i==5&&!current.landscape))Assert.That(parts[i].size,Is.EqualTo(original[i].size),"HUD parts must not resize independently");
+                    var shift=i>=8?new Vector2(closeUp,0):Vector2.zero;
+                    Assert.That((parts[i].position-current.seal.position-original[i].position+reference.seal.position-shift).magnitude,Is.LessThan(.001f),"HUD parts must not rearrange except for the portrait close-up");
                 }
                 Assert.That(current.occupiedHeight,Is.EqualTo(reference.occupiedHeight));
+                if(!current.landscape)
+                {
+                    Assert.That(closeUp,Is.LessThan(0),"Portrait pulls the potion group toward the vitals.");
+                    Assert.That(current.potions[0].x-current.potionSettings.xMax,Is.LessThanOrEqualTo(GlobalHudStyle.Load().edictGap+.01f),"The vitals area and the potion area touch.");
+                }
             }
         }
         [TestCase(640,360)] [TestCase(360,640)] [TestCase(1200,900)] [TestCase(2000,900)]

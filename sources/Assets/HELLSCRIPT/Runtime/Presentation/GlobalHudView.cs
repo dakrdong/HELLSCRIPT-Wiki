@@ -41,9 +41,9 @@ namespace Hellscript
             edict=Rect("Hunt edict",safe);edictEmblem=Picture("Emblem",edict,"menu-hunt-edict");Stretch(edictEmblem.rectTransform);edictEmblem.preserveAspect=true;
             var edictHit=edict.gameObject.AddComponent<Image>();edictHit.color=Color.clear;var edictButton=edict.gameObject.AddComponent<Button>();edictButton.targetGraphic=edictHit;edictButton.transition=Selectable.Transition.None;
             edictButton.onClick.AddListener(()=>EdictSelected?.Invoke());edict.gameObject.SetActive(false);
-            potionSettings=Rect("Threshold potion button",safe);var settingsPlate=Picture("Plate",potionSettings,"mask-square");Stretch(settingsPlate.rectTransform);settingsPlate.color=style.slotPlate;
-            var settingsIcon=Picture("Icon",potionSettings,"potion-hp");Stretch(settingsIcon.rectTransform);settingsIcon.preserveAspect=true;
-            var settingsFrame=Picture("Frame",potionSettings,"frame-active");Stretch(settingsFrame.rectTransform);
+            // A painted push-button (potion and settings cog), not a potion slot.
+            potionSettings=Rect("Threshold potion button",safe);
+            var settingsIcon=Picture("Icon",potionSettings,"menu-potion-settings");Stretch(settingsIcon.rectTransform);settingsIcon.preserveAspect=true;
             var settingsHit=potionSettings.gameObject.AddComponent<Image>();settingsHit.color=Color.clear;var settingsButton=potionSettings.gameObject.AddComponent<Button>();settingsButton.targetGraphic=settingsHit;settingsButton.transition=Selectable.Transition.None;
             settingsButton.onClick.AddListener(()=>PotionSettingsSelected?.Invoke());potionSettings.gameObject.SetActive(false);
             level=Rect("Level",safe);Stretch(Picture("Level badge",level,"badge-level").rectTransform);levelLabel=Text("Level text",level,20);Stretch(levelLabel.rectTransform);

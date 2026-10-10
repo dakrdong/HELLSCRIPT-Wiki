@@ -39,10 +39,10 @@ namespace Hellscript
             escapeCaption=Label(header,escapeLabel,13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
-            AddRiftMinimap(run);incomingHud=null;
+            AddRiftMinimap(run);incomingHud=null;monsterGraph=bossGraph=null;
             // The puzzle tutorial shows the live DPS graph and the damage taken per monster kind from level 2.
             if(game.TrainingGroundRun||run.training<0&&!run.tutorial||PuzzleGraphs(run))BuildTrainingHud(run);
-            if(PuzzleGraphs(run))BuildIncomingHud();
+            if(PuzzleGraphs(run))BuildIncomingHud();else if(trainingHud!=null&&DamageGraphsWanted(run))BuildDamageGraphs();
             BuildRiftActivityHud(run);RefreshHud();ReflowBattleHud();
         }
         void ReflowBattleHud()
@@ -86,7 +86,7 @@ namespace Hellscript
             Place(bossHud,(w-bossWidth)*.5f,bossY,bossWidth,66);
             bossTitle.alignment=TextAnchor.UpperCenter;bossActionLabel.alignment=TextAnchor.UpperCenter;ReflowBossText();
             PlaceTrainingHud(w,narrow,medals,game.TrainingGroundRun?default:panel);
-            PlaceIncomingHud();
+            PlaceIncomingHud();PlaceDamageGraphs();
             PlaceRiftActivityHud(w);
             UpdateBattleBrief();
         }
