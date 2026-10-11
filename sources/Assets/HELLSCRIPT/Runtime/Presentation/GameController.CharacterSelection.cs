@@ -8,6 +8,14 @@ namespace Hellscript
             if(Running||UI.Page!="characters"||!UI.EntrySession.SignedIn||!AccountStorageReady)return false;
             return SaveEntryCharacter(index);
         }
+        // The first start has no class choice: the tutorial stage is the warrior's, so the warrior enters at once.
+        public bool EnterFirstStart()
+        {
+            if(Running||!UI.EntrySession.SignedIn||!AccountStorageReady)return false;
+            int warrior=GuideTutorial.WarriorIndex(Store.Data);
+            if(warrior<0||!SaveEntryCharacter(warrior)||!UI.EntrySession.BeginEntry())return false;
+            Audio?.Play("flow.game_start");EnterPlaza(true);return true;
+        }
         bool SaveEntryCharacter(int index)
         {
             if(!CharacterSelectionState.CanChoose(Store.Data,index))return false;

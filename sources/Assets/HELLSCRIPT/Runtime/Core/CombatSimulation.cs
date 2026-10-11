@@ -39,7 +39,7 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null,SkillPresetScenario combatPreview=null,int puzzleLevel=0,bool puzzleHuntRound=false)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null,SkillPresetScenario combatPreview=null,int puzzleLevel=0,bool puzzleHuntRound=false,bool guideStage=false)
         {
             previewScenario=combatPreview;
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
@@ -61,6 +61,7 @@ namespace Hellscript
                 heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
                 tutorial=isTutorial,puzzleHuntRound=puzzleHuntRound,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&isTutorial&&puzzleLevel>0){State.tutorialFlowVersion=PuzzleTutorial.Version;State.puzzleLevel=puzzleLevel;}
+            if(restore==null&&isTutorial&&guideStage)State.tutorialFlowVersion=GuideTutorial.Version;
             if(restore==null)RiftResult.Begin(this.account,State);
             // Rifts and the puzzle tutorial from level 2 keep the live DPS graph's samples.
             if(restore==null&&(training<0||isTutorial&&puzzleLevel>=2))State.dps=new CombatDpsTimeline{version=CombatDpsTimeline.Version};
@@ -353,6 +354,7 @@ namespace Hellscript
                 if(!HeroActionBusy){ObserveActivity(CombatActivity.Evasion);State.action=Loc.T("공격이 끝날 때까지 안전 위치에서 대기");}
                 return;
             }
+            if(MoveGuideWalk(dt))return;
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
             if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}

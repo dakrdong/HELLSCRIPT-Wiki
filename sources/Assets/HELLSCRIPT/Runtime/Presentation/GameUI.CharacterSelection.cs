@@ -10,6 +10,7 @@ namespace Hellscript
         public void OpenCharacterSelection()
         {
             if(!titleSession.SignedIn){ShowTitle();return;}
+            if(GuideTutorial.FirstStart(game.Store.Data)&&game.EnterFirstStart())return;
             characterSelection.Reset();ShowCharacterSelection();
         }
         public void ShowCharacterSelection()

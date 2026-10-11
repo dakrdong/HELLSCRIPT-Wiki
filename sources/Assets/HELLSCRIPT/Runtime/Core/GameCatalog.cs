@@ -308,6 +308,8 @@ namespace Hellscript
         public bool tutorial,tutorialReplay;
         public int tutorialPhase;
         public int tutorialFlowVersion,tutorialLessonStep;
+        // The guide tutorial's next road point (GuideTutorial.Road).
+        public int guideWaypoint;
         public int puzzleLevel,puzzleWave;
         public PuzzleOperationState puzzleOperation;
         public bool puzzleWaveReady,puzzleHuntRound;

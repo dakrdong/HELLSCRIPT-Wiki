@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T01:00:51+09:00",
+  "generatedAt": "2026-10-11T13:16:28+09:00",
   "pages": [
     {
       "id": "shared-ui-contract",
@@ -47852,6 +47852,74 @@
       "visibility": "internal"
     },
     {
+      "id": "guide-tutorial-script-20261011.en",
+      "title": "Guide Tutorial Segment 1 (2026-10-11)",
+      "shortTitle": "Guide Tutorial Segment 1 (2026-10-11)",
+      "category": "후속 개발 기록",
+      "summary": "원본의 정책·구현 범위와 검증 내용을 보존합니다.",
+      "status": "개발 기록",
+      "notice": "",
+      "source": "Docs/Implementation/Guide_Tutorial_Script_20261011.en.md",
+      "tags": [
+        "후속 개발 기록"
+      ],
+      "versions": [
+        {
+          "revision": 1,
+          "date": "2026-10-11",
+          "capturedAt": "2026-10-11T13:16:28+09:00",
+          "hash": "c5735442cfe34756b1e74c0dac5d5e6fe3767a13fbe8e718a2337480235f00fb",
+          "body": "# Guide Tutorial Segment 1 (2026-10-11)\n\nUpdated: 2026-10-11\n\n[한국어](Guide_Tutorial_Script_20261011.md). The first segment of the tutorial-only stage (flow 6) that replaces the puzzle-level tutorial: script, guide profile, implementation and verification.\n\n## The guide\n\n- Name: **Velina**, \"Goddess of the Edict\". The name comes from *velum*, a veil. The blindfold is only shown in the art; her lines never explain the setting, such as the blindfold or stopped time (user request, 2026-10-11).\n- Voice: **polite**, and she speaks **to the player**, not to the hero. The hero is \"the hero you are watching\".\n- Portrait: Codex candidate B (guiding with a light in her palm). `Resources/Art/NpcPortraits/guide-goddess(-mirror).png`; source, prompt and manifest in `Docs/Art/GuideGoddess/`.\n- The developer never appears; she speaks only as \"the goddess who shows this world's rules\", to keep the fiction intact.\n\n## Flow and lines\n\nThe map is four rooms (entrance hall, first arena, long gallery, plaza) joined by bent corridors, climbing up and to the right. Segment 1 uses the first two rooms; the rest is the road for later segments.\n\n| Beat | Situation | Time | Velina |\n| --- | --- | --- | --- |\n| Entrance | \"The Edict's Road\" card; the hero walks in from the left edge of the entrance hall | Running | — |\n| Greeting | Stops after a few steps | Stopped | Welcome. I am glad you have come to this world. / I am Velina, the goddess who keeps this world's edicts. So that you do not lose your way here, I will show you this world's rules one at a time. / The road is not short, but I will not rush you. Please follow at your own pace. → [I will follow] |\n| Road | The hero follows the road to the first arena and fights the first foe with basic attacks (no skills) | Running | — |\n| First talk | Right after the first blows | Stopped | Did you see? The hero met the enemy and swung the sword unbidden. / The hero you are watching fights unbidden whenever an enemy appears. You need not order the sword drawn each time. / But how the hero fights is yours to decide. The hero will do exactly what you write in the Hunt Edict, to the letter. / For now there are only plain attacks. Please watch this fight to the end first. → [Watch the fight] |\n| Surround | When the first foe falls, eight appear on all sides | Stopped | Look, every side is blocked. Plain attacks alone can hardly hold off this horde. / Now please teach the hero how to use a new skill. / With the skill you choose, the hero will stand and fight that horde. → [Teach a skill] |\n| Lesson | Battle HUD: first skill slot → Whirlwind → Level Up → Equip (the gate leads one step at a time) | Stopped | Press the hero's first skill slot. / This is Whirlwind. The hero spins and cuts down every foe around at once. Press it to take a look. / You have 1 skill point. Press 'Level Up' so the hero learns Whirlwind. / Now press 'Equip' to place it in the first slot. |\n| Whirlwind | Time flows again; the hero sweeps the pack with Whirlwind | Running | Watch: this is the skill you taught. (bark) |\n| End | Right after the last foe falls | Stopped | Did you see? The hero moved exactly as you taught. / This is the Hunt Edict. Whenever the road is blocked, rewrite the edict and open the way. / The road continues up there. I will keep watching over you until you reach the town. → [Head for the town] → graduation, town |\n\nStopped beats tint the screen edges a pale blue. The hero cannot fall in the stage (health refills at zero).\n\n## Rules and implementation\n\n- **First start:** an account where no hero has begun or finished a tutorial (`GuideTutorial.FirstStart`) enters as the warrior right after guest or Google sign-in, without the class choice, also after an interruption.\n- **Accounts already in the puzzle levels** finish those; only new accounts take the new stage.\n- **Graduation:** finishing segment 1 graduates straight to the town (one `guide-graduate` transaction, the existing prologue gold). The warrior's stage stands for every hero, so the other classes start in the town without a tutorial. Hunt Edict disclosure follows the existing rift-progress rules without the puzzle.\n- **Arrival = tutorial finished (added 2026-10-11):** graduation counts as the end of the whole tutorial and opens every feature: all content unlocks (training ground to masterwork), every Hunt Edict option (`edictLegacyAccess`), repeat settings and the rune board (completed without its lesson, so the rift 15 first-clear rune block set lesson reward does not come), and tutorial hints off (the player can turn them back on). Flag `AccountGuide.everythingOpen`, owner `GuideTutorial.OpenEverything`.\n- **Restart:** quitting mid-stage restarts it from the start of the road on the next entry (skills are cleared again).\n- **HUD skill level-up (general feature):** while a skill point is free, the HUD skill slot list also shows unlearned skills, dimmed; tapping one opens its details, where 'Level Up' spends the point. It is general so the path the tutorial teaches keeps working in rifts.\n- Main files: `GuideTutorial.cs` (map, beats, rules), `CombatSimulation.Guide.cs` (walk, spawns, beat changes), `GameStore.Guide.cs` (entry, graduation), `GameUI.GuideTutorial.cs` (lines, HUD lesson), `GameController.Tutorials.cs` (entry routing).\n\n## Verification\n\n- Edit Mode `GuideTutorialTests` (2): a new account starts at the left edge and goes through greeting, first fight, surround, Whirlwind lesson, clear and graduation; the road climbs up-right and is walkable. The related test batch is in the PR record.\n- macOS development build `RuntimeGuideTutorialSmoke` (`-hellscriptGuideTutorialSmoke -hellscriptOfflineQa`): passed at 440×956 Korean and 956×440 English. A new guest enters as the warrior without the class choice; Velina's portrait and lines; four real pointer presses through the gate (skill slot, Whirlwind, Level Up, Equip); Whirlwind clears the pack; arrival in town with one graduation.\n- Not verified: physical devices, human comprehension, long English lines at other resolutions, the old puzzle tutorial smoke (new accounts no longer go to the puzzle).\n- To match the skipped class choice, five smokes that checked the character stage on a fresh save (title, character selection, equipment shop layout, town models, presentation profile) now set the tutorial exemption before guest sign-in.\n",
+          "html": "<p>Updated: 2026-10-11</p><p><a href=\"#/page/guide-tutorial-script-20261011\">한국어</a>. The first segment of the tutorial-only stage (flow 6) that replaces the puzzle-level tutorial: script, guide profile, implementation and verification.</p><h2 id=\"the-guide\">The guide</h2><ul><li>Name: <strong>Velina</strong>, &quot;Goddess of the Edict&quot;. The name comes from <em>velum</em>, a veil. The blindfold is only shown in the art; her lines never explain the setting, such as the blindfold or stopped time (user request, 2026-10-11).</li><li>Voice: <strong>polite</strong>, and she speaks <strong>to the player</strong>, not to the hero. The hero is &quot;the hero you are watching&quot;.</li><li>Portrait: Codex candidate B (guiding with a light in her palm). <code>Resources/Art/NpcPortraits/guide-goddess(-mirror).png</code>; source, prompt and manifest in <code>Docs/Art/GuideGoddess/</code>.</li><li>The developer never appears; she speaks only as &quot;the goddess who shows this world&#x27;s rules&quot;, to keep the fiction intact.</li></ul><h2 id=\"flow-and-lines\">Flow and lines</h2><p>The map is four rooms (entrance hall, first arena, long gallery, plaza) joined by bent corridors, climbing up and to the right. Segment 1 uses the first two rooms; the rest is the road for later segments.</p><div class=\"table-scroll\"><table><thead><tr><th scope=\"col\">Beat</th><th scope=\"col\">Situation</th><th scope=\"col\">Time</th><th scope=\"col\">Velina</th></tr></thead><tbody><tr><td>Entrance</td><td>&quot;The Edict&#x27;s Road&quot; card; the hero walks in from the left edge of the entrance hall</td><td>Running</td><td>—</td></tr><tr><td>Greeting</td><td>Stops after a few steps</td><td>Stopped</td><td>Welcome. I am glad you have come to this world. / I am Velina, the goddess who keeps this world&#x27;s edicts. So that you do not lose your way here, I will show you this world&#x27;s rules one at a time. / The road is not short, but I will not rush you. Please follow at your own pace. → [I will follow]</td></tr><tr><td>Road</td><td>The hero follows the road to the first arena and fights the first foe with basic attacks (no skills)</td><td>Running</td><td>—</td></tr><tr><td>First talk</td><td>Right after the first blows</td><td>Stopped</td><td>Did you see? The hero met the enemy and swung the sword unbidden. / The hero you are watching fights unbidden whenever an enemy appears. You need not order the sword drawn each time. / But how the hero fights is yours to decide. The hero will do exactly what you write in the Hunt Edict, to the letter. / For now there are only plain attacks. Please watch this fight to the end first. → [Watch the fight]</td></tr><tr><td>Surround</td><td>When the first foe falls, eight appear on all sides</td><td>Stopped</td><td>Look, every side is blocked. Plain attacks alone can hardly hold off this horde. / Now please teach the hero how to use a new skill. / With the skill you choose, the hero will stand and fight that horde. → [Teach a skill]</td></tr><tr><td>Lesson</td><td>Battle HUD: first skill slot → Whirlwind → Level Up → Equip (the gate leads one step at a time)</td><td>Stopped</td><td>Press the hero&#x27;s first skill slot. / This is Whirlwind. The hero spins and cuts down every foe around at once. Press it to take a look. / You have 1 skill point. Press &#x27;Level Up&#x27; so the hero learns Whirlwind. / Now press &#x27;Equip&#x27; to place it in the first slot.</td></tr><tr><td>Whirlwind</td><td>Time flows again; the hero sweeps the pack with Whirlwind</td><td>Running</td><td>Watch: this is the skill you taught. (bark)</td></tr><tr><td>End</td><td>Right after the last foe falls</td><td>Stopped</td><td>Did you see? The hero moved exactly as you taught. / This is the Hunt Edict. Whenever the road is blocked, rewrite the edict and open the way. / The road continues up there. I will keep watching over you until you reach the town. → [Head for the town] → graduation, town</td></tr></tbody></table></div><p>Stopped beats tint the screen edges a pale blue. The hero cannot fall in the stage (health refills at zero).</p><h2 id=\"rules-and-implementation\">Rules and implementation</h2><ul><li><strong>First start:</strong> an account where no hero has begun or finished a tutorial (<code>GuideTutorial.FirstStart</code>) enters as the warrior right after guest or Google sign-in, without the class choice, also after an interruption.</li><li><strong>Accounts already in the puzzle levels</strong> finish those; only new accounts take the new stage.</li><li><strong>Graduation:</strong> finishing segment 1 graduates straight to the town (one <code>guide-graduate</code> transaction, the existing prologue gold). The warrior&#x27;s stage stands for every hero, so the other classes start in the town without a tutorial. Hunt Edict disclosure follows the existing rift-progress rules without the puzzle.</li><li><strong>Arrival = tutorial finished (added 2026-10-11):</strong> graduation counts as the end of the whole tutorial and opens every feature: all content unlocks (training ground to masterwork), every Hunt Edict option (<code>edictLegacyAccess</code>), repeat settings and the rune board (completed without its lesson, so the rift 15 first-clear rune block set lesson reward does not come), and tutorial hints off (the player can turn them back on). Flag <code>AccountGuide.everythingOpen</code>, owner <code>GuideTutorial.OpenEverything</code>.</li><li><strong>Restart:</strong> quitting mid-stage restarts it from the start of the road on the next entry (skills are cleared again).</li><li><strong>HUD skill level-up (general feature):</strong> while a skill point is free, the HUD skill slot list also shows unlearned skills, dimmed; tapping one opens its details, where &#x27;Level Up&#x27; spends the point. It is general so the path the tutorial teaches keeps working in rifts.</li><li>Main files: <code>GuideTutorial.cs</code> (map, beats, rules), <code>CombatSimulation.Guide.cs</code> (walk, spawns, beat changes), <code>GameStore.Guide.cs</code> (entry, graduation), <code>GameUI.GuideTutorial.cs</code> (lines, HUD lesson), <code>GameController.Tutorials.cs</code> (entry routing).</li></ul><h2 id=\"verification\">Verification</h2><ul><li>Edit Mode <code>GuideTutorialTests</code> (2): a new account starts at the left edge and goes through greeting, first fight, surround, Whirlwind lesson, clear and graduation; the road climbs up-right and is walkable. The related test batch is in the PR record.</li><li>macOS development build <code>RuntimeGuideTutorialSmoke</code> (<code>-hellscriptGuideTutorialSmoke -hellscriptOfflineQa</code>): passed at 440×956 Korean and 956×440 English. A new guest enters as the warrior without the class choice; Velina&#x27;s portrait and lines; four real pointer presses through the gate (skill slot, Whirlwind, Level Up, Equip); Whirlwind clears the pack; arrival in town with one graduation.</li><li>Not verified: physical devices, human comprehension, long English lines at other resolutions, the old puzzle tutorial smoke (new accounts no longer go to the puzzle).</li><li>To match the skipped class choice, five smokes that checked the character stage on a fresh save (title, character selection, equipment shop layout, town models, presentation profile) now set the tutorial exemption before guest sign-in.</li></ul>",
+          "headings": [
+            {
+              "id": "the-guide",
+              "title": "The guide"
+            },
+            {
+              "id": "flow-and-lines",
+              "title": "Flow and lines"
+            },
+            {
+              "id": "rules-and-implementation",
+              "title": "Rules and implementation"
+            },
+            {
+              "id": "verification",
+              "title": "Verification"
+            }
+          ]
+        }
+      ],
+      "revision": 1,
+      "date": "2026-10-11",
+      "capturedAt": "2026-10-11T13:16:28+09:00",
+      "hash": "c5735442cfe34756b1e74c0dac5d5e6fe3767a13fbe8e718a2337480235f00fb",
+      "body": "# Guide Tutorial Segment 1 (2026-10-11)\n\nUpdated: 2026-10-11\n\n[한국어](Guide_Tutorial_Script_20261011.md). The first segment of the tutorial-only stage (flow 6) that replaces the puzzle-level tutorial: script, guide profile, implementation and verification.\n\n## The guide\n\n- Name: **Velina**, \"Goddess of the Edict\". The name comes from *velum*, a veil. The blindfold is only shown in the art; her lines never explain the setting, such as the blindfold or stopped time (user request, 2026-10-11).\n- Voice: **polite**, and she speaks **to the player**, not to the hero. The hero is \"the hero you are watching\".\n- Portrait: Codex candidate B (guiding with a light in her palm). `Resources/Art/NpcPortraits/guide-goddess(-mirror).png`; source, prompt and manifest in `Docs/Art/GuideGoddess/`.\n- The developer never appears; she speaks only as \"the goddess who shows this world's rules\", to keep the fiction intact.\n\n## Flow and lines\n\nThe map is four rooms (entrance hall, first arena, long gallery, plaza) joined by bent corridors, climbing up and to the right. Segment 1 uses the first two rooms; the rest is the road for later segments.\n\n| Beat | Situation | Time | Velina |\n| --- | --- | --- | --- |\n| Entrance | \"The Edict's Road\" card; the hero walks in from the left edge of the entrance hall | Running | — |\n| Greeting | Stops after a few steps | Stopped | Welcome. I am glad you have come to this world. / I am Velina, the goddess who keeps this world's edicts. So that you do not lose your way here, I will show you this world's rules one at a time. / The road is not short, but I will not rush you. Please follow at your own pace. → [I will follow] |\n| Road | The hero follows the road to the first arena and fights the first foe with basic attacks (no skills) | Running | — |\n| First talk | Right after the first blows | Stopped | Did you see? The hero met the enemy and swung the sword unbidden. / The hero you are watching fights unbidden whenever an enemy appears. You need not order the sword drawn each time. / But how the hero fights is yours to decide. The hero will do exactly what you write in the Hunt Edict, to the letter. / For now there are only plain attacks. Please watch this fight to the end first. → [Watch the fight] |\n| Surround | When the first foe falls, eight appear on all sides | Stopped | Look, every side is blocked. Plain attacks alone can hardly hold off this horde. / Now please teach the hero how to use a new skill. / With the skill you choose, the hero will stand and fight that horde. → [Teach a skill] |\n| Lesson | Battle HUD: first skill slot → Whirlwind → Level Up → Equip (the gate leads one step at a time) | Stopped | Press the hero's first skill slot. / This is Whirlwind. The hero spins and cuts down every foe around at once. Press it to take a look. / You have 1 skill point. Press 'Level Up' so the hero learns Whirlwind. / Now press 'Equip' to place it in the first slot. |\n| Whirlwind | Time flows again; the hero sweeps the pack with Whirlwind | Running | Watch: this is the skill you taught. (bark) |\n| End | Right after the last foe falls | Stopped | Did you see? The hero moved exactly as you taught. / This is the Hunt Edict. Whenever the road is blocked, rewrite the edict and open the way. / The road continues up there. I will keep watching over you until you reach the town. → [Head for the town] → graduation, town |\n\nStopped beats tint the screen edges a pale blue. The hero cannot fall in the stage (health refills at zero).\n\n## Rules and implementation\n\n- **First start:** an account where no hero has begun or finished a tutorial (`GuideTutorial.FirstStart`) enters as the warrior right after guest or Google sign-in, without the class choice, also after an interruption.\n- **Accounts already in the puzzle levels** finish those; only new accounts take the new stage.\n- **Graduation:** finishing segment 1 graduates straight to the town (one `guide-graduate` transaction, the existing prologue gold). The warrior's stage stands for every hero, so the other classes start in the town without a tutorial. Hunt Edict disclosure follows the existing rift-progress rules without the puzzle.\n- **Arrival = tutorial finished (added 2026-10-11):** graduation counts as the end of the whole tutorial and opens every feature: all content unlocks (training ground to masterwork), every Hunt Edict option (`edictLegacyAccess`), repeat settings and the rune board (completed without its lesson, so the rift 15 first-clear rune block set lesson reward does not come), and tutorial hints off (the player can turn them back on). Flag `AccountGuide.everythingOpen`, owner `GuideTutorial.OpenEverything`.\n- **Restart:** quitting mid-stage restarts it from the start of the road on the next entry (skills are cleared again).\n- **HUD skill level-up (general feature):** while a skill point is free, the HUD skill slot list also shows unlearned skills, dimmed; tapping one opens its details, where 'Level Up' spends the point. It is general so the path the tutorial teaches keeps working in rifts.\n- Main files: `GuideTutorial.cs` (map, beats, rules), `CombatSimulation.Guide.cs` (walk, spawns, beat changes), `GameStore.Guide.cs` (entry, graduation), `GameUI.GuideTutorial.cs` (lines, HUD lesson), `GameController.Tutorials.cs` (entry routing).\n\n## Verification\n\n- Edit Mode `GuideTutorialTests` (2): a new account starts at the left edge and goes through greeting, first fight, surround, Whirlwind lesson, clear and graduation; the road climbs up-right and is walkable. The related test batch is in the PR record.\n- macOS development build `RuntimeGuideTutorialSmoke` (`-hellscriptGuideTutorialSmoke -hellscriptOfflineQa`): passed at 440×956 Korean and 956×440 English. A new guest enters as the warrior without the class choice; Velina's portrait and lines; four real pointer presses through the gate (skill slot, Whirlwind, Level Up, Equip); Whirlwind clears the pack; arrival in town with one graduation.\n- Not verified: physical devices, human comprehension, long English lines at other resolutions, the old puzzle tutorial smoke (new accounts no longer go to the puzzle).\n- To match the skipped class choice, five smokes that checked the character stage on a fresh save (title, character selection, equipment shop layout, town models, presentation profile) now set the tutorial exemption before guest sign-in.\n",
+      "html": "<p>Updated: 2026-10-11</p><p><a href=\"#/page/guide-tutorial-script-20261011\">한국어</a>. The first segment of the tutorial-only stage (flow 6) that replaces the puzzle-level tutorial: script, guide profile, implementation and verification.</p><h2 id=\"the-guide\">The guide</h2><ul><li>Name: <strong>Velina</strong>, &quot;Goddess of the Edict&quot;. The name comes from <em>velum</em>, a veil. The blindfold is only shown in the art; her lines never explain the setting, such as the blindfold or stopped time (user request, 2026-10-11).</li><li>Voice: <strong>polite</strong>, and she speaks <strong>to the player</strong>, not to the hero. The hero is &quot;the hero you are watching&quot;.</li><li>Portrait: Codex candidate B (guiding with a light in her palm). <code>Resources/Art/NpcPortraits/guide-goddess(-mirror).png</code>; source, prompt and manifest in <code>Docs/Art/GuideGoddess/</code>.</li><li>The developer never appears; she speaks only as &quot;the goddess who shows this world&#x27;s rules&quot;, to keep the fiction intact.</li></ul><h2 id=\"flow-and-lines\">Flow and lines</h2><p>The map is four rooms (entrance hall, first arena, long gallery, plaza) joined by bent corridors, climbing up and to the right. Segment 1 uses the first two rooms; the rest is the road for later segments.</p><div class=\"table-scroll\"><table><thead><tr><th scope=\"col\">Beat</th><th scope=\"col\">Situation</th><th scope=\"col\">Time</th><th scope=\"col\">Velina</th></tr></thead><tbody><tr><td>Entrance</td><td>&quot;The Edict&#x27;s Road&quot; card; the hero walks in from the left edge of the entrance hall</td><td>Running</td><td>—</td></tr><tr><td>Greeting</td><td>Stops after a few steps</td><td>Stopped</td><td>Welcome. I am glad you have come to this world. / I am Velina, the goddess who keeps this world&#x27;s edicts. So that you do not lose your way here, I will show you this world&#x27;s rules one at a time. / The road is not short, but I will not rush you. Please follow at your own pace. → [I will follow]</td></tr><tr><td>Road</td><td>The hero follows the road to the first arena and fights the first foe with basic attacks (no skills)</td><td>Running</td><td>—</td></tr><tr><td>First talk</td><td>Right after the first blows</td><td>Stopped</td><td>Did you see? The hero met the enemy and swung the sword unbidden. / The hero you are watching fights unbidden whenever an enemy appears. You need not order the sword drawn each time. / But how the hero fights is yours to decide. The hero will do exactly what you write in the Hunt Edict, to the letter. / For now there are only plain attacks. Please watch this fight to the end first. → [Watch the fight]</td></tr><tr><td>Surround</td><td>When the first foe falls, eight appear on all sides</td><td>Stopped</td><td>Look, every side is blocked. Plain attacks alone can hardly hold off this horde. / Now please teach the hero how to use a new skill. / With the skill you choose, the hero will stand and fight that horde. → [Teach a skill]</td></tr><tr><td>Lesson</td><td>Battle HUD: first skill slot → Whirlwind → Level Up → Equip (the gate leads one step at a time)</td><td>Stopped</td><td>Press the hero&#x27;s first skill slot. / This is Whirlwind. The hero spins and cuts down every foe around at once. Press it to take a look. / You have 1 skill point. Press &#x27;Level Up&#x27; so the hero learns Whirlwind. / Now press &#x27;Equip&#x27; to place it in the first slot.</td></tr><tr><td>Whirlwind</td><td>Time flows again; the hero sweeps the pack with Whirlwind</td><td>Running</td><td>Watch: this is the skill you taught. (bark)</td></tr><tr><td>End</td><td>Right after the last foe falls</td><td>Stopped</td><td>Did you see? The hero moved exactly as you taught. / This is the Hunt Edict. Whenever the road is blocked, rewrite the edict and open the way. / The road continues up there. I will keep watching over you until you reach the town. → [Head for the town] → graduation, town</td></tr></tbody></table></div><p>Stopped beats tint the screen edges a pale blue. The hero cannot fall in the stage (health refills at zero).</p><h2 id=\"rules-and-implementation\">Rules and implementation</h2><ul><li><strong>First start:</strong> an account where no hero has begun or finished a tutorial (<code>GuideTutorial.FirstStart</code>) enters as the warrior right after guest or Google sign-in, without the class choice, also after an interruption.</li><li><strong>Accounts already in the puzzle levels</strong> finish those; only new accounts take the new stage.</li><li><strong>Graduation:</strong> finishing segment 1 graduates straight to the town (one <code>guide-graduate</code> transaction, the existing prologue gold). The warrior&#x27;s stage stands for every hero, so the other classes start in the town without a tutorial. Hunt Edict disclosure follows the existing rift-progress rules without the puzzle.</li><li><strong>Arrival = tutorial finished (added 2026-10-11):</strong> graduation counts as the end of the whole tutorial and opens every feature: all content unlocks (training ground to masterwork), every Hunt Edict option (<code>edictLegacyAccess</code>), repeat settings and the rune board (completed without its lesson, so the rift 15 first-clear rune block set lesson reward does not come), and tutorial hints off (the player can turn them back on). Flag <code>AccountGuide.everythingOpen</code>, owner <code>GuideTutorial.OpenEverything</code>.</li><li><strong>Restart:</strong> quitting mid-stage restarts it from the start of the road on the next entry (skills are cleared again).</li><li><strong>HUD skill level-up (general feature):</strong> while a skill point is free, the HUD skill slot list also shows unlearned skills, dimmed; tapping one opens its details, where &#x27;Level Up&#x27; spends the point. It is general so the path the tutorial teaches keeps working in rifts.</li><li>Main files: <code>GuideTutorial.cs</code> (map, beats, rules), <code>CombatSimulation.Guide.cs</code> (walk, spawns, beat changes), <code>GameStore.Guide.cs</code> (entry, graduation), <code>GameUI.GuideTutorial.cs</code> (lines, HUD lesson), <code>GameController.Tutorials.cs</code> (entry routing).</li></ul><h2 id=\"verification\">Verification</h2><ul><li>Edit Mode <code>GuideTutorialTests</code> (2): a new account starts at the left edge and goes through greeting, first fight, surround, Whirlwind lesson, clear and graduation; the road climbs up-right and is walkable. The related test batch is in the PR record.</li><li>macOS development build <code>RuntimeGuideTutorialSmoke</code> (<code>-hellscriptGuideTutorialSmoke -hellscriptOfflineQa</code>): passed at 440×956 Korean and 956×440 English. A new guest enters as the warrior without the class choice; Velina&#x27;s portrait and lines; four real pointer presses through the gate (skill slot, Whirlwind, Level Up, Equip); Whirlwind clears the pack; arrival in town with one graduation.</li><li>Not verified: physical devices, human comprehension, long English lines at other resolutions, the old puzzle tutorial smoke (new accounts no longer go to the puzzle).</li><li>To match the skipped class choice, five smokes that checked the character stage on a fresh save (title, character selection, equipment shop layout, town models, presentation profile) now set the tutorial exemption before guest sign-in.</li></ul>",
+      "headings": [
+        {
+          "id": "the-guide",
+          "title": "The guide"
+        },
+        {
+          "id": "flow-and-lines",
+          "title": "Flow and lines"
+        },
+        {
+          "id": "rules-and-implementation",
+          "title": "Rules and implementation"
+        },
+        {
+          "id": "verification",
+          "title": "Verification"
+        }
+      ],
+      "createdAt": "2026-10-11T13:16:28+09:00",
+      "updatedAt": "2026-10-11T13:16:28+09:00",
+      "visibility": "internal"
+    },
+    {
       "id": "main-integration-20261003",
       "title": "HELLSCRIPT 2026-10-03 로컬 통합 동작",
       "shortTitle": "2026-10-03 로컬 통합 동작",
@@ -90086,6 +90154,74 @@
       "visibility": "internal"
     },
     {
+      "id": "guide-tutorial-script-20261011",
+      "title": "안내 튜토리얼 1구간 (2026-10-11)",
+      "shortTitle": "안내 튜토리얼 1구간 (2026-10-11)",
+      "category": "후속 개발 기록",
+      "summary": "원본의 정책·구현 범위와 검증 내용을 보존합니다.",
+      "status": "개발 기록",
+      "notice": "",
+      "source": "Docs/Implementation/Guide_Tutorial_Script_20261011.md",
+      "tags": [
+        "후속 개발 기록"
+      ],
+      "versions": [
+        {
+          "revision": 1,
+          "date": "2026-10-11",
+          "capturedAt": "2026-10-11T13:16:28+09:00",
+          "hash": "81e4e61d4996be4752c95299203fb725829649e74fdcc50910d671bd9de0f030",
+          "body": "# 안내 튜토리얼 1구간 (2026-10-11)\n\n갱신일: 2026-10-11\n\n[English](Guide_Tutorial_Script_20261011.en.md). 퍼즐 레벨 튜토리얼을 대체하는 튜토리얼 전용 스테이지(흐름 6)의 첫 구간이다. 대본, 안내자 설정, 구현과 검증을 함께 기록한다.\n\n## 안내자\n\n- 이름: **벨리나**, 칭호 \"칙령의 여신\". 이름은 베일(velum)에서 왔다. 천으로 눈을 가린 모습은 그림으로만 보여 주고, 대사에서는 눈 가림이나 시간 정지 같은 설정을 설명하지 않는다(2026-10-11 사용자 요청).\n- 말투: **존댓말**로, 영웅이 아니라 **게임을 하는 플레이어에게** 말한다. 영웅은 \"당신이 지켜보는 이 영웅\"이다.\n- 초상: Codex 생성 후보 B(손바닥의 빛으로 이끄는 자세). `Resources/Art/NpcPortraits/guide-goddess(-mirror).png`, 원본·프롬프트·메타는 `Docs/Art/GuideGoddess/`.\n- 개발자는 직접 등장하지 않는다. 세계관을 깨지 않도록 \"이 세계의 규칙을 알려 주는 여신\"으로만 말한다.\n\n## 진행과 대사\n\n맵은 오른쪽 위로 꺾여 올라가는 네 개의 방(입구 회랑, 첫 투기장, 긴 회랑, 광장)과 꺾인 통로다. 1구간은 앞의 두 방만 쓰고 나머지는 다음 구간의 길이다.\n\n| 단계 | 상황 | 시간 | 벨리나의 대사 |\n| --- | --- | --- | --- |\n| 등장 | \"칙령의 길\" 카드, 영웅이 입구 회랑 왼쪽 끝에서 걸어 들어온다 | 흐름 | — |\n| 인사 | 몇 걸음 뒤 멈춤 | 정지 | 어서 오세요. 이 세계에 오신 것을 환영합니다. / 저는 벨리나, 이 세계의 칙령을 관장하는 여신입니다. 당신이 이곳에서 길을 잃지 않도록, 이 세계의 규칙을 하나씩 알려 드릴게요. / 길이 짧지는 않지만 서두르지 않겠습니다. 천천히 따라와 주세요. → [따르겠습니다] |\n| 길 | 영웅이 길을 따라 첫 투기장으로 가서 첫 적과 평타로 싸운다(스킬 없음) | 흐름 | — |\n| 첫 대화 | 첫 타격이 오간 직후 | 정지 | 보셨나요? 영웅이 적을 만나자 스스로 검을 휘둘렀습니다. / 당신이 지켜보는 이 영웅은 적을 만나면 알아서 싸웁니다. 검을 뽑으라고 일일이 말해 줄 필요는 없어요. / 다만 어떻게 싸울지는 당신이 정해야 합니다. 영웅은 당신이 사냥 칙령에 적은 대로, 한 글자도 어김없이 따를 거예요. / 지금은 평범한 공격뿐이에요. 우선 이 싸움을 끝까지 지켜봐 주세요. → [싸움을 지켜본다] |\n| 포위 | 첫 적이 쓰러지면 사방에서 8마리가 나타나 둘러싼다 | 정지 | 보세요, 사방이 막혔습니다. 평범한 공격만으로는 이 무리를 감당하기 어려워요. / 이제 영웅에게 새로운 기술 쓰는 법을 가르쳐 주세요. / 당신이 정해 준 기술로, 영웅은 저 무리와 맞서 싸울 거예요. → [기술을 가르친다] |\n| 수업 | 전투 HUD에서 첫 기술 칸 → 회오리 → 레벨 올리기 → 장착 (가림막이 한 단계씩 안내) | 정지 | 영웅의 첫 번째 기술 칸을 눌러 주세요. / 회오리예요. 몸을 돌려 주변의 적을 한꺼번에 베는 기술이죠. 눌러서 살펴보세요. / 스킬 포인트가 1점 있어요. '레벨 올리기'를 눌러 영웅이 회오리를 익히게 해 주세요. / 이제 '장착'을 눌러 첫 번째 칸에 올려 주세요. |\n| 회오리 | 시간이 다시 흐르고 영웅이 회오리로 무리를 쓸어낸다 | 흐름 | 보세요, 당신이 가르친 기술이에요. (말풍선) |\n| 끝 | 전멸 직후 | 정지 | 보셨나요? 영웅이 당신이 가르친 그대로 움직였습니다. / 이것이 사냥 칙령이에요. 앞으로도 길이 막힐 때마다 칙령을 고쳐 써서 길을 열어 주세요. / 길은 저 위로 이어집니다. 마을에 닿을 때까지 제가 계속 지켜볼게요. → [마을로 향한다] → 졸업, 마을 |\n\n시간이 멈춘 단계에는 화면 가장자리에 옅은 푸른 기운이 돈다. 영웅은 이 스테이지에서 쓰러지지 않는다(체력이 0이 되면 다시 채운다).\n\n## 규칙과 구현\n\n- **첫 시작:** 튜토리얼을 시작하거나 마친 영웅이 없는 계정(`GuideTutorial.FirstStart`)은 게스트·구글 로그인 뒤 직업 선택 없이 전사로 바로 들어간다. 중단 후 다시 들어와도 같다.\n- **진행 중인 퍼즐 계정:** 이미 퍼즐 레벨을 진행 중인 계정은 기존 퍼즐을 마저 한다. 새 계정만 새 스테이지를 탄다.\n- **졸업:** 1구간을 마치면 바로 마을로 졸업한다(`guide-graduate` 거래 1회, 기존 프롤로그 금화 지급). 전사의 스테이지가 모든 영웅의 튜토리얼을 대신하므로 다른 직업은 튜토리얼 없이 마을에서 시작한다. 칙령 옵션 공개는 퍼즐 없이 균열 진행도에 따른 기존 규칙을 쓴다.\n- **마을 도착 = 튜토리얼 완료(2026-10-11 추가):** 졸업과 함께 튜토리얼이 모두 끝난 것으로 보고 모든 기능을 연다. 모든 콘텐츠 해금(훈련장~걸작 강화), 사냥 칙령의 모든 옵션 공개(`edictLegacyAccess`), 반복 사냥 설정, 룬판(룬 수업 없이 완료 처리, 균열 15 첫 클리어의 룬 블럭 세트 수업 보상은 없음)을 열고 튜토리얼 힌트를 끈다(설정에서 다시 켤 수 있음). 표시는 `AccountGuide.everythingOpen`, 처리는 `GuideTutorial.OpenEverything`이다.\n- **재시작:** 스테이지 도중 앱을 끄면 다음 진입 때 길의 처음부터 다시 시작한다(스킬도 다시 비운다).\n- **HUD 스킬 레벨 올리기(일반 기능):** 남은 스킬 포인트가 있으면 HUD 기술 칸 목록에 아직 배우지 않은 스킬이 흐리게 따라 나오고, 누르면 상세 창의 '레벨 올리기'로 포인트를 쓴다. 튜토리얼이 가르친 경로가 이후 균열에서도 그대로 쓰이도록 일반 기능으로 넣었다.\n- 주요 파일: `GuideTutorial.cs`(맵·단계·규칙), `CombatSimulation.Guide.cs`(걷기·소환·단계 전환), `GameStore.Guide.cs`(입장·졸업), `GameUI.GuideTutorial.cs`(대사·HUD 수업), `GameController.Tutorials.cs`(진입 경로).\n\n## 검증\n\n- Edit Mode `GuideTutorialTests` 2개: 새 계정이 왼쪽 끝에서 시작해 인사·첫 전투·포위·회오리 수업·전멸·졸업까지 진행, 길이 오른쪽 위로 꺾이고 걸을 수 있음. 관련 테스트 묶음은 아래 PR 기록 참고.\n- macOS 개발 빌드 `RuntimeGuideTutorialSmoke`(`-hellscriptGuideTutorialSmoke -hellscriptOfflineQa`): 440×956 한국어, 956×440 영어에서 통과. 새 게스트가 직업 선택 없이 전사로 입장, 벨리나 초상과 대사, 가림막을 통한 실제 포인터 4번(기술 칸·회오리·레벨 올리기·장착), 회오리 전멸, 마을 도착과 졸업 1회.\n- 미검증: 실기기, 사람의 이해도, 긴 영어 문장의 다른 해상도 잘림, 기존 퍼즐 튜토리얼 스모크(새 계정이 더 이상 퍼즐로 가지 않음).\n- 새 계정의 직업 선택 생략에 맞춰, 새 세이브로 직업 선택 화면을 확인하던 스모크 5개(타이틀·캐릭터 선택·장비 상점 배치·마을 모델·프레젠테이션 프로필)는 게스트 로그인 전에 튜토리얼 면제를 설정한다.\n",
+          "html": "<p>갱신일: 2026-10-11</p><p><a href=\"#/page/guide-tutorial-script-20261011.en\">English</a>. 퍼즐 레벨 튜토리얼을 대체하는 튜토리얼 전용 스테이지(흐름 6)의 첫 구간이다. 대본, 안내자 설정, 구현과 검증을 함께 기록한다.</p><h2 id=\"안내자\">안내자</h2><ul><li>이름: <strong>벨리나</strong>, 칭호 &quot;칙령의 여신&quot;. 이름은 베일(velum)에서 왔다. 천으로 눈을 가린 모습은 그림으로만 보여 주고, 대사에서는 눈 가림이나 시간 정지 같은 설정을 설명하지 않는다(2026-10-11 사용자 요청).</li><li>말투: <strong>존댓말</strong>로, 영웅이 아니라 <strong>게임을 하는 플레이어에게</strong> 말한다. 영웅은 &quot;당신이 지켜보는 이 영웅&quot;이다.</li><li>초상: Codex 생성 후보 B(손바닥의 빛으로 이끄는 자세). <code>Resources/Art/NpcPortraits/guide-goddess(-mirror).png</code>, 원본·프롬프트·메타는 <code>Docs/Art/GuideGoddess/</code>.</li><li>개발자는 직접 등장하지 않는다. 세계관을 깨지 않도록 &quot;이 세계의 규칙을 알려 주는 여신&quot;으로만 말한다.</li></ul><h2 id=\"진행과-대사\">진행과 대사</h2><p>맵은 오른쪽 위로 꺾여 올라가는 네 개의 방(입구 회랑, 첫 투기장, 긴 회랑, 광장)과 꺾인 통로다. 1구간은 앞의 두 방만 쓰고 나머지는 다음 구간의 길이다.</p><div class=\"table-scroll\"><table><thead><tr><th scope=\"col\">단계</th><th scope=\"col\">상황</th><th scope=\"col\">시간</th><th scope=\"col\">벨리나의 대사</th></tr></thead><tbody><tr><td>등장</td><td>&quot;칙령의 길&quot; 카드, 영웅이 입구 회랑 왼쪽 끝에서 걸어 들어온다</td><td>흐름</td><td>—</td></tr><tr><td>인사</td><td>몇 걸음 뒤 멈춤</td><td>정지</td><td>어서 오세요. 이 세계에 오신 것을 환영합니다. / 저는 벨리나, 이 세계의 칙령을 관장하는 여신입니다. 당신이 이곳에서 길을 잃지 않도록, 이 세계의 규칙을 하나씩 알려 드릴게요. / 길이 짧지는 않지만 서두르지 않겠습니다. 천천히 따라와 주세요. → [따르겠습니다]</td></tr><tr><td>길</td><td>영웅이 길을 따라 첫 투기장으로 가서 첫 적과 평타로 싸운다(스킬 없음)</td><td>흐름</td><td>—</td></tr><tr><td>첫 대화</td><td>첫 타격이 오간 직후</td><td>정지</td><td>보셨나요? 영웅이 적을 만나자 스스로 검을 휘둘렀습니다. / 당신이 지켜보는 이 영웅은 적을 만나면 알아서 싸웁니다. 검을 뽑으라고 일일이 말해 줄 필요는 없어요. / 다만 어떻게 싸울지는 당신이 정해야 합니다. 영웅은 당신이 사냥 칙령에 적은 대로, 한 글자도 어김없이 따를 거예요. / 지금은 평범한 공격뿐이에요. 우선 이 싸움을 끝까지 지켜봐 주세요. → [싸움을 지켜본다]</td></tr><tr><td>포위</td><td>첫 적이 쓰러지면 사방에서 8마리가 나타나 둘러싼다</td><td>정지</td><td>보세요, 사방이 막혔습니다. 평범한 공격만으로는 이 무리를 감당하기 어려워요. / 이제 영웅에게 새로운 기술 쓰는 법을 가르쳐 주세요. / 당신이 정해 준 기술로, 영웅은 저 무리와 맞서 싸울 거예요. → [기술을 가르친다]</td></tr><tr><td>수업</td><td>전투 HUD에서 첫 기술 칸 → 회오리 → 레벨 올리기 → 장착 (가림막이 한 단계씩 안내)</td><td>정지</td><td>영웅의 첫 번째 기술 칸을 눌러 주세요. / 회오리예요. 몸을 돌려 주변의 적을 한꺼번에 베는 기술이죠. 눌러서 살펴보세요. / 스킬 포인트가 1점 있어요. &#x27;레벨 올리기&#x27;를 눌러 영웅이 회오리를 익히게 해 주세요. / 이제 &#x27;장착&#x27;을 눌러 첫 번째 칸에 올려 주세요.</td></tr><tr><td>회오리</td><td>시간이 다시 흐르고 영웅이 회오리로 무리를 쓸어낸다</td><td>흐름</td><td>보세요, 당신이 가르친 기술이에요. (말풍선)</td></tr><tr><td>끝</td><td>전멸 직후</td><td>정지</td><td>보셨나요? 영웅이 당신이 가르친 그대로 움직였습니다. / 이것이 사냥 칙령이에요. 앞으로도 길이 막힐 때마다 칙령을 고쳐 써서 길을 열어 주세요. / 길은 저 위로 이어집니다. 마을에 닿을 때까지 제가 계속 지켜볼게요. → [마을로 향한다] → 졸업, 마을</td></tr></tbody></table></div><p>시간이 멈춘 단계에는 화면 가장자리에 옅은 푸른 기운이 돈다. 영웅은 이 스테이지에서 쓰러지지 않는다(체력이 0이 되면 다시 채운다).</p><h2 id=\"규칙과-구현\">규칙과 구현</h2><ul><li><strong>첫 시작:</strong> 튜토리얼을 시작하거나 마친 영웅이 없는 계정(<code>GuideTutorial.FirstStart</code>)은 게스트·구글 로그인 뒤 직업 선택 없이 전사로 바로 들어간다. 중단 후 다시 들어와도 같다.</li><li><strong>진행 중인 퍼즐 계정:</strong> 이미 퍼즐 레벨을 진행 중인 계정은 기존 퍼즐을 마저 한다. 새 계정만 새 스테이지를 탄다.</li><li><strong>졸업:</strong> 1구간을 마치면 바로 마을로 졸업한다(<code>guide-graduate</code> 거래 1회, 기존 프롤로그 금화 지급). 전사의 스테이지가 모든 영웅의 튜토리얼을 대신하므로 다른 직업은 튜토리얼 없이 마을에서 시작한다. 칙령 옵션 공개는 퍼즐 없이 균열 진행도에 따른 기존 규칙을 쓴다.</li><li><strong>마을 도착 = 튜토리얼 완료(2026-10-11 추가):</strong> 졸업과 함께 튜토리얼이 모두 끝난 것으로 보고 모든 기능을 연다. 모든 콘텐츠 해금(훈련장~걸작 강화), 사냥 칙령의 모든 옵션 공개(<code>edictLegacyAccess</code>), 반복 사냥 설정, 룬판(룬 수업 없이 완료 처리, 균열 15 첫 클리어의 룬 블럭 세트 수업 보상은 없음)을 열고 튜토리얼 힌트를 끈다(설정에서 다시 켤 수 있음). 표시는 <code>AccountGuide.everythingOpen</code>, 처리는 <code>GuideTutorial.OpenEverything</code>이다.</li><li><strong>재시작:</strong> 스테이지 도중 앱을 끄면 다음 진입 때 길의 처음부터 다시 시작한다(스킬도 다시 비운다).</li><li><strong>HUD 스킬 레벨 올리기(일반 기능):</strong> 남은 스킬 포인트가 있으면 HUD 기술 칸 목록에 아직 배우지 않은 스킬이 흐리게 따라 나오고, 누르면 상세 창의 &#x27;레벨 올리기&#x27;로 포인트를 쓴다. 튜토리얼이 가르친 경로가 이후 균열에서도 그대로 쓰이도록 일반 기능으로 넣었다.</li><li>주요 파일: <code>GuideTutorial.cs</code>(맵·단계·규칙), <code>CombatSimulation.Guide.cs</code>(걷기·소환·단계 전환), <code>GameStore.Guide.cs</code>(입장·졸업), <code>GameUI.GuideTutorial.cs</code>(대사·HUD 수업), <code>GameController.Tutorials.cs</code>(진입 경로).</li></ul><h2 id=\"검증\">검증</h2><ul><li>Edit Mode <code>GuideTutorialTests</code> 2개: 새 계정이 왼쪽 끝에서 시작해 인사·첫 전투·포위·회오리 수업·전멸·졸업까지 진행, 길이 오른쪽 위로 꺾이고 걸을 수 있음. 관련 테스트 묶음은 아래 PR 기록 참고.</li><li>macOS 개발 빌드 <code>RuntimeGuideTutorialSmoke</code>(<code>-hellscriptGuideTutorialSmoke -hellscriptOfflineQa</code>): 440×956 한국어, 956×440 영어에서 통과. 새 게스트가 직업 선택 없이 전사로 입장, 벨리나 초상과 대사, 가림막을 통한 실제 포인터 4번(기술 칸·회오리·레벨 올리기·장착), 회오리 전멸, 마을 도착과 졸업 1회.</li><li>미검증: 실기기, 사람의 이해도, 긴 영어 문장의 다른 해상도 잘림, 기존 퍼즐 튜토리얼 스모크(새 계정이 더 이상 퍼즐로 가지 않음).</li><li>새 계정의 직업 선택 생략에 맞춰, 새 세이브로 직업 선택 화면을 확인하던 스모크 5개(타이틀·캐릭터 선택·장비 상점 배치·마을 모델·프레젠테이션 프로필)는 게스트 로그인 전에 튜토리얼 면제를 설정한다.</li></ul>",
+          "headings": [
+            {
+              "id": "안내자",
+              "title": "안내자"
+            },
+            {
+              "id": "진행과-대사",
+              "title": "진행과 대사"
+            },
+            {
+              "id": "규칙과-구현",
+              "title": "규칙과 구현"
+            },
+            {
+              "id": "검증",
+              "title": "검증"
+            }
+          ]
+        }
+      ],
+      "revision": 1,
+      "date": "2026-10-11",
+      "capturedAt": "2026-10-11T13:16:28+09:00",
+      "hash": "81e4e61d4996be4752c95299203fb725829649e74fdcc50910d671bd9de0f030",
+      "body": "# 안내 튜토리얼 1구간 (2026-10-11)\n\n갱신일: 2026-10-11\n\n[English](Guide_Tutorial_Script_20261011.en.md). 퍼즐 레벨 튜토리얼을 대체하는 튜토리얼 전용 스테이지(흐름 6)의 첫 구간이다. 대본, 안내자 설정, 구현과 검증을 함께 기록한다.\n\n## 안내자\n\n- 이름: **벨리나**, 칭호 \"칙령의 여신\". 이름은 베일(velum)에서 왔다. 천으로 눈을 가린 모습은 그림으로만 보여 주고, 대사에서는 눈 가림이나 시간 정지 같은 설정을 설명하지 않는다(2026-10-11 사용자 요청).\n- 말투: **존댓말**로, 영웅이 아니라 **게임을 하는 플레이어에게** 말한다. 영웅은 \"당신이 지켜보는 이 영웅\"이다.\n- 초상: Codex 생성 후보 B(손바닥의 빛으로 이끄는 자세). `Resources/Art/NpcPortraits/guide-goddess(-mirror).png`, 원본·프롬프트·메타는 `Docs/Art/GuideGoddess/`.\n- 개발자는 직접 등장하지 않는다. 세계관을 깨지 않도록 \"이 세계의 규칙을 알려 주는 여신\"으로만 말한다.\n\n## 진행과 대사\n\n맵은 오른쪽 위로 꺾여 올라가는 네 개의 방(입구 회랑, 첫 투기장, 긴 회랑, 광장)과 꺾인 통로다. 1구간은 앞의 두 방만 쓰고 나머지는 다음 구간의 길이다.\n\n| 단계 | 상황 | 시간 | 벨리나의 대사 |\n| --- | --- | --- | --- |\n| 등장 | \"칙령의 길\" 카드, 영웅이 입구 회랑 왼쪽 끝에서 걸어 들어온다 | 흐름 | — |\n| 인사 | 몇 걸음 뒤 멈춤 | 정지 | 어서 오세요. 이 세계에 오신 것을 환영합니다. / 저는 벨리나, 이 세계의 칙령을 관장하는 여신입니다. 당신이 이곳에서 길을 잃지 않도록, 이 세계의 규칙을 하나씩 알려 드릴게요. / 길이 짧지는 않지만 서두르지 않겠습니다. 천천히 따라와 주세요. → [따르겠습니다] |\n| 길 | 영웅이 길을 따라 첫 투기장으로 가서 첫 적과 평타로 싸운다(스킬 없음) | 흐름 | — |\n| 첫 대화 | 첫 타격이 오간 직후 | 정지 | 보셨나요? 영웅이 적을 만나자 스스로 검을 휘둘렀습니다. / 당신이 지켜보는 이 영웅은 적을 만나면 알아서 싸웁니다. 검을 뽑으라고 일일이 말해 줄 필요는 없어요. / 다만 어떻게 싸울지는 당신이 정해야 합니다. 영웅은 당신이 사냥 칙령에 적은 대로, 한 글자도 어김없이 따를 거예요. / 지금은 평범한 공격뿐이에요. 우선 이 싸움을 끝까지 지켜봐 주세요. → [싸움을 지켜본다] |\n| 포위 | 첫 적이 쓰러지면 사방에서 8마리가 나타나 둘러싼다 | 정지 | 보세요, 사방이 막혔습니다. 평범한 공격만으로는 이 무리를 감당하기 어려워요. / 이제 영웅에게 새로운 기술 쓰는 법을 가르쳐 주세요. / 당신이 정해 준 기술로, 영웅은 저 무리와 맞서 싸울 거예요. → [기술을 가르친다] |\n| 수업 | 전투 HUD에서 첫 기술 칸 → 회오리 → 레벨 올리기 → 장착 (가림막이 한 단계씩 안내) | 정지 | 영웅의 첫 번째 기술 칸을 눌러 주세요. / 회오리예요. 몸을 돌려 주변의 적을 한꺼번에 베는 기술이죠. 눌러서 살펴보세요. / 스킬 포인트가 1점 있어요. '레벨 올리기'를 눌러 영웅이 회오리를 익히게 해 주세요. / 이제 '장착'을 눌러 첫 번째 칸에 올려 주세요. |\n| 회오리 | 시간이 다시 흐르고 영웅이 회오리로 무리를 쓸어낸다 | 흐름 | 보세요, 당신이 가르친 기술이에요. (말풍선) |\n| 끝 | 전멸 직후 | 정지 | 보셨나요? 영웅이 당신이 가르친 그대로 움직였습니다. / 이것이 사냥 칙령이에요. 앞으로도 길이 막힐 때마다 칙령을 고쳐 써서 길을 열어 주세요. / 길은 저 위로 이어집니다. 마을에 닿을 때까지 제가 계속 지켜볼게요. → [마을로 향한다] → 졸업, 마을 |\n\n시간이 멈춘 단계에는 화면 가장자리에 옅은 푸른 기운이 돈다. 영웅은 이 스테이지에서 쓰러지지 않는다(체력이 0이 되면 다시 채운다).\n\n## 규칙과 구현\n\n- **첫 시작:** 튜토리얼을 시작하거나 마친 영웅이 없는 계정(`GuideTutorial.FirstStart`)은 게스트·구글 로그인 뒤 직업 선택 없이 전사로 바로 들어간다. 중단 후 다시 들어와도 같다.\n- **진행 중인 퍼즐 계정:** 이미 퍼즐 레벨을 진행 중인 계정은 기존 퍼즐을 마저 한다. 새 계정만 새 스테이지를 탄다.\n- **졸업:** 1구간을 마치면 바로 마을로 졸업한다(`guide-graduate` 거래 1회, 기존 프롤로그 금화 지급). 전사의 스테이지가 모든 영웅의 튜토리얼을 대신하므로 다른 직업은 튜토리얼 없이 마을에서 시작한다. 칙령 옵션 공개는 퍼즐 없이 균열 진행도에 따른 기존 규칙을 쓴다.\n- **마을 도착 = 튜토리얼 완료(2026-10-11 추가):** 졸업과 함께 튜토리얼이 모두 끝난 것으로 보고 모든 기능을 연다. 모든 콘텐츠 해금(훈련장~걸작 강화), 사냥 칙령의 모든 옵션 공개(`edictLegacyAccess`), 반복 사냥 설정, 룬판(룬 수업 없이 완료 처리, 균열 15 첫 클리어의 룬 블럭 세트 수업 보상은 없음)을 열고 튜토리얼 힌트를 끈다(설정에서 다시 켤 수 있음). 표시는 `AccountGuide.everythingOpen`, 처리는 `GuideTutorial.OpenEverything`이다.\n- **재시작:** 스테이지 도중 앱을 끄면 다음 진입 때 길의 처음부터 다시 시작한다(스킬도 다시 비운다).\n- **HUD 스킬 레벨 올리기(일반 기능):** 남은 스킬 포인트가 있으면 HUD 기술 칸 목록에 아직 배우지 않은 스킬이 흐리게 따라 나오고, 누르면 상세 창의 '레벨 올리기'로 포인트를 쓴다. 튜토리얼이 가르친 경로가 이후 균열에서도 그대로 쓰이도록 일반 기능으로 넣었다.\n- 주요 파일: `GuideTutorial.cs`(맵·단계·규칙), `CombatSimulation.Guide.cs`(걷기·소환·단계 전환), `GameStore.Guide.cs`(입장·졸업), `GameUI.GuideTutorial.cs`(대사·HUD 수업), `GameController.Tutorials.cs`(진입 경로).\n\n## 검증\n\n- Edit Mode `GuideTutorialTests` 2개: 새 계정이 왼쪽 끝에서 시작해 인사·첫 전투·포위·회오리 수업·전멸·졸업까지 진행, 길이 오른쪽 위로 꺾이고 걸을 수 있음. 관련 테스트 묶음은 아래 PR 기록 참고.\n- macOS 개발 빌드 `RuntimeGuideTutorialSmoke`(`-hellscriptGuideTutorialSmoke -hellscriptOfflineQa`): 440×956 한국어, 956×440 영어에서 통과. 새 게스트가 직업 선택 없이 전사로 입장, 벨리나 초상과 대사, 가림막을 통한 실제 포인터 4번(기술 칸·회오리·레벨 올리기·장착), 회오리 전멸, 마을 도착과 졸업 1회.\n- 미검증: 실기기, 사람의 이해도, 긴 영어 문장의 다른 해상도 잘림, 기존 퍼즐 튜토리얼 스모크(새 계정이 더 이상 퍼즐로 가지 않음).\n- 새 계정의 직업 선택 생략에 맞춰, 새 세이브로 직업 선택 화면을 확인하던 스모크 5개(타이틀·캐릭터 선택·장비 상점 배치·마을 모델·프레젠테이션 프로필)는 게스트 로그인 전에 튜토리얼 면제를 설정한다.\n",
+      "html": "<p>갱신일: 2026-10-11</p><p><a href=\"#/page/guide-tutorial-script-20261011.en\">English</a>. 퍼즐 레벨 튜토리얼을 대체하는 튜토리얼 전용 스테이지(흐름 6)의 첫 구간이다. 대본, 안내자 설정, 구현과 검증을 함께 기록한다.</p><h2 id=\"안내자\">안내자</h2><ul><li>이름: <strong>벨리나</strong>, 칭호 &quot;칙령의 여신&quot;. 이름은 베일(velum)에서 왔다. 천으로 눈을 가린 모습은 그림으로만 보여 주고, 대사에서는 눈 가림이나 시간 정지 같은 설정을 설명하지 않는다(2026-10-11 사용자 요청).</li><li>말투: <strong>존댓말</strong>로, 영웅이 아니라 <strong>게임을 하는 플레이어에게</strong> 말한다. 영웅은 &quot;당신이 지켜보는 이 영웅&quot;이다.</li><li>초상: Codex 생성 후보 B(손바닥의 빛으로 이끄는 자세). <code>Resources/Art/NpcPortraits/guide-goddess(-mirror).png</code>, 원본·프롬프트·메타는 <code>Docs/Art/GuideGoddess/</code>.</li><li>개발자는 직접 등장하지 않는다. 세계관을 깨지 않도록 &quot;이 세계의 규칙을 알려 주는 여신&quot;으로만 말한다.</li></ul><h2 id=\"진행과-대사\">진행과 대사</h2><p>맵은 오른쪽 위로 꺾여 올라가는 네 개의 방(입구 회랑, 첫 투기장, 긴 회랑, 광장)과 꺾인 통로다. 1구간은 앞의 두 방만 쓰고 나머지는 다음 구간의 길이다.</p><div class=\"table-scroll\"><table><thead><tr><th scope=\"col\">단계</th><th scope=\"col\">상황</th><th scope=\"col\">시간</th><th scope=\"col\">벨리나의 대사</th></tr></thead><tbody><tr><td>등장</td><td>&quot;칙령의 길&quot; 카드, 영웅이 입구 회랑 왼쪽 끝에서 걸어 들어온다</td><td>흐름</td><td>—</td></tr><tr><td>인사</td><td>몇 걸음 뒤 멈춤</td><td>정지</td><td>어서 오세요. 이 세계에 오신 것을 환영합니다. / 저는 벨리나, 이 세계의 칙령을 관장하는 여신입니다. 당신이 이곳에서 길을 잃지 않도록, 이 세계의 규칙을 하나씩 알려 드릴게요. / 길이 짧지는 않지만 서두르지 않겠습니다. 천천히 따라와 주세요. → [따르겠습니다]</td></tr><tr><td>길</td><td>영웅이 길을 따라 첫 투기장으로 가서 첫 적과 평타로 싸운다(스킬 없음)</td><td>흐름</td><td>—</td></tr><tr><td>첫 대화</td><td>첫 타격이 오간 직후</td><td>정지</td><td>보셨나요? 영웅이 적을 만나자 스스로 검을 휘둘렀습니다. / 당신이 지켜보는 이 영웅은 적을 만나면 알아서 싸웁니다. 검을 뽑으라고 일일이 말해 줄 필요는 없어요. / 다만 어떻게 싸울지는 당신이 정해야 합니다. 영웅은 당신이 사냥 칙령에 적은 대로, 한 글자도 어김없이 따를 거예요. / 지금은 평범한 공격뿐이에요. 우선 이 싸움을 끝까지 지켜봐 주세요. → [싸움을 지켜본다]</td></tr><tr><td>포위</td><td>첫 적이 쓰러지면 사방에서 8마리가 나타나 둘러싼다</td><td>정지</td><td>보세요, 사방이 막혔습니다. 평범한 공격만으로는 이 무리를 감당하기 어려워요. / 이제 영웅에게 새로운 기술 쓰는 법을 가르쳐 주세요. / 당신이 정해 준 기술로, 영웅은 저 무리와 맞서 싸울 거예요. → [기술을 가르친다]</td></tr><tr><td>수업</td><td>전투 HUD에서 첫 기술 칸 → 회오리 → 레벨 올리기 → 장착 (가림막이 한 단계씩 안내)</td><td>정지</td><td>영웅의 첫 번째 기술 칸을 눌러 주세요. / 회오리예요. 몸을 돌려 주변의 적을 한꺼번에 베는 기술이죠. 눌러서 살펴보세요. / 스킬 포인트가 1점 있어요. &#x27;레벨 올리기&#x27;를 눌러 영웅이 회오리를 익히게 해 주세요. / 이제 &#x27;장착&#x27;을 눌러 첫 번째 칸에 올려 주세요.</td></tr><tr><td>회오리</td><td>시간이 다시 흐르고 영웅이 회오리로 무리를 쓸어낸다</td><td>흐름</td><td>보세요, 당신이 가르친 기술이에요. (말풍선)</td></tr><tr><td>끝</td><td>전멸 직후</td><td>정지</td><td>보셨나요? 영웅이 당신이 가르친 그대로 움직였습니다. / 이것이 사냥 칙령이에요. 앞으로도 길이 막힐 때마다 칙령을 고쳐 써서 길을 열어 주세요. / 길은 저 위로 이어집니다. 마을에 닿을 때까지 제가 계속 지켜볼게요. → [마을로 향한다] → 졸업, 마을</td></tr></tbody></table></div><p>시간이 멈춘 단계에는 화면 가장자리에 옅은 푸른 기운이 돈다. 영웅은 이 스테이지에서 쓰러지지 않는다(체력이 0이 되면 다시 채운다).</p><h2 id=\"규칙과-구현\">규칙과 구현</h2><ul><li><strong>첫 시작:</strong> 튜토리얼을 시작하거나 마친 영웅이 없는 계정(<code>GuideTutorial.FirstStart</code>)은 게스트·구글 로그인 뒤 직업 선택 없이 전사로 바로 들어간다. 중단 후 다시 들어와도 같다.</li><li><strong>진행 중인 퍼즐 계정:</strong> 이미 퍼즐 레벨을 진행 중인 계정은 기존 퍼즐을 마저 한다. 새 계정만 새 스테이지를 탄다.</li><li><strong>졸업:</strong> 1구간을 마치면 바로 마을로 졸업한다(<code>guide-graduate</code> 거래 1회, 기존 프롤로그 금화 지급). 전사의 스테이지가 모든 영웅의 튜토리얼을 대신하므로 다른 직업은 튜토리얼 없이 마을에서 시작한다. 칙령 옵션 공개는 퍼즐 없이 균열 진행도에 따른 기존 규칙을 쓴다.</li><li><strong>마을 도착 = 튜토리얼 완료(2026-10-11 추가):</strong> 졸업과 함께 튜토리얼이 모두 끝난 것으로 보고 모든 기능을 연다. 모든 콘텐츠 해금(훈련장~걸작 강화), 사냥 칙령의 모든 옵션 공개(<code>edictLegacyAccess</code>), 반복 사냥 설정, 룬판(룬 수업 없이 완료 처리, 균열 15 첫 클리어의 룬 블럭 세트 수업 보상은 없음)을 열고 튜토리얼 힌트를 끈다(설정에서 다시 켤 수 있음). 표시는 <code>AccountGuide.everythingOpen</code>, 처리는 <code>GuideTutorial.OpenEverything</code>이다.</li><li><strong>재시작:</strong> 스테이지 도중 앱을 끄면 다음 진입 때 길의 처음부터 다시 시작한다(스킬도 다시 비운다).</li><li><strong>HUD 스킬 레벨 올리기(일반 기능):</strong> 남은 스킬 포인트가 있으면 HUD 기술 칸 목록에 아직 배우지 않은 스킬이 흐리게 따라 나오고, 누르면 상세 창의 &#x27;레벨 올리기&#x27;로 포인트를 쓴다. 튜토리얼이 가르친 경로가 이후 균열에서도 그대로 쓰이도록 일반 기능으로 넣었다.</li><li>주요 파일: <code>GuideTutorial.cs</code>(맵·단계·규칙), <code>CombatSimulation.Guide.cs</code>(걷기·소환·단계 전환), <code>GameStore.Guide.cs</code>(입장·졸업), <code>GameUI.GuideTutorial.cs</code>(대사·HUD 수업), <code>GameController.Tutorials.cs</code>(진입 경로).</li></ul><h2 id=\"검증\">검증</h2><ul><li>Edit Mode <code>GuideTutorialTests</code> 2개: 새 계정이 왼쪽 끝에서 시작해 인사·첫 전투·포위·회오리 수업·전멸·졸업까지 진행, 길이 오른쪽 위로 꺾이고 걸을 수 있음. 관련 테스트 묶음은 아래 PR 기록 참고.</li><li>macOS 개발 빌드 <code>RuntimeGuideTutorialSmoke</code>(<code>-hellscriptGuideTutorialSmoke -hellscriptOfflineQa</code>): 440×956 한국어, 956×440 영어에서 통과. 새 게스트가 직업 선택 없이 전사로 입장, 벨리나 초상과 대사, 가림막을 통한 실제 포인터 4번(기술 칸·회오리·레벨 올리기·장착), 회오리 전멸, 마을 도착과 졸업 1회.</li><li>미검증: 실기기, 사람의 이해도, 긴 영어 문장의 다른 해상도 잘림, 기존 퍼즐 튜토리얼 스모크(새 계정이 더 이상 퍼즐로 가지 않음).</li><li>새 계정의 직업 선택 생략에 맞춰, 새 세이브로 직업 선택 화면을 확인하던 스모크 5개(타이틀·캐릭터 선택·장비 상점 배치·마을 모델·프레젠테이션 프로필)는 게스트 로그인 전에 튜토리얼 면제를 설정한다.</li></ul>",
+      "headings": [
+        {
+          "id": "안내자",
+          "title": "안내자"
+        },
+        {
+          "id": "진행과-대사",
+          "title": "진행과 대사"
+        },
+        {
+          "id": "규칙과-구현",
+          "title": "규칙과 구현"
+        },
+        {
+          "id": "검증",
+          "title": "검증"
+        }
+      ],
+      "createdAt": "2026-10-11T13:16:28+09:00",
+      "updatedAt": "2026-10-11T13:16:28+09:00",
+      "visibility": "internal"
+    },
+    {
       "id": "localization-expansion",
       "title": "언어 설정 개발 기록",
       "shortTitle": "언어 설정 개발 기록",
@@ -121867,7 +122003,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 441
+              "line": 443
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -121910,7 +122046,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 442
+              "line": 444
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -121953,7 +122089,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 443
+              "line": 445
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -121996,7 +122132,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 444
+              "line": 446
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122039,7 +122175,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 445
+              "line": 447
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122082,7 +122218,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 446
+              "line": 448
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122125,7 +122261,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 447
+              "line": 449
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122168,7 +122304,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 448
+              "line": 450
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122211,7 +122347,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 449
+              "line": 451
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122254,7 +122390,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 450
+              "line": 452
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122297,7 +122433,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 451
+              "line": 453
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122340,7 +122476,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 452
+              "line": 454
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122383,7 +122519,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 453
+              "line": 455
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122426,7 +122562,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 454
+              "line": 456
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122469,7 +122605,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 455
+              "line": 457
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122512,7 +122648,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 456
+              "line": 458
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122555,7 +122691,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 457
+              "line": 459
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122598,7 +122734,7 @@
           "refs": [
             {
               "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-              "line": 458
+              "line": 460
             },
             {
               "path": "Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json",
@@ -122931,7 +123067,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 420
+            "line": 422
           },
           "status": "현재 정의",
           "related": [
@@ -122951,7 +123087,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 421
+            "line": 423
           },
           "status": "현재 정의",
           "related": [
@@ -122971,7 +123107,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 422
+            "line": 424
           },
           "status": "현재 정의",
           "related": [
@@ -122991,7 +123127,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 423
+            "line": 425
           },
           "status": "현재 정의",
           "related": [
@@ -123011,7 +123147,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 424
+            "line": 426
           },
           "status": "현재 정의",
           "related": [
@@ -123031,7 +123167,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 425
+            "line": 427
           },
           "status": "현재 정의",
           "related": [
@@ -123051,7 +123187,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 426
+            "line": 428
           },
           "status": "현재 정의",
           "related": [
@@ -123071,7 +123207,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 427
+            "line": 429
           },
           "status": "현재 정의",
           "related": [
@@ -123091,7 +123227,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 428
+            "line": 430
           },
           "status": "현재 정의",
           "related": [
@@ -123111,7 +123247,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 429
+            "line": 431
           },
           "status": "현재 정의",
           "related": [
@@ -123131,7 +123267,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 430
+            "line": 432
           },
           "status": "현재 정의",
           "related": [
@@ -123151,7 +123287,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 431
+            "line": 433
           },
           "status": "현재 정의",
           "related": [
@@ -123171,7 +123307,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 432
+            "line": 434
           },
           "status": "현재 정의",
           "related": [
@@ -123191,7 +123327,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 433
+            "line": 435
           },
           "status": "현재 정의",
           "related": [
@@ -123211,7 +123347,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 434
+            "line": 436
           },
           "status": "현재 정의",
           "related": [
@@ -123231,7 +123367,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 424
+            "line": 426
           },
           "status": "현재 정의",
           "related": [
@@ -123251,7 +123387,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 436
+            "line": 438
           },
           "status": "현재 정의",
           "related": [
@@ -123271,7 +123407,7 @@
           },
           "source": {
             "path": "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs",
-            "line": 437
+            "line": 439
           },
           "status": "현재 정의",
           "related": [
@@ -290087,7 +290223,7 @@
     "Assets/HELLSCRIPT/Resources/HuntEdictProgression.json": "01f09d14d285dfa6e4e9c1b840e0d31fbcc8258fd1df265376ed8c03b44bdf59",
     "Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json": "38d9a3107751c146c3c87e22be437ccd03e59ecc4bb8d6132c2e72be1fcde467",
     "Assets/HELLSCRIPT/Resources/HuntEdictUi.json": "e6f1adb1acca5efea6fa8545e2ab97770a6c9817242723e97a83811b21a803ef",
-    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "4fed510a9395bb6e74d6a8488fbf4ef2ef7dae836bf9f0d9226142de90cc9579",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "c078fd5fa94681a6e3b58d30e0c98e4b7179ebd6431f4638d6eb783221408419",
     "Assets/HELLSCRIPT/Resources/Materials/RuntimeShader.mat": "a95e1ea15d92e4846a1160bcbf64100f756de2f4a06fbb2d47275d1409ce191c",
     "Assets/HELLSCRIPT/Resources/Materials/RuntimeShader.mat.meta": "e2571f25d1c83c0979fb7ac982d06d896a2bcde8084f5085815f68e4585441a7",
     "Assets/HELLSCRIPT/Resources/NpcProfiles.json": "595b9493b58d1e65fba75a809cf45d7abbea2db52795d42069f4f89cac33dc79",
@@ -290127,12 +290263,12 @@
     "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Passives.cs": "5bad58d4e6029f738c080f012d1e045ee17766b460e7c508c3be82e0387f4cc1",
     "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Potions.cs": "6f62ec5ade33512714447c250533074573825a41c0d23913dd89de9b23e17ac0",
     "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Projectiles.cs": "787da0e040300899cdb502201b79995d4446c9d643871d7b8b3204ac7b860432",
-    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Rift.cs": "f4ccf95be138921ed9feae78197ad811de47bd3d0b856aa15d69d75a66d77259",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Rift.cs": "96a80ded9ad2a312db7b5244fb2bfdd708abd68b2e3814b5c3b207b9f9d57e72",
     "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.Rules.cs": "828a56e0aa67f50328f277bed15f7bbc42b144d30041da2b9b79efd84ced37db",
     "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.SkillIdentity.cs": "771428e0881f5827eb758203ec0fe9317babc16d9ca5ff58b5ecfe50bb8b2c40",
     "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.SkillPreview.cs": "26a9d83fc761d0c841bc96169dbf8252c37c40552a24d036b35b4e3c5886e797",
-    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs": "b6e181697698328102038810560443a689007e165fd2f9b442025ce8283d4e77",
-    "Assets/HELLSCRIPT/Runtime/Core/ContentUnlocks.cs": "493480b402340249e51cc19e04e37820549735476060126cfff268727a486503",
+    "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.cs": "f826f431c2c2a4b65a6364dded24282cca7add9680b9d21237ed7397b8ccf559",
+    "Assets/HELLSCRIPT/Runtime/Core/ContentUnlocks.cs": "145061c0a8e5f1b8c753938e75fa3d28ab1438af8645d4480506ed793574c66f",
     "Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs": "d47dc1dc1b91e6ff032b384904a6c877faf00b0f089632220c108d49f2d5197a",
     "Assets/HELLSCRIPT/Runtime/Core/Economy.ContentServices.cs": "6730975792e04a5d5ca1f1b198e839d855ba677e8cd37e8f4f3a649636155e5a",
     "Assets/HELLSCRIPT/Runtime/Core/Economy.cs": "fa8071cd50014baa4b473485ece536b174ac2641f23ac1c55d3cc1f82bd5dd08",
@@ -290142,7 +290278,7 @@
     "Assets/HELLSCRIPT/Runtime/Core/EquipmentScore.cs": "3d146a58137bfe152c68a3895ba527de331ac57ca4c6cd515ff0416d4729a304",
     "Assets/HELLSCRIPT/Runtime/Core/EquipmentSlots.cs": "326e78d28f6ff20a70a0c766079305294adec17aade525287ca2c079962e9038",
     "Assets/HELLSCRIPT/Runtime/Core/ForegroundCombatClock.cs": "3ef44bfbb2aa96813ca780cba3a7a960c578e259f47044da5d519ca542bc2408",
-    "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs": "731d04c15eb5c73572ae5dd31e1f36c0f2120abe11ba0037653f2fe60af08152",
+    "Assets/HELLSCRIPT/Runtime/Core/GameCatalog.cs": "a34e8a81eb9f1647031e03f8f353b5adc44cb4d81744c50730ef95eac83d75cb",
     "Assets/HELLSCRIPT/Runtime/Core/GameStore.Attendance.cs": "1b00c98c848a066d611df9fc894fc5216306ff96da440b7a4cc91e74c02182f8",
     "Assets/HELLSCRIPT/Runtime/Core/GameStore.BuildChanges.cs": "37ed3f0348d78445a9ef788155e2ef2a3775befb0032db8c52e8ddbd4d940608",
     "Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs": "54a86276c5c68bedd192845cc945a69a3fb7471a5c73f21f0285ec056076e743",
@@ -290167,11 +290303,11 @@
     "Assets/HELLSCRIPT/Runtime/Core/Jeweler.cs": "04862c770255b88a65b41661fdfbceadaaed1de7882742f7125acf6b1175ef9e",
     "Assets/HELLSCRIPT/Runtime/Core/LegendaryPowers.cs": "b0c97b805f2f9b664d97438537ea1f6f2d55e270402a3a719212549f49438e44",
     "Assets/HELLSCRIPT/Runtime/Core/LiveOpsConfig.cs": "0d5f32e7fc5e238153d0cd3311de714716f3cb836592b9fec57422b3f87fda07",
-    "Assets/HELLSCRIPT/Runtime/Core/NpcProfiles.cs": "198c409115b08a1bb459b1feead1332d02178bafd1439fbee35094fbc3c3945a",
+    "Assets/HELLSCRIPT/Runtime/Core/NpcProfiles.cs": "2b59526a194f2043f7f6aaa35ef013bdf652c472505991a0e3fa4299461c7caa",
     "Assets/HELLSCRIPT/Runtime/Core/OfflineSupplies.cs": "0181b050dc586f4a5a2e060585e36629d1b3564cdb02f4547c67d46eabe4d6a7",
     "Assets/HELLSCRIPT/Runtime/Core/OperationsRewards.cs": "ffa03b9b05bd30f3ca8126e9d44117177e5a31839a7069ac884cc39d41d67f63",
     "Assets/HELLSCRIPT/Runtime/Core/PotionLoadout.cs": "ef0512256a12703686e11d3868cb9ed3e4a8cb53503ee43a471d6d1d7894d9a1",
-    "Assets/HELLSCRIPT/Runtime/Core/RepeatHunt.cs": "71c71ebf7340c4c714818bbc3a9d2ed8ba2b29b3d1a75b8c5c823d9181a20823",
+    "Assets/HELLSCRIPT/Runtime/Core/RepeatHunt.cs": "3d71ca3f020c83c28fe16b5a50a9f824078298cdee8a140e086c5485e296b937",
     "Assets/HELLSCRIPT/Runtime/Core/RewardBoxes.cs": "bc6cc6ad3ec83be922474890e5ecca54b0b554803e6acc188e0e32b9e00a984b",
     "Assets/HELLSCRIPT/Runtime/Core/RiftBossPlacement.cs": "c693c71b64dac6dff2b67e1431f3c4f376cea0eb8b84b4b211dfb81bef3042c8",
     "Assets/HELLSCRIPT/Runtime/Core/RiftCirculation.cs": "255277188df581030392fcad85431f8fcaf60209466c1c44732c27a0d653aacb",
@@ -290207,12 +290343,12 @@
     "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentSlotView.cs": "d4ccb29ac42d8a475600e17cb44f49ed72c39bb2aeacdbd31b23b274491f2cee",
     "Assets/HELLSCRIPT/Runtime/Presentation/FieldLook.cs": "82c50512c7d52b307351978afb694101d07dac5342f7b7bbd8ca3a8ab55513a9",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameAudio.Clips.cs": "7981bda658d5b1de097395ad16183017398d1807a78c0308213af9e922218d83",
-    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.CharacterSelection.cs": "16c1b64410b879f6105629144c4c8d1cdb0ba17ee6dc72f4b4dcacdba13d710c",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameController.CharacterSelection.cs": "e4b03203aca564c0dea081ae8babc0e321825a2f6e092806621daaec0e12a371",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameController.Idle.cs": "2ad9b37ba045a390fa1afe1d503222bdbecdb2844923e0daaeafa295802899ff",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameController.cs": "9aeb73cc5b87ea139df4c01046fc68534df4e6a8500dcfeea98868157c72f8b1",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameServerConnection.cs": "fd1a7744d1ff5799db007d31217b7c4b0ec92f5e92b8be0db6b55f28567115a9",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs": "619ee8b0971cf983cb47fa4e4559dd141eea74cc1e3c81c49c9e446406a5249c",
-    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.CharacterSelection.cs": "42f3cf4f797f2365c80096a174c0f57728028dd79d387aa6d0be304501cc95d6",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.CharacterSelection.cs": "60562a697c52a35c22e6a95857060642e1bb82afe88df1fc362987bfbebc85dc",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Comparison.cs": "7acebf240d6f52ce42cf2da8befb9239232d86b93619207745ccff8f2ef60f5a",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs": "ba91d6bd0e096f08dcf1b44b2fe932b3040e0a2e037b533a5b9e5eae9bebe327",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentUnlocks.cs": "4047e494ef2c303b4426092fe2b3e7ead93b1f55d524a9287206319c05cf0f8d",
@@ -290237,7 +290373,7 @@
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TownServices.cs": "f8013ebeb9d1886972b52d9e50bfc4bedca349ff7005cd68e92f1c9f5f6f708a",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialComparison.cs": "4d23e672175b1a65bedadae9ed44d8c59c74b95728593773ad8ae4d14eb27b60",
     "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ViewDistance.cs": "5eb097db93a257a1f47c343918f117ec4ebc379c7bfb38b06108d0b78fed1586",
-    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "384ef128ff42b8d12b5d5722e7edeec346cda38bcb4e9a804ff7211fc0864e69",
+    "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs": "c5106d38443cc0d3dea58beea88e02a94a57b3f99efbb0b422baeaab2b65bb0a",
     "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudLayout.cs": "5eabc2d3938a05113a0b50777a5658f7425e02825c5f208a5a7119d9a25e0a1b",
     "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs": "bd44f8293958f4b680094cf0e5cfef712f9c88ac96e8d604e54df4e050d649de",
     "Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Equipment.cs": "8f2f9168598fbd98fe9c1f7dde350c2ef21459acaaa14fcb6f2cd72bba59d612",
@@ -292223,6 +292359,8 @@
     "Docs/Implementation/Gravity_Collapse.en.md": "07ef13077aab6b87817e2d8db290ce77507ed5083672d2cf1dd04a5f28b78d89",
     "Docs/Implementation/Gravity_Collapse.md": "79eff188c768afc4091e514c29a418aa393986f830222033dcd3b4d701d43511",
     "Docs/Implementation/Growth_Expansion.md": "100e2ea93249c14e0dfe317bad42a219e80466d8d6eedcbc3ab1d2d34f969c84",
+    "Docs/Implementation/Guide_Tutorial_Script_20261011.en.md": "c5735442cfe34756b1e74c0dac5d5e6fe3767a13fbe8e718a2337480235f00fb",
+    "Docs/Implementation/Guide_Tutorial_Script_20261011.md": "81e4e61d4996be4752c95299203fb725829649e74fdcc50910d671bd9de0f030",
     "Docs/Implementation/HeroSkillEffectsEvidence/class-skill-lasting-and-releases.png": "41b9678f0d66ea1a14f4992bc92a9072856f3a9402f384e0ace0a7b3fec43130",
     "Docs/Implementation/HeroSkillEffectsEvidence/legacy-skill-kinds.png": "d58cd108342b266fe841989eba60a751ccead13d9c706774dfc41b34a8d8661b",
     "Docs/Implementation/HeroSkillEffectsEvidence/runtime-art-gallery-smoke.txt": "6da3f120447a529bab84e10caafe199db1bec942133c6e35f79e9c3444b95a13",

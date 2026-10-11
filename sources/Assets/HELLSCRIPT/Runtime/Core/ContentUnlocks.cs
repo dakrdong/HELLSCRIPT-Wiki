@@ -80,6 +80,15 @@ namespace Hellscript
             if(s.unlocked.Contains(Offline)&&s.offlineActivatedUtc==0)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
         static void Grant(ContentUnlockState s,string id){if(!s.unlocked.Contains(id))s.unlocked.Add(id);}
+        public static void GrantAll(AccountSave a)
+        {
+            Reconcile(a);var s=a.contentUnlocks;
+            foreach(var f in Rules.features)
+            {
+                if(s.unlocked.Contains(f.id))continue;
+                Grant(s,f.id);if(f.id==Offline)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            }
+        }
         public static void Reconcile(AccountSave a)
         {
             if(a.contentUnlocks?.version!=Version){Normalize(a);return;}

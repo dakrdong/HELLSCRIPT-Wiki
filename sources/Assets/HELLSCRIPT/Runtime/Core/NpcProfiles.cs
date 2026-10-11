@@ -32,9 +32,10 @@ namespace Hellscript
         public static IEnumerable<NpcProfile> WithSpeakers=>All.Concat(Speakers);
         // Speakers who never stand in the town: the prologue's voice and the three heroes. Kept out of All so
         // town placement and reach checks only see residents.
-        public const string Voice="prologue-voice",Commander="pit-commander";
+        public const string Voice="prologue-voice",Commander="pit-commander",Guide="guide-goddess";
         static readonly NpcProfile[] Speakers={
             new NpcProfile{id=Voice,name="하늘의 목소리",role="칙령의 목소리",portrait="Art/NpcPortraits/prologue-divine-voice",portraitFacing="right",portraitMirror="Art/NpcPortraits/prologue-divine-voice-mirror"},
+            new NpcProfile{id=Guide,name="벨리나",role="칙령의 여신",portrait="Art/NpcPortraits/guide-goddess",portraitFacing="right",portraitMirror="Art/NpcPortraits/guide-goddess-mirror"},
             new NpcProfile{id=Commander,name="사령관",role="최종 시험 감독관",portrait="Art/NpcPortraits/pit-commander",portraitFacing="right",portraitMirror="Art/NpcPortraits/pit-commander-mirror"},
             new NpcProfile{id="hero-warrior",name="전사",role="수습전사",portrait="Art/NpcPortraits/hero-warrior",portraitFacing="left",portraitMirror="Art/NpcPortraits/hero-warrior-mirror"},
             new NpcProfile{id="hero-ranger",name="궁수",role="수습전사",portrait="Art/NpcPortraits/hero-ranger",portraitFacing="left",portraitMirror="Art/NpcPortraits/hero-ranger-mirror"},

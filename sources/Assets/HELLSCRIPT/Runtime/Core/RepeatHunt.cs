@@ -58,7 +58,7 @@ namespace Hellscript
     {
         public const int SettingsUnlockStage=15;
         public const string SettingsLockedMessage="반복 설정은 균열 15레벨 부터 가능합니다";
-        public static bool SettingsUnlocked(AccountSave account)=>account!=null&&(PuzzleTutorial.Active(account)&&PuzzleTutorial.Option(account,"repeat.enabled")||PuzzleTutorial.Progress(account.guide?.puzzle,13)?.cleared==true||ContentUnlocks.AccountClear(account)>=SettingsUnlockStage&&(HuntEdictProgression.Legacy(account)||account.guide?.runeBoard?.step==RuneBoardLesson.Complete));
+        public static bool SettingsUnlocked(AccountSave account)=>account!=null&&(account.guide?.everythingOpen==true||PuzzleTutorial.Active(account)&&PuzzleTutorial.Option(account,"repeat.enabled")||PuzzleTutorial.Progress(account.guide?.puzzle,13)?.cleared==true||ContentUnlocks.AccountClear(account)>=SettingsUnlockStage&&(HuntEdictProgression.Legacy(account)||account.guide?.runeBoard?.step==RuneBoardLesson.Complete));
         public static bool Terminal(RunState run)=>run!=null&&(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed);
         public static RepeatHuntSession Start(RunState run,RepeatHuntPolicy policy,RepeatHuntSession previous=null)
         {

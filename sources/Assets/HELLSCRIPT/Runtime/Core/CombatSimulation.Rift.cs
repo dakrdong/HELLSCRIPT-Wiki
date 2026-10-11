@@ -49,7 +49,8 @@ namespace Hellscript
                 State.layout.rooms.Add(new RiftRoom{index=0,position=Vector2.zero,size=new Vector2(16,16),role=RiftRoomRole.Entrance});
                 State.position=previewScenario.hero;
             }
-            if(fresh&&IsTutorial)
+            if(fresh&&IsGuide){State.layout=GuideTutorial.Layout();State.position=State.layout.start;}
+            else if(fresh&&IsTutorial)
             {
                 if(!IsPuzzle)State.tutorialFlowVersion=ProloguePhase.PitFlow;
                 State.layout=PitMap();
