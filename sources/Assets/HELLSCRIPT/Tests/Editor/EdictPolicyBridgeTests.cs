@@ -47,13 +47,13 @@ namespace Hellscript.Tests
         {
             var a=Account(0);
             var doc=With(a.Hero.edict,
-                ("target.default","LOW_HP"),("position.engage","STAND"),("position.mode","STAND"),("position.distanceSource","EXPLICIT"),("position.distance","5"),("position.clockwise","OFF"),
+                ("position.engage","STAND"),("position.mode","STAND"),("position.distanceSource","EXPLICIT"),("position.distance","5"),("position.clockwise","OFF"),
                 ("survival.potion","ON"),("survival.potionHpPercent","25"),
                 ("explore.mode","LEFT_WALL"),("explore.normalChest","IGNORE"),("explore.sealedChest","PRIORITY"),("explore.chestDetour","7"),("explore.chestsAfterBoss","ON"),
                 ("explore.cursedChest","CONDITIONAL"),("explore.cursedMinimumTime","120"),("explore.shrine","OFF"),("explore.guideShrine","OFF"),("explore.shrineDetour","3"),
                 ("repeat.enabled","ON"),("repeat.success","NEXT"),("repeat.failures","5"));
             var p=EdictPolicyBridge.Apply(a.Hero.build,doc,HeroClass.Warrior);
-            Assert.AreEqual(TargetMode.LowHealth,p.target);Assert.AreEqual(MovementMode.Stand,p.movement);Assert.AreEqual(5f,p.distance);Assert.IsFalse(p.clockwise);
+            Assert.AreEqual(TargetMode.Nearest,p.target);Assert.AreEqual(MovementMode.Stand,p.movement);Assert.AreEqual(5f,p.distance);Assert.IsFalse(p.clockwise);
             Assert.AreEqual(25f,p.potionThreshold);
             Assert.AreEqual(ExplorationPolicy.LeftWall,p.exploration);Assert.IsFalse(p.commonChests);Assert.IsTrue(p.sealedChests);Assert.AreEqual(7f,p.chestDetour);Assert.IsTrue(p.chestsAfterBoss);
             Assert.IsTrue(p.allowCursedChests);Assert.AreEqual(120f,p.cursedMinimumTime);Assert.IsFalse(p.useShrines);Assert.IsFalse(p.guideShrines);Assert.IsTrue(p.resolveShrines);Assert.AreEqual(3f,p.shrineDetour);
@@ -61,15 +61,11 @@ namespace Hellscript.Tests
         }
 
         [Test]
-        public void SpecialTargetsOverrideTheDefaultInTheDeclaredOrder()
+        public void CategoricalTargetPolicyDoesNotFlattenIntoAnUnrelatedLegacyMode()
         {
-            var a=Account(1);
-            var elite=EdictPolicyBridge.Apply(a.Hero.build,With(a.Hero.edict,("target.default","DENSE"),("target.specialEnabled","ELITE"),("target.specialOrder","BOSS,ELITE,SUPPORT,RANGED")),HeroClass.Ranger);
-            Assert.AreEqual(TargetMode.Elite,elite.target);
-            var support=EdictPolicyBridge.Apply(a.Hero.build,With(a.Hero.edict,("target.default","NEAREST"),("target.specialEnabled","SUPPORT,RANGED"),("target.specialOrder","RANGED,SUPPORT,BOSS,ELITE")),HeroClass.Ranger);
-            Assert.AreEqual(TargetMode.Support,support.target,"RANGED has no legacy mode and yields to the next enabled special");
-            var none=EdictPolicyBridge.Apply(a.Hero.build,With(a.Hero.edict,("target.default","HIGH_HP"),("target.specialEnabled","")),HeroClass.Ranger);
-            Assert.AreEqual(TargetMode.Nearest,none.target,"HIGH_HP has no legacy mode and reads as nearest");
+            var a=Account(1);var doc=With(a.Hero.edict,("target.priorityGrade","ELITE,BOSS,NORMAL,TREASURE,SUMMONED"));
+            var bridge=EdictPolicyBridge.Apply(a.Hero.build,doc,HeroClass.Ranger);Assert.AreEqual(TargetMode.Nearest,bridge.target);
+            Assert.AreEqual("ELITE",EdictTargetPolicy.Compile(doc).grade[0]);Assert.AreEqual("ELITE,BOSS,NORMAL,TREASURE,SUMMONED",HuntEdictSummary.Value(doc,"target.priorityGrade"));
         }
 
         [Test]

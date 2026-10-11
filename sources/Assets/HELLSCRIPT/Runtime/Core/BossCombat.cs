@@ -89,7 +89,10 @@ namespace Hellscript
             new BossProfile(1,1,2.5f,1,6),new BossProfile(.85f,.9f,8,.35f,10),new BossProfile(1.1f,1.1f,2.5f,1,7),
             new BossProfile(1.15f,1.05f,2.5f,1,5),new BossProfile(.9f,1,7,.5f,8),
         };
-        public static BossProfile ProfileOf(int pattern)=>Profile[Mathf.Clamp(pattern,0,Profile.Length-1)];
+        public static BossProfile ProfileOf(int pattern)
+            =>pattern>=Profile.Length&&MonsterRegistry.ForBoss(pattern) is MonsterDefinition d?new BossProfile(d.hp,d.attack,d.keepDistance,d.approach,d.body):Profile[Mathf.Clamp(pattern,0,Profile.Length-1)];
+        // Event definition of a boss itself: BOSS01-BOSS05 for the hard-coded five, the registry id (B06...) after them.
+        public static string BossId(int pattern)=>pattern<Profile.Length?"BOSS0"+(pattern+1):MonsterRegistry.ForBoss(pattern)?.id??"BOSS0"+(pattern+1);
         public static BossAttack[] KitOf(int pattern)=>Kit[Mathf.Clamp(pattern,0,Kit.Length-1)];
         public static string Definition(int kind)
         {
@@ -343,6 +346,7 @@ namespace Hellscript
             foreach(var enemy in run.enemies.Where(e=>e.boss&&!e.dead))
             {
                 var a=enemy.brain.action;if(a.phase==EnemyActionPhase.Idle||a.phase==EnemyActionPhase.Recovering)continue;
+                if(MonsterBehavior.IsData(a))continue;  // data kits warn through EnemyCombat.Threats
                 string key="boss-"+a.id,definition=Definition(a.kind);var kind=(BossAttack)a.kind;
                 if(Summons(a.kind))continue;
                 if(Shaped(a.kind)){foreach(var shape in Shapes(a,key,a.phase==EnemyActionPhase.Charging?0:a.remaining))yield return shape;continue;}

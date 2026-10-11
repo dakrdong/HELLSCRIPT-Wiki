@@ -106,17 +106,34 @@
       "choices": []
     },
     {
-      "scope": "global/target.default",
+      "scope": "global/target.priorityGrade",
       "id": "nearest",
       "name": "가까운 적부터",
       "nameEn": "Nearest enemy first",
       "description": "가까운 적부터 공격하고 보스전에서는 보스를 우선합니다.",
       "descriptionEn": "Attack the nearest enemy; prioritize the boss in boss fights.",
-      "values": [],
+      "values": [
+        {
+          "id": "target.priorityGrade",
+          "value": "BOSS,NORMAL,ELITE,TREASURE,SUMMONED"
+        },
+        {
+          "id": "target.priorityType",
+          "value": "MELEE,CHARGER,RANGED,CASTER,SUPPORT,EXPLODER"
+        },
+        {
+          "id": "target.priorityStatus",
+          "value": "NEAREST,WEAKENED,CONTROLLED,LOW_HP,DOT,CASTING,ATTACKING"
+        },
+        {
+          "id": "target.priorityCategories",
+          "value": "STATUS,GRADE,TYPE"
+        }
+      ],
       "choices": []
     },
     {
-      "scope": "global/target.default",
+      "scope": "global/target.priorityGrade",
       "id": "priority",
       "name": "위험한 적 우선",
       "nameEn": "Dangerous enemies first",
@@ -124,39 +141,55 @@
       "descriptionEn": "Prioritize support and ranged enemies and interrupt dangerous casts.",
       "values": [
         {
-          "id": "target.specialEnabled",
-          "value": "BOSS,ELITE,SUPPORT,RANGED"
-        },
-        {
-          "id": "target.specialOrder",
-          "value": "SUPPORT,RANGED,ELITE,BOSS"
-        },
-        {
-          "id": "target.interruptCaster",
-          "value": "ON"
-        },
-        {
           "id": "target.bossFight",
           "value": "DANGEROUS_SUPPORT"
+        },
+        {
+          "id": "target.priorityGrade",
+          "value": "ELITE,BOSS,NORMAL,TREASURE,SUMMONED"
+        },
+        {
+          "id": "target.priorityType",
+          "value": "SUPPORT,RANGED,CASTER,MELEE,CHARGER,EXPLODER"
+        },
+        {
+          "id": "target.priorityStatus",
+          "value": "CASTING,WEAKENED,CONTROLLED,LOW_HP,DOT,NEAREST,ATTACKING"
+        },
+        {
+          "id": "target.priorityCategories",
+          "value": "TYPE,STATUS,GRADE"
         }
       ],
       "choices": []
     },
     {
-      "scope": "global/target.default",
+      "scope": "global/target.priorityGrade",
       "id": "pack",
-      "name": "밀집 무리 정리",
-      "nameEn": "Clear dense packs",
-      "description": "밀집한 적을 먼저 노리고 보스전에서는 주변 적부터 처리합니다.",
-      "descriptionEn": "Target dense packs and clear adds first during boss fights.",
+      "name": "등급 순서로 정리",
+      "nameEn": "Clear by monster rank",
+      "description": "보스·일반·엘리트 순으로 비교하고 보스전에서는 소환된 적을 먼저 처리합니다.",
+      "descriptionEn": "Compare bosses, normal and elite enemies in order; clear summoned adds first during boss fights.",
       "values": [
-        {
-          "id": "target.default",
-          "value": "DENSE"
-        },
         {
           "id": "target.bossFight",
           "value": "ADDS"
+        },
+        {
+          "id": "target.priorityGrade",
+          "value": "BOSS,NORMAL,ELITE,TREASURE,SUMMONED"
+        },
+        {
+          "id": "target.priorityType",
+          "value": "MELEE,CHARGER,RANGED,CASTER,SUPPORT,EXPLODER"
+        },
+        {
+          "id": "target.priorityStatus",
+          "value": "WEAKENED,CONTROLLED,LOW_HP,DOT,CASTING,NEAREST,ATTACKING"
+        },
+        {
+          "id": "target.priorityCategories",
+          "value": "GRADE,TYPE,STATUS"
         }
       ],
       "choices": []
@@ -199,8 +232,8 @@
       "id": "finish",
       "name": "한 대상 마무리",
       "nameEn": "Finish one target",
-      "description": "대상이 쓰러질 때까지 유지하고 고블린은 최대 40m·30초까지 추적합니다.",
-      "descriptionEn": "Keep attacking until the target dies; pursue goblins for up to 40 m or 30 seconds.",
+      "description": "대상이 쓰러질 때까지 유지하고 고블린은 사망 또는 완전 탈출까지 추적합니다.",
+      "descriptionEn": "Keep attacking until the target dies; chase goblins until death or final escape.",
       "values": [
         {
           "id": "target.switch",
@@ -211,12 +244,8 @@
           "value": "ON"
         },
         {
-          "id": "target.goblinDistance",
-          "value": "40"
-        },
-        {
-          "id": "target.goblinTime",
-          "value": "30"
+          "id": "target.goblinChase",
+          "value": "ON"
         }
       ],
       "choices": []
@@ -3703,7 +3732,7 @@
           "classes": ""
         },
         {
-          "scope": "global/target.default",
+          "scope": "global/target.priorityGrade",
           "preset": "pack",
           "classes": ""
         },
@@ -3747,7 +3776,7 @@
           "classes": ""
         },
         {
-          "scope": "global/target.default",
+          "scope": "global/target.priorityGrade",
           "preset": "nearest",
           "classes": ""
         },
@@ -3796,7 +3825,7 @@
           "classes": ""
         },
         {
-          "scope": "global/target.default",
+          "scope": "global/target.priorityGrade",
           "preset": "priority",
           "classes": ""
         },

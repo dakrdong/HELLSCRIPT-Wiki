@@ -113,7 +113,7 @@ namespace Hellscript
                 }
                 if(shot.kind==ShotKind.Elites)foreach(var e in enemies.Where(x=>x.elite==2))e.elitePartner=enemies.First(x=>x!=e&&x.elite==2).id;
                 fixture.enemies.AddRange(enemies);
-                what=shot.kind==ShotKind.Boss?$"boss pattern {shot.pattern} ({GameCatalog.BossNames[shot.pattern]}) winding up a basic attack":
+                what=shot.kind==ShotKind.Boss?$"boss pattern {shot.pattern} ({GameCatalog.BossName(shot.pattern)}) winding up a basic attack":
                     shot.kind==ShotKind.Elites?"elite traits "+string.Join(",",EliteExamples.Select(x=>x.kind+":"+x.trait)):
                     $"enemy kinds {shot.first}..{shot.first+shot.count-1}, odd slots winding up";
             }

@@ -38,10 +38,10 @@
       "tab": "combat",
       "title": "공격 대상 선택",
       "ids": [
-        "target.default",
-        "target.specialEnabled",
-        "target.specialOrder",
-        "target.interruptCaster",
+        "target.priorityGrade",
+        "target.priorityType",
+        "target.priorityStatus",
+        "target.priorityCategories",
         "target.bossFight"
       ],
       "icon": "target",
@@ -57,8 +57,8 @@
         "target.chaseTime",
         "target.lostSight",
         "target.goblin",
-        "target.goblinDistance",
-        "target.goblinTime"
+        "target.goblinChase",
+        "target.goblinAllOut"
       ],
       "icon": "track",
       "description": "현재 대상을 유지하거나 바꾸는 조건과 추적 범위를 정합니다.",
@@ -520,16 +520,6 @@
       "value": "ON"
     },
     {
-      "id": "target.goblinDistance",
-      "parent": "target.goblin",
-      "value": "ON"
-    },
-    {
-      "id": "target.goblinTime",
-      "parent": "target.goblin",
-      "value": "ON"
-    },
-    {
       "id": "bag.freeSlots",
       "parent": "bag.trigger",
       "value": "FREE_SLOTS"
@@ -672,6 +662,10 @@
     {
       "id": "repeat.stage",
       "text": "목표 단계"
+    },
+    {
+      "id": "target.goblin",
+      "text": "고블린 우선 추적"
     }
   ],
   "help": [

@@ -26,6 +26,8 @@ Slots are pack roles: 0 melee (most of a pack, and every elite), 1 charger, 2 ra
 | Dusk Grassland | graveyard | stage 1 | trampled grass and standing stones, rose dusk and violet fog | N17 Thornhorn Brute | N02 Grave Hound | N18 Briar Witch | N10 Emberfire Sorcerer | N05 Funeral Priest | N12 Rift Shardling |
 | Snowbound Highland | fortress | stage 11 | snow-packed stone and ice, cold white sun | N19 Frostbitten Revenant | N08 Fanatic Charger | N09 Blackiron Crossbowman | N20 Rime Caller | N11 Bellringer | N12 Rift Shardling |
 
+The plan to grow every field to 20 regular monsters and 3 bosses, and the Hunyuan model order, is in the [monster roster per field](HELLSCRIPT_Monster_Roster_20261011.en.md) (2026-10-11, not yet in the spawn table).
+
 Seal waves and cursed-chest echoes pick their enemies from the same table. Boss adds follow each boss's own rule (Chorister N01, Dune Tyrant N13, Hoarfrost Matriarch N19).
 
 ## Eight new regular enemies

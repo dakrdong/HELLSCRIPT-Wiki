@@ -135,7 +135,7 @@ namespace Hellscript
 #endif
                 foreach(var spawn in State.layout.spawns)if(spawn.elitePartner>=0)State.enemies[spawn.index].elitePartner=State.enemies[spawn.elitePartner].id;
                 foreach(var carrier in State.layout.carriers)carrier.enemyId=State.enemies[carrier.spawn].id;
-                SpawnGoldenGoblin();return;
+                SpawnDataPacks();SpawnGoldenGoblin();return;
             }
             for(int room=0;room<8;room++)for(int i=0;i<18;i++)
             {
@@ -164,8 +164,10 @@ namespace Hellscript
         // A rift (or the training ground) adds the introductory reduction on introductory layouts and the live-ops balance.
         public static (float health,float attack,float speed) EnemyStats(int stage,int kind,bool elite,bool boss,int pattern,bool rift,bool introductory,LiveOpsRiftSettings tuning)
         {
-            float health=70*Mathf.Pow(1.08f,stage-1)*(boss?45:KindHealth[kind])*(elite?3:1);
-            float attack=18*Mathf.Pow(1.055f,stage-1)*(boss?3:KindAttack[kind])*(elite?1.5f:1),speed=boss?2:KindSpeed[kind];
+            // Kinds past the hard-coded 20 take their multipliers from the monster registry.
+            var data=boss||kind<KindHealth.Length?null:MonsterRegistry.ForKind(kind)??throw new System.ArgumentOutOfRangeException(nameof(kind),"Unregistered monster kind "+kind);
+            float health=70*Mathf.Pow(1.08f,stage-1)*(boss?45:data!=null?data.hp:KindHealth[kind])*(elite?3:1);
+            float attack=18*Mathf.Pow(1.055f,stage-1)*(boss?3:data!=null?data.attack:KindAttack[kind])*(elite?1.5f:1),speed=boss?2:data!=null?data.speed:KindSpeed[kind];
             if(rift&&introductory){health*=IntroductoryRift.HealthMultiplier(stage,boss);attack*=IntroductoryRift.AttackMultiplier(stage);}
             if(boss){var profile=BossCombat.ProfileOf(pattern);health*=profile.health;attack*=profile.attack;}
             if(rift)
@@ -183,7 +185,7 @@ namespace Hellscript
             var e=new EnemyState{id=spawnRun.nextId++,room=room,kind=kind,position=pos,health=stats.health,maxHealth=stats.health,
                 attack=stats.attack,speed=stats.speed,elite=elite,boss=boss,add=add,cooldown=1+RandomStream.Unit(ref spawnRun.rng)};
             if(boss){spawnRun.bossId=e.id;e.pattern=pattern;}
-            InitializeEnemyBrain(e,spawnRun);spawnRun.enemies.Add(e);
+            InitializeEnemyBrain(e,spawnRun);PrepareDataEnemy(e);spawnRun.enemies.Add(e);
         }
         public bool ApplyBuild(BuildConfig build)
         {
@@ -242,7 +244,7 @@ namespace Hellscript
                 if(!TryClassPolicySurvival()&&!TryAutomaticClassSkill()&&(!(ChestBusy||ShrineBusy||ObjectiveBusy)||Target!=null||InDanger))DecideRules();
                 State.decisionTime=.2f;
             }
-            var walkingOrigin=State.position;MoveHero(dt);TrackWalking(Vector2.Distance(walkingOrigin,State.position),dt,passiveWalkingTime);TickChannel(dt);
+            var walkingOrigin=State.position;MoveHero(dt);ConstrainHeroByWalls(walkingOrigin);TrackWalking(Vector2.Distance(walkingOrigin,State.position),dt,passiveWalkingTime);TickChannel(dt);
             if(State.potions.version>0&&Vector2.Distance(walkingOrigin,State.position)>.0001f)TryUseUtilityPotion(true);
             TickItemAilments(dt);
             TickEnemies(dt);TickProjectiles(dt);TickTraps(dt);TickEffects(dt);TickEnemyHazards(dt);TickLegendaryPulses();
@@ -256,7 +258,7 @@ namespace Hellscript
         }
         void Sense()
         {
-            sensed.Clear();foreach(var e in State.enemies)if(!e.dead&&Vector2.Distance(State.position,e.position)<=12&&Map.LineClear(State.position,e.position))sensed.Add(e);
+            sensed.Clear();float range=SenseRange;foreach(var e in State.enemies)if(!e.dead&&Vector2.Distance(State.position,e.position)<=range&&Map.LineClear(State.position,e.position)&&!MonsterBehavior.Hidden(e))sensed.Add(e);
             RiftExploration.ObserveEnemies(State,sensed);
             ObserveEdictTarget();ObserveEngagement();
             if(sensed.Count>0)State.noEnemySince=State.time;
@@ -427,7 +429,7 @@ namespace Hellscript
                 }
             }
             if(!Map.Walkable(goal))goal=target!=null?CombatApproach(target,goal):Map.MoveDirect(State.position,goal,Vector2.Distance(State.position,goal));
-            float speed=MovementSpeed(recovering)*(State.enemySlowTime>0?.65f:1);
+            float speed=MovementSpeed(recovering)*HeroPace;
             Vector2 p=Map.Move(State.position,goal,speed*dt,0,State.time);if(!EdictPursuitStepAllowed(p,searching,target,movementRule))return;
             float moved=Vector2.Distance(p,State.position);State.moveDistance+=moved;
             if(farming)ObserveActivity(CombatActivity.Farming);
@@ -490,10 +492,15 @@ namespace Hellscript
         void Deal(EnemyState e,float damage,bool critical)
         {
             if(damage>0&&!e.dead)State.lastOutgoingDamageTime=State.time;
-            if(e.dead)return;float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
+            if(e.dead)return;
+            // A shield ally's ward (data monsters) soaks damage first.
+            if(e.ward>0&&damage>0){float soaked=Mathf.Min(e.ward,damage);e.ward-=soaked;damage-=soaked;}
+            float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             // Rooted at stage two the charger bends but never breaks, so the defeat does not depend on a class's damage.
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;
-            if(e.health>0)return;e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;
+            var data=e.health>0||!string.IsNullOrEmpty(e.objectType)?null:Data(e);if(data!=null&&DataSurvivesFall(e))return;
+            if(e.health>0){if(!e.boss&&string.IsNullOrEmpty(e.objectType)){var d=Data(e);if(d!=null)OnDataDamaged(e,d,dealt);}return;}
+            e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;
         }
         void RewardEnemyDeath(EnemyState e)
         {
@@ -507,6 +514,12 @@ namespace Hellscript
                     var rune=RuneGrowth.GrantMonster(account,State,e);
                     if(rune!=null)Log("RUNE_DROP",Loc.Source("G{0} 룬 · {1}칸 · 모양 {2} 획득",rune.grade,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).Size,Runes.RuneMasteryCatalog.ShapeById(rune.shapeId).ShapeNumber));
                     RiftResources.Add(State,RiftResourceKind.Gold,e.position,KillGold(e.elite>=0?25+5*State.stage:5+State.stage));
+                    // A treasure monster (data) caught before it escapes pays bonusGold times the elite base gold on top.
+                    var data=Data(e);if(data!=null&&data.traits.bonusGold>0)
+                    {
+                        RiftResources.Add(State,RiftResourceKind.Gold,e.position,KillGold(Mathf.RoundToInt(data.traits.bonusGold*(25+5*State.stage))));
+                        RiftResources.Add(State,RiftResourceKind.Material,e.position,Mathf.Max(1,Mathf.RoundToInt(data.traits.bonusGold*2)));
+                    }
                     RiftResources.RollGems(State,e.elite>=0?RiftRewardSource.Elite:RiftRewardSource.Normal,e.position);
                     QueueExperience(Mathf.FloorToInt((e.elite>=0?50:10)*(1+.05f*(State.stage-1))));
                     // Preserve the guaranteed elite path and its RNG sequence at the shipped settings.

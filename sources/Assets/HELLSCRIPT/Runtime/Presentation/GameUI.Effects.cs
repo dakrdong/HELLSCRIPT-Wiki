@@ -13,6 +13,8 @@ namespace Hellscript
             if(id!=null&&id.Length==4&&id[1]=='P'&&int.TryParse(id.Substring(2),out int passive)&&passive>=1&&passive<=6)
             {int hero=id[0]=='W'?0:id[0]=='A'?1:id[0]=='M'?2:-1;if(hero>=0)return GameCatalog.Passives[hero*6+passive-1];}
             foreach(BossAttack kind in System.Enum.GetValues(typeof(BossAttack)))if(BossCombat.Definition((int)kind)==id)return BossCombat.Name((int)kind);
+            var data=MonsterBehavior.AttackName(id);if(data!=null)return data;
+            if(id!=null&&MonsterRegistry.ById(id) is MonsterDefinition monster)return monster.name;
             if(id!=null&&id.Length==6&&id.StartsWith("BOSS0")&&int.TryParse(id.Substring(5),out int boss)&&boss>=1&&boss<=GameCatalog.BossNames.Length)return GameCatalog.BossNames[boss-1];
             if(id!=null&&id.StartsWith("N")&&id.Length>=3&&int.TryParse(id.Substring(1,2),out int number)&&number>=1&&number<=GameCatalog.EnemyNames.Length)return Loc.F("{0}{1}", GameCatalog.EnemyNames[number-1], (id.EndsWith("DEATH")?" · 사망 효과":" · 공격"));
             if(id!=null&&id.StartsWith("E")&&id.Length==3&&int.TryParse(id.Substring(1),out int trait)&&trait>=1&&trait<=EnemyCombat.TraitNames.Length)return EnemyCombat.TraitNames[trait-1];

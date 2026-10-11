@@ -7,7 +7,7 @@ namespace Hellscript
 {
     public sealed partial class CombatSimulation
     {
-        bool Perceived(EnemyState e)=>!e.dead&&Vector2.Distance(State.position,e.position)<=12&&Map.LineClear(State.position,e.position);
+        bool Perceived(EnemyState e)=>!e.dead&&Vector2.Distance(State.position,e.position)<=SenseRange&&Map.LineClear(State.position,e.position)&&!MonsterBehavior.Hidden(e);
         bool OwnArea(EnemyState e,bool trap)=>trap?State.traps.Any(t=>t.triggered&&t.remaining>0&&Vector2.Distance(t.position,e.position)<=t.radius&&Map.LineClear(t.position,e.position)):
             State.effects.Any(f=>OwnBlizzard(f)&&f.delay<=0&&f.duration>0&&Vector2.Distance(f.position,e.position)<=f.radius&&Map.LineClear(f.position,e.position));
         bool VisibleGround(GroundEffect f)=>f.hostile&&f.duration>0&&Vector2.Distance(State.position,f.position)<=12+f.radius&&Map.LineClear(State.position,f.position);
@@ -95,7 +95,7 @@ namespace Hellscript
             if(EdictDodgeHolding&&(r.action==RuleAction.Basic||r.action==RuleAction.Skill))
             {float range=r.action==RuleAction.Basic?BasicReach:r.skill>=0&&r.skill<catalog.skills.Count?catalog.skills[r.skill].range:0;if(range>0)candidates=candidates.Where(e=>DodgeTargetInRange(e,range,r.action==RuleAction.Basic&&Hero.heroClass!=HeroClass.Warrior?.2f:0)).ToList();}
             if(policy!=null&&r.target==RuleTarget.Default)
-                return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,CanEdictInterrupt,(a,b)=>Map.LineClear(a,b));
+                return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,DangerousEdictCast,(a,b)=>Map.LineClear(a,b));
             var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId)??(EdictDodgeHolding?candidates.OrderBy(e=>(e.position-State.position).sqrMagnitude).ThenBy(e=>e.id).FirstOrDefault():null);
             float Score(EnemyState e)
             {
@@ -113,7 +113,7 @@ namespace Hellscript
         {
             int id=target?.id??-1;State.targetRuleId=ruleId;TrackEdictTarget(target);if(id==State.targetId)return;
             State.targetId=id;State.targetSelectedAt=State.time;
-            Log("TARGET_SELECTED",target==null?reason:Loc.F("{0} · {1}",(target.goblin?GoldenGoblin.Name:target.boss?GameCatalog.BossNames[target.pattern]:GameCatalog.EnemyNames[target.kind]),reason));
+            Log("TARGET_SELECTED",target==null?reason:Loc.F("{0} · {1}",(target.goblin?GoldenGoblin.Name:!string.IsNullOrEmpty(target.objectType)?target.objectType:target.boss?GameCatalog.BossName(target.pattern):GameCatalog.EnemyName(target.kind)),reason));
         }
         void RecordDecision(Rule r,int row,string code,string detail,EnemyState target)
         {

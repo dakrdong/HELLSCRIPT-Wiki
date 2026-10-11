@@ -85,6 +85,7 @@ namespace Hellscript
         {
             string name=ClassSkills.Find(id)?.name;if(name!=null)return name;
             name=BossCombat.NameForDefinition(id);if(name!=null)return name;
+            name=MonsterBehavior.AttackName(id);if(name!=null)return name;
             if(id?.Length==3&&int.TryParse(id.Substring(1),out int index))
             {
                 if(id[0]=='N'&&index>=1&&index<=GameCatalog.EnemyNames.Length)return Loc.Source("{0} 공격",GameCatalog.EnemyNames[index-1]);

@@ -528,7 +528,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 냉기 저항	Cold Resistance
 냉기 피해	Cold Damage
 녹슨 도검	Rusted Sword
-높은 HP	Highest HP
 뇌전 견디는	Stormproof
 눈보라	Blizzard
 눈보라 · {0} · {1:0.0}초\n{2}	Blizzard · {0} · {1:0.0}s\n{2}
@@ -583,7 +582,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 대상의 위험 시전	Target casting something dangerous
 대상이 생기면|오래 싸울 적에게	As soon as there is a target|Only on a long fight
 대체 적용	Substituted
-더 높은 우선순위로 변경	Switch for a higher priority
 더 새로운 균열 지도 버전이 필요합니다. 저장 파일은 보존했습니다.	A newer rift map version is needed. The save file was kept.
 더 새로운 사냥 칙령 버전이 필요합니다. 저장 파일은 보존했습니다.	A newer hunt edict version is needed. The save file was kept.
 더 새로운 생존 행동 상태 버전이 필요합니다.	A newer survival action state version is needed.
@@ -658,7 +656,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 마을에서 정리하고 복귀	Clear it in town and come back
 마지막 명령	Final Order
 마지막으로 발견한 적의 위치 확인	Checking where the enemy was last seen
-마지막으로 본 위치까지 확인	Check the last place it was seen
 막기 확률	Block Chance
 막은 피해 감소	Blocked Damage Reduction
 망자의 광장	Plaza of the Dead
@@ -740,7 +737,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 밀집 연소	Dense Burn
 밀집 중심	Centre of the pack
 밀집 판정 반경	Radius that counts as dense
-밀집한 곳	Where they are dense
 바뀌는 값 {0}개	{0} values change
 바람	Wind
 밖	outside
@@ -1709,7 +1705,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 처치 {0} · 균열 게이지 {1} / 100	Kills {0} · Rift gauge {1} / 100
 처치 게이지 충전 · {0}	Filling the kill gauge · {0}
 처치 시 최대 HP의 2%를 회복합니다. 한 번 발동한 뒤 1초 동안 기다립니다.	Restores 2% of max HP on a kill, then waits 1 second before it can trigger again.
-처치까지 유지	Stay until it dies
 처형	Execution
 처형자의 눈	Executioner's Eye
 천 두건	Cloth Hood
@@ -1770,7 +1765,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 추가 탐색	Explore further
 추가로 생성할 수 있는 보호막이 없습니다.	There is no further shield left to raise.
 추적	Chasing
-추적 중단	Stop chasing
 추적 화염	Homing flame
 추적할 최소 금액	Minimum amount to chase
 추적할 최소 등급	Minimum rarity to chase
@@ -2004,7 +1998,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 활성 덫 안 우선	Prefer inside a live trap
 활성 행동 {0}/24개 · 총 {1}행 · 액티브당 최대 3규칙	{0}/24 behaviors active · {1} rows in total · up to 3 rules per active
 황금 고블린 우선	Golden goblin first
-회복·지원형	Healer or support type
 회수	Gathering
 회수 대상 없음	Nothing to collect
 회수할 장비 존재	Gear waiting to be collected
@@ -6976,3 +6969,243 @@ HP가 낮아지면 적에게서 물러나 회복을 기다립니다.	Back away f
 HP가 이 위치 이하면 물러납니다	Fall back at or below this HP
 HP가 이 위치 이상이면 다시 싸웁니다	Fight again at or above this HP
 재 참전 위치는 전선 이탈 위치보다 높아야 합니다.	Rejoin must be above Retreat.
+
+지역의 우두머리	Area overlord
+기본 몬스터	Regular monster
+엘리트 몬스터	Elite monster
+추가 속성을 가진 정예	Champion with bonus affixes
+보물 몬스터	Treasure monster
+보물	Treasure
+황금 고블린처럼 도망치는 보물	Fleeing loot carriers like goblins
+소환된 적	Summoned enemy
+소환수	Summon
+다른 적이 불러낸 하수인	Minion called by another enemy
+근접 공격 타입	Melee
+가까이 붙어 공격	Attacks up close
+중거리 돌진 공격 타입	Mid-range charger
+중거리에서 돌진	Rushes in from mid range
+원거리 물리 공격 타입	Ranged physical
+화살·투척 공격	Arrows and thrown weapons
+원거리 마법 공격 타입	Ranged magic
+멀리서 마법 공격	Casts spells from afar
+지원 타입	Support
+아군을 치유·강화	Heals or buffs allies
+자폭 타입	Exploder
+자폭	Exploder
+다가와 폭발하는 적	Runs in and explodes
+약화 중인 적	Weakened
+약화	Weak
+약화 효과가 걸린 적	Under a weakening debuff
+CC기 상태의 적	Crowd-controlled
+기절·빙결·속박 중	Stunned, frozen or rooted
+체력이 가장 낮은 적	Lowest HP
+저체력	Low HP
+남은 체력이 가장 적은 적	The enemy with the least health
+출혈·중독 상태의 적	Bleeding or poisoned
+출혈·중독	DoT
+출혈이나 중독 피해를 받는 중	Taking bleed or poison damage
+위험 기술 시전 중인 적	Casting a dangerous skill
+시전	Casting
+끊지 않으면 위험한 기술	Interrupt it before it lands
+가장 가까운 적	Nearest
+가까움	Near
+영웅과 가장 가까운 적	Closest to the hero
+나를 공격 중인 적	Attacking me
+나를 노림	On me
+지금 영웅을 노리는 적	Currently targeting the hero
+몬스터 등급	Rank
+몬스터 타입	Type
+상태 타입	Status
+판정 순서	Check order
+공격 대상 선택 설정	Target selection settings
+끌어서 순서 변경 · 바로 적용	Drag to reorder · applies instantly
+우선 순위	Priority
+보물 고블린 추적	Treasure Goblin
+보물 고블린을 만나면	When a treasure goblin appears
+고블린 필살	Goblin all-out
+보물 고블린을 처치하기 위해 모든 스킬을 최대한 사용합니다.	Use every skill as much as possible to kill the treasure goblin.
+최우선	Top target
+끝까지 추적	Chase to the end
+모든 스킬	All skills
+기본 규칙	Normal rules
+우선순위 따라 변경	Switch by priority
+죽을 때까지	Until it dies
+마지막 위치 수색	Search last seen
+추적 멈춤	Stop chasing
+추적 거리·시간	Chase Range & Time
+추적 거리	Chase range
+대상 적이 멀어지면 추적할 거리를 설정합니다.	How far to chase a target that moves away.
+추적 시간	Chase time
+대상 적이 설정 시간 이내에 사정거리에 들어오지 않으면 추적을 멈춥니다.	Stop chasing if the target does not come into range within this time.
+추적 중	Chasing
+범위 밖 · 추적 중지	Out of range · stop chasing
+대상	Target
+1m 줄이기	Decrease by 1m
+1m 늘리기	Increase by 1m
+1초 줄이기	Decrease by 1s
+1초 늘리기	Increase by 1s
+위로	Move up
+아래로	Move down
+1순위	1st
+고블린 우선 추적	Goblin first
+고블린 추적	Goblin chase
+보물 고블린 발견 시 최우선 공격 대상이 됩니다.	A treasure goblin becomes the top target as soon as it is spotted.
+보물 고블린이 완전히 도망가거나 사망할 때까지 무조건 추적합니다.	Always chase a treasure goblin until it escapes for good or dies.
+추적 거리 {0:0}m	Chase range {0:0}m
+대상 {0:0}m · 추적 중 · {1:0}초	Target {0:0}m · Chasing · {1:0}s
+등급 순서로 정리	Clear by monster rank
+보스·일반·엘리트 순으로 비교하고 보스전에서는 소환된 적을 먼저 처리합니다.	Compare bosses, normal and elite enemies in order; clear summoned adds first during boss fights.
+대상이 쓰러질 때까지 유지하고 고블린은 사망 또는 완전 탈출까지 추적합니다.	Keep attacking until the target dies; chase goblins until death or final escape.
+시체	Corpse
+전방 휘두르기	Frontal Swing
+0.65초 예고 뒤 전방 120도를 내려친다.	Strikes the 120° arc in front after a 0.65 s telegraph.
+짐승	Beast
+0.8초 예고 뒤 8m 직선으로 돌진한다.	Charges 8 m in a line after a 0.8 s telegraph.
+화살 사격	Arrow Shot
+9m 안의 영웅에게 화살 한 발을 쏜다.	Fires one arrow at a hero within 9 m.
+교단	Cult
+독 장판	Poison Pool
+1.2초 예고 뒤 대상 위치에 4초 독 장판을 남긴다.	Leaves a 4 s poison pool at the target after a 1.2 s telegraph.
+장송 기도	Funeral Prayer
+반경 3m 아군의 HP를 15% 회복시킨다.	Heals allies within 3 m by 15% of their HP.
+사망 폭발	Death burst
+사망 1초 뒤 반경 2.5m에서 폭발한다.	Explodes in a 2.5 m radius 1 s after death.
+참회 기사단	Penitent order
+후방 취약	Rear Opening
+공격 뒤 0.8초 동안 뒤에서 받는 피해가 25% 늘어난다.	For 0.8 s after attacking it takes 25% more damage from behind.
+광신자	Fanatic
+연속 돌진	Double Charge
+0.9초 예고 뒤 두 번 연속 돌진한다.	Charges twice in a row after a 0.9 s telegraph.
+세 발 사격	Triple Shot
+1.2초 예고 뒤 부채꼴로 화살 세 발을 쏜다. 한 발만 맞는다.	Fires a fan of three arrows after a 1.2 s telegraph; only one can hit.
+잿불 교단	Ember cult
+예측 화염	Predictive Flames
+1.5초 예고 뒤 영웅이 향하는 곳에 3초 화염 장판을 만든다.	Creates a 3 s fire pool where the hero is heading after a 1.5 s telegraph.
+반경 4m 다른 아군의 공격을 20% 높인다.	Raises the attack of other allies within 4 m by 20%.
+지옥 하수인	Hell minion
+파편 분출	Shard Burst
+사망 0.9초 뒤 파편 세 발을 쏜다. 한 발만 맞는다.	Fires three shards 0.9 s after death; only one can hit.
+약탈자	Raider
+2연속 베기	Double Cut
+0.65초 예고 뒤 전방 110도를 두 번 벤다.	Cuts the 110° arc in front twice after a 0.65 s telegraph.
+돌진(잠행)	Charge (burrow)
+모래 벌레	Sandworm
+잠행 분출	Burrow Eruption
+땅속으로 이동해 반경 2.2m로 솟아오른다.	Tunnels underground and erupts in a 2.2 m radius.
+식인귀	Ghoul
+도약 강타	Leap Strike
+2.5–4.5m 떨어진 영웅에게 도약해 반경 1.6m를 내려친다.	Leaps at a hero 2.5–4.5 m away and strikes a 1.6 m radius.
+사망 효과	Death effect
+균류	Fungus
+포자 구름	Spore Cloud
+사망 0.6초 뒤 4초 동안 둔화시키는 독 포자 구름을 남긴다.	Leaves a slowing poison spore cloud for 4 s, 0.6 s after death.
+가시뿔	Thornhorn
+회전 베기	Spinning Cleave
+0.9초 예고 뒤 반경 2.1m를 휩쓴다.	Sweeps a 2.1 m radius after a 0.9 s telegraph.
+마녀회	Coven
+가시 창	Thorn Lance
+9m 직선 가시 창으로 맞은 영웅을 둔화시킨다.	A 9 m thorn lance that slows the hero it hits.
+냉기 베기	Frost Cleave
+전방 120도 냉기 베기로 맞은 영웅을 둔화시킨다.	A cold 120° cleave that slows the hero it hits.
+서리 교단	Frost cult
+서리 고리	Rime Ring
+1.4초 예고 뒤 서리 고리를 터뜨린다. 중심과 바깥은 안전하다.	Bursts a rime ring after a 1.4 s telegraph; the middle and the outside are safe.
+갈고리와 도끼의 처형인	Hook-and-axe executioner
+전방 4m를 내려찍는다. 후반에는 두 번 찍는다.	Slams 4 m ahead; twice in phase 2.
+직선으로 갈고리를 던져 맞은 영웅을 2m 끌어당긴다.	Throws a hook along a line and pulls the hero 2 m.
+영웅 곁으로 돌진하며 220도를 벤다.	Dashes beside the hero and cuts a 220° arc.
+영웅 곁으로 도약해 반경 3m를 내려친다.	Leaps beside the hero and strikes a 3 m radius.
+사슬을 휘두르며 직선으로 전진한다.	Advances along a lane, whirling its chains.
+세 번 도약하며 착지점마다 암흑 피해를 준다.	Hops three times, dealing shadow damage at each landing.
+성당 성가대의 지휘자	Conductor of the cathedral choir
+부하 네 명을 소환한다.	Summons four minions.
+직선 광선을 2초 동안 유지한다.	Holds a line beam for 2 s.
+영웅 옆에 나타나 고리를 터뜨린다. 중심은 안전하다.	Appears beside the hero and bursts a ring; the middle is safe.
+세 갈래 광선을 유지한다.	Holds three beams.
+반경 5m를 터뜨린다. 표시된 피난 지점은 안전하다.	Bursts 5 m around it; the marked refuges are safe.
+측면으로 이동해 구체 여섯 개를 쏜다.	Steps to a flank and fires six orbs.
+균열 결정에 잠식된 거대 짐승	Huge beast overgrown with rift crystal
+8m 직선으로 돌진한다. 후반에는 두 번 돌진한다.	Charges 8 m; twice in phase 2.
+영웅 주위에 폭발을 이어 터뜨린다. 피난 지점이 표시된다.	Chains blasts around the hero; refuges are marked.
+돌진한 뒤 전방을 문다.	Dashes in and bites ahead.
+균열을 찢으며 직선으로 돌진하고 장판을 남긴다.	Tears a rift along a line, leaving a zone.
+사방으로 파편 여덟 개를 쏜다.	Fires eight shards around it.
+영웅을 끌어당긴 뒤 주위를 문다.	Pulls the hero in, then bites around it.
+모래에 반쯤 묻힌 거대 전갈 벌레	Giant scorpion-worm half buried in sand
+전방 직선을 꼬리로 후려친다.	Lashes a line ahead with its tail.
+부채꼴로 독액 다섯 발을 뿜는다.	Sprays five venom shots in a fan.
+땅속으로 이동해 영웅 곁에서 솟아오른다.	Burrows and erupts beside the hero.
+주위에 둔화시키는 모래 고리를 만든다.	Creates a slowing ring of quicksand around it.
+사구 약탈자 세 명을 부른다.	Calls three dune raiders.
+영웅의 진행 방향을 따라 세 번 분출한다.	Erupts three times along the hero's path.
+얼음 가시 관을 쓴 서리의 사제	Frost priestess with an ice-spike crown
+직선 얼음 창으로 맞은 영웅을 둔화시킨다.	An ice lance along a line that slows the hero.
+영웅 곁으로 미끄러져 반경 4.5m를 얼린다.	Glides beside the hero and freezes a 4.5 m radius.
+직선을 따라 빙하 가시 세 개를 솟게 한다.	Raises three glacial spikes along a line.
+영웅 주위 네 곳에 둔화시키는 눈보라를 만든다.	Creates four slowing blizzards around the hero.
+서리 망자 세 명을 부른다.	Calls three frost revenants.
+물러서며 얼음 파편 일곱 개를 부채꼴로 쏜다.	Falls back and fires seven ice shards in a fan.
+매복 해제	Ambush revealed
+도주 성공	Escaped
+벽에 부딪혀 기절	Stunned by a wall
+아군 보호막	Ally shielded
+사체 부활	Corpse raised
+분열	Split
+넘어짐	Knocked down
+끌려감	Pulled in
+매복 중	Lying in ambush
+오라 유지	Holding its aura
+묘굴 구더기 떼	Grave Maggot Swarm
+떼	Swarm
+물어뜯기	Gnaw
+5마리씩 등장, HP 0.25, 짧은 물기	Packs of 5, HP 0.25, short bites
+해골 방패병	Skeleton Shieldbearer
+근접(방어)	Melee (guard)
+방패 밀치기	Shield Shove
+정면 120도에서 받는 직접 피해 60% 감소, 방패 밀치기 1m	Takes 60% less direct damage from the front 120°, 1 m shield shove
+정면 방패	Front Shield
+해골 폭탄병	Bone Bomber
+사망 폭발(돌격)	Death burst (runner)
+영웅에게 달려와 1.2초 도화선 뒤 반경 2.5m 자폭	Runs to the hero, 1.2 s fuse, 2.5 m self-destruct
+뼈의 모후	Bone Matron
+해골 군단을 낳는 뼈 왕좌의 여왕	Queen on a bone throne who births a skeleton legion
+해골 2구 소환	Summon 2 skeletons
+해골 2구 소환(상한 6)	Summon 2 skeletons (cap 6)
+뼈 감옥	Bone prison
+뼈 창 3갈래	Triple bone spear
+뼈 폭풍	Bone storm
+뼈 폭풍(자신 주위 회전 칼날 4초)	Bone storm (spinning blades around her for 4 s)
+무덤 군단	Grave legion
+뼈 비	Bone rain
+뼈 비(5곳 순차 낙하)	Bone rain (5 sequential impacts)
+기술 봉인	Skill Seal
+저주	Curse
+시야 감소	Reduced Vision
+한기	Chill
+소멸	Expired
+구조물 설치	Objects placed
+구조물 파괴	Objects broken
+쓰러짐	Fallen
+다시 일어남	Rose again
+석화	Petrified
+달라붙음	Latched on
+떨어짐	Shaken off
+부하 흡수	Minions absorbed
+투사체 반사	Projectile reflected
+흡혈 중	Draining
+걸을 수 없습니다. 이동 스킬은 쓸 수 있습니다.	Cannot walk. Movement skills still work.
+이동속도 -{0:0}%	Movement speed -{0:0}%
+스킬을 쓸 수 없습니다. 기본 공격은 할 수 있습니다.	Skills cannot be used. Basic attacks still work.
+받는 피해 +{0:0}%	Damage taken +{0:0}%
+독 {0}중첩 · 0.5초마다 피해	Poison ×{0} · damage every 0.5 s
+7m 밖의 적을 찾지 못합니다.	Enemies beyond 7 m cannot be found.
+한기 {0}중첩 · 한도에 이르면 빙결	Chill ×{0} · freezes at the limit
+기술 봉인 중에는 스킬을 쓸 수 없습니다.	Skills cannot be used while sealed.
+뼈 감옥(영웅 주위 반경 3m 뼈 벽 고리, 한 칸 부수거나 이동기로 탈출)	Bone prison (3 m ring of bone walls around the hero; break one segment or blink out)
+무덤 군단(N22·N23 각 2구)	Grave legion (2 each of N22 and N23)
+뼈 벽	Bone Wall
+해골 창병	Skeleton Spearman
+근접(사거리)	Melee (reach)
+창 찌르기	Spear Thrust
+0.8초 예고 후 길이 4.5m·폭 1m 찌르기	0.8 s telegraph, 4.5 m × 1 m thrust
+자폭 돌진	Self-Destruct Rush

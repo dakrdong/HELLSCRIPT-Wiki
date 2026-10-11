@@ -15,6 +15,8 @@ namespace Hellscript
         readonly HashSet<int> activeHazards=new HashSet<int>();
         readonly List<int> staleHazards=new List<int>();
         readonly Dictionary<int,GameObject> drops=new Dictionary<int,GameObject>();
+        // Mounds marking hidden data ambushers (MonsterBehavior.Hidden).
+        readonly Dictionary<int,GameObject> mounds=new Dictionary<int,GameObject>();
         readonly Dictionary<string,Material> materials=new Dictionary<string,Material>();
         readonly List<VisualFx> effects=new List<VisualFx>();
         Material stone,darkStone,trim,ember,blue,red,green,purple;
@@ -68,7 +70,7 @@ namespace Hellscript
             shieldView=shadowView=shoutView=null;
             // Destroy is deferred to the end of the frame, so forget the old root's effects library now: a world rebuilt in the
             // same frame must not borrow it (its materials die with the old root and its effects would render magenta).
-            if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
+            if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();mounds.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
             activeProjectiles.Clear();activeTraps.Clear();staleActions.Clear();activeHazards.Clear();staleHazards.Clear();
             roomGeometry.Clear();passageGeometry.Clear();terrainProps.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
@@ -177,21 +179,36 @@ namespace Hellscript
             ApplyBattleViewport();
             foreach(var enemy in run.enemies)
             {
+                bool buried=!enemy.dead&&MonsterBehavior.Hidden(enemy);
+                if(mounds.TryGetValue(enemy.id,out var mound)&&(!buried||mound==null)){if(mound!=null)Destroy(mound);mounds.Remove(enemy.id);}
                 if(enemy.dead){if(actors.TryGetValue(enemy.id,out var dead)){StartDying(dead,enemy,run);actors.Remove(enemy.id);}continue;}
-                if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!Combat.Map.LineClear(run.position,enemy.position))
-                {if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);continue;}
+                if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!Combat.Map.LineClear(run.position,enemy.position)||buried)
+                {
+                    if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);
+                    // A hidden ambusher shows only a low mound of disturbed earth.
+                    if(buried&&!mounds.ContainsKey(enemy.id)){var m=Shape("Ambush mound",PrimitiveType.Sphere,world.transform,Position(enemy.position)+Vector3.up*.05f,new Vector3(1.3f,.25f,1.3f),darkStone);mounds[enemy.id]=m;}
+                    continue;
+                }
                 if(!actors.TryGetValue(enemy.id,out var actor))
-                {string art=EnemyBodyArt(enemy);actor=CreateBody(!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossNames[enemy.pattern]:GameCatalog.EnemyNames[enemy.kind],enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss,art);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
+                {
+                 // Data objects are stone pillars; a decoy wears its owner's body, darkened so the real one can be told apart.
+                 bool item=!string.IsNullOrEmpty(enemy.objectType),decoy=item&&Combat.IsDecoy(enemy);var owner=item?Combat.OwnerOf(enemy):null;
+                 string art=item?(decoy&&owner!=null?EnemyBodyArt(owner):null):EnemyBodyArt(enemy);
+                 actor=CreateBody(item?enemy.objectType:!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossName(enemy.pattern):GameCatalog.EnemyName(enemy.kind),
+                     decoy&&owner!=null?(owner.boss?BossCombat.ProfileOf(owner.pattern).body:owner.kind):item?6:enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss||decoy&&owner!=null&&owner.boss,art);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
+                 if(decoy){var shade=Mat("Decoy shade",new Color(.12f,.1f,.18f,1));foreach(var r in actor.GetComponentsInChildren<Renderer>())r.sharedMaterial=shade;}
                  // Elites wear the tier effect (WorldFx.Tier); the old ring stays only where the effects library is missing.
                  if(enemy.elite>=0&&Fx==null)Ring(actor.transform,Vector3.up*.1f,1.1f,purple,.1f);
                  if(!string.IsNullOrEmpty(enemy.eventId))Ring(actor.transform,Vector3.up*.15f,.9f,red,.1f);
                  Shape("Health",PrimitiveType.Cube,actor.transform,new Vector3(0,HasModelBody(actor)?BodyTop(actor,art)+.35f:2.65f,0),new Vector3(1,.1f,.1f),red);}
                 if(enemy.boss&&actor.transform.Find("Stagger")==null){var ring=Ring(actor.transform,Vector3.up*.12f,1.1f,blue,.09f);ring.name="Stagger";}
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
-                actor.SetActive(true);actor.transform.position=snapPresentation?Position(enemy.position):Vector3.Lerp(actor.transform.position,Position(enemy.position),Mathf.Min(1,dt*20));
+                // Flyers hover above the floor.
+                var place=Position(enemy.position)+(MonsterRegistry.Behavior(enemy)?.traits.flying==true?Vector3.up*1.4f:Vector3.zero);
+                actor.SetActive(true);actor.transform.position=snapPresentation?place:Vector3.Lerp(actor.transform.position,place,Mathf.Min(1,dt*20));
                 Vector3 facing=new Vector3(enemy.brain.facing.x,0,enemy.brain.facing.y);if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
                 PoseEnemy(actor,enemy,run);AttackMotes(Fx,actor,enemy,run);
-                var bar=actor.transform.Find("Health");bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);
+                var bar=actor.transform.Find("Health");bar.gameObject.SetActive(!EdictPriorityVisible);bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);
             }
             foreach(var drop in run.drops)
             {
@@ -241,7 +258,7 @@ namespace Hellscript
             else go=Ring(world.transform,Position(kind==0||kind==4||kind==16||kind==20?origin:target)+Vector3.up*.15f,kind==24?2:Mathf.Clamp(amount,.8f,4),mat,kind==0?.16f:.09f);
             float life=kind==24?amount:kind==0?.22f:.45f;effects.Add(new VisualFx{go=go,life=life,total=life,scale=go.transform.localScale});
         }
-        void LateUpdate(){if(Isolated)return;zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
+        void LateUpdate(){TickEdictTargetPreview();if(Isolated)return;zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
         void ApplyBattleViewport()
         {
             if(viewCamera==null||presentationSuspended)return;

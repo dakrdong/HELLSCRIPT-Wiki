@@ -44,17 +44,17 @@
       "stage": 4,
       "condition": "",
       "ids": [
-        "target.default",
-        "target.specialEnabled",
-        "target.specialOrder",
-        "target.interruptCaster",
+        "target.priorityGrade",
+        "target.priorityType",
+        "target.priorityStatus",
+        "target.priorityCategories",
         "target.bossFight",
         "target.switch"
       ],
       "guide": "E04",
       "title": "공격 대상과 전환",
       "body": "공격 대상 간편 설정을 하나 고르고 저장하세요. 다음 사냥에서 어떤 적을 먼저 공격하는지 관찰하세요.",
-      "focus": "target.default"
+      "focus": "target.priorityGrade"
     },
     {
       "stage": 3,
@@ -220,15 +220,15 @@
         "target.chaseTime",
         "target.lostSight",
         "target.goblin",
-        "target.goblinDistance",
-        "target.goblinTime",
         "loot.class",
         "loot.slots",
         "loot.itemLevel",
         "loot.exceptLegendary",
         "loot.exceptSet",
         "loot.exceptEffects",
-        "loot.minimumGold"
+        "loot.minimumGold",
+        "target.goblinChase",
+        "target.goblinAllOut"
       ],
       "guide": "E18B",
       "title": "추적과 전리품 세부 조건",

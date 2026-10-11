@@ -23,6 +23,9 @@ namespace Hellscript
         public float legElapsed;
         // A regular enemy's second attack (1 = the Cave Ghoul's leap); 0 is its usual attack.
         public int variant;
+        // A decoy's action: it warns like the real one and deals nothing. scale multiplies a data attack's damage (a rear bite).
+        public bool fake;
+        public float scale=1;
     }
     [Serializable] public sealed class EnemyBrain
     {
@@ -32,6 +35,15 @@ namespace Hellscript
         public int auraSource=-1,rageStacks;
         public string state="대기";
         public float[] traitCooldowns=new float[7];
+        // Data-driven monsters: per-attack cooldowns, an ambusher revealed, when a treasure monster was first seen (-1 not yet).
+        public float[] attackCooldowns=new float[0];
+        public bool revealed;
+        public float seenAt=-1;
+        // Data-driven traits: hits taken toward retaliation, consecutive hits landed, haste, fall-and-rise, petrify, blinks, attaching.
+        public int hitsTaken,hitStreak;
+        public float haste,hasteUntil,fallenUntil,blinkCd,attachUntil,attachTick;
+        public bool revived,petrified,pendingBlink,attached,pendingRetaliate;
+        public float reflectAt=-1;
         public EnemyActionState action=new EnemyActionState();
         public BossPatternState boss=new BossPatternState();
         public List<MotionObservation> observations=new List<MotionObservation>();
@@ -59,6 +71,15 @@ namespace Hellscript
         public bool shardBurst;
         // Follows its caster (enemyId) every tick: a boss's whirl that chases the hero.
         public bool followsCaster;
+        // Data-driven zones: a zone that moves (metres per second) or shrinks from startRadius to endRadius over its first span seconds.
+        public Vector2 velocity;
+        public float startRadius,endRadius,span;
+        // Spinning zones (degrees per second), a ring whose inner radius moves from startInner to endInner over life seconds, refuge
+        // spots inside the zone, traps (sprung once by the hero stepping in), a beam linked between two enemies, death shards.
+        public float spin,startInner,endInner,life,refugeRadius;
+        public List<Vector2> refuges=new List<Vector2>();
+        public bool trap;
+        public int linkTo=-1,shardCount;
     }
     public readonly struct EnemyAttackDefinition
     {
@@ -78,12 +99,19 @@ namespace Hellscript
     {
         public static readonly string[] TraitNames={"추적 화염","얼음 고리","생명 연결","사격 방벽","시체 폭발","분노 축적","인력 붕괴"};
         public static bool Trait(EnemyState enemy,int id)=>!enemy.boss&&(enemy.elite==id||enemy.eliteTraits!=null&&enemy.eliteTraits.Contains(id));
-        public static string Name(EnemyState enemy)=>enemy.boss?GameCatalog.BossNames[enemy.pattern]:enemy.kind==9&&Trait(enemy,6)?"인력술사":GameCatalog.EnemyNames[enemy.kind];
-        public static string Id(int kind)=>kind>=100?BossCombat.Definition(kind):"N"+(kind+1).ToString("00");
+        public static string Name(EnemyState enemy)=>!string.IsNullOrEmpty(enemy.objectType)?enemy.objectType:enemy.boss?GameCatalog.BossName(enemy.pattern):enemy.kind==9&&Trait(enemy,6)?"인력술사":GameCatalog.EnemyName(enemy.kind);
+        // A regular monster's id (and the definition of its first attack): N01-N120.
+        public static string Id(int kind)=>"N"+(kind+1).ToString("00");
+        // The definition of an enemy's current action: a boss attack, a data monster's attack or a regular monster's attack.
+        public static string ActionId(EnemyState e,EnemyActionState a)
+        {
+            if(MonsterBehavior.IsData(a)){var d=MonsterRegistry.Behavior(e);return d!=null?MonsterBehavior.AttackId(d,a.variant):Id(e.kind);}
+            return e.boss?BossCombat.Definition(a.kind):Id(a.kind);
+        }
         // Pack role per kind: 0 melee, 1 charger, 2 ranged, 3 area, 4 support, 5 exploder.
         // Kinds 0-11 keep their old kind%6 meaning; 12-19 are the field-specific additions.
         static readonly int[] Roles={0,1,2,3,4,5,0,1,2,3,4,5,0,1,0,5,0,2,0,3};
-        public static int Role(int kind)=>kind>=0&&kind<Roles.Length?Roles[kind]:0;
+        public static int Role(int kind)=>kind>=0&&kind<Roles.Length?Roles[kind]:MonsterRegistry.ForKind(kind)?.slot??0;
         public static readonly string[] RoleNames={"근접","돌진","원거리","장판","지원","폭발"};
         public static bool IsSupport(int kind)=>Role(kind)==4;
         // Hunt edict "RANGED" also covers ground casters, as it always has (kinds 2, 3, 8, 9).
@@ -96,9 +124,23 @@ namespace Hellscript
         public static int FieldTemplateSet(int field)=>TemplateSets[field];
         public static int RosterKind(int field,int slot)=>Rosters[field][slot];
         // The first field whose roster holds the kind; kinds shared by several fields name the earliest.
-        public static int FieldOf(int kind)=>Array.FindIndex(Rosters,r=>Array.IndexOf(r,kind)>=0);
+        public static int FieldOf(int kind)=>kind>=Roles.Length&&MonsterRegistry.ForKind(kind) is MonsterDefinition d?d.field:Array.FindIndex(Rosters,r=>Array.IndexOf(r,kind)>=0);
+        // The kinds that can fill a field's pack slot at a tier: the slot's original kind, then every registered data monster
+        // native to the field in that slot whose unlock tier is reached, in kind order.
+        public static int[] SlotKinds(int field,int slot,int stage)
+        {
+            int baseKind=Rosters[field][slot];var list=new List<int>{baseKind};
+            foreach(var d in MonsterRegistry.All)if(!d.boss&&d.Data&&d.field==field&&d.slot==slot&&d.unlockTier<=stage&&d.kind!=baseKind)list.Add(d.kind);
+            if(list.Count>2)list.Sort(1,list.Count-1,null);
+            return list.ToArray();
+        }
+        // The kind a spawn of this slot gets. pick comes from the spawn's own hash (RiftGenerator.SpawnPick), never from a
+        // run stream, so a slot with only its original kind spawns exactly what it always did.
+        public static int SpawnKind(int field,int slot,int stage,uint pick){var kinds=SlotKinds(field,slot,stage);return kinds.Length==1?kinds[0]:kinds[pick%(uint)kinds.Length];}
         public static EnemyAttackDefinition Attack(int kind)
         {
+            if(kind>=Roles.Length&&MonsterRegistry.DataKind(kind) is MonsterDefinition data)
+            {var first=data.attacks.FirstOrDefault(MonsterBehavior.Damages)??data.attacks.FirstOrDefault();return first==null?new EnemyAttackDefinition(2,.65f,1.5f):new EnemyAttackDefinition(first.range,first.prep,first.cooldown);}
             switch(kind)
             {
                 case 1:return new EnemyAttackDefinition(8,.8f,5);case 2:return new EnemyAttackDefinition(9,1,2);
@@ -184,18 +226,26 @@ namespace Hellscript
         public static bool Pulls(EnemyHazard h,Vector2 position)=>h.pull>0&&h.delay>.00001f&&Contains(new EnemyThreat(null,h.definitionId,h.shape,h.position,h.end,h.direction,h.radius,h.innerRadius,h.angle),position);
         static Vector2 ArrowEnd(RiftNavigation navigation,Vector2 origin,Vector2 direction,float range)
             =>navigation==null?origin+direction*range:navigation.ProjectileEnd(origin,origin+direction*range,.2f,out _);
+        static readonly float[] LegacyShards={-30f,0,30};
+        // N12's three shards, or a data monster's ring of death shards.
+        public static float[] ShardAngles(EnemyHazard h)=>h.shardCount>0?BossCombat.FanAngles(h.shardCount,360f/h.shardCount):LegacyShards;
         public static IEnumerable<EnemyThreat> Threats(RunState run,RiftNavigation navigation=null)
         {
             foreach(var threat in BossCombat.Threats(run,navigation))yield return threat;
             foreach(var h in run.enemyHazards)
             {
                 if(h.shardBurst)
-                {foreach(float angle in new[]{-30f,0,30}){var d=Rotate(h.direction,angle);yield return new EnemyThreat("shard-"+h.id+"-"+angle,h.definitionId,AttackShape.Line,h.position,ArrowEnd(navigation,h.position,d,8),d,.65f,delay:h.delay);}}
+                {foreach(float angle in ShardAngles(h)){var d=Rotate(h.direction,angle);yield return new EnemyThreat("shard-"+h.id+"-"+angle,h.definitionId,AttackShape.Line,h.position,ArrowEnd(navigation,h.position,d,8),d,.65f,delay:h.delay);}}
                 else yield return HazardThreat(h);
             }
-            foreach(var e in run.enemies.Where(e=>!e.dead&&!e.boss&&e.brain.action.phase!=EnemyActionPhase.Idle))
+            foreach(var e in run.enemies.Where(e=>!e.dead&&e.brain.action.phase!=EnemyActionPhase.Idle&&(!e.boss||MonsterBehavior.IsData(e.brain.action))))
             {
                 var a=e.brain.action;int kind=a.kind;string key="action-"+a.id;
+                if(MonsterBehavior.IsData(a))
+                {
+                    var d=MonsterBehavior.Acting(run,e);var m=MonsterBehavior.AttackOf(d,a);if(m==null)continue;
+                    foreach(var t in MonsterBehavior.Threats(e,d,m,a,key,navigation))yield return t;continue;
+                }
                 if(kind==4||kind==10)continue;
                 var own=OwnShape(a,key,0);
                 if(own.HasValue)
@@ -214,7 +264,7 @@ namespace Hellscript
         }
         public static void Normalize(RunState run)
         {
-            run.enemyHazards??=new List<EnemyHazard>();run.enemyCorpses??=new List<EnemyCorpse>();run.enemyEvents??=new List<EnemyCombatEvent>();
+            run.enemyHazards??=new List<EnemyHazard>();foreach(var h in run.enemyHazards)h.refuges??=new List<Vector2>();run.enemyCorpses??=new List<EnemyCorpse>();run.enemyEvents??=new List<EnemyCombatEvent>();
             run.enemies??=new List<EnemyState>();foreach(var e in run.enemies)
             {
                 e.brain??=new EnemyBrain();e.brain.action??=new EnemyActionState();e.brain.action.points??=new List<Vector2>();e.brain.observations??=new List<MotionObservation>();

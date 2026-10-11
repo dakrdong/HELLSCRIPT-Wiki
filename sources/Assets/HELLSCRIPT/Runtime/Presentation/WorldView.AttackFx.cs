@@ -26,7 +26,7 @@ namespace Hellscript
             if(!bossAttackKinds.TryGetValue(definition,out int kind))return 0;
             var attack=(BossAttack)kind;return attack==BossAttack.Beam||attack==BossAttack.Blasts?5:BossCombat.Hit(attack).element;
         }
-        public static int ActionElement(EnemyState enemy,int kind)=>AttackElement(enemy.boss?BossCombat.Definition(kind):EnemyCombat.Id(kind));
+        public static int ActionElement(EnemyState enemy,int kind)=>kind==MonsterBehavior.DataAction?MonsterBehavior.AttackOf(MonsterRegistry.Behavior(enemy),enemy.brain.action)?.element??0:AttackElement(enemy.boss?BossCombat.Definition(kind):EnemyCombat.Id(kind));
         // Gamma tints of the WorldFx convention.
         public static Color ElementColor(int element)
         {

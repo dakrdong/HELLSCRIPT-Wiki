@@ -37,7 +37,7 @@ namespace Hellscript
             }
             if((goal-State.position).sqrMagnitude<.000001f||!EdictAttackPointAllowed(d,values,goal,seen))return true;
             if(!AdvanceEdictPursuit(dt,false,target,action.policy.rule))return true;
-            float speed=MovementSpeed(false)*(State.enemySlowTime>0?.65f:1);
+            float speed=MovementSpeed(false)*HeroPace;
             Vector2 next=Map.Move(State.position,goal,speed*dt,0,State.time);
             if(!EdictAttackPointAllowed(d,values,next,seen)||!EdictPursuitStepAllowed(next,false,target,action.policy.rule))return true;
             State.moveDistance+=Vector2.Distance(State.position,next);State.position=next;State.destination=goal;

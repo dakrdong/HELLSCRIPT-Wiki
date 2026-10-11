@@ -239,6 +239,13 @@ namespace Hellscript
         public float setPoisonTime, setPoisonTick, frostMarkTime, frostCooldown;
         public float trapTick=.5f,blizzardTick=.5f,freeze,root;
         public int setPoisonRoot,setPoisonInstance;
+        // Data-driven monsters: damage absorbed by a shield ally's ward, hits still ignored (guardHits), split generation.
+        public float ward;
+        public int guard,generation;
+        // A breakable object placed by a data monster (name key, the owner's attack index, expiry time; "" = a monster).
+        public string objectType="";
+        public int objectAttack=-1;
+        public float objectUntil,invulnerableUntil,reflectUntil;
         public int frostMarkId;
         public string setPoisonCasterId,frostCasterId;
         public DamageSnapshot setPoisonSnapshot;
@@ -338,6 +345,16 @@ namespace Hellscript
         public int pendingExperience;
         public List<GrowthEvent> growthEvents=new List<GrowthEvent>();
         public float enemySlowTime;
+        // Data-driven monsters (MonsterBehavior): the hero's root (0 speed, movement skills still work) and chill stacks.
+        public float heroRootTime,heroChillTime;
+        public int heroChill;
+        // Data-driven monsters' hero statuses: skill seal, curse (+heroCurse damage taken), poison stacks, a data slow with its own
+        // strength, vision loss; where the hero last started a skill (lastSkillTime -1 = never).
+        public float heroSealTime,heroCurseTime,heroCurse,heroPoisonTime,heroPoisonDamage,heroPoisonTick,heroSlowTime,heroSlowStrength,heroBlindTime;
+        public int heroPoisonStacks;
+        public string heroPoisonSource="",heroPoisonCaster="";
+        public Vector2 lastSkillPosition;
+        public float lastSkillTime=-1;
         public List<EnemyHazard> enemyHazards=new List<EnemyHazard>();
         public List<EnemyCorpse> enemyCorpses=new List<EnemyCorpse>();
         public List<EnemyCombatEvent> enemyEvents=new List<EnemyCombatEvent>();
@@ -414,6 +431,9 @@ namespace Hellscript
         public static readonly string[] EnemyNames={"쇠사슬 시체","무덤 사냥개","해골 궁병","역병 시종","장송 사제","부푼 순례자","철갑 망령","광신 돌격병","흑철 석궁병","잿불 사술사","종지기","균열 파편체","사구 약탈자","모래굴 벌레","동굴 식인귀","포자 부풀이","가시뿔 야수인","가시덤불 마녀","서리 망자","빙결 술사"};
         public static readonly string[] FieldNames={"잊힌 묘지","무너진 성채","작열 사막","습한 동굴","황혼 초원","눈 덮인 고원"};
         public static readonly string[] BossNames={"묘지의 집행자","종말의 합창자","균열의 포식자","사구의 폭군","혹한의 여사제"};
+        // Names of every registered monster (Korean keys): the hard-coded tables first, then the monster registry.
+        public static string EnemyName(int kind)=>kind>=0&&kind<EnemyNames.Length?EnemyNames[kind]:MonsterRegistry.ForKind(kind)?.name??EnemyNames[0];
+        public static string BossName(int pattern)=>pattern>=0&&pattern<BossNames.Length?BossNames[pattern]:MonsterRegistry.ForBoss(pattern)?.name??BossNames[0];
         public static readonly string[] BaseNames={"녹슨 도검","강철 대검","묵철 도끼","사냥 활","전쟁 활","중형 쇠뇌","재의 지팡이","봉인 지팡이","흑요석 지팡이","천 두건","철 투구","가죽 외투","철 갑옷","천 장갑","철 장갑","가죽 장화","철 장화","직물 허리띠","철 버클 허리띠","뼈 목걸이","은 목걸이","봉인 목걸이","철 반지","은 반지"};
         public static readonly float[] BaseValues={17,20,23,17,20,23,17,20,23,12,20,24,40,8,14,8,14,10,16,20,25,30,5,5};
         public static readonly int[] BaseSlots={0,0,0,0,0,0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,6,7,7};

@@ -8,9 +8,9 @@ namespace Hellscript
     {
         void EnemyEvent(EnemyState e,string kind,string definition=null,int action=0,float value=0,Vector2? aim=null)
         {
-            State.enemyEvents.Add(new EnemyCombatEvent{enemyId=e.id,actionId=action,definitionId=definition??(e.boss?"BOSS0"+(e.pattern+1):EnemyCombat.Id(e.kind)),kind=kind,time=State.time,value=value,position=e.position,aim=aim??e.aim});
+            State.enemyEvents.Add(new EnemyCombatEvent{enemyId=e.id,actionId=action,definitionId=definition??(e.boss?BossCombat.BossId(e.pattern):EnemyCombat.Id(e.kind)),kind=kind,time=State.time,value=value,position=e.position,aim=aim??e.aim});
             if(State.enemyEvents.Count>400)State.enemyEvents.RemoveAt(0);
-            JournalEnemy(e,kind,definition??(e.boss?"BOSS0"+(e.pattern+1):EnemyCombat.Id(e.kind)),action,value,aim??e.aim);
+            JournalEnemy(e,kind,definition??(e.boss?BossCombat.BossId(e.pattern):EnemyCombat.Id(e.kind)),action,value,aim??e.aim);
         }
         void EnemyMode(EnemyState e,string state)
         {if(e.brain.state==state)return;e.brain.state=state;EnemyEvent(e,"STATE:"+state);}
@@ -22,11 +22,15 @@ namespace Hellscript
         }
         void TickEnemyTimers(float dt)
         {
-            State.enemySlowTime=Mathf.Max(0,State.enemySlowTime-dt);
+            State.enemySlowTime=Mathf.Max(0,State.enemySlowTime-dt);TickHeroControl(dt);
             foreach(var e in State.enemies.Where(e=>!e.dead))
             {
+                // Haste (data monsters) makes cooldowns run faster; everything else runs at 1.
+                if(e.brain.haste>0&&State.time>=e.brain.hasteUntil){e.brain.haste=0;e.brain.hasteUntil=0;}
+                float rate=e.brain.haste>0?dt*(1+e.brain.haste):dt;
+                var cds=e.brain.attackCooldowns;if(cds!=null)for(int n=0;n<cds.Length;n++)cds[n]=Mathf.Max(0,cds[n]-rate);
                 InitializeEnemyBrain(e,State);e.brain.rearWindow=Mathf.Max(0,e.brain.rearWindow-dt);
-                if(e.boss)TickBossTimers(e,dt);else e.cooldown=Mathf.Max(0,e.cooldown-dt);
+                if(e.boss)TickBossTimers(e,dt);else e.cooldown=Mathf.Max(0,e.cooldown-rate);
                 for(int n=0;n<e.brain.traitCooldowns.Length;n++)e.brain.traitCooldowns[n]=Mathf.Max(0,e.brain.traitCooldowns[n]-dt);
                 int rage=EnemyCombat.Trait(e,5)?Mathf.Min(5,Mathf.FloorToInt((State.time-e.brain.bornAt+.00001f)/10)):0;
                 if(rage!=e.brain.rageStacks){e.brain.rageStacks=rage;EnemyEvent(e,"RAGE","E06",value:rage);}
@@ -34,7 +38,7 @@ namespace Hellscript
             State.enemyCorpses.RemoveAll(c=>State.time-c.createdAt>10);
         }
         EnemyState AuraSource(EnemyState target)=>State.enemies.Where(e=>e!=target&&!e.dead&&!e.boss&&e.kind==10&&Vector2.Distance(e.position,target.position)<=4&&Map.LineClear(e.position,target.position)).OrderBy(e=>e.id).FirstOrDefault();
-        float EnemyAttackValue(EnemyState enemy)=>enemy.attack*(1+.1f*enemy.brain.rageStacks+(AuraSource(enemy)!=null?.2f:0));
+        float EnemyAttackValue(EnemyState enemy)=>enemy.attack*(1+.1f*enemy.brain.rageStacks+(AuraSource(enemy)!=null?.2f:0)+DataAttackBonus(enemy))*DataAttackScale(enemy);
         void RefreshEnemyAuras()
         {
             bool hasSource=false;
@@ -75,10 +79,10 @@ namespace Hellscript
         void InterruptEnemyAction(EnemyState enemy,string reason)
         {
             var a=enemy.brain.action;if(a.phase==EnemyActionPhase.Idle)return;
-            EnemyEvent(enemy,"INTERRUPTED:"+reason,EnemyCombat.Id(a.kind),a.id);enemy.brain.action=new EnemyActionState();enemy.windup=0;EnemyMode(enemy,"제어로 중단");
+            EnemyEvent(enemy,"INTERRUPTED:"+reason,EnemyCombat.ActionId(enemy,a),a.id);enemy.brain.action=new EnemyActionState();enemy.windup=0;EnemyMode(enemy,"제어로 중단");
         }
         void FinishEnemyAction(EnemyState enemy)
-        {var a=enemy.brain.action;EnemyEvent(enemy,"ACTION_END",EnemyCombat.Id(a.kind),a.id);enemy.brain.action=new EnemyActionState();enemy.windup=0;EnemyMode(enemy,"재사용 대기");}
+        {var a=enemy.brain.action;EnemyEvent(enemy,"ACTION_END",EnemyCombat.ActionId(enemy,a),a.id);enemy.brain.action=new EnemyActionState();enemy.windup=0;EnemyMode(enemy,"재사용 대기");}
         void EnemyProjectiles(EnemyState e,int action,Vector2 origin,Vector2 direction,float damage,string definition,bool fan=false,float spread=10,float distance=9,float speed=10,int count=3,float radius=.2f,int element=0)
         {
             if(fan)State.projectileGroups.Add(new ProjectileGroup{actionId=action,maxPerVictim=1});
@@ -179,6 +183,7 @@ namespace Hellscript
                 bool hard=CombatEffects.Has(e,StatusKind.Stun)||CombatEffects.Has(e,StatusKind.Freeze)||e.bossControl.staggered>0;
                 if(hard){if(e.boss)InterruptBossAction(e,"보스 제압");else InterruptEnemyAction(e,"기절·빙결");e.stun=Mathf.Max(0,e.stun-dt);e.freeze=Mathf.Max(0,e.freeze-dt);continue;}
                 if(e.goblin){TickGoldenGoblin(e,dt);continue;}
+                if(!string.IsNullOrEmpty(e.objectType)){TickObject(e,dt);continue;}
                 if(e.boss){TickBoss(e,dt);continue;}
                 if(TickClassDecoyEnemy(e,dt))continue;
                 var b=e.brain;float distance=Vector2.Distance(e.position,State.position);bool visible=distance<=14&&Map.LineClear(e.position,State.position);
@@ -189,6 +194,7 @@ namespace Hellscript
                 }
                 else b.observations.Clear();
                 TickEnemyTraits(e,visible);
+                var data=Data(e);if(data!=null){TickDataEnemy(e,data,visible,distance,dt);continue;}
                 // Old saves can contain a scalar preparation but no explicit enemy action.
                 if(b.action.phase==EnemyActionPhase.Idle&&e.windup>0)BeginEnemyAction(e,e.windup);
                 if(b.action.phase!=EnemyActionPhase.Idle)
@@ -210,7 +216,7 @@ namespace Hellscript
                         var candidates=new[]{e.position+Vector2.right*2,e.position+Vector2.left*2,e.position+Vector2.up*2,e.position+Vector2.down*2};
                         target=candidates.Where(p=>Map.CanLand(p,.4f)&&Map.ProjectileClear(p,e.lastSeenPosition,.2f)).OrderBy(p=>(p-e.position).sqrMagnitude).FirstOrDefault();if(target==Vector2.zero)target=e.lastSeenPosition;
                     }
-                    var before=e.position;e.position=Map.Move(e.position,target,e.speed*(1-SlowRatio(e))*dt,e.id+1,State.time,.4f);if(e.position!=before&&b.rearWindow<=0)b.facing=(e.position-before).normalized;EnemyMode(e,"추적");
+                    var before=e.position;e.position=Map.Move(e.position,target,e.speed*DataSpeedFactor(e)*(1-SlowRatio(e))*dt,e.id+1,State.time,.4f);if(e.position!=before&&b.rearWindow<=0)b.facing=(e.position-before).normalized;EnemyMode(e,"추적");
                 }
                 else if(b.rearWindow<=0&&visible&&b.action.phase==EnemyActionPhase.Idle){var d=State.position-e.position;if(d.sqrMagnitude>.00001f)b.facing=d.normalized;}
                 if(e.kind==10){EnemyMode(e,"공격 강화 오라");continue;}
@@ -226,6 +232,7 @@ namespace Hellscript
             if(!e.boss&&e.kind==11)CreateEnemyHazard(e,"N12_DEATH",e.position,.9f,0,EnemyAttackValue(e)*1.2f,0,shards:true);
             // The sporebloat bursts into a poison cloud that lingers and slows.
             if(!e.boss&&e.kind==15)CreateEnemyHazard(e,"N16_DEATH",e.position,.6f,4,EnemyAttackValue(e)*.25f,4,2.6f,slow:.35f);
+            DataDeath(e);
         }
         void TickEnemyHazards(float dt)
         {
@@ -233,20 +240,35 @@ namespace Hellscript
             {
                 // A whirl rides with its boss: this tick's move is already done (TickEnemies runs first).
                 if(h.followsCaster){var caster=State.enemies.Find(x=>x.id==h.enemyId&&!x.dead);if(caster!=null)h.position=h.end=caster.position;}
+                if(h.linkTo>=0)
+                {
+                    // A beam linking two enemies lasts while both stand.
+                    var a=State.enemies.Find(x=>x.id==h.enemyId);var b=State.enemies.Find(x=>x.id==h.linkTo);
+                    if(a==null||b==null||a.dead||b.dead){State.enemyHazards.Remove(h);continue;}
+                    h.position=a.position;h.end=b.position;var along=b.position-a.position;if(along.sqrMagnitude>1e-6f)h.direction=along.normalized;
+                }
                 if(h.createdAt>=State.time-.00001f)continue;
                 if(!HeroTravelling&&EnemyCombat.Pulls(h,State.position))State.position=Map.MoveDirect(State.position,h.position,h.pull*Mathf.Min(dt,h.delay));
-                float active=Mathf.Max(0,dt-h.delay);h.delay=Mathf.Max(0,h.delay-dt);if(h.delay>.00001f)continue;
+                float active=Mathf.Max(0,dt-h.delay);h.delay=Mathf.Max(0,h.delay-dt);MoveDataHazard(h,dt);if(h.delay>.00001f)continue;
                 if(h.shardBurst)
                 {
-                    var source=State.enemies.Find(e=>e.id==h.enemyId)??new EnemyState{id=h.enemyId};EnemyProjectiles(source,h.actionId,h.position,h.direction,h.damage,h.definitionId,true,30,8,12);
+                    var source=State.enemies.Find(e=>e.id==h.enemyId)??new EnemyState{id=h.enemyId};
+                    if(h.shardCount>0)EnemyProjectiles(source,h.actionId,h.position,h.direction,h.damage,h.definitionId,true,360f/h.shardCount,8,12,h.shardCount);
+                    else EnemyProjectiles(source,h.actionId,h.position,h.direction,h.damage,h.definitionId,true,30,8,12);
                     State.enemyHazards.Remove(h);continue;
+                }
+                if(h.trap)
+                {
+                    // A trap springs once when the hero steps in, or fades at the end of its life.
+                    if(EnemyCombat.Contains(EnemyCombat.HazardThreat(h),State.position)&&Map.LineClear(h.position,State.position)&&!HeroTravelling){ApplyEnemyHazard(h);State.enemyHazards.Remove(h);continue;}
+                    h.duration=Mathf.Max(0,h.duration-active);if(h.duration<=.00001f)State.enemyHazards.Remove(h);continue;
                 }
                 if(h.interval<=0)
                 {
                     if(h.pull>0){var caster=State.enemies.Find(e=>e.id==h.enemyId);if(caster!=null)EnemyEvent(caster,"HAZARD_RELEASE",h.definitionId,h.actionId,aim:h.position);}
                     ApplyEnemyHazard(h);State.enemyHazards.Remove(h);continue;
                 }
-                float applied=Mathf.Min(active,h.duration);h.duration=Mathf.Max(0,h.duration-applied);h.tick-=applied;
+                float applied=Mathf.Min(active,h.duration);h.duration=Mathf.Max(0,h.duration-applied);h.tick-=applied;AgeDataHazard(h,applied);
                 while(h.tick<=.00001f){h.tick+=h.interval;ApplyEnemyHazard(h);}
                 if(h.duration<=.00001f)State.enemyHazards.Remove(h);
             }
@@ -254,10 +276,13 @@ namespace Hellscript
         }
         void ApplyEnemyHazard(EnemyHazard h)
         {
-            bool inside=EnemyCombat.Contains(EnemyCombat.HazardThreat(h),State.position),visible=Map.LineClear(h.position,State.position);
+            bool inside=EnemyCombat.Contains(EnemyCombat.HazardThreat(h),State.position)&&!InRefuge(h,State.position),visible=Map.LineClear(h.position,State.position);
             ObserveHazardImpact(h,inside,visible);
             if(!inside||!visible)return;
+            int before=State.nextDamageId;
             Hurt(h.damage,h.element,h.enemyId.ToString(),h.definitionId,h.actionId,h.id,h.interval>0?DamageKind.Periodic:DamageKind.Direct);
+            if(MonsterBehavior.FromDefinition(h.definitionId,out _)!=null)
+                OnMonsterHit(h.definitionId,h.position,h.actionId,h.interval>0,false,State.nextDamageId>before?State.damageEvents[State.damageEvents.Count-1].hpLoss:0,State.enemies.Find(x=>x.id==h.enemyId));
             if(h.heroSlow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,2*(1-Stats.ccReduction));
         }
         bool EnemyThreatAt(Vector2 point,float warning,bool activeOnly=false)

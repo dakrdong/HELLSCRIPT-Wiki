@@ -88,6 +88,12 @@ namespace Hellscript
         // Pack centres in the start room, measured from its middle. The hero enters at (0,-4).
         static readonly Vector2[] Anchors={new Vector2(0,4.2f),new Vector2(-4.6f,3),new Vector2(4.6f,3),new Vector2(-4.8f,-1.8f),new Vector2(4.8f,-1.8f)};
 
+        // Every registered monster can be trained against: the first 20 + 5 and whatever the monster registry ships.
+        public static bool Registered(bool boss,int kind)=>boss?MonsterRegistry.ForBoss(kind)!=null:MonsterRegistry.ForKind(kind)!=null;
+        // The picker's rows: bosses by pattern, then regular monsters by kind.
+        public static IEnumerable<TrainingGroundEnemy> Candidates()
+            =>Enumerable.Range(0,MonsterRegistry.PatternCount).Where(k=>Registered(true,k)).Select(k=>new TrainingGroundEnemy{boss=true,kind=k})
+                .Concat(Enumerable.Range(0,MonsterRegistry.KindCount).Where(k=>Registered(false,k)).Select(k=>new TrainingGroundEnemy{kind=k}));
         public static int MaxStage(HeroSave hero)=>Mathf.Clamp(hero.highestClear+1,1,1000);
         // The approved mockup's starting roster, at the hero's highest cleared tier.
         public static TrainingGroundSetup Default(HeroSave hero)=>new TrainingGroundSetup{stage=Mathf.Clamp(hero.highestClear,1,MaxStage(hero)),
@@ -102,8 +108,8 @@ namespace Hellscript
             if(setup.enemies.Count(e=>e?.boss==true)>1)return Loc.T("보스는 한 종류만 추가할 수 있습니다.");
             foreach(var e in setup.enemies)
             {
-                bool valid=e!=null&&(e.boss?e.kind>=0&&e.kind<BossKinds&&e.count==1&&e.tier==MonsterTier.Normal:
-                    e.kind>=0&&e.kind<NormalKinds&&e.count>=1&&e.count<=MaxNormal&&(e.tier==MonsterTier.Normal||e.tier==MonsterTier.Magic||e.tier==MonsterTier.Elite||e.tier==MonsterTier.Legendary));
+                bool valid=e!=null&&Registered(e.boss,e.kind)&&(e.boss?e.count==1&&e.tier==MonsterTier.Normal:
+                    e.count>=1&&e.count<=MaxNormal&&(e.tier==MonsterTier.Normal||e.tier==MonsterTier.Magic||e.tier==MonsterTier.Elite||e.tier==MonsterTier.Legendary));
                 if(!valid)return Loc.T("적 구성을 확인해 주세요.");
             }
             if(setup.enemies.Where(e=>!e.boss).GroupBy(e=>e.kind).Any(g=>g.Count()>1))return Loc.T("같은 몬스터는 한 줄에 모아 주세요.");

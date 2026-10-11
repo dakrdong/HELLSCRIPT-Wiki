@@ -35,11 +35,13 @@ namespace Hellscript
         DamageEvent ApplyOutgoing(EnemyState enemy,float baseAttack,float additive,float independent,float critMultiplier,bool critical,int element,DamageSnapshot snapshot,string definition,int root,int instance,DamageKind kind,int triggerTarget=-1,bool projectile=false,Vector2? origin=null,bool attackResolved=false)
         {
             // The phase-change roar is the boss's only invulnerable window.
-            if(enemy==null||enemy.dead||BossCombat.Roaring(enemy,State.time))return null;
+            if(enemy==null||enemy.dead||BossCombat.Roaring(enemy,State.time)||DataIgnoresHit(enemy,definition,root,projectile,origin))return null;
             float defense=element==0?10+2*(State.stage-1):5+State.stage-1;
             var legendary=PrepareLegendaryHit(snapshot,definition,enemy);
             int classFlags=ClassHitFlags(enemy);
             if(!attackResolved){additive+=ClassDamageBonus(definition,enemy,kind,root,instance,element);independent*=1+Mathf.Min(1.5f,LegendaryDamageBonus(snapshot,definition,enemy)+ClassLegendaryBonus(definition,root));}
+            // Data monsters' frontal guard, rear weakness and protective auras (exactly 1 for everything else).
+            float taken=DataDamageTaken(enemy,origin??State.position,kind,projectile);if(taken!=1)independent*=taken;
             var numbers=DamageMath.Calculate(baseAttack,additive,independent,critMultiplier,defense,snapshot.level,element,TargetReduction(enemy,element,projectile,origin));
             var damage=new DamageEvent{id=State.nextDamageId++,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=State.heroId,targetId=enemy.id,targetIsBoss=enemy.boss,triggerTargetId=triggerTarget,kind=kind,element=element,tick=EffectTick,time=State.time,
                 baseAttack=baseAttack,additive=additive,independent=independent,critical=critical,criticalMultiplier=critMultiplier,attackBeforeDefense=numbers.beforeDefense,projectile=projectile,attackOrigin=origin??State.position,
@@ -127,6 +129,8 @@ namespace Hellscript
         }
         void Hurt(float damage,int element=0,string caster="ENEMY",string definition="ENEMY_ATTACK",int root=0,int instance=0,DamageKind kind=DamageKind.Direct)
         {
+            // A data monster's curse raises everything the hero takes while it lasts.
+            if(State.heroCurseTime>0)damage*=1+State.heroCurse;
             var attacker=Attacker(caster);
             // Diablo IV settles dodge before anything else. A dodged hit lands nothing, so none of
             // the things a hit does — interrupting a chest, arming a proc, marking the hero as

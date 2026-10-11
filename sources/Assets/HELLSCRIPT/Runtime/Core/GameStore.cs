@@ -199,6 +199,7 @@ namespace Hellscript
             try{RiftResources.Normalize(run);}catch(Exception error){throw new NotSupportedException(Loc.T("균열의 재화·보석 기록을 안전하게 읽을 수 없어 불러오기를 중단했습니다. 원본 저장 파일은 보존했습니다."),error);}
             if(run.heroAction?.policy?.edictTarget?.version>EdictTargetPolicy.CurrentVersion)
                 throw new NotSupportedException("더 새로운 대상 판단 버전이 필요합니다. 저장 파일은 보존했습니다.");
+            run.heroAction?.policy?.edictTarget?.Upgrade();
             CombatTelemetry.Normalize(run);
             run.growthEvents??=new System.Collections.Generic.List<GrowthEvent>();
             CombatActions.Normalize(run);

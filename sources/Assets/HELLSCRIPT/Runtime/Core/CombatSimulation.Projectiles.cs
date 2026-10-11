@@ -65,7 +65,7 @@ namespace Hellscript
                     {
                         p.position=Vector2.Lerp(from,to,t);var group=State.projectileGroups.Find(g=>g.actionId==p.actionId);
                         if(group==null||!group.victims.Any(v=>v.id==-1))
-                        {Hurt(p.damage,p.element,p.casterId,p.definitionId,p.actionId,p.id);if(p.pullDistance>0)PullHero(p);group?.victims.Add(new ProjectileVictim{id=-1,hits=1});}
+                        {Hurt(p.damage,p.element,p.casterId,p.definitionId,p.actionId,p.id);if(p.pullDistance>0)PullHero(p);OnMonsterHit(p.definitionId,p.origin,p.actionId,projectile:true);group?.victims.Add(new ProjectileVictim{id=-1,hits=1});}
                         remove=true;
                     }
                 }
@@ -93,6 +93,7 @@ namespace Hellscript
                     }
                 }
                 if(!remove){p.remaining=Mathf.Max(0,p.remaining-Vector2.Distance(from,to));p.position=to;remove=wall||p.remaining<.0001f;if(remove&&p.explosionRadius>0)FireballImpact(p);}
+                if(remove&&p.hostile)DataProjectileImpact(p);
                 if(remove)State.projectiles.Remove(p);
                 if(State.phase==RunPhase.Looting||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)break;
             }

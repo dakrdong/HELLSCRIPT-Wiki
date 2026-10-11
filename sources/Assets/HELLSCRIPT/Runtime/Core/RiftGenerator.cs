@@ -21,6 +21,18 @@ namespace Hellscript
             bool excluded=previous>=0&&previous<count;
             int roll=RandomStream.Range(ref choice,0,excluded?count-1:count);return excluded&&roll>=previous?roll+1:roll;
         }
+        // Which registered kind fills a spawn's slot (EnemyCombat.SpawnKind): a hash of the layout's encounter seed and the spawn
+        // index, so no run or encounter stream value is spent and slots with a single kind spawn as before.
+        public static uint SpawnPick(RiftLayout map,int index){uint h=Derive(map.encounterSeed,"roster");h^=(uint)index*0x9E3779B9u;return RandomStream.Next(ref h);}
+        // Data bosses (MonsterRegistry) native to the field whose unlock tier is reached join the boss the stage rule picked,
+        // drawn from the layout's own hash; with none of them the stage rule's pick stands, so existing seeds keep their boss.
+        public static int FieldBoss(RiftLayout map,int chosen,int previous,int stage)
+        {
+            var pool=new List<int>{chosen};
+            foreach(var d in MonsterRegistry.All)if(d.boss&&d.Data&&d.field==map.Field&&d.unlockTier<=stage&&d.pattern!=previous)pool.Add(d.pattern);
+            if(pool.Count==1)return chosen;
+            uint pick=Derive(map.encounterSeed,"field-boss");return pool[(int)(RandomStream.Next(ref pick)%(uint)pool.Count)];
+        }
         public static int SelectBossForStage(ref uint encounter,int previous,int stage)
         {
             int count=ContentUnlocks.BossCount(stage);if(count>=3)return SelectBoss(ref encounter,previous,count);
@@ -200,7 +212,7 @@ namespace Hellscript
             {Vector2 p=boss.position+offset;if(nav.CanLand(p,1.2f)&&nav.Reachable(p))map.bossPoints.Add(p);}
             if(map.bossPoints.Count!=5)throw new InvalidOperationException("보스 공간 부족");
             }
-            uint encounter=map.encounterSeed;map.bossKind=SelectBossForStage(ref encounter,lastBoss,stage);
+            uint encounter=map.encounterSeed;map.bossKind=FieldBoss(map,SelectBossForStage(ref encounter,lastBoss,stage),lastBoss,stage);
             PlaceEncounters(map,nav,stage,ref encounter);PlaceChests(map,nav,runId,stage,hero,tuning);RiftFieldContent.AddBodiesAndValidate(map);PlaceSeals(map,new RiftNavigation(map),stage);
             RiftObjectives.Place(map,new RiftNavigation(map));
             var shape=new StringBuilder();shape.Append(map.version).Append(':').Append(map.layoutSeed).Append('|');
@@ -389,7 +401,7 @@ namespace Hellscript
                     for(int n=0;n<members+groupElite;n++)
                     {
                         bool isElite=n>=members;int type=stage<ContentUnlocks.Rules.expandedEnemiesStage?0:n==members-1?new[]{2,4,1,3,5}[archetype]:0;
-                        var spawn=new RiftSpawn{index=map.spawns.Count,group=group.index,room=room.index,kind=EnemyCombat.RosterKind(map.Field,type)};
+                        var spawn=new RiftSpawn{index=map.spawns.Count,group=group.index,room=room.index,kind=EnemyCombat.SpawnKind(map.Field,type,stage,SpawnPick(map,map.spawns.Count))};
                         bool placed=false;
                         for(int attempt=0;attempt<48;attempt++)
                         {

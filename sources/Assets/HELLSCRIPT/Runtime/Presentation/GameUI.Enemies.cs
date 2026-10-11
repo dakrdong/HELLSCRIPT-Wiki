@@ -36,7 +36,7 @@ namespace Hellscript
             }
             gravityHudId=-1;bossHud.gameObject.SetActive(true);
             bool visible=Vector2.Distance(game.Combat.State.position,boss.position)<=12&&game.Combat.Map.LineClear(game.Combat.State.position,boss.position);
-            bossTitle.text=visible?Loc.F("{0} · HP {1:0.#}% · {2}", GameCatalog.BossNames[boss.pattern], 100*boss.health/boss.maxHealth, (boss.brain.boss.enraged?"후반":"전반")):Loc.F("{0} · 위치 확인 중", GameCatalog.BossNames[boss.pattern]);
+            bossTitle.text=visible?Loc.F("{0} · HP {1:0.#}% · {2}", GameCatalog.BossName(boss.pattern), 100*boss.health/boss.maxHealth, (boss.brain.boss.enraged?"후반":"전반")):Loc.F("{0} · 위치 확인 중", GameCatalog.BossName(boss.pattern));
             var a=boss.brain.action;bossActionLabel.text=Loc.T(!visible?"표시된 방향으로 접근하세요.":boss.bossControl.staggered>0?"제압되어 행동을 멈췄습니다.":Loc.T(boss.brain.state)+(a.phase==EnemyActionPhase.Preparing?Loc.F(" · {0:0.00}초 뒤 실행", a.remaining):""));
             bossHealthFill.gameObject.SetActive(visible);Fill(bossHealthFill,boss.health/boss.maxHealth);ReflowBossText();
         }
@@ -83,7 +83,11 @@ namespace Hellscript
         static string EnemyEventName(string kind)
         {
             if(kind.StartsWith("STATE:"))return kind.Substring(6);if(kind.StartsWith("INTERRUPTED:"))return Loc.F("중단 · {0}", kind.Substring(12));
-            switch(kind){case "PREPARE":return "공격 예고 시작";case "RELEASE":return "공격 실행";case "ACTION_END":return "동작 완료";case "FOLLOWUP_PREPARE":return "후속 공격 예고";case "HAZARD_CREATED":return "장판·사망 효과 생성";case "HAZARD_RELEASE":return "장판 폭발";case "CORPSE_CONSUMED":return "사체 사용 확정";case "RAGE":return "분노 누적";case "HEAL":return "아군 회복";case "AURA_APPLIED":return "공격 강화 적용";case "AURA_REMOVED":return "공격 강화 해제";case "ENRAGED":return "후반 패턴으로 전환";case "SUMMONED":return "부하 소환 완료";case "PLAN_DEFERRED":return "안전한 폭발 배치 재검토";default:return kind;}
+            switch(kind){case "PREPARE":return "공격 예고 시작";case "RELEASE":return "공격 실행";case "ACTION_END":return "동작 완료";case "FOLLOWUP_PREPARE":return "후속 공격 예고";case "HAZARD_CREATED":return "장판·사망 효과 생성";case "HAZARD_RELEASE":return "장판 폭발";case "CORPSE_CONSUMED":return "사체 사용 확정";case "RAGE":return "분노 누적";case "HEAL":return "아군 회복";case "AURA_APPLIED":return "공격 강화 적용";case "AURA_REMOVED":return "공격 강화 해제";case "ENRAGED":return "후반 패턴으로 전환";case "SUMMONED":return "부하 소환 완료";case "PLAN_DEFERRED":return "안전한 폭발 배치 재검토";
+                case "REVEALED":return "매복 해제";case "ESCAPED":return "도주 성공";case "WALL_STUN":return "벽에 부딪혀 기절";case "SHIELDED":return "아군 보호막";case "RAISED":return "사체 부활";
+                case "SELF_DESTRUCT":return "자폭";case "SPLIT":return "분열";case "BLINK":return "순간이동";
+                case "EXPIRED":return "소멸";case "OBJECTS_PLACED":return "구조물 설치";case "OBJECTS_BROKEN":return "구조물 파괴";case "FALLEN":return "쓰러짐";case "RISEN":return "다시 일어남";
+                case "PETRIFIED":return "석화";case "ATTACHED":return "달라붙음";case "DETACHED":return "떨어짐";case "HARVESTED":return "부하 흡수";case "REFLECTED":return "투사체 반사";default:return kind;}
         }
     }
 }
