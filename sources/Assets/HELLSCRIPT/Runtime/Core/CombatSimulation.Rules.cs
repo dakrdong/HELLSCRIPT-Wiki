@@ -176,7 +176,7 @@ namespace Hellscript
                     {var basic=PlanEdictWarriorBasic(edictSource,c.target);c.code=basic.code;c.detail=basic.detail;c.ready=basic.ready;c.target=State.enemies.Find(e=>e.id==basic.targetId&&!e.dead);return c;}
                     if((r.id=="edict:MAGE:BASIC"||r.id=="edict:RANGER:BASIC")&&!EdictAimGate(c,false))return c;
                     if(c.target==null){c.code="NO_TARGET";c.detail="감지한 대상이 없습니다.";return c;}
-                    float basicRange=Hero.heroClass==HeroClass.Warrior?2:10;
+                    float basicRange=ClassSkills.BasicReach(Hero.heroClass);
                     if(Vector2.Distance(State.position,c.target.position)>basicRange){c.code="RANGE";c.detail=Loc.F("기본 공격 사거리 {0}m 밖", basicRange);return c;}
                     if(Hero.heroClass!=HeroClass.Warrior&&!Map.ProjectileClear(State.position,c.target.position,.2f)){c.code="LINE_OF_FIRE";c.detail="투사체가 통과하지 못하는 사선";return c;}
                 }

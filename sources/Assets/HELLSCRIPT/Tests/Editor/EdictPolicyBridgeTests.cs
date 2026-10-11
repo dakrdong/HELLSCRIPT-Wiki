@@ -47,7 +47,7 @@ namespace Hellscript.Tests
         {
             var a=Account(0);
             var doc=With(a.Hero.edict,
-                ("target.default","LOW_HP"),("position.mode","STAND"),("position.distanceSource","EXPLICIT"),("position.distance","5"),("position.clockwise","OFF"),
+                ("target.default","LOW_HP"),("position.engage","STAND"),("position.mode","STAND"),("position.distanceSource","EXPLICIT"),("position.distance","5"),("position.clockwise","OFF"),
                 ("survival.potion","ON"),("survival.potionHpPercent","25"),
                 ("explore.mode","LEFT_WALL"),("explore.normalChest","IGNORE"),("explore.sealedChest","PRIORITY"),("explore.chestDetour","7"),("explore.chestsAfterBoss","ON"),
                 ("explore.cursedChest","CONDITIONAL"),("explore.cursedMinimumTime","120"),("explore.shrine","OFF"),("explore.guideShrine","OFF"),("explore.shrineDetour","3"),
@@ -129,7 +129,7 @@ namespace Hellscript.Tests
         public void TwoRunsWithTheSamePolicyStayIdentical()
         {
             string Trace(CombatSimulation s)=>$"{s.State.time:F3}|{s.State.health:F4}|{s.State.position.x:F4},{s.State.position.y:F4}|{s.State.kills}|{s.State.rng}";
-            AccountSave Make(){var a=Account(useEdict:true);a.Hero.edict=With(a.Hero.edict,("position.mode","STAND"),("survival.potion","OFF"));return a;}
+            AccountSave Make(){var a=Account(useEdict:true);a.Hero.edict=With(a.Hero.edict,("position.engage","STAND"),("position.mode","STAND"),("survival.potion","OFF"));return a;}
             var x=Fixture(Make());var y=Fixture(Make());Advance(x,300);Advance(y,300);
             Assert.AreEqual(MovementMode.Stand,x.Policy.movement);Assert.AreEqual(Trace(x),Trace(y));
         }

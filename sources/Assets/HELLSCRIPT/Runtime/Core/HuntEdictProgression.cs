@@ -131,6 +131,8 @@ namespace Hellscript
             if(Legacy(a))return;
             if(Tutorials.Mandatory(a)&&a.guide.mapHero=="")
             {
+                if(hero.heroClass==HeroClass.Warrior)
+                {var starter=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(starter,GuideTutorial.BarePowers(hero));if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(starter)))return;}
                 var initial=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(initial,GameStore.ProloguePowers(hero,true));
                 if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(initial)))return;
                 var bare=ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(hero));

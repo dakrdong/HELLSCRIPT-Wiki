@@ -7,7 +7,7 @@ namespace Hellscript
     public enum HeroClass { Warrior, Ranger, Mage }
     public enum RunPhase { Exploring, Boss, Looting, Cleared, Failed }
     public enum TargetMode { Nearest, Elite, Support, LowHealth, Dense }
-    public enum MovementMode { Approach, Orbit, KeepDistance, Stand, Retreat }
+    public enum MovementMode { Approach, Orbit, KeepDistance, Stand, Retreat, Center, Edge }
     public enum BagPolicy { Portal, Replace, Ignore }
     public enum SkillKind { Whirlwind, Leap, Crush, Slam, Shield, Shout, Pierce, Multi, Trap, Retreat, Mark, Shadow, Fireball, Blizzard, Chain, Teleport, Nova }
     public enum ConditionKind { Always, HealthBelow, ResourceBelow, EnemiesNear, TargetFar, TargetNear, ElitePresent, Danger, NoShield, TargetPoisoned }

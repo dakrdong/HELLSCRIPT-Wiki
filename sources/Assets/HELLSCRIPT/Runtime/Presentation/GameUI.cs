@@ -88,7 +88,7 @@ namespace Hellscript
             if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
             if(presetModal!=null){ApplyScaler(presetModal.GetComponent<CanvasScaler>(),true);presetScreenSize=Vector2.zero;ReflowPresetDialog();}
             if(quickRoot!=null&&quickKind=="potion"){ApplyScaler(quickRoot.GetComponent<CanvasScaler>(),true);quickScale=quickRoot.GetComponent<CanvasScaler>().scaleFactor;ReflowPotionQuick();}
-            Canvas.ForceUpdateCanvases();
+            Canvas.ForceUpdateCanvases();ReflowEdictSheet();
         }
         void RefreshCanvasScale()
         {
@@ -484,6 +484,7 @@ namespace Hellscript
         void Update()
         {
             RefreshCanvasScale();
+            PositionEdictLabels();
             if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){RefreshIdleSummary();return;}

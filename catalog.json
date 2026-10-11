@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T16:50:04+09:00",
+  "generatedAt": "2026-10-11T19:47:10+09:00",
   "databases": [
     {
       "id": "resources",
@@ -177526,7 +177526,7 @@
     {
       "id": "edict-disclosure",
       "name": "사냥 칙령 단계 공개",
-      "description": "152개 전역 옵션의 실제 공개 규칙입니다. 스킬과 편집 권한은 연결된 구현 문서를 함께 확인하세요.",
+      "description": "156개 전역 옵션의 실제 공개 규칙입니다. 스킬과 편집 권한은 연결된 구현 문서를 함께 확인하세요.",
       "rows": [
         {
           "id": "survival.potionHpPercent",
@@ -177855,6 +177855,114 @@
         {
           "id": "position.gatherTime",
           "name": "position.gatherTime",
+          "category": "전투 거리와 포위 대응",
+          "summary": "계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.",
+          "fields": {
+            "균열 단계": 5,
+            "추가 조건": "없음",
+            "안내 ID": "E03",
+            "공개 규칙 버전": 1
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/HuntEdictProgression.json",
+            "line": 1
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HuntEdictProgression.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "hunt-edict-progression",
+            "hunt-edict-progression.en"
+          ]
+        },
+        {
+          "id": "position.engageApproach",
+          "name": "position.engageApproach",
+          "category": "전투 거리와 포위 대응",
+          "summary": "계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.",
+          "fields": {
+            "균열 단계": 5,
+            "추가 조건": "없음",
+            "안내 ID": "E03",
+            "공개 규칙 버전": 1
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/HuntEdictProgression.json",
+            "line": 1
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HuntEdictProgression.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "hunt-edict-progression",
+            "hunt-edict-progression.en"
+          ]
+        },
+        {
+          "id": "position.engageDistanceSource",
+          "name": "position.engageDistanceSource",
+          "category": "전투 거리와 포위 대응",
+          "summary": "계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.",
+          "fields": {
+            "균열 단계": 5,
+            "추가 조건": "없음",
+            "안내 ID": "E03",
+            "공개 규칙 버전": 1
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/HuntEdictProgression.json",
+            "line": 1
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HuntEdictProgression.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "hunt-edict-progression",
+            "hunt-edict-progression.en"
+          ]
+        },
+        {
+          "id": "position.engageDistance",
+          "name": "position.engageDistance",
+          "category": "전투 거리와 포위 대응",
+          "summary": "계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.",
+          "fields": {
+            "균열 단계": 5,
+            "추가 조건": "없음",
+            "안내 ID": "E03",
+            "공개 규칙 버전": 1
+          },
+          "source": {
+            "path": "Assets/HELLSCRIPT/Resources/HuntEdictProgression.json",
+            "line": 1
+          },
+          "status": "현재 정의",
+          "refs": [
+            {
+              "path": "Assets/HELLSCRIPT/Runtime/Core/HuntEdictProgression.cs",
+              "line": 1
+            }
+          ],
+          "related": [
+            "hunt-edict-progression",
+            "hunt-edict-progression.en"
+          ]
+        },
+        {
+          "id": "position.lureMode",
+          "name": "position.lureMode",
           "category": "전투 거리와 포위 대응",
           "summary": "계정 최고 클리어와 실제 사용 조건을 공통 판정합니다.",
           "fields": {

@@ -62,6 +62,7 @@ namespace Hellscript
         }
         public void ClearDungeon()
         {
+            HideEdictForecast();
             RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;StagedHeroAction=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
@@ -167,6 +168,7 @@ namespace Hellscript
             hero.transform.position=snapPresentation?hp:Vector3.Lerp(hero.transform.position,hp,Mathf.Min(1,dt*22));
             var currentFacing=CurrentHeroFacing(run);
             if(snapPresentation&&currentFacing.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.LookRotation(currentFacing);
+            else if(run.edictField?.lureArrived==true&&currentFacing.sqrMagnitude>.005f&&movement.sqrMagnitude<=.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(currentFacing),dt*14);
             else if(movement.sqrMagnitude>.005f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(movement),dt*14);
             // The primitive figure bobs as it walks; a model body walks with its rig.
             if(!HasModelBody(hero)){var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(movement.sqrMagnitude>.001f?Mathf.Sin(elapsed*13)*.08f:0),0);}

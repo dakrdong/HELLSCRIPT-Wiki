@@ -70,7 +70,7 @@ namespace Hellscript
         // Closed gates exclude the arena from scouting as well as blocking every physical entrance.
         // Old maps without gate geometry retain their original saved passage behavior.
         public static bool GateClosed(RunState run)=>run.layout.objective!=RiftObjectiveKind.None&&!run.layout.gateOpen;
-        public static Vector2 Goal(RunState run,RiftNavigation nav,ExplorationPolicy? exploration=null)
+        public static Vector2 Goal(RunState run,RiftNavigation nav,ExplorationPolicy? exploration=null,bool frontierOnly=false)
         {
             var policy=exploration??run.build.exploration;
             var s=run.exploration;
@@ -80,10 +80,10 @@ namespace Hellscript
             if(s.goalId.StartsWith("audit:")&&int.TryParse(s.goalId.Substring(6),out int group))valid=run.enemies.Any(e=>!e.dead&&e.group==group);
             // 0.6 seconds is a minimum commitment, not a deadline for replacing a valid route.
             // Crossing an already visited room must not reverse an in-progress exit choice.
-            if(valid&&Vector2.Distance(run.position,s.goal)>1&&!s.deferred.Any(d=>d.id==s.goalId&&d.until>run.time))return s.goal;
+            if(valid&&(!frontierOnly||s.goalId.StartsWith("exit:"))&&Vector2.Distance(run.position,s.goal)>1&&!s.deferred.Any(d=>d.id==s.goalId&&d.until>run.time))return s.goal;
             s.deferred.RemoveAll(d=>d.until<=run.time);
             var candidates=new List<(string id,Vector2 p,float score)>();
-            foreach(int index in run.visited)
+            if(!frontierOnly)foreach(int index in run.visited)
             {
                 if(GateClosed(run)&&index==run.layout.bossRoom)continue;
                 var room=run.layout.rooms[index];for(int n=0;n<room.groupAnchors.Count;n++)
@@ -121,14 +121,15 @@ namespace Hellscript
                     candidates.Clear();candidates.Add((next.id,next.p,next.length));
                 }
             }
-            if(candidates.Count==0)
+            if(candidates.Count==0&&!frontierOnly)
             {
                 // Recover missed observations from the saved spawn anchors, not hidden current positions.
                 foreach(var missed in run.layout.groups.Where(g=>run.enemies.Any(e=>!e.dead&&!e.add&&e.group==g.index)))
                 {string id="audit:"+missed.index;if(s.deferred.Any(d=>d.id==id))continue;float length=nav.Length(run.position,missed.position);if(!float.IsInfinity(length))candidates.Add((id,missed.position,length));}
             }
             if(candidates.Count==0)return run.position;
-            var selected=candidates.OrderBy(c=>c.score).ThenBy(c=>c.id,StringComparer.Ordinal).First();
+            var ranked=candidates.OrderBy(c=>c.score);
+            var selected=(frontierOnly?ranked.ThenBy(c=>c.p.x).ThenBy(c=>c.p.y).ThenBy(c=>c.id,StringComparer.Ordinal):ranked.ThenBy(c=>c.id,StringComparer.Ordinal)).First();
             if(s.goalId!=selected.id){s.failures=0;s.probeTime=run.time;s.probePosition=run.position;}
             s.goalId=selected.id;s.goal=selected.p;s.holdUntil=run.time+.6f;return s.goal;
         }

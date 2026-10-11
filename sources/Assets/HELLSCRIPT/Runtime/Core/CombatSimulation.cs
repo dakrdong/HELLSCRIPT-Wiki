@@ -382,15 +382,16 @@ namespace Hellscript
                 ObserveActivity(CombatActivity.Attack);
                 Vector2 delta=State.position-target.position;float d=delta.magnitude;float range=policy?.distance??(movementRule!=null&&movementRule.overrideMovement?movementRule.distance:Policy.distance);
                 var movement=policy?.movement??(movementRule!=null&&movementRule.overrideMovement?movementRule.movement:Policy.movement);
-                journalMovementReason=Loc.Source("대상과 거리 {0:0.0}m · 이동 정책 {1}",d,new[]{"접근","선회","거리 유지","제자리 유지","후퇴"}[(int)movement]);
+                journalMovementReason=Loc.Source("대상과 거리 {0:0.0}m · 이동 정책 {1}",d,BehaviorRules.Movements[(int)movement]);
                 float standRange=Hero.heroClass==HeroClass.Warrior?(movementRule?.id=="edict:WARRIOR:BASIC"?2:2.5f):movementRule?.id=="edict:A02"?8:movementRule?.id=="edict:A03"?6:movementRule?.id=="edict:A06"&&HuntEdictV2.Value(edictSource,"A06",3)=="A02"?8:10;
                 if(policy==null&&EdictFieldGoal(target,range,ref goal)){}
                 else
                 {
-                if(movement==MovementMode.Stand&&d<=standRange)return;
-                if(movement==MovementMode.Retreat)goal=State.position+delta.normalized*2;
+                if(movement==MovementMode.Stand&&(edictSource!=null||d<=standRange))return;
+                if(movement==MovementMode.Center||movement==MovementMode.Edge)goal=EdictPackGoal(target,movement);
+                else if(movement==MovementMode.Retreat)goal=State.position+delta.normalized*2;
                 else if(movement==MovementMode.KeepDistance)
-                {if(d<range-.75f)goal=State.position+delta.normalized*2;else if(d>range+.75f)goal=target.position+delta.normalized*range;}
+                {if(d<range-.75f)goal=State.position+delta.normalized*2;else if(d>EdictDistanceUpper(edictPositionValues,range))goal=target.position+delta.normalized*range;}
                 else if(movement==MovementMode.Orbit&&d<=range+1)
                 {Vector2 tangent=new Vector2(-delta.y,delta.x).normalized*((policy?.clockwise??Policy.clockwise)?1:-1);goal=target.position+(delta.normalized+tangent*.4f).normalized*range;}
                 else goal=target.position+delta.normalized*Mathf.Min(range,Hero.heroClass==HeroClass.Warrior?1.6f:8);

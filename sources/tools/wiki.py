@@ -726,8 +726,8 @@ def build_edict_disclosures():
             rows.append(record(identifier,labels.get(identifier,identifier),category,summary,
                 {'균열 단계':rule['stage'],'추가 조건':condition or '없음','안내 ID':rule.get('guide',''),'공개 규칙 버전':1},path,
                 refs=[source_ref(CORE+'HuntEdictProgression.cs')],related=['hunt-edict-progression','hunt-edict-progression.en']))
-    if len(rows)!=152 or len({r['id'] for r in rows})!=152:raise ValueError('Disclosure census must contain 152 unique global options')
-    return db('edict-disclosure','사냥 칙령 단계 공개','152개 전역 옵션의 실제 공개 규칙입니다. 스킬과 편집 권한은 연결된 구현 문서를 함께 확인하세요.',rows)
+    if len(rows)!=156 or len({r['id'] for r in rows})!=156:raise ValueError('Disclosure census must contain 156 unique global options')
+    return db('edict-disclosure','사냥 칙령 단계 공개','156개 전역 옵션의 실제 공개 규칙입니다. 스킬과 편집 권한은 연결된 구현 문서를 함께 확인하세요.',rows)
 
 def build_evidence():
     rows=[]

@@ -45,7 +45,7 @@ namespace Hellscript
         public static readonly string[] Buffs={"보호막","전투 함성","그림자 화살","도약 방어","이동 가속","원소 교차","회오리 충전","분쇄 충전","관통 충전","연쇄 충전","절제 비용 감소","길잡이 성소","결의 성소","절약된 집중"};
         public static readonly string[] States={"중독","둔화","기절","빙결","표식","세트 노출","자신의 눈보라 안","자신의 활성 덫 안"};
         public static readonly string[] Targets={"전체 설정","현재 대상","가까운 적","정예·보스","지원형","원거리형","낮은 HP","밀집 중심","눈보라 안 우선","활성 덫 안 우선"};
-        public static readonly string[] Movements={"접근","가장자리 선회","거리 유지","제자리","후퇴"};
+        public static readonly string[] Movements={"접근","가장자리 선회","거리 유지","제자리","후퇴","무리 중심","가장자리"};
         public static readonly string[] Purposes={"기본 위치","목표 위치","적이 많은 위치","적이 적은 위치","위험이 적은 위치","지정 거리","자신의 덫 방향"};
         public static readonly ConditionDefinition[] All={
             new ConditionDefinition(1,"현재 HP","%",5,95,5,30,Comparison.AtMost,Comparison.AtLeast),

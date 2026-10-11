@@ -53,8 +53,9 @@ namespace Hellscript
         // of the document or the loadout, so the next block is worth reporting again.
         void PrepareEdict(bool reopening=false)
         {
+            var previousField=edictField;
             if(!reopening){State.edictResponse?.ClearDodge();StopEdictWalk();}
-            edictSource=null;recommendedSkills=null;edictPolicy=null;edictLoot=null;edictTarget=null;edictField=null;edictMovementRules.Clear();LastEdictPlan=null;
+            edictSource=null;recommendedSkills=null;edictPolicy=null;edictLoot=null;edictTarget=null;edictField=null;edictPositionValues=null;edictMovementRules.Clear();LastEdictPlan=null;
             if(!reopening)State.edictBlockLogged="";
             bool classEdict=ClassSkills.Enabled(Hero)&&!ClassSkillLoadout.IsAbsent(State.build.classSkills);
             if(!classEdict&&(Hero?.edict==null||HuntEdictV2Storage.IsAbsent(Hero.edict))){edictInactiveReason="이 캐릭터에 저장된 사냥 칙령 원본이 없습니다.";return;}
@@ -67,7 +68,9 @@ namespace Hellscript
                 var document=classEdict?(recommendedSkills??State.build.classSkills).ProjectEdict():HuntEdictV2.Canonical(HuntEdictDefaults.Resolve(Hero,State.build));
                 HuntEdictV2.ValidateReceiver(document,Hero,catalog);
                 if(document.global.Single(o=>o.id=="bag.stillFull").value=="STOP")State.limitedLoot=false;
-                edictSource=document;edictPolicy=EdictPolicyBridge.Apply(State.build,document,Hero.heroClass);edictLoot=new EdictLootPolicy(document);edictTarget=EdictTargetPolicy.Compile(document);edictField=EdictFieldPolicy.Compile(document);edictInactiveReason="";
+                edictSource=document;edictPositionValues=document.global.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);edictPolicy=EdictPolicyBridge.Apply(State.build,document,Hero.heroClass);edictLoot=new EdictLootPolicy(document);edictTarget=EdictTargetPolicy.Compile(document);edictField=EdictFieldPolicy.Compile(document);edictInactiveReason="";
+                if(previousField!=null&&(previousField.engage!=edictField.engage||previousField.lureMode!=edictField.lureMode))
+                {FieldState.hasLureGoal=FieldState.lureArrived=FieldState.lureScouting=false;FieldState.engageStart=State.time;}
                 foreach(var compiled in EdictRuleOrder.ForSimulation(Array.Empty<Rule>(),document))
                     if(EdictRuleOrder.IsCompiledRule(compiled.rule.id))edictMovementRules.Add(compiled.rule.id,compiled.rule);
             }

@@ -35,7 +35,7 @@ namespace Hellscript
         public static HuntEdictV2Document Upgrade(HuntEdictV2Document source)
         {
             source=PotionEdict.Upgrade(source);
-            if(source==null||source.globalVersion<2||source.globalVersion>4)return source;
+            if(source==null||source.globalVersion<2||source.globalVersion>5)return source;
             var copy=source.Copy();
             if(copy.globalVersion==2)
             {
@@ -49,9 +49,16 @@ namespace Hellscript
                     .Concat(EdictOptions.Defaults(EdictOptions.Global.Where(d=>EquipmentAutomation.NewOption(d.id)))).ToList();
                 copy.globalVersion=4;
             }
-            copy.global=EdictOptions.Canonical(EdictOptions.WarehouseGlobal,copy.global,copy.heroClass)
-                .Concat(EdictOptions.Defaults(EdictOptions.Global.Where(d=>d.id==ExcludedSlots))).ToList();
-            copy.globalVersion=5;return copy;
+            if(copy.globalVersion==4)
+            {
+                copy.global=EdictOptions.Canonical(EdictOptions.WarehouseGlobal,copy.global,copy.heroClass)
+                    .Concat(EdictOptions.Defaults(EdictOptions.Global.Where(d=>d.id==ExcludedSlots))).ToList();
+                copy.globalVersion=5;
+            }
+            copy.global=EdictOptions.Canonical(EdictOptions.Version5Global,copy.global,copy.heroClass);
+            var mode=copy.global.Single(o=>o.id=="position.mode");if(mode.value=="ORBIT")mode.value="DISTANCE";
+            copy.global.AddRange(EdictOptions.Defaults(EdictOptions.Global.Where(d=>EdictOptions.PositionV6(d.id))));
+            copy.globalVersion=6;return copy;
         }
         public static bool Excluded(HuntEdictV2Document policy,int position)=>Get(policy,ExcludedSlots).Split(',').Contains(position.ToString(CultureInfo.InvariantCulture));
         static bool TouchesExcludedSlot(HuntEdictV2Document policy,Item candidate,int index,Item[] outgoing)

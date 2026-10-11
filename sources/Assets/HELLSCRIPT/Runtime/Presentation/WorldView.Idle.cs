@@ -68,6 +68,7 @@ namespace Hellscript
         Vector3 CurrentHeroFacing(RunState run)
         {
             Vector2 direction = run.heroAction.phase == HeroActionPhase.Idle ? run.destination - run.position : run.heroAction.aim - run.heroAction.origin;
+            if(run.heroAction.phase==HeroActionPhase.Idle&&run.edictField?.lureArrived==true&&direction.sqrMagnitude<.0001f)direction=run.edictField.lureFacing;
             return new Vector3(direction.x, 0, direction.y);
         }
     }

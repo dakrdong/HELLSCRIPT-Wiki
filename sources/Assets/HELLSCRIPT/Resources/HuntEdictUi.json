@@ -3,14 +3,18 @@
   "groups": [
     {
       "tab": "combat",
-      "title": "전투 위치·거리",
+      "title": "전투 위치 거리",
       "ids": [
         "position.engage",
         "position.mode",
         "position.distanceSource",
         "position.distance",
         "position.clockwise",
-        "position.ownArea"
+        "position.ownArea",
+        "position.engageApproach",
+        "position.engageDistanceSource",
+        "position.engageDistance",
+        "position.lureMode"
       ],
       "icon": "position",
       "description": "적과의 거리와 이동 방식을 정합니다.",
@@ -609,6 +613,31 @@
       "id": "potion.reserve",
       "parent": "potion.autoBuy",
       "value": "ON"
+    },
+    {
+      "id": "position.engageApproach",
+      "parent": "position.engage",
+      "value": "APPROACH"
+    },
+    {
+      "id": "position.engageDistanceSource",
+      "parent": "position.engage",
+      "value": "DISTANCE"
+    },
+    {
+      "id": "position.engageDistance",
+      "parent": "position.engageDistanceSource",
+      "value": "EXPLICIT"
+    },
+    {
+      "id": "position.lureMode",
+      "parent": "position.engage",
+      "value": "LURE"
+    },
+    {
+      "id": "position.distanceSource",
+      "parent": "position.mode",
+      "value": "DISTANCE"
     }
   ],
   "labels": [

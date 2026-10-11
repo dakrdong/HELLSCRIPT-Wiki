@@ -72,17 +72,18 @@ namespace Hellscript
             }
             return bubble;
         }
-        void PositionTownBubble(RectTransform bubble,Vector3 screen)
+        void PositionTownBubble(RectTransform bubble,Vector3 screen,bool town=true,float minimumTextScale=0)
         {
             var safe=UiSafeArea.Current;float canvasScale=root.parent.GetComponent<Canvas>().scaleFactor;
             float scale=globalHud?.Layout?.scale??canvasScale;
+            scale=Mathf.Max(scale,minimumTextScale);
             if(bubble==plazaPortalBubble)scale=Mathf.Max(scale,14f/22);
             // World labels follow the HUD's screen ratio, even though the page canvas uses pixels.
             // Scale the entire bubble so text, line spacing, outlines and bounds stay in proportion.
             bubble.localScale=Vector3.one*(scale/Mathf.Max(.001f,canvasScale));
             bool visible=screen.z>0&&screen.x>safe.xMin+8*scale&&screen.x<safe.xMax-8*scale
                 &&screen.y>safe.yMin+32*scale&&screen.y+bubble.rect.height*scale<safe.yMax-header.rect.height*canvasScale;
-            bubble.gameObject.SetActive(visible&&!TownNavigationOpen);
+            bubble.gameObject.SetActive(visible&&(!town||!TownNavigationOpen));
             if(!visible||!RectTransformUtility.ScreenPointToLocalPointInRectangle(root,new Vector2(screen.x,screen.y),null,out var local))return;
             var position=local-root.rect.min;float half=bubble.rect.width*bubble.localScale.x/2,padding=8*bubble.localScale.x;
             position.x=Mathf.Clamp(position.x,half+padding,Mathf.Max(half+padding,root.rect.width-half-padding));bubble.anchoredPosition=position;
