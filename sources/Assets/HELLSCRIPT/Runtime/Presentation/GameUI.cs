@@ -87,6 +87,7 @@ namespace Hellscript
             ApplyScaler(pageScaler,pageScaler.uiScaleMode==CanvasScaler.ScaleMode.ConstantPixelSize);
             if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
             if(presetModal!=null){ApplyScaler(presetModal.GetComponent<CanvasScaler>(),true);presetScreenSize=Vector2.zero;ReflowPresetDialog();}
+            if(quickRoot!=null&&quickKind=="potion"){ApplyScaler(quickRoot.GetComponent<CanvasScaler>(),true);quickScale=quickRoot.GetComponent<CanvasScaler>().scaleFactor;ReflowPotionQuick();}
             Canvas.ForceUpdateCanvases();
         }
         void RefreshCanvasScale()

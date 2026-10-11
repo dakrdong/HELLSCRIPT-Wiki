@@ -1,0 +1,81 @@
+{
+  "source_commit": "338adaf5c688dee6caad73d6c4dced1067e6776a",
+  "unity_version": "6000.6.0f1",
+  "platform": "macOS development player",
+  "seed": 9138,
+  "fixture": "Synthetic level-30 NewAccount, no user save copied",
+  "viewports": [
+    "440x956",
+    "956x440",
+    "1600x900",
+    "1600x1000",
+    "2100x900"
+  ],
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "focused_editmode": {
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0
+  },
+  "native_full": {
+    "source_commit": "f3729c46",
+    "exit_code": 0,
+    "captures": 59,
+    "scope": "Battle quick edit: edict sheet, potions, skill/equipment holds and five viewports"
+  },
+  "native_final_potion_scope": {
+    "source_commit": "338adaf5",
+    "exit_code": 0,
+    "captures": 29,
+    "scope": "Actual pointer drag, one-percent clamp, fixed size, tabs, checkbox, save/failure/retry/disk readback, cancellation/pause, correction of inverted OFF pairs, single-body disclosure, rotation and safe area"
+  },
+  "binary_sha256": "ed936d4d89abcd8adcd56b58a2216c5293e3089e26c98d12a8253878e54f2589",
+  "runtime_assembly_sha256": "c9827b525e42271ca7ab67c3770c8b148c01ce6bb473df1924778ce71ba00085",
+  "screenshot_sha256": {
+    "potions-ko.png": "a86fd9615924c3c30c9f4625894ea26641d9d562727b08bfebf4ddc720d03e7c",
+    "retreat-off-ko.png": "7c2d92066885e6f3deaad08d664d53e20ef6824bc6b0c6eb2755a0aada16a767",
+    "retreat-on-ko.png": "4fbd7318973dd8b2a180b231438cdf61573b7f5ae8f514975fcb94c85c9e36e9",
+    "potions-en.png": "83e9b6b98f6cafa60c519ec1f8b0b9ca4945f46ca43cd8e0a89af05de7ee68f8",
+    "retreat-off-en.png": "a62f79eb5aa717034dcc6d509c35c145492aebc5b2572853b3179750cac55ed9",
+    "retreat-on-en.png": "1618e3b28b520875292fe81b63f12a50bdc4270d6775a98aaf873f79b746bff9",
+    "retreat-landscape-en.png": "9631e329b687b85d7d5bb25e9e905464fa108c43c51547a6a1f19619babe4e8b",
+    "retreat-pc-21x9-ko.png": "3ccb279cc9b3fb4994f264e7c950fbe7eba82c07b9bcfde38220ae0687c014b0"
+  },
+  "not_verified": [
+    "Physical mobile input",
+    "WebGL player"
+  ],
+  "retry_notes": [
+    "Two full Edit Mode attempts were interrupted by Editor session restarts; neither is claimed as complete.",
+    "Expected save failure opened the development console during initial captures. Only affected potion acceptance was recaptured with that console closed; logs remain.",
+    "First focused recapture reused a modified test save and failed at entry before popup checks. It was rerun with a fresh synthetic fixture."
+  ],
+  "full_editmode": {
+    "status": "completed_with_targeted_repairs",
+    "attempts": 3,
+    "completed_full_results": 1,
+    "job_id": "bd37fa08ab9443ffa088a861e9345588",
+    "total": 5707,
+    "passed": 5701,
+    "failed": 2,
+    "skipped": 4,
+    "wall_seconds": 4207.548,
+    "corrections": [
+      "The unchanged 48-arena landing sweep took 228.103 seconds against the default 180-second timeout; its test-only limit is now 300 seconds.",
+      "The safe-area reservation fixture uses normal requests below the clamp for small Editor Game Views; the oversized-request clamp assertion remains."
+    ],
+    "targeted_recheck": {
+      "job_id": "1551a0ef8ab04c03a9b8cf9f0f44f89b",
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "duration_seconds": 61.3568882
+    },
+    "accepted_after_recheck": 5703,
+    "scope_reuse": "Only test timeout/input assumptions changed after the full run; runtime UI/gameplay sources and native proof are unchanged."
+  }
+}
