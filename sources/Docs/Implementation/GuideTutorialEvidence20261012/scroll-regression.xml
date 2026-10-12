@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="20" result="Passed" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:31Z" duration="20.1590624">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="6042" result="Passed" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:31Z" duration="20.159062" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="7940" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/guide-tutorial-segment2/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="6042" result="Passed" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:31Z" duration="20.077976" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="36688" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="7941" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="6042" result="Passed" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:31Z" duration="20.014003" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="7942" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="6042" result="Passed" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:31Z" duration="19.949692" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="4345" name="GuideTutorialTests" fullname="Hellscript.Tests.GuideTutorialTests" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:31Z" duration="19.624338" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="4353" name="GuideRewardPickupSavesOnceAndFailureKeepsTheLiveDrop" fullname="Hellscript.Tests.GuideTutorialTests.GuideRewardPickupSavesOnceAndFailureKeepsTheLiveDrop" methodname="GuideRewardPickupSavesOnceAndFailureKeepsTheLiveDrop" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="1451009855" result="Passed" start-time="2026-10-12 11:41:11Z" end-time="2026-10-12 11:41:12Z" duration="0.385363" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Serialization depth limit 10 exceeded at 'Hellscript::EdictCoreSkill.options'. There may be an object composition cycle in one or more of your serialized classes. Consider rearranging data or use `[SerializeReference]`. 
+
+Serialization hierarchy:
+11: Hellscript::EdictCoreSkill.options
+10: Hellscript::HuntEdictV2Document.skills
+9: Hellscript::ClassSkillLoadout.legacyEdict
+8: Hellscript::BuildConfig.classSkills
+7: Hellscript::TrainingAttempt.build
+6: Hellscript::TrainingComparisonRecord.a
+5: Hellscript::HeroSave.trainingComparison
+4: Hellscript::PuzzleLevelProgress.kitHero
+3: Hellscript::PuzzleProgress.levels
+2: Hellscript::TutorialSlot.puzzle
+1: Hellscript::AccountGuide.tutorialSlots
+0: Hellscript::AccountSave.guide
+
+저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-guide-loot-b3b02a3343674fd7af720c82773e02d1/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+            </test-case>
+            <test-case id="4354" name="HiddenTreasurePreservesItsPlaceAndOrdinaryTrainingCannotAwardGold" fullname="Hellscript.Tests.GuideTutorialTests.HiddenTreasurePreservesItsPlaceAndOrdinaryTrainingCannotAwardGold" methodname="HiddenTreasurePreservesItsPlaceAndOrdinaryTrainingCannotAwardGold" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="1925685540" result="Passed" start-time="2026-10-12 11:41:12Z" end-time="2026-10-12 11:41:12Z" duration="0.026867" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="4352" name="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce" fullname="Hellscript.Tests.GuideTutorialTests.LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-12 11:41:12Z" end-time="2026-10-12 11:41:13Z" duration="0.810180" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="4348" name="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(8)" fullname="Hellscript.Tests.GuideTutorialTests.LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(8)" methodname="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="1133035482" result="Passed" start-time="2026-10-12 11:41:12Z" end-time="2026-10-12 11:41:12Z" duration="0.204515" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-guide-save-6f298fd48d704eec8b3bfd0b2e01c7c8/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="4349" name="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(14)" fullname="Hellscript.Tests.GuideTutorialTests.LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(14)" methodname="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="1956997459" result="Passed" start-time="2026-10-12 11:41:12Z" end-time="2026-10-12 11:41:12Z" duration="0.205969" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-guide-save-3de91465ed4e4f1b833494634d5f0f71/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="4350" name="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(18)" fullname="Hellscript.Tests.GuideTutorialTests.LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(18)" methodname="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="1876767786" result="Passed" start-time="2026-10-12 11:41:12Z" end-time="2026-10-12 11:41:13Z" duration="0.201873" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-guide-save-9ef4ba19ee43498f8df455976a00895f/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+              <test-case id="4351" name="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(21)" fullname="Hellscript.Tests.GuideTutorialTests.LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce(21)" methodname="LessonDisclosureSaveFailureKeepsTheLiveRunAndRetriesOnce" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="1646811226" result="Passed" start-time="2026-10-12 11:41:13Z" end-time="2026-10-12 11:41:13Z" duration="0.195761" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[저장하지 못했습니다: Access to the path '/var/folders/xz/t_r6q59x6xj4f0z6_16ywt4w0000gn/T/hellscript-guide-save-9bfa4a42bad246dab1e6318d690503af/hellscript-local-v1.json.tmp' is denied.
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-case id="4346" name="TheGuideStarterDoesNotAuthorizeOtherLockedPositionSettings" fullname="Hellscript.Tests.GuideTutorialTests.TheGuideStarterDoesNotAuthorizeOtherLockedPositionSettings" methodname="TheGuideStarterDoesNotAuthorizeOtherLockedPositionSettings" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="482993080" result="Passed" start-time="2026-10-12 11:41:13Z" end-time="2026-10-12 11:41:13Z" duration="0.159260" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4355" name="TheRoadWindsUpAndToTheRight" fullname="Hellscript.Tests.GuideTutorialTests.TheRoadWindsUpAndToTheRight" methodname="TheRoadWindsUpAndToTheRight" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="809986123" result="Passed" start-time="2026-10-12 11:41:13Z" end-time="2026-10-12 11:41:13Z" duration="0.014685" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="4347" name="TheStageRunsFromTheLeftEdgeToGraduation" fullname="Hellscript.Tests.GuideTutorialTests.TheStageRunsFromTheLeftEdgeToGraduation" methodname="TheStageRunsFromTheLeftEdgeToGraduation" classname="Hellscript.Tests.GuideTutorialTests" runstate="Runnable" seed="75921388" result="Passed" start-time="2026-10-12 11:41:13Z" end-time="2026-10-12 11:41:31Z" duration="18.220840" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="6099" name="PrologueGateTests" fullname="Hellscript.Tests.PrologueGateTests" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.197968" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="6109" name="ABrightBandIsCutOutOfTheDimToo" fullname="Hellscript.Tests.PrologueGateTests.ABrightBandIsCutOutOfTheDimToo" methodname="ABrightBandIsCutOutOfTheDimToo" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1620795744" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.002150" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="6102" name="AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale" fullname="Hellscript.Tests.PrologueGateTests.AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.012475" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="6100" name="AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale(1)" fullname="Hellscript.Tests.PrologueGateTests.AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale(1)" methodname="AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1537799465" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.011853" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="6101" name="AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale(2)" fullname="Hellscript.Tests.PrologueGateTests.AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale(2)" methodname="AHiddenGuidedControlScrollsIntoViewAtEitherCanvasScale" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1411493485" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000381" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="6105" name="AMaskOnTheControlItselfDoesNotClipTheControl" fullname="Hellscript.Tests.PrologueGateTests.AMaskOnTheControlItselfDoesNotClipTheControl" methodname="AMaskOnTheControlItselfDoesNotClipTheControl" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1143728703" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000136" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6110" name="AnOverlappingBandAndOpeningAreNotCutTwice" fullname="Hellscript.Tests.PrologueGateTests.AnOverlappingBandAndOpeningAreNotCutTwice" methodname="AnOverlappingBandAndOpeningAreNotCutTwice" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1413823322" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000335" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6104" name="ARectMask2DCutsAControlDownToItsVisiblePart" fullname="Hellscript.Tests.PrologueGateTests.ARectMask2DCutsAControlDownToItsVisiblePart" methodname="ARectMask2DCutsAControlDownToItsVisiblePart" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1667170236" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000477" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6106" name="AScrollViewportClipsWhatSitsInItsContent" fullname="Hellscript.Tests.PrologueGateTests.AScrollViewportClipsWhatSitsInItsContent" methodname="AScrollViewportClipsWhatSitsInItsContent" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1872445669" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000370" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6111" name="NoOpeningAndNoBandMeansTheWholeScreen" fullname="Hellscript.Tests.PrologueGateTests.NoOpeningAndNoBandMeansTheWholeScreen" methodname="NoOpeningAndNoBandMeansTheWholeScreen" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="458152587" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000089" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6108" name="TheDimAroundAnOpeningTilesTheScreenWithoutOverlap" fullname="Hellscript.Tests.PrologueGateTests.TheDimAroundAnOpeningTilesTheScreenWithoutOverlap" methodname="TheDimAroundAnOpeningTilesTheScreenWithoutOverlap" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="1787074423" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000188" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6103" name="TheNarrationAdvancesWithoutUnblockingOtherPanelControls" fullname="Hellscript.Tests.PrologueGateTests.TheNarrationAdvancesWithoutUnblockingOtherPanelControls" methodname="TheNarrationAdvancesWithoutUnblockingOtherPanelControls" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="736159670" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.179594" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="6107" name="TheSafeAreaClipsToo" fullname="Hellscript.Tests.PrologueGateTests.TheSafeAreaClipsToo" methodname="TheSafeAreaClipsToo" classname="Hellscript.Tests.PrologueGateTests" runstate="Runnable" seed="489290133" result="Passed" start-time="2026-10-12 11:41:31Z" end-time="2026-10-12 11:41:31Z" duration="0.000177" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -263,14 +263,14 @@
     {
       "scope": "global/common.order",
       "id": "combat",
-      "name": "전투 후 회수",
+      "name": "공격 후 회수",
       "nameEn": "Fight, then collect",
       "description": "생존·회피 다음에 공격을 검토하고 전리품은 그 뒤에 회수합니다.",
       "descriptionEn": "After survival and dodging, attack before collecting loot.",
       "values": [
         {
           "id": "common.order",
-          "value": "EMERGENCY,DODGE,ATTACK,PRIORITY_LOOT,AFTER_COMBAT_LOOT,EXPLORE"
+          "value": "DODGE,BUFF,ATTACK,OBJECTIVE,PRIORITY_LOOT,REGROUP,EXPLORE"
         }
       ],
       "choices": []
@@ -285,7 +285,7 @@
       "values": [
         {
           "id": "common.order",
-          "value": "EMERGENCY,DODGE,PRIORITY_LOOT,AFTER_COMBAT_LOOT,ATTACK,EXPLORE"
+          "value": "DODGE,BUFF,PRIORITY_LOOT,ATTACK,OBJECTIVE,REGROUP,EXPLORE"
         }
       ],
       "choices": []

@@ -18,6 +18,13 @@ Exit codes: 0 = QA passed, 1 = QA failed (retry with another candidate or settin
 3. **Rig:** archetype `Pivot_*` bones from slices, heat weights, two smoothing passes, two normalised influences. Several variants (3 shoulder placements × arm/flank split at 0.10/0.16 H or none, plus frozen sleeve arms) are skinned on the same bakes and gated. The pick is a passing variant, preferring moving arms, then the smallest worst stretch.
 4. **QA:** contact sheet (front, side, back, the game's 49° view, walk/windup/strike poses) and `qa/qa.json`.
 
+## Shields, bases and blobs (2026-10-12)
+
+- **Held tower shield:** non-torso cuts of the 15-85% slices that stay a long thin bar of steady place and length over 0.3 H form a shield (a slanted blade's cuts walk along it, a staff's are short). The shield is left out of the skeleton analysis, symmetry and facing, and is weighted 100% to the nearest forearm so it moves as one rigid piece. A shield torn free of the body is not counted as torn loose. A shield clearly in front of or behind the body marks the front.
+- **Intrinsic base (soil mound, coiled tail on the ground):** for Blob/Worm/Serpent, when the 0-10% footprint is at least 1.3x the 35-60% band, everything up to where the footprint shrinks is bound 100% to a still root bone `Pivot_Base`, blended (never torn) into the creature.
+- **Blob:** hips, belly, head and only arms actually found, like ActorRig's blob. A spine chain and template arms twisted a 0.6 m maggot swarm apart.
+- Triangle area growth over every action's extreme is recorded per LOD. Sound models grow area at their joints too, so on its own it does not separate shards; the height-relative edge limit does.
+
 ## Fused parts
 
 Even with "limbs slightly apart" in the prompt, Hunyuan fuses hands to thighs, inner arms to flanks and blade tips to feet. Under linear blend skinning those faces stretch like rubber on the 155° windup.
@@ -35,7 +42,7 @@ Even with "limbs slightly apart" in the prompt, Hunyuan fuses hands to thighs, i
 | LOD triangles | 95–103% of target |
 | UV overlap / coverage / blank texture | < 3% / ≥ 20% / max channel > 0.03 |
 | Weights | no empty vertex, ≤ 2 influences, heat fallback ≤ 25% |
-| Max edge extension (idle walk at 8 phases, Windup .8, Release .45) | ≤ 0.30 m × max(1, height / 2 m) |
+| Max edge extension (idle walk at 8 phases, Windup .8, Release .45) | 15% of the height from 2 m up, 0.30 m × √(height / 2 m) below |
 | Torn gap at a joint | same |
 | Share torn loose from the body (robe feet excepted) | ≤ 8% |
 | Right bone on +X, back bone 5 cm behind −Z | importer axis contract |
@@ -50,7 +57,7 @@ Even with "limbs slightly apart" in the prompt, Hunyuan fuses hands to thighs, i
 | N12 | Hover | 2.0 m | 0.139 | 0.088 | 0 |
 | BOSS03 | Quadruped | 4.3 m | 0.215 | 0.162 | 0 |
 
-No precedent is a skinned biped raising its arm 155°: N12 is a short-armed hover body, and the procedural art3d models are rigid parts with zero stretch and gaps at the joints. The 0.30 m limit is therefore kept, not lowered or turned into a percentile. Two things changed: (1) height scaling, because displacement under the same rotation grows with size: 0.30 m at 2 m (15% of height, close to N02's 0.14) scales for 4.3–5 m bosses, and the Unity test uses the same formula; (2) torn gaps away from a joint are not counted as stretch (see above). N03, N06, N08 and N17, which failed on the first run, pass after this at 0.18–0.26 m, and their windup tiles show the arm rising without dragging the flank.
+No precedent is a skinned biped raising its arm 155°: N12 is a short-armed hover body, and the procedural art3d models are rigid parts with zero stretch and gaps at the joints. The 0.30 m limit is therefore kept, not lowered or turned into a percentile. Two things changed: (1) height scaling, because displacement under the same rotation grows with size: from 2 m up the limit is 15% of the height (0.675 m for a 4.5 m boss). Small bodies first kept a flat 0.30 m, and a 0.6 m maggot swarm (N21) passed while shattering into 0.19 m shards, so below 2 m the limit now shrinks with the square root of the height (0.6 m → 0.164 m, 1.9 m → 0.292 m, 2026-10-12). Fully proportional 15% was not used: it would fail N02 (1.04 m, 0.22 m measured on its LOD1) and day-1 N04 (1.9 m, 0.285 m) without visual cause. The Unity `HunyuanMonsterReadyTests` keep the earlier formula (0.30 m × max(1, height / 2 m)) as a safety net for accepted models; (2) torn gaps away from a joint are not counted as stretch (see above). N03, N06, N08 and N17, which failed on the first run, pass after this at 0.18–0.26 m, and their windup tiles show the arm rising without dragging the flank.
 
 ## What the routine must check
 

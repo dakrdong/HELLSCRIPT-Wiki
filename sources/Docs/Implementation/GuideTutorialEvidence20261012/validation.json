@@ -1,0 +1,150 @@
+{
+  "source_base": "34c1fd54f5163d4f377af68a2a64334815c98e57",
+  "final_ui_patch_sha256": "faf5ff86fd9c75533d94a58ebc95ada5f1be61d2e4cbe43d396ce3bdb81bf693",
+  "full_editmode": {
+    "id": "2",
+    "testcasecount": "6040",
+    "result": "Skipped:Ignored",
+    "total": "6040",
+    "passed": "6036",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "4",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-12 08:37:21Z",
+    "end-time": "2026-10-12 09:43:23Z",
+    "duration": "3962.0313578"
+  },
+  "affected_scroll_regression": {
+    "id": "2",
+    "testcasecount": "20",
+    "result": "Passed",
+    "total": "20",
+    "passed": "20",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-12 11:41:11Z",
+    "end-time": "2026-10-12 11:41:31Z",
+    "duration": "20.1590624"
+  },
+  "ui_contract_regressions": 15,
+  "ui_refresh_guarded_bindings": 15,
+  "unity_version": "6000.6.0f1",
+  "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635",
+  "runtime_cases": [
+    {
+      "language": "ko",
+      "width": 440,
+      "height": 956,
+      "status": "passed",
+      "elapsed_s": 78.72,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "ko",
+      "width": 956,
+      "height": 440,
+      "status": "passed",
+      "elapsed_s": 77.33,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "ko",
+      "width": 1600,
+      "height": 900,
+      "status": "passed",
+      "elapsed_s": 81.62,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "ko",
+      "width": 1600,
+      "height": 1000,
+      "status": "passed",
+      "elapsed_s": 81.67,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "ko",
+      "width": 2100,
+      "height": 900,
+      "status": "passed",
+      "elapsed_s": 81.83,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "en",
+      "width": 440,
+      "height": 956,
+      "status": "passed",
+      "elapsed_s": 78.15,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "en",
+      "width": 956,
+      "height": 440,
+      "status": "passed",
+      "elapsed_s": 78.24,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "en",
+      "width": 1600,
+      "height": 900,
+      "status": "passed",
+      "elapsed_s": 81.32,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "en",
+      "width": 1600,
+      "height": 1000,
+      "status": "passed",
+      "elapsed_s": 81.41,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    },
+    {
+      "language": "en",
+      "width": 2100,
+      "height": 900,
+      "status": "passed",
+      "elapsed_s": 81.84,
+      "screenshots": 73,
+      "bundle_sha256": "80e0662c019b23375d77b2d7f1b0c11f930a8ab1d16d501e8e1e65df1b9f9635"
+    }
+  ],
+  "scope": "macOS development player, synthetic EventSystem pointers and accelerated actual fixed combat ticks; no physical mobile, WebGL, ordinary-speed, human comprehension or performance claim",
+  "reuse": "One completed full EditMode run; only UI scroll/caption and smoke projection changes followed it. Affected geometry/combat regressions and native viewports verify those corrections; combat/save/data/package owners are unchanged.",
+  "ko_report": "PASS a fresh guest enters the guide stage as the warrior without the class choice.\nPASS tutorial: edict and potion buttons shown, fan icons at 0.80 of the edict button, live=True.\nPASS Velina speaks on entry and during the first basic-attack fight, both with her portrait.\nPASS 07-skill-lesson: 4 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS 11-opening-lesson: 3 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=True.\nPASS 14-combat-lesson: 4 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=True.\nPASS 18-target-lesson: 16 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS 22-treasure-lesson: 9 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS 25-loot-lesson: 8 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS town: edict and potion buttons shown, fan icons at 0.80 of the edict button, live=False.\nPASS positioning, grade/type, treasure and gathering lessons use existing panels and live saves; rank explanations stay visible, the goblin pauses inside the viewport, gathering requires the player to close the panel, actual gold/gear are acquired, and graduation commits once for every hero.\n440x956 ko. macOS synthetic EventSystem pointers and accelerated actual fixed combat ticks. No ordinary-speed, human comprehension or physical mobile claim.\nRenderer=Metal",
+  "en_report": "PASS a fresh guest enters the guide stage as the warrior without the class choice.\nPASS tutorial: edict and potion buttons shown, fan icons at 0.80 of the edict button, live=True.\nPASS Velina speaks on entry and during the first basic-attack fight, both with her portrait.\nPASS 07-skill-lesson: 4 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS 11-opening-lesson: 3 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=True.\nPASS 14-combat-lesson: 4 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=True.\nPASS 18-target-lesson: 16 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS 22-treasure-lesson: 9 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS 25-loot-lesson: 8 gated EventSystem presses, frozen combat, safe targets, saved-state progression and reflow=False.\nPASS town: edict and potion buttons shown, fan icons at 0.80 of the edict button, live=False.\nPASS positioning, grade/type, treasure and gathering lessons use existing panels and live saves; rank explanations stay visible, the goblin pauses inside the viewport, gathering requires the player to close the panel, actual gold/gear are acquired, and graduation commits once for every hero.\n956x440 en. macOS synthetic EventSystem pointers and accelerated actual fixed combat ticks. No ordinary-speed, human comprehension or physical mobile claim.\nRenderer=Metal",
+  "evidence_sha256": {
+    "ko-goblin.png": "c9344cbe36a253dcaa10481d33d74d65a04755837a346da93e2defe0f2736a95",
+    "scroll-regression.xml": "a3ee1e7e52e4b395e41d3664a449a8f5b441ecabc22ab8a4a33678fe841eb40d",
+    "en-goblin.png": "737a5a3fa43b4fa53dffb2a57e032b6db89475794b0ce06d4943d784f3f2cbf3",
+    "ko-collected.png": "bcd9f42f5463d39788d2dacdcf2faa972d9071899b0b511634f80a48fdeca130",
+    "en-treasure.png": "e418c9205d97a9a8264a04726536bcc35fede77fb5d38abce5e47703c88f1f97",
+    "full-editmode.xml": "30079850eb414d2f1acccf894f1fb7a51985f8e1ab75545932b4ae715b77da7e",
+    "en-target.png": "72e5305ef251b853a7e6fa188004b575873be21f208040aae2a07e25a8b3054b",
+    "en-collected.png": "0d8b58038a6f4a1bb7af79c9e60399c9ab75b4103c4231cad6139784830d0302",
+    "en-runtime.txt": "b61e129c358609ae0f4daa18673ca4fdcec472e50e8eef372c4a560936bdacae",
+    "ko-runtime.txt": "3549be37880ba826c98f3fffd3233105338db7fdc8109785d2b4bb3f8904395b",
+    "ko-treasure.png": "d41cff2e3968cff5ccf6aca4cc08003c8c080af3b6aca5fa0ea6ee9a51768d53",
+    "ko-target.png": "5966092529addbb9bd4a47d30edfacf7fa3bbe5bdbb236ca5ff9b8aec04ae5d7"
+  }
+}

@@ -112,29 +112,30 @@ namespace Hellscript
                 c.phase=ChestPhase.Available;if(c.discovered)Log("CHEST_UNLOCK",c.definitionId=="CH02"?"경비 무리 처치 · 봉인 해제":"보물 상자 개봉 가능");
             }
         }
-        void ChooseChestGoal(ref Vector2 goal)
+        void ChooseChestGoal(ref Vector2 goal,bool commit=true)
         {
-            if(State.layout.legacy||!Policy.openChests||State.phase==RunPhase.Boss&&!Policy.chestsAfterBoss||LowTime){CancelChest("");return;}
+            if(State.layout.legacy||!Policy.openChests||State.phase==RunPhase.Boss&&!Policy.chestsAfterBoss||LowTime){if(commit)CancelChest("");return;}
             var active=ActiveChest;
             if(active!=null&&active.phase==ChestPhase.Approaching&&SafeForChest(active)&&CursedAllowed(active))
             {
-                if(!OpeningPointFree(active.openingPosition))
-                {var alternative=active.accessPoints.Where(OpeningPointFree).OrderBy(p=>Map.Length(State.position,p)).ToList();if(alternative.Count==0){CancelChest("접근 위치가 막혔습니다");return;}active.openingPosition=alternative[0];Map.Repath();}
-                goal=active.openingPosition;State.action=active.definitionId=="CH03"?"저주 상자로 이동":"보물 상자로 이동";return;
+                var point=active.openingPosition;
+                if(!OpeningPointFree(point))
+                {var alternative=active.accessPoints.Where(OpeningPointFree).OrderBy(p=>Map.Length(State.position,p)).ToList();if(alternative.Count==0){if(commit)CancelChest("접근 위치가 막혔습니다");return;}point=alternative[0];if(commit){active.openingPosition=point;Map.Repath();}}
+                goal=point;if(commit)State.action=active.definitionId=="CH03"?"저주 상자로 이동":"보물 상자로 이동";return;
             }
-            if(ChestBusy)return;
+            if(ChestBusy){goal=active.openingPosition;return;}
             float best=float.MaxValue;RiftChest selected=null;Vector2 access=Vector2.zero;
             foreach(var c in State.layout.chests)
             {
                 if(!c.discovered||c.abandoned||c.phase!=ChestPhase.Available||c.retryAfter>State.time||c.definitionId=="CH01"&&!Policy.commonChests||c.definitionId=="CH02"&&!Policy.sealedChests||!CursedAllowed(c)||!SafeForChest(c))continue;
                 foreach(var p in c.accessPoints)
                 {
-                    if(!OpeningPointFree(p))continue;float length=Map.Length(State.position,p);if(length>Policy.chestDetour||length>=best)continue;
+                    if(!OpeningPointFree(p))continue;float length=Map.Length(State.position,p);if(length>Policy.chestDetour||length>best||length==best&&selected!=null&&string.CompareOrdinal(c.id,selected.id)>=0)continue;
                     best=length;selected=c;access=p;
                 }
             }
             if(selected==null)return;
-            selected.openingPosition=access;selected.phase=ChestPhase.Approaching;State.exploration.chestId=selected.id;goal=access;State.action="보물 상자로 이동";
+            if(commit){selected.openingPosition=access;selected.phase=ChestPhase.Approaching;State.exploration.chestId=selected.id;}goal=access;if(commit)State.action="보물 상자로 이동";
         }
         void TickChests(float dt)
         {

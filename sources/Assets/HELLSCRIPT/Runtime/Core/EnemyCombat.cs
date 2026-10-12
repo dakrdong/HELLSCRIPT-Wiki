@@ -178,9 +178,22 @@ namespace Hellscript
         {
             switch(kind)
             {
+                case 1:case 7:return (1.5f,0,0);
                 case 12:return (.6f,0,0);case 13:return (1.4f,0,0);case 14:return (.9f,0,0);case 16:return (1.1f,0,0);
                 case 17:return (.85f,0,1.5f);case 18:return (1,2,1.5f);case 19:return (1.3f,2,2);default:return (1,0,0);
             }
+        }
+        public const float HazardInterval=.5f;
+        public static BossHit AreaHit(int kind)=>kind==3?new BossHit(.25f,4,4,HazardInterval):new BossHit(.3f,1,3,HazardInterval);
+        public static BossHit DeathHit(int kind)=>kind==5?new BossHit(2,0):kind==11?new BossHit(1.2f,0):kind==15?new BossHit(.25f,4,4,HazardInterval):new BossHit(0,0);
+        public static BossHit TraitHit(int trait)=>trait==0?new BossHit(.25f,1,3,HazardInterval):trait==1?new BossHit(1.5f,2):trait==4?new BossHit(1.5f,5):trait==6?new BossHit(20,5):new BossHit(0,0);
+        // Registry skill order for the original roster: primary, then a death effect, leap or passive.
+        public static BossHit SkillHit(int kind,int skill)
+        {
+            if(skill>0&&kind!=14)return DeathHit(kind);
+            if(kind==4||kind==10)return new BossHit(0,0);
+            if(kind==3||kind==9)return AreaHit(kind);
+            var hit=OwnHit(kind==14&&skill==0?0:kind);return new BossHit(hit.power,hit.element);
         }
         // Seconds between the release and the landing of a travelling attack (the sandworm's tunnel, the ghoul's leap).
         public static float Travel(EnemyActionState a)=>a.kind==13?Vector2.Distance(a.origin,a.aim)/BurrowSpeed:a.kind==14&&a.variant==1?LeapTime:0;

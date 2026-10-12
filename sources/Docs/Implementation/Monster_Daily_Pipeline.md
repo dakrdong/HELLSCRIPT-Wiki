@@ -39,7 +39,7 @@
 
 ## 4. 경량화·리깅
 
-`python3 tools/hunyuan_monster_ready.py --glb raw/<ID>.glb --id <ID> --archetype <specs.archetype> --height <specs.height> [--boss] --out <작업 폴더>` 뒤 비교 시트를 보고 자동 판정 결과를 확인한다. 실패하면 다른 체형·키나 다른 후보로 다시 한다. 통과하면 `python3 tools/hunyuan_monster_install.py --id <ID> --from <작업 폴더>`로 `Resources/World/HunyuanReady/`에 넣는다. `state.py set rigged …`. 세부 규칙은 두 도구의 도움말과 `Editor/HunyuanReady/HunyuanReadyImporter.cs`의 규격을 따른다.
+`python3 tools/hunyuan_monster_ready.py --glb raw/<ID>.glb --id <ID> --archetype <specs.archetype> --height <specs.height> [--boss] --out <작업 폴더>` 뒤 비교 시트를 보고 자동 판정 결과를 확인한다. 실패하면 다른 체형·키나 다른 후보로 다시 한다. 통과하면 `python3 tools/hunyuan_monster_install.py --id <ID> --from <작업 폴더>`로 `Resources/World/HunyuanReady/`에 넣는다. 판정을 통과해도 시트의 `front` 칸이 옆모습이면 몸이 옆을 향한 것이므로 `--yaw -90`(또는 `90`)으로 다시 돌린다. 연속 실행은 `tools/monster_pipeline/retry_rig.py`가 후보 순서대로 시도한다. 비교 시트에서 준비 자세(windup)와 걷기 칸에 떨어져 나간 조각, 손에서 빠진 무기, 위로 들린 옷이 있으면 판정과 무관하게 탈락시킨다. 네 후보가 모두 탈락하면 그 ID는 상태 파일의 `_deferred`와 `selection.json`에 사유를 남기고 상태를 지워 다음 날 `state.py next`가 먼저 돌려주게 하며, `monster_specs.json` 프롬프트를 고친다(예: 가는 긴 다리 → 짧고 굵은 다리, 바닥판 → 평평한 발). `state.py set rigged …`. 세부 규칙은 두 도구의 도움말과 `Editor/HunyuanReady/HunyuanReadyImporter.cs`의 규격을 따른다.
 
 ## 5. Codex 일러스트
 

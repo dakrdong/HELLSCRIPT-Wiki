@@ -175,7 +175,7 @@ namespace Hellscript
             ApplyScaler(root.parent.GetComponent<CanvasScaler>(),battle||responsive);
             if(Page=="build"&&content!=null)buildScrollOffset=content.anchoredPosition.y;
             if(Page=="edict"&&content!=null)edictScrollOffset=content.anchoredPosition.y;
-            targetRanks.Clear();targetTags.Clear();targetLinks.Clear();targetLabelBounds.Clear();targetLabelIds.Clear();Array.Clear(targetNotes,0,targetNotes.Length);
+            targetRanks.Clear();targetTags.Clear();targetLinks.Clear();targetLabelBounds.Clear();orderHeroLabel=null;orderLootLabels.Clear();orderLootPoints.Clear();targetLabelIds.Clear();Array.Clear(targetNotes,0,targetNotes.Length);
             Page=page;foreach(Transform child in root){child.gameObject.SetActive(false);Destroy(child.gameObject);}skillLabels.Clear();status=hpText=null;
             foreach(Transform child in shell){child.gameObject.SetActive(false);Destroy(child.gameObject);}headerApron=footerApron=null;
             if(!battle)
@@ -485,7 +485,7 @@ namespace Hellscript
         void Update()
         {
             RefreshCanvasScale();
-            PositionEdictLabels();PositionTargetLabels();
+            PositionEdictLabels();PositionTargetLabels();PositionOrderLabels();
             if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){RefreshIdleSummary();return;}

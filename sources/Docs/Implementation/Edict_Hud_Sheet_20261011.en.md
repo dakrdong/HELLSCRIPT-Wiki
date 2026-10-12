@@ -14,3 +14,11 @@ Hunt Edict settings are changed inside the battle screen without leaving to a me
 - **Presets tab**: not settable here yet; it only shows a note. The next step adds slots, share code and import.
 - **Scope**: ordinary rift battles. The earlier four position tiles and their first-tap selection are replaced by this sheet.
 - **Verified**: four data-layer tests and 93 related tests, and the macOS development-build smoke `RuntimeBattleQuickEditSmoke` (choice chip, stepper, undo, order, parent-child rows, four tabs, play, close, five screen sizes). Not verified: full Edit Mode, the bag, pickup and skill moves of later steps, physical devices, long English text clipping.
+
+## Buttons always shown (added 2026-10-11)
+
+The Hunt Edict button and the potion threshold button are shown wherever the HUD is (rifts, tutorial, training, town). In a rift fight and in the guide tutorial stage a tap pauses the fight and changes go straight into it; elsewhere (town, training) nothing pauses, changes are saved to the hero only, and the play button and the walk forecast are off. The tab icons that fan out are 80% of the Hunt Edict button. Verified by `RuntimeGuideTutorialSmoke` (440×956 Korean): both buttons, the pause and an icon ratio of 0.80 in the tutorial and in town.
+
+## Latest-main integration preparation (2026-10-11)
+
+Resolved PR #91 potion/sheet conflicts while preserving the current potion/retreat tabs and dedicated target/position panels. Town settings save to the hero without reading stale combat vitals, forecasting or playback. The native guide smoke is muted and now checks disabled town position playback and full potion bars without combat numbers. Shared UI static validation, 15 regressions and refresh ownership checks passed. Unity compilation/runtime verification of this integrated source and the final main merge remain pending.

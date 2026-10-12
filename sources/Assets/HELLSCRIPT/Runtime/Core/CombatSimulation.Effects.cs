@@ -116,11 +116,11 @@ namespace Hellscript
         void AddBossControl(EnemyState enemy,float value,string definition,int root)
         {
             var control=enemy.bossControl;if(control.staggered>0||control.immunity>0||value<=0)return;
-            control.meter=Mathf.Min(100,control.meter+value);
-            if(control.meter<100-.0001f)return;
-            control.meter=0;control.staggered=3;
+            control.meter=Mathf.Min(BossCombat.StaggerMeter,control.meter+value);
+            if(control.meter<BossCombat.StaggerMeter-.0001f)return;
+            control.meter=0;control.staggered=BossCombat.StaggerSeconds;
             InterruptBossAction(enemy,"보스 제압");
-            EffectEvent(definition,"BOSS_STAGGER",root:root,target:enemy.id,value:3);Log("BOSS_STAGGER","보스 제압 · 3초 동안 행동 중단");
+            EffectEvent(definition,"BOSS_STAGGER",root:root,target:enemy.id,value:BossCombat.StaggerSeconds);Log("BOSS_STAGGER",Loc.Source("보스 제압 · {0}초 동안 행동 중단",BossCombat.StaggerSeconds));
         }
         float SlowRatio(EnemyState enemy)
         {
@@ -153,7 +153,7 @@ namespace Hellscript
                 if(enemy.boss)
                 {
                     if(control.staggered>0)
-                    {control.staggered=Mathf.Max(0,control.staggered-dt);if(control.staggered<=.00001f){control.staggered=0;control.immunity=10;EffectEvent("BOSS_CONTROL","IMMUNITY",target:enemy.id,value:10);}}
+                    {control.staggered=Mathf.Max(0,control.staggered-dt);if(control.staggered<=.00001f){control.staggered=0;control.immunity=BossCombat.StaggerImmunitySeconds;EffectEvent("BOSS_CONTROL","IMMUNITY",target:enemy.id,value:BossCombat.StaggerImmunitySeconds);}}
                     else
                     {
                         float immuneTime=Mathf.Min(dt,control.immunity);control.immunity=Mathf.Max(0,control.immunity-dt);

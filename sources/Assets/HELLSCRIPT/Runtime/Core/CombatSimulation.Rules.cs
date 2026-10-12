@@ -92,11 +92,11 @@ namespace Hellscript
         {
             var policy=exact?.version==EdictTargetPolicy.CurrentVersion?exact:global.HasValue?null:TargetPolicy;
             var candidates=policy!=null?sensed.Where(EdictTargetEligible).ToList():sensed;
-            if(EdictDodgeHolding&&(r.action==RuleAction.Basic||r.action==RuleAction.Skill))
+            if(DodgeOwnsEdictAction&&(r.action==RuleAction.Basic||r.action==RuleAction.Skill))
             {float range=r.action==RuleAction.Basic?BasicReach:r.skill>=0&&r.skill<catalog.skills.Count?catalog.skills[r.skill].range:0;if(range>0)candidates=candidates.Where(e=>DodgeTargetInRange(e,range,r.action==RuleAction.Basic&&Hero.heroClass!=HeroClass.Warrior?.2f:0)).ToList();}
             if(policy!=null&&r.target==RuleTarget.Default)
                 return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,DangerousEdictCast,(a,b)=>Map.LineClear(a,b));
-            var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId)??(EdictDodgeHolding?candidates.OrderBy(e=>(e.position-State.position).sqrMagnitude).ThenBy(e=>e.id).FirstOrDefault():null);
+            var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId)??(DodgeOwnsEdictAction?candidates.OrderBy(e=>(e.position-State.position).sqrMagnitude).ThenBy(e=>e.id).FirstOrDefault():null);
             float Score(EnemyState e)
             {
                 float score=Vector2.Distance(State.position,e.position);
@@ -151,7 +151,7 @@ namespace Hellscript
         RuleCandidate InspectRule(Rule r,int row)
         {
             var c=InspectRuleCore(r,row);
-            if(EdictDodgeHolding&&(r.action!=RuleAction.Basic&&r.action!=RuleAction.Skill||c.code=="APPROACH"||
+            if(DodgeOwnsEdictAction&&(r.action!=RuleAction.Basic&&r.action!=RuleAction.Skill||c.code=="APPROACH"||
                 !DodgeCanAttack(r.action==RuleAction.Basic?"BASIC":CombatTelemetry.SkillId(r.skill))))
             {c.ready=false;c.code="DODGE_HOLD";c.detail="회피한 공격이 끝날 때까지 안전 위치를 유지합니다.";}
             return c;
@@ -271,31 +271,18 @@ namespace Hellscript
             return State.layout.chests.Any(c=>c.discovered&&!c.abandoned&&(c.phase==ChestPhase.Available||c.phase==ChestPhase.Approaching||c.phase==ChestPhase.Opening)&&c.retryAfter<=State.time&&
                 (c.definitionId!="CH01"||Policy.commonChests)&&(c.definitionId!="CH02"||Policy.sealedChests)&&CursedAllowed(c)&&SafeForChest(c)&&c.accessPoints.Any(p=>OpeningPointFree(p)&&Map.Length(State.position,p)<=Policy.chestDetour));
         }
-        void DecideRules()
+        void DecideRules(RuleCandidate[] prepared=null,RuleCandidate chosen=null,bool ordered=false)
         {
             BehaviorRules.Normalize(State.build);
-            // With a document driving the hero the rules keep their rows but are inspected in the
-            // document's category and attack order; a skill whose automatic use is off is not inspected.
-            var candidates=EdictRuleOrder.ForSimulation(State.build.rules,edictSource)
-                .Select(o=>o.skipReason==""?InspectRule(o.rule,o.row):new RuleCandidate{rule=o.rule,row=o.row,destination=State.position,code="EDICT_OFF",detail=o.skipReason}).ToArray();
-            if(ClassSkillsActive)foreach(var c in candidates)
-            {
-                if(c.rule.action!=RuleAction.Skill&&c.rule.action!=RuleAction.Basic)continue;
-                string id=c.rule.action==RuleAction.Basic?"BASIC":ClassSkills.LegacyId(c.rule.skill);
-                if(!Loadout.automatic.Contains(id)){c.target=null;c.code="AUTO_OFF";}
-                else if(c.ready)c.code="ID_ORDER";
-                c.ready=false;
-            }
-            // Gathering walks toward remembered enemies before fighting; attacks wait until it ends.
-            if(Gathering)foreach(var c in candidates)if(c.ready&&(c.rule.action==RuleAction.Skill||c.rule.action==RuleAction.Basic)){c.ready=false;c.code="GATHERING";c.detail="몰이 중에는 공격을 보류합니다.";}
-            RuleCandidate selected=null;foreach(var c in LandingPreferenceOrder(candidates)){if(!c.ready)continue;if(EdictAimGate(c)){selected=c;break;}}
-            selected=ApplyDiscoveryOrder(candidates,ReviewShieldOpening(candidates,selected));
+            var candidates=prepared??InspectDecisionRules();
+            RuleCandidate selected=chosen;if(!ordered)foreach(var c in LandingPreferenceOrder(candidates)){if(!c.ready)continue;if(EdictAimGate(c)){selected=c;break;}}
+            if(!ordered)selected=ApplyDiscoveryOrder(candidates,ReviewShieldOpening(candidates,selected));
+            else if(selected!=null&&!EdictAimGate(selected))selected=null;
             // ID-based attacks are dispatched above this rule loop. Their range failures still
             // own navigation ahead of exploration, while survival, gathering and loot keep priority.
-            if(ClassSkillsActive&&!Gathering&&!HeroActionBusy&&selected?.rule.action==RuleAction.Explore&&
+            if(!ordered&&ClassSkillsActive&&!Gathering&&!HeroActionBusy&&selected?.rule.action==RuleAction.Explore&&
                 candidates.Any(c=>c.target!=null&&(c.code=="RANGE"||c.code=="LINE_OF_FIRE")))selected=null;
-            foreach(var c in candidates)RecordDecision(c.rule,c.row,c==selected?"SELECTED":c.ready?"PRIORITY":c.code,c.ready&&c!=selected?
-                selected==null?Loc.T("공격 위치 확보"):EdictRuleOrder.IsCompiledRule(selected.rule.id)?Loc.F("{0}이 먼저 실행됩니다.",DecisionSource(selected)):Loc.F("{0}번 규칙이 먼저 실행됩니다.",selected.row+1):c.detail,c.target);
+            RecordDecisions(candidates,selected);
             if(selected==null)
             {
                 if(HeroActionBusy)
@@ -316,6 +303,11 @@ namespace Hellscript
             if(selected.rule.action==RuleAction.Skill||selected.rule.action==RuleAction.Basic)
             {SelectTarget(selected.target,DecisionSource(selected),selected.rule.id);StartHeroAction(selected.rule.action==RuleAction.Basic?-1:selected.rule.skill,selected.target,selected.destination,selected.cost,selected.row,selected.rule.escape,explicitRule:selected!=null&&EdictRuleOrder.IsCompiledRule(selected.rule.id)?selected.rule:null,aim:selected.aim);}
             else if(selected.rule.action==RuleAction.Loot)State.movementDrop=FindRuleLoot()?.id??-1;
+        }
+        void RecordDecisions(RuleCandidate[] candidates,RuleCandidate selected)
+        {
+            foreach(var c in candidates)RecordDecision(c.rule,c.row,c==selected?"SELECTED":c.ready?"PRIORITY":c.code,c.ready&&c!=selected?
+                selected==null?Loc.T("공격 위치 확보"):EdictRuleOrder.IsCompiledRule(selected.rule.id)?Loc.F("{0}이 먼저 실행됩니다.",DecisionSource(selected)):Loc.F("{0}번 규칙이 먼저 실행됩니다.",selected.row+1):c.detail,c.target);
         }
     }
 }

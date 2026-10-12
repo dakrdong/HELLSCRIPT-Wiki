@@ -118,6 +118,7 @@ namespace Hellscript
         }
         static void Normalize(AccountSave a)
         {
+            MonsterCodex.Normalize(a);
             PlayerObservations.Normalize(a);
             if(string.IsNullOrEmpty(a.telemetryAccountId))a.telemetryAccountId=Guid.NewGuid().ToString("N");
             a.records??=new System.Collections.Generic.List<RunRecord>();
@@ -349,19 +350,23 @@ namespace Hellscript
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
             Data.dailyQuests=staged.dailyQuests;
+            var liveTutorial=Data.guide?.tutorialRun;
+            if(liveTutorial!=null&&liveTutorial.id==staged.guide?.tutorialRun?.id)liveTutorial.monsterKillsCommitted=staged.guide.tutorialRun.monsterKillsCommitted;
             Data.guide=staged.guide;Data.offlineSupplies=staged.offlineSupplies;Data.attendance=staged.attendance;Data.aspects=staged.aspects;Data.enhancementStones=staged.enhancementStones;Data.forge=staged.forge;Data.coreCraft=staged.coreCraft;
             Data.salvage=staged.salvage;Data.schema=staged.schema;Data.contentUnlocks=staged.contentUnlocks;Data.gold=staged.gold;Data.materials=staged.materials;Data.cores=staged.cores;Data.warehouse=staged.warehouse;
             Data.premium=staged.premium;Data.riftFatigue=staged.riftFatigue;Data.warehouseCapacity=staged.warehouseCapacity;Data.warehouseNames=staged.warehouseNames;
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             RiftResult.SyncDisposals(Data.suspendedRun,staged.suspendedRun);
             RiftGearRecommendations.Sync(Data.suspendedRun,staged.suspendedRun);
+            if(Data.suspendedRun!=null&&Data.suspendedRun.id==staged.suspendedRun?.id)Data.suspendedRun.monsterKillsCommitted=staged.suspendedRun.monsterKillsCommitted;
             var liveResult=Data.repeatHunt?.pendingResult;RiftResult.SyncDisposals(liveResult,staged.repeatHunt?.pendingResult);
+            if(liveResult!=null&&liveResult.id==staged.repeatHunt?.pendingResult?.id)liveResult.monsterKillsCommitted=staged.repeatHunt.pendingResult.monsterKillsCommitted;
             if(liveResult!=null&&staged.repeatHunt?.pendingResult?.id==liveResult.id)staged.repeatHunt.pendingResult=liveResult;
             Data.repeatHunt=staged.repeatHunt;Data.records=staged.records;
             Data.telemetryAccountId=staged.telemetryAccountId;Data.combatSequence=staged.combatSequence;Data.combatTelemetryLossCount=staged.combatTelemetryLossCount;
             Data.playerObservations=staged.playerObservations;
             Data.gems=staged.gems;Data.gemCapacity=staged.gemCapacity;Data.runes=staged.runes;
-            Data.rewardBoxes=staged.rewardBoxes;
+            Data.rewardBoxes=staged.rewardBoxes;Data.monsterCodex=staged.monsterCodex;
             Data.lastSeenUtc=staged.lastSeenUtc;Data.itemSequence=staged.itemSequence;Data.warehouseSequence=staged.warehouseSequence;Error="";NotifyCommitted(operation);return true;
         }
         public bool CommitChest(RunState run,RiftChest chest)
@@ -386,6 +391,8 @@ namespace Hellscript
             {Error=Loc.T("미접속 보급 정산을 먼저 완료해 주세요.");return false;}
             PlayerObservations.Normalize(data);
             var previousObservations=UnityEngine.JsonUtility.FromJson<PlayerObservations>(UnityEngine.JsonUtility.ToJson(data.playerObservations));
+            var previousCodex=data.monsterCodex;
+            var codexRuns=new[]{data.suspendedRun,data.repeatHunt?.pendingResult,data.guide?.tutorialRun}.Where(r=>MonsterCodex.Eligible(r)&&RepeatHunt.Terminal(r)).Distinct().Select(r=>(run:r,committed:r.monsterKillsCommitted)).ToArray();
             var previousEdictUnlocks=data.guide.edictUnlocks.ToList();
             try
             {
@@ -415,6 +422,11 @@ namespace Hellscript
                     data.schema=Math.Max(data.schema,MaximumSchemaVersion);
                 ObservePlayerProgress(data);
                 var saveStarted=System.Diagnostics.Stopwatch.GetTimestamp();
+                foreach(var group in codexRuns.GroupBy(r=>r.run.id))
+                {
+                    if(!group.Any(r=>r.committed))MonsterCodex.Commit(data,group.First().run);
+                    foreach(var entry in group)entry.run.monsterKillsCommitted=true;
+                }
                 string saveJson=JsonUtility.ToJson(data,false);
                 if(path!=null)
                 {
@@ -429,6 +441,7 @@ namespace Hellscript
             catch(Exception e)
             {
                 data.playerObservations=previousObservations;data.guide.edictUnlocks=previousEdictUnlocks;
+                data.monsterCodex=previousCodex;foreach(var entry in codexRuns)entry.run.monsterKillsCommitted=entry.committed;
                 if(e is ArgumentException)
                 {
                     if(ReferenceEquals(Data,data))foreach(var h in Data.heroes)

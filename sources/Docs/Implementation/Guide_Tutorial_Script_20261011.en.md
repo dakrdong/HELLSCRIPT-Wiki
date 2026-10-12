@@ -1,6 +1,6 @@
-# Guide Tutorial Segment 1 (2026-10-11)
+# Guide Tutorial Segments 1, 2 and 3
 
-Updated: 2026-10-11
+Updated: 2026-10-12
 
 [한국어](Guide_Tutorial_Script_20261011.md). The first segment of the tutorial-only stage (flow 6) that replaces the puzzle-level tutorial: script, guide profile, implementation and verification.
 
@@ -13,7 +13,7 @@ Updated: 2026-10-11
 
 ## Flow and lines
 
-The map is four rooms (entrance hall, first arena, long gallery, plaza) joined by bent corridors, climbing up and to the right. Segment 1 uses the first two rooms; the rest is the road for later segments.
+The map is four rooms (entrance hall, first arena, long gallery, plaza) joined by bent corridors, climbing up and to the right. Segment 1 uses the first two rooms. Segment 2 follows the upper door and winding corridor into the gallery for position-edict lessons. Segment 3 teaches target priorities, treasure pursuit and gathering in the plaza. See the [segment 2 record](Guide_Tutorial_Segment2_Plan_20261012.en.md).
 
 | Beat | Situation | Time | Velina |
 | --- | --- | --- | --- |
@@ -24,7 +24,9 @@ The map is four rooms (entrance hall, first arena, long gallery, plaza) joined b
 | Surround | When the first foe falls, eight appear on all sides | Stopped | Look, every side is blocked. Plain attacks alone can hardly hold off this horde. / Now please teach the hero how to use a new skill. / With the skill you choose, the hero will stand and fight that horde. → [Teach a skill] |
 | Lesson | Battle HUD: first skill slot → Whirlwind → Level Up → Equip (the gate leads one step at a time) | Stopped | Press the hero's first skill slot. / This is Whirlwind. The hero spins and cuts down every foe around at once. Press it to take a look. / You have 1 skill point. Press 'Level Up' so the hero learns Whirlwind. / Now press 'Equip' to place it in the first slot. |
 | Whirlwind | Time flows again; the hero sweeps the pack with Whirlwind | Running | Watch: this is the skill you taught. (bark) |
-| End | Right after the last foe falls | Stopped | Did you see? The hero moved exactly as you taught. / This is the Hunt Edict. Whenever the road is blocked, rewrite the edict and open the way. / The road continues up there. I will keep watching over you until you reach the town. → [Head for the town] → graduation, town |
+| Segment 2 | Clear the surrounding pack → gallery road → first engagement lesson → walking approach → first Whirlwind hit → combat position lesson → remaining fight | Running/Stopped | [Segment 2 integration](Guide_Tutorial_Segment2_Plan_20261012.en.md) |
+| Segment 3 | Plaza → grade/type lesson → boss → treasure lesson and chase → gathering lesson and pickup → final boss | Running/Stopped | [Segment 3 integration](Guide_Tutorial_Segment3_Plan_20261012.en.md) |
+| End | After the plaza boss falls | Stopped | Did you see? The hero moved exactly as you taught. / This is the Hunt Edict. Whenever the road is blocked, rewrite the edict and open the way. / The road continues up there. I will keep watching over you until you reach the town. → [Head for the town] → graduation, town |
 
 Stopped beats tint the screen edges a pale blue. The hero cannot fall in the stage (health refills at zero).
 
@@ -32,15 +34,17 @@ Stopped beats tint the screen edges a pale blue. The hero cannot fall in the sta
 
 - **First start:** an account where no hero has begun or finished a tutorial (`GuideTutorial.FirstStart`) enters as the warrior right after guest or Google sign-in, without the class choice, also after an interruption.
 - **Accounts already in the puzzle levels** finish those; only new accounts take the new stage.
-- **Graduation:** finishing segment 1 graduates straight to the town (one `guide-graduate` transaction, the existing prologue gold). The warrior's stage stands for every hero, so the other classes start in the town without a tutorial. Hunt Edict disclosure follows the existing rift-progress rules without the puzzle.
+- **Graduation:** finishing all three segments graduates to the town (one `guide-graduate` transaction, the existing prologue gold). The warrior's stage stands for every hero, so the other classes start in the town without a tutorial. Segment 2 first discloses only the three position options; Segment 3 discloses target and action priorities at their lessons; graduation opens all remaining options.
 - **Arrival = tutorial finished (added 2026-10-11):** graduation counts as the end of the whole tutorial and opens every feature: all content unlocks (training ground to masterwork), every Hunt Edict option (`edictLegacyAccess`), repeat settings and the rune board (completed without its lesson, so the rift 15 first-clear rune block set lesson reward does not come), and tutorial hints off (the player can turn them back on). Flag `AccountGuide.everythingOpen`, owner `GuideTutorial.OpenEverything`.
 - **Restart:** quitting mid-stage restarts it from the start of the road on the next entry (skills are cleared again).
 - **HUD skill level-up (general feature):** while a skill point is free, the HUD skill slot list also shows unlearned skills, dimmed; tapping one opens its details, where 'Level Up' spends the point. It is general so the path the tutorial teaches keeps working in rifts.
 - Main files: `GuideTutorial.cs` (map, beats, rules), `CombatSimulation.Guide.cs` (walk, spawns, beat changes), `GameStore.Guide.cs` (entry, graduation), `GameUI.GuideTutorial.cs` (lines, HUD lesson), `GameController.Tutorials.cs` (entry routing).
 
-## Verification
+## Segment 1 verification on 2026-10-11
 
 - Edit Mode `GuideTutorialTests` (2): a new account starts at the left edge and goes through greeting, first fight, surround, Whirlwind lesson, clear and graduation; the road climbs up-right and is walkable. The related test batch is in the PR record.
 - macOS development build `RuntimeGuideTutorialSmoke` (`-hellscriptGuideTutorialSmoke -hellscriptOfflineQa`): passed at 440×956 Korean and 956×440 English. A new guest enters as the warrior without the class choice; Velina's portrait and lines; four real pointer presses through the gate (skill slot, Whirlwind, Level Up, Equip); Whirlwind clears the pack; arrival in town with one graduation.
 - Not verified: physical devices, human comprehension, long English lines at other resolutions, the old puzzle tutorial smoke (new accounts no longer go to the puzzle).
 - To match the skipped class choice, five smokes that checked the character stage on a fresh save (title, character selection, equipment shop layout, town models, presentation profile) now set the tutorial exemption before guest sign-in.
+
+For segments 2 and 3 and final integration on 2026-10-12, see the [segment 2 record](Guide_Tutorial_Segment2_Plan_20261012.en.md).

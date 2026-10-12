@@ -75,6 +75,7 @@ namespace Hellscript
         // Cache identifiers, not localized display strings.
         public static string NameForDefinition(string id)=>id!=null&&attacksByDefinition.TryGetValue(id,out int attack)?Name(attack):null;
         public const int Slots=7;
+        public const float StaggerMeter=100,StaggerSeconds=3,StaggerImmunitySeconds=10;
         // Phase 1 uses entries 0-2 (slots 1-3), phase 2 adds entries 3-5 (slots 4-6).
         public static readonly BossAttack[][] Kit=
         {
@@ -156,6 +157,11 @@ namespace Hellscript
         {
             switch(kind)
             {
+                case BossAttack.Basic:case BossAttack.Hook:return new BossHit(1,0);
+                case BossAttack.Slam:return new BossHit(2,0);
+                case BossAttack.Charge:return new BossHit(1.5f,0);
+                case BossAttack.Beam:return new BossHit(.375f,5,2,.25f);
+                case BossAttack.Blasts:return new BossHit(1.5f,5);
                 case BossAttack.Roar:return new BossHit(.8f,5);
                 case BossAttack.ReapingSweep:return new BossHit(1.2f,0);case BossAttack.ExecutionLeap:return new BossHit(1.6f,0);
                 case BossAttack.ChainWhirl:return new BossHit(.5f,0,interval:.5f);case BossAttack.GraveToll:return new BossHit(1,5);

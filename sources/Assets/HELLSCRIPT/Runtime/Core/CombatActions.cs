@@ -31,7 +31,7 @@ namespace Hellscript
         public BlizzardMode blizzardMode;
         public DamageSnapshot snapshot;
         public HeroActionPolicy policy;
-        public bool exitChannelForBuild,exitChannelForSurvival;
+        public bool exitChannelForBuild,exitChannelForSurvival,buffUpkeep;
     }
     [Serializable] public sealed class CombatActionEvent
     {

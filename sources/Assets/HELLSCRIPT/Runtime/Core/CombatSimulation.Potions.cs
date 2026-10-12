@@ -81,6 +81,7 @@ namespace Hellscript
         }
         void TryUseUtilityPotion(bool moved)
         {
+            if(EdictActive)return;
             var p=CurrentPotionPolicy;
             bool combat=Target!=null||sensed.Any(e=>!e.dead);
             foreach(var id in ResolvedPotionSlots.Where(id=>id!=null&&PotionCatalog.IsUtility(id)))
@@ -97,11 +98,11 @@ namespace Hellscript
             return id!=null&&TryUseUtility(id);
         }
         public bool TryUseUtilitySlot(string id)=>ResolvedPotionSlots.Contains(id)&&PotionCatalog.IsUtility(id)&&TryUseUtility(id);
-        bool TryUseUtility(string id)
+        bool TryUseUtility(string id,bool upkeep=false)
         {
             var state=State.potions;
             if(state.version==0||State.health<=0||state.utilityCooldown>0||Hero.potions.Count(id)<=0)return false;
-            var def=PotionCatalog.Get(id);if(state.utilityRemaining>0&&!def.Crafted)return false;var changed=baseStats.WithPotion(def,EffectiveLevel);
+            var def=PotionCatalog.Get(id);if(state.utilityRemaining>0&&(!def.Crafted&&!upkeep||upkeep&&state.utilityId!=id))return false;var changed=baseStats.WithPotion(def,EffectiveLevel);
             if(!def.Crafted&&!baseStats.PotionChanges(changed))return false;
             state.utilityId=def.id;state.utilityRemaining=state.utilityDuration=def.duration;
             state.utilityCooldown=state.utilityTotal=RunePotionCooldown(def.cooldown);

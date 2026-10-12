@@ -303,7 +303,17 @@ namespace Hellscript
             ExitIdle(false);RestoreForegroundClock();
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();
             Comparison=null;ComparisonError="";
-            if(Combat!=null){if(Active)Combat.Abandon();Combat.Visual-=World.Effect;Combat=null;}
+            if(Combat!=null)
+            {
+                if(Active)Combat.Abandon();
+                if(MonsterCodex.Eligible(Combat.State)&&!Combat.State.monsterKillsCommitted)
+                {
+                    if(Store.Data.repeatHunt?.pendingResult?.id==Combat.State.id)Store.Data.repeatHunt.pendingResult=Combat.State;
+                    else Store.Data.suspendedRun=Combat.State;
+                    if(!Store.Save()){Notify(Store.Error);return;}
+                }
+                Combat.Visual-=World.Effect;Combat=null;
+            }
             Store.Data.suspendedRun=null;Store.Data.repeatHunt=null;repeatRestored=false;World.ClearDungeon();Save();UI.ShowTown();Audio?.Play("flow.rift_exit");
             VisitSanctuary(visit);
         }

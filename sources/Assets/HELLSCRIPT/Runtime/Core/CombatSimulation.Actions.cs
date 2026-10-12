@@ -64,7 +64,7 @@ namespace Hellscript
             CaptureRangerEdictAction(a,edictSource);
             if(edictTarget!=null)a.policy.edictTarget=JsonUtility.FromJson<EdictTargetPolicy>(JsonUtility.ToJson(edictTarget));
             OriginalClassCast(a);a.prepare*=ClassTiming(a.id);a.recovery*=ClassTiming(a.id);
-            State.heroAction=a;State.activeSkill=index;State.resource-=a.cost;ConsumeCostEffects(a.cost,a);ReserveCastCharges(a);
+            a.buffUpkeep=checkingBuffUpkeep&&index==16&&OwnElementalShield;State.heroAction=a;State.activeSkill=index;State.resource-=a.cost;ConsumeCostEffects(a.cost,a);ReserveCastCharges(a);
             ObserveShieldOpeningAction(index);
             if(index<0&&target!=null&&lastBasic!=target.id){lastBasic=target.id;basicCount=0;}
             if(index>=0)
@@ -114,7 +114,7 @@ namespace Hellscript
             // Teleport has no travelling phase, so validate its paid destination here.
             if(a.skill==15&&!TeleportLandingValid(a.origin,a.destination))
             {InterruptHeroAction("순간이동 직전 이동 거리·시야·착지 조건을 충족하지 못했습니다.");return;}
-            if(a.skill==16&&(OwnElementalShield||ElementalShieldAmount<=.00001f)||a.skill==4&&(OwnIronWall||IronWallAmount<=.00001f))
+            if(a.skill==16&&(a.buffUpkeep?UpkeepShieldCapacity<=.00001f:OwnElementalShield||ElementalShieldAmount<=.00001f)||a.skill==4&&(OwnIronWall||IronWallAmount<=.00001f))
             {InterruptHeroAction("보호막 생성 직전 같은 보호막 또는 합계 상한 때문에 추가 생성할 수 없습니다.");return;}
             a.released=true;a.snapshot=CaptureDamage();a.phase=HeroActionPhase.Recovering;
             ActionEvent(a,"ACTION_RELEASE",a.travel>0?"착지 완료":"효과 실행");

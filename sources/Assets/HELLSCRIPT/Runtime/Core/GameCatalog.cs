@@ -156,6 +156,7 @@ namespace Hellscript
     [Serializable]
     public sealed class AccountSave
     {
+        public MonsterCodexSave monsterCodex=new MonsterCodexSave();
         public DailyQuestState dailyQuests;
         [NonSerialized] internal Func<long> dailyQuestClock;
         public string telemetryAccountId;
@@ -311,12 +312,15 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public MonsterCodexSave monsterKills=new MonsterCodexSave();
+        public bool monsterKillsCommitted;
         public LiveOpsRunSnapshot liveOps;
         public bool tutorial,tutorialReplay;
         public int tutorialPhase;
         public int tutorialFlowVersion,tutorialLessonStep;
-        // The guide tutorial's next road point (GuideTutorial.Road).
+        // The guide tutorial's next point in the current road segment.
         public int guideWaypoint;
+        public float guideGoblinKilledAt;
         public int puzzleLevel,puzzleWave;
         public PuzzleOperationState puzzleOperation;
         public bool puzzleWaveReady,puzzleHuntRound;
@@ -338,6 +342,7 @@ namespace Hellscript
         public EdictResponseState edictResponse;
         public EdictLandingPreference edictLandingPreference;
         public EdictTargetState edictTarget;
+        public EdictActionState edictAction;
         public EdictFieldState edictField;
         public GoldenGoblinState goblin;
         public CombatStatistics statistics;

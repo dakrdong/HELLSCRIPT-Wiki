@@ -67,12 +67,12 @@ namespace Hellscript.Tests
         }
 
         [Test]
-        public void LootMovesBeforeAttackOnlyWhenSomeRarityIsCollectedDuringCombat()
+        public void LootKeepsItsCategoryRankRegardlessOfRarityTiming()
         {
-            var after=HuntEdictV2.Create(HeroClass.Mage);   // defaults: AFTER_COMBAT, and common.order puts AFTER_COMBAT_LOOT after ATTACK
+            var after=HuntEdictV2.Create(HeroClass.Mage);   // Rarity timing affects availability, never category rank.
             var rules=Rules(Of(RuleAction.Loot),Skill(12),Of(RuleAction.Explore),Of(RuleAction.Chest));
             var ordered=EdictRuleOrder.Order(rules,after).Select(o=>o.rule.action).ToList();
-            CollectionAssert.AreEqual(new[]{RuleAction.Skill,RuleAction.Loot,RuleAction.Explore,RuleAction.Chest},ordered);
+            CollectionAssert.AreEqual(new[]{RuleAction.Loot,RuleAction.Skill,RuleAction.Explore,RuleAction.Chest},ordered);
             var during=With(after,("loot.RARE","PRIORITY"));
             ordered=EdictRuleOrder.Order(rules,during).Select(o=>o.rule.action).ToList();
             CollectionAssert.AreEqual(new[]{RuleAction.Loot,RuleAction.Skill,RuleAction.Explore,RuleAction.Chest},ordered);
@@ -81,7 +81,7 @@ namespace Hellscript.Tests
         [Test]
         public void TheCommonOrderDecidesWhereExplorationSits()
         {
-            var d=With(HuntEdictV2.Create(HeroClass.Mage),("common.order","EMERGENCY,DODGE,EXPLORE,PRIORITY_LOOT,ATTACK,AFTER_COMBAT_LOOT"));
+            var d=With(HuntEdictV2.Create(HeroClass.Mage),("common.order","DODGE,BUFF,EXPLORE,ATTACK,OBJECTIVE,PRIORITY_LOOT,REGROUP"));
             var ordered=EdictRuleOrder.Order(Rules(Skill(12),Of(RuleAction.Explore),Of(RuleAction.Loot)),d).Select(o=>o.rule.action).ToList();
             CollectionAssert.AreEqual(new[]{RuleAction.Explore,RuleAction.Skill,RuleAction.Loot},ordered);
         }

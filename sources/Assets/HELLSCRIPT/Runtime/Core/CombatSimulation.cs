@@ -93,6 +93,7 @@ namespace Hellscript
             InitializeClassSkills(restore!=null);
             InitializePotions(restore==null);
             InitializeRift(restore==null,forcedObjective);
+            InitializeEdictOrder();
             RiftVisibility.Initialize(State,Map,restore!=null);
             if(Hero.heroClass==HeroClass.Mage||Hero.heroClass==HeroClass.Warrior)EnsureShieldEngagement();
             InitializeJournal(restore!=null,journalSeed,recordResume);
@@ -241,10 +242,12 @@ namespace Hellscript
             {
                 using var sample=PresentationMetrics.Decision.Auto();PresentationMetrics.DecisionCalls++;
                 Sense();
-                if(!TryClassPolicySurvival()&&!TryAutomaticClassSkill()&&(!(ChestBusy||ShrineBusy||ObjectiveBusy)||Target!=null||InDanger))DecideRules();
+                if(EdictActive)DecideEdictActions();
+                else if(!TryClassPolicySurvival()&&!TryAutomaticClassSkill()&&(!(ChestBusy||ShrineBusy||ObjectiveBusy)||Target!=null||InDanger))DecideRules();
                 State.decisionTime=.2f;
             }
-            var walkingOrigin=State.position;MoveHero(dt);ConstrainHeroByWalls(walkingOrigin);TrackWalking(Vector2.Distance(walkingOrigin,State.position),dt,passiveWalkingTime);TickChannel(dt);
+            TickEdictRegroup();var walkingOrigin=State.position;MoveHero(dt);ConstrainHeroByWalls(walkingOrigin);
+            float walkingDistance=Vector2.Distance(walkingOrigin,State.position);lastEdictMoving=walkingDistance>.0001f;TrackWalking(walkingDistance,dt,passiveWalkingTime);TickChannel(dt);
             if(State.potions.version>0&&Vector2.Distance(walkingOrigin,State.position)>.0001f)TryUseUtilityPotion(true);
             TickItemAilments(dt);
             TickEnemies(dt);TickProjectiles(dt);TickTraps(dt);TickEffects(dt);TickEnemyHazards(dt);TickLegendaryPulses();
@@ -350,7 +353,7 @@ namespace Hellscript
         }
         void MoveHero(float dt)
         {
-            if(EdictDodgeHolding)
+            if(DodgeOwnsEdictAction)
             {
                 if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
                 if(!HeroActionBusy){ObserveActivity(CombatActivity.Evasion);State.action=Loc.T("공격이 끝날 때까지 안전 위치에서 대기");}
@@ -360,12 +363,14 @@ namespace Hellscript
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
             if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
-            if(MoveReturningGlobe(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="FROST_PICKUP";return;}
-            if(MoveClassSkillIntent(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="SKILL_POSITIONING";return;}
-            if(MoveEdictGather(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="GATHER";return;}
-            if(MoveEdictRanger(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="RANGER_POLICY";return;}
-            if(MoveEdictNova(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="NOVA_POLICY";return;}
-            if(MoveEdictWhirlwind(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="WHIRLWIND_POLICY";return;}
+            if(MoveOrderedEdictGoal(dt))return;
+            bool attackMovement=!EdictActive||edictSelectedCategory==""||edictSelectedCategory=="ATTACK"||HeroActionBusy;
+            if(attackMovement&&MoveReturningGlobe(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="FROST_PICKUP";return;}
+            if((!EdictActive||edictSelectedCategory==""||edictSelectedCategory==(EdictRuleOrder.BuffSkill(CS?.intent?.skillId)?"BUFF":"ATTACK"))&&MoveClassSkillIntent(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="SKILL_POSITIONING";return;}
+            if((!EdictActive||edictSelectedCategory=="EXPLORE"||attackMovement)&&MoveEdictGather(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="GATHER";return;}
+            if(attackMovement&&MoveEdictRanger(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="RANGER_POLICY";return;}
+            if(attackMovement&&MoveEdictNova(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="NOVA_POLICY";return;}
+            if(attackMovement&&MoveEdictWhirlwind(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="WHIRLWIND_POLICY";return;}
             var policy=HeroActionBusy?State.heroAction.policy:null;
             var movementRule=State.movementRule>=0&&State.movementRule<State.build.rules.Count?State.build.rules[State.movementRule]:null;
             if(edictSource!=null&&State.movementRule>=0&&(State.movementAction==RuleAction.Skill||State.movementAction==RuleAction.Basic)&&
@@ -425,7 +430,7 @@ namespace Hellscript
                     farming=recovering;
                     // The objective takes the goal only when no chest or shrine wants it. Both are
                     // finite, so waiting for them cannot stall the run.
-                    if(ActiveChest==null&&ActiveShrine==null&&ChooseObjectiveGoal(ref goal))recovering=true;
+                    if(!EdictActive&&ActiveChest==null&&ActiveShrine==null&&ChooseObjectiveGoal(ref goal))recovering=true;
                 }
             }
             if(!Map.Walkable(goal))goal=target!=null?CombatApproach(target,goal):Map.MoveDirect(State.position,goal,Vector2.Distance(State.position,goal));
@@ -495,12 +500,15 @@ namespace Hellscript
             if(e.dead)return;
             // A shield ally's ward (data monsters) soaks damage first.
             if(e.ward>0&&damage>0){float soaked=Mathf.Min(e.ward,damage);e.ward-=soaked;damage-=soaked;}
+            // The tutorial boss survives the intervening lessons; residual Whirlwind cannot erase the goblin entrance.
+            if(IsGuide&&e.boss&&State.tutorialPhase<GuideTutorial.FinalBoss)damage=GuideTreasureScene?0:Mathf.Min(damage,Mathf.Max(0,e.health-e.maxHealth*(State.tutorialPhase<GuideTutorial.BossFight?.81f:.6f)));
+            if(IsGuide&&e.goblin&&State.tutorialPhase==GuideTutorial.GoblinAppear)damage=0;
             float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             // Rooted at stage two the charger bends but never breaks, so the defeat does not depend on a class's damage.
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;
             var data=e.health>0||!string.IsNullOrEmpty(e.objectType)?null:Data(e);if(data!=null&&DataSurvivesFall(e))return;
             if(e.health>0){if(!e.boss&&string.IsNullOrEmpty(e.objectType)){var d=Data(e);if(d!=null)OnDataDamaged(e,d,dealt);}return;}
-            e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;
+            e.health=0;e.dead=true;e.pendingDeath=true;State.kills++;MonsterCodex.Record(State,e);
         }
         void RewardEnemyDeath(EnemyState e)
         {
@@ -595,7 +603,9 @@ namespace Hellscript
         }
         void Loot(float dt)
         {
-            if(State.training>=0&&!PuzzleTutorial.Operating(State))return;
+            if(State.training>=0&&!PuzzleTutorial.Operating(State)&&!IsGuide)return;
+            // The guide's reward stays on the floor until the player saves the gathering lesson.
+            if(GuideTreasureScene&&State.tutorialPhase!=GuideTutorial.Pickup)return;
             CollectResources(dt);if(State.portal)return;
             if(State.limitedLoot&&Economy.FreeSlots(Hero)>0)State.limitedLoot=false;
             var pending=State.drops.Where(d=>!d.claimed&&!d.ignored).ToArray();
@@ -620,7 +630,7 @@ namespace Hellscript
                 if(shortage&&Policy.bagPolicy==BagPolicy.Ignore){drop.ignored=true;continue;}
                 if(shortage&&Policy.bagPolicy==BagPolicy.Portal&&Economy.FreeSlots(Hero)>0){PortalForBag(dt);return;}
                 var rewardSnapshot=CombatJournal.Copy(drop.item);
-                bool atomic=(State.training<0&&EquipmentRecommendation.Enabled(Hero)||PuzzleTutorial.Operating(State))&&CommitRecommendedLoot!=null;
+                bool atomic=(State.training<0&&EquipmentRecommendation.Enabled(Hero)||PuzzleTutorial.Operating(State)||IsGuide)&&CommitRecommendedLoot!=null;
                 var acquired=atomic?CommitRecommendedLoot(drop.item.id,Policy.bagPolicy,edictField?.replacementRank=="RARITY"):
                     Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account,edictField?.replacementRank=="RARITY",PuzzleTutorial.BagSlots(State,Hero),PuzzleTutorial.BagItems(State,Hero))?EquipmentLootResult.Acquired:EquipmentLootResult.Rejected;
                 if(acquired==EquipmentLootResult.SaveFailed){State.paused=true;Log("LOOT_SAVE_FAILED",Loc.T("장비 획득을 저장하지 못해 사냥을 일시정지했습니다."));return;}

@@ -115,14 +115,19 @@ namespace Hellscript
             else CSEvent("M10","MISSED_PICKUP",a.root);
             CS.effects.Remove(f);
         }
+        Vector2? ReturningGlobeGoal()
+        {
+            if(!ClassSkillsActive||!Hero.useEdict||HeroActionBusy||InDanger||DodgeOwnsEdictAction)return null;
+            var globe=Fx("M10");if(globe==null||globe.kind!="returnGlobe"||globe.count!=1||UseChoice("M10")?.rule=="CONTROLLED")return null;
+            var a=Cast(globe.root);if(a==null||Vector2.Distance(State.position,a.origin)<=N("M10","pickupRadius")*.8f||Vector2.Distance(State.position,a.origin)>3||DangerAt(a.origin,1.5f)||!Map.LineClear(State.position,a.origin))return null;
+            return a.origin;
+        }
         bool MoveReturningGlobe(float dt)
         {
-            if(!ClassSkillsActive||!Hero.useEdict||HeroActionBusy||InDanger||EdictDodgeHolding)return false;
-            var globe=Fx("M10");if(globe==null||globe.kind!="returnGlobe"||globe.count!=1||UseChoice("M10")?.rule=="CONTROLLED")return false;
-            var a=Cast(globe.root);if(a==null||Vector2.Distance(State.position,a.origin)<=N("M10","pickupRadius")*.8f||Vector2.Distance(State.position,a.origin)>3||DangerAt(a.origin,1.5f)||!Map.LineClear(State.position,a.origin))return false;
-            Vector2 point=Map.Move(State.position,a.origin,MovementSpeed(false)*dt,0,State.time);
+            var goal=ReturningGlobeGoal();if(!goal.HasValue)return false;
+            Vector2 point=Map.Move(State.position,goal.Value,MovementSpeed(false)*dt,0,State.time);
             if(DangerAt(point,1.5f))return false;
-            float moved=Vector2.Distance(point,State.position);State.position=point;State.destination=a.origin;State.moveDistance+=moved;PolicyRecord("M10").movementMeters+=moved;
+            float moved=Vector2.Distance(point,State.position);State.position=point;State.destination=goal.Value;State.moveDistance+=moved;PolicyRecord("M10").movementMeters+=moved;
             return moved>.0001f;
         }
         EnemyState ChainRouteTarget(Vector2 previous,int previousId,IDictionary<int,int> visits,IEnumerable<EnemyState> observed,ref bool usedConduit,out bool relayed)

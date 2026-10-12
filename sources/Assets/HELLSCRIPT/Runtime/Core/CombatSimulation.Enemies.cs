@@ -93,13 +93,13 @@ namespace Hellscript
         void CreateEnemyHazard(EnemyState enemy,string definition,Vector2 position,float delay,float duration,float damage,int element,float radius=2.5f,float inner=0,int action=0,float slow=0,bool shards=false,float pull=0)
         {
             State.enemyHazards.Add(new EnemyHazard{id=State.nextId++,actionId=action==0?State.nextId++:action,enemyId=enemy.id,definitionId=definition,position=position,end=position,direction=enemy.brain.facing,
-                shape=inner>0?AttackShape.Ring:AttackShape.Circle,createdAt=State.time,delay=delay,duration=duration,interval=duration>0?.5f:0,tick=.5f,damage=damage,element=element,radius=radius,innerRadius=inner,heroSlow=slow,shardBurst=shards,pull=pull});
+                shape=inner>0?AttackShape.Ring:AttackShape.Circle,createdAt=State.time,delay=delay,duration=duration,interval=duration>0?EnemyCombat.HazardInterval:0,tick=EnemyCombat.HazardInterval,damage=damage,element=element,radius=radius,innerRadius=inner,heroSlow=slow,shardBurst=shards,pull=pull});
             EnemyEvent(enemy,"HAZARD_CREATED",definition,State.enemyHazards.Last().actionId,delay,position);
         }
         void ReleaseEnemyAction(EnemyState e)
         {
             var a=e.brain.action;float attack=EnemyAttackValue(e);EnemyEvent(e,"RELEASE",EnemyCombat.Id(a.kind),a.id);
-            if(a.kind==1||a.kind==7){a.phase=EnemyActionPhase.Charging;a.damage=attack*1.5f;a.moved=0;a.hitHero=false;e.windup=0;EnemyMode(e,"돌진");return;}
+            if(a.kind==1||a.kind==7){a.phase=EnemyActionPhase.Charging;a.damage=attack*EnemyCombat.OwnHit(a.kind).power;a.moved=0;a.hitHero=false;e.windup=0;EnemyMode(e,"돌진");return;}
             // The sandworm tunnels and the ghoul leaps before they strike (a.moved counts seconds travelled).
             if(EnemyCombat.Travels(a)){a.phase=EnemyActionPhase.Charging;a.moved=0;e.windup=0;EnemyMode(e,a.kind==13?"잠행":"도약");return;}
             if(EnemyCombat.OwnShape(a,"",0) is EnemyThreat own)
@@ -110,7 +110,8 @@ namespace Hellscript
                 FinishEnemyAction(e);return;
             }
             if(a.kind==2||a.kind==8)EnemyProjectiles(e,a.id,a.origin,a.direction,attack,EnemyCombat.Id(a.kind),a.kind==8);
-            else if(a.kind==3||a.kind==9)CreateEnemyHazard(e,EnemyCombat.Id(a.kind),a.aim,0,a.kind==3?4:3,attack*(a.kind==3?.25f:.3f),a.kind==3?4:1,action:a.id);
+            else if(a.kind==3||a.kind==9)
+            {var hit=EnemyCombat.AreaHit(a.kind);CreateEnemyHazard(e,EnemyCombat.Id(a.kind),a.aim,0,hit.duration,attack*hit.power,hit.element,action:a.id);}
             else if(a.kind==4)
             {
                 foreach(var ally in State.enemies.Where(x=>!x.dead&&Vector2.Distance(e.position,x.position)<=3&&Map.LineClear(e.position,x.position)))
@@ -161,15 +162,15 @@ namespace Hellscript
             if(!visible)return;
             var b=e.brain;
             if(EnemyCombat.Trait(e,0)&&b.traitCooldowns[0]<=.00001f)
-            {CreateEnemyHazard(e,"E01",State.position,1,3,EnemyAttackValue(e)*.25f,1,2);b.traitCooldowns[0]=5;}
+            {CreateEnemyHazard(e,"E01",State.position,1,3,EnemyAttackValue(e)*EnemyCombat.TraitHit(0).power,EnemyCombat.TraitHit(0).element,2);b.traitCooldowns[0]=5;}
             if(EnemyCombat.Trait(e,1)&&b.traitCooldowns[1]<=.00001f)
-            {CreateEnemyHazard(e,"E02",State.position,1.5f,0,EnemyAttackValue(e)*1.5f,2,4,2,slow:.35f);b.traitCooldowns[1]=8;}
+            {CreateEnemyHazard(e,"E02",State.position,1.5f,0,EnemyAttackValue(e)*EnemyCombat.TraitHit(1).power,EnemyCombat.TraitHit(1).element,4,2,slow:.35f);b.traitCooldowns[1]=8;}
             if(EnemyCombat.Trait(e,6)&&b.traitCooldowns[6]<=.00001f)
-            {CreateEnemyHazard(e,"E07",State.position,5,0,EnemyAttackValue(e)*20,5,pull:8);b.traitCooldowns[6]=10;}
+            {CreateEnemyHazard(e,"E07",State.position,5,0,EnemyAttackValue(e)*EnemyCombat.TraitHit(6).power,EnemyCombat.TraitHit(6).element,pull:8);b.traitCooldowns[6]=10;}
             if(EnemyCombat.Trait(e,4)&&b.traitCooldowns[4]<=.00001f)
             {
                 var corpse=State.enemyCorpses.Where(c=>c.consumedBy<0&&Vector2.Distance(e.position,c.position)<=6&&Map.LineClear(e.position,c.position)).OrderBy(c=>(c.position-e.position).sqrMagnitude).ThenBy(c=>c.id).FirstOrDefault();
-                if(corpse!=null){corpse.consumedBy=e.id;CreateEnemyHazard(e,"E05",corpse.position,1.2f,0,EnemyAttackValue(e)*1.5f,5);EnemyEvent(e,"CORPSE_CONSUMED","E05",value:corpse.id);b.traitCooldowns[4]=6;}
+                if(corpse!=null){corpse.consumedBy=e.id;CreateEnemyHazard(e,"E05",corpse.position,1.2f,0,EnemyAttackValue(e)*EnemyCombat.TraitHit(4).power,EnemyCombat.TraitHit(4).element);EnemyEvent(e,"CORPSE_CONSUMED","E05",value:corpse.id);b.traitCooldowns[4]=6;}
             }
         }
         void TickEnemies(float dt)
@@ -228,10 +229,10 @@ namespace Hellscript
         {
             if(e.boss)InterruptBossAction(e,"사망");else InterruptEnemyAction(e,"사망");
             if(!e.boss&&!e.add&&!e.goblin)State.enemyCorpses.Add(new EnemyCorpse{id=State.nextId++,enemyId=e.id,position=e.position,createdAt=State.time});
-            if(!e.boss&&e.kind==5)CreateEnemyHazard(e,"N06_DEATH",e.position,1,0,EnemyAttackValue(e)*2,0);
-            if(!e.boss&&e.kind==11)CreateEnemyHazard(e,"N12_DEATH",e.position,.9f,0,EnemyAttackValue(e)*1.2f,0,shards:true);
+            if(!e.boss&&e.kind==5)CreateEnemyHazard(e,"N06_DEATH",e.position,1,0,EnemyAttackValue(e)*EnemyCombat.DeathHit(e.kind).power,EnemyCombat.DeathHit(e.kind).element);
+            if(!e.boss&&e.kind==11)CreateEnemyHazard(e,"N12_DEATH",e.position,.9f,0,EnemyAttackValue(e)*EnemyCombat.DeathHit(e.kind).power,EnemyCombat.DeathHit(e.kind).element,shards:true);
             // The sporebloat bursts into a poison cloud that lingers and slows.
-            if(!e.boss&&e.kind==15)CreateEnemyHazard(e,"N16_DEATH",e.position,.6f,4,EnemyAttackValue(e)*.25f,4,2.6f,slow:.35f);
+            if(!e.boss&&e.kind==15)CreateEnemyHazard(e,"N16_DEATH",e.position,.6f,EnemyCombat.DeathHit(e.kind).duration,EnemyAttackValue(e)*EnemyCombat.DeathHit(e.kind).power,EnemyCombat.DeathHit(e.kind).element,2.6f,slow:.35f);
             DataDeath(e);
         }
         void TickEnemyHazards(float dt)

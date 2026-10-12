@@ -70,7 +70,7 @@ namespace Hellscript
         // Closed gates exclude the arena from scouting as well as blocking every physical entrance.
         // Old maps without gate geometry retain their original saved passage behavior.
         public static bool GateClosed(RunState run)=>run.layout.objective!=RiftObjectiveKind.None&&!run.layout.gateOpen;
-        public static Vector2 Goal(RunState run,RiftNavigation nav,ExplorationPolicy? exploration=null,bool frontierOnly=false)
+        public static Vector2 Goal(RunState run,RiftNavigation nav,ExplorationPolicy? exploration=null,bool frontierOnly=false,bool commit=true)
         {
             var policy=exploration??run.build.exploration;
             var s=run.exploration;
@@ -81,14 +81,14 @@ namespace Hellscript
             // 0.6 seconds is a minimum commitment, not a deadline for replacing a valid route.
             // Crossing an already visited room must not reverse an in-progress exit choice.
             if(valid&&(!frontierOnly||s.goalId.StartsWith("exit:"))&&Vector2.Distance(run.position,s.goal)>1&&!s.deferred.Any(d=>d.id==s.goalId&&d.until>run.time))return s.goal;
-            s.deferred.RemoveAll(d=>d.until<=run.time);
+            if(commit)s.deferred.RemoveAll(d=>d.until<=run.time);
             var candidates=new List<(string id,Vector2 p,float score)>();
             if(!frontierOnly)foreach(int index in run.visited)
             {
                 if(GateClosed(run)&&index==run.layout.bossRoom)continue;
                 var room=run.layout.rooms[index];for(int n=0;n<room.groupAnchors.Count;n++)
                 {
-                    string id=index+":observe:"+n;if(s.observed.Contains(id)||s.deferred.Any(d=>d.id==id))continue;
+                    string id=index+":observe:"+n;if(s.observed.Contains(id)||s.deferred.Any(d=>d.id==id&&d.until>run.time))continue;
                     var p=room.groupAnchors[n];float length=nav.Length(run.position,p);if(float.IsInfinity(length))continue;
                     candidates.Add((id,p,length+(index==s.room?0:30)));
                 }
@@ -102,7 +102,7 @@ namespace Hellscript
                     int known=a?corridor.roomA:corridor.roomB,unknown=a?corridor.roomB:corridor.roomA;
                     if(GateClosed(run)&&unknown==run.layout.bossRoom)continue;
                     var port=run.layout.rooms[unknown].doors[a?corridor.doorB:corridor.doorA];var p=port.position-port.direction*2;
-                    string id="exit:"+corridor.index;if(s.deferred.Any(d=>d.id==id))continue;
+                    string id="exit:"+corridor.index;if(s.deferred.Any(d=>d.id==id&&d.until>run.time))continue;
                     float length=nav.Length(run.position,p);if(float.IsInfinity(length))continue;
                     if(known==s.room&&(policy==ExplorationPolicy.LeftWall||policy==ExplorationPolicy.RightWall))
                     {
@@ -125,13 +125,13 @@ namespace Hellscript
             {
                 // Recover missed observations from the saved spawn anchors, not hidden current positions.
                 foreach(var missed in run.layout.groups.Where(g=>run.enemies.Any(e=>!e.dead&&!e.add&&e.group==g.index)))
-                {string id="audit:"+missed.index;if(s.deferred.Any(d=>d.id==id))continue;float length=nav.Length(run.position,missed.position);if(!float.IsInfinity(length))candidates.Add((id,missed.position,length));}
+                {string id="audit:"+missed.index;if(s.deferred.Any(d=>d.id==id&&d.until>run.time))continue;float length=nav.Length(run.position,missed.position);if(!float.IsInfinity(length))candidates.Add((id,missed.position,length));}
             }
             if(candidates.Count==0)return run.position;
             var ranked=candidates.OrderBy(c=>c.score);
             var selected=(frontierOnly?ranked.ThenBy(c=>c.p.x).ThenBy(c=>c.p.y).ThenBy(c=>c.id,StringComparer.Ordinal):ranked.ThenBy(c=>c.id,StringComparer.Ordinal)).First();
-            if(s.goalId!=selected.id){s.failures=0;s.probeTime=run.time;s.probePosition=run.position;}
-            s.goalId=selected.id;s.goal=selected.p;s.holdUntil=run.time+.6f;return s.goal;
+            if(commit){if(s.goalId!=selected.id){s.failures=0;s.probeTime=run.time;s.probePosition=run.position;}
+            s.goalId=selected.id;s.goal=selected.p;s.holdUntil=run.time+.6f;}return selected.p;
         }
         public static bool TrackMovement(RunState run,RiftNavigation nav,Vector2 target,bool deliberateStop)
         {

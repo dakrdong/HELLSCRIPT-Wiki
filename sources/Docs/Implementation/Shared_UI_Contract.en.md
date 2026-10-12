@@ -202,3 +202,7 @@ The positioning panel adapts the existing quick edict sheet. `SheetApply`/`Commi
 ## Battle Auto Actions popup adapter
 
 `GameUI.PotionQuick` reuses the existing battle quick-edit canvas and `ContentWindowHost` input, back and pause ownership. Its short threshold controls use the reference's fixed card and drag bars without scrolling. It shares `UiTheme`, `UiFonts`, common `UiButton` controls and real HUD vitals. The existing `RefreshCanvasLayout` repositions the card within safe areas on rotation while preserving the draft. Persistence remains in the Hunt Edict transaction. Follow the [implementation and validation](Battle_Quick_Edit_20261009.en.md#auto-actions-reference-implementation-2026-10-11).
+
+## Monster Codex adapter
+
+`MonsterCodexWindow` starts from the new-content generator and uses `ContentWindowView` for header, close/back, safe area, pause and locale. It shares UiTheme, UiFonts and SettingsStepSlider. Its 8/4-column grid and field tabs use ScrollRect and deactivate cards outside the viewport. Landscape detail fixes the portrait/stats/defenses while skills scroll. Portrait uses two-column stats/defenses below the portrait; short safe areas scroll the body while keeping fixed actions. Tier dragging updates values without rebuilding controls. StoreViewBinding keys only kill counts, the current hero best tier and live-ops settings. Registry entries, EnemyStats and existing EnemyCombat/BossCombat coefficients remain the owners; combat balance is unchanged. [Implementation](Monster_Codex_Implementation_20261011.en.md).

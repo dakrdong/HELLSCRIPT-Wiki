@@ -32,6 +32,8 @@ namespace Hellscript
         void TickGoldenGoblin(EnemyState e,float dt)
         {
             var g=State.goblin;if(g==null)return;var b=e.brain;
+            if(IsGuide&&State.tutorialPhase==GuideTutorial.GoblinAppear)
+            {e.position=Map.MoveDirect(e.position,g.fleeGoal,e.speed*dt,.4f);EnemyMode(e,"도주");return;}
             bool sees=Vector2.Distance(e.position,State.position)<=GoldenGoblin.DetectRange&&Map.LineClear(e.position,State.position),hurt=e.health<e.maxHealth-.0001f;
             if(!g.fleeing&&(sees||hurt))
             {
@@ -39,7 +41,7 @@ namespace Hellscript
                 Log("GOBLIN_FLEE",Loc.F("{0} · {1}",GoldenGoblin.Name,hurt?"피격을 감지해 도주합니다.":"영웅을 발견해 도주합니다."));
             }
             if(!g.fleeing){EnemyMode(e,"배회");return;}
-            if(State.time-g.fleeingSince>=GoldenGoblin.FleeSeconds-.0001f)
+            if(!IsGuide&&State.time-g.fleeingSince>=GoldenGoblin.FleeSeconds-.0001f)
             {
                 EnemyMode(e,"탈출 시도");g.escapeProgress+=dt;
                 if(g.escapeProgress>=GoldenGoblin.EscapeSeconds-.0001f)
@@ -54,6 +56,13 @@ namespace Hellscript
         Vector2 GoblinFleeGoal(EnemyState e)
         {
             var away=e.position-State.position;if(away.sqrMagnitude<.01f)away=Vector2.up;
+            if(IsGuide)
+            {
+                // Keep this lesson in the plaza while retaining the normal flee direction and movement.
+                var bounds=State.layout.rooms[3].Bounds;var goal=e.position+away.normalized*4;
+                goal=new Vector2(Mathf.Clamp(goal.x,bounds.xMin+2,bounds.xMax-2),Mathf.Clamp(goal.y,bounds.yMin+2,bounds.yMax-2));
+                return Map.MoveDirect(e.position,goal,4,.4f);
+            }
             float current=Vector2.Distance(e.position,State.position);
             var room=State.layout.rooms.Where(r=>Map.CanLand(r.position)&&Vector2.Distance(r.position,State.position)>current+2)
                 .OrderByDescending(r=>Vector2.Distance(r.position,State.position)).ThenBy(r=>r.index).FirstOrDefault();
@@ -64,10 +73,22 @@ namespace Hellscript
         void RewardGoldenGoblin(EnemyState e)
         {
             var g=State.goblin;if(g==null||g.rewarded)return;g.rewarded=true;
-            if(State.training>=0)return;
-            RiftResources.Add(State,RiftResourceKind.Gold,e.position,KillGold(GoldenGoblin.GoldMultiplier*(25+5*State.stage)));
-            int rarity=Mathf.Max(2,RollRarity(RiftRewardSource.Elite,ref g.rng));
-            DropFrom(e.position,rarity,ref g.rng);
+            if(State.training>=0&&!IsGuide)return;
+            var at=e.position;
+            if(IsGuide)
+            {
+                // Scatter the tutorial reward behind the hero, beyond passing pickup, so the order lesson requires a real detour.
+                var boss=State.enemies.Find(x=>x.boss);var away=State.position-boss.position;if(away.sqrMagnitude<.01f)away=Vector2.left;away.Normalize();
+                var side=Vector2.Perpendicular(away);
+                foreach(var direction in new[]{away,side,-side})
+                {
+                    var candidate=Map.MoveDirect(State.position,State.position+direction*4,4,.3f);
+                    if(Vector2.Distance(State.position,candidate)>Stats.pickup+1&&Vector2.Distance(boss.position,candidate)<11&&Map.LineClear(boss.position,candidate)){at=candidate;break;}
+                }
+            }
+            RiftResources.Add(State,RiftResourceKind.Gold,at,KillGold(GoldenGoblin.GoldMultiplier*(25+5*State.stage)));
+            int rarity=IsGuide?2:Mathf.Max(2,RollRarity(RiftRewardSource.Elite,ref g.rng));
+            DropFrom(at,rarity,ref g.rng);
             Log("GOBLIN_KILLED",Loc.F("{0} 처치 · 정예 금화 {1}배와 희귀 이상 장비 1개",GoldenGoblin.Name,GoldenGoblin.GoldMultiplier));
         }
     }

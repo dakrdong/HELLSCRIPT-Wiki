@@ -219,3 +219,7 @@
 ## 전투 자동 행동 팝업 어댑터
 
 `GameUI.PotionQuick`는 기존 전투 빠른 편집 캔버스와 `ContentWindowHost`의 입력·뒤로가기·일시정지를 재사용한다. 짧은 HP 기준을 비교하므로 시안의 고정 카드·드래그 바를 쓰고 스크롤하지 않는다. `UiTheme`, `UiFonts`, 공통 `UiButton`과 실제 HUD 생명력 부품을 공유한다. 기존 `RefreshCanvasLayout`에서 안전 영역·회전에 맞춰 카드만 재배치하며 편집본을 유지한다. 저장은 기존 사냥 칙령 거래를 사용한다. [구현·검증](Battle_Quick_Edit_20261009.md#자동-행동-설정-시안-반영-2026-10-11)을 따른다.
+
+## 몬스터 도감 어댑터
+
+`MonsterCodexWindow`는 신규 콘텐츠 생성기로 시작한 `ContentWindowView`의 어댑터다. 공유 머리글·닫기·뒤로가기·안전 영역·일시정지·언어와 `UiTheme`/`UiFonts`/`SettingsStepSlider`를 유지한다. 목록의 8열·4열 카드와 필드 탭은 같은 ScrollRect를 사용하며 화면 밖 카드를 비활성화한다. 가로 상세는 초상화와 고정 능력치·방어 구성 옆에서 기술만 스크롤한다. 세로는 초상화 아래 2열 능력치·방어 구성을 쓰며, 짧은 안전 영역에서는 본문을 스크롤하고 고정 조작 줄을 유지한다. 단계 드래그는 수치만 갱신한다. `StoreViewBinding`은 처치 수·현재 영웅의 최고 단계·라이브옵스 설정을 표시 키로 사용한다. 도감은 `MonsterRegistry.All`, `EnemyStats`, `EnemyCombat`/`BossCombat`의 기존 수치 정의를 읽으며 전투 밸런스를 바꾸지 않는다. [구현 기록](Monster_Codex_Implementation_20261011.md).

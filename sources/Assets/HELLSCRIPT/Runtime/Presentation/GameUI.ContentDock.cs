@@ -25,10 +25,11 @@ namespace Hellscript
                 else{var label=b.GetComponentInChildren<Text>();label.fontSize=Mathf.RoundToInt(size*.3f);label.color=gold;}
                 return b;
             }
-            // The prologue hands over the Hunt Edict alone: the emblem lands here and is the only shortcut until the town.
+            // The prologue keeps the Hunt Edict and codex; the other shortcuts arrive in town.
             bool prologue=game.TutorialActive;
             if(!prologue)Add("캐릭터","menu-character",ShowPlayInventory);
             contentDockEdict=Add("사냥 칙령","menu-hunt-edict",ShowEdictEditor);
+            Add("몬스터 도감","menu-monster-codex",ShowMonsterCodex);
             contentDockRune=null;
             if(!prologue)
             {

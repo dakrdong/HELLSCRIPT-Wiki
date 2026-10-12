@@ -10,7 +10,7 @@ namespace Hellscript
         // Pickup, displacement, and the claimed flag share one atomic save and idempotent receipt.
         public EquipmentLootResult CommitRecommendedLoot(RunState run,string itemId,BagPolicy policy,bool rarityOnly)
         {
-            if(!OwnedRun(run)||run.training>=0&&!PuzzleTutorial.Operating(run)||run.heroId!=Data.Hero.id||run.portal)return EquipmentLootResult.Rejected;
+            if(!OwnedRun(run)||run.training>=0&&!PuzzleTutorial.Operating(run)&&!GuideTutorial.Running(run)||run.heroId!=Data.Hero.id||run.portal)return EquipmentLootResult.Rejected;
             var drop=run.drops.SingleOrDefault(d=>d.item.id==itemId);
             if(drop==null||drop.ignored)return EquipmentLootResult.Rejected;
             if(drop.claimed)return EquipmentLootResult.Acquired;

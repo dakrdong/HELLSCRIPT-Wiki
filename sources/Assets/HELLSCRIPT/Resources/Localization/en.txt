@@ -556,7 +556,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 다음 레벨	Next level
 다음 레벨까지 XP {0:N0} / {1:N0}	XP to the next level {0:N0} / {1:N0}
 다음 비용 {0:N0} 골드 · 보유 {1:N0}	Next cost {0:N0} gold · you hold {1:N0}
-다음 사격 3회에 암흑 추가 피해.	Adds dark damage to the next 3 shots.
+다음 사격 3회에 암흑 추가 피해.	Adds shadow damage to the next 3 shots.
 다음 전투 판단부터 기록됩니다.	Recording starts with the next combat decision.
 다음 피해부터 기록됩니다.	Recording starts with the next hit.
 다중 사격	Multishot
@@ -790,7 +790,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 보스 상태	Boss state
 보스 우선	Boss first
 보스 제압	Boss staggered
-보스 제압 · 3초 동안 행동 중단	Boss staggered · unable to act for 3 seconds
+보스 제압 · {0}초 동안 행동 중단	Boss staggered · unable to act for {0} seconds
 보스 제압 · {0:0.0}초 남음	Boss stagger · {0:0.0}s left
 보스 제압 게이지 {0:0.0} / 100	Boss stagger gauge {0:0.0} / 100
 보스 제압 면역 · {0:0.0}초 남음	Boss stagger immunity · {0:0.0}s left
@@ -1142,7 +1142,7 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 알 수 없는 조건입니다.	Unknown condition.
 알 수 없는 직업입니다.	Unknown class.
 알림\n{0}	Notice\n{0}
-암흑	Dark
+암흑	Shadow
 암흑 저항	Shadow Resistance
 암흑 피해	Shadow Damage
 압도	Overwhelming
@@ -1206,7 +1206,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 요청한 방향을 적용하지 못했습니다. 현재 표시 방향을 유지합니다. 다시 적용할 수 있습니다.	The direction you asked for could not be applied. The current one stays, and you can apply it again.
 우선 대상	Preferred target
 우선 대상 중심|많은 적 포함|한 명만 포함	Centred on the preferred target|Catch as many as possible|Catch only one
-우선 회수	Priority collecting
 우선할 대상	Target to prefer
 우선할 특수 대상	Special targets to prefer
 원거리	Ranged
@@ -1529,7 +1528,6 @@ WP03이 없어 도약 방어의 종료를 기다리지 않습니다.	Without WP0
 전투 후	After combat
 전투 후 개봉	Open after combat
 전투 후 추적	Chase after combat
-전투 후 회수	Collecting after combat
 전투가 진행 가능한 상태가 아닙니다.	The fight is not in a state that can continue.
 전투로 돌아가기	Back to combat
 전투를 우선합니다	Combat comes first
@@ -3508,6 +3506,7 @@ UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 
 대기실로	RETURN TO WAITING ROOM
 전투 위치 거리	Combat Positioning
 전투 중 · 바로 적용	In combat · applies instantly
+영웅 설정 · 바로 적용	Hero settings · applies instantly
 전투 중 위치	During Combat
 접근 방식	Approach
 길목 찾는 방법	How to find a chokepoint
@@ -3545,6 +3544,8 @@ UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 
 범위 밖 · 찾지 않음	Out of range · skip
 길목 찾는 중	Searching
 첫 교전은 이동 스킬 없이 걸어서 접근합니다.	Walk into the first engagement without a movement skill.
+공격·생존·이동 등 행동을 판단하는 순서를 정합니다.	Set the order for attack, survival, movement and other actions.
+
 # --- composed at runtime; no source literal holds these ---
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
@@ -7178,6 +7179,58 @@ CC기 상태의 적	Crowd-controlled
 무덤 군단	Grave legion
 뼈 비	Bone rain
 뼈 비(5곳 순차 낙하)	Bone rain (5 sequential impacts)
+
+# Monster Codex
+몬스터 도감	Monster Codex
+발견한 적	Discovered
+미발견	Undiscovered
+처치 {0}	Killed {0}
+생명력	Life
+피해 유형	Damage type
+방어 구성	Defenses
+물리 저항	Physical Resistance
+군중 제어	Crowd control
+모두 적용	All apply
+면역	Immune
+제압	Stagger
+피해 감소 없음	No damage reduction
+정예 속성으로만 생김	From elite traits only
+흡수하는 피해 없음	Nothing absorbs damage
+단계와 무관	Same at every tier
+사용 기술	Skills
+최고 클리어 {0}단계	Best clear: tier {0}
+다음 도전 단계	Next challenge
+클리어한 단계	Cleared
+입문 균열 보정 적용	Intro rift reduction
+보스 등급	Boss grade
+단계당 +8%	+8% per tier
+단계당 +5.5%	+5.5% per tier
+정예 ×3	Elite ×3
+정예 ×1.5	Elite ×1.5
+입문 보정	Intro
+초당 피해	Damage / sec
+각 피해	Damage each
+공격력 ×{0}	Attack ×{0}
+속박·기절·빙결·둔화	Root, stun, freeze, slow
+정예 속성 · 1–2개 무작위	Elite traits · 1–2 random
+1초 뒤 추적 화염이 생겨 3초 동안 피해를 줍니다.	After 1s, tracking fire deals damage for 3s.
+1.5초 뒤 얼음 고리가 폭발하고 둔화시킵니다.	After 1.5s, an ice ring bursts and slows.
+다른 살아 있는 정예와 연결되면 받는 피해가 20% 감소합니다.	While linked to another living elite, takes 20% less damage.
+전방 투사체의 피해가 50% 감소합니다.	Takes 50% less damage from frontal projectiles.
+주변 시체를 소비해 1.2초 뒤 암흑 폭발을 일으킵니다.	Consumes a nearby corpse for a Shadow blast after 1.2s.
+10초마다 공격력이 10% 증가합니다. 최대 50%.	Gains 10% attack every 10s, up to 50%.
+1페이즈	Phase 1
+2페이즈	Phase 2
+페이즈 전환	Phase shift
+사망 시	On death
+약점	Weakness
+오라	Aura
+2회	2 hits
+{0}초 무력화 → {1}초 면역	{0}s stagger → {1}s immunity
+속박·기절·빙결 · 둔화 → 제압	Root / stun / freeze; slow → stagger
+생명력 50%에서 포효합니다. 준비 중 피해와 제압에 면역이며 이후 2페이즈 기술이 열립니다.	Roars at 50% life. Immune to damage and stagger while preparing; phase 2 skills then unlock.
+소환	Summon
+투사체	Projectile
 기술 봉인	Skill Seal
 저주	Curse
 시야 감소	Reduced Vision
@@ -7209,3 +7262,115 @@ CC기 상태의 적	Crowd-controlled
 창 찌르기	Spear Thrust
 0.8초 예고 후 길이 4.5m·폭 1m 찌르기	0.8 s telegraph, 4.5 m × 1 m thrust
 자폭 돌진	Self-Destruct Rush
+
+긴급 생존은 항상 먼저 실행됩니다. 회피·버프 유지·회수·공격·목표 진행·재정비·탐색의 순서를 정하세요. 공유 설정은 공개 권한과 실제 소유 상태를 검사하며 추천 모드는 별도로 선택합니다.	Emergency survival always runs first. Set the order of Dodge, Buff upkeep, Pickup, Attack, Objectives, Regroup and Explore. Shared settings are checked against disclosure and ownership; recommended mode is selected separately.
+행동 우선 순위	Action priority
+버프 유지	Buff upkeep
+목표 진행	Objectives
+재정비	Regroup
+실행 중	Running
+적의 공격 범위에서 먼저 벗어남	Step out of enemy attack areas first
+강화 스킬·버프 물약이 끝나기 전에 다시 사용	Recast buffs and buff potions before they expire
+우선 회수 전리품을 싸우면서 주움	Priority loot: picked up while fighting
+우선 회수 전리품을 전투 후에 주움	Priority loot: picked up after the fight
+대상을 정해 스킬과 기본 공격 사용	Pick a target and use skills and basic attacks
+봉인·이벤트 등 지역 목표를 진행	Work on seals, events and other area goals
+체력·자원이 낮으면 회복될 때까지 대기	Wait to recover when HP or resource is low
+다음 적과 목표를 찾아 이동	Move on to find the next enemy or goal
+● 긴급 생존(체력 위험 시 물약·탈출)은 항상 가장 먼저 실행됩니다.	● Emergency survival (potions or escape when HP is at risk) always runs first.
+지금 행동 · {0} · {1}	Current action · {0} · {1}
+지금 행동 · {0}	Current action · {0}
+전리품 · 싸우면서 회수	Loot · picked up while fighting
+전리품 · 전투 후 회수	Loot · picked up after the fight
+1순위 · {0}	1st · {0}
+공격 후 회수	Fight, then collect
+재정비 · 체력과 자원 회복 대기	Regroup · waiting for HP and resource recovery
+자폭 공격	Self-Destruct
+높은 HP	Highest HP
+더 높은 우선순위로 변경	Switch for a higher priority
+마지막으로 본 위치까지 확인	Check the last place it was seen
+밀집한 곳	Where they are dense
+처치까지 유지	Stay until it dies
+추적 중단	Stop chasing
+회복·지원형	Healer or support type
+무덤 파수 기사	Barrow Knight
+근접(중장)	Melee (heavy)
+묘지 내려찍기	Barrow Slam
+1.4초 예고 후 반경 2.2m 내려찍기, 맞으면 0.5초 넘어짐	1.4 s telegraph, 2.2 m slam, knocks down for 0.5 s
+울부짖는 망령	Wailing Wraith
+원거리(제어)	Ranged (control)
+망령	Wraith
+울부짖는 비명	Wailing Scream
+떠다니는 동안 받는 피해 50% 감소, 실체화 후 0.9초 예고 비명 부채꼴(1.2초 기술 봉인)	Takes 50% less damage while drifting; materialises, then a 0.9 s scream cone seals skills for 1.2 s
+무덤 파는 자	Gravedigger
+매복	Ambush
+삽 강타	Shovel Burst
+흙더미로 숨어 있다가 4m 안에 들어오면 1초 예고 후 솟아오르며 반경 2.5m 삽 강타	Hidden in a dirt mound; within 4 m, 1 s telegraph then a 2.5 m shovel burst
+부패한 거인	Rotting Brute
+고리 충격파	Ring Shockwave
+HP 2.5배, 반경 3m 고리 충격파(1.5초 예고), 사망 시 구더기 3마리	HP ×2.5, 3 m ring shockwave (1.5 s), 3 maggots on death
+구더기 쏟기	Maggot Spill
+새끼 동굴 거미	Cave Spiderling
+거미	Spider
+물기	Bite
+6마리씩, HP 0.2, 빠름	Packs of 6, HP 0.2, fast
+빛나는 곳을 따라 전투 위치를 정해 주세요.	Follow the highlighted controls to set the combat position.
+적이 나타났어요. 적과 처음 마주쳤을 때 어떻게 대응할지 정해 볼까요?	An enemy has appeared. Shall we decide how to respond when you first meet an enemy?
+전사는 공격 거리가 짧기 때문에, 적에게 붙어서 싸우는 것이 중요합니다.	A warrior's attack reach is short, so it matters to fight up close to the enemy.
+첫 교전 위치를 정한다	Set the first engagement
+적과 마주친 뒤에도, 전투 중에 어디에서 싸울지 정할 수 있습니다.	Even after meeting the enemy, you can decide where to fight during combat.
+전투 중 위치를 정한다	Set the combat position
+이렇게 하면 회오리가 적을 좀 더 효율적으로 공격할 수 있습니다.	This way, Whirlwind can strike the enemies more efficiently.
+목표 · 길을 따라 전진	Goal · Follow the road
+목표 · 첫 교전 위치 정하기	Goal · Set the first engagement
+목표 · 원거리 적에게 접근	Goal · Approach the ranged enemies
+목표 · 전투 중 위치 정하기	Goal · Set the combat position
+목표 · 남은 적 처치	Goal · Defeat the remaining enemies
+사냥 칙령 버튼을 눌러 주세요.	Please press the Hunt Edict button.
+전투 아이콘을 눌러 주세요.	Please press the combat icon.
+'전투 위치 거리'를 눌러 주세요.	Please press 'Combat Positioning'.
+'첫 교전 위치'를 눌러 주세요.	Please press 'First Engagement'.
+'전투 중 위치'를 눌러 주세요.	Please press 'During Combat'.
+'즉시 접근'을 눌러 주세요.	Please press 'Rush In'.
+'무리 중심'을 눌러 주세요.	Please press 'Pack Center'.
+
+저기 보세요! 보물 고블린이 나타났어요!	Look over there! A treasure goblin has appeared!
+적들의 협동 공격이 시작됐어요! 이럴 때 체력이 많은 적부터 공격하면, 다른 적들에게 더 많은 공격 기회를 주게 돼요.	The enemies have started working together! If you attack the toughest enemy first, the others get more chances to strike.
+공격 우선순위를 바꿔서 적을 더 효율적으로 물리쳐 봐요.	Change your attack priorities to defeat the enemies more efficiently.
+공격 대상을 정한다	Set attack priorities
+보물 고블린은 처치하면 엄청난 보상을 떨어뜨려요! 하지만 시간이 지나면 도망가 버리니까, 빠르게 쫓아가는 게 중요해요.	A treasure goblin drops a huge reward when defeated! But it runs away after a while, so chase it quickly.
+보물 고블린을 노린다	Target the treasure goblin
+앗! 잠깐만요, 아직 바닥의 보상을 줍지 않았어요!	Oh! Wait a moment, you have not picked up the reward on the ground yet!
+적을 처치하는 것도 중요하지만, 보상을 챙기는 건 그 이상으로 중요하다고요!	Defeating enemies matters, but collecting rewards matters even more!
+행동 우선순위를 바꾼다	Change action priorities
+이제 떨어진 아이템을 모두 주웠으니, 다시 보스 몬스터를 잡으러 가 볼까요?	Now that you have picked up every item, shall we go back and defeat the boss?
+보스에게 간다	Return to the boss
+지금은 보스보다 다른 몬스터들을 먼저 처치하는 게 좋아요. 그래야 보스와 싸우는 동안 위협이 줄어드니까요.	Defeat the other monsters before the boss. That leaves fewer threats while you fight the boss.
+지금은 방어형 몬스터 뒤에서 공격하는 원거리 적들을 먼저 처치하는 게 좋아요.	Defeat the ranged enemies attacking from behind the defensive monster first.
+우선순위를 다시 정할 때마다, 각 몬스터 머리 위에 공격 순서가 나타나요.	Each time you set the priorities again, the attack order appears above each monster's head.
+전투 중에도 우선순위를 바꾸고, 의도한 순서대로 공격하는지 확인해 보세요.	Adjust priorities during combat and check that the attack order matches what you intended.
+우선순위가 바뀌었어요! 이제 보물 고블린을 쫓아서 보상을 얻어 봐요!	The priorities have changed! Now chase the treasure goblin and claim the reward!
+목록으로 돌아가 주세요.	Please return to the list.
+'행동 우선순위'를 눌러 주세요.	Please press 'Action priority'.
+'공격 대상 선택'을 눌러 주세요.	Please press 'Target selection'.
+창을 닫아 주세요.	Please close the panel.
+'회수'를 맨 위로 올려 주세요.	Move 'Gathering' to the top.
+'우선 순위'를 눌러 주세요.	Please press 'Priority'.
+'몬스터 타입'을 눌러 주세요.	Please press 'Type'.
+'몬스터 등급'을 눌러 주세요.	Please press 'Rank'.
+몬스터 등급에서 '보물 몬스터'를 최우선 처치 순위로 올려 봐요.	Move 'Treasure monster' to the top of the Rank priorities.
+'원거리 마법 공격 타입'을 2순위로 올려 주세요.	Move 'Ranged magic' to second place.
+'원거리 물리 공격 타입'을 맨 위로 올려 주세요.	Move 'Ranged physical' to the top.
+'일반 몬스터'를 맨 위로 올려 주세요.	Move 'Normal monster' to the top.
+'보스 몬스터'를 아래로 내려 주세요.	Move 'Boss monsters' down.
+'소환된 적'을 위로 올려 주세요.	Move 'Summoned enemy' up.
+눌러서 계속	Tap to continue
+목표 · 광장으로 전진	Goal · advance into the plaza
+목표 · 협동 공격에 맞서 싸우기	Goal · face the coordinated attack
+목표 · 공격 대상 우선순위 정하기	Goal · set attack priorities
+목표 · 보스 처치	Goal · defeat the boss
+목표 · 보물 고블린 처치	Goal · defeat the treasure goblin
+목표 · 보물 몬스터를 최우선으로	Goal · prioritize treasure monsters
+목표 · 회수를 최우선으로	Goal · prioritize gathering
+목표 · 바닥의 보상 회수	Goal · collect the reward on the ground
+목표 · 보스에게 돌아가기	Goal · return to the boss

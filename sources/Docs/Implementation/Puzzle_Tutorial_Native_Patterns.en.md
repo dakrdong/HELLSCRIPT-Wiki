@@ -31,7 +31,7 @@ Each level teaches one thing. From the start state the hero really dies or times
 | 7 | Slotting an escape skill | the sorcerer's `Gravity Collapse` cannot be walked out of and the explosion kills | `Chosen escape skill` (class movement skill) |
 | 8 | How a skill is used | a condition that waits for a group never fires with one enemy left, so time runs out | single or strong-enemy usage |
 | 9 | Filtering loot | picking up everything fills the bag, going far steps into the hazard | `Rare and better` + `Nearby loot only` |
-| 10 | Cursed chests | opening at 50% HP cannot clear the four echoes in 12 s; never opening misses the goal | `Attempt with a safety margin` |
+| 10 | Cursed chests | immediate opening at 50% HP fails; never opening misses the goal. Default Regroup can recover first and clear for Ranger/Mage | `Attempt with a safety margin` (all three classes clear) |
 | 11 | Bag cleanup | returning, ignoring or keeping everything cannot reach the goal (80 gold, one free slot) | replace + sell normal/magic + protect invested |
 | 12 | Auto Equip | with it off the weaker weapon cannot kill the elite in 45 s | Auto Equip on + same weapon type |
 | 13 | Repeat hunting | one run, same stage or holding the failed stage misses the gold target | next stage after a win, one stage down after a loss |

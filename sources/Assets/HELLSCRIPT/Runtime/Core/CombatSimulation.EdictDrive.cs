@@ -68,7 +68,7 @@ namespace Hellscript
                 var document=classEdict?(recommendedSkills??State.build.classSkills).ProjectEdict():HuntEdictV2.Canonical(HuntEdictDefaults.Resolve(Hero,State.build));
                 HuntEdictV2.ValidateReceiver(document,Hero,catalog);
                 if(document.global.Single(o=>o.id=="bag.stillFull").value=="STOP")State.limitedLoot=false;
-                edictSource=document;edictPositionValues=document.global.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);edictPolicy=EdictPolicyBridge.Apply(State.build,document,Hero.heroClass);edictLoot=new EdictLootPolicy(document);edictTarget=EdictTargetPolicy.Compile(document);edictField=EdictFieldPolicy.Compile(document);edictInactiveReason="";
+                edictSource=document;edictActionOrder=EdictRuleOrder.Categories(document);if(!reopening)edictSelectedCategory="";edictPositionValues=document.global.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);edictPolicy=EdictPolicyBridge.Apply(State.build,document,Hero.heroClass);edictLoot=new EdictLootPolicy(document);edictTarget=EdictTargetPolicy.Compile(document);edictField=EdictFieldPolicy.Compile(document);edictInactiveReason="";
                 if(previousField!=null&&(previousField.engage!=edictField.engage||previousField.lureMode!=edictField.lureMode))
                 {FieldState.hasLureGoal=FieldState.lureArrived=FieldState.lureScouting=false;FieldState.engageStart=State.time;}
                 foreach(var compiled in EdictRuleOrder.ForSimulation(Array.Empty<Rule>(),document))
@@ -83,7 +83,7 @@ namespace Hellscript
         // skill's chosen purpose is not met right now, so the candidate is passed over and reads EDICT_AIM.
         bool EdictAimGate(RuleCandidate c,bool countCast=true)
         {
-            if(EdictDodgeHolding&&(c.code=="APPROACH"||!DodgeCanAttack(c.rule.action==RuleAction.Basic?"BASIC":CombatTelemetry.SkillId(c.rule.skill))))
+            if(DodgeOwnsEdictAction&&(c.code=="APPROACH"||!DodgeCanAttack(c.rule.action==RuleAction.Basic?"BASIC":CombatTelemetry.SkillId(c.rule.skill))))
             {c.ready=false;c.code="DODGE_HOLD";c.detail="회피한 공격이 끝날 때까지 안전 위치를 유지합니다.";return false;}
             bool compiled=EdictRuleOrder.IsCompiledRule(c.rule.id);
             if(edictSource==null)
@@ -95,11 +95,12 @@ namespace Hellscript
             try{plan=c.edictAim??PlanEdictAim(edictSource,coreBasic?"BASIC":CombatTelemetry.SkillId(c.rule.skill),c.target);}
             catch(Exception e)
             {
+                if(!countCast){c.ready=false;c.code="EDICT_OFF";c.detail=e.Message;return false;}
                 edictSource=null;edictPolicy=null;edictLoot=null;edictTarget=null;edictField=null;edictInactiveReason=Loc.F("사냥 칙령 조준 판단을 중단했습니다: {0}", e.Message);
                 Log("EDICT_STOPPED",edictInactiveReason);
                 if(compiled){c.ready=false;c.code="EDICT_OFF";c.detail=edictInactiveReason;return false;}return true;
             }
-            LastEdictAim=plan;c.edictAim=plan;
+            if(countCast)LastEdictAim=plan;c.edictAim=plan;
             if(!plan.supported)return true;
             var target=State.enemies.Find(e=>e.id==plan.targetId&&!e.dead);
             if(target!=null)c.target=target;
@@ -125,7 +126,12 @@ namespace Hellscript
             LastEdictPlan=execution.plan;
             if(execution.plan.assessment.emergency&&execution.plan.ControlsMainAction&&State.edictTarget!=null)
             {State.edictTarget.enemyId=-1;State.edictTarget.searching=false;State.edictTarget.pursuitSeconds=0;}
-            string blocked=execution.plan.blockedReason;
+            ObserveEdictResponseBlock(execution.plan);
+            return execution.plan.blockedReason==""&&execution.plan.ControlsMainAction;
+        }
+        void ObserveEdictResponseBlock(EdictResponsePlan plan)
+        {
+            string blocked=plan.blockedReason;
             if(blocked!=State.edictBlockLogged)
             {
                 // Logged only on change; the decision cycle runs five times a second.
@@ -133,7 +139,6 @@ namespace Hellscript
                 else if(State.edictBlockLogged!="")Log("EDICT_RESUMED","사냥 칙령 판단을 다시 사용합니다.");
                 State.edictBlockLogged=blocked;
             }
-            return blocked==""&&execution.plan.ControlsMainAction;
         }
     }
 }

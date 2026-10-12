@@ -2,6 +2,8 @@
 
 > 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
 
+> 2026-10-12: Action priority adds Regroup before Explore. Immediate L10 opening still fails for every class; the early-opening regression explicitly sets the unlocked return-HP threshold to 50%. With the current default threshold, a 15-second regroup lets Ranger and Mage clear the real echoes while Warrior still fails. Historical rows below predate that order. See [Action priority results](Edict_Order_Panel_20261011.en.md).
+
 Written 2026-10-07. Connects L9–L13 and noncombat P1/P2 to actual loot, equipment, chest, cleanup, enhancement and repeat-hunt owners. This is not final tutorial acceptance. L4 ownership approval and stages 8–9 remain. No new images, packages or project copies are introduced.
 
 ## Transactions and outcomes

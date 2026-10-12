@@ -35,7 +35,7 @@ namespace Hellscript
         public static HuntEdictV2Document Upgrade(HuntEdictV2Document source)
         {
             source=PotionEdict.Upgrade(source);
-            if(source==null||source.globalVersion<2||source.globalVersion>6)return source;
+            if(source==null||source.globalVersion<2||source.globalVersion>7)return source;
             var copy=source.Copy();
             if(copy.globalVersion==2)
             {
@@ -61,21 +61,27 @@ namespace Hellscript
                 var mode=copy.global.Single(o=>o.id=="position.mode");if(mode.value=="ORBIT")mode.value="DISTANCE";
                 copy.global.AddRange(EdictOptions.Defaults(EdictOptions.Version6Global.Where(d=>EdictOptions.PositionV6(d.id))));copy.globalVersion=6;
             }
-            // Validate the old envelope before removing keys or clamping its newly narrowed ranges.
-            copy.global=EdictOptions.Canonical(EdictOptions.Version6Global,copy.global,copy.heroClass);
-            string G(string id)=>copy.global.Single(o=>o.id==id).value;
-            var enabled=G("target.specialEnabled").Split(',');var specials=G("target.specialOrder").Split(',').Where(enabled.Contains).ToArray();
-            var added=EdictOptions.Defaults(EdictOptions.Global.Where(d=>!EdictOptions.Version6Global.Any(old=>old.id==d.id)));
-            foreach(string category in EdictTargetPolicy.DefaultCategories)
-                added.Single(o=>o.id=="target.priority"+(category=="GRADE"?"Grade":category=="TYPE"?"Type":"Status")).value=
-                    string.Join(",",EdictTargetPolicy.LegacyOrder(category,G("target.default"),specials,G("target.interruptCaster")=="ON"));
-            copy.global=copy.global.Where(o=>!EdictOptions.RemovedTarget(o.id)).Concat(added).ToList();
-            foreach(string id in new[]{"target.chaseDistance","target.chaseTime"})
+            if(copy.globalVersion==6)
             {
-                var value=copy.global.Single(o=>o.id==id);decimal n=decimal.Parse(value.value,CultureInfo.InvariantCulture);
-                value.value=Math.Max(5,Math.Min(id=="target.chaseDistance"?50:30,n)).ToString("0.###",CultureInfo.InvariantCulture);
+                // Validate the old envelope before removing keys or clamping its newly narrowed ranges.
+                copy.global=EdictOptions.Canonical(EdictOptions.Version6Global,copy.global,copy.heroClass);
+                string G(string id)=>copy.global.Single(o=>o.id==id).value;
+                var enabled=G("target.specialEnabled").Split(',');var specials=G("target.specialOrder").Split(',').Where(enabled.Contains).ToArray();
+                var added=EdictOptions.Defaults(EdictOptions.Version7Global.Where(d=>!EdictOptions.Version6Global.Any(old=>old.id==d.id)));
+                foreach(string category in EdictTargetPolicy.DefaultCategories)
+                    added.Single(o=>o.id=="target.priority"+(category=="GRADE"?"Grade":category=="TYPE"?"Type":"Status")).value=
+                        string.Join(",",EdictTargetPolicy.LegacyOrder(category,G("target.default"),specials,G("target.interruptCaster")=="ON"));
+                copy.global=copy.global.Where(o=>!EdictOptions.RemovedTarget(o.id)).Concat(added).ToList();
+                foreach(string id in new[]{"target.chaseDistance","target.chaseTime"})
+                {
+                    var value=copy.global.Single(o=>o.id==id);decimal n=decimal.Parse(value.value,CultureInfo.InvariantCulture);
+                    value.value=Math.Max(5,Math.Min(id=="target.chaseDistance"?50:30,n)).ToString("0.###",CultureInfo.InvariantCulture);
+                }
+                copy.globalVersion=7;
             }
-            copy.globalVersion=7;return copy;
+            copy.global=EdictOptions.Canonical(EdictOptions.Version7Global,copy.global,copy.heroClass);
+            copy.global.Single(o=>o.id=="common.order").value=EdictRuleOrder.UpgradeOrder(copy.global.Single(o=>o.id=="common.order").value);
+            copy.globalVersion=8;return copy;
         }
         public static bool Excluded(HuntEdictV2Document policy,int position)=>Get(policy,ExcludedSlots).Split(',').Contains(position.ToString(CultureInfo.InvariantCulture));
         static bool TouchesExcludedSlot(HuntEdictV2Document policy,Item candidate,int index,Item[] outgoing)
