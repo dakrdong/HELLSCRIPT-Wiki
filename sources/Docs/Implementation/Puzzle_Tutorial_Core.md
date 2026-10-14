@@ -1,5 +1,7 @@
 # 퍼즐 튜토리얼 코어 v5
 
+> 갱신일: 2026-10-14 · 퍼즐 레벨 튜토리얼은 은퇴해 코드·테스트·빌드 포함 에셋을 삭제했다. 이 문서는 당시 기록이다. [은퇴 기록](Puzzle_Tutorial_Retirement_20261014.md)
+
 갱신일: 2026-10-07
 
 English: [Puzzle tutorial core](Puzzle_Tutorial_Core.en.md)

@@ -19,11 +19,9 @@ namespace Hellscript
             {
                 if(previewSkillPresets.TryGetValue(SkillPolicyScope,out var id)&&(id==HuntEdictQuickPresets.Custom||SkillChoiceDisclosed(SkillPolicyScope,id)))return id;
                 string active=HuntEdictSkillPresets.Active(Session.Draft,SkillPolicyScope);
-                // Existing unmatched settings remain active, but do not open a wall of advanced options
-                // on the first visit. An explicitly activated Custom tab always reopens as Custom.
-                if(PuzzleLesson&&!SkillChoiceDisclosed(SkillPolicyScope,active)&&active!=HuntEdictQuickPresets.Custom)return HuntEdictQuickPresets.For(SkillPolicyScope).First(p=>SkillChoiceDisclosed(SkillPolicyScope,p.id)).id;
+                // An explicitly activated Custom tab always reopens as Custom.
                 return active==HuntEdictQuickPresets.Custom&&!Session.Draft.classSkills.presetSelections.Any(p=>p.scope==SkillPolicyScope&&p.preset==HuntEdictQuickPresets.Custom)
-                    ?HuntEdictQuickPresets.For(SkillPolicyScope).First(p=>!PuzzleLesson||SkillChoiceDisclosed(SkillPolicyScope,p.id)).id:active;
+                    ?HuntEdictQuickPresets.For(SkillPolicyScope).First().id:active;
             }
         }
         public void PreviewSkillPreset(string id)
@@ -61,7 +59,7 @@ namespace Hellscript
             {
                 float rest=w-backWidth-12*Grow;
                 Button(parent,"기본 공격",x+backWidth+6*Grow,y,rest*.47f,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",10).name="edict-policy-basic";
-                if(!PuzzleLesson||PuzzleLevel>=PuzzleTutorial.Count)Button(parent,"공통 공격 순서",x+backWidth+6*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
+                Button(parent,"공통 공격 순서",x+backWidth+6*Grow+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",10).name="edict-policy-order";
             }
             else Text(parent,SkillName(policySkill),x+backWidth+8*Grow,y,w-backWidth-16*Grow,heading,12,gold);
             var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+6,w,100);
@@ -119,7 +117,7 @@ namespace Hellscript
                 Place(description.rectTransform,5,5,descriptionWidth-10,descriptionHeight);
                 float artX=sideBySide?descriptionWidth+8:0,artY=sideBySide?0:descriptionHeight+4,artW=sideBySide?inner-descriptionWidth-8:inner;
                 float artH=artW*.68f;
-                bool live=scope.StartsWith("skill/",StringComparison.Ordinal)&&(!PuzzleLesson||PuzzleLevel>=8);
+                bool live=scope.StartsWith("skill/",StringComparison.Ordinal);
                 if(landscape&&!live)
                 {
                     // Keep the whole tactical scene visible even in short landscape windows with
@@ -135,8 +133,7 @@ namespace Hellscript
                     layout.childControlWidth=true;layout.childForceExpandWidth=true;layout.childControlHeight=true;layout.childForceExpandHeight=false;
                     Paragraph(information,usingShown?"변경 즉시 저장":"미리보기",descriptionWidth-10,10,usingShown?UiTheme.Success:muted);
                     Paragraph(information,preset.Description,descriptionWidth-10,12,textColor);
-                    if(PuzzleLesson)Paragraph(information,"A/B 비교 · 실제 영웅의 복사본 · 레벨 8의 같은 적·장비·시드 · 선택한 스킬 사용 방식만 변경 · 보상 없음",descriptionWidth-10,10,muted);
-                    else if(!ProgressivePrologue)DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth-10);
+                    if(!ProgressivePrologue)DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth-10);
                     else Paragraph(information,"실제 초반 영웅의 복사본 · 동일한 시작 조건 · 1배속 10초 · 연습 결과는 저장되지 않습니다.",descriptionWidth-10,10,muted);
                     artH=sideBySide?Mathf.Max(150*Grow,plateH-actions-12):Mathf.Max(150*Grow,artW*.70f);
                     DrawCombatPreview(row,information,descriptionWidth-10,policySkill,shown,artX,artY,artW,artH);

@@ -1,5 +1,7 @@
 # Tutorial opening, new-skill guide and flow and timing audit
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 Updated: 2026-10-08 · Korean: [튜토리얼 도입부·새 기술 안내와 진행·타이밍 점검](Tutorial_Opening_20261008.md)
 
 Related records: [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md) (level design), [Tutorial forge](Tutorial_Forge_20261008.en.md) (the forge level), [Puzzle tutorial core](Puzzle_Tutorial_Core.en.md) (runner and saves).

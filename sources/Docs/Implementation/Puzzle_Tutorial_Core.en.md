@@ -1,5 +1,7 @@
 # Puzzle tutorial core v5
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 Updated: 2026-10-07
 
 Korean: [퍼즐 튜토리얼 코어](Puzzle_Tutorial_Core.md)

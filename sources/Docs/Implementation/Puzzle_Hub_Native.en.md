@@ -1,5 +1,7 @@
 # Native puzzle waiting room implementation
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 2026-10-07. Stage 6 implementation. Native visual/input/performance acceptance remains scheduled for the final integrated player at stage 9.
 
 `PuzzleHubWindow` uses the generated `ContentWindowView` entry point, shared host, safe area, theme, fonts and buttons. Its one-screen composition adapts the shared body to status, character art, a level board and fixed actions. Existing inventory, Hunt Edict, skill tree and settings remain their actual owners.

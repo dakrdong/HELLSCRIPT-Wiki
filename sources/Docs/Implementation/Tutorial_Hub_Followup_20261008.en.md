@@ -1,5 +1,7 @@
 # Tutorial hub follow-up and per-hero tutorials
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 Updated: 2026-10-08 · [한국어](Tutorial_Hub_Followup_20261008.md)
 
 Six user requests were handled in one PR. The hub's implementation record is [Puzzle hub native implementation](Puzzle_Hub_Native.en.md), the shared battle and town shortcuts are in [Play content dock](Play_Content_Dock.en.md), and the Hunt Edict window is owned by [Hunt Edict overview](Hunt_Edict_Overview.en.md). This page collects what changed (positions, sizes, rules) and what was verified.

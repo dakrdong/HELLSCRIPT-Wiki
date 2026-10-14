@@ -66,7 +66,6 @@ namespace Hellscript
             ExecuteEvents.Execute(b.gameObject,e,ExecuteEvents.pointerUpHandler);ExecuteEvents.Execute(b.gameObject,e,ExecuteEvents.pointerClickHandler);yield return null;yield return null;
         }
         IEnumerator Tap(string name){yield return null;var button=Find(name);Require(button!=null,"Missing button: "+name+" page="+game.UI.Page);yield return Tap(button,()=>Find(name));}
-        string EconomySnapshot(AccountSave a)=>a.gold+"|"+a.materials+"|"+a.premium+"|"+string.Join(",",a.cores)+"|"+JsonUtility.ToJson(a.runes)+"|"+a.Hero.level+"|"+a.Hero.xp+"|"+a.Hero.highestClear+"|"+a.records.Count+"|"+string.Join(";",a.Hero.inventory.Select(JsonUtility.ToJson));
         IEnumerator Until(Func<bool> test,float seconds)
         {float end=Time.realtimeSinceStartup+seconds;while(!test()&&Time.realtimeSinceStartup<end)yield return null;var r=game.Combat?.State;
             if(!test()){yield return Capture("timeout");File.WriteAllText(Path.Combine(output,"timeout-windows.txt"),string.Join("\n",game.UI.GetComponentsInChildren<ContentWindowView>().Select(v=>v.name+":"+v.Title.text))+"\nhost="+game.UI.GetComponent<ContentWindowHost>()?.Count+" common="+game.UI.CommonPanelOpen+" inventory="+game.UI.PlayInventoryOpen+" staging="+game.UI.Staging.Busy+" dimmed="+game.DisplayDimmed+" enabled="+game.UI.isActiveAndEnabled+" prompt="+typeof(GameUI).GetField("tutorialPromptPhase",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)?.GetValue(game.UI)+" journal="+game.UI.GetComponentsInChildren<Button>().Where(b=>b.gameObject.activeInHierarchy).Take(30).Select(b=>b.name).Aggregate("",(x,y)=>x+","+y));}
@@ -183,7 +182,7 @@ namespace Hellscript
             yield return null;game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Runtime store missing");var a=game.Store.Data;
             bool resumed=args.Contains("-hellscriptTutorialResume");
             int classArg=Array.IndexOf(args,"-hellscriptEdictClass");if(classArg>=0)a.selectedHero=int.Parse(args[classArg+1]);
-            if(a.guide.puzzle!=null||a.guide.tutorialRun==null){yield return PuzzleAcceptance(args,a,resumed);yield break;}
+            Require(a.guide.tutorialRun!=null,"The tutorial smoke needs a saved pit trial checkpoint; new accounts take the guide stage (RuntimeGuideTutorialSmoke).");
             yield return PitAcceptance(a,resumed);
             yield return Until(()=>Find("dialogue-skip")!=null,10);yield return new WaitForSecondsRealtime(1.2f);yield return Capture("pit-12-reward");
             Require(a.gold==0,"Reward paid before it was taken");yield return Choose("tutorial-continue");
@@ -253,7 +252,7 @@ namespace Hellscript
             yield return LayoutProfiles("briefing",()=>CheckStory("briefing"));game.UI.CloseTutorialJournal();checks.Add("PASS the blacksmith briefs enhancement in the shared story dialogue with practice, read and later.");
             game.UI.ShowTutorialJournal(ContentUnlocks.Enhance);yield return Tap("tutorial-practice");yield return Until(()=>Find("tutorial-support-execute")!=null,35);
             yield return LayoutProfiles("support");yield return Capture("support-review");int gold=a.gold;yield return Tap("tutorial-support-execute");Require(a.guide.supportUsed.Contains(ContentUnlocks.Enhance)&&a.gold==gold,"Support transaction failed");checks.Add("PASS supported enhancement uses pointer-confirmed atomic domain transaction; late unlock uses explicit fixture.");
-            game.UI.CloseTutorialJournal();yield return PitReplay(a);
+            game.UI.CloseTutorialJournal();
             game.Save();File.WriteAllText(Path.Combine(output,"runtime-tutorial-smoke.txt"),string.Join("\n",checks)+"\nmacOS synthetic EventSystem pointers. No physical mobile or human comprehension claim.\nRenderer="+SystemInfo.graphicsDeviceType);
             Debug.Log("HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK");Application.Quit(0);
         }

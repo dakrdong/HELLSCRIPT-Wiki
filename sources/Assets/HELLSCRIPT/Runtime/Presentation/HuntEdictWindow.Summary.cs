@@ -37,7 +37,7 @@ namespace Hellscript
         {
             float w=bodyWidth-16,chipTop=6;
             // Search and the changed-only filter serve people with many settings; the prologue shows exactly one.
-            if(!ProgressivePrologue&&(!PuzzleLesson||HasFeature(HuntEdictProgression.Details)))
+            if(!ProgressivePrologue)
             {
                 var query=Input(body,searchQuery,8,6,w-126,30);query.gameObject.name="edict-search";
                 var hint=Text(query.transform,"옵션 이름·설명 검색",7,0,w-142,30,11,muted);query.placeholder=hint;hint.gameObject.SetActive(searchQuery.Length==0);
@@ -85,8 +85,6 @@ namespace Hellscript
             else
             {
                 var selected=groups.Single(g=>HuntEdictSummary.Key(g)==selectedGroup);
-                // The puzzle tutorial has no summary tab, so its combat styles lead the combat tab, above the first group's settings.
-                if(PuzzleLesson&&SelectedTab=="combat"&&selected==groups[0]&&HasFeature(HuntEdictProgression.Styles)){DrawStyles(editor,w-14);Heading(editor,selected.title,w-14);}
                 Paragraph(editor,selected.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed)?selected.Description:"현재 공개된 설정으로 사냥 규칙을 정하세요.",w-14,12,muted);
                 if(changedOnly&&!selected.ids.Where(Disclosed).Any(id=>HuntEdictSummary.Changed(Session.Draft.edict,Session.Baseline.edict,id)))Paragraph(editor,"조건에 맞는 설정이 없습니다.",w-14,12,muted);
                 else DrawSelectedGroup(editor,w-14,selected);
@@ -141,7 +139,6 @@ namespace Hellscript
             var choices=d.kind==EdictOptionKind.Toggle?new[]{"ON","OFF"}:d.kind==EdictOptionKind.SkillReference?new[]{""}.Concat(Session.Draft.edict.slots.Where(id=>id!=""&&(d.choices.Length==0||d.choices.Contains(id)))).ToArray():d.choices;
             // Standing still is what the lesson is about leaving behind.
             if(PitLesson&&d.id=="position.mode")choices=choices.Where(c=>c!="STAND").ToArray();
-            if(PuzzleLesson)choices=choices.Where(c=>!PuzzleTutorial.RemovedChoice(PuzzleLevel,hero.heroClass,PuzzleHint,d.id,c)).ToArray();
             ChooseValue(title,choices,value,v=>HuntEdictSummary.Display(d,v,SkillName),Set);
         }
         void ShowOptionHelp(string title,string help)=>Dialog(title,p=>

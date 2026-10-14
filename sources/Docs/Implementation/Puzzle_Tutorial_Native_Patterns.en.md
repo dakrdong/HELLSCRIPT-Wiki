@@ -1,5 +1,7 @@
 # Puzzle tutorial: native monster patterns (2026-10-08)
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 Korean: [몬스터 고유 패턴 원칙](Puzzle_Tutorial_Native_Patterns.md)
 
 Owner decision: **a level's answer is never made by changing a monster's attack pattern.** Only monster level (stats), health, damage, count and spawn time may be tuned. The earlier build forced outcomes with a 0.1 s windup, a 300 s repeat cooldown, zero move speed and twelve monsters at 1000 HP, and the owner pointed out that "attacks once and never again" looks cheap. The previous level-design records (core, content, operations, graduation) stay as history of that build; this document is the reference for the current levels.

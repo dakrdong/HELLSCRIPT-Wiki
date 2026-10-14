@@ -11,8 +11,6 @@ namespace Hellscript
         public TitleVista TitleFlight=>titleFlight!=null?titleFlight.GetComponentInChildren<TitleVista>():null;
         public void ShowTitle()
         {
-            // Signing out of the tutorial leaves from the hub; the hub is a window above the page and would cover the title.
-            ClosePuzzleHub();
             if(titleFlight!=null){Destroy(titleFlight);titleFlight=null;}
             game.Town?.Cancel();game.World.ClearDungeon();game.World.SuspendPresentation();pageRepaint=ShowTitle;
             Base("title","HELLSCRIPT","잿빛 숲 너머, 당신의 이야기가 시작됩니다",responsive:true);

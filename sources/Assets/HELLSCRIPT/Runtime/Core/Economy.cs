@@ -259,13 +259,13 @@ namespace Hellscript
             return EquipmentSlots.Plan(hero,item).error;
         }
         // rarityOnly compares grades alone; a tie keeps the equipment already in the bag.
-        public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false,int? availableSlots=null,IEnumerable<string> replacementIds=null)
+        public static bool AddItem(HeroSave hero,Item item,BagPolicy policy,AccountSave account=null,bool rarityOnly=false)
         {
             if(item==null||hero.inventory.Any(i=>i.id==item.id))return false;
-            if((availableSlots??FreeSlots(hero))>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;}
+            if(FreeSlots(hero)>0){ItemAcquisition.Stamp(account,item);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;}
             if(policy!=BagPolicy.Replace)return false;
             var protection=account!=null&&hero.useEdict?EdictCleanupPolicy.Compile(HuntEdictV2.Canonical(HuntEdictDefaults.Resolve(hero)).global.ToDictionary(o=>o.id,o=>o.value)):null;
-            var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3&&(protection==null||!protection.Protects(account,x,EdictCleanupAction.Keep))&&(replacementIds==null||replacementIds.Contains(x.id))).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
+            var worst=hero.inventory.Where(x=>!Protected(hero,x)&&!(account?.heroes.Any(h=>Referenced(h,x))??false)&&x.rarity<3&&(protection==null||!protection.Protects(account,x,EdictCleanupAction.Keep))).OrderBy(x=>x.rarity).ThenBy(x=>x.level).ThenBy(x=>x.Price).FirstOrDefault();
             if(worst==null||(rarityOnly?item.rarity.CompareTo(worst.rarity):Compare(item,worst))<=0)return false;
             RiftResult.Disposed(account,worst.id,RiftLootOutcome.Discarded);ItemAcquisition.Stamp(account,item);hero.inventory.Remove(worst);hero.inventory.Add(item);Storage.PlaceInBag(hero,item);EquipmentShop.RecordEarned(account,hero,item);EquipmentRecommendation.Apply(hero,item,account);return true;
         }

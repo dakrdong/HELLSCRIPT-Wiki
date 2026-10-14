@@ -321,15 +321,12 @@ namespace Hellscript
         public MonsterCodexSave monsterKills=new MonsterCodexSave();
         public bool monsterKillsCommitted;
         public LiveOpsRunSnapshot liveOps;
-        public bool tutorial,tutorialReplay;
+        public bool tutorial;
         public int tutorialPhase;
         public int tutorialFlowVersion,tutorialLessonStep;
         // The guide tutorial's next point in the current road segment.
         public int guideWaypoint;
         public float guideGoblinKilledAt;
-        public int puzzleLevel,puzzleWave;
-        public PuzzleOperationState puzzleOperation;
-        public bool puzzleWaveReady,puzzleHuntRound;
         public float pitStageTime;
         public string guideSetup="";
         public CombatJournalData journal;

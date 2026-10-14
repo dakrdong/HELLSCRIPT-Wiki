@@ -106,16 +106,13 @@ namespace Hellscript
                 if(f.id==Offline)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             }
         }
-        // The puzzle tutorial opens some forge services for its own hero without saving an unlock (see PuzzleTutorial.ForgeSteps).
-        public static bool Has(AccountSave a,string id){Reconcile(a);return a.contentUnlocks.unlocked.Contains(id)||PuzzleTutorial.ForgeOpen(a,id);}
+        public static bool Has(AccountSave a,string id){Reconcile(a);return a.contentUnlocks.unlocked.Contains(id);}
         public static string Condition(string id)
         {
             var f=Rules.features.Single(x=>x.id==id);
             string text=f.stage>0?Loc.F("계정 내 영웅으로 균열 {0}단계 클리어 시 개방",f.stage):Loc.T("마을 도착부터 언제든 이용 가능");
             return string.IsNullOrEmpty(f.early)?text:text+" · "+Loc.T(f.early);
         }
-        // Inside the tutorial a service the tutorial opens names its level instead of the rift stage that opens it afterwards.
-        public static string Condition(AccountSave a,string id)=>!PuzzleTutorial.Active(a)||PuzzleTutorial.ForgeLevel(id)==0?Condition(id):id==Enhance?Loc.F("튜토리얼 {0}레벨에서 개방됩니다",PuzzleTutorial.ForgeUnlockLevel(id)):Loc.F("튜토리얼 {0}레벨을 클리어하면 개방됩니다",PuzzleTutorial.ForgeLevel(id));
         public static void RecordRunEnd(AccountSave a){a.contentUnlocks.firstRunEnded=true;Reconcile(a);}
         // Call only after the real gem acquisition transaction succeeds; no gem grants are invented here.
         public static void RecordGemAcquisition(AccountSave a){a.contentUnlocks.gemAcquired=true;Reconcile(a);}

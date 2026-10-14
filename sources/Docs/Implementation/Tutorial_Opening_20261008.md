@@ -1,5 +1,7 @@
 # 튜토리얼 도입부·새 기술 안내와 진행·타이밍 점검
 
+> 갱신일: 2026-10-14 · 퍼즐 레벨 튜토리얼은 은퇴해 코드·테스트·빌드 포함 에셋을 삭제했다. 이 문서는 당시 기록이다. [은퇴 기록](Puzzle_Tutorial_Retirement_20261014.md)
+
 갱신일: 2026-10-08 · English: [Tutorial opening, new-skill guide and flow audit](Tutorial_Opening_20261008.en.md)
 
 이어지는 기록: [몬스터 고유 패턴 원칙](Puzzle_Tutorial_Native_Patterns.md)(레벨 구성), [튜토리얼 대장간](Tutorial_Forge_20261008.md)(대장간 레벨), [퍼즐 코어](Puzzle_Tutorial_Core.md)(러너와 저장).

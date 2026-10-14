@@ -14,8 +14,6 @@ namespace Hellscript
         bool FullSkillTraining=>State.training>=0&&!State.trainingUsesOwnedHero&&!IsTutorial&&!IsSkillPreview;
         public int EffectiveLevel=>FullSkillTraining?ClassSkills.LevelCap(Hero):Hero.level;
         public float TimeLimit=>
-            PuzzleTutorial.HuntRound(State)?15:
-            IsPuzzle?PuzzleLevel.seconds:
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
             RuntimePresentationProfile.CombatDuration>0?RuntimePresentationProfile.CombatDuration:
 #endif
@@ -39,7 +37,7 @@ namespace Hellscript
         int basicCount {get=>ItemEffects.basicCount;set=>ItemEffects.basicCount=value;}
         int lastBasic {get=>ItemEffects.lastBasic;set=>ItemEffects.lastBasic=value;}
         bool reducedNext {get=>ItemEffects.reducedNext;set=>ItemEffects.reducedNext=value;}
-        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null,SkillPresetScenario combatPreview=null,int puzzleLevel=0,bool puzzleHuntRound=false,bool guideStage=false)
+        public CombatSimulation(AccountSave account,GameCatalog catalog,int stage,int training=-1,RunState restore=null,uint? seed=null,bool ownedTraining=false,RiftObjectiveKind? forcedObjective=null,bool recordResume=true,LiveOpsRunSnapshot liveOps=null,bool tutorial=false,TrainingGroundSetup trainingGround=null,SkillPresetScenario combatPreview=null,bool guideStage=false)
         {
             previewScenario=combatPreview;
             if(training>=0&&ownedTraining&&!ContentUnlocks.Has(account,ContentUnlocks.Train))throw new InvalidOperationException(ContentUnlocks.Condition(ContentUnlocks.Train));
@@ -59,12 +57,11 @@ namespace Hellscript
                 id=Guid.NewGuid().ToString("N"),
 #endif
                 heroId=Hero.id,stage=Mathf.Max(1,stage),training=training,
-                tutorial=isTutorial,puzzleHuntRound=puzzleHuntRound,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
-            if(restore==null&&isTutorial&&puzzleLevel>0){State.tutorialFlowVersion=PuzzleTutorial.Version;State.puzzleLevel=puzzleLevel;}
+                tutorial=isTutorial,rng=seed??(uint)(DateTime.UtcNow.Ticks&0xFFFFFFFF),position=RiftMap.Rooms[0]+new Vector2(0,-4),build=Hero.build.Copy()};
             if(restore==null&&isTutorial&&guideStage)State.tutorialFlowVersion=GuideTutorial.Version;
             if(restore==null)RiftResult.Begin(this.account,State);
-            // Rifts and the puzzle tutorial from level 2 keep the live DPS graph's samples.
-            if(restore==null&&(training<0||isTutorial&&puzzleLevel>=2))State.dps=new CombatDpsTimeline{version=CombatDpsTimeline.Version};
+            // Rifts keep the live DPS graph's samples.
+            if(restore==null&&training<0)State.dps=new CombatDpsTimeline{version=CombatDpsTimeline.Version};
             if(restore==null&&owned){State.trainingUsesOwnedHero=true;State.stage=ground?trainingGround.stage:1;State.rng=seed??(ground?TrainingGround.Seed(trainingGround):731010u+(uint)training);}
             // The training ground fights real rift enemies, so it keeps the rift's live-ops balance for its tier.
             if(restore==null&&ground)State.trainingGround=new TrainingGroundRunState{setup=trainingGround.Copy(),key=TrainingGround.Key(trainingGround,Hero)};
@@ -84,11 +81,9 @@ namespace Hellscript
                 if(restore==null&&ground)State.build.classSkills.automatic=State.build.classSkills.automatic.Where(id=>!trainingGround.excluded.Contains(id)).ToArray();
                 State.build.classSkills.ProjectLegacy(State.build,catalog);
             }
-            // A puzzle level is tuned for the hero the tutorial hands out, so the slot levels its forge buys wait for graduation.
-            State.slotLevels=IsPuzzle?new SlotProgress().levels:BlacksmithCatalog.SlotLevels(State,Hero);
+            State.slotLevels=BlacksmithCatalog.SlotLevels(State,Hero);
             var statsHero=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(Hero));statsHero.build=State.build;statsHero.slotProgress=new SlotProgress{levels=(int[])State.slotLevels.Clone()};
             Stats=new HeroStats(statsHero,FullSkillTraining,this.account.runes);
-            if(IsPuzzle)Stats.dodge=0;
             PrepareEdict(restore!=null);
             InitializeClassSkills(restore!=null);
             InitializePotions(restore==null);
@@ -208,9 +203,7 @@ namespace Hellscript
         EnemyState Target => State.enemies.Find(e=>e.id==State.targetId&&!e.dead);
         public void Tick(float dt)
         {
-            if(State.portal&&!State.paused&&PuzzleTutorial.Operating(State))PuzzleOperationOutcome();
             if(State.paused||State.portal||!string.IsNullOrEmpty(State.navigationError)||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;
-            if(IsPuzzle&&State.puzzleLevel==13&&!State.puzzleHuntRound){TickPuzzleHunt(dt);return;}
             journalMovementReason=null;journalMovementTrigger=null;
             if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
@@ -222,7 +215,7 @@ namespace Hellscript
         }
         void TickCombat(float dt)
         {
-            TickPreviewSpawns();TickPuzzleSpawns();if(State.paused)return;ResolveCombatDeaths();if(SettleCombatOutcome())return;
+            TickPreviewSpawns();if(State.paused)return;ResolveCombatDeaths();if(SettleCombatOutcome())return;
             State.guideShrineTime=Mathf.Max(0,State.guideShrineTime-dt);State.resolveShrineTime=Mathf.Max(0,State.resolveShrineTime-dt);
             State.time+=dt;State.statistics.ticks++;State.potionCd=Mathf.Max(0,State.potionCd-dt);State.actionCd=Mathf.Max(0,State.actionCd-dt);
             TickPotionTimers(dt);
@@ -615,7 +608,7 @@ namespace Hellscript
         }
         void Loot(float dt)
         {
-            if(State.training>=0&&!PuzzleTutorial.Operating(State)&&!IsGuide)return;
+            if(State.training>=0&&!IsGuide)return;
             // The guide's reward stays on the floor until the player saves the gathering lesson.
             if(GuideTreasureScene&&State.tutorialPhase!=GuideTutorial.Pickup)return;
             CollectResources(dt);if(State.portal)return;
@@ -642,9 +635,9 @@ namespace Hellscript
                 if(shortage&&Policy.bagPolicy==BagPolicy.Ignore){drop.ignored=true;continue;}
                 if(shortage&&Policy.bagPolicy==BagPolicy.Portal&&Economy.FreeSlots(Hero)>0){PortalForBag(dt);return;}
                 var rewardSnapshot=CombatJournal.Copy(drop.item);
-                bool atomic=(State.training<0&&EquipmentRecommendation.Enabled(Hero)||PuzzleTutorial.Operating(State)||IsGuide)&&CommitRecommendedLoot!=null;
+                bool atomic=(State.training<0&&EquipmentRecommendation.Enabled(Hero)||IsGuide)&&CommitRecommendedLoot!=null;
                 var acquired=atomic?CommitRecommendedLoot(drop.item.id,Policy.bagPolicy,edictField?.replacementRank=="RARITY"):
-                    Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account,edictField?.replacementRank=="RARITY",PuzzleTutorial.BagSlots(State,Hero),PuzzleTutorial.BagItems(State,Hero))?EquipmentLootResult.Acquired:EquipmentLootResult.Rejected;
+                    Economy.AddItem(Hero,drop.item,Policy.bagPolicy,account,edictField?.replacementRank=="RARITY")?EquipmentLootResult.Acquired:EquipmentLootResult.Rejected;
                 if(acquired==EquipmentLootResult.SaveFailed){State.paused=true;Log("LOOT_SAVE_FAILED",Loc.T("장비 획득을 저장하지 못해 사냥을 일시정지했습니다."));return;}
                 if(acquired==EquipmentLootResult.Acquired)
                 {

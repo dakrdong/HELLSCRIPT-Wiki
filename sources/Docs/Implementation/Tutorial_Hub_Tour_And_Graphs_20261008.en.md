@@ -1,5 +1,7 @@
 # Waiting-room tour, level 2 start card and live graphs
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 Updated: 2026-10-08 · Korean: [대기실 첫 방문 안내, 2레벨 시작 카드, 실시간 그래프](Tutorial_Hub_Tour_And_Graphs_20261008.md)
 
 Follows [Tutorial opening, new-skill guide and flow audit](Tutorial_Opening_20261008.en.md) (PR #80). This record covers the requests made after it (1-3: start card, waiting-room tour and live graphs; 4-6: level 2 speech and edict guide, lost-card button, monster models).

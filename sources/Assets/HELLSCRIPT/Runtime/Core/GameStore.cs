@@ -207,7 +207,7 @@ namespace Hellscript
             }
             while(hero.presets.Count<HuntEdict.PresetSlots)hero.presets.Add(new BuildConfig{emptySlot=true,name="",version=""});
         }
-        public static void NormalizeRun(RunState run,bool fresh=false)
+        public static void NormalizeRun(RunState run)
         {
             // JsonUtility materializes an absent reference as a default inline object.
             // Only the empty, originless placeholder is null; real casts stay validated.
@@ -234,7 +234,6 @@ namespace Hellscript
             run.layout.shrines??=new System.Collections.Generic.List<RiftShrine>();run.layout.events??=new System.Collections.Generic.List<RiftEvent>();
             run.layout.gates??=new System.Collections.Generic.List<RiftGate>();
             run.layout.carriers??=new System.Collections.Generic.List<RiftEssenceCarrier>();
-            if(!fresh)PuzzleTutorial.NormalizeOperation(run);
             run.layout.offerings??=new System.Collections.Generic.List<RiftOffering>();
             if(run.layout.objective!=RiftObjectiveKind.Offerings&&run.layout.altar!=null&&string.IsNullOrEmpty(run.layout.altar.id))run.layout.altar=null;
             foreach(var chest in run.layout.chests)if(chest.reward!=null&&string.IsNullOrEmpty(chest.reward.id))chest.reward=null;
@@ -255,8 +254,12 @@ namespace Hellscript
             bool success=Transact(requestId,operation,staged=>{committed=StagedRun(staged,run);return mutation(committed);});
             if(!success||committed==null)return success;
             // Keep the root RunState object used by the controller and UI; adopt the committed snapshot.
-            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(committed),run);NormalizeRun(run);AdoptPuzzleRun(run);return true;
+            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(committed),run);NormalizeRun(run);AdoptTutorialRun(run);return true;
         }
+        // A live run this store commits: the suspended rift, or the guide stage's checkpoint.
+        bool OwnedRun(RunState run)=>run!=null&&run.heroId==Data.Hero.id&&(Data.suspendedRun==run||GuideTutorial.Running(run)&&Data.guide.tutorialRun==run);
+        RunState StagedRun(AccountSave account,RunState run)=>Data.suspendedRun==run?account.suspendedRun:account.guide.tutorialRun;
+        void AdoptTutorialRun(RunState run){if(GuideTutorial.Running(run))Data.guide.tutorialRun=run;}
         static System.Collections.Generic.IEnumerable<Item> RecordedItems(AccountSave a)
             =>a.records?.Where(r=>r?.review?.equipment!=null).SelectMany(r=>r.review.equipment).Where(i=>i!=null)??Enumerable.Empty<Item>();
         static System.Collections.Generic.IEnumerable<Item> PersistedItems(AccountSave a)
@@ -404,7 +407,7 @@ namespace Hellscript
             if(committed==null){Error="상자 지급 기록과 진행 상태가 다릅니다. 저장된 균열을 다시 불러와 주세요.";return false;}
             var result=committed.layout.chests.Single(c=>c.id==chest.id);
             chest.phase=result.phase;chest.progress=result.progress;chest.dropId=result.dropId;
-            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;run.journal=committed.journal;AdoptPuzzleRun(run);return true;
+            run.drops=committed.drops;run.nextId=committed.nextId;run.earnedGold=committed.earnedGold;run.journal=committed.journal;AdoptTutorialRun(run);return true;
         }
         bool Write(AccountSave data,HuntEdictEditSession edictSession=null)
         {

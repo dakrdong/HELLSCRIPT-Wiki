@@ -1,5 +1,7 @@
 # Puzzle tutorial L2/L5/L7 simulation prototypes
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 > 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
 
 Created: 2026-10-07 · [한국어](Puzzle_Level_Prototypes.md)

@@ -1,5 +1,7 @@
 # Tutorial forge and the removed summary tab
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 > 2026-10-08 (PR #77): Maintenance puzzle P2 (the +1 enhancement with 110 trial gold) is replaced by the equipment-enhancement level L14 and gone; gear enhancement also opens after the first loss at L14, through the same `ForgeOpen` gate. Three faces of danger and graduation became L15 and L16. "L15" in the table below means the last level (`PuzzleTutorial.Count`). See [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
 
 Updated: 2026-10-08 · [한국어](Tutorial_Forge_20261008.md)

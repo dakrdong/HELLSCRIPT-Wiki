@@ -50,13 +50,7 @@ namespace Hellscript
                 State.position=previewScenario.hero;
             }
             if(fresh&&IsGuide){State.layout=GuideTutorial.Layout();State.position=State.layout.start;}
-            else if(fresh&&IsTutorial)
-            {
-                if(!IsPuzzle)State.tutorialFlowVersion=ProloguePhase.PitFlow;
-                State.layout=PitMap();
-                if(IsPuzzle){State.layout.fingerprint=PuzzleTutorial.Fingerprint;State.layout.start=PuzzleLevel.hero;}
-                State.position=State.layout.start;
-            }
+            else if(fresh&&IsTutorial){State.tutorialFlowVersion=ProloguePhase.PitFlow;State.layout=PitMap();State.position=State.layout.start;}
             if(fresh&&State.training<0)
             {
                 State.layout=RiftGenerator.Generate(State.rng,State.id,State.stage,Hero.heroClass,Hero.lastRiftFingerprint,Hero.lastRiftBoss,forcedObjective:forcedObjective,tuning:Tuning);
@@ -67,8 +61,7 @@ namespace Hellscript
             if(State.layout==null||State.layout.rooms==null||State.layout.rooms.Count==0)State.layout=RiftLayout.Legacy(State.theme);
             if(fresh&&IsTrainingGround)PrepareTrainingArena();
             if(State.rewardRng==0)State.rewardRng=State.rng;
-            // Fresh arenas are normalized before trial spawns and their receipts exist.
-            GameStore.NormalizeRun(State,fresh);Map=new RiftNavigation(State.layout,savedRoutes:State.navigationRoutes);
+            GameStore.NormalizeRun(State);Map=new RiftNavigation(State.layout,savedRoutes:State.navigationRoutes);
         }
         void TrySpawnBoss(float dt)
         {

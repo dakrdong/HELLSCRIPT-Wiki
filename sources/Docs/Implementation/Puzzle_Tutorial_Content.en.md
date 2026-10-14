@@ -1,5 +1,7 @@
 # Puzzle tutorial content — stage 5
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 > 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
 
 Written 2026-10-07. Implements mandatory tutorial v5 L3–L8, disclosure restrictions, scouting, actual damage reviews, the hint ladder and A/B comparisons using copies of the real hero. **The final L4 configuration and acceptance criteria are updated in the [stage 9 record](Puzzle_Tutorial_Final_Acceptance.en.md).** This is not a completed-tutorial report.

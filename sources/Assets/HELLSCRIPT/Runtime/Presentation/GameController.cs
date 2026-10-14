@@ -298,7 +298,7 @@ namespace Hellscript
         public void ReturnTown()
         {
             CancelRiftEntry();
-            if(TutorialActive){if(Combat.State.tutorialReplay)FinishTutorial();else UI.ShowTutorialPrompt();return;}
+            if(TutorialActive){UI.ShowTutorialPrompt();return;}
             SettleRiftAttendance(combatClock.Sample(Time.realtimeSinceStartupAsDouble));
             ExitIdle(false);RestoreForegroundClock();
             CancelPotionDeparture();string visit=Combat?.State.training<0?"return:"+Combat.State.id:PotionVisit();
@@ -346,7 +346,7 @@ namespace Hellscript
         public void Notify(string message){Notice=message;UI.ShowToast(message);}
         public bool Save()
         {
-            if(TutorialActive){if(Combat.State.tutorialReplay)return true;Combat.CapturePuzzleHunt();if(!Combat.IsPuzzle||!RepeatHunt.Terminal(Combat.State))Store.Data.guide.tutorialRun=Combat.State;bool saved=Store.Save();if(!saved)Notify(Store.Error);return saved;}
+            if(TutorialActive){Store.Data.guide.tutorialRun=Combat.State;bool saved=Store.Save();if(!saved)Notify(Store.Error);return saved;}
             if(Combat!=null)Store.Data.suspendedRun=Combat.State.training<0&&Active?Combat.State:null;
             if(Combat!=null&&!Active&&Store.Data.repeatHunt?.runId==Combat.State.id)Store.Data.repeatHunt.pendingResult=Combat.State;
             if(Store.Save())return true;
@@ -385,8 +385,7 @@ namespace Hellscript
             if(run.portal&&Active&&!IdleHunting&&UI.Page!="bag"&&UI.Page!="warehouse"&&UI.Page!="gem-menu")UI.ShowBag(true);
             if(!Active&&!resultShown)
             {
-                resultShown=!Combat.IsPuzzle||run.tutorialReplay||Store.RecordPuzzleAttempt(run);
-                if(!resultShown){Notify(Store.Error);return;}
+                resultShown=true;
                 if(run.training<0)CompleteHuntResult();else Save();if(ComparisonRun)CompleteComparison();if(Combat.IsTrainingGround)RecordTrainingGround();if(!IdleHunting){if(TutorialActive)UI.PresentTutorialStep();else UI.ShowResult();}
             }
             if(!Active&&!wasActive&&!backgroundPaused&&!foregroundResumeRequired&&!UI.BlocksRepeat&&(IdleHunting||UI.Page=="result")&&run.training<0)TickRepeat(repeatReal);

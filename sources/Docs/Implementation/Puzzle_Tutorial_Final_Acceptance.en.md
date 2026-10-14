@@ -1,5 +1,7 @@
 # Puzzle tutorial final integration — stage 9
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 Written 2026-10-07. [한국어](Puzzle_Tutorial_Final_Acceptance.md) · [Evidence](Evidence/Puzzle_Final_Acceptance.json)
 
 Stages 1–8 include the skill-tree improvements from `main` (`57bfd1ac`) and the latest workflow/validator cache (`47f98fbb`, merge `09d54317`). The latter has no game, asset or package changes, so existing game results are reused. The unfiltered Edit Mode suite ran once; all eight reported failures were repaired and verified through focused checks. macOS journey acceptance and three OFF/three ON effects measurements are complete. This execution ends at commits, pushes and PRs. The merger owns merging and public wiki deployment.

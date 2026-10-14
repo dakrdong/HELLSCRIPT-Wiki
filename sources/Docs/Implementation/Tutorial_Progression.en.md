@@ -1,5 +1,7 @@
 # Tutorial implementation and validation
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 ## 2026-10-07 puzzle core
 
 New mandatory entry now runs v5 levels 1–2. `AccountGuide.puzzle` owns the hero, current level, attempts, clears, hints and fixed starting kit. `GameStore.Puzzle.cs` validates first-clear XP and retry ownership. Edict disclosure and skill tracks use level permissions ahead of ordinary rift progression. `tutorial-v5` and the saved wave cursor prevent duplicate spawns on restore. Earlier prologue tables and counts below are historical. [Current core](Puzzle_Tutorial_Core.en.md).

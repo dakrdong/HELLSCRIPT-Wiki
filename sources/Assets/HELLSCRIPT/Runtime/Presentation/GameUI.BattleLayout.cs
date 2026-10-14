@@ -34,15 +34,14 @@ namespace Hellscript
             powerSavingButton.gameObject.SetActive(run.training<0&&!run.tutorial);
             string escapeLabel=run.training<0&&!run.tutorial?"포탈로 복귀":"탈출";
             escapeButton=Button(header,escapeLabel,ConfirmEscape,Color.clear);escapeButton.targetGraphic=Emblem(escapeButton,"menu-escape");
-            escapeButton.name="battle-escape";escapeButton.gameObject.SetActive(!run.tutorial||run.tutorialReplay);
+            escapeButton.name="battle-escape";escapeButton.gameObject.SetActive(!run.tutorial);
             powerSavingCaption=Label(header,"절전 모드",13,pale,TextAnchor.UpperCenter);powerSavingCaption.gameObject.SetActive(powerSavingButton.gameObject.activeSelf);
             escapeCaption=Label(header,escapeLabel,13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
-            AddRiftMinimap(run);incomingHud=null;monsterGraph=bossGraph=null;
-            // The puzzle tutorial shows the live DPS graph and the damage taken per monster kind from level 2.
-            if(game.TrainingGroundRun||run.training<0&&!run.tutorial||PuzzleGraphs(run))BuildTrainingHud(run);
-            if(PuzzleGraphs(run))BuildIncomingHud();else if(trainingHud!=null&&DamageGraphsWanted(run))BuildDamageGraphs();
+            AddRiftMinimap(run);monsterGraph=bossGraph=null;
+            if(game.TrainingGroundRun||run.training<0&&!run.tutorial)BuildTrainingHud(run);
+            if(trainingHud!=null&&DamageGraphsWanted(run))BuildDamageGraphs();
             BuildRiftActivityHud(run);RefreshHud();ReflowBattleHud();
         }
         void ReflowBattleHud()
@@ -86,7 +85,7 @@ namespace Hellscript
             Place(bossHud,(w-bossWidth)*.5f,bossY,bossWidth,66);
             bossTitle.alignment=TextAnchor.UpperCenter;bossActionLabel.alignment=TextAnchor.UpperCenter;ReflowBossText();
             PlaceTrainingHud(w,narrow,medals,game.TrainingGroundRun?default:panel);
-            PlaceIncomingHud();PlaceDamageGraphs();
+            PlaceDamageGraphs();
             PlaceRiftActivityHud(w);
             UpdateBattleBrief();
         }

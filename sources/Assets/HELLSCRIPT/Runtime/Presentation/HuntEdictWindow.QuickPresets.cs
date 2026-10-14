@@ -100,7 +100,7 @@ namespace Hellscript
         // The current answer shown under a group chip: the matching preset's name, or "Custom".
         string QuickSubtitle(HuntEdictUiGroup group)
         {
-            if(!PuzzleLesson&&group.ids.Any(id=>!Disclosed(id))||group.ids.Contains("bag.warehouseFull")||!QuickAllowed(group))return "";
+            if(group.ids.Any(id=>!Disclosed(id))||group.ids.Contains("bag.warehouseFull")||!QuickAllowed(group))return "";
             string scope=HuntEdictQuickPresets.GlobalScope(group),selected=QuickPresetSelection(scope);
             return selected==HuntEdictQuickPresets.Custom?Loc.T("직접 설정"):HuntEdictQuickPresets.For(scope).FirstOrDefault(p=>p.id==selected)?.Name??"";
         }

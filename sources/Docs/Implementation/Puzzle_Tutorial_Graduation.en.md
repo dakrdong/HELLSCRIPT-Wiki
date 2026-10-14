@@ -1,5 +1,7 @@
 # Puzzle tutorial graduation — stage 8
 
+> Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
+
 > 2026-10-08: The level numbers, windups and cooldowns described here record the earlier build that adjusted monster patterns. The current levels follow [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).
 
 Written 2026-10-07. [한국어](Puzzle_Tutorial_Graduation.md) · [Operating puzzles](Puzzle_Tutorial_Operations.en.md) · [Values and hashes](Evidence/Puzzle_Graduation_Matrix.json)

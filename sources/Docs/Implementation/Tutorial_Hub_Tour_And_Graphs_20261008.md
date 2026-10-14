@@ -1,5 +1,7 @@
 # 대기실 첫 방문 안내, 2레벨 시작 카드, 실시간 그래프
 
+> 갱신일: 2026-10-14 · 퍼즐 레벨 튜토리얼은 은퇴해 코드·테스트·빌드 포함 에셋을 삭제했다. 이 문서는 당시 기록이다. [은퇴 기록](Puzzle_Tutorial_Retirement_20261014.md)
+
 갱신일: 2026-10-08 · English: [Waiting-room tour, level 2 start card and live graphs](Tutorial_Hub_Tour_And_Graphs_20261008.en.md)
 
 이어지는 기록: [튜토리얼 도입부·새 기술 안내와 진행·타이밍 점검](Tutorial_Opening_20261008.md)(PR #80). 이 문서는 그 뒤에 사용자가 요청한 것들을 다룬다(1~3: 시작 카드·대기실 안내·실시간 그래프, 4~6: 레벨 2 대화와 칙령 안내·패배 카드 버튼·몬스터 모델).

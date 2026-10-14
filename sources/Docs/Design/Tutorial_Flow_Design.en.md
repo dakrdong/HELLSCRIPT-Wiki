@@ -1,12 +1,14 @@
 # Tutorial progression and content guidance
 
-## Current mandatory flow: puzzle v5
+## Current mandatory flow: guide tutorial stage
 
-Starting at level 1: scout → save real skills and Hunt Edict → automatic combat → review → a fresh retry or the next level. First-clear XP is granted once to the owned hero. Completed-level replays use a detached copy of that level’s starting kit without rewards. Levels 1–2 are connected; later content and the hub follow in subsequent stages. Entering the new runner migrates unfinished v4 checkpoints to level 1 while preserving equipment and XP. Completed accounts remain exempt. [Core implementation and checks](../Implementation/Puzzle_Tutorial_Core.en.md).
+A new account plays the tutorial-only stage (flow 6) once, as the warrior, guided by Velina, goddess of the edict. Walking the road, the player learns and equips Whirlwind and changes combat position, target priority and loot pickup in the real Hunt Edict; defeating the boss at the end of the road arrives in town with every feature open. Other classes are covered by the warrior's stage and start in town. [Script and implementation](../Implementation/Guide_Tutorial_Script_20261011.en.md).
+
+The puzzle-level tutorial (v5) was retired on 2026-10-14 and its code, tests and assets were deleted. Saves that were partway through it are handled as described in the [puzzle tutorial retirement record](../Implementation/Puzzle_Tutorial_Retirement_20261014.en.md).
 
 The earlier prologue phases and numbers below are historical, rather than the new-account entry flow.
 
-Updated: 2026-09-29
+Updated: 2026-10-14
 
 > 2026-10-04: See [Tutorial_Chapters.en.md](Tutorial_Chapters.en.md) for the chapter-based redesign and the code/document differences.
 

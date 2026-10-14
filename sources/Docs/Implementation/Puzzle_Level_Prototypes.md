@@ -1,5 +1,7 @@
 # 퍼즐 튜토리얼 L2·L5·L7 시뮬 프로토타입
 
+> 갱신일: 2026-10-14 · 퍼즐 레벨 튜토리얼은 은퇴해 코드·테스트·빌드 포함 에셋을 삭제했다. 이 문서는 당시 기록이다. [은퇴 기록](Puzzle_Tutorial_Retirement_20261014.md)
+
 > 2026-10-08: 이 문서의 레벨 수치·예고·쿨타임 설명은 몬스터 패턴을 조정하던 이전 구현의 기록이다. 현재 구성은 [몬스터 고유 패턴 원칙](Puzzle_Tutorial_Native_Patterns.md)을 따른다.
 
 작성일: 2026-10-07 · [English](Puzzle_Level_Prototypes.en.md)
