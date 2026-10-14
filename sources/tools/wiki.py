@@ -39,7 +39,7 @@ def digest(data):
 
 def save(path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
-    content = json.dumps(obj, ensure_ascii=False, indent=2) + '\n'
+    content = json.dumps(obj, ensure_ascii=False, indent=None if path.name=='data.json' else 2) + '\n'
     if not path.exists() or path.read_text() != content:
         temporary = path.with_suffix(path.suffix + '.tmp')
         temporary.write_text(content)
@@ -744,6 +744,9 @@ def build_edict_disclosures():
 
 def build_evidence():
     rows=[]
+    preserved=json.loads(read('Wiki/validation-source-manifest.json'))
+    missing=[r['path'] for r in preserved['reports'] if not (ROOT/r['path']).is_file() or digest((ROOT/r['path']).read_bytes())!=r['sha256']]
+    if missing:raise ValueError('Restore preserved validation reports from '+preserved['recoveryCommit']+': '+', '.join(missing))
     paths=sorted(list((ROOT/'Artifacts/Validation').glob('*editmode*.xml'))+list((ROOT/IMPL/'BlacksmithEvidence').glob('*editmode.xml'))+list((ROOT/IMPL/'LegendaryExpansionEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'ClassSkillEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'CompletedMergeEvidence').glob('*editmode*.xml'))+list((ROOT/IMPL/'OptimizationEvidence20260930').glob('*editmode*.xml')))
     paths+=sorted((ROOT/IMPL/'DailyQuestFixedEvidence20261001').glob('*editmode*.xml'))
     paths+=sorted((ROOT/IMPL/'DailyQuestResponsiveEvidence20261001').glob('*editmode*.xml'))
