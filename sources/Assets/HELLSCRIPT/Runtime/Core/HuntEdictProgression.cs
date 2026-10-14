@@ -117,10 +117,11 @@ namespace Hellscript
         public static void ValidateChange(AccountSave a,HeroSave hero,HuntEdictLoadout candidate,IEnumerable<SkillPresetSelection> recipes=null)
         {
             if(Legacy(a))return;
+            // Re-entry from a retired tutorial uses only the exact guide baseline; locked options stay locked.
+            if(Tutorials.Mandatory(a)&&hero.id==a.Hero.id&&hero.heroClass==HeroClass.Warrior&&(a.guide.mapHero==""||a.guide.mapHero==hero.id))
+            {var starter=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(starter,GuideTutorial.BarePowers(hero));if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(starter)))return;}
             if(Tutorials.Mandatory(a)&&a.guide.mapHero=="")
             {
-                if(hero.heroClass==HeroClass.Warrior)
-                {var starter=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(starter,GuideTutorial.BarePowers(hero));if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(starter)))return;}
                 var initial=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(initial,GameStore.ProloguePowers(hero,true));
                 if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(initial)))return;
                 var bare=ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(hero));

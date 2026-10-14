@@ -1,0 +1,50 @@
+{
+  "createdAt": "2026-10-14T14:53:42.619304+00:00",
+  "sourceCommit": "9b1b16e918bbd83f275a2e5a3ed1bb47145f88c2",
+  "reusedFullSuite": {
+    "sourceCommit": "bd785e8e0fb7df92e190fcf85b4d66bfde63e26b",
+    "total": 5781,
+    "passed": 5778,
+    "failed": 0,
+    "skipped": 3,
+    "durationSeconds": 6007.4113499,
+    "report": "editmode-final.xml",
+    "sha256": "afd3c1094f10270101d77aef789d43ffaac974c695ea53f7143329c967e00fd1"
+  },
+  "reusedArtTests": 18,
+  "reusedRuntimeCaptures": 12,
+  "unchangedPathsVerified": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/FieldLook.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldFx.Persistent.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Rift.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Props.cs",
+    "Assets/HELLSCRIPT/Resources/World/Fields",
+    "Assets/HELLSCRIPT/Tests/Editor/CasualFieldArtTests.cs",
+    "Packages/manifest.json",
+    "Packages/packages-lock.json",
+    "ProjectSettings/ProjectVersion.txt"
+  ],
+  "changedMainCommit": "bbe131dede9e8fe3b56691732bc1c04c218a02ad",
+  "additionalScope": "PR132-changed guide/tutorial, save, combat, economy, localization and UI owners only",
+  "retiredPuzzleDisplayCasesRemoved": 4,
+  "currentPrologueDisplayCases": 1,
+  "uiContract": "15/15 passed on final RuntimeFieldSmoke inputs",
+  "uiRefresh": "14 bindings guarded; 184 UI source files inventoried",
+  "initialLatestMainFocused": {
+    "total": 698,
+    "passed": 697,
+    "failed": 1,
+    "report": "latest-main-focused.xml"
+  },
+  "migrationCorrection": {
+    "sourceCommit": "cbe52141",
+    "report": "guide-migration-regression.xml",
+    "total": 120,
+    "passed": 120,
+    "failed": 0,
+    "scope": "exact guide baseline for owned mandatory warrior; locked setting boundary and guide/save callers",
+    "remaining697CasesReused": true
+  },
+  "nativeSummary": "native-summary.json",
+  "fixtureOnlyChangesAfter120Regressions": "RuntimeFieldSmoke is enabled only by its explicit development/editor flag; other source and completed checks reused."
+}

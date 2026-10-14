@@ -17,7 +17,8 @@ namespace Hellscript
             // The field's own floor art when it exists; otherwise the shared rift stone tinted per field.
             Material ground=FieldTile(field,"Floor");
             if(ground==null){ground=FieldGround(field);var paving=Resources.Load<Texture2D>("Art/RiftStone");if(paving!=null)ground.mainTexture=paving;}
-            if(layout.rooms.Any(r=>r.outline!=null&&r.outline.Count>=3))BuildOrganicFloor(run,ground,FieldTile(field,"Trim")??darkStone,FieldTile(field,"Wall")??FieldWall(field));
+            var edge=FieldTile(field,"Trim")??FieldWall(field);var wall=FieldTile(field,"Wall")??FieldWall(field);
+            if(layout.rooms.Any(r=>r.outline!=null&&r.outline.Count>=3))BuildOrganicFloor(run,ground,edge,wall);
             else
             {
             foreach(var corridor in layout.corridors)for(int n=1;n<corridor.points.Count;n++)
@@ -27,7 +28,7 @@ namespace Hellscript
                 {
                     Vector2 from=Vector2.Lerp(a,b,part/(float)pieces),to=Vector2.Lerp(a,b,(part+1f)/pieces),middle=(from+to)*.5f;
                     Vector2 size=new Vector2(Mathf.Abs(from.x-to.x),Mathf.Abs(from.y-to.y))+Vector2.one*corridor.width;
-                    var piece=Shape("Passage "+corridor.index+" part "+part,PrimitiveType.Cube,world.transform,Position(middle)-Vector3.up*.25f,new Vector3(size.x,.5f,size.y),darkStone);
+                    var piece=Shape("Passage "+corridor.index+" part "+part,PrimitiveType.Cube,world.transform,Position(middle)-Vector3.up*.25f,new Vector3(size.x,.5f,size.y),ground);
                     passageGeometry.Add(new PassageView{go=piece,roomA=corridor.roomA,roomB=corridor.roomB,center=middle});piece.SetActive(false);
                 }
             }
@@ -47,7 +48,7 @@ namespace Hellscript
                         float end=Mathf.Clamp(gap.x,-half,half);if(end-start>.01f)
                         {
                             float middle=(start+end)*.5f;Vector2 p=room.position+normal*((vertical?room.size.x:room.size.y)*.5f+.18f)+(vertical?Vector2.up:Vector2.right)*middle;
-                            Shape("Room boundary",PrimitiveType.Cube,roomRoot,Position(p)+Vector3.up*.5f,vertical?new Vector3(.35f,1,end-start):new Vector3(end-start,1,.35f),darkStone);
+                            Shape("Room boundary",PrimitiveType.Cube,roomRoot,Position(p)+Vector3.up*.5f,vertical?new Vector3(.35f,1,end-start):new Vector3(end-start,1,.35f),wall);
                         }
                         start=gap.y;
                     }
@@ -64,7 +65,7 @@ namespace Hellscript
             foreach(var o in layout.obstacles)
             {
                 if(o.kind=="Chest"||o.kind=="Shrine"||o.kind=="OfferingAltar")continue;
-                Material material=o.kind=="Brazier"?trim:o.kind=="Altar"?Mat("Drowned altar",new Color(.13f,.24f,.27f)):darkStone;
+                Material material=FieldWall(field);
                 var type=o.radius>0?PrimitiveType.Cylinder:PrimitiveType.Cube;
                 Vector3 size=o.radius>0?new Vector3(o.radius*2,o.height*.5f,o.radius*2):new Vector3(o.halfSize.x*2,o.height,o.halfSize.y*2);
                 var owner=layout.rooms.FirstOrDefault(room=>room.Bounds.Contains(o.position));
@@ -136,11 +137,12 @@ namespace Hellscript
             if(Resources.Load<Texture2D>(WorldArt.Root+path+"_A")==null)return null;
             artMaterials??=new WorldArtMaterials();var m=artMaterials.Get(path);if(m==null)return null;
             m.SetColor("_GlowColor",Color.black);m.SetColor("_RimColor",Color.black);
-            if(tile=="Floor")m.SetColor("_DetailTint",new Color(.78f,.76f,.72f,.35f));
+            if(tile=="Floor")m.SetColor("_DetailTint",new Color(.92f,.95f,.9f,.1f));
             return m;
         }
-        // Walls of a field without wall art: its ground tint over the dark rift stone.
-        Material FieldWall(int field)=>Mat("Field wall "+field,Color.Lerp(new Color(.07f,.1f,.14f),FieldGround(field).color*.2f,.5f));
+        // Missing prop kinds and old rectangular tutorial walls keep their geometry,
+        // but use the field's bright stone palette rather than a black placeholder.
+        Material FieldWall(int field)=>Mat("Field wall "+field,Color.Lerp(FieldLook.Field(field).equator,Color.white,.65f));
         void BuildOrganicFloor(RunState run,Material ground,Material edge,Material wall)
         {
             var surface=new RiftSurface(run.layout);uint seed=run.layout.decorationSeed;int field=run.layout.Field;var anchors=new List<RiftFloorMesh.WallAnchor>();
