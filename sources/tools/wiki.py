@@ -379,7 +379,7 @@ def build_resources(databases):
     with Image.open(ROOT/title_path) as title_image:
         title_size=f'{title_image.width} × {title_image.height}'
     rows.append(record('asset-title-sanctuary','TitleSanctuary.png','이미지 원본',
-        'iPhone 17 Pro Max 가로·세로와 PC에 대응하는 타이틀 배경입니다. 안개·구름 그림자·균열 조명·불씨는 별도 셰이더로 움직입니다.',
+        '균열 입장·결과 창의 성소 그림입니다. 2026-10-14부터 타이틀 화면은 영웅 절벽·먼 균열 레이어(TitleVista)를 씁니다.',
         {'원본 경로':title_path,'해상도':title_size,'SHA-256':digest(title_raw),
          'Unity GUID':re.search(r'^guid: (\w+)',title_meta,re.M)[1],
          '제작 방법':'Codex 내장 image_gen; 생성 원본 PNG를 변경 없이 복사',

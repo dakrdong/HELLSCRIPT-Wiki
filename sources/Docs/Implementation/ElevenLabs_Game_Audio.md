@@ -74,3 +74,16 @@ Unity Edit Mode 31개, 오프라인 도구 7개와 공통 UI 계약 검사 9개�
 이전 음악·설정 실행에서는 네 음악의 스트림 진행·반복·전환, 음량·음소거와 재시작 후 설정 복원을 확인했다. [음악](ElevenLabsAudioEvidence/native-audio-music.txt) · [설정](ElevenLabsAudioEvidence/native-audio-initial.txt) · [재시작](ElevenLabsAudioEvidence/native-audio-restart.txt)
 
 macOS 게임 흐름 검사는 합성 EventSystem 입력과 임시 계정을 사용한다. 일부 마을 버튼은 가려져 콜백을 직접 호출하며, 선택 검사인 대장간 조작은 포인터 차단 시 건너뛴다. 이 결과를 실제 모바일 터치나 성능 검사로 보고하지 않는다. 공개 위키는 병합된 `main`에서만 게시한다.
+
+## 추가: 타이틀 로그인 연출 효과음 (2026-10-14)
+
+[타이틀 로그인 연출](Title_Screen.md)에 쓸 효과음 2종을 ElevenLabs `eleven_text_to_sound_v2`(MCP, 프롬프트 반영도 0.65)로 새로 만들었다. 신호마다 4개씩 생성하고 음량 곡선으로 1개를 골랐다.
+
+| 신호 | 용도 | 채택 생성 ID | 길이 |
+|---|---|---|---|
+| `flow.title_flight` | 출발할 때 바람 돌진 | `PmH0ZtJAEtC86aHk2V7O` | 1.70초 |
+| `flow.title_rift` | 균열 빛이 터질 때 | `e9C3rrKPb3aFTcuHuWXP` | 1.50초 |
+
+원본 MP3는 `AudioSources/ElevenLabs/Sources/`에 보존했고 `elevenlabs_audio.py`로 마스터했다. 파일은 효과음 456개와 배경음 4곡, 재생 ID는 285종이 됐다. 생성 비용은 8개에 54.7크레딧이었다(사전 견적은 180크레딧). 사람이 직접 들어 본 확인은 하지 않았다.
+
+참고: 같은 날 `main`에서는 D4 스킬 ID 이전 때문에 `sfx-catalog.json`과 `bank.json`이 서로 달라 `generate_sfx.py --check`와 `elevenlabs_audio.py --check`가 실패한다(이번 변경 전부터 그렇다). 새 두 신호의 뱅크 행은 생성기가 쓰는 형식과 같고, `test_elevenlabs_audio.py`는 통과한다.

@@ -1,0 +1,26 @@
+Use the installed imagegen skill in built-in image_gen mode. Generate TWO images with NATIVE TRANSPARENCY (PNG with a real alpha channel and a transparent background - not a checkerboard, not white, not a colour key, no background removal afterwards), one image_gen call each, and save them in this folder, copied byte-for-byte from ~/.codex/generated_images/...:
+1. vista_heroes_left.png - square 1:1
+2. vista_heroes_right.png - square 1:1
+Then write manifest.json (for each image: exact prompt, source path, sha256, pixel size, alpha stats including the share of fully transparent pixels and the alpha of the four corners, model "unknown", number of attempts).
+
+REFERENCES ATTACHED
+- master_vista_v01.png: the approved master concept. These two images are its LEFT and RIGHT foreground groups, redrawn as separate cut-out layers. Match its rendering, lighting (warm sun from the upper left, violet rim light from the rift ahead of the heroes), cliff rock style, scale and hero poses.
+- sheet_1_warrior_m.png ... sheet_6_archer_f.png: canonical hero designs with BACK views. Keep each hero's design exact.
+
+IMAGE 1 - LEFT GROUP ON ITS CLIFF
+- A grassy, pale-grey rocky cliff top like the master's left cliff. The rock mass touches the LEFT edge and the BOTTOM edge of the canvas and fills the lower 36 percent on the left side. Its top is a fairly level grassy ledge with small white flowers. On its RIGHT side the rock ends in a sheer cliff face that drops straight down out of the bottom edge, at about 72 percent of the canvas width.
+- On the ledge, seen from BEHIND and turned toward the upper right (where the distant rift is): the male archer (green hood, bow in hand) at the outer left on a slightly higher boulder, shading his eyes with one hand; the female mage (white star hat, long white hair, white-and-blue robe, spellbook under her arm) in the middle; the male warrior (steel armour, blue scarf and cape, round star shield on his back, short sword resting on his shoulder) nearest the cliff edge on the right.
+- Hair, scarf, capes and robes blow toward the right.
+- The heroes' highest point (hat tip or weapon) is about 16 percent from the top; their feet stand on the ledge about 64 percent from the top. No hero crosses a canvas edge; only the rock touches edges.
+- Everything that is not rock, grass or hero is FULLY TRANSPARENT: no sky, no clouds, no distant scenery, no mist, no glow, no cast shadow outside the rock.
+
+IMAGE 2 - RIGHT GROUP ON ITS CLIFF (mirror composition of image 1)
+- The rock touches the RIGHT edge and the BOTTOM edge; its sheer cliff face is on the LEFT side, at about 28 percent of the canvas width.
+- Seen from BEHIND and turned toward the upper left: the female warrior (orange spiky ponytail, fur-trimmed outfit, axe resting on her shoulder, wooden shield on her back) nearest the cliff edge on the left; the male mage (blue pointed hat, blue robe, orb staff planted beside him) in the middle; the female archer (green hood, long black hair, bow) at the outer right on a slightly higher boulder, pointing toward the rift.
+- Hair, robes and cape blow toward the left.
+- Same scale, lighting and rock style as image 1 so the two groups match each other; the same transparency rules.
+
+BOTH IMAGES
+Bright casual medieval-fantasy game art for ages 12 and up ("shonen-manga chibi", Dragon Quest / Cookie Run: Kingdom spirit), chibi proportions about 3.5 to 4 heads tall, polished in-engine 3D cel-shaded look: flat colour plus one hard shadow tone, bold clean outlines, simple matte materials. Crisp and in focus: no depth-of-field blur. No text, letters, logo, watermark or signature.
+
+SELF-CHECK for each image: measure that the alpha channel exists, the four corners away from the rock are alpha 0 (for image 1 the top-left, top-right and bottom-right corners; for image 2 the top-left, top-right and bottom-left corners) and the area above the heroes is fully transparent; verify all three heroes are seen from behind and match their sheets and that the rock touches the two required edges. If a check fails, generate that image once more with a corrected prompt (two attempts maximum), keep the better one, and report the measured alpha stats.

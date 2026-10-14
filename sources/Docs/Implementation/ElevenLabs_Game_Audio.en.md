@@ -74,3 +74,16 @@ Earlier signal measurements remain applicable to byte-identical masters: all 454
 Earlier music/settings runtime tests covered four streaming tracks, loop progress, transitions, volume, mute and settings restoration after process restart. [Music](ElevenLabsAudioEvidence/native-audio-music.txt) · [Settings](ElevenLabsAudioEvidence/native-audio-initial.txt) · [Restart](ElevenLabsAudioEvidence/native-audio-restart.txt)
 
 The macOS gameplay smoke uses synthetic EventSystem input and disposable accounts. Covered town controls may use direct callbacks; optional forge interaction is skipped if pointer access is blocked. This is not physical mobile input or performance evidence. The public wiki is published only from merged `main`.
+
+## Addition: title login flight sounds (2026-10-14)
+
+Two new sound effects for the [title login flight](Title_Screen.en.md) were generated with ElevenLabs `eleven_text_to_sound_v2` (MCP, prompt influence 0.65). Four candidates were generated per cue and one was chosen from its loudness envelope.
+
+| Cue | Use | Adopted generation ID | Length |
+|---|---|---|---|
+| `flow.title_flight` | Wind rush as the flight starts | `PmH0ZtJAEtC86aHk2V7O` | 1.70 s |
+| `flow.title_rift` | Rift light burst | `e9C3rrKPb3aFTcuHuWXP` | 1.50 s |
+
+The original MP3s are kept in `AudioSources/ElevenLabs/Sources/` and were mastered with `elevenlabs_audio.py`. The set is now 456 sound effect files plus four music tracks, with 285 SFX identifiers. The eight generations cost 54.7 credits (the estimate said 180). No human listening check was done.
+
+Note: on the same day `main`'s `sfx-catalog.json` and `bank.json` disagree because of the D4 skill identifier migration, so `generate_sfx.py --check` and `elevenlabs_audio.py --check` fail (they already did before this change). The two new bank rows match the generator's format, and `test_elevenlabs_audio.py` passes.

@@ -9,21 +9,22 @@ namespace Hellscript
     // The title owns its presentation only; entering and choosing a hero still use GameController.
     public sealed partial class TitleScreenView:MonoBehaviour
     {
-        GameController game;Font font,displayFont;TitleAtmosphere atmosphere;Action settings;
+        GameController game;Font font,displayFont;TitleVista vista;Action settings;
         RectTransform root,home,logoGroup,toolbar,footline;CanvasGroup homeGroup;
         Button login,guest,server,enter,motion,language,options;
         Text logo,eyebrow,tagline,chapter,footnote,version,entryHint;
         Vector2 lastSize;float scale=1;bool wasSettingsOpen;
         public TitleSession Session {get;private set;}
-        public TitleAtmosphere Atmosphere=>atmosphere;
+        public TitleVista Vista=>vista;
         public bool DialogOpen=>dialog!=null;
         public string DialogKind {get;private set;}="";
         public RectTransform Home=>home;
+        public RectTransform Identity=>logoGroup;
         static readonly Color Bone=new Color(.91f,.865f,.75f),Gold=new Color(.65f,.49f,.3f),Muted=new Color(.67f,.69f,.69f),Slate=new Color(.047f,.049f,.053f,.93f),Red=new Color(.36f,.064f,.045f,.98f);
 
-        public void Initialize(GameController owner,Font bodyFont,TitleSession state,TitleAtmosphere backdrop,Action openSettings)
+        public void Initialize(GameController owner,Font bodyFont,TitleSession state,TitleVista backdrop,Action openSettings)
         {
-            game=owner;font=bodyFont;Session=state;atmosphere=backdrop;settings=openSettings;root=(RectTransform)transform;
+            game=owner;font=bodyFont;Session=state;vista=backdrop;settings=openSettings;root=(RectTransform)transform;
             displayFont=UiFonts.Display;
             if(displayFont==null)displayFont=font;
             toolbar=Rect("Title tools",root);
@@ -84,7 +85,8 @@ namespace Hellscript
             if(game.AccountOwnershipBusy)return;
             if(!Session.SignedIn){ShowLogin();return;}
             if(!game.AccountStorageReady){game.UI.ShowToast(game.Notice);return;}
-            game.Audio?.Play("flow.title_start");game.UI.OpenCharacterSelection();
+            // The login flight brings its own sound; the stone door only plays when motion is paused.
+            game.UI.OpenCharacterSelection();if(game.UI.TitleFlight==null)game.Audio?.Play("flow.title_start");
         }
         void Update()
         {

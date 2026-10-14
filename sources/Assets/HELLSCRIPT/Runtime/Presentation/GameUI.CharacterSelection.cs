@@ -10,6 +10,8 @@ namespace Hellscript
         public void OpenCharacterSelection()
         {
             if(!titleSession.SignedIn){ShowTitle();return;}
+            // Leaving the title flies its camera into the rift above whatever opens next; entry itself is unchanged.
+            DepartTitle();
             if(GuideTutorial.FirstStart(game.Store.Data)&&game.EnterFirstStart())return;
             characterSelection.Reset();ShowCharacterSelection();
         }

@@ -1,0 +1,30 @@
+Use the installed imagegen skill in built-in image_gen mode. Generate ONE landscape 16:9 image and save it in this folder as master_vista_v01.png, copied byte-for-byte from ~/.codex/generated_images/.... Then write manifest.json (exact prompt, source path, sha256, pixel size, alpha stats, model "unknown", number of attempts).
+
+REFERENCES ATTACHED
+- title_key_art_v05_styleD.png: the game's current title art. Use it ONLY for rendering style, palette and environment look (cel shading, clean outlines, bright sky, rounded trees, pale rocks). Do not copy its composition, poses or village.
+- sheet_1_warrior_m.png ... sheet_6_archer_f.png: canonical model sheets of the six heroes (front, three-quarter, side and BACK views). Keep every hero's design exact; their BACK views matter most here.
+
+PURPOSE
+Master concept for a layered, animated game title screen. The game will later redraw this picture as separate layers (far landscape, a close-up of the rift, two hero groups on their cliffs) and animate a camera that flies from behind the heroes toward the rift. The composition must be clean, readable and symmetrical in weight.
+
+SCENE
+In the spirit of the famous Zelda: Breath of the Wild key art: the six heroes stand on high cliff tops, seen FROM BEHIND, looking out over a vast valley toward a distant, ominous rift.
+- LEFT GROUP on a grassy rocky promontory that fills the lower-left corner: male warrior (steel armour, blue scarf, round star shield on his back, short sword resting on his shoulder) nearest the centre; female mage (white star hat, long white hair, white-and-blue robe, spellbook under her arm) beside him; male archer (green hood, bow in hand) on a slightly higher rock at the outer left, shading his eyes with one hand.
+- RIGHT GROUP on a matching promontory that fills the lower-right corner: female warrior (orange spiky ponytail, fur-trimmed outfit, axe resting on her shoulder, wooden shield on her back) nearest the centre; male mage (blue pointed hat, blue robe, orb staff planted beside him); female archer (green hood, long black hair, bow) on a slightly higher rock at the outer right, pointing toward the rift.
+- Every hero is turned toward the centre: we see their backs and a little of their profiles. Hair, scarves, capes and robes blow in a wind toward the centre. All heroes are crisp and in focus: NO depth-of-field blur anywhere in the picture.
+- CENTRE, far away (the focal point): a colossal, unsettling rock formation on the horizon - two giant jagged stone monoliths leaning apart - with a tall glowing CRACK between them. The fissure blazes magenta-violet with a white-hot core and crimson edges; broken rock shards float around it; a slow vortex of dark violet storm clouds swirls above it, lit from below by the glow. It must feel wrong and dangerous against the otherwise beautiful world, yet stay teen-friendly (no gore, no skulls, no monsters, no eyes in the crack).
+- Between the promontories: a deep green valley far below with forest canopies and soft mist, a winding river that leads the eye toward the rift, distant mountain ranges on both sides, and a few floating rock islands at middle distance near the rift.
+- Light: warm late-afternoon sun from the upper left; the heroes get a violet rim light from the rift ahead.
+
+COMPOSITION (the game UI depends on it)
+- The glowing centre of the crack sits exactly at the horizontal centre, about 47 percent down from the top.
+- Top 28 percent: calm sky with soft clouds only; no hero, no weapon, no tall rock reaches into it (the game draws its logo there).
+- Bottom centre (the middle 40 percent of the width, the bottom 30 percent of the height): only the distant valley in soft shadow; no hero, no rock, no bright detail (the game draws its login buttons there).
+- Each hero group with its promontory stays within the outer 33 percent of the width on its own side. The highest point of any hero, hat or weapon stays below 32 percent from the top. No hero is cropped by the frame.
+- Painted fully to every edge. Opaque image. No text, letters, logo, UI, frame, watermark or signature.
+
+STYLE
+"Shonen-manga chibi" for a bright casual medieval-fantasy 3D action game for ages 12 and up, in the spirit of Akira Toriyama's Dragon Quest designs and Korean hit mobile games such as Cookie Run: Kingdom. Chibi proportions about 3.5 to 4 heads tall. Rendered as a polished in-engine 3D cel-shaded look: flat colour plus one hard shadow tone, bold clean outlines with slight line-weight variation, simple matte materials, no glossy reflections, no fine surface noise, big readable forms. Bright harmonious palette (sky blue, grass green, warm yellow, coral, cream) with the rift's violet as the single ominous accent. Never a generic soft Pixar-style look.
+
+SELF-CHECK
+Open the result and verify: (1) the six heroes are seen from behind and match their sheets, three per side; (2) the crack's glowing centre is near (50%, 47%); (3) the top 28 percent and the bottom-centre button zone are free; (4) nothing is blurred. If a check fails, generate once more with a corrected prompt (two attempts maximum), keep the better one, and report which checks passed.

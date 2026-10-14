@@ -1,0 +1,30 @@
+Use the installed imagegen skill in built-in image_gen mode. Generate TWO images, one image_gen call each, and save them in this folder, copied byte-for-byte from ~/.codex/generated_images/...:
+1. vista_far_landscape.png - landscape 16:9
+2. vista_far_portrait.png - tall portrait, about 9:19.5 (a phone held upright)
+Then write manifest.json (for each image: exact prompt, source path, sha256, pixel size, alpha stats, model "unknown", number of attempts).
+
+REFERENCES ATTACHED
+- master_vista_v01.png: the approved master concept of this title screen. Reproduce its world, palette, lighting, rendering style and the position of the rift.
+- master_try1_rift_look.png: an earlier draft. Use it ONLY for the look of the rift: its bigger, brighter glowing crack and stronger violet storm vortex. Ignore its composition.
+
+PURPOSE
+This is the FAR BACKGROUND LAYER of a layered, animated game title screen. The six heroes and the two foreground cliffs of the master are separate layers drawn later, so they must NOT appear here. The game camera will zoom about 2.5 times straight into the rift, so the rift must be crisp, detailed and exactly where specified.
+
+IMAGE 1 (landscape 16:9): the master's view WITHOUT the six heroes and WITHOUT the two foreground cliffs. Where the cliffs were, continue the deep valley naturally (forest canopies, soft mist, rocky ridges), so the whole frame is the open view from a high vantage point.
+- The glowing centre of the crack sits exactly at the horizontal centre, 47 percent down from the top.
+- The rift formation (two colossal jagged stone monoliths leaning apart with a tall glowing fissure between them) is about 1.4 times larger than in the master: it spans roughly 34 to 60 percent of the image height. The fissure blazes magenta-violet with a white-hot core and crimson edges; broken rock shards float around it; a vortex of dark violet storm clouds swirls above it, lit from below. Ominous but teen-friendly: no gore, skulls, eyes, faces or monsters.
+- The winding river leads the eye from the lower middle to the rift. Floating rock islands hover near the rift at middle distance, as in the master.
+- Top 26 percent: calm sky with soft clouds only (the logo goes there); the vortex stays below 26 percent from the top.
+- Bottom 32 percent: the valley floor far below in soft blue-green shadow and mist, calm, with no bright details (login buttons go there).
+- Painted fully to every edge. Opaque. No text, letters, logo, UI, frame, watermark or signature.
+
+IMAGE 2 (portrait about 9:19.5): the same world at the same moment, re-composed for a tall phone screen, as if the same camera were turned to a tall frame. If the tool lets you, pass image 1 as the reference so both match; otherwise use the master.
+- The crack's glowing centre at the horizontal centre, 47 percent down from the top; the rift formation spans roughly 38 to 56 percent of the height and fills about 70 percent of the width.
+- Top 30 percent: calm sky (logo space). Bottom 30 percent: the valley floor in soft shadow and mist (buttons).
+- Between them: the valley, the river leading to the rift, mountains on both sides, floating rocks near the rift.
+- No heroes, no people, no foreground cliffs. Opaque, painted to every edge, no text.
+
+STYLE (same as the master)
+Bright casual medieval-fantasy game art for ages 12 and up, in the spirit of Dragon Quest and Cookie Run: Kingdom. Polished in-engine 3D cel-shaded look: flat colour plus one hard shadow tone, bold clean outlines with slight line-weight variation, simple matte materials, no fine surface noise, big readable forms. Palette: sky blue, grass green, warm yellow, cream, with the rift's violet as the single ominous accent. Warm late-afternoon sun from the upper left. Crisp everywhere: no depth-of-field blur, no motion blur.
+
+SELF-CHECK for each image: open it and verify (1) no hero, person or foreground cliff, (2) the crack's glowing centre within 2 percent of (50%, 47%), (3) calm top and bottom zones, (4) no blur, no text. If a check fails, generate that image once more with a corrected prompt (two attempts maximum), keep the better one, and report which checks passed and the measured position of the glowing centre.

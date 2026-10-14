@@ -1,0 +1,22 @@
+Use the installed imagegen skill in built-in image_gen mode. Generate TWO images, one image_gen call each, and save them in this folder, copied byte-for-byte from ~/.codex/generated_images/...:
+1. vista_rift_close.png - landscape 16:9, opaque
+2. vista_mid_floaters.png - landscape 16:9 with NATIVE TRANSPARENCY (real alpha channel, transparent background - not a checkerboard, not white, not a colour key, no background removal afterwards)
+Then write manifest.json (for each image: exact prompt, source path, sha256, pixel size, alpha stats, model "unknown", number of attempts).
+
+REFERENCES ATTACHED
+- master_vista_v01.png: the approved master concept of this title screen (world, palette, lighting, rendering style).
+- master_try1_rift_look.png: an earlier draft. Use it for the look of the rift: the big, bright glowing crack and the strong violet storm vortex.
+
+PURPOSE
+Two layers of an animated title screen. When the player logs in, the camera flies from the heroes' cliff across the valley into the distant rift. Image 1 is shown at the end of that flight; image 2 is a parallax layer that the camera passes on the way.
+
+IMAGE 1 - RIFT CLOSE-UP (opaque)
+The same rift as in the master, seen from very close, as if the camera now hovers right in front of it: the two colossal leaning stone monoliths fill the left and right thirds; the tall glowing fissure between them runs through the centre from top to bottom, blazing magenta-violet with a white-hot core and crimson edges; broken rock shards float around it; violet energy wisps stream into the crack; the dark violet storm vortex swirls above; the rock faces are lit violet by the crack. The brightest white-hot point of the core is exactly at the image centre. Ominous but teen-friendly: no gore, skulls, eyes, faces or monsters inside the crack. Painted fully to every edge, crisp (no blur), no text.
+
+IMAGE 2 - MID-DISTANCE FLOATING ROCKS (cut-out layer)
+Five to seven floating rock islands in the master's style (pale grey stone, grassy tops with small round bushes, dangling roots, a few crumbling pebbles below), hovering at middle distance between the far valley and the heroes' cliffs. Place them only in the LEFT third and the RIGHT third of the canvas, between 18 and 60 percent from the top. Vary the sizes: the largest about 14 percent of the canvas width, the smallest about 4 percent. A slight violet rim light on the side facing the centre, warm sunlight from the upper left. The central 36 percent of the width, the top 15 percent and the bottom 38 percent stay completely empty. Everything except the rocks is FULLY TRANSPARENT: no sky, no clouds, no valley, no mist, no glow.
+
+STYLE (same as the master)
+Bright casual medieval-fantasy game art for ages 12 and up, in the spirit of Dragon Quest and Cookie Run: Kingdom. Polished in-engine 3D cel-shaded look: flat colour plus one hard shadow tone, bold clean outlines with slight line-weight variation, simple matte materials, no fine surface noise. Palette: sky blue, grass green, warm yellow, cream, with violet as the ominous accent. No text, letters, logo, watermark or signature.
+
+SELF-CHECK: image 1 - the brightest core point within 3 percent of the centre, crisp, no faces or eyes in the crack. Image 2 - the alpha channel exists, the four corners and the central column are alpha 0 (measure), rocks only in the outer thirds. If a check fails, generate that image once more with a corrected prompt (two attempts maximum), keep the better one, and report the measurements.
