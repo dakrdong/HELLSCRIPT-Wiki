@@ -1,0 +1,117 @@
+{
+  "date": "2026-10-14",
+  "unity": "6000.6.0f1",
+  "filter": "Hellscript.Tests.SoundBankTests",
+  "scope": "Focused Edit Mode run on an APFS clone of the work branch before the final integration (Assets, Packages, ProjectSettings from the branch; Library cloned from the main checkout). The full Edit Mode run and the audio smoke on the merge candidate are recorded in ElevenLabs_Game_Audio.md.",
+  "total": 23,
+  "passed": 23,
+  "failed": 0,
+  "imported_music_assets": [
+    "music_title",
+    "music_characters",
+    "music_sanctuary",
+    "music_training",
+    "music_rift",
+    "music_boss"
+  ],
+  "new_or_changed_tests": [
+    "ABoundTrainingGroundRunPlaysTheTrainingMusicEvenWhenItsFightIsAtTheBoss",
+    "ImportedMusicKeepsSixStereoStreamingAssetsAliveAfterShutdown",
+    "MusicFollowsMenusWhenNoRunIsActive(\"characters\",\"characters\")",
+    "TheTrainingGroundKeepsItsOwnMusicThroughEveryPhase"
+  ],
+  "cases": [
+    {
+      "name": "ABoundTrainingGroundRunPlaysTheTrainingMusicEvenWhenItsFightIsAtTheBoss",
+      "result": "Passed"
+    },
+    {
+      "name": "ButtonsReportOnlyRealPresses",
+      "result": "Passed"
+    },
+    {
+      "name": "CommittedTransactionsChooseTheirSoundAndOnlyPlayerCausedFailuresSound",
+      "result": "Passed"
+    },
+    {
+      "name": "CooldownAndMuteGateEveryPlay",
+      "result": "Passed"
+    },
+    {
+      "name": "EveryBankEntryResolvesItsClips",
+      "result": "Passed"
+    },
+    {
+      "name": "EveryPlayableSkillEnemyBossAndVoiceHasASound",
+      "result": "Passed"
+    },
+    {
+      "name": "FinalBankContainsNoUnreferencedAudioAndSharedActionsStillPlay",
+      "result": "Passed"
+    },
+    {
+      "name": "HistoryCursorsSurviveARebuiltRunWithoutReplayingIt",
+      "result": "Passed"
+    },
+    {
+      "name": "ImportedMusicKeepsSixStereoStreamingAssetsAliveAfterShutdown",
+      "result": "Passed"
+    },
+    {
+      "name": "ItemsSoundLikeTheirMaterialAndRarity",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsMenusWhenNoRunIsActive(\"title\",\"title\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsMenusWhenNoRunIsActive(\"characters\",\"characters\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsMenusWhenNoRunIsActive(\"plaza\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsMenusWhenNoRunIsActive(\"town\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsTheActualRunPhase(Exploring,\"title\",\"rift\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsTheActualRunPhase(Boss,\"rift\",\"boss\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsTheActualRunPhase(Looting,\"rift\",\"rift\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsTheActualRunPhase(Cleared,\"rift\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "MusicFollowsTheActualRunPhase(Failed,\"rift\",\"sanctuary\")",
+      "result": "Passed"
+    },
+    {
+      "name": "RapidMusicTransitionsKeepHeadroomAndMuteEverySource",
+      "result": "Passed"
+    },
+    {
+      "name": "SharedCueReusesTheOriginalClipObjectsAndCategory",
+      "result": "Passed"
+    },
+    {
+      "name": "StartupAndRejectedPlaybackDoNotLoadEffects",
+      "result": "Passed"
+    },
+    {
+      "name": "TheTrainingGroundKeepsItsOwnMusicThroughEveryPhase",
+      "result": "Passed"
+    }
+  ]
+}

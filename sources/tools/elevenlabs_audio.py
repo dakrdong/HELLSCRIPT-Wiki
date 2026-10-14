@@ -28,7 +28,8 @@ import dsp
 import bank
 
 PROCESSING_VERSION = "elevenlabs-game-master-v1"
-MODEL_IDS = {"sfx": "eleven_text_to_sound_v2", "music": "eleven_music_v2"}
+MODEL_IDS = {"sfx": "eleven_text_to_sound_v2", "music": "eleven_music_v2_5"}
+MUSIC_CONTEXTS = ("title", "characters", "sanctuary", "training", "rift", "boss")
 SFX_EDIT_PROFILES = {"ui.slider": "single-tick-v1", "ui.tab": "immediate-tab-v2"}
 
 
@@ -121,7 +122,44 @@ def write_pcm(path, audio):
         stream.writeframes(np.round(np.clip(audio,-1,1)*32767).astype("<i2").tobytes())
 
 
-def master_music(samples, crossfade_seconds, target_lufs):
+def loop_end(samples, crossfade_seconds=2.5, min_fraction=.75):
+    """End time (s) after which master_music wraps on the same beat and harmony.
+
+    master_music blends the last crossfade before the end into the first one, so the end is the point whose last
+    window best matches the opening in timbre (50 ms log-band frames) and in rhythm (10 ms onset envelope), then
+    aligned to the sample on the low-passed waveform.
+    """
+    mono = samples.mean(axis=1)
+    length, margin = int(round(crossfade_seconds*48000)), 480
+
+    def bands(hop, fft):
+        freqs, _, spectrum = signal.stft(mono, 48000, nperseg=fft, noverlap=fft-hop, boundary=None, padded=False)
+        edges = np.searchsorted(freqs, np.geomspace(60, 12000, 41))
+        return np.log1p(30*np.stack([np.abs(spectrum[a:max(b, a+1)]).mean(axis=0) for a, b in zip(edges[:-1], edges[1:])], axis=1))
+
+    timbre, window = bands(2400, 4096), length//2400
+    cost = np.array([np.mean((timbre[end-window:end]-timbre[:window])**2) for end in range(window, len(timbre)+1)])
+    cost /= np.median(cost)
+    onset = np.maximum(np.diff(bands(480, 1024), axis=0), 0).sum(axis=1)
+    # Smoothed, so a few milliseconds of timing error does not zero the rhythm match.
+    onset = np.convolve(onset-np.convolve(onset, np.ones(50)/50, "same"), np.hanning(7), "same")
+    beats, head = length//480, onset[:length//480]
+    energy = np.cumsum(np.concatenate([[0], onset**2]))
+    rhythm = signal.correlate(onset, head, mode="valid", method="fft")/np.sqrt(np.maximum(energy[beats:]-energy[:-beats], 1e-12)*np.dot(head, head))
+    ends = (np.arange(len(rhythm))+beats)*480  # a tail starting at onset frame k ends one crossfade later
+    score = cost[np.clip(np.round(ends/2400).astype(int)-window, 0, len(cost)-1)]-rhythm
+    score[(ends < min_fraction*len(mono)) | (ends > len(mono)-margin)] = np.inf
+    coarse = int(ends[int(np.argmin(score))])
+    low = signal.sosfiltfilt(signal.butter(4, 2000, fs=48000, output="sos"), mono)
+    segment = low[coarse-length-margin:coarse+margin]
+    energy = np.cumsum(np.concatenate([[0], segment**2]))
+    fine = signal.correlate(segment, low[:length], mode="valid", method="fft")/np.sqrt(np.maximum(energy[length:]-energy[:-length], 1e-12))
+    return round((coarse-margin+int(np.argmax(fine)))/48000, 6)
+
+
+def master_music(samples, crossfade_seconds, target_lufs, end_seconds=None):
+    # A generated outro or an unaligned last bar would put a dip or a beat jump at every loop; end_seconds comes from loop_end.
+    if end_seconds is not None: samples = samples[:int(round(end_seconds*48000))]
     frames = int(round(crossfade_seconds*48000))
     if len(samples) < frames*4: raise ValueError("Music is too short for the requested loop splice")
     audio = signal.sosfilt(signal.butter(2, 28, fs=48000, btype="highpass", output="sos"), samples, axis=0)
@@ -137,7 +175,7 @@ def master_music(samples, crossfade_seconds, target_lufs):
         measured = json.JSONDecoder().raw_decode(scan.stderr[scan.stderr.rfind("{"):])[0]
         gain_db = min(target_lufs-float(measured["input_i"]), -2.5-float(measured["input_tp"]))
         audio *= safety * 10**(gain_db/20)
-    return audio, {"crossfade_seconds":crossfade_seconds, "loop_boundary":"continuous source samples", "target_integrated_lufs":target_lufs, "gain_db_after_safety":round(gain_db,6), "safety_gain":safety, "source_lufs_after_safety":float(measured["input_i"]), "ceiling_dbtp_before_encoding":-2.5, "listening_review":"pending"}
+    return audio, {"crossfade_seconds":crossfade_seconds, "loop_end_seconds":end_seconds, "loop_boundary":"continuous source samples", "target_integrated_lufs":target_lufs, "gain_db_after_safety":round(gain_db,6), "safety_gain":safety, "source_lufs_after_safety":float(measured["input_i"]), "ceiling_dbtp_before_encoding":-2.5, "listening_review":"pending"}
 
 
 def adopt(index_path, selection_path):
@@ -155,7 +193,7 @@ def adopt(index_path, selection_path):
         for name, source_id in zip(entry["clips"], ids):
             wanted.append((cue,"sfx",SFX/entry["category"]/(name+".wav"),by_id[source_id],{}))
     for cue, choice in selection.get("music",{}).items():
-        if cue not in {"title","sanctuary","rift","boss"}: raise ValueError("Unknown music context")
+        if cue not in MUSIC_CONTEXTS: raise ValueError("Unknown music context")
         wanted.append(("music."+cue,"music",MUSIC/("music_"+cue+".wav"),by_id[choice["generation_id"]],choice))
     # Preflight every selected input before replacing even one runtime asset.
     for cue,kind,target,record,choice in wanted:
@@ -176,7 +214,7 @@ def adopt(index_path, selection_path):
         if archived.exists() and sha256(archived)!=record["sha256"]: raise ValueError("Archived original changed")
         if not archived.exists(): shutil.copyfile(source,archived)
         samples=decode(source,1 if kind=="sfx" else 2)
-        audio,processing=master_sfx(samples,bank.REG[cue]["lufs"],cue) if kind=="sfx" else master_music(samples,choice.get("crossfade_seconds",2.5),choice.get("target_lufs",-21))
+        audio,processing=master_sfx(samples,bank.REG[cue]["lufs"],cue) if kind=="sfx" else master_music(samples,choice.get("crossfade_seconds",2.5),choice.get("target_lufs",-21),choice.get("end_seconds"))
         target.parent.mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(prefix="hellscript-audio-") as temp:
             pcm=Path(temp)/"master.wav";write_pcm(pcm,audio)
@@ -223,7 +261,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--index',type=Path);parser.add_argument('--selection',type=Path);parser.add_argument('--check',action='store_true')
     parser.add_argument('--rebuild',action='store_true',help='Reproduce selected masters from the committed source manifest; no generation or API calls')
+    parser.add_argument('--loop-end',type=Path,metavar='AUDIO',help='Print the end_seconds that makes a music source loop on the beat; nothing is imported')
     args=parser.parse_args()
+    if args.loop_end:print(loop_end(decode(args.loop_end,2)));return 0
     if args.rebuild:
         if args.check or args.index or args.selection:parser.error('--rebuild cannot be combined with another operation')
         document=rebuild();print(json.dumps({'assets':len(document['assets']),'source':'committed originals','generation_calls':0}));return 0
@@ -232,7 +272,7 @@ def main():
         for asset,record in document['assets'].items(): problems.extend(asset+': '+p for p in validate_record(asset,record))
         catalog=json.loads((SFX/'bank.json').read_text())['sounds']
         expected={(SFX/bank.source_entry(bank.REG[entry['id']])['cat']/(name+'.wav')).relative_to(ROOT).as_posix() for entry in catalog for name in entry['clips']}
-        expected.update((MUSIC/('music_'+context+'.wav')).relative_to(ROOT).as_posix() for context in ('title','sanctuary','rift','boss'))
+        expected.update((MUSIC/('music_'+context+'.wav')).relative_to(ROOT).as_posix() for context in MUSIC_CONTEXTS)
         missing=sorted(expected-document['assets'].keys())
         for asset in missing:problems.append('Missing final asset: '+asset)
         for asset in sorted(document['assets'].keys()-expected):problems.append('Unexpected adopted asset: '+asset)

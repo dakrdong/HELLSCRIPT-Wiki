@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-14",
+  "scope": "Objective signal measurements of the six adopted music masters (tools/elevenlabs_audio.py --loop-end). Playback and approval are recorded in ElevenLabs_Game_Audio.md.",
+  "method": {
+    "loudness": "ffmpeg loudnorm scan of the runtime WAV (integrated LUFS, true peak, LRA).",
+    "wrap_sample_step": "|last sample - first sample| of the runtime loop against the largest sample-to-sample change in the same file.",
+    "blended_windows": "Onset envelopes (10 ms, smoothed) of the last and first crossfade windows of the source; offset of the best match within +-0.5 s and correlation at zero offset. 'without_loop_end' is the source's full length.",
+    "level_dip": "Lowest 0.25 s RMS within 6 s either side of the wrap minus the track median. Staccato tracks (training) dip between hits everywhere, so compare the two columns, not the absolute value."
+  },
+  "tracks": {
+    "title": {
+      "generation_id": "cETHRn2MdcxpO1LDrFtb",
+      "model_id": "eleven_music_v2_5",
+      "source_seconds": 150.0,
+      "loop_end_seconds": 135.849917,
+      "crossfade_seconds": 2.5,
+      "master_seconds": 133.35,
+      "integrated_lufs": -19.99,
+      "target_lufs": -20,
+      "true_peak_dbtp": -6.2,
+      "loudness_range_lu": 8.7,
+      "sample_peak_dbfs": -6.22,
+      "wrap_sample_step": 0.012268,
+      "largest_natural_step": 0.129089,
+      "blended_windows_onset_offset_ms": {
+        "without_loop_end": -20,
+        "with_loop_end": -10
+      },
+      "blended_windows_onset_correlation_at_zero": {
+        "without_loop_end": 0.47,
+        "with_loop_end": 0.93
+      },
+      "deepest_level_dip_near_wrap_db": {
+        "without_loop_end": -19.6,
+        "with_loop_end": -6.8
+      }
+    },
+    "sanctuary": {
+      "generation_id": "DJqgkTuSkzYjvBR1T0ck",
+      "model_id": "eleven_music_v2_5",
+      "source_seconds": 180.0,
+      "loop_end_seconds": 145.990646,
+      "crossfade_seconds": 2.5,
+      "master_seconds": 143.491,
+      "integrated_lufs": -22.0,
+      "target_lufs": -22,
+      "true_peak_dbtp": -7.48,
+      "loudness_range_lu": 6.3,
+      "sample_peak_dbfs": -7.49,
+      "wrap_sample_step": 0.005951,
+      "largest_natural_step": 0.1763,
+      "blended_windows_onset_offset_ms": {
+        "without_loop_end": -310,
+        "with_loop_end": -10
+      },
+      "blended_windows_onset_correlation_at_zero": {
+        "without_loop_end": 0.12,
+        "with_loop_end": 0.87
+      },
+      "deepest_level_dip_near_wrap_db": {
+        "without_loop_end": -22.9,
+        "with_loop_end": -12.5
+      }
+    },
+    "rift": {
+      "generation_id": "qfw0uGfxaAEKlMhGmAhZ",
+      "model_id": "eleven_music_v2_5",
+      "source_seconds": 180.0,
+      "loop_end_seconds": 144.786708,
+      "crossfade_seconds": 2.5,
+      "master_seconds": 142.287,
+      "integrated_lufs": -23.0,
+      "target_lufs": -23,
+      "true_peak_dbtp": -9.68,
+      "loudness_range_lu": 4.9,
+      "sample_peak_dbfs": -9.77,
+      "wrap_sample_step": 0.002899,
+      "largest_natural_step": 0.139038,
+      "blended_windows_onset_offset_ms": {
+        "without_loop_end": 80,
+        "with_loop_end": 0
+      },
+      "blended_windows_onset_correlation_at_zero": {
+        "without_loop_end": -0.01,
+        "with_loop_end": 0.81
+      },
+      "deepest_level_dip_near_wrap_db": {
+        "without_loop_end": -34.2,
+        "with_loop_end": -13.9
+      }
+    },
+    "boss": {
+      "generation_id": "ZXJWDuqPD3PRi1K3wgTn",
+      "model_id": "eleven_music_v2_5",
+      "source_seconds": 150.0,
+      "loop_end_seconds": 124.081125,
+      "crossfade_seconds": 2.5,
+      "master_seconds": 121.581,
+      "integrated_lufs": -20.99,
+      "target_lufs": -21,
+      "true_peak_dbtp": -8.34,
+      "loudness_range_lu": 2.6,
+      "sample_peak_dbfs": -8.5,
+      "wrap_sample_step": 0.002625,
+      "largest_natural_step": 0.163849,
+      "blended_windows_onset_offset_ms": {
+        "without_loop_end": 90,
+        "with_loop_end": 10
+      },
+      "blended_windows_onset_correlation_at_zero": {
+        "without_loop_end": 0.05,
+        "with_loop_end": 0.63
+      },
+      "deepest_level_dip_near_wrap_db": {
+        "without_loop_end": -4.7,
+        "with_loop_end": -5.6
+      }
+    },
+    "characters": {
+      "generation_id": "qEvPEQIpXKOYqs03yAq9",
+      "model_id": "eleven_music_v2_5",
+      "source_seconds": 150.0,
+      "loop_end_seconds": 139.366104,
+      "crossfade_seconds": 2.5,
+      "master_seconds": 136.866,
+      "integrated_lufs": -21.0,
+      "target_lufs": -21,
+      "true_peak_dbtp": -6.62,
+      "loudness_range_lu": 2.9,
+      "sample_peak_dbfs": -6.62,
+      "wrap_sample_step": 0.006592,
+      "largest_natural_step": 0.231018,
+      "blended_windows_onset_offset_ms": {
+        "without_loop_end": 0,
+        "with_loop_end": 10
+      },
+      "blended_windows_onset_correlation_at_zero": {
+        "without_loop_end": 0.94,
+        "with_loop_end": 0.89
+      },
+      "deepest_level_dip_near_wrap_db": {
+        "without_loop_end": -8.7,
+        "with_loop_end": -6.1
+      }
+    },
+    "training": {
+      "generation_id": "ZeNJ9ai7UBjnBu3DfRiV",
+      "model_id": "eleven_music_v2_5",
+      "source_seconds": 150.0,
+      "loop_end_seconds": 136.504208,
+      "crossfade_seconds": 2.5,
+      "master_seconds": 134.004,
+      "integrated_lufs": -22.99,
+      "target_lufs": -23,
+      "true_peak_dbtp": -8.99,
+      "loudness_range_lu": 3.5,
+      "sample_peak_dbfs": -8.99,
+      "wrap_sample_step": 0.002319,
+      "largest_natural_step": 0.14209,
+      "blended_windows_onset_offset_ms": {
+        "without_loop_end": 500,
+        "with_loop_end": 0
+      },
+      "blended_windows_onset_correlation_at_zero": {
+        "without_loop_end": 0.58,
+        "with_loop_end": 0.76
+      },
+      "deepest_level_dip_near_wrap_db": {
+        "without_loop_end": -27.4,
+        "with_loop_end": -27.7
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ namespace Hellscript
     {
         public const string MusicPath = "Audio/Music/";
         public const float MusicFadeSeconds = 1.5f;
-        static readonly string[] MusicIds = { "title", "sanctuary", "rift", "boss" };
+        static readonly string[] MusicIds = { "title", "characters", "sanctuary", "training", "rift", "boss" };
         sealed class MusicVoice
         {
             public string id;
@@ -15,17 +15,20 @@ namespace Hellscript
             public float gain;
             public bool started;
         }
-        readonly MusicVoice[] musicVoices = new MusicVoice[4];
+        readonly MusicVoice[] musicVoices = new MusicVoice[MusicIds.Length];
         GameController musicGame;
         public string MusicContext { get; private set; } = "sanctuary";
         public int MusicClipCount { get; private set; }
         public int MissingMusicClips { get; private set; }
 
-        public static string MusicContextFor(RunPhase? phase, string page)
+        // The training ground keeps its own music from the lobby through every fight, boss test and result, so a boss
+        // picked there never switches to the rift's boss track.
+        public static string MusicContextFor(RunPhase? phase, string page, bool training = false)
         {
+            if (training) return "training";
             if (phase == RunPhase.Boss) return "boss";
             if (phase.HasValue && phase != RunPhase.Cleared && phase != RunPhase.Failed) return "rift";
-            return page is "title" or "characters" ? "title" : "sanctuary";
+            return page is "title" or "characters" ? page : "sanctuary";
         }
 
         void InitializeMusic()
@@ -51,7 +54,8 @@ namespace Hellscript
             if (background || PowerSaving) return;
             // Page and combat state are read from their owners; music never changes either.
             string page = musicGame != null && musicGame.UI != null ? musicGame.UI.Page : musicGame != null ? "title" : null;
-            MusicContext = MusicContextFor(simulation != null ? simulation.State.phase : (RunPhase?)null, page);
+            bool training = simulation != null ? simulation.IsTrainingGround : musicGame != null && musicGame.UI != null && musicGame.UI.TrainingLobby != null;
+            MusicContext = MusicContextFor(simulation != null ? simulation.State.phase : (RunPhase?)null, page, training);
             float step = Mathf.Max(0, delta) / MusicFadeSeconds;
             foreach (var voice in musicVoices)
             {
