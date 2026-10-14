@@ -50,7 +50,7 @@
   function searchDB(q){return D.databases.map(db=>{const rows=db.rows.filter(r=>JSON.stringify(r).toLowerCase().includes(q.toLowerCase()));return rows.length?`<h2>${esc(db.name)} · ${rows.length}개</h2>${rows.map(r=>`<p><a href="#/db/${db.id}?record=${encodeURIComponent(r.id)}">${esc(r.id)} · ${esc(r.name)}</a></p>`).join('')}`:''}).join('')}
   function page(id,params){const p=D.pages.find(p=>p.id===id);if(!p)return missing();
     if(params.get('view')==='history')return compare(p,params);
-    const version=params.get('version');const v=version?(p.versions||[]).find(v=>String(v.revision)===version):null;if(version&&!v)return missing();const content=v||p;
+    const version=params.get('version');const v=version?(p.versions||[]).find(v=>String(v.revision)===version):null;if(version&&!v)return missing();const content=v?full(p,v):p;if(!content)return loadHistory(p,()=>page(id,params));
     document.title=p.title+' · HELLSCRIPT 위키';
     $('#main').innerHTML=`<div class="page-heading document-heading"><div><p class="eyebrow">${esc(p.category)}</p><h1>${esc(p.title)}</h1><div class="meta">${badge(p.status||'원문 기록')}<span>최초 등록 ${esc(dateText(stamp(p,'createdAt')))}</span><span>마지막 변경 ${esc(dateText(content.capturedAt||stamp(p)))}</span><span>v${String(content.revision).padStart(3,'0')}</span>${`<a class="button" href="sources/${esc(p.source)}" download>원문 내려받기</a>`}</div></div></div>${tagLinks(p)}${p.notice?`<div class="notice">${esc(p.notice)}</div>`:''}<nav class="toc" aria-label="문서 목차">${(content.headings||[]).map(h=>`<a href="#/page/${p.id}?${version?'version='+version+'&':''}section=${encodeURIComponent(h.id)}">${esc(h.title)}</a>`).join('')}</nav><article class="prose">${content.html||'<pre>'+esc(content.body)+'</pre>'}</article>${`<div class="source">원본: ${esc(p.source)}<br>문서 해시: ${esc(content.hash||'')}</div><h2>보존 이력</h2><div class="actions">${(p.versions||[p]).slice().reverse().map(v=>`<a class="button" href="#/page/${p.id}?version=${v.revision}">v${String(v.revision).padStart(3,'0')} · ${esc(v.date||p.date)}</a>`).join('')}<a class="button" href="${pageLink(p)}?view=history">이력 비교</a></div>`}${connections(p)}`;
     const section=params.get('section');if(section)document.getElementById(section)?.scrollIntoView();
@@ -63,11 +63,19 @@
   function compare(p,params){
     const versions=p.versions||[];if(!versions.length)return missing();
     let before=params.get('from')||String(versions[Math.max(0,versions.length-2)].revision),after=params.get('to')||String(versions[versions.length-1].revision);
-    const a=versions.find(v=>String(v.revision)===before),b=versions.find(v=>String(v.revision)===after);if(!a||!b)return missing();
+    const va=versions.find(v=>String(v.revision)===before),vb=versions.find(v=>String(v.revision)===after);if(!va||!vb)return missing();
+    const a=full(p,va),b=full(p,vb);if(!a||!b)return loadHistory(p,()=>compare(p,params));
     const options=selected=>versions.map(v=>`<option value="${v.revision}" ${String(v.revision)===selected?'selected':''}>v${String(v.revision).padStart(3,'0')} · ${esc(dateText(v.capturedAt||v.date))}</option>`).join('');
     document.title=p.title+' 이력 비교 · HELLSCRIPT 위키';
     $('#main').innerHTML=`<div class="page-heading"><div><p class="eyebrow">PAGE HISTORY</p><h1>${esc(p.title)}</h1><p class="lead">보존된 두 버전의 본문에서 추가·삭제된 줄을 확인합니다.</p></div><a class="button" href="${pageLink(p)}">현재 문서로 돌아가기</a></div><div class="toolbar"><label>이전 버전 <select id="compare-from">${options(before)}</select></label><label>비교 버전 <select id="compare-to">${options(after)}</select></label></div><p class="notice">${versions.length===1?'아직 보존된 버전이 하나뿐입니다. 다음 본문 변경부터 비교할 수 있습니다.':'초록색 + 줄은 추가, 붉은색 − 줄은 삭제된 내용입니다.'}</p><div class="diff" aria-label="버전 차이">${lineDiff(a.body,b.body)}</div>`;
     const change=()=>{location.hash=`${pageLink(p)}?view=history&from=${$('#compare-from').value}&to=${$('#compare-to').value}`};$('#compare-from').onchange=$('#compare-to').onchange=change;
+  }
+  // The public data.js keeps only version metadata: the newest version is the page itself and
+  // older bodies load from history/<id>.js on demand. The local wiki still carries them inline.
+  function full(p,v){const i=p.versions.indexOf(v),h=(window.HELLSCRIPT_WIKI_HISTORY||{})[p.id]?.[i];return i===p.versions.length-1?p:v.body!=null?v:h&&{...v,...h}}
+  function loadHistory(p,show){if(!p.history||(window.HELLSCRIPT_WIKI_HISTORY||{})[p.id])return missing();
+    const hash=location.hash;$('#main').innerHTML='<p class="notice">보존 이력을 불러오는 중입니다.</p>';
+    const s=document.createElement('script');s.src=p.history;s.onload=()=>{if(location.hash===hash)show()};s.onerror=()=>{if(location.hash===hash)missing()};document.head.appendChild(s);
   }
   function lineDiff(before,after){
     const a=before.split('\n'),b=after.split('\n');
