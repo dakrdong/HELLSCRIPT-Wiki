@@ -1,0 +1,47 @@
+{
+  "mainCommit": "b7e59484bc519af3ad153f2308f49bc4a7ba6b8f",
+  "fullRunSourceCommit": "87e7e064c0bd8d0b134602a289b4d815d601ef7a",
+  "fullRunReceipt": "Docs/Implementation/D4EquipmentEvidence20261014/validation.json",
+  "fullRunXML": "Docs/Implementation/D4EquipmentEvidence20261014/full-editmode.xml",
+  "fullRunCounts": {
+    "total": "5746",
+    "passed": "5742",
+    "failed": "1",
+    "skipped": "3"
+  },
+  "windowCasesInOriginalFullRun": 13,
+  "replacementWindowCases": 17,
+  "unchangedDomainReuse": "No gameplay, save, combat, model definitions or shared framework edits in this task. Reuse main integration full run and its two bilingual aspect repairs for those unchanged inputs. Replace MonsterCodexWindow coverage with final 17 focused cases; all 35 changed texture inputs and final native KO/EN viewport coverage are validated separately. No claim of another full suite executed on this branch.",
+  "finalFocusedXML": "focused-window-contrast.xml",
+  "nativeSmoke": "RuntimeMonsterCodexSmoke, final integrated main plus this task",
+  "reusedMainInputsVerified": {
+    "main": "b7e59484bc519af3ad153f2308f49bc4a7ba6b8f",
+    "coreGameplaySources": "identical",
+    "gameDataAndMonsterDefinitions": "identical",
+    "packagesAndProjectSettings": "identical before native build; standard ProjectBuilder changes restored afterward"
+  },
+  "native": {
+    "passed": true,
+    "testedWindowSource": "native-tested-window.cs.txt",
+    "sourceCodeChangeAfterNative": "Only Chip background changed from translucent tint to opaque UiTheme.Background. Portrait sizing/full UV, badge geometry, fonts, pointer/raycast and game/save code unchanged. New colors verified by 17 window tests and final native compilation; native screenshots precede that paint-only correction.",
+    "viewportLanguagePairs": 10,
+    "screenshotsProduced": 61,
+    "receipt": "native/runtime.txt",
+    "finalWindowTests": 17,
+    "uiContractTests": 15,
+    "fullSuiteOnThisBranch": false
+  },
+  "executionCounts": {
+    "imageGeneration": 39,
+    "imageCorrections": 4,
+    "focusedWindowRuns": 4,
+    "uiContractRuns": 4,
+    "nativeBuilds": 5,
+    "nativeRuns": 4,
+    "nativeFailedAttempts": 3,
+    "nativePassedRuns": 1,
+    "wikiBuilds": 0,
+    "wikiChecks": 0,
+    "wikiTests": 0
+  }
+}
