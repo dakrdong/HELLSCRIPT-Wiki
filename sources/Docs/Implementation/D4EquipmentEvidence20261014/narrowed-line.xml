@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Failed(Child)" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.9983031">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.998303" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="7718" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.917588" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="45017" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="7719" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.830874" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="SetUpFixture" id="7614" name="Tests" fullname="Hellscript.Tests.ValidationAudioSilence" classname="Hellscript.Tests.ValidationAudioSilence" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.755577" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1888" name="SkillTreeD4CombatCoreTests" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" testcasecount="221" result="Failed" site="Child" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.686621" total="1" passed="0" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1961" name="GearNarrowedLineAppliesToAllSevenBarrageArrows" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearNarrowedLineAppliesToAllSevenBarrageArrows" methodname="GearNarrowedLineAppliesToAllSevenBarrageArrows" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="2077432620" result="Failed" label="Error" start-time="2026-10-14 02:05:57Z" end-time="2026-10-14 02:05:58Z" duration="0.668383" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.NullReferenceException : Object reference not set to an instance of an object]]></message>
+                <stack-trace><![CDATA[  at Hellscript.Tests.SkillTreeD4CombatCoreTests+<>c__DisplayClass5_0.<Call>b__1 (System.Reflection.ParameterInfo v, System.Int32 i) [0x00000] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4CombatCoreTests.cs:18 
+  at System.Linq.Enumerable+<SelectIterator>d__154`2[TSource,TResult].MoveNext () [0x0005a] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at System.Collections.Generic.LargeArrayBuilder`1[T].AddRange (System.Collections.Generic.IEnumerable`1[T] items) [0x0003d] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at System.Collections.Generic.EnumerableHelpers.ToArray[T] (System.Collections.Generic.IEnumerable`1[T] source) [0x00033] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at System.Linq.Enumerable.ToArray[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x00018] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at Hellscript.Tests.SkillTreeD4CombatCoreTests.Call (System.Object owner, System.String method, System.Object[] args) [0x0003a] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4CombatCoreTests.cs:18 
+  at Hellscript.Tests.SkillTreeD4CombatCoreTests.GearNarrowedLineAppliesToAllSevenBarrageArrows () [0x00033] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4EquipmentTests.cs:134 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+              </failure>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,122 @@
+{
+  "date": "2026-10-13",
+  "source_commit": "d7a87cb443c108c7a327d959a2494adeda144766",
+  "unity": "6000.6.0f1",
+  "platform": "macOS development player",
+  "branch": "claude/rift-gear-offer-actions",
+  "editmode": {
+    "passed": 185,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 16.0733935,
+    "source_commit": "bbdc6b84",
+    "filter": [
+      "RecommendedEquipmentTests",
+      "SharedUiTests",
+      "ItemComparisonTests",
+      "StoreViewBindingTests",
+      "UiButtonTests"
+    ],
+    "reuse_reason": "Core, shared comparison/settings/detail owners and these tests are unchanged after this run; later changes only affect GameUI card presentation, modal timing/visibility and the native acceptance adapter."
+  },
+  "ui_contract": {
+    "ownership": "passed on final source",
+    "regressions": 15,
+    "regression_runs": 1,
+    "validator_unchanged": true
+  },
+  "ui_refresh": {
+    "result": "passed",
+    "guarded_bindings": 15,
+    "inventoried_sources": 183
+  },
+  "native": {
+    "viewports": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "initial_gear_run": 1,
+    "affected_rechecks": 4,
+    "final_lifecycle_exit": 0,
+    "surface_sources": {
+      "cards": "19548b83",
+      "settings_filters_timer_comparison": "bbdc6b84",
+      "single_detail_and_actions": "b815593f",
+      "portal_and_end": "d7a87cb4"
+    },
+    "checks": [
+      "screen-pixel 92x150 portrait and 69x114 landscape cards",
+      "75 percent landscape scale; shared pixel canvas; card controls/ellipsis/score bounds; floating Hunt Edict hit area clearance",
+      "direct comparison via magnifier and icon body; centred quick Equip; negative gain in red",
+      "five grades; range/details/additional-option draft edits; one save; live and reloaded hero agree; cancel keeps original",
+      "actual popup-time pause and restart; one-second expiry advances acknowledgement",
+      "empty-slot details across all ten viewport/language combinations",
+      "inventory page hides cards; page re-entry restores queue; portal town hides cards; return restores only unhandled gear",
+      "card close advances queue; give-up clears suspendedRun/cards; ended run stays absent after reload"
+    ],
+    "reuse_note": "Runs stop on the first failed assertion. Completed surfaces and action prefixes are reused only when their owners/input fixtures are unchanged; failed checks and changed card geometry/timing/visibility were rechecked."
+  },
+  "not_run": [
+    "full Edit Mode and full runtime batch before main merge",
+    "physical mobile/touch/notch verification",
+    "WebGL build/public game deployment",
+    "wiki generation/publishing on the work branch"
+  ],
+  "timing": {
+    "seconds_since_artifact_record": 4281.5,
+    "validation_tool_seconds": 360.6,
+    "approval_or_connection_wait_seconds": 0,
+    "affected_native_rechecks": 4,
+    "native_builds": 5,
+    "related_editmode_runs": 1
+  },
+  "screenshots": [
+    {
+      "file": "cards-portrait-ko.png",
+      "source_commit": "19548b83",
+      "sha256": "21ed43990b915dda3eaa733db08be933ab61d873ff760c7250b5ca5dd77e9eb9"
+    },
+    {
+      "file": "cards-landscape-en.png",
+      "source_commit": "19548b83",
+      "sha256": "6b04eb2e602236d3065cd3aae469918177941d53ba5821ddfe139c83b98723ca"
+    },
+    {
+      "file": "comparison-portrait-ko.png",
+      "source_commit": "bbdc6b84",
+      "sha256": "095cb9a978301489a797940561140c3a781cec7ac7ce723e0837aace94cdb85b"
+    },
+    {
+      "file": "settings-filters-portrait-en.png",
+      "source_commit": "bbdc6b84",
+      "sha256": "9f24cfa6a583364ae83d19046ade460498beb41604fd0e93f1014fab69f6c759"
+    },
+    {
+      "file": "detail-portrait-ko.png",
+      "source_commit": "b815593f",
+      "sha256": "3b065a67ae4de0b1474aaaf4f18f68b892f37347f85a60d90266ed90d49eb1c3"
+    },
+    {
+      "file": "negative-gain.png",
+      "source_commit": "b815593f",
+      "sha256": "80f57f829a702f1d71dee5ac59dbee7fcdd0b5902d05242b7af87bb473e725fd"
+    },
+    {
+      "file": "portal-town.png",
+      "source_commit": "d7a87cb4",
+      "sha256": "122232a9fc636bf21b8d09fc02ccb15852f9bda9ba87cfaf3edfc61336394211"
+    },
+    {
+      "file": "portal-return.png",
+      "source_commit": "d7a87cb4",
+      "sha256": "ec6bb7b60e630024427d04c297195dd9546b5be2a3021d60adab6137a4d7cddd"
+    }
+  ]
+}

@@ -96,7 +96,7 @@ namespace Hellscript.Tests
             Advance(sim,.3f);Assert.Greater(Vector2.Distance(safe,sim.State.position),.25f);Assert.IsFalse(EnemyCombat.Contains(EnemyCombat.HazardThreat(old),sim.State.position));
             Advance(sim,.4f);Assert.IsTrue(sim.EdictDodgeHolding);Assert.AreEqual(100,sim.State.health);
         }
-        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M05")]
+        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M04-3")]
         public void EmergencyShieldRunsTheRealPreparationAndCostsOnlyOnce(HeroClass hero,string id)
         {
             var sim=Fixture(hero);var d=Configure(sim,id);Set(d,"survival.defenseSkill",id);string original=HuntEdictV2Codec.Encode(d),owner=JsonUtility.ToJson(account);
@@ -110,9 +110,9 @@ namespace Hellscript.Tests
         [TestCase("OWN")][TestCase("CAP")][TestCase("COOLDOWN")][TestCase("OFF")]
         public void ShieldQualificationRejectsAnUnusableDefenseWithoutSpendingAnything(string cause)
         {
-            var sim=Fixture();var d=Configure(sim,"M05");Set(d,"survival.defenseSkill","M05");
-            if(cause=="OWN"||cause=="CAP")sim.State.shields.Add(new ShieldEffect{id=99,definitionId=cause=="OWN"?"M05":"OTHER",amount=cause=="CAP"?100:5,remaining=4});
-            if(cause=="COOLDOWN")sim.State.cooldowns[16]=1;if(cause=="OFF")d=HuntEdictV2.WithOption(d,"M05",1,"OFF");
+            var sim=Fixture();var d=Configure(sim,"M04-3");Set(d,"survival.defenseSkill","M04-3");
+            if(cause=="OWN"||cause=="CAP")sim.State.shields.Add(new ShieldEffect{id=99,definitionId=cause=="OWN"?"M04-3":"OTHER",amount=cause=="CAP"?100:5,remaining=4});
+            if(cause=="COOLDOWN")sim.State.cooldowns[16]=1;if(cause=="OFF")d=HuntEdictV2.WithOption(d,"M04-3",1,"OFF");
             var p=sim.PlanEdictSurvival(d);Assert.IsFalse(p.attempts.First().ready);float resource=sim.State.resource;sim.ExecuteEdictSurvival(d);
             Assert.AreEqual(resource,sim.State.resource);Assert.IsFalse(sim.HeroActionBusy);
         }
@@ -158,13 +158,13 @@ namespace Hellscript.Tests
         [Test]
         public void AnotherDesignatedSurvivalSkillIsUsedOnlyThroughTheExplicitFallback()
         {
-            var sim=Fixture();var d=Configure(sim,"M04","M05");Set(d,"survival.escapeSkill","M04");Set(d,"survival.order","ESCAPE,WALK,DEFENSE");Set(d,"survival.fallback","OTHER_SKILL");Set(d,"survival.fallbackSkill","M05");sim.State.cooldowns[15]=4;
+            var sim=Fixture();var d=Configure(sim,"M04","M04-3");Set(d,"survival.escapeSkill","M04");Set(d,"survival.order","ESCAPE,WALK,DEFENSE");Set(d,"survival.fallback","OTHER_SKILL");Set(d,"survival.fallbackSkill","M04-3");sim.State.cooldowns[15]=4;
             var e=sim.ExecuteEdictSurvival(d);Assert.AreEqual("OTHER_SKILL",e.plan.selected.role);Assert.AreEqual(16,sim.State.heroAction.skill);Assert.IsFalse(sim.State.edictResponse.walking);
         }
         [Test]
         public void PotionRunsIndependentlyAndReevaluatesEmergencyAfterItsActualHealing()
         {
-            var sim=Fixture();var d=Configure(sim,"M05");Set(d,"survival.defenseSkill","M05");Set(d,"survival.potion","ON");sim.Stats.healing=1;CurrentAttack(sim,HeroActionPhase.Travelling);var action=sim.State.heroAction;
+            var sim=Fixture();var d=Configure(sim,"M04-3");Set(d,"survival.defenseSkill","M04-3");Set(d,"survival.potion","ON");sim.Stats.healing=1;CurrentAttack(sim,HeroActionPhase.Travelling);var action=sim.State.heroAction;
             var e=sim.ExecuteEdictSurvival(d);Assert.IsTrue(e.potionUsed);Assert.IsFalse(e.mainActionStarted);Assert.AreEqual(55,sim.State.health,.001f);Assert.AreEqual(20,sim.State.potionCd);Assert.AreSame(action,sim.State.heroAction);Assert.IsFalse(e.plan.assessment.emergency);
             Assert.IsFalse(sim.ExecuteEdictSurvival(d).potionUsed);Assert.AreEqual(1,sim.State.logs.Count(l=>l.Contains("[POTION]")));
         }
@@ -184,7 +184,7 @@ namespace Hellscript.Tests
         [TestCase("PAUSED")][TestCase("PORTAL")][TestCase("FAILED")][TestCase("DEAD")][TestCase("UNAPPLIED")]
         public void StoppedRunsAndUnappliedSkillDraftsCannotExecuteOrConsumePotion(string cause)
         {
-            var sim=Fixture();var d=Configure(sim,"M05");Set(d,"survival.defenseSkill","M05");Set(d,"survival.potion","ON");
+            var sim=Fixture();var d=Configure(sim,"M04-3");Set(d,"survival.defenseSkill","M04-3");Set(d,"survival.potion","ON");
             if(cause=="PAUSED")sim.State.paused=true;if(cause=="PORTAL")sim.State.portal=true;if(cause=="FAILED")sim.State.phase=RunPhase.Failed;if(cause=="DEAD")sim.State.health=0;if(cause=="UNAPPLIED")sim.State.build.activeSkills.Clear();
             string before=JsonUtility.ToJson(sim.State);var e=sim.ExecuteEdictSurvival(d);Assert.IsNotEmpty(e.plan.blockedReason);Assert.IsFalse(e.potionUsed);Assert.IsFalse(e.mainActionStarted);Assert.AreEqual(before,JsonUtility.ToJson(sim.State));
         }
@@ -235,13 +235,13 @@ namespace Hellscript.Tests
             var sim=Fixture();sim.State.health=100;var d=Configure(sim,"M04");Set(d,"survival.lowHp","OFF");Set(d,"survival.escapeSkill","M04");Set(d,"dodge.area.policy","ALWAYS");Set(d,"dodge.method",method);Danger(sim,20,delay);
             var p=sim.PlanEdictSurvival(d);Assert.AreEqual(role,p.selected.role);if(method=="SKILL_IF_NEEDED")Assert.AreEqual(delay==1,p.attempts.First().timely);
         }
-        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M05")]
+        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M04-3")]
         public void SkillFirstCanUseADesignatedPreventiveShieldWhileWalkFirstStillWalks(HeroClass hero,string id)
         {
             var sim=Fixture(hero);sim.State.health=100;var d=Configure(sim,id);
             Set(d,"survival.lowHp","OFF");Set(d,"survival.defenseSkill",id);Set(d,"dodge.area.policy","ALWAYS");Danger(sim);
             d=HuntEdictV2.WithOption(d,id,2,"PREVENT");
-            if(id=="M05")d=HuntEdictV2.WithOption(d,id,4,"ALL");
+            if(id=="M04-3")d=HuntEdictV2.WithOption(d,id,4,"ALL");
             Set(d,"dodge.method","WALK_FIRST");Assert.AreEqual("WALK",sim.PlanEdictSurvival(d).selected.role);
             Set(d,"dodge.method","SKILL_FIRST");var plan=sim.PlanEdictSurvival(d);
             Assert.AreEqual("DEFENSE",plan.selected.role);Assert.AreEqual(id,plan.selected.skillId);
@@ -278,7 +278,7 @@ namespace Hellscript.Tests
             var resumed=new CombatSimulation(account,catalog,1,restore:copy);resumed.State.resource=100;resumed.Stats.regen=0;Advance(resumed,.05f);Assert.AreEqual(HeroActionPhase.Channeling,resumed.State.heroAction.phase);Advance(resumed,.05f);
             Assert.IsFalse(resumed.HeroActionBusy);Assert.AreEqual(100,resumed.State.resource,.0001f);Assert.IsFalse(resumed.State.actionEvents.Any(a=>a.skill==4&&a.kind=="ACTION_START"));
         }
-        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M05")]
+        [TestCase(HeroClass.Warrior,"W05")][TestCase(HeroClass.Mage,"M04-3")]
         public void NormalDodgeFallbackCannotIgnoreAnEmergencyOnlyShieldPolicy(HeroClass hero,string id)
         {
             var sim=Fixture(hero);sim.State.health=100;var d=Configure(sim,id);Set(d,"survival.lowHp","OFF");Set(d,"survival.fallback","OTHER_SKILL");Set(d,"survival.fallbackSkill",id);Set(d,"dodge.area.policy","ALWAYS");d=HuntEdictV2.WithOption(d,id,2,"EMERGENCY");Danger(sim).radius=20;

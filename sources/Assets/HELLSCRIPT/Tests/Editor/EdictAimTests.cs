@@ -56,9 +56,9 @@ namespace Hellscript.Tests
         [Test]
         public void NonAimedShieldLeavesAimTelemetryUntouched()
         {
-            var account=Account(HeroClass.Mage,16,true);account.Hero.edict=HuntEdictV2.WithOption(account.Hero.edict,"BASIC",1,"OFF");account.Hero.edict=HuntEdictV2.WithOption(account.Hero.edict,"M05",2,"ENGAGE");
-            var sim=Fixture(account);Advance(sim,400); // M05 has a core policy, but no aiming stage.
-            Assert.Greater(Starts(sim,"M05"),0);
+            var account=Account(HeroClass.Mage,16,true);account.Hero.edict=HuntEdictV2.WithOption(account.Hero.edict,"BASIC",1,"OFF");account.Hero.edict=HuntEdictV2.WithOption(account.Hero.edict,"M04-3",2,"ENGAGE");
+            var sim=Fixture(account);Advance(sim,400); // The transported shield ordinal has no independent aiming stage.
+            Assert.Greater(Starts(sim,"M04-3"),0);
             Assert.AreEqual(0,sim.EdictAimedCasts);Assert.IsNull(sim.LastEdictAim);
         }
 

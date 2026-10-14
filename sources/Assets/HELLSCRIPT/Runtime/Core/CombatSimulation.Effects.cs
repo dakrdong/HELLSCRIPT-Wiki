@@ -22,7 +22,7 @@ namespace Hellscript
         void AddShield(string definition,float baseAmount,float duration,int root)
         {
             var old=State.shields.Find(s=>s.definitionId==definition);
-            float generation=definition=="W05"&&Set("REF_SW02",3)?.25f:definition=="M05"&&Set("REF_SM01",3)?.3f:0;
+            float generation=definition=="W05"&&Set("REF_SW02",3)?.25f:definition=="M04:shield"&&Set("REF_SM01",3)?.3f:0;
             float amount=baseAmount*(Stats.shieldMultiplier+generation);
             if(old!=null)
             {
@@ -37,7 +37,7 @@ namespace Hellscript
         }
         void TryShieldMana(ShieldEffect shield)
         {
-            if(shield.definitionId!="M05"||shield.manaPaid||!Stats.specials.Contains("LM03")||ItemEffects.lm03Cooldown>.00001f||shield.absorbed+.00001f<shield.createdMaxHp*.15f)return;
+            if(shield.definitionId!="M04:shield"||shield.manaPaid||!Stats.specials.Contains("LM03")||ItemEffects.lm03Cooldown>.00001f||shield.absorbed+.00001f<shield.createdMaxHp*.15f)return;
             shield.manaPaid=true;ItemEffects.lm03Cooldown=4;
             float before=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+Stats.AspectValue("LM03",20));
             EffectEvent("LM03","RESOURCE",shield.id,shield.rootCastId,value:State.resource-before);
@@ -147,7 +147,7 @@ namespace Hellscript
         }
         void TickStatuses(float dt)
         {
-            foreach(var enemy in State.enemies.Where(e=>!e.dead))
+            foreach(var enemy in State.enemies.Where(e=>!e.dead).ToArray())
             {
                 var control=enemy.bossControl;
                 if(enemy.boss)
@@ -162,6 +162,7 @@ namespace Hellscript
                 }
                 foreach(var status in enemy.statuses)status.remaining=Mathf.Max(0,status.remaining-dt);
                 enemy.statuses.RemoveAll(s=>s.remaining<=.00001f);
+                if(D4Combat&&Hero.heroClass==HeroClass.Mage)ReleaseD4Shatter(enemy);
             }
         }
     }

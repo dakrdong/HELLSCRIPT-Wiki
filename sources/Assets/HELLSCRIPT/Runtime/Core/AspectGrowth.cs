@@ -40,7 +40,7 @@ namespace Hellscript
                 case "LA01":return Change(Change(text,"+15","+"+N(15)),"+60","+"+N(60));
                 case "LA02":return Replace("{0}도",20,R(20));
                 case "LA03":return text+Loc.F(" 후퇴 덫은 0.5초마다 D{0}%의 독 피해를 줍니다.",N(30));
-                case "LA04":return text+Loc.F(" 원래 추가 피해의 {0}%를 전염시킵니다.",N(50));
+                case "LA04":return Change(text,"50%",N(50)+"%");
                 case "LM01":return Replace("초당 {0}m",1,N(1));
                 case "LM02":return Change(text,"D70%","D"+N(70)+"%");
                 case "LM03":return Replace("자원 {0}",20,N(20));

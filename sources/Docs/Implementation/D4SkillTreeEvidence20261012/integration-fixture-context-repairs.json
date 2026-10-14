@@ -1,0 +1,83 @@
+{
+  "recordedUtc": "2026-10-13T17:21:53.130812+00:00",
+  "sourceBeforeRepair": "0d3b4d9e0bbe304a8ee8813465df5dc6cadcbd1f",
+  "patchSha256": "0754b0148de968ee6e64baa473354814e1e800f3c21ced0398142e8a16dff400",
+  "fullBefore": {
+    "id": "2",
+    "testcasecount": "5715",
+    "result": "Failed(Child)",
+    "total": "5715",
+    "passed": "5612",
+    "failed": "100",
+    "inconclusive": "0",
+    "skipped": "3",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-13 15:24:01Z",
+    "end-time": "2026-10-13 16:45:34Z",
+    "duration": "4893.3319963"
+  },
+  "focused": {
+    "startedUtc": "2026-10-13T17:13:42.804101+00:00",
+    "head": "0d3b4d9e0bbe304a8ee8813465df5dc6cadcbd1f",
+    "inputPatchSha256": "0754b0148de968ee6e64baa473354814e1e800f3c21ced0398142e8a16dff400",
+    "classes": [
+      "BossTests",
+      "CombatHistoryTests",
+      "CoreTests",
+      "EdictBlizzardTests",
+      "EdictChainTests",
+      "EdictFireballTests",
+      "EdictShareTests",
+      "EffectTests",
+      "FieldTests",
+      "FirstPlayGuideTests",
+      "HuntEdictV2StorageTests",
+      "OptimizationStage1Tests",
+      "OutcomeTests",
+      "RepeatHuntTests",
+      "RuneMasteryTests"
+    ],
+    "failureCriteriaChanged": false,
+    "exit": 0,
+    "finishedUtc": "2026-10-13T17:19:18.014871+00:00",
+    "result": {
+      "id": "2",
+      "testcasecount": "405",
+      "result": "Passed",
+      "total": "405",
+      "passed": "405",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-13 17:14:17Z",
+      "end-time": "2026-10-13 17:19:07Z",
+      "duration": "290.2636407"
+    }
+  },
+  "original100CasesNotRetested": [],
+  "newRetirements": 0,
+  "newSkips": 0,
+  "failureCriteriaChanged": false,
+  "files": [
+    {
+      "file": "Docs/Implementation/D4SkillTreeEvidence20261012/integration-full-fixture-context-failed.xml",
+      "sha256": "4ae4daa13fa15881fe0420da1df44ffb4fd663539c8ea96ffb5df51672a09289",
+      "bytes": 4597942
+    },
+    {
+      "file": "Docs/Implementation/D4SkillTreeEvidence20261012/integration-fixture-context-intermediate.xml",
+      "sha256": "c8bb7e302c9581bb9a3b97c5f2754c560a1c9bd38a2e673e9ac99c3a2cc38807",
+      "bytes": 325278
+    },
+    {
+      "file": "Docs/Implementation/D4SkillTreeEvidence20261012/integration-fixture-context-focused.xml",
+      "sha256": "66ff1a04b92518029e64a5087bd82dd9222e320a0152ce2b9ffcac11be2c1ca1",
+      "bytes": 320715
+    }
+  ]
+}

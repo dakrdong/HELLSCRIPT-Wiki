@@ -1,0 +1,33 @@
+{
+  "phase": "UI-1",
+  "result": "passed",
+  "editMode": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "goldenChecks": {
+    "layout": 2975,
+    "layoutScenarios": 15034,
+    "viewModel": 600,
+    "interaction": 4986,
+    "screenTotal": 23595,
+    "priorRules": 32208,
+    "combined": 55803
+  },
+  "units": "six screen vectors and font rounding verified",
+  "coreCopiesSHA256": {
+    "Layout": "944215ed0557f136f1dd57a2797b02f1ecae047e036c49c274884d6ebb74e605",
+    "ViewModel": "7c08513398a3623a53ff21e277b2d4769e70638ff2d7fecfa205f026780b657e",
+    "Session": "c6b2b7903cb0c9ee3aaa9a5aa5a451a478bd00382d6f4f74d00a146e0446fd96",
+    "Fx": "196d497c4b6fc841bbd0b5ee6a6c35774e66a51b73a85107d299701fc6b733a8"
+  },
+  "testModel": "Game data model plus only explicit design-board allocations and selections",
+  "notVerified": [
+    "uGUI meshes",
+    "actual window",
+    "real pointer input",
+    "native player",
+    "physical mobile"
+  ]
+}

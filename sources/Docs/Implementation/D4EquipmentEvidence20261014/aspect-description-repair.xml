@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Failed(Child)" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-14 03:49:45Z" end-time="2026-10-14 03:49:46Z" duration="0.8673772">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 03:49:45Z" end-time="2026-10-14 03:49:46Z" duration="0.867377" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="7718" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 03:49:45Z" end-time="2026-10-14 03:49:46Z" duration="0.837603" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="73573" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="7719" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 03:49:45Z" end-time="2026-10-14 03:49:46Z" duration="0.812997" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="SetUpFixture" id="7614" name="Tests" fullname="Hellscript.Tests.ValidationAudioSilence" classname="Hellscript.Tests.ValidationAudioSilence" runstate="Runnable" testcasecount="5746" result="Failed" site="Child" start-time="2026-10-14 03:49:45Z" end-time="2026-10-14 03:49:46Z" duration="0.788520" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1171" name="AspectStoneTests" fullname="Hellscript.Tests.AspectStoneTests" classname="Hellscript.Tests.AspectStoneTests" runstate="Runnable" testcasecount="23" result="Failed" site="Child" start-time="2026-10-14 03:49:46Z" end-time="2026-10-14 03:49:46Z" duration="0.560759" total="2" passed="1" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1193" name="All123AspectsHaveFiveDistinctBilingualEffectDescriptions" fullname="Hellscript.Tests.AspectStoneTests.All123AspectsHaveFiveDistinctBilingualEffectDescriptions" methodname="All123AspectsHaveFiveDistinctBilingualEffectDescriptions" classname="Hellscript.Tests.AspectStoneTests" runstate="Runnable" seed="722078463" result="Failed" label="Error" start-time="2026-10-14 03:49:46Z" end-time="2026-10-14 03:49:46Z" duration="0.371968" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Missing aspect description token: 30 seconds]]></message>
+                <stack-trace><![CDATA[  at Hellscript.AspectGrowth.Change (System.String text, System.String from, System.String to) [0x0001a] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Runtime/Core/AspectGrowth.cs:24 
+  at Hellscript.AspectGrowth.Description (System.String id, System.Int32 level) [0x00203] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Runtime/Core/AspectGrowth.cs:39 
+  at Hellscript.Tests.AspectStoneTests+<>c__DisplayClass18_0.<All123AspectsHaveFiveDistinctBilingualEffectDescriptions>b__0 (System.Int32 level) [0x00000] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AspectStoneTests.cs:112 
+  at System.Linq.Enumerable+SelectIPartitionIterator`2[TSource,TResult].PreallocatingToArray (System.Int32 count) [0x0001e] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at System.Linq.Enumerable+SelectIPartitionIterator`2[TSource,TResult].ToArray () [0x00023] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at System.Linq.Enumerable.ToArray[TSource] (System.Collections.Generic.IEnumerable`1[T] source) [0x0001f] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at Hellscript.Tests.AspectStoneTests.All123AspectsHaveFiveDistinctBilingualEffectDescriptions () [0x0009c] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/AspectStoneTests.cs:112 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+              </failure>
+              <output><![CDATA[Serialization depth limit 10 exceeded at 'Hellscript::EdictCoreSkill.options'. There may be an object composition cycle in one or more of your serialized classes. Consider rearranging data or use `[SerializeReference]`. 
+
+Serialization hierarchy:
+11: Hellscript::EdictCoreSkill.options
+10: Hellscript::HuntEdictV2Document.skills
+9: Hellscript::ClassSkillLoadout.legacyEdict
+8: Hellscript::BuildConfig.classSkills
+7: Hellscript::TrainingAttempt.build
+6: Hellscript::TrainingComparisonRecord.a
+5: Hellscript::HeroSave.trainingComparison
+4: Hellscript::PuzzleLevelProgress.kitHero
+3: Hellscript::PuzzleProgress.levels
+2: Hellscript::TutorialSlot.puzzle
+1: Hellscript::AccountGuide.tutorialSlots
+0: Hellscript::AccountSave.guide
+
+]]></output>
+            </test-case>
+            <test-case id="1194" name="EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters" fullname="Hellscript.Tests.AspectStoneTests.EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters" methodname="EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters" classname="Hellscript.Tests.AspectStoneTests" runstate="Runnable" seed="1431910941" result="Passed" start-time="2026-10-14 03:49:46Z" end-time="2026-10-14 03:49:46Z" duration="0.179822" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

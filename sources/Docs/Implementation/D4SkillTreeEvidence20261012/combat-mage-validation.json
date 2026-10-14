@@ -1,0 +1,60 @@
+{
+  "phase": "5c Mage",
+  "source_base": "eee9a33b",
+  "feature_flag_default": false,
+  "proof": [
+    {
+      "name": "mage-first-pairs",
+      "total": 14,
+      "passed": 10,
+      "failed": 4,
+      "end_utc": "2026-10-12 22:56:21Z",
+      "failed_cases": [
+        "BlizzardPairsReadDurationFollowRadiusDwellAndReturningDamage(1)",
+        "BlizzardPairsReadDurationFollowRadiusDwellAndReturningDamage(5)",
+        "MageCoreCostAndLanceRowsReadIndependentApprovedValues(1)",
+        "MageCoreCostAndLanceRowsReadIndependentApprovedValues(5)"
+      ]
+    },
+    {
+      "name": "mage-second-pairs",
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "end_utc": "2026-10-12 22:59:05Z",
+      "failed_cases": []
+    },
+    {
+      "name": "mage-passives-auto-resume",
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "end_utc": "2026-10-12 23:01:36Z",
+      "failed_cases": []
+    },
+    {
+      "name": "mage-shared-boundary-regression",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "end_utc": "2026-10-12 23:03:41Z",
+      "failed_cases": []
+    }
+  ],
+  "acceptance": {
+    "paired_modifiers": 28,
+    "actual_resume_cases": 56,
+    "automatic_modifiers": 28,
+    "ordinary_passives": 8,
+    "key_passives": 2,
+    "affected_warrior_ranger_actual_resume_cases": 112,
+    "free_sage_actual_resume_both_endpoints": "pass",
+    "corrupt_element_ledgers": "rejected without input mutation"
+  },
+  "not_verified": [
+    "dependent-system and default-switch integration",
+    "full EditMode at final main",
+    "native-player combat and physical devices"
+  ],
+  "source_hash": "a18756182b1d9edeb64780be08321f5ae63581e8fcee6d89626c43f711d598c9"
+}

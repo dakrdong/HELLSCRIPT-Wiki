@@ -1,0 +1,32 @@
+# D4 스킬 변경에 따른 장비 정합성 점검
+
+작성일: 2026-10-14. [English](D4_Skill_Equipment_Audit_20261014.en.md).
+
+전설 141종(일반 123종·추가 정의 18종), 세트 장비 129종·30세트·72효과 단계를 현재 스킬·보조 스킬과 대조했다. 기준은 현재 `ClassSkills.json`, `LegendaryPowers.json`, `ItemCatalog`와 D4 전투 경로다. 기존 장비 ID·각인 ID·부위·드롭 가중치와 추가 장비의 일반 드롭 비활성 상태를 유지했다.
+
+- 삭제된 마력 회수 의존성을 원소창+균열 결계로 바꾸었다. 서로 배타적인 두 보조 스킬을 요구하던 효과는 낙인 갈고리+전율의 파동, 맹독 주입+서리 올가미, 미끼 자체의 유인 연장으로 바꾸었다. 투쟁의 빚은 현재 자원 회복 정지와 실제 소모량을 따른다.
+- 현재 경로에서 누락됐던 돌파→무쇠 자세, 사냥 준비 처치→교차 쇠뇌, 주입 독→분열 화살, 응시 사격, 선조·거인·분신·삼원소 붕괴의 장비 연계를 연결했다. 빙하창의 실제 빙결 후 3초 연계 창을 둬 두 스킬의 준비·회복 시간 뒤에도 귀환 서리가 발동하며, 보스 제압만으로는 준비하지 않는다.
+- 화염구 첫 원피해의 추가 폭발, 원소 주입 전염, 연속 도약의 충전 감소·회복, 탄막 7발의 좁혀진 사선을 현재 형상과 연결했다. 추가 피해는 기존 재귀 차단·스냅샷·저장 경로를 사용한다.
+- 냉기 세트 동상은 귀환 서리 원피해에도 적용한다. 원소 주입 세트의 문구를 현재 원소에 맞추고, 잔영 세트는 변경된 화살 형상 대신 첫 적중 위치의 지연 폭발로 통일한다. 덫·눈보라 장판만 요구하는 효과는 그 범위를 설명에 명시했다. 등급 세트는 예전 고정 해금 레벨 대신 실제 습득 여부를 따른다.
+- 한국어·영어 설명과 [현재 스킬·장비 대응표](../Design/HELLSCRIPT_Skill_Equipment.md), [전설 도감](../Design/HELLSCRIPT_Legendary_Class_Expansion.md)을 함께 갱신했다. 현재 데이터 원본은 `Docs/Design/ClassSkills/current_runtime_parameters.json`이며 `tools/class_skill_runtime.py build`로 런타임 JSON을 동기화한다.
+
+공개 위키 생성기도 삭제된 옛 트리 대신 현재 D4 스킬·보조 스킬 144개를 읽도록 수정했다. 추가 장비의 일반 드롭 비활성 표시는 유지하고 이전 18개 카탈로그는 보존 기록으로 구분한다.
+
+## 검증 기록
+
+main `87e7e064` 통합 뒤 전체 EditMode를 한 번 실행했다. 5,746건 중 5,742통과·1실패·3제외였으며 새 장비 회귀 31건은 모두 통과했다. 제외 3건은 기존 저작용 probe 2건과 별도 경로를 요구하는 측정 검사다. 실패는 각인석 성장 설명의 문자열 변환이었다. 한국어·영어의 변환 기준을 맞추고, 전염 효과가 기본 50%와 강화 수치를 동시에 표시하던 문제도 수정했다. 123개 각인의 5등급·두 언어 및 실제 성장 파라미터 검사 2건을 재실행해 모두 통과했다. 변경되지 않은 전투 검사 결과는 재사용했다.
+
+macOS 개발 플레이어의 제어 환경에서 실제 소유 장비를 착용한 전사·궁수·마법사 3개 저장을 검증했다. 장비 효과, 디스크 재로드 후 장비 ID, 진행 중 전투와 0.5초 이어하기의 RNG·자원·피해 기록이 일치했다. 첫 앱 시도는 검증 입력의 좌표·진행 해금을 맞추기 전에 스킬 시전이 실패했으며, 실제 생성 지도 좌표와 해금을 맞춘 두 번째 빌드·실행이 통과했다. 머리 없는 실행으로 전투·저장을 검증한 것이며 화면 조작·모바일 실기기·WebGL·장기 밸런스 검증은 포함하지 않는다.
+
+현재 데이터 생성 일치, 기존 ID·드롭 조건, 삭제 스킬 ID 검사와 UI 계약 회귀 15건도 통과했다. 추가 장비 18종·세트 정의의 일반 드롭 비활성 상태는 유지했다. 앱·캐시·위키 생성본은 작업 소유 산출물이며 작은 근거와 재생성 절차를 보존한 뒤 관리형 작업 폴더로 보관한다.
+
+| 근거 | 내용 |
+| --- | --- |
+| [audit.json](D4EquipmentEvidence20261014/audit.json) | 전수 범위·변경 항목·안정적인 ID와 드롭 조건 |
+| [validation.json](D4EquipmentEvidence20261014/validation.json) | 소스·binary·저장 해시, 결과, 재사용 범위와 실행 절차 |
+| [전체 EditMode XML](D4EquipmentEvidence20261014/full-editmode.xml) | 원래 실패와 제외를 포함한 전체 실행 기록 |
+| [설명 변환 첫 재검사](D4EquipmentEvidence20261014/aspect-description-repair.xml), [최종 재검사](D4EquipmentEvidence20261014/aspect-description-final-repair.xml) | 실패 보존 및 2/2 통과 |
+| [macOS 결과](D4EquipmentEvidence20261014/native/result.json), [전사](D4EquipmentEvidence20261014/native/class-0-result.json), [궁수](D4EquipmentEvidence20261014/native/class-1-result.json), [마법사](D4EquipmentEvidence20261014/native/class-2-result.json) | 3/3 효과·디스크 복원·이어하기 |
+| [UI 계약](D4EquipmentEvidence20261014/ui-contract-repaired-receipt.json) | 15/15 통과 |
+| [진단 실행 목록](D4EquipmentEvidence20261014/diagnostic-runs.json), [첫 30건](D4EquipmentEvidence20261014/focused-current-gear.xml), [실패 항목 수정](D4EquipmentEvidence20261014/failed-current-gear-repair.xml), [마지막 4건](D4EquipmentEvidence20261014/failed-gear-final-repair.xml), [자력](D4EquipmentEvidence20261014/failed-magnetic-repair.xml), [사선 실패](D4EquipmentEvidence20261014/narrowed-line.xml), [사선 수정](D4EquipmentEvidence20261014/narrowed-line-repair.xml) | 겹치는 진단 횟수는 전체 결과에 합산하지 않음 |
+| [과거 위키 입력 복원](D4EquipmentEvidence20261014/wiki-source-restoration.json) | 기존 공개 commit과 해시가 같은 291개 입력만 복원 |

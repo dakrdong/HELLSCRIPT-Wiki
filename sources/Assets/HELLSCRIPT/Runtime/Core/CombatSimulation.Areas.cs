@@ -132,6 +132,7 @@ namespace Hellscript
             foreach(var window in windows)
             {
                 var fx=window.effect;float active=window.end-window.start;
+                if(D4Combat&&fx.d4Modifier==1){fx.position=State.position;continue;}
                 if(fx.followsTarget&&Target!=null&&Perceived(Target)&&fx.moved<4)
                 {var p=Map.MoveDirect(fx.position,Target.position,Mathf.Min(active*AspectGrowth.SnapshotValue(GroundSnapshot(fx),"LM01",1),4-fx.moved));fx.moved+=Vector2.Distance(p,fx.position);fx.position=p;}
             }
@@ -147,7 +148,7 @@ namespace Hellscript
                     if(active.Length==0){enemy.blizzardTick=.5f;cursor=end;continue;}
                     var fx=active[0].effect;var snap=GroundSnapshot(fx);enemy.blizzardTick-=end-cursor;
                     while(enemy.blizzardTick<=.00001f&&!enemy.dead)
-                    {enemy.blizzardTick+=.5f;Hit(enemy,fx.damage*.5f/Mathf.Max(.0001f,snap.damage),2,false,RuneMultiBonus(snap,runeTargets[fx]),snap,false,definition:"M02",root:fx.rootCastId,instance:fx.id,kind:DamageKind.Periodic);}
+                    {enemy.blizzardTick+=.5f;Hit(enemy,fx.damage*.5f/Mathf.Max(.0001f,snap.damage),2,false,RuneMultiBonus(snap,runeTargets[fx]),snap,false,definition:fx.definitionId,root:fx.rootCastId,instance:fx.id,kind:DamageKind.Periodic);}
                     cursor=end;
                 }
                 // Slow strength is independent of which overlapping field supplied the stronger damage tick.
@@ -155,9 +156,10 @@ namespace Hellscript
                 foreach(var window in inside)
                 {
                     var fx=window.effect;float remaining=fx.duration-(window.end-window.start);if(window.end<dt-.00001f||remaining<=.00001f)continue;
-                    activeAreas.Add(fx.id);var snap=GroundSnapshot(fx);ApplyStatus(enemy,StatusKind.Slow,"M02",remaining,fx.rootCastId,SlowStrength(snap),fx.id);
+                    activeAreas.Add(fx.id);var snap=GroundSnapshot(fx);ApplyStatus(enemy,StatusKind.Slow,D4Combat&&!string.IsNullOrEmpty(fx.d4Source)?fx.d4Source:"M02",remaining,fx.rootCastId,D4Combat&&fx.d4Modifier==2?(float)SkillTreeD4Values.Modifier("M02-2",fx.d4ModifierRank)/100:SlowStrength(snap),fx.id);
                 }
-                enemy.statuses.RemoveAll(s=>s.areaId>0&&s.casterId==State.heroId&&s.definitionId=="M02"&&!activeAreas.Contains(s.areaId));
+                if(D4Combat&&inside.Any(w=>w.effect.d4Modifier==2)){enemy.d4BlizzardDwell+=inside.Where(w=>w.effect.d4Modifier==2).Max(w=>w.end-w.start);if(enemy.d4BlizzardDwell>=3){enemy.d4BlizzardDwell=0;ApplyStatus(enemy,StatusKind.Freeze,"M02",1.5f,inside.First(w=>w.effect.d4Modifier==2).effect.rootCastId);}}else if(D4Combat)enemy.d4BlizzardDwell=0;
+                enemy.statuses.RemoveAll(s=>s.areaId>0&&s.casterId==State.heroId&&(s.definitionId=="M02"||D4Combat&&s.definitionId=="M18")&&!activeAreas.Contains(s.areaId));
             }
             foreach(var fx in State.effects.Where(f=>!f.hostile&&f.kind==13).ToArray())
             {

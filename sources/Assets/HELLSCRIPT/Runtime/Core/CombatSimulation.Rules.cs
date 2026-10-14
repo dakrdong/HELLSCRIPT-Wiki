@@ -93,7 +93,7 @@ namespace Hellscript
             var policy=exact?.version==EdictTargetPolicy.CurrentVersion?exact:global.HasValue?null:TargetPolicy;
             var candidates=policy!=null?sensed.Where(EdictTargetEligible).ToList():sensed;
             if(DodgeOwnsEdictAction&&(r.action==RuleAction.Basic||r.action==RuleAction.Skill))
-            {float range=r.action==RuleAction.Basic?BasicReach:r.skill>=0&&r.skill<catalog.skills.Count?catalog.skills[r.skill].range:0;if(range>0)candidates=candidates.Where(e=>DodgeTargetInRange(e,range,r.action==RuleAction.Basic&&Hero.heroClass!=HeroClass.Warrior?.2f:0)).ToList();}
+            {float range=r.action==RuleAction.Basic?BasicReach:r.skill>=0&&r.skill<catalog.skills.Count?SkillRange(r.skill):0;if(range>0)candidates=candidates.Where(e=>DodgeTargetInRange(e,range,r.action==RuleAction.Basic&&Hero.heroClass!=HeroClass.Warrior?.2f:0)).ToList();}
             if(policy!=null&&r.target==RuleTarget.Default)
                 return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,DangerousEdictCast,(a,b)=>Map.LineClear(a,b));
             var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId)??(DodgeOwnsEdictAction?candidates.OrderBy(e=>(e.position-State.position).sqrMagnitude).ThenBy(e=>e.id).FirstOrDefault():null);
@@ -176,7 +176,7 @@ namespace Hellscript
                     {var basic=PlanEdictWarriorBasic(edictSource,c.target);c.code=basic.code;c.detail=basic.detail;c.ready=basic.ready;c.target=State.enemies.Find(e=>e.id==basic.targetId&&!e.dead);return c;}
                     if((r.id=="edict:MAGE:BASIC"||r.id=="edict:RANGER:BASIC")&&!EdictAimGate(c,false))return c;
                     if(c.target==null){c.code="NO_TARGET";c.detail="감지한 대상이 없습니다.";return c;}
-                    float basicRange=ClassSkills.BasicReach(Hero.heroClass);
+                    float basicRange=BasicReach;
                     if(Vector2.Distance(State.position,c.target.position)>basicRange){c.code="RANGE";c.detail=Loc.F("기본 공격 사거리 {0}m 밖", basicRange);return c;}
                     if(Hero.heroClass!=HeroClass.Warrior&&!Map.ProjectileClear(State.position,c.target.position,.2f)){c.code="LINE_OF_FIRE";c.detail="투사체가 통과하지 못하는 사선";return c;}
                 }
@@ -229,7 +229,7 @@ namespace Hellscript
             {
                 var plan=PlanEdictTeleport(edictSource,c.target);c.code=plan.code;c.detail=plan.detail;c.ready=plan.ready;c.cost=plan.cost;c.destination=plan.destination;return c;
             }
-            if(r.id=="edict:M05")
+            if(r.id=="edict:M04-3")
             {
                 var plan=PlanEdictShield(edictSource,c.target);c.code=plan.code;c.detail=plan.detail;c.ready=plan.ready;c.cost=plan.cost;c.destination=plan.destination;return c;
             }
@@ -253,7 +253,7 @@ namespace Hellscript
             if(skill.kind==SkillKind.Shield&&State.shields.Any(s=>s.definitionId==SkillId(r.skill)&&s.amount>0)||skill.kind==SkillKind.Mark&&CombatEffects.Has(c.target,StatusKind.Mark)||skill.kind==SkillKind.Shadow&&State.shadowCharges>0)
             {c.code="EFFECT_ACTIVE";c.detail="현재 효과가 남아 있습니다.";return c;}
             bool movement=skill.kind==SkillKind.Leap||skill.kind==SkillKind.Retreat||skill.kind==SkillKind.Teleport;
-            float range=skill.kind==SkillKind.Whirlwind?3:skill.range;
+            float range=skill.kind==SkillKind.Whirlwind?(D4Combat?RuneSkillRadius(0,2.5f)*D4ProjectedArea("W01"):3):D4Combat?SkillRange(r.skill):skill.range;
             if(ground)c.destination=c.aim??GroundAim(r,c.target);
             if(!movement&&range>0&&Vector2.Distance(State.position,ground?c.destination:c.target.position)>range+.0001f){c.code="RANGE";c.detail=Loc.F("스킬 사거리 {0}m 밖", range);return c;}
             float radius=r.skill==6?.3f:r.skill==7?.2f:r.skill==12?.25f:0;

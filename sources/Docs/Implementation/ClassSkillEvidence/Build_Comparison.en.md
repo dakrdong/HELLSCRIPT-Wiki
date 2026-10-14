@@ -6,35 +6,35 @@ Level 40, rank 1 skills, item level 30, eight legal equipment slots, seed 9137 a
 
 | Build | Single DPS | Group DPS | Boss DPS | Max. resource starvation | Scenarios survived | Ultimate casts |
 |---|---|---|---|---|---|---|
-| BUILD_REF_SA01 | 266.19 | 265.16 | 414.11 | 3.15s | 3/3 | 1 |
-| BUILD_REF_SA02 | 41.83 | 47.68 | 37.34 | 0.00s | 3/3 | 1 |
-| BUILD_REF_SA03 | 93.61 | 1465.69 | 323.41 | 49.45s | 3/3 | 1 |
-| BUILD_REF_SA04 | 90.68 | 1258.47 | 271.82 | 48.60s | 3/3 | 1 |
-| BUILD_REF_SA05 | 95.10 | 1262.58 | 259.10 | 46.70s | 3/3 | 1 |
-| BUILD_REF_SA06 | 34.83 | 254.49 | 54.02 | 0.00s | 3/3 | 1 |
-| BUILD_REF_SA07 | 112.55 | 962.98 | 237.15 | 52.10s | 3/3 | 1 |
-| BUILD_REF_SA08 | 89.07 | 840.95 | 162.50 | 49.55s | 3/3 | 1 |
-| BUILD_REF_SM01 | 42.19 | 131.58 | 49.06 | 0.00s | 3/3 | 2 |
-| BUILD_REF_SM02 | 260.71 | 1970.58 | 242.70 | 47.60s | 3/3 | 1 |
-| BUILD_REF_SM03 | 301.00 | 3187.25 | 268.73 | 39.45s | 3/3 | 2 |
-| BUILD_REF_SM04 | 257.69 | 2021.84 | 228.81 | 42.25s | 3/3 | 1 |
-| BUILD_REF_SM05 | 344.90 | 3282.71 | 285.26 | 48.25s | 3/3 | 2 |
-| BUILD_REF_SM06 | 229.44 | 1158.36 | 201.40 | 0.00s | 3/3 | 2 |
-| BUILD_REF_SM07 | 158.91 | 441.78 | 166.32 | 0.00s | 3/3 | 2 |
-| BUILD_REF_SM08 | 222.40 | 1660.87 | 198.33 | 47.55s | 3/3 | 1 |
-| BUILD_REF_SW01 | 100.23 | 329.12 | 100.28 | 0.00s | 3/3 | 2 |
-| BUILD_REF_SW02 | 331.51 | 2071.31 | 284.30 | 37.20s | 3/3 | 0 |
-| BUILD_REF_SW03 | 224.39 | 2079.36 | 184.62 | 32.70s | 3/3 | 0 |
-| BUILD_REF_SW04 | 243.67 | 2670.92 | 238.32 | 46.20s | 3/3 | 0 |
-| BUILD_REF_SW05 | 333.10 | 2643.94 | 301.42 | 43.20s | 3/3 | 0 |
-| BUILD_REF_SW06 | 239.83 | 2213.50 | 205.97 | 41.45s | 3/3 | 0 |
-| BUILD_REF_SW07 | 335.43 | 1599.61 | 234.46 | 42.50s | 3/3 | 0 |
-| BUILD_REF_SW08 | 300.17 | 2824.42 | 327.71 | 31.80s | 3/3 | 2 |
-| BUILD_SA | 32.16 | 467.73 | 109.28 | 39.55s | 3/3 | 2 |
-| BUILD_SAB | 33.60 | 291.97 | 91.93 | 38.15s | 3/3 | 1 |
-| BUILD_SM | 86.87 | 686.92 | 82.33 | 48.55s | 3/3 | 2 |
-| BUILD_SMB | 48.41 | 138.50 | 49.02 | 0.00s | 3/3 | 2 |
-| BUILD_SW | 184.99 | 1378.93 | 175.58 | 9.85s | 3/3 | 0 |
-| BUILD_SWB | 221.76 | 1276.26 | 153.96 | 44.35s | 3/3 | 0 |
+| BUILD_REF_SA01 | 265.37 | 267.02 | 349.66 | 2.95s | 3/3 | 1 |
+| BUILD_REF_SA02 | 41.83 | 51.47 | 37.34 | 0.00s | 3/3 | 1 |
+| BUILD_REF_SA03 | 94.80 | 1351.14 | 320.17 | 49.40s | 3/3 | 1 |
+| BUILD_REF_SA04 | 91.63 | 1239.88 | 272.29 | 48.50s | 3/3 | 1 |
+| BUILD_REF_SA05 | 96.47 | 1186.78 | 285.74 | 45.35s | 3/3 | 1 |
+| BUILD_REF_SA06 | 36.36 | 252.81 | 53.42 | 0.00s | 3/3 | 1 |
+| BUILD_REF_SA07 | 112.55 | 977.45 | 234.25 | 51.15s | 3/3 | 1 |
+| BUILD_REF_SA08 | 89.07 | 835.07 | 154.83 | 50.10s | 3/3 | 2 |
+| BUILD_REF_SM01 | 42.19 | 137.26 | 49.06 | 0.00s | 3/3 | 2 |
+| BUILD_REF_SM02 | 260.75 | 1997.53 | 227.58 | 47.50s | 3/3 | 1 |
+| BUILD_REF_SM03 | 296.10 | 3143.79 | 269.51 | 39.20s | 3/3 | 2 |
+| BUILD_REF_SM04 | 259.77 | 2041.85 | 224.94 | 38.95s | 3/3 | 1 |
+| BUILD_REF_SM05 | 349.67 | 3298.93 | 297.22 | 48.90s | 3/3 | 2 |
+| BUILD_REF_SM06 | 231.28 | 1061.04 | 186.01 | 0.10s | 3/3 | 2 |
+| BUILD_REF_SM07 | 158.10 | 403.94 | 161.71 | 0.00s | 3/3 | 2 |
+| BUILD_REF_SM08 | 228.55 | 1702.04 | 205.54 | 45.35s | 3/3 | 1 |
+| BUILD_REF_SW01 | 98.74 | 245.19 | 31.32 | 0.00s | 3/3 | 2 |
+| BUILD_REF_SW02 | 333.12 | 1995.52 | 242.12 | 51.55s | 3/3 | 2 |
+| BUILD_REF_SW03 | 225.08 | 2167.03 | 166.05 | 40.65s | 3/3 | 0 |
+| BUILD_REF_SW04 | 243.67 | 2660.47 | 233.88 | 49.55s | 3/3 | 0 |
+| BUILD_REF_SW05 | 333.10 | 2512.28 | 262.63 | 52.55s | 3/3 | 2 |
+| BUILD_REF_SW06 | 239.83 | 2271.22 | 200.59 | 50.85s | 3/3 | 2 |
+| BUILD_REF_SW07 | 335.43 | 1644.09 | 206.42 | 44.60s | 3/3 | 0 |
+| BUILD_REF_SW08 | 300.17 | 2240.21 | 260.88 | 37.05s | 3/3 | 3 |
+| BUILD_SA | 32.64 | 397.94 | 110.95 | 39.55s | 3/3 | 2 |
+| BUILD_SAB | 34.09 | 249.62 | 85.78 | 35.50s | 3/3 | 1 |
+| BUILD_SM | 87.32 | 693.00 | 75.88 | 48.55s | 3/3 | 2 |
+| BUILD_SMB | 48.53 | 132.95 | 48.11 | 0.00s | 3/3 | 2 |
+| BUILD_SW | 184.99 | 1375.04 | 142.03 | 19.25s | 3/3 | 0 |
+| BUILD_SWB | 221.76 | 1223.11 | 90.30 | 43.10s | 3/3 | 2 |
 
 Resource starvation counts time when at least one equipped paid skill is unaffordable. Zero ultimate casts can mean its automatic condition was never satisfied; direct ultimate behavior and rejection of an unselected ultimate are verified separately. The JSON retains incoming damage, actual cast IDs/counts and secondary-hit counts.

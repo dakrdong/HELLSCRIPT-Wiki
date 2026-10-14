@@ -1,46 +1,48 @@
 # HELLSCRIPT skill and equipment matrix
 
-Updated: 2026-10-04
+Updated: 2026-10-14
 
-[Design rules](HELLSCRIPT_Class_Skills.en.md) · [JSON](ClassSkills/catalog.json)
+See [the current equipment audit](../Implementation/D4_Skill_Equipment_Audit_20261014.en.md) for D4 changes and verification.
 
-Links 120 existing class legendaries, 3 shared items, 18 new legendary concepts, 6 existing sets and 24 set concepts. **Direct** retains exact bound skill IDs. **Condition enablers** provide a mark, barrier or similar state without replacing an item’s bound skill. The data’s supportSkillIds has the same support-only meaning.
+[Design rules](HELLSCRIPT_Class_Skills.en.md) · [JSON](ClassSkills/current_runtime_parameters.json)
+
+Links 120 existing class legendaries, 3 shared items, 18 new legendary concepts, 6 existing sets and 24 set concepts. **Direct** retains exact bound skill IDs. **Condition enablers** provide a mark, barrier or similar state without replacing an item’s bound skill. Current runtime JSON and combat code own the effects.
 
 ## 18 additional legendary concepts
 
-Six items per class link new skill pairs. These are not registered for drops, saves or combat; weights are undecided. Ultimate items enhance only the already-selected branch.
+The 18 definitions use current skills and executable effects, retain their save IDs, and keep zero drop weight. This audit does not add them to ordinary drops. Ultimate items enhance the selected branch.
 
 ### Warrior
 
 | ID | Name | Slot | Skills | Unique power |
 |---|---|---|---|---|
-| DES_LW41 | Pursuer's Chain | Amulet | W07, W08 | Directly hooking your branded target extends the brand by 2s and restores 8 extra resource. Never extend beyond 8s from initial application; 4s interval. |
-| DES_LW42 | Wound Reaper's Grasp | Hands | W09, W10 | Increase new Raking Wound bleed totals by 20%. Blood Reclamation stuns each enemy whose remaining bleed it actually cashes out for 1s, up to 5 per cast; bosses receive stagger credit. |
-| DES_LW43 | Moving Rampart | Body | W11, W12 | After Front Break, the next Iron Stance within 5s grants an 8% maximum-HP barrier for 4s. Once per completed break, not refreshed by stance recasts alone. |
-| DES_LW44 | Mountain Tremor | Waist | W13, W14 | An actual Battlefield Ring hit empowers the next Tremor Wave within 5s: width increases from 1m to 1.5m and direct damage gains +25% in the legendary pool. |
-| DES_LW45 | Unspent Resolve | Ring | W15, W16 | Using Guardian's Vow with Battle Loan debt spends up to 8 current resource to repay that amount. Add 1% maximum HP to Vow's barrier per resource actually repaid, capped at 8%; 8s interval. |
-| DES_LW46 | Ancestral King's Crown | Head | W17, W18 | With War of the Ancestors selected, the first ancestor hit grants +20% legendary-pool Whirlwind damage for 4s. With Titan's Judgment selected, restore 20 resource once on an actual hit, regardless of target count. Never unlock or cast the other ultimate. |
+| DES_LW41 | Pursuer's Chain | Amulet | W08-3 | A direct Branded Hook hit extends its new brand from 6s to 8s and restores 8 extra resource. 4s interval. |
+| DES_LW42 | Wound Reaper's Grasp | Hands | W09, W09-1 | Increase new Raking Wound bleed totals by 20%. Blood Reclamation stuns each enemy whose remaining bleed it actually cashes out for 1s, up to 5 per cast; bosses receive stagger credit. |
+| DES_LW43 | Moving Rampart | Body | W02-1, W05-1 | After Front Break, the next Iron Stance within 5s grants an 8% maximum-HP barrier for 4s. Once per completed break, not refreshed by stance recasts alone. |
+| DES_LW44 | Mountain Tremor | Waist | W08-3, W04-2 | A direct Branded Hook hit prepares +25% legendary additive direct damage for the next Tremor Wave within 5s. One charge per hook cast, consumed once. |
+| DES_LW45 | Unspent Resolve | Ring | W06-3, W05-2 | Casting Guardian Oath during Debt of Strife's regeneration pause spends up to 8 current resource and grants a 4s extra barrier equal to 1% max HP per resource spent, up to 8%. 8s interval. |
+| DES_LW46 | Ancestral King's Crown | Head | W17, W18 | The first valid Ancestor War attack grants +20% legendary additive Whirlwind damage for 4s. Giant Judgment restores 20 resource once per cast on a valid hit; Giant Form restores it on the first direct skill hit during the transformation. |
 
 ### Ranger
 
 | ID | Name | Slot | Skills | Unique power |
 |---|---|---|---|---|
-| DES_LA41 | Patient Hunter's Bow | Weapon | A07, A08 | The first direct Successive Shots or Patient Shot hit on a marked target adds D50% secondary physical damage and restores 4 resource. Both share a 1s interval. |
-| DES_LA42 | Winterthorn Grasp | Hands | A09, A10 | If Frost Snare actually hits an enemy rooted by Briar Trap, apply D90% secondary poison damage over 3s. Root or cold alone cannot retrigger it; 4s per target. |
-| DES_LA43 | Decoy Mantle | Body | A11, A12 | Using Smoke Cover while your decoy lives refreshes its normal-enemy lure to 2s from now. Once per decoy; no elite or boss taunt and no extra explosion. |
-| DES_LA44 | Forked Fang | Amulet | A13, A14 | If Forking Arrow's first target has your Venom Arrow poison, increase its secondary target count from 2 to 3. Secondary arrows remain D50% and copy no poison, mark or shadow charge. |
-| DES_LA45 | Prepared Outpost | Waist | A15, A16 | The next Crossfire Ballista placed within 6s of Hunt Preparation gains 2s duration and 2 allowed shots. It cannot extend an existing ballista; one enhanced ballista per preparation. |
-| DES_LA46 | Oath of Two Hunts | Ring | A17, A18 | With Killing Rain selected, its first pulse slows a marked target it actually hits by 30% for 2s. With Afterimage March selected, the first valid echo grants a 12% maximum-HP barrier for 4s. Once per ultimate cast. |
+| DES_LA41 | Patient Hunter's Bow | Weapon | A07, A05-1 | The first direct Successive Shots or Patient Shot hit on a marked target adds D50% secondary physical damage and restores 4 resource. Both share a 1s interval. |
+| DES_LA42 | Winterthorn Grasp | Hands | A06-2, A03-2 | A Frost Snare cold hit on a target still carrying your Poison Imbuement damage over time adds D90% poison damage over 3s. 4s interval per target. |
+| DES_LA43 | Decoy Mantle | Body | A04-1 | Decoy Projection attracts normal enemies for 2 extra seconds. Applied once to each decoy; adds neither boss/elite taunts nor extra explosions. |
+| DES_LA44 | Forked Fang | Amulet | A06-2, A14 | A direct Forking Arrow hit on your Poison Imbuement target increases the first split from 2 targets to 3. Excludes Explosive Arrow; does not copy poison, marks or imbuement charges. |
+| DES_LA45 | Prepared Outpost | Waist | A05-2, A03-3 | The first Crossbow Turret placed within 6s of killing a Hunting Preparation marked target lasts 2s longer and gains 2 shots. Does not extend an existing turret; consumed once per preparation. |
+| DES_LA46 | Oath of Two Hunts | Ring | A17, A18 | Volley Purge's first hit on a marked target slows that target by 30% for 2s. The first valid Afterimage March afterimage or Shadow Clone hit grants a 4s barrier for 12% max HP. Once per ultimate cast. |
 
 ### Mage
 
 | ID | Name | Slot | Skills | Unique power |
 |---|---|---|---|---|
-| DES_LM41 | Kindling Grasp | Hands | M07, M08 | Ember Lance gains +30% burn total against a direct target inside your Firewall. Firewall ticks cannot retrigger this effect. |
-| DES_LM42 | Glassglacier Staff | Weapon | M09, M10 | If Returning Frost hits an enemy directly frozen by Glacial Lance, cause a D60% secondary cold burst within 2m, up to 5 targets. Once per globe, with a 3s interval. Boss stagger alone is not Freeze. |
-| DES_LM43 | Thunder Collector | Amulet | M11, M12 | A direct Grounding Spear hit inside Capacitor Orb adds 1 charge to that orb, once per cast, sharing its cap of 3. The expiry blast is never reclassified as Grounding Spear. A grounding spear relaying M03 within 3m of the orb also adds one charge per chain. |
-| DES_LM44 | Quiet Rift | Waist | M13, M14 | After channeling Mana Reclaim uninterrupted for at least 1.5s inside your own Rift Ward, gain a 10% maximum-health shield for 4s. Internal cooldown: 6s; restarting the channel does not reset it. |
-| DES_LM45 | Compass Center | Body | M15, M16 | Spending Elemental Compass's lightning charge on Magnetic Vortex increases its initial pull search radius from 3m to 4m. Damage radius, pull distance and target cap are unchanged. |
+| DES_LM41 | Kindling Grasp | Hands | M07-1, M08 | Ember Lance gains +30% burn total against a direct target inside your Firewall. Firewall ticks cannot retrigger this effect. |
+| DES_LM42 | Glassglacier Staff | Weapon | M07-2, M02-3 | Hitting a target with Returning Frost within 3s of actually freezing it with Glacial Spear adds a D60% cold explosion within 2m, up to 5 targets. Once per orb, 3s interval. The window survives thawing; boss stagger alone cannot prepare it. |
+| DES_LM43 | Thunder Collector | Amulet | M07-3, M11, M03 | A direct Grounding Spear hit inside Capacitor Orb adds 1 charge to that orb, once per cast, sharing its cap of 3. The expiry blast is never reclassified as Grounding Spear. A grounding spear relaying M03 within 3m of the orb also adds one charge per chain. |
+| DES_LM44 | Quiet Rift | Waist | M07, M06-2 | A direct Elemental Spear hit while standing in your Rift Ward grants a 4s barrier for 10% max HP. 6s interval. Applies to all Elemental Spear modifiers. |
+| DES_LM45 | Compass Center | Body | M07-3, M03-3 | While your Grounding Spear conduit remains active, Magnetic Chain Lightning pulls targets 1m farther. Chain target count and damage are unchanged. |
 | DES_LM46 | Threefold Crownstone | Ring | M17, M18 | With Triune Collapse selected, its third stage's first hit restores 15 resource once without consuming elemental charges. With Sage Incarnate selected, three-element completion bursts grow from 2.5m to 3m. Never cast the other ultimate. |
 
 ## Existing 123 legendary links
@@ -58,7 +60,7 @@ Items without bound skills retain their original BASIC, potion or global conditi
 | LW03 | Solitary Execution | Hands | W03 | — |
 | LW04 | Final Order | Amulet | W02 | — |
 | LW05 | Turning Rack | Weapon | W01 | W01 |
-| LW06 | Rising Ire | Hands | W01 | W06, W15 |
+| LW06 | Rising Ire | Hands | W01 | W06, W06 |
 | LW07 | Flesh-Cutting Wind | Weapon | W01 | — |
 | LW08 | Red Rampart | Body | W01 | — |
 | LW09 | Hastening Grasp | Hands | W01 | — |
@@ -69,22 +71,22 @@ Items without bound skills retain their original BASIC, potion or global conditi
 | LW14 | Impact Cuirass | Body | W02 | — |
 | LW15 | Devouring Heel | Feet | W02 | — |
 | LW16 | Silencing Descent | Head | W02 | — |
-| LW17 | Crushed Crown | Weapon | W03 | W04, W14 |
+| LW17 | Crushed Crown | Weapon | W03 | W04, W04 |
 | LW18 | Skull Echo | Hands | W03 | — |
 | LW19 | Deep-Carved Scar | Weapon | W03 | — |
 | LW20 | Bloodied Writ | Waist | W03 | — |
 | LW21 | Battlefield Recall | Ring | W03, W06 | — |
-| LW22 | Brandbreaker | Hands | W03 | W07 |
+| LW22 | Brandbreaker | Hands | W03 | W08-3 |
 | LW23 | Twice-Ringing Earth | Weapon | W04 | — |
-| LW24 | Binder's Cord | Waist | W04 | W04, W14 |
+| LW24 | Binder's Cord | Waist | W04 | W04, W04 |
 | LW25 | Stormgate | Amulet | W04, W01 | — |
 | LW26 | Bastion of Remains | Body | W04 | — |
 | LW27 | Ankle-Binding Rift | Feet | W04 | — |
 | LW28 | Cry-Bound Strike | Head | W03 | W06 |
 | LW29 | Ironwall Shards | Body | W05 | — |
 | LW30 | Mending Ironcore | Waist | W05 | — |
-| LW31 | Unblinking Watch | Head | * | W05, W16 |
-| LW32 | Unbending Vow | Ring | W05 | W05, W16 |
+| LW31 | Unblinking Watch | Head | * | W05, W05 |
+| LW32 | Unbending Vow | Ring | W05 | W05, W05 |
 | LW33 | Answer of the Defender | Hands | * | — |
 | LW34 | Horn of Resentment | Amulet | W06 | — |
 | LW35 | Comrade's Last Wish | Body | W06 | — |
@@ -111,11 +113,11 @@ Items without bound skills retain their original BASIC, potion or global conditi
 | LA11 | Seed of Arrow Rain | Weapon | A02 | — |
 | LA12 | Death Draws Near | Hands | A02 | — |
 | LA13 | Relentless Loading | Hands | A02 | — |
-| LA14 | Venom-Lacquered Fletching | Weapon | A02 | A03, A13 |
+| LA14 | Venom-Lacquered Fletching | Weapon | A02 | A03, A06 |
 | LA15 | Branded Concussion | Head | A02 | A05 |
-| LA16 | Unhurried Archer | Ring | A02 | A16, AP09 |
+| LA16 | Unhurried Archer | Ring | A02 | A05, AP09 |
 | LA17 | Trapper's Aim | Amulet | A03, A01 | — |
-| LA18 | Venom-Harvesting Knot | Waist | A03 | A03, A13 |
+| LA18 | Venom-Harvesting Knot | Waist | A03 | A03, A06 |
 | LA19 | Trap-Leaving Step | Feet | A03 | — |
 | LA20 | Black Root | Body | A03 | — |
 | LA21 | Brand-Seeping Venom | Weapon | A03 | A05 |
@@ -132,11 +134,11 @@ Items without bound skills retain their original BASIC, potion or global conditi
 | LA32 | Rewritten Hunt Ledger | Head | A05 | A05 |
 | LA33 | Binding Gaze | Amulet | A05 | — |
 | LA34 | Gloom Bloom | Weapon | A06 | — |
-| LA35 | Venomshade Erosion | Hands | A06 | A03, A13 |
+| LA35 | Venomshade Erosion | Hands | A06 | A03, A06 |
 | LA36 | Shadow Shackles | Body | A06 | — |
 | LA37 | Alchemist's Pulse | Ring | A06 | — |
 | LA38 | Thrice-Drawn String | Amulet | A01 | — |
-| LA39 | Venom-Weathered Hide | Body | * | A03, A13 |
+| LA39 | Venom-Weathered Hide | Body | * | A03, A06 |
 | LA40 | Mist-Drinking Boots | Feet | * | — |
 
 ### Mage
@@ -145,9 +147,9 @@ Items without bound skills retain their original BASIC, potion or global conditi
 |---|---|---|---|---|
 | LM01 | Winter's Trail | Weapon | M02 | — |
 | LM02 | Echoing Ember | Hands | M01 | — |
-| LM03 | Knot of Feedback | Waist | M05 | — |
+| LM03 | Knot of Feedback | Waist | M04 | — |
 | LM04 | Circuit of the End | Amulet | M03 | — |
-| LM05 | Lingering Ember | Weapon | M01 | — |
+| LM04-3 | Lingering Ember | Weapon | M01 | — |
 | LM06 | Unblemished Furnace | Amulet | M01 | — |
 | LM07 | Ember Succession | Hands | M01 | — |
 | LM08 | Flameroot | Head | M01 | — |
@@ -156,9 +158,9 @@ Items without bound skills retain their original BASIC, potion or global conditi
 | LM11 | Splintered Snowflake | Weapon | M02 | — |
 | LM12 | Judgment of Distant Winter | Amulet | M02 | — |
 | LM13 | Frost Husk | Body | M02 | — |
-| LM14 | Cold Circulation | Ring | M02 | M02, M09, M10 |
+| LM14 | Cold Circulation | Ring | M02 | M02, M07, M02 |
 | LM15 | Freezing Sigil | Hands | M02 | — |
-| LM16 | Icebound Memory | Head | M02 | M06, M09 |
+| LM16 | Icebound Memory | Head | M02 | M06, M07 |
 | LM17 | Overflowing Charge | Weapon | M03 | — |
 | LM18 | Close-Quarters Judgment | Amulet | M03 | — |
 | LM19 | Storm Continuum | Hands | M03 | — |
@@ -172,14 +174,14 @@ Items without bound skills retain their original BASIC, potion or global conditi
 | LM27 | Riftwoven Mantle | Body | M04 | — |
 | LM28 | Mana from the Between | Ring | M04 | — |
 | LM29 | Winter Refuge | Body | * | M02 |
-| LM30 | Mending Crystal Veil | Waist | M05 | — |
-| LM31 | Charged Shell | Hands | M05, M03 | — |
-| LM32 | Unbroken Escape Route | Feet | M04 | M05, M14 |
-| LM33 | Chill-Wrapped Knot | Waist | M05 | — |
+| LM30 | Mending Crystal Veil | Waist | M04 | — |
+| LM31 | Charged Shell | Hands | M04, M03 | — |
+| LM32 | Unbroken Escape Route | Feet | M04 | M04, M06 |
+| LM33 | Chill-Wrapped Knot | Waist | M04 | — |
 | LM34 | Second Winter | Weapon | M06 | — |
-| LM35 | Bound Mana | Ring | M06 | M02, M06, M09 |
+| LM35 | Bound Mana | Ring | M06 | M02, M06, M07 |
 | LM36 | Deepening Blizzard | Amulet | M06, M02 | — |
-| LM37 | Icebreaking Oath | Hands | * | M06, M09 |
+| LM37 | Icebreaking Oath | Hands | * | M06, M07 |
 | LM38 | Wellspring of Fundamentals | Ring | BASIC | — |
 | LM39 | Reserved Spark | Head | M01 | — |
 | LM40 | Crystal in the Vial | Waist | * | — |
@@ -196,7 +198,7 @@ Items without bound skills retain their original BASIC, potion or global conditi
 
 All 60 new-set bonus tiers are linked. Sharing an element or shape never automatically substitutes for the original skill IDs bound by a set.
 
-| Set | Pieces | Required original skills | Effect IDs |
+| Set | Pieces | Current skills / modifiers | Effect IDs |
 |---|---|---|---|
 | Executioner Discipline / REF_SW01 | 3 | — | REF_SW01_B2, REF_SW01_B3 |
 | Ironwall Oath / REF_SW02 | 3 | W05 | REF_SW02_B2, REF_SW02_B3 |
@@ -214,11 +216,11 @@ All 60 new-set bonus tiers are linked. Sharing an element or shape never automat
 | Alchemical Hunting Ground / REF_SA06 | 5 | A03, A04 | REF_SA06_B2, REF_SA06_B3, REF_SA06_B5 |
 | Threefold Venom / REF_SA07 | 5 | A06, A01, A02 | REF_SA07_B2, REF_SA07_B3, REF_SA07_B5 |
 | Sightless Shadow / REF_SA08 | 6 | A04, A01, A02 | REF_SA08_B2, REF_SA08_B4, REF_SA08_B6 |
-| Warding Aegis / REF_SM01 | 3 | M05 | REF_SM01_B2, REF_SM01_B3 |
+| Warding Aegis / REF_SM01 | 3 | M04-3 | REF_SM01_B2, REF_SM01_B3 |
 | Deep Scholarship / REF_SM02 | 3 | M01, M02, M03, M06 | REF_SM02_B2, REF_SM02_B3 |
 | Rift Pilgrimage / REF_SM03 | 4 | M04 | REF_SM03_B2, REF_SM03_B4 |
 | Capricious Pact / REF_SM04 | 4 | M01, M03, M06 | REF_SM04_B2, REF_SM04_B4 |
-| Overheat Crucible / REF_SM05 | 5 | M01 | REF_SM05_B2, REF_SM05_B3, REF_SM05_B5 |
+| Overheat Crucible / REF_SM04-3 | 5 | M01 | REF_SM04-3_B2, REF_SM04-3_B3, REF_SM04-3_B5 |
 | Frozen Deep / REF_SM06 | 5 | M02, M06 | REF_SM06_B2, REF_SM06_B3, REF_SM06_B5 |
 | Wild Thunder / REF_SM07 | 5 | M03 | REF_SM07_B2, REF_SM07_B3, REF_SM07_B5 |
 | Threefold Cycle / REF_SM08 | 6 | M01, M02, M03 | REF_SM08_B2, REF_SM08_B4, REF_SM08_B6 |

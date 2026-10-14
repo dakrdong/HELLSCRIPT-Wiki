@@ -22,7 +22,7 @@ The reference is [D4 Builds' Diablo IV aspect database](https://d4builds.gg/data
 
 ## Catalogue
 
-The first four rows in each class retain their prior implementation and validation scope. New rows list their specific Diablo IV reference. `*` in the executable data means any source or affected attack; `BASIC` means the basic attack.
+The first four rows in each class retain their item IDs and use current D4 skill behavior; see the current equipment audit for compatibility changes. New rows list their specific Diablo IV reference. `*` in the executable data means any source or affected attack; `BASIC` means the basic attack.
 
 ### Warrior · 40
 
@@ -31,7 +31,7 @@ The first four rows in each class retain their prior implementation and validati
 | LW01 | Fang of the Maelstrom | Weapon | After Whirlwind has been held for 1 second, each paid tick pulls enemies within 3.5m up to 1.5m closer, once per second. They stop at walls and bodies, and bosses and immobile enemies are not pulled. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LW02 | Stride of the Falling Star | Feet | Adds a 4m radius D90% physical shockwave to a leap landing. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LW03 | Solitary Execution | Hands | A Crushing Blow that hits exactly one enemy adds +50% to its direct damage. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
-| LW04 | Final Order | Amulet | When a hit takes you from above 30% HP to 30% or below, the cooldown on your equipped leap resets. It applies only if you survive and waits 30 seconds between triggers. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
+| LW04 | Final Order | Amulet | Surviving a hit that crosses from above 30% HP to 30% or below resets equipped Leap cooldown. Double Leap immediately restores its next charge. 30s internal cooldown. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LW05 | Turning Rack | Weapon | While channeling whirlwind for at least 2s, Whirlwind damage gains +25% in the legendary damage pool. | Aspect of Channeling |
 | LW06 | Rising Ire | Hands | While resource is at least 75%, Whirlwind critical chance gains 12 percentage points. | Aspect of Anger Management |
 | LW07 | Flesh-Cutting Wind | Weapon | After every 3 qualifying Whirlwind target hits, deal a total of D60% Physical damage to the hit target in one-second ticks over 3s. Internal cooldown: 1s. The hit count resets after 5s without another counted hit. | Aspect of Berserk Ripping |
@@ -39,7 +39,7 @@ The first four rows in each class retain their prior implementation and validati
 | LW09 | Hastening Grasp | Hands | On Whirlwind critical hit, gain 12 percentage points of attack speed for new attacks for 4s. Channel and field tick intervals are unchanged. Internal cooldown: 6s. | Accelerating Aspect |
 | LW10 | Parched Fury | Ring | On Whirlwind hit, while resource is at most 30%, restore 8 resource. Internal cooldown: 2s. | Aspect of Berserk Fury |
 | LW11 | Scorched Landing | Feet | On Leap release, deal D65% extra Fire damage to up to 5 enemies within 3m of you. Internal cooldown: 4s. | Aspect of Incendiary Fissures |
-| LW12 | Returning Leap | Ring | On Leap hit, with at least 3 living enemies within 3m of you, reduce equipped Leap's remaining cooldown by 2s. Internal cooldown: 4s. | Bear Clan Berserker's Aspect |
+| LW12 | Returning Leap | Ring | On Leap hit, with at least 3 living enemies within 3m of you, reduce equipped Leap's remaining cooldown by 2s. Internal cooldown: 4s. For Double Leap, reduces the next recharge time instead. | Bear Clan Berserker's Aspect |
 | LW13 | Execution Foretold | Amulet | On Leap release, gain +35% Crush damage in the legendary pool for 4s. Internal cooldown: 4s. | Aspect of Encroaching Wrath |
 | LW14 | Impact Cuirass | Body | On Leap release, take 15% less damage for 3s. Internal cooldown: 4s. | Battle Fervor's Aspect |
 | LW15 | Devouring Heel | Feet | On Leap kill, restore 18 resource. Internal cooldown: 2s. | Aspect of Voracious Rage |
@@ -75,8 +75,8 @@ The first four rows in each class retain their prior implementation and validati
 |---|---|---|---|---|
 | LA01 | Endless Trajectory | Weapon | Each further target of a Piercing Shot takes +15%p damage, up to +60%p. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LA02 | Narrowed Line | Hands | Multishot narrows to 20 degrees, landing up to 3 arrows on the same enemy. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
-| LA03 | Viper's Molt | Feet | Retreat Leap leaves a trap where it started. It arms in 0.5 seconds, waits up to 8 seconds and deals damage for 3 seconds once triggered. Venom Trap has to be equipped, and placed traps and these count together toward the limit of 2. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
-| LA04 | Black Contagion | Amulet | The Shadow Arrow bonus damage on a poisoned target spreads to nearby enemies. It does not chain again. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
+| LA03 | Viper's Molt | Feet | Retreat Leap leaves a base Poison Trap at its origin: 0.5s arming, up to 8s waiting, 3s damage after triggering. Requires equipped Poison Trap with no modifier; shares the 2-trap cap. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
+| LA04 | Black Contagion | Amulet | Elemental Imbuement hits on a target poisoned by your Poison Trap or Poison Imbuement spread 50% of that extra damage to up to 2 other enemies within 3m. Preserves the element and cannot trigger another spread. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LA05 | Trailing Arrowhead | Weapon | On Piercing Shot hit, deal D60% extra Physical damage to the hit target after 0.4s. Internal cooldown: 1.5s. | Aspect of Arrow Storms |
 | LA06 | Oath of the Far Hunt | Amulet | Against a target at least 7m away, Piercing Shot damage gains +30% in the legendary damage pool. | Aspect of Retribution |
 | LA07 | Brand-Reading Eye | Head | On Piercing Shot hit, against a marked target, restore 6 resource. Internal cooldown: 2s. | Aspect of True Sight |
@@ -106,10 +106,10 @@ The first four rows in each class retain their prior implementation and validati
 | LA31 | Veintracker | Waist | On all attacks hit, against a marked target, heal for 3% of maximum HP. Internal cooldown: 3s. | Aspect of Siphoning Strikes |
 | LA32 | Rewritten Hunt Ledger | Head | On all attacks kill, if the target was marked before the lethal hit, reduce equipped Hunter's Mark's remaining cooldown by 3s. Internal cooldown: 3s. | Aspect of the Orange Herald |
 | LA33 | Binding Gaze | Amulet | On Hunter's Mark release, apply 45% slow to up to 5 enemies within 3m of you for 4s. Internal cooldown: 4s. | Aspect of Binding Morass |
-| LA34 | Gloom Bloom | Weapon | On Shadow Arrow release, deal D70% extra Shadow damage to up to 5 enemies within 3m of you. Internal cooldown: 6s. | Aspect of Unstable Imbuements |
-| LA35 | Venomshade Erosion | Hands | Against a poisoned target, Shadow Arrow damage gains +40% in the legendary damage pool. | Aspect of Bitter Infection |
-| LA36 | Shadow Shackles | Body | On Shadow Arrow hit, apply root to the hit target for 1s. Internal cooldown: 4s. | Aspect of Crippling Darkness |
-| LA37 | Alchemist's Pulse | Ring | On Shadow Arrow hit, gain 12 percentage points of attack speed for new attacks for 4s. Channel and field tick intervals are unchanged. Internal cooldown: 5s. | Aspect of Alchemical Advantage |
+| LA34 | Gloom Bloom | Weapon | On Elemental Imbuement release, deal D70% extra Shadow damage to up to 5 enemies within 3m of you. Internal cooldown: 6s. | Aspect of Unstable Imbuements |
+| LA35 | Venomshade Erosion | Hands | Against a poisoned target, Elemental Imbuement damage gains +40% in the legendary damage pool. | Aspect of Bitter Infection |
+| LA36 | Shadow Shackles | Body | On Elemental Imbuement hit, apply root to the hit target for 1s. Internal cooldown: 4s. | Aspect of Crippling Darkness |
+| LA37 | Alchemist's Pulse | Ring | On Elemental Imbuement hit, gain 12 percentage points of attack speed for new attacks for 4s. Channel and field tick intervals are unchanged. Internal cooldown: 5s. | Aspect of Alchemical Advantage |
 | LA38 | Thrice-Drawn String | Amulet | After every 3 qualifying Basic Attack target hits, gain +25% Piercing Shot damage in the legendary pool for 4s. Internal cooldown: 3s. The hit count resets after 5s without another counted hit. | Aspect of the Expectant |
 | LA39 | Venom-Weathered Hide | Body | On surviving a hit, if the attacker is poisoned, take 15% less damage for 4s. Internal cooldown: 8s. | Aspect of Debilitating Toxins |
 | LA40 | Mist-Drinking Boots | Feet | On actual healing from an HP potion, gain 25% movement speed for 6s, within the overall 50% bonus cap. Internal cooldown: 12s. | Aspect of Nebulous Brews |
@@ -118,10 +118,10 @@ The first four rows in each class retain their prior implementation and validati
 
 | ID | Name | Slot | Effect | Reference |
 |---|---|---|---|---|
-| LM01 | Winter's Trail | Weapon | Lets Blizzard either stay in place or follow the target. Following moves 1m per second up to 4m in total, and overlapping zones apply only the strongest damage. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
-| LM02 | Echoing Ember | Hands | 0.4 seconds after a Fireball lands, a second D70% fire blast covers a 3.5m radius. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
+| LM01 | Winter's Trail | Weapon | Base Blizzard and Deep Winter can be fixed or follow their target at 1m/s, up to 4m total; overlapping fields use the strongest damage. Following Blizzard and Returning Frost keep their modifier movement. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
+| LM02 | Echoing Ember | Hands | The first original Fireball hit creates a D70% extra fire explosion after 0.4s within 3.5m. Once per cast, including every modifier. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LM03 | Knot of Feedback | Waist | Once an Elemental Shield has absorbed 15% of the max HP it was made with, it restores 20 resource. Once per shield, waiting 4 seconds between triggers. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
-| LM04 | Circuit of the End | Amulet | Chain Lightning can visit the same enemy twice, the second hit dealing half damage. The total hit count stays the same and it never revisits the enemy it just left. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
+| LM04 | Circuit of the End | Amulet | Chain Lightning can visit a target twice, dealing half damage on the second visit; keeps its total hits and cannot revisit the immediately previous target. Single-target Ricochet follows its own modifier hit count and damage. | [Existing implementation](../Implementation/Legendary_Expansion.md) |
 | LM05 | Lingering Ember | Weapon | On Fireball hit, deal a total of D90% Fire damage to the hit target in one-second ticks over 4s. Internal cooldown: 3s. | Aspect of Searing Impact |
 | LM06 | Unblemished Furnace | Amulet | While your hp is at least 80%, Fireball damage gains +30% in the legendary damage pool. | Aspect of the Untarnished Blaze |
 | LM07 | Ember Succession | Hands | On Fireball critical hit, gain +25% Fireball damage in the legendary pool for 4s. Internal cooldown: 5s. | Aspect of Combustion |

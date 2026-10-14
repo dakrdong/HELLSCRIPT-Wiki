@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="16" result="Failed(Child)" total="16" passed="12" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-14 01:56:28Z" end-time="2026-10-14 01:56:40Z" duration="11.3209593">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:56:28Z" end-time="2026-10-14 01:56:40Z" duration="11.320959" total="16" passed="12" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="7717" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:56:28Z" end-time="2026-10-14 01:56:40Z" duration="11.232480" total="16" passed="12" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="38224" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="7718" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:56:28Z" end-time="2026-10-14 01:56:40Z" duration="11.158262" total="16" passed="12" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="SetUpFixture" id="7613" name="Tests" fullname="Hellscript.Tests.ValidationAudioSilence" classname="Hellscript.Tests.ValidationAudioSilence" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:56:28Z" end-time="2026-10-14 01:56:40Z" duration="11.084937" total="16" passed="12" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1888" name="SkillTreeD4CombatCoreTests" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" testcasecount="220" result="Failed" site="Child" start-time="2026-10-14 01:56:29Z" end-time="2026-10-14 01:56:40Z" duration="10.414690" total="16" passed="12" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1936" name="GearDebtOathUsesActualResourceInsteadOfRetiredLoans" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearDebtOathUsesActualResourceInsteadOfRetiredLoans" methodname="GearDebtOathUsesActualResourceInsteadOfRetiredLoans" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="304301539" result="Failed" start-time="2026-10-14 01:56:29Z" end-time="2026-10-14 01:56:30Z" duration="0.783496" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 0.0d +/- 0.001d
+  But was:  76.0d
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.SkillTreeD4CombatCoreTests.GearDebtOathUsesActualResourceInsteadOfRetiredLoans () [0x00082] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4EquipmentTests.cs:51
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1951" name="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-14 01:56:30Z" end-time="2026-10-14 01:56:32Z" duration="2.250649" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1947" name="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(0)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(0)" methodname="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="2142033986" result="Passed" start-time="2026-10-14 01:56:30Z" end-time="2026-10-14 01:56:31Z" duration="0.558620" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1948" name="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(1)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(1)" methodname="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="394360374" result="Passed" start-time="2026-10-14 01:56:31Z" end-time="2026-10-14 01:56:31Z" duration="0.541964" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1949" name="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(2)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(2)" methodname="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="351513430" result="Passed" start-time="2026-10-14 01:56:31Z" end-time="2026-10-14 01:56:32Z" duration="0.545733" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1950" name="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(3)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(3)" methodname="GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1986514766" result="Passed" start-time="2026-10-14 01:56:32Z" end-time="2026-10-14 01:56:32Z" duration="0.602045" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1960" name="GearFirewallSpearAndMagneticConduitUseCurrentModifiers" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers" methodname="GearFirewallSpearAndMagneticConduitUseCurrentModifiers" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="103502020" result="Failed" label="Error" start-time="2026-10-14 01:56:32Z" end-time="2026-10-14 01:56:33Z" duration="0.571955" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[System.InvalidOperationException : Sequence contains no matching element]]></message>
+                <stack-trace><![CDATA[  at System.Linq.Enumerable.Single[TSource] (System.Collections.Generic.IEnumerable`1[T] source, System.Func`2[T,TResult] predicate) [0x00070] in <1b6d7e99e5414d05b29c34e3609a3284>:0 
+  at Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers () [0x00053] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4EquipmentTests.cs:129 
+  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)
+  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <0e19fd8bd8e94908bba2ee4f803bc6a7>:0 ]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1939" name="GearFrostSnareCombinesWithEquippablePoisonImbuement" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrostSnareCombinesWithEquippablePoisonImbuement" methodname="GearFrostSnareCombinesWithEquippablePoisonImbuement" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="153875628" result="Failed" start-time="2026-10-14 01:56:33Z" end-time="2026-10-14 01:56:33Z" duration="0.545647" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  hits=BASIC,A06,A06:poison dots=A06:poison
+  Expected: True
+  But was:  False
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrostSnareCombinesWithEquippablePoisonImbuement () [0x00064] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4EquipmentTests.cs:65
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1945" name="GearFrozenSpearEnablesReturningFrostOncePerCast" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrozenSpearEnablesReturningFrostOncePerCast" methodname="GearFrozenSpearEnablesReturningFrostOncePerCast" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1797505789" result="Failed" start-time="2026-10-14 01:56:33Z" end-time="2026-10-14 01:56:34Z" duration="0.521618" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrozenSpearEnablesReturningFrostOncePerCast () [0x000b7] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4EquipmentTests.cs:95
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1937" name="GearGiantFormRestoresResourceOnceOnItsFirstRealHit" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearGiantFormRestoresResourceOnceOnItsFirstRealHit" methodname="GearGiantFormRestoresResourceOnceOnItsFirstRealHit" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="112049485" result="Passed" start-time="2026-10-14 01:56:34Z" end-time="2026-10-14 01:56:34Z" duration="0.553248" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1956" name="GearImbuementSpreadPreservesItsElementAndNeverChains" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-14 01:56:34Z" end-time="2026-10-14 01:56:37Z" duration="2.247079" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1952" name="GearImbuementSpreadPreservesItsElementAndNeverChains(0)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(0)" methodname="GearImbuementSpreadPreservesItsElementAndNeverChains" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1442381047" result="Passed" start-time="2026-10-14 01:56:34Z" end-time="2026-10-14 01:56:35Z" duration="0.577153" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1953" name="GearImbuementSpreadPreservesItsElementAndNeverChains(1)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(1)" methodname="GearImbuementSpreadPreservesItsElementAndNeverChains" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="990715204" result="Passed" start-time="2026-10-14 01:56:35Z" end-time="2026-10-14 01:56:36Z" duration="0.564483" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1954" name="GearImbuementSpreadPreservesItsElementAndNeverChains(2)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(2)" methodname="GearImbuementSpreadPreservesItsElementAndNeverChains" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="236492965" result="Passed" start-time="2026-10-14 01:56:36Z" end-time="2026-10-14 01:56:36Z" duration="0.556378" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1955" name="GearImbuementSpreadPreservesItsElementAndNeverChains(3)" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(3)" methodname="GearImbuementSpreadPreservesItsElementAndNeverChains" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1038465991" result="Passed" start-time="2026-10-14 01:56:36Z" end-time="2026-10-14 01:56:37Z" duration="0.546659" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1961" name="GearPendingEchoResumesDeterministicallyAndKeepsTheItemIdentity" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearPendingEchoResumesDeterministicallyAndKeepsTheItemIdentity" methodname="GearPendingEchoResumesDeterministicallyAndKeepsTheItemIdentity" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="282972977" result="Passed" start-time="2026-10-14 01:56:37Z" end-time="2026-10-14 01:56:37Z" duration="0.707998" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1944" name="GearSpearWithinWardAndConduitWithinOrbHaveRealOwners" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearSpearWithinWardAndConduitWithinOrbHaveRealOwners" methodname="GearSpearWithinWardAndConduitWithinOrbHaveRealOwners" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="508027794" result="Passed" start-time="2026-10-14 01:56:37Z" end-time="2026-10-14 01:56:39Z" duration="1.088330" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1943" name="GearUltimateCoversRainAndCurrentShadowCloneHits" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearUltimateCoversRainAndCurrentShadowCloneHits" methodname="GearUltimateCoversRainAndCurrentShadowCloneHits" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1816896600" result="Passed" start-time="2026-10-14 01:56:39Z" end-time="2026-10-14 01:56:40Z" duration="1.066211" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -131,7 +131,7 @@ namespace Hellscript
             var hit=EnemyCombat.OwnHit(a.kind);
             if(!EnemyCombat.Contains(shape,State.position)||!Map.LineClear(shape.origin,State.position))return;
             Hurt(attack*hit.power,hit.element,e.id.ToString(),EnemyCombat.Id(a.kind),a.id,a.id);
-            if(hit.slow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,hit.slow*(1-Stats.ccReduction));
+            if(hit.slow>0&&(!HeroControlImmune))State.enemySlowTime=Mathf.Max(State.enemySlowTime,hit.slow*(1-Stats.ccReduction));
         }
         void TickEnemyAction(EnemyState e,float dt)
         {
@@ -284,7 +284,7 @@ namespace Hellscript
             Hurt(h.damage,h.element,h.enemyId.ToString(),h.definitionId,h.actionId,h.id,h.interval>0?DamageKind.Periodic:DamageKind.Direct);
             if(MonsterBehavior.FromDefinition(h.definitionId,out _)!=null)
                 OnMonsterHit(h.definitionId,h.position,h.actionId,h.interval>0,false,State.nextDamageId>before?State.damageEvents[State.damageEvents.Count-1].hpLoss:0,State.enemies.Find(x=>x.id==h.enemyId));
-            if(h.heroSlow>0&&(!ClassSkillsActive||Fx("W16:immune")==null))State.enemySlowTime=Mathf.Max(State.enemySlowTime,2*(1-Stats.ccReduction));
+            if(h.heroSlow>0&&(!HeroControlImmune))State.enemySlowTime=Mathf.Max(State.enemySlowTime,2*(1-Stats.ccReduction));
         }
         bool EnemyThreatAt(Vector2 point,float warning,bool activeOnly=false)
             =>EnemyCombat.Threats(State,Map).Any(t=>t.delay<=(activeOnly?0:warning)+.00001f&&Vector2.Distance(State.position,t.origin)<=14+t.radius&&Map.LineClear(State.position,t.origin)&&EnemyCombat.Contains(t,point)&&Map.LineClear(t.origin,point));

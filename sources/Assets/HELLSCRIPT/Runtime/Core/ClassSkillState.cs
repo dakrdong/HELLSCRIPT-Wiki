@@ -6,20 +6,23 @@ using UnityEngine;
 namespace Hellscript
 {
     [Serializable] public sealed class ClassSkillTimer {public string id;public float remaining,total;}
+    [Serializable] public sealed class ClassSkillCharge {public string id;public int count=2;public float next,duration;}
     [Serializable] public sealed class ClassSkillEffect
     {
         public string id,kind,source,previous="";
-        public int root,target=-1,count,limit,element;
+        public int root,target=-1,count,limit,element,mod,modRank,generation,leg;
         public float until,next,period,value,additive,extra,radius,width,health,created;
         public Vector2 position,direction,origin;
-        public bool consumed,persistent;
+        public bool consumed,persistent,forceCrit;
+        public float critDamageBonus;
         public DamageSnapshot snapshot;
+        public ClassSkillCast copiedCast;
         public List<string> history=new List<string>();
         public List<int> targets=new List<int>();
     }
     [Serializable] public sealed class ClassSkillDot
     {
-        public string id;public int root,target,element;
+        public string id,source;public int root,target,element,mod,modRank;
         public float remaining,perSecond,next,expires;
         public DamageSnapshot snapshot;
     }
@@ -28,9 +31,11 @@ namespace Hellscript
     [Serializable] public sealed class ClassSkillCast
     {
         public string id;
-        public int root,target=-1,element;
-        public float started,releaseAt,finishAt,cost,resourceRatio,additive,setAdditive,setRoll,legendary,area=1,rankScale=1;
-        public bool released,automatic,highResource,reserve,stationary,combo,lightningCharge,ancestralCharge,setElementCharge,elementCharge,compassLightning,vengeance,overheat,firstHit;
+        public int root,target=-1,element,mod,modRank,baseRank=1;
+        public float started,releaseAt,finishAt,cost,resourceRatio,additive,setAdditive,setRoll,legendary,area=1,formArea=1,rankScale=1;
+        public bool released,automatic,highResource,reserve,stationary,combo,lightningCharge,ancestralCharge,setElementCharge,elementCharge,compassLightning,vengeance,overheat,firstHit,forceCrit;
+        public float critDamageBonus,damageScale=1;
+        public bool secondary;
         public Vector2 origin,aim,destination;
         public DamageSnapshot snapshot;
         public List<string> receipts=new List<string>();
@@ -39,11 +44,13 @@ namespace Hellscript
     [Serializable] public sealed class ClassSkillRuntimeState
     {
         public string format;
-        public int version=1,lastElement;
+        public int version=1,lastElement,imbueCastRoot;
         public float ultimateRemaining,ultimateTotal,stationarySeconds;
         public Vector2 previousPosition;
         public ClassSkillCast action;
         public ClassSkillIntent intent;
+        public ClassSkillCast lastWarriorActive;
+        public List<ClassSkillCharge> charges=new List<ClassSkillCharge>();
         public List<ClassSkillPolicyRecord> policies=new List<ClassSkillPolicyRecord>();
         public List<ClassSkillCast> casts=new List<ClassSkillCast>();
         public List<ClassSkillTimer> cooldowns=new List<ClassSkillTimer>();

@@ -42,7 +42,11 @@ namespace Hellscript
         static readonly HashSet<string> runeAreaSkills=new HashSet<string>{"W01","W02","W03","W04","A02","A03","M01","M02","M06"};
         static float RuneAreaBonus(DamageSnapshot snap,string definition)=>runeAreaSkills.Contains(definition)?SnapshotRune(snap,RuneBonus.AreaDamage)/100:0;
         static float RuneMultiBonus(DamageSnapshot snap,int distinctTargets)=>distinctTargets>=3?SnapshotRune(snap,RuneBonus.MultiDamage)/100:0;
-        public float RuneSkillRadius(int skill,float basis)=>basis*(1+Stats.runeSkillRadius[skill]/100);
+        public float RuneSkillRadius(int skill,float basis)
+        {
+            var cast=State.heroAction?.skill==skill?Cast(State.heroAction.id):null;
+            return basis*(1+Stats.runeSkillRadius[skill]/100)*(D4Combat&&skill==0&&(cast?.mod??Loadout.Modifier("W01"))==2?D4ModValue("W01",cast):1);
+        }
         float RunePotionCooldown(float basis)=>basis*(1-Stats.Rune(RuneBonus.PotionCooldown)/100);
         // Membership is evaluated before damage for all projectiles of this cast crossing targets in this tick.
         int RuneProjectileTargets(CombatProjectile source,float dt)

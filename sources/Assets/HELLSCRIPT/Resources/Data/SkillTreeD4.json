@@ -1,0 +1,5753 @@
+{
+  "version": 2,
+  "rules": {
+    "levelCap": 60,
+    "pointsPerLevel": 1,
+    "firstPointAtLevel": 1,
+    "tierGates": [
+      0,
+      2,
+      6,
+      11,
+      40
+    ],
+    "skillMaxRank": 5,
+    "ultimateMaxRank": 3,
+    "passiveMaxRank": 5,
+    "modifier": "one per skill; needs base rank >= 1; modifier rank <= min(base rank, max rank)",
+    "passive": "unlocked by hero level only; key passives: only one of the two may hold points",
+    "tierGate": "tier i accepts points when points spent outside tiers i..4 >= tierGates[i]; refunds that would strand a higher tier are refused"
+  },
+  "classes": [
+    {
+      "heroClass": 0,
+      "hero": "Warrior",
+      "tiers": [
+        {
+          "tier": 1,
+          "ko": "기본",
+          "en": "Basic",
+          "gate": 0
+        },
+        {
+          "tier": 2,
+          "ko": "핵심",
+          "en": "Core",
+          "gate": 2
+        },
+        {
+          "tier": 3,
+          "ko": "방어",
+          "en": "Defense",
+          "gate": 6
+        },
+        {
+          "tier": 4,
+          "ko": "기동·제압",
+          "en": "Mobility",
+          "gate": 11
+        },
+        {
+          "tier": 5,
+          "ko": "궁극기",
+          "en": "Ultimate",
+          "gate": 40
+        }
+      ],
+      "spriteCells": [
+        {
+          "iconId": "W09",
+          "id": "W09"
+        },
+        {
+          "iconId": "W09-1",
+          "id": "W09-1"
+        },
+        {
+          "iconId": "W09-2",
+          "id": "W09-2"
+        },
+        {
+          "iconId": "W09-3",
+          "id": "W09-3"
+        },
+        {
+          "iconId": "W08",
+          "id": "W08"
+        },
+        {
+          "iconId": "W08-1",
+          "id": "W08-1"
+        },
+        {
+          "iconId": "W08-2",
+          "id": "W08-2"
+        },
+        {
+          "iconId": "W08-3",
+          "id": "W08-3"
+        },
+        {
+          "iconId": "W01",
+          "id": "W01"
+        },
+        {
+          "iconId": "W01-1",
+          "id": "W01-1"
+        },
+        {
+          "iconId": "W01-2",
+          "id": "W01-2"
+        },
+        {
+          "iconId": "W01-3",
+          "id": "W01-3"
+        },
+        {
+          "iconId": "W03",
+          "id": "W03"
+        },
+        {
+          "iconId": "W03-1",
+          "id": "W03-1"
+        },
+        {
+          "iconId": "W03-2",
+          "id": "W03-2"
+        },
+        {
+          "iconId": "W03-3",
+          "id": "W03-3"
+        },
+        {
+          "iconId": "W05",
+          "id": "W05"
+        },
+        {
+          "iconId": "W05-1",
+          "id": "W05-1"
+        },
+        {
+          "iconId": "W05-2",
+          "id": "W05-2"
+        },
+        {
+          "iconId": "W05-3",
+          "id": "W05-3"
+        },
+        {
+          "iconId": "W06",
+          "id": "W06"
+        },
+        {
+          "iconId": "W06-1",
+          "id": "W06-1"
+        },
+        {
+          "iconId": "W06-2",
+          "id": "W06-2"
+        },
+        {
+          "iconId": "W06-3",
+          "id": "W06-3"
+        },
+        {
+          "iconId": "W02",
+          "id": "W02"
+        },
+        {
+          "iconId": "W02-1",
+          "id": "W02-1"
+        },
+        {
+          "iconId": "W02-2",
+          "id": "W02-2"
+        },
+        {
+          "iconId": "W02-3",
+          "id": "W02-3"
+        },
+        {
+          "iconId": "W04",
+          "id": "W04"
+        },
+        {
+          "iconId": "W04-1",
+          "id": "W04-1"
+        },
+        {
+          "iconId": "W04-2",
+          "id": "W04-2"
+        },
+        {
+          "iconId": "W04-3",
+          "id": "W04-3"
+        },
+        {
+          "iconId": "W17",
+          "id": "W17"
+        },
+        {
+          "iconId": "W17-1",
+          "id": "W17-1"
+        },
+        {
+          "iconId": "W17-2",
+          "id": "W17-2"
+        },
+        {
+          "iconId": "W18",
+          "id": "W18"
+        },
+        {
+          "iconId": "W18-1",
+          "id": "W18-1"
+        },
+        {
+          "iconId": "W18-2",
+          "id": "W18-2"
+        },
+        {
+          "iconId": "WP13",
+          "id": "WP13"
+        },
+        {
+          "iconId": "WP01",
+          "id": "WP01"
+        },
+        {
+          "iconId": "WP06",
+          "id": "WP06"
+        },
+        {
+          "iconId": "WP05",
+          "id": "WP05"
+        },
+        {
+          "iconId": "WP04",
+          "id": "WP04"
+        },
+        {
+          "iconId": "WP09",
+          "id": "WP09"
+        },
+        {
+          "iconId": "WP17",
+          "id": "WP17"
+        },
+        {
+          "iconId": "WP15",
+          "id": "WP15"
+        },
+        {
+          "iconId": "WK1",
+          "id": "WP20"
+        },
+        {
+          "iconId": "WK2",
+          "id": "WP21"
+        }
+      ],
+      "actives": [
+        {
+          "id": "W09",
+          "iconId": "W09",
+          "roleKo": "생성",
+          "tier": 1,
+          "ultimate": false,
+          "ko": "찢어낸 상처",
+          "en": "Raking Wound",
+          "descKo": "전방을 크게 베어 적들에게 출혈을 입힙니다.",
+          "descEn": "Rake the enemies in front, leaving them bleeding.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "출혈 피해",
+              "en": "Bleed damage",
+              "rank1": "D120%",
+              "rankMax": "D168%",
+              "value": {
+                "from": 120,
+                "to": 168,
+                "unit": "D%",
+                "ranks": [
+                  120.0,
+                  132.0,
+                  144.0,
+                  156.0,
+                  168.0
+                ]
+              }
+            },
+            {
+              "ko": "적중 시 자원",
+              "en": "Resource on hit",
+              "rank1": "+8",
+              "rankMax": "+12",
+              "value": {
+                "from": 8,
+                "to": 12,
+                "unit": "",
+                "ranks": [
+                  8.0,
+                  9.0,
+                  10.0,
+                  11.0,
+                  12.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W09-1",
+              "iconId": "W09-1",
+              "value": {
+                "from": 1,
+                "to": 2,
+                "unit": "%",
+                "ranks": [
+                  1.0,
+                  1.25,
+                  1.5,
+                  1.75,
+                  2.0
+                ]
+              },
+              "ko": "피의 회수",
+              "en": "Blood Reclaim",
+              "effectKo": "대상당 HP 회복 1.0% → 2.0%",
+              "effectEn": "HP per target 1.0% → 2.0%",
+              "shapeKo": "3번째 시전마다 남은 출혈을 한꺼번에 터뜨리고 HP를 회복합니다.",
+              "shapeEn": "Every 3rd cast detonates the remaining bleed and heals you."
+            },
+            {
+              "id": "W09-2",
+              "iconId": "W09-2",
+              "value": {
+                "from": 20,
+                "to": 40,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0,
+                  35.0,
+                  40.0
+                ]
+              },
+              "ko": "깊은 상처",
+              "en": "Deep Wound",
+              "effectKo": "중첩당 출혈 +20% → +40%",
+              "effectEn": "Bleed per stack +20% → +40%",
+              "shapeKo": "여러 명 대신 한 명만 베지만 출혈이 3중첩까지 쌓입니다.",
+              "shapeEn": "Hits one enemy, but bleed stacks up to 3 times."
+            },
+            {
+              "id": "W09-3",
+              "iconId": "W09-3",
+              "value": {
+                "from": 2,
+                "to": 3,
+                "unit": "초",
+                "ranks": [
+                  2.0,
+                  2.25,
+                  2.5,
+                  2.75,
+                  3.0
+                ]
+              },
+              "ko": "회전 베기",
+              "en": "Spinning Rend",
+              "effectKo": "출혈 지속 2초 → 3초",
+              "effectEn": "Bleed lasts 2s → 3s",
+              "shapeKo": "전방 베기가 360° 회전 베기로 바뀌는 대신 출혈이 짧아집니다.",
+              "shapeEn": "The cone slash becomes a 360° spin, with shorter bleed."
+            }
+          ]
+        },
+        {
+          "id": "W08",
+          "iconId": "W08",
+          "roleKo": "생성",
+          "tier": 1,
+          "ultimate": false,
+          "ko": "꿰뚫는 갈고리",
+          "en": "Impaling Hook",
+          "descKo": "갈고리를 던져 적을 꿰뚫고 내 앞으로 끌어옵니다.",
+          "descEn": "Impale an enemy with a hook and drag it to you.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D65%",
+              "rankMax": "D91%",
+              "value": {
+                "from": 65,
+                "to": 91,
+                "unit": "D%",
+                "ranks": [
+                  65.0,
+                  71.5,
+                  78.0,
+                  84.5,
+                  91.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 회복",
+              "en": "Resource gain",
+              "rank1": "+10",
+              "rankMax": "+18",
+              "value": {
+                "from": 10,
+                "to": 18,
+                "unit": "",
+                "ranks": [
+                  10.0,
+                  12.0,
+                  14.0,
+                  16.0,
+                  18.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W08-1",
+              "iconId": "W08-1",
+              "value": {
+                "from": 4,
+                "to": 12,
+                "unit": "",
+                "ranks": [
+                  4.0,
+                  6.0,
+                  8.0,
+                  10.0,
+                  12.0
+                ]
+              },
+              "ko": "돌진 갈고리",
+              "en": "Lunging Hook",
+              "effectKo": "도착 시 추가 자원 +4 → +12",
+              "effectEn": "Extra resource +4 → +12",
+              "shapeKo": "적을 끌어오는 대신 내가 적에게 날아가 붙습니다.",
+              "shapeEn": "Instead of pulling the enemy, you fly to it."
+            },
+            {
+              "id": "W08-2",
+              "iconId": "W08-2",
+              "value": {
+                "from": 3,
+                "to": 7,
+                "unit": "명",
+                "ranks": [
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ]
+              },
+              "ko": "관통 갈고리",
+              "en": "Piercing Hook",
+              "effectKo": "관통 대상 3명 → 7명",
+              "effectEn": "Pierces 3 → 7 targets",
+              "shapeKo": "직선 위의 적들을 모두 꿰뚫고 마지막 적을 끌어옵니다.",
+              "shapeEn": "Pierces every enemy in a line and pulls the last one."
+            },
+            {
+              "id": "W08-3",
+              "iconId": "W08-3",
+              "value": {
+                "from": -10,
+                "to": -18,
+                "unit": "%",
+                "ranks": [
+                  -10.0,
+                  -12.0,
+                  -14.0,
+                  -16.0,
+                  -18.0
+                ]
+              },
+              "ko": "낙인 갈고리",
+              "en": "Branding Hook",
+              "effectKo": "낙인 대상에게 받는 피해 −10% → −18%",
+              "effectEn": "Damage from brand −10% → −18%",
+              "shapeKo": "맞힌 적에게 낙인을 남겨 받는 피해를 줄이고, 처치하면 자원을 얻습니다.",
+              "shapeEn": "Brands the target: less damage from it, resource on kill."
+            }
+          ]
+        },
+        {
+          "id": "W01",
+          "iconId": "W01",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "회오리",
+          "en": "Whirlwind",
+          "descKo": "무기를 들고 회전하며 주변의 모든 적을 계속 공격합니다.",
+          "descEn": "Spin with your weapons, striking every enemy around you.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해 (0.25초마다)",
+              "en": "Damage (per 0.25s)",
+              "rank1": "D50%",
+              "rankMax": "D70%",
+              "value": {
+                "from": 50,
+                "to": 70,
+                "unit": "D%",
+                "ranks": [
+                  50.0,
+                  55.0,
+                  60.0,
+                  65.0,
+                  70.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 비용",
+              "en": "Resource cost",
+              "rank1": "6",
+              "rankMax": "4",
+              "value": {
+                "from": 6,
+                "to": 4,
+                "unit": "",
+                "ranks": [
+                  6.0,
+                  5.5,
+                  5.0,
+                  4.5,
+                  4.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W01-1",
+              "iconId": "W01-1",
+              "value": {
+                "from": 2,
+                "to": 3,
+                "unit": "x",
+                "ranks": [
+                  2.0,
+                  2.25,
+                  2.5,
+                  2.75,
+                  3.0
+                ]
+              },
+              "ko": "빠른 이동",
+              "en": "Swift Whirl",
+              "effectKo": "사용 중 이동속도 ×2.0 → ×3.0",
+              "effectEn": "Move speed ×2.0 → ×3.0",
+              "shapeKo": "회오리를 돌리는 동안 이동속도가 크게 빨라집니다.",
+              "shapeEn": "You move much faster while whirling."
+            },
+            {
+              "id": "W01-2",
+              "iconId": "W01-2",
+              "value": {
+                "from": 1.6,
+                "to": 2,
+                "unit": "x",
+                "ranks": [
+                  1.6,
+                  1.7,
+                  1.8,
+                  1.9,
+                  2.0
+                ]
+              },
+              "ko": "넓은 범위",
+              "en": "Wide Whirl",
+              "effectKo": "타격 범위 ×1.6 → ×2.0",
+              "effectEn": "Hit area ×1.6 → ×2.0",
+              "shapeKo": "회전 범위가 훨씬 넓어져 먼 적까지 공격합니다.",
+              "shapeEn": "A much wider spin that reaches distant enemies."
+            },
+            {
+              "id": "W01-3",
+              "iconId": "W01-3",
+              "value": {
+                "from": 0.7,
+                "to": 0.5,
+                "unit": "x",
+                "ranks": [
+                  0.7,
+                  0.65,
+                  0.6,
+                  0.55,
+                  0.5
+                ]
+              },
+              "ko": "빠른 회전",
+              "en": "Rapid Whirl",
+              "effectKo": "피해 간격 ×0.7 → ×0.5",
+              "effectEn": "Tick interval ×0.7 → ×0.5",
+              "shapeKo": "더 빠르게 돌아 피해를 주는 간격이 짧아집니다.",
+              "shapeEn": "Spins faster, hitting at much shorter intervals."
+            }
+          ]
+        },
+        {
+          "id": "W03",
+          "iconId": "W03",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "분쇄 일격",
+          "en": "Crushing Blow",
+          "descKo": "무기를 높이 들어 전방의 적에게 강력한 일격을 내리칩니다.",
+          "descEn": "Raise your weapon high and bring a crushing blow down ahead.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D220%",
+              "rankMax": "D308%",
+              "value": {
+                "from": 220,
+                "to": 308,
+                "unit": "D%",
+                "ranks": [
+                  220.0,
+                  242.0,
+                  264.0,
+                  286.0,
+                  308.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 비용",
+              "en": "Resource cost",
+              "rank1": "25",
+              "rankMax": "21",
+              "value": {
+                "from": 25,
+                "to": 21,
+                "unit": "",
+                "ranks": [
+                  25.0,
+                  24.0,
+                  23.0,
+                  22.0,
+                  21.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W03-1",
+              "iconId": "W03-1",
+              "value": {
+                "from": 2,
+                "to": 3,
+                "unit": "m",
+                "ranks": [
+                  2.0,
+                  2.25,
+                  2.5,
+                  2.75,
+                  3.0
+                ]
+              },
+              "ko": "대지 분쇄",
+              "en": "Earth Shatter",
+              "effectKo": "폭발 반경 2.0m → 3.0m",
+              "effectEn": "Blast radius 2.0m → 3.0m",
+              "shapeKo": "한 대상을 치는 일격이 주변을 휩쓰는 원형 폭발로 바뀝니다.",
+              "shapeEn": "The single strike becomes a circular blast."
+            },
+            {
+              "id": "W03-2",
+              "iconId": "W03-2",
+              "value": {
+                "from": 20,
+                "to": 30,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  22.5,
+                  25.0,
+                  27.5,
+                  30.0
+                ]
+              },
+              "ko": "처형 일격",
+              "en": "Execution Strike",
+              "effectKo": "처형 기준 HP 20% → 30%",
+              "effectEn": "Execute below 20% → 30% HP",
+              "shapeKo": "HP가 낮은 적에게 피해가 2배가 되고, 처치하면 자원을 돌려받습니다.",
+              "shapeEn": "Double damage to low-HP enemies; kills refund resource."
+            },
+            {
+              "id": "W03-3",
+              "iconId": "W03-3",
+              "value": {
+                "from": 40,
+                "to": 80,
+                "unit": "D%",
+                "ranks": [
+                  40.0,
+                  50.0,
+                  60.0,
+                  70.0,
+                  80.0
+                ]
+              },
+              "ko": "여진",
+              "en": "Aftershock",
+              "effectKo": "여진 피해 D40% → D80% ×2",
+              "effectEn": "Aftershocks D40% → D80% ×2",
+              "shapeKo": "내려친 자리에서 1초 뒤 여진이 두 번 일어납니다.",
+              "shapeEn": "Two aftershocks follow at the impact point after 1s."
+            }
+          ]
+        },
+        {
+          "id": "W05",
+          "iconId": "W05",
+          "roleKo": "방어",
+          "tier": 3,
+          "ultimate": false,
+          "ko": "철벽",
+          "en": "Iron Wall",
+          "descKo": "피부를 강철처럼 단단하게 만들어 피해를 흡수하는 보호막을 얻습니다.",
+          "descEn": "Harden your skin like iron, gaining a shield that absorbs damage.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "보호막",
+              "en": "Shield",
+              "rank1": "HP 30%",
+              "rankMax": "HP 42%",
+              "value": {
+                "from": 30,
+                "to": 42,
+                "unit": "%",
+                "ranks": [
+                  30.0,
+                  33.0,
+                  36.0,
+                  39.0,
+                  42.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "14초",
+              "rankMax": "14초",
+              "value": {
+                "from": 14,
+                "to": 14,
+                "unit": "초",
+                "ranks": [
+                  14.0,
+                  14.0,
+                  14.0,
+                  14.0,
+                  14.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W05-1",
+              "iconId": "W05-1",
+              "value": {
+                "from": 80,
+                "to": 120,
+                "unit": "D%",
+                "ranks": [
+                  80.0,
+                  90.0,
+                  100.0,
+                  110.0,
+                  120.0
+                ]
+              },
+              "ko": "무쇠 자세",
+              "en": "Iron Stance",
+              "effectKo": "방어 시 반격 D80% → D120%",
+              "effectEn": "Counter on block D80% → D120%",
+              "shapeKo": "보호막이 있는 동안 방어에 성공하면 적에게 반격합니다.",
+              "shapeEn": "While shielded, blocking an attack counterattacks."
+            },
+            {
+              "id": "W05-2",
+              "iconId": "W05-2",
+              "value": {
+                "from": 1,
+                "to": 2,
+                "unit": "초",
+                "ranks": [
+                  1.0,
+                  1.25,
+                  1.5,
+                  1.75,
+                  2.0
+                ]
+              },
+              "ko": "수호의 맹약",
+              "en": "Guardian Oath",
+              "effectKo": "제어 면역 1.0초 → 2.0초",
+              "effectEn": "CC immunity 1.0s → 2.0s",
+              "shapeKo": "시전하는 순간 둔화와 속박을 풀고 잠시 제어에 면역이 됩니다.",
+              "shapeEn": "Casting breaks slows and roots and grants brief CC immunity."
+            },
+            {
+              "id": "W05-3",
+              "iconId": "W05-3",
+              "value": {
+                "from": 30,
+                "to": 50,
+                "unit": "%",
+                "ranks": [
+                  30.0,
+                  35.0,
+                  40.0,
+                  45.0,
+                  50.0
+                ]
+              },
+              "ko": "가시 갑옷",
+              "en": "Thorn Armor",
+              "effectKo": "흡수 피해 반사 30% → 50%",
+              "effectEn": "Reflect absorbed 30% → 50%",
+              "shapeKo": "보호막이 흡수한 피해 일부를 주변 적에게 되돌립니다.",
+              "shapeEn": "Reflects part of the absorbed damage to nearby enemies."
+            }
+          ]
+        },
+        {
+          "id": "W06",
+          "iconId": "W06",
+          "roleKo": "방어",
+          "tier": 3,
+          "ultimate": false,
+          "ko": "전투 함성",
+          "en": "Battle Shout",
+          "descKo": "우렁찬 함성으로 자원을 채우고 잠시 피해를 높입니다.",
+          "descEn": "A war cry that refills your resource and briefly raises damage.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "자원 회복",
+              "en": "Resource",
+              "rank1": "40",
+              "rankMax": "56",
+              "value": {
+                "from": 40,
+                "to": 56,
+                "unit": "",
+                "ranks": [
+                  40.0,
+                  44.0,
+                  48.0,
+                  52.0,
+                  56.0
+                ]
+              }
+            },
+            {
+              "ko": "피해 증가",
+              "en": "Damage bonus",
+              "rank1": "+20%",
+              "rankMax": "+28%",
+              "value": {
+                "from": 20,
+                "to": 28,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  22.0,
+                  24.0,
+                  26.0,
+                  28.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W06-1",
+              "iconId": "W06-1",
+              "value": {
+                "from": 20,
+                "to": 40,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0,
+                  35.0,
+                  40.0
+                ]
+              },
+              "ko": "결집의 함성",
+              "en": "Rallying Cry",
+              "effectKo": "이동속도 +20% → +40%",
+              "effectEn": "Move speed +20% → +40%",
+              "shapeKo": "함성 동안 이동이 빨라지고 걸린 군중 제어가 빨리 풀립니다.",
+              "shapeEn": "You move faster and crowd control ends sooner."
+            },
+            {
+              "id": "W06-2",
+              "iconId": "W06-2",
+              "value": {
+                "from": 20,
+                "to": 40,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0,
+                  35.0,
+                  40.0
+                ]
+              },
+              "ko": "광폭의 함성",
+              "en": "Frenzy Cry",
+              "effectKo": "공격속도 +20% → +40%",
+              "effectEn": "Attack speed +20% → +40%",
+              "shapeKo": "자원을 채우는 대신 함성 동안 공격속도가 빨라집니다.",
+              "shapeEn": "Instead of refilling resource, it raises your attack speed."
+            },
+            {
+              "id": "W06-3",
+              "iconId": "W06-3",
+              "value": {
+                "from": 40,
+                "to": 60,
+                "unit": "",
+                "ranks": [
+                  40.0,
+                  45.0,
+                  50.0,
+                  55.0,
+                  60.0
+                ]
+              },
+              "ko": "투쟁의 빚",
+              "en": "Debt of Battle",
+              "effectKo": "즉시 추가 자원 +40 → +60",
+              "effectEn": "Extra resource +40 → +60",
+              "shapeKo": "자원을 더 많이 얻는 대신 잠시 자원이 저절로 차지 않습니다.",
+              "shapeEn": "Extra resource now, but regeneration pauses briefly."
+            }
+          ]
+        },
+        {
+          "id": "W02",
+          "iconId": "W02",
+          "roleKo": "기동",
+          "tier": 4,
+          "ultimate": false,
+          "ko": "도약 내려찍기",
+          "en": "Leap Slam",
+          "descKo": "높이 도약해 내려찍으며 착지 지점의 적들을 강타합니다.",
+          "descEn": "Leap into the air and slam down on the enemies where you land.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D180%",
+              "rankMax": "D252%",
+              "value": {
+                "from": 180,
+                "to": 252,
+                "unit": "D%",
+                "ranks": [
+                  180.0,
+                  198.0,
+                  216.0,
+                  234.0,
+                  252.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "8초",
+              "rankMax": "6.4초",
+              "value": {
+                "from": 8,
+                "to": 6.4,
+                "unit": "초",
+                "ranks": [
+                  8.0,
+                  7.6,
+                  7.2,
+                  6.8,
+                  6.4
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W02-1",
+              "iconId": "W02-1",
+              "value": {
+                "from": 3,
+                "to": 5,
+                "unit": "m",
+                "ranks": [
+                  3.0,
+                  3.5,
+                  4.0,
+                  4.5,
+                  5.0
+                ]
+              },
+              "ko": "전선 돌파",
+              "en": "Breach Charge",
+              "effectKo": "돌진 거리 3m → 5m",
+              "effectEn": "Charge distance 3m → 5m",
+              "shapeKo": "도약 대신 앞으로 돌진하며 경로의 적을 밀어냅니다.",
+              "shapeEn": "A forward charge instead of a leap, shoving enemies aside."
+            },
+            {
+              "id": "W02-2",
+              "iconId": "W02-2",
+              "value": {
+                "from": 60,
+                "to": 100,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  70.0,
+                  80.0,
+                  90.0,
+                  100.0
+                ]
+              },
+              "ko": "지진 착지",
+              "en": "Quake Landing",
+              "effectKo": "착지 여진 D60% → D100%",
+              "effectEn": "Landing quake D60% → D100%",
+              "shapeKo": "착지한 자리에 2초 뒤 여진이 일어나 적을 기절시킵니다.",
+              "shapeEn": "A quake follows 2s after landing and stuns enemies."
+            },
+            {
+              "id": "W02-3",
+              "iconId": "W02-3",
+              "value": {
+                "from": 8,
+                "to": 6,
+                "unit": "초",
+                "ranks": [
+                  8.0,
+                  7.5,
+                  7.0,
+                  6.5,
+                  6.0
+                ]
+              },
+              "ko": "연속 도약",
+              "en": "Double Leap",
+              "effectKo": "충전 대기 8초 → 6초",
+              "effectEn": "Recharge 8s → 6s",
+              "shapeKo": "도약을 2번 저장해 연속으로 뛸 수 있습니다.",
+              "shapeEn": "Stores 2 charges so you can leap twice in a row."
+            }
+          ]
+        },
+        {
+          "id": "W04",
+          "iconId": "W04",
+          "roleKo": "제압",
+          "tier": 4,
+          "ultimate": false,
+          "ko": "지면 강타",
+          "en": "Ground Slam",
+          "descKo": "땅을 세게 내리쳐 주변의 적들을 기절시킵니다.",
+          "descEn": "Stomp the ground, stunning the enemies around you.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D120%",
+              "rankMax": "D168%",
+              "value": {
+                "from": 120,
+                "to": 168,
+                "unit": "D%",
+                "ranks": [
+                  120.0,
+                  132.0,
+                  144.0,
+                  156.0,
+                  168.0
+                ]
+              }
+            },
+            {
+              "ko": "기절",
+              "en": "Stun",
+              "rank1": "1.5초",
+              "rankMax": "1.9초",
+              "value": {
+                "from": 1.5,
+                "to": 1.9,
+                "unit": "초",
+                "ranks": [
+                  1.5,
+                  1.6,
+                  1.7,
+                  1.8,
+                  1.9
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W04-1",
+              "iconId": "W04-1",
+              "value": {
+                "from": 3,
+                "to": 5,
+                "unit": "m",
+                "ranks": [
+                  3.0,
+                  3.5,
+                  4.0,
+                  4.5,
+                  5.0
+                ]
+              },
+              "ko": "전장의 고리",
+              "en": "Battle Ring",
+              "effectKo": "끌어오기 반경 3m → 5m",
+              "effectEn": "Pull radius 3m → 5m",
+              "shapeKo": "주변의 적을 한곳으로 끌어모은 뒤 강타합니다.",
+              "shapeEn": "Pulls nearby enemies in, then slams them."
+            },
+            {
+              "id": "W04-2",
+              "iconId": "W04-2",
+              "value": {
+                "from": 5,
+                "to": 9,
+                "unit": "m",
+                "ranks": [
+                  5.0,
+                  6.0,
+                  7.0,
+                  8.0,
+                  9.0
+                ]
+              },
+              "ko": "전율의 파동",
+              "en": "Tremor Wave",
+              "effectKo": "파동 길이 5m → 9m",
+              "effectEn": "Wave length 5m → 9m",
+              "shapeKo": "원형 강타가 전방으로 뻗는 직선 파동으로 바뀌고 적을 느리게 합니다.",
+              "shapeEn": "The circular slam becomes a forward wave that slows enemies."
+            },
+            {
+              "id": "W04-3",
+              "iconId": "W04-3",
+              "value": {
+                "from": 40,
+                "to": 60,
+                "unit": "%",
+                "ranks": [
+                  40.0,
+                  45.0,
+                  50.0,
+                  55.0,
+                  60.0
+                ]
+              },
+              "ko": "연속 강타",
+              "en": "Repeated Stomp",
+              "effectKo": "1회 피해 40% → 60% ×3",
+              "effectEn": "Per stomp 40% → 60% ×3",
+              "shapeKo": "짧은 간격으로 3번 내려치고 마지막 강타에만 기절이 붙습니다.",
+              "shapeEn": "Stomps 3 times in a row; only the last stomp stuns."
+            }
+          ]
+        },
+        {
+          "id": "W17",
+          "iconId": "W17",
+          "roleKo": "궁극",
+          "tier": 5,
+          "ultimate": true,
+          "ko": "선조의 전쟁",
+          "en": "War of the Ancestors",
+          "descKo": "선조의 영혼을 불러내 곁에서 함께 싸우게 합니다.",
+          "descEn": "Summon the spirits of your ancestors to fight at your side.",
+          "maxRank": 3,
+          "stats": [
+            {
+              "ko": "선조 피해",
+              "en": "Ancestor damage",
+              "rank1": "D65%",
+              "rankMax": "D91%",
+              "value": {
+                "from": 65,
+                "to": 91,
+                "unit": "D%",
+                "ranks": [
+                  65.0,
+                  78.0,
+                  91.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "60초",
+              "rankMax": "50초",
+              "value": {
+                "from": 60,
+                "to": 50,
+                "unit": "초",
+                "ranks": [
+                  60.0,
+                  55.0,
+                  50.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W17-1",
+              "iconId": "W17-1",
+              "value": {
+                "from": 6,
+                "to": 8,
+                "unit": "초",
+                "ranks": [
+                  6.0,
+                  7.0,
+                  8.0
+                ]
+              },
+              "ko": "선조의 군단",
+              "en": "Ancestral Legion",
+              "effectKo": "선조 3명 · 지속 6초 → 8초",
+              "effectEn": "3 ancestors · 6s → 8s",
+              "shapeKo": "선조가 3명으로 늘어납니다. 레벨이 오를수록 더 오래 싸웁니다.",
+              "shapeEn": "Summons 3 ancestors, and they fight longer at higher ranks."
+            },
+            {
+              "id": "W17-2",
+              "iconId": "W17-2",
+              "value": {
+                "from": 50,
+                "to": 70,
+                "unit": "%",
+                "ranks": [
+                  50.0,
+                  60.0,
+                  70.0
+                ]
+              },
+              "ko": "선조의 기술",
+              "en": "Ancestral Technique",
+              "effectKo": "따라 쓰는 피해 50% → 70%",
+              "effectEn": "Copied skill 50% → 70%",
+              "shapeKo": "선조가 내가 마지막으로 쓴 스킬을 따라 씁니다.",
+              "shapeEn": "Ancestors copy the last active skill you used."
+            }
+          ]
+        },
+        {
+          "id": "W18",
+          "iconId": "W18",
+          "roleKo": "궁극",
+          "tier": 5,
+          "ultimate": true,
+          "ko": "거인의 심판",
+          "en": "Titan's Judgment",
+          "descKo": "거인의 힘으로 내리쳐 넓은 범위의 적을 짓누르고 기절시킵니다.",
+          "descEn": "Smash down with a titan's strength, crushing and stunning a wide area.",
+          "maxRank": 3,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D600%",
+              "rankMax": "D840%",
+              "value": {
+                "from": 600,
+                "to": 840,
+                "unit": "D%",
+                "ranks": [
+                  600.0,
+                  720.0,
+                  840.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "60초",
+              "rankMax": "50초",
+              "value": {
+                "from": 60,
+                "to": 50,
+                "unit": "초",
+                "ranks": [
+                  60.0,
+                  55.0,
+                  50.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "W18-1",
+              "iconId": "W18-1",
+              "value": {
+                "from": 6,
+                "to": 8,
+                "unit": "m",
+                "ranks": [
+                  6.0,
+                  7.0,
+                  8.0
+                ]
+              },
+              "ko": "대지의 심판",
+              "en": "Judgment of the Earth",
+              "effectKo": "범위 6m → 8m",
+              "effectEn": "Area 6m → 8m",
+              "shapeKo": "내려치기 전 준비 시간이 길어지는 대신 훨씬 넓은 범위를 덮습니다.",
+              "shapeEn": "A longer wind-up, but the blow covers a far wider area."
+            },
+            {
+              "id": "W18-2",
+              "iconId": "W18-2",
+              "value": {
+                "from": 6,
+                "to": 8,
+                "unit": "초",
+                "ranks": [
+                  6.0,
+                  7.0,
+                  8.0
+                ]
+              },
+              "ko": "거인화",
+              "en": "Giant Form",
+              "effectKo": "거인화 지속 6초 → 8초",
+              "effectEn": "Giant form 6s → 8s",
+              "shapeKo": "한 번의 일격 대신 잠시 거인으로 변해 범위가 넓어지고 밀리지 않습니다.",
+              "shapeEn": "You turn into a giant: wider reach and no knockback."
+            }
+          ]
+        }
+      ],
+      "passives": [
+        {
+          "id": "WP13",
+          "iconId": "WP13",
+          "value": {
+            "from": 40,
+            "to": 56,
+            "unit": "%",
+            "ranks": [
+              40.0,
+              44.0,
+              48.0,
+              52.0,
+              56.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 2,
+          "ko": "거친 호흡",
+          "en": "Ragged Breathing",
+          "effectKo": "HP 70% 이하일 때 자원 회복 +40% → +56%",
+          "effectEn": "Below 70% HP: resource regen +40% → +56%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP01",
+          "iconId": "WP01",
+          "value": {
+            "from": 25,
+            "to": 35,
+            "unit": "%",
+            "ranks": [
+              25.0,
+              27.5,
+              30.0,
+              32.5,
+              35.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 4,
+          "ko": "군중 속으로",
+          "en": "Into the Crowd",
+          "effectKo": "주변 적 3명 이상일 때 피해 +25% → +35%",
+          "effectEn": "3+ enemies nearby: damage +25% → +35%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP06",
+          "iconId": "WP06",
+          "value": {
+            "from": 35,
+            "to": 49,
+            "unit": "%",
+            "ranks": [
+              35.0,
+              38.5,
+              42.0,
+              45.5,
+              49.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 6,
+          "ko": "처형자의 눈",
+          "en": "Executioner's Eye",
+          "effectKo": "HP 30% 이하 적에게 피해 +35% → +49%",
+          "effectEn": "Enemies below 30% HP: +35% → +49%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP05",
+          "iconId": "WP05",
+          "value": {
+            "from": 40,
+            "to": 56,
+            "unit": "%p",
+            "ranks": [
+              40.0,
+              44.0,
+              48.0,
+              52.0,
+              56.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 8,
+          "ko": "단단한 의지",
+          "en": "Hardened Will",
+          "effectKo": "보호막 생성량 +40%p → +56%p",
+          "effectEn": "Shield strength +40% → +56%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP04",
+          "iconId": "WP04",
+          "value": {
+            "from": 2,
+            "to": 2.8,
+            "unit": "%",
+            "ranks": [
+              2.0,
+              2.2,
+              2.4,
+              2.6,
+              2.8
+            ]
+          },
+          "key": false,
+          "unlockLevel": 15,
+          "ko": "피의 회복",
+          "en": "Blood Recovery",
+          "effectKo": "처치 시 최대 HP 2.0% → 2.8% 회복",
+          "effectEn": "Heal 2.0% → 2.8% max HP on kill",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP09",
+          "iconId": "WP09",
+          "value": {
+            "from": 18,
+            "to": 26,
+            "unit": "",
+            "ranks": [
+              18.0,
+              20.0,
+              22.0,
+              24.0,
+              26.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 20,
+          "ko": "반격의 호흡",
+          "en": "Counter Rhythm",
+          "effectKo": "방어 성공 시 자원 18 → 26",
+          "effectEn": "Resource on block 18 → 26",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP17",
+          "iconId": "WP17",
+          "value": {
+            "from": 15,
+            "to": 21,
+            "unit": "%",
+            "ranks": [
+              15.0,
+              16.5,
+              18.0,
+              19.5,
+              21.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 25,
+          "ko": "결전의 비축",
+          "en": "Battle Reserve",
+          "effectKo": "자원 60% 이상일 때 분쇄 일격·지면 강타 직접 피해 +15% → +21%",
+          "effectEn": "Above 60% resource: Crushing Blow and Ground Slam deal +15% → +21%",
+          "linkedActives": [
+            "W03",
+            "W04"
+          ],
+          "linkedActiveIndices": [
+            3,
+            7
+          ]
+        },
+        {
+          "id": "WP15",
+          "iconId": "WP15",
+          "value": {
+            "from": 20,
+            "to": 28,
+            "unit": "%",
+            "ranks": [
+              20.0,
+              22.0,
+              24.0,
+              26.0,
+              28.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 30,
+          "ko": "무기 연계",
+          "en": "Weapon Sequence",
+          "effectKo": "직전과 다른 공격 스킬을 쓰면 피해 +20% → +28%",
+          "effectEn": "Switching attack skills: +20% → +28%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "WP20",
+          "iconId": "WK1",
+          "value": {
+            "from": 40,
+            "to": 80,
+            "unit": "D%",
+            "ranks": [
+              40.0,
+              50.0,
+              60.0,
+              70.0,
+              80.0
+            ]
+          },
+          "key": true,
+          "unlockLevel": 45,
+          "ko": "피의 광란",
+          "en": "Blood Frenzy",
+          "effectKo": "찢어낸 상처의 출혈이 치명타로 들어가고, 출혈 대상 처치 시 D40% → D80% 폭발",
+          "effectEn": "Raking Wound bleeds can crit; bleeding kills explode for D40% → D80%",
+          "linkedActives": [
+            "W09"
+          ],
+          "linkedActiveIndices": [
+            0
+          ]
+        },
+        {
+          "id": "WP21",
+          "iconId": "WK2",
+          "value": {
+            "from": 6,
+            "to": 10,
+            "unit": "%",
+            "ranks": [
+              6.0,
+              7.0,
+              8.0,
+              9.0,
+              10.0
+            ]
+          },
+          "key": true,
+          "unlockLevel": 45,
+          "ko": "끝없는 투지",
+          "en": "Unending Resolve",
+          "effectKo": "생성·핵심·제압 스킬을 번갈아 쓰면 피해 +6% → +10% (3중첩)",
+          "effectEn": "Alternating skill types: +6% → +10% (3 stacks)",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        }
+      ]
+    },
+    {
+      "heroClass": 1,
+      "hero": "Ranger",
+      "tiers": [
+        {
+          "tier": 1,
+          "ko": "기본",
+          "en": "Basic",
+          "gate": 0
+        },
+        {
+          "tier": 2,
+          "ko": "핵심",
+          "en": "Core",
+          "gate": 2
+        },
+        {
+          "tier": 3,
+          "ko": "방어·설치",
+          "en": "Utility",
+          "gate": 6
+        },
+        {
+          "tier": 4,
+          "ko": "전술",
+          "en": "Tactics",
+          "gate": 11
+        },
+        {
+          "tier": 5,
+          "ko": "궁극기",
+          "en": "Ultimate",
+          "gate": 40
+        }
+      ],
+      "spriteCells": [
+        {
+          "iconId": "A07",
+          "id": "A07"
+        },
+        {
+          "iconId": "A07-1",
+          "id": "A07-1"
+        },
+        {
+          "iconId": "A07-2",
+          "id": "A07-2"
+        },
+        {
+          "iconId": "A07-3",
+          "id": "A07-3"
+        },
+        {
+          "iconId": "A14",
+          "id": "A14"
+        },
+        {
+          "iconId": "A14-1",
+          "id": "A14-1"
+        },
+        {
+          "iconId": "A14-2",
+          "id": "A14-2"
+        },
+        {
+          "iconId": "A14-3",
+          "id": "A14-3"
+        },
+        {
+          "iconId": "A01",
+          "id": "A01"
+        },
+        {
+          "iconId": "A01-1",
+          "id": "A01-1"
+        },
+        {
+          "iconId": "A01-2",
+          "id": "A01-2"
+        },
+        {
+          "iconId": "A01-3",
+          "id": "A01-3"
+        },
+        {
+          "iconId": "A02",
+          "id": "A02"
+        },
+        {
+          "iconId": "A02-1",
+          "id": "A02-1"
+        },
+        {
+          "iconId": "A02-2",
+          "id": "A02-2"
+        },
+        {
+          "iconId": "A02-3",
+          "id": "A02-3"
+        },
+        {
+          "iconId": "A_IMBUE",
+          "id": "A06"
+        },
+        {
+          "iconId": "A_IMBUE-1",
+          "id": "A06-1"
+        },
+        {
+          "iconId": "A_IMBUE-2",
+          "id": "A06-2"
+        },
+        {
+          "iconId": "A_IMBUE-3",
+          "id": "A06-3"
+        },
+        {
+          "iconId": "A03",
+          "id": "A03"
+        },
+        {
+          "iconId": "A03-1",
+          "id": "A03-1"
+        },
+        {
+          "iconId": "A03-2",
+          "id": "A03-2"
+        },
+        {
+          "iconId": "A03-3",
+          "id": "A03-3"
+        },
+        {
+          "iconId": "A04",
+          "id": "A04"
+        },
+        {
+          "iconId": "A04-1",
+          "id": "A04-1"
+        },
+        {
+          "iconId": "A04-2",
+          "id": "A04-2"
+        },
+        {
+          "iconId": "A04-3",
+          "id": "A04-3"
+        },
+        {
+          "iconId": "A05",
+          "id": "A05"
+        },
+        {
+          "iconId": "A05-1",
+          "id": "A05-1"
+        },
+        {
+          "iconId": "A05-2",
+          "id": "A05-2"
+        },
+        {
+          "iconId": "A05-3",
+          "id": "A05-3"
+        },
+        {
+          "iconId": "A17",
+          "id": "A17"
+        },
+        {
+          "iconId": "A17-1",
+          "id": "A17-1"
+        },
+        {
+          "iconId": "A17-2",
+          "id": "A17-2"
+        },
+        {
+          "iconId": "A18",
+          "id": "A18"
+        },
+        {
+          "iconId": "A18-1",
+          "id": "A18-1"
+        },
+        {
+          "iconId": "A18-2",
+          "id": "A18-2"
+        },
+        {
+          "iconId": "AP01",
+          "id": "AP01"
+        },
+        {
+          "iconId": "AP09",
+          "id": "AP09"
+        },
+        {
+          "iconId": "AP06",
+          "id": "AP06"
+        },
+        {
+          "iconId": "AP15",
+          "id": "AP15"
+        },
+        {
+          "iconId": "AP10",
+          "id": "AP10"
+        },
+        {
+          "iconId": "AP07",
+          "id": "AP07"
+        },
+        {
+          "iconId": "AP05",
+          "id": "AP05"
+        },
+        {
+          "iconId": "AP14",
+          "id": "AP14"
+        },
+        {
+          "iconId": "AK1",
+          "id": "AP20"
+        },
+        {
+          "iconId": "AK2",
+          "id": "AP21"
+        }
+      ],
+      "actives": [
+        {
+          "id": "A07",
+          "iconId": "A07",
+          "roleKo": "생성",
+          "tier": 1,
+          "ultimate": false,
+          "ko": "잇단 사격",
+          "en": "Successive Shots",
+          "descKo": "한 적에게 화살을 빠르게 연달아 쏩니다.",
+          "descEn": "Loose a rapid burst of arrows at a single enemy.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해 (3발)",
+              "en": "Damage (3 shots)",
+              "rank1": "D45%",
+              "rankMax": "D63%",
+              "value": {
+                "from": 45,
+                "to": 63,
+                "unit": "D%",
+                "ranks": [
+                  45.0,
+                  49.5,
+                  54.0,
+                  58.5,
+                  63.0
+                ]
+              }
+            },
+            {
+              "ko": "시전당 자원",
+              "en": "Resource per cast",
+              "rank1": "+8",
+              "rankMax": "+12",
+              "value": {
+                "from": 8,
+                "to": 12,
+                "unit": "",
+                "ranks": [
+                  8.0,
+                  9.0,
+                  10.0,
+                  11.0,
+                  12.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A07-1",
+              "iconId": "A07-1",
+              "value": {
+                "from": 25,
+                "to": 33,
+                "unit": "D%",
+                "ranks": [
+                  25.0,
+                  27.0,
+                  29.0,
+                  31.0,
+                  33.0
+                ]
+              },
+              "ko": "속사",
+              "en": "Rapid Volley",
+              "effectKo": "5발 · 발당 D25% → D33%",
+              "effectEn": "5 shots · D25% → D33% each",
+              "shapeKo": "화살이 3발에서 5발로 늘지만 한 발의 피해는 줄어듭니다.",
+              "shapeEn": "Fires 5 arrows instead of 3, each dealing less damage."
+            },
+            {
+              "id": "A07-2",
+              "iconId": "A07-2",
+              "value": {
+                "from": 3,
+                "to": 5,
+                "unit": "명",
+                "ranks": [
+                  3,
+                  3,
+                  4,
+                  4,
+                  5
+                ]
+              },
+              "ko": "흩뿌림",
+              "en": "Scatter Shot",
+              "effectKo": "서로 다른 대상 3명 → 5명",
+              "effectEn": "Targets 3 → 5",
+              "shapeKo": "화살이 한 적이 아니라 서로 다른 적에게 흩어져 날아갑니다.",
+              "shapeEn": "Arrows spread to different enemies instead of one target."
+            },
+            {
+              "id": "A07-3",
+              "iconId": "A07-3",
+              "value": {
+                "from": 30,
+                "to": 70,
+                "unit": "%",
+                "ranks": [
+                  30.0,
+                  40.0,
+                  50.0,
+                  60.0,
+                  70.0
+                ]
+              },
+              "ko": "마무리 화살",
+              "en": "Finishing Arrow",
+              "effectKo": "3번째 화살 치명 피해 +30% → +70%",
+              "effectEn": "3rd arrow crit +30% → +70%",
+              "shapeKo": "마지막 3번째 화살이 반드시 치명타가 되어 적을 관통합니다.",
+              "shapeEn": "The 3rd arrow always crits and pierces."
+            }
+          ]
+        },
+        {
+          "id": "A14",
+          "iconId": "A14",
+          "roleKo": "생성",
+          "tier": 1,
+          "ultimate": false,
+          "ko": "갈라지는 화살",
+          "en": "Forking Arrow",
+          "descKo": "적에게 맞으면 갈라져 주변의 다른 적에게 날아가는 화살을 쏩니다.",
+          "descEn": "Fire an arrow that splits on impact and flies on to nearby enemies.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D100%",
+              "rankMax": "D140%",
+              "value": {
+                "from": 100,
+                "to": 140,
+                "unit": "D%",
+                "ranks": [
+                  100.0,
+                  110.0,
+                  120.0,
+                  130.0,
+                  140.0
+                ]
+              }
+            },
+            {
+              "ko": "분열 화살",
+              "en": "Split arrows",
+              "rank1": "D50%",
+              "rankMax": "D70%",
+              "value": {
+                "from": 50,
+                "to": 70,
+                "unit": "D%",
+                "ranks": [
+                  50.0,
+                  55.0,
+                  60.0,
+                  65.0,
+                  70.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A14-1",
+              "iconId": "A14-1",
+              "value": {
+                "from": 30,
+                "to": 50,
+                "unit": "%",
+                "ranks": [
+                  30.0,
+                  35.0,
+                  40.0,
+                  45.0,
+                  50.0
+                ]
+              },
+              "ko": "연쇄 분열",
+              "en": "Chain Split",
+              "effectKo": "2차 분열 피해 30% → 50%",
+              "effectEn": "Second split 30% → 50%",
+              "shapeKo": "갈라진 화살이 한 번 더 갈라져 4발이 됩니다.",
+              "shapeEn": "Split arrows split once more, becoming 4."
+            },
+            {
+              "id": "A14-2",
+              "iconId": "A14-2",
+              "value": {
+                "from": 1.5,
+                "to": 2.5,
+                "unit": "m",
+                "ranks": [
+                  1.5,
+                  1.75,
+                  2.0,
+                  2.25,
+                  2.5
+                ]
+              },
+              "ko": "폭발 화살",
+              "en": "Explosive Arrow",
+              "effectKo": "폭발 반경 1.5m → 2.5m",
+              "effectEn": "Blast radius 1.5m → 2.5m",
+              "shapeKo": "갈라지는 대신 맞은 자리에서 폭발합니다.",
+              "shapeEn": "Explodes on impact instead of splitting."
+            },
+            {
+              "id": "A14-3",
+              "iconId": "A14-3",
+              "value": {
+                "from": 30,
+                "to": 50,
+                "unit": "D%",
+                "ranks": [
+                  30.0,
+                  35.0,
+                  40.0,
+                  45.0,
+                  50.0
+                ]
+              },
+              "ko": "귀환 화살",
+              "en": "Returning Arrow",
+              "effectKo": "돌아오는 화살 D30% → D50%",
+              "effectEn": "Return arrows D30% → D50%",
+              "shapeKo": "갈라진 화살이 부메랑처럼 되돌아와 적을 한 번 더 맞힙니다.",
+              "shapeEn": "Split arrows fly back like boomerangs, hitting again."
+            }
+          ]
+        },
+        {
+          "id": "A01",
+          "iconId": "A01",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "관통 사격",
+          "en": "Piercing Shot",
+          "descKo": "일직선으로 날아가며 길 위의 적을 모두 꿰뚫는 화살을 쏩니다.",
+          "descEn": "Fire an arrow that flies straight through every enemy in its path.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D180%",
+              "rankMax": "D252%",
+              "value": {
+                "from": 180,
+                "to": 252,
+                "unit": "D%",
+                "ranks": [
+                  180.0,
+                  198.0,
+                  216.0,
+                  234.0,
+                  252.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 비용",
+              "en": "Resource cost",
+              "rank1": "20",
+              "rankMax": "16",
+              "value": {
+                "from": 20,
+                "to": 16,
+                "unit": "",
+                "ranks": [
+                  20.0,
+                  19.0,
+                  18.0,
+                  17.0,
+                  16.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A01-1",
+              "iconId": "A01-1",
+              "value": {
+                "from": 1,
+                "to": 3,
+                "unit": "회",
+                "ranks": [
+                  1,
+                  1,
+                  2,
+                  2,
+                  3
+                ]
+              },
+              "ko": "도탄",
+              "en": "Ricochet",
+              "effectKo": "벽 튕김 1회 → 3회",
+              "effectEn": "Bounces 1 → 3",
+              "shapeKo": "벽에 맞으면 튕겨 나가 다른 적을 다시 맞힙니다.",
+              "shapeEn": "Bounces off walls to hit other enemies."
+            },
+            {
+              "id": "A01-2",
+              "iconId": "A01-2",
+              "value": {
+                "from": 10,
+                "to": 20,
+                "unit": "%",
+                "ranks": [
+                  10.0,
+                  12.5,
+                  15.0,
+                  17.5,
+                  20.0
+                ]
+              },
+              "ko": "가속 관통",
+              "en": "Accelerating Pierce",
+              "effectKo": "관통당 피해 +10% → +20%",
+              "effectEn": "+10% → +20% per pierce",
+              "shapeKo": "적을 관통할수록 화살의 피해가 점점 커집니다.",
+              "shapeEn": "The arrow grows stronger with every enemy it pierces."
+            },
+            {
+              "id": "A01-3",
+              "iconId": "A01-3",
+              "value": {
+                "from": 50,
+                "to": 70,
+                "unit": "%",
+                "ranks": [
+                  50.0,
+                  55.0,
+                  60.0,
+                  65.0,
+                  70.0
+                ]
+              },
+              "ko": "세 갈래",
+              "en": "Triple Pierce",
+              "effectKo": "화살 피해 50% → 70% ×3",
+              "effectEn": "Arrows 50% → 70% ×3",
+              "shapeKo": "화살 한 발 대신 세 갈래로 나뉘어 날아갑니다.",
+              "shapeEn": "Fires three arrows in a spread instead of one."
+            }
+          ]
+        },
+        {
+          "id": "A02",
+          "iconId": "A02",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "다중 사격",
+          "en": "Multishot",
+          "descKo": "부채꼴로 여러 발의 화살을 한꺼번에 쏩니다.",
+          "descEn": "Fire several arrows at once in a wide fan.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해 (3발)",
+              "en": "Damage (3 arrows)",
+              "rank1": "D80%",
+              "rankMax": "D112%",
+              "value": {
+                "from": 80,
+                "to": 112,
+                "unit": "D%",
+                "ranks": [
+                  80.0,
+                  88.0,
+                  96.0,
+                  104.0,
+                  112.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 비용",
+              "en": "Resource cost",
+              "rank1": "30",
+              "rankMax": "24",
+              "value": {
+                "from": 30,
+                "to": 24,
+                "unit": "",
+                "ranks": [
+                  30.0,
+                  28.5,
+                  27.0,
+                  25.5,
+                  24.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A02-1",
+              "iconId": "A02-1",
+              "value": {
+                "from": 50,
+                "to": 70,
+                "unit": "D%",
+                "ranks": [
+                  50.0,
+                  55.0,
+                  60.0,
+                  65.0,
+                  70.0
+                ]
+              },
+              "ko": "탄막",
+              "en": "Barrage",
+              "effectKo": "7발 · 발당 D50% → D70%",
+              "effectEn": "7 arrows · D50% → D70%",
+              "shapeKo": "화살이 3발에서 7발로 늘어 더 넓게 퍼집니다.",
+              "shapeEn": "Fires 7 arrows instead of 3, in a wider fan."
+            },
+            {
+              "id": "A02-2",
+              "iconId": "A02-2",
+              "value": {
+                "from": 40,
+                "to": 80,
+                "unit": "%",
+                "ranks": [
+                  40.0,
+                  50.0,
+                  60.0,
+                  70.0,
+                  80.0
+                ]
+              },
+              "ko": "튕기는 화살",
+              "en": "Bouncing Arrows",
+              "effectKo": "튕긴 화살 피해 40% → 80%",
+              "effectEn": "Bounce damage 40% → 80%",
+              "shapeKo": "맞은 화살이 한 번씩 튕겨 다른 적을 맞힙니다.",
+              "shapeEn": "Each arrow bounces once to hit another enemy."
+            },
+            {
+              "id": "A02-3",
+              "iconId": "A02-3",
+              "value": {
+                "from": 10,
+                "to": 30,
+                "unit": "%",
+                "ranks": [
+                  10.0,
+                  15.0,
+                  20.0,
+                  25.0,
+                  30.0
+                ]
+              },
+              "ko": "밀집 사격",
+              "en": "Focused Spread",
+              "effectKo": "같은 대상 추가 화살 +10% → +30%",
+              "effectEn": "Same-target arrows +10% → +30%",
+              "shapeKo": "부채꼴이 좁아져 모든 화살이 한 적에게 몰려 맞습니다.",
+              "shapeEn": "A tight fan that lands every arrow on one target."
+            }
+          ]
+        },
+        {
+          "id": "A04",
+          "iconId": "A04",
+          "roleKo": "기동",
+          "tier": 3,
+          "ultimate": false,
+          "ko": "후퇴 도약",
+          "en": "Retreat Leap",
+          "descKo": "뒤로 몸을 날려 적과 거리를 벌립니다.",
+          "descEn": "Vault backward to open distance from your enemies.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "8초",
+              "rankMax": "6.4초",
+              "value": {
+                "from": 8,
+                "to": 6.4,
+                "unit": "초",
+                "ranks": [
+                  8.0,
+                  7.6,
+                  7.2,
+                  6.8,
+                  6.4
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A04-1",
+              "iconId": "A04-1",
+              "value": {
+                "from": 2,
+                "to": 3,
+                "unit": "초",
+                "ranks": [
+                  2.0,
+                  2.25,
+                  2.5,
+                  2.75,
+                  3.0
+                ]
+              },
+              "ko": "미끼 투영",
+              "en": "Decoy Projection",
+              "effectKo": "미끼 어그로 2.0초 → 3.0초",
+              "effectEn": "Decoy taunt 2.0s → 3.0s",
+              "shapeKo": "출발한 자리에 미끼를 남겨 적을 끌어들이다 폭발합니다.",
+              "shapeEn": "Leaves a decoy that draws enemies, then explodes."
+            },
+            {
+              "id": "A04-2",
+              "iconId": "A04-2",
+              "value": {
+                "from": -12,
+                "to": -20,
+                "unit": "%",
+                "ranks": [
+                  -12.0,
+                  -14.0,
+                  -16.0,
+                  -18.0,
+                  -20.0
+                ]
+              },
+              "ko": "연막 엄폐",
+              "en": "Smoke Cover",
+              "effectKo": "받는 피해 −12% → −20%",
+              "effectEn": "Damage taken −12% → −20%",
+              "shapeKo": "착지한 뒤 연막이 퍼져 잠시 받는 피해가 줄어듭니다.",
+              "shapeEn": "Smoke covers your landing, reducing damage taken briefly."
+            },
+            {
+              "id": "A04-3",
+              "iconId": "A04-3",
+              "value": {
+                "from": 20,
+                "to": 60,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  30.0,
+                  40.0,
+                  50.0,
+                  60.0
+                ]
+              },
+              "ko": "그림자 걸음",
+              "en": "Shadow Step",
+              "effectKo": "다음 공격 치명 피해 +20% → +60%",
+              "effectEn": "Next hit crit +20% → +60%",
+              "shapeKo": "물러나는 대신 적의 등 뒤로 순간이동하고, 다음 공격의 치명 피해가 커집니다.",
+              "shapeEn": "Teleports behind the enemy; your next hit crits harder."
+            }
+          ]
+        },
+        {
+          "id": "A03",
+          "iconId": "A03",
+          "roleKo": "설치",
+          "tier": 3,
+          "ultimate": false,
+          "ko": "맹독 덫",
+          "en": "Venom Trap",
+          "descKo": "밟은 적을 중독시키는 독 덫을 설치합니다.",
+          "descEn": "Set a trap that poisons the enemies who walk over it.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "초당 피해",
+              "en": "Damage per second",
+              "rank1": "D60%",
+              "rankMax": "D84%",
+              "value": {
+                "from": 60,
+                "to": 84,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  66.0,
+                  72.0,
+                  78.0,
+                  84.0
+                ]
+              }
+            },
+            {
+              "ko": "지속",
+              "en": "Duration",
+              "rank1": "5초",
+              "rankMax": "7초",
+              "value": {
+                "from": 5,
+                "to": 7,
+                "unit": "초",
+                "ranks": [
+                  5.0,
+                  5.5,
+                  6.0,
+                  6.5,
+                  7.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A03-1",
+              "iconId": "A03-1",
+              "value": {
+                "from": 1,
+                "to": 2,
+                "unit": "초",
+                "ranks": [
+                  1.0,
+                  1.25,
+                  1.5,
+                  1.75,
+                  2.0
+                ]
+              },
+              "ko": "가시 덫",
+              "en": "Spike Trap",
+              "effectKo": "속박 1.0초 → 2.0초",
+              "effectEn": "Root 1.0s → 2.0s",
+              "shapeKo": "독 장판 대신 밟으면 터지며 적을 묶는 덫이 됩니다.",
+              "shapeEn": "Bursts and roots enemies instead of leaving poison."
+            },
+            {
+              "id": "A03-2",
+              "iconId": "A03-2",
+              "value": {
+                "from": 30,
+                "to": 50,
+                "unit": "%",
+                "ranks": [
+                  30.0,
+                  35.0,
+                  40.0,
+                  45.0,
+                  50.0
+                ]
+              },
+              "ko": "서리 올가미",
+              "en": "Frost Snare",
+              "effectKo": "둔화 30% → 50%",
+              "effectEn": "Slow 30% → 50%",
+              "shapeKo": "독 대신 냉기 장판이 깔려 안의 적을 느리게 만듭니다.",
+              "shapeEn": "A frost zone that slows enemies instead of poison."
+            },
+            {
+              "id": "A03-3",
+              "iconId": "A03-3",
+              "value": {
+                "from": 6,
+                "to": 10,
+                "unit": "회",
+                "ranks": [
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
+                ]
+              },
+              "ko": "교차 쇠뇌",
+              "en": "Crossbow Turret",
+              "effectKo": "쇠뇌 사격 6회 → 10회",
+              "effectEn": "Turret shots 6 → 10",
+              "shapeKo": "덫 대신 자동으로 화살을 쏘는 쇠뇌 포탑을 설치합니다.",
+              "shapeEn": "Places an auto-firing crossbow turret instead of a trap."
+            }
+          ]
+        },
+        {
+          "id": "A06",
+          "iconId": "A_IMBUE",
+          "roleKo": "주입",
+          "tier": 4,
+          "ultimate": false,
+          "ko": "원소 주입",
+          "en": "Elemental Imbuement",
+          "descKo": "다음 화살 3발에 원소의 힘을 불어넣어 추가 피해를 줍니다.",
+          "descEn": "Infuse your next 3 arrows with elemental power for bonus damage.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "추가 피해 (3발)",
+              "en": "Bonus damage (3 shots)",
+              "rank1": "+25%",
+              "rankMax": "+35%",
+              "value": {
+                "from": 25,
+                "to": 35,
+                "unit": "%",
+                "ranks": [
+                  25.0,
+                  27.5,
+                  30.0,
+                  32.5,
+                  35.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A06-1",
+              "iconId": "A_IMBUE-1",
+              "value": {
+                "from": 40,
+                "to": 80,
+                "unit": "D%",
+                "ranks": [
+                  40.0,
+                  50.0,
+                  60.0,
+                  70.0,
+                  80.0
+                ]
+              },
+              "ko": "그림자 주입",
+              "en": "Shadow Imbuement",
+              "effectKo": "처치 폭발 D40% → D80%",
+              "effectEn": "Kill blast D40% → D80%",
+              "shapeKo": "주입한 화살로 적을 처치하면 어둠이 폭발합니다.",
+              "shapeEn": "Enemies killed by imbued arrows burst in darkness."
+            },
+            {
+              "id": "A06-2",
+              "iconId": "A_IMBUE-2",
+              "value": {
+                "from": 60,
+                "to": 100,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  70.0,
+                  80.0,
+                  90.0,
+                  100.0
+                ]
+              },
+              "ko": "맹독 주입",
+              "en": "Poison Imbuement",
+              "effectKo": "4초 독 D60% → D100%",
+              "effectEn": "4s poison D60% → D100%",
+              "shapeKo": "주입한 화살에 맞은 적이 4초 동안 독에 중독됩니다.",
+              "shapeEn": "Imbued arrows poison enemies for 4 seconds."
+            },
+            {
+              "id": "A06-3",
+              "iconId": "A_IMBUE-3",
+              "value": {
+                "from": 20,
+                "to": 40,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0,
+                  35.0,
+                  40.0
+                ]
+              },
+              "ko": "서리 주입",
+              "en": "Cold Imbuement",
+              "effectKo": "둔화 20% → 40%",
+              "effectEn": "Slow 20% → 40%",
+              "shapeKo": "주입한 화살이 적을 느리게 하고, 3번 쌓이면 얼려 버립니다.",
+              "shapeEn": "Imbued arrows slow enemies and freeze them at 3 stacks."
+            }
+          ]
+        },
+        {
+          "id": "A05",
+          "iconId": "A05",
+          "roleKo": "표식",
+          "tier": 4,
+          "ultimate": false,
+          "ko": "사냥꾼의 표식",
+          "en": "Hunter's Mark",
+          "descKo": "적에게 표식을 남겨 그 적이 받는 피해를 높입니다.",
+          "descEn": "Mark an enemy so that it takes more damage.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "표식 대상 피해",
+              "en": "Damage to marked",
+              "rank1": "+25%",
+              "rankMax": "+35%",
+              "value": {
+                "from": 25,
+                "to": 35,
+                "unit": "%",
+                "ranks": [
+                  25.0,
+                  27.5,
+                  30.0,
+                  32.5,
+                  35.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A05-1",
+              "iconId": "A05-1",
+              "value": {
+                "from": 200,
+                "to": 280,
+                "unit": "D%",
+                "ranks": [
+                  200.0,
+                  220.0,
+                  240.0,
+                  260.0,
+                  280.0
+                ]
+              },
+              "ko": "응시 사격",
+              "en": "Gaze Shot",
+              "effectKo": "조준 저격 D200% → D280%",
+              "effectEn": "Aimed snipe D200% → D280%",
+              "shapeKo": "표식을 남긴 뒤 잠시 조준했다가 강력한 저격을 날립니다.",
+              "shapeEn": "After marking, you aim briefly, then fire a powerful snipe."
+            },
+            {
+              "id": "A05-2",
+              "iconId": "A05-2",
+              "value": {
+                "from": -10,
+                "to": -30,
+                "unit": "%",
+                "ranks": [
+                  -10.0,
+                  -15.0,
+                  -20.0,
+                  -25.0,
+                  -30.0
+                ]
+              },
+              "ko": "사냥 준비",
+              "en": "Hunter's Preparation",
+              "effectKo": "처치 시 다음 액티브 비용 −10% → −30%",
+              "effectEn": "Next skill cost −10% → −30%",
+              "shapeKo": "표식 대상을 처치하면 자원을 얻고 다음 스킬 비용이 줄어듭니다.",
+              "shapeEn": "Marked kills give resource and cut your next skill's cost."
+            },
+            {
+              "id": "A05-3",
+              "iconId": "A05-3",
+              "value": {
+                "from": 1,
+                "to": 3,
+                "unit": "회",
+                "ranks": [
+                  1,
+                  1,
+                  2,
+                  2,
+                  3
+                ]
+              },
+              "ko": "연쇄 표식",
+              "en": "Chain Mark",
+              "effectKo": "표식 이동 1회 → 3회",
+              "effectEn": "Mark jumps 1 → 3",
+              "shapeKo": "표식 대상이 죽으면 가까운 적에게 표식이 옮겨 갑니다.",
+              "shapeEn": "When the marked enemy dies, the mark jumps to a nearby one."
+            }
+          ]
+        },
+        {
+          "id": "A17",
+          "iconId": "A17",
+          "roleKo": "궁극",
+          "tier": 5,
+          "ultimate": true,
+          "ko": "일제 소탕",
+          "en": "Killing Rain",
+          "descKo": "지정한 지역에 화살비를 퍼부어 적을 쓸어 버립니다.",
+          "descEn": "Call down a rain of arrows that sweeps the target area clean.",
+          "maxRank": 3,
+          "stats": [
+            {
+              "ko": "파동당 피해",
+              "en": "Damage per wave",
+              "rank1": "D80%",
+              "rankMax": "D112%",
+              "value": {
+                "from": 80,
+                "to": 112,
+                "unit": "D%",
+                "ranks": [
+                  80.0,
+                  96.0,
+                  112.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "60초",
+              "rankMax": "50초",
+              "value": {
+                "from": 60,
+                "to": 50,
+                "unit": "초",
+                "ranks": [
+                  60.0,
+                  55.0,
+                  50.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A17-1",
+              "iconId": "A17-1",
+              "value": {
+                "from": 6,
+                "to": 8,
+                "unit": "회",
+                "ranks": [
+                  6,
+                  7,
+                  8
+                ]
+              },
+              "ko": "이동 포화",
+              "en": "Moving Barrage",
+              "effectKo": "따라오는 파동 6회 → 8회",
+              "effectEn": "Waves 6 → 8",
+              "shapeKo": "화살비가 한곳에 고정되지 않고 나를 따라 움직입니다.",
+              "shapeEn": "The rain follows you instead of staying in one place."
+            },
+            {
+              "id": "A17-2",
+              "iconId": "A17-2",
+              "value": {
+                "from": 1.6,
+                "to": 2,
+                "unit": "x",
+                "ranks": [
+                  1.6,
+                  1.8,
+                  2.0
+                ]
+              },
+              "ko": "집중 포화",
+              "en": "Focused Barrage",
+              "effectKo": "좁은 범위 피해 ×1.6 → ×2.0",
+              "effectEn": "Narrow area ×1.6 → ×2.0",
+              "shapeKo": "범위는 좁아지지만 더 빠르고 훨씬 강하게 쏟아집니다.",
+              "shapeEn": "A narrower area, but arrows fall faster and hit much harder."
+            }
+          ]
+        },
+        {
+          "id": "A18",
+          "iconId": "A18",
+          "roleKo": "궁극",
+          "tier": 5,
+          "ultimate": true,
+          "ko": "잔상 행군",
+          "en": "Afterimage March",
+          "descKo": "빠르게 이동하며 내 공격을 따라 쏘는 잔상을 남깁니다.",
+          "descEn": "Move swiftly, leaving afterimages that shoot along with you.",
+          "maxRank": 3,
+          "stats": [
+            {
+              "ko": "잔상 피해",
+              "en": "Afterimage damage",
+              "rank1": "D60%",
+              "rankMax": "D84%",
+              "value": {
+                "from": 60,
+                "to": 84,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  72.0,
+                  84.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "60초",
+              "rankMax": "50초",
+              "value": {
+                "from": 60,
+                "to": 50,
+                "unit": "초",
+                "ranks": [
+                  60.0,
+                  55.0,
+                  50.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "A18-1",
+              "iconId": "A18-1",
+              "value": {
+                "from": 40,
+                "to": 60,
+                "unit": "%",
+                "ranks": [
+                  40.0,
+                  50.0,
+                  60.0
+                ]
+              },
+              "ko": "그림자 분신",
+              "en": "Shadow Clone",
+              "effectKo": "분신 피해 40% → 60%",
+              "effectEn": "Clone damage 40% → 60%",
+              "shapeKo": "잔상 대신 내 공격을 따라 하는 분신이 한 명 생깁니다.",
+              "shapeEn": "A shadow clone copies your attacks instead of afterimages."
+            },
+            {
+              "id": "A18-2",
+              "iconId": "A18-2",
+              "value": {
+                "from": 60,
+                "to": 100,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  80.0,
+                  100.0
+                ]
+              },
+              "ko": "잔상 폭발",
+              "en": "Afterimage Burst",
+              "effectKo": "잔상 폭발 D60% → D100%",
+              "effectEn": "Burst D60% → D100%",
+              "shapeKo": "잔상이 사라질 때 어둠이 폭발해 주변의 적을 공격합니다.",
+              "shapeEn": "Afterimages burst in darkness when they fade."
+            }
+          ]
+        }
+      ],
+      "passives": [
+        {
+          "id": "AP01",
+          "iconId": "AP01",
+          "value": {
+            "from": 30,
+            "to": 42,
+            "unit": "%",
+            "ranks": [
+              30.0,
+              33.0,
+              36.0,
+              39.0,
+              42.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 2,
+          "ko": "긴 사거리",
+          "en": "Long Reach",
+          "effectKo": "6m 이상 떨어진 적중 피해 +30% → +42%",
+          "effectEn": "Hits from 6m+: +30% → +42%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP09",
+          "iconId": "AP09",
+          "value": {
+            "from": 4,
+            "to": 6,
+            "unit": "",
+            "ranks": [
+              4.0,
+              4.5,
+              5.0,
+              5.5,
+              6.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 4,
+          "ko": "다시 당기는 시위",
+          "en": "Drawing Again",
+          "effectKo": "기본 공격 적중 시 자원 4 → 6",
+          "effectEn": "Basic attack hit: resource 4 → 6",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP06",
+          "iconId": "AP06",
+          "value": {
+            "from": 20,
+            "to": 28,
+            "unit": "%p",
+            "ranks": [
+              20.0,
+              22.0,
+              24.0,
+              26.0,
+              28.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 6,
+          "ko": "마무리 사격",
+          "en": "Finishing Shot",
+          "effectKo": "HP 30% 이하 적 치명 확률 +20%p → +28%p",
+          "effectEn": "Crit vs enemies below 30% HP +20% → +28%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP07",
+          "iconId": "AP07",
+          "value": {
+            "from": 15,
+            "to": 21,
+            "unit": "%p",
+            "ranks": [
+              15.0,
+              16.5,
+              18.0,
+              19.5,
+              21.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 12,
+          "ko": "표식의 빈틈",
+          "en": "Marked Opening",
+          "effectKo": "사냥꾼의 표식 대상에게 치명 확률 +15%p → +21%p",
+          "effectEn": "Crit chance vs Hunter's Mark targets +15% → +21%",
+          "linkedActives": [
+            "A05"
+          ],
+          "linkedActiveIndices": [
+            7
+          ]
+        },
+        {
+          "id": "AP15",
+          "iconId": "AP15",
+          "value": {
+            "from": 25,
+            "to": 35,
+            "unit": "%",
+            "ranks": [
+              25.0,
+              27.5,
+              30.0,
+              32.5,
+              35.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 15,
+          "ko": "독과 서리",
+          "en": "Venom and Frost",
+          "effectKo": "중독과 둔화가 함께 걸린 적 피해 +25% → +35%",
+          "effectEn": "Poisoned and slowed enemies: +25% → +35%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP10",
+          "iconId": "AP10",
+          "value": {
+            "from": 12,
+            "to": 20,
+            "unit": "",
+            "ranks": [
+              12.0,
+              14.0,
+              16.0,
+              18.0,
+              20.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 20,
+          "ko": "독의 순환",
+          "en": "Venom Cycle",
+          "effectKo": "중독된 적 처치 시 자원 12 → 20",
+          "effectEn": "Poisoned kill: resource 12 → 20",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP05",
+          "iconId": "AP05",
+          "value": {
+            "from": -40,
+            "to": -56,
+            "unit": "%",
+            "ranks": [
+              -40.0,
+              -44.0,
+              -48.0,
+              -52.0,
+              -56.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 25,
+          "ko": "절약된 집중",
+          "en": "Saved Focus",
+          "effectKo": "1초 걸은 뒤 다음 스킬 비용 −40% → −56%",
+          "effectEn": "After 1s walking: next cost −40% → −56%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP14",
+          "iconId": "AP14",
+          "value": {
+            "from": 20,
+            "to": 28,
+            "unit": "%",
+            "ranks": [
+              20.0,
+              22.0,
+              24.0,
+              26.0,
+              28.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 30,
+          "ko": "유인 전술",
+          "en": "Decoy Tactics",
+          "effectKo": "후퇴 도약 미끼 3m 안의 적에게 피해 +20% → +28%",
+          "effectEn": "Enemies near your Retreat Leap decoy: +20% → +28%",
+          "linkedActives": [
+            "A04"
+          ],
+          "linkedActiveIndices": [
+            4
+          ]
+        },
+        {
+          "id": "AP20",
+          "iconId": "AK1",
+          "value": {
+            "from": 30,
+            "to": 50,
+            "unit": "%",
+            "ranks": [
+              30.0,
+              35.0,
+              40.0,
+              45.0,
+              50.0
+            ]
+          },
+          "key": true,
+          "unlockLevel": 45,
+          "ko": "정밀",
+          "en": "Precision",
+          "effectKo": "치명타 3회마다 다음 핵심 스킬 확정 치명, 피해 +30% → +50%",
+          "effectEn": "Every 3 crits: next Core skill crits for +30% → +50%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "AP21",
+          "iconId": "AK2",
+          "value": {
+            "from": 10,
+            "to": 18,
+            "unit": "%",
+            "ranks": [
+              10.0,
+              12.0,
+              14.0,
+              16.0,
+              18.0
+            ]
+          },
+          "key": true,
+          "unlockLevel": 45,
+          "ko": "독사의 축복",
+          "en": "Viper's Blessing",
+          "effectKo": "중독된 적이 받는 모든 피해 +10% → +18%",
+          "effectEn": "Poisoned enemies take +10% → +18%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        }
+      ]
+    },
+    {
+      "heroClass": 2,
+      "hero": "Mage",
+      "tiers": [
+        {
+          "tier": 1,
+          "ko": "기본",
+          "en": "Basic",
+          "gate": 0
+        },
+        {
+          "tier": 2,
+          "ko": "핵심",
+          "en": "Core",
+          "gate": 2
+        },
+        {
+          "tier": 3,
+          "ko": "방어·기동",
+          "en": "Defense",
+          "gate": 6
+        },
+        {
+          "tier": 4,
+          "ko": "설치",
+          "en": "Zones",
+          "gate": 11
+        },
+        {
+          "tier": 5,
+          "ko": "궁극기",
+          "en": "Ultimate",
+          "gate": 40
+        }
+      ],
+      "spriteCells": [
+        {
+          "iconId": "M_LANCE",
+          "id": "M07"
+        },
+        {
+          "iconId": "M_LANCE-1",
+          "id": "M07-1"
+        },
+        {
+          "iconId": "M_LANCE-2",
+          "id": "M07-2"
+        },
+        {
+          "iconId": "M_LANCE-3",
+          "id": "M07-3"
+        },
+        {
+          "iconId": "M01",
+          "id": "M01"
+        },
+        {
+          "iconId": "M01-1",
+          "id": "M01-1"
+        },
+        {
+          "iconId": "M01-2",
+          "id": "M01-2"
+        },
+        {
+          "iconId": "M01-3",
+          "id": "M01-3"
+        },
+        {
+          "iconId": "M02",
+          "id": "M02"
+        },
+        {
+          "iconId": "M02-1",
+          "id": "M02-1"
+        },
+        {
+          "iconId": "M02-2",
+          "id": "M02-2"
+        },
+        {
+          "iconId": "M02-3",
+          "id": "M02-3"
+        },
+        {
+          "iconId": "M03",
+          "id": "M03"
+        },
+        {
+          "iconId": "M03-1",
+          "id": "M03-1"
+        },
+        {
+          "iconId": "M03-2",
+          "id": "M03-2"
+        },
+        {
+          "iconId": "M03-3",
+          "id": "M03-3"
+        },
+        {
+          "iconId": "M08",
+          "id": "M08"
+        },
+        {
+          "iconId": "M08-1",
+          "id": "M08-1"
+        },
+        {
+          "iconId": "M08-2",
+          "id": "M08-2"
+        },
+        {
+          "iconId": "M08-3",
+          "id": "M08-3"
+        },
+        {
+          "iconId": "M11",
+          "id": "M11"
+        },
+        {
+          "iconId": "M11-1",
+          "id": "M11-1"
+        },
+        {
+          "iconId": "M11-2",
+          "id": "M11-2"
+        },
+        {
+          "iconId": "M11-3",
+          "id": "M11-3"
+        },
+        {
+          "iconId": "M06",
+          "id": "M06"
+        },
+        {
+          "iconId": "M06-1",
+          "id": "M06-1"
+        },
+        {
+          "iconId": "M06-2",
+          "id": "M06-2"
+        },
+        {
+          "iconId": "M06-3",
+          "id": "M06-3"
+        },
+        {
+          "iconId": "M04",
+          "id": "M04"
+        },
+        {
+          "iconId": "M04-1",
+          "id": "M04-1"
+        },
+        {
+          "iconId": "M04-2",
+          "id": "M04-2"
+        },
+        {
+          "iconId": "M04-3",
+          "id": "M04-3"
+        },
+        {
+          "iconId": "M17",
+          "id": "M17"
+        },
+        {
+          "iconId": "M17-1",
+          "id": "M17-1"
+        },
+        {
+          "iconId": "M17-2",
+          "id": "M17-2"
+        },
+        {
+          "iconId": "M18",
+          "id": "M18"
+        },
+        {
+          "iconId": "M18-1",
+          "id": "M18-1"
+        },
+        {
+          "iconId": "M18-2",
+          "id": "M18-2"
+        },
+        {
+          "iconId": "MP05",
+          "id": "MP05"
+        },
+        {
+          "iconId": "MP14",
+          "id": "MP14"
+        },
+        {
+          "iconId": "MP17",
+          "id": "MP17"
+        },
+        {
+          "iconId": "MP06",
+          "id": "MP06"
+        },
+        {
+          "iconId": "MP07",
+          "id": "MP07"
+        },
+        {
+          "iconId": "MP09",
+          "id": "MP09"
+        },
+        {
+          "iconId": "MP11",
+          "id": "MP11"
+        },
+        {
+          "iconId": "MP16",
+          "id": "MP16"
+        },
+        {
+          "iconId": "MK1",
+          "id": "MP20"
+        },
+        {
+          "iconId": "MK2",
+          "id": "MP21"
+        }
+      ],
+      "actives": [
+        {
+          "id": "M07",
+          "iconId": "M_LANCE",
+          "roleKo": "생성",
+          "tier": 1,
+          "ultimate": false,
+          "ko": "원소창",
+          "en": "Elemental Lance",
+          "descKo": "원소의 창을 던져 일직선 위의 적을 꿰뚫습니다. 보조 스킬이 원소를 정합니다.",
+          "descEn": "Hurl a lance through a line of enemies. Its modifier sets the element.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D120%",
+              "rankMax": "D168%",
+              "value": {
+                "from": 120,
+                "to": 168,
+                "unit": "D%",
+                "ranks": [
+                  120.0,
+                  132.0,
+                  144.0,
+                  156.0,
+                  168.0
+                ]
+              }
+            },
+            {
+              "ko": "적중 시 마나",
+              "en": "Mana on hit",
+              "rank1": "+6",
+              "rankMax": "+10",
+              "value": {
+                "from": 6,
+                "to": 10,
+                "unit": "",
+                "ranks": [
+                  6.0,
+                  7.0,
+                  8.0,
+                  9.0,
+                  10.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M07-1",
+              "iconId": "M_LANCE-1",
+              "value": {
+                "from": 60,
+                "to": 100,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  70.0,
+                  80.0,
+                  90.0,
+                  100.0
+                ]
+              },
+              "ko": "잿불창",
+              "en": "Ember Lance",
+              "effectKo": "연소 D60% → D100%",
+              "effectEn": "Burn D60% → D100%",
+              "shapeKo": "불꽃의 창이 적을 꿰뚫고 불태웁니다.",
+              "shapeEn": "A fire lance that pierces and burns enemies."
+            },
+            {
+              "id": "M07-2",
+              "iconId": "M_LANCE-2",
+              "value": {
+                "from": 0.6,
+                "to": 1,
+                "unit": "초",
+                "ranks": [
+                  0.6,
+                  0.7,
+                  0.8,
+                  0.9,
+                  1.0
+                ]
+              },
+              "ko": "빙하창",
+              "en": "Glacier Lance",
+              "effectKo": "빙결 0.6초 → 1.0초",
+              "effectEn": "Freeze 0.6s → 1.0s",
+              "shapeKo": "얼음의 창이 적을 느리게 하고, 이미 느려진 적은 얼립니다.",
+              "shapeEn": "An ice lance that slows enemies and freezes slowed ones."
+            },
+            {
+              "id": "M07-3",
+              "iconId": "M_LANCE-3",
+              "value": {
+                "from": 4,
+                "to": 6,
+                "unit": "초",
+                "ranks": [
+                  4.0,
+                  4.5,
+                  5.0,
+                  5.5,
+                  6.0
+                ]
+              },
+              "ko": "접지창",
+              "en": "Grounding Lance",
+              "effectKo": "꽂힌 창 유지 4초 → 6초",
+              "effectEn": "Lance stays 4s → 6s",
+              "shapeKo": "번개의 창이 멀리 꿰뚫고 땅에 꽂혀 연쇄 번개를 이어 줍니다.",
+              "shapeEn": "A lightning lance that stays planted and relays Chain Lightning."
+            }
+          ]
+        },
+        {
+          "id": "M01",
+          "iconId": "M01",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "화염구",
+          "en": "Fireball",
+          "descKo": "적에게 닿으면 폭발하는 화염구를 날립니다.",
+          "descEn": "Hurl a ball of fire that explodes on impact.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D210%",
+              "rankMax": "D294%",
+              "value": {
+                "from": 210,
+                "to": 294,
+                "unit": "D%",
+                "ranks": [
+                  210.0,
+                  231.0,
+                  252.0,
+                  273.0,
+                  294.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 비용",
+              "en": "Resource cost",
+              "rank1": "25",
+              "rankMax": "21",
+              "value": {
+                "from": 25,
+                "to": 21,
+                "unit": "",
+                "ranks": [
+                  25.0,
+                  24.0,
+                  23.0,
+                  22.0,
+                  21.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M01-1",
+              "iconId": "M01-1",
+              "value": {
+                "from": 1.4,
+                "to": 1.8,
+                "unit": "x",
+                "ranks": [
+                  1.4,
+                  1.5,
+                  1.6,
+                  1.7,
+                  1.8
+                ]
+              },
+              "ko": "유성",
+              "en": "Meteor",
+              "effectKo": "피해 ×1.4 → ×1.8",
+              "effectEn": "Damage ×1.4 → ×1.8",
+              "shapeKo": "화염구가 하늘에서 늦게 떨어지는 대신 더 넓고 강하게 터집니다.",
+              "shapeEn": "Falls from the sky after a delay, hitting a wider area harder."
+            },
+            {
+              "id": "M01-2",
+              "iconId": "M01-2",
+              "value": {
+                "from": 40,
+                "to": 60,
+                "unit": "D%",
+                "ranks": [
+                  40.0,
+                  45.0,
+                  50.0,
+                  55.0,
+                  60.0
+                ]
+              },
+              "ko": "분열 화염구",
+              "en": "Splitting Fireball",
+              "effectKo": "작은 화염구 D40% → D60%",
+              "effectEn": "Splits D40% → D60%",
+              "shapeKo": "폭발한 뒤 작은 화염구 3개가 사방으로 퍼집니다.",
+              "shapeEn": "After exploding, 3 small fireballs scatter outward."
+            },
+            {
+              "id": "M01-3",
+              "iconId": "M01-3",
+              "value": {
+                "from": 2,
+                "to": 4,
+                "unit": "초",
+                "ranks": [
+                  2.0,
+                  2.5,
+                  3.0,
+                  3.5,
+                  4.0
+                ]
+              },
+              "ko": "관통 화염구",
+              "en": "Piercing Fireball",
+              "effectKo": "연소 자국 2초 → 4초",
+              "effectEn": "Burn trail 2s → 4s",
+              "shapeKo": "폭발하지 않고 적을 꿰뚫으며 지나간 자리를 태웁니다.",
+              "shapeEn": "Pierces enemies without exploding, burning its trail."
+            }
+          ]
+        },
+        {
+          "id": "M02",
+          "iconId": "M02",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "눈보라",
+          "en": "Blizzard",
+          "descKo": "눈보라를 불러내 그 안의 적에게 냉기 피해를 주고 느리게 만듭니다.",
+          "descEn": "Summon a blizzard that chills and slows the enemies inside it.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "초당 피해",
+              "en": "Damage per second",
+              "rank1": "D65%",
+              "rankMax": "D91%",
+              "value": {
+                "from": 65,
+                "to": 91,
+                "unit": "D%",
+                "ranks": [
+                  65.0,
+                  71.5,
+                  78.0,
+                  84.5,
+                  91.0
+                ]
+              }
+            },
+            {
+              "ko": "지속",
+              "en": "Duration",
+              "rank1": "6초",
+              "rankMax": "8초",
+              "value": {
+                "from": 6,
+                "to": 8,
+                "unit": "초",
+                "ranks": [
+                  6.0,
+                  6.5,
+                  7.0,
+                  7.5,
+                  8.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M02-1",
+              "iconId": "M02-1",
+              "value": {
+                "from": 2.5,
+                "to": 3.5,
+                "unit": "m",
+                "ranks": [
+                  2.5,
+                  2.75,
+                  3.0,
+                  3.25,
+                  3.5
+                ]
+              },
+              "ko": "따라오는 눈보라",
+              "en": "Trailing Blizzard",
+              "effectKo": "반경 2.5m → 3.5m",
+              "effectEn": "Radius 2.5m → 3.5m",
+              "shapeKo": "눈보라가 제자리에 있지 않고 나를 따라다닙니다.",
+              "shapeEn": "The blizzard follows you around."
+            },
+            {
+              "id": "M02-2",
+              "iconId": "M02-2",
+              "value": {
+                "from": 50,
+                "to": 60,
+                "unit": "%",
+                "ranks": [
+                  50.0,
+                  52.5,
+                  55.0,
+                  57.5,
+                  60.0
+                ]
+              },
+              "ko": "혹한",
+              "en": "Deep Freeze Storm",
+              "effectKo": "둔화 50% → 60%",
+              "effectEn": "Slow 50% → 60%",
+              "shapeKo": "둔화가 훨씬 강해지고, 오래 머문 적은 얼어붙습니다.",
+              "shapeEn": "A much stronger slow that freezes enemies who linger."
+            },
+            {
+              "id": "M02-3",
+              "iconId": "M02-3",
+              "value": {
+                "from": 70,
+                "to": 110,
+                "unit": "D%",
+                "ranks": [
+                  70.0,
+                  80.0,
+                  90.0,
+                  100.0,
+                  110.0
+                ]
+              },
+              "ko": "귀환 서리",
+              "en": "Returning Frost",
+              "effectKo": "왕복 피해 D70% → D110%",
+              "effectEn": "Round trip D70% → D110%",
+              "shapeKo": "장판 대신 서리 구체가 멀리 날아갔다가 되돌아옵니다.",
+              "shapeEn": "A frost orb that flies out and back instead of a zone."
+            }
+          ]
+        },
+        {
+          "id": "M03",
+          "iconId": "M03",
+          "roleKo": "핵심",
+          "tier": 2,
+          "ultimate": false,
+          "ko": "연쇄 번개",
+          "en": "Chain Lightning",
+          "descKo": "적과 적 사이를 튀며 이어지는 번개를 발사합니다.",
+          "descEn": "Unleash lightning that leaps from enemy to enemy.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D110%",
+              "rankMax": "D154%",
+              "value": {
+                "from": 110,
+                "to": 154,
+                "unit": "D%",
+                "ranks": [
+                  110.0,
+                  121.0,
+                  132.0,
+                  143.0,
+                  154.0
+                ]
+              }
+            },
+            {
+              "ko": "자원 비용",
+              "en": "Resource cost",
+              "rank1": "25",
+              "rankMax": "21",
+              "value": {
+                "from": 25,
+                "to": 21,
+                "unit": "",
+                "ranks": [
+                  25.0,
+                  24.0,
+                  23.0,
+                  22.0,
+                  21.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M03-1",
+              "iconId": "M03-1",
+              "value": {
+                "from": 6,
+                "to": 8,
+                "unit": "명",
+                "ranks": [
+                  6,
+                  6,
+                  7,
+                  7,
+                  8
+                ]
+              },
+              "ko": "과부하 연쇄",
+              "en": "Overload Chain",
+              "effectKo": "연결 6명 → 8명",
+              "effectEn": "Chains 6 → 8",
+              "shapeKo": "번개가 더 많은 적에게 이어지고 피해가 덜 약해집니다.",
+              "shapeEn": "Lightning chains to more enemies and loses less power."
+            },
+            {
+              "id": "M03-2",
+              "iconId": "M03-2",
+              "value": {
+                "from": 2,
+                "to": 4,
+                "unit": "회",
+                "ranks": [
+                  2,
+                  2,
+                  3,
+                  3,
+                  4
+                ]
+              },
+              "ko": "되튀김",
+              "en": "Rebound",
+              "effectKo": "왕복 2회 → 4회",
+              "effectEn": "Rebounds 2 → 4",
+              "shapeKo": "적이 한 명뿐이면 번개가 나와 적 사이를 왕복합니다.",
+              "shapeEn": "With a single enemy, lightning bounces between you and it."
+            },
+            {
+              "id": "M03-3",
+              "iconId": "M03-3",
+              "value": {
+                "from": 1,
+                "to": 2,
+                "unit": "m",
+                "ranks": [
+                  1.0,
+                  1.25,
+                  1.5,
+                  1.75,
+                  2.0
+                ]
+              },
+              "ko": "자력 연쇄",
+              "en": "Magnetic Chain",
+              "effectKo": "끌어오기 1.0m → 2.0m",
+              "effectEn": "Pull 1.0m → 2.0m",
+              "shapeKo": "번개로 연결된 적들이 첫 번째 적 쪽으로 끌려옵니다.",
+              "shapeEn": "Linked enemies are pulled toward the first target."
+            }
+          ]
+        },
+        {
+          "id": "M06",
+          "iconId": "M06",
+          "roleKo": "방어",
+          "tier": 3,
+          "ultimate": false,
+          "ko": "서리 폭발",
+          "en": "Frost Nova",
+          "descKo": "주변으로 냉기를 터뜨려 가까운 적들을 얼립니다.",
+          "descEn": "Burst frost around you, freezing nearby enemies.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "피해",
+              "en": "Damage",
+              "rank1": "D100%",
+              "rankMax": "D140%",
+              "value": {
+                "from": 100,
+                "to": 140,
+                "unit": "D%",
+                "ranks": [
+                  100.0,
+                  110.0,
+                  120.0,
+                  130.0,
+                  140.0
+                ]
+              }
+            },
+            {
+              "ko": "빙결",
+              "en": "Freeze",
+              "rank1": "1.5초",
+              "rankMax": "1.9초",
+              "value": {
+                "from": 1.5,
+                "to": 1.9,
+                "unit": "초",
+                "ranks": [
+                  1.5,
+                  1.6,
+                  1.7,
+                  1.8,
+                  1.9
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M06-1",
+              "iconId": "M06-1",
+              "value": {
+                "from": 50,
+                "to": 100,
+                "unit": "%",
+                "ranks": [
+                  50.0,
+                  62.5,
+                  75.0,
+                  87.5,
+                  100.0
+                ]
+              },
+              "ko": "이중 파동",
+              "en": "Double Nova",
+              "effectKo": "2차 파동 50% → 100%",
+              "effectEn": "Second wave 50% → 100%",
+              "shapeKo": "1초 뒤 두 번째 냉기 파동이 한 번 더 터집니다.",
+              "shapeEn": "A second frost wave bursts 1s later."
+            },
+            {
+              "id": "M06-2",
+              "iconId": "M06-2",
+              "value": {
+                "from": -10,
+                "to": -20,
+                "unit": "%",
+                "ranks": [
+                  -10.0,
+                  -12.5,
+                  -15.0,
+                  -17.5,
+                  -20.0
+                ]
+              },
+              "ko": "균열 결계",
+              "en": "Rift Ward",
+              "effectKo": "받는 피해 −10% → −20%",
+              "effectEn": "Damage taken −10% → −20%",
+              "shapeKo": "얼리는 대신 결계를 펼쳐 그 안에서 받는 피해를 줄입니다.",
+              "shapeEn": "A ward that cuts damage taken, instead of freezing."
+            },
+            {
+              "id": "M06-3",
+              "iconId": "M06-3",
+              "value": {
+                "from": 2,
+                "to": 4,
+                "unit": "%",
+                "ranks": [
+                  2.0,
+                  2.5,
+                  3.0,
+                  3.5,
+                  4.0
+                ]
+              },
+              "ko": "얼음 갑옷",
+              "en": "Ice Armor",
+              "effectKo": "적 1명당 보호막 2% → 4%",
+              "effectEn": "Shield per enemy 2% → 4%",
+              "shapeKo": "맞힌 적의 수만큼 얼음 보호막이 생깁니다.",
+              "shapeEn": "Gain an ice shield for every enemy the nova hits."
+            }
+          ]
+        },
+        {
+          "id": "M04",
+          "iconId": "M04",
+          "roleKo": "기동",
+          "tier": 3,
+          "ultimate": false,
+          "ko": "순간이동",
+          "en": "Teleport",
+          "descKo": "위험이 적은 곳으로 순식간에 이동합니다.",
+          "descEn": "Blink instantly to a safer spot.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "9초",
+              "rankMax": "7.2초",
+              "value": {
+                "from": 9,
+                "to": 7.2,
+                "unit": "초",
+                "ranks": [
+                  9.0,
+                  8.55,
+                  8.1,
+                  7.65,
+                  7.2
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M04-1",
+              "iconId": "M04-1",
+              "value": {
+                "from": 80,
+                "to": 120,
+                "unit": "D%",
+                "ranks": [
+                  80.0,
+                  90.0,
+                  100.0,
+                  110.0,
+                  120.0
+                ]
+              },
+              "ko": "화염 잔불",
+              "en": "Flame Afterburn",
+              "effectKo": "출발 지점 폭발 D80% → D120%",
+              "effectEn": "Departure blast D80% → D120%",
+              "shapeKo": "떠나온 자리에서 불꽃이 폭발합니다.",
+              "shapeEn": "The spot you left explodes in flames."
+            },
+            {
+              "id": "M04-2",
+              "iconId": "M04-2",
+              "value": {
+                "from": 0.3,
+                "to": 0.7,
+                "unit": "초",
+                "ranks": [
+                  0.3,
+                  0.4,
+                  0.5,
+                  0.6,
+                  0.7
+                ]
+              },
+              "ko": "번개 도약",
+              "en": "Lightning Blink",
+              "effectKo": "도착 기절 0.3초 → 0.7초",
+              "effectEn": "Arrival stun 0.3s → 0.7s",
+              "shapeKo": "도착하는 순간 주변 적들에게 번개를 내리쳐 기절시킵니다.",
+              "shapeEn": "Lightning strikes and stuns nearby enemies where you arrive."
+            },
+            {
+              "id": "M04-3",
+              "iconId": "M04-3",
+              "value": {
+                "from": 25,
+                "to": 35,
+                "unit": "%",
+                "ranks": [
+                  25.0,
+                  27.5,
+                  30.0,
+                  32.5,
+                  35.0
+                ]
+              },
+              "ko": "원소 보호막",
+              "en": "Elemental Shield",
+              "effectKo": "보호막 HP 25% → 35%",
+              "effectEn": "Shield HP 25% → 35%",
+              "shapeKo": "도착한 뒤 잠시 피해를 막아 주는 보호막이 생깁니다.",
+              "shapeEn": "A shield appears on arrival and absorbs damage briefly."
+            }
+          ]
+        },
+        {
+          "id": "M08",
+          "iconId": "M08",
+          "roleKo": "설치",
+          "tier": 4,
+          "ultimate": false,
+          "ko": "화염 장벽",
+          "en": "Firewall",
+          "descKo": "그 안에 선 적을 태우는 불의 벽을 세웁니다.",
+          "descEn": "Raise a wall of fire that burns the enemies standing in it.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "초당 피해",
+              "en": "Damage per second",
+              "rank1": "D60%",
+              "rankMax": "D84%",
+              "value": {
+                "from": 60,
+                "to": 84,
+                "unit": "D%",
+                "ranks": [
+                  60.0,
+                  66.0,
+                  72.0,
+                  78.0,
+                  84.0
+                ]
+              }
+            },
+            {
+              "ko": "지속",
+              "en": "Duration",
+              "rank1": "4초",
+              "rankMax": "5초",
+              "value": {
+                "from": 4,
+                "to": 5,
+                "unit": "초",
+                "ranks": [
+                  4.0,
+                  4.25,
+                  4.5,
+                  4.75,
+                  5.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M08-1",
+              "iconId": "M08-1",
+              "value": {
+                "from": 2.5,
+                "to": 3.5,
+                "unit": "m",
+                "ranks": [
+                  2.5,
+                  2.75,
+                  3.0,
+                  3.25,
+                  3.5
+                ]
+              },
+              "ko": "화염 고리",
+              "en": "Ring of Fire",
+              "effectKo": "고리 반경 2.5m → 3.5m",
+              "effectEn": "Ring radius 2.5m → 3.5m",
+              "shapeKo": "일직선 벽 대신 나를 둘러싼 불의 고리가 생깁니다.",
+              "shapeEn": "A ring of fire around you replaces the straight wall."
+            },
+            {
+              "id": "M08-2",
+              "iconId": "M08-2",
+              "value": {
+                "from": 1.5,
+                "to": 2.5,
+                "unit": "m/s",
+                "ranks": [
+                  1.5,
+                  1.75,
+                  2.0,
+                  2.25,
+                  2.5
+                ]
+              },
+              "ko": "전진 불길",
+              "en": "Advancing Flames",
+              "effectKo": "전진 속도 1.5 → 2.5m/s",
+              "effectEn": "Advance 1.5 → 2.5 m/s",
+              "shapeKo": "불의 벽이 제자리에 머물지 않고 앞으로 나아갑니다.",
+              "shapeEn": "The wall of fire advances instead of staying put."
+            },
+            {
+              "id": "M08-3",
+              "iconId": "M08-3",
+              "value": {
+                "from": 2,
+                "to": 3,
+                "unit": "초",
+                "ranks": [
+                  2.0,
+                  2.25,
+                  2.5,
+                  2.75,
+                  3.0
+                ]
+              },
+              "ko": "십자 장벽",
+              "en": "Cross Wall",
+              "effectKo": "지속 2초 → 3초",
+              "effectEn": "Duration 2s → 3s",
+              "shapeKo": "불의 벽 두 개가 십자로 교차해 더 넓은 곳을 태웁니다.",
+              "shapeEn": "Two crossed walls of fire cover more ground."
+            }
+          ]
+        },
+        {
+          "id": "M11",
+          "iconId": "M11",
+          "roleKo": "설치",
+          "tier": 4,
+          "ultimate": false,
+          "ko": "축전 구체",
+          "en": "Capacitor Orb",
+          "descKo": "주변 적에게 번개를 내뿜는 전기 구체를 설치합니다.",
+          "descEn": "Place an orb that crackles lightning at nearby enemies.",
+          "maxRank": 5,
+          "stats": [
+            {
+              "ko": "초당 피해",
+              "en": "Damage per second",
+              "rank1": "D30%",
+              "rankMax": "D42%",
+              "value": {
+                "from": 30,
+                "to": 42,
+                "unit": "D%",
+                "ranks": [
+                  30.0,
+                  33.0,
+                  36.0,
+                  39.0,
+                  42.0
+                ]
+              }
+            },
+            {
+              "ko": "만료 폭발",
+              "en": "Expiry blast",
+              "rank1": "D80%",
+              "rankMax": "D120%",
+              "value": {
+                "from": 80,
+                "to": 120,
+                "unit": "D%",
+                "ranks": [
+                  80.0,
+                  90.0,
+                  100.0,
+                  110.0,
+                  120.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M11-1",
+              "iconId": "M11-1",
+              "value": {
+                "from": 40,
+                "to": 60,
+                "unit": "D%",
+                "ranks": [
+                  40.0,
+                  45.0,
+                  50.0,
+                  55.0,
+                  60.0
+                ]
+              },
+              "ko": "구르는 구체",
+              "en": "Rolling Orb",
+              "effectKo": "경로 피해 D40% → D60%",
+              "effectEn": "Path damage D40% → D60%",
+              "shapeKo": "구체가 제자리에 있지 않고 천천히 굴러가며 지나는 길에 피해를 줍니다.",
+              "shapeEn": "The orb rolls slowly forward, damaging everything on its path."
+            },
+            {
+              "id": "M11-2",
+              "iconId": "M11-2",
+              "value": {
+                "from": 2,
+                "to": 3,
+                "unit": "초",
+                "ranks": [
+                  2.0,
+                  2.25,
+                  2.5,
+                  2.75,
+                  3.0
+                ]
+              },
+              "ko": "3분할",
+              "en": "Triple Orb",
+              "effectKo": "구체 지속 2초 → 3초",
+              "effectEn": "Orbs last 2s → 3s",
+              "shapeKo": "구체를 한꺼번에 3개까지 설치하지만 오래 가지 못합니다.",
+              "shapeEn": "Place up to 3 orbs at once, each lasting a shorter time."
+            },
+            {
+              "id": "M11-3",
+              "iconId": "M11-3",
+              "value": {
+                "from": 200,
+                "to": 300,
+                "unit": "D%",
+                "ranks": [
+                  200.0,
+                  225.0,
+                  250.0,
+                  275.0,
+                  300.0
+                ]
+              },
+              "ko": "과충전",
+              "en": "Overcharge",
+              "effectKo": "만료 폭발 D200% → D300%",
+              "effectEn": "Expiry blast D200% → D300%",
+              "shapeKo": "지속 피해를 포기하는 대신 사라질 때 크게 폭발합니다.",
+              "shapeEn": "No damage over time, but a huge blast when it expires."
+            }
+          ]
+        },
+        {
+          "id": "M17",
+          "iconId": "M17",
+          "roleKo": "궁극",
+          "tier": 5,
+          "ultimate": true,
+          "ko": "삼원소 붕괴",
+          "en": "Triune Collapse",
+          "descKo": "화염·냉기·번개를 차례로 한 지점에 떨어뜨립니다.",
+          "descEn": "Bring fire, cold and lightning down on one spot in turn.",
+          "maxRank": 3,
+          "stats": [
+            {
+              "ko": "화염 단계",
+              "en": "Fire stage",
+              "rank1": "D200%",
+              "rankMax": "D280%",
+              "value": {
+                "from": 200,
+                "to": 280,
+                "unit": "D%",
+                "ranks": [
+                  200.0,
+                  240.0,
+                  280.0
+                ]
+              }
+            },
+            {
+              "ko": "쿨타임",
+              "en": "Cooldown",
+              "rank1": "60초",
+              "rankMax": "50초",
+              "value": {
+                "from": 60,
+                "to": 50,
+                "unit": "초",
+                "ranks": [
+                  60.0,
+                  55.0,
+                  50.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M17-1",
+              "iconId": "M17-1",
+              "value": {
+                "from": 20,
+                "to": 30,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0
+                ]
+              },
+              "ko": "단일 원소 집중",
+              "en": "Single Element Focus",
+              "effectKo": "피해 +20% → +30%",
+              "effectEn": "Damage +20% → +30%",
+              "shapeKo": "세 단계가 모두 마지막으로 쓴 원소 하나로 바뀌어 더 강해집니다.",
+              "shapeEn": "All three stages use your last element, hitting harder."
+            },
+            {
+              "id": "M17-2",
+              "iconId": "M17-2",
+              "value": {
+                "from": 6,
+                "to": 10,
+                "unit": "m",
+                "ranks": [
+                  6.0,
+                  8.0,
+                  10.0
+                ]
+              },
+              "ko": "추적 붕괴",
+              "en": "Tracking Collapse",
+              "effectKo": "재조준 범위 6m → 10m",
+              "effectEn": "Retarget 6m → 10m",
+              "shapeKo": "각 단계마다 적이 가장 많은 곳을 새로 노려 떨어집니다.",
+              "shapeEn": "Each stage retargets the spot with the most enemies."
+            }
+          ]
+        },
+        {
+          "id": "M18",
+          "iconId": "M18",
+          "roleKo": "궁극",
+          "tier": 5,
+          "ultimate": true,
+          "ko": "현자의 화신",
+          "en": "Sage Incarnate",
+          "descKo": "원소의 현자가 되어 보호막을 두르고 스킬 피해를 높입니다.",
+          "descEn": "Become an elemental sage, gaining a barrier and stronger skills.",
+          "maxRank": 3,
+          "stats": [
+            {
+              "ko": "보호막",
+              "en": "Shield",
+              "rank1": "HP 25%",
+              "rankMax": "HP 35%",
+              "value": {
+                "from": 25,
+                "to": 35,
+                "unit": "%",
+                "ranks": [
+                  25.0,
+                  30.0,
+                  35.0
+                ]
+              }
+            },
+            {
+              "ko": "피해 증가",
+              "en": "Damage bonus",
+              "rank1": "+20%",
+              "rankMax": "+30%",
+              "value": {
+                "from": 20,
+                "to": 30,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0
+                ]
+              }
+            }
+          ],
+          "modifiers": [
+            {
+              "id": "M18-1",
+              "iconId": "M18-1",
+              "value": {
+                "from": 40,
+                "to": 60,
+                "unit": "%",
+                "ranks": [
+                  40.0,
+                  50.0,
+                  60.0
+                ]
+              },
+              "ko": "원소 폭주",
+              "en": "Elemental Surge",
+              "effectKo": "추가 시전 피해 40% → 60%",
+              "effectEn": "Extra casts 40% → 60%",
+              "shapeKo": "핵심 스킬을 쓰면 다른 원소의 핵심 스킬이 자동으로 따라 나갑니다.",
+              "shapeEn": "Casting a core skill also casts a core skill of another element."
+            },
+            {
+              "id": "M18-2",
+              "iconId": "M18-2",
+              "value": {
+                "from": 20,
+                "to": 30,
+                "unit": "%",
+                "ranks": [
+                  20.0,
+                  25.0,
+                  30.0
+                ]
+              },
+              "ko": "원소 화신",
+              "en": "Elemental Avatar",
+              "effectKo": "원소별 효과 20% → 30%",
+              "effectEn": "Element effect 20% → 30%",
+              "shapeKo": "마지막 원소에 따라 피해, 방어, 쿨다운 중 하나가 강화됩니다.",
+              "shapeEn": "Your last element boosts damage, defense or cooldown speed."
+            }
+          ]
+        }
+      ],
+      "passives": [
+        {
+          "id": "MP05",
+          "iconId": "MP05",
+          "value": {
+            "from": 20,
+            "to": 28,
+            "unit": "%",
+            "ranks": [
+              20.0,
+              22.0,
+              24.0,
+              26.0,
+              28.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 2,
+          "ko": "마나 순환",
+          "en": "Mana Circulation",
+          "effectKo": "초당 자원 회복 +20% → +28%",
+          "effectEn": "Resource regen +20% → +28%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP14",
+          "iconId": "MP14",
+          "value": {
+            "from": -30,
+            "to": -42,
+            "unit": "%p",
+            "ranks": [
+              -30.0,
+              -33.0,
+              -36.0,
+              -39.0,
+              -42.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 4,
+          "ko": "마력 절약",
+          "en": "Mana Thrift",
+          "effectKo": "기본 공격 2회 적중 후 다음 비용 −30%p → −42%p",
+          "effectEn": "After 2 basic hits: next cost −30% → −42%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP17",
+          "iconId": "MP17",
+          "value": {
+            "from": 20,
+            "to": 28,
+            "unit": "%",
+            "ranks": [
+              20.0,
+              22.0,
+              24.0,
+              26.0,
+              28.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 6,
+          "ko": "초과 마력",
+          "en": "Overflowing Mana",
+          "effectKo": "자원 60% 이상일 때 첫 적중 피해 +20% → +28%",
+          "effectEn": "Above 60% resource: first hit +20% → +28%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP06",
+          "iconId": "MP06",
+          "value": {
+            "from": 10,
+            "to": 14,
+            "unit": "%",
+            "ranks": [
+              10.0,
+              11.0,
+              12.0,
+              13.0,
+              14.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 8,
+          "ko": "원소 교차",
+          "en": "Element Crossover",
+          "effectKo": "4초 안에 두 속성으로 피해를 주면 피해 +10% → +14%",
+          "effectEn": "Two elements within 4s: +10% → +14%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP07",
+          "iconId": "MP07",
+          "value": {
+            "from": 12,
+            "to": 20,
+            "unit": "",
+            "ranks": [
+              12.0,
+              14.0,
+              16.0,
+              18.0,
+              20.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 18,
+          "ko": "점화의 되먹임",
+          "en": "Ignition Feedback",
+          "effectKo": "연소한 적에게 화염 적중 시 자원 12 → 20",
+          "effectEn": "Fire hit on a burning enemy: resource 12 → 20",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP09",
+          "iconId": "MP09",
+          "value": {
+            "from": 12,
+            "to": 20,
+            "unit": "",
+            "ranks": [
+              12.0,
+              14.0,
+              16.0,
+              18.0,
+              20.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 18,
+          "ko": "냉기의 틈",
+          "en": "Opening in the Cold",
+          "effectKo": "제어된 적에게 냉기 적중 시 자원 12 → 20",
+          "effectEn": "Cold hit on a controlled enemy: resource 12 → 20",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP11",
+          "iconId": "MP11",
+          "value": {
+            "from": 30,
+            "to": 42,
+            "unit": "%",
+            "ranks": [
+              30.0,
+              33.0,
+              36.0,
+              39.0,
+              42.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 18,
+          "ko": "과부하",
+          "en": "Overload",
+          "effectKo": "번개 기술 3회 후 다음 연쇄 번개 피해 +30% → +42%",
+          "effectEn": "After 3 lightning casts: next Chain Lightning +30% → +42%",
+          "linkedActives": [
+            "M03"
+          ],
+          "linkedActiveIndices": [
+            3
+          ]
+        },
+        {
+          "id": "MP16",
+          "iconId": "MP16",
+          "value": {
+            "from": 8,
+            "to": 12,
+            "unit": "%",
+            "ranks": [
+              8.0,
+              9.0,
+              10.0,
+              11.0,
+              12.0
+            ]
+          },
+          "key": false,
+          "unlockLevel": 30,
+          "ko": "삼색의 기억",
+          "en": "Threefold Memory",
+          "effectKo": "화염·냉기·번개를 이어 쓰면 보호막 8% → 12%",
+          "effectEn": "Fire, cold and lightning in a row: shield 8% → 12%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP20",
+          "iconId": "MK1",
+          "value": {
+            "from": 30,
+            "to": 50,
+            "unit": "%",
+            "ranks": [
+              30.0,
+              35.0,
+              40.0,
+              45.0,
+              50.0
+            ]
+          },
+          "key": true,
+          "unlockLevel": 45,
+          "ko": "산산조각",
+          "en": "Shatter",
+          "effectKo": "빙결이 풀릴 때 그동안 받은 피해의 30% → 50%로 폭발",
+          "effectEn": "Frozen enemies shatter for 30% → 50% of damage taken",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        },
+        {
+          "id": "MP21",
+          "iconId": "MK2",
+          "value": {
+            "from": 60,
+            "to": 100,
+            "unit": "D%",
+            "ranks": [
+              60.0,
+              70.0,
+              80.0,
+              90.0,
+              100.0
+            ]
+          },
+          "key": true,
+          "unlockLevel": 45,
+          "ko": "원소 정렬",
+          "en": "Align the Elements",
+          "effectKo": "세 원소를 모두 맞은 적에게 D60% → D100% 붕괴 폭발",
+          "effectEn": "Enemies hit by all three elements burst for D60% → D100%",
+          "linkedActives": [],
+          "linkedActiveIndices": []
+        }
+      ]
+    }
+  ],
+  "strings": [
+    {
+      "locale": "ko",
+      "title": "스킬",
+      "classes": [
+        "전사",
+        "궁수",
+        "마법사"
+      ],
+      "classNav": "직업",
+      "level": "레벨",
+      "spent": "사용",
+      "left": "남은 포인트",
+      "close": "닫기",
+      "start": "기본 해금",
+      "gate": "투자 {n} 이상",
+      "locked": "잠김",
+      "mods": "보조 스킬",
+      "pick": "1개 선택 · 마을에서 교체",
+      "selected": "선택됨",
+      "refund": "포인트 회수",
+      "invest": "포인트 투자",
+      "refundS": "회수",
+      "investS": "투자",
+      "active": "액티브",
+      "tree": "스킬 트리",
+      "selRegion": "선택한 스킬",
+      "passive": "패시브",
+      "keyPassive": "핵심 패시브 · 1종만",
+      "passHead": "패시브 · 레벨 해금",
+      "keyHead": "핵심 패시브 · 1종만 투자",
+      "unlock": "해금 레벨",
+      "rank": "투자",
+      "linked": "연계 스킬",
+      "req": "Lv{n} 필요",
+      "open": "Lv{n} 해금",
+      "now": "현재 Lv{level}",
+      "lgInv": "투자함",
+      "lgAvail": "투자 가능",
+      "lgLock": "잠김",
+      "lgLink": "패시브 연계",
+      "range": "수치 Lv1 → Lv{n}",
+      "maxPop": "MAX",
+      "why": {
+        "max": "최대 레벨",
+        "base": "스킬 Lv1 먼저",
+        "swap": "마을에서 교체",
+        "cap": "스킬 Lv 한도",
+        "key": "핵심 1종만",
+        "tierOne": "{n}pt 더 필요",
+        "tierOther": "{n}pt 더 필요"
+      },
+      "keyPrefix": "핵심 · "
+    },
+    {
+      "locale": "en",
+      "title": "Skills",
+      "classes": [
+        "Warrior",
+        "Ranger",
+        "Mage"
+      ],
+      "classNav": "Class",
+      "level": "Level",
+      "spent": "Spent",
+      "left": "Points left",
+      "close": "Close",
+      "start": "Unlocked",
+      "gate": "{n}+ pts spent",
+      "locked": "Locked",
+      "mods": "Modifiers",
+      "pick": "Pick 1 · Swap in town",
+      "selected": "Selected",
+      "refund": "Refund point",
+      "invest": "Invest point",
+      "refundS": "Refund",
+      "investS": "Invest",
+      "active": "Active",
+      "tree": "Skill tree",
+      "selRegion": "Selected skill",
+      "passive": "Passive",
+      "keyPassive": "Key passive · pick one",
+      "passHead": "PASSIVES · BY LEVEL",
+      "keyHead": "Key passive · invest in one",
+      "unlock": "Unlocks at",
+      "rank": "Rank",
+      "linked": "Linked skills",
+      "req": "Requires Lv{n}",
+      "open": "Unlocked Lv{n}",
+      "now": "you are Lv{level}",
+      "lgInv": "Invested",
+      "lgAvail": "Available",
+      "lgLock": "Locked",
+      "lgLink": "Passive link",
+      "range": "values Lv1 → Lv{n}",
+      "maxPop": "MAX",
+      "why": {
+        "max": "Max rank",
+        "base": "Skill Lv1 first",
+        "swap": "Swap in town",
+        "cap": "Skill Lv cap",
+        "key": "One key only",
+        "tierOne": "{n} more pt",
+        "tierOther": "{n} more pts"
+      },
+      "keyPrefix": "Key · "
+    }
+  ],
+  "legacyRemap": [
+    {
+      "heroClass": 0,
+      "sourceSlot": 1,
+      "sourcePassive": false,
+      "to": "W01",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 2,
+      "sourcePassive": false,
+      "to": "W02",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 3,
+      "sourcePassive": false,
+      "to": "W03",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 4,
+      "sourcePassive": false,
+      "to": "W04",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 5,
+      "sourcePassive": false,
+      "to": "W05",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 6,
+      "sourcePassive": false,
+      "to": "W06",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 7,
+      "sourcePassive": false,
+      "to": "W08",
+      "modifier": "W08-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 8,
+      "sourcePassive": false,
+      "to": "W08",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 9,
+      "sourcePassive": false,
+      "to": "W09",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 10,
+      "sourcePassive": false,
+      "to": "W09",
+      "modifier": "W09-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 11,
+      "sourcePassive": false,
+      "to": "W02",
+      "modifier": "W02-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 12,
+      "sourcePassive": false,
+      "to": "W05",
+      "modifier": "W05-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 13,
+      "sourcePassive": false,
+      "to": "W04",
+      "modifier": "W04-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 14,
+      "sourcePassive": false,
+      "to": "W04",
+      "modifier": "W04-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 15,
+      "sourcePassive": false,
+      "to": "W06",
+      "modifier": "W06-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 16,
+      "sourcePassive": false,
+      "to": "W05",
+      "modifier": "W05-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 17,
+      "sourcePassive": false,
+      "to": "W17",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 18,
+      "sourcePassive": false,
+      "to": "W18",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 1,
+      "sourcePassive": true,
+      "to": "WP01",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 2,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 3,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 4,
+      "sourcePassive": true,
+      "to": "WP04",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 5,
+      "sourcePassive": true,
+      "to": "WP05",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 6,
+      "sourcePassive": true,
+      "to": "WP06",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 7,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 8,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 9,
+      "sourcePassive": true,
+      "to": "WP09",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 10,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 11,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 12,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 13,
+      "sourcePassive": true,
+      "to": "WP13",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 14,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 15,
+      "sourcePassive": true,
+      "to": "WP15",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 16,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 17,
+      "sourcePassive": true,
+      "to": "WP17",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 18,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 0,
+      "sourceSlot": 19,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 1,
+      "sourcePassive": false,
+      "to": "A01",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 2,
+      "sourcePassive": false,
+      "to": "A02",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 3,
+      "sourcePassive": false,
+      "to": "A03",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 4,
+      "sourcePassive": false,
+      "to": "A04",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 5,
+      "sourcePassive": false,
+      "to": "A05",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 6,
+      "sourcePassive": false,
+      "to": "A06",
+      "modifier": "A06-1",
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 7,
+      "sourcePassive": false,
+      "to": "A07",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 8,
+      "sourcePassive": false,
+      "to": "A05",
+      "modifier": "A05-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 9,
+      "sourcePassive": false,
+      "to": "A03",
+      "modifier": "A03-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 10,
+      "sourcePassive": false,
+      "to": "A03",
+      "modifier": "A03-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 11,
+      "sourcePassive": false,
+      "to": "A04",
+      "modifier": "A04-1",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 12,
+      "sourcePassive": false,
+      "to": "A04",
+      "modifier": "A04-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 13,
+      "sourcePassive": false,
+      "to": "A06",
+      "modifier": "A06-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 14,
+      "sourcePassive": false,
+      "to": "A14",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 15,
+      "sourcePassive": false,
+      "to": "A03",
+      "modifier": "A03-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 16,
+      "sourcePassive": false,
+      "to": "A05",
+      "modifier": "A05-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 17,
+      "sourcePassive": false,
+      "to": "A17",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 18,
+      "sourcePassive": false,
+      "to": "A18",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 1,
+      "sourcePassive": true,
+      "to": "AP01",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 2,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 3,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 4,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 5,
+      "sourcePassive": true,
+      "to": "AP05",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 6,
+      "sourcePassive": true,
+      "to": "AP06",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 7,
+      "sourcePassive": true,
+      "to": "AP07",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 8,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 9,
+      "sourcePassive": true,
+      "to": "AP09",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 10,
+      "sourcePassive": true,
+      "to": "AP10",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 11,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 12,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 13,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 14,
+      "sourcePassive": true,
+      "to": "AP14",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 15,
+      "sourcePassive": true,
+      "to": "AP15",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 16,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 17,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 18,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 1,
+      "sourceSlot": 19,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 1,
+      "sourcePassive": false,
+      "to": "M01",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 2,
+      "sourcePassive": false,
+      "to": "M02",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 3,
+      "sourcePassive": false,
+      "to": "M03",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 4,
+      "sourcePassive": false,
+      "to": "M04",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 5,
+      "sourcePassive": false,
+      "to": "M04",
+      "modifier": "M04-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 6,
+      "sourcePassive": false,
+      "to": "M06",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 7,
+      "sourcePassive": false,
+      "to": "M07",
+      "modifier": "M07-1",
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 8,
+      "sourcePassive": false,
+      "to": "M08",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 9,
+      "sourcePassive": false,
+      "to": "M07",
+      "modifier": "M07-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 10,
+      "sourcePassive": false,
+      "to": "M02",
+      "modifier": "M02-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 11,
+      "sourcePassive": false,
+      "to": "M11",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 12,
+      "sourcePassive": false,
+      "to": "M07",
+      "modifier": "M07-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 13,
+      "sourcePassive": false,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 14,
+      "sourcePassive": false,
+      "to": "M06",
+      "modifier": "M06-2",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 15,
+      "sourcePassive": false,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 16,
+      "sourcePassive": false,
+      "to": "M03",
+      "modifier": "M03-3",
+      "note": "absorbed"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 17,
+      "sourcePassive": false,
+      "to": "M17",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 18,
+      "sourcePassive": false,
+      "to": "M18",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 1,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 2,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 3,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 4,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 5,
+      "sourcePassive": true,
+      "to": "MP05",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 6,
+      "sourcePassive": true,
+      "to": "MP06",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 7,
+      "sourcePassive": true,
+      "to": "MP07",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 8,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 9,
+      "sourcePassive": true,
+      "to": "MP09",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 10,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 11,
+      "sourcePassive": true,
+      "to": "MP11",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 12,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 13,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 14,
+      "sourcePassive": true,
+      "to": "MP14",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 15,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 16,
+      "sourcePassive": true,
+      "to": "MP16",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 17,
+      "sourcePassive": true,
+      "to": "MP17",
+      "modifier": null,
+      "note": "kept"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 18,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    },
+    {
+      "heroClass": 2,
+      "sourceSlot": 19,
+      "sourcePassive": true,
+      "to": null,
+      "modifier": null,
+      "note": "retired"
+    }
+  ]
+}

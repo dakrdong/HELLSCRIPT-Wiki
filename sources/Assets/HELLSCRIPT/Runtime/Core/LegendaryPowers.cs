@@ -63,15 +63,13 @@ namespace Hellscript
         public LegendaryPower AtLevel(int level)
         {if(root!=null)return root.AtLevel(level);level=Mathf.Clamp(level,1,5);return level==1?this:levels[level-1]??(levels[level-1]=new LegendaryPower(this,level));}
         static bool Finite(float value)=>!float.IsNaN(value)&&!float.IsInfinity(value);
-        static bool ValidSkill(string skill,int heroClass)=>skill=="*"||skill=="BASIC"||Index(skill)>=heroClass*6&&Index(skill)<heroClass*6+6;
+        static bool ValidSkill(string skill,int heroClass)=>skill=="*"||skill=="BASIC"||ClassSkills.Find(skill) is ClassSkillDefinition d&&d.heroClass==heroClass&&(d.category=="active"||d.Ultimate||d.category=="modifier");
         public static int Index(string skill)
         {
-            if(string.IsNullOrEmpty(skill)||skill.Length!=3)return -1;
-            int c="WAM".IndexOf(skill[0]);
-            return c>=0&&int.TryParse(skill.Substring(1),out int n)&&n>=1&&n<=6?c*6+n-1:-1;
+            return ClassSkills.LegacyIndex(skill);
         }
-        public bool Matches(string skill)=>Skill=="*"||Skill==skill;
-        public bool Affects(string skill)=>AffectedSkill=="*"||AffectedSkill==skill;
+        public bool Matches(string skill,ClassSkillLoadout load=null,int capturedMask=-1)=>SkillTreeD4Loadout.SourceMatches(load,Skill,skill,capturedMask);
+        public bool Affects(string skill,ClassSkillLoadout load=null,int capturedMask=-1)=>SkillTreeD4Loadout.SourceMatches(load,AffectedSkill,skill,capturedMask);
     }
     public static class LegendaryPowers
     {

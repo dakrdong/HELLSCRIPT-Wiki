@@ -278,10 +278,10 @@ namespace Hellscript
                         new ClassSkillEffect{id=id+":gallery",source=id,kind=kind,created=now,until=now+30,position=hero+offset,direction=dir,radius=radius,width=1};
                     if(name=="fx-class-lasting")
                     {
-                        cs.effects.AddRange(new[]{E("M08","firewall",new Vector2(0,3.5f),Vector2.right),E("A10","trap",new Vector2(-4,1),Vector2.up,1.5f),
-                            E("M14","ward",Vector2.zero,Vector2.up,3),E("M16","vortex",new Vector2(4,2.5f),Vector2.up,3),E("M11","orb",new Vector2(-2.5f,4.5f),Vector2.up,3),
-                            E("A17","rain",new Vector2(0,7.5f),Vector2.up,4),E("W17","ancestor",new Vector2(-1.8f,.6f),Vector2.up),E("A11","decoy",new Vector2(2.2f,-1),Vector2.up),
-                            E("A15","ballista",new Vector2(-3.5f,-2.5f),Vector2.up),E("A07","arrow",new Vector2(1.2f,0),Vector2.right),E("M10","globe",new Vector2(-1.2f,-1.4f),new Vector2(-1,-.3f).normalized)});
+                        cs.effects.AddRange(new[]{E("M08","firewall",new Vector2(0,3.5f),Vector2.right),E("A03-2","trap",new Vector2(-4,1),Vector2.up,1.5f),
+                            E("M06-2","ward",Vector2.zero,Vector2.up,3),E("M03-3","vortex",new Vector2(4,2.5f),Vector2.up,3),E("M11","orb",new Vector2(-2.5f,4.5f),Vector2.up,3),
+                            E("A17","rain",new Vector2(0,7.5f),Vector2.up,4),E("W17","ancestor",new Vector2(-1.8f,.6f),Vector2.up),E("A04-1","decoy",new Vector2(2.2f,-1),Vector2.up),
+                            E("A03-3","ballista",new Vector2(-3.5f,-2.5f),Vector2.up),E("A07","arrow",new Vector2(1.2f,0),Vector2.right),E("M02-3","globe",new Vector2(-1.2f,-1.4f),new Vector2(-1,-.3f).normalized)});
                         run.enemies.Add(Enemy(run,EnemyBase+40,0,new Vector2(-4,5.5f)));frozen=Json(run);Advance(.3f);
                         foreach(var e in cs.effects)if(e.kind=="rain"||e.kind=="orb"||e.kind=="vortex"||e.kind=="ancestor")e.count=1;
                         frozen=Json(run);Advance(.12f);
@@ -291,7 +291,7 @@ namespace Hellscript
                     else
                     {
                         int castRoot=9000;ClassSkillCast C(string id,Vector2 aim)=>new ClassSkillCast{id=id,root=castRoot++,released=true,origin=hero,aim=hero+aim,destination=hero+aim};
-                        cs.casts.AddRange(new[]{C("W18",Vector2.up),C("M07",Vector2.right*10),C("M12",new Vector2(-.6f,.8f)*12),C("W09",Vector2.down*3)});
+                        cs.casts.AddRange(new[]{C("W18",Vector2.up),C("M07",Vector2.right*10),C("M07-3",new Vector2(-.6f,.8f)*12),C("W09",Vector2.down*3)});
                         frozen=Json(run);Advance(.14f);
                         what="class skill releases: Titan's Judgment, Ember Lance (east), Storm Spear (north-west) and Raking Wound (south) 0.14 s after release";
                     }

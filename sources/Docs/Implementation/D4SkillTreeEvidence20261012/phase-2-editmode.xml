@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="15" result="Passed" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:54:09Z" duration="17.9177298">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="6064" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:54:09Z" duration="17.917730" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="7969" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/Documents/Codex/2026-10-12/task-2/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="6064" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:54:09Z" duration="17.848431" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="85885" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="7970" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="6064" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:54:09Z" duration="17.773995" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="7971" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="6064" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:54:09Z" duration="17.711267" total="15" passed="15" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="4537" name="HuntEdictSkillPresetTests" fullname="Hellscript.Tests.HuntEdictSkillPresetTests" classname="Hellscript.Tests.HuntEdictSkillPresetTests" runstate="Runnable" testcasecount="16" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:53:51Z" duration="0.281278" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="4556" name="OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields" fullname="Hellscript.Tests.HuntEdictSkillPresetTests.OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields" classname="Hellscript.Tests.HuntEdictSkillPresetTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:53:51Z" duration="0.278943" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="4554" name="OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields(False)" fullname="Hellscript.Tests.HuntEdictSkillPresetTests.OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields(False)" methodname="OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields" classname="Hellscript.Tests.HuntEdictSkillPresetTests" runstate="Runnable" seed="1837957018" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:53:51Z" duration="0.202164" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Serialization depth limit 10 exceeded at 'Hellscript::EdictCoreSkill.options'. There may be an object composition cycle in one or more of your serialized classes. Consider rearranging data or use `[SerializeReference]`. 
+
+Serialization hierarchy:
+11: Hellscript::EdictCoreSkill.options
+10: Hellscript::HuntEdictV2Document.skills
+9: Hellscript::ClassSkillLoadout.legacyEdict
+8: Hellscript::BuildConfig.classSkills
+7: Hellscript::TrainingAttempt.build
+6: Hellscript::TrainingComparisonRecord.a
+5: Hellscript::HeroSave.trainingComparison
+4: Hellscript::PuzzleLevelProgress.kitHero
+3: Hellscript::PuzzleProgress.levels
+2: Hellscript::TutorialSlot.puzzle
+1: Hellscript::AccountGuide.tutorialSlots
+0: Hellscript::AccountSave.guide
+
+]]></output>
+              </test-case>
+              <test-case id="4555" name="OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields(True)" fullname="Hellscript.Tests.HuntEdictSkillPresetTests.OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields(True)" methodname="OlderShareCodesMayOmitOnlyKnownEmptyOptionalFields" classname="Hellscript.Tests.HuntEdictSkillPresetTests" runstate="Runnable" seed="579733930" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:53:51Z" duration="0.071535" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+          <test-suite type="TestFixture" id="2357" name="SkillTreeD4MigrationTests" fullname="Hellscript.Tests.SkillTreeD4MigrationTests" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:54:09Z" duration="17.305592" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2369" name="DisabledBuildRefusesSchema22WithoutBackupFallback" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.DisabledBuildRefusesSchema22WithoutBackupFallback" methodname="DisabledBuildRefusesSchema22WithoutBackupFallback" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="53003990" result="Passed" start-time="2026-10-12 14:53:51Z" end-time="2026-10-12 14:53:52Z" duration="0.374801" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2372" name="EveryGoldenAllocationSurvivesSaveJsonLoadAndShareCode" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.EveryGoldenAllocationSurvivesSaveJsonLoadAndShareCode" methodname="EveryGoldenAllocationSurvivesSaveJsonLoadAndShareCode" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="2073025022" result="Passed" start-time="2026-10-12 14:53:52Z" end-time="2026-10-12 14:54:04Z" duration="12.270094" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[D4 save/share allocation snapshots: 288
+]]></output>
+            </test-case>
+            <test-case id="2370" name="InvalidMigrationStopsAndPreservesOriginalAndBackup" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.InvalidMigrationStopsAndPreservesOriginalAndBackup" methodname="InvalidMigrationStopsAndPreservesOriginalAndBackup" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="2036117870" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:04Z" duration="0.044581" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2371" name="Level40To60UsesExistingExperienceCurveAndValidationHeroesStay40" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.Level40To60UsesExistingExperienceCurveAndValidationHeroesStay40" methodname="Level40To60UsesExistingExperienceCurveAndValidationHeroesStay40" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="906887286" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:04Z" duration="0.018543" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="2367" name="LiteralOldCodesStayStrictAndImportPolicyOnly" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldCodesStayStrictAndImportPolicyOnly" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:04Z" duration="0.119223" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2364" name="LiteralOldCodesStayStrictAndImportPolicyOnly(&quot;HED3.txt&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldCodesStayStrictAndImportPolicyOnly(&quot;HED3.txt&quot;)" methodname="LiteralOldCodesStayStrictAndImportPolicyOnly" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="1236332645" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:04Z" duration="0.049349" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2365" name="LiteralOldCodesStayStrictAndImportPolicyOnly(&quot;HED4.txt&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldCodesStayStrictAndImportPolicyOnly(&quot;HED4.txt&quot;)" methodname="LiteralOldCodesStayStrictAndImportPolicyOnly" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="1944262957" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:04Z" duration="0.027245" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2366" name="LiteralOldCodesStayStrictAndImportPolicyOnly(&quot;HED5.txt&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldCodesStayStrictAndImportPolicyOnly(&quot;HED5.txt&quot;)" methodname="LiteralOldCodesStayStrictAndImportPolicyOnly" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="992045390" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:04Z" duration="0.041751" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2363" name="LiteralOldSavesArchiveAndRefundExactlyOnce" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldSavesArchiveAndRefundExactlyOnce" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:09Z" duration="4.440714" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2358" name="LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;absent.json&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;absent.json&quot;)" methodname="LiteralOldSavesArchiveAndRefundExactlyOnce" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="215150652" result="Passed" start-time="2026-10-12 14:54:04Z" end-time="2026-10-12 14:54:05Z" duration="0.371234" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2359" name="LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;v3.json&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;v3.json&quot;)" methodname="LiteralOldSavesArchiveAndRefundExactlyOnce" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="2136110640" result="Passed" start-time="2026-10-12 14:54:05Z" end-time="2026-10-12 14:54:06Z" duration="1.007398" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2360" name="LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;v4-presets.json&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;v4-presets.json&quot;)" methodname="LiteralOldSavesArchiveAndRefundExactlyOnce" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="1749381562" result="Passed" start-time="2026-10-12 14:54:06Z" end-time="2026-10-12 14:54:06Z" duration="0.969864" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2361" name="LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;run-W15.json&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;run-W15.json&quot;)" methodname="LiteralOldSavesArchiveAndRefundExactlyOnce" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="1159824793" result="Passed" start-time="2026-10-12 14:54:06Z" end-time="2026-10-12 14:54:08Z" duration="1.063225" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="2362" name="LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;run-M13.json&quot;)" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.LiteralOldSavesArchiveAndRefundExactlyOnce(&quot;run-M13.json&quot;)" methodname="LiteralOldSavesArchiveAndRefundExactlyOnce" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="1703623574" result="Passed" start-time="2026-10-12 14:54:08Z" end-time="2026-10-12 14:54:09Z" duration="1.028163" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="2368" name="NewCodeRoundTripsModifiersAndRejectsUnknownFields" fullname="Hellscript.Tests.SkillTreeD4MigrationTests.NewCodeRoundTripsModifiersAndRejectsUnknownFields" methodname="NewCodeRoundTripsModifiersAndRejectsUnknownFields" classname="Hellscript.Tests.SkillTreeD4MigrationTests" runstate="Runnable" seed="83523622" result="Passed" start-time="2026-10-12 14:54:09Z" end-time="2026-10-12 14:54:09Z" duration="0.036037" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

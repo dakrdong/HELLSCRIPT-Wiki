@@ -19,7 +19,7 @@ namespace Hellscript.Tests
         }
         CombatSimulation Fixture(out AccountSave account,HeroClass hero=HeroClass.Ranger)
         {
-            account=GameStore.NewAccount();account.selectedHero=(int)hero;account.Hero.level=30;account.Hero.build.passives=Array.Empty<int>();account.Hero.build.potionThreshold=0;
+            account=ContentTestAccounts.Legacy();account.selectedHero=(int)hero;account.Hero.level=30;account.Hero.build.passives=Array.Empty<int>();account.Hero.build.potionThreshold=0;
             var sim=new CombatSimulation(account,catalog,1,1,seed:917);sim.State.id="outcome-fixture";sim.State.enemies.Clear();sim.State.build.rules.Clear();sim.State.decisionTime=100;
             sim.State.position=RiftMap.Rooms[0];sim.State.destination=sim.State.position;sim.State.build.movement=MovementMode.Stand;
             sim.Stats.hp=sim.State.health=1000;sim.Stats.damage=100;sim.Stats.armor=sim.Stats.resistance=sim.Stats.regen=sim.Stats.crit=0;sim.Stats.healing=1;
@@ -166,7 +166,7 @@ namespace Hellscript.Tests
             string dir=Path.Combine(Path.GetTempPath(),"hellscript-idle-audit-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(dir);
             try
             {
-                var account=GameStore.NewAccount();account.Hero.highestClear=1;account.Hero.firstClears.Add(1);account.offlineSupplies=null;account.gold=1950;account.materials=15;account.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()-3600;ContentUnlocks.Reconcile(account);account.contentUnlocks.offlineActivatedUtc=account.lastSeenUtc;
+                var account=ContentTestAccounts.Legacy();account.Hero.highestClear=1;account.Hero.firstClears.Add(1);account.offlineSupplies=null;account.gold=1950;account.materials=15;account.lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()-3600;ContentUnlocks.Reconcile(account);account.contentUnlocks.offlineActivatedUtc=account.lastSeenUtc;
                 File.WriteAllText(Path.Combine(dir,"hellscript-local-v1.json"),JsonUtility.ToJson(account));var loaded=new GameStore(dir);
                 Assert.GreaterOrEqual(loaded.LocalIdleGoldAwarded,1971);Assert.AreEqual(loaded.LocalIdleGoldAwarded,loaded.Data.gold-account.gold);Assert.AreEqual(account.materials,loaded.Data.materials);Assert.AreEqual(loaded.LocalIdleStonesAwarded,loaded.Data.enhancementStones-account.enhancementStones);
                 CollectionAssert.AreEqual(account.Hero.firstClears,loaded.Data.Hero.firstClears);int gold=loaded.Data.gold;var reloaded=new GameStore(dir);Assert.AreEqual(reloaded.LocalIdleGoldAwarded,reloaded.Data.gold-gold);

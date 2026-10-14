@@ -8,7 +8,10 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        public const int MaximumSchemaVersion=21;
+        // The default release reads/writes schema 22. Explicit developer legacy mode
+        // supports schema 21 and must refuse D4 saves, including backup fallback.
+        public static int MaximumSchemaVersion=>SkillTreeD4.Enabled?22:21;
+        public static int CurrentSchemaVersion=>MaximumSchemaVersion;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
         public string OfflineMessage {get;private set;}="";
@@ -59,9 +62,23 @@ namespace Hellscript
             try
             {
                 if(!File.Exists(file))return null;var a=JsonUtility.FromJson<AccountSave>(File.ReadAllText(file));
-                if(a!=null&&a.schema>MaximumSchemaVersion)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
+                if(a!=null&&a.schema>CurrentSchemaVersion)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
                 if(a==null||a.schema<1||a.heroes==null||a.heroes.Count!=3||a.cores==null||a.cores.Length!=8)return null;
-                if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>40))return null;
+                if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>(SkillTreeD4.Enabled?60:40)))return null;
+                if(SkillTreeD4.Enabled&&SkillTreeD4Migration.Needed(a))
+                {
+                    try
+                    {
+                        string archive=file+".schema"+a.schema+"-before-d4-skill-tree.json";
+                        if(!File.Exists(archive))File.Copy(file,archive,false);
+                        // The skill schema must not hide an older item schema before its
+                        // original affixes and investment ledger have been upgraded.
+                        if(a.schema==1){File.Copy(file,file+".schema1-"+DateTime.UtcNow.Ticks+".json",false);Migrate(a);}
+                        SkillTreeD4Migration.Apply(a);
+                    }
+                    catch(Exception error){throw new NotSupportedException("The skill-tree migration could not be completed. The original save is preserved.",error);}
+                }
+                if(!SkillTreeD4.Enabled&&a.heroes.Any(h=>h.build.classSkills?.version==5))throw new NotSupportedException("This save requires the D4 skill-tree release. The original file is preserved.");
                 if(a.heroes.Any(h=>h.level>ClassSkills.LevelCap(h)||!ClassSkillLoadout.IsAbsent(h.build.classSkills)&&!ClassSkills.Enabled(h)))
                     throw new NotSupportedException("This save requires the class-skill release. The original file is preserved.");
                 bool unlocksMigrated=a.schema<13&&(a.contentUnlocks?.version??0)<ContentUnlocks.Version;
@@ -156,10 +173,11 @@ namespace Hellscript
                 HuntEdictV2Storage.Normalize(h);
                 NormalizePresetSlots(h);
                 HuntEdictStorage.Normalize(h);
+                h.riftGearOffer??=new RiftGearOfferSettings();h.riftGearOffer.Normalize();
                 if(ClassSkillLoadout.IsAbsent(h.build.classSkills))h.build.classSkills=null;
                 else
                 {
-                    try{ClassSkillLoadout.Validate(h.build.classSkills,h);h.build.classSkills.ProjectLegacy(h.build,null);a.schema=Math.Max(a.schema,7);}
+                    try{ClassSkillLoadout.Validate(h.build.classSkills,h);SkillTreeD4Loadout.ValidateKitOwner(a,h);h.build.classSkills.ProjectLegacy(h.build,null);a.schema=Math.Max(a.schema,7);}
                     catch(Exception error){throw new NotSupportedException("Unsupported class-skill save; the original file is preserved.",error);}
                 }
             }
@@ -191,6 +209,9 @@ namespace Hellscript
         }
         public static void NormalizeRun(RunState run,bool fresh=false)
         {
+            // JsonUtility materializes an absent reference as a default inline object.
+            // Only the empty, originless placeholder is null; real casts stay validated.
+            if(run.classSkills?.action is ClassSkillCast action&&string.IsNullOrEmpty(action.id)&&action.root==0)run.classSkills.action=null;
             LiveOpsConfig.NormalizeRun(run);
             run.dps=CombatDpsTimeline.Normalize(run.dps);
             if(run.journal?.version==0)run.journal=null;
@@ -273,10 +294,11 @@ namespace Hellscript
                 var h=new HeroSave{id=Guid.NewGuid().ToString("N"),heroClass=(HeroClass)i,build=GameCatalog.Preset((HeroClass)i,0)};
                 if(catalog!=null)h.build=BehaviorPresets.ForLevel(h.heroClass,0,h.level,catalog);
                 h.build.passives=Array.Empty<int>();
+                if(SkillTreeD4.Enabled)h.build.classSkills=SkillTreeD4Loadout.Empty(h.heroClass);
                 h.edict=HuntEdictV2Storage.CreateForHero(h);
                 HuntEdictStorage.InitializeNewHero(h,catalog);
                 HuntEdictProgression.InitializeHero(h);
-                h.potions.Validate();
+                h.potions.Validate();h.riftGearOffer.Normalize();
                 var w=Economy.CreateItem(h.heroClass,0,0,1,ref rng);w.baseId=new[]{"B02","B05","B08"}[i];w.baseIndex=i*3+1;w.name=w.DisplayName;w.equipped=true;ItemAcquisition.Stamp(a,w);h.inventory.Add(w);a.heroes.Add(h);
             }
             a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
@@ -346,7 +368,8 @@ namespace Hellscript
                 target.legacyPassiveSlots=source.legacyPassiveSlots;target.level=source.level;target.xp=source.xp;target.highestClear=source.highestClear;target.capacity=source.capacity;
                 target.lastRiftFingerprint=source.lastRiftFingerprint;target.lastRiftBoss=source.lastRiftBoss;
                 target.riftProgress=source.riftProgress;target.potions=source.potions;target.guide=source.guide;target.slotProgress=source.slotProgress;
-                target.equipmentShop=source.equipmentShop;
+                target.equipmentShop=source.equipmentShop;target.d4SkillRefund=source.d4SkillRefund;
+                target.riftGearOffer=source.riftGearOffer;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
             Data.dailyQuests=staged.dailyQuests;
@@ -399,14 +422,15 @@ namespace Hellscript
                 edictBoundary.guide=Data.guide;edictBoundary.contentUnlocks=Data.contentUnlocks;edictBoundary.selectedHero=Data.selectedHero;
                 foreach(var h in edictBoundary.heroes){var current=Data.heroes.FirstOrDefault(v=>v.id==h.id)??Data.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass);if(current!=null)h.level=current.level;}
                 HuntEdictProgression.ValidateTransaction(edictBoundary,data,edictSession);
-                Tutorials.Normalize(data,false);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=MaximumSchemaVersion;
+                if(!SkillTreeD4.Enabled&&data.heroes.Any(h=>h.build.classSkills?.version==5))throw new NotSupportedException("This save requires the D4 skill-tree release.");
+                Tutorials.Normalize(data,false);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=CurrentSchemaVersion;
                 ContentUnlocks.Reconcile(data);
                 HuntEdictProgression.Reconcile(data);
                 data.speed=CombatSpeedAccess.Resolve(data.speed);
                 foreach(var hero in data.heroes)
                 {
                     NormalizePresetSlots(hero);
-                    if(!ClassSkillLoadout.IsAbsent(hero.build.classSkills))ClassSkillLoadout.Validate(hero.build.classSkills,hero);
+                    if(!ClassSkillLoadout.IsAbsent(hero.build.classSkills)){ClassSkillLoadout.Validate(hero.build.classSkills,hero);SkillTreeD4Loadout.ValidateKitOwner(data,hero);}
                 }
                 // JsonUtility can materialize an absent optional run as an empty object.
                 // Only the new ID-bearing runtime requires this additional ownership check.
@@ -419,7 +443,7 @@ namespace Hellscript
                     if(ItemQuality.HasQuality(item))item.contentVersion=Math.Max(ItemQuality.ItemVersion,item.contentVersion);
                 }
                 if(PersistedItems(data).Any(ItemQuality.HasQuality)||RecordedItems(data).Any(i=>i.contentVersion>=ItemQuality.ItemVersion))
-                    data.schema=Math.Max(data.schema,MaximumSchemaVersion);
+                    data.schema=Math.Max(data.schema,CurrentSchemaVersion);
                 ObservePlayerProgress(data);
                 var saveStarted=System.Diagnostics.Stopwatch.GetTimestamp();
                 foreach(var group in codexRuns.GroupBy(r=>r.run.id))
@@ -442,7 +466,7 @@ namespace Hellscript
             {
                 data.playerObservations=previousObservations;data.guide.edictUnlocks=previousEdictUnlocks;
                 data.monsterCodex=previousCodex;foreach(var entry in codexRuns)entry.run.monsterKillsCommitted=entry.committed;
-                if(e is ArgumentException)
+                if(e is ArgumentException||e is NotSupportedException)
                 {
                     if(ReferenceEquals(Data,data))foreach(var h in Data.heroes)
                     {var prior=edictBoundary.heroes.FirstOrDefault(v=>v.id==h.id)??edictBoundary.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass);if(prior==null)continue;ApplyHuntEdict(h,HuntEdictLoadout.FromHero(prior));h.useEdict=prior.useEdict;h.useRecommendedEdict=prior.useRecommendedEdict;h.edictPresets=prior.edictPresets.Select(p=>p.Copy()).ToList();h.presets=prior.presets.Select(p=>p.Copy()).ToList();}

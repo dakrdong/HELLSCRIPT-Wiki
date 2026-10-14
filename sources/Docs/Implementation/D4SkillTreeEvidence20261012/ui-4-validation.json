@@ -1,0 +1,36 @@
+{
+  "phase": "UI-4",
+  "fullScreenPass": 24,
+  "renders": 24,
+  "panelPartsScenarios": 1008,
+  "panelLookAndFlowTests": {
+    "total": 7,
+    "passed": 7
+  },
+  "fiveSizeAndCardTests": {
+    "total": 16,
+    "passed": 16
+  },
+  "fontAndFlowTests": {
+    "total": 13,
+    "passed": 13
+  },
+  "symbolMeshGc": "zero managed allocation",
+  "approximations": {
+    "A1": "Existing UiFonts, reference word breaks, actual width fitting and actual line-height scaling",
+    "A7": {
+      "globalGlowGain": 0.5,
+      "canvasVertexColorAlwaysGammaSpace": true
+    }
+  },
+  "notVerified": [
+    "Real pointer replay and interaction effects",
+    "Production host and saved re-entry",
+    "Native player and physical mobile"
+  ],
+  "finalCompiledPaintMeshGc": {
+    "tests": 1,
+    "passed": 1,
+    "managedAllocation": 0
+  }
+}

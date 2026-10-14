@@ -275,7 +275,15 @@ namespace Hellscript
         // Invested ranks travel with the build the run fights with; a run restored from before
         // ranks existed has none and reads as rank one everywhere.
         int[] Ranks=>Stats.effectiveSkillRanks;
-        public float SkillRange(int index)=>SkillEffects.Range(catalog.skills[index],SkillEffects.ActiveRank(Ranks,index));
+        public float SkillRange(int index)
+        {
+            if(!D4Combat)return SkillEffects.Range(catalog.skills[index],SkillEffects.ActiveRank(Ranks,index));
+            if(index==0)return RuneSkillRadius(0,2.5f)*D4ProjectedArea("W01");
+            if(index==1&&Loadout.Modifier("W02")==1)return D4ModValue("W02");
+            if(index==2)return (Loadout.Modifier("W03")==1?D4ModValue("W03"):catalog.skills[index].range)*D4ProjectedArea("W03");
+            if(index==3)return (Loadout.Modifier("W04")==1||Loadout.Modifier("W04")==2?D4ModValue("W04"):catalog.skills[index].range)*D4ProjectedArea("W04");
+            return catalog.skills[index].range;
+        }
         float ShoutBonus=>State.shoutBonus>0?State.shoutBonus:SkillEffects.ShoutBonus(SkillEffects.ActiveRank(Ranks,5));
         float ShadowFraction=>State.shadowFraction>0?State.shadowFraction:SkillEffects.ShadowFraction(SkillEffects.ActiveRank(Ranks,11));
         float LeapDefenseReduction=>SkillEffects.Passive(Ranks,HeroClass.Warrior,2);
@@ -286,10 +294,14 @@ namespace Hellscript
             if(skill.kind==SkillKind.Whirlwind){if(Stats.passives[1]&&State.channelTime>=2-.00001f)reduction+=SkillEffects.Passive(Ranks,HeroClass.Warrior,1);if(Stats.SetPieces("SW")>=2)reduction+=.15f;}
             if(skill.kind==SkillKind.Blizzard&&Stats.SetPieces("SM")>=2)reduction+=.2f;
             if(skill.kind==SkillKind.Pierce&&Stats.SetPieces("SAB")>=2||skill.kind==SkillKind.Chain&&Stats.SetPieces("SMB")>=2)reduction+=.15f;
-            return skill.cost*(1-Mathf.Min(.5f,reduction));
+            float basis=D4Combat?Hero.heroClass==HeroClass.Warrior?D4WarriorCost(skill.id,skill.cost):Hero.heroClass==HeroClass.Ranger?D4RangerCost(skill.id,skill.cost):D4MageCost(skill.id,skill.cost):skill.cost;
+            return basis*(1-Mathf.Min(.5f,reduction));
         }
         void ResolveSkill(HeroActionState action)
         {
+            if(D4Combat&&Hero.heroClass==HeroClass.Warrior&&ResolveD4WarriorLegacy(action)){PresentD4LegacyRelease(action);return;}
+            if(D4Combat&&Hero.heroClass==HeroClass.Ranger&&ResolveD4RangerLegacy(action)){PresentD4LegacyRelease(action);return;}
+            if(D4Combat&&Hero.heroClass==HeroClass.Mage&&ResolveD4MageLegacy(action)){PresentD4LegacyRelease(action);return;}
             int index=action.skill;var skill=catalog.skills[index];var target=State.enemies.Find(e=>e.id==action.targetId&&!e.dead);
             Vector2 origin=action.origin,aim=action.aim,destination=action.destination;
             switch(skill.kind)
@@ -320,7 +332,7 @@ namespace Hellscript
                     int novaHits=AreaHit(origin,3*ClassArea(action.id),skill.coefficient,skill.kind==SkillKind.Nova?2:0);
                     if(novaHits==0)ActionEvent(action,"ACTION_MISS","폭발 순간 자기 범위에 적이 없습니다.");
                     if(skill.kind==SkillKind.Nova&&novaHits>0&&Stats.SetPieces("SMB")>=4){ItemEffects.chainCharge=6;ItemEffects.chainCharges=2;EffectEvent("SMB4","CHARGE",root:action.id,value:2);}
-                    foreach(var e in AreaTargets(origin,3*ClassArea(action.id),default,360)){ApplyStatus(e,skill.kind==SkillKind.Nova?StatusKind.Freeze:StatusKind.Stun,SkillId(index),1.5f,action.id);if(skill.kind==SkillKind.Nova)ClassFreeze("M06",e,action.id);}break;
+                    foreach(var e in AreaTargets(origin,3*ClassArea(action.id),default,360)){ApplyStatus(e,skill.kind==SkillKind.Nova?StatusKind.Freeze:StatusKind.Stun,SkillId(index),1.5f,action.id);}break;
                 case SkillKind.Shield:AddShield(SkillId(index),Stats.hp*SkillEffects.ShieldFraction(Hero.heroClass,SkillEffects.ActiveRank(Ranks,index)),index==4&&Set("REF_SW02",3)?5:4,action.id);break;
                 case SkillKind.Shout:{int rank=SkillEffects.ActiveRank(Ranks,index);float before=State.resource;State.resource=Mathf.Min(Stats.maxResource,State.resource+SkillEffects.ShoutResource(rank));CombatTelemetry.Support(State.statistics,SkillId(index),SkillResultMetric.Resource,State.resource-before);State.shoutTime=6;State.shoutBonus=SkillEffects.ShoutBonus(rank);break;}
                 case SkillKind.Pierce:LaunchPierce(action);break;
@@ -345,7 +357,7 @@ namespace Hellscript
                         Hit(current,1.1f*Mathf.Pow(.8f,i)*(visits[previous]>1?AspectGrowth.SnapshotValue(action.snapshot,"LM04",.5f):1),3,true,0,action.snapshot,definition:"M03",root:action.id);Visual?.Invoke(last,current.position,14,1);last=current.position;
                         if(i+1>=hops)break;
                         current=ChainRouteTarget(last,previous,visits,State.enemies.Where(Perceived),ref usedConduit,out bool relayed);
-                        if(relayed){if(++i+1>=hops)break;ConduitRelay(action.id);Visual?.Invoke(last,Fx("M12").position,14,1);last=Fx("M12").position;}
+                        if(relayed){if(++i+1>=hops)break;var conduit=CS.effects.First(e=>e.kind=="d4conduit"&&e.until>State.time);Visual?.Invoke(last,conduit.position,14,1);last=conduit.position;}
                     }
                     break;
             }
@@ -365,7 +377,6 @@ namespace Hellscript
             if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
             if(MoveOrderedEdictGoal(dt))return;
             bool attackMovement=!EdictActive||edictSelectedCategory==""||edictSelectedCategory=="ATTACK"||HeroActionBusy;
-            if(attackMovement&&MoveReturningGlobe(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="FROST_PICKUP";return;}
             if((!EdictActive||edictSelectedCategory==""||edictSelectedCategory==(EdictRuleOrder.BuffSkill(CS?.intent?.skillId)?"BUFF":"ATTACK"))&&MoveClassSkillIntent(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="SKILL_POSITIONING";return;}
             if((!EdictActive||edictSelectedCategory=="EXPLORE"||attackMovement)&&MoveEdictGather(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="GATHER";return;}
             if(attackMovement&&MoveEdictRanger(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="RANGER_POLICY";return;}
@@ -448,14 +459,15 @@ namespace Hellscript
             if(State.activeSkill!=0||Hero.heroClass!=HeroClass.Warrior)return;
             var action=State.heroAction;if(action.phase!=HeroActionPhase.Channeling)return;
             if(action.startedAt>=State.time-.00001f)return;
-            action.emptyTime=AreaTargets(State.position,RuneSkillRadius(0,2.5f),default,360).Length==0?action.emptyTime+dt:0;
+            action.emptyTime=AreaTargets(State.position,RuneSkillRadius(0,2.5f)*ClassArea(action.id),default,360).Length==0?action.emptyTime+dt:0;
             if(action.emptyTime>=.5f-.00001f){InterruptHeroAction("0.5초 동안 공격 범위에 적 없음");return;}
             State.channelTime+=dt;State.channelTick-=dt;if(State.channelTick>.00001f)return;
             if(action.exitChannelForBuild){CompleteHeroAction(action,"설정 변경 · 유지 구간 종료");return;}
             if(action.exitChannelForSurvival){CompleteHeroAction(action,"전역 회피 · 유지 구간 종료");return;}
             float cost=Cost(catalog.skills[0]);if(State.resource<cost){InterruptHeroAction("회오리 자원 부족");return;}
             if(EndEdictWhirlwindBeforeTick(action,cost))return;
-            State.channelTick+=.25f;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;RecordFeedbackChannelTick(action);AreaHit(State.position,RuneSkillRadius(0,2.5f),.5f,0);Visual?.Invoke(State.position,State.position,0,RuneSkillRadius(0,2.5f));
+            if(D4Combat&&!action.released){action.released=true;action.snapshot=CaptureDamage(action.id);OriginalClassRelease(action);}
+            State.channelTick+=D4WhirlInterval;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;RecordFeedbackChannelTick(action);AreaHit(State.position,RuneSkillRadius(0,2.5f)*ClassArea(State.heroAction.id),.5f,0);Visual?.Invoke(State.position,State.position,0,RuneSkillRadius(0,2.5f));
             State.action=Loc.F("회오리 · {0:0.0}초 유지", State.channelTime);
             PullWhirlwindTargets();
             EndTimedEdictWhirlwind(action);
@@ -491,7 +503,7 @@ namespace Hellscript
             var targets=AreaTargets(pos,radius,direction,arc);var snapshot=CaptureDamage();definition??=SkillId(State.heroAction.skill);if(root==0)root=State.heroAction.id;
             foreach(var e in targets)Hit(e,coefficient,element,procs,RuneMultiBonus(snapshot,targets.Length),snapshot,definition:definition,root:root,kind:kind);return targets.Length;
         }
-        DamageSnapshot CaptureDamage()=>new DamageSnapshot{classWildcardEmpower=CaptureClassLegendaryEmpower(),aspectIds=Stats.aspectLevels.Keys.OrderBy(id=>id,System.StringComparer.Ordinal).ToArray(),aspectLevels=Stats.aspectLevels.OrderBy(pair=>pair.Key,System.StringComparer.Ordinal).Select(pair=>pair.Value).ToArray(),legendaryPowers=EquippedLegendaryPowers().Select(p=>p.Id).ToArray(),legendaryDamage=CaptureLegendaryDamage(),runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i)).ToArray(),runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=(State.shoutTime>0?ShoutBonus:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
+        DamageSnapshot CaptureDamage(int root=0)=>new DamageSnapshot{d4ModifierMask=D4Combat?SkillTreeD4Loadout.ModifierMask(Loadout):0,classWildcardEmpower=CaptureClassLegendaryEmpower(),aspectIds=Stats.aspectLevels.Keys.OrderBy(id=>id,System.StringComparer.Ordinal).ToArray(),aspectLevels=Stats.aspectLevels.OrderBy(pair=>pair.Key,System.StringComparer.Ordinal).Select(pair=>pair.Value).ToArray(),legendaryPowers=EquippedLegendaryPowers().Select(p=>p.Id).ToArray(),legendaryDamage=CaptureLegendaryDamage(),runeV13=(float[])Stats.runeV13.Clone(),runeSkillPower=Enumerable.Range(0,18).Select(i=>Stats.runeSkillPower[i]+(D4Combat?D4LegacyRankPower(i,Cast(root==0?State.heroAction.id:root)):Stats.runeSkillLevels[i]*10+SkillEffects.Power(Ranks,i))).ToArray(),d4BasePower=D4Combat?Enumerable.Range(0,18).Select(i=>D4LegacyRankPower(i,Cast(root==0?State.heroAction.id:root))).ToArray():null,runeBonuses=(float[])Stats.runeBonuses.Clone(),damage=Stats.damage,bonus=Mathf.Max(State.shoutTime>0?ShoutBonus:0,D4Combat?Fx("W17:shout")?.value??0:0)+(elementBuff>0?SkillEffects.Passive(Ranks,HeroClass.Mage,5):0),crit=Stats.crit,critDamage=Stats.critDamage,
             level=EffectiveLevel,elements=Stats.bonuses.Skip(4).Take(6).Select(v=>v/100).ToArray(),passives=(bool[])Stats.passives.Clone(),ranks=Ranks==null?null:(int[])Ranks.Clone(),
             crowdCaptured=Hero.heroClass==HeroClass.Warrior,crowdQualified=Hero.heroClass==HeroClass.Warrior&&CountNear(State.position,3)>=3};
         void Deal(EnemyState e,float damage,bool critical)

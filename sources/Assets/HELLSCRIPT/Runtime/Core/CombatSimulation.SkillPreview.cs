@@ -28,11 +28,13 @@ namespace Hellscript
         {
             var definition=ClassSkills.Find(scenario.skill);
             var fixture=GameStore.NewAccount(catalog);fixture.selectedHero=definition.heroClass;
-            var h=fixture.Hero;h.id="0000000000000000000000000000000"+definition.heroClass;h.level=40;h.inventory.Clear();h.build.classSkills=null;
+            var h=fixture.Hero;h.id="0000000000000000000000000000000"+definition.heroClass;h.level=60;h.inventory.Clear();h.build.classSkills=null;
             h.build.activeSkills.Clear();h.build.passives=Array.Empty<int>();h.useEdict=true;h.useRecommendedEdict=false;
             h.classUltimateRemaining=h.classUltimateTotal=0;h.potions=new PotionInventory{version=1};
-            var load=ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(h));
+            var load=SkillTreeD4Loadout.Empty(h.heroClass);
+            foreach(var passive in SkillTreeD4.For(h.heroClass).passives.Where(p=>!p.key))load.ranks.Single(r=>r.id==passive.id).rank=5;
             foreach(string id in scenario.Skills)load.ranks.Single(r=>r.id==id).rank=1;
+            foreach(var modifier in scenario.modifiers){var rank=load.ranks.Single(r=>r.id==modifier.skill);rank.modifier=modifier.choice-1;rank.modifierRank=1;}
             var ordinary=scenario.Skills.Where(id=>!ClassSkills.Find(id).Ultimate).ToArray();
             load.actives=ordinary.Concat(Enumerable.Repeat("",4-ordinary.Length)).ToArray();load.ultimate=scenario.Skills.FirstOrDefault(id=>ClassSkills.Find(id).Ultimate)??"";
             load.order=new[]{scenario.skill}.Concat(scenario.companions).Concat(new[]{"BASIC"}).Distinct().ToArray();load.automatic=load.order.ToArray();
@@ -64,7 +66,7 @@ namespace Hellscript
             {
                 var target=sim.State.enemies.First(e=>!e.dead);
                 Vector2 aim=preparation.aim=="self"?sim.State.position:preparation.aim=="behind"?sim.State.position+Vector2.left*2:target.position;
-                if(!sim.TryCastClassSkill(preparation.skill,target.id,aim))throw new InvalidOperationException("Preview preparation could not cast: "+scenario.Key+" / "+preparation.skill);
+                if(!sim.TryCastClassSkill(preparation.skill,target.id,aim))throw new InvalidOperationException("Preview preparation could not cast: "+scenario.Key+" / "+preparation.skill+" / "+sim.InspectClassSkill(preparation.skill,target.id,aim).reason);
                 for(int tick=0;tick<30&&(sim.HeroActionBusy||sim.CSBusy);tick++)sim.Tick(Step);
                 if(sim.HeroActionBusy||sim.CSBusy)throw new InvalidOperationException("Preview preparation did not finish: "+scenario.Key);
                 for(int tick=0;tick<Mathf.CeilToInt(preparation.settleSeconds/Step);tick++)sim.Tick(Step);

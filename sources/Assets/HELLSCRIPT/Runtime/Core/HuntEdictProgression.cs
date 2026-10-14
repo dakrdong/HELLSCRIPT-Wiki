@@ -175,7 +175,7 @@ namespace Hellscript
             allocation.legacyEdict=original.Draft.edict.Copy();
             allocation.automatic=allocation.order.Where(id=>original.Draft.classSkills.automatic.Contains(id)||id!="BASIC"&&!original.Draft.classSkills.Equipped(id)).ToArray();
             policyBaseline.classSkills=allocation;policyBaseline=HuntEdictLoadout.Canonical(policyBaseline);
-            foreach(var skill in ClassSkills.For(hero.heroClass).Where(s=>!s.Passive))
+            foreach(var skill in ClassSkills.ForLoadout(hero.heroClass,hero.build.classSkills).Where(s=>!s.Passive))
             {
                 string scope="skill/"+skill.id;
                 if(HuntEdictSkillPresets.SamePolicy(candidate,policyBaseline,scope))continue;

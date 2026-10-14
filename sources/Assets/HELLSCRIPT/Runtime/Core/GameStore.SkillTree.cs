@@ -16,7 +16,7 @@ namespace Hellscript
             try
             {
                 foreach(var hero in Data.heroes)
-                {var skills=ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(hero));ApplyHuntEdict(hero,new HuntEdictLoadout{version=2,classSkills=skills,edict=skills.ProjectEdict()});}
+                {var skills=SkillTreeD4.Enabled?SkillTreeD4Loadout.Empty(hero.heroClass):ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(hero));if(skills.version==5)skills.legacyEdict=hero.edict?.Copy();ApplyHuntEdict(hero,new HuntEdictLoadout{version=2,classSkills=skills,edict=skills.ProjectEdict()});}
                 CreatedAccount=false;return Save();
             }
             catch(Exception e){Error=Loc.F("사냥 칙령을 저장하지 못했습니다: {0}",e.Message);return false;}

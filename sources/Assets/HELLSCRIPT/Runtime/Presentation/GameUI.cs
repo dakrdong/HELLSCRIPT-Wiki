@@ -485,10 +485,12 @@ namespace Hellscript
         void Update()
         {
             RefreshCanvasScale();
+            if(gearRecommendationStrip!=null)
+            {bool visible=GearRecommendationsVisible;if(gearRecommendationStrip.gameObject.activeSelf!=visible)gearRecommendationStrip.gameObject.SetActive(visible);}
             PositionEdictLabels();PositionTargetLabels();PositionOrderLabels();
             if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
-            if(game.DisplayDimmed){RefreshIdleSummary();return;}
+            if(game.DisplayDimmed){gearShownAt.Clear();RefreshIdleSummary();return;}
             TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();
@@ -505,7 +507,7 @@ namespace Hellscript
             ReflowResultRows();
             ReflowHistory();
             RefreshRepeatStatus();
-            if(commonWasOpen||CommonPanelOpen)return;
+            if(commonWasOpen||CommonPanelOpen){gearShownAt.Clear();return;}
             hudClock+=Time.unscaledDeltaTime;if(hudClock>.15f){hudClock=0;RefreshHud();}
             RefreshGuideHint();
         }

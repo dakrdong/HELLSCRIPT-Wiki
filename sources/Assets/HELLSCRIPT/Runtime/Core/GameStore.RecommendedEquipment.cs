@@ -24,6 +24,7 @@ namespace Hellscript
                 if(!Economy.AddItem(a.Hero,candidate.item,policy,a,rarityOnly,PuzzleTutorial.BagSlots(staged,a.Hero),PuzzleTutorial.BagItems(staged,a.Hero)))return false;
                 eligible=true;candidate.claimed=true;candidate.outcome=RiftLootOutcome.Kept;staged.lootCount++;
                 candidate.gearRecommended=RiftGearRecommendations.CanOffer(a.Hero,candidate.item);
+                if(candidate.gearRecommended)candidate.gearOrder=staged.drops.Max(d=>d.gearOrder)+1;
                 if(candidate.item.equipped)
                 {
                     autoEquipped=true;if(PuzzleTutorial.Operating(staged)&&staged.puzzleLevel==12)staged.puzzleOperation.autoEquipped=true;

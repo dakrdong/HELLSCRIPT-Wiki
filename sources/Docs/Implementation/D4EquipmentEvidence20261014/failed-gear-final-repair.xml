@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Failed(Child)" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-14 01:58:54Z" end-time="2026-10-14 01:58:58Z" duration="4.0987145">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:58:54Z" end-time="2026-10-14 01:58:58Z" duration="4.098715" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="7717" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:58:54Z" end-time="2026-10-14 01:58:58Z" duration="4.015778" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="41051" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="7718" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:58:54Z" end-time="2026-10-14 01:58:58Z" duration="3.939804" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="SetUpFixture" id="7613" name="Tests" fullname="Hellscript.Tests.ValidationAudioSilence" classname="Hellscript.Tests.ValidationAudioSilence" runstate="Runnable" testcasecount="5745" result="Failed" site="Child" start-time="2026-10-14 01:58:55Z" end-time="2026-10-14 01:58:58Z" duration="3.864566" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1888" name="SkillTreeD4CombatCoreTests" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" testcasecount="220" result="Failed" site="Child" start-time="2026-10-14 01:58:55Z" end-time="2026-10-14 01:58:58Z" duration="3.529088" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1936" name="GearDebtOathUsesActualResourceInsteadOfRetiredLoans" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearDebtOathUsesActualResourceInsteadOfRetiredLoans" methodname="GearDebtOathUsesActualResourceInsteadOfRetiredLoans" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="244775458" result="Passed" start-time="2026-10-14 01:58:55Z" end-time="2026-10-14 01:58:56Z" duration="0.874926" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1960" name="GearFirewallSpearAndMagneticConduitUseCurrentModifiers" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers" methodname="GearFirewallSpearAndMagneticConduitUseCurrentModifiers" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1951002442" result="Failed" start-time="2026-10-14 01:58:56Z" end-time="2026-10-14 01:58:57Z" duration="1.317460" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: greater than 1.79999995f
+  But was:  0.0f
+]]></message>
+                <stack-trace><![CDATA[at Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers () [0x00114] in /Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Assets/HELLSCRIPT/Tests/Editor/D4/SkillTreeD4EquipmentTests.cs:130
+]]></stack-trace>
+              </failure>
+            </test-case>
+            <test-case id="1939" name="GearFrostSnareCombinesWithEquippablePoisonImbuement" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrostSnareCombinesWithEquippablePoisonImbuement" methodname="GearFrostSnareCombinesWithEquippablePoisonImbuement" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1952816467" result="Passed" start-time="2026-10-14 01:58:57Z" end-time="2026-10-14 01:58:58Z" duration="0.645503" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1945" name="GearFrozenSpearEnablesReturningFrostOncePerCast" fullname="Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrozenSpearEnablesReturningFrostOncePerCast" methodname="GearFrozenSpearEnablesReturningFrostOncePerCast" classname="Hellscript.Tests.SkillTreeD4CombatCoreTests" runstate="Runnable" seed="1569301447" result="Passed" start-time="2026-10-14 01:58:58Z" end-time="2026-10-14 01:58:58Z" duration="0.644529" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

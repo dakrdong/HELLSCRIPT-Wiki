@@ -167,7 +167,7 @@ namespace Hellscript.Tests
             string before=JsonUtility.ToJson(snapshot);
             var visible=snapshot.ObservationEffects();
             Assert.That(visible.Count,Is.EqualTo(3));
-            var passive=visible.Single(e=>e.key=="passive:MP01");
+            var passive=visible.Single(e=>e.key=="passive:"+LegacySkillWire.SlotId(HeroClass.Mage,1,true));
             Assert.That(passive.remaining,Is.EqualTo(2.5f));Assert.That(passive.total,Is.EqualTo(4));Assert.IsFalse(passive.permanent);
             Assert.That(passive.name,Is.EqualTo(snapshot.passives[0].name));
             Assert.That(JsonUtility.ToJson(snapshot),Is.EqualTo(before),"Projecting the HUD changed its source snapshot");

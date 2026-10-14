@@ -31,6 +31,27 @@ namespace Hellscript.Tests
             var a=Account((int)source.Hero.heroClass,source.Hero.level);a.heroes[a.selectedHero]=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(source.Hero));
             var state=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(source.State));GameStore.NormalizeRun(state);return new CombatSimulation(a,catalog,1,restore:state);
         }
+        [TestCase(198.58155822753906)][TestCase(0.1)][TestCase(1000000000000.125)]
+        public void CheckpointKeepsEveryCumulativeTotalExactly(double value)
+        {
+            var stats=new CombatStatistics();
+            var skill=stats.For("M01");var source=new IncomingDamageSource{sourceId="fixture"};stats.incomingSources.Add(source);
+            foreach(object row in new object[]{stats,skill,source})
+                foreach(var field in row.GetType().GetFields().Where(f=>f.FieldType==typeof(double)))field.SetValue(row,value);
+            for(int n=0;n<20;n++)
+            {
+                stats=JsonUtility.FromJson<CombatStatistics>(JsonUtility.ToJson(stats));
+                foreach(object row in new object[]{stats,stats.skills.Single(),stats.incomingSources.Single()})
+                    foreach(var field in row.GetType().GetFields().Where(f=>f.FieldType==typeof(double)))
+                        Assert.AreEqual(BitConverter.DoubleToInt64Bits(value),BitConverter.DoubleToInt64Bits((double)field.GetValue(row)),field.Name+" round "+n);
+            }
+        }
+        [Test]public void OlderCheckpointWithoutExactTotalsStillLoadsDecimalValues()
+        {
+            var stats=JsonUtility.FromJson<CombatStatistics>("{\"damage\":90,\"skills\":[{\"definitionId\":\"M01\",\"damage\":90}],\"incomingSources\":[{\"sourceId\":\"fixture\",\"damage\":45}]}");
+            Assert.AreEqual(90,stats.damage);Assert.AreEqual(90,stats.skills.Single().damage);Assert.AreEqual(45,stats.incomingSources.Single().damage);
+            var copy=JsonUtility.FromJson<CombatStatistics>(JsonUtility.ToJson(stats));Assert.AreEqual(90,copy.damage);Assert.AreEqual(45,copy.incomingSources.Single().damage);
+        }
         [Test] public void TargetDamageSharesUseSeparateAllSourceTotalsAndSkillOwnedSecondaryEffects()
         {
             var sim=Quiet();var enemy=sim.State.enemies[0];sim.Stats.crit=0;
@@ -46,7 +67,7 @@ namespace Hellscript.Tests
             var stats=sim.State.statistics;Assert.IsTrue(stats.targetDamageComplete);
             Assert.AreEqual(stats.damage,stats.normalDamage+stats.bossDamage,.000001);
             Assert.AreEqual(60,stats.DamageShare("M01",false).Value,.001);Assert.AreEqual(60,stats.DamageShare("M01",true).Value,.001);
-            Assert.AreEqual(0,stats.DamageShare("M05",true).Value);
+            Assert.AreEqual(0,stats.DamageShare("M04:shield",true).Value);
             var restored=Restore(sim);Assert.AreEqual(JsonUtility.ToJson(stats),JsonUtility.ToJson(restored.State.statistics));
             Assert.AreEqual(60,restored.State.statistics.DamageShare("M01",true).Value,.001);
         }
@@ -108,7 +129,7 @@ namespace Hellscript.Tests
         [Test]
         public void DamageSeparatesShieldAbsorptionHpLossAndOverkill()
         {
-            var sim=Quiet();sim.Stats.hp=1000;sim.State.health=100;sim.Stats.armor=0;sim.Stats.shieldMultiplier=1;Call(sim,"AddShield","M05",300f,10f,1);Call(sim,"Hurt",200f);Call(sim,"Hurt",900f);
+            var sim=Quiet();sim.Stats.hp=1000;sim.State.health=100;sim.Stats.armor=0;sim.Stats.shieldMultiplier=1;Call(sim,"AddShield","M04:shield",300f,10f,1);Call(sim,"Hurt",200f);Call(sim,"Hurt",900f);
             var stats=sim.State.statistics;Assert.AreEqual(2,stats.incomingHits);Assert.AreEqual(1100,stats.incomingDamage,.001);Assert.AreEqual(300,stats.absorbed,.001);Assert.AreEqual(100,stats.hpLost,.001);
             Assert.AreEqual(0,stats.damage);Assert.AreEqual(0,sim.State.health);
         }
@@ -166,7 +187,7 @@ namespace Hellscript.Tests
             var destination=sim.State.position+Vector2.right*(leave?4:2);
             var warning=EnemyCombat.Threats(sim.State,sim.Map).Single(t=>t.key=="action-"+source.brain.action.id);
             Assert.IsTrue(EnemyCombat.Contains(warning,sim.State.position));Assert.AreEqual(!leave,EnemyCombat.Contains(warning,destination));
-            Call(sim,"AddShield","M05",sim.Stats.hp,10f,1);Call(sim,"StartHeroAction",15,source,destination,0f,0,true);
+            Call(sim,"AddShield","M04:shield",sim.Stats.hp,10f,1);Call(sim,"StartHeroAction",15,source,destination,0f,0,true);
             Until(sim,()=>sim.State.statistics.evasionSuccesses+sim.State.statistics.evasionHits>0);
             var stats=sim.State.statistics;Assert.AreEqual(1,stats.evasionAttempts);Assert.AreEqual(leave?1:0,stats.evasionSuccesses);Assert.AreEqual(leave?0:1,stats.evasionHits);
             Advance(sim,40);Assert.AreEqual(1,stats.evasionSuccesses+stats.evasionHits,"Repeated ground-effect ticks must not re-count the warning.");

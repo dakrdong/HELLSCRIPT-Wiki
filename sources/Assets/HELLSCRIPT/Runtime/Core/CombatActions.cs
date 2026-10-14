@@ -49,10 +49,10 @@ namespace Hellscript
     [Serializable] public sealed class CombatProjectile
     {
         public string casterId,definitionId;
-        public int id,actionId,skill=-1,element,maxHits=1;
+        public int id,actionId,skill=-1,element,maxHits=1,bounces,imbueRoot;
         public Vector2 origin,position,direction;
         public float createdAt,delay,speed,remaining,radius,coefficient,explosionRadius,damage,pullDistance;
-        public bool hostile,shadow,extra;
+        public bool hostile,shadow,extra,modifierValue,bounced;
         public DamageSnapshot snapshot;
         public List<int> hitIds=new List<int>();
     }

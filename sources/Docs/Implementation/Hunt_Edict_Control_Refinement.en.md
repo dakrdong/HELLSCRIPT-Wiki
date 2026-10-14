@@ -1,5 +1,7 @@
 # Hunt Edict controls and Rift equipment recommendations
 
+2026-10-13 card update [validation and captures](Rift_Gear_Offer_Cards_Plan_20261013.en.md#final-verification): 185 related Edit Mode tests, shared UI/refresh checks and native macOS screens/actions/save/portal/end checks across five sizes and both languages passed. Only failed coverage was rechecked. Full tests/public wiki await main merge; there is no physical-device/WebGL proof.
+
 Updated: 2026-10-01 · [한국어](Hunt_Edict_Control_Refinement.md)
 
 Outside taps close every Hunt Edict dialog and skill bubble exactly like X. The tap is consumed, without activating the screen behind it. Unapplied local selections and save confirmations are cancelled while the existing draft remains intact.
@@ -16,13 +18,17 @@ Outside taps close every Hunt Edict dialog and skill bubble exactly like X. The 
 
 ## Equipment offers during Rift combat
 
-The existing acquisition transaction checks whether an equippable new item increases the currently equipped configuration's score. Weapons use the shared whole-hand `EquipmentScore.Replacement` calculation. Auto-equipped, incompatible and lower-score drops do not enter the manual offer queue. Training and tutorial runs do not show these offers.
+The [approved 2026-10-13 card plan](Rift_Gear_Offer_Cards_Plan_20261013.en.md) is implemented. Acquisition checks rarity, range and every enabled threshold, then equip feasibility and the score rule. Higher post-swap score is the default; settings can offer all equippable gear. Only Normal, Magic, Rare, Legendary and Set exist. Auto-equipped gear and training/tutorial drops do not enter the manual queue.
 
-Small equipment tiles show one highest-item-score unseen candidate per equipment part. The existing `BattleHudTopOnPage` reservation keeps them above the persistent character/skill HUD and reflows them when the combat journal expands or collapses. All weapon/hand families share one group and both rings share another. Different parts appear together. Opening a tile uses shared details, read-only comparison, equip and close actions; equipped items stay left and the candidate right.
+Portrait cards are 92×150. Landscape scales the whole card and its text to 75% (69×114 with a 54-unit icon). The strip starts 12 from the left with a gap of 4 and wraps above `BattleHudTopOnPage`. Each card has an ellipsized name, icon with a magnifier, part, rounded score pill and centred 58×20 Equip button. There is no separate Details button. Signed score gain uses `0.#` precision and is omitted when no worn item is replaced.
 
-Successful equip or user close acknowledges the item and advances to the next unseen candidate. Acquisition eligibility is retained, so after equipping the highest score, the player can still inspect each already queued candidate once. Closing because of page cleanup or reflow does not acknowledge an offer.
+One unhandled candidate per part appears in pickup order; all weapon/hand families share a group and both rings share a group. The magnifier and icon body open the same shared details. A worn item opens read-only comparison, worn left and candidate right, including portrait. An empty slot opens a single candidate. Other content retains the shared comparison's default portrait panes.
 
-`DropState.gearRecommended` records acquisition eligibility and `gearHandled` records acknowledgement. Existing `GameStore` transactions persist acquisition, equipment and acknowledgement atomically. Failed saves preserve the offer. A resumed Rift does not repeat acknowledged items; old saves default both new flags to false.
+The gear opens Recommended Gear Settings in `ContentWindowView`: rarities, range and detailed conditions, recommendation rule, then popup duration. Only the detached draft changes until one per-hero account transaction saves it. New settings apply to later acquisitions; existing offers are not rejudged. The bag auto-salvage option catalog is reused with separate recommendation data. One range expands at a time, with common/additional conditions and numeric inputs. Manual close is the default; only timed mode enables the 1–60 s slider (10 s default).
+
+Equip, close and expiry acknowledge the candidate and advance the queue. Popup time is paused and restarts on close. A failed expiry save preserves the queue, retries after the next interval and suppresses repeated identical error toasts. Existing acquisition/equipment/acknowledgement transactions persist `gearRecommended`, `gearHandled` and `gearOrder` atomically.
+
+Cards show only on the battle page. Page changes and a portal town visit hide them without deleting the queue. Returning to the same run restores only that run's unhandled gear. `run.portal` and terminal runs cannot show or acknowledge cards. Death, clear or give-up removes them when `suspendedRun` is cleared. Reflow closure never acknowledges a candidate. Missing offer settings/ranges/options in older saves are normalized on read.
 
 ## Preset activation
 

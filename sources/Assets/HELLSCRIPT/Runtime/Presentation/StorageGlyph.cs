@@ -47,6 +47,7 @@ namespace Hellscript
                     Path(mesh,5,4,19,4,23,10,12,23,1,10,5,4);Path(mesh,1,10,23,10);Path(mesh,8,4,6,10,12,23,18,10,16,4);break;
                 case "chevron":Path(mesh,6,9,12,15,18,9);break;
                 case "check":Path(mesh,5,12,10,17,19,6);break;
+                case "search":Path(mesh,16,10,15.5f,7.7f,14.2f,5.8f,12.3f,4.5f,10,4,7.7f,4.5f,5.8f,5.8f,4.5f,7.7f,4,10,4.5f,12.3f,5.8f,14.2f,7.7f,15.5f,10,16,12.3f,15.5f,14.2f,14.2f,15.5f,12.3f,16,10);Path(mesh,14.2f,14.2f,21,21);break;
                 case "lock":
                     Path(mesh,5,10,19,10,19,22,5,22,5,10);Path(mesh,8,10,8,5,10,2,14,2,16,5,16,10);Path(mesh,12,14,12,18);break;
                 case "minus":Path(mesh,5,12,19,12);break;

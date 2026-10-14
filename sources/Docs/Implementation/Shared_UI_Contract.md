@@ -107,6 +107,12 @@
 
 ## 스킬 트리 어댑터
 
+### D4 투자 트리 어댑터 (개발 플래그)
+
+새 `SkillTreeD4Window`는 최종 승인된 고정 좌표 시안을 `SkillTreeD4Units`의 반 포인트 캔버스와 가로·세로·PC 배치로 옮긴다. 일반 콘텐츠 셸을 쓰면 수치로 검증된 트리와 상세 패널의 좌표가 바뀌므로 전용 캔버스를 가진 어댑터로 연결한다. 안전 영역은 `UiSafeArea.Current`, 창 순서·뒤로가기·일시정지는 `ContentWindowHost`, 실저장 연결은 `StoreViewBinding`과 `ISkillTreeD4Host`가 소유한다. 이 창은 일반 `UiTheme.Scale`을 사용하지 않고 설계 포인트의 정확한 맞춤 배율을 사용한다. 공통 `UiButton`과 `UiFonts`, `UiMesh`·`UiTheme`를 재사용한다. 이미지마다 스텐실 마스크를 만들지 않고 아이콘 메시의 정점으로 자른다. 트리 내용은 설계 좌표와 높이가 정해져 있어 LayoutGroup·ContentSizeFitter 대신 독립 ScrollRect·RectMask2D를 사용한다.
+
+검증은 55,803개 규칙·배치·문구·상호작용 골든, 실제 RectTransform과 스크롤 축, 기본 Graphic·메시 GC 검사, 24개 Unity 렌더와 시각 비교, 최종 플레이어 조작으로 구분한다. 구현 진행과 미검증 범위는 [D4 기록](D4_Skill_Tree_Implementation_20261012.md)에 남긴다. 기존 트리 어댑터는 최종 전환까지 유지한다.
+
 기존 `HuntEdictWindow`가 편집본을 소유하고 `UiTheme`, `SkillIconView`, `ContentWindowHost`, 고정 행동과 독립 스크롤을 유지한다. 새 창 체계를 만들지 않는다. [통합 기록](Hunt_Edict_Skill_Tree.md)을 따른다.
 
 2026-09-27 개편부터 트리는 세 계열의 줄기와 레벨 단계 관문, 선행 스킬 연결선을 그리는 전용 배치다. 줄기·연결선·빛 번짐은 텍스처 없는 `SkillTreeGraphic` 메시가, 노드 위치는 표시 전용 `SkillTreeLayout`이 정한다. 해금·등급·장착 판정은 `ClassSkillTree`가 계속 소유한다. 노드와 장착 칸은 창고 상자처럼 `UiButton`의 `Icon` 역할을 쓰고, 장식 그래픽이 공통 버튼의 마우스·누름·초점 상태를 읽는다. 선택은 테두리 대신 빛으로 표시한다. 아이콘은 `SkillIconView`가 그리고, 장식 테두리·배경·포인트 보석은 사용자 요청으로 GPT가 생성한 콘텐츠 그림이다. 공통 버튼 장식에 래스터를 쓰지 않는 규칙과 별개이며, 테두리의 투명한 안쪽 폭을 측정해 아이콘을 맞춘다. 제작 근거와 검사는 [스킬 트리 화면 이미지 제작 기록](../Art/SkillTreeUi/Skill_Tree_UI_Art.md)에 있다.

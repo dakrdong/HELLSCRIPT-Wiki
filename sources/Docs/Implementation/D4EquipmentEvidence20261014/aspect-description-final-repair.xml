@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="2" result="Passed" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.7686695">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="5746" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.768670" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="7718" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="5746" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.742562" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="74612" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="7719" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="5746" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.700902" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="SetUpFixture" id="7614" name="Tests" fullname="Hellscript.Tests.ValidationAudioSilence" classname="Hellscript.Tests.ValidationAudioSilence" runstate="Runnable" testcasecount="5746" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.672591" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1171" name="AspectStoneTests" fullname="Hellscript.Tests.AspectStoneTests" classname="Hellscript.Tests.AspectStoneTests" runstate="Runnable" testcasecount="23" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.510595" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1193" name="All123AspectsHaveFiveDistinctBilingualEffectDescriptions" fullname="Hellscript.Tests.AspectStoneTests.All123AspectsHaveFiveDistinctBilingualEffectDescriptions" methodname="All123AspectsHaveFiveDistinctBilingualEffectDescriptions" classname="Hellscript.Tests.AspectStoneTests" runstate="Runnable" seed="422663514" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:07Z" duration="0.323463" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Serialization depth limit 10 exceeded at 'Hellscript::EdictCoreSkill.options'. There may be an object composition cycle in one or more of your serialized classes. Consider rearranging data or use `[SerializeReference]`. 
+
+Serialization hierarchy:
+11: Hellscript::EdictCoreSkill.options
+10: Hellscript::HuntEdictV2Document.skills
+9: Hellscript::ClassSkillLoadout.legacyEdict
+8: Hellscript::BuildConfig.classSkills
+7: Hellscript::TrainingAttempt.build
+6: Hellscript::TrainingComparisonRecord.a
+5: Hellscript::HeroSave.trainingComparison
+4: Hellscript::PuzzleLevelProgress.kitHero
+3: Hellscript::PuzzleProgress.levels
+2: Hellscript::TutorialSlot.puzzle
+1: Hellscript::AccountGuide.tutorialSlots
+0: Hellscript::AccountSave.guide
+
+]]></output>
+            </test-case>
+            <test-case id="1194" name="EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters" fullname="Hellscript.Tests.AspectStoneTests.EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters" methodname="EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters" classname="Hellscript.Tests.AspectStoneTests" runstate="Runnable" seed="2015265891" result="Passed" start-time="2026-10-14 03:52:07Z" end-time="2026-10-14 03:52:08Z" duration="0.179458" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

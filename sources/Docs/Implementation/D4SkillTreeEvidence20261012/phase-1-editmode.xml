@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Passed" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.6912173">
+  <test-suite type="TestSuite" id="1000" name="HELLSCRIPT" fullname="HELLSCRIPT" runstate="Runnable" testcasecount="6051" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.691217" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="7953" name="Hellscript.Tests.dll" fullname="/Users/t8g-2410-pn-005/Documents/Codex/2026-10-12/task-2/HELLSCRIPT/Library/ScriptAssemblies/Hellscript.Tests.dll" runstate="Runnable" testcasecount="6051" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.614519" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="75769" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="7954" name="Hellscript" fullname="Hellscript" runstate="Runnable" testcasecount="6051" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.539352" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="7955" name="Tests" fullname="Hellscript.Tests" runstate="Runnable" testcasecount="6051" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.462687" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="2353" name="SkillTreeD4DataTests" fullname="Hellscript.Tests.SkillTreeD4DataTests" classname="Hellscript.Tests.SkillTreeD4DataTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.041586" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="2355" name="AllGameRankValuesMatchTheIndependentGolden" fullname="Hellscript.Tests.SkillTreeD4DataTests.AllGameRankValuesMatchTheIndependentGolden" methodname="AllGameRankValuesMatchTheIndependentGolden" classname="Hellscript.Tests.SkillTreeD4DataTests" runstate="Runnable" seed="1444351398" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.020718" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[D4 rank value checks: 802
+]]></output>
+            </test-case>
+            <test-case id="2356" name="BadCatalogVersionAndMissingRanksAreRejected" fullname="Hellscript.Tests.SkillTreeD4DataTests.BadCatalogVersionAndMissingRanksAreRejected" methodname="BadCatalogVersionAndMissingRanksAreRejected" classname="Hellscript.Tests.SkillTreeD4DataTests" runstate="Runnable" seed="467815194" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.005638" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="2354" name="GameCatalogContainsAllNodesWithoutDesignAllocations" fullname="Hellscript.Tests.SkillTreeD4DataTests.GameCatalogContainsAllNodesWithoutDesignAllocations" methodname="GameCatalogContainsAllNodesWithoutDesignAllocations" classname="Hellscript.Tests.SkillTreeD4DataTests" runstate="Runnable" seed="716334709" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.008245" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="2357" name="SkillTreeD4RulesTests" fullname="Hellscript.Tests.SkillTreeD4RulesTests" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.351569" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="ParameterizedMethod" id="2361" name="AllSnapshotInvestmentsAndRefundsMatchTheGolden" fullname="Hellscript.Tests.SkillTreeD4RulesTests.AllSnapshotInvestmentsAndRefundsMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.259120" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2358" name="AllSnapshotInvestmentsAndRefundsMatchTheGolden(&quot;Warrior&quot;)" fullname="Hellscript.Tests.SkillTreeD4RulesTests.AllSnapshotInvestmentsAndRefundsMatchTheGolden(&quot;Warrior&quot;)" methodname="AllSnapshotInvestmentsAndRefundsMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" seed="842367155" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.082914" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Warrior snapshot checks: 9600
+]]></output>
+              </test-case>
+              <test-case id="2359" name="AllSnapshotInvestmentsAndRefundsMatchTheGolden(&quot;Ranger&quot;)" fullname="Hellscript.Tests.SkillTreeD4RulesTests.AllSnapshotInvestmentsAndRefundsMatchTheGolden(&quot;Ranger&quot;)" methodname="AllSnapshotInvestmentsAndRefundsMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" seed="1949684562" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.084830" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Ranger snapshot checks: 9600
+]]></output>
+              </test-case>
+              <test-case id="2360" name="AllSnapshotInvestmentsAndRefundsMatchTheGolden(&quot;Mage&quot;)" fullname="Hellscript.Tests.SkillTreeD4RulesTests.AllSnapshotInvestmentsAndRefundsMatchTheGolden(&quot;Mage&quot;)" methodname="AllSnapshotInvestmentsAndRefundsMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" seed="774166513" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.090803" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Mage snapshot checks: 9600
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="2365" name="RecordedRandomPointChangesMatchTheGolden" fullname="Hellscript.Tests.SkillTreeD4RulesTests.RecordedRandomPointChangesMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.091794" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="2362" name="RecordedRandomPointChangesMatchTheGolden(&quot;Warrior&quot;)" fullname="Hellscript.Tests.SkillTreeD4RulesTests.RecordedRandomPointChangesMatchTheGolden(&quot;Warrior&quot;)" methodname="RecordedRandomPointChangesMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" seed="656511569" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.031573" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Warrior replay checks: 1136
+]]></output>
+              </test-case>
+              <test-case id="2363" name="RecordedRandomPointChangesMatchTheGolden(&quot;Ranger&quot;)" fullname="Hellscript.Tests.SkillTreeD4RulesTests.RecordedRandomPointChangesMatchTheGolden(&quot;Ranger&quot;)" methodname="RecordedRandomPointChangesMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" seed="573289781" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.029846" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Ranger replay checks: 1136
+]]></output>
+              </test-case>
+              <test-case id="2364" name="RecordedRandomPointChangesMatchTheGolden(&quot;Mage&quot;)" fullname="Hellscript.Tests.SkillTreeD4RulesTests.RecordedRandomPointChangesMatchTheGolden(&quot;Mage&quot;)" methodname="RecordedRandomPointChangesMatchTheGolden" classname="Hellscript.Tests.SkillTreeD4RulesTests" runstate="Runnable" seed="1724829529" result="Passed" start-time="2026-10-12 13:57:31Z" end-time="2026-10-12 13:57:31Z" duration="0.029456" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Mage replay checks: 1136
+<b><color=#2EA3FF>MCP-FOR-UNITY</color></b>: [TestRunnerNoThrottle] Restored Interaction Mode after test run.
+Saving results to: /Users/t8g-2410-pn-005/Library/Application Support/DefaultCompany/HELLSCRIPT/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

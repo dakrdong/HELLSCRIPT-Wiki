@@ -59,7 +59,7 @@ namespace Hellscript
                 case "CONTROLLED":case "SLOW_TARGET":s.target="controlled";break;
                 case "NEW_DOT":case "POISONED":case "OWN_BLEED":case "BLEED_FINISH":s.target="status";break;
             }
-            if(!skill.legacy&&s.skill!="M13")return s;
+            if(!skill.legacy)return s;
             // Legacy presets own several options at once. Keep their authored scene choices explicit;
             // labels and numbers still come from the recipe/rule rather than guessed combat timings.
             string key=s.skill+"/"+preset;
@@ -76,8 +76,8 @@ namespace Hellscript
                 case "W03/charge":case "M03/charge":case "M06/charge":s.rule="CHARGE";break;
                 case "W04/interrupt":s.rule="WINDUP";s.target="casting";break;
                 case "W04/retreat":s.motion="retreat";s.rule="RETREAT";break;
-                case "W05/chain":case "M05/chain":s.rule="NO_SHIELD";break;
-                case "W05/emergency":case "M05/emergency":s.rule="EMERGENCY";break;
+                case "W05/chain":s.rule="NO_SHIELD";break;
+                case "W05/emergency":s.rule="EMERGENCY";break;
                 case "W06/resource":s.rule="LOW_RESOURCE";break;
                 case "W06/boss":s.target="elite";s.enemies=1;s.rule="ELITE";break;
                 case "A01/steady":case "M03/steady":s.enemies=1;s.target="single";s.rule="ANY";break;
@@ -94,8 +94,6 @@ namespace Hellscript
                 case "M04/sparse":s.rule="SPARSE";s.motion="retreat";break;
                 case "M06/here":s.rule="STAND";s.motion="none";break;
                 case "M06/approach":s.rule="GROUP";s.motion="center";s.enemies=4;break;
-                case "M13/hold":s.rule="HOLD";s.motion="none";s.value=.5f;break;
-                case "M13/retreat":s.rule="RETREAT_CHARGE";s.motion="retreat";s.value=.9f;break;
             }
             return s;
         }

@@ -90,7 +90,7 @@ namespace Hellscript.Tests
         {
             var account=ContentTestAccounts.Training();var sim=Start(account);sim.State.time=55;
             Assert.IsTrue(sim.EvaluateCondition(C("SC21",Comparison.AtMost,5),Make(0),null,out _));
-            var development=new CombatSimulation(account,catalog,1,0,seed:42);Assert.IsFalse(development.OwnedTraining);Assert.AreEqual(30,development.EffectiveLevel);Assert.AreEqual(300,development.TimeLimit);
+            var development=new CombatSimulation(account,catalog,1,0,seed:42);Assert.IsFalse(development.OwnedTraining);Assert.AreEqual(60,development.EffectiveLevel);Assert.AreEqual(300,development.TimeLimit);
             Assert.AreEqual(1,account.Hero.level);Assert.AreEqual(new HeroStats(account.Hero,true).hp,development.Stats.hp);
         }
         [Test]

@@ -1,0 +1,34 @@
+{
+  "phase": "UI-2",
+  "result": "passed",
+  "newGraphicsFocusedRun": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "finalGeometryChangedRange": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0
+  },
+  "priorSharedGraphicAndForgeRegressionCases": 8,
+  "meshAllocation": "zero managed GC after buffer/delegate creation; rounded/hex/circle, dashed borders, 3/5 rank arcs, all six line states, icon crops and partial overlays",
+  "fixes": [
+    "Mathf.Min params-array allocation removed",
+    "translucent round caps no longer overlap stroke body",
+    "hex glow follows the hex contour"
+  ],
+  "contractChecks": {
+    "static": "passed",
+    "regressionCases": 15,
+    "passed": 15
+  },
+  "renderEvidence": "Unity Camera sample plate; tone/blur shader compiled and rendered",
+  "notVerified": [
+    "full skill window",
+    "screen visual parity",
+    "real pointer input",
+    "native player",
+    "physical mobile"
+  ]
+}

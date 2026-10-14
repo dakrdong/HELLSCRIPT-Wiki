@@ -69,7 +69,7 @@ namespace Hellscript.Tests
             var sim=Fixture(2,2);sim.State.health=sim.Stats.hp*.4f;sim.State.resource=38;sim.State.cooldowns[13]=5;sim.State.potionCd=17;sim.State.channelTime=3;
             sim.State.heroAction=new HeroActionState{id=701,skill=12,phase=HeroActionPhase.Preparing,elapsed=.1f,prepare=.2f,cost=25};
             var snapshot=new DamageSnapshot{level=2,damage=31};sim.State.projectiles.Add(new CombatProjectile{id=800,actionId=700,definitionId="M01",snapshot=snapshot,remaining=8,speed=10,position=sim.State.position,direction=Vector2.up});
-            sim.State.shields.Add(new ShieldEffect{id=801,definitionId="M05",amount=40,remaining=3,createdMaxHp=sim.Stats.hp});
+            sim.State.shields.Add(new ShieldEffect{id=801,definitionId="M04:shield",amount=40,remaining=3,createdMaxHp=sim.Stats.hp});
             string action=JsonUtility.ToJson(sim.State.heroAction),projectile=JsonUtility.ToJson(sim.State.projectiles[0]),shield=JsonUtility.ToJson(sim.State.shields[0]);
             sim.State.pendingExperience=175;Flush(sim);Assert.AreEqual(3,sim.Hero.level);
             Assert.AreEqual(action,JsonUtility.ToJson(sim.State.heroAction));Assert.AreEqual(projectile,JsonUtility.ToJson(sim.State.projectiles[0]));Assert.AreEqual(shield,JsonUtility.ToJson(sim.State.shields[0]));
@@ -87,8 +87,8 @@ namespace Hellscript.Tests
         [Test]
         public void MaximumLevelConsumesPendingXpWithoutRepeatedGrowthOrHealing()
         {
-            var sim=Fixture(0,29);sim.State.health=sim.Stats.hp*.2f;sim.Hero.xp=Economy.XpRequired(29)-1;sim.State.pendingExperience=100000;Flush(sim);
-            Assert.AreEqual(30,sim.Hero.level);Assert.AreEqual(0,sim.Hero.xp);float hp=sim.State.health;sim.State.pendingExperience=1000;Flush(sim);
+            var sim=Fixture(0,59);sim.State.health=sim.Stats.hp*.2f;sim.Hero.xp=Economy.XpRequired(59)-1;sim.State.pendingExperience=100000;Flush(sim);
+            Assert.AreEqual(60,sim.Hero.level);Assert.AreEqual(0,sim.Hero.xp);float hp=sim.State.health;sim.State.pendingExperience=1000;Flush(sim);
             Assert.AreEqual(hp,sim.State.health);Assert.AreEqual(1,sim.State.growthEvents.Count);Assert.AreEqual(0,sim.State.pendingExperience);
         }
         [Test]
@@ -114,13 +114,13 @@ namespace Hellscript.Tests
                     // document's slots, and the stored build is that document's own projection.
                     var recommended=BehaviorPresets.ForLevel(hero.heroClass,0,1,catalog);
                     Assert.IsTrue(hero.useEdict);Assert.AreEqual(recommended.name,hero.build.name);
-                    CollectionAssert.AreEqual(recommended.activeSkills.Where(i=>catalog.skills[i].unlock<=1),hero.build.activeSkills);
+                    Assert.AreEqual(5,hero.build.classSkills.version);Assert.AreEqual(0,ClassSkillTree.Spent(hero.build.classSkills));Assert.IsEmpty(hero.build.activeSkills);CollectionAssert.AreEqual(new[]{"BASIC"},hero.build.classSkills.order);
                     CollectionAssert.AreEqual(hero.build.activeSkills.Select(CombatTelemetry.SkillId),hero.edict.slots.Where(s=>s!=""));
                     var projected=HuntEdictLoadout.FromHero(hero).ToBuild(hero.build);
                     CollectionAssert.AreEqual(projected.rules.Select(r=>r.id),hero.build.rules.Select(r=>r.id));
                     Assert.AreEqual(JsonUtility.ToJson(projected.skillRanks),JsonUtility.ToJson(hero.build.skillRanks));
                 }
-                store.Data.selectedHero=2;var custom=store.Data.Hero.build;custom.name="직접 만든 조건";custom.version="owner-saved";custom.rules.Single(r=>r.skill==12).enabled=false;custom.distance=9;
+                store.Data.selectedHero=2;var owner=store.Data.Hero;owner.level=3;var owned=ContentTestAccounts.OwnSkills(owner,catalog,"M01");owned=ClassSkillTree.Equip(owned,owner,"M01",0);owned.ProjectLegacy(owner.build,catalog);owner.edict=owned.ProjectEdict();var custom=owner.build;custom.name="직접 만든 조건";custom.version="owner-saved";custom.rules.Single(r=>r.skill==12).enabled=false;custom.distance=9;
                 string expected=JsonUtility.ToJson(custom);Assert.IsTrue(store.Save());var restored=new GameStore(directory,catalog);
                 Assert.AreEqual(expected,JsonUtility.ToJson(restored.Data.Hero.build));
             }

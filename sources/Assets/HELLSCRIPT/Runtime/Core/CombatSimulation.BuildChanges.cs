@@ -15,6 +15,7 @@ namespace Hellscript
             State=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(source.State));
             if(source.State.journal==null)State.journal=null;
             if(source.State.dps==null)State.dps=null;
+            if(source.State.classSkills?.action==null&&State.classSkills!=null)State.classSkills.action=null;
             Stats=source.baseStats;Map=new RiftNavigation(State.layout,savedRoutes:State.navigationRoutes);
         }
         BuildConfig ValidateBuildChange(BuildConfig requested)

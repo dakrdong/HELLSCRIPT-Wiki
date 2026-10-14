@@ -46,8 +46,12 @@ def save(path, obj):
         temporary.replace(path)
 
 def page_id(path):
-    if Path(path).as_posix().endswith('Docs/Art/ClassSetIcons/brief/README.md'):
-        return 'class-set-icons-brief'
+    path=Path(path);relative=path.relative_to(ROOT) if path.is_absolute() else path
+    existing={'Docs/Art/ClassSetIcons/brief/README.md':'class-set-icons-brief',
+              'Docs/Art/SkillExpansionBrief/README.md':'readme','Docs/Art/HuntEdict/README.en.md':'readme.en'}
+    if relative.as_posix() in existing:return existing[relative.as_posix()]
+    if path.stem.lower() in ('readme','readme.en'):
+        return relative.with_suffix('').as_posix().lower().replace('/','-').replace('_','-')
     return Path(path).stem.lower().removeprefix('hellscript_').replace('_', '-')
 
 def slug(text):
@@ -135,6 +139,17 @@ def table_rows(path):
             rows.setdefault(identifier, dict(cells=cells, fields=dict(zip(header,cells)), line=n, section=headings))
     return rows
 
+def current_skill_levels():
+    path='Assets/HELLSCRIPT/Resources/Data/SkillTreeD4.json'
+    levels={}
+    for cls in json.loads(read(path))['classes']:
+        gates={t['tier']:t['gate'] for t in cls['tiers']}
+        for active in cls['actives']:
+            levels[active['id']]=gates[active['tier']]+1
+            levels.update({m['id']:levels[active['id']] for m in active['modifiers']})
+        levels.update({p['id']:p['unlockLevel'] for p in cls['passives']})
+    return path,levels
+
 def build_databases():
     import yaml
     tables = table_rows(DESIGN + 'HELLSCRIPT_Content_Catalog.md')
@@ -144,8 +159,7 @@ def build_databases():
     asset_text = read(skills_path)
     asset = yaml.safe_load('\n'.join(x for x in asset_text.splitlines() if not x.startswith(('%', '---'))))['MonoBehaviour']['skills']
     definitions = {a[0]:(a,line) for a,line in constructors(catalog_path,'SkillDefinition')}
-    tree_path='Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json'
-    tree_levels={n['id']:n['level'] for c in json.loads(read(tree_path))['classes'] for n in c['nodes']}
+    tree_path,tree_levels=current_skill_levels()
     rows = []
     for s in asset:
         a, line = definitions[s['id']]
@@ -160,7 +174,7 @@ def build_databases():
         rows.append(record(s['id'],s['name'],CLASSES[s['heroClass']],s['description'],fields,skills_path,
                            next(i for i,x in enumerate(asset_text.splitlines(),1) if x.strip()=='- id: '+s['id']),
                            image={'file':'SkillAtlas.png','cell':s['icon']},refs=[source_ref(catalog_path,line),source_ref(tree_path)],related=['action-expansion','effect-expansion']))
-    data.append(db('skills','액티브 스킬','현재 에셋과 생성 코드가 일치하는 액티브 18종입니다. 수치는 개발 시험값입니다.',rows))
+    data.append(db('skills','보존된 스킬 카탈로그 18종','현재 D4 전투가 재사용하는 직렬화 프레임 18종입니다. 플레이 가능한 전체 스킬·보조 스킬·패시브는 스킬 능력 DB를 따릅니다.',rows))
     unlock_path = 'Assets/HELLSCRIPT/Resources/ContentUnlocks.json'
     unlocks = json.loads(read(unlock_path))
     unlock_rows = [record(f['id'],f['name'],'계정 공통',f['guide'],
@@ -174,7 +188,7 @@ def build_databases():
         identifier=['WP','AP','MP'][i//6]+f'{i%6+1:02}'
         rows.append(record(identifier,name,CLASSES[i//6],description,{'직업':CLASSES[i//6],'효과':description,'직업별 장착 한도':passive_slots},catalog_path,
                            read(catalog_path)[:read(catalog_path).index(json.dumps(description,ensure_ascii=False))].count('\n')+1,related=['passive-combat-detail','passive-expansion']))
-    data.append(db('passives','패시브','현재 게임 설명과 패시브 개발 기록을 연결합니다.',rows))
+    data.append(db('passives','보존된 패시브 카탈로그 18종','이전 패시브 설명과 개발 기록입니다. 현재 D4 패시브는 스킬 능력 DB를 따릅니다.',rows))
     rows=[]
     for i,key in enumerate(['WARRIOR','RANGER','MAGE']):
         t=tables[key]; rows.append(record(key,CLASSES[i],CLASSES[i],t['cells'][-1],t['fields'],DESIGN+'HELLSCRIPT_Content_Catalog.md',t['line'],status='기획·구현 기록',image={'file':'SkillAtlas.png','cell':18+i},related=['unity-implementation-plan','player-training-detail']))
@@ -689,29 +703,28 @@ def build_resources(databases):
 
 def build_class_abilities():
     path='Assets/HELLSCRIPT/Resources/Data/ClassSkills.json'
-    tree_path='Assets/HELLSCRIPT/Resources/Data/ClassSkillTree.json'
-    tree_levels={n['id']:n['level'] for c in json.loads(read(tree_path))['classes'] for n in c['nodes']}
-    content=json.loads(read(path));status='능력 구현 · UI 공개 대기'
-    categories={'active':'일반 액티브','passive':'패시브','ultimate':'궁극기'}
+    tree_path,tree_levels=current_skill_levels()
+    content=json.loads(read(path));status='현재 D4 정의'
+    categories={'active':'일반 액티브','modifier':'보조 스킬','passive':'패시브','ultimate':'궁극기'}
     skills=[record(row['id'],row['name'],CLASSES[row['heroClass']]+' · '+categories[row['category']],row['description'],
         {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'해금 레벨':tree_levels[row['id']],'이전 구성 해금 레벨':row['unlock'],'목록 순서':row['order'],'최대 투자 등급':row['maxRank'],
-         '자동 조건':row['automatic'],'Automatic condition':row['automaticEn'],'수치':{p['key']:p['value'] for p in row['parameters']},
-         '일반 플레이 활성화':content['playerEnabled'],'기존 기술':row['legacy']},path,status=status,refs=[source_ref(tree_path)],related=['class-skill-runtime']) for row in content['skills']]
+         '자동 조건':row.get('automatic',''),'Automatic condition':row.get('automaticEn',''),'수치':{p['key']:p['value'] for p in row['parameters']},
+         '일반 플레이 활성화':True,'기존 기술':row['legacy']},path,status=status,refs=[source_ref(tree_path)],related=['class-skill-runtime']) for row in content['skills']]
     gear=[record(row['id'],row['name'],'신규 세트 장비' if row['setId'] else '신규 전설',row['description'],
         {'영어 이름':row['nameEn'],'English description':row['descriptionEn'],'직업':CLASSES[row['heroClass']],'부위':SLOTS[row['slot']],
-         '세트 ID':row['setId'],'일반 드롭 등록':False,'드롭 가중치':'미정'},path,status=status,related=['class-skill-runtime']) for row in content['gear']]
+         '세트 ID':row['setId'],'일반 드롭 등록':False,'드롭 가중치':0},path,status=status,related=['class-skill-runtime']) for row in content['gear']]
     bonuses=[record(row['id'],row['setId']+' · '+str(row['count'])+'세트','세트 효과',row['description'],
         {'세트 ID':row['setId'],'필요한 서로 다른 장비 수':row['count'],'English description':row['descriptionEn'],
          '수치':{p['key']:p['value'] for p in row['parameters']}},path,status=status,related=['class-skill-runtime']) for row in content['bonuses']]
     options=[record(option['id']+':'+choice['id'],option['name']+' · '+choice['name'],'스킬 사용 규칙',choice['benefit'],
         {'스킬 ID':option['skillId'],'옵션 ID':option['id'],'선택 값':choice['id'],'영어 이름':choice['nameEn'],
          '얻는 이득':choice['benefit'],'Gain':choice['benefitEn'],'감수할 손해':choice['cost'],'Cost':choice['costEn'],
-         '관찰 지표':option['metrics'],'기본 선택':choice['id']==option['initial'],'일반 플레이 활성화':False},path,status=status,related=['class-skill-use-policies','class-skill-runtime'])
+         '관찰 지표':option['metrics'],'기본 선택':choice['id']==option['initial'],'일반 플레이 활성화':True},path,status=status,related=['class-skill-use-policies','class-skill-runtime'])
         for option in content.get('options',[]) for choice in option['choices']]
-    return [db('class-abilities','스킬 능력 108종','직업별 36종의 실행 데이터입니다. 새 기술과 40레벨 성장은 개발 검증용 계정에서만 활성화됩니다.',skills),
+    return [db('class-abilities','현재 D4 스킬 능력 144종','직업별 액티브·궁극기 10종, 보조 스킬 28종, 패시브 10종입니다. 현재 60레벨 트리와 실제 장비 연결을 사용합니다.',skills),
             db('class-ability-gear','스킬 연계 신규 장비','신규 전설 18종과 신규 세트 장비 105개입니다. 일반 드롭은 아직 활성화하지 않았습니다.',gear),
             db('class-set-bonuses','신규 세트 효과 60단계','실제 장착 수에 따라 적용하는 신규 세트 24종의 효과입니다.',bonuses),
-            db('class-skill-options','스킬 사용 선택지 164개','사용 시점·대상·위치·대기의 이득과 손해를 비교하는 55개 옵션 묶음입니다.',options)]
+            db('class-skill-options','현재 스킬 사용 선택지 '+str(len(options))+'개','현재 스킬의 사용 시점·대상·위치·대기를 비교하는 '+str(len(content.get('options',[])))+'개 옵션 묶음입니다.',options)]
 
 def build_edict_disclosures():
     path='Assets/HELLSCRIPT/Resources/HuntEdictProgression.json'
@@ -926,6 +939,12 @@ def link_target(target, source, page_paths):
     # Retain the retired v3 runner for immutable history links without putting it back in the game.
     if dest=='Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTutorialSmoke.Progression.cs' and not (ROOT/dest).exists():
         dest='Docs/Implementation/TutorialReplaySmokeEvidence20261005/RuntimeTutorialSmoke.Progression.cs.txt'
+    archive_root='Docs/Implementation/D4LegacyArchive20261013/'
+    if not (ROOT/dest).exists() and source.startswith(archive_root):
+        return link_target(target,source[len(archive_root):],page_paths)
+    archived=archive_root+dest
+    if not (ROOT/dest).exists() and (ROOT/archived).is_file():
+        dest=archived
     if dest in page_paths:
         return '#/page/'+page_paths[dest]+('?section='+quote(fragment) if fragment else '')
     if (ROOT/dest).is_dir(): return None
@@ -999,7 +1018,7 @@ def build_pages():
     if len(set(paths.values()))!=len(paths):raise ValueError('Duplicate page ID')
     for file in files:
         path=str(file.relative_to(ROOT));body=read(path);ident=paths[path]
-        title=next(x[2:] for x in body.splitlines() if x.startswith('# '))
+        title=next((x[2:] for x in body.splitlines() if x.startswith('# ')),file.stem.replace('_',' '))
         default_summary=DEV_SUMMARY.get(ident.removesuffix('-expansion'),'원본의 정책·구현 범위와 검증 내용을 보존합니다.')
         category,short,summary=PAGE_META.get(ident,('후속 개발 기록',title.removeprefix('HELLSCRIPT '),default_summary))
         public=path.startswith('Wiki/public-content/')

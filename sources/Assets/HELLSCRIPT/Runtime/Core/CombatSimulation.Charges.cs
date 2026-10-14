@@ -79,7 +79,7 @@ namespace Hellscript
             a.travelStarted=true;a.phase=HeroActionPhase.Travelling;
             if(a.skill==1&&Stats.SetPieces("SW")>=4&&ItemEffects.whirlwindCharge>0)
             {a.whirlwindReserved=true;ItemEffects.whirlwindCharge=0;EffectEvent("SW4","RESERVED",root:a.id);}
-            if(a.skill==9&&Stats.specials.Contains("LA03")&&(a.policy?.retreatTrapEquipped??State.build.activeSkills.Contains(8)))
+            if(a.skill==9&&!D4Combat&&Stats.specials.Contains("LA03")&&(a.policy?.retreatTrapEquipped??State.build.activeSkills.Contains(8)))
                 a.retreatTrapId=CreateTrap(new HeroActionState{id=a.id,skill=9,snapshot=CaptureDamage()},a.origin,3)?.id??0;
             ActionEvent(a,"ACTION_TRAVEL","이동 시작");return true;
         }

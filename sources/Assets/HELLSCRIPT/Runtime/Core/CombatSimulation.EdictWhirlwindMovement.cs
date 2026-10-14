@@ -26,7 +26,7 @@ namespace Hellscript
                 goal=EdictPackCenterGoal(d,values,target,seen);
             }
             else if(movement=="FOLLOW")
-            {if(distance<=2.4f)return true;goal=target.position+delta.normalized*2.3f;}
+            {float radius=D4Combat?RuneSkillRadius(0,2.5f)*ClassArea(action.id):2.5f;if(distance<=radius-.1f)return true;goal=target.position+delta.normalized*(radius-.2f);}
             else
             {
                 float desired=EdictDistance(values);string global=values["position.mode"];

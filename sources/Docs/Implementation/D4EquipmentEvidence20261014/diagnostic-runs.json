@@ -1,0 +1,76 @@
+{
+  "scope": "Focused diagnostic/repair runs; overlaps must not be added to the final whole-suite count.",
+  "runs": [
+    {
+      "file": "focused-current-gear.xml",
+      "total": 30,
+      "passed": 17,
+      "failed": 13,
+      "sha256": "78a4fc4aa9f71b93a800ebc81c92fee68f907a3f17f13a4d5a6295160bb7554f",
+      "failedCases": [
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearDebtOathUsesActualResourceInsteadOfRetiredLoans",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFireballEchoUsesEveryCurrentShapeAndCannotRecurse(1)",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrostSnareCombinesWithEquippablePoisonImbuement",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrozenSpearEnablesReturningFrostOncePerCast",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearGiantFormRestoresResourceOnceOnItsFirstRealHit",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(0)",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(1)",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(2)",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearImbuementSpreadPreservesItsElementAndNeverChains(3)",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearPendingEchoResumesDeterministicallyAndKeepsTheItemIdentity",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearSpearWithinWardAndConduitWithinOrbHaveRealOwners",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearUltimateCoversRainAndCurrentShadowCloneHits"
+      ]
+    },
+    {
+      "file": "failed-current-gear-repair.xml",
+      "total": 16,
+      "passed": 12,
+      "failed": 4,
+      "sha256": "0dd86b4a5c2f1d87347fe875924a74050de82a139fd8d4d6017df2303dd5a14e",
+      "failedCases": [
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearDebtOathUsesActualResourceInsteadOfRetiredLoans",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrostSnareCombinesWithEquippablePoisonImbuement",
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFrozenSpearEnablesReturningFrostOncePerCast"
+      ]
+    },
+    {
+      "file": "failed-gear-final-repair.xml",
+      "total": 4,
+      "passed": 3,
+      "failed": 1,
+      "sha256": "762723fd23f4a7084353af38de48feee81318f97da5d248de71725c0e61511ee",
+      "failedCases": [
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearFirewallSpearAndMagneticConduitUseCurrentModifiers"
+      ]
+    },
+    {
+      "file": "failed-magnetic-repair.xml",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "sha256": "1bd79b1d1571d5e0ba50bc4b8fc6c33986ce2465b3d199dff31b6c9cff1170e4",
+      "failedCases": []
+    },
+    {
+      "file": "narrowed-line.xml",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "sha256": "11fdd26a72ab02f3b541dababe79f37c75a1992c269f4f58c4ab1ffc3910daf2",
+      "failedCases": [
+        "Hellscript.Tests.SkillTreeD4CombatCoreTests.GearNarrowedLineAppliesToAllSevenBarrageArrows"
+      ]
+    },
+    {
+      "file": "narrowed-line-repair.xml",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "sha256": "de2f24ce421810f4a8f359ad73f0fccb665b319cbbe2a5b6999a2504f1d34011",
+      "failedCases": []
+    }
+  ]
+}

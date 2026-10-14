@@ -1,0 +1,256 @@
+{
+  "subject": "male warrior hero (style D model sheet, front view crop) - first Hunyuan3D test for the casual art concept",
+  "date": "2026-10-13",
+  "input": {
+    "file": "Docs/Art/CasualConcept/2026-10-13/Characters/HunyuanInput/warrior_m_front.png",
+    "source": "crop of Characters/sheet_1_warrior_m.png (front view)",
+    "uploadedBy": "user, by hand in the in-app browser"
+  },
+  "hunyuan": {
+    "site": "hy3d.tencent.ai",
+    "mode": "Image-to-3D, Single Image, PBR",
+    "modelType": "image2ModelV3.1",
+    "sceneVersion": "3.1",
+    "faceCountRequested": 1500000,
+    "facesReported": 1499462,
+    "verticesReported": 918485,
+    "creationsId": "2168d6bd-e24e-4062-b45b-d11738492c42",
+    "taskId": "r_7946da55c6d311f1863a52540029da29",
+    "submittedAt": 1791874699,
+    "finishedAt": 1791874914,
+    "quotaAfter": "19/20",
+    "objects": {
+      "textureGlb": "hunyuan3d/default/f7a8f18a-c6d3-11f1-8430-5254001fa3e3/45fc6a6d4b136a39cd3b57177889f924.glb",
+      "geometryGlb": "hunyuan3d/default/5be94290fff84bbd903d52e23f01817d.glb",
+      "preview": "hunyuan3d/default/f7a8f18a-c6d3-11f1-8430-5254001fa3e3/79df0e4ca290409b54ef33cf45267840.png"
+    },
+    "productionApproved": false,
+    "licenceNote": "Tencent HY 3D terms: public distribution approval still open (same as the town/monster models)"
+  },
+  "downloads": {
+    "warrior_m_textured.glb": {
+      "bytes": 80272404,
+      "sha256": "e5153985f1221151e52263f5ce210550f536ca94bc6223174fee2dd28f32830c"
+    },
+    "warrior_m_preview.png": {
+      "bytes": 99079,
+      "sha256": "f5ccdcd55e6c32728d703059639ff0ecfb069381ac9fc8da35fa6baa87909692"
+    },
+    "location": "AssetDeliverables/Hunyuan/2026-10-13/heroes/ (outside git)"
+  },
+  "gameTierBake": {
+    "tool": "tools/hunyuan_monster_ready.py --id HW01 --archetype Biped --height 1.8",
+    "blender": "5.2.0 LTS",
+    "seconds": 90.6,
+    "verdict": "PASS",
+    "gates": [
+      {
+        "gate": "LOD0 triangles",
+        "value": 6000,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 UV overlap %",
+        "value": 0.111,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 texture coverage %",
+        "value": 34.78,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 texture not blank",
+        "value": [
+          0.309,
+          0.296,
+          0.309
+        ],
+        "ok": true
+      },
+      {
+        "gate": "LOD1 triangles",
+        "value": 3000,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 UV overlap %",
+        "value": 0.127,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 texture coverage %",
+        "value": 40.9,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 texture not blank",
+        "value": [
+          0.309,
+          0.298,
+          0.313
+        ],
+        "ok": true
+      },
+      {
+        "gate": "LOD2 triangles",
+        "value": 1500,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 UV overlap %",
+        "value": 0.189,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 texture coverage %",
+        "value": 41.86,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 texture not blank",
+        "value": [
+          0.311,
+          0.293,
+          0.298
+        ],
+        "ok": true
+      },
+      {
+        "gate": "LOD0 unweighted vertices",
+        "value": 0,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 max influences",
+        "value": 2,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 share torn loose from the body (robe feet excepted)",
+        "value": 0.0302,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 heat-weight fallback share",
+        "value": 25,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 unweighted vertices",
+        "value": 0,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 max influences",
+        "value": 2,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 share torn loose from the body (robe feet excepted)",
+        "value": 0.0379,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 heat-weight fallback share",
+        "value": 0,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 unweighted vertices",
+        "value": 0,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 max influences",
+        "value": 2,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 share torn loose from the body (robe feet excepted)",
+        "value": 0.047,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 heat-weight fallback share",
+        "value": 0,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 max edge extension m (Windup)",
+        "value": 0.2037,
+        "ok": true
+      },
+      {
+        "gate": "LOD0 max torn-seam gap at a joint m",
+        "value": 0.0,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 max edge extension m (Windup)",
+        "value": 0.1897,
+        "ok": true
+      },
+      {
+        "gate": "LOD1 max torn-seam gap at a joint m",
+        "value": 0.0,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 max edge extension m (Windup)",
+        "value": 0.1619,
+        "ok": true
+      },
+      {
+        "gate": "LOD2 max torn-seam gap at a joint m",
+        "value": 0.0,
+        "ok": true
+      },
+      {
+        "gate": "right bone on +X",
+        "value": 0.4094,
+        "ok": true
+      },
+      {
+        "gate": "back bone behind -Z",
+        "value": -0.2199,
+        "ok": true
+      },
+      {
+        "gate": "shoulder/leg pivot symmetry (fraction of height)",
+        "value": 0.1439,
+        "ok": true
+      },
+      {
+        "gate": "no ground base left (flat ground area / ankle-band box)",
+        "value": 0.499,
+        "ok": true
+      },
+      {
+        "gate": "motion bounds sane",
+        "value": [
+          [
+            -1.2519,
+            -0.5479,
+            -1.8457
+          ],
+          [
+            1.1236,
+            2.4577,
+            1.0663
+          ]
+        ],
+        "ok": true
+      }
+    ],
+    "notes": [
+      "leg R not found: template leg (monster pivot rig; heroes will need a humanoid rig later)",
+      "LOD0 6000 tris / 512 px A,C,N,ORM; LOD1 3000; LOD2 1500"
+    ],
+    "outputs": "AssetDeliverables/Hunyuan/2026-10-13/heroes/work_HW01/ (outside git)"
+  },
+  "evidenceInRepo": [
+    "Characters/HunyuanTest/warrior_m_preview.png",
+    "Characters/HunyuanTest/warrior_m_HW01_contact_sheet.png"
+  ]
+}

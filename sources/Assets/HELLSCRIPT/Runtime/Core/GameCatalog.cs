@@ -124,8 +124,10 @@ namespace Hellscript
         public RiftEntryProgress riftProgress=new RiftEntryProgress();
         public SlotProgress slotProgress=new SlotProgress();
         public bool classSkillValidation;
+        public D4SkillRefundNotice d4SkillRefund;
         public float classUltimateRemaining,classUltimateTotal;
         public EquipmentShopState equipmentShop=new EquipmentShopState();
+        public RiftGearOfferSettings riftGearOffer=new RiftGearOfferSettings();
         public int legacyPassiveSlots;
         public PotionInventory potions=new PotionInventory();
         public TrainingComparisonRecord trainingComparison;
@@ -237,6 +239,8 @@ namespace Hellscript
         public bool boss, add, dead,pendingDeath,goblin;
         public bool runeRewardRolled;
         public int pattern;
+        public int d4ColdStacks,d4Elements;
+        public float d4Shatter,d4ElementUntil,d4BlizzardDwell;
         public float setPoisonTime, setPoisonTick, frostMarkTime, frostCooldown;
         public float trapTick=.5f,blizzardTick=.5f,freeze,root;
         public int setPoisonRoot,setPoisonInstance;
@@ -258,6 +262,8 @@ namespace Hellscript
         public string definitionId,casterId;
         public float moved,exposureTick,createdAt;
         public bool followsTarget;
+        public int d4Modifier,d4ModifierRank;
+        public string d4Source;
         public int id, kind;
         public Vector2 position, end;
         public float radius, delay, duration, tick, damage;
@@ -276,10 +282,10 @@ namespace Hellscript
         public string[] legendaryPowers;
         public float[] legendaryDamage;
         public float[] runeV13;
-        public float[] runeSkillPower;
+        public float[] runeSkillPower,d4BasePower;
         public float[] runeBonuses;
         public float damage, bonus, crit, critDamage;
-        public int level;
+        public int level,d4ModifierMask;
         public float[] elements;
         public bool[] passives;
         public int[] ranks;
@@ -308,7 +314,7 @@ namespace Hellscript
         public int chainCharges;
     }
     [Serializable]
-    public sealed class DropState { public RiftLootSource source;public RiftLootOutcome outcome; public int id; public Vector2 position; public Item item; public bool ignored, claimed, discovered; public bool gearRecommended,gearHandled; }
+    public sealed class DropState { public RiftLootSource source;public RiftLootOutcome outcome; public int id; public Vector2 position; public Item item; public bool ignored, claimed, discovered; public bool gearRecommended,gearHandled;public int gearOrder; }
     [Serializable]
     public sealed class RunState
     {
@@ -481,7 +487,7 @@ namespace Hellscript
                 new SkillDefinition("M02","눈보라",HeroClass.Mage,SkillKind.Blizzard,1,6,30,.65f,10,3,6,13,"6초간 냉기 피해와 35% 둔화. 최대 2개."),
                 new SkillDefinition("M03","연쇄 번개",HeroClass.Mage,SkillKind.Chain,1,2,25,1.1f,10,4,.45f,14,"4명에게 번개를 연결합니다. 다음 타격마다 ×0.8."),
                 new SkillDefinition("M04","순간이동",HeroClass.Mage,SkillKind.Teleport,5,9,0,0,8,0,.2f,15,"위험이 낮은 유효한 지점으로 이동합니다."),
-                new SkillDefinition("M05","원소 보호막",HeroClass.Mage,SkillKind.Shield,15,14,0,0,0,0,4,16,"최대 HP 35% 보호막을 4초 유지합니다."),
+                new SkillDefinition("M04-3","원소 보호막",HeroClass.Mage,SkillKind.Shield,15,14,0,0,0,0,4,16,"최대 HP 35% 보호막을 4초 유지합니다."),
                 new SkillDefinition("M06","서리 폭발",HeroClass.Mage,SkillKind.Nova,20,10,20,1,3,3,.35f,17,"주변 적에게 냉기 피해와 1.5초 빙결."),
             };
         }

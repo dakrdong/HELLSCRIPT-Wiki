@@ -13,17 +13,12 @@ namespace Hellscript
         }
         void TickPassiveBuffs(float dt)
         {
-            TickPassiveBuff(ref ItemEffects.leapDefense,dt,"WP03");
-            TickPassiveBuff(ref ItemEffects.moveBuff,dt,"AP02");
+            TickPassiveBuff(ref ItemEffects.leapDefense,dt,"W02");
             TickPassiveBuff(ref ItemEffects.elementBuff,dt,"MP06");
         }
         void LandingPassives(HeroActionState action)
         {
             ClassLanding(ClassSkills.LegacyId(action.skill),action.id);
-            if(action.skill==1&&Hero.heroClass==HeroClass.Warrior&&Stats.passives[2])
-            {leapDefense=2;EffectEvent("WP03","BUFF",root:action.id,value:2);}
-            if(action.skill==9&&Hero.heroClass==HeroClass.Ranger&&Stats.passives[1])
-            {moveBuff=2;EffectEvent("AP02","BUFF",root:action.id,value:2);}
         }
         void ApplyKillHealing(int deaths)
         {
@@ -45,8 +40,7 @@ namespace Hellscript
         }
         void ResetUnavailablePassives()
         {
-            if(Hero.heroClass!=HeroClass.Warrior||!Stats.passives[2])RemovePassiveBuff(ref ItemEffects.leapDefense,"WP03");
-            if(Hero.heroClass!=HeroClass.Ranger||!Stats.passives[1])RemovePassiveBuff(ref ItemEffects.moveBuff,"AP02");
+            if(D4Combat)foreach(var enemy in State.enemies){if(!Passive("MP20"))enemy.d4Shatter=0;if(!Passive("MP21")){enemy.d4Elements=0;enemy.d4ElementUntil=0;}}
             if(Hero.heroClass!=HeroClass.Mage||!Stats.passives[5])
             {
                 RemovePassiveBuff(ref ItemEffects.elementBuff,"MP06");

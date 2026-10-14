@@ -184,8 +184,8 @@
       "affectedSkill": "W02",
       "reference": "Bear Clan Berserker's Aspect",
       "referenceUrl": "https://d4builds.gg/database/legendary-aspects/",
-      "description": "도약 내려찍기 적중 시, 자신의 3m 안에 살아 있는 적이 3명 이상이면, 장착한 도약 내려찍기의 남은 쿨타임을 2초 줄입니다. 재발동 간격은 4초입니다.",
-      "descriptionEn": "On Leap hit, with at least 3 living enemies within 3m of you, reduce equipped Leap's remaining cooldown by 2s. Internal cooldown: 4s."
+      "description": "도약 내려찍기 적중 시, 자신의 3m 안에 살아 있는 적이 3명 이상이면, 장착한 도약 내려찍기의 남은 쿨타임을 2초 줄입니다. 연속 도약은 다음 충전 시간을 줄입니다. 재발동 간격은 4초입니다.",
+      "descriptionEn": "On Leap hit, with at least 3 living enemies within 3m of you, reduce equipped Leap's remaining cooldown by 2s. Internal cooldown: 4s. For Double Leap, reduces the next recharge time instead."
     },
     {
       "id": "LW13",
@@ -1518,8 +1518,8 @@
       "affectedSkill": "*",
       "reference": "Aspect of Unstable Imbuements",
       "referenceUrl": "https://d4builds.gg/database/legendary-aspects/",
-      "description": "그림자 화살 효과 실행 시, 자신 중심 3m 안의 적 최대 5명에게 D70%의 추가 어둠 피해를 줍니다. 재발동 간격은 6초입니다.",
-      "descriptionEn": "On Shadow Arrow release, deal D70% extra Shadow damage to up to 5 enemies within 3m of you. Internal cooldown: 6s."
+      "description": "원소 주입 효과 실행 시, 자신 중심 3m 안의 적 최대 5명에게 D70%의 추가 어둠 피해를 줍니다. 재발동 간격은 6초입니다.",
+      "descriptionEn": "On Elemental Imbuement release, deal D70% extra Shadow damage to up to 5 enemies within 3m of you. Internal cooldown: 6s."
     },
     {
       "id": "LA35",
@@ -1541,8 +1541,8 @@
       "affectedSkill": "A06",
       "reference": "Aspect of Bitter Infection",
       "referenceUrl": "https://d4builds.gg/database/legendary-aspects/",
-      "description": "대상이 중독 상태이면, 그림자 화살 피해가 별도 전설 가산으로 40% 증가합니다.",
-      "descriptionEn": "Against a poisoned target, Shadow Arrow damage gains +40% in the legendary damage pool."
+      "description": "대상이 중독 상태이면, 원소 주입 피해가 별도 전설 가산으로 40% 증가합니다.",
+      "descriptionEn": "Against a poisoned target, Elemental Imbuement damage gains +40% in the legendary damage pool."
     },
     {
       "id": "LA36",
@@ -1564,8 +1564,8 @@
       "affectedSkill": "*",
       "reference": "Aspect of Crippling Darkness",
       "referenceUrl": "https://d4builds.gg/database/legendary-aspects/",
-      "description": "그림자 화살 적중 시, 적중 대상에게 1초 동안 속박을 적용합니다. 재발동 간격은 4초입니다.",
-      "descriptionEn": "On Shadow Arrow hit, apply root to the hit target for 1s. Internal cooldown: 4s."
+      "description": "원소 주입 적중 시, 적중 대상에게 1초 동안 속박을 적용합니다. 재발동 간격은 4초입니다.",
+      "descriptionEn": "On Elemental Imbuement hit, apply root to the hit target for 1s. Internal cooldown: 4s."
     },
     {
       "id": "LA37",
@@ -1587,8 +1587,8 @@
       "affectedSkill": "*",
       "reference": "Aspect of Alchemical Advantage",
       "referenceUrl": "https://d4builds.gg/database/legendary-aspects/",
-      "description": "그림자 화살 적중 시, 4초 동안 새로 시작하는 공격의 속도 보너스가 12%p 증가합니다. 회오리·장판 틱 간격은 바뀌지 않습니다. 재발동 간격은 5초입니다.",
-      "descriptionEn": "On Shadow Arrow hit, gain 12 percentage points of attack speed for new attacks for 4s. Channel and field tick intervals are unchanged. Internal cooldown: 5s."
+      "description": "원소 주입 적중 시, 4초 동안 새로 시작하는 공격의 속도 보너스가 12%p 증가합니다. 회오리·장판 틱 간격은 바뀌지 않습니다. 재발동 간격은 5초입니다.",
+      "descriptionEn": "On Elemental Imbuement hit, gain 12 percentage points of attack speed for new attacks for 4s. Channel and field tick intervals are unchanged. Internal cooldown: 5s."
     },
     {
       "id": "LA38",
@@ -2241,7 +2241,7 @@
       "heroClass": 2,
       "slot": 5,
       "weight": 20,
-      "skill": "M05",
+      "skill": "M04-3",
       "trigger": "Cast",
       "effect": "Heal",
       "amount": 0.06,
@@ -2264,7 +2264,7 @@
       "heroClass": 2,
       "slot": 3,
       "weight": 20,
-      "skill": "M05",
+      "skill": "M04-3",
       "trigger": "Cast",
       "effect": "Empower",
       "amount": 0.3,
@@ -2310,7 +2310,7 @@
       "heroClass": 2,
       "slot": 5,
       "weight": 20,
-      "skill": "M05",
+      "skill": "M04-3",
       "trigger": "Cast",
       "effect": "Slow",
       "amount": 0.5,

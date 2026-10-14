@@ -80,7 +80,7 @@ namespace Hellscript.Tests
         }
         [Test]public void BossRewardPaysOnceAndFirstClearBelongsToEachHero()
         {
-            var a=GameStore.NewAccount();
+            var a=ContentTestAccounts.Legacy();
             for(int hero=0;hero<2;hero++)
             {
                 a.selectedHero=hero;var sim=new CombatSimulation(a,catalog,1);sim.State.enemies.Clear();sim.State.phase=RunPhase.Boss;

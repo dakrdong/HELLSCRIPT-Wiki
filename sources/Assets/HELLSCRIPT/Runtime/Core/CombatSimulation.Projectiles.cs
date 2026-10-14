@@ -11,7 +11,7 @@ namespace Hellscript
         CombatProjectile Shot(HeroActionState action,Vector2 direction,float range,float speed,float radius,float coefficient,int element,int maxHits=1)
         {
             var p=new CombatProjectile{id=State.nextId++,actionId=action.id,skill=action.skill,origin=action.origin,position=action.origin,direction=direction.normalized,
-                remaining=range,speed=speed,radius=radius,coefficient=coefficient,element=element,maxHits=maxHits,createdAt=State.time,snapshot=action.snapshot};
+                remaining=range,speed=speed,radius=radius,coefficient=coefficient,element=element,maxHits=maxHits,createdAt=State.time,snapshot=action.snapshot,imbueRoot=D4Combat?CS.imbueCastRoot:0};
             State.projectiles.Add(p);return p;
         }
         void LaunchBasicProjectile(HeroActionState action)
@@ -77,13 +77,15 @@ namespace Hellscript
                     {
                         if(hit.enemy.dead)continue;p.position=Vector2.Lerp(from,to,hit.t);
                         if(p.explosionRadius>0){FireballImpact(p);remove=true;break;}
-                        var group=State.projectileGroups.Find(g=>g.actionId==p.actionId);var victim=group?.victims.Find(v=>v.id==hit.enemy.id);
+                        var group=p.extra&&p.definitionId=="EXTRA:A02"?null:State.projectileGroups.Find(g=>g.actionId==p.actionId);var victim=group?.victims.Find(v=>v.id==hit.enemy.id);
                         bool allowed=group==null||victim==null||victim.hits<group.maxPerVictim;
                         if(allowed)
                         {
                             if(group!=null){if(victim==null){victim=new ProjectileVictim{id=hit.enemy.id};group.victims.Add(victim);}victim.hits++;}
                             bool poisoned=CombatEffects.OwnTrapPoison(hit.enemy,State.heroId);float extra=p.skill==6&&!p.extra&&Stats.specials.Contains("LA01")?AspectGrowth.SnapshotValue(p.snapshot,"LA01",Mathf.Min(.6f,p.hitIds.Count*.15f)):0;
-                            Hit(hit.enemy,p.coefficient,p.element,!p.extra,extra+(!p.extra&&runeTargets.TryGetValue(p.actionId,out int multi)?RuneMultiBonus(p.snapshot,multi):0),p.snapshot,true,p.shadow,p.extra?"SAB4":SkillId(p.skill),p.actionId,p.id,p.extra?DamageKind.Set:p.skill<0?DamageKind.Basic:DamageKind.Direct,true,hit.enemy.position-p.direction);
+                            if(D4Combat&&Hero.heroClass==HeroClass.Ranger)extra+=D4ProjectileBonus(p,victim);
+                            Hit(hit.enemy,p.coefficient,p.element,!p.extra,extra+(!p.extra&&runeTargets.TryGetValue(p.actionId,out int multi)?RuneMultiBonus(p.snapshot,multi):0),p.snapshot,!D4Combat||!p.extra,p.shadow,(string.IsNullOrEmpty(p.definitionId)?p.extra?"SAB4":SkillId(p.skill):p.definitionId),p.actionId,p.id,p.extra?DamageKind.Set:p.skill<0?DamageKind.Basic:DamageKind.Direct,true,hit.enemy.position-p.direction,modifierValue:p.modifierValue,imbueRoot:p.imbueRoot);
+                            if(D4Combat&&Hero.heroClass==HeroClass.Ranger)BounceD4Multi(p,hit.enemy);
                             if(p.skill<0)BasicResource(hit.enemy.id,p.actionId,p.snapshot);
                             if(p.skill==6&&!p.extra&&poisoned&&Stats.SetPieces("SA")>=4&&!hit.enemy.dead)
                                 ApplySetPoison(hit.enemy,p);
@@ -92,7 +94,7 @@ namespace Hellscript
                         if(State.phase==RunPhase.Looting||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)break;
                     }
                 }
-                if(!remove){p.remaining=Mathf.Max(0,p.remaining-Vector2.Distance(from,to));p.position=to;remove=wall||p.remaining<.0001f;if(remove&&p.explosionRadius>0)FireballImpact(p);}
+                if(!remove){p.remaining=Mathf.Max(0,p.remaining-Vector2.Distance(from,to));p.position=to;bool reflected=D4Combat&&!p.hostile&&wall&&ReflectD4Projectile(p,to);remove=wall&&!reflected||p.remaining<.0001f;if(remove&&p.explosionRadius>0)FireballImpact(p);}
                 if(remove&&p.hostile)DataProjectileImpact(p);
                 if(remove)State.projectiles.Remove(p);
                 if(State.phase==RunPhase.Looting||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)break;
@@ -125,12 +127,20 @@ namespace Hellscript
             {
                 if(trap.createdAt>=State.time-.00001f)continue;
                 float elapsed=dt;
-                if(trap.arm>0){elapsed=Mathf.Max(0,dt-trap.arm);trap.arm=Mathf.Max(0,trap.arm-dt);if(trap.arm>.00001f)continue;if(trap.definitionId=="A03")ClassTrapArmed(trap.actionId);}
+                if(trap.arm>0){elapsed=Mathf.Max(0,dt-trap.arm);trap.arm=Mathf.Max(0,trap.arm-dt);if(trap.arm>.00001f)continue;}
                 if(!trap.triggered)
                 {
                     var enemies=AreaTargets(trap.position,trap.radius,default,360);
                     if(enemies.Length>0)
-                    {trap.triggered=true;trap.triggeredAt=State.time;trap.remaining=trap.duration;foreach(var e in enemies)ApplyStatus(e,StatusKind.Root,trap.definitionId,1.5f*(trap.snapshot.passives[3]?1+SkillEffects.Passive(trap.snapshot.ranks,HeroClass.Ranger,3):1),trap.actionId);Log("TRAP_TRIGGERED","맹독 덫 발동");}
+                    {
+                        trap.triggered=true;trap.triggeredAt=State.time;trap.remaining=trap.duration;var cast=D4Combat&&trap.definitionId=="A03"?Cast(trap.actionId):null;
+                        foreach(var e in enemies)
+                        {
+                            if(cast?.mod!=2)ApplyStatus(e,StatusKind.Root,trap.definitionId,cast?.mod==1?D4ModValue("A03",cast):1.5f*(trap.snapshot.passives[3]?1+SkillEffects.Passive(trap.snapshot.ranks,HeroClass.Ranger,3):1),trap.actionId);
+                            if(cast?.mod==1)Hit(e,.6f,0,false,snapshot:trap.snapshot,definition:"A03",root:trap.actionId);
+                        }
+                        if(cast?.mod==1)State.traps.Remove(trap);Log("TRAP_TRIGGERED","맹독 덫 발동");
+                    }
                     else {trap.wait-=elapsed;if(trap.wait<=.00001f)State.traps.Remove(trap);}continue;
                 }
                 trap.remaining=Mathf.Max(0,trap.remaining-dt);
@@ -141,8 +151,9 @@ namespace Hellscript
                 var strongest=State.traps.Where(t=>t.triggered&&Vector2.Distance(t.position,enemy.position)<=t.radius&&Map.LineClear(t.position,enemy.position))
                     .OrderByDescending(t=>t.snapshot.damage*(1+t.snapshot.bonus+t.snapshot.elements[4])*(t.definitionId=="LA03"?AspectGrowth.SnapshotValue(t.snapshot,"LA03",1):1)).ThenBy(t=>t.id).FirstOrDefault();
                 if(strongest==null){enemy.trapTick=.5f;continue;}
-                ApplyStatus(enemy,StatusKind.Poisoned,strongest.definitionId,.55f,strongest.actionId);if(strongest.triggeredAt>=State.time-.00001f)continue;enemy.trapTick-=dt;
-                if(enemy.trapTick<=.00001f){enemy.trapTick+=.5f;Hit(enemy,strongest.definitionId=="LA03"?AspectGrowth.SnapshotValue(strongest.snapshot,"LA03",.3f):.3f,4,false,RuneMultiBonus(strongest.snapshot,runeTargets[strongest]),strongest.snapshot,false,definition:strongest.definitionId,root:strongest.actionId,instance:strongest.id,kind:DamageKind.Periodic);}
+                var cast=D4Combat&&strongest.definitionId=="A03"?Cast(strongest.actionId):null;bool cold=cast?.id=="A03"&&cast.mod==2;
+                ApplyStatus(enemy,cold?StatusKind.Slow:StatusKind.Poisoned,strongest.definitionId,.55f,strongest.actionId,cold?D4ModValue("A03",cast)/100:1);if(strongest.triggeredAt>=State.time-.00001f)continue;enemy.trapTick-=dt;
+                if(enemy.trapTick<=.00001f){enemy.trapTick+=.5f;Hit(enemy,strongest.definitionId=="LA03"?AspectGrowth.SnapshotValue(strongest.snapshot,"LA03",.3f):.3f,cold?2:4,false,RuneMultiBonus(strongest.snapshot,runeTargets[strongest]),strongest.snapshot,false,definition:strongest.definitionId,root:strongest.actionId,instance:strongest.id,kind:DamageKind.Periodic);}
             }
             State.traps.RemoveAll(t=>t.triggered&&t.remaining<=.00001f);
         }

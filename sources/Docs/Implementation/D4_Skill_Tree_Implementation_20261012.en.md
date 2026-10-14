@@ -1,0 +1,158 @@
+# D4 skill tree implementation record
+
+Date: 2026-10-12 · [한국어](D4_Skill_Tree_Implementation_20261012.md)
+
+The reference is the final `claude/d4-skill-tree-plan` commit `3be804b955e97b3c4500eb7d20acfbc2a3c32733`. Both plan languages mark it final and the planning worktree was clean. The original uncommitted gear-recommendation changes are preserved. An isolated checkout includes latest `main` `a5596519`. One agent implements the steps in order.
+
+## Step 1 — data and rules
+
+- `build_skill_tree_d4.py` builds and checks the JsonUtility-readable `SkillTreeD4.json` from the approved source. It contains 10 base skills, 28 modifiers and 10 passives per class: 144 nodes and 111 legacy-id mappings. Design allocations, selections and preliminary behaviour text are excluded from game data.
+- The verified C# model/rules were copied and connected to the game-data adapter and rank-value accessors. Count units take floor; other values follow the approved linear golden values.
+- `SkillTreeD4.Enabled` defaults to false and requires a development argument. This step leaves the existing catalog, UI, combat and save schema on their current path.
+- Generator check and 2 Python tests passed. The 9 focused Unity 6000.6.0f1 EditMode cases passed, matching **32,208 rule checks and 802 rank values**. [Test XML](D4SkillTreeEvidence20261012/phase-1-editmode.xml), [input hashes](D4SkillTreeEvidence20261012/phase-1-inputs.json), [result](D4SkillTreeEvidence20261012/phase-1-validation.json).
+- The initial import's automatic RuntimeShader material and URP global-settings changes were restored byte-for-byte. Unity generated the new files' metadata.
+
+## Step 2 — Saves, migration and levels
+
+Added gated v5 allocation entries (20 per class, including modifier ranks), level cap 60, pre-normalization migration and persistent per-hero refund notices. Original wire bytes are archived before migration. Presets and live-run execution state are migrated while progress, health and resources survive. Old HED3/4/5 imports carry policy only; v5 emits HED6. A flag-off build refuses schema 22 without falling back to an older backup.
+
+Validation: the first related run passed 34/37. Three old-wire test helpers/expectations were corrected; the repaired cases and added allocation round-trip test passed 15/15. Five literal pre-v5 save fixtures, HED3/4/5 literal code bytes, idempotence, archives, run progress, backup refusal and XP from 40 to 60 were covered. All 288 golden allocations survive save, JSON load and share-code round trips. Balance1000 source fingerprints were refreshed: 1,000 rows, zero errors. [Results](D4SkillTreeEvidence20261012/phase-2-validation.json), [final EditMode](D4SkillTreeEvidence20261012/phase-2-editmode.xml).
+
+Unverified: new UI and combat, full EditMode, macOS smoke and physical mobile. Stale puzzle kit copies were invalidated; step 6 connects regeneration using D4 rules.
+
+## Step 3 — Icons
+
+Imported all 92 approved PNGs byte for byte. `adopt_generated_game_art.inspect` verified their hashes and native alpha. A06 and M07 retained their complete metadata bytes and GUIDs. The resolver covers all 144 design nodes, including modifiers and key passives. W09-1 was imported and rendered through SkillIconView before the batch import. Related EditMode: 18/18 passed. [Render](D4SkillTreeEvidence20261012/representative-W09-1.png), [tests](D4SkillTreeEvidence20261012/phase-3-editmode.xml), [results](D4SkillTreeEvidence20261012/phase-3-validation.json).
+
+Texture budgets: Android ASTC 6x6 approximately 10.38MiB (10.9MB); desktop BC7 and web ETC2 each 23MiB (24.1MB). Final decision D11 already contains the corrected estimates. Compressed player download size and physical mobile remain unmeasured. The art manifest retains the original 111-row history and the 92-row renewal provenance separately.
+
+## UI-1 — Screen calculation core
+
+Copied Layout, ViewModel, Session and Fx byte for byte from the verified C# port. Tests use the game-data model and inject only the design-board allocations/selections as explicit fixtures. Related EditMode: 11/11 passed. Layout 2,975; scenarios 15,034; wording 600; interaction 4,986: 23,595 screen checks match. Together with the previously verified 32,208 rule checks, this covers all 55,803 golden checks. The six coordinate-fit vectors and half-point font rounding also passed. [Tests](D4SkillTreeEvidence20261012/ui-1-editmode.xml), [results and copy hashes](D4SkillTreeEvidence20261012/ui-1-validation.json).
+
+The real uGUI window, meshes, visual effects and pointer input remain to be implemented and verified, beginning with UI-2.
+
+## UI-2 — Drawing tools
+
+Extended the shared UiMesh with gradient borders, hexagons, arcs, rounded dashed outlines, glow and inner shade. Connector strokes retain the design's glow-before-line paint order in one mesh. Added 3/5-segment rank arcs, mesh-clipped icons, gradient text and a stencil/clip-aware tone and blur shader. UiTheme owns the palette; original artwork is unchanged.
+
+The allocation tests caught and removed hidden params arrays in multi-argument Mathf.Min. New graphics: 10/10 passed; final refined-shape cases: 4/4 passed; the earlier shared-Graphic/forge regression range passed eight cases. After preparation, mesh population of shapes, dashed borders, rank arcs, six line states, icon crops and partial line effects allocates zero managed GC. Shared UI contract plus 15 regression tests passed. The [Unity Camera sample plate](D4SkillTreeEvidence20261012/ui-2-sample-plate.png) verifies shapes, shader effects and corrected stroke caps. [Evidence and scope](D4SkillTreeEvidence20261012/ui-2-validation.json).
+
+## UI-3 — Window shell and static tree
+
+Added the adapter canvas, portrait/landscape scrolling, PC fit, retained node views and explicit in-memory host. A generator compiles 428 immutable looks and 221 normalized colour tokens without changing design CSS/goldens. The tree draws measured hit/card boxes, metal rings, tags, rank bars, ordered lines/arrows, corner ornaments and the right-edge fade. Allowed approximation A7 uses one glow compositing gain, 0.55. Word wrapping and capture font refresh handle OS font substitution.
+
+Validation: look 2/2; widget/mesh 16/16; final inner-box 2/2 passed (last at 17:11:39 UTC). Compiled paint, arrows, corners and fades also allocate zero managed GC during prepared mesh population. Shared-contract regressions: 15 passed; refresh guards: 16 passed. All 24 class/view/language renders have tree-element visual differences at or below the limit 20. [Scope](D4SkillTreeEvidence20261012/ui-3-validation.json), [24 reports](D4SkillTreeEvidence20261012/ui-3-comparison-summary.json), [renders](D4SkillTreeEvidence20261012/ui-3-shots).
+
+Full-screen comparison is **0/24**: UI-3 deliberately keeps the detail panel as a placeholder. It is not reported as passing. UI-4 fills the panel before the full L5 check. Real pointer/effects, production storage, native-player and physical-device acceptance remain pending.
+
+## UI-4 — Detail panel and typography
+
+Implemented active, modifier, passive, key and locked detail panels: reserved descriptions, stat rows, modifier focus/rank pills, unlock progress, linked chips, bottom buttons in landscape/PC and header ± buttons in portrait, blocked reasons, tab diamonds/point dots and close symbols. Descriptions preserve word breaks and rich gold/bold spans. Existing UiFonts (D6) remain; actual glyph widths and line heights prevent clipping.
+
+Validation: 7/7 covering 1,008 designer `panel.parts` scenarios and six-state geometry within ±1pt; actual font/flow 13/13; all active/modifier descriptions, rows and card names at five screen sizes in both languages 16/16. Symbol meshes allocate zero managed GC. Shared UI regressions: 15 passed; refresh guards: 16 passed. [Record](D4SkillTreeEvidence20261012/ui-4-validation.json).
+
+Full visual comparison **24/24 passed**: colour ≤6, edges ≥.7, worst tile ≤32 and every element ≤20. [24-row table](D4SkillTreeEvidence20261012/ui-4-visual-table.md), [reports](D4SkillTreeEvidence20261012/ui-4-comparison-summary.json), [Unity renders](D4SkillTreeEvidence20261012/ui-4-shots). Only the new window enables `vertexColorAlwaysGammaSpace` for dark-colour precision; its custom shader follows the same conversion. CSS border-box composition and radial mask were reproduced. The single A7 glow gain is finalized at 0.50. Gameplay values are unchanged. Last capture: 18:08:15 UTC; final comparison report: 18:09:02 UTC.
+
+## UI-5 — Input, commit, retained rendering and effects
+
+Buttons now select, invest, refund and change tabs through the host boundary. A rejected save restores the allocation and effect signals without repainting. Hit rectangles remain fixed while only their visuals press; ScrollRect owns drag gestures. Tree views compare display keys and retain their hierarchy. Twenty designer animation curves drive a fixed slot pool, including connector priority and reduced motion.
+
+Validation: final related EditMode **16/16** passed at 20:07:50 UTC. The rendered GraphicRaycaster replay passed **all 60 sessions: 1,170 clicks and 492 disabled actions**, matching every golden screen state and effect event. Prepared meshes, unchanged frames and active effects pass zero-managed-allocation constraints. The warmed transaction reuses the tree hierarchy and repaints six changed primitives. Its Mono thread allocation counter reports 0; a native click-frame profiler measurement is still pending. Six camera captures cover invest/refund at 0.10, 0.30 and 0.80 seconds. Shared UI: 15/15; refresh guards: 16/16. [Evidence](D4SkillTreeEvidence20261012/ui-5-validation.json).
+
+The replay uses the actual uGUI GraphicRaycaster and pointer handlers in a rendered Editor fixture. Native-player EventSystem/drag acceptance, production storage/relaunch and physical-device acceptance are still unverified. Production wiring follows in UI-6; combat has not started.
+
+
+## UI-6 — Production host and entry points
+
+Added owned per-hero transactions without changing the selected hero, immediate disk saves, live-run investment/town refund guards and wrong-simulation-owner refusal. The four direct routes share the standalone child window. The edict skill-management page retains equipment/order and its tree entry. Child commits refresh the parent's saved baseline. First-open refund notices acknowledge each hero separately; unrelated saves retain the same display key, and a level change is detected without waiting for a save. Added context locks, localization and effect-material restoration/disposal.
+
+Validation: the first related run passed 66/70. Four failures (Editor destruction, delegate shape and localization input) were repaired; those four and one effect GC regression passed 5/5. Three-class disk reload and actual window reopening plus flag-off legacy entry passed 4/4. Live-owner refusal and live investment passed 2/2, ending 20:27:53 UTC. Shared UI: 15/15; refresh guards: 16/16. Final **24/24 full-screen comparisons passed**. [Table](D4SkillTreeEvidence20261012/ui-6-visual-table.md), [scope and tests](D4SkillTreeEvidence20261012/ui-6-validation.json).
+
+Native-player EventSystem/drag and native saved-relaunch smoke, full EditMode and physical devices remain unverified. Next is combat framework 5.0, then all three class packages and the dependent systems. Final main integration and merged-SHA CI verification remain pending. The user's 22:25 UTC instruction cancels WebGL builds and subsequent bulk branch/worktree cleanup.
+## 5.0 — Common combat framework
+
+Added modifier/base-rank cast snapshots, copied modifier ownership on lingering effects, data-driven rank values and passive reads, the regular-base effective rank cap six, and all six ultimate rank/cooldown curves. Modifier secondary values can bypass base-rank scaling. Persistence validates new shapes against their origin. The first grade-A modifier W09-3 has paired cone/spin and duration tests at ranks 1/5, a frozen wind-up snapshot and deterministic actual simulation resume.
+
+Related first run: 455/459, including every initial new core case. Four historical HED4 test builders incorrectly included newly added fields; corrected old-wire fixtures and rank regressions passed 15/15. Persistence passed 3/3; actual resume and six ultimate cases passed 7/7 (20:54:57 UTC). The preserved catalog/validation reports remain 111/123/60; generator checks passed. Balance1000: 1,000 rows, zero errors, with D4 source fingerprints added. [Evidence](D4SkillTreeEvidence20261012/combat-core-validation.json).
+
+Defaults C1/C3/C5/C6/C8 follow the final plan: modifier values use their own ranks, omitted parameters retain current values, extras absent from the design are removed in the class packages, effect/value text takes precedence, and placed-object caps remove the oldest. Remaining 83 modifiers, all class-specific passive/ultimate behaviour, full integration and native/physical acceptance are pending. The Warrior research has now been read in full for 5a.
+
+Baseline proof: 91/91 pre-framework report cases passed at 21:02:19 UTC. All 90 build and 18 policy observations are byte-identical to the framework run. W-8 explicitly forbids the loan mechanism; the corrected persistence cases passed 2/2 at 21:04:09 UTC.
+
+## 5a — Warrior mechanism decisions (implementation in progress)
+
+W02-1 retains the approved base landing hit and rank-dependent cooldown. It moves at ground height for the existing travel time, shoves each enemy once along the segment, and adds no absorbed W11 guard or resource bonus. The charge distance reads the modifier rank. W02-3 uses a saved two-charge record, sequential recharge at the captured modifier value (8 to 6 seconds), and mirrors availability into the existing cooldown so manual and automatic paths agree. It replaces the base cooldown and its reductions. Switching away removes the charge record.
+
+W17-2 records the latest released regular active, including its base/modifier snapshot. The user's final answer includes support skill effects. Ancestors reproduce attacks as secondary damage and support effects at 50 to 70 percent without starting another cast or updating attack/role history. Shield, shout, movement, haste, immunity, counter, reflection and regeneration pause retain copied ownership; repeated shields replace rather than stack, and matching shout strengths use the stronger value. W18-2 replaces the impact with a timed form (6 to 8 seconds), adds 50 percent to newly captured attack radii/reach, and suppresses push while active. Its copied ownership and expiry survive resume.
+
+WP20 reads only the W09 bleed ledger, rolls once per bleed tick/cash-out using the existing saved RNG and crit cap, and emits one secondary death blast (2.5m, five targets); that blast cannot trigger another blast. WP21 uses the data role before the middle dot for regular skills, a four-second saved history and up to three alternate-role stacks. Repeating a role refreshes the window without adding a stack; ultimates do not change regular-skill history.
+
+The user finalized W03-2 at 10 percent. A cast that kills one or more enemies refunds 10 percent of its actual paid cost once; no-kill casts refund nothing. The saved proc receipt prevents repeated refunds. All class acceptance and final integration remain pending.
+
+Core CI correction b27fe5d7 refreshed 13 source-line anchors in the legacy dependency audit. PR113 generated and ownership checks passed in run 38311715674; this is separate from Unity test evidence.
+
+Warrior checkpoint validation: the related class run passed 70/76; the repaired boundary/fixture cases passed 8/8. All 28 modifiers at both rank endpoints survived deterministic actual simulation resume (56 comparisons) and chosen-modifier cleanup. All 28 started through automatic combat. The final added crowd-capacity/range cases passed 2/2 at 22:00:04 UTC. Balance1000 regenerated 1,000 rows with zero errors. [Evidence](D4SkillTreeEvidence20261012/combat-warrior-validation.json). The user-confirmed refund passed both rank endpoints, and support copies passed all 16 support-modifier/ultimate-rank combinations. The final form-reach/planner sweep belongs to integration; this checkpoint is not full release acceptance.
+
+## 5b — Ranger mechanism decisions (before implementation)
+
+Units: A01-3 scales the parent shot by 50 to 70 percent; A02-2 scales the parent arrow by 40 to 80 percent; A14-1 scales the first split damage by 30 to 50 percent. A07-3, A04-3 and Precision add the stated amount to the critical multiplier. Explicit D-percent rows (rapid volley, barrage, return arrows, poison, snipe and bursts) use weapon damage and their modifier rank, without the parent rank multiplier.
+
+Ricochet keeps one hit per enemy across all legs and a saved bounce allowance, reflects at a locally probed wall normal, and forecasts only the first segment. Returning forks save their leg and origin; the return uses D30 to D50, and neither leg recursively creates another regular cast. A03-3 uses the trap-cluster placement policy, one owned turret and the parent duration; its ranked shot count is spaced evenly over that duration. Oldest objects are removed when caps are exceeded.
+
+Shadow Step uses a legal point behind the observed target and a stationary preparation lasting the original movement time. It skips retreat walk-back and grants one forced harder direct hit. Gaze Shot marks first, then holds the hero for the existing A08 aim time; actual incoming damage or a requested move cancels the shot. Chain Mark carries its remaining duration and jump allowance in the saved mark. Cold imbuement tracks three hits per enemy, then applies the existing absorbed freeze duration and resets.
+
+Shadow Clone follows the hero and copies direct damage without starting a cast or consuming imbuement, capped at one. Afterimage Burst fires on expiry, use and cap eviction. Precision counts every direct critical including forced criticals, and consumes its charge once on the next A01/A02 cast. Viper is an independent multiplier and includes poison ticks and secondary damage.
+
+The Ranger checkpoint passes all paired mechanism checks after correcting test fixtures, all 28 automatic starts and actual deterministic resumes for all 56 modifier/rank combinations. Saved Focus discounts both native and legacy paid casts once, and the eight ordinary passive rows are exercised under their runtime conditions. Real-map ricochet preserves its bounce allowance, reflects at corners and stores the result. Corrupted bounce/cold-stack state is refused without changing the input. User-confirmed Warrior refund and support-copy checks are included in this follow-up. These are scoped simulation checks; final dependent-system and native-player acceptance remain pending.
+
+## 5c — Mage mechanism decisions
+
+Keep C3 defaults where a numeric parameter is omitted: the existing lance burn/slow, returning frost flight/return/pickup, ward and reactive elemental shield parameters remain. Explicit modifier D-percent rows use weapon damage; Double Nova uses the stated fraction of the ranked base wave. Lightning Blink applies its specified stun without adding unspecified damage. Existing chain decay remains; the overload modifier changes its absolute hop limit. Magnetic Chain pulls after determining the complete route so forecasts and actual hits share target order.
+
+M01-3 leaves owned trail segments and does not explode. M02-1 follows the hero; Deep Freeze uses a saved three-second dwell counter. Triple Orb creates up to three owned instances and removes the oldest at the cap; each has its own expiry blast, and the oldest eligible orb receives chain charge. Overcharge suppresses periodic damage. Single Element Focus freezes the last released regular element at cast time, defaulting to fire when none was used. Tracking Collapse re-aims each stage at the densest visible group in its ranked range.
+
+Elemental Surge follows a core cast with the first equipped core skill of another element in saved action order, with no extra payment or cooldown and no capture/history/legendary cast hooks. Its damage is secondary and recursion is blocked. Sage retains the explicit D24 cost reduction and three-element cycle burst. Avatar adds its ranked fire damage, cold protection or lightning cooldown reduction according to the last released regular element. Shatter accumulates actual HP loss while frozen/staggered, clears on death or passive removal and bursts once when the control ends. Align the Elements stores per-enemy element flags within the existing cycle window and clears before its secondary burst.
+
+Mage scoped validation: first pair run 10/14, with the existing M07 cost and returning flight time corrected in the fixtures; remaining/repaired pairs 15/15. Ordinary passives, automatic starts, free Sage resume and corrupted-ledger rejection passed 7/7. All 28 modifiers started automatically; all 56 modifier/rank combinations resumed deterministically. Charged-orb selection/expiry and the affected 112 Warrior/Ranger resume combinations passed 4/4 at 23:03:41 UTC. Frozen snapshots now store the removed base-rank power so a later investment cannot alter weapon-based modifier damage. [Evidence](D4SkillTreeEvidence20261012/combat-mage-validation.json). All three class packages are complete as scoped simulation checkpoints; dependent systems and native acceptance remain outstanding.
+
+## 6 — Dependents and final default switch (continued 2026-10-13)
+
+The inherited dirty input was preserved. The previous owner stays read-only, the gear owner finished, and no Unity/Blender job was active. Authorized gh reads confirmed both checks on PR116 `289e00e8` and PR109 `9ad9d5f3`.
+
+Current definitions, independent modifier ranks, effective base rank six, HUD/quick editing/training/rift selection, Giant reach, Fireball forecast shapes and persistent world views are connected. Guide uses W09 and `tutorial-v6-d4`; its finite melee boss prevents the single-target starter becoming trapped by repeated summons. Existing timing and graduation assertions remain unchanged.
+
+Authored prologue/puzzle kits allow only their listed rank-one skills, reject modifiers/ultimates/outside investments, refund their temporary allocation and revoke authority on graduation. HED6 export, forged import and ordinary preset storage reject kits. Replay migration preserves hero identity, level and equipment while rebuilding v5 allowances. Shared gear/rune bonus calculation includes nonlegacy inheritance, caps regular bases at six and leaves modifiers/passives/ultimates unchanged. Absorbed legendary scope requires its selected modifier and is frozen in the damage snapshot.
+
+D4 is enabled by default for production. Literal old saves/codes and developer fixtures retain their compatibility path; the developer-only `-hellscriptLegacySkills` argument reproduces existing compatibility inputs while D4 suites activate and test the new path independently. CI now checks approved D4 generation and its regressions. Native acceptance reuses the existing golden readers, moved into developer code with their meta GUIDs preserved, for rendered raycasts, 60 transcripts, all 30 active/84 modifier panels at five sizes/two languages, owned commits and process restart.
+
+Focused proof: kit baseline 42/43, repaired regression 20/24, four failed cases repaired 4/4; gear/rune/snapshot 6/6; generator 2/2; UI contract 15/15 and refresh static check passed. Failure evidence is preserved. The unchanged raw removed-ID inventory reports 7,455 references (146 files), including compatibility catalogs, literal old-wire fixtures, migration maps and developer paths; its expectations/scope have not been weakened to fabricate zero. Integration, full EditMode, native result and merged-main SHA checks remain pending. Web build and public publication remain cancelled. A later direct user request authorizes consolidation of all HELLSCRIPT branches/worktrees and cleanup after the merge.
+
+
+## Current-source common-cause repairs — 2026-10-13
+
+Retained the post-retirement full result: **5,794 total, 5,367 passed, 424 failed and three authoring/measurement skips**, with its original XML and hashes. Repairs cover the empty D4 allocation and policy projection for fresh accounts, original historical policies and schema1 item migration order, JsonUtility's empty cast placeholder, existing item-buff expiry and incoming-damage forecasts, and numeric wire identities for actual casts. Feature fixtures buy legal current-tree prerequisites and use real completed tutorial saves. Historical migration fixtures explicitly identify their historical schema.
+
+Authored kits from level nine grant only listed rank-one skills while preserving ownership, investment and graduation gates. Mage chest/forge/hazard lessons at levels ten/fourteen/fifteen were tuned through actual comparison combat; victory, death and HP-band assertions remain unchanged. Previews use current skills/modifiers/elements and enemy arrival times to verify observable automatic-policy differences. Coverage of the current 30 playable skill sounds and translation completeness remains active.
+
+The authorized 79-case prototype `PuzzleLevelTests` retirement preserves its original source, meta and hashes, replacing it with current PuzzleContent, PuzzleOpening, PuzzleOperation, PuzzleGraduation and D4TutorialKit suites. One leap assertion requiring a retired passive now verifies actual current leap/IronWall behavior, with its original preserved. Two unreferenced old WAVs and their meta are retained. No new Ignore or relaxed failure criteria was added.
+
+Final related acceptance: **109 passed, zero failed**, with retained XML. Both generator checks, 3+3 unit checks and the unchanged zero-reference retirement audit passed. The shared UI check reuses its passing receipt after verifying all 519 input hashes. The complete suite will run once after committing frozen runtime inputs, with expected case identity and new-skip guards. Fresh 24-screen/native save/restart acceptance, main merge, exact-main CI and cleanup remain pending. [Failures, repairs and original preservation](D4SkillTreeEvidence20261012/integration-current-repairs.json).
+
+## Input-context regressions discovered by the full suite — 2026-10-13
+
+The frozen `0d3b4d9e` suite returned **5,715 total, 5,612 passed, 100 failed and three existing authoring/measurement skips**. Expected case identity, added/missing cases and new skips all matched. All 100 were previously passing tests affected by the fresh-account allocation change. Numeric skills, HED2 and historical fight baselines now explicitly use their historical inputs and restore their scoped flag. Current guide/rune/pickup fixtures use actual owned allocations. The guide recognizes actual successful current casts with valid roots even when the skill has no historical rule row.
+
+Original full and subsequent XML are retained. All **405/405 cases across 15 affected classes passed**, including every original 100-case regression. There are no additional skips, deleted tests or retired assets. Baselines, victory/death, save/rollback and actual-combat assertions remain unchanged. Run the complete final suite and fresh screens/native acceptance before main merge and cleanup. [100 regressions and 405-case proof](D4SkillTreeEvidence20261012/integration-fixture-context-repairs.json).
+
+## Final integration verification and original preservation — 2026-10-13
+
+Completed the authorized retirement of old playable paths and validation assets. The production catalog exposes 144 D4 nodes; numeric wire definitions retain strict old-save reading and migration. All 87 retired originals were hash-verified in the archive and Git history. The unchanged removed-ID audit reports **zero references** across groups 1–5, including new files. Both the 38 pre-retirement and 424 post-retirement failures retain their original XML and repair proof. The authorized 79-case prototype retirement preserves source/meta/hashes and uses current tutorial ownership and actual combat coverage. The prior leap assertion and two unreferenced WAVs/meta are also retained. The subsequent 100 input-context regressions retain their original XML, passing 405/405 focused proof and final full-suite closure. Current failure criteria remain unchanged.
+
+The final complete EditMode run using `Assets=24eecdee77e513352ade124a9b6a8d46257d7e28`, `Packages=2fce9aa61b6abdfa990b03a86a8430478fdf8505`, `ProjectSettings=3443bda04f08715924f7704de54d3f7c7d126df3` returned **5715 total, 5712 passed, zero failed, 3 authoring/measurement skips**, confirmed by exit0 and every individual result in the complete XML. Its original root aggregate `Skipped:Ignored` remains unmodified; acceptance verifies the exact prior three skipped names/labels/reasons, all 5,712 passing leaves, zero missing/added/failed/inconclusive cases and unchanged source/XML hashes. The prior process ended without a final XML and its interrupted log is retained. Final related acceptance passed 405 cases with zero failures. The passing 15/15 shared UI receipt was reused after verifying all 519 input hashes. Beyond the authorized retirement and method renames, there are zero missing/added cases and zero new skips.
+
+Fresh captures after the font repairs and legacy retirement passed **24/24** original L5 comparisons, with unchanged limits: colour ≤6, edges ≥.70, worst tiles ≤32, every element ≤20. The rebuilt macOS development player reported zero build errors and passed D4's **60 transcripts, 1,662 actual raycast clicks, 502 blocked actions, 1,140 panels, 30 captures**, six schema22 allocation commits and a fresh-process restart. Fresh-account guides passed Korean 440×956 and English 956×440 through combat, rewards and persisted graduation. Equipment recommendations passed five sizes, both languages, 95 captures, equip/settings/expiry/town round trips and a fresh-process reload. Native gear setup uses normal tier purchases, actual current-guide graduation and normal settings for visible popup inputs. The verified ended-run save is retained; a separate active Rift prepared through normal loot/acknowledgement APIs passes the unchanged restart assertions. Game source, assertions and tier/unlock gates are unchanged. All native runs used muted audio and isolated disposable saves.
+
+Merged the four completed art commits through `5d97cd4b` and all 22 original local branch tips, plus commit `7196b0a9` preserving 65 subsequently discovered existing art originals, while retaining their histories. Protected 27 original MP3 files, two previously preserved tutorial originals and two newly found fourth-segment originals. New parallel art production was not applied to the game and no additional tutorial implementation was added. Documentation/art integration does not alter the validated runtime trees. After acceptance, merge PR117 into main, verify CI for the exact main SHA and clean only approved targets after retaining originals and required proof.
+
+These are macOS results, without physical-mobile, ordinary-speed usability or frame-performance claims. Web builds, public wiki publication and site deployment remain cancelled. [Closure for all 424 failures](D4SkillTreeEvidence20261012/integration-failure-closure.json), [Final inputs, XML and binary hashes](D4SkillTreeEvidence20261012/integration-validation.json), [complete XML](D4SkillTreeEvidence20261012/integration-full-editmode-retirement-final.xml), [24-screen comparison](D4SkillTreeEvidence20261012/ui-6-final-comparison-summary.json), [current native proof](D4SkillTreeEvidence20261012/integration-native).

@@ -1,0 +1,164 @@
+{
+  "sourceCommit": "87e7e064c0bd8d0b134602a289b4d815d601ef7a",
+  "sourceTrees": {
+    "Assets": "a7b8d593caa00806fae1b52a8745cb6c4de02972",
+    "Packages": "2fce9aa61b6abdfa990b03a86a8430478fdf8505",
+    "ProjectSettings": "3443bda04f08715924f7704de54d3f7c7d126df3"
+  },
+  "fullEditMode": {
+    "status": "completed_with_one_repair",
+    "startedUtc": "2026-10-14T02:23:00.733033+00:00",
+    "xml": "/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Builds/Validation/SkillGear20261014/full-editmode.xml",
+    "log": "/Users/t8g-2410-pn-005/.codex/worktrees/skill-gear-options/HELLSCRIPT/Builds/Validation/SkillGear20261014/full-editmode.log",
+    "scope": "Complete project EditMode suite, once after main integration",
+    "total": 5746,
+    "passed": 5742,
+    "failed": 1,
+    "skipped": 3,
+    "durationSeconds": 5047.7918118,
+    "endUtc": "2026-10-14 03:47:20Z",
+    "exitCode": 2,
+    "gearCases": 31,
+    "gearPassed": 31,
+    "failures": [
+      {
+        "test": "Hellscript.Tests.AspectStoneTests.All123AspectsHaveFiveDistinctBilingualEffectDescriptions",
+        "message": "System.InvalidOperationException : Missing aspect description token: 쿨타임을 2초"
+      }
+    ],
+    "skippedCases": [
+      {
+        "test": "Hellscript.Tests.PuzzleContentTests.Probe",
+        "reason": "Authoring probe only."
+      },
+      {
+        "test": "Hellscript.Tests.PuzzleOperationTests.ProbeOperations",
+        "reason": "Authoring probe only."
+      },
+      {
+        "test": "Hellscript.Tests.WebGlOptimizationMeasurement.Capture",
+        "reason": "Writes simulation measurements to HELLSCRIPT_MEASURE_OUT"
+      }
+    ]
+  },
+  "native": {
+    "status": "passed",
+    "scope": "Current D4 gear effect, real owned item identity, disk save/reload, deterministic resume for all 3 classes",
+    "buildStartedUtc": "2026-10-14T03:52:39.984296+00:00",
+    "buildExitCode": 0,
+    "buildLogSha256": "edea4ba665a48c66062396516a1efa221e488efc10e59896a3c170f30569fc3d",
+    "binarySha256": "2ce4e252a553cd560a6ab3c316f33a5a13d61e813e19205417eb252025143c12",
+    "binaryBytes": 35172,
+    "playerStartedUtc": "2026-10-14T03:54:45.091694+00:00",
+    "attempts": [
+      {
+        "output": "native",
+        "exitCode": 1,
+        "failure": "Current skill did not start: W08",
+        "buildBinarySha256": "d0678dee6a8b9e7e7c5e175301295fcde75d99defc1bdb1cbfd513a4fc4e4465"
+      }
+    ],
+    "classes": 3,
+    "diskReloadCases": 3,
+    "deterministicResumeCases": 3,
+    "playerExitCode": 0,
+    "buildCount": 2,
+    "smokeCount": 2,
+    "finalBuildLog": "build-mac-repair.log",
+    "finalOutput": "native-repair",
+    "finishedUtc": "2026-10-14T04:03:55.349847+00:00",
+    "assemblySha256": "64113aa54bf343a15754045906759d19dec3c24cd9c3d0b67ba4fd0a4fb8a83f",
+    "totalBuildBytes": 1001948949,
+    "saveInputs": [
+      {
+        "class": 0,
+        "sha256": "ef5ade260b299c5481101dbbb48f0249abb45c3fd5216a3a3da224aa92dcefe7",
+        "bytes": 402573,
+        "ownedSpecialIds": [
+          "DES_LW44"
+        ],
+        "loadoutVersion": 5,
+        "runTime": 1.1999999284744263
+      },
+      {
+        "class": 1,
+        "sha256": "ebd3dc296ed5abf49fd3dfbd388d738316fa1f4c6f2028a39f003e70c6e739bc",
+        "bytes": 421850,
+        "ownedSpecialIds": [
+          "DES_LA42"
+        ],
+        "loadoutVersion": 5,
+        "runTime": 3.499997854232788
+      },
+      {
+        "class": 2,
+        "sha256": "457997d94fbc034d34519ddc4cc32a3bda40576502e3b54c5044ab4568021be3",
+        "bytes": 407755,
+        "ownedSpecialIds": [
+          "DES_LM44"
+        ],
+        "loadoutVersion": 5,
+        "runTime": 2.399998903274536
+      }
+    ]
+  },
+  "mergeCommit": "87e7e064c0bd8d0b134602a289b4d815d601ef7a",
+  "pullRequest": "https://github.com/dakrdong/HELLSCRIPT/pull/120",
+  "ci": {
+    "headCommit": "261723eca944146af1253f49905f5326bd7b6bc1",
+    "classSkillData": "https://github.com/dakrdong/HELLSCRIPT/actions/runs/38500374419",
+    "sharedUi": "https://github.com/dakrdong/HELLSCRIPT/actions/runs/38500374431",
+    "status": "passed"
+  },
+  "deliveryPullRequest": "https://github.com/dakrdong/HELLSCRIPT/pull/121",
+  "wiki": {
+    "originalPublishedCommit": "2992e4a9fe239275b3dd5a942d5f880c9b687d9e",
+    "restoredSourceCount": 291,
+    "restoredSourceBytes": 123232600,
+    "archivedSkillLinkRegression": "passed",
+    "plannedMergeDelivery": "Generate/check/test once at evidence PR merge; publish from merged main."
+  },
+  "aspectDescriptionRepair": {
+    "status": "passed",
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "scope": "All 123 aspects at all five levels in both languages, plus actual power growth parameters",
+    "xml": "aspect-description-final-repair.xml",
+    "originalFailureXml": "aspect-description-repair.xml",
+    "reason": "Preserve localized magnitude tokens and replace base imbuement spread magnitude rather than append a conflicting upgrade sentence"
+  },
+  "status": "passed_with_three_skips_and_focused_repairs",
+  "sourceChangesAfterFullRun": {
+    "Assets/HELLSCRIPT/Runtime/Core/AspectGrowth.cs": "78e49a0c041755df2fbb4997c8b0b3a3d3afa6e31769a638884756f0d0ff9894",
+    "Assets/HELLSCRIPT/Resources/Data/LegendaryPowers.json": "ee16be9bc1c23740bbbcb2e5da55a644759faadfceae39c24ab0c8ba62a8b4a4",
+    "Assets/HELLSCRIPT/Resources/Localization/en.txt": "0294a9601e7cded9bdd556cd88f4800d30f638a593d9ab769f7d0bc08fb6005c",
+    "Assets/HELLSCRIPT/Tests/Editor/AspectStoneTests.cs": "f40e9c7a51ee2f1d5b0fd9370ac2493747693646dba2b93b35d7a25d2b210bda",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeD4EquipmentSmoke.cs": "c7ce7698d44c7c1f5b3de3e455b43dac6db30d0cb4de3713b521bd07f0962a43"
+  },
+  "reuseReason": "All 31 current equipment cases passed in the full run. Subsequent changes are localized aspect description scaling and its assertion, plus the opt-in development smoke harness. All 123 aspects in both languages and all actual power growth parameters passed after the description repair; final player directly validates the updated harness. Production combat code unchanged.",
+  "uiContract": {
+    "passed": 15,
+    "receipt": "ui-contract-repaired-receipt.json"
+  },
+  "recipes": {
+    "unity": "6000.6.0f1",
+    "full": "Unity -batchmode -nographics -runTests -testPlatform EditMode",
+    "repair": "Unity -batchmode -nographics -runTests -testPlatform EditMode -testFilter Hellscript.Tests.AspectStoneTests.All123AspectsHaveFiveDistinctBilingualEffectDescriptions;Hellscript.Tests.AspectStoneTests.EveryExpandedPowerKeepsItsTriggersAndScalesItsActualCombatParameters",
+    "build": "Unity -batchmode -nographics -quit -executeMethod Hellscript.Editor.ProjectBuilder.BuildMac -hellscriptBuildOutput <task>/HELLSCRIPT.app",
+    "native": "HELLSCRIPT.app/Contents/MacOS/HELLSCRIPT -batchmode -nographics -hellscriptD4EquipmentSmoke -hellscriptSavePath <task>/native/app-save -hellscriptEquipmentEvidence <task>/native"
+  },
+  "executionMetrics": {
+    "fullEditModeRuns": 1,
+    "fullEditModeSeconds": 5047.7918118,
+    "completedFocusedUnityRuns": 8,
+    "initialCompileFailure": 1,
+    "abortedOverbroadDiagnosticRuns": 1,
+    "macBuilds": 2,
+    "nativeAttempts": 2,
+    "nativePassedAttempts": 1,
+    "retryReason": "Only failed description checks and the failed native harness were retried; the whole suite was not repeated.",
+    "wikiBuildRuns": "One complete build planned; three attempts stopped before dataset generation on existing duplicate IDs, title-less files and missing history inputs.",
+    "waitingBoundary": "Heavy Unity processes ran sequentially; full suite was the primary validation wait."
+  }
+}

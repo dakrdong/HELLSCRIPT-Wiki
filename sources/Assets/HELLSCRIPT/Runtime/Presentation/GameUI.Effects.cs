@@ -45,7 +45,7 @@ namespace Hellscript
             if(run.heroDeathRecorded)Note(content,run.bossRewarded?"보스와 영웅이 동시에 사망했습니다.\n보스 처치를 우선하여 클리어 보상을 지급했습니다.":"영웅의 사망을 기록했습니다.",20,88,gold);
             Note(content,Loc.F("현재 보호막 {0:0} · 최대 HP {1:0}", run.shield, game.Combat.Stats.hp),23,68,gold);
             foreach(var shield in run.shields.OrderBy(s=>s.remaining).ThenBy(s=>s.id))
-                Note(content,Loc.F("{0}\n남은 양 {1:0} · {2:0.0}초\n누적 흡수 {3:0}{4}", EffectName(shield.definitionId), shield.amount, shield.remaining, shield.absorbed, (shield.definitionId=="M05"&&game.Combat.Stats.specials.Contains("LM03")?Loc.F(" / 환류 기준 {0:0}{1}", shield.createdMaxHp*.15f, (shield.manaPaid?" · 회복 완료":shield.absorbed>=shield.createdMaxHp*.15f?Loc.F(" · 대기 {0:0.0}초", run.itemEffects.lm03Cooldown):"")):"")),20,112,pale);
+                Note(content,Loc.F("{0}\n남은 양 {1:0} · {2:0.0}초\n누적 흡수 {3:0}{4}", EffectName(shield.definitionId), shield.amount, shield.remaining, shield.absorbed, (shield.definitionId=="M04-3"&&game.Combat.Stats.specials.Contains("LM03")?Loc.F(" / 환류 기준 {0:0}{1}", shield.createdMaxHp*.15f, (shield.manaPaid?" · 회복 완료":shield.absorbed>=shield.createdMaxHp*.15f?Loc.F(" · 대기 {0:0.0}초", run.itemEffects.lm03Cooldown):"")):"")),20,112,pale);
             if(run.shields.Count==0)Note(content,"유지 중인 보호막이 없습니다.",20,60,pale);
             foreach(var field in run.effects.Where(f=>!f.hostile&&f.kind==13&&(string.IsNullOrEmpty(f.casterId)||f.casterId==run.heroId)).OrderBy(f=>f.id))
                 Note(content,Loc.F("눈보라 · {0} · {1:0.0}초\n{2}", (field.followsTarget?"목표 추적":"위치 고정"), field.duration, (field.followsTarget?Loc.F("이동 {0:0.0} / 4.0m", field.moved):"생성 위치를 유지합니다.")),20,88,gold);

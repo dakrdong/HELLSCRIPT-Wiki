@@ -228,6 +228,9 @@ def source_manifest():
                               "CoreCrafting.cs","Economy.ContentServices.cs","RuneGrowth.cs","IntroductoryRift.cs","RiftSurface.cs","RewardBoxes.cs","ContentUnlocks.cs","GambleShop.cs"]]
     paths += [CORE.parent/"Presentation/GameController.cs"]
     paths += [RES/n for n in ["ContentUnlocks.json","BlacksmithSlots.json","Data/ClassSkills.json","Data/ClassSkillTree.json","Runes/V13/catalog.json","Data/RewardBoxes.json"]]
+    paths += sorted((CORE/"SkillTreeD4").glob("*.cs"))
+    paths += sorted(CORE.glob("CombatSimulation.ClassSkill*.cs"))
+    paths += [CORE/"ClassSkillState.cs",CORE/"ClassSkillPersistence.cs",RES/"Data/SkillTreeD4.json"]
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 

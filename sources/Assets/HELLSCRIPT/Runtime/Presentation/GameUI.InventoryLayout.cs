@@ -187,9 +187,19 @@ namespace Hellscript
 
                 if(!string.IsNullOrEmpty(unique.requiredSkill))
                 {
-                    var skill=game.catalog.skills.Find(s=>s.id==unique.requiredSkill);int index=game.catalog.skills.IndexOf(skill);
-                    bool active=(hero.useEdict?hero.edict?.slots.Contains(skill.id)==true:hero.build.activeSkills.Contains(index))&&hero.level>=skill.unlock;
-                    InventoryNote(parent,Loc.F("{0}{1} · Lv.{2} 필요", (active?"필수 스킬 장착·해금 완료: ":"현재 효과 비활성: "), skill.name, skill.unlock),20,active?setGreen:gold);
+                    if(hero.build.classSkills?.version==5)
+                    {
+                        var load=hero.build.classSkills;var remap=SkillTreeD4.Legacy(unique.requiredSkill);string id=remap?.to??unique.requiredSkill;
+                        bool active=load.Equipped(id)&&ClassSkillTree.Learned(load,hero.level,id)&&SkillTreeD4Loadout.SourceMatches(load,unique.requiredSkill,id);
+                        string name=ClassSkillTree.NameForLoadout(remap?.modifier??id,load);
+                        InventoryNote(parent,Loc.F(active?"필수 스킬 장착·학습 완료: {0}":"현재 효과 비활성: {0}",name),20,active?setGreen:gold);
+                    }
+                    else
+                    {
+                        var skill=game.catalog.skills.Find(s=>s.id==unique.requiredSkill);int index=game.catalog.skills.IndexOf(skill);
+                        bool active=(hero.useEdict?hero.edict?.slots.Contains(skill.id)==true:hero.build.activeSkills.Contains(index))&&hero.level>=skill.unlock;
+                        InventoryNote(parent,Loc.F("{0}{1} · Lv.{2} 필요", (active?"필수 스킬 장착·해금 완료: ":"현재 효과 비활성: "), skill.name, skill.unlock),20,active?setGreen:gold);
+                    }
                 }
                 if(unique.setId!="")
                 {
