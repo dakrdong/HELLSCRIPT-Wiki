@@ -1,0 +1,85 @@
+{
+  "status": "Passed",
+  "platform": "OSXPlayer",
+  "iOSDeviceTest": false,
+  "viewports": [
+    [
+      1600,
+      900
+    ],
+    [
+      900,
+      1600
+    ],
+    [
+      2868,
+      1320
+    ]
+  ],
+  "panels": 864,
+  "captures": 26,
+  "pressedGaugeChecks": 18,
+  "pointerDrags": 6,
+  "pointerCloses": 6,
+  "safeAreaAssumption": "left/right 102px, bottom 54px, top 0px; 3x prior synthetic test insets, not device measurements",
+  "deviceScaleAssumption": 3,
+  "finiteFxSettledSeconds": 5,
+  "editmode": {
+    "passed": 92,
+    "failed": 0,
+    "extraFinalLookDataCheck": 3
+  },
+  "geometryAudit": "geometry-native-audit.json",
+  "latestUserOverrides": [
+    "Remove bottom legend",
+    "Repair large-panel corner/fade geometry"
+  ],
+  "comparisonNotes": {
+    "visual-defects-before-after.png": "same 1025x640 crops from actual 1600x900 native before and final after",
+    "corners-legend-before-after.png": "Unscaled side-by-side actual native 1600x900 before/after",
+    "before-after.png": "Verified native baseline 1440x810 vs final actual 1600x900 after scaled proportionally by0.9 to1440x810; standalone final image remains1600x900"
+  },
+  "codeCommitBase": "8cfbacebee01f18e3eeb883801602b44f7c73ab4",
+  "remoteWrites": false,
+  "fullProjectTestsRerun": false,
+  "compiledInputSHA256": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeSkillTreeD4Smoke.cs": "a5a82d7c56f69646e3a74e31ac6df89ddff35b04919c9d2a3fd6df0302bc1a50",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeSkillTreeD4Smoke.Target.cs": "85d87532d58dca926b9ab846fca0106f489269bd2a279bfea97552f14dbb10be",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.cs": "a966b1219db9bac5a2e7937261267e206c553dfdce1f2de9b5d7ba0b51596bdb",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Scene.cs": "93c556ab8ec1bbf3f9a231888b561fcc16af5465b0ee59b53ece7779823a2263",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Panel.cs": "0ef7d106dec5beda7bafc84f651c3d1fa2a179f482fa601efb2fc3a124ab93a1",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4/SkillTreeD4Graphics.cs": "199ed8688ef157aae9028ce5592818b1b43862129d2351f214ce4634ca1cdaca",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4/SkillTreeD4PaintGraphic.cs": "9552886b93206f9fa428a5c0508d42f93bebc7695cc06365ac272b630db722a9",
+    "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4/SkillTreeD4Wrap.cs": "dbb76ea4bac50ca4d7bd6cb6fc00ef6a72a993a192112495c657310f7b8e6da6",
+    "Assets/HELLSCRIPT/Resources/Data/SkillTreeD4Looks.json": "19cd48120f2bccb130dcc6875bf425a51c8c181cded40a1686013a2db435c168"
+  },
+  "binaryManifest": "target-native-binary-manifest.json",
+  "binaryFiles": 323,
+  "byteIdenticalContractFiles": 21,
+  "libraryDeliverables": [
+    {
+      "library_file_id": "libfile_38ffc07f4a2081918a036827e6ec53f9",
+      "file_id": "file_00000000b05481f5a4e5d44aeacf1ff6",
+      "filename": "Warrior-ko-2868x1320.png",
+      "metadataExitCode": 0
+    },
+    {
+      "library_file_id": "libfile_32e8086670848191aec8de1f8d496a25",
+      "file_id": "file_0000000006e481f59f10a4f565ad32f1",
+      "filename": "Warrior-ko-1600x900.png",
+      "metadataExitCode": 0
+    },
+    {
+      "library_file_id": "libfile_c5c26202d93c8191b2809a8b30c6c1f6",
+      "file_id": "file_00000000549881fa9906a5976597f90a",
+      "filename": "before-after.png",
+      "metadataExitCode": 0
+    },
+    {
+      "library_file_id": "libfile_31123ffd9f808191b2265555c158a8b5",
+      "file_id": "file_000000002748820d8ba9675d13f3ee0e",
+      "filename": "Casual_UI_Skin_Rules_20261014.md",
+      "metadataExitCode": 0
+    }
+  ]
+}

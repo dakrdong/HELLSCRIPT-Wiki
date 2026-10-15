@@ -1,5 +1,7 @@
 # Global HUD, Potions and Hunting Edicts
 
+2026-10-14 update: casual base HUD layout, independent graphs and top-right edict follow the [new source handoff](Casual_Battle_HUD_20261014.en.md). Historical runtime evidence below does not validate the new skin.
+
 Update, 2026-09-28: the whole bottom HUD retains one landscape composition at one scale. Portrait no longer splits ultimate/ordinary skills into rows or changes individual potion, seal, XP, HP or MP dimensions. The historical orientation-specific descriptions and captures below are superseded by [window shrinking and a unified bottom HUD](Responsive_Hud_20260928.en.md).
 
 Historical rule (September 20, 2026): potions sat above every skill row. The September 28 layout places them beside skills and anchors the combat journal below the complete HUD. The earlier bottom potion row is superseded by [Town HUD improvements](Town_Hud_Responsive.en.md).

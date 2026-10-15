@@ -22,6 +22,7 @@ namespace Hellscript
         public float BattleViewHeight=>Page=="battle"&&battleWorld!=null?battleWorld.rect.height:Screen.height;
         void BuildBattleHud(RunState run)
         {
+            if(CasualCombatHud)PrepareCasualBattleHud();
             battleWorld=Rect("Combat viewport",root.parent);battleWorld.SetAsFirstSibling();
             header.GetComponent<Image>().color=Color.clear;
             foreach(var child in header.GetComponentsInChildren<Image>())if(child.name=="Gold divider")child.enabled=false;
@@ -59,6 +60,7 @@ namespace Hellscript
             // The selected aspect frame is the camera region. The HUD only observes it.
             BattleViewport=UiSafeArea.FrameNormalized;
             battleWorld.anchorMin=BattleViewport.min;battleWorld.anchorMax=BattleViewport.max;battleWorld.offsetMin=battleWorld.offsetMax=Vector2.zero;
+            if(CasualCombatHud){ReflowCasualBattleHud();return;}
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
             var hud=globalHud?.Layout;
             dockIcon=hud==null?44:DockIconSize(root.rect.height-(LiveJournalHudInset+hud.potionBounds.yMax*hud.scale)/BattleCanvasScale,false);

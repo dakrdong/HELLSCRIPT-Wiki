@@ -27,7 +27,7 @@ namespace Hellscript
         public static CombatSimulation CreateSkillPreview(GameCatalog catalog,SkillPresetScenario scenario)
         {
             var definition=ClassSkills.Find(scenario.skill);
-            var fixture=GameStore.NewAccount(catalog);fixture.selectedHero=definition.heroClass;
+            var fixture=GameStore.NewAccount(catalog);fixture.selectedHero=HeroSlots.Index((HeroClass)definition.heroClass,HeroGender.Male);
             var h=fixture.Hero;h.id="0000000000000000000000000000000"+definition.heroClass;h.level=60;h.inventory.Clear();h.build.classSkills=null;
             h.build.activeSkills.Clear();h.build.passives=Array.Empty<int>();h.useEdict=true;h.useRecommendedEdict=false;
             h.classUltimateRemaining=h.classUltimateTotal=0;h.potions=new PotionInventory{version=1};

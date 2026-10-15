@@ -88,7 +88,11 @@ namespace Hellscript
             if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
             if(presetModal!=null){ApplyScaler(presetModal.GetComponent<CanvasScaler>(),true);presetScreenSize=Vector2.zero;ReflowPresetDialog();}
             if(quickRoot!=null&&quickKind=="potion"){ApplyScaler(quickRoot.GetComponent<CanvasScaler>(),true);quickScale=quickRoot.GetComponent<CanvasScaler>().scaleFactor;ReflowPotionQuick();}
-            Canvas.ForceUpdateCanvases();ReflowEdictSheet();
+            Canvas.ForceUpdateCanvases();
+            // The edict camera subtracts the HUD bounds. Settle the new orientation first;
+            // the periodic HUD refresh would otherwise leave the old portrait inset here.
+            RefreshGlobalHud();ReflowBattleHud();Canvas.ForceUpdateCanvases();
+            ReflowEdictSheet();
         }
         void RefreshCanvasScale()
         {
@@ -167,6 +171,7 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
+            CloseCharacterSelectionPage();
             if(combatLogView!=null){combatLogView.Close();combatLogView=null;}
             CloseRiftVictory();CloseTrainingResult();CloseNpcDialogue();CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
             if(PlayInventoryOpen&&page!="bag"&&page!="warehouse")ReleasePlayInventory();
@@ -224,7 +229,17 @@ namespace Hellscript
             Note(content,"SANCTUARY  /  잿빛 성소",18,45,gold);
             var heroCard=Row(content,158);Icon(heroCard,18+(int)h.heroClass,15,15,125);
             var info=Label(heroCard,Loc.F("{0}   Lv.{1}\n최고 실클리어 {2}단계\n{3}", game.catalog.classNames[(int)h.heroClass], h.level, h.highestClear, h.build.name),25,pale);Place(info.rectTransform,160,10,470,135);
-            var classes=Row(content,96);for(int i=0;i<3;i++){int id=i;var b=Button(classes,game.catalog.classNames[i],()=>game.SelectHero(id),i==a.selectedHero?new Color(.35f,.25f,.14f):panel);UiTheme.Choice(b,i==a.selectedHero,false);Across(b,i,3,8,TouchHeight);b.interactable=a.suspendedRun==null;}
+            var roster=new[]{0,3,1,4,2,5}.Where(index=>HeroSlots.IsCreated(a,index)).ToArray();
+            for(int offset=0;offset<roster.Length;offset+=3)
+            {
+                var classes=Row(content,96);int count=Mathf.Min(3,roster.Length-offset);
+                for(int i=0;i<count;i++)
+                {
+                    int id=roster[offset+i];var candidate=a.heroes[id];
+                    var b=Button(classes,Loc.T(game.catalog.classNames[(int)candidate.heroClass])+" "+(candidate.gender==HeroGender.Female?"♀":"♂"),()=>game.SelectHero(id),panel);
+                    UiTheme.Choice(b,id==a.selectedHero,false);Across(b,i,count,8,TouchHeight);b.interactable=a.suspendedRun==null;
+                }
+            }
             AddTownGuide();
             Note(content,Loc.F("골드 {0:N0}    일반 재료 {1:N0}    가방 {2}/{3}", a.gold, a.materials, h.inventory.Count(x=>!x.equipped), h.capacity),21,50,pale);
             var stage=Row(content,100);var minus=Button(stage,"−",()=>{game.SelectedStage=Mathf.Max(1,game.SelectedStage-1);ShowTownMenu();});Place((RectTransform)minus.transform,12,10,TouchHeight,TouchHeight);
@@ -465,15 +480,16 @@ namespace Hellscript
             foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
         }
         public void ShowToast(string text)=>ShowToast(text,5);
-        public void ShowToast(string text,float seconds)
+        public void ShowToast(string text,float seconds)=>ShowToast(text,seconds,false);
+        void ShowToast(string text,float seconds,bool showDuringBattle)
         {
             if(game.DisplayDimmed){RefreshIdleSummary(true);return;}
             if(toast==null)return;toast.text=Loc.T(text);toastTime=seconds;toastFrame.gameObject.SetActive(!string.IsNullOrEmpty(text));overlay.SetAsLastSibling();
             bool compact=seconds<=2;
             toastFrame.anchorMin=new Vector2(compact?.5f:.05f,0);toastFrame.anchorMax=new Vector2(compact?.5f:.95f,0);
             toastFrame.sizeDelta=new Vector2(compact?Mathf.Min(root.rect.width*.9f,toast.preferredWidth+32):0,62);
-            // The battle HUD shows a long toast in its brief line only; a tutorial run keeps the toast, since its refusals and errors are the only word the player gets.
-            if(Page=="battle"&&!compact&&!game.TutorialActive){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
+            // Routine long notices stay hidden in battle; tutorial refusals and explicit save errors remain visible.
+            if(Page=="battle"&&!compact&&!game.TutorialActive&&!showDuringBattle){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
             Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
         }
         void LateUpdate()

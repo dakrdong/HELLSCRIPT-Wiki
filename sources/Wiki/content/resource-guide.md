@@ -1,71 +1,38 @@
-# 리소스 제작·관리 기준
+# 리소스 제작·관리 기준 / Resource management
 
-정리 기준일: 2026-09-09 · 현재 파일, 런타임 사용처와 기존 기획의 제작 공백을 정리합니다.
+정리 기준일: 2026-10-15. 리소스 DB는 현재 게임에 등록된 파일과 연결 근거를 수집합니다. 등록·아트 검수·실제 화면 적용·출시 승인은 각각 별도 상태입니다. / Updated 2026-10-15. The resource database collects current registered game files and their evidence. Registration, art review, runtime acceptance and release approval are separate states.
 
-## 리소스 DB의 분류
+## 현재 수집 범위 / Current collection
 
-| 분류 | 의미 | 관리 방법 |
-| --- | --- | --- |
-| 이미지 원본 | 프로젝트에서 사용하는 PNG 파일입니다. | 파일 경로·크기·색상 모드·알파 유무·해시·사용처·출처 기록을 연결합니다. |
-| 아틀라스 영역 | 원본 이미지의 일부를 사용하는 아이콘입니다. 독립 PNG가 아닙니다. | 원본 파일과 0부터 시작하는 셀 번호를 보존하고 Unity와 같은 6열×4행 배치를 표시합니다. |
-| 코드 생성 표현 | 런타임에 기본 메시·선·UI 요소로 만드는 표현입니다. | 표현을 만드는 코드, 연결 콘텐츠, 정식 제작 때 교체할 범위를 기록합니다. |
-| 제작 과제 | 기획에 필요하지만 정식 자산이 아직 없는 항목입니다. | 현재 대체 표현, 다음 제작물과 완료 조건을 명시합니다. |
-| Unity 자산 | 카탈로그·재질·씬처럼 게임이 직접 참조하는 Unity 파일입니다. | 경로·GUID·해시와 변경 기준을 기록합니다. |
-| 임시 모델·환경 | 영웅·적·보스·방·상호작용 오브젝트를 기본 메시로 조합한 런타임 표현입니다. | 연결 콘텐츠 ID와 정식 모델·애니메이션 제작 범위를 기록합니다. |
-| 캐릭터 원본 | 생성한 캐릭터의 참고 이미지와 3D 모델 파일입니다. | 생성 모델·프롬프트·GUID·해시와 전투 연결 여부를 기록합니다. |
+| 분류 / Category | 수집과 연결 / Collection and binding |
+| --- | --- |
+| 승인 장비 / Canonical equipment | 승인 receipt의 359개 그림과 콘텐츠 ID를 대조합니다. 공통 장비 조회는 이 그림을 기본으로 사용하고 B28→B32 공유를 유지합니다. / Match the 359-art receipt to catalog IDs; shared lookup uses canonical art and keeps the B28→B32 alias. |
+| 캐주얼 화면 / Casual screens | Resources/Art의 현재 PNG, 기본 HUD Casual 60개, Title/Vista, CharacterPlaza와 각 콘텐츠 창의 실제 등록 그림을 수집합니다. / Collect current PNGs in Resources/Art, including 60 Casual HUD assets, Title/Vista, CharacterPlaza and content-window assets. |
+| 보석·제조 영약 / Gems and elixirs | 공통 조회와 DB 미리보기는 JewelerWindow의 새 그림 72개를 사용합니다. / Shared lookup and previews use the 72 new JewelerWindow images. |
+| 모델·필드 / Models and fields | HunyuanReady의 실제 prefab/recipe와 6개 캐주얼 필드 manifest를 연결합니다. 설치 상태를 실제 실행 통과로 표현하지 않습니다. / Link installed HunyuanReady prefab/recipes and six casual-field manifests without claiming fresh runtime acceptance. |
+| 글꼴·보조 UI / Fonts and auxiliary UI | CasualSkill 번들 글꼴, DailyQuestCasual과 PotionQuickCasual의 등록 파일도 수집합니다. / Include bundled CasualSkill fonts and registered DailyQuestCasual/PotionQuickCasual assets. |
+| 런타임 대체 표현 / Runtime fallbacks | 아직 코드나 기존 그림을 사용하는 표현은 해당 소스와 현재 적용 범위를 기록합니다. / Retain source and scoped usage for remaining code or older-art fallbacks. |
 
-원본 PNG 4개와 같은 파일을 나눠 사용하는 아이콘 영역을 합쳐 ‘고유 이미지 파일 수’로 계산하지 않습니다. 전설·세트 장비는 베이스 아이콘을 사용하므로 전설별 정식 아이콘이 완성되었다고 표시하지 않습니다.
+파일별 실제 크기·모드·PNG SHA-256·Unity GUID와 원본 경로는 DB에서 확인합니다. 같은 원본을 공유하는 콘텐츠나 별칭을 고유 신규 그림 수로 중복 계산하지 않습니다. `row.image.file`은 미리보기 경로이며 실제 원본은 각 항목의 source/assetPath에 연결됩니다. / Inspect actual dimensions, mode, PNG hash, Unity GUID and source path in each record. Shared art and aliases are not additional unique masters. `row.image.file` identifies the preview; source/assetPath identifies its original.
 
-## 현재 이미지
+## 이전 그림과 문서 이력 / Retired art and document history
 
-| 파일 | 사용처 | 제작·출처 상태 |
-| --- | --- | --- |
-| Sanctuary.png | 성소·결과 화면의 배경 | 내장 이미지 생성으로 제작한 개발용 임시 자산입니다. 생성 모델명은 기존 기록에서 검증하지 못했습니다. |
-| SkillAtlas.png | 액티브 18개와 직업 3개 아이콘 | 내장 이미지 생성으로 제작한 개발용 임시 아틀라스입니다. 모델명은 검증하지 못했습니다. 마지막 3셀은 현재 장비 전용 아틀라스와 구분합니다. |
-| EquipmentAtlas.png | B01–B24의 장비 목록·상세 아이콘 | RGBA 원본의 알파를 유지합니다. 기존 생성 기록에서 gpt-image / 2.0 메타데이터를 확인했으나 출시 승인 자산은 아닙니다. |
-| RiftStone.png | 균열의 바닥 재질 | RGB 원본입니다. 기존 생성 기록에서 gpt-image / 2.0 메타데이터를 확인했습니다. |
+구 장비335·보석36·제조 영약36의 PNG/meta 407쌍은 새 대체본의 ID·해시·GUID를 확인하고 현재 게임 Resources에서 복구 가능한 범위로 분리했습니다. 현재 DB와 미리보기는 제거한 경로를 사용하지 않습니다. 정확한 목록과 검증은 [retirement manifest](../../tools/casual_resource_retirement_20261015.json), [통합 인계](../../Docs/Implementation/Casual_UI_Integration_20261014.md), [English handoff](../../Docs/Implementation/Casual_UI_Integration_20261014.en.md)에 있습니다. / The 407 old equipment/gem/elixir image/meta pairs are recoverably separated after exact replacement verification; current database rows and previews no longer use them.
 
-이미지 크기와 알파 통계는 빌드할 때 실제 파일에서 읽습니다. 출처 설명은 [임시 리소스 출처](../../Docs/Implementation/Asset_Provenance.md), [장비 아이콘 생성 기록](../../Docs/Implementation/Equipment_Atlas_Prompt.md), [균열 바닥 생성 기록](../../Docs/Implementation/Rift_Stone_Prompt.md)에 근거합니다. 알파 채널이 존재한다는 것만으로 외곽선·잔색·후광의 시각 검수가 끝났다고 판단하지 않습니다.
+과거 문서가 실제로 참조하는 첨부는 [exact Git-object allowlist](../../tools/wiki_retired_art_sources.json)에 따라 보존된 이력에서 읽어 내보냅니다. 이 첨부를 현재 게임 리소스로 다시 등록하거나 게임 폴더에 원화 사본을 만들지 않습니다. Git 객체가 없는 불완전 이력에서는 생성기가 명시적으로 실패하므로 해당 원본 이력을 먼저 복구해야 합니다. / Historical attachments export only from exact preserved Git objects on the allowlist. They are not current resources or new game-source copies. Missing historical objects fail generation explicitly.
 
-## 코드로 만드는 화면과 표현
+## 남은 캐주얼 교체 / Remaining casual replacement
 
-아래 표현은 독립 이미지·프리팹 파일이 아니라 런타임에 uGUI와 기본 메시·선으로 구성합니다. 리소스 DB의 ‘코드 생성 표현’ 항목과 같은 범위이며, 정식 아트로 교체할 때 연결 기록의 판정·보존 계약을 유지해야 합니다.
+사용자는 새 대체본이 없는 그림도 제작해 이전 컨셉을 모두 교체하도록 승인했습니다. 기존 승인 원화는 먼저 재사용하고, 실제 부족한 스킬·공통 UI 그림만 새로 만듭니다. 스킬, 공통 UI, 인물·아이템 담당은 별도 출력에서 작업하며 게임 소스·Unity·최종 통합은 한 담당이 소유합니다. / The user authorized replacement of the remaining previous-concept artwork, including new art where needed. Reuse approved art first. Separate skill, shared-UI and portrait/item producers deliver outputs to one game/Unity integration owner.
 
-| 표현 | 구현 파일 | 연결 기록 |
-| --- | --- | --- |
-| 적·정예 위험 형상 | `WorldView.Enemies.cs` | [일반 몬스터·정예 구현](../../Docs/Implementation/Enemy_Expansion.md) |
-| 전투 효과·위험 예고 | `WorldView.Actions.cs` | [전투 효과 통합 기록](../../Docs/Implementation/Effect_Expansion.md) |
-| 게임 UI·게이지 | `GameUI.cs` | [첫 플레이 빌드](../../Docs/Implementation/Playable_Build.md) |
-| 전투 HUD 배치 | `BattleHudLayout.cs`, `GameUI.BattleLayout.cs` | [전투 HUD·카메라 배치 개발 기록](../../Docs/Implementation/Battle_Layout_Expansion.md) |
-| 탐색 안개·미니맵 | `WorldView.Exploration.cs`, `RiftMinimap.cs` | [전투 HUD·카메라 배치 개발 기록](../../Docs/Implementation/Battle_Layout_Expansion.md) |
-| 장비 목록·비교 화면 | `InventoryLayout.cs`, `GameUI.InventoryLayout.cs` | [장비 목록·비교·일괄 정리 개발 기록](../../Docs/Implementation/Inventory_Management_Expansion.md) |
-| 설정·안내 공통 창 | `GameUI.ScreenSettings.cs` | [화면 설정·공통 안내 개발 기록](../../Docs/Implementation/Screen_Settings_Expansion.md) |
-| 첫 플레이 안내 화면 | `GameUI.Guide.cs` | [첫 플레이 안내 개발 기록](../../Docs/Implementation/First_Play_Expansion.md) |
-| 성장·레벨업 화면 | `GameUI.Growth.cs` | [성장 정산 개발 기록](../../Docs/Implementation/Growth_Expansion.md) |
-| 훈련 A/B 비교 화면 | `GameUI.Comparison.cs` | [훈련 A/B 비교 개발 기록](../../Docs/Implementation/Training_Comparison_Expansion.md) |
-| 행동 규칙·프리셋 편집 화면 | `GameUI.Rules.cs`, `GameUI.Presets.cs` | [행동 규칙 개발 기록](../../Docs/Implementation/Rule_Expansion.md), [화면 배치 개발 기록](../../Docs/Implementation/Screen_Layout_Expansion.md) |
-| 전투 효과·적 정보 열람 화면 | `GameUI.Effects.cs`, `GameUI.Enemies.cs` | [전투 효과 통합 기록](../../Docs/Implementation/Effect_Expansion.md), [일반 몬스터·정예 구현](../../Docs/Implementation/Enemy_Expansion.md) |
+직업·성별·방향·아이템 ID·별칭·저장 키와 기존 화면 기능은 유지합니다. 승인된 인물·위상·상자 원화가 있다는 사실만으로 런타임 연결까지 완료됐다고 표시하지 않습니다. 모델 리깅과 진행 중 몬스터 작업도 별도 소유 범위로 보호합니다. / Preserve class, gender, facing, item IDs, aliases, saves and screen behavior. Existing approved portraits/aspects/boxes are not automatically runtime-integrated. Protect active model-rigging and monster work.
 
-## 정식 제작으로 이어질 항목
+## 추가·교체 검증 / Addition and replacement checks
 
-| 항목 | 현재 표현 | 다음 제작·확인 범위 |
-| --- | --- | --- |
-| 영웅 3직업 | 골격 없는 기본 몸체와 이동·회전·흔들림입니다. 야만전사 모델 1종을 생성해 시작 씬에 확인용으로 배치했으나 전투 표현에는 연결하지 않았습니다. | 생성한 모델에 골격과 스킬 준비·발사·회피·피격·사망 애니메이션을 붙여 실제 판정 시점과 연결하고, 나머지 두 직업의 모델을 제작합니다. |
-| 일반 적 20종·보스 5종 | 코드로 구성하는 임시 몸체와 패턴 표시 | 식별 가능한 실루엣·애니메이션과 공격 예고·피격 영역을 맞춥니다. |
-| 필드 6종과 12종 방 | 기본 메시의 바닥·기둥·벽·화로 | 테마별 모델·재질과 장식물을 제작하되 통로·시야·투사체·몸체 통과 계약을 유지합니다. |
-| 상자·성소 | 코드로 만든 상호작용 오브젝트 | CH01–CH03, SH01–SH02를 구분하고 봉인·사용 가능·개봉·사용 완료 상태를 표현합니다. |
-| 작은 마을·NPC 4명 | 기본 메시 광장과 통자 임시 담당자 5곳이 있고, 목적지를 누르면 영웅이 걸어가 서비스를 엽니다. | 담당자와 광장의 정식 모델을 제작하고 카메라 범위를 조정합니다. 메뉴 바로가기는 같은 서비스를 계속 즉시 엽니다. |
-| 전투·보상 음향 | 프로젝트 소스와 리소스 폴더에서 정식 음원 등록을 확인하지 못했습니다. | 타격·피격·회피·장비 획득·보스 예고·결과의 음원과 재생 우선순위를 연결합니다. |
-| 탐색 안개 경계 | 방·통로 단위의 표시와 고정 관찰 범위로 미탐색 정보를 가립니다. | 안개 경계의 미술적 개선과 실제 기기의 렌더링 비용 측정이 남아 있습니다. |
-| 한국어 글꼴 | 실행 기기의 운영체제 글꼴을 사용합니다. | Android 배포 글꼴의 사용권·포함 방식·긴 문구와 작은 화면 표시를 검증합니다. |
-| 보석 | 단일 패치 기준의 실제 수치표를 검증하는 단계입니다. | 종류·등급·효과·8부위 적용표를 확인한 뒤 데이터와 아이콘을 제작합니다. 기존 혼합 표를 현행 데이터로 옮기지 않습니다. |
+1. 실제 소비 화면과 콘텐츠 ID·상태·공유 관계를 확인합니다. / Identify the real consumer, ID, states and aliases.
+2. 최신 승인 원본·정확한 SHA·출처·프롬프트를 먼저 확인합니다. / Verify the latest approved original, hash, provenance and prompt.
+3. 같은 경로의 교체는 meta/GUID를 유지하고 가져오기 예산을 확인합니다. / Preserve meta/GUID for same-path replacement and check import budgets.
+4. alpha·잘림·작은 크기·상태 대비와 실제 게임 대표를 검증한 뒤 같은 유형을 확대합니다. / Verify alpha, containment, small-size readability, state contrast and one actual-game representative before expansion.
+5. 최종 통합 입력에서 전체 게임 검사와 한 개 네이티브 빌드를 공유하고 위키 build/check·검색·링크·이미지 검사를 한 번 수행합니다. / Share final game tests and one native build, then run integrated wiki build/check, search, link and image validation once.
 
-## 리소스를 추가하거나 교체할 때
-
-1. 연결할 콘텐츠 ID, 목적과 화면에서 필요한 상태를 정합니다.
-2. 원본과 출처·프롬프트·사용권 기록을 함께 보존합니다.
-3. 정식 자산의 경로, Unity 가져오기 설정과 런타임 참조를 확인합니다.
-4. 이미지의 알파·가독성, 모델·애니메이션의 판정 시점, 기기 품질을 검증합니다.
-5. 리소스 DB를 다시 생성하고 원본 경로·ID·연결 문서가 맞는지 확인합니다.
-
-이번 정리에서 이미지나 게임 자산을 새로 생성·편집하지 않았습니다. 위키의 미리보기는 기존 원본 파일과 아틀라스 좌표를 그대로 사용합니다.
+영구 삭제·공개 게시·원격 push의 승인 범위와 실제 실행 결과는 별도로 기록합니다. 휴지통 이동이나 폴더 표시 용량을 실제 공간 회수로 보고하지 않습니다. / Record permanent deletion, publication and push authorization/results separately. A Trash move or logical folder size is not reclaimed-space proof.

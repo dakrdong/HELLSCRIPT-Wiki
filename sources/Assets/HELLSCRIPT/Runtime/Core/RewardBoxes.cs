@@ -128,7 +128,7 @@ namespace Hellscript
             a.rewardBoxes.firstClearPromises??=new List<RewardBoxPromise>();
             a.rewardBoxes.openingReceipts??=new List<RewardBoxReceipt>();
             // Existing exact clears keep their shipped package even when first opened after deployment.
-            if(a.schema<16)foreach(int stage in a.heroes.SelectMany(h=>h.riftProgress?.best??new List<RiftBestTime>()).Where(b=>b.milliseconds>0).Select(b=>b.stage).Distinct())
+            if(a.schema<16)foreach(int stage in HeroSlots.Created(a).SelectMany(h=>h.riftProgress?.best??new List<RiftBestTime>()).Where(b=>b.milliseconds>0).Select(b=>b.stage).Distinct())
                 CapturePromise(a,stage,null);
             Validate(a);
         }
@@ -149,7 +149,7 @@ namespace Hellscript
                     throw new NotSupportedException("Invalid owned reward box; original save preserved.");
             }
         }
-        public static bool Eligible(AccountSave a,int stage)=>stage>=1&&stage<=1000&&a.heroes.Any(h=>(h.riftProgress?.Best(stage)??0)>0);
+        public static bool Eligible(AccountSave a,int stage)=>stage>=1&&stage<=1000&&HeroSlots.Created(a).Any(h=>(h.riftProgress?.Best(stage)??0)>0);
         public static string Status(AccountSave a,int stage)=>a.rewardBoxes.claimedStages.Contains(stage)?"claimed":Eligible(a,stage)?"ready":"locked";
         public static RewardBoxGrant[] Preview(AccountSave a,int stage,LiveOpsRunSnapshot next=null)
         {

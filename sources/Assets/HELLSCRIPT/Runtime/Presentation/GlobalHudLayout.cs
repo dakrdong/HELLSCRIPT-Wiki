@@ -16,25 +16,25 @@ namespace Hellscript
         public float potionRowGap=36,landscapePotionPitch=96,portraitPotionPitch=84;
         public float portraitStatusIcon=40,landscapeStatusY=150,portraitStatusY=188,portraitStatusX=56,statusTextHeight=24;
         public float portraitXpY=72,landscapeXpTextY=24,portraitXpTextY=44;
-        public Color gold=new Color(0.77f,0.66f,0.45f,1f);
-        public Color pale=new Color(0.953f,0.922f,0.855f,1f);
-        public Color hpColor=new Color(0.784f,0.251f,0.235f,1f);
-        public Color resourceColor=new Color(0.2f,0.541f,0.796f,1f);
-        public Color shieldColor=new Color(0.35f,0.87f,0.83f,1f);
-        public Color vitalTrack=new Color(0.035f,0.045f,0.052f,0.7f);
-        public Color xpTrack=new Color(0.2f,0.17f,0.12f,0.65f);
-        public Color xpColor=new Color(0.847f,0.718f,0.455f,1f);
-        public Color slotPlate=new Color(0.025f,0.03f,0.04f,0.66f);
-        public Color cooldownTint=new Color(0f,0f,0f,0.7f);
-        public Color disabledTint=new Color(0.38f,0.38f,0.4f,0.75f);
-        public Color activeTint=new Color(1f,0.87f,0.52f,1f);
-        public Color resourceWarning=new Color(0.45f,0.72f,1f,1f);
-        public Color textShadow=new Color(0.02f,0.025f,0.03f,0.95f);
-        public Color deadTint=new Color(0.55f,0.55f,0.55f,1f);
-        public Color expiredTint=new Color(0.4f,0.4f,0.4f,0.35f);
-        public float valueFont=16f;
+        public Color gold=new Color(1.0f,0.8235294f,0.2470588f,1f);
+        public Color pale=new Color(1.0f,1.0f,1.0f,1f);
+        public Color hpColor=new Color(1.0f,0.3529412f,0.372549f,1f);
+        public Color resourceColor=new Color(0.2078431f,0.654902f,1.0f,1f);
+        public Color shieldColor=new Color(0.3686275f,0.8784314f,0.8313725f,1f);
+        public Color vitalTrack=new Color(0.9019608f,0.9137255f,0.9411765f,1f);
+        public Color xpTrack=new Color(0.9019608f,0.9137255f,0.9411765f,1f);
+        public Color xpColor=new Color(1.0f,0.6235294f,0.1098039f,1f);
+        public Color slotPlate=new Color(1.0f,0.9647059f,0.8901961f,1f);
+        public Color cooldownTint=new Color(0.1647059f,0.1921569f,0.3137255f,0.6f);
+        public Color disabledTint=new Color(0.5411765f,0.5764706f,0.7098039f,1f);
+        public Color activeTint=new Color(1.0f,0.8235294f,0.2470588f,1f);
+        public Color resourceWarning=new Color(0.2078431f,0.654902f,1.0f,1f);
+        public Color textShadow=new Color(0.1647059f,0.1921569f,0.3137255f,1f);
+        public Color deadTint=new Color(0.5411765f,0.5764706f,0.7098039f,1f);
+        public Color expiredTint=new Color(0.5411765f,0.5764706f,0.7098039f,0.35f);
+        public float valueFont=12f;
         public float levelFont=20f;
-        public float captionFont=16f;
+        public float captionFont=14f;
         public float cooldownFont=25f;
         public float potionCooldownFont=22f;
         public float statusFont=16f;
@@ -67,7 +67,8 @@ namespace Hellscript
     public sealed class GlobalHudLayout
     {
         public readonly float scale,width,height,statusIcon,statusGap,buttonHit,maximumStatusWidth;
-        public readonly bool landscape,wrapped;
+        public readonly bool landscape,wrapped,compact;
+        public readonly float presentationScale,collapsedStatusWidth,textScale;
         public readonly Rect seal,edict,potionSettings,level,hp,resource,shield,shieldLine,status,xp,xpText,potionBounds,ultimate;
         public readonly Rect[] actives=new Rect[4],potions=new Rect[3];
         public readonly float occupiedHeight;
@@ -86,51 +87,54 @@ namespace Hellscript
         {
             style??=new GlobalHudStyle();
             landscape=pixelsWide>=pixelsHigh;
-            float s=style.landscapeSkill,g=style.skillGap;
-            float row5=5*s+4*g,row3=3*s+2*g,row8=row5+row3+style.groupGap;
-            float requested=Mathf.Sqrt(Mathf.Max(1,pixelsWide*pixelsHigh)/(style.referenceLong*style.referenceShort))*interfaceFactor;
-            // One landscape composition, fitted as a group at every aspect ratio, never split or rewrapped.
-            // A portrait screen has no use for the empty middle of the landscape composition: the potion group closes up to the
-            // vitals (and the potion settings button beside them), so the whole HUD is as large as the screen's width allows.
-            float settingsSide=2*Mathf.Max(style.landscapeVitalHeight,style.valueFont+2)+style.vitalGap;
-            float compactLong=style.landscapeVitalsX+style.landscapeVitalWidth+style.edictGap+settingsSide+style.edictGap+row8+style.margin;
-            float composition=landscape?style.referenceLong:Mathf.Min(style.referenceLong,compactLong);
-            float fit=Mathf.Min(pixelsWide/composition,pixelsHigh/style.referenceShort);
-            scale=Mathf.Max(.01f,Mathf.Min(requested,fit));
+            compact=landscape&&pixelsHigh<600&&pixelsWide/pixelsHigh>=2;
+            wrapped=!landscape;
+            // Keep the 1600x900 area scale and its floor. Each orientation has its own approved
+            // composition; convert its design points back to logical units exactly once.
+            float requested=Mathf.Max(style.minimumScale,Mathf.Sqrt(Mathf.Max(1,pixelsWide*pixelsHigh)/(style.referenceLong*style.referenceShort)))*interfaceFactor;
+            float referenceW=!landscape?440:compact?956:1600,referenceH=!landscape?956:compact?440:900;
+            float baseline=Mathf.Sqrt(referenceW*referenceH/(style.referenceLong*style.referenceShort));
+            presentationScale=Mathf.Min(requested/baseline,Mathf.Min(pixelsWide/referenceW,pixelsHigh/referenceH));
+            scale=Mathf.Max(.01f,presentationScale*baseline);
             width=pixelsWide/scale;height=pixelsHigh/scale;
-            float origin=(width-composition)*.5f,m=style.margin+origin;
-            float left=style.landscapeVitalsX+origin,barWidth=style.landscapeVitalWidth;
-            wrapped=false;
-            float rightStart=width-m-row8;
-            barWidth=Mathf.Min(barWidth,Mathf.Max(style.minimumVitalWidth,width-left-m));
-            float vitalHeight=Mathf.Max(style.landscapeVitalHeight,style.valueFont+2),baseY=style.landscapeVitalY;
-            float sealSize=style.landscapeSeal;
-            // Text and its row shrink together. Compensate only for whole-pixel font rounding,
-            // never for an unscaled pixel floor that would enlarge text after the next HUD refresh.
-            float Row(float height,float font)=>Mathf.Max(height,font);
-            seal=new Rect(origin+style.sealX,style.sealY,sealSize,sealSize);
-            // The Hunt Edict button rides on the seal, a skill icon in size, so the combat settings are one tap from the hero.
-            edict=new Rect(seal.center.x-s*.5f,seal.yMax+style.edictGap,s,s);
-            level=new Rect(seal.center.x-style.levelWidth*.5f,style.levelY,style.levelWidth,Row(style.levelHeight,style.levelFont));
-            resource=new Rect(left,baseY,barWidth,vitalHeight);
-            hp=new Rect(left,baseY+vitalHeight+style.vitalGap,barWidth,vitalHeight);
-            // Right of the two bars, as tall as both: the potion thresholds are one tap from the vitals they guard.
-            potionSettings=new Rect(left+barWidth+style.edictGap,resource.y,hp.yMax-resource.y,hp.yMax-resource.y);
-            shieldLine=new Rect(left,hp.yMax+1,barWidth,2);
-            shield=new Rect(left,hp.yMax+3,barWidth,Row(style.shieldHeight,style.shieldFont));
-            float activeY=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
-            for(int i=0;i<3;i++)potions[i]=new Rect(rightStart+i*(s+g),activeY,s,s);
-            potionBounds=new Rect(rightStart,activeY-style.captionHeight,row3,s+style.captionHeight);
-            rightStart+=row3+style.groupGap;
-            ultimate=new Rect(rightStart,activeY,s,s);
-            for(int i=0;i<4;i++)actives[i]=new Rect(rightStart+(i+1)*(s+g),activeY,s,s);
-            statusIcon=style.statusIcon;statusGap=style.statusGap;buttonHit=44;
-            float sy=Mathf.Max(style.landscapeStatusY,shield.yMax+1);
-            status=new Rect(left,sy,style.collapsed,statusIcon+style.statusTextHeight);
-            maximumStatusWidth=Mathf.Max(style.collapsed,Mathf.Min(style.expanded,potions[0].x-status.x-buttonHit-20));
-            xp=new Rect(m,style.xpBottom,composition-2*style.margin,style.xpThickness);
-            xpText=new Rect(m,style.landscapeXpTextY,200,Row(style.xpTextHeight,style.captionFont));
-            occupiedHeight=Mathf.Max(status.yMax,potionBounds.yMax)+16;
+            float k=presentationScale,unit=k/scale,w=pixelsWide/k,h=pixelsHigh/k;
+            textScale=k*(landscape&&!compact?1:.72f);
+            Rect R(float x,float y,float rw,float rh)=>new Rect(x*unit,y*unit,rw*unit,rh*unit);
+            float margin=!landscape?16:compact?66:32,slot=!landscape?44:compact?48:76;
+            float gap=!landscape?5:compact?8:12,group=!landscape?10:compact?14:24;
+            float row3=3*slot+2*gap,row8=8*slot+6*gap+group;
+            float first=!landscape?16:w-margin-row8,slotY=!landscape?147:compact?37:54;
+            if(!landscape)gap=Mathf.Max(5,(w-32-8*slot-group)/6);
+            row3=3*slot+2*gap;
+            for(int i=0;i<3;i++)potions[i]=R(first+i*(slot+gap),slotY,slot,slot);
+            potionBounds=R(first,slotY-18,row3,slot+18);
+            float start=first+row3+group;
+            ultimate=R(start,slotY,slot,slot);
+            for(int i=0;i<4;i++)actives[i]=R(start+(i+1)*(slot+gap),slotY,slot,slot);
+            float sealX=!landscape?16:compact?70:24,sealY=!landscape?58:compact?34:60,sealSize=!landscape?60:compact?64:112;
+            seal=R(sealX,sealY,sealSize,sealSize);
+            float lw=landscape&&!compact?72:48,lh=landscape&&!compact?26:20;
+            level=R(sealX+(sealSize-lw)/2,sealY-(landscape&&!compact?16:12),lw,lh);
+            float barX=!landscape?88:compact?146:152,barY=!landscape?62:compact?38:86;
+            float barW=Mathf.Min(!landscape?260:compact?200:300,w-barX-(!landscape?76:compact?60:90));
+            float barH=!landscape?14:compact?15:20,barGap=!landscape?5:compact?6:8;
+            resource=R(barX,barY,barW,barH);hp=R(barX,barY+barH+barGap,barW,barH);
+            potionSettings=R(barX+barW+12,barY-2,landscape&&!compact?48:44,landscape&&!compact?48:44);
+            shieldLine=R(barX,barY+2*barH+barGap,barW,4);
+            shield=new Rect(shieldLine.x,shieldLine.yMax,shieldLine.width,(landscape&&!compact?18:14)*unit);
+            float statusSize=!landscape?32:compact?30:44,sg=landscape&&!compact?8:6;
+            statusIcon=statusSize*unit;statusGap=sg*unit;buttonHit=44*unit;
+            float sy=!landscape?200:compact?88:134,sx=!landscape?16:first;
+            float caption=Mathf.Max(style.statusTextHeight*scale,FontSize(style.statusFont,(int)style.minimumFont)+2)/k;
+            collapsedStatusWidth=(4.5f*statusSize+4*sg)*unit;
+            maximumStatusWidth=Mathf.Min(8*statusSize+7*sg,w-sx-44-12)*unit;
+            status=R(sx,sy,collapsedStatusWidth/unit,statusSize+caption);
+            float xpY=!landscape?40:12,xpX=!landscape?16:compact?70:32;
+            xp=R(xpX,xpY,w-xpX-margin,landscape&&!compact?8:6);
+            xpText=R(!landscape?88:compact?146:32,xpY+9,200,landscape&&!compact?22:16);
+            float button=landscape&&!compact?60:44,right=!landscape?12:compact?66:24,top=!landscape?110:compact?58:74;
+            edict=R(w-right-button,h-top-button,button,button);
+            occupiedHeight=Mathf.Max(status.yMax,Mathf.Max(seal.yMax,potionBounds.yMax))+8*unit;
         }
         // Page units of a content shortcut (and the settings gear): a skill icon's size on screen (skill logical units at the HUD scale, in page units
         // at the canvas scale) plus 15% for the clear margin the emblem art keeps inside its square, not under minimum page units, and small enough
@@ -142,7 +146,7 @@ namespace Hellscript
             return Mathf.Min(Mathf.Max(minimum,skill*1.15f*card),(hudTop-3*12*card-5*UiTheme.Gap*card)/6);
         }
         public Rect Pixels(Rect r)=>new Rect(r.x*scale,r.y*scale,r.width*scale,r.height*scale);
-        public int FontSize(float basis,int minimum)=>Mathf.Max(1,Mathf.RoundToInt(Mathf.Max(basis,minimum)*scale));
+        public int FontSize(float basis,int minimum)=>Mathf.Max(1,Mathf.RoundToInt(Mathf.Max(basis,minimum)*textScale));
         public static float ContentWidth(int count,float icon=44,float gap=8)=>Mathf.Max(0,count)*icon+Mathf.Max(0,count-1)*gap;
         public static float EdgeAlpha(float distance,float width)
         {if(width<=0)return 1;float t=Mathf.Clamp01(distance/width);return t*t*(3-2*t);}

@@ -1,0 +1,73 @@
+{
+  "mode": "static Roslyn compile only; no Unity execution",
+  "common_commit": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "runtime_and_editor_test_source_compiled": true,
+  "unity_runs": 0,
+  "editmode_tests_run": 0,
+  "new_blacksmith_test_cases_compiled_not_run": 9,
+  "assemblies": {
+    "Runtime": {
+      "exit_code": 0,
+      "sources": 834,
+      "errors": 0,
+      "warnings": 47,
+      "outputs": {
+        "Hellscript.Runtime.pdb": {
+          "bytes": 1629140,
+          "sha256": "42040d383b592e3dc2b45388171e0d699f302ba6f46a1ac18a075c7317744160"
+        },
+        "Hellscript.Runtime.dll": {
+          "bytes": 6650368,
+          "sha256": "253a8f4dc689533c0b0af5ac971ec50da601d67f91db45aab3bbeb9b5e0b28c6"
+        },
+        "Hellscript.Runtime.ref.dll": {
+          "bytes": 875008,
+          "sha256": "d8fc853c81bdf4ca2f7d1bd082ddd4aa027b3cecf2ba996f6d5aabec5be4d1c4"
+        }
+      },
+      "log_sha256": "f1be85525cd73b28e25f7114ac5244ea28b1c44cd018ef66f2674ce4e3366ec7",
+      "warning_files": [
+        "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/ItemCardArt.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeActionSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeAreaSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeIdleSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.Comparison.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.ItemPolish.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimePortalRecoverySmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRuleSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeScreenSettingsSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTownLookSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTrainingGroundSmoke.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTutorialSmoke.Puzzle.cs",
+        "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeUiStyleSmoke.cs"
+      ]
+    },
+    "Tests": {
+      "exit_code": 0,
+      "sources": 259,
+      "errors": 0,
+      "warnings": 2,
+      "outputs": {
+        "Hellscript.Tests.ref.dll": {
+          "bytes": 455680,
+          "sha256": "03333699b31ea023ee87562cc241fe0a80fb0c12e0296640d2c1dec07d7d0ca3"
+        },
+        "Hellscript.Tests.dll": {
+          "bytes": 2526208,
+          "sha256": "91f7d83aadc48e63b77dce28ff4b139bfeff33a13f490f676a213ad45514f40b"
+        },
+        "Hellscript.Tests.pdb": {
+          "bytes": 633828,
+          "sha256": "de0cdca2477a37789b11c3bfbf967263528af7e43f15adbc86c77b1dbe4c70e4"
+        }
+      },
+      "log_sha256": "9cf7c4152653feaa3aca5b5b56eddcbe05aa75a47a88283f95705cab8ae260ca",
+      "warning_files": [
+        "Assets/HELLSCRIPT/Tests/Editor/PuzzleHubTests.cs"
+      ]
+    }
+  },
+  "inputs_sha256": "b02c3e4a1f13d60b1037c9fe9f7c2e9900c4afe776f87db2245ff158e6dc8660"
+}

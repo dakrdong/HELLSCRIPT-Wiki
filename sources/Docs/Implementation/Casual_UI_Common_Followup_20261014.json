@@ -1,0 +1,146 @@
+{
+  "recordedAt": "2026-10-14T07:51:36.701869+00:00",
+  "baseCommit": "cdb9c140fbf8b778bd3c0bbc0fbcc68a5d9e3fa8",
+  "geometryFontCommit": "6cdf2df690941b7c9f751c39235ea36ce4ff9ed9",
+  "equipmentCommit": "f25e67aab62d72f9792b5c0d49e6692bfbca5eed",
+  "scope": "common shared presentation only; screen owners explicitly consume optional skins",
+  "staticCompile": {
+    "Runtime": {
+      "errors": 0,
+      "warnings": 47,
+      "sourceFileCount": 833,
+      "sourcePathShaManifest": "d755b3e74945d487dcfcd9cb644b6b7a41d27ab6c40e47c66955806ac4ba2ba4",
+      "sourceManifest": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/runtime-sources.sha256",
+      "log": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/runtime-compile.txt",
+      "logSha256": "5d5af5571c431d0b00b0faf5583b0d06a8e5fa791babee57f2c2f44894e27128",
+      "executedUnityTests": 0
+    },
+    "Editor": {
+      "errors": 0,
+      "warnings": 1,
+      "sourceFileCount": 53,
+      "sourcePathShaManifest": "c007b08b2db91a81f0580eb3a4c453a89e1da3d487a76cea6b5b5045cdc01c14",
+      "sourceManifest": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/editor-sources.sha256",
+      "log": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/editor-compile.txt",
+      "logSha256": "92a0a54847e59d0fc6329305e40dbaf8d36f918c82c917b7284058d24925959f",
+      "executedUnityTests": 0
+    },
+    "Tests": {
+      "errors": 0,
+      "warnings": 2,
+      "sourceFileCount": 258,
+      "sourcePathShaManifest": "d04b5b9910a29fe040091e6737fd13cd2ab22b456999c7ffe560149164c5f09b",
+      "sourceManifest": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/tests-sources.sha256",
+      "log": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/tests-compile.txt",
+      "logSha256": "9cf7c4152653feaa3aca5b5b56eddcbe05aa75a47a88283f95705cab8ae260ca",
+      "executedUnityTests": 0
+    }
+  },
+  "checks": {
+    "uiContract": {
+      "cases": 15,
+      "status": "pass",
+      "log": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/ui-contract.txt"
+    },
+    "uiRefresh": {
+      "bindings": 16,
+      "inventory": 192,
+      "status": "pass",
+      "log": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/ui-refresh.txt"
+    },
+    "diffCheck": "pass",
+    "fontCheck": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-followup/font-check.json",
+    "localDocLinks": "pass",
+    "newCodeMetaGuidUniqueness": "pass"
+  },
+  "fontPreservation": {
+    "status": "passed",
+    "baseCommit": "cdb9c140fbf8b778bd3c0bbc0fbcc68a5d9e3fa8",
+    "baselinePreservation": [
+      {
+        "font": "NotoSansKR-Skill400.ttf",
+        "baselineBytes": 515376,
+        "baselineSha256": "00bad3cfb48563a45c51b13089ce83356bb290ab39acb993c2f46c0cb556528c",
+        "existingCodepoints": 2604,
+        "existingGlyphs": 2989,
+        "allOutlinesAdvancesHintsAndLineMetricsPreserved": true
+      },
+      {
+        "font": "NotoSansKR-Skill700.ttf",
+        "baselineBytes": 515908,
+        "baselineSha256": "56c404ca5dd5bdf99c634ad5675ee3b5860123ea1f5a82472cfc0ba812b7e72b",
+        "existingCodepoints": 2604,
+        "existingGlyphs": 2989,
+        "allOutlinesAdvancesHintsAndLineMetricsPreserved": true
+      },
+      {
+        "font": "NotoSansKR-Skill900.ttf",
+        "baselineBytes": 515760,
+        "baselineSha256": "a574ab95fca157c65692644dc7ebd0f564689701af88c5101cd9930045a9db79",
+        "existingCodepoints": 2604,
+        "existingGlyphs": 2989,
+        "allOutlinesAdvancesHintsAndLineMetricsPreserved": true
+      }
+    ],
+    "protectedFilesUnchanged": [
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/Jua-SkillSubset.ttf",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-Skill900.ttf.meta",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-Skill400.ttf.meta",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/Jua-OFL.txt.meta",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-Skill700.ttf.meta",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-OFL.txt.meta",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/Jua-OFL.txt",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-OFL.txt",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/Jua-SkillSubset.ttf.meta"
+    ],
+    "byteDelta": 4484,
+    "requestedSymbols": "≠①②ⓘ□◆＋×",
+    "unsupportedSourceSymbols": "↳ ↶ ⌖ ▴ ▸ ▾ ☐ ☑ ☰ ✔",
+    "fullReceipt": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/font-symbol-coverage-followup.json"
+  },
+  "artReceipt": "../../tools/casual_equipment_art_receipt.json",
+  "artValidation": "359 sources/destinations SHA match; idempotent verified by import owner; Unity not imported",
+  "newUnityTests": {
+    "detailGeometryCases": 6,
+    "tabContrastSymbolCase": 1,
+    "chartCases": 14,
+    "executed": 0
+  },
+  "review": {
+    "independentReview": "read-only, no additional blocking finding after material correction",
+    "corrected": "RiftTerrain ignores vertex RGB; use cached gold/muted fog-aware preview materials rather than white dynamic material",
+    "nativeRemaining": "fog/colour state, range preview, representative equipment render, font metrics/KOEN and shared card layout"
+  },
+  "queue": {
+    "externalPid": 30116,
+    "observedAt": "2026-10-14T07:50:38Z",
+    "state": "R",
+    "elapsed": "01:05:21",
+    "project": "/private/tmp/claude-501/-Users-t8g-2410-pn-005-Documents-MyProject-HELLSCRIPT-HELLSCRIPT/c0f5663b-4a35-4341-9c80-4957c89bc86b/scratchpad/proj-final",
+    "purpose": "full EditMode",
+    "logMtime": "2026-10-14T07:50:30.816881Z",
+    "logBytes": 2066266,
+    "resultsXmlExists": false,
+    "access": "read-only ps allowed; no denial",
+    "firstPlannedScreen": "rift entry",
+    "firstPlannedCommit": "118371c77908ddfa1cf57097efa7c6c0c9391b0a",
+    "slot": "unassigned; no Unity launched by task6",
+    "cacheReuse": "parent may take over current clean worktree and its Library in place after external completion and explicit slot; no cache copying"
+  },
+  "attempts": {
+    "runtimeStaticCompile": 2,
+    "editorStaticCompile": 2,
+    "testsStaticCompile": 2,
+    "uiContractRuns": 2,
+    "uiRefreshRuns": 2,
+    "wholeUnityRuns": 0,
+    "playerBuilds": 0,
+    "nativeScreenshots": 0,
+    "wikiRuns": 0,
+    "remotePushes": 0
+  },
+  "timing": "Full active/tool-wait totals were not reliably measured across app update; actual command/output timestamps retained. No estimated savings claimed.",
+  "artifactLogicalBytes": 13534549,
+  "artPngLogicalBytes": 69753836,
+  "cleanup": "retain one existing cache/player and new proof until integration; no deletions or duplicate cache/player outputs"
+}

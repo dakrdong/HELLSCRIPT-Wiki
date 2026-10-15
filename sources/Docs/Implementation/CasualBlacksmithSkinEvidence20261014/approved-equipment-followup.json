@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "verified_utc": "2026-10-14T08:03:03.624852+00:00",
+  "result": "passed",
+  "scope": "Read-only source, donor bytes and fixed-commit Git blobs; no Unity import or rendering. Only this evidence JSON is written.",
+  "common_commit": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "forge_merge_commit": "c0da48f4fe3c9db78b9347d29f2c111aaaef1f7b",
+  "approval_receipt": "casual-equipment-20261014-359:qa-sha256:619e9fb629ebb03ad0ea78f7bb6f172fb5b0a24c39b59a1798324e33e4d74f4b",
+  "import_receipt": {
+    "donor_path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/tools/casual_equipment_art_receipt.json",
+    "repository_path": "tools/casual_equipment_art_receipt.json",
+    "sha256": "52b29468e0932e9d40e80ed007b27345a69ad08188ae3eb47b004dd3defa3020",
+    "matches_fixed_commit_blob": true
+  },
+  "approval_ledger_checks": {
+    "asset_index": {
+      "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Docs/Art/Art_Transition_20261014_Asset_Index.json",
+      "sha256": "21e44b1dcd9f6eb2a11c620caa7a8ced639036240ef90f842b6e6b9b10b49fbd",
+      "observed_sha256": "21e44b1dcd9f6eb2a11c620caa7a8ced639036240ef90f842b6e6b9b10b49fbd",
+      "matches": true
+    },
+    "csv": {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-13/task-7/output/hellscript-casual-equipment/delivery/HELLSCRIPT-equipment-359.csv",
+      "sha256": "4a45ac1e9d7aa279ac59340dba176b88345b97083666a36ec3a2e32401180588",
+      "observed_sha256": "4a45ac1e9d7aa279ac59340dba176b88345b97083666a36ec3a2e32401180588",
+      "matches": true
+    },
+    "director": {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-13/task-3/casual-art-brief/DIRECTOR_STATUS.json",
+      "sha256": "8dac73a7b7161dee5a9d38e2cd9b1db94d0d5d33dc338befd57992f0bde76403",
+      "observed_sha256": "8dac73a7b7161dee5a9d38e2cd9b1db94d0d5d33dc338befd57992f0bde76403",
+      "matches": true
+    },
+    "qa": {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-13/task-3/casual-art-brief/FINAL_PRIMARY_EXPORTS_QA.json",
+      "sha256": "619e9fb629ebb03ad0ea78f7bb6f172fb5b0a24c39b59a1798324e33e4d74f4b",
+      "observed_sha256": "619e9fb629ebb03ad0ea78f7bb6f172fb5b0a24c39b59a1798324e33e4d74f4b",
+      "matches": true
+    }
+  },
+  "prior_forge_map": {
+    "path": "Docs/Implementation/CasualBlacksmithSkinEvidence20261014/approved-art-map.json",
+    "sha256": "e3812257f900ba7625a5b78eb563ef183301b0a3197077d298ae9be8e423d035",
+    "equipment_records_matched": 359,
+    "total_prior_records": 376
+  },
+  "verification": {
+    "records": 359,
+    "group_counts": {
+      "base": 59,
+      "legendary": 141,
+      "set_emblem": 30,
+      "set_piece": 129
+    },
+    "approved_source_png_sha_matches": 359,
+    "donor_png_sha_matches": 359,
+    "fixed_commit_png_blob_sha_matches": 359,
+    "prior_map_sha_and_source_path_matches": 359,
+    "donor_meta_to_commit_blob_matches": 359,
+    "meta_guid_to_receipt_matches": 359,
+    "distinct_guids": 359,
+    "canonical_id_sha_resource_guid_bytes_table_sha256": "0a1fd003b5a86c40c9ecbd247927e217c391a87b5d624f8db4ec607a0f2c1049",
+    "png_logical_bytes": 69753836,
+    "errors": []
+  },
+  "provider": {
+    "path": "Assets/HELLSCRIPT/Runtime/Presentation/CasualEquipmentArt.cs",
+    "sha256": "abbc4a1d1378fa14da0abd9dda8d1ea12d614e9c94ab21a87cec35a6f504a57b",
+    "matches_fixed_commit_blob": true,
+    "resource_root": "Art/Casual/Equipment/",
+    "native_item_ids": 329,
+    "item_keys_including_alias": 330,
+    "set_emblem_ids": 30,
+    "b28_alias": {
+      "maps_to": "B32",
+      "resource": "Art/Casual/Equipment/B32",
+      "separate_png": false,
+      "verified": true
+    }
+  },
+  "observed_forge_consumer_wiring": {
+    "status": "Source wiring observed; import/render not executed",
+    "checks": {
+      "default_provider_declared": true,
+      "field_uses_default": true,
+      "open_uses_optional_or_default": true,
+      "slot_uses_helper": true,
+      "slot_uses_public_for_base": true,
+      "slot_preserves_legacy_fallback": true,
+      "nine_slot_ids_exact": true
+    },
+    "empty_slot_base_ids": {
+      "sword": "B01",
+      "shield": "B32",
+      "helm": "B11",
+      "armor": "B13",
+      "gloves": "B15",
+      "boots": "B17",
+      "belt": "B19",
+      "amulet": "B21",
+      "ring": "B23"
+    },
+    "source_sha256": {
+      "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.cs": "55cd1d0b29dda20fda8fee20d539d88af1ce2236e6e933ff2d71161967966151",
+      "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Casual.cs": "1a74ae1e08446c8ec5ea1f10228d1c2e1390e543d20374ce99b7233adca1833f",
+      "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.cs": "019b4ad3aee6f162f1dff4b81ea784c51cc5317b36306f517314526ce7559bb3"
+    },
+    "global_equipment_fallback_unchanged": true,
+    "custom_skin_argument_preserved": true
+  },
+  "shared_dependency_sources": {
+    "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentArt.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "88df9e2fe4c9005098c96f2707929436334b1e574cd9cf52069a9be92e7a0aa1"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/EquipmentArtProvider.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "73bf3fababdc5625e37268604962db0cd9a533cf56cd776f5e04c26b367e8e30"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "a8c5467f1985fd913ec170ca43794f6de728df610e759997903bc213ca283cd9"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/CharacterEquipmentView.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "edccfdaf7fe6ae6587cf565f4b182ba92a293a099e386bb499d33156f396b4f2"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/CharacterFigure.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "67c2bbb705f88b5fd33a72c142357a3323ec874f2c9178036e2d7097a4576e6f"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/CoreQualityGauge.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "d146e43157330d45dca8e5e4a0dbaffcdaa34b32b0b830c2bc69f16fa2265127"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiLockGraphic.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "6b900c6edda1ebe17697cd1cb93a5f6fb7b2c6bb318d57603507efa0d4281e77"
+    },
+    "Assets/HELLSCRIPT/Runtime/Presentation/UiButtonFace.cs": {
+      "unchanged_since_cdb9c140": true,
+      "sha256": "45290875746760dc5cb8a72fa46bb81eb07def038ec53e04dfbe9ac83bff8f99"
+    }
+  },
+  "remaining": {
+    "currency_and_core": "Existing CurrencyIconView resources; no new scoped supplier in this commit",
+    "hero": "CharacterFigure still loads Art/CharacterSelection/{HeroClass} Texture2D plus .atlas TextAsset; six-frame contract retained",
+    "close": "Icon role returns before CasualClose circular face",
+    "gauge_and_lock": "Direct legacy UiTheme palette remains",
+    "stitch": "Casual panel inner stitching remains pending",
+    "unity": "One handoff for combined-screen validation to owner 01a13790-39bc-7062-a516-b83a354000a8 on a separate integration branch in task-6/skill-skin, reusing its existing Library. Per-screen Unity/build/check reruns are closed; import, rendering, interaction and KO/EN multi-aspect validation remain pending. Freeze after final source commit; resume only for concrete integration-owner defect requests."
+  },
+  "sparse_strategy": {
+    "method": "git cat-file --batch on the fixed donor commit; PNG/meta bytes hashed in memory, no checkout/export",
+    "forge_png_directory_materialized": false,
+    "png_copies_created_by_this_review": 0,
+    "new_pngs_generated": 0,
+    "pngs_removed": 0,
+    "unity_runs": 0,
+    "browser_runs": 0,
+    "build_impact": "359 Resources PNGs add 69,753,836 logical source bytes to build inputs regardless of view opt-in; final compressed player delta is not measured"
+  },
+  "artifact_lifecycle": {
+    "owner": "forge_art_dependencies",
+    "kind": "source-evidence",
+    "retention": "Retain with forge implementation until integration/validation acceptance",
+    "expected_bytes_under": 12000
+  }
+}

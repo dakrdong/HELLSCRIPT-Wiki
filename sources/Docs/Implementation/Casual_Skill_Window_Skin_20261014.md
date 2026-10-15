@@ -1,0 +1,112 @@
+# 스킬 창 캐주얼 스킨 파일럿
+
+2026-10-14 · [English](Casual_Skill_Window_Skin_20261014.en.md) · [공통 규칙 정본](Casual_UI_Skin_Rules_20261014.md)
+
+스킬 창 한 개를 로컬 브랜치 `codex/casual-skill-skin`에 구현했다. 기준은 `origin/main 53d6a3e13304a781f9823134ba0f497bafb78621`이며 검증된 `083b03f0` 이후의 작업 지침을 포함한다. 출석 `6378320b`는 조상이 아니며 이 작업에 포함하지 않았다. 출석·HUD·재화·보상·장비 효과·CI·다른 UI와 기존 스킬 원화는 변경하지 않았다. 원격 push, PR, main 통합, 웹 빌드와 공개 배포는 실행하지 않았다.
+
+## 실제 시안 확인과 결정
+
+사용자 Mac의 Chrome에서 [Claude 아티팩트](https://claude.ai/artifact/JsCKnJUbKkzfBYyJDR3493)를 실제로 읽었다. 직업 3개 × 세로/가로/PC × KO/EN 및 세로 패시브로 구성된 24개 아트보드를 확인했다. PC의 직업 탭, 잠긴 일반/핵심 패시브, 세로 트리 스크롤, 영문 가로 패시브의 회수→투자 가능→재투자를 실행해 상태·수치·버튼 모양을 확인했다. 시안을 단순히 열었다는 이유로 확인했다고 판정하지 않았다. Claude 메시지·파일 업로드·결제·공유 변경은 하지 않았다.
+
+필수 프롬프트가 원본 체크아웃의 지정 경로에는 없어서 `wt-casual-art`의 `claude/casual-art-concept ab5edd76`에서 찾아 완독했다. `casual/README.md`, 두 시안과 보조 도구를 가져오고 **잠금판**을 구현 기준으로 삼았다. 캔버스의 더 큰 제목/탭/버튼 크기는 적용하지 않았다. 어두운 원본은 `Docs/Design/D4SkillTree/dark/`에 보존했다.
+
+- 실제 브라우저 일반 본문: Noto Sans KR **400**, 11.5px/16.675px. 프롬프트의 본문 700/900 지시와 달랐다. 사용자에게 이 차이와 잘림을 제시했고, 사용자가 **실제 시안 우선: 일반 본문 400, 강조 700/900, 기존 글자 크기·배치 유지**를 선택했다. 그 선택을 반영했다.
+- Chrome은 시안의 `배경색 padding-box, 뒤의 gradient border-box` 배경 shorthand를 무효 처리한다. 실제 상세 판의 computed background는 투명, image는 none, border는 transparent였다. 게임은 프롬프트와 코드가 지정한 크림/남색 판을 그린다. 따라서 라이브 아티팩트와 배경이 픽셀 단위로 같다고 주장하지 않는다.
+- 사용자가 본 작은 화면은 동작 스모크가 `previewOrient=landscape`로 956×440 시안을 고정해서 재생하는 단계였다. 약 1596×900 창에서 UI 폭은 약 52%였다. 실사용 `HuntEdictWindow`는 미리보기 방향을 넘기지 않고 PC Fit을 사용한다. 아래 최종 캡처는 실제 크기별 Fit을 확인한 것이다.
+
+## 변경 내용
+
+하늘→크림 바탕, 크림/남색 판, 아래쪽 단단한 그림자, 점선 바느질, 둥근 젬, 탭·배지·카드·보조 칸·패시브 메달·순위 호·연결선·범례·상세 패널·단추·FX 색을 교체했다. 번진 상세 아트 배경은 만들지 않는다. 스킬 아이콘 경로와 원화는 그대로다.
+
+`SkillTreeD4Looks`의 430개 look과 7개 장식을 생성한다. 색은 105개 팔레트 토큰에서 읽고 전역 UiTheme 램프를 교체하지 않는다. UiFonts는 D4 전용 400/700/900/Jua를 선택해서 로드하며 `Body/Display/WebBody` 경로는 그대로다. 제목 외곽선은 재사용 vertex 목록을 가진 단일 BaseMeshEffect로 그린다.
+
+실제 네이티브 검사에서 찾은 `Ground Slam` 연결 칩 잘림과 `Bonus damage (3 shots)` 능력치 제목 잘림은 실제 Canvas 배율의 글자 폭으로 수정했다. 설명은 uGUI의 실제 줄바꿈을 사용한다. 보조 행과 패시브 효과는 원래 참조의 줄 수에 필요한 높이를 최소 공간으로 예약해 좁은 새 글꼴 때문에 기존 사각형이 줄어들지 않도록 했다. 실제 Canvas 배율이 바뀌면 한 번 다시 그린다. 색상 태그를 빼고 굵기 태그의 짝을 맞춘 상태로 부분 줄의 너비를 재어 영문 강조 문구의 불필요한 줄바꿈도 고쳤다. 비활성 버튼은 클릭 핸들러가 없는 투명 면으로 입력을 받아 아래 수정자/게임으로 통과시키지 않으며, 하단 버튼을 마지막 형제로 배치한다. 테스트 허용오차·기존 기능 단언은 약화하지 않았다.
+
+## 정답 파일과 엄격 조건의 충돌
+
+`viewmodel` 12개, `interaction` 6개, `rules_golden`, `rank_values`, `panel_parts`는 기준과 **byte identical**이다. 스킬 ID·문구·포인트·구매/회수·선택·해금·FX 이벤트 의미는 그대로다. JS/C# 참조는 각각 55,803개 검사를 통과했다.
+
+프롬프트의 “styles.json만 변경 / layout raw diff=0”은 그대로는 만족하지 않는다. 외형 정보가 layout 안에도 있기 때문이다. 이를 합격으로 바꿔 해석하지 않았다. [전체 차이 근거](CasualSkillSkinEvidence20261014/final-golden-diff.json)와 [3,600개 실제 차이 경로](CasualSkillSkinEvidence20261014/raw-layout-differences.json)를 기록한다.
+
+| 위치 | 정확한 차이 |
+|---|---|
+| layout 9개, 3,510 scalar leaves | stroke.color 1,436, stroke.width 1,436 (2→3), stroke.dash 620 (4 4→5 5), plate.radius 18 (8→18 / 10→20) |
+| layout_scenarios 9개, 90 leaves | 모서리 값 때문에 달라지는 plate hash |
+| pickScene 계약의 18개 직업/배치/언어 | plate.radius만 다름. 다른 좌표·사각형·텍스트·ID·상태·스크롤/바/호 의미는 차이 없음 |
+| CSS geometry 비교 36조합 | 49,942개 문자열; 안쪽 치수 원복 후 치수·글자 크기 차이 0 |
+| styles / fx | 의도된 새 색·그림자·장식·FX; 핵심 패시브 selected ring look 2개 추가 |
+
+생성기의 구색상/2px 바/붉은색 조건 하드코딩이 새 시안에서 순위 호·바·잠김/핵심 상태를 잘못 읽었다. 새 색만으로 게임 상태를 추론하지 않도록 source 구조/수치를 사용하게 고쳤다. JS/C# 참조의 판 모서리 상수도 외형 값 18/20으로 맞췄으며 도메인 규칙은 바꾸지 않았다. 원래 엄격 조건의 충돌은 아래 승인 기준으로 raw 외형 차이에 한해 해결했다.
+
+## 승인된 수용 기준과 별도 치수 차이
+
+2026-10-14에 사용자는 “위치·크기·글자 크기·기능은 유지하고, 시안에 따른 색·선·모서리 변경만 허용”하는 기준에 **“ㅇㅇ 그렇게 해줘”**라고 답했다. 기존 본문 400 / 강조 700·900 선택은 그대로다. [수용 기준 검토](CasualSkillSkinEvidence20261014/acceptance-review.json)에서 기존 raw 3,600개의 경로를 분류했다. 3,510개는 `stroke.color`, `stroke.width`, `stroke.dash`, `plate.radius`이고, 90개는 radius 때문에 달라진 `scenarios[].hashes.plate`다. 그 밖의 raw 경로는 0이다. 따라서 **이 raw 외형 차이는 승인된 기준에 부합**한다. 원래의 literal raw diff=0 결과는 여전히 false로 보존했다.
+
+위치·크기 차이 0은 `pickScene` 18개 조합의 `frame.w/h/scale`, header/title/tab/close의 rect/container/gap/size, plate/panel rect와 inner/scrollAxis, primitive의 rect/hit/face/icon.size, 경로·바·호에 대한 계약 비교다. 글자 크기는 기존 CSS 비교의 FONT-SIZE 차이 0으로, 문구·규칙·기능은 viewmodel 12개/interaction 6개/rules/rank_values/panel_parts의 byte 동일성과 기존 실제 60개 동작 기록으로 확인했다. 실제 픽셀·모든 자식 RectTransform이 동일하다는 의미는 아니다.
+
+**실측 후속 조치:** 불필요한 CSS 안쪽 치수를 원복했다. 36조합의 49,942개 문자열 비교에서 치수·font-size 차이는 0이다. 네이티브 텍스트 칸은 승인된 본문 400/명시적 강조 700이 들어가는 경우 기존 폭으로 복원했다. 남는 확대 치수는 아래에 수치로 기록하며 raw 외형 승인으로 포괄 수용하지 않는다. 사용자는 이어서 게이지 포함·연결선 접점·원둘레·큰 모서리 수리와 하단 범례 제거를 요청했다. 최신 모서리/범례 변경의 최종 네이티브 검증도 통과했다.
+
+## 글꼴·라이선스
+
+공식 Google Fonts 저장소의 Jua와 Noto Sans KR 가변 원본을 SHA256으로 고정했다. SIL OFL 두 라이선스를 폰트 폴더에 동봉했다. 파생 family/PostScript 이름은 Hellscript로 바꾸어 Reserved Font Name을 새 이름으로 쓰지 않는다. 한글 KS X 1001 2,350자·라틴·현재 문자를 보존했다. Noto는 세 weight 모두 현재 문자가 빠지지 않는다. Jua에 없는 °·중점·곱셈·화살표·마이너스는 본문/벡터에서 사용하며 Jua 문자라고 주장하지 않는다.
+
+| 파일 | bytes | cmap 문자 |
+|---|---:|---:|
+| Jua-SkillSubset.ttf | 2035040 | 2448 |
+| NotoSansKR-Skill400.ttf | 515376 | 2604 |
+| NotoSansKR-Skill700.ttf | 515908 | 2604 |
+| NotoSansKR-Skill900.ttf | 515760 | 2604 |
+
+총 3582084 bytes. Noto 줄 메트릭은 hhea/typo 880 / -220 / 0으로 정규화했다. 윤곽·advance는 그대로다. 원본·생성 hash와 라이선스 확인은 [font-validation.json](CasualSkillSkinEvidence20261014/font-validation.json)에 있다. `tools/build_skill_tree_d4_fonts.py`와 고정 codepoint 목록으로 다시 만들 수 있다. 원본 다운로드는 단일 작업의 `Builds/Validation/CasualSkillSkin/font-sources`에 보존했다. 일반 WebBody는 변경하지 않았고 WebGL 실행은 범위 밖이다.
+
+## 검증과 화면
+
+- 최초 스킨 구현(**7ab84dc6**)의 관련 EditMode **102개 서로 다른 검사 통과**. 직전 99/99에서 영향이 없는 38개 결과를 재사용하고, 마지막 줄바꿈·입력 수정에 대해 64/64를 다시 실행했다. Panel 47/47에는 기존 실측 사각형/잘림, 연결 칩/능력치 회귀 12개, 강조 태그 회귀 3개가 포함된다. 행과 하단 버튼의 겹침 검사도 강화했다.
+- looks check, golden verify 41개, JS/C# 55,803개 각각, UI contract 15개, UI refresh 정적 검사를 통과했다.
+- 최초 구현의 macOS 개발 플레이어: **60개 transcript / 클릭 1,662 / 차단 502 / 패널 2,016 / 캡처 84** 통과. 직업 3개 × KO/EN × 7크기 × active/passive를 확인했다. 각 선택의 전체 상태/패널/FX 의미를 golden과 비교했고, 글자 높이·SafeArea·하단 겹침을 검사했다. 세 직업의 실소유 구매 6개를 작업 전용 세이브에 기록한 뒤 별도 프로세스로 다시 열어 **스키마 22·할당 보존**을 확인했다. [실행 근거](CasualSkillSkinEvidence20261014/native-receipt.json), [검사 실행별 근거](CasualSkillSkinEvidence20261014/editmode-provenance.json).
+- 최종 실행 전 시도 6개의 근거를 보존했다. 1–2는 연결 칩/능력치 제목 잘림, 3–5는 비활성 버튼의 클릭 통과 재현·진단, 6은 기능/84개 캡처 통과 후 직접 검토에서 발견한 강조 태그 줄바꿈/하단 겹침이다. 같은 앱 출력 하나를 재사용했고 캐시를 복제하지 않았다.
+- 실제 before는 검증된 통합의 원본 캡처를 재사용했다. 빌드 05973ea3의 Assets/Packages/ProjectSettings tree가 기준 53d6a3e1과 각각 동일함을 확인했다. 이전 플레이어를 새로 실행했다고 주장하지 않는다.
+
+[실제 before/after 비교](CasualSkillSkinEvidence20261014/before-after.png) · [7크기 모음](CasualSkillSkinEvidence20261014/viewport-contact-sheet.png) · [실제 캡처 84개 색인](CasualSkillSkinEvidence20261014/screenshots.json)
+
+| 실제 viewport | 확인 결과 | 대표 화면 |
+|---|---|---|
+| 440×956 | 세로 스크롤·고정 하단 상세 판·SafeArea | [전사 KO](CasualSkillSkinEvidence20261014/after/Warrior-ko-440x956.png) |
+| 956×440 | 가로 스크롤·오른쪽 상세 판, 영문 강조 1줄/하단 겹침 없음 | [궁수 EN](CasualSkillSkinEvidence20261014/after/Ranger-en-956x440.png) |
+| 1440×810 | PC 전체 화면에 맞춤 | [궁수 KO](CasualSkillSkinEvidence20261014/after/Ranger-ko-1440x810.png) |
+| 1440×900 | 1440×810 기준 프레임, 위·아래 45px 여백 | [마법사 KO 패시브](CasualSkillSkinEvidence20261014/after/Mage-ko-1440x900-passive.png) |
+| 1680×720 | 1280×720 기준 프레임, 좌·우 200px 여백 | [전사 EN 패시브](CasualSkillSkinEvidence20261014/after/Warrior-en-1680x720-passive.png) |
+| 1600×900 | PC 전체 화면에 맞춤 | [전사 KO](CasualSkillSkinEvidence20261014/after/Warrior-ko-1600x900.png) |
+| 900×1600 | 세로 SafeArea 안에 제목·닫기·고정 상세 판, 스크롤 유지 | [마법사 EN 패시브](CasualSkillSkinEvidence20261014/after/Mage-en-900x1600-passive.png) |
+
+시안 대비 평가: 노드의 위치/크기, 선택·잠김·패시브 연계, KO/EN 텍스트와 FX 이벤트 의미를 유지한다. 잠금판 크기로 색/선/그림자/장식을 적용했다. 라이브 캔버스의 더 큰 글자와 무효 CSS로 투명한 판, uGUI와 브라우저의 glyph/blur/antialias 차이는 남는다. 후속 수리에서 긴 판의 삼각형 모서리와 사각 페이드 덮임을 고쳤다. 브라우저와 픽셀 동일한 결과라고 판정하지 않는다. 잠금판에서 별도 24개 브라우저 기준 렌더를 재생성하지 못했으며, 이전 24개 어두운 reference를 캐주얼 정답으로 쓰지 않았다. 실제 Claude 캡처와 잠금판 코드, 실제 네이티브 before/after를 나란히 확인했다.
+
+## 최종 시각 수리와 2868×1320 검증
+
+사용자가 표시한 다섯 항목을 반영했다. 게이지는 둥근 카드의 테두리를 제외한 면 안에 그리며 눌림 0.97 배율을 함께 따른다. 연결선은 모든 외곽선을 먼저 그린 뒤 색선을 그려 뒤 선분이 앞 접점을 덮지 않게 했다. 원형 배경의 거친 극점과 사각 안쪽 그림자 띠를 원호 메시로 고쳤다. 긴 판의 배경 메시에는 모서리별 원호 꼭짓점을 배치하고 트리/페이드를 둥근 안쪽 마스크 한 개로 잘라 큰 구석의 삼각형 빈틈과 외곽선 덮임을 없앴다. 하단 상태 범례는 요청에 따라 숨겼다. 모델 문자열·프레임·스크롤·노드 배치는 유지한다.
+
+[게이지·선·원둘레 before/after](CasualSkillSkinEvidence20261014/visual-defects-before-after.png) · [범례·모서리 before/after](CasualSkillSkinEvidence20261014/corners-legend-before-after.png) · [최종 궁수 EN 실제 화면](CasualSkillSkinEvidence20261014/after/Ranger-en-1600x900-visual-fix.png) · [최종 2868×1320 전사 KO](CasualSkillSkinEvidence20261014/after/Warrior-ko-2868x1320.png)
+
+최신 관련 EditMode **92/92**, 최종 look 데이터 검사 **3/3**, UI 계약 **15/15**, UI refresh(191소스/16바인딩), golden verify **41**을 통과했다. 전체 프로젝트 검사를 중복 실행하지 않았다. 최종 macOS 개발 플레이어에서 직업 3개 × KO/EN × PC 1600×900 / 세로 900×1600 / 가로 2868×1320의 **864개 상세 상태·26개 캡처·18개 게이지 눌림 검증·포인터 가로 드래그 6회·닫기 6회**가 통과했다. 각 캡처는 최장 3.9초+720ms의 일시적 선 효과가 끝나도록 5초 기다렸다. [실행·소스·바이너리 근거](CasualSkillSkinEvidence20261014/target-native-receipt.json). 이전 7크기/60transcript 결과는 최초 구현의 회귀 근거로 보존했으며 최신 26개 캡처와 혼동하지 않는다.
+
+2868×1320은 사용자 지정 렌더 픽셀 조건이다. 특정 기기 사양을 뜻하지 않는다. 논리 프레임 956×440과 ConstantPixelSize Canvas 배율 **1.51074**(디자인 pt당 **3.02148px**)을 사용했다. DPR **3**, 안전영역 좌/우 **102px**, 하단 **54px**, 상단 **0px**는 시뮬레이션 가정이다. UI 표시 영역은 **2513.87×1266px**, 화면 폭 **87.65%**, 높이 **95.91%**다. 고정 956×440 미리보기는 같은 큰 화면의 일부만 쓰며 실사용 Fit 결과와 구별했다. macOS 자동 PC Fit은 논리 1152×648을 사용한다. 실제 framebuffer PNG가 2868×1320임을 검사했다.
+
+닫기와 하단 버튼은 44 디자인 pt(132.945px, 가정 DPR3에서 44.315pt)다. 일반 카드는 38pt, 수정자 소켓은 32pt이므로 모든 터치 영역이 44pt라고 판정하지 않았다. 이 확대는 iOS 실기기·기기 DPR/안전영역·터치 접근성 인증이 아니다. 스킬 선택·가로 스크롤·닫기는 실제 EventSystem raycast/handler 경로로 확인했다.
+
+| 내부 텍스트 실측 | 기존 폭 유지 | 남는 확대 치수 (디자인 pt) |
+|---|---:|---|
+| 능력치 value/label 배분, 1272관측 | 1242 | 30관측, 0.037–2.818; 연쇄 번개와 세로 다중 사격/일제 소탕 값 등 |
+| 수정자 rank 및 이름/효과 배분, 1944관측 | 1324 | 620관측, 0.061–0.386; 명시적 Noto700 숫자가 기존 칸을 넘음 |
+| 연결 칩, 36관측 | 30 | 영문 Ground Slam / Raking Wound 6관측, 2.036–4.076 |
+
+연결 칩의 **줄·위치 변화는 0/36**이다. 이전 진단 도구의 고정 폭 52는 원본 C#과 달랐으며 최종 비교에서는 정답 **54**로 고쳤다. 일반 본문/효과는 Noto400, 시안이 명시한 칩 이름/순위는 Noto700이다. 기존 폭으로 돌아갈 수 있는 영역은 복원했고, 새 글꼴의 실측 초과분만 유지했다. [상태별 before/after 폭과 역할](CasualSkillSkinEvidence20261014/geometry-native-audit.json)에 전체 수치를 남겼다. 이 남는 내부 치수는 raw 외형 승인으로 포괄 수용하지 않으며 별도 검토 대상이다. CSS 치수/font-size는 49,942문자열·36조합에서 차이 **0**이다.
+
+실패 근거도 보존했다. 최초 추가 진단의 숨은 패널 null 접근, 샌드박스 macOS 앱 등록 실패, 추가 눌림 검사에서 등급0 마법사 스킬을 고른 fixture 오류를 구분했다. 각각 원인을 고친 뒤 완료 결과를 남겼으며 검사 허용오차·게임 규칙을 완화하지 않았다. 빌드는 동일 앱 출력·캐시 한 개를 재사용했고 이전 바이너리를 복제하지 않았다.
+
+## 인계와 보존
+
+작업 폴더: `task-6/skill-skin`. 소스·관련 검사·한/영 기록·공통 규칙을 로컬 커밋으로 묶는다. 원본 체크아웃과 미커밋 `Art_Transition_20261014.md`, `_Asset_Index.json`, `.en.md`를 덮거나 삭제하지 않았다. 보호 경로의 Git 차이는 0이다.
+
+빌드/캐시/원본 다운로드/로그의 정확한 경로·크기·보존 사유는 [artifact-lifecycle.json](CasualSkillSkinEvidence20261014/artifact-lifecycle.json)에 기록한다. 납품 소스와 캡처·실패 근거는 보존한다. 일괄 삭제·공유 캐시 삭제는 하지 않았다.
+
+미검증: Android/iOS 실기기, 화면 낭독기·실기기 터치 접근성, 동일 이전/이후 각 3회 CPU/GC 성능, WebGL, main 통합 후 전체 EditMode. 성능은 **미측정**이다. 위키 생성/검사/공개 배포는 작업 브랜치에서 실행하지 않고 병합 단계에 남긴다. 다른 UI로 확장하기 전에 공통 규칙과 명세 충돌을 검토해야 한다.

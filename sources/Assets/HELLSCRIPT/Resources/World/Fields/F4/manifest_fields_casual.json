@@ -1,0 +1,292 @@
+{
+  "revision": "hellscript-casual-field-runtime-v1",
+  "productionApproved": false,
+  "palette": {
+    "name": "Flower Meadow",
+    "floor": [
+      "#8ccf5a",
+      "#7fc24e",
+      "#9ad968"
+    ],
+    "grout": "#5aa63e",
+    "light": "#b8ea86",
+    "stone": "#d3d7d3",
+    "stone2": "#adb5ad",
+    "dark": "#8a928a",
+    "accent": "#5fc04a",
+    "accent2": "#ffd84d",
+    "wood": "#a9764a",
+    "glow": "#ffe08a",
+    "sky": "#bfe6fb"
+  },
+  "models": {
+    "F4_Floor": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 4.0,
+      "sha256": {
+        "Floor_A.png": "92e2dd202f4d4cc112a0cb909fe2f35d44fdc3471b415aae5bea2be3dd5d889f"
+      }
+    },
+    "F4_Wall": {
+      "kind": "prop",
+      "tris": 1428,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        6,
+        2
+      ],
+      "bounds": [
+        -3.4,
+        0.0,
+        -0.95,
+        3.4,
+        2.61,
+        0.95
+      ],
+      "glow": null,
+      "seed": 73627824,
+      "sha256": {
+        "F4_Wall.fbx": "d57e8be8ce05006d9f16e32398ceeaa1ad75fe61dd42de1678ac370a57b1c7ee",
+        "F4_Wall_A.png": "64223839cc47d552efb019b2edc5d7bd5c189b26ead08452ceada83436be5542"
+      }
+    },
+    "F4_Trim": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 2.0,
+      "sha256": {
+        "Trim_A.png": "e7f6f26876af4a398381edf130ec99a5271c5b434778a1a2ea426da8a2848c37"
+      }
+    },
+    "F4_Pillar": {
+      "kind": "prop",
+      "tris": 528,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.6,
+        0.0,
+        -0.6,
+        0.6,
+        2.68,
+        0.6
+      ],
+      "glow": null,
+      "seed": 560726994,
+      "sha256": {
+        "F4_Pillar.fbx": "1d87100f91c14dca11662da06b4a5015dad4128fc31d1798099141e4728e26e4",
+        "F4_Pillar_A.png": "980eaab7b9227bf40ea37c22fcbe2644fcc49ab39a9cd25874b2660ccaa8aef1"
+      }
+    },
+    "F4_WallColumn": {
+      "kind": "prop",
+      "tris": 656,
+      "texture": 64,
+      "height": 3.9,
+      "footprint": [
+        0.9,
+        0.62
+      ],
+      "bounds": [
+        -0.45,
+        0.0,
+        -0.31,
+        0.45,
+        4.0,
+        0.31
+      ],
+      "glow": null,
+      "seed": 1488298999,
+      "sha256": {
+        "F4_WallColumn.fbx": "fbcd60749dfdd4a04322f888ef69abb109d3758904cfe0c2d5b07baf1c3ad21e",
+        "F4_WallColumn_A.png": "980eaab7b9227bf40ea37c22fcbe2644fcc49ab39a9cd25874b2660ccaa8aef1"
+      }
+    },
+    "F4_Rubble_A": {
+      "kind": "prop",
+      "tris": 764,
+      "texture": 64,
+      "height": 0.6,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.506,
+        -0.016,
+        -0.681,
+        0.674,
+        0.513,
+        0.437
+      ],
+      "glow": null,
+      "seed": 3659107575,
+      "sha256": {
+        "F4_Rubble_A.fbx": "fb40e51d6b003a6332c3c54828f4bae4026dece38287e524b2fa12fd8b843a05",
+        "F4_Rubble_A_A.png": "3b824ac95010d76d361b140d8e24096c9af0d23805625094165a7fc1a2a9d5e2"
+      }
+    },
+    "F4_Rubble_B": {
+      "kind": "prop",
+      "tris": 980,
+      "texture": 64,
+      "height": 0.5,
+      "footprint": [
+        1.6,
+        1.1
+      ],
+      "bounds": [
+        -1.021,
+        -0.016,
+        -0.947,
+        0.882,
+        0.518,
+        0.974
+      ],
+      "glow": null,
+      "seed": 3529429411,
+      "sha256": {
+        "F4_Rubble_B.fbx": "d3e1f04b06871a9a8a7a21df0925300c599144e50e68ae6af757c58609123953",
+        "F4_Rubble_B_A.png": "3b824ac95010d76d361b140d8e24096c9af0d23805625094165a7fc1a2a9d5e2"
+      }
+    },
+    "F4_Torch": {
+      "kind": "prop",
+      "tris": 164,
+      "texture": 64,
+      "height": 0.45,
+      "footprint": [
+        0.2,
+        0.5
+      ],
+      "bounds": [
+        -0.09,
+        0.0,
+        -0.09,
+        0.09,
+        0.44,
+        0.09
+      ],
+      "glow": "#ffe08a",
+      "seed": 1806252711,
+      "sha256": {
+        "F4_Torch.fbx": "069b60329b3a5d43ecbca7a9982ede583e6c3794e8f9f25c35eb3645257b7ee2",
+        "F4_Torch_A.png": "563d4f9b222fe6ff075d266b530b934bb1f80a965aa7063a9565db3b36cf5da7"
+      }
+    },
+    "F4_Decor_Bush": {
+      "kind": "prop",
+      "tris": 1568,
+      "texture": 64,
+      "height": 0.8,
+      "footprint": [
+        1.0,
+        0.9
+      ],
+      "bounds": [
+        -0.588,
+        -0.0,
+        -0.374,
+        0.619,
+        0.73,
+        0.376
+      ],
+      "glow": null,
+      "seed": 363418513,
+      "sha256": {
+        "F4_Decor_Bush.fbx": "5ecd31eb3da5249a6bf098e1302402ef0fa214259ff561c2e3bee72fbf259180",
+        "F4_Decor_Bush_A.png": "8f3ec6978ed601afe3fd46ad34e3bc71fd3ca4e7bc8a35755f3bb6211f334565"
+      }
+    },
+    "F4_Decor_Flowers": {
+      "kind": "prop",
+      "tris": 1424,
+      "texture": 64,
+      "height": 0.35,
+      "footprint": [
+        0.9,
+        0.7
+      ],
+      "bounds": [
+        -0.395,
+        -0.022,
+        -0.346,
+        0.395,
+        0.295,
+        0.236
+      ],
+      "glow": null,
+      "seed": 3105474765,
+      "sha256": {
+        "F4_Decor_Flowers.fbx": "5cb7d93a9e30a05da676d7397a73bf8421b7831884b262cd776194544963bc55",
+        "F4_Decor_Flowers_A.png": "32c9d27389ab85bc6b7a65dfa2a9aac890d0ff11cf6f80114e6d29ec0dcda41f"
+      }
+    },
+    "F4_Decor_StandingStone": {
+      "kind": "prop",
+      "tris": 440,
+      "texture": 64,
+      "height": 1.1,
+      "footprint": [
+        0.7,
+        0.6
+      ],
+      "bounds": [
+        -0.25,
+        -0.012,
+        -0.2,
+        0.433,
+        1.1,
+        0.227
+      ],
+      "glow": null,
+      "seed": 1515590542,
+      "sha256": {
+        "F4_Decor_StandingStone.fbx": "e455f173aabffca04bd9267209f8e1b6e84051f1596dae8ee1371732ef621049",
+        "F4_Decor_StandingStone_A.png": "b39ace828e04acec32393b811fafc4a694f274fe0bbbe3a33c482f11dd2cc5c8"
+      }
+    }
+  },
+  "recolored": [],
+  "files": {
+    "F4_Decor_Bush.fbx": "5ecd31eb3da5249a6bf098e1302402ef0fa214259ff561c2e3bee72fbf259180",
+    "F4_Decor_Bush_A.png": "8f3ec6978ed601afe3fd46ad34e3bc71fd3ca4e7bc8a35755f3bb6211f334565",
+    "F4_Decor_Bush_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Decor_Flowers.fbx": "5cb7d93a9e30a05da676d7397a73bf8421b7831884b262cd776194544963bc55",
+    "F4_Decor_Flowers_A.png": "32c9d27389ab85bc6b7a65dfa2a9aac890d0ff11cf6f80114e6d29ec0dcda41f",
+    "F4_Decor_Flowers_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Decor_StandingStone.fbx": "e455f173aabffca04bd9267209f8e1b6e84051f1596dae8ee1371732ef621049",
+    "F4_Decor_StandingStone_A.png": "b39ace828e04acec32393b811fafc4a694f274fe0bbbe3a33c482f11dd2cc5c8",
+    "F4_Decor_StandingStone_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Pillar.fbx": "1d87100f91c14dca11662da06b4a5015dad4128fc31d1798099141e4728e26e4",
+    "F4_Pillar_A.png": "980eaab7b9227bf40ea37c22fcbe2644fcc49ab39a9cd25874b2660ccaa8aef1",
+    "F4_Pillar_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Rubble_A.fbx": "fb40e51d6b003a6332c3c54828f4bae4026dece38287e524b2fa12fd8b843a05",
+    "F4_Rubble_A_A.png": "3b824ac95010d76d361b140d8e24096c9af0d23805625094165a7fc1a2a9d5e2",
+    "F4_Rubble_A_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Rubble_B.fbx": "d3e1f04b06871a9a8a7a21df0925300c599144e50e68ae6af757c58609123953",
+    "F4_Rubble_B_A.png": "3b824ac95010d76d361b140d8e24096c9af0d23805625094165a7fc1a2a9d5e2",
+    "F4_Rubble_B_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Torch.fbx": "069b60329b3a5d43ecbca7a9982ede583e6c3794e8f9f25c35eb3645257b7ee2",
+    "F4_Torch_A.png": "563d4f9b222fe6ff075d266b530b934bb1f80a965aa7063a9565db3b36cf5da7",
+    "F4_Torch_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Wall.fbx": "d57e8be8ce05006d9f16e32398ceeaa1ad75fe61dd42de1678ac370a57b1c7ee",
+    "F4_WallColumn.fbx": "fbcd60749dfdd4a04322f888ef69abb109d3758904cfe0c2d5b07baf1c3ad21e",
+    "F4_WallColumn_A.png": "980eaab7b9227bf40ea37c22fcbe2644fcc49ab39a9cd25874b2660ccaa8aef1",
+    "F4_WallColumn_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F4_Wall_A.png": "64223839cc47d552efb019b2edc5d7bd5c189b26ead08452ceada83436be5542",
+    "F4_Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Floor_A.png": "92e2dd202f4d4cc112a0cb909fe2f35d44fdc3471b415aae5bea2be3dd5d889f",
+    "Floor_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Trim_A.png": "e7f6f26876af4a398381edf130ec99a5271c5b434778a1a2ea426da8a2848c37",
+    "Trim_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Wall_A.png": "938263426bbf38cea98a814c9826bb00ab1d3e3222e7426be709ca1257e2f76b",
+    "Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d"
+  }
+}

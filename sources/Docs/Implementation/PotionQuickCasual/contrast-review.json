@@ -1,0 +1,51 @@
+{
+  "shared_api_commit": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "method": "Independent source review calculation of shared OnLight sRGB luminance and 12-step interpolation; ratios use float colours, hex values are rounded",
+  "scope": "Opaque text and stated solid backgrounds only; not actual Unity rendering or accessibility certification",
+  "source": {
+    "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/potion-skin/Assets/HELLSCRIPT/Runtime/Presentation/UiSkin.cs",
+    "bytes": 7364,
+    "sha256": "9fe91b564c068d077302e4443fdd06df63f9623f2eeff7b7411bfb5c4d59091f"
+  },
+  "screen_source": {
+    "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/potion-skin/Assets/HELLSCRIPT/Runtime/Presentation/PotionQuickSkin.cs",
+    "bytes": 6440,
+    "sha256": "5cd8b7df642890609bcf7393607ee1b86983f6f1e23bda49882e117f99b79d54"
+  },
+  "backgrounds": {
+    "white": "#FFFFFF",
+    "cream_shade": "#FFF6E3",
+    "gold": "#FFD23F"
+  },
+  "ratios": [
+    {
+      "text": "Retreat before",
+      "hex": "#F08A00",
+      "white": 2.5179,
+      "cream_shade": 2.3432,
+      "gold": 1.7436
+    },
+    {
+      "text": "Retreat after",
+      "hex": "#9E6521",
+      "white": 4.8368,
+      "cream_shade": 4.5014,
+      "gold": 3.3495
+    },
+    {
+      "text": "Muted",
+      "hex": "#697190",
+      "white": 4.8358,
+      "cream_shade": 4.5004,
+      "gold": 3.3488
+    },
+    {
+      "text": "Navy",
+      "hex": "#2A3150",
+      "white": 12.6995,
+      "cream_shade": 11.8187,
+      "gold": 8.7943
+    }
+  ],
+  "actual_usage": "Retreat text on white card; Muted on white/cream; Navy on selected gold or unselected light tab. Marker colours unchanged."
+}

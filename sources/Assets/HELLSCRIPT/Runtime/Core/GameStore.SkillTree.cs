@@ -15,7 +15,7 @@ namespace Hellscript
             if(!CreatedAccount)return true;
             try
             {
-                foreach(var hero in Data.heroes)
+                foreach(var hero in HeroSlots.Created(Data))
                 {var skills=SkillTreeD4.Enabled?SkillTreeD4Loadout.Empty(hero.heroClass):ClassSkillTree.ResetAllocation(ClassSkillTree.FromHero(hero));if(skills.version==5)skills.legacyEdict=hero.edict?.Copy();ApplyHuntEdict(hero,new HuntEdictLoadout{version=2,classSkills=skills,edict=skills.ProjectEdict()});}
                 CreatedAccount=false;return Save();
             }
@@ -27,9 +27,9 @@ namespace Hellscript
         {
             try
             {
-                if(!Data.heroes.Any(h=>!h.classSkillValidation&&!ClassSkillTree.Uses(h.build.classSkills)&&Data.suspendedRun?.heroId!=h.id))return true;
+                if(!HeroSlots.Created(Data).Any(h=>!h.classSkillValidation&&!ClassSkillTree.Uses(h.build.classSkills)&&Data.suspendedRun?.heroId!=h.id))return true;
                 var staged=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(Data));bool changed=false;
-                foreach(var hero in staged.heroes)
+                foreach(var hero in HeroSlots.Created(staged))
                 {
                     if(hero.classSkillValidation||ClassSkillTree.Uses(hero.build.classSkills)||staged.suspendedRun?.heroId==hero.id)continue;
                     hero.edictLegacyBuild??=hero.build.Copy();

@@ -1,0 +1,14 @@
+{
+  "result": "passed",
+  "baseline": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "scope": "source/art only; Unity and runtime pending",
+  "checks": [
+    "Draft clamping, safe-area reflow and commit/save-failure methods unchanged",
+    "Every existing QuickRect and the layout constants retained",
+    "Localized strings and explicit Label font sizes retained",
+    "All screen color tokens exist in unchanged 430-look shared catalog",
+    "Both approved PNG byte hashes match; sprite alpha/full-rect/no-mipmap settings present",
+    "Existing Fill Image/fillAmount contract and shared rounded mask composition present",
+    "Tracked changes remain inside assigned screen ownership"
+  ]
+}

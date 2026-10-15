@@ -17,6 +17,12 @@
   const stamp=(p,key='updatedAt')=>p[key]||p.capturedAt||p.date;
   const day=value=>value?new Date(value).toLocaleDateString('sv-SE',{timeZone:'Asia/Seoul'}):'';
   const tagLinks=p=>`<div class="tags">${(p.tags||[]).map(t=>`<a href="#/tags?tag=${encodeURIComponent(t)}">#${esc(t)}</a>`).join('')}</div>`;
+  function entryCards(){
+    const overview=D.pages.find(p=>p.id==='project-overview');
+    const entries=[...(overview?[{href:pageLink(overview),title:overview.shortTitle||overview.title,detail:overview.category,icon:'guide'}]:[]),
+      ...['items','skills','resources'].map((id,i)=>{const db=D.databases.find(d=>d.id===id);return db&&{href:'#/db/'+id,title:db.name,detail:db.rows.length+'개 항목',icon:['equipment','skills','resources'][i]}}).filter(Boolean)];
+    return `<nav class="entry-grid" id="home-entries" aria-label="주요 문서와 데이터베이스">${entries.map(e=>`<a class="entry-card" href="${e.href}"><img src="icons/casual/${e.icon}.webp" width="72" height="72" alt=""><span><strong>${esc(e.title)}</strong><small>${esc(e.detail)}</small></span><span class="entry-arrow" aria-hidden="true">↗</span></a>`).join('')}</nav>`;
+  }
   function row(p){return `<article class="tree-row" data-page="${esc(p.id)}"><div class="row-title"><a href="${pageLink(p)}">${esc(p.title)}</a>${badge(p.status||'원문 기록')}</div><p>${esc(p.summary||'')}</p><div class="meta"><span>${esc(p.category)}</span><span>최초 등록 ${esc(dateText(stamp(p,'createdAt')))}</span><span>마지막 변경 ${esc(dateText(stamp(p)))}</span></div>${tagLinks(p)}${`<div class="actions version-links">${(p.versions||[]).slice().reverse().map(v=>`<a href="${pageLink(p)}?version=${v.revision}">v${String(v.revision).padStart(3,'0')}</a>`).join('')}<a href="${pageLink(p)}?view=history">이력 비교</a></div>`}</article>`}
   function tree(params=new URLSearchParams(),mode='tree'){
     let q=params.get('q')||'',tag=params.get('tag')||'',sort=params.get('sort')||'category',basis=params.get('basis')||'updatedAt',from=params.get('from')||'',to=params.get('to')||'';
@@ -24,11 +30,14 @@
     if(!['createdAt','updatedAt'].includes(basis))basis='updatedAt';
     $('#search').value=q;
     document.title=(mode==='tags'?'태그 탐색':mode==='search'?'검색 결과':'전체 위키 트리')+' · HELLSCRIPT 위키';
-    $('#main').innerHTML=`<div class="page-heading"><div><p class="eyebrow">${PUBLIC?'PUBLIC WIKI':'WIKI MAP'}</p><h1>${mode==='tags'?'태그 탐색':mode==='search'?'검색 결과':'전체 위키 트리'}</h1><p class="lead">${PUBLIC?'전체 문서와 데이터베이스를 읽기 전용으로 탐색합니다.':'기획과 개발 기록을 주제·시간·태그로 탐색합니다.'}</p></div><div class="actions"><button id="expand">모두 펼치기</button><button id="collapse">모두 접기</button></div></div>
+    $('#main').innerHTML=`<div class="page-heading" id="tree-heading">${mode==='tree'?'<img id="tree-hero" class="hero-art" src="icons/casual/key-art.webp" width="1536" height="1024" alt="" fetchpriority="high">':''}<div><p class="eyebrow">${PUBLIC?'PUBLIC WIKI':'WIKI MAP'}</p><h1>${mode==='tags'?'태그 탐색':mode==='search'?'검색 결과':'전체 위키 트리'}</h1><p class="lead">${PUBLIC?'전체 문서와 데이터베이스를 읽기 전용으로 탐색합니다.':'기획과 개발 기록을 주제·시간·태그로 탐색합니다.'}</p></div><div class="actions"><button id="expand">모두 펼치기</button><button id="collapse">모두 접기</button></div></div>${mode==='tree'?entryCards():''}
     <div class="stats"><div class="stat"><strong>${D.pages.length}</strong><span>문서</span></div><div class="stat"><strong>${new Set(D.pages.flatMap(p=>p.tags||[])).size}</strong><span>태그</span></div><div class="stat"><strong>${new Set(D.pages.map(p=>p.category)).size}</strong><span>카테고리</span></div><div class="stat"><strong>${D.pages.reduce((n,p)=>n+(p.versions?.length||1),0)}</strong><span>보존 문서 버전</span></div></div>
     <div class="toolbar" aria-label="문서 검색과 날짜 필터"><input id="page-search" type="search" aria-label="문서 검색" placeholder="제목·본문 검색" value="${esc(q)}"><label>보기 방식 <select id="page-sort">${[['category','카테고리'],['newest','최신순'],['oldest','오래된순']].map(([v,n])=>`<option value="${v}" ${v===sort?'selected':''}>${n}</option>`).join('')}</select></label><label>날짜 기준 <select id="date-basis"><option value="updatedAt" ${basis==='updatedAt'?'selected':''}>마지막 변경</option><option value="createdAt" ${basis==='createdAt'?'selected':''}>최초 등록</option></select></label><label>시작일 <input id="date-from" type="date" value="${esc(from)}"></label><label>종료일 <input id="date-to" type="date" value="${esc(to)}"></label><button id="page-reset">초기화</button></div>
     <p class="filter-help">날짜는 한국 시간 기준의 위키 등록·변경 시각입니다. 원문에 적힌 기준일과 다를 수 있습니다.</p><div id="tag-browser"></div><p id="page-count" role="status" aria-live="polite"></p><div id="page-results"></div><div id="search-db-results"></div>`;
     function update(){
+      const home=mode==='tree'&&!q&&!tag&&sort==='category'&&!from&&!to;
+      $('#tree-heading').classList.toggle('home-heading',home);
+      if(mode==='tree')$('#tree-hero').hidden=$('#home-entries').hidden=!home;
       const invalid=from&&to&&from>to;
       const dated=D.pages.filter(p=>!invalid&&(!from||day(stamp(p,basis))>=from)&&(!to||day(stamp(p,basis))<=to));
       let found=dated.filter(p=>(!tag||(p.tags||[]).includes(tag))&&(!q||[p.title,p.body,...p.tags||[]].join(' ').toLowerCase().includes(q.toLowerCase())));
@@ -143,6 +152,7 @@
   $('#sync').textContent=(PUBLIC?'읽기 전용 · ':'원본 확인 · ')+D.generatedAt.slice(0,10);
   $('#search-form').onsubmit=e=>{e.preventDefault();location.hash='#/search?q='+encodeURIComponent($('#search').value.trim())};
   $('#menu').onclick=()=>{const open=document.body.classList.toggle('menu-open');$('#menu').setAttribute('aria-expanded',String(open))};
+  $('#menu-backdrop').onclick=()=>{document.body.classList.remove('menu-open');$('#menu').setAttribute('aria-expanded','false');$('#menu').focus()};
   $('#close-detail').onclick=()=>{const [path,q='']=location.hash.split('?'),params=new URLSearchParams(q);params.delete('record');history.replaceState(null,'',path+(params.size?'?'+params:''));$('#detail').close()};
   $('#detail').addEventListener('cancel',()=>{const [path,q='']=location.hash.split('?'),params=new URLSearchParams(q);params.delete('record');history.replaceState(null,'',path+(params.size?'?'+params:''))});
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('#search').focus()}if(e.key==='Escape'){document.body.classList.remove('menu-open');$('#menu').setAttribute('aria-expanded','false')}});

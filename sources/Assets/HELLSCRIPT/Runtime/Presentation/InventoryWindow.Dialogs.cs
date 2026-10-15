@@ -11,25 +11,30 @@ namespace Hellscript
         void Modal(string kind,string title,float w,float h)
         {
             Dismiss();dialogKind=kind;
-            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint(UiTheme.VoidHex+"ce",UiTheme.VoidHex+"ce");
+            var shade=Btn(overlays,"",0,0,width,height,Dismiss,casual:false);shade.name="inventory-dialog-backdrop";UiTheme.Backdrop(shade);var shadeSurface=shade.GetComponent<StorageSurface>();shadeSurface.Paint(UiTheme.VoidHex+"ce",UiTheme.VoidHex+"ce");shadeSurface.radius=landscape?18:20;
             dialog=Panel(overlays,"Inventory dialog "+kind,UiTheme.SelectedHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);Place(dialog,(width-w)/2,(height-h)/2,w,h);
             if(kind=="detail")return; // The shared item popup owns this header and card viewport.
             bool itemWindow=kind=="detail"||kind=="compare";
-            Txt(dialog,title,14,0,w-(itemWindow?130:58),39,16,gold);Btn(dialog,"×",w-34,4,27,28,Dismiss,false,19).name="inventory-dialog-close";Rule(dialog,40,w);
+            Txt(dialog,title,14,0,w-(itemWindow?130:58),39,16,gold,heading:true);Btn(dialog,"×",w-34,4,27,28,Dismiss,false,19).name="inventory-dialog-close";Rule(dialog,40,w);
             if(itemWindow)RangeToggle(dialog,w-102,5,"inventory-detail-range-toggle");
         }
         void ItemInfo(Transform parent,Item item,float w,ref float y,bool concise=false,bool stackedHeader=false)
         {
-            var shared=ItemDetailView.Append(parent,item,w-12,font,textScale,EquipmentViewSource.Owned,icon:!concise,hero:Hero);float h=shared.sizeDelta.y;UiLayout.Place(shared,6,y,w-12,h);y+=h+4;
+            var shared=ItemDetailView.Append(parent,item,w-12,BodyFont,textScale,EquipmentViewSource.Owned,icon:!concise,hero:Hero,skin:Skin);float h=shared.sizeDelta.y;UiLayout.Place(shared,6,y,w-12,h);y+=h+4;
             if(!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item))Paragraph(parent,"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.",12,ref y,w-24,UiTheme.Caption,muted);
         }
         public void ShowDetail(string id)
         {
-            var item=FindItem(id);if(item==null)return;if(!store.ReviewInventoryItem(id))Toast(store.Error);// Landscape opens an unequipped item beside what it would replace, like Diablo IV's hover comparison.
+            var item=FindItem(id);if(item==null)return;if(!store.ReviewInventoryItem(id))Toast(store.Error);
+            item=FindItem(id);if(item==null)return;// Review commits replace inventory item instances.
+            // Landscape opens an unequipped item beside what it would replace, like Diablo IV's hover comparison.
             bool compare=landscape&&!item.equipped&&Hero.inventory.Any(i=>i.equipped&&i.slot==item.slot);
             float w=landscape?(compare?width-16:Mathf.Min(width-16,640)):width-16,h=height-16;
             Modal("detail","아이템 정보",w,h);detailId=id;Place(dialog,width-w-8,8,w,h);
-            var detail=ItemDetailPopup.Create(dialog,w,h,textScale,Dismiss,"inventory-dialog-close",font,RangeToggle);
+            // The shared shell remains legacy; clip its edge without recolouring its children.
+            dialog.GetComponent<StorageSurface>().SetSkin(Skin,radius:12,shadow:0);
+            var popupHost=Skin.Clip(dialog,radius:12,inset:2);
+            var detail=ItemDetailPopup.Create(popupHost,w,h,textScale,Dismiss,"inventory-dialog-close",BodyFont,RangeToggle);
             var actions=new System.Collections.Generic.List<ItemDetailPopup.FooterAction>
             {
                 new ItemDetailPopup.FooterAction("inventory-equip",item.equipped?"장착 해제":"장착",()=>{if(item.equipped)Unequip(id);else RequestEquip(id);},true),
@@ -41,8 +46,8 @@ namespace Hellscript
             if(!item.equipped)actions.Add(new ItemDetailPopup.FooterAction("inventory-compare","장착 비교",()=>ShowComparison(id)));
             actions.Add(new ItemDetailPopup.FooterAction("inventory-detail-close","닫기",Dismiss));
             detail.SetFooter(null,!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item)?"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.":null,actions.ToArray());
-            if(compare)EquipmentComparisonView.Create(detail.Body,EquipmentPreviewHero(Hero),item,store.Data.runes,font,atlas,textScale);
-            else ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,font,textScale,hero:Hero);
+            if(compare)EquipmentComparisonView.Create(detail.Body,EquipmentPreviewHero(Hero),item,store.Data.runes,BodyFont,atlas,textScale,skin:Skin);
+            else ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,BodyFont,textScale,hero:Hero,skin:Skin);
         }
         void RequestEquip(string id)
         {
@@ -69,10 +74,11 @@ namespace Hellscript
         public void ShowComparison(string id)
         {
             var item=FindItem(id);if(item==null||item.equipped)return;if(!store.ReviewInventoryItem(id,true))Toast(store.Error);
+            item=FindItem(id);if(item==null)return;
             float w=width-16,h=landscape?422:height-32;Modal("compare","장착 비교",w,h);detailId=id;
             var targets=EquipmentSlots.Targets(Hero,item);
             var host=Rect("Inventory comparison body",dialog);Place(host,12,46,w-24,h-99);
-            EquipmentComparisonView.Create(host,EquipmentPreviewHero(Hero),item,store.Data.runes,font,atlas,textScale);
+            EquipmentComparisonView.Create(host,EquipmentPreviewHero(Hero),item,store.Data.runes,BodyFont,atlas,textScale,skin:Skin);
             float bw=(w-24-(targets.Length-1)*8)/targets.Length;
             for(int n=0;n<targets.Length;n++){int index=targets[n];Btn(dialog,Loc.F("{0}에 장착",EquipmentSlots.Label(item.slot,index)),12+n*(bw+8),h-43,bw,32,()=>Equip(id,index),true,11).name="inventory-equip-"+index;}
         }
@@ -141,7 +147,7 @@ namespace Hellscript
         {
             var item=FindItem(id);if(item==null)return;ClosePopover();
             float w=Mathf.Min(width-32,300),h=landscape?258:300;popover=Panel(overlays,"Item quick information",UiTheme.BorderHex,UiTheme.RaisedHex,UiTheme.GoldHex);Place(popover,(width-w)/2,(height-h)/2,w,h);
-            Txt(popover,"아이템 정보",12,0,w-118,31,12,gold);Btn(popover,"×",w-31,3,26,25,ClosePopover,false,17).name="salvage-info-close";
+            Txt(popover,"아이템 정보",12,0,w-118,31,12,gold,heading:true);Btn(popover,"×",w-31,3,26,25,ClosePopover,false,17).name="salvage-info-close";
             RangeToggle(popover,w-99,2,"inventory-quick-range-toggle");
             Scroll(popover,"Quick information scroll",7,35,w-14,h-42,out var content);float y=7;ItemInfo(content,item,w-20,ref y);content.sizeDelta=new Vector2(0,y+6);
         }

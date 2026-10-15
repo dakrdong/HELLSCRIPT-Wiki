@@ -11,7 +11,7 @@ namespace Hellscript
     public sealed partial class InventoryWindow : MonoBehaviour
     {
         GameStore store;GameCatalog catalog;Font font;Texture2D atlas;Action closed,equipmentChanged;Func<float> readingScale;
-        RectTransform canvasRoot,frame,body,overlays,dialog,dialogBody,popover,filterMenu;ScrollRect bagScroll;
+        RectTransform canvasRoot,frame,body,edgeControls,overlays,dialog,dialogBody,popover,filterMenu;ScrollRect bagScroll;
         Rect safe;float width,height,scale,textScale,bagOffset;bool ready,landscape;string language;
         int category,grades=31;InventoryOrder order=InventoryOrder.Equipment;string filterKind;
         static readonly InventoryOrder[] Orders={InventoryOrder.Equipment,InventoryOrder.Newest,InventoryOrder.Oldest,InventoryOrder.Grade,InventoryOrder.Level};
@@ -64,8 +64,11 @@ namespace Hellscript
             Clear(canvasRoot);dialog=null;popover=null;filterMenu=null;filterKind=null;
             var backdrop=Panel(canvasRoot,"Inventory backdrop",UiTheme.VoidHex,UiTheme.VoidHex);Stretch(backdrop);
             frame=Panel(canvasRoot,"Inventory frame",UiTheme.RaisedHex,UiTheme.PanelHex,UiTheme.GoldDeepHex);frame.anchorMin=frame.anchorMax=Vector2.zero;frame.pivot=Vector2.zero;
-            frame.anchoredPosition=(safe.position+(safe.size-new Vector2(width,height)*scale)/2)/scale;frame.sizeDelta=new Vector2(width,height);frame.gameObject.AddComponent<RectMask2D>();
-            body=Rect("Inventory content",frame);Stretch(body);overlays=Rect("Inventory overlays",frame);Stretch(overlays);
+            frame.anchoredPosition=(safe.position+(safe.size-new Vector2(width,height)*scale)/2)/scale;frame.sizeDelta=new Vector2(width,height);
+            var clip=Skin.Clip(frame,radius:landscape?18:20,inset:3);
+            body=Rect("Inventory content",clip);Stretch(body);
+            edgeControls=Rect("Inventory edge controls",frame);Stretch(edgeControls);
+            overlays=Rect("Inventory overlays",frame);Stretch(overlays);
             Draw();
             if(kind=="detail"&&FindItem(id)!=null)ShowDetail(id);else if(kind=="compare"&&FindItem(id)!=null)ShowComparison(id);
             else if(kind=="stats")ShowStats();else if(kind=="bulk")ShowSalvage(true);else if(kind=="selected")ShowSalvage(false);
@@ -76,14 +79,14 @@ namespace Hellscript
         }
         void RememberScroll(){if(bagScroll!=null)bagOffset=bagScroll.content.anchoredPosition.y;}
         public void Repaint(){Repaint(false);}
-        void Repaint(bool resetScroll){CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Draw();StoreViewBinding.Rendered(this);}
+        void Repaint(bool resetScroll){CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Clear(edgeControls);Draw();StoreViewBinding.Rendered(this);}
         string DisplayKey()=>string.Join("|",StoreViewBinding.EquipmentKey(store.Data),store.Data.gold,store.Data.premium,
             store.Data.materials,store.Data.enhancementStones,StoreViewBinding.Key(store.Data.cores));
         void Draw()
         {
             var header=Panel(body,"Header",UiTheme.RaisedHex,UiTheme.PanelHex,UiTheme.BorderHex);Place(header,0,0,width,34);UiHeaderRule.Attach(header);
             Txt(header,"HELLSCRIPT",12,0,95,34,10,gold);
-            Txt(header,"가방",width/2-55,0,110,34,20,pale,TextAnchor.MiddleCenter);
+            Title(Txt(header,"가방",width/2-55,0,110,34,20,pale,TextAnchor.MiddleCenter));
             Btn(header,"×",width-34,2,30,30,RequestClose,false,20).name="inventory-close";
             var wallet=Panel(body,"Wallet summary",UiTheme.HoverHex,UiTheme.PanelHex,UiTheme.EdgeHex);Place(wallet,0,34,width,WalletSummaryHeight);
             DrawWalletSummary(wallet);
@@ -109,7 +112,7 @@ namespace Hellscript
         {
             var panel=Panel(body,"Character equipment",UiTheme.HoverHex,UiTheme.PanelHex,UiTheme.EdgeHex);Place(panel,x,y,w,h);
             var target=panel.gameObject.AddComponent<InventoryDropTarget>();target.window=this;target.slot=-1;
-            Txt(panel,catalog.classNames[(int)Hero.heroClass],12,2,125,28,15,pale);
+            Txt(panel,catalog.classNames[(int)Hero.heroClass],12,2,125,28,15,pale,heading:true);
             Btn(panel,"전체 능력치",w-111,3,99,25,ShowStats,false,10).name="inventory-stats";
             float equipmentHeight=landscape?328:230;
             var equipment=CharacterEquipmentView.Create(panel,Hero,w,equipmentHeight,landscape,EquipmentViewSource.Owned,(host,p)=>EquipmentCell(host,p.slot,p.index,p.rect.x,p.rect.y),weaponTray:landscape);equipment.transform.SetAsFirstSibling();
@@ -128,7 +131,8 @@ namespace Hellscript
             if(item==null)Txt(r,EquipmentSlots.Label(slot,index),2,3,SlotSize-4,SlotSize-6,9,muted,TextAnchor.MiddleCenter);
             else
             {
-                var label=Panel(r,"Equipment label",UiTheme.BackgroundHex+"df",UiTheme.BackgroundHex+"df");Place(label,1,SlotSize-13,SlotSize-2,12);label.GetComponent<Image>().raycastTarget=false;
+                var labelClip=Skin.Clip(r,radius:8,inset:2);
+                var label=Panel(labelClip,"Equipment label",UiTheme.BackgroundHex+"df",UiTheme.BackgroundHex+"df");Place(label,1,SlotSize-13,SlotSize-2,12);label.GetComponent<Image>().raycastTarget=false;
                 var caption=Txt(label,slot==0&&EquipmentSlots.TwoHanded(item)?"양손 점유":EquipmentSlots.Label(slot,index),0,0,SlotSize-2,12,8,gold,TextAnchor.MiddleCenter);caption.resizeTextForBestFit=true;caption.resizeTextMinSize=6;caption.resizeTextMaxSize=caption.fontSize;
                 if(index==1&&EquipmentSlots.TwoHanded(item))foreach(var image in r.GetComponentsInChildren<RawImage>())image.color=new Color(1,1,1,.35f);
             }
@@ -137,7 +141,7 @@ namespace Hellscript
         void DrawBag(float x,float y,float w,float h)
         {
             var panel=Panel(body,"Bag panel",UiTheme.RaisedHex,UiTheme.PanelHex);Place(panel,x,y,w,h);var drop=panel.gameObject.AddComponent<InventoryDropTarget>();drop.window=this;drop.slot=-2;
-            Txt(panel,"소지품",14,0,94,24,12,pale).name="inventory-bag-title";Txt(panel,Loc.F("{0} / {1}",Hero.inventory.Count(i=>!i.equipped),Hero.capacity),w-113,0,99,24,11,gold,TextAnchor.MiddleRight);
+            Txt(panel,"소지품",14,0,94,24,12,pale,heading:true).name="inventory-bag-title";Txt(panel,Loc.F("{0} / {1}",Hero.inventory.Count(i=>!i.equipped),Hero.capacity),w-113,0,99,24,11,gold,TextAnchor.MiddleRight);
             string[] categories={"전체","무기","방어구","장신구"};float tab=(w-28)/4;
             for(int n=0;n<4;n++){int c=n;var button=Btn(panel,categories[n],14+n*tab,24,tab-3,24,()=>{category=c;Repaint(true);},false,11);button.name="inventory-category-"+n;UiTheme.Choice(button,category==n);}
             float filterWidth=(w-36)/2;
@@ -194,7 +198,7 @@ namespace Hellscript
         }
         RectTransform DrawCell(Transform parent,Item item,float x,float y,float size,bool bag)
         {
-            var r=EquipmentSlotView.Create(parent,item,x,y,size,font,item!=null&&selected.Contains(item.id),!bag,bag&&selecting&&item!=null&&InventorySalvagePlan.Eligible(store.Data,item));
+            var r=EquipmentSlotView.Create(parent,item,x,y,size,BodyFont,item!=null&&selected.Contains(item.id),!bag,bag&&selecting&&item!=null&&InventorySalvagePlan.Eligible(store.Data,item),skin:Skin);
             var marker=r.gameObject.AddComponent<InventoryCell>();marker.window=this;marker.itemId=item?.id;marker.bag=bag;return r;
         }
         public Button Find(string name)=>GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name==name);

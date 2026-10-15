@@ -1,5 +1,7 @@
 # Battle damage graphs (2026-10-10)
 
+2026-10-14 update: casual base HUD layout, independent graphs and top-right edict follow the [new source handoff](Casual_Battle_HUD_20261014.en.md). Historical runtime evidence below does not validate the new skin.
+
 [한국어](Damage_Graphs_20261010.md)
 
 Two damage-taken graphs sit under the DPS panel in a rift battle. They show at which HP a potion has to be drunk to survive. Each line reads "average damage per second · share of the hero's full HP"; with 100 HP and 30 damage per second that is 30%.

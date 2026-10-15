@@ -1,0 +1,81 @@
+# Casual blacksmith skin — source handoff
+
+2026-10-14 · [한국어](Casual_Blacksmith_Skin_20261014.md)
+
+**The shared follow-up, approved equipment provider, nine empty-slot mappings and final static checks are complete. Unity import and rendering are handed off once to the owner of combined screen validation.** Initial screen base: `2e193c336c6176d80b9ddbdff7269246bf2590fb`. The first common API `cdb9c140fbf8b778bd3c0bbc0fbcc68a5d9e3fa8` was merged by `60a5c5d8d2d8fb23890b5f72059fc97a1bf05564`; screen wiring and static checks were recorded in `644e5782bfba943b75c1e957d2be67682de6273e`. The later common commit `0ccba80eef0da4703cb7ffcd1fb8e22848002b3d` was merged by `c0da48f4fe3c9db78b9347d29f2c111aaaef1f7b`. This document includes the screen changes following that merge. Direct edits are confined to the approved 14 BlacksmithWindow partials, one new Casual partial, dedicated tests and documents. **Shared files were not edited directly; approved owner commits were received through merges.** Original checkout/index, Core/game data, existing PNG/meta and user saves were not directly changed. Attendance pilot `6378320b` remains excluded. The equipment supply blocker is cleared; this is not full visual completion.
+
+## Design evidence and preserved behavior
+
+Reference: https://claude.ai/artifact/Qi7NdiGwLdRBwQh8ic7UAg
+
+The user specified 32 artboards. All 32 DOM states were inventoried; **one PC KO Main artboard was visually inspected at full size**, not 32 full visual/device validations. Actual prototype interactions included reroll confirmation (51,800 sample gold spent and history increment), slot upgrade (10 sample stones spent, 1/2 workstations busy), disabled core controls without a recipe, and the Craft placeholder. These sample values were not copied into game rules. [Inventory](CasualBlacksmithSkinEvidence20261014/claude-artboard-inventory.json).
+
+The prototype's fifth Craft tab has no implemented function. Per the parent decision, the game keeps its **four services**. Prototype body weight 700 is superseded by approved general-body 400, with real 700 for explicit emphasis.
+
+Key reference capture: `forge-claude-pc-ko-initial.jpg`; actual Library ID `libfile_3f8e8b948f4081918d936a891d82df4c`, file ID `file_00000000eb0081f5a2d92bc97753a64f`, version0. [Upload receipt](CasualBlacksmithSkinEvidence20261014/library-delivery.json). It is an artboard-only crop. Any further browser access requires verifying the user-designated `dakrdong@gmail.com` Chrome profile first.
+
+## Before and after
+
+| Area | Baseline source | Dedicated change | Outstanding |
+|---|---|---|---|
+| Body/emphasis | Existing font, synthetic bold | Noto400 / bundled700, no synthetic bold | KO/EN rendered wrapping and clipping |
+| Title/tab/button/display text | Legacy display/body | Shared LabelFont Jua/Noto fallback; dynamic minimum-guarantee glyph fallback fix | Actual transitions and glyph extents |
+| Background/text | Obsidian/ivory | Shared generated sky/cream/navy tokens | Pixel comparison |
+| Major PanelBox/columns/dialogs | Square | Shared StorageSurface.SetSkin rounded face, stroke and shadow | Actual scale against the reference's 3px stroke/5px shadow; inner stitching |
+| Button faces | Shared Gilt | UiSkin.Casual chrome connected; input, roles and state transitions retained | CasualClose circular face for the Icon role |
+| Equipment slots/details | Legacy shared views | DefaultSkin with approved provider passed through 13 equipment and 2 detail API calls | Unity import and rendered validation |
+| Search/dropdown | Legacy style | Screen factories and inactive template styled | Clone/input validation |
+| Equipment/empty-slot art | Legacy resources | Shared Art/Casual/Equipment supply; nine empty slots use ForBase | Unity import/render and separate currency/core/hero wiring |
+
+There is **no current-game before/after capture yet**. The old `forge-1440x810-ko.png` was not accepted as a baseline because its provenance does not establish this SHA. The table describes source changes, not visual proof. Fixed placement calls, font-size assignments and existing best-fit floors are unchanged; font metrics can still change computed dimensions. No rendered-geometry equivalence is claimed.
+
+The temporary `ForgeTextInk` contrast shim and screen-local display-font selector were removed in favour of shared `UiSkin.OnLight` and `LabelFont`. Legacy service-tab Gilt text colours were also removed. Display text created empty and later assigned symbols, including the minimum-guarantee value, now reapplies glyph fallback after value changes. Actual font transitions between the minimum-guarantee `—` and numbers during investment 0→500→0 remain pending integrated runtime validation. There is no hierarchy-wide recolouring of body, rarity or element text, and no new frame callback, transaction or save path.
+
+## Integration dependencies
+
+1. **Separate shared currency, core and hero wiring.** Equipment supply is resolved through the verified `CasualEquipmentArt.Provider` below. Source inspection confirms `DefaultSkin=UiSkin.Casual.WithEquipmentArt(CasualEquipmentArt.Provider)` and the default used by `Open(..., skin:null)`. An explicit skin argument is preserved; global `EquipmentArt` fallback is unchanged. Nine empty-slot icons now call public `ForBase`, falling back to legacy slot art when the provider/file is absent. Currencies, cores and heroes are outside this equipment provider's scope and still need their shared owner's wiring.
+2. **Remaining shared visuals.** Ask owner `01a13790-39bc-7062-a516-b83a354000a8` to address the Icon early return in `UiButtonFace` that prevents the circular coral `CasualClose` face, direct legacy UiTheme colours in `CoreQualityGauge` and `UiLockGraphic`, and inner stitching on Casual panels. Assigning `.color=gold` does not reskin the gauge. Major panels currently pass borderWidth 2/shadow 3; actual scale against the reference's 3px/5px remains unverified. `ForgeWorkingPulse` only animates alpha and is not a required separate skin API blocker. No renderer/state-machine clone was added.
+3. **One combined-screen validation handoff.** Per-screen Unity and build plans are closed. The sole integration owner `01a13790-39bc-7062-a516-b83a354000a8` will validate all screens together on a separate integration branch in `task-6/skill-skin`, reusing its existing Library. Do not rerun Unity, builds or individual checks in this sparse source checkout. Hand off the dedicated test filters, smoke scope and existing receipts once; Roslyn compilation does not replace execution in the integration environment. Freeze after the final source commit and resume only for a concrete defect request from the integration owner.
+
+Integration order: first confirm that the separate task6 integration branch contains common `0ccba80e`. Receive the screen's non-merge commits from `codex/casual-blacksmith-skin` in local `/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-14/forge-skin` in this order: `77d6702b` → `644e5782` → **the final wiring commit containing this document**. Merges `60a5c5d8` and `c0da48f4` record shared-code receipt and need not be cherry-picked separately as screen changes. Alternatively, merge the reviewed final branch as a whole. Record the final wiring SHA after committing in external `evidence/implementation-handoff.json`.
+
+[Approved mapping](CasualBlacksmithSkinEvidence20261014/approved-art-map.json) preserves the earlier check of 359 equipment +6 heroes +3 currencies/materials +8 cores = **376 actual file hashes matched**, with zero missing/mismatched. The follow-up [equipment verification](CasualBlacksmithSkinEvidence20261014/approved-equipment-followup.json) checked the `0ccba80e` [import receipt](../../tools/casual_equipment_art_receipt.json), four approval-ledger hashes, all 359 source/donor PNGs/fixed-commit Git blobs/prior forge mappings, and 359 meta/GUID records: all matched. The shared path is `Art/Casual/Equipment/{ID}`, with 330 item keys (329 physical masters plus alias) and 30 set emblems. B28 shares B32's path; there is no B28 PNG. This is neither Unity import validation nor pixel-readability validation.
+
+Empty-slot wiring: sword B01, shield B32, helm B11, armor B13, gloves B15, boots B17, belt B19, amulet B21, ring B23. Both ring positions reuse one image. `SlotEmblem()` uses `skin.EquipmentArt?.ForBase(id)` without changing equipment calculations, item IDs or catalogue unlocks.
+
+Current currency consumers remain `CurrencyIconView`: gold `Art/Attendance/reward-gold`, Abyssal Coin `Art/GlobalHUD/currency-abyssal-coin`, enhancement stone `Art/GlobalHUD/currency-enhancement-stone`, and cores `Art/GlobalHUD/currency-core-{weapon,head,chest,hands,feet,belt,amulet,ring}`. Legacy `Art/Blacksmith/slot-{sword,shield,helm,armor,gloves,boots,belt,amulet,ring}` is now the fallback if the approved ForBase lookup fails. `CharacterEquipmentView` calls `CharacterFigure.Load(heroClass)`, loading a Texture2D at `Art/CharacterSelection/{Warrior,Ranger,Mage}` and a TextAsset at the same path plus `.atlas`. Each legacy atlas has six frames; new approved hero PNGs are single images, so no overwrite was made. A shared character display adapter and class-to-art choice are required without adding HeroSave gender or changing save contracts. There is no current NPC portrait consumer in the forge.
+
+The shared Git commit contains 359 approved equipment PNGs, verified in the donor checkout. **Duplicate physical PNG copies in the forge sparse checkout: 0;** newly generated PNGs: 0; legacy overwrites: 0; removals: 0. Fixed-commit blobs were verified in memory through `git cat-file --batch`, without PNG checkout/export. Resources add **69,753,836 logical source bytes (about 66.522 MiB)** to build inputs regardless of view opt-in. This is not a measured compressed-player delta or free-disk-space change. Retain legacy art until Unity import, screen validation and global-reference checks are complete; shared currency and attendance resources remain intact.
+
+## Validation and next acceptance
+
+After receiving `0ccba80e` and wiring DefaultSkin/empty-slot art, the final UI contract passed **15 tests in 31.841 seconds**, and the refresh guard passed **16 bindings/193 UI sources**. The [source invariant check](CasualBlacksmithSkinEvidence20261014/check_source_invariants.py) confirmed unchanged 17 store calls, 124 rectangle-placement calls, 182 localization calls, 5 click listeners and font-size/best-fit assignments across the 14 baseline files. Generated palette IDs, skin propagation for 13 equipment and 2 ItemDetail API calls, and removal of the temporary contrast shim also passed. These are source checks, not runtime results.
+
+The ownership guard in `check_source_invariants.py` compares this dedicated branch against `0ccba80e`. It cannot be applied unchanged to the entire diff of a branch containing other screens. Reuse the frozen dedicated-source receipt; the integration owner must validate the combined scope. This handoff does not change the checker or rerun individual checks.
+
+Final Roslyn static compilation completed with **Runtime 834 C# sources: exit 0/errors 0/warnings 47**, and **Tests 259 sources: exit 0/errors 0/warnings 2**. Blacksmith source warnings: 0. Check exact source inputs and recording times in the [compile result](CasualBlacksmithSkinEvidence20261014/compile-result.json), [input manifest](CasualBlacksmithSkinEvidence20261014/compile-inputs.json), [Runtime log](CasualBlacksmithSkinEvidence20261014/Runtime.log) and [Tests log](CasualBlacksmithSkinEvidence20261014/Tests.log). Static outputs belong only in task14 evidence; existing donor reference DLLs were read without duplicating Unity caches or projects. **Unity/EditMode executions: 0.** Static compilation is not runtime validation.
+
+Preserved history for `644e5782`: Runtime 831/Tests 258 sources, errors 0 and warnings 47/2, no blacksmith warnings, 8 dedicated cases compiled only, UI contract 15 tests/28.586 seconds, and refresh 16 bindings/192 sources passed. These results belong to the earlier inputs and remain distinct from the final results above.
+
+The latest **9 BlacksmithCasualSkinTests cases were compiled only**. Coverage includes default-provider wiring/global-fallback preservation, typography rectangles/sizes, glyph fallback, inactive dropdown templates and selection callbacks, Casual chrome retention through state changes, and unchanged major-panel rectangles. Nine empty-slot mappings are outside those nine cases; they were confirmed by separate source review and the [equipment verification](CasualBlacksmithSkinEvidence20261014/approved-equipment-followup.json). The existing text-measurement path uses deferred Destroy, making the full investment 0→500→0 flow unsuitable for a synchronous EditMode fixture; its minimum-guarantee `—` font transition is handed off for integrated runtime validation. Minimum EditMode filters for the integration owner: BlacksmithCasualSkinTests, BlacksmithTests, CoreCraftingTests, PuzzleForgeTests, ForgePresentationAllocationTests and StoreViewBindingTests. Do not omit failures.
+
+Integrated runtime acceptance scope (not executed): four tabs/2-second lock hints/re-entry, selection/empty/insufficient currency/save failure, reroll confirm and auto target wait/continue/stop, slot start/finish/time settlement, core search/class/grade, zero/capped investment, craft/result acknowledgement/re-entry, scroll restoration and dropdown input. Use disposable test saves and muted execution.
+
+Existing smoke entry points were inspected in source only, without execution. The integration owner can select them for sequential acceptance using one integrated build.
+
+| Existing entry point | Arguments | Success evidence |
+|---|---|---|
+| `RuntimeBlacksmithSmoke.cs` | `-hellscriptBlacksmithSmoke -hellscriptScreenshots <evidence> -hellscriptSavePath <disposable>` | PASS in `result.txt` + `HELLSCRIPT_BLACKSMITH_SMOKE_OK` |
+| `RuntimeForgeNavigationSmoke.cs` | `-hellscriptForgeNavigationSmoke -hellscriptEvidencePath <evidence> -hellscriptSavePath <disposable>` | `runtime.txt` + `HELLSCRIPT_FORGE_NAVIGATION_OK` |
+| `RuntimeCoreCraftingSmoke.cs` | `-hellscriptCoreCraftingSmoke -hellscriptScreenshots <evidence> -hellscriptSavePath <disposable>` | `result.txt` + `HELLSCRIPT_CORE_CRAFTING_SMOKE_OK` |
+| Core restart verification | Add `-hellscriptCoreCraftingVerify` to the core arguments above | `restart-result.txt` + `HELLSCRIPT_CORE_CRAFTING_RESTART_OK` |
+
+All three smoke scripts have a Debug build guard and call Quit themselves; do not activate different smoke flags together. `CaptureOnly`/`SkipExercise` do not establish functional acceptance. **2868×1320 is absent from the existing resolution inputs of all three smoke scripts**, so integrated acceptance must include it separately. This source-only task has no individual execution or build plan.
+
+Validate PC16:9/16:10/21:9, 440×956/956×440 and2868×1320, KO/EN, text, rounded corners, circular edges, min/max gauges, fixed actions and scrolling. The2868×1320 Mac simulation assumes DPR3 and safe-area left/right102,bottom54,top0; it is not iOS hardware validation. Light purple paid-currency text and small orange accents on cream remain contrast checks. No performance improvement is claimed.
+
+Suggested common-rule addition: extend the completed body/font, button and equipment opt-in wiring with explicit acceptance for gauges, locks, Close Icons and inner stitching. Check glyph fallback after dynamic value changes and inactive dropdown templates. Assign one PNG storage owner and settle legacy aliases and the character atlas contract before expanding consumers.
+
+## Artifacts
+
+The source-only sparse clone initially measured about25MB and reads the original's Git objects without modifying its index. No Library/Builds or PNG copy was made. Final sizes, receipts and integration handoff state are in task14 `evidence/artifact-lifecycle.json` and `implementation-handoff.json`. Retain until integration and validation are accepted. Freeze after the final source commit; do not rerun individual checks, Unity or builds. Resume only for a concrete integration-owner defect request. Push/main merge/web builds/public deployment/wiki runs:0.

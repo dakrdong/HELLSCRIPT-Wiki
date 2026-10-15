@@ -1,5 +1,7 @@
 # Battle HUD Hunt Edict sheet (2026-10-11)
 
+2026-10-14 update: casual base HUD layout, independent graphs and top-right edict follow the [new source handoff](Casual_Battle_HUD_20261014.en.md). Historical runtime evidence below does not validate the new skin.
+
 [한국어](Edict_Hud_Sheet_20261011.md)
 
 Hunt Edict settings are changed inside the battle screen without leaving to a menu. The Hunt Edict button above the seal pauses the battle and fans out five tab icons (combat, survival, explore, repeat, presets). A tab opens one sheet above the icon row.

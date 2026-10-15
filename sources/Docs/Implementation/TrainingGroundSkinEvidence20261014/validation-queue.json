@@ -1,0 +1,100 @@
+{
+  "screen": "Training Ground",
+  "branch": "codex/casual-training-skin",
+  "sharedGameBaseline": "4139a77e2df495cee009c07c6094b2eea9b1aeaa",
+  "baseCommit": "2e193c336c6176d80b9ddbdff7269246bf2590fb",
+  "status": "screen-local Unity/build plan closed; frozen inputs handed to one integrated validation owner",
+  "unityExecuted": false,
+  "editModeFilters": [
+    "Hellscript.Tests.TrainingGroundSkinTests",
+    "Hellscript.Tests.TrainingGroundUiTests",
+    "Hellscript.Tests.TrainingGroundTests",
+    "Hellscript.Tests.StoreViewBindingTests",
+    "Hellscript.Tests.UiButtonTests",
+    "Hellscript.Tests.CasualUiSkinTests",
+    "Hellscript.Tests.CasualChartSkinTests"
+  ],
+  "scenarios": [
+    "KO/EN",
+    "portrait 440x956",
+    "landscape 2868x1320",
+    "PC 16:9, 16:10, 21:9",
+    "skill checked/excluded/auto-off/empty slot",
+    "boss swap, 0/5, 5/5, max count and stage",
+    "dropdown click/touch, slider drag/release, independent list scroll",
+    "start, pause/resume, first/faster/slower/failed result",
+    "edicts nested return, language switch, reopen, isolated save/failure",
+    "Quiet auto-off warning border overlap: pending common-owner policy, native capture required",
+    "rounded hero/dropdown/portrait boundaries and scroll under nested masks",
+    "button keyboard focus and disabled/selected transitions after shared chrome migration"
+  ],
+  "safeArea": "2868x1320 is a Mac simulation; if used, DPR3/102px sides/54px bottom must be explicitly recorded. No physical iOS claim.",
+  "save": "Disposable task-specific save; never user save",
+  "audio": "Muted",
+  "prerequisites": [
+    "integrator preserves/adopts common 0ccba80e baseline; this screen still consumes cdb9",
+    "wire result DrawDps and SkillCard skin arguments, then validate combat/edict creation scope and restoration",
+    "common owner decides Casual Quiet idle warning-border overlap; inspect shared pause/header residual styling",
+    "integrate shared35 portraits/meta from 57bba034dad1659e8a36dc9645b1291d2554e497 or identical audited blobs",
+    "single owner tests all merged screens together; no separate screen execution"
+  ],
+  "output": "Single integrated branch/validation suite owned by task-6; reuse its existing Library in place. No per-screen build or Unity plan.",
+  "retentionReviewDate": "2026-10-21",
+  "buildsCreated": 0,
+  "candidateCodeCommit": "2dee3038016169b7ad7110cfec524d351c9d02dc",
+  "sourceTreeCleanAtCodeCommit": false,
+  "sourceInputs": "common-api-inputs.json",
+  "sourceReview": "common-api-diff-review.md",
+  "updatedUtc": "2026-10-14T08:09:43.816518+00:00",
+  "sharedApiOwnerCommit": "cdb9c140fbf8b778bd3c0bbc0fbcc68a5d9e3fa8",
+  "localSharedApiImportCommit": "d5b8c8898cb2bc140c4c736426b961704f57ac09",
+  "sourceCodeMatchesCommittedInputs": true,
+  "pendingDocumentationAtCodeCommit": true,
+  "staticChecks": "common-api-static-checks.json",
+  "unityTrainingSkinCasesPrepared": 5,
+  "unityTrainingSkinCasesExecuted": 0,
+  "blockedActions": [
+    {
+      "action": "follow-up common API import and training chart/combat/edict consumers",
+      "target": "0ccba80e plus TrainingGroundResultWindow and existing UI entry callbacks",
+      "reason": "latest parent instruction freezes screen edits for combined integration; follow-up agent also hit model capacity and was not retried",
+      "state": "pending integration owner; no import/edit attempted"
+    },
+    {
+      "action": "Unity compilation, EditMode and native before/after capture",
+      "target": "task-6 separate integrated branch and existing Library",
+      "reason": "all individual plans closed by latest user instruction; one combined validation plan",
+      "state": "pending integration owner; not denied or executed"
+    }
+  ],
+  "individualUnityPlanClosed": true,
+  "sourceEditingFrozen": true,
+  "resumeOnlyFor": "specific defect request from integration owner",
+  "integrationOwnerThread": "01a13790-39bc-7062-a516-b83a354000a8",
+  "integrationWorkspace": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin",
+  "finalHandoff": "../Casual_Training_Ground_Final_Handoff_20261014.md",
+  "commonFollowupAvailableButNotIntegrated": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "safeHeadBeforeHandoff": "1cbf79b866de313a738f1195e39067fe3061bbe8",
+  "followupAuditAgent": "ended with selected model at capacity; not retried",
+  "smoke": {
+    "entry": "RuntimeTrainingGroundSmoke.Boot",
+    "flag": "-hellscriptTrainingGroundSmoke",
+    "requiredArgs": [
+      "-hellscriptSavePath <disposable path>",
+      "-hellscriptEvidence <integrated evidence path>"
+    ],
+    "success": "HELLSCRIPT_TRAINING_GROUND_SMOKE_OK; runtime.txt; exit0",
+    "failure": "failure.txt for exception; exit1",
+    "existingSizes": [
+      "440x956",
+      "956x440",
+      "1600x900",
+      "1600x1000",
+      "2100x900"
+    ],
+    "additionalRequiredSize": "2868x1320 not present in existing smoke size array",
+    "saveWarning": "Fixture mutates save data; never user save",
+    "audio": "Integration runner must apply mute",
+    "execution": "not run; use only as integrated plan input"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "owner": "task-16/source_inventory (AspectStone screen art)",
+  "created_utc": "2026-10-14T06:52:07.547869+00:00",
+  "source_base_commit": "2e193c336c6176d80b9ddbdff7269246bf2590fb",
+  "artifacts": [
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/aspect-skin/Assets/HELLSCRIPT/Resources/Art/CasualAspectStone/LW02.png",
+      "purpose": "One approved LW02 representative for screen-only opt-in validation",
+      "estimated_bytes_before_copy": 1168223,
+      "actual_bytes": 1168223,
+      "kind": "deliverable",
+      "retention": "Preserve while this screen implementation and its validation depend on the asset; owner review required before removal",
+      "cleanup_status": "retain",
+      "source_path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-13/task-6/output/hellscript-casual-items/aspect_sigil/aspect-LW02-casual-v01.png",
+      "source_sha256": "7eaedc552682d30ece36195a7d7b6cf139aeb250bc577acbd0bbd607a78ff27e",
+      "copy_hash_matches_source": true
+    }
+  ],
+  "excluded": "No other approved PNG copied; no Library, Builds, source archive, source PNG edit, or Unity process created.",
+  "common_followup": {
+    "commit": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+    "equipment_mapping": "Art/Casual/Equipment/{id}",
+    "source_receipt": "tools/casual_equipment_art_receipt.json",
+    "verified_pngs": 359,
+    "reference_png_logical_bytes": 69753836,
+    "copied_pngs": 0,
+    "aspect_pilot_duplicate_png_count": 0,
+    "pilot_retained": true,
+    "separate_role": "The LW02 aspect sigil and LW02 equipment icon have different approved sources, SHA values and resource paths.",
+    "validation_outputs": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/static-validation",
+    "retention": "Preserve source mapping and static evidence. DLL/ref/PDB/compiler temp outputs are cleanup candidates after integration review.",
+    "deletions": 0
+  }
+}

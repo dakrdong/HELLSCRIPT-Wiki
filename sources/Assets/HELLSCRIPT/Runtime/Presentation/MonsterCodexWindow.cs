@@ -31,7 +31,7 @@ namespace Hellscript
                     MonsterRegistry.Changed+=owner.Repaint;
                 }
                 owner.Render(v);
-            },close,back:()=>owner.Back());
+            },close,back:()=>owner.Back(),skin:UiSkin.Casual);
         }
         string VisibleState()=>string.Join("|",Account.Hero.id,Account.Hero.highestClear,StoreViewBinding.Key(Account.monsterCodex),game.LiveOps?.ConfigHash);
         void OnDestroy(){MonsterRegistry.Changed-=Repaint;}
@@ -59,12 +59,12 @@ namespace Hellscript
             var closer=(RectTransform)v.Frame.Find("content-close");UiLayout.Place(closer,w-52,5,Touch,Touch);
             float tx=portrait?56:206,progressW=portrait?100:184;
             UiLayout.Place(v.Title.rectTransform,tx,5,Mathf.Max(130,w-52-progressW-tx-18),44);v.Title.fontSize=UiTheme.Title;
-            if(!portrait)Text(v.Frame,"Codex wordmark","HELLSCRIPT",60,5,138,44,UiTheme.Heading,UiTheme.Gold,TextAnchor.MiddleLeft,UiFonts.Display);
+            if(!portrait)Text(v.Frame,"Codex wordmark","HELLSCRIPT",60,5,138,44,UiTheme.Heading,UiTheme.Gold,TextAnchor.MiddleLeft,UiFonts.CasualDisplay);
             float px=w-64-progressW;int discovered=MonsterCodexPreview.Discovered(Account,MonsterRegistry.All),total=MonsterRegistry.All.Count;
             Text(v.Frame,"Codex progress label",Loc.T("발견한 적"),px,9,progressW,14,UiTheme.Caption,UiTheme.Muted);
             Text(v.Frame,"codex-progress",discovered+" / "+total,px,23,progressW,18,UiTheme.Body,UiTheme.GoldBright,TextAnchor.MiddleRight);
-            var track=Box(v.Frame,"Progress track",px,45,progressW,3,UiTheme.Edge);
-            Box(track,"Progress fill",0,0,total>0?progressW*discovered/total:0,3,UiTheme.Gold);
+            var track=Box(v.Frame,"Progress track",px,45,progressW,3,UiTheme.D4Token("SteelC9D0E2A1000"));
+            Gauge(track,"Progress fill","bar.rank",total>0?discovered/(float)total:0);
         }
         void RenderList(ContentWindowView v)
         {
@@ -80,6 +80,8 @@ namespace Hellscript
                 var card=Button(v.Body,"codex-card-"+d.id,"",i%columns*(cell+gap),i/columns*(cardH+gap),cell,cardH,()=>OpenDetail(d.id));
                 card.interactable=known;((UiButton)card).Configure(UiButtonRole.Item,false,!known);
                 var r=(RectTransform)card.transform;cards.Add(r);
+                // Item chrome owns input feedback; its artwork/background remains screen content.
+                Paint(r,"Codex card background",known?CardLook:"panel.btn.sq.refund.off");
                 var frame=Panel(r,"Portrait frame",6,6,pic,pic,d.boss?UiTheme.GoldHex:UiTheme.BorderHex);
                 if(known)Portrait(frame,d,2,2,pic-4);else Text(frame,"Undiscovered portrait","?",0,0,pic,pic,36,UiTheme.Faint,TextAnchor.MiddleCenter);
                 if(d.boss){string label=Loc.T("보스");Chip(frame,"Boss ribbon",label,2,pic-20,LabelWidth(label,UiTheme.Caption)+6,18,UiTheme.Gold);}
@@ -101,7 +103,7 @@ namespace Hellscript
             float x=0;foreach(int f in new[]{MonsterCodexPreview.All}.Concat(MonsterCodexPreview.Fields()).Concat(new[]{MonsterCodexPreview.Bosses}))
             {
                 var entries=MonsterCodexPreview.Entries(f).ToArray();string label=(f==MonsterCodexPreview.All?Loc.T("전체"):f==MonsterCodexPreview.Bosses?Loc.T("보스"):FieldName(f))+"  "+MonsterCodexPreview.Discovered(Account,entries)+"/"+entries.Length;
-                float width=Mathf.Max(76,LabelWidth(label,UiTheme.Body)+24);int filter=f;
+                float width=Mathf.Max(76,LabelWidth(label,UiTheme.Body,v.Skin.LabelFont(label))+24);int filter=f;
                 var b=v.Tab(body,label,x,0,width,Touch,()=>{field=filter;listOffset=0;v.Body.anchoredPosition=Vector2.zero;Repaint();},field==f);b.name="codex-tab-"+f;x+=width+6;
             }
             UiLayout.Place(body,0,0,Mathf.Max(w,x-6),Touch);
@@ -122,14 +124,24 @@ namespace Hellscript
         static RectTransform Box(Transform parent,string name,float x,float y,float w,float h,Color? color=null)
         {var r=UiLayout.Rect(name,parent);UiLayout.Place(r,x,y,w,h);if(color.HasValue){var image=r.gameObject.AddComponent<Image>();image.color=color.Value;image.raycastTarget=false;}return r;}
         static RectTransform Panel(Transform parent,string name,float x,float y,float w,float h,string edge=null)
-        {var r=Box(parent,name,x,y,w,h);var s=r.gameObject.AddComponent<StorageSurface>();s.Paint(UiTheme.PanelHex,UiTheme.BackgroundHex,edge??UiTheme.BorderHex);s.raycastTarget=false;return r;}
+        {
+            var r=Box(parent,name,x,y,w,h);var paint=Paint(r,"Codex casual panel",edge==UiTheme.GoldHex?ChosenLook:CardLook);
+            if(edge==UiTheme.DangerHex)
+            {
+                var cue=Box(r,"Phase danger edge",0,0,w,h);var ring=cue.gameObject.AddComponent<StorageSurface>();
+                ring.top=ring.bottom=Color.clear;ring.edge=UiTheme.Danger;ring.radius=paint.Look.radius;ring.raycastTarget=false;
+            }
+            return r;
+        }
         static Text Text(Transform parent,string name,string value,float x,float y,float w,float h,int size,Color color,TextAnchor align=TextAnchor.UpperLeft,Font font=null)
-        {var t=UiLayout.Text(parent,name,value,x,y,w,h,size,color,font);t.alignment=align;return t;}
-        static float LabelWidth(string value,int size)
-        {var settings=new TextGenerationSettings{font=UiFonts.Body,fontSize=size,fontStyle=FontStyle.Normal,scaleFactor=1,richText=true};return Mathf.Ceil(new TextGenerator().GetPreferredWidth(value,settings))+2;}
+        {var t=UiLayout.Text(parent,name,value,x,y,w,h,size,UiSkin.Casual.TextColor(color),font??UiFonts.CasualBody());t.fontStyle=FontStyle.Normal;t.alignment=align;return t;}
+        static float LabelWidth(string value,int size,Font font=null)
+        {var settings=new TextGenerationSettings{font=font??UiFonts.CasualBody(),fontSize=size,fontStyle=FontStyle.Normal,scaleFactor=1,richText=true};return Mathf.Ceil(new TextGenerator().GetPreferredWidth(value,settings))+2;}
         static string FieldName(int f)=>Loc.T(GameCatalog.FieldNames[f]);
         static void Chip(Transform parent,string name,string value,float x,float y,float w,float h,Color color)
-        {var r=Box(parent,name,x,y,w,h,UiTheme.Background);Text(r,name+" text",value,3,0,w-6,h,UiTheme.Caption,color,TextAnchor.MiddleCenter);}
+        {var r=Box(parent,name,x,y,w,h,Color.clear);
+            Paint(r,"Codex casual chip",color==UiTheme.Gold?"tag.passive-unlock.l.key":CardLook);
+            Text(r,name+" text",value,3,0,w-6,h,UiTheme.Caption,color,TextAnchor.MiddleCenter);}
         static void Portrait(Transform parent,MonsterDefinition d,float x,float y,float size)
         {
             var r=Box(parent,"Monster portrait",x,y,size,size);var picture=r.gameObject.AddComponent<RawImage>();picture.raycastTarget=false;

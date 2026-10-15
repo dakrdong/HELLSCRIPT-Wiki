@@ -84,7 +84,7 @@ namespace Hellscript
         }
         public void SelectHero(int index)
         {
-            if(Running)return;CancelRiftEntry();CancelPotionDeparture();Tutorials.Switch(Store.Data,Store.Data.selectedHero,Mathf.Clamp(index,0,2));SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
+            if(Running||!HeroSlots.IsCreated(Store.Data,index))return;CancelRiftEntry();CancelPotionDeparture();Tutorials.Switch(Store.Data,Store.Data.selectedHero,index);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
         public bool ChangeCharacterFromSettings(int index)
         {

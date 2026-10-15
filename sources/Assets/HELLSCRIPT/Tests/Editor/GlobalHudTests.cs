@@ -16,29 +16,36 @@ namespace Hellscript.Tests
             // A dynamic OS font left behind keeps its atlas alive for the rest of the editor session and
             // has been seen to change what a later test reads back, so this one is destroyed with the row.
             var font=GameUI.CreateFont();bool created=font!=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            label.font=font;label.text="보호막 +25";
+            label.font=UiFonts.CasualBody(true);label.text="보호막 +25";
             label.horizontalOverflow=HorizontalWrapMode.Overflow;label.verticalOverflow=VerticalWrapMode.Overflow;
             try
             {
                 foreach(var size in new[]{new Vector2Int(360,640),new Vector2Int(640,360),new Vector2Int(900,360),new Vector2Int(540,960),new Vector2Int(720,1280),new Vector2Int(1280,720),new Vector2Int(1600,900),new Vector2Int(900,1600),new Vector2Int(3440,1440)})
                 {
                     var p=new GlobalHudLayout(size.x,size.y,1f,style);
-                    string where=" at "+size.x+"x"+size.y;
+                    string where=" at "+size.x+"x"+size.y;label.text="\uBCF4\uD638\uB9C9 +25";
                     foreach(var row in new[]{("Level",p.level,style.levelFont,style.minimumLevelFont),("HP",p.hp,style.valueFont,style.minimumValueFont),
                         ("Resource",p.resource,style.valueFont,style.minimumValueFont),("Shield",p.shield,style.shieldFont,style.minimumFont),("XP",p.xpText,style.captionFont,style.minimumFont)})
                     {
+                        label.font=row.Item1=="Level"?UiFonts.CasualDisplay:UiFonts.CasualBody(true);
                         label.fontSize=p.FontSize(row.Item3,(int)row.Item4);
-                        Assert.That(label.fontSize/p.scale,Is.EqualTo(Mathf.Max(row.Item3,row.Item4)).Within(.5f/p.scale+.001f),row.Item1+" text no longer proportional"+where);
+                        Assert.That(label.fontSize/p.textScale,Is.EqualTo(Mathf.Max(row.Item3,row.Item4)).Within(.5f/p.textScale+.001f),row.Item1+" text no longer proportional"+where);
                         Assert.That(label.preferredHeight,Is.LessThanOrEqualTo(row.Item2.height*p.scale+1),row.Item1+" text clipped"+where);
                     }
-                    Assert.That(p.shield.yMax,Is.LessThanOrEqualTo(p.status.y),"Shield band runs into the status strip"+where);
+                    label.font=UiFonts.CasualBody(true);label.fontSize=p.FontSize(style.statusFont,(int)style.minimumFont);
+                    foreach(string text in new[]{"\uC0C1\uC2DC","99","\u221e"})
+                    {
+                        label.text=text;
+                        Assert.That(label.preferredHeight,Is.LessThanOrEqualTo((p.status.height-p.statusIcon)*p.scale+1),"Status caption clipped"+where);
+                    }
+                    Assert.IsFalse(p.shield.Overlaps(p.status),"Shield band runs into the status strip"+where);
                     Assert.That(p.shield.y,Is.GreaterThanOrEqualTo(p.shieldLine.yMax),"Shield text sits on its own line"+where);
                 }
             }
             finally{Object.DestroyImmediate(host);if(created&&font!=null)Object.DestroyImmediate(font);}
         }
-        // The gear and the content shortcuts are the skill icons' size (plus the emblem margin) on a landscape screen at any resolution, never under
-        // their minimum, and six of them always fit above the HUD.
+        // Legacy gear and content shortcuts prefer the skill icons' size plus the emblem margin, while
+        // six controls and their rail spacing must fit above the HUD without dropping below the minimum.
         [Test] public void ShortcutsMatchTheSkillIconsAndKeepTheirMinimum()
         {
             var style=GlobalHudStyle.Load();
@@ -49,85 +56,53 @@ namespace Hellscript.Tests
                 float town=GlobalHudLayout.ShortcutIcon(skillWidth,hud.scale,canvas,hudTop,44/canvas),battle=GlobalHudLayout.ShortcutIcon(skillWidth,hud.scale,canvas,hudTop,44);
                 Assert.That(town*canvas,Is.GreaterThanOrEqualTo(Mathf.Min(44f,skill)-.01f),"Town shortcut smaller than its pointer target or a skill icon"+where);
                 Assert.That(battle,Is.GreaterThanOrEqualTo(44f-.01f),"Battle shortcuts shrank below the 44 page units they always had"+where);
-                Assert.That(6*town,Is.LessThanOrEqualTo(hudTop),"Six town shortcuts do not fit above the HUD"+where);Assert.That(6*battle,Is.LessThanOrEqualTo(hudTop),"Six battle shortcuts do not fit above the HUD"+where);
-                if(size.x>size.y&&size.x<=1600&&size.y<=900&&battle*canvas>44.01f)Assert.That(battle*canvas,Is.EqualTo(skill*1.15f).Within(.01f),"A landscape battle shortcut is not the skill icon's size"+where);
+                float railSpacing=(3*12+5*UiTheme.Gap)*hud.scale;
+                Assert.That(6*town*canvas+railSpacing,Is.LessThanOrEqualTo(hudTop*canvas+.01f),"Six town shortcuts and their rail spacing do not fit above the HUD"+where);
+                Assert.That(6*battle*canvas+railSpacing,Is.LessThanOrEqualTo(hudTop*canvas+.01f),"Six battle shortcuts and their rail spacing do not fit above the HUD"+where);
+                if(size.x>size.y&&size.x<=1600&&size.y<=900&&battle*canvas>44.01f&&6*skill*1.15f+railSpacing<=hudTop*canvas)
+                    Assert.That(battle*canvas,Is.EqualTo(skill*1.15f).Within(.01f),"A landscape battle shortcut with enough rail space is not the skill icon's size"+where);
             }
             Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,1,1,731,44),Is.EqualTo(88.32f).Within(.01f));
             Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,.5f,.5f,731,44),Is.EqualTo(88.32f).Within(.01f),"The size must not depend on the window size in landscape");
             Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,1,1,200,44),Is.LessThan(88.32f),"Six shortcuts must fit even in a short window");
             Assert.That(GlobalHudLayout.ShortcutIcon(76.8f,.275f,.543f,1705,44),Is.EqualTo(44.7f).Within(.1f),"A small portrait window keeps the shortcuts at about the 44 page units they always had in battle");
         }
-        [Test] public void LandscapeLocksApprovedGeometry()
+        [Test] public void LandscapeLocksCasualReferenceGeometry()
         {
             var p=new GlobalHudLayout(1600,900);
             Assert.That(p.scale,Is.EqualTo(1));Assert.That(p.potions.Length,Is.EqualTo(3));Assert.That(p.actives.Length,Is.EqualTo(4));
-            Assert.That(p.actives.All(r=>Mathf.Abs(r.width-76.8f)<.001f),Is.True);
-            Assert.That(p.potions.All(r=>Mathf.Abs(r.width-76.8f)<.001f&&Mathf.Abs(r.center.y-p.actives[0].center.y)<.001f),Is.True);
+            Assert.That(p.actives.All(r=>Mathf.Abs(r.width-76)<.001f),Is.True);
+            Assert.That(p.potions.All(r=>Mathf.Abs(r.width-76)<.001f&&Mathf.Abs(r.center.y-p.actives[0].center.y)<.001f),Is.True);
             Assert.That(p.ultimate.x-p.potions[2].xMax,Is.EqualTo(24).Within(.001));
             Assert.That(p.status.width,Is.EqualTo(230));Assert.That(p.maximumStatusWidth,Is.EqualTo(408));
-            Assert.That(p.xp,Is.EqualTo(new Rect(32,16,1536,3)));
+            Assert.That(p.xp,Is.EqualTo(new Rect(32,12,1536,8)));
+            Assert.That(p.Pixels(p.edict),Is.EqualTo(new Rect(1516,766,60,60)));
         }
-        [Test] public void HalvingTheWindowHalvesTextAndControlsAcrossRepeatedRefreshes()
+        [TestCase(440,956,44)] [TestCase(956,440,48)] [TestCase(1600,900,76)]
+        public void OrientationOwnsItsCompositionAndUsesOneScale(int width,int height,int slot)
+        {
+            var p=new GlobalHudLayout(width,height);Assert.That(p.Pixels(p.actives[0]).width,Is.EqualTo(slot).Within(.001));
+            Assert.That(p.wrapped,Is.EqualTo(width<height));
+            Assert.That(p.potions.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
+            if(width<height){Assert.Greater(p.status.yMin,p.actives[0].yMax);Assert.Greater(p.actives[0].yMin,p.seal.yMax);Assert.Greater(p.seal.yMin,p.xp.yMax);}
+            else Assert.That(p.status.xMin,Is.EqualTo(p.potions[0].xMin).Within(.001));
+            Assert.That(p.Pixels(p.edict).yMin,Is.GreaterThan(height*.7f));
+        }
+        [Test] public void ProportionalWindowChangesDoNotMultiplyFontScaleOnRefresh()
         {
             var large=new GlobalHudLayout(1600,900);var small=new GlobalHudLayout(800,450);
             Assert.That(small.Pixels(small.actives[0]).width/large.Pixels(large.actives[0]).width,Is.EqualTo(.5f).Within(.001));
-            foreach(float font in new[]{12f,16f,20f,22f})
-            {
-                int expected=large.FontSize(font,10)/2;
-                for(int refresh=0;refresh<30;refresh++)Assert.That(new GlobalHudLayout(800,450).FontSize(font,10),Is.EqualTo(expected));
-            }
-        }
-        [TestCase(800,450)] [TestCase(450,800)] [TestCase(640,360)]
-        public void SmallerWindowsKeepShrinkingBelowTheOldMinimum(int width,int height)
-        {
-            var large=new GlobalHudLayout(width,height);var small=new GlobalHudLayout(width/2f,height/2f);
-            Assert.That(small.scale,Is.EqualTo(large.scale*.5f).Within(.0001));
-            Assert.That(small.Pixels(small.seal).width,Is.EqualTo(large.Pixels(large.seal).width*.5f).Within(.001));
-            Assert.That(UiTheme.Scale(new Rect(0,0,width/2f,height/2f)),Is.EqualTo(UiTheme.Scale(new Rect(0,0,width,height))*.5f).Within(.0001));
-        }
-        [Test] public void PortraitKeepsTheSameHudCompositionAsLandscape()
-        {
-            var p=new GlobalHudLayout(900,1600);var wide=new GlobalHudLayout(1600,900);
-            Assert.That(p.potions.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
-            Assert.That(p.potions.All(r=>r.xMax<p.ultimate.xMin),Is.True);
-            Assert.That(p.actives[0].width,Is.EqualTo(wide.actives[0].width));Assert.That(p.potions[0].width,Is.EqualTo(wide.potions[0].width));
-            Assert.That(p.xp.width,Is.LessThanOrEqualTo(wide.xp.width),"A portrait experience line spans the compact composition.");
-        }
-        [TestCase(440,956)] [TestCase(956,440)] [TestCase(1600,1000)] [TestCase(2100,900)]
-        public void EveryHudPartPreservesItsSizeAndRelativePositionAsOneSet(int w,int h)
-        {
-            var reference=new GlobalHudLayout(1600,900);
-            Rect[] Parts(GlobalHudLayout p)=>new[]{p.seal,p.level,p.hp,p.resource,p.shield,p.xp,p.xpText,p.status,p.potionBounds,p.ultimate}.Concat(p.actives).Concat(p.potions).ToArray();
-            var original=Parts(reference);
-            { const float reading=1f;
-                var current=new GlobalHudLayout(w,h,reading);var parts=Parts(current);
-                // Portrait closes the empty middle: the potion and skill group moves left as one block, nothing else moves or resizes.
-                float closeUp=current.landscape?0:(current.potions[0].x-current.seal.x)-(reference.potions[0].x-reference.seal.x);
-                for(int i=0;i<parts.Length;i++)
-                {
-                    if(!(i==5&&!current.landscape))Assert.That(parts[i].size,Is.EqualTo(original[i].size),"HUD parts must not resize independently");
-                    var shift=i>=8?new Vector2(closeUp,0):Vector2.zero;
-                    Assert.That((parts[i].position-current.seal.position-original[i].position+reference.seal.position-shift).magnitude,Is.LessThan(.001f),"HUD parts must not rearrange except for the portrait close-up");
-                }
-                Assert.That(current.occupiedHeight,Is.EqualTo(reference.occupiedHeight));
-                if(!current.landscape)
-                {
-                    Assert.That(closeUp,Is.LessThan(0),"Portrait pulls the potion group toward the vitals.");
-                    Assert.That(current.potions[0].x-current.potionSettings.xMax,Is.LessThanOrEqualTo(GlobalHudStyle.Load().edictGap+.01f),"The vitals area and the potion area touch.");
-                }
-            }
+            foreach(float font in new[]{12f,16f,20f,22f})for(int refresh=0;refresh<30;refresh++)
+                Assert.That(new GlobalHudLayout(800,450).FontSize(font,10),Is.EqualTo(large.FontSize(font,10)/2));
         }
         [TestCase(640,360)] [TestCase(360,640)] [TestCase(1200,900)] [TestCase(2000,900)]
         public void AllFiveSkillsAndThreePotionsStayInside(int w,int h)
         {
             var p=new GlobalHudLayout(w,h);
-            Assert.IsFalse(p.wrapped,"Skill wrapping is forbidden at every screen size.");
-            Assert.That(p.actives.Append(p.ultimate).All(r=>r.y==p.actives[0].y),Is.True);
-            foreach(var r in p.actives.Append(p.ultimate).Concat(p.potions))
-            {Assert.That(r.xMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.yMin,Is.GreaterThanOrEqualTo(0));Assert.That(r.xMax,Is.LessThanOrEqualTo(p.width+.01f));Assert.That(r.yMax,Is.LessThanOrEqualTo(p.height+.01f));}
-            for(int a=0;a<p.actives.Length;a++)foreach(var passive in p.potions.Append(p.ultimate))Assert.That(p.actives[a].Overlaps(passive),Is.False);
-            foreach(var potion in p.potions)foreach(var skill in p.actives.Append(p.ultimate))
-                Assert.That(potion.xMax,Is.LessThan(skill.xMin),"Potions must stay beside the single skill row.");
+            var slots=p.actives.Append(p.ultimate).Concat(p.potions).ToArray();
+            foreach(var r in slots){Assert.GreaterOrEqual(r.xMin,0);Assert.GreaterOrEqual(r.yMin,0);Assert.LessOrEqual(r.xMax,p.width+.01f);Assert.LessOrEqual(r.yMax,p.height+.01f);}
+            for(int i=0;i<slots.Length;i++)for(int j=i+1;j<slots.Length;j++)Assert.IsFalse(slots[i].Overlaps(slots[j]));
+            foreach(var potion in p.potions)foreach(var skill in p.actives.Append(p.ultimate))Assert.Less(potion.xMax,skill.xMin);
         }
         [Test] public void FadesOnlyHiddenEdgesAndApproachesBoundaryContinuously()
         {
@@ -144,8 +119,8 @@ namespace Hellscript.Tests
             var style=GlobalHudStyle.Load();
             { const float factor=1f;
                 var p=new GlobalHudLayout(width,height,factor,style);
-                float baseline=Mathf.Max(style.skillBottom,style.xpBottom+style.xpThickness+style.captionHeight+8);
-                Assert.That(p.actives[0].yMin,Is.EqualTo(baseline),"The bottom row must not float upward in portrait.");
+                float baseline=(!p.landscape?147:p.compact?37:54)*p.presentationScale;
+                Assert.That(p.Pixels(p.actives[0]).yMin,Is.EqualTo(baseline).Within(.001),"The face must reserve its caption above the XP line.");
                 if(p.landscape)Assert.That(p.actives[0].yMin-style.captionHeight,Is.GreaterThan(p.xp.yMax),"Skill captions must clear the XP line.");
                 Assert.That(p.potionBounds.xMax,Is.LessThan(p.ultimate.xMin));
                 Assert.That(p.potions[0].center.y,Is.EqualTo(p.actives[0].center.y).Within(.001));

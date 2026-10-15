@@ -1,0 +1,103 @@
+{
+  "scope": "Static checks only; Unity/player/web execution prohibited until all sources integrate",
+  "atUtc": "2026-10-14T09:25:56.306384+00:00",
+  "base": "4148241a",
+  "dependencies": [
+    "e38096240d1d54f680204212f583340708d798e0",
+    "93219e3fef4f7a07f2e3249b9598b1e0e7f014a8",
+    "4148241a"
+  ],
+  "compiler": {
+    "Runtime": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 89
+    },
+    "Editor": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 28
+    },
+    "Tests": {
+      "exitCode": 0,
+      "errors": 0,
+      "warnings": 43
+    }
+  },
+  "compilerNotes": "Roslyn uses existing integration Unity reference DLLs read-only; no Unity process launched and no Library copied. Compiler script/response files/logs remain validation/character-plaza/compile.",
+  "uiContract": {
+    "result": "passed",
+    "cases": 15,
+    "receipt": "ui-contract.json"
+  },
+  "refresh": {
+    "result": "passed",
+    "bindings": 16,
+    "inventorySources": 199
+  },
+  "referenceNodeSmoke": {
+    "result": "passed",
+    "combinations": 912,
+    "artboards": 28,
+    "overlaps": 0,
+    "outOfFrame": 0,
+    "scope": "authored JS reference, not the Unity implementation"
+  },
+  "art": {
+    "originalHashes": 17,
+    "runtimePngs": 41,
+    "runtimeBytes": 31524964,
+    "sceneHeroes": 12,
+    "gpuOnlyMasks": 24,
+    "productionApproved": false,
+    "receipt": "../../../tools/character_plaza_art_receipt.json"
+  },
+  "guid": {
+    "newAssets": 48,
+    "missingMeta": [],
+    "newGuidCollisions": [],
+    "scope": "all tracked baseline GUIDs plus newly added asset metadata"
+  },
+  "localization": {
+    "addedKoreanLiterals": 22,
+    "missingAddedKeys": [],
+    "removedLiteralsStillTranslated": [],
+    "scope": "ordinary C# literals changed since 8d356b3c3bc2e7950302c47bf52445777808a85c",
+    "fullUnityLocalizationTestsExecuted": false
+  },
+  "newSaveTests": 15,
+  "unityImport": 0,
+  "unityTests": 0,
+  "playerBuilds": 0,
+  "playerRuns": 0,
+  "webBuilds": 0,
+  "realSavesTouched": false,
+  "uiReviewFixes": [
+    "shared Escape consumption",
+    "landscape feet nameplate",
+    "44-point hit rectangles after layout",
+    "same-aspect Canvas-scale resize",
+    "pose/UV outline updates",
+    "omitted JSON UV defaults"
+  ],
+  "saveReviewFixes": [
+    "existing-account fixture prerequisites",
+    "cross-hero unlock fixtures",
+    "legacy fresh three-created roster",
+    "existing migration archive must match original bytes"
+  ],
+  "remaining": [
+    "single integrated Unity test/build/input/screenshot pass",
+    "shader/import/texture memory checks",
+    "fixed painted weapon appearance",
+    "WebP cutout seams and mage focus softness",
+    "female warrior age12 rating review"
+  ],
+  "cleanup": "Old shared resources preserved; no permanent deletion; sparse checkout historical evidence can be restored from Git",
+  "checkRuns": {
+    "roslyn": 6,
+    "uiContract": 3,
+    "unity": 0
+  },
+  "timingNotes": "Approx.37 minutes from isolated-workspace creation08:48UTC to static completion09:25UTC. No model wait loop; one same-model retry failed capacity. A fresh Astra ultra read-only review completed. No credit shortage or paid-service purchase occurred."
+}

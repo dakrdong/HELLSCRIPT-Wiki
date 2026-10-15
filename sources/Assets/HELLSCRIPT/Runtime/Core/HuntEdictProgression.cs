@@ -48,8 +48,8 @@ namespace Hellscript
                 foreach(string id in rule.ids)Grant(g,id);
             if(g.edictLegacyAccess||best>=2)Grant(g,Styles);
             if(a.cores.Any(c=>c>0))Grant(g,"seen-core");
-            if(a.heroes.Any(h=>h.potions?.stacks?.Any(p=>p.count>0&&PotionCatalog.Get(p.id).effect=="resource")==true))Grant(g,"seen-resource");
-            if(a.heroes.Any(h=>h.potions?.stacks?.Any(p=>p.count>0&&PotionCatalog.IsUtility(p.id))==true))Grant(g,"seen-utility");
+            if(HeroSlots.Created(a).Any(h=>h.potions?.stacks?.Any(p=>p.count>0&&PotionCatalog.Get(p.id).effect=="resource")==true))Grant(g,"seen-resource");
+            if(HeroSlots.Created(a).Any(h=>h.potions?.stacks?.Any(p=>p.count>0&&PotionCatalog.IsUtility(p.id))==true))Grant(g,"seen-utility");
             if(g.edictLegacyAccess||best>=6){Grant(g,Details);Grant(g,Presets);}
             if(g.edictLegacyAccess||best>=20)Grant(g,Sharing);
             if(g.edictLegacyAccess||a.contentUnlocks?.firstRunEnded==true)Grant(g,Dodge);
@@ -184,7 +184,7 @@ namespace Hellscript
             if(before==null||ReferenceEquals(before,after)||Legacy(before))return;
             foreach(var hero in after.heroes)
             {
-                var old=before.heroes.FirstOrDefault(h=>h.id==hero.id)??before.heroes.FirstOrDefault(h=>h.heroClass==hero.heroClass);if(old==null)continue;
+                var old=before.heroes.FirstOrDefault(h=>h.id==hero.id)??before.heroes.FirstOrDefault(h=>h.heroClass==hero.heroClass&&h.gender==hero.gender);if(old==null)continue;
                 if(!Has(before,Sharing)&&(old.useRecommendedEdict!=hero.useRecommendedEdict||old.useEdict&&!hero.useEdict))throw new ArgumentException(Loc.T("추천 모드 전환은 균열 20단계부터 공개됩니다."));
                 // Compare the committed snapshot before projecting unchanged policies. Mode, presets and domain checks remain independent.
                 if(JsonUtility.ToJson(old.build)!=JsonUtility.ToJson(hero.build)||JsonUtility.ToJson(old.edict)!=JsonUtility.ToJson(hero.edict)||

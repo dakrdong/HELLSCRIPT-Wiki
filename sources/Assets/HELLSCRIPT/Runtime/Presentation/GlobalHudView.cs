@@ -21,7 +21,8 @@ namespace Hellscript
         readonly List<Slot> slots=new List<Slot>();
         RectTransform safe,seal,level,hp,resource,xp,edict,potionSettings;
         Image edictEmblem;
-        Image face,hpFill,resourceFill,xpFill,sealFrame,shieldLine;
+        Image sealState;Material greyTone,mutedTone;
+        Image face,hpFill,hpBorder,resourceFill,xpFill,sealFrame,shieldLine;
         Text levelLabel,hpLabel,resourceLabel,shieldLabel,xpLabel;
         readonly List<RectTransform> ticks=new List<RectTransform>();
         Font font;Texture2D atlas;GlobalHudStyle style;
@@ -33,11 +34,13 @@ namespace Hellscript
         {public RectTransform root;public Image icon,cover,frame,glyph;public SkillIconView skillView;public Text caption,number;public HudSlotState data;public bool potion;}
         public void Initialize(Font textFont,Texture2D skillAtlas)
         {
-            font=textFont;atlas=skillAtlas;style=GlobalHudStyle.Load();
+            font=UiFonts.CasualBody(true);atlas=skillAtlas;style=GlobalHudStyle.Load();
+            var shader=Resources.Load<Shader>("SkillTreeD4Tone");
+            if(shader!=null){greyTone=new Material(shader);greyTone.SetVector("_Tone",new Vector4(1,0,0,0));mutedTone=new Material(shader);mutedTone.SetVector("_Tone",new Vector4(.8f,.25f,0,0));}
             var canvas=gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=105;
             gameObject.AddComponent<GraphicRaycaster>();
             safe=Rect("HUD safe area",transform);
-            seal=CreateSeal(safe,"Class seal",out face,out sealFrame);
+            seal=CreateSeal(safe,"Class seal",out face,out sealFrame);sealState=Picture("Seal health ring",seal,"ring-state");Stretch(sealState.rectTransform);
             edict=Rect("Hunt edict",safe);edictEmblem=Picture("Emblem",edict,"menu-hunt-edict");Stretch(edictEmblem.rectTransform);edictEmblem.preserveAspect=true;
             var edictHit=edict.gameObject.AddComponent<Image>();edictHit.color=Color.clear;var edictButton=edict.gameObject.AddComponent<Button>();edictButton.targetGraphic=edictHit;edictButton.transition=Selectable.Transition.None;
             edictButton.onClick.AddListener(()=>EdictSelected?.Invoke());edict.gameObject.SetActive(false);
@@ -46,15 +49,15 @@ namespace Hellscript
             var settingsIcon=Picture("Icon",potionSettings,"menu-potion-settings");Stretch(settingsIcon.rectTransform);settingsIcon.preserveAspect=true;
             var settingsHit=potionSettings.gameObject.AddComponent<Image>();settingsHit.color=Color.clear;var settingsButton=potionSettings.gameObject.AddComponent<Button>();settingsButton.targetGraphic=settingsHit;settingsButton.transition=Selectable.Transition.None;
             settingsButton.onClick.AddListener(()=>PotionSettingsSelected?.Invoke());potionSettings.gameObject.SetActive(false);
-            level=Rect("Level",safe);Stretch(Picture("Level badge",level,"badge-level").rectTransform);levelLabel=Text("Level text",level,20);Stretch(levelLabel.rectTransform);
+            level=Rect("Level",safe);Stretch(Picture("Level badge",level,"badge-level").rectTransform);levelLabel=Text("Level text",level,20);levelLabel.color=UiSkin.Casual.Navy;levelLabel.font=UiFonts.CasualDisplay;levelLabel.GetComponent<SkillTreeD4TextShadow>().enabled=false;Stretch(levelLabel.rectTransform);
             hp=Vital("HP",style.hpColor,out hpFill,out hpLabel);
             resource=Vital("Resource",style.resourceColor,out resourceFill,out resourceLabel);
-            shieldLabel=Text("Shield",safe,12);shieldLabel.alignment=TextAnchor.MiddleRight;
+            shieldLabel=Text("Shield",safe,12);shieldLabel.alignment=TextAnchor.MiddleLeft;shieldLabel.color=style.shieldColor;
             shieldLine=Picture("Shield line",safe,"fill-white");shieldLine.color=style.shieldColor;shieldLine.type=Image.Type.Filled;shieldLine.fillMethod=Image.FillMethod.Horizontal;
             xp=Rect("Experience",safe);var track=Picture("Track",xp,"fill-white");Stretch(track.rectTransform);track.color=style.xpTrack;
             xpFill=Picture("Progress",xp,"fill-white");Stretch(xpFill.rectTransform);xpFill.color=style.xpColor;xpFill.type=Image.Type.Filled;xpFill.fillMethod=Image.FillMethod.Horizontal;
             for(int i=1;i<10;i++){var t=Picture("XP "+i*10+"%",xp,i==5?"xp-tick-major":"xp-tick");ticks.Add(t.rectTransform);}
-            xpLabel=Text("XP text",safe,16);xpLabel.alignment=TextAnchor.MiddleLeft;xpLabel.color=Gold;
+            xpLabel=Text("XP text",safe,16);xpLabel.alignment=TextAnchor.MiddleLeft;
             for(int i=0;i<3;i++)slots.Add(CreateSlot("Potion "+i,true,i));
             for(int i=0;i<4;i++)slots.Add(CreateSlot("Active "+i,false,i));
             slots.Add(CreateSlot("Ultimate",false,4));
@@ -66,6 +69,7 @@ namespace Hellscript
             var r=Rect(name,safe);var plate=Picture("Track",r,"fill-vital");Stretch(plate.rectTransform);plate.color=style.vitalTrack;plate.type=Image.Type.Sliced;
             fill=Picture("Fill",r,"fill-vital");Stretch(fill.rectTransform);fill.color=color;fill.type=Image.Type.Filled;fill.fillMethod=Image.FillMethod.Horizontal;
             var border=Picture("Border",r,"frame-vital");Stretch(border.rectTransform);border.type=Image.Type.Sliced;
+            if(name=="HP")hpBorder=border;
             label=Text(name+" value",r,16);Stretch(label.rectTransform);label.alignment=TextAnchor.MiddleLeft;return r;
         }
         Slot CreateSlot(string name,bool potion,int index=-1)
@@ -76,6 +80,7 @@ namespace Hellscript
                 slot.skillView=SkillIconView.Create(slot.root,false);Stretch(slot.skillView.Rect);
                 slot.icon=slot.skillView.Icon;slot.cover=slot.skillView.Cover;slot.frame=slot.skillView.Frame;
                 slot.skillView.Plate.color=style.slotPlate;slot.cover.color=style.cooldownTint;
+                slot.skillView.SetCasualHudFrame(ultimate:index==4);
             }
             else
             {
@@ -87,7 +92,7 @@ namespace Hellscript
                 slot.frame=Picture("Frame",slot.root,"frame-active");Stretch(slot.frame.rectTransform);
             }
             slot.glyph=Picture("Potion kind",slot.root,"");slot.glyph.enabled=potion;
-            slot.number=Text("Cooldown time",slot.root,25);Stretch(slot.number.rectTransform);
+            slot.number=Text("Cooldown time",slot.root,25);slot.number.font=UiFonts.CasualDisplay;Stretch(slot.number.rectTransform);
             slot.caption=Text("Caption",slot.root,16);
             var target=slot.root.gameObject.AddComponent<Image>();target.color=Color.clear;
             // A slot is a tap (swap list) or a hold (details); the gauge rings the icon while the hold fills.
@@ -108,7 +113,7 @@ namespace Hellscript
             SetRect(safe,new Rect(bounds.x,bounds.y+BottomInset,bounds.width,bounds.height));
             if(Layout==null||bounds!=previousSafe||factor!=interfaceFactor||contentLayout!=fitContent)
             {factor=interfaceFactor;contentLayout=fitContent;previousSafe=bounds;float fitted=fitContent?GlobalHudLayout.ContentFactor(bounds.width,bounds.height,factor,style):factor;Layout=new GlobalHudLayout(bounds.width,bounds.height,fitted,style);Reflow();}
-            face.sprite=Portrait(data.heroClass);
+            face.sprite=Portrait(data.heroClass,data.gender);face.material=data.dead?greyTone:null;
             levelLabel.text="Lv."+data.level;hpFill.fillAmount=Ratio(data.health,data.maxHealth);resourceFill.fillAmount=Ratio(data.resource,data.maxResource);
             hpLabel.text=data.maxHealth>0?Loc.F("  HP  {0:0} / {1:0}",Mathf.Max(0,data.health),data.maxHealth):"  HP  —";
             if(data.dead)hpLabel.text+=" · "+Loc.T("사망");
@@ -118,8 +123,11 @@ namespace Hellscript
             shieldLabel.text=data.shield>0?Loc.F("보호막 +{0:0}",data.shield):"";
             shieldLine.fillAmount=Ratio(data.shield,data.maxHealth);shieldLine.enabled=data.shield>0;
             xpFill.fillAmount=data.ExperienceRatio;xpLabel.text=data.maximumLevel?Loc.T("최대 레벨"):Loc.F("EXP  {0:0}%",Mathf.FloorToInt(100*xpFill.fillAmount));
-            sealFrame.color=data.dead?style.deadTint:Color.white;
+            sealFrame.color=Color.white;bool danger=data.combat&&!data.dead&&Ratio(data.health,data.maxHealth)<.3f;
+            sealState.enabled=data.dead||danger;sealState.color=data.dead?style.deadTint:Color.Lerp(style.hpColor,Color.white,.16f*(1+Mathf.Sin(Time.unscaledTime*Mathf.PI*2/1.1f)));
+            hpBorder.color=danger?sealState.color:Color.white;
             for(int i=0;i<slots.Count;i++)UpdateSlot(slots[i],i<3?data.potions[i]:i<7?data.actives[i-3]:data.ultimate);
+            SetRect(edict,new Rect(Layout.edict.x*Layout.scale,Layout.edict.y*Layout.scale-BottomInset,Layout.edict.width*Layout.scale,Layout.edict.height*Layout.scale));
             StatusStrip.SetEffects(data.ObservationEffects());
         }
         public RectTransform EdictButton=>edict;
@@ -138,11 +146,13 @@ namespace Hellscript
         {
             slot.data=data;if(data==null){slot.root.gameObject.SetActive(false);return;}slot.root.gameObject.SetActive(true);
             slot.icon.sprite=!slot.potion&&SkillIconAssets.TryResolve(data.id,out _,out var skillSprite)?skillSprite:!slot.potion&&data.atlas>=0?SkillIconAssets.Active(data.atlas):Sprite(data.icon);slot.icon.enabled=slot.icon.sprite!=null;
-            slot.icon.color=data.locked||data.empty||slot.potion&&data.count==0?style.disabledTint:Color.white;
+            bool inactive=data.locked||data.empty||slot.potion&&data.count==0;
+            slot.icon.color=Color.white;slot.icon.material=inactive?greyTone:data.insufficient?mutedTone:null;
+            if(slot.potion)slot.frame.sprite=Sprite(inactive?"frame-empty":"frame-active");
             slot.frame.enabled=true;slot.frame.color=data.active?style.activeTint:Color.white;
             slot.cover.fillAmount=data.total>0?Mathf.Clamp01(data.remaining/data.total):0;
             slot.number.text=data.locked?"—":GlobalHudSnapshot.TimeLabel(data.remaining);
-            if(!slot.potion&&data.insufficient&&data.remaining<=0)slot.number.text="◇";
+            if(!slot.potion&&data.insufficient&&data.remaining<=0)slot.number.text="◆";
             slot.number.color=data.insufficient?style.resourceWarning:Pale;
             slot.caption.text=slot.potion?(data.empty?Loc.T("빈칸"):data.count<0?"∞":"×"+data.count):data.caption;
             if(slot.potion&&data.id.StartsWith("PU",StringComparison.Ordinal)){slot.glyph.sprite=Sprite(PotionCatalog.Get(data.id).icon);slot.glyph.enabled=true;}else slot.glyph.enabled=false;
@@ -158,7 +168,7 @@ namespace Hellscript
                 if(s.potion)
                 {
                     var icon=s.icon.rectTransform;icon.anchorMin=icon.anchorMax=icon.pivot=Vector2.one*.5f;
-                    icon.anchoredPosition=Vector2.zero;icon.sizeDelta=Vector2.one*(style.landscapePotion*Layout.scale);
+                    icon.anchoredPosition=Vector2.zero;icon.sizeDelta=Vector2.one*(r.width*.66f*Layout.scale);
                 }
                 SetRect(s.caption.rectTransform,new Rect(0,-style.captionHeight*Layout.scale,r.width*Layout.scale,style.captionHeight*Layout.scale));
                 float gs=style.potionGlyph*Layout.scale;SetRect(s.glyph.rectTransform,new Rect(6*Layout.scale,6*Layout.scale,gs,gs));
@@ -173,7 +183,8 @@ namespace Hellscript
             StatusStrip.Configure(Layout,style);
         }
         public int FontSize(float basis,int minimum=11)=>Layout!=null?Layout.FontSize(basis,minimum):Mathf.Max(minimum,Mathf.RoundToInt(basis));
-        public Sprite Portrait(HeroClass heroClass)=>heroClass==HeroClass.Mage?Sprite("portrait-mage"):Atlas(18+(int)heroClass);
+        public Sprite Portrait(HeroClass heroClass)=>Portrait(heroClass,Snapshot?.gender??HeroGender.Male);
+        public Sprite Portrait(HeroClass heroClass,HeroGender gender)=>Sprite("seal-"+(heroClass==HeroClass.Warrior?"warrior":heroClass==HeroClass.Ranger?"ranger":"mage")+"-"+(gender==HeroGender.Female?"f":"m"));
         public RectTransform CreateSeal(Transform parent,string name,out Image portrait,out Image frame)
         {
             var root=Rect(name,parent);var clipping=Picture("Circle",root,"mask-circle");Stretch(clipping.rectTransform);
@@ -184,10 +195,10 @@ namespace Hellscript
         public Sprite Sprite(string id)
         {
             if(string.IsNullOrEmpty(id))return null;
-            if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility"||id.StartsWith("elixir-",StringComparison.Ordinal))return PotionArt.Bottle(id);
+            if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility"||id.StartsWith("elixir-",StringComparison.Ordinal))return PotionArt.Bottle(id,casualHud:true);
             if(!sprites.TryGetValue(id,out var value))
             {
-                value=Resources.Load<Sprite>("Art/GlobalHUD/"+id);
+                value=Resources.Load<Sprite>("Art/GlobalHUD/Casual/"+id)??Resources.Load<Sprite>("Art/GlobalHUD/"+id);
                 sprites[id]=value;
             }
             return value;
@@ -204,7 +215,7 @@ namespace Hellscript
         {
             var r=Rect(name,parent);var t=r.gameObject.AddComponent<Text>();t.font=font;t.fontSize=size;t.color=Pale;t.alignment=TextAnchor.MiddleCenter;
             t.horizontalOverflow=HorizontalWrapMode.Overflow;t.verticalOverflow=VerticalWrapMode.Overflow;t.raycastTarget=false;
-            var shadow=r.gameObject.AddComponent<Shadow>();shadow.effectColor=style.textShadow;shadow.effectDistance=new Vector2(1,-1);return t;
+            CasualBattleHudStyle.Outline(t);return t;
         }
         public static RectTransform Rect(string name,Transform parent)
         {var r=new GameObject(name,typeof(RectTransform)).GetComponent<RectTransform>();r.SetParent(parent,false);r.anchorMin=r.anchorMax=r.pivot=Vector2.zero;return r;}
@@ -212,6 +223,6 @@ namespace Hellscript
         {r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;}
         public static void SetRect(RectTransform r,Rect area)
         {r.anchorMin=r.anchorMax=r.pivot=Vector2.zero;r.anchoredPosition=area.position;r.sizeDelta=area.size;}
-        void OnDestroy(){foreach(var sprite in owned)if(sprite!=null)Destroy(sprite);}
+        void OnDestroy(){foreach(var sprite in owned)if(sprite!=null)Destroy(sprite);if(greyTone!=null)Destroy(greyTone);if(mutedTone!=null)Destroy(mutedTone);}
     }
 }

@@ -122,9 +122,22 @@ namespace Hellscript
                 plazaJoystick.Reflow(TownJoystick.Bounds(safe.width,safe.height,layout),scale);
                 float cardScale=layout.scale/Mathf.Max(.001f,scale);
                 float gap=UiTheme.Gap*cardScale,edge=12*cardScale;
-                float iconSize=DockIconSize((safe.height-layout.potionBounds.yMax*layout.scale)/scale,true);
+                float dockLimit=(safe.height-layout.potionBounds.yMax*layout.scale)/scale;
+                float iconSize=DockIconSize(dockLimit,true);
                 Right((RectTransform)plazaSettings.transform,edge,edge,iconSize,iconSize);CompactGear(plazaSettings,iconSize);
-                Right((RectTransform)contentDock.transform,edge,edge+iconSize+gap,iconSize,iconSize);contentDock.Reflow(iconSize,gap);
+                float dockTop=edge+iconSize+gap,dockRight=edge;
+                float dockHeight=(contentDock.Items.childCount+1)*iconSize+contentDock.Items.childCount*gap;
+                var edict=layout.Pixels(layout.edict);
+                edict=new Rect(edict.x/scale,(safe.height-edict.yMax)/scale,edict.width/scale,edict.height/scale);
+                var dockBounds=new Rect(root.rect.width-dockRight-iconSize,dockTop,iconSize,dockHeight);
+                if(dockBounds.Overlaps(edict))
+                {
+                    // Reserve the complete open column even while folded, so the toggle never jumps.
+                    float below=edict.yMax+gap;
+                    if(below+dockHeight<=dockLimit)dockTop=below;
+                    else dockRight=root.rect.width-edict.xMin+gap;
+                }
+                Right((RectTransform)contentDock.transform,dockRight,dockTop,iconSize,iconSize);contentDock.Reflow(iconSize,gap);
                 ReflowEventButton();
                 headerTitle.fontSize=18;float fullTitleWidth=headerTitle.preferredWidth;
                 float titleWidth=Mathf.Min(fullTitleWidth+24,root.rect.width-iconSize-3*edge);
@@ -136,7 +149,7 @@ namespace Hellscript
                 float hudTop=layout.potions.Concat(layout.actives).Max(r=>r.yMax)*layout.scale/scale;
                 float halfHeight=plazaAction.rect.height*cardScale/2;
                 float center=Mathf.Min(root.rect.height-44-halfHeight,Mathf.Max(root.rect.height*.35f,hudTop+14*cardScale+halfHeight));
-                float cardRight=Mathf.Max(22*cardScale,edge+iconSize+gap);
+                float cardRight=Mathf.Max(22*cardScale,dockRight+iconSize+gap);
                 plazaAction.anchoredPosition=new Vector2(-cardRight,center-root.rect.height*.35f);
             }
             plazaStatus.text=walk.Destination.HasValue?Loc.F("{0}으로 이동 중 · {1:0.0}m",TownLayout.Station(walk.Destination.Value).name,walk.Remaining):Loc.F("{0} Lv.{1} · 중앙 길 횡단 약 20초",game.catalog.classNames[(int)game.Store.Data.Hero.heroClass],game.Store.Data.Hero.level);

@@ -29,7 +29,13 @@ namespace Hellscript
                 Require(text.preferredHeight<=text.rectTransform.rect.height+2,tag+" clipped activity text: "+text.text);
                 if(Loc.Language=="en")Require(!text.text.Any(c=>c>=0xAC00&&c<=0xD7A3),tag+" untranslated: "+text.text);
             }
-            if(!ActivityBody.gameObject.activeSelf)return;
+            if(!ActivityBody.gameObject.activeSelf)
+            {
+                var ratio=Activity.Find("Folded activity ratio");Require(ratio!=null&&ratio.gameObject.activeSelf,"Folded activity lost its live ratio");
+                var share=game.Combat.State.statistics.feedback.ActivityPercentages();float endRatio=0;
+                for(int i=0;i<4;i++){var segment=(RectTransform)ratio.GetChild(i);Require(Mathf.Abs(segment.anchorMin.x-endRatio/100)<.00001f,"Folded ratio start differs");endRatio+=share[i];Require(Mathf.Abs(segment.anchorMax.x-endRatio/100)<.00001f,"Folded ratio share differs");}
+                return;
+            }
             var f=game.Combat.State.statistics.feedback;var shares=f.ActivityPercentages();float end=0;
             Require(shares.Sum()==100,"Activity shares do not total 100");
             for(int i=0;i<4;i++)
@@ -81,7 +87,7 @@ namespace Hellscript
             proof.Add("PASS natural seeded Rift: cumulative graph endpoints equal real totals, monotonic time/value samples, exclusive purpose intervals, live updates and pause/resume; no damage/result/time totals injected");
             string recorded=JsonUtility.ToJson(f);
             if(!System.Environment.GetCommandLineArgs().Contains("-hellscriptResultActivityFocused"))
-            foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{1680,720}})
+            foreach(var size in RuntimeCasualUiSmokeSupport.Viewports(new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{1680,720},new[]{2868,1320}}))
             foreach(string language in new[]{"ko","en"})
             {
                 UiSafeArea.StopSimulating();if(size[0]==440)UiSafeArea.Simulate(0,34,0,54);if(size[0]==956)UiSafeArea.Simulate(54,21,54,0);
@@ -91,7 +97,7 @@ namespace Hellscript
                     game.MapDisplay.Apply(mode);game.UI.ShowBattle();yield return null;yield return null;game.UI.RefreshHud();
                     CheckActivity(tag,false);var dpsPosition=LiveDps.anchoredPosition;var dpsSaved=game.DpsPosition.Position;
                     yield return DragActivity(new Vector2(.08f,.35f));var moved=Activity.anchoredPosition;
-                    yield return Tap("rift-activity-fold");Require(!ActivityBody.gameObject.activeSelf&&Activity.anchoredPosition==moved,"Fold moved activity panel");
+                    yield return Tap("rift-activity-fold");Require(!ActivityBody.gameObject.activeSelf&&Activity.anchoredPosition==moved,"Fold moved activity panel");CheckActivity(tag+" folded",false);
                     Require(LiveDps.anchoredPosition==dpsPosition&&game.DpsPosition.Position==dpsSaved&&LiveChart.gameObject.activeSelf,"Activity controls changed DPS");
                     game.UI.ShowBattle();yield return null;yield return null;
                     Require(!ActivityBody.gameObject.activeSelf&&Vector2.Distance(Activity.anchoredPosition,moved)<1,"HUD rebuild lost activity fold/position");
@@ -126,13 +132,13 @@ namespace Hellscript
             Require(JsonUtility.ToJson(review)==JsonUtility.ToJson(restored),"Completed activity did not survive file reload");
             File.WriteAllText(Path.Combine(output,"final-feedback.json"),JsonUtility.ToJson(feedback,true));
             File.WriteAllText(Path.Combine(output,"final-activity-samples.json"),"["+string.Join(",",review.activityHistory.Select(s=>JsonUtility.ToJson(s)))+"]");
-            // The synthetic stage-15 result gate must also satisfy the real account-level repeat-tab gate.
+            // Keep the account locked for stage 14; unlock it only for the real repeat-tab shortcut.
             var originalClears=game.Store.Data.heroes.Select(hero=>hero.highestClear).ToArray();
-            game.Store.Data.Hero.highestClear=System.Math.Max(game.Store.Data.Hero.highestClear,RepeatHunt.SettingsUnlockStage);
-            Require(RepeatHunt.SettingsUnlocked(game.Store.Data),"Repeat shortcut fixture has not unlocked the account repeat tab.");
-            foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{2100,900}})
+            foreach(var size in RuntimeCasualUiSmokeSupport.Viewports(new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{2100,900},new[]{2868,1320}}))
             foreach(string language in new[]{"ko","en"})
             {
+                for(int i=0;i<originalClears.Length;i++)game.Store.Data.heroes[i].highestClear=originalClears[i];
+                Require(!RepeatHunt.SettingsUnlocked(game.Store.Data),"Stage-14 locked fixture unexpectedly has account repeat access.");
                 UiSafeArea.StopSimulating();if(size[0]==440)UiSafeArea.Simulate(0,34,0,54);if(size[0]==956)UiSafeArea.Simulate(54,21,54,0);
                 yield return Resize(size[0],size[1],language);string tag=$"{size[0]}x{size[1]}-{language}";
                 string before=JsonUtility.ToJson(game.Store.Data);yield return Tap("victory-compare");
@@ -159,7 +165,8 @@ namespace Hellscript
                 Require(result==game.UI.RiftVictory&&before==JsonUtility.ToJson(game.Store.Data),"Result graph changed owned evidence");
                 int battleStage=run.stage;run.stage=14;game.RepeatSession.policy.enabled=true;game.RepeatSession.cancelled=false;result.View.Repaint();yield return null;
                 yield return Tap("victory-repeat-settings");
-                Require(Find("victory-repeat-settings").GetComponent<CanvasGroup>().alpha<.5f&&Find("victory-repeat-configure")==null&&!game.UI.CommonPanelOpen,"Locked repeat exposed settings or configured guide");
+                var lockedSettings=Find("victory-repeat-settings");
+                Require(lockedSettings!=null&&lockedSettings.GetComponent<CanvasGroup>()!=null&&lockedSettings.GetComponent<CanvasGroup>().alpha<.5f&&Find("victory-repeat-configure")==null&&!game.UI.CommonPanelOpen,"Locked repeat exposed settings or configured guide");
                 var locked=result.View.GetComponentsInChildren<Text>().Single(t=>t.name=="Repeat hint");
                 Require(locked.text==Loc.T("반복 설정은 균열 15레벨 부터 가능합니다")&&locked.preferredHeight<=locked.rectTransform.rect.height+2,"Locked repeat hint missing or clipped");
                 yield return Capture("repeat-locked-"+tag);yield return new WaitForSecondsRealtime(2.1f);
@@ -167,6 +174,8 @@ namespace Hellscript
                 // Only the UI gate uses stage fixtures; the actual completed battle and activity record remain stage 1.
                 foreach(int stage in new[]{15,16})
                 {run.stage=stage;result.View.Repaint();yield return null;Require(Find("victory-repeat-settings").GetComponent<CanvasGroup>().alpha==1,"Unlocked configured repeat stayed dim");}
+                game.Store.Data.Hero.highestClear=System.Math.Max(game.Store.Data.Hero.highestClear,RepeatHunt.SettingsUnlockStage);
+                Require(RepeatHunt.SettingsUnlocked(game.Store.Data),"Repeat shortcut fixture has not unlocked the account repeat tab.");
                 run.stage=15;game.RepeatSession.policy.enabled=false;game.RepeatSession.cancelled=true;result.View.Repaint();yield return null;
                 yield return Tap("victory-repeat-settings");var configure=Find("victory-repeat-configure");Require(configure!=null,"Repeat hint shortcut missing");
                 var label=configure.GetComponentInChildren<Text>();var rect=(RectTransform)configure.transform;
@@ -182,7 +191,7 @@ namespace Hellscript
                 proof.Add("PASS final activity and repeat shortcut "+tag+": saved battle curves/totals/shares, shared DPS, read-only graph, stage-14 configured lock and two-second expiry, stage-15/16 configured availability, compact stage-15 unconfigured pointer action and same-result return");
             }
             for(int i=0;i<originalClears.Length;i++)game.Store.Data.heroes[i].highestClear=originalClears[i];
-            proof.Add("PASS synthetic result-stage gate with a repeat-unlocked account; original account clear levels restored, actual stage-1 review unchanged");
+            proof.Add("PASS stage-14 lock with a repeat-locked account, stage-15/16 result availability and account-unlocked repeat shortcut; original account clear levels restored, actual stage-1 review unchanged");
             proof.Add("PASS naturally completed Rift: final activity snapshot includes final tick and survives an actual saved-file reload; no combat totals/timestamps injected");
         }
     }

@@ -1,0 +1,292 @@
+{
+  "revision": "hellscript-casual-field-runtime-v1",
+  "productionApproved": false,
+  "palette": {
+    "name": "Crystal Cavern",
+    "floor": [
+      "#a197cb",
+      "#9086bf",
+      "#b0a7d6"
+    ],
+    "grout": "#6258a0",
+    "light": "#c9c1e8",
+    "stone": "#b9b0da",
+    "stone2": "#9a90c4",
+    "dark": "#6f66a2",
+    "accent": "#5ee0d0",
+    "accent2": "#ff9ad5",
+    "wood": "#8a6a55",
+    "glow": "#7ff0e0",
+    "sky": "#8f86c0"
+  },
+  "models": {
+    "F3_Floor": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 4.0,
+      "sha256": {
+        "Floor_A.png": "85f78f7277810a4f1fec4e58d9e6492884c70bb11a36b3f64b167788a78d1934"
+      }
+    },
+    "F3_Wall": {
+      "kind": "prop",
+      "tris": 1428,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        6,
+        2
+      ],
+      "bounds": [
+        -3.4,
+        0.0,
+        -0.95,
+        3.4,
+        2.61,
+        0.95
+      ],
+      "glow": null,
+      "seed": 3198509268,
+      "sha256": {
+        "F3_Wall.fbx": "d048759510636a731fb8504ba717654907629328903dd9406f34b1b3370bb36d",
+        "F3_Wall_A.png": "a274d8d2618c35b79762f48e82f880162fae13bbc1e4ecd89ae6cb883979dc8d"
+      }
+    },
+    "F3_Trim": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 2.0,
+      "sha256": {
+        "Trim_A.png": "768d3d1d44acb1ded428c089ce67d2052f558d6f2336c417d5babbfa3e7dc1bb"
+      }
+    },
+    "F3_Pillar": {
+      "kind": "prop",
+      "tris": 528,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.6,
+        0.0,
+        -0.6,
+        0.6,
+        2.68,
+        0.6
+      ],
+      "glow": null,
+      "seed": 3975275516,
+      "sha256": {
+        "F3_Pillar.fbx": "05edffcca0acae5a8407fe714538d8f1158485805d77f3fcf4fdcd874fe0280c",
+        "F3_Pillar_A.png": "5ad4e40fb0a5ca9e99e1b3e1aec76168aa914e79abde158946657656e2a0e3e9"
+      }
+    },
+    "F3_WallColumn": {
+      "kind": "prop",
+      "tris": 656,
+      "texture": 64,
+      "height": 3.9,
+      "footprint": [
+        0.9,
+        0.62
+      ],
+      "bounds": [
+        -0.45,
+        0.0,
+        -0.31,
+        0.45,
+        4.0,
+        0.31
+      ],
+      "glow": null,
+      "seed": 1179224577,
+      "sha256": {
+        "F3_WallColumn.fbx": "7f7523364703f3e47da90cca53888227271aa0af22b079b6cdc41c034d1df2e8",
+        "F3_WallColumn_A.png": "5ad4e40fb0a5ca9e99e1b3e1aec76168aa914e79abde158946657656e2a0e3e9"
+      }
+    },
+    "F3_Rubble_A": {
+      "kind": "prop",
+      "tris": 764,
+      "texture": 64,
+      "height": 0.6,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.764,
+        -0.016,
+        -0.65,
+        0.559,
+        0.479,
+        0.662
+      ],
+      "glow": null,
+      "seed": 3601101663,
+      "sha256": {
+        "F3_Rubble_A.fbx": "e0950437a533f043de8b48c0e4563f512afa90d882500f63fda84fc805594ad5",
+        "F3_Rubble_A_A.png": "f47c297c2ecf775cff311b7280550f524ea8d0849851393f478de110e70c985c"
+      }
+    },
+    "F3_Rubble_B": {
+      "kind": "prop",
+      "tris": 980,
+      "texture": 64,
+      "height": 0.5,
+      "footprint": [
+        1.6,
+        1.1
+      ],
+      "bounds": [
+        -0.979,
+        -0.016,
+        -0.801,
+        0.675,
+        0.506,
+        0.745
+      ],
+      "glow": null,
+      "seed": 4107173187,
+      "sha256": {
+        "F3_Rubble_B.fbx": "0f3026b1144321bd71d2397faade698bc84e96b32583aee6446b0b4ae43b567a",
+        "F3_Rubble_B_A.png": "f47c297c2ecf775cff311b7280550f524ea8d0849851393f478de110e70c985c"
+      }
+    },
+    "F3_Torch": {
+      "kind": "prop",
+      "tris": 164,
+      "texture": 64,
+      "height": 0.45,
+      "footprint": [
+        0.2,
+        0.5
+      ],
+      "bounds": [
+        -0.09,
+        0.0,
+        -0.09,
+        0.09,
+        0.44,
+        0.09
+      ],
+      "glow": "#7ff0e0",
+      "seed": 3786179061,
+      "sha256": {
+        "F3_Torch.fbx": "03399f50ca3e926b68d999272d1d609f2062668eb0f6f14d84330514eb6db8cc",
+        "F3_Torch_A.png": "99b074cc1d321872c462843324aaf93736d42089d7f9c03d98b7dcc9cea93f41"
+      }
+    },
+    "F3_Decor_Crystal": {
+      "kind": "prop",
+      "tris": 160,
+      "texture": 64,
+      "height": 0.8,
+      "footprint": [
+        0.9,
+        0.9
+      ],
+      "bounds": [
+        -0.364,
+        -0.023,
+        -0.34,
+        0.384,
+        0.75,
+        0.22
+      ],
+      "glow": null,
+      "seed": 1076180187,
+      "sha256": {
+        "F3_Decor_Crystal.fbx": "3fb8372ed27e23ff396479a6e585540715928d29a6c9074dc5f0c9752db2f2a5",
+        "F3_Decor_Crystal_A.png": "57f98dbf429ffef0eed21464fdfe45fd8e00b41c6f6f995e1418ee41259517a5"
+      }
+    },
+    "F3_Decor_GlowMushroom": {
+      "kind": "prop",
+      "tris": 756,
+      "texture": 64,
+      "height": 0.3,
+      "footprint": [
+        0.6,
+        0.5
+      ],
+      "bounds": [
+        -0.262,
+        0.0,
+        -0.167,
+        0.318,
+        0.31,
+        0.224
+      ],
+      "glow": "#7ff0e0",
+      "seed": 365945443,
+      "sha256": {
+        "F3_Decor_GlowMushroom.fbx": "868f78768da0f059be150e4427d834e97b15b69ef73ba39a0655444f9c4616b0",
+        "F3_Decor_GlowMushroom_A.png": "3b94d6204411d16da1a29eb0541b0a219a8c494d8a4c3e345d67fdbbb5f214e4"
+      }
+    },
+    "F3_Decor_Stalagmite": {
+      "kind": "prop",
+      "tris": 64,
+      "texture": 64,
+      "height": 0.8,
+      "footprint": [
+        0.9,
+        0.8
+      ],
+      "bounds": [
+        -0.285,
+        0.0,
+        -0.3,
+        0.46,
+        0.8,
+        0.3
+      ],
+      "glow": null,
+      "seed": 4276736989,
+      "sha256": {
+        "F3_Decor_Stalagmite.fbx": "e48088dbb72e76d07ee7e7f563dd94e3e209625354553777fd000cc860642859",
+        "F3_Decor_Stalagmite_A.png": "2e5f407300962adc398c60f0245bcb9aa7ff77ed71ed7d906bc8e34c5afc13cc"
+      }
+    }
+  },
+  "recolored": [],
+  "files": {
+    "F3_Decor_Crystal.fbx": "3fb8372ed27e23ff396479a6e585540715928d29a6c9074dc5f0c9752db2f2a5",
+    "F3_Decor_Crystal_A.png": "57f98dbf429ffef0eed21464fdfe45fd8e00b41c6f6f995e1418ee41259517a5",
+    "F3_Decor_Crystal_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Decor_GlowMushroom.fbx": "868f78768da0f059be150e4427d834e97b15b69ef73ba39a0655444f9c4616b0",
+    "F3_Decor_GlowMushroom_A.png": "3b94d6204411d16da1a29eb0541b0a219a8c494d8a4c3e345d67fdbbb5f214e4",
+    "F3_Decor_GlowMushroom_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Decor_Stalagmite.fbx": "e48088dbb72e76d07ee7e7f563dd94e3e209625354553777fd000cc860642859",
+    "F3_Decor_Stalagmite_A.png": "2e5f407300962adc398c60f0245bcb9aa7ff77ed71ed7d906bc8e34c5afc13cc",
+    "F3_Decor_Stalagmite_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Pillar.fbx": "05edffcca0acae5a8407fe714538d8f1158485805d77f3fcf4fdcd874fe0280c",
+    "F3_Pillar_A.png": "5ad4e40fb0a5ca9e99e1b3e1aec76168aa914e79abde158946657656e2a0e3e9",
+    "F3_Pillar_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Rubble_A.fbx": "e0950437a533f043de8b48c0e4563f512afa90d882500f63fda84fc805594ad5",
+    "F3_Rubble_A_A.png": "f47c297c2ecf775cff311b7280550f524ea8d0849851393f478de110e70c985c",
+    "F3_Rubble_A_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Rubble_B.fbx": "0f3026b1144321bd71d2397faade698bc84e96b32583aee6446b0b4ae43b567a",
+    "F3_Rubble_B_A.png": "f47c297c2ecf775cff311b7280550f524ea8d0849851393f478de110e70c985c",
+    "F3_Rubble_B_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Torch.fbx": "03399f50ca3e926b68d999272d1d609f2062668eb0f6f14d84330514eb6db8cc",
+    "F3_Torch_A.png": "99b074cc1d321872c462843324aaf93736d42089d7f9c03d98b7dcc9cea93f41",
+    "F3_Torch_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Wall.fbx": "d048759510636a731fb8504ba717654907629328903dd9406f34b1b3370bb36d",
+    "F3_WallColumn.fbx": "7f7523364703f3e47da90cca53888227271aa0af22b079b6cdc41c034d1df2e8",
+    "F3_WallColumn_A.png": "5ad4e40fb0a5ca9e99e1b3e1aec76168aa914e79abde158946657656e2a0e3e9",
+    "F3_WallColumn_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F3_Wall_A.png": "a274d8d2618c35b79762f48e82f880162fae13bbc1e4ecd89ae6cb883979dc8d",
+    "F3_Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Floor_A.png": "85f78f7277810a4f1fec4e58d9e6492884c70bb11a36b3f64b167788a78d1934",
+    "Floor_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Trim_A.png": "768d3d1d44acb1ded428c089ce67d2052f558d6f2336c417d5babbfa3e7dc1bb",
+    "Trim_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Wall_A.png": "364ecfa7a0884d61bbd6e8613ee16d2d30b409f8193b5514d77a7d62b7a5de40",
+    "Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d"
+  }
+}

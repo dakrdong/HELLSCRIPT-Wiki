@@ -10,11 +10,15 @@ namespace Hellscript.Tests
     // tests on GameStore.NewAccount.
     static class ContentTestAccounts
     {
+        // Existing-account scenarios predate the plaza and own all three original heroes.
+        // Do not use this helper for first-start, creation, or migration expectations.
+        public static void ExistingMaleRoster(AccountSave account)
+        {foreach(var hero in account.heroes.Where(h=>h.gender==HeroGender.Male))hero.created=true;}
         // Domain-contract fixtures with existing full access retain their pre-disclosure automation defaults.
         // Fresh progression and permission tests deliberately do not call this helper.
         public static void ReleasedAccess(AccountSave account)
         {
-            account.guide.edictLegacyAccess=true;HuntEdictProgression.Reconcile(account);
+            ExistingMaleRoster(account);account.guide.edictLegacyAccess=true;HuntEdictProgression.Reconcile(account);
             foreach(var hero in account.heroes)
             {
                 var defaults=HuntEdictV2.Create(hero.heroClass);
@@ -25,7 +29,7 @@ namespace Hellscript.Tests
         }
         public static void CurrentSkillPolicies(AccountSave account,GameCatalog catalog)
         {
-            account.guide.legacyExempt=true;account.guide.mapComplete=true;account.guide.edictLegacyAccess=true;HuntEdictProgression.Reconcile(account);
+            ExistingMaleRoster(account);account.guide.legacyExempt=true;account.guide.mapComplete=true;account.guide.edictLegacyAccess=true;HuntEdictProgression.Reconcile(account);
             foreach(var hero in account.heroes)
             {
                 hero.level=60;var load=SkillTreeD4Loadout.Empty(hero.heroClass);var data=SkillTreeD4.For(hero.heroClass);

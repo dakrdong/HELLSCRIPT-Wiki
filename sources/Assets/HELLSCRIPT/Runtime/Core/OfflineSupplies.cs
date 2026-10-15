@@ -44,7 +44,7 @@ namespace Hellscript
                 // Old saves have no resource ledger in their completed reviews. Prefer the last
                 // completed run's owner/stage; never substitute another hero's account record.
                 var record=a.records?.FirstOrDefault(r=>r.review?.phase==RunPhase.Cleared&&r.review.totals?.finish==CombatFinish.Other);
-                var hero=record==null?a.Hero:a.heroes.FirstOrDefault(h=>h.id==record.review.heroId)??a.Hero;
+                var hero=record==null?a.Hero:HeroSlots.Created(a).FirstOrDefault(h=>h.id==record.review.heroId)??a.Hero;
                 int stage=record?.stage??hero.highestClear;
                 if(stage>0&&stage<=hero.highestClear)
                 {
@@ -67,7 +67,7 @@ namespace Hellscript
             var s=a.offlineSupplies;
             if(s==null||s.version!=Version||s.stage<0||s.stage>1000||s.goldPerRun<0||s.stonesPerRun<0||s.cycleMs<0||s.cycleMs>86400000||
                 !Fraction(s.goldFraction)||!Fraction(s.stoneFraction)||
-                s.stage>0&&(s.cycleMs<5000||string.IsNullOrEmpty(s.runId)||!a.heroes.Any(h=>h.id==s.heroId&&h.highestClear>=s.stage)))
+                s.stage>0&&(s.cycleMs<5000||string.IsNullOrEmpty(s.runId)||!HeroSlots.Created(a).Any(h=>h.id==s.heroId&&h.highestClear>=s.stage)))
                 throw new NotSupportedException("Invalid offline supply basis; original save preserved.");
             var r=s.receipt;
             if(r!=null&&(r.gold<0||r.stones<0||r.seconds<0||r.seconds>CapSeconds||r.stage<0||r.stage>1000))throw new NotSupportedException("Invalid offline supply receipt.");
@@ -75,7 +75,7 @@ namespace Hellscript
         static bool Fraction(double value)=>!double.IsNaN(value)&&!double.IsInfinity(value)&&value>=0&&value<1;
         public static void RecordClear(AccountSave a,RunState run,float resultSeconds)
         {
-            if(run.training>=0||run.phase!=RunPhase.Cleared||!run.bossRewarded||run.statistics?.finish!=CombatFinish.Other||run.stage<1||run.stage>1000)return;
+            if(!HeroSlots.Created(a).Any(h=>h.id==run.heroId)||run.training>=0||run.phase!=RunPhase.Cleared||!run.bossRewarded||run.statistics?.finish!=CombatFinish.Other||run.stage<1||run.stage>1000)return;
             Normalize(a);var s=a.offlineSupplies;if(s.runId==run.id)return;
             double seconds=Math.Max(run.time,run.realTime);
             if(double.IsNaN(seconds)||double.IsInfinity(seconds)||seconds<=0)return;

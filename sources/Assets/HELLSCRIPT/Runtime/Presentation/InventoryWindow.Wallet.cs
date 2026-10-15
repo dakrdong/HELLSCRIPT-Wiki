@@ -35,7 +35,7 @@ namespace Hellscript
                 label.rectTransform.sizeDelta=new Vector2(labelWidth,rowHeight);
                 float iconX=x+labelWidth+7;
                 WalletIcon(strip,row.icon,iconX,y+(rowHeight-16)/2,16);
-                var value=Txt(strip,row.amount.ToString("N0"),iconX+20,y,cell-labelWidth-32,rowHeight,11,gold);WalletFit(value);value.name="wallet-value-"+row.id;
+                var value=Txt(strip,row.amount.ToString("N0"),iconX+20,y,cell-labelWidth-32,rowHeight,11,gold,heading:true);WalletFit(value);value.name="wallet-value-"+row.id;
             }
         }
         void WalletIcon(Transform parent,string icon,float x,float y,float size)
@@ -53,7 +53,7 @@ namespace Hellscript
                 var cell=Panel(content,"wallet-row-"+row.id,UiTheme.HoverHex,UiTheme.RaisedHex,UiTheme.EdgeHex);Place(cell,4,y,w-38,42);
                 WalletIcon(cell,row.icon,4,3,36);
                 var name=Txt(cell,row.label,44,0,(w-88)*.56f,42,11,pale);WalletFit(name);
-                var value=Txt(cell,row.amount.ToString("N0"),44+(w-88)*.56f,0,(w-88)*.44f,42,12,gold,TextAnchor.MiddleRight);
+                var value=Txt(cell,row.amount.ToString("N0"),44+(w-88)*.56f,0,(w-88)*.44f,42,12,gold,TextAnchor.MiddleRight,heading:true);
                 WalletFit(value);value.name="wallet-detail-value-"+row.id;y+=46;
             }
             content.sizeDelta=new Vector2(0,y);

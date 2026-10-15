@@ -1,0 +1,292 @@
+{
+  "revision": "hellscript-casual-field-runtime-v1",
+  "productionApproved": false,
+  "palette": {
+    "name": "Snowy Plateau",
+    "floor": [
+      "#f2f8ff",
+      "#e3eefa",
+      "#ffffff"
+    ],
+    "grout": "#b5cde6",
+    "light": "#ffffff",
+    "stone": "#dde7f3",
+    "stone2": "#bccee2",
+    "dark": "#90a9c5",
+    "accent": "#7fd0f5",
+    "accent2": "#e85a5a",
+    "wood": "#a07048",
+    "glow": "#ffd89a",
+    "sky": "#d4ecfb"
+  },
+  "models": {
+    "F5_Floor": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 4.0,
+      "sha256": {
+        "Floor_A.png": "2520dbc3cb2694b57361898aea723dccf55b2222411f832a64aaa9d61e33cb32"
+      }
+    },
+    "F5_Wall": {
+      "kind": "prop",
+      "tris": 1428,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        6,
+        2
+      ],
+      "bounds": [
+        -3.4,
+        0.0,
+        -0.95,
+        3.4,
+        2.61,
+        0.95
+      ],
+      "glow": null,
+      "seed": 4286444699,
+      "sha256": {
+        "F5_Wall.fbx": "ac3e56caa18b944c11f98fb0d1e61afa8e5fcc9da1d9c95e81b1fa0602d3a477",
+        "F5_Wall_A.png": "5e7ea0907ffa8c0c44dad9a1577b8f690eea6ff6dbad6c18ba8af4afea867457"
+      }
+    },
+    "F5_Trim": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 2.0,
+      "sha256": {
+        "Trim_A.png": "0c609284ca21d168256ac55e3752cc6fe0411593608a437724b06e4bfe4b37b5"
+      }
+    },
+    "F5_Pillar": {
+      "kind": "prop",
+      "tris": 528,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.6,
+        0.0,
+        -0.6,
+        0.6,
+        2.68,
+        0.6
+      ],
+      "glow": null,
+      "seed": 4024714427,
+      "sha256": {
+        "F5_Pillar.fbx": "d1ebc9c473aff859610c0f764efef64baac2803cca950ddb12757aa6930f68a3",
+        "F5_Pillar_A.png": "9ff3b4f44756af2eb78010c4ee9e28e717ad92c093d9748e9080d00ebdf5616a"
+      }
+    },
+    "F5_WallColumn": {
+      "kind": "prop",
+      "tris": 656,
+      "texture": 64,
+      "height": 3.9,
+      "footprint": [
+        0.9,
+        0.62
+      ],
+      "bounds": [
+        -0.45,
+        0.0,
+        -0.31,
+        0.45,
+        4.0,
+        0.31
+      ],
+      "glow": null,
+      "seed": 593458582,
+      "sha256": {
+        "F5_WallColumn.fbx": "098a1de01ec28fbd35a5b12aa1bfa4c9dfdacb2c7f3b6274c629b3d7a8a18006",
+        "F5_WallColumn_A.png": "9ff3b4f44756af2eb78010c4ee9e28e717ad92c093d9748e9080d00ebdf5616a"
+      }
+    },
+    "F5_Rubble_A": {
+      "kind": "prop",
+      "tris": 764,
+      "texture": 64,
+      "height": 0.6,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.73,
+        -0.016,
+        -0.827,
+        0.83,
+        0.445,
+        0.741
+      ],
+      "glow": null,
+      "seed": 2641550329,
+      "sha256": {
+        "F5_Rubble_A.fbx": "d6d7dfc99d217ab5ddb6815454d05cc168437d750bbd10c8d67d3104e4358e9d",
+        "F5_Rubble_A_A.png": "63cc9af393ce0e331fdaf338019db0e05a76e74f47c4494b684289b52c5e824e"
+      }
+    },
+    "F5_Rubble_B": {
+      "kind": "prop",
+      "tris": 980,
+      "texture": 64,
+      "height": 0.5,
+      "footprint": [
+        1.6,
+        1.1
+      ],
+      "bounds": [
+        -0.716,
+        -0.016,
+        -0.692,
+        0.865,
+        0.435,
+        0.805
+      ],
+      "glow": null,
+      "seed": 405944870,
+      "sha256": {
+        "F5_Rubble_B.fbx": "f1f38368c0a61ab42a1a464ad06e8eb14cf2575711b4a73bba76f49fb1f148d9",
+        "F5_Rubble_B_A.png": "63cc9af393ce0e331fdaf338019db0e05a76e74f47c4494b684289b52c5e824e"
+      }
+    },
+    "F5_Torch": {
+      "kind": "prop",
+      "tris": 164,
+      "texture": 64,
+      "height": 0.45,
+      "footprint": [
+        0.2,
+        0.5
+      ],
+      "bounds": [
+        -0.09,
+        0.0,
+        -0.09,
+        0.09,
+        0.44,
+        0.09
+      ],
+      "glow": "#ffd89a",
+      "seed": 846749603,
+      "sha256": {
+        "F5_Torch.fbx": "612d93c5f201def811d53c2e34829cf752c2cb71b97af7b401bb4db0189c29b1",
+        "F5_Torch_A.png": "8d48facdde6b727e012e128329a1692751834fb018892d84dd0bd6d755ebcda3"
+      }
+    },
+    "F5_Decor_Pine": {
+      "kind": "prop",
+      "tris": 808,
+      "texture": 64,
+      "height": 1.2,
+      "footprint": [
+        0.9,
+        0.9
+      ],
+      "bounds": [
+        -0.399,
+        0.0,
+        -0.42,
+        0.399,
+        1.16,
+        0.42
+      ],
+      "glow": null,
+      "seed": 1706890413,
+      "sha256": {
+        "F5_Decor_Pine.fbx": "ed2766e19d45c8a258b2f4d084a74e8d7f04abb910c074ac53ef7662703fa282",
+        "F5_Decor_Pine_A.png": "248952d216d44f659792c82bb376a9970085b2d6d1f08e1b58b212eeb8214ed0"
+      }
+    },
+    "F5_Decor_Snowman": {
+      "kind": "prop",
+      "tris": 1212,
+      "texture": 64,
+      "height": 1.25,
+      "footprint": [
+        0.7,
+        0.7
+      ],
+      "bounds": [
+        -0.288,
+        -0.02,
+        -0.295,
+        0.288,
+        1.26,
+        0.295
+      ],
+      "glow": null,
+      "seed": 4102394613,
+      "sha256": {
+        "F5_Decor_Snowman.fbx": "e2a5e30864ef531c345954b272e738099b3c48b274740b9a88931607378a9441",
+        "F5_Decor_Snowman_A.png": "b5327bdd22a2e5f835b09df64b4ce79972c48387c7f7c148ee1859206a2f74e0"
+      }
+    },
+    "F5_Decor_IceCrystal": {
+      "kind": "prop",
+      "tris": 272,
+      "texture": 64,
+      "height": 0.8,
+      "footprint": [
+        0.9,
+        0.8
+      ],
+      "bounds": [
+        -0.365,
+        -0.05,
+        -0.295,
+        0.37,
+        0.8,
+        0.295
+      ],
+      "glow": null,
+      "seed": 4220887296,
+      "sha256": {
+        "F5_Decor_IceCrystal.fbx": "9de51d880d5dbf0fdbe61046f9de3bd66ebd68f3e8c58325ae73841286a015d9",
+        "F5_Decor_IceCrystal_A.png": "3644af19206597707a08470d6df4af9d2a4d4336b509f88e946f826978a43005"
+      }
+    }
+  },
+  "recolored": [],
+  "files": {
+    "F5_Decor_IceCrystal.fbx": "9de51d880d5dbf0fdbe61046f9de3bd66ebd68f3e8c58325ae73841286a015d9",
+    "F5_Decor_IceCrystal_A.png": "3644af19206597707a08470d6df4af9d2a4d4336b509f88e946f826978a43005",
+    "F5_Decor_IceCrystal_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Decor_Pine.fbx": "ed2766e19d45c8a258b2f4d084a74e8d7f04abb910c074ac53ef7662703fa282",
+    "F5_Decor_Pine_A.png": "248952d216d44f659792c82bb376a9970085b2d6d1f08e1b58b212eeb8214ed0",
+    "F5_Decor_Pine_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Decor_Snowman.fbx": "e2a5e30864ef531c345954b272e738099b3c48b274740b9a88931607378a9441",
+    "F5_Decor_Snowman_A.png": "b5327bdd22a2e5f835b09df64b4ce79972c48387c7f7c148ee1859206a2f74e0",
+    "F5_Decor_Snowman_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Pillar.fbx": "d1ebc9c473aff859610c0f764efef64baac2803cca950ddb12757aa6930f68a3",
+    "F5_Pillar_A.png": "9ff3b4f44756af2eb78010c4ee9e28e717ad92c093d9748e9080d00ebdf5616a",
+    "F5_Pillar_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Rubble_A.fbx": "d6d7dfc99d217ab5ddb6815454d05cc168437d750bbd10c8d67d3104e4358e9d",
+    "F5_Rubble_A_A.png": "63cc9af393ce0e331fdaf338019db0e05a76e74f47c4494b684289b52c5e824e",
+    "F5_Rubble_A_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Rubble_B.fbx": "f1f38368c0a61ab42a1a464ad06e8eb14cf2575711b4a73bba76f49fb1f148d9",
+    "F5_Rubble_B_A.png": "63cc9af393ce0e331fdaf338019db0e05a76e74f47c4494b684289b52c5e824e",
+    "F5_Rubble_B_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Torch.fbx": "612d93c5f201def811d53c2e34829cf752c2cb71b97af7b401bb4db0189c29b1",
+    "F5_Torch_A.png": "8d48facdde6b727e012e128329a1692751834fb018892d84dd0bd6d755ebcda3",
+    "F5_Torch_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Wall.fbx": "ac3e56caa18b944c11f98fb0d1e61afa8e5fcc9da1d9c95e81b1fa0602d3a477",
+    "F5_WallColumn.fbx": "098a1de01ec28fbd35a5b12aa1bfa4c9dfdacb2c7f3b6274c629b3d7a8a18006",
+    "F5_WallColumn_A.png": "9ff3b4f44756af2eb78010c4ee9e28e717ad92c093d9748e9080d00ebdf5616a",
+    "F5_WallColumn_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F5_Wall_A.png": "5e7ea0907ffa8c0c44dad9a1577b8f690eea6ff6dbad6c18ba8af4afea867457",
+    "F5_Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Floor_A.png": "2520dbc3cb2694b57361898aea723dccf55b2222411f832a64aaa9d61e33cb32",
+    "Floor_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Trim_A.png": "0c609284ca21d168256ac55e3752cc6fe0411593608a437724b06e4bfe4b37b5",
+    "Trim_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Wall_A.png": "53aa2eb9f0e08192ddfb80a0446e2565b25a1b522fb0d27139523b687e417d52",
+    "Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d"
+  }
+}

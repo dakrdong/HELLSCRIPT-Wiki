@@ -7,6 +7,7 @@ namespace Hellscript
     // The live HUD and completed battle use the same read-only activity presentation and chart.
     public sealed class RiftActivityPanel:MonoBehaviour
     {
+        public UiSkin Skin {get;private set;}
         RectTransform bar;
         Text hint;
         readonly Text[] labels=new Text[4],percents=new Text[4];
@@ -15,24 +16,38 @@ namespace Hellscript
         readonly List<float>[] series={new List<float>(),new List<float>(),new List<float>(),new List<float>()};
         readonly List<float> times=new List<float>();
         static readonly string[] Names={"이동","공격","회피","파밍"};
+        // Main.dc.html --c controls the share/area; --l is the separately authored sparkline hue.
+        static readonly Color[] HudShares={new Color32(0x35,0xa7,0xff,0xff),new Color32(0xff,0x5a,0x5f,0xff),new Color32(0xff,0xd2,0x3f,0xff),new Color32(0x4c,0xbf,0x55,0xff)};
+        static readonly Color[] HudLines={new Color32(0x2f,0x8f,0xd8,0xff),new Color32(0xe8,0x47,0x4c,0xff),new Color32(0xd9,0xa3,0x00,0xff),new Color32(0x36,0xa8,0x45,0xff)};
         static Color Ink(int i)=>i==0?UiTheme.Resource:i==1?UiTheme.Danger:i==2?UiTheme.PaidFatigueText:UiTheme.Success;
-        public static RiftActivityPanel Create(Transform parent)
+        public static RiftActivityPanel Create(Transform parent,UiSkin skin=null)
         {
-            var root=UiLayout.Rect("Activity graphs",parent);var panel=root.gameObject.AddComponent<RiftActivityPanel>();
+            var root=UiLayout.Rect("Activity graphs",parent);var panel=root.gameObject.AddComponent<RiftActivityPanel>();panel.Skin=skin;
             panel.bar=UiLayout.Rect("Activity share 100%",root);
-            var background=panel.bar.gameObject.AddComponent<Image>();background.color=UiTheme.Inset;background.raycastTarget=false;
-            panel.hint=UiLayout.Text(root,"Activity range","",0,0,1,18,10,UiTheme.Muted);
+            var background=panel.bar.gameObject.AddComponent<Image>();background.color=skin?.Disabled??UiTheme.Inset;background.raycastTarget=false;
+            panel.hint=UiLayout.Text(root,"Activity range","",0,0,1,18,10,skin?.Muted??UiTheme.Muted,skin?.BodyFont);
             for(int i=0;i<4;i++)
             {
                 var segment=panel.segments[i]=UiLayout.Rect("Activity share "+i,panel.bar);
-                var fill=segment.gameObject.AddComponent<Image>();fill.color=Ink(i);fill.raycastTarget=false;
-                var percent=panel.percents[i]=UiLayout.Text(segment,"Activity percent "+i,"",0,0,1,18,10,UiTheme.Background);
+                var fill=segment.gameObject.AddComponent<Image>();fill.color=skin!=null?HudShares[i]:Ink(i);fill.raycastTarget=false;
+                var percent=panel.percents[i]=UiLayout.Text(segment,"Activity percent "+i,"",0,0,1,18,10,skin?.Navy??UiTheme.Background,skin?.BodyFont);
                 percent.alignment=TextAnchor.MiddleCenter;UiLayout.Stretch(percent.rectTransform);
-                panel.labels[i]=UiLayout.Text(root,"Activity label "+i,"",0,0,1,32,12,Ink(i));
+                panel.labels[i]=UiLayout.Text(root,"Activity label "+i,"",0,0,1,32,12,skin?.OnLight(Ink(i))??Ink(i),skin?.BodyFont);
                 panel.charts[i]=UiLayout.Rect("Activity chart "+i,root).gameObject.AddComponent<TrainingDpsChart>();
-                panel.charts[i].raycastTarget=false;panel.charts[i].CurrentColor=Ink(i);
+                panel.charts[i].raycastTarget=false;panel.charts[i].CurrentColor=Ink(i);panel.charts[i].SetSkin(skin);
+                if(skin!=null)panel.charts[i].SetCasualActivityColors(HudLines[i],HudShares[i]);
             }
             return panel;
+        }
+        public void SetCasualHudAppearance()
+        {
+            var skin=Skin??UiSkin.Casual;
+            for(int i=0;i<4;i++)
+            {
+                segments[i].GetComponent<Image>().color=HudShares[i];labels[i].color=skin.Navy;
+                // The original share text is white with an ink outline; use legible ink in this shared text component.
+                percents[i].color=skin.Navy;charts[i].SetCasualActivityAppearance(HudLines[i],HudShares[i]);
+            }
         }
         public float Layout(float width,float f=1,float chartHeight=24)
         {

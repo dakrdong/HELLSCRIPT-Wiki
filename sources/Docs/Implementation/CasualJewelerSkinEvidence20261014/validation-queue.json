@@ -1,0 +1,109 @@
+{
+  "status": "individual execution/build queue closed; transferred to combined all-screen validation; source frozen",
+  "screen": "Jeweler",
+  "branch": "codex/casual-jeweler-skin",
+  "baseline": "2e193c336c6176d80b9ddbdff7269246bf2590fb",
+  "shared_code": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "source_workspace": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-15/jeweler-skin",
+  "source_only_sparse_checkout": true,
+  "requires_complete_parent_assigned_project": true,
+  "shared_files_changed": 0,
+  "approved_assets": 72,
+  "asset_manifest_sha256": "d1b66a4ca39eabd32628594838d9119f644ffab1b3b88106a51f30214e9c193c",
+  "editmode_filters": [
+    "Hellscript.Tests.JewelerWindowSkinTests",
+    "Hellscript.Tests.JewelerTests",
+    "Hellscript.Tests.StoreViewBindingTests",
+    "Hellscript.Tests.RiftContentUnlockTests",
+    "Hellscript.Tests.CasualUiSkinTests",
+    "Hellscript.Tests.UiButtonTests"
+  ],
+  "player_arguments": [
+    "-hellscriptJewelerSmoke",
+    "-hellscriptSavePath",
+    "<task-owned-isolated-save>",
+    "-hellscriptScreenshots",
+    "<task-owned-evidence>"
+  ],
+  "second_process_argument": "-hellscriptJewelerResume",
+  "viewports": [
+    [
+      440,
+      956
+    ],
+    [
+      956,
+      440
+    ],
+    [
+      1440,
+      810
+    ],
+    [
+      1440,
+      900
+    ],
+    [
+      1680,
+      720
+    ],
+    [
+      2868,
+      1320
+    ]
+  ],
+  "languages": [
+    "ko",
+    "en"
+  ],
+  "mobile_scope": "macOS window simulation only; not iOS physical validation",
+  "safe_area_assumption_2868x1320": {
+    "left": 102,
+    "right": 102,
+    "bottom": 54,
+    "top": 0,
+    "basis": "DPR3 reference assumption"
+  },
+  "manual_review": [
+    "before/after actual game capture",
+    "KO/EN glyphs and clipping at unchanged font sizes",
+    "panel corners and selection edges",
+    "touch and native physical-device input unverified",
+    "nested socket window/back restoration",
+    "shared pointer/keyboard button feedback after opt-in"
+  ],
+  "audio": "muted by smoke",
+  "save_policy": "explicit isolated path required; fixture refuses real Application.persistentDataPath",
+  "expected_runtime_capture_count": 48,
+  "estimated_runtime_output_bytes": 15000000,
+  "retention": "evidence retain with integration; review 2026-10-21",
+  "cleanup": "no originals removed; shared JewelerArt/PotionArt still referenced",
+  "shared_dependency_applied": "Conflict-free merge of shared0ccba80e preserving dedicated74095ce4; no screen-owned common file edits",
+  "latest_static_evidence": "shared-followup-0ccba80e",
+  "dedicated_source_commit": "74095ce42185e2ce2e444f2e5bffdad4ed2d669d",
+  "native_runs": 0,
+  "integration_owner_thread": "01a13790-39bc-7062-a516-b83a354000a8",
+  "integration_workspace": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin",
+  "integration_branch_policy": "owner selects a separate integration branch; reuse existing Library in place",
+  "individual_unity_or_build_allowed": false,
+  "source_frozen": true,
+  "resume_condition": "specific defect request from integration owner only",
+  "remaining_common_api_connections": [],
+  "last_implementation_and_evidence_commit": "6befc80c9373d08835e5e903959810b2a4413390",
+  "integration_method": "Common0ccba80e followed by merge of final codex/casual-jeweler-skin tip; preserve shared and dedicated history",
+  "art_root": "Assets/HELLSCRIPT/Resources/Art/JewelerWindow",
+  "preserve_asset_meta_guids": true,
+  "second_process_arguments": [
+    "-hellscriptJewelerSmoke",
+    "-hellscriptJewelerResume",
+    "-hellscriptSavePath",
+    "<same isolated integration save as initial>",
+    "-hellscriptScreenshots",
+    "<integration evidence>"
+  ],
+  "success_markers": [
+    "HELLSCRIPT_JEWELER_RUNTIME_OK",
+    "HELLSCRIPT_JEWELER_RESUME_OK"
+  ],
+  "repeated_checks_during_freeze": 0
+}

@@ -8,9 +8,9 @@ namespace Hellscript
     // Development adapter. Production account ownership and server-time settlement are a separate boundary.
     public sealed partial class GameStore
     {
-        // The default release reads/writes schema 22. Explicit developer legacy mode
-        // supports schema 21 and must refuse D4 saves, including backup fallback.
-        public static int MaximumSchemaVersion=>SkillTreeD4.Enabled?22:21;
+        // The default release stores six hero slots. Explicit developer legacy mode
+        // supports schema 21 and refuses newer saves before backup fallback or writes.
+        public static int MaximumSchemaVersion=>SkillTreeD4.Enabled?HeroSlots.SchemaVersion:21;
         public static int CurrentSchemaVersion=>MaximumSchemaVersion;
         public AccountSave Data {get;private set;}
         public string Error {get;private set;}="";
@@ -27,14 +27,15 @@ namespace Hellscript
         long? pendingLocalIdleThrough;
         bool settlingLocalIdle;
         readonly string path;
+        readonly GameCatalog heroCatalog;
         AccountSave edictBoundary;
         void CaptureEdictBoundary(AccountSave a)
         {
-            edictBoundary=new AccountSave{heroes=a.heroes.Select(h=>new HeroSave{id=h.id,heroClass=h.heroClass,level=h.level,build=h.build.Copy(),edict=h.edict.Copy(),edictPassiveSlots=h.edictPassiveSlots.ToArray(),useEdict=h.useEdict,useRecommendedEdict=h.useRecommendedEdict,selectedEdictPreset=h.selectedEdictPreset,edictPresets=h.edictPresets.Select(p=>p.Copy()).ToList(),presets=h.presets.Select(p=>p.Copy()).ToList()}).ToList()};
+            edictBoundary=new AccountSave{heroes=a.heroes.Select(h=>new HeroSave{id=h.id,heroClass=h.heroClass,gender=h.gender,created=h.created,level=h.level,build=h.build.Copy(),edict=h.edict.Copy(),edictPassiveSlots=h.edictPassiveSlots.ToArray(),useEdict=h.useEdict,useRecommendedEdict=h.useRecommendedEdict,selectedEdictPreset=h.selectedEdictPreset,edictPresets=h.edictPresets.Select(p=>p.Copy()).ToList(),presets=h.presets.Select(p=>p.Copy()).ToList()}).ToList()};
         }
         public GameStore(string directory,GameCatalog catalog=null,Func<long> forgeClock=null,Func<long> offlineClock=null)
         {
-            dailyQuestTime=()=>AttendanceClock();
+            heroCatalog=catalog;dailyQuestTime=()=>AttendanceClock();
             this.offlineClock=offlineClock??(()=>DateTimeOffset.UtcNow.ToUnixTimeSeconds());
             if(forgeClock!=null)ForgeClock=forgeClock;
             CombatArchive=new CombatJournalArchive(directory);
@@ -43,7 +44,7 @@ namespace Hellscript
             Data=Read(path);
             if(Data==null){source=path+".bak";Data=Read(source);}
             if(Data==null&&(File.Exists(path)||File.Exists(path+".bak")))throw new InvalidDataException(Loc.F("저장 파일과 백업을 복구할 수 없습니다. 원본은 그대로 보존했습니다.\n{0}", path));
-            if(Data==null){Data=NewAccount(catalog);Data.lastSeenUtc=this.offlineClock();CreatedAccount=true;}
+            if(Data==null){Data=NewAccount(catalog,onlyWarriorCreated:SkillTreeD4.Enabled);Data.lastSeenUtc=this.offlineClock();CreatedAccount=true;}
             else if(Data.schema==1)
             {
                 File.Copy(source,path+".schema1-"+DateTime.UtcNow.Ticks+".json",false);
@@ -63,8 +64,26 @@ namespace Hellscript
             {
                 if(!File.Exists(file))return null;var a=JsonUtility.FromJson<AccountSave>(File.ReadAllText(file));
                 if(a!=null&&a.schema>CurrentSchemaVersion)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
-                if(a==null||a.schema<1||a.heroes==null||a.heroes.Count!=3||a.cores==null||a.cores.Length!=8)return null;
+                if(a==null||a.schema<1||a.heroes==null||(a.heroes.Count!=3&&a.heroes.Count!=HeroSlots.Count)||a.cores==null||a.cores.Length!=8)return null;
                 if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>(SkillTreeD4.Enabled?60:40)))return null;
+                if(!SkillTreeD4.Enabled&&a.heroes.Count!=3)throw new NotSupportedException("This save requires the six-hero release. The original file is preserved.");
+                bool sixHeroesMigrated=SkillTreeD4.Enabled&&a.heroes.Count==3&&a.schema<HeroSlots.SchemaVersion;
+                if(a.schema>=HeroSlots.SchemaVersion&&a.heroes.Count!=HeroSlots.Count)throw new NotSupportedException("Invalid six-hero save. The original file is preserved.");
+                if(sixHeroesMigrated)
+                {
+                    string archive=file+".schema"+a.schema+"-before-six-heroes.json";
+                    try
+                    {
+                        if(!File.Exists(archive))File.Copy(file,archive,false);
+                        else if(!File.ReadAllBytes(archive).SequenceEqual(File.ReadAllBytes(file)))
+                            throw new IOException("An existing migration archive does not match the source save.");
+                    }
+                    catch(Exception error){throw new NotSupportedException("The six-hero migration could not preserve the original save.",error);}
+                }
+                // Missing fields in every three-hero wire predate the creation contract.
+                if(a.heroes.Count==3&&a.schema<HeroSlots.SchemaVersion)
+                    foreach(var hero in a.heroes){hero.gender=HeroGender.Male;hero.created=true;}
+                HeroSlots.Validate(a,allowLegacy:true);
                 if(SkillTreeD4.Enabled&&SkillTreeD4Migration.Needed(a))
                 {
                     try
@@ -115,6 +134,11 @@ namespace Hellscript
                     string archive=file+".schema"+a.schema+"-before-hunt-edict.json";
                     if(!File.Exists(archive))File.Copy(file,archive,false);
                 }
+                if(sixHeroesMigrated)
+                {
+                    ExpandHeroSlots(a,heroCatalog);Normalize(a);a.schema=HeroSlots.SchemaVersion;
+                }
+                HeroSlots.Validate(a,allowLegacy:!SkillTreeD4.Enabled);
                 return a;
             }
             catch(NotSupportedException){throw;}
@@ -288,25 +312,28 @@ namespace Hellscript
             if(a.repeatHunt?.pendingResult!=null)
             {foreach(var d in a.repeatHunt.pendingResult.drops)ItemCatalog.Validate(d.item);foreach(var c in a.repeatHunt.pendingResult.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);}
         }
-        public static AccountSave NewAccount(GameCatalog catalog=null)
+        public static AccountSave NewAccount(GameCatalog catalog=null,bool onlyWarriorCreated=false)
         {
             var a=new AccountSave{telemetryAccountId=Guid.NewGuid().ToString("N"),guide=new AccountGuide{edictProgressionVersion=HuntEdictProgression.Version,tutorialVersion=Tutorials.Version,runeBoard=new RuneBoardTutorialState{version=1}},contentUnlocks=new ContentUnlockState{version=ContentUnlocks.Version},lastSeenUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds()};
             uint rng=112358;
-            for(int i=0;i<3;i++)
-            {
-                var h=new HeroSave{id=Guid.NewGuid().ToString("N"),heroClass=(HeroClass)i,build=GameCatalog.Preset((HeroClass)i,0)};
-                if(catalog!=null)h.build=BehaviorPresets.ForLevel(h.heroClass,0,h.level,catalog);
-                h.build.passives=Array.Empty<int>();
-                if(SkillTreeD4.Enabled)h.build.classSkills=SkillTreeD4Loadout.Empty(h.heroClass);
-                h.edict=HuntEdictV2Storage.CreateForHero(h);
-                HuntEdictStorage.InitializeNewHero(h,catalog);
-                HuntEdictProgression.InitializeHero(h);
-                h.potions.Validate();h.riftGearOffer.Normalize();
-                var w=Economy.CreateItem(h.heroClass,0,0,1,ref rng);w.baseId=new[]{"B02","B05","B08"}[i];w.baseIndex=i*3+1;w.name=w.DisplayName;w.equipped=true;ItemAcquisition.Stamp(a,w);h.inventory.Add(w);a.heroes.Add(h);
-            }
+            for(int i=0;i<(SkillTreeD4.Enabled?HeroSlots.Count:3);i++)
+                a.heroes.Add(NewHero(a,(HeroClass)(i%3),i<3?HeroGender.Male:HeroGender.Female,i<3&&(!onlyWarriorCreated||i==0),catalog,ref rng));
             a.riftFatigue??=new RiftFatigue();RiftEntryRules.Validate(a.riftFatigue);
             AspectStone.Normalize(a);
             RuneGrowth.Normalize(a);RewardBoxes.Normalize(a);Attendance.Normalize(a);OfflineSupplies.Normalize(a);HuntEdictProgression.Reconcile(a);return a;
+        }
+        static HeroSave NewHero(AccountSave account,HeroClass heroClass,HeroGender gender,bool created,GameCatalog catalog,ref uint rng)
+        {
+            var h=new HeroSave{id=Guid.NewGuid().ToString("N"),heroClass=heroClass,gender=gender,created=created,build=GameCatalog.Preset(heroClass,0)};
+            if(catalog!=null)h.build=BehaviorPresets.ForLevel(heroClass,0,h.level,catalog);
+            h.build.passives=Array.Empty<int>();
+            if(SkillTreeD4.Enabled)h.build.classSkills=SkillTreeD4Loadout.Empty(heroClass);
+            h.edict=HuntEdictV2Storage.CreateForHero(h);
+            HuntEdictStorage.InitializeNewHero(h,catalog);HuntEdictProgression.InitializeHero(h);
+            h.potions.Validate();h.riftGearOffer.Normalize();
+            var w=Economy.CreateItem(heroClass,0,0,1,ref rng);int c=(int)heroClass;
+            w.baseId=new[]{"B02","B05","B08"}[c];w.baseIndex=c*3+1;w.name=w.DisplayName;w.equipped=true;
+            ItemAcquisition.Stamp(account,w);h.inventory.Add(w);return h;
         }
         public bool SettleLocalIdle()
         {
@@ -368,7 +395,7 @@ namespace Hellscript
             for(int i=0;i<Data.heroes.Count;i++)
             {
                 var target=Data.heroes[i];var source=staged.heroes[i];
-                target.legacyPassiveSlots=source.legacyPassiveSlots;target.level=source.level;target.xp=source.xp;target.highestClear=source.highestClear;target.capacity=source.capacity;
+                target.created=source.created;target.gender=source.gender;target.legacyPassiveSlots=source.legacyPassiveSlots;target.level=source.level;target.xp=source.xp;target.highestClear=source.highestClear;target.capacity=source.capacity;
                 target.lastRiftFingerprint=source.lastRiftFingerprint;target.lastRiftBoss=source.lastRiftBoss;
                 target.riftProgress=source.riftProgress;target.potions=source.potions;target.guide=source.guide;target.slotProgress=source.slotProgress;
                 target.equipmentShop=source.equipmentShop;target.d4SkillRefund=source.d4SkillRefund;
@@ -412,6 +439,11 @@ namespace Hellscript
         bool Write(AccountSave data,HuntEdictEditSession edictSession=null)
         {
             using var sample=PresentationMetrics.Save.Auto();
+            // Reject the schema before normalization, observation, or touching a temporary file.
+            if(!SkillTreeD4.Enabled&&(data.schema>CurrentSchemaVersion||data.heroes.Count!=3))
+            {Error="This save requires the six-hero or D4 release. The original file is preserved.";return false;}
+            try{HeroSlots.Validate(data,allowLegacy:!SkillTreeD4.Enabled);}
+            catch(Exception error){Error=error.Message;return false;}
             // Direct build/preset/character writers must not bypass a failed offline interval.
             if(pendingLocalIdleThrough.HasValue&&!settlingLocalIdle)
             {Error=Loc.T("미접속 보급 정산을 먼저 완료해 주세요.");return false;}
@@ -423,7 +455,7 @@ namespace Hellscript
             try
             {
                 edictBoundary.guide=Data.guide;edictBoundary.contentUnlocks=Data.contentUnlocks;edictBoundary.selectedHero=Data.selectedHero;
-                foreach(var h in edictBoundary.heroes){var current=Data.heroes.FirstOrDefault(v=>v.id==h.id)??Data.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass);if(current!=null)h.level=current.level;}
+                foreach(var h in edictBoundary.heroes){var current=Data.heroes.FirstOrDefault(v=>v.id==h.id)??Data.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass&&v.gender==h.gender);if(current!=null)h.level=current.level;}
                 HuntEdictProgression.ValidateTransaction(edictBoundary,data,edictSession);
                 if(!SkillTreeD4.Enabled&&data.heroes.Any(h=>h.build.classSkills?.version==5))throw new NotSupportedException("This save requires the D4 skill-tree release.");
                 Tutorials.Normalize(data,false);ContentUnlocks.Normalize(data);RewardBoxes.Normalize(data);GemInventory.Normalize(data);OfflineSupplies.Normalize(data);data.schema=CurrentSchemaVersion;
@@ -472,7 +504,7 @@ namespace Hellscript
                 if(e is ArgumentException||e is NotSupportedException)
                 {
                     if(ReferenceEquals(Data,data))foreach(var h in Data.heroes)
-                    {var prior=edictBoundary.heroes.FirstOrDefault(v=>v.id==h.id)??edictBoundary.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass);if(prior==null)continue;ApplyHuntEdict(h,HuntEdictLoadout.FromHero(prior));h.useEdict=prior.useEdict;h.useRecommendedEdict=prior.useRecommendedEdict;h.edictPresets=prior.edictPresets.Select(p=>p.Copy()).ToList();h.presets=prior.presets.Select(p=>p.Copy()).ToList();}
+                    {var prior=edictBoundary.heroes.FirstOrDefault(v=>v.id==h.id)??edictBoundary.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass&&v.gender==h.gender);if(prior==null)continue;ApplyHuntEdict(h,HuntEdictLoadout.FromHero(prior));h.useEdict=prior.useEdict;h.useRecommendedEdict=prior.useRecommendedEdict;h.edictPresets=prior.edictPresets.Select(p=>p.Copy()).ToList();h.presets=prior.presets.Select(p=>p.Copy()).ToList();}
                     Error=e.Message;return false;
                 }
                 Error=Loc.T("저장하지 못했습니다. 저장 공간과 파일 접근 권한을 확인한 뒤 다시 시도해 주세요.");

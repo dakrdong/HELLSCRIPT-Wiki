@@ -1,0 +1,18 @@
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/AttendanceWindow.cs:246:                foreach(var pair in new[]{("G03",0f),("G02",.34f),("G01",.66f)})JewelerArt.Gem(parent,pair.Item1,reward.tier,x+pair.Item2*size*.55f,y+pair.Item2*size*.15f,size*.62f);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs:19:            RiftResourceKind.Gem=>JewelerArt.ForGem(drop.gemId,drop.tier),
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionSlotQuick.cs:38:            var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(PotionArt.IconId(PotionCatalog.Get(id)));image.preserveAspect=true;image.raycastTarget=false;
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionSlotQuick.cs:57:                var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(PotionArt.IconId(def));image.preserveAspect=true;image.raycastTarget=false;
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs:112:                d.potions[i]=new HudSlotState{id=def.id,icon=PotionArt.IconId(def),name=GemElixirs.Name(def),description=GemElixirs.Description(def),
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs:187:            if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility"||id.StartsWith("elixir-",StringComparison.Ordinal))return PotionArt.Bottle(id);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs:22:                    var def=PotionCatalog.Get(slot.id);var art=PotionArt.Draw(root,def,3,3,size-6);art.color=Hero.potions.Count(slot.id)>0?Color.white:new Color(1,1,1,.35f);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs:77:                PotionArt.Draw(row.transform,def,8,12,48);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/ItemDetailView.Style.cs:232:                        var gem=filled?JewelerArt.ForGem(state.gemId,state.tier):null;
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/ItemDetailView.Style.cs:233:                        if(gem!=null){var image=JewelerArt.Gem(body,state.gemId,state.tier,x-2+size*.2f,y-1+size*.2f,size*.6f);image.raycastTarget=false;}
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs:77:                JewelerArt.Gem(header,family.gemId,5,x+(cell-25)/2,0,25);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs:88:                    var image=JewelerArt.Gem(button.transform,id,grade,(cell-35)/2,2,32);image.color=count>0?Color.white:new Color(1,1,1,.3f);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs:127:                JewelerArt.Gem(b.transform,id,5,(size-30)/2,3,30);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs:136:                PotionArt.Draw(b.transform,def,8,12,50);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs:65:                PotionArt.Draw(b.transform,def,6,(ch-46)/2,46);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs:319:                    float isz=2.9f*B;if(def!=null)PotionArt.Draw(b.transform,def,.7f*B,(th-isz)/2,isz);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs:326:                    float isz=2.6f*B;if(def!=null)PotionArt.Draw(b.transform,def,(tw-isz)/2,4*S,isz);
+2e193c33:Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs:79:                var bottle = PotionArt.Bottle(id);

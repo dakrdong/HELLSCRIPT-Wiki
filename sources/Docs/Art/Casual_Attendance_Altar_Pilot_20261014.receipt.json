@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-13T23:06:21.322514+00:00",
+  "result": "pilot art import and required cases verified; initial all-in-one harness failure preserved",
+  "repository": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT",
+  "branch": "codex/casual-attendance-altar-pilot",
+  "base_commit": "53d6a3e13304a781f9823134ba0f497bafb78621",
+  "runtime_changed_file": "Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png",
+  "asset_sha256": "1d8ec19907d2e66acefae53a1b051b304f80328bc1fd5eca8874305776e2d18f",
+  "original_asset_sha256": "05d2b3df863412c16ca55b75dc6f9b4b37c4bd01f891ea569e8456aa409a3f44",
+  "guid": "688eef0212b544a0f9f9f673441bc601",
+  "meta_sha256": "fd891bb4ae492ab2b472262ea9a40b8bd57b41f2afc6fb69d94563dc2b093dc3",
+  "canvas": [
+    1254,
+    1254
+  ],
+  "opaque": true,
+  "generated_tool": "built-in image_gen",
+  "imagegen_calls": 4,
+  "postprocessing": "none",
+  "input_trees": {
+    "Assets": "24eecdee77e513352ade124a9b6a8d46257d7e28",
+    "Packages": "2fce9aa61b6abdfa990b03a86a8430478fdf8505",
+    "ProjectSettings": "3443bda04f08715924f7704de54d3f7c7d126df3"
+  },
+  "focused_editmode": {
+    "runs": 2,
+    "final_summary": {
+      "Total": 7,
+      "Passed": 7,
+      "Failed": 0,
+      "Skipped": 0,
+      "Inconclusive": 0
+    },
+    "final_seconds": 8.13,
+    "result_sha256": "b49a3fd1eed192b0e4210666c076edc86bec55c8784406a4f1fb136b64ebce28"
+  },
+  "ui_contract": {
+    "result": "passed",
+    "regression_tests": 15,
+    "seconds": 22.298,
+    "receipt_sha256": "fed8d2f91639c78f8ab21324dbe1f20e811baeae27b7936b3f319257482e5786",
+    "final_call": "matching proof reused"
+  },
+  "native": {
+    "build_count": 1,
+    "build": {
+      "started_utc": "2026-10-13T22:53:24.216027+00:00",
+      "command": [
+        "/Applications/Unity/Hub/Editor/6000.6.0f1/Unity.app/Contents/MacOS/Unity",
+        "-batchmode",
+        "-nographics",
+        "-projectPath",
+        "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT",
+        "-executeMethod",
+        "Hellscript.Editor.ProjectBuilder.BuildMac",
+        "-hellscriptBuildOutput",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/native/HELLSCRIPT.app",
+        "-quit",
+        "-noaudio",
+        "-logFile",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-build.log"
+      ],
+      "status": "passed",
+      "asset_sha256": "1d8ec19907d2e66acefae53a1b051b304f80328bc1fd5eca8874305776e2d18f",
+      "exit": 0,
+      "elapsed_seconds": 34.660997459,
+      "finished_utc": "2026-10-13T22:53:58.878044+00:00",
+      "app_bytes": 1001815942,
+      "binary_sha256": "53234842e769e2481cf78ecaa8676fde1ccde8922bfc84f74e620f8239be409b",
+      "runtime_assembly_sha256": "e4b85f70dcf3c18590ee32920ea6b61453a3ba05439b50960ea77cc9a2d109c2",
+      "archived_app_path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/archive/native-build/HELLSCRIPT.app",
+      "closeout_disposition": "recoverable same-volume move; no permanent deletion or reclaimed-space claim"
+    },
+    "initial_run": {
+      "started_utc": "2026-10-13T22:57:01.521060+00:00",
+      "command": [
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/native/HELLSCRIPT.app/Contents/MacOS/HELLSCRIPT",
+        "-hellscriptAttendanceSmoke",
+        "-hellscriptSavePath",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-save",
+        "-hellscriptScreenshots",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens",
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        "1440",
+        "-screen-height",
+        "810",
+        "-noaudio",
+        "-logFile",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-attendance.log"
+      ],
+      "status": "failed",
+      "audio": "-noaudio",
+      "save_isolation": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-save",
+      "binary_sha256": "53234842e769e2481cf78ecaa8676fde1ccde8922bfc84f74e620f8239be409b",
+      "exit": 1,
+      "elapsed_seconds": 55.608528166999996,
+      "finished_utc": "2026-10-13T22:57:57.129434+00:00",
+      "captures": 25,
+      "initial_marker": false,
+      "art_marker": false
+    },
+    "continuation": {
+      "started_utc": "2026-10-13T23:00:07.813303+00:00",
+      "command": [
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/native/HELLSCRIPT.app/Contents/MacOS/HELLSCRIPT",
+        "-hellscriptAttendanceSmoke",
+        "-hellscriptAttendanceCollectOnly",
+        "-hellscriptSavePath",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-save",
+        "-hellscriptScreenshots",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens",
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        "1440",
+        "-screen-height",
+        "810",
+        "-noaudio",
+        "-logFile",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-attendance-continue.log"
+      ],
+      "status": "passed",
+      "changed_input": "Existing explicit CollectOnly entry point continues the saved current state after the initial raycast failure; no binary/source/assertion change.",
+      "binary_sha256": "53234842e769e2481cf78ecaa8676fde1ccde8922bfc84f74e620f8239be409b",
+      "exit": 0,
+      "elapsed_seconds": 80.844220417,
+      "finished_utc": "2026-10-13T23:01:28.656026+00:00",
+      "captures": 69,
+      "initial_marker": true,
+      "art_marker": true
+    },
+    "resume": {
+      "started_utc": "2026-10-13T23:03:01.518004+00:00",
+      "command": [
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/native/HELLSCRIPT.app/Contents/MacOS/HELLSCRIPT",
+        "-hellscriptAttendanceSmoke",
+        "-hellscriptAttendanceResume",
+        "-hellscriptSavePath",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-save",
+        "-hellscriptScreenshots",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens",
+        "-screen-fullscreen",
+        "0",
+        "-screen-width",
+        "1440",
+        "-screen-height",
+        "810",
+        "-noaudio",
+        "-logFile",
+        "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-attendance-resume.log"
+      ],
+      "status": "passed",
+      "binary_sha256": "53234842e769e2481cf78ecaa8676fde1ccde8922bfc84f74e620f8239be409b",
+      "exit": 0,
+      "elapsed_seconds": 6.571280542,
+      "finished_utc": "2026-10-13T23:03:08.089678+00:00",
+      "resume_marker": true
+    },
+    "continued_checks": "PASS: 1066 eligible collect buttons with visible bounds and unobscured raycast targets, 1596 claimability-specific green light/border checks, 1368 reward sprite checks and 1596 claimed-seal checks across 78 viewport/language/scale page checks, the altar backdrop on every page, and 1596 day tiles inside the unscrolled body at 100% reading scale. Gold, random cores and legendary chests use their dedicated alpha sprites; existing coins and gems are preserved.",
+    "continued_actions": "PASS: login order, individual and atomic bulk claims, failed bulk save and retry, independent hide-today checkboxes, same-day suppression and manual reopen, midnight rollover, weekly and full monthly rewards, legendary box opening, battle pause restoration, automatic town heartbeat with preserved page/scroll, 104 raycast-verified clicks, 0 uGUI drag gestures, 78 viewport/language/scale page checks. Isolated native macOS player; physical mobile not tested.",
+    "resume_result": "PASS: fresh process restored account progress, all reward balances, opened legendary and both device popup preferences. Manual event button bypassed suppression.",
+    "captures": 69,
+    "requested_viewports": [
+      [
+        440,
+        956
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1440,
+        810
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1680,
+        720
+      ]
+    ],
+    "extra_harness_viewport": [
+      640,
+      360
+    ],
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "default_text_size": true,
+    "save_path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-save",
+    "readback": {
+      "weekly": {
+        "period": 20724,
+        "earned": 1,
+        "claimed": 0
+      },
+      "monthly": {
+        "period": 20697,
+        "earned": 28,
+        "claimed": 268435455
+      },
+      "premium": 990,
+      "gold": 110000,
+      "gem_count": 110,
+      "core_count": 55,
+      "unopened_attendance_chests": 5,
+      "opened_attendance_items": 1,
+      "save_sha256": "9c74f6e9ffab541f8347b279752c82718a4bbbe097ea349e5fd5e20efca03256"
+    }
+  },
+  "initial_failure_and_limits": {
+    "initial_error": "Collect button obscured: Weekly day 4 (empty raycast hits), RuntimeAttendanceSmoke.Geometry line127 called from Start line234",
+    "initial_exit": 1,
+    "initial_captures": 25,
+    "continuation": "Existing CollectOnly mode on the same binary and saved state passed the same collect-button geometry assertions and all remaining matrix/transactions, followed by fresh-process resume. No source/assertion changes, no excluded tests.",
+    "root_cause": "Unconfirmed; a repaint/input timing boundary is an inference. A clean complete all-in-one run is not claimed. Preserve as harness follow-up risk before expansion.",
+    "physical_mobile": "not tested",
+    "full_editmode": "not rerun; final integration owner retains the established final-suite requirement",
+    "web_builds": 0,
+    "public_deployments": 0
+  },
+  "proofs": [
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/before/weekly-ko.png",
+      "sha256": "57550b005304ce134fe807cbc4c07bf5a091c95c7d29e63eaec73d1f0da2a22d"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/after/editor-selected-1893x1637-ko.png",
+      "sha256": "2ebf3a99f3ac8e1c345399212dbdb7ca41b0e088c9d5d92c1f48fd97034bed0a"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens/weekly-ready-440x956.png",
+      "sha256": "32c1c261e2c066ea8830ccf47881841fbd4726e402ee52305af1239e4fdc5a7e"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens/monthly-956x440-en-100.png",
+      "sha256": "51504af12244e60a3fc0bf5770c5f70afb1a799de0dbf9ac2326407a81472079"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens/weekly-1680x720-en-100.png",
+      "sha256": "5ba967f36968ed7449e468050234263cc021159b8c2d8f67ea04cc704b993671"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens/weekly-claimed-440x956-ko-100.png",
+      "sha256": "6308cbce865ba8b9d1183f1d9887d083b77bb98e7301a83601bc512d1ae1f4d4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens/pending-monthly-28-1440x900-en.png",
+      "sha256": "24bc71a73d8959a18e92ce4fd90ce8c1a640954f78df6019009a2fc33e2aafbc"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/native-screens/monthly-all-collected.png",
+      "sha256": "a4821579efa991b6f17e2f90a3b91e1a49de2ec4cdf370f1c224593cecebdb61"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/attendance-art-tests-final.json",
+      "sha256": "b49a3fd1eed192b0e4210666c076edc86bec55c8784406a4f1fb136b64ebce28"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/ui-contract-receipt.json",
+      "sha256": "fed8d2f91639c78f8ab21324dbe1f20e811baeae27b7936b3f319257482e5786"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-attendance.json",
+      "sha256": "4a8bee3f294c2ce7dca55d9ce572ded18ee630f0efb834b840001f5d55f51298"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-attendance-continue.json",
+      "sha256": "2eebdfe55782fb119f6a3c6ce24109c30fc3641b237bd67324a4969770fa53c2"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/validation/native-attendance-resume.json",
+      "sha256": "8b0502d0d67badccca5ac2491e88466085e0f855dc1987c70d58df91a9b03a8a"
+    }
+  ],
+  "protected_documents": [
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Docs/Art/Art_Transition_20261014.md",
+      "sha256": "81d868d7c2d018416f8c836ea7397cd81f483f800c228a237b6a51aa1f47de3b",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Docs/Art/Art_Transition_20261014.en.md",
+      "sha256": "5ebd1a3ae6437c755314ca989c26f7e8dba8331a60d44223277453427e41e9a6",
+      "unchanged": true
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Docs/Art/Art_Transition_20261014_Asset_Index.json",
+      "sha256": "21e44b1dcd9f6eb2a11c620caa7a8ced639036240ef90f842b6e6b9b10b49fbd",
+      "unchanged": true
+    }
+  ],
+  "rollback": {
+    "git_ref": "53d6a3e1:Assets/HELLSCRIPT/Resources/Art/Attendance/popup-altar.png",
+    "backup": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/evidence/original/popup-altar.png",
+    "backup_sha256": "05d2b3df863412c16ca55b75dc6f9b4b37c4bd01f891ea569e8456aa409a3f44"
+  },
+  "next_scope": {
+    "first": "One native-alpha attendance reward sprite: reuse approved random-core master for reward-random-core.png, preserving its existing GUID/import contract.",
+    "source": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-13/task-6/output/hellscript-casual-items/attendance_resource/random-core-casual-v01.png",
+    "source_sha256": "3cab5df6c47cee4c5c47f2579874ce1b2f4784bb1ef924240a48c6d0be786b9f",
+    "after_representative": "Existing approved legendary-chest master can follow as a small same-type sprite batch.",
+    "risks": [
+      "alpha border and crop",
+      "icon readability over green claim glow",
+      "retained dark UI and old reward art remain visually mixed",
+      "initial full harness timing failure needs a separate follow-up"
+    ],
+    "status": "await parent coordination; no expansion edits made"
+  },
+  "artifact_closeout": {
+    "record": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/artifact-lifecycle.json",
+    "archived_app": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-5/archive/native-build/HELLSCRIPT.app",
+    "archive_bytes": 1003253811,
+    "review_after": "2026-10-21",
+    "permanent_deletions": 0,
+    "project_clones": 0
+  }
+}

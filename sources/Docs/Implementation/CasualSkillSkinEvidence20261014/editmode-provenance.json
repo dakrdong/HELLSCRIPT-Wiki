@@ -1,0 +1,436 @@
+{
+  "runs": [
+    {
+      "report": "accepted-editmode.xml",
+      "total": 99,
+      "passed": "99",
+      "failed": "0",
+      "start": "2026-10-14 02:37:27Z",
+      "end": "2026-10-14 02:38:27Z"
+    },
+    {
+      "report": "final-rich-wrap-editmode.xml",
+      "total": 64,
+      "passed": "64",
+      "failed": "0",
+      "start": "2026-10-14 03:32:54Z",
+      "end": "2026-10-14 03:33:45Z"
+    }
+  ],
+  "distinctPassed": 102,
+  "reuse": {
+    "accepted-editmode.xml": 38,
+    "final-rich-wrap-editmode.xml": 64
+  },
+  "suiteScope": "Related skill-window tests only; not the full project suite",
+  "tests": {
+    "Hellscript.Tests.SkillTreeD4AnimationTests.ActiveIdleAndReducedMotionTicksAllocateZeroAndReplayReplacesItsSlot": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4AnimationTests.DelayAndThreeAlternatingBreathsRemainIndependentOfCommitTime": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4AnimationTests.KeyframeValuesAndTimingComeFromTheDesignerData": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.AllEffectMeshesAllocateZeroAfterPreparation": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.ArcEndpointsFollowClockwisePolarCoordinatesAndRadii": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.CompiledPaintsAndArrowMeshesAllocateNoManagedMemory": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.EveryHeaderAndButtonSymbolHasARendererAndAZeroGcMesh": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.HexVerticesMatchTheIndependentDesignPolygon": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.IconCroppingKeepsUvsInSourceAndAllocatesNoMemory(Rounded)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.IconCroppingKeepsUvsInSourceAndAllocatesNoMemory(Hex)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.IconCroppingKeepsUvsInSourceAndAllocatesNoMemory(Circle)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.RankArcsAndAllSixLineStatesAllocateNoManagedMemory": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.ShapePopulationAllocatesNoManagedMemory(Rounded)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.ShapePopulationAllocatesNoManagedMemory(Hex)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.ShapePopulationAllocatesNoManagedMemory(Circle)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4GraphicsTests.ToneShaderSupportsStencilClipBlurAndRadialMask": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.ActiveWindowEffectsAllocateZeroAfterPreparation": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.AllRecordedTranscriptsReplayThroughPointerButtonCallbacks(\"Warrior\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.AllRecordedTranscriptsReplayThroughPointerButtonCallbacks(\"Warrior\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.AllRecordedTranscriptsReplayThroughPointerButtonCallbacks(\"Ranger\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.AllRecordedTranscriptsReplayThroughPointerButtonCallbacks(\"Ranger\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.AllRecordedTranscriptsReplayThroughPointerButtonCallbacks(\"Mage\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.AllRecordedTranscriptsReplayThroughPointerButtonCallbacks(\"Mage\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.FailedHostCommitRestoresAllocationViewEffectsAndPoints": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.IdenticalRepaintKeepsEveryTreeViewAndPaintsNoPrimitive": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.PressedVisualKeepsTheSceneHitRectangleFixedAndExitCancelsIt": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.ReusedPanelClearsOldReasonsAndPlacesArtworkAboveItsRing": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.UnchangedWindowTickAllocatesZeroAndDoesNotRebuild": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4InputTests.WarmClickReportsAllocationsWithoutReconstructingExistingViews": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4LookTests.AllGoldenPrimitiveLookNamesFollowTheirSemanticStates": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4LookTests.EveryPanelPartNameMatchesAllDesignerAllocationScenarios": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4LookTests.LookDataRetainsEveryStyleAndExactPaletteValues": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.ActualFontMeasurementsMatchTheExistingLegacyTextMeasurement": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.AllThirtyCardNamesFitTheActualFontWithoutClipping(\"landscape\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.AllThirtyCardNamesFitTheActualFontWithoutClipping(\"portrait\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.AllThirtyCardNamesFitTheActualFontWithoutClipping(\"pc\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.AllThirtyCardNamesFitTheActualFontWithoutClipping(\"landscape\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.AllThirtyCardNamesFitTheActualFontWithoutClipping(\"portrait\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.AllThirtyCardNamesFitTheActualFontWithoutClipping(\"pc\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(956,440,True,\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(440,956,True,\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(2340,1080,True,\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(1080,2340,True,\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(1440,810,False,\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(956,440,True,\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(440,956,True,\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(2340,1080,True,\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(1080,2340,True,\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.DescriptionAndModifierFlowFitsAtAllFiveAcceptanceSizes(1440,810,False,\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveAndModifierDescriptionFitsItsReservedSlot(\"landscape\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveAndModifierDescriptionFitsItsReservedSlot(\"portrait\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveAndModifierDescriptionFitsItsReservedSlot(\"pc\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveAndModifierDescriptionFitsItsReservedSlot(\"landscape\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveAndModifierDescriptionFitsItsReservedSlot(\"portrait\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveAndModifierDescriptionFitsItsReservedSlot(\"pc\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveStatRowStaysOnOneLine(\"landscape\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveStatRowStaysOnOneLine(\"portrait\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveStatRowStaysOnOneLine(\"pc\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveStatRowStaysOnOneLine(\"landscape\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveStatRowStaysOnOneLine(\"portrait\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryActiveStatRowStaysOnOneLine(\"pc\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryPassiveAndLinkedNameFitsItsReservedSlot(\"landscape\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryPassiveAndLinkedNameFitsItsReservedSlot(\"portrait\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryPassiveAndLinkedNameFitsItsReservedSlot(\"pc\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryPassiveAndLinkedNameFitsItsReservedSlot(\"landscape\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryPassiveAndLinkedNameFitsItsReservedSlot(\"portrait\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.EveryPassiveAndLinkedNameFitsItsReservedSlot(\"pc\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.SixPanelStatesMatchTheMeasuredBrowserFlow(\"landscape\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.SixPanelStatesMatchTheMeasuredBrowserFlow(\"portrait\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.SixPanelStatesMatchTheMeasuredBrowserFlow(\"pc\",\"ko\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.SixPanelStatesMatchTheMeasuredBrowserFlow(\"landscape\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.SixPanelStatesMatchTheMeasuredBrowserFlow(\"portrait\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.SixPanelStatesMatchTheMeasuredBrowserFlow(\"pc\",\"en\")": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.WrappedGlyphBaselinesKeepRequestedSpacingAtEveryCanvasScale(0.5f)": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.WrappedGlyphBaselinesKeepRequestedSpacingAtEveryCanvasScale(0.625f)": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.WrappedGlyphBaselinesKeepRequestedSpacingAtEveryCanvasScale(1.0f)": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4ScreenCoreTests.All60InteractionTranscriptsMatchGoldenStatesAndEffects": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4ScreenCoreTests.LayoutScenariosMatchAllGoldenHashes": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4ScreenCoreTests.LayoutsMatchEveryGoldenPrimitive": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4ScreenCoreTests.ViewModelsMatchAllGoldenTextAndStates": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4WindowTests.RepaintReusesTheSameNodesAndSelectionStaysPerHero": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4WindowTests.SelectedCardInnerBoxesMatchTheMeasuredAnatomy(\"portrait\",52,16.5d,66,15,10,7,34)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4WindowTests.SelectedCardInnerBoxesMatchTheMeasuredAnatomy(\"landscape\",42,12.5d,62,13,10,6,26)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4WindowTests.ShellAndAllSelectableHitRectsMatchTheGoldenScene(\"portrait\")": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4WindowTests.ShellAndAllSelectableHitRectsMatchTheGoldenScene(\"landscape\")": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4WindowTests.ShellAndAllSelectableHitRectsMatchTheGoldenScene(\"pc\")": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.ChildWindowKeepsItsFocusAndAppliesThePendingStateAfterClosing": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.CommitDuringPressWaitsForReleaseWithoutCancellingTheClick": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.EquipmentKeyCapturesListsProtectionAndFrozenSlotInputsButIgnoresSaveMetadata": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.FailedSaveAndDuplicateTransactionNeitherReplaceControlsNorGrantAgain": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.FocusedTextDraftSurvivesACommitUntilEditingEnds": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.LiveTutorialTimeKeepsEquipmentControlsButArmorProtectionStillRefreshes": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.ManualActionRepaintConsumesItsAlreadyDisplayedCommit": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.MeaningfulRefreshRestoresTheSameNamedFocusAndModality(False)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.MeaningfulRefreshRestoresTheSameNamedFocusAndModality(True)": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.OwnerReadinessCoalescesAllPendingCommitsUntilReady": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.PlainSaveIsNotFilteredWhenTheDisplayedBalanceReallyChanges": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.RepeatingButtonConfigurationDoesNotRestartAnExistingTransition": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.StoreViewBindingTests.UnrelatedTransactionsKeepButtonsFocusAndTheirClickListener": {
+      "result": "Passed",
+      "report": "accepted-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.MultiWordRichEmphasisDoesNotAddSpuriousLineBreaks(0.5f)": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.MultiWordRichEmphasisDoesNotAddSpuriousLineBreaks(0.625f)": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    },
+    "Hellscript.Tests.SkillTreeD4PanelTests.MultiWordRichEmphasisDoesNotAddSpuriousLineBreaks(1.0f)": {
+      "result": "Passed",
+      "report": "final-rich-wrap-editmode.xml"
+    }
+  }
+}

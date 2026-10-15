@@ -5,28 +5,24 @@ namespace Hellscript
     // Artwork follows the original equipment definition, independently of an imprinted power.
     public static class EquipmentArt
     {
-        public static Texture2D ForItem(Item item)
+        public static Texture2D ForItem(Item item,EquipmentArtProvider provider=null)
         {
             if(item==null)return null;
-            return ForDefinition(item.special)??ForBase(ItemCatalog.Base(item).id);
+            return provider?.ForItem(item)??ForDefinition(item.special)??ForBase(ItemCatalog.Base(item).id);
         }
         public static Texture2D ForBase(string id)
         {
-            // The legacy iron shield shares the ironbound round shield silhouette.
-            return Resources.Load<Texture2D>("Art/EquipmentVariants/"+(id=="B28"?"B32":id));
+            return CasualEquipmentArt.Provider.ForBase(id);
         }
         public static Texture2D ForDefinition(string id)
         {
-            if(string.IsNullOrEmpty(id))return null;
-            var definition=ItemCatalog.Unique(id);if(definition==null)return null;
-            string folder=string.IsNullOrEmpty(definition.setId)?"ClassLegendaryIcons":"ClassSetIcons";
-            return Resources.Load<Texture2D>("Art/"+folder+"/"+definition.id);
+            return CasualEquipmentArt.Provider.ForDefinition(id);
         }
-        public static Texture2D SetEmblem(Item item)
+        public static Texture2D SetEmblem(Item item,EquipmentArtProvider provider=null)
         {
+            var supplied=provider?.SetEmblem(item);if(supplied!=null)return supplied;
             if(string.IsNullOrEmpty(item?.special))return null;
-            string setId=ItemCatalog.Unique(item.special)?.setId;
-            return string.IsNullOrEmpty(setId)?null:Resources.Load<Texture2D>("Art/ClassSetIcons/"+setId);
+            return CasualEquipmentArt.Provider.SetEmblem(item);
         }
     }
 }

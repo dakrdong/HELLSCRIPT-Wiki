@@ -1,0 +1,96 @@
+{
+  "updated_utc": "2026-10-14T08:01:31.743250+00:00",
+  "prior_rift_head": "118371c77908ddfa1cf57097efa7c6c0c9391b0a",
+  "shared_dependency": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "merge_commit": "70f767327ddbfa7f825f5122bb326bf4ffae5186",
+  "authored_source_scope": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.CasualSkin.cs"
+  ],
+  "change": "Removed local diamond text replacement and graphic; original ◆/◇ strings now use shared Noto400 without font size/layout reduction",
+  "common_source_test_font_files_verified": 28,
+  "checks": {
+    "runtime_compile": {
+      "sources": 834,
+      "errors": 0,
+      "warnings": 47,
+      "warning_codes": {
+        "CS0108": 1,
+        "CS0618": 45,
+        "CS0414": 1
+      },
+      "references_read_in_place": 296,
+      "result": "passed"
+    },
+    "ui_contract": {
+      "passed": 15,
+      "result": "passed"
+    },
+    "ui_refresh": {
+      "bindings": 16,
+      "ui_sources": 193,
+      "result": "passed"
+    },
+    "diff_whitespace": "passed",
+    "independent_read_only_review": "no additional blocking finding"
+  },
+  "font_cmap_evidence": [
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-Skill400.ttf",
+      "sha256": "c16631aa0e50c63fd33a52c0b1b980c1fd449a433e134dedf611a0d349166a76",
+      "symbols": "◆◇",
+      "present": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-Skill700.ttf",
+      "sha256": "817b0a77d85b602062d2e912caf72f86716ba692056ddf3e3972de6def2fb2fa",
+      "symbols": "◆◇",
+      "present": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Fonts/CasualSkill/NotoSansKR-Skill900.ttf",
+      "sha256": "695a738acb041f27881cfd3466ef887d8b8163a81d808b07e0d3f7923ffd11f0",
+      "symbols": "◆◇",
+      "present": true
+    }
+  ],
+  "approved_rift_png_sha_matches": 42,
+  "portal_sha256": "788b21ce4e5516262a5267b26f9d2853c8585878563f4531ae3c7b9980cc760e",
+  "equipment": {
+    "provider_inherited": "CasualEquipmentArt.Provider",
+    "entry_screen_has_equipment_consumer": false,
+    "git_tracked_shared_png_count": 359,
+    "sparse_working_tree_shared_png_count": 0,
+    "reason": "No Rift equipment consumer; do not duplicate shared equipment PNGs into screen-local art. Parent validation project supplies the shared resources."
+  },
+  "remaining_local_adapters": [
+    "One purple paid-entry button face: common accent API absent",
+    "Three named neutral RiftRewardList labels: common skin parameter absent"
+  ],
+  "layout_font_size_changes": false,
+  "native_visual_risk": "Noto diamond outline is wider than prior temporary vector; verify KO/EN fatigue legend fitting and locked slot markers at required viewports. Existing fitting algorithm is unchanged; no compensating font reduction.",
+  "artboards": {
+    "reported": 32,
+    "dom_read": 32,
+    "expanded_visual": 1
+  },
+  "unity_queue": {
+    "status": "pending-parent-slot-and-execution-project",
+    "action": "Unity import/compile, related EditMode, muted disposable-save player and visual verification",
+    "external_pid": 30116,
+    "external_observation_utc": "2026-10-14T07:50:00Z",
+    "observation_source": "parent delegation; no process action by this task",
+    "denied": false,
+    "uncertain_outcome": false,
+    "unity_launches": 0
+  },
+  "new_generations": 0,
+  "legacy_assets_deleted": 0,
+  "review_date": "2026-10-28",
+  "evidence_sha256": {
+    "runtime-compile-receipt.json": "ba142a2f6218eb8f1b0c09d0bd1056062d4d3c35af0558469885b68ec239add6",
+    "runtime-compile.txt": "181b2e96ac502d35e7429c75624c1b00bef5750fe22c62995612a566e54991c6",
+    "ui-contract-receipt.json": "1978cebdfbbbffa6909575d426825edfc8d710893c4d5ef1ffa0c5bcff4b707b",
+    "ui-refresh-inventory.json": "cb180beb0c0313f9ffd6b74d9468c577cf1190167c63c1221069d3134a955d0c",
+    "ui-contract.txt": "1abde76849707872d47a42664912072eacac22302a0b174158688108c33db4b6"
+  }
+}

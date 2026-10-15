@@ -1,0 +1,91 @@
+{
+  "updated_utc": "2026-10-14T07:35:52.056315+00:00",
+  "screen": "Rift entry",
+  "branch": "codex/casual-rift-entry-skin",
+  "prior_rift_head": "8c63d13c9638cf963a54066d6293bbe8dd8553d6",
+  "shared_dependency": "cdb9c140fbf8b778bd3c0bbc0fbcc68a5d9e3fa8",
+  "merge_commit": "2e03272a529bf24336042608f8740e30f40ea7f3",
+  "source_snapshot": "runtime-compile-receipt.json contains hashes of the final 831 Runtime sources; this evidence is committed together with the migration",
+  "authored_source_scope": [
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs",
+    "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.CasualSkin.cs"
+  ],
+  "shared_source_and_tests_modified": false,
+  "checks": {
+    "roslyn_runtime": {
+      "result": "passed",
+      "errors": 0,
+      "warnings": 47,
+      "warning_codes": {
+        "CS0108": 1,
+        "CS0618": 45,
+        "CS0414": 1
+      },
+      "reference_assemblies_read_in_place": 296,
+      "source_hashes_verified": 831,
+      "unity_process_started": false
+    },
+    "ui_contract": {
+      "result": "passed",
+      "tests_passed": 15,
+      "receipt": "ui-contract-receipt.json"
+    },
+    "refresh_inventory": {
+      "result": "passed",
+      "guarded_bindings": 16,
+      "ui_sources": 192
+    },
+    "diff_whitespace": "passed"
+  },
+  "assets": {
+    "approved_png_hashes_matched": 42,
+    "portal_sha256": "788b21ce4e5516262a5267b26f9d2853c8585878563f4531ae3c7b9980cc760e",
+    "content_changes": 0,
+    "legacy_assets_deleted": 0
+  },
+  "findings_resolved": [
+    "Matched clip and frame pivots to preserve reparented content coordinates",
+    "Included frame border and shadow in rounded clip inset",
+    "Re-included screen art in sparse checkout after the post-merge asset verification found missing working-tree files"
+  ],
+  "known_api_gaps": [
+    "Paid-action accent parameter: retain one local RiftEntryPaidButtonGraphic",
+    "RiftRewardList skin parameter: adapt three named neutral text labels locally"
+  ],
+  "validation_pending": {
+    "status": "pending-parent-slot-and-execution-project",
+    "action": "Unity import/compile, related EditMode, muted disposable-save player and visual tests",
+    "reason": "Parent reported external Unity PID30116; no slot allocated",
+    "denied": false,
+    "uncertain_outcome": false,
+    "unity_launches": 0
+  },
+  "artboards": {
+    "user_reported": 32,
+    "dom_read": 32,
+    "expanded_visual": 1
+  },
+  "library": {
+    "reference": "libfile_f1f61ec6c4a48191a6f5659566bc34da",
+    "portal": "libfile_c60dd4966560819186473c6a951e9fcb",
+    "runtime_after_capture": null
+  },
+  "local_only_compiler_artifacts": "task-18/evidence/static-common-api contains rsp/dll/ref.dll/pdb; binaries are excluded from the source commit",
+  "review_date": "2026-10-28",
+  "evidence_sha256": {
+    "runtime-compile-receipt.json": "60eef79f898646d3d36d051b6f9bdcf02024e9b15cfc1a1b3a47453b067e28d5",
+    "runtime-compile.txt": "053535b92f2ed8c137ca9a29060a5c572a6f74e27ac9ce741247e03d568a2f56",
+    "ui-contract-receipt.json": "0cee97af29427a2ddc982c7843d8cc27c8f919e2fb5b390ff5d989f2eba4ec21",
+    "ui-refresh-inventory.json": "2b2ec20974b17385f7d1e02e20a5480e9d5c60b4816e1bee056e6130c0f1af0d",
+    "ui-contract.txt": "0793e7b0faf30b6bb4453c6c01753a722e5ac9cb21ab2f90a46d2d597de6ddbb"
+  },
+  "independent_read_only_review": {
+    "result": "passed",
+    "runtime_hashes": 831,
+    "ui_contract_input_hashes": 524,
+    "common_source_test_meta_exact_matches": 17,
+    "contract_regressions_found": 0,
+    "unity_launches": 0
+  }
+}

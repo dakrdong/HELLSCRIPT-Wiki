@@ -15,9 +15,15 @@ namespace Hellscript
     {
         GameController game;string output,savePath;long now;int clicks,layouts,drags;uint rng=19007;
         ContentWindowView Panel=>game.UI.AttendancePanel;AccountSave A=>game.Store.Data;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] static void Mute()
+        {
+            if(!Debug.isDebugBuild||!Environment.GetCommandLineArgs().Contains("-hellscriptDailyQuestSmoke"))return;
+            AudioListener.volume=0;AudioListener.pause=true;
+        }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)] static void Boot()
         {
             if(!Debug.isDebugBuild||!Environment.GetCommandLineArgs().Contains("-hellscriptDailyQuestSmoke"))return;
+            AudioListener.volume=0;AudioListener.pause=true;
             Application.runInBackground=true;Application.logMessageReceived+=(m,s,t)=>{if(t==LogType.Exception)Application.Quit(1);};
             new GameObject("Daily quest acceptance").AddComponent<RuntimeDailyQuestSmoke>();
         }
@@ -35,7 +41,13 @@ namespace Hellscript
         IEnumerator Resize(int w,int h)
         {Screen.SetResolution(w,h,FullScreenMode.Windowed);float until=Time.realtimeSinceStartup+8;while((Screen.width!=w||Screen.height!=h)&&Time.realtimeSinceStartup<until)yield return null;Require(Screen.width==w&&Screen.height==h,"Native resolution mismatch");yield return new WaitForSecondsRealtime(.3f);}
         IEnumerator Capture(string name)
-        {yield return new WaitForEndOfFrame();var image=ScreenCapture.CaptureScreenshotAsTexture();File.WriteAllBytes(Path.Combine(output,name+".png"),image.EncodeToPNG());Destroy(image);}
+        {
+            yield return new WaitForEndOfFrame();var image=ScreenCapture.CaptureScreenshotAsTexture();
+            Require(image.width==Screen.width&&image.height==Screen.height,"Daily capture/render pixel mismatch");
+            File.WriteAllBytes(Path.Combine(output,name+".png"),image.EncodeToPNG());
+            File.AppendAllText(Path.Combine(output,"capture-sizes.txt"),$"{name} render={Screen.width}x{Screen.height} capture={image.width}x{image.height} canvasScale={Panel.GetComponent<Canvas>().scaleFactor} safe={UiSafeArea.Current}\n");
+            Destroy(image);
+        }
         static void Inside(Rect child,Rect parent,string message)
         {Require(child.xMin>=parent.xMin-1&&child.xMax<=parent.xMax+1&&child.yMin>=parent.yMin-1&&child.yMax<=parent.yMax+1,message);}
         void Hit(Button b)
@@ -47,6 +59,7 @@ namespace Hellscript
         void Geometry()
         {
             Canvas.ForceUpdateCanvases();var frame=Bounds(Panel.Frame);var viewport=Bounds(Panel.Scroll.viewport);
+            Require(Panel.Skin==UiSkin.Casual&&Panel.Frame.GetComponent<UiWindowFrame>().Skin==Panel.Skin,"Daily shell lost casual skin");
             Inside(frame,UiSafeArea.Current,"Daily frame outside safe area");
             Require(!Panel.Scroll.enabled&&!Panel.Body.GetComponent<VerticalLayoutGroup>().enabled&&!Panel.Body.GetComponent<ContentSizeFitter>().enabled,"Daily automatic scroll/layout is enabled");
             Require(Panel.Body.anchoredPosition==Vector2.zero,"Daily body moved");
@@ -60,15 +73,27 @@ namespace Hellscript
             }
             foreach(var b in Panel.GetComponentsInChildren<Button>())
             {
+                Require(b is UiButton skinned&&skinned.Chrome==(b.name=="content-close"?UiButtonChrome.CasualClose:UiButtonChrome.Casual),"Daily button lost casual chrome: "+b.name);
                 Inside(Bounds((RectTransform)b.transform),frame,"Daily action outside frame: "+b.name);
                 if(b.transform.IsChildOf(Panel.Body))Inside(Bounds((RectTransform)b.transform),viewport,"Masked daily claim: "+b.name);
                 Hit(b);
+            }
+            foreach(var image in Panel.Body.GetComponentsInChildren<Image>())
+            {
+                if(image.name.EndsWith(" fill")&&image.name.StartsWith("Daily ")&&image.name!="Daily panel fill")
+                    Inside(Bounds(image.rectTransform),Bounds((RectTransform)image.transform.parent),"Daily progress fill overflow: "+image.name);
+                if(image.name=="Abyssal Coin")
+                {
+                    Require(image.sprite==Resources.Load<Sprite>(DailyQuestCasualSkin.CoinResource),"Daily coin does not use approved screen artwork");
+                    Require(image.preserveAspect&&!image.raycastTarget,"Daily coin changed aspect/input contract");
+                }
             }
             var cards=new List<Rect>();
             foreach(var q in A.dailyQuests.quests)
             {
                 var b=Find("daily-quest-claim-"+q.id);Require(b!=null,"Missing daily claim "+q.id);
                 Require(b.interactable==(!q.claimed&&q.progress>=q.target&&A.dailyQuests.day==DailyQuests.Day(now)),"Incorrect claim state "+q.id);
+                Require(((UiButton)b).Role==(b.interactable?UiButtonRole.Primary:UiButtonRole.Action)&&((UiButton)b).SoundCue=="ui.click","Daily claim chrome changed state/audio semantics "+q.id);
                 var card=Bounds((RectTransform)b.transform.parent);Inside(card,viewport,"Masked daily card "+q.id);
                 Require(!cards.Any(r=>r.Overlaps(card)),"Daily cards overlap");cards.Add(card);
                 var labels=b.transform.parent.GetComponentsInChildren<Text>();
@@ -156,20 +181,22 @@ namespace Hellscript
             string complete=JsonUtility.ToJson(A.dailyQuests);
             string blocked=Path.Combine(savePath,"hellscript-local-v1.json.tmp");
             Directory.CreateDirectory(blocked);
-            foreach(var size in new[]{(440,956),(956,440),(1440,810),(1440,900),(1680,720),(640,360)})foreach(string language in new[]{"ko","en"})
+            foreach(var size in RuntimeCasualUiSmokeSupport.Viewports(new[]{(440,956),(956,440),(1440,810),(1440,900),(1680,720),(640,360),(2868,1320)}))foreach(string language in new[]{"ko","en"})
             {
                 yield return Resize(size.Item1,size.Item2);game.ApplyLanguage(language);
                 foreach(bool inset in new[]{false,true})
                 {
-                    if(inset)UiSafeArea.Simulate(size.Item1>size.Item2?32:18,20,18,24);else UiSafeArea.StopSimulating();
+                    // 2868x1320 assumes a 956x440 logical display at DPR3; this is Mac simulation, not iOS validation.
+                    if(inset&&size.Item1==2868)UiSafeArea.Simulate(102,54,102,0);
+                    else if(inset)UiSafeArea.Simulate(size.Item1>size.Item2?32:18,20,18,24);else UiSafeArea.StopSimulating();
                     foreach(string state in new[]{"start","mixed","ready","claimed","empty"})
                     {
                         LayoutFixture(state,complete);yield return new WaitForEndOfFrame();
                         string unchanged=JsonUtility.ToJson(A.dailyQuests);int coins=A.premium;
                         Geometry();yield return Drag();
                         Require(JsonUtility.ToJson(A.dailyQuests)==unchanged&&A.premium==coins,"Layout/drag changed daily account state");
-                        File.AppendAllText(Path.Combine(output,"layouts.txt"),$"PASS {size.Item1}x{size.Item2} {language} safe={inset} state={state} cards={A.dailyQuests.quests.Count} claimed={coins}\n");
-                        if(!inset&&state=="mixed")yield return Capture("daily-"+size.Item1+"x"+size.Item2+"-"+language);
+                        File.AppendAllText(Path.Combine(output,"layouts.txt"),$"PASS requested={size.Item1}x{size.Item2} render={Screen.width}x{Screen.height} {language} safe={inset} area={UiSafeArea.Current} canvasScale={Panel.GetComponent<Canvas>().scaleFactor} state={state} cards={A.dailyQuests.quests.Count} claimed={coins} dprAssumption={(size.Item1==2868?3:1)} physicalIOS=false\n");
+                        if(state=="mixed"&&(!inset||size.Item1==2868))yield return Capture("daily-"+size.Item1+"x"+size.Item2+"-"+language+(inset?"-safe":""));
                     }
                 }
             }

@@ -77,7 +77,7 @@ namespace Hellscript
             {a.Hero.potions.Activate();foreach(var def in PotionCatalog.All)a.Hero.potions.Set(def.id,12);a.premium=4321;a.enhancementStones=12345;for(int i=0;i<a.cores.Length;i++)a.cores[i]=i*13;
                 a.Hero.highestClear=ContentUnlocks.Rules.features.Single(f=>f.id==ContentUnlocks.CoreCraft).stage;ContentUnlocks.Reconcile(a);return true;}),game.Store.Error);
             int checks=0;
-            foreach(var size in new[]{(440,956),(956,440),(1440,810),(1440,900),(1680,720)})
+            foreach(var size in RuntimeCasualUiSmokeSupport.Viewports(new[]{(440,956),(956,440),(1440,810),(1440,900),(1680,720)}))
             foreach(string language in new[]{"ko","en"})
 
             { const int percent=100;

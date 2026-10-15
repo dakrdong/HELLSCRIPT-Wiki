@@ -1,0 +1,118 @@
+{
+  "kind": "Roslyn static source compilation only",
+  "shared_api_commit": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "compiler": {
+    "path": "/usr/local/share/dotnet/sdk/10.0.401/Roslyn/bincore/csc.dll",
+    "bytes": 152360,
+    "sha256": "99148255a90b5a6a0a37b7be3a51e8753bcdbb52f3a7785eb8bb227e99e34414"
+  },
+  "sdk": "10.0.401",
+  "reference_origin": "Existing shared-owner response file and Unity reference DLLs read-only; no libraries or caches copied",
+  "shared_response_origin": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin/Builds/Validation/CasualSkillSkin/dotnet/common-api",
+  "test_scope": "PotionQuickCasualSkinTests only; all 14 authored cases compile but were not executed",
+  "unity_launched": false,
+  "unity_import_validated": false,
+  "editmode_tests_executed": false,
+  "player_launched": false,
+  "owned_inputs": [
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/potion-skin/Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionQuick.cs",
+      "bytes": 16141,
+      "sha256": "05c6165242186a45b8cf35b88bede6cb5be97dfd01c41e19e136ed56a3efd6d4"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/potion-skin/Assets/HELLSCRIPT/Runtime/Presentation/PotionQuickSkin.cs",
+      "bytes": 6440,
+      "sha256": "5cd8b7df642890609bcf7393607ee1b86983f6f1e23bda49882e117f99b79d54"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/potion-skin/Assets/HELLSCRIPT/Runtime/Presentation/PotionQuickFill.cs",
+      "bytes": 717,
+      "sha256": "bcd4c2c0357f0552815c95108ee127f9589c2c020c2fcef1cdb183dcbad562a8"
+    },
+    {
+      "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/potion-skin/Assets/HELLSCRIPT/Tests/Editor/PotionQuickCasualSkinTests.cs",
+      "bytes": 15146,
+      "sha256": "1342ae61d18fe101b265ae7150635ab26a366a5a139d865935944d38811fdde9"
+    }
+  ],
+  "results": [
+    {
+      "assembly": "Runtime",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 47,
+      "screen_warnings": [],
+      "command": "/usr/local/share/dotnet/dotnet /usr/local/share/dotnet/sdk/10.0.401/Roslyn/bincore/csc.dll @static-compile/common-followup-0ccba80/Runtime.rsp > static-compile/common-followup-0ccba80/runtime-compile.log 2>&1",
+      "working_directory": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11",
+      "response_file": {
+        "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/Runtime.rsp",
+        "bytes": 159218,
+        "sha256": "532d1f7044719ba7efd7aaea9385228b2f98762686e9d5c308cfdc3725c7fd2d"
+      },
+      "input_manifest": {
+        "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/runtime-inputs.json",
+        "bytes": 303400,
+        "sha256": "050232a227bb905a16234e682b3da6c4bf5065fc3b881b6a2baf61981eb2f2ed"
+      },
+      "source_count": 835,
+      "reference_count": 296,
+      "log": {
+        "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/runtime-compile.log",
+        "bytes": 15875,
+        "sha256": "1789ed4b47a64719f0086452583b022d85b7390cfeb210482819d27fb526efa3"
+      },
+      "outputs": [
+        {
+          "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/Hellscript.Runtime.dll",
+          "bytes": 6652928,
+          "sha256": "3664263b1694f4602550f8575028befc2dc0dbd7c099149a1b67db7561f8f360"
+        },
+        {
+          "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/Hellscript.Runtime.ref.dll",
+          "bytes": 876544,
+          "sha256": "5c083bd04f2bbbd06ff650f40fc05731e30cf79c547c0a6b7c437145cce22e61"
+        }
+      ]
+    },
+    {
+      "assembly": "Tests",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0,
+      "screen_warnings": [],
+      "command": "/usr/local/share/dotnet/dotnet /usr/local/share/dotnet/sdk/10.0.401/Roslyn/bincore/csc.dll @static-compile/common-followup-0ccba80/Tests.rsp > static-compile/common-followup-0ccba80/tests-compile.log 2>&1",
+      "working_directory": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11",
+      "response_file": {
+        "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/Tests.rsp",
+        "bytes": 50930,
+        "sha256": "f728d5f1a546ed0bc9bef920f4ec57d3b9827e22f25225072809100d55747701"
+      },
+      "input_manifest": {
+        "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/tests-inputs.json",
+        "bytes": 86234,
+        "sha256": "3dfacb1b5e7b95834934a996370e1f7ea206109b59d8981b0d3c235bc6d51d4d"
+      },
+      "source_count": 1,
+      "reference_count": 308,
+      "log": {
+        "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/tests-compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "outputs": [
+        {
+          "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/Hellscript.Tests.dll",
+          "bytes": 18944,
+          "sha256": "f1b963bfebc6987b051b73ab9af3477fcd031f724deb0dd104cb74e8fd9a4693"
+        },
+        {
+          "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-11/static-compile/common-followup-0ccba80/Hellscript.Tests.ref.dll",
+          "bytes": 6144,
+          "sha256": "9d96451850dd62fff92b1d2e650335e52cb80c525ec8c2620cf342cda5e5bedc"
+        }
+      ]
+    }
+  ],
+  "runtime_source_completeness": "835 Runtime .cs inputs, including CasualEquipmentArt.cs, GameUI.SharedCombatSkin.cs and WorldView.EdictSkin.cs; no Unity process"
+}

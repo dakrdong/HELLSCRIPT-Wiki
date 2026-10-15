@@ -14,9 +14,9 @@ namespace Hellscript
             float left=w-12-(size*3+gap*2+4+cog),y=weapon.center.y-size/2;
             for(int i=0;i<PotionLoadout.SlotCount;i++)
             {
-                int index=i;var slot=slots[i];var root=EquipmentSlotView.Create(parent,null,left+i*(size+gap),y,size,font);
+                int index=i;var slot=slots[i];var root=EquipmentSlotView.Create(parent,null,left+i*(size+gap),y,size,BodyFont,skin:Skin);
                 root.name="inventory-potion-"+i;var target=root.gameObject.AddComponent<InventoryDropTarget>();target.window=this;target.slot=-3;
-                var button=root.gameObject.AddComponent<UiButton>();button.targetGraphic=root.GetComponent<StorageSurface>();button.Configure(UiButtonRole.Item);button.onClick.AddListener(()=>ShowPotionPicker(index));
+                var button=root.gameObject.AddComponent<UiButton>();button.targetGraphic=root.GetComponent<StorageSurface>();button.Configure(UiButtonRole.Item);Skin.ApplyChrome(button);button.onClick.AddListener(()=>ShowPotionPicker(index));
                 if(!string.IsNullOrEmpty(slot.id))
                 {
                     var def=PotionCatalog.Get(slot.id);var art=PotionArt.Draw(root,def,3,3,size-6);art.color=Hero.potions.Count(slot.id)>0?Color.white:new Color(1,1,1,.35f);
@@ -32,7 +32,7 @@ namespace Hellscript
         public void ShowPotionSettings()
         {
             Dismiss();dialogKind="potion";
-            var shade=Btn(overlays,"",0,0,width,height,Dismiss);shade.name="potion-settings-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
+            var shade=Btn(overlays,"",0,0,width,height,Dismiss,casual:false);shade.name="potion-settings-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
             float w=Mathf.Min(352,width-16),h=310;
             var anchor=(RectTransform)Find("inventory-potion-settings").transform;var corners=new Vector3[4];anchor.GetWorldCorners(corners);
             var point=frame.InverseTransformPoint((corners[0]+corners[3])*.5f);float ax=point.x-frame.rect.xMin,ay=frame.rect.yMax-point.y;
@@ -40,7 +40,7 @@ namespace Hellscript
             dialog=Panel(overlays,"Potion settings bubble",UiTheme.SelectedHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);Place(dialog,Mathf.Clamp(ax-w/2,8,width-w-8),top,w,h);
             var tail=Panel(dialog,"Speech bubble tail",UiTheme.SelectedHex,UiTheme.SelectedHex,UiTheme.GoldDeepHex);float tx=Mathf.Clamp(ax-dialog.anchoredPosition.x,12,w-12);
             Place(tail,tx-4,below?-4:h-4,8,8);tail.localRotation=Quaternion.Euler(0,0,45);tail.SetAsFirstSibling();tail.GetComponent<Image>().raycastTarget=false;
-            Txt(dialog,"물약 사용 순서",12,2,w-53,25,12,gold);
+            Txt(dialog,"물약 사용 순서",12,2,w-53,25,12,gold,heading:true);
             Btn(dialog,"×",w-32,3,26,25,Dismiss,false,17).name="potion-settings-close";
             Txt(dialog,"지정 물약을 모두 소진 했을 시",12,30,w-24,39,12,gold);
             for(int n=0;n<PotionLoadout.FallbackLabels.Length;n++)
@@ -59,8 +59,8 @@ namespace Hellscript
             for(int n=0;n<PotionLoadout.FallbackLabels.Length;n++)
             {
                 var row=Find("potion-fallback-"+n);bool chosen=n==(int)choice;UiTheme.Choice(row,chosen,false);
-                foreach(var text in row.GetComponentsInChildren<Text>())text.color=chosen?gold:pale;
-                var check=row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?UiTheme.GoldHex:UiTheme.PanelHex,chosen?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);
+                foreach(var text in row.GetComponentsInChildren<Text>())text.color=LabelInk(row.transform,chosen?gold:pale);
+                var check=row.transform.Find("Selection checkbox");PaintCheck(check,chosen);
                 if(check.childCount==0&&chosen)Glyph(check,"check",1,1,13,ink);else if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);
             }
         }

@@ -29,7 +29,7 @@ namespace Hellscript.Runes
              case "B04":case "B05":return "bow";case "B06":return "crossbow";
              case "B07":case "B08":case "B09":case "B25":return "staff";default:return null;}
         }
-        public static int UnlockedGrade(AccountSave account)=>Math.Min(6,account.heroes.Max(h=>h.highestClear)/5);
+        public static int UnlockedGrade(AccountSave account)=>Math.Min(6,HeroSlots.Created(account).Select(h=>h.highestClear).DefaultIfEmpty(0).Max()/5);
         // Retained only for legacy save migration and historical verification tools.
         public static int ClearForGrade(int grade){RuneColors.CheckGrade(grade);return grade*5;}
         public const string ElitePrefix="Elite:";

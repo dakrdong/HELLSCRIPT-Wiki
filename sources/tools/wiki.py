@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
+import wiki_resources_current
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 
@@ -333,7 +334,7 @@ def build_resources(databases):
     from wiki_attendance import resource_rows as attendance_resource_rows
     rows=[]
     uses={'Sanctuary.png':'성소·결과 화면의 배경','SkillAtlas.png':'액티브 18개·직업 3개와 기존 장비용 3셀',
-          'EquipmentAtlas.png':'B01–B24 장비 목록·상세 아이콘','RiftStone.png':'균열 바닥 재질'}
+          'EquipmentAtlas.png':'정본 그림이 없는 장비의 공통 대체 아틀라스 / Shared missing-art fallback','RiftStone.png':'균열 바닥 재질'}
     sizes={}
     for filename in sorted(uses):
         path=ART+filename; raw=(ROOT/path).read_bytes(); INPUTS[path]=digest(raw)
@@ -396,7 +397,7 @@ def build_resources(databases):
         raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         qc=next(row for row in selection_qc if row['asset']==path)
         rows.append(record('asset-selection-'+hero_name.lower(),hero_name+' selection atlas','이미지 원본',
-            '로그인 다음 화면에서 대기 동작과 전투 준비 자세를 보여 주는 투명 캐릭터 아틀라스입니다.',
+            '인벤토리·대장장이·위상·창고의 장비 인형이 사용하는 투명 캐릭터 아틀라스입니다. 선택 무대는 CharacterPlaza 정본을 씁니다. / Shared equipment paper-doll atlas; selection uses CharacterPlaza.',
             {'원본 경로':path,'해상도':'1024 × 1536','프레임 수':6,'색상 모드':'RGBA',
              '완전 투명 픽셀 비율':qc['nativeTransparentFraction'],'SHA-256':digest(raw),
              'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
@@ -480,13 +481,10 @@ def build_resources(databases):
             IMPL+'Button_UX.md',status='임시 사용',image={'file':path.removeprefix(ART)},assetPath=path,
             refs=[source_ref(chest_source),source_ref('Docs/Art/StorageChests/alpha-validation.json'),
                   source_ref('Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs')],related=['button-ux','button-ux.en']))
-    variant_manifest='Docs/Art/EquipmentVariants/manifest.json'
-    variant_art={a['id']:a for a in json.loads(read(variant_manifest))['assets']}
     item_art_manifest='Docs/Art/ItemIcons/manifest.json'
     item_art={a['id']:a for a in json.loads(read(item_art_manifest))['assets']}
-    variant_art.update({key:asset for key,asset in item_art.items() if key.startswith('B')})
     for asset in item_art.values():
-        if asset['id'].startswith('B'):continue
+        if asset['id'].startswith('B') or asset['path'].startswith(wiki_resources_current.RETIRED):continue
         path=asset['path'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         if digest(raw)!=asset['sha256']:raise ValueError('Item art native source mismatch: '+path)
         rows.append(record('item-art-'+asset['id'],asset['name'],'아이템 이미지',
@@ -547,7 +545,7 @@ def build_resources(databases):
             refs=[source_ref(hud_art),source_ref('Docs/Art/HudButtons/hud-buttons-prompt.txt'),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs')],
             related=['battle-escape','battle-escape.en']))
     byid={d['id']:d for d in databases}
-    for group in ['skills','heroes','items']:
+    for group in ['skills','heroes']:
         for item in byid[group]['rows']:
             item['resource']='icon-'+item['id']
             if item.get('vector'):
@@ -562,20 +560,6 @@ def build_resources(databases):
                     content={'db':group,'id':item['id']},related=['native-inventory','resource-guide']))
                 continue
             image=item['image']
-            if 'cell' not in image:
-                provenance=variant_art['B32' if item['id']=='B28' else item['id']]
-                path=ART+image['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
-                if digest(raw)!=provenance['sha256']:raise ValueError('Equipment variant provenance hash mismatch: '+path)
-                with Image.open(ROOT/path) as im:
-                    alpha=im.getchannel('A') if 'A' in im.getbands() else None
-                    fields={'콘텐츠 ID':item['id'],'원본':image['file'],'해상도':f'{im.width} × {im.height}',
-                            '색상 모드':im.mode,'완전 투명 픽셀':alpha.histogram()[0] if alpha else 0,
-                            'SHA-256':digest(raw),'생성 모델':provenance['model'],'승인 상태':provenance['status'],
-                            '등록 방식':'독립 PNG. 네이티브 알파를 보존하고 공통 EquipmentArt에서 조회합니다.'}
-                rows.append(record(item['resource'],item['name']+' 아이콘','장비 아이콘',item['id']+' · 독립 PNG',fields,
-                    IMPL+('Item_Art_Coverage.md' if item['id'] in item_art else 'Equipment_Variants.md'),status='개발용 사용 · 모델 미확인',image=image,assetPath=path,
-                    content={'db':group,'id':item['id']},refs=[source_ref(item_art_manifest if item['id'] in item_art else variant_manifest)],related=['equipment-variants','equipment-variants.en','item-art-coverage']))
-                continue
             cell=image['cell'];width,height=sizes[image['file']]
             rows.append(record('icon-'+item['id'],item['name']+' 아이콘','장비 아이콘' if group=='items' else '스킬·직업 아이콘',
                 f'{item["id"]} · {image["file"]} · {cell//6+1}행 {cell%6+1}열',
@@ -699,7 +683,8 @@ def build_resources(databases):
             refs=[source_ref(entry['source']),source_ref('Assets/HELLSCRIPT/Editor/BlacksmithArtImporter.cs')],
             related=['blacksmith-unity-integration','blacksmith-unity-integration.en','blacksmith-validation']))
     rows.extend(attendance_resource_rows(sys.modules[__name__]))
-    return db('resources','리소스 DB','타이틀 배경을 포함한 이미지 원본, 아틀라스 영역, 코드로 만드는 표현과 제작 과제를 함께 관리합니다. 영역·표현·과제는 독립 이미지 파일이 아닙니다.',rows)
+    rows=wiki_resources_current.build(sys.modules[__name__],databases,rows)
+    return db('resources','리소스 DB','현재 등록된 정본 이미지·모델·필드를 표시합니다. 공유 원본과 콘텐츠 수를 구분하며 과거 첨부는 문서 이력으로 보존합니다. / Current canonical art; historical attachments remain in document history.',rows)
 
 def build_class_abilities():
     path='Assets/HELLSCRIPT/Resources/Data/ClassSkills.json'
@@ -926,7 +911,25 @@ DEV_SUMMARY={
  'localization':'설정에서 한국어·영어를 고르게 하고, 게임의 한국어 문장 전체에 대응하는 영어 문장을 넣었습니다. 한국어 원문을 열쇠로 쓰며, 글자를 놓는 한 함수와 조립하는 자리에서 선택한 언어를 읽습니다.',
 }
 
+def portable_attachment(target, source):
+    # Only exact historical links may name an external path; never read that path at build time.
+    manifest = json.loads(read('tools/wiki_portable_attachments.json'))
+    matches = [r for r in manifest['records'] if target == r['originalPath'] and source in r['sources']]
+    if manifest.get('schemaVersion') != 1 or len(matches) != 1:
+        raise ValueError(f'Nonportable local Markdown link: {source} -> {target}')
+    record = matches[0]; dest = record['path']
+    if not dest.startswith('Docs/Implementation/') or '..' in Path(dest).parts:
+        raise ValueError('Invalid portable attachment destination: ' + dest)
+    candidate = ROOT / dest
+    if not candidate.resolve().is_relative_to(ROOT.resolve()):
+        raise ValueError('Portable attachment escapes repository: ' + dest)
+    raw = candidate.read_bytes()
+    if len(raw) != record['bytes'] or digest(raw) != record['sha256']:
+        raise ValueError('Portable attachment differs from preserved proof: ' + dest)
+    return dest
+
 def link_target(target, source, page_paths):
+    if target.startswith('<') and target.endswith('>'):target=target[1:-1]
     parsed=urlsplit(target)
     if parsed.scheme: return target if parsed.scheme in ('http','https','mailto') else None
     if target.startswith('#/'):
@@ -936,7 +939,8 @@ def link_target(target, source, page_paths):
     else:
         candidate=(ROOT/source).parent.joinpath(unquote(parsed.path))
         if candidate.is_dir():return None
-        dest=str(candidate.resolve().relative_to(ROOT))
+        try:dest=str(candidate.resolve().relative_to(ROOT.resolve()))
+        except ValueError:dest=portable_attachment(unquote(parsed.path),source)
     # Local build directories are not portable wiki attachments, even on a clean checkout.
     if dest.startswith('Builds/') and dest.endswith('.app'): return None
     # Retain the retired v3 runner for immutable history links without putting it back in the game.
@@ -950,15 +954,16 @@ def link_target(target, source, page_paths):
         dest=archived
     if dest in page_paths:
         return '#/page/'+page_paths[dest]+('?section='+quote(fragment) if fragment else '')
-    if (ROOT/dest).is_dir(): return None
-    if (ROOT/dest).is_file():
-        INPUTS[dest]=digest((ROOT/dest).read_bytes())
+    if (ROOT/dest).is_dir() or dest in {p.rstrip('/') for p in wiki_resources_current.RETIRED}: return None
+    raw=wiki_resources_current.source_bytes(sys.modules[__name__],dest,optional=True)
+    if raw is not None:
+        INPUTS[dest]=digest(raw)
         return 'sources/'+quote(dest,safe='/')+('#'+fragment if fragment else '')
     raise ValueError(f'Unresolved local Markdown link: {source} -> {target}')
 
 def inline(text, source, page_paths):
     # Tokenize code and links before escaping prose. Raw HTML is always escaped.
-    pattern=r'`(?P<code>[^`]+)`|(?P<image>!)?\[(?P<label>[^\]]+)\]\((?P<target>[^\s)]+)\)'
+    pattern=r'`(?P<code>[^`]+)`|(?P<image>!)?\[(?P<label>[^\]]+)\]\((?P<target><[^>]+>|[^\s)]+)\)'
     result=[];pos=0
     for m in re.finditer(pattern,text):
         result.append(html.escape(text[pos:m.start()]))
@@ -1116,11 +1121,14 @@ def build_public(dataset):
         stage.rename(target)
 
 def build():
-    INPUTS.clear();pages=build_pages();databases=build_databases();resources=build_resources(databases)
+    INPUTS.clear()
+    if hasattr(sys.modules[__name__],'_historical_art'):delattr(sys.modules[__name__],'_historical_art')
+    pages=build_pages();databases=build_databases();resources=build_resources(databases)
     databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_edict_disclosures());databases.append(build_evidence())
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
-    for path in ['tools/wiki.py','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
+    for path in ['tools/wiki.py','tools/wiki_resources_current.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,
+             'archivedSources':wiki_resources_current.archived_sources(sys.modules[__name__]),
              'inputManifest':dict(sorted(INPUTS.items()))}
     old=SITE/'data.json'
     if old.exists():
@@ -1128,47 +1136,11 @@ def build():
         if previous.get('inputManifest')==dataset['inputManifest']:dataset['generatedAt']=previous['generatedAt']
     SITE.mkdir(parents=True,exist_ok=True)
     for path,expected in INPUTS.items():
-        actual=(ROOT/path).read_bytes()
+        actual=wiki_resources_current.source_bytes(sys.modules[__name__],path)
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
-        if path.startswith(('Docs/','Wiki/content/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
+        if path.startswith(('Docs/','Wiki/content/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/','AgentRules/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
-    for file in (ROOT/ART).glob('*.png'):
-        target=SITE/'media'/file.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,target)
-    (SITE/'media/GlobalHUD').mkdir(parents=True,exist_ok=True)
-    shutil.copyfile(ROOT/ART/'GlobalHUD/menu-storage.png',SITE/'media/GlobalHUD/menu-storage.png')
-    shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')
-    for file in (ROOT/ART/'GlobalHUD').glob('currency-*.png'):
-        shutil.copyfile(file,SITE/'media/GlobalHUD'/file.name)
-    (SITE/'media/Storage').mkdir(parents=True,exist_ok=True)
-    for file in (ROOT/ART/'Storage').glob('chest-*.png'):
-        shutil.copyfile(file,SITE/'media/Storage'/file.name)
-    for name in ('menu-power-saving','menu-escape'):shutil.copyfile(ROOT/ART/('GlobalHUD/'+name+'.png'),SITE/'media/GlobalHUD'/(name+'.png'))
-    (SITE/'media/Title').mkdir(parents=True,exist_ok=True)
-    shutil.copyfile(ROOT/ART/'Title/TitleSanctuary.png',SITE/'media/Title/TitleSanctuary.png')
-    (SITE/'media/CharacterSelection').mkdir(parents=True,exist_ok=True)
-    for name in ('Warrior','Mage','Ranger','SelectionCourtyard'):
-        shutil.copyfile(ROOT/ART/('CharacterSelection/'+name+'.png'),SITE/'media/CharacterSelection'/(name+'.png'))
-    (SITE/'media/Blacksmith').mkdir(parents=True,exist_ok=True)
-    for file in (ROOT/ART/'Blacksmith').glob('*.png'):
-        shutil.copyfile(file,SITE/'media/Blacksmith'/file.name)
-    (SITE/'media/Attendance').mkdir(parents=True,exist_ok=True)
-    for file in (ROOT/ART/'Attendance').glob('*.png'):
-        shutil.copyfile(file,SITE/'media/Attendance'/file.name)
-    (SITE/'media/RewardBoxes').mkdir(parents=True,exist_ok=True)
-    for file in (ROOT/ART/'RewardBoxes').glob('*.png'):
-        shutil.copyfile(file,SITE/'media/RewardBoxes'/file.name)
-    # Archived pages keep their original URLs; game builds contain only canonical sprites.
-    for icon in json.loads((ROOT/'Docs/Art/RewardBoxes/manifest.json').read_text())['icons']:
-        resource=icon.get('resourceId',icon['id'])
-        if resource!=icon['id']:
-            shutil.copyfile(ROOT/ART/'RewardBoxes'/(resource+'.png'),SITE/'media/RewardBoxes'/(icon['id']+'.png'))
-    for folder in ('EquipmentVariants','ItemIcons','ClassSetIcons','ClassAspectIcons'):
-        (SITE/'media'/folder).mkdir(parents=True,exist_ok=True)
-        for file in (ROOT/ART/folder).glob('*.png'):
-            shutil.copyfile(file,SITE/'media'/folder/file.name)
-    (SITE/'media/NpcPortraits').mkdir(parents=True,exist_ok=True)
-    for file in (ROOT/ART/'NpcPortraits').glob('*.png'):
-        shutil.copyfile(file,SITE/'media/NpcPortraits'/file.name)
+    wiki_resources_current.copy_media(sys.modules[__name__],databases)
     report=validate(dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')
@@ -1180,6 +1152,7 @@ def build():
 def validate(dataset):
     pageids={p['id'] for p in dataset['pages']};dbids={d['id'] for d in dataset['databases']};links=0;images=0
     resourceids={r['id'] for d in dataset['databases'] if d['id']=='resources' for r in d['rows']}
+    image_sources=wiki_resources_current.image_sources(dataset['databases'])
     for page in dataset['pages']:
         for target in re.findall(r'href="([^"]+)"',page['html']):
             target=html.unescape(target);parts=urlsplit(target)
@@ -1207,10 +1180,10 @@ def validate(dataset):
             image=row.get('image')
             if image:
                 if not (SITE/'media'/image['file']).is_file():raise ValueError('Missing image: '+image['file'])
-                if digest((SITE/'media'/image['file']).read_bytes())!=dataset['inputManifest'][ART+image['file']]:raise ValueError('Image bytes changed in wiki copy')
+                if digest((SITE/'media'/image['file']).read_bytes())!=dataset['inputManifest'][image_sources[image['file']]]:raise ValueError('Image bytes changed in wiki copy')
                 if 'cell' in image and not 0<=image['cell']<24:raise ValueError('Invalid atlas cell')
                 images+=1
-    stale=[p for p,h in dataset['inputManifest'].items() if not (ROOT/p).is_file() or digest((ROOT/p).read_bytes())!=h]
+    stale=[p for p,h in dataset['inputManifest'].items() if (raw:=wiki_resources_current.source_bytes(sys.modules[__name__],p,optional=True)) is None or digest(raw)!=h]
     if stale:raise ValueError('Stale wiki source: '+', '.join(stale))
     for p,h in dataset['inputManifest'].items():
         copy=SITE/'sources'/p
@@ -1231,8 +1204,8 @@ def check():
     for source in dataset['inputManifest']:
         original=SITE/'sources'/source
         if original.is_file() and (not (SITE/'public/sources'/source).is_file() or original.read_bytes()!=(SITE/'public/sources'/source).read_bytes()):raise ValueError('Stale public source: '+source)
-    for original in (SITE/'media').glob('*'):
-        if original.is_file() and (not (SITE/'public/media'/original.name).is_file() or original.read_bytes()!=(SITE/'public/media'/original.name).read_bytes()):raise ValueError('Stale public media: '+original.name)
+    for original in (SITE/'media').rglob('*'):
+        if original.is_file() and (not (SITE/'public/media'/original.relative_to(SITE/'media')).is_file() or original.read_bytes()!=(SITE/'public/media'/original.relative_to(SITE/'media')).read_bytes()):raise ValueError('Stale public media: '+original.name)
     result['publicPages']=len(public_dataset(dataset)['pages'])
     print(json.dumps(result,ensure_ascii=False,indent=2))
 

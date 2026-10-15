@@ -1,0 +1,89 @@
+{
+ "pic": "landscape",
+ "master": "scene_landscape.png",
+ "clean": "clean_landscape.png",
+ "heroes": {
+  "warrior_m": {
+   "crop": [
+    40,
+    360,
+    345,
+    800
+   ],
+   "seed": [
+    200,
+    560
+   ],
+   "cheerK": 0.98
+  },
+  "warrior_f": {
+   "crop": [
+    380,
+    380,
+    690,
+    800
+   ],
+   "seed": [
+    540,
+    560
+   ],
+   "cheerK": 1.0
+  },
+  "archer_m": {
+   "crop": [
+    930,
+    400,
+    1180,
+    730
+   ],
+   "seed": [
+    1060,
+    560
+   ],
+   "cheerK": 1.08
+  },
+  "archer_f": {
+   "crop": [
+    1180,
+    400,
+    1400,
+    735
+   ],
+   "seed": [
+    1280,
+    540
+   ],
+   "cheerK": 1.08
+  },
+  "mage_m": {
+   "crop": [
+    600,
+    310,
+    750,
+    575
+   ],
+   "seed": [
+    675,
+    450
+   ],
+   "cheerK": 1.05,
+   "nogrow": [
+    "left",
+    "bottom"
+   ]
+  },
+  "mage_f": {
+   "crop": [
+    770,
+    315,
+    930,
+    560
+   ],
+   "seed": [
+    845,
+    440
+   ],
+   "cheerK": 1.08
+  }
+ }
+}

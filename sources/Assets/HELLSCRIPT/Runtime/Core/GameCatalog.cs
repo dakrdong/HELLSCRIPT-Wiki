@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Hellscript
 {
     public enum HeroClass { Warrior, Ranger, Mage }
+    public enum HeroGender { Male, Female }
     public enum RunPhase { Exploring, Boss, Looting, Cleared, Failed }
     public enum TargetMode { Nearest, Elite, Support, LowHealth, Dense }
     public enum MovementMode { Approach, Orbit, KeepDistance, Stand, Retreat, Center, Edge }
@@ -134,6 +135,8 @@ namespace Hellscript
         public TrainingGroundProgress trainingGround=new TrainingGroundProgress();
         public string id;
         public HeroClass heroClass;
+        public HeroGender gender;
+        public bool created=true;
         public int level=1, xp, highestClear, capacity=50;
         public string lastRiftFingerprint="";
         public int lastRiftBoss=-1;

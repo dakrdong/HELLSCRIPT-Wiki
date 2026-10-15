@@ -65,7 +65,7 @@ namespace Hellscript.Tests
         }
         [TestCase(0)] [TestCase(1)] [TestCase(2)] public void AllGearBoxesProduceOnlyLegalReleasedClassEquipment(int hero)
         {
-            A.selectedHero=hero;A.Hero.capacity=500;
+            ContentTestAccounts.ExistingMaleRoster(A);A.selectedHero=hero;A.Hero.capacity=500;
             foreach(var definition in RewardBoxCatalog.All.Where(d=>d.kind=="equipment"&&!d.chooseSlot))
             {
                 var box=Add(definition.id,3);Assert.IsTrue(store.OpenRewardBox(Guid.NewGuid().ToString(),box.id,3),store.Error);
@@ -85,7 +85,7 @@ namespace Hellscript.Tests
             Cleared(10);int gold=A.gold,materials=A.materials;Assert.IsTrue(store.ClaimRiftFirstRewards("claim",10),store.Error);
             Assert.AreEqual(gold,A.gold);Assert.AreEqual(materials,A.materials);Assert.AreEqual(5,A.rewardBoxes.owned.Sum(b=>b.count));
             string before=Json(A.rewardBoxes);Assert.IsTrue(store.ClaimRiftFirstRewards("claim",10));Assert.AreEqual(before,Json(A.rewardBoxes));
-            Assert.IsFalse(store.ClaimRiftFirstRewards("claim",1));A.selectedHero=1;Cleared(10);Assert.IsFalse(store.ClaimRiftFirstRewards("another-hero",10));
+            Assert.IsFalse(store.ClaimRiftFirstRewards("claim",1));ContentTestAccounts.ExistingMaleRoster(A);A.selectedHero=1;Cleared(10);Assert.IsFalse(store.ClaimRiftFirstRewards("another-hero",10));
             Assert.AreEqual(before,Json(A.rewardBoxes));
         }
         [Test] public void GemChoiceIsExplicitTenPerBoxAndRequestBindsChoice()

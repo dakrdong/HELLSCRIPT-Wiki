@@ -1,0 +1,254 @@
+{
+  "recordedUtc": "2026-10-14T08:00:39.716594+00:00",
+  "commonCommit": "0ccba80eef0da4703cb7ffcd1fb8e22848002b3d",
+  "observedScreenHead": "15f5baf5c71a54a1cc12fcbc6f1d760409a34659",
+  "scope": "Static font cmap/SHA inspection; no Unity, player, browser, C# execution, or copied artwork.",
+  "corpus": {
+    "screenInputFiles": [
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/aspect-skin/Assets/HELLSCRIPT/Runtime/Presentation/AspectStoneWindow.cs",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/aspect-skin/Assets/HELLSCRIPT/Runtime/Presentation/AspectStoneSkin.cs",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/aspect-skin/Assets/HELLSCRIPT/Runtime/Presentation/GameUI.AspectStone.cs",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/aspect-skin/Assets/HELLSCRIPT/Runtime/Core/AspectStone.cs",
+      "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/aspect-skin/Assets/HELLSCRIPT/Runtime/Core/AspectGrowth.cs"
+    ],
+    "screenLiteralCount": 242,
+    "catalogHardcodedIds": 15,
+    "catalogJsonIds": 108,
+    "distinctCatalogIds": 123,
+    "matchedTranslationOccurrences": 123,
+    "uniqueScreenCodepoints": 248,
+    "uniqueScreenAndCatalogCodepoints": 469,
+    "commonRuntimeSymbols": 48,
+    "method": "Regex C# literals excluding comments, hardcoded/JSON aspect names and descriptions, plus exact matching English localization entries."
+  },
+  "fallback": {
+    "webLegacyFont": "Assets/HELLSCRIPT/ThirdParty/Fonts/NanumGothic-Regular.ttf",
+    "sha256": "76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31",
+    "codepoints": 11827,
+    "missingScreenAndCatalogCorpus": [],
+    "casualFallback": "UiSkin.LabelFont routes the whole label to Noto Sans KR 400 when Jua lacks any non-whitespace character. Casual TTF importer fallback lists are empty; NanumGothic is the separate legacy WebBody font and is not wired as a casual glyph fallback.",
+    "codeReferences": [
+      "Assets/HELLSCRIPT/Runtime/Presentation/UiSkin.cs:60",
+      "Assets/HELLSCRIPT/Runtime/Presentation/UiTheme.cs:175"
+    ]
+  },
+  "inputsStable": true,
+  "limitations": [
+    "Cmap presence is not native font rendering, line wrapping, clipping, weight rasterization, fallback execution, or device acceptance.",
+    "Source extraction is a bounded static corpus, not execution of every formatting branch or dynamically assembled item detail.",
+    "Arbitrary user search input, legacy save names, and characters outside the inspected corpus are not guaranteed.",
+    "Ten source-unsupported common symbols may remain absent; this does not imply the aspect screen uses them."
+  ],
+  "fonts": {
+    "NotoSansKR-Skill400.ttf": {
+      "bytes": 516856,
+      "sha256": "c16631aa0e50c63fd33a52c0b1b980c1fd449a433e134dedf611a0d349166a76",
+      "matchesPinnedCommit": true,
+      "matchesCommonReceipt": true,
+      "weight": 400,
+      "cmapCodepoints": 2619,
+      "baselineSha256": "00bad3cfb48563a45c51b13089ce83356bb290ab39acb993c2f46c0cb556528c",
+      "byteDelta": 1480,
+      "baselineCmapPreserved": true,
+      "declaredCodepointsCovered": true,
+      "ksx1001Count": 2350,
+      "missingKsx1001": [],
+      "missingScreenLiteralsAndTranslations": [],
+      "missingScreenAndCatalogCorpus": [],
+      "blankRequestedSymbols": [],
+      "hheaMetrics": [
+        880,
+        -220,
+        0
+      ],
+      "explicitFallbackReferencesEmpty": true
+    },
+    "NotoSansKR-Skill700.ttf": {
+      "bytes": 517408,
+      "sha256": "817b0a77d85b602062d2e912caf72f86716ba692056ddf3e3972de6def2fb2fa",
+      "matchesPinnedCommit": true,
+      "matchesCommonReceipt": true,
+      "weight": 700,
+      "cmapCodepoints": 2619,
+      "baselineSha256": "56c404ca5dd5bdf99c634ad5675ee3b5860123ea1f5a82472cfc0ba812b7e72b",
+      "byteDelta": 1500,
+      "baselineCmapPreserved": true,
+      "declaredCodepointsCovered": true,
+      "ksx1001Count": 2350,
+      "missingKsx1001": [],
+      "missingScreenLiteralsAndTranslations": [],
+      "missingScreenAndCatalogCorpus": [],
+      "blankRequestedSymbols": [],
+      "hheaMetrics": [
+        880,
+        -220,
+        0
+      ],
+      "explicitFallbackReferencesEmpty": true
+    },
+    "NotoSansKR-Skill900.ttf": {
+      "bytes": 517264,
+      "sha256": "695a738acb041f27881cfd3466ef887d8b8163a81d808b07e0d3f7923ffd11f0",
+      "matchesPinnedCommit": true,
+      "matchesCommonReceipt": true,
+      "weight": 900,
+      "cmapCodepoints": 2619,
+      "baselineSha256": "a574ab95fca157c65692644dc7ebd0f564689701af88c5101cd9930045a9db79",
+      "byteDelta": 1504,
+      "baselineCmapPreserved": true,
+      "declaredCodepointsCovered": true,
+      "ksx1001Count": 2350,
+      "missingKsx1001": [],
+      "missingScreenLiteralsAndTranslations": [],
+      "missingScreenAndCatalogCorpus": [],
+      "blankRequestedSymbols": [],
+      "hheaMetrics": [
+        880,
+        -220,
+        0
+      ],
+      "explicitFallbackReferencesEmpty": true
+    },
+    "Jua-SkillSubset.ttf": {
+      "bytes": 2035040,
+      "sha256": "32743ae07a2af66d7f6ad066fc9ac91c713156174780ac126fcd0d5b83e5986e",
+      "matchesPinnedCommit": true,
+      "matchesCommonReceipt": true,
+      "weight": 400,
+      "cmapCodepoints": 2448,
+      "baselineSha256": "32743ae07a2af66d7f6ad066fc9ac91c713156174780ac126fcd0d5b83e5986e",
+      "byteDelta": 0,
+      "baselineCmapPreserved": true,
+      "declaredCodepointsCovered": true,
+      "ksx1001Count": 2350,
+      "missingKsx1001": [],
+      "missingScreenLiteralsAndTranslations": [
+        {
+          "codepoint": "U+00B7",
+          "character": "·"
+        },
+        {
+          "codepoint": "U+2194",
+          "character": "↔"
+        }
+      ],
+      "missingScreenAndCatalogCorpus": [
+        {
+          "codepoint": "U+00B7",
+          "character": "·"
+        },
+        {
+          "codepoint": "U+2194",
+          "character": "↔"
+        }
+      ],
+      "blankRequestedSymbols": [],
+      "hheaMetrics": [
+        800,
+        -200,
+        250
+      ],
+      "explicitFallbackReferencesEmpty": true
+    }
+  },
+  "addedNotoSymbols": "≠≡①②③ⓘ□▲▶▼◆◇○●＋",
+  "sourceUnsupportedCommonSymbols": [
+    {
+      "codepoint": "U+21B3",
+      "character": "↳"
+    },
+    {
+      "codepoint": "U+21B6",
+      "character": "↶"
+    },
+    {
+      "codepoint": "U+2316",
+      "character": "⌖"
+    },
+    {
+      "codepoint": "U+25B4",
+      "character": "▴"
+    },
+    {
+      "codepoint": "U+25B8",
+      "character": "▸"
+    },
+    {
+      "codepoint": "U+25BE",
+      "character": "▾"
+    },
+    {
+      "codepoint": "U+2610",
+      "character": "☐"
+    },
+    {
+      "codepoint": "U+2611",
+      "character": "☑"
+    },
+    {
+      "codepoint": "U+2630",
+      "character": "☰"
+    },
+    {
+      "codepoint": "U+2714",
+      "character": "✔"
+    }
+  ],
+  "fullEvidence": {
+    "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/static-validation/followup-fonts/font-evidence.json",
+    "sha256": "33f9ff8eb6b53842f77b6807dae7bd616380b4e9ca30b71328bf653fe0148472",
+    "inputManifest": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-16/static-validation/followup-fonts/input-manifest.json"
+  },
+  "previousAudit": {
+    "scope": "Screen literals + 15 base and 108 expanded aspect names/descriptions; static cmap coverage only",
+    "baseAspects": 15,
+    "expandedAspects": 108,
+    "testedKoreanCharacters": 390,
+    "fonts": {
+      "NotoSansKR-Skill400.ttf": {
+        "missingCount": 0,
+        "missing": "",
+        "sha256": "00bad3cfb48563a45c51b13089ce83356bb290ab39acb993c2f46c0cb556528c",
+        "symbols": {
+          "↔": true,
+          "×": true,
+          "·": true,
+          "?": true
+        }
+      },
+      "Jua-SkillSubset.ttf": {
+        "missingCount": 0,
+        "missing": "",
+        "sha256": "32743ae07a2af66d7f6ad066fc9ac91c713156174780ac126fcd0d5b83e5986e",
+        "symbols": {
+          "↔": false,
+          "×": false,
+          "·": false,
+          "?": true
+        }
+      },
+      "NotoSansKR-Skill700.ttf": {
+        "missingCount": 0,
+        "missing": "",
+        "sha256": "56c404ca5dd5bdf99c634ad5675ee3b5860123ea1f5a82472cfc0ba812b7e72b",
+        "symbols": {
+          "↔": true,
+          "×": true,
+          "·": true,
+          "?": true
+        }
+      },
+      "NotoSansKR-Skill900.ttf": {
+        "missingCount": 0,
+        "missing": "",
+        "sha256": "a574ab95fca157c65692644dc7ebd0f564689701af88c5101cd9930045a9db79",
+        "symbols": {
+          "↔": true,
+          "×": true,
+          "·": true,
+          "?": true
+        }
+      }
+    }
+  }
+}

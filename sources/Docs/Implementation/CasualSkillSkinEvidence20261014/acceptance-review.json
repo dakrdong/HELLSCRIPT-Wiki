@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-14",
+  "baseline": "53d6a3e13304a781f9823134ba0f497bafb78621",
+  "implementationCommit": "7ab84dc6091b918db18bf705c96c01ee07638f2d",
+  "approval": {
+    "criterion": "위치·크기·글자 크기·기능은 유지하고, 시안에 따른 색·선·모서리 변경만 허용",
+    "userReply": "ㅇㅇ 그렇게 해줘",
+    "source": "Parent delegation relayed the user reply to this exact criterion",
+    "bodyFontDecision": "400 body, 700/900 emphasis; original font sizes retained",
+    "authorizesOtherUiOrPush": false
+  },
+  "rawReview": {
+    "total": 3600,
+    "counts": {
+      "plate/radius": 18,
+      "stroke/color": 1436,
+      "stroke/width": 1436,
+      "stroke/dash": 620,
+      "scenarioPlateHash": 90
+    },
+    "allowedPaths": 3600,
+    "unexpectedPaths": [],
+    "literalRawDiffZero": false,
+    "appearanceOnlyRawCriterionAccepted": true,
+    "scenarioHashExplanation": "All 90 are /scenarios/<n>/hashes/plate; picked plate differences contain only radius. Other scene/layout hashes remain unchanged."
+  },
+  "zeroDifferenceContractFields": {
+    "scene": [
+      "frame.w/h/scale",
+      "header.title.text/rect",
+      "header.tabs.container/gap/items.label/selected/pointDot/size",
+      "header.stats.container/gap/items.label/value",
+      "header.close.rect",
+      "plate.rect/scrollAxis/inner/legend.items",
+      "panel.rect/medal.size/medal.icon",
+      "primitives.rect/hit/face/icon.size",
+      "line.path/points/direction",
+      "primitive IDs/text/rank/state/selection/flags",
+      "bars/arc/avail/unlockLevel"
+    ],
+    "pickedScenes": 18,
+    "fontSizeDifferenceGroups": 0,
+    "byteIdentical": [
+      "12 viewmodel files",
+      "6 interaction files",
+      "rules_golden.json",
+      "rank_values.json",
+      "panel_parts.json"
+    ],
+    "nativeSemanticEvidence": "60 transcripts / 1662 clicks / 502 blocked; full state/panel/effects equal; schema 22 and three allocations preserved on restart"
+  },
+  "outsideRawComparison": {
+    "cssDecorGeometry": {
+      "groupsBefore": 36,
+      "groupsNow": 0,
+      "fontSizeDifferenceGroups": 0,
+      "status": "Restored all unnecessary CSS inner ring/padding/line-height geometry to the baseline; original locked source preserved."
+    },
+    "nativeDynamicTextLayout": {
+      "audit": "geometry-native-audit.json",
+      "measuredObservationCount": 3252,
+      "linkedChipRowChanges": 0,
+      "remainingSlotExpansions": "Specified Noto700 linked names/rank values and measured rich stat values exceed their old slots; actual before/after widths recorded without blanket approval."
+    },
+    "nativeDynamicSource": "Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Panel.cs:14,112,124,144,182",
+    "note": "Original text slots restored where the approved fonts fit. Detailed native deltas are now measured at all three orientations. Outer scene geometry stays unchanged; not every glyph/child rectangle is identical."
+  },
+  "overallAcceptance": "Renderer corrections and legend removal completed under explicit requests; raw appearance-only paths remain accepted. Measured internal text-width exceptions remain separately reviewable; no other UI or remote integration.",
+  "latestUserRequests": [
+    "게이지가 UI에 겹치고 삐져나옴 수정",
+    "연결선 접점 끊김 수정",
+    "아이콘 원둘레 이물 제거",
+    "하단 상태 범례 제거",
+    "큰 판 구석 깨짐 수리"
+  ],
+  "latestValidation": "target-native-receipt.json"
+}

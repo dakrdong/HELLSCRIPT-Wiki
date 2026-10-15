@@ -79,7 +79,7 @@ namespace Hellscript
     {
         public static bool Start(AccountSave a,string request,string hero,string slot,int expectedLevel,long now)
         {
-                if(a.Hero.id!=hero||!ContentUnlocks.Has(a,ContentUnlocks.SlotEnhance))return false;
+                if(!a.Hero.created||a.Hero.id!=hero||!ContentUnlocks.Has(a,ContentUnlocks.SlotEnhance))return false;
                 BlacksmithCatalog.Settle(a,now);int index=BlacksmithCatalog.Index(slot),level=a.Hero.slotProgress.levels[index];
                 if(level!=expectedLevel||level>=100||a.forge.jobs.Count>=a.forge.stations||a.forge.jobs.Any(j=>j.heroId==hero&&j.slot==slot))return false;
                 int cost=BlacksmithCatalog.Stones(level+1);if(a.enhancementStones<cost)return false;
@@ -144,12 +144,12 @@ namespace Hellscript
             foreach(var j in jobs)
             {
                 var h=a.heroes.Find(x=>x.id==j.heroId);
-                if(string.IsNullOrEmpty(j.id)||h==null||j.station<0||j.station>=a.forge.stations||j.from<1||j.target!=j.from+1||j.target>100||h.slotProgress.levels[Index(j.slot)]!=j.from||j.paidStones!=Stones(j.target)||j.startedUtc<0||j.finishUtc-j.startedUtc!=Seconds(j.target))throw new InvalidOperationException("강화 작업 기록을 확인해 주세요.");
+                if(string.IsNullOrEmpty(j.id)||h==null||!h.created||j.station<0||j.station>=a.forge.stations||j.from<1||j.target!=j.from+1||j.target>100||h.slotProgress.levels[Index(j.slot)]!=j.from||j.paidStones!=Stones(j.target)||j.startedUtc<0||j.finishUtc-j.startedUtc!=Seconds(j.target))throw new InvalidOperationException("강화 작업 기록을 확인해 주세요.");
             }
         }
         public static int Settle(AccountSave a,long now)
         {
-            var done=a.forge.jobs.Where(j=>j.finishUtc<=now).ToArray();
+            var done=a.forge.jobs.Where(j=>j.finishUtc<=now&&HeroSlots.Created(a).Any(h=>h.id==j.heroId)).ToArray();
             foreach(var j in done){a.heroes.First(h=>h.id==j.heroId).slotProgress.levels[Index(j.slot)]=j.target;a.forge.jobs.Remove(j);}return done.Length;
         }
     }

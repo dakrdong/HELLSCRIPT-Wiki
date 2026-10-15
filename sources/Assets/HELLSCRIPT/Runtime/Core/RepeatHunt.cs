@@ -112,7 +112,7 @@ namespace Hellscript
             // edict cleanup policy, and no cleanup report exists before a completed transaction.
             if(s.policy!=null&&!s.policy.edict)s.policy.cleanup=null;
             if(!s.cleanupDone)s.cleanup=null;
-            if(s.version!=1||!Valid(s.policy)||!account.heroes.Any(h=>h.id==s.heroId)||double.IsNaN(s.seconds)||double.IsInfinity(s.seconds)||s.seconds<0||s.completed<0||s.gold<0||
+            if(s.version!=1||!Valid(s.policy)||!HeroSlots.Created(account).Any(h=>h.id==s.heroId)||double.IsNaN(s.seconds)||double.IsInfinity(s.seconds)||s.seconds<0||s.completed<0||s.gold<0||
                 float.IsNaN(s.delayElapsed)||float.IsInfinity(s.delayElapsed)||s.delayElapsed<0||s.consecutiveFailures<0||s.cleanupAttempt<0||
                 !Enum.IsDefined(typeof(RepeatStop),s.stop)||!Enum.IsDefined(typeof(RepeatBlock),s.blocked)||
                 s.pendingResult!=null&&(!Terminal(s.pendingResult)||s.pendingResult.training>=0||s.pendingResult.heroId!=s.heroId||s.pendingResult.id!=s.runId)||

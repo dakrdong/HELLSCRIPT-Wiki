@@ -18,17 +18,17 @@ namespace Hellscript
         void BuildRiftActivityHud(RunState run)
         {
             if(run.training>=0||run.tutorial)return;
-            activityHud=Box("Rift activity panel",root,UiTheme.Tint(UiTheme.PanelHex,.86f));activityHud.GetComponent<Image>().raycastTarget=false;
-            activityTitle=Label(activityHud,"활동 시간",16,pale);activityTitle.name="activity-drag-handle";activityTitle.raycastTarget=true;
+            activityHud=CombatHudPanel("Rift activity panel",root,CombatSkin);
+            activityTitle=Label(activityHud,"활동 시간",16,pale);CombatHudText(activityTitle,CombatSkin);activityTitle.name="activity-drag-handle";activityTitle.raycastTarget=true;
             activityDrag=activityTitle.gameObject.AddComponent<DpsHudDrag>();
-            activityDrag.Bind(activityHud,game.ActivityPosition,()=>ShowToast(Loc.T("그래프 위치를 기기에 저장하지 못했습니다. 다시 끌어 놓아 저장을 재시도해 주세요.")),()=>BattleHudTopOnPage-8);
-            activityFold=UiIconButton.CreateGlyph(activityHud,"rift-activity-fold","chevron",0,0,30,30,ToggleActivityFold,flip:!activityFolded);
-            activityPanel=RiftActivityPanel.Create(activityHud);activityBody=(RectTransform)activityPanel.transform;
-            activityShownTime=-1;
+            activityDrag.Bind(activityHud,game.ActivityPosition,GraphPositionFailed,()=>BattleHudTopOnPage-8);
+            activityFold=UiIconButton.CreateGlyph(activityHud,"rift-activity-fold","chevron",0,0,30,30,ToggleActivityFold,flip:!activityFolded);CombatHudButton(activityFold,CombatSkin);
+            activityPanel=RiftActivityPanel.Create(activityHud,skin:CombatSkin);activityBody=(RectTransform)activityPanel.transform;
+            activityShownTime=-1;BuildCasualActivityChrome();
         }
         void PlaceRiftActivityHud(float w)
         {
-            if(activityHud==null)return;
+            if(activityHud==null)return;if(CasualCombatHud){PlaceCasualActivityHud();return;}
             bool wide=w>=720;float pw=wide?Mathf.Min(320,w*.3f):w-24,ph=activityFolded?42:216,top=124;
             if(!wide&&trainingHud!=null)top=-trainingHud.anchoredPosition.y+trainingHud.rect.height+8;
             if(wide&&bossHud!=null&&bossHud.gameObject.activeSelf&&bossHud.anchoredPosition.x<pw+12)
@@ -47,8 +47,10 @@ namespace Hellscript
         }
         void RefreshRiftActivityHud(RunState run)
         {
-            if(activityHud==null||activityFolded||activityShownTime>=0&&run.time-activityShownTime<.15f)return;
-            activityShownTime=run.time;activityPanel.Show(run.statistics?.feedback);
+            if(activityHud==null||activityFolded&&!CasualCombatHud||activityShownTime>=0&&run.time-activityShownTime<.15f)return;
+            activityShownTime=run.time;
+            if(CasualCombatHud)CasualBattleHudStyle.SetRatio(activityRatio,run.statistics?.feedback);
+            if(!activityFolded)activityPanel.Show(run.statistics?.feedback);
         }
     }
 }

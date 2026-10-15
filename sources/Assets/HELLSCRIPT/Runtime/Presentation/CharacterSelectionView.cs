@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,136 +6,198 @@ using UnityEngine.UI;
 
 namespace Hellscript
 {
-    public sealed class CharacterSelectionView:MonoBehaviour
+    public sealed partial class CharacterSelectionView:MonoBehaviour
     {
-        GameController game;Font font;TitleSession session;TitleAtmosphere atmosphere;RectTransform root,tools,identity,stageArea,choices,details;
-        CharacterSelectionState state;CanvasGroup group;Button back,motion,language,start;Button[] classButtons;
-        Text title,subtitle,account,heroName,description,hint;Vector2 lastSize;float scale;bool ready;
-        static readonly Color Bone=new Color(.91f,.865f,.75f),Gold=new Color(.65f,.49f,.3f),Muted=new Color(.67f,.69f,.69f);
-        public CharacterSelectionStage Stage {get;private set;}
+        GameController game;TitleSession session;CharacterSelectionState state;CharacterPlazaSlots provider;CharacterPlazaSlot[] slots;
+        RectTransform root,design,worldArea,badge,nameplate,crestRail;Text title,hint,heroName,level,bubble;Button back,start,create,gear;
+        Button[] crests;Text[] locks;StorageSurface topFog,bottomFog;Image entryFade;Canvas parentCanvas;
+        Rect lastArea;Vector2 lastSize,logical,lastDisplay;float units,minimumHit,lastPixels;bool portrait,compact,entered;int revision=-1;ContentWindowView gearWindow;
+        int anchorRevision=-1;bool anchorsDirty=true;StorageSurface[] crestDiscs;
+        static readonly int[] KeyboardOrder={0,3,1,4,2,5};
+        readonly UiSkin skin=UiSkin.Casual.WithEquipmentArt(CasualEquipmentArt.Provider);
+        public CharacterPlazaStage Stage {get;private set;}
         public CharacterSelectionState Selection=>state;
         public Button StartButton=>start;
-        public bool BackdropReady=>atmosphere.Ready;
-        public static Color ClassColor(HeroClass type)=>type==HeroClass.Warrior?new Color(.9f,.53f,.22f):type==HeroClass.Mage?new Color(.39f,.72f,1):new Color(.44f,.8f,.57f);
-        public void Initialize(GameController owner,Font bodyFont,CharacterSelectionState selection,TitleSession login,TitleAtmosphere backdrop)
+        public bool BackdropReady=>Stage!=null&&Stage.ArtReady;
+        public static Color ClassColor(HeroClass type)=>type==HeroClass.Warrior?UiTheme.D4Token("GoldFF9F1CA1000"):type==HeroClass.Mage?UiTheme.D4Token("Steel35A7FFA1000"):UiSkin.Casual.GreenShade;
+        public void Initialize(GameController owner,CharacterSelectionState selection,TitleSession login)
         {
-            game=owner;font=bodyFont;state=selection;session=login;atmosphere=backdrop;root=(RectTransform)transform;group=gameObject.AddComponent<CanvasGroup>();
-            stageArea=Rect("Hero stage",root);Stage=stageArea.gameObject.AddComponent<CharacterSelectionStage>();Stage.Choose=Choose;Stage.Initialize(game,state,session);
-            identity=Rect("Selection identity",root);
-            title=Caption(identity,"selection-heading","운명을 선택하라",29,Bone);
-            subtitle=Caption(identity,"selection-subtitle","성소의 부름에 응할 자는 누구인가.",14,Muted);
-            tools=Rect("Selection tools",root);
-            back=Button(tools,"characters-back","‹ 타이틀",Back,14);
-            motion=Button(tools,"characters-motion",session.MotionEnabled?"연출 켜짐":"연출 멈춤",()=>{session.MotionEnabled=!session.MotionEnabled;Refresh();},12);
-            language=Button(tools,"characters-language",LanguageOptions.Find(Loc.Language).NativeName,()=>game.ApplyLanguage(Loc.Language=="ko"?"en":"ko"),12);
-            account=Caption(root,"selection-account",Loc.F("{0}   ·   {1}",session.DisplayName,TitleSession.ServerNames[session.Server]),12,Muted);
-            choices=Rect("Character choices",root);classButtons=new Button[game.Store.Data.heroes.Count];
-            for(int i=0;i<classButtons.Length;i++)
+            game=owner;state=selection;session=login;root=(RectTransform)transform;provider=new CharacterPlazaSlots(game.Store);slots=provider.Read();
+            parentCanvas=root.GetComponentInParent<Canvas>();root.gameObject.AddComponent<RectMask2D>();
+            design=UiLayout.Rect("Plaza design units",root);worldArea=UiLayout.Rect("Hero stage",design);
+            Stage=worldArea.gameObject.AddComponent<CharacterPlazaStage>();Stage.Initialize(state,slots);Stage.Choose=Choose;
+            topFog=Fog("Upper cream mist",true);bottomFog=Fog("Lower cream mist",false);
+            title=Caption(design,"selection-heading","나만의 모험가를 골라요",30,skin.Gold,true);Outline(title,2.5f);
+            back=Button(design,"characters-back","‹ 타이틀",Back,14);
+            hint=Caption(Panel(design,"Hint pill",13),"selection-hint","캐릭터를 눌러 선택하세요",13,skin.Muted);
+            start=Button(design,"character-start","플레이",StartGame,26,true);Outline(start.GetComponentInChildren<Text>(),2);start.GetComponentInChildren<Text>().color=skin.White;
+            crestRail=Panel(design,"Class crest rail",3);
+            crests=new Button[3];crestDiscs=new StorageSurface[3];var classes=new[]{HeroClass.Mage,HeroClass.Ranger,HeroClass.Warrior};
+            for(int i=0;i<crests.Length;i++)
             {
-                int index=i;var hero=game.Store.Data.heroes[i];
-                classButtons[i]=Button(choices,"character-choice-"+i,Loc.F("{0}  ·  Lv.{1}",game.catalog.classNames[(int)hero.heroClass],hero.level),()=>Choose(index),16);
-                classButtons[i].interactable=CharacterSelectionState.CanChoose(game.Store.Data,i);
+                var type=classes[i];crests[i]=Button(design,"character-focus-"+type,"",()=>{if(!game.UI.CommonPanelOpen&&state.FocusClass(type))Refresh();},14);
+                ((UiButton)crests[i]).Face.gameObject.SetActive(false);
+                var disc=Panel(crests[i].transform,"Circular crest chrome",100);UiLayout.Stretch(disc);crestDiscs[i]=disc.GetComponent<StorageSurface>();
+                var image=UiLayout.Rect("Class crest",crests[i].transform).gameObject.AddComponent<RawImage>();image.texture=Stage.Crest(type);image.raycastTarget=false;UiLayout.Stretch(image.rectTransform);image.rectTransform.offsetMin=new Vector2(4,6);image.rectTransform.offsetMax=new Vector2(-4,-4);
             }
-            details=Rect("Selected hero details",root);
-            heroName=Caption(details,"selected-hero-name","",26,Bone);
-            description=Caption(details,"selected-hero-description","",14,Muted);
-            start=Button(details,"character-start","시작하기",StartGame,22,true);
-            hint=Caption(details,"selection-hint","캐릭터를 누르면 전투 태세를 취합니다.",13,Muted);
-            Refresh();Reflow();
+            nameplate=Panel(design,"Selected hero nameplate",12);heroName=Caption(nameplate,"selected-hero-name","",14,skin.Navy,true);
+            badge=UiLayout.Rect("Selected hero badge",design);level=Caption(Panel(badge,"Level pill",15),"selected-hero-level","",16,skin.Navy,true);
+            create=Button(badge,"character-create","+",Create,26,true);gear=Button(badge,"character-equipment","",OpenEquipment,16);
+            var person=UiLayout.Rect("Equipment person glyph",gear.transform).gameObject.AddComponent<CharacterPlazaPerson>();person.raycastTarget=false;person.color=skin.Navy;UiLayout.Stretch(person.rectTransform);person.rectTransform.offsetMin=new Vector2(12,10);person.rectTransform.offsetMax=new Vector2(-12,-10);
+            bubble=Caption(Panel(badge,"Hero speech",16),"hero-speech","",15,skin.Navy,true);
+            locks=new Text[slots.Length];for(int i=0;i<locks.Length;i++){var panel=Panel(design,"Locked hero "+i,12);locks[i]=Caption(panel,"Rift lock","",12,skin.Muted);EquipmentSlotView.Glyph(panel,"Rift lock symbol","lock",5,4,14,skin.Muted);}
+            entryFade=UiLayout.Rect("Entry cream fade",design).gameObject.AddComponent<Image>();entryFade.color=Color.clear;entryFade.raycastTarget=false;
+            Reflow();Refresh();
         }
-        public Button Find(string id)
-        {foreach(var b in GetComponentsInChildren<Button>())if(b.name==id)return b;return null;}
+        public Button Find(string id){foreach(var b in GetComponentsInChildren<Button>())if(b.name==id)return b;return null;}
         public void Choose(int index)
         {
-            if(session.Entering||game.UI.CommonPanelOpen||!state.Choose(game.Store.Data,index))return;
-            game.Audio?.Play("char.select."+GameAudio.ClassKey(game.Store.Data.heroes[state.Selected].heroClass));ready=false;Refresh();
+            if(session.Entering||game.UI.CommonPanelOpen||!provider.Choose(state,index))return;
+            game.Audio?.Play("char.select."+GameAudio.ClassKey(slots[index].Class));Refresh();
         }
-        void Back(){if(session.Entering)return;game.UI.ShowTitle();}
-        void Refresh()
-        {
-            motion.GetComponentInChildren<Text>().text=Loc.T(session.MotionEnabled?"연출 켜짐":"연출 멈춤");
-            bool selected=CharacterSelectionState.CanChoose(game.Store.Data,state.Selected);
-            heroName.gameObject.SetActive(selected);description.gameObject.SetActive(selected);
-            start.gameObject.SetActive(selected&&Stage.Ready);start.interactable=selected&&Stage.Ready&&!session.Entering;
-            for(int i=0;i<classButtons.Length;i++)
-                UiTheme.Choice(classButtons[i],state.Selected==i,false);
-            if(selected)
-            {
-                var h=game.Store.Data.heroes[state.Selected];heroName.text=Loc.F("{0}  ·  Lv.{1}",game.catalog.classNames[(int)h.heroClass],h.level);
-                heroName.color=ClassColor(h.heroClass);
-                description.text=Loc.T(h.heroClass==HeroClass.Warrior?"강철의 의지 · 검으로 길을 여는 전사":h.heroClass==HeroClass.Mage?"금지된 지식 · 원소를 지배하는 마법사":"침묵의 추적자 · 어둠을 꿰뚫는 궁수");
-            }
-            hint.text=Loc.T(session.Entering?"성소로 향하는 중…":CharacterSelectionState.LockedHero(game.Store.Data)!=-1?"진행 중인 균열의 캐릭터로 이어갑니다.":!selected?"캐릭터를 누르면 전투 태세를 취합니다.":Stage.Ready?"선택한 캐릭터로 성소에 입장합니다.":"전투 태세를 갖추는 중…");
-        }
+        void Back(){if(state.Busy||session.Entering)return;if(gearWindow!=null){gearWindow.Close();return;}game.UI.ShowTitle();}
+        void Create()
+        {if(session.Entering||game.UI.CommonPanelOpen||!provider.BeginCreation(state))return;Refresh();}
         void StartGame()
         {
-            if(!Stage.Ready||session.Entering||!session.SignedIn||!game.CommitEntryCharacter(state.Selected))return;
-            if(!session.BeginEntry())return;game.Audio?.Play("flow.game_start");Refresh();StartCoroutine(Enter());
+            if(state.Busy||state.Phase!=CharacterPlazaPhase.Selected||game.UI.CommonPanelOpen||!session.SignedIn||!slots[state.Selected].Created)return;
+            if(!game.CommitEntryCharacter(state.Selected))return;
+            if(!provider.BeginEntry(state)||!session.BeginEntry())return;
+            game.Audio?.Play("flow.game_start");Refresh();
         }
-        IEnumerator Enter()
+        void Refresh()
         {
-            group.interactable=false;foreach(var f in Stage.Figures)f.Available=false;
-            float elapsed=0;while(elapsed<.65f){elapsed+=Time.unscaledDeltaTime;float t=Mathf.SmoothStep(0,1,elapsed/.65f);group.alpha=1-t;atmosphere.SetEntryFade(t);yield return null;}
-            game.EnterPlaza(true);
+            anchorsDirty=true;
+            revision=state.Revision;slots=provider.Read();Stage.SetSlots(slots);bool selected=state.Selected>=0;
+            var slot=selected?slots[state.Selected]:null;bool busy=state.Busy,equipment=state.Phase==CharacterPlazaPhase.Equipment;
+            nameplate.gameObject.SetActive(selected&&!equipment);badge.gameObject.SetActive(selected&&!equipment);
+            start.gameObject.SetActive(selected&&slot.Created&&state.Phase!=CharacterPlazaPhase.Creating);
+            start.interactable=!busy;start.GetComponentInChildren<Text>().text=Loc.T(state.Phase==CharacterPlazaPhase.Entering?"입장 중…":"플레이");
+            back.interactable=!busy;foreach(var crest in crests)crest.interactable=!busy&&!equipment;
+            create.gameObject.SetActive(selected&&!slot.Created&&!busy);gear.gameObject.SetActive(selected&&slot.Created&&!busy);level.transform.parent.gameObject.SetActive(selected&&slot.Created&&!busy);
+            bubble.transform.parent.gameObject.SetActive(busy);
+            if(selected)
+            {
+                heroName.text=Loc.T(game.catalog.classNames[(int)slot.Class])+" "+(slot.Gender==HeroGender.Female?"♀":"♂");heroName.font=skin.LabelFont(heroName.text);heroName.color=skin.OnLight(ClassColor(slot.Class));
+                level.text="Lv."+slot.Level;bubble.text=Loc.T(CharacterSelectionState.Line(slot.Class,slot.Gender,state.Phase==CharacterPlazaPhase.Entering));bubble.color=skin.OnLight(ClassColor(slot.Class));
+            }
+            bool locked=Array.Exists(slots,s=>s.Locked);
+            hint.text=Loc.T(state.Phase==CharacterPlazaPhase.Entering?"성소로 향하는 중…":locked?"진행 중인 균열의 캐릭터로 이어갑니다.":!selected?"캐릭터를 눌러 선택하세요":!slot.Created?"+를 눌러 새 모험가를 만들어요":"선택한 캐릭터로 성소에 입장합니다.");
+            hint.transform.parent.gameObject.SetActive(!equipment&&state.Phase!=CharacterPlazaPhase.Creating&&(!start.gameObject.activeSelf||!portrait&&!compact));
+            for(int i=0;i<locks.Length;i++)locks[i].transform.parent.gameObject.SetActive(slots[i].Locked);
+            LayoutCrests();
+            LayoutAnchors();
         }
         void Update()
         {
-            Reflow();if(ready!=Stage.Ready){ready=Stage.Ready;Refresh();}
-            if(session.Entering||game.UI.CommonPanelOpen)return;
+            Reflow();float dt=Mathf.Min(Time.unscaledDeltaTime,.1f);state.Tick(dt);
+            if(state.CreationReady)
+            {
+                bool saved=provider.Create(state.Selected);state.FinishCreation();if(!saved)game.UI.ShowToast(game.Store.Error);Refresh();
+            }
+            if(revision!=state.Revision)Refresh();Stage.Tick(dt);LayoutAnchors();
+            if(state.Phase==CharacterPlazaPhase.Entering)
+            {
+                var tint=skin.Cream;tint.a=.32f+.68f*Mathf.Clamp01((state.Age-1.8f)/.65f);entryFade.color=tint;
+                if(!entered&&state.Age>=2.45f){entered=true;game.EnterPlaza(true);}return;
+            }
+            if(state.Busy||game.UI.CommonPanelOpen)return;
             var keyboard=Keyboard.current;if(keyboard==null)return;
-            if(keyboard.escapeKey.wasPressedThisFrame){Back();return;}
+            if(keyboard.escapeKey.wasPressedThisFrame&&!ContentWindowHost.EscapeHandledThisFrame){Back();return;}
             int direction=keyboard.rightArrowKey.wasPressedThisFrame?1:keyboard.leftArrowKey.wasPressedThisFrame?-1:0;
             if(direction!=0)
-                for(int step=1;step<=classButtons.Length;step++)
-                {int next=(Mathf.Max(0,state.Selected)+direction*step+classButtons.Length*2)%classButtons.Length;if(CharacterSelectionState.CanChoose(game.Store.Data,next)){Choose(next);break;}}
-            if(keyboard.enterKey.wasPressedThisFrame&&EventSystem.current?.currentSelectedGameObject==null)StartGame();
+            {
+                int at=Array.IndexOf(KeyboardOrder,state.Selected);if(at<0)at=direction>0?-1:0;
+                for(int n=1;n<=KeyboardOrder.Length;n++){int index=KeyboardOrder[(at+direction*n+KeyboardOrder.Length*2)%KeyboardOrder.Length];if(index<slots.Length&&!slots[index].Locked){Choose(index);break;}}
+            }
+            if(keyboard.enterKey.wasPressedThisFrame&&EventSystem.current?.currentSelectedGameObject==null&&state.Selected>=0)StartGame();
+        }
+        internal static float PixelScale(Rect area)
+        {
+            bool vertical=area.height>area.width;
+            return Mathf.Max(.01f,vertical?area.width/440:area.height<650?area.height/440:Mathf.Min(area.width/1152,area.height/648));
         }
         void Reflow()
         {
-            var size=root.rect.size;if(size==lastSize)return;lastSize=size;
-            bool portrait=size.y>size.x;
-            // Match the title's native 44-point targets when the parent canvas shrinks.
-            float minimum=1/Mathf.Max(.01f,root.GetComponentInParent<Canvas>().scaleFactor);
-            scale=Mathf.Max(minimum,Mathf.Clamp(Mathf.Min(size.x/(portrait?440:1280),size.y/(portrait?860:760)),1,1.65f));
-            float w=size.x/scale,h=size.y/scale;bool compact=!portrait&&h<570;
-            Fit(tools,16,10,w-32,44);Put((RectTransform)back.transform,0,0,100,44);
-            Put((RectTransform)motion.transform,w-32-204,0,100,44);Put((RectTransform)language.transform,w-32-96,0,96,44);
-            Fit(identity,20,compact?60:70,w-40,70);Put(title.rectTransform,0,0,w-40,37);Put(subtitle.rectTransform,0,39,w-40,26);
-            subtitle.gameObject.SetActive(!compact);
-            float detailsH=compact?106:174,choiceH=48,choiceY=h-detailsH-choiceH-14;
-            float stageTop=compact?99:148,stageBottom=choiceY-5;
-            Put(stageArea,0,stageTop*scale,size.x,Mathf.Max(100,(stageBottom-stageTop)*scale));
-            float choiceW=Mathf.Min(w-32,780);Fit(choices,(w-choiceW)/2,choiceY,choiceW,choiceH);
-            float cell=(choiceW-12*(classButtons.Length-1))/classButtons.Length;
-            for(int i=0;i<classButtons.Length;i++)Put((RectTransform)classButtons[i].transform,i*(cell+12),0,cell,choiceH);
-            Fit(details,16,h-detailsH,w-32,detailsH);
-            float dw=w-32;
-            Put(heroName.rectTransform,0,4,dw,36);Put(description.rectTransform,0,39,dw,28);
-            Put((RectTransform)start.transform,(dw-Mathf.Min(420,dw))/2,76,Mathf.Min(420,dw),58);
-            Put(hint.rectTransform,0,detailsH-30,dw,26);
-            if(compact)
-            {
-                float bw=Mathf.Min(280,dw*.4f);
-                Put(heroName.rectTransform,0,4,dw-bw-16,34);Put(description.rectTransform,0,39,dw-bw-16,26);
-                Put((RectTransform)start.transform,dw-bw,5,bw,58);
-            }
-            account.gameObject.SetActive(!portrait&&!compact);Fit(account.rectTransform,180,14,Mathf.Max(160,w-430),34);
+            var area=UiSafeArea.Current;var display=new Vector2(Screen.width,Screen.height);float pixels=PixelScale(area);var size=area.size/pixels;
+            if(size==lastSize&&pixels==lastPixels&&area==lastArea&&display==lastDisplay)return;
+            lastArea=area;lastSize=size;lastPixels=pixels;lastDisplay=display;portrait=area.height>area.width;compact=!portrait&&area.height<650;
+            parentCanvas.GetComponent<CanvasScaler>().scaleFactor=pixels;parentCanvas.scaleFactor=pixels;
+            root.anchorMin=new Vector2(area.xMin/Screen.width,area.yMin/Screen.height);root.anchorMax=new Vector2(area.xMax/Screen.width,area.yMax/Screen.height);
+            root.offsetMin=root.offsetMax=Vector2.zero;
+            units=1;logical=size;UiLayout.Place(design,0,0,logical.x,logical.y);design.localScale=Vector3.one;
+            minimumHit=44/Mathf.Max(.01f,units*pixels);
+            UiLayout.Place(worldArea,0,0,logical.x,logical.y);Stage.Layout(logical,portrait);
+            float w=logical.x,h=logical.y;
+            Place(back,portrait?16:compact?16:24,portrait?Mathf.Min(56,h*.06f):12,100,44);
+            UiLayout.Place(title.rectTransform,portrait?16:compact?120:0,portrait?Mathf.Min(108,h*.113f):compact?8:56,portrait?w-32:compact?w-240:w,portrait?44:46);title.fontSize=portrait?30:compact?26:38;
+            Place(start,(w-(portrait?220:compact?200:180))/2,h-(portrait?88:compact?52:78),portrait?220:compact?200:180,portrait?50:46);
+            var hintRect=(RectTransform)hint.transform.parent;UiLayout.Place(hintRect,(w-Mathf.Min(w-40,400))/2,h-(portrait?76:compact?28:27),Mathf.Min(w-40,400),26);Fill(hint);
+            LayoutCrests();
+            UiLayout.Place(bottomFog.rectTransform,0,h-110,w,110);bottomFog.gameObject.SetActive(portrait);
+            UiLayout.Place(entryFade.rectTransform,0,0,w,h);
+            // Preserve 44 screen points even when fitting a short safe area.
+            ExpandHit(back,minimumHit);ExpandHit(start,minimumHit);
+            if(revision>=0)Refresh();
         }
-        void Fit(RectTransform r,float x,float y,float w,float h){Put(r,x*scale,y*scale,w,h);r.localScale=Vector3.one*scale;}
-        static RectTransform Rect(string name,Transform parent){var go=new GameObject(name,typeof(RectTransform));go.transform.SetParent(parent,false);return (RectTransform)go.transform;}
-        static void Put(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(w,h);}
-        Text Caption(Transform parent,string name,string value,int size,Color color)
+        void LayoutAnchors()
         {
-            var r=Rect(name,parent);var t=r.gameObject.AddComponent<Text>();t.font=font;t.text=Loc.T(value);t.fontSize=size;t.color=color;t.supportRichText=false;t.alignment=TextAnchor.MiddleCenter;t.raycastTarget=false;return t;
+            if(Stage==null||logical.x<=0)return;
+            bool bouncing=state.Selected>=0&&!slots[state.Selected].Created&&!state.Busy;
+            if(!anchorsDirty&&anchorRevision==Stage.LayoutRevision&&!bouncing)return;
+            anchorsDirty=false;anchorRevision=Stage.LayoutRevision;
+            UiLayout.Place(topFog.rectTransform,0,0,logical.x,Stage.TopFog);
+            for(int i=0;i<locks.Length;i++){var p=Stage.Head(i);UiLayout.Place((RectTransform)locks[i].transform.parent,p.x-12,p.y-30,24,24);}
+            if(state.Selected<0)return;
+            var head=Stage.Head(state.Selected);var feet=Stage.Feet(state.Selected);float bh=state.Busy?(compact?52:60):44;
+            float max=portrait?logical.x-188:logical.x-118,min=portrait?118:compact?112:118;
+            float cx=Mathf.Clamp(head.x,Mathf.Min(min,max),Mathf.Max(min,max));float y=Mathf.Clamp(head.y-bh-8,portrait?160:compact?60:108,logical.y-bh-104);
+            UiLayout.Place(badge,cx-130,y,260,bh);
+            float tagHeight=compact?22:24;
+            UiLayout.Place(nameplate,Mathf.Clamp(feet.x-(compact?48:54),4,logical.x-(compact?100:112)),Mathf.Clamp(feet.y+4,0,logical.y-tagHeight-4),compact?96:108,tagHeight);Fill(heroName);
+            float hit=Mathf.Max(44,minimumHit);
+            Place(create,130-hit/2,(44-hit)/2,hit,hit);float visible=compact?32:38;var face=((UiButton)create).Face.rectTransform;UiLayout.Place(face,(hit-visible)/2,(hit-visible)/2,visible,visible);
+            float bounce=!state.Busy&&!slots[state.Selected].Created?Mathf.Sin(Stage.Clock*Mathf.PI*2/1.2f)*3:0;face.anchoredPosition+=Vector2.up*bounce;
+            UiLayout.Place((RectTransform)level.transform.parent,78,7,70,compact?26:30);Fill(level);Place(gear,176-hit/2,(44-hit)/2,hit,hit);
+            var gearFace=((UiButton)gear).Face.rectTransform;visible=compact?28:32;UiLayout.Place(gearFace,(hit-visible)/2,(hit-visible)/2,visible,visible);
+            UiLayout.Place((RectTransform)bubble.transform.parent,(260-(compact?200:210))/2,0,compact?200:210,bh);Fill(bubble,10,4);
         }
+        void LayoutCrests()
+        {
+            crestRail.gameObject.SetActive(portrait);UiLayout.Place(crestRail,logical.x-49.5f,logical.y*.5f-111.5f,6,224);
+            for(int i=0;i<crests.Length;i++)
+            {
+                bool chosen=(int)state.Focus==2-i;float size=chosen?73:65;
+                crests[i].gameObject.SetActive(portrait);Place(crests[i],logical.x-79-(chosen?4:0),logical.y*.5f-144+112*i-(chosen?4:0),size,size);
+                ((UiButton)crests[i]).Configure(UiButtonRole.Icon,chosen);
+                crestDiscs[i].SetSkin(skin,chosen?ClassColor((HeroClass)(2-i)):skin.Navy,radius:100,borderWidth:chosen?4:3,shadow:3);
+            }
+        }
+        static void Place(Button b,float x,float y,float w,float h)=>UiLayout.Place((RectTransform)b.transform,x,y,w,h);
+        static void Fill(Text t,float x=4,float y=0){UiLayout.Stretch(t.rectTransform);t.rectTransform.offsetMin=new Vector2(x,y);t.rectTransform.offsetMax=new Vector2(-x,-y);}
+        static void ExpandHit(Button b,float minimum){var r=(RectTransform)b.transform;r.sizeDelta=new Vector2(Mathf.Max(r.sizeDelta.x,minimum),Mathf.Max(r.sizeDelta.y,minimum));}
+        RectTransform Panel(Transform parent,string name,float radius)
+        {var r=UiLayout.Rect(name,parent);var surface=r.gameObject.AddComponent<StorageSurface>();surface.SetSkin(skin,radius:radius,borderWidth:2.5f,shadow:3);surface.raycastTarget=false;return r;}
+        Text Caption(Transform parent,string name,string value,int size,Color color,bool display=false)
+        {var t=UiLayout.Text(parent,name,Loc.T(value),0,0,1,1,size,color,display?skin.LabelFont(Loc.T(value)):skin.BodyFont);t.alignment=TextAnchor.MiddleCenter;t.supportRichText=false;return t;}
         Button Button(Transform parent,string name,string label,Action action,int size,bool primary=false)
         {
-            var r=Rect(name,parent);var image=r.gameObject.AddComponent<Image>();image.color=primary?new Color(.36f,.064f,.045f,.98f):new Color(.035f,.039f,.045f,.9f);
-            var border=Rect("Etched frame",r);border.anchorMin=Vector2.zero;border.anchorMax=Vector2.one;border.offsetMin=border.offsetMax=Vector2.zero;
-            var frame=border.gameObject.AddComponent<TitleFrameGraphic>();frame.color=Gold;frame.raycastTarget=false;
-            var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=image;
-            var t=Caption(r,"Caption",label,size,Bone);t.rectTransform.anchorMin=Vector2.zero;t.rectTransform.anchorMax=Vector2.one;t.rectTransform.offsetMin=new Vector2(8,3);t.rectTransform.offsetMax=new Vector2(-8,-3);
-            UiTheme.Button(b,primary);b.onClick.AddListener(()=>action());return b;
+            var r=UiLayout.Rect(name,parent);var hit=r.gameObject.AddComponent<Image>();hit.color=Color.clear;var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=hit;UiTheme.Button(b,primary);skin.ApplyChrome(b);
+            var text=Caption(r,"Caption",label,size,skin.Navy,true);Fill(text,5,2);b.onClick.AddListener(()=>action());return b;
         }
+        StorageSurface Fog(string name,bool top)
+        {var r=UiLayout.Rect(name,design);var f=r.gameObject.AddComponent<StorageSurface>();var clear=skin.Cream;clear.a=0;var solid=skin.Cream;solid.a=.94f;f.top=top?solid:clear;f.bottom=top?clear:solid;f.raycastTarget=false;return f;}
+        static void Outline(Text text,float width)
+        {
+            var values=new D4Shadow[8];int i=0;foreach(var p in new[]{new Vector2(1,0),new Vector2(-1,0),new Vector2(0,1),new Vector2(0,-1),new Vector2(.75f,.75f),new Vector2(-.75f,.75f),new Vector2(.75f,-.75f),new Vector2(-.75f,-.75f)})values[i++]=new D4Shadow{x=p.x*width,y=p.y*width,color="Steel2A3150A1000"};
+            text.gameObject.AddComponent<SkillTreeD4TextShadow>().Apply(values,1);
+        }
+        void OnDestroy(){if(gearWindow!=null)gearWindow.Close();}
+    }
+    [RequireComponent(typeof(CanvasRenderer))]
+    public sealed class CharacterPlazaPerson:MaskableGraphic
+    {
+        protected override void OnPopulateMesh(VertexHelper vh)
+        {vh.Clear();var r=rectTransform.rect;UiMesh.RoundedBox(vh,new Rect(r.x+r.width*.25f,r.y+r.height*.53f,r.width*.5f,r.height*.43f),r.width*.25f,color,color);UiMesh.RoundedBox(vh,new Rect(r.x,r.y,r.width,r.height*.47f),r.width*.25f,color,color);}
     }
 }

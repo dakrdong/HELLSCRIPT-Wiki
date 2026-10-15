@@ -85,19 +85,19 @@ namespace Hellscript
             string label=corePage==2?"장비 목록으로":"코어 목록으로";int size=Z(.9f);
             float icon=E(1.3f),tw=TextWidth(Loc.T(label),size,true)+E(.4f),bw=E(.4f)+icon+E(.5f)+tw+E(.5f);
             var back=CoreGhost(body,"core-back",x,y,bw,h,()=>NavigateCore(corePage-1));
-            Icon(back.transform,"back",E(.4f),(h-icon)/2,icon,UiTheme.GoldBright);Bold(Txt(back.transform,label,E(.4f)+icon+E(.5f),0,tw,h,size,UiTheme.GoldBright));
+            Icon(back.transform,"back",E(.4f),(h-icon)/2,icon,ForgeSkin.GoldBright);Bold(Txt(back.transform,label,E(.4f)+icon+E(.5f),0,tw,h,size,ForgeSkin.GoldBright));
             CoreHistoryButton(body,x+w,y+h/2);
         }
         // A button with no face of its own: a transparent hit area with the shared focus and click feedback.
         UiButton CoreGhost(Transform parent,string name,float x,float y,float w,float h,Action click,UiButtonRole role=UiButtonRole.Icon)
         {
             var r=Rect(name,parent);Place(r,x,y,w,h);var hit=r.gameObject.AddComponent<Image>();hit.color=Color.clear;
-            var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=hit;b.Configure(role);b.onClick.AddListener(()=>click());return b;
+            var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=hit;b.Configure(role);skin.ApplyChrome(b);b.onClick.AddListener(()=>click());return b;
         }
         // Button with a small icon in front of the label.
         Button CoreIconButton(Transform parent,string label,string symbol,float x,float y,float w,float h,Action click,bool primary,int size,Color iconColor)
         {
-            var b=Btn(parent,label,x,y,w,h,click,primary,size);float tw=Mathf.Min(TextWidth(Loc.T(label),size,true),w-E(3)),icon=Mathf.Min(h*.5f,E(1.3f));
+            var b=Btn(parent,label,x,y,w,h,click,primary,size);float tw=Mathf.Min(TextWidth(Loc.T(label),size,false,true),w-E(3)),icon=Mathf.Min(h*.5f,E(1.3f));
             Icon(b.transform,symbol,Mathf.Max(E(.4f),(w-tw)/2-icon-E(.4f)),(h-icon)/2,icon,iconColor);return b;
         }
         void CoreHistoryButton(Transform parent,float right,float centerY)
@@ -112,13 +112,13 @@ namespace Hellscript
         {
             float uw=unit==null?0:TextWidth(unit,unitSize)+E(.25f),nw=TextWidth(number,size,true,true)+E(.15f),drop=(size-unitSize)*(top?.85f:.3f);
             var n=Bold(Serif(Txt(parent,number,right-uw-nw,y,nw,h,size,color,top?TextAnchor.UpperRight:TextAnchor.MiddleRight)));n.horizontalOverflow=HorizontalWrapMode.Overflow;if(name!=null)n.name=name;
-            if(unit!=null){var u=Txt(parent,unit,right-uw+E(.1f),y+drop,uw,h,unitSize,UiTheme.Faint,top?TextAnchor.UpperLeft:TextAnchor.MiddleLeft);u.horizontalOverflow=HorizontalWrapMode.Overflow;}
+            if(unit!=null){var u=Txt(parent,unit,right-uw+E(.1f),y+drop,uw,h,unitSize,ForgeSkin.Faint,top?TextAnchor.UpperLeft:TextAnchor.MiddleLeft);u.horizontalOverflow=HorizontalWrapMode.Overflow;}
             return n;
         }
         // A right-pointing chevron centred on (right - size/2, centerY).
         void CoreChevron(Transform parent,float right,float centerY,float size)
         {
-            var r=Icon(parent,"chevron",0,0,size,ColorOf(UiTheme.GoldDeepHex));r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=new Vector2(right-size/2,-centerY);r.localRotation=Quaternion.Euler(0,0,90);
+            var r=Icon(parent,"chevron",0,0,size,ColorOf(ForgeSkin.GoldDeepHex));r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=new Vector2(right-size/2,-centerY);r.localRotation=Quaternion.Euler(0,0,90);
         }
         // "장비 제련": the catalogue starts unfiltered (HTML openCoreCatalog(true)).
         void OpenCoreCatalogue(){coreGrade=0;coreClass=-1;coreQuery="";ResetCoreCatalogueScroll();NavigateCore(1);}
@@ -126,7 +126,7 @@ namespace Hellscript
         // The crystal of one slot in a small framed box.
         void CoreGlyph(Transform parent,int slot,float x,float y,float size)
         {
-            var frame=Panel(parent,"Core glyph",UiTheme.SelectedHex,UiTheme.VoidHex,UiTheme.EdgeHex);Place(frame,x,y,size,size);frame.GetComponent<Image>().raycastTarget=false;
+            var frame=Panel(parent,"Core glyph",ForgeSkin.SelectedHex,ForgeSkin.VoidHex,ForgeSkin.EdgeHex);Place(frame,x,y,size,size);frame.GetComponent<Image>().raycastTarget=false;
             float pad=size*.08f;CurrencyIconView.Create(frame,CurrencyIconView.CoreIcon(slot),pad,pad,size-pad*2);
         }
 
@@ -143,7 +143,7 @@ namespace Hellscript
             cy+=tile*4+tg*3+gap;DrawCoreSummary(panel,px,cy,cw,summary);
             if(noteH>0)
             {
-                float ny=h-px-noteH;var rule=Panel(panel,"Foot rule",UiTheme.BorderHex,UiTheme.BorderHex);rule.GetComponent<Image>().raycastTarget=false;Place(rule,px,ny,cw,1);
+                float ny=h-px-noteH;var rule=Panel(panel,"Foot rule",ForgeSkin.BorderHex,ForgeSkin.BorderHex);rule.GetComponent<Image>().raycastTarget=false;Place(rule,px,ny,cw,1);
                 Icon(panel,"info",px,ny+E(.6f),E(1.1f),muted);Txt(panel,note,px+E(1.6f),ny+E(.5f),cw-E(1.7f),noteH-E(.5f),Z(.76f),muted,TextAnchor.UpperLeft);
             }
         }
@@ -157,7 +157,7 @@ namespace Hellscript
             int count=store.Data.cores[slot];bool selected=coreSlot==slot,ready=count>=CoreCrafting.CoreCost,compact=coreLook==CoreLook.Compact,portrait=coreLook==CoreLook.Portrait;
             var b=Btn(parent,"",x,y,w,h,()=>SelectCore(slot));b.name="core-slot-"+slot;UiTheme.Choice(b,selected,false);var t=b.transform;
             float glyph=E(compact?2.1f:portrait?3.3f:2.6f),pad=E(compact?.4f:portrait?.75f:.5f);string name=CoreName(slot),status=ready?Loc.T("제작 가능"):Loc.F("{0}개 더 필요",CoreCrafting.CoreCost-count);
-            Color countColor=ready?UiTheme.GoldBright:muted;string number=count.ToString("N0");
+            Color countColor=ready?ForgeSkin.GoldBright:muted;string number=count.ToString("N0");
             if(portrait)
             {
                 float top=E(.7f);CoreGlyph(t,slot,pad,top,glyph);CoreCount(t,number,Z(1.7f),countColor,"/10",Z(.58f),w-pad,top,glyph,true);
@@ -171,7 +171,7 @@ namespace Hellscript
                 if(compact)
                 {
                     CoreFit(Bold(Txt(t,name,tx,0,nameW,h,Z(.78f))));
-                    if(ready){var mark=Panel(t,"Ready mark",UiTheme.SuccessHex,UiTheme.SuccessHex);float m=E(.4f);mark.pivot=new Vector2(.5f,.5f);mark.anchorMin=mark.anchorMax=new Vector2(0,1);mark.sizeDelta=new Vector2(m,m);mark.anchoredPosition=new Vector2(w-E(.55f),-E(.55f));mark.localRotation=Quaternion.Euler(0,0,45);mark.GetComponent<Image>().raycastTarget=false;}
+                    if(ready){var mark=Panel(t,"Ready mark",ForgeSkin.SuccessHex,ForgeSkin.SuccessHex);float m=E(.4f);mark.pivot=new Vector2(.5f,.5f);mark.anchorMin=mark.anchorMax=new Vector2(0,1);mark.sizeDelta=new Vector2(m,m);mark.anchoredPosition=new Vector2(w-E(.55f),-E(.55f));mark.localRotation=Quaternion.Euler(0,0,45);mark.GetComponent<Image>().raycastTarget=false;}
                 }
                 else
                 {
@@ -179,23 +179,23 @@ namespace Hellscript
                     CoreFit(Bold(Txt(t,name,tx,y0,nameW,nameH,Z(.9f))));Txt(t,status,tx,y0+nameH,nameW,statusH,Z(.7f),ready?green:muted);
                 }
             }
-            float meterH=E(compact?.15f:.2f);var meter=Panel(t,"Core meter",ready?UiTheme.SuccessHex:UiTheme.GoldDeepHex,ready?UiTheme.SuccessHex:UiTheme.GoldDeepHex);
+            float meterH=E(compact?.15f:.2f);var meter=Panel(t,"Core meter",ready?ForgeSkin.SuccessHex:ForgeSkin.GoldDeepHex,ready?ForgeSkin.SuccessHex:ForgeSkin.GoldDeepHex);
             Place(meter,0,h-meterH,Mathf.Max(1,w*Mathf.Min(1f,count/(float)CoreCrafting.CoreCost)),meterH);meter.GetComponent<Image>().raycastTarget=false;
         }
         void DrawCoreSummary(Transform panel,float x,float y,float w,float h)
         {
             int count=store.Data.cores[coreSlot];bool ready=count>=CoreCrafting.CoreCost,compact=coreLook==CoreLook.Compact;
-            var box=Panel(panel,"Core summary",UiTheme.InsetHex,UiTheme.InsetHex,UiTheme.GoldDeepHex);Place(box,x,y,w,h);box.GetComponent<Image>().raycastTarget=false;
+            var box=Panel(panel,"Core summary",ForgeSkin.InsetHex,ForgeSkin.InsetHex,ForgeSkin.GoldDeepHex);Place(box,x,y,w,h);box.GetComponent<Image>().raycastTarget=false;
             float pad=E(compact?.55f:.9f);string status=ready?Loc.T("제작 가능"):Loc.F("{0}개 더 필요",CoreCrafting.CoreCost-count),label=Loc.T("장비 제련");
             int nameSize=Z(compact?.86f:1.02f),subSize=Z(compact?.66f:.78f),countSize=Z(compact?1.2f:1.7f);
-            float buttonH=compact?E(2.4f):E(coreLook==CoreLook.Portrait?2.9f:2.6f),buttonW=compact?TextWidth(label,Z(.86f),true)+E(1.8f):w-pad*2,copyW=compact?w-pad*2-buttonW-E(.5f):w-pad*2;
+            float buttonH=compact?E(2.4f):E(coreLook==CoreLook.Portrait?2.9f:2.6f),buttonW=compact?TextWidth(label,Z(.86f),false,true)+E(1.8f):w-pad*2,copyW=compact?w-pad*2-buttonW-E(.5f):w-pad*2;
             float r1=compact?E(.35f):pad,r1h=countSize*1.3f,r2=r1+r1h,r2h=subSize*1.5f;
-            CoreFit(Bold(Txt(box,CoreName(coreSlot),pad,r1,copyW-E(4),r1h,nameSize,UiTheme.GoldBright)));
-            CoreCount(box,count.ToString("N0"),countSize,UiTheme.GoldBright,"/ 10",Z(compact?.6f:.8f),pad+copyW,r1,r1h);
+            CoreFit(Bold(Txt(box,CoreName(coreSlot),pad,r1,copyW-E(4),r1h,nameSize,ForgeSkin.GoldBright)));
+            CoreCount(box,count.ToString("N0"),countSize,ForgeSkin.GoldBright,"/ 10",Z(compact?.6f:.8f),pad+copyW,r1,r1h);
             float sw=TextWidth(status,subSize)+E(.3f);
             CoreFit(Txt(box,"인벤토리·창고 공용",pad,r2,copyW-sw-E(.4f),r2h,subSize,muted));Txt(box,status,pad+copyW-sw,r2,sw,r2h,subSize,ready?green:muted,TextAnchor.MiddleRight);
             var refine=compact?Btn(box,"장비 제련",w-pad-buttonW,(h-buttonH)/2,buttonW,buttonH,()=>OpenCoreCatalogue(),true,Z(.86f))
-                :CoreIconButton(box,"장비 제련","craft",pad,r2+r2h+E(.6f),buttonW,buttonH,()=>OpenCoreCatalogue(),true,Z(.94f),UiTheme.GoldBright);
+                :CoreIconButton(box,"장비 제련","craft",pad,r2+r2h+E(.6f),buttonW,buttonH,()=>OpenCoreCatalogue(),true,Z(.94f),ForgeSkin.GoldBright);
             refine.name="core-refine";refine.interactable=ready;
         }
 
@@ -209,13 +209,13 @@ namespace Hellscript
             string hint=roomy?Loc.T("부위 코어 10개로 원하는 전설·세트 장비를 제작합니다."):null;float hintW=Mathf.Min(cw-E(1),E(24)),hintH=hint==null?0:TextHeight(hint,hintW,lineSize);
             float total=over*2+seal+E(.9f)+titleSize*1.4f+(hint==null?0:E(.4f)+hintH)+E(.5f)+amountSize*1.4f+E(.3f)+lineSize*1.5f;
             float y=px+hh+Mathf.Max(0,(h-px*2-hh-total)/2)+over;
-            var ring=Panel(panel,"Core seal",UiTheme.InsetHex,UiTheme.InsetHex,UiTheme.GoldDeepHex);ring.pivot=new Vector2(.5f,.5f);ring.anchorMin=ring.anchorMax=new Vector2(0,1);ring.sizeDelta=new Vector2(seal,seal);
+            var ring=Panel(panel,"Core seal",ForgeSkin.InsetHex,ForgeSkin.InsetHex,ForgeSkin.GoldDeepHex);ring.pivot=new Vector2(.5f,.5f);ring.anchorMin=ring.anchorMax=new Vector2(0,1);ring.sizeDelta=new Vector2(seal,seal);
             ring.anchoredPosition=new Vector2(cx,-(y+seal/2));ring.localRotation=Quaternion.Euler(0,0,45);ring.GetComponent<Image>().raycastTarget=false;
             float icon=seal*.8f;CurrencyIconView.Create(panel,CurrencyIconView.CoreIcon(coreSlot),cx-icon/2,y+(seal-icon)/2,icon);y+=seal+over+E(.9f);
-            Bold(Serif(Txt(panel,"어떤 전설을 벼릴까요?",px,y,cw,titleSize*1.4f,titleSize,UiTheme.GoldBright,TextAnchor.MiddleCenter)));y+=titleSize*1.4f;
+            Bold(Serif(Txt(panel,"어떤 전설을 벼릴까요?",px,y,cw,titleSize*1.4f,titleSize,ForgeSkin.GoldBright,TextAnchor.MiddleCenter)));y+=titleSize*1.4f;
             if(hint!=null){y+=E(.4f);Txt(panel,hint,cx-hintW/2,y,hintW,hintH,lineSize,muted,TextAnchor.UpperCenter);y+=hintH;}
             y+=E(.5f);string one="10",two="1";float w1=TextWidth(one,amountSize,true,true),w2=TextWidth(two,amountSize,true,true),arrow=amountSize*.7f,gapA=E(.8f),row=w1+gapA+arrow+gapA+w2,x0=cx-row/2;
-            Bold(Serif(Txt(panel,one,x0,y,w1+2,amountSize*1.4f,amountSize,gold,TextAnchor.MiddleCenter)));Icon(panel,"arrow",x0+w1+gapA,y+(amountSize*1.4f-arrow)/2,arrow,UiTheme.Faint);
+            Bold(Serif(Txt(panel,one,x0,y,w1+2,amountSize*1.4f,amountSize,gold,TextAnchor.MiddleCenter)));Icon(panel,"arrow",x0+w1+gapA,y+(amountSize*1.4f-arrow)/2,arrow,ForgeSkin.Faint);
             Bold(Serif(Txt(panel,two,x0+w1+gapA*2+arrow,y,w2+2,amountSize*1.4f,amountSize,gold,TextAnchor.MiddleCenter)));y+=amountSize*1.4f+E(.3f);
             string a=CoreName(coreSlot),b=" · "+Loc.F("보유 {0:N0}개",store.Data.cores[coreSlot]);float aw=TextWidth(a,lineSize),bw=TextWidth(b,lineSize),lx=cx-(aw+bw)/2;
             Txt(panel,a,lx,y,aw+2,lineSize*1.5f,lineSize,pale);Txt(panel,b,lx+aw,y,bw+2,lineSize*1.5f,lineSize,muted);
@@ -229,7 +229,7 @@ namespace Hellscript
             float hh=Head(panel,"02","제작할 장비 선택",px,cy,cw);
             if(landscape)
             {
-                float close=E(2.2f);UiIconButton.CreateGlyph(panel,"core-catalog-back","close",px+cw-close,cy+(hh-close)/2,close,close,()=>NavigateCore(coreRecipeId!=null?2:0),false,muted);
+                float close=E(2.2f);StyleForgeIconButton(UiIconButton.CreateGlyph(panel,"core-catalog-back","close",px+cw-close,cy+(hh-close)/2,close,close,()=>NavigateCore(coreRecipeId!=null?2:0),false,muted),close:true);
             }
             cy+=hh+E(.4f);Text count=null;
             if(!compact)
@@ -240,10 +240,10 @@ namespace Hellscript
             }
             string[] classes={Loc.T("모든 직업"),Loc.T(catalog.classNames[0]),Loc.T(catalog.classNames[1]),Loc.T(catalog.classNames[2])};
             float fh=E(compact?2.2f:2.4f),classW=classes.Max(c=>TextWidth(c,Z(.82f)))+E(3f),searchW=cw-classW-E(.4f);
-            var inputRoot=Panel(panel,"Core search",UiTheme.InsetHex,UiTheme.InsetHex,UiTheme.BorderHex);Place(inputRoot,px,cy,searchW,fh);
+            var inputRoot=Panel(panel,"Core search",ForgeSkin.InsetHex,ForgeSkin.InsetHex,ForgeSkin.BorderHex);Place(inputRoot,px,cy,searchW,fh);
             var input=inputRoot.gameObject.AddComponent<InputField>();input.name="core-search";
-            input.textComponent=Txt(inputRoot,"",E(.6f),0,searchW-E(1.2f),fh,Z(.86f),pale);input.placeholder=Txt(inputRoot,"장비 이름 검색",E(.6f),0,searchW-E(1.2f),fh,Z(.86f),UiTheme.Faint);input.SetTextWithoutNotify(coreQuery);
-            UiDropdown.Create(panel,"core-class-filter",px+searchW+E(.4f),cy,classW,fh,Z(.82f)/10f,classes,coreClass+1,index=>{coreClass=index-1;ResetCoreCatalogueScroll();Repaint();},null,4);
+            input.textComponent=Txt(inputRoot,"",E(.6f),0,searchW-E(1.2f),fh,Z(.86f),pale);input.placeholder=Txt(inputRoot,"장비 이름 검색",E(.6f),0,searchW-E(1.2f),fh,Z(.86f),ForgeSkin.Faint);input.SetTextWithoutNotify(coreQuery);
+            StyleForgeDropdown(UiDropdown.Create(panel,"core-class-filter",px+searchW+E(.4f),cy,classW,fh,Z(.82f)/10f,classes,coreClass+1,index=>{coreClass=index-1;ResetCoreCatalogueScroll();Repaint();},null,4));
             cy+=fh+gap;
             Seg(panel,new[]{Loc.T("전체"),Loc.T("전설"),Loc.T("세트")},coreGrade,px,cy,compact?searchW:cw,fh,grade=>{coreGrade=grade;ResetCoreCatalogueScroll();Repaint();},"core-grade-");cy+=fh+gap;
             var scroll=List(panel,"Core recipe list",px,cy,cw,h-cy-px,out var content);
@@ -260,8 +260,8 @@ namespace Hellscript
                     Bold(Txt(select.transform,item.DisplayName,tx,ty,tw,nameH,nameSize,EquipmentGradePalette.For(item),TextAnchor.UpperLeft));Txt(select.transform,kind,tx,ty+nameH,tw,kindSize*1.5f,kindSize,muted);
                     CoreChevron(select.transform,rw-E(.8f),row/2,E(1.1f));
                     var inspect=CoreGhost(select.transform,"core-inspect-"+id,0,0,art,row,()=>{coreInspectId=id;OpenDialog("core-preview");},UiButtonRole.Item);
-                    var back=Panel(inspect.transform,"Art backdrop",UiTheme.BorderHex,UiTheme.VoidHex,UiTheme.BorderHex);Stretch(back);back.GetComponent<Image>().raycastTarget=false;
-                    float inset=art*.1f;EquipmentSlotView.Icon(inspect.transform,item,inset,(row-(art-inset*2))/2-E(.1f),art-inset*2);
+                    var back=Panel(inspect.transform,"Art backdrop",ForgeSkin.BorderHex,ForgeSkin.VoidHex,ForgeSkin.BorderHex);Stretch(back);back.GetComponent<Image>().raycastTarget=false;
+                    float inset=art*.1f;EquipmentSlotView.Icon(inspect.transform,item,inset,(row-(art-inset*2))/2-E(.1f),art-inset*2,skin:skin);
                     var line=Panel(inspect.transform,"Rarity line",EquipmentGradePalette.Hex[Storage.Grade(item)],EquipmentGradePalette.Hex[Storage.Grade(item)]);Place(line,1,row-E(.2f),art-1,E(.2f));line.GetComponent<Image>().raycastTarget=false;
                     Icon(inspect.transform,"info",art-E(1.15f),E(.15f),E(1f),gold);
                     ry+=row+rowGap;

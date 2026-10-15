@@ -76,10 +76,11 @@ namespace Hellscript
             var title=BigButton(body,"타이틀로 이동",()=>{if(!game.ReturnToTitle())characterMessage.text=Loc.T(string.IsNullOrEmpty(game.Store.Error)?game.Notice:game.Store.Error);});title.name="settings-title";
             CommonNote(body,"현재 진행을 저장하고 로그아웃합니다. 타이틀에서 다른 계정으로 로그인할 수 있습니다.",19,muted);
             characterNotice=CommonNote(body,"",20);characterButtons.Clear();
-            foreach(int index in new[]{0,2,1})
+            foreach(int index in new[]{0,3,1,4,2,5})
             {
+                if(!HeroSlots.IsCreated(game.Store.Data,index))continue;
                 var hero=game.Store.Data.heroes[index];bool selected=game.Store.Data.selectedHero==index;
-                var b=BigButton(body,Loc.F("{0} · Lv.{1}",game.catalog.classNames[(int)hero.heroClass],hero.level),()=>{if(!game.ChangeCharacterFromSettings(index)&&characterMessage!=null)characterMessage.text=Loc.T(string.IsNullOrEmpty(game.Store.Error)?game.Notice:game.Store.Error);},selected);
+                var b=BigButton(body,Loc.F("{0} · Lv.{1}",Loc.T(game.catalog.classNames[(int)hero.heroClass])+" "+(hero.gender==HeroGender.Female?"♀":"♂"),hero.level),()=>{if(!game.ChangeCharacterFromSettings(index)&&characterMessage!=null)characterMessage.text=Loc.T(string.IsNullOrEmpty(game.Store.Error)?game.Notice:game.Store.Error);},selected);
                 b.name="settings-character-"+index;characterButtons.Add((index,b));
             }
             characterMessage=CommonNote(body,"",19,gold);

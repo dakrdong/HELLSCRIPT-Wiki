@@ -34,7 +34,7 @@ namespace Hellscript
         public const int Version=2;
         static ContentUnlockData data;
         public static ContentUnlockData Rules=>data??=JsonUtility.FromJson<ContentUnlockData>(Resources.Load<TextAsset>("ContentUnlocks").text);
-        public static int AccountClear(AccountSave a)=>a.heroes.Count==0?0:a.heroes.Max(h=>Math.Max(0,h.highestClear));
+        public static int AccountClear(AccountSave a)=>HeroSlots.Created(a).Select(h=>Math.Max(0,h.highestClear)).DefaultIfEmpty(0).Max();
         public static ContentUnlockDefinition[] AtStage(int stage)=>Rules.features.Where(f=>f.stage==stage).ToArray();
         public static ContentUnlockDefinition NextAfter(int stage)=>Rules.features.Where(f=>f.stage>stage).OrderBy(f=>f.stage).FirstOrDefault();
         public static ContentUnlockDefinition[] NextLocked(AccountSave account)
@@ -57,7 +57,7 @@ namespace Hellscript
             {
                 // These services and three passive slots were available to every schema-1/2 user.
                 foreach(string id in new[]{Train,Enhance,RareCraft,Reroll,Shop,Sweep,CoreCraft})Grant(s,id);
-                foreach(var h in a.heroes)h.legacyPassiveSlots=3;
+                foreach(var h in HeroSlots.Created(a))h.legacyPassiveSlots=3;
                 if(AccountClear(a)>0){Grant(s,Offline);s.offlineActivatedUtc=a.lastSeenUtc;}
                 s.firstRunEnded=a.records.Count>0||AccountClear(a)>0;
             }
@@ -95,7 +95,7 @@ namespace Hellscript
             a.contentUnlocks??=new ContentUnlockState();var s=a.contentUnlocks;
             s.unlocked??=new List<string>();s.guidesCompleted??=new List<string>();
             s.coreReady|=a.cores.Any(c=>c>=Rules.coreCount);
-            foreach(var item in a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse))RecordEquipment(a,item);
+            foreach(var item in HeroSlots.Created(a).SelectMany(h=>h.inventory).Concat(a.warehouse))RecordEquipment(a,item);
             int best=AccountClear(a);
             s.firstRunEnded|=best>0;
             foreach(var f in Rules.features)

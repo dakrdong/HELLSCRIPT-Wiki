@@ -14,7 +14,7 @@ namespace Hellscript.Tests
         [TearDown] public void Cleanup(){UnityEngine.Object.DestroyImmediate(catalog);}
         [Test] public void U01_NewAccountHasBaseAndNoGrowthPrivileges()
         {
-            var a=New();Assert.AreEqual(3,a.heroes.Count);Assert.IsTrue(a.heroes.All(h=>h.build!=null&&h.inventory.Count==1));
+            var a=New();Assert.AreEqual(SkillTreeD4.Enabled?HeroSlots.Count:3,a.heroes.Count);Assert.IsTrue(a.heroes.All(h=>h.build!=null&&h.inventory.Count==1));
             foreach(var f in ContentUnlocks.Rules.features)Assert.AreEqual(f.id==ContentUnlocks.Train,ContentUnlocks.Has(a,f.id),f.id);
             Assert.IsTrue(a.heroes.All(h=>h.build.passives.Length==0));
         }

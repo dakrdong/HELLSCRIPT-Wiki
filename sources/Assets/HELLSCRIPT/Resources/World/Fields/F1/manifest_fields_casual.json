@@ -1,0 +1,325 @@
+{
+  "revision": "hellscript-casual-field-runtime-v1",
+  "productionApproved": false,
+  "palette": {
+    "name": "Bright Fortress",
+    "floor": [
+      "#cfc9bb",
+      "#bfb9ab",
+      "#dcd6c8"
+    ],
+    "grout": "#8f897c",
+    "light": "#ece8dd",
+    "stone": "#dcd7cb",
+    "stone2": "#c0b9ab",
+    "dark": "#8f8a7e",
+    "accent": "#d95b52",
+    "accent2": "#f4c552",
+    "wood": "#9a6a44",
+    "glow": "#ffb454",
+    "sky": "#cfe8f6"
+  },
+  "models": {
+    "F1_Floor": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 4.0,
+      "sha256": {
+        "Floor_A.png": "cc87267e3999d288fbfdc404a899f6c38483b0d3da338c113cff51a29d876c56"
+      }
+    },
+    "F1_Wall": {
+      "kind": "prop",
+      "tris": 1428,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        6,
+        2
+      ],
+      "bounds": [
+        -3.4,
+        0.0,
+        -0.95,
+        3.4,
+        2.61,
+        0.95
+      ],
+      "glow": null,
+      "seed": 88001355,
+      "sha256": {
+        "F1_Wall.fbx": "d1b173b49ef0fdc8dc097db04af23674dcb0c9ebd602eaffd5d1a8a8f3b9b071",
+        "F1_Wall_A.png": "07de9e1fc538371a7e09c4d4f244960152f05fd3aed49847befdb3aebcbafc9f"
+      }
+    },
+    "F1_Trim": {
+      "kind": "tile",
+      "texture": 512,
+      "period": 2.0,
+      "sha256": {
+        "Trim_A.png": "455883af59f2e780ab279f0fc2f43c9dc164cbb07377b94705eca1f5048dce02"
+      }
+    },
+    "F1_Pillar": {
+      "kind": "prop",
+      "tris": 528,
+      "texture": 64,
+      "height": 2.5,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.6,
+        0.0,
+        -0.6,
+        0.6,
+        2.68,
+        0.6
+      ],
+      "glow": null,
+      "seed": 233311974,
+      "sha256": {
+        "F1_Pillar.fbx": "566590c15a0d7c505604b4c54302eb02b8f49e478f9c1656bb3552cf8a5718bf",
+        "F1_Pillar_A.png": "bad021a80aa5d78fed18f6d0983b55ceabeea02564d6200f360c202b4f920c77"
+      }
+    },
+    "F1_WallColumn": {
+      "kind": "prop",
+      "tris": 656,
+      "texture": 64,
+      "height": 3.9,
+      "footprint": [
+        0.9,
+        0.62
+      ],
+      "bounds": [
+        -0.45,
+        0.0,
+        -0.31,
+        0.45,
+        4.0,
+        0.31
+      ],
+      "glow": null,
+      "seed": 3641450782,
+      "sha256": {
+        "F1_WallColumn.fbx": "ed24c099208dc601194e43777c2e62cd8a9e29a6cd34dcdf607f40a89e617683",
+        "F1_WallColumn_A.png": "110e7203f252dbfcbe3063a7f9d647b5fd0fbac443194820816274bd0496ac06"
+      }
+    },
+    "F1_Rubble_A": {
+      "kind": "prop",
+      "tris": 764,
+      "texture": 64,
+      "height": 0.6,
+      "footprint": [
+        1.2,
+        1.2
+      ],
+      "bounds": [
+        -0.542,
+        -0.016,
+        -0.757,
+        0.604,
+        0.505,
+        0.602
+      ],
+      "glow": null,
+      "seed": 428185477,
+      "sha256": {
+        "F1_Rubble_A.fbx": "55c53b45bc81f204d5f3340ce511cf0d99e500b70e1a8b3c010c757b7ad90c58",
+        "F1_Rubble_A_A.png": "87b128271c7c5adbec162d1c3613ade1fca61175e41108be2b49cff5a64ea3aa"
+      }
+    },
+    "F1_Rubble_B": {
+      "kind": "prop",
+      "tris": 980,
+      "texture": 64,
+      "height": 0.5,
+      "footprint": [
+        1.6,
+        1.1
+      ],
+      "bounds": [
+        -1.026,
+        -0.016,
+        -0.872,
+        0.851,
+        0.504,
+        0.804
+      ],
+      "glow": null,
+      "seed": 2189692994,
+      "sha256": {
+        "F1_Rubble_B.fbx": "17194e5881cf8f969b398d38ee8ab6a03dc48e6531a3c7519851931cd075881c",
+        "F1_Rubble_B_A.png": "87b128271c7c5adbec162d1c3613ade1fca61175e41108be2b49cff5a64ea3aa"
+      }
+    },
+    "F1_Torch": {
+      "kind": "prop",
+      "tris": 164,
+      "texture": 64,
+      "height": 0.45,
+      "footprint": [
+        0.2,
+        0.5
+      ],
+      "bounds": [
+        -0.09,
+        0.0,
+        -0.09,
+        0.09,
+        0.44,
+        0.09
+      ],
+      "glow": "#ffb454",
+      "seed": 2754542765,
+      "sha256": {
+        "F1_Torch.fbx": "01f5724d7096a63d099a65d18ae91e5683eb97488b834964f75c3d70f95fb600",
+        "F1_Torch_A.png": "dc41d69d7b0ca9028721ba0497b8635e8466379f5553b1cc4e7e3f81a1997a61"
+      }
+    },
+    "F1_Decor_Banner": {
+      "kind": "prop",
+      "tris": 468,
+      "texture": 64,
+      "height": 1.9,
+      "footprint": [
+        0.8,
+        0.7
+      ],
+      "bounds": [
+        -0.37,
+        0.0,
+        -0.049,
+        0.37,
+        1.92,
+        0.049
+      ],
+      "glow": null,
+      "seed": 1603497892,
+      "sha256": {
+        "F1_Decor_Banner.fbx": "1569b420a5329969f4300bac97b0dc765d559cf8e28eb932a071403f148e7822",
+        "F1_Decor_Banner_A.png": "65156ca736c9d7c1a4a26f975ad00392b0618d209b13e085266fb43d1663a096"
+      }
+    },
+    "F1_Decor_Barrel": {
+      "kind": "prop",
+      "tris": 132,
+      "texture": 64,
+      "height": 0.5,
+      "footprint": [
+        0.8,
+        0.8
+      ],
+      "bounds": [
+        -0.32,
+        0.0,
+        -0.32,
+        0.32,
+        0.5,
+        0.32
+      ],
+      "glow": null,
+      "seed": 1468370448,
+      "sha256": {
+        "F1_Decor_Barrel.fbx": "b61a37b7a31fe8d0344706d17b8103250dde863b6c9b75ff53c298237ebbb964",
+        "F1_Decor_Barrel_A.png": "9e2fca814ad20106fc19c946c34dc88c8ae11158bb2f696c4c9b38c23e5407ce"
+      }
+    },
+    "F1_Decor_Crate": {
+      "kind": "prop",
+      "tris": 324,
+      "texture": 64,
+      "height": 0.7,
+      "footprint": [
+        0.8,
+        0.6
+      ],
+      "bounds": [
+        -0.27,
+        0.0,
+        -0.25,
+        0.319,
+        0.66,
+        0.279
+      ],
+      "glow": null,
+      "seed": 299720191,
+      "sha256": {
+        "F1_Decor_Crate.fbx": "2faa469cd7931b7bec11b20441eb7a0a13c5c5cf5a0323734d87d25ce37940ce",
+        "F1_Decor_Crate_A.png": "9e2fca814ad20106fc19c946c34dc88c8ae11158bb2f696c4c9b38c23e5407ce"
+      }
+    }
+  },
+  "recolored": [
+    "F1_Brazier_A.png",
+    "F1_Decor_Chains_A.png",
+    "F1_Decor_Debris_A.png",
+    "F1_Decor_Shield_A.png",
+    "F1_Decor_Weapons_A.png",
+    "F1_Rack_A.png",
+    "F1_Sarcophagus_A.png",
+    "F1_Statue_A.png"
+  ],
+  "files": {
+    "F1_Brazier.fbx": "8ae2e47dc1906d922456e0d882ebcfa3b56000cf4f1f99960849294d39bc7dd5",
+    "F1_Brazier_A.png": "a656086ff693e3d8e91c9b8543077848091017b3c633769d75853619712ccb0f",
+    "F1_Brazier_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Banner.fbx": "1569b420a5329969f4300bac97b0dc765d559cf8e28eb932a071403f148e7822",
+    "F1_Decor_Banner_A.png": "65156ca736c9d7c1a4a26f975ad00392b0618d209b13e085266fb43d1663a096",
+    "F1_Decor_Banner_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Barrel.fbx": "b61a37b7a31fe8d0344706d17b8103250dde863b6c9b75ff53c298237ebbb964",
+    "F1_Decor_Barrel_A.png": "9e2fca814ad20106fc19c946c34dc88c8ae11158bb2f696c4c9b38c23e5407ce",
+    "F1_Decor_Barrel_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Chains.fbx": "6c7c3ad4f0a26a9748f5c7d6df1d589d62645bd80f24bb49c8ed71a74508f088",
+    "F1_Decor_Chains_A.png": "fab7db37091bfaf3edc8bcf16953c5b45e62224ffa59802b74b0ebca0bdde1bf",
+    "F1_Decor_Chains_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Crate.fbx": "2faa469cd7931b7bec11b20441eb7a0a13c5c5cf5a0323734d87d25ce37940ce",
+    "F1_Decor_Crate_A.png": "9e2fca814ad20106fc19c946c34dc88c8ae11158bb2f696c4c9b38c23e5407ce",
+    "F1_Decor_Crate_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Debris.fbx": "05ea0fa05470a263c47e513076fad8d426381da8f0540da6f62f79efea32a280",
+    "F1_Decor_Debris_A.png": "4f1709fbe555e7d57f56881a72f64f59cb4d6517c259d0851e17d48af9431188",
+    "F1_Decor_Debris_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Shield.fbx": "fdbb628297e179210e5054c3ab90e9e65c9e40b712a64ce61c58e27b025f885a",
+    "F1_Decor_Shield_A.png": "4cf52844e6031cae572c297b2ef7800ac374a433b32dff4e4dbe583f8583cd57",
+    "F1_Decor_Shield_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Decor_Weapons.fbx": "e46bb51fa2ded7556e87f12d6f807aa8af946a56c71ded10cf71d589d8f9ea8f",
+    "F1_Decor_Weapons_A.png": "7209b81a5141ba959d1db4cea12cc3d02e2e60a6faabc18d03f68aec0134493e",
+    "F1_Decor_Weapons_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Pillar.fbx": "566590c15a0d7c505604b4c54302eb02b8f49e478f9c1656bb3552cf8a5718bf",
+    "F1_Pillar_A.png": "bad021a80aa5d78fed18f6d0983b55ceabeea02564d6200f360c202b4f920c77",
+    "F1_Pillar_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Rack.fbx": "2e1082a8f239253d6522b79c43a254d27d23cc5b1c22ad9547f3d2453d870e4d",
+    "F1_Rack_A.png": "14e3ae2080157655395acd6410c7e0a8a5d46b570c022e26a8a8a563e9a2fc0d",
+    "F1_Rack_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Rubble_A.fbx": "55c53b45bc81f204d5f3340ce511cf0d99e500b70e1a8b3c010c757b7ad90c58",
+    "F1_Rubble_A_A.png": "87b128271c7c5adbec162d1c3613ade1fca61175e41108be2b49cff5a64ea3aa",
+    "F1_Rubble_A_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Rubble_B.fbx": "17194e5881cf8f969b398d38ee8ab6a03dc48e6531a3c7519851931cd075881c",
+    "F1_Rubble_B_A.png": "87b128271c7c5adbec162d1c3613ade1fca61175e41108be2b49cff5a64ea3aa",
+    "F1_Rubble_B_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Sarcophagus.fbx": "c54b60cd65d46cab611425641d4943f82cb7c6db2cdc44e1b905ad5d66cd2948",
+    "F1_Sarcophagus_A.png": "8221a4f4bead4222df35053b73cd1e3139cbe86fa5640e9880e3790f6523a2db",
+    "F1_Sarcophagus_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Statue.fbx": "6f6b5b7a15100bfcac39ced6937fbe68b54dfddb4a7c2530397ea83b5e2a6751",
+    "F1_Statue_A.png": "648f9e8546d2037ab0f650f919fb63ef283e0104725d60923132826bf23f6ff5",
+    "F1_Statue_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Torch.fbx": "01f5724d7096a63d099a65d18ae91e5683eb97488b834964f75c3d70f95fb600",
+    "F1_Torch_A.png": "dc41d69d7b0ca9028721ba0497b8635e8466379f5553b1cc4e7e3f81a1997a61",
+    "F1_Torch_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Wall.fbx": "d1b173b49ef0fdc8dc097db04af23674dcb0c9ebd602eaffd5d1a8a8f3b9b071",
+    "F1_WallColumn.fbx": "ed24c099208dc601194e43777c2e62cd8a9e29a6cd34dcdf607f40a89e617683",
+    "F1_WallColumn_A.png": "110e7203f252dbfcbe3063a7f9d647b5fd0fbac443194820816274bd0496ac06",
+    "F1_WallColumn_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "F1_Wall_A.png": "07de9e1fc538371a7e09c4d4f244960152f05fd3aed49847befdb3aebcbafc9f",
+    "F1_Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Floor_A.png": "cc87267e3999d288fbfdc404a899f6c38483b0d3da338c113cff51a29d876c56",
+    "Floor_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Trim_A.png": "455883af59f2e780ab279f0fc2f43c9dc164cbb07377b94705eca1f5048dce02",
+    "Trim_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d",
+    "Wall_A.png": "4c78c7b83f906210b7e0df6ea5de1f6918a5cf60dc8f76c062381a6175d11bc4",
+    "Wall_N.png": "50761dd383077ec328caa7e6882927b1824376c5b890c52caff5a5cd1970148d"
+  }
+}

@@ -1,5 +1,7 @@
 # Rift activity time graphs
 
+2026-10-14 update: casual base HUD layout, independent graphs and top-right edict follow the [new source handoff](Casual_Battle_HUD_20261014.en.md). Historical runtime evidence below does not validate the new skin.
+
 Updated: 2026-10-03 · [한국어](Rift_Activity_Time.md)
 
 Rift battles show **Movement, Attack, Evasion and Farming** in real time. An independent HUD places one stacked 100% bar above four cumulative time/share labels and cumulative graphs. The horizontal axis is elapsed Rift time; the vertical axis is total seconds spent on that activity by that moment. Farming for 0.4 seconds, doing something else, then farming for another 0.4 seconds produces a flat stretch at 0.4 seconds followed by a rise to 0.8 seconds. The graph spans this play session's observation start through the current moment, rather than only the last 30 seconds. The hint above the graphs states the displayed start/end times.

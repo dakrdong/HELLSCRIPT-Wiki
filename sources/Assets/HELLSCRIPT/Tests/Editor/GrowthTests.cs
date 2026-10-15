@@ -120,7 +120,7 @@ namespace Hellscript.Tests
                     CollectionAssert.AreEqual(projected.rules.Select(r=>r.id),hero.build.rules.Select(r=>r.id));
                     Assert.AreEqual(JsonUtility.ToJson(projected.skillRanks),JsonUtility.ToJson(hero.build.skillRanks));
                 }
-                store.Data.selectedHero=2;var owner=store.Data.Hero;owner.level=3;var owned=ContentTestAccounts.OwnSkills(owner,catalog,"M01");owned=ClassSkillTree.Equip(owned,owner,"M01",0);owned.ProjectLegacy(owner.build,catalog);owner.edict=owned.ProjectEdict();var custom=owner.build;custom.name="직접 만든 조건";custom.version="owner-saved";custom.rules.Single(r=>r.skill==12).enabled=false;custom.distance=9;
+                ContentTestAccounts.ExistingMaleRoster(store.Data);store.Data.selectedHero=2;var owner=store.Data.Hero;owner.level=3;var owned=ContentTestAccounts.OwnSkills(owner,catalog,"M01");owned=ClassSkillTree.Equip(owned,owner,"M01",0);owned.ProjectLegacy(owner.build,catalog);owner.edict=owned.ProjectEdict();var custom=owner.build;custom.name="직접 만든 조건";custom.version="owner-saved";custom.rules.Single(r=>r.skill==12).enabled=false;custom.distance=9;
                 string expected=JsonUtility.ToJson(custom);Assert.IsTrue(store.Save());var restored=new GameStore(directory,catalog);
                 Assert.AreEqual(expected,JsonUtility.ToJson(restored.Data.Hero.build));
             }

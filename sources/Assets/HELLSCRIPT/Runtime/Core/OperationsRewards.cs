@@ -72,7 +72,7 @@ namespace Hellscript
             return Transact("operations:"+deliveryId,"operations:"+packageId+":"+sourceStage+":"+fingerprint,a=>
             {
                 if(a.suspendedRun!=null)return false;
-                int cleared=Math.Max(1,a.heroes.SelectMany(h=>h.riftProgress.best).Where(b=>b.milliseconds>0).Select(b=>b.stage).DefaultIfEmpty(1).Max());
+                int cleared=Math.Max(1,HeroSlots.Created(a).SelectMany(h=>h.riftProgress.best).Where(b=>b.milliseconds>0).Select(b=>b.stage).DefaultIfEmpty(1).Max());
                 if(sourceStage>cleared)return false;
                 LiveOpsConfig.ValidateGrants(grants,sourceStage);
                 int index=0;

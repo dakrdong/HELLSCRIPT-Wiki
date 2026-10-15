@@ -7,6 +7,7 @@ namespace Hellscript
     public sealed class EquipmentSlotView:MonoBehaviour
     {
         public string ItemId {get;private set;}
+        public UiSkin Skin {get;private set;}
         EquipmentDropHighlight dropHighlight;
         public bool DropHighlighted=>dropHighlight!=null&&dropHighlight.gameObject.activeSelf;
         public void SetDropHighlight(bool enabled,bool hovered=false)
@@ -19,39 +20,40 @@ namespace Hellscript
             if(dropHighlight==null)return;
             dropHighlight.gameObject.SetActive(enabled);dropHighlight.hovered=hovered;dropHighlight.transform.SetAsLastSibling();
         }
-        public static RectTransform Create(Transform parent,Item item,float x,float y,float size,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,string label=null)
+        public static RectTransform Create(Transform parent,Item item,float x,float y,float size,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,string label=null,UiSkin skin=null)
         {
             var r=UiLayout.Rect(item==null?"Empty equipment slot":"Equipment "+item.id,parent);UiLayout.Place(r,x,y,size,size);
-            Paint(r,item,font,selected,equipped,showSelection);if(!string.IsNullOrEmpty(label))Caption(r,label,font);return r;
+            Paint(r,item,font,selected,equipped,showSelection,skin);if(!string.IsNullOrEmpty(label))Caption(r,label,font,skin);return r;
         }
-        public static StorageSurface Paint(RectTransform root,Item item,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false)
+        public static StorageSurface Paint(RectTransform root,Item item,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,UiSkin skin=null)
         {
-            var view=root.GetComponent<EquipmentSlotView>();if(view==null)view=root.gameObject.AddComponent<EquipmentSlotView>();view.ItemId=item?.id;
+            var view=root.GetComponent<EquipmentSlotView>();if(view==null)view=root.gameObject.AddComponent<EquipmentSlotView>();view.ItemId=item?.id;view.Skin=skin;
+            font=font??skin?.BodyFont;
             var frame=root.GetComponent<StorageSurface>();if(frame==null)frame=root.gameObject.AddComponent<StorageSurface>();float size=root.rect.width;
-            frame.Paint(item==null?UiTheme.PanelHex:selected?UiTheme.BorderHex:UiTheme.HoverHex,item==null?UiTheme.PanelHex:UiTheme.RaisedHex,selected?UiTheme.GoldHex:item==null?UiTheme.BorderHex:EquipmentGradePalette.Hex[Storage.Grade(item)]);frame.inset=true;
+            frame.Paint(item==null?UiTheme.PanelHex:selected?UiTheme.BorderHex:UiTheme.HoverHex,item==null?UiTheme.PanelHex:UiTheme.RaisedHex,selected?UiTheme.GoldHex:item==null?UiTheme.BorderHex:EquipmentGradePalette.Hex[Storage.Grade(item)]);frame.inset=true;frame.SetSkin(skin,selected?skin?.Gold:item==null?skin?.Edge:StorageSurface.Hex(EquipmentGradePalette.Hex[Storage.Grade(item)]),radius:8,shadow:2);
             if(item==null)return frame;
-            Icon(root,item,3,3,size-6);
-            var level=UiLayout.Text(root,"Equipment level",item.enhancement>0?"+"+item.enhancement+" · "+item.level:"Lv."+item.level,2,equipped?size-26:size-14,size-5,12,8,UiTheme.Text,font);level.alignment=TextAnchor.MiddleRight;
-            if(item.locked)Glyph(root,"Equipment locked","lock",size-15,2,12,UiTheme.Gold);
+            Icon(root,item,3,3,size-6,skin:skin);
+            var level=UiLayout.Text(root,"Equipment level",item.enhancement>0?"+"+item.enhancement+" · "+item.level:"Lv."+item.level,2,equipped?size-26:size-14,size-5,12,8,skin?.Navy??UiTheme.Text,font);level.alignment=TextAnchor.MiddleRight;
+            if(item.locked)Glyph(root,"Equipment locked","lock",size-15,2,12,skin?.Navy??UiTheme.Gold);
             if(equipped)Glyph(root,"Equipment worn","check",2,2,11,UiTheme.Success);
-            if(item.slot==0)UiLayout.Text(root,"Equipment hands",EquipmentSlots.TwoHanded(item)?"2H":EquipmentSlots.Offhand(item)?"OFF":"1H",16,2,24,12,7,UiTheme.Gold,font);
+            if(item.slot==0)UiLayout.Text(root,"Equipment hands",EquipmentSlots.TwoHanded(item)?"2H":EquipmentSlots.Offhand(item)?"OFF":"1H",16,2,24,12,7,skin?.Navy??UiTheme.Gold,font);
             if(showSelection)
             {
-                var check=UiLayout.Rect("Equipment selection",root);UiLayout.Place(check,size-17,2,15,15);var s=check.gameObject.AddComponent<StorageSurface>();s.Paint(UiTheme.PanelHex,UiTheme.PanelHex,UiTheme.GoldHex);s.raycastTarget=false;
-                if(selected)Glyph(check,"Selected","check",1,1,13,UiTheme.Gold);
+                var check=UiLayout.Rect("Equipment selection",root);UiLayout.Place(check,size-17,2,15,15);var s=check.gameObject.AddComponent<StorageSurface>();s.Paint(UiTheme.PanelHex,UiTheme.PanelHex,UiTheme.GoldHex);s.SetSkin(skin,radius:3,shadow:0);s.raycastTarget=false;
+                if(selected)Glyph(check,"Selected","check",1,1,13,skin?.Navy??UiTheme.Gold);
             }
             return frame;
         }
-        public static void Caption(RectTransform root,string label,Font font=null)
+        public static void Caption(RectTransform root,string label,Font font=null,UiSkin skin=null)
         {
-            float size=root.rect.width;var t=UiLayout.Text(root,"Equipment position",label,2,size-13,size-4,12,8,UiTheme.Gold,font);t.alignment=TextAnchor.MiddleCenter;
+            float size=root.rect.width;var t=UiLayout.Text(root,"Equipment position",label,2,size-13,size-4,12,8,skin?.Navy??UiTheme.Gold,font??skin?.BodyFont);t.alignment=TextAnchor.MiddleCenter;
             t.resizeTextForBestFit=true;t.resizeTextMinSize=6;t.resizeTextMaxSize=8;
         }
-        public static RectTransform Icon(Transform parent,Item item,float x,float y,float size,float opacity=1)
+        public static RectTransform Icon(Transform parent,Item item,float x,float y,float size,float opacity=1,UiSkin skin=null)
         {
             var r=UiLayout.Rect("Equipment art",parent);UiLayout.Place(r,x,y,size,size);
             if(item==null)return r;
-            var dedicated=EquipmentArt.ForItem(item);
+            var dedicated=EquipmentArt.ForItem(item,skin?.EquipmentArt);
             if(dedicated!=null)
             {var image=r.gameObject.AddComponent<RawImage>();image.texture=dedicated;image.raycastTarget=false;image.color=new Color(1,1,1,opacity);}
             else if(ItemCatalog.Base(item).legacyIndex>=24)

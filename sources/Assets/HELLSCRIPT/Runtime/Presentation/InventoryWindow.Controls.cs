@@ -7,27 +7,73 @@ namespace Hellscript
     public sealed partial class InventoryWindow
     {
         static Color ColorOf(string hex)=>StorageSurface.Hex(hex);
+        static readonly UiSkin Skin=UiSkin.Casual.WithEquipmentArt(CasualEquipmentArt.Provider);
+        Font BodyFont=>Skin.BodyFont;
+        UiSkin SkinAt(Transform parent)
+        {
+            var slot=parent.GetComponentInParent<EquipmentSlotView>();if(slot!=null)return slot.Skin;
+            var button=parent.GetComponentInParent<UiButton>();
+            if(button!=null&&button.Chrome!=UiButtonChrome.Casual&&button.Chrome!=UiButtonChrome.CasualClose)return null;
+            return parent.GetComponentInParent<ItemDetailPopup>()==null?Skin:null;
+        }
+        Color LabelInk(Transform parent,Color color)
+        {
+            var skin=SkinAt(parent);if(skin==null)return color;
+            var button=parent.GetComponentInParent<UiButton>();
+            if(button!=null&&button.Chosen&&color==muted)return skin.Navy;
+            var result=skin.TextColor(color);result.a=color.a;return result;
+        }
+        void Title(Text text)
+        {text.font=Skin.LabelFont(text.text);text.color=UiTheme.D4TitleTop;text.gameObject.AddComponent<SkillTreeD4TextShadow>().Apply(SkillTreeD4Looks.Get("chrome.title.gold").textShadows,1);}
         RectTransform Rect(string name,Transform parent){var r=new GameObject(name,typeof(RectTransform)).GetComponent<RectTransform>();r.SetParent(parent,false);return r;}
         static void Clear(Transform parent){foreach(Transform child in parent){child.gameObject.SetActive(false);Destroy(child.gameObject);}}
         static void Stretch(RectTransform r){r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;}
         static void Place(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=new Vector2(0,1);r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(w,h);}
-        RectTransform Panel(Transform parent,string name,string top,string bottom,string edge="00000000")
-        {var r=Rect(name,parent);r.gameObject.AddComponent<StorageSurface>().Paint(top,bottom,edge);return r;}
-        Text Txt(Transform parent,string value,float x,float y,float w,float h,int size=11,Color? color=null,TextAnchor align=TextAnchor.MiddleLeft)
+        RectTransform Panel(Transform parent,string name,string top,string bottom,string edge="00000000",bool casual=true)
         {
-            var r=Rect("Text",parent);Place(r,x,y,w,h);var t=r.gameObject.AddComponent<Text>();t.font=font;t.text=Loc.T(value);t.color=color??pale;t.fontSize=Mathf.RoundToInt(size*Mathf.Clamp(textScale,.8f,1.5f));
+            var r=Rect(name,parent);var surface=r.gameObject.AddComponent<StorageSurface>();surface.Paint(top,bottom,edge);
+            var skin=casual?SkinAt(parent):null;if(skin==null)return r;
+            if(name=="Inventory backdrop"){surface.top=skin.Sky;surface.bottom=skin.CreamShade;surface.edge=Color.clear;}
+            else if(name=="Inventory frame")surface.SetSkin(skin,radius:landscape?18:20,borderWidth:3,shadow:0);
+            else if(name=="Rule"||name=="Two hand link")surface.top=surface.bottom=skin.Navy;
+            else if(name=="Scrollbar track")surface.top=surface.bottom=skin.Disabled;
+            else if(name=="Scrollbar thumb")surface.top=surface.bottom=skin.Edge;
+            else
+            {
+                surface.color=new Color(1,1,1,surface.top.a);
+                bool flat=name=="Equipment label"||name=="Speech bubble tail";
+                surface.SetSkin(skin,surface.edge.a>0?skin.Navy:Color.clear,radius:flat?0:12,borderWidth:surface.edge.a>0?2:0,shadow:flat?0:3);
+            }
+            return r;
+        }
+        Text Txt(Transform parent,string value,float x,float y,float w,float h,int size=11,Color? color=null,TextAnchor align=TextAnchor.MiddleLeft,bool heading=false)
+        {
+            var r=Rect("Text",parent);Place(r,x,y,w,h);var t=r.gameObject.AddComponent<Text>();t.text=Loc.T(value);t.font=BodyFont;
+            var skin=SkinAt(parent);if(skin!=null)skin.ApplyLabel(t,display:heading);
+            t.color=LabelInk(parent,color??pale);t.fontSize=Mathf.RoundToInt(size*Mathf.Clamp(textScale,.8f,1.5f));
             t.alignment=align;t.supportRichText=false;t.horizontalOverflow=HorizontalWrapMode.Wrap;t.verticalOverflow=VerticalWrapMode.Truncate;t.raycastTarget=false;return t;
         }
-        Button Btn(Transform parent,string label,float x,float y,float w,float h,Action click,bool primary=false,int size=11)
+        Button Btn(Transform parent,string label,float x,float y,float w,float h,Action click,bool primary=false,int size=11,bool casual=true)
         {
-            var r=Panel(parent,label,primary?"71352a":UiTheme.BorderHex,primary?"482219":UiTheme.HoverHex,primary?UiTheme.GoldHex:UiTheme.GoldDeepHex);Place(r,x,y,w,h);r.GetComponent<StorageSurface>().inset=true;
+            var r=Panel(parent,label,primary?"71352a":UiTheme.BorderHex,primary?"482219":UiTheme.HoverHex,primary?UiTheme.GoldHex:UiTheme.GoldDeepHex,casual:false);Place(r,x,y,w,h);r.GetComponent<StorageSurface>().inset=true;
             var b=r.gameObject.AddComponent<UiButton>();b.targetGraphic=r.GetComponent<Image>();UiTheme.Button(b,primary);
-            var t=Txt(r,label,4,0,w-8,h,size,pale,TextAnchor.MiddleCenter);t.resizeTextForBestFit=true;t.resizeTextMinSize=8;t.resizeTextMaxSize=t.fontSize;b.onClick.AddListener(()=>click());return b;
+            var skin=casual?SkinAt(parent):null;if(skin!=null)skin.ApplyChrome(b,close:label=="×");
+            var t=Txt(r,label,4,0,w-8,h,size,pale,TextAnchor.MiddleCenter,heading:true);if(skin!=null&&label=="×")t.color=skin.White;
+            t.resizeTextForBestFit=true;t.resizeTextMinSize=8;t.resizeTextMaxSize=t.fontSize;b.onClick.AddListener(()=>click());
+            // Preserve edge-button silhouettes while only the full-bleed panels use the frame clip.
+            if(parent.parent==body&&(parent.name=="Header"||parent.name=="Footer"))r.SetParent(edgeControls,true);
+            return b;
         }
         void Glyph(Transform parent,string symbol,float x,float y,float size,Color color)
-        {var r=Rect(symbol,parent);Place(r,x,y,size,size);var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=color;glyph.raycastTarget=false;}
+        {var r=Rect(symbol,parent);Place(r,x,y,size,size);var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=LabelInk(parent,color);glyph.raycastTarget=false;}
         void Check(Transform parent,float x,float y,float size,bool selected)
-        {var r=Panel(parent,"Selection checkbox",selected?UiTheme.GoldHex:UiTheme.PanelHex,selected?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);Place(r,x,y,size,size);r.GetComponent<Image>().raycastTarget=false;if(selected)Glyph(r,"check",1,1,size-2,ink);}
+        {var r=Panel(parent,"Selection checkbox",UiTheme.PanelHex,UiTheme.PanelHex,UiTheme.GoldHex,casual:false);Place(r,x,y,size,size);PaintCheck(r,selected);r.GetComponent<Image>().raycastTarget=false;if(selected)Glyph(r,"check",1,1,size-2,ink);}
+        void PaintCheck(Transform check,bool selected)
+        {
+            var surface=check.GetComponent<StorageSurface>();var skin=SkinAt(check);
+            surface.Paint(selected?UiTheme.GoldHex:UiTheme.PanelHex,selected?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);
+            surface.SetSkin(skin,selected?skin?.Gold:skin?.Edge,radius:3,shadow:0);
+        }
         void FilterButton(Transform parent,string label,float x,float y,float w,string kind)
         {
             var button=Btn(parent,label,x,y,w,28,()=>ShowFilter(kind),false,10);button.name="inventory-"+kind;
@@ -41,7 +87,7 @@ namespace Hellscript
             var corners=new Vector3[4];anchor.GetWorldCorners(corners);var bottom=frame.InverseTransformPoint(corners[0]);
             float w=anchor.rect.width,h=kind=="grade"?232:200;
             filterMenu=Rect("Inventory filter layer",overlays);Stretch(filterMenu);
-            var shade=Btn(filterMenu,"",0,0,width,height,CloseFilter);shade.name="inventory-filter-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
+            var shade=Btn(filterMenu,"",0,0,width,height,CloseFilter,casual:false);shade.name="inventory-filter-backdrop";UiTheme.Backdrop(shade);shade.GetComponent<StorageSurface>().Paint("00000000","00000000");
             var menu=Panel(filterMenu,"Inventory filter list",UiTheme.BorderHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);
             Place(menu,Mathf.Clamp(bottom.x,8,width-w-8),Mathf.Clamp(frame.rect.yMax-bottom.y+4,8,height-h-8),w,h);
             Txt(menu,kind=="grade"?"등급":"정렬",10,0,w-48,30,12,gold);
@@ -67,18 +113,20 @@ namespace Hellscript
             {
                 int bit=1<<n;bool chosen=(grades&bit)!=0;var row=Find("inventory-grade-option-"+n);row.interactable=grades!=bit;
                 UiTheme.Choice(row,chosen,false);
-                var check=(RectTransform)row.transform.Find("Selection checkbox");check.GetComponent<StorageSurface>().Paint(chosen?UiTheme.GoldHex:UiTheme.PanelHex,chosen?UiTheme.GoldHex:UiTheme.PanelHex,UiTheme.GoldHex);
+                var check=(RectTransform)row.transform.Find("Selection checkbox");PaintCheck(check,chosen);
                 if(check.childCount>0)check.GetChild(0).gameObject.SetActive(chosen);else if(chosen)Glyph(check,"check",1,1,13,ink);
             }
         }
-        void DrawIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size);
+        void DrawIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size,skin:Skin);
         ScrollRect Scroll(Transform parent,string name,float x,float y,float w,float h,out RectTransform content)
         {
             var root=Panel(parent,name,UiTheme.BackgroundHex,UiTheme.BackgroundHex);Place(root,x,y,w,h);
-            var viewport=Rect("Viewport",root);Place(viewport,0,0,w-6,h);viewport.gameObject.AddComponent<RectMask2D>();var fill=viewport.gameObject.AddComponent<Image>();fill.color=Color.clear;
+            root.GetComponent<StorageSurface>().SetSkin(Skin,radius:12,borderWidth:0,shadow:0);
+            var clip=Skin.Clip(root,radius:12,inset:0);
+            var viewport=Rect("Viewport",clip);Place(viewport,0,0,w-6,h);viewport.gameObject.AddComponent<RectMask2D>();var fill=viewport.gameObject.AddComponent<Image>();fill.color=Color.clear;
             content=Rect("Content",viewport);content.anchorMin=new Vector2(0,1);content.anchorMax=Vector2.one;content.pivot=new Vector2(.5f,1);content.sizeDelta=Vector2.zero;
             var scroll=root.gameObject.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.vertical=true;scroll.viewport=viewport;scroll.content=content;scroll.movementType=ScrollRect.MovementType.Clamped;scroll.scrollSensitivity=26;
-            var track=Panel(root,"Scrollbar track",UiTheme.HoverHex,UiTheme.HoverHex);Place(track,w-4,0,3,h);
+            var track=Panel(clip,"Scrollbar track",UiTheme.HoverHex,UiTheme.HoverHex);Place(track,w-4,0,3,h);
             var thumb=Panel(track,"Scrollbar thumb",UiTheme.GoldDeepHex,UiTheme.GoldDeepHex);Stretch(thumb);
             var bar=track.gameObject.AddComponent<Scrollbar>();bar.handleRect=thumb;bar.targetGraphic=thumb.GetComponent<Image>();bar.direction=Scrollbar.Direction.BottomToTop;
             scroll.verticalScrollbar=bar;scroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;return scroll;

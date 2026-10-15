@@ -1,0 +1,7 @@
+{
+  "result": "harness failed before GUID comparison",
+  "action": "Read new dedicated .meta files from git diff shared0cc versus pre-merge HEAD74095",
+  "error": "FileNotFoundError: Assets/HELLSCRIPT/Resources/Art/Casual/Equipment.meta",
+  "cause": "The two branches differ in shared additions too; deleted-side common metadata is intentionally absent from sparse checkout.",
+  "correction": "Select dedicated added metadata from cdb9c140..74095ce4, then compare GUIDs with all tracked metadata in shared0cc. No source/assets changed and no Unity execution."
+}

@@ -39,6 +39,7 @@ namespace Hellscript
             try
             {
                 var hero=Data.heroes.Single(h=>h.id==heroId);
+                if(!hero.created)throw new ArgumentException("The hero has not been created.");
                 bool replacing=heroId==Data.Hero.id&&RiftEntryRules.CanReplace(Data,replaceRunId);
                 if(replaceRunId!=null&&!replacing||Data.suspendedRun!=null&&!RepeatHunt.Terminal(Data.suspendedRun)&&!replacing)
                     throw new InvalidOperationException("물약 구매는 성소에서만 가능합니다.");

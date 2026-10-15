@@ -1,0 +1,3432 @@
+{
+  "timestamp_utc": "2026-10-14T06:46:33.588478+00:00",
+  "mode": "read_only_project_audit; this evidence JSON is the only written file",
+  "roots": {
+    "original": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT",
+    "skill_skin": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-6/skill-skin"
+  },
+  "heads": {
+    "original": "6378320b975117d7ba6c7a6b48bda0e853d4d124",
+    "skill_skin": "df2e366c18ba01eaf8a2ceaa145dfb8c940e5f7a"
+  },
+  "scope": "Assets, Packages, ProjectSettings, tools; rg --no-ignore; external GUID counts exclude each asset own .meta; generated output, Library, Builds, Docs and other worktrees not scanned",
+  "counting": "Counts are matching text lines, not proven exhaustive runtime call counts. Shared dispatcher and concatenated Resources paths are separately recorded. Zero GUID or literal counts never mean unused.",
+  "png_count": 49,
+  "total_png_logical_bytes": 47215475,
+  "total_meta_logical_bytes": 196722,
+  "all_49_png_meta_pairs_identical": true,
+  "all_external_guid_reference_counts_zero": true,
+  "disposition": "Preserve all 49 resources; replacement and visual validation are incomplete, other screens currently use them. No cleanup action attempted or pending approval.",
+  "parent_portal_status": "Parent reports no approved portal/rift/TitleSanctuary/포털 replacement ID. UI supplements19 remain on-hold. Candidate rift-entry-portal-casual-v01 awaits a single production owner. This audit does not authorize generation.",
+  "disk": "Logical PNG/.meta byte sums only. No cleanup or disk-space recovery was performed; df before/after not applicable.",
+  "tests": "No Unity, builds, tests or browser actions executed. Static source and file hash inspection only.",
+  "family_references": {
+    "sanctuary": {
+      "original": {
+        "matching_lines": 4,
+        "files": 4,
+        "production_runtime_matching_lines": 3,
+        "production_runtime_files": 3,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/TitleScreenTests.cs",
+            "line": 52,
+            "text": "            var texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");Assert.IsNotNull(texture);Assert.IsFalse(texture.isReadable);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+            "line": 14,
+            "text": "        public void Initialize(TitleSession state,string artwork=\"Art/Title/TitleSanctuary\",bool puzzleHub=false)"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 177,
+            "text": "            var picture=Box(panel,\"Sanctuary\",0,0,w,h).gameObject.AddComponent<RawImage>();picture.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");picture.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs",
+            "line": 281,
+            "text": "            var art=Box(p,\"Sanctuary artwork\",1,1,w-2,h-2).gameObject.AddComponent<RawImage>();art.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");art.raycastTarget=false;"
+          }
+        ]
+      },
+      "skill_skin": {
+        "matching_lines": 4,
+        "files": 4,
+        "production_runtime_matching_lines": 3,
+        "production_runtime_files": 3,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/TitleScreenTests.cs",
+            "line": 52,
+            "text": "            var texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");Assert.IsNotNull(texture);Assert.IsFalse(texture.isReadable);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+            "line": 14,
+            "text": "        public void Initialize(TitleSession state,string artwork=\"Art/Title/TitleSanctuary\",bool puzzleHub=false)"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs",
+            "line": 281,
+            "text": "            var art=Box(p,\"Sanctuary artwork\",1,1,w-2,h-2).gameObject.AddComponent<RawImage>();art.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");art.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 177,
+            "text": "            var picture=Box(panel,\"Sanctuary\",0,0,w,h).gameObject.AddComponent<RawImage>();picture.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");picture.raycastTarget=false;"
+          }
+        ]
+      }
+    },
+    "coin": {
+      "original": {
+        "matching_lines": 28,
+        "files": 16,
+        "production_runtime_matching_lines": 17,
+        "production_runtime_files": 9,
+        "references": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 51,
+            "text": "    for ident in [\"abyssal-coin\", \"enhancement-stone\"]+[\"core-\"+s for s in [\"weapon\",\"head\",\"chest\",\"hands\",\"feet\",\"belt\",\"amulet\",\"ring\"]]:"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 418,
+            "text": "    coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 421,
+            "text": "    coin_source=IMPL+'PotionSlotsEvidence/abyssal-coin-source.json'"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 424,
+            "text": "    rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 430,
+            "text": "        IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 1097,
+            "text": "    shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')"
+          },
+          {
+            "path": "tools/test_wiki.py",
+            "line": 102,
+            "text": "        coin=next(r for r in resources if r['id']=='currency-abyssal-coin')"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 64,
+            "text": "            foreach(string id in new[]{\"frame-vital\",\"fill-vital\",\"potion-hp\",\"currency-abyssal-coin\"})"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/AttendanceArtTests.cs",
+            "line": 72,
+            "text": "            Assert.AreEqual(\"Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png\",AssetDatabase.GetAssetPath(AttendanceArt.For(AttendanceRewardKind.Coins)));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftEntrySmoke.Preparation.cs",
+            "line": 128,
+            "text": "                var coin=v.Frame.GetComponentsInChildren<Image>().Single(i=>i.transform.parent==v.Frame&&i.sprite!=null&&i.sprite.name==\"currency-abyssal-coin\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs",
+            "line": 16,
+            "text": "            yield return (\"premium\",Loc.T(\"심연 주화\"),a.premium,\"abyssal-coin\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+            "line": 29,
+            "text": "            =>Draw(parent,icon==\"abyssal-coin\"?\"Abyssal Coin\":\"currency-icon-\"+icon,ForIcon(icon),x,y,size);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.Potions.cs",
+            "line": 50,
+            "text": "            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name==\"Abyssal Coin\"&&i.sprite!=null&&i.sprite.texture==Resources.Load<Texture2D>(\"Art/GlobalHUD/currency-abyssal-coin\")),\"Original Abyssal Coin sprite was not imported.\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs",
+            "line": 95,
+            "text": "            CurrencyIconView.Create(parent,\"abyssal-coin\",0,3,18);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs",
+            "line": 124,
+            "text": "            CurrencyIconView.Create(row,\"abyssal-coin\",left,h-25,18);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Quality.cs",
+            "line": 16,
+            "text": "            var coin=CurrencyIconView.Create(parent,\"abyssal-coin\",0,y+(h-icon)/2,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+            "line": 8,
+            "text": "    // Dialogs of the slot screen: the workstation sheet (portrait), the abyssal-coin confirmation before a station is unlocked,"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+            "line": 45,
+            "text": "                Txt(parent,\"심연 주화\",0,y,w*.5f,rh,Z(.9f),muted);CurrencyIconView.Create(parent,\"abyssal-coin\",w-hw-icon-E(.5f),y+(rh-icon)/2,icon);Bold(Txt(parent,have,w-hw-2,y,hw+2,rh,Z(.94f),pale,TextAnchor.MiddleRight));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+            "line": 57,
+            "text": "                CurrencyIconView.Create(confirm.transform,\"abyssal-coin\",Mathf.Max(E(.5f),(bw-tw)/2-icon-E(.5f)),(bh-icon)/2,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 68,
+            "text": "        {float size=compact?16:22;Image(parent,\"Art/GlobalHUD/currency-abyssal-coin\",x,y,size);Text(parent,\"Abyssal Coins\",amount.ToString(\"N0\"),x+size+5,y,width-size-5,size,compact?UiTheme.Caption:UiTheme.Body).alignment=TextAnchor.MiddleLeft;}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 130,
+            "text": "            Image(v.Frame,\"Art/GlobalHUD/currency-abyssal-coin\",walletX+walletW-numberW-icon-.35f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 414,
+            "text": "            Image(fast.transform,\"Art/GlobalHUD/currency-abyssal-coin\",bw*.5f-.7f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Chrome.cs",
+            "line": 130,
+            "text": "            if(tab==1){right=Wallet(header,\"abyssal-coin\",store.Data.premium,right,wy,wh,UiTheme.PaidFatigueText)-E(.5f);right=Wallet(header,\"enhancement-stone\",store.Data.enhancementStones,right,wy,wh,UiTheme.GoldBright)-E(.5f);}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Chrome.cs",
+            "line": 131,
+            "text": "            if(tab==3)right=Wallet(header,\"abyssal-coin\",store.Data.premium,right,wy,wh,UiTheme.PaidFatigueText)-E(.5f);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+            "line": 37,
+            "text": "        // One workstation (HTML .sl-station): busy with its job and progress, free, or locked behind the abyssal-coin unlock."
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+            "line": 57,
+            "text": "                CurrencyIconView.Create(unlock.transform,\"abyssal-coin\",E(.7f),(btn-icon)/2,icon);Bold(Txt(unlock.transform,cost.ToString(),E(.7f)+icon+E(.4f),0,bw-E(1.1f)-icon-E(.4f),btn,Z(.84f),UiTheme.PaidFatigueText,TextAnchor.MiddleLeft));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+            "line": 103,
+            "text": "            CurrencyIconView.Create(b.transform,\"abyssal-coin\",x0+lw+gap,(h-icon)/2,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+            "line": 12,
+            "text": "                AttendanceRewardKind.Coins=>\"Art/GlobalHUD/currency-abyssal-coin\","
+          }
+        ]
+      },
+      "skill_skin": {
+        "matching_lines": 28,
+        "files": 16,
+        "production_runtime_matching_lines": 17,
+        "production_runtime_files": 9,
+        "references": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 51,
+            "text": "    for ident in [\"abyssal-coin\", \"enhancement-stone\"]+[\"core-\"+s for s in [\"weapon\",\"head\",\"chest\",\"hands\",\"feet\",\"belt\",\"amulet\",\"ring\"]]:"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 418,
+            "text": "    coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 421,
+            "text": "    coin_source=IMPL+'PotionSlotsEvidence/abyssal-coin-source.json'"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 424,
+            "text": "    rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 430,
+            "text": "        IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 1097,
+            "text": "    shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')"
+          },
+          {
+            "path": "tools/test_wiki.py",
+            "line": 102,
+            "text": "        coin=next(r for r in resources if r['id']=='currency-abyssal-coin')"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/AttendanceArtTests.cs",
+            "line": 72,
+            "text": "            Assert.AreEqual(\"Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png\",AssetDatabase.GetAssetPath(AttendanceArt.For(AttendanceRewardKind.Coins)));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+            "line": 29,
+            "text": "            =>Draw(parent,icon==\"abyssal-coin\"?\"Abyssal Coin\":\"currency-icon-\"+icon,ForIcon(icon),x,y,size);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 64,
+            "text": "            foreach(string id in new[]{\"frame-vital\",\"fill-vital\",\"potion-hp\",\"currency-abyssal-coin\"})"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftEntrySmoke.Preparation.cs",
+            "line": 128,
+            "text": "                var coin=v.Frame.GetComponentsInChildren<Image>().Single(i=>i.transform.parent==v.Frame&&i.sprite!=null&&i.sprite.name==\"currency-abyssal-coin\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs",
+            "line": 16,
+            "text": "            yield return (\"premium\",Loc.T(\"심연 주화\"),a.premium,\"abyssal-coin\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs",
+            "line": 95,
+            "text": "            CurrencyIconView.Create(parent,\"abyssal-coin\",0,3,18);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/DailyQuestWindow.cs",
+            "line": 124,
+            "text": "            CurrencyIconView.Create(row,\"abyssal-coin\",left,h-25,18);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Chrome.cs",
+            "line": 130,
+            "text": "            if(tab==1){right=Wallet(header,\"abyssal-coin\",store.Data.premium,right,wy,wh,UiTheme.PaidFatigueText)-E(.5f);right=Wallet(header,\"enhancement-stone\",store.Data.enhancementStones,right,wy,wh,UiTheme.GoldBright)-E(.5f);}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Chrome.cs",
+            "line": 131,
+            "text": "            if(tab==3)right=Wallet(header,\"abyssal-coin\",store.Data.premium,right,wy,wh,UiTheme.PaidFatigueText)-E(.5f);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+            "line": 8,
+            "text": "    // Dialogs of the slot screen: the workstation sheet (portrait), the abyssal-coin confirmation before a station is unlocked,"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+            "line": 45,
+            "text": "                Txt(parent,\"심연 주화\",0,y,w*.5f,rh,Z(.9f),muted);CurrencyIconView.Create(parent,\"abyssal-coin\",w-hw-icon-E(.5f),y+(rh-icon)/2,icon);Bold(Txt(parent,have,w-hw-2,y,hw+2,rh,Z(.94f),pale,TextAnchor.MiddleRight));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Dialogs.cs",
+            "line": 57,
+            "text": "                CurrencyIconView.Create(confirm.transform,\"abyssal-coin\",Mathf.Max(E(.5f),(bw-tw)/2-icon-E(.5f)),(bh-icon)/2,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+            "line": 12,
+            "text": "                AttendanceRewardKind.Coins=>\"Art/GlobalHUD/currency-abyssal-coin\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+            "line": 37,
+            "text": "        // One workstation (HTML .sl-station): busy with its job and progress, free, or locked behind the abyssal-coin unlock."
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+            "line": 57,
+            "text": "                CurrencyIconView.Create(unlock.transform,\"abyssal-coin\",E(.7f),(btn-icon)/2,icon);Bold(Txt(unlock.transform,cost.ToString(),E(.7f)+icon+E(.4f),0,bw-E(1.1f)-icon-E(.4f),btn,Z(.84f),UiTheme.PaidFatigueText,TextAnchor.MiddleLeft));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Slots.Work.cs",
+            "line": 103,
+            "text": "            CurrencyIconView.Create(b.transform,\"abyssal-coin\",x0+lw+gap,(h-icon)/2,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Quality.cs",
+            "line": 16,
+            "text": "            var coin=CurrencyIconView.Create(parent,\"abyssal-coin\",0,y+(h-icon)/2,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 68,
+            "text": "        {float size=compact?16:22;Image(parent,\"Art/GlobalHUD/currency-abyssal-coin\",x,y,size);Text(parent,\"Abyssal Coins\",amount.ToString(\"N0\"),x+size+5,y,width-size-5,size,compact?UiTheme.Caption:UiTheme.Body).alignment=TextAnchor.MiddleLeft;}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 130,
+            "text": "            Image(v.Frame,\"Art/GlobalHUD/currency-abyssal-coin\",walletX+walletW-numberW-icon-.35f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 414,
+            "text": "            Image(fast.transform,\"Art/GlobalHUD/currency-abyssal-coin\",bw*.5f-.7f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.Potions.cs",
+            "line": 50,
+            "text": "            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name==\"Abyssal Coin\"&&i.sprite!=null&&i.sprite.texture==Resources.Load<Texture2D>(\"Art/GlobalHUD/currency-abyssal-coin\")),\"Original Abyssal Coin sprite was not imported.\");"
+          }
+        ]
+      }
+    },
+    "storage_chest": {
+      "original": {
+        "matching_lines": 6,
+        "files": 4,
+        "production_runtime_matching_lines": 3,
+        "production_runtime_files": 2,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/ItemArtCoverageTests.cs",
+            "line": 106,
+            "text": "                Assert.AreEqual(\"Assets/HELLSCRIPT/Resources/Art/Storage/chest-\"+(state==\"claimed\"?\"open\":\"closed\")+\".png\",AssetDatabase.GetAssetPath(chest.sprite));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardChest.cs",
+            "line": 15,
+            "text": "            sprite=Resources.Load<Sprite>(\"Art/Storage/chest-\"+(state==\"claimed\"?\"open\":\"closed\"));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 22,
+            "text": "                if (IsOpen) return openArt != null ? openArt : openArt = Resources.Load<Sprite>(\"Art/Storage/chest-open\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 23,
+            "text": "                return closedArt != null ? closedArt : closedArt = Resources.Load<Sprite>(\"Art/Storage/chest-closed\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 80,
+            "text": "                Require(chest!=null&&chest.State==\"ready\"&&chest.sprite==Resources.Load<Sprite>(\"Art/Storage/chest-closed\")&&!chest.raycastTarget,\"Ready chest lost its native artwork\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 102,
+            "text": "            Require(claimed.GetComponentInChildren<RiftRewardChest>().sprite==Resources.Load<Sprite>(\"Art/Storage/chest-open\"),\"Claimed chest is not open artwork\");"
+          }
+        ]
+      },
+      "skill_skin": {
+        "matching_lines": 6,
+        "files": 4,
+        "production_runtime_matching_lines": 3,
+        "production_runtime_files": 2,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/ItemArtCoverageTests.cs",
+            "line": 106,
+            "text": "                Assert.AreEqual(\"Assets/HELLSCRIPT/Resources/Art/Storage/chest-\"+(state==\"claimed\"?\"open\":\"closed\")+\".png\",AssetDatabase.GetAssetPath(chest.sprite));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 80,
+            "text": "                Require(chest!=null&&chest.State==\"ready\"&&chest.sprite==Resources.Load<Sprite>(\"Art/Storage/chest-closed\")&&!chest.raycastTarget,\"Ready chest lost its native artwork\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 102,
+            "text": "            Require(claimed.GetComponentInChildren<RiftRewardChest>().sprite==Resources.Load<Sprite>(\"Art/Storage/chest-open\"),\"Claimed chest is not open artwork\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 22,
+            "text": "                if (IsOpen) return openArt != null ? openArt : openArt = Resources.Load<Sprite>(\"Art/Storage/chest-open\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 23,
+            "text": "                return closedArt != null ? closedArt : closedArt = Resources.Load<Sprite>(\"Art/Storage/chest-closed\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardChest.cs",
+            "line": 15,
+            "text": "            sprite=Resources.Load<Sprite>(\"Art/Storage/chest-\"+(state==\"claimed\"?\"open\":\"closed\"));"
+          }
+        ]
+      }
+    },
+    "potion_art_callers": {
+      "original": {
+        "matching_lines": 13,
+        "files": 10,
+        "production_runtime_matching_lines": 10,
+        "production_runtime_files": 7,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/ItemArtCoverageTests.cs",
+            "line": 56,
+            "text": "            foreach(var potion in PotionCatalog.All)Assert.IsNotNull(PotionArt.Bottle(PotionArt.IconId(potion)),potion.id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 56,
+            "text": "            var sprite = PotionArt.Bottle(id);Assert.IsNotNull(sprite);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs",
+            "line": 22,
+            "text": "                    var def=PotionCatalog.Get(slot.id);var art=PotionArt.Draw(root,def,3,3,size-6);art.color=Hero.potions.Count(slot.id)>0?Color.white:new Color(1,1,1,.35f);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs",
+            "line": 77,
+            "text": "                PotionArt.Draw(row.transform,def,8,12,48);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 79,
+            "text": "                var bottle = PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs",
+            "line": 65,
+            "text": "                PotionArt.Draw(b.transform,def,6,(ch-46)/2,46);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 112,
+            "text": "                d.potions[i]=new HudSlotState{id=def.id,icon=PotionArt.IconId(def),name=GemElixirs.Name(def),description=GemElixirs.Description(def),"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 319,
+            "text": "                    float isz=2.9f*B;if(def!=null)PotionArt.Draw(b.transform,def,.7f*B,(th-isz)/2,isz);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 326,
+            "text": "                    float isz=2.6f*B;if(def!=null)PotionArt.Draw(b.transform,def,(tw-isz)/2,4*S,isz);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs",
+            "line": 136,
+            "text": "                PotionArt.Draw(b.transform,def,8,12,50);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionSlotQuick.cs",
+            "line": 38,
+            "text": "            var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(PotionArt.IconId(PotionCatalog.Get(id)));image.preserveAspect=true;image.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionSlotQuick.cs",
+            "line": 57,
+            "text": "                var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(PotionArt.IconId(def));image.preserveAspect=true;image.raycastTarget=false;"
+          }
+        ]
+      },
+      "skill_skin": {
+        "matching_lines": 13,
+        "files": 10,
+        "production_runtime_matching_lines": 10,
+        "production_runtime_files": 7,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 56,
+            "text": "            var sprite = PotionArt.Bottle(id);Assert.IsNotNull(sprite);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/ItemArtCoverageTests.cs",
+            "line": 56,
+            "text": "            foreach(var potion in PotionCatalog.All)Assert.IsNotNull(PotionArt.Bottle(PotionArt.IconId(potion)),potion.id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs",
+            "line": 22,
+            "text": "                    var def=PotionCatalog.Get(slot.id);var art=PotionArt.Draw(root,def,3,3,size-6);art.color=Hero.potions.Count(slot.id)>0?Color.white:new Color(1,1,1,.35f);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Potions.cs",
+            "line": 77,
+            "text": "                PotionArt.Draw(row.transform,def,8,12,48);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 79,
+            "text": "                var bottle = PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 112,
+            "text": "                d.potions[i]=new HudSlotState{id=def.id,icon=PotionArt.IconId(def),name=GemElixirs.Name(def),description=GemElixirs.Description(def),"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/JewelerWindow.cs",
+            "line": 136,
+            "text": "                PotionArt.Draw(b.transform,def,8,12,50);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionSlotQuick.cs",
+            "line": 38,
+            "text": "            var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(PotionArt.IconId(PotionCatalog.Get(id)));image.preserveAspect=true;image.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionSlotQuick.cs",
+            "line": 57,
+            "text": "                var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(PotionArt.IconId(def));image.preserveAspect=true;image.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 319,
+            "text": "                    float isz=2.9f*B;if(def!=null)PotionArt.Draw(b.transform,def,.7f*B,(th-isz)/2,isz);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 326,
+            "text": "                    float isz=2.6f*B;if(def!=null)PotionArt.Draw(b.transform,def,(tw-isz)/2,4*S,isz);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.Popups.cs",
+            "line": 65,
+            "text": "                PotionArt.Draw(b.transform,def,6,(ch-46)/2,46);"
+          }
+        ]
+      }
+    },
+    "elixir": {
+      "original": {
+        "matching_lines": 3,
+        "files": 3,
+        "production_runtime_matching_lines": 1,
+        "production_runtime_files": 1,
+        "references": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 42,
+            "text": "            add(\"elixir\", ident, \"Art/Jeweler/Potions/elixir-\"+ident+\".png\")"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/ElixirTests.cs",
+            "line": 18,
+            "text": "            foreach(var def in defs){Assert.AreEqual(GemElixirs.Id(def.gemId,def.grade),def.id);Assert.NotNull(Resources.Load<Sprite>(\"Art/Jeweler/Potions/elixir-\"+def.gemId+\"-\"+def.grade));}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 15,
+            "text": "            if(id.StartsWith(\"elixir-\",System.StringComparison.Ordinal))return bottles[id]=Resources.Load<Sprite>(\"Art/Jeweler/Potions/\"+id);"
+          }
+        ]
+      },
+      "skill_skin": {
+        "matching_lines": 3,
+        "files": 3,
+        "production_runtime_matching_lines": 1,
+        "production_runtime_files": 1,
+        "references": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 42,
+            "text": "            add(\"elixir\", ident, \"Art/Jeweler/Potions/elixir-\"+ident+\".png\")"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/ElixirTests.cs",
+            "line": 18,
+            "text": "            foreach(var def in defs){Assert.AreEqual(GemElixirs.Id(def.gemId,def.grade),def.id);Assert.NotNull(Resources.Load<Sprite>(\"Art/Jeweler/Potions/elixir-\"+def.gemId+\"-\"+def.grade));}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 15,
+            "text": "            if(id.StartsWith(\"elixir-\",System.StringComparison.Ordinal))return bottles[id]=Resources.Load<Sprite>(\"Art/Jeweler/Potions/\"+id);"
+          }
+        ]
+      }
+    },
+    "potion_effect_glyph": {
+      "original": {
+        "matching_lines": 15,
+        "files": 3,
+        "production_runtime_matching_lines": 8,
+        "production_runtime_files": 1,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 33,
+            "text": "      \"icon\": \"status-wind\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 45,
+            "text": "      \"icon\": \"status-sword\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 57,
+            "text": "      \"icon\": \"status-elements\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 69,
+            "text": "      \"icon\": \"status-shield\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 81,
+            "text": "      \"icon\": \"status-lightning\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 93,
+            "text": "      \"icon\": \"status-eye\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 40,
+            "text": "                    yield return new PotionDefinition{id=Id(f.gemId,tier),gemId=f.gemId,grade=tier,name=\"보석 물약\",description=\"보석 물약\",effect=\"elixir-\"+f.gemId,icon=\"status-elements\",duration=Duration,cooldown=Duration};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 124,
+            "text": "            foreach(var s in run.shields.OrderBy(s=>s.id))Add(\"shield:\"+s.id,s.definitionId,\"status-shield\",\"보호막\",Loc.F(\"남은 보호막 {0:0} · 출처 {1}\",s.amount,ClassSkillTree.NameForLoadout(s.definitionId.Split(':')[0],run.build.classSkills)),s.remaining);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 132,
+            "text": "            Add(\"monster-blind\",\"MONSTER_BLIND\",\"status-eye\",\"시야 감소\",\"7m 밖의 적을 찾지 못합니다.\",run.heroBlindTime,0,1,true);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 135,
+            "text": "            Add(\"MP06\",\"MP06\",\"status-elements\",\"원소 교차\",\"가산 피해 +10% · 중첩 없음\",f.elementBuff,4);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 136,
+            "text": "            Add(\"W06\",\"W06\",\"status-sword\",\"전투 함성\",\"6초간 피해 +20%\",run.shoutTime,6);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 140,
+            "text": "            Add(\"crush\",\"SWB\",\"status-sword\",\"분쇄 준비\",\"다음 분쇄에 추가타를 적용합니다.\",f.crushCharge);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 142,
+            "text": "            Add(\"chain\",\"SMB\",\"status-lightning\",\"과충전\",\"다음 연쇄 번개를 강화합니다.\",f.chainCharge,0,f.chainCharges);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 145,
+            "text": "            Add(\"guide\",\"GUIDE\",\"status-eye\",\"길잡이\",\"길잡이 성소 효과\",run.guideShrineTime);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 146,
+            "text": "            Add(\"resolve\",\"RESOLVE\",\"status-shield\",\"결의\",\"결의 성소 효과\",run.resolveShrineTime);"
+          }
+        ]
+      },
+      "skill_skin": {
+        "matching_lines": 15,
+        "files": 3,
+        "production_runtime_matching_lines": 8,
+        "production_runtime_files": 1,
+        "references": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 33,
+            "text": "      \"icon\": \"status-wind\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 45,
+            "text": "      \"icon\": \"status-sword\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 57,
+            "text": "      \"icon\": \"status-elements\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 69,
+            "text": "      \"icon\": \"status-shield\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 81,
+            "text": "      \"icon\": \"status-lightning\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 93,
+            "text": "      \"icon\": \"status-eye\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 124,
+            "text": "            foreach(var s in run.shields.OrderBy(s=>s.id))Add(\"shield:\"+s.id,s.definitionId,\"status-shield\",\"보호막\",Loc.F(\"남은 보호막 {0:0} · 출처 {1}\",s.amount,ClassSkillTree.NameForLoadout(s.definitionId.Split(':')[0],run.build.classSkills)),s.remaining);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 132,
+            "text": "            Add(\"monster-blind\",\"MONSTER_BLIND\",\"status-eye\",\"시야 감소\",\"7m 밖의 적을 찾지 못합니다.\",run.heroBlindTime,0,1,true);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 135,
+            "text": "            Add(\"MP06\",\"MP06\",\"status-elements\",\"원소 교차\",\"가산 피해 +10% · 중첩 없음\",f.elementBuff,4);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 136,
+            "text": "            Add(\"W06\",\"W06\",\"status-sword\",\"전투 함성\",\"6초간 피해 +20%\",run.shoutTime,6);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 140,
+            "text": "            Add(\"crush\",\"SWB\",\"status-sword\",\"분쇄 준비\",\"다음 분쇄에 추가타를 적용합니다.\",f.crushCharge);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 142,
+            "text": "            Add(\"chain\",\"SMB\",\"status-lightning\",\"과충전\",\"다음 연쇄 번개를 강화합니다.\",f.chainCharge,0,f.chainCharges);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 145,
+            "text": "            Add(\"guide\",\"GUIDE\",\"status-eye\",\"길잡이\",\"길잡이 성소 효과\",run.guideShrineTime);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 146,
+            "text": "            Add(\"resolve\",\"RESOLVE\",\"status-shield\",\"결의\",\"결의 성소 효과\",run.resolveShrineTime);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 40,
+            "text": "                    yield return new PotionDefinition{id=Id(f.gemId,tier),gemId=f.gemId,grade=tier,name=\"보석 물약\",description=\"보석 물약\",effect=\"elixir-\"+f.gemId,icon=\"status-elements\",duration=Duration,cooldown=Duration};"
+          }
+        ]
+      }
+    }
+  },
+  "shared_dispatch_references": {
+    "original": [
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs",
+        "line": 16,
+        "text": "            yield return (\"premium\",Loc.T(\"심연 주화\"),a.premium,\"abyssal-coin\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+        "line": 8,
+        "text": "    public sealed class TitleAtmosphere:MonoBehaviour"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+        "line": 14,
+        "text": "        public void Initialize(TitleSession state,string artwork=\"Art/Title/TitleSanctuary\",bool puzzleHub=false)"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+        "line": 18,
+        "text": "            var shader=Resources.Load<Shader>(\"Art/Title/TitleAtmosphere\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardChest.cs",
+        "line": 7,
+        "text": "    public sealed class RiftRewardChest : Image"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardChest.cs",
+        "line": 15,
+        "text": "            sprite=Resources.Load<Sprite>(\"Art/Storage/chest-\"+(state==\"claimed\"?\"open\":\"closed\"));"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+        "line": 15,
+        "text": "            _=>\"Art/GlobalHUD/currency-\"+icon"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+        "line": 29,
+        "text": "            =>Draw(parent,icon==\"abyssal-coin\"?\"Abyssal Coin\":\"currency-icon-\"+icon,ForIcon(icon),x,y,size);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+        "line": 187,
+        "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+        "line": 190,
+        "text": "                value=Resources.Load<Sprite>(\"Art/GlobalHUD/\"+id);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 8,
+        "text": "    public sealed class StorageChestGraphic : MaskableGraphic"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 22,
+        "text": "                if (IsOpen) return openArt != null ? openArt : openArt = Resources.Load<Sprite>(\"Art/Storage/chest-open\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 23,
+        "text": "                return closedArt != null ? closedArt : closedArt = Resources.Load<Sprite>(\"Art/Storage/chest-closed\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 92,
+        "text": "        StorageChestGraphic chest;"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 93,
+        "text": "        public void Bind(StorageChestGraphic owner) { chest = owner; raycastTarget = false; SetVerticesDirty(); }"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Title.cs",
+        "line": 20,
+        "text": "            var atmosphere=backdrop.gameObject.AddComponent<TitleAtmosphere>();atmosphere.Initialize(titleSession);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 11,
+        "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 15,
+        "text": "            if(id.StartsWith(\"elixir-\",System.StringComparison.Ordinal))return bottles[id]=Resources.Load<Sprite>(\"Art/Jeweler/Potions/\"+id);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 16,
+        "text": "            var source=Resources.Load<Sprite>(\"Art/GlobalHUD/\"+id);if(source==null)return null;"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 17,
+        "text": "            var bounds=id==\"potion-hp\"?new Rect(291,86,672,1106):id==\"potion-mp\"?new Rect(364,69,526,1126):new Rect(254,79,747,1095);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 33,
+        "text": "                var icon=glyph.gameObject.AddComponent<Image>();icon.sprite=Resources.Load<Sprite>(\"Art/GlobalHUD/\"+def.icon);icon.raycastTarget=false;"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.cs",
+        "line": 215,
+        "text": "                icon.gameObject.AddComponent<StorageChestGraphic>().Bind(b,owned,next);"
+      }
+    ],
+    "skill_skin": [
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+        "line": 15,
+        "text": "            _=>\"Art/GlobalHUD/currency-\"+icon"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/CurrencyIconView.cs",
+        "line": 29,
+        "text": "            =>Draw(parent,icon==\"abyssal-coin\"?\"Abyssal Coin\":\"currency-icon-\"+icon,ForIcon(icon),x,y,size);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs",
+        "line": 16,
+        "text": "            yield return (\"premium\",Loc.T(\"심연 주화\"),a.premium,\"abyssal-coin\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+        "line": 8,
+        "text": "    public sealed class TitleAtmosphere:MonoBehaviour"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+        "line": 14,
+        "text": "        public void Initialize(TitleSession state,string artwork=\"Art/Title/TitleSanctuary\",bool puzzleHub=false)"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+        "line": 18,
+        "text": "            var shader=Resources.Load<Shader>(\"Art/Title/TitleAtmosphere\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 8,
+        "text": "    public sealed class StorageChestGraphic : MaskableGraphic"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 22,
+        "text": "                if (IsOpen) return openArt != null ? openArt : openArt = Resources.Load<Sprite>(\"Art/Storage/chest-open\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 23,
+        "text": "                return closedArt != null ? closedArt : closedArt = Resources.Load<Sprite>(\"Art/Storage/chest-closed\");"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 92,
+        "text": "        StorageChestGraphic chest;"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+        "line": 93,
+        "text": "        public void Bind(StorageChestGraphic owner) { chest = owner; raycastTarget = false; SetVerticesDirty(); }"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Title.cs",
+        "line": 20,
+        "text": "            var atmosphere=backdrop.gameObject.AddComponent<TitleAtmosphere>();atmosphere.Initialize(titleSession);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardChest.cs",
+        "line": 7,
+        "text": "    public sealed class RiftRewardChest : Image"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftRewardChest.cs",
+        "line": 15,
+        "text": "            sprite=Resources.Load<Sprite>(\"Art/Storage/chest-\"+(state==\"claimed\"?\"open\":\"closed\"));"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageWindow.cs",
+        "line": 215,
+        "text": "                icon.gameObject.AddComponent<StorageChestGraphic>().Bind(b,owned,next);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+        "line": 187,
+        "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+        "line": 190,
+        "text": "                value=Resources.Load<Sprite>(\"Art/GlobalHUD/\"+id);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 11,
+        "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 15,
+        "text": "            if(id.StartsWith(\"elixir-\",System.StringComparison.Ordinal))return bottles[id]=Resources.Load<Sprite>(\"Art/Jeweler/Potions/\"+id);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 16,
+        "text": "            var source=Resources.Load<Sprite>(\"Art/GlobalHUD/\"+id);if(source==null)return null;"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 17,
+        "text": "            var bounds=id==\"potion-hp\"?new Rect(291,86,672,1106):id==\"potion-mp\"?new Rect(364,69,526,1126):new Rect(254,79,747,1095);"
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+        "line": 33,
+        "text": "                var icon=glyph.gameObject.AddComponent<Image>();icon.sprite=Resources.Load<Sprite>(\"Art/GlobalHUD/\"+def.icon);icon.raycastTarget=false;"
+      }
+    ]
+  },
+  "records": [
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Title/TitleSanctuary.png",
+      "resource_key": "Art/Title/TitleSanctuary",
+      "family": "sanctuary",
+      "bytes": 2518905,
+      "sha256": "5580ca0b49fd162e78d50106f3b84f05167033921dcbf5dc559a5a4c8b877717",
+      "dimensions_px": [
+        1672,
+        941
+      ],
+      "guid": "4ad849614411f4ab3ab62a9e9443c440",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Title/TitleSanctuary.png.meta",
+      "meta_bytes": 3428,
+      "meta_sha256": "9a0e09a2779e734897c6f30654996cfc3a39202485517d52d46e3e7c2d447b43",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/TitleScreenTests.cs",
+            "line": 52,
+            "text": "            var texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");Assert.IsNotNull(texture);Assert.IsFalse(texture.isReadable);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+            "line": 14,
+            "text": "        public void Initialize(TitleSession state,string artwork=\"Art/Title/TitleSanctuary\",bool puzzleHub=false)"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 177,
+            "text": "            var picture=Box(panel,\"Sanctuary\",0,0,w,h).gameObject.AddComponent<RawImage>();picture.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");picture.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs",
+            "line": 281,
+            "text": "            var art=Box(p,\"Sanctuary artwork\",1,1,w-2,h-2).gameObject.AddComponent<RawImage>();art.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");art.raycastTarget=false;"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/TitleScreenTests.cs",
+            "line": 52,
+            "text": "            var texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");Assert.IsNotNull(texture);Assert.IsFalse(texture.isReadable);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs",
+            "line": 14,
+            "text": "        public void Initialize(TitleSession state,string artwork=\"Art/Title/TitleSanctuary\",bool puzzleHub=false)"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftVictoryWindow.cs",
+            "line": 281,
+            "text": "            var art=Box(p,\"Sanctuary artwork\",1,1,w-2,h-2).gameObject.AddComponent<RawImage>();art.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");art.raycastTarget=false;"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 177,
+            "text": "            var picture=Box(panel,\"Sanctuary\",0,0,w,h).gameObject.AddComponent<RawImage>();picture.texture=Resources.Load<Texture2D>(\"Art/Title/TitleSanctuary\");picture.raycastTarget=false;"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 4,
+        "skill_skin": 4
+      },
+      "dynamic_dependency_family": "sanctuary"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png",
+      "resource_key": "Art/GlobalHUD/currency-abyssal-coin",
+      "family": "coin",
+      "bytes": 2478569,
+      "sha256": "6f48ca86c7f47f886c7c009176200a30c0d942b5c6f610a2dc2631f8a7ee9097",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "443177b4fbfd5493f8dd8147db954268",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png.meta",
+      "meta_bytes": 4043,
+      "meta_sha256": "a296bcafad65ad40b7857478ac1b569519c515629c845d51e4e783149b0aafa1",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "tools/wiki.py",
+            "line": 418,
+            "text": "    coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 424,
+            "text": "    rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 430,
+            "text": "        IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 1097,
+            "text": "    shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')"
+          },
+          {
+            "path": "tools/test_wiki.py",
+            "line": 102,
+            "text": "        coin=next(r for r in resources if r['id']=='currency-abyssal-coin')"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 64,
+            "text": "            foreach(string id in new[]{\"frame-vital\",\"fill-vital\",\"potion-hp\",\"currency-abyssal-coin\"})"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/AttendanceArtTests.cs",
+            "line": 72,
+            "text": "            Assert.AreEqual(\"Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png\",AssetDatabase.GetAssetPath(AttendanceArt.For(AttendanceRewardKind.Coins)));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftEntrySmoke.Preparation.cs",
+            "line": 128,
+            "text": "                var coin=v.Frame.GetComponentsInChildren<Image>().Single(i=>i.transform.parent==v.Frame&&i.sprite!=null&&i.sprite.name==\"currency-abyssal-coin\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.Potions.cs",
+            "line": 50,
+            "text": "            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name==\"Abyssal Coin\"&&i.sprite!=null&&i.sprite.texture==Resources.Load<Texture2D>(\"Art/GlobalHUD/currency-abyssal-coin\")),\"Original Abyssal Coin sprite was not imported.\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 68,
+            "text": "        {float size=compact?16:22;Image(parent,\"Art/GlobalHUD/currency-abyssal-coin\",x,y,size);Text(parent,\"Abyssal Coins\",amount.ToString(\"N0\"),x+size+5,y,width-size-5,size,compact?UiTheme.Caption:UiTheme.Body).alignment=TextAnchor.MiddleLeft;}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 130,
+            "text": "            Image(v.Frame,\"Art/GlobalHUD/currency-abyssal-coin\",walletX+walletW-numberW-icon-.35f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 414,
+            "text": "            Image(fast.transform,\"Art/GlobalHUD/currency-abyssal-coin\",bw*.5f-.7f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+            "line": 12,
+            "text": "                AttendanceRewardKind.Coins=>\"Art/GlobalHUD/currency-abyssal-coin\","
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "tools/wiki.py",
+            "line": 418,
+            "text": "    coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 424,
+            "text": "    rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 430,
+            "text": "        IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,"
+          },
+          {
+            "path": "tools/wiki.py",
+            "line": 1097,
+            "text": "    shutil.copyfile(ROOT/ART/'GlobalHUD/currency-abyssal-coin.png',SITE/'media/GlobalHUD/currency-abyssal-coin.png')"
+          },
+          {
+            "path": "tools/test_wiki.py",
+            "line": 102,
+            "text": "        coin=next(r for r in resources if r['id']=='currency-abyssal-coin')"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/AttendanceArtTests.cs",
+            "line": 72,
+            "text": "            Assert.AreEqual(\"Assets/HELLSCRIPT/Resources/Art/GlobalHUD/currency-abyssal-coin.png\",AssetDatabase.GetAssetPath(AttendanceArt.For(AttendanceRewardKind.Coins)));"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 64,
+            "text": "            foreach(string id in new[]{\"frame-vital\",\"fill-vital\",\"potion-hp\",\"currency-abyssal-coin\"})"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftEntrySmoke.Preparation.cs",
+            "line": 128,
+            "text": "                var coin=v.Frame.GetComponentsInChildren<Image>().Single(i=>i.transform.parent==v.Frame&&i.sprite!=null&&i.sprite.name==\"currency-abyssal-coin\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/AttendanceArt.cs",
+            "line": 12,
+            "text": "                AttendanceRewardKind.Coins=>\"Art/GlobalHUD/currency-abyssal-coin\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 68,
+            "text": "        {float size=compact?16:22;Image(parent,\"Art/GlobalHUD/currency-abyssal-coin\",x,y,size);Text(parent,\"Abyssal Coins\",amount.ToString(\"N0\"),x+size+5,y,width-size-5,size,compact?UiTheme.Caption:UiTheme.Body).alignment=TextAnchor.MiddleLeft;}"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 130,
+            "text": "            Image(v.Frame,\"Art/GlobalHUD/currency-abyssal-coin\",walletX+walletW-numberW-icon-.35f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RiftEntryWindow.cs",
+            "line": 414,
+            "text": "            Image(fast.transform,\"Art/GlobalHUD/currency-abyssal-coin\",bw*.5f-.7f*B,rowY,icon);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeInventorySmoke.Potions.cs",
+            "line": 50,
+            "text": "            Require(View.GetComponentsInChildren<Image>().Any(i=>i.name==\"Abyssal Coin\"&&i.sprite!=null&&i.sprite.texture==Resources.Load<Texture2D>(\"Art/GlobalHUD/currency-abyssal-coin\")),\"Original Abyssal Coin sprite was not imported.\");"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 13,
+        "skill_skin": 13
+      },
+      "dynamic_dependency_family": "coin"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Storage/chest-closed.png",
+      "resource_key": "Art/Storage/chest-closed",
+      "family": "storage_chest",
+      "bytes": 1473598,
+      "sha256": "8e528bf8ef6b5ce354a8e11fcff12574ef8eb26cb551b2f5e5403cd54363c38f",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "0d7e0497b608c40fc93dfd6e3dd4a304",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Storage/chest-closed.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "e8af0bb613819fa7e048adedaf08e3e9e5c769594272462523fd75013dd3939f",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 23,
+            "text": "                return closedArt != null ? closedArt : closedArt = Resources.Load<Sprite>(\"Art/Storage/chest-closed\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 80,
+            "text": "                Require(chest!=null&&chest.State==\"ready\"&&chest.sprite==Resources.Load<Sprite>(\"Art/Storage/chest-closed\")&&!chest.raycastTarget,\"Ready chest lost its native artwork\");"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 80,
+            "text": "                Require(chest!=null&&chest.State==\"ready\"&&chest.sprite==Resources.Load<Sprite>(\"Art/Storage/chest-closed\")&&!chest.raycastTarget,\"Ready chest lost its native artwork\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 23,
+            "text": "                return closedArt != null ? closedArt : closedArt = Resources.Load<Sprite>(\"Art/Storage/chest-closed\");"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 2,
+        "skill_skin": 2
+      },
+      "dynamic_dependency_family": "storage_chest"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Storage/chest-open.png",
+      "resource_key": "Art/Storage/chest-open",
+      "family": "storage_chest",
+      "bytes": 1826264,
+      "sha256": "e63c66df3e22fc60fd068044b46b0d8c0ff918bf653568ed317a86f38739af5a",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "f347cd6a51a51479286e21d396112975",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Storage/chest-open.png.meta",
+      "meta_bytes": 4022,
+      "meta_sha256": "9ac2b6ffb19eb2b23f13ae0b6888e28d13d5800ffc5b87df135e92e0f2686eac",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 22,
+            "text": "                if (IsOpen) return openArt != null ? openArt : openArt = Resources.Load<Sprite>(\"Art/Storage/chest-open\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 102,
+            "text": "            Require(claimed.GetComponentInChildren<RiftRewardChest>().sprite==Resources.Load<Sprite>(\"Art/Storage/chest-open\"),\"Claimed chest is not open artwork\");"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeRiftVictorySmoke.ItemArt.cs",
+            "line": 102,
+            "text": "            Require(claimed.GetComponentInChildren<RiftRewardChest>().sprite==Resources.Load<Sprite>(\"Art/Storage/chest-open\"),\"Claimed chest is not open artwork\");"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/StorageChestGraphic.cs",
+            "line": 22,
+            "text": "                if (IsOpen) return openArt != null ? openArt : openArt = Resources.Load<Sprite>(\"Art/Storage/chest-open\");"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 2,
+        "skill_skin": 2
+      },
+      "dynamic_dependency_family": "storage_chest"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/potion-hp.png",
+      "resource_key": "Art/GlobalHUD/potion-hp",
+      "family": "potion_bottle",
+      "bytes": 1113152,
+      "sha256": "57eeba0a12aacd3d2552ffe5ead02207b17d150b237fb9bdddb521d78e4be4eb",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "af9275b203f1443a39fcc7b213f25753",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/potion-hp.png.meta",
+      "meta_bytes": 4021,
+      "meta_sha256": "dab6bebdf11f7eb7691467075bd081cda439ddcacdc84973d18ea4bb18527857",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 44,
+            "text": "        bottle = \"potion-hp\" if potion[\"effect\"] == \"hp\" else \"potion-mp\" if potion[\"effect\"] == \"resource\" else \"potion-utility\""
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 14,
+            "text": "        [TestCase(\"Art/GlobalHUD/potion-hp\",512)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 51,
+            "text": "        [TestCase(\"potion-hp\",672f/1106)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 22,
+            "text": "                var ids=new[]{\"potion-hp\",\"potion-mp\",\"potion-utility\"};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 64,
+            "text": "            foreach(string id in new[]{\"frame-vital\",\"fill-vital\",\"potion-hp\",\"currency-abyssal-coin\"})"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 23,
+            "text": "            \"Art/GlobalHUD/portrait-mage\", \"Art/GlobalHUD/potion-hp\", \"Art/GlobalHUD/menu-storage\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 77,
+            "text": "            foreach (string id in new[] { \"potion-hp\", \"potion-mp\", \"potion-utility\" })"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionQuick.cs",
+            "line": 113,
+            "text": "                    var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(hp?\"potion-hp\":\"potion-mp\");image.preserveAspect=true;image.raycastTarget=false;icon.pivot=new Vector2(.5f,.5f);icon.anchoredPosition+=new Vector2(14,18);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 154,
+            "text": "            for(int i=0;i<3;i++)d.potions[i]=new HudSlotState{id=i==0?\"PH01\":i==1?\"PM01\":\"PU04\",icon=i==0?\"potion-hp\":i==1?\"potion-mp\":\"potion-utility\",count=new[]{12,8,3}[i],remaining=i==1?6.4f:0,total=20};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 11,
+            "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 17,
+            "text": "            var bounds=id==\"potion-hp\"?new Rect(291,86,672,1106):id==\"potion-mp\"?new Rect(364,69,526,1126):new Rect(254,79,747,1095);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 44,
+            "text": "        bottle = \"potion-hp\" if potion[\"effect\"] == \"hp\" else \"potion-mp\" if potion[\"effect\"] == \"resource\" else \"potion-utility\""
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 14,
+            "text": "        [TestCase(\"Art/GlobalHUD/potion-hp\",512)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 51,
+            "text": "        [TestCase(\"potion-hp\",672f/1106)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 22,
+            "text": "                var ids=new[]{\"potion-hp\",\"potion-mp\",\"potion-utility\"};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 64,
+            "text": "            foreach(string id in new[]{\"frame-vital\",\"fill-vital\",\"potion-hp\",\"currency-abyssal-coin\"})"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 23,
+            "text": "            \"Art/GlobalHUD/portrait-mage\", \"Art/GlobalHUD/potion-hp\", \"Art/GlobalHUD/menu-storage\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 77,
+            "text": "            foreach (string id in new[] { \"potion-hp\", \"potion-mp\", \"potion-utility\" })"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 154,
+            "text": "            for(int i=0;i<3;i++)d.potions[i]=new HudSlotState{id=i==0?\"PH01\":i==1?\"PM01\":\"PU04\",icon=i==0?\"potion-hp\":i==1?\"potion-mp\":\"potion-utility\",count=new[]{12,8,3}[i],remaining=i==1?6.4f:0,total=20};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 11,
+            "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 17,
+            "text": "            var bounds=id==\"potion-hp\"?new Rect(291,86,672,1106):id==\"potion-mp\"?new Rect(364,69,526,1126):new Rect(254,79,747,1095);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionQuick.cs",
+            "line": 113,
+            "text": "                    var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(hp?\"potion-hp\":\"potion-mp\");image.preserveAspect=true;image.raycastTarget=false;icon.pivot=new Vector2(.5f,.5f);icon.anchoredPosition+=new Vector2(14,18);"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 12,
+        "skill_skin": 12
+      },
+      "dynamic_dependency_family": "potion_bottle"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/potion-mp.png",
+      "resource_key": "Art/GlobalHUD/potion-mp",
+      "family": "potion_bottle",
+      "bytes": 990071,
+      "sha256": "77e80abaafd60b2b29c98230382e944c1cf11f47c55e25f4154b37c8c1d51cb8",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "638b3133515bb4d03b631e255863196c",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/potion-mp.png.meta",
+      "meta_bytes": 4019,
+      "meta_sha256": "cf46e9ae94d2a1acd33f73bce1454f3adafff528f95e571f1bb67a9bbf010c52",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 44,
+            "text": "        bottle = \"potion-hp\" if potion[\"effect\"] == \"hp\" else \"potion-mp\" if potion[\"effect\"] == \"resource\" else \"potion-utility\""
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 52,
+            "text": "        [TestCase(\"potion-mp\",526f/1126)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 22,
+            "text": "                var ids=new[]{\"potion-hp\",\"potion-mp\",\"potion-utility\"};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 77,
+            "text": "            foreach (string id in new[] { \"potion-hp\", \"potion-mp\", \"potion-utility\" })"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionQuick.cs",
+            "line": 113,
+            "text": "                    var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(hp?\"potion-hp\":\"potion-mp\");image.preserveAspect=true;image.raycastTarget=false;icon.pivot=new Vector2(.5f,.5f);icon.anchoredPosition+=new Vector2(14,18);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 154,
+            "text": "            for(int i=0;i<3;i++)d.potions[i]=new HudSlotState{id=i==0?\"PH01\":i==1?\"PM01\":\"PU04\",icon=i==0?\"potion-hp\":i==1?\"potion-mp\":\"potion-utility\",count=new[]{12,8,3}[i],remaining=i==1?6.4f:0,total=20};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 11,
+            "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 17,
+            "text": "            var bounds=id==\"potion-hp\"?new Rect(291,86,672,1106):id==\"potion-mp\"?new Rect(364,69,526,1126):new Rect(254,79,747,1095);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 44,
+            "text": "        bottle = \"potion-hp\" if potion[\"effect\"] == \"hp\" else \"potion-mp\" if potion[\"effect\"] == \"resource\" else \"potion-utility\""
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 52,
+            "text": "        [TestCase(\"potion-mp\",526f/1126)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 22,
+            "text": "                var ids=new[]{\"potion-hp\",\"potion-mp\",\"potion-utility\"};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 77,
+            "text": "            foreach (string id in new[] { \"potion-hp\", \"potion-mp\", \"potion-utility\" })"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 154,
+            "text": "            for(int i=0;i<3;i++)d.potions[i]=new HudSlotState{id=i==0?\"PH01\":i==1?\"PM01\":\"PU04\",icon=i==0?\"potion-hp\":i==1?\"potion-mp\":\"potion-utility\",count=new[]{12,8,3}[i],remaining=i==1?6.4f:0,total=20};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 11,
+            "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 17,
+            "text": "            var bounds=id==\"potion-hp\"?new Rect(291,86,672,1106):id==\"potion-mp\"?new Rect(364,69,526,1126):new Rect(254,79,747,1095);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.PotionQuick.cs",
+            "line": 113,
+            "text": "                    var image=icon.gameObject.AddComponent<Image>();image.sprite=globalHud.Sprite(hp?\"potion-hp\":\"potion-mp\");image.preserveAspect=true;image.raycastTarget=false;icon.pivot=new Vector2(.5f,.5f);icon.anchoredPosition+=new Vector2(14,18);"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 9,
+        "skill_skin": 9
+      },
+      "dynamic_dependency_family": "potion_bottle"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/potion-utility.png",
+      "resource_key": "Art/GlobalHUD/potion-utility",
+      "family": "potion_bottle",
+      "bytes": 1328329,
+      "sha256": "39d27241a76917d308546f83c61ce675dfe7298e02e1ea61130fe2facb762641",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "495d35bfba756441296f9bb19bd37c2f",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/potion-utility.png.meta",
+      "meta_bytes": 4031,
+      "meta_sha256": "aede33757ff57022633eb8014ce4584d775c98718cd811e3da66078b556da401",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 44,
+            "text": "        bottle = \"potion-hp\" if potion[\"effect\"] == \"hp\" else \"potion-mp\" if potion[\"effect\"] == \"resource\" else \"potion-utility\""
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 53,
+            "text": "        [TestCase(\"potion-utility\",747f/1095)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 22,
+            "text": "                var ids=new[]{\"potion-hp\",\"potion-mp\",\"potion-utility\"};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 77,
+            "text": "            foreach (string id in new[] { \"potion-hp\", \"potion-mp\", \"potion-utility\" })"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 154,
+            "text": "            for(int i=0;i<3;i++)d.potions[i]=new HudSlotState{id=i==0?\"PH01\":i==1?\"PM01\":\"PU04\",icon=i==0?\"potion-hp\":i==1?\"potion-mp\":\"potion-utility\",count=new[]{12,8,3}[i],remaining=i==1?6.4f:0,total=20};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 11,
+            "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "tools/audit_item_art.py",
+            "line": 44,
+            "text": "        bottle = \"potion-hp\" if potion[\"effect\"] == \"hp\" else \"potion-mp\" if potion[\"effect\"] == \"resource\" else \"potion-utility\""
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/BuildResourceTests.cs",
+            "line": 53,
+            "text": "        [TestCase(\"potion-utility\",747f/1095)]"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudResourceTests.cs",
+            "line": 22,
+            "text": "                var ids=new[]{\"potion-hp\",\"potion-mp\",\"potion-utility\"};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuntimeBuildResourceSmoke.cs",
+            "line": 77,
+            "text": "            foreach (string id in new[] { \"potion-hp\", \"potion-mp\", \"potion-utility\" })"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 154,
+            "text": "            for(int i=0;i<3;i++)d.potions[i]=new HudSlotState{id=i==0?\"PH01\":i==1?\"PM01\":\"PU04\",icon=i==0?\"potion-hp\":i==1?\"potion-mp\":\"potion-utility\",count=new[]{12,8,3}[i],remaining=i==1?6.4f:0,total=20};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudView.cs",
+            "line": 187,
+            "text": "            if(id==\"potion-hp\"||id==\"potion-mp\"||id==\"potion-utility\"||id.StartsWith(\"elixir-\",StringComparison.Ordinal))return PotionArt.Bottle(id);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/PotionArt.cs",
+            "line": 11,
+            "text": "        public static string IconId(PotionDefinition def)=>def.Crafted?\"elixir-\"+def.gemId+\"-\"+def.grade:def.effect==\"hp\"?\"potion-hp\":def.effect==\"resource\"?\"potion-mp\":\"potion-utility\";"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 7,
+        "skill_skin": 7
+      },
+      "dynamic_dependency_family": "potion_bottle"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-1.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G01-1",
+      "family": "elixir",
+      "bytes": 758069,
+      "sha256": "8f8573a609513877dde54a233fe525533cacf0ba752c3d13989b206826d85a57",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "a72f5ca7a7717443db0aea4c85d04c60",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-1.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "520f4166fe21a4467735ab2345e718da9d655cb0c16c0f93c99f06fe0302b085",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-2.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G01-2",
+      "family": "elixir",
+      "bytes": 815774,
+      "sha256": "495d5349393d9a573b1e844cf6a16bc64901448a71606c3f09c42c5993ba885b",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "6727d2256470541b2a2ba0c749ceaa41",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-2.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "82ac51e35090b355ca7238569c09410745377a1e0d7168ec10ceea825d3da614",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-3.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G01-3",
+      "family": "elixir",
+      "bytes": 906018,
+      "sha256": "8c1e8da79b4dfb70960a5c7135feb8ec4a4c46cb38eab8709fb327c1d87293c6",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "e470284910f50490db4c208164627a02",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-3.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "2ef0aed00f9253a95d7b2cf70a450428530d7aa63138b8a5dc8283804c800e0a",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-4.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G01-4",
+      "family": "elixir",
+      "bytes": 1036593,
+      "sha256": "d7a98664f2fd28741efcee6f0f8d1fee30b9753ce6e914456134b687ed023735",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "1a8a742bff7714f7ebea8489ff30af43",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-4.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "2171f0a41be5ad6d30d83fd8215cec493bccea30cd8d10848415bc093c478f95",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-5.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G01-5",
+      "family": "elixir",
+      "bytes": 1082309,
+      "sha256": "3f0160a2970cfe10716f16b90d31643fad2d8c025fa30ff2f747bde9777c7c34",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "6a19c46a552f647be8cd17cc4d3f09c3",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-5.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "6e2817c8d4433d8dceb54229e803270e8a756fdc63ca84a54cec36eaa05ee8a3",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-6.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G01-6",
+      "family": "elixir",
+      "bytes": 1312094,
+      "sha256": "b43dcd917978ef6c68230c1f6eb4820415925c7ff2a071598303f83628da3716",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "07df5ea68823445b995330d2ce2f06db",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G01-6.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "a088f92bf36de814fdad6a900876ef560c8b3139c36a93987b30dd4728e7944e",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-1.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G02-1",
+      "family": "elixir",
+      "bytes": 773171,
+      "sha256": "f0cfe0188d5a987e309ab9fed85a5a5cb1ce83e99e48343da6e3bbbe03182c77",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "94732212d4ed842598af8a0ba9eda1ae",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-1.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "95480edcb10980614744f80db621cc6cc07ebbc7825e409fb8770af5e1846059",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-2.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G02-2",
+      "family": "elixir",
+      "bytes": 994955,
+      "sha256": "b8e56604890f787b7499affe4ca5c6d36242575a324bdcd24a8545e1d6c3d2f5",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "b8531fb3c32c94e56ad9720f5b906dd7",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-2.png.meta",
+      "meta_bytes": 4024,
+      "meta_sha256": "54730174093529f4ff30118c5c9e6ba2e1345ae6d2694282dbfe65adcc15d91d",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-3.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G02-3",
+      "family": "elixir",
+      "bytes": 810179,
+      "sha256": "024e309298c9016e9cce5b471c2d5ac6fac1bec13089da1b5cf50135f3aa8228",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "d944f9d2252a64254abc5a1f7127e3b6",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-3.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "6de341878f6e91db551d278cdd96aea31dc068a8165df9180c82b9c3942c6215",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-4.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G02-4",
+      "family": "elixir",
+      "bytes": 1085616,
+      "sha256": "7b7a6f9eca6483cf86a326180c8eff3e9c93b7c585b6456c761d870c2f03020a",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "24eff9341de974d8a9abd75f9be608dc",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-4.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "e6497c85cbfcc34cb8e1f98c51a957894bb89ad1128f5832f829cbbe5b6732c4",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-5.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G02-5",
+      "family": "elixir",
+      "bytes": 1077180,
+      "sha256": "f0ca3d6810515ade8cfac8d43b89f58fcc028915aad9f83c7dbfe02b4712dc1c",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "fc970da29021f4ec5874ea2b2efb5ead",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-5.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "8397f8c9ecda94cf9c23dc66bdbf4c12518264edcfcaf76c870abbb177746223",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-6.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G02-6",
+      "family": "elixir",
+      "bytes": 1173484,
+      "sha256": "82827b5ed31ed58a7a4f5ac988ceb383a96d6c046bfdfebba254b712800efd95",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "0fa4ecd30d3f8410288c08b2e10c99fa",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G02-6.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "80af6d3219b43751964d83c7d5d588d65721e68bc89cfa1fbbb16ecd0dbe7858",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-1.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G03-1",
+      "family": "elixir",
+      "bytes": 710021,
+      "sha256": "35f16b7af41f9124bb7fc08fc8b6e525d235788790b21887ef445026d8f70cb4",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "df13a2174b14d4ce9a1aaea7d8b4f898",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-1.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "d0438d1ad0c89a3aa20ff7b6c76792f8a16989627f0e926122b6d720d0e40e25",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-2.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G03-2",
+      "family": "elixir",
+      "bytes": 868516,
+      "sha256": "07c0511256f8c3012b4eb35e05c533f3866674a165310e18ca8e24518fbbb000",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "d093f830a4fd14e638d37b07ca7d668a",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-2.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "bc57489e5d16af68e98786d7cc0ab8a24c1656eb10da3d4e74df7461b302dc84",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-3.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G03-3",
+      "family": "elixir",
+      "bytes": 902552,
+      "sha256": "c00eadcacc7ea40a1ebfc9bd5850cb58305aba16db3346b6863dae4e7c4f0fee",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "5bec3e6ab8209486cae21de329406527",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-3.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "e440318fd6cc6e075df40c7d4a3d30205ddf9183f7d6298e042b79f1abecd72c",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-4.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G03-4",
+      "family": "elixir",
+      "bytes": 1038254,
+      "sha256": "200ef825c4aab3bf2ac672088eff4e0f2f96f5e7be94788c84045c658d1127b7",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "a98dab3886e524273b8b8947b6f44528",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-4.png.meta",
+      "meta_bytes": 4024,
+      "meta_sha256": "34015ab376a4d0b03b3544f87a45b6a86f1bd539f87482893b6eb369c7639d48",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-5.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G03-5",
+      "family": "elixir",
+      "bytes": 1073111,
+      "sha256": "4eb2355606c007a753e48f0ea13ecff0a4e07fc51a7ac14e34655cfb7da92ccd",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "f588b0c2d93c54764b4ace3c63812c1f",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-5.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "5af9f2f88caa6eda9d1701f79de135cc4c7fff0f5fa198a2c6f4edefaea5541e",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-6.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G03-6",
+      "family": "elixir",
+      "bytes": 1245859,
+      "sha256": "bed35118e4d97f9bd0011ced0fa3969aefb179556de461cbaf4793c446d11446",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "15adb3e508c8d40f9b607dfb3c20d7c3",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G03-6.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "44e9fad347e1ccc3551c0f50a375a78ed3c0c5303ac96bb926c0fcb8c344acb0",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-1.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G04-1",
+      "family": "elixir",
+      "bytes": 752365,
+      "sha256": "338da27dde0d9171c32e19a31a3108e46e223269b5f8456503d7450a96096c1c",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "21b76b70ffd154ad8b1a9c337312d518",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-1.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "01365c7b4aca9583d70058d787242d5a7d57bc7bb99a28561e6e48c687a71536",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-2.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G04-2",
+      "family": "elixir",
+      "bytes": 812149,
+      "sha256": "ef574da836ca82b6a9e2109a4dc85f1ac67d15aa04af5bd86b47ec42507e2930",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "aabb490f58bdc43ebb8c47bd5c5222c4",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-2.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "067a86cd36d257edd0c480913407e05e77641d71864846c4323e79ac11dbbcb9",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-3.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G04-3",
+      "family": "elixir",
+      "bytes": 984935,
+      "sha256": "7256c10c34e523f7c5d7fc4bf31ce5e89967e591730f87810aba3475008b1ad4",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "49acea173dc3746108802ef1d02cf07f",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-3.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "caab334086ebe3d4a2b1812af8e5dae390a2235fd0b99c38f841f77f45217813",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-4.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G04-4",
+      "family": "elixir",
+      "bytes": 1031443,
+      "sha256": "a7c94663b652ff6b48d6678156f5e70136329358f98f72076053fe78a63548f1",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "480eb89aa5dda466ea87e5b9072146c5",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-4.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "cba64b38a0ded8a3bb6270fbea2cff1a82d15af825bf65707a5547452899f7a8",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-5.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G04-5",
+      "family": "elixir",
+      "bytes": 1113912,
+      "sha256": "77a5ca8279ab485b3eadb1c559c04f449971ecf76efbc61640b14f753247e9bc",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "a2cfbcea37a804bbbb96a921443d1f80",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-5.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "2b8cf2607cfe87ef81f8b273575b7b6ab6438564d91b2fe8710a144f7e380092",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-6.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G04-6",
+      "family": "elixir",
+      "bytes": 1337024,
+      "sha256": "e550ed146866c8634b05668b61cb2ac26d8dda9c18e6c966a5d7029c58f4ea75",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "3b552db595262478188ab74e1c140456",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G04-6.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "5c7c32dad2c24ec7e423be8c933c0128810e358e5dcf7b700f48e659fecea502",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-1.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G05-1",
+      "family": "elixir",
+      "bytes": 745270,
+      "sha256": "02d11936f73946b0e470ceb22dde9086ffae77f3f5d2765fcb770d03253bdbb5",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "ebced60f788c040478b306c9ece6bf50",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-1.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "2b9140dc5dd8885e6e0dc94a6ab55ac4aa013f6d3078f042b8278217855efbb4",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-2.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G05-2",
+      "family": "elixir",
+      "bytes": 946438,
+      "sha256": "c7e4cf978f1fa17055b934fc6885b35a9c33f944bb824dd93e34fe6c85d0f0e9",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "2299adf0fbebe4439b8813ab119a0eba",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-2.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "cc454f10ae1c792467e9c8e1564dda5d81fd43d23e033ce85eaec7bd83ad455e",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-3.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G05-3",
+      "family": "elixir",
+      "bytes": 899708,
+      "sha256": "3ee5b1fdd43017e2750adeca4bda021060561d196c0747a017faf31eafda554b",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "29d9d12656cce43f79d3b9c11807f755",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-3.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "d729c0bf3c58decfffdd3cdd1fddde78fd3709c5a4c7e8b3c6a2e266bea48869",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-4.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G05-4",
+      "family": "elixir",
+      "bytes": 1032959,
+      "sha256": "0d439fd87ce410169a1b2bb8caf2baccd6aaca6195b4af6193ee2c2d28a963da",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "e4c9490cb4d0b4be3880f6725a1d1d0b",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-4.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "b0c52319ed79fced030d330c59dadb4e24033ef2327767a50c6a13dd25baa2c8",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-5.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G05-5",
+      "family": "elixir",
+      "bytes": 996332,
+      "sha256": "97ca40621f4e8503085ebf26ef002f329c9cf9b155782056847477ccde65580f",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "e476e349e3d47492ab954371f516eded",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-5.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "2b632e8d924e72df034cb50ba4bec20a304355433052a01b53e8ad23d0f8b799",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-6.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G05-6",
+      "family": "elixir",
+      "bytes": 1195088,
+      "sha256": "9bea7dcb54ffee818cf8354f315e5345bd2fe3c19b9b71cedcadd59fd258611a",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "56e92b2dd64294ce0b7fc773e868d5b5",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G05-6.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "133381d98f89d4102db52234f57358a256a5170179ea47a53182fdfaaf7d816f",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-1.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G06-1",
+      "family": "elixir",
+      "bytes": 796224,
+      "sha256": "0db50a5ad8f27061922a338ed14d84531378fdcae0d37cbabd2448cd6e27c53a",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "147b8c09beefc4b7f81e5393c4828ec2",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-1.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "deaa7f6c18c14ee3a92f8dc109175090dafef2ca4dc80a8be72e7bbc2842226a",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-2.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G06-2",
+      "family": "elixir",
+      "bytes": 917794,
+      "sha256": "e53e5a09c485773ef994b12e8bde79a246c41db8e5520b3e8786d85c8ab1e4b5",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "aeb5c3fa97d74479cbcdd276fd66566e",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-2.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "d62856db22f24c4aba66880ca26e11f28056b1d91289b4e31762d6cdb1a8bd1e",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-3.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G06-3",
+      "family": "elixir",
+      "bytes": 882942,
+      "sha256": "23dc90163389eaa454648adc832fade8922b863cc4915d46ff5f65c836a10ef5",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "b0bba2c117a3b4739b6155cbdc96194a",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-3.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "d07a30aed6b6e2f4709b03f2c259ae766e2b9de627958d3fa79e0f958b45048c",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-4.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G06-4",
+      "family": "elixir",
+      "bytes": 1023640,
+      "sha256": "5a4d0a815a12302241a31bc410a2bf56b79c9b811bbed1ac32a2cb90fd017f61",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "1c8de9cf4f34a49eca1565b96e290098",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-4.png.meta",
+      "meta_bytes": 4022,
+      "meta_sha256": "9a53180b1b1ab660209d3f7269408be567103ffd227279c6bd2a70651874e6e3",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-5.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G06-5",
+      "family": "elixir",
+      "bytes": 1077631,
+      "sha256": "10dc38ef225c81aaab25d24e907edaa788b7e3f4aa265d427b380d53e80b668d",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "08886e13176e4465d8637f82f2bb6c77",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-5.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "7e6c04810f50e5572d12bd74e0fca2599a8e5da8a6d913d58494544c3f9ecd91",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-6.png",
+      "resource_key": "Art/Jeweler/Potions/elixir-G06-6",
+      "family": "elixir",
+      "bytes": 1254539,
+      "sha256": "8043b02b8c77243eb456a97f6f2cfd55a91d8981aa8878558cc35130ea891a90",
+      "dimensions_px": [
+        1254,
+        1254
+      ],
+      "guid": "6b08da28ede654ea6bc217e76acc0a20",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/Jeweler/Potions/elixir-G06-6.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "f97ca93289c68fe53c23217f6bf9e3f8d826c7d2959582c45c09bc38245ef760",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "literal_stem_matching_line_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "dynamic_dependency_family": "elixir"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-wind.png",
+      "resource_key": "Art/GlobalHUD/status-wind",
+      "family": "potion_effect_glyph",
+      "bytes": 3181,
+      "sha256": "b919764ff2ae8d16bb6000a8909c0de949abf2798feb3eadffdeb7381af3ee37",
+      "dimensions_px": [
+        256,
+        256
+      ],
+      "guid": "444857b7fc0384f749ddd822fa1b2820",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-wind.png.meta",
+      "meta_bytes": 4024,
+      "meta_sha256": "bd2fa7ef99858d827ebd2a4b4e390fee9168eb7761885b611e5e4b5ed18cb79e",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 33,
+            "text": "      \"icon\": \"status-wind\","
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 33,
+            "text": "      \"icon\": \"status-wind\","
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 1,
+        "skill_skin": 1
+      },
+      "dynamic_dependency_family": "potion_effect_glyph"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-sword.png",
+      "resource_key": "Art/GlobalHUD/status-sword",
+      "family": "potion_effect_glyph",
+      "bytes": 2961,
+      "sha256": "7206fa79f5fadfa35742324a296d60bb98b38890a4d58f434b7c1c0f0240c28c",
+      "dimensions_px": [
+        256,
+        256
+      ],
+      "guid": "9379dec14983c4a538c1318e9d106441",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-sword.png.meta",
+      "meta_bytes": 4026,
+      "meta_sha256": "1e897740706a8fb625cd956b97f6e207104ff05def14d280964341fde9a5b486",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 45,
+            "text": "      \"icon\": \"status-sword\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 136,
+            "text": "            Add(\"W06\",\"W06\",\"status-sword\",\"전투 함성\",\"6초간 피해 +20%\",run.shoutTime,6);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 140,
+            "text": "            Add(\"crush\",\"SWB\",\"status-sword\",\"분쇄 준비\",\"다음 분쇄에 추가타를 적용합니다.\",f.crushCharge);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 45,
+            "text": "      \"icon\": \"status-sword\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 136,
+            "text": "            Add(\"W06\",\"W06\",\"status-sword\",\"전투 함성\",\"6초간 피해 +20%\",run.shoutTime,6);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 140,
+            "text": "            Add(\"crush\",\"SWB\",\"status-sword\",\"분쇄 준비\",\"다음 분쇄에 추가타를 적용합니다.\",f.crushCharge);"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 3,
+        "skill_skin": 3
+      },
+      "dynamic_dependency_family": "potion_effect_glyph"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-elements.png",
+      "resource_key": "Art/GlobalHUD/status-elements",
+      "family": "potion_effect_glyph",
+      "bytes": 3882,
+      "sha256": "447e373e6c03e46d58b4c073fa20a9ea85971ab909ac0ad2c0437e44847bb902",
+      "dimensions_px": [
+        256,
+        256
+      ],
+      "guid": "0e1f2fe934afa4017be556a89ed48416",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-elements.png.meta",
+      "meta_bytes": 4032,
+      "meta_sha256": "51f7c82aaeab204a7fcdc8cc4449fc5e5aad881438f5b4069f800995196e253b",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 57,
+            "text": "      \"icon\": \"status-elements\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 40,
+            "text": "                    yield return new PotionDefinition{id=Id(f.gemId,tier),gemId=f.gemId,grade=tier,name=\"보석 물약\",description=\"보석 물약\",effect=\"elixir-\"+f.gemId,icon=\"status-elements\",duration=Duration,cooldown=Duration};"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 135,
+            "text": "            Add(\"MP06\",\"MP06\",\"status-elements\",\"원소 교차\",\"가산 피해 +10% · 중첩 없음\",f.elementBuff,4);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 57,
+            "text": "      \"icon\": \"status-elements\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 135,
+            "text": "            Add(\"MP06\",\"MP06\",\"status-elements\",\"원소 교차\",\"가산 피해 +10% · 중첩 없음\",f.elementBuff,4);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Core/GemElixirs.cs",
+            "line": 40,
+            "text": "                    yield return new PotionDefinition{id=Id(f.gemId,tier),gemId=f.gemId,grade=tier,name=\"보석 물약\",description=\"보석 물약\",effect=\"elixir-\"+f.gemId,icon=\"status-elements\",duration=Duration,cooldown=Duration};"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 3,
+        "skill_skin": 3
+      },
+      "dynamic_dependency_family": "potion_effect_glyph"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-shield.png",
+      "resource_key": "Art/GlobalHUD/status-shield",
+      "family": "potion_effect_glyph",
+      "bytes": 4752,
+      "sha256": "8ac0001d74ab8b0d7be8e736bbbf2cb1e8d2573cfe5df53ea3b6bb07bec02b69",
+      "dimensions_px": [
+        256,
+        256
+      ],
+      "guid": "292321b73a2b64cf5a6ef26b40bcec69",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-shield.png.meta",
+      "meta_bytes": 4028,
+      "meta_sha256": "30a0c44f21d0cdc49c0a5c06aa2e7241966f695ffcdc6966ffbb5477098f4b1c",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 69,
+            "text": "      \"icon\": \"status-shield\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 124,
+            "text": "            foreach(var s in run.shields.OrderBy(s=>s.id))Add(\"shield:\"+s.id,s.definitionId,\"status-shield\",\"보호막\",Loc.F(\"남은 보호막 {0:0} · 출처 {1}\",s.amount,ClassSkillTree.NameForLoadout(s.definitionId.Split(':')[0],run.build.classSkills)),s.remaining);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 146,
+            "text": "            Add(\"resolve\",\"RESOLVE\",\"status-shield\",\"결의\",\"결의 성소 효과\",run.resolveShrineTime);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 69,
+            "text": "      \"icon\": \"status-shield\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 124,
+            "text": "            foreach(var s in run.shields.OrderBy(s=>s.id))Add(\"shield:\"+s.id,s.definitionId,\"status-shield\",\"보호막\",Loc.F(\"남은 보호막 {0:0} · 출처 {1}\",s.amount,ClassSkillTree.NameForLoadout(s.definitionId.Split(':')[0],run.build.classSkills)),s.remaining);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 146,
+            "text": "            Add(\"resolve\",\"RESOLVE\",\"status-shield\",\"결의\",\"결의 성소 효과\",run.resolveShrineTime);"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 3,
+        "skill_skin": 3
+      },
+      "dynamic_dependency_family": "potion_effect_glyph"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-lightning.png",
+      "resource_key": "Art/GlobalHUD/status-lightning",
+      "family": "potion_effect_glyph",
+      "bytes": 2559,
+      "sha256": "0c1cda7183e863ba7ffaf51793ff3d28c3a44259febbb97a423b8f21e48d1054",
+      "dimensions_px": [
+        256,
+        256
+      ],
+      "guid": "4d0e9654a2a214881afad4983681cf74",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-lightning.png.meta",
+      "meta_bytes": 4034,
+      "meta_sha256": "452ced04f35a16d0aa490c379132eabe2d302ef8a0d23c2fe5ba609790fa36b8",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 81,
+            "text": "      \"icon\": \"status-lightning\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 142,
+            "text": "            Add(\"chain\",\"SMB\",\"status-lightning\",\"과충전\",\"다음 연쇄 번개를 강화합니다.\",f.chainCharge,0,f.chainCharges);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 81,
+            "text": "      \"icon\": \"status-lightning\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 142,
+            "text": "            Add(\"chain\",\"SMB\",\"status-lightning\",\"과충전\",\"다음 연쇄 번개를 강화합니다.\",f.chainCharge,0,f.chainCharges);"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 2,
+        "skill_skin": 2
+      },
+      "dynamic_dependency_family": "potion_effect_glyph"
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-eye.png",
+      "resource_key": "Art/GlobalHUD/status-eye",
+      "family": "potion_effect_glyph",
+      "bytes": 5104,
+      "sha256": "c4035b6600b4b9b8604603771190a84ec1eccff2cf1feed840b06779d3fd30e4",
+      "dimensions_px": [
+        256,
+        256
+      ],
+      "guid": "8cc02e29540df429993ea1f92385b734",
+      "meta_path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/status-eye.png.meta",
+      "meta_bytes": 4024,
+      "meta_sha256": "ca646500404b9d46c40fa17e58eab7c21d3ee09fc66561f709606e7c8329df21",
+      "skill_skin_png_and_meta_identical": true,
+      "disposition": "preserve_shared_active_resources",
+      "cleanup_blocker": "Screen-only replacement/validation is not complete and other screens retain string/dynamic Resources references.",
+      "external_guid_references": {
+        "original": [],
+        "skill_skin": []
+      },
+      "external_guid_reference_count": {
+        "original": 0,
+        "skill_skin": 0
+      },
+      "literal_stem_references": {
+        "original": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 93,
+            "text": "      \"icon\": \"status-eye\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 132,
+            "text": "            Add(\"monster-blind\",\"MONSTER_BLIND\",\"status-eye\",\"시야 감소\",\"7m 밖의 적을 찾지 못합니다.\",run.heroBlindTime,0,1,true);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 145,
+            "text": "            Add(\"guide\",\"GUIDE\",\"status-eye\",\"길잡이\",\"길잡이 성소 효과\",run.guideShrineTime);"
+          }
+        ],
+        "skill_skin": [
+          {
+            "path": "Assets/HELLSCRIPT/Resources/Data/Potions.json",
+            "line": 93,
+            "text": "      \"icon\": \"status-eye\","
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 132,
+            "text": "            Add(\"monster-blind\",\"MONSTER_BLIND\",\"status-eye\",\"시야 감소\",\"7m 밖의 적을 찾지 못합니다.\",run.heroBlindTime,0,1,true);"
+          },
+          {
+            "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudSnapshot.cs",
+            "line": 145,
+            "text": "            Add(\"guide\",\"GUIDE\",\"status-eye\",\"길잡이\",\"길잡이 성소 효과\",run.guideShrineTime);"
+          }
+        ]
+      },
+      "literal_stem_matching_line_count": {
+        "original": 3,
+        "skill_skin": 3
+      },
+      "dynamic_dependency_family": "potion_effect_glyph"
+    }
+  ]
+}
