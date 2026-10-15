@@ -4,6 +4,8 @@ Updated: 2026-10-11 · [한국어](Monster_Daily_Pipeline.md)
 
 This is the runbook for the daily routine that adds the 138 monsters of the [monster roster per field](../Design/HELLSCRIPT_Monster_Roster_20261011.en.md) to the game, 20 per day. The routine follows it as written. The user's rules (2026-10-11): use the 20 free Hunyuan generations every day; do reduction, Codex illustration, game integration and Monster Codex entries in one pass; a monster spawns in rifts from the day it is added; when checks pass, merge into main automatically and publish the wiki.
 
+**Standing rule (reconfirmed by the user 2026-10-15):** at the end of every day's work, apply the monsters that passed that day to the game and merge into main. IDs not finished within the day stay in the state file for the next day; stop the merge and report only when there is a new check failure.
+
 ## 0. Inputs and locations
 
 | What | Where |
