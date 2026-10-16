@@ -369,5 +369,70 @@
     "independentReviewSHA256": "7ae32bad2f5fa2255bc968d0e12205bcf26863b9e638fb659828d0834c3fa657",
     "protected": "hero13/settings/held8/RAW/real saves unchanged; new models0",
     "recordedAtKST": "2026-10-16T22:08:20.922312+09:00"
+  },
+  "approvedStorageDisposal20261017": {
+    "status": "COMPLETED_AFTER_EXPLICIT_USER_APPROVAL",
+    "completedAtKST": "2026-10-17T05:46:34.813161+09:00",
+    "sourceBase": "2bc331f1d269055edafe5450464b8bd91ac6fc66",
+    "trackedHtmlRemoved": [
+      {
+        "path": "Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html",
+        "bytes": 73181975,
+        "sha256": "fd7195b6b375756e908d47d8173d25720caafd0a66529d0291b491324d28918f",
+        "gitBlob": "b05edecf94737079040893c3685ad4052e21bf78",
+        "restoreBase": "9b779d62aa9020a43aaefb69e41499a88655972d",
+        "restore": "git restore --source=9b779d62aa9020a43aaefb69e41499a88655972d -- Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html"
+      },
+      {
+        "path": "Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html",
+        "bytes": 33089040,
+        "sha256": "0f8df2917eaa241ba73c3050a2993dcce550bcc548a925e46a47c72338a63bc6",
+        "gitBlob": "d7a211935f4dff4c6dca38234e7ccef4e234fc05",
+        "restoreBase": "9b779d62aa9020a43aaefb69e41499a88655972d",
+        "restore": "git restore --source=9b779d62aa9020a43aaefb69e41499a88655972d -- Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html"
+      }
+    ],
+    "trackedHtmlLogicalBytes": 106271015,
+    "obsoleteGeneratedCopies": {
+      "relativeRetentionRoot": "retained-ignored/wiki-sources-obsolete-20261016",
+      "permanentDeletedCount": 982,
+      "permanentDeletedLogicalBytes": 477806727,
+      "originalIntentSHA256": "c1ed5816ecff38eb15d9fb84503363df64874b1210f5bb471bc3359ff4bfe297",
+      "deletedFilesManifestSHA256": "e50b526fc942b64ebe7459a8cb1e5357026be8d83226a2062c73caa97e9d0cc0",
+      "identicalHistoricalReconstructionGuaranteed": false,
+      "currentCollectedSnapshotsAndOriginalsDeleted": 0
+    },
+    "preflight": {
+      "exactListAndMetadataMatched": true,
+      "symlinkOrAdditionalFiles": 0,
+      "hardlinks": 0,
+      "activeCurrentAndHistoryReferences": 0,
+      "openFileHandles": 0,
+      "currentFileSHA256PinnedBeforeDeletion": true,
+      "originalRetentionPinnedMetadataNotSHA": true,
+      "gitRestoreBytesVerified": true
+    },
+    "dfMeasurement": {
+      "filesystem": "/dev/disk3s5 /System/Volumes/Data",
+      "beforeAvailableBytes": 236613672960,
+      "afterAvailableBytes": 237199736832,
+      "observedAvailableBytesDelta": 586063872,
+      "combinedRemovedLogicalBytes": 584077742,
+      "exclusivePhysicalAttribution": false,
+      "reason": "APFS sharing, directory metadata, snapshots and concurrent writes can affect available space; Git history retains the HTML blobs."
+    },
+    "protected": {
+      "heroHead": "a3f96545b951f4d65702b70a284fc0f99fa746ef",
+      "hero13SHAUnchanged": true,
+      "settingsSHA256": "738f73fffe19ceb9a1b3865890a6413f11b86441d0c271072847e30f4f107a17"
+    },
+    "exclusions": {
+      "gitHistoryRewriteGCPrune": 0,
+      "modelsOrRAWChanged": 0,
+      "runtimeCodeChanged": 0,
+      "UnityGameBuildWholeTests": 0
+    },
+    "executionReceiptSHA256": "2867de1bda56b1890f7f8b8ba9145a55e8e2543e1cf3864981caff5b7f3220eb",
+    "independentApplyReviewSHA256": "6a4ba191b1a38d89ae38ab291f0d528f58b1a4af70fad250c14fbabbf2d6ee8f"
   }
 }
