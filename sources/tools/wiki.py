@@ -1214,6 +1214,28 @@ def copy_public_file(source, destination):
     return shutil.copyfile(source, destination)
 
 
+def write_source_snapshot(path, actual):
+    wiki_resources_current.safe_relative(path)
+    original = ROOT / path
+    if not original.resolve().is_relative_to(ROOT.resolve()):
+        raise ValueError('Wiki source escapes repository: ' + path)
+    sources = SITE / 'sources'
+    target = sources / path
+    if (not sources.resolve().is_relative_to(SITE.resolve())
+            or not target.parent.resolve().is_relative_to(sources.resolve())):
+        raise ValueError('Wiki snapshot escapes sources: ' + path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=target.parent, prefix='.source-build-') as temporary:
+        staged = Path(temporary) / target.name
+        if original.is_file():
+            copy_public_file(original, staged)
+        else:
+            staged.write_bytes(actual)
+        if staged.read_bytes() != actual:
+            raise ValueError('Source changed during collection; build again: ' + path)
+        staged.replace(target)
+
+
 def build_public(dataset):
     public=public_dataset(dataset)
     target=SITE/'public'
@@ -1273,7 +1295,7 @@ def build():
         actual=wiki_resources_current.source_bytes(sys.modules[__name__],path)
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
         if path.startswith(('Docs/','Wiki/content/','Wiki/assets/runtime-models/','Wiki/assets/rune-shapes-20261016/','Wiki/assets/field-items-20261016/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/','AgentRules/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
-            target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
+            write_source_snapshot(path, actual)
     wiki_resources_current.copy_media(sys.modules[__name__],databases)
     wiki_skills_current.write_bundle(SITE,skill_bundle)
     report=validate(dataset)
@@ -1318,6 +1340,7 @@ def validate(dataset):
     resourceids={r['id'] for d in dataset['databases'] if d['id']=='resources' for r in d['rows']}
     image_sources=wiki_resources_current.image_sources(dataset['databases'])
     record_image_coverage=validate_record_image_coverage(dataset)
+    content_ids={}
     for page in dataset['pages']:
         for target in re.findall(r'href="([^"]+)"',page['html']):
             target=html.unescape(target);parts=urlsplit(target)
@@ -1341,7 +1364,10 @@ def validate(dataset):
             content=row.get('content')
             if content:
                 if content['db'] not in dbids:raise ValueError('Missing DB')
-                if content['id'] not in {r['id'] for d in dataset['databases'] if d['id']==content['db'] for r in d['rows']}:raise ValueError('Missing content relation')
+                content_id=content['id']
+                if content['db'] not in content_ids:
+                    content_ids[content['db']]={r['id'] for d in dataset['databases'] if d['id']==content['db'] for r in d['rows']}
+                if content_id not in content_ids[content['db']]:raise ValueError('Missing content relation')
             for image in wiki_resources_current.preview_images(row):
                 file=SITE/'media'/image['file']
                 if not file.is_file():raise ValueError('Missing image: '+image['file'])

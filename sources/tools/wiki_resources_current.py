@@ -43,7 +43,6 @@ def source_bytes(api, path, optional=False):
         raise ValueError('Duplicate historical art source: ' + path)
     entry = matches[0] if matches else None
     if entry:
-        safe_relative(path)
         allowed = path in PRESERVED_DOCUMENTS
         if not allowed or not isinstance(entry.get('commit'), str) or not re.fullmatch(r'[0-9a-f]{40}', entry['commit']):
             raise ValueError('Invalid historical art source: ' + path)
@@ -56,8 +55,7 @@ def source_bytes(api, path, optional=False):
         raw = archive_file.read_bytes()
         if len(raw) != entry['bytes'] or api.digest(raw) != entry['sha256']:
             raise ValueError('Missing or changed historical art object: ' + path)
-        if path in PRESERVED_DOCUMENTS:
-            api.INPUTS[archive_path] = entry['sha256']
+        api.INPUTS[archive_path] = entry['sha256']
         api._historical_art[path] = raw
         return raw
     if optional:
@@ -139,13 +137,12 @@ def image_sources(databases):
                         and evidence.startswith('Wiki/assets/field-items-20261016/'))
                     if source or not allowed or not evidence.endswith('.png'):
                         raise ValueError(('Invalid runtime model evidence preview: ' if role=='runtime-model-evidence' or row.get('category')=='현재 모델' else 'Invalid verified evidence/artwork preview: ') + evidence)
-                    if file in paths and paths[file] != evidence:
-                        raise ValueError('Conflicting preview source: ' + file)
-                    paths[file] = evidence
-                if source:
+                    source = evidence
+                elif source:
                     safe_relative(source)
                     if not source.startswith(RESOURCES):
                         raise ValueError('Preview outside runtime resources: ' + source)
+                if source:
                     if file in paths and paths[file] != source:
                         raise ValueError('Conflicting preview source: ' + file)
                     paths[file] = source

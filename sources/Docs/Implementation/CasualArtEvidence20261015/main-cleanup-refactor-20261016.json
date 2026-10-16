@@ -1,0 +1,245 @@
+{
+  "utc": "2026-10-16T11:47:16.583365+00:00",
+  "result": "PASS",
+  "focusedTests": {
+    "modules": [
+      "test_wiki_resources_current",
+      "test_wiki_record_image_integration",
+      "test_wiki_town_models",
+      "test_wiki_town_eight"
+    ],
+    "tests": 29,
+    "durationSeconds": 1.534,
+    "exitCode": 0
+  },
+  "equivalence": {
+    "datasetRows": 5595,
+    "orderedMediaMappings": 1214,
+    "identical": true
+  },
+  "newSourceSHA256": "e7a624d9ba3a079610958da65a1a78d94feabd0ce83b09325fdde39a01d08db4",
+  "wholeNUnit": 0,
+  "gameBuild": 0,
+  "scope": "First behavior-preserving refactor after completed branch integration",
+  "sourceBase": "1266d2d31a37b7b848bd020e4027166d31d4da7f",
+  "changedRuntimeOrSerializedAssetsByRefactor": 0,
+  "modelFollowup": "Town8 retained; eight held Town models, ungenerated garland and future replacement crate remain deferred. Newly merged monster5 keep productionApproved=false; no new in-game verification claimed.",
+  "cleanupStatus": "Five completed worktrees removed/archived recoverably and four local branches deleted after main ancestry checks. Remaining worktrees/local branches: main and protected hero-manual-rig with13 tracked dirty files. Unrelated ProjectSettings bytes unchanged. Three completed remote branches retained pending remote-main upload approval.",
+  "independentReview": "PASS: validation order, error precedence, mapping insertion order and fallback preserved",
+  "firstRefactorCommit": "76ba597b8d31530a43c69160e9a6abe58045739d",
+  "secondRefactor": {
+    "sourceBase": "76ba597b8d31530a43c69160e9a6abe58045739d",
+    "target": "tools/wiki_resources_current.py:source_bytes",
+    "change": "Remove repeated path validation and already-proven preserved-document membership condition; keep byte/hash validation, pin/cache ordering and return values.",
+    "beforeSHA256": "e7a624d9ba3a079610958da65a1a78d94feabd0ce83b09325fdde39a01d08db4",
+    "afterSHA256": "031b3f5897065d63ecff864cf2e4e3acbcc39dc702e9416cf4b408cb8be604b1",
+    "focusedTests": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_wiki_resources_current",
+        "test_wiki_historical_reference87"
+      ],
+      "count": 16,
+      "seconds": 0.233,
+      "exitCode": 0,
+      "logSHA256": "29f2f888bc27981c91c671cf38c8136a52bc7e764df5151a309103346d4df0f7"
+    },
+    "actualPreservedDocuments": 3,
+    "orderedInputs": 4,
+    "cachedDocuments": 3,
+    "beforeAfterIdentical": true,
+    "wholeNUnit": 0,
+    "gameBuild": 0,
+    "wikiBuild": 0,
+    "additionalFocusedTests": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_wiki_portable_attachments"
+      ],
+      "count": 15,
+      "seconds": 0.079,
+      "exitCode": 0,
+      "reason": "Direct preserved archive hash/size/missing path/symlink and no-Git fallback cases identified during independent review"
+    },
+    "totalFocusedTests": 31,
+    "combinedLogSHA256": "5162d5a06a18c5d8118732fbc0519d7499d361fd3e56a55ebeedacc3bd9d9961",
+    "independentReview": {
+      "verdict": "PASS_STATIC_REVIEW",
+      "sha256": "9396fcd67486d65360d1d086e688c0b81f80ac88a09a705ba53986cb7b044bd3",
+      "blockingFindings": 0
+    }
+  },
+  "remoteStatus": "Completed/validated main90216d7f uploaded non-force and remote SHA confirmed. Both automatic workflows failed before any steps because GitHub reported account billing/spending restrictions. No reruns or billing settings changed. New storage cleanup remains local and is not included in that upload.",
+  "unusedCodeReview": "The subprocess import has no production call here but remains a test patch seam. No unreferenced Python definition has been established as safe for blanket deletion.",
+  "sizeContext": {
+    "measuredTreeCommit": "76ba597b8d31530a43c69160e9a6abe58045739d",
+    "trackedLogicalBytes": 4479242655,
+    "docsLogicalBytes": 2623969118,
+    "assetsLogicalBytes": 1365520067,
+    "packedHistoryPreviouslyMeasured": "5.57 GiB includes current and historical objects; not obsolete-only storage",
+    "generatedWikiPreviouslyMeasuredAllocatedKiB": {
+      "sources": 2545296,
+      "media": 691108,
+      "public": 701828
+    },
+    "historyRewrite": false,
+    "permanentDeletion": false
+  },
+  "unusedCodeCandidates": {
+    "inspectedModules": 14,
+    "inspectedDefinitions": 107,
+    "confirmedUnusedFunctionDeletions": 0,
+    "unconfirmedImportCandidates": [
+      "tools/wiki.py:BytesIO",
+      "tools/wiki_runes.py:re"
+    ],
+    "removed": false
+  },
+  "storageCleanup": {
+    "base": "90216d7f14f2556804d41920368efeabdcdae2ce",
+    "docs": {
+      "removedDuplicatePaths": 15,
+      "removedDuplicateGrossLogicalBytes": 3264802,
+      "canonicalMapping": "Docs/Implementation/MainCleanup20260930Evidence/training/canonical-files.json",
+      "mappingBytes": 4583,
+      "canonicalFilesPreserved": 15,
+      "originalNativeResultsSHA256": "601e77752a18a7a5825814afad619df39b8104e286579c3a2b0639e0cb81b718",
+      "recovery": "git restore --source=90216d7f14f2556804d41920368efeabdcdae2ce -- Docs/Implementation/MainCleanup20260930Evidence/training",
+      "basis": "Same current Git blob, byte verification, no current/published-history href, no game Resources/GUID consumer."
+    },
+    "generatedSources": {
+      "before": {
+        "files": 8841,
+        "logicalBytes": 2589712294
+      },
+      "after": {
+        "files": 7859,
+        "logicalBytes": 2111905567
+      },
+      "obsoleteCopiesMoved": 982,
+      "logicalBytesMoved": 477806727,
+      "preservedActiveSnapshots": 7859,
+      "retentionMethod": "Same-volume rename into task-owned retention, preserving dev/inode/size/mtime; no deletion or copy.",
+      "dataAndPublicUnchanged": true,
+      "diskReclaimClaim": null
+    },
+    "snapshotWriter": {
+      "change": "Reuse existing independent APFS clone copy policy for captured source snapshots; verify staged bytes and atomically replace. Preserve missing-original document fallback and reject source/destination tree escapes.",
+      "logicalPathContractChanged": false,
+      "newTinyFixtureCases": 6,
+      "focusedTests": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "test_wiki.SourceSnapshotFixtureTests",
+          "test_wiki.PublicDeliveryFixtureTests",
+          "test_wiki_portable_attachments"
+        ],
+        "tests": 36,
+        "seconds": 0.338,
+        "exitCode": 0,
+        "logSHA256": "8996fc45b3e38bf60c5380ae0a8427eb6eb321b1dd2433e8930dbea960fec240"
+      },
+      "sourceSHA256": {
+        "tools/wiki.py": "50c0223f82232a26c5699d21afb0cb3b14014064cfd95943df71985f2428362c",
+        "tools/test_wiki.py": "ce3fc3c59aa2eb3e25fc3cb8cf6b28a7994d49bab8266e4a0556a05e790c83eb"
+      },
+      "largeConversionOrBuild": false,
+      "actualPhysicalSavingsMeasured": false
+    },
+    "retainedLargeAttachments": "Four ZIP bundles retain current and historical download references; some contain unique earlier content. They remain unchanged.",
+    "historyRewrite": false,
+    "permanentUntrackedDeletion": false,
+    "newLargeBackupCopies": false,
+    "newRemoteUpload": false,
+    "existingDatasetCheck": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "tools/wiki.py",
+        "check"
+      ],
+      "exitCode": 1,
+      "seconds": 0.631,
+      "classification": "STALE_RECORD_IMAGE_INPUT_REBUILD_DEFERRED",
+      "logSHA256": "c7c95a1d7bbc650b9c7daff0b881025759886fdf78b8d8c328b44aed349f9123",
+      "reason": "Existing generated dataset remains pinned to prior publication; merged model/tool/follow-up changes are intentionally not recollected because whole builds are disallowed.",
+      "initialClassification": "UNEXPECTED_FAILURE",
+      "error": "Stale record image mapping source: Docs/Art/Monsters/portrait-manifest.json",
+      "staleInputEvidence": {
+        "path": "Docs/Art/Monsters/portrait-manifest.json",
+        "generatedInputAndSnapshotSHA256": "047216aa1f6e50ff61e34f5620048b44f4fbd00b1eaf34b4ae274d45ddf5645d",
+        "currentMainSHA256": "64575fd464b3cc0467a4c06f821a8a7667ad45548ce3bad19310d10ec9ac9ee8",
+        "changedByPreviouslyMergedMonsterCommit": true
+      },
+      "passed": false,
+      "notReached": "Later source-copy/public validation gates were not executed; independent retained-source/reference checks cover the removal scope."
+    },
+    "canonicalMappingLinks": {
+      "result": "PASS",
+      "links": {
+        "Docs/Implementation/Casual_Art_Followup_20261016.md": "sources/Docs/Implementation/MainCleanup20260930Evidence/training/canonical-files.json",
+        "Docs/Implementation/Casual_Art_Followup_20261016.en.md": "sources/Docs/Implementation/MainCleanup20260930Evidence/training/canonical-files.json"
+      },
+      "collectedMappingSHA256": "38c81007898081eba5d4ad0dff39c4998dcf0098d189a06fb17c1406739634f3"
+    },
+    "independentReview": "PASS_WITH_STATED_SCOPE_LIMITS; no blocking findings. Public delivery functions unchanged; source/public logical URL contracts retained."
+  },
+  "boundedLookupOptimization": {
+    "sourceBase": "09ebcbf28b2f3553e41829c877dc9be0273367ef",
+    "scope": "validate content membership only; call-local lazy target ID sets",
+    "actualReferences": 256,
+    "setConstructionsBefore": 256,
+    "setConstructionsAfter": 8,
+    "lookupMedianMsBefore": 1.219292,
+    "lookupMedianMsAfter": 0.255025,
+    "peakBytesBefore": 26448,
+    "peakBytesAfter": 47352,
+    "wholeValidateOrGameSpeedupClaim": false,
+    "actualValidateParityCases": 7,
+    "betweenCallMutationEquivalent": true,
+    "focusedTests": {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_wiki_record_image_integration",
+        "test_wiki.SourceSnapshotFixtureTests",
+        "test_wiki.PublicDeliveryFixtureTests",
+        "test_wiki_portable_attachments"
+      ],
+      "exitCode": 0,
+      "seconds": 1.807,
+      "logSHA256": "971d50eda0918ff92ed97f1328ab95b7309df64e7ced6de6afaeb3427ea32972",
+      "testSourceSHA256": "0794b3537dbcd4e4cc398170a574fd4669964fcbb7950d29f1c20f4aea98ac84"
+    },
+    "focusedTestCount": 45,
+    "initialGroupedError": "Preexisting test_wiki duplicate wiki registration; old/new both fail identically. Fixed canonical test import; same group passes.",
+    "wikiSourceSHA256": "7b30de6eebe5443aafc351023bb252cb42293876bd735aa7f2865eb71a206c89",
+    "performanceEvidenceSHA256": "533b0b8342d7c99e1a382ba8af1183e8df50e4aa9d429ab8b15c1e9c235bf6e2",
+    "independentReviewSHA256": "597f87e744765f46c042644ae23605366b7144801ce520cfb60e8dbee4840b47",
+    "wholeCollectionRunsAtSourceFreeze": 0
+  },
+  "finalWikiSynchronization": {
+    "state": "PREPARED_NOT_RUN_AT_SOURCE_FREEZE",
+    "reason": "Current merged monster manifest plus changed docs/generator inputs require one ordinary collection; old generated pins are stale, not removal regression.",
+    "allowedCollections": 1,
+    "gameTests": 0,
+    "gameBuilds": 0,
+    "heldModelsIntake": 0,
+    "originalAndUniqueDataProtected": true
+  }
+}
