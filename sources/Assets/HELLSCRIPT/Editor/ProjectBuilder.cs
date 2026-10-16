@@ -30,15 +30,6 @@ namespace Hellscript.Editor
             var shader=Shader.Find("Universal Render Pipeline/Lit");if(shader==null)throw new InvalidOperationException("URP Lit shader is unavailable.");
             const string matPath="Assets/HELLSCRIPT/Resources/Materials/RuntimeShader.mat";
             if(AssetDatabase.LoadAssetAtPath<Material>(matPath)==null)AssetDatabase.CreateAsset(new Material(shader){name="Runtime Shader Reference"},matPath);
-            foreach(string image in new[]{"Sanctuary","EquipmentAtlas"})
-            {
-                var importer=(TextureImporter)AssetImporter.GetAtPath("Assets/HELLSCRIPT/Resources/Art/"+image+".png");
-                if(importer!=null&&(importer.mipmapEnabled||importer.maxTextureSize!=2048))
-                {importer.textureType=TextureImporterType.Default;importer.mipmapEnabled=false;importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Compressed;importer.wrapMode=TextureWrapMode.Clamp;importer.SaveAndReimport();}
-            }
-            var paving=(TextureImporter)AssetImporter.GetAtPath("Assets/HELLSCRIPT/Resources/Art/RiftStone.png");
-            if(paving!=null&&(!paving.mipmapEnabled||paving.wrapMode!=TextureWrapMode.Repeat||paving.maxTextureSize!=1024||paving.filterMode!=FilterMode.Trilinear))
-            {paving.textureType=TextureImporterType.Default;paving.mipmapEnabled=true;paving.wrapMode=TextureWrapMode.Repeat;paving.maxTextureSize=1024;paving.npotScale=TextureImporterNPOTScale.ToNearest;paving.filterMode=FilterMode.Trilinear;paving.anisoLevel=2;paving.textureCompression=TextureImporterCompression.Compressed;paving.SaveAndReimport();}
             if(!File.Exists(ScenePath))
             {
                 var active=EditorSceneManager.GetActiveScene();

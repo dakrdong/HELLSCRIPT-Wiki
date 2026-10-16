@@ -14,9 +14,9 @@ namespace Hellscript
         void BuildGeneratedGeometry(RunState run)
         {
             var layout=run.layout;int field=layout.Field;
-            // The field's own floor art when it exists; otherwise the shared rift stone tinted per field.
+            // The field's own floor art when it exists; otherwise the field-coloured ground material.
             Material ground=FieldTile(field,"Floor");
-            if(ground==null){ground=FieldGround(field);var paving=Resources.Load<Texture2D>("Art/RiftStone");if(paving!=null)ground.mainTexture=paving;}
+            if(ground==null)ground=FieldGround(field);
             var edge=FieldTile(field,"Trim")??FieldWall(field);var wall=FieldTile(field,"Wall")??FieldWall(field);
             if(layout.rooms.Any(r=>r.outline!=null&&r.outline.Count>=3))BuildOrganicFloor(run,ground,edge,wall);
             else

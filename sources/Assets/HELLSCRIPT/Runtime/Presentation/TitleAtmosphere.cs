@@ -11,7 +11,7 @@ namespace Hellscript
         public float Clock {get;private set;}
         public bool Ready=>image!=null&&image.texture!=null&&atmosphere!=null&&atmosphere.shader.isSupported;
         static readonly int ClockId=Shader.PropertyToID("_SceneTime"),CropId=Shader.PropertyToID("_Crop"),FadeId=Shader.PropertyToID("_EntryFade");
-        public void Initialize(TitleSession state,string artwork="Art/Title/TitleSanctuary")
+        public void Initialize(TitleSession state,string artwork="Art/Title/Vista/vista_far_landscape")
         {
             session=state;image=gameObject.AddComponent<RawImage>();image.raycastTarget=false;
             image.texture=Resources.Load<Texture2D>(artwork);

@@ -3,6 +3,7 @@
 """Build a local, source-grounded HELLSCRIPT wiki. Never writes game assets."""
 from __future__ import annotations
 import argparse
+import copy
 import datetime as dt
 import hashlib
 import html
@@ -19,6 +20,9 @@ import wiki_resources_current
 import wiki_art_retirement
 from io import BytesIO
 import wiki_art_attestation
+import wiki_skills_current
+import wiki_record_images
+from types import SimpleNamespace
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 
@@ -1220,8 +1224,10 @@ def build_public(dataset):
         (stage/'.nojekyll').write_text('')
         shell=(SITE/'index.html').read_text().replace('HELLSCRIPT 개발 위키','HELLSCRIPT 공개 위키').replace('DEVELOPMENT WIKI','PUBLIC WIKI').replace('HELLSCRIPT 기획, 개발 기록과 리소스 데이터베이스','HELLSCRIPT 전체 문서와 데이터베이스 · 읽기 전용')
         shell=shell.replace('src="data.js"','src="data.js?v='+digest(json.dumps(public,ensure_ascii=False).encode())[:16]+'"')
+        if dataset.get('skillDetails'):
+            shell=shell.replace('src="skill-details.js"','src="skill-details.js?v='+digest((SITE/'skill-details.js').read_bytes())[:16]+'"')
         (stage/'index.html').write_text(shell)
-        for name in ['app.js','app.css']:copy_public_file(SITE/name,stage/name)
+        for name in ['app.js','app.css',*wiki_skills_current.public_files(dataset)]:copy_public_file(SITE/name,stage/name)
         shutil.copytree(SITE/'icons',stage/'icons',copy_function=copy_public_file)
         # Copy only current collected source snapshots, not stale files from prior builds.
         for source in dataset['inputManifest']:
@@ -1248,13 +1254,16 @@ def build():
     pages=build_pages();databases=build_databases();resources=build_resources(databases)
     databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_edict_disclosures());databases.append(build_evidence())
     wiki_art_attestation.attach_current_skill_images(sys.modules[__name__],databases,resources['rows'])
+    skill_bundle=wiki_skills_current.prepare(sys.modules[__name__],databases)
+    record_image_coverage=wiki_record_images.attach(sys.modules[__name__],databases)
     databases=wiki_art_retirement.retained_databases(ROOT,databases)
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
-    for path in ['tools/wiki.py',PUBLIC_DELIVERY_MANIFEST,'tools/wiki_art_retirement.py','tools/wiki_art_attestation.py','tools/wiki_resources_current.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
+    for path in ['tools/wiki.py',PUBLIC_DELIVERY_MANIFEST,'tools/wiki_art_retirement.py','tools/wiki_art_attestation.py','tools/wiki_resources_current.py','tools/wiki_record_images.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css','tools/wiki_skills_current.py','Wiki/site/skill-db.js','Wiki/site/skill-db.css']:read(path)
     if (ROOT/wiki_art_retirement.ADDITIONAL_REGISTRY).is_file(): read(wiki_art_retirement.ADDITIONAL_REGISTRY)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,
              'archivedSources':wiki_resources_current.archived_sources(sys.modules[__name__]),
-             'inputManifest':dict(sorted(INPUTS.items()))}
+             'inputManifest':dict(sorted(INPUTS.items())),'skillDetails':wiki_skills_current.bundle_metadata(skill_bundle),
+             'recordImageCoverage':record_image_coverage}
     old=SITE/'data.json'
     if old.exists():
         previous=json.loads(old.read_text())
@@ -1263,10 +1272,12 @@ def build():
     for path,expected in INPUTS.items():
         actual=wiki_resources_current.source_bytes(sys.modules[__name__],path)
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
-        if path.startswith(('Docs/','Wiki/content/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/','AgentRules/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
+        if path.startswith(('Docs/','Wiki/content/','Wiki/assets/runtime-models/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/','AgentRules/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
     wiki_resources_current.copy_media(sys.modules[__name__],databases)
+    wiki_skills_current.write_bundle(SITE,skill_bundle)
     report=validate(dataset)
+    report['currentSkills']=wiki_skills_current.check(sys.modules[__name__],dataset)
     save(SITE/'data.json',dataset)
     (SITE/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(dataset,ensure_ascii=False).replace('</','<\\/')+';\n')
     save(SITE/'catalog.json',{'generatedAt':dataset['generatedAt'],'databases':databases})
@@ -1274,10 +1285,39 @@ def build():
     build_public(dataset)
     print(json.dumps(report,ensure_ascii=False,indent=2))
 
+def validate_record_image_coverage(dataset):
+    """Recompute preview metadata on a copy without trusting saved coverage counters."""
+    coverage = dataset.get('recordImageCoverage')
+    if coverage is None and not any(table['id'] in wiki_record_images.EXPECTED for table in dataset['databases']):
+        return None  # Small non-content fixtures do not claim this catalog's coverage.
+    if not isinstance(coverage, dict):
+        raise ValueError('Record image coverage missing; rebuild wiki')
+    api = SimpleNamespace(ROOT=ROOT, INPUTS=dict(dataset['inputManifest']))
+    def read_current(path):
+        raw = wiki_resources_current.source_bytes(api, path)
+        sha = digest(raw)
+        if dataset['inputManifest'].get(path) != sha:
+            raise ValueError('Stale record image mapping source: ' + path)
+        api.INPUTS[path] = sha
+        return raw.decode('utf-8-sig')
+    api.read = read_current
+    def collected_ref(path, line=1):
+        if path not in api.INPUTS: read_current(path)
+        return {'path': path, 'line': line}
+    api.source_ref = collected_ref
+    read_current('tools/wiki_record_images.py')
+    expected = copy.deepcopy(dataset['databases'])
+    recomputed = wiki_record_images.attach(api, expected)
+    if recomputed != coverage or expected != dataset['databases']:
+        raise ValueError('Stale record image coverage or preview metadata')
+    return recomputed
+
+
 def validate(dataset):
     pageids={p['id'] for p in dataset['pages']};dbids={d['id'] for d in dataset['databases']};links=0;images=0
     resourceids={r['id'] for d in dataset['databases'] if d['id']=='resources' for r in d['rows']}
     image_sources=wiki_resources_current.image_sources(dataset['databases'])
+    record_image_coverage=validate_record_image_coverage(dataset)
     for page in dataset['pages']:
         for target in re.findall(r'href="([^"]+)"',page['html']):
             target=html.unescape(target);parts=urlsplit(target)
@@ -1302,10 +1342,16 @@ def validate(dataset):
             if content:
                 if content['db'] not in dbids:raise ValueError('Missing DB')
                 if content['id'] not in {r['id'] for d in dataset['databases'] if d['id']==content['db'] for r in d['rows']}:raise ValueError('Missing content relation')
-            image=row.get('image')
-            if image:
-                if not (SITE/'media'/image['file']).is_file():raise ValueError('Missing image: '+image['file'])
-                if digest((SITE/'media'/image['file']).read_bytes())!=dataset['inputManifest'][image_sources[image['file']]]:raise ValueError('Image bytes changed in wiki copy')
+            for image in wiki_resources_current.preview_images(row):
+                file=SITE/'media'/image['file']
+                if not file.is_file():raise ValueError('Missing image: '+image['file'])
+                if not file.resolve().is_relative_to((SITE/'media').resolve()):raise ValueError('Wiki image escapes media: '+image['file'])
+                raw=file.read_bytes()
+                if 'images' in row:wiki_resources_current.check_png_preview(raw,image['file'])
+                source=image_sources[image['file']]
+                expected=dataset['inputManifest'].get(source)
+                if not isinstance(expected,str) or not re.fullmatch(r'[0-9a-f]{64}',expected):raise ValueError('Uncollected wiki preview: '+source)
+                if digest(raw)!=expected:raise ValueError('Image bytes changed in wiki copy')
                 if 'cell' in image and not 0<=image['cell']<24:raise ValueError('Invalid atlas cell')
                 images+=1
     stale=[p for p,h in dataset['inputManifest'].items() if (raw:=wiki_resources_current.source_bytes(sys.modules[__name__],p,optional=True)) is None or digest(raw)!=h]
@@ -1316,15 +1362,16 @@ def validate(dataset):
     return {'result':'passed','generatedAt':dataset['generatedAt'],'pages':len(dataset['pages']),
             'databases':len(dataset['databases']),'records':sum(len(d['rows']) for d in dataset['databases']),
             'recordsByDatabase':{d['id']:len(d['rows']) for d in dataset['databases']},'documentLinks':links,
-            'imageReferences':images,'uniqueImageFiles':len({r['image']['file'] for d in dataset['databases'] for r in d['rows'] if r.get('image')}),
+            'imageReferences':images,'uniqueImageFiles':len(image_sources),'recordImageCoverage':record_image_coverage,
             'sourceFiles':len(dataset['inputManifest']),'gameExecution':'not performed; preserved reports only'}
 
 def check():
     dataset=json.loads((SITE/'data.json').read_text())
     result=validate(dataset)
+    result['currentSkills']=wiki_skills_current.check(sys.modules[__name__],dataset)
     if json.loads((SITE/'public/data.json').read_text())!=public_dataset(dataset):raise ValueError('Stale public wiki')
     if {f.name:f.read_text() for f in (SITE/'public/history').glob('*')}!=public_history(dataset):raise ValueError('Stale public history')
-    for name in ['app.js','app.css']:
+    for name in ['app.js','app.css',*wiki_skills_current.public_files(dataset)]:
         if (SITE/name).read_bytes()!=(SITE/'public'/name).read_bytes():raise ValueError('Stale public UI: '+name)
     result['publicBytes']=check_public_files(dataset)
     result['publicPages']=len(public_dataset(dataset)['pages'])

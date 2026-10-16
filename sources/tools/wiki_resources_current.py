@@ -74,44 +74,95 @@ def archived_sources(api):
 
 
 def safe_relative(value):
-    path = PurePosixPath(value)
-    if not value or path.is_absolute() or '..' in path.parts or '\\' in value:
-        raise ValueError('Unsafe wiki resource path: ' + value)
-    return path
+    if (not isinstance(value, str) or not value or value.startswith('/')
+            or '\\' in value or re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', value)
+            or any(part in ('', '.', '..') for part in value.split('/'))
+            or any(ord(char) < 32 or ord(char) == 127 for char in value)):
+        raise ValueError('Unsafe wiki resource path: ' + str(value))
+    return PurePosixPath(value)
+
+
+def preview_images(row):
+    """Validate ordered exact bundles; keep legacy single-image and atlas consumers."""
+    image = row.get('image')
+    if image is not None:
+        if not isinstance(image, dict) or 'file' not in image:
+            raise ValueError('Invalid wiki preview image')
+        safe_relative(image['file'])
+    if 'images' not in row:
+        return [image] if image is not None else []
+    pictures = row['images']
+    if not isinstance(pictures, list) or not 1 <= len(pictures) <= 9:
+        raise ValueError('Wiki preview bundle requires 1 to 9 images')
+    for item in pictures:
+        if (not isinstance(item, dict) or not {'file', 'assetPath', 'label'} <= set(item)
+                or set(item) - {'file', 'assetPath', 'label', 'count'}):
+            raise ValueError('Invalid wiki preview bundle item')
+        safe_relative(item['file']); safe_relative(item['assetPath'])
+        if (not item['file'].endswith('.png') or not item['assetPath'].startswith(RESOURCES)
+                or not item['assetPath'].endswith('.png')
+                or not isinstance(item['label'], str) or not item['label'].strip()
+                or ('count' in item and (type(item['count']) is not int or item['count'] <= 0))):
+            raise ValueError('Invalid exact PNG preview bundle item')
+    if (image is None or set(image) != {'file'} or image['file'] != pictures[0]['file']
+            or row.get('assetPath') != pictures[0]['assetPath'] or row.get('previewSource')):
+        raise ValueError('Primary preview must be a separate first bundle image copy')
+    return pictures
+
+
+def check_png_preview(raw, file):
+    if len(raw) < 24 or raw[:8] != b'\x89PNG\r\n\x1a\n' or raw[12:16] != b'IHDR':
+        raise ValueError('Exact preview is not PNG: ' + file)
 
 
 def image_sources(databases):
-    """A media key keeps the frontend contract; assetPath owns its original bytes."""
+    """A media key keeps the frontend contract; assetPath owns each original's bytes."""
     paths = {}
     for database in databases:
         for row in database['rows']:
-            image = row.get('image')
-            if not image:
-                continue
-            file = image['file']; safe_relative(file)
-            source = row.get('assetPath')
-            if source:
-                safe_relative(source)
-                if not source.startswith(RESOURCES):
-                    raise ValueError('Preview outside runtime resources: ' + source)
-                if file in paths and paths[file] != source:
-                    raise ValueError('Conflicting preview source: ' + file)
-                paths[file] = source
+            for image in preview_images(row):
+                file = image['file']
+                source = image['assetPath'] if 'images' in row else row.get('assetPath')
+                evidence = row.get('previewSource')
+                if evidence:
+                    safe_relative(evidence)
+                    if (source or row.get('category') != '현재 모델'
+                            or image.get('role') != 'runtime-model-evidence'
+                            or not evidence.startswith('Wiki/assets/runtime-models/')
+                            or not evidence.endswith('.png')):
+                        raise ValueError('Invalid runtime model evidence preview: ' + evidence)
+                    if file in paths and paths[file] != evidence:
+                        raise ValueError('Conflicting preview source: ' + file)
+                    paths[file] = evidence
+                if source:
+                    safe_relative(source)
+                    if not source.startswith(RESOURCES):
+                        raise ValueError('Preview outside runtime resources: ' + source)
+                    if file in paths and paths[file] != source:
+                        raise ValueError('Conflicting preview source: ' + file)
+                    paths[file] = source
+    # Unowned legacy singles inherit a collected resource's mapping before Art/file fallback.
     for database in databases:
         for row in database['rows']:
-            if row.get('image'):
-                file = row['image']['file']; paths.setdefault(file, ART + file)
+            for image in preview_images(row):
+                file = image['file']; paths.setdefault(file, ART + file)
     return paths
 
 
 def copy_media(api, databases):
     """Replace only the generated media tree, leaving the prior tree until staging succeeds."""
     paths = image_sources(databases)
+    gallery_files = {image['file'] for table in databases for row in table['rows']
+                     if 'images' in row for image in preview_images(row)}
     api.SITE.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=api.SITE, prefix='.media-build-') as temporary:
         stage = Path(temporary) / 'media'; stage.mkdir()
         for file, source in paths.items():
-            raw = (api.ROOT / source).read_bytes()
+            original = api.ROOT / source
+            if not original.resolve().is_relative_to(api.ROOT.resolve()):
+                raise ValueError('Wiki preview escapes repository: ' + source)
+            raw = original.read_bytes()
+            if file in gallery_files: check_png_preview(raw, file)
             if api.INPUTS.get(source) != api.digest(raw):
                 raise ValueError('Uncollected or changed preview: ' + source)
             target = stage / file; target.parent.mkdir(parents=True, exist_ok=True)
@@ -237,6 +288,64 @@ def _models(api, databases, existing):
     return rows, replaced
 
 
+
+def _town_models(api):
+    """Publish only the adopted Mark representative, with hash-bound actual Editor proof."""
+    manifest_path = RESOURCES + 'World/Town/manifest_town_hunyuan.json'
+    if not (api.ROOT / manifest_path).is_file():
+        return []
+    manifest = json.loads(api.read(manifest_path))
+    key = 'Npc_MarkKus'
+    model = manifest['models'][key]
+    proof_path = 'Wiki/assets/runtime-models/mark-kus/receipt.json'
+    proof = json.loads(api.read(proof_path))
+    if (proof.get('status') != 'MARK1_FOCUSED_EDITOR_PASS'
+            or proof.get('runtime', {}).get('status') != 'PASSED'
+            or proof.get('geometry', {}).get('triangles') != model['tris']
+            or proof.get('geometry', {}).get('height') != model['height']
+            or proof.get('geometry', {}).get('footY') != 0
+            or not proof.get('geometry', {}).get('staticMesh')
+            or proof.get('other11NPCReplaced') != 0):
+        raise ValueError('Missing or invalid focused Town model proof: ' + key)
+    names = {key + '.fbx', key + '_A.png', key + '_N.png'}
+    if set(model['sha256']) != names or set(proof.get('runtimeFiles', {})) != {RESOURCES + 'World/Town/' + name for name in names}:
+        raise ValueError('Invalid Mark runtime file inventory')
+    refs = [api.source_ref(proof_path)]
+    hashes = {}; guids = {}
+    for filename, expected in model['sha256'].items():
+        path = RESOURCES + 'World/Town/' + filename
+        raw = _binary(api, path)
+        if api.digest(raw) != expected or proof['runtimeFiles'].get(path, {}).get('sha256') != expected:
+            raise ValueError('Town model source differs from focused proof: ' + path)
+        meta = path + '.meta'
+        meta_text = api.read(meta)
+        if api.digest(meta_text.encode()) != proof['runtimeFiles'][path]['metaSha256']:
+            raise ValueError('Town model meta differs from focused proof: ' + meta)
+        guid = re.search(r'^guid: (\w+)', meta_text, re.M)
+        if not guid:
+            raise ValueError('Missing Town model GUID: ' + meta)
+        hashes[filename] = expected; guids[filename] = guid[1]
+        refs += [api.source_ref(path), api.source_ref(meta)]
+    preview = proof['preview']['path']; safe_relative(preview)
+    if not preview.startswith('Wiki/assets/runtime-models/mark-kus/') or not preview.endswith('.png'):
+        raise ValueError('Invalid Mark evidence preview path')
+    if api.digest(_binary(api, preview)) != proof['preview']['sha256']:
+        raise ValueError('Changed Mark evidence screenshot')
+    refs.append(api.source_ref(preview))
+    fields = {'모델 경로 / Model': RESOURCES + 'World/Town/' + key + '.fbx',
+              '삼각형 / Triangles': model['tris'], '높이 / Height': model['height'],
+              '텍스처 / Texture': model['texture'], '원점 / Origin': model['origin'],
+              '정면 / Front': model['front'], '파일 SHA-256 / Files': hashes, 'Unity GUID': guids,
+              '제작 근거 / Source': model['source'], '실행 검증 커밋 / Runtime source': proof['integratedSourceCommit'],
+              '검증 범위 / Scope': '실제 Editor 마을·대화·대장간, 가로·세로. 다른 NPC11·플레이어 빌드는 미포함. / Actual Editor Town, dialogue and forge in both orientations; excludes other11 NPCs and player build.',
+              '미리보기 / Preview': '실제 Editor 근접 화면이며 원화나 독립 3D 뷰어가 아닙니다. / Actual Editor close-up, not standalone artwork or a 3D viewer.',
+              '출시 승인 / Production approved': manifest['productionApproved']}
+    return [api.record('model-town-' + key, '마르크 쿠스 / Mark Kus', '현재 모델',
+                       '캐주얼 마을 NPC 대표 모델 / Casual Town NPC representative', fields, manifest_path,
+                       status='Editor 검증 완료 · 출시 승인 별도 / Editor verified; release approval separate',
+                       refs=refs, previewSource=preview,
+                       image={'file': 'evidence/models/mark-kus.png', 'role': 'runtime-model-evidence'})]
+
 def build(api, databases, existing):
     rows = _equipment(api, databases)
     represented = {r.get('assetPath') for r in existing + rows if r.get('image') or r.get('historicalOnly')}
@@ -250,6 +359,7 @@ def build(api, databases, existing):
             rows.append(_image_row(api, path)); represented.add(path)
     model_rows, replaced = _models(api, databases, existing)
     rows.extend(model_rows)
+    rows.extend(_town_models(api))
     for row in rows:
         if row.get('assetPath', '').startswith(ART + 'CasualAspectStone/'):
             row['id'] = 'asset-aspect-LW02'; row['category'] = '위상 정본 원화'

@@ -8,6 +8,14 @@ namespace Hellscript
     public sealed class StorageGlyph : MaskableGraphic
     {
         public string symbol;
+        // Four small technical controls keep their exact action shape and the owner's hit rectangle.
+        internal static bool TryDrawControl(RectTransform rect,string id,Color ink)
+        {
+            string symbol=id switch {"collapse"=>"right","expand"=>"chevron","drag-grip"=>"drag-grip","plus"=>"plus",_=>null};
+            if(symbol==null)return false;
+            var glyph=rect.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=ink;glyph.raycastTarget=false;return true;
+        }
+
         protected override void OnPopulateMesh(VertexHelper mesh)
         {
             mesh.Clear();
@@ -85,6 +93,8 @@ namespace Hellscript
                 case "craft":Path(mesh,3,8,21,8,18,13,13,13,13,17,17,17,17,20,6,20,6,17,9,17,9,13,6,13,3,8);Path(mesh,13,3,15,2,19,6,17,8,13,3);break;
                 case "spark":Path(mesh,12,2,15,9,22,12,15,15,12,22,9,15,2,12,9,9,12,2);break;
                 case "plus":Path(mesh,12,5,12,19);Path(mesh,5,12,19,12);break;
+                case "drag-grip":
+                    foreach(float x in new[]{8f,16f})foreach(float y in new[]{5f,12f,19f})Path(mesh,x,y-.5f,x,y+.5f);break;
                 case "auto":Path(mesh,5,4,13,12,5,20,5,4);Path(mesh,14,4,22,12,14,20,14,4);break;
                 case "list":Path(mesh,8,6,21,6);Path(mesh,8,12,21,12);Path(mesh,8,18,21,18);Path(mesh,3,6,4,6);Path(mesh,3,12,4,12);Path(mesh,3,18,4,18);break;
                 case "reroll":Path(mesh,19,7,17.5f,4.5f,15,3,12,3,8.5f,3.6f,6,6,3,9);Path(mesh,3,4,3,9,8,9);Path(mesh,5,17,6.5f,19.5f,9,21,12,21,15.5f,20.4f,18,18,21,15);Path(mesh,21,20,21,15,16,15);break;

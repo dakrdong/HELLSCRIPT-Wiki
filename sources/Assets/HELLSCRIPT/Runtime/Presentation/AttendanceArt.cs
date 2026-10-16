@@ -17,7 +17,7 @@ namespace Hellscript
             };
             return path==null?null:Resources.Load<Sprite>(path);
         }
-        public static Sprite Seal=>Resources.Load<Sprite>("Art/Attendance/claimed-seal");
+        public static Sprite Seal=>Resources.Load<Sprite>("Art/Options/Casual/check");
         public static Sprite EventIcon=>GlobalHudView.LoadArt("menu-events");
         public static Texture2D Altar=>Resources.Load<Texture2D>("Art/Attendance/popup-altar");
     }

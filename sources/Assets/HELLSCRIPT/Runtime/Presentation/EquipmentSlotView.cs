@@ -56,10 +56,8 @@ namespace Hellscript
             var dedicated=EquipmentArt.ForItem(item,skin?.EquipmentArt);
             if(dedicated!=null)
             {var image=r.gameObject.AddComponent<RawImage>();image.texture=dedicated;image.raycastTarget=false;image.color=new Color(1,1,1,opacity);}
-            else if(ItemCatalog.Base(item).legacyIndex>=24)
-            {var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=EquipmentSlots.Kind(item).ToString().ToLowerInvariant();var c=UiTheme.Gold;c.a=opacity;glyph.color=c;glyph.raycastTarget=false;}
             else
-            {var image=r.gameObject.AddComponent<RawImage>();image.texture=Resources.Load<Texture2D>("Art/EquipmentAtlas");int n=ItemCatalog.AtlasIndex(item);image.uvRect=new Rect(n%6/6f,1-(n/6+1)/4f,1/6f,1/4f);image.raycastTarget=false;image.color=new Color(1,1,1,opacity);}
+            {var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=EquipmentSlots.Kind(item).ToString().ToLowerInvariant();var c=UiTheme.Gold;c.a=opacity;glyph.color=c;glyph.raycastTarget=false;}
             return r;
         }
         public static void Glyph(Transform parent,string name,string symbol,float x,float y,float size,Color color)

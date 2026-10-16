@@ -15,6 +15,7 @@ namespace Hellscript
         RectTransform root,shell,headerApron,footerApron,content,header,footer,overlay,toastFrame;
         Font font;
         Texture2D background,equipmentAtlas;
+        RawImage pageBackdrop;
         Text status,hpText,resourceText,timerText,actionText,meterText,toast,headerTitle,headerSubtitle;
         Image hpFill,resourceFill,meterFill;
         List<Text> skillLabels=new List<Text>();
@@ -37,8 +38,8 @@ namespace Hellscript
             game=controller;
             windowHost=gameObject.AddComponent<ContentWindowHost>();windowHost.Initialize(()=>game.Active?game.Combat.State:null);
             font=CreateFont();
-            background=Resources.Load<Texture2D>("Art/Sanctuary");
-            equipmentAtlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");
+            background=Resources.Load<Texture2D>("Art/CharacterPlaza/landscape_bg");
+            equipmentAtlas=null;
             var canvasObject=new GameObject("HELLSCRIPT UI",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
             canvasObject.transform.SetParent(transform,false);var canvas=canvasObject.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=100;canvas.pixelPerfect=true;
             ApplyScaler(canvasObject.GetComponent<CanvasScaler>(),false);
@@ -63,9 +64,16 @@ namespace Hellscript
             if(ReserveGlobalHudSpace&&globalHud?.Layout!=null)
             {float inset=globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12;s.yMin+=inset;}
             float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
+            CoverUV();
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;
             if(headerApron!=null){headerApron.anchorMin=new Vector2(0,s.yMax/h);headerApron.anchorMax=Vector2.one;headerApron.offsetMin=headerApron.offsetMax=Vector2.zero;}
             if(footerApron!=null){footerApron.anchorMin=Vector2.zero;footerApron.anchorMax=new Vector2(1,s.y/h);footerApron.offsetMin=footerApron.offsetMax=Vector2.zero;}
+        }
+        // The backdrop fills the screen canvas; cropping keeps the painting's aspect.
+        void CoverUV()
+        {
+            if(pageBackdrop==null||background==null)return;
+            pageBackdrop.uvRect=TitleAtmosphere.Cover(Mathf.Max(1,Screen.width)/(float)Mathf.Max(1,Screen.height),(float)background.width/background.height);
         }
         // Shared adapters retain their layout callback; the player reading-size preference is retired.
         public float InterfaceFactor=>1f;
@@ -83,6 +91,7 @@ namespace Hellscript
         public void RefreshCanvasLayout()
         {
             if(root==null)return;
+            CoverUV();
             var pageScaler=root.parent.GetComponent<CanvasScaler>();
             ApplyScaler(pageScaler,pageScaler.uiScaleMode==CanvasScaler.ScaleMode.ConstantPixelSize);
             if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
@@ -184,11 +193,11 @@ namespace Hellscript
             if(Page=="edict"&&content!=null)edictScrollOffset=content.anchoredPosition.y;
             targetRanks.Clear();targetTags.Clear();targetLinks.Clear();targetLabelBounds.Clear();orderHeroLabel=null;orderLootLabels.Clear();orderLootPoints.Clear();targetLabelIds.Clear();Array.Clear(targetNotes,0,targetNotes.Length);
             Page=page;foreach(Transform child in root){child.gameObject.SetActive(false);Destroy(child.gameObject);}skillLabels.Clear();status=hpText=null;
-            foreach(Transform child in shell){child.gameObject.SetActive(false);Destroy(child.gameObject);}headerApron=footerApron=null;
+            foreach(Transform child in shell){child.gameObject.SetActive(false);Destroy(child.gameObject);}headerApron=footerApron=null;pageBackdrop=null;
             if(!battle)
             {
                 var back=Box("Backdrop",shell,ink);Stretch(back);
-                if(art&&background!=null){var image=Rect("Generated Sanctuary",shell);Stretch(image);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=background;raw.color=new Color(1,1,1,.8f);raw.raycastTarget=false;}
+                if(art&&background!=null){var image=Rect("Generated Sanctuary",shell);Stretch(image);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=background;pageBackdrop=raw;raw.color=new Color(1,1,1,.8f);raw.raycastTarget=false;var veil=Box("Artwork reading scrim",shell,UiTheme.Scrim);Stretch(veil);}
             }
             header=Box("Header",root,UiTheme.Background);header.anchorMin=new Vector2(0,1);header.anchorMax=Vector2.one;header.pivot=new Vector2(.5f,1);header.sizeDelta=new Vector2(0,80);
             var top=Label(header,title,30,gold);Place(top.rectTransform,20,6,650,38);headerTitle=top;

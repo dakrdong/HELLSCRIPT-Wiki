@@ -60,10 +60,11 @@
   if(PUBLIC)document.body.classList.add('public-wiki');
   const pageLink=p=>`#/page/${p.id}`;
   function badge(s){return `<span class="badge ${/현재|추출|등록/.test(s)?'current':/대기|후속|임시|검토/.test(s)?'pending':''}">${esc(s)}</span>`}
+  const visibleDatabases=()=>D.databases.filter(d=>!['class-abilities','passives'].includes(d.id));
   function navigation(db=false){
     $('#wiki-tab').classList.toggle('active',!db);$('#db-tab').classList.toggle('active',db);
     const path=location.hash;
-    $('#navigation').innerHTML=db?`<p class="nav-group">리소스와 콘텐츠</p>${D.databases.map(d=>`<a class="nav-link ${path.startsWith('#/db/'+d.id)?'active':''}" href="#/db/${d.id}">${esc(d.name)}<span>${d.rows.length}</span></a>`).join('')}`:
+    $('#navigation').innerHTML=db?`<p class="nav-group">리소스와 콘텐츠</p>${visibleDatabases().map(d=>`<a class="nav-link ${path.startsWith('#/db/'+d.id)?'active':''}" href="#/db/${d.id}">${esc(d.name)}<span>${d.rows.length}</span></a>`).join('')}`:
       `<a class="nav-link ${path.startsWith('#/tree')?'active':''}" href="#/tree">전체 위키 트리</a><a class="nav-link" href="#/tree?sort=newest">시간순 페이지 목록</a><a class="nav-link" href="#/tags">태그 탐색</a><a class="nav-link" href="#/page/live-operations">게임 운영툴 · 접속 안내</a>${PUBLIC?'':'<a class="nav-link" href="https://dakrdong.github.io/HELLSCRIPT-Wiki/#/tree">공개용 위키 ↗</a>'}`+[...new Set(D.pages.map(p=>p.category))].map(c=>`<p class="nav-group">${esc(c)}</p>${D.pages.filter(p=>p.category===c).map(p=>`<a class="nav-link ${path.startsWith(pageLink(p))?'active':''}" href="${pageLink(p)}">${esc(p.shortTitle||p.title)}</a>`).join('')}`).join('');
     $('#sidebar-footer').innerHTML=`문서 ${D.pages.length}개 · DB ${D.databases.length}개<br>원본 기준 ${esc(D.generatedAt.slice(0,10))}`;
   }
@@ -110,7 +111,7 @@
     $('#page-reset').onclick=()=>{q=tag=from=to='';$('#page-search').value=$('#search').value=$('#date-from').value=$('#date-to').value='';sync()};
     $('#expand').onclick=()=>document.querySelectorAll('.tree').forEach(e=>e.open=true);$('#collapse').onclick=()=>document.querySelectorAll('.tree').forEach(e=>e.open=false);update();
   }
-  function searchDB(q){return D.databases.map(db=>{const rows=db.rows.filter(r=>JSON.stringify(r).toLowerCase().includes(q.toLowerCase()));return rows.length?`<h2>${esc(db.name)} · ${rows.length}개</h2>${rows.map(r=>`<p><a href="#/db/${db.id}?record=${encodeURIComponent(r.id)}">${esc(r.id)} · ${esc(r.name)}</a></p>`).join('')}`:''}).join('')}
+  function searchDB(q){return visibleDatabases().map(db=>{const rows=db.rows.filter(r=>JSON.stringify(r).toLowerCase().includes(q.toLowerCase()));return rows.length?`<h2>${esc(db.name)} · ${rows.length}개</h2>${rows.map(r=>`<p><a href="#/db/${db.id}?record=${encodeURIComponent(r.id)}">${esc(r.id)} · ${esc(r.name)}</a></p>`).join('')}`:''}).join('')}
   function page(id,params){const p=D.pages.find(p=>p.id===id);if(!p)return missing();
     if(params.get('view')==='history')return compare(p,params);
     const version=params.get('version');const v=version?(p.versions||[]).find(v=>String(v.revision)===version):null;if(version&&!v)return missing();const content=v?full(p,v):p;if(!content)return loadHistory(p,()=>page(id,params));
@@ -152,6 +153,15 @@
   }
   function missing(){$('#main').innerHTML='<h1>항목을 찾을 수 없습니다.</h1><p><a href="#/tree">전체 위키 트리로 돌아가기</a></p>'}
   function visual(row,large=false){
+    if(Array.isArray(row.images)&&row.images.length>1){
+      const pictures=row.images.map(img=>{
+        const quantity=img.count===undefined||img.count===null?'':' ×'+String(img.count),rawLabel=String(img.label??row.name);
+        const label=quantity&&rawLabel.endsWith(quantity)?rawLabel.slice(0,-quantity.length):rawLabel;
+        return `<figure class="db-art-gallery-item"><img class="db-art-gallery-image" src="${esc(resolveMediaUrl(img.file))}" alt="${esc(row.name+' · '+label+quantity)}" loading="lazy"><figcaption><span>${esc(label)}</span>${quantity?`<span class="db-art-gallery-count">${esc(quantity.trim())}</span>`:''}</figcaption></figure>`;
+      }).join('');
+      return `<div class="db-art-gallery${large?' db-art-gallery-large':''}" role="group" aria-label="${esc(row.name)} · ${row.images.length}개 이미지">${pictures}</div>`;
+    }
+    if(!row.image&&row.imageMissing)return `<div class="db-art-missing" role="note">${esc(row.imageMissing.reason??'정확 미리보기 없음 / Exact preview unavailable')}</div>`;
     const img=row.image;if(!img)return `<div class="preview"><span class="badge">${esc(row.status==='제작 대기'?'제작 대기':row.category)}</span></div>`;
     const file=resolveMediaUrl(img.file);
     if(img.cell!==undefined){const col=img.cell%6,line=Math.floor(img.cell/6);return `<span role="img" aria-label="${esc(row.name)} 아틀라스 영역" class="${large?'atlas':'thumb'}" style="background-image:url('${file}');background-size:600% 400%;background-position:${col*20}% ${line*100/3}%"></span>`}
@@ -163,13 +173,14 @@
     const popup=$('#detail');if(!row)return;
     const refs=[row.source,...row.refs||[]];
     $('#detail-body').innerHTML=`<p class="eyebrow">${esc(db.name)} / ${esc(row.id)}</p><h2>${esc(row.name)}</h2>${badge(row.status)}<p>${esc(row.summary)}</p>
-      ${row.image?`<div class="preview">${visual(row,true)}</div>`:''}
+      ${row.image||row.imageMissing?`<div class="preview${Array.isArray(row.images)&&row.images.length>1?' preview-gallery':''}">${visual(row,true)}</div>`:''}
       <dl>${Object.entries(row.fields).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(value(v))}</dd>`).join('')}</dl>
       <h3>연결된 자료</h3><div class="actions">${row.content?`<a class="button" href="#/db/${row.content.db}?record=${encodeURIComponent(row.content.id)}">콘텐츠 ${esc(row.content.id)}</a>`:''}${row.resource?`<a class="button" href="#/db/resources?record=${encodeURIComponent(row.resource)}">연결 리소스</a>`:''}${related(row)}</div>
       <h3>원본 근거</h3>${refs.map(s=>`<p class="source"><a href="${esc(resolveSourceUrl(s.path))}" target="_blank" rel="noopener">${esc(s.path)}</a><br>${s.line}행부터 · 수집한 원본 사본</p>`).join('')}`;
     popup.setAttribute('aria-label',row.name+' 상세');if(!popup.open)popup.showModal();popup.scrollTop=0;
   }
   function database(id,params){
+    if(window.HELLSCRIPT_SKILL_DB&&['skills','class-abilities','passives'].includes(id)){if(id==='passives'&&!params.has('kind'))params.set('kind','passive');window.HELLSCRIPT_SKILL_DB.render({params,main:$('#main'),detail:$('#detail'),detailBody:$('#detail-body'),visual,resolveSourceUrl});return;}
     const db=D.databases.find(d=>d.id===id);if(!db)return missing();
     document.title=db.name+' · HELLSCRIPT 위키';
     const categories=[...new Set(db.rows.map(r=>r.category))],statuses=[...new Set(db.rows.map(r=>r.status))];
@@ -190,8 +201,8 @@
       $('#db-count').textContent=`${filtered.length} / ${db.rows.length}개 표시`;
       $('#clear-filters').disabled=!(query||category||status);$('#view-toggle').textContent=view==='gallery'?'표로 보기':'카드로 보기';
       if(!filtered.length){$('#db-results').innerHTML='<div class="empty">일치하는 항목이 없습니다. 검색어나 필터를 바꿔 주세요.</div>';return}
-      $('#db-results').innerHTML=view==='gallery'?`<div class="db-grid">${filtered.map(r=>`<button class="resource-card" data-record="${esc(r.id)}"><div class="preview">${r.image?visual(r,true):`<span class="badge">${esc(r.status==='제작 대기'?'제작 대기':'코드 생성 / 기록')}</span>`}</div><span class="db-code">${esc(r.id)} · ${esc(r.category)}</span><h3>${esc(r.name)}</h3><p>${esc(r.summary)}</p><span>${badge(r.status)}</span></button>`).join('')}</div>`:
-        `<div class="table-scroll"><table class="db-table"><thead><tr><th scope="col">표현</th><th scope="col">이름 · ID</th><th scope="col">분류 · 상태</th><th scope="col">효과 · 용도</th><th scope="col">상세</th></tr></thead><tbody>${filtered.map(r=>`<tr><td>${r.image?visual(r):'<span class="db-code">'+esc(r.category)+'</span>'}</td><td><button class="text-button db-name" data-record="${esc(r.id)}">${esc(r.name)}</button><span class="db-code">${esc(r.id)}</span></td><td>${esc(r.category)}<br>${badge(r.status)}</td><td>${esc(r.summary)}</td><td><button data-record="${esc(r.id)}" aria-label="${esc(r.name)} 상세 보기">보기 ↗</button></td></tr>`).join('')}</tbody></table></div>`;
+      $('#db-results').innerHTML=view==='gallery'?`<div class="db-grid">${filtered.map(r=>`<button class="resource-card" data-record="${esc(r.id)}"><div class="preview${Array.isArray(r.images)&&r.images.length>1?' preview-gallery':''}">${r.image||r.imageMissing?visual(r,true):`<span class="badge">${esc(r.status==='제작 대기'?'제작 대기':'코드 생성 / 기록')}</span>`}</div><span class="db-code">${esc(r.id)} · ${esc(r.category)}</span><h3>${esc(r.name)}</h3><p>${esc(r.summary)}</p><span>${badge(r.status)}</span></button>`).join('')}</div>`:
+        `<div class="table-scroll"><table class="db-table"><thead><tr><th scope="col">표현</th><th scope="col">이름 · ID</th><th scope="col">분류 · 상태</th><th scope="col">효과 · 용도</th><th scope="col">상세</th></tr></thead><tbody>${filtered.map(r=>`<tr><td>${r.image||r.imageMissing?visual(r):'<span class="db-code">'+esc(r.category)+'</span>'}</td><td><button class="text-button db-name" data-record="${esc(r.id)}">${esc(r.name)}</button><span class="db-code">${esc(r.id)}</span></td><td>${esc(r.category)}<br>${badge(r.status)}</td><td>${esc(r.summary)}</td><td><button data-record="${esc(r.id)}" aria-label="${esc(r.name)} 상세 보기">보기 ↗</button></td></tr>`).join('')}</tbody></table></div>`;
     }
     function sync(){history.replaceState(null,'',`#/db/${id}${currentParams().size?'?'+currentParams():''}`);update()}
     $('#db-search').oninput=e=>{query=e.target.value;sync()};$('#category').onchange=e=>{category=e.target.value;sync()};$('#status').onchange=e=>{status=e.target.value;sync()};$('#sort').onchange=e=>{sort=e.target.value;sync()};
@@ -202,7 +213,7 @@
     update();const record=params.get('record');if(record){const row=db.rows.find(r=>r.id===record);if(row)showDetail(db,row);else $('#db-results').insertAdjacentHTML('afterbegin','<div class="notice">요청한 레코드를 찾을 수 없습니다.</div>')}
   }
   let lastPath='';
-  function route(){const [path,query='']=(location.hash||'#/tree').slice(2).split('?'), parts=path.split('/'),params=new URLSearchParams(query);if($('#detail').open)$('#detail').close();document.body.classList.remove('menu-open');$('#menu').setAttribute('aria-expanded','false');navigation(parts[0]==='db');if(path!==lastPath)window.scrollTo(0,0);lastPath=path;document.title='HELLSCRIPT 개발 위키';if(parts[0]==='page')page(parts[1],params);else if(parts[0]==='db')database(parts[1],params);else if(['tree','search','tags'].includes(parts[0]))tree(params,parts[0]);else missing();}
+  function route(){const [path,query='']=(location.hash||'#/tree').slice(2).split('?'), parts=path.split('/'),params=new URLSearchParams(query);if($('#detail').open)$('#detail').close();$('#detail').classList.remove('skill-detail-dialog');document.body.classList.remove('menu-open');$('#menu').setAttribute('aria-expanded','false');navigation(parts[0]==='db');if(path!==lastPath)window.scrollTo(0,0);lastPath=path;document.title='HELLSCRIPT 개발 위키';if(parts[0]==='page')page(parts[1],params);else if(parts[0]==='db')database(parts[1],params);else if(['tree','search','tags'].includes(parts[0]))tree(params,parts[0]);else missing();}
   $('#sync').textContent=(PUBLIC?'읽기 전용 · ':'원본 확인 · ')+D.generatedAt.slice(0,10);
   $('#search-form').onsubmit=e=>{e.preventDefault();location.hash='#/search?q='+encodeURIComponent($('#search').value.trim())};
   $('#menu').onclick=()=>{const open=document.body.classList.toggle('menu-open');$('#menu').setAttribute('aria-expanded',String(open))};
