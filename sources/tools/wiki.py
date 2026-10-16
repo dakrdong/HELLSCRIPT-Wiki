@@ -16,6 +16,7 @@ import sys
 import tempfile
 import xml.etree.ElementTree as ET
 import wiki_resources_current
+import wiki_art_retirement
 from io import BytesIO
 import wiki_art_attestation
 from pathlib import Path
@@ -331,47 +332,19 @@ def build_databases():
     data.extend(wiki_operations_rewards.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
     return data
 
-def historical_skill_atlas_rows():
-    """Keep stable historical IDs/downloads without exposing old art as a current preview."""
-    from PIL import Image
-    path=ART+'SkillAtlas.png'
-    raw=wiki_resources_current.source_bytes(sys.modules[__name__],path); INPUTS[path]=digest(raw)
-    meta=read(path+'.meta')
-    with Image.open(BytesIO(raw)) as image:
-        alpha=image.getchannel('A') if 'A' in image.getbands() else None
-        fields={'원본 경로':path,'해상도':f'{image.width} × {image.height}','색상 모드':image.mode,
-                '파일 크기 (바이트)':len(raw),'완전 투명 픽셀':alpha.histogram()[0] if alpha else 0,
-                '알파 범위':str(alpha.getextrema()) if alpha else '알파 채널 없음',
-                '사용처':'과거 액티브 18개·직업 3개·장비 3셀 기록 / Historical 18 active, 3 class and 3 equipment cells',
-                'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
-                '제작 방법':'Codex 내장 image_gen (기존 기록)',
-                '출처 확인':'기존 기록에서 생성 모델명을 확인하지 못했습니다.',
-                '사용 상태':'역사·미사용; 현재 원화나 런타임 사용 근거가 아닙니다. / Historical, unused; not current artwork or runtime evidence.'}
-    refs=[source_ref(path),source_ref(path+'.meta')]
-    rows=[record('asset-skillatlas','SkillAtlas.png','역사 이미지 원본 / Historical image source',
-                 '과거 아틀라스 원본 다운로드 / Historical atlas source download',fields,
-                 IMPL+'Asset_Provenance.md',status='역사·미사용 / Historical; unused',assetPath=path,
-                 historicalOnly=True,refs=refs,related=['asset-provenance','image-prompts'])]
-    for cell in [21,22,23]:
-        rows.append(record(f'legacy-cell-{cell}','기존 장비 표시 셀 '+str(cell-20),'미사용 참고 셀',
-            'SkillAtlas의 원래 장비 표시용 영역입니다. 현재 장비는 공통 정본 원화를 사용합니다. / Historical atlas cell; current equipment uses canonical artwork.',
-            {'셀 번호 (0부터)':cell,'현재 장비 아이콘':'공통 정본 장비 원화 / Shared canonical equipment artwork',
-             '사용 상태':'역사·미사용 / Historical; unused','원본 경로':path},
-            IMPL+'Asset_Provenance.md',status='참고 보존',historicalOnly=True,refs=list(refs)))
-    return rows
-
-
 def build_resources(databases):
     from PIL import Image
     from wiki_attendance import resource_rows as attendance_resource_rows
     wiki_art_attestation._index(sys.modules[__name__])  # Reject partial imports before collecting rows.
     wiki_art_attestation.apply_legacy_images(sys.modules[__name__],databases)
-    rows=historical_skill_atlas_rows()
+    rows=[]
     uses={'Sanctuary.png':'성소·결과 화면의 배경',
           'EquipmentAtlas.png':'정본 그림이 없는 장비의 공통 대체 아틀라스 / Shared missing-art fallback','RiftStone.png':'균열 바닥 재질'}
     sizes={}
     for filename in sorted(uses):
-        path=ART+filename; raw=(ROOT/path).read_bytes(); INPUTS[path]=digest(raw)
+        path=ART+filename
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes(); INPUTS[path]=digest(raw)
         with Image.open(ROOT/path) as im:
             sizes[filename]=im.size
             alpha=im.getchannel('A') if 'A' in im.getbands() else None
@@ -390,7 +363,9 @@ def build_resources(databases):
                    related=['asset-provenance','equipment-atlas-prompt' if filename=='EquipmentAtlas.png' else 'rift-stone-prompt' if filename=='RiftStone.png' else 'image-prompts']))
     box_art=json.loads(read('Docs/Art/RewardBoxes/manifest.json'))
     for icon in box_art['icons']:
-        path=ART+'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png';raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+        path=ART+'RewardBoxes/'+icon.get('resourceId',icon['id'])+'.png'
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
         rows.append(record('asset-reward-box-'+icon['id'],icon['id'],'보상 상자 아이콘','상자의 등급·내용물을 표현하며 단계·수량은 공통 UI 텍스트로 표시합니다.',
             {'해상도':f'{icon["width"]} × {icon["height"]}','색상 모드':icon['mode'],'완전 투명 픽셀':icon['transparentPixels'],'SHA-256':digest(raw),
              '제작 방식':box_art['provenance'],'모델':box_art['model'],'제작 요청':icon['requestId'],
@@ -401,7 +376,9 @@ def build_resources(databases):
     generated_art_path='Docs/Art/GeneratedGameArt/requests.json'
     for icon in json.loads(read(generated_art_path))['requests']:
         if icon['category']!='reused-native-aspect':continue
-        path=icon['master'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
+        path=icon['master']
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
         ident=Path(path).stem
         rows.append(record('asset-aspect-'+ident,ident,'위상 원화','출시 위상 ID의 생성 원화를 위상 도감과 상세에 표시합니다.',
             {'해상도':f'{icon["width"]} × {icon["height"]}','색상 모드':icon['mode'],'SHA-256':digest(raw),
@@ -409,25 +386,27 @@ def build_resources(databases):
             generated_art_path,status='개발 적용 · 모델 출처 미확인',image={'file':'ClassAspectIcons/'+ident+'.png'},assetPath=path,
             related=['aspect-runestone','generated-game-art']))
     title_path=ART+'Title/TitleSanctuary.png'
-    title_raw=(ROOT/title_path).read_bytes();INPUTS[title_path]=digest(title_raw)
-    title_meta=read(title_path+'.meta')
-    with Image.open(ROOT/title_path) as title_image:
-        title_size=f'{title_image.width} × {title_image.height}'
-    rows.append(record('asset-title-sanctuary','TitleSanctuary.png','이미지 원본',
-        '균열 입장·결과 창의 성소 그림입니다. 2026-10-14부터 타이틀 화면은 영웅 절벽·먼 균열 레이어(TitleVista)를 씁니다.',
-        {'원본 경로':title_path,'해상도':title_size,'SHA-256':digest(title_raw),
-         'Unity GUID':re.search(r'^guid: (\w+)',title_meta,re.M)[1],
-         '제작 방법':'Codex 내장 image_gen; 생성 원본 PNG를 변경 없이 복사',
-         '출처 확인':'도구와 C2PA 정보에 정확한 모델 버전이 없어 gpt-image-2 사용 여부는 미확인입니다.',
-         '승인 상태':'개발용 배경이며 출시 확정 자산이 아닙니다.'},
-        IMPL+'Title_Screen.md',status='임시 사용',image={'file':'Title/TitleSanctuary.png'},assetPath=title_path,
-        refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Title.cs'),
-              source_ref('Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs'),
-              source_ref(ART+'Title/TitleAtmosphere.shader'),source_ref(IMPL+'Title_Screen_Prompt.txt')],
-        related=['title-screen','title-screen.en','resource-guide']))
+    if not wiki_art_retirement.retired_path(ROOT,title_path):
+        title_raw=(ROOT/title_path).read_bytes();INPUTS[title_path]=digest(title_raw)
+        title_meta=read(title_path+'.meta')
+        with Image.open(ROOT/title_path) as title_image:
+            title_size=f'{title_image.width} × {title_image.height}'
+        rows.append(record('asset-title-sanctuary','TitleSanctuary.png','이미지 원본',
+            '균열 입장·결과 창의 성소 그림입니다. 2026-10-14부터 타이틀 화면은 영웅 절벽·먼 균열 레이어(TitleVista)를 씁니다.',
+            {'원본 경로':title_path,'해상도':title_size,'SHA-256':digest(title_raw),
+             'Unity GUID':re.search(r'^guid: (\w+)',title_meta,re.M)[1],
+             '제작 방법':'Codex 내장 image_gen; 생성 원본 PNG를 변경 없이 복사',
+             '출처 확인':'도구와 C2PA 정보에 정확한 모델 버전이 없어 gpt-image-2 사용 여부는 미확인입니다.',
+             '승인 상태':'개발용 배경이며 출시 확정 자산이 아닙니다.'},
+            IMPL+'Title_Screen.md',status='임시 사용',image={'file':'Title/TitleSanctuary.png'},assetPath=title_path,
+            refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Title.cs'),
+                  source_ref('Assets/HELLSCRIPT/Runtime/Presentation/TitleAtmosphere.cs'),
+                  source_ref(ART+'Title/TitleAtmosphere.shader'),source_ref(IMPL+'Title_Screen_Prompt.txt')],
+            related=['title-screen','title-screen.en','resource-guide']))
     selection_qc=json.loads(read(IMPL+'CharacterSelectionEvidence/art-qc.json'))
     for hero_name in ('Warrior','Mage','Ranger'):
         file='CharacterSelection/'+hero_name+'.png';path=ART+file
+        if wiki_art_retirement.retired_path(ROOT,path): continue
         raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         qc=next(row for row in selection_qc if row['asset']==path)
         rows.append(record('asset-selection-'+hero_name.lower(),hero_name+' selection atlas','이미지 원본',
@@ -444,49 +423,54 @@ def build_resources(databases):
                   source_ref(IMPL+'Character_Selection_Prompts.txt')],
             related=['character-selection','character-selection.en','title-screen','resource-guide']))
     courtyard_path=ART+'CharacterSelection/SelectionCourtyard.png'
-    courtyard_raw=(ROOT/courtyard_path).read_bytes();INPUTS[courtyard_path]=digest(courtyard_raw)
-    courtyard_meta=read(courtyard_path+'.meta')
-    rows.append(record('asset-selection-courtyard','SelectionCourtyard.png','이미지 원본',
-        '세 캐릭터가 함께 대기하는 평평한 성소 마당의 배경입니다.',
-        {'원본 경로':courtyard_path,'해상도':'1672 × 941','SHA-256':digest(courtyard_raw),
-         'Unity GUID':re.search(r'^guid: (\w+)',courtyard_meta,re.M)[1],
-         '제작 방법':'내장 image_gen 원본; 픽셀 변경 없음','출처 확인':'정확한 모델 버전 미확인'},
-        IMPL+'Character_Selection.md',status='임시 사용',image={'file':'CharacterSelection/SelectionCourtyard.png'},assetPath=courtyard_path,
-        refs=[source_ref(IMPL+'Character_Selection_Prompts.txt')],related=['character-selection','character-selection.en']))
+    if not wiki_art_retirement.retired_path(ROOT,courtyard_path):
+        courtyard_raw=(ROOT/courtyard_path).read_bytes();INPUTS[courtyard_path]=digest(courtyard_raw)
+        courtyard_meta=read(courtyard_path+'.meta')
+        rows.append(record('asset-selection-courtyard','SelectionCourtyard.png','이미지 원본',
+            '세 캐릭터가 함께 대기하는 평평한 성소 마당의 배경입니다.',
+            {'원본 경로':courtyard_path,'해상도':'1672 × 941','SHA-256':digest(courtyard_raw),
+             'Unity GUID':re.search(r'^guid: (\w+)',courtyard_meta,re.M)[1],
+             '제작 방법':'내장 image_gen 원본; 픽셀 변경 없음','출처 확인':'정확한 모델 버전 미확인'},
+            IMPL+'Character_Selection.md',status='임시 사용',image={'file':'CharacterSelection/SelectionCourtyard.png'},assetPath=courtyard_path,
+            refs=[source_ref(IMPL+'Character_Selection_Prompts.txt')],related=['character-selection','character-selection.en']))
     storage_path=wiki_art_attestation.resolve_path(sys.modules[__name__],ART+'GlobalHUD/menu-storage.png')
-    storage_raw=(ROOT/storage_path).read_bytes();INPUTS[storage_path]=digest(storage_raw)
-    storage_meta=read(storage_path+'.meta')
-    storage_provenance=json.loads(read(IMPL+'TownHudEvidence/provenance.json'))
-    wiki_art_attestation.expected(sys.modules[__name__],storage_path,storage_raw,storage_provenance['sha256'])
-    rows.append(record('ui-menu-storage','창고 바로가기 아이콘','콘텐츠 바로가기 아이콘',
-        '마을·전투 창고 바로가기의 현재 정본 원화입니다. 이전 첨부 근거는 별도 보존합니다. / Current canonical storage shortcut art; previous attachment provenance is retained separately.',
-        {'원본 경로':storage_path,'해상도':'1254 × 1254','색상 모드':'RGBA','제작 방법':'사용자 첨부 원본을 변경 없이 복사',
-         '완전 투명 픽셀':storage_provenance['fullyTransparentPixels'],'SHA-256':digest(storage_raw),
-         'Unity GUID':re.search(r'^guid: (\w+)',storage_meta,re.M)[1],'사용처':'GameUI.ContentDock → ShowStorage'},
-        IMPL+'Town_Hud_Responsive.md',status='사용 중',image={'file':storage_path.removeprefix(ART)},assetPath=storage_path,
-        refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs')],related=['town-hud-responsive','play-content-dock']))
+    if not wiki_art_retirement.retired_path(ROOT,storage_path):
+        storage_raw=(ROOT/storage_path).read_bytes();INPUTS[storage_path]=digest(storage_raw)
+        storage_meta=read(storage_path+'.meta')
+        storage_provenance=json.loads(read(IMPL+'TownHudEvidence/provenance.json'))
+        wiki_art_attestation.expected(sys.modules[__name__],storage_path,storage_raw,storage_provenance['sha256'])
+        rows.append(record('ui-menu-storage','창고 바로가기 아이콘','콘텐츠 바로가기 아이콘',
+            '마을·전투 창고 바로가기의 현재 정본 원화입니다. 이전 첨부 근거는 별도 보존합니다. / Current canonical storage shortcut art; previous attachment provenance is retained separately.',
+            {'원본 경로':storage_path,'해상도':'1254 × 1254','색상 모드':'RGBA','제작 방법':'사용자 첨부 원본을 변경 없이 복사',
+             '완전 투명 픽셀':storage_provenance['fullyTransparentPixels'],'SHA-256':digest(storage_raw),
+             'Unity GUID':re.search(r'^guid: (\w+)',storage_meta,re.M)[1],'사용처':'GameUI.ContentDock → ShowStorage'},
+            IMPL+'Town_Hud_Responsive.md',status='사용 중',image={'file':storage_path.removeprefix(ART)},assetPath=storage_path,
+            refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs')],related=['town-hud-responsive','play-content-dock']))
     coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'
-    coin_raw=(ROOT/coin_path).read_bytes();INPUTS[coin_path]=digest(coin_raw)
-    coin_meta=read(coin_path+'.meta')
-    coin_source=IMPL+'PotionSlotsEvidence/abyssal-coin-source.json'
-    coin_provenance=json.loads(read(coin_source))
-    coin_check=wiki_art_attestation.expected(sys.modules[__name__],coin_path,coin_raw,coin_provenance['sha256']) or coin_provenance
-    if digest(coin_raw)!=coin_check['sha256']:raise ValueError('Abyssal Coin source image changed')
-    rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',
-        '기존 premium 잔액을 표시하는 인벤토리 아이콘입니다. / Inventory icon for the existing premium balance.',
-        {'원본 경로':coin_path,'해상도':'1254 × 1254','색상 모드':'RGBA','SHA-256':digest(coin_raw),
-         'Unity GUID':re.search(r'^guid: (\w+)',coin_meta,re.M)[1],
-         '저장 키 / Save key':'premium','제작 방법':'기존 내장 image_gen 원본 복사, 픽셀 변경 없음 / Unchanged original',
-         '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
-        IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,
-        refs=[source_ref(coin_source),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs')],related=['potion-slots','potion-slots.en']))
+    if not wiki_art_retirement.retired_path(ROOT,coin_path):
+        coin_raw=(ROOT/coin_path).read_bytes();INPUTS[coin_path]=digest(coin_raw)
+        coin_meta=read(coin_path+'.meta')
+        coin_source=IMPL+'PotionSlotsEvidence/abyssal-coin-source.json'
+        coin_provenance=json.loads(read(coin_source))
+        coin_check=wiki_art_attestation.expected(sys.modules[__name__],coin_path,coin_raw,coin_provenance['sha256']) or coin_provenance
+        if digest(coin_raw)!=coin_check['sha256']:raise ValueError('Abyssal Coin source image changed')
+        rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',
+            '기존 premium 잔액을 표시하는 인벤토리 아이콘입니다. / Inventory icon for the existing premium balance.',
+            {'원본 경로':coin_path,'해상도':'1254 × 1254','색상 모드':'RGBA','SHA-256':digest(coin_raw),
+             'Unity GUID':re.search(r'^guid: (\w+)',coin_meta,re.M)[1],
+             '저장 키 / Save key':'premium','제작 방법':'기존 내장 image_gen 원본 복사, 픽셀 변경 없음 / Unchanged original',
+             '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
+            IMPL+'Potion_Slots.md',status='임시 사용',image={'file':'GlobalHUD/currency-abyssal-coin.png'},assetPath=coin_path,
+            refs=[source_ref(coin_source),source_ref('Assets/HELLSCRIPT/Runtime/Presentation/InventoryWindow.Wallet.cs')],related=['potion-slots','potion-slots.en']))
     currency_source='Docs/Art/Currency/generation.json'
     currency_manifest=json.loads(read(currency_source))
     currency_qa={r['id']:r for r in json.loads(read('Docs/Art/Currency/alpha-validation.json'))}
     currency_names=['강화석 / Enhancement stone','무기 코어 / Weapon core','머리 코어 / Head core','몸통 코어 / Chest core',
                     '손 코어 / Hands core','발 코어 / Feet core','벨트 코어 / Belt core','목걸이 코어 / Amulet core','반지 코어 / Ring core']
     for a,name in zip(currency_manifest['assets'],currency_names):
-        path=a['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=currency_qa[a['id']]
+        path=a['file']
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=currency_qa[a['id']]
         qc=wiki_art_attestation.expected(sys.modules[__name__],path,raw,qc['sha256']) or qc
         if digest(raw)!=qc['sha256']:raise ValueError('Currency differs from its original generated PNG: '+a['id'])
         rows.append(record('currency-'+a['id'],name,'이미지 원본',
@@ -504,7 +488,9 @@ def build_resources(databases):
     chest_manifest=json.loads(read(chest_source))
     chest_qa={r['id']:r for r in json.loads(read('Docs/Art/StorageChests/alpha-validation.json'))}
     for a in chest_manifest['assets']:
-        path=a['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=chest_qa[a['id']]
+        path=a['file']
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=chest_qa[a['id']]
         qc=wiki_art_attestation.expected(sys.modules[__name__],path,raw,qc['sha256']) or qc
         if digest(raw)!=qc['sha256']:raise ValueError('Storage chest differs from its native PNG: '+a['id'])
         opened=a['id']=='chest-open'
@@ -523,7 +509,9 @@ def build_resources(databases):
     item_art={a['id']:a for a in json.loads(read(item_art_manifest))['assets']}
     for asset in item_art.values():
         if asset['id'].startswith('B') or asset['path'].startswith(wiki_resources_current.RETIRED):continue
-        path=asset['path'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        path=asset['path']
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         item_check=wiki_art_attestation.expected(sys.modules[__name__],path,raw,asset['sha256']) or asset
         if digest(raw)!=item_check['sha256']:raise ValueError('Item art native source mismatch: '+path)
         rows.append(record('item-art-'+asset['id'],asset['name'],'아이템 이미지',
@@ -540,6 +528,7 @@ def build_resources(databases):
     npc_qa={p['id']:p for p in json.loads(read(npc_art+'alpha-validation.json'))}
     for npc in json.loads(read(npc_path))['profiles']:
         file=npc['portrait'].removeprefix('Art/')+'.png';path=ART+file
+        if wiki_art_retirement.retired_path(ROOT,path): continue
         raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=npc_qa[npc['id']]
         qc=wiki_art_attestation.expected(sys.modules[__name__],path,raw,qc['sha256']) or qc
         if digest(raw)!=qc['sha256']:raise ValueError('NPC portrait differs from its native generated source: '+npc['id'])
@@ -558,7 +547,9 @@ def build_resources(databases):
     hero_art='Docs/Art/HeroPortraits/hero-portraits-manifest.json'
     hero_manifest=json.loads(read(hero_art))
     for hero in hero_manifest['assets']:
-        path=hero['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        path=hero['file']
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         hero_check=wiki_art_attestation.expected(sys.modules[__name__],path,raw,hero['sha256']) or hero
         if digest(raw)!=hero_check['sha256']:raise ValueError('Hero portrait differs from its native generated source: '+hero['id'])
         rows.append(record('dialogue-portrait-'+hero['id'],hero['id'],'이미지 원본',
@@ -574,7 +565,9 @@ def build_resources(databases):
     hud_use={'menu-power-saving':('절전 모드 메달 / Power saving medallion','GameUI.BattleLayout → GameController.RequestIdle'),
              'menu-escape':('탈출 메달 / Escape medallion','GameUI.BattleEscape → ConfirmEscape')}
     for icon in hud_manifest['assets']:
-        path=wiki_art_attestation.resolve_path(sys.modules[__name__],icon['file']);raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        path=wiki_art_attestation.resolve_path(sys.modules[__name__],icon['file'])
+        if wiki_art_retirement.retired_path(ROOT,path): continue
+        raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         current_icon=wiki_art_attestation.expected(sys.modules[__name__],path,raw,icon['sha256']) or icon
         if digest(raw)!=current_icon['sha256']:raise ValueError('HUD medallion differs from its attested current source: '+icon['id'])
         name,use=hud_use[icon['id']]
@@ -602,6 +595,7 @@ def build_resources(databases):
                     content={'db':group,'id':item['id']},related=['native-inventory','resource-guide']))
                 continue
             image=item['image']
+            if wiki_art_retirement.retired_path(ROOT,item.get('assetPath') or ART+image['file']):continue
             if 'cell' not in image:
                 path=item['assetPath'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
                 width,height=struct.unpack('>II',raw[16:24])
@@ -702,6 +696,7 @@ def build_resources(databases):
         ('char-barbarian-back','야만전사 후면 참고 이미지',barb+'Barbarian_Reference_Back.png','Gemini 3.0 Pro (gemini-3.0-pro)','후면 참고 이미지입니다. 3D 생성의 입력으로 사용했습니다.'),
         ('char-barbarian-left','야만전사 좌측면 참고 이미지',barb+'Barbarian_Reference_Left.png','Gemini 3.0 Pro (gemini-3.0-pro)','좌측면 참고 이미지입니다. 3D 생성의 입력으로 사용했습니다.'),
         ('char-barbarian-right','야만전사 우측면 참고 이미지',barb+'Barbarian_Reference_Right.png','Gemini 3.0 Pro (gemini-3.0-pro)','우측면 참고 이미지입니다. 이번 3D 생성의 입력에는 포함되지 않았습니다.')]:
+        if wiki_art_retirement.retired_path(ROOT,path): continue
         raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
         rows.append(record(ident,name,'캐릭터 원본',use,
             {'경로':path,'파일 크기 (바이트)':len(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],'SHA-256':digest(raw),
@@ -719,6 +714,7 @@ def build_resources(databases):
     forge_manifest='Prototypes/Blacksmith/UnityResources/manifest.json'
     for entry in json.loads(read(forge_manifest))['entries']:
         path='Assets/HELLSCRIPT/Resources/'+entry['resource']+'.png'
+        if wiki_art_retirement.retired_path(ROOT,path): continue
         raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw)
         if digest(raw)!=entry['sha256']:raise ValueError('Stale blacksmith resource: '+path)
         rows.append(record('forge-'+entry['id'],entry['id'],'대장간 UI 리소스',
@@ -980,6 +976,7 @@ def portable_attachment(target, source):
 def link_target(target, source, page_paths):
     if target.startswith('<') and target.endswith('>'):target=target[1:-1]
     parsed=urlsplit(target)
+    if wiki_art_retirement.retired_target(ROOT,target): return None
     if parsed.scheme: return target if parsed.scheme in ('http','https','mailto') else None
     if target.startswith('#/'):
         return target
@@ -990,6 +987,7 @@ def link_target(target, source, page_paths):
         if candidate.is_dir():return None
         try:dest=str(candidate.resolve().relative_to(ROOT.resolve()))
         except ValueError:dest=portable_attachment(unquote(parsed.path),source)
+    if wiki_art_retirement.retired_path(ROOT,dest): return None
     # Local build directories are not portable wiki attachments, even on a clean checkout.
     if dest.startswith('Builds/') and dest.endswith('.app'): return None
     # Retain the retired v3 runner for immutable history links without putting it back in the game.
@@ -1001,6 +999,7 @@ def link_target(target, source, page_paths):
     archived=archive_root+dest
     if not (ROOT/dest).exists() and (ROOT/archived).is_file():
         dest=archived
+    if wiki_art_retirement.retired_path(ROOT,dest): return None
     if dest in page_paths:
         return '#/page/'+page_paths[dest]+('?section='+quote(fragment) if fragment else '')
     if (ROOT/dest).is_dir() or dest in {p.rstrip('/') for p in wiki_resources_current.RETIRED}: return None
@@ -1070,6 +1069,7 @@ def render_markdown(body, source, page_paths):
 
 def build_pages():
     files=sorted((ROOT/'Docs').rglob('*.md'))+sorted((ROOT/'Wiki/content').glob('*.md'))
+    files=[file for file in files if not wiki_art_retirement.retired_path(ROOT,file.relative_to(ROOT).as_posix())]
     metadata=json.loads(read('Wiki/page-metadata.json'))
     paths={str(p.relative_to(ROOT)):page_id(p) for p in files};pages=[]
     if len(set(paths.values()))!=len(paths):raise ValueError('Duplicate page ID')
@@ -1121,13 +1121,15 @@ def public_dataset(dataset):
     # to history/<id>.js, loaded on demand, so data.js stays far below GitHub's 100 MiB file limit.
     pages=[]
     for page in dataset['pages']:
+        if wiki_art_retirement.retired_page(page): continue
         mirror=dict(page,versions=[{k:v for k,v in version.items() if k not in VERSION_CONTENT} for version in page['versions']])
         if len(page['versions'])>1:mirror['history']='history/'+page['id']+'.js?v='+digest(history_script(page).encode())[:16]
         pages.append(mirror)
     return {**dataset,'pages':pages,'audience':'public','readOnly':True,'assetDelivery':public_delivery(dataset)}
 
 def public_history(dataset):
-    return {page['id']+'.js':history_script(page) for page in dataset['pages'] if len(page['versions'])>1}
+    return {page['id']+'.js':history_script(page) for page in dataset['pages']
+            if len(page['versions'])>1 and not wiki_art_retirement.retired_page(page)}
 
 
 
@@ -1139,55 +1141,15 @@ PUBLIC_LOCAL_RASTER_PREFIXES = (
     'Docs/Design/GlobalHUD/Resources/', 'Docs/Art/Gems/',
 )
 PUBLIC_MAX_BYTES = 900_000_000
-PUBLIC_PROTOTYPE_MANIFEST = 'tools/wiki_prototype_aliases.json'
-PUBLIC_LEGACY_ROOT = 'Docs/Implementation/D4LegacyArchive20261013/'
-PUBLIC_LEGACY_CATALOG = PUBLIC_LEGACY_ROOT + 'Prototypes/SkillTree/catalog.js'
-
-
-def public_prototype_aliases(dataset):
-    if PUBLIC_LEGACY_CATALOG not in dataset['inputManifest']:
-        return []
-    config = json.loads((ROOT / PUBLIC_PROTOTYPE_MANIFEST).read_text())
-    if (not isinstance(config, dict)
-            or set(config) != {'schemaVersion', 'publicRepository', 'publicCommit', 'sourceCommit', 'files'}
-            or type(config['schemaVersion']) is not int or config['schemaVersion'] != 1
-            or config['publicRepository'] != 'dakrdong/HELLSCRIPT-Wiki'
-            or not all(isinstance(config[k], str) and re.fullmatch(r'[0-9a-f]{40}', config[k]) for k in ('publicCommit', 'sourceCommit'))
-            or not isinstance(config['files'], list)):
-        raise ValueError('Invalid prototype originals manifest')
-    catalog = (SITE / 'sources' / PUBLIC_LEGACY_CATALOG).read_text()
-    required = set(re.findall(r'\.\./\.\./(Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/[^\s\"\'<>]+\.png)', catalog))
-    if not required:
-        raise ValueError('Missing prototype icon references')
-    sources = set()
-    for entry in config['files']:
-        if (not isinstance(entry, dict) or set(entry) != {'path', 'source', 'sha256', 'bytes'}
-                or not isinstance(entry['source'], str)
-                or not re.fullmatch(r'Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/(?:Warrior/WP?|Ranger/AP?|Mage/MP?)\d{2}\.png', entry['source'])
-                or entry['path'] != PUBLIC_LEGACY_ROOT + entry['source']
-                or entry['path'] in dataset['inputManifest'] or entry['source'] in sources
-                or not isinstance(entry['sha256'], str) or not re.fullmatch(r'[0-9a-f]{64}', entry['sha256'])
-                or type(entry['bytes']) is not int or entry['bytes'] < 1):
-            raise ValueError('Invalid prototype original entry')
-        sources.add(entry['source'])
-    if sources != required:
-        raise ValueError('Prototype originals do not match catalog dependencies')
-    return [dict(entry, commit=config['sourceCommit']) for entry in config['files']]
-
-
-def public_prototype_bytes(entry):
-    # The archived prototype needs its historical art, not current replacement icons.
-    raw = subprocess.check_output(['git', '-C', str(ROOT), 'show', entry['commit'] + ':' + entry['source']])
-    if len(raw) != entry['bytes'] or digest(raw) != entry['sha256']:
-        raise ValueError('Changed preserved prototype original: ' + entry['source'])
-    return raw
-
-
 def external_public_source(path):
     return Path(path).suffix.lower() in PUBLIC_RASTER_EXTENSIONS and not path.startswith(PUBLIC_LOCAL_RASTER_PREFIXES)
 
 
 def public_delivery(dataset):
+    retired=[path for path in dataset['inputManifest'] if wiki_art_retirement.retired_path(ROOT,path)]
+    if retired: raise ValueError('Retired wiki sources in public input: '+', '.join(retired))
+    if wiki_art_retirement.retained_databases(ROOT,dataset['databases']) != dataset['databases']:
+        raise ValueError('Retired artwork remains in public records')
     config = json.loads((ROOT / PUBLIC_DELIVERY_MANIFEST).read_text())
     if (not isinstance(config, dict) or set(config) != {'schemaVersion', 'repository', 'commit', 'externalSources'}
             or type(config.get('schemaVersion')) is not int or config['schemaVersion'] != 1
@@ -1228,11 +1190,6 @@ def check_public_files(dataset):
         elif original.is_file() and (not exported.is_file() or original.read_bytes() != exported.read_bytes()):
             raise ValueError('Stale public source: ' + source)
     expected={p for p in dataset['inputManifest'] if (SITE/'sources'/p).is_file() and p not in delivery['externalSources']}
-    for entry in public_prototype_aliases(dataset):
-        exported=target/'sources'/entry['path']
-        if not exported.is_file() or exported.read_bytes()!=public_prototype_bytes(entry):
-            raise ValueError('Stale prototype original: '+entry['path'])
-        expected.add(entry['path'])
     actual={p.relative_to(target/'sources').as_posix() for p in (target/'sources').rglob('*') if p.is_file()}
     if actual != expected:
         raise ValueError('Unexpected public source inventory')
@@ -1273,10 +1230,6 @@ def build_public(dataset):
                 destination=stage/'sources'/source
                 destination.parent.mkdir(parents=True,exist_ok=True)
                 copy_public_file(original,destination)
-        for entry in public_prototype_aliases(dataset):
-            destination=stage/'sources'/entry['path']
-            destination.parent.mkdir(parents=True,exist_ok=True)
-            destination.write_bytes(public_prototype_bytes(entry))
         save(stage/'catalog.json',{'generatedAt':dataset['generatedAt'],'databases':dataset['databases']})
         save(stage/'data.json',public)
         (stage/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(public,ensure_ascii=False).replace('</','<\\/')+';\n')
@@ -1295,8 +1248,10 @@ def build():
     pages=build_pages();databases=build_databases();resources=build_resources(databases)
     databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_edict_disclosures());databases.append(build_evidence())
     wiki_art_attestation.attach_current_skill_images(sys.modules[__name__],databases,resources['rows'])
+    databases=wiki_art_retirement.retained_databases(ROOT,databases)
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
-    for path in ['tools/wiki.py',PUBLIC_DELIVERY_MANIFEST,PUBLIC_PROTOTYPE_MANIFEST,'tools/wiki_art_attestation.py','tools/wiki_resources_current.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
+    for path in ['tools/wiki.py',PUBLIC_DELIVERY_MANIFEST,'tools/wiki_art_retirement.py','tools/wiki_art_attestation.py','tools/wiki_resources_current.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
+    if (ROOT/wiki_art_retirement.ADDITIONAL_REGISTRY).is_file(): read(wiki_art_retirement.ADDITIONAL_REGISTRY)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,
              'archivedSources':wiki_resources_current.archived_sources(sys.modules[__name__]),
              'inputManifest':dict(sorted(INPUTS.items()))}

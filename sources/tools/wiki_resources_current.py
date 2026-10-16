@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import wiki_art_retirement
 from pathlib import Path, PurePosixPath
 
 
@@ -20,30 +21,11 @@ PRESERVED_DOCUMENTS = (
 )
 
 
-EXACT_RETIREMENT = ('casual-art-followup-20261015', '2026-10-15')
-
-
-def exact_retired_source(api, path, entry):
-    if (entry.get('retirementScope'), entry.get('retiredOn')) != EXACT_RETIREMENT:
-        return False
-    if (not path.startswith(ART) or PurePosixPath(path).as_posix() != path or '\\' in path
-            or not re.fullmatch(r'.+\.png(?:\.meta)?', path)):
-        return False
-    if (type(entry.get('bytes')) is not int or entry['bytes'] <= 0
-            or not isinstance(entry.get('sha256'), str)
-            or not re.fullmatch(r'[0-9a-f]{64}', entry['sha256'])):
-        return False
-    if path.startswith(ART + 'ClassSkillIcons/'):
-        skills = json.loads(api.read(RESOURCES + 'Data/ClassSkills.json'))['skills']
-        current = {ART + 'ClassSkillIcons/' + ('Warrior', 'Ranger', 'Mage')[row['heroClass']]
-                   + '/' + row['id'] + '.png' for row in skills}
-        if path.removesuffix('.meta') in current:
-            return False
-    return True
-
-
 def source_bytes(api, path, optional=False):
     safe_relative(path)
+    if wiki_art_retirement.retired_path(api.ROOT,path):
+        if optional: return None
+        raise ValueError('Retired wiki source: ' + path)
     file = api.ROOT / path
     if not file.resolve().is_relative_to(api.ROOT.resolve()):
         raise ValueError('Wiki source escapes repository: ' + path)
@@ -61,23 +43,16 @@ def source_bytes(api, path, optional=False):
     entry = matches[0] if matches else None
     if entry:
         safe_relative(path)
-        allowed = path.startswith(RETIRED) or path in PRESERVED_DOCUMENTS or exact_retired_source(api, path, entry)
+        allowed = path in PRESERVED_DOCUMENTS
         if not allowed or not isinstance(entry.get('commit'), str) or not re.fullmatch(r'[0-9a-f]{40}', entry['commit']):
             raise ValueError('Invalid historical art source: ' + path)
-        if path in PRESERVED_DOCUMENTS:
-            archive_path = 'Wiki/assets/preserved-documents/20261014/' + PurePosixPath(path).name
-            if entry.get('archivePath') != archive_path:
-                raise ValueError('Invalid preserved document archive: ' + path)
-            archive_file = api.ROOT / archive_path
-            if not archive_file.is_file() or not archive_file.resolve().is_relative_to(api.ROOT.resolve()):
-                raise ValueError('Missing or unsafe preserved document archive: ' + path)
-            raw = archive_file.read_bytes()
-        else:
-            if 'archivePath' in entry:
-                raise ValueError('Invalid historical art archive: ' + path)
-            result = subprocess.run(['git', '-C', str(api.ROOT), 'show', entry['commit'] + ':' + path],
-                                    capture_output=True)
-            raw = result.stdout if result.returncode == 0 else b''
+        archive_path = 'Wiki/assets/preserved-documents/20261014/' + PurePosixPath(path).name
+        if entry.get('archivePath') != archive_path:
+            raise ValueError('Invalid preserved document archive: ' + path)
+        archive_file = api.ROOT / archive_path
+        if not archive_file.is_file() or not archive_file.resolve().is_relative_to(api.ROOT.resolve()):
+            raise ValueError('Missing or unsafe preserved document archive: ' + path)
+        raw = archive_file.read_bytes()
         if len(raw) != entry['bytes'] or api.digest(raw) != entry['sha256']:
             raise ValueError('Missing or changed historical art object: ' + path)
         if path in PRESERVED_DOCUMENTS:
@@ -95,7 +70,7 @@ def archived_sources(api):
         return {}
     manifest = json.loads(api.read(ARCHIVE_MANIFEST))
     return {x['path']: {k: x[k] for k in ('commit', 'sha256', 'bytes', 'archivePath', 'retirementScope', 'retiredOn') if k in x}
-            for x in manifest['files'] if x['path'] in used}
+            for x in manifest['files'] if x['path'] in used and not wiki_art_retirement.retired_path(api.ROOT,x['path'])}
 
 
 def safe_relative(value):
@@ -270,7 +245,7 @@ def build(api, databases, existing):
     for root in roots:
         for file in sorted(root.rglob('*.png')):
             path = file.relative_to(api.ROOT).as_posix()
-            if path in represented or path.startswith(RETIRED):
+            if path in represented or path.startswith(RETIRED) or wiki_art_retirement.retired_path(api.ROOT,path):
                 continue
             rows.append(_image_row(api, path)); represented.add(path)
     model_rows, replaced = _models(api, databases, existing)
@@ -300,7 +275,7 @@ def build(api, databases, existing):
         if row['id'].startswith('model-'):
             row['summary'] = '런타임 대체 표현 기록 / Runtime fallback representation'
             row['fields']['독립 모델·프리팹'] = '현재 모델·필드 정본 항목과 런타임 적용 범위를 함께 확인합니다. / See current model and field records.'
-    return classify_historical_references(api, retained + rows)
+    return wiki_art_retirement.retained_rows(api.ROOT, retained + rows)
 
 # Presentation-only roles: exact current paths, never a frame/name prefix rule.
 FUNCTIONAL_IMAGE_ROLES = {
@@ -336,58 +311,4 @@ def annotate_resource_roles(rows):
         row['summary'] = role[1]
         row['fields']['표현 용도 / Visual role'] = role[0]
         row['fields']['완성 원화 여부 / Standalone illustration'] = 'UI 기능용 이미지이며 독립 장식 원화가 아닙니다. / UI rendering primitive, not a standalone illustration.'
-    return rows
-
-
-HISTORICAL_REFERENCE87 = 'tools/wiki_historical_reference87.json'
-HISTORICAL_REFERENCE87_SHA256 = 'f9a7b3181dd721b2364244430862c3d3cff3c27049918caf4b97e16aa1d336df'
-
-
-def classify_historical_references(api, rows):
-    """Keep exact old source identities/downloads while hiding their current-art previews."""
-    text = api.read(HISTORICAL_REFERENCE87)
-    if api.digest(text.encode('utf-8')) != HISTORICAL_REFERENCE87_SHA256:
-        raise ValueError('Changed exact87 historical reference plan')
-    plan = json.loads(text)
-    entries = plan['records']
-    by_path = {entry['path']: entry for entry in entries}
-    if (plan.get('schemaVersion') != 1 or plan.get('recordCount') != 87
-            or len(entries) != 87 or len(by_path) != 87
-            or set(by_path) & set(FUNCTIONAL_IMAGE_ROLES)):
-        raise ValueError('Invalid exact87 historical reference scope')
-    registry = json.loads(api.read(ARCHIVE_MANIFEST))['files']
-    canonical = json.dumps(sorted(registry, key=lambda entry: entry['path']),
-                           ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
-    if (len(registry) != 416 or len({entry['path'] for entry in registry}) != 416
-            or api.digest(canonical) != plan['registryRecordSetSha256']):
-        raise ValueError('Exact416 original-SHA history bridge is not adopted')
-    selected = [row for row in rows if row.get('assetPath') in by_path]
-    if {row['assetPath'] for row in selected} != set(by_path):
-        raise ValueError('Missing exact87 historical resource identities')
-    # This alternative retains all originals; physical retirement needs a separate root transition.
-    for path, entry in by_path.items():
-        for source in (entry['png'], entry['meta']):
-            target = api.ROOT / source['path']
-            if (not target.is_file() or target.resolve() != api.ROOT.resolve() / source['path']
-                    or api.INPUTS.get(source['path']) != source['sha256']):
-                raise ValueError('Missing or uncollected retained historical source: ' + source['path'])
-    for row in selected:
-        path = row['assetPath']; entry = by_path[path]
-        row.pop('image', None)
-        row['historicalOnly'] = True
-        row['retirementStatus'] = 'retained_pending_physical_retirement'
-        row['category'] = '역사·참조 원화 / Historical reference artwork'
-        row['status'] = '원형 보존 · 물리 분리 미실행 / Original retained; physical retirement not performed'
-        row['summary'] = ('이전 원화의 원본·근거를 보존합니다. 현재 원화 미리보기와 기능 도형으로 분류하지 않습니다. / '
-                          'Previous artwork retained as source evidence, not a current-art preview or rendering primitive.')
-        fields = row['fields']
-        fields['역사 분류 / Historical classification'] = '이전 원화 · 참조 전용 / Previous artwork; reference only'
-        fields['원본 위치 / Original location'] = path
-        fields['물리 분리 / Physical retirement'] = '미실행; Resources의 PNG와 메타 원형 보존 / Not performed; original PNG and metadata remain in Resources'
-        fields['원본 SHA-256 / Original PNG'] = entry['png']['sha256']
-        fields['원본 메타 SHA-256 / Original metadata'] = entry['meta']['sha256']
-        refs = row.setdefault('refs', [])
-        for source in (path, path + '.meta'):
-            if not any(ref.get('path') == source for ref in refs):
-                refs.append(api.source_ref(source))
     return rows

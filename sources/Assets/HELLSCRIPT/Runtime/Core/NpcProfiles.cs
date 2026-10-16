@@ -41,9 +41,9 @@ namespace Hellscript
             new NpcProfile{id=Voice,name="하늘의 목소리",role="칙령의 목소리",portrait="Art/NpcPortraits/prologue-divine-voice",portraitFacing="right",portraitMirror="Art/NpcPortraits/prologue-divine-voice-mirror"},
             new NpcProfile{id=Guide,name="벨리나",role="칙령의 여신",portrait="Art/NpcPortraits/guide-goddess",portraitFacing="right",portraitMirror="Art/NpcPortraits/guide-goddess-mirror"},
             new NpcProfile{id=Commander,name="사령관",role="최종 시험 감독관",portrait="Art/NpcPortraits/pit-commander",portraitFacing="right",portraitMirror="Art/NpcPortraits/pit-commander-mirror"},
-            new NpcProfile{id="hero-warrior",name="전사",role="수습전사",portrait="Art/NpcPortraits/hero-warrior",portraitFacing="left",portraitMirror="Art/NpcPortraits/hero-warrior-mirror"},
-            new NpcProfile{id="hero-ranger",name="궁수",role="수습전사",portrait="Art/NpcPortraits/hero-ranger",portraitFacing="left",portraitMirror="Art/NpcPortraits/hero-ranger-mirror"},
-            new NpcProfile{id="hero-mage",name="마법사",role="수습전사",portrait="Art/NpcPortraits/hero-mage",portraitFacing="left",portraitMirror="Art/NpcPortraits/hero-mage-mirror"}};
+            new NpcProfile{id="hero-warrior",name="전사",role="수습전사",portrait="Art/NpcPortraits/hero-warrior",portraitFacing="left"},
+            new NpcProfile{id="hero-ranger",name="궁수",role="수습전사",portrait="Art/NpcPortraits/hero-ranger",portraitFacing="left"},
+            new NpcProfile{id="hero-mage",name="마법사",role="수습전사",portrait="Art/NpcPortraits/hero-mage",portraitFacing="left"}};
         public static NpcProfile ForStation(TownStation station)=>All.FirstOrDefault(p=>p.Station==(station==TownStation.Reroller?TownStation.Blacksmith:station));
         public static NpcProfile ForResident(string id)=>All.FirstOrDefault(p=>p.residentId==id);
         public static bool WithinReach(NpcProfile profile,Vector2 position)=>profile!=null&&Vector2.Distance(profile.Position,position)<=TownLayout.InteractionRadius;
