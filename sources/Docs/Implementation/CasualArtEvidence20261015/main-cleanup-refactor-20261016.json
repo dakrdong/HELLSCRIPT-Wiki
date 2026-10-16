@@ -241,5 +241,133 @@
     "gameBuilds": 0,
     "heldModelsIntake": 0,
     "originalAndUniqueDataProtected": true
+  },
+  "runtimeDietRound2": {
+    "sourceBase": "9b779d62aa9020a43aaefb69e41499a88655972d",
+    "scope": "Bounded second runtime and storage round; no measured player performance claim",
+    "changes": [
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TrainingGround.cs",
+        "sha256": "eabd743b2331ada209aae1c929d6e6435f7a5e92f4427fea0397f3c37c7693cd",
+        "change": "Reuse the already-required current chart list for the same peak prefix; same per-second samples and peak order, no persistent cache or additional collection."
+      },
+      {
+        "path": "Assets/HELLSCRIPT/Runtime/Presentation/WorldView.Enemies.cs",
+        "sha256": "c208e1d9bf25455b29ea9a1ed5ee42c858fa784fb54ef191eb0d04a80df094f3",
+        "change": "Write two tether endpoints into the existing instance scratch buffer and synchronously consume count2; keep all partner/visibility/trait/material/key/width checks."
+      }
+    ],
+    "focusedVerification": {
+      "actualDpsSourceCases": 261,
+      "floatComparison": "bitwise totals/peak/chart values including NaN/signedzero; same formatted stats arguments and input preservation",
+      "tetherCases": 24,
+      "consecutiveFramesPerCase": 2,
+      "tetherAssertions": 5376,
+      "tetherMethod": "Actual source caller and immediate rendering-consumer expressions with diagnostic renderer adapters; not Unity display verification",
+      "runtimeSourcesCompiled": 851,
+      "compileErrors": 0,
+      "warningsInChangedFiles": 0,
+      "otherCompileWarnings": 48,
+      "uiContractTests": 15,
+      "gameBuilds": 0,
+      "UnityEditorPlayerRuns": 0,
+      "wholeNUnit": 0,
+      "fpsCpuGcImprovementMeasured": false,
+      "initialDiagnosticPreparationFailures": "Two C# harness naming collisions fixed before execution; original logs retained. UI contract default shared receipt write was sandbox blocked before tests; supported task-owned --receipt used successfully."
+    },
+    "storage": {
+      "result": "DUPLICATE_PATHS_CONSOLIDATED",
+      "sourceBase": "9b779d62aa9020a43aaefb69e41499a88655972d",
+      "files": [
+        {
+          "retiredDuplicate": "Docs/Implementation/AttendanceCollectEvidence20261003/final-editmode.xml",
+          "canonical": "Artifacts/Validation/attendance-collect-20261003-final-editmode.xml",
+          "bytes": 4023971,
+          "sha256": "3cee9fe33e6fcf336c56875e350cdbcf7dce7c8e03413866cc5b1051e4e9bf01",
+          "gitBlob": "31da24c2f4d2ab96af774f5cf2134b69c0cd3a89",
+          "restoreBase": "9b779d62aa9020a43aaefb69e41499a88655972d"
+        },
+        {
+          "retiredDuplicate": "Docs/Implementation/AttendanceCollectEvidence20261003/integrated-focused.xml",
+          "canonical": "Artifacts/Validation/attendance-collect-20261003-integrated-editmode.xml",
+          "bytes": 98856,
+          "sha256": "24ae17637b50c118fd4ce71ec1d2add7649d58c9e71de5e3a573b6ad46f28e89",
+          "gitBlob": "ffe193edf8002ee656d3c882e378ecea176d3651",
+          "restoreBase": "9b779d62aa9020a43aaefb69e41499a88655972d"
+        }
+      ],
+      "grossLogicalBytesRemoved": 4122827,
+      "mappingPath": "Docs/Implementation/AttendanceCollectEvidence20261003/canonical-files.json",
+      "mappingBytes": 1349,
+      "freeBytesBefore": 197917052928,
+      "freeBytesAfter": 197921140736,
+      "physicalReclaimClaim": null,
+      "uniqueOriginalDeleted": 0,
+      "historyRewrite": false,
+      "utc": "2026-10-16T13:07:31.676036+00:00"
+    },
+    "largeConditionalCandidates": {
+      "items": [
+        {
+          "path": "Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html",
+          "bytes": 73181975,
+          "blob": "b05edecf94737079040893c3685ad4052e21bf78",
+          "current_reference": "Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html",
+          "current_reference_blob": "3d3ee85c6ab28eceaae01b419d6beec99b17298b",
+          "producer_limit": "Archive has HTML, engine.test.cjs and ui.js only; no archived build.cjs/page/styles/catalog/engine.js. Current root producer exists, but identical historical output reconstruction is not established.",
+          "current_logical_bytes": 73181975,
+          "allocated_bytes_from_stat": 73183232,
+          "git_status": "clean",
+          "incoming_exact_path_refs": {
+            "tracked_current_text": 0,
+            "runtime_or_serialized": 0,
+            "input_manifest": false,
+            "tracked_history": 0,
+            "generated_public_history_and_current_data": 0
+          },
+          "decision": "Require explicit approval to untrack a unique historical compiled snapshot while retaining exact Git restore base; not approved deletion or regenerable cache.",
+          "restore": "git restore --source=9b779d62aa9020a43aaefb69e41499a88655972d -- 'Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html'"
+        },
+        {
+          "path": "Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html",
+          "bytes": 33089040,
+          "blob": "d7a211935f4dff4c6dca38234e7ccef4e234fc05",
+          "current_reference": "Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html",
+          "current_reference_blob": "02af009946e41ecf750e4dbc0aac263a6515a4de",
+          "producer_limit": "Archive build.cjs exists but its relative root resolves inside the archive and template/locale/loot/item-details/style inputs are missing there. It also differs from the current producer (W10/W07 versus W09-1/W08-3), so current root HTML is not an identical canonical replacement.",
+          "current_logical_bytes": 33089040,
+          "allocated_bytes_from_stat": 33091584,
+          "git_status": "clean",
+          "incoming_exact_path_refs": {
+            "tracked_current_text": 0,
+            "runtime_or_serialized": 0,
+            "input_manifest": false,
+            "tracked_history": 0,
+            "generated_public_history_and_current_data": 0
+          },
+          "decision": "Require explicit approval to untrack a unique historical compiled snapshot while retaining exact Git restore base; not approved deletion or regenerable cache.",
+          "restore": "git restore --source=9b779d62aa9020a43aaefb69e41499a88655972d -- 'Docs/Implementation/D4LegacyArchive20261013/Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html'"
+        }
+      ],
+      "total_bytes": 106271015,
+      "active_root_sources_to_preserve": [
+        "Prototypes/RiftEntry/HELLSCRIPT-RiftEntry.html",
+        "Prototypes/RiftEntry/artifact.test.cjs",
+        "Prototypes/RiftEntry/build.cjs",
+        "Prototypes/RiftEntry/source-manifest.json",
+        "Prototypes/RiftVictory/HELLSCRIPT-RiftVictory.html",
+        "Prototypes/RiftVictory/build.cjs",
+        "Prototypes/RiftVictory/source-manifest.json"
+      ],
+      "why_not_auto_safe": "These are distinct historical Git blobs, not byte-identical copies. No current incoming archive-path consumer was found, but the archive is not presently self-contained for exact regeneration. Deletion approval must explicitly cover compiled snapshot untracking with Git recovery; source/art and current reference HTML remain."
+    },
+    "deferredRuntimeCandidates": [
+      "Plaza Concat/Max tiny enumeration requires consistent Rect.yMax/NaN/empty contracts; not selected in this round.",
+      "Chart Nice literal4float array has small static allocation; not selected over existing duplicate work.",
+      "Broad layout/string repaint suppression needs invalidation and actual lifecycle proof; no speculative cache added."
+    ],
+    "independentReviewSHA256": "7ae32bad2f5fa2255bc968d0e12205bcf26863b9e638fb659828d0834c3fa657",
+    "protected": "hero13/settings/held8/RAW/real saves unchanged; new models0",
+    "recordedAtKST": "2026-10-16T22:08:20.922312+09:00"
   }
 }
