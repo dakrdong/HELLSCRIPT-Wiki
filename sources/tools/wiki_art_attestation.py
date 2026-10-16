@@ -4,6 +4,7 @@ import re
 
 RECEIPT = 'tools/casual_art_adoption_receipt_20261015.json'
 EXPECTED_COUNT = 603  # Exact root-approved import unit; runtime/release approval remains separate.
+ADOPTED_SOURCE_STATUS = '개발 적용 · 출시 승인 별도 / Development; release approval separate'
 CLASS_GLYPH_PATHS = {
     18: 'Assets/HELLSCRIPT/Resources/Art/CharacterPlaza/crest_warrior.png',
     19: 'Assets/HELLSCRIPT/Resources/Art/CharacterPlaza/crest_ranger.png',
@@ -106,6 +107,9 @@ def decorate(api, rows):
         fields['Unity GUID'] = entry['guid']
         fields['현재 원화 ID / Current artwork ID'] = entry['id']
         fields['현재 원화 승인 / Current artwork approval'] = '별도 승인 원화 수입 영수증 / Separately approved source import; release approval remains separate'
+        if row.get('status') == '임시 사용':
+            fields['이전 등록 상태 / Previous lifecycle status'] = row['status']
+            row['status'] = ADOPTED_SOURCE_STATUS
         for key in ('출처 확인', '제작 방법', '제작 방법 / Surface'):
             if key in fields:
                 fields[key] = entry.get('method', '현재 런타임 PNG 바이트를 검증; 이전 생성 근거는 별도 보존 / Current runtime PNG bytes verified; previous generation provenance preserved separately')

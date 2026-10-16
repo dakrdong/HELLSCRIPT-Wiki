@@ -1272,7 +1272,7 @@ def build():
     for path,expected in INPUTS.items():
         actual=wiki_resources_current.source_bytes(sys.modules[__name__],path)
         if digest(actual)!=expected:raise ValueError('Source changed during collection; build again: '+path)
-        if path.startswith(('Docs/','Wiki/content/','Wiki/assets/runtime-models/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/','AgentRules/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
+        if path.startswith(('Docs/','Wiki/content/','Wiki/assets/runtime-models/','Wiki/assets/rune-shapes-20261016/','Wiki/assets/field-items-20261016/','Assets/','AudioSources/','Artifacts/','tools/','Prototypes/','AgentRules/')) or ('/' not in path and path.endswith('.md')) or (path.startswith('server/') and Path(path).suffix in ('.py','.sql','.js','.mjs')):
             target=SITE/'sources'/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(actual)
     wiki_resources_current.copy_media(sys.modules[__name__],databases)
     wiki_skills_current.write_bundle(SITE,skill_bundle)

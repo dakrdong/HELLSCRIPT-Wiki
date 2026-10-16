@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import tempfile
 import wiki_art_retirement
+import wiki_town_eight
 from pathlib import Path, PurePosixPath
 
 
@@ -126,11 +127,18 @@ def image_sources(databases):
                 evidence = row.get('previewSource')
                 if evidence:
                     safe_relative(evidence)
-                    if (source or row.get('category') != '현재 모델'
-                            or image.get('role') != 'runtime-model-evidence'
-                            or not evidence.startswith('Wiki/assets/runtime-models/')
-                            or not evidence.endswith('.png')):
-                        raise ValueError('Invalid runtime model evidence preview: ' + evidence)
+                    role = image.get('role')
+                    allowed = (
+                        role == 'runtime-model-evidence' and row.get('category') == '현재 모델'
+                        and evidence.startswith('Wiki/assets/runtime-models/')
+                        or role == 'derived-rune-shape-preview' and (database.get('id') == 'rune-shapes'
+                        or database.get('id') == 'resources' and re.fullmatch(r'preview-rune-rune-[1-5]-[0-9]{2}', row.get('id','')))
+                        and evidence.startswith('Wiki/assets/rune-shapes-20261016/')
+                        or role == 'field-item-artwork' and (database.get('id') == 'field'
+                        or database.get('id') == 'resources' and re.fullmatch(r'field-art-(?:CH0[1-3]|SH0[1-2])', row.get('id','')))
+                        and evidence.startswith('Wiki/assets/field-items-20261016/'))
+                    if source or not allowed or not evidence.endswith('.png'):
+                        raise ValueError(('Invalid runtime model evidence preview: ' if role=='runtime-model-evidence' or row.get('category')=='현재 모델' else 'Invalid verified evidence/artwork preview: ') + evidence)
                     if file in paths and paths[file] != evidence:
                         raise ValueError('Conflicting preview source: ' + file)
                     paths[file] = evidence
@@ -360,6 +368,7 @@ def build(api, databases, existing):
     model_rows, replaced = _models(api, databases, existing)
     rows.extend(model_rows)
     rows.extend(_town_models(api))
+    rows.extend(wiki_town_eight.build(api, _binary, safe_relative))
     for row in rows:
         if row.get('assetPath', '').startswith(ART + 'CasualAspectStone/'):
             row['id'] = 'asset-aspect-LW02'; row['category'] = '위상 정본 원화'

@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 1,
+  "status": "TOWN8_FOCUSED_EDITOR_PASS",
+  "integratedSourceCommit": "cfcdf310d6e9d11fec601e9923f1337b80be0446",
+  "sourceProof": "Docs/Implementation/TownEightCasualEvidence/receipt.json",
+  "sourceProofSHA256": "790f8e096ee58fc5dccb2b4654ea0ab7fd51694d0f5984cfde8b5426cac87152",
+  "modelCount": 8,
+  "models": {
+    "Npc_JakeBokun": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "npc",
+        "height": 2.5,
+        "tris": 5998,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity +Z (the town turns it to the camera)",
+        "boundsUnity": {
+          "min": [
+            -0.698,
+            0.0,
+            -0.364
+          ],
+          "max": [
+            0.698,
+            2.5,
+            0.364
+          ]
+        },
+        "footprint": {
+          "size": [
+            1.396,
+            0.728
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "jake-bokun",
+          "bakedGlb": "jake-bokun.glb",
+          "bakedGlbSha256": "284dd0ec1e188252526bd5751cee633b36226667d1e88d2e59bb6f63d27ca6c2",
+          "rawGlbSha256": "0b53cf5b702c7ab547e7da0e425d636cf410e8b75128de9fd6cecd8d6d190a46",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/434ff095ecc30e0b407053e13b8e08f8.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/jake-bokun-normalized1024.jpg",
+          "inputImageSha256": "323adb02c80cc9ee878fece74448a09210b9f6934ebecc3ab6a72cdfe29a98e8",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/jake-bokun-fullbody-v01.png",
+            "sha256": "b78c435d81b63a4d3886215577215fccd6a5b9a1b9608c14512a6efe76140d7b",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "original UV/color/ORM; tangent NORMAL-only bake",
+          "sourcePortrait": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/NpcPortraits/jake-bokun.png",
+            "sha256": "9fcdb4df6cdc5ffc0b24da238fc124faf6de1ed49f70e0cbcfdfa00f15c8000b",
+            "bytes": 1812664
+          }
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "npc",
+        "sha256": {
+          "Npc_JakeBokun.fbx": "d8a323df953f7c3c28d8d40eada5a46caf08ebd58ab4ee78fd7c4afdfe5c228c",
+          "Npc_JakeBokun_A.png": "4d69218a12e0a3d561e68fee6754a9329d7b98c87b13348638ad80152c94c1eb",
+          "Npc_JakeBokun_N.png": "0cd5c988295e8e3b1ab4b2e93da96f768871bc61890d1ce632970f4ec86fd8ff"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/jake-bokun.png",
+        "sha256": "596c7c64e25964bdbaecd9e2e656f5d9ebd4c4f4b006f5f73e03d5de63155a7a",
+        "scope": "Actual Town game screenshot"
+      }
+    },
+    "Npc_AntonJindark": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "npc",
+        "height": 2.5,
+        "tris": 5998,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity +Z (the town turns it to the camera)",
+        "boundsUnity": {
+          "min": [
+            -0.668,
+            0.0,
+            -0.492
+          ],
+          "max": [
+            0.668,
+            2.5,
+            0.492
+          ]
+        },
+        "footprint": {
+          "size": [
+            1.335,
+            0.985
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "anton-jindark",
+          "bakedGlb": "anton-jindark.glb",
+          "bakedGlbSha256": "a8b6a650191b32c82bfd73779b3b59f8f91437d5347ce930122e0242be7c3da4",
+          "rawGlbSha256": "3e2ae695bbb4b90596c89865f8e403c5a7924acc7f5548338f9396545436379e",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/b59753e007359a7a1923b46efc89603d.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/anton-jindark-normalized1024.jpg",
+          "inputImageSha256": "7201975526196c84300f3c5f1f3cfa6dbd9e48f58a3272b38793a5e43c959412",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/anton-jindark-fullbody-v01.png",
+            "sha256": "72706e1739bc2881f14dc0fb0740a213473b78366b4ee358e42290b424a149cb",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "original UV/color/ORM; tangent NORMAL-only bake",
+          "sourcePortrait": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/NpcPortraits/anton-jindark.png",
+            "sha256": "38b89c3a5937acaab8bb3deb55f30ad1e141fafb74e2c6aa18487fdb882abdab",
+            "bytes": 1912801
+          }
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "npc",
+        "sha256": {
+          "Npc_AntonJindark.fbx": "8f8640d83b704bc4c75e960bd11d91d076c9d430efc4e2a8a1308ca59bf764bf",
+          "Npc_AntonJindark_A.png": "1e3e5ae35c43fc82b465b88e38fc7ea5864317f731976668e1fa0a764cee748f",
+          "Npc_AntonJindark_N.png": "68b4601249720648f5a5cdff3511ff6e8cebd8cb49d2a4b811aa516eecdbb953"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/anton-jindark.png",
+        "sha256": "54045155cfa4d7986c9247aa5fc944b208b423c463fea080e4825fc8c9e50562",
+        "scope": "Actual Town game screenshot"
+      }
+    },
+    "Npc_TurkGarbi": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "npc",
+        "height": 2.5,
+        "tris": 5998,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity +Z (the town turns it to the camera)",
+        "boundsUnity": {
+          "min": [
+            -0.689,
+            0.0,
+            -0.475
+          ],
+          "max": [
+            0.689,
+            2.5,
+            0.475
+          ]
+        },
+        "footprint": {
+          "size": [
+            1.378,
+            0.951
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "turk-garbi",
+          "bakedGlb": "turk-garbi.glb",
+          "bakedGlbSha256": "9532e9053a1df8e766268a91415b0d7329d63aabf9ff3c5868d1878a633f1770",
+          "rawGlbSha256": "3fe733c6973f2c0f2a7187117750b68d6c2e69771a6313dc0afd5c133ad024d2",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/2bf25da4140bf85b6876bfff75fb85a0.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/turk-garbi-normalized1024.jpg",
+          "inputImageSha256": "2b4535ba9c46a82b80687e691b8f0847d8f53c8484796b6dd8a8fc4e16971995",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/turk-garbi-fullbody-v01.png",
+            "sha256": "e7f182b237b720ce1c740ca0a91eea17270238d1a4b05ebd09422ece926d5a7d",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "original UV/color/ORM; tangent NORMAL-only bake",
+          "sourcePortrait": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/NpcPortraits/turk-garbi.png",
+            "sha256": "ce9ef17d30bc38911f171d7c54ea43fbc6122e00a9b5d36202ff28af247613da",
+            "bytes": 1886732
+          }
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "npc",
+        "sha256": {
+          "Npc_TurkGarbi.fbx": "5b8295ab1546dc61d415af79d4360755f961f8efb891c6052a7b4c37ef1a2b4e",
+          "Npc_TurkGarbi_A.png": "fb4651db8518539885d26fbb9b3fbbbbc7be8e6374ee797ff48847478b61503a",
+          "Npc_TurkGarbi_N.png": "888f69ed699ce482739d39d730e7aea772a1f668028b1d1ce617aa0a6fa20816"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/turk-garbi.png",
+        "sha256": "930535a8eb12d45ba68300e4e0b5786f5d76a81e700efa9029189a3d7d036aa4",
+        "scope": "Actual Town game screenshot"
+      }
+    },
+    "Npc_PyonyaNermwen": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "npc",
+        "height": 2.5,
+        "tris": 5998,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity +Z (the town turns it to the camera)",
+        "boundsUnity": {
+          "min": [
+            -0.718,
+            0.0,
+            -0.478
+          ],
+          "max": [
+            0.718,
+            2.5,
+            0.478
+          ]
+        },
+        "footprint": {
+          "size": [
+            1.435,
+            0.957
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "pyonya-nermwen",
+          "bakedGlb": "pyonya-nermwen.glb",
+          "bakedGlbSha256": "a560d5d53baed82642bf6560a788f4e18b97081c63a1736ba8863603f1c6b746",
+          "rawGlbSha256": "314010530e7d6a4306af68ef7144411169828d5871f5ff1265162367dc6ca3e9",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/f10d7e097fcb7f2585e35649e5845197.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/pyonya-nermwen-fullbody-v01.png",
+          "inputImageSha256": "08c069bd5dc199245f6c2f5e49351395968acfed62014acb1408b8cddefd40de",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/npc/pyonya-nermwen-fullbody-v01.png",
+            "sha256": "08c069bd5dc199245f6c2f5e49351395968acfed62014acb1408b8cddefd40de",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "Mark normal-only reduction with exactly one UV component clamped by 0.099609375 texels at512; geometry and3PNG bytes unchanged",
+          "sourcePortrait": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/Assets/HELLSCRIPT/Resources/Art/NpcPortraits/pyonya-nermwen.png",
+            "sha256": "85f5585d0ace7b8c906b4ea13441775935d3c35e36762e4183879cc5e2cb39ac",
+            "bytes": 1797393
+          },
+          "repairKind": "uv-boundary-v1",
+          "candidateGlbSha256": "a560d5d53baed82642bf6560a788f4e18b97081c63a1736ba8863603f1c6b746",
+          "candidateReceiptSha256": "fd0a060995f06eabe73e7e81629af42695e9918df77f440c73d0f2548d224742",
+          "qualification": "One UV V component clamped from -0.000194549560546875 to 0 (0.099609375 texel at 512); geometry, all three map PNGs and material settings unchanged."
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "npc",
+        "sha256": {
+          "Npc_PyonyaNermwen.fbx": "f68d601fd4c7075b312b8b6e7863d29d58f0f95e8fa4927b7cb42708b7b83720",
+          "Npc_PyonyaNermwen_A.png": "1d84ea707cb59507b253c1ecefc714127c444ecb92bb9853fad9c4b2ed8bbad7",
+          "Npc_PyonyaNermwen_N.png": "60718201444b20a023941c8e1a81d71620f167fcdf178907a41c85f5a0ba9af8"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/pyonya-nermwen.png",
+        "sha256": "4047a46866679dabc7cfb38bb1623515f76aab1cf23c75d0ee25eacebddadeff",
+        "scope": "Actual Town game screenshot"
+      }
+    },
+    "Prop_Barrel": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "prop_large",
+        "height": 1.5,
+        "tris": 2498,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity -Z (camera side)",
+        "boundsUnity": {
+          "min": [
+            -0.747,
+            0.0,
+            -0.742
+          ],
+          "max": [
+            0.747,
+            1.5,
+            0.742
+          ]
+        },
+        "footprint": {
+          "size": [
+            1.495,
+            1.483
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "casual-barrel",
+          "bakedGlb": "casual-barrel.glb",
+          "bakedGlbSha256": "ba0c4b7cccecfd9b408c1d3fce273037878b8539842e7245ae0e8f6fa5709c8a",
+          "rawGlbSha256": "029ab920cb3e8c84a7dcfc35d2bc3f50aea72b45709d1519b8f972beb6025664",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/b7c219c35f5adb9745ecad260b0d56cc.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-barrel-normalized1024.jpg",
+          "inputImageSha256": "5a87832cc1b845e153568d779d8e164d01c00218b824aef43526e2dc3b99a685",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-barrel-normalized1024.jpg",
+            "sha256": "5a87832cc1b845e153568d779d8e164d01c00218b824aef43526e2dc3b99a685",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "original UV/color/ORM; tangent NORMAL-only bake",
+          "sourceConcept": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/AssetDeliverables/Hunyuan/2026-10-15-town/env_in/b/Barrel_object.png",
+            "sha256": "07239f666ff23378859dd54c4c075e4119ba255c7fec9944e417a10349367f89",
+            "bytes": 1442583
+          }
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "prop_large",
+        "sha256": {
+          "Prop_Barrel.fbx": "47877c0fea804cdf5c23a97562ba66eb8113a915b2e6a6064b0802e581a3221c",
+          "Prop_Barrel_A.png": "ee2b54bd39fc1a2ea1a9d340c589ccd27da66c959774a9bd4078065065fd68d5",
+          "Prop_Barrel_N.png": "47b0fd7e7b442b2414406f9157a59898a34fd4c1048917a7f0488889832024d5"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/barrel.png",
+        "sha256": "867a9d28d668d5942a2f12a7da561fd5dc523cc8e3c1c914e259325dc1628984",
+        "scope": "Isolated actual runtime mesh/material snapshot; placement checked separately"
+      }
+    },
+    "Prop_BannerPost": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "prop_large",
+        "height": 3.8,
+        "tris": 2498,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity -Z (camera side)",
+        "boundsUnity": {
+          "min": [
+            -1.023,
+            0.0,
+            -0.216
+          ],
+          "max": [
+            1.023,
+            3.8,
+            0.216
+          ]
+        },
+        "footprint": {
+          "size": [
+            2.045,
+            0.431
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "casual-banner-post",
+          "bakedGlb": "casual-banner-post.glb",
+          "bakedGlbSha256": "49a83393b0a747667301a4c797f03697fe665995ef02d7a9e3ee69b5e0d24623",
+          "rawGlbSha256": "9f4907266f56ba3126433d89a1ddf76c0014c98bd25272fb543d1861ee3e4e69",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/8093d6d65b3713133d8360b0125fb27a.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-banner-post-normalized1024.jpg",
+          "inputImageSha256": "9e52b3694c1d2d119ab676f671d493326b63080cb42221ac548d18f66e7ba899",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-banner-post-normalized1024.jpg",
+            "sha256": "9e52b3694c1d2d119ab676f671d493326b63080cb42221ac548d18f66e7ba899",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "color/ORM reprojected; LOW geometry/UV/normal frozen",
+          "sourceConcept": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/AssetDeliverables/Hunyuan/2026-10-15-town/env_in/c/BannerPost_object.png",
+            "sha256": "2432488280e64ae4884b8713b2512577cd6a707fc5838c8b843b15948e3ee3ab",
+            "bytes": 1279426
+          },
+          "repairKind": "uv-reprojection-v1",
+          "candidateGlbSha256": "49a83393b0a747667301a4c797f03697fe665995ef02d7a9e3ee69b5e0d24623",
+          "candidateReceiptSha256": "298def59646f43515964c9417f274de99d4dc9932dc703d44ac3e61c91691bf8",
+          "qualification": "Color/ORM are intentionally reprojected onto unchanged LOW UV; geometry, UV, normal PNG and original material settings are frozen."
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "prop_large",
+        "sha256": {
+          "Prop_BannerPost.fbx": "58cc0e1d51d5a1ac702cc842ac9e98c947b201f6b947527ff50045987bca16b6",
+          "Prop_BannerPost_A.png": "1705ffae17dac8fd62c3eb5f3a5464b42283e0e1293e584e78488a02b65ec4cb",
+          "Prop_BannerPost_N.png": "4f5ec1447c1072d565f4465fe2c427418f55b1c2b285a35a41a5445d8c740309"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/banner-post.png",
+        "sha256": "e9deaf3d810bb4b2bb2fb1005a2c5fb4081b85505d269d95ef70b6cc0ccb1793",
+        "scope": "Isolated actual runtime mesh/material snapshot; placement checked separately"
+      }
+    },
+    "Prop_Signpost": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "prop_large",
+        "height": 2.7,
+        "tris": 2498,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity -Z (camera side)",
+        "boundsUnity": {
+          "min": [
+            -0.93,
+            0.0,
+            -0.35
+          ],
+          "max": [
+            0.93,
+            2.7,
+            0.35
+          ]
+        },
+        "footprint": {
+          "size": [
+            1.859,
+            0.7
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "casual-signpost",
+          "bakedGlb": "casual-signpost.glb",
+          "bakedGlbSha256": "6cc332988dc645da2fbd75e9f080d0f28363940907cd61dc996d4064a46408cc",
+          "rawGlbSha256": "90ed40feb3201e1ef6c0f42636b6e1ff95186f93b5af5b889753ad7137e0abb4",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/0b1e06eea9214163f0dc2679017a3d9f.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-signpost-normalized1024.jpg",
+          "inputImageSha256": "b329577266b582b7b51599cd6f39b8d48be26b6b6c92421e3ac7ca4b58e2bd9d",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-signpost-normalized1024.jpg",
+            "sha256": "b329577266b582b7b51599cd6f39b8d48be26b6b6c92421e3ac7ca4b58e2bd9d",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "original UV/color/ORM; tangent NORMAL-only bake",
+          "sourceConcept": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/AssetDeliverables/Hunyuan/2026-10-15-town/env_in/c/Signpost_object.png",
+            "sha256": "daada1bd25f7e16f150358244f919afb325f742befb078d2978a0c6b2554d862",
+            "bytes": 1284236
+          }
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "prop_large",
+        "sha256": {
+          "Prop_Signpost.fbx": "3c8025409167edee64b5b5fab89a3ae4d49d7a11c6e06dfd287b350ab1c286ae",
+          "Prop_Signpost_A.png": "805521fe0b11585d7631cb282eca9d9de58d465107da3468ec3b6baae06b11f6",
+          "Prop_Signpost_N.png": "006d92f59c5b2c7d5406ce01182f5cd4229c6865aa04caca20b0f2f9bf134eca"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/signpost.png",
+        "sha256": "659939c37b5f82fdebec29401761bb06d111daa4cdfd5ab5efdfa17c4db41f11",
+        "scope": "Isolated actual runtime mesh/material snapshot; placement checked separately"
+      }
+    },
+    "Prop_FenceSegment": {
+      "facts": {
+        "archetype": "Prop",
+        "role": "prop_large",
+        "height": 1.7,
+        "tris": 2498,
+        "texture": 512,
+        "origin": "base",
+        "front": "Unity -Z (camera side)",
+        "boundsUnity": {
+          "min": [
+            -1.445,
+            0.0,
+            -0.243
+          ],
+          "max": [
+            1.445,
+            1.7,
+            0.243
+          ]
+        },
+        "footprint": {
+          "size": [
+            2.89,
+            0.486
+          ]
+        },
+        "source": {
+          "generator": "Hunyuan HY3D-V3.1",
+          "id": "casual-fence-segment",
+          "bakedGlb": "casual-fence-segment.glb",
+          "bakedGlbSha256": "36bdb1384b3f797c8a8d5e9f81c5bf1e06d74133ab6eb9bf8552357391c573bf",
+          "rawGlbSha256": "eb3f32eb98d7c78b36f7a6438e50f8a5017211f7377fd8d7d1b4e0296f3c3738",
+          "rawCanonicalPath": "/Users/t8g-2410-pn-005/Downloads/7a9f205a4fc2dc21e0382001f31b7071.glb",
+          "inputImagePath": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-fence-segment-normalized1024.jpg",
+          "inputImageSha256": "a2cfdc60140ff07ae2eceea175d0113f8d9f831a65e52a16af0ac99b4bd246ed",
+          "preparedSourceImage": {
+            "path": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-16/task/validation/town-expansion-20261016/inputs/props/casual-fence-segment-v02.png",
+            "sha256": "5c390754ef19a1c3ef20ae65ee2dd903dfcd112710e1d5deb839cdf597747301",
+            "role": "Prepared fullbody or prop source; distinct from actual HY3D upload"
+          },
+          "method": "original UV/color/ORM; tangent NORMAL-only bake",
+          "sourceConcept": {
+            "path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/AssetDeliverables/Hunyuan/2026-10-15-town/env_in/b/FenceSegment_object.png",
+            "sha256": "0e3bc011fcb65404b9a83c780ac5ceafd2b095d7797cdec5d8a11f0c39b07809",
+            "bytes": 1333485
+          }
+        },
+        "recipe": "import_hunyuan_town",
+        "revision": "hellscript-hunyuan-town-v1",
+        "budget": "prop_large",
+        "sha256": {
+          "Prop_FenceSegment.fbx": "9edb86ecc8ffbb20c408051facfcd76861bd5572be541d95b68344e6a1a994a7",
+          "Prop_FenceSegment_A.png": "d4eaca75717335697a76c2f231aaebd41700df8d8732fd2080241296b687bda9",
+          "Prop_FenceSegment_N.png": "04306cd4a5921ca1d6891edf5d6e2f85cb18f161475ca63244a27485ddb647d0"
+        }
+      },
+      "preview": {
+        "path": "Wiki/assets/runtime-models/town-eight/fence-segment.png",
+        "sha256": "418a90e8189bbe2c77bc00cac48a22917c7b681a028faae22638046a036eb04c",
+        "scope": "Isolated actual runtime mesh/material snapshot; placement checked separately"
+      }
+    }
+  },
+  "runtimeFiles": {
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_JakeBokun.fbx": {
+      "sha256": "d8a323df953f7c3c28d8d40eada5a46caf08ebd58ab4ee78fd7c4afdfe5c228c",
+      "bytes": 655340,
+      "metaSha256": "dd95e296947b43c8f2862c1b00057d6d5e04dfdc7c5846efeba8400c7cb73801"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_JakeBokun_A.png": {
+      "sha256": "4d69218a12e0a3d561e68fee6754a9329d7b98c87b13348638ad80152c94c1eb",
+      "bytes": 548668,
+      "metaSha256": "d4b2e4edfbbacc86dce9249c913176aca6fe176736cf9d3602db63e86a292abf"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_JakeBokun_N.png": {
+      "sha256": "0cd5c988295e8e3b1ab4b2e93da96f768871bc61890d1ce632970f4ec86fd8ff",
+      "bytes": 499281,
+      "metaSha256": "81075e6d004159c241a28fb900df947a06eccb611a31dcaeefade6e34cb1626e"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_AntonJindark.fbx": {
+      "sha256": "8f8640d83b704bc4c75e960bd11d91d076c9d430efc4e2a8a1308ca59bf764bf",
+      "bytes": 643612,
+      "metaSha256": "8babbf7475e11a25431e76da88108885e2f8661bacc801be5843adb4320e61e3"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_AntonJindark_A.png": {
+      "sha256": "1e3e5ae35c43fc82b465b88e38fc7ea5864317f731976668e1fa0a764cee748f",
+      "bytes": 526794,
+      "metaSha256": "dd1f2786ed39482e868edcc1813b024f581a81fc4f80b5ff34f2d0724465c90e"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_AntonJindark_N.png": {
+      "sha256": "68b4601249720648f5a5cdff3511ff6e8cebd8cb49d2a4b811aa516eecdbb953",
+      "bytes": 493092,
+      "metaSha256": "00ec8ec10beb6e6c197aff73b6d59de4b4fad8120ded4b83789e4da333fc2870"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_TurkGarbi.fbx": {
+      "sha256": "5b8295ab1546dc61d415af79d4360755f961f8efb891c6052a7b4c37ef1a2b4e",
+      "bytes": 631820,
+      "metaSha256": "61019d0e2756fff5396be6e98f236363f3a40a2cf90eca4bdd5eda2e116f9e50"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_TurkGarbi_A.png": {
+      "sha256": "fb4651db8518539885d26fbb9b3fbbbbc7be8e6374ee797ff48847478b61503a",
+      "bytes": 541763,
+      "metaSha256": "cd4f386cfcb54579bc85b38354ffc406ed46a9b110a362e0958fe12d37c09be3"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_TurkGarbi_N.png": {
+      "sha256": "888f69ed699ce482739d39d730e7aea772a1f668028b1d1ce617aa0a6fa20816",
+      "bytes": 474925,
+      "metaSha256": "87c3139dba78c080f7104016003fa1f16c92b56a0d2562fd56c809ff8e8675d7"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_PyonyaNermwen.fbx": {
+      "sha256": "f68d601fd4c7075b312b8b6e7863d29d58f0f95e8fa4927b7cb42708b7b83720",
+      "bytes": 614252,
+      "metaSha256": "058ccd6e2c428187806676d8fb73119be7bdd6937e00a20c186cf4a7befe33ad"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_PyonyaNermwen_A.png": {
+      "sha256": "1d84ea707cb59507b253c1ecefc714127c444ecb92bb9853fad9c4b2ed8bbad7",
+      "bytes": 549948,
+      "metaSha256": "5cfdad6ff809f22f368a8d62b2094814d6e26d039f5ab3601645e86201225471"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Npc_PyonyaNermwen_N.png": {
+      "sha256": "60718201444b20a023941c8e1a81d71620f167fcdf178907a41c85f5a0ba9af8",
+      "bytes": 471981,
+      "metaSha256": "8245ead7b42795786f1aa983d0fdd7acea43268859daa4c78ab1066c5a4635d2"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_Barrel.fbx": {
+      "sha256": "47877c0fea804cdf5c23a97562ba66eb8113a915b2e6a6064b0802e581a3221c",
+      "bytes": 275148,
+      "metaSha256": "85532aec7938b74591eb588069f29bf1788d8392fb8817602cd4e8baf04305cf"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_Barrel_A.png": {
+      "sha256": "ee2b54bd39fc1a2ea1a9d340c589ccd27da66c959774a9bd4078065065fd68d5",
+      "bytes": 381227,
+      "metaSha256": "02455c5d975a7c7ac23020584c33543f91af94f0e3449acd00151a3bcc9cc6f4"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_Barrel_N.png": {
+      "sha256": "47b0fd7e7b442b2414406f9157a59898a34fd4c1048917a7f0488889832024d5",
+      "bytes": 371636,
+      "metaSha256": "f4c11788a7675fe08022dbce8029f4853d51158ef9aee91d5260ce744dae9283"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_BannerPost.fbx": {
+      "sha256": "58cc0e1d51d5a1ac702cc842ac9e98c947b201f6b947527ff50045987bca16b6",
+      "bytes": 228284,
+      "metaSha256": "7c28feefdacd215c1a849ffa6136e158ea469ad5975a50f959096c4fa974f7a4"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_BannerPost_A.png": {
+      "sha256": "1705ffae17dac8fd62c3eb5f3a5464b42283e0e1293e584e78488a02b65ec4cb",
+      "bytes": 383905,
+      "metaSha256": "a095daa371a30f847693da32d2a984b7e96a086421ee9b3150c8884aea0962a1"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_BannerPost_N.png": {
+      "sha256": "4f5ec1447c1072d565f4465fe2c427418f55b1c2b285a35a41a5445d8c740309",
+      "bytes": 334317,
+      "metaSha256": "1cf2159d419b5ae7add0c4690d7584263fabeea617d06f59f686721bb254945f"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_Signpost.fbx": {
+      "sha256": "3c8025409167edee64b5b5fab89a3ae4d49d7a11c6e06dfd287b350ab1c286ae",
+      "bytes": 244620,
+      "metaSha256": "1bad09ecbd21a4f8689f18aef6a8bcd6bcd83c8b434c215c32427c1f8769ed92"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_Signpost_A.png": {
+      "sha256": "805521fe0b11585d7631cb282eca9d9de58d465107da3468ec3b6baae06b11f6",
+      "bytes": 310306,
+      "metaSha256": "58fe1bf76d72f3fbc4061098ec6a824896a42318ae1d70efe3efa5774dbee63d"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_Signpost_N.png": {
+      "sha256": "006d92f59c5b2c7d5406ce01182f5cd4229c6865aa04caca20b0f2f9bf134eca",
+      "bytes": 274562,
+      "metaSha256": "9d632e2958b414abe0c9b785aa38c564227b45e718c8765b65e510049be5b9bc"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_FenceSegment.fbx": {
+      "sha256": "9edb86ecc8ffbb20c408051facfcd76861bd5572be541d95b68344e6a1a994a7",
+      "bytes": 238620,
+      "metaSha256": "e5cfa45703d1c36d1a6c66b6fbb7ec92e45909b0849269071572ee22282edea9"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_FenceSegment_A.png": {
+      "sha256": "d4eaca75717335697a76c2f231aaebd41700df8d8732fd2080241296b687bda9",
+      "bytes": 310089,
+      "metaSha256": "6866dd8ea639b5e7dbef12a3b9d61b3f9b2cfb570cb0c3e620000481d54e8393"
+    },
+    "Assets/HELLSCRIPT/Resources/World/Town/Prop_FenceSegment_N.png": {
+      "sha256": "04306cd4a5921ca1d6891edf5d6e2f85cb18f161475ca63244a27485ddb647d0",
+      "bytes": 294780,
+      "metaSha256": "d9fb8111ba3b36619849b5b17a5365d8418f5117d9db92691612da740b148642"
+    }
+  },
+  "validation": {
+    "EditModePassed": 23,
+    "EditModeFailed": 0,
+    "NPCChecks": 8,
+    "dialogues": 8,
+    "services": 6,
+    "pointerActions": 24,
+    "outerFenceSegments": 136,
+    "wholeNUnit": 0,
+    "nativeBuilds": 0,
+    "deviceTests": 0,
+    "runtimeErrors": 0
+  },
+  "remainingQualityHeldModels": 8,
+  "garlandNotGenerated": 1,
+  "createdUtc": "2026-10-16T07:23:47.252484+00:00",
+  "sourcePixelsUnchanged": true,
+  "imageEdits": 0
+}

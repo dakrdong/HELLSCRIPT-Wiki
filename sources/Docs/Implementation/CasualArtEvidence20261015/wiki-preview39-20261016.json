@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "state": "SOURCE_INTAKE_FOCUSED_CHECKS_PASS_PUBLICATION_PENDING",
+  "scope": "2D Wiki artwork and exact shape previews; current Town8 proof publication",
+  "sourceMainBefore": "cfcdf310d6e9d11fec601e9923f1337b80be0446",
+  "userScopeCorrection": "These39 image deliverables are2D and do not depend on3D generation, quota, conversion or game models.",
+  "field2D": {
+    "count": 5,
+    "ids": [
+      "CH01",
+      "CH02",
+      "CH03",
+      "SH01",
+      "SH02"
+    ],
+    "manifest": "Wiki/assets/field-items-20261016/manifest.json",
+    "sha256": "b456c60da4be1b93756450bbec600a9738c36bafe074ee7887a274333bbd8ce2",
+    "newMasterPaintings": 5,
+    "runtimeAssetsChanged": 0,
+    "gameIntegration": "NOT_RUN; artwork only"
+  },
+  "rune2D": {
+    "count": 34,
+    "manifest": "Wiki/assets/rune-shapes-20261016/manifest.json",
+    "sha256": "95b62a8064069e228e4dfa5765f901673cca30ceaa7bee8bcccdae6e7ef8a045",
+    "method": "Current painted tile/emblem plus exact cells/storage rotations; CPU derived composition, not a runtime screenshot.",
+    "presentation": "Only detached outer offset glint omitted in derived presentation; original runtime unchanged.",
+    "palette": "Attack example; shapes support all5types",
+    "newImageGeneration": 0,
+    "runtimeAssetsChanged": 0
+  },
+  "town8": {
+    "manifest": "Wiki/assets/runtime-models/town-eight/receipt.json",
+    "sha256": "e9484ccccba52f34188ef79086137a48878b82c83ea610f72d7a0bb50e9febe2",
+    "sourceCommit": "cfcdf310d6e9d11fec601e9923f1337b80be0446",
+    "models": 8,
+    "NPCs": 4,
+    "props": 4,
+    "focusedEditModePassed": 23,
+    "NPCChecks": 8,
+    "dialogues": 8,
+    "services": 6,
+    "pointerActions": 24,
+    "outerFenceSegments": 136,
+    "clearPropPreviews": 4,
+    "remainingQualityHold": 8,
+    "garlandUnsubmitted": 1,
+    "newGameTestOrBuild": 0
+  },
+  "statusCorrection": {
+    "temporaryRecordsCorrected": 22,
+    "requirement": "Existing approval hashes, identity, opaque-pilot proof and GUIDs verified before correction.",
+    "currentStatus": "개발 적용 · 출시 승인 별도 / Development; release approval separate",
+    "remainingTemporaryRows": 38,
+    "aggregateProductionTodos": 5,
+    "remainingTotal": 43,
+    "preserved": true
+  },
+  "recordCoverageContract": {
+    "totalRows": 1291,
+    "existingExactArt": 1252,
+    "derivedRunePreviews": 34,
+    "newFieldPaintings": 5,
+    "missingAfter": 0,
+    "newDerivedResourceRecords": 39,
+    "semanticModelRelations": "preserved"
+  },
+  "focusedWikiValidation": {
+    "passed": 65,
+    "failed": 0,
+    "elapsedSeconds": 3.599,
+    "initialLoaderInvocation": "7 ModuleNotFound errors before any test executed; PYTHONPATH corrected, all65 pass",
+    "independentSourceReviews": "No blocking findings in collector integration and Rune INPUTS/source_ref sequence"
+  },
+  "remoteCI": {
+    "checkedUtc": "2026-10-16T07:27:06.625012+00:00",
+    "runs": [
+      {
+        "run": 38865945157,
+        "name": "Class skill data",
+        "headSHA": "cfcdf310d6e9d11fec601e9923f1337b80be0446",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/dakrdong/HELLSCRIPT/actions/runs/38865945157",
+        "jobs": [
+          {
+            "id": 116858683136,
+            "name": "generated",
+            "conclusion": "failure",
+            "steps": [],
+            "annotations": [
+              {
+                "annotation_level": "failure",
+                "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings"
+              },
+              {
+                "annotation_level": "notice",
+                "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "run": 38865945127,
+        "name": "Shared UI contract",
+        "headSHA": "cfcdf310d6e9d11fec601e9923f1337b80be0446",
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/dakrdong/HELLSCRIPT/actions/runs/38865945127",
+        "jobs": [
+          {
+            "id": 116858682971,
+            "name": "ownership",
+            "conclusion": "failure",
+            "steps": [],
+            "annotations": [
+              {
+                "annotation_level": "failure",
+                "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings"
+              },
+              {
+                "annotation_level": "notice",
+                "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "readOnly": true,
+    "reruns": 0,
+    "billingOrBudgetChanges": 0
+  },
+  "notRun": [
+    "new Unity/Blender/game-code changes for this2D phase",
+    "whole-game NUnit",
+    "native/player/device/performance tests",
+    "public publication at source-freeze time"
+  ],
+  "protectedUserSettingsSHA256": "738f73fffe19ceb9a1b3865890a6413f11b86441d0c271072847e30f4f107a17",
+  "payments": 0,
+  "createdUtc": "2026-10-16T07:51:18.353323+00:00",
+  "firstOrdinaryBuild": {
+    "build": "PASS",
+    "check": "PASS",
+    "pages": 791,
+    "databases": 33,
+    "records": 5595,
+    "imagesMissing": 0,
+    "fullWikiPythonPassed": 37,
+    "fullWikiPythonFailed": 1,
+    "failureCause": "Old field-art prefix count expected only6landscapes; five new painted field records correctly increase it to11. Test now pins the6landscape IDs and5painting IDs/roles separately.",
+    "recollectionReason": "Correct bilingual retained-status count from43temporary+5todo to38temporary+5todo=43, retaining first failed proof and exact same art snapshot."
+  }
+}

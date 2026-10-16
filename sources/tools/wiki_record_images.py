@@ -203,14 +203,37 @@ def attach(api, databases):
     shapes = json.loads(api.read(shapes_path))['shapes']
     _same_ids(rows['rune-shapes'], [s['id'] for s in shapes], 'rune shape')
     _same_ids(rows['field'], ['CH01','CH02','CH03','SH01','SH02'], 'field')
-    for table, reason, evidence in [
-            ('field', 'NO_EXACT_CURRENT_FIELD_PREVIEW', PRESENTATION+'WorldView.Rift.cs'),
-            ('rune-shapes', 'NO_EXACT_POLYHEX_SHAPE_PREVIEW', PRESENTATION+'RuneItemArt.cs')]:
-        for row in rows[table].values():
-            if row.get('image') or row.get('images'):
-                raise ValueError('Review newly supplied exact preview: ' + row['id'])
-            missing.append((table, row, {'reason':'정확 미리보기 없음 / Exact preview unavailable',
-                            'code':reason, 'evidence':api.source_ref(evidence)}))
+    import wiki_rune_shape_previews
+    import wiki_field_2d
+    derived = [('rune-shapes', item) for item in wiki_rune_shape_previews.prepare(api, shapes, rows['rune-shapes'])]
+    derived += [('field', item) for item in wiki_field_2d.prepare(api, rows['field'])]
+    resource_rows = tables['resources']['rows']
+    resource_ids = _unique(resource_rows, 'id', 'resource')
+    derived_resources = []
+    for table, item in derived:
+        row = rows[table][item['id']]
+        if 'source' not in item:
+            item['source']=api.source_ref(wiki_rune_shape_previews.MANIFEST)
+        if 'name' not in item:
+            shape=next(s for s in shapes if s['id']==item['id'])
+            item['name']=row.get('name',str(shape['size'])+'칸 · 모양 '+str(shape['number']))
+        if (row.get('image') not in (None,item['image']) or row.get('images')
+                or row.get('assetPath') or row.get('previewSource') not in (None,item['previewSource'])):
+            raise ValueError('Existing derived preview differs: '+item['id'])
+        for key,value in item['fields'].items():
+            if key in row['fields'] and row['fields'][key] != value:
+                raise ValueError('Existing derived preview facts differ: '+item['id'])
+        resource_id = ('preview-rune-' if table == 'rune-shapes' else 'field-art-') + item['id']
+        resource = dict(id=resource_id, name=item.get('name',item['id']),
+                        category='룬 형태 미리보기' if table=='rune-shapes' else '필드 2D 원화',
+                        summary=item.get('summary','정확한 형태의 2D 미리보기 / Shape-specific 2D preview'),
+                        fields=dict(item['fields']), source=item['source'], refs=list(item['refs']),
+                        status='2D 미리보기 제작 완료 / 2D preview complete' if table=='rune-shapes' else
+                               '2D 원화 제작 완료 · 게임 연결 검증 별도 / 2D artwork complete; runtime integration verification separate',
+                        content={'db':table,'id':item['id']}, image=dict(item['image']),previewSource=item['previewSource'])
+        if resource_id in resource_ids and resource_ids[resource_id] != resource:
+            raise ValueError('Existing preview resource differs: '+resource_id)
+        derived_resources.append((resource_id,resource))
 
     # All identities/sources pass before any record is changed.
     receipt = {name:{'rows':len(rows[name]), 'imageRows':0, 'bundleRows':0,
@@ -229,8 +252,17 @@ def attach(api, databases):
         receipt[table]['imageRows'] += 1
         receipt[table]['bundleRows'] += int(bundle)
         receipt[table]['multipleImageRows'] += int(len(items)>1)
+    for (table,item),(resource_id,resource) in zip(derived,derived_resources):
+        row=rows[table][item['id']]
+        row['image']=dict(item['image']);row['previewSource']=item['previewSource']
+        row['fields'].update(item['fields']);row.pop('imageMissing',None)
+        row.setdefault('resource',resource_id)
+        for reference in item['refs']:
+            if reference not in row.setdefault('refs',[]):row['refs'].append(reference)
+        if resource_id not in resource_ids:resource_rows.append(resource)
+        receipt[table]['imageRows']+=1
     for table, row, reason in missing:
         row['imageMissing'] = reason
         receipt[table]['missing'].append(row['id'])
-    return {'schemaVersion':1, 'state':'CURRENT_RECORD_IMAGES_ATTACHED_WITH_EXPLICIT_MISSING',
+    return {'schemaVersion':1, 'state':'CURRENT_RECORD_IMAGES_ATTACHED_WITH_DERIVED_2D_PREVIEWS',
             'categories':receipt, 'missingExactPreviews':len(missing)}
